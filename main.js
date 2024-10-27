@@ -24866,15 +24866,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "2c16b3a",
-  "hash": "2c16b3a",
+  "raw": "ec1dcfd",
+  "hash": "ec1dcfd",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "2c16b3a",
+  "suffix": "ec1dcfd",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1729731949635
+  "time": 1730071048576
 };
 /* tslint:enable */
 
@@ -39366,8 +39366,8 @@ function generateEventForm(event = new _event_class__WEBPACK_IMPORTED_MODULE_1__
     view_access: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.view_access || 'OPEN'),
     images: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.images || []),
     featured: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.featured || false),
-    host_entity: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.host_entity || ''),
-    visitor_entity: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.visitor_entity || '')
+    host_entity: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.host_entity || '', [_angular_forms__WEBPACK_IMPORTED_MODULE_8__.Validators.required]),
+    visitor_entity: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.visitor_entity || '', [_angular_forms__WEBPACK_IMPORTED_MODULE_8__.Validators.required])
   });
   form.get('organiser').valueChanges.subscribe(o => form.controls.host.setValue(o?.email));
   form.get('resources').valueChanges.subscribe(l => {
