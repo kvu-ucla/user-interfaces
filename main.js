@@ -32596,15 +32596,15 @@ exports.VERSION = void 0;
 /* tslint:disable */
 exports.VERSION = {
   "dirty": false,
-  "raw": "bfe21ee",
-  "hash": "bfe21ee",
+  "raw": "ec1dcfd",
+  "hash": "ec1dcfd",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "bfe21ee",
+  "suffix": "ec1dcfd",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1729640608132
+  "time": 1730071050681
 };
 /* tslint:enable */
 
@@ -49404,8 +49404,8 @@ function generateEventForm() {
     view_access: new forms_1.FormControl(((_event$extension_data12 = event.extension_data) === null || _event$extension_data12 === void 0 ? void 0 : _event$extension_data12.view_access) || 'OPEN'),
     images: new forms_1.FormControl(((_event$extension_data13 = event.extension_data) === null || _event$extension_data13 === void 0 ? void 0 : _event$extension_data13.images) || []),
     featured: new forms_1.FormControl(((_event$extension_data14 = event.extension_data) === null || _event$extension_data14 === void 0 ? void 0 : _event$extension_data14.featured) || false),
-    host_entity: new forms_1.FormControl(((_event$extension_data15 = event.extension_data) === null || _event$extension_data15 === void 0 ? void 0 : _event$extension_data15.host_entity) || ''),
-    visitor_entity: new forms_1.FormControl(((_event$extension_data16 = event.extension_data) === null || _event$extension_data16 === void 0 ? void 0 : _event$extension_data16.visitor_entity) || '')
+    host_entity: new forms_1.FormControl(((_event$extension_data15 = event.extension_data) === null || _event$extension_data15 === void 0 ? void 0 : _event$extension_data15.host_entity) || '', [forms_1.Validators.required]),
+    visitor_entity: new forms_1.FormControl(((_event$extension_data16 = event.extension_data) === null || _event$extension_data16 === void 0 ? void 0 : _event$extension_data16.visitor_entity) || '', [forms_1.Validators.required])
   });
   form.get('organiser').valueChanges.subscribe(function (o) {
     return form.controls.host.setValue(o === null || o === void 0 ? void 0 : o.email);
