@@ -1518,13 +1518,13 @@ class EventPanelComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.A
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](32, "div", 15)(33, "i", 16);
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("modelChange", function EventPanelComponent_Template_i_modelChange_33_listener($event) {
           _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r1);
-          return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx.current = ctx.asCalendarEvent($event));
+          return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx.current = $event ? ctx.asCalendarEvent($event) : null);
         });
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](34, "i", 17);
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("modelChange", function EventPanelComponent_Template_i_modelChange_34_listener($event) {
           _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r1);
-          return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx.next = ctx.asCalendarEvent($event));
+          return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx.next = $event ? ctx.asCalendarEvent($event) : null);
         });
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()();
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](35, EventPanelComponent_div_35_Template, 6, 5, "div", 18);
@@ -22234,15 +22234,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "bfe21ee",
-  "hash": "bfe21ee",
+  "raw": "ec1dcfd",
+  "hash": "ec1dcfd",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "bfe21ee",
+  "suffix": "ec1dcfd",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1729640602731
+  "time": 1730071048846
 };
 /* tslint:enable */
 
@@ -36734,8 +36734,8 @@ function generateEventForm(event = new _event_class__WEBPACK_IMPORTED_MODULE_1__
     view_access: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.view_access || 'OPEN'),
     images: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.images || []),
     featured: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.featured || false),
-    host_entity: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.host_entity || ''),
-    visitor_entity: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.visitor_entity || '')
+    host_entity: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.host_entity || '', [_angular_forms__WEBPACK_IMPORTED_MODULE_8__.Validators.required]),
+    visitor_entity: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(event.extension_data?.visitor_entity || '', [_angular_forms__WEBPACK_IMPORTED_MODULE_8__.Validators.required])
   });
   form.get('organiser').valueChanges.subscribe(o => form.controls.host.setValue(o?.email));
   form.get('resources').valueChanges.subscribe(l => {
