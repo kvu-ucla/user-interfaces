@@ -5854,7 +5854,7 @@ function MeetingFormDetailsComponent_div_0_div_13_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵproperty"]("ngIf", !ctx_r0.allow_multiday);
   }
 }
-function MeetingFormDetailsComponent_div_0_div_14_mat_option_14_Template(rf, ctx) {
+function MeetingFormDetailsComponent_div_0_div_14_mat_option_17_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementStart"](0, "mat-option", 35);
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtext"](1);
@@ -5877,25 +5877,29 @@ function MeetingFormDetailsComponent_div_0_div_14_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementEnd"]()();
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelement"](6, "host-select-field", 29);
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementStart"](7, "div", 30)(8, "label", 31);
-    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtext"](9, "Host's Entity:");
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtext"](9, "Host's Entity");
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementStart"](10, "span");
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtext"](11, "*");
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementStart"](10, "mat-form-field", 6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelement"](11, "input", 32);
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtext"](12, ":");
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementStart"](12, "mat-autocomplete", 33, 0);
-    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtemplate"](14, MeetingFormDetailsComponent_div_0_div_14_mat_option_14_Template, 2, 2, "mat-option", 34);
-    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵpipe"](15, "async");
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementStart"](13, "mat-form-field", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelement"](14, "input", 32);
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementStart"](15, "mat-autocomplete", 33, 0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtemplate"](17, MeetingFormDetailsComponent_div_0_div_14_mat_option_17_Template, 2, 2, "mat-option", 34);
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵpipe"](18, "async");
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementEnd"]()()();
   }
   if (rf & 2) {
-    const auto_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵreference"](13);
+    const auto_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵreference"](16);
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵpipeBind1"](3, 3, "FORM.HOST"), "");
-    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵadvance"](9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵadvance"](12);
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵproperty"]("matAutocomplete", auto_r5);
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵpipeBind1"](15, 5, ctx_r0.filtered_entities));
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵpipeBind1"](18, 5, ctx_r0.filtered_entities));
   }
 }
 function MeetingFormDetailsComponent_div_0_div_15_mat_option_19_Template(rf, ctx) {
@@ -5991,7 +5995,7 @@ function MeetingFormDetailsComponent_div_0_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementEnd"]()()();
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtemplate"](11, MeetingFormDetailsComponent_div_0_div_11_Template, 10, 10, "div", 8);
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtemplate"](12, MeetingFormDetailsComponent_div_0_div_12_Template, 20, 22, "div", 9)(13, MeetingFormDetailsComponent_div_0_div_13_Template, 10, 10, "div", 10)(14, MeetingFormDetailsComponent_div_0_div_14_Template, 16, 7, "div", 11)(15, MeetingFormDetailsComponent_div_0_div_15_Template, 21, 7, "div", 11)(16, MeetingFormDetailsComponent_div_0_div_16_Template, 8, 5, "div", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtemplate"](12, MeetingFormDetailsComponent_div_0_div_12_Template, 20, 22, "div", 9)(13, MeetingFormDetailsComponent_div_0_div_13_Template, 10, 10, "div", 10)(14, MeetingFormDetailsComponent_div_0_div_14_Template, 19, 7, "div", 11)(15, MeetingFormDetailsComponent_div_0_div_15_Template, 21, 7, "div", 11)(16, MeetingFormDetailsComponent_div_0_div_16_Template, 8, 5, "div", 11);
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementEnd"]();
   }
   if (rf & 2) {
