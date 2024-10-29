@@ -1055,7 +1055,8 @@ class ParkingTopbarComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1_
         relativeTo: this._route,
         queryParams: {
           zone_ids: z.join(',')
-        }
+        },
+        queryParamsHandling: 'merge'
       });
       this._state.setOptions({
         zones: z

@@ -166,7 +166,7 @@ function ParkingBookingModalComponent_main_5_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngIf", !ctx_r1.user);
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](20);
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngIf", ctx_r1.allow_all_day);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngIf", ctx_r1.allow_all_day && !ctx_r1.form.controls.duration.disabled);
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngIf", !ctx_r1.form.value.all_day);
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](6);
@@ -248,13 +248,24 @@ class ParkingBookingModalComponent extends _placeos_common__WEBPACK_IMPORTED_MOD
         user: this._data.booking?.attendees[0] || (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.currentUser)()
       });
     }
+    if (this._data.parent_id) {
+      this.form.patchValue({
+        parent_id: this._data.parent_id
+      });
+    }
     if (this._data.user) {
       this.form.patchValue({
+        user: this._data.user,
         user_email: this._data.user.email,
         user_name: this._data.user.name,
         attendees: [this._data.user]
       });
       this.form.controls.plate_number.setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_12__.Validators.required]);
+      this.form.controls.user_name.disable();
+      this.form.controls.user_email.disable();
+    }
+    if (this._data.booking?.id) {
+      this.form.controls.user.disable();
       this.form.controls.user_name.disable();
       this.form.controls.user_email.disable();
     }
@@ -300,13 +311,21 @@ class ParkingBookingModalComponent extends _placeos_common__WEBPACK_IMPORTED_MOD
   postForm() {
     var _this = this;
     return (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      if (!_this.form.value.all_day && _this.form.value.duration > _this.max_duration) {
+        _this.form.patchValue({
+          duration: 30
+        });
+      }
       _this.form.markAllAsTouched();
       _this.form.updateValueAndValidity();
-      if (!_this.form.valid) return;
+      if (!_this.form.valid) {
+        return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.notifyError)(`Some fields are invalid. [${(0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.getInvalidFields)(_this.form).join(', ')}]`);
+      }
       _this.loading = true;
       const id = _this.form.value.id;
       _this.form.patchValue({
-        user_id: undefined
+        user_id: undefined,
+        booking_type: 'parking'
       });
       const result = yield _this._booking_form.postForm().catch(e => {
         _this.loading = false;
@@ -316,6 +335,11 @@ class ParkingBookingModalComponent extends _placeos_common__WEBPACK_IMPORTED_MOD
       });
       _this.form.controls.plate_number.setValidators([]);
       (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.notifySuccess)(`Successfully ${id ? 'updated' : 'created'} parking reservation`);
+      _this.form.get('date').enable();
+      _this.form.get('duration').enable();
+      _this.form.controls.user.disable();
+      _this.form.controls.user_name.disable();
+      _this.form.controls.user_email.disable();
       _this._dialog_ref.close(result.id);
     })();
   }
@@ -879,6 +903,7 @@ class ParkingStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.A
     })();
   }
   editReservation(reservation, {
+    parent_id,
     user,
     link_id,
     date,
@@ -896,6 +921,7 @@ class ParkingStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.A
         }
         const ref = _this5._dialog.open(_parking_booking_modal_component__WEBPACK_IMPORTED_MODULE_7__.ParkingBookingModalComponent, {
           data: {
+            parent_id,
             booking: reservation,
             user,
             link_id,

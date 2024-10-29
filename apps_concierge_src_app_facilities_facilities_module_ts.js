@@ -254,7 +254,8 @@ class FacilitiesTopbarComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE
         relativeTo: this._route,
         queryParams: {
           zone_ids: z.join(',')
-        }
+        },
+        queryParamsHandling: 'merge'
       });
       this._state.setZones(z);
     };

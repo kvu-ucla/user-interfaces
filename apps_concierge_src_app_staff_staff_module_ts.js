@@ -1569,7 +1569,8 @@ class StaffTopbarComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.
         relativeTo: this._route,
         queryParams: {
           zone_ids: zones.join(',')
-        }
+        },
+        queryParamsHandling: 'merge'
       });
       this._state.setFilters({
         zones

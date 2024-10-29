@@ -455,7 +455,8 @@ class RoomManagerTopbarComponent extends _placeos_common__WEBPACK_IMPORTED_MODUL
         relativeTo: this._route,
         queryParams: {
           zone_ids: zones.join(',')
-        }
+        },
+        queryParamsHandling: 'merge'
       });
     };
     this.newRoom = () => this._manager.editRoom();
