@@ -3029,6 +3029,9 @@ video {
 #placeos .leading-9 {
   line-height: 2.25rem;
 }
+#placeos .leading-none {
+  line-height: 1;
+}
 #placeos .leading-normal {
   line-height: 1.5;
 }

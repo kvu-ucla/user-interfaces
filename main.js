@@ -9942,7 +9942,6 @@ var BookingFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                 }
                 event_id = value.event_id, parent_id = value.parent_id;
                 delete value.event_id;
-                delete value.parent_id;
                 resources = value.resources || [];
                 zone = _this3._org.levelWithID((_resources$ = resources[0]) === null || _resources$ === void 0 ? void 0 : _resources$.zone_id) || ((_resources$2 = resources[0]) === null || _resources$2 === void 0 ? void 0 : _resources$2.zone);
                 zones = zone && zone instanceof Object ? (0, common_1.unique)([_this3._org.organisation.id, (_this3$_org$region = _this3._org.region) === null || _this3$_org$region === void 0 ? void 0 : _this3$_org$region.id, zone.parent_id, zone.id]) : [_this3._org.organisation.id, (_this3$_org$region2 = _this3._org.region) === null || _this3$_org$region2 === void 0 ? void 0 : _this3$_org$region2.id];
@@ -9956,7 +9955,7 @@ var BookingFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                   q.instance = true;
                   q.start_time = booking.booking_start;
                 }
-                _context2.next = 31;
+                _context2.next = 30;
                 return (0, bookings_fn_1.saveBooking)(new booking_class_1.Booking(_objectSpread(_objectSpread(_objectSpread({}, _this3._options.getValue()), value), {}, {
                   description: value.asset_name || value.description,
                   user_name: ((_value$user2 = value.user) === null || _value$user2 === void 0 ? void 0 : _value$user2.name) || value.user_name,
@@ -9977,13 +9976,13 @@ var BookingFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                   _this3._loading.next('');
                   throw (e === null || e === void 0 ? void 0 : e.error) || e;
                 });
-              case 31:
+              case 30:
                 result = _context2.sent;
                 if (!((_value$assets = value.assets) !== null && _value$assets !== void 0 && _value$assets.length || (_booking$extension_da = booking.extension_data.assets) !== null && _booking$extension_da !== void 0 && _booking$extension_da.length)) {
-                  _context2.next = 40;
+                  _context2.next = 39;
                   break;
                 }
-                _context2.next = 35;
+                _context2.next = 34;
                 return (0, assets_fn_1.validateAssetRequestsForResource)(_objectSpread(_objectSpread({}, result), {}, {
                   from_booking: true
                 }), {
@@ -10002,17 +10001,17 @@ var BookingFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                   _this3._loading.next('');
                   throw (e === null || e === void 0 ? void 0 : e.error) || e;
                 });
-              case 35:
+              case 34:
                 requests = _context2.sent;
                 if (requests) {
-                  _context2.next = 38;
+                  _context2.next = 37;
                   break;
                 }
                 throw 'Unable to validate asset requests';
-              case 38:
-                _context2.next = 40;
+              case 37:
+                _context2.next = 39;
                 return requests();
-              case 40:
+              case 39:
                 _this3._loading.next('');
                 booking_type = value.booking_type;
                 _this3.clearForm();
@@ -10023,7 +10022,7 @@ var BookingFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                 sessionStorage.setItem('PLACEOS.last_booked_booking', JSON.stringify(result));
                 _this3.setView('success');
                 return _context2.abrupt("return", result);
-              case 48:
+              case 47:
               case "end":
                 return _context2.stop();
             }
@@ -15717,6 +15716,15 @@ var InviteVisitorFormComponent = /*#__PURE__*/function (_common_1$AsyncHandle) {
       return ngOnInit;
     }()
   }, {
+    key: "ngOnChanges",
+    value: function ngOnChanges(changes) {
+      if (changes.date && this.date) {
+        this.form.patchValue({
+          date: this.date
+        });
+      }
+    }
+  }, {
     key: "setVisitor",
     value: function setVisitor(item) {
       this.form.patchValue({
@@ -15942,10 +15950,13 @@ _InviteVisitorFormComponent.ɵfac = function InviteVisitorFormComponent_Factory(
 _InviteVisitorFormComponent.ɵcmp = /*@__PURE__*/i0.ɵɵdefineComponent({
   type: _InviteVisitorFormComponent,
   selectors: [["invite-visitor-form"]],
+  inputs: {
+    date: "date"
+  },
   outputs: {
     done: "done"
   },
-  features: [i0.ɵɵInheritDefinitionFeature],
+  features: [i0.ɵɵInheritDefinitionFeature, i0.ɵɵNgOnChangesFeature],
   decls: 7,
   vars: 2,
   consts: function consts() {
@@ -32596,15 +32607,15 @@ exports.VERSION = void 0;
 /* tslint:disable */
 exports.VERSION = {
   "dirty": false,
-  "raw": "26c26c5",
-  "hash": "26c26c5",
+  "raw": "b5f38d3",
+  "hash": "b5f38d3",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "26c26c5",
+  "suffix": "b5f38d3",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1730159686910
+  "time": 1730161794131
 };
 /* tslint:enable */
 
