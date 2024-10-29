@@ -10658,7 +10658,6 @@ class BookingFormService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.As
         parent_id
       } = value;
       delete value.event_id;
-      delete value.parent_id;
       const resources = value.resources || [];
       const zone = _this2._org.levelWithID(resources[0]?.zone_id) || resources[0]?.zone;
       const zones = zone && zone instanceof Object ? (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)([_this2._org.organisation.id, _this2._org.region?.id, zone.parent_id, zone.id]) : [_this2._org.organisation.id, _this2._org.region?.id];
@@ -15584,6 +15583,13 @@ class InviteVisitorFormComponent extends _placeos_common__WEBPACK_IMPORTED_MODUL
       });
     })();
   }
+  ngOnChanges(changes) {
+    if (changes.date && this.date) {
+      this.form.patchValue({
+        date: this.date
+      });
+    }
+  }
   setVisitor(item) {
     this.form.patchValue({
       asset_id: item.email,
@@ -15707,10 +15713,13 @@ class InviteVisitorFormComponent extends _placeos_common__WEBPACK_IMPORTED_MODUL
   static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵdefineComponent"]({
     type: InviteVisitorFormComponent,
     selectors: [["invite-visitor-form"]],
+    inputs: {
+      date: "date"
+    },
     outputs: {
       done: "done"
     },
-    features: [_angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵInheritDefinitionFeature"]],
+    features: [_angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵInheritDefinitionFeature"], _angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵNgOnChangesFeature"]],
     decls: 7,
     vars: 2,
     consts: () => {
@@ -24866,15 +24875,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "ec1dcfd",
-  "hash": "ec1dcfd",
+  "raw": "b5f38d3",
+  "hash": "b5f38d3",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "ec1dcfd",
+  "suffix": "b5f38d3",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1730071048576
+  "time": 1730161787332
 };
 /* tslint:enable */
 
