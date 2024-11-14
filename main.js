@@ -26000,15 +26000,21 @@ var CateringOrderStateService = /*#__PURE__*/function () {
       }));
     }), (0, operators_1.tap)(function (items) {
       _this._loading.next(_this._loading.getValue().replace('[MENU]', ''));
-      var caterer_list = (0, common_1.unique)(items.map(function (i) {
-        return i.caterer;
-      }).filter(function (_) {
-        return !!_;
-      }));
-      if (caterer_list.length <= 1) return;
-      _this.setFilters({
-        caterer: caterer_list[0] || ''
-      });
+      if (_this._settings.get('app.catering_provider')) {
+        _this.setFilters({
+          caterer: _this._settings.get('app.catering_provider')
+        });
+      } else {
+        var caterer_list = (0, common_1.unique)(items.map(function (i) {
+          return i.caterer;
+        }).filter(function (_) {
+          return !!_;
+        }));
+        if (caterer_list.length <= 1) return;
+        _this.setFilters({
+          caterer: caterer_list[0] || ''
+        });
+      }
     }), (0, operators_1.shareReplay)(1));
     this.categories = this.available_menu.pipe((0, operators_1.map)(function (_) {
       return (0, common_1.unique)(_.map(function (i) {
@@ -26016,7 +26022,7 @@ var CateringOrderStateService = /*#__PURE__*/function () {
       }));
     }));
     this.caterers = this.available_menu.pipe((0, operators_1.map)(function (_) {
-      return (0, common_1.unique)(_.map(function (i) {
+      return _this._settings.get('app.catering_provider') ? [] : (0, common_1.unique)(_.map(function (i) {
         return i.caterer;
       }));
     }));
@@ -32904,15 +32910,15 @@ exports.VERSION = void 0;
 /* tslint:disable */
 exports.VERSION = {
   "dirty": false,
-  "raw": "e247725",
-  "hash": "e247725",
+  "raw": "f6bf596",
+  "hash": "f6bf596",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "e247725",
+  "suffix": "f6bf596",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1731553506169
+  "time": 1731553889315
 };
 /* tslint:enable */
 
