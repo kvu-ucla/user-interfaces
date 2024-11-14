@@ -11935,7 +11935,7 @@ class CateringItemModalComponent {
       name: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.name || '', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]),
       description: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.description || ''),
       category: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.category || '', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]),
-      caterer: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.caterer || 'Internal', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]),
+      caterer: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.caterer || '', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]),
       unit_price: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.unit_price, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]),
       tags: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.tags || []),
       accept_points: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.accept_points || false),
@@ -15991,6 +15991,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function checkOrder(order, filters) {
   const s = (filters.search || '').toLowerCase();
   return !!order.items.find(item => item.name.toLowerCase().includes(s) || !!item.options.find(option => option.name.toLowerCase().includes(s)));
@@ -16004,15 +16005,16 @@ class CateringOrdersService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__
   set filters(filters) {
     this._filters.next(filters);
   }
-  constructor() {
+  constructor(_settings) {
     super();
+    this._settings = _settings;
     this._poll = new rxjs__WEBPACK_IMPORTED_MODULE_5__.BehaviorSubject(0);
     this._loading = new rxjs__WEBPACK_IMPORTED_MODULE_5__.BehaviorSubject(false);
     this._filters = new rxjs__WEBPACK_IMPORTED_MODULE_5__.BehaviorSubject({
       caterer: ''
     });
     /** Observable for list of orders */
-    this.orders = (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.combineLatest)([this._filters, this._poll]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.debounceTime)(1000), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.switchMap)(([{
+    this.orders = (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.combineLatest)([this._filters, this._poll]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.debounceTime)(300), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.switchMap)(([{
       date,
       zones
     }]) => {
@@ -16031,7 +16033,20 @@ class CateringOrdersService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__
     /** Observable for loading status of orders */
     this.loading = this._loading.asObservable();
     this.order_filters = this._filters.asObservable();
-    this.caterers = this.orders.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(_ => (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(_.map(i => i.caterer))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.shareReplay)(1));
+    this.caterers = this.orders.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(_ => {
+      const provider_groups = this._settings.get('app.catering_provider_groups') || {};
+      let provider_list = Object.keys(provider_groups);
+      const is_admin = (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.currentUser)().groups.includes('placeos_admin') || (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.currentUser)().groups.includes('placeos_support');
+      if (!provider_list.length || is_admin) return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(_.map(i => i.caterer));
+      provider_list = provider_list.filter(caterer => provider_groups[caterer].find(group => (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.currentUser)().groups.includes(group)));
+      if (provider_list.length <= 1 && this._filters.getValue()?.caterer !== provider_list[0]) {
+        this._filters.next({
+          ...this._filters.getValue(),
+          caterer: provider_list[0]
+        });
+      }
+      return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(provider_list);
+    }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.shareReplay)(1));
     /** Filtered list of catering orders */
     this.filtered = this.orders.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(list => list.filter(order => checkOrder(order, this._filters.getValue())).sort((a, b) => a.deliver_at - b.deliver_at)));
     this.subscription('changes', this.orders.subscribe());
@@ -16073,7 +16088,7 @@ class CateringOrdersService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__
     })();
   }
   static #_ = this.ɵfac = function CateringOrdersService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || CateringOrdersService)();
+    return new (__ngFactoryType__ || CateringOrdersService)(_angular_core__WEBPACK_IMPORTED_MODULE_18__["ɵɵinject"](_placeos_common__WEBPACK_IMPORTED_MODULE_1__.SettingsService));
   };
   static #_2 = this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_18__["ɵɵdefineInjectable"]({
     token: CateringOrdersService,
@@ -16096,17 +16111,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 89204);
 /* harmony import */ var _placeos_ts_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @placeos/ts-client */ 35713);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 90521);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 68824);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 71536);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs/operators */ 8627);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs/operators */ 71963);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs/operators */ 29314);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs/operators */ 35443);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs/operators */ 66000);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! rxjs/operators */ 7841);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! rxjs/operators */ 57871);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! rxjs/operators */ 33602);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 90521);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs */ 68824);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 71536);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs/operators */ 8627);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs/operators */ 71963);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs/operators */ 29314);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs/operators */ 35443);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! rxjs/operators */ 66000);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! rxjs/operators */ 7841);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! rxjs/operators */ 57871);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! rxjs/operators */ 33602);
 /* harmony import */ var _placeos_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @placeos/common */ 22797);
 /* harmony import */ var _placeos_organisation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @placeos/organisation */ 2510);
 /* harmony import */ var _catering_item_modal_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./catering-item-modal.component */ 30807);
@@ -16117,8 +16132,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _catering_order_modal_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./catering-order-modal.component */ 82912);
 /* harmony import */ var _catering_order_options_modal_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./catering-order-options-modal.component */ 17707);
 /* harmony import */ var _catering_import_menu_modal_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./catering-import-menu-modal.component */ 76095);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/core */ 37580);
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/material/dialog */ 12587);
+/* harmony import */ var _catering_orders_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./catering-orders.service */ 98197);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/core */ 37580);
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @angular/material/dialog */ 12587);
+
+
 
 
 
@@ -16150,38 +16168,50 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
     const menu = this._menu.getValue();
     return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.unique)(menu.map(i => i.caterer));
   }
-  constructor(_org, _dialog, _settings) {
+  constructor(_org, _dialog, _settings, _orders) {
     var _this;
     super();
     _this = this;
     this._org = _org;
     this._dialog = _dialog;
     this._settings = _settings;
-    this._updated = new rxjs__WEBPACK_IMPORTED_MODULE_12__.BehaviorSubject(0);
+    this._orders = _orders;
+    this._updated = new rxjs__WEBPACK_IMPORTED_MODULE_13__.BehaviorSubject(0);
     /** Active menu */
-    this._menu = new rxjs__WEBPACK_IMPORTED_MODULE_12__.BehaviorSubject([]);
+    this._menu = new rxjs__WEBPACK_IMPORTED_MODULE_13__.BehaviorSubject([]);
     /** Whether the menu for the active building is loading */
-    this._loading = new rxjs__WEBPACK_IMPORTED_MODULE_12__.BehaviorSubject(false);
+    this._loading = new rxjs__WEBPACK_IMPORTED_MODULE_13__.BehaviorSubject(false);
     /** Currency code for the active building */
-    this._currency = new rxjs__WEBPACK_IMPORTED_MODULE_12__.BehaviorSubject('USD');
-    this._change = new rxjs__WEBPACK_IMPORTED_MODULE_12__.BehaviorSubject(0);
+    this._currency = new rxjs__WEBPACK_IMPORTED_MODULE_13__.BehaviorSubject('USD');
+    this._change = new rxjs__WEBPACK_IMPORTED_MODULE_13__.BehaviorSubject(0);
     /** Observable for the active menu */
     this.menu = this._menu.asObservable();
     /** Observable for whether the menu for the active building is loadingg */
     this.loading = this._loading.asObservable();
     /** Observable for the currency code of the active building */
     this.currency = this._currency.asObservable();
-    this.settings = (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.combineLatest)([this._org.active_building, this._change]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.filter)(([_]) => !!_), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_15__.switchMap)(([_]) => (0,_placeos_ts_client__WEBPACK_IMPORTED_MODULE_1__.showMetadata)(_.id, 'catering-settings').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.catchError)(_ => (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.of)({})))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.map)(_ => _.details || {}), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_19__.tap)(_ => this._settings.post('require_catering_notes', !!_?.require_notes)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.shareReplay)(1));
-    this.charge_codes = this.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.map)(_ => _.charge_codes || []));
-    this.availability = this.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.map)(_ => _.disabled_rooms || []));
-    this.caterers = this._menu.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.map)(_ => (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.unique)(_.map(i => i.caterer))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.shareReplay)(1));
+    this.settings = (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.combineLatest)([this._org.active_building, this._change]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_15__.filter)(([_]) => !!_), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(([_]) => (0,_placeos_ts_client__WEBPACK_IMPORTED_MODULE_1__.showMetadata)(_.id, 'catering-settings').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.catchError)(_ => (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.of)({})))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_19__.map)(_ => _.details || {}), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.tap)(_ => this._settings.post('require_catering_notes', !!_?.require_notes)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.shareReplay)(1));
+    this.charge_codes = this.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_19__.map)(_ => _.charge_codes || []));
+    this.availability = this.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_19__.map)(_ => _.disabled_rooms || []));
+    this.caterers = (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.combineLatest)([this._menu, this._orders.caterers]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_19__.map)(([menu_items]) => {
+      const provider_groups = this._settings.get('app.catering_provider_groups') || {};
+      let provider_list = Object.keys(provider_groups);
+      if (!provider_list.length) {
+        return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.unique)(menu_items.map(i => i.caterer));
+      }
+      provider_list = provider_list.filter(caterer => provider_groups[caterer].find(group => (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.currentUser)().groups.includes(group)));
+      return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.unique)(provider_list);
+    }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.shareReplay)(1));
     this.zone = '';
     this.subscription('building', this._org.active_building.subscribe( /*#__PURE__*/function () {
       var _ref = (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (bld) {
         if (bld) {
-          const menu = (yield _this.getCateringForZone(bld.id)).map(i => new _catering_item_class__WEBPACK_IMPORTED_MODULE_7__.CateringItem(i));
+          _this._loading.next(true);
+          _this._menu.next([]);
+          const menu = (yield _this.getCateringForZone(bld.id).catch(_ => [])).map(i => new _catering_item_class__WEBPACK_IMPORTED_MODULE_7__.CateringItem(i));
           _this._currency.next(_this._settings.get('app.currency') || bld.currency || 'USD');
-          _this._menu.next(menu);
+          _this._loading.next(false);
+          _this.timeout('loaded', () => _this._menu.next(menu), 1000);
         }
       });
       return function (_x) {
@@ -16206,7 +16236,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
           selectOptions: _ => _this2.selectOptions(_)
         }
       });
-      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
+      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
       ref.close();
       return details?.metadata?.order || order;
     })();
@@ -16221,7 +16251,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
           caterers: _this3.caterer_list
         }
       });
-      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
+      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
       if (details?.reason !== 'done') return;
       const menu = _this3._menu.getValue();
       const index = menu.findIndex(itm => itm.id === item.id);
@@ -16253,7 +16283,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
           types
         }
       });
-      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
+      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
       if (details?.reason !== 'done') return;
       const menu = _this4._menu.getValue();
       const index = menu.findIndex(itm => itm.id === item.id);
@@ -16277,7 +16307,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
           options
         }
       });
-      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
+      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
       if (details?.reason !== 'done') return [];
       ref.close();
       return details.metadata.options;
@@ -16335,7 +16365,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
       const config = yield _this8.getCateringConfig(_this8._org.building.id);
       const {
         require_notes
-      } = yield _this8.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.take)(1)).toPromise();
+      } = yield _this8.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_23__.take)(1)).toPromise();
       const menu = _this8._menu.getValue();
       const types = (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.unique)((0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.flatten)(menu.map(i => [i.category, ...i.tags])));
       const ref = _this8._dialog.open(_placeos_components__WEBPACK_IMPORTED_MODULE_6__.AttachedResourceConfigModalComponent, {
@@ -16348,7 +16378,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
           })
         }
       });
-      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
+      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
       if (details?.reason !== 'done') return;
       _this8.updateConfig(_this8._org.building.id, details.metadata).then(() => ref.close(), () => ref.componentInstance.loading = false);
     })();
@@ -16357,7 +16387,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
     var _this9 = this;
     return (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const ref = _this9._dialog.open(_catering_import_menu_modal_component__WEBPACK_IMPORTED_MODULE_11__.CateringImportMenuModalComponent);
-      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
+      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
       if (details?.reason !== 'done') return;
       ref.componentInstance.loading = 'Updating menu...';
       const menu = _this9._menu.getValue();
@@ -16383,7 +16413,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
   saveSettings(settings) {
     var _this10 = this;
     return (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const old_settings = yield _this10.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.take)(1)).toPromise();
+      const old_settings = yield _this10.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_23__.take)(1)).toPromise();
       const result = yield (0,_placeos_ts_client__WEBPACK_IMPORTED_MODULE_1__.updateMetadata)(_this10._org.building.id, {
         id: _this10._org.building.id,
         name: 'catering-settings',
@@ -16432,9 +16462,9 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
     return new_order;
   }
   static #_ = this.ɵfac = function CateringStateService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || CateringStateService)(_angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵinject"](_placeos_organisation__WEBPACK_IMPORTED_MODULE_3__.OrganisationService), _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵinject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_24__.MatDialog), _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵinject"](_placeos_common__WEBPACK_IMPORTED_MODULE_2__.SettingsService));
+    return new (__ngFactoryType__ || CateringStateService)(_angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵinject"](_placeos_organisation__WEBPACK_IMPORTED_MODULE_3__.OrganisationService), _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵinject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_25__.MatDialog), _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵinject"](_placeos_common__WEBPACK_IMPORTED_MODULE_2__.SettingsService), _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵinject"](_catering_orders_service__WEBPACK_IMPORTED_MODULE_12__.CateringOrdersService));
   };
-  static #_2 = this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineInjectable"]({
+  static #_2 = this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵdefineInjectable"]({
     token: CateringStateService,
     factory: CateringStateService.ɵfac,
     providedIn: 'root'
