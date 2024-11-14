@@ -22097,7 +22097,7 @@ var CateringItemModalComponent = /*#__PURE__*/function () {
       name: new forms_1.FormControl(this.item.name || '', [forms_1.Validators.required]),
       description: new forms_1.FormControl(this.item.description || ''),
       category: new forms_1.FormControl(this.item.category || '', [forms_1.Validators.required]),
-      caterer: new forms_1.FormControl(this.item.caterer || 'Internal', [forms_1.Validators.required]),
+      caterer: new forms_1.FormControl(this.item.caterer || '', [forms_1.Validators.required]),
       unit_price: new forms_1.FormControl(this.item.unit_price, [forms_1.Validators.required]),
       tags: new forms_1.FormControl(this.item.tags || []),
       accept_points: new forms_1.FormControl(this.item.accept_points || false),
@@ -22298,7 +22298,7 @@ var CateringItem = /*#__PURE__*/function () {
     this.id = data.id || '';
     this.name = data.name || data.id || '';
     this.category = data.category || '';
-    this.caterer = data.caterer || 'Internal';
+    this.caterer = data.caterer || '';
     this.unit_price = data.unit_price || 0;
     this.description = data.description || '';
     this.quantity = data.quantity || 0;
@@ -26720,7 +26720,7 @@ var CateringOrder = /*#__PURE__*/function () {
     this.id = data.id || "order-".concat((0, common_1.randomInt)(9999999, 1000000));
     this.system_id = data.system_id || '';
     this.event_id = data.event_id || ((_data$event = data.event) === null || _data$event === void 0 ? void 0 : _data$event.id) || '';
-    this.caterer = data.caterer || 'Internal';
+    this.caterer = data.caterer || '';
     this.items = (data.items || []).map(function (i) {
       return i instanceof catering_item_class_1.CateringItem ? i : new catering_item_class_1.CateringItem(i);
     });
@@ -26793,6 +26793,7 @@ var events_fn_1 = __webpack_require__(/*! libs/events/src/lib/events.fn */ 51416
 var event_class_1 = __webpack_require__(/*! libs/events/src/lib/event.class */ 6727);
 var catering_order_class_1 = __webpack_require__(/*! ./catering-order.class */ 75555);
 var i0 = __webpack_require__(/*! @angular/core */ 37580);
+var i1 = __webpack_require__(/*! @placeos/common */ 22797);
 function checkOrder(order, filters) {
   var s = (filters.search || '').toLowerCase();
   return !!order.items.find(function (item) {
@@ -26802,17 +26803,18 @@ function checkOrder(order, filters) {
   });
 }
 var CateringOrdersService = /*#__PURE__*/function (_common_1$AsyncHandle) {
-  function CateringOrdersService() {
+  function CateringOrdersService(_settings) {
     var _this;
     _classCallCheck(this, CateringOrdersService);
     _this = _callSuper(this, CateringOrdersService);
+    _this._settings = _settings;
     _this._poll = new rxjs_1.BehaviorSubject(0);
     _this._loading = new rxjs_1.BehaviorSubject(false);
     _this._filters = new rxjs_1.BehaviorSubject({
       caterer: ''
     });
     /** Observable for list of orders */
-    _this.orders = (0, rxjs_1.combineLatest)([_this._filters, _this._poll]).pipe((0, operators_1.debounceTime)(1000), (0, operators_1.switchMap)(function (_ref) {
+    _this.orders = (0, rxjs_1.combineLatest)([_this._filters, _this._poll]).pipe((0, operators_1.debounceTime)(300), (0, operators_1.switchMap)(function (_ref) {
       var _ref2 = _slicedToArray(_ref, 1),
         _ref2$ = _ref2[0],
         date = _ref2$.date,
@@ -26846,9 +26848,24 @@ var CateringOrdersService = /*#__PURE__*/function (_common_1$AsyncHandle) {
     _this.loading = _this._loading.asObservable();
     _this.order_filters = _this._filters.asObservable();
     _this.caterers = _this.orders.pipe((0, operators_1.map)(function (_) {
-      return (0, common_1.unique)(_.map(function (i) {
+      var _this$_filters$getVal;
+      var provider_groups = _this._settings.get('app.catering_provider_groups') || {};
+      var provider_list = Object.keys(provider_groups);
+      var is_admin = (0, common_1.currentUser)().groups.includes('placeos_admin') || (0, common_1.currentUser)().groups.includes('placeos_support');
+      if (!provider_list.length || is_admin) return (0, common_1.unique)(_.map(function (i) {
         return i.caterer;
       }));
+      provider_list = provider_list.filter(function (caterer) {
+        return provider_groups[caterer].find(function (group) {
+          return (0, common_1.currentUser)().groups.includes(group);
+        });
+      });
+      if (provider_list.length <= 1 && ((_this$_filters$getVal = _this._filters.getValue()) === null || _this$_filters$getVal === void 0 ? void 0 : _this$_filters$getVal.caterer) !== provider_list[0]) {
+        _this._filters.next(_objectSpread(_objectSpread({}, _this._filters.getValue()), {}, {
+          caterer: provider_list[0]
+        }));
+      }
+      return (0, common_1.unique)(provider_list);
     }), (0, operators_1.shareReplay)(1));
     /** Filtered list of catering orders */
     _this.filtered = _this.orders.pipe((0, operators_1.map)(function (list) {
@@ -26942,7 +26959,7 @@ var CateringOrdersService = /*#__PURE__*/function (_common_1$AsyncHandle) {
 }(common_1.AsyncHandler);
 _CateringOrdersService = CateringOrdersService;
 _CateringOrdersService.ɵfac = function CateringOrdersService_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CateringOrdersService)();
+  return new (__ngFactoryType__ || _CateringOrdersService)(i0.ɵɵinject(i1.SettingsService));
 };
 _CateringOrdersService.ɵprov = /*@__PURE__*/i0.ɵɵdefineInjectable({
   token: _CateringOrdersService,
@@ -26989,18 +27006,21 @@ var catering_order_class_1 = __webpack_require__(/*! ./catering-order.class */ 7
 var catering_order_modal_component_1 = __webpack_require__(/*! ./catering-order-modal.component */ 82912);
 var catering_order_options_modal_component_1 = __webpack_require__(/*! ./catering-order-options-modal.component */ 17707);
 var catering_import_menu_modal_component_1 = __webpack_require__(/*! ./catering-import-menu-modal.component */ 76095);
+var catering_orders_service_1 = __webpack_require__(/*! ./catering-orders.service */ 98197);
 var i0 = __webpack_require__(/*! @angular/core */ 37580);
 var i1 = __webpack_require__(/*! @placeos/organisation */ 2510);
 var i2 = __webpack_require__(/*! @angular/material/dialog */ 12587);
 var i3 = __webpack_require__(/*! @placeos/common */ 22797);
+var i4 = __webpack_require__(/*! ./catering-orders.service */ 98197);
 var CateringStateService = /*#__PURE__*/function (_common_1$AsyncHandle) {
-  function CateringStateService(_org, _dialog, _settings) {
+  function CateringStateService(_org, _dialog, _settings, _orders) {
     var _this;
     _classCallCheck(this, CateringStateService);
     _this = _callSuper(this, CateringStateService);
     _this._org = _org;
     _this._dialog = _dialog;
     _this._settings = _settings;
+    _this._orders = _orders;
     _this._updated = new rxjs_1.BehaviorSubject(0);
     /** Active menu */
     _this._menu = new rxjs_1.BehaviorSubject([]);
@@ -27036,38 +27056,57 @@ var CateringStateService = /*#__PURE__*/function (_common_1$AsyncHandle) {
     _this.availability = _this.settings.pipe((0, operators_1.map)(function (_) {
       return _.disabled_rooms || [];
     }));
-    _this.caterers = _this._menu.pipe((0, operators_1.map)(function (_) {
-      return (0, common_1.unique)(_.map(function (i) {
-        return i.caterer;
-      }));
+    _this.caterers = (0, rxjs_1.combineLatest)([_this._menu, _this._orders.caterers]).pipe((0, operators_1.map)(function (_ref5) {
+      var _ref6 = _slicedToArray(_ref5, 1),
+        menu_items = _ref6[0];
+      var provider_groups = _this._settings.get('app.catering_provider_groups') || {};
+      var provider_list = Object.keys(provider_groups);
+      if (!provider_list.length) {
+        return (0, common_1.unique)(menu_items.map(function (i) {
+          return i.caterer;
+        }));
+      }
+      provider_list = provider_list.filter(function (caterer) {
+        return provider_groups[caterer].find(function (group) {
+          return (0, common_1.currentUser)().groups.includes(group);
+        });
+      });
+      return (0, common_1.unique)(provider_list);
     }), (0, operators_1.shareReplay)(1));
     _this.zone = '';
     _this.subscription('building', _this._org.active_building.subscribe( /*#__PURE__*/function () {
-      var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(bld) {
+      var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(bld) {
         var menu;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               if (!bld) {
-                _context.next = 6;
+                _context.next = 9;
                 break;
               }
-              _context.next = 3;
-              return _this.getCateringForZone(bld.id);
-            case 3:
+              _this._loading.next(true);
+              _this._menu.next([]);
+              _context.next = 5;
+              return _this.getCateringForZone(bld.id)["catch"](function (_) {
+                return [];
+              });
+            case 5:
               menu = _context.sent.map(function (i) {
                 return new catering_item_class_1.CateringItem(i);
               });
               _this._currency.next(_this._settings.get('app.currency') || bld.currency || 'USD');
-              _this._menu.next(menu);
-            case 6:
+              _this._loading.next(false);
+              _this.timeout('loaded', function () {
+                return _this._menu.next(menu);
+              }, 1000);
+            case 9:
             case "end":
               return _context.stop();
           }
         }, _callee);
       }));
       return function (_x) {
-        return _ref5.apply(this, arguments);
+        return _ref7.apply(this, arguments);
       };
     }()));
     return _this;
@@ -27649,7 +27688,7 @@ var CateringStateService = /*#__PURE__*/function (_common_1$AsyncHandle) {
 }(common_1.AsyncHandler);
 _CateringStateService = CateringStateService;
 _CateringStateService.ɵfac = function CateringStateService_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CateringStateService)(i0.ɵɵinject(i1.OrganisationService), i0.ɵɵinject(i2.MatDialog), i0.ɵɵinject(i3.SettingsService));
+  return new (__ngFactoryType__ || _CateringStateService)(i0.ɵɵinject(i1.OrganisationService), i0.ɵɵinject(i2.MatDialog), i0.ɵɵinject(i3.SettingsService), i0.ɵɵinject(i4.CateringOrdersService));
 };
 _CateringStateService.ɵprov = /*@__PURE__*/i0.ɵɵdefineInjectable({
   token: _CateringStateService,
@@ -32910,15 +32949,15 @@ exports.VERSION = void 0;
 /* tslint:disable */
 exports.VERSION = {
   "dirty": false,
-  "raw": "f6bf596",
-  "hash": "f6bf596",
+  "raw": "23fc312",
+  "hash": "23fc312",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "f6bf596",
+  "suffix": "23fc312",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1731553889315
+  "time": 1731558085023
 };
 /* tslint:enable */
 
