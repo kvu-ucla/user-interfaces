@@ -235,10 +235,10 @@ __webpack_require__.r(__webpack_exports__);
 const _c0 = () => ["/"];
 function CateringTopbarComponent_mat_option_15_div_2_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "div", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "div", 24);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](2, "building");
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](3, "span", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](3, "span", 25);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](4, " - ");
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()();
   }
@@ -251,8 +251,8 @@ function CateringTopbarComponent_mat_option_15_div_2_Template(rf, ctx) {
 }
 function CateringTopbarComponent_mat_option_15_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "mat-option", 20)(1, "div", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](2, CateringTopbarComponent_mat_option_15_div_2_Template, 5, 3, "div", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "mat-option", 21)(1, "div", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](2, CateringTopbarComponent_mat_option_15_div_2_Template, 5, 3, "div", 23);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](3, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()()();
@@ -267,17 +267,54 @@ function CateringTopbarComponent_mat_option_15_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate1"](" ", level_r1.display_name || level_r1.name, " ");
   }
 }
-function CateringTopbarComponent_div_17_Template(rf, ctx) {
+function CateringTopbarComponent_mat_form_field_17_mat_option_4_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](0, "div", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "mat-option", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+  }
+  if (rf & 2) {
+    const caterer_r4 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("value", caterer_r4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate1"](" ", caterer_r4, " ");
   }
 }
-function CateringTopbarComponent_button_18_Template(rf, ctx) {
+function CateringTopbarComponent_mat_form_field_17_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 26);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function CateringTopbarComponent_button_18_Template_button_click_0_listener() {
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "mat-form-field", 10)(1, "mat-select", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("ngModelChange", function CateringTopbarComponent_mat_form_field_17_Template_mat_select_ngModelChange_1_listener($event) {
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r3);
+      const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r1.setCaterer($event));
+    });
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](2, "mat-option", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](3, "All Caterers");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](4, CateringTopbarComponent_mat_form_field_17_mat_option_4_Template, 2, 2, "mat-option", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](5, "async");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngModel", ctx_r1.filters == null ? null : ctx_r1.filters.caterer);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](5, 2, ctx_r1.caterers));
+  }
+}
+function CateringTopbarComponent_div_19_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](0, "div", 28);
+  }
+}
+function CateringTopbarComponent_button_20_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function CateringTopbarComponent_button_20_Template_button_click_0_listener() {
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r5);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r1.addItem());
     });
@@ -286,12 +323,12 @@ function CateringTopbarComponent_button_18_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()();
   }
 }
-function CateringTopbarComponent_button_19_Template(rf, ctx) {
+function CateringTopbarComponent_button_21_Template(rf, ctx) {
   if (rf & 1) {
-    const _r4 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 27);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function CateringTopbarComponent_button_19_Template_button_click_0_listener() {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r4);
+    const _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function CateringTopbarComponent_button_21_Template_button_click_0_listener() {
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r6);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r1.editConfig());
     });
@@ -300,12 +337,12 @@ function CateringTopbarComponent_button_19_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()();
   }
 }
-function CateringTopbarComponent_button_20_Template(rf, ctx) {
+function CateringTopbarComponent_button_22_Template(rf, ctx) {
   if (rf & 1) {
-    const _r5 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 28);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function CateringTopbarComponent_button_20_Template_button_click_0_listener() {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r5);
+    const _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 31);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function CateringTopbarComponent_button_22_Template_button_click_0_listener() {
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r7);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r1.importMenu());
     });
@@ -314,12 +351,12 @@ function CateringTopbarComponent_button_20_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()();
   }
 }
-function CateringTopbarComponent_button_21_Template(rf, ctx) {
+function CateringTopbarComponent_button_23_Template(rf, ctx) {
   if (rf & 1) {
-    const _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 29);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function CateringTopbarComponent_button_21_Template_button_click_0_listener() {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r6);
+    const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 32);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function CateringTopbarComponent_button_23_Template_button_click_0_listener() {
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r8);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r1.setRoomAvailability());
     });
@@ -328,12 +365,12 @@ function CateringTopbarComponent_button_21_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()();
   }
 }
-function CateringTopbarComponent_button_22_Template(rf, ctx) {
+function CateringTopbarComponent_button_24_Template(rf, ctx) {
   if (rf & 1) {
-    const _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 30);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function CateringTopbarComponent_button_22_Template_button_click_0_listener() {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r7);
+    const _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 33);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function CateringTopbarComponent_button_24_Template_button_click_0_listener() {
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r9);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r1.setChargeCodes());
     });
@@ -342,17 +379,17 @@ function CateringTopbarComponent_button_22_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()();
   }
 }
-function CateringTopbarComponent_div_23_Template(rf, ctx) {
+function CateringTopbarComponent_div_25_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](0, "div", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](0, "div", 28);
   }
 }
-function CateringTopbarComponent_date_options_24_Template(rf, ctx) {
+function CateringTopbarComponent_date_options_26_Template(rf, ctx) {
   if (rf & 1) {
-    const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "date-options", 31);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("dateChange", function CateringTopbarComponent_date_options_24_Template_date_options_dateChange_0_listener($event) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r8);
+    const _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "date-options", 34);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("dateChange", function CateringTopbarComponent_date_options_26_Template_date_options_dateChange_0_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r10);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r1.setDate($event));
     });
@@ -378,6 +415,7 @@ class CateringTopbarComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1
     /** List of selected levels */
     this.zones = [];
     this.filters = this._orders.filters;
+    this.caterers = this._catering.caterers;
     /** List of levels for the active building */
     this.levels = (0,rxjs__WEBPACK_IMPORTED_MODULE_9__.combineLatest)([this._org.active_building, this._org.active_region]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_10__.map)(([bld, region]) => this._settings.get('app.use_region') ? this._org.levelsForRegion(region) : this._org.levelsForBuilding(bld)));
     /** Set filtered date */
@@ -461,9 +499,9 @@ class CateringTopbarComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1
     type: CateringTopbarComponent,
     selectors: [["catering-topbar"]],
     features: [_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵInheritDefinitionFeature"]],
-    decls: 25,
-    vars: 16,
-    consts: [[1, "flex", "items-center", "w-full", "pt-4", "pb-2", "px-8", "space-x-2"], ["icon", "", "matRipple", "", "matTooltip", "Back to Home", 1, "h-12", "w-12", 3, "routerLink"], [1, "text-2xl"], [1, "text-2xl", "font-medium"], [1, "flex-1", "w-px"], ["appearance", "outline", 1, "no-subscript", "w-64"], ["matInput", "", "placeholder", "Search...", 3, "ngModelChange", "ngModel"], ["matSuffix", "", 1, "text-xl"], [1, "flex", "items-center", "bg-base-100", "px-8", "pt-2", "pb-4", "space-x-2"], [1, "w-12"], ["appearance", "outline", 1, "no-subscript", "w-60"], ["placeholder", "All Levels", "multiple", "", 3, "ngModelChange", "ngModel"], [3, "value", 4, "ngFor", "ngForOf"], ["class", "flex-1 w-2", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Add Item", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Edit Config", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Import Menu", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Room Availability", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Charge Codes", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], [3, "dateChange", 4, "ngIf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"], [1, "flex-1", "w-2"], ["icon", "", "matRipple", "", "matTooltip", "Add Item", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Edit Config", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Import Menu", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Room Availability", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Charge Codes", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], [3, "dateChange"]],
+    decls: 27,
+    vars: 19,
+    consts: [[1, "flex", "items-center", "w-full", "pt-4", "pb-2", "px-8", "space-x-2"], ["icon", "", "matRipple", "", "matTooltip", "Back to Home", 1, "h-12", "w-12", 3, "routerLink"], [1, "text-2xl"], [1, "text-2xl", "font-medium"], [1, "flex-1", "w-px"], ["appearance", "outline", 1, "no-subscript", "w-64"], ["matInput", "", "placeholder", "Search...", 3, "ngModelChange", "ngModel"], ["matSuffix", "", 1, "text-xl"], [1, "flex", "items-center", "bg-base-100", "px-8", "pt-2", "pb-4", "space-x-2"], [1, "w-12"], ["appearance", "outline", 1, "no-subscript", "w-60"], ["placeholder", "All Levels", "multiple", "", 3, "ngModelChange", "ngModel"], [3, "value", 4, "ngFor", "ngForOf"], ["appearance", "outline", "class", "no-subscript w-60", 4, "ngIf"], ["class", "flex-1 w-2", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Add Item", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Edit Config", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Import Menu", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Room Availability", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Charge Codes", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], [3, "dateChange", 4, "ngIf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"], ["placeholder", "All Caterers", 3, "ngModelChange", "ngModel"], ["value", ""], [1, "flex-1", "w-2"], ["icon", "", "matRipple", "", "matTooltip", "Add Item", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Edit Config", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Import Menu", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Room Availability", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Charge Codes", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], [3, "dateChange"]],
     template: function CateringTopbarComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "div", 0)(1, "a", 1)(2, "app-icon", 2);
@@ -490,12 +528,15 @@ class CateringTopbarComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](15, CateringTopbarComponent_mat_option_15_Template, 5, 3, "mat-option", 12);
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](16, "async");
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](17, CateringTopbarComponent_div_17_Template, 1, 0, "div", 13)(18, CateringTopbarComponent_button_18_Template, 3, 0, "button", 14)(19, CateringTopbarComponent_button_19_Template, 3, 0, "button", 15)(20, CateringTopbarComponent_button_20_Template, 3, 0, "button", 16)(21, CateringTopbarComponent_button_21_Template, 3, 0, "button", 17)(22, CateringTopbarComponent_button_22_Template, 3, 0, "button", 18)(23, CateringTopbarComponent_div_23_Template, 1, 0, "div", 13)(24, CateringTopbarComponent_date_options_24_Template, 1, 0, "date-options", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](17, CateringTopbarComponent_mat_form_field_17_Template, 6, 4, "mat-form-field", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](18, "async");
+        _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](19, CateringTopbarComponent_div_19_Template, 1, 0, "div", 14)(20, CateringTopbarComponent_button_20_Template, 3, 0, "button", 15)(21, CateringTopbarComponent_button_21_Template, 3, 0, "button", 16)(22, CateringTopbarComponent_button_22_Template, 3, 0, "button", 17)(23, CateringTopbarComponent_button_23_Template, 3, 0, "button", 18)(24, CateringTopbarComponent_button_24_Template, 3, 0, "button", 19)(25, CateringTopbarComponent_div_25_Template, 1, 0, "div", 14)(26, CateringTopbarComponent_date_options_26_Template, 1, 0, "date-options", 20);
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
       }
       if (rf & 2) {
+        let tmp_5_0;
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpureFunction0"](15, _c0));
+        _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpureFunction0"](18, _c0));
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](4);
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate1"](" Catering ", ctx.page === "menu" ? "Menu" : "Orders", " ");
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
@@ -503,7 +544,9 @@ class CateringTopbarComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](6);
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngModel", ctx.filters == null ? null : ctx.filters.zones);
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](16, 13, ctx.levels));
+        _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](16, 14, ctx.levels));
+        _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", ((tmp_5_0 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](18, 16, ctx.caterers)) == null ? null : tmp_5_0.length) > 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", ctx.page === "menu");
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"]();
@@ -15237,7 +15280,7 @@ class CateringItemModalComponent {
       name: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.name || '', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]),
       description: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.description || ''),
       category: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.category || '', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]),
-      caterer: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.caterer || 'Internal', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]),
+      caterer: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.caterer || '', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]),
       unit_price: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.unit_price, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]),
       tags: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.tags || []),
       accept_points: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(this.item.accept_points || false),
@@ -15394,7 +15437,7 @@ class CateringItem {
     this.id = data.id || '';
     this.name = data.name || data.id || '';
     this.category = data.category || '';
-    this.caterer = data.caterer || 'Internal';
+    this.caterer = data.caterer || '';
     this.unit_price = data.unit_price || 0;
     this.description = data.description || '';
     this.quantity = data.quantity || 0;
@@ -19344,7 +19387,7 @@ class CateringOrder {
     this.id = data.id || `order-${(0,_placeos_common__WEBPACK_IMPORTED_MODULE_0__.randomInt)(9_999_999, 1_000_000)}`;
     this.system_id = data.system_id || '';
     this.event_id = data.event_id || data.event?.id || '';
-    this.caterer = data.caterer || 'Internal';
+    this.caterer = data.caterer || '';
     this.items = (data.items || []).map(i => i instanceof _catering_item_class__WEBPACK_IMPORTED_MODULE_1__.CateringItem ? i : new _catering_item_class__WEBPACK_IMPORTED_MODULE_1__.CateringItem(i));
     this.items = this.items.filter(i => i.quantity > 0 && this.caterer === i.caterer);
     this.item_count = this.items.reduce((amount, item) => amount + item.quantity, 0);
@@ -19401,6 +19444,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function checkOrder(order, filters) {
   const s = (filters.search || '').toLowerCase();
   return !!order.items.find(item => item.name.toLowerCase().includes(s) || !!item.options.find(option => option.name.toLowerCase().includes(s)));
@@ -19414,15 +19458,16 @@ class CateringOrdersService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__
   set filters(filters) {
     this._filters.next(filters);
   }
-  constructor() {
+  constructor(_settings) {
     super();
+    this._settings = _settings;
     this._poll = new rxjs__WEBPACK_IMPORTED_MODULE_5__.BehaviorSubject(0);
     this._loading = new rxjs__WEBPACK_IMPORTED_MODULE_5__.BehaviorSubject(false);
     this._filters = new rxjs__WEBPACK_IMPORTED_MODULE_5__.BehaviorSubject({
       caterer: ''
     });
     /** Observable for list of orders */
-    this.orders = (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.combineLatest)([this._filters, this._poll]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.debounceTime)(1000), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.switchMap)(([{
+    this.orders = (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.combineLatest)([this._filters, this._poll]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.debounceTime)(300), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.switchMap)(([{
       date,
       zones
     }]) => {
@@ -19441,7 +19486,20 @@ class CateringOrdersService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__
     /** Observable for loading status of orders */
     this.loading = this._loading.asObservable();
     this.order_filters = this._filters.asObservable();
-    this.caterers = this.orders.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(_ => (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(_.map(i => i.caterer))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.shareReplay)(1));
+    this.caterers = this.orders.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(_ => {
+      const provider_groups = this._settings.get('app.catering_provider_groups') || {};
+      let provider_list = Object.keys(provider_groups);
+      const is_admin = (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.currentUser)().groups.includes('placeos_admin') || (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.currentUser)().groups.includes('placeos_support');
+      if (!provider_list.length || is_admin) return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(_.map(i => i.caterer));
+      provider_list = provider_list.filter(caterer => provider_groups[caterer].find(group => (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.currentUser)().groups.includes(group)));
+      if (provider_list.length <= 1 && this._filters.getValue()?.caterer !== provider_list[0]) {
+        this._filters.next({
+          ...this._filters.getValue(),
+          caterer: provider_list[0]
+        });
+      }
+      return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(provider_list);
+    }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.shareReplay)(1));
     /** Filtered list of catering orders */
     this.filtered = this.orders.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(list => list.filter(order => checkOrder(order, this._filters.getValue())).sort((a, b) => a.deliver_at - b.deliver_at)));
     this.subscription('changes', this.orders.subscribe());
@@ -19483,7 +19541,7 @@ class CateringOrdersService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__
     })();
   }
   static #_ = this.ɵfac = function CateringOrdersService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || CateringOrdersService)();
+    return new (__ngFactoryType__ || CateringOrdersService)(_angular_core__WEBPACK_IMPORTED_MODULE_18__["ɵɵinject"](_placeos_common__WEBPACK_IMPORTED_MODULE_1__.SettingsService));
   };
   static #_2 = this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_18__["ɵɵdefineInjectable"]({
     token: CateringOrdersService,
@@ -19506,17 +19564,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 89204);
 /* harmony import */ var _placeos_ts_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @placeos/ts-client */ 35713);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 90521);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 68824);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 71536);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs/operators */ 8627);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs/operators */ 71963);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs/operators */ 29314);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs/operators */ 35443);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs/operators */ 66000);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! rxjs/operators */ 7841);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! rxjs/operators */ 57871);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! rxjs/operators */ 33602);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 90521);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs */ 68824);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 71536);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs/operators */ 8627);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs/operators */ 71963);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs/operators */ 29314);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs/operators */ 35443);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! rxjs/operators */ 66000);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! rxjs/operators */ 7841);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! rxjs/operators */ 57871);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! rxjs/operators */ 33602);
 /* harmony import */ var _placeos_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @placeos/common */ 22797);
 /* harmony import */ var _placeos_organisation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @placeos/organisation */ 2510);
 /* harmony import */ var _catering_item_modal_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./catering-item-modal.component */ 30807);
@@ -19527,8 +19585,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _catering_order_modal_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./catering-order-modal.component */ 82912);
 /* harmony import */ var _catering_order_options_modal_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./catering-order-options-modal.component */ 17707);
 /* harmony import */ var _catering_import_menu_modal_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./catering-import-menu-modal.component */ 76095);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/core */ 37580);
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/material/dialog */ 12587);
+/* harmony import */ var _catering_orders_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./catering-orders.service */ 98197);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/core */ 37580);
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @angular/material/dialog */ 12587);
+
+
 
 
 
@@ -19560,38 +19621,50 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
     const menu = this._menu.getValue();
     return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.unique)(menu.map(i => i.caterer));
   }
-  constructor(_org, _dialog, _settings) {
+  constructor(_org, _dialog, _settings, _orders) {
     var _this;
     super();
     _this = this;
     this._org = _org;
     this._dialog = _dialog;
     this._settings = _settings;
-    this._updated = new rxjs__WEBPACK_IMPORTED_MODULE_12__.BehaviorSubject(0);
+    this._orders = _orders;
+    this._updated = new rxjs__WEBPACK_IMPORTED_MODULE_13__.BehaviorSubject(0);
     /** Active menu */
-    this._menu = new rxjs__WEBPACK_IMPORTED_MODULE_12__.BehaviorSubject([]);
+    this._menu = new rxjs__WEBPACK_IMPORTED_MODULE_13__.BehaviorSubject([]);
     /** Whether the menu for the active building is loading */
-    this._loading = new rxjs__WEBPACK_IMPORTED_MODULE_12__.BehaviorSubject(false);
+    this._loading = new rxjs__WEBPACK_IMPORTED_MODULE_13__.BehaviorSubject(false);
     /** Currency code for the active building */
-    this._currency = new rxjs__WEBPACK_IMPORTED_MODULE_12__.BehaviorSubject('USD');
-    this._change = new rxjs__WEBPACK_IMPORTED_MODULE_12__.BehaviorSubject(0);
+    this._currency = new rxjs__WEBPACK_IMPORTED_MODULE_13__.BehaviorSubject('USD');
+    this._change = new rxjs__WEBPACK_IMPORTED_MODULE_13__.BehaviorSubject(0);
     /** Observable for the active menu */
     this.menu = this._menu.asObservable();
     /** Observable for whether the menu for the active building is loadingg */
     this.loading = this._loading.asObservable();
     /** Observable for the currency code of the active building */
     this.currency = this._currency.asObservable();
-    this.settings = (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.combineLatest)([this._org.active_building, this._change]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.filter)(([_]) => !!_), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_15__.switchMap)(([_]) => (0,_placeos_ts_client__WEBPACK_IMPORTED_MODULE_1__.showMetadata)(_.id, 'catering-settings').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.catchError)(_ => (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.of)({})))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.map)(_ => _.details || {}), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_19__.tap)(_ => this._settings.post('require_catering_notes', !!_?.require_notes)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.shareReplay)(1));
-    this.charge_codes = this.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.map)(_ => _.charge_codes || []));
-    this.availability = this.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.map)(_ => _.disabled_rooms || []));
-    this.caterers = this._menu.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.map)(_ => (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.unique)(_.map(i => i.caterer))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.shareReplay)(1));
+    this.settings = (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.combineLatest)([this._org.active_building, this._change]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_15__.filter)(([_]) => !!_), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(([_]) => (0,_placeos_ts_client__WEBPACK_IMPORTED_MODULE_1__.showMetadata)(_.id, 'catering-settings').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.catchError)(_ => (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.of)({})))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_19__.map)(_ => _.details || {}), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.tap)(_ => this._settings.post('require_catering_notes', !!_?.require_notes)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.shareReplay)(1));
+    this.charge_codes = this.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_19__.map)(_ => _.charge_codes || []));
+    this.availability = this.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_19__.map)(_ => _.disabled_rooms || []));
+    this.caterers = (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.combineLatest)([this._menu, this._orders.caterers]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_19__.map)(([menu_items]) => {
+      const provider_groups = this._settings.get('app.catering_provider_groups') || {};
+      let provider_list = Object.keys(provider_groups);
+      if (!provider_list.length) {
+        return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.unique)(menu_items.map(i => i.caterer));
+      }
+      provider_list = provider_list.filter(caterer => provider_groups[caterer].find(group => (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.currentUser)().groups.includes(group)));
+      return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.unique)(provider_list);
+    }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.shareReplay)(1));
     this.zone = '';
     this.subscription('building', this._org.active_building.subscribe( /*#__PURE__*/function () {
       var _ref = (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (bld) {
         if (bld) {
-          const menu = (yield _this.getCateringForZone(bld.id)).map(i => new _catering_item_class__WEBPACK_IMPORTED_MODULE_7__.CateringItem(i));
+          _this._loading.next(true);
+          _this._menu.next([]);
+          const menu = (yield _this.getCateringForZone(bld.id).catch(_ => [])).map(i => new _catering_item_class__WEBPACK_IMPORTED_MODULE_7__.CateringItem(i));
           _this._currency.next(_this._settings.get('app.currency') || bld.currency || 'USD');
-          _this._menu.next(menu);
+          _this._loading.next(false);
+          _this.timeout('loaded', () => _this._menu.next(menu), 1000);
         }
       });
       return function (_x) {
@@ -19616,7 +19689,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
           selectOptions: _ => _this2.selectOptions(_)
         }
       });
-      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
+      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
       ref.close();
       return details?.metadata?.order || order;
     })();
@@ -19631,7 +19704,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
           caterers: _this3.caterer_list
         }
       });
-      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
+      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
       if (details?.reason !== 'done') return;
       const menu = _this3._menu.getValue();
       const index = menu.findIndex(itm => itm.id === item.id);
@@ -19663,7 +19736,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
           types
         }
       });
-      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
+      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
       if (details?.reason !== 'done') return;
       const menu = _this4._menu.getValue();
       const index = menu.findIndex(itm => itm.id === item.id);
@@ -19687,7 +19760,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
           options
         }
       });
-      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
+      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
       if (details?.reason !== 'done') return [];
       ref.close();
       return details.metadata.options;
@@ -19745,7 +19818,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
       const config = yield _this8.getCateringConfig(_this8._org.building.id);
       const {
         require_notes
-      } = yield _this8.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.take)(1)).toPromise();
+      } = yield _this8.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_23__.take)(1)).toPromise();
       const menu = _this8._menu.getValue();
       const types = (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.unique)((0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.flatten)(menu.map(i => [i.category, ...i.tags])));
       const ref = _this8._dialog.open(_placeos_components__WEBPACK_IMPORTED_MODULE_6__.AttachedResourceConfigModalComponent, {
@@ -19758,7 +19831,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
           })
         }
       });
-      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
+      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
       if (details?.reason !== 'done') return;
       _this8.updateConfig(_this8._org.building.id, details.metadata).then(() => ref.close(), () => ref.componentInstance.loading = false);
     })();
@@ -19767,7 +19840,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
     var _this9 = this;
     return (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const ref = _this9._dialog.open(_catering_import_menu_modal_component__WEBPACK_IMPORTED_MODULE_11__.CateringImportMenuModalComponent);
-      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
+      const details = yield Promise.race([ref.componentInstance.event.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.first)(_ => _.reason === 'done')).toPromise(), ref.afterClosed().toPromise()]);
       if (details?.reason !== 'done') return;
       ref.componentInstance.loading = 'Updating menu...';
       const menu = _this9._menu.getValue();
@@ -19793,7 +19866,7 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
   saveSettings(settings) {
     var _this10 = this;
     return (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const old_settings = yield _this10.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.take)(1)).toPromise();
+      const old_settings = yield _this10.settings.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_23__.take)(1)).toPromise();
       const result = yield (0,_placeos_ts_client__WEBPACK_IMPORTED_MODULE_1__.updateMetadata)(_this10._org.building.id, {
         id: _this10._org.building.id,
         name: 'catering-settings',
@@ -19842,9 +19915,9 @@ class CateringStateService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.
     return new_order;
   }
   static #_ = this.ɵfac = function CateringStateService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || CateringStateService)(_angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵinject"](_placeos_organisation__WEBPACK_IMPORTED_MODULE_3__.OrganisationService), _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵinject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_24__.MatDialog), _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵinject"](_placeos_common__WEBPACK_IMPORTED_MODULE_2__.SettingsService));
+    return new (__ngFactoryType__ || CateringStateService)(_angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵinject"](_placeos_organisation__WEBPACK_IMPORTED_MODULE_3__.OrganisationService), _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵinject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_25__.MatDialog), _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵinject"](_placeos_common__WEBPACK_IMPORTED_MODULE_2__.SettingsService), _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵinject"](_catering_orders_service__WEBPACK_IMPORTED_MODULE_12__.CateringOrdersService));
   };
-  static #_2 = this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineInjectable"]({
+  static #_2 = this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵdefineInjectable"]({
     token: CateringStateService,
     factory: CateringStateService.ɵfac,
     providedIn: 'root'
@@ -24264,15 +24337,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "f6bf596",
-  "hash": "f6bf596",
+  "raw": "23fc312",
+  "hash": "23fc312",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "f6bf596",
+  "suffix": "23fc312",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1731553863874
+  "time": 1731558089917
 };
 /* tslint:enable */
 
