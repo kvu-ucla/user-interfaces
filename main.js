@@ -18716,14 +18716,22 @@ class CateringOrderStateService {
       return (0,_placeos_ts_client__WEBPACK_IMPORTED_MODULE_3__.showMetadata)(zone || bld.id, 'catering').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.map)(d => (d.details instanceof Array ? d.details : []).map(_ => new _catering_item_class__WEBPACK_IMPORTED_MODULE_4__.CateringItem(_))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_9__.catchError)(_ => []));
     }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.tap)(items => {
       this._loading.next(this._loading.getValue().replace('[MENU]', ''));
-      const caterer_list = (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(items.map(i => i.caterer).filter(_ => !!_));
-      if (caterer_list.length <= 1) return;
-      this.setFilters({
-        caterer: caterer_list[0] || ''
-      });
+      if (this._settings.get('app.catering_provider')) {
+        this.setFilters({
+          caterer: this._settings.get('app.catering_provider')
+        });
+      } else {
+        const caterer_list = (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(items.map(i => i.caterer).filter(_ => !!_));
+        if (caterer_list.length <= 1) return;
+        this.setFilters({
+          caterer: caterer_list[0] || ''
+        });
+      }
     }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.shareReplay)(1));
     this.categories = this.available_menu.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.map)(_ => (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(_.map(i => i.category))));
-    this.caterers = this.available_menu.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.map)(_ => (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(_.map(i => i.caterer))));
+    this.caterers = this.available_menu.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.map)(_ => {
+      return this._settings.get('app.catering_provider') ? [] : (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(_.map(i => i.caterer));
+    }));
     this.filtered_menu = (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.combineLatest)([this._filters, this.available_menu]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_15__.debounceTime)(300), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.switchMap)( /*#__PURE__*/function () {
       var _ref = (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* ([{
         search,
@@ -24256,15 +24264,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "e247725",
-  "hash": "e247725",
+  "raw": "f6bf596",
+  "hash": "f6bf596",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "e247725",
+  "suffix": "f6bf596",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1731553505763
+  "time": 1731553863874
 };
 /* tslint:enable */
 
