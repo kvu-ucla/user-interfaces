@@ -13702,7 +13702,7 @@ class CateringItem {
     this.id = data.id || '';
     this.name = data.name || data.id || '';
     this.category = data.category || '';
-    this.caterer = data.caterer || 'Internal';
+    this.caterer = data.caterer || '';
     this.unit_price = data.unit_price || 0;
     this.description = data.description || '';
     this.quantity = data.quantity || 0;
@@ -13772,7 +13772,7 @@ class CateringOrder {
     this.id = data.id || `order-${(0,_placeos_common__WEBPACK_IMPORTED_MODULE_0__.randomInt)(9_999_999, 1_000_000)}`;
     this.system_id = data.system_id || '';
     this.event_id = data.event_id || data.event?.id || '';
-    this.caterer = data.caterer || 'Internal';
+    this.caterer = data.caterer || '';
     this.items = (data.items || []).map(i => i instanceof _catering_item_class__WEBPACK_IMPORTED_MODULE_1__.CateringItem ? i : new _catering_item_class__WEBPACK_IMPORTED_MODULE_1__.CateringItem(i));
     this.items = this.items.filter(i => i.quantity > 0 && this.caterer === i.caterer);
     this.item_count = this.items.reduce((amount, item) => amount + item.quantity, 0);
@@ -17704,15 +17704,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "f6bf596",
-  "hash": "f6bf596",
+  "raw": "23fc312",
+  "hash": "23fc312",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "f6bf596",
+  "suffix": "23fc312",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1731553860394
+  "time": 1731558086663
 };
 /* tslint:enable */
 
