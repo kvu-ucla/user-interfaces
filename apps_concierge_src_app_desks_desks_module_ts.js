@@ -36,6 +36,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function DeskBookModalComponent_main_7_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "main", 5);
@@ -78,11 +79,17 @@ class DeskBookModalComponent {
   get form() {
     return this._booking_form.form;
   }
-  constructor(_booking_form, _dialog_ref) {
+  constructor(_booking_form, _dialog_ref, _settings) {
     this._booking_form = _booking_form;
     this._dialog_ref = _dialog_ref;
+    this._settings = _settings;
     this.event = new _angular_core__WEBPACK_IMPORTED_MODULE_5__.EventEmitter();
     this.loading = new rxjs__WEBPACK_IMPORTED_MODULE_6__.BehaviorSubject(false);
+    if (!this.form.value.id) {
+      this.form.patchValue({
+        duration: this._settings.get('app.desks.default_duration') || 60
+      });
+    }
   }
   save() {
     var _this = this;
@@ -106,7 +113,7 @@ class DeskBookModalComponent {
     })();
   }
   static #_ = this.ɵfac = function DeskBookModalComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || DeskBookModalComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_placeos_bookings__WEBPACK_IMPORTED_MODULE_1__.BookingFormService), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__.MatDialogRef));
+    return new (__ngFactoryType__ || DeskBookModalComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_placeos_bookings__WEBPACK_IMPORTED_MODULE_1__.BookingFormService), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__.MatDialogRef), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_placeos_common__WEBPACK_IMPORTED_MODULE_2__.SettingsService));
   };
   static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({
     type: DeskBookModalComponent,

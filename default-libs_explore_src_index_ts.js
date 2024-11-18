@@ -274,51 +274,7 @@ class ExploreDesksService extends _placeos_common__WEBPACK_IMPORTED_MODULE_3__.A
       const book_fn = /*#__PURE__*/function () {
         var _ref2 = (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
           if (!can_book) return;
-          if (_this3._statuses[desk.id] !== 'free') {
-            return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.notifyError)(`${desk.name || 'Desk'} is unavailable at this time.`);
-          }
-          if (desk.groups?.length && !desk.groups.find(_ => (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.currentUser)().groups.includes(_))) {
-            return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.notifyError)(`You are not allowed to book ${desk.name}.`);
-          }
-          _this3._bookings.newForm();
-          _this3._bookings.setOptions({
-            type: 'desk'
-          });
-          if (options.date) {
-            _this3._bookings.form.patchValue({
-              date: options.date
-            });
-            _this3._bookings.form.patchValue({
-              all_day: !!options.all_day
-            });
-          }
-          let {
-            date,
-            duration,
-            user
-          } = yield _this3._setBookingTime(_this3._bookings.form.value.date, _this3._bookings.form.value.duration, _this3._options.getValue()?.custom ?? false, desk);
-          user = user || options.host || (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.currentUser)();
-          const user_email = user?.email;
-          _this3._bookings.form.patchValue({
-            resources: [desk],
-            asset_id: desk.id,
-            asset_name: desk.name,
-            date,
-            duration: options.all_day ? 12 * 60 : duration,
-            map_id: desk?.map_id || desk?.id,
-            description: desk.name,
-            user,
-            user_email,
-            booking_type: 'desk',
-            zones: desk.zone ? [desk.zone?.parent_id, desk.zone?.id] : []
-          });
-          yield _this3._bookings.confirmPost().catch(e => {
-            console.log(e);
-            (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.notifyError)(`Failed to book desk ${desk.name || desk.id}. ${e.message || e.error || e}`);
-            throw e;
-          });
-          _this3._users[desk.map_id] = (options.host || (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.currentUser)())?.name;
-          (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.notifySuccess)(`Successfully booked desk ${desk.name || desk.id}`);
+          yield _this3._bookDesk(desk, options);
         });
         return function book_fn() {
           return _ref2.apply(this, arguments);
@@ -370,6 +326,69 @@ class ExploreDesksService extends _placeos_common__WEBPACK_IMPORTED_MODULE_3__.A
         duration,
         user
       };
+    })();
+  }
+  _bookDesk(desk, options) {
+    var _this5 = this;
+    return (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      if (_this5._statuses[desk.id] !== 'free') {
+        return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.notifyError)(`${desk.name || 'Desk'} is unavailable at this time.`);
+      }
+      if (desk.groups?.length && !desk.groups.find(_ => (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.currentUser)().groups.includes(_))) {
+        return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.notifyError)(`You are not allowed to book ${desk.name}.`);
+      }
+      _this5._bookings.newForm();
+      _this5._bookings.setOptions({
+        type: 'desk'
+      });
+      if (options.date) {
+        _this5._bookings.form.patchValue({
+          date: options.date
+        });
+        _this5._bookings.form.patchValue({
+          all_day: !!options.all_day
+        });
+      }
+      let {
+        date,
+        duration,
+        user
+      } = yield _this5._setBookingTime(_this5._bookings.form.value.date, _this5._bookings.form.value.duration, _this5._options.getValue()?.custom ?? false, desk);
+      user = user || options.host || (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.currentUser)();
+      const user_email = user?.email;
+      _this5._bookings.form.patchValue({
+        resources: [desk],
+        asset_id: desk.id,
+        asset_name: desk.name,
+        date,
+        duration: options.all_day ? 12 * 60 : duration,
+        map_id: desk?.map_id || desk?.id,
+        description: desk.name,
+        user,
+        user_email,
+        booking_type: 'desk',
+        zones: desk.zone ? [desk.zone?.parent_id, desk.zone?.id] : []
+      });
+      const restrictions = yield _this5.booking_rules.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_25__.take)(1)).toPromise();
+      const is_restricted = (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.rulesForResource)({
+        date,
+        duration,
+        host: (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.currentUser)(),
+        resource: {
+          id: desk.id,
+          zones: [desk.zone?.parent_id, desk.zone?.id]
+        }
+      }, restrictions)?.hidden;
+      if (is_restricted) {
+        return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.notifyError)(`You are not allowed to book ${desk.name} at this time.`);
+      }
+      yield _this5._bookings.confirmPost().catch(e => {
+        console.log(e);
+        (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.notifyError)(`Failed to book desk ${desk.name || desk.id}. ${e.message || e.error || e}`);
+        throw e;
+      });
+      _this5._users[desk.map_id] = (options.host || (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.currentUser)())?.name;
+      (0,_placeos_common__WEBPACK_IMPORTED_MODULE_3__.notifySuccess)(`Successfully booked desk ${desk.name || desk.id}`);
     })();
   }
   static #_ = this.ɵfac = function ExploreDesksService_Factory(__ngFactoryType__) {
@@ -1625,7 +1644,6 @@ class ExploreParkingService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__
       date
     }]) => {
       const available = spaces.filter(space => {
-        console.log('Space:', space);
         const event = events.find(e => e.asset_id === space.id && !e.rejected);
         const level = this._org.levelWithID([space.zone_id]);
         const assigned = `${event?.user_email || space.assigned_to || ''}`.toLowerCase();
@@ -1678,7 +1696,8 @@ class ExploreParkingService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__
       const booked_space = yield _this._parking.booked_space.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_26__.take)(1)).toPromise();
       for (const space of spaces) {
         const can_book = !!available.find(_ => _.id === space.id);
-        const is_assigned = !!space.assigned_to;
+        const is_workplace = _this._settings.app_name.toLowerCase().includes('workplace') || _this._settings.app_name.toLowerCase().includes('staff');
+        const is_assigned = is_workplace ? false : !!space.assigned_to;
         const id = space.map_id || space.id;
         const status = is_assigned ? can_book ? 'pending' : 'busy' : can_book ? 'free' : 'busy';
         styles[`#${id}`] = {
@@ -1708,10 +1727,11 @@ class ExploreParkingService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__
             if (deny_parking_access) {
               return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.notifyError)(`Your user account has been denied parking access to ${space.zone?.display_name || space.zone?.name}.`);
             }
-            if (assigned_space) {
+            console.log('Booked Space:', booked_space);
+            if (assigned_space && booked_space) {
               return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.notifyError)(`You are already assigned to parking space "${space.name || space.id}".`);
             }
-            if (booked_space?.find(_ => _.id === space.id)) {
+            if (booked_space) {
               return (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.notifyError)(`You already have a parking space booked for the selected time.`);
             }
             if (status !== 'free') {

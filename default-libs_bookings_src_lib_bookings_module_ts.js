@@ -645,7 +645,7 @@ class BookingDetailsModalComponent {
     return building;
   }
   get can_edit() {
-    return this.booking.booking_type !== 'visitor' && this.booking.booking_type !== 'parking';
+    return this.booking.booking_type !== 'visitor' && this.booking.booking_type !== 'parking' && this.booking.booking_type !== 'locker';
   }
   get auto_checkin() {
     return this._settings.get(`app.${this.booking?.type || 'bookings'}.auto_checkin`);
@@ -4433,6 +4433,7 @@ class DeskSelectModalComponent {
     this.view = 'list';
     this.selected = [...(_data.items || [])];
     this._event_form.setOptions(_data.options);
+    this.view = this._settings.get('app.desks.default_select_as_map') ? 'map' : 'list';
   }
   isSelected(id) {
     return id && this.selected_ids.includes(id);
@@ -6475,6 +6476,7 @@ class LockerBankListComponent {
         available: resources.filter(_ => _.bank_id === bank.id).length,
         lockers: bank.lockers.map(_ => ({
           ..._,
+          map_id: bank.map_id || bank.id,
           zone: bank.zone
         }))
       }));
@@ -10407,6 +10409,11 @@ class ParkingService extends _placeos_common__WEBPACK_IMPORTED_MODULE_0__.AsyncH
       this._loading.next([...this._loading.getValue(), 'users']);
       return (0,_placeos_ts_client__WEBPACK_IMPORTED_MODULE_2__.showMetadata)(bld.id, 'parking-users');
     }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.map)(metadata => metadata.details instanceof Array ? metadata.details : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_10__.tap)(() => this._loading.next(this._loading.getValue().filter(_ => _ !== 'users'))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.shareReplay)(1));
+    this.has_booking = (0,_bookings_fn__WEBPACK_IMPORTED_MODULE_3__.queryBookings)({
+      period_start: (0,date_fns__WEBPACK_IMPORTED_MODULE_12__.getUnixTime)((0,date_fns__WEBPACK_IMPORTED_MODULE_13__.startOfDay)(Date.now())),
+      period_end: (0,date_fns__WEBPACK_IMPORTED_MODULE_12__.getUnixTime)((0,date_fns__WEBPACK_IMPORTED_MODULE_14__.endOfDay)(Date.now())),
+      type: 'parking'
+    }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.map)(_ => _.length > 0));
     this.assigned_space = this.spaces.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.map)(list => list.find(_ => _.assigned_to?.toLowerCase() === (0,_placeos_common__WEBPACK_IMPORTED_MODULE_0__.currentUser)().email?.toLowerCase())));
     this.user_details = this.users.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.map)(list => list.find(_ => _.email?.toLowerCase() === (0,_placeos_common__WEBPACK_IMPORTED_MODULE_0__.currentUser)().email?.toLowerCase())));
     this.deny_parking_access = this.user_details.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.map)(details => !!details?.deny));

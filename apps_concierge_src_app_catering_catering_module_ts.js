@@ -60,10 +60,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function CateringTopbarComponent_mat_option_8_div_2_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "div", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "div", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵpipe"](2, "building");
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](3, "span", 19);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](3, "span", 20);
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](4, " - ");
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
   }
@@ -76,8 +76,8 @@ function CateringTopbarComponent_mat_option_8_div_2_Template(rf, ctx) {
 }
 function CateringTopbarComponent_mat_option_8_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "mat-option", 15)(1, "div", 16);
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtemplate"](2, CateringTopbarComponent_mat_option_8_div_2_Template, 5, 3, "div", 17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "mat-option", 16)(1, "div", 17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtemplate"](2, CateringTopbarComponent_mat_option_8_div_2_Template, 5, 3, "div", 18);
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](3, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()()();
@@ -92,37 +92,46 @@ function CateringTopbarComponent_mat_option_8_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtextInterpolate1"](" ", level_r1.display_name || level_r1.name, " ");
   }
 }
-function CateringTopbarComponent_div_10_Template(rf, ctx) {
+function CateringTopbarComponent_mat_form_field_10_mat_option_4_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelement"](0, "div", 20);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "mat-option", 16);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]();
+  }
+  if (rf & 2) {
+    const caterer_r4 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("value", caterer_r4 || "<empty>");
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtextInterpolate1"](" ", caterer_r4 || "== No Caterer ==", " ");
   }
 }
-function CateringTopbarComponent_button_11_Template(rf, ctx) {
+function CateringTopbarComponent_mat_form_field_10_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "button", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("click", function CateringTopbarComponent_button_11_Template_button_click_0_listener() {
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "mat-form-field", 5)(1, "mat-select", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("ngModelChange", function CateringTopbarComponent_mat_form_field_10_Template_mat_select_ngModelChange_1_listener($event) {
       _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r3);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r1.addItem());
+      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r1.setCaterer($event));
     });
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](1, "app-icon", 22);
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](2, "add");
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](2, "mat-option", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](3, "All Caterers");
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtemplate"](4, CateringTopbarComponent_mat_form_field_10_mat_option_4_Template, 2, 2, "mat-option", 7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵpipe"](5, "async");
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
   }
+  if (rf & 2) {
+    const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngModel", ctx_r1.filters == null ? null : ctx_r1.filters.caterer);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵpipeBind1"](5, 2, ctx_r1.caterers));
+  }
 }
-function CateringTopbarComponent_button_12_Template(rf, ctx) {
+function CateringTopbarComponent_div_12_Template(rf, ctx) {
   if (rf & 1) {
-    const _r4 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "button", 23);
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("click", function CateringTopbarComponent_button_12_Template_button_click_0_listener() {
-      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r4);
-      const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r1.editConfig());
-    });
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](1, "app-icon", 22);
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](2, "menu_book");
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelement"](0, "div", 23);
   }
 }
 function CateringTopbarComponent_button_13_Template(rf, ctx) {
@@ -132,52 +141,80 @@ function CateringTopbarComponent_button_13_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("click", function CateringTopbarComponent_button_13_Template_button_click_0_listener() {
       _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r5);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r1.importMenu());
+      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r1.addItem());
     });
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](1, "app-icon", 22);
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](2, "cloud_upload");
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](1, "app-icon", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](2, "add");
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
   }
 }
 function CateringTopbarComponent_button_14_Template(rf, ctx) {
   if (rf & 1) {
     const _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "button", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "button", 26);
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("click", function CateringTopbarComponent_button_14_Template_button_click_0_listener() {
       _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r6);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r1.setRoomAvailability());
+      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r1.editConfig());
     });
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](1, "app-icon", 22);
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](2, "event_available");
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](1, "app-icon", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](2, "menu_book");
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
   }
 }
 function CateringTopbarComponent_button_15_Template(rf, ctx) {
   if (rf & 1) {
     const _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "button", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "button", 27);
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("click", function CateringTopbarComponent_button_15_Template_button_click_0_listener() {
       _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r7);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r1.importMenu());
+    });
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](1, "app-icon", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](2, "cloud_upload");
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
+  }
+}
+function CateringTopbarComponent_button_16_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "button", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("click", function CateringTopbarComponent_button_16_Template_button_click_0_listener() {
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r8);
+      const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r1.setRoomAvailability());
+    });
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](1, "app-icon", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](2, "event_available");
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
+  }
+}
+function CateringTopbarComponent_button_17_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "button", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("click", function CateringTopbarComponent_button_17_Template_button_click_0_listener() {
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r9);
+      const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r1.setChargeCodes());
     });
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](1, "app-icon", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](1, "app-icon", 25);
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](2, "payments");
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
   }
 }
-function CateringTopbarComponent_div_16_Template(rf, ctx) {
+function CateringTopbarComponent_div_18_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelement"](0, "div", 20);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelement"](0, "div", 23);
   }
 }
-function CateringTopbarComponent_date_options_17_Template(rf, ctx) {
+function CateringTopbarComponent_date_options_19_Template(rf, ctx) {
   if (rf & 1) {
-    const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "date-options", 27);
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("dateChange", function CateringTopbarComponent_date_options_17_Template_date_options_dateChange_0_listener($event) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r8);
+    const _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "date-options", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("dateChange", function CateringTopbarComponent_date_options_19_Template_date_options_dateChange_0_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r10);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r1.setDate($event));
     });
@@ -203,12 +240,17 @@ class CateringTopbarComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1
     /** List of selected levels */
     this.zones = [];
     this.filters = this._orders.filters;
+    this.caterers = this._catering.caterers;
     /** List of levels for the active building */
     this.levels = (0,rxjs__WEBPACK_IMPORTED_MODULE_10__.combineLatest)([this._org.active_building, this._org.active_region]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.map)(([bld, region]) => this._settings.get('app.use_region') ? this._org.levelsForRegion(region) : this._org.levelsForBuilding(bld)));
     /** Set filtered date */
     this.setDate = date => this._orders.filters = {
       ...this._orders.filters,
       date
+    };
+    this.setCaterer = caterer => this._orders.filters = {
+      ...this._orders.filters,
+      caterer
     };
     this.setSearch = str => this._orders.filters = {
       ...this._orders.filters,
@@ -283,9 +325,9 @@ class CateringTopbarComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1
     type: CateringTopbarComponent,
     selectors: [["catering-topbar"]],
     features: [_angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵInheritDefinitionFeature"]],
-    decls: 18,
-    vars: 14,
-    consts: [[1, "flex", "items-center", "w-full", "pt-4", "pb-2", "px-8", "space-x-2"], [1, "text-2xl", "font-medium"], [1, "flex-1", "w-px"], [1, "mr-2", 3, "modelChange", "model"], [1, "flex", "items-center", "bg-base-100", "h-20", "px-8", "space-x-2"], ["appearance", "outline", 1, "no-subscript", "w-60"], ["placeholder", "All Levels", "multiple", "", 3, "ngModelChange", "ngModel"], [3, "value", 4, "ngFor", "ngForOf"], ["class", "flex-1 w-2", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Add Item", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Edit Config", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Import Menu", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Room Availability", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Charge Codes", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], [3, "dateChange", 4, "ngIf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"], [1, "flex-1", "w-2"], ["icon", "", "matRipple", "", "matTooltip", "Add Item", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], [1, "text-2xl"], ["icon", "", "matRipple", "", "matTooltip", "Edit Config", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Import Menu", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Room Availability", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Charge Codes", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], [3, "dateChange"]],
+    decls: 20,
+    vars: 17,
+    consts: [[1, "flex", "items-center", "w-full", "pt-4", "pb-2", "px-8", "space-x-2"], [1, "text-2xl", "font-medium"], [1, "flex-1", "w-px"], [1, "mr-2", 3, "modelChange", "model"], [1, "flex", "items-center", "bg-base-100", "h-20", "px-8", "space-x-2"], ["appearance", "outline", 1, "no-subscript", "w-60"], ["placeholder", "All Levels", "multiple", "", 3, "ngModelChange", "ngModel"], [3, "value", 4, "ngFor", "ngForOf"], ["appearance", "outline", "class", "no-subscript w-60", 4, "ngIf"], ["class", "flex-1 w-2", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Add Item", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Edit Config", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Import Menu", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Room Availability", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "matTooltip", "Charge Codes", "class", "bg-secondary text-secondary-content rounded h-12 w-12", 3, "click", 4, "ngIf"], [3, "dateChange", 4, "ngIf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"], ["placeholder", "All Caterers", 3, "ngModelChange", "ngModel"], ["value", ""], [1, "flex-1", "w-2"], ["icon", "", "matRipple", "", "matTooltip", "Add Item", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], [1, "text-2xl"], ["icon", "", "matRipple", "", "matTooltip", "Edit Config", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Import Menu", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Room Availability", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], ["icon", "", "matRipple", "", "matTooltip", "Charge Codes", 1, "bg-secondary", "text-secondary-content", "rounded", "h-12", "w-12", 3, "click"], [3, "dateChange"]],
     template: function CateringTopbarComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "div", 0)(1, "h2", 1);
@@ -304,10 +346,13 @@ class CateringTopbarComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtemplate"](8, CateringTopbarComponent_mat_option_8_Template, 5, 3, "mat-option", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵpipe"](9, "async");
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtemplate"](10, CateringTopbarComponent_div_10_Template, 1, 0, "div", 8)(11, CateringTopbarComponent_button_11_Template, 3, 0, "button", 9)(12, CateringTopbarComponent_button_12_Template, 3, 0, "button", 10)(13, CateringTopbarComponent_button_13_Template, 3, 0, "button", 11)(14, CateringTopbarComponent_button_14_Template, 3, 0, "button", 12)(15, CateringTopbarComponent_button_15_Template, 3, 0, "button", 13)(16, CateringTopbarComponent_div_16_Template, 1, 0, "div", 8)(17, CateringTopbarComponent_date_options_17_Template, 1, 0, "date-options", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtemplate"](10, CateringTopbarComponent_mat_form_field_10_Template, 6, 4, "mat-form-field", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵpipe"](11, "async");
+        _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtemplate"](12, CateringTopbarComponent_div_12_Template, 1, 0, "div", 9)(13, CateringTopbarComponent_button_13_Template, 3, 0, "button", 10)(14, CateringTopbarComponent_button_14_Template, 3, 0, "button", 11)(15, CateringTopbarComponent_button_15_Template, 3, 0, "button", 12)(16, CateringTopbarComponent_button_16_Template, 3, 0, "button", 13)(17, CateringTopbarComponent_button_17_Template, 3, 0, "button", 14)(18, CateringTopbarComponent_div_18_Template, 1, 0, "div", 9)(19, CateringTopbarComponent_date_options_19_Template, 1, 0, "date-options", 15);
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]();
       }
       if (rf & 2) {
+        let tmp_4_0;
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtextInterpolate1"](" Catering ", ctx.page === "menu" ? "Menu" : "Orders", " ");
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](2);
@@ -315,7 +360,9 @@ class CateringTopbarComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](3);
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngModel", ctx.filters == null ? null : ctx.filters.zones);
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵpipeBind1"](9, 12, ctx.levels));
+        _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵpipeBind1"](9, 13, ctx.levels));
+        _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngIf", ((tmp_4_0 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵpipeBind1"](11, 15, ctx.caterers)) == null ? null : tmp_4_0.length) > 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngIf", ctx.page === "menu");
         _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"]();

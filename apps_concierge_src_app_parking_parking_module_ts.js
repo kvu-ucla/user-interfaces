@@ -406,7 +406,7 @@ function ParkingBookingsListComponent_ng_template_16_Template(rf, ctx) {
     const row_r11 = ctx.row;
     const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("matMenuTriggerFor", ctx_r1.menu)("disabled", row_r11.checked_in || row_r11.state === "in_progress" || row_r11.status === "ended");
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("matMenuTriggerFor", ctx_r1.menu)("disabled", row_r11.checked_in || row_r11.state === "in_progress" || row_r11.status === "ended" || row_r11.instance);
   }
 }
 class ParkingBookingsListComponent {
@@ -673,7 +673,7 @@ function ParkingSpaceListComponent_ng_template_6_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](data_r5);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", row_r4.id, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", row_r4.map_id || row_r4.id, " ");
   }
 }
 function ParkingSpaceListComponent_ng_template_8_div_0_Template(rf, ctx) {

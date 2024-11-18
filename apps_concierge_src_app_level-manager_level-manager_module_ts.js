@@ -53,14 +53,19 @@ const _c2 = a0 => ({
   size: "5rem",
   sortable: false
 });
-const _c3 = a0 => ({
+const _c3 = () => ({
+  key: "room_count",
+  name: "Rooms",
+  size: "6rem"
+});
+const _c4 = a0 => ({
   key: "actions",
   name: " ",
   content: a0,
   size: "3.75rem",
   sortable: false
 });
-const _c4 = (a0, a1, a2, a3) => [a0, a1, a2, a3];
+const _c5 = (a0, a1, a2, a3, a4) => [a0, a1, a2, a3, a4];
 function LevelListComponent_ng_template_3_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵgetCurrentView"]();
@@ -178,7 +183,7 @@ class LevelListComponent {
     type: LevelListComponent,
     selectors: [["level-list"]],
     decls: 9,
-    vars: 15,
+    vars: 17,
     consts: [["name_template", ""], ["parking_template", ""], ["action_template", ""], ["menu", "matMenu"], [1, "absolute", "inset-0", "overflow-auto", "px-8"], ["empty_message", "No levels", 1, "min-w-[48rem]", "block", "text-sm", 3, "data", "columns", "sortable"], [1, "w-full", "h-20"], [1, "px-4", "py-2", "text-left", "leading-tight", 3, "click"], [1, ""], [1, "text-[0.625rem]", "opacity-30", "font-mono"], ["class", "rounded h-8 w-8 flex items-center justify-center text-2xl bg-success text-success-content mx-auto", 4, "ngIf"], [1, "rounded", "h-8", "w-8", "flex", "items-center", "justify-center", "text-2xl", "bg-success", "text-success-content", "mx-auto"], [1, "w-full", "flex", "justify-end", "space-x-2", "p-2"], ["icon", "", "matRipple", "", 1, "h-12", "w-12", "rounded", 3, "matMenuTriggerFor"], ["mat-menu-item", "", 3, "click"], [1, "flex", "items-center", "space-x-2"], [1, "text-2xl"], ["className", "material-symbols-rounded", 1, "text-2xl"], [1, "text-2xl", "text-error"]],
     template: function LevelListComponent_Template(rf, ctx) {
       if (rf & 1) {
@@ -192,7 +197,7 @@ class LevelListComponent {
         const parking_template_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵreference"](6);
         const action_template_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵreference"](8);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("data", ctx.levels)("columns", _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction4"](10, _c4, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction1"](3, _c0, name_template_r9), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction0"](5, _c1), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction1"](6, _c2, parking_template_r10), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction1"](8, _c3, action_template_r11)))("sortable", true);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("data", ctx.levels)("columns", _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction5"](11, _c5, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction1"](3, _c0, name_template_r9), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction0"](5, _c1), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction1"](6, _c2, parking_template_r10), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction0"](8, _c3), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction1"](9, _c4, action_template_r11)))("sortable", true);
       }
     },
     dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_8__.NgIf, _angular_material_menu__WEBPACK_IMPORTED_MODULE_9__.MatMenu, _angular_material_menu__WEBPACK_IMPORTED_MODULE_9__.MatMenuItem, _angular_material_menu__WEBPACK_IMPORTED_MODULE_9__.MatMenuTrigger, _angular_material_core__WEBPACK_IMPORTED_MODULE_10__.MatRipple, _libs_components_src_lib_icon_component__WEBPACK_IMPORTED_MODULE_3__.IconComponent, _libs_components_src_lib_simple_table_component__WEBPACK_IMPORTED_MODULE_4__.SimpleTableComponent]
@@ -214,13 +219,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 89204);
 /* harmony import */ var _placeos_organisation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @placeos/organisation */ 2510);
 /* harmony import */ var _placeos_ts_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @placeos/ts-client */ 35713);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ 90521);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ 68824);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ 35443);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ 90521);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ 68824);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ 71963);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs/operators */ 7841);
 /* harmony import */ var _level_modal_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./level-modal.component */ 65013);
 /* harmony import */ var _placeos_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @placeos/common */ 22797);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 37580);
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/dialog */ 12587);
+/* harmony import */ var _placeos_spaces__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @placeos/spaces */ 44855);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 37580);
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material/dialog */ 12587);
+
 
 
 
@@ -234,28 +242,35 @@ __webpack_require__.r(__webpack_exports__);
 
 class LevelManagementService {
   constructor(_org, _dialog) {
+    var _this = this;
     this._org = _org;
     this._dialog = _dialog;
-    this._options = new rxjs__WEBPACK_IMPORTED_MODULE_5__.BehaviorSubject({});
-    this._change = new rxjs__WEBPACK_IMPORTED_MODULE_5__.BehaviorSubject(0);
+    this._options = new rxjs__WEBPACK_IMPORTED_MODULE_6__.BehaviorSubject({});
+    this._change = new rxjs__WEBPACK_IMPORTED_MODULE_6__.BehaviorSubject(0);
     this.options = this._options.asObservable();
     this.level_list = this._org.level_list;
-    this.filtered_levels = (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.combineLatest)([this._org.building_list, this.level_list, this._options]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.map)(([buildings, list, options]) => {
-      list = list.filter(_ => buildings.find(bld => bld.id === _.parent_id));
-      if (options.zone) {
-        list = list.filter(_ => _.parent_id === options.zone);
-      }
-      if (options.search) {
-        list = list.filter(_ => _.name.toLowerCase().includes(options.search.toLowerCase()));
-      }
-      for (const level of list) {
-        const parent = this._org.buildings.find(bld => bld.id === level.parent_id);
-        if (parent) {
-          level.building = parent.display_name || parent.name;
+    this.filtered_levels = (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.combineLatest)([this._org.building_list, this.level_list, this._options]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.switchMap)( /*#__PURE__*/function () {
+      var _ref = (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* ([buildings, list, options]) {
+        list = list.filter(_ => buildings.find(bld => bld.id === _.parent_id));
+        if (options.zone) {
+          list = list.filter(_ => _.parent_id === options.zone);
         }
-      }
-      return list;
-    }));
+        if (options.search) {
+          list = list.filter(_ => _.name.toLowerCase().includes(options.search.toLowerCase()));
+        }
+        for (const level of list) {
+          const parent = _this._org.buildings.find(bld => bld.id === level.parent_id);
+          if (parent) {
+            level.building = parent.display_name || parent.name;
+          }
+          level.room_count = yield (0,_placeos_spaces__WEBPACK_IMPORTED_MODULE_5__.requestSpacesForZone)(level.id).toPromise().then(spaces => spaces.length);
+        }
+        return list;
+      });
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }()), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_9__.shareReplay)(1));
   }
   setFilters(options) {
     this._options.next({
@@ -278,7 +293,7 @@ class LevelManagementService {
     });
   }
   removeLevel(level) {
-    var _this = this;
+    var _this2 = this;
     return (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const ref = yield (0,_placeos_common__WEBPACK_IMPORTED_MODULE_4__.openConfirmModal)({
         title: 'Remove Building',
@@ -287,11 +302,11 @@ class LevelManagementService {
           content: 'delete_forever'
         },
         confirm_text: 'Remove'
-      }, _this._dialog);
+      }, _this2._dialog);
       if (ref.reason !== 'done') return ref.close();
       ref.loading('Removing building...');
       yield (0,_placeos_ts_client__WEBPACK_IMPORTED_MODULE_2__.removeZone)(level.id).toPromise();
-      _this._org.removeZone({
+      _this2._org.removeZone({
         id: level.id,
         tags: ['level']
       });
@@ -300,9 +315,9 @@ class LevelManagementService {
     })();
   }
   static #_ = this.ɵfac = function LevelManagementService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || LevelManagementService)(_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵinject"](_placeos_organisation__WEBPACK_IMPORTED_MODULE_1__.OrganisationService), _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵinject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__.MatDialog));
+    return new (__ngFactoryType__ || LevelManagementService)(_angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵinject"](_placeos_organisation__WEBPACK_IMPORTED_MODULE_1__.OrganisationService), _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵinject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_11__.MatDialog));
   };
-  static #_2 = this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineInjectable"]({
+  static #_2 = this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdefineInjectable"]({
     token: LevelManagementService,
     factory: LevelManagementService.ɵfac,
     providedIn: 'root'
