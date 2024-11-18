@@ -170,7 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function GroupEventsSidebarComponent_mat_option_11_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "mat-option", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "mat-option", 14);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
   }
@@ -181,16 +181,16 @@ function GroupEventsSidebarComponent_mat_option_11_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", range_r1.display, " ");
   }
 }
-function GroupEventsSidebarComponent_div_19_button_3_Template(rf, ctx) {
+function GroupEventsSidebarComponent_div_20_button_3_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "button", 15);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function GroupEventsSidebarComponent_div_19_button_3_Template_button_click_0_listener() {
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "button", 17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function GroupEventsSidebarComponent_div_20_button_3_Template_button_click_0_listener() {
       const tag_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r2).$implicit;
       const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2);
       return _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵresetView"](ctx_r3.toggleTag(tag_r3));
     });
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "mat-checkbox", 16);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "mat-checkbox", 18);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](2, "async");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
@@ -205,12 +205,12 @@ function GroupEventsSidebarComponent_div_19_button_3_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", tag_r3, " ");
   }
 }
-function GroupEventsSidebarComponent_div_19_Template(rf, ctx) {
+function GroupEventsSidebarComponent_div_20_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 13)(1, "h3");
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 15)(1, "h3");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](2, "Tags");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](3, GroupEventsSidebarComponent_div_19_button_3_Template, 4, 4, "button", 14);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](3, GroupEventsSidebarComponent_div_20_button_3_Template, 4, 4, "button", 16);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](4, "async");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
   }
@@ -322,9 +322,9 @@ class GroupEventsSidebarComponent extends _placeos_common__WEBPACK_IMPORTED_MODU
     type: GroupEventsSidebarComponent,
     selectors: [["group-events-sidebar"]],
     features: [_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵInheritDefinitionFeature"]],
-    decls: 21,
+    decls: 22,
     vars: 16,
-    consts: [[1, "flex", "flex-col", "bg-base-100", "w-[18rem]", "h-full"], [1, "flex", "items-center", "space-x-2", "p-2"], ["btn", "", "matRipple", "", 1, "flex-1", "rounded-3xl", 3, "click"], [1, "flex", "flex-col", "items-center", "space-y-2", "pb-2", "px-2"], ["appearance", "outline", 1, "w-full", "no-subscript"], ["placeholder", "Select Period", 3, "ngModelChange", "ngModel"], [3, "value", 4, "ngFor", "ngForOf"], [1, "border-base-200", "w-[calc(100%-1rem)]", "mx-auto"], [3, "ngModelChange", "ngModel"], [1, "flex", "flex-col", "flex-1", "overflow-auto"], [1, "text-lg", "font-medium", "p-4"], ["class", "flex flex-col space-y-2 px-4", 4, "ngIf"], [3, "value"], [1, "flex", "flex-col", "space-y-2", "px-4"], ["matRipple", "", "class", "flex items-center rounded w-full text-left", 3, "click", 4, "ngFor", "ngForOf"], ["matRipple", "", 1, "flex", "items-center", "rounded", "w-full", "text-left", 3, "click"], [3, "ngModel"]],
+    consts: [[1, "flex", "flex-col", "bg-base-100", "sm:w-[18rem]", "sm:h-full"], [1, "flex", "items-center", "space-x-2", "p-2"], ["btn", "", "matRipple", "", 1, "flex-1", "rounded-3xl", 3, "click"], [1, "flex", "flex-col", "items-center", "space-y-2", "pb-2", "px-2"], ["appearance", "outline", 1, "w-full", "no-subscript"], ["placeholder", "Select Period", 3, "ngModelChange", "ngModel"], [3, "value", 4, "ngFor", "ngForOf"], [1, "border-base-200", "w-[calc(100%-1rem)]", "mx-auto", "hidden", "sm:block"], [1, "flex-col", "flex-1", "overflow-auto", "hidden", "sm:flex"], [3, "ngModelChange", "ngModel"], [1, "border-base-200", "w-[calc(100%-1rem)]", "mx-auto"], [1, "flex", "flex-col", "flex-1", "overflow-auto"], [1, "text-lg", "font-medium", "p-4"], ["class", "flex flex-col space-y-2 px-4", 4, "ngIf"], [3, "value"], [1, "flex", "flex-col", "space-y-2", "px-4"], ["matRipple", "", "class", "flex items-center rounded w-full text-left", 3, "click", 4, "ngFor", "ngForOf"], ["matRipple", "", 1, "flex", "items-center", "rounded", "w-full", "text-left", 3, "click"], [3, "ngModel"]],
     template: function GroupEventsSidebarComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "button", 2);
@@ -352,19 +352,19 @@ class GroupEventsSidebarComponent extends _placeos_common__WEBPACK_IMPORTED_MODU
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](11, GroupEventsSidebarComponent_mat_option_11_Template, 2, 2, "mat-option", 6);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()()();
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](12, "hr", 7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](13, "date-calendar", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](14, "async");
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("ngModelChange", function GroupEventsSidebarComponent_Template_date_calendar_ngModelChange_13_listener($event) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](13, "div", 8)(14, "date-calendar", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](15, "async");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("ngModelChange", function GroupEventsSidebarComponent_Template_date_calendar_ngModelChange_14_listener($event) {
           return ctx.setPeriodFromDate($event);
         });
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](15, "hr", 7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](16, "div", 9)(17, "h2", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](18, "Filters");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](16, "hr", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](17, "div", 11)(18, "h2", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](19, "Filters");
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](19, GroupEventsSidebarComponent_div_19_Template, 5, 3, "div", 11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](20, "async");
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](20, GroupEventsSidebarComponent_div_20_Template, 5, 3, "div", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipe"](21, "async");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()()();
       }
       if (rf & 2) {
         let tmp_5_0;
@@ -376,10 +376,10 @@ class GroupEventsSidebarComponent extends _placeos_common__WEBPACK_IMPORTED_MODU
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtwoWayProperty"]("ngModel", ctx.selected_range);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngForOf", ctx.period_list);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngModel", _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](14, 12, ctx.options).date);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngModel", _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](15, 12, ctx.options).date);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", (tmp_5_0 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](20, 14, ctx.tags)) == null ? null : tmp_5_0.length);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", (tmp_5_0 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpipeBind1"](21, 14, ctx.tags)) == null ? null : tmp_5_0.length);
       }
     },
     dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_13__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_13__.NgIf, _angular_forms__WEBPACK_IMPORTED_MODULE_14__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_14__.NgModel, _angular_material_core__WEBPACK_IMPORTED_MODULE_15__.MatOption, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_16__.MatFormField, _angular_material_select__WEBPACK_IMPORTED_MODULE_17__.MatSelect, _angular_material_core__WEBPACK_IMPORTED_MODULE_15__.MatRipple, _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_18__.MatCheckbox, _libs_form_fields_src_lib_date_calendar_component__WEBPACK_IMPORTED_MODULE_3__.DateCalendarComponent, _angular_common__WEBPACK_IMPORTED_MODULE_13__.AsyncPipe]
@@ -580,7 +580,7 @@ class GroupEventsComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.
     attrs: _c0,
     decls: 12,
     vars: 7,
-    consts: [["no_events", ""], [1, "flex", "flex-1", "h-1/2", "bg-base-200"], [1, "w-1/2", "flex-1", "h-full", "overflow-auto", "p-4"], ["class", "my-2 mx-auto w-[64rem] max-w-full", 3, "event", "featured", 4, "ngIf"], [4, "ngIf", "ngIfElse"], [1, "my-2", "mx-auto", "w-[64rem]", "max-w-full", 3, "event", "featured"], [1, "flex", "flex-wrap", "mt-2", "w-[64rem]", "max-w-full", "mx-auto"], ["class", "m-2", 3, "event", 4, "ngFor", "ngForOf"], [1, "m-2", 3, "event"], [1, "flex", "flex-col", "items-center", "justify-center", "w-full", "h-full", "space-y-2"], ["src", "assets/icons/no-results.svg", 1, "w-32"], [1, "font-medium"], [1, "opacity-30"]],
+    consts: [["no_events", ""], [1, "flex", "flex-col", "sm:flex-row", "flex-1", "h-1/2", "bg-base-200"], [1, "w-full", "sm:w-1/2", "flex-1", "h-full", "overflow-auto", "p-2", "sm:p-4"], ["class", "my-2 mx-auto w-[64rem] max-w-full", 3, "event", "featured", 4, "ngIf"], [4, "ngIf", "ngIfElse"], [1, "my-2", "mx-auto", "w-[64rem]", "max-w-full", 3, "event", "featured"], [1, "flex", "flex-wrap", "mt-2", "w-[64rem]", "max-w-full", "mx-auto"], ["class", "m-2", 3, "event", 4, "ngFor", "ngForOf"], [1, "m-2", 3, "event"], [1, "flex", "flex-col", "items-center", "justify-center", "w-full", "h-full", "space-y-2"], ["src", "assets/icons/no-results.svg", 1, "w-32"], [1, "font-medium"], [1, "opacity-30"]],
     template: function GroupEventsComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](0, "topbar");
