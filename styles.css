@@ -2050,6 +2050,10 @@ video {
   --tw-translate-y: calc(100% - 1rem);
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+#placeos .rotate-12 {
+  --tw-rotate: 12deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
 #placeos .scale-75 {
   --tw-scale-x: .75;
   --tw-scale-y: .75;
@@ -2541,6 +2545,9 @@ video {
 }
 #placeos .\!bg-error {
   background-color: var(--er) !important;
+}
+#placeos .\!bg-error-light {
+  background-color: var(--erl) !important;
 }
 #placeos .\!bg-info {
   background-color: var(--in) !important;
