@@ -3542,24 +3542,7 @@ class ReportsStateService {
         ...query,
         zone_ids: zones,
         limit: 1000
-      }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.switchMap)( /*#__PURE__*/function () {
-        var _ref = (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (l) {
-          return Promise.all(l.map( /*#__PURE__*/function () {
-            var _ref2 = (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (_) {
-              return new _placeos_events__WEBPACK_IMPORTED_MODULE_4__.CalendarEvent({
-                ..._,
-                resources: (yield Promise.all(_.resources.map(r => _this._space_pipe.transform(r.id || r.email)))).filter(s => options.zones?.find(z => s.zones.includes(z)))
-              });
-            });
-            return function (_x2) {
-              return _ref2.apply(this, arguments);
-            };
-          }()));
-        });
-        return function (_x) {
-          return _ref.apply(this, arguments);
-        };
-      }()), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.catchError)(_ => (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.of)([])));
+      }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.catchError)(_ => (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.of)([])));
     }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.map)(list => {
       this._loading.next('');
       if (!list?.length) {
@@ -3593,24 +3576,22 @@ class ReportsStateService {
         details: []
       })), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.map)(m => [z, m.details.length])).toPromise()));
     }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.map)(list => {
-      console.log('Counts:', list);
       const map = {};
       this._active_bookings.next([]);
       list.forEach(([id, count]) => map[id] = count);
       return map;
     }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.shareReplay)(1));
-    this.stats = (0,rxjs__WEBPACK_IMPORTED_MODULE_24__.combineLatest)([this.counts, this.bookings]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.switchMap)( /*#__PURE__*/function () {
-      var _ref3 = (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* ([counts, list]) {
-        console.log('Details:', counts, list);
+    this.stats = (0,rxjs__WEBPACK_IMPORTED_MODULE_24__.combineLatest)([this.counts, this.bookings]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.debounceTime)(300), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.switchMap)( /*#__PURE__*/function () {
+      var _ref = (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* ([counts, list]) {
         if (list[0] instanceof _placeos_events__WEBPACK_IMPORTED_MODULE_4__.CalendarEvent) {
           return (0,_reports_utilities__WEBPACK_IMPORTED_MODULE_6__.generateReportForBookings)(list, _this.duration * 8, counts);
         }
         return (0,_reports_utilities__WEBPACK_IMPORTED_MODULE_6__.generateReportForDeskBookings)(list || [], _this.duration, counts);
       });
-      return function (_x3) {
-        return _ref3.apply(this, arguments);
+      return function (_x) {
+        return _ref.apply(this, arguments);
       };
-    }()));
+    }()), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.shareReplay)(1));
     this.day_list = (0,rxjs__WEBPACK_IMPORTED_MODULE_24__.combineLatest)([this.options, this.stats]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.map)(([options, stats]) => {
       const {
         start
