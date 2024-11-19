@@ -24885,15 +24885,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "fc47601",
-  "hash": "fc47601",
+  "raw": "bafd3e5",
+  "hash": "bafd3e5",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "fc47601",
+  "suffix": "bafd3e5",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1731911755242
+  "time": 1731975451511
 };
 /* tslint:enable */
 
@@ -33100,6 +33100,7 @@ class SimpleTableComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.
     this.empty_message = 'No data to list';
     this.child_template = null;
     this.show_children = {};
+    this.filter_on = [];
     this.selectedChange = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
     this.rowClicked = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
     this.page = 0;
@@ -33136,7 +33137,7 @@ class SimpleTableComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.
       this.data_view$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_5__.combineLatest)([this.data$, this._filter$, this._sort$]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.debounceTime)(300), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.map)(([data, filter, sort]) => {
         data = [...data];
         if (filter) {
-          data = data.filter(_ => Object.values(_).some(i => JSON.stringify(i)?.toLowerCase().includes((filter || '').toLowerCase())));
+          data = data.filter(v => Object.keys(v).some(k => !filter || (!this.filter_on.length || this.filter_on.includes(k)) && JSON.stringify(v[k])?.toLowerCase().includes((filter || '').toLowerCase())));
         }
         if (sort && data.length) {
           const type = typeof data[0][sort.key];
@@ -33218,7 +33219,8 @@ class SimpleTableComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.
       page_size: "page_size",
       empty_message: "empty_message",
       child_template: "child_template",
-      show_children: "show_children"
+      show_children: "show_children",
+      filter_on: "filter_on"
     },
     outputs: {
       selectedChange: "selectedChange",
@@ -37092,6 +37094,11 @@ class EventFormService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.Asyn
     var _this3 = this;
     return (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this3._updateVisitorList(event.attendees);
+      const old_system = event.old_system?.id || event.old_system?.email || event.resources[0]?.email;
+      const system_id = event.system?.id || event.system?.email || event.resources[0]?.email;
+      if (old_system !== system_id) {
+        event.attendees = event.attendees.filter(_ => _.email !== old_system || _.id !== old_system);
+      }
       return (!_this3.has_calendar ? (0,libs_bookings_src_lib_bookings_fn__WEBPACK_IMPORTED_MODULE_5__.saveBooking)((0,libs_bookings_src_lib_booking_utilities__WEBPACK_IMPORTED_MODULE_9__.newBookingFromCalendarEvent)({
         ...event.toJSON(),
         status: _this3._settings.get('app.bookings.no_approval') ? 'approved' : 'tentative'
