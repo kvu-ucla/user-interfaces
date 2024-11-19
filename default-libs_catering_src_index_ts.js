@@ -986,7 +986,7 @@ class CateringMenuComponent {
     this._orders = _orders;
     this.show_children = {};
     /** Observable for the currently active menu */
-    this.menu = (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.combineLatest)([this._catering.menu, this._orders.order_filters]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.map)(([menu, filters]) => menu.filter(item => !filters?.caterer || item.caterer === filters.caterer)));
+    this.menu = (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.combineLatest)([this._catering.menu, this._orders.order_filters]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.map)(([menu, filters]) => menu.filter(item => !filters?.caterer || filters.caterer === '<empty>' && !item.caterer || item.caterer === filters.caterer)));
     this.addOption = item => this._catering.addOption(item);
     this.editOption = (item, option) => this._catering.addOption(item, option);
     this.removeOption = (item, option) => this._catering.deleteOption(item, option);
@@ -2534,7 +2534,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function checkOrder(order, filters) {
   const s = (filters.search || '').toLowerCase();
-  return !!order.items.find(item => item.name.toLowerCase().includes(s) || !!item.options.find(option => option.name.toLowerCase().includes(s)));
+  return !!order.items.find(item => (!filters?.caterer || filters.caterer === '<empty>' && !item.caterer || item.caterer === filters.caterer) && (item.name.toLowerCase().includes(s) || !!item.options.find(option => option.name.toLowerCase().includes(s))));
 }
 class CateringOrdersService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.AsyncHandler {
   /** Order filters */

@@ -1133,6 +1133,9 @@ video {
 #placeos .h-10 {
   height: 2.5rem;
 }
+#placeos .h-11 {
+  height: 2.75rem;
+}
 #placeos .h-12 {
   height: 3rem;
 }
@@ -1516,6 +1519,9 @@ video {
 }
 #placeos .w-3 {
   width: 0.75rem;
+}
+#placeos .w-3\/4 {
+  width: 75%;
 }
 #placeos .w-3\/5 {
   width: 60%;

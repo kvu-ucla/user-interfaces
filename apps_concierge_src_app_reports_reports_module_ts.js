@@ -4216,17 +4216,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 89204);
 /* harmony import */ var _placeos_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @placeos/common */ 22797);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! date-fns */ 71246);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ 68824);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ 19803);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ 35443);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs/operators */ 33602);
-/* harmony import */ var _reports_state_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reports-state.service */ 58255);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 37580);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common */ 60316);
-/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/material/core */ 74646);
-/* harmony import */ var _libs_components_src_lib_icon_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../libs/components/src/lib/icon.component */ 69434);
-/* harmony import */ var _libs_components_src_lib_simple_table_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../libs/components/src/lib/simple-table.component */ 88328);
+/* harmony import */ var _placeos_spaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @placeos/spaces */ 44855);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! date-fns */ 71246);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ 68824);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ 19803);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs/operators */ 71963);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs/operators */ 35443);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs/operators */ 33602);
+/* harmony import */ var _reports_state_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reports-state.service */ 58255);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 37580);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/common */ 60316);
+/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material/core */ 74646);
+/* harmony import */ var _libs_components_src_lib_icon_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../libs/components/src/lib/icon.component */ 69434);
+/* harmony import */ var _libs_components_src_lib_simple_table_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../../libs/components/src/lib/simple-table.component */ 88328);
+
 
 
 
@@ -4282,38 +4285,38 @@ const _c8 = () => ({
 const _c9 = (a0, a1, a2, a3, a4, a5, a6, a7, a8) => [a0, a1, a2, a3, a4, a5, a6, a7, a8];
 function ReportSpacesSpaceListing_button_4_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "button", 6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function ReportSpacesSpaceListing_button_4_Template_button_click_0_listener() {
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r1);
-      const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵresetView"](ctx_r1.download());
+    const _r1 = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](0, "button", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵlistener"]("click", function ReportSpacesSpaceListing_button_4_Template_button_click_0_listener() {
+      _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵrestoreView"](_r1);
+      const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵresetView"](ctx_r1.download());
     });
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](1, "app-icon");
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](2, "download");
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](1, "app-icon");
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtext"](2, "download");
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]()();
   }
 }
 function ReportSpacesSpaceListing_ng_template_9_span_2_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "span", 9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](1, "Not set");
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](0, "span", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtext"](1, "Not set");
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
   }
 }
 function ReportSpacesSpaceListing_ng_template_9_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 7);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](2, ReportSpacesSpaceListing_ng_template_9_span_2_Template, 2, 0, "span", 8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](0, "div", 7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtemplate"](2, ReportSpacesSpaceListing_ng_template_9_span_2_Template, 2, 0, "span", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
   }
   if (rf & 2) {
     const data_r3 = ctx.data;
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate1"](" ", data_r3 < 1 ? "" : data_r3, " ");
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", data_r3 < 1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵadvance"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtextInterpolate1"](" ", data_r3 < 1 ? "" : data_r3, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵadvance"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵproperty"]("ngIf", data_r3 < 1);
   }
 }
 class ReportSpacesSpaceListing {
@@ -4321,68 +4324,79 @@ class ReportSpacesSpaceListing {
     var _this = this;
     this._reports = _reports;
     this.print = false;
-    this.space_list = (0,rxjs__WEBPACK_IMPORTED_MODULE_6__.combineLatest)([this._reports.stats, this._reports.options]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.debounceTime)(300), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.map)(([stats, {
-      start,
-      end
-    }]) => {
-      let list = [];
-      let has_attendance = false;
-      for (const booking of stats.events) {
-        const resources = (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(booking.resources, 'email') || [booking.system];
-        for (const space of resources) {
-          let details = list.find(_ => _.id === space.id || _.id?.toLowerCase() === space.email.toLowerCase());
-          if (!details) {
-            details = {
-              id: space.id || space.email,
-              name: space.display_name || space.name,
-              capacity: space.capacity,
-              booking_count: 0,
-              attendance: 0,
-              avg_attendance: 0,
-              min_attendance: 99,
-              max_attendance: 0,
-              attendees: 0,
-              avg_attendees: 0,
-              usage: 0,
-              no_shows: 0,
-              utilisation: 0,
-              occupancy: 0
-            };
-            if (!details.id || !details.name) continue;
-            list.push(details);
+    this._space_pipe = new _placeos_spaces__WEBPACK_IMPORTED_MODULE_2__.SpacePipe();
+    this.space_list = (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.combineLatest)([this._reports.stats, this._reports.options]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.debounceTime)(300), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_9__.switchMap)( /*#__PURE__*/function () {
+      var _ref = (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* ([stats, {
+        start,
+        end
+      }]) {
+        let list = [];
+        let has_attendance = false;
+        for (const booking of stats.events) {
+          let space_list = (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.unique)(booking.resources, 'email') || [booking.system];
+          let resources = [];
+          for (const space of space_list) {
+            const details = yield _this._space_pipe.transform(space.email || space.id);
+            resources.push(details);
           }
-          if (booking.extension_data?.people_count?.max === 0) {
-            details.no_shows += 1;
+          for (const space of resources) {
+            let details = list.find(_ => _.id === space.id || _.id?.toLowerCase() === space.email.toLowerCase());
+            if (!details) {
+              details = {
+                id: space.id || space.email,
+                name: space.display_name || space.name,
+                capacity: space.capacity,
+                booking_count: 0,
+                attendance: 0,
+                avg_attendance: 0,
+                min_attendance: 99,
+                max_attendance: 0,
+                attendees: 0,
+                avg_attendees: 0,
+                usage: 0,
+                no_shows: 0,
+                utilisation: 0,
+                occupancy: 0
+              };
+              if (!details.id || !details.name) continue;
+              list.push(details);
+            }
+            if (booking.extension_data?.people_count?.max === 0) {
+              details.no_shows += 1;
+            }
+            details.booking_count += 1;
+            details.attendance += booking.extension_data?.people_count?.max ?? 0;
+            details.avg_attendance += booking.extension_data?.people_count?.avg ?? 0;
+            details.min_attendance = Math.min(details.max_attendance, booking.extension_data?.people_count?.max ?? 99);
+            details.max_attendance = Math.max(details.max_attendance, booking.extension_data?.people_count?.max ?? 0);
+            details.usage += booking.duration;
+            details.attendees += booking.attendees.length;
+            has_attendance = has_attendance || !!booking.extension_data.people_count;
           }
-          details.booking_count += 1;
-          details.attendance += booking.extension_data?.people_count?.max ?? 0;
-          details.avg_attendance += booking.extension_data?.people_count?.avg ?? 0;
-          details.min_attendance = Math.min(details.max_attendance, booking.extension_data?.people_count?.max ?? 99);
-          details.max_attendance = Math.max(details.max_attendance, booking.extension_data?.people_count?.max ?? 0);
-          details.usage += booking.duration;
-          details.attendees += booking.attendees.length;
-          has_attendance = has_attendance || !!booking.extension_data.people_count;
         }
-      }
-      const period_in_days = Math.max(1, (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.differenceInDays)(end, start) + 1);
-      for (const space of list) {
-        space.avg_attendees = Math.floor(space.attendees / space.booking_count * 100) / 100;
-        space.avg_attendance = Math.floor(space.attendance / space.booking_count * 100) / 100;
-        space.utilisation = `${Math.floor(space.usage / 60 / 8 / period_in_days * 100)}%`;
-        space.min_attendance = space.min_attendance === 99 ? '?' : space.min_attendance;
-        space.occupancy = `${Math.floor(space.avg_attendees / Math.max(1, space.capacity) * 1000) / 10}%`;
-        if (space.attendance < 0 || !has_attendance) {
-          space.attendance = '?';
-          space.avg_attendance = '?';
+        const period_in_days = Math.max(1, (0,date_fns__WEBPACK_IMPORTED_MODULE_10__.differenceInDays)(end, start) + 1);
+        for (const space of list) {
+          space.avg_attendees = Math.floor(space.attendees / space.booking_count * 100) / 100;
+          space.avg_attendance = Math.floor(space.attendance / space.booking_count * 100) / 100;
+          space.utilisation = `${Math.floor(space.usage / 60 / 8 / period_in_days * 100)}%`;
+          space.min_attendance = space.min_attendance === 99 ? '?' : space.min_attendance;
+          space.occupancy = `${Math.floor(space.avg_attendees / Math.max(1, space.capacity) * 1000) / 10}%`;
+          if (space.attendance < 0 || !has_attendance) {
+            space.attendance = '?';
+            space.avg_attendance = '?';
+          }
         }
-      }
-      return list;
-    }));
-    this.has_attendance = this.space_list.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.map)(_ => !!_.find(({
+        return list;
+      });
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }()));
+    this.has_attendance = this.space_list.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.map)(_ => !!_.find(({
       attendance
     }) => attendance !== '?')));
     this.download = /*#__PURE__*/(0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const data = yield _this.space_list.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_10__.take)(1)).toPromise();
+      const data = yield _this.space_list.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.take)(1)).toPromise();
       for (const item of data) {
         delete item.attendance;
         delete item.avg_attendance;
@@ -4394,9 +4408,9 @@ class ReportSpacesSpaceListing {
     });
   }
   static #_ = this.ɵfac = function ReportSpacesSpaceListing_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || ReportSpacesSpaceListing)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_reports_state_service__WEBPACK_IMPORTED_MODULE_2__.ReportsStateService));
+    return new (__ngFactoryType__ || ReportSpacesSpaceListing)(_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](_reports_state_service__WEBPACK_IMPORTED_MODULE_3__.ReportsStateService));
   };
-  static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({
+  static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineComponent"]({
     type: ReportSpacesSpaceListing,
     selectors: [["report-spaces-space-listing"]],
     inputs: {
@@ -4407,27 +4421,27 @@ class ReportSpacesSpaceListing {
     consts: [["capacity_template", ""], [1, "m-4", "rounded", "bg-base-100", "border", "border-base-200", "overflow-hidden"], [1, "border-b", "border-base-200", "px-4", "py-2", "flex", "items-center"], [1, "font-bold", "text-xl", "flex-1"], ["icon", "", "matRipple", "", 3, "click", 4, "ngIf"], ["empty_message", "No events for selected period", 1, "w-full", "block", "text-sm", 3, "data", "columns", "sortable", "page_size"], ["icon", "", "matRipple", "", 3, "click"], [1, "p-4"], ["class", "opacity-30", 4, "ngIf"], [1, "opacity-30"]],
     template: function ReportSpacesSpaceListing_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 1)(1, "div", 2)(2, "h3", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](3, "Room Utilisation");
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](4, ReportSpacesSpaceListing_button_4_Template, 3, 0, "button", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](5, "simple-table", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpipe"](6, "async");
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpipe"](7, "async");
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpipe"](8, "async");
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](9, ReportSpacesSpaceListing_ng_template_9_Template, 3, 2, "ng-template", null, 0, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplateRefExtractor"]);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](0, "div", 1)(1, "div", 2)(2, "h3", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtext"](3, "Room Utilisation");
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtemplate"](4, ReportSpacesSpaceListing_button_4_Template, 3, 0, "button", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelement"](5, "simple-table", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpipe"](6, "async");
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpipe"](7, "async");
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpipe"](8, "async");
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtemplate"](9, ReportSpacesSpaceListing_ng_template_9_Template, 3, 2, "ng-template", null, 0, _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtemplateRefExtractor"]);
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
       }
       if (rf & 2) {
-        const capacity_template_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵreference"](10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", !ctx.print);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("data", ctx.space_list)("columns", _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunctionV"](24, _c9, [_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction0"](11, _c0), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction1"](12, _c1, capacity_template_r4), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction0"](14, _c2), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction0"](15, _c3), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction0"](16, _c4), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction1"](17, _c5, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpipeBind1"](6, 5, ctx.has_attendance)), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction1"](19, _c6, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpipeBind1"](7, 7, ctx.has_attendance)), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction1"](21, _c7, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpipeBind1"](8, 9, ctx.has_attendance)), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction0"](23, _c8)]))("sortable", true)("page_size", ctx.print ? 0 : 10);
+        const capacity_template_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵreference"](10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵadvance"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵproperty"]("ngIf", !ctx.print);
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵadvance"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵproperty"]("data", ctx.space_list)("columns", _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpureFunctionV"](24, _c9, [_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpureFunction0"](11, _c0), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpureFunction1"](12, _c1, capacity_template_r4), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpureFunction0"](14, _c2), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpureFunction0"](15, _c3), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpureFunction0"](16, _c4), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpureFunction1"](17, _c5, _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpipeBind1"](6, 5, ctx.has_attendance)), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpureFunction1"](19, _c6, _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpipeBind1"](7, 7, ctx.has_attendance)), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpureFunction1"](21, _c7, _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpipeBind1"](8, 9, ctx.has_attendance)), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpureFunction0"](23, _c8)]))("sortable", true)("page_size", ctx.print ? 0 : 10);
       }
     },
-    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_11__.NgIf, _angular_material_core__WEBPACK_IMPORTED_MODULE_12__.MatRipple, _libs_components_src_lib_icon_component__WEBPACK_IMPORTED_MODULE_3__.IconComponent, _libs_components_src_lib_simple_table_component__WEBPACK_IMPORTED_MODULE_4__.SimpleTableComponent, _angular_common__WEBPACK_IMPORTED_MODULE_11__.AsyncPipe]
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_13__.NgIf, _angular_material_core__WEBPACK_IMPORTED_MODULE_14__.MatRipple, _libs_components_src_lib_icon_component__WEBPACK_IMPORTED_MODULE_4__.IconComponent, _libs_components_src_lib_simple_table_component__WEBPACK_IMPORTED_MODULE_5__.SimpleTableComponent, _angular_common__WEBPACK_IMPORTED_MODULE_13__.AsyncPipe]
   });
 }
 
