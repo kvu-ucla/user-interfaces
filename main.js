@@ -32947,15 +32947,15 @@ exports.VERSION = void 0;
 /* tslint:disable */
 exports.VERSION = {
   "dirty": false,
-  "raw": "fc47601",
-  "hash": "fc47601",
+  "raw": "bafd3e5",
+  "hash": "bafd3e5",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "fc47601",
+  "suffix": "bafd3e5",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1731911750217
+  "time": 1731975504850
 };
 /* tslint:enable */
 
@@ -42408,6 +42408,7 @@ var SimpleTableComponent = /*#__PURE__*/function (_common_1$AsyncHandle) {
     _this.empty_message = 'No data to list';
     _this.child_template = null;
     _this.show_children = {};
+    _this.filter_on = [];
     _this.selectedChange = new core_1.EventEmitter();
     _this.rowClicked = new core_1.EventEmitter();
     _this.page = 0;
@@ -42465,10 +42466,10 @@ var SimpleTableComponent = /*#__PURE__*/function (_common_1$AsyncHandle) {
             sort = _ref2[2];
           data = _toConsumableArray(data);
           if (filter) {
-            data = data.filter(function (_) {
-              return Object.values(_).some(function (i) {
+            data = data.filter(function (v) {
+              return Object.keys(v).some(function (k) {
                 var _JSON$stringify;
-                return (_JSON$stringify = JSON.stringify(i)) === null || _JSON$stringify === void 0 ? void 0 : _JSON$stringify.toLowerCase().includes((filter || '').toLowerCase());
+                return !filter || (!_this2.filter_on.length || _this2.filter_on.includes(k)) && ((_JSON$stringify = JSON.stringify(v[k])) === null || _JSON$stringify === void 0 ? void 0 : _JSON$stringify.toLowerCase().includes((filter || '').toLowerCase()));
               });
             });
           }
@@ -42589,7 +42590,8 @@ _SimpleTableComponent.ɵcmp = /*@__PURE__*/i0.ɵɵdefineComponent({
     page_size: "page_size",
     empty_message: "empty_message",
     child_template: "child_template",
-    show_children: "show_children"
+    show_children: "show_children",
+    filter_on: "filter_on"
   },
   outputs: {
     selectedChange: "selectedChange",
@@ -47045,16 +47047,25 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
     key: "_makeBooking",
     value: function () {
       var _makeBooking2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(event, query) {
+        var _event$old_system, _event$old_system2, _event$resources$, _event$system, _event$system2, _event$resources$2;
+        var old_system, system_id;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) switch (_context4.prev = _context4.next) {
             case 0:
               this._updateVisitorList(event.attendees);
+              old_system = ((_event$old_system = event.old_system) === null || _event$old_system === void 0 ? void 0 : _event$old_system.id) || ((_event$old_system2 = event.old_system) === null || _event$old_system2 === void 0 ? void 0 : _event$old_system2.email) || ((_event$resources$ = event.resources[0]) === null || _event$resources$ === void 0 ? void 0 : _event$resources$.email);
+              system_id = ((_event$system = event.system) === null || _event$system === void 0 ? void 0 : _event$system.id) || ((_event$system2 = event.system) === null || _event$system2 === void 0 ? void 0 : _event$system2.email) || ((_event$resources$2 = event.resources[0]) === null || _event$resources$2 === void 0 ? void 0 : _event$resources$2.email);
+              if (old_system !== system_id) {
+                event.attendees = event.attendees.filter(function (_) {
+                  return _.email !== old_system || _.id !== old_system;
+                });
+              }
               return _context4.abrupt("return", (!this.has_calendar ? (0, bookings_fn_1.saveBooking)((0, booking_utilities_1.newBookingFromCalendarEvent)(_objectSpread(_objectSpread({}, event.toJSON()), {}, {
                 status: this._settings.get('app.bookings.no_approval') ? 'approved' : 'tentative'
               }))).pipe((0, operators_1.map)(function (_) {
                 return (0, utilities_1.newCalendarEventFromBooking)(_);
               })) : (0, events_fn_1.saveEvent)(event, query)).toPromise());
-            case 2:
+            case 5:
             case "end":
               return _context4.stop();
           }
