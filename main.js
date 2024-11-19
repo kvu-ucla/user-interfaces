@@ -275,7 +275,7 @@ function CateringTopbarComponent_mat_form_field_17_mat_option_4_Template(rf, ctx
   }
   if (rf & 2) {
     const caterer_r4 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("value", caterer_r4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("value", caterer_r4 || "<empty>");
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate1"](" ", caterer_r4 || "== No Caterer ==", " ");
   }
@@ -16120,7 +16120,7 @@ class CateringMenuComponent {
     this._orders = _orders;
     this.show_children = {};
     /** Observable for the currently active menu */
-    this.menu = (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.combineLatest)([this._catering.menu, this._orders.order_filters]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.map)(([menu, filters]) => menu.filter(item => !filters?.caterer || item.caterer === filters.caterer)));
+    this.menu = (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.combineLatest)([this._catering.menu, this._orders.order_filters]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.map)(([menu, filters]) => menu.filter(item => !filters?.caterer || filters.caterer === '<empty>' && !item.caterer || item.caterer === filters.caterer)));
     this.addOption = item => this._catering.addOption(item);
     this.editOption = (item, option) => this._catering.addOption(item, option);
     this.removeOption = (item, option) => this._catering.deleteOption(item, option);
@@ -18792,7 +18792,7 @@ class CateringOrderStateService {
         let list = search ? l.filter(_ => _.name.toLowerCase().includes(search)) : l;
         list = tags.length ? list.filter(_ => tags.every(t => _.tags.includes(t))) : list;
         list = categories.length ? list.filter(_ => categories.includes(_.category)) : list;
-        list = caterer ? list.filter(_ => _.caterer === caterer) : list;
+        list = caterer ? list.filter(_ => caterer === '<empty>' && !_.caterer || _.caterer === caterer) : list;
         list = list.filter(_ => (0,_utilities__WEBPACK_IMPORTED_MODULE_5__.cateringItemAvailable)(_, rules, {
           date,
           duration,
@@ -19448,7 +19448,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function checkOrder(order, filters) {
   const s = (filters.search || '').toLowerCase();
-  return !!order.items.find(item => item.name.toLowerCase().includes(s) || !!item.options.find(option => option.name.toLowerCase().includes(s)));
+  return !!order.items.find(item => (!filters?.caterer || filters.caterer === '<empty>' && !item.caterer || item.caterer === filters.caterer) && (item.name.toLowerCase().includes(s) || !!item.options.find(option => option.name.toLowerCase().includes(s))));
 }
 class CateringOrdersService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.AsyncHandler {
   /** Order filters */
@@ -24338,15 +24338,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "f78f541",
-  "hash": "f78f541",
+  "raw": "887e30d",
+  "hash": "887e30d",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "f78f541",
+  "suffix": "887e30d",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1731892606703
+  "time": 1731993254308
 };
 /* tslint:enable */
 
@@ -32553,6 +32553,7 @@ class SimpleTableComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.
     this.empty_message = 'No data to list';
     this.child_template = null;
     this.show_children = {};
+    this.filter_on = [];
     this.selectedChange = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
     this.rowClicked = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
     this.page = 0;
@@ -32589,7 +32590,15 @@ class SimpleTableComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.
       this.data_view$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_5__.combineLatest)([this.data$, this._filter$, this._sort$]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.debounceTime)(300), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.map)(([data, filter, sort]) => {
         data = [...data];
         if (filter) {
-          data = data.filter(_ => Object.values(_).some(i => JSON.stringify(i)?.toLowerCase().includes((filter || '').toLowerCase())));
+          const filter_str = (filter || '').toLowerCase();
+          data = data.filter(v => {
+            const keys = this.filter_on.length ? this.filter_on : Object.keys(v);
+            return keys.some(key => {
+              const value = v[key];
+              const cmp_str = JSON.stringify(value).toLowerCase();
+              return cmp_str.includes(filter_str);
+            });
+          });
         }
         if (sort && data.length) {
           const type = typeof data[0][sort.key];
@@ -32671,7 +32680,8 @@ class SimpleTableComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.
       page_size: "page_size",
       empty_message: "empty_message",
       child_template: "child_template",
-      show_children: "show_children"
+      show_children: "show_children",
+      filter_on: "filter_on"
     },
     outputs: {
       selectedChange: "selectedChange",
@@ -36508,6 +36518,11 @@ class EventFormService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.Asyn
     var _this3 = this;
     return (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this3._updateVisitorList(event.attendees);
+      const old_system = event.old_system?.id || event.old_system?.email || event.resources[0]?.email;
+      const system_id = event.system?.id || event.system?.email || event.resources[0]?.email;
+      if (old_system !== system_id) {
+        event.attendees = event.attendees.filter(_ => _.email !== old_system || _.id !== old_system);
+      }
       return (!_this3.has_calendar ? (0,libs_bookings_src_lib_bookings_fn__WEBPACK_IMPORTED_MODULE_5__.saveBooking)((0,libs_bookings_src_lib_booking_utilities__WEBPACK_IMPORTED_MODULE_9__.newBookingFromCalendarEvent)({
         ...event.toJSON(),
         status: _this3._settings.get('app.bookings.no_approval') ? 'approved' : 'tentative'
