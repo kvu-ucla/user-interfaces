@@ -63,7 +63,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function CateringImportMenuModalComponent_button_3_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "button", 4)(1, "app-icon");
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "button", 5)(1, "app-icon");
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](2, "close");
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
   }
@@ -71,20 +71,20 @@ function CateringImportMenuModalComponent_button_3_Template(rf, ctx) {
 function CateringImportMenuModalComponent_main_4_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "main")(1, "div", 5)(2, "app-icon", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "main")(1, "div", 6)(2, "app-icon", 7);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](3, "upload");
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](4, "p");
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](5, "Click to select file or Drag and drop files");
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](6, "input", 7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](6, "input", 8);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("change", function CateringImportMenuModalComponent_main_4_Template_input_change_6_listener($event) {
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r1);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵresetView"](ctx_r1.handleFileEvent($event));
     });
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](7, "div", 8)(8, "button", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](7, "div", 9)(8, "button", 10);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function CateringImportMenuModalComponent_main_4_Template_button_click_8_listener() {
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r1);
       const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]();
@@ -96,8 +96,8 @@ function CateringImportMenuModalComponent_main_4_Template(rf, ctx) {
 }
 function CateringImportMenuModalComponent_ng_template_5_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "main", 10);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](1, "mat-spinner", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "main", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](1, "mat-spinner", 12);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](2, "p");
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
@@ -142,8 +142,8 @@ class CateringImportMenuModalComponent {
     fileReader.readAsText(file);
   }
   downloadTemplate() {
-    const template = `ID,Type,Name,Unit Price,Category,Description,Tags,Multiple
-item-1,item,Coffee,200,Drink,Wake Up,,
+    const template = `ID,Type,Name,Unit Price,Category,Caterer,Description,Tags,Multiple
+item-1,item,Coffee,200,Drink,Wake Up Cafe,Wake Up,,
 option-1,option,1 Sugar,20,Sugars,,item-1,false`;
     (0,_placeos_common__WEBPACK_IMPORTED_MODULE_0__.downloadFile)('import-menu-template.csv', template);
   }
@@ -158,15 +158,15 @@ option-1,option,1 Sugar,20,Sugars,,item-1,false`;
     },
     decls: 7,
     vars: 3,
-    consts: [["load_state", ""], [1, "h-12", "bg-primary", "flex", "items-center", "justify-between", "px-4"], ["icon", "", "mat-dialog-close", "", 4, "ngIf"], [4, "ngIf", "ngIfElse"], ["icon", "", "mat-dialog-close", ""], [1, "relative", "flex", "flex-col", "items-center", "justify-center", "space-y-2", "h-[24rem]", "w-[24rem]", "border-4", "border-base-200", "border-dashed", "rounded-xl", "hover:bg-base-200", "m-4", "p-4", "cursor-pointer"], [1, "text-4xl"], ["type", "file", 1, "absolute", "inset-0", "opacity-0", 3, "change"], [1, "flex", "items-center", "justify-center", "px-4", "pb-4"], ["matRipple", "", 1, "clear", "underline", "w-48", 3, "click"], [1, "flex", "flex-col", "items-center", "justify-center", "space-y-2", "p-8", "h-[24rem]", "w-[24rem]"], ["diameter", "32"]],
+    consts: [["load_state", ""], [1, "h-16", "flex", "items-center", "justify-between", "px-4"], [1, "text-xl", "font-medium"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 4, "ngIf"], [4, "ngIf", "ngIfElse"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "relative", "flex", "flex-col", "items-center", "justify-center", "space-y-2", "h-[24rem]", "w-[24rem]", "border-4", "border-base-200", "border-dashed", "rounded-xl", "hover:bg-base-200", "m-4", "p-4", "cursor-pointer"], [1, "text-4xl"], ["type", "file", 1, "absolute", "inset-0", "opacity-0", 3, "change"], [1, "flex", "items-center", "justify-center", "px-4", "pb-4"], ["matRipple", "", 1, "clear", "underline", "w-48", 3, "click"], [1, "flex", "flex-col", "items-center", "justify-center", "space-y-2", "p-8", "h-[24rem]", "w-[24rem]"], ["diameter", "32"]],
     template: function CateringImportMenuModalComponent_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "header", 1)(1, "h2");
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "header", 1)(1, "h2", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](2, "Import Catering Menu");
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](3, CateringImportMenuModalComponent_button_3_Template, 3, 0, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](3, CateringImportMenuModalComponent_button_3_Template, 3, 0, "button", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](4, CateringImportMenuModalComponent_main_4_Template, 10, 0, "main", 3)(5, CateringImportMenuModalComponent_ng_template_5_Template, 4, 1, "ng-template", null, 0, _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplateRefExtractor"]);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](4, CateringImportMenuModalComponent_main_4_Template, 10, 0, "main", 4)(5, CateringImportMenuModalComponent_ng_template_5_Template, 4, 1, "ng-template", null, 0, _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplateRefExtractor"]);
       }
       if (rf & 2) {
         const load_state_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵreference"](6);
@@ -986,7 +986,7 @@ class CateringMenuComponent {
     this._orders = _orders;
     this.show_children = {};
     /** Observable for the currently active menu */
-    this.menu = (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.combineLatest)([this._catering.menu, this._orders.order_filters]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.map)(([menu, filters]) => menu.filter(item => !filters?.caterer || item.caterer === filters.caterer)));
+    this.menu = (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.combineLatest)([this._catering.menu, this._orders.order_filters]).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.map)(([menu, filters]) => menu.filter(item => !filters?.caterer || filters.caterer === '<empty>' && !item.caterer || item.caterer === filters.caterer)));
     this.addOption = item => this._catering.addOption(item);
     this.editOption = (item, option) => this._catering.addOption(item, option);
     this.removeOption = (item, option) => this._catering.deleteOption(item, option);
@@ -2534,7 +2534,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function checkOrder(order, filters) {
   const s = (filters.search || '').toLowerCase();
-  return !!order.items.find(item => item.name.toLowerCase().includes(s) || !!item.options.find(option => option.name.toLowerCase().includes(s)));
+  return !!order.items.find(item => (!filters?.caterer || filters.caterer === '<empty>' && !item.caterer || item.caterer === filters.caterer) && (item.name.toLowerCase().includes(s) || !!item.options.find(option => option.name.toLowerCase().includes(s))));
 }
 class CateringOrdersService extends _placeos_common__WEBPACK_IMPORTED_MODULE_1__.AsyncHandler {
   /** Order filters */

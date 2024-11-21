@@ -2342,7 +2342,7 @@ function ExploreSensorInfoComponent_ng_template_3_div_1_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"]("", ctx_r0.temp, "\u02DAF");
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate2"]("", ctx_r0.temp, "\u02DA", ctx_r0.temp_unit, "");
   }
 }
 function ExploreSensorInfoComponent_ng_template_3_div_2_Template(rf, ctx) {
@@ -2370,7 +2370,7 @@ function ExploreSensorInfoComponent_ng_template_3_div_3_Template(rf, ctx) {
 function ExploreSensorInfoComponent_ng_template_3_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](1, ExploreSensorInfoComponent_ng_template_3_div_1_Template, 5, 1, "div", 3)(2, ExploreSensorInfoComponent_ng_template_3_div_2_Template, 5, 1, "div", 3)(3, ExploreSensorInfoComponent_ng_template_3_div_3_Template, 3, 0, "div", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](1, ExploreSensorInfoComponent_ng_template_3_div_1_Template, 5, 2, "div", 3)(2, ExploreSensorInfoComponent_ng_template_3_div_2_Template, 5, 1, "div", 3)(3, ExploreSensorInfoComponent_ng_template_3_div_3_Template, 3, 0, "div", 4);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
   }
   if (rf & 2) {
@@ -2395,6 +2395,7 @@ class ExploreSensorInfoComponent extends _placeos_common__WEBPACK_IMPORTED_MODUL
     super();
     this._details = _details;
     this.temp = this._details.temp || 0;
+    this.temp_unit = this._details.temp_unit || 'C';
     this.humidity = this._details.humidity || 0;
   }
   static #_ = this.ɵfac = function ExploreSensorInfoComponent_Factory(__ngFactoryType__) {
@@ -2578,6 +2579,7 @@ class ExploreZonesService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.A
           data: {
             id,
             temp: zone.temperature || 10,
+            temp_unit: this._settings.get('app.use_imperial_units') ? 'F' : 'C',
             humidity: zone.humidity || 10
           },
           z_index: 98

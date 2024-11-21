@@ -100,9 +100,9 @@ function CateringTopbarComponent_mat_form_field_10_mat_option_4_Template(rf, ctx
   }
   if (rf & 2) {
     const caterer_r4 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("value", caterer_r4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("value", caterer_r4 || "<empty>");
     _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtextInterpolate1"](" ", caterer_r4, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtextInterpolate1"](" ", caterer_r4 || "[No Caterer]", " ");
   }
 }
 function CateringTopbarComponent_mat_form_field_10_Template(rf, ctx) {
