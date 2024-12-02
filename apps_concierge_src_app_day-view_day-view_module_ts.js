@@ -1301,7 +1301,7 @@ function EventFormComponent_form_0_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtemplate"](19, EventFormComponent_form_0_div_19_Template, 15, 6, "div", 11);
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementStart"](20, "div", 12)(21, "label", 13);
-    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtext"](22, "Host");
+    _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtext"](22, "Handler");
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementStart"](23, "span");
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵtext"](24, "*");
     _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵelementEnd"]();
