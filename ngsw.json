@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1733105588419,
+  "timestamp": 1733139689841,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -16,9 +16,7 @@
         "./main.js",
         "./manifest.webmanifest",
         "./polyfills.js",
-        "./runtime.js",
-        "./styles.css",
-        "./vendor.js"
+        "./styles.css"
       ],
       "patterns": []
     },
@@ -102,15 +100,7 @@
         "./assets/support/edge-logo.svg",
         "./assets/support/firefox-logo.svg",
         "./assets/support/opera-logo.svg",
-        "./assets/support/safari-logo.svg",
-        "./material-icons-outlined.woff2",
-        "./material-icons-round.woff2",
-        "./material-icons-sharp.woff2",
-        "./material-icons-two-tone.woff2",
-        "./material-icons.woff2",
-        "./material-symbols-outlined.woff2",
-        "./material-symbols-rounded.woff2",
-        "./material-symbols-sharp.woff2"
+        "./assets/support/safari-logo.svg"
       ],
       "patterns": []
     }
@@ -191,21 +181,11 @@
     "./assets/support/opera-logo.svg": "23f8e25409598ac843eefe81ea3c09b4f460844d",
     "./assets/support/safari-logo.svg": "1c510b0c330f84f6662351e4a0abd7fb8af2f678",
     "./favicon.ico": "5d8cf2b09be186513f3621f4c03d98eea93822ba",
-    "./index.html": "54764a2c063ef6b78fc642bf78c471d4f6031f37",
-    "./main.js": "4b227cc2e7b624be0335129885835a932ac3497a",
+    "./index.html": "95512c28b90a7fa70044ffaf6787d90b4b73c350",
+    "./main.js": "674bf256aa27e0991a56e39786fc453b27a841a1",
     "./manifest.webmanifest": "b77d510a22ab8c2bbb2bd38f11b3b266666784f3",
-    "./material-icons-outlined.woff2": "2f9e28ab559782402f27332633c843c40209d95a",
-    "./material-icons-round.woff2": "abe05e0641f1050fbe00ef0dbb10c5ea72c26cff",
-    "./material-icons-sharp.woff2": "cf1c7b4d066d18af44cf7bc664dd2e46652a3a30",
-    "./material-icons-two-tone.woff2": "296ff0bff395a77c2e33e7e31fffe73980bd93cf",
-    "./material-icons.woff2": "0bc0c675480d94ec7e8609dda6227f88c5d08d2c",
-    "./material-symbols-outlined.woff2": "8eabd6dbf6426bf2cb725b3d0c68ec5ce0c55227",
-    "./material-symbols-rounded.woff2": "1b5557d408be7a0280f189251a25719a114dfb5e",
-    "./material-symbols-sharp.woff2": "3ca7850e8f453acc7afc0a9f3afa7c83140d3608",
-    "./polyfills.js": "005c09c7b6004549c0bbfa5dd8eec3a978b6b683",
-    "./runtime.js": "e3b1aa4f01d03a28fac24fc707eb3214d4f067b7",
-    "./styles.css": "ad164c3ab2ffad219e5f78935d5bcd3e5ca5d224",
-    "./vendor.js": "227fea7628b93b29f316bdaf9a030b7d28f25ae6"
+    "./polyfills.js": "5aa689e5fc641a87b69e63bf1517624883734854",
+    "./styles.css": "ecc70bb5f03ef7bb707db506248489225e620c4f"
   },
   "navigationUrls": [
     {
