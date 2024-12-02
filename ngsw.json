@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1733105512049,
+  "timestamp": 1733139696541,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -15,9 +15,7 @@
         "./index.html",
         "./main.js",
         "./polyfills.js",
-        "./runtime.js",
-        "./styles.css",
-        "./vendor.js"
+        "./styles.css"
       ],
       "patterns": []
     },
@@ -103,15 +101,7 @@
         "./assets/yolov8x_web_model/group1-shard3of4.bin",
         "./assets/yolov8x_web_model/group1-shard4of4.bin",
         "./assets/yolov8x_web_model/metadata.yaml",
-        "./assets/yolov8x_web_model/model.json",
-        "./material-icons-outlined.woff2",
-        "./material-icons-round.woff2",
-        "./material-icons-sharp.woff2",
-        "./material-icons-two-tone.woff2",
-        "./material-icons.woff2",
-        "./material-symbols-outlined.woff2",
-        "./material-symbols-rounded.woff2",
-        "./material-symbols-sharp.woff2"
+        "./assets/yolov8x_web_model/model.json"
       ],
       "patterns": []
     }
@@ -194,20 +184,10 @@
     "./assets/yolov8x_web_model/metadata.yaml": "b1a29dc18ee0c4b5f0f7240d2d92cd8b2fa03318",
     "./assets/yolov8x_web_model/model.json": "51607c6c0f465d41cdca4d65a17cfbf9c9f99c62",
     "./favicon.ico": "4e23d0f9b6ddaf3c9ddef90dbaed2342941297b5",
-    "./index.html": "131ec0eeec9712f3fa657ab3298acdae0bb8680c",
-    "./main.js": "e86e4c7a172fef6981452f20834c85981da67786",
-    "./material-icons-outlined.woff2": "2f9e28ab559782402f27332633c843c40209d95a",
-    "./material-icons-round.woff2": "abe05e0641f1050fbe00ef0dbb10c5ea72c26cff",
-    "./material-icons-sharp.woff2": "cf1c7b4d066d18af44cf7bc664dd2e46652a3a30",
-    "./material-icons-two-tone.woff2": "296ff0bff395a77c2e33e7e31fffe73980bd93cf",
-    "./material-icons.woff2": "0bc0c675480d94ec7e8609dda6227f88c5d08d2c",
-    "./material-symbols-outlined.woff2": "8eabd6dbf6426bf2cb725b3d0c68ec5ce0c55227",
-    "./material-symbols-rounded.woff2": "1b5557d408be7a0280f189251a25719a114dfb5e",
-    "./material-symbols-sharp.woff2": "3ca7850e8f453acc7afc0a9f3afa7c83140d3608",
-    "./polyfills.js": "06e9419886fac603bcca18d68d709011bc78a2a8",
-    "./runtime.js": "db6ac17ef18c13a8a1f306a4219df0f6018bf41e",
-    "./styles.css": "e75dc5333ae4545eb829e9365875879d0d6ef16d",
-    "./vendor.js": "5eba5815931a6ffd3d44ab4cfa7709dfeeb2e7c7"
+    "./index.html": "35fc7a4560b6ee2320a43e6d76d65f670cc74786",
+    "./main.js": "0e099eb22d96c706f264b20b753dc3ec10672cd9",
+    "./polyfills.js": "5aa689e5fc641a87b69e63bf1517624883734854",
+    "./styles.css": "13462c0294ced488db2e5cf631ccd15852c4fa5a"
   },
   "navigationUrls": [
     {
