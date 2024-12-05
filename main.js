@@ -32947,15 +32947,15 @@ exports.VERSION = void 0;
 /* tslint:disable */
 exports.VERSION = {
   "dirty": false,
-  "raw": "f6e2470",
-  "hash": "f6e2470",
+  "raw": "d5f7661",
+  "hash": "d5f7661",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "f6e2470",
+  "suffix": "d5f7661",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733229284846
+  "time": 1733379450194
 };
 /* tslint:enable */
 
@@ -46766,8 +46766,8 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
       var ignore_owner = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
       return new Promise( /*#__PURE__*/function () {
         var _ref18 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(resolve, reject) {
-          var _this7$event, _form$get, _form$get2, _form$get3, _ref19, _ref20, _spaces$, _this7$event2, _this7$event3, _this7$event4, _value$organiser, _ref21, _value$organiser2, _ref22, _ref23, _event$extension_data2, _result$extension_dat, _result$extension_dat2;
-          var form, event, ical_uid, value, _value, id, host, date, duration, creator, all_day, assets, recurrence, spaces, catering, changed_times, changed_spaces, is_owner, space, attendees, message, space_id, query, receipt, d, _iterator2, _step2, order, setup, breakdown, _iterator3, _step3, _space, overflow, processed_assets, result, domain, visitors, creating_assets, on_error, _spaces$2, _spaces$3, _spaces$4, _this7$_org$region, _this7$_org$building, _spaces$5, requests;
+          var _this7$event, _form$get, _form$get2, _form$get3, _ref19, _ref20, _ref21, _spaces$, _this7$event2, _this7$event3, _this7$event4, _value$organiser, _ref22, _value$organiser2, _ref23, _ref24, _event$extension_data2, _result$extension_dat, _result$extension_dat2;
+          var form, event, ical_uid, value, _value, id, host, date, duration, creator, all_day, assets, recurrence, spaces, catering, changed_times, changed_spaces, is_host, is_owner, space, attendees, message, space_id, query, receipt, d, _iterator2, _step2, order, setup, breakdown, _iterator3, _step3, _space, overflow, processed_assets, result, domain, visitors, creating_assets, on_error, _spaces$2, _spaces$3, _spaces$4, _this7$_org$region, _this7$_org$building, _spaces$5, requests;
           return _regeneratorRuntime().wrap(function _callee3$(_context3) {
             while (1) switch (_context3.prev = _context3.next) {
               case 0:
@@ -46818,38 +46818,43 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                 });
               case 20:
                 spaces = ((_form$get3 = form.get('resources')) === null || _form$get3 === void 0 ? void 0 : _form$get3.value) || [];
-                is_owner = host === ((_ref19 = (0, common_1.currentUser)()) === null || _ref19 === void 0 ? void 0 : _ref19.email) || creator === ((_ref20 = (0, common_1.currentUser)()) === null || _ref20 === void 0 ? void 0 : _ref20.email);
+                is_host = host === ((_ref19 = (0, common_1.currentUser)()) === null || _ref19 === void 0 ? void 0 : _ref19.email);
+                is_owner = host === ((_ref20 = (0, common_1.currentUser)()) === null || _ref20 === void 0 ? void 0 : _ref20.email) || creator === ((_ref21 = (0, common_1.currentUser)()) === null || _ref21 === void 0 ? void 0 : _ref21.email);
                 if (!(!spaces.length && _this7._settings.get('app.events.no_space_resource'))) {
-                  _context3.next = 27;
+                  _context3.next = 28;
                   break;
                 }
-                _context3.next = 25;
+                _context3.next = 26;
                 return _this7._space_pipe.transform(_this7._settings.get('app.events.no_space_resource'));
-              case 25:
+              case 26:
                 space = _context3.sent;
                 spaces.push(space);
-              case 27:
+              case 28:
                 attendees = (0, common_1.unique)([].concat(_toConsumableArray(value.attendees), [value.organiser || (0, common_1.currentUser)()]), 'email');
                 if (!(!spaces.length && attendees.find(function (_) {
                   return _.is_external;
                 }))) {
-                  _context3.next = 33;
+                  _context3.next = 34;
                   break;
                 }
                 _this7._loading.next('');
                 message = 'External attendees require a space to be booked';
                 reject(message);
                 throw message;
-              case 33:
+              case 34:
                 space_id = (_spaces$ = spaces[0]) === null || _spaces$ === void 0 ? void 0 : _spaces$.id;
                 query = id ? {
                   system_id: ((_this7$event2 = _this7.event) === null || _this7$event2 === void 0 || (_this7$event2 = _this7$event2.resources[0]) === null || _this7$event2 === void 0 ? void 0 : _this7$event2.id) || ((_this7$event3 = _this7.event) === null || _this7$event3 === void 0 || (_this7$event3 = _this7$event3.system) === null || _this7$event3 === void 0 ? void 0 : _this7$event3.id) || space_id
-                } : {}; // if (is_owner && !ignore_owner) query.calendar = host || creator;
+                } : {};
+                if (is_owner && !ignore_owner) {
+                  // query.calendar = host || creator;
+                }
+                if (is_host && 'system_id' in query) delete query.system_id;
                 if (!(_this7._payments.payment_module && spaces.length)) {
-                  _context3.next = 42;
+                  _context3.next = 45;
                   break;
                 }
-                _context3.next = 38;
+                _context3.next = 41;
                 return _this7._payments.makePayment({
                   type: 'space',
                   resource_name: spaces[0].display_name || spaces[0].name,
@@ -46857,19 +46862,19 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                   duration: duration,
                   all_day: all_day
                 });
-              case 38:
+              case 41:
                 receipt = _context3.sent;
                 if (receipt !== null && receipt !== void 0 && receipt.success) {
-                  _context3.next = 41;
+                  _context3.next = 44;
                   break;
                 }
                 return _context3.abrupt("return", _this7._loading.next(''));
-              case 41:
+              case 44:
                 value.extension_data = {
                   invoice: receipt,
                   invoice_id: receipt.invoice_id
                 };
-              case 42:
+              case 45:
                 d = value.date;
                 _iterator2 = _createForOfIteratorHelper(catering);
                 try {
@@ -46910,7 +46915,7 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                 processed_assets = (assets || []).map(function (_) {
                   return new asset_request_class_1.AssetRequest(_).toJSON();
                 });
-                _context3.next = 49;
+                _context3.next = 52;
                 return _this7._makeBooking(new event_class_1.CalendarEvent(_objectSpread(_objectSpread({}, value), {}, {
                   old_system: (_this7$event4 = _this7.event) === null || _this7$event4 === void 0 ? void 0 : _this7$event4.system,
                   host: _this7._settings.get('app.events.force_host') || (_this7._settings.get('app.events.room_as_host') ? value.resources[0].email : '') || value.host,
@@ -46925,25 +46930,25 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                   assets: processed_assets,
                   extension_data: _this7._settings.get('app.events.force_host') || _this7._settings.get('app.events.room_as_host') ? {
                     host_override: value.host,
-                    department: ((_value$organiser = value.organiser) === null || _value$organiser === void 0 ? void 0 : _value$organiser.department) || ((_ref21 = (0, common_1.currentUser)()) === null || _ref21 === void 0 ? void 0 : _ref21.department)
+                    department: ((_value$organiser = value.organiser) === null || _value$organiser === void 0 ? void 0 : _value$organiser.department) || ((_ref22 = (0, common_1.currentUser)()) === null || _ref22 === void 0 ? void 0 : _ref22.department)
                   } : {
-                    department: ((_value$organiser2 = value.organiser) === null || _value$organiser2 === void 0 ? void 0 : _value$organiser2.department) || ((_ref22 = (0, common_1.currentUser)()) === null || _ref22 === void 0 ? void 0 : _ref22.department)
+                    department: ((_value$organiser2 = value.organiser) === null || _value$organiser2 === void 0 ? void 0 : _value$organiser2.department) || ((_ref23 = (0, common_1.currentUser)()) === null || _ref23 === void 0 ? void 0 : _ref23.department)
                   }
                 })), query)["catch"](function (e) {
                   reject(e);
                   _this7._loading.next('');
                   throw e;
                 });
-              case 49:
+              case 52:
                 result = _context3.sent;
-                domain = (((_ref23 = (0, common_1.currentUser)()) === null || _ref23 === void 0 ? void 0 : _ref23.email) || '@').split('@')[1];
+                domain = (((_ref24 = (0, common_1.currentUser)()) === null || _ref24 === void 0 ? void 0 : _ref24.email) || '@').split('@')[1];
                 visitors = attendees.filter(function (user) {
                   return user.is_external && user.email !== event.host && !user.email.includes(domain) && user.visit_expected;
                 });
                 creating_assets = false;
                 on_error = /*#__PURE__*/function () {
-                  var _ref24 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
-                    var _ref25;
+                  var _ref25 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
+                    var _ref26;
                     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
                       while (1) switch (_context2.prev = _context2.next) {
                         case 0:
@@ -46953,7 +46958,7 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                           }
                           _context2.next = 3;
                           return (0, events_fn_2.removeEvent)(result.id, spaces.length ? {
-                            calendar: _this7.form.value.host || ((_ref25 = (0, common_1.currentUser)()) === null || _ref25 === void 0 ? void 0 : _ref25.email),
+                            calendar: _this7.form.value.host || ((_ref26 = (0, common_1.currentUser)()) === null || _ref26 === void 0 ? void 0 : _ref26.email),
                             system_id: spaces[0].id
                           } : {}).toPromise();
                         case 3:
@@ -46980,22 +46985,22 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                     }, _callee2);
                   }));
                   return function on_error(_x3) {
-                    return _ref24.apply(this, arguments);
+                    return _ref25.apply(this, arguments);
                   };
                 }();
                 if (!visitors.length) {
-                  _context3.next = 57;
+                  _context3.next = 60;
                   break;
                 }
-                _context3.next = 57;
+                _context3.next = 60;
                 return (0, bookings_fn_1.createBookingsForEvent)(result, 'visitor', visitors)["catch"](on_error);
-              case 57:
+              case 60:
                 if (!(assets !== null && assets !== void 0 && assets.length || (_event$extension_data2 = event.extension_data.assets) !== null && _event$extension_data2 !== void 0 && _event$extension_data2.length)) {
-                  _context3.next = 67;
+                  _context3.next = 70;
                   break;
                 }
                 creating_assets = true;
-                _context3.next = 61;
+                _context3.next = 64;
                 return (0, assets_fn_1.validateAssetRequestsForResource)(result, {
                   date: date,
                   duration: duration,
@@ -47008,19 +47013,19 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                   }),
                   reset_state: changed_times
                 }, assets, changed_spaces || changed_times)["catch"](on_error);
-              case 61:
+              case 64:
                 requests = _context3.sent;
                 if (requests) {
-                  _context3.next = 64;
+                  _context3.next = 67;
                   break;
                 }
                 throw 'Unable to validate asset requests';
-              case 64:
-                _context3.next = 66;
-                return requests();
-              case 66:
-                creating_assets = false;
               case 67:
+                _context3.next = 69;
+                return requests();
+              case 69:
+                creating_assets = false;
+              case 70:
                 _this7.clearForm();
                 _this7.last_success = result;
                 sessionStorage.setItem('PLACEOS.last_booked_event', JSON.stringify(result));
@@ -47032,7 +47037,7 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                 _this7._saveEntity([(_result$extension_dat = result.extension_data) === null || _result$extension_dat === void 0 ? void 0 : _result$extension_dat.host_entity]);
                 _this7._saveEntity([(_result$extension_dat2 = result.extension_data) === null || _result$extension_dat2 === void 0 ? void 0 : _result$extension_dat2.visitor_entity], 'visitor');
                 _this7._loading.next('');
-              case 76:
+              case 79:
               case "end":
                 return _context3.stop();
             }
@@ -47095,8 +47100,8 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                 break;
               }
               _context5.next = 5;
-              return (0, events_fn_1.querySpaceAvailability)(spaces.map(function (_ref26) {
-                var id = _ref26.id;
+              return (0, events_fn_1.querySpaceAvailability)(spaces.map(function (_ref27) {
+                var id = _ref27.id;
                 return id;
               }), date, duration, (this === null || this === void 0 || (_this$event5 = this.event) === null || _this$event5 === void 0 || (_this$event5 = _this$event5.resources[0]) === null || _this$event5 === void 0 ? void 0 : _this$event5.id) || ((_this$event6 = this.event) === null || _this$event6 === void 0 || (_this$event6 = _this$event6.system) === null || _this$event6 === void 0 ? void 0 : _this$event6.id) || ((_this$event7 = this.event) === null || _this$event7 === void 0 ? void 0 : _this$event7.id) || undefined, undefined, [(_this$event8 = this.event) === null || _this$event8 === void 0 ? void 0 : _this$event8.date, (_this$event9 = this.event) === null || _this$event9 === void 0 ? void 0 : _this$event9.duration]).toPromise();
             case 5:
