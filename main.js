@@ -24885,15 +24885,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "d5f7661",
-  "hash": "d5f7661",
+  "raw": "ff53777",
+  "hash": "ff53777",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "d5f7661",
+  "suffix": "ff53777",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733379447750
+  "time": 1733380246297
 };
 /* tslint:enable */
 
@@ -37061,7 +37061,7 @@ class EventFormService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.Asyn
           };
         }();
         if (visitors.length) {
-          yield (0,libs_bookings_src_lib_bookings_fn__WEBPACK_IMPORTED_MODULE_5__.createBookingsForEvent)(result, 'visitor', visitors).catch(on_error);
+          yield (0,libs_bookings_src_lib_bookings_fn__WEBPACK_IMPORTED_MODULE_5__.createBookingsForEvent)(result, 'visitor', visitors).catch(() => null);
         }
         if (assets?.length || event.extension_data.assets?.length) {
           creating_assets = true;
