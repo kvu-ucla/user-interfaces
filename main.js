@@ -19671,15 +19671,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "2b30f47",
-  "hash": "2b30f47",
+  "raw": "d5f7661",
+  "hash": "d5f7661",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "2b30f47",
+  "suffix": "d5f7661",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733221414772
+  "time": 1733379476606
 };
 /* tslint:enable */
 
@@ -31738,6 +31738,7 @@ class EventFormService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.Asyn
           });
         }
         spaces = form.get('resources')?.value || [];
+        const is_host = host === (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.currentUser)()?.email;
         const is_owner = host === (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.currentUser)()?.email || creator === (0,_placeos_common__WEBPACK_IMPORTED_MODULE_2__.currentUser)()?.email;
         if (!spaces.length && _this2._settings.get('app.events.no_space_resource')) {
           const space = yield _this2._space_pipe.transform(_this2._settings.get('app.events.no_space_resource'));
@@ -31754,7 +31755,10 @@ class EventFormService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.Asyn
         const query = id ? {
           system_id: _this2.event?.resources[0]?.id || _this2.event?.system?.id || space_id
         } : {};
-        // if (is_owner && !ignore_owner) query.calendar = host || creator;
+        if (is_owner && !ignore_owner) {
+          // query.calendar = host || creator;
+        }
+        if (is_host && 'system_id' in query) delete query.system_id;
         if (_this2._payments.payment_module && spaces.length) {
           const receipt = yield _this2._payments.makePayment({
             type: 'space',
