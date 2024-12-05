@@ -21401,15 +21401,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "34be687",
-  "hash": "34be687",
+  "raw": "d7278c9",
+  "hash": "d7278c9",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "34be687",
+  "suffix": "d7278c9",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733381915353
+  "time": 1733383528249
 };
 /* tslint:enable */
 
@@ -33487,8 +33487,8 @@ class EventFormService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.Asyn
         } : {};
         if (is_owner && !ignore_owner) {
           query.calendar = host || creator;
+          delete query.system_id;
         }
-        if (is_host && 'system_id' in query) delete query.system_id;
         if (_this2._payments.payment_module && spaces.length) {
           const receipt = yield _this2._payments.makePayment({
             type: 'space',
