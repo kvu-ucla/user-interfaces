@@ -24885,15 +24885,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "ff53777",
-  "hash": "ff53777",
+  "raw": "34be687",
+  "hash": "34be687",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "ff53777",
+  "suffix": "34be687",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733380246297
+  "time": 1733381920837
 };
 /* tslint:enable */
 
@@ -36970,7 +36970,7 @@ class EventFormService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.Asyn
           system_id: _this2.event?.resources[0]?.id || _this2.event?.system?.id || space_id
         } : {};
         if (is_owner && !ignore_owner) {
-          // query.calendar = host || creator;
+          query.calendar = host || creator;
         }
         if (is_host && 'system_id' in query) delete query.system_id;
         if (_this2._payments.payment_module && spaces.length) {
