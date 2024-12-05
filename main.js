@@ -32947,15 +32947,15 @@ exports.VERSION = void 0;
 /* tslint:disable */
 exports.VERSION = {
   "dirty": false,
-  "raw": "ff53777",
-  "hash": "ff53777",
+  "raw": "34be687",
+  "hash": "34be687",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "ff53777",
+  "suffix": "34be687",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733380243042
+  "time": 1733381921245
 };
 /* tslint:enable */
 
@@ -46847,7 +46847,7 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                   system_id: ((_this7$event2 = _this7.event) === null || _this7$event2 === void 0 || (_this7$event2 = _this7$event2.resources[0]) === null || _this7$event2 === void 0 ? void 0 : _this7$event2.id) || ((_this7$event3 = _this7.event) === null || _this7$event3 === void 0 || (_this7$event3 = _this7$event3.system) === null || _this7$event3 === void 0 ? void 0 : _this7$event3.id) || space_id
                 } : {};
                 if (is_owner && !ignore_owner) {
-                  // query.calendar = host || creator;
+                  query.calendar = host || creator;
                 }
                 if (is_host && 'system_id' in query) delete query.system_id;
                 if (!(_this7._payments.payment_module && spaces.length)) {
