@@ -32947,15 +32947,15 @@ exports.VERSION = void 0;
 /* tslint:disable */
 exports.VERSION = {
   "dirty": false,
-  "raw": "d5f7661",
-  "hash": "d5f7661",
+  "raw": "ff53777",
+  "hash": "ff53777",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "d5f7661",
+  "suffix": "ff53777",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733379450194
+  "time": 1733380243042
 };
 /* tslint:enable */
 
@@ -46993,7 +46993,9 @@ var EventFormService = /*#__PURE__*/function (_common_1$AsyncHandle) {
                   break;
                 }
                 _context3.next = 60;
-                return (0, bookings_fn_1.createBookingsForEvent)(result, 'visitor', visitors)["catch"](on_error);
+                return (0, bookings_fn_1.createBookingsForEvent)(result, 'visitor', visitors)["catch"](function () {
+                  return null;
+                });
               case 60:
                 if (!(assets !== null && assets !== void 0 && assets.length || (_event$extension_data2 = event.extension_data.assets) !== null && _event$extension_data2 !== void 0 && _event$extension_data2.length)) {
                   _context3.next = 70;
