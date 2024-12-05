@@ -780,7 +780,7 @@ class EventBookModalComponent extends _placeos_common__WEBPACK_IMPORTED_MODULE_1
     var _this2 = this;
     return (0,_home_runner_work_user_interfaces_user_interfaces_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this2.loading.next(true);
-      const event = yield _this2._event_form.postForm().catch(_ => {
+      const event = yield _this2._event_form.postForm(undefined, undefined, true).catch(_ => {
         (0,_placeos_common__WEBPACK_IMPORTED_MODULE_1__.notifyError)(_);
         _this2.loading.next(false);
         throw _;
@@ -14029,15 +14029,15 @@ __webpack_require__.r(__webpack_exports__);
 /* tslint:disable */
 const VERSION = {
   "dirty": false,
-  "raw": "ff53777",
-  "hash": "ff53777",
+  "raw": "34be687",
+  "hash": "34be687",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "ff53777",
+  "suffix": "34be687",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733380251307
+  "time": 1733381916518
 };
 /* tslint:enable */
 
@@ -26114,7 +26114,7 @@ class EventFormService extends _placeos_common__WEBPACK_IMPORTED_MODULE_2__.Asyn
           system_id: _this2.event?.resources[0]?.id || _this2.event?.system?.id || space_id
         } : {};
         if (is_owner && !ignore_owner) {
-          // query.calendar = host || creator;
+          query.calendar = host || creator;
         }
         if (is_host && 'system_id' in query) delete query.system_id;
         if (_this2._payments.payment_module && spaces.length) {
