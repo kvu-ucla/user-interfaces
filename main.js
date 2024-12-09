@@ -78882,15 +78882,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "2fac4c4",
-  "hash": "2fac4c4",
+  "raw": "ebb6596",
+  "hash": "ebb6596",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "2fac4c4",
+  "suffix": "ebb6596",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733730739592
+  "time": 1733731637995
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -124206,10 +124206,13 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     this.last_success = new CalendarEvent(JSON.parse(sessionStorage.getItem("PLACEOS.last_booked_event") || "{}"));
     this.loading = this._loading.asObservable();
     this.options = this._options.asObservable();
-    this.booking_rules = this._org.building_list.pipe(switchMap((list2) => Promise.all(list2.map((bld) => showMetadata(bld.id, "room_booking_rules").toPromise()))), map((building_rules) => {
+    this.booking_rules = this._org.building_list.pipe(switchMap((list2) => Promise.all(list2.map((bld) => showMetadata(bld.id, "room_booking_rules").pipe(catchError(() => of({ details: [] })), map((_3) => ({
+      id: bld.id,
+      details: _3.details instanceof Array ? _3.details : []
+    }))).toPromise()))), map((building_rules) => {
       const mapping = {};
       for (const rules of building_rules) {
-        mapping[rules.id] = rules.details instanceof Array ? rules.details : [];
+        mapping[rules.id] = rules.details;
       }
       return mapping;
     }), shareReplay(1));
@@ -124263,8 +124266,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
       this.booking_rules,
       merge(this.form.valueChanges, timer(1e3)),
       this._changed
-    ]).pipe(debounceTime(300), map(([list2, bookings, booking_rules]) => {
-      console.log("Current Space Availability");
+    ]).pipe(tap(() => console.log("Current Space Availability")), debounceTime(300), map(([list2, bookings, booking_rules]) => {
       this._loading.next("Updating available spaces...");
       let { ical_uid, date, duration, all_day } = this._form.getRawValue();
       list2 = filterResourcesFromRules(list2, { date, duration, resource: null, host: currentUser2() }, booking_rules[this._org.building?.id] || []);
@@ -124282,8 +124284,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
       this.filtered_spaces,
       this.booking_rules,
       this.form.valueChanges.pipe(debounceTime(400), startWith({}))
-    ]).pipe(filter(() => !this._loading.getValue()), debounceTime(500), switchMap(([spaces, booking_rules]) => {
-      console.log("Future Space Availability");
+    ]).pipe(tap(() => console.log("Future Space Availability")), filter(() => !this._loading.getValue()), debounceTime(500), switchMap(([spaces, booking_rules]) => {
       if (!spaces.length)
         return of([]);
       this._loading.next("Retrieving available spaces...");
@@ -124304,7 +124305,6 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     this.available_spaces = this._date.pipe(switchMap((d3) => {
       const diff = Math.abs(differenceInDays(d3, Date.now()));
       const cache_length = this._settings.get("app.events.cache_duration_in_days") ?? 14;
-      console.log("Available spaces:", diff, cache_length, this._loading.getValue());
       return diff < cache_length ? this.current_available_spaces : this.future_available_spaces;
     }), shareReplay(1));
     this.cancelPostForm = () => this.unsub("post-event-form");
