@@ -252,7 +252,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-KX5NAKJL.js";
+} from "./chunk-OD5TQAAQ.js";
 import {
   __async,
   __spreadProps,
@@ -13836,4 +13836,4 @@ var BookModule = _BookModule;
 export {
   BookModule
 };
-//# sourceMappingURL=book.module-TUY6JKGU.js.map
+//# sourceMappingURL=book.module-4AWXPCPE.js.map
