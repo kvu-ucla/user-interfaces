@@ -78,7 +78,7 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-M3SCZXIH.js";
+} from "./chunk-Y2PTFUPQ.js";
 import {
   __async,
   __spreadValues
@@ -531,4 +531,4 @@ var GroupEventsModule = _GroupEventsModule;
 export {
   GroupEventsModule
 };
-//# sourceMappingURL=group-events.module-Q6A2NU4C.js.map
+//# sourceMappingURL=group-events.module-HXBAI34L.js.map

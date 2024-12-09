@@ -61,7 +61,7 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-M3SCZXIH.js";
+} from "./chunk-Y2PTFUPQ.js";
 import "./chunk-4MWRP73S.js";
 
 // apps/workplace/src/app/directory/user-details.component.ts
@@ -342,4 +342,4 @@ var DirectoryModule = _DirectoryModule;
 export {
   DirectoryModule
 };
-//# sourceMappingURL=directory.module-R66BLYBG.js.map
+//# sourceMappingURL=directory.module-AO7IF2BA.js.map
