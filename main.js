@@ -98834,15 +98834,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "ebb6596",
-  "hash": "ebb6596",
+  "raw": "132fa22",
+  "hash": "132fa22",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "ebb6596",
+  "suffix": "132fa22",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733731689330
+  "time": 1733732536399
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -143237,7 +143237,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     }), shareReplay(1));
     this.spaces = combineLatest([
       this._options.pipe(distinctUntilKeyChanged("zone_ids")),
-      this._org.active_region.pipe(filter((_3) => !!_3), distinctUntilKeyChanged("id")),
+      this._org.active_region.pipe(distinctUntilKeyChanged("id")),
       this._org.active_building.pipe(filter((_3) => !!_3), distinctUntilKeyChanged("id"))
     ]).pipe(debounceTime(300), tap((_3) => this.unsubWith("bind:")), switchMap(([{ zone_ids }]) => {
       console.log("Load Spaces:", zone_ids);
