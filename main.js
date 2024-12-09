@@ -102316,15 +102316,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "0131a4c",
-  "hash": "0131a4c",
+  "raw": "bf32375",
+  "hash": "bf32375",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "0131a4c",
+  "suffix": "bf32375",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733647720020
+  "time": 1733726416220
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -212741,6 +212741,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
       const limit_map = this._settings.get("app.events.limit_spaces") || {};
       const limited_zones = Object.keys(limit_map);
       const zone_limit = s2.zones.find((_3) => limited_zones.includes(_3));
+      console.log("Space:", s2.display_name || s2.name, s2.bookable && (!zone || s2.zones.includes(zone)) && (!zone_limit || limit_map[zone_limit] === domain) && (!show_fav || this.favorite_spaces.includes(s2.id)) && features.every((f3) => s2.features.includes(f3)) && s2.capacity >= Math.max(0, capacity || 0));
       return s2.bookable && (!zone || s2.zones.includes(zone)) && (!zone_limit || limit_map[zone_limit] === domain) && (!show_fav || this.favorite_spaces.includes(s2.id)) && features.every((f3) => s2.features.includes(f3)) && s2.capacity >= Math.max(0, capacity || 0);
     }).slice(0, Math.min(100, spaces.length))), shareReplay(1));
     this._space_bookings = combineLatest([
