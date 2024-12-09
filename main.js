@@ -98834,15 +98834,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "cbe8087",
-  "hash": "cbe8087",
+  "raw": "cfdcfb5",
+  "hash": "cfdcfb5",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "cbe8087",
+  "suffix": "cfdcfb5",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733729403842
+  "time": 1733730145714
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -143283,6 +143283,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
       merge(this.form.valueChanges, timer(1e3)),
       this._changed
     ]).pipe(debounceTime(300), map(([list2, bookings, booking_rules]) => {
+      console.log("Current Space Availability");
       this._loading.next("Updating available spaces...");
       let { ical_uid, date, duration, all_day } = this._form.getRawValue();
       list2 = filterResourcesFromRules(list2, { date, duration, resource: null, host: currentUser2() }, booking_rules[this._org.building?.id] || []);
@@ -143301,6 +143302,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
       this.booking_rules,
       this.form.valueChanges.pipe(debounceTime(400), startWith({}))
     ]).pipe(filter(() => !this._loading.getValue()), debounceTime(500), switchMap(([spaces, booking_rules]) => {
+      console.log("Future Space Availability");
       if (!spaces.length)
         return of([]);
       this._loading.next("Retrieving available spaces...");
@@ -143320,7 +143322,8 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     }), tap((_3) => this._loading.next("")), shareReplay(1));
     this.available_spaces = this._date.pipe(switchMap((d3) => {
       const diff = Math.abs(differenceInDays(d3, Date.now()));
-      const cache_length = this._settings.get("app.events.cache_duration_in_days") || 14;
+      const cache_length = this._settings.get("app.events.cache_duration_in_days") ?? 14;
+      console.log("Available spaces:", diff, cache_length);
       return diff < cache_length ? this.current_available_spaces : this.future_available_spaces;
     }), shareReplay(1));
     this.cancelPostForm = () => this.unsub("post-event-form");
