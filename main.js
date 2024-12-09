@@ -102316,15 +102316,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "bf32375",
-  "hash": "bf32375",
+  "raw": "cbe8087",
+  "hash": "cbe8087",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "bf32375",
+  "suffix": "cbe8087",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733726416220
+  "time": 1733729401754
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -212721,6 +212721,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
       this._org.active_region.pipe(filter((_3) => !!_3), distinctUntilKeyChanged("id")),
       this._org.active_building.pipe(filter((_3) => !!_3), distinctUntilKeyChanged("id"))
     ]).pipe(debounceTime(300), tap((_3) => this.unsubWith("bind:")), switchMap(([{ zone_ids }]) => {
+      console.log("Load Spaces:", zone_ids);
       this._loading.next("Loading space list for location...");
       const use_region = this._settings.get("app.use_region");
       if (!zone_ids?.length) {
@@ -212729,7 +212730,10 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
         ];
       }
       return forkJoin(zone_ids.map((id) => requestSpacesForZone(id).pipe(catchError(() => of([])))));
-    }), map((l3) => flatten2(l3)), tap((_3) => this._loading.next("")), shareReplay(1));
+    }), map((l3) => flatten2(l3)), tap((_3) => {
+      this._loading.next("");
+      console.log("Spaces:", _3);
+    }), shareReplay(1));
     this.features = this.spaces.pipe(map((l3) => unique(flatten2(l3.map((_3) => _3.features)))));
     this.room_alerts = this._changed.pipe(switchMap((_3) => showMetadata(this._org.organisation.id, "room_alerts")), map((r2) => r2.details), startWith({}), shareReplay(1));
     this.filtered_spaces = combineLatest([
@@ -212741,7 +212745,6 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
       const limit_map = this._settings.get("app.events.limit_spaces") || {};
       const limited_zones = Object.keys(limit_map);
       const zone_limit = s2.zones.find((_3) => limited_zones.includes(_3));
-      console.log("Space:", s2.display_name || s2.name, s2.bookable && (!zone || s2.zones.includes(zone)) && (!zone_limit || limit_map[zone_limit] === domain) && (!show_fav || this.favorite_spaces.includes(s2.id)) && features.every((f3) => s2.features.includes(f3)) && s2.capacity >= Math.max(0, capacity || 0));
       return s2.bookable && (!zone || s2.zones.includes(zone)) && (!zone_limit || limit_map[zone_limit] === domain) && (!show_fav || this.favorite_spaces.includes(s2.id)) && features.every((f3) => s2.features.includes(f3)) && s2.capacity >= Math.max(0, capacity || 0);
     }).slice(0, Math.min(100, spaces.length))), shareReplay(1));
     this._space_bookings = combineLatest([
