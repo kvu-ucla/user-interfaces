@@ -102316,15 +102316,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "cfdcfb5",
-  "hash": "cfdcfb5",
+  "raw": "2fac4c4",
+  "hash": "2fac4c4",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "cfdcfb5",
+  "suffix": "2fac4c4",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733730083558
+  "time": 1733730744137
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -212807,7 +212807,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     this.available_spaces = this._date.pipe(switchMap((d3) => {
       const diff = Math.abs(differenceInDays(d3, Date.now()));
       const cache_length = this._settings.get("app.events.cache_duration_in_days") ?? 14;
-      console.log("Available spaces:", diff, cache_length);
+      console.log("Available spaces:", diff, cache_length, this._loading.getValue());
       return diff < cache_length ? this.current_available_spaces : this.future_available_spaces;
     }), shareReplay(1));
     this.cancelPostForm = () => this.unsub("post-event-form");
