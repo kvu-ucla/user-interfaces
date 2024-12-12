@@ -103619,15 +103619,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "8f1a3c1",
-  "hash": "8f1a3c1",
+  "raw": "7afaaba",
+  "hash": "7afaaba",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "8f1a3c1",
+  "suffix": "7afaaba",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733974058736
+  "time": 1733981714844
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -123298,6 +123298,85 @@ var ZonePipe = class _ZonePipe {
     this.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "zone", type: _ZonePipe, pure: true });
   }
 };
+
+// libs/components/src/lib/settings-toggle.component.ts
+function SettingsToggleComponent_app_icon_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "app-icon", 4);
+    \u0275\u0275text(1, "info");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("matTooltip", ctx_r0.info);
+  }
+}
+var SettingsToggleComponent = class _SettingsToggleComponent {
+  constructor() {
+    this.registerOnChange = (fn) => this._onChange = fn;
+    this.registerOnTouched = (fn) => this._onTouch = fn;
+  }
+  /**
+   * Update the form field value
+   * @param new_value New value to set on the form field
+   */
+  setValue(new_value) {
+    this.value = new_value;
+    if (this._onChange)
+      this._onChange(new_value);
+  }
+  /* istanbul ignore next */
+  /**
+   * Update local value when form control value is changed
+   * @param value The new value for the component
+   */
+  writeValue(value2) {
+    this.value = value2;
+  }
+  static {
+    this.\u0275fac = function SettingsToggleComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _SettingsToggleComponent)();
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SettingsToggleComponent, selectors: [["settings-toggle"]], inputs: { name: "name", info: "info" }, features: [\u0275\u0275ProvidersFeature([
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => _SettingsToggleComponent),
+        multi: true
+      }
+    ])], decls: 6, vars: 3, consts: [["matRipple", "", 1, "flex", "items-center", "space-x-2", "p-2", "border", "border-base-300", "rounded", "flex-1", 3, "click"], [1, "ml-2", "flex-1", "text-left", "flex", "items-center", "space-x-2"], [3, "matTooltip", 4, "ngIf"], [1, "pointer-events-none", 3, "ngModelChange", "ngModel"], [3, "matTooltip"]], template: function SettingsToggleComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "button", 0);
+        \u0275\u0275listener("click", function SettingsToggleComponent_Template_button_click_0_listener() {
+          return ctx.setValue(!ctx.value);
+        });
+        \u0275\u0275elementStart(1, "div", 1)(2, "div");
+        \u0275\u0275text(3);
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(4, SettingsToggleComponent_app_icon_4_Template, 2, 1, "app-icon", 2);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(5, "mat-checkbox", 3);
+        \u0275\u0275twoWayListener("ngModelChange", function SettingsToggleComponent_Template_mat_checkbox_ngModelChange_5_listener($event) {
+          \u0275\u0275twoWayBindingSet(ctx.value, $event) || (ctx.value = $event);
+          return $event;
+        });
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate(ctx.name);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.info);
+        \u0275\u0275advance();
+        \u0275\u0275twoWayProperty("ngModel", ctx.value);
+      }
+    }, dependencies: [NgIf, NgControlStatus, NgModel, MatRipple, MatTooltip, MatCheckbox, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SettingsToggleComponent, { className: "SettingsToggleComponent", filePath: "libs/components/src/lib/settings-toggle.component.ts", lineNumber: 37 });
+})();
 
 // libs/components/src/lib/components.module.ts
 var MAT_MODULES = [
@@ -213333,7 +213412,7 @@ function loadLockers(org, obs, banks$, useRegion) {
     for (const locker of locker_list) {
       const bank = banks.find((b3) => b3.id === locker.bank_id);
       locker.bank = bank;
-      locker.zone = bank.zone;
+      locker.zone = org.levelWithID(bank.zones);
     }
     return lockers.filter((_3) => _3.bank);
   }), shareReplay(1));
@@ -235674,7 +235753,7 @@ var BookingFormService = class _BookingFormService extends AsyncHandler {
       merge(this.form.get("date").valueChanges, timer(1e3)),
       merge(this.form.get("duration").valueChanges, timer(1e3))
     ]).pipe(filter(() => this.form.getRawValue().date > 0 && this.form.getRawValue().duration > 0), debounceTime(500), tap(([{ type: type2 }]) => this._loading.next(`Checking ${type2} availability...`)), switchMap(([options2, resources, restrictions]) => {
-      var { all_day, date, duration, user } = this.form.getRawValue();
+      let { all_day, date, duration, user } = this.form.getRawValue();
       if (all_day) {
         date = startOfDay(date).valueOf();
         duration = 24 * 60 - 1;
@@ -235702,8 +235781,8 @@ var BookingFormService = class _BookingFormService extends AsyncHandler {
         });
         console.log("Resources:", resources, available);
         return available;
-      }, catchError((_3) => of([]))));
-    }), tap((_3) => this._loading.next("")), shareReplay(1));
+      }, catchError(() => of([]))));
+    }), tap(() => this._loading.next("")), shareReplay(1));
     this.grouped_availability = combineLatest([
       this.options,
       this.available_resources
@@ -236030,13 +236109,10 @@ var BookingFormService = class _BookingFormService extends AsyncHandler {
   }
   loadResourceList(type2) {
     const use_region = this._settings.get("app.use_region");
-    const map_metadata = (_3) => (_3?.metadata[type2]?.details instanceof Array ? _3.metadata[type2]?.details : []).map((d3) => type2 !== "lockers" ? __spreadProps(__spreadValues({}, d3), {
+    const map_metadata = (_3) => (_3?.metadata[type2]?.details instanceof Array ? _3.metadata[type2].details : []).map((d3) => __spreadProps(__spreadValues({}, d3), {
       id: d3.id || d3.map_id,
       zone: _3.zone
-    }) : d3.lockers?.map((locker) => __spreadProps(__spreadValues({}, locker), {
-      bank_id: d3.id,
-      zone: _3.zone
-    })) || []);
+    }));
     const id = use_region ? this._org.building.parent_id : this._org.building.id;
     if (use_region) {
       const id2 = this._org.building.parent_id;
@@ -239711,6 +239787,989 @@ var LockerGridComponent = class _LockerGridComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerGridComponent, { className: "LockerGridComponent", filePath: "libs/bookings/src/lib/locker-grid.component.ts", lineNumber: 77 });
 })();
 
+// libs/bookings/src/lib/locker-select-modal/locker-filters.component.ts
+var _c073 = () => ({ standalone: true });
+var _c140 = () => [];
+function LockerFiltersComponent_button_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 18);
+    \u0275\u0275listener("click", function LockerFiltersComponent_button_2_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.close());
+    });
+    \u0275\u0275elementStart(1, "app-icon");
+    \u0275\u0275text(2, "keyboard_arrow_left");
+    \u0275\u0275elementEnd()();
+  }
+}
+function LockerFiltersComponent_div_10_mat_form_field_3_mat_option_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-option", 25);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const reg_r4 = ctx.$implicit;
+    \u0275\u0275property("value", reg_r4);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", reg_r4.display_name || reg_r4.name, " ");
+  }
+}
+function LockerFiltersComponent_div_10_mat_form_field_3_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-form-field", 22)(1, "mat-select", 23);
+    \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_div_10_mat_form_field_3_Template_mat_select_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.setRegion($event));
+    });
+    \u0275\u0275template(2, LockerFiltersComponent_div_10_mat_form_field_3_mat_option_2_Template, 2, 2, "mat-option", 24);
+    \u0275\u0275pipe(3, "async");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngModel", ctx_r1.region)("ngModelOptions", \u0275\u0275pureFunction0(5, _c073));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(3, 3, ctx_r1.regions));
+  }
+}
+function LockerFiltersComponent_div_10_mat_form_field_5_mat_option_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-option", 25);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const bld_r6 = ctx.$implicit;
+    \u0275\u0275property("value", bld_r6);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", bld_r6.display_name || bld_r6.name, " ");
+  }
+}
+function LockerFiltersComponent_div_10_mat_form_field_5_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-form-field", 22)(1, "mat-select", 26);
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275pipe(3, "async");
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_div_10_mat_form_field_5_Template_mat_select_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.setBuilding($event));
+    });
+    \u0275\u0275template(5, LockerFiltersComponent_div_10_mat_form_field_5_mat_option_5_Template, 2, 2, "mat-option", 24);
+    \u0275\u0275pipe(6, "async");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_4_0;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(2, 4, ctx_r1.building))("ngModelOptions", \u0275\u0275pureFunction0(12, _c073))("placeholder", ((tmp_4_0 = \u0275\u0275pipeBind1(3, 6, ctx_r1.building)) == null ? null : tmp_4_0.display_name) || ((tmp_4_0 = \u0275\u0275pipeBind1(4, 8, ctx_r1.building)) == null ? null : tmp_4_0.name));
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(6, 10, ctx_r1.buildings));
+  }
+}
+function LockerFiltersComponent_div_10_mat_form_field_7_mat_option_3_div_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 30);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "building");
+    \u0275\u0275elementStart(3, "span", 31);
+    \u0275\u0275text(4, " - ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_5_0;
+    const lvl_r8 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", (tmp_5_0 = \u0275\u0275pipeBind1(2, 1, lvl_r8.parent_id)) == null ? null : tmp_5_0.display_name, " ");
+  }
+}
+function LockerFiltersComponent_div_10_mat_form_field_7_mat_option_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-option", 25)(1, "div", 28);
+    \u0275\u0275template(2, LockerFiltersComponent_div_10_mat_form_field_7_mat_option_3_div_2_Template, 5, 3, "div", 29);
+    \u0275\u0275elementStart(3, "div");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const lvl_r8 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275property("value", lvl_r8.id);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.use_region);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", lvl_r8.display_name || lvl_r8.name, " ");
+  }
+}
+function LockerFiltersComponent_div_10_mat_form_field_7_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-form-field", 22)(1, "mat-select", 27);
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_div_10_mat_form_field_7_Template_mat_select_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.setOptions({ zone_id: $event }));
+    });
+    \u0275\u0275template(3, LockerFiltersComponent_div_10_mat_form_field_7_mat_option_3_Template, 5, 3, "mat-option", 24);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_2_0;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngModel", (tmp_2_0 = \u0275\u0275pipeBind1(2, 3, ctx_r1.options)) == null ? null : tmp_2_0.zone_id)("ngModelOptions", \u0275\u0275pureFunction0(7, _c073));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 5, ctx_r1.levels));
+  }
+}
+function LockerFiltersComponent_div_10_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 19)(1, "label", 20);
+    \u0275\u0275text(2, "Location");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, LockerFiltersComponent_div_10_mat_form_field_3_Template, 4, 6, "mat-form-field", 21);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275template(5, LockerFiltersComponent_div_10_mat_form_field_5_Template, 7, 13, "mat-form-field", 21);
+    \u0275\u0275pipe(6, "async");
+    \u0275\u0275template(7, LockerFiltersComponent_div_10_mat_form_field_7_Template, 5, 8, "mat-form-field", 21);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_1_0;
+    let tmp_2_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r1.use_region && ((tmp_1_0 = \u0275\u0275pipeBind1(4, 3, ctx_r1.regions)) == null ? null : tmp_1_0.length));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", !ctx_r1.use_region && ((tmp_2_0 = \u0275\u0275pipeBind1(6, 5, ctx_r1.buildings)) == null ? null : tmp_2_0.length) > 1);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", !ctx_r1.hide_levels);
+  }
+}
+function LockerFiltersComponent_div_19_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 32)(1, "mat-checkbox", 33);
+    \u0275\u0275text(2, " All Day ");
+    \u0275\u0275elementEnd()();
+  }
+}
+function LockerFiltersComponent_div_20_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 34)(1, "div", 35)(2, "label");
+    \u0275\u0275text(3, "Start Time");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "a-time-field", 36);
+    \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_div_20_Template_a_time_field_ngModelChange_4_listener($event) {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.form.patchValue({ date: $event }));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(5, "div", 35)(6, "label");
+    \u0275\u0275text(7, "End Time");
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(8, "a-duration-field", 37);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_4_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(8, _c073))("use_24hr", ctx_r1.use_24hr);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("time", (tmp_4_0 = ctx_r1.form.get("date")) == null ? null : tmp_4_0.value)("max", 10 * 60)("min", 60)("step", 60)("use_24hr", ctx_r1.use_24hr);
+  }
+}
+function LockerFiltersComponent_section_27_div_3_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r10 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 41)(1, "div", 42);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "mat-checkbox", 43);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_section_27_div_3_Template_mat_checkbox_ngModelChange_3_listener($event) {
+      const feat_r11 = \u0275\u0275restoreView(_r10).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.setFeature(feat_r11, $event));
+    });
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_4_0;
+    const feat_r11 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(feat_r11);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngModel", (((tmp_4_0 = \u0275\u0275pipeBind1(4, 3, ctx_r1.options)) == null ? null : tmp_4_0.features) || \u0275\u0275pureFunction0(5, _c140)).includes(feat_r11))("ngModelOptions", \u0275\u0275pureFunction0(6, _c073));
+  }
+}
+function LockerFiltersComponent_section_27_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "section", 38)(1, "h2", 39);
+    \u0275\u0275text(2, "Type");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, LockerFiltersComponent_section_27_div_3_Template, 5, 7, "div", 40);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 1, ctx_r1.features));
+  }
+}
+function LockerFiltersComponent_div_29_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r12 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 44)(1, "button", 45);
+    \u0275\u0275listener("click", function LockerFiltersComponent_div_29_Template_button_click_1_listener() {
+      \u0275\u0275restoreView(_r12);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.close());
+    });
+    \u0275\u0275text(2, " Apply Filters ");
+    \u0275\u0275elementEnd()();
+  }
+}
+var LockerFiltersComponent = class _LockerFiltersComponent {
+  get building() {
+    return this._org.building;
+  }
+  set building(bld) {
+    this._org.building = bld;
+  }
+  get region() {
+    return this._org.region;
+  }
+  set region(reg) {
+    this._org.region = reg;
+  }
+  get allow_time_changes() {
+    return !!this._settings.get("app.lockers.allow_time_changes");
+  }
+  get allow_all_day() {
+    return this.allow_time_changes && !!this._settings.get("app.lockers.allow_all_day");
+  }
+  get end_date() {
+    return endOfDay(addDays(Date.now(), this._settings.get("app.lockers.available_period") || 90));
+  }
+  get use_24hr() {
+    return this._settings.get("app.use_24_hour_time");
+  }
+  get use_region() {
+    return this._settings.get("app.use_region");
+  }
+  constructor(_bsheet_ref, _state, _org, _settings) {
+    this._bsheet_ref = _bsheet_ref;
+    this._state = _state;
+    this._org = _org;
+    this._settings = _settings;
+    this.can_close = false;
+    this.options = this._state.options;
+    this.features = this._state.features;
+    this.buildings = this._org.active_buildings;
+    this.form = this._state.form;
+    this.regions = this._org.region_list;
+    this.levels = combineLatest([
+      this._org.active_region,
+      this._org.active_building
+    ]).pipe(map(([region, bld]) => {
+      const level_list = this.use_region ? this._org.levelsForRegion(region) : this._org.levelsForBuilding(bld);
+      return level_list.sort((a6, b3) => a6.parent_id.localeCompare(b3.parent_id) || (a6.display_name || "").localeCompare(b3.display_name || ""));
+    }));
+    this.close = () => this._bsheet_ref.dismiss();
+    this.setOptions = (o2) => this._state.setOptions(o2);
+    this.setFeature = (f3, e2) => this._state.setFeature(f3, e2);
+    this.setLevel = (l3) => {
+    };
+    this.can_close = !!this._bsheet_ref;
+  }
+  static {
+    this.\u0275fac = function LockerFiltersComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _LockerFiltersComponent)(\u0275\u0275directiveInject(MatBottomSheetRef, 8), \u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerFiltersComponent, selectors: [["locker-filters"]], inputs: { hide_levels: "hide_levels" }, decls: 30, vars: 30, consts: [[1, "flex", "rounded-t-md", "items-center", "border-b", "border-base-200", "pb-2", "sm:hidden"], [1, "flex-1", "pl-2"], ["icon", "", "matRipple", "", "name", "close-locker-filters", "class", "sm:hidden", 3, "click", 4, "ngIf"], [1, "font-medium", "flex-2", "text-center"], [1, "flex-1"], [1, "max-h-[65vh]", "p-2", "overflow-y-auto", "overflow-x-hidden", "divide-y", "divide-base-200", "w-full", 3, "formGroup"], ["details", ""], [1, "text-lg", "font-medium", "mb-1"], ["class", "flex-1 min-w-[8rem] flex flex-col", 4, "ngIf"], [1, "flex-1", "min-w-[256px]"], ["name", "date", "formControlName", "date", 3, "to"], ["class", "flex justify-end -mt-2 mb-2", 4, "ngIf"], ["class", "flex items-center space-x-2", 4, "ngIf"], ["favs", "", 1, "space-y-4", "pb-4"], [3, "ngModelChange", "name", "ngModel", "ngModelOptions"], ["name", "Show Accessible Lockers", 3, "ngModelChange", "ngModel", "ngModelOptions"], ["class", "space-y-2", "features", "", 4, "ngIf"], ["class", "px-2 py-2 w-full border-t border-base-200", 4, "ngIf"], ["icon", "", "matRipple", "", "name", "close-locker-filters", 1, "sm:hidden", 3, "click"], [1, "flex-1", "min-w-[8rem]", "flex", "flex-col"], ["for", "location"], ["appearance", "outline", "class", "w-full", 4, "ngIf"], ["appearance", "outline", 1, "w-full"], ["name", "region", "placeholder", "Any Region", 3, "ngModelChange", "ngModel", "ngModelOptions"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], ["name", "building", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], ["name", "location", "placeholder", "Any Level", 3, "ngModelChange", "ngModel", "ngModelOptions"], [1, "flex", "flex-col-reverse"], ["class", "opacity-30 text-xs", 4, "ngIf"], [1, "opacity-30", "text-xs"], [1, "opacity-0"], [1, "flex", "justify-end", "-mt-2", "mb-2"], ["formControlName", "all_day"], [1, "flex", "items-center", "space-x-2"], [1, "flex-1", "w-1/3"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "use_24hr"], ["formControlName", "duration", 3, "time", "max", "min", "step", "use_24hr"], ["features", "", 1, "space-y-2"], [1, "text-lg", "font-medium"], ["class", "flex items-center flex-wrap space-x-2", 4, "ngFor", "ngForOf"], [1, "flex", "items-center", "flex-wrap", "space-x-2"], ["for", "feat", 1, "flex-1", "w-1/2"], [3, "ngModelChange", "ngModel", "ngModelOptions"], [1, "px-2", "py-2", "w-full", "border-t", "border-base-200"], ["btn", "", "matRipple", "", "name", "apply-locker-filters", 1, "w-full", 3, "click"]], template: function LockerFiltersComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
+        \u0275\u0275template(2, LockerFiltersComponent_button_2_Template, 3, 0, "button", 2);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(3, "h3", 3);
+        \u0275\u0275text(4, "Locker Filters");
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(5, "div", 4);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(6, "form", 5)(7, "section", 6)(8, "h2", 7);
+        \u0275\u0275text(9, "Details");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(10, LockerFiltersComponent_div_10_Template, 8, 7, "div", 8);
+        \u0275\u0275pipe(11, "async");
+        \u0275\u0275pipe(12, "async");
+        \u0275\u0275elementStart(13, "div", 9)(14, "label");
+        \u0275\u0275text(15, "Date");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(16, "a-date-field", 10);
+        \u0275\u0275text(17);
+        \u0275\u0275pipe(18, "translate");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275template(19, LockerFiltersComponent_div_19_Template, 3, 0, "div", 11)(20, LockerFiltersComponent_div_20_Template, 9, 9, "div", 12);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(21, "section", 13)(22, "settings-toggle", 14);
+        \u0275\u0275pipe(23, "translate");
+        \u0275\u0275pipe(24, "async");
+        \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_Template_settings_toggle_ngModelChange_22_listener($event) {
+          return ctx.setOptions({ show_fav: $event });
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(25, "settings-toggle", 15);
+        \u0275\u0275pipe(26, "async");
+        \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_Template_settings_toggle_ngModelChange_25_listener($event) {
+          return ctx.setOptions({ show_accessible: $event });
+        });
+        \u0275\u0275elementEnd()();
+        \u0275\u0275template(27, LockerFiltersComponent_section_27_Template, 5, 3, "section", 16);
+        \u0275\u0275pipe(28, "async");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(29, LockerFiltersComponent_div_29_Template, 3, 0, "div", 17);
+      }
+      if (rf & 2) {
+        let tmp_2_0;
+        let tmp_8_0;
+        let tmp_10_0;
+        let tmp_12_0;
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.can_close);
+        \u0275\u0275advance(4);
+        \u0275\u0275property("formGroup", ctx.form);
+        \u0275\u0275advance(4);
+        \u0275\u0275property("ngIf", !ctx.hide_levels && (!(ctx.use_region && ((tmp_2_0 = \u0275\u0275pipeBind1(11, 14, ctx.regions)) == null ? null : tmp_2_0.length)) || !(!ctx.use_region && ((tmp_2_0 = \u0275\u0275pipeBind1(12, 16, ctx.buildings)) == null ? null : tmp_2_0.length) > 1)));
+        \u0275\u0275advance(6);
+        \u0275\u0275property("to", ctx.end_date);
+        \u0275\u0275advance();
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(18, 18, "FORM.DATE_ERROR"), " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.allow_all_day);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", !ctx.form.value.all_day);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("name", \u0275\u0275pipeBind1(23, 20, "LOCKERS.SHOW_FAVOURITES"))("ngModel", (tmp_8_0 = \u0275\u0275pipeBind1(24, 22, ctx.options)) == null ? null : tmp_8_0.show_fav)("ngModelOptions", \u0275\u0275pureFunction0(28, _c073));
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngModel", (tmp_10_0 = \u0275\u0275pipeBind1(26, 24, ctx.options)) == null ? null : tmp_10_0.show_accessible)("ngModelOptions", \u0275\u0275pureFunction0(29, _c073));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", (tmp_12_0 = \u0275\u0275pipeBind1(28, 26, ctx.features)) == null ? null : tmp_12_0.length);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.can_close);
+      }
+    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, MatFormField, MatCheckbox, MatOption, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, IconComponent, SettingsToggleComponent, MatSelect, MatRipple, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  max-width: 100vw;\n}\n/*# sourceMappingURL=locker-filters.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerFiltersComponent, { className: "LockerFiltersComponent", filePath: "libs/bookings/src/lib/locker-select-modal/locker-filters.component.ts", lineNumber: 233 });
+})();
+
+// libs/bookings/src/lib/locker-select-modal/locker-filters-display.component.ts
+var _c074 = () => [];
+function LockerFiltersDisplayComponent_div_16_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 10)(1, "p");
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "button", 11);
+    \u0275\u0275listener("click", function LockerFiltersDisplayComponent_div_16_Template_button_click_3_listener() {
+      const feat_r2 = \u0275\u0275restoreView(_r1).$implicit;
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.setFeature(feat_r2, false));
+    });
+    \u0275\u0275elementStart(4, "app-icon");
+    \u0275\u0275text(5, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const feat_r2 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(feat_r2);
+  }
+}
+function LockerFiltersDisplayComponent_div_18_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 12)(1, "span");
+    \u0275\u0275text(2, "Favourites Only");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "button", 13);
+    \u0275\u0275listener("click", function LockerFiltersDisplayComponent_div_18_Template_button_click_3_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.setOptions({ show_fav: false }));
+    });
+    \u0275\u0275elementStart(4, "app-icon");
+    \u0275\u0275text(5, "close");
+    \u0275\u0275elementEnd()()();
+  }
+}
+function LockerFiltersDisplayComponent_div_20_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 12)(1, "span");
+    \u0275\u0275text(2, "Accessible Only");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "button", 14);
+    \u0275\u0275listener("click", function LockerFiltersDisplayComponent_div_20_Template_button_click_3_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.setOptions({ show_accessible: false }));
+    });
+    \u0275\u0275elementStart(4, "app-icon");
+    \u0275\u0275text(5, "close");
+    \u0275\u0275elementEnd()()();
+  }
+}
+var LockerFiltersDisplayComponent = class _LockerFiltersDisplayComponent extends AsyncHandler {
+  get start() {
+    return this._state.form.value.date;
+  }
+  get end() {
+    const { date, duration, all_day } = this._state.form.value;
+    if (all_day)
+      return endOfDay(date);
+    return date + duration * 60 * 1e3;
+  }
+  get time_format() {
+    return this._settings.time_format;
+  }
+  constructor(_bsheet, _state, _settings) {
+    super();
+    this._bsheet = _bsheet;
+    this._state = _state;
+    this._settings = _settings;
+    this.view = "list";
+    this.viewChange = new EventEmitter();
+    this.options = this._state.options;
+    this.setOptions = (o2) => this._state.setOptions(o2);
+    this.setFeature = (f3, e2) => this._state.setFeature(f3, e2);
+    this.editFilter = () => this._bsheet.open(LockerFiltersComponent);
+  }
+  static {
+    this.\u0275fac = function LockerFiltersDisplayComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _LockerFiltersDisplayComponent)(\u0275\u0275directiveInject(MatBottomSheet), \u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(SettingsService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerFiltersDisplayComponent, selectors: [["locker-filters-display"]], inputs: { view: "view" }, outputs: { viewChange: "viewChange" }, features: [\u0275\u0275InheritDefinitionFeature], decls: 22, vars: 26, consts: [["actions", "", 1, "sm:hidden", "space-x-2", "flex", "flex-row", "items-center", "p-2"], ["btn", "", "matRipple", "", "name", "edit-locker-filters", 1, "flex-1", "w-1/2", 3, "click"], [1, "flex", "items-center"], ["btn", "", "matRipple", "", "name", "view-locker-map", 1, "rounded-l", "rounded-r-none", 3, "click"], ["btn", "", "matRipple", "", "name", "view-locker-list", 1, "rounded-r", "rounded-l-none", 3, "click"], ["filters", "", 1, "flex", "items-center", "flex-wrap", "p-2", "w-[35rem]", "max-w-full", "sm:max-w-[35rem]"], ["filter-item", "", "date", ""], ["filter-item", "", "time", ""], ["filter-item", "", "features", "", 4, "ngFor", "ngForOf"], ["filter-item", "", 4, "ngIf"], ["filter-item", "", "features", ""], ["icon", "", "matRipple", "", "name", "remove-locker-filter", 1, "-mr-4", 3, "click"], ["filter-item", ""], ["icon", "", "matRipple", "", "name", "remove-locker-favs-filter", 1, "-mr-4", 3, "click"], ["icon", "", "matRipple", "", "name", "remove-locker-accessible-filter", 1, "-mr-4", 3, "click"]], template: function LockerFiltersDisplayComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "section", 0)(1, "button", 1);
+        \u0275\u0275listener("click", function LockerFiltersDisplayComponent_Template_button_click_1_listener() {
+          return ctx.editFilter();
+        });
+        \u0275\u0275text(2, " Filters ");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(3, "div", 2)(4, "button", 3);
+        \u0275\u0275listener("click", function LockerFiltersDisplayComponent_Template_button_click_4_listener() {
+          ctx.view = "map";
+          return ctx.viewChange.emit(ctx.view);
+        });
+        \u0275\u0275text(5, " Map ");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(6, "button", 4);
+        \u0275\u0275listener("click", function LockerFiltersDisplayComponent_Template_button_click_6_listener() {
+          ctx.view = "list";
+          return ctx.viewChange.emit(ctx.view);
+        });
+        \u0275\u0275text(7, " List ");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(8, "section", 5)(9, "div", 6);
+        \u0275\u0275text(10);
+        \u0275\u0275pipe(11, "date");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(12, "div", 7);
+        \u0275\u0275text(13);
+        \u0275\u0275pipe(14, "date");
+        \u0275\u0275pipe(15, "date");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(16, LockerFiltersDisplayComponent_div_16_Template, 6, 1, "div", 8);
+        \u0275\u0275pipe(17, "async");
+        \u0275\u0275template(18, LockerFiltersDisplayComponent_div_18_Template, 6, 0, "div", 9);
+        \u0275\u0275pipe(19, "async");
+        \u0275\u0275template(20, LockerFiltersDisplayComponent_div_20_Template, 6, 0, "div", 9);
+        \u0275\u0275pipe(21, "async");
+        \u0275\u0275elementEnd();
+      }
+      if (rf & 2) {
+        let tmp_4_0;
+        let tmp_5_0;
+        let tmp_6_0;
+        \u0275\u0275advance(4);
+        \u0275\u0275classProp("inverse", ctx.view !== "map");
+        \u0275\u0275advance(2);
+        \u0275\u0275classProp("inverse", ctx.view !== "list");
+        \u0275\u0275advance(4);
+        \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(11, 10, ctx.start, "mediumDate"));
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(14, 13, ctx.start, ctx.time_format), " \u2014 ", \u0275\u0275pipeBind2(15, 16, ctx.end, ctx.time_format), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngForOf", ((tmp_4_0 = \u0275\u0275pipeBind1(17, 19, ctx.options)) == null ? null : tmp_4_0.features) || \u0275\u0275pureFunction0(25, _c074));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", (tmp_5_0 = \u0275\u0275pipeBind1(19, 21, ctx.options)) == null ? null : tmp_5_0.show_fav);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", (tmp_6_0 = \u0275\u0275pipeBind1(21, 23, ctx.options)) == null ? null : tmp_6_0.show_accessible);
+      }
+    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, AsyncPipe, DatePipe], styles: ["\n\n[filter-item][_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0 1rem;\n  height: 2rem;\n  font-size: 0.875rem;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 1.25rem;\n  margin-right: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n[filter-item][_ngcontent-%COMP%]:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n[filter-item][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%]    + *[_ngcontent-%COMP%] {\n  margin-left: 0.5rem;\n}\n/*# sourceMappingURL=locker-filters-display.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerFiltersDisplayComponent, { className: "LockerFiltersDisplayComponent", filePath: "libs/bookings/src/lib/locker-select-modal/locker-filters-display.component.ts", lineNumber: 124 });
+})();
+
+// libs/bookings/src/lib/locker-select-modal/locker-bank-list.component.ts
+function LockerBankListComponent_ng_container_5_ul_1_li_1_div_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 21)(1, "app-icon");
+    \u0275\u0275text(2, "done");
+    \u0275\u0275elementEnd()();
+  }
+}
+function LockerBankListComponent_ng_container_5_ul_1_li_1_img_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 22);
+  }
+  if (rf & 2) {
+    const locker_bank_r2 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275property("source", locker_bank_r2.images[0]);
+  }
+}
+function LockerBankListComponent_ng_container_5_ul_1_li_1_ng_template_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 23);
+  }
+}
+function LockerBankListComponent_ng_container_5_ul_1_li_1_div_26_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 24);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const locker_bank_r2 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", locker_bank_r2.tags[0], " ");
+  }
+}
+function LockerBankListComponent_ng_container_5_ul_1_li_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "li", 9)(1, "button", 10);
+    \u0275\u0275listener("click", function LockerBankListComponent_ng_container_5_ul_1_li_1_Template_button_click_1_listener() {
+      const locker_bank_r2 = \u0275\u0275restoreView(_r1).$implicit;
+      const ctx_r2 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r2.selectLockerBank(locker_bank_r2));
+    });
+    \u0275\u0275elementStart(2, "div", 11);
+    \u0275\u0275template(3, LockerBankListComponent_ng_container_5_ul_1_li_1_div_3_Template, 3, 0, "div", 12)(4, LockerBankListComponent_ng_container_5_ul_1_li_1_img_4_Template, 1, 1, "img", 13)(5, LockerBankListComponent_ng_container_5_ul_1_li_1_ng_template_5_Template, 1, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "div", 14)(8, "span", 15);
+    \u0275\u0275text(9);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "div", 16)(11, "app-icon", 17);
+    \u0275\u0275text(12, "place");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(13, "p", 18);
+    \u0275\u0275text(14);
+    \u0275\u0275pipe(15, "level");
+    \u0275\u0275pipe(16, "level");
+    \u0275\u0275pipe(17, "level");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(18, "div", 16)(19, "app-icon", 17);
+    \u0275\u0275text(20, "people");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(21, "p", 18);
+    \u0275\u0275text(22);
+    \u0275\u0275elementEnd()()()();
+    \u0275\u0275elementStart(23, "button", 19);
+    \u0275\u0275listener("click", function LockerBankListComponent_ng_container_5_ul_1_li_1_Template_button_click_23_listener() {
+      const locker_bank_r2 = \u0275\u0275restoreView(_r1).$implicit;
+      const ctx_r2 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r2.toggleFav.emit(locker_bank_r2));
+    });
+    \u0275\u0275elementStart(24, "app-icon");
+    \u0275\u0275text(25);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275template(26, LockerBankListComponent_ng_container_5_ul_1_li_1_div_26_Template, 2, 1, "div", 20);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_12_0;
+    const locker_bank_r2 = ctx.$implicit;
+    const placeholder_r4 = \u0275\u0275reference(6);
+    const ctx_r2 = \u0275\u0275nextContext(3);
+    \u0275\u0275classProp("!border-blue-400", ctx_r2.active === locker_bank_r2.id);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r2.selected.includes(locker_bank_r2.id));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", locker_bank_r2.images == null ? null : locker_bank_r2.images.length)("ngIfElse", placeholder_r4);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", locker_bank_r2.name || locker_bank_r2.id || "Locker_bank", " ");
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(15, 13, locker_bank_r2.zones) ? ((tmp_12_0 = \u0275\u0275pipeBind1(16, 15, locker_bank_r2.zones)) == null ? null : tmp_12_0.display_name) || ((tmp_12_0 = \u0275\u0275pipeBind1(17, 17, locker_bank_r2.zones)) == null ? null : tmp_12_0.name) : "", " ");
+    \u0275\u0275advance(8);
+    \u0275\u0275textInterpolate2(" ", locker_bank_r2.available || 0, " / ", locker_bank_r2.lockers.length || 1, " Available ");
+    \u0275\u0275advance();
+    \u0275\u0275classProp("text-blue-400", ctx_r2.isFavourite(locker_bank_r2.id));
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r2.isFavourite(locker_bank_r2.id) ? "favorite" : "favorite_border");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", locker_bank_r2.tags == null ? null : locker_bank_r2.tags.length);
+  }
+}
+function LockerBankListComponent_ng_container_5_ul_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "ul", 7);
+    \u0275\u0275template(1, LockerBankListComponent_ng_container_5_ul_1_li_1_Template, 27, 19, "li", 8);
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(2, 1, ctx_r2.locker_banks));
+  }
+}
+function LockerBankListComponent_ng_container_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, LockerBankListComponent_ng_container_5_ul_1_Template, 3, 3, "ul", 6);
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r2 = \u0275\u0275nextContext();
+    const empty_state_r5 = \u0275\u0275reference(10);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", (tmp_3_0 = \u0275\u0275pipeBind1(2, 2, ctx_r2.locker_banks)) == null ? null : tmp_3_0.length)("ngIfElse", empty_state_r5);
+  }
+}
+function LockerBankListComponent_ng_template_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 25);
+    \u0275\u0275element(1, "mat-spinner", 26);
+    \u0275\u0275elementStart(2, "p", 27);
+    \u0275\u0275text(3, "Finding available locker banks...");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275property("diameter", 32);
+  }
+}
+function LockerBankListComponent_ng_template_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 28)(1, "p", 29);
+    \u0275\u0275text(2, " No available locker banks for selected time and/or filters ");
+    \u0275\u0275elementEnd()();
+  }
+}
+var LockerBankListComponent = class _LockerBankListComponent {
+  constructor(_state, _org, _settings) {
+    this._state = _state;
+    this._org = _org;
+    this._settings = _settings;
+    this.active = "";
+    this.selected = "";
+    this.favorites = [];
+    this.onSelect = new EventEmitter();
+    this.toggleFav = new EventEmitter();
+    this.lockers_banks$ = loadLockerBanks(this._org, combineLatest([this._org.active_building, this._org.active_region]), () => this._settings.get("app.use_region"));
+    this.lockers$ = loadLockers(this._org, combineLatest([this._org.active_building, this._org.active_region]), this.lockers_banks$, () => this._settings.get("app.use_region"));
+    this.locker_banks = combineLatest([
+      this._state.options,
+      this._state.available_resources,
+      this.lockers_banks$,
+      this.lockers$
+    ]).pipe(map(([{ show_fav, show_accessible }, resources, banks]) => {
+      return banks.filter((i2) => (!show_fav || this.isFavourite(i2.id)) && (!show_accessible || i2.lockers.find((_3) => _3.accessible)) && resources.find((_3) => _3.bank_id === i2.id)).map((bank) => __spreadProps(__spreadValues({}, bank), {
+        available: resources.filter((_3) => _3.bank_id === bank.id).length,
+        lockers: bank.lockers.map((_3) => __spreadProps(__spreadValues({}, _3), {
+          map_id: bank.map_id || bank.id,
+          zone: bank.zone
+        }))
+      }));
+    }));
+    this.loading = this._state.loading;
+  }
+  isFavourite(locker_bank_id) {
+    return this.favorites.includes(locker_bank_id);
+  }
+  selectLockerBank(locker_bank) {
+    this.onSelect.emit(locker_bank);
+  }
+  static {
+    this.\u0275fac = function LockerBankListComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _LockerBankListComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerBankListComponent, selectors: [["locker-bank-list"]], inputs: { active: "active", selected: "selected", favorites: "favorites" }, outputs: { onSelect: "onSelect", toggleFav: "toggleFav" }, decls: 11, vars: 7, consts: [["load_state", ""], ["empty_state", ""], ["placeholder", ""], [1, "font-bold"], ["count", "", 1, "text-sm", "opacity-60", "mb-4"], [4, "ngIf", "ngIfElse"], ["class", "list-style-none space-y-2 min-w-[50vh]", 4, "ngIf", "ngIfElse"], [1, "list-style-none", "space-y-2", "min-w-[50vh]"], ["locker_bank", "", "class", "relative rounded-lg w-full shadow border bg-base-100 border-base-200 overflow-hidden", 3, "!border-blue-400", 4, "ngFor", "ngForOf"], ["locker_bank", "", 1, "relative", "rounded-lg", "w-full", "shadow", "border", "bg-base-100", "border-base-200", "overflow-hidden"], ["name", "select-locker_bank", "matRipple", "", 1, "w-full", "h-full", "flex", "p-2", 3, "click"], [1, "relative", "w-20", "h-20", "rounded-xl", "bg-base-200", "mr-4", "flex", "items-center", "justify-center"], ["class", "absolute top-1 left-1 border border-neutral bg-base-200 rounded-full h-6 w-6 flex items-center justify-center text-white", 4, "ngIf"], ["auth", "", "class", "object-cover h-full", 3, "source", 4, "ngIf", "ngIfElse"], [1, "space-y-2", "pt-2", "flex-1", "text-left"], [1, "font-medium"], [1, "flex", "items-center", "text-sm", "space-x-2"], [1, "text-blue-500"], [1, "text-xs"], ["icon", "", "matRipple", "", "name", "toggle-locker_bank-favourite", 1, "absolute", "top-1", "right-1", 3, "click"], ["class", "absolute bottom-2 right-2 bg-base-200 rounded text-xs px-2 py-1 font-mono", 4, "ngIf"], [1, "absolute", "top-1", "left-1", "border", "border-neutral", "bg-base-200", "rounded-full", "h-6", "w-6", "flex", "items-center", "justify-center", "text-white"], ["auth", "", 1, "object-cover", "h-full", 3, "source"], ["src", "assets/icons/locker-placeholder.svg", 1, "m-auto"], [1, "absolute", "bottom-2", "right-2", "bg-base-200", "rounded", "text-xs", "px-2", "py-1", "font-mono"], ["loading", "", 1, "p-16", "flex", "flex-col", "items-center", "justify-center", "space-y-2"], [3, "diameter"], [1, "opacity-30"], ["empty", "", 1, "p-16", "flex", "flex-col", "items-center", "justify-center", "space-y-2"], [1, "opacity-30", "text-center"]], template: function LockerBankListComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "h3", 3);
+        \u0275\u0275text(1, "Results");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(2, "p", 4);
+        \u0275\u0275text(3);
+        \u0275\u0275pipe(4, "async");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(5, LockerBankListComponent_ng_container_5_Template, 3, 4, "ng-container", 5);
+        \u0275\u0275pipe(6, "async");
+        \u0275\u0275template(7, LockerBankListComponent_ng_template_7_Template, 4, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(9, LockerBankListComponent_ng_template_9_Template, 3, 0, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        let tmp_2_0;
+        let tmp_3_0;
+        const load_state_r6 = \u0275\u0275reference(8);
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate1(" ", ((tmp_2_0 = \u0275\u0275pipeBind1(4, 3, ctx.locker_banks)) == null ? null : tmp_2_0.length) || 0, " result(s) found ");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", !((tmp_3_0 = \u0275\u0275pipeBind1(6, 5, ctx.loading)) == null ? null : tmp_3_0.length))("ngIfElse", load_state_r6);
+      }
+    }, dependencies: [NgForOf, NgIf, MatProgressSpinner, IconComponent, AuthenticatedImageDirective, MatRipple, AsyncPipe, LevelPipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  background: rgba(0, 0, 0, 0.05);\n  overflow-y: auto;\n}\n/*# sourceMappingURL=locker-bank-list.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerBankListComponent, { className: "LockerBankListComponent", filePath: "libs/bookings/src/lib/locker-select-modal/locker-bank-list.component.ts", lineNumber: 153 });
+})();
+
+// libs/bookings/src/lib/locker-select-modal/locker-map.component.ts
+var _c075 = () => ({ controls: true });
+var _c141 = () => ({ standalone: true });
+function LockerMapComponent_mat_form_field_1_mat_option_2_div_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 10);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "building");
+    \u0275\u0275elementStart(3, "span", 11);
+    \u0275\u0275text(4, " - ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_4_0;
+    const lvl_r3 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", (tmp_4_0 = \u0275\u0275pipeBind1(2, 1, lvl_r3.parent_id)) == null ? null : tmp_4_0.display_name, " ");
+  }
+}
+function LockerMapComponent_mat_form_field_1_mat_option_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-option", 7)(1, "div", 8);
+    \u0275\u0275template(2, LockerMapComponent_mat_form_field_1_mat_option_2_div_2_Template, 5, 3, "div", 9);
+    \u0275\u0275elementStart(3, "div");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const lvl_r3 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("value", lvl_r3);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.use_region);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", lvl_r3.display_name || lvl_r3.name, " ");
+  }
+}
+function LockerMapComponent_mat_form_field_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-form-field", 4)(1, "mat-select", 5);
+    \u0275\u0275twoWayListener("ngModelChange", function LockerMapComponent_mat_form_field_1_Template_mat_select_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r1.level, $event) || (ctx_r1.level = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("ngModelChange", function LockerMapComponent_mat_form_field_1_Template_mat_select_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.setOptions({ zone_ids: [$event.id] }));
+    });
+    \u0275\u0275template(2, LockerMapComponent_mat_form_field_1_mat_option_2_Template, 5, 3, "mat-option", 6);
+    \u0275\u0275pipe(3, "async");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275twoWayProperty("ngModel", ctx_r1.level);
+    \u0275\u0275property("ngModelOptions", \u0275\u0275pureFunction0(5, _c141));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(3, 3, ctx_r1.levels));
+  }
+}
+var LockerMapComponent = class _LockerMapComponent extends AsyncHandler {
+  get map_url() {
+    return this.level?.map_id || "";
+  }
+  get use_region() {
+    return !!this._settings.get("app.use_region");
+  }
+  constructor(_state, _settings, _org) {
+    super();
+    this._state = _state;
+    this._settings = _settings;
+    this._org = _org;
+    this.is_displayed = false;
+    this.active = "";
+    this.onSelect = new EventEmitter();
+    this.lockers_banks$ = loadLockerBanks(this._org, combineLatest([this._org.active_building, this._org.active_region]), () => this._settings.get("app.use_region"));
+    this.lockers$ = loadLockers(this._org, combineLatest([this._org.active_building, this._org.active_region]), this.lockers_banks$, () => this._settings.get("app.use_region"));
+    this.locker_banks = combineLatest([
+      this._state.options,
+      this._state.available_resources,
+      this.lockers_banks$,
+      this.lockers$
+    ]).pipe(map(([{ show_fav, show_accessible }, resources, banks]) => {
+      return banks.filter((i2) => resources.find((_3) => _3.bank_id === i2.id) && (!show_accessible || i2.lockers.find((_3) => _3.accessible))).map((bank) => __spreadProps(__spreadValues({}, bank), {
+        available: resources.filter((_3) => _3.bank_id === bank.id).length,
+        lockers: bank.lockers.map((_3) => __spreadProps(__spreadValues({}, _3), {
+          map_id: bank.map_id || bank.id,
+          zone: bank.zone
+        }))
+      }));
+    }));
+    this.loading = this._state.loading;
+    this.zoom = 1;
+    this.center = { x: 0.5, y: 0.5 };
+    this.coordinates = void 0;
+    this._change = new BehaviorSubject(0);
+    this.levels = combineLatest([
+      this._org.active_region,
+      this._org.active_building
+    ]).pipe(map(([region, bld]) => {
+      const level_list = this.use_region ? this._org.levelsForRegion(region) : this._org.levelsForBuilding(bld);
+      const viewable_levels = level_list.filter((lvl) => !lvl.tags.includes("parking"));
+      return viewable_levels.sort((a6, b3) => a6.parent_id.localeCompare(b3.parent_id) || (a6.display_name || "").localeCompare(b3.display_name || ""));
+    }));
+    this.setOptions = (o2) => this._state.setOptions(o2);
+    this.actions = this.locker_banks.pipe(map((banks) => banks.map((locker) => ({
+      id: locker.map_id || locker.id,
+      action: ["touchend", "mouseup"],
+      callback: () => this.selectLocker(locker)
+    }))));
+    this.features = combineLatest([
+      this.locker_banks,
+      this._state.available_resources
+    ]).pipe(map(([lockers]) => {
+      return this._settings.get("app.lockers.hide_user") ? [] : lockers.map((locker) => ({
+        location: locker.id,
+        content: ExploreDeskInfoComponent,
+        full_size: true,
+        no_scale: true,
+        data: {
+          id: locker.map_id || locker.id,
+          map_id: locker.name,
+          name: locker.name || locker.map_id,
+          user: this._state.resourceUserName(locker.id)
+        },
+        z_index: 20
+      }));
+    }));
+    this.styles = combineLatest([
+      this.locker_banks,
+      this._state.available_resources,
+      this._change
+    ]).pipe(map(([banks, free_lockers]) => banks.reduce((styles, bank) => {
+      const colours = this._settings.get("app.explore.colors") || {};
+      const status2 = this.active === bank.id ? "active" : free_lockers.find((_3) => bank.lockers.find((lkr) => lkr.id === _3.id)) ? "free" : this._state.resourceUserName(bank.id) ? "busy" : "not-bookable";
+      styles[`#${bank.map_id || bank.id}`] = {
+        fill: status2 === "active" ? "#512DA8" : colours[`locker-${status2}`] || colours[`${status2}`] || DEFAULT_COLOURS[`${status2}`]
+      };
+      return styles;
+    }, {})));
+  }
+  ngOnInit() {
+    this.subscription("levels_update", this._state.options.subscribe(({ zone_id }) => {
+      const level2 = this._org.levelWithID([zone_id]);
+      if (level2)
+        this.level = level2;
+    }));
+  }
+  ngOnChanges(changes) {
+    if (changes.active)
+      this._change.next(Date.now());
+  }
+  selectLocker(locker) {
+    this.onSelect.emit(locker);
+  }
+  setLevel(level2) {
+    this.setOptions({ zone_id: level2?.id });
+    const bld = this._org.buildings.find((_3) => _3.id === level2?.parent_id);
+    if (bld) {
+      const [latitude, longitude] = bld.location.split(",").map((_3) => parseFloat(_3));
+      this.coordinates = { latitude, longitude };
+    }
+    this.level = level2;
+  }
+  setZoom(new_zoom) {
+    this.zoom = Math.max(0.5, Math.min(10, new_zoom));
+  }
+  resetMap() {
+    this.zoom = 1;
+    this.center = { x: 0.5, y: 0.5 };
+  }
+  static {
+    this.\u0275fac = function LockerMapComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _LockerMapComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerMapComponent, selectors: [["locker-map"]], inputs: { is_displayed: "is_displayed", active: "active" }, outputs: { onSelect: "onSelect" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 8, vars: 17, consts: [[1, "bg-base-100", "p-2", "border-b", "border-base-200", "w-full"], ["levels", "", "appearance", "outline", "class", "w-full no-subscript", 4, "ngIf"], [1, "relative", "flex-1", "w-full"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "options"], ["levels", "", "appearance", "outline", 1, "w-full", "no-subscript"], ["name", "location", "placeholder", "Any Level", 3, "ngModelChange", "ngModel", "ngModelOptions"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "opacity-30 text-xs", 4, "ngIf"], [1, "opacity-30", "text-xs"], [1, "opacity-0"]], template: function LockerMapComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "div", 0);
+        \u0275\u0275template(1, LockerMapComponent_mat_form_field_1_Template, 4, 6, "mat-form-field", 1);
+        \u0275\u0275pipe(2, "async");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(3, "div", 2)(4, "interactive-map", 3);
+        \u0275\u0275pipe(5, "async");
+        \u0275\u0275pipe(6, "async");
+        \u0275\u0275pipe(7, "async");
+        \u0275\u0275twoWayListener("zoomChange", function LockerMapComponent_Template_interactive_map_zoomChange_4_listener($event) {
+          \u0275\u0275twoWayBindingSet(ctx.zoom, $event) || (ctx.zoom = $event);
+          return $event;
+        })("centerChange", function LockerMapComponent_Template_interactive_map_centerChange_4_listener($event) {
+          \u0275\u0275twoWayBindingSet(ctx.center, $event) || (ctx.center = $event);
+          return $event;
+        });
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        let tmp_0_0;
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", (tmp_0_0 = \u0275\u0275pipeBind1(2, 8, ctx.levels)) == null ? null : tmp_0_0.length);
+        \u0275\u0275advance(3);
+        \u0275\u0275property("src", ctx.map_url);
+        \u0275\u0275twoWayProperty("zoom", ctx.zoom)("center", ctx.center);
+        \u0275\u0275property("styles", \u0275\u0275pipeBind1(5, 10, ctx.styles))("features", \u0275\u0275pipeBind1(6, 12, ctx.features))("actions", \u0275\u0275pipeBind1(7, 14, ctx.actions))("options", \u0275\u0275pureFunction0(16, _c075));
+      }
+    }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatFormField, MatOption, InteractiveMapComponent, MatSelect, AsyncPipe, BuildingPipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  background: rgba(0, 0, 0, 0.05);\n  display: flex;\n  flex-direction: column;\n}\nbutton[_ngcontent-%COMP%] {\n  border-radius: 0;\n}\n/*# sourceMappingURL=locker-map.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerMapComponent, { className: "LockerMapComponent", filePath: "libs/bookings/src/lib/locker-select-modal/locker-map.component.ts", lineNumber: 81 });
+})();
+
 // libs/bookings/src/lib/locker-select-modal/locker-select-modal.component.ts
 function LockerSelectModalComponent_ng_container_16_locker_bank_list_1_Template(rf, ctx) {
   if (rf & 1) {
@@ -239779,7 +240838,7 @@ function LockerSelectModalComponent_ng_template_38_Template(rf, ctx) {
     \u0275\u0275listener("onSelect", function LockerSelectModalComponent_ng_template_38_Template_locker_map_onSelect_0_listener($event) {
       \u0275\u0275restoreView(_r7);
       const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.displayed = $event);
+      return \u0275\u0275resetView(ctx_r2.bank = $event);
     });
     \u0275\u0275elementEnd();
   }
@@ -239946,7 +241005,7 @@ var LockerSelectModalComponent = class _LockerSelectModalComponent {
         \u0275\u0275advance(2);
         \u0275\u0275textInterpolate1(" ", ctx.isSelected(ctx.displayed == null ? null : ctx.displayed.id) ? "Remove from Booking" : "Add to booking", " ");
       }
-    }, encapsulation: 2 });
+    }, dependencies: [NgIf, MatDialogClose, IconComponent, MatRipple, LockerGridComponent, LockerFiltersComponent, LockerFiltersDisplayComponent, LockerBankListComponent, LockerMapComponent], encapsulation: 2 });
   }
 };
 (() => {
@@ -239954,8 +241013,8 @@ var LockerSelectModalComponent = class _LockerSelectModalComponent {
 })();
 
 // libs/bookings/src/lib/locker-list-field.component.ts
-var _c073 = () => [];
-var _c140 = () => ({ standalone: true });
+var _c076 = () => [];
+var _c142 = () => ({ standalone: true });
 function LockerListFieldComponent_div_1_div_1_mat_checkbox_4_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
@@ -239971,7 +241030,7 @@ function LockerListFieldComponent_div_1_div_1_mat_checkbox_4_Template(rf, ctx) {
   if (rf & 2) {
     const opt_r3 = ctx.$implicit;
     const ctx_r3 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("ngModel", (ctx_r3.selected_features || \u0275\u0275pureFunction0(3, _c073)).includes(opt_r3))("ngModelOptions", \u0275\u0275pureFunction0(4, _c140));
+    \u0275\u0275property("ngModel", (ctx_r3.selected_features || \u0275\u0275pureFunction0(3, _c076)).includes(opt_r3))("ngModelOptions", \u0275\u0275pureFunction0(4, _c142));
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", opt_r3, " ");
   }
@@ -240194,1007 +241253,6 @@ var LockerListFieldComponent = class _LockerListFieldComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerListFieldComponent, { className: "LockerListFieldComponent", filePath: "libs/bookings/src/lib/locker-list-field.component.ts", lineNumber: 146 });
 })();
 
-// libs/bookings/src/lib/locker-select-modal/locker-filters.component.ts
-var _c074 = () => ({ standalone: true });
-var _c141 = () => [];
-function LockerFiltersComponent_button_2_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 22);
-    \u0275\u0275listener("click", function LockerFiltersComponent_button_2_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.close());
-    });
-    \u0275\u0275elementStart(1, "app-icon");
-    \u0275\u0275text(2, "keyboard_arrow_left");
-    \u0275\u0275elementEnd()();
-  }
-}
-function LockerFiltersComponent_mat_form_field_13_mat_option_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 26);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const reg_r4 = ctx.$implicit;
-    \u0275\u0275property("value", reg_r4);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", reg_r4.display_name || reg_r4.name, " ");
-  }
-}
-function LockerFiltersComponent_mat_form_field_13_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-form-field", 23)(1, "mat-select", 24);
-    \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_mat_form_field_13_Template_mat_select_ngModelChange_1_listener($event) {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.setRegion($event));
-    });
-    \u0275\u0275template(2, LockerFiltersComponent_mat_form_field_13_mat_option_2_Template, 2, 2, "mat-option", 25);
-    \u0275\u0275pipe(3, "async");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngModel", ctx_r1.region)("ngModelOptions", \u0275\u0275pureFunction0(5, _c074));
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(3, 3, ctx_r1.regions));
-  }
-}
-function LockerFiltersComponent_mat_form_field_15_mat_option_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 26);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const bld_r6 = ctx.$implicit;
-    \u0275\u0275property("value", bld_r6);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", bld_r6.display_name || bld_r6.name, " ");
-  }
-}
-function LockerFiltersComponent_mat_form_field_15_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-form-field", 23)(1, "mat-select", 27);
-    \u0275\u0275pipe(2, "async");
-    \u0275\u0275pipe(3, "async");
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_mat_form_field_15_Template_mat_select_ngModelChange_1_listener($event) {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.setBuilding($event));
-    });
-    \u0275\u0275template(5, LockerFiltersComponent_mat_form_field_15_mat_option_5_Template, 2, 2, "mat-option", 25);
-    \u0275\u0275pipe(6, "async");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    let tmp_3_0;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(2, 4, ctx_r1.building))("ngModelOptions", \u0275\u0275pureFunction0(12, _c074))("placeholder", ((tmp_3_0 = \u0275\u0275pipeBind1(3, 6, ctx_r1.building)) == null ? null : tmp_3_0.display_name) || ((tmp_3_0 = \u0275\u0275pipeBind1(4, 8, ctx_r1.building)) == null ? null : tmp_3_0.name));
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(6, 10, ctx_r1.buildings));
-  }
-}
-function LockerFiltersComponent_mat_form_field_17_mat_option_3_div_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 31);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "building");
-    \u0275\u0275elementStart(3, "span", 32);
-    \u0275\u0275text(4, " - ");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    let tmp_4_0;
-    const lvl_r8 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", (tmp_4_0 = \u0275\u0275pipeBind1(2, 1, lvl_r8.parent_id)) == null ? null : tmp_4_0.display_name, " ");
-  }
-}
-function LockerFiltersComponent_mat_form_field_17_mat_option_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 26)(1, "div", 29);
-    \u0275\u0275template(2, LockerFiltersComponent_mat_form_field_17_mat_option_3_div_2_Template, 5, 3, "div", 30);
-    \u0275\u0275elementStart(3, "div");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const lvl_r8 = ctx.$implicit;
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("value", lvl_r8.id);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.use_region);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", lvl_r8.display_name || lvl_r8.name, " ");
-  }
-}
-function LockerFiltersComponent_mat_form_field_17_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r7 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-form-field", 23)(1, "mat-select", 28);
-    \u0275\u0275pipe(2, "async");
-    \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_mat_form_field_17_Template_mat_select_ngModelChange_1_listener($event) {
-      \u0275\u0275restoreView(_r7);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.setOptions({ zone_id: $event }));
-    });
-    \u0275\u0275template(3, LockerFiltersComponent_mat_form_field_17_mat_option_3_Template, 5, 3, "mat-option", 25);
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    let tmp_1_0;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngModel", (tmp_1_0 = \u0275\u0275pipeBind1(2, 3, ctx_r1.options)) == null ? null : tmp_1_0.zone_id)("ngModelOptions", \u0275\u0275pureFunction0(7, _c074));
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 5, ctx_r1.levels));
-  }
-}
-function LockerFiltersComponent_div_24_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 33)(1, "mat-checkbox", 34);
-    \u0275\u0275text(2, " All Day ");
-    \u0275\u0275elementEnd()();
-  }
-}
-function LockerFiltersComponent_div_25_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 35)(1, "div", 36)(2, "label");
-    \u0275\u0275text(3, "Start Time");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "a-time-field", 37);
-    \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_div_25_Template_a_time_field_ngModelChange_4_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.form.patchValue({ date: $event }));
-    });
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(5, "div", 36)(6, "label");
-    \u0275\u0275text(7, "End Time");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(8, "a-duration-field", 38);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    let tmp_4_0;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(8, _c074))("use_24hr", ctx_r1.use_24hr);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("time", (tmp_4_0 = ctx_r1.form.get("date")) == null ? null : tmp_4_0.value)("max", 10 * 60)("min", 60)("step", 60)("use_24hr", ctx_r1.use_24hr);
-  }
-}
-function LockerFiltersComponent_section_36_div_3_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r10 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 41)(1, "div", 42);
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "mat-checkbox", 43);
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_section_36_div_3_Template_mat_checkbox_ngModelChange_3_listener($event) {
-      const feat_r11 = \u0275\u0275restoreView(_r10).$implicit;
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r1.setFeature(feat_r11, $event));
-    });
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    let tmp_4_0;
-    const feat_r11 = ctx.$implicit;
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(feat_r11);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngModel", (((tmp_4_0 = \u0275\u0275pipeBind1(4, 3, ctx_r1.options)) == null ? null : tmp_4_0.features) || \u0275\u0275pureFunction0(5, _c141)).includes(feat_r11))("ngModelOptions", \u0275\u0275pureFunction0(6, _c074));
-  }
-}
-function LockerFiltersComponent_section_36_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "section", 39)(1, "h2", 16);
-    \u0275\u0275text(2, "Type");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, LockerFiltersComponent_section_36_div_3_Template, 5, 7, "div", 40);
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 1, ctx_r1.features));
-  }
-}
-function LockerFiltersComponent_div_38_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r12 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 44)(1, "button", 45);
-    \u0275\u0275listener("click", function LockerFiltersComponent_div_38_Template_button_click_1_listener() {
-      \u0275\u0275restoreView(_r12);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.close());
-    });
-    \u0275\u0275text(2, " Apply Filters ");
-    \u0275\u0275elementEnd()();
-  }
-}
-var LockerFiltersComponent = class _LockerFiltersComponent {
-  get building() {
-    return this._org.building;
-  }
-  set building(bld) {
-    this._org.building = bld;
-  }
-  get region() {
-    return this._org.region;
-  }
-  set region(reg) {
-    this._org.region = reg;
-  }
-  get allow_time_changes() {
-    return !!this._settings.get("app.lockers.allow_time_changes");
-  }
-  get allow_all_day() {
-    return this.allow_time_changes && !!this._settings.get("app.lockers.allow_all_day");
-  }
-  get end_date() {
-    return endOfDay(addDays(Date.now(), this._settings.get("app.lockers.available_period") || 90));
-  }
-  get use_24hr() {
-    return this._settings.get("app.use_24_hour_time");
-  }
-  get use_region() {
-    return this._settings.get("app.use_region");
-  }
-  constructor(_bsheet_ref, _state, _org, _settings) {
-    this._bsheet_ref = _bsheet_ref;
-    this._state = _state;
-    this._org = _org;
-    this._settings = _settings;
-    this.can_close = false;
-    this.options = this._state.options;
-    this.features = this._state.features;
-    this.buildings = this._org.active_buildings;
-    this.form = this._state.form;
-    this.regions = this._org.region_list;
-    this.levels = combineLatest([
-      this._org.active_region,
-      this._org.active_building
-    ]).pipe(map(([region, bld]) => {
-      const level_list = this.use_region ? this._org.levelsForRegion(region) : this._org.levelsForBuilding(bld);
-      return level_list.sort((a6, b3) => a6.parent_id.localeCompare(b3.parent_id) || (a6.display_name || "").localeCompare(b3.display_name || ""));
-    }));
-    this.close = () => this._bsheet_ref.dismiss();
-    this.setOptions = (o2) => this._state.setOptions(o2);
-    this.setFeature = (f3, e2) => this._state.setFeature(f3, e2);
-    this.setLevel = (l3) => {
-    };
-    this.can_close = !!this._bsheet_ref;
-  }
-  static {
-    this.\u0275fac = function LockerFiltersComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _LockerFiltersComponent)(\u0275\u0275directiveInject(MatBottomSheetRef, 8), \u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerFiltersComponent, selectors: [["locker-filters"]], inputs: { hide_levels: "hide_levels" }, decls: 39, vars: 30, consts: [[1, "flex", "rounded-t-md", "items-center", "border-b", "border-base-200", "pb-2", "sm:hidden"], [1, "flex-1", "pl-2"], ["icon", "", "matRipple", "", "name", "close-locker-filters", "class", "sm:hidden", 3, "click", 4, "ngIf"], [1, "font-medium", "flex-2", "text-center"], [1, "flex-1"], [1, "max-h-[65vh]", "p-2", "overflow-y-auto", "overflow-x-hidden", "divide-y", "divide-base-200", "w-full", "max-w-[100vw]", "sm:max-w-[30vw]", 3, "formGroup"], ["details", ""], [1, "text-lg", "font-medium", "mb-1"], [1, "flex-1", "min-w-[8rem]", "flex", "flex-col"], ["for", "location"], ["appearance", "outline", "class", "w-full", 4, "ngIf"], [1, "flex-1", "min-w-[256px]"], ["name", "date", "formControlName", "date", 3, "to"], ["class", "flex justify-end -mt-2 mb-2", 4, "ngIf"], ["class", "flex items-center space-x-2", 4, "ngIf"], ["favs", "", 1, "space-y-2", "pb-4"], [1, "text-lg", "font-medium"], [1, "flex", "items-center"], ["for", "fav", 1, "flex-1", "w-1/2"], ["name", "fav", 3, "ngModelChange", "ngModel", "ngModelOptions"], ["class", "space-y-2", "features", "", 4, "ngIf"], ["class", "px-2 py-2 w-full border-t border-base-200", 4, "ngIf"], ["icon", "", "matRipple", "", "name", "close-locker-filters", 1, "sm:hidden", 3, "click"], ["appearance", "outline", 1, "w-full"], ["name", "region", "placeholder", "Any Region", 3, "ngModelChange", "ngModel", "ngModelOptions"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], ["name", "building", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], ["name", "location", "placeholder", "Any Level", 3, "ngModelChange", "ngModel", "ngModelOptions"], [1, "flex", "flex-col-reverse"], ["class", "opacity-30 text-xs", 4, "ngIf"], [1, "opacity-30", "text-xs"], [1, "opacity-0"], [1, "flex", "justify-end", "-mt-2", "mb-2"], ["formControlName", "all_day"], [1, "flex", "items-center", "space-x-2"], [1, "flex-1", "w-1/3"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "use_24hr"], ["formControlName", "duration", 3, "time", "max", "min", "step", "use_24hr"], ["features", "", 1, "space-y-2"], ["class", "flex items-center flex-wrap space-x-2", 4, "ngFor", "ngForOf"], [1, "flex", "items-center", "flex-wrap", "space-x-2"], ["for", "feat", 1, "flex-1", "w-1/2"], [3, "ngModelChange", "ngModel", "ngModelOptions"], [1, "px-2", "py-2", "w-full", "border-t", "border-base-200"], ["btn", "", "matRipple", "", "name", "apply-locker-filters", 1, "w-full", 3, "click"]], template: function LockerFiltersComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
-        \u0275\u0275template(2, LockerFiltersComponent_button_2_Template, 3, 0, "button", 2);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(3, "h3", 3);
-        \u0275\u0275text(4, "Locker Filters");
-        \u0275\u0275elementEnd();
-        \u0275\u0275element(5, "div", 4);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(6, "form", 5)(7, "section", 6)(8, "h2", 7);
-        \u0275\u0275text(9, "Details");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(10, "div", 8)(11, "label", 9);
-        \u0275\u0275text(12, "Location");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(13, LockerFiltersComponent_mat_form_field_13_Template, 4, 6, "mat-form-field", 10);
-        \u0275\u0275pipe(14, "async");
-        \u0275\u0275template(15, LockerFiltersComponent_mat_form_field_15_Template, 7, 13, "mat-form-field", 10);
-        \u0275\u0275pipe(16, "async");
-        \u0275\u0275template(17, LockerFiltersComponent_mat_form_field_17_Template, 5, 8, "mat-form-field", 10);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(18, "div", 11)(19, "label");
-        \u0275\u0275text(20, "Date");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(21, "a-date-field", 12);
-        \u0275\u0275text(22);
-        \u0275\u0275pipe(23, "translate");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275template(24, LockerFiltersComponent_div_24_Template, 3, 0, "div", 13)(25, LockerFiltersComponent_div_25_Template, 9, 9, "div", 14);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(26, "section", 15)(27, "h2", 16);
-        \u0275\u0275text(28);
-        \u0275\u0275pipe(29, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(30, "div", 17)(31, "div", 18);
-        \u0275\u0275text(32);
-        \u0275\u0275pipe(33, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(34, "mat-checkbox", 19);
-        \u0275\u0275pipe(35, "async");
-        \u0275\u0275listener("ngModelChange", function LockerFiltersComponent_Template_mat_checkbox_ngModelChange_34_listener($event) {
-          return ctx.setOptions({ show_fav: $event });
-        });
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275template(36, LockerFiltersComponent_section_36_Template, 5, 3, "section", 20);
-        \u0275\u0275pipe(37, "async");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(38, LockerFiltersComponent_div_38_Template, 3, 0, "div", 21);
-      }
-      if (rf & 2) {
-        let tmp_2_0;
-        let tmp_3_0;
-        let tmp_11_0;
-        let tmp_13_0;
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.can_close);
-        \u0275\u0275advance(4);
-        \u0275\u0275property("formGroup", ctx.form);
-        \u0275\u0275advance(7);
-        \u0275\u0275property("ngIf", ctx.use_region && ((tmp_2_0 = \u0275\u0275pipeBind1(14, 15, ctx.regions)) == null ? null : tmp_2_0.length));
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !ctx.use_region && ((tmp_3_0 = \u0275\u0275pipeBind1(16, 17, ctx.buildings)) == null ? null : tmp_3_0.length) > 1);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !ctx.hide_levels);
-        \u0275\u0275advance(4);
-        \u0275\u0275property("to", ctx.end_date);
-        \u0275\u0275advance();
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(23, 19, "FORM.DATE_ERROR"), " ");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.allow_all_day);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", !ctx.form.value.all_day);
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(29, 21, "COMMON.FAVOURITES"), " ");
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(33, 23, "LOCKERS.SHOW_FAVOURITES"), " ");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngModel", (tmp_11_0 = \u0275\u0275pipeBind1(35, 25, ctx.options)) == null ? null : tmp_11_0.show_fav)("ngModelOptions", \u0275\u0275pureFunction0(29, _c074));
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", (tmp_13_0 = \u0275\u0275pipeBind1(37, 27, ctx.features)) == null ? null : tmp_13_0.length);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.can_close);
-      }
-    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, MatFormField, MatCheckbox, MatOption, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, IconComponent, MatSelect, MatRipple, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  max-width: 100vw;\n}\n/*# sourceMappingURL=locker-filters.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerFiltersComponent, { className: "LockerFiltersComponent", filePath: "libs/bookings/src/lib/locker-select-modal/locker-filters.component.ts", lineNumber: 229 });
-})();
-
-// libs/bookings/src/lib/locker-select-modal/locker-filters-display.component.ts
-var _c075 = () => [];
-function LockerFiltersDisplayComponent_div_16_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 10)(1, "p");
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "button", 11);
-    \u0275\u0275listener("click", function LockerFiltersDisplayComponent_div_16_Template_button_click_3_listener() {
-      const feat_r2 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.setFeature(feat_r2, false));
-    });
-    \u0275\u0275elementStart(4, "app-icon");
-    \u0275\u0275text(5, "close");
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const feat_r2 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(feat_r2);
-  }
-}
-function LockerFiltersDisplayComponent_div_18_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 12)(1, "span");
-    \u0275\u0275text(2, "Favourites Only");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "button", 13);
-    \u0275\u0275listener("click", function LockerFiltersDisplayComponent_div_18_Template_button_click_3_listener() {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.setOptions({ show_fav: false }));
-    });
-    \u0275\u0275elementStart(4, "app-icon");
-    \u0275\u0275text(5, "close");
-    \u0275\u0275elementEnd()()();
-  }
-}
-var LockerFiltersDisplayComponent = class _LockerFiltersDisplayComponent extends AsyncHandler {
-  get start() {
-    return this._state.form.value.date;
-  }
-  get end() {
-    const { date, duration, all_day } = this._state.form.value;
-    if (all_day)
-      return endOfDay(date);
-    return date + duration * 60 * 1e3;
-  }
-  get time_format() {
-    return this._settings.time_format;
-  }
-  constructor(_bsheet, _state, _settings) {
-    super();
-    this._bsheet = _bsheet;
-    this._state = _state;
-    this._settings = _settings;
-    this.view = "list";
-    this.viewChange = new EventEmitter();
-    this.options = this._state.options;
-    this.setOptions = (o2) => this._state.setOptions(o2);
-    this.setFeature = (f3, e2) => this._state.setFeature(f3, e2);
-    this.editFilter = () => this._bsheet.open(LockerFiltersComponent);
-  }
-  static {
-    this.\u0275fac = function LockerFiltersDisplayComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _LockerFiltersDisplayComponent)(\u0275\u0275directiveInject(MatBottomSheet), \u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(SettingsService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerFiltersDisplayComponent, selectors: [["locker-filters-display"]], inputs: { view: "view" }, outputs: { viewChange: "viewChange" }, features: [\u0275\u0275InheritDefinitionFeature], decls: 20, vars: 23, consts: [["actions", "", 1, "sm:hidden", "space-x-2", "flex", "flex-row", "items-center", "p-2"], ["btn", "", "matRipple", "", "name", "edit-locker-filters", 1, "flex-1", "w-1/2", 3, "click"], [1, "flex", "items-center"], ["btn", "", "matRipple", "", "name", "view-locker-map", 1, "rounded-l", "rounded-r-none", 3, "click"], ["btn", "", "matRipple", "", "name", "view-locker-list", 1, "rounded-r", "rounded-l-none", 3, "click"], ["filters", "", 1, "flex", "items-center", "flex-wrap", "p-2", "w-[35rem]", "max-w-full", "sm:max-w-[35rem]"], ["filter-item", "", "date", ""], ["filter-item", "", "time", ""], ["filter-item", "", "features", "", 4, "ngFor", "ngForOf"], ["filter-item", "", 4, "ngIf"], ["filter-item", "", "features", ""], ["icon", "", "matRipple", "", "name", "remove-locker-filter", 1, "-mr-4", 3, "click"], ["filter-item", ""], ["icon", "", "matRipple", "", "name", "remove-locker-favs-filter", 1, "-mr-4", 3, "click"]], template: function LockerFiltersDisplayComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "section", 0)(1, "button", 1);
-        \u0275\u0275listener("click", function LockerFiltersDisplayComponent_Template_button_click_1_listener() {
-          return ctx.editFilter();
-        });
-        \u0275\u0275text(2, " Filters ");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(3, "div", 2)(4, "button", 3);
-        \u0275\u0275listener("click", function LockerFiltersDisplayComponent_Template_button_click_4_listener() {
-          ctx.view = "map";
-          return ctx.viewChange.emit(ctx.view);
-        });
-        \u0275\u0275text(5, " Map ");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(6, "button", 4);
-        \u0275\u0275listener("click", function LockerFiltersDisplayComponent_Template_button_click_6_listener() {
-          ctx.view = "list";
-          return ctx.viewChange.emit(ctx.view);
-        });
-        \u0275\u0275text(7, " List ");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(8, "section", 5)(9, "div", 6);
-        \u0275\u0275text(10);
-        \u0275\u0275pipe(11, "date");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(12, "div", 7);
-        \u0275\u0275text(13);
-        \u0275\u0275pipe(14, "date");
-        \u0275\u0275pipe(15, "date");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(16, LockerFiltersDisplayComponent_div_16_Template, 6, 1, "div", 8);
-        \u0275\u0275pipe(17, "async");
-        \u0275\u0275template(18, LockerFiltersDisplayComponent_div_18_Template, 6, 0, "div", 9);
-        \u0275\u0275pipe(19, "async");
-        \u0275\u0275elementEnd();
-      }
-      if (rf & 2) {
-        let tmp_4_0;
-        let tmp_5_0;
-        \u0275\u0275advance(4);
-        \u0275\u0275classProp("inverse", ctx.view !== "map");
-        \u0275\u0275advance(2);
-        \u0275\u0275classProp("inverse", ctx.view !== "list");
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(11, 9, ctx.start, "mediumDate"));
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(14, 12, ctx.start, ctx.time_format), " \u2014 ", \u0275\u0275pipeBind2(15, 15, ctx.end, ctx.time_format), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngForOf", ((tmp_4_0 = \u0275\u0275pipeBind1(17, 18, ctx.options)) == null ? null : tmp_4_0.features) || \u0275\u0275pureFunction0(22, _c075));
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", (tmp_5_0 = \u0275\u0275pipeBind1(19, 20, ctx.options)) == null ? null : tmp_5_0.show_fav);
-      }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, AsyncPipe, DatePipe], styles: ["\n\n[filter-item][_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0 1rem;\n  height: 2rem;\n  font-size: 0.875rem;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 1.25rem;\n  margin-right: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n[filter-item][_ngcontent-%COMP%]:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n[filter-item][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%]    + *[_ngcontent-%COMP%] {\n  margin-left: 0.5rem;\n}\n/*# sourceMappingURL=locker-filters-display.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerFiltersDisplayComponent, { className: "LockerFiltersDisplayComponent", filePath: "libs/bookings/src/lib/locker-select-modal/locker-filters-display.component.ts", lineNumber: 112 });
-})();
-
-// libs/bookings/src/lib/locker-select-modal/locker-bank-list.component.ts
-function LockerBankListComponent_ng_container_5_ul_1_li_1_div_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 21)(1, "app-icon");
-    \u0275\u0275text(2, "done");
-    \u0275\u0275elementEnd()();
-  }
-}
-function LockerBankListComponent_ng_container_5_ul_1_li_1_img_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 22);
-  }
-  if (rf & 2) {
-    const locker_bank_r2 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275property("source", locker_bank_r2.images[0]);
-  }
-}
-function LockerBankListComponent_ng_container_5_ul_1_li_1_ng_template_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 23);
-  }
-}
-function LockerBankListComponent_ng_container_5_ul_1_li_1_div_26_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 24);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const locker_bank_r2 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", locker_bank_r2.tags[0], " ");
-  }
-}
-function LockerBankListComponent_ng_container_5_ul_1_li_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "li", 9)(1, "button", 10);
-    \u0275\u0275listener("click", function LockerBankListComponent_ng_container_5_ul_1_li_1_Template_button_click_1_listener() {
-      const locker_bank_r2 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r2.selectLockerBank(locker_bank_r2));
-    });
-    \u0275\u0275elementStart(2, "div", 11);
-    \u0275\u0275template(3, LockerBankListComponent_ng_container_5_ul_1_li_1_div_3_Template, 3, 0, "div", 12)(4, LockerBankListComponent_ng_container_5_ul_1_li_1_img_4_Template, 1, 1, "img", 13)(5, LockerBankListComponent_ng_container_5_ul_1_li_1_ng_template_5_Template, 1, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "div", 14)(8, "span", 15);
-    \u0275\u0275text(9);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "div", 16)(11, "app-icon", 17);
-    \u0275\u0275text(12, "place");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "p", 18);
-    \u0275\u0275text(14);
-    \u0275\u0275pipe(15, "level");
-    \u0275\u0275pipe(16, "level");
-    \u0275\u0275pipe(17, "level");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(18, "div", 16)(19, "app-icon", 17);
-    \u0275\u0275text(20, "people");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(21, "p", 18);
-    \u0275\u0275text(22);
-    \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(23, "button", 19);
-    \u0275\u0275listener("click", function LockerBankListComponent_ng_container_5_ul_1_li_1_Template_button_click_23_listener() {
-      const locker_bank_r2 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r2.toggleFav.emit(locker_bank_r2));
-    });
-    \u0275\u0275elementStart(24, "app-icon");
-    \u0275\u0275text(25);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(26, LockerBankListComponent_ng_container_5_ul_1_li_1_div_26_Template, 2, 1, "div", 20);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    let tmp_12_0;
-    const locker_bank_r2 = ctx.$implicit;
-    const placeholder_r4 = \u0275\u0275reference(6);
-    const ctx_r2 = \u0275\u0275nextContext(3);
-    \u0275\u0275classProp("!border-blue-400", ctx_r2.active === locker_bank_r2.id);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", ctx_r2.selected.includes(locker_bank_r2.id));
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", locker_bank_r2.images == null ? null : locker_bank_r2.images.length)("ngIfElse", placeholder_r4);
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", locker_bank_r2.name || locker_bank_r2.id || "Locker_bank", " ");
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(15, 13, locker_bank_r2.zones) ? ((tmp_12_0 = \u0275\u0275pipeBind1(16, 15, locker_bank_r2.zones)) == null ? null : tmp_12_0.display_name) || ((tmp_12_0 = \u0275\u0275pipeBind1(17, 17, locker_bank_r2.zones)) == null ? null : tmp_12_0.name) : "", " ");
-    \u0275\u0275advance(8);
-    \u0275\u0275textInterpolate2(" ", locker_bank_r2.available || 0, " / ", locker_bank_r2.lockers.length || 1, " Available ");
-    \u0275\u0275advance();
-    \u0275\u0275classProp("text-blue-400", ctx_r2.isFavourite(locker_bank_r2.id));
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r2.isFavourite(locker_bank_r2.id) ? "favorite" : "favorite_border");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", locker_bank_r2.tags == null ? null : locker_bank_r2.tags.length);
-  }
-}
-function LockerBankListComponent_ng_container_5_ul_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "ul", 7);
-    \u0275\u0275template(1, LockerBankListComponent_ng_container_5_ul_1_li_1_Template, 27, 19, "li", 8);
-    \u0275\u0275pipe(2, "async");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(2, 1, ctx_r2.locker_banks));
-  }
-}
-function LockerBankListComponent_ng_container_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, LockerBankListComponent_ng_container_5_ul_1_Template, 3, 3, "ul", 6);
-    \u0275\u0275pipe(2, "async");
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    let tmp_3_0;
-    const ctx_r2 = \u0275\u0275nextContext();
-    const empty_state_r5 = \u0275\u0275reference(10);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", (tmp_3_0 = \u0275\u0275pipeBind1(2, 2, ctx_r2.locker_banks)) == null ? null : tmp_3_0.length)("ngIfElse", empty_state_r5);
-  }
-}
-function LockerBankListComponent_ng_template_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 25);
-    \u0275\u0275element(1, "mat-spinner", 26);
-    \u0275\u0275elementStart(2, "p", 27);
-    \u0275\u0275text(3, "Finding available locker banks...");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275property("diameter", 32);
-  }
-}
-function LockerBankListComponent_ng_template_9_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 28)(1, "p", 29);
-    \u0275\u0275text(2, " No available locker banks for selected time and/or filters ");
-    \u0275\u0275elementEnd()();
-  }
-}
-var LockerBankListComponent = class _LockerBankListComponent {
-  constructor(_state, _org, _settings) {
-    this._state = _state;
-    this._org = _org;
-    this._settings = _settings;
-    this.active = "";
-    this.selected = "";
-    this.favorites = [];
-    this.onSelect = new EventEmitter();
-    this.toggleFav = new EventEmitter();
-    this.lockers_banks$ = loadLockerBanks(this._org, combineLatest([this._org.active_building, this._org.active_region]), () => this._settings.get("app.use_region"));
-    this.lockers$ = loadLockers(this._org, combineLatest([this._org.active_building, this._org.active_region]), this.lockers_banks$, () => this._settings.get("app.use_region"));
-    this.locker_banks = combineLatest([
-      this._state.options,
-      this._state.available_resources,
-      this.lockers_banks$,
-      this.lockers$
-    ]).pipe(map(([{ show_fav }, resources, banks]) => {
-      return banks.filter((i2) => (!show_fav || this.isFavourite(i2.id)) && resources.find((_3) => _3.bank_id === i2.id)).map((bank) => __spreadProps(__spreadValues({}, bank), {
-        available: resources.filter((_3) => _3.bank_id === bank.id).length,
-        lockers: bank.lockers.map((_3) => __spreadProps(__spreadValues({}, _3), {
-          map_id: bank.map_id || bank.id,
-          zone: bank.zone
-        }))
-      }));
-    }));
-    this.loading = this._state.loading;
-  }
-  isFavourite(locker_bank_id) {
-    return this.favorites.includes(locker_bank_id);
-  }
-  selectLockerBank(locker_bank) {
-    this.onSelect.emit(locker_bank);
-  }
-  static {
-    this.\u0275fac = function LockerBankListComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _LockerBankListComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerBankListComponent, selectors: [["locker-bank-list"]], inputs: { active: "active", selected: "selected", favorites: "favorites" }, outputs: { onSelect: "onSelect", toggleFav: "toggleFav" }, decls: 11, vars: 7, consts: [["load_state", ""], ["empty_state", ""], ["placeholder", ""], [1, "font-bold"], ["count", "", 1, "text-sm", "opacity-60", "mb-4"], [4, "ngIf", "ngIfElse"], ["class", "list-style-none space-y-2 min-w-[50vh]", 4, "ngIf", "ngIfElse"], [1, "list-style-none", "space-y-2", "min-w-[50vh]"], ["locker_bank", "", "class", "relative rounded-lg w-full shadow border bg-base-100 border-base-200 overflow-hidden", 3, "!border-blue-400", 4, "ngFor", "ngForOf"], ["locker_bank", "", 1, "relative", "rounded-lg", "w-full", "shadow", "border", "bg-base-100", "border-base-200", "overflow-hidden"], ["name", "select-locker_bank", "matRipple", "", 1, "w-full", "h-full", "flex", "p-2", 3, "click"], [1, "relative", "w-20", "h-20", "rounded-xl", "bg-base-200", "mr-4", "flex", "items-center", "justify-center"], ["class", "absolute top-1 left-1 border border-neutral bg-base-200 rounded-full h-6 w-6 flex items-center justify-center text-white", 4, "ngIf"], ["auth", "", "class", "object-cover h-full", 3, "source", 4, "ngIf", "ngIfElse"], [1, "space-y-2", "pt-2", "flex-1", "text-left"], [1, "font-medium"], [1, "flex", "items-center", "text-sm", "space-x-2"], [1, "text-blue-500"], [1, "text-xs"], ["icon", "", "matRipple", "", "name", "toggle-locker_bank-favourite", 1, "absolute", "top-1", "right-1", 3, "click"], ["class", "absolute bottom-2 right-2 bg-base-200 rounded text-xs px-2 py-1 font-mono", 4, "ngIf"], [1, "absolute", "top-1", "left-1", "border", "border-neutral", "bg-base-200", "rounded-full", "h-6", "w-6", "flex", "items-center", "justify-center", "text-white"], ["auth", "", 1, "object-cover", "h-full", 3, "source"], ["src", "assets/icons/locker-placeholder.svg", 1, "m-auto"], [1, "absolute", "bottom-2", "right-2", "bg-base-200", "rounded", "text-xs", "px-2", "py-1", "font-mono"], ["loading", "", 1, "p-16", "flex", "flex-col", "items-center", "justify-center", "space-y-2"], [3, "diameter"], [1, "opacity-30"], ["empty", "", 1, "p-16", "flex", "flex-col", "items-center", "justify-center", "space-y-2"], [1, "opacity-30", "text-center"]], template: function LockerBankListComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "h3", 3);
-        \u0275\u0275text(1, "Results");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(2, "p", 4);
-        \u0275\u0275text(3);
-        \u0275\u0275pipe(4, "async");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(5, LockerBankListComponent_ng_container_5_Template, 3, 4, "ng-container", 5);
-        \u0275\u0275pipe(6, "async");
-        \u0275\u0275template(7, LockerBankListComponent_ng_template_7_Template, 4, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(9, LockerBankListComponent_ng_template_9_Template, 3, 0, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        let tmp_2_0;
-        let tmp_3_0;
-        const load_state_r6 = \u0275\u0275reference(8);
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", ((tmp_2_0 = \u0275\u0275pipeBind1(4, 3, ctx.locker_banks)) == null ? null : tmp_2_0.length) || 0, " result(s) found ");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !((tmp_3_0 = \u0275\u0275pipeBind1(6, 5, ctx.loading)) == null ? null : tmp_3_0.length))("ngIfElse", load_state_r6);
-      }
-    }, dependencies: [NgForOf, NgIf, MatProgressSpinner, IconComponent, AuthenticatedImageDirective, MatRipple, AsyncPipe, LevelPipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  background: rgba(0, 0, 0, 0.05);\n  overflow-y: auto;\n}\n/*# sourceMappingURL=locker-bank-list.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerBankListComponent, { className: "LockerBankListComponent", filePath: "libs/bookings/src/lib/locker-select-modal/locker-bank-list.component.ts", lineNumber: 153 });
-})();
-
-// libs/explore/src/lib/explore-locker-bank-modal.component.ts
-var ExploreLockerBankModalComponent = class _ExploreLockerBankModalComponent {
-  constructor(_data) {
-    this._data = _data;
-    this.bank = this._data.bank;
-    this.lockers = this._data.lockers.reduce((map3, l3) => {
-      map3[l3.id] = "busy";
-      return map3;
-    }, {});
-  }
-  static {
-    this.\u0275fac = function ExploreLockerBankModalComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _ExploreLockerBankModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreLockerBankModalComponent, selectors: [["explore-locker-bank-modal"]], decls: 8, vars: 3, consts: [[1, "text-xl", "font-medium"], ["btn", "", "icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "h-[65vh]", "overflow-hidden"], [3, "bank", "bank_status"]], template: function ExploreLockerBankModalComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "header")(1, "h2", 0);
-        \u0275\u0275text(2);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(3, "button", 1)(4, "app-icon");
-        \u0275\u0275text(5, "close");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(6, "main", 2);
-        \u0275\u0275element(7, "locker-grid", 3);
-        \u0275\u0275elementEnd();
-      }
-      if (rf & 2) {
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate(ctx.bank.name);
-        \u0275\u0275advance(5);
-        \u0275\u0275property("bank", ctx.bank)("bank_status", ctx.lockers);
-      }
-    }, dependencies: [IconComponent, MatRipple, MatDialogClose, LockerGridComponent] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreLockerBankModalComponent, { className: "ExploreLockerBankModalComponent", filePath: "libs/explore/src/lib/explore-locker-bank-modal.component.ts", lineNumber: 25 });
-})();
-
-// libs/explore/src/lib/explore-locker-bank-info.component.ts
-function ExploreLockerBankInfoComponent_ng_template_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 3)(1, "h3", 4);
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "p", 5);
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275classMap("absolute rounded bg-base-100 p-4 top-0 left-0 shadow pointer-events-none " + ctx_r1.x_pos + " " + ctx_r1.y_pos);
-    \u0275\u0275property("id", ctx_r1.map_id);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r1.bank.name);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate2(" ", ctx_r1.in_use_count, " lockers in use of ", ctx_r1.bank.lockers.length || 1, " ");
-  }
-}
-var ExploreLockerBankInfoComponent = class _ExploreLockerBankInfoComponent {
-  constructor(_details, _element, _dialog) {
-    this._details = _details;
-    this._element = _element;
-    this._dialog = _dialog;
-    this.bank = this._details.bank;
-    this.in_use_count = this._details.in_use_count;
-  }
-  ngOnInit(tries = 0) {
-    if (tries > 10)
-      return;
-    setTimeout(() => {
-      const parent = this._element.nativeElement.parentElement?.parentElement;
-      if (!parent)
-        return this.ngOnInit(++tries);
-      const position = {
-        y: parseInt(parent.style.top, 10) / 100,
-        x: parseInt(parent.style.left, 10) / 100
-      };
-      this.y_pos = position.y >= 0.5 ? "bottom" : "top";
-      this.x_pos = position.x >= 0.5 ? "right" : "left";
-    }, 200);
-  }
-  openBankModal() {
-    this._dialog.open(ExploreLockerBankModalComponent, {
-      data: __spreadValues({}, this._details)
-    });
-  }
-  static {
-    this.\u0275fac = function ExploreLockerBankInfoComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _ExploreLockerBankInfoComponent)(\u0275\u0275directiveInject(MAP_FEATURE_DATA), \u0275\u0275directiveInject(ElementRef), \u0275\u0275directiveInject(MatDialog));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreLockerBankInfoComponent, selectors: [["explore-locker-bank-info"]], decls: 4, vars: 6, consts: [["desk_tooltip", ""], [1, "h-full", "w-full", "pointer-events-auto", "relative", 3, "click"], ["customTooltip", "", 1, "h-full", "w-full", "pointer-events-auto", "relative", 3, "content", "backdrop", "xPosition", "yPosition", "hover", "delay"], ["name", "space-info", 3, "id"], [1, "font-medium"], [1, "whitespace-nowrap", "text-sm"]], template: function ExploreLockerBankInfoComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "button", 1);
-        \u0275\u0275listener("click", function ExploreLockerBankInfoComponent_Template_button_click_0_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.openBankModal());
-        });
-        \u0275\u0275element(1, "div", 2);
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(2, ExploreLockerBankInfoComponent_ng_template_2_Template, 5, 6, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        const desk_tooltip_r3 = \u0275\u0275reference(3);
-        \u0275\u0275advance();
-        \u0275\u0275property("content", desk_tooltip_r3)("backdrop", false)("xPosition", "center")("yPosition", "center")("hover", true)("delay", 3e3);
-      }
-    }, dependencies: [CustomTooltipComponent] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreLockerBankInfoComponent, { className: "ExploreLockerBankInfoComponent", filePath: "libs/explore/src/lib/explore-locker-bank-info.component.ts", lineNumber: 53 });
-})();
-
-// libs/bookings/src/lib/locker-select-modal/locker-map.component.ts
-var _c076 = () => ({ standalone: true });
-function LockerMapComponent_mat_option_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 10);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const lvl_r1 = ctx.$implicit;
-    \u0275\u0275property("value", lvl_r1);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", lvl_r1.display_name || lvl_r1.name, " ");
-  }
-}
-var LockerMapComponent = class _LockerMapComponent extends AsyncHandler {
-  get map_url() {
-    return this.level?.map_id || "";
-  }
-  constructor(_state, _settings) {
-    super();
-    this._state = _state;
-    this._settings = _settings;
-    this.is_displayed = false;
-    this.onSelect = new EventEmitter();
-    this.lockers = this._state.available_resources;
-    this.loading = this._state.loading;
-    this.zoom = 1;
-    this.center = { x: 0.5, y: 0.5 };
-    this.setOptions = (o2) => this._state.setOptions(o2);
-    this.levels = this._state.available_resources.pipe(map((lockers) => unique(lockers.map((locker) => locker.zone), "id")));
-    this.actions = this._state.available_resources.pipe(map((lockers) => lockers.map((locker) => ({
-      id: locker.map_id || locker.id,
-      action: ["touchend", "mouseup"],
-      callback: () => this.selectLocker(locker)
-    }))));
-    this.features = this._state.resources.pipe(map((lockers) => {
-      return this._settings.get("app.lockers.hide_user") ? [] : lockers.map((locker) => ({
-        location: locker.id,
-        content: ExploreLockerBankInfoComponent,
-        full_size: true,
-        no_scale: true,
-        data: {
-          id: locker.map_id || locker.id,
-          map_id: locker.name,
-          name: locker.name || locker.map_id,
-          user: this._state.resourceUserName(locker.id)
-        },
-        z_index: 20
-      }));
-    }));
-    this.styles = combineLatest([
-      this._state.resources,
-      this._state.available_resources
-    ]).pipe(map(([lockers, free_lockers]) => lockers.reduce((styles, locker) => {
-      const colours = this._settings.get("app.explore.colors") || {};
-      const status2 = free_lockers.find((_3) => _3.id === locker.id) ? "free" : "busy";
-      styles[`#${locker.map_id || locker.id}`] = {
-        fill: colours[`locker-${status2}`] || colours[`${status2}`] || DEFAULT_COLOURS[`${status2}`]
-      };
-      return styles;
-    }, {})));
-  }
-  ngOnInit() {
-    this.subscription("levels_update", this.levels.subscribe((levels2) => {
-      if (!levels2.find((_3) => _3.id === this.level?.id)) {
-        this.level = levels2[0];
-      }
-    }));
-  }
-  selectLocker(locker) {
-    this.onSelect.emit(locker);
-  }
-  setZoom(new_zoom) {
-    this.zoom = Math.max(0.5, Math.min(10, new_zoom));
-  }
-  resetMap() {
-    this.zoom = 1;
-    this.center = { x: 0.5, y: 0.5 };
-  }
-  static {
-    this.\u0275fac = function LockerMapComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _LockerMapComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(SettingsService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerMapComponent, selectors: [["locker-map"]], inputs: { is_displayed: "is_displayed" }, outputs: { onSelect: "onSelect" }, features: [\u0275\u0275InheritDefinitionFeature], decls: 21, vars: 18, consts: [[3, "zoomChange", "centerChange", "src", "zoom", "center", "features", "styles", "actions"], [1, "absolute", "inset-x-0", "top-0", "bg-base-100", "p-2", "border-b", "border-base-200"], ["levels", "", "appearance", "outline", 1, "w-full", "h-[3.25rem]"], [3, "ngModelChange", "ngModel", "ngModelOptions"], [3, "value", 4, "ngFor", "ngForOf"], ["zoom", "", 1, "absolute", "bottom-2", "right-2", "rounded-lg", "border", "border-base-200", "bg-base-100", "flex", "flex-col", "overflow-hidden"], ["zoom-in", "", "icon", "", "matRipple", "", 3, "click"], [1, "border-t", "border-base-200", "w-full"], ["zoom-out", "", "icon", "", "matRipple", "", 3, "click"], ["reset", "", "icon", "", "matRipple", "", 3, "click"], [3, "value"]], template: function LockerMapComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "interactive-map", 0);
-        \u0275\u0275pipe(1, "async");
-        \u0275\u0275pipe(2, "async");
-        \u0275\u0275pipe(3, "async");
-        \u0275\u0275twoWayListener("zoomChange", function LockerMapComponent_Template_interactive_map_zoomChange_0_listener($event) {
-          \u0275\u0275twoWayBindingSet(ctx.zoom, $event) || (ctx.zoom = $event);
-          return $event;
-        })("centerChange", function LockerMapComponent_Template_interactive_map_centerChange_0_listener($event) {
-          \u0275\u0275twoWayBindingSet(ctx.center, $event) || (ctx.center = $event);
-          return $event;
-        });
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(4, "div", 1)(5, "mat-form-field", 2)(6, "mat-select", 3);
-        \u0275\u0275twoWayListener("ngModelChange", function LockerMapComponent_Template_mat_select_ngModelChange_6_listener($event) {
-          \u0275\u0275twoWayBindingSet(ctx.level, $event) || (ctx.level = $event);
-          return $event;
-        });
-        \u0275\u0275template(7, LockerMapComponent_mat_option_7_Template, 2, 2, "mat-option", 4);
-        \u0275\u0275pipe(8, "async");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(9, "div", 5)(10, "button", 6);
-        \u0275\u0275listener("click", function LockerMapComponent_Template_button_click_10_listener() {
-          return ctx.setZoom(ctx.zoom * 1.1);
-        });
-        \u0275\u0275elementStart(11, "app-icon");
-        \u0275\u0275text(12, "zoom_in");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275element(13, "div", 7);
-        \u0275\u0275elementStart(14, "button", 8);
-        \u0275\u0275listener("click", function LockerMapComponent_Template_button_click_14_listener() {
-          return ctx.setZoom(ctx.zoom * (1 / 1.1));
-        });
-        \u0275\u0275elementStart(15, "app-icon");
-        \u0275\u0275text(16, "zoom_out");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275element(17, "div", 7);
-        \u0275\u0275elementStart(18, "button", 9);
-        \u0275\u0275listener("click", function LockerMapComponent_Template_button_click_18_listener() {
-          return ctx.resetMap();
-        });
-        \u0275\u0275elementStart(19, "app-icon");
-        \u0275\u0275text(20, "refresh");
-        \u0275\u0275elementEnd()()();
-      }
-      if (rf & 2) {
-        \u0275\u0275property("src", ctx.map_url);
-        \u0275\u0275twoWayProperty("zoom", ctx.zoom)("center", ctx.center);
-        \u0275\u0275property("features", \u0275\u0275pipeBind1(1, 9, ctx.features))("styles", \u0275\u0275pipeBind1(2, 11, ctx.styles))("actions", \u0275\u0275pipeBind1(3, 13, ctx.actions));
-        \u0275\u0275advance(6);
-        \u0275\u0275twoWayProperty("ngModel", ctx.level);
-        \u0275\u0275property("ngModelOptions", \u0275\u0275pureFunction0(17, _c076));
-        \u0275\u0275advance();
-        \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(8, 15, ctx.levels));
-      }
-    }, dependencies: [NgForOf, NgControlStatus, NgModel, MatFormField, MatOption, IconComponent, InteractiveMapComponent, MatSelect, MatRipple, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  background: rgba(0, 0, 0, 0.05);\n  padding-top: 4rem;\n}\nbutton[_ngcontent-%COMP%] {\n  border-radius: 0;\n}\n/*# sourceMappingURL=locker-map.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerMapComponent, { className: "LockerMapComponent", filePath: "libs/bookings/src/lib/locker-select-modal/locker-map.component.ts", lineNumber: 73 });
-})();
-
 // libs/bookings/src/lib/bookings.module.ts
 var SharedBookingsModule = class _SharedBookingsModule {
   static {
@@ -241229,17 +241287,6 @@ var SharedBookingsModule = class _SharedBookingsModule {
     ] });
   }
 };
-\u0275\u0275setComponentScope(LockerSelectModalComponent, [
-  NgIf,
-  MatDialogClose,
-  IconComponent,
-  MatRipple,
-  LockerGridComponent,
-  LockerFiltersComponent,
-  LockerFiltersDisplayComponent,
-  LockerBankListComponent,
-  LockerMapComponent
-], []);
 
 // libs/explore/src/lib/explore-map-control.component.ts
 function ExploreMapControlComponent_mat_form_field_1_mat_option_3_Template(rf, ctx) {
@@ -242687,6 +242734,125 @@ var DesksService = class _DesksService {
   }
 };
 
+// libs/explore/src/lib/explore-locker-bank-modal.component.ts
+var ExploreLockerBankModalComponent = class _ExploreLockerBankModalComponent {
+  constructor(_data) {
+    this._data = _data;
+    this.bank = this._data.bank;
+    this.lockers = this._data.lockers.reduce((map3, l3) => {
+      map3[l3.id] = "busy";
+      return map3;
+    }, {});
+  }
+  static {
+    this.\u0275fac = function ExploreLockerBankModalComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ExploreLockerBankModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreLockerBankModalComponent, selectors: [["explore-locker-bank-modal"]], decls: 8, vars: 3, consts: [[1, "text-xl", "font-medium"], ["btn", "", "icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "h-[65vh]", "overflow-hidden"], [3, "bank", "bank_status"]], template: function ExploreLockerBankModalComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "header")(1, "h2", 0);
+        \u0275\u0275text(2);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(3, "button", 1)(4, "app-icon");
+        \u0275\u0275text(5, "close");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(6, "main", 2);
+        \u0275\u0275element(7, "locker-grid", 3);
+        \u0275\u0275elementEnd();
+      }
+      if (rf & 2) {
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate(ctx.bank.name);
+        \u0275\u0275advance(5);
+        \u0275\u0275property("bank", ctx.bank)("bank_status", ctx.lockers);
+      }
+    }, dependencies: [IconComponent, MatRipple, MatDialogClose, LockerGridComponent] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreLockerBankModalComponent, { className: "ExploreLockerBankModalComponent", filePath: "libs/explore/src/lib/explore-locker-bank-modal.component.ts", lineNumber: 25 });
+})();
+
+// libs/explore/src/lib/explore-locker-bank-info.component.ts
+function ExploreLockerBankInfoComponent_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 3)(1, "h3", 4);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "p", 5);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classMap("absolute rounded bg-base-100 p-4 top-0 left-0 shadow pointer-events-none " + ctx_r1.x_pos + " " + ctx_r1.y_pos);
+    \u0275\u0275property("id", ctx_r1.map_id);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r1.bank.name);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", ctx_r1.in_use_count, " lockers in use of ", ctx_r1.bank.lockers.length || 1, " ");
+  }
+}
+var ExploreLockerBankInfoComponent = class _ExploreLockerBankInfoComponent {
+  constructor(_details, _element, _dialog) {
+    this._details = _details;
+    this._element = _element;
+    this._dialog = _dialog;
+    this.bank = this._details.bank;
+    this.in_use_count = this._details.in_use_count;
+  }
+  ngOnInit(tries = 0) {
+    if (tries > 10)
+      return;
+    setTimeout(() => {
+      const parent = this._element.nativeElement.parentElement?.parentElement;
+      if (!parent)
+        return this.ngOnInit(++tries);
+      const position = {
+        y: parseInt(parent.style.top, 10) / 100,
+        x: parseInt(parent.style.left, 10) / 100
+      };
+      this.y_pos = position.y >= 0.5 ? "bottom" : "top";
+      this.x_pos = position.x >= 0.5 ? "right" : "left";
+    }, 200);
+  }
+  openBankModal() {
+    this._dialog.open(ExploreLockerBankModalComponent, {
+      data: __spreadValues({}, this._details)
+    });
+  }
+  static {
+    this.\u0275fac = function ExploreLockerBankInfoComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ExploreLockerBankInfoComponent)(\u0275\u0275directiveInject(MAP_FEATURE_DATA), \u0275\u0275directiveInject(ElementRef), \u0275\u0275directiveInject(MatDialog));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreLockerBankInfoComponent, selectors: [["explore-locker-bank-info"]], decls: 4, vars: 6, consts: [["desk_tooltip", ""], [1, "h-full", "w-full", "pointer-events-auto", "relative", 3, "click"], ["customTooltip", "", 1, "h-full", "w-full", "pointer-events-auto", "relative", 3, "content", "backdrop", "xPosition", "yPosition", "hover", "delay"], ["name", "space-info", 3, "id"], [1, "font-medium"], [1, "whitespace-nowrap", "text-sm"]], template: function ExploreLockerBankInfoComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "button", 1);
+        \u0275\u0275listener("click", function ExploreLockerBankInfoComponent_Template_button_click_0_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.openBankModal());
+        });
+        \u0275\u0275element(1, "div", 2);
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(2, ExploreLockerBankInfoComponent_ng_template_2_Template, 5, 6, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        const desk_tooltip_r3 = \u0275\u0275reference(3);
+        \u0275\u0275advance();
+        \u0275\u0275property("content", desk_tooltip_r3)("backdrop", false)("xPosition", "center")("yPosition", "center")("hover", true)("delay", 3e3);
+      }
+    }, dependencies: [CustomTooltipComponent] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreLockerBankInfoComponent, { className: "ExploreLockerBankInfoComponent", filePath: "libs/explore/src/lib/explore-locker-bank-info.component.ts", lineNumber: 53 });
+})();
+
 // libs/explore/src/lib/explore-lockers.service.ts
 var ExploreLockersService = class _ExploreLockersService extends AsyncHandler {
   constructor(_explore, _org, _settings) {
@@ -243207,7 +243373,7 @@ var ExploreSearchService = class _ExploreSearchService {
 
 // libs/explore/src/lib/explore-search.component.ts
 var _c080 = ["input"];
-var _c142 = ["button"];
+var _c143 = ["button"];
 function ExploreSearchComponent_mat_spinner_8_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "mat-spinner", 9);
@@ -243347,7 +243513,7 @@ var ExploreSearchComponent = class _ExploreSearchComponent extends AsyncHandler 
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreSearchComponent, selectors: [["explore-search"]], viewQuery: function ExploreSearchComponent_Query(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275viewQuery(_c080, 5);
-        \u0275\u0275viewQuery(_c142, 7);
+        \u0275\u0275viewQuery(_c143, 7);
       }
       if (rf & 2) {
         let _t;
