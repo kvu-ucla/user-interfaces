@@ -69595,15 +69595,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "31e1a64",
-  "hash": "31e1a64",
+  "raw": "8f1a3c1",
+  "hash": "8f1a3c1",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "31e1a64",
+  "suffix": "8f1a3c1",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733973107017
+  "time": 1733974062300
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -142638,30 +142638,42 @@ var DeskListFieldComponent = class _DeskListFieldComponent {
 
 // libs/bookings/src/lib/locker-grid.component.ts
 var _c070 = () => [];
-function LockerGridComponent_button_3_Template(rf, ctx) {
+function LockerGridComponent_div_0_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 3);
-    \u0275\u0275listener("click", function LockerGridComponent_button_3_Template_button_click_0_listener() {
-      const locker_r2 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.clicked.emit(locker_r2));
-    });
-    \u0275\u0275element(1, "div", 4)(2, "div", 5)(3, "div", 6)(4, "div", 7);
-    \u0275\u0275elementStart(5, "div", 8);
-    \u0275\u0275text(6);
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(7, "div", 9);
+    \u0275\u0275elementStart(0, "div", 3);
+    \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const locker_r2 = ctx.$implicit;
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275styleProp("grid-column-start", locker_r2.position[0] + 1)("grid-row-start", locker_r2.position[1] + 1)("grid-column-end", locker_r2.position[0] + (locker_r2.size[0] + 1))("background-color", ctx_r2.status(locker_r2))("grid-row-end", locker_r2.position[1] + (locker_r2.size[1] + 1));
-    \u0275\u0275classProp("opacity-60", ctx_r2.selected && ctx_r2.selected !== locker_r2.id);
-    \u0275\u0275property("matTooltip", locker_r2.name)("disabled", locker_r2.bookable === false);
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r0.bank == null ? null : ctx_r0.bank.name, " ");
+  }
+}
+function LockerGridComponent_button_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 4);
+    \u0275\u0275listener("click", function LockerGridComponent_button_2_Template_button_click_0_listener() {
+      const locker_r3 = \u0275\u0275restoreView(_r2).$implicit;
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.clicked.emit(locker_r3));
+    });
+    \u0275\u0275element(1, "div", 5)(2, "div", 6)(3, "div", 7)(4, "div", 8);
+    \u0275\u0275elementStart(5, "div", 9);
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(7, "div", 10);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const locker_r3 = ctx.$implicit;
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275styleProp("grid-column-start", locker_r3.position[0] + 1)("grid-row-start", locker_r3.position[1] + 1)("grid-column-end", locker_r3.position[0] + (locker_r3.size[0] + 1))("background-color", ctx_r0.status(locker_r3))("grid-row-end", locker_r3.position[1] + (locker_r3.size[1] + 1));
+    \u0275\u0275classProp("opacity-60", ctx_r0.selected && ctx_r0.selected !== locker_r3.id);
+    \u0275\u0275property("matTooltip", locker_r3.name)("disabled", locker_r3.bookable === false);
     \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate1(" ", locker_r2.name, " ");
+    \u0275\u0275textInterpolate1(" ", locker_r3.name, " ");
   }
 }
 var LockerGridComponent = class _LockerGridComponent {
@@ -142676,6 +142688,7 @@ var LockerGridComponent = class _LockerGridComponent {
   }
   constructor(_settings) {
     this._settings = _settings;
+    this.show_name = true;
     this.bank_status = {
       "10": "busy",
       "7": "pending"
@@ -142694,24 +142707,21 @@ var LockerGridComponent = class _LockerGridComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerGridComponent, selectors: [["locker-grid"]], inputs: { bank: "bank", bank_status: "bank_status", selected: "selected" }, outputs: { clicked: "clicked" }, decls: 4, vars: 9, consts: [[1, "p-4", "text-xl", "font-medium"], [1, "flex-1", "grid", "gap-2", "overflow-hidden", "max-h-full", "h-[75vh]", "min-w-[60vw]", "p-2"], ["matRipple", "", "class", "relative border border-base-200 rounded bg-teal-300 overflow-hidden", 3, "opacity-60", "grid-column-start", "grid-row-start", "grid-column-end", "background-color", "grid-row-end", "matTooltip", "disabled", "click", 4, "ngFor", "ngForOf"], ["matRipple", "", 1, "relative", "border", "border-base-200", "rounded", "bg-teal-300", "overflow-hidden", 3, "click", "matTooltip", "disabled"], ["handle", "", 1, "absolute", "top-1/2", "-translate-y-1/2", "left-2", "w-1", "h-6", "bg-neutral", "rounded"], ["vent", "", 1, "absolute", "left-1/2", "-translate-x-1/2", "top-2", "w-3/5", "h-1", "bg-neutral", "rounded-t"], ["vent", "", 1, "absolute", "left-1/2", "-translate-x-1/2", "top-4", "w-3/5", "h-1", "bg-neutral", "rounded-t"], ["vent", "", 1, "absolute", "left-1/2", "-translate-x-1/2", "top-6", "w-3/5", "h-1", "bg-neutral", "rounded-t"], [1, "absolute", "left-1/2", "-translate-x-1/2", "top-8", "text-[0.6rem]", "font-medium", "text-black/60"], [1, "absolute", "inset-0", "hover:bg-base-content", "opacity-10"]], template: function LockerGridComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerGridComponent, selectors: [["locker-grid"]], inputs: { show_name: "show_name", bank: "bank", bank_status: "bank_status", selected: "selected" }, outputs: { clicked: "clicked" }, decls: 3, vars: 9, consts: [["class", "p-4 text-xl font-medium", 4, "ngIf"], [1, "flex-1", "grid", "gap-2", "overflow-hidden", "max-h-full", "h-[75vh]", "min-w-[60vw]", "p-2"], ["matRipple", "", "class", "relative border border-base-200 rounded bg-teal-300 overflow-hidden", 3, "opacity-60", "grid-column-start", "grid-row-start", "grid-column-end", "background-color", "grid-row-end", "matTooltip", "disabled", "click", 4, "ngFor", "ngForOf"], [1, "p-4", "text-xl", "font-medium"], ["matRipple", "", 1, "relative", "border", "border-base-200", "rounded", "bg-teal-300", "overflow-hidden", 3, "click", "matTooltip", "disabled"], ["handle", "", 1, "absolute", "top-1/2", "-translate-y-1/2", "left-2", "w-1", "h-6", "bg-neutral", "rounded"], ["vent", "", 1, "absolute", "left-1/2", "-translate-x-1/2", "top-2", "w-3/5", "h-1", "bg-neutral", "rounded-t"], ["vent", "", 1, "absolute", "left-1/2", "-translate-x-1/2", "top-4", "w-3/5", "h-1", "bg-neutral", "rounded-t"], ["vent", "", 1, "absolute", "left-1/2", "-translate-x-1/2", "top-6", "w-3/5", "h-1", "bg-neutral", "rounded-t"], [1, "absolute", "left-1/2", "-translate-x-1/2", "top-8", "text-[0.6rem]", "font-medium", "text-black/60"], [1, "absolute", "inset-0", "hover:bg-base-content", "opacity-10"]], template: function LockerGridComponent_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275elementStart(0, "div", 0);
-        \u0275\u0275text(1);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(2, "div", 1);
-        \u0275\u0275template(3, LockerGridComponent_button_3_Template, 8, 15, "button", 2);
+        \u0275\u0275template(0, LockerGridComponent_div_0_Template, 2, 1, "div", 0);
+        \u0275\u0275elementStart(1, "div", 1);
+        \u0275\u0275template(2, LockerGridComponent_button_2_Template, 8, 15, "button", 2);
         \u0275\u0275elementEnd();
       }
       if (rf & 2) {
-        \u0275\u0275advance();
-        \u0275\u0275textInterpolate1(" ", ctx.bank == null ? null : ctx.bank.name, " ");
+        \u0275\u0275property("ngIf", ctx.show_name);
         \u0275\u0275advance();
         \u0275\u0275styleProp("width", ctx.columns * 2.5 + "rem")("grid-template-columns", "repeat(" + ctx.columns + ", 1fr)")("grid-template-rows", "repeat(" + (ctx.bank == null ? null : ctx.bank.height) + ", 1fr)");
         \u0275\u0275advance();
         \u0275\u0275property("ngForOf", (ctx.bank == null ? null : ctx.bank.lockers) || \u0275\u0275pureFunction0(8, _c070));
       }
-    }, dependencies: [NgForOf, MatRipple, MatTooltip], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n}\nbutton[disabled][_ngcontent-%COMP%] {\n  pointer-events: none;\n  opacity: 0.75;\n  background-color: #ccc !important;\n}\n/*# sourceMappingURL=locker-grid.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatRipple, MatTooltip], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n}\nbutton[disabled][_ngcontent-%COMP%] {\n  pointer-events: none;\n  opacity: 0.75;\n  background-color: #ccc !important;\n}\n/*# sourceMappingURL=locker-grid.component.css.map */"] });
   }
 };
 (() => {
@@ -155494,4 +155504,4 @@ lodash-es/lodash.js:
    * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
    *)
 */
-//# sourceMappingURL=chunk-RC6MOBJH.js.map
+//# sourceMappingURL=chunk-KLGOGSYW.js.map
