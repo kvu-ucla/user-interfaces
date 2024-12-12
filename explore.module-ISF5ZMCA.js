@@ -21,7 +21,7 @@ import {
   ɵɵelementStart,
   ɵɵproperty,
   ɵɵtemplate
-} from "./chunk-Y7LLQGMM.js";
+} from "./chunk-MRT3S262.js";
 import "./chunk-4MWRP73S.js";
 
 // apps/workplace/src/app/explore/explore.component.ts
@@ -98,4 +98,4 @@ var ExploreModule = class _ExploreModule {
 export {
   ExploreModule
 };
-//# sourceMappingURL=explore.module-IIAEDRYJ.js.map
+//# sourceMappingURL=explore.module-ISF5ZMCA.js.map
