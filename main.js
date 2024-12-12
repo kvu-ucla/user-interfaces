@@ -79850,15 +79850,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "f073b71",
-  "hash": "f073b71",
+  "raw": "1721d02",
+  "hash": "1721d02",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "f073b71",
+  "suffix": "1721d02",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733967084258
+  "time": 1733971517105
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -168929,6 +168929,7 @@ var BookingFormService = class _BookingFormService extends AsyncHandler {
     ]).pipe(debounceTime(300), switchMap(([bld, { type: type2 }]) => {
       if (!bld)
         return of([]);
+      const useRegion = () => this._settings.get("app.use_region");
       switch (type2) {
         case "desk":
           this._loading.next(`Loading desks...`);
@@ -168938,7 +168939,7 @@ var BookingFormService = class _BookingFormService extends AsyncHandler {
           return this.loadResourceList("parking-spaces");
         case "locker":
           this._loading.next(`Loading lockers...`);
-          return this.loadResourceList("lockers");
+          return loadLockers(this._org, of([bld]), loadLockerBanks(this._org, of([bld]), useRegion), useRegion);
       }
       return of([]);
     }), tap(() => this._loading.next(``)), shareReplay(1));
@@ -173989,14 +173990,14 @@ var LockerFiltersDisplayComponent = class _LockerFiltersDisplayComponent extends
 // libs/bookings/src/lib/locker-select-modal/locker-bank-list.component.ts
 function LockerBankListComponent_ng_container_5_ul_1_li_1_div_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 20)(1, "app-icon");
+    \u0275\u0275elementStart(0, "div", 21)(1, "app-icon");
     \u0275\u0275text(2, "done");
     \u0275\u0275elementEnd()();
   }
 }
 function LockerBankListComponent_ng_container_5_ul_1_li_1_img_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "img", 21);
+    \u0275\u0275element(0, "img", 22);
   }
   if (rf & 2) {
     const locker_bank_r2 = \u0275\u0275nextContext().$implicit;
@@ -174005,7 +174006,19 @@ function LockerBankListComponent_ng_container_5_ul_1_li_1_img_4_Template(rf, ctx
 }
 function LockerBankListComponent_ng_container_5_ul_1_li_1_ng_template_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "img", 22);
+    \u0275\u0275element(0, "img", 23);
+  }
+}
+function LockerBankListComponent_ng_container_5_ul_1_li_1_div_26_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 24);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const locker_bank_r2 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", locker_bank_r2.tags[0], " ");
   }
 }
 function LockerBankListComponent_ng_container_5_ul_1_li_1_Template(rf, ctx) {
@@ -174028,24 +174041,30 @@ function LockerBankListComponent_ng_container_5_ul_1_li_1_Template(rf, ctx) {
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(13, "p", 18);
     \u0275\u0275text(14);
+    \u0275\u0275pipe(15, "level");
+    \u0275\u0275pipe(16, "level");
+    \u0275\u0275pipe(17, "level");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(15, "div", 16)(16, "app-icon", 17);
-    \u0275\u0275text(17, "people");
+    \u0275\u0275elementStart(18, "div", 16)(19, "app-icon", 17);
+    \u0275\u0275text(20, "people");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(18, "p", 18);
-    \u0275\u0275text(19);
+    \u0275\u0275elementStart(21, "p", 18);
+    \u0275\u0275text(22);
     \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(20, "button", 19);
-    \u0275\u0275listener("click", function LockerBankListComponent_ng_container_5_ul_1_li_1_Template_button_click_20_listener() {
+    \u0275\u0275elementStart(23, "button", 19);
+    \u0275\u0275listener("click", function LockerBankListComponent_ng_container_5_ul_1_li_1_Template_button_click_23_listener() {
       const locker_bank_r2 = \u0275\u0275restoreView(_r1).$implicit;
       const ctx_r2 = \u0275\u0275nextContext(3);
       return \u0275\u0275resetView(ctx_r2.toggleFav.emit(locker_bank_r2));
     });
-    \u0275\u0275elementStart(21, "app-icon");
-    \u0275\u0275text(22);
-    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(24, "app-icon");
+    \u0275\u0275text(25);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275template(26, LockerBankListComponent_ng_container_5_ul_1_li_1_div_26_Template, 2, 1, "div", 20);
+    \u0275\u0275elementEnd();
   }
   if (rf & 2) {
+    let tmp_12_0;
     const locker_bank_r2 = ctx.$implicit;
     const placeholder_r4 = \u0275\u0275reference(6);
     const ctx_r2 = \u0275\u0275nextContext(3);
@@ -174057,19 +174076,21 @@ function LockerBankListComponent_ng_container_5_ul_1_li_1_Template(rf, ctx) {
     \u0275\u0275advance(5);
     \u0275\u0275textInterpolate1(" ", locker_bank_r2.name || locker_bank_r2.id || "Locker_bank", " ");
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", (locker_bank_r2.zone == null ? null : locker_bank_r2.zone.display_name) || (locker_bank_r2.zone == null ? null : locker_bank_r2.zone.name) || "<No Level>", " ");
-    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(15, 13, locker_bank_r2.zones) ? ((tmp_12_0 = \u0275\u0275pipeBind1(16, 15, locker_bank_r2.zones)) == null ? null : tmp_12_0.display_name) || ((tmp_12_0 = \u0275\u0275pipeBind1(17, 17, locker_bank_r2.zones)) == null ? null : tmp_12_0.name) : "", " ");
+    \u0275\u0275advance(8);
     \u0275\u0275textInterpolate2(" ", locker_bank_r2.available || 0, " / ", locker_bank_r2.lockers.length || 1, " Available ");
     \u0275\u0275advance();
     \u0275\u0275classProp("text-blue-400", ctx_r2.isFavourite(locker_bank_r2.id));
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(ctx_r2.isFavourite(locker_bank_r2.id) ? "favorite" : "favorite_border");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", locker_bank_r2.tags == null ? null : locker_bank_r2.tags.length);
   }
 }
 function LockerBankListComponent_ng_container_5_ul_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "ul", 7);
-    \u0275\u0275template(1, LockerBankListComponent_ng_container_5_ul_1_li_1_Template, 23, 12, "li", 8);
+    \u0275\u0275template(1, LockerBankListComponent_ng_container_5_ul_1_li_1_Template, 27, 19, "li", 8);
     \u0275\u0275pipe(2, "async");
     \u0275\u0275elementEnd();
   }
@@ -174096,9 +174117,9 @@ function LockerBankListComponent_ng_container_5_Template(rf, ctx) {
 }
 function LockerBankListComponent_ng_template_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 23);
-    \u0275\u0275element(1, "mat-spinner", 24);
-    \u0275\u0275elementStart(2, "p", 25);
+    \u0275\u0275elementStart(0, "div", 25);
+    \u0275\u0275element(1, "mat-spinner", 26);
+    \u0275\u0275elementStart(2, "p", 27);
     \u0275\u0275text(3, "Finding available locker banks...");
     \u0275\u0275elementEnd()();
   }
@@ -174109,7 +174130,7 @@ function LockerBankListComponent_ng_template_7_Template(rf, ctx) {
 }
 function LockerBankListComponent_ng_template_9_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 26)(1, "p", 27);
+    \u0275\u0275elementStart(0, "div", 28)(1, "p", 29);
     \u0275\u0275text(2, " No available locker banks for selected time and/or filters ");
     \u0275\u0275elementEnd()();
   }
@@ -174124,28 +174145,8 @@ var LockerBankListComponent = class _LockerBankListComponent {
     this.favorites = [];
     this.onSelect = new EventEmitter();
     this.toggleFav = new EventEmitter();
-    this.lockers_banks$ = combineLatest([
-      this._org.active_building,
-      this._org.active_region
-    ]).pipe(filter(([bld]) => !!bld), switchMap(([bld]) => this._settings.get("app.use_region") ? forkJoin(this._org.buildingsForRegion().map((building) => showMetadata(building.id, "locker_banks").pipe(catchError(() => of(new PlaceMetadata())), map((_3) => _3.details instanceof Array ? _3.details : [])))).pipe(map((_3) => flatten2(_3))) : showMetadata(bld.id, "locker_banks").pipe(catchError(() => of(new PlaceMetadata())), map((_3) => _3.details instanceof Array ? _3.details : []))), shareReplay(1));
-    this.lockers$ = combineLatest([
-      this._org.active_building,
-      this._org.active_region
-    ]).pipe(filter(([bld]) => !!bld), switchMap(([bld]) => combineLatest([
-      this._settings.get("app.use_region") ? forkJoin(this._org.buildingsForRegion().map((building) => showMetadata(building.id, "lockers").pipe(catchError(() => of(new PlaceMetadata())), map((_3) => _3.details instanceof Array ? _3.details : [])))).pipe(map((_3) => flatten2(_3))) : showMetadata(bld.id, "lockers").pipe(catchError(() => of(new PlaceMetadata())), map((_3) => _3.details instanceof Array ? _3.details : [])),
-      this.lockers_banks$
-    ])), map(([lockers, banks]) => {
-      const locker_list = lockers;
-      for (const bank of banks) {
-        bank.lockers = lockers.filter((_3) => _3.bank_id === bank.id).map((_3) => __spreadValues({}, _3));
-      }
-      for (const locker of locker_list) {
-        const bank = banks.find((b3) => b3.id === locker.bank_id);
-        locker.bank = bank;
-        locker.zone = bank.zone;
-      }
-      return lockers.filter((_3) => _3.bank);
-    }), shareReplay(1));
+    this.lockers_banks$ = loadLockerBanks(this._org, combineLatest([this._org.active_building, this._org.active_region]), () => this._settings.get("app.use_region"));
+    this.lockers$ = loadLockers(this._org, combineLatest([this._org.active_building, this._org.active_region]), this.lockers_banks$, () => this._settings.get("app.use_region"));
     this.locker_banks = combineLatest([
       this._state.options,
       this._state.available_resources,
@@ -174174,7 +174175,7 @@ var LockerBankListComponent = class _LockerBankListComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerBankListComponent, selectors: [["locker-bank-list"]], inputs: { active: "active", selected: "selected", favorites: "favorites" }, outputs: { onSelect: "onSelect", toggleFav: "toggleFav" }, decls: 11, vars: 7, consts: [["load_state", ""], ["empty_state", ""], ["placeholder", ""], [1, "font-bold"], ["count", "", 1, "text-sm", "opacity-60", "mb-4"], [4, "ngIf", "ngIfElse"], ["class", "list-style-none space-y-2 min-w-[50vh]", 4, "ngIf", "ngIfElse"], [1, "list-style-none", "space-y-2", "min-w-[50vh]"], ["locker_bank", "", "class", "relative rounded-lg w-full shadow border bg-base-100 border-base-200 overflow-hidden", 3, "!border-blue-400", 4, "ngFor", "ngForOf"], ["locker_bank", "", 1, "relative", "rounded-lg", "w-full", "shadow", "border", "bg-base-100", "border-base-200", "overflow-hidden"], ["name", "select-locker_bank", "matRipple", "", 1, "w-full", "h-full", "flex", "p-2", 3, "click"], [1, "relative", "w-20", "h-20", "rounded-xl", "bg-base-200", "mr-4", "flex", "items-center", "justify-center"], ["class", "absolute top-1 left-1 border border-neutral bg-base-200 rounded-full h-6 w-6 flex items-center justify-center text-white", 4, "ngIf"], ["auth", "", "class", "object-cover h-full", 3, "source", 4, "ngIf", "ngIfElse"], [1, "space-y-2", "pt-2", "flex-1", "text-left"], [1, "font-medium"], [1, "flex", "items-center", "text-sm", "space-x-2"], [1, "text-blue-500"], [1, "text-xs"], ["icon", "", "matRipple", "", "name", "toggle-locker_bank-favourite", 1, "absolute", "top-1", "right-1", 3, "click"], [1, "absolute", "top-1", "left-1", "border", "border-neutral", "bg-base-200", "rounded-full", "h-6", "w-6", "flex", "items-center", "justify-center", "text-white"], ["auth", "", 1, "object-cover", "h-full", 3, "source"], ["src", "assets/icons/locker-placeholder.svg", 1, "m-auto"], ["loading", "", 1, "p-16", "flex", "flex-col", "items-center", "justify-center", "space-y-2"], [3, "diameter"], [1, "opacity-30"], ["empty", "", 1, "p-16", "flex", "flex-col", "items-center", "justify-center", "space-y-2"], [1, "opacity-30", "text-center"]], template: function LockerBankListComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerBankListComponent, selectors: [["locker-bank-list"]], inputs: { active: "active", selected: "selected", favorites: "favorites" }, outputs: { onSelect: "onSelect", toggleFav: "toggleFav" }, decls: 11, vars: 7, consts: [["load_state", ""], ["empty_state", ""], ["placeholder", ""], [1, "font-bold"], ["count", "", 1, "text-sm", "opacity-60", "mb-4"], [4, "ngIf", "ngIfElse"], ["class", "list-style-none space-y-2 min-w-[50vh]", 4, "ngIf", "ngIfElse"], [1, "list-style-none", "space-y-2", "min-w-[50vh]"], ["locker_bank", "", "class", "relative rounded-lg w-full shadow border bg-base-100 border-base-200 overflow-hidden", 3, "!border-blue-400", 4, "ngFor", "ngForOf"], ["locker_bank", "", 1, "relative", "rounded-lg", "w-full", "shadow", "border", "bg-base-100", "border-base-200", "overflow-hidden"], ["name", "select-locker_bank", "matRipple", "", 1, "w-full", "h-full", "flex", "p-2", 3, "click"], [1, "relative", "w-20", "h-20", "rounded-xl", "bg-base-200", "mr-4", "flex", "items-center", "justify-center"], ["class", "absolute top-1 left-1 border border-neutral bg-base-200 rounded-full h-6 w-6 flex items-center justify-center text-white", 4, "ngIf"], ["auth", "", "class", "object-cover h-full", 3, "source", 4, "ngIf", "ngIfElse"], [1, "space-y-2", "pt-2", "flex-1", "text-left"], [1, "font-medium"], [1, "flex", "items-center", "text-sm", "space-x-2"], [1, "text-blue-500"], [1, "text-xs"], ["icon", "", "matRipple", "", "name", "toggle-locker_bank-favourite", 1, "absolute", "top-1", "right-1", 3, "click"], ["class", "absolute bottom-2 right-2 bg-base-200 rounded text-xs px-2 py-1 font-mono", 4, "ngIf"], [1, "absolute", "top-1", "left-1", "border", "border-neutral", "bg-base-200", "rounded-full", "h-6", "w-6", "flex", "items-center", "justify-center", "text-white"], ["auth", "", 1, "object-cover", "h-full", 3, "source"], ["src", "assets/icons/locker-placeholder.svg", 1, "m-auto"], [1, "absolute", "bottom-2", "right-2", "bg-base-200", "rounded", "text-xs", "px-2", "py-1", "font-mono"], ["loading", "", 1, "p-16", "flex", "flex-col", "items-center", "justify-center", "space-y-2"], [3, "diameter"], [1, "opacity-30"], ["empty", "", 1, "p-16", "flex", "flex-col", "items-center", "justify-center", "space-y-2"], [1, "opacity-30", "text-center"]], template: function LockerBankListComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "h3", 3);
         \u0275\u0275text(1, "Results");
@@ -174196,11 +174197,11 @@ var LockerBankListComponent = class _LockerBankListComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", !((tmp_3_0 = \u0275\u0275pipeBind1(6, 5, ctx.loading)) == null ? null : tmp_3_0.length))("ngIfElse", load_state_r6);
       }
-    }, dependencies: [NgForOf, NgIf, MatProgressSpinner, IconComponent, AuthenticatedImageDirective, MatRipple, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  background: rgba(0, 0, 0, 0.05);\n  overflow-y: auto;\n}\n/*# sourceMappingURL=locker-bank-list.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatProgressSpinner, IconComponent, AuthenticatedImageDirective, MatRipple, AsyncPipe, LevelPipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  background: rgba(0, 0, 0, 0.05);\n  overflow-y: auto;\n}\n/*# sourceMappingURL=locker-bank-list.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerBankListComponent, { className: "LockerBankListComponent", filePath: "libs/bookings/src/lib/locker-select-modal/locker-bank-list.component.ts", lineNumber: 144 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerBankListComponent, { className: "LockerBankListComponent", filePath: "libs/bookings/src/lib/locker-select-modal/locker-bank-list.component.ts", lineNumber: 153 });
 })();
 
 // libs/explore/src/lib/explore-locker-bank-modal.component.ts
