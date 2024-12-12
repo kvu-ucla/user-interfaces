@@ -165,6 +165,8 @@ import {
   getUnixTime,
   isAfter,
   isBefore,
+  loadLockerBanks,
+  loadLockers,
   map,
   notifyError,
   notifyInfo,
@@ -247,7 +249,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-MRT3S262.js";
+} from "./chunk-RC6MOBJH.js";
 import {
   __async,
   __spreadProps,
@@ -8186,30 +8188,23 @@ var ParkingFlowConfirmComponent = class _ParkingFlowConfirmComponent {
 })();
 
 // apps/workplace/src/app/book/parking-flow.component.ts
-function BookParkingFlowComponent_ng_container_2_Template(rf, ctx) {
+function BookParkingFlowComponent_parking_flow_confirm_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "parking-flow-confirm");
-    \u0275\u0275elementContainerEnd();
+    \u0275\u0275element(0, "parking-flow-confirm");
   }
 }
-function BookParkingFlowComponent_ng_container_3_Template(rf, ctx) {
+function BookParkingFlowComponent_flow_success_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "flow-success", 4);
-    \u0275\u0275elementContainerEnd();
+    \u0275\u0275element(0, "flow-success", 5);
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
     \u0275\u0275property("calendar", ctx_r0.last_success == null ? null : ctx_r0.last_success.host);
   }
 }
-function BookParkingFlowComponent_ng_container_4_Template(rf, ctx) {
+function BookParkingFlowComponent_parking_flow_map_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "parking-flow-map");
-    \u0275\u0275elementContainerEnd();
+    \u0275\u0275element(0, "parking-flow-map");
   }
 }
 var BookParkingFlowComponent = class _BookParkingFlowComponent extends AsyncHandler {
@@ -8244,11 +8239,11 @@ var BookParkingFlowComponent = class _BookParkingFlowComponent extends AsyncHand
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookParkingFlowComponent, selectors: [["placeos-book-parking-flow"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 5, vars: 3, consts: [[1, "bg-base-100", "h-full", "w-full"], [3, "ngSwitch"], [4, "ngSwitchCase"], [4, "ngSwitchDefault"], ["route", "parking", "type", "parking", 3, "calendar"]], template: function BookParkingFlowComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookParkingFlowComponent, selectors: [["placeos-book-parking-flow"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 5, vars: 3, consts: [[1, "bg-base-100", "h-full", "w-full"], [3, "ngSwitch"], [4, "ngSwitchCase"], ["route", "parking", "type", "parking", 3, "calendar", 4, "ngSwitchCase"], [4, "ngSwitchDefault"], ["route", "parking", "type", "parking", 3, "calendar"]], template: function BookParkingFlowComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 0);
         \u0275\u0275elementContainerStart(1, 1);
-        \u0275\u0275template(2, BookParkingFlowComponent_ng_container_2_Template, 2, 0, "ng-container", 2)(3, BookParkingFlowComponent_ng_container_3_Template, 2, 1, "ng-container", 2)(4, BookParkingFlowComponent_ng_container_4_Template, 2, 0, "ng-container", 3);
+        \u0275\u0275template(2, BookParkingFlowComponent_parking_flow_confirm_2_Template, 1, 0, "parking-flow-confirm", 2)(3, BookParkingFlowComponent_flow_success_3_Template, 1, 1, "flow-success", 3)(4, BookParkingFlowComponent_parking_flow_map_4_Template, 1, 0, "parking-flow-map", 4);
         \u0275\u0275elementContainerEnd();
         \u0275\u0275elementEnd();
       }
@@ -8264,7 +8259,7 @@ var BookParkingFlowComponent = class _BookParkingFlowComponent extends AsyncHand
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookParkingFlowComponent, { className: "BookParkingFlowComponent", filePath: "apps/workplace/src/app/book/parking-flow.component.ts", lineNumber: 37 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookParkingFlowComponent, { className: "BookParkingFlowComponent", filePath: "apps/workplace/src/app/book/parking-flow.component.ts", lineNumber: 34 });
 })();
 
 // apps/workplace/src/app/book/meeting-flow/meeting-flow-confirm-modal.component.ts
@@ -13034,19 +13029,59 @@ var BookLockerFlowSuccessComponent = class _BookLockerFlowSuccessComponent {
 })();
 
 // apps/workplace/src/app/book/locker-flow.component.ts
-function BookLockerFlowComponent_locker_flow_success_1_Template(rf, ctx) {
+var _c027 = () => ["/your-bookings"];
+function BookLockerFlowComponent_ng_container_0_locker_flow_success_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "locker-flow-success");
   }
 }
-function BookLockerFlowComponent_locker_flow_confirm_2_Template(rf, ctx) {
+function BookLockerFlowComponent_ng_container_0_locker_flow_confirm_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "locker-flow-confirm");
   }
 }
-function BookLockerFlowComponent_locker_flow_form_3_Template(rf, ctx) {
+function BookLockerFlowComponent_ng_container_0_locker_flow_form_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "locker-flow-form");
+  }
+}
+function BookLockerFlowComponent_ng_container_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "div", 2);
+    \u0275\u0275template(2, BookLockerFlowComponent_ng_container_0_locker_flow_success_2_Template, 1, 0, "locker-flow-success", 3)(3, BookLockerFlowComponent_ng_container_0_locker_flow_confirm_3_Template, 1, 0, "locker-flow-confirm", 3)(4, BookLockerFlowComponent_ng_container_0_locker_flow_form_4_Template, 1, 0, "locker-flow-form", 4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngSwitch", ctx_r0.view);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngSwitchCase", "success");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngSwitchCase", "confirm");
+  }
+}
+function BookLockerFlowComponent_ng_template_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 5);
+    \u0275\u0275element(1, "img", 6);
+    \u0275\u0275elementStart(2, "p");
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "a", 7);
+    \u0275\u0275text(6, " View Your Bookings ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_2_0;
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(' You are already assigned a locker "', (tmp_2_0 = \u0275\u0275pipeBind1(4, 2, ctx_r0.assigned_space)) == null ? null : tmp_2_0.name, '" ');
+    \u0275\u0275advance(2);
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(4, _c027));
   }
 }
 var BookLockerFlowComponent = class _BookLockerFlowComponent extends AsyncHandler {
@@ -13056,14 +13091,23 @@ var BookLockerFlowComponent = class _BookLockerFlowComponent extends AsyncHandle
   get last_success() {
     return this._state.last_success;
   }
-  constructor(_state, _route) {
+  constructor(_state, _route, _org, _settings) {
     super();
     this._state = _state;
     this._route = _route;
+    this._org = _org;
+    this._settings = _settings;
+    this._lockers_banks = loadLockerBanks(this._org, combineLatest([this._org.active_building, this._org.active_region]), () => this._settings.get("app.use_region"));
+    this._lockers = loadLockers(this._org, combineLatest([this._org.active_building, this._org.active_region]), this._lockers_banks, () => this._settings.get("app.use_region"));
+    this.assigned_space = this._lockers.pipe(map((list) => list.find((_) => _.assigned_to?.toLowerCase() === currentUser().email?.toLowerCase())));
+    this.has_booking = queryBookings({
+      period_start: getUnixTime(startOfDay(Date.now())),
+      period_end: getUnixTime(endOfDay(Date.now())),
+      type: "parking"
+    }).pipe(map((_) => _.length > 0), shareReplay(1));
   }
   ngOnInit() {
     this._state.loadForm();
-    this._state.listenForStatusChanges();
     this.subscription("route.params", this._route.paramMap.subscribe((param) => {
       if (param.has("step"))
         this._state.setView(param.get("step"));
@@ -13075,28 +13119,26 @@ var BookLockerFlowComponent = class _BookLockerFlowComponent extends AsyncHandle
   }
   static {
     this.\u0275fac = function BookLockerFlowComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _BookLockerFlowComponent)(\u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(ActivatedRoute));
+      return new (__ngFactoryType__ || _BookLockerFlowComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookLockerFlowComponent, selectors: [["placeos-book-locker-flow"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 4, vars: 3, consts: [[1, "bg-base-100", "h-full", "w-full", "z-50", 3, "ngSwitch"], [4, "ngSwitchCase"], [4, "ngSwitchDefault"]], template: function BookLockerFlowComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookLockerFlowComponent, selectors: [["placeos-book-locker-flow"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 5, vars: 6, consts: [["assigned_state", ""], [4, "ngIf", "ngIfElse"], [1, "bg-base-100", "h-full", "w-full", "z-50", 3, "ngSwitch"], [4, "ngSwitchCase"], [4, "ngSwitchDefault"], [1, "bg-base-100", "flex", "flex-col", "items-center", "justify-center", "h-full", "w-full", "z-50", "space-y-4"], ["src", "assets/icons/parking-success.svg", 1, "w-64", "h-64"], ["btn", "", "matRipple", "", 1, "w-48", 3, "routerLink"]], template: function BookLockerFlowComponent_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275elementStart(0, "div", 0);
-        \u0275\u0275template(1, BookLockerFlowComponent_locker_flow_success_1_Template, 1, 0, "locker-flow-success", 1)(2, BookLockerFlowComponent_locker_flow_confirm_2_Template, 1, 0, "locker-flow-confirm", 1)(3, BookLockerFlowComponent_locker_flow_form_3_Template, 1, 0, "locker-flow-form", 2);
-        \u0275\u0275elementEnd();
+        \u0275\u0275template(0, BookLockerFlowComponent_ng_container_0_Template, 5, 3, "ng-container", 1);
+        \u0275\u0275pipe(1, "async");
+        \u0275\u0275pipe(2, "async");
+        \u0275\u0275template(3, BookLockerFlowComponent_ng_template_3_Template, 7, 5, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
       }
       if (rf & 2) {
-        \u0275\u0275property("ngSwitch", ctx.view);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngSwitchCase", "success");
-        \u0275\u0275advance();
-        \u0275\u0275property("ngSwitchCase", "confirm");
+        const assigned_state_r2 = \u0275\u0275reference(4);
+        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(1, 2, ctx.assigned_space) || !\u0275\u0275pipeBind1(2, 4, ctx.has_booking))("ngIfElse", assigned_state_r2);
       }
-    }, dependencies: [NgSwitch, NgSwitchCase, NgSwitchDefault, BookLockerFlowFormComponent, BookLockerFlowConfirmComponent, BookLockerFlowSuccessComponent], styles: ["\n\n[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=locker-flow.component.css.map */"] });
+    }, dependencies: [NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, MatRipple, RouterLink, BookLockerFlowFormComponent, BookLockerFlowConfirmComponent, BookLockerFlowSuccessComponent, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=locker-flow.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookLockerFlowComponent, { className: "BookLockerFlowComponent", filePath: "apps/workplace/src/app/book/locker-flow.component.ts", lineNumber: 26 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookLockerFlowComponent, { className: "BookLockerFlowComponent", filePath: "apps/workplace/src/app/book/locker-flow.component.ts", lineNumber: 58 });
 })();
 
 // apps/workplace/src/app/book/book.module.ts
@@ -13158,4 +13200,4 @@ var BookModule = class _BookModule {
 export {
   BookModule
 };
-//# sourceMappingURL=book.module-MPLJLTZN.js.map
+//# sourceMappingURL=book.module-K6UE5Z2D.js.map
