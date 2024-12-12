@@ -19,7 +19,6 @@ import {
   ExploreBookingModalComponent,
   ExploreDeskInfoComponent,
   ExploreIconComponent,
-  ExploreLockerBankInfoComponent,
   ExploreSpaceInfoComponent,
   ExploreSpacesService,
   ExploreStateService,
@@ -31,6 +30,7 @@ import {
   FormsModule,
   IconComponent,
   InteractiveMapComponent,
+  LockerGridComponent,
   MAP_FEATURE_DATA,
   MAT_DIALOG_DATA,
   MapCanvasComponent,
@@ -128,6 +128,7 @@ import {
   ɵɵProvidersFeature,
   ɵɵadvance,
   ɵɵattribute,
+  ɵɵclassMap,
   ɵɵclassProp,
   ɵɵdefineComponent,
   ɵɵdefineInjectable,
@@ -167,7 +168,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-6IUQADK6.js";
+} from "./chunk-OMLA4HLO.js";
 import {
   __async,
   __spreadProps,
@@ -1497,6 +1498,125 @@ var ExploreParkingService = class _ExploreParkingService extends AsyncHandler {
     this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ExploreParkingService, factory: _ExploreParkingService.\u0275fac });
   }
 };
+
+// libs/explore/src/lib/explore-locker-bank-modal.component.ts
+var ExploreLockerBankModalComponent = class _ExploreLockerBankModalComponent {
+  constructor(_data) {
+    this._data = _data;
+    this.bank = this._data.bank;
+    this.lockers = this._data.lockers.reduce((map2, l) => {
+      map2[l.id] = "busy";
+      return map2;
+    }, {});
+  }
+  static {
+    this.\u0275fac = function ExploreLockerBankModalComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ExploreLockerBankModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreLockerBankModalComponent, selectors: [["explore-locker-bank-modal"]], decls: 8, vars: 3, consts: [[1, "text-xl", "font-medium"], ["btn", "", "icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "h-[65vh]", "overflow-hidden"], [3, "bank", "bank_status"]], template: function ExploreLockerBankModalComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "header")(1, "h2", 0);
+        \u0275\u0275text(2);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(3, "button", 1)(4, "app-icon");
+        \u0275\u0275text(5, "close");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(6, "main", 2);
+        \u0275\u0275element(7, "locker-grid", 3);
+        \u0275\u0275elementEnd();
+      }
+      if (rf & 2) {
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate(ctx.bank.name);
+        \u0275\u0275advance(5);
+        \u0275\u0275property("bank", ctx.bank)("bank_status", ctx.lockers);
+      }
+    }, dependencies: [IconComponent, MatRipple, MatDialogClose, LockerGridComponent] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreLockerBankModalComponent, { className: "ExploreLockerBankModalComponent", filePath: "libs/explore/src/lib/explore-locker-bank-modal.component.ts", lineNumber: 25 });
+})();
+
+// libs/explore/src/lib/explore-locker-bank-info.component.ts
+function ExploreLockerBankInfoComponent_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 3)(1, "h3", 4);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "p", 5);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classMap("absolute rounded bg-base-100 p-4 top-0 left-0 shadow pointer-events-none " + ctx_r1.x_pos + " " + ctx_r1.y_pos);
+    \u0275\u0275property("id", ctx_r1.map_id);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r1.bank.name);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", ctx_r1.in_use_count, " lockers in use of ", ctx_r1.bank.lockers.length || 1, " ");
+  }
+}
+var ExploreLockerBankInfoComponent = class _ExploreLockerBankInfoComponent {
+  constructor(_details, _element, _dialog) {
+    this._details = _details;
+    this._element = _element;
+    this._dialog = _dialog;
+    this.bank = this._details.bank;
+    this.in_use_count = this._details.in_use_count;
+  }
+  ngOnInit(tries = 0) {
+    if (tries > 10)
+      return;
+    setTimeout(() => {
+      const parent = this._element.nativeElement.parentElement?.parentElement;
+      if (!parent)
+        return this.ngOnInit(++tries);
+      const position = {
+        y: parseInt(parent.style.top, 10) / 100,
+        x: parseInt(parent.style.left, 10) / 100
+      };
+      this.y_pos = position.y >= 0.5 ? "bottom" : "top";
+      this.x_pos = position.x >= 0.5 ? "right" : "left";
+    }, 200);
+  }
+  openBankModal() {
+    this._dialog.open(ExploreLockerBankModalComponent, {
+      data: __spreadValues({}, this._details)
+    });
+  }
+  static {
+    this.\u0275fac = function ExploreLockerBankInfoComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ExploreLockerBankInfoComponent)(\u0275\u0275directiveInject(MAP_FEATURE_DATA), \u0275\u0275directiveInject(ElementRef), \u0275\u0275directiveInject(MatDialog));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreLockerBankInfoComponent, selectors: [["explore-locker-bank-info"]], decls: 4, vars: 6, consts: [["desk_tooltip", ""], [1, "h-full", "w-full", "pointer-events-auto", "relative", 3, "click"], ["customTooltip", "", 1, "h-full", "w-full", "pointer-events-auto", "relative", 3, "content", "backdrop", "xPosition", "yPosition", "hover", "delay"], ["name", "space-info", 3, "id"], [1, "font-medium"], [1, "whitespace-nowrap", "text-sm"]], template: function ExploreLockerBankInfoComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "button", 1);
+        \u0275\u0275listener("click", function ExploreLockerBankInfoComponent_Template_button_click_0_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.openBankModal());
+        });
+        \u0275\u0275element(1, "div", 2);
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(2, ExploreLockerBankInfoComponent_ng_template_2_Template, 5, 6, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        const desk_tooltip_r3 = \u0275\u0275reference(3);
+        \u0275\u0275advance();
+        \u0275\u0275property("content", desk_tooltip_r3)("backdrop", false)("xPosition", "center")("yPosition", "center")("hover", true)("delay", 3e3);
+      }
+    }, dependencies: [CustomTooltipComponent] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreLockerBankInfoComponent, { className: "ExploreLockerBankInfoComponent", filePath: "libs/explore/src/lib/explore-locker-bank-info.component.ts", lineNumber: 53 });
+})();
 
 // libs/explore/src/lib/explore-lockers.service.ts
 var ExploreLockersService = class _ExploreLockersService extends AsyncHandler {
@@ -3060,4 +3180,4 @@ var AppExploreModule = class _AppExploreModule {
 export {
   AppExploreModule
 };
-//# sourceMappingURL=explore.module-RGJXAUWZ.js.map
+//# sourceMappingURL=explore.module-5TMKHLRZ.js.map
