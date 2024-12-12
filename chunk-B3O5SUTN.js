@@ -95318,15 +95318,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "1721d02",
-  "hash": "1721d02",
+  "raw": "31e1a64",
+  "hash": "31e1a64",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "1721d02",
+  "suffix": "31e1a64",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733971518297
+  "time": 1733973110311
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -135751,7 +135751,7 @@ var LockerGridComponent = class _LockerGridComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerGridComponent, selectors: [["locker-grid"]], inputs: { bank: "bank", bank_status: "bank_status", selected: "selected" }, outputs: { clicked: "clicked" }, decls: 4, vars: 9, consts: [[1, "p-4", "text-xl", "font-medium"], [1, "flex-1", "grid", "gap-2", "overflow-hidden", "max-h-full", "h-[75vh]", "min-w-[60vw]", "p-2"], ["matRipple", "", "class", "relative border border-base-200 rounded bg-teal-300 overflow-hidden", 3, "opacity-60", "grid-column-start", "grid-row-start", "grid-column-end", "background-color", "grid-row-end", "matTooltip", "disabled", "click", 4, "ngFor", "ngForOf"], ["matRipple", "", 1, "relative", "border", "border-base-200", "rounded", "bg-teal-300", "overflow-hidden", 3, "click", "matTooltip", "disabled"], ["handle", "", 1, "absolute", "top-1/2", "-translate-y-1/2", "left-2", "w-1", "h-6", "bg-neutral", "rounded"], ["vent", "", 1, "absolute", "left-1/2", "-translate-x-1/2", "top-2", "w-3/5", "h-1", "bg-neutral", "rounded-t"], ["vent", "", 1, "absolute", "left-1/2", "-translate-x-1/2", "top-4", "w-3/5", "h-1", "bg-neutral", "rounded-t"], ["vent", "", 1, "absolute", "left-1/2", "-translate-x-1/2", "top-6", "w-3/5", "h-1", "bg-neutral", "rounded-t"], [1, "absolute", "left-1/2", "-translate-x-1/2", "top-8", "text-[0.6rem]", "font-medium", "text-black/60"], [1, "absolute", "inset-0", "hover:bg-neutral"]], template: function LockerGridComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerGridComponent, selectors: [["locker-grid"]], inputs: { bank: "bank", bank_status: "bank_status", selected: "selected" }, outputs: { clicked: "clicked" }, decls: 4, vars: 9, consts: [[1, "p-4", "text-xl", "font-medium"], [1, "flex-1", "grid", "gap-2", "overflow-hidden", "max-h-full", "h-[75vh]", "min-w-[60vw]", "p-2"], ["matRipple", "", "class", "relative border border-base-200 rounded bg-teal-300 overflow-hidden", 3, "opacity-60", "grid-column-start", "grid-row-start", "grid-column-end", "background-color", "grid-row-end", "matTooltip", "disabled", "click", 4, "ngFor", "ngForOf"], ["matRipple", "", 1, "relative", "border", "border-base-200", "rounded", "bg-teal-300", "overflow-hidden", 3, "click", "matTooltip", "disabled"], ["handle", "", 1, "absolute", "top-1/2", "-translate-y-1/2", "left-2", "w-1", "h-6", "bg-neutral", "rounded"], ["vent", "", 1, "absolute", "left-1/2", "-translate-x-1/2", "top-2", "w-3/5", "h-1", "bg-neutral", "rounded-t"], ["vent", "", 1, "absolute", "left-1/2", "-translate-x-1/2", "top-4", "w-3/5", "h-1", "bg-neutral", "rounded-t"], ["vent", "", 1, "absolute", "left-1/2", "-translate-x-1/2", "top-6", "w-3/5", "h-1", "bg-neutral", "rounded-t"], [1, "absolute", "left-1/2", "-translate-x-1/2", "top-8", "text-[0.6rem]", "font-medium", "text-black/60"], [1, "absolute", "inset-0", "hover:bg-base-content", "opacity-10"]], template: function LockerGridComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 0);
         \u0275\u0275text(1);
@@ -135772,7 +135772,7 @@ var LockerGridComponent = class _LockerGridComponent {
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerGridComponent, { className: "LockerGridComponent", filePath: "libs/bookings/src/lib/locker-grid.component.ts", lineNumber: 75 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerGridComponent, { className: "LockerGridComponent", filePath: "libs/bookings/src/lib/locker-grid.component.ts", lineNumber: 77 });
 })();
 
 // libs/explore/src/lib/explore-locker-bank-modal.component.ts
@@ -139350,7 +139350,7 @@ var ParkingService = class _ParkingService extends AsyncHandler {
       period_start: getUnixTime(startOfDay(Date.now())),
       period_end: getUnixTime(endOfDay(Date.now())),
       type: "parking"
-    }).pipe(map((_3) => _3.length > 0));
+    }).pipe(map((_3) => _3.length > 0), shareReplay(1));
     this.assigned_space = this.spaces.pipe(map((list2) => list2.find((_3) => _3.assigned_to?.toLowerCase() === currentUser2().email?.toLowerCase())));
     this.user_details = this.users.pipe(map((list2) => list2.find((_3) => _3.email?.toLowerCase() === currentUser2().email?.toLowerCase())));
     this.deny_parking_access = this.user_details.pipe(map((details) => !!details?.deny));
@@ -144405,7 +144405,7 @@ function LockerListFieldComponent_div_1_ng_template_4_Template(rf, ctx) {
     \u0275\u0275element(0, "img", 27);
   }
 }
-function LockerListFieldComponent_div_1_div_14_Template(rf, ctx) {
+function LockerListFieldComponent_div_1_div_16_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 13)(1, "app-icon", 14);
     \u0275\u0275text(2, "accessible");
@@ -144431,41 +144431,44 @@ function LockerListFieldComponent_div_1_Template(rf, ctx) {
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(12, "p");
     \u0275\u0275text(13);
+    \u0275\u0275pipe(14, "level");
+    \u0275\u0275pipe(15, "level");
     \u0275\u0275elementEnd()();
-    \u0275\u0275template(14, LockerListFieldComponent_div_1_div_14_Template, 5, 0, "div", 15);
-    \u0275\u0275elementStart(15, "div", 16)(16, "button", 17);
-    \u0275\u0275listener("click", function LockerListFieldComponent_div_1_Template_button_click_16_listener() {
+    \u0275\u0275template(16, LockerListFieldComponent_div_1_div_16_Template, 5, 0, "div", 15);
+    \u0275\u0275elementStart(17, "div", 16)(18, "button", 17);
+    \u0275\u0275listener("click", function LockerListFieldComponent_div_1_Template_button_click_18_listener() {
       const item_r5 = \u0275\u0275restoreView(_r1).$implicit;
       const ctx_r3 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r3.changeResources(item_r5));
     });
-    \u0275\u0275elementStart(17, "div", 18)(18, "app-icon");
-    \u0275\u0275text(19, "edit");
+    \u0275\u0275elementStart(19, "div", 18)(20, "app-icon");
+    \u0275\u0275text(21, "edit");
     \u0275\u0275elementEnd();
-    \u0275\u0275text(20, " Change ");
+    \u0275\u0275text(22, " Change ");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(21, "button", 19);
-    \u0275\u0275listener("click", function LockerListFieldComponent_div_1_Template_button_click_21_listener() {
+    \u0275\u0275elementStart(23, "button", 19);
+    \u0275\u0275listener("click", function LockerListFieldComponent_div_1_Template_button_click_23_listener() {
       const item_r5 = \u0275\u0275restoreView(_r1).$implicit;
       const ctx_r3 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r3.removeResource(item_r5));
     });
-    \u0275\u0275elementStart(22, "div", 18)(23, "app-icon");
-    \u0275\u0275text(24, "close");
+    \u0275\u0275elementStart(24, "div", 18)(25, "app-icon");
+    \u0275\u0275text(26, "close");
     \u0275\u0275elementEnd();
-    \u0275\u0275text(25, " Remove ");
+    \u0275\u0275text(27, " Remove ");
     \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(26, "button", 20);
-    \u0275\u0275listener("click", function LockerListFieldComponent_div_1_Template_button_click_26_listener() {
+    \u0275\u0275elementStart(28, "button", 20);
+    \u0275\u0275listener("click", function LockerListFieldComponent_div_1_Template_button_click_28_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r3 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r3.toggleFavourite(ctx_r3.asset));
     });
-    \u0275\u0275elementStart(27, "app-icon");
-    \u0275\u0275text(28);
+    \u0275\u0275elementStart(29, "app-icon");
+    \u0275\u0275text(30);
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
+    let tmp_7_0;
     const item_r5 = ctx.$implicit;
     const placeholder_r6 = \u0275\u0275reference(5);
     const ctx_r3 = \u0275\u0275nextContext();
@@ -144476,8 +144479,8 @@ function LockerListFieldComponent_div_1_Template(rf, ctx) {
     \u0275\u0275advance(5);
     \u0275\u0275textInterpolate1(" ", item_r5.name || "Locker", " ");
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate((item_r5.zone == null ? null : item_r5.zone.display_name) || (item_r5.zone == null ? null : item_r5.zone.name));
-    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ((tmp_7_0 = \u0275\u0275pipeBind1(14, 9, item_r5.bank == null ? null : item_r5.bank.zones)) == null ? null : tmp_7_0.display_name) || ((tmp_7_0 = \u0275\u0275pipeBind1(15, 11, item_r5.bank == null ? null : item_r5.bank.zones)) == null ? null : tmp_7_0.name), " ");
+    \u0275\u0275advance(3);
     \u0275\u0275property("ngIf", item_r5.accessible);
     \u0275\u0275advance(12);
     \u0275\u0275classProp("text-blue-400", ctx_r3.favorites.includes(ctx_r3.asset == null ? null : ctx_r3.asset.id));
@@ -144564,7 +144567,7 @@ var LockerListFieldComponent = class _LockerListFieldComponent {
     ])], decls: 10, vars: 1, consts: [["placeholder", ""], ["list", "", 1, "space-y-2"], ["locker", "", "class", "relative p-2 rounded-lg w-full flex items-center shadow border border-base-200", 4, "ngFor", "ngForOf"], ["btn", "", "matRipple", "", "name", "add-locker", 1, "w-full", "inverse", "mt-2", 3, "click"], [1, "flex", "items-center", "justify-center", "space-x-2"], [1, "flex", "items-center", "flex-wrap", "sm:space-x-2", "mb-2"], [1, "flex-1", "min-w-[256px]", "space-y-2"], ["locker", "", 1, "relative", "p-2", "rounded-lg", "w-full", "flex", "items-center", "shadow", "border", "border-base-200"], ["class", "flex flex-col", 4, "ngIf"], [1, "w-20", "h-20", "rounded-xl", "bg-base-200", "mr-4", "overflow-hidden", "flex", "items-center", "justify-center"], ["auth", "", "class", "min-h-full object-cover", 3, "source", 4, "ngIf", "ngIfElse"], [1, "space-y-2", "pb-4"], [1, "font-medium"], [1, "flex", "items-center", "text-sm", "space-x-2"], [1, "text-blue-500", "text-base"], ["class", "flex items-center text-sm space-x-2", 4, "ngIf"], [1, "absolute", "bottom-0", "right-0", "flex", "items-center", "justify-end", "text-xs"], ["btn", "", "matRipple", "", "name", "edit-locker", 1, "clear", 3, "click"], [1, "flex", "items-center", "space-x-2"], ["btn", "", "matRipple", "", "name", "remove-locker", 1, "clear", 3, "click"], ["icon", "", "matRipple", "", "name", "toggle-locker-favourite", 1, "absolute", "top-1", "right-1", 3, "click"], [1, "flex", "flex-col"], ["for", "title"], ["features", "", 1, "flex", "items-center", "flex-wrap", "space-x-2"], [3, "ngModel", "ngModelOptions", "ngModelChange", 4, "ngFor", "ngForOf"], [3, "ngModelChange", "ngModel", "ngModelOptions"], ["auth", "", 1, "min-h-full", "object-cover", 3, "source"], ["src", "assets/icons/locker-placeholder.svg", 1, "m-auto"]], template: function LockerListFieldComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 1);
-        \u0275\u0275template(1, LockerListFieldComponent_div_1_Template, 29, 9, "div", 2);
+        \u0275\u0275template(1, LockerListFieldComponent_div_1_Template, 31, 13, "div", 2);
         \u0275\u0275elementEnd();
         \u0275\u0275elementStart(2, "button", 3);
         \u0275\u0275listener("click", function LockerListFieldComponent_Template_button_click_2_listener() {
@@ -144584,11 +144587,11 @@ var LockerListFieldComponent = class _LockerListFieldComponent {
         \u0275\u0275advance();
         \u0275\u0275property("ngForOf", ctx.items);
       }
-    }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatCheckbox, IconComponent, AuthenticatedImageDirective, MatRipple] });
+    }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatCheckbox, IconComponent, AuthenticatedImageDirective, MatRipple, LevelPipe] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerListFieldComponent, { className: "LockerListFieldComponent", filePath: "libs/bookings/src/lib/locker-list-field.component.ts", lineNumber: 141 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerListFieldComponent, { className: "LockerListFieldComponent", filePath: "libs/bookings/src/lib/locker-list-field.component.ts", lineNumber: 146 });
 })();
 
 // libs/bookings/src/lib/locker-select-modal/locker-filters.component.ts
@@ -146196,4 +146199,4 @@ lodash-es/lodash.js:
    * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
    *)
 */
-//# sourceMappingURL=chunk-YOPZVL2V.js.map
+//# sourceMappingURL=chunk-B3O5SUTN.js.map
