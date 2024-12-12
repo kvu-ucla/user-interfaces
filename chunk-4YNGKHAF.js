@@ -15,7 +15,7 @@ import {
   tap,
   ɵɵdefineInjectable,
   ɵɵinject
-} from "./chunk-KLGOGSYW.js";
+} from "./chunk-YC5SYUMF.js";
 import {
   __async
 } from "./chunk-4MWRP73S.js";
@@ -92,4 +92,4 @@ var CalendarService = class _CalendarService extends AsyncHandler {
 export {
   CalendarService
 };
-//# sourceMappingURL=chunk-PI3URKQ6.js.map
+//# sourceMappingURL=chunk-4YNGKHAF.js.map
