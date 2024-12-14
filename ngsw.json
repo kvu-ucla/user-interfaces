@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1733982255325,
+  "timestamp": 1734180619930,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -86,6 +86,7 @@
         "./assets/locale/fr-CA.json",
         "./assets/locale/fr.json",
         "./assets/locale/it.json",
+        "./assets/locale/jp.json",
         "./assets/locale/pt.json",
         "./assets/locale/zh.json",
         "./assets/logo-dark.svg",
@@ -164,16 +165,17 @@
     "./assets/icons/today-filled.svg": "1410738877666c872263634fc33cfe9b2c3ac6f1",
     "./assets/icons/today-outline.svg": "40fc045c0b90aa2313cc5385260781ba5b55b8ad",
     "./assets/icons/visa.svg": "11187e2ea86894625af0aeb5b85c17bcbf8fe192",
-    "./assets/locale/ar.json": "e35b2842b2eaf6393e27913cecd0ab8f3223102d",
-    "./assets/locale/en-GB.json": "05ba863613a406f0530613f16bd011bf221c23c5",
-    "./assets/locale/en-US.json": "f9e6170b158d3c57fc5d5eb3d21f77ccdb0ca2eb",
-    "./assets/locale/en.json": "04e6b457256b6a6228ccc255fa98207515488737",
-    "./assets/locale/es.json": "0b19ed0eb0ba7375f3e3a57739e1492b40f2f995",
-    "./assets/locale/fr-CA.json": "e7c7d4146005a15dbe0e6f1cfecfd09227010f82",
+    "./assets/locale/ar.json": "6521f11ee57d2f53fca46d83be490ce94ed525dd",
+    "./assets/locale/en-GB.json": "37534e0309660e734bc7d8785c971a74125ca8bf",
+    "./assets/locale/en-US.json": "37534e0309660e734bc7d8785c971a74125ca8bf",
+    "./assets/locale/en.json": "37534e0309660e734bc7d8785c971a74125ca8bf",
+    "./assets/locale/es.json": "f651acf27dc81ff32e7b388ac9c2009a665d9683",
+    "./assets/locale/fr-CA.json": "ff89f19b0812a5f09e38641caf5270188e8be07b",
     "./assets/locale/fr.json": "b72b91f6ea6b3f7070317062f81c7aa0a3c05110",
-    "./assets/locale/it.json": "fa337088311dd9e83461266395b8a1699f3a0afe",
-    "./assets/locale/pt.json": "0d093fa89ceb3887e7757c787ccc34509ac1d781",
-    "./assets/locale/zh.json": "da00631642f59f04ed1f58e5ad239e19f764e50e",
+    "./assets/locale/it.json": "162676e2bae6968582840a21eee6bb51980a0922",
+    "./assets/locale/jp.json": "1a1413d514ac9058b6cc3536187f0c7c73889b49",
+    "./assets/locale/pt.json": "940b0184a69c05f5e0cadfcf1391ee463bed3792",
+    "./assets/locale/zh.json": "067875641a66b02bbaca526e527cd75f13be3e93",
     "./assets/logo-dark.svg": "3c5dbbd620a781a0d1e3680cb697982dd44a1613",
     "./assets/logo-light.svg": "29908fafefe60c105f06b2f8d69f7c1eed436c17",
     "./assets/maps/level_1.svg": "ba165a2e4b967619f71aa625855113950c4cde53",
@@ -196,10 +198,10 @@
     "./assets/support/safari-logo.svg": "1c510b0c330f84f6662351e4a0abd7fb8af2f678",
     "./favicon.ico": "5d8cf2b09be186513f3621f4c03d98eea93822ba",
     "./index.html": "f3e61145d02ed05df3c43bd57ce0251907790931",
-    "./main.js": "a38080bfafffb8e7b19be98e97a1aa0a30f95e9c",
+    "./main.js": "79367cee02c6f0491aa63e2002ea9a4267664bc5",
     "./manifest.webmanifest": "1403ffbb424e3924fdbd03de6cc312e4a7a0b0b6",
     "./polyfills.js": "bbc5bc3958c959c3048bb84772b416a59bef38b5",
-    "./styles.css": "4e62f12750e3cda0f3e0d2a1ca184ae8aa9a164c"
+    "./styles.css": "5565ed323169ca02fb29b26e98a034a630af75bb"
   },
   "navigationUrls": [
     {
