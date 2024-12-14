@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1734180625699,
+  "timestamp": 1734184671522,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -158,7 +158,7 @@
     "./assets/locale/ar.json": "6521f11ee57d2f53fca46d83be490ce94ed525dd",
     "./assets/locale/en-GB.json": "37534e0309660e734bc7d8785c971a74125ca8bf",
     "./assets/locale/en-US.json": "37534e0309660e734bc7d8785c971a74125ca8bf",
-    "./assets/locale/en.json": "37534e0309660e734bc7d8785c971a74125ca8bf",
+    "./assets/locale/en.json": "0c3477428545f7539e82aec7a2a9e7bd2b24b14e",
     "./assets/locale/es.json": "f651acf27dc81ff32e7b388ac9c2009a665d9683",
     "./assets/locale/fr-CA.json": "ff89f19b0812a5f09e38641caf5270188e8be07b",
     "./assets/locale/fr.json": "b72b91f6ea6b3f7070317062f81c7aa0a3c05110",
@@ -193,7 +193,7 @@
     "./assets/yolov8x_web_model/model.json": "51607c6c0f465d41cdca4d65a17cfbf9c9f99c62",
     "./favicon.ico": "4e23d0f9b6ddaf3c9ddef90dbaed2342941297b5",
     "./index.html": "e2cee14f202cee4ab6e407466f2a6b19dbd09c86",
-    "./main.js": "deb64fae446ce4390b1635cc9a8f3bbce7b5a73a",
+    "./main.js": "9286b95635bc90593bad0b41909e9799a37a655d",
     "./polyfills.js": "bbc5bc3958c959c3048bb84772b416a59bef38b5",
     "./styles.css": "0c20571bcde9901310904988e4416b1a898b8601"
   },
