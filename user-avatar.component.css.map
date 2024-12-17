@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;f88ccc81d32003201134c083fa84e95e876444cbae96b766c98c084762f6237e;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/user-avatar.component.ts"],
-  "sourcesContent": ["\n            :host > div {\n                height: 2.5em;\n                width: 2.5em;\n            }\n\n            .initials {\n                font-size: 1em;\n            }\n        "],
-  "mappings": "AACY,KAAM,CAAE,IACJ,OAAQ,MACR,MAAO,KACX,CAEA,CAAC,SACG,UAAW,GACf",
-  "names": []
-}
