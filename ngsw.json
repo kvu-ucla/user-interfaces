@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1734430787916,
+  "timestamp": 1734492967710,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -147,12 +147,12 @@
     "./assets/locale/ar.json": "689851c33591b5d8ee20ee14562c2d2f50af2413",
     "./assets/locale/en-GB.json": "9ed46549ef1c8db6d6fe673fd4bcceec3c999329",
     "./assets/locale/en-US.json": "9ed46549ef1c8db6d6fe673fd4bcceec3c999329",
-    "./assets/locale/en.json": "1665df3d9f9c7ea3c19a56939516fb3ce510f922",
+    "./assets/locale/en.json": "164c61eeb476db193ecaa353452d1bf96bef6755",
     "./assets/locale/es.json": "4b863932648912491f23dedfd893efe986e545d5",
     "./assets/locale/fr-CA.json": "96aa60f12acc99cbdd7ff57ddac751da9b931997",
     "./assets/locale/fr.json": "b72b91f6ea6b3f7070317062f81c7aa0a3c05110",
     "./assets/locale/it.json": "d1fb73a263f6f0afb2335fdf2053af0cbdf1e07e",
-    "./assets/locale/jp.json": "05f36f9802edd5bc2b87ea8710a4392cab0d5308",
+    "./assets/locale/jp.json": "b596a9f788741a46b8cd6886512601cd1cef9e21",
     "./assets/locale/pt.json": "38109f58eefa23eea1d0e89b632ae8f045fe569c",
     "./assets/locale/zh.json": "b9c8429c610afb11bf370fca3584a87bbd8565bc",
     "./assets/logo-dark.svg": "3c5dbbd620a781a0d1e3680cb697982dd44a1613",
@@ -174,10 +174,10 @@
     "./assets/support/safari-logo.svg": "1c510b0c330f84f6662351e4a0abd7fb8af2f678",
     "./favicon.ico": "4e23d0f9b6ddaf3c9ddef90dbaed2342941297b5",
     "./index.html": "05465870c4351e15778cc4e9406e40fb42ca4efe",
-    "./main.js": "4bcff6d594522f39c1543d25118935b35118b20b",
+    "./main.js": "5bc56fe1d83f0a55bf657848a74a1910fc91a290",
     "./manifest.webmanifest": "859c98440bb281fcf0ded0850aa3d2f6da75fb5e",
     "./polyfills.js": "bbc5bc3958c959c3048bb84772b416a59bef38b5",
-    "./styles.css": "a92a4543c18560d8726014d6743880bdd165772e"
+    "./styles.css": "633c37b3d88397d238628cb5bfd161cb6434f911"
   },
   "navigationUrls": [
     {
