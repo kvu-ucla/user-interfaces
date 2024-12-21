@@ -68777,15 +68777,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "132fa22",
-  "hash": "132fa22",
+  "raw": "137bedc",
+  "hash": "137bedc",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "132fa22",
+  "suffix": "137bedc",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1733732533594
+  "time": 1734755427831
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -119386,6 +119386,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
         value2.breakdown_time = value2.breakdown_time || breakdown;
       }
       const processed_assets = (assets || []).map((_3) => new AssetRequest(_3).toJSON());
+      delete value2.location;
       const result = yield this._makeBooking(new CalendarEvent(__spreadProps(__spreadValues({}, value2), {
         old_system: this.event?.system,
         host: this._settings.get("app.events.force_host") || (this._settings.get("app.events.room_as_host") ? value2.resources[0].email : "") || value2.host,
@@ -155842,4 +155843,4 @@ lodash-es/lodash.js:
    * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
    *)
 */
-//# sourceMappingURL=chunk-JEX54VN6.js.map
+//# sourceMappingURL=chunk-5YQPQVZW.js.map
