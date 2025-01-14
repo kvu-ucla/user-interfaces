@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1736827333668,
+  "timestamp": 1736828694939,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -156,14 +156,14 @@
     "./assets/icons/user-avatar.jpg": "f757773a550a69b954c833376a6f1eed8ad4683c",
     "./assets/icons/visa.svg": "11187e2ea86894625af0aeb5b85c17bcbf8fe192",
     "./assets/locale/ar.json": "39c8214132fd086ea18adb8ee87f498ffa9bd573",
-    "./assets/locale/en-AU.json": "707e41d1a39e0b833f6b96d2381cf354d4eed2b8",
+    "./assets/locale/en-AU.json": "58d8f36253d7376b4eb0f20323c1eb48d97d73bd",
     "./assets/locale/en-GB.json": "c0ccea7cf0d1be466199f8be84e2956618590456",
     "./assets/locale/en-US.json": "9ed46549ef1c8db6d6fe673fd4bcceec3c999329",
     "./assets/locale/es.json": "91f80db833aee523dd8b0e785f175e0859f23539",
     "./assets/locale/fr-CA.json": "5ed599982114b42005fefcc5f69e1df8656fb946",
     "./assets/locale/fr.json": "5ed599982114b42005fefcc5f69e1df8656fb946",
     "./assets/locale/it.json": "9ed89e2debc18af58560520c8ad606f16a93bd7f",
-    "./assets/locale/ja-JP.json": "1799fcd39b3cd45f51be7c70852bc012123b6e65",
+    "./assets/locale/ja-JP.json": "7631d6c42ee1714d397a3720fb273d07a00c6851",
     "./assets/locale/pt.json": "9df48bb1fb9767fcf866b513769268ed60656275",
     "./assets/locale/zh.json": "0728372b137024f6fc74259109b594d81579fdce",
     "./assets/logo-dark.svg": "3c5dbbd620a781a0d1e3680cb697982dd44a1613",
@@ -193,7 +193,7 @@
     "./assets/yolov8x_web_model/model.json": "51607c6c0f465d41cdca4d65a17cfbf9c9f99c62",
     "./favicon.ico": "4e23d0f9b6ddaf3c9ddef90dbaed2342941297b5",
     "./index.html": "20b725e3034753334d262205377fe3d375f5ed09",
-    "./main.js": "33f43cc59f78850c4b87f69d2872748f3b1f3229",
+    "./main.js": "fa7a6d30e5228f9f69aff06333888d9ab7cc982b",
     "./polyfills.js": "bbc5bc3958c959c3048bb84772b416a59bef38b5",
     "./styles.css": "ba03be2c3393747dcce0140b41f9e6179de41acd"
   },
