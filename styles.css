@@ -2922,6 +2922,9 @@ video {
 #placeos .top-2 {
   top: 0.5rem;
 }
+#placeos .top-3 {
+  top: 0.75rem;
+}
 #placeos .top-4 {
   top: 1rem;
 }
@@ -3101,6 +3104,9 @@ video {
 }
 #placeos .-mt-4 {
   margin-top: -1rem;
+}
+#placeos .-mt-px {
+  margin-top: -1px;
 }
 #placeos .mb-0 {
   margin-bottom: 0px;
