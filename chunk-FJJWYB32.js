@@ -94067,15 +94067,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "6dbabd9",
-  "hash": "6dbabd9",
+  "raw": "7227ea8",
+  "hash": "7227ea8",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "6dbabd9",
+  "suffix": "7227ea8",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1737099168385
+  "time": 1737106500543
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -115818,7 +115818,7 @@ var CalendarEvent = class _CalendarEvent {
     }
     const system = data.system;
     if (system?.email && !this.resources.find((_3) => _3.email === system.email)) {
-      this.resources.push(new Space(system));
+      this.resources.push(new Space(__spreadProps(__spreadValues({}, system), { response_status: data.status })));
     }
     this.system = system || this.resources[0] || null;
     if (!system && data.system_id) {
@@ -146319,4 +146319,4 @@ lodash-es/lodash.js:
    * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
    *)
 */
-//# sourceMappingURL=chunk-DGSMTS2O.js.map
+//# sourceMappingURL=chunk-FJJWYB32.js.map
