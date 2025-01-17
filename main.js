@@ -78882,15 +78882,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION8 = {
   "dirty": false,
-  "raw": "137bedc",
-  "hash": "137bedc",
+  "raw": "6dbabd9",
+  "hash": "6dbabd9",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "137bedc",
+  "suffix": "6dbabd9",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1734755426051
+  "time": 1737099161189
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -106753,7 +106753,7 @@ var Space = class {
     this.images = data.images || [];
     this.configurations = data.configurations || [];
     this.features = data.features || [];
-    this.response_status = data.response_status;
+    this.response_status = data.response_status || "tentative";
     this.level = data.level || new BuildingLevel();
     this.availability = data.availability || [];
   }
