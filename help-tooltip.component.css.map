@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;a23c81b71bea2c3a8c1a4de5d1d77eec03ab55435ec13e1184a9903d87b24266;/home/runner/work/user-interfaces/user-interfaces/apps/control/src/app/ui/help-tooltip.component.ts"],
+  "sourcesContent": ["\n            a {\n                text-decoration-line: underline;\n            }\n        "],
+  "mappings": ";AACY;AACI,wBAAsB;AAC1B;",
+  "names": []
+}
