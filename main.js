@@ -106294,15 +106294,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "165cb09",
-  "hash": "165cb09",
+  "raw": "4f6dd94",
+  "hash": "4f6dd94",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "165cb09",
+  "suffix": "4f6dd94",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1737526550567
+  "time": 1737605004531
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -123417,6 +123417,18 @@ var HelpTooltipComponent = class _HelpTooltipComponent {
 })();
 
 // libs/components/src/lib/language-tooltip.component.ts
+function LanguageSelectComponent_button_10_div_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 9);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const lang_r2 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", lang_r2.local, " ");
+  }
+}
 function LanguageSelectComponent_button_10_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -123426,18 +123438,23 @@ function LanguageSelectComponent_button_10_Template(rf, ctx) {
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.setLocale(lang_r2.id));
     });
-    \u0275\u0275elementStart(1, "div");
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementStart(1, "div")(2, "div");
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div");
-    \u0275\u0275text(5);
+    \u0275\u0275template(5, LanguageSelectComponent_button_10_div_5_Template, 2, 1, "div", 7);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "div", 8);
+    \u0275\u0275text(8);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     const lang_r2 = ctx.$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 3, lang_r2.name));
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 2, lang_r2.name));
+    \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(6, 5, lang_r2.name) !== lang_r2.local);
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(lang_r2.flag);
   }
@@ -123463,7 +123480,7 @@ var LanguageSelectComponent = class _LanguageSelectComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LanguageSelectComponent, selectors: [["language-select"]], standalone: false, decls: 11, vars: 7, consts: [[1, "flex", "flex-col", "w-[18.5rem]", "rounded", "bg-base-100", "shadow", "relative", "-top-12", "-right-1", 3, "click"], [1, "flex", "items-center", "space-x-2", "p-2"], [1, "text-2xl"], [1, ""], [1, "text-xs", "opacity-60", "px-8"], ["class", "w-full p-4 border-t border-base-200 text-left flex items-center justify-between", 3, "click", 4, "ngFor", "ngForOf"], [1, "w-full", "p-4", "border-t", "border-base-200", "text-left", "flex", "items-center", "justify-between", 3, "click"]], template: function LanguageSelectComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LanguageSelectComponent, selectors: [["language-select"]], standalone: false, decls: 11, vars: 7, consts: [[1, "flex", "flex-col", "w-[18.5rem]", "rounded", "bg-base-100", "shadow", "relative", "-top-12", "-right-1", 3, "click"], [1, "flex", "items-center", "space-x-2", "p-2"], [1, "text-2xl"], [1, ""], [1, "text-xs", "opacity-60", "px-8", "mb-2"], ["class", "w-full px-4 h-14 border-t border-base-200 text-left flex items-center justify-between", 3, "click", 4, "ngFor", "ngForOf"], [1, "w-full", "px-4", "h-14", "border-t", "border-base-200", "text-left", "flex", "items-center", "justify-between", 3, "click"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-3xl"], [1, "text-xs", "opacity-30"]], template: function LanguageSelectComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 0);
         \u0275\u0275listener("click", function LanguageSelectComponent_Template_div_click_0_listener() {
@@ -123480,7 +123497,7 @@ var LanguageSelectComponent = class _LanguageSelectComponent {
         \u0275\u0275text(8);
         \u0275\u0275pipe(9, "translate");
         \u0275\u0275elementEnd();
-        \u0275\u0275template(10, LanguageSelectComponent_button_10_Template, 6, 4, "button", 5);
+        \u0275\u0275template(10, LanguageSelectComponent_button_10_Template, 9, 7, "button", 5);
         \u0275\u0275elementEnd();
       }
       if (rf & 2) {
@@ -123491,11 +123508,11 @@ var LanguageSelectComponent = class _LanguageSelectComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngForOf", ctx.locales);
       }
-    }, dependencies: [NgForOf, IconComponent, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, IconComponent, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LanguageSelectComponent, { className: "LanguageSelectComponent", filePath: "libs/components/src/lib/language-tooltip.component.ts", lineNumber: 32 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LanguageSelectComponent, { className: "LanguageSelectComponent", filePath: "libs/components/src/lib/language-tooltip.component.ts", lineNumber: 40 });
 })();
 
 // libs/components/src/lib/region-select.component.ts
@@ -134287,39 +134304,51 @@ function UserControlsComponent_ng_template_24_Template(rf, ctx) {
     \u0275\u0275element(0, "desk-height-presets");
   }
 }
+function UserControlsComponent_div_26_div_11_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 29);
+    \u0275\u0275text(1, " Language ");
+    \u0275\u0275elementEnd();
+  }
+}
 function UserControlsComponent_div_26_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 25)(1, "button", 9)(2, "div", 10)(3, "div", 11)(4, "app-icon");
-    \u0275\u0275text(5, "mode_night");
+    \u0275\u0275text(5, "language");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(6, "div", 26)(7, "div");
-    \u0275\u0275text(8);
-    \u0275\u0275pipe(9, "translate");
+    \u0275\u0275elementStart(6, "div", 26)(7, "div")(8, "div");
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "div", 27);
-    \u0275\u0275pipe(11, "translate");
-    \u0275\u0275text(12);
-    \u0275\u0275pipe(13, "translate");
+    \u0275\u0275template(11, UserControlsComponent_div_26_div_11_Template, 2, 0, "div", 27);
+    \u0275\u0275pipe(12, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(13, "div", 28);
+    \u0275\u0275pipe(14, "translate");
+    \u0275\u0275text(15);
+    \u0275\u0275pipe(16, "translate");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(14, "app-icon", 13);
-    \u0275\u0275text(15, " chevron_right ");
+    \u0275\u0275elementStart(17, "app-icon", 13);
+    \u0275\u0275text(18, " chevron_right ");
     \u0275\u0275elementEnd()()()();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275property("content", ctx_r1.language_tooltip);
-    \u0275\u0275advance(8);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(9, 4, "COMMON.LANGUAGE"));
+    \u0275\u0275advance(9);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(10, 5, "COMMON.LANGUAGE"));
     \u0275\u0275advance(2);
-    \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(11, 6, ctx_r1.active_locale));
+    \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(12, 7, "COMMON.LANGUAGE") !== "Language");
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(13, 8, ctx_r1.active_locale), " ");
+    \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(14, 9, ctx_r1.active_locale));
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(16, 11, ctx_r1.active_locale), " ");
   }
 }
 function UserControlsComponent_button_27_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 28);
+    \u0275\u0275elementStart(0, "button", 30);
     \u0275\u0275listener("click", function UserControlsComponent_button_27_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
@@ -134341,7 +134370,7 @@ function UserControlsComponent_button_27_Template(rf, ctx) {
 function UserControlsComponent_button_33_Template(rf, ctx) {
   if (rf & 1) {
     const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 29);
+    \u0275\u0275elementStart(0, "button", 31);
     \u0275\u0275listener("click", function UserControlsComponent_button_33_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r1 = \u0275\u0275nextContext();
@@ -134442,7 +134471,7 @@ var UserControlsComponent = class _UserControlsComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserControlsComponent, selectors: [["user-controls"]], standalone: false, decls: 44, vars: 35, consts: [["desk_height_tooltip", ""], [1, "rounded", "bg-base-100", "shadow", "mt-1", "flex", "flex-col", "relative", "divide-y", "divide-base-200"], ["avatar", "", 1, "flex", "flex-col", "items-center", "p-2", "w-[18rem]"], [1, "text-2xl", 3, "user", "matTooltip"], [1, ""], [1, "text-xs", "opacity-60", "truncate"], ["customTooltip", "", "class", "relative", 3, "content", 4, "ngIf"], ["customTooltip", "", 3, "content", 4, "ngIf"], ["customTooltip", "", 3, "content"], ["btn", "", "matRipple", "", 1, "clear", "w-full", "text-left", "h-[3.5rem]"], [1, "w-full", "flex", "items-center", "space-x-2"], [1, "flex", "items-center", "justify-center", "rounded-full", "w-8", "h-8", "bg-base-200"], [1, "flex-1"], [1, "opacity-60", "text-2xl"], ["customTooltip", "", 3, "content", "!border-b", 4, "ngIf"], ["customTooltip", "", "class", "!border-b", 3, "content", 4, "ngIf"], ["btn", "", "matRipple", "", "class", "clear w-full text-left h-[3.5rem]", 3, "click", 4, "ngIf"], [1, "flex", "flex-col", "items-center", "p-4"], [1, "flex", "items-center", "justify-center", "space-x-2", "mb-4"], ["btn", "", "matRipple", "", 1, "inverse", 3, "click"], ["btn", "", "matRipple", "", 3, "click", 4, "ngIf"], [1, "text-xs", "opacity-60", "w-full"], [1, "underline", "p-0", "m-0", "bg-none", "border-none", "text-xs", 3, "click"], ["customTooltip", "", 1, "relative", 3, "content"], [1, "flex-1", "truncate", "w-px"], ["customTooltip", "", 1, "!border-b", 3, "content"], [1, "flex-1", "flex", "items-center", "justify-between", "space-x-4"], [1, "text-sm", "px-2", "py-1", "rounded", "bg-base-200", "max-w-24", "truncate", 3, "matTooltip"], ["btn", "", "matRipple", "", 1, "clear", "w-full", "text-left", "h-[3.5rem]", 3, "click"], ["btn", "", "matRipple", "", 3, "click"]], template: function UserControlsComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserControlsComponent, selectors: [["user-controls"]], standalone: false, decls: 44, vars: 35, consts: [["desk_height_tooltip", ""], [1, "rounded", "bg-base-100", "shadow", "mt-1", "flex", "flex-col", "relative", "divide-y", "divide-base-200"], ["avatar", "", 1, "flex", "flex-col", "items-center", "p-2", "w-[18rem]"], [1, "text-2xl", 3, "user", "matTooltip"], [1, ""], [1, "text-xs", "opacity-60", "truncate"], ["customTooltip", "", "class", "relative", 3, "content", 4, "ngIf"], ["customTooltip", "", 3, "content", 4, "ngIf"], ["customTooltip", "", 3, "content"], ["btn", "", "matRipple", "", 1, "clear", "w-full", "text-left", "h-[3.5rem]"], [1, "w-full", "flex", "items-center", "space-x-2"], [1, "flex", "items-center", "justify-center", "rounded-full", "w-8", "h-8", "bg-base-200"], [1, "flex-1"], [1, "opacity-60", "text-2xl"], ["customTooltip", "", 3, "content", "!border-b", 4, "ngIf"], ["customTooltip", "", "class", "!border-b", 3, "content", 4, "ngIf"], ["btn", "", "matRipple", "", "class", "clear w-full text-left h-[3.5rem]", 3, "click", 4, "ngIf"], [1, "flex", "flex-col", "items-center", "p-4"], [1, "flex", "items-center", "justify-center", "space-x-2", "mb-4"], ["btn", "", "matRipple", "", 1, "inverse", 3, "click"], ["btn", "", "matRipple", "", 3, "click", 4, "ngIf"], [1, "text-xs", "opacity-60", "w-full"], [1, "underline", "p-0", "m-0", "bg-none", "border-none", "text-xs", 3, "click"], ["customTooltip", "", 1, "relative", 3, "content"], [1, "flex-1", "truncate", "w-px"], ["customTooltip", "", 1, "!border-b", 3, "content"], [1, "flex-1", "flex", "items-center", "justify-between", "space-x-4"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-sm", "px-2", "py-1", "rounded", "bg-base-200", "max-w-24", "truncate", 3, "matTooltip"], [1, "text-xs", "opacity-30"], ["btn", "", "matRipple", "", 1, "clear", "w-full", "text-left", "h-[3.5rem]", 3, "click"], ["btn", "", "matRipple", "", 3, "click"]], template: function UserControlsComponent_Template(rf, ctx) {
       if (rf & 1) {
         const _r1 = \u0275\u0275getCurrentView();
         \u0275\u0275elementStart(0, "div", 1)(1, "div", 2);
@@ -134466,7 +134495,7 @@ var UserControlsComponent = class _UserControlsComponent {
         \u0275\u0275elementStart(21, "app-icon", 13);
         \u0275\u0275text(22, "chevron_right");
         \u0275\u0275elementEnd()()()();
-        \u0275\u0275template(23, UserControlsComponent_div_23_Template, 11, 6, "div", 14)(24, UserControlsComponent_ng_template_24_Template, 1, 0, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(26, UserControlsComponent_div_26_Template, 16, 10, "div", 15)(27, UserControlsComponent_button_27_Template, 8, 3, "button", 16);
+        \u0275\u0275template(23, UserControlsComponent_div_23_Template, 11, 6, "div", 14)(24, UserControlsComponent_ng_template_24_Template, 1, 0, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(26, UserControlsComponent_div_26_Template, 19, 13, "div", 15)(27, UserControlsComponent_button_27_Template, 8, 3, "button", 16);
         \u0275\u0275elementStart(28, "div", 17)(29, "div", 18)(30, "button", 19);
         \u0275\u0275listener("click", function UserControlsComponent_Template_button_click_30_listener() {
           \u0275\u0275restoreView(_r1);
@@ -134536,7 +134565,7 @@ var UserControlsComponent = class _UserControlsComponent {
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserControlsComponent, { className: "UserControlsComponent", filePath: "libs/components/src/lib/user-controls.component.ts", lineNumber: 265 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserControlsComponent, { className: "UserControlsComponent", filePath: "libs/components/src/lib/user-controls.component.ts", lineNumber: 276 });
 })();
 
 // libs/components/src/lib/printable.component.ts
