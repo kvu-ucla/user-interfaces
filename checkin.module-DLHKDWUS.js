@@ -1,6 +1,6 @@
 import {
   CheckinStateService
-} from "./chunk-5IOYSC3R.js";
+} from "./chunk-RDUWQIKT.js";
 import {
   ANIMATION_MODULE_TYPE,
   ANIMATION_SHOW_CONTRACT_EXPAND,
@@ -259,7 +259,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-FUW32KJ4.js";
+} from "./chunk-WOIWPZND.js";
 import {
   __async,
   __spreadProps,
@@ -8710,6 +8710,10 @@ var CheckinQRScanComponent = class _CheckinQRScanComponent extends AsyncHandler 
         this.checking_code = false;
         return;
       }
+      if (event.checked_in_at) {
+        this._router.navigate(["/checkin", "checkout"]);
+        return;
+      }
       if (event.induction !== "accepted" && this.is_induction_enabled && !this.induction_after_details) {
         this._router.navigate(["/checkin", "induction"]);
       } else {
@@ -9458,13 +9462,12 @@ function CheckoutComponent_div_0_Template(rf, ctx) {
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 4, "APP.VISITOR_KIOSK.CHECKOUT"), " ");
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 6, "APP.VISITOR_KIOSK.CHECKOUT_MSG"), " ");
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 8, ctx_r1.beverage ? "APP.VISITOR_KIOSK.SAVE" : "APP.VISITOR_KIOSK.CONTINUE"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 8, "COMMON.CHECK_OUT"), " ");
     \u0275\u0275advance(2);
     \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(10, _c019));
   }
@@ -9486,10 +9489,19 @@ function CheckoutComponent_ng_template_1_Template(rf, ctx) {
   }
 }
 var CheckoutComponent = class _CheckoutComponent {
-  constructor(_state, _router) {
+  constructor(_state, _router, _org) {
     this._state = _state;
     this._router = _router;
+    this._org = _org;
     this.loading = false;
+  }
+  ngOnInit() {
+    return __async(this, null, function* () {
+      yield this._org.initialised.pipe(first((_) => _)).toPromise();
+      const event = yield this._state.event.pipe(first()).toPromise();
+      if (!event)
+        this._router.navigate(["/checkin"]);
+    });
   }
   updateGuest() {
     return __async(this, null, function* () {
@@ -9504,11 +9516,11 @@ var CheckoutComponent = class _CheckoutComponent {
   }
   static {
     this.\u0275fac = function CheckoutComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _CheckoutComponent)(\u0275\u0275directiveInject(CheckinStateService), \u0275\u0275directiveInject(Router));
+      return new (__ngFactoryType__ || _CheckoutComponent)(\u0275\u0275directiveInject(CheckinStateService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(OrganisationService));
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckoutComponent, selectors: [["app-checkout"]], decls: 3, vars: 2, consts: [["load_state", ""], ["class", "bg-base-100 rounded shadow overflow-hidden relative flex flex-col items-center w-[36rem] p-4", 4, "ngIf", "ngIfElse"], [1, "bg-base-100", "rounded", "shadow", "overflow-hidden", "relative", "flex", "flex-col", "items-center", "w-[36rem]", "p-4"], [1, "text-xl", "mb-2", "w-full"], [1, "w-full"], [1, "flex", "items-center", "justify-end", "w-full"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"], ["icon", "", "matRipple", "", 1, "absolute", "top-2", "right-2", 3, "routerLink"], [1, "bg-base-100", "rounded", "shadow", "overflow-hidden", "relative", "flex", "flex-col", "items-center", "justify-center", "w-[28rem]", "h-[20rem]", "p-8", "space-y-2"], [3, "diameter"]], template: function CheckoutComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckoutComponent, selectors: [["app-checkout"]], standalone: false, decls: 3, vars: 2, consts: [["load_state", ""], ["class", "bg-base-100 rounded shadow overflow-hidden relative flex flex-col items-center w-[28rem] p-4", 4, "ngIf", "ngIfElse"], [1, "bg-base-100", "rounded", "shadow", "overflow-hidden", "relative", "flex", "flex-col", "items-center", "w-[28rem]", "p-4"], [1, "text-xl", "mb-2", "w-full"], [1, "w-full", "mt-2", "mb-4"], [1, "flex", "items-center", "justify-end", "w-full"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"], ["icon", "", "matRipple", "", 1, "absolute", "top-2", "right-2", 3, "routerLink"], [1, "bg-base-100", "rounded", "shadow", "overflow-hidden", "relative", "flex", "flex-col", "items-center", "justify-center", "w-[28rem]", "h-[20rem]", "p-8", "space-y-2"], [3, "diameter"]], template: function CheckoutComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275template(0, CheckoutComponent_div_0_Template, 14, 11, "div", 1)(1, CheckoutComponent_ng_template_1_Template, 5, 4, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
       }
@@ -9516,11 +9528,11 @@ var CheckoutComponent = class _CheckoutComponent {
         const load_state_r3 = \u0275\u0275reference(2);
         \u0275\u0275property("ngIf", !ctx.loading)("ngIfElse", load_state_r3);
       }
-    }, styles: ["\n\n[_nghost-%COMP%]    > div[_ngcontent-%COMP%] {\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=checkout.component.css.map */"] });
+    }, dependencies: [NgIf, IconComponent, MatRipple, MatProgressSpinner, RouterLink, TranslatePipe], styles: ["\n\n[_nghost-%COMP%]    > div[_ngcontent-%COMP%] {\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=checkout.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckoutComponent, { className: "CheckoutComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkout.component.ts", lineNumber: 57 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckoutComponent, { className: "CheckoutComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkout.component.ts", lineNumber: 55 });
 })();
 
 // apps/visitor-kiosk/src/app/checkin/checkin.module.ts
@@ -9565,4 +9577,4 @@ var VisitorCheckinModule = class _VisitorCheckinModule {
 export {
   VisitorCheckinModule
 };
-//# sourceMappingURL=checkin.module-5P5G6LB7.js.map
+//# sourceMappingURL=checkin.module-DLHKDWUS.js.map
