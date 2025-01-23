@@ -1,6 +1,6 @@
 import {
   CheckinStateService
-} from "./chunk-DY6Z7RFP.js";
+} from "./chunk-5ICKCJM2.js";
 import {
   ANIMATION_MODULE_TYPE,
   ANIMATION_SHOW_CONTRACT_EXPAND,
@@ -239,7 +239,7 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-PU63Q47P.js";
+} from "./chunk-LTVLQQYP.js";
 import {
   __async,
   __export,
@@ -25741,51 +25741,83 @@ function WelcomeComponent_a_15_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 2, "APP.VISITOR_KIOSK.EXPLORE"), " ");
   }
 }
+function WelcomeComponent_button_20_div_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 21);
+    \u0275\u0275text(1, " Language ");
+    \u0275\u0275elementEnd();
+  }
+}
 function WelcomeComponent_button_20_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "button", 15)(1, "div", 16)(2, "div", 17);
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275elementStart(0, "button", 15)(1, "div", 16)(2, "app-icon", 17);
+    \u0275\u0275text(3, "language");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 18);
-    \u0275\u0275pipe(6, "translate");
-    \u0275\u0275text(7);
-    \u0275\u0275pipe(8, "translate");
+    \u0275\u0275elementStart(4, "div", 18)(5, "div");
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(8, WelcomeComponent_button_20_div_8_Template, 2, 0, "div", 19);
+    \u0275\u0275pipe(9, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "div", 20);
+    \u0275\u0275pipe(11, "translate");
+    \u0275\u0275text(12);
+    \u0275\u0275pipe(13, "translate");
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
     const menu_r2 = \u0275\u0275reference(22);
     \u0275\u0275property("matMenuTriggerFor", menu_r2);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 4, "COMMON.LANGUAGE"), " ");
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(7, 5, "COMMON.LANGUAGE"));
     \u0275\u0275advance(2);
-    \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(6, 6, ctx_r0.active_locale));
+    \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(9, 7, "COMMON.LANGUAGE") !== "Language");
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(8, 8, ctx_r0.active_locale), " ");
+    \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(11, 9, ctx_r0.active_locale));
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(13, 11, ctx_r0.active_locale), " ");
+  }
+}
+function WelcomeComponent_button_23_div_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 21);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const lang_r4 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", lang_r4.local, " ");
   }
 }
 function WelcomeComponent_button_23_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 19);
+    \u0275\u0275elementStart(0, "button", 22);
     \u0275\u0275listener("click", function WelcomeComponent_button_23_Template_button_click_0_listener() {
       const lang_r4 = \u0275\u0275restoreView(_r3).$implicit;
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.setLocale(lang_r4.id));
     });
-    \u0275\u0275elementStart(1, "div", 16)(2, "div");
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275elementStart(1, "div", 23)(2, "div")(3, "div");
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div");
-    \u0275\u0275text(6);
+    \u0275\u0275template(6, WelcomeComponent_button_23_div_6_Template, 2, 1, "div", 19);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 24);
+    \u0275\u0275text(9);
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
     const lang_r4 = ctx.$implicit;
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 2, lang_r4.name));
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 3, lang_r4.name));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(7, 5, lang_r4.name) !== lang_r4.local);
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(lang_r4.flag);
   }
@@ -25843,7 +25875,7 @@ var WelcomeComponent = class _WelcomeComponent extends AsyncHandler {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _WelcomeComponent, selectors: [["app-welcome"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 25, vars: 24, consts: [["menu", "matMenu"], [1, "absolute", "inset-0", "p-8", "flex", "items-center"], ["auth", "", 1, "absolute", "min-h-[100%]", "min-w-[100%]", "top-1/2", "-translate-y-1/2", "left-1/2", "-translate-x-1/2", 3, "source"], [1, "flex", "flex-col", "justify-center", "space-y-8", "z-10", "w-[60%]"], [1, "mb-4", "text-white", "text-6xl", "space-y-4", 3, "innerHTML"], [1, "flex", "items-center", "space-x-4", "font-medium"], ["btn", "", "matRipple", "", 1, "base", "w-40", 3, "routerLink"], [1, "flex", "items-center", "space-x-2"], [1, "ml-2"], [1, "text-2xl"], ["btn", "", "matRipple", "", "class", "base w-40", 3, "routerLink", 4, "ngIf"], [1, "absolute", "top-4", "right-4", "text-2xl", "text-white"], ["class", "absolute top-4 left-4", 3, "matMenuTriggerFor", 4, "ngIf"], ["mat-menu-item", "", 3, "click", 4, "ngFor", "ngForOf"], ["src", "assets/img/building.png", 1, "absolute", "w-[60%]", "bottom-0", "right-0"], [1, "absolute", "top-4", "left-4", 3, "matMenuTriggerFor"], [1, "flex", "items-center", "justify-between", "space-x-4"], [1, "text-white"], [1, "text-sm", "px-2", "py-1", "rounded", "bg-base-200", "max-w-24", "truncate", 3, "matTooltip"], ["mat-menu-item", "", 3, "click"]], template: function WelcomeComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _WelcomeComponent, selectors: [["app-welcome"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 25, vars: 24, consts: [["menu", "matMenu"], [1, "absolute", "inset-0", "p-8", "flex", "items-center"], ["auth", "", 1, "absolute", "min-h-[100%]", "min-w-[100%]", "top-1/2", "-translate-y-1/2", "left-1/2", "-translate-x-1/2", 3, "source"], [1, "flex", "flex-col", "justify-center", "space-y-8", "z-10", "w-[60%]"], [1, "mb-4", "text-white", "text-6xl", "space-y-4", 3, "innerHTML"], [1, "flex", "items-center", "space-x-4", "font-medium"], ["btn", "", "matRipple", "", 1, "base", "w-40", 3, "routerLink"], [1, "flex", "items-center", "space-x-2"], [1, "ml-2"], [1, "text-2xl"], ["btn", "", "matRipple", "", "class", "base w-40", 3, "routerLink", 4, "ngIf"], [1, "absolute", "top-4", "right-4", "text-2xl", "text-white"], ["class", "absolute top-4 left-4", 3, "matMenuTriggerFor", 4, "ngIf"], ["mat-menu-item", "", 3, "click", 4, "ngFor", "ngForOf"], ["src", "assets/img/building.png", 1, "absolute", "w-[60%]", "bottom-0", "right-0"], [1, "absolute", "top-4", "left-4", 3, "matMenuTriggerFor"], [1, "flex", "items-center", "justify-between"], [1, "text-2xl", "text-white"], [1, "text-white", "text-left", "ml-2"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-sm", "px-2", "py-1", "rounded", "bg-base-200", "max-w-24", "truncate", "ml-4", 3, "matTooltip"], [1, "text-xs", "opacity-30"], ["mat-menu-item", "", 3, "click"], [1, "flex", "items-center", "justify-between", "space-x-8", "h-14"], [1, "text-3xl"]], template: function WelcomeComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 1);
         \u0275\u0275element(1, "img", 2);
@@ -25865,9 +25897,9 @@ var WelcomeComponent = class _WelcomeComponent extends AsyncHandler {
         \u0275\u0275pipe(18, "date");
         \u0275\u0275pipe(19, "date");
         \u0275\u0275elementEnd();
-        \u0275\u0275template(20, WelcomeComponent_button_20_Template, 9, 10, "button", 12);
+        \u0275\u0275template(20, WelcomeComponent_button_20_Template, 14, 13, "button", 12);
         \u0275\u0275elementStart(21, "mat-menu", null, 0);
-        \u0275\u0275template(23, WelcomeComponent_button_23_Template, 7, 4, "button", 13);
+        \u0275\u0275template(23, WelcomeComponent_button_23_Template, 10, 7, "button", 13);
         \u0275\u0275elementEnd();
         \u0275\u0275element(24, "img", 14);
         \u0275\u0275elementEnd();
@@ -25896,7 +25928,7 @@ var WelcomeComponent = class _WelcomeComponent extends AsyncHandler {
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WelcomeComponent, { className: "WelcomeComponent", filePath: "apps/visitor-kiosk/src/app/welcome.component.ts", lineNumber: 116 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WelcomeComponent, { className: "WelcomeComponent", filePath: "apps/visitor-kiosk/src/app/welcome.component.ts", lineNumber: 135 });
 })();
 
 // apps/visitor-kiosk/src/app/visitor-registration.component.ts
@@ -26086,11 +26118,11 @@ var routes = [
   { path: "register", component: VisitorRegistrationComponent },
   {
     path: "explore",
-    loadChildren: () => import("./explore.module-MKD4P5DY.js").then((m) => m.AppExploreModule)
+    loadChildren: () => import("./explore.module-VQVY7F3C.js").then((m) => m.AppExploreModule)
   },
   {
     path: "checkin",
-    loadChildren: () => import("./checkin.module-JCS4MFPP.js").then((m) => m.VisitorCheckinModule)
+    loadChildren: () => import("./checkin.module-KGOQQXJW.js").then((m) => m.VisitorCheckinModule)
   },
   { path: "**", redirectTo: "bootstrap" }
 ];
