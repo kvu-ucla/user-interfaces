@@ -82633,15 +82633,15 @@ var AsyncHandler = class _AsyncHandler {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "1ad37e4",
-  "hash": "1ad37e4",
+  "raw": "d6f6e38",
+  "hash": "d6f6e38",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "1ad37e4",
+  "suffix": "d6f6e38",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1739417256754
+  "time": 1739420103513
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -162920,7 +162920,7 @@ var CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
       return this.using_bookings ? this._booking_orders : this._embedded_orders;
     }), map((orders) => {
       const start = startOfDay(this._filters.getValue().date || Date.now());
-      return orders.filter((o2) => format(o2.deliver_at, "yyyy-MM-dd") === format(start, "yyyy-MM-dd"));
+      return unique(orders.filter((o2) => format(o2.deliver_at, "yyyy-MM-dd") === format(start, "yyyy-MM-dd")), "id");
     }), tap(() => this._loading.next(false)), shareReplay(1));
     this.loading = this._loading.asObservable();
     this.order_filters = this._filters.asObservable();
