@@ -1,6 +1,6 @@
 import {
   CheckinStateService
-} from "./chunk-DZWZP4D3.js";
+} from "./chunk-73P5Q2WP.js";
 import {
   ANIMATION_MODULE_TYPE,
   ANIMATION_SHOW_CONTRACT_EXPAND,
@@ -262,7 +262,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-P5HC3WZV.js";
+} from "./chunk-62BPKHXR.js";
 import {
   __async,
   __spreadProps,
@@ -4972,11 +4972,11 @@ var CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
       const booking = yield updateEventMetadata(event.id, system_id, event.extension_data).toPromise();
       if (this.using_bookings) {
         const booking2 = BOOKINGS[order.id];
-        yield updateBooking(booking2.id, __spreadProps(__spreadValues({}, booking2), {
+        yield updateBooking(booking2.id, __spreadProps(__spreadValues({}, booking2.toJSON()), {
           extension_data: __spreadProps(__spreadValues({}, booking2.extension_data), {
             details: updated_order.toJSON()
           })
-        }));
+        })).toPromise();
       }
       this.timeout("refresh-list", () => this._poll.next(Date.now()), 1e3);
       order.status = status;
@@ -9620,4 +9620,4 @@ var VisitorCheckinModule = class _VisitorCheckinModule {
 export {
   VisitorCheckinModule
 };
-//# sourceMappingURL=checkin.module-AQPFOMBO.js.map
+//# sourceMappingURL=checkin.module-DFY7VF7A.js.map

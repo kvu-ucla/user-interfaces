@@ -1,6 +1,6 @@
 import {
   CheckinStateService
-} from "./chunk-DZWZP4D3.js";
+} from "./chunk-73P5Q2WP.js";
 import {
   ANIMATION_MODULE_TYPE,
   ANIMATION_SHOW_CONTRACT_EXPAND,
@@ -239,7 +239,7 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-P5HC3WZV.js";
+} from "./chunk-62BPKHXR.js";
 import {
   __async,
   __export,
@@ -26179,11 +26179,11 @@ var routes = [
   { path: "register", component: VisitorRegistrationComponent },
   {
     path: "explore",
-    loadChildren: () => import("./explore.module-FD6L5WYF.js").then((m) => m.AppExploreModule)
+    loadChildren: () => import("./explore.module-7XI4SWTU.js").then((m) => m.AppExploreModule)
   },
   {
     path: "checkin",
-    loadChildren: () => import("./checkin.module-AQPFOMBO.js").then((m) => m.VisitorCheckinModule)
+    loadChildren: () => import("./checkin.module-DFY7VF7A.js").then((m) => m.VisitorCheckinModule)
   },
   { path: "**", redirectTo: "bootstrap" }
 ];
