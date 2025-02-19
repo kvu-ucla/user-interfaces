@@ -82633,15 +82633,15 @@ var AsyncHandler = class _AsyncHandler {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "d6f6e38",
-  "hash": "d6f6e38",
+  "raw": "9a81a31",
+  "hash": "9a81a31",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "d6f6e38",
+  "suffix": "9a81a31",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1739420103513
+  "time": 1739946759858
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -135489,7 +135489,7 @@ var CateringOrder = class {
     this.deliver_at_time = deliverAtTime(this);
   }
   toJSON() {
-    const obj = __spreadValues({}, this);
+    const obj = cleanObject(__spreadValues({}, this), ["", null, void 0]);
     obj.status = obj._status;
     delete obj.event;
     delete obj._status;
@@ -162975,11 +162975,11 @@ var CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
       const booking = yield updateEventMetadata(event.id, system_id, event.extension_data).toPromise();
       if (this.using_bookings) {
         const booking2 = BOOKINGS2[order.id];
-        yield updateBooking(booking2.id, __spreadProps(__spreadValues({}, booking2), {
+        yield updateBooking(booking2.id, __spreadProps(__spreadValues({}, booking2.toJSON()), {
           extension_data: __spreadProps(__spreadValues({}, booking2.extension_data), {
             details: updated_order.toJSON()
           })
-        }));
+        })).toPromise();
       }
       this.timeout("refresh-list", () => this._poll.next(Date.now()), 1e3);
       order.status = status2;
