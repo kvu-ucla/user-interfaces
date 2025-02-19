@@ -261,7 +261,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-W6XJDRE3.js";
+} from "./chunk-KVINMB72.js";
 import {
   __async,
   __spreadProps,
@@ -1927,11 +1927,11 @@ var CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
       const booking = yield updateEventMetadata(event.id, system_id, event.extension_data).toPromise();
       if (this.using_bookings) {
         const booking2 = BOOKINGS[order.id];
-        yield updateBooking(booking2.id, __spreadProps(__spreadValues({}, booking2), {
+        yield updateBooking(booking2.id, __spreadProps(__spreadValues({}, booking2.toJSON()), {
           extension_data: __spreadProps(__spreadValues({}, booking2.extension_data), {
             details: updated_order.toJSON()
           })
-        }));
+        })).toPromise();
       }
       this.timeout("refresh-list", () => this._poll.next(Date.now()), 1e3);
       order.status = status;
@@ -13892,4 +13892,4 @@ var BookModule = class _BookModule {
 export {
   BookModule
 };
-//# sourceMappingURL=book.module-VZYZQHS4.js.map
+//# sourceMappingURL=book.module-WLZKFOI4.js.map

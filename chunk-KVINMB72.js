@@ -72700,15 +72700,15 @@ var DEFAULT_SETTINGS = {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "d6f6e38",
-  "hash": "d6f6e38",
+  "raw": "9a81a31",
+  "hash": "9a81a31",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "d6f6e38",
+  "suffix": "9a81a31",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1739420102974
+  "time": 1739946813886
 };
 
 // libs/users/src/lib/user.utilities.ts
@@ -129980,7 +129980,7 @@ var CateringOrder = class {
     this.deliver_at_time = deliverAtTime(this);
   }
   toJSON() {
-    const obj = __spreadValues({}, this);
+    const obj = cleanObject(__spreadValues({}, this), ["", null, void 0]);
     obj.status = obj._status;
     delete obj.event;
     delete obj._status;
@@ -160398,4 +160398,4 @@ lodash-es/lodash.js:
    * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
    *)
 */
-//# sourceMappingURL=chunk-W6XJDRE3.js.map
+//# sourceMappingURL=chunk-KVINMB72.js.map
