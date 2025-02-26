@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1740544714929,
+  "timestamp": 1740545420449,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -70,6 +70,7 @@
         "./assets/icons/today-outline.svg",
         "./assets/icons/user-avatar.jpg",
         "./assets/icons/visa.svg",
+        "./assets/icons/visitor-placeholder.svg",
         "./assets/locale/ar.json",
         "./assets/locale/en-AU.json",
         "./assets/locale/en-GB.json",
@@ -130,7 +131,7 @@
     "./assets/icons/gcal.svg": "b8d23e34f4c427fd40b111f8b0dfaafbd1d1e77c",
     "./assets/icons/home-filled.svg": "96184359a17eaa01b3e50134124eb0034d3e4f34",
     "./assets/icons/home-outline.svg": "0a7375fdb84d3b06f05435c96448b64a3548d2fb",
-    "./assets/icons/locker-placeholder.svg": "a6abc6523abe014126c1e625548e3fb7f352ad44",
+    "./assets/icons/locker-placeholder.svg": "6e84a00041c55c3e7153a52847b6d26810771078",
     "./assets/icons/locker-success.svg": "20169b2a608943dac0ecc2033b291e2127542326",
     "./assets/icons/mastercard.svg": "79fcc68055a5038b0ab81cecd407496fdfd350c9",
     "./assets/icons/meeting-room-filled.svg": "cdc43c2a31283ba4bbe5f8c32169dd057e6e7065",
@@ -155,6 +156,7 @@
     "./assets/icons/today-outline.svg": "40fc045c0b90aa2313cc5385260781ba5b55b8ad",
     "./assets/icons/user-avatar.jpg": "f757773a550a69b954c833376a6f1eed8ad4683c",
     "./assets/icons/visa.svg": "11187e2ea86894625af0aeb5b85c17bcbf8fe192",
+    "./assets/icons/visitor-placeholder.svg": "744f6d0a7c3f96db704b4e4cc301aff7bed145d2",
     "./assets/locale/ar.json": "2bb6cad15009056d7e34cfaa633a11f8bf5b7b0e",
     "./assets/locale/en-AU.json": "b39a61eb3bc011ee223bb13d07f525aa0ca1d894",
     "./assets/locale/en-GB.json": "c0ccea7cf0d1be466199f8be84e2956618590456",
@@ -193,7 +195,7 @@
     "./assets/yolov8x_web_model/model.json": "51607c6c0f465d41cdca4d65a17cfbf9c9f99c62",
     "./favicon.ico": "4e23d0f9b6ddaf3c9ddef90dbaed2342941297b5",
     "./index.html": "6e01ae425c7a2e2209c95ebc27988952f043c716",
-    "./main.js": "14de8fcc2d54b6372dee1296efcefc1a55b2707e",
+    "./main.js": "2f0be9a65f938a920bb81850f0aaa9cfb7789030",
     "./polyfills.js": "bbc5bc3958c959c3048bb84772b416a59bef38b5",
     "./styles.css": "ba03be2c3393747dcce0140b41f9e6179de41acd"
   },
