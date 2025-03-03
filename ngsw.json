@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1740981903609,
+  "timestamp": 1741005056723,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -164,7 +164,7 @@
     "./assets/icons/visa.svg": "11187e2ea86894625af0aeb5b85c17bcbf8fe192",
     "./assets/icons/visitor-placeholder.svg": "744f6d0a7c3f96db704b4e4cc301aff7bed145d2",
     "./assets/locale/ar.json": "2bb6cad15009056d7e34cfaa633a11f8bf5b7b0e",
-    "./assets/locale/en-AU.json": "8ed10f388144b9e94420b53becbd527b8e7ac78b",
+    "./assets/locale/en-AU.json": "61755670b0af0ad2d6cf47a7f252561b5a2d6f73",
     "./assets/locale/en-GB.json": "c0ccea7cf0d1be466199f8be84e2956618590456",
     "./assets/locale/en-US.json": "9ed46549ef1c8db6d6fe673fd4bcceec3c999329",
     "./assets/locale/es.json": "670567bd810a9800c2da52771140090617da0019",
@@ -186,15 +186,15 @@
     "./assets/mocks/building1.jpg": "9170087fb243e25d0dbd5a29c58aafd4e1a4daee",
     "./assets/mocks/building2.jpg": "9fcdd5204d4294effd515b8b97fac937f494d7e4",
     "./assets/mocks/building3.jpg": "782111d26faa182f2c163fd972a021357fd384c8",
-    "./assets/not-supported.html": "eee844456ef3bda3481d919b95e4e558dbc95549",
+    "./assets/not-supported.html": "71a889ea40e681a39f8156a976ebf66ff148f785",
     "./assets/support/chrome-logo.svg": "265fb92c1ab3d68ac7fc58c70c6a42e77569288f",
     "./assets/support/edge-logo.svg": "28d8691fd6c19223a3d99dd8732416d32a82d496",
     "./assets/support/firefox-logo.svg": "5d92cf1198425c8696bbd4c4c79f7ee029a207b9",
     "./assets/support/opera-logo.svg": "23f8e25409598ac843eefe81ea3c09b4f460844d",
     "./assets/support/safari-logo.svg": "1c510b0c330f84f6662351e4a0abd7fb8af2f678",
     "./favicon.ico": "5d8cf2b09be186513f3621f4c03d98eea93822ba",
-    "./index.html": "21f161a84bc078b97e5133a0c28a3c3f784c8496",
-    "./main.js": "3090ba54581e0670dc10ec625679347fc89f1bcb",
+    "./index.html": "7ba8c282541578f43e0410e396db594d9118c471",
+    "./main.js": "ba585a61ce19e0943853d25ac77fde792b640d19",
     "./manifest.webmanifest": "8c6fdda8ecb155f4951a7175bd0b695d39d23ad7",
     "./polyfills.js": "bbc5bc3958c959c3048bb84772b416a59bef38b5",
     "./styles.css": "80f23005fac4535b691ce7d14af3de0856767e2a"
