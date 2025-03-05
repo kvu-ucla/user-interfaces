@@ -1,0 +1,1763 @@
+import {
+  ScheduleStateService
+} from "./chunk-5ZWLFDXT.js";
+import {
+  AsyncHandler,
+  AsyncPipe,
+  BookingCardComponent,
+  BookingFormService,
+  CalendarEvent,
+  CommonModule,
+  DateCalendarComponent,
+  DatePipe,
+  EventCardComponent,
+  EventFormService,
+  FooterMenuComponent,
+  FormsModule,
+  IconComponent,
+  MatBottomSheet,
+  MatBottomSheetModule,
+  MatBottomSheetRef,
+  MatCheckbox,
+  MatDialog,
+  MatFormField,
+  MatOption,
+  MatProgressBar,
+  MatRipple,
+  MatSelect,
+  MatTooltip,
+  NG_VALUE_ACCESSOR,
+  NgControlStatus,
+  NgForOf,
+  NgIf,
+  NgModel,
+  OrganisationService,
+  Router,
+  RouterModule,
+  SettingsService,
+  SharedComponentModule,
+  SlicePipe,
+  TopbarComponent,
+  TranslatePipe,
+  addDays,
+  addMonths,
+  checkinBooking,
+  checkinBookingInstance,
+  combineLatest,
+  currentUser,
+  debounceTime,
+  filter,
+  format,
+  forwardRef,
+  i18n,
+  isBefore,
+  isSameDay,
+  isSameMonth,
+  map,
+  notifyError,
+  notifySuccess,
+  openConfirmModal,
+  parse,
+  queryEvents,
+  removeBooking,
+  removeEvent,
+  startOfDay,
+  startOfMonth,
+  startOfWeek,
+  ɵsetClassDebugInfo,
+  ɵɵInheritDefinitionFeature,
+  ɵɵProvidersFeature,
+  ɵɵadvance,
+  ɵɵclassProp,
+  ɵɵdefineComponent,
+  ɵɵdefineInjector,
+  ɵɵdefineNgModule,
+  ɵɵdirectiveInject,
+  ɵɵelement,
+  ɵɵelementContainerEnd,
+  ɵɵelementContainerStart,
+  ɵɵelementEnd,
+  ɵɵelementStart,
+  ɵɵgetCurrentView,
+  ɵɵlistener,
+  ɵɵnextContext,
+  ɵɵpipe,
+  ɵɵpipeBind1,
+  ɵɵpipeBind2,
+  ɵɵpipeBind3,
+  ɵɵproperty,
+  ɵɵreference,
+  ɵɵresetView,
+  ɵɵrestoreView,
+  ɵɵtemplate,
+  ɵɵtemplateRefExtractor,
+  ɵɵtext,
+  ɵɵtextInterpolate,
+  ɵɵtextInterpolate1,
+  ɵɵtextInterpolate2
+} from "./chunk-5Q2ZU3FL.js";
+import {
+  __async
+} from "./chunk-4MWRP73S.js";
+
+// apps/workplace/src/app/new-schedule/schedule-filter-card.component.ts
+function ScheduleFilterCardComponent_button_9_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 11);
+    \u0275\u0275listener("click", function ScheduleFilterCardComponent_button_9_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("event"));
+    });
+    \u0275\u0275elementStart(1, "div", 12)(2, "app-icon");
+    \u0275\u0275text(3, "place");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(4, "div", 13)(5, "div", 14);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 15);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(11, "mat-checkbox", 16);
+    \u0275\u0275pipe(12, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(7, 3, "RESOURCE.ROOMS"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 5, "APP.WORKPLACE.SCHEDULE_FILTER_ROOMS"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(12, 7, ctx_r1.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("event"));
+  }
+}
+function ScheduleFilterCardComponent_button_10_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 17);
+    \u0275\u0275listener("click", function ScheduleFilterCardComponent_button_10_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("desk"));
+    });
+    \u0275\u0275elementStart(1, "div", 12);
+    \u0275\u0275element(2, "img", 18);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 13)(4, "div", 14);
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "div", 15);
+    \u0275\u0275text(8);
+    \u0275\u0275pipe(9, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(10, "mat-checkbox", 16);
+    \u0275\u0275pipe(11, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 3, "RESOURCE.DESKS"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(9, 5, "APP.WORKPLACE.SCHEDULE_FILTER_DESKS"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(11, 7, ctx_r1.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("desk"));
+  }
+}
+function ScheduleFilterCardComponent_button_11_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 19);
+    \u0275\u0275listener("click", function ScheduleFilterCardComponent_button_11_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("parking"));
+    });
+    \u0275\u0275elementStart(1, "div", 12)(2, "app-icon");
+    \u0275\u0275text(3, "drive_eta");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(4, "div", 13)(5, "div", 14);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 15);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(11, "mat-checkbox", 16);
+    \u0275\u0275pipe(12, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(7, 3, "RESOURCE.PARKING"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 5, "APP.WORKPLACE.SCHEDULE_FILTER_PARKING"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(12, 7, ctx_r1.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("parking"));
+  }
+}
+function ScheduleFilterCardComponent_button_12_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 20);
+    \u0275\u0275listener("click", function ScheduleFilterCardComponent_button_12_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("visitor"));
+    });
+    \u0275\u0275elementStart(1, "div", 12)(2, "app-icon");
+    \u0275\u0275text(3, "people");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(4, "div", 13)(5, "div", 14);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 15);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(11, "mat-checkbox", 16);
+    \u0275\u0275pipe(12, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 3, "RESOURCE.VISITORS"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 5, "APP.WORKPLACE.SCHEDULE_FILTER_VISITORS"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(12, 7, ctx_r1.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("visitor"));
+  }
+}
+function ScheduleFilterCardComponent_button_13_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 21);
+    \u0275\u0275listener("click", function ScheduleFilterCardComponent_button_13_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("locker"));
+    });
+    \u0275\u0275elementStart(1, "div", 12)(2, "app-icon");
+    \u0275\u0275text(3, "door_back");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(4, "div", 13)(5, "div", 14);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 15);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(11, "mat-checkbox", 16);
+    \u0275\u0275pipe(12, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 3, "RESOURCE.LOCKERS"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 5, "APP.WORKPLACE.SCHEDULE_FILTER_LOCKERS"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(12, 7, ctx_r1.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("locker"));
+  }
+}
+function ScheduleFilterCardComponent_button_14_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 21);
+    \u0275\u0275listener("click", function ScheduleFilterCardComponent_button_14_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("group-event"));
+    });
+    \u0275\u0275elementStart(1, "div", 12)(2, "app-icon");
+    \u0275\u0275text(3, "door_back");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(4, "div", 13)(5, "div", 14);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 15);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(11, "mat-checkbox", 16);
+    \u0275\u0275pipe(12, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 3, "RESOURCE.EVENTS"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 5, "APP.WORKPLACE.SCHEDULE_FILTER_EVENTS"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(12, 7, ctx_r1.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("group-event"));
+  }
+}
+var ScheduleFilterCardComponent = class _ScheduleFilterCardComponent {
+  hasFeature(feature) {
+    return this._settings.get("app.features")?.includes(feature);
+  }
+  constructor(_state, _settings, _sheet_ref) {
+    this._state = _state;
+    this._settings = _settings;
+    this._sheet_ref = _sheet_ref;
+    this.filters = this._state.filters;
+    this.toggleType = (t) => this._state.toggleType(t);
+    this.dismiss = () => this._sheet_ref.dismiss();
+  }
+  static {
+    this.\u0275fac = function ScheduleFilterCardComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ScheduleFilterCardComponent)(\u0275\u0275directiveInject(ScheduleStateService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(MatBottomSheetRef));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ScheduleFilterCardComponent, selectors: [["schedule-filter-card"]], standalone: false, decls: 19, vars: 12, consts: [[1, "mb-4", "flex", "items-center", "space-x-2", "border-b", "border-base-200", "text-xl"], ["icon", "", "matRipple", "", 3, "click"], [1, "w-1/2", "flex-1", "text-center"], [1, "mb-4", "space-y-4", "border-b", "border-base-200", "px-2", "pb-4"], ["matRipple", "", "name", "schedule-toggle-event-filter", "class", "flex w-full items-center space-x-2 text-left", 3, "click", 4, "ngIf"], ["matRipple", "", "name", "schedule-toggle-desk-filter", "class", "flex w-full items-center space-x-2 text-left", 3, "click", 4, "ngIf"], ["matRipple", "", "name", "schedule-toggle-parking-filter", "class", "flex w-full items-center space-x-2 text-left", 3, "click", 4, "ngIf"], ["matRipple", "", "name", "schedule-toggle-visitor-filter", "class", "flex w-full items-center space-x-2 text-left", 3, "click", 4, "ngIf"], ["matRipple", "", "name", "schedule-toggle-locker-filter", "class", "flex w-full items-center space-x-2 text-left", 3, "click", 4, "ngIf"], [1, "px-2", "pb-2"], ["btn", "", "matRipple", "", "name", "schedule-apply-filter", 1, "w-full", 3, "click"], ["matRipple", "", "name", "schedule-toggle-event-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full", "bg-base-200", "text-2xl"], [1, "flex-1"], [1, ""], [1, "text-sm", "opacity-60"], [3, "ngModel"], ["matRipple", "", "name", "schedule-toggle-desk-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], ["src", "assets/icons/desk-outline.svg", 1, "w-6"], ["matRipple", "", "name", "schedule-toggle-parking-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], ["matRipple", "", "name", "schedule-toggle-visitor-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], ["matRipple", "", "name", "schedule-toggle-locker-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"]], template: function ScheduleFilterCardComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "div", 0)(1, "button", 1);
+        \u0275\u0275listener("click", function ScheduleFilterCardComponent_Template_button_click_1_listener() {
+          return ctx.dismiss();
+        });
+        \u0275\u0275elementStart(2, "app-icon");
+        \u0275\u0275text(3, "chevron_left");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(4, "h2", 2);
+        \u0275\u0275text(5);
+        \u0275\u0275pipe(6, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(7, "app-icon");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(8, "div", 3);
+        \u0275\u0275template(9, ScheduleFilterCardComponent_button_9_Template, 13, 9, "button", 4)(10, ScheduleFilterCardComponent_button_10_Template, 12, 9, "button", 5)(11, ScheduleFilterCardComponent_button_11_Template, 13, 9, "button", 6)(12, ScheduleFilterCardComponent_button_12_Template, 13, 9, "button", 7)(13, ScheduleFilterCardComponent_button_13_Template, 13, 9, "button", 8)(14, ScheduleFilterCardComponent_button_14_Template, 13, 9, "button", 8);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(15, "div", 9)(16, "button", 10);
+        \u0275\u0275listener("click", function ScheduleFilterCardComponent_Template_button_click_16_listener() {
+          return ctx.dismiss();
+        });
+        \u0275\u0275text(17);
+        \u0275\u0275pipe(18, "translate");
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        \u0275\u0275advance(5);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 8, "APP.WORKPLACE.SCHEDULE_FILTERS"), " ");
+        \u0275\u0275advance(4);
+        \u0275\u0275property("ngIf", ctx.hasFeature("spaces"));
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.hasFeature("desks"));
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.hasFeature("parking"));
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.hasFeature("visitor-invite"));
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.hasFeature("lockers"));
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.hasFeature("group-events"));
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(18, 10, "COMMON.APPLY"), " ");
+      }
+    }, dependencies: [NgIf, IconComponent, MatRipple, MatCheckbox, NgControlStatus, NgModel, AsyncPipe, TranslatePipe], styles: ["\n\nmat-checkbox[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n/*# sourceMappingURL=schedule-filter-card.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ScheduleFilterCardComponent, { className: "ScheduleFilterCardComponent", filePath: "apps/workplace/src/app/new-schedule/schedule-filter-card.component.ts", lineNumber: 197 });
+})();
+
+// apps/workplace/src/app/new-schedule/schedule-filters.component.ts
+function ScheduleFiltersComponent_div_5_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 9)(1, "div", 10);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 11);
+    \u0275\u0275listener("click", function ScheduleFiltersComponent_div_5_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("event", true));
+    });
+    \u0275\u0275elementStart(5, "app-icon");
+    \u0275\u0275text(6, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "RESOURCE.ROOMS"));
+  }
+}
+function ScheduleFiltersComponent_div_7_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 9)(1, "div", 10);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 12);
+    \u0275\u0275listener("click", function ScheduleFiltersComponent_div_7_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("desk", true));
+    });
+    \u0275\u0275elementStart(5, "app-icon");
+    \u0275\u0275text(6, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "RESOURCE.DESKS"));
+  }
+}
+function ScheduleFiltersComponent_div_9_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 9)(1, "div", 10);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 13);
+    \u0275\u0275listener("click", function ScheduleFiltersComponent_div_9_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("parking", true));
+    });
+    \u0275\u0275elementStart(5, "app-icon");
+    \u0275\u0275text(6, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "RESOURCE.PARKING"), " ");
+  }
+}
+function ScheduleFiltersComponent_div_11_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 9)(1, "div", 10);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 14);
+    \u0275\u0275listener("click", function ScheduleFiltersComponent_div_11_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("visitor", true));
+    });
+    \u0275\u0275elementStart(5, "app-icon");
+    \u0275\u0275text(6, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "RESOURCE.VISITORS"), " ");
+  }
+}
+function ScheduleFiltersComponent_div_13_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 9)(1, "div", 10);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 15);
+    \u0275\u0275listener("click", function ScheduleFiltersComponent_div_13_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("locker", true));
+    });
+    \u0275\u0275elementStart(5, "app-icon");
+    \u0275\u0275text(6, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "RESOURCE.LOCKERS"), " ");
+  }
+}
+function ScheduleFiltersComponent_div_15_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 9)(1, "div", 10);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 15);
+    \u0275\u0275listener("click", function ScheduleFiltersComponent_div_15_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("group-event", true));
+    });
+    \u0275\u0275elementStart(5, "app-icon");
+    \u0275\u0275text(6, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "RESOURCE.EVENTS"));
+  }
+}
+function ScheduleFiltersComponent_div_22_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 16)(1, "div");
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 17);
+    \u0275\u0275listener("click", function ScheduleFiltersComponent_div_22_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r8);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("event", true));
+    });
+    \u0275\u0275elementStart(5, "app-icon");
+    \u0275\u0275text(6, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "RESOURCE.ROOMS"));
+  }
+}
+function ScheduleFiltersComponent_div_24_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 16)(1, "div");
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 18);
+    \u0275\u0275listener("click", function ScheduleFiltersComponent_div_24_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("desk", true));
+    });
+    \u0275\u0275elementStart(5, "app-icon");
+    \u0275\u0275text(6, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "RESOURCE.DESKS"));
+  }
+}
+function ScheduleFiltersComponent_div_26_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r10 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 16)(1, "div");
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 19);
+    \u0275\u0275listener("click", function ScheduleFiltersComponent_div_26_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r10);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("parking", true));
+    });
+    \u0275\u0275elementStart(5, "app-icon");
+    \u0275\u0275text(6, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "RESOURCE.PARKING"));
+  }
+}
+function ScheduleFiltersComponent_div_28_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r11 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 16)(1, "div");
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 20);
+    \u0275\u0275listener("click", function ScheduleFiltersComponent_div_28_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r11);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("visitor", true));
+    });
+    \u0275\u0275elementStart(5, "app-icon");
+    \u0275\u0275text(6, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "RESOURCE.VISITORS"));
+  }
+}
+function ScheduleFiltersComponent_div_30_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r12 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 16)(1, "div");
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 21);
+    \u0275\u0275listener("click", function ScheduleFiltersComponent_div_30_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r12);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("locker", true));
+    });
+    \u0275\u0275elementStart(5, "app-icon");
+    \u0275\u0275text(6, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "RESOURCE.LOCKERS"));
+  }
+}
+function ScheduleFiltersComponent_div_32_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r13 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 16)(1, "div");
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 21);
+    \u0275\u0275listener("click", function ScheduleFiltersComponent_div_32_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r13);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("group-event", true));
+    });
+    \u0275\u0275elementStart(5, "app-icon");
+    \u0275\u0275text(6, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "RESOURCE.EVENTS"));
+  }
+}
+var ScheduleFiltersComponent = class _ScheduleFiltersComponent {
+  hasFeature(feature) {
+    return this._settings.get("app.features")?.includes(feature);
+  }
+  constructor(_sheet, _state, _settings) {
+    this._sheet = _sheet;
+    this._state = _state;
+    this._settings = _settings;
+    this.filters = this._state.filters;
+    this.toggleType = (t, c = false) => this._state.toggleType(t, c);
+  }
+  openFilters() {
+    this._sheet.open(ScheduleFilterCardComponent);
+  }
+  static {
+    this.\u0275fac = function ScheduleFiltersComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ScheduleFiltersComponent)(\u0275\u0275directiveInject(MatBottomSheet), \u0275\u0275directiveInject(ScheduleStateService), \u0275\u0275directiveInject(SettingsService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ScheduleFiltersComponent, selectors: [["schedule-filters"]], standalone: false, decls: 34, vars: 39, consts: [[1, "hidden", "rounded", "border", "border-base-200", "bg-base-100", "p-2", "sm:block"], [1, "mb-2", "font-medium"], [1, "flex", "flex-wrap"], ["class", "m-1 flex items-center rounded-3xl border border-base-200", 4, "ngIf"], [1, "flex", "items-center", "space-x-2", "overflow-auto", "sm:hidden"], ["btn", "", "matRipple", "", "name", "schedule-open-filter-edit", 1, "min-w-12", "sm:w-24", 3, "click"], [1, "flex", "items-center", "justify-center", "space-x-2"], [1, "text-xl"], ["class", "flex items-center rounded-3xl border border-base-200 bg-base-100 pl-2 text-sm", 4, "ngIf"], [1, "m-1", "flex", "items-center", "rounded-3xl", "border", "border-base-200"], [1, "px-2"], ["icon", "", "name", "schedule-remove-event-filter", 3, "click"], ["icon", "", "name", "schedule-remove-desk-filter", 3, "click"], ["icon", "", "matRipple", "", "name", "schedule-remove-parking-filter", 3, "click"], ["icon", "", "matRipple", "", "name", "schedule-remove-visitor-filter", 3, "click"], ["icon", "", "matRipple", "", "name", "schedule-remove-locker-filter", 3, "click"], [1, "flex", "items-center", "rounded-3xl", "border", "border-base-200", "bg-base-100", "pl-2", "text-sm"], ["icon", "", "name", "schedule-remove-event-filter-mobile", 3, "click"], ["icon", "", "name", "schedule-remove-desk-filter-mobile", 3, "click"], ["icon", "", "name", "schedule-remove-parking-filter-mobile", 3, "click"], ["icon", "", "name", "schedule-remove-visitor-filter-mobile", 3, "click"], ["icon", "", "name", "schedule-remove-locker-filter-mobile", 3, "click"]], template: function ScheduleFiltersComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "div", 0)(1, "h3", 1);
+        \u0275\u0275text(2);
+        \u0275\u0275pipe(3, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(4, "div", 2);
+        \u0275\u0275template(5, ScheduleFiltersComponent_div_5_Template, 7, 3, "div", 3);
+        \u0275\u0275pipe(6, "async");
+        \u0275\u0275template(7, ScheduleFiltersComponent_div_7_Template, 7, 3, "div", 3);
+        \u0275\u0275pipe(8, "async");
+        \u0275\u0275template(9, ScheduleFiltersComponent_div_9_Template, 7, 3, "div", 3);
+        \u0275\u0275pipe(10, "async");
+        \u0275\u0275template(11, ScheduleFiltersComponent_div_11_Template, 7, 3, "div", 3);
+        \u0275\u0275pipe(12, "async");
+        \u0275\u0275template(13, ScheduleFiltersComponent_div_13_Template, 7, 3, "div", 3);
+        \u0275\u0275pipe(14, "async");
+        \u0275\u0275template(15, ScheduleFiltersComponent_div_15_Template, 7, 3, "div", 3);
+        \u0275\u0275pipe(16, "async");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(17, "div", 4)(18, "button", 5);
+        \u0275\u0275listener("click", function ScheduleFiltersComponent_Template_button_click_18_listener() {
+          return ctx.openFilters();
+        });
+        \u0275\u0275elementStart(19, "div", 6)(20, "app-icon", 7);
+        \u0275\u0275text(21, "filter_list");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275template(22, ScheduleFiltersComponent_div_22_Template, 7, 3, "div", 8);
+        \u0275\u0275pipe(23, "async");
+        \u0275\u0275template(24, ScheduleFiltersComponent_div_24_Template, 7, 3, "div", 8);
+        \u0275\u0275pipe(25, "async");
+        \u0275\u0275template(26, ScheduleFiltersComponent_div_26_Template, 7, 3, "div", 8);
+        \u0275\u0275pipe(27, "async");
+        \u0275\u0275template(28, ScheduleFiltersComponent_div_28_Template, 7, 3, "div", 8);
+        \u0275\u0275pipe(29, "async");
+        \u0275\u0275template(30, ScheduleFiltersComponent_div_30_Template, 7, 3, "div", 8);
+        \u0275\u0275pipe(31, "async");
+        \u0275\u0275template(32, ScheduleFiltersComponent_div_32_Template, 7, 3, "div", 8);
+        \u0275\u0275pipe(33, "async");
+        \u0275\u0275elementEnd();
+      }
+      if (rf & 2) {
+        let tmp_1_0;
+        let tmp_2_0;
+        let tmp_3_0;
+        let tmp_4_0;
+        let tmp_5_0;
+        let tmp_6_0;
+        let tmp_7_0;
+        let tmp_8_0;
+        let tmp_9_0;
+        let tmp_10_0;
+        let tmp_11_0;
+        let tmp_12_0;
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 13, "APP.WORKPLACE.SCHEDULE_FILTERS_DISPLAY_HEADER"), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngIf", ((tmp_1_0 = \u0275\u0275pipeBind1(6, 15, ctx.filters)) == null ? null : tmp_1_0.shown_types == null ? null : tmp_1_0.shown_types.includes("event")) && ctx.hasFeature("spaces"));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ((tmp_2_0 = \u0275\u0275pipeBind1(8, 17, ctx.filters)) == null ? null : tmp_2_0.shown_types == null ? null : tmp_2_0.shown_types.includes("desk")) && ctx.hasFeature("desks"));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ((tmp_3_0 = \u0275\u0275pipeBind1(10, 19, ctx.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("parking")) && ctx.hasFeature("parking"));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ((tmp_4_0 = \u0275\u0275pipeBind1(12, 21, ctx.filters)) == null ? null : tmp_4_0.shown_types == null ? null : tmp_4_0.shown_types.includes("visitor")) && ctx.hasFeature("visitor-invite"));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ((tmp_5_0 = \u0275\u0275pipeBind1(14, 23, ctx.filters)) == null ? null : tmp_5_0.shown_types == null ? null : tmp_5_0.shown_types.includes("locker")) && ctx.hasFeature("lockers"));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ((tmp_6_0 = \u0275\u0275pipeBind1(16, 25, ctx.filters)) == null ? null : tmp_6_0.shown_types == null ? null : tmp_6_0.shown_types.includes("group-event")) && ctx.hasFeature("group-events"));
+        \u0275\u0275advance(7);
+        \u0275\u0275property("ngIf", ((tmp_7_0 = \u0275\u0275pipeBind1(23, 27, ctx.filters)) == null ? null : tmp_7_0.shown_types == null ? null : tmp_7_0.shown_types.includes("event")) && ctx.hasFeature("spaces"));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ((tmp_8_0 = \u0275\u0275pipeBind1(25, 29, ctx.filters)) == null ? null : tmp_8_0.shown_types == null ? null : tmp_8_0.shown_types.includes("desk")) && ctx.hasFeature("desks"));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ((tmp_9_0 = \u0275\u0275pipeBind1(27, 31, ctx.filters)) == null ? null : tmp_9_0.shown_types == null ? null : tmp_9_0.shown_types.includes("parking")) && ctx.hasFeature("parking"));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ((tmp_10_0 = \u0275\u0275pipeBind1(29, 33, ctx.filters)) == null ? null : tmp_10_0.shown_types == null ? null : tmp_10_0.shown_types.includes("visitor")) && ctx.hasFeature("visitor-invite"));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ((tmp_11_0 = \u0275\u0275pipeBind1(31, 35, ctx.filters)) == null ? null : tmp_11_0.shown_types == null ? null : tmp_11_0.shown_types.includes("locker")) && ctx.hasFeature("lockers"));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ((tmp_12_0 = \u0275\u0275pipeBind1(33, 37, ctx.filters)) == null ? null : tmp_12_0.shown_types == null ? null : tmp_12_0.shown_types.includes("group-event")) && ctx.hasFeature("group-events"));
+      }
+    }, dependencies: [NgIf, IconComponent, MatRipple, AsyncPipe, TranslatePipe], encapsulation: 2 });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ScheduleFiltersComponent, { className: "ScheduleFiltersComponent", filePath: "apps/workplace/src/app/new-schedule/schedule-filters.component.ts", lineNumber: 242 });
+})();
+
+// apps/workplace/src/app/new-schedule/schedule-mobile-calendar.component.ts
+function ScheduleMobileCalendarComponent_div_16_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 8);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "date");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const day_r1 = ctx.$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 1, day_r1.id, "EE"), " ");
+  }
+}
+function ScheduleMobileCalendarComponent_button_18_div_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 11);
+  }
+}
+function ScheduleMobileCalendarComponent_button_18_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 9);
+    \u0275\u0275listener("click", function ScheduleMobileCalendarComponent_button_18_Template_button_click_0_listener() {
+      const day_r3 = \u0275\u0275restoreView(_r2).$implicit;
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.setValue(day_r3.id));
+    });
+    \u0275\u0275template(1, ScheduleMobileCalendarComponent_button_18_div_1_Template, 1, 0, "div", 10);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "date");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const day_r3 = ctx.$implicit;
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275classProp("text-opacity-30", !day_r3.is_month)("text-white", day_r3.id === ctx_r3.active_date)("text-black", day_r3.id !== ctx_r3.active_date)("bg-primary", day_r3.id === ctx_r3.active_date)("font-normal", day_r3.id !== ctx_r3.active_date);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", day_r3.is_today);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 12, day_r3.id, "d"), " ");
+  }
+}
+var ScheduleMobileCalendarComponent = class _ScheduleMobileCalendarComponent {
+  constructor() {
+    this.active_date = startOfDay(Date.now()).valueOf();
+    this.offset = 0;
+    this.date_list = [];
+    this.short_list = [];
+    this.show_shortlist = true;
+    this.registerOnChange = (fn) => this._onChange = fn;
+    this.registerOnTouched = (fn) => this._onTouch = fn;
+  }
+  ngOnInit() {
+    this.generateDates();
+  }
+  get list() {
+    return this.show_shortlist ? this.short_list : this.date_list;
+  }
+  /**
+   * Update the form field value
+   * @param new_value New value to set on the form field
+   */
+  setValue(new_value) {
+    this.active_date = startOfDay(new_value).valueOf();
+    this.offset = 0;
+    if (this._onChange) {
+      this._onChange(new_value);
+    }
+  }
+  /**
+   * Update local value when form control value is changed
+   * @param value The new value for the component
+   */
+  writeValue(value) {
+    this.active_date = startOfDay(value).valueOf();
+    this.offset = 0;
+    this.generateDates();
+  }
+  resetMonth() {
+    this.changeMonth(-this.offset);
+  }
+  changeMonth(change) {
+    this.offset += change;
+    this.generateDates();
+  }
+  generateDates() {
+    const date = addMonths(this.active_date, this.offset);
+    let start = startOfWeek(startOfMonth(date));
+    const now = startOfDay(Date.now());
+    let list = [];
+    while (list.length < 7 * 6) {
+      list.push({
+        id: start.valueOf(),
+        is_past: isBefore(start, now),
+        is_month: isSameMonth(start, date),
+        is_today: isSameDay(Date.now(), start)
+      });
+      start = addDays(start, 1);
+    }
+    this.date_list = list;
+    start = this.offset === 0 ? startOfWeek(date) : startOfWeek(startOfMonth(date));
+    list = [];
+    while (list.length < 7) {
+      list.push({
+        id: start.valueOf(),
+        is_past: isBefore(start, now),
+        is_month: isSameMonth(start, date),
+        is_today: isSameDay(Date.now(), start)
+      });
+      start = addDays(start, 1);
+    }
+    this.short_list = list;
+  }
+  static {
+    this.\u0275fac = function ScheduleMobileCalendarComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ScheduleMobileCalendarComponent)();
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ScheduleMobileCalendarComponent, selectors: [["schedule-mobile-calendar"]], standalone: false, features: [\u0275\u0275ProvidersFeature([
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => _ScheduleMobileCalendarComponent),
+        multi: true
+      }
+    ])], decls: 19, vars: 10, consts: [[1, "p-2"], [1, "flex", "items-center", "justify-between"], ["btn", "", "matRipple", "", 1, "clear", "font-medium", 3, "click"], [1, "flex", "items-center"], ["icon", "", "matRipple", "", 3, "click"], [1, "mb-2", "grid", "grid-cols-7", "gap-2"], ["class", "mx-2 w-10 text-center opacity-60", 4, "ngFor", "ngForOf"], ["icon", "", "matRipple", "", "class", "mx-2 h-9 min-w-[calc(14%-1rem)] flex-1 overflow-visible", 3, "text-opacity-30", "text-white", "text-black", "bg-primary", "font-normal", "click", 4, "ngFor", "ngForOf"], [1, "mx-2", "w-10", "text-center", "opacity-60"], ["icon", "", "matRipple", "", 1, "mx-2", "h-9", "min-w-[calc(14%-1rem)]", "flex-1", "overflow-visible", 3, "click"], ["class", "absolute -inset-0.5 rounded-full border border-primary", 4, "ngIf"], [1, "absolute", "-inset-0.5", "rounded-full", "border", "border-primary"]], template: function ScheduleMobileCalendarComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "button", 2);
+        \u0275\u0275listener("click", function ScheduleMobileCalendarComponent_Template_button_click_2_listener() {
+          return ctx.resetMonth();
+        });
+        \u0275\u0275text(3);
+        \u0275\u0275pipe(4, "date");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(5, "div", 3)(6, "button", 4);
+        \u0275\u0275listener("click", function ScheduleMobileCalendarComponent_Template_button_click_6_listener() {
+          return ctx.changeMonth(-1);
+        });
+        \u0275\u0275elementStart(7, "app-icon");
+        \u0275\u0275text(8, "chevron_left");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(9, "button", 4);
+        \u0275\u0275listener("click", function ScheduleMobileCalendarComponent_Template_button_click_9_listener() {
+          return ctx.changeMonth(1);
+        });
+        \u0275\u0275elementStart(10, "app-icon");
+        \u0275\u0275text(11, "chevron_right");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(12, "button", 4);
+        \u0275\u0275listener("click", function ScheduleMobileCalendarComponent_Template_button_click_12_listener() {
+          return ctx.show_shortlist = !ctx.show_shortlist;
+        });
+        \u0275\u0275elementStart(13, "app-icon");
+        \u0275\u0275text(14, "arrow_drop_down");
+        \u0275\u0275elementEnd()()()();
+        \u0275\u0275elementStart(15, "div", 5);
+        \u0275\u0275template(16, ScheduleMobileCalendarComponent_div_16_Template, 3, 4, "div", 6);
+        \u0275\u0275pipe(17, "slice");
+        \u0275\u0275template(18, ScheduleMobileCalendarComponent_button_18_Template, 4, 15, "button", 7);
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 3, (ctx.date_list[6] == null ? null : ctx.date_list[6].id) || ctx.active_date, "LLLL YYYY"), " ");
+        \u0275\u0275advance(13);
+        \u0275\u0275property("ngForOf", \u0275\u0275pipeBind3(17, 6, ctx.date_list, 0, 7));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngForOf", ctx.list);
+      }
+    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, SlicePipe, DatePipe], encapsulation: 2 });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ScheduleMobileCalendarComponent, { className: "ScheduleMobileCalendarComponent", filePath: "apps/workplace/src/app/new-schedule/schedule-mobile-calendar.component.ts", lineNumber: 81 });
+})();
+
+// apps/workplace/src/app/new-schedule/schedule-sidebar.component.ts
+function ScheduleSidebarComponent_date_calendar_8_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "date-calendar", 12);
+    \u0275\u0275pipe(1, "async");
+    \u0275\u0275listener("ngModelChange", function ScheduleSidebarComponent_date_calendar_8_Template_date_calendar_ngModelChange_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.setDate($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(1, 2, ctx_r1.date))("offset_weekday", ctx_r1.offset_weekday);
+  }
+}
+function ScheduleSidebarComponent_div_9_mat_option_4_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 19);
+    \u0275\u0275pipe(1, "translate");
+    \u0275\u0275text(2, "(C)");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(1, 1, "COMMON.WEEK_THIS"));
+  }
+}
+function ScheduleSidebarComponent_div_9_mat_option_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-option", 17);
+    \u0275\u0275text(1);
+    \u0275\u0275template(2, ScheduleSidebarComponent_div_9_mat_option_4_span_2_Template, 3, 3, "span", 18);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const option_r4 = ctx.$implicit;
+    \u0275\u0275property("value", option_r4.id);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", option_r4.name, " ");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", option_r4.this_week);
+  }
+}
+function ScheduleSidebarComponent_div_9_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 13)(1, "mat-form-field", 14)(2, "mat-select", 15);
+    \u0275\u0275pipe(3, "async");
+    \u0275\u0275listener("ngModelChange", function ScheduleSidebarComponent_div_9_Template_mat_select_ngModelChange_2_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.setDate($event));
+    });
+    \u0275\u0275template(4, ScheduleSidebarComponent_div_9_mat_option_4_Template, 3, 3, "mat-option", 16);
+    \u0275\u0275pipe(5, "async");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(3, 2, ctx_r1.week_date));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(5, 4, ctx_r1.week_options));
+  }
+}
+function ScheduleSidebarComponent_button_14_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 20);
+    \u0275\u0275listener("click", function ScheduleSidebarComponent_button_14_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("event"));
+    });
+    \u0275\u0275elementStart(1, "div", 21)(2, "app-icon");
+    \u0275\u0275text(3, "place");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(4, "div", 22)(5, "div", 23);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 24);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(11, "mat-checkbox", 25);
+    \u0275\u0275pipe(12, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(7, 3, "RESOURCE.ROOMS"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 5, "APP.WORKPLACE.SCHEDULE_FILTER_ROOMS"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(12, 7, ctx_r1.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("event"));
+  }
+}
+function ScheduleSidebarComponent_button_15_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 26);
+    \u0275\u0275listener("click", function ScheduleSidebarComponent_button_15_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("desk"));
+    });
+    \u0275\u0275elementStart(1, "div", 21);
+    \u0275\u0275element(2, "img", 27);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 22)(4, "div", 23);
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "div", 24);
+    \u0275\u0275text(8);
+    \u0275\u0275pipe(9, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(10, "mat-checkbox", 25);
+    \u0275\u0275pipe(11, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 3, "RESOURCE.DESKS"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(9, 5, "APP.WORKPLACE.SCHEDULE_FILTER_DESKS"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(11, 7, ctx_r1.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("desk"));
+  }
+}
+function ScheduleSidebarComponent_button_16_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 28);
+    \u0275\u0275listener("click", function ScheduleSidebarComponent_button_16_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("parking"));
+    });
+    \u0275\u0275elementStart(1, "div", 21)(2, "app-icon");
+    \u0275\u0275text(3, "drive_eta");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(4, "div", 22)(5, "div", 23);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 24);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(11, "mat-checkbox", 25);
+    \u0275\u0275pipe(12, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(7, 3, "RESOURCE.PARKING"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 5, "APP.WORKPLACE.SCHEDULE_FILTER_PARKING"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(12, 7, ctx_r1.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("parking"));
+  }
+}
+function ScheduleSidebarComponent_button_17_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 29);
+    \u0275\u0275listener("click", function ScheduleSidebarComponent_button_17_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r8);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("visitor"));
+    });
+    \u0275\u0275elementStart(1, "div", 21)(2, "app-icon");
+    \u0275\u0275text(3, "people");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(4, "div", 22)(5, "div", 23);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 24);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(11, "mat-checkbox", 25);
+    \u0275\u0275pipe(12, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 3, "RESOURCE.VISITORS"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 5, "APP.WORKPLACE.SCHEDULE_FILTER_VISITORS"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(12, 7, ctx_r1.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("visitor"));
+  }
+}
+function ScheduleSidebarComponent_button_18_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 30);
+    \u0275\u0275listener("click", function ScheduleSidebarComponent_button_18_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r9);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("locker"));
+    });
+    \u0275\u0275elementStart(1, "div", 21)(2, "app-icon");
+    \u0275\u0275text(3, "lock");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(4, "div", 22)(5, "div", 23);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 24);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(11, "mat-checkbox", 25);
+    \u0275\u0275pipe(12, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 3, "RESOURCE.LOCKERS"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 5, "APP.WORKPLACE.SCHEDULE_FILTER_LOCKERS"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(12, 7, ctx_r1.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("locker"));
+  }
+}
+function ScheduleSidebarComponent_button_19_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r10 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 30);
+    \u0275\u0275listener("click", function ScheduleSidebarComponent_button_19_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r10);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleType("group-event"));
+    });
+    \u0275\u0275elementStart(1, "div", 21)(2, "app-icon");
+    \u0275\u0275text(3, "event_available");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(4, "div", 22)(5, "div", 23);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 24);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(11, "mat-checkbox", 25);
+    \u0275\u0275pipe(12, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 3, "RESOURCE.EVENTS"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 5, "APP.WORKPLACE.SCHEDULE_FILTER_EVENTS"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(12, 7, ctx_r1.filters)) == null ? null : tmp_3_0.shown_types == null ? null : tmp_3_0.shown_types.includes("group-event"));
+  }
+}
+var ScheduleSidebarComponent = class _ScheduleSidebarComponent extends AsyncHandler {
+  get period() {
+    return this._state.getOptions()?.period;
+  }
+  setOptions(options) {
+    this._state.setOptions(options);
+  }
+  hasFeature(feature) {
+    return (this._settings.get("app.features") || []).includes(feature);
+  }
+  get offset_weekday() {
+    return this._settings.get("app.week_start") || 0;
+  }
+  constructor(_org, _state, _settings) {
+    super();
+    this._org = _org;
+    this._state = _state;
+    this._settings = _settings;
+    this.filters = this._state.filters;
+    this.date = this._state.date.pipe(map((_) => startOfDay(_)));
+    this.toggleType = (t) => this._state.toggleType(t);
+    this.setDate = (d) => this._state.setDate(d);
+    this.week_date = this._state.week_date;
+    this.week_options = this._state.week_options;
+  }
+  ngOnInit() {
+    this.subscription("building", this._org.active_building.pipe(filter((_) => !!_), debounceTime(1e3)).subscribe((_) => {
+      this._state.setType("event", this.hasFeature("spaces"));
+      this._state.setType("desk", this.hasFeature("desks"));
+      this._state.setType("parking", this.hasFeature("parking"));
+      this._state.setType("visitor", this.hasFeature("visitor-invite"));
+      this._state.setType("locker", this.hasFeature("lockers"));
+      this._state.setType("group-event", this.hasFeature("group-events"));
+    }));
+  }
+  static {
+    this.\u0275fac = function ScheduleSidebarComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ScheduleSidebarComponent)(\u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(ScheduleStateService), \u0275\u0275directiveInject(SettingsService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ScheduleSidebarComponent, selectors: [["schedule-sidebar"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 20, vars: 21, consts: [[1, "bg-base-100[#1F2021]", "flex", "h-full", "w-[18rem]", "flex-col", "overflow-hidden", "border-r", "border-base-200"], [1, "flex", "items-center", "space-x-2", "p-2"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "click"], ["class", "border-b border-base-200", 3, "ngModel", "offset_weekday", "ngModelChange", 4, "ngIf"], ["class", "w-full px-2", 4, "ngIf"], [1, "mx-4", "mt-4", "font-medium"], [1, "h-1/2", "flex-1", "space-y-4", "overflow-auto", "p-4"], ["matRipple", "", "name", "schedule-toggle-event-filter", "class", "flex w-full items-center space-x-2 text-left", 3, "click", 4, "ngIf"], ["matRipple", "", "name", "schedule-toggle-desk-filter", "class", "flex w-full items-center space-x-2 text-left", 3, "click", 4, "ngIf"], ["matRipple", "", "name", "schedule-toggle-parking-filter", "class", "flex w-full items-center space-x-2 text-left", 3, "click", 4, "ngIf"], ["matRipple", "", "name", "schedule-toggle-visitor-filter", "class", "flex w-full items-center space-x-2 text-left", 3, "click", 4, "ngIf"], ["matRipple", "", "name", "schedule-toggle-locker-filter", "class", "flex w-full items-center space-x-2 text-left", 3, "click", 4, "ngIf"], [1, "border-b", "border-base-200", 3, "ngModelChange", "ngModel", "offset_weekday"], [1, "w-full", "px-2"], ["appearance", "outline", 1, "no-subscript", "w-full"], ["placeholder", "Select Week...", 3, "ngModelChange", "ngModel"], ["class", "leading-tight", 3, "value", 4, "ngFor", "ngForOf"], [1, "leading-tight", 3, "value"], ["class", "px-1 text-xs text-info", 3, "matTooltip", 4, "ngIf"], [1, "px-1", "text-xs", "text-info", 3, "matTooltip"], ["matRipple", "", "name", "schedule-toggle-event-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full", "bg-base-200", "text-2xl"], [1, "flex-1"], [1, ""], [1, "text-sm", "opacity-60"], [3, "ngModel"], ["matRipple", "", "name", "schedule-toggle-desk-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], ["src", "assets/icons/desk-outline.svg", 1, "w-6"], ["matRipple", "", "name", "schedule-toggle-parking-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], ["matRipple", "", "name", "schedule-toggle-visitor-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], ["matRipple", "", "name", "schedule-toggle-locker-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"]], template: function ScheduleSidebarComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "button", 2);
+        \u0275\u0275listener("click", function ScheduleSidebarComponent_Template_button_click_2_listener() {
+          return ctx.setOptions({ period: "day" });
+        });
+        \u0275\u0275text(3);
+        \u0275\u0275pipe(4, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(5, "button", 2);
+        \u0275\u0275listener("click", function ScheduleSidebarComponent_Template_button_click_5_listener() {
+          return ctx.setOptions({ period: "week" });
+        });
+        \u0275\u0275text(6);
+        \u0275\u0275pipe(7, "translate");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275template(8, ScheduleSidebarComponent_date_calendar_8_Template, 2, 4, "date-calendar", 3)(9, ScheduleSidebarComponent_div_9_Template, 6, 6, "div", 4);
+        \u0275\u0275elementStart(10, "h3", 5);
+        \u0275\u0275text(11);
+        \u0275\u0275pipe(12, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(13, "div", 6);
+        \u0275\u0275template(14, ScheduleSidebarComponent_button_14_Template, 13, 9, "button", 7)(15, ScheduleSidebarComponent_button_15_Template, 12, 9, "button", 8)(16, ScheduleSidebarComponent_button_16_Template, 13, 9, "button", 9)(17, ScheduleSidebarComponent_button_17_Template, 13, 9, "button", 10)(18, ScheduleSidebarComponent_button_18_Template, 13, 9, "button", 11)(19, ScheduleSidebarComponent_button_19_Template, 13, 9, "button", 11);
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        \u0275\u0275advance(2);
+        \u0275\u0275classProp("inverse", ctx.period !== "day");
+        \u0275\u0275advance();
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 15, "COMMON.DAY"), " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275classProp("inverse", ctx.period !== "week");
+        \u0275\u0275advance();
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 17, "COMMON.WEEK"), " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.period === "day");
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.period === "week");
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(12, 19, "APP.WORKPLACE.SCHEDULE_FILTERS"), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngIf", ctx.hasFeature("spaces"));
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.hasFeature("desks"));
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.hasFeature("parking"));
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.hasFeature("visitor-invite"));
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.hasFeature("lockers"));
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.hasFeature("group-events"));
+      }
+    }, dependencies: [NgForOf, NgIf, IconComponent, MatOption, MatFormField, MatSelect, MatRipple, MatTooltip, MatCheckbox, DateCalendarComponent, NgControlStatus, NgModel, AsyncPipe, TranslatePipe], styles: ["\n\nmat-checkbox[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n/*# sourceMappingURL=schedule-sidebar.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ScheduleSidebarComponent, { className: "ScheduleSidebarComponent", filePath: "apps/workplace/src/app/new-schedule/schedule-sidebar.component.ts", lineNumber: 256 });
+})();
+
+// apps/workplace/src/app/new-schedule/schedule.component.ts
+function ScheduleComponent_topbar_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "topbar");
+  }
+}
+function ScheduleComponent_schedule_mobile_calendar_11_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "schedule-mobile-calendar", 13);
+    \u0275\u0275pipe(1, "async");
+    \u0275\u0275listener("ngModelChange", function ScheduleComponent_schedule_mobile_calendar_11_Template_schedule_mobile_calendar_ngModelChange_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.setDate($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(1, 1, ctx_r2.date));
+  }
+}
+function ScheduleComponent_div_12_mat_option_5_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 20);
+    \u0275\u0275pipe(1, "translate");
+    \u0275\u0275text(2, "(C)");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(1, 1, "COMMON.WEEK_THIS"));
+  }
+}
+function ScheduleComponent_div_12_mat_option_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-option", 18);
+    \u0275\u0275text(1);
+    \u0275\u0275template(2, ScheduleComponent_div_12_mat_option_5_span_2_Template, 3, 3, "span", 19);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const option_r5 = ctx.$implicit;
+    \u0275\u0275property("value", option_r5.id);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", option_r5.name, " ");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", option_r5.this_week);
+  }
+}
+function ScheduleComponent_div_12_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 14)(1, "mat-form-field", 15)(2, "mat-select", 16);
+    \u0275\u0275pipe(3, "async");
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275listener("ngModelChange", function ScheduleComponent_div_12_Template_mat_select_ngModelChange_2_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.setDate($event));
+    });
+    \u0275\u0275template(5, ScheduleComponent_div_12_mat_option_5_Template, 3, 3, "mat-option", 17);
+    \u0275\u0275pipe(6, "async");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(3, 3, ctx_r2.week_date))("placeholder", \u0275\u0275pipeBind1(4, 5, "COMMON.WEEK_SELECT"));
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(6, 7, ctx_r2.week_options));
+  }
+}
+function ScheduleComponent_ng_container_15_ng_container_1_span_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" (", \u0275\u0275pipeBind1(2, 1, "COMMON.TODAY"), ") ");
+  }
+}
+function ScheduleComponent_ng_container_15_ng_container_1_ng_container_5_event_card_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "event-card", 25);
+    \u0275\u0275listener("edit", function ScheduleComponent_ng_container_15_ng_container_1_ng_container_5_event_card_1_Template_event_card_edit_0_listener() {
+      \u0275\u0275restoreView(_r6);
+      const item_r7 = \u0275\u0275nextContext().$implicit;
+      const ctx_r2 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r2.edit(item_r7));
+    })("remove", function ScheduleComponent_ng_container_15_ng_container_1_ng_container_5_event_card_1_Template_event_card_remove_0_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const item_r7 = \u0275\u0275nextContext().$implicit;
+      const ctx_r2 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r2.remove(item_r7, $event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const item_r7 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275property("event", item_r7);
+  }
+}
+function ScheduleComponent_ng_container_15_ng_container_1_ng_container_5_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "booking-card", 26);
+    \u0275\u0275listener("edit", function ScheduleComponent_ng_container_15_ng_container_1_ng_container_5_ng_template_2_Template_booking_card_edit_0_listener() {
+      \u0275\u0275restoreView(_r8);
+      const item_r7 = \u0275\u0275nextContext().$implicit;
+      const ctx_r2 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r2.editBooking(item_r7));
+    })("remove", function ScheduleComponent_ng_container_15_ng_container_1_ng_container_5_ng_template_2_Template_booking_card_remove_0_listener($event) {
+      \u0275\u0275restoreView(_r8);
+      const item_r7 = \u0275\u0275nextContext().$implicit;
+      const ctx_r2 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r2.remove(item_r7, $event));
+    })("end", function ScheduleComponent_ng_container_15_ng_container_1_ng_container_5_ng_template_2_Template_booking_card_end_0_listener() {
+      \u0275\u0275restoreView(_r8);
+      const item_r7 = \u0275\u0275nextContext().$implicit;
+      const ctx_r2 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r2.end(item_r7));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const item_r7 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275property("booking", item_r7);
+  }
+}
+function ScheduleComponent_ng_container_15_ng_container_1_ng_container_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, ScheduleComponent_ng_container_15_ng_container_1_ng_container_5_event_card_1_Template, 1, 1, "event-card", 24)(2, ScheduleComponent_ng_container_15_ng_container_1_ng_container_5_ng_template_2_Template, 1, 1, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const item_r7 = ctx.$implicit;
+    const booking_card_r9 = \u0275\u0275reference(3);
+    const ctx_r2 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.isEvent(item_r7))("ngIfElse", booking_card_r9);
+  }
+}
+function ScheduleComponent_ng_container_15_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "h3", 22);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "date");
+    \u0275\u0275template(4, ScheduleComponent_ng_container_15_ng_container_1_span_4_Template, 3, 3, "span", 2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(5, ScheduleComponent_ng_container_15_ng_container_1_ng_container_5_Template, 4, 2, "ng-container", 23);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const date_block_r10 = ctx.$implicit;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 4, date_block_r10.date, "EEE dd LLL yyyy"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", date_block_r10.is_today);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", date_block_r10.bookings)("ngForTrackBy", ctx_r2.trackByFn);
+  }
+}
+function ScheduleComponent_ng_container_15_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, ScheduleComponent_ng_container_15_ng_container_1_Template, 6, 7, "ng-container", 21);
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(2, 1, ctx_r2.booking_dates));
+  }
+}
+function ScheduleComponent_mat_progress_bar_17_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "mat-progress-bar", 27);
+  }
+}
+function ScheduleComponent_footer_menu_19_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "footer-menu");
+  }
+}
+function ScheduleComponent_ng_template_20_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 28);
+    \u0275\u0275element(1, "img", 29);
+    \u0275\u0275elementStart(2, "p", 30);
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275pipe(5, "async");
+    \u0275\u0275pipe(6, "date");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind1(4, 2, "APP.WORKPLACE.SCHEDULE_EMPTY"), " ", \u0275\u0275pipeBind2(6, 6, \u0275\u0275pipeBind1(5, 4, ctx_r2.date), "EEEE, dd LLL yyyy"), " ");
+  }
+}
+var ScheduleComponent = class _ScheduleComponent extends AsyncHandler {
+  get period() {
+    return this._state.getOptions().period;
+  }
+  isEvent(item) {
+    return item instanceof CalendarEvent;
+  }
+  get hide_nav() {
+    return localStorage.getItem("PlaceOS.hide_nav") === "true";
+  }
+  constructor(_state, _event_form, _booking_form, _router, _dialog, _settings) {
+    super();
+    this._state = _state;
+    this._event_form = _event_form;
+    this._booking_form = _booking_form;
+    this._router = _router;
+    this._dialog = _dialog;
+    this._settings = _settings;
+    this.booking_dates = combineLatest([
+      this._state.filtered_bookings,
+      this._state.loading
+    ]).pipe(map(([bookings, loading]) => loading ? [] : bookings), map((bookings) => {
+      const sorted = bookings.sort((a, b) => a.date - b.date);
+      const dates = /* @__PURE__ */ new Set();
+      for (const booking of sorted) {
+        const date = format(booking.date, "yyyy-MM-dd");
+        if (!dates.has(date))
+          dates.add(date);
+      }
+      const list = [];
+      for (const date of dates) {
+        const day = parse(date, "yyyy-MM-dd", 0);
+        list.push({
+          id: date,
+          date: day.valueOf(),
+          bookings: sorted.filter((booking) => isSameDay(booking.date, day)),
+          is_today: isSameDay(day, Date.now())
+        });
+      }
+      return list;
+    }));
+    this.date = this._state.date;
+    this.loading = this._state.loading;
+    this.setDate = (d) => this._state.setDate(d);
+    this.week_date = this._state.week_date;
+    this.week_options = this._state.week_options;
+  }
+  ngOnInit() {
+    this._state.triggerPoll();
+    this.subscription("poll", this._state.startPolling());
+  }
+  trackByFn(index, item) {
+    return item?.id;
+  }
+  setOptions(options) {
+    this._state.setOptions(options);
+  }
+  edit(event) {
+    return __async(this, null, function* () {
+      this._router.navigate(["/book", "meeting", "form"]);
+      if (event.creator !== event.mailbox) {
+        event = (yield queryEvents({
+          period_start: event.event_start,
+          period_end: event.event_end,
+          ical_uid: event.ical_uid
+        }).toPromise()).find((_) => _.ical_uid === event.ical_uid) || event;
+      }
+      this._event_form.newForm(event);
+    });
+  }
+  editBooking(event) {
+    this._router.navigate(["/book", `new-${event.type}`]);
+    this._booking_form.newForm(event);
+    setTimeout(() => {
+      this._booking_form.form.patchValue({
+        resources: [
+          {
+            id: event.asset_id,
+            name: event.asset_name || event.description
+          }
+        ],
+        asset_id: event.asset_id
+      });
+    }, 100);
+  }
+  remove(item, remove_series = false) {
+    return __async(this, null, function* () {
+      const time = `${format(item.date, "dd MMM yyyy h:mma")}`;
+      const resource_name = item instanceof CalendarEvent ? item.space?.display_name : item.asset_name || item.asset_id;
+      const resp = yield openConfirmModal({
+        title: i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_TITLE" : "APP.WORKPLACE.SCHEDULE_REMOVE_TITLE", { name: resource_name, time }),
+        content: i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_MSG" : "APP.WORKPLACE.SCHEDULE_REMOVE_MSG", { name: resource_name, time }),
+        icon: { content: "delete" }
+      }, this._dialog);
+      if (item instanceof CalendarEvent && item.creator !== item.mailbox) {
+        item = (yield queryEvents({
+          period_start: item.event_start,
+          period_end: item.event_end,
+          ical_uid: item.ical_uid
+        }).toPromise()).find((_) => _.ical_uid === item.ical_uid) || item;
+      }
+      if (resp.reason !== "done")
+        return;
+      resp.loading(i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_LOADING" : "APP.WORKPLACE.SCHEDULE_REMOVE_LOADING"));
+      yield (item instanceof CalendarEvent ? removeEvent : removeBooking)(remove_series ? item.recurring_event_id || item.id : item.id, {
+        calendar: this._settings.get("app.events.use_bookings") ? null : item.calendar || currentUser()?.email,
+        system_id: item.system?.id,
+        instance: remove_series ? void 0 : !!item.instance,
+        start_time: !!item.instance ? item.instance : void 0
+      }).toPromise().catch((e) => {
+        notifyError(i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_ERROR" : "APP.WORKPLACE.SCHEDULE_REMOVE_ERROR", { error: e }));
+        resp.close();
+        throw e;
+      });
+      notifySuccess(i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_SUCCESS" : "APP.WORKPLACE.SCHEDULE_REMOVE_SUCCESS"));
+      this._state.removeItem(item);
+      this._dialog.closeAll();
+    });
+  }
+  end(item) {
+    return __async(this, null, function* () {
+      const time = `${format(item.date, "dd MMM yyyy h:mma")}`;
+      const resource_name = item.asset_name || item.asset_id;
+      const resp = yield openConfirmModal({
+        title: i18n("APP.WORKPLACE.SCHEDULE_END_TITLE"),
+        content: i18n("APP.WORKPLACE.SCHEDULE_END_MSG", {
+          name: resource_name,
+          time
+        }),
+        icon: { content: "event_busy" }
+      }, this._dialog);
+      if (resp.reason !== "done")
+        return;
+      resp.loading(i18n("APP.WORKPLACE.SCHEDULE_END_LOADING"));
+      const promise = (item.instance ? checkinBookingInstance(item.id, item.instance, false) : checkinBooking(item.id, false)).toPromise().catch((e) => {
+        notifyError(i18n("APP.WORKPLACE.SCHEDULE_END_ERROR", { error: e }));
+        resp.close();
+        throw e;
+      });
+      yield promise;
+      notifySuccess(i18n("APP.WORKPLACE.SCHEDULE_END_SUCCESS"));
+      this._state.removeItem(item);
+      this._dialog.closeAll();
+    });
+  }
+  static {
+    this.\u0275fac = function ScheduleComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ScheduleComponent)(\u0275\u0275directiveInject(ScheduleStateService), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(SettingsService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ScheduleComponent, selectors: [["app-schedule"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 22, vars: 21, consts: [["empty_state", ""], ["booking_card", ""], [4, "ngIf"], [1, "relative", "flex", "h-1/2", "flex-1", "flex-col", "bg-base-200", "sm:flex-row"], [1, "hidden", "bg-base-100", "sm:block"], [1, "w-full", "border-b", "border-neutral", "bg-base-100", "sm:hidden"], [1, "flex", "items-center", "space-x-2", "px-2", "pt-2"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "click"], [3, "ngModel", "ngModelChange", 4, "ngIf"], ["class", "my-2 w-full px-2", 4, "ngIf"], [1, "h-full", "flex-1", "space-y-2", "overflow-auto", "p-4"], [4, "ngIf", "ngIfElse"], ["class", "absolute inset-x-0 bottom-0", "mode", "indeterminate", 4, "ngIf"], [3, "ngModelChange", "ngModel"], [1, "my-2", "w-full", "px-2"], ["appearance", "outline", 1, "no-subscript", "w-full"], [3, "ngModelChange", "ngModel", "placeholder"], ["class", "leading-tight", 3, "value", 4, "ngFor", "ngForOf"], [1, "leading-tight", 3, "value"], ["class", "px-1 text-xs text-info", 3, "matTooltip", 4, "ngIf"], [1, "px-1", "text-xs", "text-info", 3, "matTooltip"], [4, "ngFor", "ngForOf"], [1, "my-2", "font-medium"], [4, "ngFor", "ngForOf", "ngForTrackBy"], [3, "event", "edit", "remove", 4, "ngIf", "ngIfElse"], [3, "edit", "remove", "event"], [3, "edit", "remove", "end", "booking"], ["mode", "indeterminate", 1, "absolute", "inset-x-0", "bottom-0"], [1, "flex", "w-full", "flex-col", "items-center", "justify-center", "space-y-4", "p-8"], ["src", "assets/img/no-events.svg", 1, "mr-4"], [1, "opacity-30"]], template: function ScheduleComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275template(0, ScheduleComponent_topbar_0_Template, 1, 0, "topbar", 2);
+        \u0275\u0275elementStart(1, "div", 3);
+        \u0275\u0275element(2, "schedule-sidebar", 4);
+        \u0275\u0275elementStart(3, "div", 5)(4, "div", 6)(5, "button", 7);
+        \u0275\u0275listener("click", function ScheduleComponent_Template_button_click_5_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.setOptions({ period: "day" }));
+        });
+        \u0275\u0275text(6);
+        \u0275\u0275pipe(7, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(8, "button", 7);
+        \u0275\u0275listener("click", function ScheduleComponent_Template_button_click_8_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.setOptions({ period: "week" }));
+        });
+        \u0275\u0275text(9);
+        \u0275\u0275pipe(10, "translate");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275template(11, ScheduleComponent_schedule_mobile_calendar_11_Template, 2, 3, "schedule-mobile-calendar", 8)(12, ScheduleComponent_div_12_Template, 7, 9, "div", 9);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(13, "div", 10);
+        \u0275\u0275element(14, "schedule-filters");
+        \u0275\u0275template(15, ScheduleComponent_ng_container_15_Template, 3, 3, "ng-container", 11);
+        \u0275\u0275pipe(16, "async");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(17, ScheduleComponent_mat_progress_bar_17_Template, 1, 0, "mat-progress-bar", 12);
+        \u0275\u0275pipe(18, "async");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(19, ScheduleComponent_footer_menu_19_Template, 1, 0, "footer-menu", 2)(20, ScheduleComponent_ng_template_20_Template, 7, 9, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        let tmp_8_0;
+        const empty_state_r11 = \u0275\u0275reference(21);
+        \u0275\u0275property("ngIf", !ctx.hide_nav);
+        \u0275\u0275advance(5);
+        \u0275\u0275classProp("inverse", ctx.period !== "day");
+        \u0275\u0275advance();
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 13, "COMMON.DAY"), " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275classProp("inverse", ctx.period !== "week");
+        \u0275\u0275advance();
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 15, "COMMON.WEEK"), " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.period === "day");
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.period === "week");
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngIf", (tmp_8_0 = \u0275\u0275pipeBind1(16, 17, ctx.booking_dates)) == null ? null : tmp_8_0.length)("ngIfElse", empty_state_r11);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(18, 19, ctx.loading));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", !ctx.hide_nav);
+      }
+    }, dependencies: [NgForOf, NgIf, TopbarComponent, FooterMenuComponent, MatOption, MatFormField, MatSelect, MatRipple, MatTooltip, EventCardComponent, BookingCardComponent, MatProgressBar, NgControlStatus, NgModel, ScheduleSidebarComponent, ScheduleFiltersComponent, ScheduleMobileCalendarComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=schedule.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ScheduleComponent, { className: "ScheduleComponent", filePath: "apps/workplace/src/app/new-schedule/schedule.component.ts", lineNumber: 168 });
+})();
+
+// apps/workplace/src/app/new-schedule/schedule.module.ts
+var ROUTES = [
+  { path: "", component: ScheduleComponent },
+  { path: "**", redirectTo: "" }
+];
+var AppScheduleModule = class _AppScheduleModule {
+  static {
+    this.\u0275fac = function AppScheduleModule_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _AppScheduleModule)();
+    };
+  }
+  static {
+    this.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _AppScheduleModule });
+  }
+  static {
+    this.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ imports: [
+      CommonModule,
+      SharedComponentModule,
+      FormsModule,
+      MatBottomSheetModule,
+      RouterModule.forChild(ROUTES)
+    ] });
+  }
+};
+export {
+  AppScheduleModule
+};
+//# sourceMappingURL=schedule.module-OWOR52NK.js.map
