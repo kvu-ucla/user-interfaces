@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1741137210593,
+  "timestamp": 1741147974681,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -69,6 +69,7 @@
         "./assets/icons/outlook.svg",
         "./assets/icons/parking-success.svg",
         "./assets/icons/payment-confirmed.svg",
+        "./assets/icons/permission-none.svg",
         "./assets/icons/place-filled.svg",
         "./assets/icons/place-outline.svg",
         "./assets/icons/room-placeholder.svg",
@@ -153,6 +154,7 @@
     "./assets/icons/outlook.svg": "af709f8c546089eb91c03c88af0860cb302eb28a",
     "./assets/icons/parking-success.svg": "f50d3173f7e5ff00f4175ac6fd85f0bd1f5da57b",
     "./assets/icons/payment-confirmed.svg": "f011484b0d845fa2a1b5c9db5107e2bb9c3d2c09",
+    "./assets/icons/permission-none.svg": "b1a2acd18617135947b503f992656371733bb464",
     "./assets/icons/place-filled.svg": "89ab65674b9e909b284ad78a7f8d7544a13ab74a",
     "./assets/icons/place-outline.svg": "6059875d2deb6a48ea76d30ac29bd329a888a48d",
     "./assets/icons/room-placeholder.svg": "34f3ab3edf77261db961c011e099b0c38d2ebe3e",
@@ -192,7 +194,7 @@
     "./assets/support/safari-logo.svg": "1c510b0c330f84f6662351e4a0abd7fb8af2f678",
     "./favicon.ico": "4e23d0f9b6ddaf3c9ddef90dbaed2342941297b5",
     "./index.html": "636b1139a41a5a53acac1612a3621d9784b01295",
-    "./main.js": "d74ab9f1b965bd184c7d256b82958d14fabac078",
+    "./main.js": "8a141b272fc1b659dc5a273ce0f21ffb7ec48865",
     "./manifest.webmanifest": "82971c858291f0ddb5d37cc8e43d81fce9a88bc5",
     "./polyfills.js": "e61db933651ae257d0c246b446cd1f470be08f78",
     "./styles.css": "5e3b2df0ba20df21b697bebbc40a98a284b39728"
