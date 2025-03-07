@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1741264309384,
+  "timestamp": 1741311931838,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -196,10 +196,10 @@
     "./assets/yolov8x_web_model/metadata.yaml": "b1a29dc18ee0c4b5f0f7240d2d92cd8b2fa03318",
     "./assets/yolov8x_web_model/model.json": "51607c6c0f465d41cdca4d65a17cfbf9c9f99c62",
     "./favicon.ico": "4e23d0f9b6ddaf3c9ddef90dbaed2342941297b5",
-    "./index.html": "420defc993276e581d801b5237efb4f3014bcd73",
-    "./main.js": "855cfc2368fe13165853935a4a6ac4e1c544d168",
+    "./index.html": "efd92144784718e4ac236c755924e35e11de02c9",
+    "./main.js": "d3e9a15bda4565bc518d74865a01be33f597266b",
     "./polyfills.js": "bbc5bc3958c959c3048bb84772b416a59bef38b5",
-    "./styles.css": "642d875b310bd30d66063d09e290a5b70e8d3805"
+    "./styles.css": "3ff02e39faffc3d0c540ef27b847e69169b46103"
   },
   "navigationUrls": [
     {
