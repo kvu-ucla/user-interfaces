@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["css;81f3856ff37038766291cb938ae73359518c6f759e09b5d235943572971aa3a0;/home/runner/work/user-interfaces/user-interfaces/apps/concierge/src/app/week-view/week-view.component.ts"],
-  "sourcesContent": ["\n            :host {\n                display: flex;\n                height: 100%;\n                width: 100%;\n                background: var(--b1);\n            }\n\n            sidebar {\n                height: 100%;\n            }\n\n            main {\n                display: flex;\n                flex-direction: column;\n                flex: 1;\n                min-width: 50%;\n                height: 100%;\n            }\n        "],
-  "mappings": "AACY,MACI,QAAS,KACT,OAAQ,KACR,MAAO,KACP,WAAY,IAAI,KACpB,CAEA,QACI,OAAQ,IACZ,CAEA,KACI,QAAS,KACT,eAAgB,OAChB,KAAM,EACN,UAAW,IACX,OAAQ,IACZ",
-  "names": []
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["css;3a7cea5117d3bbce1ee5dc72b81e3118d3fd349bd4d2a58591e15b23616cf475;/home/runner/work/user-interfaces/user-interfaces/apps/concierge/src/app/week-view/week-view-event.component.ts"],
-  "sourcesContent": ["\n            button {\n                background: none !important;\n                border: none !important;\n            }\n\n            [content] {\n                width: calc(100% - 1rem);\n            }\n\n            .done {\n                opacity: 0.5;\n            }\n\n            .done:hover {\n                opacity: 1;\n            }\n\n            .cancelled {\n                border-color: #626262;\n            }\n\n            .external {\n                border-color: #d85be0;\n            }\n\n            .internal {\n                border-color: #00a4c7;\n            }\n        "],
-  "mappings": "AACY,OACI,WAAY,eACZ,OAAQ,cACZ,CAEA,CAAC,SACG,MAAO,KAAK,KAAK,EAAE,KACvB,CAEA,CAAC,KACG,QAAS,EACb,CAEA,CAJC,IAII,OACD,QAAS,CACb,CAEA,CAAC,UACG,aAAc,OAClB,CAEA,CAAC,SACG,aAAc,OAClB,CAEA,CAAC,SACG,aAAc,OAClB",
-  "names": []
-}
