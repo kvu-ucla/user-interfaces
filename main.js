@@ -103224,7 +103224,7 @@ function generateMicrosoftCalendarLink(event, type2 = "office", status = "free")
   const resources = ((event.resources?.length ? event.resources : null) || [event.system]).map((_3) => _3?.email || _3);
   if (emails.length || resources.length)
     data.to = unique([...emails, ...resources]).join();
-  return type2 === "office" ? `https://outlook.office.com/calendar/0/action/compose?${toQueryString(data)}` : `https://outlook.live.com/calendar/0/action/compose?${toQueryString(data)}`;
+  return type2 === "office" ? `https://outlook.office.com/calendar/deeplink/compose?${toQueryString(data)}` : `https://outlook.live.com/calendar/deeplink/compose?${toQueryString(data)}`;
 }
 
 // libs/common/src/lib/async-handler.class.ts
@@ -104078,15 +104078,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "b1aaaaf",
-  "hash": "b1aaaaf",
+  "raw": "3d7109c",
+  "hash": "3d7109c",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "b1aaaaf",
+  "suffix": "3d7109c",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1743677830588
+  "time": 1744171130814
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -122307,6 +122307,8 @@ var MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         options: this.options
       });
     } catch (e2) {
+      console.warn("[MAP] Update viewer error.", e2);
+      return this.timeout("update_view", () => this.updateView());
     }
   }
   /** Update zoom and center position of viewer */
@@ -122320,6 +122322,8 @@ var MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         options: this.options
       });
     } catch (e2) {
+      console.warn("[MAP] Update view display error.", e2);
+      return this.timeout("update_display", () => this.updateDisplay());
     }
   }
   createView() {
@@ -136076,13 +136080,13 @@ function newCalendarEventFromBooking(booking) {
 var IGNORE_EXT_KEYS = ["user", "booked_by", "resources", "assets", "members"];
 var RecurrenceDays;
 (function(RecurrenceDays2) {
-  RecurrenceDays2[RecurrenceDays2["SUNDAY"] = 64] = "SUNDAY";
-  RecurrenceDays2[RecurrenceDays2["MONDAY"] = 32] = "MONDAY";
-  RecurrenceDays2[RecurrenceDays2["TUESDAY"] = 16] = "TUESDAY";
+  RecurrenceDays2[RecurrenceDays2["SUNDAY"] = 1] = "SUNDAY";
+  RecurrenceDays2[RecurrenceDays2["MONDAY"] = 2] = "MONDAY";
+  RecurrenceDays2[RecurrenceDays2["TUESDAY"] = 4] = "TUESDAY";
   RecurrenceDays2[RecurrenceDays2["WEDNESDAY"] = 8] = "WEDNESDAY";
-  RecurrenceDays2[RecurrenceDays2["THURSDAY"] = 4] = "THURSDAY";
-  RecurrenceDays2[RecurrenceDays2["FRIDAY"] = 2] = "FRIDAY";
-  RecurrenceDays2[RecurrenceDays2["SATURDAY"] = 1] = "SATURDAY";
+  RecurrenceDays2[RecurrenceDays2["THURSDAY"] = 16] = "THURSDAY";
+  RecurrenceDays2[RecurrenceDays2["FRIDAY"] = 32] = "FRIDAY";
+  RecurrenceDays2[RecurrenceDays2["SATURDAY"] = 64] = "SATURDAY";
 })(RecurrenceDays || (RecurrenceDays = {}));
 var DAYS_OF_WEEK_INDEX = [
   RecurrenceDays.SUNDAY,
@@ -140463,7 +140467,7 @@ function fromBookingRecurrence(r2) {
   if (r2.recurrence_end) {
     recurr.end_date = r2.recurrence_end * 1e3;
   }
-  if (r2.recurrence_type === "weekly" && r2.recurrence_days) {
+  if (r2.recurrence_type === "daily" && r2.recurrence_days) {
     const weekdays = /* @__PURE__ */ new Set();
     for (let i = 0; i < 7; i++) {
       if (r2.recurrence_days & 1 << 6 - i) {
@@ -140477,7 +140481,7 @@ function fromBookingRecurrence(r2) {
     if (r2.recurrence_days) {
       const weekdays = /* @__PURE__ */ new Set();
       for (let i = 0; i < 7; i++) {
-        if (r2.recurrence_days & 1 << 6 - i) {
+        if (r2.recurrence_days & DAYS_OF_WEEK_INDEX[i]) {
           weekdays.add(i);
         }
       }
@@ -140503,9 +140507,10 @@ function toBookingRecurrence(r2) {
   if (r2.type === "weekly" && r2.weekdays) {
     let days = 0;
     r2.weekdays.forEach((day) => {
-      days |= 1 << 6 - day;
+      days |= DAYS_OF_WEEK_INDEX[day];
     });
     booking.recurrence_days = days;
+    booking.recurrence_type = "daily";
   }
   if ((r2.type === "monthly" || r2.type === "yearly") && r2.weekdays) {
     let days = 0;
@@ -140708,7 +140713,7 @@ var RecurrenceFieldComponent = class _RecurrenceFieldComponent {
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RecurrenceFieldComponent, { className: "RecurrenceFieldComponent", filePath: "libs/form-fields/src/lib/recurrence-field.component.ts", lineNumber: 263 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RecurrenceFieldComponent, { className: "RecurrenceFieldComponent", filePath: "libs/form-fields/src/lib/recurrence-field.component.ts", lineNumber: 267 });
 })();
 
 // libs/form-fields/src/lib/space-list-field.component.ts
@@ -178215,6 +178220,9 @@ var DeskMapComponent = class _DeskMapComponent extends AsyncHandler {
     ]).pipe(map(([region, bld]) => {
       const level_list = this.use_region ? this._org.levelsForRegion(region) : this._org.levelsForBuilding(bld);
       const viewable_levels = level_list.filter((lvl) => !lvl.tags.includes("parking"));
+      if (!this.level && viewable_levels.length) {
+        this.level = viewable_levels[0];
+      }
       return viewable_levels.sort((a, b2) => a.parent_id.localeCompare(b2.parent_id) || (a.display_name || "").localeCompare(b2.display_name || ""));
     }));
     this.setOptions = (o) => this._state.setOptions(o);
@@ -178290,7 +178298,7 @@ var DeskMapComponent = class _DeskMapComponent extends AsyncHandler {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DeskMapComponent, selectors: [["desk-map"]], inputs: { is_displayed: "is_displayed", active: "active" }, outputs: { onSelect: "onSelect" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 8, vars: 17, consts: [[1, "w-full", "border-b", "border-base-200", "bg-base-100", "p-2"], ["levels", "", "appearance", "outline", "class", "w-full", 4, "ngIf"], [1, "relative", "w-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "options"], ["levels", "", "appearance", "outline", 1, "w-full"], ["name", "location", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"]], template: function DeskMapComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DeskMapComponent, selectors: [["desk-map"]], inputs: { is_displayed: "is_displayed", active: "active" }, outputs: { onSelect: "onSelect" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 8, vars: 17, consts: [[1, "w-full", "border-b", "border-base-200", "bg-base-100", "p-2"], ["levels", "", "appearance", "outline", "class", "no-subscript w-full", 4, "ngIf"], [1, "relative", "w-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "options"], ["levels", "", "appearance", "outline", 1, "no-subscript", "w-full"], ["name", "location", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"]], template: function DeskMapComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 0);
         \u0275\u0275template(1, DeskMapComponent_mat_form_field_1_Template, 5, 9, "mat-form-field", 1);
@@ -179324,21 +179332,8 @@ var InviteVisitorFormComponent = class _InviteVisitorFormComponent extends Async
       ]);
       yield this.multiple ? this._bookForMany() : this._bookForOne();
       this.last_success = this._service.last_success;
-      if (this.last_success) {
-        const event = __spreadProps(__spreadValues({}, this.last_success), {
-          host: this.last_success.user_email,
-          organiser: {
-            name: this.last_success.user_name,
-            email: this.last_success.user_email
-          },
-          attendees: this.last_success.attendees.map((_3) => _3.email),
-          body: this.last_success.description,
-          location: this.last_success.asset_name
-        });
-        this.outlook_link = generateMicrosoftCalendarLink(event);
-        this.google_link = generateGoogleCalendarLink(event);
-        this.ical_link = generateCalendarFileLink(event);
-      }
+      if (this.last_success)
+        this._generateLinks();
       yield this.initFormZone();
       this.sent = true;
     });
@@ -179414,13 +179409,30 @@ var InviteVisitorFormComponent = class _InviteVisitorFormComponent extends Async
       this.loading_many = false;
     });
   }
+  _generateLinks() {
+    const event = __spreadProps(__spreadValues({}, this.last_success), {
+      host: this.last_success.user_email,
+      organiser: {
+        name: this.last_success.user_name,
+        email: this.last_success.user_email
+      },
+      attendees: this.last_success.attendees.map((_3) => _3.email),
+      body: this.last_success.description,
+      location: this._org.building.display_name || this._org.building.name
+    });
+    event.attendees.push(this.last_success.asset_id);
+    console.log("Event:", event);
+    this.outlook_link = generateMicrosoftCalendarLink(event);
+    this.google_link = generateGoogleCalendarLink(event);
+    this.ical_link = generateCalendarFileLink(event);
+  }
   static {
     this.\u0275fac = function InviteVisitorFormComponent_Factory(__ngFactoryType__) {
       return new (__ngFactoryType__ || _InviteVisitorFormComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InviteVisitorFormComponent, selectors: [["invite-visitor-form"]], inputs: { date: "date" }, outputs: { done: "done" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 7, vars: 2, consts: [["send_state", ""], ["load_state", ""], ["multi_state", ""], ["name_auto", "matAutocomplete"], ["email_auto", "matAutocomplete"], [4, "ngIf", "ngIfElse"], ["class", "relative flex max-h-full flex-col overflow-auto bg-base-100", 4, "ngIf", "ngIfElse"], [1, "relative", "flex", "max-h-full", "flex-col", "overflow-auto", "bg-base-100"], [1, "w-full", "border-b", "border-base-200", "px-4", "py-4", "sm:px-16"], [1, "text-2xl", "font-medium"], ["class", "px-4 py-4 sm:px-16", 3, "formGroup", 4, "ngIf"], [1, "sticky", "bottom-0", "border-t", "border-base-200", "bg-base-100", "px-4", "py-4", "sm:px-16"], ["btn", "", "matRipple", "", "send", "", 1, "w-full", "sm:w-auto", 3, "click"], [1, "px-4", "py-4", "sm:px-16", 3, "formGroup"], ["class", "flex flex-col", 4, "ngIf"], [1, "flex", "flex-col"], ["for", "date"], ["name", "date", "formControlName", "date"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "w-1/3", "flex-1", "flex-col"], ["for", "start-time"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "disabled", "use_24hr"], ["for", "end-time"], ["name", "end-time", "formControlName", "duration", 3, "time", "max", "use_24hr"], ["class", "flex w-full flex-col", 4, "ngIf"], ["for", "reason"], ["appearance", "outline"], ["name", "reason", "matInput", "", "formControlName", "title", 3, "placeholder"], ["for", "building"], ["name", "building", "placeholder", "Select building", 3, "ngModelChange", "ngModel", "ngModelOptions"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "w-full", "flex-col"], ["for", "host"], ["name", "host", "formControlName", "user", 1, "mb-4"], ["for", "visitor-name"], ["matInput", "", "name", "visitor-name", "formControlName", "asset_name", 3, "focus", "placeholder", "matAutocomplete"], [3, "value", "click", 4, "ngFor", "ngForOf"], ["for", "visitor-email"], ["matInput", "", "name", "visitor-email", "type", "email", "formControlName", "asset_id", 3, "focus", "placeholder", "matAutocomplete"], ["matInput", "", "name", "company", "formControlName", "company", 3, "placeholder"], [3, "click", "value"], [1, "flex", "flex-col", "leading-tight"], [1, "text-xs", "opacity-60"], ["sent", "", 1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "bg-base-100", "text-center"], [1, "m-8", "h-1/2", "w-full", "max-w-[32rem]", "flex-1", "space-y-2"], [1, "text-3xl"], ["src", "assets/icons/sent.svg", 1, "mx-auto"], ["class", "relative flex flex-col items-center space-y-4 p-4", 4, "ngIf"], [1, "w-full", "border-t", "border-base-200", "p-2"], [1, "mx-auto", "flex", "w-full", "max-w-[32rem]", "items-center", "space-x-2"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "click"], [1, "relative", "flex", "flex-col", "items-center", "space-y-4", "p-4"], ["btn", "", "matRipple", "", "name", "desk-outlook-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/outlook.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-google-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/gcal.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-ical-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], [1, "text-xl"], ["loading", "", 1, "relative", "flex", "h-full", "min-h-[18rem]", "w-full", "flex-col", "items-center", "justify-center", "overflow-hidden", "rounded"], [3, "diameter"], [1, "flex", "flex-col", 3, "formGroup"], ["formControlName", "assets", 3, "guests_only"]], template: function InviteVisitorFormComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InviteVisitorFormComponent, selectors: [["invite-visitor-form"]], inputs: { date: "date" }, outputs: { done: "done" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 7, vars: 2, consts: [["send_state", ""], ["load_state", ""], ["multi_state", ""], ["name_auto", "matAutocomplete"], ["email_auto", "matAutocomplete"], [4, "ngIf", "ngIfElse"], ["class", "relative flex max-h-full flex-col overflow-auto bg-base-100", 4, "ngIf", "ngIfElse"], [1, "relative", "flex", "max-h-full", "flex-col", "overflow-auto", "bg-base-100"], [1, "w-full", "border-b", "border-base-200", "px-4", "py-4", "sm:px-16"], [1, "text-2xl", "font-medium"], ["class", "px-4 py-4 sm:px-16", 3, "formGroup", 4, "ngIf"], [1, "sticky", "bottom-0", "border-t", "border-base-200", "bg-base-100", "px-4", "py-4", "sm:px-16"], ["btn", "", "matRipple", "", "send", "", 1, "w-full", "sm:w-auto", 3, "click"], [1, "px-4", "py-4", "sm:px-16", 3, "formGroup"], ["class", "flex flex-col", 4, "ngIf"], [1, "flex", "flex-col"], ["for", "date"], ["name", "date", "formControlName", "date"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "w-1/3", "flex-1", "flex-col"], ["for", "start-time"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "disabled", "use_24hr"], ["for", "end-time"], ["name", "end-time", "formControlName", "duration", 3, "time", "max", "use_24hr"], ["class", "flex w-full flex-col", 4, "ngIf"], ["for", "reason"], ["appearance", "outline"], ["name", "reason", "matInput", "", "formControlName", "title", 3, "placeholder"], ["for", "building"], ["name", "building", "placeholder", "Select building", 3, "ngModelChange", "ngModel", "ngModelOptions"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "w-full", "flex-col"], ["for", "host"], ["name", "host", "formControlName", "user", 1, "mb-4"], ["for", "visitor-name"], ["matInput", "", "name", "visitor-name", "formControlName", "asset_name", 3, "focus", "placeholder", "matAutocomplete"], [3, "value", "click", 4, "ngFor", "ngForOf"], ["for", "visitor-email"], ["matInput", "", "name", "visitor-email", "type", "email", "formControlName", "asset_id", 3, "focus", "placeholder", "matAutocomplete"], ["matInput", "", "name", "company", "formControlName", "company", 3, "placeholder"], [3, "click", "value"], [1, "flex", "flex-col", "leading-tight"], [1, "text-xs", "opacity-60"], ["sent", "", 1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "bg-base-100", "text-center"], [1, "z-0", "m-8", "h-1/2", "w-full", "max-w-[32rem]", "flex-1", "space-y-2", "overflow-auto"], [1, "text-3xl"], ["src", "assets/icons/sent.svg", 1, "mx-auto"], ["class", "relative flex flex-col items-center space-y-4 p-4", 4, "ngIf"], [1, "z-10", "w-full", "border-t", "border-base-200", "bg-base-100", "p-2"], [1, "mx-auto", "flex", "w-full", "max-w-[32rem]", "items-center", "space-x-2"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "click"], [1, "relative", "flex", "flex-col", "items-center", "space-y-4", "p-4"], ["btn", "", "matRipple", "", "name", "desk-outlook-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/outlook.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-google-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/gcal.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-ical-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], [1, "text-xl"], ["loading", "", 1, "relative", "flex", "h-full", "min-h-[18rem]", "w-full", "flex-col", "items-center", "justify-center", "overflow-hidden", "rounded"], [3, "diameter"], [1, "flex", "flex-col", 3, "formGroup"], ["formControlName", "assets", 3, "guests_only"]], template: function InviteVisitorFormComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275template(0, InviteVisitorFormComponent_ng_container_0_Template, 3, 4, "ng-container", 5)(1, InviteVisitorFormComponent_ng_template_1_Template, 20, 28, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(3, InviteVisitorFormComponent_ng_template_3_Template, 5, 4, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(5, InviteVisitorFormComponent_ng_template_5_Template, 7, 5, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
       }
@@ -179432,7 +179444,7 @@ var InviteVisitorFormComponent = class _InviteVisitorFormComponent extends Async
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(InviteVisitorFormComponent, { className: "InviteVisitorFormComponent", filePath: "libs/bookings/src/lib/invite-visitor-form.component.ts", lineNumber: 385 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(InviteVisitorFormComponent, { className: "InviteVisitorFormComponent", filePath: "libs/bookings/src/lib/invite-visitor-form.component.ts", lineNumber: 389 });
 })();
 
 // libs/bookings/src/lib/locker-grid.component.ts
