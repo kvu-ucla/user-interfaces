@@ -68,7 +68,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-4LW2ZPSH.js";
+} from "./chunk-7HB5YGQC.js";
 import "./chunk-4MWRP73S.js";
 
 // apps/workplace/src/app/directory/user-list.component.ts
@@ -309,4 +309,4 @@ var DirectoryModule = class _DirectoryModule {
 export {
   DirectoryModule
 };
-//# sourceMappingURL=directory.module-OCJQVGMD.js.map
+//# sourceMappingURL=directory.module-VWUNIEE4.js.map

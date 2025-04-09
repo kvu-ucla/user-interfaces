@@ -1,6 +1,6 @@
 import {
   subMinutes
-} from "./chunk-CAEAJJ5N.js";
+} from "./chunk-SETK32OJ.js";
 import {
   ANIMATION_SHOW_CONTRACT_EXPAND,
   ActivatedRoute,
@@ -165,6 +165,7 @@ import {
   loadLockerBanks,
   loadLockers,
   map,
+  newCalendarEventFromBooking,
   nextValueFrom,
   notifyError,
   notifyInfo,
@@ -250,7 +251,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-4LW2ZPSH.js";
+} from "./chunk-7HB5YGQC.js";
 import {
   __async,
   __spreadProps,
@@ -834,12 +835,14 @@ var CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
       }).pipe(catchError(() => of([])), map((bookings) => flatten(bookings.map((bkn) => {
         BOOKINGS[bkn.asset_id] = bkn;
         const order = new CateringOrder(__spreadProps(__spreadValues({}, bkn.extension_data.details), {
-          event: new CalendarEvent(__spreadValues({}, bkn.linked_event))
+          event: bkn.linked_event ? new CalendarEvent(__spreadValues({}, bkn.linked_event)) : newCalendarEventFromBooking(bkn.linked_bookings[0] || bkn)
         }));
-        this._space_pipe.transform(bkn.linked_event.system_id).then((space) => {
-          order.space = space;
-          order.event.system = space;
-        });
+        if (bkn.linked_event) {
+          this._space_pipe.transform(bkn.linked_event.system_id).then((space) => {
+            order.space = space;
+            order.event.system = space;
+          });
+        }
         return order;
       }))));
     }), shareReplay(1));
@@ -868,7 +871,7 @@ var CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
       }
       return unique(provider_list);
     }), shareReplay(1));
-    this.filtered = combineLatest([this.orders, this._filters]).pipe(map(([list, filters]) => list.filter((order) => checkOrder(order, filters)).sort((a, b) => a.deliver_at - b.deliver_at)));
+    this.filtered = combineLatest([this.orders, this._filters]).pipe(tap(([l]) => console.log("Orders:", l)), map(([list, filters]) => list.filter((order) => checkOrder(order, filters)).sort((a, b) => a.deliver_at - b.deliver_at)));
     this.subscription("changes", this.orders.subscribe());
   }
   /** Start polling for catering orders */
@@ -11197,4 +11200,4 @@ var BookModule = class _BookModule {
 export {
   BookModule
 };
-//# sourceMappingURL=book.module-57VX7FEE.js.map
+//# sourceMappingURL=book.module-LDCBXHFV.js.map
