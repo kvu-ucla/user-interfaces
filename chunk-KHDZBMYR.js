@@ -97248,7 +97248,7 @@ function generateMicrosoftCalendarLink(event, type2 = "office", status = "free")
   const resources = ((event.resources?.length ? event.resources : null) || [event.system]).map((_3) => _3?.email || _3);
   if (emails.length || resources.length)
     data.to = unique([...emails, ...resources]).join();
-  return type2 === "office" ? `https://outlook.office.com/calendar/0/action/compose?${toQueryString(data)}` : `https://outlook.live.com/calendar/0/action/compose?${toQueryString(data)}`;
+  return type2 === "office" ? `https://outlook.office.com/calendar/deeplink/compose?${toQueryString(data)}` : `https://outlook.live.com/calendar/deeplink/compose?${toQueryString(data)}`;
 }
 
 // libs/common/src/lib/async-handler.class.ts
@@ -98196,15 +98196,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "b1aaaaf",
-  "hash": "b1aaaaf",
+  "raw": "3d7109c",
+  "hash": "3d7109c",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "b1aaaaf",
+  "suffix": "3d7109c",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1743677858958
+  "time": 1744171182622
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -116874,6 +116874,8 @@ var MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         options: this.options
       });
     } catch (e) {
+      console.warn("[MAP] Update viewer error.", e);
+      return this.timeout("update_view", () => this.updateView());
     }
   }
   /** Update zoom and center position of viewer */
@@ -116887,6 +116889,8 @@ var MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         options: this.options
       });
     } catch (e) {
+      console.warn("[MAP] Update view display error.", e);
+      return this.timeout("update_display", () => this.updateDisplay());
     }
   }
   createView() {
@@ -132446,6 +132450,254 @@ var PlaceUserPipe = class _PlaceUserPipe {
   }
 };
 
+// libs/assets/src/lib/asset-request.class.ts
+function deliverAtTime(request) {
+  let date = request.event?.date || request._time;
+  if (request.deliver_time) {
+    date = set(date, {
+      hours: Math.floor(request.deliver_time),
+      minutes: request.deliver_time % 1 * 60
+    }).valueOf();
+  }
+  if (request.deliver_day_offset > 0 || request.event?.all_day) {
+    date = addDays(startOfDay(date), request.deliver_day_offset).valueOf();
+  }
+  return addMinutes(date, request.deliver_offset).valueOf();
+}
+var AssetRequest = class {
+  get deliver_at() {
+    return deliverAtTime(this);
+  }
+  get status() {
+    return this._status;
+  }
+  set status(value) {
+    this._status = value;
+    this[`${this.event_id}_status`] = value;
+  }
+  constructor(data = {}) {
+    this.conflict = false;
+    this._changed = false;
+    this._time = startOfMinute(Date.now()).valueOf();
+    this.id = data.id || `order-${randomInt(9999999, 1e6)}`;
+    this.event_id = data.event_id || data.parent_id || "";
+    this.items = data.items || data.asset_ids?.map((_3) => ({ id: _3, quantity: 1 })) || [];
+    this.item_count = this.items.reduce((amount, item) => amount + item.quantity, 0);
+    this._status = data[`${this.event_id}_status`] || data.status || (data.extension_data || {})[`${this.event_id}_status`] || data.extension_data?.status || "in_storage";
+    this.event = data.event || data || null;
+    const booking = this.event?.linked_bookings?.find((_3) => _3.extension_data.request_id === this.id);
+    this._booking = booking || data.booking || null;
+    this._changed = !!data._changed || !booking;
+    this.notes = data.notes || data.description || "";
+    this.deliver_time = data.deliver_time || data.extension_data?.deliver_time || void 0;
+    this.deliver_offset = data.deliver_offset || data.extension_data?.deliver_offset || 0;
+    this.deliver_day_offset = data.deliver_day_offset || data.extension_data?.deliver_day_offset || 0;
+    this.deliver_at_time = deliverAtTime(this);
+    this.conflict = !!data.conflict;
+    this.ref_id = `${this.deliver_at_time}|${this.items.map((_3) => `${_3.id}:${_3.quantity}`).join("|")}`;
+  }
+  toJSON() {
+    const blob = __spreadValues({}, this);
+    delete blob.event;
+    delete blob._changed;
+    delete blob._status;
+    delete blob._time;
+    delete blob.deliver_at_time;
+    delete blob.deliver_at;
+    blob.items = blob.items.map((_3) => ({
+      id: _3.id,
+      category_id: _3.category_id,
+      quantity: _3.quantity,
+      name: _3.name,
+      item_ids: _3.item_ids
+    }));
+    return blob;
+  }
+};
+
+// libs/bookings/src/lib/booking.class.ts
+var IGNORE_EXT_KEYS = ["user", "booked_by", "resources", "assets", "members"];
+var RecurrenceDays;
+(function(RecurrenceDays2) {
+  RecurrenceDays2[RecurrenceDays2["SUNDAY"] = 1] = "SUNDAY";
+  RecurrenceDays2[RecurrenceDays2["MONDAY"] = 2] = "MONDAY";
+  RecurrenceDays2[RecurrenceDays2["TUESDAY"] = 4] = "TUESDAY";
+  RecurrenceDays2[RecurrenceDays2["WEDNESDAY"] = 8] = "WEDNESDAY";
+  RecurrenceDays2[RecurrenceDays2["THURSDAY"] = 16] = "THURSDAY";
+  RecurrenceDays2[RecurrenceDays2["FRIDAY"] = 32] = "FRIDAY";
+  RecurrenceDays2[RecurrenceDays2["SATURDAY"] = 64] = "SATURDAY";
+})(RecurrenceDays || (RecurrenceDays = {}));
+var DAYS_OF_WEEK_INDEX = [
+  RecurrenceDays.SUNDAY,
+  RecurrenceDays.MONDAY,
+  RecurrenceDays.TUESDAY,
+  RecurrenceDays.WEDNESDAY,
+  RecurrenceDays.THURSDAY,
+  RecurrenceDays.FRIDAY,
+  RecurrenceDays.SATURDAY
+];
+var WeekOfMonth;
+(function(WeekOfMonth2) {
+  WeekOfMonth2[WeekOfMonth2["First"] = 1] = "First";
+  WeekOfMonth2[WeekOfMonth2["Second"] = 2] = "Second";
+  WeekOfMonth2[WeekOfMonth2["Third"] = 3] = "Third";
+  WeekOfMonth2[WeekOfMonth2["Fourth"] = 4] = "Fourth";
+  WeekOfMonth2[WeekOfMonth2["Fifth"] = 5] = "Fifth";
+  WeekOfMonth2[WeekOfMonth2["Last"] = -1] = "Last";
+  WeekOfMonth2[WeekOfMonth2["SecondLast"] = -2] = "SecondLast";
+  WeekOfMonth2[WeekOfMonth2["ThirdLast"] = -3] = "ThirdLast";
+  WeekOfMonth2[WeekOfMonth2["FourthLast"] = -4] = "FourthLast";
+  WeekOfMonth2[WeekOfMonth2["FifthLast"] = -5] = "FifthLast";
+})(WeekOfMonth || (WeekOfMonth = {}));
+var Booking = class {
+  get group() {
+    return this.extension_data.group || "";
+  }
+  get is_all_day() {
+    return this.all_day || this.duration >= 12 * 60;
+  }
+  get valid_assets() {
+    if (this._valid_cache_expiry > Date.now() && this._valid_asset_cache.length) {
+      return this._valid_asset_cache;
+    }
+    const list2 = this.linked_bookings;
+    this._valid_asset_cache = (this.extension_data.assets || []).map((request) => new AssetRequest(__spreadProps(__spreadValues({}, request), { event: this }))).filter((request) => request.deliver_at < this.date_end).map((request) => {
+      const booking = list2.find((_3) => _3.extension_data.request_id === request.id);
+      if (booking) {
+        request.state = booking.approved ? "approved" : booking.rejected ? "rejected" : "pending";
+      }
+      return request;
+    });
+    this._valid_cache_expiry = addMinutes(Date.now(), 5).valueOf();
+    return this._valid_asset_cache;
+  }
+  constructor(data = {}) {
+    this._valid_asset_cache = [];
+    this._valid_cache_expiry = 0;
+    this.id = data.id || "";
+    this.parent_id = data.parent_id || "";
+    this.asset_id = data.asset_id || "";
+    this.asset_ids = data.asset_ids || [data.asset_id].filter((_3) => _3);
+    this.asset_name = data.asset_name || data.extension_data?.asset_name || data.description || data.asset_id || "";
+    this.zones = data.zones || [];
+    this.booking_start = Math.floor(data.date / 1e3) || data.booking_start || getUnixTime(roundToNearestMinutes(addMinutes(Date.now(), 5), {
+      nearestTo: 5
+    }));
+    this.booking_end = Math.floor(data.date / 1e3) + data.duration * 60 || data.booking_end || getUnixTime(addMinutes(this.booking_start * 1e3, data.duration || 60));
+    this.booking_type = data.booking_type || " ";
+    this.type = data.type || data.booking_type || "booking";
+    this.date = data.date || this.booking_start * 1e3 || Date.now();
+    this.duration = data.duration || Math.abs(differenceInMinutes(this.booking_start * 1e3, this.booking_end * 1e3)) || 60;
+    this.date_end = this.booking_end * 1e3 || this.date + this.duration * 60 * 1e3;
+    this.timezone = data.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
+    this.user_email = data.user_email || "";
+    this.user_id = data.user_id || "";
+    this.user_name = data.user_name || "";
+    this.title = data.title ?? (this.booking_type ? `${capitalizeFirstLetter(this.booking_type)} Booking`.trim() : "");
+    this.description = data.description || "";
+    this.checked_in = !!data.checked_in;
+    this.rejected = !!data.rejected;
+    this.approved = !!data.approved;
+    this.deleted = !!data.deleted;
+    this.booked_by_id = data.booked_by_id || "";
+    this.booked_by_name = data.booked_by_name || "";
+    this.booked_by_email = data.booked_by_email || "";
+    this.approver_id = data.approver_id || "";
+    this.approver_email = data.approver_email || "";
+    this.approver_name = data.approver_name || "";
+    this.extension_data = data.extension_data || {};
+    this.access = !!data.extension_data?.access;
+    this.event_id = data.event_id;
+    this.permission = (data.permission || "PRIVATE").toUpperCase();
+    this.attendees = data.attendees || data.guests || data.members || [];
+    this.tags = data.tags || data.extension_data?.tags || [];
+    this.images = data.images || [];
+    this.all_day = data.all_day || this.duration >= 24 * 60;
+    this.induction = data.induction || void 0;
+    if (this.all_day) {
+      this.date = startOfDay(this.date).getTime();
+      this.duration = Math.max(24 * 60 - 1, this.duration - (this.duration % 24 * 60 === 0 ? 1 : 0));
+      this.date_end = endOfDay(addMinutes(this.date, this.duration - 1).valueOf()).getTime();
+    }
+    this.checked_out_at = data.checked_out_at;
+    this.checked_in_at = data.checked_in_at;
+    this.linked_event = data.linked_event || null;
+    this.linked_bookings = data.linked_bookings || [];
+    this.images = data.images || [];
+    this.status = this.checked_out_at > 0 || isAfter(Date.now(), this.date_end) ? "ended" : this.rejected || this.deleted ? "declined" : this.approved ? "approved" : "tentative";
+    this.process_state = data.process_state || "pending";
+    this.recurrence_type = data.recurrence_type || "none";
+    this.recurrence_days = data.recurrence_days;
+    this.recurrence_nth_of_month = data.recurrence_nth_of_month;
+    this.recurrence_interval = data.recurrence_interval;
+    this.recurrence_end = data.recurrence_end;
+    this.instance = data.instance;
+    for (const key in data) {
+      if (!(key in this) && !IGNORE_EXT_KEYS.includes(key) && data[key]) {
+        this.extension_data[key] = data[key] || this.extension_data[key];
+      }
+    }
+    this.extension_data.assets = (this.extension_data.assets || []).map((i) => new AssetRequest(__spreadProps(__spreadValues({}, i), { event: this, date: this.date })));
+    this.extension_data.tags = data.tags || [];
+    if (this.extension_data.request) {
+      this.extension_data.request = new AssetRequest(__spreadProps(__spreadValues({}, this.extension_data.request), {
+        event: this,
+        date: this.date
+      }));
+    }
+  }
+  toJSON() {
+    const data = __spreadValues({}, this);
+    if (!this.id)
+      delete data.id;
+    data.extension_data.assets = data.extension_data.assets.map((i) => new AssetRequest(__spreadProps(__spreadValues({}, i), { event: null })));
+    if (data.extension_data.request) {
+      data.extension_data.request = new AssetRequest(__spreadProps(__spreadValues({}, data.extension_data.request), {
+        event: null
+      }));
+    }
+    if (!data.parent_id)
+      delete data.parent_id;
+    data.zones = data.zones.filter((_3) => _3);
+    delete data.date;
+    delete data.duration;
+    delete data.process_state;
+    removeEmptyFields(data);
+    return data;
+  }
+  get location() {
+    return this.extension_data?.location || this.description;
+  }
+  /** Whether the booking occurs today */
+  get is_today() {
+    return isSameDay(this.date, /* @__PURE__ */ new Date());
+  }
+  /** Whether booking is done */
+  get is_done() {
+    const start = /* @__PURE__ */ new Date();
+    const end = this.all_day ? addHours(this.date, 24) : addMinutes(this.date, this.duration);
+    const checked_out = (this.checked_out_at || this.extension_data.checked_out_at || 0) * 1e3;
+    let end_time = end.getTime();
+    if (checked_out && Date.now() > checked_out)
+      return true;
+    return isAfter(start, new Date(end_time));
+  }
+  /** Status of the booking */
+  get state() {
+    const now = /* @__PURE__ */ new Date();
+    const date = this.date;
+    if (isBefore(now, add(date, { minutes: -15 })))
+      return "future";
+    if (isBefore(now, date))
+      return "upcoming";
+    if (isBefore(now, add(date, { minutes: 15 })))
+      return "started";
+    if (isBefore(now, add(date, { minutes: this.duration })))
+      return "in_progress";
+    return "done";
+  }
+};
+
 // libs/events/src/lib/helpers.ts
 var DAYS_OF_WEEK = [
   "sunday",
@@ -132864,7 +133116,7 @@ function fromBookingRecurrence(r) {
   if (r.recurrence_end) {
     recurr.end_date = r.recurrence_end * 1e3;
   }
-  if (r.recurrence_type === "weekly" && r.recurrence_days) {
+  if (r.recurrence_type === "daily" && r.recurrence_days) {
     const weekdays = /* @__PURE__ */ new Set();
     for (let i = 0; i < 7; i++) {
       if (r.recurrence_days & 1 << 6 - i) {
@@ -132878,7 +133130,7 @@ function fromBookingRecurrence(r) {
     if (r.recurrence_days) {
       const weekdays = /* @__PURE__ */ new Set();
       for (let i = 0; i < 7; i++) {
-        if (r.recurrence_days & 1 << 6 - i) {
+        if (r.recurrence_days & DAYS_OF_WEEK_INDEX[i]) {
           weekdays.add(i);
         }
       }
@@ -132904,9 +133156,10 @@ function toBookingRecurrence(r) {
   if (r.type === "weekly" && r.weekdays) {
     let days = 0;
     r.weekdays.forEach((day) => {
-      days |= 1 << 6 - day;
+      days |= DAYS_OF_WEEK_INDEX[day];
     });
     booking.recurrence_days = days;
+    booking.recurrence_type = "daily";
   }
   if ((r.type === "monthly" || r.type === "yearly") && r.weekdays) {
     let days = 0;
@@ -133109,73 +133362,8 @@ var RecurrenceFieldComponent = class _RecurrenceFieldComponent {
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RecurrenceFieldComponent, { className: "RecurrenceFieldComponent", filePath: "libs/form-fields/src/lib/recurrence-field.component.ts", lineNumber: 263 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RecurrenceFieldComponent, { className: "RecurrenceFieldComponent", filePath: "libs/form-fields/src/lib/recurrence-field.component.ts", lineNumber: 267 });
 })();
-
-// libs/assets/src/lib/asset-request.class.ts
-function deliverAtTime(request) {
-  let date = request.event?.date || request._time;
-  if (request.deliver_time) {
-    date = set(date, {
-      hours: Math.floor(request.deliver_time),
-      minutes: request.deliver_time % 1 * 60
-    }).valueOf();
-  }
-  if (request.deliver_day_offset > 0 || request.event?.all_day) {
-    date = addDays(startOfDay(date), request.deliver_day_offset).valueOf();
-  }
-  return addMinutes(date, request.deliver_offset).valueOf();
-}
-var AssetRequest = class {
-  get deliver_at() {
-    return deliverAtTime(this);
-  }
-  get status() {
-    return this._status;
-  }
-  set status(value) {
-    this._status = value;
-    this[`${this.event_id}_status`] = value;
-  }
-  constructor(data = {}) {
-    this.conflict = false;
-    this._changed = false;
-    this._time = startOfMinute(Date.now()).valueOf();
-    this.id = data.id || `order-${randomInt(9999999, 1e6)}`;
-    this.event_id = data.event_id || data.parent_id || "";
-    this.items = data.items || data.asset_ids?.map((_3) => ({ id: _3, quantity: 1 })) || [];
-    this.item_count = this.items.reduce((amount, item) => amount + item.quantity, 0);
-    this._status = data[`${this.event_id}_status`] || data.status || (data.extension_data || {})[`${this.event_id}_status`] || data.extension_data?.status || "in_storage";
-    this.event = data.event || data || null;
-    const booking = this.event?.linked_bookings?.find((_3) => _3.extension_data.request_id === this.id);
-    this._booking = booking || data.booking || null;
-    this._changed = !!data._changed || !booking;
-    this.notes = data.notes || data.description || "";
-    this.deliver_time = data.deliver_time || data.extension_data?.deliver_time || void 0;
-    this.deliver_offset = data.deliver_offset || data.extension_data?.deliver_offset || 0;
-    this.deliver_day_offset = data.deliver_day_offset || data.extension_data?.deliver_day_offset || 0;
-    this.deliver_at_time = deliverAtTime(this);
-    this.conflict = !!data.conflict;
-    this.ref_id = `${this.deliver_at_time}|${this.items.map((_3) => `${_3.id}:${_3.quantity}`).join("|")}`;
-  }
-  toJSON() {
-    const blob = __spreadValues({}, this);
-    delete blob.event;
-    delete blob._changed;
-    delete blob._status;
-    delete blob._time;
-    delete blob.deliver_at_time;
-    delete blob.deliver_at;
-    blob.items = blob.items.map((_3) => ({
-      id: _3.id,
-      category_id: _3.category_id,
-      quantity: _3.quantity,
-      name: _3.name,
-      item_ids: _3.item_ids
-    }));
-    return blob;
-  }
-};
 
 // libs/catering/src/lib/catering-item.class.ts
 var CateringItem = class {
@@ -133814,189 +134002,6 @@ function newCalendarEventFromBooking(booking) {
     from_bookings: true
   }));
 }
-
-// libs/bookings/src/lib/booking.class.ts
-var IGNORE_EXT_KEYS = ["user", "booked_by", "resources", "assets", "members"];
-var RecurrenceDays;
-(function(RecurrenceDays2) {
-  RecurrenceDays2[RecurrenceDays2["SUNDAY"] = 64] = "SUNDAY";
-  RecurrenceDays2[RecurrenceDays2["MONDAY"] = 32] = "MONDAY";
-  RecurrenceDays2[RecurrenceDays2["TUESDAY"] = 16] = "TUESDAY";
-  RecurrenceDays2[RecurrenceDays2["WEDNESDAY"] = 8] = "WEDNESDAY";
-  RecurrenceDays2[RecurrenceDays2["THURSDAY"] = 4] = "THURSDAY";
-  RecurrenceDays2[RecurrenceDays2["FRIDAY"] = 2] = "FRIDAY";
-  RecurrenceDays2[RecurrenceDays2["SATURDAY"] = 1] = "SATURDAY";
-})(RecurrenceDays || (RecurrenceDays = {}));
-var DAYS_OF_WEEK_INDEX = [
-  RecurrenceDays.SUNDAY,
-  RecurrenceDays.MONDAY,
-  RecurrenceDays.TUESDAY,
-  RecurrenceDays.WEDNESDAY,
-  RecurrenceDays.THURSDAY,
-  RecurrenceDays.FRIDAY,
-  RecurrenceDays.SATURDAY
-];
-var WeekOfMonth;
-(function(WeekOfMonth2) {
-  WeekOfMonth2[WeekOfMonth2["First"] = 1] = "First";
-  WeekOfMonth2[WeekOfMonth2["Second"] = 2] = "Second";
-  WeekOfMonth2[WeekOfMonth2["Third"] = 3] = "Third";
-  WeekOfMonth2[WeekOfMonth2["Fourth"] = 4] = "Fourth";
-  WeekOfMonth2[WeekOfMonth2["Fifth"] = 5] = "Fifth";
-  WeekOfMonth2[WeekOfMonth2["Last"] = -1] = "Last";
-  WeekOfMonth2[WeekOfMonth2["SecondLast"] = -2] = "SecondLast";
-  WeekOfMonth2[WeekOfMonth2["ThirdLast"] = -3] = "ThirdLast";
-  WeekOfMonth2[WeekOfMonth2["FourthLast"] = -4] = "FourthLast";
-  WeekOfMonth2[WeekOfMonth2["FifthLast"] = -5] = "FifthLast";
-})(WeekOfMonth || (WeekOfMonth = {}));
-var Booking = class {
-  get group() {
-    return this.extension_data.group || "";
-  }
-  get is_all_day() {
-    return this.all_day || this.duration >= 12 * 60;
-  }
-  get valid_assets() {
-    if (this._valid_cache_expiry > Date.now() && this._valid_asset_cache.length) {
-      return this._valid_asset_cache;
-    }
-    const list2 = this.linked_bookings;
-    this._valid_asset_cache = (this.extension_data.assets || []).map((request) => new AssetRequest(__spreadProps(__spreadValues({}, request), { event: this }))).filter((request) => request.deliver_at < this.date_end).map((request) => {
-      const booking = list2.find((_3) => _3.extension_data.request_id === request.id);
-      if (booking) {
-        request.state = booking.approved ? "approved" : booking.rejected ? "rejected" : "pending";
-      }
-      return request;
-    });
-    this._valid_cache_expiry = addMinutes(Date.now(), 5).valueOf();
-    return this._valid_asset_cache;
-  }
-  constructor(data = {}) {
-    this._valid_asset_cache = [];
-    this._valid_cache_expiry = 0;
-    this.id = data.id || "";
-    this.parent_id = data.parent_id || "";
-    this.asset_id = data.asset_id || "";
-    this.asset_ids = data.asset_ids || [data.asset_id].filter((_3) => _3);
-    this.asset_name = data.asset_name || data.extension_data?.asset_name || data.description || data.asset_id || "";
-    this.zones = data.zones || [];
-    this.booking_start = Math.floor(data.date / 1e3) || data.booking_start || getUnixTime(roundToNearestMinutes(addMinutes(Date.now(), 5), {
-      nearestTo: 5
-    }));
-    this.booking_end = Math.floor(data.date / 1e3) + data.duration * 60 || data.booking_end || getUnixTime(addMinutes(this.booking_start * 1e3, data.duration || 60));
-    this.booking_type = data.booking_type || " ";
-    this.type = data.type || data.booking_type || "booking";
-    this.date = data.date || this.booking_start * 1e3 || Date.now();
-    this.duration = data.duration || Math.abs(differenceInMinutes(this.booking_start * 1e3, this.booking_end * 1e3)) || 60;
-    this.date_end = this.booking_end * 1e3 || this.date + this.duration * 60 * 1e3;
-    this.timezone = data.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
-    this.user_email = data.user_email || "";
-    this.user_id = data.user_id || "";
-    this.user_name = data.user_name || "";
-    this.title = data.title ?? (this.booking_type ? `${capitalizeFirstLetter(this.booking_type)} Booking`.trim() : "");
-    this.description = data.description || "";
-    this.checked_in = !!data.checked_in;
-    this.rejected = !!data.rejected;
-    this.approved = !!data.approved;
-    this.deleted = !!data.deleted;
-    this.booked_by_id = data.booked_by_id || "";
-    this.booked_by_name = data.booked_by_name || "";
-    this.booked_by_email = data.booked_by_email || "";
-    this.approver_id = data.approver_id || "";
-    this.approver_email = data.approver_email || "";
-    this.approver_name = data.approver_name || "";
-    this.extension_data = data.extension_data || {};
-    this.access = !!data.extension_data?.access;
-    this.event_id = data.event_id;
-    this.permission = (data.permission || "PRIVATE").toUpperCase();
-    this.attendees = data.attendees || data.guests || data.members || [];
-    this.tags = data.tags || data.extension_data?.tags || [];
-    this.images = data.images || [];
-    this.all_day = data.all_day || this.duration >= 24 * 60;
-    this.induction = data.induction || void 0;
-    if (this.all_day) {
-      this.date = startOfDay(this.date).getTime();
-      this.duration = Math.max(24 * 60 - 1, this.duration - (this.duration % 24 * 60 === 0 ? 1 : 0));
-      this.date_end = endOfDay(addMinutes(this.date, this.duration - 1).valueOf()).getTime();
-    }
-    this.checked_out_at = data.checked_out_at;
-    this.checked_in_at = data.checked_in_at;
-    this.linked_event = data.linked_event || null;
-    this.linked_bookings = data.linked_bookings || [];
-    this.images = data.images || [];
-    this.status = this.checked_out_at > 0 || isAfter(Date.now(), this.date_end) ? "ended" : this.rejected || this.deleted ? "declined" : this.approved ? "approved" : "tentative";
-    this.process_state = data.process_state || "pending";
-    this.recurrence_type = data.recurrence_type || "none";
-    this.recurrence_days = data.recurrence_days;
-    this.recurrence_nth_of_month = data.recurrence_nth_of_month;
-    this.recurrence_interval = data.recurrence_interval;
-    this.recurrence_end = data.recurrence_end;
-    this.instance = data.instance;
-    for (const key in data) {
-      if (!(key in this) && !IGNORE_EXT_KEYS.includes(key) && data[key]) {
-        this.extension_data[key] = data[key] || this.extension_data[key];
-      }
-    }
-    this.extension_data.assets = (this.extension_data.assets || []).map((i) => new AssetRequest(__spreadProps(__spreadValues({}, i), { event: this, date: this.date })));
-    this.extension_data.tags = data.tags || [];
-    if (this.extension_data.request) {
-      this.extension_data.request = new AssetRequest(__spreadProps(__spreadValues({}, this.extension_data.request), {
-        event: this,
-        date: this.date
-      }));
-    }
-  }
-  toJSON() {
-    const data = __spreadValues({}, this);
-    if (!this.id)
-      delete data.id;
-    data.extension_data.assets = data.extension_data.assets.map((i) => new AssetRequest(__spreadProps(__spreadValues({}, i), { event: null })));
-    if (data.extension_data.request) {
-      data.extension_data.request = new AssetRequest(__spreadProps(__spreadValues({}, data.extension_data.request), {
-        event: null
-      }));
-    }
-    if (!data.parent_id)
-      delete data.parent_id;
-    data.zones = data.zones.filter((_3) => _3);
-    delete data.date;
-    delete data.duration;
-    delete data.process_state;
-    removeEmptyFields(data);
-    return data;
-  }
-  get location() {
-    return this.extension_data?.location || this.description;
-  }
-  /** Whether the booking occurs today */
-  get is_today() {
-    return isSameDay(this.date, /* @__PURE__ */ new Date());
-  }
-  /** Whether booking is done */
-  get is_done() {
-    const start = /* @__PURE__ */ new Date();
-    const end = this.all_day ? addHours(this.date, 24) : addMinutes(this.date, this.duration);
-    const checked_out = (this.checked_out_at || this.extension_data.checked_out_at || 0) * 1e3;
-    let end_time = end.getTime();
-    if (checked_out && Date.now() > checked_out)
-      return true;
-    return isAfter(start, new Date(end_time));
-  }
-  /** Status of the booking */
-  get state() {
-    const now = /* @__PURE__ */ new Date();
-    const date = this.date;
-    if (isBefore(now, add(date, { minutes: -15 })))
-      return "future";
-    if (isBefore(now, date))
-      return "upcoming";
-    if (isBefore(now, add(date, { minutes: 15 })))
-      return "started";
-    if (isBefore(now, add(date, { minutes: this.duration })))
-      return "in_progress";
-    return "done";
-  }
-};
 
 // libs/bookings/src/lib/booking.utilities.ts
 function setBookingAsset(form, resource) {
@@ -147698,6 +147703,9 @@ var DeskMapComponent = class _DeskMapComponent extends AsyncHandler {
     ]).pipe(map(([region, bld]) => {
       const level_list = this.use_region ? this._org.levelsForRegion(region) : this._org.levelsForBuilding(bld);
       const viewable_levels = level_list.filter((lvl) => !lvl.tags.includes("parking"));
+      if (!this.level && viewable_levels.length) {
+        this.level = viewable_levels[0];
+      }
       return viewable_levels.sort((a, b2) => a.parent_id.localeCompare(b2.parent_id) || (a.display_name || "").localeCompare(b2.display_name || ""));
     }));
     this.setOptions = (o) => this._state.setOptions(o);
@@ -147773,7 +147781,7 @@ var DeskMapComponent = class _DeskMapComponent extends AsyncHandler {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DeskMapComponent, selectors: [["desk-map"]], inputs: { is_displayed: "is_displayed", active: "active" }, outputs: { onSelect: "onSelect" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 8, vars: 17, consts: [[1, "w-full", "border-b", "border-base-200", "bg-base-100", "p-2"], ["levels", "", "appearance", "outline", "class", "w-full", 4, "ngIf"], [1, "relative", "w-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "options"], ["levels", "", "appearance", "outline", 1, "w-full"], ["name", "location", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"]], template: function DeskMapComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DeskMapComponent, selectors: [["desk-map"]], inputs: { is_displayed: "is_displayed", active: "active" }, outputs: { onSelect: "onSelect" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 8, vars: 17, consts: [[1, "w-full", "border-b", "border-base-200", "bg-base-100", "p-2"], ["levels", "", "appearance", "outline", "class", "no-subscript w-full", 4, "ngIf"], [1, "relative", "w-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "options"], ["levels", "", "appearance", "outline", 1, "no-subscript", "w-full"], ["name", "location", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"]], template: function DeskMapComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 0);
         \u0275\u0275template(1, DeskMapComponent_mat_form_field_1_Template, 5, 9, "mat-form-field", 1);
@@ -148807,21 +148815,8 @@ var InviteVisitorFormComponent = class _InviteVisitorFormComponent extends Async
       ]);
       yield this.multiple ? this._bookForMany() : this._bookForOne();
       this.last_success = this._service.last_success;
-      if (this.last_success) {
-        const event = __spreadProps(__spreadValues({}, this.last_success), {
-          host: this.last_success.user_email,
-          organiser: {
-            name: this.last_success.user_name,
-            email: this.last_success.user_email
-          },
-          attendees: this.last_success.attendees.map((_3) => _3.email),
-          body: this.last_success.description,
-          location: this.last_success.asset_name
-        });
-        this.outlook_link = generateMicrosoftCalendarLink(event);
-        this.google_link = generateGoogleCalendarLink(event);
-        this.ical_link = generateCalendarFileLink(event);
-      }
+      if (this.last_success)
+        this._generateLinks();
       yield this.initFormZone();
       this.sent = true;
     });
@@ -148897,13 +148892,30 @@ var InviteVisitorFormComponent = class _InviteVisitorFormComponent extends Async
       this.loading_many = false;
     });
   }
+  _generateLinks() {
+    const event = __spreadProps(__spreadValues({}, this.last_success), {
+      host: this.last_success.user_email,
+      organiser: {
+        name: this.last_success.user_name,
+        email: this.last_success.user_email
+      },
+      attendees: this.last_success.attendees.map((_3) => _3.email),
+      body: this.last_success.description,
+      location: this._org.building.display_name || this._org.building.name
+    });
+    event.attendees.push(this.last_success.asset_id);
+    console.log("Event:", event);
+    this.outlook_link = generateMicrosoftCalendarLink(event);
+    this.google_link = generateGoogleCalendarLink(event);
+    this.ical_link = generateCalendarFileLink(event);
+  }
   static {
     this.\u0275fac = function InviteVisitorFormComponent_Factory(__ngFactoryType__) {
       return new (__ngFactoryType__ || _InviteVisitorFormComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InviteVisitorFormComponent, selectors: [["invite-visitor-form"]], inputs: { date: "date" }, outputs: { done: "done" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 7, vars: 2, consts: [["send_state", ""], ["load_state", ""], ["multi_state", ""], ["name_auto", "matAutocomplete"], ["email_auto", "matAutocomplete"], [4, "ngIf", "ngIfElse"], ["class", "relative flex max-h-full flex-col overflow-auto bg-base-100", 4, "ngIf", "ngIfElse"], [1, "relative", "flex", "max-h-full", "flex-col", "overflow-auto", "bg-base-100"], [1, "w-full", "border-b", "border-base-200", "px-4", "py-4", "sm:px-16"], [1, "text-2xl", "font-medium"], ["class", "px-4 py-4 sm:px-16", 3, "formGroup", 4, "ngIf"], [1, "sticky", "bottom-0", "border-t", "border-base-200", "bg-base-100", "px-4", "py-4", "sm:px-16"], ["btn", "", "matRipple", "", "send", "", 1, "w-full", "sm:w-auto", 3, "click"], [1, "px-4", "py-4", "sm:px-16", 3, "formGroup"], ["class", "flex flex-col", 4, "ngIf"], [1, "flex", "flex-col"], ["for", "date"], ["name", "date", "formControlName", "date"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "w-1/3", "flex-1", "flex-col"], ["for", "start-time"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "disabled", "use_24hr"], ["for", "end-time"], ["name", "end-time", "formControlName", "duration", 3, "time", "max", "use_24hr"], ["class", "flex w-full flex-col", 4, "ngIf"], ["for", "reason"], ["appearance", "outline"], ["name", "reason", "matInput", "", "formControlName", "title", 3, "placeholder"], ["for", "building"], ["name", "building", "placeholder", "Select building", 3, "ngModelChange", "ngModel", "ngModelOptions"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "w-full", "flex-col"], ["for", "host"], ["name", "host", "formControlName", "user", 1, "mb-4"], ["for", "visitor-name"], ["matInput", "", "name", "visitor-name", "formControlName", "asset_name", 3, "focus", "placeholder", "matAutocomplete"], [3, "value", "click", 4, "ngFor", "ngForOf"], ["for", "visitor-email"], ["matInput", "", "name", "visitor-email", "type", "email", "formControlName", "asset_id", 3, "focus", "placeholder", "matAutocomplete"], ["matInput", "", "name", "company", "formControlName", "company", 3, "placeholder"], [3, "click", "value"], [1, "flex", "flex-col", "leading-tight"], [1, "text-xs", "opacity-60"], ["sent", "", 1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "bg-base-100", "text-center"], [1, "m-8", "h-1/2", "w-full", "max-w-[32rem]", "flex-1", "space-y-2"], [1, "text-3xl"], ["src", "assets/icons/sent.svg", 1, "mx-auto"], ["class", "relative flex flex-col items-center space-y-4 p-4", 4, "ngIf"], [1, "w-full", "border-t", "border-base-200", "p-2"], [1, "mx-auto", "flex", "w-full", "max-w-[32rem]", "items-center", "space-x-2"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "click"], [1, "relative", "flex", "flex-col", "items-center", "space-y-4", "p-4"], ["btn", "", "matRipple", "", "name", "desk-outlook-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/outlook.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-google-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/gcal.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-ical-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], [1, "text-xl"], ["loading", "", 1, "relative", "flex", "h-full", "min-h-[18rem]", "w-full", "flex-col", "items-center", "justify-center", "overflow-hidden", "rounded"], [3, "diameter"], [1, "flex", "flex-col", 3, "formGroup"], ["formControlName", "assets", 3, "guests_only"]], template: function InviteVisitorFormComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InviteVisitorFormComponent, selectors: [["invite-visitor-form"]], inputs: { date: "date" }, outputs: { done: "done" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 7, vars: 2, consts: [["send_state", ""], ["load_state", ""], ["multi_state", ""], ["name_auto", "matAutocomplete"], ["email_auto", "matAutocomplete"], [4, "ngIf", "ngIfElse"], ["class", "relative flex max-h-full flex-col overflow-auto bg-base-100", 4, "ngIf", "ngIfElse"], [1, "relative", "flex", "max-h-full", "flex-col", "overflow-auto", "bg-base-100"], [1, "w-full", "border-b", "border-base-200", "px-4", "py-4", "sm:px-16"], [1, "text-2xl", "font-medium"], ["class", "px-4 py-4 sm:px-16", 3, "formGroup", 4, "ngIf"], [1, "sticky", "bottom-0", "border-t", "border-base-200", "bg-base-100", "px-4", "py-4", "sm:px-16"], ["btn", "", "matRipple", "", "send", "", 1, "w-full", "sm:w-auto", 3, "click"], [1, "px-4", "py-4", "sm:px-16", 3, "formGroup"], ["class", "flex flex-col", 4, "ngIf"], [1, "flex", "flex-col"], ["for", "date"], ["name", "date", "formControlName", "date"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "w-1/3", "flex-1", "flex-col"], ["for", "start-time"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "disabled", "use_24hr"], ["for", "end-time"], ["name", "end-time", "formControlName", "duration", 3, "time", "max", "use_24hr"], ["class", "flex w-full flex-col", 4, "ngIf"], ["for", "reason"], ["appearance", "outline"], ["name", "reason", "matInput", "", "formControlName", "title", 3, "placeholder"], ["for", "building"], ["name", "building", "placeholder", "Select building", 3, "ngModelChange", "ngModel", "ngModelOptions"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "w-full", "flex-col"], ["for", "host"], ["name", "host", "formControlName", "user", 1, "mb-4"], ["for", "visitor-name"], ["matInput", "", "name", "visitor-name", "formControlName", "asset_name", 3, "focus", "placeholder", "matAutocomplete"], [3, "value", "click", 4, "ngFor", "ngForOf"], ["for", "visitor-email"], ["matInput", "", "name", "visitor-email", "type", "email", "formControlName", "asset_id", 3, "focus", "placeholder", "matAutocomplete"], ["matInput", "", "name", "company", "formControlName", "company", 3, "placeholder"], [3, "click", "value"], [1, "flex", "flex-col", "leading-tight"], [1, "text-xs", "opacity-60"], ["sent", "", 1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "bg-base-100", "text-center"], [1, "z-0", "m-8", "h-1/2", "w-full", "max-w-[32rem]", "flex-1", "space-y-2", "overflow-auto"], [1, "text-3xl"], ["src", "assets/icons/sent.svg", 1, "mx-auto"], ["class", "relative flex flex-col items-center space-y-4 p-4", 4, "ngIf"], [1, "z-10", "w-full", "border-t", "border-base-200", "bg-base-100", "p-2"], [1, "mx-auto", "flex", "w-full", "max-w-[32rem]", "items-center", "space-x-2"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "click"], [1, "relative", "flex", "flex-col", "items-center", "space-y-4", "p-4"], ["btn", "", "matRipple", "", "name", "desk-outlook-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/outlook.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-google-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/gcal.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-ical-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], [1, "text-xl"], ["loading", "", 1, "relative", "flex", "h-full", "min-h-[18rem]", "w-full", "flex-col", "items-center", "justify-center", "overflow-hidden", "rounded"], [3, "diameter"], [1, "flex", "flex-col", 3, "formGroup"], ["formControlName", "assets", 3, "guests_only"]], template: function InviteVisitorFormComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275template(0, InviteVisitorFormComponent_ng_container_0_Template, 3, 4, "ng-container", 5)(1, InviteVisitorFormComponent_ng_template_1_Template, 20, 28, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(3, InviteVisitorFormComponent_ng_template_3_Template, 5, 4, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(5, InviteVisitorFormComponent_ng_template_5_Template, 7, 5, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
       }
@@ -148915,7 +148927,7 @@ var InviteVisitorFormComponent = class _InviteVisitorFormComponent extends Async
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(InviteVisitorFormComponent, { className: "InviteVisitorFormComponent", filePath: "libs/bookings/src/lib/invite-visitor-form.component.ts", lineNumber: 385 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(InviteVisitorFormComponent, { className: "InviteVisitorFormComponent", filePath: "libs/bookings/src/lib/invite-visitor-form.component.ts", lineNumber: 389 });
 })();
 
 // libs/bookings/src/lib/locker-grid.component.ts
@@ -152419,6 +152431,7 @@ export {
   from,
   of,
   throwError,
+  lastValueFrom,
   map,
   combineLatest,
   concat,
@@ -152978,4 +152991,4 @@ lodash-es/lodash.js:
    * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
    *)
 */
-//# sourceMappingURL=chunk-S4OOPIZ2.js.map
+//# sourceMappingURL=chunk-KHDZBMYR.js.map
