@@ -70555,7 +70555,7 @@ function generateMicrosoftCalendarLink(event, type2 = "office", status = "free")
   const resources = ((event.resources?.length ? event.resources : null) || [event.system]).map((_3) => _3?.email || _3);
   if (emails.length || resources.length)
     data.to = unique([...emails, ...resources]).join();
-  return type2 === "office" ? `https://outlook.office.com/calendar/0/action/compose?${toQueryString(data)}` : `https://outlook.live.com/calendar/0/action/compose?${toQueryString(data)}`;
+  return type2 === "office" ? `https://outlook.office.com/calendar/deeplink/compose?${toQueryString(data)}` : `https://outlook.live.com/calendar/deeplink/compose?${toQueryString(data)}`;
 }
 
 // libs/common/src/lib/async-handler.class.ts
@@ -77212,15 +77212,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "b1aaaaf",
-  "hash": "b1aaaaf",
+  "raw": "3d7109c",
+  "hash": "3d7109c",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "b1aaaaf",
+  "suffix": "3d7109c",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1743677872802
+  "time": 1744171129575
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -89962,13 +89962,13 @@ var AssetRequest = class {
 var IGNORE_EXT_KEYS = ["user", "booked_by", "resources", "assets", "members"];
 var RecurrenceDays;
 (function(RecurrenceDays2) {
-  RecurrenceDays2[RecurrenceDays2["SUNDAY"] = 64] = "SUNDAY";
-  RecurrenceDays2[RecurrenceDays2["MONDAY"] = 32] = "MONDAY";
-  RecurrenceDays2[RecurrenceDays2["TUESDAY"] = 16] = "TUESDAY";
+  RecurrenceDays2[RecurrenceDays2["SUNDAY"] = 1] = "SUNDAY";
+  RecurrenceDays2[RecurrenceDays2["MONDAY"] = 2] = "MONDAY";
+  RecurrenceDays2[RecurrenceDays2["TUESDAY"] = 4] = "TUESDAY";
   RecurrenceDays2[RecurrenceDays2["WEDNESDAY"] = 8] = "WEDNESDAY";
-  RecurrenceDays2[RecurrenceDays2["THURSDAY"] = 4] = "THURSDAY";
-  RecurrenceDays2[RecurrenceDays2["FRIDAY"] = 2] = "FRIDAY";
-  RecurrenceDays2[RecurrenceDays2["SATURDAY"] = 1] = "SATURDAY";
+  RecurrenceDays2[RecurrenceDays2["THURSDAY"] = 16] = "THURSDAY";
+  RecurrenceDays2[RecurrenceDays2["FRIDAY"] = 32] = "FRIDAY";
+  RecurrenceDays2[RecurrenceDays2["SATURDAY"] = 64] = "SATURDAY";
 })(RecurrenceDays || (RecurrenceDays = {}));
 var DAYS_OF_WEEK_INDEX = [
   RecurrenceDays.SUNDAY,
@@ -122505,6 +122505,8 @@ var MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         options: this.options
       });
     } catch (e) {
+      console.warn("[MAP] Update viewer error.", e);
+      return this.timeout("update_view", () => this.updateView());
     }
   }
   /** Update zoom and center position of viewer */
@@ -122518,6 +122520,8 @@ var MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         options: this.options
       });
     } catch (e) {
+      console.warn("[MAP] Update view display error.", e);
+      return this.timeout("update_display", () => this.updateDisplay());
     }
   }
   createView() {
@@ -138108,7 +138112,7 @@ function fromBookingRecurrence(r) {
   if (r.recurrence_end) {
     recurr.end_date = r.recurrence_end * 1e3;
   }
-  if (r.recurrence_type === "weekly" && r.recurrence_days) {
+  if (r.recurrence_type === "daily" && r.recurrence_days) {
     const weekdays = /* @__PURE__ */ new Set();
     for (let i = 0; i < 7; i++) {
       if (r.recurrence_days & 1 << 6 - i) {
@@ -138122,7 +138126,7 @@ function fromBookingRecurrence(r) {
     if (r.recurrence_days) {
       const weekdays = /* @__PURE__ */ new Set();
       for (let i = 0; i < 7; i++) {
-        if (r.recurrence_days & 1 << 6 - i) {
+        if (r.recurrence_days & DAYS_OF_WEEK_INDEX[i]) {
           weekdays.add(i);
         }
       }
@@ -138148,9 +138152,10 @@ function toBookingRecurrence(r) {
   if (r.type === "weekly" && r.weekdays) {
     let days = 0;
     r.weekdays.forEach((day) => {
-      days |= 1 << 6 - day;
+      days |= DAYS_OF_WEEK_INDEX[day];
     });
     booking.recurrence_days = days;
+    booking.recurrence_type = "daily";
   }
   if ((r.type === "monthly" || r.type === "yearly") && r.weekdays) {
     let days = 0;
@@ -138353,7 +138358,7 @@ var RecurrenceFieldComponent = class _RecurrenceFieldComponent {
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RecurrenceFieldComponent, { className: "RecurrenceFieldComponent", filePath: "libs/form-fields/src/lib/recurrence-field.component.ts", lineNumber: 263 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RecurrenceFieldComponent, { className: "RecurrenceFieldComponent", filePath: "libs/form-fields/src/lib/recurrence-field.component.ts", lineNumber: 267 });
 })();
 
 // libs/catering/src/lib/catering-item.class.ts
@@ -143198,6 +143203,6400 @@ var CateringItemModalComponent = class _CateringItemModalComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CateringItemModalComponent, { className: "CateringItemModalComponent", filePath: "libs/catering/src/lib/catering-item-modal.component.ts", lineNumber: 313 });
 })();
 
+// libs/payments/src/lib/card-input-field.component.ts
+var _c060 = ["input"];
+function CardInputFieldComponent_img_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 20);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("src", "assets/icons/" + ctx_r1.card_type + ".svg", \u0275\u0275sanitizeUrl);
+  }
+}
+function CardInputFieldComponent_mat_option_23_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-option", 21);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const item_r3 = ctx.$implicit;
+    \u0275\u0275property("value", item_r3[0]);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate2(" ", item_r3[1], " (", item_r3[0], ") ");
+  }
+}
+function CardInputFieldComponent_mat_option_31_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-option", 21);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const item_r4 = ctx.$implicit;
+    \u0275\u0275property("value", item_r4);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(item_r4);
+  }
+}
+var BLANK_CARD = { card_number: "                ", cardholder: "", cvv: "" };
+var DATE_PIPE = new DatePipe("en-us", "");
+var CardInputFieldComponent = class _CardInputFieldComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this.details = new FormGroup({
+      card_number: new FormControl(Array(16).fill("X").join()),
+      cardholder: new FormControl(""),
+      exp_month: new FormControl(""),
+      exp_year: new FormControl(""),
+      cvv: new FormControl("", [
+        Validators.minLength(3),
+        Validators.maxLength(4)
+      ])
+    });
+    this.disabled = false;
+    this.months = Array(12).fill(0).map((_3, idx) => [
+      DATE_PIPE.transform(setMonth(Date.now(), idx), "MM"),
+      DATE_PIPE.transform(setMonth(Date.now(), idx), "MMM")
+    ]);
+    this.years = Array(12).fill(0).map((_3, idx) => DATE_PIPE.transform(addYears(Date.now(), idx), "yyyy"));
+    this.digits = Array(16).fill(0);
+    this._index = 0;
+    this.registerOnChange = (fn3) => this._onChange = fn3;
+    this.registerOnTouched = (fn3) => this._onTouch = fn3;
+    this.setDisabledState = (s) => this.disabled = s;
+  }
+  get is_amex() {
+    const no2 = this.details.value?.card_number || "";
+    return no2.startsWith("3");
+  }
+  get card_type() {
+    const no2 = this.details.value?.card_number || "";
+    if (no2.startsWith("3"))
+      return "amex";
+    if (no2.startsWith("4"))
+      return "visa";
+    if (no2.startsWith("5"))
+      return "mastercard";
+    return "";
+  }
+  get card_display() {
+    let no2 = this.details.value?.card_number || "";
+    if (this.card_focused)
+      no2 = no2.substring(0, this._index) + "\u2BD0" + no2.substring(this._index + 1);
+    return this.is_amex ? `${no2.substring(0, 4)}-${no2.substring(4, 10)}-${no2.substring(10)}` : `${no2.substring(0, 4)}-${no2.substring(4, 8)}-${no2.substring(8, 12)}-${no2.substring(12)}`;
+  }
+  get card_focused() {
+    return document.activeElement === this._input_el.nativeElement || document.activeElement === this._input_el.nativeElement.parentElement;
+  }
+  ngOnInit() {
+    this.subscription("changes", this.details.valueChanges.subscribe((v4) => this.timeout("update", () => this.setValue(this.details.getRawValue()))));
+  }
+  focusInput() {
+    this._input_el.nativeElement.focus();
+    this._index = this._input_el.nativeElement.selectionStart || 0;
+  }
+  onInput(event) {
+    if (!event || !this.card_focused)
+      return;
+    const idx = this._index;
+    if (idx < 0 || idx > 16)
+      return;
+    let card_number = this.details.value.card_number;
+    if ((event.code.startsWith("Digit") || event.code.startsWith("Numpad")) && idx < (this.is_amex ? 15 : 16)) {
+      card_number = card_number.substring(0, idx) + event.key + card_number.substring(idx + 1);
+      this.details.patchValue({ card_number });
+      this._focusChange(idx, 1);
+    } else if (event.code === "Backspace" && idx > 0) {
+      let card_number2 = this.details.value.card_number;
+      card_number2 = card_number2.substring(0, idx) + " " + card_number2.substring(idx + 1);
+      this.details.patchValue({ card_number: card_number2 });
+      this._focusChange(idx, -1);
+    } else if (event.code === "ArrowLeft") {
+      this._focusChange(idx, -1);
+    } else if (event.code === "ArrowRight" && card_number[idx] !== " ") {
+      this._focusChange(idx, 1);
+    }
+  }
+  _focusChange(idx, dir) {
+    this._index = Math.min(16, Math.max(0, idx + dir));
+  }
+  /**
+   * Update the form field value
+   * @param new_value New value to set on the form field
+   */
+  setValue(new_value) {
+    if (this._onChange)
+      this._onChange(new_value);
+  }
+  /**
+   * Update local value when form control value is changed
+   * @param value The new value for the component
+   */
+  writeValue(value) {
+    this.details.patchValue(value || BLANK_CARD);
+  }
+  static {
+    this.\u0275fac = /* @__PURE__ */ (() => {
+      let \u0275CardInputFieldComponent_BaseFactory;
+      return function CardInputFieldComponent_Factory(__ngFactoryType__) {
+        return (\u0275CardInputFieldComponent_BaseFactory || (\u0275CardInputFieldComponent_BaseFactory = \u0275\u0275getInheritedFactory(_CardInputFieldComponent)))(__ngFactoryType__ || _CardInputFieldComponent);
+      };
+    })();
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CardInputFieldComponent, selectors: [["card-input-field"]], viewQuery: function CardInputFieldComponent_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c060, 7);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._input_el = _t4.first);
+      }
+    }, features: [\u0275\u0275ProvidersFeature([
+      {
+        provide: NG_VALUE_ACCESSOR,
+        /* istanbul ignore next */
+        useExisting: forwardRef(() => _CardInputFieldComponent),
+        multi: true
+      }
+    ]), \u0275\u0275InheritDefinitionFeature], decls: 41, vars: 6, consts: [["input", ""], [3, "keyup", "formGroup"], [1, "flex", "flex-col"], ["for", "card-number"], ["tabindex", "0", 1, "relative", "mb-4", "flex", "h-12", "w-full", "items-center", "rounded", "border", "border-base-200", "p-2", "font-mono", "focus-within:border-base-200", "focus-within:shadow", 3, "focus"], [1, "flex-1"], ["type", "tel", "maxlength", "17", 1, "absolute", "hidden", 3, "keydown", "value"], ["class", "h-8", 3, "src", 4, "ngIf"], [1, "flex", "flex-1", "flex-col"], ["for", "cardholder"], ["appearance", "outline"], ["name", "cardholder", "matInput", "", "placeholder", "Mr John Smith", "formControlName", "cardholder"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "w-1/4", "flex-1", "flex-col"], ["placeholder", "MM", "formControlName", "exp_month"], [3, "value", 4, "ngFor", "ngForOf"], ["placeholder", "YYYY", "formControlName", "exp_year"], ["for", "cvv"], ["appearance", "outline", 1, "w-20"], ["name", "cvv", "matInput", "", "formControlName", "cvv", "maxlength", "4"], [1, "h-8", 3, "src"], [3, "value"]], template: function CardInputFieldComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "form", 1);
+        \u0275\u0275listener("keyup", function CardInputFieldComponent_Template_form_keyup_0_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.onInput($event));
+        }, false, \u0275\u0275resolveWindow);
+        \u0275\u0275elementStart(1, "div", 2)(2, "label", 3);
+        \u0275\u0275text(3, "Card Number");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(4, "div", 4);
+        \u0275\u0275listener("focus", function CardInputFieldComponent_Template_div_focus_4_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.focusInput());
+        });
+        \u0275\u0275elementStart(5, "pre", 5);
+        \u0275\u0275text(6);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(7, "input", 6, 0);
+        \u0275\u0275listener("keydown", function CardInputFieldComponent_Template_input_keydown_7_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(false);
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(9, CardInputFieldComponent_img_9_Template, 1, 1, "img", 7);
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(10, "div", 8)(11, "label", 9);
+        \u0275\u0275text(12, "Name on Card");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(13, "mat-form-field", 10);
+        \u0275\u0275element(14, "input", 11);
+        \u0275\u0275elementStart(15, "mat-error");
+        \u0275\u0275text(16, "Cardholder name is required");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(17, "div", 12)(18, "div", 13)(19, "label", 9);
+        \u0275\u0275text(20, "Expiry Month");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(21, "mat-form-field", 10)(22, "mat-select", 14);
+        \u0275\u0275template(23, CardInputFieldComponent_mat_option_23_Template, 2, 3, "mat-option", 15);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(24, "mat-error");
+        \u0275\u0275text(25, "Expiry month is required");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(26, "div", 13)(27, "label", 9);
+        \u0275\u0275text(28, "Expiry Year");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(29, "mat-form-field", 10)(30, "mat-select", 16);
+        \u0275\u0275template(31, CardInputFieldComponent_mat_option_31_Template, 2, 2, "mat-option", 15);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(32, "mat-error");
+        \u0275\u0275text(33, "Expiry year is required");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(34, "div", 2)(35, "label", 17);
+        \u0275\u0275text(36, "CVV");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(37, "mat-form-field", 18);
+        \u0275\u0275element(38, "input", 19);
+        \u0275\u0275elementStart(39, "mat-error");
+        \u0275\u0275text(40, "Invalid security code");
+        \u0275\u0275elementEnd()()()()();
+      }
+      if (rf & 2) {
+        \u0275\u0275property("formGroup", ctx.details);
+        \u0275\u0275advance(6);
+        \u0275\u0275textInterpolate(ctx.card_display);
+        \u0275\u0275advance();
+        \u0275\u0275property("value", ctx.details.value.card_number == null ? null : ctx.details.value.card_number.trim());
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.card_type);
+        \u0275\u0275advance(14);
+        \u0275\u0275property("ngForOf", ctx.months);
+        \u0275\u0275advance(8);
+        \u0275\u0275property("ngForOf", ctx.years);
+      }
+    }, dependencies: [MatFormFieldModule, MatFormField, MatError, MatInputModule, MatInput, MatSelectModule, MatSelect, MatOption, ReactiveFormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, MaxLengthValidator, FormGroupDirective, FormControlName], styles: ["\n\nmat-form-field[_ngcontent-%COMP%] {\n  height: 3.25rem;\n}\n/*# sourceMappingURL=card-input-field.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CardInputFieldComponent, { className: "CardInputFieldComponent", filePath: "libs/payments/src/lib/card-input-field.component.ts", lineNumber: 138 });
+})();
+
+// libs/payments/src/lib/payment-modal.component.ts
+function PaymentModalComponent_div_0_ng_container_1_ng_container_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "date");
+    \u0275\u0275pipe(3, "date");
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate2(" between ", \u0275\u0275pipeBind2(2, 2, ctx_r1.details.date, "shortTime"), " and ", \u0275\u0275pipeBind2(3, 5, ctx_r1.details.date + ctx_r1.details.duration * 60 * 1e3, "shortTime"), " ");
+  }
+}
+function PaymentModalComponent_div_0_ng_container_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "main", 5)(2, "h2", 6);
+    \u0275\u0275text(3, "Booking Payment");
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(4, "img", 7);
+    \u0275\u0275elementStart(5, "p", 8);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "date");
+    \u0275\u0275template(8, PaymentModalComponent_div_0_ng_container_1_ng_container_8_Template, 4, 8, "ng-container", 9);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(9, "p", 10);
+    \u0275\u0275text(10, "You booking will cost:");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(11, "p", 11)(12, "strong");
+    \u0275\u0275text(13);
+    \u0275\u0275pipe(14, "currency");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(15, "card-input-field", 12);
+    \u0275\u0275twoWayListener("ngModelChange", function PaymentModalComponent_div_0_ng_container_1_Template_card_input_field_ngModelChange_15_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      \u0275\u0275twoWayBindingSet(ctx_r1.card_details, $event) || (ctx_r1.card_details = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(16, "footer", 13)(17, "button", 14);
+    \u0275\u0275listener("click", function PaymentModalComponent_div_0_ng_container_1_Template_button_click_17_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.processPayment());
+    });
+    \u0275\u0275text(18, " Make Payment ");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(19, "button", 15)(20, "i", 16);
+    \u0275\u0275text(21, "close");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate3(" You are requesting a ", ctx_r1.details.type, " booking in ", ctx_r1.details.resource_name, " for ", \u0275\u0275pipeBind2(7, 6, ctx_r1.details.date, "mediumDate"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", !ctx_r1.details.all_day);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(14, 9, ctx_r1.details.amount / 100, ctx_r1.code));
+    \u0275\u0275advance(2);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r1.card_details);
+  }
+}
+function PaymentModalComponent_div_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 3);
+    \u0275\u0275template(1, PaymentModalComponent_div_0_ng_container_1_Template, 22, 12, "ng-container", 4);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    const success_state_r3 = \u0275\u0275reference(5);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.success)("ngIfElse", success_state_r3);
+  }
+}
+function PaymentModalComponent_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 17);
+    \u0275\u0275element(1, "mat-spinner", 18);
+    \u0275\u0275elementStart(2, "p");
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 1, ctx_r1.loading));
+  }
+}
+function PaymentModalComponent_ng_template_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "main", 19)(1, "h2", 6);
+    \u0275\u0275text(2, "Payment Successful");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "h3", 20);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "p");
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "currency");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "p");
+    \u0275\u0275text(9);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "p");
+    \u0275\u0275text(11);
+    \u0275\u0275pipe(12, "date");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(13, "p");
+    \u0275\u0275text(14);
+    \u0275\u0275pipe(15, "date");
+    \u0275\u0275pipe(16, "date");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(17, "img", 21);
+    \u0275\u0275elementStart(18, "footer", 22)(19, "button", 23);
+    \u0275\u0275text(20, " Great, thanks. ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" Ref #", ctx_r1.transaction_id, " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind2(7, 6, ctx_r1.details.amount / 100, ctx_r1.code), " paid.");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1("", ctx_r1.details.resource_name, " booked.");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(12, 9, ctx_r1.details.date, "mediumDate"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(15, 12, ctx_r1.details.date, "shortTime"), " and ", \u0275\u0275pipeBind2(16, 15, ctx_r1.details.date + ctx_r1.details.duration * 60 * 1e3, "shortTime"), " ");
+  }
+}
+var PaymentModalComponent = class _PaymentModalComponent {
+  get code() {
+    return this._org.currency_code;
+  }
+  constructor(_data, _org) {
+    this._data = _data;
+    this._org = _org;
+    this.event = new EventEmitter();
+    this.details = this._data;
+    this.loading = this._data.loading;
+    this.success = false;
+    this.transaction_id = "12345678";
+  }
+  processPayment() {
+    return __async(this, null, function* () {
+      if (!this.card_details || !this._validCardDetails())
+        return;
+      this.event.emit(this.card_details);
+      yield this._data.makePayment(this.card_details);
+      this.success = true;
+    });
+  }
+  _validCardDetails() {
+    return (this.card_details?.cardholder.length || 0) > 0 && (this.card_details?.cvv.length || 0) >= 3;
+  }
+  static {
+    this.\u0275fac = function PaymentModalComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _PaymentModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(OrganisationService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PaymentModalComponent, selectors: [["payment-modal"]], outputs: { event: "event" }, decls: 6, vars: 4, consts: [["load_state", ""], ["success_state", ""], ["class", "relative max-h-[100vh] overflow-auto", 4, "ngIf", "ngIfElse"], [1, "relative", "max-h-[100vh]", "overflow-auto"], [4, "ngIf", "ngIfElse"], [1, "relative", "flex", "w-[24rem]", "flex-col", "items-center", "space-y-2", "px-4", "pt-8"], [1, "text-2xl", "font-medium"], ["src", "assets/icons/cost.svg", 1, "w-1/2"], [1, "pb-2", "text-center", "text-sm"], [4, "ngIf"], [1, "text-sm"], [1, "text-center", "text-lg", "font-medium"], [1, "w-full", 3, "ngModelChange", "ngModel"], [1, "p-4"], ["matRipple", "", 1, "w-full", 3, "click"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "left-1", "top-1"], [1, "material-icons", "text-2xl"], [1, "flex", "h-full", "w-full", "flex-col", "items-center", "justify-center", "p-8"], ["diameter", "32"], [1, "relative", "flex", "w-[24rem]", "flex-col", "px-8", "pt-8"], [1, "mb-2", "text-xl", "font-medium"], ["src", "assets/icons/payment-confirmed.svg", 1, "w-full"], [1, "border-t", "border-base-200", "p-4"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "w-full"]], template: function PaymentModalComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275template(0, PaymentModalComponent_div_0_Template, 2, 2, "div", 2);
+        \u0275\u0275pipe(1, "async");
+        \u0275\u0275template(2, PaymentModalComponent_ng_template_2_Template, 5, 3, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(4, PaymentModalComponent_ng_template_4_Template, 21, 18, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        const load_state_r4 = \u0275\u0275reference(3);
+        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(1, 2, ctx.loading))("ngIfElse", load_state_r4);
+      }
+    }, dependencies: [
+      CardInputFieldComponent,
+      MatProgressSpinnerModule,
+      MatProgressSpinner,
+      MatRippleModule,
+      MatRipple
+    ], encapsulation: 2 });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PaymentModalComponent, { className: "PaymentModalComponent", filePath: "libs/payments/src/lib/payment-modal.component.ts", lineNumber: 118 });
+})();
+
+// libs/payments/src/lib/payments.service.ts
+var STRIPE_MODULE = "Payment";
+var PaymentsService = class _PaymentsService {
+  get enabled() {
+    return !!this._org.module("payments", STRIPE_MODULE);
+  }
+  constructor(_org, _settings, _dialog) {
+    this._org = _org;
+    this._settings = _settings;
+    this._dialog = _dialog;
+    this._loading = new BehaviorSubject("");
+    this._active_card = new BehaviorSubject("");
+    this.loading = this._loading.asObservable();
+    this.payment_sources = of(1).pipe(switchMap(() => {
+      const mod = this._org.module("payments", STRIPE_MODULE);
+      if (!mod)
+        return of([]);
+      return mod.execute("list_payment_methods", ["card"]);
+    }), tap((_3) => _3[0] ? this._active_card.next(_3[0].id) : ""), shareReplay(1));
+  }
+  makePayment(details) {
+    return __async(this, null, function* () {
+      if (!this._org.module("payments", STRIPE_MODULE))
+        throw "Payments not enabled";
+      const [cost, period] = yield this._getCostOfProduct(details?.type).catch((_3) => [0, 60]);
+      console.log("Cost:", cost, period);
+      if (cost <= 0)
+        return;
+      let customer_id = this._settings.get("STRIPE_Customer_ID");
+      if (!customer_id)
+        customer_id = yield this._newCustomerID();
+      this._settings.saveUserSetting("STRIPE_Customer_ID", customer_id);
+      const amount = cost * (details.duration / period);
+      let result = void 0;
+      const makePayment = (c) => __async(this, null, function* () {
+        result = yield this._processPayment(amount, customer_id, c).catch((e) => {
+          this._loading.next("");
+          throw e;
+        });
+      });
+      const data = __spreadProps(__spreadValues({}, details), {
+        rate: `$${(cost / 100).toFixed(2)} per hour`,
+        amount,
+        makePayment,
+        loading: this.loading
+      });
+      const ref = this._dialog.open(PaymentModalComponent, { data });
+      yield ref.afterClosed().toPromise();
+      return result;
+    });
+  }
+  _addPaymentMethod(card) {
+    return __async(this, null, function* () {
+      const mod = this._org.module("payments", STRIPE_MODULE);
+      if (!mod)
+        throw "Unable to load module";
+      const payment_method = yield mod.execute("add_payment_method", [
+        "card",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        card
+      ]);
+      return payment_method.id || payment_method;
+    });
+  }
+  _getCostOfProduct(type2) {
+    return __async(this, null, function* () {
+      const price = [0, 60];
+      const mod = this._org.module("payments", STRIPE_MODULE);
+      if (!mod)
+        return price;
+      const product_list = yield mod.execute("get_product_prices", [
+        null,
+        null,
+        type2
+      ]);
+      if (!product_list.length)
+        return price;
+      return product_list;
+    });
+  }
+  _processPayment(amount, customer_id, card_details) {
+    return __async(this, null, function* () {
+      this._loading.next("Checking payment method...");
+      console.log("Getting payment method...");
+      const source = card_details ? yield this._addPaymentMethod(card_details) : this._active_card.getValue();
+      if (!source)
+        throw "No payment source selected";
+      this._loading.next("Processing payment...");
+      console.log("Processing payment...");
+      const mod = this._org.module("payments", STRIPE_MODULE);
+      if (!mod)
+        throw "Unable to load module";
+      const id = yield mod.execute("create_payment_intent", [
+        amount,
+        this._org.building.currency || "USD",
+        null,
+        null,
+        customer_id,
+        null,
+        null,
+        null,
+        currentUser()?.email
+      ]);
+      if (!id)
+        throw "Failed to create payment";
+      console.log("Confirming payment...");
+      yield mod.execute("confirm_payment_intent", [id, source]);
+      this._loading.next("");
+      return {
+        success: true,
+        state: "approved",
+        invoice_id: id,
+        amount,
+        created_at: Date.now(),
+        updated_at: Date.now()
+      };
+    });
+  }
+  _newCustomerID() {
+    return __async(this, null, function* () {
+      const mod = this._org.module("payments", STRIPE_MODULE);
+      if (!mod)
+        throw "Unable to load module";
+      const user = currentUser();
+      const id = yield mod.execute("create_customer", [
+        0,
+        null,
+        null,
+        null,
+        `${user.id}|${user.name}|FromPlaceOS`,
+        user.email
+      ]);
+      return id;
+    });
+  }
+  static {
+    this.\u0275fac = function PaymentsService_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _PaymentsService)(\u0275\u0275inject(OrganisationService), \u0275\u0275inject(SettingsService), \u0275\u0275inject(MatDialog));
+    };
+  }
+  static {
+    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _PaymentsService, factory: _PaymentsService.\u0275fac, providedIn: "root" });
+  }
+};
+
+// libs/events/src/lib/event-form.service.ts
+var BOOKING_URLS2 = [
+  "book/rooms",
+  "book/spaces",
+  "book/meeting",
+  "schedule/view",
+  "confirm/success",
+  "upcoming"
+];
+var MINUTES = 60 * 1e3;
+var OldEventFormService = class _OldEventFormService extends AsyncHandler {
+  get options_value() {
+    return this._options.getValue();
+  }
+  get is_multiday() {
+    return this._event.getValue()?.duration > 24 * 60;
+  }
+  get view() {
+    return this._view.getValue();
+  }
+  get form() {
+    return this._form;
+  }
+  get event() {
+    return this._event.getValue();
+  }
+  get favorite_spaces() {
+    return this._settings.get("favourite_spaces") || [];
+  }
+  get has_calendar() {
+    return this._settings.get("app.events.use_bookings") !== true;
+  }
+  constructor(_org, _router, _payments, _settings, _assets, _dialog) {
+    super();
+    this._org = _org;
+    this._router = _router;
+    this._payments = _payments;
+    this._settings = _settings;
+    this._assets = _assets;
+    this._dialog = _dialog;
+    this._view = new BehaviorSubject("form");
+    this._options = new BehaviorSubject({
+      zone_ids: [],
+      features: []
+    });
+    this._form = generateEventForm(void 0, this._settings);
+    this._date = new BehaviorSubject(Date.now());
+    this._event = new BehaviorSubject(null);
+    this._loading = new BehaviorSubject("");
+    this._changed = new BehaviorSubject(0);
+    this.last_success = new CalendarEvent(JSON.parse(sessionStorage?.getItem("PLACEOS.last_booked_event") || "{}"));
+    this.loading = this._loading.asObservable();
+    this.options = this._options.asObservable();
+    this.booking_rules = this._org.building_list.pipe(switchMap((list2) => Promise.all(list2.map((bld) => hu(bld.id, "room_booking_rules").pipe(catchError(() => of({ details: [] })), map((_3) => ({
+      id: bld.id,
+      details: _3.details instanceof Array ? _3.details : []
+    })))?.toPromise()))), map((building_rules) => {
+      const mapping = {};
+      for (const rules of building_rules) {
+        mapping[rules.id] = rules.details;
+      }
+      return mapping;
+    }), shareReplay(1));
+    this.spaces = combineLatest([
+      this._options.pipe(distinctUntilKeyChanged("zone_ids")),
+      this._org.active_region.pipe(distinctUntilKeyChanged("id")),
+      this._org.active_building.pipe(filter((_3) => !!_3), distinctUntilKeyChanged("id"))
+    ]).pipe(debounceTime(300), tap((_3) => this.unsubWith("bind:")), switchMap(([{ zone_ids }]) => {
+      this._loading.next(i18n("CALENDAR_EVENT.SPACE_LOADING"));
+      const use_region = this._settings.get("app.use_region");
+      if (!zone_ids?.length) {
+        zone_ids = [
+          (use_region ? this._org.region?.id : this._org.building?.id) || this._org.building?.id
+        ];
+      }
+      return forkJoin(zone_ids.map((id) => requestSpacesForZone(id).pipe(catchError(() => of([])))));
+    }), map((l2) => flatten2(l2)), tap((_3) => this._loading.next("")), shareReplay(1));
+    this.features = this.spaces.pipe(map((l2) => unique(flatten2(l2.map((_3) => _3.features)))));
+    this.room_alerts = this._changed.pipe(switchMap((_3) => hu(this._org.organisation.id, "room_alerts")), map((r) => r.details), startWith({}), shareReplay(1));
+    this.filtered_spaces = combineLatest([
+      this.spaces,
+      this.options
+    ]).pipe(map(([spaces, { show_fav, features, capacity }]) => spaces.filter((s) => {
+      const domain = (currentUser()?.email || "@").split("@")[1];
+      const zone = (this._settings.get("app.events.restrict_spaces") || {})[domain];
+      const limit_map = this._settings.get("app.events.limit_spaces") || {};
+      const limited_zones = Object.keys(limit_map);
+      const zone_limit = s.zones.find((_3) => limited_zones.includes(_3));
+      return s.bookable && (!zone || s.zones.includes(zone)) && (!zone_limit || limit_map[zone_limit] === domain) && (!show_fav || this.favorite_spaces.includes(s.id)) && features.every((f2) => s.features.includes(f2)) && s.capacity >= Math.max(0, capacity || 0);
+    }).slice(0, Math.min(100, spaces.length))), shareReplay(1));
+    this._space_bookings = combineLatest([
+      this.spaces,
+      this.filtered_spaces
+    ]).pipe(distinctUntilChanged(([s1], [s2]) => s1 !== s2), switchMap(([_3, list2]) => {
+      return combineLatest((list2 || []).map((_4) => {
+        const binding = Oa(_4.id, "Bookings").binding("bookings");
+        const obs = binding.listen().pipe(map((_5) => (_5 || []).map((i) => new CalendarEvent(i))));
+        if (!this.hasSubscription(`bind:${_4.id}`)) {
+          this.subscription(`bind:${_4.id}`, binding.bind());
+        }
+        return obs;
+      }));
+    }), shareReplay(1));
+    this.current_available_spaces = combineLatest([
+      this.filtered_spaces,
+      this._space_bookings,
+      this.booking_rules,
+      merge(this.form.valueChanges, timer(1e3)),
+      this._changed
+    ]).pipe(debounceTime(300), map(([list2, bookings, booking_rules]) => {
+      this._loading.next(i18n("CALENDAR_EVENT.SPACE_STATUS_LOADING"));
+      const { ical_uid, date, duration, all_day } = this._form.getRawValue();
+      list2 = filterResourcesFromRules(list2, { date, duration, resource: null, host: currentUser() }, booking_rules[this._org.building?.id] || []);
+      return (list2 || []).filter((_3, idx) => {
+        const start = all_day ? startOfDay(date).valueOf() : date;
+        const end = start + (all_day ? Math.max(24 * 60, duration) : duration) * MINUTES;
+        let booking_list = bookings[idx] || [];
+        if (this.last_success?.system?.id === _3.id) {
+          booking_list = [...booking_list, this.last_success];
+        }
+        return periodInFreeTimeSlot(start, end, booking_list.filter((_4) => _4.ical_uid !== ical_uid));
+      }).sort((a, b2) => a.capacity - b2.capacity);
+    }), tap(() => this._loading.next("")), shareReplay(1));
+    this.future_available_spaces = combineLatest([
+      this.filtered_spaces,
+      this.booking_rules,
+      this.form.valueChanges.pipe(debounceTime(400), startWith({}))
+    ]).pipe(filter(() => !this._loading.getValue()), debounceTime(500), switchMap(([spaces, booking_rules]) => {
+      if (!spaces.length)
+        return of([]);
+      this._loading.next(i18n("CALENDAR_EVENT.SPACE_STATUS_LOADING"));
+      const { date, duration, all_day } = this._form.getRawValue();
+      const availability_method = this.has_calendar ? querySpaceAvailability : queryResourceAvailability;
+      spaces = filterResourcesFromRules(spaces, { date, duration, resource: null, host: currentUser() }, booking_rules[this._org.building?.id] || []);
+      return availability_method(spaces.map(({ id }) => id), all_day ? startOfDay(date).valueOf() : date, all_day ? Math.max(24 * 60, duration) : duration, this?.event?.resources[0]?.id || this.event?.system?.id || this.event?.id || void 0, void 0, [this.event?.date, this.event?.duration]).pipe(map((availability) => {
+        let list2 = spaces.filter((_3, i) => availability[i]);
+        list2 = filterResourcesFromRules(list2, {
+          date,
+          duration,
+          resource: null,
+          host: currentUser()
+        }, booking_rules[this._org.building?.id] || []);
+        return list2;
+      }), catchError(() => of([])));
+    }), tap(() => this._loading.next("")), shareReplay(1));
+    this.available_spaces = this._date.pipe(switchMap((d) => {
+      const diff = Math.abs(differenceInDays(d, Date.now()));
+      const cache_length = this._settings.get("app.events.cache_duration_in_days") || 14;
+      return diff < cache_length ? this.current_available_spaces : this.future_available_spaces;
+    }), shareReplay(1));
+    this.cancelPostForm = () => this.unsub("post-event-form");
+    this._space_pipe = new SpacePipe(this._org);
+    this.subscription("router.events", this._router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd && !BOOKING_URLS2.some((_3) => event.url.includes(_3))) {
+        this.clearForm();
+      }
+    }));
+    const previous = {};
+    this.subscription("form_change", this._form.valueChanges.subscribe(({ date, duration }) => {
+      if (date && date !== previous["date"] || duration && duration !== previous["duration"]) {
+        this._assets.setOptions({
+          date: this.form.value.date,
+          duration: this.form.value.duration
+        });
+        previous["date"] = date;
+        previous["duration"] = duration;
+      }
+      if (date && date !== this._date.getValue()) {
+        this._date.next(date);
+      }
+      this.storeForm();
+    }));
+  }
+  listenForStatusChanges() {
+    this.subscription("status:rooms", this.available_spaces.subscribe());
+  }
+  setView(value) {
+    this.timeout("set_view", () => this._view.next(value), 50);
+  }
+  setOptions(value) {
+    this._options.next(__spreadValues(__spreadValues({}, this._options.getValue()), value));
+  }
+  newForm() {
+    return __async(this, arguments, function* (event = new CalendarEvent({
+      all_day: this._settings.get("app.events.all_day_default")
+    })) {
+      this._event.next(event);
+      if (event.recurring_event_id) {
+        const master = yield showEvent(event.recurring_event_id)?.toPromise().catch(() => null);
+        if (master) {
+          this._event.getValue().recurrence = __spreadProps(__spreadValues({}, master.recurrence), {
+            _pattern: master.recurrence.pattern
+          });
+        }
+      }
+      this._assets.setOptions({
+        ignore: flatten2(event.linked_bookings?.map((_3) => _3.asset_ids || [_3.asset_id]) || [])
+      });
+      for (const idx in event.resources) {
+        const space = event.resources[idx];
+        event.resources[idx] = yield this._space_pipe.transform(space.id || space.email);
+      }
+      this._date.next(event.date);
+      this.timeout("post-event-form", () => {
+        this._form.patchValue({
+          date: event.date || this._form.value.date
+        });
+      }, 1e3);
+      this.resetForm();
+    });
+  }
+  resetForm() {
+    this._form.reset();
+    const event = this._event.getValue() || { extension_data: {} };
+    this._assets.setOptions({
+      ignore: flatten2(event.linked_bookings?.map((_3) => _3.asset_ids || [_3.asset_id]) || [])
+    });
+    const has_catering = !!event.extension_data.catering[0];
+    this._form.patchValue(__spreadProps(__spreadValues(__spreadValues({}, event.extension_data), event), {
+      duration: event.duration >= 12 * 60 ? 30 : event.duration,
+      organiser: event?.organiser || currentUser() || new User({ email: event?.host }),
+      catering_charge_code: event.extension_data.catering[0]?.charge_code || (event.id && has_catering ? " " : ""),
+      assets: (event.extension_data.assets || []).map((_3) => new AssetRequest(__spreadProps(__spreadValues({}, _3), { event })))
+    }));
+    this._form.patchValue({
+      date: event.date || this._form.value.date,
+      date_end: event.date_end || this._form.value.date_end
+    });
+    this._options.next({ features: [] });
+    this.storeForm();
+  }
+  clearForm() {
+    sessionStorage.removeItem("PLACEOS.event_form");
+    this.unsubWith("status:");
+    this.unsubWith("bind:");
+    this.newForm();
+  }
+  storeForm() {
+    sessionStorage.setItem("PLACEOS.event_form", JSON.stringify(this._form.getRawValue() || {}));
+  }
+  loadForm() {
+    if (!sessionStorage.getItem("PLACEOS.event_form")) {
+      return this.newForm();
+    }
+    const form_data = JSON.parse(sessionStorage.getItem("PLACEOS.event_form") || "{}");
+    if (form_data.id && form_data.id !== this._event.getValue()?.id) {
+      showEvent(form_data.id).subscribe((event) => {
+        this._event.next(event);
+        this._assets.setOptions({
+          ignore: flatten2(event.linked_bookings?.map((_3) => _3.asset_ids || [_3.asset_id]) || [])
+        });
+      });
+    }
+    this._form.patchValue(__spreadValues({}, form_data));
+  }
+  openEventLinkModal(force = false) {
+    const form = this._form;
+    form.markAllAsTouched();
+    if (!form.valid && !force)
+      return;
+    const event = new CalendarEvent(__spreadProps(__spreadValues({}, form.getRawValue()), { assets: [] }));
+    const ref = this._dialog.open(EventLinkModalComponent, { data: event });
+    ref.afterClosed().subscribe((d) => d ? this._router.navigate(["/"]) : "");
+  }
+  postForm(force = false, ignore_space_check = [], ignore_owner = false) {
+    return new Promise((resolve, reject) => __async(this, null, function* () {
+      this._loading.next("Creating event...");
+      const form = this._form;
+      form.markAllAsTouched();
+      const event = this.event || new CalendarEvent();
+      if (!form.valid && !force) {
+        this._loading.next("");
+        return reject(i18n("FORM.INVALID_FIELDS", {
+          field_list: getInvalidFields(form).join(", ")
+        }));
+      }
+      const ical_uid = this.event?.ical_uid;
+      let value = this._form.getRawValue();
+      const { id, host, date, duration, creator, all_day, assets, recurrence } = value;
+      let spaces = form.get("resources")?.value || [];
+      if (ignore_space_check.length) {
+        spaces = spaces.filter((_3) => !ignore_space_check.includes(_3.email) && !ignore_space_check.includes(_3.id));
+      }
+      const catering = form.get("catering")?.value || [];
+      if (recurrence?._pattern && recurrence?._pattern !== "none") {
+        this.form.patchValue({ recurring: true });
+        value = this._form.getRawValue();
+      }
+      let changed_times = false;
+      const changed_spaces = spaces.some((s) => !event.resources?.find((_3) => _3.id === s.id));
+      if ((!id || date !== event.date || duration !== event.duration) && spaces.length) {
+        changed_times = true;
+        yield this.checkSelectedSpacesAreAvailable(spaces, all_day ? startOfDay(date).valueOf() : date, all_day ? Math.max(24 * 60, duration) : duration, ical_uid || id || "").catch((_3) => {
+          this._loading.next("");
+          reject(_3);
+          throw _3;
+        });
+      }
+      spaces = form.get("resources")?.value || [];
+      const is_owner = host === currentUser()?.email || creator === currentUser()?.email;
+      if (!spaces.length && this._settings.get("app.events.no_space_resource")) {
+        const space = yield this._space_pipe.transform(this._settings.get("app.events.no_space_resource"));
+        spaces.push(space);
+      }
+      const attendees = unique([...value.attendees, value.organiser || currentUser()], "email");
+      if (!spaces.length && attendees.find((_3) => _3.is_external)) {
+        this._loading.next("");
+        const message2 = i18n("CALENDAR_EVENT.SPACE_EXTERNALS_ERROR");
+        reject(message2);
+        throw message2;
+      }
+      const space_id = spaces[0]?.id;
+      const query = id ? {
+        system_id: this.event?.resources[0]?.id || this.event?.system?.id || space_id
+      } : {};
+      if (is_owner && !ignore_owner)
+        query.calendar = host || creator;
+      if (this._payments.enabled && spaces.length) {
+        const receipt = yield this._payments.makePayment({
+          type: "space",
+          resource_name: spaces[0].display_name || spaces[0].name,
+          date,
+          duration,
+          all_day
+        });
+        if (!receipt?.success)
+          return this._loading.next("");
+        value.extension_data = {
+          invoice: receipt,
+          invoice_id: receipt.invoice_id
+        };
+      }
+      const d = value.date;
+      for (const order of catering) {
+        order.notes = value.catering_notes;
+        order.charge_code = value.catering_charge_code;
+      }
+      if (spaces.length) {
+        let [setup, breakdown] = [0, 0];
+        for (const space of spaces) {
+          const overflow = this._settings.get(`app.events.overflow.${space.id}`);
+          if (overflow?.setup) {
+            setup = Math.max(setup, overflow.setup);
+          }
+          if (overflow?.breakdown) {
+            breakdown = Math.max(breakdown, overflow.breakdown);
+          }
+        }
+        value.setup = value.setup_time || setup;
+        value.breakdown = value.breakdown_time || breakdown;
+        value.setup_time = value.setup_time || setup;
+        value.breakdown_time = value.breakdown_time || breakdown;
+      }
+      const processed_assets = (assets || []).map((_3) => new AssetRequest(_3).toJSON());
+      const result = yield this._makeBooking(new CalendarEvent(__spreadProps(__spreadValues({}, value), {
+        old_system: this.event?.system,
+        host: this._settings.get("app.events.force_host") || (this._settings.get("app.events.room_as_host") ? value.resources[0].email : "") || value.host,
+        title: value.title || "Space Booking",
+        attendees: attendees.map((_3) => {
+          const v4 = __spreadValues({}, _3);
+          delete v4.visit_expected;
+          return v4;
+        }),
+        date: d,
+        catering,
+        assets: processed_assets,
+        extension_data: this._settings.get("app.events.force_host") || this._settings.get("app.events.room_as_host") ? {
+          host_override: value.host,
+          department: value.organiser?.department || currentUser()?.department
+        } : {
+          department: value.organiser?.department || currentUser()?.department
+        }
+      })), query).catch((e) => {
+        reject(e);
+        this._loading.next("");
+        throw e;
+      });
+      const domain = (currentUser()?.email || "@").split("@")[1];
+      const visitors = attendees.filter((user) => user.is_external && user.email !== event.host && !user.email.includes(domain) && user.visit_expected);
+      let creating_assets = false;
+      const on_error = (e) => __async(this, null, function* () {
+        if (!this.form.value.id) {
+          yield removeEvent(result.id, spaces.length ? {
+            calendar: this.form.value.host || currentUser()?.email,
+            system_id: spaces[0].id
+          } : {})?.toPromise();
+          console.warn("Couldn't update asset requests", e);
+          if (e?.status === 409) {
+            notifyError(i18n("CALENDAR_EVENT.ASSETS_CLASH_ERROR"));
+          } else
+            notifyError(i18n("CALENDAR_EVENT.ASSETS_ERROR"));
+        } else if (creating_assets) {
+          notifyError(i18n("CALENDAR_EVENT.ASSETS_PARTIAL_ERROR", {
+            error: e
+          }));
+          return;
+        }
+        this._loading.next("");
+        throw e;
+      });
+      if (visitors.length) {
+        yield createBookingsForEvent(result, "visitor", visitors).catch(on_error);
+      }
+      if (assets?.length || event.extension_data.assets?.length) {
+        creating_assets = true;
+        const requests = yield validateAssetRequestsForResource(result, {
+          date,
+          duration,
+          host,
+          all_day,
+          location_name: spaces[0]?.display_name || spaces[0]?.name || "",
+          location_id: spaces[0]?.id || "",
+          zones: unique([
+            this._org.organisation.id,
+            this._org.region?.id,
+            this._org.building?.id,
+            ...spaces[0]?.zones || []
+          ]).filter((_3) => !!_3),
+          reset_state: changed_times
+        }, assets, changed_spaces || changed_times).catch(on_error);
+        if (!requests)
+          throw i18n("CALENDAR_EVENT.ASSETS_INVALID_ERROR");
+        yield requests();
+        creating_assets = false;
+      }
+      this.clearForm();
+      this.last_success = result;
+      sessionStorage.setItem("PLACEOS.last_booked_event", JSON.stringify(result));
+      this.setView("success");
+      this.timeout("post_finshed", () => this._changed.next(Date.now()));
+      resolve(result);
+      this._loading.next("");
+    }));
+  }
+  _makeBooking(event, query) {
+    return __async(this, null, function* () {
+      this._updateVisitorList(event.attendees);
+      const old_system = event.old_system?.id || event.old_system?.email || event.resources[0]?.email;
+      const system_id = event.system?.id || event.system?.email || event.resources[0]?.email;
+      if (old_system !== system_id) {
+        event.attendees = event.attendees.filter((_3) => _3.email !== old_system || _3.id !== old_system);
+      }
+      return (!this.has_calendar ? saveBooking(newBookingFromCalendarEvent(__spreadProps(__spreadValues({}, event.toJSON()), {
+        status: this._settings.get("app.bookings.no_approval") === true ? "approved" : "tentative"
+      }))).pipe(map((_3) => newCalendarEventFromBooking(_3))) : saveEvent(event, query))?.toPromise();
+    });
+  }
+  checkSelectedSpacesAreAvailable(spaces, date, duration, ignore) {
+    return __async(this, null, function* () {
+      if (!spaces?.length)
+        return true;
+      if (this.has_calendar) {
+        const response = yield querySpaceAvailability(spaces.map(({ id }) => id), date, duration, this?.event?.resources[0]?.id || this.event?.system?.id || this.event?.id || void 0, void 0, [this.event?.date, this.event?.duration]).toPromise();
+        if (!response.every((_3) => _3)) {
+          throw i18n(spaces.length > 1 ? "CALENDAR_EVENT.SPACES_UNAVAILABLE" : "CALENDAR_EVENT.SPACE_UNAVAILABLE");
+        }
+      } else {
+        const availability = yield queryResourceAvailability(spaces.map((_3) => _3.id), date, duration, ignore)?.toPromise();
+        if (!availability.every((_3) => _3))
+          throw i18n(spaces.length > 1 ? "CALENDAR_EVENT.SPACES_UNAVAILABLE" : "CALENDAR_EVENT.SPACE_UNAVAILABLE");
+      }
+      return true;
+    });
+  }
+  _updateVisitorList(attendees) {
+    const visitors = attendees.filter((user) => user.is_external);
+    if (!visitors?.length)
+      return;
+    const old_visitors = this._settings.get("visitor-invitees") || [];
+    this._settings.saveUserSetting("visitor-invitees", unique([
+      ...old_visitors.filter((_3) => !_3.includes(_3.email)),
+      ...visitors.map((_3) => `${_3.email}|${_3.name}|${_3.organisation}`)
+    ]));
+  }
+  static {
+    this.\u0275fac = function OldEventFormService_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _OldEventFormService)(\u0275\u0275inject(OrganisationService), \u0275\u0275inject(Router), \u0275\u0275inject(PaymentsService), \u0275\u0275inject(SettingsService), \u0275\u0275inject(AssetStateService), \u0275\u0275inject(MatDialog));
+    };
+  }
+  static {
+    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _OldEventFormService, factory: _OldEventFormService.\u0275fac, providedIn: "root" });
+  }
+};
+
+// node_modules/@angular/material/fesm2022/bottom-sheet.mjs
+function MatBottomSheetContainer_ng_template_0_Template(rf, ctx) {
+}
+var ENTER_ANIMATION3 = "_mat-bottom-sheet-enter";
+var EXIT_ANIMATION3 = "_mat-bottom-sheet-exit";
+var MatBottomSheetContainer = class _MatBottomSheetContainer extends CdkDialogContainer {
+  _breakpointSubscription;
+  _animationsDisabled = inject(ANIMATION_MODULE_TYPE, {
+    optional: true
+  }) === "NoopAnimations";
+  /** The state of the bottom sheet animations. */
+  _animationState = "void";
+  /** Emits whenever the state of the animation changes. */
+  _animationStateChanged = new EventEmitter();
+  /** Whether the component has been destroyed. */
+  _destroyed;
+  constructor() {
+    super();
+    const breakpointObserver = inject(BreakpointObserver);
+    this._breakpointSubscription = breakpointObserver.observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge]).subscribe(() => {
+      const classList = this._elementRef.nativeElement.classList;
+      classList.toggle("mat-bottom-sheet-container-medium", breakpointObserver.isMatched(Breakpoints.Medium));
+      classList.toggle("mat-bottom-sheet-container-large", breakpointObserver.isMatched(Breakpoints.Large));
+      classList.toggle("mat-bottom-sheet-container-xlarge", breakpointObserver.isMatched(Breakpoints.XLarge));
+    });
+  }
+  /** Begin animation of bottom sheet entrance into view. */
+  enter() {
+    if (!this._destroyed) {
+      this._animationState = "visible";
+      this._changeDetectorRef.markForCheck();
+      this._changeDetectorRef.detectChanges();
+      if (this._animationsDisabled) {
+        this._simulateAnimation(ENTER_ANIMATION3);
+      }
+    }
+  }
+  /** Begin animation of the bottom sheet exiting from view. */
+  exit() {
+    if (!this._destroyed) {
+      this._elementRef.nativeElement.setAttribute("mat-exit", "");
+      this._animationState = "hidden";
+      this._changeDetectorRef.markForCheck();
+      if (this._animationsDisabled) {
+        this._simulateAnimation(EXIT_ANIMATION3);
+      }
+    }
+  }
+  ngOnDestroy() {
+    super.ngOnDestroy();
+    this._breakpointSubscription.unsubscribe();
+    this._destroyed = true;
+  }
+  _simulateAnimation(name) {
+    this._ngZone.run(() => {
+      this._handleAnimationEvent(true, name);
+      setTimeout(() => this._handleAnimationEvent(false, name));
+    });
+  }
+  _handleAnimationEvent(isStart2, animationName) {
+    const isEnter = animationName === ENTER_ANIMATION3;
+    const isExit = animationName === EXIT_ANIMATION3;
+    if (isEnter || isExit) {
+      this._animationStateChanged.emit({
+        toState: isEnter ? "visible" : "hidden",
+        phase: isStart2 ? "start" : "done"
+      });
+    }
+  }
+  static \u0275fac = function MatBottomSheetContainer_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatBottomSheetContainer)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _MatBottomSheetContainer,
+    selectors: [["mat-bottom-sheet-container"]],
+    hostAttrs: ["tabindex", "-1", 1, "mat-bottom-sheet-container"],
+    hostVars: 9,
+    hostBindings: function MatBottomSheetContainer_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("animationstart", function MatBottomSheetContainer_animationstart_HostBindingHandler($event) {
+          return ctx._handleAnimationEvent(true, $event.animationName);
+        })("animationend", function MatBottomSheetContainer_animationend_HostBindingHandler($event) {
+          return ctx._handleAnimationEvent(false, $event.animationName);
+        })("animationcancel", function MatBottomSheetContainer_animationcancel_HostBindingHandler($event) {
+          return ctx._handleAnimationEvent(false, $event.animationName);
+        });
+      }
+      if (rf & 2) {
+        \u0275\u0275attribute("role", ctx._config.role)("aria-modal", ctx._config.ariaModal)("aria-label", ctx._config.ariaLabel);
+        \u0275\u0275classProp("mat-bottom-sheet-container-animations-enabled", !ctx._animationsDisabled)("mat-bottom-sheet-container-enter", ctx._animationState === "visible")("mat-bottom-sheet-container-exit", ctx._animationState === "hidden");
+      }
+    },
+    features: [\u0275\u0275InheritDefinitionFeature],
+    decls: 1,
+    vars: 0,
+    consts: [["cdkPortalOutlet", ""]],
+    template: function MatBottomSheetContainer_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275template(0, MatBottomSheetContainer_ng_template_0_Template, 0, 0, "ng-template", 0);
+      }
+    },
+    dependencies: [CdkPortalOutlet],
+    styles: ["@keyframes _mat-bottom-sheet-enter{from{transform:translateY(100%)}to{transform:none}}@keyframes _mat-bottom-sheet-exit{from{transform:none}to{transform:translateY(100%)}}.mat-bottom-sheet-container{box-shadow:0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);padding:8px 16px;min-width:100vw;box-sizing:border-box;display:block;outline:0;max-height:80vh;overflow:auto;position:relative;background:var(--mat-bottom-sheet-container-background-color, var(--mat-sys-surface-container-low));color:var(--mat-bottom-sheet-container-text-color, var(--mat-sys-on-surface));font-family:var(--mat-bottom-sheet-container-text-font, var(--mat-sys-body-large-font));font-size:var(--mat-bottom-sheet-container-text-size, var(--mat-sys-body-large-size));line-height:var(--mat-bottom-sheet-container-text-line-height, var(--mat-sys-body-large-line-height));font-weight:var(--mat-bottom-sheet-container-text-weight, var(--mat-sys-body-large-weight));letter-spacing:var(--mat-bottom-sheet-container-text-tracking, var(--mat-sys-body-large-tracking))}@media(forced-colors: active){.mat-bottom-sheet-container{outline:1px solid}}.mat-bottom-sheet-container-animations-enabled{transform:translateY(100%)}.mat-bottom-sheet-container-animations-enabled.mat-bottom-sheet-container-enter{animation:_mat-bottom-sheet-enter 195ms cubic-bezier(0, 0, 0.2, 1) forwards}.mat-bottom-sheet-container-animations-enabled.mat-bottom-sheet-container-exit{animation:_mat-bottom-sheet-exit 375ms cubic-bezier(0.4, 0, 1, 1) backwards}.mat-bottom-sheet-container-xlarge,.mat-bottom-sheet-container-large,.mat-bottom-sheet-container-medium{border-top-left-radius:var(--mat-bottom-sheet-container-shape, 28px);border-top-right-radius:var(--mat-bottom-sheet-container-shape, 28px)}.mat-bottom-sheet-container-medium{min-width:384px;max-width:calc(100vw - 128px)}.mat-bottom-sheet-container-large{min-width:512px;max-width:calc(100vw - 256px)}.mat-bottom-sheet-container-xlarge{min-width:576px;max-width:calc(100vw - 384px)}"],
+    encapsulation: 2
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatBottomSheetContainer, [{
+    type: Component,
+    args: [{
+      selector: "mat-bottom-sheet-container",
+      changeDetection: ChangeDetectionStrategy.Default,
+      encapsulation: ViewEncapsulation.None,
+      host: {
+        "class": "mat-bottom-sheet-container",
+        "[class.mat-bottom-sheet-container-animations-enabled]": "!_animationsDisabled",
+        "[class.mat-bottom-sheet-container-enter]": '_animationState === "visible"',
+        "[class.mat-bottom-sheet-container-exit]": '_animationState === "hidden"',
+        "tabindex": "-1",
+        "[attr.role]": "_config.role",
+        "[attr.aria-modal]": "_config.ariaModal",
+        "[attr.aria-label]": "_config.ariaLabel",
+        "(animationstart)": "_handleAnimationEvent(true, $event.animationName)",
+        "(animationend)": "_handleAnimationEvent(false, $event.animationName)",
+        "(animationcancel)": "_handleAnimationEvent(false, $event.animationName)"
+      },
+      imports: [CdkPortalOutlet],
+      template: "<ng-template cdkPortalOutlet></ng-template>\r\n",
+      styles: ["@keyframes _mat-bottom-sheet-enter{from{transform:translateY(100%)}to{transform:none}}@keyframes _mat-bottom-sheet-exit{from{transform:none}to{transform:translateY(100%)}}.mat-bottom-sheet-container{box-shadow:0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);padding:8px 16px;min-width:100vw;box-sizing:border-box;display:block;outline:0;max-height:80vh;overflow:auto;position:relative;background:var(--mat-bottom-sheet-container-background-color, var(--mat-sys-surface-container-low));color:var(--mat-bottom-sheet-container-text-color, var(--mat-sys-on-surface));font-family:var(--mat-bottom-sheet-container-text-font, var(--mat-sys-body-large-font));font-size:var(--mat-bottom-sheet-container-text-size, var(--mat-sys-body-large-size));line-height:var(--mat-bottom-sheet-container-text-line-height, var(--mat-sys-body-large-line-height));font-weight:var(--mat-bottom-sheet-container-text-weight, var(--mat-sys-body-large-weight));letter-spacing:var(--mat-bottom-sheet-container-text-tracking, var(--mat-sys-body-large-tracking))}@media(forced-colors: active){.mat-bottom-sheet-container{outline:1px solid}}.mat-bottom-sheet-container-animations-enabled{transform:translateY(100%)}.mat-bottom-sheet-container-animations-enabled.mat-bottom-sheet-container-enter{animation:_mat-bottom-sheet-enter 195ms cubic-bezier(0, 0, 0.2, 1) forwards}.mat-bottom-sheet-container-animations-enabled.mat-bottom-sheet-container-exit{animation:_mat-bottom-sheet-exit 375ms cubic-bezier(0.4, 0, 1, 1) backwards}.mat-bottom-sheet-container-xlarge,.mat-bottom-sheet-container-large,.mat-bottom-sheet-container-medium{border-top-left-radius:var(--mat-bottom-sheet-container-shape, 28px);border-top-right-radius:var(--mat-bottom-sheet-container-shape, 28px)}.mat-bottom-sheet-container-medium{min-width:384px;max-width:calc(100vw - 128px)}.mat-bottom-sheet-container-large{min-width:512px;max-width:calc(100vw - 256px)}.mat-bottom-sheet-container-xlarge{min-width:576px;max-width:calc(100vw - 384px)}"]
+    }]
+  }], () => [], null);
+})();
+var MAT_BOTTOM_SHEET_DATA = new InjectionToken("MatBottomSheetData");
+var MatBottomSheetConfig = class {
+  /** The view container to place the overlay for the bottom sheet into. */
+  viewContainerRef;
+  /** Extra CSS classes to be added to the bottom sheet container. */
+  panelClass;
+  /** Text layout direction for the bottom sheet. */
+  direction;
+  /** Data being injected into the child component. */
+  data = null;
+  /** Whether the bottom sheet has a backdrop. */
+  hasBackdrop = true;
+  /** Custom class for the backdrop. */
+  backdropClass;
+  /** Whether the user can use escape or clicking outside to close the bottom sheet. */
+  disableClose = false;
+  /** Aria label to assign to the bottom sheet element. */
+  ariaLabel = null;
+  /**
+   * Whether this is a modal dialog. Used to set the `aria-modal` attribute. Off by default,
+   * because it can interfere with other overlay-based components (e.g. `mat-select`) and because
+   * it is redundant since the dialog marks all outside content as `aria-hidden` anyway.
+   */
+  ariaModal = false;
+  /**
+   * Whether the bottom sheet should close when the user goes backwards/forwards in history.
+   * Note that this usually doesn't include clicking on links (unless the user is using
+   * the `HashLocationStrategy`).
+   */
+  closeOnNavigation = true;
+  /**
+   * Where the bottom sheet should focus on open.
+   * @breaking-change 14.0.0 Remove boolean option from autoFocus. Use string or
+   * AutoFocusTarget instead.
+   */
+  autoFocus = "first-tabbable";
+  /**
+   * Whether the bottom sheet should restore focus to the
+   * previously-focused element, after it's closed.
+   */
+  restoreFocus = true;
+  /** Scroll strategy to be used for the bottom sheet. */
+  scrollStrategy;
+  /** Height for the bottom sheet. */
+  height = "";
+  /** Minimum height for the bottom sheet. If a number is provided, assumes pixel units. */
+  minHeight;
+  /** Maximum height for the bottom sheet. If a number is provided, assumes pixel units. */
+  maxHeight;
+};
+var MatBottomSheetRef = class {
+  _ref;
+  /** Instance of the component making up the content of the bottom sheet. */
+  get instance() {
+    return this._ref.componentInstance;
+  }
+  /**
+   * `ComponentRef` of the component opened into the bottom sheet. Will be
+   * null when the bottom sheet is opened using a `TemplateRef`.
+   */
+  get componentRef() {
+    return this._ref.componentRef;
+  }
+  /**
+   * Instance of the component into which the bottom sheet content is projected.
+   * @docs-private
+   */
+  containerInstance;
+  /** Whether the user is allowed to close the bottom sheet. */
+  disableClose;
+  /** Subject for notifying the user that the bottom sheet has opened and appeared. */
+  _afterOpened = new Subject();
+  /** Result to be passed down to the `afterDismissed` stream. */
+  _result;
+  /** Handle to the timeout that's running as a fallback in case the exit animation doesn't fire. */
+  _closeFallbackTimeout;
+  constructor(_ref, config5, containerInstance) {
+    this._ref = _ref;
+    this.containerInstance = containerInstance;
+    this.disableClose = config5.disableClose;
+    containerInstance._animationStateChanged.pipe(filter((event) => event.phase === "done" && event.toState === "visible"), take(1)).subscribe(() => {
+      this._afterOpened.next();
+      this._afterOpened.complete();
+    });
+    containerInstance._animationStateChanged.pipe(filter((event) => event.phase === "done" && event.toState === "hidden"), take(1)).subscribe(() => {
+      clearTimeout(this._closeFallbackTimeout);
+      this._ref.close(this._result);
+    });
+    _ref.overlayRef.detachments().subscribe(() => {
+      this._ref.close(this._result);
+    });
+    merge(this.backdropClick(), this.keydownEvents().pipe(filter((event) => event.keyCode === ESCAPE))).subscribe((event) => {
+      if (!this.disableClose && (event.type !== "keydown" || !hasModifierKey(event))) {
+        event.preventDefault();
+        this.dismiss();
+      }
+    });
+  }
+  /**
+   * Dismisses the bottom sheet.
+   * @param result Data to be passed back to the bottom sheet opener.
+   */
+  dismiss(result) {
+    if (!this.containerInstance) {
+      return;
+    }
+    this.containerInstance._animationStateChanged.pipe(filter((event) => event.phase === "start"), take(1)).subscribe(() => {
+      this._closeFallbackTimeout = setTimeout(() => this._ref.close(this._result), 500);
+      this._ref.overlayRef.detachBackdrop();
+    });
+    this._result = result;
+    this.containerInstance.exit();
+    this.containerInstance = null;
+  }
+  /** Gets an observable that is notified when the bottom sheet is finished closing. */
+  afterDismissed() {
+    return this._ref.closed;
+  }
+  /** Gets an observable that is notified when the bottom sheet has opened and appeared. */
+  afterOpened() {
+    return this._afterOpened;
+  }
+  /**
+   * Gets an observable that emits when the overlay's backdrop has been clicked.
+   */
+  backdropClick() {
+    return this._ref.backdropClick;
+  }
+  /**
+   * Gets an observable that emits when keydown events are targeted on the overlay.
+   */
+  keydownEvents() {
+    return this._ref.keydownEvents;
+  }
+};
+var MAT_BOTTOM_SHEET_DEFAULT_OPTIONS = new InjectionToken("mat-bottom-sheet-default-options");
+var MatBottomSheet = class _MatBottomSheet {
+  _overlay = inject(Overlay);
+  _parentBottomSheet = inject(_MatBottomSheet, {
+    optional: true,
+    skipSelf: true
+  });
+  _defaultOptions = inject(MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, {
+    optional: true
+  });
+  _bottomSheetRefAtThisLevel = null;
+  _dialog = inject(Dialog);
+  /** Reference to the currently opened bottom sheet. */
+  get _openedBottomSheetRef() {
+    const parent = this._parentBottomSheet;
+    return parent ? parent._openedBottomSheetRef : this._bottomSheetRefAtThisLevel;
+  }
+  set _openedBottomSheetRef(value) {
+    if (this._parentBottomSheet) {
+      this._parentBottomSheet._openedBottomSheetRef = value;
+    } else {
+      this._bottomSheetRefAtThisLevel = value;
+    }
+  }
+  constructor() {
+  }
+  open(componentOrTemplateRef, config5) {
+    const _config = __spreadValues(__spreadValues({}, this._defaultOptions || new MatBottomSheetConfig()), config5);
+    let ref;
+    this._dialog.open(componentOrTemplateRef, __spreadProps(__spreadValues({}, _config), {
+      // Disable closing since we need to sync it up to the animation ourselves.
+      disableClose: true,
+      // Disable closing on detachments so that we can sync up the animation.
+      closeOnOverlayDetachments: false,
+      maxWidth: "100%",
+      container: MatBottomSheetContainer,
+      scrollStrategy: _config.scrollStrategy || this._overlay.scrollStrategies.block(),
+      positionStrategy: this._overlay.position().global().centerHorizontally().bottom("0"),
+      templateContext: () => ({
+        bottomSheetRef: ref
+      }),
+      providers: (cdkRef, _cdkConfig, container) => {
+        ref = new MatBottomSheetRef(cdkRef, _config, container);
+        return [{
+          provide: MatBottomSheetRef,
+          useValue: ref
+        }, {
+          provide: MAT_BOTTOM_SHEET_DATA,
+          useValue: _config.data
+        }];
+      }
+    }));
+    ref.afterDismissed().subscribe(() => {
+      if (this._openedBottomSheetRef === ref) {
+        this._openedBottomSheetRef = null;
+      }
+    });
+    if (this._openedBottomSheetRef) {
+      this._openedBottomSheetRef.afterDismissed().subscribe(() => ref.containerInstance?.enter());
+      this._openedBottomSheetRef.dismiss();
+    } else {
+      ref.containerInstance.enter();
+    }
+    this._openedBottomSheetRef = ref;
+    return ref;
+  }
+  /**
+   * Dismisses the currently-visible bottom sheet.
+   * @param result Data to pass to the bottom sheet instance.
+   */
+  dismiss(result) {
+    if (this._openedBottomSheetRef) {
+      this._openedBottomSheetRef.dismiss(result);
+    }
+  }
+  ngOnDestroy() {
+    if (this._bottomSheetRefAtThisLevel) {
+      this._bottomSheetRefAtThisLevel.dismiss();
+    }
+  }
+  static \u0275fac = function MatBottomSheet_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatBottomSheet)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _MatBottomSheet,
+    factory: _MatBottomSheet.\u0275fac,
+    providedIn: "root"
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatBottomSheet, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], () => [], null);
+})();
+var MatBottomSheetModule = class _MatBottomSheetModule {
+  static \u0275fac = function MatBottomSheetModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatBottomSheetModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatBottomSheetModule
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    providers: [MatBottomSheet],
+    imports: [DialogModule, MatCommonModule, PortalModule, MatCommonModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatBottomSheetModule, [{
+    type: NgModule,
+    args: [{
+      imports: [DialogModule, MatCommonModule, PortalModule, MatBottomSheetContainer],
+      exports: [MatBottomSheetContainer, MatCommonModule],
+      providers: [MatBottomSheet]
+    }]
+  }], null, null);
+})();
+
+// libs/spaces/src/lib/space-select-modal/space-details.component.ts
+var _c061 = (a0) => ({ count: a0 });
+var _c137 = () => ({ disable_pan: true, disable_zoom: true });
+function SpaceDetailsComponent_ng_container_0_image_carousel_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "image-carousel", 19);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("images", ctx_r1.space.images);
+  }
+}
+function SpaceDetailsComponent_ng_container_0_div_13_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 20);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275classProp("bg-info", ctx_r1.alert[0] === "info")("text-info-content", ctx_r1.alert[0] === "info")("bg-warning", ctx_r1.alert[0] === "warn")("text-warning-content", ctx_r1.alert[0] === "warn")("bg-error", ctx_r1.alert[0] === "closed")("text-error-content", ctx_r1.alert[0] === "closed");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.alert[1], " ");
+  }
+}
+function SpaceDetailsComponent_ng_container_0_section_36_div_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 12)(1, "p");
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const feature_r3 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(feature_r3);
+  }
+}
+function SpaceDetailsComponent_ng_container_0_section_36_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "section", 21)(1, "h2", 11);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(4, SpaceDetailsComponent_ng_container_0_section_36_div_4_Template, 3, 1, "div", 22);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 2, "CALENDAR_EVENT.FACILITIES"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", ctx_r1.space.features);
+  }
+}
+function SpaceDetailsComponent_ng_container_0_section_37_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "section", 23);
+    \u0275\u0275element(1, "interactive-map", 24);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("src", ctx_r1.map_url)("focus", ctx_r1.space.map_id)("features", ctx_r1.features)("options", \u0275\u0275pureFunction0(4, _c137));
+  }
+}
+function SpaceDetailsComponent_ng_container_0_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "section", 2);
+    \u0275\u0275template(2, SpaceDetailsComponent_ng_container_0_image_carousel_2_Template, 1, 1, "image-carousel", 3);
+    \u0275\u0275elementStart(3, "button", 4);
+    \u0275\u0275listener("click", function SpaceDetailsComponent_ng_container_0_Template_button_click_3_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.close.emit());
+    });
+    \u0275\u0275elementStart(4, "app-icon");
+    \u0275\u0275text(5, "arrow_back");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "button", 5);
+    \u0275\u0275listener("click", function SpaceDetailsComponent_ng_container_0_Template_button_click_6_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.toggleFav.emit());
+    });
+    \u0275\u0275elementStart(7, "app-icon");
+    \u0275\u0275text(8);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(9, "div", 6)(10, "section", 7)(11, "h2", 8);
+    \u0275\u0275text(12);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275template(13, SpaceDetailsComponent_ng_container_0_div_13_Template, 2, 13, "div", 9);
+    \u0275\u0275element(14, "hr");
+    \u0275\u0275elementStart(15, "section", 10)(16, "h2", 11);
+    \u0275\u0275text(17);
+    \u0275\u0275pipe(18, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(19, "div", 12)(20, "app-icon");
+    \u0275\u0275text(21, "people");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(22, "p");
+    \u0275\u0275text(23);
+    \u0275\u0275pipe(24, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(25, "div", 12)(26, "app-icon");
+    \u0275\u0275text(27, "meeting_room");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(28, "p");
+    \u0275\u0275text(29);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(30, "div", 12)(31, "app-icon");
+    \u0275\u0275text(32, "place");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(33, "p");
+    \u0275\u0275text(34);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275element(35, "hr");
+    \u0275\u0275template(36, SpaceDetailsComponent_ng_container_0_section_36_Template, 5, 4, "section", 13)(37, SpaceDetailsComponent_ng_container_0_section_37_Template, 2, 5, "section", 14);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(38, "div", 15)(39, "button", 16);
+    \u0275\u0275listener("click", function SpaceDetailsComponent_ng_container_0_Template_button_click_39_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      ctx_r1.active = !ctx_r1.active;
+      return \u0275\u0275resetView(ctx_r1.activeChange.emit(ctx_r1.active));
+    });
+    \u0275\u0275elementStart(40, "div", 17)(41, "app-icon", 18);
+    \u0275\u0275text(42);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(43, "p");
+    \u0275\u0275text(44);
+    \u0275\u0275pipe(45, "translate");
+    \u0275\u0275elementEnd()()()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275classProp("sm:h-64", ctx_r1.space.images == null ? null : ctx_r1.space.images.length)("h-40", ctx_r1.space.images == null ? null : ctx_r1.space.images.length)("sm:h-0", !(ctx_r1.space.images == null ? null : ctx_r1.space.images.length))("h-12", !(ctx_r1.space.images == null ? null : ctx_r1.space.images.length))("!bg-transparent", !(ctx_r1.space.images == null ? null : ctx_r1.space.images.length));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.space.images == null ? null : ctx_r1.space.images.length);
+    \u0275\u0275advance(4);
+    \u0275\u0275classProp("text-white", !ctx_r1.fav)("text-info", ctx_r1.fav);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r1.fav ? "favorite" : "favorite_border");
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", ctx_r1.space.display_name || ctx_r1.space.name, " ");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.alert);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(18, 28, "CALENDAR_EVENT.DETAILS"), " ");
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(24, 30, "CALENDAR_EVENT.CAPACITY_COUNT", \u0275\u0275pureFunction1(35, _c061, ctx_r1.space.capacity)), " ");
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate1(" ", (ctx_r1.level == null ? null : ctx_r1.level.display_name) || (ctx_r1.level == null ? null : ctx_r1.level.name), " ");
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", (ctx_r1.building == null ? null : ctx_r1.building.address) || (ctx_r1.building == null ? null : ctx_r1.building.display_name) || (ctx_r1.building == null ? null : ctx_r1.building.name), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.space.features == null ? null : ctx_r1.space.features.length);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.hide_map);
+    \u0275\u0275advance(2);
+    \u0275\u0275classProp("inverse", ctx_r1.active);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r1.active ? "remove" : "add");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(45, 33, ctx_r1.active ? "CALENDAR_EVENT.SPACE_REMOVE" : "CALENDAR_EVENT.SPACE_ADD_TO"), " ");
+  }
+}
+function SpaceDetailsComponent_ng_template_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 25)(1, "p", 26);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "CALENDAR_EVENT.SPACE_LIST_INFO"), " ");
+  }
+}
+var SpaceDetailsComponent = class _SpaceDetailsComponent {
+  get level() {
+    return this._org.levelWithID(this.space?.zones) || this.space?.level;
+  }
+  get building() {
+    return this._org.buildings.find((_3) => this.space?.zones.includes(_3.id));
+  }
+  constructor(_org) {
+    this._org = _org;
+    this.fav = false;
+    this.active = false;
+    this.hide_map = false;
+    this.activeChange = new EventEmitter();
+    this.close = new EventEmitter();
+    this.toggleFav = new EventEmitter();
+    this.map_url = "";
+    this.features = [];
+  }
+  ngOnChanges(changes) {
+    if (changes.space && this.space) {
+      this._updateFeature();
+    }
+  }
+  _updateFeature() {
+    this.map_url = this.level?.map_id;
+    this.features = [
+      {
+        location: this.space?.map_id,
+        content: MapPinComponent
+      }
+    ];
+  }
+  static {
+    this.\u0275fac = function SpaceDetailsComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _SpaceDetailsComponent)(\u0275\u0275directiveInject(OrganisationService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceDetailsComponent, selectors: [["space-details"]], inputs: { space: "space", fav: "fav", active: "active", hide_map: "hide_map", alert: "alert" }, outputs: { activeChange: "activeChange", close: "close", toggleFav: "toggleFav" }, standalone: false, features: [\u0275\u0275NgOnChangesFeature], decls: 3, vars: 2, consts: [["empty_state", ""], [4, "ngIf", "ngIfElse"], ["image", "", 1, "relative", "w-full", "bg-neutral"], ["class", "absolute inset-0", 3, "images", 4, "ngIf"], ["icon", "", "matRipple", "", "name", "close-space-details", 1, "absolute", "left-2", "top-2", "bg-neutral", "text-white", "sm:hidden", 3, "click"], ["icon", "", "matRipple", "", "name", "toggle-space-favourite-details", 1, "absolute", "right-2", "top-2", "bg-neutral", 3, "click"], [1, "h-1/2", "flex-1", "space-y-2", "overflow-auto", "p-2"], ["actions", "", 1, "z-0"], [1, "mb-2", "mt-4", "text-xl", "font-medium"], ["class", "my-2 rounded px-2 py-1 text-xs", 3, "bg-info", "text-info-content", "bg-warning", "text-warning-content", "bg-error", "text-error-content", 4, "ngIf"], ["details", "", 1, "space-y-2"], [1, "text-xl", "font-medium"], [1, "flex", "items-center", "space-x-2"], ["facilities", "", "class", "space-y-2", 4, "ngIf"], ["map", "", "class", "relative mx-auto h-64 w-full overflow-hidden rounded border border-base-200 sm:h-48", 4, "ngIf"], [1, "border-t", "border-base-200", "px-2", "pb-[5.5rem]", "pt-2", "shadow", "sm:hidden"], ["btn", "", "matRipple", "", "name", "toggle-space-details", 1, "w-full", 3, "click"], [1, "flex", "items-center", "justify-center"], [1, "text-2xl"], [1, "absolute", "inset-0", 3, "images"], [1, "my-2", "rounded", "px-2", "py-1", "text-xs"], ["facilities", "", 1, "space-y-2"], ["class", "flex items-center space-x-2", 4, "ngFor", "ngForOf"], ["map", "", 1, "relative", "mx-auto", "h-64", "w-full", "overflow-hidden", "rounded", "border", "border-base-200", "sm:h-48"], [1, "pointer-events-none", 3, "src", "focus", "features", "options"], ["empty", "", 1, "flex", "flex-col", "items-center", "justify-center", "space-y-2", "p-16"], [1, "text-center", "opacity-30"]], template: function SpaceDetailsComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275template(0, SpaceDetailsComponent_ng_container_0_Template, 46, 37, "ng-container", 1)(1, SpaceDetailsComponent_ng_template_1_Template, 4, 3, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        const empty_state_r4 = \u0275\u0275reference(2);
+        \u0275\u0275property("ngIf", ctx.space)("ngIfElse", empty_state_r4);
+      }
+    }, dependencies: [NgForOf, NgIf, IconComponent, InteractiveMapComponent, ImageCarouselComponent, MatRipple, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  width: 30%;\n  min-width: 20rem;\n  height: 100%;\n  min-height: 65vh;\n}\n/*# sourceMappingURL=space-details.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceDetailsComponent, { className: "SpaceDetailsComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-details.component.ts", lineNumber: 188 });
+})();
+
+// libs/spaces/src/lib/space-select-modal/space-filters.component.ts
+var _c062 = () => ({ standalone: true });
+function SpaceFiltersComponent_button_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 21);
+    \u0275\u0275listener("click", function SpaceFiltersComponent_button_2_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.close());
+    });
+    \u0275\u0275elementStart(1, "app-icon");
+    \u0275\u0275text(2, "keyboard_arrow_left");
+    \u0275\u0275elementEnd()();
+  }
+}
+function SpaceFiltersComponent_mat_form_field_16_mat_option_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-option", 25);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const reg_r5 = ctx.$implicit;
+    \u0275\u0275property("value", reg_r5);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", reg_r5.display_name || reg_r5.name, " ");
+  }
+}
+function SpaceFiltersComponent_mat_form_field_16_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-form-field", 22)(1, "mat-select", 23);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_mat_form_field_16_Template_mat_select_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.setRegion($event));
+    });
+    \u0275\u0275template(3, SpaceFiltersComponent_mat_form_field_16_mat_option_3_Template, 2, 2, "mat-option", 24);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngModel", ctx_r2.region)("ngModelOptions", \u0275\u0275pureFunction0(8, _c062))("placeholder", \u0275\u0275pipeBind1(2, 4, "CALENDAR_EVENT.SPACE_REGION_ANY"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 6, ctx_r2.regions));
+  }
+}
+function SpaceFiltersComponent_mat_form_field_18_mat_option_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-option", 25);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const bld_r7 = ctx.$implicit;
+    \u0275\u0275property("value", bld_r7);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", bld_r7.display_name || bld_r7.name, " ");
+  }
+}
+function SpaceFiltersComponent_mat_form_field_18_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-form-field", 22)(1, "mat-select", 26);
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275pipe(3, "async");
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_mat_form_field_18_Template_mat_select_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r6);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.setBuilding($event));
+    });
+    \u0275\u0275template(5, SpaceFiltersComponent_mat_form_field_18_mat_option_5_Template, 2, 2, "mat-option", 24);
+    \u0275\u0275pipe(6, "async");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_4_0;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(2, 4, ctx_r2.building))("ngModelOptions", \u0275\u0275pureFunction0(12, _c062))("placeholder", ((tmp_4_0 = \u0275\u0275pipeBind1(3, 6, ctx_r2.building)) == null ? null : tmp_4_0.display_name) || ((tmp_4_0 = \u0275\u0275pipeBind1(4, 8, ctx_r2.building)) == null ? null : tmp_4_0.name));
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(6, 10, ctx_r2.buildings));
+  }
+}
+function SpaceFiltersComponent_mat_form_field_20_mat_option_4_div_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 30);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "building");
+    \u0275\u0275elementStart(3, "span", 31);
+    \u0275\u0275text(4, " - ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_5_0;
+    const lvl_r9 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", (tmp_5_0 = \u0275\u0275pipeBind1(2, 1, lvl_r9.parent_id)) == null ? null : tmp_5_0.display_name, " ");
+  }
+}
+function SpaceFiltersComponent_mat_form_field_20_mat_option_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-option", 25)(1, "div", 28);
+    \u0275\u0275template(2, SpaceFiltersComponent_mat_form_field_20_mat_option_4_div_2_Template, 5, 3, "div", 29);
+    \u0275\u0275elementStart(3, "div");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const lvl_r9 = ctx.$implicit;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("value", lvl_r9.id);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r2.use_region);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", lvl_r9.display_name || lvl_r9.name, " ");
+  }
+}
+function SpaceFiltersComponent_mat_form_field_20_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-form-field", 22)(1, "mat-select", 27);
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_mat_form_field_20_Template_mat_select_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r8);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.setOptions({ zones: $event }));
+    });
+    \u0275\u0275template(4, SpaceFiltersComponent_mat_form_field_20_mat_option_4_Template, 5, 3, "mat-option", 24);
+    \u0275\u0275pipe(5, "async");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_2_0;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngModel", (tmp_2_0 = \u0275\u0275pipeBind1(2, 5, ctx_r2.options)) == null ? null : tmp_2_0.zones)("ngModelOptions", \u0275\u0275pureFunction0(11, _c062))("placeholder", \u0275\u0275pipeBind1(3, 7, "CALENDAR_EVENT.SPACE_LEVEL_ANY"))("multiple", true);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(5, 9, ctx_r2.levels));
+  }
+}
+function SpaceFiltersComponent_div_31_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r10 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 32)(1, "label", 13);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementStart(4, "span");
+    \u0275\u0275text(5, "*");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "a-date-field", 33);
+    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_div_31_Template_a_date_field_ngModelChange_6_listener($event) {
+      \u0275\u0275restoreView(_r10);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.form.patchValue({ date_end: $event }));
+    });
+    \u0275\u0275text(7);
+    \u0275\u0275pipe(8, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 9, "FORM.DATE_END"), "");
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngModel", ctx_r2.form.getRawValue().date_end)("ngModelOptions", \u0275\u0275pureFunction0(13, _c062))("from", ctx_r2.start_date)("to", ctx_r2.end_date)("short", true)("timezone", ctx_r2.timezone)("range", 2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(8, 11, "FORM.DATE_ERROR"), " ");
+  }
+}
+function SpaceFiltersComponent_div_32_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 34)(1, "mat-checkbox", 35);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "COMMON.ALL_DAY"), " ");
+  }
+}
+function SpaceFiltersComponent_div_33_div_8_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r12 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 37)(1, "label", 41);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementStart(4, "span");
+    \u0275\u0275text(5, "*");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "a-time-field", 42);
+    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_div_33_div_8_Template_a_time_field_ngModelChange_6_listener($event) {
+      \u0275\u0275restoreView(_r12);
+      const ctx_r2 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r2.form.patchValue({ date_end: $event }));
+    });
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_6_0;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 6, "FORM.TIME_END"), "");
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngModel", ctx_r2.form.value.date_end)("ngModelOptions", \u0275\u0275pureFunction0(8, _c062))("from", ctx_r2.form == null ? null : (tmp_6_0 = ctx_r2.form.getRawValue()) == null ? null : tmp_6_0.date)("use_24hr", ctx_r2.use_24hr)("timezone", ctx_r2.timezone);
+  }
+}
+function SpaceFiltersComponent_div_33_div_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 37)(1, "label", 41);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementStart(4, "span");
+    \u0275\u0275text(5, "*");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(6, "a-duration-field", 43);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_4_0;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 5, "FORM.TIME_END"), "");
+    \u0275\u0275advance(4);
+    \u0275\u0275property("time", ctx_r2.form == null ? null : (tmp_4_0 = ctx_r2.form.getRawValue()) == null ? null : tmp_4_0.date)("max", ctx_r2.max_duration)("use_24hr", ctx_r2.use_24hr)("timezone", ctx_r2.timezone);
+  }
+}
+function SpaceFiltersComponent_div_33_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r11 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 36)(1, "div", 37)(2, "label", 38);
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275elementStart(5, "span");
+    \u0275\u0275text(6, "*");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(7, "a-time-field", 39);
+    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_div_33_Template_a_time_field_ngModelChange_7_listener($event) {
+      \u0275\u0275restoreView(_r11);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.form.patchValue({ date: $event }));
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275template(8, SpaceFiltersComponent_div_33_div_8_Template, 7, 9, "div", 40)(9, SpaceFiltersComponent_div_33_div_9_Template, 7, 7, "div", 40);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 7, "FORM.TIME_START"), "");
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngModel", ctx_r2.form.getRawValue().date)("ngModelOptions", \u0275\u0275pureFunction0(9, _c062))("use_24hr", ctx_r2.use_24hr)("timezone", ctx_r2.timezone);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r2.multiday);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.multiday);
+  }
+}
+function SpaceFiltersComponent_section_36_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r13 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "section", 44)(1, "h2", 45);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 46)(5, "settings-toggle", 47);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275pipe(7, "async");
+    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_section_36_Template_settings_toggle_ngModelChange_5_listener($event) {
+      \u0275\u0275restoreView(_r13);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.setOptions({ show_fav: $event }));
+    });
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    let tmp_4_0;
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 4, "COMMON.FAVOURITES"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275property("name", \u0275\u0275pipeBind1(6, 6, "COMMON.FAVOURITES_ONLY"))("ngModel", (tmp_4_0 = \u0275\u0275pipeBind1(7, 8, ctx_r2.options)) == null ? null : tmp_4_0.show_fav)("ngModelOptions", \u0275\u0275pureFunction0(10, _c062));
+  }
+}
+function SpaceFiltersComponent_section_37_ng_container_3_div_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r14 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 51)(1, "settings-toggle", 47);
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_section_37_ng_container_3_div_1_Template_settings_toggle_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r14);
+      const feat_r15 = \u0275\u0275nextContext().$implicit;
+      const ctx_r2 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r2.toggleFeature(feat_r15, $event));
+    });
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_6_0;
+    const feat_r15 = \u0275\u0275nextContext().$implicit;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("name", ctx_r2.feature_display[feat_r15] || feat_r15)("ngModel", (tmp_6_0 = \u0275\u0275pipeBind1(2, 3, ctx_r2.options)) == null ? null : tmp_6_0.features == null ? null : tmp_6_0.features.includes(feat_r15))("ngModelOptions", \u0275\u0275pureFunction0(5, _c062));
+  }
+}
+function SpaceFiltersComponent_section_37_ng_container_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, SpaceFiltersComponent_section_37_ng_container_3_div_1_Template, 3, 6, "div", 50);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const feat_r15 = ctx.$implicit;
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r2.hide_features.includes(feat_r15));
+  }
+}
+function SpaceFiltersComponent_section_37_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "section", 48)(1, "h2", 45);
+    \u0275\u0275text(2, "Facilities");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(3, SpaceFiltersComponent_section_37_ng_container_3_Template, 2, 1, "ng-container", 49);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 1, ctx_r2.features));
+  }
+}
+function SpaceFiltersComponent_div_39_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r16 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 52)(1, "button", 53);
+    \u0275\u0275listener("click", function SpaceFiltersComponent_div_39_Template_button_click_1_listener() {
+      \u0275\u0275restoreView(_r16);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.close());
+    });
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "COMON.APPLY"), " ");
+  }
+}
+var SpaceFiltersComponent = class _SpaceFiltersComponent {
+  get allow_all_day() {
+    return !!this._settings.get("app.events.allow_all_day");
+  }
+  get use_region() {
+    return !!this._settings.get("app.use_region");
+  }
+  get timezone() {
+    return this._settings.get("app.events.use_building_timezone") ? this._org.building.timezone : "";
+  }
+  get bld() {
+    return this._org.building;
+  }
+  get region() {
+    return this._org.region;
+  }
+  get form() {
+    return this._event_form.form;
+  }
+  get max_duration() {
+    return this._settings.get("app.events.max_duration") || 480;
+  }
+  get feature_display() {
+    return this._settings.get("app.events.feature_decriptions") || {};
+  }
+  get hide_features() {
+    return this._settings.get("app.events.hide_features") || [];
+  }
+  get use_24hr() {
+    return this._settings.get("app.use_24_hour_time");
+  }
+  get start_date() {
+    return startOfDay(this.form.getRawValue().date).valueOf();
+  }
+  get end_date() {
+    return endOfDay(addDays(Date.now(), this._settings.get("app.events.allowed_future_days") || 180));
+  }
+  constructor(_bsheet_ref, _settings, _event_form, _org, _spaces, _mapspeople) {
+    this._bsheet_ref = _bsheet_ref;
+    this._settings = _settings;
+    this._event_form = _event_form;
+    this._org = _org;
+    this._spaces = _spaces;
+    this._mapspeople = _mapspeople;
+    this.can_close = false;
+    this.options = this._event_form.options$;
+    this.building = this._org.active_building;
+    this.buildings = this._org.active_buildings;
+    this.levels = combineLatest([
+      this._org.active_region,
+      this._org.active_building
+    ]).pipe(map(([region, bld]) => {
+      const level_list = this.use_region ? this._org.levelsForRegion(region) : this._org.levelsForBuilding(bld);
+      const viewable_levels = level_list.filter((lvl) => !lvl.tags.includes("parking"));
+      return viewable_levels.sort((a, b2) => a.parent_id.localeCompare(b2.parent_id) || (a.display_name || "").localeCompare(b2.display_name || ""));
+    }));
+    this.regions = this._org.region_list;
+    this.using_mapspeople = this._mapspeople.available$;
+    this.features = combineLatest([
+      this._spaces.features,
+      this._event_form.available_spaces
+    ]).pipe(map(([features, spaces]) => unique(features.concat(flatten2(spaces.map((_3) => _3.features))))));
+    this.close = () => this._bsheet_ref.dismiss();
+    this.setOptions = (o) => this._event_form.setOptions(o);
+    this.can_close = !!this._bsheet_ref;
+  }
+  setBuilding(bld) {
+    this._org.building = bld;
+  }
+  setRegion(region) {
+    this._org.region = region;
+  }
+  toggleFeature(feat, state2) {
+    return __async(this, null, function* () {
+      const { features } = this._event_form.filters;
+      const new_list = (features || []).filter((_3) => feat !== _3);
+      if (state2)
+        new_list.push(feat);
+      this._event_form.setFilters({ features: new_list });
+    });
+  }
+  static {
+    this.\u0275fac = function SpaceFiltersComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _SpaceFiltersComponent)(\u0275\u0275directiveInject(MatBottomSheetRef, 8), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SpacesService), \u0275\u0275directiveInject(MapsPeopleService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceFiltersComponent, selectors: [["space-filters"]], inputs: { multiday: "multiday", hide_levels: "hide_levels", viewing_map: "viewing_map" }, standalone: false, decls: 40, vars: 41, consts: [[1, "flex", "items-center", "border-b", "border-base-200", "pb-2", "sm:hidden"], [1, "flex-1", "pl-2"], ["icon", "", "matRipple", "", "name", "close-space-filters", 3, "click", 4, "ngIf"], [1, "flex-2", "text-center", "text-xl", "font-medium"], [1, "flex-1"], [1, "max-h-[65vh]", "w-full", "max-w-[100vw]", "divide-y", "divide-base-200", "overflow-y-auto", "overflow-x-hidden", "p-2", 3, "formGroup"], ["details", ""], [1, "mb-1", "text-lg", "font-medium"], [1, "flex", "min-w-[8rem]", "flex-1", "flex-col"], ["for", "location"], ["appearance", "outline", "class", "w-full", 4, "ngIf"], [1, "flex", "flex-wrap", "items-center", "sm:space-x-2"], [1, "min-w-[8rem]", "flex-1"], ["for", "date"], ["name", "date", 3, "ngModelChange", "ngModel", "ngModelOptions", "to", "short", "timezone", "range"], ["class", "relative min-w-[8rem] flex-1", 4, "ngIf"], ["class", "-mt-2 mb-2 flex justify-end", 4, "ngIf"], ["class", "flex items-center space-x-2", 4, "ngIf"], ["favs", "", "class", "space-y-2 pb-4", 4, "ngIf"], ["features", "", "class", "space-y-2", 4, "ngIf"], ["class", "w-full border-t border-base-200 px-2 pt-2", 4, "ngIf"], ["icon", "", "matRipple", "", "name", "close-space-filters", 3, "click"], ["appearance", "outline", 1, "w-full"], ["name", "region", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], ["name", "building", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], ["name", "location", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder", "multiple"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"], [1, "relative", "min-w-[8rem]", "flex-1"], ["name", "date", 3, "ngModelChange", "ngModel", "ngModelOptions", "from", "to", "short", "timezone", "range"], [1, "-mt-2", "mb-2", "flex", "justify-end"], ["formControlName", "all_day"], [1, "flex", "items-center", "space-x-2"], [1, "w-1/3", "flex-1"], ["for", "start-time"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "use_24hr", "timezone"], ["class", "w-1/3 flex-1", 4, "ngIf"], ["for", "end-time"], ["name", "end-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "from", "use_24hr", "timezone"], ["name", "end-time", "formControlName", "duration", 3, "time", "max", "use_24hr", "timezone"], ["favs", "", 1, "space-y-2", "pb-4"], [1, "mt-2", "text-lg", "font-medium"], [1, "flex", "w-full", "items-center"], [1, "w-full", 3, "ngModelChange", "name", "ngModel", "ngModelOptions"], ["features", "", 1, "space-y-2"], [4, "ngFor", "ngForOf"], ["class", "flex items-center", 4, "ngIf"], [1, "flex", "items-center"], [1, "w-full", "border-t", "border-base-200", "px-2", "pt-2"], ["btn", "", "matRipple", "", "name", "apply-space-filters", 1, "w-full", 3, "click"]], template: function SpaceFiltersComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
+        \u0275\u0275template(2, SpaceFiltersComponent_button_2_Template, 3, 0, "button", 2);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(3, "h3", 3);
+        \u0275\u0275text(4);
+        \u0275\u0275pipe(5, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(6, "div", 4);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(7, "form", 5)(8, "section", 6)(9, "h2", 7);
+        \u0275\u0275text(10);
+        \u0275\u0275pipe(11, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(12, "div", 8)(13, "label", 9);
+        \u0275\u0275text(14);
+        \u0275\u0275pipe(15, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(16, SpaceFiltersComponent_mat_form_field_16_Template, 5, 9, "mat-form-field", 10);
+        \u0275\u0275pipe(17, "async");
+        \u0275\u0275template(18, SpaceFiltersComponent_mat_form_field_18_Template, 7, 13, "mat-form-field", 10);
+        \u0275\u0275pipe(19, "async");
+        \u0275\u0275template(20, SpaceFiltersComponent_mat_form_field_20_Template, 6, 12, "mat-form-field", 10);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(21, "div", 11)(22, "div", 12)(23, "label", 13);
+        \u0275\u0275text(24);
+        \u0275\u0275pipe(25, "translate");
+        \u0275\u0275elementStart(26, "span");
+        \u0275\u0275text(27, "*");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(28, "a-date-field", 14);
+        \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_Template_a_date_field_ngModelChange_28_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.form.patchValue({ date: $event }));
+        });
+        \u0275\u0275text(29);
+        \u0275\u0275pipe(30, "translate");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275template(31, SpaceFiltersComponent_div_31_Template, 9, 14, "div", 15);
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(32, SpaceFiltersComponent_div_32_Template, 4, 3, "div", 16)(33, SpaceFiltersComponent_div_33_Template, 10, 10, "div", 17);
+        \u0275\u0275elementEnd();
+        \u0275\u0275declareLet(34);
+        \u0275\u0275pipe(35, "async");
+        \u0275\u0275template(36, SpaceFiltersComponent_section_36_Template, 8, 11, "section", 18)(37, SpaceFiltersComponent_section_37_Template, 5, 3, "section", 19);
+        \u0275\u0275pipe(38, "async");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(39, SpaceFiltersComponent_div_39_Template, 4, 3, "div", 20);
+      }
+      if (rf & 2) {
+        let tmp_5_0;
+        let tmp_6_0;
+        let tmp_21_0;
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.can_close);
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 22, "COMMON.FILTERS"), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275property("formGroup", ctx.form);
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(11, 24, "CALENDAR_EVENT.DETAILS"), " ");
+        \u0275\u0275advance(4);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(15, 26, "CALENDAR_EVENT.SPACE_LOCATION"), " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.use_region && ((tmp_5_0 = \u0275\u0275pipeBind1(17, 28, ctx.regions)) == null ? null : tmp_5_0.length));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", !ctx.use_region && ((tmp_6_0 = \u0275\u0275pipeBind1(19, 30, ctx.buildings)) == null ? null : tmp_6_0.length) > 1);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", !ctx.hide_levels);
+        \u0275\u0275advance(4);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(25, 32, "FORM.DATE"), "");
+        \u0275\u0275advance(4);
+        \u0275\u0275property("ngModel", ctx.form.getRawValue().date)("ngModelOptions", \u0275\u0275pureFunction0(40, _c062))("to", ctx.end_date)("short", true)("timezone", ctx.timezone)("range", ctx.multiday ? 1 : 0);
+        \u0275\u0275advance();
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(30, 34, "FORM.DATE_ERROR"), " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.multiday);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.allow_all_day);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", !ctx.form.value.all_day);
+        const has_mapspeople_r17 = \u0275\u0275pipeBind1(35, 36, ctx.using_mapspeople);
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngIf", !ctx.hide_levels && (!ctx.viewing_map || !has_mapspeople_r17));
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ((tmp_21_0 = \u0275\u0275pipeBind1(38, 38, ctx.features)) == null ? null : tmp_21_0.length) && (!ctx.viewing_map || !has_mapspeople_r17) && !ctx.hide_levels);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.can_close);
+      }
+    }, dependencies: [NgForOf, NgIf, IconComponent, SettingsToggleComponent, MatOption, MatFormField, MatSelect, MatRipple, MatCheckbox, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  max-width: 100vw;\n}\n/*# sourceMappingURL=space-filters.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceFiltersComponent, { className: "SpaceFiltersComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-filters.component.ts", lineNumber: 301 });
+})();
+
+// libs/spaces/src/lib/space-select-modal/space-filters-display.component.ts
+var _c063 = (a0) => ({ count: a0 });
+function SpaceFiltersDisplayComponent_button_12_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 13);
+    \u0275\u0275listener("click", function SpaceFiltersDisplayComponent_button_12_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.removeAllFeatures());
+    });
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "COMMON.FILTERS_CLEAR"), " ");
+  }
+}
+function SpaceFiltersDisplayComponent_div_14_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 14);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.location, " ");
+  }
+}
+function SpaceFiltersDisplayComponent_ng_container_19_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "date");
+    \u0275\u0275pipe(3, "date");
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(2, 2, ctx_r1.start, ctx_r1.time_format), " \u2014 ", \u0275\u0275pipeBind2(3, 5, ctx_r1.end, ctx_r1.time_format), " ");
+  }
+}
+function SpaceFiltersDisplayComponent_ng_container_20_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "COMMON.ALL_DAY"), " ");
+  }
+}
+function SpaceFiltersDisplayComponent_div_25_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 15)(1, "p", 16);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "button", 17);
+    \u0275\u0275listener("click", function SpaceFiltersDisplayComponent_div_25_Template_button_click_3_listener() {
+      const feat_r4 = \u0275\u0275restoreView(_r3).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.removeFeature(feat_r4));
+    });
+    \u0275\u0275elementStart(4, "app-icon");
+    \u0275\u0275text(5, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const feat_r4 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(feat_r4);
+  }
+}
+var SpaceFiltersDisplayComponent = class _SpaceFiltersDisplayComponent extends AsyncHandler {
+  get all_day() {
+    return this._event_form.form.value.all_day;
+  }
+  get start() {
+    return this._event_form.form.value.date;
+  }
+  get end() {
+    const { date, duration } = this._event_form.form.value;
+    return date + duration * 60 * 1e3;
+  }
+  get time_format() {
+    return this._settings.time_format;
+  }
+  constructor(_bsheet, _event_form, _org, _settings) {
+    super();
+    this._bsheet = _bsheet;
+    this._event_form = _event_form;
+    this._org = _org;
+    this._settings = _settings;
+    this.view = "list";
+    this.viewChange = new EventEmitter();
+    this.options = this._event_form.options$;
+    this.location = "";
+    this.editFilters = () => this._bsheet.open(SpaceFiltersComponent);
+  }
+  ngOnInit() {
+    this.subscription("opts", this.options.subscribe(({ zones }) => this._updateLocation(zones)));
+  }
+  removeFeature(feat) {
+    return __async(this, null, function* () {
+      const { features } = this._event_form.filters || {};
+      this._event_form.setFilters({
+        features: (features || []).filter((_3) => _3 !== feat)
+      });
+    });
+  }
+  removeAllFeatures() {
+    return __async(this, null, function* () {
+      this._event_form.setFilters({ features: [] });
+    });
+  }
+  _updateLocation(zone_ids = []) {
+    const level2 = this._org.levelWithID(zone_ids);
+    const item = level2 || this._org.building;
+    this.location = item?.display_name || item?.name || "";
+  }
+  static {
+    this.\u0275fac = function SpaceFiltersDisplayComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _SpaceFiltersDisplayComponent)(\u0275\u0275directiveInject(MatBottomSheet), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceFiltersDisplayComponent, selectors: [["space-filters-display"]], inputs: { view: "view" }, outputs: { viewChange: "viewChange" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 27, vars: 34, consts: [["actions", "", 1, "flex", "items-center", "space-x-2", "p-2", "sm:hidden"], ["btn", "", "matRipple", "", "name", "edit-space-filters", 1, "w-1/2", "flex-1", 3, "click"], [1, "flex", "items-center"], ["btn", "", "matRipple", "", "name", "view-space-map", 1, "rounded-l", "rounded-r-none", 3, "click"], ["btn", "", "matRipple", "", "name", "view-space-list", 1, "rounded-l-none", "rounded-r", 3, "click"], ["filters", "", 1, "flex", "w-[35rem]", "max-w-full", "flex-wrap", "items-center", "p-2", "sm:max-w-[35rem]"], ["btn", "", "matRipple", "", "name", "clear-space-filters", "class", "mb-2 mr-2 min-h-[2rem]", 3, "click", 4, "ngIf"], ["filter-item", "", "zone", "", 4, "ngIf"], ["filter-item", "", "date", ""], ["filter-item", "", "time", ""], [4, "ngIf"], ["filter-item", "", "count", ""], ["filter-item", "", 4, "ngFor", "ngForOf"], ["btn", "", "matRipple", "", "name", "clear-space-filters", 1, "mb-2", "mr-2", "min-h-[2rem]", 3, "click"], ["filter-item", "", "zone", ""], ["filter-item", ""], [1, "truncate"], ["icon", "", "matRipple", "", "name", "remove-space-filter", 1, "-mr-4", 3, "click"]], template: function SpaceFiltersDisplayComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "section", 0)(1, "button", 1);
+        \u0275\u0275listener("click", function SpaceFiltersDisplayComponent_Template_button_click_1_listener() {
+          return ctx.editFilters();
+        });
+        \u0275\u0275text(2);
+        \u0275\u0275pipe(3, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(4, "div", 2)(5, "button", 3);
+        \u0275\u0275listener("click", function SpaceFiltersDisplayComponent_Template_button_click_5_listener() {
+          ctx.view = "map";
+          return ctx.viewChange.emit(ctx.view);
+        });
+        \u0275\u0275text(6);
+        \u0275\u0275pipe(7, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(8, "button", 4);
+        \u0275\u0275listener("click", function SpaceFiltersDisplayComponent_Template_button_click_8_listener() {
+          ctx.view = "list";
+          return ctx.viewChange.emit(ctx.view);
+        });
+        \u0275\u0275text(9);
+        \u0275\u0275pipe(10, "translate");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(11, "section", 5);
+        \u0275\u0275template(12, SpaceFiltersDisplayComponent_button_12_Template, 3, 3, "button", 6);
+        \u0275\u0275pipe(13, "async");
+        \u0275\u0275template(14, SpaceFiltersDisplayComponent_div_14_Template, 2, 1, "div", 7);
+        \u0275\u0275elementStart(15, "div", 8);
+        \u0275\u0275text(16);
+        \u0275\u0275pipe(17, "date");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(18, "div", 9);
+        \u0275\u0275template(19, SpaceFiltersDisplayComponent_ng_container_19_Template, 4, 8, "ng-container", 10)(20, SpaceFiltersDisplayComponent_ng_container_20_Template, 3, 3, "ng-container", 10);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(21, "div", 11);
+        \u0275\u0275text(22);
+        \u0275\u0275pipe(23, "async");
+        \u0275\u0275pipe(24, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(25, SpaceFiltersDisplayComponent_div_25_Template, 6, 1, "div", 12);
+        \u0275\u0275pipe(26, "async");
+        \u0275\u0275elementEnd();
+      }
+      if (rf & 2) {
+        let tmp_5_0;
+        let tmp_10_0;
+        let tmp_11_0;
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 14, "COMMON.FILTERS"), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275classProp("inverse", ctx.view !== "map");
+        \u0275\u0275advance();
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 16, "COMMON.MAP"), " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275classProp("inverse", ctx.view !== "list");
+        \u0275\u0275advance();
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 18, "COMMON.LIST"), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngIf", ((tmp_5_0 = \u0275\u0275pipeBind1(13, 20, ctx.options)) == null ? null : tmp_5_0.features == null ? null : tmp_5_0.features.length) > 1);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.location);
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(17, 22, ctx.start, "mediumDate"), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngIf", !ctx.all_day);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.all_day);
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(24, 27, "CALENDAR_EVENT.SPACE_SELECT_SIZE_X", \u0275\u0275pureFunction1(32, _c063, ((tmp_10_0 = \u0275\u0275pipeBind1(23, 25, ctx.options)) == null ? null : tmp_10_0.capacity) || 2)), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngForOf", (tmp_11_0 = \u0275\u0275pipeBind1(26, 30, ctx.options)) == null ? null : tmp_11_0.features);
+      }
+    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[filter-item][_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0 1rem;\n  min-height: 2rem;\n  font-size: 0.875rem;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 1.25rem;\n  margin-right: 0.5rem;\n  margin-bottom: 0.5rem;\n  max-width: 100%;\n  text-align: center;\n}\n[filter-item][_ngcontent-%COMP%]:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n[filter-item][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%]    + *[_ngcontent-%COMP%] {\n  margin-left: 0.5rem;\n}\n/*# sourceMappingURL=space-filters-display.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceFiltersDisplayComponent, { className: "SpaceFiltersDisplayComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-filters-display.component.ts", lineNumber: 120 });
+})();
+
+// libs/spaces/src/lib/space-select-modal/space-list.component.ts
+var _c064 = (a0) => ({ count: a0 });
+function SpaceListComponent_ng_container_6_ul_1_li_1_div_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 21)(1, "app-icon");
+    \u0275\u0275text(2, "done");
+    \u0275\u0275elementEnd()();
+  }
+}
+function SpaceListComponent_ng_container_6_ul_1_li_1_img_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 22);
+  }
+  if (rf & 2) {
+    const space_r2 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275property("source", space_r2.images[0]);
+  }
+}
+function SpaceListComponent_ng_container_6_ul_1_li_1_ng_template_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 23);
+  }
+}
+function SpaceListComponent_ng_container_6_ul_1_li_1_div_11_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 24);
+    \u0275\u0275pipe(1, "async");
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275pipe(3, "async");
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275pipe(5, "async");
+    \u0275\u0275pipe(6, "async");
+    \u0275\u0275pipe(7, "async");
+    \u0275\u0275listener("click", function SpaceListComponent_ng_container_6_ul_1_li_1_div_11_Template_div_click_0_listener($event) {
+      \u0275\u0275restoreView(_r4);
+      return \u0275\u0275resetView($event.stopPropagation());
+    });
+    \u0275\u0275elementStart(8, "app-icon");
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "async");
+    \u0275\u0275pipe(11, "async");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const space_r2 = \u0275\u0275nextContext().$implicit;
+    const ctx_r2 = \u0275\u0275nextContext(3);
+    \u0275\u0275classProp("bg-error", \u0275\u0275pipeBind1(1, 14, ctx_r2.room_alerts)[space_r2.id][0] === "closed")("bg-info", \u0275\u0275pipeBind1(2, 16, ctx_r2.room_alerts)[space_r2.id][0] === "info")("bg-warning", \u0275\u0275pipeBind1(3, 18, ctx_r2.room_alerts)[space_r2.id][0] === "warn")("text-error-content", \u0275\u0275pipeBind1(4, 20, ctx_r2.room_alerts)[space_r2.id][0] === "closed")("text-info-content", \u0275\u0275pipeBind1(5, 22, ctx_r2.room_alerts)[space_r2.id][0] === "info")("text-warning-content", \u0275\u0275pipeBind1(6, 24, ctx_r2.room_alerts)[space_r2.id][0] === "warn");
+    \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(7, 26, ctx_r2.room_alerts)[space_r2.id][1]);
+    \u0275\u0275advance(9);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(10, 28, ctx_r2.room_alerts)[space_r2.id][0] === "warn" ? "warning" : \u0275\u0275pipeBind1(11, 30, ctx_r2.room_alerts)[space_r2.id][0] === "info" ? "info" : "close");
+  }
+}
+function SpaceListComponent_ng_container_6_ul_1_li_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "li", 9);
+    \u0275\u0275pipe(1, "async");
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275elementStart(3, "button", 10);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275pipe(5, "async");
+    \u0275\u0275listener("click", function SpaceListComponent_ng_container_6_ul_1_li_1_Template_button_click_3_listener() {
+      const space_r2 = \u0275\u0275restoreView(_r1).$implicit;
+      const ctx_r2 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r2.selectSpace(space_r2));
+    });
+    \u0275\u0275elementStart(6, "div", 11);
+    \u0275\u0275template(7, SpaceListComponent_ng_container_6_ul_1_li_1_div_7_Template, 3, 0, "div", 12)(8, SpaceListComponent_ng_container_6_ul_1_li_1_img_8_Template, 1, 1, "img", 13)(9, SpaceListComponent_ng_container_6_ul_1_li_1_ng_template_9_Template, 1, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(11, SpaceListComponent_ng_container_6_ul_1_li_1_div_11_Template, 12, 32, "div", 14);
+    \u0275\u0275pipe(12, "async");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(13, "div", 15)(14, "div", 16);
+    \u0275\u0275text(15);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(16, "div", 17)(17, "app-icon", 18);
+    \u0275\u0275text(18, "place");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(19, "p", 19);
+    \u0275\u0275text(20);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(21, "div", 17)(22, "app-icon", 18);
+    \u0275\u0275text(23, "people");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(24, "p");
+    \u0275\u0275text(25);
+    \u0275\u0275pipe(26, "translate");
+    \u0275\u0275elementEnd()()()();
+    \u0275\u0275elementStart(27, "button", 20);
+    \u0275\u0275listener("click", function SpaceListComponent_ng_container_6_ul_1_li_1_Template_button_click_27_listener() {
+      const space_r2 = \u0275\u0275restoreView(_r1).$implicit;
+      const ctx_r2 = \u0275\u0275nextContext(3);
+      return \u0275\u0275resetView(ctx_r2.toggleFav.emit(space_r2));
+    });
+    \u0275\u0275elementStart(28, "app-icon");
+    \u0275\u0275text(29);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    let tmp_15_0;
+    const space_r2 = ctx.$implicit;
+    const space_placeholder_r5 = \u0275\u0275reference(10);
+    const ctx_r2 = \u0275\u0275nextContext(3);
+    \u0275\u0275classProp("!border-info", ctx_r2.active === space_r2.id)("!bg-error-light", \u0275\u0275pipeBind1(1, 16, ctx_r2.room_alerts)[space_r2.id] ? \u0275\u0275pipeBind1(2, 18, ctx_r2.room_alerts)[space_r2.id][0] === "closed" : false);
+    \u0275\u0275advance(3);
+    \u0275\u0275classProp("pointer-events-none", \u0275\u0275pipeBind1(4, 20, ctx_r2.room_alerts)[space_r2.id] ? \u0275\u0275pipeBind1(5, 22, ctx_r2.room_alerts)[space_r2.id][0] === "closed" : false);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngIf", ctx_r2.selected.includes(space_r2.id));
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", space_r2.images == null ? null : space_r2.images.length)("ngIfElse", space_placeholder_r5);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(12, 24, ctx_r2.room_alerts)[space_r2.id]);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", space_r2.display_name || space_r2.name || "Meeting Space", " ");
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", space_r2.location || ((tmp_15_0 = ctx_r2.level(space_r2.zones)) == null ? null : tmp_15_0.display_name) || ((tmp_15_0 = ctx_r2.level(space_r2.zones)) == null ? null : tmp_15_0.name), " ");
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(26, 26, "CALENDAR_EVENT.CAPACITY_COUNT", \u0275\u0275pureFunction1(29, _c064, space_r2.capacity < 1 ? 2 : space_r2.capacity)), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275classProp("text-info", ctx_r2.isFavourite(space_r2.id));
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r2.isFavourite(space_r2.id) ? "favorite" : "favorite_border");
+  }
+}
+function SpaceListComponent_ng_container_6_ul_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "ul", 7);
+    \u0275\u0275template(1, SpaceListComponent_ng_container_6_ul_1_li_1_Template, 30, 31, "li", 8);
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r2 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(2, 1, ctx_r2.available_spaces));
+  }
+}
+function SpaceListComponent_ng_container_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, SpaceListComponent_ng_container_6_ul_1_Template, 3, 3, "ul", 6);
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r2 = \u0275\u0275nextContext();
+    const empty_state_r6 = \u0275\u0275reference(9);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", (tmp_3_0 = \u0275\u0275pipeBind1(2, 2, ctx_r2.available_spaces)) == null ? null : tmp_3_0.length)("ngIfElse", empty_state_r6);
+  }
+}
+function SpaceListComponent_ng_template_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 25)(1, "p", 26);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "CALENDAR_EVENT.SPACE_SELECT_EMPTY"), " ");
+  }
+}
+function SpaceListComponent_ng_template_10_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 27);
+    \u0275\u0275element(1, "mat-spinner", 28);
+    \u0275\u0275elementStart(2, "p", 29);
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275property("diameter", 32);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 2, "CALENDAR_EVENT.SPACE_SELECT_LOADING"), " ");
+  }
+}
+var SpaceListComponent = class _SpaceListComponent {
+  constructor(_event_form, _org) {
+    this._event_form = _event_form;
+    this._org = _org;
+    this.active = "";
+    this.selected = "";
+    this.favorites = [];
+    this.onSelect = new EventEmitter();
+    this.toggleFav = new EventEmitter();
+    this.loading = this._event_form.loading$;
+    this.available_spaces = this._event_form.available_spaces;
+    this.room_alerts = this._event_form.room_alerts;
+  }
+  level(zones) {
+    return this._org.levelWithID(zones);
+  }
+  ngOnInit() {
+    this._event_form.setView("find");
+  }
+  isFavourite(space_id) {
+    return this.favorites.includes(space_id);
+  }
+  selectSpace(space) {
+    this.onSelect.emit(space);
+  }
+  static {
+    this.\u0275fac = function SpaceListComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _SpaceListComponent)(\u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(OrganisationService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceListComponent, selectors: [["space-list"]], inputs: { active: "active", selected: "selected", favorites: "favorites" }, outputs: { onSelect: "onSelect", toggleFav: "toggleFav" }, standalone: false, decls: 12, vars: 10, consts: [["empty_state", ""], ["load_state", ""], ["space_placeholder", ""], [1, "font-bold"], ["count", "", 1, "mb-4", "text-sm", "opacity-60"], [4, "ngIf", "ngIfElse"], ["class", "list-style-none space-y-2", 4, "ngIf", "ngIfElse"], [1, "list-style-none", "space-y-2"], ["space", "", "class", "relative w-full rounded-lg border border-base-200 bg-base-100 p-2 shadow", 3, "!border-info", "!bg-error-light", 4, "ngFor", "ngForOf"], ["space", "", 1, "relative", "w-full", "rounded-lg", "border", "border-base-200", "bg-base-100", "p-2", "shadow"], ["matRipple", "", "name", "select-space", 1, "flex", "h-full", "w-full", "items-center", "rounded", 3, "click"], [1, "relative", "mr-4", "flex", "h-20", "w-20", "min-w-[5rem]", "items-center", "justify-center", "overflow-hidden", "rounded-xl", "bg-base-200"], ["class", "absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full border border-neutral bg-base-200 text-white", 4, "ngIf"], ["auth", "", "class", "h-full object-cover", 3, "source", 4, "ngIf", "ngIfElse"], ["class", "pointer-events-auto absolute bottom-1 left-1 flex h-6 w-6 rotate-12 items-center justify-center rounded-full", 3, "matTooltip", "bg-error", "bg-info", "bg-warning", "text-error-content", "text-info-content", "text-warning-content", "click", 4, "ngIf"], [1, "space-y-2"], [1, "mr-10", "truncate", "text-left", "font-medium"], [1, "flex", "items-center", "space-x-2", "text-sm"], [1, "text-info"], [1, "truncate"], ["icon", "", "matRipple", "", "name", "toggle-space-favourite", 1, "absolute", "right-1", "top-1", 3, "click"], [1, "absolute", "left-1", "top-1", "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", "border", "border-neutral", "bg-base-200", "text-white"], ["auth", "", 1, "h-full", "object-cover", 3, "source"], ["src", "assets/icons/room-placeholder.svg", 1, "m-auto"], [1, "pointer-events-auto", "absolute", "bottom-1", "left-1", "flex", "h-6", "w-6", "rotate-12", "items-center", "justify-center", "rounded-full", 3, "click", "matTooltip"], ["empty", "", 1, "flex", "flex-col", "items-center", "justify-center", "space-y-2", "p-16"], [1, "text-center", "opacity-30"], ["loading", "", 1, "flex", "flex-col", "items-center", "justify-center", "space-y-2", "p-16"], [3, "diameter"], [1, "opacity-30"]], template: function SpaceListComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "h3", 3);
+        \u0275\u0275text(1);
+        \u0275\u0275pipe(2, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(3, "p", 4);
+        \u0275\u0275text(4);
+        \u0275\u0275pipe(5, "async");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(6, SpaceListComponent_ng_container_6_Template, 3, 4, "ng-container", 5);
+        \u0275\u0275pipe(7, "async");
+        \u0275\u0275template(8, SpaceListComponent_ng_template_8_Template, 4, 3, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(10, SpaceListComponent_ng_template_10_Template, 5, 4, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        let tmp_3_0;
+        const load_state_r7 = \u0275\u0275reference(11);
+        \u0275\u0275advance();
+        \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(2, 4, "COMMON.RESULTS"));
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate1(" ", ((tmp_3_0 = \u0275\u0275pipeBind1(5, 6, ctx.available_spaces)) == null ? null : tmp_3_0.length) || 0, " result(s) found ");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(7, 8, ctx.loading))("ngIfElse", load_state_r7);
+      }
+    }, dependencies: [NgForOf, NgIf, IconComponent, AuthenticatedImageDirective, MatRipple, MatProgressSpinner, MatTooltip, AsyncPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  overflow: auto;\n}\n/*# sourceMappingURL=space-list.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceListComponent, { className: "SpaceListComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-list.component.ts", lineNumber: 197 });
+})();
+
+// libs/common/src/lib/vanillaqr.min.ts
+function VanillaQR(r) {
+  var e = this;
+  r = "object" == typeof r ? r : {}, e.revision = 3, e.imageTypes = { bmp: "image/bmp", gif: "image/gif", jpeg: "image/jpeg", jpg: "image/jpg", png: "image/png", "svg+xml": "image/svg+xml", tiff: "image/tiff", webp: "image/webp", "x-icon": "image/x-icon" }, e.toTable = r.toTable, e.domElement = e.toTable ? document.createElement("div") : document.createElement("canvas"), e.url = r.url || "", e.size = r.size || 280, e.qrc = false, e.colorLight = r.colorLight || "#fff", e.colorDark = r.colorDark || "#000", e.ecclevel = r.ecclevel || 1, e.noBorder = r.noBorder, e.borderSize = r.borderSize || 4;
+  var o, a, t, i, n, l2, f2, c = [], s = [], d = [], g3 = [], h3 = [], v4 = [], m3 = function(r2, e2) {
+    var o2;
+    r2 > e2 && (o2 = r2, r2 = e2, e2 = o2), o2 = e2, o2 *= e2, o2 += e2, o2 >>= 1, g3[o2 += r2] = 1;
+  }, u3 = function(r2, e2) {
+    var o2;
+    for (d[r2 + t * e2] = 1, o2 = -2; o2 < 2; o2++)
+      d[r2 + o2 + t * (e2 - 2)] = 1, d[r2 - 2 + t * (e2 + o2 + 1)] = 1, d[r2 + 2 + t * (e2 + o2)] = 1, d[r2 + o2 + 1 + t * (e2 + 2)] = 1;
+    for (o2 = 0; o2 < 2; o2++)
+      m3(r2 - 1, e2 + o2), m3(r2 + 1, e2 - o2), m3(r2 - o2, e2 - 1), m3(r2 + o2, e2 + 1);
+  }, p = function(r2) {
+    for (; r2 >= 255; )
+      r2 = ((r2 -= 255) >> 8) + (255 & r2);
+    return r2;
+  }, b2 = function(r2, e2, o2, a2) {
+    var t2, i2, n2, l3 = VanillaQR.gexp, f3 = VanillaQR.glog;
+    for (t2 = 0; t2 < a2; t2++)
+      c[o2 + t2] = 0;
+    for (t2 = 0; t2 < e2; t2++) {
+      if (255 != (n2 = f3[c[r2 + t2] ^ c[o2]]))
+        for (i2 = 1; i2 < a2; i2++)
+          c[o2 + i2 - 1] = c[o2 + i2] ^ l3[p(n2 + v4[a2 - i2])];
+      else
+        for (i2 = o2; i2 < o2 + a2; i2++)
+          c[i2] = c[i2 + 1];
+      c[o2 + a2 - 1] = 255 == n2 ? 0 : l3[p(n2 + v4[0])];
+    }
+  }, R3 = function(r2, e2) {
+    var o2;
+    return r2 > e2 && (o2 = r2, r2 = e2, e2 = o2), o2 = e2, o2 += e2 * e2, o2 >>= 1, g3[o2 += r2];
+  }, Q4 = function(r2) {
+    var e2, o2, a2, i2;
+    switch (r2) {
+      case 0:
+        for (o2 = 0; o2 < t; o2++)
+          for (e2 = 0; e2 < t; e2++)
+            e2 + o2 & 1 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
+        break;
+      case 1:
+        for (o2 = 0; o2 < t; o2++)
+          for (e2 = 0; e2 < t; e2++)
+            1 & o2 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
+        break;
+      case 2:
+        for (o2 = 0; o2 < t; o2++)
+          for (a2 = 0, e2 = 0; e2 < t; e2++, a2++)
+            3 == a2 && (a2 = 0), a2 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
+        break;
+      case 3:
+        for (i2 = 0, o2 = 0; o2 < t; o2++, i2++)
+          for (3 == i2 && (i2 = 0), a2 = i2, e2 = 0; e2 < t; e2++, a2++)
+            3 == a2 && (a2 = 0), a2 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
+        break;
+      case 4:
+        for (o2 = 0; o2 < t; o2++)
+          for (a2 = 0, i2 = o2 >> 1 & 1, e2 = 0; e2 < t; e2++, a2++)
+            3 == a2 && (a2 = 0, i2 = !i2), i2 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
+        break;
+      case 5:
+        for (i2 = 0, o2 = 0; o2 < t; o2++, i2++)
+          for (3 == i2 && (i2 = 0), a2 = 0, e2 = 0; e2 < t; e2++, a2++)
+            3 == a2 && (a2 = 0), (e2 & o2 & 1) + !(!a2 | !i2) || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
+        break;
+      case 6:
+        for (i2 = 0, o2 = 0; o2 < t; o2++, i2++)
+          for (3 == i2 && (i2 = 0), a2 = 0, e2 = 0; e2 < t; e2++, a2++)
+            3 == a2 && (a2 = 0), (e2 & o2 & 1) + (a2 && a2 == i2) & 1 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
+        break;
+      case 7:
+        for (i2 = 0, o2 = 0; o2 < t; o2++, i2++)
+          for (3 == i2 && (i2 = 0), a2 = 0, e2 = 0; e2 < t; e2++, a2++)
+            3 == a2 && (a2 = 0), (a2 && a2 == i2) + (e2 + o2 & 1) & 1 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
+    }
+  }, V3 = function(r2) {
+    var e2, o2 = 0;
+    for (e2 = 0; e2 <= r2; e2++)
+      h3[e2] >= 5 && (o2 += VanillaQR.N1 + h3[e2] - 5);
+    for (e2 = 3; e2 < r2 - 1; e2 += 2)
+      h3[e2 - 2] == h3[e2 + 2] && h3[e2 + 2] == h3[e2 - 1] && h3[e2 - 1] == h3[e2 + 1] && 3 * h3[e2 - 1] == h3[e2] && (0 == h3[e2 - 3] || e2 + 3 > r2 || 3 * h3[e2 - 3] >= 4 * h3[e2] || 3 * h3[e2 + 3] >= 4 * h3[e2]) && (o2 += VanillaQR.N3);
+    return o2;
+  }, k3 = function() {
+    var r2, e2, o2, a2, i2, n2 = 0, l3 = 0;
+    for (e2 = 0; e2 < t - 1; e2++)
+      for (r2 = 0; r2 < t - 1; r2++)
+        (d[r2 + t * e2] && d[r2 + 1 + t * e2] && d[r2 + t * (e2 + 1)] && d[r2 + 1 + t * (e2 + 1)] || !(d[r2 + t * e2] || d[r2 + 1 + t * e2] || d[r2 + t * (e2 + 1)] || d[r2 + 1 + t * (e2 + 1)])) && (n2 += VanillaQR.N2);
+    for (e2 = 0; e2 < t; e2++) {
+      for (h3[0] = 0, o2 = a2 = r2 = 0; r2 < t; r2++)
+        (i2 = d[r2 + t * e2]) == a2 ? h3[o2]++ : h3[++o2] = 1, l3 += (a2 = i2) ? 1 : -1;
+      n2 += V3(o2);
+    }
+    l3 < 0 && (l3 = -l3);
+    var f3 = l3, c2 = 0;
+    for (f3 += f3 << 2, f3 <<= 1; f3 > t * t; )
+      f3 -= t * t, c2++;
+    for (n2 += c2 * VanillaQR.N4, r2 = 0; r2 < t; r2++) {
+      for (h3[0] = 0, o2 = a2 = e2 = 0; e2 < t; e2++)
+        (i2 = d[r2 + t * e2]) == a2 ? h3[o2]++ : h3[++o2] = 1, a2 = i2;
+      n2 += V3(o2);
+    }
+    return n2;
+  };
+  e.genframe = function(r2) {
+    var e2, h4, V4, x3, C4, w2, E3, N4, T4 = VanillaQR.eccblocks, y2 = VanillaQR.gexp, z3 = VanillaQR.glog;
+    x3 = r2.length, a = 0;
+    do {
+      if (a++, V4 = 4 * (o - 1) + 16 * (a - 1), i = T4[V4++], n = T4[V4++], l2 = T4[V4++], f2 = T4[V4], x3 <= (V4 = l2 * (i + n) + n - 3 + (a <= 9)))
+        break;
+    } while (a < 40);
+    for (t = 17 + 4 * a, C4 = l2 + (l2 + f2) * (i + n) + n, x3 = 0; x3 < C4; x3++)
+      s[x3] = 0;
+    for (c = r2.slice(0), x3 = 0; x3 < t * t; x3++)
+      d[x3] = 0;
+    for (x3 = 0; x3 < (t * (t + 1) + 1) / 2; x3++)
+      g3[x3] = 0;
+    for (x3 = 0; x3 < 3; x3++) {
+      for (V4 = 0, h4 = 0, 1 == x3 && (V4 = t - 7), 2 == x3 && (h4 = t - 7), d[h4 + 3 + t * (V4 + 3)] = 1, e2 = 0; e2 < 6; e2++)
+        d[h4 + e2 + t * V4] = 1, d[h4 + t * (V4 + e2 + 1)] = 1, d[h4 + 6 + t * (V4 + e2)] = 1, d[h4 + e2 + 1 + t * (V4 + 6)] = 1;
+      for (e2 = 1; e2 < 5; e2++)
+        m3(h4 + e2, V4 + 1), m3(h4 + 1, V4 + e2 + 1), m3(h4 + 5, V4 + e2), m3(h4 + e2 + 1, V4 + 5);
+      for (e2 = 2; e2 < 4; e2++)
+        d[h4 + e2 + t * (V4 + 2)] = 1, d[h4 + 2 + t * (V4 + e2 + 1)] = 1, d[h4 + 4 + t * (V4 + e2)] = 1, d[h4 + e2 + 1 + t * (V4 + 4)] = 1;
+    }
+    if (a > 1)
+      for (x3 = VanillaQR.adelta[a], h4 = t - 7; ; ) {
+        for (e2 = t - 7; e2 > x3 - 3 && (u3(e2, h4), !(e2 < x3)); )
+          e2 -= x3;
+        if (h4 <= x3 + 9)
+          break;
+        u3(6, h4 -= x3), u3(h4, 6);
+      }
+    for (d[8 + t * (t - 8)] = 1, h4 = 0; h4 < 7; h4++)
+      m3(7, h4), m3(t - 8, h4), m3(7, h4 + t - 7);
+    for (e2 = 0; e2 < 8; e2++)
+      m3(e2, 7), m3(e2 + t - 8, 7), m3(e2, t - 8);
+    for (e2 = 0; e2 < 9; e2++)
+      m3(e2, 8);
+    for (e2 = 0; e2 < 8; e2++)
+      m3(e2 + t - 8, 8), m3(8, e2);
+    for (h4 = 0; h4 < 7; h4++)
+      m3(8, h4 + t - 7);
+    for (e2 = 0; e2 < t - 14; e2++)
+      1 & e2 ? (m3(8 + e2, 6), m3(6, 8 + e2)) : (d[8 + e2 + 6 * t] = 1, d[6 + t * (8 + e2)] = 1);
+    if (a > 6)
+      for (x3 = VanillaQR.vpat[a - 7], V4 = 17, e2 = 0; e2 < 6; e2++)
+        for (h4 = 0; h4 < 3; h4++, V4--)
+          1 & (V4 > 11 ? a >> V4 - 12 : x3 >> V4) ? (d[5 - e2 + t * (2 - h4 + t - 11)] = 1, d[2 - h4 + t - 11 + t * (5 - e2)] = 1) : (m3(5 - e2, 2 - h4 + t - 11), m3(2 - h4 + t - 11, 5 - e2));
+    for (h4 = 0; h4 < t; h4++)
+      for (e2 = 0; e2 <= h4; e2++)
+        d[e2 + t * h4] && m3(e2, h4);
+    for (C4 = c.length, w2 = 0; w2 < C4; w2++)
+      s[w2] = c.charCodeAt(w2);
+    if (c = s.slice(0), C4 >= (e2 = l2 * (i + n) + n) - 2 && (C4 = e2 - 2, a > 9 && C4--), w2 = C4, a > 9) {
+      for (c[w2 + 2] = 0, c[w2 + 3] = 0; w2--; )
+        x3 = c[w2], c[w2 + 3] |= 255 & x3 << 4, c[w2 + 2] = x3 >> 4;
+      c[2] |= 255 & C4 << 4, c[1] = C4 >> 4, c[0] = 64 | C4 >> 12;
+    } else {
+      for (c[w2 + 1] = 0, c[w2 + 2] = 0; w2--; )
+        x3 = c[w2], c[w2 + 2] |= 255 & x3 << 4, c[w2 + 1] = x3 >> 4;
+      c[1] |= 255 & C4 << 4, c[0] = 64 | C4 >> 4;
+    }
+    for (w2 = C4 + 3 - (a < 10); w2 < e2; )
+      c[w2++] = 236, c[w2++] = 17;
+    for (v4[0] = 1, w2 = 0; w2 < f2; w2++) {
+      for (v4[w2 + 1] = 1, E3 = w2; E3 > 0; E3--)
+        v4[E3] = v4[E3] ? v4[E3 - 1] ^ y2[p(z3[v4[E3]] + w2)] : v4[E3 - 1];
+      v4[0] = y2[p(z3[v4[0]] + w2)];
+    }
+    for (w2 = 0; w2 <= f2; w2++)
+      v4[w2] = z3[v4[w2]];
+    for (V4 = e2, h4 = 0, w2 = 0; w2 < i; w2++)
+      b2(h4, l2, V4, f2), h4 += l2, V4 += f2;
+    for (w2 = 0; w2 < n; w2++)
+      b2(h4, l2 + 1, V4, f2), h4 += l2 + 1, V4 += f2;
+    for (h4 = 0, w2 = 0; w2 < l2; w2++) {
+      for (E3 = 0; E3 < i; E3++)
+        s[h4++] = c[w2 + E3 * l2];
+      for (E3 = 0; E3 < n; E3++)
+        s[h4++] = c[i * l2 + w2 + E3 * (l2 + 1)];
+    }
+    for (E3 = 0; E3 < n; E3++)
+      s[h4++] = c[i * l2 + w2 + E3 * (l2 + 1)];
+    for (w2 = 0; w2 < f2; w2++)
+      for (E3 = 0; E3 < i + n; E3++)
+        s[h4++] = c[e2 + w2 + E3 * f2];
+    for (c = s, e2 = h4 = t - 1, V4 = C4 = 1, N4 = (l2 + f2) * (i + n) + n, w2 = 0; w2 < N4; w2++)
+      for (x3 = c[w2], E3 = 0; E3 < 8; E3++, x3 <<= 1) {
+        128 & x3 && (d[e2 + t * h4] = 1);
+        do {
+          C4 ? e2-- : (e2++, V4 ? 0 != h4 ? h4-- : (V4 = !V4, 6 == (e2 -= 2) && (e2--, h4 = 9)) : h4 != t - 1 ? h4++ : (V4 = !V4, 6 == (e2 -= 2) && (e2--, h4 -= 8))), C4 = !C4;
+        } while (R3(e2, h4));
+      }
+    for (c = d.slice(0), x3 = 0, h4 = 3e4, V4 = 0; V4 < 8 && (Q4(V4), (e2 = k3()) < h4 && (h4 = e2, x3 = V4), 7 != x3); V4++)
+      d = c.slice(0);
+    for (x3 != V4 && Q4(x3), h4 = VanillaQR.fmtword[x3 + (o - 1 << 3)], V4 = 0; V4 < 8; V4++, h4 >>= 1)
+      1 & h4 && (d[t - 1 - V4 + 8 * t] = 1, V4 < 6 ? d[8 + t * V4] = 1 : d[8 + t * (V4 + 1)] = 1);
+    for (V4 = 0; V4 < 7; V4++, h4 >>= 1)
+      1 & h4 && (d[8 + t * (t - 7 + V4)] = 1, V4 ? d[6 - V4 + 8 * t] = 1 : d[7 + 8 * t] = 1);
+    return d;
+  }, e.init = function() {
+    o = e.ecclevel;
+    var r2 = e.genframe(e.url);
+    e.toTable ? e.tableWrite(r2, t) : e.canvasWrite(r2, t);
+  }, e.init();
+}
+VanillaQR.prototype = { canvasWrite: function(r, e) {
+  if (!this.qrc && (this.qrc = this.getContext(this.domElement), !this.qrc))
+    return this.toTable = true, this.domElement = document.createElement("div"), void this.tableWrite(r, e);
+  var o = this.size, a = this.qrc;
+  a.lineWidth = 1;
+  var t = o;
+  t /= e + 10, t = Math.round(t - 0.5);
+  var i = 4;
+  this.noBorder ? (a.canvas.width = a.canvas.height = t * e, i = 0) : a.canvas.width = a.canvas.height = o, a.clearRect(0, 0, o, o), a.fillStyle = this.colorLight, a.fillRect(0, 0, t * (e + 8), t * (e + 8)), a.fillStyle = this.colorDark;
+  for (var n = 0; n < e; n++)
+    for (var l2 = 0; l2 < e; l2++)
+      r[l2 * e + n] && a.fillRect(t * (i + n), t * (i + l2), t, t);
+}, tableWrite: function(r, e) {
+  var o = this, a = Math.round(this.size / e - 3.5) + "px", t = e + (o.noBorder ? 0 : 2 * o.borderSize), i = o.borderSize, n = "width:" + a + ";height:" + a + ";", l2 = o.colorLight, f2 = o.colorDark, c = document.createElement("table");
+  c.style.cssText = "border:0;border-collapse:collapse;";
+  for (var s, d = document.createElement("tr"), g3 = document.createElement("td"), h3 = function() {
+    return g3.cloneNode();
+  }, v4 = function() {
+    var r2 = h3();
+    return r2.style.cssText = n + "background:" + l2, r2;
+  }, m3 = function(r2) {
+    for (var e2 = r2.firstChild, o2 = 0; o2 < i; o2++)
+      r2.insertBefore(v4(), e2), r2.appendChild(v4());
+  }, u3 = 0; u3 < e; u3++) {
+    var p = d.cloneNode();
+    c.appendChild(p);
+    for (var b2 = 0; b2 < e; b2++)
+      if (1 === r[u3 * e + b2]) {
+        var R3 = (s = void 0, (s = h3()).style.cssText = n + "background:" + f2, s);
+        p.appendChild(R3);
+      } else {
+        var Q4 = v4();
+        p.appendChild(Q4);
+      }
+    o.noBorder || m3(p);
+  }
+  o.noBorder || function(r2) {
+    for (var e2 = r2.firstChild, a2 = 0; a2 < o.borderSize; a2++) {
+      for (var i2 = d.cloneNode(), n2 = 0; n2 < t; n2++) {
+        var l3 = v4();
+        i2.appendChild(l3);
+      }
+      r2.appendChild(i2), r2.insertBefore(i2.cloneNode(true), e2);
+    }
+  }(c), o.domElement.innerHTML = "", o.domElement.appendChild(c);
+}, getContext: function(r) {
+  return r.getContext && r.getContext("2d") ? r.getContext("2d") : (console.log("Browser does not have 2d Canvas support"), false);
+}, toImage: function(r) {
+  if (this.qrc) {
+    var e = this.imageTypes[r];
+    if (!e)
+      throw new Error(r + " is not a valid image type ");
+    var o = new Image();
+    return o.src = this.domElement.toDataURL(e), o;
+  }
+} }, VanillaQR.adelta = [0, 11, 15, 19, 23, 27, 31, 16, 18, 20, 22, 24, 26, 28, 20, 22, 24, 24, 26, 28, 28, 22, 24, 24, 26, 26, 28, 28, 24, 24, 26, 26, 26, 28, 28, 24, 26, 26, 26, 28, 28], VanillaQR.vpat = [3220, 1468, 2713, 1235, 3062, 1890, 2119, 1549, 2344, 2936, 1117, 2583, 1330, 2470, 1667, 2249, 2028, 3780, 481, 4011, 142, 3098, 831, 3445, 592, 2517, 1776, 2234, 1951, 2827, 1070, 2660, 1345, 3177], VanillaQR.fmtword = [30660, 29427, 32170, 30877, 26159, 25368, 27713, 26998, 21522, 20773, 24188, 23371, 17913, 16590, 20375, 19104, 13663, 12392, 16177, 14854, 9396, 8579, 11994, 11245, 5769, 5054, 7399, 6608, 1890, 597, 3340, 2107], VanillaQR.eccblocks = [1, 0, 19, 7, 1, 0, 16, 10, 1, 0, 13, 13, 1, 0, 9, 17, 1, 0, 34, 10, 1, 0, 28, 16, 1, 0, 22, 22, 1, 0, 16, 28, 1, 0, 55, 15, 1, 0, 44, 26, 2, 0, 17, 18, 2, 0, 13, 22, 1, 0, 80, 20, 2, 0, 32, 18, 2, 0, 24, 26, 4, 0, 9, 16, 1, 0, 108, 26, 2, 0, 43, 24, 2, 2, 15, 18, 2, 2, 11, 22, 2, 0, 68, 18, 4, 0, 27, 16, 4, 0, 19, 24, 4, 0, 15, 28, 2, 0, 78, 20, 4, 0, 31, 18, 2, 4, 14, 18, 4, 1, 13, 26, 2, 0, 97, 24, 2, 2, 38, 22, 4, 2, 18, 22, 4, 2, 14, 26, 2, 0, 116, 30, 3, 2, 36, 22, 4, 4, 16, 20, 4, 4, 12, 24, 2, 2, 68, 18, 4, 1, 43, 26, 6, 2, 19, 24, 6, 2, 15, 28, 4, 0, 81, 20, 1, 4, 50, 30, 4, 4, 22, 28, 3, 8, 12, 24, 2, 2, 92, 24, 6, 2, 36, 22, 4, 6, 20, 26, 7, 4, 14, 28, 4, 0, 107, 26, 8, 1, 37, 22, 8, 4, 20, 24, 12, 4, 11, 22, 3, 1, 115, 30, 4, 5, 40, 24, 11, 5, 16, 20, 11, 5, 12, 24, 5, 1, 87, 22, 5, 5, 41, 24, 5, 7, 24, 30, 11, 7, 12, 24, 5, 1, 98, 24, 7, 3, 45, 28, 15, 2, 19, 24, 3, 13, 15, 30, 1, 5, 107, 28, 10, 1, 46, 28, 1, 15, 22, 28, 2, 17, 14, 28, 5, 1, 120, 30, 9, 4, 43, 26, 17, 1, 22, 28, 2, 19, 14, 28, 3, 4, 113, 28, 3, 11, 44, 26, 17, 4, 21, 26, 9, 16, 13, 26, 3, 5, 107, 28, 3, 13, 41, 26, 15, 5, 24, 30, 15, 10, 15, 28, 4, 4, 116, 28, 17, 0, 42, 26, 17, 6, 22, 28, 19, 6, 16, 30, 2, 7, 111, 28, 17, 0, 46, 28, 7, 16, 24, 30, 34, 0, 13, 24, 4, 5, 121, 30, 4, 14, 47, 28, 11, 14, 24, 30, 16, 14, 15, 30, 6, 4, 117, 30, 6, 14, 45, 28, 11, 16, 24, 30, 30, 2, 16, 30, 8, 4, 106, 26, 8, 13, 47, 28, 7, 22, 24, 30, 22, 13, 15, 30, 10, 2, 114, 28, 19, 4, 46, 28, 28, 6, 22, 28, 33, 4, 16, 30, 8, 4, 122, 30, 22, 3, 45, 28, 8, 26, 23, 30, 12, 28, 15, 30, 3, 10, 117, 30, 3, 23, 45, 28, 4, 31, 24, 30, 11, 31, 15, 30, 7, 7, 116, 30, 21, 7, 45, 28, 1, 37, 23, 30, 19, 26, 15, 30, 5, 10, 115, 30, 19, 10, 47, 28, 15, 25, 24, 30, 23, 25, 15, 30, 13, 3, 115, 30, 2, 29, 46, 28, 42, 1, 24, 30, 23, 28, 15, 30, 17, 0, 115, 30, 10, 23, 46, 28, 10, 35, 24, 30, 19, 35, 15, 30, 17, 1, 115, 30, 14, 21, 46, 28, 29, 19, 24, 30, 11, 46, 15, 30, 13, 6, 115, 30, 14, 23, 46, 28, 44, 7, 24, 30, 59, 1, 16, 30, 12, 7, 121, 30, 12, 26, 47, 28, 39, 14, 24, 30, 22, 41, 15, 30, 6, 14, 121, 30, 6, 34, 47, 28, 46, 10, 24, 30, 2, 64, 15, 30, 17, 4, 122, 30, 29, 14, 46, 28, 49, 10, 24, 30, 24, 46, 15, 30, 4, 18, 122, 30, 13, 32, 46, 28, 48, 14, 24, 30, 42, 32, 15, 30, 20, 4, 117, 30, 40, 7, 47, 28, 43, 22, 24, 30, 10, 67, 15, 30, 19, 6, 118, 30, 18, 31, 47, 28, 34, 34, 24, 30, 20, 61, 15, 30], VanillaQR.glog = [255, 0, 1, 25, 2, 50, 26, 198, 3, 223, 51, 238, 27, 104, 199, 75, 4, 100, 224, 14, 52, 141, 239, 129, 28, 193, 105, 248, 200, 8, 76, 113, 5, 138, 101, 47, 225, 36, 15, 33, 53, 147, 142, 218, 240, 18, 130, 69, 29, 181, 194, 125, 106, 39, 249, 185, 201, 154, 9, 120, 77, 228, 114, 166, 6, 191, 139, 98, 102, 221, 48, 253, 226, 152, 37, 179, 16, 145, 34, 136, 54, 208, 148, 206, 143, 150, 219, 189, 241, 210, 19, 92, 131, 56, 70, 64, 30, 66, 182, 163, 195, 72, 126, 110, 107, 58, 40, 84, 250, 133, 186, 61, 202, 94, 155, 159, 10, 21, 121, 43, 78, 212, 229, 172, 115, 243, 167, 87, 7, 112, 192, 247, 140, 128, 99, 13, 103, 74, 222, 237, 49, 197, 254, 24, 227, 165, 153, 119, 38, 184, 180, 124, 17, 68, 146, 217, 35, 32, 137, 46, 55, 63, 209, 91, 149, 188, 207, 205, 144, 135, 151, 178, 220, 252, 190, 97, 242, 86, 211, 171, 20, 42, 93, 158, 132, 60, 57, 83, 71, 109, 65, 162, 31, 45, 67, 216, 183, 123, 164, 118, 196, 23, 73, 236, 127, 12, 111, 246, 108, 161, 59, 82, 41, 157, 85, 170, 251, 96, 134, 177, 187, 204, 62, 90, 203, 89, 95, 176, 156, 169, 160, 81, 11, 245, 22, 235, 122, 117, 44, 215, 79, 174, 213, 233, 230, 231, 173, 232, 116, 214, 244, 234, 168, 80, 88, 175], VanillaQR.gexp = [1, 2, 4, 8, 16, 32, 64, 128, 29, 58, 116, 232, 205, 135, 19, 38, 76, 152, 45, 90, 180, 117, 234, 201, 143, 3, 6, 12, 24, 48, 96, 192, 157, 39, 78, 156, 37, 74, 148, 53, 106, 212, 181, 119, 238, 193, 159, 35, 70, 140, 5, 10, 20, 40, 80, 160, 93, 186, 105, 210, 185, 111, 222, 161, 95, 190, 97, 194, 153, 47, 94, 188, 101, 202, 137, 15, 30, 60, 120, 240, 253, 231, 211, 187, 107, 214, 177, 127, 254, 225, 223, 163, 91, 182, 113, 226, 217, 175, 67, 134, 17, 34, 68, 136, 13, 26, 52, 104, 208, 189, 103, 206, 129, 31, 62, 124, 248, 237, 199, 147, 59, 118, 236, 197, 151, 51, 102, 204, 133, 23, 46, 92, 184, 109, 218, 169, 79, 158, 33, 66, 132, 21, 42, 84, 168, 77, 154, 41, 82, 164, 85, 170, 73, 146, 57, 114, 228, 213, 183, 115, 230, 209, 191, 99, 198, 145, 63, 126, 252, 229, 215, 179, 123, 246, 241, 255, 227, 219, 171, 75, 150, 49, 98, 196, 149, 55, 110, 220, 165, 87, 174, 65, 130, 25, 50, 100, 200, 141, 7, 14, 28, 56, 112, 224, 221, 167, 83, 166, 81, 162, 89, 178, 121, 242, 249, 239, 195, 155, 43, 86, 172, 69, 138, 9, 18, 36, 72, 144, 61, 122, 244, 245, 247, 243, 251, 235, 203, 139, 11, 22, 44, 88, 176, 125, 250, 233, 207, 131, 27, 54, 108, 216, 173, 71, 142, 0], VanillaQR.N1 = 3, VanillaQR.N2 = 3, VanillaQR.N3 = 40, VanillaQR.N4 = 10;
+
+// libs/common/src/lib/qr-code.ts
+function generateQRCode(code, colorLight = "#fff0", colorDark = "#000") {
+  const qr2 = new VanillaQR({
+    url: code || "Hello",
+    size: 360,
+    colorLight,
+    colorDark,
+    toTable: false,
+    ecclevel: 1,
+    noBorder: true,
+    borderSize: 0
+  });
+  return qr2?.toImage("svg+xml")?.src;
+}
+
+// libs/explore/src/lib/explore-book-qr.component.ts
+var _c065 = (a0) => ({ name: a0 });
+var DEFAULT_PATH = `workplace/#/explore?space={{id}}`;
+var ExploreBookQrComponent = class _ExploreBookQrComponent {
+  constructor(_data, _settings) {
+    this._data = _data;
+    this._settings = _settings;
+    this.space = this._data.space;
+    this.qr_code = generateQRCode(`${location.origin}${(this._settings.get("app.booking_qr_path") || DEFAULT_PATH).replace("{{id}}", this._data.space?.email)}`);
+  }
+  static {
+    this.\u0275fac = function ExploreBookQrComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ExploreBookQrComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(SettingsService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreBookQrComponent, selectors: [["explore-book-qr"]], standalone: false, decls: 10, vars: 7, consts: [[1, "truncate"], [1, "flex-1"], ["icon", "", "mat-dialog-close", ""], [1, "p-4"], [1, "m-auto", "h-64", "w-64", 3, "src"]], template: function ExploreBookQrComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "header")(1, "h2", 0);
+        \u0275\u0275text(2);
+        \u0275\u0275pipe(3, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(4, "div", 1);
+        \u0275\u0275elementStart(5, "button", 2)(6, "app-icon");
+        \u0275\u0275text(7, "close");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(8, "main", 3);
+        \u0275\u0275element(9, "img", 4);
+        \u0275\u0275elementEnd();
+      }
+      if (rf & 2) {
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 2, "EXPLORE.BOOK_RESOURCE", \u0275\u0275pureFunction1(5, _c065, ctx.space == null ? null : ctx.space.name)), " ");
+        \u0275\u0275advance(7);
+        \u0275\u0275property("src", ctx.qr_code, \u0275\u0275sanitizeUrl);
+      }
+    }, dependencies: [IconComponent, MatDialogClose, TranslatePipe], encapsulation: 2 });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreBookQrComponent, { className: "ExploreBookQrComponent", filePath: "libs/explore/src/lib/explore-book-qr.component.ts", lineNumber: 29 });
+})();
+
+// libs/explore/src/lib/explore-booking-modal.component.ts
+function ExploreBookingModalComponent_button_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "button", 4)(1, "app-icon");
+    \u0275\u0275text(2, "close");
+    \u0275\u0275elementEnd()();
+  }
+}
+function ExploreBookingModalComponent_ng_container_7_main_1_div_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 9)(1, "label", 19);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementStart(4, "span");
+    \u0275\u0275text(5, "*");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(6, ":");
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(7, "a-user-search-field", 20);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "FORM.HOST"));
+  }
+}
+function ExploreBookingModalComponent_ng_container_7_main_1_div_19_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 21);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275classProp("bg-info", ctx_r1.alert[0] === "info")("text-info-content", ctx_r1.alert[0] === "info")("bg-warning", ctx_r1.alert[0] === "warn")("text-warning-content", ctx_r1.alert[0] === "warn")("bg-error", ctx_r1.alert[0] === "closed")("text-error-content", ctx_r1.alert[0] === "closed");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.alert[1], " ");
+  }
+}
+function ExploreBookingModalComponent_ng_container_7_main_1_div_21_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 22)(1, "label");
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 23);
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "date");
+    \u0275\u0275pipe(7, "date");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(3, 3, "FORM.DATE"), ":");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(6, 5, ctx_r1.form.value.date, "mediumDate"), " at ", \u0275\u0275pipeBind2(7, 8, ctx_r1.form.value.date, ctx_r1.time_format), " ");
+  }
+}
+function ExploreBookingModalComponent_ng_container_7_main_1_div_22_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 24)(1, "label");
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(4, "a-duration-field", 25);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(3, 4, "FORM.DURATION"), ":");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("time", ctx_r1.form.value.date)("max", ctx_r1.max_duration)("use_24hr", ctx_r1.use_24hr_time);
+  }
+}
+function ExploreBookingModalComponent_ng_container_7_main_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "main", 8)(1, "div", 9)(2, "label", 10);
+    \u0275\u0275text(3, "Title");
+    \u0275\u0275elementStart(4, "span");
+    \u0275\u0275text(5, "*");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(6, ":");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "mat-form-field", 11);
+    \u0275\u0275element(8, "input", 12);
+    \u0275\u0275elementStart(9, "mat-error");
+    \u0275\u0275text(10);
+    \u0275\u0275pipe(11, "translate");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275template(12, ExploreBookingModalComponent_ng_container_7_main_1_div_12_Template, 8, 3, "div", 13);
+    \u0275\u0275elementStart(13, "div", 9)(14, "label");
+    \u0275\u0275text(15);
+    \u0275\u0275pipe(16, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(17, "div", 14);
+    \u0275\u0275text(18);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(19, ExploreBookingModalComponent_ng_container_7_main_1_div_19_Template, 2, 13, "div", 15);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(20, "div", 16);
+    \u0275\u0275template(21, ExploreBookingModalComponent_ng_container_7_main_1_div_21_Template, 8, 11, "div", 17)(22, ExploreBookingModalComponent_ng_container_7_main_1_div_22_Template, 5, 6, "div", 18);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("formGroup", ctx_r1.form);
+    \u0275\u0275advance(10);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(11, 8, "EXPLORE.BOOKING_TITLE_REQUIRED"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.can_book_for_others);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(16, 10, "EXPLORE.BOOKING_SPACE"), ":");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", (ctx_r1.form.controls.resources == null ? null : ctx_r1.form.controls.resources.value[0] == null ? null : ctx_r1.form.controls.resources.value[0].display_name) || (ctx_r1.form.controls.resources == null ? null : ctx_r1.form.controls.resources.value[0] == null ? null : ctx_r1.form.controls.resources.value[0].name), " ");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.alert);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.form.controls.date);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.form.controls.duration);
+  }
+}
+function ExploreBookingModalComponent_ng_container_7_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, ExploreBookingModalComponent_ng_container_7_main_1_Template, 23, 12, "main", 5);
+    \u0275\u0275elementStart(2, "footer", 6)(3, "button", 7);
+    \u0275\u0275listener("click", function ExploreBookingModalComponent_ng_container_7_Template_button_click_3_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.save());
+    });
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.form);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 2, "COMMON.SAVE"), " ");
+  }
+}
+function ExploreBookingModalComponent_ng_template_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 26);
+    \u0275\u0275element(1, "mat-spinner", 27);
+    \u0275\u0275elementStart(2, "p");
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("diameter", 48);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 2, ctx_r1.loading));
+  }
+}
+var ExploreBookingModalComponent = class _ExploreBookingModalComponent {
+  get form() {
+    return this._event_form.form;
+  }
+  get max_duration() {
+    return this._settings.get("app.events.max_duration") || 4 * 60;
+  }
+  get can_book_for_others() {
+    return this._settings.get("app.events.can_book_for_others");
+  }
+  get use_24hr_time() {
+    return this._settings.get("app.use_24_hour_time");
+  }
+  get time_format() {
+    return this._settings.time_format;
+  }
+  constructor(_data, _settings, _event_form, _dialog_ref, _router) {
+    this._data = _data;
+    this._settings = _settings;
+    this._event_form = _event_form;
+    this._dialog_ref = _dialog_ref;
+    this._router = _router;
+    this.loading = this._event_form.loading$;
+    this.alert = this._data.alert;
+  }
+  ngOnInit() {
+    this._event_form.newForm();
+    this.form.patchValue({
+      resources: [this._data.space],
+      host: currentUser().email,
+      organiser: currentUser()
+    });
+  }
+  save() {
+    return __async(this, null, function* () {
+      yield this._event_form.postForm().catch((_3) => {
+        notifyError(_3);
+        throw _3;
+      });
+      if (this._settings.app_name.toLowerCase().includes("workplace")) {
+        this._router.navigate(["/book", "meeting", "success"]);
+      } else {
+        notifySuccess(i18n("EXPLORE.BOOKING_SUCCESS"));
+      }
+      this._dialog_ref.close();
+    });
+  }
+  static {
+    this.\u0275fac = function ExploreBookingModalComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ExploreBookingModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(MatDialogRef), \u0275\u0275directiveInject(Router));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreBookingModalComponent, selectors: [["explore-booking-modal"]], standalone: false, decls: 11, vars: 10, consts: [["load_state", ""], [1, "flex-1"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 4, "ngIf"], [4, "ngIf", "ngIfElse"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], ["class", "max-w-[85vw] p-4", 3, "formGroup", 4, "ngIf"], [1, "flex", "justify-center", "border-t", "border-base-200", "p-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"], [1, "max-w-[85vw]", "p-4", 3, "formGroup"], [1, "flex", "flex-col"], ["for", "title"], ["appearance", "outline"], ["matInput", "", "name", "title", "formControlName", "title", "placeholder", "Booking Title"], ["class", "flex flex-col", 4, "ngIf"], ["name", "space", 1, "mb-4", "w-full", "rounded", "border", "border-base-200", "px-4", "py-3"], ["class", "-mt-2 mb-4 rounded px-2 py-1 text-xs", 3, "bg-info", "text-info-content", "bg-warning", "text-warning-content", "bg-error", "text-error-content", 4, "ngIf"], [1, "flex", "flex-wrap", "sm:space-x-4"], ["class", "flex w-full flex-1 flex-col sm:w-auto", 4, "ngIf"], ["class", "flex w-full flex-col sm:w-auto", 4, "ngIf"], ["for", "host"], ["name", "host", "formControlName", "organiser", 1, "mb-4"], [1, "-mt-2", "mb-4", "rounded", "px-2", "py-1", "text-xs"], [1, "flex", "w-full", "flex-1", "flex-col", "sm:w-auto"], [1, "mb-4", "w-full", "rounded", "border", "border-base-200", "px-4", "py-3"], [1, "flex", "w-full", "flex-col", "sm:w-auto"], ["formControlName", "duration", 1, "w-full", 3, "time", "max", "use_24hr"], ["load", "", 1, "flex", "h-64", "flex-col", "items-center", "justify-center"], [1, "m-4", 3, "diameter"]], template: function ExploreBookingModalComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "header")(1, "h2");
+        \u0275\u0275text(2);
+        \u0275\u0275pipe(3, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(4, "div", 1);
+        \u0275\u0275template(5, ExploreBookingModalComponent_button_5_Template, 3, 0, "button", 2);
+        \u0275\u0275pipe(6, "async");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(7, ExploreBookingModalComponent_ng_container_7_Template, 6, 4, "ng-container", 3);
+        \u0275\u0275pipe(8, "async");
+        \u0275\u0275template(9, ExploreBookingModalComponent_ng_template_9_Template, 5, 4, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        const load_state_r3 = \u0275\u0275reference(10);
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 4, "EXPLORE.BOOKING_HEADER"));
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(6, 6, ctx.loading));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(8, 8, ctx.loading))("ngIfElse", load_state_r3);
+      }
+    }, dependencies: [NgIf, IconComponent, MatFormField, MatError, MatRipple, MatDialogClose, MatInput, MatProgressSpinner, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, DurationFieldComponent, UserSearchFieldComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\nheader[_ngcontent-%COMP%] {\n  max-width: calc(100vw + 100%);\n}\n[load][_ngcontent-%COMP%] {\n  width: 32rem;\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=explore-booking-modal.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreBookingModalComponent, { className: "ExploreBookingModalComponent", filePath: "libs/explore/src/lib/explore-booking-modal.component.ts", lineNumber: 135 });
+})();
+
+// libs/explore/src/lib/explore-icon.component.ts
+var ExploreIconComponent = class _ExploreIconComponent {
+  constructor(_details) {
+    this._details = _details;
+    this.icon = this._details.icon || { content: "done" };
+    this.color = this._details.color || "var(--in)";
+    this.text_color = this._details.text_color || "var(--inc)";
+  }
+  static {
+    this.\u0275fac = function ExploreIconComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ExploreIconComponent)(\u0275\u0275directiveInject(MAP_FEATURE_DATA));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreIconComponent, selectors: [["explore-icon"]], standalone: false, decls: 2, vars: 5, consts: [[1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full", "border", "border-base-200", "shadow"], [1, "text-xl", 3, "icon"]], template: function ExploreIconComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "div", 0);
+        \u0275\u0275element(1, "app-icon", 1);
+        \u0275\u0275elementEnd();
+      }
+      if (rf & 2) {
+        \u0275\u0275styleProp("background-color", ctx.color)("color", ctx.text_color);
+        \u0275\u0275advance();
+        \u0275\u0275property("icon", ctx.icon);
+      }
+    }, dependencies: [IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  height: 100%;\n  width: 100%;\n  align-items: end;\n  justify-content: end;\n}\n/*# sourceMappingURL=explore-icon.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreIconComponent, { className: "ExploreIconComponent", filePath: "libs/explore/src/lib/explore-icon.component.ts", lineNumber: 29 });
+})();
+
+// libs/explore/src/lib/explore-space-info.component.ts
+function ExploreSpaceInfoComponent_ng_template_2_img_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 16);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("source", ctx_r1.space.images[0]);
+  }
+}
+function ExploreSpaceInfoComponent_ng_template_2_div_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 17);
+  }
+}
+function ExploreSpaceInfoComponent_ng_template_2_div_11_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 18);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.available_until, " ");
+  }
+}
+function ExploreSpaceInfoComponent_ng_template_2_div_15_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 19)(1, "span");
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(3, 3, "COMMON.CAPACITY"), ": ");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2("", ctx_r1.space.capacity, " ", ctx_r1.space.capacity === 1 ? "person" : "people", " ");
+  }
+}
+function ExploreSpaceInfoComponent_ng_template_2_ul_16_li_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "li", 22);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const feature_r3 = ctx.$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", feature_r3, " ");
+  }
+}
+function ExploreSpaceInfoComponent_ng_template_2_ul_16_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "ul", 20);
+    \u0275\u0275template(1, ExploreSpaceInfoComponent_ng_template_2_ul_16_li_1_Template, 2, 1, "li", 21);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", ctx_r1.space.features);
+  }
+}
+function ExploreSpaceInfoComponent_ng_template_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 3);
+    \u0275\u0275element(1, "div", 4);
+    \u0275\u0275elementStart(2, "div", 5)(3, "div", 6);
+    \u0275\u0275template(4, ExploreSpaceInfoComponent_ng_template_2_img_4_Template, 1, 1, "img", 7)(5, ExploreSpaceInfoComponent_ng_template_2_div_5_Template, 1, 0, "div", 8);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "div", 9)(7, "div", 10);
+    \u0275\u0275text(8);
+    \u0275\u0275pipe(9, "uppercase");
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(11, ExploreSpaceInfoComponent_ng_template_2_div_11_Template, 2, 1, "div", 11);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(12, "div", 12)(13, "h4", 13);
+    \u0275\u0275text(14);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(15, ExploreSpaceInfoComponent_ng_template_2_div_15_Template, 5, 5, "div", 14)(16, ExploreSpaceInfoComponent_ng_template_2_ul_16_Template, 2, 1, "ul", 15);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classProp("-translate-x-full", ctx_r1.x_pos === "end")("-translate-y-full", ctx_r1.y_pos === "bottom");
+    \u0275\u0275property("id", ctx_r1.space == null ? null : ctx_r1.space.id);
+    \u0275\u0275advance(3);
+    \u0275\u0275classProp("bg-neutral", ctx_r1.space.images[0])("h-32", ctx_r1.space.images[0])("h-8", !ctx_r1.space.images[0]);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.space.images[0]);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.space.images[0]);
+    \u0275\u0275advance(2);
+    \u0275\u0275classMap("text-light rounded border border-white p-1 px-2 capitalize shadow " + ctx_r1.status);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 22, ctx_r1.status === "not-bookable" ? "COMMON.STATUS_NOT_BOOKABLE" : "COMMON.STATUS_" + \u0275\u0275pipeBind1(9, 20, ctx_r1.status)), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r1.status !== "not-bookable");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", ctx_r1.space.display_name || ctx_r1.space.name, " ");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.space.capacity >= 0);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", (ctx_r1.space.features == null ? null : ctx_r1.space.features.length) > 0 && ctx_r1.show_features);
+  }
+}
+var ExploreSpaceInfoComponent = class _ExploreSpaceInfoComponent {
+  get show_features() {
+    return !this._settings.get("app.spaces.hide_features");
+  }
+  constructor(_details, _settings, _element) {
+    this._details = _details;
+    this._settings = _settings;
+    this._element = _element;
+    this.space = this._details.space;
+    this.events = this._details.events;
+    this.status = this._details.status;
+  }
+  ngOnInit() {
+    setTimeout(() => this.updateOffset(), 200);
+  }
+  updateOffset() {
+    const pos = this._element.nativeElement.getBoundingClientRect();
+    this.x_pos = pos.x < document.body.clientWidth / 2 ? "start" : "end";
+    this.y_pos = pos.y < document.body.clientHeight / 2 ? "top" : "bottom";
+  }
+  get available_until() {
+    return "";
+  }
+  static {
+    this.\u0275fac = function ExploreSpaceInfoComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ExploreSpaceInfoComponent)(\u0275\u0275directiveInject(MAP_FEATURE_DATA), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(ElementRef));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreSpaceInfoComponent, selectors: [["explore-space-info"]], standalone: false, decls: 4, vars: 7, consts: [["tooltip", ""], ["space_tooltip", ""], ["customTooltip", "", 1, "pointer-events-auto", "relative", "hidden", "h-full", "w-full", "cursor-pointer", "sm:block", 3, "mouseenter", "content", "backdrop", "xPosition", "yPosition", "hover", "delay"], ["name", "space-info", 1, "pointer-events-none", "absolute", "left-0", "top-0", "transform", "overflow-hidden", "rounded", "bg-base-100", "shadow", 3, "id"], [1, "arrow"], [1, "relative"], [1, "relative", "flex", "w-full", "items-center", "justify-center", "overflow-hidden", "bg-opacity-20"], ["auth", "", "class", "min-h-full min-w-full object-cover", 3, "source", 4, "ngIf"], ["class", "absolute inset-0 bg-neutral opacity-30", 4, "ngIf"], [1, "absolute", "left-2", "top-2", "flex", "flex-wrap", "text-sm"], ["status", ""], ["available-until", "", 4, "ngIf"], [1, "flex", "flex-col", "px-2", "py-4"], [1, "mb-2", "px-2", "text-xl", "font-medium"], ["capacity", "", "class", "mb-2 px-2 text-base", 4, "ngIf"], ["class", "flex flex-wrap", 4, "ngIf"], ["auth", "", 1, "min-h-full", "min-w-full", "object-cover", 3, "source"], [1, "absolute", "inset-0", "bg-neutral", "opacity-30"], ["available-until", ""], ["capacity", "", 1, "mb-2", "px-2", "text-base"], [1, "flex", "flex-wrap"], ["class", "m-1 rounded-2xl bg-base-200 px-2 py-1 text-xs font-medium", 4, "ngFor", "ngForOf"], [1, "m-1", "rounded-2xl", "bg-base-200", "px-2", "py-1", "text-xs", "font-medium"]], template: function ExploreSpaceInfoComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "div", 2, 0);
+        \u0275\u0275listener("mouseenter", function ExploreSpaceInfoComponent_Template_div_mouseenter_0_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.updateOffset());
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(2, ExploreSpaceInfoComponent_ng_template_2_Template, 17, 24, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        const space_tooltip_r4 = \u0275\u0275reference(3);
+        \u0275\u0275property("content", space_tooltip_r4)("backdrop", false)("xPosition", "center")("yPosition", "center")("hover", true)("delay", 3e3);
+        \u0275\u0275attribute("id", (ctx.space == null ? null : ctx.space.map_id) || (ctx.space == null ? null : ctx.space.id));
+      }
+    }, dependencies: [NgForOf, NgIf, CustomTooltipComponent, AuthenticatedImageDirective, UpperCasePipe, TranslatePipe], styles: ["\n\n[name=space-info][_ngcontent-%COMP%] {\n  width: 16rem;\n}\n[status][_ngcontent-%COMP%] {\n  background-color: #43a047;\n  font-weight: 500;\n}\n[status].busy[_ngcontent-%COMP%] {\n  background-color: #e53935;\n}\n[status].pending[_ngcontent-%COMP%] {\n  background-color: #ffb300;\n}\n[status].not-bookable[_ngcontent-%COMP%] {\n  background-color: #757575;\n}\n/*# sourceMappingURL=explore-space-info.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreSpaceInfoComponent, { className: "ExploreSpaceInfoComponent", filePath: "libs/explore/src/lib/explore-space-info.component.ts", lineNumber: 137 });
+})();
+
+// libs/explore/src/lib/explore-spaces.service.ts
+var DEFAULT_COLOURS = {
+  free: "#43a047",
+  pending: "#ffb300",
+  reserved: "#e65100",
+  busy: "#e53935",
+  "signs-of-life": "#1565c0",
+  "not-bookable": "#757575",
+  unknown: "#757575"
+};
+var ExploreSpacesService = class _ExploreSpacesService extends AsyncHandler {
+  constructor(_state, _settings, _event_form, _dialog, _org) {
+    super();
+    this._state = _state;
+    this._settings = _settings;
+    this._event_form = _event_form;
+    this._dialog = _dialog;
+    this._org = _org;
+    this._bookings = {};
+    this._statuses = {};
+    this._presence = {};
+    this._panning = true;
+    this._last_action = "";
+    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => hu(bld.id, `room_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_3) => _3?.details instanceof Array ? _3.details : []), shareReplay(1));
+    this.room_alerts = this._org.active_building.pipe(filter((bld) => !!bld), switchMap(() => hu(this._org.organisation.id, `room_alerts`).pipe(catchError(() => of({ details: {} })))), map((_3) => _3.details || {}), shareReplay(1));
+    this._bind = combineLatest([
+      this._state.spaces,
+      this._state.options
+    ]).pipe(filter(([_3, { is_public }]) => !is_public), map(([list2]) => {
+      this.unsubWith("b-");
+      this.unsubWith("s-");
+      this.unsubWith("c-");
+      this._statuses = {};
+      if (!list2?.length)
+        return;
+      for (const space of list2) {
+        const mod = Oa(space.id, "Bookings");
+        let binding = mod.binding("bookings");
+        this.subscription(`b-${space.id}`, binding.listen().subscribe((d) => this.handleBookingsChange(list2, space, d)));
+        this.subscription(`b-bind-${space.id}`, binding.bind());
+        binding = mod.binding("status");
+        this.subscription(`s-${space.id}`, binding.listen().subscribe((d) => this.handleStatusChange(list2, space, d)));
+        this.subscription(`s-bind-${space.id}`, binding.bind());
+        binding = mod.binding("presence");
+        this.subscription(`c-${space.id}`, binding.listen().subscribe((d) => this.handlePresenceChange(list2, space, d)));
+        this.subscription(`c-bind-${space.id}`, binding.bind());
+      }
+      this.updateActions(list2);
+      this._updateHoverElements(list2);
+    }));
+    this.subscription("spaces", this._bind.subscribe());
+  }
+  bookSpace(space, force = false) {
+    return __async(this, null, function* () {
+      if (this._panning && this._last_action === "down")
+        return;
+      const booking_rules = yield nextValueFrom(this.booking_rules);
+      const room_alerts = yield nextValueFrom(this.room_alerts);
+      const { hidden } = rulesForResource({
+        date: Date.now(),
+        duration: 60,
+        resource: space,
+        host: currentUser()
+      }, booking_rules) || {};
+      if (hidden) {
+        return notifyError(i18n("EXPLORE.SPACES_PERMISSIONS_ERROR"));
+      }
+      if (this._statuses[space.id] !== "free" && !force || !space.bookable) {
+        return notifyError(i18n("EXPLORE.SPACES_UNAVAILABLE_ERROR", {
+          name: space.display_name || space.name
+        }));
+      }
+      this._event_form.newForm();
+      this._event_form.form.patchValue({
+        host: currentUser()?.email,
+        resources: [space]
+      });
+      if (room_alerts[space.id]?.[0] === "closed") {
+        return notifyError(`${room_alerts[space.id][1]}`);
+      }
+      if (this._settings.get("app.events.booking_unavailable")) {
+        return this._event_form.openEventLinkModal();
+      }
+      this._dialog.open(this._settings.get("app.explore.show_booking_qr") ? ExploreBookQrComponent : ExploreBookingModalComponent, {
+        data: { space, alert: room_alerts[space.id] }
+      });
+    });
+  }
+  handleBookingsChange(spaces, space, bookings) {
+    if (!bookings)
+      return;
+    this._bookings[space.id] = bookings.map((i) => new CalendarEvent(i));
+    this.timeout("update_hover_els", () => this._updateHoverElements(spaces), 100);
+  }
+  handleStatusChange(spaces, space, status) {
+    if (space.bookable)
+      this._statuses[space.id] = status || "free";
+    else
+      delete this._statuses[space.id];
+    this.timeout("update_statuses", () => {
+      this.clearTimeout("update_hover_els");
+      this._updateStatus(spaces);
+      this._updateHoverElements(spaces);
+    }, 100);
+  }
+  handlePresenceChange(spaces, space, presence) {
+    this._presence[space.id] = presence;
+    this.timeout("update_icons", () => this._updateIcons(spaces), 100);
+  }
+  _updateStatus(spaces) {
+    return __async(this, null, function* () {
+      const style_map = {};
+      const colours = this._settings.get("app.explore.colors") || {};
+      for (const space of spaces) {
+        if (!this._statuses[space.id])
+          continue;
+        const status = this._statuses[space.id];
+        style_map[`#${space.map_id}`] = {
+          fill: colours[`space-${status}`] || colours[`${status}`] || DEFAULT_COLOURS[`${status}`],
+          opacity: 0.6
+        };
+      }
+      this._state.setStyles("spaces", style_map);
+    });
+  }
+  _updateHoverElements(spaces) {
+    const features = [];
+    for (const space of spaces) {
+      if (!space.map_id)
+        continue;
+      features.push({
+        location: space.map_id,
+        full_size: true,
+        no_scale: true,
+        content: ExploreSpaceInfoComponent,
+        z_index: 10,
+        data: {
+          space: new Space(space),
+          events: this._bookings[space.id],
+          status: this._statuses[space.id] || "not-bookable"
+        }
+      });
+    }
+    this._state.setFeatures("spaces", features);
+  }
+  _updateIcons(spaces) {
+    if (!this._settings.get("app.show_presence_indicators"))
+      return;
+    const features = [];
+    for (const space of spaces) {
+      if (!space.map_id)
+        continue;
+      features.push({
+        location: space.map_id,
+        content: ExploreIconComponent,
+        data: {
+          icon: {
+            class: "material-symbols-rounded",
+            content: "sensor_occupied"
+          },
+          color: this._presence[space.id] ? "var(--su)" : "var(--bc)",
+          text_color: this._presence[space.id] ? "var(--suc)" : "var(--b1)"
+        },
+        z_index: 98
+      });
+    }
+    this._state.setFeatures("spaces-presence", features);
+  }
+  updateActions(spaces) {
+    const actions = [];
+    for (const space of spaces) {
+      if (!space.map_id)
+        continue;
+      for (const action of ["mousedown", "touchstart"]) {
+        actions.push({
+          id: space.map_id,
+          action,
+          priority: 5,
+          callback: () => {
+            this._panning = false;
+            this.timeout("panning", () => this._panning = true, 300);
+            this._last_action = "down";
+          }
+        });
+      }
+      for (const action of ["mouseup", "touchend"]) {
+        actions.push({
+          id: space.map_id,
+          action,
+          priority: 5,
+          callback: () => {
+            this.bookSpace(space);
+            this._last_action = "up";
+          }
+        });
+      }
+    }
+    this.timeout("set-actions", () => this._state.setActions("spaces", actions), 50);
+  }
+  static {
+    this.\u0275fac = function ExploreSpacesService_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ExploreSpacesService)(\u0275\u0275inject(ExploreStateService), \u0275\u0275inject(SettingsService), \u0275\u0275inject(EventFormService), \u0275\u0275inject(MatDialog), \u0275\u0275inject(OrganisationService));
+    };
+  }
+  static {
+    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ExploreSpacesService, factory: _ExploreSpacesService.\u0275fac });
+  }
+};
+
+// libs/spaces/src/lib/space-select-modal/space-location-pin.component.ts
+function SpaceLocationPinComponent_div_15_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 16);
+  }
+}
+function SpaceLocationPinComponent_app_icon_16_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "app-icon", 17);
+    \u0275\u0275text(1, " done ");
+    \u0275\u0275elementEnd();
+  }
+}
+var SpaceLocationPinComponent = class _SpaceLocationPinComponent {
+  get color() {
+    return this.active ? "#F4511E" : this.selected ? "#D32F2F" : "#309251";
+  }
+  constructor(_data) {
+    this._data = _data;
+    this.selected = this._data.selected === true;
+    this.active = this._data.active === true;
+  }
+  static {
+    this.\u0275fac = function SpaceLocationPinComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _SpaceLocationPinComponent)(\u0275\u0275directiveInject(MAP_FEATURE_DATA));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceLocationPinComponent, selectors: [["space-location-pin"]], standalone: false, decls: 17, vars: 3, consts: [[1, "absolute", "bottom-0", "left-1/2", "-translate-x-1/2"], ["width", "44", "height", "60", "viewBox", "0 0 66 80", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["filter", "url(#filter0_d_1065_10313)"], ["d", "M19.724 53.0408C25.0871 60.3435 30.5582 65.8583 31.0184 66.3178C31.4558 66.755 32.0489 67.0007 32.6674 67.0008H32.6678C33.2863 67.0007 33.8795 66.755 34.3169 66.3178C34.7771 65.8583 40.2481 60.3435 45.6112 53.0408C48.2928 49.3894 50.963 45.2701 52.9663 41.0957C54.9629 36.935 56.3331 32.6459 56.3342 28.6724C56.364 25.5564 55.7725 22.4657 54.5941 19.5809C53.415 16.6946 51.6722 14.0724 49.4675 11.8677C47.2629 9.66308 44.6407 7.92024 41.7544 6.74121C38.8711 5.5634 35.782 4.97184 32.6676 5.00103C29.5533 4.97184 26.4642 5.5634 23.5809 6.74121C20.6946 7.92024 18.0724 9.66308 15.8677 11.8677C13.6631 14.0724 11.9202 16.6946 10.7412 19.5809C9.56278 22.4657 8.97122 25.5565 9.00108 28.6726C9.0022 32.646 10.3724 36.9351 12.369 41.0957C14.3723 45.2701 17.0425 49.3894 19.724 53.0408Z", "stroke", "#0B421D", "stroke-width", "2"], ["id", "filter0_d_1065_10313", "x", "0", "y", "0", "width", "65.3353", "height", "80.001", "filterUnits", "userSpaceOnUse", "color-interpolation-filters", "sRGB"], ["flood-opacity", "0", "result", "BackgroundImageFix"], ["in", "SourceAlpha", "type", "matrix", "values", "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0", "result", "hardAlpha"], ["dy", "4"], ["stdDeviation", "4"], ["in2", "hardAlpha", "operator", "out"], ["type", "matrix", "values", "0 0 0 0 0.0196078 0 0 0 0 0.109804 0 0 0 0 0.172549 0 0 0 0.2 0"], ["mode", "normal", "in2", "BackgroundImageFix", "result", "effect1_dropShadow_1065_10313"], ["mode", "normal", "in", "SourceGraphic", "in2", "effect1_dropShadow_1065_10313", "result", "shape"], [1, "absolute", "left-0", "top-0", "flex", "h-3/4", "w-full", "items-center", "justify-center"], ["class", "relative z-10 h-4 w-4 rounded-full border-2 border-[#0B421D] bg-base-100", 4, "ngIf"], ["class", "relative z-10 text-2xl text-white", 4, "ngIf"], [1, "relative", "z-10", "h-4", "w-4", "rounded-full", "border-2", "border-[#0B421D]", "bg-base-100"], [1, "relative", "z-10", "text-2xl", "text-white"]], template: function SpaceLocationPinComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "div", 0);
+        \u0275\u0275namespaceSVG();
+        \u0275\u0275elementStart(1, "svg", 1)(2, "g", 2);
+        \u0275\u0275element(3, "path", 3);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(4, "defs")(5, "filter", 4);
+        \u0275\u0275element(6, "feFlood", 5)(7, "feColorMatrix", 6)(8, "feOffset", 7)(9, "feGaussianBlur", 8)(10, "feComposite", 9)(11, "feColorMatrix", 10)(12, "feBlend", 11)(13, "feBlend", 12);
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275namespaceHTML();
+        \u0275\u0275elementStart(14, "div", 13);
+        \u0275\u0275template(15, SpaceLocationPinComponent_div_15_Template, 1, 0, "div", 14)(16, SpaceLocationPinComponent_app_icon_16_Template, 2, 0, "app-icon", 15);
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        \u0275\u0275advance(3);
+        \u0275\u0275attribute("fill", ctx.color);
+        \u0275\u0275advance(12);
+        \u0275\u0275property("ngIf", !ctx.selected);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.selected);
+      }
+    }, dependencies: [NgIf, IconComponent], encapsulation: 2 });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceLocationPinComponent, { className: "SpaceLocationPinComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-location-pin.component.ts", lineNumber: 83 });
+})();
+
+// libs/spaces/src/lib/space-select-modal/space-map.component.ts
+var _c066 = () => ({ controls: true });
+var _c138 = () => ({ standalone: true });
+function SpaceSelectMapComponent_mat_form_field_1_mat_option_3_div_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 10);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "building");
+    \u0275\u0275elementStart(3, "span", 11);
+    \u0275\u0275text(4, " - ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_4_0;
+    const lvl_r3 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", (tmp_4_0 = \u0275\u0275pipeBind1(2, 1, lvl_r3.parent_id)) == null ? null : tmp_4_0.display_name, " ");
+  }
+}
+function SpaceSelectMapComponent_mat_form_field_1_mat_option_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-option", 7)(1, "div", 8);
+    \u0275\u0275template(2, SpaceSelectMapComponent_mat_form_field_1_mat_option_3_div_2_Template, 5, 3, "div", 9);
+    \u0275\u0275elementStart(3, "div");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const lvl_r3 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("value", lvl_r3);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.use_region);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", lvl_r3.display_name || lvl_r3.name, " ");
+  }
+}
+function SpaceSelectMapComponent_mat_form_field_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-form-field", 4)(1, "mat-select", 5);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275twoWayListener("ngModelChange", function SpaceSelectMapComponent_mat_form_field_1_Template_mat_select_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r1.level, $event) || (ctx_r1.level = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("ngModelChange", function SpaceSelectMapComponent_mat_form_field_1_Template_mat_select_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.setOptions({ zone_ids: [$event.id] }));
+    });
+    \u0275\u0275template(3, SpaceSelectMapComponent_mat_form_field_1_mat_option_3_Template, 5, 3, "mat-option", 6);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275twoWayProperty("ngModel", ctx_r1.level);
+    \u0275\u0275property("ngModelOptions", \u0275\u0275pureFunction0(8, _c138))("placeholder", \u0275\u0275pipeBind1(2, 4, "CALENDAR_EVENT.SPACE_LEVEL_ANY"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 6, ctx_r1.levels));
+  }
+}
+var SpaceSelectMapComponent = class _SpaceSelectMapComponent extends AsyncHandler {
+  get map_url() {
+    return this.level?.map_id || "";
+  }
+  get use_region() {
+    return !!this._settings.get("app.use_region");
+  }
+  constructor(_event_form, _org, _settings) {
+    super();
+    this._event_form = _event_form;
+    this._org = _org;
+    this._settings = _settings;
+    this.selected = [];
+    this.is_displayed = false;
+    this.onSelect = new EventEmitter();
+    this.zoom = 1;
+    this.center = { x: 0.5, y: 0.5 };
+    this.coordinates = void 0;
+    this._seletedSpace = (s) => () => {
+      this.onSelect.emit(s);
+      this._change.next(Date.now());
+    };
+    this.level = null;
+    this._change = new BehaviorSubject(0);
+    this.levels = combineLatest([
+      this._org.active_region,
+      this._org.active_building
+    ]).pipe(map(([region, bld]) => {
+      const level_list = this.use_region ? this._org.levelsForRegion(region) : this._org.levelsForBuilding(bld);
+      const viewable_levels = level_list.filter((lvl) => !lvl.tags.includes("parking"));
+      return viewable_levels.sort((a, b2) => a.parent_id.localeCompare(b2.parent_id) || (a.display_name || "").localeCompare(b2.display_name || ""));
+    }));
+    this.setOptions = (o) => this._event_form.setOptions(o);
+    this.features = combineLatest([
+      this._event_form.available_spaces,
+      this._change
+    ]).pipe(debounceTime(300), map(([l2]) => l2.map((space) => ({
+      location: space.map_id,
+      content: SpaceLocationPinComponent,
+      data: __spreadProps(__spreadValues({}, space), {
+        active: this.active === space.id,
+        selected: this.selected.includes(space.id)
+      })
+    }))));
+    this.actions = this._event_form.available_spaces.pipe(map((l2) => l2.map((space) => ({
+      id: space.map_id,
+      action: ["touchend", "mouseup"],
+      callback: this._seletedSpace(space)
+    }))));
+    this.styles = combineLatest([
+      this._event_form.spaces$,
+      this._event_form.available_spaces
+    ]).pipe(map(([spaces, free_spaces]) => spaces.reduce((styles, space) => {
+      const colours = this._settings.get("app.explore.colors") || {};
+      const status = free_spaces.find((_3) => _3.id === space.id) ? "free" : "busy";
+      styles[`#${space.map_id || space.id}`] = {
+        fill: colours[`space-${status}`] || colours[`${status}`] || DEFAULT_COLOURS[`${status}`]
+      };
+      return styles;
+    }, {})));
+  }
+  ngOnInit() {
+    this.subscription("levels_update", this._event_form.options$.subscribe(({ zones }) => {
+      const level2 = this._org.levelWithID(zones);
+      if (level2)
+        this.level = level2;
+    }));
+  }
+  setLevel(level2) {
+    this.setOptions({ zone_ids: [level2?.id] });
+    const bld = this._org.buildings.find((_3) => _3.id === level2?.parent_id);
+    if (bld) {
+      const [latitude, longitude] = (level2.location || bld.location).split(",").map((_3) => parseFloat(_3));
+      this.coordinates = { latitude, longitude };
+    }
+    this.level = level2;
+  }
+  setZoom(new_zoom) {
+    this.zoom = Math.max(0.5, Math.min(10, new_zoom));
+  }
+  resetMap() {
+    this.zoom = 1;
+    this.center = { x: 0.5, y: 0.5 };
+  }
+  static {
+    this.\u0275fac = function SpaceSelectMapComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _SpaceSelectMapComponent)(\u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceSelectMapComponent, selectors: [["space-map"]], inputs: { selected: "selected", active: "active", is_displayed: "is_displayed" }, outputs: { onSelect: "onSelect" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 8, vars: 17, consts: [[1, "w-full", "border-b", "border-base-200", "bg-base-100", "p-2"], ["appearance", "outline", "class", "w-full", 4, "ngIf"], [1, "relative", "w-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "options"], ["appearance", "outline", 1, "w-full"], ["name", "location", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"]], template: function SpaceSelectMapComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "div", 0);
+        \u0275\u0275template(1, SpaceSelectMapComponent_mat_form_field_1_Template, 5, 9, "mat-form-field", 1);
+        \u0275\u0275pipe(2, "async");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(3, "div", 2)(4, "interactive-map", 3);
+        \u0275\u0275pipe(5, "async");
+        \u0275\u0275pipe(6, "async");
+        \u0275\u0275pipe(7, "async");
+        \u0275\u0275twoWayListener("zoomChange", function SpaceSelectMapComponent_Template_interactive_map_zoomChange_4_listener($event) {
+          \u0275\u0275twoWayBindingSet(ctx.zoom, $event) || (ctx.zoom = $event);
+          return $event;
+        })("centerChange", function SpaceSelectMapComponent_Template_interactive_map_centerChange_4_listener($event) {
+          \u0275\u0275twoWayBindingSet(ctx.center, $event) || (ctx.center = $event);
+          return $event;
+        });
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        let tmp_0_0;
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", (tmp_0_0 = \u0275\u0275pipeBind1(2, 8, ctx.levels)) == null ? null : tmp_0_0.length);
+        \u0275\u0275advance(3);
+        \u0275\u0275property("src", ctx.map_url);
+        \u0275\u0275twoWayProperty("zoom", ctx.zoom)("center", ctx.center);
+        \u0275\u0275property("styles", \u0275\u0275pipeBind1(5, 10, ctx.styles))("features", \u0275\u0275pipeBind1(6, 12, ctx.features))("actions", \u0275\u0275pipeBind1(7, 14, ctx.actions))("options", \u0275\u0275pureFunction0(16, _c066));
+      }
+    }, dependencies: [NgForOf, NgIf, InteractiveMapComponent, MatOption, MatFormField, MatSelect, NgControlStatus, NgModel, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  background: rgba(0, 0, 0, 0.05);\n  display: flex;\n  flex-direction: column;\n}\nbutton[_ngcontent-%COMP%] {\n  border-radius: 0;\n}\n/*# sourceMappingURL=space-map.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceSelectMapComponent, { className: "SpaceSelectMapComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-map.component.ts", lineNumber: 74 });
+})();
+
+// libs/spaces/src/lib/spaces.module.ts
+var SharedSpacesModule = class _SharedSpacesModule {
+  static {
+    this.\u0275fac = function SharedSpacesModule_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _SharedSpacesModule)();
+    };
+  }
+  static {
+    this.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _SharedSpacesModule });
+  }
+  static {
+    this.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ imports: [
+      CommonModule,
+      MatDialogModule,
+      ComponentsModule,
+      FormFieldsModule,
+      MatBottomSheetModule,
+      MatCheckboxModule,
+      FormsModule,
+      ReactiveFormsModule
+    ] });
+  }
+};
+\u0275\u0275setComponentScope(NewSpaceSelectModalComponent, [
+  NgIf,
+  MatDialogClose,
+  IconComponent,
+  MatRipple,
+  SpaceDetailsComponent,
+  SpaceListComponent,
+  SpaceFiltersComponent,
+  SpaceFiltersDisplayComponent,
+  SpaceSelectMapComponent
+], [AsyncPipe, TranslatePipe]);
+
+// libs/events/src/lib/attendee-list.component.ts
+function AttendeeListComponent_button_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 7);
+    \u0275\u0275listener("click", function AttendeeListComponent_button_2_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.close.emit());
+    });
+    \u0275\u0275elementStart(1, "app-icon");
+    \u0275\u0275text(2, "arrow_back");
+    \u0275\u0275elementEnd()();
+  }
+}
+function AttendeeListComponent_div_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 8);
+  }
+}
+function AttendeeListComponent_ng_container_7_div_1_div_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 17);
+    \u0275\u0275text(1, " Host ");
+    \u0275\u0275elementEnd();
+  }
+}
+function AttendeeListComponent_ng_container_7_div_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 10);
+    \u0275\u0275element(1, "a-user-avatar", 11);
+    \u0275\u0275elementStart(2, "div", 12)(3, "div", 13);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(5, AttendeeListComponent_ng_container_7_div_1_div_5_Template, 2, 0, "div", 14);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "div", 15);
+    \u0275\u0275element(7, "div", 16);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const user_r3 = \u0275\u0275nextContext().$implicit;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("user", user_r3);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(user_r3.name);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.host === user_r3.email);
+    \u0275\u0275advance(2);
+    \u0275\u0275classProp("bg-success", user_r3.checked_in)("bg-pending", !user_r3.checked_in);
+    \u0275\u0275property("matTooltip", user_r3.checked_in ? "Checked in" : "Not checked in");
+  }
+}
+function AttendeeListComponent_ng_container_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, AttendeeListComponent_ng_container_7_div_1_Template, 8, 8, "div", 9);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const user_r3 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !user_r3.resource && (ctx_r1.host !== user_r3.email || ctx_r1.show_host));
+  }
+}
+var AttendeeListComponent = class _AttendeeListComponent {
+  constructor() {
+    this.host = "";
+    this.show_host = true;
+    this.list = [];
+    this.hide_close = false;
+    this.custom_title = "";
+    this.close = new EventEmitter();
+  }
+  static {
+    this.\u0275fac = function AttendeeListComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _AttendeeListComponent)();
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AttendeeListComponent, selectors: [["attendee-list"]], inputs: { host: "host", show_host: "show_host", list: "list", hide_close: "hide_close", custom_title: "custom_title" }, outputs: { close: "close" }, standalone: false, decls: 8, vars: 5, consts: [[1, "flex", "h-full", "w-full", "flex-col", "overflow-hidden", "bg-base-100"], [1, "flex", "min-h-12", "items-center", "border-b", "border-base-200", "p-2"], ["close", "", "icon", "", "matRipple", "", 3, "click", 4, "ngIf"], [1, "flex-1", "text-center", "font-medium"], ["class", "w-12", 4, "ngIf"], [1, "w-full", "flex-1", "overflow-auto"], [4, "ngFor", "ngForOf"], ["close", "", "icon", "", "matRipple", "", 3, "click"], [1, "w-12"], ["attendee", "", "class", "flex items-center space-x-2 p-2 hover:bg-base-200", 4, "ngIf"], ["attendee", "", 1, "flex", "items-center", "space-x-2", "p-2", "hover:bg-base-200"], [3, "user"], [1, "w-1/2", "flex-1"], [1, "truncate"], ["class", "text-sm opacity-60", 4, "ngIf"], [1, "p-2"], [1, "h-3", "w-3", "rounded-full", 3, "matTooltip"], [1, "text-sm", "opacity-60"]], template: function AttendeeListComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
+        \u0275\u0275template(2, AttendeeListComponent_button_2_Template, 3, 0, "button", 2);
+        \u0275\u0275elementStart(3, "div", 3);
+        \u0275\u0275text(4);
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(5, AttendeeListComponent_div_5_Template, 1, 0, "div", 4);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(6, "div", 5);
+        \u0275\u0275template(7, AttendeeListComponent_ng_container_7_Template, 2, 1, "ng-container", 6);
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", !ctx.hide_close);
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate2(" ", ctx.list.length, " ", ctx.custom_title ? ctx.custom_title : ctx.list.length === 1 ? "Attendee" : "Attendees", " ");
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", !ctx.hide_close);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngForOf", ctx.list);
+      }
+    }, dependencies: [NgForOf, NgIf, IconComponent, UserAvatarComponent, MatRipple, MatTooltip], encapsulation: 2 });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AttendeeListComponent, { className: "AttendeeListComponent", filePath: "libs/events/src/lib/attendee-list.component.ts", lineNumber: 71 });
+})();
+
+// libs/events/src/lib/event-details-modal.component.ts
+var _c067 = (a0) => ({ time: a0 });
+var _c139 = (a0, a1) => ({ count: a0, cost: a1 });
+var _c215 = (a0) => ({ count: a0 });
+var _c311 = () => ({ disable_pan: true, disable_zoom: true });
+function EventDetailsModalComponent_div_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 46);
+  }
+}
+function EventDetailsModalComponent_div_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 47);
+    \u0275\u0275element(1, "image-carousel", 48);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("images", ctx_r1.event == null ? null : ctx_r1.event.system == null ? null : ctx_r1.event.system.images);
+  }
+}
+function EventDetailsModalComponent_div_13_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 49);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.period_tz, " ");
+  }
+}
+function EventDetailsModalComponent_div_14_button_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 53);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_div_14_button_1_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.checkin());
+    });
+    \u0275\u0275elementStart(1, "div", 54)(2, "app-icon", 55);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 56);
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275classProp("bg-success", ctx_r1.room_status !== "pending")("border-none", ctx_r1.room_status !== "pending")("pointer-events-none", ctx_r1.room_status !== "pending");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r1.room_status === "pending" ? "arrow_back" : "done");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 8, ctx_r1.room_status === "pending" ? "COMMON.CHECK_IN" : "COMMON.CHECKED_IN"), " ");
+  }
+}
+function EventDetailsModalComponent_div_14_button_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "button", 57)(1, "app-icon");
+    \u0275\u0275text(2, "more_horiz");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275nextContext(2);
+    const menu_r4 = \u0275\u0275reference(91);
+    \u0275\u0275property("matMenuTriggerFor", menu_r4);
+  }
+}
+function EventDetailsModalComponent_div_14_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 50);
+    \u0275\u0275template(1, EventDetailsModalComponent_div_14_button_1_Template, 7, 10, "button", 51)(2, EventDetailsModalComponent_div_14_button_2_Template, 3, 1, "button", 52);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.room_status && (ctx_r1.event == null ? null : ctx_r1.event.can_check_in) && ctx_r1.room_status !== "free");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.allow_edit);
+  }
+}
+function EventDetailsModalComponent_div_27_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 49);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "date");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind3(2, 1, ctx_r1.event.date, "EEEE, dd LLLL y (z)", ctx_r1.tz), " ");
+  }
+}
+function EventDetailsModalComponent_div_34_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 49);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.period_tz, " ");
+  }
+}
+function EventDetailsModalComponent_ng_container_39_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275text(1);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", (ctx_r1.level == null ? null : ctx_r1.level.display_name) || (ctx_r1.level == null ? null : ctx_r1.level.name), ", ");
+  }
+}
+function EventDetailsModalComponent_div_41_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 16)(1, "app-icon");
+    \u0275\u0275text(2, "place");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate2(" ", (ctx_r1.building == null ? null : ctx_r1.building.display_name) || (ctx_r1.building == null ? null : ctx_r1.building.name), ", ", ctx_r1.building == null ? null : ctx_r1.building.address, " ");
+  }
+}
+function EventDetailsModalComponent_ng_container_70_div_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 59);
+    \u0275\u0275element(1, "a-user-avatar", 31);
+    \u0275\u0275elementStart(2, "div", 32)(3, "div", 33);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 34);
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const user_r5 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("user", user_r5);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", user_r5 == null ? null : user_r5.name, " ");
+    \u0275\u0275advance();
+    \u0275\u0275property("title", user_r5.email);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", user_r5.email, " ");
+  }
+}
+function EventDetailsModalComponent_ng_container_70_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275template(1, EventDetailsModalComponent_ng_container_70_div_1_Template, 7, 4, "div", 58);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const user_r5 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", user_r5.email !== ctx_r1.event.host);
+  }
+}
+function EventDetailsModalComponent_ng_container_81_div_6_div_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 73);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const order_r7 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", order_r7.caterer, " ");
+  }
+}
+function EventDetailsModalComponent_ng_container_81_div_6_div_17_span_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 79);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const item_r8 = \u0275\u0275nextContext().$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275property("matTooltip", ctx_r1.optionList(item_r8));
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 2, "CALENDAR_EVENT.CATERING_ORDER_OPTION_COUNT", \u0275\u0275pureFunction1(5, _c215, (item_r8.option_list == null ? null : item_r8.option_list.length) || "0")), " ");
+  }
+}
+function EventDetailsModalComponent_ng_container_81_div_6_div_17_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 74)(1, "div", 75)(2, "span", 66);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(4, EventDetailsModalComponent_ng_container_81_div_6_div_17_span_4_Template, 3, 7, "span", 76);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 77);
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "div", 78);
+    \u0275\u0275text(8);
+    \u0275\u0275pipe(9, "currency");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const item_r8 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(item_r8.name || "Item");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", item_r8.option_list == null ? null : item_r8.option_list.length);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" x", item_r8.quantity, " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(9, 4, item_r8.unit_price_with_options / 100, ctx_r1.currency_code), " ea ");
+  }
+}
+function EventDetailsModalComponent_ng_container_81_div_6_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r6 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 63)(1, "div", 64)(2, "div", 65)(3, "div", 66);
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "date");
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "div", 67)(8, "div", 68);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "currency");
+    \u0275\u0275pipe(11, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(12, EventDetailsModalComponent_ng_container_81_div_6_div_12_Template, 2, 1, "div", 69);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(13, "button", 70);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_ng_container_81_div_6_Template_button_click_13_listener() {
+      const order_r7 = \u0275\u0275restoreView(_r6).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.show_order[order_r7.id] = !ctx_r1.show_order[order_r7.id]);
+    });
+    \u0275\u0275elementStart(14, "app-icon");
+    \u0275\u0275text(15);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(16, "div", 71);
+    \u0275\u0275template(17, EventDetailsModalComponent_ng_container_81_div_6_div_17_Template, 10, 7, "div", 72);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const order_r7 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 10, "CALENDAR_EVENT.CATERING_ORDER_AT", \u0275\u0275pureFunction1(19, _c067, \u0275\u0275pipeBind2(5, 7, order_r7.deliver_at, "MMM d, " + ctx_r1.time_format))), " ");
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(11, 16, "CALENDAR_EVENT.CATERING_ORDER_DETAILS", \u0275\u0275pureFunction2(21, _c139, order_r7.item_count, \u0275\u0275pipeBind2(10, 13, order_r7.total_cost / 100, ctx_r1.currency_code))), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", order_r7.caterer);
+    \u0275\u0275advance();
+    \u0275\u0275property("matTooltip", ctx_r1.show_order[order_r7.id] ? "Hide order items" : "Show order items");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", ctx_r1.show_order[order_r7.id] ? "expand_less" : "expand_more", " ");
+    \u0275\u0275advance();
+    \u0275\u0275property("@show", ctx_r1.print || ctx_r1.show_order[order_r7.id] ? "show" : "hide");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", order_r7.items);
+  }
+}
+function EventDetailsModalComponent_ng_container_81_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "div", 19)(2, "h3", 60);
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 61);
+    \u0275\u0275template(6, EventDetailsModalComponent_ng_container_81_div_6_Template, 18, 24, "div", 62);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 2, "CALENDAR_EVENT.CATERING"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngForOf", ctx_r1.event.valid_catering);
+  }
+}
+function EventDetailsModalComponent_ng_container_83_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275element(1, "interactive-map", 80);
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("src", ctx_r1.level == null ? null : ctx_r1.level.map_id)("features", ctx_r1.features)("options", \u0275\u0275pureFunction0(3, _c311));
+  }
+}
+function EventDetailsModalComponent_div_84_div_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 83);
+    \u0275\u0275pipe(1, "sanitize");
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("innerHTML", \u0275\u0275pipeBind1(1, 1, ctx_r1.body) || "Unable to sanitize notes contents", \u0275\u0275sanitizeHtml);
+  }
+}
+function EventDetailsModalComponent_div_84_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 19)(1, "h3", 81);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(4, EventDetailsModalComponent_div_84_div_4_Template, 2, 3, "div", 82);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 2, "CALENDAR_EVENT.NOTES_HEADER"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.raw_body);
+  }
+}
+function EventDetailsModalComponent_ng_container_85_div_6_div_14_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 74)(1, "div", 75)(2, "span", 66);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(4, "div", 77);
+    \u0275\u0275text(5);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const item_r11 = ctx.$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(item_r11.name || "Item");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" x", item_r11.quantity, " ");
+  }
+}
+function EventDetailsModalComponent_ng_container_85_div_6_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 86)(1, "button", 87);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_ng_container_85_div_6_Template_button_click_1_listener() {
+      const request_r10 = \u0275\u0275restoreView(_r9).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.show_request[request_r10.id] = !ctx_r1.show_request[request_r10.id]);
+    });
+    \u0275\u0275elementStart(2, "div", 88)(3, "div", 66);
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "date");
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(7, "div", 89)(8, "app-icon");
+    \u0275\u0275text(9);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(10, "div", 90)(11, "app-icon", 55);
+    \u0275\u0275text(12);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(13, "div", 71);
+    \u0275\u0275template(14, EventDetailsModalComponent_ng_container_85_div_6_div_14_Template, 6, 2, "div", 72);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const request_r10 = ctx.$implicit;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 21, "CALENDAR_EVENT.ASSETS_REQUESTED_FOR", \u0275\u0275pureFunction1(24, _c067, \u0275\u0275pipeBind2(5, 18, request_r10.deliver_at, "MMM d, " + ctx_r1.time_format))), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275classProp("bg-success", request_r10.state === "approved")("text-success-content", request_r10.state === "approved")("bg-warning", request_r10.state !== "approved" && request_r10.state !== "rejected")("text-warning-content", request_r10.state !== "approved" && request_r10.state !== "rejected")("bg-error", request_r10.state === "rejected")("text-error-content", request_r10.state === "rejected");
+    \u0275\u0275property("matTooltip", request_r10.state || "Tentative");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", request_r10.state === "approved" ? "done" : request_r10.state === "rejected" ? "close" : "schedule", " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", ctx_r1.show_request[request_r10.id] ? "expand_less" : "expand_more", " ");
+    \u0275\u0275advance();
+    \u0275\u0275property("@show", ctx_r1.print || ctx_r1.show_request[request_r10.id] ? "show" : "hide");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", request_r10.items);
+  }
+}
+function EventDetailsModalComponent_ng_container_85_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "div", 19)(2, "h3", 84);
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 61);
+    \u0275\u0275template(6, EventDetailsModalComponent_ng_container_85_div_6_Template, 15, 26, "div", 85);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind1(4, 3, "CALENDAR_EVENT.ASSETS_HEADER"), " (", (ctx_r1.event.valid_assets == null ? null : ctx_r1.event.valid_assets.length) || 0, ") ");
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngForOf", ctx_r1.event.valid_assets);
+  }
+}
+function EventDetailsModalComponent_div_89_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r12 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 91)(1, "attendee-list", 92);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_div_89_Template_attendee_list_click_1_listener() {
+      \u0275\u0275restoreView(_r12);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.show_attendees = false);
+    });
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("list", ctx_r1.event.attendees)("host", ctx_r1.event.host);
+  }
+}
+function EventDetailsModalComponent_button_92_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r13 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 93);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_button_92_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r13);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.edit ? ctx_r1.edit(ctx_r1.event) : "");
+    });
+    \u0275\u0275elementStart(1, "div", 42)(2, "app-icon", 55);
+    \u0275\u0275text(3, "edit");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div");
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("matTooltip", !ctx_r1.can_edit ? ctx_r1.no_edit_message : "")("disabled", !ctx_r1.can_edit);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 3, "CALENDAR_EVENT.ACTION_EDIT"), " ");
+  }
+}
+function EventDetailsModalComponent_button_100_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r14 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 41);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_button_100_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r14);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.printEvent());
+    });
+    \u0275\u0275elementStart(1, "div", 42)(2, "app-icon", 55);
+    \u0275\u0275text(3, "print");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div");
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 1, "CALENDAR_EVENT.ACTION_PRINT"), " ");
+  }
+}
+function EventDetailsModalComponent_button_101_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r15 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 41);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_button_101_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r15);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.remove ? ctx_r1.remove(ctx_r1.event, true) : "");
+    });
+    \u0275\u0275elementStart(1, "div", 42)(2, "app-icon", 43);
+    \u0275\u0275text(3, "delete");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div");
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 1, "CALENDAR_EVENT.ACTION_DELETE_SERIES"), " ");
+  }
+}
+function EventDetailsModalComponent_button_102_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r16 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 41);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_button_102_Template_button_click_0_listener() {
+      const act_r17 = \u0275\u0275restoreView(_r16).$implicit;
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.action.emit(act_r17.id));
+    });
+    \u0275\u0275elementStart(1, "div", 42)(2, "app-icon", 55);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div");
+    \u0275\u0275text(5);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const act_r17 = ctx.$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(act_r17.icon);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(act_r17.name);
+  }
+}
+var EMPTY_ACTIONS = [];
+var EventDetailsModalComponent = class _EventDetailsModalComponent {
+  get is_concierge() {
+    return this._settings.app_name.toLowerCase().includes("concierge");
+  }
+  get can_edit() {
+    return true;
+  }
+  get timezone() {
+    return this._settings.get("app.events.use_building_timezone") ? this._org.building.timezone : "";
+  }
+  get tz() {
+    const tz = this.timezone;
+    if (!tz)
+      return "";
+    const tz_offset = getTimezoneOffsetString(tz);
+    return tz_offset === this._local_tz ? "" : tz_offset;
+  }
+  get tz_date_same() {
+    return !this._date.transform(this.event.date, "yyyy-MM-dd", this.tz).localeCompare(this._date.transform(this.event.date, "yyyy-MM-dd"));
+  }
+  get body() {
+    return this.event.body.replace(/\\n\\n\[ID\|.*\]/gm, "");
+  }
+  get allow_edit() {
+    return !this._settings.get("app.events.booking_unavailable");
+  }
+  get custom_actions() {
+    return this._settings.get("app.events.custom_actions") || EMPTY_ACTIONS;
+  }
+  get time_format() {
+    return this._settings.time_format;
+  }
+  get event_status() {
+    if (this.event?.state === "done")
+      return "neutral";
+    if (this.event?.status === "approved")
+      return "success";
+    if (this.event?.status === "tentative")
+      return "warning";
+    if (this.event?.status === "declined")
+      return "error";
+    return "warning";
+  }
+  constructor(_data, _org, _space_pipe, _settings, _dialog) {
+    this._data = _data;
+    this._org = _org;
+    this._space_pipe = _space_pipe;
+    this._settings = _settings;
+    this._dialog = _dialog;
+    this.action = new EventEmitter();
+    this.edit = this._data.edit_fn;
+    this.remove = this._data.remove_fn;
+    this.show_order = {};
+    this.show_request = {};
+    this.room_status = "";
+    this.hide_map = false;
+    this.hide_edit = false;
+    this.raw_body = "";
+    this.print = false;
+    this.show_attendees = false;
+    this.event = this._data.event;
+    this.no_edit_message = "Editing bookings long than \n a day is not available";
+    this.features = [
+      {
+        location: this.event?.system?.map_id,
+        content: MapPinComponent
+      }
+    ];
+    this.has_catering = this.event?.ext("catering")?.length > 0;
+    this.has_assets = !!this.event?.linked_bookings?.find((_3) => _3.booking_type === "asset-request");
+    this.level = new BuildingLevel();
+    this.building = new Building();
+    this.space = new Space();
+    this._local_tz = getTimezoneOffsetString(Intl.DateTimeFormat().resolvedOptions().timeZone);
+    this.accept_count = this.event.attendees.reduce((count, user) => count += user.response_status === "accepted" ? 1 : 0, 0);
+    this.declined_count = this.event.attendees.reduce((count, user) => count += user.response_status === "declined" ? 1 : 0, 0);
+    this.pending_count = this.event.attendees.reduce((count, user) => count += user.response_status === "tentative" || user.response_status === "needsAction" ? 1 : 0, 0);
+    this._date = new DatePipe("en");
+    const doc = new DOMParser().parseFromString(this.event.body, "text/html");
+    this.raw_body = (doc.body.textContent || "").trim();
+    console.log("");
+    this._load().then();
+  }
+  ngOnInit() {
+    this.no_edit_message = i18n("CALENDAR_EVENT.NO_LONG_EDIT_MSG");
+  }
+  get period() {
+    if (this.event?.all_day)
+      return "All Day";
+    return this.formattedTime();
+  }
+  get period_tz() {
+    return this.formattedTime(this.tz);
+  }
+  formattedTime(tz) {
+    const date = this.event.date;
+    const date_end = this.event.date_end;
+    const all_day = this.event.all_day;
+    const tz_format = this._date.transform(date, "zzzz", tz);
+    const start_date = this._date.transform(date, "MMM d", tz);
+    const start_time = this._date.transform(date, this.time_format, tz);
+    const end_date = this._date.transform(date_end, "MMM d", tz);
+    const end_time = this._date.transform(date_end, this.time_format, tz);
+    const is_multiday = this.event?.duration > 24 * 60;
+    if (is_multiday) {
+      return `${start_date}${all_day ? "" : ", " + start_time} - ${end_date}${all_day ? "" : ", " + end_time}`;
+    } else if (all_day) {
+      return "All Day";
+    }
+    return `${start_time} - ${end_time} ${"(" + tz_format + ")"}`;
+  }
+  optionList(item) {
+    return item.option_list?.map((_3) => _3.name).join("\n");
+  }
+  checkin() {
+    return __async(this, null, function* () {
+      const mod = Oa(this.space?.id, "Bookings");
+      if (!mod)
+        return;
+      yield mod.execute("checkin", [getUnixTime(this.event.date)]).catch((e) => notifyError(`Error checking in booking. ${e}`));
+      this.room_status = "busy";
+    });
+  }
+  _load() {
+    return __async(this, null, function* () {
+      this.space = yield this._space_pipe.transform(this.event.system?.id || this.event.system?.email);
+      this.level = this._org.levelWithID(this.space.zones);
+      this.building = this._org.buildings.find((bld) => this.space.zones.includes(bld.id));
+      this.features = [
+        {
+          location: this.space.map_id,
+          content: MapPinComponent
+        }
+      ];
+      const doc = new DOMParser().parseFromString(this.event.body, "text/html");
+      this.raw_body = (doc.body.textContent || "").trim();
+      if (this.event.extension_data.catering?.length || this.event.extension_data.assets?.length) {
+        return;
+      }
+      const metadata = yield getEventMetadata(this.event.id, this.space.id).toPromise();
+      if (metadata) {
+        this.event = new CalendarEvent(__spreadProps(__spreadValues({}, this.event), {
+          extension_data: __spreadValues(__spreadValues({}, this.event.extension_data), metadata)
+        }));
+      }
+    });
+  }
+  status(id) {
+    const booking = this.event.linked_bookings.find((_3) => _3.asset_id === id);
+    if (booking.status)
+      return booking.status;
+    return booking ? booking.approved ? "approved" : booking.rejected ? "rejected" : "pending" : "pending";
+  }
+  viewLocation() {
+    this.hide_map = true;
+    const ref = this._dialog.open(MapLocateModalComponent, {
+      maxWidth: "95vw",
+      maxHeight: "95vh",
+      data: { item: this.space }
+    });
+    ref.afterClosed().subscribe(() => {
+      this.hide_map = false;
+    });
+  }
+  printEvent() {
+    this.print = true;
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => this.print = false, 100);
+    }, 300);
+  }
+  static {
+    this.\u0275fac = function EventDetailsModalComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _EventDetailsModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SpacePipe), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(MatDialog));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _EventDetailsModalComponent, selectors: [["event-details-modal"]], outputs: { action: "action" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe])], decls: 103, vars: 64, consts: [["menu", "matMenu"], [1, "h-screen", "w-screen", "space-y-2", "overflow-auto", "bg-base-100", "pb-2", "sm:relative", "sm:inset-auto", "sm:h-auto", "sm:max-h-[80vh]", "sm:w-[51rem]", "sm:rounded", "sm:bg-base-200", "print:min-h-screen", "print:w-screen", "print:overflow-visible"], [1, "max-h-screen", "flex-col", "items-center", "border-base-200", "bg-base-100", "pb-4", "sm:flex", "sm:max-h-[80vh]", "sm:border-b", "sm:px-16", "print:border-none"], ["binding", "", "mod", "Bookings", "bind", "status", 3, "modelChange", "model", "sys"], ["class", "block h-8 w-full sm:hidden", 4, "ngIf"], ["class", "h-64 w-full overflow-hidden bg-neutral sm:rounded-b print:hidden", 4, "ngIf"], ["title", "", 1, "mt-2", "w-full", "px-3", "text-xl", "font-medium"], [1, "w-full", "items-center", "justify-between", "sm:flex"], [1, "m-2", "flex"], [3, "status"], [1, "flex", "flex-col", "leading-tight"], ["class", "text-xs opacity-30", 4, "ngIf"], ["actions", "", "class", "flex items-center space-x-2 px-2 print:hidden", 4, "ngIf"], [1, "flex-wrap", "sm:flex", "sm:px-12"], [1, "min-w-1/3", "flex-grow-[3]", "space-y-2", "rounded", "border-base-200", "sm:m-2", "sm:w-[16rem]", "sm:border", "sm:bg-base-100", "sm:p-4"], [1, "mb-2", "mt-2", "px-3", "text-lg", "font-medium"], [1, "flex", "items-center", "space-x-2", "px-2"], [4, "ngIf"], ["class", "flex items-center space-x-2 px-2", 4, "ngIf"], [1, "min-w-1/3", "mt-4", "flex-grow-[3]", "rounded", "border-base-200", "sm:m-2", "sm:w-[16rem]", "sm:border", "sm:bg-base-100", "sm:p-4"], [1, "mx-3", "flex", "items-center", "justify-between", "border-t", "border-base-200", "sm:border-none"], [1, "text-lg", "font-medium"], ["matRipple", "", "show-attendees", "", 1, "clear", "text-xs", "underline", "print:hidden", 3, "click"], [1, "flex", "items-center", "p-1"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-1"], [1, "text-lg"], [1, "text-sm", "uppercase"], [1, "hidden", "print:block"], [4, "ngFor", "ngForOf"], [1, "mx-3", "mt-2", "border-t", "border-base-200", "pt-2", "text-lg", "font-medium"], ["host", "", 1, "flex", "items-center", "space-x-2", "px-2"], [3, "user"], [1, "w-px", "flex-1", "text-sm"], [1, "w-full", "truncate"], [1, "w-full", "truncate", "opacity-60", 3, "title"], ["map", "", 1, "min-w-1/3", "relative", "m-2", "mt-4", "h-64", "w-[calc(100%-1rem)]", "flex-grow-[3]", "overflow-hidden", "rounded", "border", "border-base-200", "p-2", "sm:mt-2", "sm:h-48", "sm:w-[16rem]", "sm:bg-base-100", 3, "click"], ["class", "min-w-1/3 mt-4 flex-grow-[3] rounded border-base-200 sm:m-2 sm:w-[16rem] sm:border sm:bg-base-100 sm:p-4", 4, "ngIf"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "left-2", "top-2", "bg-neutral", "text-white", "print:hidden"], ["class", "absolute inset-0 z-50", 4, "ngIf"], ["xPosition", "before"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "matTooltip", "disabled", "click", 4, "ngIf"], ["mat-menu-item", "", 3, "click"], [1, "flex", "items-center", "space-x-2", "pr-2", "text-base"], [1, "text-2xl", "text-error"], ["mat-menu-item", "", 3, "click", 4, "ngIf"], ["mat-menu-item", "", 3, "click", 4, "ngFor", "ngForOf"], [1, "block", "h-8", "w-full", "sm:hidden"], [1, "h-64", "w-full", "overflow-hidden", "bg-neutral", "sm:rounded-b", "print:hidden"], [1, "h-64", "w-full", 3, "images"], [1, "text-xs", "opacity-30"], ["actions", "", 1, "flex", "items-center", "space-x-2", "px-2", "print:hidden"], ["btn", "", "matRipple", "", "class", "h-10 flex-1", 3, "bg-success", "border-none", "pointer-events-none", "click", 4, "ngIf"], ["icon", "", "matRipple", "", "class", "h-12 w-12 rounded bg-secondary text-white", 3, "matMenuTriggerFor", 4, "ngIf"], ["btn", "", "matRipple", "", 1, "h-10", "flex-1", 3, "click"], [1, "flex", "items-center", "justify-center", "space-x-2"], [1, "text-2xl"], [1, "pr-4"], ["icon", "", "matRipple", "", 1, "h-12", "w-12", "rounded", "bg-secondary", "text-white", 3, "matMenuTriggerFor"], ["class", "flex items-center space-x-2 px-2", "attendee", "", 4, "ngIf"], ["attendee", "", 1, "flex", "items-center", "space-x-2", "px-2"], [1, "mx-3", "my-2", "text-lg", "font-medium"], [1, "flex", "flex-col", "space-y-2"], ["order", "", "class", "overflow-hidden rounded-xl border border-base-300 bg-base-100", 4, "ngFor", "ngForOf"], ["order", "", 1, "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100"], [1, "flex", "items-center", "space-x-2", "p-3"], [1, "flex-1"], [1, "text-sm"], [1, "flex", "items-center", "space-x-2"], [1, "text-xs", "opacity-60"], ["class", "rounded bg-base-200 px-2 py-1 text-xs", 4, "ngIf"], ["icon", "", "matRipple", "", 1, "print:hidden", 3, "click", "matTooltip"], [1, "flex", "flex-col", "divide-y", "divide-base-100", "bg-base-200"], ["class", "flex items-center space-x-2 px-3 py-1 hover:opacity-90", 4, "ngFor", "ngForOf"], [1, "rounded", "bg-base-200", "px-2", "py-1", "text-xs"], [1, "flex", "items-center", "space-x-2", "px-3", "py-1", "hover:opacity-90"], [1, "flex", "flex-1", "items-center"], ["class", "ml-4 text-xs font-normal opacity-60", 3, "matTooltip", 4, "ngIf"], [1, "rounded", "bg-success", "px-2", "py-1", "text-xs", "text-success-content"], [1, "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content"], [1, "ml-4", "text-xs", "font-normal", "opacity-60", 3, "matTooltip"], [1, "pointer-events-none", 3, "src", "features", "options"], [1, "mx-3", "border-t", "border-base-200", "text-lg", "font-medium", "sm:border-none"], ["notes", "", "class", "mx-4 max-w-full overflow-hidden", 3, "innerHTML", 4, "ngIf"], ["notes", "", 1, "mx-4", "max-w-full", "overflow-hidden", 3, "innerHTML"], [1, "mx-3", "pt-2", "text-lg", "font-medium"], ["request", "", "class", "overflow-hidden rounded-xl border border-base-300 bg-base-100", 4, "ngFor", "ngForOf"], ["request", "", 1, "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100"], ["matRipple", "", 1, "flex", "w-full", "items-center", "space-x-2", "p-3", 3, "click"], [1, "flex-1", "text-left"], [1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full", "print:hidden", 3, "matTooltip"], [1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full", "print:hidden"], [1, "absolute", "inset-0", "z-50"], [3, "click", "list", "host"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "click", "matTooltip", "disabled"]], template: function EventDetailsModalComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "div", 1)(1, "div", 2)(2, "i", 3);
+        \u0275\u0275twoWayListener("modelChange", function EventDetailsModalComponent_Template_i_modelChange_2_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          \u0275\u0275twoWayBindingSet(ctx.room_status, $event) || (ctx.room_status = $event);
+          return \u0275\u0275resetView($event);
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(3, EventDetailsModalComponent_div_3_Template, 1, 0, "div", 4)(4, EventDetailsModalComponent_div_4_Template, 2, 1, "div", 5);
+        \u0275\u0275elementStart(5, "h3", 6);
+        \u0275\u0275text(6);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(7, "div", 7)(8, "div", 8)(9, "status-pill", 9)(10, "div", 10)(11, "div");
+        \u0275\u0275text(12);
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(13, EventDetailsModalComponent_div_13_Template, 2, 1, "div", 11);
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275template(14, EventDetailsModalComponent_div_14_Template, 3, 2, "div", 12);
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(15, "div", 13)(16, "div", 14)(17, "h3", 15);
+        \u0275\u0275text(18);
+        \u0275\u0275pipe(19, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(20, "div", 16)(21, "app-icon");
+        \u0275\u0275text(22, "event");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(23, "div", 10)(24, "div");
+        \u0275\u0275text(25);
+        \u0275\u0275pipe(26, "date");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(27, EventDetailsModalComponent_div_27_Template, 3, 5, "div", 11);
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(28, "div", 16)(29, "app-icon");
+        \u0275\u0275text(30, "schedule");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(31, "div", 10)(32, "div");
+        \u0275\u0275text(33);
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(34, EventDetailsModalComponent_div_34_Template, 2, 1, "div", 11);
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(35, "div", 16)(36, "app-icon");
+        \u0275\u0275text(37, "map");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(38, "div");
+        \u0275\u0275template(39, EventDetailsModalComponent_ng_container_39_Template, 2, 1, "ng-container", 17);
+        \u0275\u0275text(40);
+        \u0275\u0275elementEnd()();
+        \u0275\u0275template(41, EventDetailsModalComponent_div_41_Template, 5, 2, "div", 18);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(42, "div", 19)(43, "div", 20)(44, "h3", 21);
+        \u0275\u0275text(45);
+        \u0275\u0275pipe(46, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(47, "button", 22);
+        \u0275\u0275listener("click", function EventDetailsModalComponent_Template_button_click_47_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.show_attendees = true);
+        });
+        \u0275\u0275text(48);
+        \u0275\u0275pipe(49, "translate");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(50, "div", 23)(51, "div", 24)(52, "div", 25);
+        \u0275\u0275text(53);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(54, "div", 26);
+        \u0275\u0275text(55);
+        \u0275\u0275pipe(56, "translate");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(57, "div", 24)(58, "div", 25);
+        \u0275\u0275text(59);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(60, "div", 26);
+        \u0275\u0275text(61);
+        \u0275\u0275pipe(62, "translate");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(63, "div", 24)(64, "div", 25);
+        \u0275\u0275text(65);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(66, "div", 26);
+        \u0275\u0275text(67);
+        \u0275\u0275pipe(68, "translate");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(69, "div", 27);
+        \u0275\u0275template(70, EventDetailsModalComponent_ng_container_70_Template, 2, 1, "ng-container", 28);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(71, "h3", 29);
+        \u0275\u0275text(72);
+        \u0275\u0275pipe(73, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(74, "div", 30);
+        \u0275\u0275element(75, "a-user-avatar", 31);
+        \u0275\u0275elementStart(76, "div", 32)(77, "div", 33);
+        \u0275\u0275text(78);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(79, "div", 34);
+        \u0275\u0275text(80);
+        \u0275\u0275elementEnd()()()();
+        \u0275\u0275template(81, EventDetailsModalComponent_ng_container_81_Template, 7, 4, "ng-container", 17);
+        \u0275\u0275elementStart(82, "button", 35);
+        \u0275\u0275listener("click", function EventDetailsModalComponent_Template_button_click_82_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.viewLocation());
+        });
+        \u0275\u0275template(83, EventDetailsModalComponent_ng_container_83_Template, 2, 4, "ng-container", 17);
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(84, EventDetailsModalComponent_div_84_Template, 5, 4, "div", 36)(85, EventDetailsModalComponent_ng_container_85_Template, 7, 5, "ng-container", 17);
+        \u0275\u0275elementStart(86, "button", 37)(87, "app-icon");
+        \u0275\u0275text(88, "close");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275template(89, EventDetailsModalComponent_div_89_Template, 2, 2, "div", 38);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(90, "mat-menu", 39, 0);
+        \u0275\u0275template(92, EventDetailsModalComponent_button_92_Template, 7, 5, "button", 40);
+        \u0275\u0275elementStart(93, "button", 41);
+        \u0275\u0275listener("click", function EventDetailsModalComponent_Template_button_click_93_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.remove ? ctx.remove(ctx.event, false) : "");
+        });
+        \u0275\u0275elementStart(94, "div", 42)(95, "app-icon", 43);
+        \u0275\u0275text(96, "delete");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(97, "div");
+        \u0275\u0275text(98);
+        \u0275\u0275pipe(99, "translate");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275template(100, EventDetailsModalComponent_button_100_Template, 7, 3, "button", 44)(101, EventDetailsModalComponent_button_101_Template, 7, 3, "button", 44)(102, EventDetailsModalComponent_button_102_Template, 6, 2, "button", 45);
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        \u0275\u0275advance(2);
+        \u0275\u0275twoWayProperty("model", ctx.room_status);
+        \u0275\u0275property("sys", ctx.space == null ? null : ctx.space.id);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", !(ctx.event == null ? null : ctx.event.system == null ? null : ctx.event.system.images == null ? null : ctx.event.system.images.length));
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.event == null ? null : ctx.event.system == null ? null : ctx.event.system.images == null ? null : ctx.event.system.images.length);
+        \u0275\u0275advance();
+        \u0275\u0275classProp("pt-4", !(ctx.event == null ? null : ctx.event.system == null ? null : ctx.event.system.images == null ? null : ctx.event.system.images.length));
+        \u0275\u0275advance();
+        \u0275\u0275textInterpolate1(" ", ctx.event.title, " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275property("status", ctx.event_status);
+        \u0275\u0275advance();
+        \u0275\u0275classProp("pr-4", ctx.timezone && ctx.tz);
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate(ctx.period);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.timezone && ctx.tz);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.event.state !== "done");
+        \u0275\u0275advance(4);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(19, 45, "CALENDAR_EVENT.DETAILS"), " ");
+        \u0275\u0275advance(7);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(26, 47, ctx.event.date, "EEEE, dd LLLL y"), " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.timezone && ctx.tz && !ctx.tz_date_same);
+        \u0275\u0275advance(6);
+        \u0275\u0275textInterpolate(ctx.period);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.timezone && ctx.tz);
+        \u0275\u0275advance(5);
+        \u0275\u0275property("ngIf", ctx.level);
+        \u0275\u0275advance();
+        \u0275\u0275textInterpolate1(" ", (ctx.event == null ? null : ctx.event.system == null ? null : ctx.event.system.display_name) || (ctx.event == null ? null : ctx.event.system == null ? null : ctx.event.system.name) || (ctx.event == null ? null : ctx.event.location), " ");
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.building);
+        \u0275\u0275advance(4);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(46, 50, "CALENDAR_EVENT.ATTENDEES"), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(49, 52, "COMMON.VIEW_ALL"), " ");
+        \u0275\u0275advance(5);
+        \u0275\u0275textInterpolate(ctx.accept_count || 0);
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(56, 54, "COMMON.TRUE"), " ");
+        \u0275\u0275advance(4);
+        \u0275\u0275textInterpolate(ctx.declined_count || 0);
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(62, 56, "COMMON.FALSE"), " ");
+        \u0275\u0275advance(4);
+        \u0275\u0275textInterpolate(ctx.pending_count || 0);
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(68, 58, "COMMON.PENDING"), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngForOf", ctx.event.attendees);
+        \u0275\u0275advance(2);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(73, 60, "FORM.HOST"), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275property("user", ctx.event.organiser);
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate1(" ", ctx.event.organiser == null ? null : ctx.event.organiser.name, " ");
+        \u0275\u0275advance();
+        \u0275\u0275property("title", ctx.event.host);
+        \u0275\u0275advance();
+        \u0275\u0275textInterpolate1(" ", ctx.event.host, " ");
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.has_catering);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", !ctx.hide_map);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.raw_body);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.has_assets);
+        \u0275\u0275advance(4);
+        \u0275\u0275property("ngIf", ctx.show_attendees);
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngIf", !ctx.hide_edit);
+        \u0275\u0275advance(6);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(99, 62, "CALENDAR_EVENT.ACTION_DELETE"), " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.is_concierge);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.event.recurring_event_id);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngForOf", ctx.custom_actions);
+      }
+    }, dependencies: [NgForOf, NgIf, MatDialogClose, IconComponent, UserAvatarComponent, InteractiveMapComponent, ImageCarouselComponent, StatusPillComponent, BindingDirective, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, MatTooltip, AttendeeListComponent, CurrencyPipe, DatePipe, SanitizePipe, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(EventDetailsModalComponent, { className: "EventDetailsModalComponent", filePath: "libs/events/src/lib/event-details-modal.component.ts", lineNumber: 647 });
+})();
+
+// libs/events/src/lib/group-event-details-modal.component.ts
+var _c068 = (a0) => ({ name: a0 });
+var _c140 = (a0, a1) => ({ going: a0, interested: a1 });
+function GroupEventDetailsModalComponent_img_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 36);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("source", ctx_r1.event.extension_data == null ? null : ctx_r1.event.extension_data.images[0]);
+  }
+}
+function GroupEventDetailsModalComponent_div_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 37)(1, "app-icon", 38);
+    \u0275\u0275text(2, "star");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 39);
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 1, "CALENDAR_EVENT.GROUP_FEATURED"), " ");
+  }
+}
+function GroupEventDetailsModalComponent_ng_container_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementContainerStart(0);
+    \u0275\u0275elementStart(1, "div", 40)(2, "app-icon");
+    \u0275\u0275text(3, "star");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 41);
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(7, "div", 40)(8, "app-icon");
+    \u0275\u0275text(9, "help");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "div", 41);
+    \u0275\u0275text(11);
+    \u0275\u0275pipe(12, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementContainerEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275classProp("bg-base-200", !ctx_r1.is_interested)("text-base-content", !ctx_r1.is_interested)("opacity-30", !ctx_r1.is_interested)("bg-success", ctx_r1.is_interested)("text-success-content", ctx_r1.is_interested)("opacity-100", ctx_r1.is_interested);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 26, ctx_r1.is_interested ? "CALENDAR_EVENT.GROUP_INTERESTED" : "CALENDAR_EVENT.GROUP_NOT_INTERESTED"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275classProp("bg-base-200", !ctx_r1.is_going)("text-base-content", !ctx_r1.is_going)("opacity-30", !ctx_r1.is_going)("bg-success", ctx_r1.is_going)("text-success-content", ctx_r1.is_going)("opacity-100", ctx_r1.is_going);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(12, 28, ctx_r1.is_going ? "CALENDAR_EVENT.GROUP_GOING" : "CALENDAR_EVENT.GROUP_NOT_GOING"), " ");
+  }
+}
+function GroupEventDetailsModalComponent_div_92_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div");
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "space");
+    \u0275\u0275pipe(3, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", (tmp_3_0 = \u0275\u0275pipeBind1(3, 3, \u0275\u0275pipeBind1(2, 1, ctx_r1.system_id))) == null ? null : tmp_3_0.display_name, " ");
+  }
+}
+function GroupEventDetailsModalComponent_div_93_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 42);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_UNCONFIRMED"), " ");
+  }
+}
+function GroupEventDetailsModalComponent_div_94_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 42);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, ctx_r1.is_onsite ? "CALENDAR_EVENT.GROUP_BOTH_LOCATIONS" : "CALENDAR_EVENT.GROUP_REMOTE"), " ");
+  }
+}
+function GroupEventDetailsModalComponent_span_108_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 42);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_NO_DESCRIPTION"), " ");
+  }
+}
+function GroupEventDetailsModalComponent_div_110_interactive_map_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "interactive-map", 50);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("src", ctx_r1.level == null ? null : ctx_r1.level.map_id)("features", ctx_r1.features)("styles", ctx_r1.styles);
+  }
+}
+function GroupEventDetailsModalComponent_div_110_div_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div");
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "space");
+    \u0275\u0275pipe(3, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_4_0;
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", (tmp_4_0 = \u0275\u0275pipeBind1(3, 3, \u0275\u0275pipeBind1(2, 1, ctx_r1.system_id))) == null ? null : tmp_4_0.display_name, " ");
+  }
+}
+function GroupEventDetailsModalComponent_div_110_div_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 42);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_UNCONFIRMED"), " ");
+  }
+}
+function GroupEventDetailsModalComponent_div_110_span_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate2(" ", ctx_r1.building.display_name || ctx_r1.building.name, ", ", (ctx_r1.level == null ? null : ctx_r1.level.display_name) || (ctx_r1.level == null ? null : ctx_r1.level.name), " ");
+  }
+}
+function GroupEventDetailsModalComponent_div_110_span_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 42);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_NO_LOCATION"), " ");
+  }
+}
+function GroupEventDetailsModalComponent_div_110_a_10_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "a", 51);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275classProp("underline", ctx_r1.event.meeting_url);
+    \u0275\u0275property("href", ctx_r1.event.meeting_url, \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 4, ctx_r1.is_onsite ? "CALENDAR_EVENT.GROUP_BOTH_LOCATIONS" : "CALENDAR_EVENT.GROUP_REMOTE"), " ");
+  }
+}
+function GroupEventDetailsModalComponent_div_110_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 43)(1, "div", 44)(2, "button", 45);
+    \u0275\u0275listener("click", function GroupEventDetailsModalComponent_div_110_Template_button_click_2_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.viewLocation());
+    });
+    \u0275\u0275template(3, GroupEventDetailsModalComponent_div_110_interactive_map_3_Template, 1, 3, "interactive-map", 46);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 47);
+    \u0275\u0275template(5, GroupEventDetailsModalComponent_div_110_div_5_Template, 4, 5, "div", 12)(6, GroupEventDetailsModalComponent_div_110_div_6_Template, 3, 3, "div", 30);
+    \u0275\u0275elementStart(7, "div", 48);
+    \u0275\u0275template(8, GroupEventDetailsModalComponent_div_110_span_8_Template, 2, 2, "span", 12)(9, GroupEventDetailsModalComponent_div_110_span_9_Template, 3, 3, "span", 30);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(10, GroupEventDetailsModalComponent_div_110_a_10_Template, 3, 6, "a", 49);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", !ctx_r1.showing_map);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.is_onsite && ctx_r1.has_space);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.is_onsite && !ctx_r1.has_space);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.building && ctx_r1.level);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.building || !ctx_r1.level);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.is_online);
+  }
+}
+function GroupEventDetailsModalComponent_div_111_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 52)(1, "button", 53);
+    \u0275\u0275listener("click", function GroupEventDetailsModalComponent_div_111_Template_button_click_1_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.show_attendees = false);
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(2, "div", 54)(3, "attendee-list", 55);
+    \u0275\u0275listener("click", function GroupEventDetailsModalComponent_div_111_Template_attendee_list_click_3_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.show_attendees = false);
+    });
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275property("show_host", false)("list", ctx_r1.event.attendees)("host", ctx_r1.event.user_email);
+  }
+}
+var GroupEventDetailsModalComponent = class _GroupEventDetailsModalComponent {
+  get time_format() {
+    return this._settings.time_format;
+  }
+  get featured() {
+    return this.event.featured || this.event.extension_data?.featured;
+  }
+  get is_onsite() {
+    return this.event.extension_data.attendance_type !== "ONLINE";
+  }
+  get has_space() {
+    return !!this.space?.id;
+  }
+  get is_online() {
+    return !this.is_onsite || this.event.extension_data.attendance_type === "ANY";
+  }
+  get body() {
+    if (this.is_online)
+      return this.event.body;
+    let body = this.event.body;
+    const remove_blocks = [
+      `<div style="margin-bottom:24px; overflow:hidden; white-space:nowrap">________________________________________________________________________________</div>`,
+      `<p>________________________________________________________________________________</p>`
+    ];
+    for (const block2 of remove_blocks) {
+      const first2 = body.indexOf(block2);
+      const last4 = body.lastIndexOf(block2);
+      body = body.substring(0, first2) + body.substring(last4);
+    }
+    for (const block2 of remove_blocks) {
+      body = body.replace(block2, "");
+    }
+    return body;
+  }
+  get attendance() {
+    return this.event.attendees?.filter((_3) => _3.checked_in)?.length || 0;
+  }
+  get is_interested() {
+    return !!this.guest_details;
+  }
+  get is_going() {
+    return this.guest_details?.checked_in;
+  }
+  get system_id() {
+    return this.space?.id;
+  }
+  get guest_details() {
+    const user = currentUser();
+    return this.event.attendees?.find((_3) => _3.email === user.email);
+  }
+  get group_event_calendar() {
+    return this._settings.get("app.group_events_calendar");
+  }
+  constructor(_data, _org, _settings, _dialog, _dialog_ref) {
+    this._data = _data;
+    this._org = _org;
+    this._settings = _settings;
+    this._dialog = _dialog;
+    this._dialog_ref = _dialog_ref;
+    this.edit = this._data.edit_fn;
+    this.remove = this._data.remove_fn;
+    this.event = this._data.event;
+    this.concierge = this._data.concierge;
+    this.features = [];
+    this.locate = "";
+    this.showing_map = false;
+    this.show_attendees = false;
+    this.styles = {};
+    this.raw_description = "";
+  }
+  ngOnInit() {
+    return __async(this, null, function* () {
+      const space_pipe = new SpacePipe(this._org);
+      const resource = this.event.resources.find((_3) => _3.email !== this.group_event_calendar);
+      this.space = yield space_pipe.transform(resource?.id || resource?.email);
+      const map_id = this.event.extension_data?.map_id;
+      const id = this.space?.map_id || map_id;
+      if (id) {
+        this.styles[`#${id}`] = { fill: "green" };
+        this.features = [
+          {
+            location: id,
+            content: MapPinComponent,
+            data: {}
+          }
+        ];
+      }
+      const zones = this.space?.zones || [];
+      this.level = this._org.levelWithID(zones);
+      this.building = this._org.buildings.find((_3) => zones.includes(_3.id)) || this._org.building;
+      this.locate = map_id || "";
+      this.raw_description = this.removeHtmlTags(this.event.body);
+    });
+  }
+  removeHtmlTags(html2) {
+    const doc = new DOMParser().parseFromString(html2, "text/html");
+    return (doc.body.textContent || "").trim();
+  }
+  viewLocation() {
+    if (!this.space?.map_id) {
+      return notifyInfo("Unable to locate space on map.");
+    }
+    this.showing_map = true;
+    const ref = this._dialog.open(MapLocateModalComponent, {
+      maxWidth: "95vw",
+      maxHeight: "95vh",
+      data: { item: this.space }
+    });
+    ref.afterClosed().subscribe(() => {
+      this.showing_map = false;
+    });
+  }
+  toggleInterest() {
+    return __async(this, null, function* () {
+      let user = this.guest_details;
+      if (this.is_interested && user) {
+        yield removeEventGuest(this.event.id, currentUser(), {
+          system_id: this.event.system?.id
+        }).toPromise();
+        this.event.attendees = (this.event.attendees || []).filter((_3) => _3.email !== user.email);
+      } else {
+        user = yield addEventGuest(this.event.id, currentUser(), {
+          system_id: this.event.system?.id
+        }).toPromise();
+        this.event.attendees = unique([...this.event.attendees || [], user], "email");
+      }
+    });
+  }
+  toggleAttendance() {
+    return __async(this, null, function* () {
+      let user = this.guest_details;
+      if (!user) {
+        user = yield addEventGuest(this.event.id, currentUser(), {
+          system_id: this.event.system?.id
+        }).toPromise();
+        this.event.attendees = unique([...this.event.attendees || [], user], "email");
+      }
+      user = __spreadValues(__spreadValues({}, currentUser()), user || {});
+      if (!user.email)
+        return;
+      yield checkinEventGuest(this.event.id, user.email, !this.is_going, {
+        system_id: this.event.system?.id
+      }).toPromise();
+      const guest = this.event.attendees.find((_3) => _3.email === user.email);
+      if (!guest)
+        return;
+      guest.checked_in = !this.is_going;
+    });
+  }
+  static {
+    this.\u0275fac = function GroupEventDetailsModalComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _GroupEventDetailsModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(MatDialogRef));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GroupEventDetailsModalComponent, selectors: [["group-event-details-modal"]], standalone: false, decls: 112, vars: 73, consts: [["concierge_menu", "matMenu"], ["menu", "matMenu"], [1, "relative", "max-h-[80vh]", "w-[48rem]", "max-w-[calc(100vw-1rem)]", "overflow-hidden"], [1, "relative", "flex", "h-52", "w-full", "items-center", "justify-between", "overflow-hidden", "bg-base-200"], ["auth", "", "class", "absolute left-1/2 top-1/2 min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 object-cover", 3, "source", 4, "ngIf"], ["class", "absolute left-0 top-0 flex items-center space-x-2 rounded-br bg-info py-2 pl-2 pr-4 text-sm text-info-content", 4, "ngIf"], ["icon", "", "mat-dialog-close", "", 1, "absolute", "right-1", "top-1", "overflow-hidden"], [1, "absolute", "inset-0", "z-0", "bg-base-100", "opacity-30"], [1, "z-10"], [1, "flex", "items-center", "justify-between", "border-b", "border-base-200", "px-8", "py-4"], [1, "text-left", "text-xl"], [1, "flex", "items-center", "space-x-2"], [4, "ngIf"], ["btn", "", "matRipple", "", 1, "clear", "w-[2.75rem]", "bg-base-200", "text-base-content", 3, "disabled", "matMenuTriggerFor"], [1, "text-2xl"], ["mat-menu-item", "", 3, "disabled"], [1, "mr-2"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "click"], ["mat-menu-item", "", 3, "click"], [1, "text-2xl", "text-error"], ["mat-menu-item", "", 1, "flex", "items-center", "space-x-2", 3, "click"], [1, "flex", "max-h-[calc(80vh-18rem)]", "flex-1", "space-x-6", "overflow-y-auto", "overflow-x-hidden", "p-8"], [1, "flex", "w-1/3", "flex-1", "flex-col", "space-y-2"], [1, "flex", "items-center", "space-x-4"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full", "bg-base-200"], [1, "pt-4", "font-medium"], [1, "flex", "flex-col"], [1, "text-sm"], [1, "text-sm", "opacity-30"], [1, "flex", "flex-col", "text-sm"], ["class", "opacity-30", 4, "ngIf"], ["matRipple", "", 1, "flex", "min-h-12", "items-center", "space-x-4", "rounded", 3, "click"], [1, "pb-4", "text-sm"], ["event-details", "", 3, "innerHTML"], ["class", "flex w-[20rem]", 4, "ngIf"], ["class", "absolute inset-0 z-50", 4, "ngIf"], ["auth", "", 1, "absolute", "left-1/2", "top-1/2", "min-h-full", "min-w-full", "-translate-x-1/2", "-translate-y-1/2", "object-cover", 3, "source"], [1, "absolute", "left-0", "top-0", "flex", "items-center", "space-x-2", "rounded-br", "bg-info", "py-2", "pl-2", "pr-4", "text-sm", "text-info-content"], [1, "text-base"], [1, "uppercase"], ["btn", "", 1, "flex", "h-10", "items-center", "space-x-2", "rounded", "px-4"], [1, "pr-2"], [1, "opacity-30"], [1, "flex", "w-[20rem]"], [1, "w-full", "border", "border-base-300"], ["matRipple", "", 1, "relative", "h-40", "w-full", "bg-base-200", 3, "click"], [3, "src", "features", "styles", 4, "ngIf"], [1, "space-y-2", "p-4"], [1, "!mt-0", "text-sm", "opacity-30"], ["class", "mt-4 opacity-30", "target", "_blank", "rel", "noopener noreferrer", 3, "underline", "href", 4, "ngIf"], [3, "src", "features", "styles"], ["target", "_blank", "rel", "noopener noreferrer", 1, "mt-4", "opacity-30", 3, "href"], [1, "absolute", "inset-0", "z-50"], [1, "absolute", "inset-0", "bg-base-content", "opacity-60", 3, "click"], [1, "absolute", "inset-y-8", "left-1/2", "w-[24rem]", "-translate-x-1/2", "overflow-hidden", "rounded", "shadow"], [3, "click", "show_host", "list", "host"]], template: function GroupEventDetailsModalComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "div", 2)(1, "div", 3);
+        \u0275\u0275template(2, GroupEventDetailsModalComponent_img_2_Template, 1, 1, "img", 4);
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(3, GroupEventDetailsModalComponent_div_3_Template, 6, 3, "div", 5);
+        \u0275\u0275elementStart(4, "button", 6);
+        \u0275\u0275element(5, "div", 7);
+        \u0275\u0275elementStart(6, "app-icon", 8);
+        \u0275\u0275text(7, "close");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(8, "div", 9)(9, "h3", 10);
+        \u0275\u0275text(10);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(11, "div", 11);
+        \u0275\u0275template(12, GroupEventDetailsModalComponent_ng_container_12_Template, 13, 30, "ng-container", 12);
+        \u0275\u0275elementStart(13, "button", 13)(14, "app-icon", 14);
+        \u0275\u0275text(15, "more_horiz");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(16, "mat-menu", null, 0)(18, "button", 15)(19, "div", 11)(20, "app-icon", 14);
+        \u0275\u0275text(21, " confirmation_number ");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(22, "div", 16);
+        \u0275\u0275text(23);
+        \u0275\u0275pipe(24, "translate");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(25, "button", 17);
+        \u0275\u0275listener("click", function GroupEventDetailsModalComponent_Template_button_click_25_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.edit ? ctx.edit(ctx.event) : "");
+        });
+        \u0275\u0275elementStart(26, "div", 11)(27, "app-icon", 14);
+        \u0275\u0275text(28, "edit");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(29, "div", 16);
+        \u0275\u0275text(30);
+        \u0275\u0275pipe(31, "translate");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(32, "button", 15)(33, "div", 11)(34, "app-icon", 14);
+        \u0275\u0275text(35, "content_copy");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(36, "div", 16);
+        \u0275\u0275text(37);
+        \u0275\u0275pipe(38, "translate");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(39, "button", 18);
+        \u0275\u0275listener("click", function GroupEventDetailsModalComponent_Template_button_click_39_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.remove ? ctx.remove(ctx.event, false) : "");
+        });
+        \u0275\u0275elementStart(40, "div", 11)(41, "app-icon", 19);
+        \u0275\u0275text(42, " delete ");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(43, "div", 16);
+        \u0275\u0275text(44);
+        \u0275\u0275pipe(45, "translate");
+        \u0275\u0275elementEnd()()()();
+        \u0275\u0275elementStart(46, "mat-menu", null, 1)(48, "button", 20);
+        \u0275\u0275listener("click", function GroupEventDetailsModalComponent_Template_button_click_48_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.toggleInterest());
+        });
+        \u0275\u0275elementStart(49, "div", 11)(50, "app-icon");
+        \u0275\u0275text(51, " star ");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(52, "span");
+        \u0275\u0275text(53);
+        \u0275\u0275pipe(54, "translate");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(55, "button", 18);
+        \u0275\u0275listener("click", function GroupEventDetailsModalComponent_Template_button_click_55_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.toggleAttendance());
+        });
+        \u0275\u0275elementStart(56, "div", 11)(57, "app-icon");
+        \u0275\u0275text(58, " help ");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(59, "span");
+        \u0275\u0275text(60);
+        \u0275\u0275pipe(61, "translate");
+        \u0275\u0275elementEnd()()()()()();
+        \u0275\u0275elementStart(62, "div", 21)(63, "div", 22)(64, "div", 23)(65, "div", 24)(66, "app-icon");
+        \u0275\u0275text(67, "person");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(68, "div");
+        \u0275\u0275text(69);
+        \u0275\u0275pipe(70, "translate");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(71, "h3", 25);
+        \u0275\u0275text(72);
+        \u0275\u0275pipe(73, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(74, "div", 23)(75, "div", 24)(76, "app-icon");
+        \u0275\u0275text(77, "calendar_today");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(78, "div", 26)(79, "div", 27);
+        \u0275\u0275text(80);
+        \u0275\u0275pipe(81, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(82, "div", 28);
+        \u0275\u0275text(83);
+        \u0275\u0275pipe(84, "date");
+        \u0275\u0275pipe(85, "date");
+        \u0275\u0275pipe(86, "date");
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275elementStart(87, "div", 23)(88, "div", 24)(89, "app-icon");
+        \u0275\u0275text(90, "place");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(91, "div", 29);
+        \u0275\u0275template(92, GroupEventDetailsModalComponent_div_92_Template, 4, 5, "div", 12)(93, GroupEventDetailsModalComponent_div_93_Template, 3, 3, "div", 30)(94, GroupEventDetailsModalComponent_div_94_Template, 3, 3, "div", 30);
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(95, "button", 31);
+        \u0275\u0275listener("click", function GroupEventDetailsModalComponent_Template_button_click_95_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.show_attendees = true);
+        });
+        \u0275\u0275elementStart(96, "div", 24)(97, "app-icon");
+        \u0275\u0275text(98, "person");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(99, "div");
+        \u0275\u0275text(100);
+        \u0275\u0275pipe(101, "translate");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(102, "h3", 25);
+        \u0275\u0275text(103);
+        \u0275\u0275pipe(104, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(105, "div", 32);
+        \u0275\u0275element(106, "span", 33);
+        \u0275\u0275pipe(107, "sanitize");
+        \u0275\u0275template(108, GroupEventDetailsModalComponent_span_108_Template, 3, 3, "span", 30);
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(109, "div");
+        \u0275\u0275template(110, GroupEventDetailsModalComponent_div_110_Template, 11, 6, "div", 34);
+        \u0275\u0275elementEnd()()();
+        \u0275\u0275template(111, GroupEventDetailsModalComponent_div_111_Template, 4, 3, "div", 35);
+      }
+      if (rf & 2) {
+        const concierge_menu_r5 = \u0275\u0275reference(17);
+        const menu_r6 = \u0275\u0275reference(47);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.event.extension_data == null ? null : ctx.event.extension_data.images == null ? null : ctx.event.extension_data.images.length);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.featured);
+        \u0275\u0275advance(7);
+        \u0275\u0275textInterpolate1(" ", ctx.event.title, " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", !ctx.concierge);
+        \u0275\u0275advance();
+        \u0275\u0275property("disabled", ctx.event.state === "done")("matMenuTriggerFor", ctx.concierge ? concierge_menu_r5 : menu_r6);
+        \u0275\u0275advance(5);
+        \u0275\u0275property("disabled", true);
+        \u0275\u0275advance(5);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(24, 33, "CALENDAR_EVENT.GROUP_PREMOTE"), " ");
+        \u0275\u0275advance(7);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(31, 35, "CALENDAR_EVENT.GROUP_EDIT"), " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("disabled", true);
+        \u0275\u0275advance(5);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(38, 37, "CALENDAR_EVENT.GROUP_COPY_URL"), " ");
+        \u0275\u0275advance(7);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(45, 39, "CALENDAR_EVENT.GROUP_DELETE"), " ");
+        \u0275\u0275advance(6);
+        \u0275\u0275classProp("text-error", ctx.is_interested);
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(54, 41, ctx.is_interested ? "CALENDAR_EVENT.GROUP_INTEREST_REMOVE" : "CALENDAR_EVENT.GROUP_INTEREST_ADD"), " ");
+        \u0275\u0275advance(4);
+        \u0275\u0275classProp("text-error", ctx.is_going);
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(61, 43, ctx.is_going ? "CALENDAR_EVENT.GROUP_GOING_REMOVE" : "CALENDAR_EVENT.GROUP_GOING_ADD"), " ");
+        \u0275\u0275advance(9);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(70, 45, "CALENDAR_EVENT.GROUP_HOST", \u0275\u0275pureFunction1(68, _c068, (ctx.event.organiser == null ? null : ctx.event.organiser.name) || ctx.event.host)), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(73, 48, "CALENDAR_EVENT.GROUP_WHEN_WHERE"), " ");
+        \u0275\u0275advance(8);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(81, 50, "CALENDAR_EVENT.GROUP_DATE_TIME"), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate3(" ", \u0275\u0275pipeBind2(84, 52, ctx.event.date, "EEEE, d MMMM, yyyy"), " . ", \u0275\u0275pipeBind2(85, 55, ctx.event.date, ctx.time_format), " - ", \u0275\u0275pipeBind2(86, 58, ctx.event.date + ctx.event.duration * 60 * 1e3, ctx.time_format), " ");
+        \u0275\u0275advance(9);
+        \u0275\u0275property("ngIf", ctx.is_onsite && ctx.has_space);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.is_onsite && !ctx.has_space);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.is_online);
+        \u0275\u0275advance(6);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(101, 61, "CALENDAR_EVENT.GROUP_ATTENDEES", \u0275\u0275pureFunction2(70, _c140, ctx.attendance, ctx.event.attendees == null ? null : ctx.event.attendees.length)), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(104, 64, "CALENDAR_EVENT.GROUP_ABOUT"), " ");
+        \u0275\u0275advance(3);
+        \u0275\u0275property("innerHTML", \u0275\u0275pipeBind1(107, 66, ctx.body), \u0275\u0275sanitizeHtml);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", !ctx.raw_description.trim());
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.level);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.show_attendees);
+      }
+    }, dependencies: [NgIf, MatDialogClose, IconComponent, InteractiveMapComponent, AuthenticatedImageDirective, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, AttendeeListComponent, AsyncPipe, DatePipe, SanitizePipe, TranslatePipe, SpacePipe], encapsulation: 2 });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GroupEventDetailsModalComponent, { className: "GroupEventDetailsModalComponent", filePath: "libs/events/src/lib/group-event-details-modal.component.ts", lineNumber: 424 });
+})();
+
+// libs/events/src/lib/event-card.component.ts
+var _c069 = () => ["./"];
+var _c141 = (a0) => ({ event: a0 });
+var _c216 = (a0) => ({ count: a0 });
+function EventCardComponent_h4_0_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 5);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1("", ctx_r0.day, ",\xA0");
+  }
+}
+function EventCardComponent_h4_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "h4", 2);
+    \u0275\u0275template(1, EventCardComponent_h4_0_span_1_Template, 2, 1, "span", 3);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "date");
+    \u0275\u0275elementStart(4, "span", 4);
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "date");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.show_day);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 3, ctx_r0.event == null ? null : ctx_r0.event.date, ctx_r0.time_format), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1("(", \u0275\u0275pipeBind2(6, 6, ctx_r0.event == null ? null : ctx_r0.event.date, "zzzz"), ")");
+  }
+}
+function EventCardComponent_a_1_div_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 21);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r0.period_tz, " ");
+  }
+}
+function EventCardComponent_a_1_div_22_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 14)(1, "app-icon");
+    \u0275\u0275text(2, "restaurant");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 17);
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 1, "CALENDAR_EVENT.CATERED"), " ");
+  }
+}
+function EventCardComponent_a_1_div_31_div_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 25);
+    \u0275\u0275element(1, "a-user-avatar", 26);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const user_r3 = ctx.$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("user", user_r3);
+  }
+}
+function EventCardComponent_a_1_div_31_div_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 25)(1, "div", 27);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext(3);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" +", (ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length) - 5, " ");
+  }
+}
+function EventCardComponent_a_1_div_31_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 22);
+    \u0275\u0275template(1, EventCardComponent_a_1_div_31_div_1_Template, 2, 1, "div", 23);
+    \u0275\u0275pipe(2, "slice");
+    \u0275\u0275template(3, EventCardComponent_a_1_div_31_div_3_Template, 3, 1, "div", 24);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind3(2, 2, ctx_r0.event == null ? null : ctx_r0.event.attendees, 0, (ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length) === 6 ? 6 : 5));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", (ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length) > 6);
+  }
+}
+function EventCardComponent_a_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "a", 6);
+    \u0275\u0275listener("click", function EventCardComponent_a_1_Template_a_click_0_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.viewDetails());
+    });
+    \u0275\u0275elementStart(1, "div", 7)(2, "h4", 8);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 9)(5, "status-pill", 10)(6, "div", 11)(7, "div");
+    \u0275\u0275text(8);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(9, EventCardComponent_a_1_div_9_Template, 2, 1, "div", 12);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(10, "div", 13)(11, "div", 14)(12, "app-icon", 15);
+    \u0275\u0275pipe(13, "translate");
+    \u0275\u0275text(14, "meeting_room");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(15, "div", 16);
+    \u0275\u0275text(16);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(17, "div", 14)(18, "app-icon");
+    \u0275\u0275text(19, "person_outline");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(20, "div", 17);
+    \u0275\u0275text(21);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275template(22, EventCardComponent_a_1_div_22_Template, 6, 3, "div", 18);
+    \u0275\u0275elementStart(23, "div", 14)(24, "app-icon");
+    \u0275\u0275text(25, "people");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(26, "div", 17);
+    \u0275\u0275text(27);
+    \u0275\u0275pipe(28, "translate");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(29, "app-icon", 19);
+    \u0275\u0275text(30, " chevron_right ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(31, EventCardComponent_a_1_div_31_Template, 4, 6, "div", 20);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_11_0;
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(19, _c069))("queryParams", \u0275\u0275pureFunction1(20, _c141, ctx_r0.event == null ? null : ctx_r0.event.id));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r0.event == null ? null : ctx_r0.event.title);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("status", ctx_r0.status);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("pr-4", ctx_r0.timezone && ctx_r0.tz);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r0.period);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.timezone && ctx_r0.tz);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(13, 14, "RESOURCE.ROOM"));
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", ctx_r0.location, " ");
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", (ctx_r0.event == null ? null : ctx_r0.event.organiser == null ? null : ctx_r0.event.organiser.name) || (ctx_r0.event == null ? null : ctx_r0.event.organiser == null ? null : ctx_r0.event.organiser.email), " ");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.event == null ? null : (tmp_11_0 = ctx_r0.event.ext("catering")) == null ? null : tmp_11_0.length);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(28, 16, "CALENDAR_EVENT.ATTENDEE_COUNT", \u0275\u0275pureFunction1(22, _c216, (ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length) || 0)), " ");
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngIf", ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length);
+  }
+}
+var EventCardComponent = class _EventCardComponent extends AsyncHandler {
+  get timezone() {
+    return this._settings.get("app.events.use_building_timezone") ? this._org.building.timezone : "";
+  }
+  get tz() {
+    const tz = this.timezone;
+    if (!tz)
+      return "";
+    const tz_offset = getTimezoneOffsetString(tz);
+    return tz_offset === this._local_tz ? "" : tz_offset;
+  }
+  get time_format() {
+    return this._settings.time_format;
+  }
+  get period() {
+    if (this.event?.all_day)
+      return i18n("COMMON.ALL_DAY");
+    return this.formattedTime();
+  }
+  get period_tz() {
+    return this.formattedTime(this.tz);
+  }
+  formattedTime(tz) {
+    const date = this.event.date;
+    const date_end = this.event.date_end;
+    const all_day = this.event.all_day;
+    const tz_format = this._date.transform(date, "zzzz", tz);
+    const start_date = this._date.transform(date, "MMM d", tz);
+    const start_time = this._date.transform(date, this.time_format, tz);
+    const end_date = this._date.transform(date_end, "MMM d", tz);
+    const end_time = this._date.transform(date_end, this.time_format, tz);
+    const is_multiday = this.event?.duration > 24 * 60;
+    if (is_multiday) {
+      return `${start_date}${all_day ? "" : ", " + start_time} - ${end_date}${all_day ? "" : ", " + end_time}`;
+    } else if (all_day) {
+      return i18n("COMMON.ALL_DAY");
+    }
+    return `${start_time} - ${end_time} ${"(" + tz_format + ")"}`;
+  }
+  get status() {
+    if (this.event?.state === "done")
+      return "neutral";
+    if (this.event?.status === "approved")
+      return "success";
+    if (this.event?.status === "tentative")
+      return "warning";
+    if (this.event?.status === "declined")
+      return "error";
+    return "warning";
+  }
+  constructor(_dialog, _route, _org, _space_pipe, _settings) {
+    super();
+    this._dialog = _dialog;
+    this._route = _route;
+    this._org = _org;
+    this._space_pipe = _space_pipe;
+    this._settings = _settings;
+    this.show_day = false;
+    this.edit_fn = (d) => null;
+    this.remove_fn = (d, t) => null;
+    this.location = "";
+    this._local_tz = getTimezoneOffsetString(Intl.DateTimeFormat().resolvedOptions().timeZone);
+    this._date = new DatePipe("en");
+  }
+  ngOnInit() {
+    return __async(this, null, function* () {
+      this.subscription("route.query", this._route.queryParamMap.subscribe((params) => params.has("event") && this.event?.id === params.get("event") ? this.viewDetails() : ""));
+      this.location = yield this.getLocationString();
+    });
+  }
+  ngOnChanges(changes) {
+    return __async(this, null, function* () {
+      if (changes.event && this.event) {
+        this.location = yield this.getLocationString();
+      }
+    });
+  }
+  get day() {
+    const date = this.event?.date || Date.now();
+    const is_today = isSameDay(Date.now(), date);
+    return `${is_today ? i18n("COMMON.TODAY") : format(date, "EEEE")}`;
+  }
+  getLocationString() {
+    return __async(this, null, function* () {
+      const system = this.event?.resources[0] || this.event?.system || this.event?.space || {};
+      const space = yield this._space_pipe.transform(system.id || system.email);
+      const zone_list = space?.zones || [];
+      const zone = this._org.levelWithID(zone_list) || this._org.buildings.find((_3) => zone_list.includes(_3.id));
+      return `${zone ? (zone.display_name || zone.name) + ", " : ""} ${space?.display_name || space?.name}`;
+    });
+  }
+  viewDetails() {
+    if (!this.event)
+      return;
+    console.log("View Details:", this.edit_fn, this.remove_fn);
+    this.timeout("open", () => {
+      if (this.event.extension_data?.shared_event) {
+        this._dialog.open(GroupEventDetailsModalComponent, {
+          data: {
+            event: this.event,
+            edit_fn: this.edit_fn,
+            remove_fn: this.remove_fn,
+            concierge: false
+          }
+        });
+        return;
+      }
+      this._dialog.open(EventDetailsModalComponent, {
+        data: {
+          event: this.event,
+          edit_fn: this.edit_fn,
+          remove_fn: this.remove_fn
+        }
+      });
+    });
+  }
+  static {
+    this.\u0275fac = function EventCardComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _EventCardComponent)(\u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SpacePipe), \u0275\u0275directiveInject(SettingsService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _EventCardComponent, selectors: [["event-card"]], inputs: { event: "event", show_day: "show_day", edit_fn: "edit_fn", remove_fn: "remove_fn" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 2, vars: 2, consts: [["class", "mb-2 flex items-center", "date", "", 4, "ngIf"], ["name", "view-event-details", "class", "relative w-full cursor-pointer", 3, "routerLink", "queryParams", "click", 4, "ngIf"], ["date", "", 1, "mb-2", "flex", "items-center"], ["day", "", 4, "ngIf"], [1, "px-2", "text-xs"], ["day", ""], ["name", "view-event-details", 1, "relative", "w-full", "cursor-pointer", 3, "click", "routerLink", "queryParams"], [1, "relative", "w-full", "rounded-xl", "border", "border-base-300", "bg-base-100", "py-4", "shadow"], [1, "px-4", "text-lg"], [1, "mx-4", "my-2", "flex"], [3, "status"], [1, "flex", "flex-col", "leading-tight"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "divide-base-200-500", "flex", "flex-col", "flex-wrap", "space-y-2", "py-2", "sm:flex-row", "sm:space-y-0", "sm:divide-x"], [1, "flex", "items-center", "px-4"], ["matTooltipPosition", "right", 3, "matTooltip"], [1, "mx-2", "truncate"], [1, "mx-2"], ["class", "flex items-center px-4", 4, "ngIf"], [1, "absolute", "right-1", "top-1/2", "-translate-y-1/2", "text-4xl"], ["class", "absolute bottom-2 right-2 flex items-center pr-4 text-sm sm:bottom-auto sm:top-2 sm:text-base", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "absolute", "bottom-2", "right-2", "flex", "items-center", "pr-4", "text-sm", "sm:bottom-auto", "sm:top-2", "sm:text-base"], ["class", "h-10 w-6", 4, "ngFor", "ngForOf"], ["class", "h-10 w-6", 4, "ngIf"], [1, "h-10", "w-6"], [3, "user"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full", "border-2", "border-base-100", "bg-secondary", "text-secondary-content"]], template: function EventCardComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275template(0, EventCardComponent_h4_0_Template, 7, 9, "h4", 0)(1, EventCardComponent_a_1_Template, 32, 24, "a", 1);
+      }
+      if (rf & 2) {
+        \u0275\u0275property("ngIf", ctx.event);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.event);
+      }
+    }, dependencies: [NgForOf, NgIf, IconComponent, UserAvatarComponent, StatusPillComponent, MatTooltip, SlicePipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=event-card.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(EventCardComponent, { className: "EventCardComponent", filePath: "libs/events/src/lib/event-card.component.ts", lineNumber: 148 });
+})();
+
+// libs/events/src/lib/group-event-card.component.ts
+var _c070 = (a0) => ({ count: a0 });
+function GroupEventCardComponent_button_0_img_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 15);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("source", ctx_r1.event.images[0]);
+  }
+}
+function GroupEventCardComponent_button_0_p_13_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 16);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_NO_DESCRIPTION"), " ");
+  }
+}
+function GroupEventCardComponent_button_0_div_17_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div");
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.space.display_name || ctx_r1.space.name || "", " ");
+  }
+}
+function GroupEventCardComponent_button_0_div_18_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 16);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_UNCONFIRMED"), " ");
+  }
+}
+function GroupEventCardComponent_button_0_div_19_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 16);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_REMOTE"), " ");
+  }
+}
+function GroupEventCardComponent_button_0_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 2);
+    \u0275\u0275listener("click", function GroupEventCardComponent_button_0_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.viewDetails());
+    });
+    \u0275\u0275elementStart(1, "div", 3);
+    \u0275\u0275template(2, GroupEventCardComponent_button_0_img_2_Template, 1, 1, "img", 4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 5)(4, "div", 6);
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "date");
+    \u0275\u0275pipe(7, "date");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "h2", 7);
+    \u0275\u0275text(9);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "div", 8)(11, "p", 9);
+    \u0275\u0275text(12);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(13, GroupEventCardComponent_button_0_p_13_Template, 3, 3, "p", 10);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(14, "div", 11)(15, "app-icon", 12);
+    \u0275\u0275text(16, "place");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(17, GroupEventCardComponent_button_0_div_17_Template, 2, 1, "div", 13)(18, GroupEventCardComponent_button_0_div_18_Template, 3, 3, "div", 10)(19, GroupEventCardComponent_button_0_div_19_Template, 3, 3, "div", 10);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(20, "div", 11)(21, "app-icon", 12);
+    \u0275\u0275text(22, "people");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(23, "div", 14);
+    \u0275\u0275text(24);
+    \u0275\u0275pipe(25, "translate");
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.event.images == null ? null : ctx_r1.event.images.length);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(6, 11, ctx_r1.event.date, "EEE d MMM"), ", ", \u0275\u0275pipeBind2(7, 14, ctx_r1.event.date, ctx_r1.time_format), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275property("title", ctx_r1.event.title);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.event.title, " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r1.raw_description);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.raw_description.trim());
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngIf", ctx_r1.is_onsite && ctx_r1.has_space);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.is_onsite && !ctx_r1.has_space);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.is_onsite);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(25, 17, "CALENDAR_EVENT.GROUP_ATTENDING", \u0275\u0275pureFunction1(20, _c070, (ctx_r1.event.attendees == null ? null : ctx_r1.event.attendees.length) || "0")), " ");
+  }
+}
+function GroupEventCardComponent_ng_template_1_img_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 15);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("source", ctx_r1.event.images[0]);
+  }
+}
+function GroupEventCardComponent_ng_template_1_p_28_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "p", 16);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_NO_DESCRIPTION"), " ");
+  }
+}
+function GroupEventCardComponent_ng_template_1_div_32_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div");
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r1.space.display_name || ctx_r1.space.name || "", " ");
+  }
+}
+function GroupEventCardComponent_ng_template_1_div_33_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 16);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_UNCONFIRMED"), " ");
+  }
+}
+function GroupEventCardComponent_ng_template_1_div_34_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 16);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_REMOTE"), " ");
+  }
+}
+function GroupEventCardComponent_ng_template_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 17);
+    \u0275\u0275listener("click", function GroupEventCardComponent_ng_template_1_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.viewDetails());
+    });
+    \u0275\u0275elementStart(1, "div", 18);
+    \u0275\u0275template(2, GroupEventCardComponent_ng_template_1_img_2_Template, 1, 1, "img", 4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 19)(4, "app-icon", 20);
+    \u0275\u0275text(5, "star");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "div", 21);
+    \u0275\u0275text(7);
+    \u0275\u0275pipe(8, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(9, "div", 22)(10, "div", 23)(11, "div", 24);
+    \u0275\u0275text(12);
+    \u0275\u0275pipe(13, "date");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(14, "div", 25);
+    \u0275\u0275text(15);
+    \u0275\u0275pipe(16, "date");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(17, "div", 26)(18, "h3", 27);
+    \u0275\u0275text(19);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(20, "div", 28);
+    \u0275\u0275text(21);
+    \u0275\u0275pipe(22, "date");
+    \u0275\u0275pipe(23, "date");
+    \u0275\u0275pipe(24, "date");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(25, "div", 29)(26, "p", 30);
+    \u0275\u0275text(27);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(28, GroupEventCardComponent_ng_template_1_p_28_Template, 3, 3, "p", 10);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(29, "div", 11)(30, "app-icon", 12);
+    \u0275\u0275text(31, "place");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(32, GroupEventCardComponent_ng_template_1_div_32_Template, 2, 1, "div", 13)(33, GroupEventCardComponent_ng_template_1_div_33_Template, 3, 3, "div", 10)(34, GroupEventCardComponent_ng_template_1_div_34_Template, 3, 3, "div", 10);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(35, "div", 11)(36, "app-icon", 12);
+    \u0275\u0275text(37, "people");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(38, "div", 14);
+    \u0275\u0275text(39);
+    \u0275\u0275pipe(40, "translate");
+    \u0275\u0275elementEnd()()()();
+    \u0275\u0275elementStart(41, "div", 31);
+    \u0275\u0275text(42);
+    \u0275\u0275pipe(43, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r1.event.images == null ? null : ctx_r1.event.images.length);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(8, 15, "CALEDAR_EVENT.GROUP_FEATURED"), " ");
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(13, 17, ctx_r1.event.date, "MMM"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(16, 20, ctx_r1.event.date, "d"));
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(ctx_r1.event.title);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate3(" ", \u0275\u0275pipeBind2(22, 23, ctx_r1.event.date, "EEEE"), " ", \u0275\u0275pipeBind2(23, 26, ctx_r1.event.date, ctx_r1.time_format), " - ", \u0275\u0275pipeBind2(24, 29, ctx_r1.event.date + ctx_r1.event.duration * 60 * 1e3, ctx_r1.time_format), " ");
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate(ctx_r1.raw_description);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.raw_description.trim());
+    \u0275\u0275advance(4);
+    \u0275\u0275property("ngIf", ctx_r1.is_onsite && ctx_r1.has_space);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r1.is_onsite && !ctx_r1.has_space);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx_r1.is_onsite);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(40, 32, "CALENDAR_EVENT.GROUP_ATTENDING", \u0275\u0275pureFunction1(37, _c070, (ctx_r1.event.attendees == null ? null : ctx_r1.event.attendees.length) || "0")), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(43, 35, "COMMON.VIEW_DETAILS"), " ");
+  }
+}
+var GroupEventCardComponent = class _GroupEventCardComponent {
+  get time_format() {
+    return this._settings.time_format;
+  }
+  get is_onsite() {
+    return this.event?.extension_data.attendance_type !== "ONLINE";
+  }
+  get has_space() {
+    return !!this.space?.id;
+  }
+  get is_online() {
+    return !this.is_onsite || this.event?.extension_data.attendance_type === "ANY";
+  }
+  get group_event_calendar() {
+    return this._settings.get("app.group_events_calendar");
+  }
+  constructor(_settings, _dialog, _org) {
+    this._settings = _settings;
+    this._dialog = _dialog;
+    this._org = _org;
+    this.raw_description = "";
+  }
+  ngOnInit() {
+    return __async(this, null, function* () {
+      const space_pipe = new SpacePipe(this._org);
+      const resource = this.event.resources.find((_3) => _3.email !== this.group_event_calendar);
+      this.space = yield space_pipe.transform(resource?.id || resource?.email);
+      this.raw_description = this.removeHtmlTags(this.event.body);
+    });
+  }
+  removeHtmlTags(html2) {
+    const doc = new DOMParser().parseFromString(html2, "text/html");
+    return doc.body.textContent || "";
+  }
+  viewDetails() {
+    this._dialog.open(GroupEventDetailsModalComponent, {
+      data: { event: this.event, concierge: false }
+    });
+  }
+  static {
+    this.\u0275fac = function GroupEventCardComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _GroupEventCardComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(OrganisationService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GroupEventCardComponent, selectors: [["group-event-card"]], inputs: { event: "event", featured: "featured" }, standalone: false, decls: 3, vars: 2, consts: [["featured_card", ""], ["matRipple", "", "class", "flex h-[20rem] w-60 flex-col overflow-hidden rounded-xl border border-base-300 bg-base-100 shadow hover:border-info hover:shadow-2xl", 3, "click", 4, "ngIf", "ngIfElse"], ["matRipple", "", 1, "flex", "h-[20rem]", "w-60", "flex-col", "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100", "shadow", "hover:border-info", "hover:shadow-2xl", 3, "click"], [1, "relative", "flex", "h-28", "min-h-28", "w-full", "items-center", "justify-between", "overflow-hidden", "border-b", "border-base-200", "bg-base-200"], ["auth", "", "class", "absolute left-0 top-0 h-full w-full object-cover object-center", 3, "source", 4, "ngIf"], [1, "h-1/2", "w-full", "flex-1", "p-4"], [1, "text-left", "text-sm", "opacity-60"], [1, "mb-2", "w-full", "truncate", "text-left", "text-xl", 3, "title"], [1, "mb-2", "h-[4.5rem]", "flex-1", "overflow-hidden", "text-left", "text-xs", "opacity-60"], [1, "line-clamp-4"], ["class", "opacity-30", 4, "ngIf"], [1, "flex", "items-center", "space-x-2", "text-sm"], [1, "text-info"], [4, "ngIf"], [1, ""], ["auth", "", 1, "absolute", "left-0", "top-0", "h-full", "w-full", "object-cover", "object-center", 3, "source"], [1, "opacity-30"], ["matRipple", "", 1, "mx-auto", "flex", "h-56", "w-[63rem]", "max-w-full", "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100", "shadow", "hover:border-info", "hover:shadow-2xl", 3, "click"], [1, "relative", "flex", "h-full", "w-1/2", "min-w-56", "max-w-[20rem]", "items-center", "justify-between", "overflow-hidden", "border-r", "border-base-200", "bg-base-200"], [1, "absolute", "left-0", "top-0", "flex", "items-center", "space-x-2", "rounded-br-xl", "bg-info", "py-2", "pl-2", "pr-4", "text-sm", "text-info-content"], [1, "text-base"], [1, "uppercase"], ["details", "", 1, "flex", "space-x-4", "px-8", "py-4"], [1, "flex", "flex-col", "items-center"], [1, "text-sm", "opacity-30"], [1, "text-lg"], [1, "flex", "flex-col", "space-y-2"], [1, "text-left"], ["time", "", 1, "text-left", "text-sm", "opacity-30"], [1, "h-20", "overflow-hidden", "text-left"], [1, "line-clamp-3"], [1, "absolute", "right-4", "top-4", "w-32", "truncate", "rounded", "bg-secondary", "px-4", "py-2", "text-center", "text-secondary-content"]], template: function GroupEventCardComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275template(0, GroupEventCardComponent_button_0_Template, 26, 22, "button", 1)(1, GroupEventCardComponent_ng_template_1_Template, 44, 39, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        const featured_card_r4 = \u0275\u0275reference(2);
+        \u0275\u0275property("ngIf", !ctx.featured)("ngIfElse", featured_card_r4);
+      }
+    }, dependencies: [NgIf, IconComponent, AuthenticatedImageDirective, MatRipple, DatePipe, TranslatePipe], styles: ["\n\nbutton[_ngcontent-%COMP%] {\n  transition: box-shadow 300ms, border 200ms;\n}\n/*# sourceMappingURL=group-event-card.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GroupEventCardComponent, { className: "GroupEventCardComponent", filePath: "libs/events/src/lib/group-event-card.component.ts", lineNumber: 179 });
+})();
+
+// libs/events/src/lib/setup-breakdown-modal.component.ts
+var _c071 = () => [5, 10];
+function SetupBreakdownModalComponent_button_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "button", 5)(1, "app-icon");
+    \u0275\u0275text(2, "close");
+    \u0275\u0275elementEnd()();
+  }
+}
+function SetupBreakdownModalComponent_main_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "main", 6)(1, "div", 7)(2, "label", 8);
+    \u0275\u0275text(3, "Setup Duration");
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(4, "a-duration-field", 9);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 7)(6, "label", 10);
+    \u0275\u0275text(7, "Breakdown Duration");
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(8, "a-duration-field", 11);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("formGroup", ctx_r0.form);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("min", 0)("custom_options", \u0275\u0275pureFunction0(5, _c071));
+    \u0275\u0275advance(4);
+    \u0275\u0275property("min", 0)("custom_options", \u0275\u0275pureFunction0(6, _c071));
+  }
+}
+function SetupBreakdownModalComponent_footer_5_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "footer", 12)(1, "button", 13);
+    \u0275\u0275listener("click", function SetupBreakdownModalComponent_footer_5_Template_button_click_1_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.save());
+    });
+    \u0275\u0275text(2, "Save Changes");
+    \u0275\u0275elementEnd()();
+  }
+}
+function SetupBreakdownModalComponent_ng_template_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 14);
+    \u0275\u0275element(1, "mat-spinner", 15);
+    \u0275\u0275elementStart(2, "p", 16);
+    \u0275\u0275text(3, " Saving setup and breakdown durations... ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275property("diameter", 32);
+  }
+}
+var SetupBreakdownModalComponent = class _SetupBreakdownModalComponent {
+  constructor(_event, _dialog_ref) {
+    this._event = _event;
+    this._dialog_ref = _dialog_ref;
+    this.loading = false;
+    this.form = new FormGroup({
+      setup: new FormControl(this._event.setup_time || 0),
+      breakdown: new FormControl(this._event.breakdown_time || 0)
+    });
+  }
+  save() {
+    return __async(this, null, function* () {
+      this.loading = true;
+      this._dialog_ref.disableClose = true;
+      const { host, creator } = this._event;
+      const query = {
+        system_id: this._event?.resources[0]?.id || this._event?.system?.id,
+        ical_uid: this._event?.ical_uid
+      };
+      let event = yield saveEvent(new CalendarEvent(__spreadProps(__spreadValues({}, this._event), {
+        setup_time: this.form.value.setup,
+        breakdown_time: this.form.value.breakdown
+      })).toJSON(), query).toPromise().catch((_3) => null);
+      if (!event) {
+        event = yield updateEventMetadata(this._event.id, query.system_id, __spreadProps(__spreadValues({}, this._event.extension_data), {
+          setup_time: this.form.value.setup,
+          breakdown_time: this.form.value.breakdown,
+          setup: this.form.value.setup,
+          breakdown: this.form.value.breakdown
+        })).toPromise().catch((_3) => null);
+      }
+      if (!event) {
+        this.loading = false;
+        this._dialog_ref.disableClose = false;
+        notifyError(`Error updating setup and breakdown.`);
+        return;
+      }
+      notifySuccess("Succesfully updated setup and breakdown period.");
+      this._dialog_ref.disableClose = false;
+      this.loading = false;
+      this._dialog_ref.close(event);
+    });
+  }
+  static {
+    this.\u0275fac = function SetupBreakdownModalComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _SetupBreakdownModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(MatDialogRef));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SetupBreakdownModalComponent, selectors: [["setup-breakdown-modal"]], standalone: false, decls: 8, vars: 4, consts: [["load_state", ""], [1, "min-h-16", "space-x-4"], ["btn", "", "icon", "", "mat-dialog-close", "", "matRipple", "", 4, "ngIf"], ["class", "w-full min-w-[20rem] p-4", 3, "formGroup", 4, "ngIf", "ngIfElse"], ["class", "flex justify-end border-t border-base-200 px-4 py-2", 4, "ngIf"], ["btn", "", "icon", "", "mat-dialog-close", "", "matRipple", ""], [1, "w-full", "min-w-[20rem]", "p-4", 3, "formGroup"], [1, "flex", "flex-col", "space-y-2"], ["for", "setup"], ["name", "setup", "formControlName", "setup", 3, "min", "custom_options"], ["for", "breakdown"], ["name", "breakdown", "formControlName", "breakdown", 3, "min", "custom_options"], [1, "flex", "justify-end", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "matRipple", "", 3, "click"], [1, "flex", "h-64", "w-64", "flex-col", "items-center", "justify-center"], [3, "diameter"], [1, "p-4", "text-center"]], template: function SetupBreakdownModalComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "header", 1)(1, "h2");
+        \u0275\u0275text(2, "Set Event's Setup and Breakdown");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(3, SetupBreakdownModalComponent_button_3_Template, 3, 0, "button", 2);
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(4, SetupBreakdownModalComponent_main_4_Template, 9, 7, "main", 3)(5, SetupBreakdownModalComponent_footer_5_Template, 3, 0, "footer", 4)(6, SetupBreakdownModalComponent_ng_template_6_Template, 4, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        const load_state_r3 = \u0275\u0275reference(7);
+        \u0275\u0275advance(3);
+        \u0275\u0275property("ngIf", !ctx.loading);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", !ctx.loading)("ngIfElse", load_state_r3);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", !ctx.loading);
+      }
+    }, dependencies: [NgIf, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, MatDialogClose, MatProgressSpinner, DurationFieldComponent, IconComponent, MatRipple], encapsulation: 2 });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SetupBreakdownModalComponent, { className: "SetupBreakdownModalComponent", filePath: "libs/events/src/lib/setup-breakdown-modal.component.ts", lineNumber: 59 });
+})();
+
+// libs/events/src/lib/events.module.ts
+var SharedEventsModule = class _SharedEventsModule {
+  static {
+    this.\u0275fac = function SharedEventsModule_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _SharedEventsModule)();
+    };
+  }
+  static {
+    this.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _SharedEventsModule });
+  }
+  static {
+    this.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ providers: [ReactiveFormsModule], imports: [
+      CommonModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MatRadioModule,
+      MatInputModule,
+      MatFormFieldModule,
+      MatDatepickerModule,
+      MatButtonModule,
+      MatDialogModule,
+      MatProgressSpinnerModule,
+      FormFieldsModule,
+      ComponentsModule,
+      MatRippleModule,
+      SharedSpacesModule
+    ] });
+  }
+};
+
 // libs/catering/src/lib/catering-orders.service.ts
 function checkOrder(order, filters) {
   const s = (filters.search || "").toLowerCase();
@@ -143252,12 +149651,14 @@ var CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
       }).pipe(catchError(() => of([])), map((bookings) => flatten2(bookings.map((bkn) => {
         BOOKINGS2[bkn.asset_id] = bkn;
         const order = new CateringOrder(__spreadProps(__spreadValues({}, bkn.extension_data.details), {
-          event: new CalendarEvent(__spreadValues({}, bkn.linked_event))
+          event: bkn.linked_event ? new CalendarEvent(__spreadValues({}, bkn.linked_event)) : newCalendarEventFromBooking(bkn.linked_bookings[0] || bkn)
         }));
-        this._space_pipe.transform(bkn.linked_event.system_id).then((space) => {
-          order.space = space;
-          order.event.system = space;
-        });
+        if (bkn.linked_event) {
+          this._space_pipe.transform(bkn.linked_event.system_id).then((space) => {
+            order.space = space;
+            order.event.system = space;
+          });
+        }
         return order;
       }))));
     }), shareReplay(1));
@@ -143286,7 +149687,7 @@ var CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
       }
       return unique(provider_list);
     }), shareReplay(1));
-    this.filtered = combineLatest([this.orders, this._filters]).pipe(map(([list2, filters]) => list2.filter((order) => checkOrder(order, filters)).sort((a, b2) => a.deliver_at - b2.deliver_at)));
+    this.filtered = combineLatest([this.orders, this._filters]).pipe(tap(([l2]) => console.log("Orders:", l2)), map(([list2, filters]) => list2.filter((order) => checkOrder(order, filters)).sort((a, b2) => a.deliver_at - b2.deliver_at)));
     this.subscription("changes", this.orders.subscribe());
   }
   /** Start polling for catering orders */
@@ -143776,15 +150177,15 @@ function cateringItemAvailable(item, rules, event) {
 }
 
 // node_modules/@angular/material/fesm2022/tabs.mjs
-var _c060 = ["*"];
+var _c072 = ["*"];
 function MatTab_ng_template_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projection(0);
   }
 }
-var _c137 = ["tabListContainer"];
-var _c215 = ["tabList"];
-var _c311 = ["tabListInner"];
+var _c142 = ["tabListContainer"];
+var _c217 = ["tabList"];
+var _c312 = ["tabListInner"];
 var _c46 = ["nextPaginator"];
 var _c56 = ["previousPaginator"];
 var _c66 = ["content"];
@@ -144068,7 +150469,7 @@ var MatTab = class _MatTab {
       provide: MAT_TAB,
       useExisting: _MatTab
     }]), \u0275\u0275NgOnChangesFeature],
-    ngContentSelectors: _c060,
+    ngContentSelectors: _c072,
     decls: 1,
     vars: 0,
     template: function MatTab_Template(rf, ctx) {
@@ -144830,9 +151231,9 @@ var MatTabHeader = class _MatTabHeader extends MatPaginatedTabHeader {
     },
     viewQuery: function MatTabHeader_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c137, 7);
-        \u0275\u0275viewQuery(_c215, 7);
-        \u0275\u0275viewQuery(_c311, 7);
+        \u0275\u0275viewQuery(_c142, 7);
+        \u0275\u0275viewQuery(_c217, 7);
+        \u0275\u0275viewQuery(_c312, 7);
         \u0275\u0275viewQuery(_c46, 5);
         \u0275\u0275viewQuery(_c56, 5);
       }
@@ -144858,7 +151259,7 @@ var MatTabHeader = class _MatTabHeader extends MatPaginatedTabHeader {
       disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute]
     },
     features: [\u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c060,
+    ngContentSelectors: _c072,
     decls: 13,
     vars: 10,
     consts: [["previousPaginator", ""], ["tabListContainer", ""], ["tabList", ""], ["tabListInner", ""], ["nextPaginator", ""], ["mat-ripple", "", 1, "mat-mdc-tab-header-pagination", "mat-mdc-tab-header-pagination-before", 3, "click", "mousedown", "touchend", "matRippleDisabled"], [1, "mat-mdc-tab-header-pagination-chevron"], [1, "mat-mdc-tab-label-container", 3, "keydown"], ["role", "tablist", 1, "mat-mdc-tab-list", 3, "cdkObserveContent"], [1, "mat-mdc-tab-labels"], ["mat-ripple", "", 1, "mat-mdc-tab-header-pagination", "mat-mdc-tab-header-pagination-after", 3, "mousedown", "click", "touchend", "matRippleDisabled"]],
@@ -145749,7 +152150,7 @@ var MatTabGroup = class _MatTabGroup {
       provide: MAT_TAB_GROUP,
       useExisting: _MatTabGroup
     }])],
-    ngContentSelectors: _c060,
+    ngContentSelectors: _c072,
     decls: 9,
     vars: 8,
     consts: [["tabHeader", ""], ["tabBodyWrapper", ""], ["tabNode", ""], [3, "indexFocused", "selectFocusedIndex", "selectedIndex", "disableRipple", "disablePagination", "aria-label", "aria-labelledby"], ["role", "tab", "matTabLabelWrapper", "", "cdkMonitorElementFocus", "", 1, "mdc-tab", "mat-mdc-tab", "mat-focus-indicator", 3, "id", "mdc-tab--active", "class", "disabled", "fitInkBarToContent"], [1, "mat-mdc-tab-body-wrapper"], ["role", "tabpanel", 3, "id", "class", "content", "position", "animationDuration", "preserveContent"], ["role", "tab", "matTabLabelWrapper", "", "cdkMonitorElementFocus", "", 1, "mdc-tab", "mat-mdc-tab", "mat-focus-indicator", 3, "click", "cdkFocusChange", "id", "disabled", "fitInkBarToContent"], [1, "mdc-tab__ripple"], ["mat-ripple", "", 1, "mat-mdc-tab-ripple", 3, "matRippleTrigger", "matRippleDisabled"], [1, "mdc-tab__content"], [1, "mdc-tab__text-label"], [3, "cdkPortalOutlet"], ["role", "tabpanel", 3, "_onCentered", "_onCentering", "_beforeCentering", "id", "content", "position", "animationDuration", "preserveContent"]],
@@ -146062,9 +152463,9 @@ var MatTabNav = class _MatTabNav extends MatPaginatedTabHeader {
     },
     viewQuery: function MatTabNav_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c137, 7);
-        \u0275\u0275viewQuery(_c215, 7);
-        \u0275\u0275viewQuery(_c311, 7);
+        \u0275\u0275viewQuery(_c142, 7);
+        \u0275\u0275viewQuery(_c217, 7);
+        \u0275\u0275viewQuery(_c312, 7);
         \u0275\u0275viewQuery(_c46, 5);
         \u0275\u0275viewQuery(_c56, 5);
       }
@@ -146098,7 +152499,7 @@ var MatTabNav = class _MatTabNav extends MatPaginatedTabHeader {
     exportAs: ["matTabNavBar", "matTabNav"],
     features: [\u0275\u0275InheritDefinitionFeature],
     attrs: _c93,
-    ngContentSelectors: _c060,
+    ngContentSelectors: _c072,
     decls: 13,
     vars: 6,
     consts: [["previousPaginator", ""], ["tabListContainer", ""], ["tabList", ""], ["tabListInner", ""], ["nextPaginator", ""], ["mat-ripple", "", 1, "mat-mdc-tab-header-pagination", "mat-mdc-tab-header-pagination-before", 3, "click", "mousedown", "touchend", "matRippleDisabled"], [1, "mat-mdc-tab-header-pagination-chevron"], [1, "mat-mdc-tab-link-container", 3, "keydown"], [1, "mat-mdc-tab-list", 3, "cdkObserveContent"], [1, "mat-mdc-tab-links"], ["mat-ripple", "", 1, "mat-mdc-tab-header-pagination", "mat-mdc-tab-header-pagination-after", 3, "mousedown", "click", "touchend", "matRippleDisabled"]],
@@ -146426,7 +152827,7 @@ var MatTabLink = class _MatTabLink extends InkBarItem {
     exportAs: ["matTabLink"],
     features: [\u0275\u0275InheritDefinitionFeature],
     attrs: _c102,
-    ngContentSelectors: _c060,
+    ngContentSelectors: _c072,
     decls: 5,
     vars: 2,
     consts: [[1, "mdc-tab__ripple"], ["mat-ripple", "", 1, "mat-mdc-tab-ripple", 3, "matRippleTrigger", "matRippleDisabled"], [1, "mdc-tab__content"], [1, "mdc-tab__text-label"]],
@@ -146527,7 +152928,7 @@ var MatTabNavPanel = class _MatTabNavPanel {
       id: "id"
     },
     exportAs: ["matTabNavPanel"],
-    ngContentSelectors: _c060,
+    ngContentSelectors: _c072,
     decls: 1,
     vars: 0,
     template: function MatTabNavPanel_Template(rf, ctx) {
@@ -146584,8 +152985,8 @@ var MatTabsModule = class _MatTabsModule {
 })();
 
 // libs/catering/src/lib/catering-order-modal.component.ts
-var _c061 = () => ({});
-var _c138 = (a0) => ({ count: a0 });
+var _c073 = () => ({});
+var _c143 = (a0) => ({ count: a0 });
 function CateringOrderModalComponent_div_0_ng_container_1_ng_container_2_mat_tab_1_div_2_div_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 18);
@@ -146685,7 +153086,7 @@ function CateringOrderModalComponent_div_0_ng_container_1_ng_container_2_mat_tab
     const ctx_r2 = \u0275\u0275nextContext(3);
     \u0275\u0275property("label", cat_r5);
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", (ctx_r2.menu_items || \u0275\u0275pureFunction0(2, _c061))[cat_r5]);
+    \u0275\u0275property("ngForOf", (ctx_r2.menu_items || \u0275\u0275pureFunction0(2, _c073))[cat_r5]);
   }
 }
 function CateringOrderModalComponent_div_0_ng_container_1_ng_container_2_Template(rf, ctx) {
@@ -146698,7 +153099,7 @@ function CateringOrderModalComponent_div_0_ng_container_1_ng_container_2_Templat
     const cat_r5 = ctx.$implicit;
     const ctx_r2 = \u0275\u0275nextContext(3);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", (ctx_r2.menu_items || \u0275\u0275pureFunction0(1, _c061))[cat_r5].length);
+    \u0275\u0275property("ngIf", (ctx_r2.menu_items || \u0275\u0275pureFunction0(1, _c073))[cat_r5].length);
   }
 }
 function CateringOrderModalComponent_div_0_ng_container_1_Template(rf, ctx) {
@@ -146825,7 +153226,7 @@ function CateringOrderModalComponent_ng_template_4_div_5_div_4_Template(rf, ctx)
     const ctx_r2 = \u0275\u0275nextContext(2);
     \u0275\u0275property("matTooltip", ctx_r2.optionsFor(item_r11));
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 2, "CATERING.ORDERS_SELECTED", \u0275\u0275pureFunction1(5, _c138, item_r11.options.length)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 2, "CATERING.ORDERS_SELECTED", \u0275\u0275pureFunction1(5, _c143, item_r11.options.length)), " ");
   }
 }
 function CateringOrderModalComponent_ng_template_4_div_5_Template(rf, ctx) {
@@ -147526,10 +153927,10 @@ var CateringStateService = class _CateringStateService extends AsyncHandler {
 };
 
 // libs/catering/src/lib/catering-menu.component.ts
-var _c062 = (a0) => ({ key: "active", name: " ", content: a0, size: "3.5rem", sortable: false });
-var _c139 = (a0) => ({ key: "name", name: a0 });
-var _c216 = (a0) => ({ key: "category", name: a0 });
-var _c312 = (a0, a1) => ({ key: "caterer", name: a0, show: a1 });
+var _c074 = (a0) => ({ key: "active", name: " ", content: a0, size: "3.5rem", sortable: false });
+var _c144 = (a0) => ({ key: "name", name: a0 });
+var _c218 = (a0) => ({ key: "category", name: a0 });
+var _c313 = (a0, a1) => ({ key: "caterer", name: a0, show: a1 });
 var _c47 = (a0, a1) => ({ key: "unit_price", name: a0, content: a1, size: "6rem" });
 var _c57 = (a0) => ({ key: "actions", name: " ", content: a0, size: "6.5rem", sortable: false });
 var _c67 = (a0, a1, a2, a3, a4, a5) => [a0, a1, a2, a3, a4, a5];
@@ -147775,7 +154176,7 @@ var CateringMenuComponent = class _CateringMenuComponent {
         const price_template_r13 = \u0275\u0275reference(9);
         const actions_template_r14 = \u0275\u0275reference(11);
         const child_template_r15 = \u0275\u0275reference(13);
-        \u0275\u0275property("data", ctx.menu)("columns", \u0275\u0275pureFunction6(31, _c67, \u0275\u0275pureFunction1(17, _c062, active_template_r12), \u0275\u0275pureFunction1(19, _c139, \u0275\u0275pipeBind1(1, 7, "FORM.NAME")), \u0275\u0275pureFunction1(21, _c216, \u0275\u0275pipeBind1(2, 9, "COMMON.CATEGORY")), \u0275\u0275pureFunction2(23, _c312, \u0275\u0275pipeBind1(3, 11, "CATERING.CATERER"), !(ctx.filters == null ? null : ctx.filters.caterer) && ctx.caterers.length > 1), \u0275\u0275pureFunction2(26, _c47, \u0275\u0275pipeBind1(4, 13, "CATERING.ITEM_PRICE"), price_template_r13), \u0275\u0275pureFunction1(29, _c57, actions_template_r14)))("filter", ctx.filters == null ? null : ctx.filters.search)("show_children", ctx.show_children)("child_template", child_template_r15)("sortable", true)("empty_message", \u0275\u0275pipeBind1(5, 15, "CATERING.ITEM_LIST_EMPTY"));
+        \u0275\u0275property("data", ctx.menu)("columns", \u0275\u0275pureFunction6(31, _c67, \u0275\u0275pureFunction1(17, _c074, active_template_r12), \u0275\u0275pureFunction1(19, _c144, \u0275\u0275pipeBind1(1, 7, "FORM.NAME")), \u0275\u0275pureFunction1(21, _c218, \u0275\u0275pipeBind1(2, 9, "COMMON.CATEGORY")), \u0275\u0275pureFunction2(23, _c313, \u0275\u0275pipeBind1(3, 11, "CATERING.CATERER"), !(ctx.filters == null ? null : ctx.filters.caterer) && ctx.caterers.length > 1), \u0275\u0275pureFunction2(26, _c47, \u0275\u0275pipeBind1(4, 13, "CATERING.ITEM_PRICE"), price_template_r13), \u0275\u0275pureFunction1(29, _c57, actions_template_r14)))("filter", ctx.filters == null ? null : ctx.filters.search)("show_children", ctx.show_children)("child_template", child_template_r15)("sortable", true)("empty_message", \u0275\u0275pipeBind1(5, 15, "CATERING.ITEM_LIST_EMPTY"));
       }
     }, dependencies: [NgForOf, NgIf, MatMenu, MatMenuItem, MatMenuTrigger, MatCheckbox, MatTooltip, NgControlStatus, NgModel, IconComponent, SimpleTableComponent, MatRipple, AsyncPipe, CurrencyPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 90%;\n  width: 100%;\n}\n/*# sourceMappingURL=catering-menu.component.css.map */"] });
   }
@@ -147785,7 +154186,7 @@ var CateringMenuComponent = class _CateringMenuComponent {
 })();
 
 // libs/catering/src/lib/catering-order-item.component.ts
-var _c063 = ["catering-order-item", ""];
+var _c075 = ["catering-order-item", ""];
 function CateringOrderItemComponent_ng_container_0_ng_container_14_div_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 12);
@@ -147877,7 +154278,7 @@ var CateringOrderItemComponent = class _CateringOrderItemComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CateringOrderItemComponent, selectors: [["", "catering-order-item", ""]], inputs: { order_id: "order_id", item: "item" }, standalone: false, attrs: _c063, decls: 1, vars: 1, consts: [[4, "ngIf"], [1, "relative", "h-14", "w-16", "text-right"], ["arm", "", 1, "absolute", "left-1/2", "top-1/2", "h-16", "w-4", "-translate-x-px", "-translate-y-full", "border-b-2", "border-l-2", "border-base-200"], [1, "mr-4", "w-12"], ["action", "", "icon", "", "matRipple", "", 1, "text-dark-fade", "border-2", "border-dashed", "border-base-200", "p-2", "text-xl", 3, "click"], [1, "flex", "flex-1", "items-center", "space-x-4", "border-b", "border-solid", "border-base-200", "py-4"], [1, ""], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full", "bg-base-300", "p-1", "font-mono", "text-sm"], [1, "flex-1"], [1, "mr-2", "flex", "space-x-2", "px-4"], [4, "ngFor", "ngForOf"], ["class", "rounded-2xl bg-warning px-2 py-1 text-xs text-warning-content shadow", 4, "ngIf"], [1, "rounded-2xl", "bg-warning", "px-2", "py-1", "text-xs", "text-warning-content", "shadow"]], template: function CateringOrderItemComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CateringOrderItemComponent, selectors: [["", "catering-order-item", ""]], inputs: { order_id: "order_id", item: "item" }, standalone: false, attrs: _c075, decls: 1, vars: 1, consts: [[4, "ngIf"], [1, "relative", "h-14", "w-16", "text-right"], ["arm", "", 1, "absolute", "left-1/2", "top-1/2", "h-16", "w-4", "-translate-x-px", "-translate-y-full", "border-b-2", "border-l-2", "border-base-200"], [1, "mr-4", "w-12"], ["action", "", "icon", "", "matRipple", "", 1, "text-dark-fade", "border-2", "border-dashed", "border-base-200", "p-2", "text-xl", 3, "click"], [1, "flex", "flex-1", "items-center", "space-x-4", "border-b", "border-solid", "border-base-200", "py-4"], [1, ""], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full", "bg-base-300", "p-1", "font-mono", "text-sm"], [1, "flex-1"], [1, "mr-2", "flex", "space-x-2", "px-4"], [4, "ngFor", "ngForOf"], ["class", "rounded-2xl bg-warning px-2 py-1 text-xs text-warning-content shadow", 4, "ngIf"], [1, "rounded-2xl", "bg-warning", "px-2", "py-1", "text-xs", "text-warning-content", "shadow"]], template: function CateringOrderItemComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275template(0, CateringOrderItemComponent_ng_container_0_Template, 15, 10, "ng-container", 0);
       }
@@ -148215,10 +154616,10 @@ var MatProgressBarModule = class _MatProgressBarModule {
 })();
 
 // libs/catering/src/lib/catering-order-list.component.ts
-var _c064 = (a0) => ({ key: "state", name: " ", size: "4rem", sortable: false, content: a0 });
-var _c140 = (a0, a1) => ({ key: "caterer", name: a0, show: a1 });
-var _c217 = (a0, a1) => ({ key: "deliver_at", name: a0, content: a1 });
-var _c313 = (a0, a1) => ({ key: "event", name: a0, content: a1, sortable: false });
+var _c076 = (a0) => ({ key: "state", name: " ", size: "4rem", sortable: false, content: a0 });
+var _c145 = (a0, a1) => ({ key: "caterer", name: a0, show: a1 });
+var _c219 = (a0, a1) => ({ key: "deliver_at", name: a0, content: a1 });
+var _c314 = (a0, a1) => ({ key: "event", name: a0, content: a1, sortable: false });
 var _c48 = (a0) => ({ key: "charge_code", name: a0 });
 var _c58 = (a0) => ({ key: "invoice_number", name: a0, empty: "No Invoice" });
 var _c68 = (a0, a1) => ({ key: "status", name: a0, content: a1, size: "11rem" });
@@ -148504,7 +154905,7 @@ var CateringOrderListComponent = class _CateringOrderListComponent extends Async
         \u0275\u0275advance();
         \u0275\u0275classProp("opacity-0", !\u0275\u0275pipeBind1(2, 8, ctx.loading));
         \u0275\u0275advance(2);
-        \u0275\u0275property("data", ctx.order_list)("columns", \u0275\u0275pureFunctionV(51, _c84, [\u0275\u0275pureFunction1(28, _c064, state_template_r17), \u0275\u0275pureFunction2(30, _c140, \u0275\u0275pipeBind1(4, 10, "CATERING.CATERER"), !(ctx.filters == null ? null : ctx.filters.caterer) && ((tmp_9_0 = \u0275\u0275pipeBind1(5, 12, ctx.caterers)) == null ? null : tmp_9_0.length) > 1), \u0275\u0275pureFunction2(33, _c217, \u0275\u0275pipeBind1(6, 14, "COMMON.TIME"), time_template_r18), \u0275\u0275pureFunction2(36, _c313, \u0275\u0275pipeBind1(7, 16, "COMMON.LOCATION"), location_template_r19), \u0275\u0275pureFunction2(39, _c313, \u0275\u0275pipeBind1(8, 18, "FORM.HOST"), host_template_r20), \u0275\u0275pureFunction1(42, _c48, \u0275\u0275pipeBind1(9, 20, "CATERING.CHARGE_CODE")), \u0275\u0275pureFunction1(44, _c58, \u0275\u0275pipeBind1(10, 22, "CATERING.INVOICE_NUMBER")), \u0275\u0275pureFunction2(46, _c68, \u0275\u0275pipeBind1(11, 24, "COMMON.STATUS"), status_template_r21), \u0275\u0275pureFunction1(49, _c74, actions_template_r22)]))("sortable", true)("show_children", ctx.show_children)("child_template", child_template_r23)("empty_message", \u0275\u0275pipeBind1(12, 26, "CATERING.ORDERS_EMPTY"));
+        \u0275\u0275property("data", ctx.order_list)("columns", \u0275\u0275pureFunctionV(51, _c84, [\u0275\u0275pureFunction1(28, _c076, state_template_r17), \u0275\u0275pureFunction2(30, _c145, \u0275\u0275pipeBind1(4, 10, "CATERING.CATERER"), !(ctx.filters == null ? null : ctx.filters.caterer) && ((tmp_9_0 = \u0275\u0275pipeBind1(5, 12, ctx.caterers)) == null ? null : tmp_9_0.length) > 1), \u0275\u0275pureFunction2(33, _c219, \u0275\u0275pipeBind1(6, 14, "COMMON.TIME"), time_template_r18), \u0275\u0275pureFunction2(36, _c314, \u0275\u0275pipeBind1(7, 16, "COMMON.LOCATION"), location_template_r19), \u0275\u0275pureFunction2(39, _c314, \u0275\u0275pipeBind1(8, 18, "FORM.HOST"), host_template_r20), \u0275\u0275pureFunction1(42, _c48, \u0275\u0275pipeBind1(9, 20, "CATERING.CHARGE_CODE")), \u0275\u0275pureFunction1(44, _c58, \u0275\u0275pipeBind1(10, 22, "CATERING.INVOICE_NUMBER")), \u0275\u0275pureFunction2(46, _c68, \u0275\u0275pipeBind1(11, 24, "COMMON.STATUS"), status_template_r21), \u0275\u0275pureFunction1(49, _c74, actions_template_r22)]))("sortable", true)("show_children", ctx.show_children)("child_template", child_template_r23)("empty_message", \u0275\u0275pipeBind1(12, 26, "CATERING.ORDERS_EMPTY"));
       }
     }, dependencies: [NgForOf, NgIf, MatMenu, MatMenuItem, MatMenuTrigger, IconComponent, CustomTooltipComponent, SimpleTableComponent, MatRipple, MatProgressBar, CateringOrderItemComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=catering-order-list.component.css.map */"] });
   }
@@ -148766,7 +155167,7 @@ var CateringItemListItemComponent = class _CateringItemListItemComponent {
 })();
 
 // libs/catering/src/lib/catering-order-modal/catering-item-list.component.ts
-var _c065 = (a0) => ({ count: a0 });
+var _c077 = (a0) => ({ count: a0 });
 function CateringItemListComponent_ng_container_1_catering_item_list_item_9_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -148812,7 +155213,7 @@ function CateringItemListComponent_ng_container_1_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 3, "CATERING.ORDER_SELECTED_HEADER"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(7, 7, "CATERING.ORDER_SELECTED_COUNT", \u0275\u0275pureFunction1(12, _c065, ((tmp_4_0 = \u0275\u0275pipeBind1(6, 5, ctx_r2.list)) == null ? null : tmp_4_0.length) || 0)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(7, 7, "CATERING.ORDER_SELECTED_COUNT", \u0275\u0275pureFunction1(12, _c077, ((tmp_4_0 = \u0275\u0275pipeBind1(6, 5, ctx_r2.list)) == null ? null : tmp_4_0.length) || 0)), " ");
     \u0275\u0275advance(4);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(10, 10, ctx_r2.list));
   }
@@ -148958,7 +155359,7 @@ var CateringItemListComponent = class _CateringItemListComponent {
         \u0275\u0275advance(3);
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 7, "COMMON.RESULTS"));
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(9, 11, "COMMON.RESULTS_COUNT", \u0275\u0275pureFunction1(16, _c065, ((tmp_4_0 = \u0275\u0275pipeBind1(8, 9, ctx.item_list)) == null ? null : tmp_4_0.length) || 0)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(9, 11, "COMMON.RESULTS_COUNT", \u0275\u0275pureFunction1(16, _c077, ((tmp_4_0 = \u0275\u0275pipeBind1(8, 9, ctx.item_list)) == null ? null : tmp_4_0.length) || 0)), " ");
         \u0275\u0275advance(3);
         \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(11, 14, ctx.loading))("ngIfElse", load_state_r7);
       }
@@ -149701,7 +156102,7 @@ var CateringItemFiltersComponent = class _CateringItemFiltersComponent extends A
 })();
 
 // libs/catering/src/lib/catering-order-modal/new-catering-order-modal.component.ts
-var _c066 = (a0) => ({ count: a0 });
+var _c078 = (a0) => ({ count: a0 });
 function NewCateringOrderModalComponent_button_15_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -149874,7 +156275,7 @@ var NewCateringOrderModalComponent = class _NewCateringOrderModalComponent {
         \u0275\u0275advance(5);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(26, 35, "COMMON.BACK_TO_FORM"), " ");
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(29, 37, "CATERING.ORDER_ITEM_COUNT", \u0275\u0275pureFunction1(42, _c066, ctx.count)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(29, 37, "CATERING.ORDER_ITEM_COUNT", \u0275\u0275pureFunction1(42, _c078, ctx.count)), " ");
         \u0275\u0275advance(2);
         \u0275\u0275classProp("inverse", ctx.isSelected(ctx.displayed == null ? null : ctx.displayed.custom_id));
         \u0275\u0275property("disabled", !ctx.displayed);
@@ -149891,9 +156292,9 @@ var NewCateringOrderModalComponent = class _NewCateringOrderModalComponent {
 })();
 
 // libs/catering/src/lib/catering-list-field.component.ts
-var _c067 = (a0, a1) => ({ date: a0, time: a1 });
-var _c141 = (a0, a1) => ({ count: a0, cost: a1 });
-var _c218 = (a0) => ({ count: a0 });
+var _c079 = (a0, a1) => ({ date: a0, time: a1 });
+var _c146 = (a0, a1) => ({ count: a0, cost: a1 });
+var _c220 = (a0) => ({ count: a0 });
 function CateringListFieldComponent_div_1_div_9_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 15)(1, "app-icon");
@@ -149970,7 +156371,7 @@ function CateringListFieldComponent_div_1_div_22_span_3_Template(rf, ctx) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275property("matTooltip", ctx_r1.optionList(item_r8));
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 2, "CALENDAR_EVENT.CATERING_ORDER_OPTION_COUNT", \u0275\u0275pureFunction1(5, _c218, (item_r8.option_list == null ? null : item_r8.option_list.length) || "0")), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 2, "CALENDAR_EVENT.CATERING_ORDER_OPTION_COUNT", \u0275\u0275pureFunction1(5, _c220, (item_r8.option_list == null ? null : item_r8.option_list.length) || "0")), " ");
   }
 }
 function CateringListFieldComponent_div_1_div_22_button_9_Template(rf, ctx) {
@@ -150071,11 +156472,11 @@ function CateringListFieldComponent_div_1_Template(rf, ctx) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275classProp("border-error", ctx_r1.end_time < order_r4.deliver_at)("border-base-300", ctx_r1.end_time >= order_r4.deliver_at);
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(8, 20, "CALENDAR_EVENT.CATERING_ORDER_AT_DATE", \u0275\u0275pureFunction2(31, _c067, \u0275\u0275pipeBind2(6, 14, order_r4.deliver_at_time, "mediumDate"), \u0275\u0275pipeBind2(7, 17, order_r4.deliver_at_time, ctx_r1.time_format))), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(8, 20, "CALENDAR_EVENT.CATERING_ORDER_AT_DATE", \u0275\u0275pureFunction2(31, _c079, \u0275\u0275pipeBind2(6, 14, order_r4.deliver_at_time, "mediumDate"), \u0275\u0275pipeBind2(7, 17, order_r4.deliver_at_time, ctx_r1.time_format))), " ");
     \u0275\u0275advance(4);
     \u0275\u0275property("ngIf", ctx_r1.end_time < order_r4.deliver_at);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(13, 26, "CALENDAR_EVENT.CATERING_ORDER_DETAILS", \u0275\u0275pureFunction2(34, _c141, order_r4.item_count, \u0275\u0275pipeBind2(12, 23, order_r4.total_cost / 100, ctx_r1.currency_code))), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(13, 26, "CALENDAR_EVENT.CATERING_ORDER_DETAILS", \u0275\u0275pureFunction2(34, _c146, order_r4.item_count, \u0275\u0275pipeBind2(12, 23, order_r4.total_cost / 100, ctx_r1.currency_code))), " ");
     \u0275\u0275advance(3);
     \u0275\u0275property("ngIf", !ctx_r1.disabled);
     \u0275\u0275advance();
@@ -150711,594 +157112,6 @@ var DeskQuestionsModalComponent = class _DeskQuestionsModalComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DeskQuestionsModalComponent, { className: "DeskQuestionsModalComponent", filePath: "libs/bookings/src/lib/desk-questions-modal.component.ts", lineNumber: 85 });
 })();
 
-// libs/payments/src/lib/card-input-field.component.ts
-var _c068 = ["input"];
-function CardInputFieldComponent_img_9_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 20);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("src", "assets/icons/" + ctx_r1.card_type + ".svg", \u0275\u0275sanitizeUrl);
-  }
-}
-function CardInputFieldComponent_mat_option_23_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 21);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const item_r3 = ctx.$implicit;
-    \u0275\u0275property("value", item_r3[0]);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate2(" ", item_r3[1], " (", item_r3[0], ") ");
-  }
-}
-function CardInputFieldComponent_mat_option_31_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 21);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const item_r4 = ctx.$implicit;
-    \u0275\u0275property("value", item_r4);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(item_r4);
-  }
-}
-var BLANK_CARD = { card_number: "                ", cardholder: "", cvv: "" };
-var DATE_PIPE = new DatePipe("en-us", "");
-var CardInputFieldComponent = class _CardInputFieldComponent extends AsyncHandler {
-  constructor() {
-    super(...arguments);
-    this.details = new FormGroup({
-      card_number: new FormControl(Array(16).fill("X").join()),
-      cardholder: new FormControl(""),
-      exp_month: new FormControl(""),
-      exp_year: new FormControl(""),
-      cvv: new FormControl("", [
-        Validators.minLength(3),
-        Validators.maxLength(4)
-      ])
-    });
-    this.disabled = false;
-    this.months = Array(12).fill(0).map((_3, idx) => [
-      DATE_PIPE.transform(setMonth(Date.now(), idx), "MM"),
-      DATE_PIPE.transform(setMonth(Date.now(), idx), "MMM")
-    ]);
-    this.years = Array(12).fill(0).map((_3, idx) => DATE_PIPE.transform(addYears(Date.now(), idx), "yyyy"));
-    this.digits = Array(16).fill(0);
-    this._index = 0;
-    this.registerOnChange = (fn3) => this._onChange = fn3;
-    this.registerOnTouched = (fn3) => this._onTouch = fn3;
-    this.setDisabledState = (s) => this.disabled = s;
-  }
-  get is_amex() {
-    const no2 = this.details.value?.card_number || "";
-    return no2.startsWith("3");
-  }
-  get card_type() {
-    const no2 = this.details.value?.card_number || "";
-    if (no2.startsWith("3"))
-      return "amex";
-    if (no2.startsWith("4"))
-      return "visa";
-    if (no2.startsWith("5"))
-      return "mastercard";
-    return "";
-  }
-  get card_display() {
-    let no2 = this.details.value?.card_number || "";
-    if (this.card_focused)
-      no2 = no2.substring(0, this._index) + "\u2BD0" + no2.substring(this._index + 1);
-    return this.is_amex ? `${no2.substring(0, 4)}-${no2.substring(4, 10)}-${no2.substring(10)}` : `${no2.substring(0, 4)}-${no2.substring(4, 8)}-${no2.substring(8, 12)}-${no2.substring(12)}`;
-  }
-  get card_focused() {
-    return document.activeElement === this._input_el.nativeElement || document.activeElement === this._input_el.nativeElement.parentElement;
-  }
-  ngOnInit() {
-    this.subscription("changes", this.details.valueChanges.subscribe((v4) => this.timeout("update", () => this.setValue(this.details.getRawValue()))));
-  }
-  focusInput() {
-    this._input_el.nativeElement.focus();
-    this._index = this._input_el.nativeElement.selectionStart || 0;
-  }
-  onInput(event) {
-    if (!event || !this.card_focused)
-      return;
-    const idx = this._index;
-    if (idx < 0 || idx > 16)
-      return;
-    let card_number = this.details.value.card_number;
-    if ((event.code.startsWith("Digit") || event.code.startsWith("Numpad")) && idx < (this.is_amex ? 15 : 16)) {
-      card_number = card_number.substring(0, idx) + event.key + card_number.substring(idx + 1);
-      this.details.patchValue({ card_number });
-      this._focusChange(idx, 1);
-    } else if (event.code === "Backspace" && idx > 0) {
-      let card_number2 = this.details.value.card_number;
-      card_number2 = card_number2.substring(0, idx) + " " + card_number2.substring(idx + 1);
-      this.details.patchValue({ card_number: card_number2 });
-      this._focusChange(idx, -1);
-    } else if (event.code === "ArrowLeft") {
-      this._focusChange(idx, -1);
-    } else if (event.code === "ArrowRight" && card_number[idx] !== " ") {
-      this._focusChange(idx, 1);
-    }
-  }
-  _focusChange(idx, dir) {
-    this._index = Math.min(16, Math.max(0, idx + dir));
-  }
-  /**
-   * Update the form field value
-   * @param new_value New value to set on the form field
-   */
-  setValue(new_value) {
-    if (this._onChange)
-      this._onChange(new_value);
-  }
-  /**
-   * Update local value when form control value is changed
-   * @param value The new value for the component
-   */
-  writeValue(value) {
-    this.details.patchValue(value || BLANK_CARD);
-  }
-  static {
-    this.\u0275fac = /* @__PURE__ */ (() => {
-      let \u0275CardInputFieldComponent_BaseFactory;
-      return function CardInputFieldComponent_Factory(__ngFactoryType__) {
-        return (\u0275CardInputFieldComponent_BaseFactory || (\u0275CardInputFieldComponent_BaseFactory = \u0275\u0275getInheritedFactory(_CardInputFieldComponent)))(__ngFactoryType__ || _CardInputFieldComponent);
-      };
-    })();
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CardInputFieldComponent, selectors: [["card-input-field"]], viewQuery: function CardInputFieldComponent_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(_c068, 7);
-      }
-      if (rf & 2) {
-        let _t4;
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._input_el = _t4.first);
-      }
-    }, features: [\u0275\u0275ProvidersFeature([
-      {
-        provide: NG_VALUE_ACCESSOR,
-        /* istanbul ignore next */
-        useExisting: forwardRef(() => _CardInputFieldComponent),
-        multi: true
-      }
-    ]), \u0275\u0275InheritDefinitionFeature], decls: 41, vars: 6, consts: [["input", ""], [3, "keyup", "formGroup"], [1, "flex", "flex-col"], ["for", "card-number"], ["tabindex", "0", 1, "relative", "mb-4", "flex", "h-12", "w-full", "items-center", "rounded", "border", "border-base-200", "p-2", "font-mono", "focus-within:border-base-200", "focus-within:shadow", 3, "focus"], [1, "flex-1"], ["type", "tel", "maxlength", "17", 1, "absolute", "hidden", 3, "keydown", "value"], ["class", "h-8", 3, "src", 4, "ngIf"], [1, "flex", "flex-1", "flex-col"], ["for", "cardholder"], ["appearance", "outline"], ["name", "cardholder", "matInput", "", "placeholder", "Mr John Smith", "formControlName", "cardholder"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "w-1/4", "flex-1", "flex-col"], ["placeholder", "MM", "formControlName", "exp_month"], [3, "value", 4, "ngFor", "ngForOf"], ["placeholder", "YYYY", "formControlName", "exp_year"], ["for", "cvv"], ["appearance", "outline", 1, "w-20"], ["name", "cvv", "matInput", "", "formControlName", "cvv", "maxlength", "4"], [1, "h-8", 3, "src"], [3, "value"]], template: function CardInputFieldComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "form", 1);
-        \u0275\u0275listener("keyup", function CardInputFieldComponent_Template_form_keyup_0_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.onInput($event));
-        }, false, \u0275\u0275resolveWindow);
-        \u0275\u0275elementStart(1, "div", 2)(2, "label", 3);
-        \u0275\u0275text(3, "Card Number");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(4, "div", 4);
-        \u0275\u0275listener("focus", function CardInputFieldComponent_Template_div_focus_4_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.focusInput());
-        });
-        \u0275\u0275elementStart(5, "pre", 5);
-        \u0275\u0275text(6);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(7, "input", 6, 0);
-        \u0275\u0275listener("keydown", function CardInputFieldComponent_Template_input_keydown_7_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(false);
-        });
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(9, CardInputFieldComponent_img_9_Template, 1, 1, "img", 7);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(10, "div", 8)(11, "label", 9);
-        \u0275\u0275text(12, "Name on Card");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(13, "mat-form-field", 10);
-        \u0275\u0275element(14, "input", 11);
-        \u0275\u0275elementStart(15, "mat-error");
-        \u0275\u0275text(16, "Cardholder name is required");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(17, "div", 12)(18, "div", 13)(19, "label", 9);
-        \u0275\u0275text(20, "Expiry Month");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(21, "mat-form-field", 10)(22, "mat-select", 14);
-        \u0275\u0275template(23, CardInputFieldComponent_mat_option_23_Template, 2, 3, "mat-option", 15);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(24, "mat-error");
-        \u0275\u0275text(25, "Expiry month is required");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(26, "div", 13)(27, "label", 9);
-        \u0275\u0275text(28, "Expiry Year");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(29, "mat-form-field", 10)(30, "mat-select", 16);
-        \u0275\u0275template(31, CardInputFieldComponent_mat_option_31_Template, 2, 2, "mat-option", 15);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(32, "mat-error");
-        \u0275\u0275text(33, "Expiry year is required");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(34, "div", 2)(35, "label", 17);
-        \u0275\u0275text(36, "CVV");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(37, "mat-form-field", 18);
-        \u0275\u0275element(38, "input", 19);
-        \u0275\u0275elementStart(39, "mat-error");
-        \u0275\u0275text(40, "Invalid security code");
-        \u0275\u0275elementEnd()()()()();
-      }
-      if (rf & 2) {
-        \u0275\u0275property("formGroup", ctx.details);
-        \u0275\u0275advance(6);
-        \u0275\u0275textInterpolate(ctx.card_display);
-        \u0275\u0275advance();
-        \u0275\u0275property("value", ctx.details.value.card_number == null ? null : ctx.details.value.card_number.trim());
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.card_type);
-        \u0275\u0275advance(14);
-        \u0275\u0275property("ngForOf", ctx.months);
-        \u0275\u0275advance(8);
-        \u0275\u0275property("ngForOf", ctx.years);
-      }
-    }, dependencies: [MatFormFieldModule, MatFormField, MatError, MatInputModule, MatInput, MatSelectModule, MatSelect, MatOption, ReactiveFormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, MaxLengthValidator, FormGroupDirective, FormControlName], styles: ["\n\nmat-form-field[_ngcontent-%COMP%] {\n  height: 3.25rem;\n}\n/*# sourceMappingURL=card-input-field.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CardInputFieldComponent, { className: "CardInputFieldComponent", filePath: "libs/payments/src/lib/card-input-field.component.ts", lineNumber: 138 });
-})();
-
-// libs/payments/src/lib/payment-modal.component.ts
-function PaymentModalComponent_div_0_ng_container_1_ng_container_8_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "date");
-    \u0275\u0275pipe(3, "date");
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate2(" between ", \u0275\u0275pipeBind2(2, 2, ctx_r1.details.date, "shortTime"), " and ", \u0275\u0275pipeBind2(3, 5, ctx_r1.details.date + ctx_r1.details.duration * 60 * 1e3, "shortTime"), " ");
-  }
-}
-function PaymentModalComponent_div_0_ng_container_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "main", 5)(2, "h2", 6);
-    \u0275\u0275text(3, "Booking Payment");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(4, "img", 7);
-    \u0275\u0275elementStart(5, "p", 8);
-    \u0275\u0275text(6);
-    \u0275\u0275pipe(7, "date");
-    \u0275\u0275template(8, PaymentModalComponent_div_0_ng_container_1_ng_container_8_Template, 4, 8, "ng-container", 9);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(9, "p", 10);
-    \u0275\u0275text(10, "You booking will cost:");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(11, "p", 11)(12, "strong");
-    \u0275\u0275text(13);
-    \u0275\u0275pipe(14, "currency");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(15, "card-input-field", 12);
-    \u0275\u0275twoWayListener("ngModelChange", function PaymentModalComponent_div_0_ng_container_1_Template_card_input_field_ngModelChange_15_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      \u0275\u0275twoWayBindingSet(ctx_r1.card_details, $event) || (ctx_r1.card_details = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(16, "footer", 13)(17, "button", 14);
-    \u0275\u0275listener("click", function PaymentModalComponent_div_0_ng_container_1_Template_button_click_17_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r1.processPayment());
-    });
-    \u0275\u0275text(18, " Make Payment ");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(19, "button", 15)(20, "i", 16);
-    \u0275\u0275text(21, "close");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate3(" You are requesting a ", ctx_r1.details.type, " booking in ", ctx_r1.details.resource_name, " for ", \u0275\u0275pipeBind2(7, 6, ctx_r1.details.date, "mediumDate"), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", !ctx_r1.details.all_day);
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(14, 9, ctx_r1.details.amount / 100, ctx_r1.code));
-    \u0275\u0275advance(2);
-    \u0275\u0275twoWayProperty("ngModel", ctx_r1.card_details);
-  }
-}
-function PaymentModalComponent_div_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 3);
-    \u0275\u0275template(1, PaymentModalComponent_div_0_ng_container_1_Template, 22, 12, "ng-container", 4);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    const success_state_r3 = \u0275\u0275reference(5);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.success)("ngIfElse", success_state_r3);
-  }
-}
-function PaymentModalComponent_ng_template_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 17);
-    \u0275\u0275element(1, "mat-spinner", 18);
-    \u0275\u0275elementStart(2, "p");
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 1, ctx_r1.loading));
-  }
-}
-function PaymentModalComponent_ng_template_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "main", 19)(1, "h2", 6);
-    \u0275\u0275text(2, "Payment Successful");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "h3", 20);
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "p");
-    \u0275\u0275text(6);
-    \u0275\u0275pipe(7, "currency");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "p");
-    \u0275\u0275text(9);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "p");
-    \u0275\u0275text(11);
-    \u0275\u0275pipe(12, "date");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "p");
-    \u0275\u0275text(14);
-    \u0275\u0275pipe(15, "date");
-    \u0275\u0275pipe(16, "date");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275element(17, "img", 21);
-    \u0275\u0275elementStart(18, "footer", 22)(19, "button", 23);
-    \u0275\u0275text(20, " Great, thanks. ");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" Ref #", ctx_r1.transaction_id, " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind2(7, 6, ctx_r1.details.amount / 100, ctx_r1.code), " paid.");
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("", ctx_r1.details.resource_name, " booked.");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(12, 9, ctx_r1.details.date, "mediumDate"));
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(15, 12, ctx_r1.details.date, "shortTime"), " and ", \u0275\u0275pipeBind2(16, 15, ctx_r1.details.date + ctx_r1.details.duration * 60 * 1e3, "shortTime"), " ");
-  }
-}
-var PaymentModalComponent = class _PaymentModalComponent {
-  get code() {
-    return this._org.currency_code;
-  }
-  constructor(_data, _org) {
-    this._data = _data;
-    this._org = _org;
-    this.event = new EventEmitter();
-    this.details = this._data;
-    this.loading = this._data.loading;
-    this.success = false;
-    this.transaction_id = "12345678";
-  }
-  processPayment() {
-    return __async(this, null, function* () {
-      if (!this.card_details || !this._validCardDetails())
-        return;
-      this.event.emit(this.card_details);
-      yield this._data.makePayment(this.card_details);
-      this.success = true;
-    });
-  }
-  _validCardDetails() {
-    return (this.card_details?.cardholder.length || 0) > 0 && (this.card_details?.cvv.length || 0) >= 3;
-  }
-  static {
-    this.\u0275fac = function PaymentModalComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _PaymentModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(OrganisationService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PaymentModalComponent, selectors: [["payment-modal"]], outputs: { event: "event" }, decls: 6, vars: 4, consts: [["load_state", ""], ["success_state", ""], ["class", "relative max-h-[100vh] overflow-auto", 4, "ngIf", "ngIfElse"], [1, "relative", "max-h-[100vh]", "overflow-auto"], [4, "ngIf", "ngIfElse"], [1, "relative", "flex", "w-[24rem]", "flex-col", "items-center", "space-y-2", "px-4", "pt-8"], [1, "text-2xl", "font-medium"], ["src", "assets/icons/cost.svg", 1, "w-1/2"], [1, "pb-2", "text-center", "text-sm"], [4, "ngIf"], [1, "text-sm"], [1, "text-center", "text-lg", "font-medium"], [1, "w-full", 3, "ngModelChange", "ngModel"], [1, "p-4"], ["matRipple", "", 1, "w-full", 3, "click"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "left-1", "top-1"], [1, "material-icons", "text-2xl"], [1, "flex", "h-full", "w-full", "flex-col", "items-center", "justify-center", "p-8"], ["diameter", "32"], [1, "relative", "flex", "w-[24rem]", "flex-col", "px-8", "pt-8"], [1, "mb-2", "text-xl", "font-medium"], ["src", "assets/icons/payment-confirmed.svg", 1, "w-full"], [1, "border-t", "border-base-200", "p-4"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "w-full"]], template: function PaymentModalComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275template(0, PaymentModalComponent_div_0_Template, 2, 2, "div", 2);
-        \u0275\u0275pipe(1, "async");
-        \u0275\u0275template(2, PaymentModalComponent_ng_template_2_Template, 5, 3, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(4, PaymentModalComponent_ng_template_4_Template, 21, 18, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        const load_state_r4 = \u0275\u0275reference(3);
-        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(1, 2, ctx.loading))("ngIfElse", load_state_r4);
-      }
-    }, dependencies: [
-      CardInputFieldComponent,
-      MatProgressSpinnerModule,
-      MatProgressSpinner,
-      MatRippleModule,
-      MatRipple
-    ], encapsulation: 2 });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PaymentModalComponent, { className: "PaymentModalComponent", filePath: "libs/payments/src/lib/payment-modal.component.ts", lineNumber: 118 });
-})();
-
-// libs/payments/src/lib/payments.service.ts
-var STRIPE_MODULE = "Payment";
-var PaymentsService = class _PaymentsService {
-  get enabled() {
-    return !!this._org.module("payments", STRIPE_MODULE);
-  }
-  constructor(_org, _settings, _dialog) {
-    this._org = _org;
-    this._settings = _settings;
-    this._dialog = _dialog;
-    this._loading = new BehaviorSubject("");
-    this._active_card = new BehaviorSubject("");
-    this.loading = this._loading.asObservable();
-    this.payment_sources = of(1).pipe(switchMap(() => {
-      const mod = this._org.module("payments", STRIPE_MODULE);
-      if (!mod)
-        return of([]);
-      return mod.execute("list_payment_methods", ["card"]);
-    }), tap((_3) => _3[0] ? this._active_card.next(_3[0].id) : ""), shareReplay(1));
-  }
-  makePayment(details) {
-    return __async(this, null, function* () {
-      if (!this._org.module("payments", STRIPE_MODULE))
-        throw "Payments not enabled";
-      const [cost, period] = yield this._getCostOfProduct(details?.type).catch((_3) => [0, 60]);
-      console.log("Cost:", cost, period);
-      if (cost <= 0)
-        return;
-      let customer_id = this._settings.get("STRIPE_Customer_ID");
-      if (!customer_id)
-        customer_id = yield this._newCustomerID();
-      this._settings.saveUserSetting("STRIPE_Customer_ID", customer_id);
-      const amount = cost * (details.duration / period);
-      let result = void 0;
-      const makePayment = (c) => __async(this, null, function* () {
-        result = yield this._processPayment(amount, customer_id, c).catch((e) => {
-          this._loading.next("");
-          throw e;
-        });
-      });
-      const data = __spreadProps(__spreadValues({}, details), {
-        rate: `$${(cost / 100).toFixed(2)} per hour`,
-        amount,
-        makePayment,
-        loading: this.loading
-      });
-      const ref = this._dialog.open(PaymentModalComponent, { data });
-      yield ref.afterClosed().toPromise();
-      return result;
-    });
-  }
-  _addPaymentMethod(card) {
-    return __async(this, null, function* () {
-      const mod = this._org.module("payments", STRIPE_MODULE);
-      if (!mod)
-        throw "Unable to load module";
-      const payment_method = yield mod.execute("add_payment_method", [
-        "card",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        card
-      ]);
-      return payment_method.id || payment_method;
-    });
-  }
-  _getCostOfProduct(type2) {
-    return __async(this, null, function* () {
-      const price = [0, 60];
-      const mod = this._org.module("payments", STRIPE_MODULE);
-      if (!mod)
-        return price;
-      const product_list = yield mod.execute("get_product_prices", [
-        null,
-        null,
-        type2
-      ]);
-      if (!product_list.length)
-        return price;
-      return product_list;
-    });
-  }
-  _processPayment(amount, customer_id, card_details) {
-    return __async(this, null, function* () {
-      this._loading.next("Checking payment method...");
-      console.log("Getting payment method...");
-      const source = card_details ? yield this._addPaymentMethod(card_details) : this._active_card.getValue();
-      if (!source)
-        throw "No payment source selected";
-      this._loading.next("Processing payment...");
-      console.log("Processing payment...");
-      const mod = this._org.module("payments", STRIPE_MODULE);
-      if (!mod)
-        throw "Unable to load module";
-      const id = yield mod.execute("create_payment_intent", [
-        amount,
-        this._org.building.currency || "USD",
-        null,
-        null,
-        customer_id,
-        null,
-        null,
-        null,
-        currentUser()?.email
-      ]);
-      if (!id)
-        throw "Failed to create payment";
-      console.log("Confirming payment...");
-      yield mod.execute("confirm_payment_intent", [id, source]);
-      this._loading.next("");
-      return {
-        success: true,
-        state: "approved",
-        invoice_id: id,
-        amount,
-        created_at: Date.now(),
-        updated_at: Date.now()
-      };
-    });
-  }
-  _newCustomerID() {
-    return __async(this, null, function* () {
-      const mod = this._org.module("payments", STRIPE_MODULE);
-      if (!mod)
-        throw "Unable to load module";
-      const user = currentUser();
-      const id = yield mod.execute("create_customer", [
-        0,
-        null,
-        null,
-        null,
-        `${user.id}|${user.name}|FromPlaceOS`,
-        user.email
-      ]);
-      return id;
-    });
-  }
-  static {
-    this.\u0275fac = function PaymentsService_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _PaymentsService)(\u0275\u0275inject(OrganisationService), \u0275\u0275inject(SettingsService), \u0275\u0275inject(MatDialog));
-    };
-  }
-  static {
-    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _PaymentsService, factory: _PaymentsService.\u0275fac, providedIn: "root" });
-  }
-};
-
 // libs/bookings/src/lib/booking-form.service.ts
 var BOOKING_TYPES = ["desk", "parking", "locker", "catering"];
 var BookingFormService = class _BookingFormService extends AsyncHandler {
@@ -151799,7 +157612,7 @@ var BookingFormService = class _BookingFormService extends AsyncHandler {
 };
 
 // libs/explore/src/lib/set-datetime-modal.component.ts
-var _c069 = () => ({ standalone: true });
+var _c080 = () => ({ standalone: true });
 function SetDatetimeModalComponent_main_6_div_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 7)(1, "div", 13)(2, "label");
@@ -151862,7 +157675,7 @@ function SetDatetimeModalComponent_main_6_Template(rf, ctx) {
     \u0275\u0275advance(5);
     \u0275\u0275property("to", ctx_r1.book_until);
     \u0275\u0275advance(6);
-    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(12, _c069))("use_24hr", ctx_r1.use_24hr_time);
+    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(12, _c080))("use_24hr", ctx_r1.use_24hr_time);
     \u0275\u0275advance(4);
     \u0275\u0275property("time", (tmp_8_0 = ctx_r1.form.get("date")) == null ? null : tmp_8_0.value)("max", 10 * 60)("min", 60)("step", 60)("use_24hr", ctx_r1.use_24hr_time);
   }
@@ -152033,7 +157846,7 @@ var ExploreDeskInfoComponent = class _ExploreDeskInfoComponent {
 })();
 
 // libs/explore/src/lib/explore-device-info.component.ts
-var _c070 = ["explore-device-info", ""];
+var _c081 = ["explore-device-info", ""];
 function ExploreDeviceInfoComponent_ng_template_5_p_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "p", 15)(1, "label");
@@ -152257,7 +158070,7 @@ var ExploreDeviceInfoComponent = class _ExploreDeviceInfoComponent extends Async
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreDeviceInfoComponent, selectors: [["", "explore-device-info", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c070, decls: 7, vars: 9, consts: [["dot", ""], ["device_tooltip", ""], ["name", "radius", 1, "radius", "center", "border-blue-600", "absolute", "rounded-full", "border-8", "border-dashed", "bg-info", "bg-opacity-25"], ["shadow", "", 1, "center", "absolute", "h-8", "w-8", "rounded-full", "bg-neutral"], ["name", "dot", 1, "center", "absolute", "h-3", "w-3", "rounded-full", "border-2", "border-white", "shadow"], ["customTooltip", "", 1, "pointer-events-auto", "absolute", "inset-0", 3, "mouseenter", "content", "backdrop", "xPosition", "yPosition", "hover"], ["name", "device-info", 1, "pointer-events-none", "left-0", "top-0", "mx-2", "w-64", "rounded", "bg-base-100", "p-4", "shadow", 3, "mouseleave"], [1, "arrow"], [1, "details"], ["class", "break-words", 4, "ngIf"], ["type", "", 4, "ngIf"], ["os", "", 4, "ngIf"], ["ssid", "", 4, "ngIf"], ["username", "", 4, "ngIf"], ["user", "", 4, "ngIf"], [1, "break-words"], ["type", ""], ["os", ""], ["ssid", ""], ["username", ""], ["user", ""]], template: function ExploreDeviceInfoComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreDeviceInfoComponent, selectors: [["", "explore-device-info", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c081, decls: 7, vars: 9, consts: [["dot", ""], ["device_tooltip", ""], ["name", "radius", 1, "radius", "center", "border-blue-600", "absolute", "rounded-full", "border-8", "border-dashed", "bg-info", "bg-opacity-25"], ["shadow", "", 1, "center", "absolute", "h-8", "w-8", "rounded-full", "bg-neutral"], ["name", "dot", 1, "center", "absolute", "h-3", "w-3", "rounded-full", "border-2", "border-white", "shadow"], ["customTooltip", "", 1, "pointer-events-auto", "absolute", "inset-0", 3, "mouseenter", "content", "backdrop", "xPosition", "yPosition", "hover"], ["name", "device-info", 1, "pointer-events-none", "left-0", "top-0", "mx-2", "w-64", "rounded", "bg-base-100", "p-4", "shadow", 3, "mouseleave"], [1, "arrow"], [1, "details"], ["class", "break-words", 4, "ngIf"], ["type", "", 4, "ngIf"], ["os", "", 4, "ngIf"], ["ssid", "", 4, "ngIf"], ["username", "", 4, "ngIf"], ["user", "", 4, "ngIf"], [1, "break-words"], ["type", ""], ["os", ""], ["ssid", ""], ["username", ""], ["user", ""]], template: function ExploreDeviceInfoComponent_Template(rf, ctx) {
       if (rf & 1) {
         const _r1 = \u0275\u0275getCurrentView();
         \u0275\u0275element(0, "div", 2)(1, "div", 3)(2, "div", 4, 0);
@@ -152283,981 +158096,6 @@ var ExploreDeviceInfoComponent = class _ExploreDeviceInfoComponent extends Async
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreDeviceInfoComponent, { className: "ExploreDeviceInfoComponent", filePath: "libs/explore/src/lib/explore-device-info.component.ts", lineNumber: 144 });
 })();
-
-// libs/common/src/lib/vanillaqr.min.ts
-function VanillaQR(r) {
-  var e = this;
-  r = "object" == typeof r ? r : {}, e.revision = 3, e.imageTypes = { bmp: "image/bmp", gif: "image/gif", jpeg: "image/jpeg", jpg: "image/jpg", png: "image/png", "svg+xml": "image/svg+xml", tiff: "image/tiff", webp: "image/webp", "x-icon": "image/x-icon" }, e.toTable = r.toTable, e.domElement = e.toTable ? document.createElement("div") : document.createElement("canvas"), e.url = r.url || "", e.size = r.size || 280, e.qrc = false, e.colorLight = r.colorLight || "#fff", e.colorDark = r.colorDark || "#000", e.ecclevel = r.ecclevel || 1, e.noBorder = r.noBorder, e.borderSize = r.borderSize || 4;
-  var o, a, t, i, n, l2, f2, c = [], s = [], d = [], g3 = [], h3 = [], v4 = [], m3 = function(r2, e2) {
-    var o2;
-    r2 > e2 && (o2 = r2, r2 = e2, e2 = o2), o2 = e2, o2 *= e2, o2 += e2, o2 >>= 1, g3[o2 += r2] = 1;
-  }, u3 = function(r2, e2) {
-    var o2;
-    for (d[r2 + t * e2] = 1, o2 = -2; o2 < 2; o2++)
-      d[r2 + o2 + t * (e2 - 2)] = 1, d[r2 - 2 + t * (e2 + o2 + 1)] = 1, d[r2 + 2 + t * (e2 + o2)] = 1, d[r2 + o2 + 1 + t * (e2 + 2)] = 1;
-    for (o2 = 0; o2 < 2; o2++)
-      m3(r2 - 1, e2 + o2), m3(r2 + 1, e2 - o2), m3(r2 - o2, e2 - 1), m3(r2 + o2, e2 + 1);
-  }, p = function(r2) {
-    for (; r2 >= 255; )
-      r2 = ((r2 -= 255) >> 8) + (255 & r2);
-    return r2;
-  }, b2 = function(r2, e2, o2, a2) {
-    var t2, i2, n2, l3 = VanillaQR.gexp, f3 = VanillaQR.glog;
-    for (t2 = 0; t2 < a2; t2++)
-      c[o2 + t2] = 0;
-    for (t2 = 0; t2 < e2; t2++) {
-      if (255 != (n2 = f3[c[r2 + t2] ^ c[o2]]))
-        for (i2 = 1; i2 < a2; i2++)
-          c[o2 + i2 - 1] = c[o2 + i2] ^ l3[p(n2 + v4[a2 - i2])];
-      else
-        for (i2 = o2; i2 < o2 + a2; i2++)
-          c[i2] = c[i2 + 1];
-      c[o2 + a2 - 1] = 255 == n2 ? 0 : l3[p(n2 + v4[0])];
-    }
-  }, R3 = function(r2, e2) {
-    var o2;
-    return r2 > e2 && (o2 = r2, r2 = e2, e2 = o2), o2 = e2, o2 += e2 * e2, o2 >>= 1, g3[o2 += r2];
-  }, Q4 = function(r2) {
-    var e2, o2, a2, i2;
-    switch (r2) {
-      case 0:
-        for (o2 = 0; o2 < t; o2++)
-          for (e2 = 0; e2 < t; e2++)
-            e2 + o2 & 1 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
-        break;
-      case 1:
-        for (o2 = 0; o2 < t; o2++)
-          for (e2 = 0; e2 < t; e2++)
-            1 & o2 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
-        break;
-      case 2:
-        for (o2 = 0; o2 < t; o2++)
-          for (a2 = 0, e2 = 0; e2 < t; e2++, a2++)
-            3 == a2 && (a2 = 0), a2 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
-        break;
-      case 3:
-        for (i2 = 0, o2 = 0; o2 < t; o2++, i2++)
-          for (3 == i2 && (i2 = 0), a2 = i2, e2 = 0; e2 < t; e2++, a2++)
-            3 == a2 && (a2 = 0), a2 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
-        break;
-      case 4:
-        for (o2 = 0; o2 < t; o2++)
-          for (a2 = 0, i2 = o2 >> 1 & 1, e2 = 0; e2 < t; e2++, a2++)
-            3 == a2 && (a2 = 0, i2 = !i2), i2 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
-        break;
-      case 5:
-        for (i2 = 0, o2 = 0; o2 < t; o2++, i2++)
-          for (3 == i2 && (i2 = 0), a2 = 0, e2 = 0; e2 < t; e2++, a2++)
-            3 == a2 && (a2 = 0), (e2 & o2 & 1) + !(!a2 | !i2) || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
-        break;
-      case 6:
-        for (i2 = 0, o2 = 0; o2 < t; o2++, i2++)
-          for (3 == i2 && (i2 = 0), a2 = 0, e2 = 0; e2 < t; e2++, a2++)
-            3 == a2 && (a2 = 0), (e2 & o2 & 1) + (a2 && a2 == i2) & 1 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
-        break;
-      case 7:
-        for (i2 = 0, o2 = 0; o2 < t; o2++, i2++)
-          for (3 == i2 && (i2 = 0), a2 = 0, e2 = 0; e2 < t; e2++, a2++)
-            3 == a2 && (a2 = 0), (a2 && a2 == i2) + (e2 + o2 & 1) & 1 || R3(e2, o2) || (d[e2 + o2 * t] ^= 1);
-    }
-  }, V3 = function(r2) {
-    var e2, o2 = 0;
-    for (e2 = 0; e2 <= r2; e2++)
-      h3[e2] >= 5 && (o2 += VanillaQR.N1 + h3[e2] - 5);
-    for (e2 = 3; e2 < r2 - 1; e2 += 2)
-      h3[e2 - 2] == h3[e2 + 2] && h3[e2 + 2] == h3[e2 - 1] && h3[e2 - 1] == h3[e2 + 1] && 3 * h3[e2 - 1] == h3[e2] && (0 == h3[e2 - 3] || e2 + 3 > r2 || 3 * h3[e2 - 3] >= 4 * h3[e2] || 3 * h3[e2 + 3] >= 4 * h3[e2]) && (o2 += VanillaQR.N3);
-    return o2;
-  }, k3 = function() {
-    var r2, e2, o2, a2, i2, n2 = 0, l3 = 0;
-    for (e2 = 0; e2 < t - 1; e2++)
-      for (r2 = 0; r2 < t - 1; r2++)
-        (d[r2 + t * e2] && d[r2 + 1 + t * e2] && d[r2 + t * (e2 + 1)] && d[r2 + 1 + t * (e2 + 1)] || !(d[r2 + t * e2] || d[r2 + 1 + t * e2] || d[r2 + t * (e2 + 1)] || d[r2 + 1 + t * (e2 + 1)])) && (n2 += VanillaQR.N2);
-    for (e2 = 0; e2 < t; e2++) {
-      for (h3[0] = 0, o2 = a2 = r2 = 0; r2 < t; r2++)
-        (i2 = d[r2 + t * e2]) == a2 ? h3[o2]++ : h3[++o2] = 1, l3 += (a2 = i2) ? 1 : -1;
-      n2 += V3(o2);
-    }
-    l3 < 0 && (l3 = -l3);
-    var f3 = l3, c2 = 0;
-    for (f3 += f3 << 2, f3 <<= 1; f3 > t * t; )
-      f3 -= t * t, c2++;
-    for (n2 += c2 * VanillaQR.N4, r2 = 0; r2 < t; r2++) {
-      for (h3[0] = 0, o2 = a2 = e2 = 0; e2 < t; e2++)
-        (i2 = d[r2 + t * e2]) == a2 ? h3[o2]++ : h3[++o2] = 1, a2 = i2;
-      n2 += V3(o2);
-    }
-    return n2;
-  };
-  e.genframe = function(r2) {
-    var e2, h4, V4, x3, C4, w2, E3, N4, T4 = VanillaQR.eccblocks, y2 = VanillaQR.gexp, z3 = VanillaQR.glog;
-    x3 = r2.length, a = 0;
-    do {
-      if (a++, V4 = 4 * (o - 1) + 16 * (a - 1), i = T4[V4++], n = T4[V4++], l2 = T4[V4++], f2 = T4[V4], x3 <= (V4 = l2 * (i + n) + n - 3 + (a <= 9)))
-        break;
-    } while (a < 40);
-    for (t = 17 + 4 * a, C4 = l2 + (l2 + f2) * (i + n) + n, x3 = 0; x3 < C4; x3++)
-      s[x3] = 0;
-    for (c = r2.slice(0), x3 = 0; x3 < t * t; x3++)
-      d[x3] = 0;
-    for (x3 = 0; x3 < (t * (t + 1) + 1) / 2; x3++)
-      g3[x3] = 0;
-    for (x3 = 0; x3 < 3; x3++) {
-      for (V4 = 0, h4 = 0, 1 == x3 && (V4 = t - 7), 2 == x3 && (h4 = t - 7), d[h4 + 3 + t * (V4 + 3)] = 1, e2 = 0; e2 < 6; e2++)
-        d[h4 + e2 + t * V4] = 1, d[h4 + t * (V4 + e2 + 1)] = 1, d[h4 + 6 + t * (V4 + e2)] = 1, d[h4 + e2 + 1 + t * (V4 + 6)] = 1;
-      for (e2 = 1; e2 < 5; e2++)
-        m3(h4 + e2, V4 + 1), m3(h4 + 1, V4 + e2 + 1), m3(h4 + 5, V4 + e2), m3(h4 + e2 + 1, V4 + 5);
-      for (e2 = 2; e2 < 4; e2++)
-        d[h4 + e2 + t * (V4 + 2)] = 1, d[h4 + 2 + t * (V4 + e2 + 1)] = 1, d[h4 + 4 + t * (V4 + e2)] = 1, d[h4 + e2 + 1 + t * (V4 + 4)] = 1;
-    }
-    if (a > 1)
-      for (x3 = VanillaQR.adelta[a], h4 = t - 7; ; ) {
-        for (e2 = t - 7; e2 > x3 - 3 && (u3(e2, h4), !(e2 < x3)); )
-          e2 -= x3;
-        if (h4 <= x3 + 9)
-          break;
-        u3(6, h4 -= x3), u3(h4, 6);
-      }
-    for (d[8 + t * (t - 8)] = 1, h4 = 0; h4 < 7; h4++)
-      m3(7, h4), m3(t - 8, h4), m3(7, h4 + t - 7);
-    for (e2 = 0; e2 < 8; e2++)
-      m3(e2, 7), m3(e2 + t - 8, 7), m3(e2, t - 8);
-    for (e2 = 0; e2 < 9; e2++)
-      m3(e2, 8);
-    for (e2 = 0; e2 < 8; e2++)
-      m3(e2 + t - 8, 8), m3(8, e2);
-    for (h4 = 0; h4 < 7; h4++)
-      m3(8, h4 + t - 7);
-    for (e2 = 0; e2 < t - 14; e2++)
-      1 & e2 ? (m3(8 + e2, 6), m3(6, 8 + e2)) : (d[8 + e2 + 6 * t] = 1, d[6 + t * (8 + e2)] = 1);
-    if (a > 6)
-      for (x3 = VanillaQR.vpat[a - 7], V4 = 17, e2 = 0; e2 < 6; e2++)
-        for (h4 = 0; h4 < 3; h4++, V4--)
-          1 & (V4 > 11 ? a >> V4 - 12 : x3 >> V4) ? (d[5 - e2 + t * (2 - h4 + t - 11)] = 1, d[2 - h4 + t - 11 + t * (5 - e2)] = 1) : (m3(5 - e2, 2 - h4 + t - 11), m3(2 - h4 + t - 11, 5 - e2));
-    for (h4 = 0; h4 < t; h4++)
-      for (e2 = 0; e2 <= h4; e2++)
-        d[e2 + t * h4] && m3(e2, h4);
-    for (C4 = c.length, w2 = 0; w2 < C4; w2++)
-      s[w2] = c.charCodeAt(w2);
-    if (c = s.slice(0), C4 >= (e2 = l2 * (i + n) + n) - 2 && (C4 = e2 - 2, a > 9 && C4--), w2 = C4, a > 9) {
-      for (c[w2 + 2] = 0, c[w2 + 3] = 0; w2--; )
-        x3 = c[w2], c[w2 + 3] |= 255 & x3 << 4, c[w2 + 2] = x3 >> 4;
-      c[2] |= 255 & C4 << 4, c[1] = C4 >> 4, c[0] = 64 | C4 >> 12;
-    } else {
-      for (c[w2 + 1] = 0, c[w2 + 2] = 0; w2--; )
-        x3 = c[w2], c[w2 + 2] |= 255 & x3 << 4, c[w2 + 1] = x3 >> 4;
-      c[1] |= 255 & C4 << 4, c[0] = 64 | C4 >> 4;
-    }
-    for (w2 = C4 + 3 - (a < 10); w2 < e2; )
-      c[w2++] = 236, c[w2++] = 17;
-    for (v4[0] = 1, w2 = 0; w2 < f2; w2++) {
-      for (v4[w2 + 1] = 1, E3 = w2; E3 > 0; E3--)
-        v4[E3] = v4[E3] ? v4[E3 - 1] ^ y2[p(z3[v4[E3]] + w2)] : v4[E3 - 1];
-      v4[0] = y2[p(z3[v4[0]] + w2)];
-    }
-    for (w2 = 0; w2 <= f2; w2++)
-      v4[w2] = z3[v4[w2]];
-    for (V4 = e2, h4 = 0, w2 = 0; w2 < i; w2++)
-      b2(h4, l2, V4, f2), h4 += l2, V4 += f2;
-    for (w2 = 0; w2 < n; w2++)
-      b2(h4, l2 + 1, V4, f2), h4 += l2 + 1, V4 += f2;
-    for (h4 = 0, w2 = 0; w2 < l2; w2++) {
-      for (E3 = 0; E3 < i; E3++)
-        s[h4++] = c[w2 + E3 * l2];
-      for (E3 = 0; E3 < n; E3++)
-        s[h4++] = c[i * l2 + w2 + E3 * (l2 + 1)];
-    }
-    for (E3 = 0; E3 < n; E3++)
-      s[h4++] = c[i * l2 + w2 + E3 * (l2 + 1)];
-    for (w2 = 0; w2 < f2; w2++)
-      for (E3 = 0; E3 < i + n; E3++)
-        s[h4++] = c[e2 + w2 + E3 * f2];
-    for (c = s, e2 = h4 = t - 1, V4 = C4 = 1, N4 = (l2 + f2) * (i + n) + n, w2 = 0; w2 < N4; w2++)
-      for (x3 = c[w2], E3 = 0; E3 < 8; E3++, x3 <<= 1) {
-        128 & x3 && (d[e2 + t * h4] = 1);
-        do {
-          C4 ? e2-- : (e2++, V4 ? 0 != h4 ? h4-- : (V4 = !V4, 6 == (e2 -= 2) && (e2--, h4 = 9)) : h4 != t - 1 ? h4++ : (V4 = !V4, 6 == (e2 -= 2) && (e2--, h4 -= 8))), C4 = !C4;
-        } while (R3(e2, h4));
-      }
-    for (c = d.slice(0), x3 = 0, h4 = 3e4, V4 = 0; V4 < 8 && (Q4(V4), (e2 = k3()) < h4 && (h4 = e2, x3 = V4), 7 != x3); V4++)
-      d = c.slice(0);
-    for (x3 != V4 && Q4(x3), h4 = VanillaQR.fmtword[x3 + (o - 1 << 3)], V4 = 0; V4 < 8; V4++, h4 >>= 1)
-      1 & h4 && (d[t - 1 - V4 + 8 * t] = 1, V4 < 6 ? d[8 + t * V4] = 1 : d[8 + t * (V4 + 1)] = 1);
-    for (V4 = 0; V4 < 7; V4++, h4 >>= 1)
-      1 & h4 && (d[8 + t * (t - 7 + V4)] = 1, V4 ? d[6 - V4 + 8 * t] = 1 : d[7 + 8 * t] = 1);
-    return d;
-  }, e.init = function() {
-    o = e.ecclevel;
-    var r2 = e.genframe(e.url);
-    e.toTable ? e.tableWrite(r2, t) : e.canvasWrite(r2, t);
-  }, e.init();
-}
-VanillaQR.prototype = { canvasWrite: function(r, e) {
-  if (!this.qrc && (this.qrc = this.getContext(this.domElement), !this.qrc))
-    return this.toTable = true, this.domElement = document.createElement("div"), void this.tableWrite(r, e);
-  var o = this.size, a = this.qrc;
-  a.lineWidth = 1;
-  var t = o;
-  t /= e + 10, t = Math.round(t - 0.5);
-  var i = 4;
-  this.noBorder ? (a.canvas.width = a.canvas.height = t * e, i = 0) : a.canvas.width = a.canvas.height = o, a.clearRect(0, 0, o, o), a.fillStyle = this.colorLight, a.fillRect(0, 0, t * (e + 8), t * (e + 8)), a.fillStyle = this.colorDark;
-  for (var n = 0; n < e; n++)
-    for (var l2 = 0; l2 < e; l2++)
-      r[l2 * e + n] && a.fillRect(t * (i + n), t * (i + l2), t, t);
-}, tableWrite: function(r, e) {
-  var o = this, a = Math.round(this.size / e - 3.5) + "px", t = e + (o.noBorder ? 0 : 2 * o.borderSize), i = o.borderSize, n = "width:" + a + ";height:" + a + ";", l2 = o.colorLight, f2 = o.colorDark, c = document.createElement("table");
-  c.style.cssText = "border:0;border-collapse:collapse;";
-  for (var s, d = document.createElement("tr"), g3 = document.createElement("td"), h3 = function() {
-    return g3.cloneNode();
-  }, v4 = function() {
-    var r2 = h3();
-    return r2.style.cssText = n + "background:" + l2, r2;
-  }, m3 = function(r2) {
-    for (var e2 = r2.firstChild, o2 = 0; o2 < i; o2++)
-      r2.insertBefore(v4(), e2), r2.appendChild(v4());
-  }, u3 = 0; u3 < e; u3++) {
-    var p = d.cloneNode();
-    c.appendChild(p);
-    for (var b2 = 0; b2 < e; b2++)
-      if (1 === r[u3 * e + b2]) {
-        var R3 = (s = void 0, (s = h3()).style.cssText = n + "background:" + f2, s);
-        p.appendChild(R3);
-      } else {
-        var Q4 = v4();
-        p.appendChild(Q4);
-      }
-    o.noBorder || m3(p);
-  }
-  o.noBorder || function(r2) {
-    for (var e2 = r2.firstChild, a2 = 0; a2 < o.borderSize; a2++) {
-      for (var i2 = d.cloneNode(), n2 = 0; n2 < t; n2++) {
-        var l3 = v4();
-        i2.appendChild(l3);
-      }
-      r2.appendChild(i2), r2.insertBefore(i2.cloneNode(true), e2);
-    }
-  }(c), o.domElement.innerHTML = "", o.domElement.appendChild(c);
-}, getContext: function(r) {
-  return r.getContext && r.getContext("2d") ? r.getContext("2d") : (console.log("Browser does not have 2d Canvas support"), false);
-}, toImage: function(r) {
-  if (this.qrc) {
-    var e = this.imageTypes[r];
-    if (!e)
-      throw new Error(r + " is not a valid image type ");
-    var o = new Image();
-    return o.src = this.domElement.toDataURL(e), o;
-  }
-} }, VanillaQR.adelta = [0, 11, 15, 19, 23, 27, 31, 16, 18, 20, 22, 24, 26, 28, 20, 22, 24, 24, 26, 28, 28, 22, 24, 24, 26, 26, 28, 28, 24, 24, 26, 26, 26, 28, 28, 24, 26, 26, 26, 28, 28], VanillaQR.vpat = [3220, 1468, 2713, 1235, 3062, 1890, 2119, 1549, 2344, 2936, 1117, 2583, 1330, 2470, 1667, 2249, 2028, 3780, 481, 4011, 142, 3098, 831, 3445, 592, 2517, 1776, 2234, 1951, 2827, 1070, 2660, 1345, 3177], VanillaQR.fmtword = [30660, 29427, 32170, 30877, 26159, 25368, 27713, 26998, 21522, 20773, 24188, 23371, 17913, 16590, 20375, 19104, 13663, 12392, 16177, 14854, 9396, 8579, 11994, 11245, 5769, 5054, 7399, 6608, 1890, 597, 3340, 2107], VanillaQR.eccblocks = [1, 0, 19, 7, 1, 0, 16, 10, 1, 0, 13, 13, 1, 0, 9, 17, 1, 0, 34, 10, 1, 0, 28, 16, 1, 0, 22, 22, 1, 0, 16, 28, 1, 0, 55, 15, 1, 0, 44, 26, 2, 0, 17, 18, 2, 0, 13, 22, 1, 0, 80, 20, 2, 0, 32, 18, 2, 0, 24, 26, 4, 0, 9, 16, 1, 0, 108, 26, 2, 0, 43, 24, 2, 2, 15, 18, 2, 2, 11, 22, 2, 0, 68, 18, 4, 0, 27, 16, 4, 0, 19, 24, 4, 0, 15, 28, 2, 0, 78, 20, 4, 0, 31, 18, 2, 4, 14, 18, 4, 1, 13, 26, 2, 0, 97, 24, 2, 2, 38, 22, 4, 2, 18, 22, 4, 2, 14, 26, 2, 0, 116, 30, 3, 2, 36, 22, 4, 4, 16, 20, 4, 4, 12, 24, 2, 2, 68, 18, 4, 1, 43, 26, 6, 2, 19, 24, 6, 2, 15, 28, 4, 0, 81, 20, 1, 4, 50, 30, 4, 4, 22, 28, 3, 8, 12, 24, 2, 2, 92, 24, 6, 2, 36, 22, 4, 6, 20, 26, 7, 4, 14, 28, 4, 0, 107, 26, 8, 1, 37, 22, 8, 4, 20, 24, 12, 4, 11, 22, 3, 1, 115, 30, 4, 5, 40, 24, 11, 5, 16, 20, 11, 5, 12, 24, 5, 1, 87, 22, 5, 5, 41, 24, 5, 7, 24, 30, 11, 7, 12, 24, 5, 1, 98, 24, 7, 3, 45, 28, 15, 2, 19, 24, 3, 13, 15, 30, 1, 5, 107, 28, 10, 1, 46, 28, 1, 15, 22, 28, 2, 17, 14, 28, 5, 1, 120, 30, 9, 4, 43, 26, 17, 1, 22, 28, 2, 19, 14, 28, 3, 4, 113, 28, 3, 11, 44, 26, 17, 4, 21, 26, 9, 16, 13, 26, 3, 5, 107, 28, 3, 13, 41, 26, 15, 5, 24, 30, 15, 10, 15, 28, 4, 4, 116, 28, 17, 0, 42, 26, 17, 6, 22, 28, 19, 6, 16, 30, 2, 7, 111, 28, 17, 0, 46, 28, 7, 16, 24, 30, 34, 0, 13, 24, 4, 5, 121, 30, 4, 14, 47, 28, 11, 14, 24, 30, 16, 14, 15, 30, 6, 4, 117, 30, 6, 14, 45, 28, 11, 16, 24, 30, 30, 2, 16, 30, 8, 4, 106, 26, 8, 13, 47, 28, 7, 22, 24, 30, 22, 13, 15, 30, 10, 2, 114, 28, 19, 4, 46, 28, 28, 6, 22, 28, 33, 4, 16, 30, 8, 4, 122, 30, 22, 3, 45, 28, 8, 26, 23, 30, 12, 28, 15, 30, 3, 10, 117, 30, 3, 23, 45, 28, 4, 31, 24, 30, 11, 31, 15, 30, 7, 7, 116, 30, 21, 7, 45, 28, 1, 37, 23, 30, 19, 26, 15, 30, 5, 10, 115, 30, 19, 10, 47, 28, 15, 25, 24, 30, 23, 25, 15, 30, 13, 3, 115, 30, 2, 29, 46, 28, 42, 1, 24, 30, 23, 28, 15, 30, 17, 0, 115, 30, 10, 23, 46, 28, 10, 35, 24, 30, 19, 35, 15, 30, 17, 1, 115, 30, 14, 21, 46, 28, 29, 19, 24, 30, 11, 46, 15, 30, 13, 6, 115, 30, 14, 23, 46, 28, 44, 7, 24, 30, 59, 1, 16, 30, 12, 7, 121, 30, 12, 26, 47, 28, 39, 14, 24, 30, 22, 41, 15, 30, 6, 14, 121, 30, 6, 34, 47, 28, 46, 10, 24, 30, 2, 64, 15, 30, 17, 4, 122, 30, 29, 14, 46, 28, 49, 10, 24, 30, 24, 46, 15, 30, 4, 18, 122, 30, 13, 32, 46, 28, 48, 14, 24, 30, 42, 32, 15, 30, 20, 4, 117, 30, 40, 7, 47, 28, 43, 22, 24, 30, 10, 67, 15, 30, 19, 6, 118, 30, 18, 31, 47, 28, 34, 34, 24, 30, 20, 61, 15, 30], VanillaQR.glog = [255, 0, 1, 25, 2, 50, 26, 198, 3, 223, 51, 238, 27, 104, 199, 75, 4, 100, 224, 14, 52, 141, 239, 129, 28, 193, 105, 248, 200, 8, 76, 113, 5, 138, 101, 47, 225, 36, 15, 33, 53, 147, 142, 218, 240, 18, 130, 69, 29, 181, 194, 125, 106, 39, 249, 185, 201, 154, 9, 120, 77, 228, 114, 166, 6, 191, 139, 98, 102, 221, 48, 253, 226, 152, 37, 179, 16, 145, 34, 136, 54, 208, 148, 206, 143, 150, 219, 189, 241, 210, 19, 92, 131, 56, 70, 64, 30, 66, 182, 163, 195, 72, 126, 110, 107, 58, 40, 84, 250, 133, 186, 61, 202, 94, 155, 159, 10, 21, 121, 43, 78, 212, 229, 172, 115, 243, 167, 87, 7, 112, 192, 247, 140, 128, 99, 13, 103, 74, 222, 237, 49, 197, 254, 24, 227, 165, 153, 119, 38, 184, 180, 124, 17, 68, 146, 217, 35, 32, 137, 46, 55, 63, 209, 91, 149, 188, 207, 205, 144, 135, 151, 178, 220, 252, 190, 97, 242, 86, 211, 171, 20, 42, 93, 158, 132, 60, 57, 83, 71, 109, 65, 162, 31, 45, 67, 216, 183, 123, 164, 118, 196, 23, 73, 236, 127, 12, 111, 246, 108, 161, 59, 82, 41, 157, 85, 170, 251, 96, 134, 177, 187, 204, 62, 90, 203, 89, 95, 176, 156, 169, 160, 81, 11, 245, 22, 235, 122, 117, 44, 215, 79, 174, 213, 233, 230, 231, 173, 232, 116, 214, 244, 234, 168, 80, 88, 175], VanillaQR.gexp = [1, 2, 4, 8, 16, 32, 64, 128, 29, 58, 116, 232, 205, 135, 19, 38, 76, 152, 45, 90, 180, 117, 234, 201, 143, 3, 6, 12, 24, 48, 96, 192, 157, 39, 78, 156, 37, 74, 148, 53, 106, 212, 181, 119, 238, 193, 159, 35, 70, 140, 5, 10, 20, 40, 80, 160, 93, 186, 105, 210, 185, 111, 222, 161, 95, 190, 97, 194, 153, 47, 94, 188, 101, 202, 137, 15, 30, 60, 120, 240, 253, 231, 211, 187, 107, 214, 177, 127, 254, 225, 223, 163, 91, 182, 113, 226, 217, 175, 67, 134, 17, 34, 68, 136, 13, 26, 52, 104, 208, 189, 103, 206, 129, 31, 62, 124, 248, 237, 199, 147, 59, 118, 236, 197, 151, 51, 102, 204, 133, 23, 46, 92, 184, 109, 218, 169, 79, 158, 33, 66, 132, 21, 42, 84, 168, 77, 154, 41, 82, 164, 85, 170, 73, 146, 57, 114, 228, 213, 183, 115, 230, 209, 191, 99, 198, 145, 63, 126, 252, 229, 215, 179, 123, 246, 241, 255, 227, 219, 171, 75, 150, 49, 98, 196, 149, 55, 110, 220, 165, 87, 174, 65, 130, 25, 50, 100, 200, 141, 7, 14, 28, 56, 112, 224, 221, 167, 83, 166, 81, 162, 89, 178, 121, 242, 249, 239, 195, 155, 43, 86, 172, 69, 138, 9, 18, 36, 72, 144, 61, 122, 244, 245, 247, 243, 251, 235, 203, 139, 11, 22, 44, 88, 176, 125, 250, 233, 207, 131, 27, 54, 108, 216, 173, 71, 142, 0], VanillaQR.N1 = 3, VanillaQR.N2 = 3, VanillaQR.N3 = 40, VanillaQR.N4 = 10;
-
-// libs/common/src/lib/qr-code.ts
-function generateQRCode(code, colorLight = "#fff0", colorDark = "#000") {
-  const qr2 = new VanillaQR({
-    url: code || "Hello",
-    size: 360,
-    colorLight,
-    colorDark,
-    toTable: false,
-    ecclevel: 1,
-    noBorder: true,
-    borderSize: 0
-  });
-  return qr2?.toImage("svg+xml")?.src;
-}
-
-// libs/explore/src/lib/explore-book-qr.component.ts
-var _c071 = (a0) => ({ name: a0 });
-var DEFAULT_PATH = `workplace/#/explore?space={{id}}`;
-var ExploreBookQrComponent = class _ExploreBookQrComponent {
-  constructor(_data, _settings) {
-    this._data = _data;
-    this._settings = _settings;
-    this.space = this._data.space;
-    this.qr_code = generateQRCode(`${location.origin}${(this._settings.get("app.booking_qr_path") || DEFAULT_PATH).replace("{{id}}", this._data.space?.email)}`);
-  }
-  static {
-    this.\u0275fac = function ExploreBookQrComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _ExploreBookQrComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(SettingsService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreBookQrComponent, selectors: [["explore-book-qr"]], standalone: false, decls: 10, vars: 7, consts: [[1, "truncate"], [1, "flex-1"], ["icon", "", "mat-dialog-close", ""], [1, "p-4"], [1, "m-auto", "h-64", "w-64", 3, "src"]], template: function ExploreBookQrComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "header")(1, "h2", 0);
-        \u0275\u0275text(2);
-        \u0275\u0275pipe(3, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275element(4, "div", 1);
-        \u0275\u0275elementStart(5, "button", 2)(6, "app-icon");
-        \u0275\u0275text(7, "close");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(8, "main", 3);
-        \u0275\u0275element(9, "img", 4);
-        \u0275\u0275elementEnd();
-      }
-      if (rf & 2) {
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 2, "EXPLORE.BOOK_RESOURCE", \u0275\u0275pureFunction1(5, _c071, ctx.space == null ? null : ctx.space.name)), " ");
-        \u0275\u0275advance(7);
-        \u0275\u0275property("src", ctx.qr_code, \u0275\u0275sanitizeUrl);
-      }
-    }, dependencies: [IconComponent, MatDialogClose, TranslatePipe], encapsulation: 2 });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreBookQrComponent, { className: "ExploreBookQrComponent", filePath: "libs/explore/src/lib/explore-book-qr.component.ts", lineNumber: 29 });
-})();
-
-// libs/explore/src/lib/explore-booking-modal.component.ts
-function ExploreBookingModalComponent_button_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "button", 4)(1, "app-icon");
-    \u0275\u0275text(2, "close");
-    \u0275\u0275elementEnd()();
-  }
-}
-function ExploreBookingModalComponent_ng_container_7_main_1_div_12_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 9)(1, "label", 19);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementStart(4, "span");
-    \u0275\u0275text(5, "*");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(6, ":");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(7, "a-user-search-field", 20);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 1, "FORM.HOST"));
-  }
-}
-function ExploreBookingModalComponent_ng_container_7_main_1_div_19_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 21);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275classProp("bg-info", ctx_r1.alert[0] === "info")("text-info-content", ctx_r1.alert[0] === "info")("bg-warning", ctx_r1.alert[0] === "warn")("text-warning-content", ctx_r1.alert[0] === "warn")("bg-error", ctx_r1.alert[0] === "closed")("text-error-content", ctx_r1.alert[0] === "closed");
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r1.alert[1], " ");
-  }
-}
-function ExploreBookingModalComponent_ng_container_7_main_1_div_21_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 22)(1, "label");
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 23);
-    \u0275\u0275text(5);
-    \u0275\u0275pipe(6, "date");
-    \u0275\u0275pipe(7, "date");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(3, 3, "FORM.DATE"), ":");
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(6, 5, ctx_r1.form.value.date, "mediumDate"), " at ", \u0275\u0275pipeBind2(7, 8, ctx_r1.form.value.date, ctx_r1.time_format), " ");
-  }
-}
-function ExploreBookingModalComponent_ng_container_7_main_1_div_22_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 24)(1, "label");
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(4, "a-duration-field", 25);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(3, 4, "FORM.DURATION"), ":");
-    \u0275\u0275advance(2);
-    \u0275\u0275property("time", ctx_r1.form.value.date)("max", ctx_r1.max_duration)("use_24hr", ctx_r1.use_24hr_time);
-  }
-}
-function ExploreBookingModalComponent_ng_container_7_main_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "main", 8)(1, "div", 9)(2, "label", 10);
-    \u0275\u0275text(3, "Title");
-    \u0275\u0275elementStart(4, "span");
-    \u0275\u0275text(5, "*");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(6, ":");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "mat-form-field", 11);
-    \u0275\u0275element(8, "input", 12);
-    \u0275\u0275elementStart(9, "mat-error");
-    \u0275\u0275text(10);
-    \u0275\u0275pipe(11, "translate");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275template(12, ExploreBookingModalComponent_ng_container_7_main_1_div_12_Template, 8, 3, "div", 13);
-    \u0275\u0275elementStart(13, "div", 9)(14, "label");
-    \u0275\u0275text(15);
-    \u0275\u0275pipe(16, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(17, "div", 14);
-    \u0275\u0275text(18);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(19, ExploreBookingModalComponent_ng_container_7_main_1_div_19_Template, 2, 13, "div", 15);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(20, "div", 16);
-    \u0275\u0275template(21, ExploreBookingModalComponent_ng_container_7_main_1_div_21_Template, 8, 11, "div", 17)(22, ExploreBookingModalComponent_ng_container_7_main_1_div_22_Template, 5, 6, "div", 18);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("formGroup", ctx_r1.form);
-    \u0275\u0275advance(10);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(11, 8, "EXPLORE.BOOKING_TITLE_REQUIRED"));
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.can_book_for_others);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(16, 10, "EXPLORE.BOOKING_SPACE"), ":");
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", (ctx_r1.form.controls.resources == null ? null : ctx_r1.form.controls.resources.value[0] == null ? null : ctx_r1.form.controls.resources.value[0].display_name) || (ctx_r1.form.controls.resources == null ? null : ctx_r1.form.controls.resources.value[0] == null ? null : ctx_r1.form.controls.resources.value[0].name), " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.alert);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.form.controls.date);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.form.controls.duration);
-  }
-}
-function ExploreBookingModalComponent_ng_container_7_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, ExploreBookingModalComponent_ng_container_7_main_1_Template, 23, 12, "main", 5);
-    \u0275\u0275elementStart(2, "footer", 6)(3, "button", 7);
-    \u0275\u0275listener("click", function ExploreBookingModalComponent_ng_container_7_Template_button_click_3_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.save());
-    });
-    \u0275\u0275text(4);
-    \u0275\u0275pipe(5, "translate");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.form);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 2, "COMMON.SAVE"), " ");
-  }
-}
-function ExploreBookingModalComponent_ng_template_9_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 26);
-    \u0275\u0275element(1, "mat-spinner", 27);
-    \u0275\u0275elementStart(2, "p");
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("diameter", 48);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 2, ctx_r1.loading));
-  }
-}
-var ExploreBookingModalComponent = class _ExploreBookingModalComponent {
-  get form() {
-    return this._event_form.form;
-  }
-  get max_duration() {
-    return this._settings.get("app.events.max_duration") || 4 * 60;
-  }
-  get can_book_for_others() {
-    return this._settings.get("app.events.can_book_for_others");
-  }
-  get use_24hr_time() {
-    return this._settings.get("app.use_24_hour_time");
-  }
-  get time_format() {
-    return this._settings.time_format;
-  }
-  constructor(_data, _settings, _event_form, _dialog_ref, _router) {
-    this._data = _data;
-    this._settings = _settings;
-    this._event_form = _event_form;
-    this._dialog_ref = _dialog_ref;
-    this._router = _router;
-    this.loading = this._event_form.loading$;
-    this.alert = this._data.alert;
-  }
-  ngOnInit() {
-    this._event_form.newForm();
-    this.form.patchValue({
-      resources: [this._data.space],
-      host: currentUser().email,
-      organiser: currentUser()
-    });
-  }
-  save() {
-    return __async(this, null, function* () {
-      yield this._event_form.postForm().catch((_3) => {
-        notifyError(_3);
-        throw _3;
-      });
-      if (this._settings.app_name.toLowerCase().includes("workplace")) {
-        this._router.navigate(["/book", "meeting", "success"]);
-      } else {
-        notifySuccess(i18n("EXPLORE.BOOKING_SUCCESS"));
-      }
-      this._dialog_ref.close();
-    });
-  }
-  static {
-    this.\u0275fac = function ExploreBookingModalComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _ExploreBookingModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(MatDialogRef), \u0275\u0275directiveInject(Router));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreBookingModalComponent, selectors: [["explore-booking-modal"]], standalone: false, decls: 11, vars: 10, consts: [["load_state", ""], [1, "flex-1"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 4, "ngIf"], [4, "ngIf", "ngIfElse"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], ["class", "max-w-[85vw] p-4", 3, "formGroup", 4, "ngIf"], [1, "flex", "justify-center", "border-t", "border-base-200", "p-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"], [1, "max-w-[85vw]", "p-4", 3, "formGroup"], [1, "flex", "flex-col"], ["for", "title"], ["appearance", "outline"], ["matInput", "", "name", "title", "formControlName", "title", "placeholder", "Booking Title"], ["class", "flex flex-col", 4, "ngIf"], ["name", "space", 1, "mb-4", "w-full", "rounded", "border", "border-base-200", "px-4", "py-3"], ["class", "-mt-2 mb-4 rounded px-2 py-1 text-xs", 3, "bg-info", "text-info-content", "bg-warning", "text-warning-content", "bg-error", "text-error-content", 4, "ngIf"], [1, "flex", "flex-wrap", "sm:space-x-4"], ["class", "flex w-full flex-1 flex-col sm:w-auto", 4, "ngIf"], ["class", "flex w-full flex-col sm:w-auto", 4, "ngIf"], ["for", "host"], ["name", "host", "formControlName", "organiser", 1, "mb-4"], [1, "-mt-2", "mb-4", "rounded", "px-2", "py-1", "text-xs"], [1, "flex", "w-full", "flex-1", "flex-col", "sm:w-auto"], [1, "mb-4", "w-full", "rounded", "border", "border-base-200", "px-4", "py-3"], [1, "flex", "w-full", "flex-col", "sm:w-auto"], ["formControlName", "duration", 1, "w-full", 3, "time", "max", "use_24hr"], ["load", "", 1, "flex", "h-64", "flex-col", "items-center", "justify-center"], [1, "m-4", 3, "diameter"]], template: function ExploreBookingModalComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "header")(1, "h2");
-        \u0275\u0275text(2);
-        \u0275\u0275pipe(3, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275element(4, "div", 1);
-        \u0275\u0275template(5, ExploreBookingModalComponent_button_5_Template, 3, 0, "button", 2);
-        \u0275\u0275pipe(6, "async");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(7, ExploreBookingModalComponent_ng_container_7_Template, 6, 4, "ng-container", 3);
-        \u0275\u0275pipe(8, "async");
-        \u0275\u0275template(9, ExploreBookingModalComponent_ng_template_9_Template, 5, 4, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        const load_state_r3 = \u0275\u0275reference(10);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 4, "EXPLORE.BOOKING_HEADER"));
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(6, 6, ctx.loading));
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(8, 8, ctx.loading))("ngIfElse", load_state_r3);
-      }
-    }, dependencies: [NgIf, IconComponent, MatFormField, MatError, MatRipple, MatDialogClose, MatInput, MatProgressSpinner, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, DurationFieldComponent, UserSearchFieldComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\nheader[_ngcontent-%COMP%] {\n  max-width: calc(100vw + 100%);\n}\n[load][_ngcontent-%COMP%] {\n  width: 32rem;\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=explore-booking-modal.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreBookingModalComponent, { className: "ExploreBookingModalComponent", filePath: "libs/explore/src/lib/explore-booking-modal.component.ts", lineNumber: 135 });
-})();
-
-// libs/explore/src/lib/explore-icon.component.ts
-var ExploreIconComponent = class _ExploreIconComponent {
-  constructor(_details) {
-    this._details = _details;
-    this.icon = this._details.icon || { content: "done" };
-    this.color = this._details.color || "var(--in)";
-    this.text_color = this._details.text_color || "var(--inc)";
-  }
-  static {
-    this.\u0275fac = function ExploreIconComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _ExploreIconComponent)(\u0275\u0275directiveInject(MAP_FEATURE_DATA));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreIconComponent, selectors: [["explore-icon"]], standalone: false, decls: 2, vars: 5, consts: [[1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full", "border", "border-base-200", "shadow"], [1, "text-xl", 3, "icon"]], template: function ExploreIconComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "div", 0);
-        \u0275\u0275element(1, "app-icon", 1);
-        \u0275\u0275elementEnd();
-      }
-      if (rf & 2) {
-        \u0275\u0275styleProp("background-color", ctx.color)("color", ctx.text_color);
-        \u0275\u0275advance();
-        \u0275\u0275property("icon", ctx.icon);
-      }
-    }, dependencies: [IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  height: 100%;\n  width: 100%;\n  align-items: end;\n  justify-content: end;\n}\n/*# sourceMappingURL=explore-icon.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreIconComponent, { className: "ExploreIconComponent", filePath: "libs/explore/src/lib/explore-icon.component.ts", lineNumber: 29 });
-})();
-
-// libs/explore/src/lib/explore-space-info.component.ts
-function ExploreSpaceInfoComponent_ng_template_2_img_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 16);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("source", ctx_r1.space.images[0]);
-  }
-}
-function ExploreSpaceInfoComponent_ng_template_2_div_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "div", 17);
-  }
-}
-function ExploreSpaceInfoComponent_ng_template_2_div_11_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 18);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r1.available_until, " ");
-  }
-}
-function ExploreSpaceInfoComponent_ng_template_2_div_15_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 19)(1, "span");
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1("", \u0275\u0275pipeBind1(3, 3, "COMMON.CAPACITY"), ": ");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate2("", ctx_r1.space.capacity, " ", ctx_r1.space.capacity === 1 ? "person" : "people", " ");
-  }
-}
-function ExploreSpaceInfoComponent_ng_template_2_ul_16_li_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "li", 22);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const feature_r3 = ctx.$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", feature_r3, " ");
-  }
-}
-function ExploreSpaceInfoComponent_ng_template_2_ul_16_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "ul", 20);
-    \u0275\u0275template(1, ExploreSpaceInfoComponent_ng_template_2_ul_16_li_1_Template, 2, 1, "li", 21);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", ctx_r1.space.features);
-  }
-}
-function ExploreSpaceInfoComponent_ng_template_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 3);
-    \u0275\u0275element(1, "div", 4);
-    \u0275\u0275elementStart(2, "div", 5)(3, "div", 6);
-    \u0275\u0275template(4, ExploreSpaceInfoComponent_ng_template_2_img_4_Template, 1, 1, "img", 7)(5, ExploreSpaceInfoComponent_ng_template_2_div_5_Template, 1, 0, "div", 8);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "div", 9)(7, "div", 10);
-    \u0275\u0275text(8);
-    \u0275\u0275pipe(9, "uppercase");
-    \u0275\u0275pipe(10, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(11, ExploreSpaceInfoComponent_ng_template_2_div_11_Template, 2, 1, "div", 11);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "div", 12)(13, "h4", 13);
-    \u0275\u0275text(14);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(15, ExploreSpaceInfoComponent_ng_template_2_div_15_Template, 5, 5, "div", 14)(16, ExploreSpaceInfoComponent_ng_template_2_ul_16_Template, 2, 1, "ul", 15);
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275classProp("-translate-x-full", ctx_r1.x_pos === "end")("-translate-y-full", ctx_r1.y_pos === "bottom");
-    \u0275\u0275property("id", ctx_r1.space == null ? null : ctx_r1.space.id);
-    \u0275\u0275advance(3);
-    \u0275\u0275classProp("bg-neutral", ctx_r1.space.images[0])("h-32", ctx_r1.space.images[0])("h-8", !ctx_r1.space.images[0]);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.space.images[0]);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.space.images[0]);
-    \u0275\u0275advance(2);
-    \u0275\u0275classMap("text-light rounded border border-white p-1 px-2 capitalize shadow " + ctx_r1.status);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 22, ctx_r1.status === "not-bookable" ? "COMMON.STATUS_NOT_BOOKABLE" : "COMMON.STATUS_" + \u0275\u0275pipeBind1(9, 20, ctx_r1.status)), " ");
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", ctx_r1.status !== "not-bookable");
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", ctx_r1.space.display_name || ctx_r1.space.name, " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.space.capacity >= 0);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", (ctx_r1.space.features == null ? null : ctx_r1.space.features.length) > 0 && ctx_r1.show_features);
-  }
-}
-var ExploreSpaceInfoComponent = class _ExploreSpaceInfoComponent {
-  get show_features() {
-    return !this._settings.get("app.spaces.hide_features");
-  }
-  constructor(_details, _settings, _element) {
-    this._details = _details;
-    this._settings = _settings;
-    this._element = _element;
-    this.space = this._details.space;
-    this.events = this._details.events;
-    this.status = this._details.status;
-  }
-  ngOnInit() {
-    setTimeout(() => this.updateOffset(), 200);
-  }
-  updateOffset() {
-    const pos = this._element.nativeElement.getBoundingClientRect();
-    this.x_pos = pos.x < document.body.clientWidth / 2 ? "start" : "end";
-    this.y_pos = pos.y < document.body.clientHeight / 2 ? "top" : "bottom";
-  }
-  get available_until() {
-    return "";
-  }
-  static {
-    this.\u0275fac = function ExploreSpaceInfoComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _ExploreSpaceInfoComponent)(\u0275\u0275directiveInject(MAP_FEATURE_DATA), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(ElementRef));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreSpaceInfoComponent, selectors: [["explore-space-info"]], standalone: false, decls: 4, vars: 7, consts: [["tooltip", ""], ["space_tooltip", ""], ["customTooltip", "", 1, "pointer-events-auto", "relative", "hidden", "h-full", "w-full", "cursor-pointer", "sm:block", 3, "mouseenter", "content", "backdrop", "xPosition", "yPosition", "hover", "delay"], ["name", "space-info", 1, "pointer-events-none", "absolute", "left-0", "top-0", "transform", "overflow-hidden", "rounded", "bg-base-100", "shadow", 3, "id"], [1, "arrow"], [1, "relative"], [1, "relative", "flex", "w-full", "items-center", "justify-center", "overflow-hidden", "bg-opacity-20"], ["auth", "", "class", "min-h-full min-w-full object-cover", 3, "source", 4, "ngIf"], ["class", "absolute inset-0 bg-neutral opacity-30", 4, "ngIf"], [1, "absolute", "left-2", "top-2", "flex", "flex-wrap", "text-sm"], ["status", ""], ["available-until", "", 4, "ngIf"], [1, "flex", "flex-col", "px-2", "py-4"], [1, "mb-2", "px-2", "text-xl", "font-medium"], ["capacity", "", "class", "mb-2 px-2 text-base", 4, "ngIf"], ["class", "flex flex-wrap", 4, "ngIf"], ["auth", "", 1, "min-h-full", "min-w-full", "object-cover", 3, "source"], [1, "absolute", "inset-0", "bg-neutral", "opacity-30"], ["available-until", ""], ["capacity", "", 1, "mb-2", "px-2", "text-base"], [1, "flex", "flex-wrap"], ["class", "m-1 rounded-2xl bg-base-200 px-2 py-1 text-xs font-medium", 4, "ngFor", "ngForOf"], [1, "m-1", "rounded-2xl", "bg-base-200", "px-2", "py-1", "text-xs", "font-medium"]], template: function ExploreSpaceInfoComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "div", 2, 0);
-        \u0275\u0275listener("mouseenter", function ExploreSpaceInfoComponent_Template_div_mouseenter_0_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.updateOffset());
-        });
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(2, ExploreSpaceInfoComponent_ng_template_2_Template, 17, 24, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        const space_tooltip_r4 = \u0275\u0275reference(3);
-        \u0275\u0275property("content", space_tooltip_r4)("backdrop", false)("xPosition", "center")("yPosition", "center")("hover", true)("delay", 3e3);
-        \u0275\u0275attribute("id", (ctx.space == null ? null : ctx.space.map_id) || (ctx.space == null ? null : ctx.space.id));
-      }
-    }, dependencies: [NgForOf, NgIf, CustomTooltipComponent, AuthenticatedImageDirective, UpperCasePipe, TranslatePipe], styles: ["\n\n[name=space-info][_ngcontent-%COMP%] {\n  width: 16rem;\n}\n[status][_ngcontent-%COMP%] {\n  background-color: #43a047;\n  font-weight: 500;\n}\n[status].busy[_ngcontent-%COMP%] {\n  background-color: #e53935;\n}\n[status].pending[_ngcontent-%COMP%] {\n  background-color: #ffb300;\n}\n[status].not-bookable[_ngcontent-%COMP%] {\n  background-color: #757575;\n}\n/*# sourceMappingURL=explore-space-info.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreSpaceInfoComponent, { className: "ExploreSpaceInfoComponent", filePath: "libs/explore/src/lib/explore-space-info.component.ts", lineNumber: 137 });
-})();
-
-// libs/explore/src/lib/explore-spaces.service.ts
-var DEFAULT_COLOURS = {
-  free: "#43a047",
-  pending: "#ffb300",
-  reserved: "#e65100",
-  busy: "#e53935",
-  "signs-of-life": "#1565c0",
-  "not-bookable": "#757575",
-  unknown: "#757575"
-};
-var ExploreSpacesService = class _ExploreSpacesService extends AsyncHandler {
-  constructor(_state, _settings, _event_form, _dialog, _org) {
-    super();
-    this._state = _state;
-    this._settings = _settings;
-    this._event_form = _event_form;
-    this._dialog = _dialog;
-    this._org = _org;
-    this._bookings = {};
-    this._statuses = {};
-    this._presence = {};
-    this._panning = true;
-    this._last_action = "";
-    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => hu(bld.id, `room_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_3) => _3?.details instanceof Array ? _3.details : []), shareReplay(1));
-    this.room_alerts = this._org.active_building.pipe(filter((bld) => !!bld), switchMap(() => hu(this._org.organisation.id, `room_alerts`).pipe(catchError(() => of({ details: {} })))), map((_3) => _3.details || {}), shareReplay(1));
-    this._bind = combineLatest([
-      this._state.spaces,
-      this._state.options
-    ]).pipe(filter(([_3, { is_public }]) => !is_public), map(([list2]) => {
-      this.unsubWith("b-");
-      this.unsubWith("s-");
-      this.unsubWith("c-");
-      this._statuses = {};
-      if (!list2?.length)
-        return;
-      for (const space of list2) {
-        const mod = Oa(space.id, "Bookings");
-        let binding = mod.binding("bookings");
-        this.subscription(`b-${space.id}`, binding.listen().subscribe((d) => this.handleBookingsChange(list2, space, d)));
-        this.subscription(`b-bind-${space.id}`, binding.bind());
-        binding = mod.binding("status");
-        this.subscription(`s-${space.id}`, binding.listen().subscribe((d) => this.handleStatusChange(list2, space, d)));
-        this.subscription(`s-bind-${space.id}`, binding.bind());
-        binding = mod.binding("presence");
-        this.subscription(`c-${space.id}`, binding.listen().subscribe((d) => this.handlePresenceChange(list2, space, d)));
-        this.subscription(`c-bind-${space.id}`, binding.bind());
-      }
-      this.updateActions(list2);
-      this._updateHoverElements(list2);
-    }));
-    this.subscription("spaces", this._bind.subscribe());
-  }
-  bookSpace(space, force = false) {
-    return __async(this, null, function* () {
-      if (this._panning && this._last_action === "down")
-        return;
-      const booking_rules = yield nextValueFrom(this.booking_rules);
-      const room_alerts = yield nextValueFrom(this.room_alerts);
-      const { hidden } = rulesForResource({
-        date: Date.now(),
-        duration: 60,
-        resource: space,
-        host: currentUser()
-      }, booking_rules) || {};
-      if (hidden) {
-        return notifyError(i18n("EXPLORE.SPACES_PERMISSIONS_ERROR"));
-      }
-      if (this._statuses[space.id] !== "free" && !force || !space.bookable) {
-        return notifyError(i18n("EXPLORE.SPACES_UNAVAILABLE_ERROR", {
-          name: space.display_name || space.name
-        }));
-      }
-      this._event_form.newForm();
-      this._event_form.form.patchValue({
-        host: currentUser()?.email,
-        resources: [space]
-      });
-      if (room_alerts[space.id]?.[0] === "closed") {
-        return notifyError(`${room_alerts[space.id][1]}`);
-      }
-      if (this._settings.get("app.events.booking_unavailable")) {
-        return this._event_form.openEventLinkModal();
-      }
-      this._dialog.open(this._settings.get("app.explore.show_booking_qr") ? ExploreBookQrComponent : ExploreBookingModalComponent, {
-        data: { space, alert: room_alerts[space.id] }
-      });
-    });
-  }
-  handleBookingsChange(spaces, space, bookings) {
-    if (!bookings)
-      return;
-    this._bookings[space.id] = bookings.map((i) => new CalendarEvent(i));
-    this.timeout("update_hover_els", () => this._updateHoverElements(spaces), 100);
-  }
-  handleStatusChange(spaces, space, status) {
-    if (space.bookable)
-      this._statuses[space.id] = status || "free";
-    else
-      delete this._statuses[space.id];
-    this.timeout("update_statuses", () => {
-      this.clearTimeout("update_hover_els");
-      this._updateStatus(spaces);
-      this._updateHoverElements(spaces);
-    }, 100);
-  }
-  handlePresenceChange(spaces, space, presence) {
-    this._presence[space.id] = presence;
-    this.timeout("update_icons", () => this._updateIcons(spaces), 100);
-  }
-  _updateStatus(spaces) {
-    return __async(this, null, function* () {
-      const style_map = {};
-      const colours = this._settings.get("app.explore.colors") || {};
-      for (const space of spaces) {
-        if (!this._statuses[space.id])
-          continue;
-        const status = this._statuses[space.id];
-        style_map[`#${space.map_id}`] = {
-          fill: colours[`space-${status}`] || colours[`${status}`] || DEFAULT_COLOURS[`${status}`],
-          opacity: 0.6
-        };
-      }
-      this._state.setStyles("spaces", style_map);
-    });
-  }
-  _updateHoverElements(spaces) {
-    const features = [];
-    for (const space of spaces) {
-      if (!space.map_id)
-        continue;
-      features.push({
-        location: space.map_id,
-        full_size: true,
-        no_scale: true,
-        content: ExploreSpaceInfoComponent,
-        z_index: 10,
-        data: {
-          space: new Space(space),
-          events: this._bookings[space.id],
-          status: this._statuses[space.id] || "not-bookable"
-        }
-      });
-    }
-    this._state.setFeatures("spaces", features);
-  }
-  _updateIcons(spaces) {
-    if (!this._settings.get("app.show_presence_indicators"))
-      return;
-    const features = [];
-    for (const space of spaces) {
-      if (!space.map_id)
-        continue;
-      features.push({
-        location: space.map_id,
-        content: ExploreIconComponent,
-        data: {
-          icon: {
-            class: "material-symbols-rounded",
-            content: "sensor_occupied"
-          },
-          color: this._presence[space.id] ? "var(--su)" : "var(--bc)",
-          text_color: this._presence[space.id] ? "var(--suc)" : "var(--b1)"
-        },
-        z_index: 98
-      });
-    }
-    this._state.setFeatures("spaces-presence", features);
-  }
-  updateActions(spaces) {
-    const actions = [];
-    for (const space of spaces) {
-      if (!space.map_id)
-        continue;
-      for (const action of ["mousedown", "touchstart"]) {
-        actions.push({
-          id: space.map_id,
-          action,
-          priority: 5,
-          callback: () => {
-            this._panning = false;
-            this.timeout("panning", () => this._panning = true, 300);
-            this._last_action = "down";
-          }
-        });
-      }
-      for (const action of ["mouseup", "touchend"]) {
-        actions.push({
-          id: space.map_id,
-          action,
-          priority: 5,
-          callback: () => {
-            this.bookSpace(space);
-            this._last_action = "up";
-          }
-        });
-      }
-    }
-    this.timeout("set-actions", () => this._state.setActions("spaces", actions), 50);
-  }
-  static {
-    this.\u0275fac = function ExploreSpacesService_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _ExploreSpacesService)(\u0275\u0275inject(ExploreStateService), \u0275\u0275inject(SettingsService), \u0275\u0275inject(EventFormService), \u0275\u0275inject(MatDialog), \u0275\u0275inject(OrganisationService));
-    };
-  }
-  static {
-    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ExploreSpacesService, factory: _ExploreSpacesService.\u0275fac });
-  }
-};
 
 // libs/explore/src/lib/explore-desks.service.ts
 var ExploreDesksService = class _ExploreDesksService extends AsyncHandler {
@@ -153719,8 +158557,8 @@ var UserAvailabilityComponent = class _UserAvailabilityComponent {
 })();
 
 // libs/users/src/lib/find-availability-modal/find-availability-modal.component.ts
-var _c072 = ["container"];
-var _c142 = () => [];
+var _c082 = ["container"];
+var _c147 = () => [];
 function FindAvailabilityModalComponent_div_13_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 32)(1, "span");
@@ -153799,7 +158637,7 @@ function FindAvailabilityModalComponent_user_availability_list_37_Template(rf, c
   if (rf & 2) {
     const user_r8 = ctx.$implicit;
     const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275property("user", user_r8)("date", ctx_r3.date)("availability", \u0275\u0275pipeBind1(1, 3, ctx_r3.availability) ? \u0275\u0275pipeBind1(2, 5, ctx_r3.availability)[user_r8.email.toLowerCase()] : \u0275\u0275pureFunction0(7, _c142));
+    \u0275\u0275property("user", user_r8)("date", ctx_r3.date)("availability", \u0275\u0275pipeBind1(1, 3, ctx_r3.availability) ? \u0275\u0275pipeBind1(2, 5, ctx_r3.availability)[user_r8.email.toLowerCase()] : \u0275\u0275pureFunction0(7, _c147));
   }
 }
 var FindAvailabilityModalComponent = class _FindAvailabilityModalComponent extends AsyncHandler {
@@ -153944,7 +158782,7 @@ var FindAvailabilityModalComponent = class _FindAvailabilityModalComponent exten
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FindAvailabilityModalComponent, selectors: [["find-availability-modal"]], viewQuery: function FindAvailabilityModalComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c072, 7);
+        \u0275\u0275viewQuery(_c082, 7);
       }
       if (rf & 2) {
         let _t4;
@@ -154064,7 +158902,7 @@ var FindAvailabilityModalComponent = class _FindAvailabilityModalComponent exten
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ctx.move_time);
         \u0275\u0275advance(3);
-        \u0275\u0275property("user", ctx.host)("date", ctx.date)("availability", \u0275\u0275pipeBind1(35, 28, ctx.availability) ? \u0275\u0275pipeBind1(36, 30, ctx.availability)[ctx.host.email] : \u0275\u0275pureFunction0(36, _c142));
+        \u0275\u0275property("user", ctx.host)("date", ctx.date)("availability", \u0275\u0275pipeBind1(35, 28, ctx.availability) ? \u0275\u0275pipeBind1(36, 30, ctx.availability)[ctx.host.email] : \u0275\u0275pureFunction0(36, _c147));
         \u0275\u0275advance(3);
         \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(38, 32, ctx.users));
         \u0275\u0275advance(3);
@@ -154254,722 +159092,6 @@ var SharedUsersModule = class _SharedUsersModule {
   }
 };
 
-// libs/events/src/lib/attendee-list.component.ts
-function AttendeeListComponent_button_2_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 7);
-    \u0275\u0275listener("click", function AttendeeListComponent_button_2_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.close.emit());
-    });
-    \u0275\u0275elementStart(1, "app-icon");
-    \u0275\u0275text(2, "arrow_back");
-    \u0275\u0275elementEnd()();
-  }
-}
-function AttendeeListComponent_div_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "div", 8);
-  }
-}
-function AttendeeListComponent_ng_container_7_div_1_div_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 17);
-    \u0275\u0275text(1, " Host ");
-    \u0275\u0275elementEnd();
-  }
-}
-function AttendeeListComponent_ng_container_7_div_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 10);
-    \u0275\u0275element(1, "a-user-avatar", 11);
-    \u0275\u0275elementStart(2, "div", 12)(3, "div", 13);
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(5, AttendeeListComponent_ng_container_7_div_1_div_5_Template, 2, 0, "div", 14);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "div", 15);
-    \u0275\u0275element(7, "div", 16);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const user_r3 = \u0275\u0275nextContext().$implicit;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("user", user_r3);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(user_r3.name);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.host === user_r3.email);
-    \u0275\u0275advance(2);
-    \u0275\u0275classProp("bg-success", user_r3.checked_in)("bg-pending", !user_r3.checked_in);
-    \u0275\u0275property("matTooltip", user_r3.checked_in ? "Checked in" : "Not checked in");
-  }
-}
-function AttendeeListComponent_ng_container_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, AttendeeListComponent_ng_container_7_div_1_Template, 8, 8, "div", 9);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const user_r3 = ctx.$implicit;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !user_r3.resource && (ctx_r1.host !== user_r3.email || ctx_r1.show_host));
-  }
-}
-var AttendeeListComponent = class _AttendeeListComponent {
-  constructor() {
-    this.host = "";
-    this.show_host = true;
-    this.list = [];
-    this.hide_close = false;
-    this.custom_title = "";
-    this.close = new EventEmitter();
-  }
-  static {
-    this.\u0275fac = function AttendeeListComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _AttendeeListComponent)();
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AttendeeListComponent, selectors: [["attendee-list"]], inputs: { host: "host", show_host: "show_host", list: "list", hide_close: "hide_close", custom_title: "custom_title" }, outputs: { close: "close" }, standalone: false, decls: 8, vars: 5, consts: [[1, "flex", "h-full", "w-full", "flex-col", "overflow-hidden", "bg-base-100"], [1, "flex", "min-h-12", "items-center", "border-b", "border-base-200", "p-2"], ["close", "", "icon", "", "matRipple", "", 3, "click", 4, "ngIf"], [1, "flex-1", "text-center", "font-medium"], ["class", "w-12", 4, "ngIf"], [1, "w-full", "flex-1", "overflow-auto"], [4, "ngFor", "ngForOf"], ["close", "", "icon", "", "matRipple", "", 3, "click"], [1, "w-12"], ["attendee", "", "class", "flex items-center space-x-2 p-2 hover:bg-base-200", 4, "ngIf"], ["attendee", "", 1, "flex", "items-center", "space-x-2", "p-2", "hover:bg-base-200"], [3, "user"], [1, "w-1/2", "flex-1"], [1, "truncate"], ["class", "text-sm opacity-60", 4, "ngIf"], [1, "p-2"], [1, "h-3", "w-3", "rounded-full", 3, "matTooltip"], [1, "text-sm", "opacity-60"]], template: function AttendeeListComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
-        \u0275\u0275template(2, AttendeeListComponent_button_2_Template, 3, 0, "button", 2);
-        \u0275\u0275elementStart(3, "div", 3);
-        \u0275\u0275text(4);
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(5, AttendeeListComponent_div_5_Template, 1, 0, "div", 4);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(6, "div", 5);
-        \u0275\u0275template(7, AttendeeListComponent_ng_container_7_Template, 2, 1, "ng-container", 6);
-        \u0275\u0275elementEnd()();
-      }
-      if (rf & 2) {
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !ctx.hide_close);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate2(" ", ctx.list.length, " ", ctx.custom_title ? ctx.custom_title : ctx.list.length === 1 ? "Attendee" : "Attendees", " ");
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", !ctx.hide_close);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngForOf", ctx.list);
-      }
-    }, dependencies: [NgForOf, NgIf, IconComponent, UserAvatarComponent, MatRipple, MatTooltip], encapsulation: 2 });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AttendeeListComponent, { className: "AttendeeListComponent", filePath: "libs/events/src/lib/attendee-list.component.ts", lineNumber: 71 });
-})();
-
-// libs/events/src/lib/group-event-details-modal.component.ts
-var _c073 = (a0) => ({ name: a0 });
-var _c143 = (a0, a1) => ({ going: a0, interested: a1 });
-function GroupEventDetailsModalComponent_img_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 36);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("source", ctx_r1.event.extension_data == null ? null : ctx_r1.event.extension_data.images[0]);
-  }
-}
-function GroupEventDetailsModalComponent_div_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 37)(1, "app-icon", 38);
-    \u0275\u0275text(2, "star");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div", 39);
-    \u0275\u0275text(4);
-    \u0275\u0275pipe(5, "translate");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 1, "CALENDAR_EVENT.GROUP_FEATURED"), " ");
-  }
-}
-function GroupEventDetailsModalComponent_ng_container_12_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "div", 40)(2, "app-icon");
-    \u0275\u0275text(3, "star");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 41);
-    \u0275\u0275text(5);
-    \u0275\u0275pipe(6, "translate");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(7, "div", 40)(8, "app-icon");
-    \u0275\u0275text(9, "help");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "div", 41);
-    \u0275\u0275text(11);
-    \u0275\u0275pipe(12, "translate");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275classProp("bg-base-200", !ctx_r1.is_interested)("text-base-content", !ctx_r1.is_interested)("opacity-30", !ctx_r1.is_interested)("bg-success", ctx_r1.is_interested)("text-success-content", ctx_r1.is_interested)("opacity-100", ctx_r1.is_interested);
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 26, ctx_r1.is_interested ? "CALENDAR_EVENT.GROUP_INTERESTED" : "CALENDAR_EVENT.GROUP_NOT_INTERESTED"), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275classProp("bg-base-200", !ctx_r1.is_going)("text-base-content", !ctx_r1.is_going)("opacity-30", !ctx_r1.is_going)("bg-success", ctx_r1.is_going)("text-success-content", ctx_r1.is_going)("opacity-100", ctx_r1.is_going);
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(12, 28, ctx_r1.is_going ? "CALENDAR_EVENT.GROUP_GOING" : "CALENDAR_EVENT.GROUP_NOT_GOING"), " ");
-  }
-}
-function GroupEventDetailsModalComponent_div_92_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div");
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "space");
-    \u0275\u0275pipe(3, "async");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    let tmp_3_0;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", (tmp_3_0 = \u0275\u0275pipeBind1(3, 3, \u0275\u0275pipeBind1(2, 1, ctx_r1.system_id))) == null ? null : tmp_3_0.display_name, " ");
-  }
-}
-function GroupEventDetailsModalComponent_div_93_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 42);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_UNCONFIRMED"), " ");
-  }
-}
-function GroupEventDetailsModalComponent_div_94_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 42);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, ctx_r1.is_onsite ? "CALENDAR_EVENT.GROUP_BOTH_LOCATIONS" : "CALENDAR_EVENT.GROUP_REMOTE"), " ");
-  }
-}
-function GroupEventDetailsModalComponent_span_108_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 42);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_NO_DESCRIPTION"), " ");
-  }
-}
-function GroupEventDetailsModalComponent_div_110_interactive_map_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "interactive-map", 50);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("src", ctx_r1.level == null ? null : ctx_r1.level.map_id)("features", ctx_r1.features)("styles", ctx_r1.styles);
-  }
-}
-function GroupEventDetailsModalComponent_div_110_div_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div");
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "space");
-    \u0275\u0275pipe(3, "async");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    let tmp_4_0;
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", (tmp_4_0 = \u0275\u0275pipeBind1(3, 3, \u0275\u0275pipeBind1(2, 1, ctx_r1.system_id))) == null ? null : tmp_4_0.display_name, " ");
-  }
-}
-function GroupEventDetailsModalComponent_div_110_div_6_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 42);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_UNCONFIRMED"), " ");
-  }
-}
-function GroupEventDetailsModalComponent_div_110_span_8_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate2(" ", ctx_r1.building.display_name || ctx_r1.building.name, ", ", (ctx_r1.level == null ? null : ctx_r1.level.display_name) || (ctx_r1.level == null ? null : ctx_r1.level.name), " ");
-  }
-}
-function GroupEventDetailsModalComponent_div_110_span_9_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 42);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_NO_LOCATION"), " ");
-  }
-}
-function GroupEventDetailsModalComponent_div_110_a_10_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 51);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275classProp("underline", ctx_r1.event.meeting_url);
-    \u0275\u0275property("href", ctx_r1.event.meeting_url, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 4, ctx_r1.is_onsite ? "CALENDAR_EVENT.GROUP_BOTH_LOCATIONS" : "CALENDAR_EVENT.GROUP_REMOTE"), " ");
-  }
-}
-function GroupEventDetailsModalComponent_div_110_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 43)(1, "div", 44)(2, "button", 45);
-    \u0275\u0275listener("click", function GroupEventDetailsModalComponent_div_110_Template_button_click_2_listener() {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.viewLocation());
-    });
-    \u0275\u0275template(3, GroupEventDetailsModalComponent_div_110_interactive_map_3_Template, 1, 3, "interactive-map", 46);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 47);
-    \u0275\u0275template(5, GroupEventDetailsModalComponent_div_110_div_5_Template, 4, 5, "div", 12)(6, GroupEventDetailsModalComponent_div_110_div_6_Template, 3, 3, "div", 30);
-    \u0275\u0275elementStart(7, "div", 48);
-    \u0275\u0275template(8, GroupEventDetailsModalComponent_div_110_span_8_Template, 2, 2, "span", 12)(9, GroupEventDetailsModalComponent_div_110_span_9_Template, 3, 3, "span", 30);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(10, GroupEventDetailsModalComponent_div_110_a_10_Template, 3, 6, "a", 49);
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", !ctx_r1.showing_map);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.is_onsite && ctx_r1.has_space);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.is_onsite && !ctx_r1.has_space);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.building && ctx_r1.level);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.building || !ctx_r1.level);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.is_online);
-  }
-}
-function GroupEventDetailsModalComponent_div_111_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 52)(1, "button", 53);
-    \u0275\u0275listener("click", function GroupEventDetailsModalComponent_div_111_Template_button_click_1_listener() {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.show_attendees = false);
-    });
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "div", 54)(3, "attendee-list", 55);
-    \u0275\u0275listener("click", function GroupEventDetailsModalComponent_div_111_Template_attendee_list_click_3_listener() {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.show_attendees = false);
-    });
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
-    \u0275\u0275property("show_host", false)("list", ctx_r1.event.attendees)("host", ctx_r1.event.user_email);
-  }
-}
-var GroupEventDetailsModalComponent = class _GroupEventDetailsModalComponent {
-  get time_format() {
-    return this._settings.time_format;
-  }
-  get featured() {
-    return this.event.featured || this.event.extension_data?.featured;
-  }
-  get is_onsite() {
-    return this.event.extension_data.attendance_type !== "ONLINE";
-  }
-  get has_space() {
-    return !!this.space?.id;
-  }
-  get is_online() {
-    return !this.is_onsite || this.event.extension_data.attendance_type === "ANY";
-  }
-  get body() {
-    if (this.is_online)
-      return this.event.body;
-    let body = this.event.body;
-    const remove_blocks = [
-      `<div style="margin-bottom:24px; overflow:hidden; white-space:nowrap">________________________________________________________________________________</div>`,
-      `<p>________________________________________________________________________________</p>`
-    ];
-    for (const block2 of remove_blocks) {
-      const first2 = body.indexOf(block2);
-      const last4 = body.lastIndexOf(block2);
-      body = body.substring(0, first2) + body.substring(last4);
-    }
-    for (const block2 of remove_blocks) {
-      body = body.replace(block2, "");
-    }
-    return body;
-  }
-  get attendance() {
-    return this.event.attendees?.filter((_3) => _3.checked_in)?.length || 0;
-  }
-  get is_interested() {
-    return !!this.guest_details;
-  }
-  get is_going() {
-    return this.guest_details?.checked_in;
-  }
-  get system_id() {
-    return this.space?.id;
-  }
-  get guest_details() {
-    const user = currentUser();
-    return this.event.attendees?.find((_3) => _3.email === user.email);
-  }
-  get group_event_calendar() {
-    return this._settings.get("app.group_events_calendar");
-  }
-  constructor(_data, _org, _settings, _dialog, _dialog_ref) {
-    this._data = _data;
-    this._org = _org;
-    this._settings = _settings;
-    this._dialog = _dialog;
-    this._dialog_ref = _dialog_ref;
-    this.edit = this._data.edit_fn;
-    this.remove = this._data.remove_fn;
-    this.event = this._data.event;
-    this.concierge = this._data.concierge;
-    this.features = [];
-    this.locate = "";
-    this.showing_map = false;
-    this.show_attendees = false;
-    this.styles = {};
-    this.raw_description = "";
-  }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      const space_pipe = new SpacePipe(this._org);
-      const resource = this.event.resources.find((_3) => _3.email !== this.group_event_calendar);
-      this.space = yield space_pipe.transform(resource?.id || resource?.email);
-      const map_id = this.event.extension_data?.map_id;
-      const id = this.space?.map_id || map_id;
-      if (id) {
-        this.styles[`#${id}`] = { fill: "green" };
-        this.features = [
-          {
-            location: id,
-            content: MapPinComponent,
-            data: {}
-          }
-        ];
-      }
-      const zones = this.space?.zones || [];
-      this.level = this._org.levelWithID(zones);
-      this.building = this._org.buildings.find((_3) => zones.includes(_3.id)) || this._org.building;
-      this.locate = map_id || "";
-      this.raw_description = this.removeHtmlTags(this.event.body);
-    });
-  }
-  removeHtmlTags(html2) {
-    const doc = new DOMParser().parseFromString(html2, "text/html");
-    return (doc.body.textContent || "").trim();
-  }
-  viewLocation() {
-    if (!this.space?.map_id) {
-      return notifyInfo("Unable to locate space on map.");
-    }
-    this.showing_map = true;
-    const ref = this._dialog.open(MapLocateModalComponent, {
-      maxWidth: "95vw",
-      maxHeight: "95vh",
-      data: { item: this.space }
-    });
-    ref.afterClosed().subscribe(() => {
-      this.showing_map = false;
-    });
-  }
-  toggleInterest() {
-    return __async(this, null, function* () {
-      let user = this.guest_details;
-      if (this.is_interested && user) {
-        yield removeEventGuest(this.event.id, currentUser(), {
-          system_id: this.event.system?.id
-        }).toPromise();
-        this.event.attendees = (this.event.attendees || []).filter((_3) => _3.email !== user.email);
-      } else {
-        user = yield addEventGuest(this.event.id, currentUser(), {
-          system_id: this.event.system?.id
-        }).toPromise();
-        this.event.attendees = unique([...this.event.attendees || [], user], "email");
-      }
-    });
-  }
-  toggleAttendance() {
-    return __async(this, null, function* () {
-      let user = this.guest_details;
-      if (!user) {
-        user = yield addEventGuest(this.event.id, currentUser(), {
-          system_id: this.event.system?.id
-        }).toPromise();
-        this.event.attendees = unique([...this.event.attendees || [], user], "email");
-      }
-      user = __spreadValues(__spreadValues({}, currentUser()), user || {});
-      if (!user.email)
-        return;
-      yield checkinEventGuest(this.event.id, user.email, !this.is_going, {
-        system_id: this.event.system?.id
-      }).toPromise();
-      const guest = this.event.attendees.find((_3) => _3.email === user.email);
-      if (!guest)
-        return;
-      guest.checked_in = !this.is_going;
-    });
-  }
-  static {
-    this.\u0275fac = function GroupEventDetailsModalComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _GroupEventDetailsModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(MatDialogRef));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GroupEventDetailsModalComponent, selectors: [["group-event-details-modal"]], standalone: false, decls: 112, vars: 73, consts: [["concierge_menu", "matMenu"], ["menu", "matMenu"], [1, "relative", "max-h-[80vh]", "w-[48rem]", "max-w-[calc(100vw-1rem)]", "overflow-hidden"], [1, "relative", "flex", "h-52", "w-full", "items-center", "justify-between", "overflow-hidden", "bg-base-200"], ["auth", "", "class", "absolute left-1/2 top-1/2 min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 object-cover", 3, "source", 4, "ngIf"], ["class", "absolute left-0 top-0 flex items-center space-x-2 rounded-br bg-info py-2 pl-2 pr-4 text-sm text-info-content", 4, "ngIf"], ["icon", "", "mat-dialog-close", "", 1, "absolute", "right-1", "top-1", "overflow-hidden"], [1, "absolute", "inset-0", "z-0", "bg-base-100", "opacity-30"], [1, "z-10"], [1, "flex", "items-center", "justify-between", "border-b", "border-base-200", "px-8", "py-4"], [1, "text-left", "text-xl"], [1, "flex", "items-center", "space-x-2"], [4, "ngIf"], ["btn", "", "matRipple", "", 1, "clear", "w-[2.75rem]", "bg-base-200", "text-base-content", 3, "disabled", "matMenuTriggerFor"], [1, "text-2xl"], ["mat-menu-item", "", 3, "disabled"], [1, "mr-2"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "click"], ["mat-menu-item", "", 3, "click"], [1, "text-2xl", "text-error"], ["mat-menu-item", "", 1, "flex", "items-center", "space-x-2", 3, "click"], [1, "flex", "max-h-[calc(80vh-18rem)]", "flex-1", "space-x-6", "overflow-y-auto", "overflow-x-hidden", "p-8"], [1, "flex", "w-1/3", "flex-1", "flex-col", "space-y-2"], [1, "flex", "items-center", "space-x-4"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full", "bg-base-200"], [1, "pt-4", "font-medium"], [1, "flex", "flex-col"], [1, "text-sm"], [1, "text-sm", "opacity-30"], [1, "flex", "flex-col", "text-sm"], ["class", "opacity-30", 4, "ngIf"], ["matRipple", "", 1, "flex", "min-h-12", "items-center", "space-x-4", "rounded", 3, "click"], [1, "pb-4", "text-sm"], ["event-details", "", 3, "innerHTML"], ["class", "flex w-[20rem]", 4, "ngIf"], ["class", "absolute inset-0 z-50", 4, "ngIf"], ["auth", "", 1, "absolute", "left-1/2", "top-1/2", "min-h-full", "min-w-full", "-translate-x-1/2", "-translate-y-1/2", "object-cover", 3, "source"], [1, "absolute", "left-0", "top-0", "flex", "items-center", "space-x-2", "rounded-br", "bg-info", "py-2", "pl-2", "pr-4", "text-sm", "text-info-content"], [1, "text-base"], [1, "uppercase"], ["btn", "", 1, "flex", "h-10", "items-center", "space-x-2", "rounded", "px-4"], [1, "pr-2"], [1, "opacity-30"], [1, "flex", "w-[20rem]"], [1, "w-full", "border", "border-base-300"], ["matRipple", "", 1, "relative", "h-40", "w-full", "bg-base-200", 3, "click"], [3, "src", "features", "styles", 4, "ngIf"], [1, "space-y-2", "p-4"], [1, "!mt-0", "text-sm", "opacity-30"], ["class", "mt-4 opacity-30", "target", "_blank", "rel", "noopener noreferrer", 3, "underline", "href", 4, "ngIf"], [3, "src", "features", "styles"], ["target", "_blank", "rel", "noopener noreferrer", 1, "mt-4", "opacity-30", 3, "href"], [1, "absolute", "inset-0", "z-50"], [1, "absolute", "inset-0", "bg-base-content", "opacity-60", 3, "click"], [1, "absolute", "inset-y-8", "left-1/2", "w-[24rem]", "-translate-x-1/2", "overflow-hidden", "rounded", "shadow"], [3, "click", "show_host", "list", "host"]], template: function GroupEventDetailsModalComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "div", 2)(1, "div", 3);
-        \u0275\u0275template(2, GroupEventDetailsModalComponent_img_2_Template, 1, 1, "img", 4);
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(3, GroupEventDetailsModalComponent_div_3_Template, 6, 3, "div", 5);
-        \u0275\u0275elementStart(4, "button", 6);
-        \u0275\u0275element(5, "div", 7);
-        \u0275\u0275elementStart(6, "app-icon", 8);
-        \u0275\u0275text(7, "close");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(8, "div", 9)(9, "h3", 10);
-        \u0275\u0275text(10);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(11, "div", 11);
-        \u0275\u0275template(12, GroupEventDetailsModalComponent_ng_container_12_Template, 13, 30, "ng-container", 12);
-        \u0275\u0275elementStart(13, "button", 13)(14, "app-icon", 14);
-        \u0275\u0275text(15, "more_horiz");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(16, "mat-menu", null, 0)(18, "button", 15)(19, "div", 11)(20, "app-icon", 14);
-        \u0275\u0275text(21, " confirmation_number ");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(22, "div", 16);
-        \u0275\u0275text(23);
-        \u0275\u0275pipe(24, "translate");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(25, "button", 17);
-        \u0275\u0275listener("click", function GroupEventDetailsModalComponent_Template_button_click_25_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.edit ? ctx.edit(ctx.event) : "");
-        });
-        \u0275\u0275elementStart(26, "div", 11)(27, "app-icon", 14);
-        \u0275\u0275text(28, "edit");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(29, "div", 16);
-        \u0275\u0275text(30);
-        \u0275\u0275pipe(31, "translate");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(32, "button", 15)(33, "div", 11)(34, "app-icon", 14);
-        \u0275\u0275text(35, "content_copy");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(36, "div", 16);
-        \u0275\u0275text(37);
-        \u0275\u0275pipe(38, "translate");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(39, "button", 18);
-        \u0275\u0275listener("click", function GroupEventDetailsModalComponent_Template_button_click_39_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.remove ? ctx.remove(ctx.event, false) : "");
-        });
-        \u0275\u0275elementStart(40, "div", 11)(41, "app-icon", 19);
-        \u0275\u0275text(42, " delete ");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(43, "div", 16);
-        \u0275\u0275text(44);
-        \u0275\u0275pipe(45, "translate");
-        \u0275\u0275elementEnd()()()();
-        \u0275\u0275elementStart(46, "mat-menu", null, 1)(48, "button", 20);
-        \u0275\u0275listener("click", function GroupEventDetailsModalComponent_Template_button_click_48_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.toggleInterest());
-        });
-        \u0275\u0275elementStart(49, "div", 11)(50, "app-icon");
-        \u0275\u0275text(51, " star ");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(52, "span");
-        \u0275\u0275text(53);
-        \u0275\u0275pipe(54, "translate");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(55, "button", 18);
-        \u0275\u0275listener("click", function GroupEventDetailsModalComponent_Template_button_click_55_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.toggleAttendance());
-        });
-        \u0275\u0275elementStart(56, "div", 11)(57, "app-icon");
-        \u0275\u0275text(58, " help ");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(59, "span");
-        \u0275\u0275text(60);
-        \u0275\u0275pipe(61, "translate");
-        \u0275\u0275elementEnd()()()()()();
-        \u0275\u0275elementStart(62, "div", 21)(63, "div", 22)(64, "div", 23)(65, "div", 24)(66, "app-icon");
-        \u0275\u0275text(67, "person");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(68, "div");
-        \u0275\u0275text(69);
-        \u0275\u0275pipe(70, "translate");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(71, "h3", 25);
-        \u0275\u0275text(72);
-        \u0275\u0275pipe(73, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(74, "div", 23)(75, "div", 24)(76, "app-icon");
-        \u0275\u0275text(77, "calendar_today");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(78, "div", 26)(79, "div", 27);
-        \u0275\u0275text(80);
-        \u0275\u0275pipe(81, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(82, "div", 28);
-        \u0275\u0275text(83);
-        \u0275\u0275pipe(84, "date");
-        \u0275\u0275pipe(85, "date");
-        \u0275\u0275pipe(86, "date");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(87, "div", 23)(88, "div", 24)(89, "app-icon");
-        \u0275\u0275text(90, "place");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(91, "div", 29);
-        \u0275\u0275template(92, GroupEventDetailsModalComponent_div_92_Template, 4, 5, "div", 12)(93, GroupEventDetailsModalComponent_div_93_Template, 3, 3, "div", 30)(94, GroupEventDetailsModalComponent_div_94_Template, 3, 3, "div", 30);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(95, "button", 31);
-        \u0275\u0275listener("click", function GroupEventDetailsModalComponent_Template_button_click_95_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.show_attendees = true);
-        });
-        \u0275\u0275elementStart(96, "div", 24)(97, "app-icon");
-        \u0275\u0275text(98, "person");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(99, "div");
-        \u0275\u0275text(100);
-        \u0275\u0275pipe(101, "translate");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(102, "h3", 25);
-        \u0275\u0275text(103);
-        \u0275\u0275pipe(104, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(105, "div", 32);
-        \u0275\u0275element(106, "span", 33);
-        \u0275\u0275pipe(107, "sanitize");
-        \u0275\u0275template(108, GroupEventDetailsModalComponent_span_108_Template, 3, 3, "span", 30);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(109, "div");
-        \u0275\u0275template(110, GroupEventDetailsModalComponent_div_110_Template, 11, 6, "div", 34);
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275template(111, GroupEventDetailsModalComponent_div_111_Template, 4, 3, "div", 35);
-      }
-      if (rf & 2) {
-        const concierge_menu_r5 = \u0275\u0275reference(17);
-        const menu_r6 = \u0275\u0275reference(47);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.event.extension_data == null ? null : ctx.event.extension_data.images == null ? null : ctx.event.extension_data.images.length);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.featured);
-        \u0275\u0275advance(7);
-        \u0275\u0275textInterpolate1(" ", ctx.event.title, " ");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !ctx.concierge);
-        \u0275\u0275advance();
-        \u0275\u0275property("disabled", ctx.event.state === "done")("matMenuTriggerFor", ctx.concierge ? concierge_menu_r5 : menu_r6);
-        \u0275\u0275advance(5);
-        \u0275\u0275property("disabled", true);
-        \u0275\u0275advance(5);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(24, 33, "CALENDAR_EVENT.GROUP_PREMOTE"), " ");
-        \u0275\u0275advance(7);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(31, 35, "CALENDAR_EVENT.GROUP_EDIT"), " ");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("disabled", true);
-        \u0275\u0275advance(5);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(38, 37, "CALENDAR_EVENT.GROUP_COPY_URL"), " ");
-        \u0275\u0275advance(7);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(45, 39, "CALENDAR_EVENT.GROUP_DELETE"), " ");
-        \u0275\u0275advance(6);
-        \u0275\u0275classProp("text-error", ctx.is_interested);
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(54, 41, ctx.is_interested ? "CALENDAR_EVENT.GROUP_INTEREST_REMOVE" : "CALENDAR_EVENT.GROUP_INTEREST_ADD"), " ");
-        \u0275\u0275advance(4);
-        \u0275\u0275classProp("text-error", ctx.is_going);
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(61, 43, ctx.is_going ? "CALENDAR_EVENT.GROUP_GOING_REMOVE" : "CALENDAR_EVENT.GROUP_GOING_ADD"), " ");
-        \u0275\u0275advance(9);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(70, 45, "CALENDAR_EVENT.GROUP_HOST", \u0275\u0275pureFunction1(68, _c073, (ctx.event.organiser == null ? null : ctx.event.organiser.name) || ctx.event.host)), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(73, 48, "CALENDAR_EVENT.GROUP_WHEN_WHERE"), " ");
-        \u0275\u0275advance(8);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(81, 50, "CALENDAR_EVENT.GROUP_DATE_TIME"), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate3(" ", \u0275\u0275pipeBind2(84, 52, ctx.event.date, "EEEE, d MMMM, yyyy"), " . ", \u0275\u0275pipeBind2(85, 55, ctx.event.date, ctx.time_format), " - ", \u0275\u0275pipeBind2(86, 58, ctx.event.date + ctx.event.duration * 60 * 1e3, ctx.time_format), " ");
-        \u0275\u0275advance(9);
-        \u0275\u0275property("ngIf", ctx.is_onsite && ctx.has_space);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.is_onsite && !ctx.has_space);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.is_online);
-        \u0275\u0275advance(6);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(101, 61, "CALENDAR_EVENT.GROUP_ATTENDEES", \u0275\u0275pureFunction2(70, _c143, ctx.attendance, ctx.event.attendees == null ? null : ctx.event.attendees.length)), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(104, 64, "CALENDAR_EVENT.GROUP_ABOUT"), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275property("innerHTML", \u0275\u0275pipeBind1(107, 66, ctx.body), \u0275\u0275sanitizeHtml);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !ctx.raw_description.trim());
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.level);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.show_attendees);
-      }
-    }, dependencies: [NgIf, MatDialogClose, IconComponent, InteractiveMapComponent, AuthenticatedImageDirective, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, AttendeeListComponent, AsyncPipe, DatePipe, SanitizePipe, TranslatePipe, SpacePipe], encapsulation: 2 });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GroupEventDetailsModalComponent, { className: "GroupEventDetailsModalComponent", filePath: "libs/events/src/lib/group-event-details-modal.component.ts", lineNumber: 424 });
-})();
-
 // libs/bookings/src/lib/desk-settings-modal.component.ts
 function DeskSettingsModalComponent_div_0_Template(rf, ctx) {
   if (rf & 1) {
@@ -155158,8 +159280,8 @@ var DeskSettingsModalComponent = class _DeskSettingsModalComponent {
 })();
 
 // libs/bookings/src/lib/booking-details-modal.component.ts
-var _c074 = (a0) => ({ time: a0 });
-var _c144 = () => ({ disable_pan: true, disable_zoom: true });
+var _c083 = (a0) => ({ time: a0 });
+var _c148 = () => ({ disable_pan: true, disable_zoom: true });
 function BookingDetailsModalComponent_div_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "div", 21);
@@ -155295,7 +159417,7 @@ function BookingDetailsModalComponent_ng_container_37_div_6_Template(rf, ctx) {
     const request_r6 = ctx.$implicit;
     const ctx_r0 = \u0275\u0275nextContext(2);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 21, "BOOKINGS.ASSETS_REQUESTED_FOR", \u0275\u0275pureFunction1(24, _c074, \u0275\u0275pipeBind2(5, 18, request_r6.deliver_at, "MMM d, " + ctx_r0.time_format))), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 21, "BOOKINGS.ASSETS_REQUESTED_FOR", \u0275\u0275pureFunction1(24, _c083, \u0275\u0275pipeBind2(5, 18, request_r6.deliver_at, "MMM d, " + ctx_r0.time_format))), " ");
     \u0275\u0275advance(3);
     \u0275\u0275classProp("bg-success", request_r6.state === "approved")("text-success-content", request_r6.state === "approved")("bg-warning", request_r6.state !== "approved" && request_r6.state !== "rejected")("text-warning-content", request_r6.state !== "approved" && request_r6.state !== "rejected")("bg-error", request_r6.state === "rejected")("text-error-content", request_r6.state === "rejected");
     \u0275\u0275property("matTooltip", request_r6.state || "Tentative");
@@ -155338,7 +159460,7 @@ function BookingDetailsModalComponent_button_38_ng_container_1_Template(rf, ctx)
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("src", ctx_r0.level == null ? null : ctx_r0.level.map_id)("features", ctx_r0.features)("options", \u0275\u0275pureFunction0(3, _c144));
+    \u0275\u0275property("src", ctx_r0.level == null ? null : ctx_r0.level.map_id)("features", ctx_r0.features)("options", \u0275\u0275pureFunction0(3, _c148));
   }
 }
 function BookingDetailsModalComponent_button_38_Template(rf, ctx) {
@@ -155773,8 +159895,8 @@ var ParkingService = class _ParkingService extends AsyncHandler {
 };
 
 // libs/bookings/src/lib/booking-card.component.ts
-var _c075 = () => ["./"];
-var _c145 = (a0) => ({ booking: a0 });
+var _c084 = () => ["./"];
+var _c149 = (a0) => ({ booking: a0 });
 function BookingCardComponent_h4_0_span_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span", 5);
@@ -155943,7 +160065,7 @@ function BookingCardComponent_a_1_Template(rf, ctx) {
   if (rf & 2) {
     let tmp_6_0;
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(13, _c075))("queryParams", \u0275\u0275pureFunction1(14, _c145, ctx_r0.booking == null ? null : ctx_r0.booking.id));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(13, _c084))("queryParams", \u0275\u0275pureFunction1(14, _c149, ctx_r0.booking == null ? null : ctx_r0.booking.id));
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(ctx_r0.booking == null ? null : ctx_r0.booking.title);
     \u0275\u0275advance(2);
@@ -156069,3637 +160191,6 @@ var BookingCardComponent = class _BookingCardComponent extends AsyncHandler {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookingCardComponent, { className: "BookingCardComponent", filePath: "libs/bookings/src/lib/booking-card.component.ts", lineNumber: 150 });
 })();
-
-// node_modules/@angular/material/fesm2022/bottom-sheet.mjs
-function MatBottomSheetContainer_ng_template_0_Template(rf, ctx) {
-}
-var ENTER_ANIMATION3 = "_mat-bottom-sheet-enter";
-var EXIT_ANIMATION3 = "_mat-bottom-sheet-exit";
-var MatBottomSheetContainer = class _MatBottomSheetContainer extends CdkDialogContainer {
-  _breakpointSubscription;
-  _animationsDisabled = inject(ANIMATION_MODULE_TYPE, {
-    optional: true
-  }) === "NoopAnimations";
-  /** The state of the bottom sheet animations. */
-  _animationState = "void";
-  /** Emits whenever the state of the animation changes. */
-  _animationStateChanged = new EventEmitter();
-  /** Whether the component has been destroyed. */
-  _destroyed;
-  constructor() {
-    super();
-    const breakpointObserver = inject(BreakpointObserver);
-    this._breakpointSubscription = breakpointObserver.observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge]).subscribe(() => {
-      const classList = this._elementRef.nativeElement.classList;
-      classList.toggle("mat-bottom-sheet-container-medium", breakpointObserver.isMatched(Breakpoints.Medium));
-      classList.toggle("mat-bottom-sheet-container-large", breakpointObserver.isMatched(Breakpoints.Large));
-      classList.toggle("mat-bottom-sheet-container-xlarge", breakpointObserver.isMatched(Breakpoints.XLarge));
-    });
-  }
-  /** Begin animation of bottom sheet entrance into view. */
-  enter() {
-    if (!this._destroyed) {
-      this._animationState = "visible";
-      this._changeDetectorRef.markForCheck();
-      this._changeDetectorRef.detectChanges();
-      if (this._animationsDisabled) {
-        this._simulateAnimation(ENTER_ANIMATION3);
-      }
-    }
-  }
-  /** Begin animation of the bottom sheet exiting from view. */
-  exit() {
-    if (!this._destroyed) {
-      this._elementRef.nativeElement.setAttribute("mat-exit", "");
-      this._animationState = "hidden";
-      this._changeDetectorRef.markForCheck();
-      if (this._animationsDisabled) {
-        this._simulateAnimation(EXIT_ANIMATION3);
-      }
-    }
-  }
-  ngOnDestroy() {
-    super.ngOnDestroy();
-    this._breakpointSubscription.unsubscribe();
-    this._destroyed = true;
-  }
-  _simulateAnimation(name) {
-    this._ngZone.run(() => {
-      this._handleAnimationEvent(true, name);
-      setTimeout(() => this._handleAnimationEvent(false, name));
-    });
-  }
-  _handleAnimationEvent(isStart2, animationName) {
-    const isEnter = animationName === ENTER_ANIMATION3;
-    const isExit = animationName === EXIT_ANIMATION3;
-    if (isEnter || isExit) {
-      this._animationStateChanged.emit({
-        toState: isEnter ? "visible" : "hidden",
-        phase: isStart2 ? "start" : "done"
-      });
-    }
-  }
-  static \u0275fac = function MatBottomSheetContainer_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatBottomSheetContainer)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _MatBottomSheetContainer,
-    selectors: [["mat-bottom-sheet-container"]],
-    hostAttrs: ["tabindex", "-1", 1, "mat-bottom-sheet-container"],
-    hostVars: 9,
-    hostBindings: function MatBottomSheetContainer_HostBindings(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275listener("animationstart", function MatBottomSheetContainer_animationstart_HostBindingHandler($event) {
-          return ctx._handleAnimationEvent(true, $event.animationName);
-        })("animationend", function MatBottomSheetContainer_animationend_HostBindingHandler($event) {
-          return ctx._handleAnimationEvent(false, $event.animationName);
-        })("animationcancel", function MatBottomSheetContainer_animationcancel_HostBindingHandler($event) {
-          return ctx._handleAnimationEvent(false, $event.animationName);
-        });
-      }
-      if (rf & 2) {
-        \u0275\u0275attribute("role", ctx._config.role)("aria-modal", ctx._config.ariaModal)("aria-label", ctx._config.ariaLabel);
-        \u0275\u0275classProp("mat-bottom-sheet-container-animations-enabled", !ctx._animationsDisabled)("mat-bottom-sheet-container-enter", ctx._animationState === "visible")("mat-bottom-sheet-container-exit", ctx._animationState === "hidden");
-      }
-    },
-    features: [\u0275\u0275InheritDefinitionFeature],
-    decls: 1,
-    vars: 0,
-    consts: [["cdkPortalOutlet", ""]],
-    template: function MatBottomSheetContainer_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275template(0, MatBottomSheetContainer_ng_template_0_Template, 0, 0, "ng-template", 0);
-      }
-    },
-    dependencies: [CdkPortalOutlet],
-    styles: ["@keyframes _mat-bottom-sheet-enter{from{transform:translateY(100%)}to{transform:none}}@keyframes _mat-bottom-sheet-exit{from{transform:none}to{transform:translateY(100%)}}.mat-bottom-sheet-container{box-shadow:0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);padding:8px 16px;min-width:100vw;box-sizing:border-box;display:block;outline:0;max-height:80vh;overflow:auto;position:relative;background:var(--mat-bottom-sheet-container-background-color, var(--mat-sys-surface-container-low));color:var(--mat-bottom-sheet-container-text-color, var(--mat-sys-on-surface));font-family:var(--mat-bottom-sheet-container-text-font, var(--mat-sys-body-large-font));font-size:var(--mat-bottom-sheet-container-text-size, var(--mat-sys-body-large-size));line-height:var(--mat-bottom-sheet-container-text-line-height, var(--mat-sys-body-large-line-height));font-weight:var(--mat-bottom-sheet-container-text-weight, var(--mat-sys-body-large-weight));letter-spacing:var(--mat-bottom-sheet-container-text-tracking, var(--mat-sys-body-large-tracking))}@media(forced-colors: active){.mat-bottom-sheet-container{outline:1px solid}}.mat-bottom-sheet-container-animations-enabled{transform:translateY(100%)}.mat-bottom-sheet-container-animations-enabled.mat-bottom-sheet-container-enter{animation:_mat-bottom-sheet-enter 195ms cubic-bezier(0, 0, 0.2, 1) forwards}.mat-bottom-sheet-container-animations-enabled.mat-bottom-sheet-container-exit{animation:_mat-bottom-sheet-exit 375ms cubic-bezier(0.4, 0, 1, 1) backwards}.mat-bottom-sheet-container-xlarge,.mat-bottom-sheet-container-large,.mat-bottom-sheet-container-medium{border-top-left-radius:var(--mat-bottom-sheet-container-shape, 28px);border-top-right-radius:var(--mat-bottom-sheet-container-shape, 28px)}.mat-bottom-sheet-container-medium{min-width:384px;max-width:calc(100vw - 128px)}.mat-bottom-sheet-container-large{min-width:512px;max-width:calc(100vw - 256px)}.mat-bottom-sheet-container-xlarge{min-width:576px;max-width:calc(100vw - 384px)}"],
-    encapsulation: 2
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatBottomSheetContainer, [{
-    type: Component,
-    args: [{
-      selector: "mat-bottom-sheet-container",
-      changeDetection: ChangeDetectionStrategy.Default,
-      encapsulation: ViewEncapsulation.None,
-      host: {
-        "class": "mat-bottom-sheet-container",
-        "[class.mat-bottom-sheet-container-animations-enabled]": "!_animationsDisabled",
-        "[class.mat-bottom-sheet-container-enter]": '_animationState === "visible"',
-        "[class.mat-bottom-sheet-container-exit]": '_animationState === "hidden"',
-        "tabindex": "-1",
-        "[attr.role]": "_config.role",
-        "[attr.aria-modal]": "_config.ariaModal",
-        "[attr.aria-label]": "_config.ariaLabel",
-        "(animationstart)": "_handleAnimationEvent(true, $event.animationName)",
-        "(animationend)": "_handleAnimationEvent(false, $event.animationName)",
-        "(animationcancel)": "_handleAnimationEvent(false, $event.animationName)"
-      },
-      imports: [CdkPortalOutlet],
-      template: "<ng-template cdkPortalOutlet></ng-template>\r\n",
-      styles: ["@keyframes _mat-bottom-sheet-enter{from{transform:translateY(100%)}to{transform:none}}@keyframes _mat-bottom-sheet-exit{from{transform:none}to{transform:translateY(100%)}}.mat-bottom-sheet-container{box-shadow:0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);padding:8px 16px;min-width:100vw;box-sizing:border-box;display:block;outline:0;max-height:80vh;overflow:auto;position:relative;background:var(--mat-bottom-sheet-container-background-color, var(--mat-sys-surface-container-low));color:var(--mat-bottom-sheet-container-text-color, var(--mat-sys-on-surface));font-family:var(--mat-bottom-sheet-container-text-font, var(--mat-sys-body-large-font));font-size:var(--mat-bottom-sheet-container-text-size, var(--mat-sys-body-large-size));line-height:var(--mat-bottom-sheet-container-text-line-height, var(--mat-sys-body-large-line-height));font-weight:var(--mat-bottom-sheet-container-text-weight, var(--mat-sys-body-large-weight));letter-spacing:var(--mat-bottom-sheet-container-text-tracking, var(--mat-sys-body-large-tracking))}@media(forced-colors: active){.mat-bottom-sheet-container{outline:1px solid}}.mat-bottom-sheet-container-animations-enabled{transform:translateY(100%)}.mat-bottom-sheet-container-animations-enabled.mat-bottom-sheet-container-enter{animation:_mat-bottom-sheet-enter 195ms cubic-bezier(0, 0, 0.2, 1) forwards}.mat-bottom-sheet-container-animations-enabled.mat-bottom-sheet-container-exit{animation:_mat-bottom-sheet-exit 375ms cubic-bezier(0.4, 0, 1, 1) backwards}.mat-bottom-sheet-container-xlarge,.mat-bottom-sheet-container-large,.mat-bottom-sheet-container-medium{border-top-left-radius:var(--mat-bottom-sheet-container-shape, 28px);border-top-right-radius:var(--mat-bottom-sheet-container-shape, 28px)}.mat-bottom-sheet-container-medium{min-width:384px;max-width:calc(100vw - 128px)}.mat-bottom-sheet-container-large{min-width:512px;max-width:calc(100vw - 256px)}.mat-bottom-sheet-container-xlarge{min-width:576px;max-width:calc(100vw - 384px)}"]
-    }]
-  }], () => [], null);
-})();
-var MAT_BOTTOM_SHEET_DATA = new InjectionToken("MatBottomSheetData");
-var MatBottomSheetConfig = class {
-  /** The view container to place the overlay for the bottom sheet into. */
-  viewContainerRef;
-  /** Extra CSS classes to be added to the bottom sheet container. */
-  panelClass;
-  /** Text layout direction for the bottom sheet. */
-  direction;
-  /** Data being injected into the child component. */
-  data = null;
-  /** Whether the bottom sheet has a backdrop. */
-  hasBackdrop = true;
-  /** Custom class for the backdrop. */
-  backdropClass;
-  /** Whether the user can use escape or clicking outside to close the bottom sheet. */
-  disableClose = false;
-  /** Aria label to assign to the bottom sheet element. */
-  ariaLabel = null;
-  /**
-   * Whether this is a modal dialog. Used to set the `aria-modal` attribute. Off by default,
-   * because it can interfere with other overlay-based components (e.g. `mat-select`) and because
-   * it is redundant since the dialog marks all outside content as `aria-hidden` anyway.
-   */
-  ariaModal = false;
-  /**
-   * Whether the bottom sheet should close when the user goes backwards/forwards in history.
-   * Note that this usually doesn't include clicking on links (unless the user is using
-   * the `HashLocationStrategy`).
-   */
-  closeOnNavigation = true;
-  /**
-   * Where the bottom sheet should focus on open.
-   * @breaking-change 14.0.0 Remove boolean option from autoFocus. Use string or
-   * AutoFocusTarget instead.
-   */
-  autoFocus = "first-tabbable";
-  /**
-   * Whether the bottom sheet should restore focus to the
-   * previously-focused element, after it's closed.
-   */
-  restoreFocus = true;
-  /** Scroll strategy to be used for the bottom sheet. */
-  scrollStrategy;
-  /** Height for the bottom sheet. */
-  height = "";
-  /** Minimum height for the bottom sheet. If a number is provided, assumes pixel units. */
-  minHeight;
-  /** Maximum height for the bottom sheet. If a number is provided, assumes pixel units. */
-  maxHeight;
-};
-var MatBottomSheetRef = class {
-  _ref;
-  /** Instance of the component making up the content of the bottom sheet. */
-  get instance() {
-    return this._ref.componentInstance;
-  }
-  /**
-   * `ComponentRef` of the component opened into the bottom sheet. Will be
-   * null when the bottom sheet is opened using a `TemplateRef`.
-   */
-  get componentRef() {
-    return this._ref.componentRef;
-  }
-  /**
-   * Instance of the component into which the bottom sheet content is projected.
-   * @docs-private
-   */
-  containerInstance;
-  /** Whether the user is allowed to close the bottom sheet. */
-  disableClose;
-  /** Subject for notifying the user that the bottom sheet has opened and appeared. */
-  _afterOpened = new Subject();
-  /** Result to be passed down to the `afterDismissed` stream. */
-  _result;
-  /** Handle to the timeout that's running as a fallback in case the exit animation doesn't fire. */
-  _closeFallbackTimeout;
-  constructor(_ref, config5, containerInstance) {
-    this._ref = _ref;
-    this.containerInstance = containerInstance;
-    this.disableClose = config5.disableClose;
-    containerInstance._animationStateChanged.pipe(filter((event) => event.phase === "done" && event.toState === "visible"), take(1)).subscribe(() => {
-      this._afterOpened.next();
-      this._afterOpened.complete();
-    });
-    containerInstance._animationStateChanged.pipe(filter((event) => event.phase === "done" && event.toState === "hidden"), take(1)).subscribe(() => {
-      clearTimeout(this._closeFallbackTimeout);
-      this._ref.close(this._result);
-    });
-    _ref.overlayRef.detachments().subscribe(() => {
-      this._ref.close(this._result);
-    });
-    merge(this.backdropClick(), this.keydownEvents().pipe(filter((event) => event.keyCode === ESCAPE))).subscribe((event) => {
-      if (!this.disableClose && (event.type !== "keydown" || !hasModifierKey(event))) {
-        event.preventDefault();
-        this.dismiss();
-      }
-    });
-  }
-  /**
-   * Dismisses the bottom sheet.
-   * @param result Data to be passed back to the bottom sheet opener.
-   */
-  dismiss(result) {
-    if (!this.containerInstance) {
-      return;
-    }
-    this.containerInstance._animationStateChanged.pipe(filter((event) => event.phase === "start"), take(1)).subscribe(() => {
-      this._closeFallbackTimeout = setTimeout(() => this._ref.close(this._result), 500);
-      this._ref.overlayRef.detachBackdrop();
-    });
-    this._result = result;
-    this.containerInstance.exit();
-    this.containerInstance = null;
-  }
-  /** Gets an observable that is notified when the bottom sheet is finished closing. */
-  afterDismissed() {
-    return this._ref.closed;
-  }
-  /** Gets an observable that is notified when the bottom sheet has opened and appeared. */
-  afterOpened() {
-    return this._afterOpened;
-  }
-  /**
-   * Gets an observable that emits when the overlay's backdrop has been clicked.
-   */
-  backdropClick() {
-    return this._ref.backdropClick;
-  }
-  /**
-   * Gets an observable that emits when keydown events are targeted on the overlay.
-   */
-  keydownEvents() {
-    return this._ref.keydownEvents;
-  }
-};
-var MAT_BOTTOM_SHEET_DEFAULT_OPTIONS = new InjectionToken("mat-bottom-sheet-default-options");
-var MatBottomSheet = class _MatBottomSheet {
-  _overlay = inject(Overlay);
-  _parentBottomSheet = inject(_MatBottomSheet, {
-    optional: true,
-    skipSelf: true
-  });
-  _defaultOptions = inject(MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, {
-    optional: true
-  });
-  _bottomSheetRefAtThisLevel = null;
-  _dialog = inject(Dialog);
-  /** Reference to the currently opened bottom sheet. */
-  get _openedBottomSheetRef() {
-    const parent = this._parentBottomSheet;
-    return parent ? parent._openedBottomSheetRef : this._bottomSheetRefAtThisLevel;
-  }
-  set _openedBottomSheetRef(value) {
-    if (this._parentBottomSheet) {
-      this._parentBottomSheet._openedBottomSheetRef = value;
-    } else {
-      this._bottomSheetRefAtThisLevel = value;
-    }
-  }
-  constructor() {
-  }
-  open(componentOrTemplateRef, config5) {
-    const _config = __spreadValues(__spreadValues({}, this._defaultOptions || new MatBottomSheetConfig()), config5);
-    let ref;
-    this._dialog.open(componentOrTemplateRef, __spreadProps(__spreadValues({}, _config), {
-      // Disable closing since we need to sync it up to the animation ourselves.
-      disableClose: true,
-      // Disable closing on detachments so that we can sync up the animation.
-      closeOnOverlayDetachments: false,
-      maxWidth: "100%",
-      container: MatBottomSheetContainer,
-      scrollStrategy: _config.scrollStrategy || this._overlay.scrollStrategies.block(),
-      positionStrategy: this._overlay.position().global().centerHorizontally().bottom("0"),
-      templateContext: () => ({
-        bottomSheetRef: ref
-      }),
-      providers: (cdkRef, _cdkConfig, container) => {
-        ref = new MatBottomSheetRef(cdkRef, _config, container);
-        return [{
-          provide: MatBottomSheetRef,
-          useValue: ref
-        }, {
-          provide: MAT_BOTTOM_SHEET_DATA,
-          useValue: _config.data
-        }];
-      }
-    }));
-    ref.afterDismissed().subscribe(() => {
-      if (this._openedBottomSheetRef === ref) {
-        this._openedBottomSheetRef = null;
-      }
-    });
-    if (this._openedBottomSheetRef) {
-      this._openedBottomSheetRef.afterDismissed().subscribe(() => ref.containerInstance?.enter());
-      this._openedBottomSheetRef.dismiss();
-    } else {
-      ref.containerInstance.enter();
-    }
-    this._openedBottomSheetRef = ref;
-    return ref;
-  }
-  /**
-   * Dismisses the currently-visible bottom sheet.
-   * @param result Data to pass to the bottom sheet instance.
-   */
-  dismiss(result) {
-    if (this._openedBottomSheetRef) {
-      this._openedBottomSheetRef.dismiss(result);
-    }
-  }
-  ngOnDestroy() {
-    if (this._bottomSheetRefAtThisLevel) {
-      this._bottomSheetRefAtThisLevel.dismiss();
-    }
-  }
-  static \u0275fac = function MatBottomSheet_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatBottomSheet)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _MatBottomSheet,
-    factory: _MatBottomSheet.\u0275fac,
-    providedIn: "root"
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatBottomSheet, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], () => [], null);
-})();
-var MatBottomSheetModule = class _MatBottomSheetModule {
-  static \u0275fac = function MatBottomSheetModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatBottomSheetModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _MatBottomSheetModule
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    providers: [MatBottomSheet],
-    imports: [DialogModule, MatCommonModule, PortalModule, MatCommonModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatBottomSheetModule, [{
-    type: NgModule,
-    args: [{
-      imports: [DialogModule, MatCommonModule, PortalModule, MatBottomSheetContainer],
-      exports: [MatBottomSheetContainer, MatCommonModule],
-      providers: [MatBottomSheet]
-    }]
-  }], null, null);
-})();
-
-// libs/spaces/src/lib/space-select-modal/space-details.component.ts
-var _c076 = (a0) => ({ count: a0 });
-var _c146 = () => ({ disable_pan: true, disable_zoom: true });
-function SpaceDetailsComponent_ng_container_0_image_carousel_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "image-carousel", 19);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("images", ctx_r1.space.images);
-  }
-}
-function SpaceDetailsComponent_ng_container_0_div_13_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 20);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275classProp("bg-info", ctx_r1.alert[0] === "info")("text-info-content", ctx_r1.alert[0] === "info")("bg-warning", ctx_r1.alert[0] === "warn")("text-warning-content", ctx_r1.alert[0] === "warn")("bg-error", ctx_r1.alert[0] === "closed")("text-error-content", ctx_r1.alert[0] === "closed");
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r1.alert[1], " ");
-  }
-}
-function SpaceDetailsComponent_ng_container_0_section_36_div_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 12)(1, "p");
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const feature_r3 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(feature_r3);
-  }
-}
-function SpaceDetailsComponent_ng_container_0_section_36_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "section", 21)(1, "h2", 11);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(4, SpaceDetailsComponent_ng_container_0_section_36_div_4_Template, 3, 1, "div", 22);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 2, "CALENDAR_EVENT.FACILITIES"), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", ctx_r1.space.features);
-  }
-}
-function SpaceDetailsComponent_ng_container_0_section_37_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "section", 23);
-    \u0275\u0275element(1, "interactive-map", 24);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("src", ctx_r1.map_url)("focus", ctx_r1.space.map_id)("features", ctx_r1.features)("options", \u0275\u0275pureFunction0(4, _c146));
-  }
-}
-function SpaceDetailsComponent_ng_container_0_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "section", 2);
-    \u0275\u0275template(2, SpaceDetailsComponent_ng_container_0_image_carousel_2_Template, 1, 1, "image-carousel", 3);
-    \u0275\u0275elementStart(3, "button", 4);
-    \u0275\u0275listener("click", function SpaceDetailsComponent_ng_container_0_Template_button_click_3_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.close.emit());
-    });
-    \u0275\u0275elementStart(4, "app-icon");
-    \u0275\u0275text(5, "arrow_back");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(6, "button", 5);
-    \u0275\u0275listener("click", function SpaceDetailsComponent_ng_container_0_Template_button_click_6_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.toggleFav.emit());
-    });
-    \u0275\u0275elementStart(7, "app-icon");
-    \u0275\u0275text(8);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(9, "div", 6)(10, "section", 7)(11, "h2", 8);
-    \u0275\u0275text(12);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(13, SpaceDetailsComponent_ng_container_0_div_13_Template, 2, 13, "div", 9);
-    \u0275\u0275element(14, "hr");
-    \u0275\u0275elementStart(15, "section", 10)(16, "h2", 11);
-    \u0275\u0275text(17);
-    \u0275\u0275pipe(18, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(19, "div", 12)(20, "app-icon");
-    \u0275\u0275text(21, "people");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(22, "p");
-    \u0275\u0275text(23);
-    \u0275\u0275pipe(24, "translate");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(25, "div", 12)(26, "app-icon");
-    \u0275\u0275text(27, "meeting_room");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(28, "p");
-    \u0275\u0275text(29);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(30, "div", 12)(31, "app-icon");
-    \u0275\u0275text(32, "place");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(33, "p");
-    \u0275\u0275text(34);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275element(35, "hr");
-    \u0275\u0275template(36, SpaceDetailsComponent_ng_container_0_section_36_Template, 5, 4, "section", 13)(37, SpaceDetailsComponent_ng_container_0_section_37_Template, 2, 5, "section", 14);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(38, "div", 15)(39, "button", 16);
-    \u0275\u0275listener("click", function SpaceDetailsComponent_ng_container_0_Template_button_click_39_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      ctx_r1.active = !ctx_r1.active;
-      return \u0275\u0275resetView(ctx_r1.activeChange.emit(ctx_r1.active));
-    });
-    \u0275\u0275elementStart(40, "div", 17)(41, "app-icon", 18);
-    \u0275\u0275text(42);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(43, "p");
-    \u0275\u0275text(44);
-    \u0275\u0275pipe(45, "translate");
-    \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275classProp("sm:h-64", ctx_r1.space.images == null ? null : ctx_r1.space.images.length)("h-40", ctx_r1.space.images == null ? null : ctx_r1.space.images.length)("sm:h-0", !(ctx_r1.space.images == null ? null : ctx_r1.space.images.length))("h-12", !(ctx_r1.space.images == null ? null : ctx_r1.space.images.length))("!bg-transparent", !(ctx_r1.space.images == null ? null : ctx_r1.space.images.length));
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.space.images == null ? null : ctx_r1.space.images.length);
-    \u0275\u0275advance(4);
-    \u0275\u0275classProp("text-white", !ctx_r1.fav)("text-info", ctx_r1.fav);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r1.fav ? "favorite" : "favorite_border");
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", ctx_r1.space.display_name || ctx_r1.space.name, " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.alert);
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(18, 28, "CALENDAR_EVENT.DETAILS"), " ");
-    \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(24, 30, "CALENDAR_EVENT.CAPACITY_COUNT", \u0275\u0275pureFunction1(35, _c076, ctx_r1.space.capacity)), " ");
-    \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate1(" ", (ctx_r1.level == null ? null : ctx_r1.level.display_name) || (ctx_r1.level == null ? null : ctx_r1.level.name), " ");
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", (ctx_r1.building == null ? null : ctx_r1.building.address) || (ctx_r1.building == null ? null : ctx_r1.building.display_name) || (ctx_r1.building == null ? null : ctx_r1.building.name), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.space.features == null ? null : ctx_r1.space.features.length);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.hide_map);
-    \u0275\u0275advance(2);
-    \u0275\u0275classProp("inverse", ctx_r1.active);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(ctx_r1.active ? "remove" : "add");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(45, 33, ctx_r1.active ? "CALENDAR_EVENT.SPACE_REMOVE" : "CALENDAR_EVENT.SPACE_ADD_TO"), " ");
-  }
-}
-function SpaceDetailsComponent_ng_template_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 25)(1, "p", 26);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "CALENDAR_EVENT.SPACE_LIST_INFO"), " ");
-  }
-}
-var SpaceDetailsComponent = class _SpaceDetailsComponent {
-  get level() {
-    return this._org.levelWithID(this.space?.zones) || this.space?.level;
-  }
-  get building() {
-    return this._org.buildings.find((_3) => this.space?.zones.includes(_3.id));
-  }
-  constructor(_org) {
-    this._org = _org;
-    this.fav = false;
-    this.active = false;
-    this.hide_map = false;
-    this.activeChange = new EventEmitter();
-    this.close = new EventEmitter();
-    this.toggleFav = new EventEmitter();
-    this.map_url = "";
-    this.features = [];
-  }
-  ngOnChanges(changes) {
-    if (changes.space && this.space) {
-      this._updateFeature();
-    }
-  }
-  _updateFeature() {
-    this.map_url = this.level?.map_id;
-    this.features = [
-      {
-        location: this.space?.map_id,
-        content: MapPinComponent
-      }
-    ];
-  }
-  static {
-    this.\u0275fac = function SpaceDetailsComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _SpaceDetailsComponent)(\u0275\u0275directiveInject(OrganisationService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceDetailsComponent, selectors: [["space-details"]], inputs: { space: "space", fav: "fav", active: "active", hide_map: "hide_map", alert: "alert" }, outputs: { activeChange: "activeChange", close: "close", toggleFav: "toggleFav" }, standalone: false, features: [\u0275\u0275NgOnChangesFeature], decls: 3, vars: 2, consts: [["empty_state", ""], [4, "ngIf", "ngIfElse"], ["image", "", 1, "relative", "w-full", "bg-neutral"], ["class", "absolute inset-0", 3, "images", 4, "ngIf"], ["icon", "", "matRipple", "", "name", "close-space-details", 1, "absolute", "left-2", "top-2", "bg-neutral", "text-white", "sm:hidden", 3, "click"], ["icon", "", "matRipple", "", "name", "toggle-space-favourite-details", 1, "absolute", "right-2", "top-2", "bg-neutral", 3, "click"], [1, "h-1/2", "flex-1", "space-y-2", "overflow-auto", "p-2"], ["actions", "", 1, "z-0"], [1, "mb-2", "mt-4", "text-xl", "font-medium"], ["class", "my-2 rounded px-2 py-1 text-xs", 3, "bg-info", "text-info-content", "bg-warning", "text-warning-content", "bg-error", "text-error-content", 4, "ngIf"], ["details", "", 1, "space-y-2"], [1, "text-xl", "font-medium"], [1, "flex", "items-center", "space-x-2"], ["facilities", "", "class", "space-y-2", 4, "ngIf"], ["map", "", "class", "relative mx-auto h-64 w-full overflow-hidden rounded border border-base-200 sm:h-48", 4, "ngIf"], [1, "border-t", "border-base-200", "px-2", "pb-[5.5rem]", "pt-2", "shadow", "sm:hidden"], ["btn", "", "matRipple", "", "name", "toggle-space-details", 1, "w-full", 3, "click"], [1, "flex", "items-center", "justify-center"], [1, "text-2xl"], [1, "absolute", "inset-0", 3, "images"], [1, "my-2", "rounded", "px-2", "py-1", "text-xs"], ["facilities", "", 1, "space-y-2"], ["class", "flex items-center space-x-2", 4, "ngFor", "ngForOf"], ["map", "", 1, "relative", "mx-auto", "h-64", "w-full", "overflow-hidden", "rounded", "border", "border-base-200", "sm:h-48"], [1, "pointer-events-none", 3, "src", "focus", "features", "options"], ["empty", "", 1, "flex", "flex-col", "items-center", "justify-center", "space-y-2", "p-16"], [1, "text-center", "opacity-30"]], template: function SpaceDetailsComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275template(0, SpaceDetailsComponent_ng_container_0_Template, 46, 37, "ng-container", 1)(1, SpaceDetailsComponent_ng_template_1_Template, 4, 3, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        const empty_state_r4 = \u0275\u0275reference(2);
-        \u0275\u0275property("ngIf", ctx.space)("ngIfElse", empty_state_r4);
-      }
-    }, dependencies: [NgForOf, NgIf, IconComponent, InteractiveMapComponent, ImageCarouselComponent, MatRipple, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  width: 30%;\n  min-width: 20rem;\n  height: 100%;\n  min-height: 65vh;\n}\n/*# sourceMappingURL=space-details.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceDetailsComponent, { className: "SpaceDetailsComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-details.component.ts", lineNumber: 188 });
-})();
-
-// libs/spaces/src/lib/space-select-modal/space-filters.component.ts
-var _c077 = () => ({ standalone: true });
-function SpaceFiltersComponent_button_2_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 21);
-    \u0275\u0275listener("click", function SpaceFiltersComponent_button_2_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.close());
-    });
-    \u0275\u0275elementStart(1, "app-icon");
-    \u0275\u0275text(2, "keyboard_arrow_left");
-    \u0275\u0275elementEnd()();
-  }
-}
-function SpaceFiltersComponent_mat_form_field_16_mat_option_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 25);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const reg_r5 = ctx.$implicit;
-    \u0275\u0275property("value", reg_r5);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", reg_r5.display_name || reg_r5.name, " ");
-  }
-}
-function SpaceFiltersComponent_mat_form_field_16_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-form-field", 22)(1, "mat-select", 23);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_mat_form_field_16_Template_mat_select_ngModelChange_1_listener($event) {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.setRegion($event));
-    });
-    \u0275\u0275template(3, SpaceFiltersComponent_mat_form_field_16_mat_option_3_Template, 2, 2, "mat-option", 24);
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngModel", ctx_r2.region)("ngModelOptions", \u0275\u0275pureFunction0(8, _c077))("placeholder", \u0275\u0275pipeBind1(2, 4, "CALENDAR_EVENT.SPACE_REGION_ANY"));
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 6, ctx_r2.regions));
-  }
-}
-function SpaceFiltersComponent_mat_form_field_18_mat_option_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 25);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const bld_r7 = ctx.$implicit;
-    \u0275\u0275property("value", bld_r7);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", bld_r7.display_name || bld_r7.name, " ");
-  }
-}
-function SpaceFiltersComponent_mat_form_field_18_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r6 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-form-field", 22)(1, "mat-select", 26);
-    \u0275\u0275pipe(2, "async");
-    \u0275\u0275pipe(3, "async");
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_mat_form_field_18_Template_mat_select_ngModelChange_1_listener($event) {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.setBuilding($event));
-    });
-    \u0275\u0275template(5, SpaceFiltersComponent_mat_form_field_18_mat_option_5_Template, 2, 2, "mat-option", 24);
-    \u0275\u0275pipe(6, "async");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    let tmp_4_0;
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(2, 4, ctx_r2.building))("ngModelOptions", \u0275\u0275pureFunction0(12, _c077))("placeholder", ((tmp_4_0 = \u0275\u0275pipeBind1(3, 6, ctx_r2.building)) == null ? null : tmp_4_0.display_name) || ((tmp_4_0 = \u0275\u0275pipeBind1(4, 8, ctx_r2.building)) == null ? null : tmp_4_0.name));
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(6, 10, ctx_r2.buildings));
-  }
-}
-function SpaceFiltersComponent_mat_form_field_20_mat_option_4_div_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 30);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "building");
-    \u0275\u0275elementStart(3, "span", 31);
-    \u0275\u0275text(4, " - ");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    let tmp_5_0;
-    const lvl_r9 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", (tmp_5_0 = \u0275\u0275pipeBind1(2, 1, lvl_r9.parent_id)) == null ? null : tmp_5_0.display_name, " ");
-  }
-}
-function SpaceFiltersComponent_mat_form_field_20_mat_option_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 25)(1, "div", 28);
-    \u0275\u0275template(2, SpaceFiltersComponent_mat_form_field_20_mat_option_4_div_2_Template, 5, 3, "div", 29);
-    \u0275\u0275elementStart(3, "div");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const lvl_r9 = ctx.$implicit;
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("value", lvl_r9.id);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r2.use_region);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", lvl_r9.display_name || lvl_r9.name, " ");
-  }
-}
-function SpaceFiltersComponent_mat_form_field_20_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r8 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-form-field", 22)(1, "mat-select", 27);
-    \u0275\u0275pipe(2, "async");
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_mat_form_field_20_Template_mat_select_ngModelChange_1_listener($event) {
-      \u0275\u0275restoreView(_r8);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.setOptions({ zones: $event }));
-    });
-    \u0275\u0275template(4, SpaceFiltersComponent_mat_form_field_20_mat_option_4_Template, 5, 3, "mat-option", 24);
-    \u0275\u0275pipe(5, "async");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    let tmp_2_0;
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngModel", (tmp_2_0 = \u0275\u0275pipeBind1(2, 5, ctx_r2.options)) == null ? null : tmp_2_0.zones)("ngModelOptions", \u0275\u0275pureFunction0(11, _c077))("placeholder", \u0275\u0275pipeBind1(3, 7, "CALENDAR_EVENT.SPACE_LEVEL_ANY"))("multiple", true);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(5, 9, ctx_r2.levels));
-  }
-}
-function SpaceFiltersComponent_div_31_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r10 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 32)(1, "label", 13);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementStart(4, "span");
-    \u0275\u0275text(5, "*");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(6, "a-date-field", 33);
-    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_div_31_Template_a_date_field_ngModelChange_6_listener($event) {
-      \u0275\u0275restoreView(_r10);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.form.patchValue({ date_end: $event }));
-    });
-    \u0275\u0275text(7);
-    \u0275\u0275pipe(8, "translate");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 9, "FORM.DATE_END"), "");
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngModel", ctx_r2.form.getRawValue().date_end)("ngModelOptions", \u0275\u0275pureFunction0(13, _c077))("from", ctx_r2.start_date)("to", ctx_r2.end_date)("short", true)("timezone", ctx_r2.timezone)("range", 2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(8, 11, "FORM.DATE_ERROR"), " ");
-  }
-}
-function SpaceFiltersComponent_div_32_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 34)(1, "mat-checkbox", 35);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "COMMON.ALL_DAY"), " ");
-  }
-}
-function SpaceFiltersComponent_div_33_div_8_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r12 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 37)(1, "label", 41);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementStart(4, "span");
-    \u0275\u0275text(5, "*");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(6, "a-time-field", 42);
-    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_div_33_div_8_Template_a_time_field_ngModelChange_6_listener($event) {
-      \u0275\u0275restoreView(_r12);
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.form.patchValue({ date_end: $event }));
-    });
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    let tmp_6_0;
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 6, "FORM.TIME_END"), "");
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngModel", ctx_r2.form.value.date_end)("ngModelOptions", \u0275\u0275pureFunction0(8, _c077))("from", ctx_r2.form == null ? null : (tmp_6_0 = ctx_r2.form.getRawValue()) == null ? null : tmp_6_0.date)("use_24hr", ctx_r2.use_24hr)("timezone", ctx_r2.timezone);
-  }
-}
-function SpaceFiltersComponent_div_33_div_9_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 37)(1, "label", 41);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementStart(4, "span");
-    \u0275\u0275text(5, "*");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275element(6, "a-duration-field", 43);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    let tmp_4_0;
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 5, "FORM.TIME_END"), "");
-    \u0275\u0275advance(4);
-    \u0275\u0275property("time", ctx_r2.form == null ? null : (tmp_4_0 = ctx_r2.form.getRawValue()) == null ? null : tmp_4_0.date)("max", ctx_r2.max_duration)("use_24hr", ctx_r2.use_24hr)("timezone", ctx_r2.timezone);
-  }
-}
-function SpaceFiltersComponent_div_33_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r11 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 36)(1, "div", 37)(2, "label", 38);
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "translate");
-    \u0275\u0275elementStart(5, "span");
-    \u0275\u0275text(6, "*");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(7, "a-time-field", 39);
-    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_div_33_Template_a_time_field_ngModelChange_7_listener($event) {
-      \u0275\u0275restoreView(_r11);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.form.patchValue({ date: $event }));
-    });
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(8, SpaceFiltersComponent_div_33_div_8_Template, 7, 9, "div", 40)(9, SpaceFiltersComponent_div_33_div_9_Template, 7, 7, "div", 40);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 7, "FORM.TIME_START"), "");
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngModel", ctx_r2.form.getRawValue().date)("ngModelOptions", \u0275\u0275pureFunction0(9, _c077))("use_24hr", ctx_r2.use_24hr)("timezone", ctx_r2.timezone);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r2.multiday);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.multiday);
-  }
-}
-function SpaceFiltersComponent_section_36_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r13 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "section", 44)(1, "h2", 45);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 46)(5, "settings-toggle", 47);
-    \u0275\u0275pipe(6, "translate");
-    \u0275\u0275pipe(7, "async");
-    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_section_36_Template_settings_toggle_ngModelChange_5_listener($event) {
-      \u0275\u0275restoreView(_r13);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.setOptions({ show_fav: $event }));
-    });
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    let tmp_4_0;
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 4, "COMMON.FAVOURITES"), " ");
-    \u0275\u0275advance(3);
-    \u0275\u0275property("name", \u0275\u0275pipeBind1(6, 6, "COMMON.FAVOURITES_ONLY"))("ngModel", (tmp_4_0 = \u0275\u0275pipeBind1(7, 8, ctx_r2.options)) == null ? null : tmp_4_0.show_fav)("ngModelOptions", \u0275\u0275pureFunction0(10, _c077));
-  }
-}
-function SpaceFiltersComponent_section_37_ng_container_3_div_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r14 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 51)(1, "settings-toggle", 47);
-    \u0275\u0275pipe(2, "async");
-    \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_section_37_ng_container_3_div_1_Template_settings_toggle_ngModelChange_1_listener($event) {
-      \u0275\u0275restoreView(_r14);
-      const feat_r15 = \u0275\u0275nextContext().$implicit;
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.toggleFeature(feat_r15, $event));
-    });
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    let tmp_6_0;
-    const feat_r15 = \u0275\u0275nextContext().$implicit;
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("name", ctx_r2.feature_display[feat_r15] || feat_r15)("ngModel", (tmp_6_0 = \u0275\u0275pipeBind1(2, 3, ctx_r2.options)) == null ? null : tmp_6_0.features == null ? null : tmp_6_0.features.includes(feat_r15))("ngModelOptions", \u0275\u0275pureFunction0(5, _c077));
-  }
-}
-function SpaceFiltersComponent_section_37_ng_container_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, SpaceFiltersComponent_section_37_ng_container_3_div_1_Template, 3, 6, "div", 50);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const feat_r15 = ctx.$implicit;
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r2.hide_features.includes(feat_r15));
-  }
-}
-function SpaceFiltersComponent_section_37_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "section", 48)(1, "h2", 45);
-    \u0275\u0275text(2, "Facilities");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(3, SpaceFiltersComponent_section_37_ng_container_3_Template, 2, 1, "ng-container", 49);
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 1, ctx_r2.features));
-  }
-}
-function SpaceFiltersComponent_div_39_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r16 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 52)(1, "button", 53);
-    \u0275\u0275listener("click", function SpaceFiltersComponent_div_39_Template_button_click_1_listener() {
-      \u0275\u0275restoreView(_r16);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.close());
-    });
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "COMON.APPLY"), " ");
-  }
-}
-var SpaceFiltersComponent = class _SpaceFiltersComponent {
-  get allow_all_day() {
-    return !!this._settings.get("app.events.allow_all_day");
-  }
-  get use_region() {
-    return !!this._settings.get("app.use_region");
-  }
-  get timezone() {
-    return this._settings.get("app.events.use_building_timezone") ? this._org.building.timezone : "";
-  }
-  get bld() {
-    return this._org.building;
-  }
-  get region() {
-    return this._org.region;
-  }
-  get form() {
-    return this._event_form.form;
-  }
-  get max_duration() {
-    return this._settings.get("app.events.max_duration") || 480;
-  }
-  get feature_display() {
-    return this._settings.get("app.events.feature_decriptions") || {};
-  }
-  get hide_features() {
-    return this._settings.get("app.events.hide_features") || [];
-  }
-  get use_24hr() {
-    return this._settings.get("app.use_24_hour_time");
-  }
-  get start_date() {
-    return startOfDay(this.form.getRawValue().date).valueOf();
-  }
-  get end_date() {
-    return endOfDay(addDays(Date.now(), this._settings.get("app.events.allowed_future_days") || 180));
-  }
-  constructor(_bsheet_ref, _settings, _event_form, _org, _spaces, _mapspeople) {
-    this._bsheet_ref = _bsheet_ref;
-    this._settings = _settings;
-    this._event_form = _event_form;
-    this._org = _org;
-    this._spaces = _spaces;
-    this._mapspeople = _mapspeople;
-    this.can_close = false;
-    this.options = this._event_form.options$;
-    this.building = this._org.active_building;
-    this.buildings = this._org.active_buildings;
-    this.levels = combineLatest([
-      this._org.active_region,
-      this._org.active_building
-    ]).pipe(map(([region, bld]) => {
-      const level_list = this.use_region ? this._org.levelsForRegion(region) : this._org.levelsForBuilding(bld);
-      const viewable_levels = level_list.filter((lvl) => !lvl.tags.includes("parking"));
-      return viewable_levels.sort((a, b2) => a.parent_id.localeCompare(b2.parent_id) || (a.display_name || "").localeCompare(b2.display_name || ""));
-    }));
-    this.regions = this._org.region_list;
-    this.using_mapspeople = this._mapspeople.available$;
-    this.features = combineLatest([
-      this._spaces.features,
-      this._event_form.available_spaces
-    ]).pipe(map(([features, spaces]) => unique(features.concat(flatten2(spaces.map((_3) => _3.features))))));
-    this.close = () => this._bsheet_ref.dismiss();
-    this.setOptions = (o) => this._event_form.setOptions(o);
-    this.can_close = !!this._bsheet_ref;
-  }
-  setBuilding(bld) {
-    this._org.building = bld;
-  }
-  setRegion(region) {
-    this._org.region = region;
-  }
-  toggleFeature(feat, state2) {
-    return __async(this, null, function* () {
-      const { features } = this._event_form.filters;
-      const new_list = (features || []).filter((_3) => feat !== _3);
-      if (state2)
-        new_list.push(feat);
-      this._event_form.setFilters({ features: new_list });
-    });
-  }
-  static {
-    this.\u0275fac = function SpaceFiltersComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _SpaceFiltersComponent)(\u0275\u0275directiveInject(MatBottomSheetRef, 8), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SpacesService), \u0275\u0275directiveInject(MapsPeopleService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceFiltersComponent, selectors: [["space-filters"]], inputs: { multiday: "multiday", hide_levels: "hide_levels", viewing_map: "viewing_map" }, standalone: false, decls: 40, vars: 41, consts: [[1, "flex", "items-center", "border-b", "border-base-200", "pb-2", "sm:hidden"], [1, "flex-1", "pl-2"], ["icon", "", "matRipple", "", "name", "close-space-filters", 3, "click", 4, "ngIf"], [1, "flex-2", "text-center", "text-xl", "font-medium"], [1, "flex-1"], [1, "max-h-[65vh]", "w-full", "max-w-[100vw]", "divide-y", "divide-base-200", "overflow-y-auto", "overflow-x-hidden", "p-2", 3, "formGroup"], ["details", ""], [1, "mb-1", "text-lg", "font-medium"], [1, "flex", "min-w-[8rem]", "flex-1", "flex-col"], ["for", "location"], ["appearance", "outline", "class", "w-full", 4, "ngIf"], [1, "flex", "flex-wrap", "items-center", "sm:space-x-2"], [1, "min-w-[8rem]", "flex-1"], ["for", "date"], ["name", "date", 3, "ngModelChange", "ngModel", "ngModelOptions", "to", "short", "timezone", "range"], ["class", "relative min-w-[8rem] flex-1", 4, "ngIf"], ["class", "-mt-2 mb-2 flex justify-end", 4, "ngIf"], ["class", "flex items-center space-x-2", 4, "ngIf"], ["favs", "", "class", "space-y-2 pb-4", 4, "ngIf"], ["features", "", "class", "space-y-2", 4, "ngIf"], ["class", "w-full border-t border-base-200 px-2 pt-2", 4, "ngIf"], ["icon", "", "matRipple", "", "name", "close-space-filters", 3, "click"], ["appearance", "outline", 1, "w-full"], ["name", "region", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], ["name", "building", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], ["name", "location", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder", "multiple"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"], [1, "relative", "min-w-[8rem]", "flex-1"], ["name", "date", 3, "ngModelChange", "ngModel", "ngModelOptions", "from", "to", "short", "timezone", "range"], [1, "-mt-2", "mb-2", "flex", "justify-end"], ["formControlName", "all_day"], [1, "flex", "items-center", "space-x-2"], [1, "w-1/3", "flex-1"], ["for", "start-time"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "use_24hr", "timezone"], ["class", "w-1/3 flex-1", 4, "ngIf"], ["for", "end-time"], ["name", "end-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "from", "use_24hr", "timezone"], ["name", "end-time", "formControlName", "duration", 3, "time", "max", "use_24hr", "timezone"], ["favs", "", 1, "space-y-2", "pb-4"], [1, "mt-2", "text-lg", "font-medium"], [1, "flex", "w-full", "items-center"], [1, "w-full", 3, "ngModelChange", "name", "ngModel", "ngModelOptions"], ["features", "", 1, "space-y-2"], [4, "ngFor", "ngForOf"], ["class", "flex items-center", 4, "ngIf"], [1, "flex", "items-center"], [1, "w-full", "border-t", "border-base-200", "px-2", "pt-2"], ["btn", "", "matRipple", "", "name", "apply-space-filters", 1, "w-full", 3, "click"]], template: function SpaceFiltersComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
-        \u0275\u0275template(2, SpaceFiltersComponent_button_2_Template, 3, 0, "button", 2);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(3, "h3", 3);
-        \u0275\u0275text(4);
-        \u0275\u0275pipe(5, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275element(6, "div", 4);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(7, "form", 5)(8, "section", 6)(9, "h2", 7);
-        \u0275\u0275text(10);
-        \u0275\u0275pipe(11, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(12, "div", 8)(13, "label", 9);
-        \u0275\u0275text(14);
-        \u0275\u0275pipe(15, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(16, SpaceFiltersComponent_mat_form_field_16_Template, 5, 9, "mat-form-field", 10);
-        \u0275\u0275pipe(17, "async");
-        \u0275\u0275template(18, SpaceFiltersComponent_mat_form_field_18_Template, 7, 13, "mat-form-field", 10);
-        \u0275\u0275pipe(19, "async");
-        \u0275\u0275template(20, SpaceFiltersComponent_mat_form_field_20_Template, 6, 12, "mat-form-field", 10);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(21, "div", 11)(22, "div", 12)(23, "label", 13);
-        \u0275\u0275text(24);
-        \u0275\u0275pipe(25, "translate");
-        \u0275\u0275elementStart(26, "span");
-        \u0275\u0275text(27, "*");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(28, "a-date-field", 14);
-        \u0275\u0275listener("ngModelChange", function SpaceFiltersComponent_Template_a_date_field_ngModelChange_28_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.form.patchValue({ date: $event }));
-        });
-        \u0275\u0275text(29);
-        \u0275\u0275pipe(30, "translate");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275template(31, SpaceFiltersComponent_div_31_Template, 9, 14, "div", 15);
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(32, SpaceFiltersComponent_div_32_Template, 4, 3, "div", 16)(33, SpaceFiltersComponent_div_33_Template, 10, 10, "div", 17);
-        \u0275\u0275elementEnd();
-        \u0275\u0275declareLet(34);
-        \u0275\u0275pipe(35, "async");
-        \u0275\u0275template(36, SpaceFiltersComponent_section_36_Template, 8, 11, "section", 18)(37, SpaceFiltersComponent_section_37_Template, 5, 3, "section", 19);
-        \u0275\u0275pipe(38, "async");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(39, SpaceFiltersComponent_div_39_Template, 4, 3, "div", 20);
-      }
-      if (rf & 2) {
-        let tmp_5_0;
-        let tmp_6_0;
-        let tmp_21_0;
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.can_close);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 22, "COMMON.FILTERS"), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275property("formGroup", ctx.form);
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(11, 24, "CALENDAR_EVENT.DETAILS"), " ");
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(15, 26, "CALENDAR_EVENT.SPACE_LOCATION"), " ");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.use_region && ((tmp_5_0 = \u0275\u0275pipeBind1(17, 28, ctx.regions)) == null ? null : tmp_5_0.length));
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !ctx.use_region && ((tmp_6_0 = \u0275\u0275pipeBind1(19, 30, ctx.buildings)) == null ? null : tmp_6_0.length) > 1);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !ctx.hide_levels);
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(25, 32, "FORM.DATE"), "");
-        \u0275\u0275advance(4);
-        \u0275\u0275property("ngModel", ctx.form.getRawValue().date)("ngModelOptions", \u0275\u0275pureFunction0(40, _c077))("to", ctx.end_date)("short", true)("timezone", ctx.timezone)("range", ctx.multiday ? 1 : 0);
-        \u0275\u0275advance();
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(30, 34, "FORM.DATE_ERROR"), " ");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.multiday);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.allow_all_day);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", !ctx.form.value.all_day);
-        const has_mapspeople_r17 = \u0275\u0275pipeBind1(35, 36, ctx.using_mapspeople);
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngIf", !ctx.hide_levels && (!ctx.viewing_map || !has_mapspeople_r17));
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ((tmp_21_0 = \u0275\u0275pipeBind1(38, 38, ctx.features)) == null ? null : tmp_21_0.length) && (!ctx.viewing_map || !has_mapspeople_r17) && !ctx.hide_levels);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.can_close);
-      }
-    }, dependencies: [NgForOf, NgIf, IconComponent, SettingsToggleComponent, MatOption, MatFormField, MatSelect, MatRipple, MatCheckbox, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  max-width: 100vw;\n}\n/*# sourceMappingURL=space-filters.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceFiltersComponent, { className: "SpaceFiltersComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-filters.component.ts", lineNumber: 301 });
-})();
-
-// libs/spaces/src/lib/space-select-modal/space-filters-display.component.ts
-var _c078 = (a0) => ({ count: a0 });
-function SpaceFiltersDisplayComponent_button_12_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 13);
-    \u0275\u0275listener("click", function SpaceFiltersDisplayComponent_button_12_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.removeAllFeatures());
-    });
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "COMMON.FILTERS_CLEAR"), " ");
-  }
-}
-function SpaceFiltersDisplayComponent_div_14_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 14);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r1.location, " ");
-  }
-}
-function SpaceFiltersDisplayComponent_ng_container_19_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "date");
-    \u0275\u0275pipe(3, "date");
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(2, 2, ctx_r1.start, ctx_r1.time_format), " \u2014 ", \u0275\u0275pipeBind2(3, 5, ctx_r1.end, ctx_r1.time_format), " ");
-  }
-}
-function SpaceFiltersDisplayComponent_ng_container_20_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "COMMON.ALL_DAY"), " ");
-  }
-}
-function SpaceFiltersDisplayComponent_div_25_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 15)(1, "p", 16);
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "button", 17);
-    \u0275\u0275listener("click", function SpaceFiltersDisplayComponent_div_25_Template_button_click_3_listener() {
-      const feat_r4 = \u0275\u0275restoreView(_r3).$implicit;
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.removeFeature(feat_r4));
-    });
-    \u0275\u0275elementStart(4, "app-icon");
-    \u0275\u0275text(5, "close");
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const feat_r4 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(feat_r4);
-  }
-}
-var SpaceFiltersDisplayComponent = class _SpaceFiltersDisplayComponent extends AsyncHandler {
-  get all_day() {
-    return this._event_form.form.value.all_day;
-  }
-  get start() {
-    return this._event_form.form.value.date;
-  }
-  get end() {
-    const { date, duration } = this._event_form.form.value;
-    return date + duration * 60 * 1e3;
-  }
-  get time_format() {
-    return this._settings.time_format;
-  }
-  constructor(_bsheet, _event_form, _org, _settings) {
-    super();
-    this._bsheet = _bsheet;
-    this._event_form = _event_form;
-    this._org = _org;
-    this._settings = _settings;
-    this.view = "list";
-    this.viewChange = new EventEmitter();
-    this.options = this._event_form.options$;
-    this.location = "";
-    this.editFilters = () => this._bsheet.open(SpaceFiltersComponent);
-  }
-  ngOnInit() {
-    this.subscription("opts", this.options.subscribe(({ zones }) => this._updateLocation(zones)));
-  }
-  removeFeature(feat) {
-    return __async(this, null, function* () {
-      const { features } = this._event_form.filters || {};
-      this._event_form.setFilters({
-        features: (features || []).filter((_3) => _3 !== feat)
-      });
-    });
-  }
-  removeAllFeatures() {
-    return __async(this, null, function* () {
-      this._event_form.setFilters({ features: [] });
-    });
-  }
-  _updateLocation(zone_ids = []) {
-    const level2 = this._org.levelWithID(zone_ids);
-    const item = level2 || this._org.building;
-    this.location = item?.display_name || item?.name || "";
-  }
-  static {
-    this.\u0275fac = function SpaceFiltersDisplayComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _SpaceFiltersDisplayComponent)(\u0275\u0275directiveInject(MatBottomSheet), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceFiltersDisplayComponent, selectors: [["space-filters-display"]], inputs: { view: "view" }, outputs: { viewChange: "viewChange" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 27, vars: 34, consts: [["actions", "", 1, "flex", "items-center", "space-x-2", "p-2", "sm:hidden"], ["btn", "", "matRipple", "", "name", "edit-space-filters", 1, "w-1/2", "flex-1", 3, "click"], [1, "flex", "items-center"], ["btn", "", "matRipple", "", "name", "view-space-map", 1, "rounded-l", "rounded-r-none", 3, "click"], ["btn", "", "matRipple", "", "name", "view-space-list", 1, "rounded-l-none", "rounded-r", 3, "click"], ["filters", "", 1, "flex", "w-[35rem]", "max-w-full", "flex-wrap", "items-center", "p-2", "sm:max-w-[35rem]"], ["btn", "", "matRipple", "", "name", "clear-space-filters", "class", "mb-2 mr-2 min-h-[2rem]", 3, "click", 4, "ngIf"], ["filter-item", "", "zone", "", 4, "ngIf"], ["filter-item", "", "date", ""], ["filter-item", "", "time", ""], [4, "ngIf"], ["filter-item", "", "count", ""], ["filter-item", "", 4, "ngFor", "ngForOf"], ["btn", "", "matRipple", "", "name", "clear-space-filters", 1, "mb-2", "mr-2", "min-h-[2rem]", 3, "click"], ["filter-item", "", "zone", ""], ["filter-item", ""], [1, "truncate"], ["icon", "", "matRipple", "", "name", "remove-space-filter", 1, "-mr-4", 3, "click"]], template: function SpaceFiltersDisplayComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "section", 0)(1, "button", 1);
-        \u0275\u0275listener("click", function SpaceFiltersDisplayComponent_Template_button_click_1_listener() {
-          return ctx.editFilters();
-        });
-        \u0275\u0275text(2);
-        \u0275\u0275pipe(3, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(4, "div", 2)(5, "button", 3);
-        \u0275\u0275listener("click", function SpaceFiltersDisplayComponent_Template_button_click_5_listener() {
-          ctx.view = "map";
-          return ctx.viewChange.emit(ctx.view);
-        });
-        \u0275\u0275text(6);
-        \u0275\u0275pipe(7, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(8, "button", 4);
-        \u0275\u0275listener("click", function SpaceFiltersDisplayComponent_Template_button_click_8_listener() {
-          ctx.view = "list";
-          return ctx.viewChange.emit(ctx.view);
-        });
-        \u0275\u0275text(9);
-        \u0275\u0275pipe(10, "translate");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(11, "section", 5);
-        \u0275\u0275template(12, SpaceFiltersDisplayComponent_button_12_Template, 3, 3, "button", 6);
-        \u0275\u0275pipe(13, "async");
-        \u0275\u0275template(14, SpaceFiltersDisplayComponent_div_14_Template, 2, 1, "div", 7);
-        \u0275\u0275elementStart(15, "div", 8);
-        \u0275\u0275text(16);
-        \u0275\u0275pipe(17, "date");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(18, "div", 9);
-        \u0275\u0275template(19, SpaceFiltersDisplayComponent_ng_container_19_Template, 4, 8, "ng-container", 10)(20, SpaceFiltersDisplayComponent_ng_container_20_Template, 3, 3, "ng-container", 10);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(21, "div", 11);
-        \u0275\u0275text(22);
-        \u0275\u0275pipe(23, "async");
-        \u0275\u0275pipe(24, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(25, SpaceFiltersDisplayComponent_div_25_Template, 6, 1, "div", 12);
-        \u0275\u0275pipe(26, "async");
-        \u0275\u0275elementEnd();
-      }
-      if (rf & 2) {
-        let tmp_5_0;
-        let tmp_10_0;
-        let tmp_11_0;
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 14, "COMMON.FILTERS"), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275classProp("inverse", ctx.view !== "map");
-        \u0275\u0275advance();
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 16, "COMMON.MAP"), " ");
-        \u0275\u0275advance(2);
-        \u0275\u0275classProp("inverse", ctx.view !== "list");
-        \u0275\u0275advance();
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 18, "COMMON.LIST"), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngIf", ((tmp_5_0 = \u0275\u0275pipeBind1(13, 20, ctx.options)) == null ? null : tmp_5_0.features == null ? null : tmp_5_0.features.length) > 1);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.location);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(17, 22, ctx.start, "mediumDate"), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngIf", !ctx.all_day);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.all_day);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(24, 27, "CALENDAR_EVENT.SPACE_SELECT_SIZE_X", \u0275\u0275pureFunction1(32, _c078, ((tmp_10_0 = \u0275\u0275pipeBind1(23, 25, ctx.options)) == null ? null : tmp_10_0.capacity) || 2)), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngForOf", (tmp_11_0 = \u0275\u0275pipeBind1(26, 30, ctx.options)) == null ? null : tmp_11_0.features);
-      }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[filter-item][_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0 1rem;\n  min-height: 2rem;\n  font-size: 0.875rem;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 1.25rem;\n  margin-right: 0.5rem;\n  margin-bottom: 0.5rem;\n  max-width: 100%;\n  text-align: center;\n}\n[filter-item][_ngcontent-%COMP%]:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n[filter-item][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%]    + *[_ngcontent-%COMP%] {\n  margin-left: 0.5rem;\n}\n/*# sourceMappingURL=space-filters-display.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceFiltersDisplayComponent, { className: "SpaceFiltersDisplayComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-filters-display.component.ts", lineNumber: 120 });
-})();
-
-// libs/spaces/src/lib/space-select-modal/space-list.component.ts
-var _c079 = (a0) => ({ count: a0 });
-function SpaceListComponent_ng_container_6_ul_1_li_1_div_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 21)(1, "app-icon");
-    \u0275\u0275text(2, "done");
-    \u0275\u0275elementEnd()();
-  }
-}
-function SpaceListComponent_ng_container_6_ul_1_li_1_img_8_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 22);
-  }
-  if (rf & 2) {
-    const space_r2 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275property("source", space_r2.images[0]);
-  }
-}
-function SpaceListComponent_ng_container_6_ul_1_li_1_ng_template_9_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 23);
-  }
-}
-function SpaceListComponent_ng_container_6_ul_1_li_1_div_11_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 24);
-    \u0275\u0275pipe(1, "async");
-    \u0275\u0275pipe(2, "async");
-    \u0275\u0275pipe(3, "async");
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275pipe(5, "async");
-    \u0275\u0275pipe(6, "async");
-    \u0275\u0275pipe(7, "async");
-    \u0275\u0275listener("click", function SpaceListComponent_ng_container_6_ul_1_li_1_div_11_Template_div_click_0_listener($event) {
-      \u0275\u0275restoreView(_r4);
-      return \u0275\u0275resetView($event.stopPropagation());
-    });
-    \u0275\u0275elementStart(8, "app-icon");
-    \u0275\u0275text(9);
-    \u0275\u0275pipe(10, "async");
-    \u0275\u0275pipe(11, "async");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const space_r2 = \u0275\u0275nextContext().$implicit;
-    const ctx_r2 = \u0275\u0275nextContext(3);
-    \u0275\u0275classProp("bg-error", \u0275\u0275pipeBind1(1, 14, ctx_r2.room_alerts)[space_r2.id][0] === "closed")("bg-info", \u0275\u0275pipeBind1(2, 16, ctx_r2.room_alerts)[space_r2.id][0] === "info")("bg-warning", \u0275\u0275pipeBind1(3, 18, ctx_r2.room_alerts)[space_r2.id][0] === "warn")("text-error-content", \u0275\u0275pipeBind1(4, 20, ctx_r2.room_alerts)[space_r2.id][0] === "closed")("text-info-content", \u0275\u0275pipeBind1(5, 22, ctx_r2.room_alerts)[space_r2.id][0] === "info")("text-warning-content", \u0275\u0275pipeBind1(6, 24, ctx_r2.room_alerts)[space_r2.id][0] === "warn");
-    \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(7, 26, ctx_r2.room_alerts)[space_r2.id][1]);
-    \u0275\u0275advance(9);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(10, 28, ctx_r2.room_alerts)[space_r2.id][0] === "warn" ? "warning" : \u0275\u0275pipeBind1(11, 30, ctx_r2.room_alerts)[space_r2.id][0] === "info" ? "info" : "close");
-  }
-}
-function SpaceListComponent_ng_container_6_ul_1_li_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "li", 9);
-    \u0275\u0275pipe(1, "async");
-    \u0275\u0275pipe(2, "async");
-    \u0275\u0275elementStart(3, "button", 10);
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275pipe(5, "async");
-    \u0275\u0275listener("click", function SpaceListComponent_ng_container_6_ul_1_li_1_Template_button_click_3_listener() {
-      const space_r2 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r2.selectSpace(space_r2));
-    });
-    \u0275\u0275elementStart(6, "div", 11);
-    \u0275\u0275template(7, SpaceListComponent_ng_container_6_ul_1_li_1_div_7_Template, 3, 0, "div", 12)(8, SpaceListComponent_ng_container_6_ul_1_li_1_img_8_Template, 1, 1, "img", 13)(9, SpaceListComponent_ng_container_6_ul_1_li_1_ng_template_9_Template, 1, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(11, SpaceListComponent_ng_container_6_ul_1_li_1_div_11_Template, 12, 32, "div", 14);
-    \u0275\u0275pipe(12, "async");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "div", 15)(14, "div", 16);
-    \u0275\u0275text(15);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(16, "div", 17)(17, "app-icon", 18);
-    \u0275\u0275text(18, "place");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(19, "p", 19);
-    \u0275\u0275text(20);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(21, "div", 17)(22, "app-icon", 18);
-    \u0275\u0275text(23, "people");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(24, "p");
-    \u0275\u0275text(25);
-    \u0275\u0275pipe(26, "translate");
-    \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(27, "button", 20);
-    \u0275\u0275listener("click", function SpaceListComponent_ng_container_6_ul_1_li_1_Template_button_click_27_listener() {
-      const space_r2 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r2.toggleFav.emit(space_r2));
-    });
-    \u0275\u0275elementStart(28, "app-icon");
-    \u0275\u0275text(29);
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    let tmp_15_0;
-    const space_r2 = ctx.$implicit;
-    const space_placeholder_r5 = \u0275\u0275reference(10);
-    const ctx_r2 = \u0275\u0275nextContext(3);
-    \u0275\u0275classProp("!border-info", ctx_r2.active === space_r2.id)("!bg-error-light", \u0275\u0275pipeBind1(1, 16, ctx_r2.room_alerts)[space_r2.id] ? \u0275\u0275pipeBind1(2, 18, ctx_r2.room_alerts)[space_r2.id][0] === "closed" : false);
-    \u0275\u0275advance(3);
-    \u0275\u0275classProp("pointer-events-none", \u0275\u0275pipeBind1(4, 20, ctx_r2.room_alerts)[space_r2.id] ? \u0275\u0275pipeBind1(5, 22, ctx_r2.room_alerts)[space_r2.id][0] === "closed" : false);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngIf", ctx_r2.selected.includes(space_r2.id));
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", space_r2.images == null ? null : space_r2.images.length)("ngIfElse", space_placeholder_r5);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(12, 24, ctx_r2.room_alerts)[space_r2.id]);
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", space_r2.display_name || space_r2.name || "Meeting Space", " ");
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", space_r2.location || ((tmp_15_0 = ctx_r2.level(space_r2.zones)) == null ? null : tmp_15_0.display_name) || ((tmp_15_0 = ctx_r2.level(space_r2.zones)) == null ? null : tmp_15_0.name), " ");
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(26, 26, "CALENDAR_EVENT.CAPACITY_COUNT", \u0275\u0275pureFunction1(29, _c079, space_r2.capacity < 1 ? 2 : space_r2.capacity)), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275classProp("text-info", ctx_r2.isFavourite(space_r2.id));
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r2.isFavourite(space_r2.id) ? "favorite" : "favorite_border");
-  }
-}
-function SpaceListComponent_ng_container_6_ul_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "ul", 7);
-    \u0275\u0275template(1, SpaceListComponent_ng_container_6_ul_1_li_1_Template, 30, 31, "li", 8);
-    \u0275\u0275pipe(2, "async");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(2, 1, ctx_r2.available_spaces));
-  }
-}
-function SpaceListComponent_ng_container_6_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, SpaceListComponent_ng_container_6_ul_1_Template, 3, 3, "ul", 6);
-    \u0275\u0275pipe(2, "async");
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    let tmp_3_0;
-    const ctx_r2 = \u0275\u0275nextContext();
-    const empty_state_r6 = \u0275\u0275reference(9);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", (tmp_3_0 = \u0275\u0275pipeBind1(2, 2, ctx_r2.available_spaces)) == null ? null : tmp_3_0.length)("ngIfElse", empty_state_r6);
-  }
-}
-function SpaceListComponent_ng_template_8_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 25)(1, "p", 26);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "CALENDAR_EVENT.SPACE_SELECT_EMPTY"), " ");
-  }
-}
-function SpaceListComponent_ng_template_10_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 27);
-    \u0275\u0275element(1, "mat-spinner", 28);
-    \u0275\u0275elementStart(2, "p", 29);
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "translate");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275property("diameter", 32);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 2, "CALENDAR_EVENT.SPACE_SELECT_LOADING"), " ");
-  }
-}
-var SpaceListComponent = class _SpaceListComponent {
-  constructor(_event_form, _org) {
-    this._event_form = _event_form;
-    this._org = _org;
-    this.active = "";
-    this.selected = "";
-    this.favorites = [];
-    this.onSelect = new EventEmitter();
-    this.toggleFav = new EventEmitter();
-    this.loading = this._event_form.loading$;
-    this.available_spaces = this._event_form.available_spaces;
-    this.room_alerts = this._event_form.room_alerts;
-  }
-  level(zones) {
-    return this._org.levelWithID(zones);
-  }
-  ngOnInit() {
-    this._event_form.setView("find");
-  }
-  isFavourite(space_id) {
-    return this.favorites.includes(space_id);
-  }
-  selectSpace(space) {
-    this.onSelect.emit(space);
-  }
-  static {
-    this.\u0275fac = function SpaceListComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _SpaceListComponent)(\u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(OrganisationService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceListComponent, selectors: [["space-list"]], inputs: { active: "active", selected: "selected", favorites: "favorites" }, outputs: { onSelect: "onSelect", toggleFav: "toggleFav" }, standalone: false, decls: 12, vars: 10, consts: [["empty_state", ""], ["load_state", ""], ["space_placeholder", ""], [1, "font-bold"], ["count", "", 1, "mb-4", "text-sm", "opacity-60"], [4, "ngIf", "ngIfElse"], ["class", "list-style-none space-y-2", 4, "ngIf", "ngIfElse"], [1, "list-style-none", "space-y-2"], ["space", "", "class", "relative w-full rounded-lg border border-base-200 bg-base-100 p-2 shadow", 3, "!border-info", "!bg-error-light", 4, "ngFor", "ngForOf"], ["space", "", 1, "relative", "w-full", "rounded-lg", "border", "border-base-200", "bg-base-100", "p-2", "shadow"], ["matRipple", "", "name", "select-space", 1, "flex", "h-full", "w-full", "items-center", "rounded", 3, "click"], [1, "relative", "mr-4", "flex", "h-20", "w-20", "min-w-[5rem]", "items-center", "justify-center", "overflow-hidden", "rounded-xl", "bg-base-200"], ["class", "absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full border border-neutral bg-base-200 text-white", 4, "ngIf"], ["auth", "", "class", "h-full object-cover", 3, "source", 4, "ngIf", "ngIfElse"], ["class", "pointer-events-auto absolute bottom-1 left-1 flex h-6 w-6 rotate-12 items-center justify-center rounded-full", 3, "matTooltip", "bg-error", "bg-info", "bg-warning", "text-error-content", "text-info-content", "text-warning-content", "click", 4, "ngIf"], [1, "space-y-2"], [1, "mr-10", "truncate", "text-left", "font-medium"], [1, "flex", "items-center", "space-x-2", "text-sm"], [1, "text-info"], [1, "truncate"], ["icon", "", "matRipple", "", "name", "toggle-space-favourite", 1, "absolute", "right-1", "top-1", 3, "click"], [1, "absolute", "left-1", "top-1", "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", "border", "border-neutral", "bg-base-200", "text-white"], ["auth", "", 1, "h-full", "object-cover", 3, "source"], ["src", "assets/icons/room-placeholder.svg", 1, "m-auto"], [1, "pointer-events-auto", "absolute", "bottom-1", "left-1", "flex", "h-6", "w-6", "rotate-12", "items-center", "justify-center", "rounded-full", 3, "click", "matTooltip"], ["empty", "", 1, "flex", "flex-col", "items-center", "justify-center", "space-y-2", "p-16"], [1, "text-center", "opacity-30"], ["loading", "", 1, "flex", "flex-col", "items-center", "justify-center", "space-y-2", "p-16"], [3, "diameter"], [1, "opacity-30"]], template: function SpaceListComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "h3", 3);
-        \u0275\u0275text(1);
-        \u0275\u0275pipe(2, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(3, "p", 4);
-        \u0275\u0275text(4);
-        \u0275\u0275pipe(5, "async");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(6, SpaceListComponent_ng_container_6_Template, 3, 4, "ng-container", 5);
-        \u0275\u0275pipe(7, "async");
-        \u0275\u0275template(8, SpaceListComponent_ng_template_8_Template, 4, 3, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(10, SpaceListComponent_ng_template_10_Template, 5, 4, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        let tmp_3_0;
-        const load_state_r7 = \u0275\u0275reference(11);
-        \u0275\u0275advance();
-        \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(2, 4, "COMMON.RESULTS"));
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", ((tmp_3_0 = \u0275\u0275pipeBind1(5, 6, ctx.available_spaces)) == null ? null : tmp_3_0.length) || 0, " result(s) found ");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(7, 8, ctx.loading))("ngIfElse", load_state_r7);
-      }
-    }, dependencies: [NgForOf, NgIf, IconComponent, AuthenticatedImageDirective, MatRipple, MatProgressSpinner, MatTooltip, AsyncPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  overflow: auto;\n}\n/*# sourceMappingURL=space-list.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceListComponent, { className: "SpaceListComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-list.component.ts", lineNumber: 197 });
-})();
-
-// libs/spaces/src/lib/space-select-modal/space-location-pin.component.ts
-function SpaceLocationPinComponent_div_15_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "div", 16);
-  }
-}
-function SpaceLocationPinComponent_app_icon_16_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "app-icon", 17);
-    \u0275\u0275text(1, " done ");
-    \u0275\u0275elementEnd();
-  }
-}
-var SpaceLocationPinComponent = class _SpaceLocationPinComponent {
-  get color() {
-    return this.active ? "#F4511E" : this.selected ? "#D32F2F" : "#309251";
-  }
-  constructor(_data) {
-    this._data = _data;
-    this.selected = this._data.selected === true;
-    this.active = this._data.active === true;
-  }
-  static {
-    this.\u0275fac = function SpaceLocationPinComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _SpaceLocationPinComponent)(\u0275\u0275directiveInject(MAP_FEATURE_DATA));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceLocationPinComponent, selectors: [["space-location-pin"]], standalone: false, decls: 17, vars: 3, consts: [[1, "absolute", "bottom-0", "left-1/2", "-translate-x-1/2"], ["width", "44", "height", "60", "viewBox", "0 0 66 80", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["filter", "url(#filter0_d_1065_10313)"], ["d", "M19.724 53.0408C25.0871 60.3435 30.5582 65.8583 31.0184 66.3178C31.4558 66.755 32.0489 67.0007 32.6674 67.0008H32.6678C33.2863 67.0007 33.8795 66.755 34.3169 66.3178C34.7771 65.8583 40.2481 60.3435 45.6112 53.0408C48.2928 49.3894 50.963 45.2701 52.9663 41.0957C54.9629 36.935 56.3331 32.6459 56.3342 28.6724C56.364 25.5564 55.7725 22.4657 54.5941 19.5809C53.415 16.6946 51.6722 14.0724 49.4675 11.8677C47.2629 9.66308 44.6407 7.92024 41.7544 6.74121C38.8711 5.5634 35.782 4.97184 32.6676 5.00103C29.5533 4.97184 26.4642 5.5634 23.5809 6.74121C20.6946 7.92024 18.0724 9.66308 15.8677 11.8677C13.6631 14.0724 11.9202 16.6946 10.7412 19.5809C9.56278 22.4657 8.97122 25.5565 9.00108 28.6726C9.0022 32.646 10.3724 36.9351 12.369 41.0957C14.3723 45.2701 17.0425 49.3894 19.724 53.0408Z", "stroke", "#0B421D", "stroke-width", "2"], ["id", "filter0_d_1065_10313", "x", "0", "y", "0", "width", "65.3353", "height", "80.001", "filterUnits", "userSpaceOnUse", "color-interpolation-filters", "sRGB"], ["flood-opacity", "0", "result", "BackgroundImageFix"], ["in", "SourceAlpha", "type", "matrix", "values", "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0", "result", "hardAlpha"], ["dy", "4"], ["stdDeviation", "4"], ["in2", "hardAlpha", "operator", "out"], ["type", "matrix", "values", "0 0 0 0 0.0196078 0 0 0 0 0.109804 0 0 0 0 0.172549 0 0 0 0.2 0"], ["mode", "normal", "in2", "BackgroundImageFix", "result", "effect1_dropShadow_1065_10313"], ["mode", "normal", "in", "SourceGraphic", "in2", "effect1_dropShadow_1065_10313", "result", "shape"], [1, "absolute", "left-0", "top-0", "flex", "h-3/4", "w-full", "items-center", "justify-center"], ["class", "relative z-10 h-4 w-4 rounded-full border-2 border-[#0B421D] bg-base-100", 4, "ngIf"], ["class", "relative z-10 text-2xl text-white", 4, "ngIf"], [1, "relative", "z-10", "h-4", "w-4", "rounded-full", "border-2", "border-[#0B421D]", "bg-base-100"], [1, "relative", "z-10", "text-2xl", "text-white"]], template: function SpaceLocationPinComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "div", 0);
-        \u0275\u0275namespaceSVG();
-        \u0275\u0275elementStart(1, "svg", 1)(2, "g", 2);
-        \u0275\u0275element(3, "path", 3);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(4, "defs")(5, "filter", 4);
-        \u0275\u0275element(6, "feFlood", 5)(7, "feColorMatrix", 6)(8, "feOffset", 7)(9, "feGaussianBlur", 8)(10, "feComposite", 9)(11, "feColorMatrix", 10)(12, "feBlend", 11)(13, "feBlend", 12);
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275namespaceHTML();
-        \u0275\u0275elementStart(14, "div", 13);
-        \u0275\u0275template(15, SpaceLocationPinComponent_div_15_Template, 1, 0, "div", 14)(16, SpaceLocationPinComponent_app_icon_16_Template, 2, 0, "app-icon", 15);
-        \u0275\u0275elementEnd()();
-      }
-      if (rf & 2) {
-        \u0275\u0275advance(3);
-        \u0275\u0275attribute("fill", ctx.color);
-        \u0275\u0275advance(12);
-        \u0275\u0275property("ngIf", !ctx.selected);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.selected);
-      }
-    }, dependencies: [NgIf, IconComponent], encapsulation: 2 });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceLocationPinComponent, { className: "SpaceLocationPinComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-location-pin.component.ts", lineNumber: 83 });
-})();
-
-// libs/spaces/src/lib/space-select-modal/space-map.component.ts
-var _c080 = () => ({ controls: true });
-var _c147 = () => ({ standalone: true });
-function SpaceSelectMapComponent_mat_form_field_1_mat_option_3_div_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 10);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "building");
-    \u0275\u0275elementStart(3, "span", 11);
-    \u0275\u0275text(4, " - ");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    let tmp_4_0;
-    const lvl_r3 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", (tmp_4_0 = \u0275\u0275pipeBind1(2, 1, lvl_r3.parent_id)) == null ? null : tmp_4_0.display_name, " ");
-  }
-}
-function SpaceSelectMapComponent_mat_form_field_1_mat_option_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 7)(1, "div", 8);
-    \u0275\u0275template(2, SpaceSelectMapComponent_mat_form_field_1_mat_option_3_div_2_Template, 5, 3, "div", 9);
-    \u0275\u0275elementStart(3, "div");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const lvl_r3 = ctx.$implicit;
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("value", lvl_r3);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.use_region);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", lvl_r3.display_name || lvl_r3.name, " ");
-  }
-}
-function SpaceSelectMapComponent_mat_form_field_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-form-field", 4)(1, "mat-select", 5);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275twoWayListener("ngModelChange", function SpaceSelectMapComponent_mat_form_field_1_Template_mat_select_ngModelChange_1_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      \u0275\u0275twoWayBindingSet(ctx_r1.level, $event) || (ctx_r1.level = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275listener("ngModelChange", function SpaceSelectMapComponent_mat_form_field_1_Template_mat_select_ngModelChange_1_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.setOptions({ zone_ids: [$event.id] }));
-    });
-    \u0275\u0275template(3, SpaceSelectMapComponent_mat_form_field_1_mat_option_3_Template, 5, 3, "mat-option", 6);
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275twoWayProperty("ngModel", ctx_r1.level);
-    \u0275\u0275property("ngModelOptions", \u0275\u0275pureFunction0(8, _c147))("placeholder", \u0275\u0275pipeBind1(2, 4, "CALENDAR_EVENT.SPACE_LEVEL_ANY"));
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 6, ctx_r1.levels));
-  }
-}
-var SpaceSelectMapComponent = class _SpaceSelectMapComponent extends AsyncHandler {
-  get map_url() {
-    return this.level?.map_id || "";
-  }
-  get use_region() {
-    return !!this._settings.get("app.use_region");
-  }
-  constructor(_event_form, _org, _settings) {
-    super();
-    this._event_form = _event_form;
-    this._org = _org;
-    this._settings = _settings;
-    this.selected = [];
-    this.is_displayed = false;
-    this.onSelect = new EventEmitter();
-    this.zoom = 1;
-    this.center = { x: 0.5, y: 0.5 };
-    this.coordinates = void 0;
-    this._seletedSpace = (s) => () => {
-      this.onSelect.emit(s);
-      this._change.next(Date.now());
-    };
-    this.level = null;
-    this._change = new BehaviorSubject(0);
-    this.levels = combineLatest([
-      this._org.active_region,
-      this._org.active_building
-    ]).pipe(map(([region, bld]) => {
-      const level_list = this.use_region ? this._org.levelsForRegion(region) : this._org.levelsForBuilding(bld);
-      const viewable_levels = level_list.filter((lvl) => !lvl.tags.includes("parking"));
-      return viewable_levels.sort((a, b2) => a.parent_id.localeCompare(b2.parent_id) || (a.display_name || "").localeCompare(b2.display_name || ""));
-    }));
-    this.setOptions = (o) => this._event_form.setOptions(o);
-    this.features = combineLatest([
-      this._event_form.available_spaces,
-      this._change
-    ]).pipe(debounceTime(300), map(([l2]) => l2.map((space) => ({
-      location: space.map_id,
-      content: SpaceLocationPinComponent,
-      data: __spreadProps(__spreadValues({}, space), {
-        active: this.active === space.id,
-        selected: this.selected.includes(space.id)
-      })
-    }))));
-    this.actions = this._event_form.available_spaces.pipe(map((l2) => l2.map((space) => ({
-      id: space.map_id,
-      action: ["touchend", "mouseup"],
-      callback: this._seletedSpace(space)
-    }))));
-    this.styles = combineLatest([
-      this._event_form.spaces$,
-      this._event_form.available_spaces
-    ]).pipe(map(([spaces, free_spaces]) => spaces.reduce((styles, space) => {
-      const colours = this._settings.get("app.explore.colors") || {};
-      const status = free_spaces.find((_3) => _3.id === space.id) ? "free" : "busy";
-      styles[`#${space.map_id || space.id}`] = {
-        fill: colours[`space-${status}`] || colours[`${status}`] || DEFAULT_COLOURS[`${status}`]
-      };
-      return styles;
-    }, {})));
-  }
-  ngOnInit() {
-    this.subscription("levels_update", this._event_form.options$.subscribe(({ zones }) => {
-      const level2 = this._org.levelWithID(zones);
-      if (level2)
-        this.level = level2;
-    }));
-  }
-  setLevel(level2) {
-    this.setOptions({ zone_ids: [level2?.id] });
-    const bld = this._org.buildings.find((_3) => _3.id === level2?.parent_id);
-    if (bld) {
-      const [latitude, longitude] = (level2.location || bld.location).split(",").map((_3) => parseFloat(_3));
-      this.coordinates = { latitude, longitude };
-    }
-    this.level = level2;
-  }
-  setZoom(new_zoom) {
-    this.zoom = Math.max(0.5, Math.min(10, new_zoom));
-  }
-  resetMap() {
-    this.zoom = 1;
-    this.center = { x: 0.5, y: 0.5 };
-  }
-  static {
-    this.\u0275fac = function SpaceSelectMapComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _SpaceSelectMapComponent)(\u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceSelectMapComponent, selectors: [["space-map"]], inputs: { selected: "selected", active: "active", is_displayed: "is_displayed" }, outputs: { onSelect: "onSelect" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 8, vars: 17, consts: [[1, "w-full", "border-b", "border-base-200", "bg-base-100", "p-2"], ["appearance", "outline", "class", "w-full", 4, "ngIf"], [1, "relative", "w-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "options"], ["appearance", "outline", 1, "w-full"], ["name", "location", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"]], template: function SpaceSelectMapComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "div", 0);
-        \u0275\u0275template(1, SpaceSelectMapComponent_mat_form_field_1_Template, 5, 9, "mat-form-field", 1);
-        \u0275\u0275pipe(2, "async");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(3, "div", 2)(4, "interactive-map", 3);
-        \u0275\u0275pipe(5, "async");
-        \u0275\u0275pipe(6, "async");
-        \u0275\u0275pipe(7, "async");
-        \u0275\u0275twoWayListener("zoomChange", function SpaceSelectMapComponent_Template_interactive_map_zoomChange_4_listener($event) {
-          \u0275\u0275twoWayBindingSet(ctx.zoom, $event) || (ctx.zoom = $event);
-          return $event;
-        })("centerChange", function SpaceSelectMapComponent_Template_interactive_map_centerChange_4_listener($event) {
-          \u0275\u0275twoWayBindingSet(ctx.center, $event) || (ctx.center = $event);
-          return $event;
-        });
-        \u0275\u0275elementEnd()();
-      }
-      if (rf & 2) {
-        let tmp_0_0;
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", (tmp_0_0 = \u0275\u0275pipeBind1(2, 8, ctx.levels)) == null ? null : tmp_0_0.length);
-        \u0275\u0275advance(3);
-        \u0275\u0275property("src", ctx.map_url);
-        \u0275\u0275twoWayProperty("zoom", ctx.zoom)("center", ctx.center);
-        \u0275\u0275property("styles", \u0275\u0275pipeBind1(5, 10, ctx.styles))("features", \u0275\u0275pipeBind1(6, 12, ctx.features))("actions", \u0275\u0275pipeBind1(7, 14, ctx.actions))("options", \u0275\u0275pureFunction0(16, _c080));
-      }
-    }, dependencies: [NgForOf, NgIf, InteractiveMapComponent, MatOption, MatFormField, MatSelect, NgControlStatus, NgModel, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  background: rgba(0, 0, 0, 0.05);\n  display: flex;\n  flex-direction: column;\n}\nbutton[_ngcontent-%COMP%] {\n  border-radius: 0;\n}\n/*# sourceMappingURL=space-map.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceSelectMapComponent, { className: "SpaceSelectMapComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-map.component.ts", lineNumber: 74 });
-})();
-
-// libs/spaces/src/lib/spaces.module.ts
-var SharedSpacesModule = class _SharedSpacesModule {
-  static {
-    this.\u0275fac = function SharedSpacesModule_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _SharedSpacesModule)();
-    };
-  }
-  static {
-    this.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _SharedSpacesModule });
-  }
-  static {
-    this.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ imports: [
-      CommonModule,
-      MatDialogModule,
-      ComponentsModule,
-      FormFieldsModule,
-      MatBottomSheetModule,
-      MatCheckboxModule,
-      FormsModule,
-      ReactiveFormsModule
-    ] });
-  }
-};
-\u0275\u0275setComponentScope(NewSpaceSelectModalComponent, [
-  NgIf,
-  MatDialogClose,
-  IconComponent,
-  MatRipple,
-  SpaceDetailsComponent,
-  SpaceListComponent,
-  SpaceFiltersComponent,
-  SpaceFiltersDisplayComponent,
-  SpaceSelectMapComponent
-], [AsyncPipe, TranslatePipe]);
-
-// libs/events/src/lib/event-details-modal.component.ts
-var _c081 = (a0) => ({ time: a0 });
-var _c148 = (a0, a1) => ({ count: a0, cost: a1 });
-var _c219 = (a0) => ({ count: a0 });
-var _c314 = () => ({ disable_pan: true, disable_zoom: true });
-function EventDetailsModalComponent_div_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "div", 46);
-  }
-}
-function EventDetailsModalComponent_div_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 47);
-    \u0275\u0275element(1, "image-carousel", 48);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("images", ctx_r1.event == null ? null : ctx_r1.event.system == null ? null : ctx_r1.event.system.images);
-  }
-}
-function EventDetailsModalComponent_div_13_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 49);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r1.period_tz, " ");
-  }
-}
-function EventDetailsModalComponent_div_14_button_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 53);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_div_14_button_1_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r1.checkin());
-    });
-    \u0275\u0275elementStart(1, "div", 54)(2, "app-icon", 55);
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 56);
-    \u0275\u0275text(5);
-    \u0275\u0275pipe(6, "translate");
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275classProp("bg-success", ctx_r1.room_status !== "pending")("border-none", ctx_r1.room_status !== "pending")("pointer-events-none", ctx_r1.room_status !== "pending");
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(ctx_r1.room_status === "pending" ? "arrow_back" : "done");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 8, ctx_r1.room_status === "pending" ? "COMMON.CHECK_IN" : "COMMON.CHECKED_IN"), " ");
-  }
-}
-function EventDetailsModalComponent_div_14_button_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "button", 57)(1, "app-icon");
-    \u0275\u0275text(2, "more_horiz");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    \u0275\u0275nextContext(2);
-    const menu_r4 = \u0275\u0275reference(91);
-    \u0275\u0275property("matMenuTriggerFor", menu_r4);
-  }
-}
-function EventDetailsModalComponent_div_14_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 50);
-    \u0275\u0275template(1, EventDetailsModalComponent_div_14_button_1_Template, 7, 10, "button", 51)(2, EventDetailsModalComponent_div_14_button_2_Template, 3, 1, "button", 52);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.room_status && (ctx_r1.event == null ? null : ctx_r1.event.can_check_in) && ctx_r1.room_status !== "free");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.allow_edit);
-  }
-}
-function EventDetailsModalComponent_div_27_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 49);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "date");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind3(2, 1, ctx_r1.event.date, "EEEE, dd LLLL y (z)", ctx_r1.tz), " ");
-  }
-}
-function EventDetailsModalComponent_div_34_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 49);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r1.period_tz, " ");
-  }
-}
-function EventDetailsModalComponent_ng_container_39_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275text(1);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", (ctx_r1.level == null ? null : ctx_r1.level.display_name) || (ctx_r1.level == null ? null : ctx_r1.level.name), ", ");
-  }
-}
-function EventDetailsModalComponent_div_41_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 16)(1, "app-icon");
-    \u0275\u0275text(2, "place");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate2(" ", (ctx_r1.building == null ? null : ctx_r1.building.display_name) || (ctx_r1.building == null ? null : ctx_r1.building.name), ", ", ctx_r1.building == null ? null : ctx_r1.building.address, " ");
-  }
-}
-function EventDetailsModalComponent_ng_container_70_div_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 59);
-    \u0275\u0275element(1, "a-user-avatar", 31);
-    \u0275\u0275elementStart(2, "div", 32)(3, "div", 33);
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 34);
-    \u0275\u0275text(6);
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const user_r5 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275property("user", user_r5);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", user_r5 == null ? null : user_r5.name, " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("title", user_r5.email);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", user_r5.email, " ");
-  }
-}
-function EventDetailsModalComponent_ng_container_70_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, EventDetailsModalComponent_ng_container_70_div_1_Template, 7, 4, "div", 58);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const user_r5 = ctx.$implicit;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", user_r5.email !== ctx_r1.event.host);
-  }
-}
-function EventDetailsModalComponent_ng_container_81_div_6_div_12_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 73);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const order_r7 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", order_r7.caterer, " ");
-  }
-}
-function EventDetailsModalComponent_ng_container_81_div_6_div_17_span_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 79);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const item_r8 = \u0275\u0275nextContext().$implicit;
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("matTooltip", ctx_r1.optionList(item_r8));
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 2, "CALENDAR_EVENT.CATERING_ORDER_OPTION_COUNT", \u0275\u0275pureFunction1(5, _c219, (item_r8.option_list == null ? null : item_r8.option_list.length) || "0")), " ");
-  }
-}
-function EventDetailsModalComponent_ng_container_81_div_6_div_17_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 74)(1, "div", 75)(2, "span", 66);
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(4, EventDetailsModalComponent_ng_container_81_div_6_div_17_span_4_Template, 3, 7, "span", 76);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 77);
-    \u0275\u0275text(6);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "div", 78);
-    \u0275\u0275text(8);
-    \u0275\u0275pipe(9, "currency");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const item_r8 = ctx.$implicit;
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(item_r8.name || "Item");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", item_r8.option_list == null ? null : item_r8.option_list.length);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" x", item_r8.quantity, " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(9, 4, item_r8.unit_price_with_options / 100, ctx_r1.currency_code), " ea ");
-  }
-}
-function EventDetailsModalComponent_ng_container_81_div_6_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r6 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 63)(1, "div", 64)(2, "div", 65)(3, "div", 66);
-    \u0275\u0275text(4);
-    \u0275\u0275pipe(5, "date");
-    \u0275\u0275pipe(6, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "div", 67)(8, "div", 68);
-    \u0275\u0275text(9);
-    \u0275\u0275pipe(10, "currency");
-    \u0275\u0275pipe(11, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(12, EventDetailsModalComponent_ng_container_81_div_6_div_12_Template, 2, 1, "div", 69);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(13, "button", 70);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_ng_container_81_div_6_Template_button_click_13_listener() {
-      const order_r7 = \u0275\u0275restoreView(_r6).$implicit;
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r1.show_order[order_r7.id] = !ctx_r1.show_order[order_r7.id]);
-    });
-    \u0275\u0275elementStart(14, "app-icon");
-    \u0275\u0275text(15);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(16, "div", 71);
-    \u0275\u0275template(17, EventDetailsModalComponent_ng_container_81_div_6_div_17_Template, 10, 7, "div", 72);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const order_r7 = ctx.$implicit;
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 10, "CALENDAR_EVENT.CATERING_ORDER_AT", \u0275\u0275pureFunction1(19, _c081, \u0275\u0275pipeBind2(5, 7, order_r7.deliver_at, "MMM d, " + ctx_r1.time_format))), " ");
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(11, 16, "CALENDAR_EVENT.CATERING_ORDER_DETAILS", \u0275\u0275pureFunction2(21, _c148, order_r7.item_count, \u0275\u0275pipeBind2(10, 13, order_r7.total_cost / 100, ctx_r1.currency_code))), " ");
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", order_r7.caterer);
-    \u0275\u0275advance();
-    \u0275\u0275property("matTooltip", ctx_r1.show_order[order_r7.id] ? "Hide order items" : "Show order items");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", ctx_r1.show_order[order_r7.id] ? "expand_less" : "expand_more", " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("@show", ctx_r1.print || ctx_r1.show_order[order_r7.id] ? "show" : "hide");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", order_r7.items);
-  }
-}
-function EventDetailsModalComponent_ng_container_81_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "div", 19)(2, "h3", 60);
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 61);
-    \u0275\u0275template(6, EventDetailsModalComponent_ng_container_81_div_6_Template, 18, 24, "div", 62);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 2, "CALENDAR_EVENT.CATERING"), " ");
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngForOf", ctx_r1.event.valid_catering);
-  }
-}
-function EventDetailsModalComponent_ng_container_83_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "interactive-map", 80);
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("src", ctx_r1.level == null ? null : ctx_r1.level.map_id)("features", ctx_r1.features)("options", \u0275\u0275pureFunction0(3, _c314));
-  }
-}
-function EventDetailsModalComponent_div_84_div_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "div", 83);
-    \u0275\u0275pipe(1, "sanitize");
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("innerHTML", \u0275\u0275pipeBind1(1, 1, ctx_r1.body) || "Unable to sanitize notes contents", \u0275\u0275sanitizeHtml);
-  }
-}
-function EventDetailsModalComponent_div_84_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 19)(1, "h3", 81);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(4, EventDetailsModalComponent_div_84_div_4_Template, 2, 3, "div", 82);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 2, "CALENDAR_EVENT.NOTES_HEADER"), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.raw_body);
-  }
-}
-function EventDetailsModalComponent_ng_container_85_div_6_div_14_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 74)(1, "div", 75)(2, "span", 66);
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(4, "div", 77);
-    \u0275\u0275text(5);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const item_r11 = ctx.$implicit;
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(item_r11.name || "Item");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" x", item_r11.quantity, " ");
-  }
-}
-function EventDetailsModalComponent_ng_container_85_div_6_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 86)(1, "button", 87);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_ng_container_85_div_6_Template_button_click_1_listener() {
-      const request_r10 = \u0275\u0275restoreView(_r9).$implicit;
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r1.show_request[request_r10.id] = !ctx_r1.show_request[request_r10.id]);
-    });
-    \u0275\u0275elementStart(2, "div", 88)(3, "div", 66);
-    \u0275\u0275text(4);
-    \u0275\u0275pipe(5, "date");
-    \u0275\u0275pipe(6, "translate");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(7, "div", 89)(8, "app-icon");
-    \u0275\u0275text(9);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(10, "div", 90)(11, "app-icon", 55);
-    \u0275\u0275text(12);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(13, "div", 71);
-    \u0275\u0275template(14, EventDetailsModalComponent_ng_container_85_div_6_div_14_Template, 6, 2, "div", 72);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const request_r10 = ctx.$implicit;
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 21, "CALENDAR_EVENT.ASSETS_REQUESTED_FOR", \u0275\u0275pureFunction1(24, _c081, \u0275\u0275pipeBind2(5, 18, request_r10.deliver_at, "MMM d, " + ctx_r1.time_format))), " ");
-    \u0275\u0275advance(3);
-    \u0275\u0275classProp("bg-success", request_r10.state === "approved")("text-success-content", request_r10.state === "approved")("bg-warning", request_r10.state !== "approved" && request_r10.state !== "rejected")("text-warning-content", request_r10.state !== "approved" && request_r10.state !== "rejected")("bg-error", request_r10.state === "rejected")("text-error-content", request_r10.state === "rejected");
-    \u0275\u0275property("matTooltip", request_r10.state || "Tentative");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", request_r10.state === "approved" ? "done" : request_r10.state === "rejected" ? "close" : "schedule", " ");
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", ctx_r1.show_request[request_r10.id] ? "expand_less" : "expand_more", " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("@show", ctx_r1.print || ctx_r1.show_request[request_r10.id] ? "show" : "hide");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", request_r10.items);
-  }
-}
-function EventDetailsModalComponent_ng_container_85_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "div", 19)(2, "h3", 84);
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 61);
-    \u0275\u0275template(6, EventDetailsModalComponent_ng_container_85_div_6_Template, 15, 26, "div", 85);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind1(4, 3, "CALENDAR_EVENT.ASSETS_HEADER"), " (", (ctx_r1.event.valid_assets == null ? null : ctx_r1.event.valid_assets.length) || 0, ") ");
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngForOf", ctx_r1.event.valid_assets);
-  }
-}
-function EventDetailsModalComponent_div_89_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r12 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 91)(1, "attendee-list", 92);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_div_89_Template_attendee_list_click_1_listener() {
-      \u0275\u0275restoreView(_r12);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.show_attendees = false);
-    });
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("list", ctx_r1.event.attendees)("host", ctx_r1.event.host);
-  }
-}
-function EventDetailsModalComponent_button_92_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r13 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 93);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_button_92_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r13);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.edit ? ctx_r1.edit(ctx_r1.event) : "");
-    });
-    \u0275\u0275elementStart(1, "div", 42)(2, "app-icon", 55);
-    \u0275\u0275text(3, "edit");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div");
-    \u0275\u0275text(5);
-    \u0275\u0275pipe(6, "translate");
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("matTooltip", !ctx_r1.can_edit ? ctx_r1.no_edit_message : "")("disabled", !ctx_r1.can_edit);
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 3, "CALENDAR_EVENT.ACTION_EDIT"), " ");
-  }
-}
-function EventDetailsModalComponent_button_100_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r14 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 41);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_button_100_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r14);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.printEvent());
-    });
-    \u0275\u0275elementStart(1, "div", 42)(2, "app-icon", 55);
-    \u0275\u0275text(3, "print");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div");
-    \u0275\u0275text(5);
-    \u0275\u0275pipe(6, "translate");
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 1, "CALENDAR_EVENT.ACTION_PRINT"), " ");
-  }
-}
-function EventDetailsModalComponent_button_101_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r15 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 41);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_button_101_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r15);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.remove ? ctx_r1.remove(ctx_r1.event, true) : "");
-    });
-    \u0275\u0275elementStart(1, "div", 42)(2, "app-icon", 43);
-    \u0275\u0275text(3, "delete");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div");
-    \u0275\u0275text(5);
-    \u0275\u0275pipe(6, "translate");
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 1, "CALENDAR_EVENT.ACTION_DELETE_SERIES"), " ");
-  }
-}
-function EventDetailsModalComponent_button_102_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r16 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 41);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_button_102_Template_button_click_0_listener() {
-      const act_r17 = \u0275\u0275restoreView(_r16).$implicit;
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.action.emit(act_r17.id));
-    });
-    \u0275\u0275elementStart(1, "div", 42)(2, "app-icon", 55);
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div");
-    \u0275\u0275text(5);
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const act_r17 = ctx.$implicit;
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(act_r17.icon);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(act_r17.name);
-  }
-}
-var EMPTY_ACTIONS = [];
-var EventDetailsModalComponent = class _EventDetailsModalComponent {
-  get is_concierge() {
-    return this._settings.app_name.toLowerCase().includes("concierge");
-  }
-  get can_edit() {
-    return true;
-  }
-  get timezone() {
-    return this._settings.get("app.events.use_building_timezone") ? this._org.building.timezone : "";
-  }
-  get tz() {
-    const tz = this.timezone;
-    if (!tz)
-      return "";
-    const tz_offset = getTimezoneOffsetString(tz);
-    return tz_offset === this._local_tz ? "" : tz_offset;
-  }
-  get tz_date_same() {
-    return !this._date.transform(this.event.date, "yyyy-MM-dd", this.tz).localeCompare(this._date.transform(this.event.date, "yyyy-MM-dd"));
-  }
-  get body() {
-    return this.event.body.replace(/\\n\\n\[ID\|.*\]/gm, "");
-  }
-  get allow_edit() {
-    return !this._settings.get("app.events.booking_unavailable");
-  }
-  get custom_actions() {
-    return this._settings.get("app.events.custom_actions") || EMPTY_ACTIONS;
-  }
-  get time_format() {
-    return this._settings.time_format;
-  }
-  get event_status() {
-    if (this.event?.state === "done")
-      return "neutral";
-    if (this.event?.status === "approved")
-      return "success";
-    if (this.event?.status === "tentative")
-      return "warning";
-    if (this.event?.status === "declined")
-      return "error";
-    return "warning";
-  }
-  constructor(_data, _org, _space_pipe, _settings, _dialog) {
-    this._data = _data;
-    this._org = _org;
-    this._space_pipe = _space_pipe;
-    this._settings = _settings;
-    this._dialog = _dialog;
-    this.action = new EventEmitter();
-    this.edit = this._data.edit_fn;
-    this.remove = this._data.remove_fn;
-    this.show_order = {};
-    this.show_request = {};
-    this.room_status = "";
-    this.hide_map = false;
-    this.hide_edit = false;
-    this.raw_body = "";
-    this.print = false;
-    this.show_attendees = false;
-    this.event = this._data.event;
-    this.no_edit_message = "Editing bookings long than \n a day is not available";
-    this.features = [
-      {
-        location: this.event?.system?.map_id,
-        content: MapPinComponent
-      }
-    ];
-    this.has_catering = this.event?.ext("catering")?.length > 0;
-    this.has_assets = !!this.event?.linked_bookings?.find((_3) => _3.booking_type === "asset-request");
-    this.level = new BuildingLevel();
-    this.building = new Building();
-    this.space = new Space();
-    this._local_tz = getTimezoneOffsetString(Intl.DateTimeFormat().resolvedOptions().timeZone);
-    this.accept_count = this.event.attendees.reduce((count, user) => count += user.response_status === "accepted" ? 1 : 0, 0);
-    this.declined_count = this.event.attendees.reduce((count, user) => count += user.response_status === "declined" ? 1 : 0, 0);
-    this.pending_count = this.event.attendees.reduce((count, user) => count += user.response_status === "tentative" || user.response_status === "needsAction" ? 1 : 0, 0);
-    this._date = new DatePipe("en");
-    const doc = new DOMParser().parseFromString(this.event.body, "text/html");
-    this.raw_body = (doc.body.textContent || "").trim();
-    console.log("");
-    this._load().then();
-  }
-  ngOnInit() {
-    this.no_edit_message = i18n("CALENDAR_EVENT.NO_LONG_EDIT_MSG");
-  }
-  get period() {
-    if (this.event?.all_day)
-      return "All Day";
-    return this.formattedTime();
-  }
-  get period_tz() {
-    return this.formattedTime(this.tz);
-  }
-  formattedTime(tz) {
-    const date = this.event.date;
-    const date_end = this.event.date_end;
-    const all_day = this.event.all_day;
-    const tz_format = this._date.transform(date, "zzzz", tz);
-    const start_date = this._date.transform(date, "MMM d", tz);
-    const start_time = this._date.transform(date, this.time_format, tz);
-    const end_date = this._date.transform(date_end, "MMM d", tz);
-    const end_time = this._date.transform(date_end, this.time_format, tz);
-    const is_multiday = this.event?.duration > 24 * 60;
-    if (is_multiday) {
-      return `${start_date}${all_day ? "" : ", " + start_time} - ${end_date}${all_day ? "" : ", " + end_time}`;
-    } else if (all_day) {
-      return "All Day";
-    }
-    return `${start_time} - ${end_time} ${"(" + tz_format + ")"}`;
-  }
-  optionList(item) {
-    return item.option_list?.map((_3) => _3.name).join("\n");
-  }
-  checkin() {
-    return __async(this, null, function* () {
-      const mod = Oa(this.space?.id, "Bookings");
-      if (!mod)
-        return;
-      yield mod.execute("checkin", [getUnixTime(this.event.date)]).catch((e) => notifyError(`Error checking in booking. ${e}`));
-      this.room_status = "busy";
-    });
-  }
-  _load() {
-    return __async(this, null, function* () {
-      this.space = yield this._space_pipe.transform(this.event.system?.id || this.event.system?.email);
-      this.level = this._org.levelWithID(this.space.zones);
-      this.building = this._org.buildings.find((bld) => this.space.zones.includes(bld.id));
-      this.features = [
-        {
-          location: this.space.map_id,
-          content: MapPinComponent
-        }
-      ];
-      const doc = new DOMParser().parseFromString(this.event.body, "text/html");
-      this.raw_body = (doc.body.textContent || "").trim();
-      if (this.event.extension_data.catering?.length || this.event.extension_data.assets?.length) {
-        return;
-      }
-      const metadata = yield getEventMetadata(this.event.id, this.space.id).toPromise();
-      if (metadata) {
-        this.event = new CalendarEvent(__spreadProps(__spreadValues({}, this.event), {
-          extension_data: __spreadValues(__spreadValues({}, this.event.extension_data), metadata)
-        }));
-      }
-    });
-  }
-  status(id) {
-    const booking = this.event.linked_bookings.find((_3) => _3.asset_id === id);
-    if (booking.status)
-      return booking.status;
-    return booking ? booking.approved ? "approved" : booking.rejected ? "rejected" : "pending" : "pending";
-  }
-  viewLocation() {
-    this.hide_map = true;
-    const ref = this._dialog.open(MapLocateModalComponent, {
-      maxWidth: "95vw",
-      maxHeight: "95vh",
-      data: { item: this.space }
-    });
-    ref.afterClosed().subscribe(() => {
-      this.hide_map = false;
-    });
-  }
-  printEvent() {
-    this.print = true;
-    setTimeout(() => {
-      window.print();
-      setTimeout(() => this.print = false, 100);
-    }, 300);
-  }
-  static {
-    this.\u0275fac = function EventDetailsModalComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _EventDetailsModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SpacePipe), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(MatDialog));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _EventDetailsModalComponent, selectors: [["event-details-modal"]], outputs: { action: "action" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe])], decls: 103, vars: 64, consts: [["menu", "matMenu"], [1, "h-screen", "w-screen", "space-y-2", "overflow-auto", "bg-base-100", "pb-2", "sm:relative", "sm:inset-auto", "sm:h-auto", "sm:max-h-[80vh]", "sm:w-[51rem]", "sm:rounded", "sm:bg-base-200", "print:min-h-screen", "print:w-screen", "print:overflow-visible"], [1, "max-h-screen", "flex-col", "items-center", "border-base-200", "bg-base-100", "pb-4", "sm:flex", "sm:max-h-[80vh]", "sm:border-b", "sm:px-16", "print:border-none"], ["binding", "", "mod", "Bookings", "bind", "status", 3, "modelChange", "model", "sys"], ["class", "block h-8 w-full sm:hidden", 4, "ngIf"], ["class", "h-64 w-full overflow-hidden bg-neutral sm:rounded-b print:hidden", 4, "ngIf"], ["title", "", 1, "mt-2", "w-full", "px-3", "text-xl", "font-medium"], [1, "w-full", "items-center", "justify-between", "sm:flex"], [1, "m-2", "flex"], [3, "status"], [1, "flex", "flex-col", "leading-tight"], ["class", "text-xs opacity-30", 4, "ngIf"], ["actions", "", "class", "flex items-center space-x-2 px-2 print:hidden", 4, "ngIf"], [1, "flex-wrap", "sm:flex", "sm:px-12"], [1, "min-w-1/3", "flex-grow-[3]", "space-y-2", "rounded", "border-base-200", "sm:m-2", "sm:w-[16rem]", "sm:border", "sm:bg-base-100", "sm:p-4"], [1, "mb-2", "mt-2", "px-3", "text-lg", "font-medium"], [1, "flex", "items-center", "space-x-2", "px-2"], [4, "ngIf"], ["class", "flex items-center space-x-2 px-2", 4, "ngIf"], [1, "min-w-1/3", "mt-4", "flex-grow-[3]", "rounded", "border-base-200", "sm:m-2", "sm:w-[16rem]", "sm:border", "sm:bg-base-100", "sm:p-4"], [1, "mx-3", "flex", "items-center", "justify-between", "border-t", "border-base-200", "sm:border-none"], [1, "text-lg", "font-medium"], ["matRipple", "", "show-attendees", "", 1, "clear", "text-xs", "underline", "print:hidden", 3, "click"], [1, "flex", "items-center", "p-1"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-1"], [1, "text-lg"], [1, "text-sm", "uppercase"], [1, "hidden", "print:block"], [4, "ngFor", "ngForOf"], [1, "mx-3", "mt-2", "border-t", "border-base-200", "pt-2", "text-lg", "font-medium"], ["host", "", 1, "flex", "items-center", "space-x-2", "px-2"], [3, "user"], [1, "w-px", "flex-1", "text-sm"], [1, "w-full", "truncate"], [1, "w-full", "truncate", "opacity-60", 3, "title"], ["map", "", 1, "min-w-1/3", "relative", "m-2", "mt-4", "h-64", "w-[calc(100%-1rem)]", "flex-grow-[3]", "overflow-hidden", "rounded", "border", "border-base-200", "p-2", "sm:mt-2", "sm:h-48", "sm:w-[16rem]", "sm:bg-base-100", 3, "click"], ["class", "min-w-1/3 mt-4 flex-grow-[3] rounded border-base-200 sm:m-2 sm:w-[16rem] sm:border sm:bg-base-100 sm:p-4", 4, "ngIf"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "left-2", "top-2", "bg-neutral", "text-white", "print:hidden"], ["class", "absolute inset-0 z-50", 4, "ngIf"], ["xPosition", "before"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "matTooltip", "disabled", "click", 4, "ngIf"], ["mat-menu-item", "", 3, "click"], [1, "flex", "items-center", "space-x-2", "pr-2", "text-base"], [1, "text-2xl", "text-error"], ["mat-menu-item", "", 3, "click", 4, "ngIf"], ["mat-menu-item", "", 3, "click", 4, "ngFor", "ngForOf"], [1, "block", "h-8", "w-full", "sm:hidden"], [1, "h-64", "w-full", "overflow-hidden", "bg-neutral", "sm:rounded-b", "print:hidden"], [1, "h-64", "w-full", 3, "images"], [1, "text-xs", "opacity-30"], ["actions", "", 1, "flex", "items-center", "space-x-2", "px-2", "print:hidden"], ["btn", "", "matRipple", "", "class", "h-10 flex-1", 3, "bg-success", "border-none", "pointer-events-none", "click", 4, "ngIf"], ["icon", "", "matRipple", "", "class", "h-12 w-12 rounded bg-secondary text-white", 3, "matMenuTriggerFor", 4, "ngIf"], ["btn", "", "matRipple", "", 1, "h-10", "flex-1", 3, "click"], [1, "flex", "items-center", "justify-center", "space-x-2"], [1, "text-2xl"], [1, "pr-4"], ["icon", "", "matRipple", "", 1, "h-12", "w-12", "rounded", "bg-secondary", "text-white", 3, "matMenuTriggerFor"], ["class", "flex items-center space-x-2 px-2", "attendee", "", 4, "ngIf"], ["attendee", "", 1, "flex", "items-center", "space-x-2", "px-2"], [1, "mx-3", "my-2", "text-lg", "font-medium"], [1, "flex", "flex-col", "space-y-2"], ["order", "", "class", "overflow-hidden rounded-xl border border-base-300 bg-base-100", 4, "ngFor", "ngForOf"], ["order", "", 1, "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100"], [1, "flex", "items-center", "space-x-2", "p-3"], [1, "flex-1"], [1, "text-sm"], [1, "flex", "items-center", "space-x-2"], [1, "text-xs", "opacity-60"], ["class", "rounded bg-base-200 px-2 py-1 text-xs", 4, "ngIf"], ["icon", "", "matRipple", "", 1, "print:hidden", 3, "click", "matTooltip"], [1, "flex", "flex-col", "divide-y", "divide-base-100", "bg-base-200"], ["class", "flex items-center space-x-2 px-3 py-1 hover:opacity-90", 4, "ngFor", "ngForOf"], [1, "rounded", "bg-base-200", "px-2", "py-1", "text-xs"], [1, "flex", "items-center", "space-x-2", "px-3", "py-1", "hover:opacity-90"], [1, "flex", "flex-1", "items-center"], ["class", "ml-4 text-xs font-normal opacity-60", 3, "matTooltip", 4, "ngIf"], [1, "rounded", "bg-success", "px-2", "py-1", "text-xs", "text-success-content"], [1, "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content"], [1, "ml-4", "text-xs", "font-normal", "opacity-60", 3, "matTooltip"], [1, "pointer-events-none", 3, "src", "features", "options"], [1, "mx-3", "border-t", "border-base-200", "text-lg", "font-medium", "sm:border-none"], ["notes", "", "class", "mx-4 max-w-full overflow-hidden", 3, "innerHTML", 4, "ngIf"], ["notes", "", 1, "mx-4", "max-w-full", "overflow-hidden", 3, "innerHTML"], [1, "mx-3", "pt-2", "text-lg", "font-medium"], ["request", "", "class", "overflow-hidden rounded-xl border border-base-300 bg-base-100", 4, "ngFor", "ngForOf"], ["request", "", 1, "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100"], ["matRipple", "", 1, "flex", "w-full", "items-center", "space-x-2", "p-3", 3, "click"], [1, "flex-1", "text-left"], [1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full", "print:hidden", 3, "matTooltip"], [1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full", "print:hidden"], [1, "absolute", "inset-0", "z-50"], [3, "click", "list", "host"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "click", "matTooltip", "disabled"]], template: function EventDetailsModalComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "div", 1)(1, "div", 2)(2, "i", 3);
-        \u0275\u0275twoWayListener("modelChange", function EventDetailsModalComponent_Template_i_modelChange_2_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          \u0275\u0275twoWayBindingSet(ctx.room_status, $event) || (ctx.room_status = $event);
-          return \u0275\u0275resetView($event);
-        });
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(3, EventDetailsModalComponent_div_3_Template, 1, 0, "div", 4)(4, EventDetailsModalComponent_div_4_Template, 2, 1, "div", 5);
-        \u0275\u0275elementStart(5, "h3", 6);
-        \u0275\u0275text(6);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(7, "div", 7)(8, "div", 8)(9, "status-pill", 9)(10, "div", 10)(11, "div");
-        \u0275\u0275text(12);
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(13, EventDetailsModalComponent_div_13_Template, 2, 1, "div", 11);
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275template(14, EventDetailsModalComponent_div_14_Template, 3, 2, "div", 12);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(15, "div", 13)(16, "div", 14)(17, "h3", 15);
-        \u0275\u0275text(18);
-        \u0275\u0275pipe(19, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(20, "div", 16)(21, "app-icon");
-        \u0275\u0275text(22, "event");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(23, "div", 10)(24, "div");
-        \u0275\u0275text(25);
-        \u0275\u0275pipe(26, "date");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(27, EventDetailsModalComponent_div_27_Template, 3, 5, "div", 11);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(28, "div", 16)(29, "app-icon");
-        \u0275\u0275text(30, "schedule");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(31, "div", 10)(32, "div");
-        \u0275\u0275text(33);
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(34, EventDetailsModalComponent_div_34_Template, 2, 1, "div", 11);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(35, "div", 16)(36, "app-icon");
-        \u0275\u0275text(37, "map");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(38, "div");
-        \u0275\u0275template(39, EventDetailsModalComponent_ng_container_39_Template, 2, 1, "ng-container", 17);
-        \u0275\u0275text(40);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275template(41, EventDetailsModalComponent_div_41_Template, 5, 2, "div", 18);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(42, "div", 19)(43, "div", 20)(44, "h3", 21);
-        \u0275\u0275text(45);
-        \u0275\u0275pipe(46, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(47, "button", 22);
-        \u0275\u0275listener("click", function EventDetailsModalComponent_Template_button_click_47_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.show_attendees = true);
-        });
-        \u0275\u0275text(48);
-        \u0275\u0275pipe(49, "translate");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(50, "div", 23)(51, "div", 24)(52, "div", 25);
-        \u0275\u0275text(53);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(54, "div", 26);
-        \u0275\u0275text(55);
-        \u0275\u0275pipe(56, "translate");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(57, "div", 24)(58, "div", 25);
-        \u0275\u0275text(59);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(60, "div", 26);
-        \u0275\u0275text(61);
-        \u0275\u0275pipe(62, "translate");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(63, "div", 24)(64, "div", 25);
-        \u0275\u0275text(65);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(66, "div", 26);
-        \u0275\u0275text(67);
-        \u0275\u0275pipe(68, "translate");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(69, "div", 27);
-        \u0275\u0275template(70, EventDetailsModalComponent_ng_container_70_Template, 2, 1, "ng-container", 28);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(71, "h3", 29);
-        \u0275\u0275text(72);
-        \u0275\u0275pipe(73, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(74, "div", 30);
-        \u0275\u0275element(75, "a-user-avatar", 31);
-        \u0275\u0275elementStart(76, "div", 32)(77, "div", 33);
-        \u0275\u0275text(78);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(79, "div", 34);
-        \u0275\u0275text(80);
-        \u0275\u0275elementEnd()()()();
-        \u0275\u0275template(81, EventDetailsModalComponent_ng_container_81_Template, 7, 4, "ng-container", 17);
-        \u0275\u0275elementStart(82, "button", 35);
-        \u0275\u0275listener("click", function EventDetailsModalComponent_Template_button_click_82_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.viewLocation());
-        });
-        \u0275\u0275template(83, EventDetailsModalComponent_ng_container_83_Template, 2, 4, "ng-container", 17);
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(84, EventDetailsModalComponent_div_84_Template, 5, 4, "div", 36)(85, EventDetailsModalComponent_ng_container_85_Template, 7, 5, "ng-container", 17);
-        \u0275\u0275elementStart(86, "button", 37)(87, "app-icon");
-        \u0275\u0275text(88, "close");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275template(89, EventDetailsModalComponent_div_89_Template, 2, 2, "div", 38);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(90, "mat-menu", 39, 0);
-        \u0275\u0275template(92, EventDetailsModalComponent_button_92_Template, 7, 5, "button", 40);
-        \u0275\u0275elementStart(93, "button", 41);
-        \u0275\u0275listener("click", function EventDetailsModalComponent_Template_button_click_93_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.remove ? ctx.remove(ctx.event, false) : "");
-        });
-        \u0275\u0275elementStart(94, "div", 42)(95, "app-icon", 43);
-        \u0275\u0275text(96, "delete");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(97, "div");
-        \u0275\u0275text(98);
-        \u0275\u0275pipe(99, "translate");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275template(100, EventDetailsModalComponent_button_100_Template, 7, 3, "button", 44)(101, EventDetailsModalComponent_button_101_Template, 7, 3, "button", 44)(102, EventDetailsModalComponent_button_102_Template, 6, 2, "button", 45);
-        \u0275\u0275elementEnd()();
-      }
-      if (rf & 2) {
-        \u0275\u0275advance(2);
-        \u0275\u0275twoWayProperty("model", ctx.room_status);
-        \u0275\u0275property("sys", ctx.space == null ? null : ctx.space.id);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", !(ctx.event == null ? null : ctx.event.system == null ? null : ctx.event.system.images == null ? null : ctx.event.system.images.length));
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.event == null ? null : ctx.event.system == null ? null : ctx.event.system.images == null ? null : ctx.event.system.images.length);
-        \u0275\u0275advance();
-        \u0275\u0275classProp("pt-4", !(ctx.event == null ? null : ctx.event.system == null ? null : ctx.event.system.images == null ? null : ctx.event.system.images.length));
-        \u0275\u0275advance();
-        \u0275\u0275textInterpolate1(" ", ctx.event.title, " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275property("status", ctx.event_status);
-        \u0275\u0275advance();
-        \u0275\u0275classProp("pr-4", ctx.timezone && ctx.tz);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate(ctx.period);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.timezone && ctx.tz);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.event.state !== "done");
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(19, 45, "CALENDAR_EVENT.DETAILS"), " ");
-        \u0275\u0275advance(7);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(26, 47, ctx.event.date, "EEEE, dd LLLL y"), " ");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.timezone && ctx.tz && !ctx.tz_date_same);
-        \u0275\u0275advance(6);
-        \u0275\u0275textInterpolate(ctx.period);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.timezone && ctx.tz);
-        \u0275\u0275advance(5);
-        \u0275\u0275property("ngIf", ctx.level);
-        \u0275\u0275advance();
-        \u0275\u0275textInterpolate1(" ", (ctx.event == null ? null : ctx.event.system == null ? null : ctx.event.system.display_name) || (ctx.event == null ? null : ctx.event.system == null ? null : ctx.event.system.name) || (ctx.event == null ? null : ctx.event.location), " ");
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.building);
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(46, 50, "CALENDAR_EVENT.ATTENDEES"), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(49, 52, "COMMON.VIEW_ALL"), " ");
-        \u0275\u0275advance(5);
-        \u0275\u0275textInterpolate(ctx.accept_count || 0);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(56, 54, "COMMON.TRUE"), " ");
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate(ctx.declined_count || 0);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(62, 56, "COMMON.FALSE"), " ");
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate(ctx.pending_count || 0);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(68, 58, "COMMON.PENDING"), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngForOf", ctx.event.attendees);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(73, 60, "FORM.HOST"), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275property("user", ctx.event.organiser);
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", ctx.event.organiser == null ? null : ctx.event.organiser.name, " ");
-        \u0275\u0275advance();
-        \u0275\u0275property("title", ctx.event.host);
-        \u0275\u0275advance();
-        \u0275\u0275textInterpolate1(" ", ctx.event.host, " ");
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.has_catering);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !ctx.hide_map);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.raw_body);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.has_assets);
-        \u0275\u0275advance(4);
-        \u0275\u0275property("ngIf", ctx.show_attendees);
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngIf", !ctx.hide_edit);
-        \u0275\u0275advance(6);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(99, 62, "CALENDAR_EVENT.ACTION_DELETE"), " ");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.is_concierge);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.event.recurring_event_id);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngForOf", ctx.custom_actions);
-      }
-    }, dependencies: [NgForOf, NgIf, MatDialogClose, IconComponent, UserAvatarComponent, InteractiveMapComponent, ImageCarouselComponent, StatusPillComponent, BindingDirective, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, MatTooltip, AttendeeListComponent, CurrencyPipe, DatePipe, SanitizePipe, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(EventDetailsModalComponent, { className: "EventDetailsModalComponent", filePath: "libs/events/src/lib/event-details-modal.component.ts", lineNumber: 647 });
-})();
-
-// libs/events/src/lib/event-card.component.ts
-var _c082 = () => ["./"];
-var _c149 = (a0) => ({ event: a0 });
-var _c220 = (a0) => ({ count: a0 });
-function EventCardComponent_h4_0_span_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 5);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1("", ctx_r0.day, ",\xA0");
-  }
-}
-function EventCardComponent_h4_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "h4", 2);
-    \u0275\u0275template(1, EventCardComponent_h4_0_span_1_Template, 2, 1, "span", 3);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "date");
-    \u0275\u0275elementStart(4, "span", 4);
-    \u0275\u0275text(5);
-    \u0275\u0275pipe(6, "date");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r0.show_day);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 3, ctx_r0.event == null ? null : ctx_r0.event.date, ctx_r0.time_format), " ");
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("(", \u0275\u0275pipeBind2(6, 6, ctx_r0.event == null ? null : ctx_r0.event.date, "zzzz"), ")");
-  }
-}
-function EventCardComponent_a_1_div_9_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 21);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r0.period_tz, " ");
-  }
-}
-function EventCardComponent_a_1_div_22_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 14)(1, "app-icon");
-    \u0275\u0275text(2, "restaurant");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div", 17);
-    \u0275\u0275text(4);
-    \u0275\u0275pipe(5, "translate");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 1, "CALENDAR_EVENT.CATERED"), " ");
-  }
-}
-function EventCardComponent_a_1_div_31_div_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 25);
-    \u0275\u0275element(1, "a-user-avatar", 26);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const user_r3 = ctx.$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275property("user", user_r3);
-  }
-}
-function EventCardComponent_a_1_div_31_div_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 25)(1, "div", 27);
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(3);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" +", (ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length) - 5, " ");
-  }
-}
-function EventCardComponent_a_1_div_31_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 22);
-    \u0275\u0275template(1, EventCardComponent_a_1_div_31_div_1_Template, 2, 1, "div", 23);
-    \u0275\u0275pipe(2, "slice");
-    \u0275\u0275template(3, EventCardComponent_a_1_div_31_div_3_Template, 3, 1, "div", 24);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind3(2, 2, ctx_r0.event == null ? null : ctx_r0.event.attendees, 0, (ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length) === 6 ? 6 : 5));
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", (ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length) > 6);
-  }
-}
-function EventCardComponent_a_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "a", 6);
-    \u0275\u0275listener("click", function EventCardComponent_a_1_Template_a_click_0_listener() {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r0 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r0.viewDetails());
-    });
-    \u0275\u0275elementStart(1, "div", 7)(2, "h4", 8);
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 9)(5, "status-pill", 10)(6, "div", 11)(7, "div");
-    \u0275\u0275text(8);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(9, EventCardComponent_a_1_div_9_Template, 2, 1, "div", 12);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(10, "div", 13)(11, "div", 14)(12, "app-icon", 15);
-    \u0275\u0275pipe(13, "translate");
-    \u0275\u0275text(14, "meeting_room");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(15, "div", 16);
-    \u0275\u0275text(16);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(17, "div", 14)(18, "app-icon");
-    \u0275\u0275text(19, "person_outline");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(20, "div", 17);
-    \u0275\u0275text(21);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(22, EventCardComponent_a_1_div_22_Template, 6, 3, "div", 18);
-    \u0275\u0275elementStart(23, "div", 14)(24, "app-icon");
-    \u0275\u0275text(25, "people");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(26, "div", 17);
-    \u0275\u0275text(27);
-    \u0275\u0275pipe(28, "translate");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(29, "app-icon", 19);
-    \u0275\u0275text(30, " chevron_right ");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(31, EventCardComponent_a_1_div_31_Template, 4, 6, "div", 20);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    let tmp_11_0;
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(19, _c082))("queryParams", \u0275\u0275pureFunction1(20, _c149, ctx_r0.event == null ? null : ctx_r0.event.id));
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(ctx_r0.event == null ? null : ctx_r0.event.title);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("status", ctx_r0.status);
-    \u0275\u0275advance();
-    \u0275\u0275classProp("pr-4", ctx_r0.timezone && ctx_r0.tz);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r0.period);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r0.timezone && ctx_r0.tz);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(13, 14, "RESOURCE.ROOM"));
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", ctx_r0.location, " ");
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", (ctx_r0.event == null ? null : ctx_r0.event.organiser == null ? null : ctx_r0.event.organiser.name) || (ctx_r0.event == null ? null : ctx_r0.event.organiser == null ? null : ctx_r0.event.organiser.email), " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r0.event == null ? null : (tmp_11_0 = ctx_r0.event.ext("catering")) == null ? null : tmp_11_0.length);
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(28, 16, "CALENDAR_EVENT.ATTENDEE_COUNT", \u0275\u0275pureFunction1(22, _c220, (ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length) || 0)), " ");
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngIf", ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length);
-  }
-}
-var EventCardComponent = class _EventCardComponent extends AsyncHandler {
-  get timezone() {
-    return this._settings.get("app.events.use_building_timezone") ? this._org.building.timezone : "";
-  }
-  get tz() {
-    const tz = this.timezone;
-    if (!tz)
-      return "";
-    const tz_offset = getTimezoneOffsetString(tz);
-    return tz_offset === this._local_tz ? "" : tz_offset;
-  }
-  get time_format() {
-    return this._settings.time_format;
-  }
-  get period() {
-    if (this.event?.all_day)
-      return i18n("COMMON.ALL_DAY");
-    return this.formattedTime();
-  }
-  get period_tz() {
-    return this.formattedTime(this.tz);
-  }
-  formattedTime(tz) {
-    const date = this.event.date;
-    const date_end = this.event.date_end;
-    const all_day = this.event.all_day;
-    const tz_format = this._date.transform(date, "zzzz", tz);
-    const start_date = this._date.transform(date, "MMM d", tz);
-    const start_time = this._date.transform(date, this.time_format, tz);
-    const end_date = this._date.transform(date_end, "MMM d", tz);
-    const end_time = this._date.transform(date_end, this.time_format, tz);
-    const is_multiday = this.event?.duration > 24 * 60;
-    if (is_multiday) {
-      return `${start_date}${all_day ? "" : ", " + start_time} - ${end_date}${all_day ? "" : ", " + end_time}`;
-    } else if (all_day) {
-      return i18n("COMMON.ALL_DAY");
-    }
-    return `${start_time} - ${end_time} ${"(" + tz_format + ")"}`;
-  }
-  get status() {
-    if (this.event?.state === "done")
-      return "neutral";
-    if (this.event?.status === "approved")
-      return "success";
-    if (this.event?.status === "tentative")
-      return "warning";
-    if (this.event?.status === "declined")
-      return "error";
-    return "warning";
-  }
-  constructor(_dialog, _route, _org, _space_pipe, _settings) {
-    super();
-    this._dialog = _dialog;
-    this._route = _route;
-    this._org = _org;
-    this._space_pipe = _space_pipe;
-    this._settings = _settings;
-    this.show_day = false;
-    this.edit_fn = (d) => null;
-    this.remove_fn = (d, t) => null;
-    this.location = "";
-    this._local_tz = getTimezoneOffsetString(Intl.DateTimeFormat().resolvedOptions().timeZone);
-    this._date = new DatePipe("en");
-  }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      this.subscription("route.query", this._route.queryParamMap.subscribe((params) => params.has("event") && this.event?.id === params.get("event") ? this.viewDetails() : ""));
-      this.location = yield this.getLocationString();
-    });
-  }
-  ngOnChanges(changes) {
-    return __async(this, null, function* () {
-      if (changes.event && this.event) {
-        this.location = yield this.getLocationString();
-      }
-    });
-  }
-  get day() {
-    const date = this.event?.date || Date.now();
-    const is_today = isSameDay(Date.now(), date);
-    return `${is_today ? i18n("COMMON.TODAY") : format(date, "EEEE")}`;
-  }
-  getLocationString() {
-    return __async(this, null, function* () {
-      const system = this.event?.resources[0] || this.event?.system || this.event?.space || {};
-      const space = yield this._space_pipe.transform(system.id || system.email);
-      const zone_list = space?.zones || [];
-      const zone = this._org.levelWithID(zone_list) || this._org.buildings.find((_3) => zone_list.includes(_3.id));
-      return `${zone ? (zone.display_name || zone.name) + ", " : ""} ${space?.display_name || space?.name}`;
-    });
-  }
-  viewDetails() {
-    if (!this.event)
-      return;
-    console.log("View Details:", this.edit_fn, this.remove_fn);
-    this.timeout("open", () => {
-      if (this.event.extension_data?.shared_event) {
-        this._dialog.open(GroupEventDetailsModalComponent, {
-          data: {
-            event: this.event,
-            edit_fn: this.edit_fn,
-            remove_fn: this.remove_fn,
-            concierge: false
-          }
-        });
-        return;
-      }
-      this._dialog.open(EventDetailsModalComponent, {
-        data: {
-          event: this.event,
-          edit_fn: this.edit_fn,
-          remove_fn: this.remove_fn
-        }
-      });
-    });
-  }
-  static {
-    this.\u0275fac = function EventCardComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _EventCardComponent)(\u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SpacePipe), \u0275\u0275directiveInject(SettingsService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _EventCardComponent, selectors: [["event-card"]], inputs: { event: "event", show_day: "show_day", edit_fn: "edit_fn", remove_fn: "remove_fn" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 2, vars: 2, consts: [["class", "mb-2 flex items-center", "date", "", 4, "ngIf"], ["name", "view-event-details", "class", "relative w-full cursor-pointer", 3, "routerLink", "queryParams", "click", 4, "ngIf"], ["date", "", 1, "mb-2", "flex", "items-center"], ["day", "", 4, "ngIf"], [1, "px-2", "text-xs"], ["day", ""], ["name", "view-event-details", 1, "relative", "w-full", "cursor-pointer", 3, "click", "routerLink", "queryParams"], [1, "relative", "w-full", "rounded-xl", "border", "border-base-300", "bg-base-100", "py-4", "shadow"], [1, "px-4", "text-lg"], [1, "mx-4", "my-2", "flex"], [3, "status"], [1, "flex", "flex-col", "leading-tight"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "divide-base-200-500", "flex", "flex-col", "flex-wrap", "space-y-2", "py-2", "sm:flex-row", "sm:space-y-0", "sm:divide-x"], [1, "flex", "items-center", "px-4"], ["matTooltipPosition", "right", 3, "matTooltip"], [1, "mx-2", "truncate"], [1, "mx-2"], ["class", "flex items-center px-4", 4, "ngIf"], [1, "absolute", "right-1", "top-1/2", "-translate-y-1/2", "text-4xl"], ["class", "absolute bottom-2 right-2 flex items-center pr-4 text-sm sm:bottom-auto sm:top-2 sm:text-base", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "absolute", "bottom-2", "right-2", "flex", "items-center", "pr-4", "text-sm", "sm:bottom-auto", "sm:top-2", "sm:text-base"], ["class", "h-10 w-6", 4, "ngFor", "ngForOf"], ["class", "h-10 w-6", 4, "ngIf"], [1, "h-10", "w-6"], [3, "user"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full", "border-2", "border-base-100", "bg-secondary", "text-secondary-content"]], template: function EventCardComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275template(0, EventCardComponent_h4_0_Template, 7, 9, "h4", 0)(1, EventCardComponent_a_1_Template, 32, 24, "a", 1);
-      }
-      if (rf & 2) {
-        \u0275\u0275property("ngIf", ctx.event);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.event);
-      }
-    }, dependencies: [NgForOf, NgIf, IconComponent, UserAvatarComponent, StatusPillComponent, MatTooltip, SlicePipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=event-card.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(EventCardComponent, { className: "EventCardComponent", filePath: "libs/events/src/lib/event-card.component.ts", lineNumber: 148 });
-})();
-
-// libs/events/src/lib/group-event-card.component.ts
-var _c083 = (a0) => ({ count: a0 });
-function GroupEventCardComponent_button_0_img_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 15);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("source", ctx_r1.event.images[0]);
-  }
-}
-function GroupEventCardComponent_button_0_p_13_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 16);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_NO_DESCRIPTION"), " ");
-  }
-}
-function GroupEventCardComponent_button_0_div_17_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r1.space.display_name || ctx_r1.space.name || "", " ");
-  }
-}
-function GroupEventCardComponent_button_0_div_18_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 16);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_UNCONFIRMED"), " ");
-  }
-}
-function GroupEventCardComponent_button_0_div_19_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 16);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_REMOTE"), " ");
-  }
-}
-function GroupEventCardComponent_button_0_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 2);
-    \u0275\u0275listener("click", function GroupEventCardComponent_button_0_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.viewDetails());
-    });
-    \u0275\u0275elementStart(1, "div", 3);
-    \u0275\u0275template(2, GroupEventCardComponent_button_0_img_2_Template, 1, 1, "img", 4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div", 5)(4, "div", 6);
-    \u0275\u0275text(5);
-    \u0275\u0275pipe(6, "date");
-    \u0275\u0275pipe(7, "date");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "h2", 7);
-    \u0275\u0275text(9);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "div", 8)(11, "p", 9);
-    \u0275\u0275text(12);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(13, GroupEventCardComponent_button_0_p_13_Template, 3, 3, "p", 10);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(14, "div", 11)(15, "app-icon", 12);
-    \u0275\u0275text(16, "place");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(17, GroupEventCardComponent_button_0_div_17_Template, 2, 1, "div", 13)(18, GroupEventCardComponent_button_0_div_18_Template, 3, 3, "div", 10)(19, GroupEventCardComponent_button_0_div_19_Template, 3, 3, "div", 10);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(20, "div", 11)(21, "app-icon", 12);
-    \u0275\u0275text(22, "people");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(23, "div", 14);
-    \u0275\u0275text(24);
-    \u0275\u0275pipe(25, "translate");
-    \u0275\u0275elementEnd()()()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.event.images == null ? null : ctx_r1.event.images.length);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(6, 11, ctx_r1.event.date, "EEE d MMM"), ", ", \u0275\u0275pipeBind2(7, 14, ctx_r1.event.date, ctx_r1.time_format), " ");
-    \u0275\u0275advance(3);
-    \u0275\u0275property("title", ctx_r1.event.title);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r1.event.title, " ");
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(ctx_r1.raw_description);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.raw_description.trim());
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngIf", ctx_r1.is_onsite && ctx_r1.has_space);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.is_onsite && !ctx_r1.has_space);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.is_onsite);
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(25, 17, "CALENDAR_EVENT.GROUP_ATTENDING", \u0275\u0275pureFunction1(20, _c083, (ctx_r1.event.attendees == null ? null : ctx_r1.event.attendees.length) || "0")), " ");
-  }
-}
-function GroupEventCardComponent_ng_template_1_img_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 15);
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("source", ctx_r1.event.images[0]);
-  }
-}
-function GroupEventCardComponent_ng_template_1_p_28_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 16);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_NO_DESCRIPTION"), " ");
-  }
-}
-function GroupEventCardComponent_ng_template_1_div_32_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r1.space.display_name || ctx_r1.space.name || "", " ");
-  }
-}
-function GroupEventCardComponent_ng_template_1_div_33_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 16);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_UNCONFIRMED"), " ");
-  }
-}
-function GroupEventCardComponent_ng_template_1_div_34_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 16);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.GROUP_REMOTE"), " ");
-  }
-}
-function GroupEventCardComponent_ng_template_1_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 17);
-    \u0275\u0275listener("click", function GroupEventCardComponent_ng_template_1_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.viewDetails());
-    });
-    \u0275\u0275elementStart(1, "div", 18);
-    \u0275\u0275template(2, GroupEventCardComponent_ng_template_1_img_2_Template, 1, 1, "img", 4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div", 19)(4, "app-icon", 20);
-    \u0275\u0275text(5, "star");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "div", 21);
-    \u0275\u0275text(7);
-    \u0275\u0275pipe(8, "translate");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(9, "div", 22)(10, "div", 23)(11, "div", 24);
-    \u0275\u0275text(12);
-    \u0275\u0275pipe(13, "date");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(14, "div", 25);
-    \u0275\u0275text(15);
-    \u0275\u0275pipe(16, "date");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(17, "div", 26)(18, "h3", 27);
-    \u0275\u0275text(19);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(20, "div", 28);
-    \u0275\u0275text(21);
-    \u0275\u0275pipe(22, "date");
-    \u0275\u0275pipe(23, "date");
-    \u0275\u0275pipe(24, "date");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(25, "div", 29)(26, "p", 30);
-    \u0275\u0275text(27);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(28, GroupEventCardComponent_ng_template_1_p_28_Template, 3, 3, "p", 10);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(29, "div", 11)(30, "app-icon", 12);
-    \u0275\u0275text(31, "place");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(32, GroupEventCardComponent_ng_template_1_div_32_Template, 2, 1, "div", 13)(33, GroupEventCardComponent_ng_template_1_div_33_Template, 3, 3, "div", 10)(34, GroupEventCardComponent_ng_template_1_div_34_Template, 3, 3, "div", 10);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(35, "div", 11)(36, "app-icon", 12);
-    \u0275\u0275text(37, "people");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(38, "div", 14);
-    \u0275\u0275text(39);
-    \u0275\u0275pipe(40, "translate");
-    \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(41, "div", 31);
-    \u0275\u0275text(42);
-    \u0275\u0275pipe(43, "translate");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.event.images == null ? null : ctx_r1.event.images.length);
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(8, 15, "CALEDAR_EVENT.GROUP_FEATURED"), " ");
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(13, 17, ctx_r1.event.date, "MMM"), " ");
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(16, 20, ctx_r1.event.date, "d"));
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(ctx_r1.event.title);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate3(" ", \u0275\u0275pipeBind2(22, 23, ctx_r1.event.date, "EEEE"), " ", \u0275\u0275pipeBind2(23, 26, ctx_r1.event.date, ctx_r1.time_format), " - ", \u0275\u0275pipeBind2(24, 29, ctx_r1.event.date + ctx_r1.event.duration * 60 * 1e3, ctx_r1.time_format), " ");
-    \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate(ctx_r1.raw_description);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.raw_description.trim());
-    \u0275\u0275advance(4);
-    \u0275\u0275property("ngIf", ctx_r1.is_onsite && ctx_r1.has_space);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.is_onsite && !ctx_r1.has_space);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.is_onsite);
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(40, 32, "CALENDAR_EVENT.GROUP_ATTENDING", \u0275\u0275pureFunction1(37, _c083, (ctx_r1.event.attendees == null ? null : ctx_r1.event.attendees.length) || "0")), " ");
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(43, 35, "COMMON.VIEW_DETAILS"), " ");
-  }
-}
-var GroupEventCardComponent = class _GroupEventCardComponent {
-  get time_format() {
-    return this._settings.time_format;
-  }
-  get is_onsite() {
-    return this.event?.extension_data.attendance_type !== "ONLINE";
-  }
-  get has_space() {
-    return !!this.space?.id;
-  }
-  get is_online() {
-    return !this.is_onsite || this.event?.extension_data.attendance_type === "ANY";
-  }
-  get group_event_calendar() {
-    return this._settings.get("app.group_events_calendar");
-  }
-  constructor(_settings, _dialog, _org) {
-    this._settings = _settings;
-    this._dialog = _dialog;
-    this._org = _org;
-    this.raw_description = "";
-  }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      const space_pipe = new SpacePipe(this._org);
-      const resource = this.event.resources.find((_3) => _3.email !== this.group_event_calendar);
-      this.space = yield space_pipe.transform(resource?.id || resource?.email);
-      this.raw_description = this.removeHtmlTags(this.event.body);
-    });
-  }
-  removeHtmlTags(html2) {
-    const doc = new DOMParser().parseFromString(html2, "text/html");
-    return doc.body.textContent || "";
-  }
-  viewDetails() {
-    this._dialog.open(GroupEventDetailsModalComponent, {
-      data: { event: this.event, concierge: false }
-    });
-  }
-  static {
-    this.\u0275fac = function GroupEventCardComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _GroupEventCardComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(OrganisationService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GroupEventCardComponent, selectors: [["group-event-card"]], inputs: { event: "event", featured: "featured" }, standalone: false, decls: 3, vars: 2, consts: [["featured_card", ""], ["matRipple", "", "class", "flex h-[20rem] w-60 flex-col overflow-hidden rounded-xl border border-base-300 bg-base-100 shadow hover:border-info hover:shadow-2xl", 3, "click", 4, "ngIf", "ngIfElse"], ["matRipple", "", 1, "flex", "h-[20rem]", "w-60", "flex-col", "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100", "shadow", "hover:border-info", "hover:shadow-2xl", 3, "click"], [1, "relative", "flex", "h-28", "min-h-28", "w-full", "items-center", "justify-between", "overflow-hidden", "border-b", "border-base-200", "bg-base-200"], ["auth", "", "class", "absolute left-0 top-0 h-full w-full object-cover object-center", 3, "source", 4, "ngIf"], [1, "h-1/2", "w-full", "flex-1", "p-4"], [1, "text-left", "text-sm", "opacity-60"], [1, "mb-2", "w-full", "truncate", "text-left", "text-xl", 3, "title"], [1, "mb-2", "h-[4.5rem]", "flex-1", "overflow-hidden", "text-left", "text-xs", "opacity-60"], [1, "line-clamp-4"], ["class", "opacity-30", 4, "ngIf"], [1, "flex", "items-center", "space-x-2", "text-sm"], [1, "text-info"], [4, "ngIf"], [1, ""], ["auth", "", 1, "absolute", "left-0", "top-0", "h-full", "w-full", "object-cover", "object-center", 3, "source"], [1, "opacity-30"], ["matRipple", "", 1, "mx-auto", "flex", "h-56", "w-[63rem]", "max-w-full", "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100", "shadow", "hover:border-info", "hover:shadow-2xl", 3, "click"], [1, "relative", "flex", "h-full", "w-1/2", "min-w-56", "max-w-[20rem]", "items-center", "justify-between", "overflow-hidden", "border-r", "border-base-200", "bg-base-200"], [1, "absolute", "left-0", "top-0", "flex", "items-center", "space-x-2", "rounded-br-xl", "bg-info", "py-2", "pl-2", "pr-4", "text-sm", "text-info-content"], [1, "text-base"], [1, "uppercase"], ["details", "", 1, "flex", "space-x-4", "px-8", "py-4"], [1, "flex", "flex-col", "items-center"], [1, "text-sm", "opacity-30"], [1, "text-lg"], [1, "flex", "flex-col", "space-y-2"], [1, "text-left"], ["time", "", 1, "text-left", "text-sm", "opacity-30"], [1, "h-20", "overflow-hidden", "text-left"], [1, "line-clamp-3"], [1, "absolute", "right-4", "top-4", "w-32", "truncate", "rounded", "bg-secondary", "px-4", "py-2", "text-center", "text-secondary-content"]], template: function GroupEventCardComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275template(0, GroupEventCardComponent_button_0_Template, 26, 22, "button", 1)(1, GroupEventCardComponent_ng_template_1_Template, 44, 39, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        const featured_card_r4 = \u0275\u0275reference(2);
-        \u0275\u0275property("ngIf", !ctx.featured)("ngIfElse", featured_card_r4);
-      }
-    }, dependencies: [NgIf, IconComponent, AuthenticatedImageDirective, MatRipple, DatePipe, TranslatePipe], styles: ["\n\nbutton[_ngcontent-%COMP%] {\n  transition: box-shadow 300ms, border 200ms;\n}\n/*# sourceMappingURL=group-event-card.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GroupEventCardComponent, { className: "GroupEventCardComponent", filePath: "libs/events/src/lib/group-event-card.component.ts", lineNumber: 179 });
-})();
-
-// libs/events/src/lib/setup-breakdown-modal.component.ts
-var _c084 = () => [5, 10];
-function SetupBreakdownModalComponent_button_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "button", 5)(1, "app-icon");
-    \u0275\u0275text(2, "close");
-    \u0275\u0275elementEnd()();
-  }
-}
-function SetupBreakdownModalComponent_main_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "main", 6)(1, "div", 7)(2, "label", 8);
-    \u0275\u0275text(3, "Setup Duration");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(4, "a-duration-field", 9);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 7)(6, "label", 10);
-    \u0275\u0275text(7, "Breakdown Duration");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(8, "a-duration-field", 11);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("formGroup", ctx_r0.form);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("min", 0)("custom_options", \u0275\u0275pureFunction0(5, _c084));
-    \u0275\u0275advance(4);
-    \u0275\u0275property("min", 0)("custom_options", \u0275\u0275pureFunction0(6, _c084));
-  }
-}
-function SetupBreakdownModalComponent_footer_5_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "footer", 12)(1, "button", 13);
-    \u0275\u0275listener("click", function SetupBreakdownModalComponent_footer_5_Template_button_click_1_listener() {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r0 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r0.save());
-    });
-    \u0275\u0275text(2, "Save Changes");
-    \u0275\u0275elementEnd()();
-  }
-}
-function SetupBreakdownModalComponent_ng_template_6_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 14);
-    \u0275\u0275element(1, "mat-spinner", 15);
-    \u0275\u0275elementStart(2, "p", 16);
-    \u0275\u0275text(3, " Saving setup and breakdown durations... ");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275property("diameter", 32);
-  }
-}
-var SetupBreakdownModalComponent = class _SetupBreakdownModalComponent {
-  constructor(_event, _dialog_ref) {
-    this._event = _event;
-    this._dialog_ref = _dialog_ref;
-    this.loading = false;
-    this.form = new FormGroup({
-      setup: new FormControl(this._event.setup_time || 0),
-      breakdown: new FormControl(this._event.breakdown_time || 0)
-    });
-  }
-  save() {
-    return __async(this, null, function* () {
-      this.loading = true;
-      this._dialog_ref.disableClose = true;
-      const { host, creator } = this._event;
-      const query = {
-        system_id: this._event?.resources[0]?.id || this._event?.system?.id,
-        ical_uid: this._event?.ical_uid
-      };
-      let event = yield saveEvent(new CalendarEvent(__spreadProps(__spreadValues({}, this._event), {
-        setup_time: this.form.value.setup,
-        breakdown_time: this.form.value.breakdown
-      })).toJSON(), query).toPromise().catch((_3) => null);
-      if (!event) {
-        event = yield updateEventMetadata(this._event.id, query.system_id, __spreadProps(__spreadValues({}, this._event.extension_data), {
-          setup_time: this.form.value.setup,
-          breakdown_time: this.form.value.breakdown,
-          setup: this.form.value.setup,
-          breakdown: this.form.value.breakdown
-        })).toPromise().catch((_3) => null);
-      }
-      if (!event) {
-        this.loading = false;
-        this._dialog_ref.disableClose = false;
-        notifyError(`Error updating setup and breakdown.`);
-        return;
-      }
-      notifySuccess("Succesfully updated setup and breakdown period.");
-      this._dialog_ref.disableClose = false;
-      this.loading = false;
-      this._dialog_ref.close(event);
-    });
-  }
-  static {
-    this.\u0275fac = function SetupBreakdownModalComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _SetupBreakdownModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(MatDialogRef));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SetupBreakdownModalComponent, selectors: [["setup-breakdown-modal"]], standalone: false, decls: 8, vars: 4, consts: [["load_state", ""], [1, "min-h-16", "space-x-4"], ["btn", "", "icon", "", "mat-dialog-close", "", "matRipple", "", 4, "ngIf"], ["class", "w-full min-w-[20rem] p-4", 3, "formGroup", 4, "ngIf", "ngIfElse"], ["class", "flex justify-end border-t border-base-200 px-4 py-2", 4, "ngIf"], ["btn", "", "icon", "", "mat-dialog-close", "", "matRipple", ""], [1, "w-full", "min-w-[20rem]", "p-4", 3, "formGroup"], [1, "flex", "flex-col", "space-y-2"], ["for", "setup"], ["name", "setup", "formControlName", "setup", 3, "min", "custom_options"], ["for", "breakdown"], ["name", "breakdown", "formControlName", "breakdown", 3, "min", "custom_options"], [1, "flex", "justify-end", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "matRipple", "", 3, "click"], [1, "flex", "h-64", "w-64", "flex-col", "items-center", "justify-center"], [3, "diameter"], [1, "p-4", "text-center"]], template: function SetupBreakdownModalComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "header", 1)(1, "h2");
-        \u0275\u0275text(2, "Set Event's Setup and Breakdown");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(3, SetupBreakdownModalComponent_button_3_Template, 3, 0, "button", 2);
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(4, SetupBreakdownModalComponent_main_4_Template, 9, 7, "main", 3)(5, SetupBreakdownModalComponent_footer_5_Template, 3, 0, "footer", 4)(6, SetupBreakdownModalComponent_ng_template_6_Template, 4, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        const load_state_r3 = \u0275\u0275reference(7);
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngIf", !ctx.loading);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", !ctx.loading)("ngIfElse", load_state_r3);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", !ctx.loading);
-      }
-    }, dependencies: [NgIf, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, MatDialogClose, MatProgressSpinner, DurationFieldComponent, IconComponent, MatRipple], encapsulation: 2 });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SetupBreakdownModalComponent, { className: "SetupBreakdownModalComponent", filePath: "libs/events/src/lib/setup-breakdown-modal.component.ts", lineNumber: 59 });
-})();
-
-// libs/events/src/lib/events.module.ts
-var SharedEventsModule = class _SharedEventsModule {
-  static {
-    this.\u0275fac = function SharedEventsModule_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _SharedEventsModule)();
-    };
-  }
-  static {
-    this.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _SharedEventsModule });
-  }
-  static {
-    this.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ providers: [ReactiveFormsModule], imports: [
-      CommonModule,
-      FormsModule,
-      ReactiveFormsModule,
-      MatRadioModule,
-      MatInputModule,
-      MatFormFieldModule,
-      MatDatepickerModule,
-      MatButtonModule,
-      MatDialogModule,
-      MatProgressSpinnerModule,
-      FormFieldsModule,
-      ComponentsModule,
-      MatRippleModule,
-      SharedSpacesModule
-    ] });
-  }
-};
 
 // libs/bookings/src/lib/desk-confirm-modal.component.ts
 function DeskConfirmModalComponent_button_4_Template(rf, ctx) {
@@ -160989,6 +161480,9 @@ var DeskMapComponent = class _DeskMapComponent extends AsyncHandler {
     ]).pipe(map(([region, bld]) => {
       const level_list = this.use_region ? this._org.levelsForRegion(region) : this._org.levelsForBuilding(bld);
       const viewable_levels = level_list.filter((lvl) => !lvl.tags.includes("parking"));
+      if (!this.level && viewable_levels.length) {
+        this.level = viewable_levels[0];
+      }
       return viewable_levels.sort((a, b2) => a.parent_id.localeCompare(b2.parent_id) || (a.display_name || "").localeCompare(b2.display_name || ""));
     }));
     this.setOptions = (o) => this._state.setOptions(o);
@@ -161064,7 +161558,7 @@ var DeskMapComponent = class _DeskMapComponent extends AsyncHandler {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DeskMapComponent, selectors: [["desk-map"]], inputs: { is_displayed: "is_displayed", active: "active" }, outputs: { onSelect: "onSelect" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 8, vars: 17, consts: [[1, "w-full", "border-b", "border-base-200", "bg-base-100", "p-2"], ["levels", "", "appearance", "outline", "class", "w-full", 4, "ngIf"], [1, "relative", "w-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "options"], ["levels", "", "appearance", "outline", 1, "w-full"], ["name", "location", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"]], template: function DeskMapComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DeskMapComponent, selectors: [["desk-map"]], inputs: { is_displayed: "is_displayed", active: "active" }, outputs: { onSelect: "onSelect" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 8, vars: 17, consts: [[1, "w-full", "border-b", "border-base-200", "bg-base-100", "p-2"], ["levels", "", "appearance", "outline", "class", "no-subscript w-full", 4, "ngIf"], [1, "relative", "w-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "options"], ["levels", "", "appearance", "outline", 1, "no-subscript", "w-full"], ["name", "location", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "flex-col-reverse"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "opacity-0"]], template: function DeskMapComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 0);
         \u0275\u0275template(1, DeskMapComponent_mat_form_field_1_Template, 5, 9, "mat-form-field", 1);
@@ -162098,21 +162592,8 @@ var InviteVisitorFormComponent = class _InviteVisitorFormComponent extends Async
       ]);
       yield this.multiple ? this._bookForMany() : this._bookForOne();
       this.last_success = this._service.last_success;
-      if (this.last_success) {
-        const event = __spreadProps(__spreadValues({}, this.last_success), {
-          host: this.last_success.user_email,
-          organiser: {
-            name: this.last_success.user_name,
-            email: this.last_success.user_email
-          },
-          attendees: this.last_success.attendees.map((_3) => _3.email),
-          body: this.last_success.description,
-          location: this.last_success.asset_name
-        });
-        this.outlook_link = generateMicrosoftCalendarLink(event);
-        this.google_link = generateGoogleCalendarLink(event);
-        this.ical_link = generateCalendarFileLink(event);
-      }
+      if (this.last_success)
+        this._generateLinks();
       yield this.initFormZone();
       this.sent = true;
     });
@@ -162188,13 +162669,30 @@ var InviteVisitorFormComponent = class _InviteVisitorFormComponent extends Async
       this.loading_many = false;
     });
   }
+  _generateLinks() {
+    const event = __spreadProps(__spreadValues({}, this.last_success), {
+      host: this.last_success.user_email,
+      organiser: {
+        name: this.last_success.user_name,
+        email: this.last_success.user_email
+      },
+      attendees: this.last_success.attendees.map((_3) => _3.email),
+      body: this.last_success.description,
+      location: this._org.building.display_name || this._org.building.name
+    });
+    event.attendees.push(this.last_success.asset_id);
+    console.log("Event:", event);
+    this.outlook_link = generateMicrosoftCalendarLink(event);
+    this.google_link = generateGoogleCalendarLink(event);
+    this.ical_link = generateCalendarFileLink(event);
+  }
   static {
     this.\u0275fac = function InviteVisitorFormComponent_Factory(__ngFactoryType__) {
       return new (__ngFactoryType__ || _InviteVisitorFormComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InviteVisitorFormComponent, selectors: [["invite-visitor-form"]], inputs: { date: "date" }, outputs: { done: "done" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 7, vars: 2, consts: [["send_state", ""], ["load_state", ""], ["multi_state", ""], ["name_auto", "matAutocomplete"], ["email_auto", "matAutocomplete"], [4, "ngIf", "ngIfElse"], ["class", "relative flex max-h-full flex-col overflow-auto bg-base-100", 4, "ngIf", "ngIfElse"], [1, "relative", "flex", "max-h-full", "flex-col", "overflow-auto", "bg-base-100"], [1, "w-full", "border-b", "border-base-200", "px-4", "py-4", "sm:px-16"], [1, "text-2xl", "font-medium"], ["class", "px-4 py-4 sm:px-16", 3, "formGroup", 4, "ngIf"], [1, "sticky", "bottom-0", "border-t", "border-base-200", "bg-base-100", "px-4", "py-4", "sm:px-16"], ["btn", "", "matRipple", "", "send", "", 1, "w-full", "sm:w-auto", 3, "click"], [1, "px-4", "py-4", "sm:px-16", 3, "formGroup"], ["class", "flex flex-col", 4, "ngIf"], [1, "flex", "flex-col"], ["for", "date"], ["name", "date", "formControlName", "date"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "w-1/3", "flex-1", "flex-col"], ["for", "start-time"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "disabled", "use_24hr"], ["for", "end-time"], ["name", "end-time", "formControlName", "duration", 3, "time", "max", "use_24hr"], ["class", "flex w-full flex-col", 4, "ngIf"], ["for", "reason"], ["appearance", "outline"], ["name", "reason", "matInput", "", "formControlName", "title", 3, "placeholder"], ["for", "building"], ["name", "building", "placeholder", "Select building", 3, "ngModelChange", "ngModel", "ngModelOptions"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "w-full", "flex-col"], ["for", "host"], ["name", "host", "formControlName", "user", 1, "mb-4"], ["for", "visitor-name"], ["matInput", "", "name", "visitor-name", "formControlName", "asset_name", 3, "focus", "placeholder", "matAutocomplete"], [3, "value", "click", 4, "ngFor", "ngForOf"], ["for", "visitor-email"], ["matInput", "", "name", "visitor-email", "type", "email", "formControlName", "asset_id", 3, "focus", "placeholder", "matAutocomplete"], ["matInput", "", "name", "company", "formControlName", "company", 3, "placeholder"], [3, "click", "value"], [1, "flex", "flex-col", "leading-tight"], [1, "text-xs", "opacity-60"], ["sent", "", 1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "bg-base-100", "text-center"], [1, "m-8", "h-1/2", "w-full", "max-w-[32rem]", "flex-1", "space-y-2"], [1, "text-3xl"], ["src", "assets/icons/sent.svg", 1, "mx-auto"], ["class", "relative flex flex-col items-center space-y-4 p-4", 4, "ngIf"], [1, "w-full", "border-t", "border-base-200", "p-2"], [1, "mx-auto", "flex", "w-full", "max-w-[32rem]", "items-center", "space-x-2"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "click"], [1, "relative", "flex", "flex-col", "items-center", "space-y-4", "p-4"], ["btn", "", "matRipple", "", "name", "desk-outlook-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/outlook.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-google-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/gcal.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-ical-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], [1, "text-xl"], ["loading", "", 1, "relative", "flex", "h-full", "min-h-[18rem]", "w-full", "flex-col", "items-center", "justify-center", "overflow-hidden", "rounded"], [3, "diameter"], [1, "flex", "flex-col", 3, "formGroup"], ["formControlName", "assets", 3, "guests_only"]], template: function InviteVisitorFormComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InviteVisitorFormComponent, selectors: [["invite-visitor-form"]], inputs: { date: "date" }, outputs: { done: "done" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 7, vars: 2, consts: [["send_state", ""], ["load_state", ""], ["multi_state", ""], ["name_auto", "matAutocomplete"], ["email_auto", "matAutocomplete"], [4, "ngIf", "ngIfElse"], ["class", "relative flex max-h-full flex-col overflow-auto bg-base-100", 4, "ngIf", "ngIfElse"], [1, "relative", "flex", "max-h-full", "flex-col", "overflow-auto", "bg-base-100"], [1, "w-full", "border-b", "border-base-200", "px-4", "py-4", "sm:px-16"], [1, "text-2xl", "font-medium"], ["class", "px-4 py-4 sm:px-16", 3, "formGroup", 4, "ngIf"], [1, "sticky", "bottom-0", "border-t", "border-base-200", "bg-base-100", "px-4", "py-4", "sm:px-16"], ["btn", "", "matRipple", "", "send", "", 1, "w-full", "sm:w-auto", 3, "click"], [1, "px-4", "py-4", "sm:px-16", 3, "formGroup"], ["class", "flex flex-col", 4, "ngIf"], [1, "flex", "flex-col"], ["for", "date"], ["name", "date", "formControlName", "date"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "w-1/3", "flex-1", "flex-col"], ["for", "start-time"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "disabled", "use_24hr"], ["for", "end-time"], ["name", "end-time", "formControlName", "duration", 3, "time", "max", "use_24hr"], ["class", "flex w-full flex-col", 4, "ngIf"], ["for", "reason"], ["appearance", "outline"], ["name", "reason", "matInput", "", "formControlName", "title", 3, "placeholder"], ["for", "building"], ["name", "building", "placeholder", "Select building", 3, "ngModelChange", "ngModel", "ngModelOptions"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "flex", "w-full", "flex-col"], ["for", "host"], ["name", "host", "formControlName", "user", 1, "mb-4"], ["for", "visitor-name"], ["matInput", "", "name", "visitor-name", "formControlName", "asset_name", 3, "focus", "placeholder", "matAutocomplete"], [3, "value", "click", 4, "ngFor", "ngForOf"], ["for", "visitor-email"], ["matInput", "", "name", "visitor-email", "type", "email", "formControlName", "asset_id", 3, "focus", "placeholder", "matAutocomplete"], ["matInput", "", "name", "company", "formControlName", "company", 3, "placeholder"], [3, "click", "value"], [1, "flex", "flex-col", "leading-tight"], [1, "text-xs", "opacity-60"], ["sent", "", 1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "bg-base-100", "text-center"], [1, "z-0", "m-8", "h-1/2", "w-full", "max-w-[32rem]", "flex-1", "space-y-2", "overflow-auto"], [1, "text-3xl"], ["src", "assets/icons/sent.svg", 1, "mx-auto"], ["class", "relative flex flex-col items-center space-y-4 p-4", 4, "ngIf"], [1, "z-10", "w-full", "border-t", "border-base-200", "bg-base-100", "p-2"], [1, "mx-auto", "flex", "w-full", "max-w-[32rem]", "items-center", "space-x-2"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "click"], [1, "relative", "flex", "flex-col", "items-center", "space-y-4", "p-4"], ["btn", "", "matRipple", "", "name", "desk-outlook-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/outlook.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-google-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/gcal.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-ical-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], [1, "text-xl"], ["loading", "", 1, "relative", "flex", "h-full", "min-h-[18rem]", "w-full", "flex-col", "items-center", "justify-center", "overflow-hidden", "rounded"], [3, "diameter"], [1, "flex", "flex-col", 3, "formGroup"], ["formControlName", "assets", 3, "guests_only"]], template: function InviteVisitorFormComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275template(0, InviteVisitorFormComponent_ng_container_0_Template, 3, 4, "ng-container", 5)(1, InviteVisitorFormComponent_ng_template_1_Template, 20, 28, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(3, InviteVisitorFormComponent_ng_template_3_Template, 5, 4, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(5, InviteVisitorFormComponent_ng_template_5_Template, 7, 5, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
       }
@@ -162206,7 +162704,7 @@ var InviteVisitorFormComponent = class _InviteVisitorFormComponent extends Async
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(InviteVisitorFormComponent, { className: "InviteVisitorFormComponent", filePath: "libs/bookings/src/lib/invite-visitor-form.component.ts", lineNumber: 385 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(InviteVisitorFormComponent, { className: "InviteVisitorFormComponent", filePath: "libs/bookings/src/lib/invite-visitor-form.component.ts", lineNumber: 389 });
 })();
 
 // libs/bookings/src/lib/locker-grid.component.ts
@@ -167326,490 +167824,6 @@ var PaymentsModule = class _PaymentsModule {
       MatSelectModule,
       MatProgressSpinnerModule
     ] });
-  }
-};
-
-// libs/events/src/lib/event-form.service.ts
-var BOOKING_URLS2 = [
-  "book/rooms",
-  "book/spaces",
-  "book/meeting",
-  "schedule/view",
-  "confirm/success",
-  "upcoming"
-];
-var MINUTES = 60 * 1e3;
-var OldEventFormService = class _OldEventFormService extends AsyncHandler {
-  get options_value() {
-    return this._options.getValue();
-  }
-  get is_multiday() {
-    return this._event.getValue()?.duration > 24 * 60;
-  }
-  get view() {
-    return this._view.getValue();
-  }
-  get form() {
-    return this._form;
-  }
-  get event() {
-    return this._event.getValue();
-  }
-  get favorite_spaces() {
-    return this._settings.get("favourite_spaces") || [];
-  }
-  get has_calendar() {
-    return this._settings.get("app.events.use_bookings") !== true;
-  }
-  constructor(_org, _router, _payments, _settings, _assets, _dialog) {
-    super();
-    this._org = _org;
-    this._router = _router;
-    this._payments = _payments;
-    this._settings = _settings;
-    this._assets = _assets;
-    this._dialog = _dialog;
-    this._view = new BehaviorSubject("form");
-    this._options = new BehaviorSubject({
-      zone_ids: [],
-      features: []
-    });
-    this._form = generateEventForm(void 0, this._settings);
-    this._date = new BehaviorSubject(Date.now());
-    this._event = new BehaviorSubject(null);
-    this._loading = new BehaviorSubject("");
-    this._changed = new BehaviorSubject(0);
-    this.last_success = new CalendarEvent(JSON.parse(sessionStorage?.getItem("PLACEOS.last_booked_event") || "{}"));
-    this.loading = this._loading.asObservable();
-    this.options = this._options.asObservable();
-    this.booking_rules = this._org.building_list.pipe(switchMap((list2) => Promise.all(list2.map((bld) => hu(bld.id, "room_booking_rules").pipe(catchError(() => of({ details: [] })), map((_3) => ({
-      id: bld.id,
-      details: _3.details instanceof Array ? _3.details : []
-    })))?.toPromise()))), map((building_rules) => {
-      const mapping = {};
-      for (const rules of building_rules) {
-        mapping[rules.id] = rules.details;
-      }
-      return mapping;
-    }), shareReplay(1));
-    this.spaces = combineLatest([
-      this._options.pipe(distinctUntilKeyChanged("zone_ids")),
-      this._org.active_region.pipe(distinctUntilKeyChanged("id")),
-      this._org.active_building.pipe(filter((_3) => !!_3), distinctUntilKeyChanged("id"))
-    ]).pipe(debounceTime(300), tap((_3) => this.unsubWith("bind:")), switchMap(([{ zone_ids }]) => {
-      this._loading.next(i18n("CALENDAR_EVENT.SPACE_LOADING"));
-      const use_region = this._settings.get("app.use_region");
-      if (!zone_ids?.length) {
-        zone_ids = [
-          (use_region ? this._org.region?.id : this._org.building?.id) || this._org.building?.id
-        ];
-      }
-      return forkJoin(zone_ids.map((id) => requestSpacesForZone(id).pipe(catchError(() => of([])))));
-    }), map((l2) => flatten2(l2)), tap((_3) => this._loading.next("")), shareReplay(1));
-    this.features = this.spaces.pipe(map((l2) => unique(flatten2(l2.map((_3) => _3.features)))));
-    this.room_alerts = this._changed.pipe(switchMap((_3) => hu(this._org.organisation.id, "room_alerts")), map((r) => r.details), startWith({}), shareReplay(1));
-    this.filtered_spaces = combineLatest([
-      this.spaces,
-      this.options
-    ]).pipe(map(([spaces, { show_fav, features, capacity }]) => spaces.filter((s) => {
-      const domain = (currentUser()?.email || "@").split("@")[1];
-      const zone = (this._settings.get("app.events.restrict_spaces") || {})[domain];
-      const limit_map = this._settings.get("app.events.limit_spaces") || {};
-      const limited_zones = Object.keys(limit_map);
-      const zone_limit = s.zones.find((_3) => limited_zones.includes(_3));
-      return s.bookable && (!zone || s.zones.includes(zone)) && (!zone_limit || limit_map[zone_limit] === domain) && (!show_fav || this.favorite_spaces.includes(s.id)) && features.every((f2) => s.features.includes(f2)) && s.capacity >= Math.max(0, capacity || 0);
-    }).slice(0, Math.min(100, spaces.length))), shareReplay(1));
-    this._space_bookings = combineLatest([
-      this.spaces,
-      this.filtered_spaces
-    ]).pipe(distinctUntilChanged(([s1], [s2]) => s1 !== s2), switchMap(([_3, list2]) => {
-      return combineLatest((list2 || []).map((_4) => {
-        const binding = Oa(_4.id, "Bookings").binding("bookings");
-        const obs = binding.listen().pipe(map((_5) => (_5 || []).map((i) => new CalendarEvent(i))));
-        if (!this.hasSubscription(`bind:${_4.id}`)) {
-          this.subscription(`bind:${_4.id}`, binding.bind());
-        }
-        return obs;
-      }));
-    }), shareReplay(1));
-    this.current_available_spaces = combineLatest([
-      this.filtered_spaces,
-      this._space_bookings,
-      this.booking_rules,
-      merge(this.form.valueChanges, timer(1e3)),
-      this._changed
-    ]).pipe(debounceTime(300), map(([list2, bookings, booking_rules]) => {
-      this._loading.next(i18n("CALENDAR_EVENT.SPACE_STATUS_LOADING"));
-      const { ical_uid, date, duration, all_day } = this._form.getRawValue();
-      list2 = filterResourcesFromRules(list2, { date, duration, resource: null, host: currentUser() }, booking_rules[this._org.building?.id] || []);
-      return (list2 || []).filter((_3, idx) => {
-        const start = all_day ? startOfDay(date).valueOf() : date;
-        const end = start + (all_day ? Math.max(24 * 60, duration) : duration) * MINUTES;
-        let booking_list = bookings[idx] || [];
-        if (this.last_success?.system?.id === _3.id) {
-          booking_list = [...booking_list, this.last_success];
-        }
-        return periodInFreeTimeSlot(start, end, booking_list.filter((_4) => _4.ical_uid !== ical_uid));
-      }).sort((a, b2) => a.capacity - b2.capacity);
-    }), tap(() => this._loading.next("")), shareReplay(1));
-    this.future_available_spaces = combineLatest([
-      this.filtered_spaces,
-      this.booking_rules,
-      this.form.valueChanges.pipe(debounceTime(400), startWith({}))
-    ]).pipe(filter(() => !this._loading.getValue()), debounceTime(500), switchMap(([spaces, booking_rules]) => {
-      if (!spaces.length)
-        return of([]);
-      this._loading.next(i18n("CALENDAR_EVENT.SPACE_STATUS_LOADING"));
-      const { date, duration, all_day } = this._form.getRawValue();
-      const availability_method = this.has_calendar ? querySpaceAvailability : queryResourceAvailability;
-      spaces = filterResourcesFromRules(spaces, { date, duration, resource: null, host: currentUser() }, booking_rules[this._org.building?.id] || []);
-      return availability_method(spaces.map(({ id }) => id), all_day ? startOfDay(date).valueOf() : date, all_day ? Math.max(24 * 60, duration) : duration, this?.event?.resources[0]?.id || this.event?.system?.id || this.event?.id || void 0, void 0, [this.event?.date, this.event?.duration]).pipe(map((availability) => {
-        let list2 = spaces.filter((_3, i) => availability[i]);
-        list2 = filterResourcesFromRules(list2, {
-          date,
-          duration,
-          resource: null,
-          host: currentUser()
-        }, booking_rules[this._org.building?.id] || []);
-        return list2;
-      }), catchError(() => of([])));
-    }), tap(() => this._loading.next("")), shareReplay(1));
-    this.available_spaces = this._date.pipe(switchMap((d) => {
-      const diff = Math.abs(differenceInDays(d, Date.now()));
-      const cache_length = this._settings.get("app.events.cache_duration_in_days") || 14;
-      return diff < cache_length ? this.current_available_spaces : this.future_available_spaces;
-    }), shareReplay(1));
-    this.cancelPostForm = () => this.unsub("post-event-form");
-    this._space_pipe = new SpacePipe(this._org);
-    this.subscription("router.events", this._router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd && !BOOKING_URLS2.some((_3) => event.url.includes(_3))) {
-        this.clearForm();
-      }
-    }));
-    const previous = {};
-    this.subscription("form_change", this._form.valueChanges.subscribe(({ date, duration }) => {
-      if (date && date !== previous["date"] || duration && duration !== previous["duration"]) {
-        this._assets.setOptions({
-          date: this.form.value.date,
-          duration: this.form.value.duration
-        });
-        previous["date"] = date;
-        previous["duration"] = duration;
-      }
-      if (date && date !== this._date.getValue()) {
-        this._date.next(date);
-      }
-      this.storeForm();
-    }));
-  }
-  listenForStatusChanges() {
-    this.subscription("status:rooms", this.available_spaces.subscribe());
-  }
-  setView(value) {
-    this.timeout("set_view", () => this._view.next(value), 50);
-  }
-  setOptions(value) {
-    this._options.next(__spreadValues(__spreadValues({}, this._options.getValue()), value));
-  }
-  newForm() {
-    return __async(this, arguments, function* (event = new CalendarEvent({
-      all_day: this._settings.get("app.events.all_day_default")
-    })) {
-      this._event.next(event);
-      if (event.recurring_event_id) {
-        const master = yield showEvent(event.recurring_event_id)?.toPromise().catch(() => null);
-        if (master) {
-          this._event.getValue().recurrence = __spreadProps(__spreadValues({}, master.recurrence), {
-            _pattern: master.recurrence.pattern
-          });
-        }
-      }
-      this._assets.setOptions({
-        ignore: flatten2(event.linked_bookings?.map((_3) => _3.asset_ids || [_3.asset_id]) || [])
-      });
-      for (const idx in event.resources) {
-        const space = event.resources[idx];
-        event.resources[idx] = yield this._space_pipe.transform(space.id || space.email);
-      }
-      this._date.next(event.date);
-      this.timeout("post-event-form", () => {
-        this._form.patchValue({
-          date: event.date || this._form.value.date
-        });
-      }, 1e3);
-      this.resetForm();
-    });
-  }
-  resetForm() {
-    this._form.reset();
-    const event = this._event.getValue() || { extension_data: {} };
-    this._assets.setOptions({
-      ignore: flatten2(event.linked_bookings?.map((_3) => _3.asset_ids || [_3.asset_id]) || [])
-    });
-    const has_catering = !!event.extension_data.catering[0];
-    this._form.patchValue(__spreadProps(__spreadValues(__spreadValues({}, event.extension_data), event), {
-      duration: event.duration >= 12 * 60 ? 30 : event.duration,
-      organiser: event?.organiser || currentUser() || new User({ email: event?.host }),
-      catering_charge_code: event.extension_data.catering[0]?.charge_code || (event.id && has_catering ? " " : ""),
-      assets: (event.extension_data.assets || []).map((_3) => new AssetRequest(__spreadProps(__spreadValues({}, _3), { event })))
-    }));
-    this._form.patchValue({
-      date: event.date || this._form.value.date,
-      date_end: event.date_end || this._form.value.date_end
-    });
-    this._options.next({ features: [] });
-    this.storeForm();
-  }
-  clearForm() {
-    sessionStorage.removeItem("PLACEOS.event_form");
-    this.unsubWith("status:");
-    this.unsubWith("bind:");
-    this.newForm();
-  }
-  storeForm() {
-    sessionStorage.setItem("PLACEOS.event_form", JSON.stringify(this._form.getRawValue() || {}));
-  }
-  loadForm() {
-    if (!sessionStorage.getItem("PLACEOS.event_form")) {
-      return this.newForm();
-    }
-    const form_data = JSON.parse(sessionStorage.getItem("PLACEOS.event_form") || "{}");
-    if (form_data.id && form_data.id !== this._event.getValue()?.id) {
-      showEvent(form_data.id).subscribe((event) => {
-        this._event.next(event);
-        this._assets.setOptions({
-          ignore: flatten2(event.linked_bookings?.map((_3) => _3.asset_ids || [_3.asset_id]) || [])
-        });
-      });
-    }
-    this._form.patchValue(__spreadValues({}, form_data));
-  }
-  openEventLinkModal(force = false) {
-    const form = this._form;
-    form.markAllAsTouched();
-    if (!form.valid && !force)
-      return;
-    const event = new CalendarEvent(__spreadProps(__spreadValues({}, form.getRawValue()), { assets: [] }));
-    const ref = this._dialog.open(EventLinkModalComponent, { data: event });
-    ref.afterClosed().subscribe((d) => d ? this._router.navigate(["/"]) : "");
-  }
-  postForm(force = false, ignore_space_check = [], ignore_owner = false) {
-    return new Promise((resolve, reject) => __async(this, null, function* () {
-      this._loading.next("Creating event...");
-      const form = this._form;
-      form.markAllAsTouched();
-      const event = this.event || new CalendarEvent();
-      if (!form.valid && !force) {
-        this._loading.next("");
-        return reject(i18n("FORM.INVALID_FIELDS", {
-          field_list: getInvalidFields(form).join(", ")
-        }));
-      }
-      const ical_uid = this.event?.ical_uid;
-      let value = this._form.getRawValue();
-      const { id, host, date, duration, creator, all_day, assets, recurrence } = value;
-      let spaces = form.get("resources")?.value || [];
-      if (ignore_space_check.length) {
-        spaces = spaces.filter((_3) => !ignore_space_check.includes(_3.email) && !ignore_space_check.includes(_3.id));
-      }
-      const catering = form.get("catering")?.value || [];
-      if (recurrence?._pattern && recurrence?._pattern !== "none") {
-        this.form.patchValue({ recurring: true });
-        value = this._form.getRawValue();
-      }
-      let changed_times = false;
-      const changed_spaces = spaces.some((s) => !event.resources?.find((_3) => _3.id === s.id));
-      if ((!id || date !== event.date || duration !== event.duration) && spaces.length) {
-        changed_times = true;
-        yield this.checkSelectedSpacesAreAvailable(spaces, all_day ? startOfDay(date).valueOf() : date, all_day ? Math.max(24 * 60, duration) : duration, ical_uid || id || "").catch((_3) => {
-          this._loading.next("");
-          reject(_3);
-          throw _3;
-        });
-      }
-      spaces = form.get("resources")?.value || [];
-      const is_owner = host === currentUser()?.email || creator === currentUser()?.email;
-      if (!spaces.length && this._settings.get("app.events.no_space_resource")) {
-        const space = yield this._space_pipe.transform(this._settings.get("app.events.no_space_resource"));
-        spaces.push(space);
-      }
-      const attendees = unique([...value.attendees, value.organiser || currentUser()], "email");
-      if (!spaces.length && attendees.find((_3) => _3.is_external)) {
-        this._loading.next("");
-        const message2 = i18n("CALENDAR_EVENT.SPACE_EXTERNALS_ERROR");
-        reject(message2);
-        throw message2;
-      }
-      const space_id = spaces[0]?.id;
-      const query = id ? {
-        system_id: this.event?.resources[0]?.id || this.event?.system?.id || space_id
-      } : {};
-      if (is_owner && !ignore_owner)
-        query.calendar = host || creator;
-      if (this._payments.enabled && spaces.length) {
-        const receipt = yield this._payments.makePayment({
-          type: "space",
-          resource_name: spaces[0].display_name || spaces[0].name,
-          date,
-          duration,
-          all_day
-        });
-        if (!receipt?.success)
-          return this._loading.next("");
-        value.extension_data = {
-          invoice: receipt,
-          invoice_id: receipt.invoice_id
-        };
-      }
-      const d = value.date;
-      for (const order of catering) {
-        order.notes = value.catering_notes;
-        order.charge_code = value.catering_charge_code;
-      }
-      if (spaces.length) {
-        let [setup, breakdown] = [0, 0];
-        for (const space of spaces) {
-          const overflow = this._settings.get(`app.events.overflow.${space.id}`);
-          if (overflow?.setup) {
-            setup = Math.max(setup, overflow.setup);
-          }
-          if (overflow?.breakdown) {
-            breakdown = Math.max(breakdown, overflow.breakdown);
-          }
-        }
-        value.setup = value.setup_time || setup;
-        value.breakdown = value.breakdown_time || breakdown;
-        value.setup_time = value.setup_time || setup;
-        value.breakdown_time = value.breakdown_time || breakdown;
-      }
-      const processed_assets = (assets || []).map((_3) => new AssetRequest(_3).toJSON());
-      const result = yield this._makeBooking(new CalendarEvent(__spreadProps(__spreadValues({}, value), {
-        old_system: this.event?.system,
-        host: this._settings.get("app.events.force_host") || (this._settings.get("app.events.room_as_host") ? value.resources[0].email : "") || value.host,
-        title: value.title || "Space Booking",
-        attendees: attendees.map((_3) => {
-          const v4 = __spreadValues({}, _3);
-          delete v4.visit_expected;
-          return v4;
-        }),
-        date: d,
-        catering,
-        assets: processed_assets,
-        extension_data: this._settings.get("app.events.force_host") || this._settings.get("app.events.room_as_host") ? {
-          host_override: value.host,
-          department: value.organiser?.department || currentUser()?.department
-        } : {
-          department: value.organiser?.department || currentUser()?.department
-        }
-      })), query).catch((e) => {
-        reject(e);
-        this._loading.next("");
-        throw e;
-      });
-      const domain = (currentUser()?.email || "@").split("@")[1];
-      const visitors = attendees.filter((user) => user.is_external && user.email !== event.host && !user.email.includes(domain) && user.visit_expected);
-      let creating_assets = false;
-      const on_error = (e) => __async(this, null, function* () {
-        if (!this.form.value.id) {
-          yield removeEvent(result.id, spaces.length ? {
-            calendar: this.form.value.host || currentUser()?.email,
-            system_id: spaces[0].id
-          } : {})?.toPromise();
-          console.warn("Couldn't update asset requests", e);
-          if (e?.status === 409) {
-            notifyError(i18n("CALENDAR_EVENT.ASSETS_CLASH_ERROR"));
-          } else
-            notifyError(i18n("CALENDAR_EVENT.ASSETS_ERROR"));
-        } else if (creating_assets) {
-          notifyError(i18n("CALENDAR_EVENT.ASSETS_PARTIAL_ERROR", {
-            error: e
-          }));
-          return;
-        }
-        this._loading.next("");
-        throw e;
-      });
-      if (visitors.length) {
-        yield createBookingsForEvent(result, "visitor", visitors).catch(on_error);
-      }
-      if (assets?.length || event.extension_data.assets?.length) {
-        creating_assets = true;
-        const requests = yield validateAssetRequestsForResource(result, {
-          date,
-          duration,
-          host,
-          all_day,
-          location_name: spaces[0]?.display_name || spaces[0]?.name || "",
-          location_id: spaces[0]?.id || "",
-          zones: unique([
-            this._org.organisation.id,
-            this._org.region?.id,
-            this._org.building?.id,
-            ...spaces[0]?.zones || []
-          ]).filter((_3) => !!_3),
-          reset_state: changed_times
-        }, assets, changed_spaces || changed_times).catch(on_error);
-        if (!requests)
-          throw i18n("CALENDAR_EVENT.ASSETS_INVALID_ERROR");
-        yield requests();
-        creating_assets = false;
-      }
-      this.clearForm();
-      this.last_success = result;
-      sessionStorage.setItem("PLACEOS.last_booked_event", JSON.stringify(result));
-      this.setView("success");
-      this.timeout("post_finshed", () => this._changed.next(Date.now()));
-      resolve(result);
-      this._loading.next("");
-    }));
-  }
-  _makeBooking(event, query) {
-    return __async(this, null, function* () {
-      this._updateVisitorList(event.attendees);
-      const old_system = event.old_system?.id || event.old_system?.email || event.resources[0]?.email;
-      const system_id = event.system?.id || event.system?.email || event.resources[0]?.email;
-      if (old_system !== system_id) {
-        event.attendees = event.attendees.filter((_3) => _3.email !== old_system || _3.id !== old_system);
-      }
-      return (!this.has_calendar ? saveBooking(newBookingFromCalendarEvent(__spreadProps(__spreadValues({}, event.toJSON()), {
-        status: this._settings.get("app.bookings.no_approval") === true ? "approved" : "tentative"
-      }))).pipe(map((_3) => newCalendarEventFromBooking(_3))) : saveEvent(event, query))?.toPromise();
-    });
-  }
-  checkSelectedSpacesAreAvailable(spaces, date, duration, ignore) {
-    return __async(this, null, function* () {
-      if (!spaces?.length)
-        return true;
-      if (this.has_calendar) {
-        const response = yield querySpaceAvailability(spaces.map(({ id }) => id), date, duration, this?.event?.resources[0]?.id || this.event?.system?.id || this.event?.id || void 0, void 0, [this.event?.date, this.event?.duration]).toPromise();
-        if (!response.every((_3) => _3)) {
-          throw i18n(spaces.length > 1 ? "CALENDAR_EVENT.SPACES_UNAVAILABLE" : "CALENDAR_EVENT.SPACE_UNAVAILABLE");
-        }
-      } else {
-        const availability = yield queryResourceAvailability(spaces.map((_3) => _3.id), date, duration, ignore)?.toPromise();
-        if (!availability.every((_3) => _3))
-          throw i18n(spaces.length > 1 ? "CALENDAR_EVENT.SPACES_UNAVAILABLE" : "CALENDAR_EVENT.SPACE_UNAVAILABLE");
-      }
-      return true;
-    });
-  }
-  _updateVisitorList(attendees) {
-    const visitors = attendees.filter((user) => user.is_external);
-    if (!visitors?.length)
-      return;
-    const old_visitors = this._settings.get("visitor-invitees") || [];
-    this._settings.saveUserSetting("visitor-invitees", unique([
-      ...old_visitors.filter((_3) => !_3.includes(_3.email)),
-      ...visitors.map((_3) => `${_3.email}|${_3.name}|${_3.organisation}`)
-    ]));
-  }
-  static {
-    this.\u0275fac = function OldEventFormService_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _OldEventFormService)(\u0275\u0275inject(OrganisationService), \u0275\u0275inject(Router), \u0275\u0275inject(PaymentsService), \u0275\u0275inject(SettingsService), \u0275\u0275inject(AssetStateService), \u0275\u0275inject(MatDialog));
-    };
-  }
-  static {
-    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _OldEventFormService, factory: _OldEventFormService.\u0275fac, providedIn: "root" });
   }
 };
 
