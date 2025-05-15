@@ -93502,40 +93502,6 @@ var MatSliderModule = class _MatSliderModule {
   }], null, null);
 })();
 
-// libs/components/src/lib/safe.pipe.ts
-var SafePipe = class _SafePipe {
-  constructor(sanitizer) {
-    this.sanitizer = sanitizer;
-  }
-  /**
-   * Sanitizes the string allowing it to be injected into a template
-   * @param value String to sanitize
-   * @param type Type of value to sanitise. `resource`, `url`, `script`, `style` or `html`
-   */
-  transform(value, type2 = "html") {
-    switch (type2) {
-      case "resource":
-        return this.sanitizer.bypassSecurityTrustResourceUrl(value);
-      case "url":
-        return this.sanitizer.bypassSecurityTrustUrl(value);
-      case "script":
-        return this.sanitizer.bypassSecurityTrustScript(value);
-      case "style":
-        return this.sanitizer.bypassSecurityTrustStyle(value);
-      default:
-        return this.sanitizer.bypassSecurityTrustHtml(value);
-    }
-  }
-  static {
-    this.\u0275fac = function SafePipe_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _SafePipe)(\u0275\u0275directiveInject(DomSanitizer, 16));
-    };
-  }
-  static {
-    this.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "safe", type: _SafePipe, pure: true, standalone: false });
-  }
-};
-
 // libs/components/src/lib/icon.component.ts
 var _c019 = ["*"];
 function IconComponent_i_1_Template(rf, ctx) {
@@ -93572,7 +93538,7 @@ var IconComponent = class _IconComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["app-icon"], ["icon"]], inputs: { className: "className", icon: "icon" }, standalone: false, ngContentSelectors: _c019, decls: 3, vars: 2, consts: [[1, "flex", "h-[1.25em]", "w-[1.25em]", "items-center", "justify-center"], [3, "class", 4, "ngIf"], ["class", "h-[1em] w-[1em]", 3, "src", 4, "ngIf"], [1, "h-[1em]", "w-[1em]", 3, "src"]], template: function IconComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["app-icon"], ["icon"]], inputs: { className: "className", icon: "icon" }, ngContentSelectors: _c019, decls: 3, vars: 2, consts: [[1, "flex", "h-[1.25em]", "w-[1.25em]", "items-center", "justify-center"], [3, "class", 4, "ngIf"], ["class", "h-[1em] w-[1em]", 3, "src", 4, "ngIf"], [1, "h-[1em]", "w-[1em]", 3, "src"]], template: function IconComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275projectionDef();
         \u0275\u0275elementStart(0, "div", 0);
@@ -93585,11 +93551,11 @@ var IconComponent = class _IconComponent {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.icon && ctx.icon.type === "img");
       }
-    }, dependencies: [NgIf, SafePipe], styles: ["\n\ni[_ngcontent-%COMP%] {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */"] });
+    }, dependencies: [CommonModule, NgIf], styles: ["\n\ni[_ngcontent-%COMP%] {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IconComponent, { className: "IconComponent", filePath: "libs/components/src/lib/icon.component.ts", lineNumber: 31 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IconComponent, { className: "IconComponent", filePath: "libs/components/src/lib/icon.component.ts", lineNumber: 32 });
 })();
 
 // libs/components/src/lib/action-icon.component.ts
@@ -93912,7 +93878,7 @@ function mt(t, e2) {
     0 <= n && t.splice(n, 1);
   }
 }
-var ge = function() {
+var ve = function() {
   function t(e2) {
     this.initialTeardown = e2, this.closed = false, this._parentage = null, this._finalizers = null;
   }
@@ -93997,9 +93963,9 @@ var ge = function() {
     return e2.closed = true, e2;
   }(), t;
 }();
-var Wn = ge.EMPTY;
+var Wn = ve.EMPTY;
 function Hn(t) {
-  return t instanceof ge || t && "closed" in t && T(t.remove) && T(t.add) && T(t.unsubscribe);
+  return t instanceof ve || t && "closed" in t && T(t.remove) && T(t.add) && T(t.unsubscribe);
 }
 function Sn(t) {
   T(t) ? t() : t.unsubscribe();
@@ -94058,7 +94024,7 @@ var wt = function(t) {
       this.unsubscribe();
     }
   }, e2;
-}(ge);
+}(ve);
 var Qr = function() {
   function t(e2) {
     this.partialObserver = e2;
@@ -94318,7 +94284,7 @@ var ce = function(t) {
     return this._throwIfClosed(), this._checkFinalizedStatuses(n), this._innerSubscribe(n);
   }, e2.prototype._innerSubscribe = function(n) {
     var r2 = this, i = this, o = i.hasError, s = i.isStopped, u3 = i.observers;
-    return o || s ? Wn : (this.currentObservers = null, u3.push(n), new ge(function() {
+    return o || s ? Wn : (this.currentObservers = null, u3.push(n), new ve(function() {
       r2.currentObservers = null, mt(u3, n);
     }));
   }, e2.prototype._checkFinalizedStatuses = function(n) {
@@ -94410,7 +94376,7 @@ var ni = function(t) {
   return e2.prototype.schedule = function(n, r2) {
     return this;
   }, e2;
-}(ge);
+}(ve);
 var $n = {
   setInterval: function(t, e2) {
     for (var n = [], r2 = 2; r2 < arguments.length; r2++) n[r2 - 2] = arguments[r2];
@@ -94666,7 +94632,7 @@ function _i(t, e2) {
     });
   });
 }
-function pe(t, e2, n, r2, i) {
+function _e(t, e2, n, r2, i) {
   r2 === void 0 && (r2 = 0), i === void 0 && (i = false);
   var o = e2.schedule(function() {
     n(), i ? t.add(this.schedule(null, r2)) : this.unsubscribe();
@@ -94676,15 +94642,15 @@ function pe(t, e2, n, r2, i) {
 function or(t, e2) {
   return e2 === void 0 && (e2 = 0), ie(function(n, r2) {
     n.subscribe(K(r2, function(i) {
-      return pe(r2, t, function() {
+      return _e(r2, t, function() {
         return r2.next(i);
       }, e2);
     }, function() {
-      return pe(r2, t, function() {
+      return _e(r2, t, function() {
         return r2.complete();
       }, e2);
     }, function(i) {
-      return pe(r2, t, function() {
+      return _e(r2, t, function() {
         return r2.error(i);
       }, e2);
     }));
@@ -94714,8 +94680,8 @@ function gi(t, e2) {
 function vi(t, e2) {
   return new C(function(n) {
     var r2;
-    return pe(n, e2, function() {
-      r2 = t[er](), pe(n, e2, function() {
+    return _e(n, e2, function() {
+      r2 = t[er](), _e(n, e2, function() {
         var i, o, s;
         try {
           i = r2.next(), o = i.value, s = i.done;
@@ -94733,9 +94699,9 @@ function vi(t, e2) {
 function ur(t, e2) {
   if (!t) throw new Error("Iterable cannot be null");
   return new C(function(n) {
-    pe(n, e2, function() {
+    _e(n, e2, function() {
       var r2 = t[Symbol.asyncIterator]();
-      pe(n, e2, function() {
+      _e(n, e2, function() {
         r2.next().then(function(i) {
           i.done ? n.complete() : n.next(i.value);
         });
@@ -95288,7 +95254,7 @@ function Wi(t = 40) {
   for (let n = 0; n < t; n++) e2 += Mn.charAt(Math.floor(Math.random() * Mn.length));
   return e2;
 }
-function he(t) {
+function de(t) {
   const e2 = (window.location?.hash || "").replace(new RegExp(`${t}[a-zA-Z0-9_+-.%=]*&?`, "g"), "").replace(/&&/g, "&").replace(/#&/g, "#").replace(/&$/g, "#"), n = (window.location?.search || "").replace(new RegExp(`${t}[a-zA-Z0-9_+-.%=]*&?`, "g"), "").replace(/&&/g, "&").replace(/\?&/g, "#").replace(/&$/g, "#");
   window.history?.replaceState && window.history?.replaceState(null, "", `${window.location?.pathname}${e2}${n}`);
 }
@@ -95327,15 +95293,15 @@ function L(t) {
   if (t) for (const n in t) t.hasOwnProperty(n) && t[n] !== void 0 && t[n] !== null && (e2 += `${e2 ? "&" : ""}${n}=${encodeURIComponent(t[n])}`);
   return e2;
 }
-var _e = {};
+var me = {};
 function re(t, e2, n = 300) {
-  if (t && e2 && e2 instanceof Function) ve(t), _e[t] = setTimeout(() => {
-    e2(), delete _e[t];
+  if (t && e2 && e2 instanceof Function) be(t), me[t] = setTimeout(() => {
+    e2(), delete me[t];
   }, n);
   else throw new Error(t ? "Cannot create named timeout without a name" : "Cannot create a timeout without a callback");
 }
-function ve(t) {
-  _e[t] && (clearTimeout(_e[t]), delete _e[t]);
+function be(t) {
+  me[t] && (clearTimeout(me[t]), delete me[t]);
 }
 var Xi = {
   id: "mock-authority",
@@ -95354,14 +95320,14 @@ var $;
 var z;
 var m = {};
 var A2 = "";
-var me = "";
-var ye = new ae("");
+var ye = "";
+var ge = new ae("");
 var We = new ae("");
 var an = "/api/engine/v2";
 var ne = new ae(false);
 var eo = ne.asObservable();
 var vt = 0;
-function be() {
+function Se() {
   return `${`${g.secure || window.location?.protocol.indexOf("https") >= 0 ? "https:" : "http:"}//${g.host || window.location?.host}`}${dr()}`;
 }
 function dr() {
@@ -95386,7 +95352,7 @@ function Y(t = true) {
   if (g.mock) return "mock-token";
   if (!$) return "";
   if (Et() && !g.ignore_api_key) return "x-api-key";
-  const e2 = $.getItem(`${A2}_expires_at`) || "", n = ye.getValue();
+  const e2 = $.getItem(`${A2}_expires_at`) || "", n = ge.getValue();
   return Li(+e2, /* @__PURE__ */ new Date()) && (h("Auth", "Token expired. Requesting new token..."), hn(), m.load_authority || (vt += 1, re("re-authorise", () => mr().catch((r2) => h("Auth", `Failed to get token: ${r2}`)), 200 * Math.min(20, vt))), !t) ? "" : n || $.getItem(`${A2}_access_token`) || "";
 }
 function rn() {
@@ -95399,7 +95365,7 @@ function io() {
   return !!Y();
 }
 function oo() {
-  return ye.pipe(I((t) => !!io()));
+  return ge.pipe(I((t) => !!io()));
 }
 function bt() {
   return z;
@@ -95437,7 +95403,7 @@ function _r() {
   return h("Auth", "Refreshing authorty."), z = void 0, dn();
 }
 function hn() {
-  h("Auth", "Invalidating tokens."), $.removeItem(`${A2}_access_token`), $.removeItem(`${A2}_expires_at`), ye.getValue() && ye.next("");
+  h("Auth", "Invalidating tokens."), $.removeItem(`${A2}_access_token`), $.removeItem(`${A2}_expires_at`), ge.getValue() && ge.next("");
 }
 function mr(t, e2 = z) {
   return m.authorise || (m.authorise = new Promise((n, r2) => {
@@ -95451,7 +95417,7 @@ function mr(t, e2 = z) {
         }, () => {
           h("Auth", "Failed to generate token."), r2("Failed to generate token"), setTimeout(() => delete m.authorise, 200);
         }];
-        g && g.auth_type === "password" ? (h("Auth", "Logging in with credentials."), yo(g).then(...o), vt = 0) : me || rn() ? (h("Auth", `Generating token with ${me ? "code" : "refresh token"}`), gr().then(...o), vt = 0) : e2.session ? (h("Auth", "Users has session. Authorising application..."), uo(t).then(...o)) : (h("Auth", "No user session"), yr(e2), r2("No user session"), setTimeout(() => delete m.authorise, 200));
+        g && g.auth_type === "password" ? (h("Auth", "Logging in with credentials."), yo(g).then(...o), vt = 0) : ye || rn() ? (h("Auth", `Generating token with ${ye ? "code" : "refresh token"}`), gr().then(...o), vt = 0) : e2.session ? (h("Auth", "Users has session. Authorising application..."), uo(t).then(...o)) : (h("Auth", "No user session"), yr(e2), r2("No user session"), setTimeout(() => delete m.authorise, 200));
       }
     };
     ao().then(i, i);
@@ -95507,10 +95473,10 @@ function co(t) {
     const i = (o) => {
       if (o.origin === window.location?.origin && o.data.type === "place-os") {
         const s = o.data;
-        if (h("Auth", "Received credentials from iFrame..."), document.body.removeChild(r2), ve("iframe_auth"), window.removeEventListener("message", i), delete m.iframe_auth, s.token) return e2(), pn(__spreadValues({
+        if (h("Auth", "Received credentials from iFrame..."), document.body.removeChild(r2), be("iframe_auth"), window.removeEventListener("message", i), delete m.iframe_auth, s.token) return e2(), pn(__spreadValues({
           access_token: s.token
         }, s));
-        me = s.code || "", gr().then((u3) => e2(u3), (u3) => n(u3));
+        ye = s.code || "", gr().then((u3) => e2(u3), (u3) => n(u3));
       }
     };
     re("iframe_auth", () => {
@@ -95539,9 +95505,9 @@ function lo() {
     h("Auth", "Checking for auth parameters...");
     let e2 = hr();
     if ((!e2 || Object.keys(e2).length <= 0) && sessionStorage && (e2 = JSON.parse(sessionStorage.getItem("ENGINE.auth.params") || "{}")), e2 && (e2.code || e2.access_token || e2.refresh_token)) {
-      e2.code && (me = e2.code, he("code")), e2.refresh_token && ($.setItem(`${A2}_refresh_token`, e2.refresh_token), he("refresh_token"));
+      e2.code && (ye = e2.code, de("code")), e2.refresh_token && ($.setItem(`${A2}_refresh_token`, e2.refresh_token), de("refresh_token"));
       const n = $.getItem(`${A2}_nonce`) || "", r2 = (e2.state || "").split(";");
-      he("state"), he("token_type");
+      de("state"), de("token_type");
       const i = r2[0];
       n === i ? (pn(e2), t(!!e2.access_token)) : t(false);
     } else t(false);
@@ -95577,9 +95543,9 @@ function po() {
     const r2 = e2.split("?");
     e2 = r2[0], n = r2[1];
   } else {
-    e2 += `&code=${encodeURIComponent(me)}`, e2 += "&grant_type=authorization_code";
+    e2 += `&code=${encodeURIComponent(ye)}`, e2 += "&grant_type=authorization_code";
     const r2 = sessionStorage.getItem(`${A2}_challenge`);
-    r2 && (e2 += `&code_verifier=${r2}`, sessionStorage.removeItem(`${A2}_challenge`)), me = "";
+    r2 && (e2 += `&code_verifier=${r2}`, sessionStorage.removeItem(`${A2}_challenge`)), ye = "";
   }
   return [e2, n];
 }
@@ -95606,7 +95572,7 @@ function mo() {
       method: "POST"
     }).subscribe((i) => {
       if (!i.ok) return r2(i);
-      h("Auth", "Successfully revoked token."), ye.next(""), We.next(""), $.removeItem(`${A2}_access_token`), $.removeItem(`${A2}_refresh_token`), t(), delete m.revoke_token;
+      h("Auth", "Successfully revoked token."), ge.next(""), We.next(""), $.removeItem(`${A2}_access_token`), $.removeItem(`${A2}_refresh_token`), t(), delete m.revoke_token;
     }, r2);
   })), m.revoke_token;
 }
@@ -95637,7 +95603,7 @@ function vr(t, e2 = "") {
 }
 function pn(t) {
   const e2 = ji(/* @__PURE__ */ new Date(), Math.max(60, parseInt(t.expires_in, 10) - 300));
-  h("Auth", "Tokens generated storing..."), fn() && (t.access_token && ($.setItem(`${A2}_access_token`, t.access_token), he("access_token")), t.refresh_token && ($.setItem(`${A2}_refresh_token`, t.refresh_token), he("refresh_token"))), t.expires_in && ($.setItem(`${A2}_expires_at`, `${e2.valueOf()}`), he("expires_in")), ne.next(true), ye.next(t.access_token || ""), We.next(t.refresh_token || "");
+  h("Auth", "Tokens generated storing..."), fn() && (t.access_token && ($.setItem(`${A2}_access_token`, t.access_token), de("access_token")), t.refresh_token && ($.setItem(`${A2}_refresh_token`, t.refresh_token), de("refresh_token"))), t.expires_in && ($.setItem(`${A2}_expires_at`, `${e2.valueOf()}`), de("expires_in")), ne.next(true), ge.next(t.access_token || ""), We.next(t.refresh_token || "");
 }
 function go() {
   const t = Wi();
@@ -95796,7 +95762,7 @@ function E(t) {
     fn: n,
     path: r2,
     endpoint: i
-  } = t, o = L(e2), s = `${i || be()}${r2 ? "/" + r2 : ""}${o ? "?" + o : ""}`;
+  } = t, o = L(e2), s = `${i || Se()}${r2 ? "/" + r2 : ""}${o ? "?" + o : ""}`;
   return ee(s).pipe(I((u3) => {
     const c2 = Oo(s, o, r2);
     return {
@@ -95818,7 +95784,7 @@ function w(t) {
     path: r2,
     fn: i,
     options: o
-  } = t, s = L(e2), u3 = `${be()}/${r2}/${n}${s ? "?" + s : ""}`;
+  } = t, s = L(e2), u3 = `${Se()}/${r2}/${n}${s ? "?" + s : ""}`;
   return ee(u3, o).pipe(I((c2) => (i || Tt)(c2)));
 }
 function v(t) {
@@ -95829,7 +95795,7 @@ function v(t) {
     method: i,
     path: o,
     callback: s
-  } = t, u3 = L(r2), c2 = `${be()}/${o}/${e2}/${n}`;
+  } = t, u3 = L(r2), c2 = `${Se()}/${o}/${e2}/${n}`;
   return (i === "post" || i === "put" || !i ? (i === "put" ? He : Ie)(c2, r2) : (i === "del" ? Be : ee)(`${c2}${u3 ? "?" + u3 : ""}`, {
     response_type: "json"
   })).pipe(I((_3) => (s || ((b2) => b2))(_3)));
@@ -95844,7 +95810,7 @@ function N(t) {
     fn: s
   } = t, u3 = L(__spreadProps(__spreadValues({}, n), {
     version: r2.version || 0
-  })), c2 = `${be()}/${o}/${e2}${u3 ? "?" + u3 : ""}`;
+  })), c2 = `${Se()}/${o}/${e2}${u3 ? "?" + u3 : ""}`;
   return (i === "put" ? He : Pt)(c2, r2).pipe(I((l2) => (s || Tt)(l2)));
 }
 function Oo(t, e2, n) {
@@ -95859,7 +95825,7 @@ function Oo(t, e2, n) {
   return r2 && r2.link && (Cn = Hi(r2.link || "").next, i.next = Ne(Cn.split("?")[1])), i;
 }
 var Pe = /* @__PURE__ */ ((t) => (t[t.None = 0] = "None", t[t.Support = 1] = "Support", t[t.Admin = 2] = "Admin", t[t.NeverDisplay = 3] = "NeverDisplay", t))(Pe || {});
-var Se = class extends B {
+var xe = class extends B {
   /** ID of the parent zone/system/module/driver */
   parent_id;
   /** Unix timestamp in seconds of when the settings where last updated */
@@ -95909,7 +95875,7 @@ var $r = class extends B {
   settings;
   constructor(e2 = {}) {
     super(e2), this.description = e2.description || "", this.module_name = e2.module_name || "", this.role = e2.role ?? xt.Logic, this.default_uri = e2.default_uri || "", this.default_port = e2.default_port || 1, this.ignore_connected = e2.ignore_connected || false, this.class_name = e2.class_name || "", this.repository_id = e2.repository_id || "", this.file_name = e2.file_name || "", this.commit = e2.commit || "", this.update_available = e2.update_available || false, this.update_info = e2.update_info, this.settings = e2.settings || [null, null, null, null], typeof this.settings != "object" && (this.settings = [null, null, null, null]);
-    for (const n in Pe) !isNaN(Number(n)) && !this.settings[n] && (this.settings[n] = new Se({
+    for (const n in Pe) !isNaN(Number(n)) && !this.settings[n] && (this.settings[n] = new xe({
       parent_id: this.id,
       encryption_level: +n
     }));
@@ -96052,7 +96018,7 @@ var mn = class extends B {
   trigger_list = [];
   constructor(e2 = {}) {
     super(e2), this.description = e2.description || "", this.tags = e2.tags || [], this.triggers = e2.triggers || [], this.settings = e2.settings || [null, null, null, null], this.parent_id = e2.parent_id || "", this.location = e2.location || "", this.display_name = e2.display_name || "", this.code = e2.code || "", this.type = e2.type || "", this.count = e2.count || 0, this.capacity = e2.capacity || 0, this.map_id = e2.map_id || "", this.timezone = e2.timezone || "", this.images = e2.images || [], this.playlists = e2.playlists || [], typeof this.settings != "object" && (this.settings = [null, null, null, null]);
-    for (const n in Pe) !isNaN(Number(n)) && !this.settings[n] && (this.settings[n] = new Se({
+    for (const n in Pe) !isNaN(Number(n)) && !this.settings[n] && (this.settings[n] = new xe({
       parent_id: this.id,
       encryption_level: +n
     }));
@@ -96072,7 +96038,7 @@ var qo = class {
     for (const r2 of this.keys) this.metadata[r2] = new Ar(n[r2]);
   }
 };
-var xe = "metadata";
+var ke = "metadata";
 function Ge(t) {
   return new Ar(t);
 }
@@ -96083,7 +96049,7 @@ function hu(t, e2, n = {}) {
       name: e2
     }),
     fn: (r2) => Ge(r2[e2]),
-    path: xe
+    path: ke
   });
 }
 function du(t, e2, n = "put") {
@@ -96093,7 +96059,7 @@ function du(t, e2, n = "put") {
     query_params: {},
     method: n,
     fn: Ge,
-    path: xe
+    path: ke
   });
 }
 function mu(t, e2) {
@@ -96105,7 +96071,7 @@ function mu(t, e2) {
     callback: (n) => n.map((r2) => new qo(__spreadProps(__spreadValues({}, r2), {
       keys: Object.keys(r2.metadata)
     }))),
-    path: xe
+    path: ke
   });
 }
 var wr = class extends B {
@@ -96150,11 +96116,12 @@ var wr = class extends B {
   signage;
   /** List of playlist IDs associated with the system */
   playlists;
+  approval;
   /** Orientation of the signage system */
   orientation;
   constructor(e2 = {}) {
-    super(e2), this.display_name = e2.display_name || "", this.description = e2.description || "", this.email = e2.email || "", this.code = e2.code || "", this.capacity = e2.capacity || 0, this.features = e2.features || [], this.bookable = e2.bookable || false, this.public = e2.public ?? false, this.installed_ui_devices = e2.installed_ui_devices || 0, this.support_url = e2.support_url || "", this.map_id = e2.map_id || "", this.modules = e2.modules || [], this.images = e2.images || [], this.zones = e2.zones || [], this.settings = e2.settings || [null, null, null, null], this.timezone = e2.timezone || "", this.signage = e2.signage || false, this.playlists = e2.playlists || [], this.orientation = e2.orientation || "unspecified", typeof this.settings != "object" && (this.settings = [null, null, null, null]);
-    for (const n in Pe) !isNaN(Number(n)) && !this.settings[n] && (this.settings[n] = new Se({
+    super(e2), this.display_name = e2.display_name || "", this.description = e2.description || "", this.email = e2.email || "", this.code = e2.code || "", this.capacity = e2.capacity || 0, this.features = e2.features || [], this.bookable = e2.bookable || false, this.public = e2.public ?? false, this.installed_ui_devices = e2.installed_ui_devices || 0, this.support_url = e2.support_url || "", this.map_id = e2.map_id || "", this.modules = e2.modules || [], this.images = e2.images || [], this.zones = e2.zones || [], this.settings = e2.settings || [null, null, null, null], this.timezone = e2.timezone || "", this.signage = e2.signage || false, this.playlists = e2.playlists || [], this.orientation = e2.orientation || "unspecified", this.approval = e2.approval || false, typeof this.settings != "object" && (this.settings = [null, null, null, null]);
+    for (const n in Pe) !isNaN(Number(n)) && !this.settings[n] && (this.settings[n] = new xe({
       parent_id: this.id,
       encryption_level: +n
     }));
@@ -96210,7 +96177,7 @@ var Or = class extends B {
   }
   constructor(e2 = {}) {
     super(e2), this.driver_id = e2.driver_id || e2.dependency_id || "", this.control_system_id = e2.control_system_id || "", this.edge_id = e2.edge_id || "", this.ip = e2.ip || "", this.tls = e2.tls || false, this.udp = e2.udp || false, this.port = e2.port || 1, this.makebreak = e2.makebreak || false, this.uri = e2.uri || "", this.custom_name = e2.custom_name || "", this.role = e2.role ?? xt.Logic, this.notes = e2.notes || "", this.ignore_connected = e2.ignore_connected || false, this.connected = e2.connected, this.running = e2.running || false, this.updated_at = e2.updated_at || 0, this.system = new wr(e2.control_system || e2.system), this.has_runtime_error = e2.has_runtime_error || false, this.error_timestamp = e2.error_timestamp || 0, this.driver = new $r(e2.dependency || e2.driver), this.settings = e2.settings || [null, null, null, null], typeof this.settings != "object" && (this.settings = [null, null, null, null]);
-    for (const n in Pe) !isNaN(Number(n)) && !this.settings[n] && (this.settings[n] = new Se({
+    for (const n in Pe) !isNaN(Number(n)) && !this.settings[n] && (this.settings[n] = new xe({
       parent_id: this.id,
       encryption_level: +n
     }));
@@ -96225,7 +96192,7 @@ var Or = class extends B {
 };
 var Ue = "settings";
 function et(t) {
-  return new Se(t);
+  return new xe(t);
 }
 function ec(t = {}) {
   return E({
@@ -96235,20 +96202,20 @@ function ec(t = {}) {
   });
 }
 var U = "systems";
-function ke(t) {
+function $e(t) {
   return new wr(t);
 }
 function sc(t = {}) {
   return E({
     query_params: t,
-    fn: ke,
+    fn: $e,
     path: U
   });
 }
 function uc(t = {}) {
   return E({
     query_params: t,
-    fn: ke,
+    fn: $e,
     path: `${U}/with_emails`
   });
 }
@@ -96256,7 +96223,7 @@ function cc(t, e2 = {}) {
   return w({
     id: t,
     query_params: e2,
-    fn: ke,
+    fn: $e,
     path: U
   });
 }
@@ -96338,7 +96305,7 @@ function Mc(t, e2, n = "patch") {
     path: De
   });
 }
-var $e = "zones";
+var fe = "zones";
 function Wt(t) {
   return new mn(t);
 }
@@ -96346,15 +96313,15 @@ function Cc(t = {}) {
   return E({
     query_params: t,
     fn: Wt,
-    path: $e
+    path: fe
   });
 }
-function Fc(t, e2 = {}) {
+function Nc(t, e2 = {}) {
   return w({
     id: t,
     query_params: e2,
     fn: Wt,
-    path: $e
+    path: fe
   });
 }
 var Qo = {
@@ -96427,7 +96394,7 @@ var Ko = function(t) {
       c2.error(b2);
       return;
     }
-    var _3 = new ge(function() {
+    var _3 = new ve(function() {
       n._socket = null, l2 && l2.readyState === 1 && l2.close();
     });
     l2.onopen = function(b2) {
@@ -96542,7 +96509,7 @@ var Jo = class {
   }
 };
 var kt = {};
-function xa(t, e2) {
+function ka(t, e2) {
   return kt[t] = new Jo(e2), kt[t];
 }
 function Xo(t) {
@@ -96556,8 +96523,8 @@ var W = {};
 var gn = {};
 var Ae = {};
 var es = {};
-var de = new ae(false);
-Ae._place_os_status = de.asObservable();
+var pe = new ae(false);
+Ae._place_os_status = pe.asObservable();
 var qr = new ae([0, 0]);
 Ae._place_os_sync = qr.asObservable();
 var Cr = Date.now();
@@ -96570,10 +96537,10 @@ var ut = 10 * 1e3;
 var Fr = new ce();
 Ae._place_os_debug_events = Fr.asObservable();
 function Gt() {
-  return be().indexOf("/control/") >= 0 ? "/control/websocket" : `${dr()}/systems/control`;
+  return Se().indexOf("/control/") >= 0 ? "/control/websocket" : `${dr()}/systems/control`;
 }
 function Nr() {
-  return de.getValue();
+  return pe.getValue();
 }
 function ts() {
   return Ae._place_os_status;
@@ -96648,7 +96615,7 @@ function jr(t) {
         time: Math.floor((/* @__PURE__ */ new Date()).getTime() / 1e3)
       });
     } else t.type === "error" ? us(t) : t.cmd || h("WS", "Invalid websocket message", t, "error");
-    ve(`${t.id}`);
+    be(`${t.id}`);
   } else t === "pong" && (vn = Date.now(), h("WS", "Pong!"));
 }
 function ss(t) {
@@ -96682,7 +96649,7 @@ function us(t) {
   }
   h("WS", `[ERROR] ${e2}(${t.id}): ${t.msg}`, void 0, "error");
   const n = Object.keys(W).map((r2) => W[r2]).filter((r2) => r2).find((r2) => r2.id === t.id);
-  n && n.reject && (n.reject(t), ve(`${n.key}`), delete W[n.key]);
+  n && n.reject && (n.reject(t), be(`${n.key}`), delete W[n.key]);
 }
 function cs(t, e2, n = gn, r2 = Ae) {
   const i = `${t.sys}|${t.mod}_${t.index}|${t.name}`;
@@ -96694,13 +96661,13 @@ function bn(t = 0) {
   return se == null && (se = new Promise((e2) => {
     if (t > 40) return location.reload();
     $t++, Cr = Date.now(), Q = ln() ? fs() : as(), Q ? (h("WS(Debug)", "Authority:", [bt()]), h("WS", "Connecting to websocket..."), Q.subscribe((n) => {
-      de.getValue() || (h("WS", "Connection established."), e2()), de.next(true), $t = 0, Jt(), jr(n);
+      pe.getValue() || (h("WS", "Connection established."), e2()), pe.next(true), $t = 0, Jt(), jr(n);
     }, (n) => {
       Q = void 0, se = null, jn(), Jt(), ls(n);
     }, () => {
-      Q = void 0, se = null, jn(), h("WS", "Connection closed by browser."), de.next(false), At();
+      Q = void 0, se = null, jn(), h("WS", "Connection closed by browser."), pe.next(false), At();
     }), Oe && clearInterval(Oe), vn = Date.now(), Nn(), Oe = setInterval(() => Nn(), Mr * 1e3), Jt(), Dr += 1, dt = setTimeout(() => {
-      h("WS", "Unhealthy connection. Reconnecting..."), de.next(false), se = null, At();
+      h("WS", "Unhealthy connection. Reconnecting..."), pe.next(false), se = null, At();
     }, 30 * 1e3)) : (Q ? h("WS", `Waiting on auth(${t}). Retrying in ${1e3 * Math.min(10, t + 1)}ms...`, [!!Y(), !!bt()], "info") : h("WS", `Failed to create websocket(${t}). Retrying in ${1e3 * Math.min(10, t + 1)}ms...`, void 0, "error"), setTimeout(() => {
       se = null, bn(t).then((n) => e2(n));
     }, 1e3 * Math.min(10, ++t)));
@@ -96734,7 +96701,7 @@ function Nn() {
   Q?.next("ping");
 }
 function ls(t) {
-  de.next(false), h("WS", "Websocket error:", t, void 0, "error"), t.status === 401 && hn(), _r(), At();
+  pe.next(false), h("WS", "Websocket error:", t, void 0, "error"), t.status === 401 && hn(), _r(), At();
 }
 function Jt() {
   dt && (clearTimeout(dt), dt = void 0);
@@ -96763,7 +96730,7 @@ function hs(t, e2, n) {
         });
         break;
       case "unbind":
-        n[r2] && (n[r2].unsubscribe(), delete n[r2], ve(`${r2}`));
+        n[r2] && (n[r2].unsubscribe(), delete n[r2], be(`${r2}`));
         break;
     }
     re(`${t.id}-response`, () => {
@@ -96786,7 +96753,7 @@ function jn() {
 var ds = class {
   constructor(e2, n) {
     this._module = e2, this.name = n, ts().pipe(Ii()).subscribe((r2) => {
-      r2 && (this._stale_bindings || this._pending === 1) ? (h("VAR", "Re-binding to status variable", this.binding()), this.rebind()) : r2 || (ve(`rebind:${JSON.stringify(this.binding())}`), h("VAR", "Binding dropped due to disconnection, re-binding when possible.", this.binding()), this._stale_bindings = this._binding_count || this._stale_bindings, this._binding_count = 0);
+      r2 && (this._stale_bindings || this._pending === 1) ? (h("VAR", "Re-binding to status variable", this.binding()), this.rebind()) : r2 || (be(`rebind:${JSON.stringify(this.binding())}`), h("VAR", "Binding dropped due to disconnection, re-binding when possible.", this.binding()), this._stale_bindings = this._binding_count || this._stale_bindings, this._binding_count = 0);
     });
   }
   /** Status variable name */
@@ -96921,7 +96888,7 @@ var Xt = {};
 function ms(t) {
   return Xt[t] || (Xt[t] = new _s(t)), Xt[t];
 }
-function Oa(t, e2, n = 1) {
+function Ea(t, e2, n = 1) {
   return ms(t).module(e2, n);
 }
 
@@ -100786,7 +100753,13 @@ var COMMON = {
   USER_NEW: "New External User",
   USER_EDIT: "Edit External User",
   USER_SAVING: "Saving user...",
-  ORGANISATION: "Organisation"
+  ORGANISATION: "Organisation",
+  APPROVAL: "Approval",
+  APPROVAL_REQUIRED: "Approval Required",
+  REQUIRE_APPROVAL: "Bookings require approval",
+  WFO: "Work from Office",
+  WFH: "Work from Home",
+  AOL: "Away on Leave"
 };
 var LANGUAGE = {
   ENGLISH: "English",
@@ -101112,7 +101085,8 @@ var BOOKINGS = {
   VISITOR_BOOK_ANOTHER: "Book another visitor",
   SPACE_REMOVE: "Remove this space",
   SPACE_ADD_TO: "Add this space",
-  INDUCTED: "Inducted"
+  INDUCTED: "Inducted",
+  RECURRING_TOOLTIP: "This booking is part of a recurring series"
 };
 var CALENDAR_EVENT = {
   CATERING: "Catering",
@@ -101212,7 +101186,9 @@ var CALENDAR_EVENT = {
   GROUP_DATE_TIME: "Date and Time",
   GROUP_ABOUT: "About this event",
   GROUP_ATTENDEES: "{{ going }} going, {{ interested }} interested",
-  FIND_AVAILABILITY: "Find Availability"
+  FIND_AVAILABILITY: "Find Availability",
+  RECURRING_TOOLTIP: "This event is part of a recurring series",
+  APPROVAL_REQUIRED_MSG: "Room selected for this booking requires approval and may not be confirmed until a later date."
 };
 var CATERING = {
   MENU: "Catering Menu",
@@ -101651,6 +101627,9 @@ var APP = {
     AUTO_RELEASE_LOCKER: "Custom locker auto-release",
     AUTO_RELEASE_ALL_DAY_START: "All Day Release time",
     AUTO_RELEASE_OUTSIDE_HOURS: "Release outside business hours",
+    AUTO_RELEASE_DEFAULT_HOURS: "Default Work Hours",
+    AUTO_RELEASE_DEFAULT_HOURS_EMPTY: "No default works hours set",
+    AUTO_RELEASE_DEFAULT_HOURS_SET: "Set default works hours",
     INDUCTION_HEADER: "Induction Settings",
     INDUCTION_DETAILS: "Induction Details",
     INDUCTION_ENABLE: "Enable induction for building",
@@ -101672,6 +101651,7 @@ var APP = {
     VISITORS_ACTION_REMOTE: "Set visitor as Remote",
     VISITORS_ACTION_ONSITE: "Set visitor as Onsite",
     VISITORS_ACTION_PRINT_QR: "Print QR Code",
+    VISITORS_ACTION_PRINT_PASS: "Print Guest Pass",
     VISITORS_ACTION_EMAIL_HOST: "Email Host",
     VISITORS_ACTION_EMAIL_GUEST: "Email Guest",
     VISITORS_ACTION_CHECKIN: "Check-in Guest",
@@ -102516,10 +102496,10 @@ var _service;
 function setTranslationService(service) {
   _service = service;
 }
-function i18n(key, args = {}) {
+function i18n(key, args = {}, plural2 = 0) {
   if (!_service)
     return key;
-  return _service.get(key, args);
+  return _service.get(key, args, plural2);
 }
 function removeNesting(value, path = "") {
   let out_object = {};
@@ -102570,8 +102550,22 @@ var LocaleService = class _LocaleService {
       window.i18n = i18n;
     }
   }
-  get(key, args = {}) {
-    let value = (this._locale_mappings[this._current_locale] || {})[key] || (this._locale_mappings[this._current_locale_short] || {})[key] || this._default_mappings[key] || key;
+  get(key, args = {}, plural2 = 0) {
+    let key_value = key;
+    let value = key;
+    const map3 = this._locale_mappings[this._current_locale] || {};
+    const map_short = this._locale_mappings[this._current_locale_short] || {};
+    const map_default = this._default_mappings || {};
+    if (plural2) {
+      key_value = `${key}_${plural2}`;
+      value = map3[key_value] || map_short[key_value] || map_default[key_value] || key;
+      if (value === key) {
+        key_value = `${key}_N`;
+        value = map3[key_value] || map_short[key_value] || map_default[key_value] || key;
+      }
+    } else {
+      value = map3[key_value] || map_short[key_value] || map_default[key_value] || key;
+    }
     for (const id in args) {
       value = value.replace(`{{ ${id} }}`, args[id]).replace(`{{ ${id} }}`, args[id]);
     }
@@ -103159,27 +103153,30 @@ function generateGoogleCalendarLink(event) {
     details.add = unique([...emails, ...resources]).join();
   return `https://calendar.google.com/calendar/render?${toQueryString(details)}`;
 }
+function dateToISO(date) {
+  return `${format(date, "yyyy-MM-dd")}T${format(date, "HH:mm:ss")}`;
+}
 function generateMicrosoftCalendarLink(event, type2 = "office", status = "free") {
   if (!event.date)
     event.date = Date.now();
   const data = {
-    path: "/calendar/action/compose",
-    rru: "addevent",
-    startdt: new Date(event.date).toISOString(),
-    enddt: addMinutes(event.date, event.duration ?? 60).toISOString(),
+    // path: '/calendar/deeplink/compose',
+    // rru: 'addevent',
+    startdt: dateToISO(event.date),
+    enddt: dateToISO(addMinutes(event.date, event.duration ?? 60)),
     subject: event.title,
-    body: `${event.body || ""}${event.id ? "\n\n[ID|" + event.id + "]" : ""}`,
+    body: `${event.body || ""}${event.id ? "\n\n\n[ID|" + event.id + "]" : ""}`,
     location: event.location,
-    allday: event.all_day ?? false,
-    availability: status,
-    freebusy: status
+    allday: event.all_day ?? false
+    // availability: status,
+    // freebusy: status,
   };
   if (event.all_day)
     delete data.enddt;
   const emails = (event.attendees || []).map((_3) => _3.email || _3);
   const resources = ((event.resources?.length ? event.resources : null) || [event.system]).map((_3) => _3?.email || _3);
   if (emails.length || resources.length)
-    data.to = unique([...emails, ...resources]).join();
+    data.to = unique([...emails, ...resources]).filter((_3) => !!_3).join(",");
   return type2 === "office" ? `https://outlook.office.com/calendar/deeplink/compose?${toQueryString(data)}` : `https://outlook.live.com/calendar/deeplink/compose?${toQueryString(data)}`;
 }
 
@@ -103956,7 +103953,7 @@ var StaffUser = class extends User {
     }
   }
   location_time(datetime = Date.now()) {
-    return this.work_preference(datetime)?.location || "wfo";
+    return this.work_preference(datetime)?.location || "ooo";
   }
   get location_name() {
     return this.location_name_time();
@@ -104044,15 +104041,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "3d7109c",
-  "hash": "3d7109c",
+  "raw": "2a6faf1",
+  "hash": "2a6faf1",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "3d7109c",
+  "suffix": "2a6faf1",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1744171135531
+  "time": 1747283801359
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -106872,7 +106869,7 @@ var OrganisationService = class _OrganisationService {
     const binding = this.binding(name);
     const system_id = binding instanceof Object ? binding.id || binding.system_id : binding;
     const mod_id = (binding instanceof Object ? binding.mod || binding.module : "") || default_mod_id;
-    return !system_id || !mod_id ? null : Oa(system_id, mod_id);
+    return !system_id || !mod_id ? null : Ea(system_id, mod_id);
   }
   /** Get building by id */
   find(id) {
@@ -107357,7 +107354,7 @@ var VorlonService = class _VorlonService extends AsyncHandler {
     return __async(this, null, function* () {
       const system = this._settings.get("app.vorlon.system");
       if (system) {
-        const module2 = Oa(system, "Vorlon");
+        const module2 = Ea(system, "Vorlon");
         if (module2) {
           const binding = module2.binding("enabled");
           this.subscription("binding", binding.bind());
@@ -108799,7 +108796,7 @@ var KeepAliveService = class _KeepAliveService extends AsyncHandler {
   }
   /** List to binding */
   _bindTo(id, name, mod = "SystemHealth") {
-    const module2 = Oa(id, mod).binding(name);
+    const module2 = Ea(id, mod).binding(name);
     this.subscription(`bind:${name}`, module2.bind());
     return module2.listen();
   }
@@ -108812,6 +108809,261 @@ var KeepAliveService = class _KeepAliveService extends AsyncHandler {
     this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _KeepAliveService, factory: _KeepAliveService.\u0275fac, providedIn: "root" });
   }
 };
+
+// libs/common/src/lib/recurrence.ts
+var WeekOfMonth;
+(function(WeekOfMonth3) {
+  WeekOfMonth3[WeekOfMonth3["First"] = 1] = "First";
+  WeekOfMonth3[WeekOfMonth3["Second"] = 2] = "Second";
+  WeekOfMonth3[WeekOfMonth3["Third"] = 3] = "Third";
+  WeekOfMonth3[WeekOfMonth3["Fourth"] = 4] = "Fourth";
+  WeekOfMonth3[WeekOfMonth3["Fifth"] = 5] = "Fifth";
+  WeekOfMonth3[WeekOfMonth3["Last"] = -1] = "Last";
+  WeekOfMonth3[WeekOfMonth3["SecondLast"] = -2] = "SecondLast";
+  WeekOfMonth3[WeekOfMonth3["ThirdLast"] = -3] = "ThirdLast";
+  WeekOfMonth3[WeekOfMonth3["FourthLast"] = -4] = "FourthLast";
+  WeekOfMonth3[WeekOfMonth3["FifthLast"] = -5] = "FifthLast";
+})(WeekOfMonth || (WeekOfMonth = {}));
+var RecurrDays;
+(function(RecurrDays2) {
+  RecurrDays2[RecurrDays2["SUNDAY"] = 1] = "SUNDAY";
+  RecurrDays2[RecurrDays2["MONDAY"] = 2] = "MONDAY";
+  RecurrDays2[RecurrDays2["TUESDAY"] = 4] = "TUESDAY";
+  RecurrDays2[RecurrDays2["WEDNESDAY"] = 8] = "WEDNESDAY";
+  RecurrDays2[RecurrDays2["THURSDAY"] = 16] = "THURSDAY";
+  RecurrDays2[RecurrDays2["FRIDAY"] = 32] = "FRIDAY";
+  RecurrDays2[RecurrDays2["SATURDAY"] = 64] = "SATURDAY";
+})(RecurrDays || (RecurrDays = {}));
+var DAYS_OF_WEEK_INDEX = [
+  RecurrDays.SUNDAY,
+  RecurrDays.MONDAY,
+  RecurrDays.TUESDAY,
+  RecurrDays.WEDNESDAY,
+  RecurrDays.THURSDAY,
+  RecurrDays.FRIDAY,
+  RecurrDays.SATURDAY
+];
+var NO_RECURR = {
+  _custom: false,
+  type: "none",
+  end_type: "never",
+  interval: 1
+};
+function fromEventRecurrence(r2) {
+  if (!r2.pattern || r2._pattern === "none") {
+    return {
+      _custom: false,
+      type: "none",
+      interval: 1,
+      end_type: "never"
+    };
+  }
+  const recurr = {
+    _custom: r2._pattern == "custom_display",
+    type: r2.pattern,
+    interval: r2.interval || 1,
+    end_type: r2.end ? "date" : "never"
+  };
+  if (r2.end)
+    recurr.end_date = r2.end;
+  if (r2.pattern === "weekly" && r2.days_of_week?.length) {
+    recurr.weekdays = new Set(r2.days_of_week);
+  }
+  if (r2.pattern === "monthly") {
+    recurr.monthly_type = "day_of_week";
+    if (r2.days_of_week?.length) {
+      recurr.weekdays = new Set(r2.days_of_week);
+    }
+  }
+  return recurr;
+}
+function toEventRecurrence(r2, date = Date.now()) {
+  if (r2.type === "none") {
+    return {
+      pattern: "daily",
+      _pattern: "none",
+      interval: 1,
+      days_of_week: [],
+      start: date,
+      end: date
+    };
+  }
+  let end = addMonths(date, 6).valueOf();
+  if (r2.end_type === "date" && r2.end_date) {
+    end = r2.end_date;
+  } else if (r2.end_type === "instances") {
+    const end_step = r2.interval * r2.end_instances;
+    end = startOfDay(r2.type === "daily" ? addDays(date, end_step) : r2.type === "weekly" ? addWeeks(date, end_step) : addMonths(date, end_step)).valueOf() - 1;
+  }
+  const details = {
+    _pattern: r2._custom ? "custom_display" : r2.type,
+    pattern: r2.type,
+    interval: r2.interval,
+    days_of_week: [],
+    start: date,
+    end
+  };
+  if ((r2.type === "weekly" || r2.type === "monthly") && r2.weekdays) {
+    details.days_of_week = Array.from(r2.weekdays);
+  }
+  return details;
+}
+function fromBookingRecurrence(r2) {
+  if (!r2.recurrence_type || r2.recurrence_type === "none") {
+    return {
+      _custom: r2.recurrence_custom,
+      type: "none",
+      interval: 1,
+      end_type: "never"
+    };
+  }
+  const recurr = {
+    _custom: r2.recurrence_custom,
+    type: r2.recurrence_type,
+    interval: r2.recurrence_interval || 1,
+    end_type: r2.recurrence_end ? "date" : "never"
+  };
+  if (r2.recurrence_end) {
+    recurr.end_date = r2.recurrence_end * 1e3;
+  }
+  if (r2.recurrence_type === "daily" && r2.recurrence_days) {
+    const weekdays = /* @__PURE__ */ new Set();
+    for (let i = 0; i < 7; i++) {
+      if (r2.recurrence_days & 1 << 6 - i) {
+        weekdays.add(i);
+      }
+    }
+    recurr.weekdays = weekdays;
+  }
+  if (r2.recurrence_type === "monthly") {
+    recurr.monthly_type = "day_of_week";
+    if (r2.recurrence_days) {
+      const weekdays = /* @__PURE__ */ new Set();
+      for (let i = 0; i < 7; i++) {
+        if (r2.recurrence_days & DAYS_OF_WEEK_INDEX[i]) {
+          weekdays.add(i);
+        }
+      }
+      recurr.weekdays = weekdays;
+    }
+    if (r2.recurrence_nth_of_month) {
+      recurr.week = r2.recurrence_nth_of_month;
+    }
+  }
+  return recurr;
+}
+function toBookingRecurrence(r2) {
+  if (r2.type === "none")
+    return { recurrence_type: "none" };
+  const booking = {
+    recurrence_custom: r2._custom,
+    recurrence_type: r2.type === "yearly" ? "monthly" : r2.type,
+    recurrence_interval: r2.type === "yearly" ? r2.interval * 12 : r2.interval
+  };
+  if (r2.end_type === "date" && r2.end_date) {
+    booking.recurrence_end = Math.floor(r2.end_date / 1e3);
+  }
+  if (r2.type === "weekly" && r2.weekdays) {
+    let days = 0;
+    r2.weekdays.forEach((day) => {
+      days |= DAYS_OF_WEEK_INDEX[day];
+    });
+    booking.recurrence_days = days;
+    booking.recurrence_type = "daily";
+  }
+  if ((r2.type === "monthly" || r2.type === "yearly") && r2.weekdays) {
+    let days = 0;
+    r2.weekdays.forEach((day) => {
+      days |= 1 << 6 - day;
+    });
+    booking.recurrence_days = days;
+  }
+  if ((r2.type === "monthly" || r2.type === "yearly") && r2.week) {
+    booking.recurrence_nth_of_month = r2.week;
+  }
+  return booking;
+}
+function formatRecurrence(recurrence) {
+  const { type: type2, interval: interval3, weekdays, week, monthly_type, end_type, end_date, end_instances } = recurrence;
+  const dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
+  const weekNames = {
+    [WeekOfMonth.First]: "First",
+    [WeekOfMonth.Second]: "Second",
+    [WeekOfMonth.Third]: "Third",
+    [WeekOfMonth.Fourth]: "Fourth",
+    [WeekOfMonth.Fifth]: "Fifth",
+    [WeekOfMonth.Last]: "Last",
+    [WeekOfMonth.SecondLast]: "Second Last",
+    [WeekOfMonth.ThirdLast]: "Third Last",
+    [WeekOfMonth.FourthLast]: "Fourth Last",
+    [WeekOfMonth.FifthLast]: "Fifth Last"
+  };
+  function formatList(items) {
+    if (items.length === 0)
+      return "";
+    if (items.length === 1)
+      return items[0];
+    return items.slice(0, -1).join(", ") + " and " + items[items.length - 1];
+  }
+  function plural2(n, singular) {
+    return n > 1 ? singular + "s" : singular;
+  }
+  function formatEnd() {
+    switch (end_type) {
+      case "never":
+        return "";
+      case "date":
+        if (!end_date)
+          return "";
+        return ` until ${new Date(end_date).toLocaleDateString(void 0, {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        })}`;
+      case "instances":
+        if (!end_instances)
+          return "";
+        return ` for ${end_instances} ${plural2(end_instances, "time")}`;
+    }
+  }
+  let result;
+  switch (type2) {
+    case "none":
+      result = "";
+      break;
+    case "daily":
+      result = `Every ${interval3} ${plural2(interval3, "day")}`;
+      break;
+    case "weekly": {
+      const days = weekdays && weekdays.size ? formatList(Array.from(weekdays).sort().map((d) => dayNames[d])) : "";
+      result = `Every ${interval3} ${plural2(interval3, "week")}${days ? " on " + days : ""}`;
+      break;
+    }
+    case "monthly": {
+      if (monthly_type === "day_of_week" && week != null && weekdays) {
+        const days = weekdays.size > 0 ? formatList(Array.from(weekdays).sort().map((d) => dayNames[d])) : "";
+        result = `Every ${interval3} ${plural2(interval3, "month")} on the ${weekNames[week]}${days ? " " + days : ""}`;
+      } else {
+        result = `Every ${interval3} ${plural2(interval3, "month")}`;
+      }
+      break;
+    }
+    case "yearly":
+      result = `Every ${interval3} ${plural2(interval3, "year")}`;
+      break;
+    default:
+      result = "Unsupported recurrence type";
+  }
+  return result + formatEnd();
+}
 
 // libs/common/src/lib/remote-logging.service.ts
 function hookMethod(rootObject, functionToHook, hookingFunction) {
@@ -108835,7 +109087,7 @@ var RemoteLoggingService = class _RemoteLoggingService extends AsyncHandler {
     this._metadata = null;
     this._logging_bindings = this._system_id.pipe(filter((_3) => !!_3), switchMap((id) => combineLatest([of(id), this._bindTo(id, "enabled")])), filter(([_3, enabled]) => !!enabled), map(([id]) => this.subscription("post_events", this._event_history.subscribe((d) => __async(this, null, function* () {
       this._disable_handling = true;
-      yield Oa(id, "Logger").execute("post_event", [d]).catch();
+      yield Ea(id, "Logger").execute("post_event", [d]).catch();
       this._disable_handling = false;
     })))));
     this.history = this._event_history;
@@ -108877,7 +109129,7 @@ var RemoteLoggingService = class _RemoteLoggingService extends AsyncHandler {
   }
   /** List to binding */
   _bindTo(id, name, mod = "Logger") {
-    const module2 = Oa(id, mod).binding(name);
+    const module2 = Ea(id, mod).binding(name);
     this.subscription(`bind:${name}`, module2.bind());
     return module2.listen();
   }
@@ -110536,12 +110788,12 @@ var UploadPermissionsModalComponent = class _UploadPermissionsModalComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadPermissionsModalComponent, selectors: [["upload-permissions-modal"]], standalone: false, decls: 21, vars: 8, consts: [["btn", "", "icon", "", "mat-dialog-close", ""], [1, "min-w-[20rem]", "p-4"], [1, "flex", "flex-col", "space-y-2"], ["appearance", "outline"], ["matInput", "", "disabled", "true", "placeholder", "File Name", 3, "ngModel"], [1, "pb-4"], [3, "ngModelChange", "ngModel"], ["class", "flex flex-col space-y-2", 4, "ngIf"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", 1, "w-32", 3, "mat-dialog-close"], ["value", "none"], ["value", "support"], ["value", "admin"]], template: function UploadPermissionsModalComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadPermissionsModalComponent, selectors: [["upload-permissions-modal"]], decls: 21, vars: 8, consts: [["btn", "", "icon", "", "mat-dialog-close", ""], [1, "min-w-[20rem]", "p-4"], [1, "flex", "flex-col", "space-y-2"], ["appearance", "outline"], ["matInput", "", "disabled", "true", "placeholder", "File Name", 3, "ngModel"], [1, "pb-4"], [3, "ngModelChange", "ngModel"], ["class", "flex flex-col space-y-2", 4, "ngIf"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", 1, "w-32", 3, "mat-dialog-close"], ["value", "none"], ["value", "support"], ["value", "admin"]], template: function UploadPermissionsModalComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "header")(1, "h2");
         \u0275\u0275text(2, "Upload File");
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(3, "button", 0)(4, "app-icon");
+        \u0275\u0275elementStart(3, "button", 0)(4, "icon");
         \u0275\u0275text(5, "close");
         \u0275\u0275elementEnd()()();
         \u0275\u0275elementStart(6, "main", 1)(7, "div", 2)(8, "label");
@@ -110576,11 +110828,11 @@ var UploadPermissionsModalComponent = class _UploadPermissionsModalComponent {
         \u0275\u0275advance(4);
         \u0275\u0275property("mat-dialog-close", \u0275\u0275pureFunction3(4, _c021, ctx.file, ctx.is_public, ctx.permissions));
       }
-    }, dependencies: [NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatOption, MatFormField, MatSelect, MatDialogClose, MatInput, MatCheckbox, IconComponent], encapsulation: 2 });
+    }, dependencies: [MatDialogModule, MatDialogClose, MatFormFieldModule, MatFormField, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadPermissionsModalComponent, { className: "UploadPermissionsModalComponent", filePath: "libs/components/src/lib/upload-permissions-modal.component.ts", lineNumber: 56 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadPermissionsModalComponent, { className: "UploadPermissionsModalComponent", filePath: "libs/components/src/lib/upload-permissions-modal.component.ts", lineNumber: 63 });
 })();
 
 // libs/common/src/lib/uploads.service.ts
@@ -110728,7 +110980,7 @@ var BindingDirective = class _BindingDirective extends AsyncHandler {
   bindVariable() {
     if (bt() && this.bind && this.sys && this.mod && !this._binding) {
       this.timeout("bind", () => {
-        const module2 = Oa(this.sys, this.mod, this.index);
+        const module2 = Ea(this.sys, this.mod, this.index);
         const binding = module2.binding(this.bind);
         this._binding = true;
         this.subscription("binding", binding.bind());
@@ -110751,7 +111003,7 @@ var BindingDirective = class _BindingDirective extends AsyncHandler {
   execute() {
     if (bt() && this.exec && this.sys && this.mod && !this._timers["execute"]) {
       this.timeout("execute", () => {
-        const module2 = Oa(this.sys, this.mod, this.index);
+        const module2 = Ea(this.sys, this.mod, this.index);
         let params = this.params;
         if (this.bind)
           params = this.params || [this.model];
@@ -111510,7 +111762,7 @@ var TranslatePipe = class _TranslatePipe {
     };
   }
   static {
-    this.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "translate", type: _TranslatePipe, pure: true, standalone: false });
+    this.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "translate", type: _TranslatePipe, pure: true });
   }
 };
 
@@ -111661,12 +111913,13 @@ var AccessibilityTooltipComponent = class _AccessibilityTooltipComponent extends
 })();
 
 // libs/components/src/lib/settings-toggle.component.ts
+var _c023 = ["*"];
 function SettingsToggleComponent_div_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "div", 5);
   }
 }
-function SettingsToggleComponent_app_icon_5_Template(rf, ctx) {
+function SettingsToggleComponent_app_icon_6_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "app-icon", 6);
     \u0275\u0275text(1, "info");
@@ -111675,6 +111928,40 @@ function SettingsToggleComponent_app_icon_5_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
     \u0275\u0275property("matTooltip", ctx_r0.info);
+  }
+}
+function SettingsToggleComponent_Conditional_7_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-slide-toggle", 7);
+    \u0275\u0275twoWayListener("ngModelChange", function SettingsToggleComponent_Conditional_7_Template_mat_slide_toggle_ngModelChange_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r0.value, $event) || (ctx_r0.value = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275twoWayProperty("ngModel", ctx_r0.value);
+  }
+}
+function SettingsToggleComponent_Conditional_8_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-checkbox", 7);
+    \u0275\u0275twoWayListener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r0 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r0.value, $event) || (ctx_r0.value = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275twoWayProperty("ngModel", ctx_r0.value);
   }
 }
 var SettingsToggleComponent = class _SettingsToggleComponent {
@@ -111705,14 +111992,15 @@ var SettingsToggleComponent = class _SettingsToggleComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SettingsToggleComponent, selectors: [["settings-toggle"]], inputs: { name: "name", info: "info" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SettingsToggleComponent, selectors: [["settings-toggle"]], inputs: { toggle: "toggle", name: "name", info: "info" }, features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => _SettingsToggleComponent),
         multi: true
       }
-    ])], decls: 7, vars: 8, consts: [["matRipple", "", 1, "relative", "flex", "flex-1", "items-center", "space-x-2", "overflow-hidden", "rounded", "border", "py-1", "pl-2", "pr-1", "hover:bg-base-200", 3, "click"], ["class", "absolute inset-0 bg-info opacity-10", 4, "ngIf"], [1, "ml-2", "flex", "flex-1", "items-center", "space-x-2", "text-left"], [3, "matTooltip", 4, "ngIf"], [1, "pointer-events-none", 3, "ngModelChange", "ngModel"], [1, "absolute", "inset-0", "bg-info", "opacity-10"], [3, "matTooltip"]], template: function SettingsToggleComponent_Template(rf, ctx) {
+    ])], ngContentSelectors: _c023, decls: 9, vars: 8, consts: [["matRipple", "", 1, "relative", "flex", "flex-1", "items-center", "space-x-2", "overflow-hidden", "rounded", "border", "py-1", "pl-2", "pr-1", "hover:bg-base-200", 3, "click"], ["class", "absolute inset-0 bg-info opacity-10", 4, "ngIf"], [1, "ml-2", "flex", "flex-1", "items-center", "space-x-2", "text-left"], [3, "matTooltip", 4, "ngIf"], [1, "pointer-events-none", 3, "ngModel"], [1, "absolute", "inset-0", "bg-info", "opacity-10"], [3, "matTooltip"], [1, "pointer-events-none", 3, "ngModelChange", "ngModel"]], template: function SettingsToggleComponent_Template(rf, ctx) {
       if (rf & 1) {
+        \u0275\u0275projectionDef();
         \u0275\u0275elementStart(0, "button", 0);
         \u0275\u0275listener("click", function SettingsToggleComponent_Template_button_click_0_listener() {
           return ctx.setValue(!ctx.value);
@@ -111720,36 +112008,33 @@ var SettingsToggleComponent = class _SettingsToggleComponent {
         \u0275\u0275template(1, SettingsToggleComponent_div_1_Template, 1, 0, "div", 1);
         \u0275\u0275elementStart(2, "div", 2)(3, "div");
         \u0275\u0275text(4);
+        \u0275\u0275projection(5);
         \u0275\u0275elementEnd();
-        \u0275\u0275template(5, SettingsToggleComponent_app_icon_5_Template, 2, 1, "app-icon", 3);
+        \u0275\u0275template(6, SettingsToggleComponent_app_icon_6_Template, 2, 1, "app-icon", 3);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(6, "mat-checkbox", 4);
-        \u0275\u0275twoWayListener("ngModelChange", function SettingsToggleComponent_Template_mat_checkbox_ngModelChange_6_listener($event) {
-          \u0275\u0275twoWayBindingSet(ctx.value, $event) || (ctx.value = $event);
-          return $event;
-        });
-        \u0275\u0275elementEnd()();
+        \u0275\u0275template(7, SettingsToggleComponent_Conditional_7_Template, 1, 1, "mat-slide-toggle", 4)(8, SettingsToggleComponent_Conditional_8_Template, 1, 1, "mat-checkbox", 4);
+        \u0275\u0275elementEnd();
       }
       if (rf & 2) {
         \u0275\u0275classProp("border-base-300", !ctx.value)("border-info", ctx.value);
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.value);
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate(ctx.name);
-        \u0275\u0275advance();
+        \u0275\u0275textInterpolate1(" ", ctx.name, " ");
+        \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ctx.info);
         \u0275\u0275advance();
-        \u0275\u0275twoWayProperty("ngModel", ctx.value);
+        \u0275\u0275conditional(ctx.toggle ? 7 : 8);
       }
-    }, dependencies: [NgIf, NgControlStatus, NgModel, MatRipple, MatTooltip, MatCheckbox, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */"] });
+    }, dependencies: [CommonModule, NgIf, MatCheckboxModule, MatCheckbox, MatSlideToggleModule, MatSlideToggle, FormsModule, NgControlStatus, NgModel, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SettingsToggleComponent, { className: "SettingsToggleComponent", filePath: "libs/components/src/lib/settings-toggle.component.ts", lineNumber: 44 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SettingsToggleComponent, { className: "SettingsToggleComponent", filePath: "libs/components/src/lib/settings-toggle.component.ts", lineNumber: 68 });
 })();
 
 // libs/components/src/lib/attached-resource-config-modal.component.ts
-var _c023 = (a0) => ({ name: a0 });
+var _c024 = (a0) => ({ name: a0 });
 function AttachedResourceConfigModalComponent_button_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "button", 10)(1, "app-icon");
@@ -112006,7 +112291,7 @@ var AttachedResourceConfigModalComponent = class _AttachedResourceConfigModalCom
       }
       if (rf & 2) {
         \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 6, "RESOURCE.RULESET_HEADER", \u0275\u0275pureFunction1(13, _c023, ctx.resource_name)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 6, "RESOURCE.RULESET_HEADER", \u0275\u0275pureFunction1(13, _c024, ctx.resource_name)), " ");
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", !ctx.loading);
         \u0275\u0275advance(2);
@@ -112044,6 +112329,7 @@ var Space = class {
     this.response_status = data.response_status || "tentative";
     this.level = data.level || new BuildingLevel();
     this.availability = data.availability || [];
+    this.approval = data.approval ?? false;
   }
   inUseAt(start, duration) {
     const end = start + duration * 60 * 1e3;
@@ -112115,6 +112401,9 @@ var SpacePipe = class _SpacePipe {
       return EMPTY_SPACE;
     });
   }
+  get(space_id) {
+    return SPACE_LIST.find(({ id, email }) => id === space_id || email === space_id) || EMPTY_SPACE;
+  }
   updateSpaceList(space_list) {
     updateSpaceList(space_list);
   }
@@ -112176,7 +112465,7 @@ function generateMockSpace(overrides = {}) {
 }
 
 // libs/components/src/lib/available-rooms-state-modal.component.ts
-var _c024 = (a0) => ({ type: a0 });
+var _c025 = (a0) => ({ type: a0 });
 var _c117 = (a0) => ({ count: a0 });
 function AvailableRoomsStateModalComponent_button_5_Template(rf, ctx) {
   if (rf & 1) {
@@ -112267,7 +112556,7 @@ function AvailableRoomsStateModalComponent_ng_template_14_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 1, "APP.CONCIERGE.AVAILABLE_ROOMS_SAVING", \u0275\u0275pureFunction1(4, _c024, ctx_r2.type)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 1, "APP.CONCIERGE.AVAILABLE_ROOMS_SAVING", \u0275\u0275pureFunction1(4, _c025, ctx_r2.type)), " ");
   }
 }
 var AvailableRoomsStateModalComponent = class _AvailableRoomsStateModalComponent {
@@ -112352,7 +112641,7 @@ var AvailableRoomsStateModalComponent = class _AvailableRoomsStateModalComponent
       if (rf & 2) {
         const load_state_r6 = \u0275\u0275reference(15);
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 6, "APP.CONCIERGE.AVAILABLE_ROOMS_HEADER", \u0275\u0275pureFunction1(13, _c024, ctx.type)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 6, "APP.CONCIERGE.AVAILABLE_ROOMS_HEADER", \u0275\u0275pureFunction1(13, _c025, ctx.type)), " ");
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", !ctx.loading);
         \u0275\u0275advance();
@@ -114776,7 +115065,7 @@ var parser = _Parser.parse;
 var lexer = _Lexer.lex;
 
 // libs/components/src/lib/fullscreen-modal-shell.component.ts
-var _c025 = ["*"];
+var _c026 = ["*"];
 function FullscreenModalShellComponent_Conditional_4_button_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "button", 4)(1, "app-icon");
@@ -114871,7 +115160,7 @@ var FullscreenModalShellComponent = class _FullscreenModalShellComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FullscreenModalShellComponent, selectors: [["fullscreen-modal-shell"], ["", "fs-modal-shell", ""]], inputs: { loading: "loading", heading: "heading", confirm_text: "confirm_text", close: "close", hide_confirm: "hide_confirm" }, outputs: { confirm: "confirm" }, standalone: false, ngContentSelectors: _c025, decls: 11, vars: 5, consts: [["load_state", ""], [1, "fixed", "bottom-0", "left-0", "right-0", "top-0", "flex", "flex-col", "overflow-auto", "bg-base-100"], [1, "sticky", "top-0", "z-10", "mx-auto", "my-2", "flex", "h-14", "w-full", "max-w-[640px]", "items-center", "justify-between", "rounded", "border-none", "bg-base-200", "px-4", "py-2"], [1, "text-xl", "font-medium", "capitalize"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], ["icon", "", "matRipple", "", 3, "routerLink"], [1, "z-0", "mx-auto", "h-1/2", "w-full", "max-w-[640px]", "flex-1", "space-y-8", "px-4", "py-2"], [4, "ngIf", "ngIfElse"], ["class", "fixed bottom-0 left-1/2 z-10 mx-auto my-2 flex w-full max-w-[640px] -translate-x-1/2 items-center justify-end rounded border-none bg-base-200 px-4 py-2", 4, "ngIf"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 4, "ngIf"], ["icon", "", "matRipple", "", 3, "routerLink", 4, "ngIf"], [1, "h-10", "w-full"], [1, "fixed", "bottom-0", "left-1/2", "z-10", "mx-auto", "my-2", "flex", "w-full", "max-w-[640px]", "-translate-x-1/2", "items-center", "justify-end", "rounded", "border-none", "bg-base-200", "px-4", "py-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"], [1, "flex", "h-1/2", "w-full", "flex-1", "flex-col", "items-center", "justify-center", "space-y-4", "p-12"], [3, "diameter"], [1, "text-center", "opacity-50"]], template: function FullscreenModalShellComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FullscreenModalShellComponent, selectors: [["fullscreen-modal-shell"], ["", "fs-modal-shell", ""]], inputs: { loading: "loading", heading: "heading", confirm_text: "confirm_text", close: "close", hide_confirm: "hide_confirm" }, outputs: { confirm: "confirm" }, standalone: false, ngContentSelectors: _c026, decls: 11, vars: 5, consts: [["load_state", ""], [1, "fixed", "bottom-0", "left-0", "right-0", "top-0", "flex", "flex-col", "overflow-auto", "bg-base-100"], [1, "sticky", "top-0", "z-10", "mx-auto", "my-2", "flex", "h-14", "w-full", "max-w-[640px]", "items-center", "justify-between", "rounded", "border-none", "bg-base-200", "px-4", "py-2"], [1, "text-xl", "font-medium", "capitalize"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], ["icon", "", "matRipple", "", 3, "routerLink"], [1, "z-0", "mx-auto", "h-1/2", "w-full", "max-w-[640px]", "flex-1", "space-y-8", "px-4", "py-2"], [4, "ngIf", "ngIfElse"], ["class", "fixed bottom-0 left-1/2 z-10 mx-auto my-2 flex w-full max-w-[640px] -translate-x-1/2 items-center justify-end rounded border-none bg-base-200 px-4 py-2", 4, "ngIf"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 4, "ngIf"], ["icon", "", "matRipple", "", 3, "routerLink", 4, "ngIf"], [1, "h-10", "w-full"], [1, "fixed", "bottom-0", "left-1/2", "z-10", "mx-auto", "my-2", "flex", "w-full", "max-w-[640px]", "-translate-x-1/2", "items-center", "justify-end", "rounded", "border-none", "bg-base-200", "px-4", "py-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"], [1, "flex", "h-1/2", "w-full", "flex-1", "flex-col", "items-center", "justify-center", "space-y-4", "p-12"], [3, "diameter"], [1, "text-center", "opacity-50"]], template: function FullscreenModalShellComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275projectionDef();
         \u0275\u0275elementStart(0, "div", 1)(1, "header", 2)(2, "h2", 3);
@@ -114903,6 +115192,40 @@ var FullscreenModalShellComponent = class _FullscreenModalShellComponent {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FullscreenModalShellComponent, { className: "FullscreenModalShellComponent", filePath: "libs/components/src/lib/fullscreen-modal-shell.component.ts", lineNumber: 53 });
 })();
+
+// libs/components/src/lib/safe.pipe.ts
+var SafePipe = class _SafePipe {
+  constructor(sanitizer) {
+    this.sanitizer = sanitizer;
+  }
+  /**
+   * Sanitizes the string allowing it to be injected into a template
+   * @param value String to sanitize
+   * @param type Type of value to sanitise. `resource`, `url`, `script`, `style` or `html`
+   */
+  transform(value, type2 = "html") {
+    switch (type2) {
+      case "resource":
+        return this.sanitizer.bypassSecurityTrustResourceUrl(value);
+      case "url":
+        return this.sanitizer.bypassSecurityTrustUrl(value);
+      case "script":
+        return this.sanitizer.bypassSecurityTrustScript(value);
+      case "style":
+        return this.sanitizer.bypassSecurityTrustStyle(value);
+      default:
+        return this.sanitizer.bypassSecurityTrustHtml(value);
+    }
+  }
+  static {
+    this.\u0275fac = function SafePipe_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _SafePipe)(\u0275\u0275directiveInject(DomSanitizer, 16));
+    };
+  }
+  static {
+    this.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "safe", type: _SafePipe, pure: true, standalone: false });
+  }
+};
 
 // libs/components/src/lib/changelog-modal.component.ts
 function ChangelogModalComponent_div_1_Template(rf, ctx) {
@@ -115210,7 +115533,7 @@ var ChatService = class _ChatService extends AsyncHandler {
     }));
     this._chat_id = "";
     this.chat_hint = this._chat_system.pipe(filter((_3) => !!_3), switchMap((id) => {
-      const mod = Oa(id, "LLM");
+      const mod = Ea(id, "LLM");
       const binding = mod.binding("user_hint");
       this.subscription(`binding:LLM:user_hint`, binding.bind());
       return binding.listen();
@@ -115400,7 +115723,7 @@ var DateFromPipe = class _DateFromPipe {
 };
 
 // libs/components/src/lib/chat/chat.component.ts
-var _c026 = ["input"];
+var _c027 = ["input"];
 var _c118 = ["container"];
 var _c211 = (a0) => ({ name: a0 });
 function ChatComponent_div_0_div_4_div_19_Template(rf, ctx) {
@@ -115695,7 +116018,7 @@ var ChatComponent = class _ChatComponent extends AsyncHandler {
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ChatComponent, selectors: [["global-chat"]], viewQuery: function ChatComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c026, 5);
+        \u0275\u0275viewQuery(_c027, 5);
         \u0275\u0275viewQuery(_c118, 5);
       }
       if (rf & 2) {
@@ -115710,7 +116033,7 @@ var ChatComponent = class _ChatComponent extends AsyncHandler {
       if (rf & 2) {
         \u0275\u0275property("ngIf", ctx.can_show);
       }
-    }, dependencies: [NgForOf, NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatRipple, IconComponent, AsyncPipe, SanitizePipe, DateFromPipe, TranslatePipe], styles: ["\n\n.anim-delay-1[_ngcontent-%COMP%] {\n  animation-delay: 0.25s;\n}\n.anim-delay-2[_ngcontent-%COMP%] {\n  animation-delay: 0.5s;\n}\n.waiting-margin[_ngcontent-%COMP%]:last-child {\n  padding-bottom: 2rem;\n}\n/*# sourceMappingURL=chat.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatRipple, IconComponent, AsyncPipe, TranslatePipe, SanitizePipe, DateFromPipe], styles: ["\n\n.anim-delay-1[_ngcontent-%COMP%] {\n  animation-delay: 0.25s;\n}\n.anim-delay-2[_ngcontent-%COMP%] {\n  animation-delay: 0.5s;\n}\n.waiting-margin[_ngcontent-%COMP%]:last-child {\n  padding-bottom: 2rem;\n}\n/*# sourceMappingURL=chat.component.css.map */"] });
   }
 };
 (() => {
@@ -115848,7 +116171,7 @@ var ConfirmModalComponent = class _ConfirmModalComponent extends AsyncHandler {
 })();
 
 // node_modules/@angular/material/fesm2022/table.mjs
-var _c027 = [[["caption"]], [["colgroup"], ["col"]], "*"];
+var _c028 = [[["caption"]], [["colgroup"], ["col"]], "*"];
 var _c119 = ["caption", "colgroup, col", "*"];
 function MatTable_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -115978,7 +116301,7 @@ var MatTable = class _MatTable extends CdkTable {
     consts: [["role", "rowgroup"], ["headerRowOutlet", ""], ["role", "rowgroup", 1, "mdc-data-table__content"], ["rowOutlet", ""], ["noDataRowOutlet", ""], ["footerRowOutlet", ""]],
     template: function MatTable_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c027);
+        \u0275\u0275projectionDef(_c028);
         \u0275\u0275projection(0);
         \u0275\u0275projection(1, 1);
         \u0275\u0275template(2, MatTable_Conditional_2_Template, 1, 0)(3, MatTable_Conditional_3_Template, 7, 0)(4, MatTable_Conditional_4_Template, 4, 0);
@@ -116930,7 +117253,7 @@ var MatTableDataSource = class extends DataSource {
 };
 
 // libs/components/src/lib/custom-table.component.ts
-var _c028 = (a0, a1, a2, a3, a4, a5, a6) => ({ first: a0, last: a1, index: a2, data: a3, row: a4, key: a5, name: a6 });
+var _c029 = (a0, a1, a2, a3, a4, a5, a6) => ({ first: a0, last: a1, index: a2, data: a3, row: a4, key: a5, name: a6 });
 function CustomTableComponent_ng_container_1_div_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 12);
@@ -116987,7 +117310,7 @@ function CustomTableComponent_ng_container_1_div_3_ng_container_1_ng_template_2_
     const column_r2 = ctx_r0.$implicit;
     const i_r3 = ctx_r0.index;
     const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275property("ngTemplateOutlet", ctx_r3.template[column_r2])("ngTemplateOutletContext", \u0275\u0275pureFunction7(2, _c028, idx_r7 === 0, idx_r7 === ctx_r3.data_source.data.length - 1 || idx_r7 === ctx_r3.data_source.length - 1, i_r3, row_r5[column_r2], row_r5, column_r2, ctx_r3.display_column[i_r3] || column_r2));
+    \u0275\u0275property("ngTemplateOutlet", ctx_r3.template[column_r2])("ngTemplateOutletContext", \u0275\u0275pureFunction7(2, _c029, idx_r7 === 0, idx_r7 === ctx_r3.data_source.data.length - 1 || idx_r7 === ctx_r3.data_source.length - 1, i_r3, row_r5[column_r2], row_r5, column_r2, ctx_r3.display_column[i_r3] || column_r2));
   }
 }
 function CustomTableComponent_ng_container_1_div_3_ng_container_1_Template(rf, ctx) {
@@ -117171,7 +117494,7 @@ var CustomTableComponent = class _CustomTableComponent extends AsyncHandler {
 })();
 
 // libs/components/src/lib/custom-tooltip.component.ts
-var _c029 = ["customTooltip", ""];
+var _c030 = ["customTooltip", ""];
 var _c120 = ["*"];
 function CustomTooltipComponent_ng_template_1_ng_container_1_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
@@ -117354,17 +117677,17 @@ var CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler 
           return ctx.onLeave();
         });
       }
-    }, inputs: { x_pos: [0, "xPosition", "x_pos"], y_pos: [0, "yPosition", "y_pos"], content: "content", data: "data", backdrop: "backdrop", hover: "hover", delay: "delay" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c029, ngContentSelectors: _c120, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["custom-tooltip", "", 1, "relative", "print:hidden", 3, "ngSwitch"], [4, "ngSwitchCase"], [4, "ngSwitchDefault"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [3, "innerHTML"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function CustomTooltipComponent_Template(rf, ctx) {
+    }, inputs: { x_pos: [0, "xPosition", "x_pos"], y_pos: [0, "yPosition", "y_pos"], content: "content", data: "data", backdrop: "backdrop", hover: "hover", delay: "delay" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c030, ngContentSelectors: _c120, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["custom-tooltip", "", 1, "relative", "print:hidden", 3, "ngSwitch"], [4, "ngSwitchCase"], [4, "ngSwitchDefault"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [3, "innerHTML"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function CustomTooltipComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275projectionDef();
         \u0275\u0275projection(0);
         \u0275\u0275template(1, CustomTooltipComponent_ng_template_1_Template, 4, 3, "ng-template", 0);
       }
-    }, dependencies: [NgComponentOutlet, NgTemplateOutlet, NgSwitch, NgSwitchCase, NgSwitchDefault, TemplatePortalDirective, SanitizePipe], encapsulation: 2 });
+    }, dependencies: [CommonModule, NgComponentOutlet, NgTemplateOutlet, NgSwitch, NgSwitchCase, NgSwitchDefault, PortalModule, TemplatePortalDirective], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CustomTooltipComponent, { className: "CustomTooltipComponent", filePath: "libs/components/src/lib/custom-tooltip.component.ts", lineNumber: 54 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CustomTooltipComponent, { className: "CustomTooltipComponent", filePath: "libs/components/src/lib/custom-tooltip.component.ts", lineNumber: 55 });
 })();
 
 // libs/components/src/lib/json-display.component.ts
@@ -117707,7 +118030,7 @@ var DebugConsoleComponent = class _DebugConsoleComponent extends AsyncHandler {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.can_activate);
       }
-    }, dependencies: [NgForOf, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, DefaultValueAccessor, NgControlStatus, NgModel, MatRipple, CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport, IconComponent, CustomTooltipComponent, AsyncPipe, DatePipe, SanitizePipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, DefaultValueAccessor, NgControlStatus, NgModel, MatRipple, CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport, IconComponent, CustomTooltipComponent, AsyncPipe, DatePipe, TranslatePipe, SanitizePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -118605,7 +118928,7 @@ var ExploreStateService = class _ExploreStateService extends AsyncHandler {
 };
 
 // libs/components/src/lib/indoor-maps.component.ts
-var _c030 = ["searchInput"];
+var _c031 = ["searchInput"];
 var _c121 = ["searchResultItems"];
 function IndoorMapsComponent_div_1_Template(rf, ctx) {
   if (rf & 1) {
@@ -119018,7 +119341,7 @@ var IndoorMapsComponent = class _IndoorMapsComponent extends AsyncHandler {
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IndoorMapsComponent, selectors: [["indoor-maps"]], viewQuery: function IndoorMapsComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c030, 7);
+        \u0275\u0275viewQuery(_c031, 7);
         \u0275\u0275viewQuery(_c121, 5);
       }
       if (rf & 2) {
@@ -119064,7 +119387,7 @@ var IndoorMapsComponent = class _IndoorMapsComponent extends AsyncHandler {
 })();
 
 // libs/components/src/lib/interactive-map.component.ts
-var _c031 = ["*", "*"];
+var _c032 = ["*", "*"];
 function InteractiveMapComponent_ng_container_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -119210,9 +119533,9 @@ var InteractiveMapComponent = class _InteractiveMapComponent extends AsyncHandle
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InteractiveMapComponent, selectors: [["interactive-map"]], inputs: { src: "src", zoom: "zoom", center: "center", reset: "reset", metadata: "metadata", styles: "styles", features: "features", labels: "labels", actions: "actions", options: "options", focus: "focus" }, outputs: { zoomChange: "zoomChange", centerChange: "centerChange", mapInfo: "mapInfo" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c031, decls: 5, vars: 5, consts: [["mapsindoors_template", ""], [4, "ngIf", "ngIfElse"], ["zoom", "", "class", "absolute bottom-16 right-1 flex flex-col divide-y divide-base-200 overflow-hidden rounded border border-base-200 bg-base-100 text-base-content shadow", 4, "ngIf"], [3, "zoomChange", "mapInfo", "src", "zoom", "reset", "styles", "features", "actions", "labels"], [3, "zoneChange", "zoomChange", "zone", "zoom", "options", "reset", "focus", "metadata"], ["zoom", "", 1, "absolute", "bottom-16", "right-1", "flex", "flex-col", "divide-y", "divide-base-200", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-100", "text-base-content", "shadow"], ["icon", "", "matRipple", "", "matTooltipPosition", "left", 1, "rounded-none", 3, "click", "matTooltip"]], template: function InteractiveMapComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InteractiveMapComponent, selectors: [["interactive-map"]], inputs: { src: "src", zoom: "zoom", center: "center", reset: "reset", metadata: "metadata", styles: "styles", features: "features", labels: "labels", actions: "actions", options: "options", focus: "focus" }, outputs: { zoomChange: "zoomChange", centerChange: "centerChange", mapInfo: "mapInfo" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c032, decls: 5, vars: 5, consts: [["mapsindoors_template", ""], [4, "ngIf", "ngIfElse"], ["zoom", "", "class", "absolute bottom-16 right-1 flex flex-col divide-y divide-base-200 overflow-hidden rounded border border-base-200 bg-base-100 text-base-content shadow", 4, "ngIf"], [3, "zoomChange", "mapInfo", "src", "zoom", "reset", "styles", "features", "actions", "labels"], [3, "zoneChange", "zoomChange", "zone", "zoom", "options", "reset", "focus", "metadata"], ["zoom", "", 1, "absolute", "bottom-16", "right-1", "flex", "flex-col", "divide-y", "divide-base-200", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-100", "text-base-content", "shadow"], ["icon", "", "matRipple", "", "matTooltipPosition", "left", 1, "rounded-none", 3, "click", "matTooltip"]], template: function InteractiveMapComponent_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c031);
+        \u0275\u0275projectionDef(_c032);
         \u0275\u0275template(0, InteractiveMapComponent_ng_container_0_Template, 3, 7, "ng-container", 1);
         \u0275\u0275pipe(1, "async");
         \u0275\u0275template(2, InteractiveMapComponent_ng_template_2_Template, 2, 6, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(4, InteractiveMapComponent_div_4_Template, 13, 9, "div", 2);
@@ -119409,7 +119732,7 @@ var LimitInputDirective = class _LimitInputDirective {
 };
 
 // libs/components/src/lib/login.component.ts
-var _c032 = ["pass_field"];
+var _c033 = ["pass_field"];
 function LoginComponent_ng_container_7_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -119504,7 +119827,7 @@ var LoginComponent = class _LoginComponent {
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LoginComponent, selectors: [["app-login"]], viewQuery: function LoginComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c032, 7);
+        \u0275\u0275viewQuery(_c033, 7);
       }
       if (rf & 2) {
         let _t4;
@@ -119556,7 +119879,7 @@ img[_ngcontent-%COMP%] {
 })();
 
 // libs/components/src/lib/map-canvas.component.ts
-var _c033 = ["canvas"];
+var _c034 = ["canvas"];
 var _c122 = ["map-canvas", ""];
 var MapCanvasComponent = class _MapCanvasComponent extends AsyncHandler {
   get ratioed_height() {
@@ -119654,7 +119977,7 @@ var MapCanvasComponent = class _MapCanvasComponent extends AsyncHandler {
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapCanvasComponent, selectors: [["", "map-canvas", ""]], viewQuery: function MapCanvasComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c033, 7);
+        \u0275\u0275viewQuery(_c034, 7);
       }
       if (rf & 2) {
         let _t4;
@@ -119675,7 +119998,7 @@ var MapCanvasComponent = class _MapCanvasComponent extends AsyncHandler {
 })();
 
 // libs/components/src/lib/map-pin.component.ts
-var _c034 = ["map-pin", ""];
+var _c035 = ["map-pin", ""];
 function MapPinComponent_div_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 3);
@@ -119727,7 +120050,7 @@ var MapPinComponent = class _MapPinComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapPinComponent, selectors: [["", "map-pin", ""]], standalone: false, attrs: _c034, decls: 3, vars: 2, consts: [[1, "-z-1", "absolute", "bottom-1/2", "left-1/2", "flex", "w-[24rem]", "-translate-x-1/2", "flex-col", "items-center"], ["name", "message", "class", "text-gray-700 m-2 rounded bg-base-100 p-2 shadow", 4, "ngIf"], ["name", "pin", "viewBox", "0 0 380 560", "class", "w-8", 3, "pointer-events-auto", "click", 4, "ngIf"], ["name", "message", 1, "text-gray-700", "m-2", "rounded", "bg-base-100", "p-2", "shadow"], ["name", "pin", "viewBox", "0 0 380 560", 1, "w-8", 3, "click"], ["stroke-width", "25", "d", "M182.9,551.7c0,0.1,0.2,0.3,0.2,0.3S358.3,283,358.3,194.6c0-130.1-88.8-186.7-175.4-186.9\n            C96.3,7.9,7.5,64.5,7.5,194.6c0,88.4,175.3,357.4,175.3,357.4S182.9,551.7,182.9,551.7z M122.2,187.2c0-33.6,27.2-60.8,60.8-60.8\n            c33.6,0,60.8,27.2,60.8,60.8S216.5,248,182.9,248C149.4,248,122.2,220.8,122.2,187.2z"]], template: function MapPinComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapPinComponent, selectors: [["", "map-pin", ""]], standalone: false, attrs: _c035, decls: 3, vars: 2, consts: [[1, "-z-1", "absolute", "bottom-1/2", "left-1/2", "flex", "w-[24rem]", "-translate-x-1/2", "flex-col", "items-center"], ["name", "message", "class", "text-gray-700 m-2 rounded bg-base-100 p-2 shadow", 4, "ngIf"], ["name", "pin", "viewBox", "0 0 380 560", "class", "w-8", 3, "pointer-events-auto", "click", 4, "ngIf"], ["name", "message", 1, "text-gray-700", "m-2", "rounded", "bg-base-100", "p-2", "shadow"], ["name", "pin", "viewBox", "0 0 380 560", 1, "w-8", 3, "click"], ["stroke-width", "25", "d", "M182.9,551.7c0,0.1,0.2,0.3,0.2,0.3S358.3,283,358.3,194.6c0-130.1-88.8-186.7-175.4-186.9\n            C96.3,7.9,7.5,64.5,7.5,194.6c0,88.4,175.3,357.4,175.3,357.4S182.9,551.7,182.9,551.7z M122.2,187.2c0-33.6,27.2-60.8,60.8-60.8\n            c33.6,0,60.8,27.2,60.8,60.8S216.5,248,182.9,248C149.4,248,122.2,220.8,122.2,187.2z"]], template: function MapPinComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 0);
         \u0275\u0275template(1, MapPinComponent_div_1_Template, 2, 1, "div", 1)(2, MapPinComponent__svg_svg_2_Template, 3, 6, "svg", 2);
@@ -119747,7 +120070,7 @@ var MapPinComponent = class _MapPinComponent {
 })();
 
 // libs/components/src/lib/map-locate-modal.component.ts
-var _c035 = () => ({ disable_pan: true, disable_zoom: true });
+var _c036 = () => ({ disable_pan: true, disable_zoom: true });
 function MapLocateModalComponent_div_6_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 7)(1, "interactive-map", 8);
@@ -119760,7 +120083,7 @@ function MapLocateModalComponent_div_6_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("src", ctx_r0.level == null ? null : ctx_r0.level.map_id)("focus", ctx_r0.item == null ? null : ctx_r0.item.map_id)("features", ctx_r0.features)("options", \u0275\u0275pureFunction0(5, _c035));
+    \u0275\u0275property("src", ctx_r0.level == null ? null : ctx_r0.level.map_id)("focus", ctx_r0.item == null ? null : ctx_r0.item.map_id)("features", ctx_r0.features)("options", \u0275\u0275pureFunction0(5, _c036));
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1(" ", (ctx_r0.level == null ? null : ctx_r0.level.display_name) || (ctx_r0.level == null ? null : ctx_r0.level.name), " ");
   }
@@ -119846,7 +120169,7 @@ var MapLocateModalComponent = class _MapLocateModalComponent extends AsyncHandle
 })();
 
 // libs/components/src/lib/map-polygon.component.ts
-var _c036 = ["map-polygon", ""];
+var _c037 = ["map-polygon", ""];
 var MapPolygonComponent = class _MapPolygonComponent extends AsyncHandler {
   get scale() {
     return this._details.svg_ratio || 1;
@@ -119919,7 +120242,7 @@ var MapPolygonComponent = class _MapPolygonComponent extends AsyncHandler {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapPolygonComponent, selectors: [["", "map-polygon", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c036, decls: 6, vars: 13, consts: [["polygon", "", 1, "absolute", "-left-1", "-top-1", "h-full", "w-full", "-translate-x-1/2", "-translate-y-1/2", "transform"], [1, "absolute", "left-1/2", "top-1/2", "-translate-x-1/2", "-translate-y-1/2", "transform"], ["preserveAspectRatio", "none", 1, "relative", "h-full", "w-full"], ["text", "", 1, "text-shadow", "absolute", "left-1/2", "top-1/2", "-translate-x-1/2", "-translate-y-1/2", "transform", "whitespace-pre-line", "text-center", "text-xl", "text-white"]], template: function MapPolygonComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapPolygonComponent, selectors: [["", "map-polygon", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c037, decls: 6, vars: 13, consts: [["polygon", "", 1, "absolute", "-left-1", "-top-1", "h-full", "w-full", "-translate-x-1/2", "-translate-y-1/2", "transform"], [1, "absolute", "left-1/2", "top-1/2", "-translate-x-1/2", "-translate-y-1/2", "transform"], ["preserveAspectRatio", "none", 1, "relative", "h-full", "w-full"], ["text", "", 1, "text-shadow", "absolute", "left-1/2", "top-1/2", "-translate-x-1/2", "-translate-y-1/2", "transform", "whitespace-pre-line", "text-center", "text-xl", "text-white"]], template: function MapPolygonComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
         \u0275\u0275namespaceSVG();
@@ -119951,7 +120274,7 @@ var MapPolygonComponent = class _MapPolygonComponent extends AsyncHandler {
 })();
 
 // libs/components/src/lib/map-radius.component.ts
-var _c037 = ["map-radius", ""];
+var _c038 = ["map-radius", ""];
 function MapRadiusComponent_ng_container_0_div_2_span_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span", 6);
@@ -120036,7 +120359,7 @@ var MapRadiusComponent = class _MapRadiusComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapRadiusComponent, selectors: [["", "map-radius", ""]], standalone: false, attrs: _c037, decls: 1, vars: 1, consts: [[3, "resize", 4, "ngIf"], [3, "resize"], ["radius", "", 1, "center", "rounded-full", "border-4", "border-dashed"], ["message", "", "class", "text-gray-700 whitespace-no-wrap absolute top-0 m-2 flex w-64 flex-col rounded bg-base-100 p-2 shadow", 3, "top", 4, "ngIf"], ["message", "", 1, "text-gray-700", "whitespace-no-wrap", "absolute", "top-0", "m-2", "flex", "w-64", "flex-col", "rounded", "bg-base-100", "p-2", "shadow"], ["class", "text-xs", 4, "ngIf"], [1, "text-xs"]], template: function MapRadiusComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapRadiusComponent, selectors: [["", "map-radius", ""]], standalone: false, attrs: _c038, decls: 1, vars: 1, consts: [[3, "resize", 4, "ngIf"], [3, "resize"], ["radius", "", 1, "center", "rounded-full", "border-4", "border-dashed"], ["message", "", "class", "text-gray-700 whitespace-no-wrap absolute top-0 m-2 flex w-64 flex-col rounded bg-base-100 p-2 shadow", 3, "top", 4, "ngIf"], ["message", "", 1, "text-gray-700", "whitespace-no-wrap", "absolute", "top-0", "m-2", "flex", "w-64", "flex-col", "rounded", "bg-base-100", "p-2", "shadow"], ["class", "text-xs", 4, "ngIf"], [1, "text-xs"]], template: function MapRadiusComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275template(0, MapRadiusComponent_ng_container_0_Template, 3, 9, "ng-container", 0);
       }
@@ -120283,7 +120606,7 @@ var ae2 = je(function(e2) {
   `) : "", this.name = "UnsubscriptionError", this.errors = t;
   };
 });
-function fe(e2, n) {
+function fe2(e2, n) {
   if (e2) {
     var t = e2.indexOf(n);
     0 <= t && e2.splice(t, 1);
@@ -120365,10 +120688,10 @@ var J2 = function() {
     this._parentage = Array.isArray(t) ? (t.push(n), t) : t ? [t, n] : n;
   }, e2.prototype._removeParent = function(n) {
     var t = this._parentage;
-    t === n ? this._parentage = null : Array.isArray(t) && fe(t, n);
+    t === n ? this._parentage = null : Array.isArray(t) && fe2(t, n);
   }, e2.prototype.remove = function(n) {
     var t = this._finalizers;
-    t && fe(t, n), n instanceof e2 && n._removeParent(this);
+    t && fe2(t, n), n instanceof e2 && n._removeParent(this);
   }, e2.EMPTY = function() {
     var n = new e2();
     return n.closed = true, n;
@@ -120399,7 +120722,7 @@ function Ue2(e2) {
     throw e2;
   });
 }
-function he2() {
+function he() {
 }
 function ee2(e2) {
   e2();
@@ -120484,9 +120807,9 @@ function xt3(e2) {
 }
 var St3 = {
   closed: true,
-  next: he2,
+  next: he,
   error: xt3,
-  complete: he2
+  complete: he
 };
 var we2 = function() {
   return typeof Symbol == "function" && Symbol.observable || "@@observable";
@@ -120696,7 +121019,7 @@ var xe2 = function(e2) {
   }, n.prototype._innerSubscribe = function(t) {
     var r2 = this, o = this, i = o.hasError, s = o.isStopped, c2 = o.observers;
     return i || s ? Be2 : (this.currentObservers = null, c2.push(t), new J2(function() {
-      r2.currentObservers = null, fe(c2, t);
+      r2.currentObservers = null, fe2(c2, t);
     }));
   }, n.prototype._checkFinalizedStatuses = function(t) {
     var r2 = this, o = r2.hasError, i = r2.thrownError, s = r2.isStopped;
@@ -121141,7 +121464,7 @@ function cn2(e2, n) {
       o.has(s) || (o.add(s), r2.next(i));
     })), n && A4(n).subscribe(O2(r2, function() {
       return o.clear();
-    }, he2));
+    }, he));
   });
 }
 var U3 = {};
@@ -122067,7 +122390,7 @@ var In2 = `
 `;
 
 // libs/components/src/lib/map-renderer.component.ts
-var _c038 = ["outlet"];
+var _c039 = ["outlet"];
 var _c123 = ["feature"];
 function MapRendererComponent_ng_container_2_mat_spinner_1_Template(rf, ctx) {
   if (rf & 1) {
@@ -122401,7 +122724,7 @@ var MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapRendererComponent, selectors: [["map-renderer"]], viewQuery: function MapRendererComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c038, 5);
+        \u0275\u0275viewQuery(_c039, 5);
         \u0275\u0275viewQuery(_c123, 5);
       }
       if (rf & 2) {
@@ -122428,7 +122751,7 @@ var MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.injectors == null ? null : ctx.injectors.length);
       }
-    }, dependencies: [NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgSwitch, NgSwitchCase, NgSwitchDefault, MatProgressSpinner, SanitizePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n}\nmat-spinner[_ngcontent-%COMP%] {\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n/*# sourceMappingURL=map-renderer.component.css.map */"] });
+    }, dependencies: [NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgSwitch, NgSwitchCase, NgSwitchDefault, MatProgressSpinner, TranslatePipe, SanitizePipe], styles: ["\n\n[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n}\nmat-spinner[_ngcontent-%COMP%] {\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n/*# sourceMappingURL=map-renderer.component.css.map */"] });
   }
 };
 (() => {
@@ -122436,7 +122759,7 @@ var MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
 })();
 
 // libs/components/src/lib/maps-indoors.component.ts
-var _c039 = ["map_container"];
+var _c040 = ["map_container"];
 function MapsIndoorsComponent_button_2_mat_spinner_5_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "mat-spinner", 6);
@@ -122820,7 +123143,7 @@ var MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapsIndoorsComponent, selectors: [["maps-indoors"]], viewQuery: function MapsIndoorsComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c039, 7);
+        \u0275\u0275viewQuery(_c040, 7);
       }
       if (rf & 2) {
         let _t4;
@@ -122906,7 +123229,7 @@ var MisconfiguredComponent = class _MisconfiguredComponent {
 })();
 
 // libs/components/src/lib/printable.component.ts
-var _c040 = ["printable", ""];
+var _c041 = ["printable", ""];
 var _c124 = ["*"];
 function PrintableComponent_ng_template_1_Template(rf, ctx) {
   if (rf & 1) {
@@ -122979,7 +123302,7 @@ var PrintableComponent = class _PrintableComponent extends AsyncHandler {
         let _t4;
         \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._portal = _t4.first);
       }
-    }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c040, ngContentSelectors: _c124, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["printable-view", "", 1, "pointer-events-none", "fixed", "left-0", "top-0", "hidden", "flex-col", "items-end", "print:flex", 3, "innerHTML"]], template: function PrintableComponent_Template(rf, ctx) {
+    }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c041, ngContentSelectors: _c124, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["printable-view", "", 1, "pointer-events-none", "fixed", "left-0", "top-0", "hidden", "flex-col", "items-end", "print:flex", 3, "innerHTML"]], template: function PrintableComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275projectionDef();
         \u0275\u0275projection(0);
@@ -123105,7 +123428,7 @@ var RegionSelectComponent = class _RegionSelectComponent {
 })();
 
 // libs/components/src/lib/simple-table.component.ts
-var _c041 = (a0, a1, a2, a3, a4, a5, a6) => ({ first: a0, last: a1, index: a2, data: a3, row: a4, key: a5, name: a6 });
+var _c042 = (a0, a1, a2, a3, a4, a5, a6) => ({ first: a0, last: a1, index: a2, data: a3, row: a4, key: a5, name: a6 });
 var _c125 = (a0, a1, a2, a3) => ({ first: a0, last: a1, index: a2, row: a3 });
 var _forTrack02 = ($index, $item) => $item.id || $item;
 function SimpleTableComponent_Conditional_1_div_0_Template(rf, ctx) {
@@ -123271,7 +123594,7 @@ function SimpleTableComponent_For_3_div_1_ng_container_4_Template(rf, ctx) {
     const \u0275$index_23_r7 = ctx_r9.$index;
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", column_r9.content)("ngTemplateOutletContext", \u0275\u0275pureFunction7(6, _c041, \u0275$index_23_r7 === 0, \u0275$index_23_r7 === ((tmp_16_0 = \u0275\u0275pipeBind1(2, 2, ctx_r1.data_view$)) == null ? null : tmp_16_0.length) - 1 || \u0275$index_23_r7 === ((tmp_16_0 = \u0275\u0275pipeBind1(3, 4, ctx_r1.data_view$)) == null ? null : tmp_16_0.length) - 1, \u0275$index_23_r7, row_r11[column_r9.key], row_r11, column_r9.key, column_r9.name || column_r9.key));
+    \u0275\u0275property("ngTemplateOutlet", column_r9.content)("ngTemplateOutletContext", \u0275\u0275pureFunction7(6, _c042, \u0275$index_23_r7 === 0, \u0275$index_23_r7 === ((tmp_16_0 = \u0275\u0275pipeBind1(2, 2, ctx_r1.data_view$)) == null ? null : tmp_16_0.length) - 1 || \u0275$index_23_r7 === ((tmp_16_0 = \u0275\u0275pipeBind1(3, 4, ctx_r1.data_view$)) == null ? null : tmp_16_0.length) - 1, \u0275$index_23_r7, row_r11[column_r9.key], row_r11, column_r9.key, column_r9.name || column_r9.key));
   }
 }
 function SimpleTableComponent_For_3_div_1_Template(rf, ctx) {
@@ -123591,7 +123914,7 @@ var SimpleTableComponent = class _SimpleTableComponent extends AsyncHandler {
 })();
 
 // libs/components/src/lib/status-overlay.component.ts
-var _c042 = ["*"];
+var _c043 = ["*"];
 var _c126 = (a0) => [a0];
 function StatusOverlayComponent_ng_container_1_ng_container_5_Template(rf, ctx) {
   if (rf & 1) {
@@ -123678,7 +124001,7 @@ var StatusOverlayComponent = class _StatusOverlayComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _StatusOverlayComponent, selectors: [["status-overlay"]], inputs: { loading: "loading", error: "error", links: "links" }, standalone: false, ngContentSelectors: _c042, decls: 6, vars: 2, consts: [["error_msg", ""], ["load_state", ""], ["status-overlay", "", 1, "fixed", "inset-0", "z-50", "flex", "flex-col", "items-center", "justify-center", "bg-secondary", "text-white"], [4, "ngIf", "ngIfElse"], [1, "mb-4", "rounded-full", "bg-base-100", "text-4xl"], [1, "mb-4", "text-center", "text-lg"], [1, "flex", "items-center", "space-x-2"], ["btn", "", "matRipple", "", "class", "w-32", 3, "routerLink", 4, "ngFor", "ngForOf"], ["btn", "", "matRipple", "", 1, "w-32", 3, "routerLink"], ["error", ""], [1, "mb-4", 3, "diameter"], ["loading", "", 1, "text-center", "text-lg"]], template: function StatusOverlayComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _StatusOverlayComponent, selectors: [["status-overlay"]], inputs: { loading: "loading", error: "error", links: "links" }, standalone: false, ngContentSelectors: _c043, decls: 6, vars: 2, consts: [["error_msg", ""], ["load_state", ""], ["status-overlay", "", 1, "fixed", "inset-0", "z-50", "flex", "flex-col", "items-center", "justify-center", "bg-secondary", "text-white"], [4, "ngIf", "ngIfElse"], [1, "mb-4", "rounded-full", "bg-base-100", "text-4xl"], [1, "mb-4", "text-center", "text-lg"], [1, "flex", "items-center", "space-x-2"], ["btn", "", "matRipple", "", "class", "w-32", 3, "routerLink", 4, "ngFor", "ngForOf"], ["btn", "", "matRipple", "", 1, "w-32", 3, "routerLink"], ["error", ""], [1, "mb-4", 3, "diameter"], ["loading", "", 1, "text-center", "text-lg"]], template: function StatusOverlayComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275projectionDef();
         \u0275\u0275elementStart(0, "div", 2);
@@ -123699,7 +124022,7 @@ var StatusOverlayComponent = class _StatusOverlayComponent {
 })();
 
 // libs/components/src/lib/status-pill.component.ts
-var _c043 = ["*"];
+var _c044 = ["*"];
 function StatusPillComponent_ng_container_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
@@ -123742,7 +124065,7 @@ var StatusPillComponent = class _StatusPillComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _StatusPillComponent, selectors: [["status-pill"]], inputs: { status: "status" }, standalone: false, ngContentSelectors: _c043, decls: 10, vars: 31, consts: [[1, "flex", "items-center", "space-x-2", "rounded-full", "bg-opacity-30", "px-2", "py-1", "text-base", "font-medium", "text-black"], [1, "flex", "h-5", "w-5", "items-center", "justify-center", "rounded-full"], [1, "text-2xl", 3, "ngSwitch"], [4, "ngSwitchCase"], [4, "ngSwitchDefault"]], template: function StatusPillComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _StatusPillComponent, selectors: [["status-pill"]], inputs: { status: "status" }, standalone: false, ngContentSelectors: _c044, decls: 10, vars: 31, consts: [[1, "flex", "items-center", "space-x-2", "rounded-full", "bg-opacity-30", "px-2", "py-1", "text-base", "font-medium", "text-black"], [1, "flex", "h-5", "w-5", "items-center", "justify-center", "rounded-full"], [1, "text-2xl", 3, "ngSwitch"], [4, "ngSwitchCase"], [4, "ngSwitchDefault"]], template: function StatusPillComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275projectionDef();
         \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "app-icon", 2);
@@ -123862,327 +124185,6 @@ var UnauthorisedComponent = class _UnauthorisedComponent {
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UnauthorisedComponent, { className: "UnauthorisedComponent", filePath: "libs/components/src/lib/unauthorised.component.ts", lineNumber: 42 });
-})();
-
-// libs/form-fields/src/lib/time-field.component.ts
-var _c044 = ["select"];
-var _c127 = ["*"];
-function TimeFieldComponent_div_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 10);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "date");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind3(2, 1, ctx_r0.active_time, ctx_r0.time_format + " (z)", ctx_r0.tz), " ");
-  }
-}
-function TimeFieldComponent_button_10_div_6_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 17);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "date");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind3(2, 1, ctx_r0.force_time, ctx_r0.time_format + " (z)", ctx_r0.tz), " ");
-  }
-}
-function TimeFieldComponent_button_10_app_icon_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "app-icon", 18);
-    \u0275\u0275text(1, " done ");
-    \u0275\u0275elementEnd();
-  }
-}
-function TimeFieldComponent_button_10_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 11);
-    \u0275\u0275listener("click", function TimeFieldComponent_button_10_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r0 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r0.setValue(ctx_r0.force_time));
-    });
-    \u0275\u0275elementStart(1, "div", 12)(2, "div", 13)(3, "div", 14);
-    \u0275\u0275text(4);
-    \u0275\u0275pipe(5, "date");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(6, TimeFieldComponent_button_10_div_6_Template, 3, 5, "div", 15);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(7, TimeFieldComponent_button_10_app_icon_7_Template, 2, 0, "app-icon", 16);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", ctx_r0.force_time);
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(5, 4, ctx_r0.force_time, ctx_r0.time_format), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r0.timezone && ctx_r0.tz);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r0.active_time === ctx_r0.force_time);
-  }
-}
-function TimeFieldComponent_button_11_div_6_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 17);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "date");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const option_r4 = \u0275\u0275nextContext().$implicit;
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind3(2, 1, option_r4.date, ctx_r0.time_format + " (z)", ctx_r0.tz), " ");
-  }
-}
-function TimeFieldComponent_button_11_app_icon_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "app-icon", 18);
-    \u0275\u0275text(1, " done ");
-    \u0275\u0275elementEnd();
-  }
-}
-function TimeFieldComponent_button_11_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 11);
-    \u0275\u0275listener("click", function TimeFieldComponent_button_11_Template_button_click_0_listener() {
-      const option_r4 = \u0275\u0275restoreView(_r3).$implicit;
-      const ctx_r0 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r0.setValue(option_r4.id));
-    });
-    \u0275\u0275elementStart(1, "div", 12)(2, "div", 13)(3, "div", 14);
-    \u0275\u0275text(4);
-    \u0275\u0275pipe(5, "date");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(6, TimeFieldComponent_button_11_div_6_Template, 3, 5, "div", 15);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(7, TimeFieldComponent_button_11_app_icon_7_Template, 2, 0, "app-icon", 16);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const option_r4 = ctx.$implicit;
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("value", option_r4.id);
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(5, 5, option_r4.date, ctx_r0.time_format), " ", ctx_r0.extra_info_fn(option_r4.date), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r0.timezone && ctx_r0.tz);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r0.active_time === option_r4.date);
-  }
-}
-function TimeFieldComponent_mat_error_12_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-error");
-    \u0275\u0275projection(1);
-    \u0275\u0275elementEnd();
-  }
-}
-var TimeFieldComponent = class _TimeFieldComponent extends AsyncHandler {
-  constructor() {
-    super(...arguments);
-    this.step = 15;
-    this.no_past_times = true;
-    this.use_24hr = false;
-    this.extra_info_fn = (t) => "";
-    this.from = startOfDay(Date.now()).valueOf();
-    this.timezone = "";
-    this.date = (/* @__PURE__ */ new Date()).valueOf();
-    this.time = format(/* @__PURE__ */ new Date(), "HH:mm");
-    this.active_time = Date.now();
-    this._local_tz = getTimezoneOffsetString(Intl.DateTimeFormat().resolvedOptions().timeZone);
-  }
-  get time_format() {
-    return this.use_24hr ? "HH : mm" : "h : mm a";
-  }
-  get tz() {
-    const tz = this.timezone;
-    if (!tz)
-      return "";
-    const tz_offset = getTimezoneOffsetString(tz);
-    return tz_offset === this._local_tz ? "" : tz_offset;
-  }
-  ngOnInit() {
-    this.show_select = true;
-    this._time_options = this.generateAvailableTimes(this.date, !this.no_past_times, this.step);
-    this.timeout("hide", () => this.show_select = false);
-    this.active_time = this._time_options.find((_3) => _3.id === format(this.date, "HH:mm"))?.date || this.active_time;
-  }
-  ngOnChanges(changes) {
-    if (changes.no_past_times || changes.step || changes.from) {
-      this._time_options = this.generateAvailableTimes(this.date, !this.no_past_times, this.step);
-    }
-  }
-  /** Available time blocks for the selected date */
-  get time_options() {
-    const time = (this.time || "00:00").split(":");
-    const date = set(this.date, { hours: +time[0], minutes: +time[1] });
-    if (date.getMinutes() % 15 !== 0 && !this._time_options.find((time2) => time2.id === format(date, "HH:mm"))) {
-      this._time_options.push({
-        date,
-        id: format(date, "HH:mm")
-      });
-      this._time_options.sort((a, b2) => `${a.id}`.localeCompare(`${b2.id}`));
-    }
-    return this._time_options;
-  }
-  /**
-   * Update the form field value
-   * @param new_value New value to set on the form field
-   */
-  setValue(new_value) {
-    this.time = new_value;
-    if (this._onChange) {
-      const time2 = (this.time || "00:00").split(":");
-      const date2 = startOfMinute(set(this.date, { hours: +time2[0], minutes: +time2[1] }));
-      this._onChange(date2.valueOf());
-    }
-    const time = this.force_time || this.time;
-    const date = startOfMinute(set(this.date, { hours: +time[0], minutes: +time[1] }));
-    this.active_time = this._time_options.find((_3) => _3.id === time)?.date || date;
-  }
-  /**
-   * Update local value when form control value is changed
-   * @param value The new value for the component
-   */
-  writeValue(value) {
-    this.date = value || this.date;
-    let date = startOfMinute(this.date);
-    date = roundToNearestMinutes(date, { nearestTo: 5 });
-    this.time = format(date, "HH:mm");
-    this._time_options = this.generateAvailableTimes(this.date, !this.no_past_times, this.step);
-    const time = this.force_time || this.time;
-    this.active_time = this._time_options.find((_3) => _3.id === time)?.date || date;
-  }
-  setDisabledState(disabled) {
-    this.disabled = disabled;
-    this._time_options = this.generateAvailableTimes(this.date, !this.no_past_times || disabled, this.step);
-  }
-  /**
-   * Registers a callback function that is called when the control's value changes in the UI.
-   * @param fn The callback function to register
-   */
-  registerOnChange(fn3) {
-    this._onChange = fn3;
-  }
-  /**
-   * Registers a callback function is called by the forms API on initialization to update the form model on blur.
-   * @param fn The callback function to register
-   */
-  registerOnTouched(fn3) {
-    this._onTouch = fn3;
-  }
-  /**
-   * Show select field for time options
-   */
-  showSelect() {
-    this.show_select = true;
-    this.timeout("on_shown", () => {
-      if (this.select_field) {
-        this.select_field.focus();
-        this.select_field.open();
-        this.subscription("listen_close", this.select_field.openedChange.subscribe((state2) => {
-          if (!state2) {
-            this.show_select = false;
-          }
-        }));
-      }
-    });
-  }
-  /**
-   * Generate a list of time options for the given date
-   * @param datestamp Date to generate options for
-   * @param show_past Whether past times should be options
-   */
-  generateAvailableTimes(datestamp, show_past, step = 15) {
-    const now = new Date(Math.max(this.from, Date.now()));
-    let date = new Date(datestamp);
-    const blocks = [];
-    if (show_past || !isSameDay(date, now) && isAfter(date, now)) {
-      date = startOfDay(date);
-    } else if (isAfter(date, now)) {
-      date = new Date(now);
-    }
-    date = roundToNearestMinutes(date, { nearestTo: step });
-    const end = endOfDay(date);
-    while (isAfter(end, date)) {
-      blocks.push({
-        date: date.valueOf(),
-        id: format(date, "HH:mm")
-      });
-      date = addMinutes(date, step);
-    }
-    return blocks;
-  }
-  static {
-    this.\u0275fac = /* @__PURE__ */ (() => {
-      let \u0275TimeFieldComponent_BaseFactory;
-      return function TimeFieldComponent_Factory(__ngFactoryType__) {
-        return (\u0275TimeFieldComponent_BaseFactory || (\u0275TimeFieldComponent_BaseFactory = \u0275\u0275getInheritedFactory(_TimeFieldComponent)))(__ngFactoryType__ || _TimeFieldComponent);
-      };
-    })();
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TimeFieldComponent, selectors: [["a-time-field"]], viewQuery: function TimeFieldComponent_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(_c044, 5);
-      }
-      if (rf & 2) {
-        let _t4;
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.select_field = _t4.first);
-      }
-    }, inputs: { step: "step", disabled: "disabled", no_past_times: "no_past_times", use_24hr: "use_24hr", force_time: "force_time", no_error: "no_error", extra_info_fn: "extra_info_fn", from: "from", timezone: "timezone" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
-      {
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => _TimeFieldComponent),
-        multi: true
-      }
-    ]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c127, decls: 13, vars: 12, consts: [["menu", "matMenu"], ["time-field", "", "matRipple", "", 1, "flex", "h-12", "w-full", "items-center", "justify-between", "rounded", "border", "border-neutral", "px-2", 3, "disabled", "matMenuTriggerFor"], [1, "flex", "w-1/2", "flex-1", "flex-col", "px-2", "text-left", "leading-tight"], [1, "truncate"], ["class", "truncate text-xs opacity-30", 4, "ngIf"], [1, "text-2xl"], [1, "max-h-[15rem]", "min-w-[18rem]"], ["mat-menu-item", "", "class", "text-left", 3, "value", "click", 4, "ngIf"], ["mat-menu-item", "", "class", "text-left", 3, "value", "click", 4, "ngFor", "ngForOf"], [4, "ngIf"], [1, "truncate", "text-xs", "opacity-30"], ["mat-menu-item", "", 1, "text-left", 3, "click", "value"], [1, "flex", "items-center", "justify-between"], [1, "flex", "flex-col", "leading-tight"], [1, ""], ["class", "text-xs opacity-30", 4, "ngIf"], ["class", "ml-2 text-2xl", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "ml-2", "text-2xl"]], template: function TimeFieldComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275elementStart(0, "button", 1)(1, "div", 2)(2, "div", 3);
-        \u0275\u0275text(3);
-        \u0275\u0275pipe(4, "date");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(5, TimeFieldComponent_div_5_Template, 3, 5, "div", 4);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(6, "app-icon", 5);
-        \u0275\u0275text(7, "arrow_drop_down");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(8, "mat-menu", 6, 0);
-        \u0275\u0275template(10, TimeFieldComponent_button_10_Template, 8, 7, "button", 7)(11, TimeFieldComponent_button_11_Template, 8, 8, "button", 8);
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(12, TimeFieldComponent_mat_error_12_Template, 2, 0, "mat-error", 9);
-      }
-      if (rf & 2) {
-        const menu_r5 = \u0275\u0275reference(9);
-        \u0275\u0275classProp("opacity-30", ctx.disabled);
-        \u0275\u0275property("disabled", ctx.disabled)("matMenuTriggerFor", menu_r5);
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 9, ctx.active_time, ctx.time_format), " ");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.timezone && ctx.tz);
-        \u0275\u0275advance(5);
-        \u0275\u0275property("ngIf", ctx.force_time);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngForOf", ctx.time_options);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", !ctx.no_error);
-      }
-    }, dependencies: [NgForOf, NgIf, MatRipple, MatError, IconComponent, MatMenu, MatMenuItem, MatMenuTrigger, DatePipe], styles: ["\n\nmat-form-field[_ngcontent-%COMP%] {\n  width: 100%;\n}\n/*# sourceMappingURL=time-field.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TimeFieldComponent, { className: "TimeFieldComponent", filePath: "libs/form-fields/src/lib/time-field.component.ts", lineNumber: 121 });
 })();
 
 // libs/users/src/lib/wfh-settings-modal.component.ts
@@ -124444,7 +124446,8 @@ var WFHSettingsModalComponent = class _WFHSettingsModalComponent {
   get now() {
     return startOfMinute(Date.now()).getTime();
   }
-  constructor(_dialog_ref) {
+  constructor(_data, _dialog_ref) {
+    this._data = _data;
     this._dialog_ref = _dialog_ref;
     this.options = [];
     this.option = "";
@@ -124457,8 +124460,9 @@ var WFHSettingsModalComponent = class _WFHSettingsModalComponent {
   }
   ngOnInit() {
     const user = currentUser();
+    const prefs = this._data?.local ? this._data.preferences : user.work_preferences;
     this.settings = [
-      ...(user.work_preferences || []).map((_3) => __spreadProps(__spreadValues({}, _3), {
+      ...(prefs || []).map((_3) => __spreadProps(__spreadValues({}, _3), {
         blocks: [..._3?.blocks || []]
       }))
     ];
@@ -124536,7 +124540,6 @@ var WFHSettingsModalComponent = class _WFHSettingsModalComponent {
     return __async(this, null, function* () {
       this.loading = true;
       this._dialog_ref.disableClose = true;
-      const user = yield Rc("current").toPromise();
       const new_settings = new Array(7).fill(0).map((_3, idx) => ({ day_of_week: idx, blocks: [] }));
       for (const day of this.days) {
         const day_of_week = day.getDay();
@@ -124547,29 +124550,30 @@ var WFHSettingsModalComponent = class _WFHSettingsModalComponent {
           };
         }
       }
-      console.log("Update user...");
-      yield Mc(user.id, __spreadProps(__spreadValues({}, user), {
-        groups: user.groups.filter((_3) => !_3.startsWith("placeos_")),
-        work_preferences: new_settings
-      })).toPromise().catch((e2) => {
-        this.loading = false;
-        this._dialog_ref.disableClose = false;
-        notifyError("Unable to save user work preferences.");
-        throw e2;
-      });
-      console.log("Updated user");
+      if (!this._data.local) {
+        const user = yield lastValueFrom(Rc("current"));
+        yield lastValueFrom(Mc(user.id, __spreadProps(__spreadValues({}, user), {
+          groups: user.groups.filter((_3) => !_3.startsWith("placeos_")),
+          work_preferences: new_settings
+        }))).catch((e2) => {
+          this.loading = false;
+          this._dialog_ref.disableClose = false;
+          notifyError("Unable to save user work preferences.");
+          throw e2;
+        });
+      }
       this.loading = false;
       this._dialog_ref.disableClose = false;
       if (close2) {
-        reloadUserData();
-        console.log("Close WFH Modal");
-        this._dialog_ref.close();
+        if (!this._data.local)
+          reloadUserData();
+        this._dialog_ref.close(new_settings);
       }
     });
   }
   static {
     this.\u0275fac = function WFHSettingsModalComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _WFHSettingsModalComponent)(\u0275\u0275directiveInject(MatDialogRef));
+      return new (__ngFactoryType__ || _WFHSettingsModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(MatDialogRef));
     };
   }
   static {
@@ -124594,11 +124598,11 @@ var WFHSettingsModalComponent = class _WFHSettingsModalComponent {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", !ctx.loading);
       }
-    }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatDialogClose, TimeFieldComponent, IconComponent, MatOption, MatFormField, MatSelect, MatRipple, MatProgressSpinner, MatCheckbox, DatePipe, TranslatePipe], encapsulation: 2 });
+    }, encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WFHSettingsModalComponent, { className: "WFHSettingsModalComponent", filePath: "libs/users/src/lib/wfh-settings-modal.component.ts", lineNumber: 189 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WFHSettingsModalComponent, { className: "WFHSettingsModalComponent", filePath: "libs/users/src/lib/wfh-settings-modal.component.ts", lineNumber: 190 });
 })();
 
 // libs/components/src/lib/work-location-tooltip.component.ts
@@ -124828,6 +124832,366 @@ var WorkLocationTooltipComponent = class _WorkLocationTooltipComponent {
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WorkLocationTooltipComponent, { className: "WorkLocationTooltipComponent", filePath: "libs/components/src/lib/work-location-tooltip.component.ts", lineNumber: 130 });
+})();
+
+// libs/form-fields/src/lib/image-list-field.component.ts
+var _c045 = ["image_list"];
+var _c127 = ["file_input"];
+function ImageListFieldComponent_div_10_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 16);
+    \u0275\u0275element(1, "img", 17);
+    \u0275\u0275elementStart(2, "div", 18);
+    \u0275\u0275element(3, "div", 19);
+    \u0275\u0275elementStart(4, "div", 20)(5, "button", 21);
+    \u0275\u0275listener("click", function ImageListFieldComponent_div_10_Template_button_click_5_listener() {
+      const url_r3 = \u0275\u0275restoreView(_r2).$implicit;
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.copyLink(url_r3));
+    });
+    \u0275\u0275elementStart(6, "icon");
+    \u0275\u0275text(7, "link");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(8, "button", 21);
+    \u0275\u0275listener("click", function ImageListFieldComponent_div_10_Template_button_click_8_listener() {
+      const url_r3 = \u0275\u0275restoreView(_r2).$implicit;
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.viewImage(url_r3));
+    });
+    \u0275\u0275elementStart(9, "icon");
+    \u0275\u0275text(10, "visibility");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(11, "button", 21);
+    \u0275\u0275listener("click", function ImageListFieldComponent_div_10_Template_button_click_11_listener() {
+      const url_r3 = \u0275\u0275restoreView(_r2).$implicit;
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.removeImage(url_r3));
+    });
+    \u0275\u0275elementStart(12, "icon");
+    \u0275\u0275text(13, "close");
+    \u0275\u0275elementEnd()()()()();
+  }
+  if (rf & 2) {
+    const url_r3 = ctx.$implicit;
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275styleProp("transform", "translate(-" + ctx_r3.offset + "00%)");
+    \u0275\u0275advance();
+    \u0275\u0275property("source", url_r3);
+  }
+}
+function ImageListFieldComponent_div_11_mat_progress_spinner_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "mat-progress-spinner", 26);
+  }
+  if (rf & 2) {
+    const item_r6 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275property("value", item_r6.progress)("diameter", 64);
+  }
+}
+function ImageListFieldComponent_div_11_icon_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "icon", 27);
+    \u0275\u0275text(1, "warning");
+    \u0275\u0275elementEnd();
+  }
+}
+function ImageListFieldComponent_div_11_div_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 28)(1, "icon", 29);
+    \u0275\u0275text(2, "refresh");
+    \u0275\u0275elementEnd()();
+  }
+}
+function ImageListFieldComponent_div_11_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 22);
+    \u0275\u0275listener("click", function ImageListFieldComponent_div_11_Template_div_click_0_listener() {
+      const item_r6 = \u0275\u0275restoreView(_r5).$implicit;
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.retryUpload(item_r6));
+    });
+    \u0275\u0275template(1, ImageListFieldComponent_div_11_mat_progress_spinner_1_Template, 1, 2, "mat-progress-spinner", 23)(2, ImageListFieldComponent_div_11_icon_2_Template, 2, 0, "icon", 24)(3, ImageListFieldComponent_div_11_div_3_Template, 3, 0, "div", 25);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const item_r6 = ctx.$implicit;
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275styleProp("transform", "translate(-" + ctx_r3.offset + "00%)");
+    \u0275\u0275property("matTooltip", item_r6.error);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !item_r6.error);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", item_r6.error);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", item_r6.error);
+  }
+}
+function ImageListFieldComponent_button_13_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 30);
+    \u0275\u0275listener("click", function ImageListFieldComponent_button_13_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r7);
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.offset = ctx_r3.offset - 1);
+    });
+    \u0275\u0275elementStart(1, "icon");
+    \u0275\u0275text(2, "chevron_left");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275property("disabled", ctx_r3.offset === 0);
+  }
+}
+function ImageListFieldComponent_button_14_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r8 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 31);
+    \u0275\u0275listener("click", function ImageListFieldComponent_button_14_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r8);
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.offset = ctx_r3.offset + 1);
+    });
+    \u0275\u0275elementStart(1, "icon");
+    \u0275\u0275text(2, "chevron_right");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275property("disabled", ctx_r3.offset >= ctx_r3.length - ctx_r3.view_space);
+  }
+}
+function ImageListFieldComponent_mat_chip_row_18_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-chip-row", 32);
+    \u0275\u0275listener("removed", function ImageListFieldComponent_mat_chip_row_18_Template_mat_chip_row_removed_0_listener() {
+      const item_r10 = \u0275\u0275restoreView(_r9).$implicit;
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.removeImage(item_r10));
+    });
+    \u0275\u0275elementStart(1, "div", 33);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "button", 34)(4, "icon");
+    \u0275\u0275text(5, "cancel");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const item_r10 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(item_r10);
+    \u0275\u0275advance();
+    \u0275\u0275attribute("aria-label", "Remove " + item_r10);
+  }
+}
+var ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandler {
+  get length() {
+    return this.list.length + this._upload_list.getValue().length + 1;
+  }
+  constructor(_clipboard, _uploads, _dialog) {
+    super();
+    this._clipboard = _clipboard;
+    this._uploads = _uploads;
+    this._dialog = _dialog;
+    this.list = [];
+    this.upload_ids = new BehaviorSubject([]);
+    this._upload_list = new BehaviorSubject([]);
+    this.upload_list = this._upload_list.asObservable();
+    this.offset = 0;
+    this.view_space = 0;
+    this.separators = [COMMA, ENTER];
+    this.uploads = combineLatest([
+      this.upload_list,
+      this.upload_ids
+    ]).pipe(map(([list2, ids]) => list2.filter((i) => ids.includes(i.id))));
+    this.registerOnChange = (fn3) => this._onChange = fn3;
+    this.registerOnTouched = (fn3) => this._onTouch = fn3;
+  }
+  ngAfterViewInit() {
+    this.timeout("init_view_space", () => {
+      const box = this._list_el.nativeElement.getBoundingClientRect();
+      this.view_space = Math.floor(box.width / 152);
+    }, 100);
+    this.subscription("upload_changes", this.upload_list.subscribe((list2) => {
+      const id_list = this.upload_ids.getValue();
+      for (const id of id_list) {
+        const item = list2.find((_3) => _3.id === id);
+        if (item && item.progress >= 100) {
+          this.addImageUrl(item.link);
+          this.upload_ids.next(this.upload_ids.getValue().filter((_3) => _3 !== id));
+        }
+      }
+    }));
+  }
+  copyLink(url) {
+    this._clipboard.copy(url);
+    notifyInfo("Copied image URL to clipboard");
+  }
+  viewImage(url) {
+    this._dialog.open(ImageViewerComponent, { data: url });
+  }
+  removeImage(url) {
+    this.setValue(this.list.filter((_3) => _3 !== url));
+  }
+  addImage(event) {
+    if (!event.value)
+      return;
+    this.setValue(unique([...this.list, event.value]));
+    event.chipInput.inputElement.value = "";
+  }
+  addImageUrl(url) {
+    this.setValue(unique([...this.list, url]));
+  }
+  retryUpload(item) {
+    if (item.error) {
+      item.error = null;
+      item.upload.resume();
+    }
+  }
+  uploadImages(event) {
+    return __async(this, null, function* () {
+      const element = event.target;
+      if (element?.files) {
+        const files = element.files;
+        if (files.length) {
+          this.interval("update_status", () => this._updateUploadHistory());
+          for (let i = 0; i < files.length; i++) {
+            const id = yield this._uploads.uploadFileWithPermissions(files[i]);
+            this.upload_ids.next([...this.upload_ids.getValue(), id]);
+            this._file_input.nativeElement.value = "";
+          }
+        }
+      }
+    });
+  }
+  setValue(value) {
+    this.list = value;
+    if (this._onChange)
+      this._onChange(value);
+  }
+  /**
+   * Update local value when form control value is changed
+   * @param value The new value for the component
+   */
+  writeValue(value) {
+    this.list = value || [];
+  }
+  _updateUploadHistory() {
+    return __async(this, null, function* () {
+      const list2 = this.upload_ids.getValue();
+      if (list2.length === 0)
+        return;
+      const global_list = yield nextValueFrom(this._uploads.upload_list);
+      const new_list = global_list.filter((_3) => list2.find((i) => i === _3.id));
+      const done_list = new_list.filter((file) => file.progress >= 100);
+      this._upload_list.next(new_list);
+      done_list.forEach((i) => delete i.upload);
+      if (done_list.length >= list2.length)
+        this.clearInterval("update_status");
+    });
+  }
+  static {
+    this.\u0275fac = function ImageListFieldComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ImageListFieldComponent)(\u0275\u0275directiveInject(Clipboard), \u0275\u0275directiveInject(UploadsService), \u0275\u0275directiveInject(MatDialog));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ImageListFieldComponent, selectors: [["image-list-field"]], viewQuery: function ImageListFieldComponent_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c045, 5);
+        \u0275\u0275viewQuery(_c127, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._list_el = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._file_input = _t4.first);
+      }
+    }, features: [\u0275\u0275ProvidersFeature([
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => _ImageListFieldComponent),
+        multi: true
+      }
+    ]), \u0275\u0275InheritDefinitionFeature], decls: 21, vars: 18, consts: [["image_list", ""], ["file_input", ""], ["chipList", ""], ["images", "", 1, "relative", "mb-2", "flex", "w-full", "items-center", "space-x-2", "overflow-hidden", "py-2", 3, "resize"], ["image", "", 1, "relative", "flex", "h-32", "w-36", "flex-shrink-0", "cursor-pointer", "flex-col", "items-center", "justify-center", "rounded-xl", "border-2", "border-dashed", "border-base-200", "hover:border-base-300", "hover:bg-base-200"], [1, "text-4xl", "opacity-60"], [1, "px-4", "text-center", "opacity-60"], ["type", "file", 1, "absolute", "inset-0", "h-32", "w-32", "cursor-pointer", "opacity-0", 3, "change"], ["image", "", "class", "relative h-32 w-36 flex-shrink-0 overflow-hidden rounded bg-base-200 bg-cover bg-center", 3, "transform", 4, "ngFor", "ngForOf"], ["image", "", "class", "border-base-content/10 /5 flex h-32 w-36 flex-shrink-0 items-center justify-center rounded border bg-base-200 bg-cover bg-center", 3, "transform", "matTooltip", "click", 4, "ngFor", "ngForOf"], ["icon", "", "matRipple", "", "class", "absolute left-0 top-1/2 -translate-y-1/2 transform bg-base-100", 3, "disabled", "click", 4, "ngIf"], ["icon", "", "matRipple", "", "class", "absolute right-0 top-1/2 -translate-y-1/2 transform bg-base-100", 3, "disabled", "click", 4, "ngIf"], ["appearance", "outline", 1, "w-full"], ["aria-label", "Image List"], [3, "removed", 4, "ngFor", "ngForOf"], [3, "matChipInputTokenEnd", "placeholder", "matChipInputFor", "matChipInputSeparatorKeyCodes", "matChipInputAddOnBlur"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center"], ["auth", "", 1, "pointer-events-none", "absolute", "left-1/2", "top-1/2", "z-10", "-translate-x-1/2", "-translate-y-1/2", "object-contain", 3, "source"], ["overlay", "", 1, "absolute", "inset-0", "z-20", "text-base-100"], ["bg", "", 1, "absolute", "inset-0", "bg-black", "opacity-0"], ["actions", "", 1, "absolute", "left-0", "right-0", "top-0", "flex", "items-center", "justify-center", "space-x-2", "opacity-0"], ["icon", "", 3, "click"], ["image", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "click", "matTooltip"], ["mode", "determinate", 3, "value", "diameter", 4, "ngIf"], ["class", "text-6xl text-error", 4, "ngIf"], ["overlay", "", "class", "absolute inset-0 flex items-center justify-center text-base-100 hover:bg-base-content hover:bg-opacity-50", 4, "ngIf"], ["mode", "determinate", 3, "value", "diameter"], [1, "text-6xl", "text-error"], ["overlay", "", 1, "absolute", "inset-0", "flex", "items-center", "justify-center", "text-base-100", "hover:bg-base-content", "hover:bg-opacity-50"], [1, "text-3xl", "opacity-0"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], [3, "removed"], [1, "max-w-md", "truncate"], ["matChipRemove", ""]], template: function ImageListFieldComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "div", 3, 0);
+        \u0275\u0275listener("resize", function ImageListFieldComponent_Template_div_resize_0_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.ngAfterViewInit());
+        }, false, \u0275\u0275resolveWindow);
+        \u0275\u0275elementStart(2, "div", 4)(3, "icon", 5);
+        \u0275\u0275text(4, "add");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(5, "p", 6);
+        \u0275\u0275text(6);
+        \u0275\u0275pipe(7, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(8, "input", 7, 1);
+        \u0275\u0275listener("change", function ImageListFieldComponent_Template_input_change_8_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.uploadImages($event));
+        });
+        \u0275\u0275elementEnd()();
+        \u0275\u0275template(10, ImageListFieldComponent_div_10_Template, 14, 3, "div", 8)(11, ImageListFieldComponent_div_11_Template, 4, 6, "div", 9);
+        \u0275\u0275pipe(12, "async");
+        \u0275\u0275template(13, ImageListFieldComponent_button_13_Template, 3, 1, "button", 10)(14, ImageListFieldComponent_button_14_Template, 3, 1, "button", 11);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(15, "mat-form-field", 12)(16, "mat-chip-grid", 13, 2);
+        \u0275\u0275template(18, ImageListFieldComponent_mat_chip_row_18_Template, 6, 2, "mat-chip-row", 14);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(19, "input", 15);
+        \u0275\u0275pipe(20, "translate");
+        \u0275\u0275listener("matChipInputTokenEnd", function ImageListFieldComponent_Template_input_matChipInputTokenEnd_19_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.addImage($event));
+        });
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        const chipList_r11 = \u0275\u0275reference(17);
+        \u0275\u0275advance(2);
+        \u0275\u0275styleProp("transform", "translate(-" + ctx.offset + "00%)");
+        \u0275\u0275advance(4);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 12, "COMMON.IMAGE_UPLOADS"), " ");
+        \u0275\u0275advance(4);
+        \u0275\u0275property("ngForOf", ctx.list);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(12, 14, ctx.uploads));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.length > ctx.view_space);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.length > ctx.view_space);
+        \u0275\u0275advance(4);
+        \u0275\u0275property("ngForOf", ctx.list);
+        \u0275\u0275advance();
+        \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(20, 16, "COMMON.IMAGE_ADD_URL"))("matChipInputFor", chipList_r11)("matChipInputSeparatorKeyCodes", ctx.separators)("matChipInputAddOnBlur", true);
+      }
+    }, dependencies: [
+      MatFormFieldModule,
+      MatFormField,
+      MatChipsModule,
+      MatChipGrid,
+      MatChipInput,
+      MatChipRemove,
+      MatChipRow,
+      MatProgressSpinnerModule,
+      MatProgressSpinner,
+      IconComponent,
+      CommonModule,
+      NgForOf,
+      NgIf,
+      AsyncPipe,
+      TranslatePipe
+    ], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n}\n[overlay][_ngcontent-%COMP%] {\n  transition: background 200ms;\n}\n[image][_ngcontent-%COMP%]:hover   [actions][_ngcontent-%COMP%], \n[image][_ngcontent-%COMP%]:hover    > icon[_ngcontent-%COMP%] {\n  opacity: 1 !important;\n}\n[image][_ngcontent-%COMP%]:hover   [bg][_ngcontent-%COMP%] {\n  opacity: 0.4 !important;\n}\n[actions][_ngcontent-%COMP%], \n[image][_ngcontent-%COMP%]    > icon[_ngcontent-%COMP%] {\n  transition: opacity 200ms;\n}\n[image][_ngcontent-%COMP%] {\n  transition: transform 200ms;\n}\n/*# sourceMappingURL=image-list-field.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageListFieldComponent, { className: "ImageListFieldComponent", filePath: "libs/form-fields/src/lib/image-list-field.component.ts", lineNumber: 210 });
 })();
 
 // node_modules/lodash-es/_freeGlobal.js
@@ -133484,7 +133848,7 @@ core_default.register({
 var quill_default = core_default;
 
 // libs/form-fields/src/lib/rich-text-input.component.ts
-var _c045 = ["container"];
+var _c046 = ["container"];
 var _c128 = ["editor"];
 var RichTextInputComponent = class _RichTextInputComponent extends AsyncHandler {
   constructor() {
@@ -133572,12 +133936,12 @@ var RichTextInputComponent = class _RichTextInputComponent extends AsyncHandler 
     if (!range2)
       return;
     const { index } = range2;
-    var file_input = document.createElement("input");
+    const file_input = document.createElement("input");
     file_input.setAttribute("type", "file");
     file_input.setAttribute("accept", "image/*");
     file_input.click();
     file_input.onchange = () => {
-      var file = file_input.files[0];
+      const file = file_input.files[0];
       uploadFile(file, true).subscribe(({ link: link2, progress }) => {
         if (!link2 || progress !== 100)
           return;
@@ -133592,11 +133956,11 @@ var RichTextInputComponent = class _RichTextInputComponent extends AsyncHandler 
     if (!range2)
       return;
     const { index } = range2;
-    var file_input = document.createElement("input");
+    const file_input = document.createElement("input");
     file_input.setAttribute("type", "file");
     file_input.click();
     file_input.onchange = () => {
-      var file = file_input.files[0];
+      const file = file_input.files[0];
       uploadFile(file, true).subscribe(({ link: link2, progress }) => {
         if (!link2 || progress !== 100)
           return;
@@ -133616,7 +133980,7 @@ var RichTextInputComponent = class _RichTextInputComponent extends AsyncHandler 
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _RichTextInputComponent, selectors: [["rich-text-input"]], viewQuery: function RichTextInputComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c045, 5);
+        \u0275\u0275viewQuery(_c046, 5);
         \u0275\u0275viewQuery(_c128, 5);
       }
       if (rf & 2) {
@@ -133624,7 +133988,7 @@ var RichTextInputComponent = class _RichTextInputComponent extends AsyncHandler 
         \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._container_el = _t4.first);
         \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._editor_el = _t4.first);
       }
-    }, inputs: { placeholder: "placeholder", readonly: "readonly", images_allowed: "images_allowed" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
+    }, inputs: { placeholder: "placeholder", readonly: "readonly", images_allowed: "images_allowed" }, features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         /* istanbul ignore next */
@@ -133641,357 +134005,13 @@ var RichTextInputComponent = class _RichTextInputComponent extends AsyncHandler 
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RichTextInputComponent, { className: "RichTextInputComponent", filePath: "libs/form-fields/src/lib/rich-text-input.component.ts", lineNumber: 42 });
-})();
-
-// libs/form-fields/src/lib/image-list-field.component.ts
-var _c046 = ["image_list"];
-var _c129 = ["file_input"];
-function ImageListFieldComponent_div_10_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 16);
-    \u0275\u0275element(1, "img", 17);
-    \u0275\u0275elementStart(2, "div", 18);
-    \u0275\u0275element(3, "div", 19);
-    \u0275\u0275elementStart(4, "div", 20)(5, "button", 21);
-    \u0275\u0275listener("click", function ImageListFieldComponent_div_10_Template_button_click_5_listener() {
-      const url_r3 = \u0275\u0275restoreView(_r2).$implicit;
-      const ctx_r3 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r3.copyLink(url_r3));
-    });
-    \u0275\u0275elementStart(6, "app-icon");
-    \u0275\u0275text(7, "link");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(8, "button", 21);
-    \u0275\u0275listener("click", function ImageListFieldComponent_div_10_Template_button_click_8_listener() {
-      const url_r3 = \u0275\u0275restoreView(_r2).$implicit;
-      const ctx_r3 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r3.viewImage(url_r3));
-    });
-    \u0275\u0275elementStart(9, "app-icon");
-    \u0275\u0275text(10, "visibility");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(11, "button", 21);
-    \u0275\u0275listener("click", function ImageListFieldComponent_div_10_Template_button_click_11_listener() {
-      const url_r3 = \u0275\u0275restoreView(_r2).$implicit;
-      const ctx_r3 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r3.removeImage(url_r3));
-    });
-    \u0275\u0275elementStart(12, "app-icon");
-    \u0275\u0275text(13, "close");
-    \u0275\u0275elementEnd()()()()();
-  }
-  if (rf & 2) {
-    const url_r3 = ctx.$implicit;
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275styleProp("transform", "translate(-" + ctx_r3.offset + "00%)");
-    \u0275\u0275advance();
-    \u0275\u0275property("source", url_r3);
-  }
-}
-function ImageListFieldComponent_div_11_mat_progress_spinner_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "mat-progress-spinner", 26);
-  }
-  if (rf & 2) {
-    const item_r6 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275property("value", item_r6.progress)("diameter", 64);
-  }
-}
-function ImageListFieldComponent_div_11_app_icon_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "app-icon", 27);
-    \u0275\u0275text(1, "warning");
-    \u0275\u0275elementEnd();
-  }
-}
-function ImageListFieldComponent_div_11_div_3_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 28)(1, "app-icon", 29);
-    \u0275\u0275text(2, "refresh");
-    \u0275\u0275elementEnd()();
-  }
-}
-function ImageListFieldComponent_div_11_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 22);
-    \u0275\u0275listener("click", function ImageListFieldComponent_div_11_Template_div_click_0_listener() {
-      const item_r6 = \u0275\u0275restoreView(_r5).$implicit;
-      const ctx_r3 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r3.retryUpload(item_r6));
-    });
-    \u0275\u0275template(1, ImageListFieldComponent_div_11_mat_progress_spinner_1_Template, 1, 2, "mat-progress-spinner", 23)(2, ImageListFieldComponent_div_11_app_icon_2_Template, 2, 0, "app-icon", 24)(3, ImageListFieldComponent_div_11_div_3_Template, 3, 0, "div", 25);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const item_r6 = ctx.$implicit;
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275styleProp("transform", "translate(-" + ctx_r3.offset + "00%)");
-    \u0275\u0275property("matTooltip", item_r6.error);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !item_r6.error);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", item_r6.error);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", item_r6.error);
-  }
-}
-function ImageListFieldComponent_button_13_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r7 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 30);
-    \u0275\u0275listener("click", function ImageListFieldComponent_button_13_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r7);
-      const ctx_r3 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r3.offset = ctx_r3.offset - 1);
-    });
-    \u0275\u0275elementStart(1, "app-icon");
-    \u0275\u0275text(2, "chevron_left");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275property("disabled", ctx_r3.offset === 0);
-  }
-}
-function ImageListFieldComponent_button_14_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r8 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 31);
-    \u0275\u0275listener("click", function ImageListFieldComponent_button_14_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r8);
-      const ctx_r3 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r3.offset = ctx_r3.offset + 1);
-    });
-    \u0275\u0275elementStart(1, "app-icon");
-    \u0275\u0275text(2, "chevron_right");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275property("disabled", ctx_r3.offset >= ctx_r3.length - ctx_r3.view_space);
-  }
-}
-function ImageListFieldComponent_mat_chip_row_18_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-chip-row", 32);
-    \u0275\u0275listener("removed", function ImageListFieldComponent_mat_chip_row_18_Template_mat_chip_row_removed_0_listener() {
-      const item_r10 = \u0275\u0275restoreView(_r9).$implicit;
-      const ctx_r3 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r3.removeImage(item_r10));
-    });
-    \u0275\u0275elementStart(1, "div", 33);
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "button", 34)(4, "app-icon");
-    \u0275\u0275text(5, "cancel");
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const item_r10 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(item_r10);
-    \u0275\u0275advance();
-    \u0275\u0275attribute("aria-label", "Remove " + item_r10);
-  }
-}
-var ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandler {
-  get length() {
-    return this.list.length + this._upload_list.getValue().length + 1;
-  }
-  constructor(_clipboard, _uploads, _dialog) {
-    super();
-    this._clipboard = _clipboard;
-    this._uploads = _uploads;
-    this._dialog = _dialog;
-    this.list = [];
-    this.upload_ids = new BehaviorSubject([]);
-    this._upload_list = new BehaviorSubject([]);
-    this.upload_list = this._upload_list.asObservable();
-    this.offset = 0;
-    this.view_space = 0;
-    this.separators = [COMMA, ENTER];
-    this.uploads = combineLatest([
-      this.upload_list,
-      this.upload_ids
-    ]).pipe(map(([list2, ids]) => list2.filter((i) => ids.includes(i.id))));
-    this.registerOnChange = (fn3) => this._onChange = fn3;
-    this.registerOnTouched = (fn3) => this._onTouch = fn3;
-  }
-  ngAfterViewInit() {
-    this.timeout("init_view_space", () => {
-      const box = this._list_el.nativeElement.getBoundingClientRect();
-      this.view_space = Math.floor(box.width / 152);
-    }, 100);
-    this.subscription("upload_changes", this.upload_list.subscribe((list2) => {
-      const id_list = this.upload_ids.getValue();
-      for (const id of id_list) {
-        const item = list2.find((_3) => _3.id === id);
-        if (item && item.progress >= 100) {
-          this.addImageUrl(item.link);
-          this.upload_ids.next(this.upload_ids.getValue().filter((_3) => _3 !== id));
-        }
-      }
-    }));
-  }
-  copyLink(url) {
-    this._clipboard.copy(url);
-    notifyInfo("Copied image URL to clipboard");
-  }
-  viewImage(url) {
-    this._dialog.open(ImageViewerComponent, { data: url });
-  }
-  removeImage(url) {
-    this.setValue(this.list.filter((_3) => _3 !== url));
-  }
-  addImage(event) {
-    if (!event.value)
-      return;
-    this.setValue(unique([...this.list, event.value]));
-    event.chipInput.inputElement.value = "";
-  }
-  addImageUrl(url) {
-    this.setValue(unique([...this.list, url]));
-  }
-  retryUpload(item) {
-    if (item.error) {
-      item.error = null;
-      item.upload.resume();
-    }
-  }
-  uploadImages(event) {
-    return __async(this, null, function* () {
-      const element = event.target;
-      if (element?.files) {
-        const files = element.files;
-        if (files.length) {
-          this.interval("update_status", () => this._updateUploadHistory());
-          for (let i = 0; i < files.length; i++) {
-            const id = yield this._uploads.uploadFileWithPermissions(files[i]);
-            this.upload_ids.next([...this.upload_ids.getValue(), id]);
-            this._file_input.nativeElement.value = "";
-          }
-        }
-      }
-    });
-  }
-  setValue(value) {
-    this.list = value;
-    if (this._onChange)
-      this._onChange(value);
-  }
-  /**
-   * Update local value when form control value is changed
-   * @param value The new value for the component
-   */
-  writeValue(value) {
-    this.list = value || [];
-  }
-  _updateUploadHistory() {
-    return __async(this, null, function* () {
-      const list2 = this.upload_ids.getValue();
-      if (list2.length === 0)
-        return;
-      const global_list = yield nextValueFrom(this._uploads.upload_list);
-      const new_list = global_list.filter((_3) => list2.find((i) => i === _3.id));
-      const done_list = new_list.filter((file) => file.progress >= 100);
-      this._upload_list.next(new_list);
-      done_list.forEach((i) => delete i.upload);
-      if (done_list.length >= list2.length)
-        this.clearInterval("update_status");
-    });
-  }
-  static {
-    this.\u0275fac = function ImageListFieldComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _ImageListFieldComponent)(\u0275\u0275directiveInject(Clipboard), \u0275\u0275directiveInject(UploadsService), \u0275\u0275directiveInject(MatDialog));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ImageListFieldComponent, selectors: [["image-list-field"]], viewQuery: function ImageListFieldComponent_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(_c046, 5);
-        \u0275\u0275viewQuery(_c129, 5);
-      }
-      if (rf & 2) {
-        let _t4;
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._list_el = _t4.first);
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._file_input = _t4.first);
-      }
-    }, standalone: false, features: [\u0275\u0275ProvidersFeature([
-      {
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => _ImageListFieldComponent),
-        multi: true
-      }
-    ]), \u0275\u0275InheritDefinitionFeature], decls: 21, vars: 18, consts: [["image_list", ""], ["file_input", ""], ["chipList", ""], ["images", "", 1, "relative", "mb-2", "flex", "w-full", "items-center", "space-x-2", "overflow-hidden", "py-2", 3, "resize"], ["image", "", 1, "relative", "flex", "h-32", "w-36", "flex-shrink-0", "cursor-pointer", "flex-col", "items-center", "justify-center", "rounded-xl", "border-2", "border-dashed", "border-base-200", "hover:border-base-300", "hover:bg-base-200"], [1, "text-4xl", "opacity-60"], [1, "px-4", "text-center", "opacity-60"], ["type", "file", 1, "absolute", "inset-0", "h-32", "w-32", "cursor-pointer", "opacity-0", 3, "change"], ["image", "", "class", "relative h-32 w-36 flex-shrink-0 overflow-hidden rounded bg-base-200 bg-cover bg-center", 3, "transform", 4, "ngFor", "ngForOf"], ["image", "", "class", "border-base-content/10 /5 flex h-32 w-36 flex-shrink-0 items-center justify-center rounded border bg-base-200 bg-cover bg-center", 3, "transform", "matTooltip", "click", 4, "ngFor", "ngForOf"], ["icon", "", "matRipple", "", "class", "absolute left-0 top-1/2 -translate-y-1/2 transform bg-base-100", 3, "disabled", "click", 4, "ngIf"], ["icon", "", "matRipple", "", "class", "absolute right-0 top-1/2 -translate-y-1/2 transform bg-base-100", 3, "disabled", "click", 4, "ngIf"], ["appearance", "outline", 1, "w-full"], ["aria-label", "Image List"], [3, "removed", 4, "ngFor", "ngForOf"], [3, "matChipInputTokenEnd", "placeholder", "matChipInputFor", "matChipInputSeparatorKeyCodes", "matChipInputAddOnBlur"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center"], ["auth", "", 1, "pointer-events-none", "absolute", "left-1/2", "top-1/2", "z-10", "-translate-x-1/2", "-translate-y-1/2", "object-contain", 3, "source"], ["overlay", "", 1, "absolute", "inset-0", "z-20", "text-base-100"], ["bg", "", 1, "absolute", "inset-0", "bg-black", "opacity-0"], ["actions", "", 1, "absolute", "left-0", "right-0", "top-0", "flex", "items-center", "justify-center", "space-x-2", "opacity-0"], ["icon", "", 3, "click"], ["image", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "click", "matTooltip"], ["mode", "determinate", 3, "value", "diameter", 4, "ngIf"], ["class", "text-6xl text-error", 4, "ngIf"], ["overlay", "", "class", "absolute inset-0 flex items-center justify-center text-base-100 hover:bg-base-content hover:bg-opacity-50", 4, "ngIf"], ["mode", "determinate", 3, "value", "diameter"], [1, "text-6xl", "text-error"], ["overlay", "", 1, "absolute", "inset-0", "flex", "items-center", "justify-center", "text-base-100", "hover:bg-base-content", "hover:bg-opacity-50"], [1, "text-3xl", "opacity-0"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], [3, "removed"], [1, "max-w-md", "truncate"], ["matChipRemove", ""]], template: function ImageListFieldComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "div", 3, 0);
-        \u0275\u0275listener("resize", function ImageListFieldComponent_Template_div_resize_0_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.ngAfterViewInit());
-        }, false, \u0275\u0275resolveWindow);
-        \u0275\u0275elementStart(2, "div", 4)(3, "app-icon", 5);
-        \u0275\u0275text(4, "add");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(5, "p", 6);
-        \u0275\u0275text(6);
-        \u0275\u0275pipe(7, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(8, "input", 7, 1);
-        \u0275\u0275listener("change", function ImageListFieldComponent_Template_input_change_8_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.uploadImages($event));
-        });
-        \u0275\u0275elementEnd()();
-        \u0275\u0275template(10, ImageListFieldComponent_div_10_Template, 14, 3, "div", 8)(11, ImageListFieldComponent_div_11_Template, 4, 6, "div", 9);
-        \u0275\u0275pipe(12, "async");
-        \u0275\u0275template(13, ImageListFieldComponent_button_13_Template, 3, 1, "button", 10)(14, ImageListFieldComponent_button_14_Template, 3, 1, "button", 11);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(15, "mat-form-field", 12)(16, "mat-chip-grid", 13, 2);
-        \u0275\u0275template(18, ImageListFieldComponent_mat_chip_row_18_Template, 6, 2, "mat-chip-row", 14);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(19, "input", 15);
-        \u0275\u0275pipe(20, "translate");
-        \u0275\u0275listener("matChipInputTokenEnd", function ImageListFieldComponent_Template_input_matChipInputTokenEnd_19_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.addImage($event));
-        });
-        \u0275\u0275elementEnd()();
-      }
-      if (rf & 2) {
-        const chipList_r11 = \u0275\u0275reference(17);
-        \u0275\u0275advance(2);
-        \u0275\u0275styleProp("transform", "translate(-" + ctx.offset + "00%)");
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(7, 12, "COMMON.IMAGE_UPLOADS"), " ");
-        \u0275\u0275advance(4);
-        \u0275\u0275property("ngForOf", ctx.list);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(12, 14, ctx.uploads));
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.length > ctx.view_space);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.length > ctx.view_space);
-        \u0275\u0275advance(4);
-        \u0275\u0275property("ngForOf", ctx.list);
-        \u0275\u0275advance();
-        \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(20, 16, "COMMON.IMAGE_ADD_URL"))("matChipInputFor", chipList_r11)("matChipInputSeparatorKeyCodes", ctx.separators)("matChipInputAddOnBlur", true);
-      }
-    }, dependencies: [NgForOf, NgIf, MatRipple, MatFormField, MatTooltip, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow, IconComponent, AuthenticatedImageDirective, MatProgressSpinner, AsyncPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n}\n[overlay][_ngcontent-%COMP%] {\n  transition: background 200ms;\n}\n[image][_ngcontent-%COMP%]:hover   [actions][_ngcontent-%COMP%], \n[image][_ngcontent-%COMP%]:hover    > app-icon[_ngcontent-%COMP%] {\n  opacity: 1 !important;\n}\n[image][_ngcontent-%COMP%]:hover   [bg][_ngcontent-%COMP%] {\n  opacity: 0.4 !important;\n}\n[actions][_ngcontent-%COMP%], \n[image][_ngcontent-%COMP%]    > app-icon[_ngcontent-%COMP%] {\n  transition: opacity 200ms;\n}\n[image][_ngcontent-%COMP%] {\n  transition: transform 200ms;\n}\n/*# sourceMappingURL=image-list-field.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageListFieldComponent, { className: "ImageListFieldComponent", filePath: "libs/form-fields/src/lib/image-list-field.component.ts", lineNumber: 199 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RichTextInputComponent, { className: "RichTextInputComponent", filePath: "libs/form-fields/src/lib/rich-text-input.component.ts", lineNumber: 41 });
 })();
 
 // libs/form-fields/src/lib/support-ticket-modal.component.ts
 function SupportTicketModalComponent_main_6_mat_option_34_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 22);
+    \u0275\u0275elementStart(0, "mat-option", 24);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -134004,7 +134024,7 @@ function SupportTicketModalComponent_main_6_mat_option_34_Template(rf, ctx) {
 }
 function SupportTicketModalComponent_main_6_div_36_mat_option_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 22);
+    \u0275\u0275elementStart(0, "mat-option", 24);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -134017,13 +134037,13 @@ function SupportTicketModalComponent_main_6_div_36_mat_option_7_Template(rf, ctx
 }
 function SupportTicketModalComponent_main_6_div_36_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 12)(1, "label");
+    \u0275\u0275elementStart(0, "div", 14)(1, "label");
     \u0275\u0275text(2);
     \u0275\u0275pipe(3, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "mat-form-field", 13)(5, "mat-select", 23);
+    \u0275\u0275elementStart(4, "mat-form-field", 15)(5, "mat-select", 25);
     \u0275\u0275pipe(6, "translate");
-    \u0275\u0275template(7, SupportTicketModalComponent_main_6_div_36_mat_option_7_Template, 2, 2, "mat-option", 15);
+    \u0275\u0275template(7, SupportTicketModalComponent_main_6_div_36_mat_option_7_Template, 2, 2, "mat-option", 17);
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
@@ -134038,7 +134058,7 @@ function SupportTicketModalComponent_main_6_div_36_Template(rf, ctx) {
 }
 function SupportTicketModalComponent_main_6_mat_error_45_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-error", 24);
+    \u0275\u0275elementStart(0, "mat-error", 26);
     \u0275\u0275text(1);
     \u0275\u0275pipe(2, "translate");
     \u0275\u0275elementEnd();
@@ -134050,11 +134070,11 @@ function SupportTicketModalComponent_main_6_mat_error_45_Template(rf, ctx) {
 }
 function SupportTicketModalComponent_main_6_div_46_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div")(1, "label", 17);
+    \u0275\u0275elementStart(0, "div")(1, "label", 19);
     \u0275\u0275text(2);
     \u0275\u0275pipe(3, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(4, "image-list-field", 25);
+    \u0275\u0275element(4, "image-list-field", 27);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -134064,55 +134084,55 @@ function SupportTicketModalComponent_main_6_div_46_Template(rf, ctx) {
 }
 function SupportTicketModalComponent_main_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "main", 5)(1, "form", 6)(2, "div", 7)(3, "div", 8)(4, "label");
+    \u0275\u0275elementStart(0, "main", 7)(1, "form", 8)(2, "div", 9)(3, "div", 10)(4, "label");
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementStart(7, "span");
     \u0275\u0275text(8, "*");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(9, "mat-form-field", 9);
-    \u0275\u0275element(10, "input", 10);
+    \u0275\u0275elementStart(9, "mat-form-field", 11);
+    \u0275\u0275element(10, "input", 12);
     \u0275\u0275pipe(11, "translate");
     \u0275\u0275elementStart(12, "mat-error");
     \u0275\u0275text(13);
     \u0275\u0275pipe(14, "translate");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(15, "div", 8)(16, "label");
+    \u0275\u0275elementStart(15, "div", 10)(16, "label");
     \u0275\u0275text(17);
     \u0275\u0275pipe(18, "translate");
     \u0275\u0275elementStart(19, "span");
     \u0275\u0275text(20, "*");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(21, "mat-form-field", 9);
-    \u0275\u0275element(22, "input", 11);
+    \u0275\u0275elementStart(21, "mat-form-field", 11);
+    \u0275\u0275element(22, "input", 13);
     \u0275\u0275pipe(23, "translate");
     \u0275\u0275elementStart(24, "mat-error");
     \u0275\u0275text(25);
     \u0275\u0275pipe(26, "translate");
     \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(27, "div", 12)(28, "label");
+    \u0275\u0275elementStart(27, "div", 14)(28, "label");
     \u0275\u0275text(29);
     \u0275\u0275pipe(30, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(31, "mat-form-field", 13)(32, "mat-select", 14);
+    \u0275\u0275elementStart(31, "mat-form-field", 15)(32, "mat-select", 16);
     \u0275\u0275pipe(33, "translate");
-    \u0275\u0275template(34, SupportTicketModalComponent_main_6_mat_option_34_Template, 2, 2, "mat-option", 15);
+    \u0275\u0275template(34, SupportTicketModalComponent_main_6_mat_option_34_Template, 2, 2, "mat-option", 17);
     \u0275\u0275pipe(35, "async");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275template(36, SupportTicketModalComponent_main_6_div_36_Template, 8, 7, "div", 16);
-    \u0275\u0275elementStart(37, "div")(38, "label", 17);
+    \u0275\u0275template(36, SupportTicketModalComponent_main_6_div_36_Template, 8, 7, "div", 18);
+    \u0275\u0275elementStart(37, "div")(38, "label", 19);
     \u0275\u0275text(39);
     \u0275\u0275pipe(40, "translate");
     \u0275\u0275elementStart(41, "span");
     \u0275\u0275text(42, "*");
     \u0275\u0275elementEnd()();
-    \u0275\u0275element(43, "rich-text-input", 18);
+    \u0275\u0275element(43, "rich-text-input", 20);
     \u0275\u0275pipe(44, "translate");
-    \u0275\u0275template(45, SupportTicketModalComponent_main_6_mat_error_45_Template, 3, 3, "mat-error", 19);
+    \u0275\u0275template(45, SupportTicketModalComponent_main_6_mat_error_45_Template, 3, 3, "mat-error", 21);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(46, SupportTicketModalComponent_main_6_div_46_Template, 5, 3, "div", 20);
+    \u0275\u0275template(46, SupportTicketModalComponent_main_6_div_46_Template, 5, 3, "div", 22);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(47, "div", 21);
+    \u0275\u0275elementStart(47, "div", 23);
     \u0275\u0275text(48);
     \u0275\u0275pipe(49, "translate");
     \u0275\u0275elementEnd()();
@@ -134156,7 +134176,7 @@ function SupportTicketModalComponent_main_6_Template(rf, ctx) {
 function SupportTicketModalComponent_footer_7_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "footer", 26)(1, "button", 27);
+    \u0275\u0275elementStart(0, "footer", 28)(1, "button", 29);
     \u0275\u0275listener("click", function SupportTicketModalComponent_footer_7_Template_button_click_1_listener() {
       \u0275\u0275restoreView(_r4);
       const ctx_r2 = \u0275\u0275nextContext();
@@ -134173,8 +134193,8 @@ function SupportTicketModalComponent_footer_7_Template(rf, ctx) {
 }
 function SupportTicketModalComponent_ng_template_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "main", 28);
-    \u0275\u0275element(1, "mat-spinner", 29);
+    \u0275\u0275elementStart(0, "main", 30);
+    \u0275\u0275element(1, "mat-spinner", 31);
     \u0275\u0275elementStart(2, "p");
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
@@ -134275,15 +134295,15 @@ ${images.join("\n")}`,
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SupportTicketModalComponent, selectors: [["support-ticket-modal"]], standalone: false, decls: 10, vars: 3, consts: [["load_state", ""], [1, "flex", "items-center", "justify-between"], ["icon", "", "mat-dialog-close", ""], ["class", "w-[32rem] max-w-[85vw]", 4, "ngIf", "ngIfElse"], ["class", "flex items-center justify-center border-t border-base-200 p-2", 4, "ngIf"], [1, "w-[32rem]", "max-w-[85vw]"], [1, "p-2", 3, "formGroup"], [1, "flex", "flex-wrap", "items-center", "sm:space-x-2"], [1, "flex", "flex-1", "flex-col"], ["appearance", "outline"], ["matInput", "", "formControlName", "name", 3, "placeholder"], ["matInput", "", "formControlName", "email", 3, "placeholder"], [1, "flex", "flex-col"], ["appearance", "outline", 1, "w-full"], ["formControlName", "location", 3, "placeholder"], [3, "value", 4, "ngFor", "ngForOf"], ["class", "flex flex-col", 4, "ngIf"], [1, "mb-4"], ["formControlName", "description", 3, "placeholder"], ["class", "my-2 text-xs", 4, "ngIf"], [4, "ngIf"], [1, "mb-2", "text-center", "text-xs", "italic"], [3, "value"], ["formControlName", "issue_type", 3, "placeholder"], [1, "my-2", "text-xs"], ["formControlName", "images"], [1, "flex", "items-center", "justify-center", "border-t", "border-base-200", "p-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"], [1, "flex", "min-h-[24rem]", "w-[32rem]", "max-w-[100vw]", "flex-col", "items-center", "justify-center", "space-y-2"], [3, "diameter"]], template: function SupportTicketModalComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SupportTicketModalComponent, selectors: [["support-ticket-modal"]], decls: 10, vars: 3, consts: [["load_state", ""], [1, "flex", "items-center", "justify-between"], [1, "text-lg", "font-medium"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "text-2xl"], ["class", "w-[32rem] max-w-[85vw]", 4, "ngIf", "ngIfElse"], ["class", "flex items-center justify-end border-t border-base-200 px-4 py-2", 4, "ngIf"], [1, "w-[32rem]", "max-w-[85vw]"], [1, "px-4", "py-2", 3, "formGroup"], [1, "flex", "flex-wrap", "items-center", "sm:space-x-2"], [1, "flex", "flex-1", "flex-col"], ["appearance", "outline"], ["matInput", "", "formControlName", "name", 3, "placeholder"], ["matInput", "", "formControlName", "email", 3, "placeholder"], [1, "flex", "flex-col"], ["appearance", "outline", 1, "w-full"], ["formControlName", "location", 3, "placeholder"], [3, "value", 4, "ngFor", "ngForOf"], ["class", "flex flex-col", 4, "ngIf"], [1, "mb-4"], ["formControlName", "description", 3, "placeholder"], ["class", "my-2 text-xs", 4, "ngIf"], [4, "ngIf"], [1, "mb-2", "text-center", "text-xs", "italic"], [3, "value"], ["formControlName", "issue_type", 3, "placeholder"], [1, "my-2", "text-xs"], ["formControlName", "images"], [1, "flex", "items-center", "justify-end", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"], [1, "flex", "min-h-[24rem]", "w-[32rem]", "max-w-[100vw]", "flex-col", "items-center", "justify-center", "space-y-2"], [3, "diameter"]], template: function SupportTicketModalComponent_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275elementStart(0, "header", 1)(1, "h2");
+        \u0275\u0275elementStart(0, "header", 1)(1, "h2", 2);
         \u0275\u0275text(2, "Raise a support ticket");
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(3, "button", 2)(4, "app-icon");
+        \u0275\u0275elementStart(3, "button", 3)(4, "icon", 4);
         \u0275\u0275text(5, "close");
         \u0275\u0275elementEnd()()();
-        \u0275\u0275template(6, SupportTicketModalComponent_main_6_Template, 50, 40, "main", 3)(7, SupportTicketModalComponent_footer_7_Template, 4, 3, "footer", 4)(8, SupportTicketModalComponent_ng_template_8_Template, 5, 4, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+        \u0275\u0275template(6, SupportTicketModalComponent_main_6_Template, 50, 40, "main", 5)(7, SupportTicketModalComponent_footer_7_Template, 4, 3, "footer", 6)(8, SupportTicketModalComponent_ng_template_8_Template, 5, 4, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
       }
       if (rf & 2) {
         const load_state_r5 = \u0275\u0275reference(9);
@@ -134292,11 +134312,42 @@ ${images.join("\n")}`,
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", !ctx.loading);
       }
-    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, MatRipple, MatFormField, MatError, MatInput, MatSelect, MatOption, IconComponent, MatDialogClose, MatProgressSpinner, RichTextInputComponent, ImageListFieldComponent, AsyncPipe, TranslatePipe], styles: ["\n\nmat-form-field[_ngcontent-%COMP%] {\n  width: 100%;\n}\n/*# sourceMappingURL=support-ticket-modal.component.css.map */"] });
+    }, dependencies: [
+      CommonModule,
+      NgForOf,
+      NgIf,
+      AsyncPipe,
+      MatFormFieldModule,
+      MatFormField,
+      MatError,
+      MatInputModule,
+      MatInput,
+      FormsModule,
+      \u0275NgNoValidate,
+      DefaultValueAccessor,
+      NgControlStatus,
+      NgControlStatusGroup,
+      ReactiveFormsModule,
+      FormGroupDirective,
+      FormControlName,
+      MatProgressSpinnerModule,
+      MatProgressSpinner,
+      IconComponent,
+      MatRippleModule,
+      MatRipple,
+      RichTextInputComponent,
+      ImageListFieldComponent,
+      MatSelectModule,
+      MatSelect,
+      MatOption,
+      TranslatePipe,
+      MatDialogModule,
+      MatDialogClose
+    ], styles: ["\n\nmat-form-field[_ngcontent-%COMP%] {\n  width: 100%;\n}\n/*# sourceMappingURL=support-ticket-modal.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SupportTicketModalComponent, { className: "SupportTicketModalComponent", filePath: "libs/form-fields/src/lib/support-ticket-modal.component.ts", lineNumber: 150 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SupportTicketModalComponent, { className: "SupportTicketModalComponent", filePath: "libs/form-fields/src/lib/support-ticket-modal.component.ts", lineNumber: 180 });
 })();
 
 // libs/components/src/lib/user-controls.component.ts
@@ -134574,13 +134625,13 @@ var UserControlsComponent = class _UserControlsComponent {
     const date = format(/* @__PURE__ */ new Date(), "yyyy-MM-dd");
     const day = (/* @__PURE__ */ new Date()).getDay();
     const pref = this.overrides[date] ? this.overrides[date] : this.work_prefs.find((pref2) => pref2.day_of_week === day);
-    return pref.blocks?.find((_3) => this.now >= this.timeFrom(_3.start_time) && this.now < this.timeFrom(_3.end_time));
+    return pref?.blocks?.find((_3) => this.now >= this.timeFrom(_3.start_time) && this.now < this.timeFrom(_3.end_time));
   }
   get active_index() {
     const date = format(/* @__PURE__ */ new Date(), "yyyy-MM-dd");
     const day = (/* @__PURE__ */ new Date()).getDay();
     const pref = this.overrides[date] ? this.overrides[date] : this.work_prefs.find((pref2) => pref2.day_of_week === day);
-    return pref.blocks?.findIndex((_3) => this.now >= this.timeFrom(_3.start_time) && this.now < this.timeFrom(_3.end_time));
+    return pref?.blocks?.findIndex((_3) => this.now >= this.timeFrom(_3.start_time) && this.now < this.timeFrom(_3.end_time));
   }
   location_icon(time) {
     const user = currentUser();
@@ -134791,7 +134842,7 @@ var UserControlsComponent = class _UserControlsComponent {
         \u0275\u0275advance(2);
         \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(43, 30, ctx.version.time, "longDate"), " (", \u0275\u0275pipeBind2(44, 33, ctx.version.time, "shortTime"), ") ");
       }
-    }, dependencies: [NgForOf, NgIf, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, MatTooltip, IconComponent, UserAvatarComponent, CustomTooltipComponent, DeskHeightPresetsComponent, AsyncPipe, JsonPipe, DatePipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, MatTooltip, IconComponent, CustomTooltipComponent, UserAvatarComponent, DeskHeightPresetsComponent, AsyncPipe, JsonPipe, DatePipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -134800,7 +134851,7 @@ var UserControlsComponent = class _UserControlsComponent {
 
 // libs/components/src/lib/virtual-keyboard.component.ts
 var _c047 = ["keyboard", ""];
-var _c130 = ["*"];
+var _c129 = ["*"];
 function VirtualKeyboardComponent_ng_template_1_div_1_ng_container_1_div_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "div", 7);
@@ -134972,7 +135023,7 @@ var VirtualKeyboardComponent = class _VirtualKeyboardComponent extends AsyncHand
           return ctx.onBlur();
         });
       }
-    }, inputs: { keyset: "keyset" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c047, ngContentSelectors: _c130, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["keyboard-view", "", 1, "flex", "w-screen", "flex-col", "space-y-4", "border-t", "border-base-200", "bg-base-200", "p-2"], ["row", "", "class", "flex items-center justify-center space-x-2", 4, "ngFor", "ngForOf"], ["row", "", 1, "flex", "items-center", "justify-center", "space-x-2"], [4, "ngFor", "ngForOf"], ["tabindex", "0", 1, "relative", "cursor-pointer", "rounded-xl", "border", "border-base-200", "bg-base-100", "p-2", 3, "focus", "click"], ["dot", "", "class", "absolute right-2 top-2 h-2 w-2 rounded-full bg-base-200", 3, "bg-success", 4, "ngIf"], ["dot", "", 1, "absolute", "right-2", "top-2", "h-2", "w-2", "rounded-full", "bg-base-200"]], template: function VirtualKeyboardComponent_Template(rf, ctx) {
+    }, inputs: { keyset: "keyset" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c047, ngContentSelectors: _c129, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["keyboard-view", "", 1, "flex", "w-screen", "flex-col", "space-y-4", "border-t", "border-base-200", "bg-base-200", "p-2"], ["row", "", "class", "flex items-center justify-center space-x-2", 4, "ngFor", "ngForOf"], ["row", "", 1, "flex", "items-center", "justify-center", "space-x-2"], [4, "ngFor", "ngForOf"], ["tabindex", "0", 1, "relative", "cursor-pointer", "rounded-xl", "border", "border-base-200", "bg-base-100", "p-2", 3, "focus", "click"], ["dot", "", "class", "absolute right-2 top-2 h-2 w-2 rounded-full bg-base-200", 3, "bg-success", 4, "ngIf"], ["dot", "", 1, "absolute", "right-2", "top-2", "h-2", "w-2", "rounded-full", "bg-base-200"]], template: function VirtualKeyboardComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275projectionDef();
         \u0275\u0275projection(0);
@@ -134993,7 +135044,7 @@ var ZonePipe = class _ZonePipe {
     return __async(this, null, function* () {
       if (ZONE_LIST[id])
         return ZONE_LIST[id];
-      const zone = yield Fc(id).toPromise().catch((_3) => null);
+      const zone = yield Nc(id).toPromise().catch((_3) => null);
       if (!zone)
         return EMPTY_ZONE;
       ZONE_LIST[id] = zone;
@@ -135056,6 +135107,9 @@ var ComponentsModule = class _ComponentsModule {
       ReactiveFormsModule,
       RouterModule,
       MAT_MODULES,
+      IconComponent,
+      CustomTooltipComponent,
+      SettingsToggleComponent,
       MatAutocompleteModule,
       MatMenuModule,
       MatFormFieldModule,
@@ -135247,7 +135301,7 @@ var RecurrenceDays;
   RecurrenceDays2[RecurrenceDays2["FRIDAY"] = 32] = "FRIDAY";
   RecurrenceDays2[RecurrenceDays2["SATURDAY"] = 64] = "SATURDAY";
 })(RecurrenceDays || (RecurrenceDays = {}));
-var DAYS_OF_WEEK_INDEX = [
+var DAYS_OF_WEEK_INDEX2 = [
   RecurrenceDays.SUNDAY,
   RecurrenceDays.MONDAY,
   RecurrenceDays.TUESDAY,
@@ -135256,19 +135310,19 @@ var DAYS_OF_WEEK_INDEX = [
   RecurrenceDays.FRIDAY,
   RecurrenceDays.SATURDAY
 ];
-var WeekOfMonth;
-(function(WeekOfMonth2) {
-  WeekOfMonth2[WeekOfMonth2["First"] = 1] = "First";
-  WeekOfMonth2[WeekOfMonth2["Second"] = 2] = "Second";
-  WeekOfMonth2[WeekOfMonth2["Third"] = 3] = "Third";
-  WeekOfMonth2[WeekOfMonth2["Fourth"] = 4] = "Fourth";
-  WeekOfMonth2[WeekOfMonth2["Fifth"] = 5] = "Fifth";
-  WeekOfMonth2[WeekOfMonth2["Last"] = -1] = "Last";
-  WeekOfMonth2[WeekOfMonth2["SecondLast"] = -2] = "SecondLast";
-  WeekOfMonth2[WeekOfMonth2["ThirdLast"] = -3] = "ThirdLast";
-  WeekOfMonth2[WeekOfMonth2["FourthLast"] = -4] = "FourthLast";
-  WeekOfMonth2[WeekOfMonth2["FifthLast"] = -5] = "FifthLast";
-})(WeekOfMonth || (WeekOfMonth = {}));
+var WeekOfMonth2;
+(function(WeekOfMonth3) {
+  WeekOfMonth3[WeekOfMonth3["First"] = 1] = "First";
+  WeekOfMonth3[WeekOfMonth3["Second"] = 2] = "Second";
+  WeekOfMonth3[WeekOfMonth3["Third"] = 3] = "Third";
+  WeekOfMonth3[WeekOfMonth3["Fourth"] = 4] = "Fourth";
+  WeekOfMonth3[WeekOfMonth3["Fifth"] = 5] = "Fifth";
+  WeekOfMonth3[WeekOfMonth3["Last"] = -1] = "Last";
+  WeekOfMonth3[WeekOfMonth3["SecondLast"] = -2] = "SecondLast";
+  WeekOfMonth3[WeekOfMonth3["ThirdLast"] = -3] = "ThirdLast";
+  WeekOfMonth3[WeekOfMonth3["FourthLast"] = -4] = "FourthLast";
+  WeekOfMonth3[WeekOfMonth3["FifthLast"] = -5] = "FifthLast";
+})(WeekOfMonth2 || (WeekOfMonth2 = {}));
 var Booking = class {
   get group() {
     return this.extension_data.group || "";
@@ -135470,7 +135524,7 @@ var BookingLinkModalComponent = class _BookingLinkModalComponent {
         \u0275\u0275advance(5);
         \u0275\u0275property("href", \u0275\u0275pipeBind2(14, 9, ctx.ical_link, "url"), \u0275\u0275sanitizeUrl);
       }
-    }, dependencies: [MatDialogClose, IconComponent, MatRipple, SafePipe, SanitizePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n}\n/*# sourceMappingURL=booking-link-modal.component.css.map */"] });
+    }, dependencies: [MatDialogClose, MatRipple, IconComponent, SafePipe, SanitizePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n}\n/*# sourceMappingURL=booking-link-modal.component.css.map */"] });
   }
 };
 (() => {
@@ -137431,7 +137485,7 @@ var DateCalendarComponent = class _DateCalendarComponent extends AsyncHandler {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DateCalendarComponent, selectors: [["date-calendar"]], inputs: { from: "from", to: "to", offset_weekday: "offset_weekday" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DateCalendarComponent, selectors: [["date-calendar"]], inputs: { from: "from", to: "to", offset_weekday: "offset_weekday" }, features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => _DateCalendarComponent),
@@ -137447,14 +137501,14 @@ var DateCalendarComponent = class _DateCalendarComponent extends AsyncHandler {
         \u0275\u0275listener("click", function DateCalendarComponent_Template_button_click_6_listener() {
           return ctx.changeMonth(-1);
         });
-        \u0275\u0275elementStart(7, "app-icon");
+        \u0275\u0275elementStart(7, "icon");
         \u0275\u0275text(8, "chevron_left");
         \u0275\u0275elementEnd()();
         \u0275\u0275elementStart(9, "button", 5);
         \u0275\u0275listener("click", function DateCalendarComponent_Template_button_click_9_listener() {
           return ctx.changeMonth(1);
         });
-        \u0275\u0275elementStart(10, "app-icon");
+        \u0275\u0275elementStart(10, "icon");
         \u0275\u0275text(11, "chevron_right");
         \u0275\u0275elementEnd()()()();
         \u0275\u0275elementStart(12, "div", 6);
@@ -137477,11 +137531,11 @@ var DateCalendarComponent = class _DateCalendarComponent extends AsyncHandler {
         \u0275\u0275advance(3);
         \u0275\u0275property("ngForOf", ctx.date_list);
       }
-    }, dependencies: [NgForOf, NgIf, MatRipple, IconComponent, SlicePipe, DatePipe], encapsulation: 2 });
+    }, dependencies: [CommonModule, NgForOf, NgIf, SlicePipe, DatePipe, IconComponent], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateCalendarComponent, { className: "DateCalendarComponent", filePath: "libs/form-fields/src/lib/date-calendar.component.ts", lineNumber: 105 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateCalendarComponent, { className: "DateCalendarComponent", filePath: "libs/form-fields/src/lib/date-calendar.component.ts", lineNumber: 107 });
 })();
 
 // libs/form-fields/src/lib/date-field.component.ts
@@ -137698,7 +137752,7 @@ var DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
         let _t4;
         \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._tooltip = _t4.first);
       }
-    }, inputs: { from_date: [0, "from", "from_date"], to_date: [0, "to", "to_date"], week_start: "week_start", use_24hr: "use_24hr", disabled: "disabled", short: "short", timezone: "timezone", range: "range" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
+    }, inputs: { from_date: [0, "from", "from_date"], to_date: [0, "to", "to_date"], week_start: "week_start", use_24hr: "use_24hr", disabled: "disabled", short: "short", timezone: "timezone", range: "range" }, features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => _DateFieldComponent),
@@ -137712,7 +137766,7 @@ var DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
         \u0275\u0275elementEnd();
         \u0275\u0275template(5, DateFieldComponent_div_5_Template, 4, 3, "div", 5);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(6, "div", 6)(7, "app-icon");
+        \u0275\u0275elementStart(6, "div", 6)(7, "icon");
         \u0275\u0275text(8, "today");
         \u0275\u0275elementEnd()()();
         \u0275\u0275elementStart(9, "div", 7);
@@ -137731,11 +137785,21 @@ var DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
         \u0275\u0275advance(5);
         \u0275\u0275property("ngIf", ctx.has_error);
       }
-    }, dependencies: [NgIf, NgControlStatus, NgModel, MatRipple, IconComponent, CustomTooltipComponent, DateCalendarComponent, DatePipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [
+      CommonModule,
+      NgIf,
+      DatePipe,
+      FormsModule,
+      NgControlStatus,
+      NgModel,
+      DateCalendarComponent,
+      IconComponent,
+      CustomTooltipComponent
+    ], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateFieldComponent, { className: "DateFieldComponent", filePath: "libs/form-fields/src/lib/date-field.component.ts", lineNumber: 85 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateFieldComponent, { className: "DateFieldComponent", filePath: "libs/form-fields/src/lib/date-field.component.ts", lineNumber: 94 });
 })();
 
 // libs/form-fields/src/lib/duration-field.component.ts
@@ -137787,9 +137851,9 @@ function DurationFieldComponent_button_10_ng_container_2_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r0.timezone && ctx_r0.tz);
   }
 }
-function DurationFieldComponent_button_10_app_icon_5_Template(rf, ctx) {
+function DurationFieldComponent_button_10_icon_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "app-icon", 14);
+    \u0275\u0275elementStart(0, "icon", 14);
     \u0275\u0275text(1, " done ");
     \u0275\u0275elementEnd();
   }
@@ -137808,7 +137872,7 @@ function DurationFieldComponent_button_10_Template(rf, ctx) {
     \u0275\u0275elementStart(3, "div");
     \u0275\u0275text(4);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(5, DurationFieldComponent_button_10_app_icon_5_Template, 2, 0, "app-icon", 12);
+    \u0275\u0275template(5, DurationFieldComponent_button_10_icon_5_Template, 2, 0, "icon", 12);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
@@ -137940,7 +138004,7 @@ var DurationFieldComponent = class _DurationFieldComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DurationFieldComponent, selectors: [["a-duration-field"]], inputs: { max: "max", min: "min", step: "step", time: "time", disabled: "disabled", custom_options: "custom_options", force: "force", use_24hr: "use_24hr", timezone: "timezone" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DurationFieldComponent, selectors: [["a-duration-field"]], inputs: { max: "max", min: "min", step: "step", time: "time", disabled: "disabled", custom_options: "custom_options", force: "force", use_24hr: "use_24hr", timezone: "timezone" }, features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => _DurationFieldComponent),
@@ -137955,7 +138019,7 @@ var DurationFieldComponent = class _DurationFieldComponent {
         \u0275\u0275elementEnd();
         \u0275\u0275template(5, DurationFieldComponent_div_5_Template, 3, 5, "div", 4);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(6, "app-icon", 5);
+        \u0275\u0275elementStart(6, "icon", 5);
         \u0275\u0275text(7, "arrow_drop_down");
         \u0275\u0275elementEnd()();
         \u0275\u0275elementStart(8, "mat-menu", 6, 0);
@@ -137976,11 +138040,332 @@ var DurationFieldComponent = class _DurationFieldComponent {
         \u0275\u0275advance(5);
         \u0275\u0275property("ngForOf", ctx.duration_options);
       }
-    }, dependencies: [NgForOf, NgIf, MatRipple, MatError, IconComponent, MatMenu, MatMenuItem, MatMenuTrigger, DatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n}\nmat-form-field[_ngcontent-%COMP%] {\n  width: 100%;\n}\n/*# sourceMappingURL=duration-field.component.css.map */"] });
+    }, dependencies: [MatMenuModule, MatMenu, MatMenuItem, MatMenuTrigger, MatFormFieldModule, MatError, CommonModule, NgForOf, NgIf, DatePipe, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n}\nmat-form-field[_ngcontent-%COMP%] {\n  width: 100%;\n}\n/*# sourceMappingURL=duration-field.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DurationFieldComponent, { className: "DurationFieldComponent", filePath: "libs/form-fields/src/lib/duration-field.component.ts", lineNumber: 114 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DurationFieldComponent, { className: "DurationFieldComponent", filePath: "libs/form-fields/src/lib/duration-field.component.ts", lineNumber: 118 });
+})();
+
+// libs/form-fields/src/lib/time-field.component.ts
+var _c051 = ["select"];
+var _c130 = ["*"];
+function TimeFieldComponent_div_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 10);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "date");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind3(2, 1, ctx_r0.active_time, ctx_r0.time_format + " (z)", ctx_r0.tz), " ");
+  }
+}
+function TimeFieldComponent_button_10_div_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 17);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "date");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind3(2, 1, ctx_r0.force_time, ctx_r0.time_format + " (z)", ctx_r0.tz), " ");
+  }
+}
+function TimeFieldComponent_button_10_icon_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "icon", 18);
+    \u0275\u0275text(1, " done ");
+    \u0275\u0275elementEnd();
+  }
+}
+function TimeFieldComponent_button_10_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 11);
+    \u0275\u0275listener("click", function TimeFieldComponent_button_10_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.setValue(ctx_r0.force_time));
+    });
+    \u0275\u0275elementStart(1, "div", 12)(2, "div", 13)(3, "div", 14);
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "date");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(6, TimeFieldComponent_button_10_div_6_Template, 3, 5, "div", 15);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(7, TimeFieldComponent_button_10_icon_7_Template, 2, 0, "icon", 16);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", ctx_r0.force_time);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(5, 4, ctx_r0.force_time, ctx_r0.time_format), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r0.timezone && ctx_r0.tz);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.active_time === ctx_r0.force_time);
+  }
+}
+function TimeFieldComponent_button_11_div_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 17);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "date");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const option_r4 = \u0275\u0275nextContext().$implicit;
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind3(2, 1, option_r4.date, ctx_r0.time_format + " (z)", ctx_r0.tz), " ");
+  }
+}
+function TimeFieldComponent_button_11_icon_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "icon", 18);
+    \u0275\u0275text(1, " done ");
+    \u0275\u0275elementEnd();
+  }
+}
+function TimeFieldComponent_button_11_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 11);
+    \u0275\u0275listener("click", function TimeFieldComponent_button_11_Template_button_click_0_listener() {
+      const option_r4 = \u0275\u0275restoreView(_r3).$implicit;
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.setValue(option_r4.id));
+    });
+    \u0275\u0275elementStart(1, "div", 12)(2, "div", 13)(3, "div", 14);
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "date");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(6, TimeFieldComponent_button_11_div_6_Template, 3, 5, "div", 15);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(7, TimeFieldComponent_button_11_icon_7_Template, 2, 0, "icon", 16);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const option_r4 = ctx.$implicit;
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("value", option_r4.id);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(5, 5, option_r4.date, ctx_r0.time_format), " ", ctx_r0.extra_info_fn(option_r4.date), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngIf", ctx_r0.timezone && ctx_r0.tz);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.active_time === option_r4.date);
+  }
+}
+function TimeFieldComponent_mat_error_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "mat-error");
+    \u0275\u0275projection(1);
+    \u0275\u0275elementEnd();
+  }
+}
+var TimeFieldComponent = class _TimeFieldComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this.step = 15;
+    this.no_past_times = true;
+    this.use_24hr = false;
+    this.extra_info_fn = (t) => "";
+    this.from = startOfDay(Date.now()).valueOf();
+    this.timezone = "";
+    this.date = (/* @__PURE__ */ new Date()).valueOf();
+    this.time = format(/* @__PURE__ */ new Date(), "HH:mm");
+    this.active_time = Date.now();
+    this._local_tz = getTimezoneOffsetString(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  }
+  get time_format() {
+    return this.use_24hr ? "HH : mm" : "h : mm a";
+  }
+  get tz() {
+    const tz = this.timezone;
+    if (!tz)
+      return "";
+    const tz_offset = getTimezoneOffsetString(tz);
+    return tz_offset === this._local_tz ? "" : tz_offset;
+  }
+  ngOnInit() {
+    this.show_select = true;
+    this._time_options = this.generateAvailableTimes(this.date, !this.no_past_times, this.step);
+    this.timeout("hide", () => this.show_select = false);
+    this.active_time = this._time_options.find((_3) => _3.id === format(this.date, "HH:mm"))?.date || this.active_time;
+  }
+  ngOnChanges(changes) {
+    if (changes.no_past_times || changes.step || changes.from) {
+      this._time_options = this.generateAvailableTimes(this.date, !this.no_past_times, this.step);
+    }
+  }
+  /** Available time blocks for the selected date */
+  get time_options() {
+    const time = (this.time || "00:00").split(":");
+    const date = set(this.date, { hours: +time[0], minutes: +time[1] });
+    if (date.getMinutes() % 15 !== 0 && !this._time_options.find((time2) => time2.id === format(date, "HH:mm"))) {
+      this._time_options.push({
+        date,
+        id: format(date, "HH:mm")
+      });
+      this._time_options.sort((a, b2) => `${a.id}`.localeCompare(`${b2.id}`));
+    }
+    return this._time_options;
+  }
+  /**
+   * Update the form field value
+   * @param new_value New value to set on the form field
+   */
+  setValue(new_value) {
+    this.time = new_value;
+    if (this._onChange) {
+      const time2 = (this.time || "00:00").split(":");
+      const date2 = startOfMinute(set(this.date, { hours: +time2[0], minutes: +time2[1] }));
+      this._onChange(date2.valueOf());
+    }
+    const time = this.force_time || this.time;
+    const date = startOfMinute(set(this.date, { hours: +time[0], minutes: +time[1] }));
+    this.active_time = this._time_options.find((_3) => _3.id === time)?.date || date;
+  }
+  /**
+   * Update local value when form control value is changed
+   * @param value The new value for the component
+   */
+  writeValue(value) {
+    this.date = value || this.date;
+    let date = startOfMinute(this.date);
+    date = roundToNearestMinutes(date, { nearestTo: 5 });
+    this.time = format(date, "HH:mm");
+    this._time_options = this.generateAvailableTimes(this.date, !this.no_past_times, this.step);
+    const time = this.force_time || this.time;
+    this.active_time = this._time_options.find((_3) => _3.id === time)?.date || date;
+  }
+  setDisabledState(disabled) {
+    this.disabled = disabled;
+    this._time_options = this.generateAvailableTimes(this.date, !this.no_past_times || disabled, this.step);
+  }
+  /**
+   * Registers a callback function that is called when the control's value changes in the UI.
+   * @param fn The callback function to register
+   */
+  registerOnChange(fn3) {
+    this._onChange = fn3;
+  }
+  /**
+   * Registers a callback function is called by the forms API on initialization to update the form model on blur.
+   * @param fn The callback function to register
+   */
+  registerOnTouched(fn3) {
+    this._onTouch = fn3;
+  }
+  /**
+   * Show select field for time options
+   */
+  showSelect() {
+    this.show_select = true;
+    this.timeout("on_shown", () => {
+      if (this.select_field) {
+        this.select_field.focus();
+        this.select_field.open();
+        this.subscription("listen_close", this.select_field.openedChange.subscribe((state2) => {
+          if (!state2) {
+            this.show_select = false;
+          }
+        }));
+      }
+    });
+  }
+  /**
+   * Generate a list of time options for the given date
+   * @param datestamp Date to generate options for
+   * @param show_past Whether past times should be options
+   */
+  generateAvailableTimes(datestamp, show_past, step = 15) {
+    const now = new Date(Math.max(this.from, Date.now()));
+    let date = new Date(datestamp);
+    const blocks = [];
+    if (show_past || !isSameDay(date, now) && isAfter(date, now)) {
+      date = startOfDay(date);
+    } else if (isAfter(date, now)) {
+      date = new Date(now);
+    }
+    date = roundToNearestMinutes(date, { nearestTo: step });
+    const end = endOfDay(date);
+    while (isAfter(end, date)) {
+      blocks.push({
+        date: date.valueOf(),
+        id: format(date, "HH:mm")
+      });
+      date = addMinutes(date, step);
+    }
+    return blocks;
+  }
+  static {
+    this.\u0275fac = /* @__PURE__ */ (() => {
+      let \u0275TimeFieldComponent_BaseFactory;
+      return function TimeFieldComponent_Factory(__ngFactoryType__) {
+        return (\u0275TimeFieldComponent_BaseFactory || (\u0275TimeFieldComponent_BaseFactory = \u0275\u0275getInheritedFactory(_TimeFieldComponent)))(__ngFactoryType__ || _TimeFieldComponent);
+      };
+    })();
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TimeFieldComponent, selectors: [["a-time-field"]], viewQuery: function TimeFieldComponent_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c051, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.select_field = _t4.first);
+      }
+    }, inputs: { step: "step", disabled: "disabled", no_past_times: "no_past_times", use_24hr: "use_24hr", force_time: "force_time", no_error: "no_error", extra_info_fn: "extra_info_fn", from: "from", timezone: "timezone" }, features: [\u0275\u0275ProvidersFeature([
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => _TimeFieldComponent),
+        multi: true
+      }
+    ]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c130, decls: 13, vars: 12, consts: [["menu", "matMenu"], ["time-field", "", "matRipple", "", 1, "flex", "h-12", "w-full", "items-center", "justify-between", "rounded", "border", "border-neutral", "px-2", 3, "disabled", "matMenuTriggerFor"], [1, "flex", "w-1/2", "flex-1", "flex-col", "px-2", "text-left", "leading-tight"], [1, "truncate"], ["class", "truncate text-xs opacity-30", 4, "ngIf"], [1, "text-2xl"], [1, "max-h-[15rem]", "min-w-[18rem]"], ["mat-menu-item", "", "class", "text-left", 3, "value", "click", 4, "ngIf"], ["mat-menu-item", "", "class", "text-left", 3, "value", "click", 4, "ngFor", "ngForOf"], [4, "ngIf"], [1, "truncate", "text-xs", "opacity-30"], ["mat-menu-item", "", 1, "text-left", 3, "click", "value"], [1, "flex", "items-center", "justify-between"], [1, "flex", "flex-col", "leading-tight"], [1, ""], ["class", "text-xs opacity-30", 4, "ngIf"], ["class", "ml-2 text-2xl", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "ml-2", "text-2xl"]], template: function TimeFieldComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275elementStart(0, "button", 1)(1, "div", 2)(2, "div", 3);
+        \u0275\u0275text(3);
+        \u0275\u0275pipe(4, "date");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(5, TimeFieldComponent_div_5_Template, 3, 5, "div", 4);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(6, "icon", 5);
+        \u0275\u0275text(7, "arrow_drop_down");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(8, "mat-menu", 6, 0);
+        \u0275\u0275template(10, TimeFieldComponent_button_10_Template, 8, 7, "button", 7)(11, TimeFieldComponent_button_11_Template, 8, 8, "button", 8);
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(12, TimeFieldComponent_mat_error_12_Template, 2, 0, "mat-error", 9);
+      }
+      if (rf & 2) {
+        const menu_r5 = \u0275\u0275reference(9);
+        \u0275\u0275classProp("opacity-30", ctx.disabled);
+        \u0275\u0275property("disabled", ctx.disabled)("matMenuTriggerFor", menu_r5);
+        \u0275\u0275advance(3);
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 9, ctx.active_time, ctx.time_format), " ");
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", ctx.timezone && ctx.tz);
+        \u0275\u0275advance(5);
+        \u0275\u0275property("ngIf", ctx.force_time);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngForOf", ctx.time_options);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", !ctx.no_error);
+      }
+    }, dependencies: [CommonModule, NgForOf, NgIf, DatePipe, MatMenuModule, MatMenu, MatMenuItem, MatMenuTrigger, MatFormFieldModule, MatError, IconComponent], styles: ["\n\nmat-form-field[_ngcontent-%COMP%] {\n  width: 100%;\n}\n/*# sourceMappingURL=time-field.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TimeFieldComponent, { className: "TimeFieldComponent", filePath: "libs/form-fields/src/lib/time-field.component.ts", lineNumber: 125 });
 })();
 
 // libs/catering/src/lib/catering-item.class.ts
@@ -138118,38 +138503,6 @@ function parseRecurrence(data) {
     pattern: data.pattern,
     days_of_week: data.days_of_week?.map((_3) => typeof _3 === "number" ? DAYS_OF_WEEK[_3] : _3) || []
   };
-}
-function formatRecurrence({ interval: interval3, pattern, start, end, occurrences }) {
-  let details = "";
-  if (interval3) {
-    switch (pattern) {
-      case "daily":
-        details = details.concat(interval3 > 1 ? `Every ${interval3} days` : "Daily");
-        if (occurrences > 1)
-          end = addDays(start || Date.now(), (occurrences - 1) * interval3).valueOf();
-        break;
-      case "weekly":
-        details = details.concat(interval3 > 1 ? `Every ${interval3} weeks` : "Weekly");
-        if (occurrences > 1)
-          end = addWeeks(start || Date.now(), (occurrences - 1) * interval3).valueOf();
-        break;
-      case "month_day":
-      case "monthly":
-        details = details.concat(interval3 > 1 ? `Every ${interval3} months` : "Monthly");
-        if (occurrences > 1)
-          end = addMonths(start || Date.now(), (occurrences - 1) * interval3).valueOf();
-        break;
-      case "yearly":
-        details = details.concat(interval3 > 1 ? `Every ${interval3} yeats` : "Yearly");
-        if (occurrences > 1)
-          end = addYears(start || Date.now(), (occurrences - 1) * interval3).valueOf();
-        break;
-    }
-    if (occurrences >= 1) {
-      details = details.concat(`, until ${format(end, "MMM do, yyyy")}`);
-    }
-  }
-  return details;
 }
 
 // libs/events/src/lib/event.class.ts
@@ -138400,7 +138753,7 @@ function showStaff(id) {
 }
 
 // libs/form-fields/src/lib/user-search-field.component.ts
-var _c051 = ["input"];
+var _c052 = ["input"];
 var _c131 = (a0) => ({ name: a0 });
 function UserSearchFieldComponent_mat_spinner_6_Template(rf, ctx) {
   if (rf & 1) {
@@ -138577,13 +138930,13 @@ var UserSearchFieldComponent = class _UserSearchFieldComponent extends AsyncHand
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserSearchFieldComponent, selectors: [["a-user-search-field"]], viewQuery: function UserSearchFieldComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c051, 5, ElementRef);
+        \u0275\u0275viewQuery(_c052, 5, ElementRef);
       }
       if (rf & 2) {
         let _t4;
         \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._input_el = _t4.first);
       }
-    }, inputs: { disabled: "disabled", placeholder: "placeholder", options: "options", guests: "guests", error: "error", validate: "validate", empty_fn: "empty_fn", filter: "filter", query_fn: "query_fn" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
+    }, inputs: { disabled: "disabled", placeholder: "placeholder", options: "options", guests: "guests", error: "error", validate: "validate", empty_fn: "empty_fn", filter: "filter", query_fn: "query_fn" }, features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => _UserSearchFieldComponent),
@@ -138640,15 +138993,37 @@ var UserSearchFieldComponent = class _UserSearchFieldComponent extends AsyncHand
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", !(ctx.user_list == null ? null : ctx.user_list.length) && (ctx.search_str || ctx.error));
       }
-    }, dependencies: [NgForOf, NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatFormField, MatPrefix, MatSuffix, MatInput, MatOption, MatAutocomplete, MatAutocompleteTrigger, IconComponent, VirtualKeyboardComponent, MatProgressSpinner, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\napp-icon[_ngcontent-%COMP%] {\n  top: 0.15em;\n  left: -0.15em;\n}\n/*# sourceMappingURL=user-search-field.component.css.map */"] });
+    }, dependencies: [
+      CommonModule,
+      NgForOf,
+      NgIf,
+      MatFormFieldModule,
+      MatFormField,
+      MatPrefix,
+      MatSuffix,
+      MatInputModule,
+      MatInput,
+      MatProgressSpinnerModule,
+      MatProgressSpinner,
+      MatAutocompleteModule,
+      MatAutocomplete,
+      MatOption,
+      MatAutocompleteTrigger,
+      FormsModule,
+      DefaultValueAccessor,
+      NgControlStatus,
+      NgModel,
+      IconComponent,
+      TranslatePipe
+    ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\napp-icon[_ngcontent-%COMP%] {\n  top: 0.15em;\n  left: -0.15em;\n}\n/*# sourceMappingURL=user-search-field.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserSearchFieldComponent, { className: "UserSearchFieldComponent", filePath: "libs/form-fields/src/lib/user-search-field.component.ts", lineNumber: 126 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserSearchFieldComponent, { className: "UserSearchFieldComponent", filePath: "libs/form-fields/src/lib/user-search-field.component.ts", lineNumber: 145 });
 })();
 
 // libs/explore/src/lib/set-datetime-modal.component.ts
-var _c052 = () => ({ standalone: true });
+var _c053 = () => ({ standalone: true });
 function SetDatetimeModalComponent_main_6_div_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 7)(1, "div", 13)(2, "label");
@@ -138711,7 +139086,7 @@ function SetDatetimeModalComponent_main_6_Template(rf, ctx) {
     \u0275\u0275advance(5);
     \u0275\u0275property("to", ctx_r1.book_until);
     \u0275\u0275advance(6);
-    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(12, _c052))("use_24hr", ctx_r1.use_24hr_time);
+    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(12, _c053))("use_24hr", ctx_r1.use_24hr_time);
     \u0275\u0275advance(4);
     \u0275\u0275property("time", (tmp_8_0 = ctx_r1.form.get("date")) == null ? null : tmp_8_0.value)("max", 10 * 60)("min", 60)("step", 60)("use_24hr", ctx_r1.use_24hr_time);
   }
@@ -138757,7 +139132,7 @@ var SetDatetimeModalComponent = class _SetDatetimeModalComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("mat-dialog-close", ctx.form.value);
       }
-    }, dependencies: [NgIf, IconComponent, MatRipple, MatDialogClose, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, UserSearchFieldComponent], encapsulation: 2 });
+    }, dependencies: [NgIf, MatRipple, MatDialogClose, IconComponent, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, UserSearchFieldComponent], encapsulation: 2 });
   }
 };
 (() => {
@@ -138882,7 +139257,7 @@ var ExploreDeskInfoComponent = class _ExploreDeskInfoComponent {
 })();
 
 // libs/explore/src/lib/explore-device-info.component.ts
-var _c053 = ["explore-device-info", ""];
+var _c054 = ["explore-device-info", ""];
 function ExploreDeviceInfoComponent_ng_template_5_p_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "p", 15)(1, "label");
@@ -139092,7 +139467,7 @@ var ExploreDeviceInfoComponent = class _ExploreDeviceInfoComponent extends Async
     return __async(this, null, function* () {
       if (this.username)
         return;
-      const mod = Oa(this._details.system, "LocationServices");
+      const mod = Ea(this._details.system, "LocationServices");
       if (!mod)
         return;
       this.username = "Loading...";
@@ -139106,7 +139481,7 @@ var ExploreDeviceInfoComponent = class _ExploreDeviceInfoComponent extends Async
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreDeviceInfoComponent, selectors: [["", "explore-device-info", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c053, decls: 7, vars: 9, consts: [["dot", ""], ["device_tooltip", ""], ["name", "radius", 1, "radius", "center", "border-blue-600", "absolute", "rounded-full", "border-8", "border-dashed", "bg-info", "bg-opacity-25"], ["shadow", "", 1, "center", "absolute", "h-8", "w-8", "rounded-full", "bg-neutral"], ["name", "dot", 1, "center", "absolute", "h-3", "w-3", "rounded-full", "border-2", "border-white", "shadow"], ["customTooltip", "", 1, "pointer-events-auto", "absolute", "inset-0", 3, "mouseenter", "content", "backdrop", "xPosition", "yPosition", "hover"], ["name", "device-info", 1, "pointer-events-none", "left-0", "top-0", "mx-2", "w-64", "rounded", "bg-base-100", "p-4", "shadow", 3, "mouseleave"], [1, "arrow"], [1, "details"], ["class", "break-words", 4, "ngIf"], ["type", "", 4, "ngIf"], ["os", "", 4, "ngIf"], ["ssid", "", 4, "ngIf"], ["username", "", 4, "ngIf"], ["user", "", 4, "ngIf"], [1, "break-words"], ["type", ""], ["os", ""], ["ssid", ""], ["username", ""], ["user", ""]], template: function ExploreDeviceInfoComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreDeviceInfoComponent, selectors: [["", "explore-device-info", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c054, decls: 7, vars: 9, consts: [["dot", ""], ["device_tooltip", ""], ["name", "radius", 1, "radius", "center", "border-blue-600", "absolute", "rounded-full", "border-8", "border-dashed", "bg-info", "bg-opacity-25"], ["shadow", "", 1, "center", "absolute", "h-8", "w-8", "rounded-full", "bg-neutral"], ["name", "dot", 1, "center", "absolute", "h-3", "w-3", "rounded-full", "border-2", "border-white", "shadow"], ["customTooltip", "", 1, "pointer-events-auto", "absolute", "inset-0", 3, "mouseenter", "content", "backdrop", "xPosition", "yPosition", "hover"], ["name", "device-info", 1, "pointer-events-none", "left-0", "top-0", "mx-2", "w-64", "rounded", "bg-base-100", "p-4", "shadow", 3, "mouseleave"], [1, "arrow"], [1, "details"], ["class", "break-words", 4, "ngIf"], ["type", "", 4, "ngIf"], ["os", "", 4, "ngIf"], ["ssid", "", 4, "ngIf"], ["username", "", 4, "ngIf"], ["user", "", 4, "ngIf"], [1, "break-words"], ["type", ""], ["os", ""], ["ssid", ""], ["username", ""], ["user", ""]], template: function ExploreDeviceInfoComponent_Template(rf, ctx) {
       if (rf & 1) {
         const _r1 = \u0275\u0275getCurrentView();
         \u0275\u0275element(0, "div", 2)(1, "div", 3)(2, "div", 4, 0);
@@ -139209,7 +139584,7 @@ var EventLinkModalComponent = class _EventLinkModalComponent {
         \u0275\u0275advance(8);
         \u0275\u0275property("mat-dialog-close", ctx.has_actioned);
       }
-    }, dependencies: [MatDialogClose, IconComponent, MatRipple, SafePipe, SanitizePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n}\n/*# sourceMappingURL=event-link-modal.component.css.map */"] });
+    }, dependencies: [MatDialogClose, MatRipple, IconComponent, SafePipe, SanitizePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n}\n/*# sourceMappingURL=event-link-modal.component.css.map */"] });
   }
 };
 (() => {
@@ -140183,7 +140558,7 @@ function generateQRCode(code, colorLight = "#fff0", colorDark = "#000") {
 }
 
 // libs/explore/src/lib/explore-book-qr.component.ts
-var _c054 = (a0) => ({ name: a0 });
+var _c055 = (a0) => ({ name: a0 });
 var DEFAULT_PATH = `workplace/#/explore?space={{id}}`;
 var ExploreBookQrComponent = class _ExploreBookQrComponent {
   constructor(_data, _settings) {
@@ -140214,11 +140589,11 @@ var ExploreBookQrComponent = class _ExploreBookQrComponent {
       }
       if (rf & 2) {
         \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 2, "EXPLORE.BOOK_RESOURCE", \u0275\u0275pureFunction1(5, _c054, ctx.space == null ? null : ctx.space.name)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 2, "EXPLORE.BOOK_RESOURCE", \u0275\u0275pureFunction1(5, _c055, ctx.space == null ? null : ctx.space.name)), " ");
         \u0275\u0275advance(7);
         \u0275\u0275property("src", ctx.qr_code, \u0275\u0275sanitizeUrl);
       }
-    }, dependencies: [IconComponent, MatDialogClose, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [MatDialogClose, IconComponent, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -140466,7 +140841,7 @@ var ExploreBookingModalComponent = class _ExploreBookingModalComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(8, 8, ctx.loading))("ngIfElse", load_state_r3);
       }
-    }, dependencies: [NgIf, IconComponent, MatFormField, MatError, MatRipple, MatDialogClose, MatInput, MatProgressSpinner, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, DurationFieldComponent, UserSearchFieldComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\nheader[_ngcontent-%COMP%] {\n  max-width: calc(100vw + 100%);\n}\n[load][_ngcontent-%COMP%] {\n  width: 32rem;\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=explore-booking-modal.component.css.map */"] });
+    }, styles: ["\n\nheader[_ngcontent-%COMP%] {\n  max-width: calc(100vw + 100%);\n}\n[load][_ngcontent-%COMP%] {\n  width: 32rem;\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=explore-booking-modal.component.css.map */"] });
   }
 };
 (() => {
@@ -140662,7 +141037,7 @@ var ExploreSpaceInfoComponent = class _ExploreSpaceInfoComponent {
         \u0275\u0275property("content", space_tooltip_r4)("backdrop", false)("xPosition", "center")("yPosition", "center")("hover", true)("delay", 3e3);
         \u0275\u0275attribute("id", (ctx.space == null ? null : ctx.space.map_id) || (ctx.space == null ? null : ctx.space.id));
       }
-    }, dependencies: [NgForOf, NgIf, CustomTooltipComponent, AuthenticatedImageDirective, UpperCasePipe, TranslatePipe], styles: ["\n\n[name=space-info][_ngcontent-%COMP%] {\n  width: 16rem;\n}\n[status][_ngcontent-%COMP%] {\n  background-color: #43a047;\n  font-weight: 500;\n}\n[status].busy[_ngcontent-%COMP%] {\n  background-color: #e53935;\n}\n[status].pending[_ngcontent-%COMP%] {\n  background-color: #ffb300;\n}\n[status].not-bookable[_ngcontent-%COMP%] {\n  background-color: #757575;\n}\n/*# sourceMappingURL=explore-space-info.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, AuthenticatedImageDirective, CustomTooltipComponent, UpperCasePipe, TranslatePipe], styles: ["\n\n[name=space-info][_ngcontent-%COMP%] {\n  width: 16rem;\n}\n[status][_ngcontent-%COMP%] {\n  background-color: #43a047;\n  font-weight: 500;\n}\n[status].busy[_ngcontent-%COMP%] {\n  background-color: #e53935;\n}\n[status].pending[_ngcontent-%COMP%] {\n  background-color: #ffb300;\n}\n[status].not-bookable[_ngcontent-%COMP%] {\n  background-color: #757575;\n}\n/*# sourceMappingURL=explore-space-info.component.css.map */"] });
   }
 };
 (() => {
@@ -140705,7 +141080,7 @@ var ExploreSpacesService = class _ExploreSpacesService extends AsyncHandler {
       if (!list2?.length)
         return;
       for (const space of list2) {
-        const mod = Oa(space.id, "Bookings");
+        const mod = Ea(space.id, "Bookings");
         let binding = mod.binding("bookings");
         this.subscription(`b-${space.id}`, binding.listen().subscribe((d) => this.handleBookingsChange(list2, space, d)));
         this.subscription(`b-bind-${space.id}`, binding.bind());
@@ -141293,52 +141668,8 @@ var ExploreMapControlComponent = class _ExploreMapControlComponent extends Async
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreMapControlComponent, { className: "ExploreMapControlComponent", filePath: "libs/explore/src/lib/explore-map-control.component.ts", lineNumber: 70 });
 })();
 
-// libs/users/src/lib/find-availability-modal/user-availability.component.ts
-function UserAvailabilityComponent_div_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 2)(1, "div", 3);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "date");
-    \u0275\u0275pipe(4, "date");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const event_r1 = ctx.$implicit;
-    \u0275\u0275styleProp("left", event_r1.start + "%")("width", event_r1.size + "%");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(3, 6, event_r1.date, "shortTime"), " - ", \u0275\u0275pipeBind2(4, 9, event_r1.date.valueOf() + event_r1.duration * 60 * 1e3, "shortTime"), " ");
-  }
-}
-var UserAvailabilityComponent = class _UserAvailabilityComponent {
-  constructor() {
-    this.availability = [];
-    this.date = Date.now();
-  }
-  static {
-    this.\u0275fac = function UserAvailabilityComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _UserAvailabilityComponent)();
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserAvailabilityComponent, selectors: [["user-availability-list"]], inputs: { user: "user", availability: "availability", date: "date" }, standalone: false, decls: 2, vars: 1, consts: [[1, "relative", "inset-y-0", "h-32", "w-[120rem]", "border-b", "border-base-200"], ["event", "", "class", "border-red-700 absolute inset-y-0 overflow-hidden rounded border bg-error p-2 text-white", 3, "left", "width", 4, "ngFor", "ngForOf"], ["event", "", 1, "border-red-700", "absolute", "inset-y-0", "overflow-hidden", "rounded", "border", "bg-error", "p-2", "text-white"], [1, "max-w-full", "text-xs"]], template: function UserAvailabilityComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "div", 0);
-        \u0275\u0275template(1, UserAvailabilityComponent_div_1_Template, 5, 12, "div", 1);
-        \u0275\u0275elementEnd();
-      }
-      if (rf & 2) {
-        \u0275\u0275advance();
-        \u0275\u0275property("ngForOf", ctx.availability);
-      }
-    }, dependencies: [NgForOf, DatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=user-availability.component.css.map */"] });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserAvailabilityComponent, { className: "UserAvailabilityComponent", filePath: "libs/users/src/lib/find-availability-modal/user-availability.component.ts", lineNumber: 44 });
-})();
-
 // libs/users/src/lib/find-availability-modal/find-availability-modal.component.ts
-var _c055 = ["container"];
+var _c056 = ["container"];
 var _c132 = () => [];
 function FindAvailabilityModalComponent_div_13_Template(rf, ctx) {
   if (rf & 1) {
@@ -141563,7 +141894,7 @@ var FindAvailabilityModalComponent = class _FindAvailabilityModalComponent exten
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FindAvailabilityModalComponent, selectors: [["find-availability-modal"]], viewQuery: function FindAvailabilityModalComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c055, 7);
+        \u0275\u0275viewQuery(_c056, 7);
       }
       if (rf & 2) {
         let _t4;
@@ -141691,7 +142022,7 @@ var FindAvailabilityModalComponent = class _FindAvailabilityModalComponent exten
         \u0275\u0275advance(5);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(46, 34, "COMMON.BACK_TO_FORM"), " ");
       }
-    }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatDialogClose, DateFieldComponent, UserSearchFieldComponent, IconComponent, UserAvatarComponent, MatRipple, UserAvailabilityComponent, AsyncPipe, DatePipe, DurationPipe, TranslatePipe], styles: ["\n\n.grid[_ngcontent-%COMP%] {\n  grid-template-columns: 6rem 1fr;\n  grid-template-rows: 2.5rem minmax(0, 1fr);\n}\n[disabled=true][_ngcontent-%COMP%], \n[disabled=true][_ngcontent-%COMP%]   [header][_ngcontent-%COMP%] {\n  background: var(--b3) !important;\n  pointer-events: none;\n}\n[disabled=true][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%] {\n  opacity: 0.3;\n}\n/*# sourceMappingURL=find-availability-modal.component.css.map */"] });
+    }, styles: ["\n\n.grid[_ngcontent-%COMP%] {\n  grid-template-columns: 6rem 1fr;\n  grid-template-rows: 2.5rem minmax(0, 1fr);\n}\n[disabled=true][_ngcontent-%COMP%], \n[disabled=true][_ngcontent-%COMP%]   [header][_ngcontent-%COMP%] {\n  background: var(--b3) !important;\n  pointer-events: none;\n}\n[disabled=true][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%] {\n  opacity: 0.3;\n}\n/*# sourceMappingURL=find-availability-modal.component.css.map */"] });
   }
 };
 (() => {
@@ -141972,7 +142303,7 @@ var NewUserModalComponent = class _NewUserModalComponent extends AsyncHandler {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", !ctx.loading);
       }
-    }, dependencies: [NgIf, MatDialogClose, IconComponent, MatRipple, MatProgressSpinner, UserFormComponent, TranslatePipe], styles: ["\n\nmain[_ngcontent-%COMP%] {\n  min-height: 20em !important;\n  width: 100%;\n}\nfooter[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  min-width: 8em;\n}\n/*# sourceMappingURL=new-user-modal.component.css.map */"] });
+    }, dependencies: [NgIf, MatDialogClose, MatRipple, MatProgressSpinner, IconComponent, UserFormComponent, TranslatePipe], styles: ["\n\nmain[_ngcontent-%COMP%] {\n  min-height: 20em !important;\n  width: 100%;\n}\nfooter[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  min-width: 8em;\n}\n/*# sourceMappingURL=new-user-modal.component.css.map */"] });
   }
 };
 (() => {
@@ -141980,7 +142311,7 @@ var NewUserModalComponent = class _NewUserModalComponent extends AsyncHandler {
 })();
 
 // libs/form-fields/src/lib/action-field.component.ts
-var _c056 = ["*"];
+var _c057 = ["*"];
 var ActionFieldComponent = class _ActionFieldComponent {
   constructor() {
     this.on_action = new EventEmitter();
@@ -141999,7 +142330,7 @@ var ActionFieldComponent = class _ActionFieldComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ActionFieldComponent, selectors: [["an-action-field"]], inputs: { name: "name", disabled: "disabled" }, outputs: { on_action: "onAction" }, standalone: false, ngContentSelectors: _c056, decls: 5, vars: 3, consts: [["type", "button", "role", "button", "form-field", "", "tabindex", "0", 1, "flex", "w-full", "items-center", "rounded", "border", "border-base-200", "p-2", "hover:border-base-200", 3, "keydown.enter"], ["placeholder", "", 1, "w-0", "flex-1", "truncate", 3, "click"], [1, "text-xl", 3, "click"]], template: function ActionFieldComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ActionFieldComponent, selectors: [["an-action-field"]], inputs: { name: "name", disabled: "disabled" }, outputs: { on_action: "onAction" }, ngContentSelectors: _c057, decls: 5, vars: 3, consts: [["type", "button", "role", "button", "form-field", "", "tabindex", "0", 1, "flex", "w-full", "items-center", "rounded", "border", "border-base-200", "p-2", "hover:border-base-200", 3, "keydown.enter"], ["placeholder", "", 1, "w-0", "flex-1", "truncate", 3, "click"], [1, "text-xl", 3, "click"]], template: function ActionFieldComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275projectionDef();
         \u0275\u0275elementStart(0, "button", 0);
@@ -142012,8 +142343,8 @@ var ActionFieldComponent = class _ActionFieldComponent {
         });
         \u0275\u0275projection(2);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(3, "app-icon", 2);
-        \u0275\u0275listener("click", function ActionFieldComponent_Template_app_icon_click_3_listener() {
+        \u0275\u0275elementStart(3, "icon", 2);
+        \u0275\u0275listener("click", function ActionFieldComponent_Template_icon_click_3_listener() {
           return ctx.performAction();
         });
         \u0275\u0275text(4);
@@ -142024,11 +142355,11 @@ var ActionFieldComponent = class _ActionFieldComponent {
         \u0275\u0275advance(4);
         \u0275\u0275textInterpolate1(" arrow_drop_", ctx.show_tooltip ? "up" : "down", " ");
       }
-    }, dependencies: [IconComponent], styles: ["\n\n[_nghost-%COMP%]    > div[_ngcontent-%COMP%]:hover {\n  box-shadow: inset 0 0 0 1px #000;\n}\n/*# sourceMappingURL=action-field.component.css.map */"] });
+    }, dependencies: [CommonModule, IconComponent], styles: ["\n\n[_nghost-%COMP%]    > div[_ngcontent-%COMP%]:hover {\n  box-shadow: inset 0 0 0 1px #000;\n}\n/*# sourceMappingURL=action-field.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ActionFieldComponent, { className: "ActionFieldComponent", filePath: "libs/form-fields/src/lib/action-field.component.ts", lineNumber: 37 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ActionFieldComponent, { className: "ActionFieldComponent", filePath: "libs/form-fields/src/lib/action-field.component.ts", lineNumber: 39 });
 })();
 
 // libs/form-fields/src/lib/item-list-field.component.ts
@@ -142138,7 +142469,7 @@ var ItemListFieldComponent = class _ItemListFieldComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ItemListFieldComponent, selectors: [["item-list-field"]], inputs: { separators: "separators", placeholder: "placeholder" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ItemListFieldComponent, selectors: [["item-list-field"]], inputs: { separators: "separators", placeholder: "placeholder" }, features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         /* istanbul ignore next */
@@ -142165,15 +142496,15 @@ var ItemListFieldComponent = class _ItemListFieldComponent {
         \u0275\u0275advance();
         \u0275\u0275property("placeholder", ctx.placeholder || "User groups...")("matChipInputFor", chipList_r5)("matChipInputSeparatorKeyCodes", ctx.separators)("matChipInputAddOnBlur", true);
       }
-    }, dependencies: [NgForOf, MatFormField, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow, IconComponent], encapsulation: 2 });
+    }, dependencies: [MatFormFieldModule, MatFormField, MatChipsModule, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow, IconComponent, CommonModule, NgForOf], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ItemListFieldComponent, { className: "ItemListFieldComponent", filePath: "libs/form-fields/src/lib/item-list-field.component.ts", lineNumber: 98 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ItemListFieldComponent, { className: "ItemListFieldComponent", filePath: "libs/form-fields/src/lib/item-list-field.component.ts", lineNumber: 101 });
 })();
 
 // libs/form-fields/src/lib/booking-rules-form.component.ts
-var _c057 = () => ({ standalone: true });
+var _c058 = () => ({ standalone: true });
 function BookingRulesFormComponent_mat_option_14_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "mat-option", 27);
@@ -142398,9 +142729,9 @@ function BookingRulesFormComponent_div_80_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 6, ctx_r1.form.value.rules.hidden ? "BOOKINGS.BETWEEN_DATES_ALLOW" : "BOOKINGS.BETWEEN_DATES_DENY"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275property("ngModel", ctx_r1.form.value.conditions.is_period[0])("ngModelOptions", \u0275\u0275pureFunction0(8, _c057));
+    \u0275\u0275property("ngModel", ctx_r1.form.value.conditions.is_period[0])("ngModelOptions", \u0275\u0275pureFunction0(8, _c058));
     \u0275\u0275advance();
-    \u0275\u0275property("from", ctx_r1.form.value.conditions.is_period[0])("ngModel", ctx_r1.form.value.conditions.is_period[1])("ngModelOptions", \u0275\u0275pureFunction0(9, _c057));
+    \u0275\u0275property("from", ctx_r1.form.value.conditions.is_period[0])("ngModel", ctx_r1.form.value.conditions.is_period[1])("ngModelOptions", \u0275\u0275pureFunction0(9, _c058));
   }
 }
 function BookingRulesFormComponent_div_81_mat_option_7_Template(rf, ctx) {
@@ -142479,11 +142810,11 @@ function BookingRulesFormComponent_div_81_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 8, ctx_r1.form.value.rules.hidden ? "BOOKINGS.BETWEEN_HOURS_ALLOW" : "BOOKINGS.BETWEEN_HOURS_DENY"), " ");
     \u0275\u0275advance(4);
-    \u0275\u0275property("ngModel", ctx_r1.form.value.conditions.is_between[0] || 6)("ngModelOptions", \u0275\u0275pureFunction0(12, _c057));
+    \u0275\u0275property("ngModel", ctx_r1.form.value.conditions.is_between[0] || 6)("ngModelOptions", \u0275\u0275pureFunction0(12, _c058));
     \u0275\u0275advance();
     \u0275\u0275property("ngForOf", ctx_r1.time_blocks);
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngModel", ctx_r1.form.value.conditions.is_between[1] || 18)("ngModelOptions", \u0275\u0275pureFunction0(13, _c057));
+    \u0275\u0275property("ngModel", ctx_r1.form.value.conditions.is_between[1] || 18)("ngModelOptions", \u0275\u0275pureFunction0(13, _c058));
     \u0275\u0275advance();
     \u0275\u0275property("ngForOf", ctx_r1.time_blocks);
     \u0275\u0275advance(2);
@@ -142622,7 +142953,7 @@ var BookingRulesFormComponent = class _BookingRulesFormComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookingRulesFormComponent, selectors: [["booking-rules-form"]], inputs: { ruleset: "ruleset", save: "save" }, outputs: { rulesetChange: "rulesetChange" }, standalone: false, features: [\u0275\u0275NgOnChangesFeature], decls: 83, vars: 74, consts: [[1, "flex", "flex-col", "space-y-2", 3, "formGroup"], [1, "flex", "items-center", "space-x-4"], [1, "flex", "flex-1", "flex-col"], ["for", "zone"], ["appearance", "outline"], ["name", "zone", "formControlName", "zone"], ["value", "*"], [3, "value", 4, "ngFor", "ngForOf"], ["for", "name"], ["matInput", "", "name", "name", "formControlName", "name", "placeholder", "Ruleset Name"], ["formGroupName", "rules", 1, "flex", "items-center", "space-x-4", "pb-4"], ["formControlName", "hidden", 3, "name", "info"], ["formControlName", "auto_approve", 3, "name", "info", 4, "ngIf"], [1, "flex", "flex-col"], ["name", "zone", "multiple", "", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], ["value", "groups"], ["value", "locations"], ["value", "tags"], ["value", "min_length"], ["value", "max_length"], ["value", "is_before"], ["value", "is_after"], ["value", "is_between"], ["value", "is_period"], ["value", "resource_ids"], ["class", "flex flex-col", "formGroupName", "conditions", 4, "ngIf"], ["class", "flex items-center space-x-2", "formGroupName", "conditions", 4, "ngIf"], [3, "value"], ["formControlName", "auto_approve", 3, "name", "info"], ["formGroupName", "conditions", 1, "flex", "flex-col"], ["for", "groups"], ["name", "groups", "formControlName", "groups", 3, "placeholder"], ["for", "locations"], ["name", "locations", "formControlName", "locations", 3, "placeholder"], ["for", "tags"], ["name", "tags", "formControlName", "tags", 3, "placeholder"], ["formGroupName", "conditions", 1, "flex", "items-center", "space-x-2"], ["class", "flex flex-1 flex-col", 4, "ngIf"], ["for", "min_length"], ["name", "min_length", "formControlName", "min_length", 3, "min", "max", "step"], ["for", "max_length"], ["name", "max_length", "formControlName", "max_length", 3, "min", "max", "step"], ["for", "is-before"], ["appearance", "outline", 1, "flex-1"], ["name", "is-before", "formControlName", "is_before"], ["for", "is-after"], ["name", "is-after", "formControlName", "is_after"], [1, "flex", "items-center", "space-x-2"], [1, "flex-1", 3, "ngModelChange", "ngModel", "ngModelOptions"], [1, "flex-1", 3, "ngModelChange", "from", "ngModel", "ngModelOptions"], ["for", "is_between"], [1, "flex", "w-full", "items-center", "space-x-2"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions"], ["name", "end-time", 3, "ngModelChange", "ngModel", "ngModelOptions"], [4, "ngFor", "ngForOf"], [3, "value", 4, "ngIf"], ["for", "resource_ids"], ["name", "resource_ids", "formControlName", "resource_ids", 3, "placeholder"]], template: function BookingRulesFormComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookingRulesFormComponent, selectors: [["booking-rules-form"]], inputs: { ruleset: "ruleset", save: "save" }, outputs: { rulesetChange: "rulesetChange" }, features: [\u0275\u0275NgOnChangesFeature], decls: 83, vars: 74, consts: [[1, "flex", "flex-col", "space-y-2", 3, "formGroup"], [1, "flex", "items-center", "space-x-4"], [1, "flex", "flex-1", "flex-col"], ["for", "zone"], ["appearance", "outline"], ["name", "zone", "formControlName", "zone"], ["value", "*"], [3, "value", 4, "ngFor", "ngForOf"], ["for", "name"], ["matInput", "", "name", "name", "formControlName", "name", "placeholder", "Ruleset Name"], ["formGroupName", "rules", 1, "flex", "items-center", "space-x-4", "pb-4"], ["formControlName", "hidden", 3, "name", "info"], ["formControlName", "auto_approve", 3, "name", "info", 4, "ngIf"], [1, "flex", "flex-col"], ["name", "zone", "multiple", "", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], ["value", "groups"], ["value", "locations"], ["value", "tags"], ["value", "min_length"], ["value", "max_length"], ["value", "is_before"], ["value", "is_after"], ["value", "is_between"], ["value", "is_period"], ["value", "resource_ids"], ["class", "flex flex-col", "formGroupName", "conditions", 4, "ngIf"], ["class", "flex items-center space-x-2", "formGroupName", "conditions", 4, "ngIf"], [3, "value"], ["formControlName", "auto_approve", 3, "name", "info"], ["formGroupName", "conditions", 1, "flex", "flex-col"], ["for", "groups"], ["name", "groups", "formControlName", "groups", 3, "placeholder"], ["for", "locations"], ["name", "locations", "formControlName", "locations", 3, "placeholder"], ["for", "tags"], ["name", "tags", "formControlName", "tags", 3, "placeholder"], ["formGroupName", "conditions", 1, "flex", "items-center", "space-x-2"], ["class", "flex flex-1 flex-col", 4, "ngIf"], ["for", "min_length"], ["name", "min_length", "formControlName", "min_length", 3, "min", "max", "step"], ["for", "max_length"], ["name", "max_length", "formControlName", "max_length", 3, "min", "max", "step"], ["for", "is-before"], ["appearance", "outline", 1, "flex-1"], ["name", "is-before", "formControlName", "is_before"], ["for", "is-after"], ["name", "is-after", "formControlName", "is_after"], [1, "flex", "items-center", "space-x-2"], [1, "flex-1", 3, "ngModelChange", "ngModel", "ngModelOptions"], [1, "flex-1", 3, "ngModelChange", "from", "ngModel", "ngModelOptions"], ["for", "is_between"], [1, "flex", "w-full", "items-center", "space-x-2"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions"], ["name", "end-time", 3, "ngModelChange", "ngModel", "ngModelOptions"], [4, "ngFor", "ngForOf"], [3, "value", 4, "ngIf"], ["for", "resource_ids"], ["name", "resource_ids", "formControlName", "resource_ids", 3, "placeholder"]], template: function BookingRulesFormComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "label", 3);
         \u0275\u0275text(4);
@@ -142738,7 +143069,7 @@ var BookingRulesFormComponent = class _BookingRulesFormComponent {
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(40, 49, "BOOKINGS.CONDITIONS"));
         \u0275\u0275advance(3);
         \u0275\u0275twoWayProperty("ngModel", ctx.available_conditions);
-        \u0275\u0275property("ngModelOptions", \u0275\u0275pureFunction0(73, _c057))("placeholder", \u0275\u0275pipeBind1(43, 51, "BOOKINGS.CONDITIONS_PLACEHOLDER"));
+        \u0275\u0275property("ngModelOptions", \u0275\u0275pureFunction0(73, _c058))("placeholder", \u0275\u0275pipeBind1(43, 51, "BOOKINGS.CONDITIONS_PLACEHOLDER"));
         \u0275\u0275advance(3);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(46, 53, "BOOKINGS.CONDITION_GROUPS"), " ");
         \u0275\u0275advance(3);
@@ -142778,11 +143109,37 @@ var BookingRulesFormComponent = class _BookingRulesFormComponent {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.available_conditions.includes("resource_ids"));
       }
-    }, dependencies: [NgForOf, NgIf, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, FormGroupName, MatFormField, MatError, MatInput, MatSelect, MatOption, SettingsToggleComponent, DateFieldComponent, DurationFieldComponent, ItemListFieldComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=booking-rules-form.component.css.map */"] });
+    }, dependencies: [
+      CommonModule,
+      NgForOf,
+      NgIf,
+      AsyncPipe,
+      DatePipe,
+      MatFormFieldModule,
+      MatFormField,
+      MatError,
+      FormsModule,
+      DefaultValueAccessor,
+      NgControlStatus,
+      NgControlStatusGroup,
+      NgModel,
+      ReactiveFormsModule,
+      FormGroupDirective,
+      FormControlName,
+      FormGroupName,
+      ItemListFieldComponent,
+      MatSelectModule,
+      MatSelect,
+      MatOption,
+      DateFieldComponent,
+      DurationFieldComponent,
+      SettingsToggleComponent,
+      TranslatePipe
+    ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=booking-rules-form.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookingRulesFormComponent, { className: "BookingRulesFormComponent", filePath: "libs/form-fields/src/lib/booking-rules-form.component.ts", lineNumber: 428 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookingRulesFormComponent, { className: "BookingRulesFormComponent", filePath: "libs/form-fields/src/lib/booking-rules-form.component.ts", lineNumber: 453 });
 })();
 
 // libs/form-fields/src/lib/compact-counter.component.ts
@@ -142864,7 +143221,7 @@ var CompactCounterComponent = class _CompactCounterComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CompactCounterComponent, selectors: [["compact-counter"]], inputs: { step: "step", max: "max", min: "min", render_fn: "render_fn", disabled: "disabled" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CompactCounterComponent, selectors: [["compact-counter"]], inputs: { step: "step", max: "max", min: "min", render_fn: "render_fn", disabled: "disabled" }, features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         /* istanbul ignore next */
@@ -142905,14 +143262,14 @@ var CompactCounterComponent = class _CompactCounterComponent {
         \u0275\u0275listener("click", function CompactCounterComponent_Template_button_click_5_listener() {
           return ctx.add();
         });
-        \u0275\u0275elementStart(6, "app-icon");
+        \u0275\u0275elementStart(6, "icon");
         \u0275\u0275text(7, "add");
         \u0275\u0275elementEnd()();
         \u0275\u0275elementStart(8, "button", 6);
         \u0275\u0275listener("click", function CompactCounterComponent_Template_button_click_8_listener() {
           return ctx.remove();
         });
-        \u0275\u0275elementStart(9, "app-icon");
+        \u0275\u0275elementStart(9, "icon");
         \u0275\u0275text(10, "remove");
         \u0275\u0275elementEnd()()()();
       }
@@ -142927,11 +143284,11 @@ var CompactCounterComponent = class _CompactCounterComponent {
         \u0275\u0275advance(3);
         \u0275\u0275property("disabled", !ctx.value || ctx.value === ctx.min);
       }
-    }, dependencies: [NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatRipple, IconComponent, LimitInputDirective], styles: ["\n\n[counter].disabled[_ngcontent-%COMP%] {\n  pointer-events: none;\n  opacity: 0.3;\n}\n/*# sourceMappingURL=compact-counter.component.css.map */"] });
+    }, dependencies: [CommonModule, NgIf, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel, IconComponent], styles: ["\n\n[counter].disabled[_ngcontent-%COMP%] {\n  pointer-events: none;\n  opacity: 0.3;\n}\n/*# sourceMappingURL=compact-counter.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CompactCounterComponent, { className: "CompactCounterComponent", filePath: "libs/form-fields/src/lib/compact-counter.component.ts", lineNumber: 77 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CompactCounterComponent, { className: "CompactCounterComponent", filePath: "libs/form-fields/src/lib/compact-counter.component.ts", lineNumber: 83 });
 })();
 
 // libs/form-fields/src/lib/counter.component.ts
@@ -143013,7 +143370,7 @@ var CounterComponent = class _CounterComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CounterComponent, selectors: [["a-counter"]], inputs: { step: "step", max: "max", min: "min", render_fn: "render_fn", disabled: "disabled" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CounterComponent, selectors: [["a-counter"]], inputs: { step: "step", max: "max", min: "min", render_fn: "render_fn", disabled: "disabled" }, features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         /* istanbul ignore next */
@@ -143040,7 +143397,7 @@ var CounterComponent = class _CounterComponent {
         \u0275\u0275listener("click", function CounterComponent_Template_button_click_1_listener() {
           return ctx.remove();
         });
-        \u0275\u0275elementStart(2, "app-icon");
+        \u0275\u0275elementStart(2, "icon");
         \u0275\u0275text(3, "remove");
         \u0275\u0275elementEnd()();
         \u0275\u0275elementStart(4, "div", 2);
@@ -143061,7 +143418,7 @@ var CounterComponent = class _CounterComponent {
         \u0275\u0275listener("click", function CounterComponent_Template_button_click_7_listener() {
           return ctx.add();
         });
-        \u0275\u0275elementStart(8, "app-icon");
+        \u0275\u0275elementStart(8, "icon");
         \u0275\u0275text(9, "add");
         \u0275\u0275elementEnd()()();
       }
@@ -143076,11 +143433,11 @@ var CounterComponent = class _CounterComponent {
         \u0275\u0275advance();
         \u0275\u0275property("disabled", ctx.value === ctx.max);
       }
-    }, dependencies: [NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatRipple, IconComponent, LimitInputDirective], styles: ["\n\n[counter].disabled[_ngcontent-%COMP%] {\n  pointer-events: none;\n  opacity: 0.3;\n}\n/*# sourceMappingURL=counter.component.css.map */"] });
+    }, dependencies: [CommonModule, NgIf, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel, IconComponent], styles: ["\n\n[counter].disabled[_ngcontent-%COMP%] {\n  pointer-events: none;\n  opacity: 0.3;\n}\n/*# sourceMappingURL=counter.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CounterComponent, { className: "CounterComponent", filePath: "libs/form-fields/src/lib/counter.component.ts", lineNumber: 75 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CounterComponent, { className: "CounterComponent", filePath: "libs/form-fields/src/lib/counter.component.ts", lineNumber: 81 });
 })();
 
 // libs/form-fields/src/lib/date-range-calendar.component.ts
@@ -143253,7 +143610,7 @@ var DateRangeCalendarComponent = class _DateRangeCalendarComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DateRangeCalendarComponent, selectors: [["date-range-calendar"]], inputs: { from_date: [0, "from", "from_date"], to_date: [0, "to", "to_date"], offset_weekday: "offset_weekday", start: "start", end: "end", month: "month" }, outputs: { startChange: "startChange", endChange: "endChange" }, standalone: false, features: [\u0275\u0275NgOnChangesFeature], decls: 15, vars: 7, consts: [[1, "flex", "items-center", "justify-between"], ["month", "", 1, "px-2", "font-medium"], [1, "flex", "items-center", "space-x-2"], ["icon", "", "matRipple", "", 3, "click"], [1, "grid", "h-[17.25rem]", "w-[17.25rem]", "grid-cols-7", "grid-rows-7", "gap-1"], [1, "col-span-full", "grid", "grid-cols-7", "border-b", "border-base-200"], ["weekday", "", "class", "relative flex items-center justify-center text-sm opacity-60", 4, "ngFor", "ngForOf"], ["class", "relative h-9 w-9 rounded-full hover:bg-base-200", 3, "text-secondary-content", "disabled", "click", "mouseenter", 4, "ngFor", "ngForOf", "ngForTrackBy"], ["weekday", "", 1, "relative", "flex", "items-center", "justify-center", "text-sm", "opacity-60"], [1, "relative", "h-9", "w-9", "rounded-full", "hover:bg-base-200", 3, "click", "mouseenter", "disabled"], ["class", "absolute -inset-x-0.5 inset-y-0 border-y border-dashed border-base-content bg-base-200", 4, "ngIf"], ["class", "absolute inset-y-0 -right-0.5 w-[calc(50%+2px)] border-y border-dashed border-base-content bg-base-200", 4, "ngIf"], ["class", "absolute inset-y-0 -left-0.5 w-[calc(50%+2px)] border-y border-dashed border-base-content bg-base-200", 4, "ngIf"], ["class", "absolute inset-0 z-10 flex items-center justify-center rounded-full bg-secondary", 4, "ngIf"], ["matRipple", "", 1, "absolute", "inset-0", "z-20", "flex", "items-center", "justify-center", "rounded-full"], ["class", "absolute -inset-[3px] z-10 flex items-center justify-center rounded-full border border-secondary", 4, "ngIf"], [1, "absolute", "-inset-x-0.5", "inset-y-0", "border-y", "border-dashed", "border-base-content", "bg-base-200"], [1, "absolute", "inset-y-0", "-right-0.5", "w-[calc(50%+2px)]", "border-y", "border-dashed", "border-base-content", "bg-base-200"], [1, "absolute", "inset-y-0", "-left-0.5", "w-[calc(50%+2px)]", "border-y", "border-dashed", "border-base-content", "bg-base-200"], [1, "absolute", "inset-0", "z-10", "flex", "items-center", "justify-center", "rounded-full", "bg-secondary"], [1, "absolute", "-inset-[3px]", "z-10", "flex", "items-center", "justify-center", "rounded-full", "border", "border-secondary"]], template: function DateRangeCalendarComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DateRangeCalendarComponent, selectors: [["date-range-calendar"]], inputs: { from_date: [0, "from", "from_date"], to_date: [0, "to", "to_date"], offset_weekday: "offset_weekday", start: "start", end: "end", month: "month" }, outputs: { startChange: "startChange", endChange: "endChange" }, features: [\u0275\u0275NgOnChangesFeature], decls: 15, vars: 7, consts: [[1, "flex", "items-center", "justify-between"], ["month", "", 1, "px-2", "font-medium"], [1, "flex", "items-center", "space-x-2"], ["icon", "", "matRipple", "", 3, "click"], [1, "grid", "h-[17.25rem]", "w-[17.25rem]", "grid-cols-7", "grid-rows-7", "gap-1"], [1, "col-span-full", "grid", "grid-cols-7", "border-b", "border-base-200"], ["weekday", "", "class", "relative flex items-center justify-center text-sm opacity-60", 4, "ngFor", "ngForOf"], ["class", "relative h-9 w-9 rounded-full hover:bg-base-200", 3, "text-secondary-content", "disabled", "click", "mouseenter", 4, "ngFor", "ngForOf", "ngForTrackBy"], ["weekday", "", 1, "relative", "flex", "items-center", "justify-center", "text-sm", "opacity-60"], [1, "relative", "h-9", "w-9", "rounded-full", "hover:bg-base-200", 3, "click", "mouseenter", "disabled"], ["class", "absolute -inset-x-0.5 inset-y-0 border-y border-dashed border-base-content bg-base-200", 4, "ngIf"], ["class", "absolute inset-y-0 -right-0.5 w-[calc(50%+2px)] border-y border-dashed border-base-content bg-base-200", 4, "ngIf"], ["class", "absolute inset-y-0 -left-0.5 w-[calc(50%+2px)] border-y border-dashed border-base-content bg-base-200", 4, "ngIf"], ["class", "absolute inset-0 z-10 flex items-center justify-center rounded-full bg-secondary", 4, "ngIf"], ["matRipple", "", 1, "absolute", "inset-0", "z-20", "flex", "items-center", "justify-center", "rounded-full"], ["class", "absolute -inset-[3px] z-10 flex items-center justify-center rounded-full border border-secondary", 4, "ngIf"], [1, "absolute", "-inset-x-0.5", "inset-y-0", "border-y", "border-dashed", "border-base-content", "bg-base-200"], [1, "absolute", "inset-y-0", "-right-0.5", "w-[calc(50%+2px)]", "border-y", "border-dashed", "border-base-content", "bg-base-200"], [1, "absolute", "inset-y-0", "-left-0.5", "w-[calc(50%+2px)]", "border-y", "border-dashed", "border-base-content", "bg-base-200"], [1, "absolute", "inset-0", "z-10", "flex", "items-center", "justify-center", "rounded-full", "bg-secondary"], [1, "absolute", "-inset-[3px]", "z-10", "flex", "items-center", "justify-center", "rounded-full", "border", "border-secondary"]], template: function DateRangeCalendarComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
         \u0275\u0275text(2);
@@ -143263,14 +143620,14 @@ var DateRangeCalendarComponent = class _DateRangeCalendarComponent {
         \u0275\u0275listener("click", function DateRangeCalendarComponent_Template_button_click_5_listener() {
           return ctx.previousMonth();
         });
-        \u0275\u0275elementStart(6, "app-icon");
+        \u0275\u0275elementStart(6, "icon");
         \u0275\u0275text(7, "chevron_left");
         \u0275\u0275elementEnd()();
         \u0275\u0275elementStart(8, "button", 3);
         \u0275\u0275listener("click", function DateRangeCalendarComponent_Template_button_click_8_listener() {
           return ctx.nextMonth();
         });
-        \u0275\u0275elementStart(9, "app-icon");
+        \u0275\u0275elementStart(9, "icon");
         \u0275\u0275text(10, "chevron_right");
         \u0275\u0275elementEnd()()()();
         \u0275\u0275elementStart(11, "div", 4)(12, "div", 5);
@@ -143287,15 +143644,15 @@ var DateRangeCalendarComponent = class _DateRangeCalendarComponent {
         \u0275\u0275advance();
         \u0275\u0275property("ngForOf", ctx.month_days)("ngForTrackBy", ctx.trackByFn);
       }
-    }, dependencies: [NgForOf, NgIf, MatRipple, IconComponent, DatePipe], encapsulation: 2 });
+    }, dependencies: [CommonModule, NgForOf, NgIf, DatePipe, IconComponent], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateRangeCalendarComponent, { className: "DateRangeCalendarComponent", filePath: "libs/form-fields/src/lib/date-range-calendar.component.ts", lineNumber: 94 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateRangeCalendarComponent, { className: "DateRangeCalendarComponent", filePath: "libs/form-fields/src/lib/date-range-calendar.component.ts", lineNumber: 96 });
 })();
 
 // libs/form-fields/src/lib/date-range-field.component.ts
-var _c058 = ["startDate"];
+var _c059 = ["startDate"];
 var _c133 = ["endDate"];
 var _c212 = [[["input", "startDate", ""]], [["input", "endDate", ""]]];
 var _c39 = ["input[startDate]", "input[endDate]"];
@@ -143351,7 +143708,7 @@ var DateRangeFieldComponent = class _DateRangeFieldComponent extends AsyncHandle
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DateRangeFieldComponent, selectors: [["date-range-field"]], contentQueries: function DateRangeFieldComponent_ContentQueries(rf, ctx, dirIndex) {
       if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, _c058, 5, NgControl);
+        \u0275\u0275contentQuery(dirIndex, _c059, 5, NgControl);
         \u0275\u0275contentQuery(dirIndex, _c133, 5, NgControl);
       }
       if (rf & 2) {
@@ -143367,7 +143724,7 @@ var DateRangeFieldComponent = class _DateRangeFieldComponent extends AsyncHandle
         let _t4;
         \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._tooltip = _t4.first);
       }
-    }, inputs: { from_date: [0, "from", "from_date"], to_date: [0, "to", "to_date"], week_start: "week_start", disabled: "disabled", short: "short" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], ngContentSelectors: _c39, decls: 16, vars: 12, consts: [["calendar_picker", ""], ["matRipple", "", "type", "button", "role", "date-picker", "customTooltip", "", "yPosition", "top", 1, "flex", "min-w-max", "items-center", "space-x-2", "rounded", "border", "border-neutral", "px-4", "py-2", "outline-base-content", "hover:border-base-content", "focus:outline-2", 3, "content", "disabled"], [1, "flex-1", "whitespace-nowrap"], [1, "text-2xl"], [1, "hidden"], [1, "relative", "w-[18.25rem]", "rounded", "bg-base-100", "px-2", "py-4"], [3, "startChange", "endChange", "month", "from", "to", "offset_weekday"]], template: function DateRangeFieldComponent_Template(rf, ctx) {
+    }, inputs: { from_date: [0, "from", "from_date"], to_date: [0, "to", "to_date"], week_start: "week_start", disabled: "disabled", short: "short" }, features: [\u0275\u0275InheritDefinitionFeature], ngContentSelectors: _c39, decls: 16, vars: 12, consts: [["calendar_picker", ""], ["matRipple", "", "type", "button", "role", "date-picker", "customTooltip", "", "yPosition", "top", 1, "flex", "min-w-max", "items-center", "space-x-2", "rounded", "border", "border-neutral", "px-4", "py-2", "outline-base-content", "hover:border-base-content", "focus:outline-2", 3, "content", "disabled"], [1, "flex-1", "whitespace-nowrap"], [1, "text-2xl"], [1, "hidden"], [1, "relative", "w-[18.25rem]", "rounded", "bg-base-100", "px-2", "py-4"], [3, "startChange", "endChange", "month", "from", "to", "offset_weekday"]], template: function DateRangeFieldComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275projectionDef(_c212);
         \u0275\u0275elementStart(0, "button", 1)(1, "div", 2);
@@ -143381,7 +143738,7 @@ var DateRangeFieldComponent = class _DateRangeFieldComponent extends AsyncHandle
         \u0275\u0275text(7);
         \u0275\u0275pipe(8, "date");
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(9, "app-icon", 3);
+        \u0275\u0275elementStart(9, "icon", 3);
         \u0275\u0275text(10, "today");
         \u0275\u0275elementEnd()();
         \u0275\u0275elementStart(11, "div", 4);
@@ -143399,11 +143756,17 @@ var DateRangeFieldComponent = class _DateRangeFieldComponent extends AsyncHandle
         \u0275\u0275advance(5);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(8, 9, (ctx.end_date == null ? null : ctx.end_date.value) || ctx.now, "MMM d, yyyy"), " ");
       }
-    }, dependencies: [MatRipple, IconComponent, CustomTooltipComponent, DateRangeCalendarComponent, DatePipe], encapsulation: 2 });
+    }, dependencies: [
+      CommonModule,
+      DatePipe,
+      DateRangeCalendarComponent,
+      IconComponent,
+      CustomTooltipComponent
+    ], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateRangeFieldComponent, { className: "DateRangeFieldComponent", filePath: "libs/form-fields/src/lib/date-range-field.component.ts", lineNumber: 50 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateRangeFieldComponent, { className: "DateRangeFieldComponent", filePath: "libs/form-fields/src/lib/date-range-field.component.ts", lineNumber: 57 });
 })();
 
 // libs/form-fields/src/lib/host-select-field.component.ts
@@ -143472,7 +143835,7 @@ var HostSelectFieldComponent = class _HostSelectFieldComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HostSelectFieldComponent, selectors: [["host-select-field"]], standalone: false, features: [\u0275\u0275ProvidersFeature([
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HostSelectFieldComponent, selectors: [["host-select-field"]], features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => _HostSelectFieldComponent),
@@ -143501,11 +143864,11 @@ var HostSelectFieldComponent = class _HostSelectFieldComponent {
         \u0275\u0275advance(4);
         \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(7, 7, ctx.users));
       }
-    }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatFormField, MatError, MatSelect, MatOption, AsyncPipe], encapsulation: 2 });
+    }, dependencies: [MatFormFieldModule, MatFormField, MatError, MatSelectModule, MatSelect, MatOption, CommonModule, NgForOf, NgIf, AsyncPipe, FormsModule, NgControlStatus, NgModel], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HostSelectFieldComponent, { className: "HostSelectFieldComponent", filePath: "libs/form-fields/src/lib/host-select-field.component.ts", lineNumber: 49 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HostSelectFieldComponent, { className: "HostSelectFieldComponent", filePath: "libs/form-fields/src/lib/host-select-field.component.ts", lineNumber: 56 });
 })();
 
 // libs/form-fields/src/lib/place-user.pipe.ts
@@ -143538,7 +143901,7 @@ var PlaceUserPipe = class _PlaceUserPipe {
     };
   }
   static {
-    this.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "placeuser", type: _PlaceUserPipe, pure: true, standalone: false });
+    this.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "placeuser", type: _PlaceUserPipe, pure: true });
   }
 };
 
@@ -143638,7 +144001,7 @@ var RecurrenceModalComponent = class _RecurrenceModalComponent extends AsyncHand
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _RecurrenceModalComponent, selectors: [["recurrence-modal"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 49, vars: 42, consts: [[1, "m-2", "flex", "h-14", "w-[calc(100%-1rem)]", "items-center", "justify-between", "rounded", "border-none", "bg-base-200", "px-4", "py-2"], [1, "text-xl", "font-medium"], [1, "flex", "min-w-[24rem]", "flex-col", "space-y-2", "px-4", 3, "formGroup"], [1, "w-auto"], [1, "mt-2", "flex", "items-center", "space-x-4", "pb-4"], ["formControlName", "interval", 3, "min", "max"], ["appearance", "outline", 1, "no-subscript"], ["formControlName", "type"], ["value", "daily"], ["value", "weekly"], ["value", "monthly"], ["appearance", "outline"], [1, "pb-4"], ["formControlName", "end_type"], [1, "flex", "items-center"], ["value", "never"], [1, "mt-2", "flex", "items-center"], ["value", "date"], ["formControlName", "end_date"], ["value", "instances"], ["formControlName", "end_instances", 1, "flex-1", 3, "render_fn", "min", "max"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", "matRipple", "", 1, "w-32", 3, "mat-dialog-close"], [1, "flex", "items-center", "space-x-2", "pb-4"], ["icon", "", "matRipple", "", 1, "h-12", "w-12", "rounded", "border", "border-secondary", 3, "bg-secondary", "text-secondary", "text-base-200"], ["icon", "", "matRipple", "", 1, "h-12", "w-12", "rounded", "border", "border-secondary", 3, "click"], ["formControlName", "monthly_type"]], template: function RecurrenceModalComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _RecurrenceModalComponent, selectors: [["recurrence-modal"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 49, vars: 42, consts: [[1, "m-2", "flex", "h-14", "w-[calc(100%-1rem)]", "items-center", "justify-between", "rounded", "border-none", "bg-base-200", "px-4", "py-2"], [1, "text-xl", "font-medium"], [1, "flex", "min-w-[24rem]", "flex-col", "space-y-2", "px-4", 3, "formGroup"], [1, "w-auto"], [1, "mt-2", "flex", "items-center", "space-x-4", "pb-4"], ["formControlName", "interval", 3, "min", "max"], ["appearance", "outline", 1, "no-subscript"], ["formControlName", "type"], ["value", "daily"], ["value", "weekly"], ["value", "monthly"], ["appearance", "outline"], [1, "pb-4"], ["formControlName", "end_type"], [1, "flex", "items-center"], ["value", "never"], [1, "mt-2", "flex", "items-center"], ["value", "date"], ["formControlName", "end_date"], ["value", "instances"], ["formControlName", "end_instances", 1, "flex-1", 3, "render_fn", "min", "max"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", "matRipple", "", 1, "w-32", 3, "mat-dialog-close"], [1, "flex", "items-center", "space-x-2", "pb-4"], ["icon", "", "matRipple", "", 1, "h-12", "w-12", "rounded", "border", "border-secondary", 3, "bg-secondary", "text-secondary", "text-base-200"], ["icon", "", "matRipple", "", 1, "h-12", "w-12", "rounded", "border", "border-secondary", 3, "click"], ["formControlName", "monthly_type"]], template: function RecurrenceModalComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "header", 0)(1, "h3", 1);
         \u0275\u0275text(2);
@@ -143728,15 +144091,36 @@ var RecurrenceModalComponent = class _RecurrenceModalComponent extends AsyncHand
         \u0275\u0275advance();
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(48, 40, "COMMON.SAVE"), " ");
       }
-    }, dependencies: [NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, MatRipple, MatFormField, MatSelect, MatOption, MatRadioGroup, MatRadioButton, MatDialogClose, CompactCounterComponent, DateFieldComponent, DatePipe, TranslatePipe], styles: ["\n\nmat-form-field[_ngcontent-%COMP%], \na-date-field[_ngcontent-%COMP%] {\n  height: 3.25rem;\n}\nmat-radio-button[_ngcontent-%COMP%] {\n  width: 8rem;\n}\n/*# sourceMappingURL=recurrence-modal.component.css.map */"] });
+    }, dependencies: [
+      CommonModule,
+      DatePipe,
+      ReactiveFormsModule,
+      NgControlStatus,
+      NgControlStatusGroup,
+      FormGroupDirective,
+      FormControlName,
+      MatFormFieldModule,
+      MatFormField,
+      MatRadioModule,
+      MatRadioGroup,
+      MatRadioButton,
+      MatSelectModule,
+      MatSelect,
+      MatOption,
+      MatDialogModule,
+      MatDialogClose,
+      CompactCounterComponent,
+      DateFieldComponent,
+      TranslatePipe
+    ], styles: ["\n\nmat-form-field[_ngcontent-%COMP%], \na-date-field[_ngcontent-%COMP%] {\n  height: 3.25rem;\n}\nmat-radio-button[_ngcontent-%COMP%] {\n  width: 8rem;\n}\n/*# sourceMappingURL=recurrence-modal.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RecurrenceModalComponent, { className: "RecurrenceModalComponent", filePath: "libs/form-fields/src/lib/recurrence-modal.component.ts", lineNumber: 153 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RecurrenceModalComponent, { className: "RecurrenceModalComponent", filePath: "libs/form-fields/src/lib/recurrence-modal.component.ts", lineNumber: 159 });
 })();
 
 // libs/form-fields/src/lib/recurrence-field.component.ts
-var _c059 = (a0) => ({ day: a0 });
+var _c060 = (a0) => ({ day: a0 });
 var _c134 = (a0, a1) => ({ index: a0, day: a1 });
 function RecurrenceFieldComponent_Conditional_17_Template(rf, ctx) {
   if (rf & 1) {
@@ -143762,139 +144146,6 @@ function RecurrenceFieldComponent_mat_option_18_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", ctx_r0.formatted_value, " ");
   }
-}
-var NO_RECURR = {
-  _custom: false,
-  type: "none",
-  end_type: "never",
-  interval: 1
-};
-function fromEventRecurrence(r2) {
-  if (!r2.pattern || r2._pattern === "none") {
-    return {
-      _custom: false,
-      type: "none",
-      interval: 1,
-      end_type: "never"
-    };
-  }
-  const recurr = {
-    _custom: r2._pattern == "custom_display",
-    type: r2.pattern,
-    interval: r2.interval || 1,
-    end_type: r2.end ? "date" : "never"
-  };
-  if (r2.end)
-    recurr.end_date = r2.end;
-  if (r2.pattern === "weekly" && r2.days_of_week?.length) {
-    recurr.weekdays = new Set(r2.days_of_week);
-  }
-  if (r2.pattern === "monthly") {
-    recurr.monthly_type = "day_of_week";
-    if (r2.days_of_week?.length) {
-      recurr.weekdays = new Set(r2.days_of_week);
-    }
-  }
-  return recurr;
-}
-function toEventRecurrence(r2, date = Date.now()) {
-  if (r2.type === "none") {
-    return {
-      pattern: "daily",
-      _pattern: "none",
-      interval: 1,
-      days_of_week: [],
-      start: date,
-      end: date
-    };
-  }
-  const details = {
-    _pattern: r2._custom ? "custom_display" : r2.type,
-    pattern: r2.type,
-    interval: r2.interval,
-    days_of_week: [],
-    start: date,
-    end: r2.end_type === "date" && r2.end_date ? r2.end_date : date
-  };
-  if ((r2.type === "weekly" || r2.type === "monthly") && r2.weekdays) {
-    details.days_of_week = Array.from(r2.weekdays);
-  }
-  return details;
-}
-function fromBookingRecurrence(r2) {
-  if (!r2.recurrence_type || r2.recurrence_type === "none") {
-    return {
-      _custom: r2.recurrence_custom,
-      type: "none",
-      interval: 1,
-      end_type: "never"
-    };
-  }
-  const recurr = {
-    _custom: r2.recurrence_custom,
-    type: r2.recurrence_type,
-    interval: r2.recurrence_interval || 1,
-    end_type: r2.recurrence_end ? "date" : "never"
-  };
-  if (r2.recurrence_end) {
-    recurr.end_date = r2.recurrence_end * 1e3;
-  }
-  if (r2.recurrence_type === "daily" && r2.recurrence_days) {
-    const weekdays = /* @__PURE__ */ new Set();
-    for (let i = 0; i < 7; i++) {
-      if (r2.recurrence_days & 1 << 6 - i) {
-        weekdays.add(i);
-      }
-    }
-    recurr.weekdays = weekdays;
-  }
-  if (r2.recurrence_type === "monthly") {
-    recurr.monthly_type = "day_of_week";
-    if (r2.recurrence_days) {
-      const weekdays = /* @__PURE__ */ new Set();
-      for (let i = 0; i < 7; i++) {
-        if (r2.recurrence_days & DAYS_OF_WEEK_INDEX[i]) {
-          weekdays.add(i);
-        }
-      }
-      recurr.weekdays = weekdays;
-    }
-    if (r2.recurrence_nth_of_month) {
-      recurr.week = r2.recurrence_nth_of_month;
-    }
-  }
-  return recurr;
-}
-function toBookingRecurrence(r2) {
-  if (r2.type === "none")
-    return { recurrence_type: "none" };
-  const booking = {
-    recurrence_custom: r2._custom,
-    recurrence_type: r2.type === "yearly" ? "monthly" : r2.type,
-    recurrence_interval: r2.type === "yearly" ? r2.interval * 12 : r2.interval
-  };
-  if (r2.end_type === "date" && r2.end_date) {
-    booking.recurrence_end = Math.floor(r2.end_date / 1e3);
-  }
-  if (r2.type === "weekly" && r2.weekdays) {
-    let days = 0;
-    r2.weekdays.forEach((day) => {
-      days |= DAYS_OF_WEEK_INDEX[day];
-    });
-    booking.recurrence_days = days;
-    booking.recurrence_type = "daily";
-  }
-  if ((r2.type === "monthly" || r2.type === "yearly") && r2.weekdays) {
-    let days = 0;
-    r2.weekdays.forEach((day) => {
-      days |= 1 << 6 - day;
-    });
-    booking.recurrence_days = days;
-  }
-  if ((r2.type === "monthly" || r2.type === "yearly") && r2.week) {
-    booking.recurrence_nth_of_month = r2.week;
-  }
-  return booking;
 }
 var RecurrenceFieldComponent = class _RecurrenceFieldComponent {
   constructor(_dialog, _settings) {
@@ -143924,7 +144175,7 @@ var RecurrenceFieldComponent = class _RecurrenceFieldComponent {
     }
   }
   get formatted_value() {
-    return !this.value ? "" : formatRecurrence(toEventRecurrence(this.value));
+    return !this.value ? "" : formatRecurrence(this.value);
   }
   toRaw(data) {
     return this.type === "event" ? toEventRecurrence(data) : toBookingRecurrence(data);
@@ -144017,7 +144268,7 @@ var RecurrenceFieldComponent = class _RecurrenceFieldComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _RecurrenceFieldComponent, selectors: [["recurrence-field"]], inputs: { type: "type", date: "date" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _RecurrenceFieldComponent, selectors: [["recurrence-field"]], inputs: { type: "type", date: "date" }, features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         /* istanbul ignore next */
@@ -144071,7 +144322,7 @@ var RecurrenceFieldComponent = class _RecurrenceFieldComponent {
         \u0275\u0275advance(3);
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(8, 13, "FORM.RECURRENCE_DAILY"));
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(12, 18, "FORM.RECURRENCE_WEEKLY_ON", \u0275\u0275pureFunction1(29, _c059, \u0275\u0275pipeBind2(11, 15, ctx.date, "EEEE"))), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(12, 18, "FORM.RECURRENCE_WEEKLY_ON", \u0275\u0275pureFunction1(29, _c060, \u0275\u0275pipeBind2(11, 15, ctx.date, "EEEE"))), " ");
         \u0275\u0275advance(4);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(16, 24, "FORM.RECURRENCE_MONTH_INSTANCE", \u0275\u0275pureFunction2(31, _c134, ctx.instance_of_month, \u0275\u0275pipeBind2(15, 21, ctx.date, "EEEE"))), " ");
         \u0275\u0275advance(3);
@@ -144081,15 +144332,28 @@ var RecurrenceFieldComponent = class _RecurrenceFieldComponent {
         \u0275\u0275advance(2);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(21, 27, "FORM.RECURRENCE_CUSTOM"), " ");
       }
-    }, dependencies: [NgIf, NgControlStatus, NgModel, MatFormField, MatSelect, MatOption, DatePipe, TranslatePipe], styles: ["\n\n[value][_ngcontent-%COMP%] {\n  min-width: 3em;\n}\n/*# sourceMappingURL=recurrence-field.component.css.map */"] });
+    }, dependencies: [
+      MatFormFieldModule,
+      MatFormField,
+      MatSelectModule,
+      MatSelect,
+      MatOption,
+      CommonModule,
+      NgIf,
+      DatePipe,
+      TranslatePipe,
+      FormsModule,
+      NgControlStatus,
+      NgModel
+    ], styles: ["\n\n[value][_ngcontent-%COMP%] {\n  min-width: 3em;\n}\n/*# sourceMappingURL=recurrence-field.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RecurrenceFieldComponent, { className: "RecurrenceFieldComponent", filePath: "libs/form-fields/src/lib/recurrence-field.component.ts", lineNumber: 267 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RecurrenceFieldComponent, { className: "RecurrenceFieldComponent", filePath: "libs/form-fields/src/lib/recurrence-field.component.ts", lineNumber: 106 });
 })();
 
 // libs/spaces/src/lib/space-select-modal/new-space-select-modal.component.ts
-var _c060 = (a0) => ({ count: a0 });
+var _c061 = (a0) => ({ count: a0 });
 function NewSpaceSelectModalComponent_space_list_19_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
@@ -144309,7 +144573,7 @@ var NewSpaceSelectModalComponent = class _NewSpaceSelectModalComponent {
         \u0275\u0275advance(5);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(34, 45, "COMMON.BACK_TO_FORM"), " ");
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(37, 47, "CALENDAR_EVENT.SPACE_SELECT_COUNT", \u0275\u0275pureFunction1(52, _c060, ctx.selected.length)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(37, 47, "CALENDAR_EVENT.SPACE_SELECT_COUNT", \u0275\u0275pureFunction1(52, _c061, ctx.selected.length)), " ");
         \u0275\u0275advance(2);
         \u0275\u0275classProp("inverse", ctx.isSelected(ctx.displayed == null ? null : ctx.displayed.id));
         \u0275\u0275property("disabled", !ctx.displayed);
@@ -144326,7 +144590,7 @@ var NewSpaceSelectModalComponent = class _NewSpaceSelectModalComponent {
 })();
 
 // libs/form-fields/src/lib/space-list-field.component.ts
-var _c061 = () => ({ standalone: true });
+var _c062 = () => ({ standalone: true });
 var _c135 = () => ({ count: 4 });
 var _c213 = () => ({ count: 10 });
 var _c310 = (a0) => ({ count: a0 });
@@ -144353,13 +144617,13 @@ function SpaceListFieldComponent_div_21_Template(rf, ctx) {
     \u0275\u0275elementStart(5, "div", 13)(6, "div", 14);
     \u0275\u0275text(7);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "div", 15)(9, "app-icon", 16);
+    \u0275\u0275elementStart(8, "div", 15)(9, "icon", 16);
     \u0275\u0275text(10, "place");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(11, "p");
     \u0275\u0275text(12);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(13, "div", 15)(14, "app-icon", 16);
+    \u0275\u0275elementStart(13, "div", 15)(14, "icon", 16);
     \u0275\u0275text(15, "people");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(16, "p");
@@ -144372,7 +144636,7 @@ function SpaceListFieldComponent_div_21_Template(rf, ctx) {
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.changeSpaces(space_r2));
     });
-    \u0275\u0275elementStart(21, "div", 19)(22, "app-icon");
+    \u0275\u0275elementStart(21, "div", 19)(22, "icon");
     \u0275\u0275text(23, "edit");
     \u0275\u0275elementEnd();
     \u0275\u0275text(24);
@@ -144384,7 +144648,7 @@ function SpaceListFieldComponent_div_21_Template(rf, ctx) {
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.removeSpace(space_r2));
     });
-    \u0275\u0275elementStart(27, "div", 19)(28, "app-icon");
+    \u0275\u0275elementStart(27, "div", 19)(28, "icon");
     \u0275\u0275text(29, "close");
     \u0275\u0275elementEnd();
     \u0275\u0275text(30);
@@ -144396,7 +144660,7 @@ function SpaceListFieldComponent_div_21_Template(rf, ctx) {
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.toggleFavourite(space_r2));
     });
-    \u0275\u0275elementStart(33, "app-icon");
+    \u0275\u0275elementStart(33, "icon");
     \u0275\u0275text(34);
     \u0275\u0275elementEnd()()();
   }
@@ -144503,7 +144767,7 @@ var SpaceListFieldComponent = class _SpaceListFieldComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceListFieldComponent, selectors: [["space-list-field"]], inputs: { multiday: "multiday" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceListFieldComponent, selectors: [["space-list-field"]], inputs: { multiday: "multiday" }, features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => _SpaceListFieldComponent),
@@ -144543,7 +144807,7 @@ var SpaceListFieldComponent = class _SpaceListFieldComponent {
         \u0275\u0275listener("click", function SpaceListFieldComponent_Template_button_click_23_listener() {
           return ctx.changeSpaces();
         });
-        \u0275\u0275elementStart(24, "div", 9)(25, "app-icon");
+        \u0275\u0275elementStart(24, "div", 9)(25, "icon");
         \u0275\u0275text(26, "search");
         \u0275\u0275elementEnd();
         \u0275\u0275elementStart(27, "span");
@@ -144556,7 +144820,7 @@ var SpaceListFieldComponent = class _SpaceListFieldComponent {
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 12, "CALENDAR_EVENT.SPACE_SELECT_SIZE"), "");
         \u0275\u0275advance(5);
         \u0275\u0275twoWayProperty("ngModel", ctx.room_size);
-        \u0275\u0275property("ngModelOptions", \u0275\u0275pureFunction0(28, _c061));
+        \u0275\u0275property("ngModelOptions", \u0275\u0275pureFunction0(28, _c062));
         \u0275\u0275attribute("aria-label", \u0275\u0275pipeBind1(10, 14, "CALENDAR_EVENT.SPACE_SELECT_SIZE"));
         \u0275\u0275advance(2);
         \u0275\u0275property("value", 1);
@@ -144575,11 +144839,26 @@ var SpaceListFieldComponent = class _SpaceListFieldComponent {
         \u0275\u0275advance(7);
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(29, 26, "CALENDAR_EVENT.SPACE_ADD"));
       }
-    }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatRipple, MatRadioGroup, MatRadioButton, IconComponent, AuthenticatedImageDirective, AsyncPipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [
+      CommonModule,
+      NgForOf,
+      NgIf,
+      AsyncPipe,
+      MatRadioModule,
+      MatRadioGroup,
+      MatRadioButton,
+      FormsModule,
+      NgControlStatus,
+      NgModel,
+      IconComponent,
+      MatRippleModule,
+      MatRipple,
+      TranslatePipe
+    ], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceListFieldComponent, { className: "SpaceListFieldComponent", filePath: "libs/form-fields/src/lib/space-list-field.component.ts", lineNumber: 177 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceListFieldComponent, { className: "SpaceListFieldComponent", filePath: "libs/form-fields/src/lib/space-list-field.component.ts", lineNumber: 192 });
 })();
 
 // libs/form-fields/src/lib/upload-file-field.component.ts
@@ -144603,7 +144882,7 @@ function UploadFileFieldComponent_div_2_ng_container_3_Template(rf, ctx) {
 }
 function UploadFileFieldComponent_div_2_a_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 12)(1, "app-icon");
+    \u0275\u0275elementStart(0, "a", 12)(1, "icon");
     \u0275\u0275text(2, "link");
     \u0275\u0275elementEnd()();
   }
@@ -144625,7 +144904,7 @@ function UploadFileFieldComponent_div_2_Template(rf, ctx) {
       const ctx_r2 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r2.writeValue(null));
     });
-    \u0275\u0275elementStart(6, "app-icon");
+    \u0275\u0275elementStart(6, "icon");
     \u0275\u0275text(7, "close");
     \u0275\u0275elementEnd()()();
   }
@@ -144712,7 +144991,7 @@ var UploadFileFieldComponent = class _UploadFileFieldComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadFileFieldComponent, selectors: [["upload-file"]], standalone: false, features: [\u0275\u0275ProvidersFeature([
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadFileFieldComponent, selectors: [["upload-file"]], features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => _UploadFileFieldComponent),
@@ -144736,11 +145015,11 @@ var UploadFileFieldComponent = class _UploadFileFieldComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ctx.item)("ngIfElse", empty_state_r4);
       }
-    }, dependencies: [NgIf, MatRipple, IconComponent, MatProgressSpinner], encapsulation: 2 });
+    }, dependencies: [CommonModule, NgIf, MatProgressSpinnerModule, MatProgressSpinner, IconComponent], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadFileFieldComponent, { className: "UploadFileFieldComponent", filePath: "libs/form-fields/src/lib/upload-file-field.component.ts", lineNumber: 79 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadFileFieldComponent, { className: "UploadFileFieldComponent", filePath: "libs/form-fields/src/lib/upload-file-field.component.ts", lineNumber: 82 });
 })();
 
 // libs/form-fields/src/lib/upload-list-field.component.ts
@@ -144764,7 +145043,7 @@ function UploadListFieldComponent_div_12_div_1_ng_container_3_Template(rf, ctx) 
 }
 function UploadListFieldComponent_div_12_div_1_a_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 20)(1, "app-icon");
+    \u0275\u0275elementStart(0, "a", 20)(1, "icon");
     \u0275\u0275text(2, "link");
     \u0275\u0275elementEnd()();
   }
@@ -144786,7 +145065,7 @@ function UploadListFieldComponent_div_12_div_1_Template(rf, ctx) {
       const ctx_r3 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r3.removeFile(item_r3));
     });
-    \u0275\u0275elementStart(6, "app-icon");
+    \u0275\u0275elementStart(6, "icon");
     \u0275\u0275text(7, "close");
     \u0275\u0275elementEnd()()();
   }
@@ -144895,7 +145174,7 @@ var UploadListFieldComponent = class _UploadListFieldComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadListFieldComponent, selectors: [["upload-list"]], standalone: false, features: [\u0275\u0275ProvidersFeature([
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadListFieldComponent, selectors: [["upload-list"]], features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => _UploadListFieldComponent),
@@ -144904,7 +145183,7 @@ var UploadListFieldComponent = class _UploadListFieldComponent {
     ])], decls: 15, vars: 2, consts: [["empty_state", ""], [1, "flex", "items-center", "space-x-2"], [1, "relative", "flex", "h-48", "w-52", "cursor-pointer", "flex-col", "items-center", "justify-center", "rounded", "border-2", "border-dashed", "border-base-200", "hover:bg-neutral"], [1, "mb-2", "text-3xl"], [1, "text-center"], [1, "my-1", "text-center", "text-xs"], ["btn", "", "matRipple", "", 1, "w-28"], ["multiple", "true", "type", "file", 1, "absolute", "inset-0", "max-w-full", "opacity-0", 3, "change"], [1, "flex", "h-48", "w-1/2", "flex-1", "flex-col", "items-center"], ["list", "", "class", "h-full w-full space-y-2 overflow-auto", 4, "ngIf", "ngIfElse"], ["list", "", 1, "h-full", "w-full", "space-y-2", "overflow-auto"], ["item", "", "class", "flex w-full items-center rounded border border-base-200 bg-base-100 hover:bg-base-200", 3, "!bg-error", "!bg-opacity-20", 4, "ngFor", "ngForOf"], ["item", "", 1, "flex", "w-full", "items-center", "rounded", "border", "border-base-200", "bg-base-100", "hover:bg-base-200"], [1, "w-px", "flex-1", "truncate", "px-2", "font-mono", "text-sm"], [4, "ngIf"], ["icon", "", "matRipple", "", "target", "_blank", "rel", "noopener noreferrer", 3, "href", 4, "ngIf"], ["icon", "", 3, "click"], [1, "relative", "mx-1"], ["mode", "determinate", 3, "diameter", "value"], [1, "absolute", "left-1/2", "top-1/2", "-translate-x-1/2", "-translate-y-1/2", "text-sm", "font-bold"], ["icon", "", "matRipple", "", "target", "_blank", "rel", "noopener noreferrer", 3, "href"], [1, "flex", "h-full", "w-full", "flex-col", "items-center", "justify-center"], [1, "opacity-30"]], template: function UploadListFieldComponent_Template(rf, ctx) {
       if (rf & 1) {
         const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "div", 1)(1, "div", 2)(2, "app-icon", 3);
+        \u0275\u0275elementStart(0, "div", 1)(1, "div", 2)(2, "icon", 3);
         \u0275\u0275text(3, "upload_file");
         \u0275\u0275elementEnd();
         \u0275\u0275elementStart(4, "p", 4);
@@ -144932,15 +145211,24 @@ var UploadListFieldComponent = class _UploadListFieldComponent {
         \u0275\u0275advance(12);
         \u0275\u0275property("ngIf", ctx.list == null ? null : ctx.list.length)("ngIfElse", empty_state_r5);
       }
-    }, dependencies: [NgForOf, NgIf, MatRipple, IconComponent, MatProgressSpinner], encapsulation: 2 });
+    }, dependencies: [
+      CommonModule,
+      NgForOf,
+      NgIf,
+      MatProgressSpinnerModule,
+      MatProgressSpinner,
+      IconComponent,
+      MatRippleModule,
+      MatRipple
+    ], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadListFieldComponent, { className: "UploadListFieldComponent", filePath: "libs/form-fields/src/lib/upload-list-field.component.ts", lineNumber: 98 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadListFieldComponent, { className: "UploadListFieldComponent", filePath: "libs/form-fields/src/lib/upload-list-field.component.ts", lineNumber: 107 });
 })();
 
 // libs/form-fields/src/lib/user-list-field.component.ts
-var _c062 = ["search_field"];
+var _c063 = ["search_field"];
 var _c136 = (a0) => ({ name: a0 });
 var _c214 = (a0) => ({ email: a0 });
 function UserListFieldComponent_mat_chip_row_6_app_icon_4_Template(rf, ctx) {
@@ -145339,13 +145627,13 @@ Fake Org,John,Smith,john.smith@example.com,01234567898,false,true`;
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserListFieldComponent, selectors: [["a-user-list-field"]], viewQuery: function UserListFieldComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c062, 5);
+        \u0275\u0275viewQuery(_c063, 5);
       }
       if (rf & 2) {
         let _t4;
         \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._search_el = _t4.first);
       }
-    }, inputs: { time: "time", disabled: "disabled", limit: "limit", guests: "guests", guests_only: "guests_only", hide_actions: "hide_actions", custom_template: "custom_template", filter: "filter" }, outputs: { new_user: "new_user", download: "download" }, standalone: false, features: [\u0275\u0275ProvidersFeature([
+    }, inputs: { time: "time", disabled: "disabled", limit: "limit", guests: "guests", guests_only: "guests_only", hide_actions: "hide_actions", custom_template: "custom_template", filter: "filter" }, outputs: { new_user: "new_user", download: "download" }, features: [\u0275\u0275ProvidersFeature([
       {
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => _UserListFieldComponent),
@@ -145394,11 +145682,11 @@ Fake Org,John,Smith,john.smith@example.com,01234567898,false,true`;
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", !ctx.hide_actions);
       }
-    }, dependencies: [NgForOf, NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatRipple, MatFormField, MatSuffix, MatOption, MatAutocomplete, MatAutocompleteTrigger, MatAutocompleteOrigin, MatTooltip, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow, IconComponent, MatProgressSpinner, AsyncPipe, TranslatePipe, PlaceUserPipe], styles: ["\n\n[search][_ngcontent-%COMP%] {\n}\n/*# sourceMappingURL=user-list-field.component.css.map */"] });
+    }, dependencies: [CommonModule, NgForOf, NgIf, AsyncPipe, MatFormFieldModule, MatFormField, MatSuffix, MatChipsModule, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow, MatAutocompleteModule, MatAutocomplete, MatOption, MatAutocompleteTrigger, MatAutocompleteOrigin, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel, MatRippleModule, MatRipple, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserListFieldComponent, { className: "UserListFieldComponent", filePath: "libs/form-fields/src/lib/user-list-field.component.ts", lineNumber: 233 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserListFieldComponent, { className: "UserListFieldComponent", filePath: "libs/form-fields/src/lib/user-list-field.component.ts", lineNumber: 246 });
 })();
 
 // libs/form-fields/src/lib/form-fields.module.ts
@@ -145413,24 +145701,74 @@ var FormFieldsModule = class _FormFieldsModule {
   }
   static {
     this.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ imports: [
-      CommonModule,
-      FormsModule,
-      ReactiveFormsModule,
-      MatRippleModule,
-      ReactiveFormsModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatSelectModule,
-      MatAutocompleteModule,
-      MatTooltipModule,
-      MatCheckboxModule,
-      MatRadioModule,
-      MatChipsModule,
-      ClipboardModule,
-      ComponentsModule
+      ActionFieldComponent,
+      CounterComponent,
+      CompactCounterComponent,
+      DateFieldComponent,
+      DateCalendarComponent,
+      DateRangeFieldComponent,
+      DateRangeCalendarComponent,
+      DurationFieldComponent,
+      HostSelectFieldComponent,
+      ItemListFieldComponent,
+      ImageListFieldComponent,
+      RecurrenceFieldComponent,
+      SpaceListFieldComponent,
+      SupportTicketModalComponent,
+      TimeFieldComponent,
+      UploadFileFieldComponent,
+      UploadListFieldComponent,
+      UserListFieldComponent,
+      UserSearchFieldComponent,
+      RecurrenceModalComponent,
+      BookingRulesFormComponent
     ] });
   }
 };
+
+// libs/users/src/lib/find-availability-modal/user-availability.component.ts
+function UserAvailabilityComponent_div_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 2)(1, "div", 3);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "date");
+    \u0275\u0275pipe(4, "date");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const event_r1 = ctx.$implicit;
+    \u0275\u0275styleProp("left", event_r1.start + "%")("width", event_r1.size + "%");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(3, 6, event_r1.date, "shortTime"), " - ", \u0275\u0275pipeBind2(4, 9, event_r1.date.valueOf() + event_r1.duration * 60 * 1e3, "shortTime"), " ");
+  }
+}
+var UserAvailabilityComponent = class _UserAvailabilityComponent {
+  constructor() {
+    this.availability = [];
+    this.date = Date.now();
+  }
+  static {
+    this.\u0275fac = function UserAvailabilityComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _UserAvailabilityComponent)();
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserAvailabilityComponent, selectors: [["user-availability-list"]], inputs: { user: "user", availability: "availability", date: "date" }, standalone: false, decls: 2, vars: 1, consts: [[1, "relative", "inset-y-0", "h-32", "w-[120rem]", "border-b", "border-base-200"], ["event", "", "class", "border-red-700 absolute inset-y-0 overflow-hidden rounded border bg-error p-2 text-white", 3, "left", "width", 4, "ngFor", "ngForOf"], ["event", "", 1, "border-red-700", "absolute", "inset-y-0", "overflow-hidden", "rounded", "border", "bg-error", "p-2", "text-white"], [1, "max-w-full", "text-xs"]], template: function UserAvailabilityComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275elementStart(0, "div", 0);
+        \u0275\u0275template(1, UserAvailabilityComponent_div_1_Template, 5, 12, "div", 1);
+        \u0275\u0275elementEnd();
+      }
+      if (rf & 2) {
+        \u0275\u0275advance();
+        \u0275\u0275property("ngForOf", ctx.availability);
+      }
+    }, dependencies: [NgForOf, DatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=user-availability.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserAvailabilityComponent, { className: "UserAvailabilityComponent", filePath: "libs/users/src/lib/find-availability-modal/user-availability.component.ts", lineNumber: 44 });
+})();
 
 // libs/users/src/lib/select-user-modal.component.ts
 function SelectUserModalComponent_button_15_Template(rf, ctx) {
@@ -145520,7 +145858,7 @@ var SelectUserModalComponent = class _SelectUserModalComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(18, 11, ctx.users).length);
       }
-    }, dependencies: [NgForOf, NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatDialogClose, IconComponent, MatFormField, MatPrefix, MatRipple, MatInput, AsyncPipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatDialogClose, MatFormField, MatPrefix, MatRipple, MatInput, IconComponent, AsyncPipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -145589,6 +145927,8 @@ var SharedUsersModule = class _SharedUsersModule {
     ] });
   }
 };
+\u0275\u0275setComponentScope(WFHSettingsModalComponent, [NgForOf, NgIf, NgControlStatus, NgModel, MatDialogClose, TimeFieldComponent, MatOption, MatFormField, MatSelect, MatRipple, MatProgressSpinner, MatCheckbox, IconComponent], [DatePipe, TranslatePipe]);
+\u0275\u0275setComponentScope(FindAvailabilityModalComponent, [NgForOf, NgIf, NgControlStatus, NgModel, MatDialogClose, DateFieldComponent, UserSearchFieldComponent, UserAvatarComponent, MatRipple, IconComponent, UserAvailabilityComponent], [AsyncPipe, DatePipe, DurationPipe, TranslatePipe]);
 
 // libs/events/src/lib/attendee-list.component.ts
 function AttendeeListComponent_button_2_Template(rf, ctx) {
@@ -145695,7 +146035,7 @@ var AttendeeListComponent = class _AttendeeListComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngForOf", ctx.list);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, UserAvatarComponent, MatRipple, MatTooltip], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, UserAvatarComponent, MatRipple, MatTooltip, IconComponent], encapsulation: 2 });
   }
 };
 (() => {
@@ -145703,7 +146043,7 @@ var AttendeeListComponent = class _AttendeeListComponent {
 })();
 
 // libs/events/src/lib/group-event-details-modal.component.ts
-var _c063 = (a0) => ({ name: a0 });
+var _c064 = (a0) => ({ name: a0 });
 var _c137 = (a0, a1) => ({ going: a0, interested: a1 });
 function GroupEventDetailsModalComponent_img_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -146273,7 +146613,7 @@ var GroupEventDetailsModalComponent = class _GroupEventDetailsModalComponent {
         \u0275\u0275advance(3);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(61, 43, ctx.is_going ? "CALENDAR_EVENT.GROUP_GOING_REMOVE" : "CALENDAR_EVENT.GROUP_GOING_ADD"), " ");
         \u0275\u0275advance(9);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(70, 45, "CALENDAR_EVENT.GROUP_HOST", \u0275\u0275pureFunction1(68, _c063, (ctx.event.organiser == null ? null : ctx.event.organiser.name) || ctx.event.host)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(70, 45, "CALENDAR_EVENT.GROUP_HOST", \u0275\u0275pureFunction1(68, _c064, (ctx.event.organiser == null ? null : ctx.event.organiser.name) || ctx.event.host)), " ");
         \u0275\u0275advance(3);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(73, 48, "CALENDAR_EVENT.GROUP_WHEN_WHERE"), " ");
         \u0275\u0275advance(8);
@@ -146299,7 +146639,7 @@ var GroupEventDetailsModalComponent = class _GroupEventDetailsModalComponent {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.show_attendees);
       }
-    }, dependencies: [NgIf, MatDialogClose, IconComponent, InteractiveMapComponent, AuthenticatedImageDirective, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, AttendeeListComponent, AsyncPipe, DatePipe, SanitizePipe, TranslatePipe, SpacePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatDialogClose, InteractiveMapComponent, AuthenticatedImageDirective, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, IconComponent, AttendeeListComponent, AsyncPipe, DatePipe, SanitizePipe, TranslatePipe, SpacePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -146486,7 +146826,7 @@ var DeskSettingsModalComponent = class _DeskSettingsModalComponent {
         const desk_height_tooltip_r4 = \u0275\u0275reference(2);
         \u0275\u0275property("ngIf", !ctx.edit_presets)("ngIfElse", desk_height_tooltip_r4);
       }
-    }, dependencies: [NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatFormField, MatDialogClose, MatOption, IconComponent, DeskHeightPresetsComponent, MatSelect, MatRipple, MatSlider, MatSliderThumb], encapsulation: 2 });
+    }, dependencies: [NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatFormField, MatDialogClose, MatOption, DeskHeightPresetsComponent, MatSelect, MatRipple, MatSlider, MatSliderThumb, IconComponent], encapsulation: 2 });
   }
 };
 (() => {
@@ -146494,17 +146834,17 @@ var DeskSettingsModalComponent = class _DeskSettingsModalComponent {
 })();
 
 // libs/bookings/src/lib/booking-details-modal.component.ts
-var _c064 = (a0) => ({ time: a0 });
+var _c065 = (a0) => ({ time: a0 });
 var _c138 = () => ({ disable_pan: true, disable_zoom: true });
 function BookingDetailsModalComponent_div_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div", 21);
+    \u0275\u0275element(0, "div", 22);
   }
 }
 function BookingDetailsModalComponent_div_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 22);
-    \u0275\u0275element(1, "image-carousel", 23);
+    \u0275\u0275elementStart(0, "div", 23);
+    \u0275\u0275element(1, "image-carousel", 24);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -146513,12 +146853,23 @@ function BookingDetailsModalComponent_div_3_Template(rf, ctx) {
     \u0275\u0275property("images", ctx_r0.booking == null ? null : ctx_r0.booking.extension_data == null ? null : ctx_r0.booking.extension_data.images);
   }
 }
-function BookingDetailsModalComponent_div_10_Conditional_1_button_0_div_1_Template(rf, ctx) {
+function BookingDetailsModalComponent_icon_10_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 30)(1, "app-icon");
+    \u0275\u0275elementStart(0, "icon", 25);
+    \u0275\u0275text(1, "event_repeat");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("matTooltip", ctx_r0.recurr_tooltip);
+  }
+}
+function BookingDetailsModalComponent_div_11_Conditional_1_button_0_div_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 32)(1, "app-icon");
     \u0275\u0275text(2);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div", 31);
+    \u0275\u0275elementStart(3, "div", 33);
     \u0275\u0275text(4);
     \u0275\u0275pipe(5, "translate");
     \u0275\u0275elementEnd()();
@@ -146531,24 +146882,24 @@ function BookingDetailsModalComponent_div_10_Conditional_1_button_0_div_1_Templa
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 2, ctx_r0.booking.checked_in ? "COMMON.CHECKED_IN" : "COMMON.CHECK_IN"), " ");
   }
 }
-function BookingDetailsModalComponent_div_10_Conditional_1_button_0_ng_template_2_Template(rf, ctx) {
+function BookingDetailsModalComponent_div_11_Conditional_1_button_0_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "mat-spinner", 32);
+    \u0275\u0275element(0, "mat-spinner", 34);
   }
   if (rf & 2) {
     \u0275\u0275property("diameter", 32);
   }
 }
-function BookingDetailsModalComponent_div_10_Conditional_1_button_0_Template(rf, ctx) {
+function BookingDetailsModalComponent_div_11_Conditional_1_button_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 28);
-    \u0275\u0275listener("click", function BookingDetailsModalComponent_div_10_Conditional_1_button_0_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 30);
+    \u0275\u0275listener("click", function BookingDetailsModalComponent_div_11_Conditional_1_button_0_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r2);
       const ctx_r0 = \u0275\u0275nextContext(3);
       return \u0275\u0275resetView(ctx_r0.toggleCheckedIn());
     });
-    \u0275\u0275template(1, BookingDetailsModalComponent_div_10_Conditional_1_button_0_div_1_Template, 6, 4, "div", 29)(2, BookingDetailsModalComponent_div_10_Conditional_1_button_0_ng_template_2_Template, 1, 1, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+    \u0275\u0275template(1, BookingDetailsModalComponent_div_11_Conditional_1_button_0_div_1_Template, 6, 4, "div", 31)(2, BookingDetailsModalComponent_div_11_Conditional_1_button_0_ng_template_2_Template, 1, 1, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -146560,38 +146911,38 @@ function BookingDetailsModalComponent_div_10_Conditional_1_button_0_Template(rf,
     \u0275\u0275property("ngIf", !ctx_r0.checking_in)("ngIfElse", loading_state_r3);
   }
 }
-function BookingDetailsModalComponent_div_10_Conditional_1_Template(rf, ctx) {
+function BookingDetailsModalComponent_div_11_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275template(0, BookingDetailsModalComponent_div_10_Conditional_1_button_0_Template, 4, 7, "button", 27);
+    \u0275\u0275template(0, BookingDetailsModalComponent_div_11_Conditional_1_button_0_Template, 4, 7, "button", 29);
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext(2);
     \u0275\u0275property("ngIf", !ctx_r0.booking.checked_out_at && !ctx_r0.checked_out && !ctx_r0.auto_checkin && (ctx_r0.booking.state === "upcoming" || ctx_r0.booking.state === "started" || ctx_r0.booking.state === "in_progress") && ctx_r0.booking.status !== "declined");
   }
 }
-function BookingDetailsModalComponent_div_10_Template(rf, ctx) {
+function BookingDetailsModalComponent_div_11_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 24);
-    \u0275\u0275template(1, BookingDetailsModalComponent_div_10_Conditional_1_Template, 1, 1, "button", 25);
-    \u0275\u0275elementStart(2, "button", 26)(3, "app-icon");
+    \u0275\u0275elementStart(0, "div", 26);
+    \u0275\u0275template(1, BookingDetailsModalComponent_div_11_Conditional_1_Template, 1, 1, "button", 27);
+    \u0275\u0275elementStart(2, "button", 28)(3, "app-icon");
     \u0275\u0275text(4, "more_horiz");
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    const menu_r4 = \u0275\u0275reference(43);
+    const menu_r4 = \u0275\u0275reference(44);
     \u0275\u0275advance();
     \u0275\u0275conditional(ctx_r0.can_checkin ? 1 : -1);
     \u0275\u0275advance();
     \u0275\u0275property("matMenuTriggerFor", menu_r4);
   }
 }
-function BookingDetailsModalComponent_ng_container_37_div_6_div_14_Template(rf, ctx) {
+function BookingDetailsModalComponent_ng_container_38_div_6_div_14_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 46)(1, "div", 47)(2, "span", 40);
+    \u0275\u0275elementStart(0, "div", 48)(1, "div", 49)(2, "span", 42);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(4, "div", 48);
+    \u0275\u0275elementStart(4, "div", 50);
     \u0275\u0275text(5);
     \u0275\u0275elementEnd()();
   }
@@ -146603,35 +146954,35 @@ function BookingDetailsModalComponent_ng_container_37_div_6_div_14_Template(rf, 
     \u0275\u0275textInterpolate1(" x", item_r7.quantity, " ");
   }
 }
-function BookingDetailsModalComponent_ng_container_37_div_6_Template(rf, ctx) {
+function BookingDetailsModalComponent_ng_container_38_div_6_Template(rf, ctx) {
   if (rf & 1) {
     const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 37)(1, "button", 38);
-    \u0275\u0275listener("click", function BookingDetailsModalComponent_ng_container_37_div_6_Template_button_click_1_listener() {
+    \u0275\u0275elementStart(0, "div", 39)(1, "button", 40);
+    \u0275\u0275listener("click", function BookingDetailsModalComponent_ng_container_38_div_6_Template_button_click_1_listener() {
       const request_r6 = \u0275\u0275restoreView(_r5).$implicit;
       const ctx_r0 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r0.show_request[request_r6.id] = !ctx_r0.show_request[request_r6.id]);
     });
-    \u0275\u0275elementStart(2, "div", 39)(3, "div", 40);
+    \u0275\u0275elementStart(2, "div", 41)(3, "div", 42);
     \u0275\u0275text(4);
     \u0275\u0275pipe(5, "date");
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(7, "div", 41)(8, "app-icon");
+    \u0275\u0275elementStart(7, "div", 43)(8, "app-icon");
     \u0275\u0275text(9);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(10, "div", 42)(11, "app-icon", 43);
+    \u0275\u0275elementStart(10, "div", 44)(11, "app-icon", 45);
     \u0275\u0275text(12);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(13, "div", 44);
-    \u0275\u0275template(14, BookingDetailsModalComponent_ng_container_37_div_6_div_14_Template, 6, 2, "div", 45);
+    \u0275\u0275elementStart(13, "div", 46);
+    \u0275\u0275template(14, BookingDetailsModalComponent_ng_container_38_div_6_div_14_Template, 6, 2, "div", 47);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     const request_r6 = ctx.$implicit;
     const ctx_r0 = \u0275\u0275nextContext(2);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 21, "BOOKINGS.ASSETS_REQUESTED_FOR", \u0275\u0275pureFunction1(24, _c064, \u0275\u0275pipeBind2(5, 18, request_r6.deliver_at, "MMM d, " + ctx_r0.time_format))), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 21, "BOOKINGS.ASSETS_REQUESTED_FOR", \u0275\u0275pureFunction1(24, _c065, \u0275\u0275pipeBind2(5, 18, request_r6.deliver_at, "MMM d, " + ctx_r0.time_format))), " ");
     \u0275\u0275advance(3);
     \u0275\u0275classProp("bg-success", request_r6.state === "approved")("text-success-content", request_r6.state === "approved")("bg-warning", request_r6.state !== "approved" && request_r6.state !== "rejected")("text-warning-content", request_r6.state !== "approved" && request_r6.state !== "rejected")("bg-error", request_r6.state === "rejected")("text-error-content", request_r6.state === "rejected");
     \u0275\u0275property("matTooltip", request_r6.state || "Tentative");
@@ -146645,15 +146996,15 @@ function BookingDetailsModalComponent_ng_container_37_div_6_Template(rf, ctx) {
     \u0275\u0275property("ngForOf", request_r6.items);
   }
 }
-function BookingDetailsModalComponent_ng_container_37_Template(rf, ctx) {
+function BookingDetailsModalComponent_ng_container_38_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "div", 33)(2, "h3", 34);
+    \u0275\u0275elementStart(1, "div", 35)(2, "h3", 36);
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 35);
-    \u0275\u0275template(6, BookingDetailsModalComponent_ng_container_37_div_6_Template, 15, 26, "div", 36);
+    \u0275\u0275elementStart(5, "div", 37);
+    \u0275\u0275template(6, BookingDetailsModalComponent_ng_container_38_div_6_Template, 15, 26, "div", 38);
     \u0275\u0275elementEnd()();
     \u0275\u0275elementContainerEnd();
   }
@@ -146665,10 +147016,10 @@ function BookingDetailsModalComponent_ng_container_37_Template(rf, ctx) {
     \u0275\u0275property("ngForOf", ctx_r0.booking.valid_assets);
   }
 }
-function BookingDetailsModalComponent_button_38_ng_container_1_Template(rf, ctx) {
+function BookingDetailsModalComponent_button_39_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "interactive-map", 50);
+    \u0275\u0275element(1, "interactive-map", 52);
     \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
@@ -146677,16 +147028,16 @@ function BookingDetailsModalComponent_button_38_ng_container_1_Template(rf, ctx)
     \u0275\u0275property("src", ctx_r0.level == null ? null : ctx_r0.level.map_id)("features", ctx_r0.features)("options", \u0275\u0275pureFunction0(3, _c138));
   }
 }
-function BookingDetailsModalComponent_button_38_Template(rf, ctx) {
+function BookingDetailsModalComponent_button_39_Template(rf, ctx) {
   if (rf & 1) {
     const _r8 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 49);
-    \u0275\u0275listener("click", function BookingDetailsModalComponent_button_38_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 51);
+    \u0275\u0275listener("click", function BookingDetailsModalComponent_button_39_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r8);
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.viewLocation());
     });
-    \u0275\u0275template(1, BookingDetailsModalComponent_button_38_ng_container_1_Template, 2, 4, "ng-container", 15);
+    \u0275\u0275template(1, BookingDetailsModalComponent_button_39_ng_container_1_Template, 2, 4, "ng-container", 16);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -146695,16 +147046,16 @@ function BookingDetailsModalComponent_button_38_Template(rf, ctx) {
     \u0275\u0275property("ngIf", !ctx_r0.hide_map);
   }
 }
-function BookingDetailsModalComponent_button_44_Template(rf, ctx) {
+function BookingDetailsModalComponent_button_45_Template(rf, ctx) {
   if (rf & 1) {
     const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 51);
-    \u0275\u0275listener("click", function BookingDetailsModalComponent_button_44_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 53);
+    \u0275\u0275listener("click", function BookingDetailsModalComponent_button_45_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r9);
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.edit(ctx_r0.booking));
     });
-    \u0275\u0275elementStart(1, "div", 52)(2, "app-icon");
+    \u0275\u0275elementStart(1, "div", 54)(2, "app-icon");
     \u0275\u0275text(3, "edit");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "div");
@@ -146717,16 +147068,16 @@ function BookingDetailsModalComponent_button_44_Template(rf, ctx) {
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 1, "BOOKINGS.ACTION_EDIT"));
   }
 }
-function BookingDetailsModalComponent_button_45_Template(rf, ctx) {
+function BookingDetailsModalComponent_button_46_Template(rf, ctx) {
   if (rf & 1) {
     const _r10 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 53);
-    \u0275\u0275listener("click", function BookingDetailsModalComponent_button_45_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 55);
+    \u0275\u0275listener("click", function BookingDetailsModalComponent_button_46_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r10);
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.setDeskHeight());
     });
-    \u0275\u0275elementStart(1, "div", 52)(2, "app-icon", 54);
+    \u0275\u0275elementStart(1, "div", 54)(2, "app-icon", 56);
     \u0275\u0275text(3, " height ");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "div");
@@ -146739,16 +147090,16 @@ function BookingDetailsModalComponent_button_45_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 1, "BOOKINGS.ACTION_SET_DESK_HEIGHT"), " ");
   }
 }
-function BookingDetailsModalComponent_button_46_Template(rf, ctx) {
+function BookingDetailsModalComponent_button_47_Template(rf, ctx) {
   if (rf & 1) {
     const _r11 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 53);
-    \u0275\u0275listener("click", function BookingDetailsModalComponent_button_46_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 55);
+    \u0275\u0275listener("click", function BookingDetailsModalComponent_button_47_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r11);
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.remove(ctx_r0.booking, false));
     });
-    \u0275\u0275elementStart(1, "div", 52)(2, "app-icon", 55);
+    \u0275\u0275elementStart(1, "div", 54)(2, "app-icon", 57);
     \u0275\u0275text(3, "delete");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "div");
@@ -146761,16 +147112,16 @@ function BookingDetailsModalComponent_button_46_Template(rf, ctx) {
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 1, "BOOKINGS.ACTION_DELETE"));
   }
 }
-function BookingDetailsModalComponent_button_47_Template(rf, ctx) {
+function BookingDetailsModalComponent_button_48_Template(rf, ctx) {
   if (rf & 1) {
     const _r12 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 53);
-    \u0275\u0275listener("click", function BookingDetailsModalComponent_button_47_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 55);
+    \u0275\u0275listener("click", function BookingDetailsModalComponent_button_48_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r12);
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.remove(ctx_r0.booking, true));
     });
-    \u0275\u0275elementStart(1, "div", 52)(2, "app-icon", 55);
+    \u0275\u0275elementStart(1, "div", 54)(2, "app-icon", 57);
     \u0275\u0275text(3, "delete");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "div");
@@ -146783,16 +147134,16 @@ function BookingDetailsModalComponent_button_47_Template(rf, ctx) {
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 1, "BOOKINGS.ACTION_DELETE_SERIES"));
   }
 }
-function BookingDetailsModalComponent_button_48_Template(rf, ctx) {
+function BookingDetailsModalComponent_button_49_Template(rf, ctx) {
   if (rf & 1) {
     const _r13 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 53);
-    \u0275\u0275listener("click", function BookingDetailsModalComponent_button_48_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 55);
+    \u0275\u0275listener("click", function BookingDetailsModalComponent_button_49_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r13);
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.end(ctx_r0.booking));
     });
-    \u0275\u0275elementStart(1, "div", 52)(2, "app-icon", 55);
+    \u0275\u0275elementStart(1, "div", 54)(2, "app-icon", 57);
     \u0275\u0275text(3, "delete");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "div");
@@ -146920,6 +147271,9 @@ var BookingDetailsModalComponent = class _BookingDetailsModalComponent {
       this.checking_in = false;
     });
   }
+  get recurr_tooltip() {
+    return formatRecurrence(fromBookingRecurrence(this.booking)) || i18n("CALENDAR_EVENT.RECURRING_TOOLTIP");
+  }
   status(id) {
     const booking = this.booking.linked_bookings.find((_3) => _3.asset_id === id);
     if (booking.status)
@@ -146953,7 +147307,7 @@ var BookingDetailsModalComponent = class _BookingDetailsModalComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookingDetailsModalComponent, selectors: [["booking-details-modal"]], standalone: false, decls: 49, vars: 27, consts: [["menu", "matMenu"], ["loading_state", ""], [1, "h-[100vh]", "w-[100vw]", "space-y-2", "overflow-auto", "bg-base-100", "pb-2", "sm:relative", "sm:inset-auto", "sm:h-auto", "sm:max-h-[80vh]", "sm:w-[51rem]", "sm:rounded", "sm:bg-base-200"], [1, "max-h-screen", "flex-col", "items-center", "border-base-200", "bg-base-100", "pb-4", "sm:flex", "sm:max-h-[80vh]", "sm:border-b", "sm:px-16"], ["class", "block h-8 w-full sm:hidden", 4, "ngIf"], ["class", "h-64 w-full overflow-hidden bg-neutral sm:rounded-b", 4, "ngIf"], ["title", "", 1, "mt-2", "w-full", "px-3", "text-xl", "font-medium"], [1, "w-full", "items-center", "justify-between", "sm:flex"], [1, "m-2", "flex"], [3, "status"], ["actions", "", "class", "flex items-center space-x-2 px-2", 4, "ngIf"], [1, "flex-wrap", "sm:flex", "sm:px-12"], [1, "min-w-1/3", "flex-grow-[4]", "rounded", "border-base-200", "sm:m-2", "sm:w-[16rem]", "sm:border", "sm:bg-base-100", "sm:p-4"], [1, "mb-2", "mt-2", "px-3", "text-lg", "font-medium"], [1, "flex", "items-center", "space-x-2", "px-2"], [4, "ngIf"], ["map", "", "class", "min-w-1/3 relative m-2 mt-4 h-64 w-[calc(100%-1rem)] flex-grow-[3] overflow-hidden rounded border border-base-200 p-2 sm:my-2 sm:h-48 sm:w-[16rem] sm:bg-base-100", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "left-2", "top-0", "bg-neutral", "text-white"], ["xPosition", "before"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "click", 4, "ngIf"], ["mat-menu-item", "", 3, "click", 4, "ngIf"], [1, "block", "h-8", "w-full", "sm:hidden"], [1, "h-64", "w-full", "overflow-hidden", "bg-neutral", "sm:rounded-b"], [1, "h-64", "w-full", 3, "images"], ["actions", "", 1, "flex", "items-center", "space-x-2", "px-2"], ["btn", "", "matRipple", "", 1, "h-10", "flex-1", "border-none", 3, "bg-success", "text-success-content", "disabled"], ["icon", "", "matRipple", "", 1, "h-12", "w-12", "rounded", "bg-secondary", "text-white", 3, "matMenuTriggerFor"], ["btn", "", "matRipple", "", "class", "h-10 flex-1 border-none", 3, "bg-success", "text-success-content", "disabled", "click", 4, "ngIf"], ["btn", "", "matRipple", "", 1, "h-10", "flex-1", "border-none", 3, "click", "disabled"], ["class", "flex items-center justify-center space-x-2", 4, "ngIf", "ngIfElse"], [1, "flex", "items-center", "justify-center", "space-x-2"], [1, "mr-4"], [1, "mx-auto", 3, "diameter"], [1, "min-w-1/3", "mt-4", "flex-grow-[3]", "rounded", "border-base-200", "sm:m-2", "sm:w-[16rem]", "sm:border", "sm:bg-base-100", "sm:p-4"], [1, "mx-3", "py-2", "text-lg", "font-medium"], [1, "flex", "flex-col", "space-y-2"], ["request", "", "class", "overflow-hidden rounded-xl border border-base-300 bg-base-100", 4, "ngFor", "ngForOf"], ["request", "", 1, "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100"], ["matRipple", "", 1, "flex", "w-full", "items-center", "space-x-2", "p-3", 3, "click"], [1, "flex-1", "text-left"], [1, "text-sm"], [1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full", 3, "matTooltip"], [1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full"], [1, "text-2xl"], [1, "flex", "flex-col", "divide-y", "divide-base-100", "bg-base-200"], ["class", "flex items-center space-x-2 px-3 py-1 hover:opacity-90", 4, "ngFor", "ngForOf"], [1, "flex", "items-center", "space-x-2", "px-3", "py-1", "hover:opacity-90"], [1, "flex", "flex-1", "items-center"], [1, "rounded", "bg-success", "px-2", "py-1", "text-xs", "text-success-content"], ["map", "", 1, "min-w-1/3", "relative", "m-2", "mt-4", "h-64", "w-[calc(100%-1rem)]", "flex-grow-[3]", "overflow-hidden", "rounded", "border", "border-base-200", "p-2", "sm:my-2", "sm:h-48", "sm:w-[16rem]", "sm:bg-base-100", 3, "click"], [1, "pointer-events-none", 3, "src", "features", "options"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "click"], [1, "flex", "items-center", "space-x-2", "text-base"], ["mat-menu-item", "", 3, "click"], ["className", "material-symbols-rounded"], [1, "text-error"]], template: function BookingDetailsModalComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookingDetailsModalComponent, selectors: [["booking-details-modal"]], standalone: false, decls: 50, vars: 28, consts: [["menu", "matMenu"], ["loading_state", ""], [1, "h-[100vh]", "w-[100vw]", "space-y-2", "overflow-auto", "bg-base-100", "pb-2", "sm:relative", "sm:inset-auto", "sm:h-auto", "sm:max-h-[80vh]", "sm:w-[51rem]", "sm:rounded", "sm:bg-base-200"], [1, "max-h-screen", "flex-col", "items-center", "border-base-200", "bg-base-100", "pb-4", "sm:flex", "sm:max-h-[80vh]", "sm:border-b", "sm:px-16"], ["class", "block h-8 w-full sm:hidden", 4, "ngIf"], ["class", "h-64 w-full overflow-hidden bg-neutral sm:rounded-b", 4, "ngIf"], ["title", "", 1, "mt-2", "w-full", "px-3", "text-xl", "font-medium"], [1, "w-full", "items-center", "justify-between", "sm:flex"], [1, "m-2", "flex", "items-center", "space-x-2"], [3, "status"], ["class", "text-2xl", 3, "matTooltip", 4, "ngIf"], ["actions", "", "class", "flex items-center space-x-2 px-2", 4, "ngIf"], [1, "flex-wrap", "sm:flex", "sm:px-12"], [1, "min-w-1/3", "flex-grow-[4]", "rounded", "border-base-200", "sm:m-2", "sm:w-[16rem]", "sm:border", "sm:bg-base-100", "sm:p-4"], [1, "mb-2", "mt-2", "px-3", "text-lg", "font-medium"], [1, "flex", "items-center", "space-x-2", "px-2"], [4, "ngIf"], ["map", "", "class", "min-w-1/3 relative m-2 mt-4 h-64 w-[calc(100%-1rem)] flex-grow-[3] overflow-hidden rounded border border-base-200 p-2 sm:my-2 sm:h-48 sm:w-[16rem] sm:bg-base-100", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "left-2", "top-0", "bg-neutral", "text-white"], ["xPosition", "before"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "click", 4, "ngIf"], ["mat-menu-item", "", 3, "click", 4, "ngIf"], [1, "block", "h-8", "w-full", "sm:hidden"], [1, "h-64", "w-full", "overflow-hidden", "bg-neutral", "sm:rounded-b"], [1, "h-64", "w-full", 3, "images"], [1, "text-2xl", 3, "matTooltip"], ["actions", "", 1, "flex", "items-center", "space-x-2", "px-2"], ["btn", "", "matRipple", "", 1, "h-10", "flex-1", "border-none", 3, "bg-success", "text-success-content", "disabled"], ["icon", "", "matRipple", "", 1, "h-12", "w-12", "rounded", "bg-secondary", "text-white", 3, "matMenuTriggerFor"], ["btn", "", "matRipple", "", "class", "h-10 flex-1 border-none", 3, "bg-success", "text-success-content", "disabled", "click", 4, "ngIf"], ["btn", "", "matRipple", "", 1, "h-10", "flex-1", "border-none", 3, "click", "disabled"], ["class", "flex items-center justify-center space-x-2", 4, "ngIf", "ngIfElse"], [1, "flex", "items-center", "justify-center", "space-x-2"], [1, "mr-4"], [1, "mx-auto", 3, "diameter"], [1, "min-w-1/3", "mt-4", "flex-grow-[3]", "rounded", "border-base-200", "sm:m-2", "sm:w-[16rem]", "sm:border", "sm:bg-base-100", "sm:p-4"], [1, "mx-3", "py-2", "text-lg", "font-medium"], [1, "flex", "flex-col", "space-y-2"], ["request", "", "class", "overflow-hidden rounded-xl border border-base-300 bg-base-100", 4, "ngFor", "ngForOf"], ["request", "", 1, "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100"], ["matRipple", "", 1, "flex", "w-full", "items-center", "space-x-2", "p-3", 3, "click"], [1, "flex-1", "text-left"], [1, "text-sm"], [1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full", 3, "matTooltip"], [1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full"], [1, "text-2xl"], [1, "flex", "flex-col", "divide-y", "divide-base-100", "bg-base-200"], ["class", "flex items-center space-x-2 px-3 py-1 hover:opacity-90", 4, "ngFor", "ngForOf"], [1, "flex", "items-center", "space-x-2", "px-3", "py-1", "hover:opacity-90"], [1, "flex", "flex-1", "items-center"], [1, "rounded", "bg-success", "px-2", "py-1", "text-xs", "text-success-content"], ["map", "", 1, "min-w-1/3", "relative", "m-2", "mt-4", "h-64", "w-[calc(100%-1rem)]", "flex-grow-[3]", "overflow-hidden", "rounded", "border", "border-base-200", "p-2", "sm:my-2", "sm:h-48", "sm:w-[16rem]", "sm:bg-base-100", 3, "click"], [1, "pointer-events-none", 3, "src", "features", "options"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "click"], [1, "flex", "items-center", "space-x-2", "text-base"], ["mat-menu-item", "", 3, "click"], ["className", "material-symbols-rounded"], [1, "text-error"]], template: function BookingDetailsModalComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 2)(1, "div", 3);
         \u0275\u0275template(2, BookingDetailsModalComponent_div_2_Template, 1, 0, "div", 4)(3, BookingDetailsModalComponent_div_3_Template, 2, 1, "div", 5);
@@ -146962,45 +147316,47 @@ var BookingDetailsModalComponent = class _BookingDetailsModalComponent {
         \u0275\u0275elementEnd();
         \u0275\u0275elementStart(6, "div", 7)(7, "div", 8)(8, "status-pill", 9);
         \u0275\u0275text(9);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275template(10, BookingDetailsModalComponent_div_10_Template, 5, 2, "div", 10);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(11, "div", 11)(12, "div", 12)(13, "h3", 13);
-        \u0275\u0275text(14);
-        \u0275\u0275pipe(15, "translate");
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(16, "div", 14)(17, "app-icon");
-        \u0275\u0275text(18, "event");
+        \u0275\u0275template(10, BookingDetailsModalComponent_icon_10_Template, 2, 1, "icon", 10);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(19, "div");
-        \u0275\u0275text(20);
-        \u0275\u0275pipe(21, "date");
+        \u0275\u0275template(11, BookingDetailsModalComponent_div_11_Template, 5, 2, "div", 11);
         \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(22, "div", 14)(23, "app-icon");
-        \u0275\u0275text(24, "schedule");
+        \u0275\u0275elementStart(12, "div", 12)(13, "div", 13)(14, "h3", 14);
+        \u0275\u0275text(15);
+        \u0275\u0275pipe(16, "translate");
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(25, "div");
-        \u0275\u0275text(26);
+        \u0275\u0275elementStart(17, "div", 15)(18, "app-icon");
+        \u0275\u0275text(19, "event");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(20, "div");
+        \u0275\u0275text(21);
+        \u0275\u0275pipe(22, "date");
         \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(27, "div", 14)(28, "app-icon");
-        \u0275\u0275text(29, "map");
+        \u0275\u0275elementStart(23, "div", 15)(24, "app-icon");
+        \u0275\u0275text(25, "schedule");
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(30, "div");
-        \u0275\u0275text(31);
+        \u0275\u0275elementStart(26, "div");
+        \u0275\u0275text(27);
         \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(32, "div", 14)(33, "app-icon");
-        \u0275\u0275text(34, "place");
+        \u0275\u0275elementStart(28, "div", 15)(29, "app-icon");
+        \u0275\u0275text(30, "map");
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(35, "div");
-        \u0275\u0275text(36);
+        \u0275\u0275elementStart(31, "div");
+        \u0275\u0275text(32);
+        \u0275\u0275elementEnd()();
+        \u0275\u0275elementStart(33, "div", 15)(34, "app-icon");
+        \u0275\u0275text(35, "place");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(36, "div");
+        \u0275\u0275text(37);
         \u0275\u0275elementEnd()()();
-        \u0275\u0275template(37, BookingDetailsModalComponent_ng_container_37_Template, 7, 5, "ng-container", 15)(38, BookingDetailsModalComponent_button_38_Template, 2, 1, "button", 16);
+        \u0275\u0275template(38, BookingDetailsModalComponent_ng_container_38_Template, 7, 5, "ng-container", 16)(39, BookingDetailsModalComponent_button_39_Template, 2, 1, "button", 17);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(39, "button", 17)(40, "app-icon");
-        \u0275\u0275text(41, "close");
+        \u0275\u0275elementStart(40, "button", 18)(41, "app-icon");
+        \u0275\u0275text(42, "close");
         \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(42, "mat-menu", 18, 0);
-        \u0275\u0275template(44, BookingDetailsModalComponent_button_44_Template, 7, 3, "button", 19)(45, BookingDetailsModalComponent_button_45_Template, 7, 3, "button", 20)(46, BookingDetailsModalComponent_button_46_Template, 7, 3, "button", 20)(47, BookingDetailsModalComponent_button_47_Template, 7, 3, "button", 20)(48, BookingDetailsModalComponent_button_48_Template, 7, 3, "button", 20);
+        \u0275\u0275elementStart(43, "mat-menu", 19, 0);
+        \u0275\u0275template(45, BookingDetailsModalComponent_button_45_Template, 7, 3, "button", 20)(46, BookingDetailsModalComponent_button_46_Template, 7, 3, "button", 21)(47, BookingDetailsModalComponent_button_47_Template, 7, 3, "button", 21)(48, BookingDetailsModalComponent_button_48_Template, 7, 3, "button", 21)(49, BookingDetailsModalComponent_button_49_Template, 7, 3, "button", 21);
         \u0275\u0275elementEnd();
       }
       if (rf & 2) {
@@ -147017,11 +147373,13 @@ var BookingDetailsModalComponent = class _BookingDetailsModalComponent {
         \u0275\u0275advance();
         \u0275\u0275textInterpolate1(" ", ctx.period, " ");
         \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.booking.instance);
+        \u0275\u0275advance();
         \u0275\u0275property("ngIf", !ctx.booking.is_done);
         \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(15, 22, "BOOKINGS.DETAILS"), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(16, 23, "BOOKINGS.DETAILS"), " ");
         \u0275\u0275advance(6);
-        \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(21, 24, ctx.booking.date, "EEEE, dd LLLL y"));
+        \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(22, 25, ctx.booking.date, "EEEE, dd LLLL y"));
         \u0275\u0275advance(6);
         \u0275\u0275textInterpolate(ctx.period);
         \u0275\u0275advance(5);
@@ -147043,11 +147401,11 @@ var BookingDetailsModalComponent = class _BookingDetailsModalComponent {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.is_in_progress);
       }
-    }, dependencies: [NgForOf, NgIf, MatDialogClose, MatProgressSpinner, IconComponent, InteractiveMapComponent, ImageCarouselComponent, StatusPillComponent, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, MatTooltip, DatePipe, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
+    }, dependencies: [NgForOf, NgIf, MatDialogClose, MatProgressSpinner, InteractiveMapComponent, ImageCarouselComponent, StatusPillComponent, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, MatTooltip, IconComponent, DatePipe, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookingDetailsModalComponent, { className: "BookingDetailsModalComponent", filePath: "libs/bookings/src/lib/booking-details-modal.component.ts", lineNumber: 352 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookingDetailsModalComponent, { className: "BookingDetailsModalComponent", filePath: "libs/bookings/src/lib/booking-details-modal.component.ts", lineNumber: 360 });
 })();
 
 // libs/bookings/src/lib/parking.service.ts
@@ -147109,7 +147467,7 @@ var ParkingService = class _ParkingService extends AsyncHandler {
 };
 
 // libs/bookings/src/lib/booking-card.component.ts
-var _c065 = () => ["./"];
+var _c066 = () => ["./"];
 var _c139 = (a0) => ({ booking: a0 });
 function BookingCardComponent_h4_0_span_1_Template(rf, ctx) {
   if (rf & 1) {
@@ -147144,9 +147502,20 @@ function BookingCardComponent_h4_0_Template(rf, ctx) {
     \u0275\u0275textInterpolate1("(", \u0275\u0275pipeBind2(6, 6, ctx_r0.booking == null ? null : ctx_r0.booking.date, "zzzz"), ")");
   }
 }
-function BookingCardComponent_a_1_Case_9_Template(rf, ctx) {
+function BookingCardComponent_a_1_icon_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "app-icon", 13);
+    \u0275\u0275elementStart(0, "icon", 19);
+    \u0275\u0275text(1, "event_repeat");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("matTooltip", ctx_r0.recurr_tooltip);
+  }
+}
+function BookingCardComponent_a_1_Case_10_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "app-icon", 14);
     \u0275\u0275pipe(1, "translate");
     \u0275\u0275text(2, "desk");
     \u0275\u0275elementEnd();
@@ -147155,9 +147524,9 @@ function BookingCardComponent_a_1_Case_9_Template(rf, ctx) {
     \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(1, 1, "RESOURCE.DESK"));
   }
 }
-function BookingCardComponent_a_1_Case_10_Template(rf, ctx) {
+function BookingCardComponent_a_1_Case_11_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "app-icon", 13);
+    \u0275\u0275elementStart(0, "app-icon", 14);
     \u0275\u0275pipe(1, "translate");
     \u0275\u0275text(2, "lock");
     \u0275\u0275elementEnd();
@@ -147166,9 +147535,9 @@ function BookingCardComponent_a_1_Case_10_Template(rf, ctx) {
     \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(1, 1, "RESOURCE.LOCKER"));
   }
 }
-function BookingCardComponent_a_1_Case_11_Template(rf, ctx) {
+function BookingCardComponent_a_1_Case_12_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "app-icon", 13);
+    \u0275\u0275elementStart(0, "app-icon", 14);
     \u0275\u0275pipe(1, "translate");
     \u0275\u0275text(2, "drive_eta");
     \u0275\u0275elementEnd();
@@ -147177,9 +147546,9 @@ function BookingCardComponent_a_1_Case_11_Template(rf, ctx) {
     \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(1, 1, "RESOURCE.PARKING"));
   }
 }
-function BookingCardComponent_a_1_Case_12_Template(rf, ctx) {
+function BookingCardComponent_a_1_Case_13_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "app-icon", 13);
+    \u0275\u0275elementStart(0, "app-icon", 14);
     \u0275\u0275pipe(1, "translate");
     \u0275\u0275text(2, "people");
     \u0275\u0275elementEnd();
@@ -147188,19 +147557,19 @@ function BookingCardComponent_a_1_Case_12_Template(rf, ctx) {
     \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(1, 1, "RESOURCE.VISITOR"));
   }
 }
-function BookingCardComponent_a_1_Case_13_Template(rf, ctx) {
+function BookingCardComponent_a_1_Case_14_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "app-icon");
     \u0275\u0275text(1, "book");
     \u0275\u0275elementEnd();
   }
 }
-function BookingCardComponent_a_1_div_16_Template(rf, ctx) {
+function BookingCardComponent_a_1_div_17_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 18)(1, "app-icon");
+    \u0275\u0275elementStart(0, "div", 20)(1, "app-icon");
     \u0275\u0275text(2, "place");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div", 19);
+    \u0275\u0275elementStart(3, "div", 21);
     \u0275\u0275text(4);
     \u0275\u0275elementEnd()();
   }
@@ -147210,9 +147579,9 @@ function BookingCardComponent_a_1_div_16_Template(rf, ctx) {
     \u0275\u0275textInterpolate(ctx_r0.location);
   }
 }
-function BookingCardComponent_a_1_div_19_Template(rf, ctx) {
+function BookingCardComponent_a_1_div_20_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 20);
+    \u0275\u0275elementStart(0, "div", 22);
     \u0275\u0275text(1);
     \u0275\u0275pipe(2, "translate");
     \u0275\u0275elementEnd();
@@ -147222,9 +147591,9 @@ function BookingCardComponent_a_1_div_19_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "BOOKINGS.ASSOCIATE"), " ");
   }
 }
-function BookingCardComponent_a_1_div_20_Template(rf, ctx) {
+function BookingCardComponent_a_1_div_21_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 20);
+    \u0275\u0275elementStart(0, "div", 22);
     \u0275\u0275text(1);
     \u0275\u0275pipe(2, "translate");
     \u0275\u0275elementEnd();
@@ -147234,9 +147603,9 @@ function BookingCardComponent_a_1_div_20_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "BOOKINGS.EVENT"), " ");
   }
 }
-function BookingCardComponent_a_1_div_21_Template(rf, ctx) {
+function BookingCardComponent_a_1_div_22_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 20);
+    \u0275\u0275elementStart(0, "div", 22);
     \u0275\u0275text(1);
     \u0275\u0275pipe(2, "translate");
     \u0275\u0275elementEnd();
@@ -147261,33 +147630,37 @@ function BookingCardComponent_a_1_Template(rf, ctx) {
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "div", 9)(5, "status-pill", 10);
     \u0275\u0275text(6);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(7, "div", 11)(8, "div", 12);
-    \u0275\u0275template(9, BookingCardComponent_a_1_Case_9_Template, 3, 3, "app-icon", 13)(10, BookingCardComponent_a_1_Case_10_Template, 3, 3, "app-icon", 13)(11, BookingCardComponent_a_1_Case_11_Template, 3, 3, "app-icon", 13)(12, BookingCardComponent_a_1_Case_12_Template, 3, 3, "app-icon", 13)(13, BookingCardComponent_a_1_Case_13_Template, 2, 0, "app-icon");
-    \u0275\u0275elementStart(14, "div", 14);
-    \u0275\u0275text(15);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(16, BookingCardComponent_a_1_div_16_Template, 5, 1, "div", 15);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(17, "app-icon", 16);
-    \u0275\u0275text(18, " chevron_right ");
+    \u0275\u0275template(7, BookingCardComponent_a_1_icon_7_Template, 2, 1, "icon", 11);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(19, BookingCardComponent_a_1_div_19_Template, 3, 3, "div", 17)(20, BookingCardComponent_a_1_div_20_Template, 3, 3, "div", 17)(21, BookingCardComponent_a_1_div_21_Template, 3, 3, "div", 17);
-    \u0275\u0275pipe(22, "async");
+    \u0275\u0275elementStart(8, "div", 12)(9, "div", 13);
+    \u0275\u0275template(10, BookingCardComponent_a_1_Case_10_Template, 3, 3, "app-icon", 14)(11, BookingCardComponent_a_1_Case_11_Template, 3, 3, "app-icon", 14)(12, BookingCardComponent_a_1_Case_12_Template, 3, 3, "app-icon", 14)(13, BookingCardComponent_a_1_Case_13_Template, 3, 3, "app-icon", 14)(14, BookingCardComponent_a_1_Case_14_Template, 2, 0, "app-icon");
+    \u0275\u0275elementStart(15, "div", 15);
+    \u0275\u0275text(16);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275template(17, BookingCardComponent_a_1_div_17_Template, 5, 1, "div", 16);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(18, "app-icon", 17);
+    \u0275\u0275text(19, " chevron_right ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(20, BookingCardComponent_a_1_div_20_Template, 3, 3, "div", 18)(21, BookingCardComponent_a_1_div_21_Template, 3, 3, "div", 18)(22, BookingCardComponent_a_1_div_22_Template, 3, 3, "div", 18);
+    \u0275\u0275pipe(23, "async");
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    let tmp_6_0;
+    let tmp_7_0;
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(13, _c065))("queryParams", \u0275\u0275pureFunction1(14, _c139, ctx_r0.booking == null ? null : ctx_r0.booking.id));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(14, _c066))("queryParams", \u0275\u0275pureFunction1(15, _c139, ctx_r0.booking == null ? null : ctx_r0.booking.id));
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(ctx_r0.booking == null ? null : ctx_r0.booking.title);
     \u0275\u0275advance(2);
     \u0275\u0275property("status", ctx_r0.status);
     \u0275\u0275advance();
     \u0275\u0275textInterpolate(ctx_r0.period);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.booking.instance);
     \u0275\u0275advance(3);
-    \u0275\u0275conditional((tmp_6_0 = ctx_r0.type) === "desk" ? 9 : tmp_6_0 === "locker" ? 10 : tmp_6_0 === "parking" ? 11 : tmp_6_0 === "visitor" ? 12 : 13);
+    \u0275\u0275conditional((tmp_7_0 = ctx_r0.type) === "desk" ? 10 : tmp_7_0 === "locker" ? 11 : tmp_7_0 === "parking" ? 12 : tmp_7_0 === "visitor" ? 13 : 14);
     \u0275\u0275advance(6);
     \u0275\u0275textInterpolate1(" ", ctx_r0.raw_description || (ctx_r0.booking == null ? null : ctx_r0.booking.asset_name) || (ctx_r0.booking == null ? null : ctx_r0.booking.asset_id), " ");
     \u0275\u0275advance();
@@ -147297,7 +147670,7 @@ function BookingCardComponent_a_1_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", (ctx_r0.booking == null ? null : ctx_r0.booking.booking_type) === "group-event");
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(22, 11, ctx_r0.is_reserved_parking_space));
+    \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(23, 12, ctx_r0.is_reserved_parking_space));
   }
 }
 var BookingCardComponent = class _BookingCardComponent extends AsyncHandler {
@@ -147319,6 +147692,9 @@ var BookingCardComponent = class _BookingCardComponent extends AsyncHandler {
     if (this.booking?.status === "tentative")
       return "warning";
     return "warning";
+  }
+  get recurr_tooltip() {
+    return formatRecurrence(fromBookingRecurrence(this.booking)) || i18n("CALENDAR_EVENT.RECURRING_TOOLTIP");
   }
   constructor(_dialog, _route, _org, _settings, _parking) {
     super();
@@ -147390,20 +147766,20 @@ var BookingCardComponent = class _BookingCardComponent extends AsyncHandler {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookingCardComponent, selectors: [["booking-card"]], inputs: { booking: "booking", show_day: "show_day", edit_fn: "edit_fn", remove_fn: "remove_fn", end_fn: "end_fn" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 2, vars: 2, consts: [["class", "mb-2 flex items-center", 4, "ngIf"], ["name", "view-booking-details", "class", "relative w-full cursor-pointer overflow-hidden", 3, "routerLink", "queryParams", "click", 4, "ngIf"], [1, "mb-2", "flex", "items-center"], ["day", "", 4, "ngIf"], [1, "px-2", "text-xs"], ["day", ""], ["name", "view-booking-details", 1, "relative", "w-full", "cursor-pointer", "overflow-hidden", 3, "click", "routerLink", "queryParams"], [1, "relative", "w-full", "rounded-xl", "border", "border-base-300", "bg-base-100", "py-4", "shadow"], [1, "px-4", "text-lg"], [1, "mx-4", "my-2", "flex"], [3, "status"], [1, "divide-base-200-500", "flex", "flex-col", "flex-wrap", "space-y-2", "py-2", "sm:flex-row", "sm:space-y-0", "sm:divide-x"], [1, "flex", "max-w-[33%]", "items-center", "px-4"], ["matTooltipPosition", "right", 3, "matTooltip"], [1, "mx-2", "w-1/2", "flex-1", "truncate"], ["class", "flex items-center px-4", 4, "ngIf"], [1, "absolute", "right-1", "top-1/2", "-translate-y-1/2", "text-4xl"], ["class", "bg-warning/50 absolute right-2 top-2 rounded-xl px-2 py-1 text-xs", 4, "ngIf"], [1, "flex", "items-center", "px-4"], [1, "mx-2", "truncate"], [1, "bg-warning/50", "absolute", "right-2", "top-2", "rounded-xl", "px-2", "py-1", "text-xs"]], template: function BookingCardComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookingCardComponent, selectors: [["booking-card"]], inputs: { booking: "booking", show_day: "show_day", edit_fn: "edit_fn", remove_fn: "remove_fn", end_fn: "end_fn" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 2, vars: 2, consts: [["class", "mb-2 flex items-center", 4, "ngIf"], ["name", "view-booking-details", "class", "relative w-full cursor-pointer overflow-hidden", 3, "routerLink", "queryParams", "click", 4, "ngIf"], [1, "mb-2", "flex", "items-center"], ["day", "", 4, "ngIf"], [1, "px-2", "text-xs"], ["day", ""], ["name", "view-booking-details", 1, "relative", "w-full", "cursor-pointer", "overflow-hidden", 3, "click", "routerLink", "queryParams"], [1, "relative", "w-full", "rounded-xl", "border", "border-base-300", "bg-base-100", "py-4", "shadow"], [1, "px-4", "text-lg"], [1, "mx-4", "my-2", "flex", "items-center", "space-x-2"], [3, "status"], ["class", "text-2xl", 3, "matTooltip", 4, "ngIf"], [1, "divide-base-200-500", "flex", "flex-col", "flex-wrap", "space-y-2", "py-2", "sm:flex-row", "sm:space-y-0", "sm:divide-x"], [1, "flex", "max-w-[33%]", "items-center", "px-4"], ["matTooltipPosition", "right", 3, "matTooltip"], [1, "mx-2", "w-1/2", "flex-1", "truncate"], ["class", "flex items-center px-4", 4, "ngIf"], [1, "absolute", "right-1", "top-1/2", "-translate-y-1/2", "text-4xl"], ["class", "bg-warning/50 absolute right-2 top-2 rounded-xl px-2 py-1 text-xs", 4, "ngIf"], [1, "text-2xl", 3, "matTooltip"], [1, "flex", "items-center", "px-4"], [1, "mx-2", "truncate"], [1, "bg-warning/50", "absolute", "right-2", "top-2", "rounded-xl", "px-2", "py-1", "text-xs"]], template: function BookingCardComponent_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275template(0, BookingCardComponent_h4_0_Template, 7, 9, "h4", 0)(1, BookingCardComponent_a_1_Template, 23, 16, "a", 1);
+        \u0275\u0275template(0, BookingCardComponent_h4_0_Template, 7, 9, "h4", 0)(1, BookingCardComponent_a_1_Template, 24, 17, "a", 1);
       }
       if (rf & 2) {
         \u0275\u0275property("ngIf", ctx.booking);
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.booking);
       }
-    }, dependencies: [NgIf, IconComponent, StatusPillComponent, MatTooltip, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n  position: relative;\n}\n/*# sourceMappingURL=booking-card.component.css.map */"] });
+    }, dependencies: [NgIf, StatusPillComponent, MatTooltip, IconComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n  position: relative;\n}\n/*# sourceMappingURL=booking-card.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookingCardComponent, { className: "BookingCardComponent", filePath: "libs/bookings/src/lib/booking-card.component.ts", lineNumber: 150 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookingCardComponent, { className: "BookingCardComponent", filePath: "libs/bookings/src/lib/booking-card.component.ts", lineNumber: 158 });
 })();
 
 // node_modules/@angular/material/fesm2022/bottom-sheet.mjs
@@ -147794,7 +148170,7 @@ var MatBottomSheetModule = class _MatBottomSheetModule {
 })();
 
 // libs/spaces/src/lib/space-select-modal/space-details.component.ts
-var _c066 = (a0) => ({ count: a0 });
+var _c067 = (a0) => ({ count: a0 });
 var _c140 = () => ({ disable_pan: true, disable_zoom: true });
 function SpaceDetailsComponent_ng_container_0_image_carousel_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -147947,7 +148323,7 @@ function SpaceDetailsComponent_ng_container_0_Template(rf, ctx) {
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(18, 28, "CALENDAR_EVENT.DETAILS"), " ");
     \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(24, 30, "CALENDAR_EVENT.CAPACITY_COUNT", \u0275\u0275pureFunction1(35, _c066, ctx_r1.space.capacity)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(24, 30, "CALENDAR_EVENT.CAPACITY_COUNT", \u0275\u0275pureFunction1(35, _c067, ctx_r1.space.capacity)), " ");
     \u0275\u0275advance(6);
     \u0275\u0275textInterpolate1(" ", (ctx_r1.level == null ? null : ctx_r1.level.display_name) || (ctx_r1.level == null ? null : ctx_r1.level.name), " ");
     \u0275\u0275advance(5);
@@ -148022,7 +148398,7 @@ var SpaceDetailsComponent = class _SpaceDetailsComponent {
         const empty_state_r4 = \u0275\u0275reference(2);
         \u0275\u0275property("ngIf", ctx.space)("ngIfElse", empty_state_r4);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, InteractiveMapComponent, ImageCarouselComponent, MatRipple, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  width: 30%;\n  min-width: 20rem;\n  height: 100%;\n  min-height: 65vh;\n}\n/*# sourceMappingURL=space-details.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, InteractiveMapComponent, ImageCarouselComponent, MatRipple, IconComponent, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  width: 30%;\n  min-width: 20rem;\n  height: 100%;\n  min-height: 65vh;\n}\n/*# sourceMappingURL=space-details.component.css.map */"] });
   }
 };
 (() => {
@@ -148030,7 +148406,7 @@ var SpaceDetailsComponent = class _SpaceDetailsComponent {
 })();
 
 // libs/spaces/src/lib/space-select-modal/space-filters.component.ts
-var _c067 = () => ({ standalone: true });
+var _c068 = () => ({ standalone: true });
 function SpaceFiltersComponent_button_2_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
@@ -148075,7 +148451,7 @@ function SpaceFiltersComponent_mat_form_field_16_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", ctx_r2.region)("ngModelOptions", \u0275\u0275pureFunction0(8, _c067))("placeholder", \u0275\u0275pipeBind1(2, 4, "CALENDAR_EVENT.SPACE_REGION_ANY"));
+    \u0275\u0275property("ngModel", ctx_r2.region)("ngModelOptions", \u0275\u0275pureFunction0(8, _c068))("placeholder", \u0275\u0275pipeBind1(2, 4, "CALENDAR_EVENT.SPACE_REGION_ANY"));
     \u0275\u0275advance(2);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 6, ctx_r2.regions));
   }
@@ -148113,7 +148489,7 @@ function SpaceFiltersComponent_mat_form_field_18_Template(rf, ctx) {
     let tmp_4_0;
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(2, 4, ctx_r2.building))("ngModelOptions", \u0275\u0275pureFunction0(12, _c067))("placeholder", ((tmp_4_0 = \u0275\u0275pipeBind1(3, 6, ctx_r2.building)) == null ? null : tmp_4_0.display_name) || ((tmp_4_0 = \u0275\u0275pipeBind1(4, 8, ctx_r2.building)) == null ? null : tmp_4_0.name));
+    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(2, 4, ctx_r2.building))("ngModelOptions", \u0275\u0275pureFunction0(12, _c068))("placeholder", ((tmp_4_0 = \u0275\u0275pipeBind1(3, 6, ctx_r2.building)) == null ? null : tmp_4_0.display_name) || ((tmp_4_0 = \u0275\u0275pipeBind1(4, 8, ctx_r2.building)) == null ? null : tmp_4_0.name));
     \u0275\u0275advance(4);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(6, 10, ctx_r2.buildings));
   }
@@ -148171,7 +148547,7 @@ function SpaceFiltersComponent_mat_form_field_20_Template(rf, ctx) {
     let tmp_2_0;
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", (tmp_2_0 = \u0275\u0275pipeBind1(2, 5, ctx_r2.options)) == null ? null : tmp_2_0.zones)("ngModelOptions", \u0275\u0275pureFunction0(11, _c067))("placeholder", \u0275\u0275pipeBind1(3, 7, "CALENDAR_EVENT.SPACE_LEVEL_ANY"))("multiple", true);
+    \u0275\u0275property("ngModel", (tmp_2_0 = \u0275\u0275pipeBind1(2, 5, ctx_r2.options)) == null ? null : tmp_2_0.zones)("ngModelOptions", \u0275\u0275pureFunction0(11, _c068))("placeholder", \u0275\u0275pipeBind1(3, 7, "CALENDAR_EVENT.SPACE_LEVEL_ANY"))("multiple", true);
     \u0275\u0275advance(3);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(5, 9, ctx_r2.levels));
   }
@@ -148200,7 +148576,7 @@ function SpaceFiltersComponent_div_31_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 9, "FORM.DATE_END"), "");
     \u0275\u0275advance(4);
-    \u0275\u0275property("ngModel", ctx_r2.form.getRawValue().date_end)("ngModelOptions", \u0275\u0275pureFunction0(13, _c067))("from", ctx_r2.start_date)("to", ctx_r2.end_date)("short", true)("timezone", ctx_r2.timezone)("range", 2);
+    \u0275\u0275property("ngModel", ctx_r2.form.getRawValue().date_end)("ngModelOptions", \u0275\u0275pureFunction0(13, _c068))("from", ctx_r2.start_date)("to", ctx_r2.end_date)("short", true)("timezone", ctx_r2.timezone)("range", 2);
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(8, 11, "FORM.DATE_ERROR"), " ");
   }
@@ -148240,7 +148616,7 @@ function SpaceFiltersComponent_div_33_div_8_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 6, "FORM.TIME_END"), "");
     \u0275\u0275advance(4);
-    \u0275\u0275property("ngModel", ctx_r2.form.value.date_end)("ngModelOptions", \u0275\u0275pureFunction0(8, _c067))("from", ctx_r2.form == null ? null : (tmp_6_0 = ctx_r2.form.getRawValue()) == null ? null : tmp_6_0.date)("use_24hr", ctx_r2.use_24hr)("timezone", ctx_r2.timezone);
+    \u0275\u0275property("ngModel", ctx_r2.form.value.date_end)("ngModelOptions", \u0275\u0275pureFunction0(8, _c068))("from", ctx_r2.form == null ? null : (tmp_6_0 = ctx_r2.form.getRawValue()) == null ? null : tmp_6_0.date)("use_24hr", ctx_r2.use_24hr)("timezone", ctx_r2.timezone);
   }
 }
 function SpaceFiltersComponent_div_33_div_9_Template(rf, ctx) {
@@ -148287,7 +148663,7 @@ function SpaceFiltersComponent_div_33_Template(rf, ctx) {
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 7, "FORM.TIME_START"), "");
     \u0275\u0275advance(4);
-    \u0275\u0275property("ngModel", ctx_r2.form.getRawValue().date)("ngModelOptions", \u0275\u0275pureFunction0(9, _c067))("use_24hr", ctx_r2.use_24hr)("timezone", ctx_r2.timezone);
+    \u0275\u0275property("ngModel", ctx_r2.form.getRawValue().date)("ngModelOptions", \u0275\u0275pureFunction0(9, _c068))("use_24hr", ctx_r2.use_24hr)("timezone", ctx_r2.timezone);
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r2.multiday);
     \u0275\u0275advance();
@@ -148317,7 +148693,7 @@ function SpaceFiltersComponent_section_36_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 4, "COMMON.FAVOURITES"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275property("name", \u0275\u0275pipeBind1(6, 6, "COMMON.FAVOURITES_ONLY"))("ngModel", (tmp_4_0 = \u0275\u0275pipeBind1(7, 8, ctx_r2.options)) == null ? null : tmp_4_0.show_fav)("ngModelOptions", \u0275\u0275pureFunction0(10, _c067));
+    \u0275\u0275property("name", \u0275\u0275pipeBind1(6, 6, "COMMON.FAVOURITES_ONLY"))("ngModel", (tmp_4_0 = \u0275\u0275pipeBind1(7, 8, ctx_r2.options)) == null ? null : tmp_4_0.show_fav)("ngModelOptions", \u0275\u0275pureFunction0(10, _c068));
   }
 }
 function SpaceFiltersComponent_section_37_ng_container_3_div_1_Template(rf, ctx) {
@@ -148338,7 +148714,7 @@ function SpaceFiltersComponent_section_37_ng_container_3_div_1_Template(rf, ctx)
     const feat_r15 = \u0275\u0275nextContext().$implicit;
     const ctx_r2 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("name", ctx_r2.feature_display[feat_r15] || feat_r15)("ngModel", (tmp_6_0 = \u0275\u0275pipeBind1(2, 3, ctx_r2.options)) == null ? null : tmp_6_0.features == null ? null : tmp_6_0.features.includes(feat_r15))("ngModelOptions", \u0275\u0275pureFunction0(5, _c067));
+    \u0275\u0275property("name", ctx_r2.feature_display[feat_r15] || feat_r15)("ngModel", (tmp_6_0 = \u0275\u0275pipeBind1(2, 3, ctx_r2.options)) == null ? null : tmp_6_0.features == null ? null : tmp_6_0.features.includes(feat_r15))("ngModelOptions", \u0275\u0275pureFunction0(5, _c068));
   }
 }
 function SpaceFiltersComponent_section_37_ng_container_3_Template(rf, ctx) {
@@ -148548,7 +148924,7 @@ var SpaceFiltersComponent = class _SpaceFiltersComponent {
         \u0275\u0275advance(4);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(25, 32, "FORM.DATE"), "");
         \u0275\u0275advance(4);
-        \u0275\u0275property("ngModel", ctx.form.getRawValue().date)("ngModelOptions", \u0275\u0275pureFunction0(40, _c067))("to", ctx.end_date)("short", true)("timezone", ctx.timezone)("range", ctx.multiday ? 1 : 0);
+        \u0275\u0275property("ngModel", ctx.form.getRawValue().date)("ngModelOptions", \u0275\u0275pureFunction0(40, _c068))("to", ctx.end_date)("short", true)("timezone", ctx.timezone)("range", ctx.multiday ? 1 : 0);
         \u0275\u0275advance();
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(30, 34, "FORM.DATE_ERROR"), " ");
         \u0275\u0275advance(2);
@@ -148565,7 +148941,7 @@ var SpaceFiltersComponent = class _SpaceFiltersComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ctx.can_close);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, SettingsToggleComponent, MatOption, MatFormField, MatSelect, MatRipple, MatCheckbox, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  max-width: 100vw;\n}\n/*# sourceMappingURL=space-filters.component.css.map */"] });
+    }, styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  max-width: 100vw;\n}\n/*# sourceMappingURL=space-filters.component.css.map */"] });
   }
 };
 (() => {
@@ -148573,7 +148949,7 @@ var SpaceFiltersComponent = class _SpaceFiltersComponent {
 })();
 
 // libs/spaces/src/lib/space-select-modal/space-filters-display.component.ts
-var _c068 = (a0) => ({ count: a0 });
+var _c069 = (a0) => ({ count: a0 });
 function SpaceFiltersDisplayComponent_button_12_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -148775,11 +149151,11 @@ var SpaceFiltersDisplayComponent = class _SpaceFiltersDisplayComponent extends A
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.all_day);
         \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(24, 27, "CALENDAR_EVENT.SPACE_SELECT_SIZE_X", \u0275\u0275pureFunction1(32, _c068, ((tmp_10_0 = \u0275\u0275pipeBind1(23, 25, ctx.options)) == null ? null : tmp_10_0.capacity) || 2)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(24, 27, "CALENDAR_EVENT.SPACE_SELECT_SIZE_X", \u0275\u0275pureFunction1(32, _c069, ((tmp_10_0 = \u0275\u0275pipeBind1(23, 25, ctx.options)) == null ? null : tmp_10_0.capacity) || 2)), " ");
         \u0275\u0275advance(3);
         \u0275\u0275property("ngForOf", (tmp_11_0 = \u0275\u0275pipeBind1(26, 30, ctx.options)) == null ? null : tmp_11_0.features);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[filter-item][_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0 1rem;\n  min-height: 2rem;\n  font-size: 0.875rem;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 1.25rem;\n  margin-right: 0.5rem;\n  margin-bottom: 0.5rem;\n  max-width: 100%;\n  text-align: center;\n}\n[filter-item][_ngcontent-%COMP%]:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n[filter-item][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%]    + *[_ngcontent-%COMP%] {\n  margin-left: 0.5rem;\n}\n/*# sourceMappingURL=space-filters-display.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatRipple, IconComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[filter-item][_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0 1rem;\n  min-height: 2rem;\n  font-size: 0.875rem;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 1.25rem;\n  margin-right: 0.5rem;\n  margin-bottom: 0.5rem;\n  max-width: 100%;\n  text-align: center;\n}\n[filter-item][_ngcontent-%COMP%]:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n[filter-item][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%]    + *[_ngcontent-%COMP%] {\n  margin-left: 0.5rem;\n}\n/*# sourceMappingURL=space-filters-display.component.css.map */"] });
   }
 };
 (() => {
@@ -148787,17 +149163,17 @@ var SpaceFiltersDisplayComponent = class _SpaceFiltersDisplayComponent extends A
 })();
 
 // libs/spaces/src/lib/space-select-modal/space-list.component.ts
-var _c069 = (a0) => ({ count: a0 });
+var _c070 = (a0) => ({ count: a0 });
 function SpaceListComponent_ng_container_6_ul_1_li_1_div_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 21)(1, "app-icon");
+    \u0275\u0275elementStart(0, "div", 22)(1, "app-icon");
     \u0275\u0275text(2, "done");
     \u0275\u0275elementEnd()();
   }
 }
 function SpaceListComponent_ng_container_6_ul_1_li_1_img_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "img", 22);
+    \u0275\u0275element(0, "img", 23);
   }
   if (rf & 2) {
     const space_r2 = \u0275\u0275nextContext().$implicit;
@@ -148806,13 +149182,13 @@ function SpaceListComponent_ng_container_6_ul_1_li_1_img_8_Template(rf, ctx) {
 }
 function SpaceListComponent_ng_container_6_ul_1_li_1_ng_template_9_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "img", 23);
+    \u0275\u0275element(0, "img", 24);
   }
 }
 function SpaceListComponent_ng_container_6_ul_1_li_1_div_11_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 24);
+    \u0275\u0275elementStart(0, "div", 25);
     \u0275\u0275pipe(1, "async");
     \u0275\u0275pipe(2, "async");
     \u0275\u0275pipe(3, "async");
@@ -148837,6 +149213,18 @@ function SpaceListComponent_ng_container_6_ul_1_li_1_div_11_Template(rf, ctx) {
     \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(7, 26, ctx_r2.room_alerts)[space_r2.id][1]);
     \u0275\u0275advance(9);
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(10, 28, ctx_r2.room_alerts)[space_r2.id][0] === "warn" ? "warning" : \u0275\u0275pipeBind1(11, 30, ctx_r2.room_alerts)[space_r2.id][0] === "info" ? "info" : "close");
+  }
+}
+function SpaceListComponent_ng_container_6_ul_1_li_1_div_30_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 26);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "COMMON.APPROVAL_REQUIRED"), " ");
   }
 }
 function SpaceListComponent_ng_container_6_ul_1_li_1_Template(rf, ctx) {
@@ -148881,38 +149269,42 @@ function SpaceListComponent_ng_container_6_ul_1_li_1_Template(rf, ctx) {
     });
     \u0275\u0275elementStart(28, "app-icon");
     \u0275\u0275text(29);
-    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementEnd()();
+    \u0275\u0275template(30, SpaceListComponent_ng_container_6_ul_1_li_1_div_30_Template, 3, 3, "div", 21);
+    \u0275\u0275elementEnd();
   }
   if (rf & 2) {
     let tmp_15_0;
     const space_r2 = ctx.$implicit;
     const space_placeholder_r5 = \u0275\u0275reference(10);
     const ctx_r2 = \u0275\u0275nextContext(3);
-    \u0275\u0275classProp("!border-info", ctx_r2.active === space_r2.id)("!bg-error-light", \u0275\u0275pipeBind1(1, 16, ctx_r2.room_alerts)[space_r2.id] ? \u0275\u0275pipeBind1(2, 18, ctx_r2.room_alerts)[space_r2.id][0] === "closed" : false);
+    \u0275\u0275classProp("!border-info", ctx_r2.active === space_r2.id)("!bg-error-light", \u0275\u0275pipeBind1(1, 17, ctx_r2.room_alerts)[space_r2.id] ? \u0275\u0275pipeBind1(2, 19, ctx_r2.room_alerts)[space_r2.id][0] === "closed" : false);
     \u0275\u0275advance(3);
-    \u0275\u0275classProp("pointer-events-none", \u0275\u0275pipeBind1(4, 20, ctx_r2.room_alerts)[space_r2.id] ? \u0275\u0275pipeBind1(5, 22, ctx_r2.room_alerts)[space_r2.id][0] === "closed" : false);
+    \u0275\u0275classProp("pointer-events-none", \u0275\u0275pipeBind1(4, 21, ctx_r2.room_alerts)[space_r2.id] ? \u0275\u0275pipeBind1(5, 23, ctx_r2.room_alerts)[space_r2.id][0] === "closed" : false);
     \u0275\u0275advance(4);
     \u0275\u0275property("ngIf", ctx_r2.selected.includes(space_r2.id));
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", space_r2.images == null ? null : space_r2.images.length)("ngIfElse", space_placeholder_r5);
     \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(12, 24, ctx_r2.room_alerts)[space_r2.id]);
+    \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(12, 25, ctx_r2.room_alerts)[space_r2.id]);
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate1(" ", space_r2.display_name || space_r2.name || "Meeting Space", " ");
     \u0275\u0275advance(5);
     \u0275\u0275textInterpolate1(" ", space_r2.location || ((tmp_15_0 = ctx_r2.level(space_r2.zones)) == null ? null : tmp_15_0.display_name) || ((tmp_15_0 = ctx_r2.level(space_r2.zones)) == null ? null : tmp_15_0.name), " ");
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(26, 26, "CALENDAR_EVENT.CAPACITY_COUNT", \u0275\u0275pureFunction1(29, _c069, space_r2.capacity < 1 ? 2 : space_r2.capacity)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(26, 27, "CALENDAR_EVENT.CAPACITY_COUNT", \u0275\u0275pureFunction1(30, _c070, space_r2.capacity < 1 ? 2 : space_r2.capacity)), " ");
     \u0275\u0275advance(2);
     \u0275\u0275classProp("text-info", ctx_r2.isFavourite(space_r2.id));
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(ctx_r2.isFavourite(space_r2.id) ? "favorite" : "favorite_border");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", space_r2.approval);
   }
 }
 function SpaceListComponent_ng_container_6_ul_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "ul", 7);
-    \u0275\u0275template(1, SpaceListComponent_ng_container_6_ul_1_li_1_Template, 30, 31, "li", 8);
+    \u0275\u0275template(1, SpaceListComponent_ng_container_6_ul_1_li_1_Template, 31, 32, "li", 8);
     \u0275\u0275pipe(2, "async");
     \u0275\u0275elementEnd();
   }
@@ -148939,7 +149331,7 @@ function SpaceListComponent_ng_container_6_Template(rf, ctx) {
 }
 function SpaceListComponent_ng_template_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 25)(1, "p", 26);
+    \u0275\u0275elementStart(0, "div", 27)(1, "p", 28);
     \u0275\u0275text(2);
     \u0275\u0275pipe(3, "translate");
     \u0275\u0275elementEnd()();
@@ -148951,9 +149343,9 @@ function SpaceListComponent_ng_template_8_Template(rf, ctx) {
 }
 function SpaceListComponent_ng_template_10_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 27);
-    \u0275\u0275element(1, "mat-spinner", 28);
-    \u0275\u0275elementStart(2, "p", 29);
+    \u0275\u0275elementStart(0, "div", 29);
+    \u0275\u0275element(1, "mat-spinner", 30);
+    \u0275\u0275elementStart(2, "p", 31);
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd()();
@@ -148996,7 +149388,7 @@ var SpaceListComponent = class _SpaceListComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceListComponent, selectors: [["space-list"]], inputs: { active: "active", selected: "selected", favorites: "favorites" }, outputs: { onSelect: "onSelect", toggleFav: "toggleFav" }, standalone: false, decls: 12, vars: 10, consts: [["empty_state", ""], ["load_state", ""], ["space_placeholder", ""], [1, "font-bold"], ["count", "", 1, "mb-4", "text-sm", "opacity-60"], [4, "ngIf", "ngIfElse"], ["class", "list-style-none space-y-2", 4, "ngIf", "ngIfElse"], [1, "list-style-none", "space-y-2"], ["space", "", "class", "relative w-full rounded-lg border border-base-200 bg-base-100 p-2 shadow", 3, "!border-info", "!bg-error-light", 4, "ngFor", "ngForOf"], ["space", "", 1, "relative", "w-full", "rounded-lg", "border", "border-base-200", "bg-base-100", "p-2", "shadow"], ["matRipple", "", "name", "select-space", 1, "flex", "h-full", "w-full", "items-center", "rounded", 3, "click"], [1, "relative", "mr-4", "flex", "h-20", "w-20", "min-w-[5rem]", "items-center", "justify-center", "overflow-hidden", "rounded-xl", "bg-base-200"], ["class", "absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full border border-neutral bg-base-200 text-white", 4, "ngIf"], ["auth", "", "class", "h-full object-cover", 3, "source", 4, "ngIf", "ngIfElse"], ["class", "pointer-events-auto absolute bottom-1 left-1 flex h-6 w-6 rotate-12 items-center justify-center rounded-full", 3, "matTooltip", "bg-error", "bg-info", "bg-warning", "text-error-content", "text-info-content", "text-warning-content", "click", 4, "ngIf"], [1, "space-y-2"], [1, "mr-10", "truncate", "text-left", "font-medium"], [1, "flex", "items-center", "space-x-2", "text-sm"], [1, "text-info"], [1, "truncate"], ["icon", "", "matRipple", "", "name", "toggle-space-favourite", 1, "absolute", "right-1", "top-1", 3, "click"], [1, "absolute", "left-1", "top-1", "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", "border", "border-neutral", "bg-base-200", "text-white"], ["auth", "", 1, "h-full", "object-cover", 3, "source"], ["src", "assets/icons/room-placeholder.svg", 1, "m-auto"], [1, "pointer-events-auto", "absolute", "bottom-1", "left-1", "flex", "h-6", "w-6", "rotate-12", "items-center", "justify-center", "rounded-full", 3, "click", "matTooltip"], ["empty", "", 1, "flex", "flex-col", "items-center", "justify-center", "space-y-2", "p-16"], [1, "text-center", "opacity-30"], ["loading", "", 1, "flex", "flex-col", "items-center", "justify-center", "space-y-2", "p-16"], [3, "diameter"], [1, "opacity-30"]], template: function SpaceListComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SpaceListComponent, selectors: [["space-list"]], inputs: { active: "active", selected: "selected", favorites: "favorites" }, outputs: { onSelect: "onSelect", toggleFav: "toggleFav" }, standalone: false, decls: 12, vars: 10, consts: [["empty_state", ""], ["load_state", ""], ["space_placeholder", ""], [1, "font-bold"], ["count", "", 1, "mb-4", "text-sm", "opacity-60"], [4, "ngIf", "ngIfElse"], ["class", "list-style-none space-y-2", 4, "ngIf", "ngIfElse"], [1, "list-style-none", "space-y-2"], ["space", "", "class", "relative w-full rounded-lg border border-base-200 bg-base-100 p-2 shadow", 3, "!border-info", "!bg-error-light", 4, "ngFor", "ngForOf"], ["space", "", 1, "relative", "w-full", "rounded-lg", "border", "border-base-200", "bg-base-100", "p-2", "shadow"], ["matRipple", "", "name", "select-space", 1, "flex", "h-full", "w-full", "items-center", "rounded", 3, "click"], [1, "relative", "mr-4", "flex", "h-20", "w-20", "min-w-[5rem]", "items-center", "justify-center", "overflow-hidden", "rounded-xl", "bg-base-200"], ["class", "absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full border border-neutral bg-base-200 text-white", 4, "ngIf"], ["auth", "", "class", "h-full object-cover", 3, "source", 4, "ngIf", "ngIfElse"], ["class", "pointer-events-auto absolute bottom-1 left-1 flex h-6 w-6 items-center justify-center rounded-full", 3, "matTooltip", "bg-error", "bg-info", "bg-warning", "text-error-content", "text-info-content", "text-warning-content", "click", 4, "ngIf"], [1, "space-y-2"], [1, "mr-10", "truncate", "text-left", "font-medium"], [1, "flex", "items-center", "space-x-2", "text-sm"], [1, "text-info"], [1, "truncate"], ["icon", "", "matRipple", "", "name", "toggle-space-favourite", 1, "absolute", "right-1", "top-1", 3, "click"], ["class", "absolute bottom-1 right-1 rounded bg-warning px-2 py-1 text-[0.625rem] font-medium text-warning-content", 4, "ngIf"], [1, "absolute", "left-1", "top-1", "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", "border", "border-neutral", "bg-base-200", "text-white"], ["auth", "", 1, "h-full", "object-cover", 3, "source"], ["src", "assets/icons/room-placeholder.svg", 1, "m-auto"], [1, "pointer-events-auto", "absolute", "bottom-1", "left-1", "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", 3, "click", "matTooltip"], [1, "absolute", "bottom-1", "right-1", "rounded", "bg-warning", "px-2", "py-1", "text-[0.625rem]", "font-medium", "text-warning-content"], ["empty", "", 1, "flex", "flex-col", "items-center", "justify-center", "space-y-2", "p-16"], [1, "text-center", "opacity-30"], ["loading", "", 1, "flex", "flex-col", "items-center", "justify-center", "space-y-2", "p-16"], [3, "diameter"], [1, "opacity-30"]], template: function SpaceListComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "h3", 3);
         \u0275\u0275text(1);
@@ -149020,11 +149412,11 @@ var SpaceListComponent = class _SpaceListComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(7, 8, ctx.loading))("ngIfElse", load_state_r7);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, AuthenticatedImageDirective, MatRipple, MatProgressSpinner, MatTooltip, AsyncPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  overflow: auto;\n}\n/*# sourceMappingURL=space-list.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, AuthenticatedImageDirective, MatRipple, MatProgressSpinner, MatTooltip, IconComponent, AsyncPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  overflow: auto;\n}\n/*# sourceMappingURL=space-list.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceListComponent, { className: "SpaceListComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-list.component.ts", lineNumber: 197 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SpaceListComponent, { className: "SpaceListComponent", filePath: "libs/spaces/src/lib/space-select-modal/space-list.component.ts", lineNumber: 203 });
 })();
 
 // libs/spaces/src/lib/space-select-modal/space-location-pin.component.ts
@@ -149086,7 +149478,7 @@ var SpaceLocationPinComponent = class _SpaceLocationPinComponent {
 })();
 
 // libs/spaces/src/lib/space-select-modal/space-map.component.ts
-var _c070 = () => ({ controls: true });
+var _c071 = () => ({ controls: true });
 var _c141 = () => ({ standalone: true });
 function SpaceSelectMapComponent_mat_form_field_1_mat_option_3_div_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -149267,7 +149659,7 @@ var SpaceSelectMapComponent = class _SpaceSelectMapComponent extends AsyncHandle
         \u0275\u0275advance(3);
         \u0275\u0275property("src", ctx.map_url);
         \u0275\u0275twoWayProperty("zoom", ctx.zoom)("center", ctx.center);
-        \u0275\u0275property("styles", \u0275\u0275pipeBind1(5, 10, ctx.styles))("features", \u0275\u0275pipeBind1(6, 12, ctx.features))("actions", \u0275\u0275pipeBind1(7, 14, ctx.actions))("options", \u0275\u0275pureFunction0(16, _c070));
+        \u0275\u0275property("styles", \u0275\u0275pipeBind1(5, 10, ctx.styles))("features", \u0275\u0275pipeBind1(6, 12, ctx.features))("actions", \u0275\u0275pipeBind1(7, 14, ctx.actions))("options", \u0275\u0275pureFunction0(16, _c071));
       }
     }, dependencies: [NgForOf, NgIf, InteractiveMapComponent, MatOption, MatFormField, MatSelect, NgControlStatus, NgModel, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  background: rgba(0, 0, 0, 0.05);\n  display: flex;\n  flex-direction: column;\n}\nbutton[_ngcontent-%COMP%] {\n  border-radius: 0;\n}\n/*# sourceMappingURL=space-map.component.css.map */"] });
   }
@@ -149302,29 +149694,30 @@ var SharedSpacesModule = class _SharedSpacesModule {
 \u0275\u0275setComponentScope(NewSpaceSelectModalComponent, [
   NgIf,
   MatDialogClose,
-  IconComponent,
   MatRipple,
+  IconComponent,
   SpaceDetailsComponent,
   SpaceListComponent,
   SpaceFiltersComponent,
   SpaceFiltersDisplayComponent,
   SpaceSelectMapComponent
 ], [AsyncPipe, TranslatePipe]);
+\u0275\u0275setComponentScope(SpaceFiltersComponent, [NgForOf, NgIf, MatOption, MatFormField, MatSelect, MatRipple, MatCheckbox, IconComponent, SettingsToggleComponent, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName], [AsyncPipe, BuildingPipe, TranslatePipe]);
 
 // libs/events/src/lib/event-details-modal.component.ts
-var _c071 = (a0) => ({ time: a0 });
+var _c072 = (a0) => ({ time: a0 });
 var _c142 = (a0, a1) => ({ count: a0, cost: a1 });
 var _c215 = (a0) => ({ count: a0 });
 var _c311 = () => ({ disable_pan: true, disable_zoom: true });
 function EventDetailsModalComponent_div_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div", 46);
+    \u0275\u0275element(0, "div", 47);
   }
 }
 function EventDetailsModalComponent_div_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 47);
-    \u0275\u0275element(1, "image-carousel", 48);
+    \u0275\u0275elementStart(0, "div", 48);
+    \u0275\u0275element(1, "image-carousel", 49);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -149335,7 +149728,7 @@ function EventDetailsModalComponent_div_4_Template(rf, ctx) {
 }
 function EventDetailsModalComponent_div_13_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 49);
+    \u0275\u0275elementStart(0, "div", 50);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -149345,19 +149738,30 @@ function EventDetailsModalComponent_div_13_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.period_tz, " ");
   }
 }
-function EventDetailsModalComponent_div_14_button_1_Template(rf, ctx) {
+function EventDetailsModalComponent_icon_14_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "icon", 51);
+    \u0275\u0275text(1, "event_repeat");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("matTooltip", ctx_r1.recurr_tooltip);
+  }
+}
+function EventDetailsModalComponent_div_15_button_1_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 53);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_div_14_button_1_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 55);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_div_15_button_1_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r3);
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.checkin());
     });
-    \u0275\u0275elementStart(1, "div", 54)(2, "app-icon", 55);
+    \u0275\u0275elementStart(1, "div", 56)(2, "app-icon", 57);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 56);
+    \u0275\u0275elementStart(4, "div", 58);
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd()()();
@@ -149371,22 +149775,22 @@ function EventDetailsModalComponent_div_14_button_1_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 8, ctx_r1.room_status === "pending" ? "COMMON.CHECK_IN" : "COMMON.CHECKED_IN"), " ");
   }
 }
-function EventDetailsModalComponent_div_14_button_2_Template(rf, ctx) {
+function EventDetailsModalComponent_div_15_button_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "button", 57)(1, "app-icon");
+    \u0275\u0275elementStart(0, "button", 59)(1, "app-icon");
     \u0275\u0275text(2, "more_horiz");
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     \u0275\u0275nextContext(2);
-    const menu_r4 = \u0275\u0275reference(91);
+    const menu_r4 = \u0275\u0275reference(92);
     \u0275\u0275property("matMenuTriggerFor", menu_r4);
   }
 }
-function EventDetailsModalComponent_div_14_Template(rf, ctx) {
+function EventDetailsModalComponent_div_15_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 50);
-    \u0275\u0275template(1, EventDetailsModalComponent_div_14_button_1_Template, 7, 10, "button", 51)(2, EventDetailsModalComponent_div_14_button_2_Template, 3, 1, "button", 52);
+    \u0275\u0275elementStart(0, "div", 52);
+    \u0275\u0275template(1, EventDetailsModalComponent_div_15_button_1_Template, 7, 10, "button", 53)(2, EventDetailsModalComponent_div_15_button_2_Template, 3, 1, "button", 54);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -149397,9 +149801,9 @@ function EventDetailsModalComponent_div_14_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r1.allow_edit);
   }
 }
-function EventDetailsModalComponent_div_27_Template(rf, ctx) {
+function EventDetailsModalComponent_div_28_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 49);
+    \u0275\u0275elementStart(0, "div", 50);
     \u0275\u0275text(1);
     \u0275\u0275pipe(2, "date");
     \u0275\u0275elementEnd();
@@ -149410,9 +149814,9 @@ function EventDetailsModalComponent_div_27_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind3(2, 1, ctx_r1.event.date, "EEEE, dd LLLL y (z)", ctx_r1.tz), " ");
   }
 }
-function EventDetailsModalComponent_div_34_Template(rf, ctx) {
+function EventDetailsModalComponent_div_35_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 49);
+    \u0275\u0275elementStart(0, "div", 50);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -149422,7 +149826,7 @@ function EventDetailsModalComponent_div_34_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.period_tz, " ");
   }
 }
-function EventDetailsModalComponent_ng_container_39_Template(rf, ctx) {
+function EventDetailsModalComponent_ng_container_40_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
     \u0275\u0275text(1);
@@ -149434,9 +149838,9 @@ function EventDetailsModalComponent_ng_container_39_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", (ctx_r1.level == null ? null : ctx_r1.level.display_name) || (ctx_r1.level == null ? null : ctx_r1.level.name), ", ");
   }
 }
-function EventDetailsModalComponent_div_41_Template(rf, ctx) {
+function EventDetailsModalComponent_div_42_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 16)(1, "app-icon");
+    \u0275\u0275elementStart(0, "div", 17)(1, "app-icon");
     \u0275\u0275text(2, "place");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(3, "div");
@@ -149449,14 +149853,14 @@ function EventDetailsModalComponent_div_41_Template(rf, ctx) {
     \u0275\u0275textInterpolate2(" ", (ctx_r1.building == null ? null : ctx_r1.building.display_name) || (ctx_r1.building == null ? null : ctx_r1.building.name), ", ", ctx_r1.building == null ? null : ctx_r1.building.address, " ");
   }
 }
-function EventDetailsModalComponent_ng_container_70_div_1_Template(rf, ctx) {
+function EventDetailsModalComponent_ng_container_71_div_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 59);
-    \u0275\u0275element(1, "a-user-avatar", 31);
-    \u0275\u0275elementStart(2, "div", 32)(3, "div", 33);
+    \u0275\u0275elementStart(0, "div", 61);
+    \u0275\u0275element(1, "a-user-avatar", 32);
+    \u0275\u0275elementStart(2, "div", 33)(3, "div", 34);
     \u0275\u0275text(4);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 34);
+    \u0275\u0275elementStart(5, "div", 35);
     \u0275\u0275text(6);
     \u0275\u0275elementEnd()()();
   }
@@ -149472,10 +149876,10 @@ function EventDetailsModalComponent_ng_container_70_div_1_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", user_r5.email, " ");
   }
 }
-function EventDetailsModalComponent_ng_container_70_Template(rf, ctx) {
+function EventDetailsModalComponent_ng_container_71_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275template(1, EventDetailsModalComponent_ng_container_70_div_1_Template, 7, 4, "div", 58);
+    \u0275\u0275template(1, EventDetailsModalComponent_ng_container_71_div_1_Template, 7, 4, "div", 60);
     \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
@@ -149485,9 +149889,9 @@ function EventDetailsModalComponent_ng_container_70_Template(rf, ctx) {
     \u0275\u0275property("ngIf", user_r5.email !== ctx_r1.event.host);
   }
 }
-function EventDetailsModalComponent_ng_container_81_div_6_div_12_Template(rf, ctx) {
+function EventDetailsModalComponent_ng_container_82_div_6_div_12_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 73);
+    \u0275\u0275elementStart(0, "div", 75);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -149497,9 +149901,9 @@ function EventDetailsModalComponent_ng_container_81_div_6_div_12_Template(rf, ct
     \u0275\u0275textInterpolate1(" ", order_r7.caterer, " ");
   }
 }
-function EventDetailsModalComponent_ng_container_81_div_6_div_17_span_4_Template(rf, ctx) {
+function EventDetailsModalComponent_ng_container_82_div_6_div_17_span_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 79);
+    \u0275\u0275elementStart(0, "span", 81);
     \u0275\u0275text(1);
     \u0275\u0275pipe(2, "translate");
     \u0275\u0275elementEnd();
@@ -149512,17 +149916,17 @@ function EventDetailsModalComponent_ng_container_81_div_6_div_17_span_4_Template
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 2, "CALENDAR_EVENT.CATERING_ORDER_OPTION_COUNT", \u0275\u0275pureFunction1(5, _c215, (item_r8.option_list == null ? null : item_r8.option_list.length) || "0")), " ");
   }
 }
-function EventDetailsModalComponent_ng_container_81_div_6_div_17_Template(rf, ctx) {
+function EventDetailsModalComponent_ng_container_82_div_6_div_17_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 74)(1, "div", 75)(2, "span", 66);
+    \u0275\u0275elementStart(0, "div", 76)(1, "div", 77)(2, "span", 68);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(4, EventDetailsModalComponent_ng_container_81_div_6_div_17_span_4_Template, 3, 7, "span", 76);
+    \u0275\u0275template(4, EventDetailsModalComponent_ng_container_82_div_6_div_17_span_4_Template, 3, 7, "span", 78);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 77);
+    \u0275\u0275elementStart(5, "div", 79);
     \u0275\u0275text(6);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "div", 78);
+    \u0275\u0275elementStart(7, "div", 80);
     \u0275\u0275text(8);
     \u0275\u0275pipe(9, "currency");
     \u0275\u0275elementEnd()();
@@ -149540,23 +149944,23 @@ function EventDetailsModalComponent_ng_container_81_div_6_div_17_Template(rf, ct
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(9, 4, item_r8.unit_price_with_options / 100, ctx_r1.currency_code), " ea ");
   }
 }
-function EventDetailsModalComponent_ng_container_81_div_6_Template(rf, ctx) {
+function EventDetailsModalComponent_ng_container_82_div_6_Template(rf, ctx) {
   if (rf & 1) {
     const _r6 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 63)(1, "div", 64)(2, "div", 65)(3, "div", 66);
+    \u0275\u0275elementStart(0, "div", 65)(1, "div", 66)(2, "div", 67)(3, "div", 68);
     \u0275\u0275text(4);
     \u0275\u0275pipe(5, "date");
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "div", 67)(8, "div", 68);
+    \u0275\u0275elementStart(7, "div", 69)(8, "div", 70);
     \u0275\u0275text(9);
     \u0275\u0275pipe(10, "currency");
     \u0275\u0275pipe(11, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275template(12, EventDetailsModalComponent_ng_container_81_div_6_div_12_Template, 2, 1, "div", 69);
+    \u0275\u0275template(12, EventDetailsModalComponent_ng_container_82_div_6_div_12_Template, 2, 1, "div", 71);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(13, "button", 70);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_ng_container_81_div_6_Template_button_click_13_listener() {
+    \u0275\u0275elementStart(13, "button", 72);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_ng_container_82_div_6_Template_button_click_13_listener() {
       const order_r7 = \u0275\u0275restoreView(_r6).$implicit;
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.show_order[order_r7.id] = !ctx_r1.show_order[order_r7.id]);
@@ -149564,15 +149968,15 @@ function EventDetailsModalComponent_ng_container_81_div_6_Template(rf, ctx) {
     \u0275\u0275elementStart(14, "app-icon");
     \u0275\u0275text(15);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(16, "div", 71);
-    \u0275\u0275template(17, EventDetailsModalComponent_ng_container_81_div_6_div_17_Template, 10, 7, "div", 72);
+    \u0275\u0275elementStart(16, "div", 73);
+    \u0275\u0275template(17, EventDetailsModalComponent_ng_container_82_div_6_div_17_Template, 10, 7, "div", 74);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     const order_r7 = ctx.$implicit;
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 10, "CALENDAR_EVENT.CATERING_ORDER_AT", \u0275\u0275pureFunction1(19, _c071, \u0275\u0275pipeBind2(5, 7, order_r7.deliver_at, "MMM d, " + ctx_r1.time_format))), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 10, "CALENDAR_EVENT.CATERING_ORDER_AT", \u0275\u0275pureFunction1(19, _c072, \u0275\u0275pipeBind2(5, 7, order_r7.deliver_at, "MMM d, " + ctx_r1.time_format))), " ");
     \u0275\u0275advance(5);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(11, 16, "CALENDAR_EVENT.CATERING_ORDER_DETAILS", \u0275\u0275pureFunction2(21, _c142, order_r7.item_count, \u0275\u0275pipeBind2(10, 13, order_r7.total_cost / 100, ctx_r1.currency_code))), " ");
     \u0275\u0275advance(3);
@@ -149587,15 +149991,15 @@ function EventDetailsModalComponent_ng_container_81_div_6_Template(rf, ctx) {
     \u0275\u0275property("ngForOf", order_r7.items);
   }
 }
-function EventDetailsModalComponent_ng_container_81_Template(rf, ctx) {
+function EventDetailsModalComponent_ng_container_82_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "div", 19)(2, "h3", 60);
+    \u0275\u0275elementStart(1, "div", 20)(2, "h3", 62);
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 61);
-    \u0275\u0275template(6, EventDetailsModalComponent_ng_container_81_div_6_Template, 18, 24, "div", 62);
+    \u0275\u0275elementStart(5, "div", 63);
+    \u0275\u0275template(6, EventDetailsModalComponent_ng_container_82_div_6_Template, 18, 24, "div", 64);
     \u0275\u0275elementEnd()();
     \u0275\u0275elementContainerEnd();
   }
@@ -149607,10 +150011,10 @@ function EventDetailsModalComponent_ng_container_81_Template(rf, ctx) {
     \u0275\u0275property("ngForOf", ctx_r1.event.valid_catering);
   }
 }
-function EventDetailsModalComponent_ng_container_83_Template(rf, ctx) {
+function EventDetailsModalComponent_ng_container_84_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "interactive-map", 80);
+    \u0275\u0275element(1, "interactive-map", 82);
     \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
@@ -149619,9 +150023,9 @@ function EventDetailsModalComponent_ng_container_83_Template(rf, ctx) {
     \u0275\u0275property("src", ctx_r1.level == null ? null : ctx_r1.level.map_id)("features", ctx_r1.features)("options", \u0275\u0275pureFunction0(3, _c311));
   }
 }
-function EventDetailsModalComponent_div_84_div_4_Template(rf, ctx) {
+function EventDetailsModalComponent_div_85_div_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div", 83);
+    \u0275\u0275element(0, "div", 85);
     \u0275\u0275pipe(1, "sanitize");
   }
   if (rf & 2) {
@@ -149629,13 +150033,13 @@ function EventDetailsModalComponent_div_84_div_4_Template(rf, ctx) {
     \u0275\u0275property("innerHTML", \u0275\u0275pipeBind1(1, 1, ctx_r1.body) || "Unable to sanitize notes contents", \u0275\u0275sanitizeHtml);
   }
 }
-function EventDetailsModalComponent_div_84_Template(rf, ctx) {
+function EventDetailsModalComponent_div_85_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 19)(1, "h3", 81);
+    \u0275\u0275elementStart(0, "div", 20)(1, "h3", 83);
     \u0275\u0275text(2);
     \u0275\u0275pipe(3, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275template(4, EventDetailsModalComponent_div_84_div_4_Template, 2, 3, "div", 82);
+    \u0275\u0275template(4, EventDetailsModalComponent_div_85_div_4_Template, 2, 3, "div", 84);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -149646,12 +150050,12 @@ function EventDetailsModalComponent_div_84_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r1.raw_body);
   }
 }
-function EventDetailsModalComponent_ng_container_85_div_6_div_14_Template(rf, ctx) {
+function EventDetailsModalComponent_ng_container_86_div_6_div_14_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 74)(1, "div", 75)(2, "span", 66);
+    \u0275\u0275elementStart(0, "div", 76)(1, "div", 77)(2, "span", 68);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(4, "div", 77);
+    \u0275\u0275elementStart(4, "div", 79);
     \u0275\u0275text(5);
     \u0275\u0275elementEnd()();
   }
@@ -149663,35 +150067,35 @@ function EventDetailsModalComponent_ng_container_85_div_6_div_14_Template(rf, ct
     \u0275\u0275textInterpolate1(" x", item_r11.quantity, " ");
   }
 }
-function EventDetailsModalComponent_ng_container_85_div_6_Template(rf, ctx) {
+function EventDetailsModalComponent_ng_container_86_div_6_Template(rf, ctx) {
   if (rf & 1) {
     const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 86)(1, "button", 87);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_ng_container_85_div_6_Template_button_click_1_listener() {
+    \u0275\u0275elementStart(0, "div", 88)(1, "button", 89);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_ng_container_86_div_6_Template_button_click_1_listener() {
       const request_r10 = \u0275\u0275restoreView(_r9).$implicit;
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.show_request[request_r10.id] = !ctx_r1.show_request[request_r10.id]);
     });
-    \u0275\u0275elementStart(2, "div", 88)(3, "div", 66);
+    \u0275\u0275elementStart(2, "div", 90)(3, "div", 68);
     \u0275\u0275text(4);
     \u0275\u0275pipe(5, "date");
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(7, "div", 89)(8, "app-icon");
+    \u0275\u0275elementStart(7, "div", 91)(8, "app-icon");
     \u0275\u0275text(9);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(10, "div", 90)(11, "app-icon", 55);
+    \u0275\u0275elementStart(10, "div", 92)(11, "app-icon", 57);
     \u0275\u0275text(12);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(13, "div", 71);
-    \u0275\u0275template(14, EventDetailsModalComponent_ng_container_85_div_6_div_14_Template, 6, 2, "div", 72);
+    \u0275\u0275elementStart(13, "div", 73);
+    \u0275\u0275template(14, EventDetailsModalComponent_ng_container_86_div_6_div_14_Template, 6, 2, "div", 74);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     const request_r10 = ctx.$implicit;
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 21, "CALENDAR_EVENT.ASSETS_REQUESTED_FOR", \u0275\u0275pureFunction1(24, _c071, \u0275\u0275pipeBind2(5, 18, request_r10.deliver_at, "MMM d, " + ctx_r1.time_format))), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 21, "CALENDAR_EVENT.ASSETS_REQUESTED_FOR", \u0275\u0275pureFunction1(24, _c072, \u0275\u0275pipeBind2(5, 18, request_r10.deliver_at, "MMM d, " + ctx_r1.time_format))), " ");
     \u0275\u0275advance(3);
     \u0275\u0275classProp("bg-success", request_r10.state === "approved")("text-success-content", request_r10.state === "approved")("bg-warning", request_r10.state !== "approved" && request_r10.state !== "rejected")("text-warning-content", request_r10.state !== "approved" && request_r10.state !== "rejected")("bg-error", request_r10.state === "rejected")("text-error-content", request_r10.state === "rejected");
     \u0275\u0275property("matTooltip", request_r10.state || "Tentative");
@@ -149705,15 +150109,15 @@ function EventDetailsModalComponent_ng_container_85_div_6_Template(rf, ctx) {
     \u0275\u0275property("ngForOf", request_r10.items);
   }
 }
-function EventDetailsModalComponent_ng_container_85_Template(rf, ctx) {
+function EventDetailsModalComponent_ng_container_86_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "div", 19)(2, "h3", 84);
+    \u0275\u0275elementStart(1, "div", 20)(2, "h3", 86);
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 61);
-    \u0275\u0275template(6, EventDetailsModalComponent_ng_container_85_div_6_Template, 15, 26, "div", 85);
+    \u0275\u0275elementStart(5, "div", 63);
+    \u0275\u0275template(6, EventDetailsModalComponent_ng_container_86_div_6_Template, 15, 26, "div", 87);
     \u0275\u0275elementEnd()();
     \u0275\u0275elementContainerEnd();
   }
@@ -149725,11 +150129,11 @@ function EventDetailsModalComponent_ng_container_85_Template(rf, ctx) {
     \u0275\u0275property("ngForOf", ctx_r1.event.valid_assets);
   }
 }
-function EventDetailsModalComponent_div_89_Template(rf, ctx) {
+function EventDetailsModalComponent_div_90_Template(rf, ctx) {
   if (rf & 1) {
     const _r12 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 91)(1, "attendee-list", 92);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_div_89_Template_attendee_list_click_1_listener() {
+    \u0275\u0275elementStart(0, "div", 93)(1, "attendee-list", 94);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_div_90_Template_attendee_list_click_1_listener() {
       \u0275\u0275restoreView(_r12);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.show_attendees = false);
@@ -149742,16 +150146,16 @@ function EventDetailsModalComponent_div_89_Template(rf, ctx) {
     \u0275\u0275property("list", ctx_r1.event.attendees)("host", ctx_r1.event.host);
   }
 }
-function EventDetailsModalComponent_button_92_Template(rf, ctx) {
+function EventDetailsModalComponent_button_93_Template(rf, ctx) {
   if (rf & 1) {
     const _r13 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 93);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_button_92_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 95);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_button_93_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r13);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.edit ? ctx_r1.edit(ctx_r1.event) : "");
     });
-    \u0275\u0275elementStart(1, "div", 42)(2, "app-icon", 55);
+    \u0275\u0275elementStart(1, "div", 43)(2, "app-icon", 57);
     \u0275\u0275text(3, "edit");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "div");
@@ -149766,16 +150170,16 @@ function EventDetailsModalComponent_button_92_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 3, "CALENDAR_EVENT.ACTION_EDIT"), " ");
   }
 }
-function EventDetailsModalComponent_button_100_Template(rf, ctx) {
+function EventDetailsModalComponent_button_101_Template(rf, ctx) {
   if (rf & 1) {
     const _r14 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 41);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_button_100_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 42);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_button_101_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r14);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.printEvent());
     });
-    \u0275\u0275elementStart(1, "div", 42)(2, "app-icon", 55);
+    \u0275\u0275elementStart(1, "div", 43)(2, "app-icon", 57);
     \u0275\u0275text(3, "print");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "div");
@@ -149788,16 +150192,16 @@ function EventDetailsModalComponent_button_100_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 1, "CALENDAR_EVENT.ACTION_PRINT"), " ");
   }
 }
-function EventDetailsModalComponent_button_101_Template(rf, ctx) {
+function EventDetailsModalComponent_button_102_Template(rf, ctx) {
   if (rf & 1) {
     const _r15 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 41);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_button_101_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 42);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_button_102_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r15);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.remove ? ctx_r1.remove(ctx_r1.event, true) : "");
     });
-    \u0275\u0275elementStart(1, "div", 42)(2, "app-icon", 43);
+    \u0275\u0275elementStart(1, "div", 43)(2, "app-icon", 44);
     \u0275\u0275text(3, "delete");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "div");
@@ -149810,16 +150214,16 @@ function EventDetailsModalComponent_button_101_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 1, "CALENDAR_EVENT.ACTION_DELETE_SERIES"), " ");
   }
 }
-function EventDetailsModalComponent_button_102_Template(rf, ctx) {
+function EventDetailsModalComponent_button_103_Template(rf, ctx) {
   if (rf & 1) {
     const _r16 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 41);
-    \u0275\u0275listener("click", function EventDetailsModalComponent_button_102_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 42);
+    \u0275\u0275listener("click", function EventDetailsModalComponent_button_103_Template_button_click_0_listener() {
       const act_r17 = \u0275\u0275restoreView(_r16).$implicit;
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.action.emit(act_r17.id));
     });
-    \u0275\u0275elementStart(1, "div", 42)(2, "app-icon", 55);
+    \u0275\u0275elementStart(1, "div", 43)(2, "app-icon", 57);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "div");
@@ -149949,9 +150353,12 @@ var EventDetailsModalComponent = class _EventDetailsModalComponent {
   optionList(item) {
     return item.option_list?.map((_3) => _3.name).join("\n");
   }
+  get recurr_tooltip() {
+    return formatRecurrence(fromEventRecurrence(this.event.recurrence)) || i18n("CALENDAR_EVENT.RECURRING_TOOLTIP");
+  }
   checkin() {
     return __async(this, null, function* () {
-      const mod = Oa(this.space?.id, "Bookings");
+      const mod = Ea(this.space?.id, "Bookings");
       if (!mod)
         return;
       yield mod.execute("checkin", [getUnixTime(this.event.date)]).catch((e2) => notifyError(`Error checking in booking. ${e2}`));
@@ -150012,7 +150419,7 @@ var EventDetailsModalComponent = class _EventDetailsModalComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _EventDetailsModalComponent, selectors: [["event-details-modal"]], outputs: { action: "action" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe])], decls: 103, vars: 64, consts: [["menu", "matMenu"], [1, "h-screen", "w-screen", "space-y-2", "overflow-auto", "bg-base-100", "pb-2", "sm:relative", "sm:inset-auto", "sm:h-auto", "sm:max-h-[80vh]", "sm:w-[51rem]", "sm:rounded", "sm:bg-base-200", "print:min-h-screen", "print:w-screen", "print:overflow-visible"], [1, "max-h-screen", "flex-col", "items-center", "border-base-200", "bg-base-100", "pb-4", "sm:flex", "sm:max-h-[80vh]", "sm:border-b", "sm:px-16", "print:border-none"], ["binding", "", "mod", "Bookings", "bind", "status", 3, "modelChange", "model", "sys"], ["class", "block h-8 w-full sm:hidden", 4, "ngIf"], ["class", "h-64 w-full overflow-hidden bg-neutral sm:rounded-b print:hidden", 4, "ngIf"], ["title", "", 1, "mt-2", "w-full", "px-3", "text-xl", "font-medium"], [1, "w-full", "items-center", "justify-between", "sm:flex"], [1, "m-2", "flex"], [3, "status"], [1, "flex", "flex-col", "leading-tight"], ["class", "text-xs opacity-30", 4, "ngIf"], ["actions", "", "class", "flex items-center space-x-2 px-2 print:hidden", 4, "ngIf"], [1, "flex-wrap", "sm:flex", "sm:px-12"], [1, "min-w-1/3", "flex-grow-[3]", "space-y-2", "rounded", "border-base-200", "sm:m-2", "sm:w-[16rem]", "sm:border", "sm:bg-base-100", "sm:p-4"], [1, "mb-2", "mt-2", "px-3", "text-lg", "font-medium"], [1, "flex", "items-center", "space-x-2", "px-2"], [4, "ngIf"], ["class", "flex items-center space-x-2 px-2", 4, "ngIf"], [1, "min-w-1/3", "mt-4", "flex-grow-[3]", "rounded", "border-base-200", "sm:m-2", "sm:w-[16rem]", "sm:border", "sm:bg-base-100", "sm:p-4"], [1, "mx-3", "flex", "items-center", "justify-between", "border-t", "border-base-200", "sm:border-none"], [1, "text-lg", "font-medium"], ["matRipple", "", "show-attendees", "", 1, "clear", "text-xs", "underline", "print:hidden", 3, "click"], [1, "flex", "items-center", "p-1"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-1"], [1, "text-lg"], [1, "text-sm", "uppercase"], [1, "hidden", "print:block"], [4, "ngFor", "ngForOf"], [1, "mx-3", "mt-2", "border-t", "border-base-200", "pt-2", "text-lg", "font-medium"], ["host", "", 1, "flex", "items-center", "space-x-2", "px-2"], [3, "user"], [1, "w-px", "flex-1", "text-sm"], [1, "w-full", "truncate"], [1, "w-full", "truncate", "opacity-60", 3, "title"], ["map", "", 1, "min-w-1/3", "relative", "m-2", "mt-4", "h-64", "w-[calc(100%-1rem)]", "flex-grow-[3]", "overflow-hidden", "rounded", "border", "border-base-200", "p-2", "sm:mt-2", "sm:h-48", "sm:w-[16rem]", "sm:bg-base-100", 3, "click"], ["class", "min-w-1/3 mt-4 flex-grow-[3] rounded border-base-200 sm:m-2 sm:w-[16rem] sm:border sm:bg-base-100 sm:p-4", 4, "ngIf"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "left-2", "top-2", "bg-neutral", "text-white", "print:hidden"], ["class", "absolute inset-0 z-50", 4, "ngIf"], ["xPosition", "before"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "matTooltip", "disabled", "click", 4, "ngIf"], ["mat-menu-item", "", 3, "click"], [1, "flex", "items-center", "space-x-2", "pr-2", "text-base"], [1, "text-2xl", "text-error"], ["mat-menu-item", "", 3, "click", 4, "ngIf"], ["mat-menu-item", "", 3, "click", 4, "ngFor", "ngForOf"], [1, "block", "h-8", "w-full", "sm:hidden"], [1, "h-64", "w-full", "overflow-hidden", "bg-neutral", "sm:rounded-b", "print:hidden"], [1, "h-64", "w-full", 3, "images"], [1, "text-xs", "opacity-30"], ["actions", "", 1, "flex", "items-center", "space-x-2", "px-2", "print:hidden"], ["btn", "", "matRipple", "", "class", "h-10 flex-1", 3, "bg-success", "border-none", "pointer-events-none", "click", 4, "ngIf"], ["icon", "", "matRipple", "", "class", "h-12 w-12 rounded bg-secondary text-white", 3, "matMenuTriggerFor", 4, "ngIf"], ["btn", "", "matRipple", "", 1, "h-10", "flex-1", 3, "click"], [1, "flex", "items-center", "justify-center", "space-x-2"], [1, "text-2xl"], [1, "pr-4"], ["icon", "", "matRipple", "", 1, "h-12", "w-12", "rounded", "bg-secondary", "text-white", 3, "matMenuTriggerFor"], ["class", "flex items-center space-x-2 px-2", "attendee", "", 4, "ngIf"], ["attendee", "", 1, "flex", "items-center", "space-x-2", "px-2"], [1, "mx-3", "my-2", "text-lg", "font-medium"], [1, "flex", "flex-col", "space-y-2"], ["order", "", "class", "overflow-hidden rounded-xl border border-base-300 bg-base-100", 4, "ngFor", "ngForOf"], ["order", "", 1, "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100"], [1, "flex", "items-center", "space-x-2", "p-3"], [1, "flex-1"], [1, "text-sm"], [1, "flex", "items-center", "space-x-2"], [1, "text-xs", "opacity-60"], ["class", "rounded bg-base-200 px-2 py-1 text-xs", 4, "ngIf"], ["icon", "", "matRipple", "", 1, "print:hidden", 3, "click", "matTooltip"], [1, "flex", "flex-col", "divide-y", "divide-base-100", "bg-base-200"], ["class", "flex items-center space-x-2 px-3 py-1 hover:opacity-90", 4, "ngFor", "ngForOf"], [1, "rounded", "bg-base-200", "px-2", "py-1", "text-xs"], [1, "flex", "items-center", "space-x-2", "px-3", "py-1", "hover:opacity-90"], [1, "flex", "flex-1", "items-center"], ["class", "ml-4 text-xs font-normal opacity-60", 3, "matTooltip", 4, "ngIf"], [1, "rounded", "bg-success", "px-2", "py-1", "text-xs", "text-success-content"], [1, "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content"], [1, "ml-4", "text-xs", "font-normal", "opacity-60", 3, "matTooltip"], [1, "pointer-events-none", 3, "src", "features", "options"], [1, "mx-3", "border-t", "border-base-200", "text-lg", "font-medium", "sm:border-none"], ["notes", "", "class", "mx-4 max-w-full overflow-hidden", 3, "innerHTML", 4, "ngIf"], ["notes", "", 1, "mx-4", "max-w-full", "overflow-hidden", 3, "innerHTML"], [1, "mx-3", "pt-2", "text-lg", "font-medium"], ["request", "", "class", "overflow-hidden rounded-xl border border-base-300 bg-base-100", 4, "ngFor", "ngForOf"], ["request", "", 1, "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100"], ["matRipple", "", 1, "flex", "w-full", "items-center", "space-x-2", "p-3", 3, "click"], [1, "flex-1", "text-left"], [1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full", "print:hidden", 3, "matTooltip"], [1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full", "print:hidden"], [1, "absolute", "inset-0", "z-50"], [3, "click", "list", "host"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "click", "matTooltip", "disabled"]], template: function EventDetailsModalComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _EventDetailsModalComponent, selectors: [["event-details-modal"]], outputs: { action: "action" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe])], decls: 104, vars: 65, consts: [["menu", "matMenu"], [1, "h-screen", "w-screen", "space-y-2", "overflow-auto", "bg-base-100", "pb-2", "sm:relative", "sm:inset-auto", "sm:h-auto", "sm:max-h-[80vh]", "sm:w-[51rem]", "sm:rounded", "sm:bg-base-200", "print:min-h-screen", "print:w-screen", "print:overflow-visible"], [1, "max-h-screen", "flex-col", "items-center", "border-base-200", "bg-base-100", "pb-4", "sm:flex", "sm:max-h-[80vh]", "sm:border-b", "sm:px-16", "print:border-none"], ["binding", "", "mod", "Bookings", "bind", "status", 3, "modelChange", "model", "sys"], ["class", "block h-8 w-full sm:hidden", 4, "ngIf"], ["class", "h-64 w-full overflow-hidden bg-neutral sm:rounded-b print:hidden", 4, "ngIf"], ["title", "", 1, "mt-2", "w-full", "px-3", "text-xl", "font-medium"], [1, "w-full", "items-center", "justify-between", "sm:flex"], [1, "m-2", "flex", "items-center", "space-x-2"], [3, "status"], [1, "flex", "flex-col", "leading-tight"], ["class", "text-xs opacity-30", 4, "ngIf"], ["class", "text-2xl", 3, "matTooltip", 4, "ngIf"], ["actions", "", "class", "flex items-center space-x-2 px-2 print:hidden", 4, "ngIf"], [1, "flex-wrap", "sm:flex", "sm:px-12"], [1, "min-w-1/3", "flex-grow-[3]", "space-y-2", "rounded", "border-base-200", "sm:m-2", "sm:w-[16rem]", "sm:border", "sm:bg-base-100", "sm:p-4"], [1, "mb-2", "mt-2", "px-3", "text-lg", "font-medium"], [1, "flex", "items-center", "space-x-2", "px-2"], [4, "ngIf"], ["class", "flex items-center space-x-2 px-2", 4, "ngIf"], [1, "min-w-1/3", "mt-4", "flex-grow-[3]", "rounded", "border-base-200", "sm:m-2", "sm:w-[16rem]", "sm:border", "sm:bg-base-100", "sm:p-4"], [1, "mx-3", "flex", "items-center", "justify-between", "border-t", "border-base-200", "sm:border-none"], [1, "text-lg", "font-medium"], ["matRipple", "", "show-attendees", "", 1, "clear", "text-xs", "underline", "print:hidden", 3, "click"], [1, "flex", "items-center", "p-1"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-1"], [1, "text-lg"], [1, "text-sm", "uppercase"], [1, "hidden", "print:block"], [4, "ngFor", "ngForOf"], [1, "mx-3", "mt-2", "border-t", "border-base-200", "pt-2", "text-lg", "font-medium"], ["host", "", 1, "flex", "items-center", "space-x-2", "px-2"], [3, "user"], [1, "w-px", "flex-1", "text-sm"], [1, "w-full", "truncate"], [1, "w-full", "truncate", "opacity-60", 3, "title"], ["map", "", 1, "min-w-1/3", "relative", "m-2", "mt-4", "h-64", "w-[calc(100%-1rem)]", "flex-grow-[3]", "overflow-hidden", "rounded", "border", "border-base-200", "p-2", "sm:mt-2", "sm:h-48", "sm:w-[16rem]", "sm:bg-base-100", 3, "click"], ["class", "min-w-1/3 mt-4 flex-grow-[3] rounded border-base-200 sm:m-2 sm:w-[16rem] sm:border sm:bg-base-100 sm:p-4", 4, "ngIf"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "left-2", "top-2", "bg-neutral", "text-white", "print:hidden"], ["class", "absolute inset-0 z-50", 4, "ngIf"], ["xPosition", "before"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "matTooltip", "disabled", "click", 4, "ngIf"], ["mat-menu-item", "", 3, "click"], [1, "flex", "items-center", "space-x-2", "pr-2", "text-base"], [1, "text-2xl", "text-error"], ["mat-menu-item", "", 3, "click", 4, "ngIf"], ["mat-menu-item", "", 3, "click", 4, "ngFor", "ngForOf"], [1, "block", "h-8", "w-full", "sm:hidden"], [1, "h-64", "w-full", "overflow-hidden", "bg-neutral", "sm:rounded-b", "print:hidden"], [1, "h-64", "w-full", 3, "images"], [1, "text-xs", "opacity-30"], [1, "text-2xl", 3, "matTooltip"], ["actions", "", 1, "flex", "items-center", "space-x-2", "px-2", "print:hidden"], ["btn", "", "matRipple", "", "class", "h-10 flex-1", 3, "bg-success", "border-none", "pointer-events-none", "click", 4, "ngIf"], ["icon", "", "matRipple", "", "class", "h-12 w-12 rounded bg-secondary text-white", 3, "matMenuTriggerFor", 4, "ngIf"], ["btn", "", "matRipple", "", 1, "h-10", "flex-1", 3, "click"], [1, "flex", "items-center", "justify-center", "space-x-2"], [1, "text-2xl"], [1, "pr-4"], ["icon", "", "matRipple", "", 1, "h-12", "w-12", "rounded", "bg-secondary", "text-white", 3, "matMenuTriggerFor"], ["class", "flex items-center space-x-2 px-2", "attendee", "", 4, "ngIf"], ["attendee", "", 1, "flex", "items-center", "space-x-2", "px-2"], [1, "mx-3", "my-2", "text-lg", "font-medium"], [1, "flex", "flex-col", "space-y-2"], ["order", "", "class", "overflow-hidden rounded-xl border border-base-300 bg-base-100", 4, "ngFor", "ngForOf"], ["order", "", 1, "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100"], [1, "flex", "items-center", "space-x-2", "p-3"], [1, "flex-1"], [1, "text-sm"], [1, "flex", "items-center", "space-x-2"], [1, "text-xs", "opacity-60"], ["class", "rounded bg-base-200 px-2 py-1 text-xs", 4, "ngIf"], ["icon", "", "matRipple", "", 1, "print:hidden", 3, "click", "matTooltip"], [1, "flex", "flex-col", "divide-y", "divide-base-100", "bg-base-200"], ["class", "flex items-center space-x-2 px-3 py-1 hover:opacity-90", 4, "ngFor", "ngForOf"], [1, "rounded", "bg-base-200", "px-2", "py-1", "text-xs"], [1, "flex", "items-center", "space-x-2", "px-3", "py-1", "hover:opacity-90"], [1, "flex", "flex-1", "items-center"], ["class", "ml-4 text-xs font-normal opacity-60", 3, "matTooltip", 4, "ngIf"], [1, "rounded", "bg-success", "px-2", "py-1", "text-xs", "text-success-content"], [1, "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content"], [1, "ml-4", "text-xs", "font-normal", "opacity-60", 3, "matTooltip"], [1, "pointer-events-none", 3, "src", "features", "options"], [1, "mx-3", "border-t", "border-base-200", "text-lg", "font-medium", "sm:border-none"], ["notes", "", "class", "mx-4 max-w-full overflow-hidden", 3, "innerHTML", 4, "ngIf"], ["notes", "", 1, "mx-4", "max-w-full", "overflow-hidden", 3, "innerHTML"], [1, "mx-3", "pt-2", "text-lg", "font-medium"], ["request", "", "class", "overflow-hidden rounded-xl border border-base-300 bg-base-100", 4, "ngFor", "ngForOf"], ["request", "", 1, "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-100"], ["matRipple", "", 1, "flex", "w-full", "items-center", "space-x-2", "p-3", 3, "click"], [1, "flex-1", "text-left"], [1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full", "print:hidden", 3, "matTooltip"], [1, "flex", "h-8", "w-8", "items-center", "justify-center", "rounded-full", "print:hidden"], [1, "absolute", "inset-0", "z-50"], [3, "click", "list", "host"], ["mat-menu-item", "", "mat-dialog-close", "", 3, "click", "matTooltip", "disabled"]], template: function EventDetailsModalComponent_Template(rf, ctx) {
       if (rf & 1) {
         const _r1 = \u0275\u0275getCurrentView();
         \u0275\u0275elementStart(0, "div", 1)(1, "div", 2)(2, "i", 3);
@@ -150030,116 +150437,118 @@ var EventDetailsModalComponent = class _EventDetailsModalComponent {
         \u0275\u0275text(12);
         \u0275\u0275elementEnd();
         \u0275\u0275template(13, EventDetailsModalComponent_div_13_Template, 2, 1, "div", 11);
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275template(14, EventDetailsModalComponent_div_14_Template, 3, 2, "div", 12);
         \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(15, "div", 13)(16, "div", 14)(17, "h3", 15);
-        \u0275\u0275text(18);
-        \u0275\u0275pipe(19, "translate");
+        \u0275\u0275template(14, EventDetailsModalComponent_icon_14_Template, 2, 1, "icon", 12);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(20, "div", 16)(21, "app-icon");
-        \u0275\u0275text(22, "event");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(23, "div", 10)(24, "div");
-        \u0275\u0275text(25);
-        \u0275\u0275pipe(26, "date");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(27, EventDetailsModalComponent_div_27_Template, 3, 5, "div", 11);
+        \u0275\u0275template(15, EventDetailsModalComponent_div_15_Template, 3, 2, "div", 13);
         \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(28, "div", 16)(29, "app-icon");
-        \u0275\u0275text(30, "schedule");
+        \u0275\u0275elementStart(16, "div", 14)(17, "div", 15)(18, "h3", 16);
+        \u0275\u0275text(19);
+        \u0275\u0275pipe(20, "translate");
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(31, "div", 10)(32, "div");
-        \u0275\u0275text(33);
+        \u0275\u0275elementStart(21, "div", 17)(22, "app-icon");
+        \u0275\u0275text(23, "event");
         \u0275\u0275elementEnd();
-        \u0275\u0275template(34, EventDetailsModalComponent_div_34_Template, 2, 1, "div", 11);
+        \u0275\u0275elementStart(24, "div", 10)(25, "div");
+        \u0275\u0275text(26);
+        \u0275\u0275pipe(27, "date");
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(28, EventDetailsModalComponent_div_28_Template, 3, 5, "div", 11);
         \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(35, "div", 16)(36, "app-icon");
-        \u0275\u0275text(37, "map");
+        \u0275\u0275elementStart(29, "div", 17)(30, "app-icon");
+        \u0275\u0275text(31, "schedule");
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(38, "div");
-        \u0275\u0275template(39, EventDetailsModalComponent_ng_container_39_Template, 2, 1, "ng-container", 17);
-        \u0275\u0275text(40);
+        \u0275\u0275elementStart(32, "div", 10)(33, "div");
+        \u0275\u0275text(34);
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(35, EventDetailsModalComponent_div_35_Template, 2, 1, "div", 11);
         \u0275\u0275elementEnd()();
-        \u0275\u0275template(41, EventDetailsModalComponent_div_41_Template, 5, 2, "div", 18);
+        \u0275\u0275elementStart(36, "div", 17)(37, "app-icon");
+        \u0275\u0275text(38, "map");
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(42, "div", 19)(43, "div", 20)(44, "h3", 21);
-        \u0275\u0275text(45);
-        \u0275\u0275pipe(46, "translate");
+        \u0275\u0275elementStart(39, "div");
+        \u0275\u0275template(40, EventDetailsModalComponent_ng_container_40_Template, 2, 1, "ng-container", 18);
+        \u0275\u0275text(41);
+        \u0275\u0275elementEnd()();
+        \u0275\u0275template(42, EventDetailsModalComponent_div_42_Template, 5, 2, "div", 19);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(47, "button", 22);
-        \u0275\u0275listener("click", function EventDetailsModalComponent_Template_button_click_47_listener() {
+        \u0275\u0275elementStart(43, "div", 20)(44, "div", 21)(45, "h3", 22);
+        \u0275\u0275text(46);
+        \u0275\u0275pipe(47, "translate");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(48, "button", 23);
+        \u0275\u0275listener("click", function EventDetailsModalComponent_Template_button_click_48_listener() {
           \u0275\u0275restoreView(_r1);
           return \u0275\u0275resetView(ctx.show_attendees = true);
         });
-        \u0275\u0275text(48);
-        \u0275\u0275pipe(49, "translate");
+        \u0275\u0275text(49);
+        \u0275\u0275pipe(50, "translate");
         \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(50, "div", 23)(51, "div", 24)(52, "div", 25);
-        \u0275\u0275text(53);
+        \u0275\u0275elementStart(51, "div", 24)(52, "div", 25)(53, "div", 26);
+        \u0275\u0275text(54);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(54, "div", 26);
-        \u0275\u0275text(55);
-        \u0275\u0275pipe(56, "translate");
+        \u0275\u0275elementStart(55, "div", 27);
+        \u0275\u0275text(56);
+        \u0275\u0275pipe(57, "translate");
         \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(57, "div", 24)(58, "div", 25);
-        \u0275\u0275text(59);
+        \u0275\u0275elementStart(58, "div", 25)(59, "div", 26);
+        \u0275\u0275text(60);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(60, "div", 26);
-        \u0275\u0275text(61);
-        \u0275\u0275pipe(62, "translate");
+        \u0275\u0275elementStart(61, "div", 27);
+        \u0275\u0275text(62);
+        \u0275\u0275pipe(63, "translate");
         \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(63, "div", 24)(64, "div", 25);
-        \u0275\u0275text(65);
+        \u0275\u0275elementStart(64, "div", 25)(65, "div", 26);
+        \u0275\u0275text(66);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(66, "div", 26);
-        \u0275\u0275text(67);
-        \u0275\u0275pipe(68, "translate");
+        \u0275\u0275elementStart(67, "div", 27);
+        \u0275\u0275text(68);
+        \u0275\u0275pipe(69, "translate");
         \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(69, "div", 27);
-        \u0275\u0275template(70, EventDetailsModalComponent_ng_container_70_Template, 2, 1, "ng-container", 28);
+        \u0275\u0275elementStart(70, "div", 28);
+        \u0275\u0275template(71, EventDetailsModalComponent_ng_container_71_Template, 2, 1, "ng-container", 29);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(71, "h3", 29);
-        \u0275\u0275text(72);
-        \u0275\u0275pipe(73, "translate");
+        \u0275\u0275elementStart(72, "h3", 30);
+        \u0275\u0275text(73);
+        \u0275\u0275pipe(74, "translate");
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(74, "div", 30);
-        \u0275\u0275element(75, "a-user-avatar", 31);
-        \u0275\u0275elementStart(76, "div", 32)(77, "div", 33);
-        \u0275\u0275text(78);
+        \u0275\u0275elementStart(75, "div", 31);
+        \u0275\u0275element(76, "a-user-avatar", 32);
+        \u0275\u0275elementStart(77, "div", 33)(78, "div", 34);
+        \u0275\u0275text(79);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(79, "div", 34);
-        \u0275\u0275text(80);
+        \u0275\u0275elementStart(80, "div", 35);
+        \u0275\u0275text(81);
         \u0275\u0275elementEnd()()()();
-        \u0275\u0275template(81, EventDetailsModalComponent_ng_container_81_Template, 7, 4, "ng-container", 17);
-        \u0275\u0275elementStart(82, "button", 35);
-        \u0275\u0275listener("click", function EventDetailsModalComponent_Template_button_click_82_listener() {
+        \u0275\u0275template(82, EventDetailsModalComponent_ng_container_82_Template, 7, 4, "ng-container", 18);
+        \u0275\u0275elementStart(83, "button", 36);
+        \u0275\u0275listener("click", function EventDetailsModalComponent_Template_button_click_83_listener() {
           \u0275\u0275restoreView(_r1);
           return \u0275\u0275resetView(ctx.viewLocation());
         });
-        \u0275\u0275template(83, EventDetailsModalComponent_ng_container_83_Template, 2, 4, "ng-container", 17);
+        \u0275\u0275template(84, EventDetailsModalComponent_ng_container_84_Template, 2, 4, "ng-container", 18);
         \u0275\u0275elementEnd();
-        \u0275\u0275template(84, EventDetailsModalComponent_div_84_Template, 5, 4, "div", 36)(85, EventDetailsModalComponent_ng_container_85_Template, 7, 5, "ng-container", 17);
-        \u0275\u0275elementStart(86, "button", 37)(87, "app-icon");
-        \u0275\u0275text(88, "close");
+        \u0275\u0275template(85, EventDetailsModalComponent_div_85_Template, 5, 4, "div", 37)(86, EventDetailsModalComponent_ng_container_86_Template, 7, 5, "ng-container", 18);
+        \u0275\u0275elementStart(87, "button", 38)(88, "app-icon");
+        \u0275\u0275text(89, "close");
         \u0275\u0275elementEnd()();
-        \u0275\u0275template(89, EventDetailsModalComponent_div_89_Template, 2, 2, "div", 38);
+        \u0275\u0275template(90, EventDetailsModalComponent_div_90_Template, 2, 2, "div", 39);
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(90, "mat-menu", 39, 0);
-        \u0275\u0275template(92, EventDetailsModalComponent_button_92_Template, 7, 5, "button", 40);
-        \u0275\u0275elementStart(93, "button", 41);
-        \u0275\u0275listener("click", function EventDetailsModalComponent_Template_button_click_93_listener() {
+        \u0275\u0275elementStart(91, "mat-menu", 40, 0);
+        \u0275\u0275template(93, EventDetailsModalComponent_button_93_Template, 7, 5, "button", 41);
+        \u0275\u0275elementStart(94, "button", 42);
+        \u0275\u0275listener("click", function EventDetailsModalComponent_Template_button_click_94_listener() {
           \u0275\u0275restoreView(_r1);
           return \u0275\u0275resetView(ctx.remove ? ctx.remove(ctx.event, false) : "");
         });
-        \u0275\u0275elementStart(94, "div", 42)(95, "app-icon", 43);
-        \u0275\u0275text(96, "delete");
+        \u0275\u0275elementStart(95, "div", 43)(96, "app-icon", 44);
+        \u0275\u0275text(97, "delete");
         \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(97, "div");
-        \u0275\u0275text(98);
-        \u0275\u0275pipe(99, "translate");
+        \u0275\u0275elementStart(98, "div");
+        \u0275\u0275text(99);
+        \u0275\u0275pipe(100, "translate");
         \u0275\u0275elementEnd()()();
-        \u0275\u0275template(100, EventDetailsModalComponent_button_100_Template, 7, 3, "button", 44)(101, EventDetailsModalComponent_button_101_Template, 7, 3, "button", 44)(102, EventDetailsModalComponent_button_102_Template, 6, 2, "button", 45);
+        \u0275\u0275template(101, EventDetailsModalComponent_button_101_Template, 7, 3, "button", 45)(102, EventDetailsModalComponent_button_102_Template, 7, 3, "button", 45)(103, EventDetailsModalComponent_button_103_Template, 6, 2, "button", 46);
         \u0275\u0275elementEnd()();
       }
       if (rf & 2) {
@@ -150163,11 +150572,13 @@ var EventDetailsModalComponent = class _EventDetailsModalComponent {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.timezone && ctx.tz);
         \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.event.recurring_event_id);
+        \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.event.state !== "done");
         \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(19, 45, "CALENDAR_EVENT.DETAILS"), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(20, 46, "CALENDAR_EVENT.DETAILS"), " ");
         \u0275\u0275advance(7);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(26, 47, ctx.event.date, "EEEE, dd LLLL y"), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(27, 48, ctx.event.date, "EEEE, dd LLLL y"), " ");
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ctx.timezone && ctx.tz && !ctx.tz_date_same);
         \u0275\u0275advance(6);
@@ -150181,25 +150592,25 @@ var EventDetailsModalComponent = class _EventDetailsModalComponent {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.building);
         \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(46, 50, "CALENDAR_EVENT.ATTENDEES"), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(47, 51, "CALENDAR_EVENT.ATTENDEES"), " ");
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(49, 52, "COMMON.VIEW_ALL"), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(50, 53, "COMMON.VIEW_ALL"), " ");
         \u0275\u0275advance(5);
         \u0275\u0275textInterpolate(ctx.accept_count || 0);
         \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(56, 54, "COMMON.TRUE"), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(57, 55, "COMMON.TRUE"), " ");
         \u0275\u0275advance(4);
         \u0275\u0275textInterpolate(ctx.declined_count || 0);
         \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(62, 56, "COMMON.FALSE"), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(63, 57, "COMMON.FALSE"), " ");
         \u0275\u0275advance(4);
         \u0275\u0275textInterpolate(ctx.pending_count || 0);
         \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(68, 58, "COMMON.PENDING"), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(69, 59, "COMMON.PENDING"), " ");
         \u0275\u0275advance(3);
         \u0275\u0275property("ngForOf", ctx.event.attendees);
         \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(73, 60, "FORM.HOST"), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(74, 61, "FORM.HOST"), " ");
         \u0275\u0275advance(3);
         \u0275\u0275property("user", ctx.event.organiser);
         \u0275\u0275advance(3);
@@ -150221,7 +150632,7 @@ var EventDetailsModalComponent = class _EventDetailsModalComponent {
         \u0275\u0275advance(3);
         \u0275\u0275property("ngIf", !ctx.hide_edit);
         \u0275\u0275advance(6);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(99, 62, "CALENDAR_EVENT.ACTION_DELETE"), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(100, 63, "CALENDAR_EVENT.ACTION_DELETE"), " ");
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ctx.is_concierge);
         \u0275\u0275advance();
@@ -150229,15 +150640,15 @@ var EventDetailsModalComponent = class _EventDetailsModalComponent {
         \u0275\u0275advance();
         \u0275\u0275property("ngForOf", ctx.custom_actions);
       }
-    }, dependencies: [NgForOf, NgIf, MatDialogClose, IconComponent, UserAvatarComponent, InteractiveMapComponent, ImageCarouselComponent, StatusPillComponent, BindingDirective, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, MatTooltip, AttendeeListComponent, CurrencyPipe, DatePipe, SanitizePipe, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
+    }, dependencies: [NgForOf, NgIf, MatDialogClose, UserAvatarComponent, InteractiveMapComponent, ImageCarouselComponent, StatusPillComponent, BindingDirective, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, MatTooltip, IconComponent, AttendeeListComponent, CurrencyPipe, DatePipe, SanitizePipe, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(EventDetailsModalComponent, { className: "EventDetailsModalComponent", filePath: "libs/events/src/lib/event-details-modal.component.ts", lineNumber: 647 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(EventDetailsModalComponent, { className: "EventDetailsModalComponent", filePath: "libs/events/src/lib/event-details-modal.component.ts", lineNumber: 655 });
 })();
 
 // libs/events/src/lib/event-card.component.ts
-var _c072 = () => ["./"];
+var _c073 = () => ["./"];
 var _c143 = (a0) => ({ event: a0 });
 var _c216 = (a0) => ({ count: a0 });
 function EventCardComponent_h4_0_span_1_Template(rf, ctx) {
@@ -150275,7 +150686,7 @@ function EventCardComponent_h4_0_Template(rf, ctx) {
 }
 function EventCardComponent_a_1_div_9_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 21);
+    \u0275\u0275elementStart(0, "div", 22);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -150285,12 +150696,23 @@ function EventCardComponent_a_1_div_9_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r0.period_tz, " ");
   }
 }
-function EventCardComponent_a_1_div_22_Template(rf, ctx) {
+function EventCardComponent_a_1_icon_10_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 14)(1, "app-icon");
+    \u0275\u0275elementStart(0, "icon", 23);
+    \u0275\u0275text(1, "event_repeat");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("matTooltip", ctx_r0.recurr_tooltip);
+  }
+}
+function EventCardComponent_a_1_div_23_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 15)(1, "app-icon");
     \u0275\u0275text(2, "restaurant");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div", 17);
+    \u0275\u0275elementStart(3, "div", 18);
     \u0275\u0275text(4);
     \u0275\u0275pipe(5, "translate");
     \u0275\u0275elementEnd()();
@@ -150300,10 +150722,10 @@ function EventCardComponent_a_1_div_22_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 1, "CALENDAR_EVENT.CATERED"), " ");
   }
 }
-function EventCardComponent_a_1_div_31_div_1_Template(rf, ctx) {
+function EventCardComponent_a_1_div_32_div_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 25);
-    \u0275\u0275element(1, "a-user-avatar", 26);
+    \u0275\u0275elementStart(0, "div", 27);
+    \u0275\u0275element(1, "a-user-avatar", 28);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -150312,9 +150734,9 @@ function EventCardComponent_a_1_div_31_div_1_Template(rf, ctx) {
     \u0275\u0275property("user", user_r3);
   }
 }
-function EventCardComponent_a_1_div_31_div_3_Template(rf, ctx) {
+function EventCardComponent_a_1_div_32_div_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 25)(1, "div", 27);
+    \u0275\u0275elementStart(0, "div", 27)(1, "div", 29);
     \u0275\u0275text(2);
     \u0275\u0275elementEnd()();
   }
@@ -150324,12 +150746,12 @@ function EventCardComponent_a_1_div_31_div_3_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" +", (ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length) - 5, " ");
   }
 }
-function EventCardComponent_a_1_div_31_Template(rf, ctx) {
+function EventCardComponent_a_1_div_32_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 22);
-    \u0275\u0275template(1, EventCardComponent_a_1_div_31_div_1_Template, 2, 1, "div", 23);
+    \u0275\u0275elementStart(0, "div", 24);
+    \u0275\u0275template(1, EventCardComponent_a_1_div_32_div_1_Template, 2, 1, "div", 25);
     \u0275\u0275pipe(2, "slice");
-    \u0275\u0275template(3, EventCardComponent_a_1_div_31_div_3_Template, 3, 1, "div", 24);
+    \u0275\u0275template(3, EventCardComponent_a_1_div_32_div_3_Template, 3, 1, "div", 26);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -150356,38 +150778,40 @@ function EventCardComponent_a_1_Template(rf, ctx) {
     \u0275\u0275text(8);
     \u0275\u0275elementEnd();
     \u0275\u0275template(9, EventCardComponent_a_1_div_9_Template, 2, 1, "div", 12);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(10, "div", 13)(11, "div", 14)(12, "app-icon", 15);
-    \u0275\u0275pipe(13, "translate");
-    \u0275\u0275text(14, "meeting_room");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(15, "div", 16);
-    \u0275\u0275text(16);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(17, "div", 14)(18, "app-icon");
-    \u0275\u0275text(19, "person_outline");
+    \u0275\u0275template(10, EventCardComponent_a_1_icon_10_Template, 2, 1, "icon", 13);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(20, "div", 17);
-    \u0275\u0275text(21);
+    \u0275\u0275elementStart(11, "div", 14)(12, "div", 15)(13, "app-icon", 16);
+    \u0275\u0275pipe(14, "translate");
+    \u0275\u0275text(15, "meeting_room");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(16, "div", 17);
+    \u0275\u0275text(17);
     \u0275\u0275elementEnd()();
-    \u0275\u0275template(22, EventCardComponent_a_1_div_22_Template, 6, 3, "div", 18);
-    \u0275\u0275elementStart(23, "div", 14)(24, "app-icon");
-    \u0275\u0275text(25, "people");
+    \u0275\u0275elementStart(18, "div", 15)(19, "app-icon");
+    \u0275\u0275text(20, "person_outline");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(26, "div", 17);
-    \u0275\u0275text(27);
-    \u0275\u0275pipe(28, "translate");
+    \u0275\u0275elementStart(21, "div", 18);
+    \u0275\u0275text(22);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275template(23, EventCardComponent_a_1_div_23_Template, 6, 3, "div", 19);
+    \u0275\u0275elementStart(24, "div", 15)(25, "app-icon");
+    \u0275\u0275text(26, "people");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(27, "div", 18);
+    \u0275\u0275text(28);
+    \u0275\u0275pipe(29, "translate");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(29, "app-icon", 19);
-    \u0275\u0275text(30, " chevron_right ");
+    \u0275\u0275elementStart(30, "app-icon", 20);
+    \u0275\u0275text(31, " chevron_right ");
     \u0275\u0275elementEnd();
-    \u0275\u0275template(31, EventCardComponent_a_1_div_31_Template, 4, 6, "div", 20);
+    \u0275\u0275template(32, EventCardComponent_a_1_div_32_Template, 4, 6, "div", 21);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    let tmp_11_0;
+    let tmp_12_0;
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(19, _c072))("queryParams", \u0275\u0275pureFunction1(20, _c143, ctx_r0.event == null ? null : ctx_r0.event.id));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(20, _c073))("queryParams", \u0275\u0275pureFunction1(21, _c143, ctx_r0.event == null ? null : ctx_r0.event.id));
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(ctx_r0.event == null ? null : ctx_r0.event.title);
     \u0275\u0275advance(2);
@@ -150398,16 +150822,18 @@ function EventCardComponent_a_1_Template(rf, ctx) {
     \u0275\u0275textInterpolate(ctx_r0.period);
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ctx_r0.timezone && ctx_r0.tz);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.event.recurring_event_id);
     \u0275\u0275advance(3);
-    \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(13, 14, "RESOURCE.ROOM"));
+    \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(14, 15, "RESOURCE.ROOM"));
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate1(" ", ctx_r0.location, " ");
     \u0275\u0275advance(5);
     \u0275\u0275textInterpolate1(" ", (ctx_r0.event == null ? null : ctx_r0.event.organiser == null ? null : ctx_r0.event.organiser.name) || (ctx_r0.event == null ? null : ctx_r0.event.organiser == null ? null : ctx_r0.event.organiser.email), " ");
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r0.event == null ? null : (tmp_11_0 = ctx_r0.event.ext("catering")) == null ? null : tmp_11_0.length);
+    \u0275\u0275property("ngIf", ctx_r0.event == null ? null : (tmp_12_0 = ctx_r0.event.ext("catering")) == null ? null : tmp_12_0.length);
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(28, 16, "CALENDAR_EVENT.ATTENDEE_COUNT", \u0275\u0275pureFunction1(22, _c216, (ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length) || 0)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(29, 17, "CALENDAR_EVENT.ATTENDEE_COUNT", \u0275\u0275pureFunction1(23, _c216, (ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length) || 0)), " ");
     \u0275\u0275advance(4);
     \u0275\u0275property("ngIf", ctx_r0.event == null ? null : ctx_r0.event.attendees == null ? null : ctx_r0.event.attendees.length);
   }
@@ -150433,6 +150859,9 @@ var EventCardComponent = class _EventCardComponent extends AsyncHandler {
   }
   get period_tz() {
     return this.formattedTime(this.tz);
+  }
+  get recurr_tooltip() {
+    return formatRecurrence(fromEventRecurrence(this.event.recurrence)) || i18n("CALENDAR_EVENT.RECURRING_TOOLTIP");
   }
   formattedTime(tz) {
     const date = this.event.date;
@@ -150534,24 +150963,24 @@ var EventCardComponent = class _EventCardComponent extends AsyncHandler {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _EventCardComponent, selectors: [["event-card"]], inputs: { event: "event", show_day: "show_day", edit_fn: "edit_fn", remove_fn: "remove_fn" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 2, vars: 2, consts: [["class", "mb-2 flex items-center", "date", "", 4, "ngIf"], ["name", "view-event-details", "class", "relative w-full cursor-pointer", 3, "routerLink", "queryParams", "click", 4, "ngIf"], ["date", "", 1, "mb-2", "flex", "items-center"], ["day", "", 4, "ngIf"], [1, "px-2", "text-xs"], ["day", ""], ["name", "view-event-details", 1, "relative", "w-full", "cursor-pointer", 3, "click", "routerLink", "queryParams"], [1, "relative", "w-full", "rounded-xl", "border", "border-base-300", "bg-base-100", "py-4", "shadow"], [1, "px-4", "text-lg"], [1, "mx-4", "my-2", "flex"], [3, "status"], [1, "flex", "flex-col", "leading-tight"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "divide-base-200-500", "flex", "flex-col", "flex-wrap", "space-y-2", "py-2", "sm:flex-row", "sm:space-y-0", "sm:divide-x"], [1, "flex", "items-center", "px-4"], ["matTooltipPosition", "right", 3, "matTooltip"], [1, "mx-2", "truncate"], [1, "mx-2"], ["class", "flex items-center px-4", 4, "ngIf"], [1, "absolute", "right-1", "top-1/2", "-translate-y-1/2", "text-4xl"], ["class", "absolute bottom-2 right-2 flex items-center pr-4 text-sm sm:bottom-auto sm:top-2 sm:text-base", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "absolute", "bottom-2", "right-2", "flex", "items-center", "pr-4", "text-sm", "sm:bottom-auto", "sm:top-2", "sm:text-base"], ["class", "h-10 w-6", 4, "ngFor", "ngForOf"], ["class", "h-10 w-6", 4, "ngIf"], [1, "h-10", "w-6"], [3, "user"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full", "border-2", "border-base-100", "bg-secondary", "text-secondary-content"]], template: function EventCardComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _EventCardComponent, selectors: [["event-card"]], inputs: { event: "event", show_day: "show_day", edit_fn: "edit_fn", remove_fn: "remove_fn" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 2, vars: 2, consts: [["class", "mb-2 flex items-center", "date", "", 4, "ngIf"], ["name", "view-event-details", "class", "relative w-full cursor-pointer", 3, "routerLink", "queryParams", "click", 4, "ngIf"], ["date", "", 1, "mb-2", "flex", "items-center"], ["day", "", 4, "ngIf"], [1, "px-2", "text-xs"], ["day", ""], ["name", "view-event-details", 1, "relative", "w-full", "cursor-pointer", 3, "click", "routerLink", "queryParams"], [1, "relative", "w-full", "rounded-xl", "border", "border-base-300", "bg-base-100", "py-4", "shadow"], [1, "px-4", "text-lg"], [1, "mx-4", "my-2", "flex", "items-center", "space-x-2"], [3, "status"], [1, "flex", "flex-col", "leading-tight"], ["class", "text-xs opacity-30", 4, "ngIf"], ["class", "text-2xl", 3, "matTooltip", 4, "ngIf"], [1, "divide-base-200-500", "flex", "flex-col", "flex-wrap", "space-y-2", "py-2", "sm:flex-row", "sm:space-y-0", "sm:divide-x"], [1, "flex", "items-center", "px-4"], ["matTooltipPosition", "right", 3, "matTooltip"], [1, "mx-2", "truncate"], [1, "mx-2"], ["class", "flex items-center px-4", 4, "ngIf"], [1, "absolute", "right-1", "top-1/2", "-translate-y-1/2", "text-4xl"], ["class", "absolute bottom-2 right-2 flex items-center pr-4 text-sm sm:bottom-auto sm:top-2 sm:text-base", 4, "ngIf"], [1, "text-xs", "opacity-30"], [1, "text-2xl", 3, "matTooltip"], [1, "absolute", "bottom-2", "right-2", "flex", "items-center", "pr-4", "text-sm", "sm:bottom-auto", "sm:top-2", "sm:text-base"], ["class", "h-10 w-6", 4, "ngFor", "ngForOf"], ["class", "h-10 w-6", 4, "ngIf"], [1, "h-10", "w-6"], [3, "user"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full", "border-2", "border-base-100", "bg-secondary", "text-secondary-content"]], template: function EventCardComponent_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275template(0, EventCardComponent_h4_0_Template, 7, 9, "h4", 0)(1, EventCardComponent_a_1_Template, 32, 24, "a", 1);
+        \u0275\u0275template(0, EventCardComponent_h4_0_Template, 7, 9, "h4", 0)(1, EventCardComponent_a_1_Template, 33, 25, "a", 1);
       }
       if (rf & 2) {
         \u0275\u0275property("ngIf", ctx.event);
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.event);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, UserAvatarComponent, StatusPillComponent, MatTooltip, SlicePipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=event-card.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, UserAvatarComponent, StatusPillComponent, MatTooltip, IconComponent, SlicePipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=event-card.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(EventCardComponent, { className: "EventCardComponent", filePath: "libs/events/src/lib/event-card.component.ts", lineNumber: 148 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(EventCardComponent, { className: "EventCardComponent", filePath: "libs/events/src/lib/event-card.component.ts", lineNumber: 156 });
 })();
 
 // libs/events/src/lib/group-event-card.component.ts
-var _c073 = (a0) => ({ count: a0 });
+var _c074 = (a0) => ({ count: a0 });
 function GroupEventCardComponent_button_0_img_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "img", 15);
@@ -150668,7 +151097,7 @@ function GroupEventCardComponent_button_0_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r1.is_onsite);
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(25, 17, "CALENDAR_EVENT.GROUP_ATTENDING", \u0275\u0275pureFunction1(20, _c073, (ctx_r1.event.attendees == null ? null : ctx_r1.event.attendees.length) || "0")), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(25, 17, "CALENDAR_EVENT.GROUP_ATTENDING", \u0275\u0275pureFunction1(20, _c074, (ctx_r1.event.attendees == null ? null : ctx_r1.event.attendees.length) || "0")), " ");
   }
 }
 function GroupEventCardComponent_ng_template_1_img_2_Template(rf, ctx) {
@@ -150811,7 +151240,7 @@ function GroupEventCardComponent_ng_template_1_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r1.is_onsite);
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(40, 32, "CALENDAR_EVENT.GROUP_ATTENDING", \u0275\u0275pureFunction1(37, _c073, (ctx_r1.event.attendees == null ? null : ctx_r1.event.attendees.length) || "0")), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(40, 32, "CALENDAR_EVENT.GROUP_ATTENDING", \u0275\u0275pureFunction1(37, _c074, (ctx_r1.event.attendees == null ? null : ctx_r1.event.attendees.length) || "0")), " ");
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(43, 35, "COMMON.VIEW_DETAILS"), " ");
   }
@@ -150869,7 +151298,7 @@ var GroupEventCardComponent = class _GroupEventCardComponent {
         const featured_card_r4 = \u0275\u0275reference(2);
         \u0275\u0275property("ngIf", !ctx.featured)("ngIfElse", featured_card_r4);
       }
-    }, dependencies: [NgIf, IconComponent, AuthenticatedImageDirective, MatRipple, DatePipe, TranslatePipe], styles: ["\n\nbutton[_ngcontent-%COMP%] {\n  transition: box-shadow 300ms, border 200ms;\n}\n/*# sourceMappingURL=group-event-card.component.css.map */"] });
+    }, dependencies: [NgIf, AuthenticatedImageDirective, MatRipple, IconComponent, DatePipe, TranslatePipe], styles: ["\n\nbutton[_ngcontent-%COMP%] {\n  transition: box-shadow 300ms, border 200ms;\n}\n/*# sourceMappingURL=group-event-card.component.css.map */"] });
   }
 };
 (() => {
@@ -150877,7 +151306,7 @@ var GroupEventCardComponent = class _GroupEventCardComponent {
 })();
 
 // libs/events/src/lib/setup-breakdown-modal.component.ts
-var _c074 = () => [5, 10];
+var _c075 = () => [5, 10];
 function SetupBreakdownModalComponent_button_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "button", 5)(1, "app-icon");
@@ -150902,9 +151331,9 @@ function SetupBreakdownModalComponent_main_4_Template(rf, ctx) {
     const ctx_r0 = \u0275\u0275nextContext();
     \u0275\u0275property("formGroup", ctx_r0.form);
     \u0275\u0275advance(4);
-    \u0275\u0275property("min", 0)("custom_options", \u0275\u0275pureFunction0(5, _c074));
+    \u0275\u0275property("min", 0)("custom_options", \u0275\u0275pureFunction0(5, _c075));
     \u0275\u0275advance(4);
-    \u0275\u0275property("min", 0)("custom_options", \u0275\u0275pureFunction0(6, _c074));
+    \u0275\u0275property("min", 0)("custom_options", \u0275\u0275pureFunction0(6, _c075));
   }
 }
 function SetupBreakdownModalComponent_footer_5_Template(rf, ctx) {
@@ -151000,7 +151429,7 @@ var SetupBreakdownModalComponent = class _SetupBreakdownModalComponent {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", !ctx.loading);
       }
-    }, dependencies: [NgIf, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, MatDialogClose, MatProgressSpinner, DurationFieldComponent, IconComponent, MatRipple], encapsulation: 2 });
+    }, encapsulation: 2 });
   }
 };
 (() => {
@@ -151036,6 +151465,7 @@ var SharedEventsModule = class _SharedEventsModule {
     ] });
   }
 };
+\u0275\u0275setComponentScope(SetupBreakdownModalComponent, [NgIf, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, MatDialogClose, MatProgressSpinner, DurationFieldComponent, MatRipple, IconComponent], []);
 
 // libs/bookings/src/lib/desk-confirm-modal.component.ts
 function DeskConfirmModalComponent_button_4_Template(rf, ctx) {
@@ -151228,7 +151658,7 @@ var DeskConfirmModalComponent = class _DeskConfirmModalComponent {
 })();
 
 // libs/bookings/src/lib/desk-select-modal/desk-details.component.ts
-var _c075 = () => [];
+var _c076 = () => [];
 var _c144 = () => ({ disable_pan: true, disable_zoom: true });
 function DeskDetailsComponent_ng_container_0_image_carousel_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -151265,7 +151695,7 @@ function DeskDetailsComponent_ng_container_0_section_33_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 2, "COMMON.FEATURES"), " ");
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngForOf", ctx_r1.desk.features || \u0275\u0275pureFunction0(4, _c075));
+    \u0275\u0275property("ngForOf", ctx_r1.desk.features || \u0275\u0275pureFunction0(4, _c076));
   }
 }
 function DeskDetailsComponent_ng_container_0_section_34_Template(rf, ctx) {
@@ -151431,7 +151861,7 @@ var DeskDetailsComponent = class _DeskDetailsComponent {
         const emptyState_r4 = \u0275\u0275reference(2);
         \u0275\u0275property("ngIf", ctx.desk)("ngIfElse", emptyState_r4);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, InteractiveMapComponent, ImageCarouselComponent, MatRipple, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 30%;\n  min-width: 20rem;\n  height: 100%;\n  min-height: 65vh;\n  background: white;\n}\n/*# sourceMappingURL=desk-details.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, InteractiveMapComponent, ImageCarouselComponent, MatRipple, IconComponent, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 30%;\n  min-width: 20rem;\n  height: 100%;\n  min-height: 65vh;\n  background: white;\n}\n/*# sourceMappingURL=desk-details.component.css.map */"] });
   }
 };
 (() => {
@@ -151439,7 +151869,7 @@ var DeskDetailsComponent = class _DeskDetailsComponent {
 })();
 
 // libs/bookings/src/lib/desk-select-modal/desk-filters.component.ts
-var _c076 = () => ({ standalone: true });
+var _c077 = () => ({ standalone: true });
 var _c145 = () => [];
 function DeskFiltersComponent_button_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -151485,7 +151915,7 @@ function DeskFiltersComponent_mat_form_field_16_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", ctx_r1.region)("ngModelOptions", \u0275\u0275pureFunction0(8, _c076))("placeholder", \u0275\u0275pipeBind1(2, 4, "COMMON.REGION_ANY"));
+    \u0275\u0275property("ngModel", ctx_r1.region)("ngModelOptions", \u0275\u0275pureFunction0(8, _c077))("placeholder", \u0275\u0275pipeBind1(2, 4, "COMMON.REGION_ANY"));
     \u0275\u0275advance(2);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 6, ctx_r1.regions));
   }
@@ -151523,7 +151953,7 @@ function DeskFiltersComponent_mat_form_field_18_Template(rf, ctx) {
     let tmp_3_0;
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(2, 4, ctx_r1.building))("ngModelOptions", \u0275\u0275pureFunction0(12, _c076))("placeholder", ((tmp_3_0 = \u0275\u0275pipeBind1(3, 6, ctx_r1.building)) == null ? null : tmp_3_0.display_name) || ((tmp_3_0 = \u0275\u0275pipeBind1(4, 8, ctx_r1.building)) == null ? null : tmp_3_0.name));
+    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(2, 4, ctx_r1.building))("ngModelOptions", \u0275\u0275pureFunction0(12, _c077))("placeholder", ((tmp_3_0 = \u0275\u0275pipeBind1(3, 6, ctx_r1.building)) == null ? null : tmp_3_0.display_name) || ((tmp_3_0 = \u0275\u0275pipeBind1(4, 8, ctx_r1.building)) == null ? null : tmp_3_0.name));
     \u0275\u0275advance(4);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(6, 10, ctx_r1.buildings));
   }
@@ -151581,7 +152011,7 @@ function DeskFiltersComponent_mat_form_field_20_Template(rf, ctx) {
     let tmp_1_0;
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", (tmp_1_0 = \u0275\u0275pipeBind1(2, 4, ctx_r1.options)) == null ? null : tmp_1_0.zone_id)("ngModelOptions", \u0275\u0275pureFunction0(10, _c076))("placeholder", \u0275\u0275pipeBind1(3, 6, "COMMON.LEVEL_ANY"));
+    \u0275\u0275property("ngModel", (tmp_1_0 = \u0275\u0275pipeBind1(2, 4, ctx_r1.options)) == null ? null : tmp_1_0.zone_id)("ngModelOptions", \u0275\u0275pureFunction0(10, _c077))("placeholder", \u0275\u0275pipeBind1(3, 6, "COMMON.LEVEL_ANY"));
     \u0275\u0275advance(3);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(5, 8, ctx_r1.levels));
   }
@@ -151625,7 +152055,7 @@ function DeskFiltersComponent_div_29_Template(rf, ctx) {
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 12, "FORM.TIME_START"));
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(16, _c076))("use_24hr", ctx_r1.use_24hr)("timezone", ctx_r1.timezone);
+    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(16, _c077))("use_24hr", ctx_r1.use_24hr)("timezone", ctx_r1.timezone);
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(9, 14, "FORM.TIME_END"));
     \u0275\u0275advance(2);
@@ -151655,7 +152085,7 @@ function DeskFiltersComponent_section_30_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 4, "COMMON.FAVOURITES"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275property("name", \u0275\u0275pipeBind1(6, 6, "COMMON.FAVOURITES_ONLY"))("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(7, 8, ctx_r1.options)) == null ? null : tmp_3_0.show_fav)("ngModelOptions", \u0275\u0275pureFunction0(10, _c076));
+    \u0275\u0275property("name", \u0275\u0275pipeBind1(6, 6, "COMMON.FAVOURITES_ONLY"))("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(7, 8, ctx_r1.options)) == null ? null : tmp_3_0.show_fav)("ngModelOptions", \u0275\u0275pureFunction0(10, _c077));
   }
 }
 function DeskFiltersComponent_section_31_div_4_Template(rf, ctx) {
@@ -151675,7 +152105,7 @@ function DeskFiltersComponent_section_31_div_4_Template(rf, ctx) {
     const feat_r12 = ctx.$implicit;
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("name", feat_r12)("ngModel", (((tmp_4_0 = \u0275\u0275pipeBind1(2, 3, ctx_r1.options)) == null ? null : tmp_4_0.features) || \u0275\u0275pureFunction0(5, _c145)).includes(feat_r12))("ngModelOptions", \u0275\u0275pureFunction0(6, _c076));
+    \u0275\u0275property("name", feat_r12)("ngModel", (((tmp_4_0 = \u0275\u0275pipeBind1(2, 3, ctx_r1.options)) == null ? null : tmp_4_0.features) || \u0275\u0275pureFunction0(5, _c145)).includes(feat_r12))("ngModelOptions", \u0275\u0275pureFunction0(6, _c077));
   }
 }
 function DeskFiltersComponent_section_31_Template(rf, ctx) {
@@ -151844,7 +152274,7 @@ var DeskFiltersComponent = class _DeskFiltersComponent {
         \u0275\u0275advance(3);
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(24, 29, "FORM.DATE"));
         \u0275\u0275advance(2);
-        \u0275\u0275property("ngModel", ctx.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(35, _c076))("to", ctx.end_date)("timezone", ctx.timezone);
+        \u0275\u0275property("ngModel", ctx.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(35, _c077))("to", ctx.end_date)("timezone", ctx.timezone);
         \u0275\u0275advance();
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(27, 31, "FORM.DATE_ERROR"), " ");
         \u0275\u0275advance(2);
@@ -151858,7 +152288,7 @@ var DeskFiltersComponent = class _DeskFiltersComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ctx.can_close);
       }
-    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, MatFormField, MatCheckbox, MatOption, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, IconComponent, SettingsToggleComponent, MatSelect, MatRipple, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  max-width: 100vw;\n}\n/*# sourceMappingURL=desk-filters.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, MatFormField, MatCheckbox, MatOption, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, MatSelect, MatRipple, IconComponent, SettingsToggleComponent, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  max-width: 100vw;\n}\n/*# sourceMappingURL=desk-filters.component.css.map */"] });
   }
 };
 (() => {
@@ -151866,7 +152296,7 @@ var DeskFiltersComponent = class _DeskFiltersComponent {
 })();
 
 // libs/bookings/src/lib/desk-select-modal/desk-filters-display.component.ts
-var _c077 = () => [];
+var _c078 = () => [];
 function DeskFiltersDisplayComponent_ng_container_16_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainerStart(0);
@@ -152029,11 +152459,11 @@ var DeskFiltersDisplayComponent = class _DeskFiltersDisplayComponent extends Asy
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.all_day);
         \u0275\u0275advance();
-        \u0275\u0275property("ngForOf", ((tmp_8_0 = \u0275\u0275pipeBind1(19, 21, ctx.options)) == null ? null : tmp_8_0.features) || \u0275\u0275pureFunction0(25, _c077));
+        \u0275\u0275property("ngForOf", ((tmp_8_0 = \u0275\u0275pipeBind1(19, 21, ctx.options)) == null ? null : tmp_8_0.features) || \u0275\u0275pureFunction0(25, _c078));
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", (tmp_9_0 = \u0275\u0275pipeBind1(21, 23, ctx.options)) == null ? null : tmp_9_0.show_fav);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[filter-item][_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0 1rem;\n  height: 2rem;\n  font-size: 0.875rem;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 1.25rem;\n  margin-right: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n[filter-item][_ngcontent-%COMP%]:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n[filter-item][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%]    + *[_ngcontent-%COMP%] {\n  margin-left: 0.5rem;\n}\n/*# sourceMappingURL=desk-filters-display.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatRipple, IconComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[filter-item][_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0 1rem;\n  height: 2rem;\n  font-size: 0.875rem;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 1.25rem;\n  margin-right: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n[filter-item][_ngcontent-%COMP%]:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n[filter-item][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%]    + *[_ngcontent-%COMP%] {\n  margin-left: 0.5rem;\n}\n/*# sourceMappingURL=desk-filters-display.component.css.map */"] });
   }
 };
 (() => {
@@ -152041,7 +152471,7 @@ var DeskFiltersDisplayComponent = class _DeskFiltersDisplayComponent extends Asy
 })();
 
 // libs/bookings/src/lib/desk-select-modal/desk-list.component.ts
-var _c078 = (a0) => ({ count: a0 });
+var _c079 = (a0) => ({ count: a0 });
 function DeskListComponent_ng_container_7_ul_1_li_1_div_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 20)(1, "app-icon");
@@ -152221,11 +152651,11 @@ var DeskListComponent = class _DeskListComponent {
         \u0275\u0275advance();
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(2, 4, "COMMON.RESULTS"));
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 8, "COMMON.RESULTS_COUNT", \u0275\u0275pureFunction1(13, _c078, ((tmp_3_0 = \u0275\u0275pipeBind1(5, 6, ctx.desks)) == null ? null : tmp_3_0.length) || 0)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 8, "COMMON.RESULTS_COUNT", \u0275\u0275pureFunction1(13, _c079, ((tmp_3_0 = \u0275\u0275pipeBind1(5, 6, ctx.desks)) == null ? null : tmp_3_0.length) || 0)), " ");
         \u0275\u0275advance(3);
         \u0275\u0275property("ngIf", !((tmp_4_0 = \u0275\u0275pipeBind1(8, 11, ctx.loading)) == null ? null : tmp_4_0.length))("ngIfElse", load_state_r6);
       }
-    }, dependencies: [NgForOf, NgIf, MatProgressSpinner, IconComponent, AuthenticatedImageDirective, MatRipple, AsyncPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  background: rgba(0, 0, 0, 0.05);\n  overflow-y: auto;\n}\n/*# sourceMappingURL=desk-list.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatProgressSpinner, AuthenticatedImageDirective, MatRipple, IconComponent, AsyncPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  background: rgba(0, 0, 0, 0.05);\n  overflow-y: auto;\n}\n/*# sourceMappingURL=desk-list.component.css.map */"] });
   }
 };
 (() => {
@@ -152233,7 +152663,7 @@ var DeskListComponent = class _DeskListComponent {
 })();
 
 // libs/bookings/src/lib/desk-select-modal/desk-map.component.ts
-var _c079 = () => ({ controls: true });
+var _c080 = () => ({ controls: true });
 var _c146 = () => ({ standalone: true });
 function DeskMapComponent_mat_form_field_1_mat_option_3_div_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -152429,7 +152859,7 @@ var DeskMapComponent = class _DeskMapComponent extends AsyncHandler {
         \u0275\u0275advance(3);
         \u0275\u0275property("src", ctx.map_url);
         \u0275\u0275twoWayProperty("zoom", ctx.zoom)("center", ctx.center);
-        \u0275\u0275property("styles", \u0275\u0275pipeBind1(5, 10, ctx.styles))("features", \u0275\u0275pipeBind1(6, 12, ctx.features))("actions", \u0275\u0275pipeBind1(7, 14, ctx.actions))("options", \u0275\u0275pureFunction0(16, _c079));
+        \u0275\u0275property("styles", \u0275\u0275pipeBind1(5, 10, ctx.styles))("features", \u0275\u0275pipeBind1(6, 12, ctx.features))("actions", \u0275\u0275pipeBind1(7, 14, ctx.actions))("options", \u0275\u0275pureFunction0(16, _c080));
       }
     }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatFormField, MatOption, InteractiveMapComponent, MatSelect, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  background: rgba(0, 0, 0, 0.05);\n  display: flex;\n  flex-direction: column;\n}\nbutton[_ngcontent-%COMP%] {\n  border-radius: 0;\n}\n/*# sourceMappingURL=desk-map.component.css.map */"] });
   }
@@ -152439,7 +152869,7 @@ var DeskMapComponent = class _DeskMapComponent extends AsyncHandler {
 })();
 
 // libs/bookings/src/lib/desk-select-modal/desk-select-modal.component.ts
-var _c080 = (a0) => ({ count: a0 });
+var _c081 = (a0) => ({ count: a0 });
 function DeskSelectModalComponent_desk_list_19_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
@@ -152657,7 +153087,7 @@ var DeskSelectModalComponent = class _DeskSelectModalComponent {
         \u0275\u0275advance(5);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(33, 40, "COMMON.BACK_TO_FORM"), " ");
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(36, 42, "BOOKINGS.DESK_ADDED_COUNT", \u0275\u0275pureFunction1(47, _c080, ctx.selected.length)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(36, 42, "BOOKINGS.DESK_ADDED_COUNT", \u0275\u0275pureFunction1(47, _c081, ctx.selected.length)), " ");
         \u0275\u0275advance(2);
         \u0275\u0275classProp("inverse", ctx.isSelected(ctx.displayed == null ? null : ctx.displayed.id));
         \u0275\u0275property("disabled", !ctx.displayed);
@@ -152666,7 +153096,7 @@ var DeskSelectModalComponent = class _DeskSelectModalComponent {
         \u0275\u0275advance(2);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(43, 45, ctx.isSelected(ctx.displayed == null ? null : ctx.displayed.id) ? "COMMON.REMOVE_FROM" : "COMMON.ADD_TO"), " ");
       }
-    }, dependencies: [NgIf, MatDialogClose, IconComponent, MatRipple, DeskDetailsComponent, DeskFiltersComponent, DeskFiltersDisplayComponent, DeskListComponent, DeskMapComponent, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatDialogClose, MatRipple, IconComponent, DeskDetailsComponent, DeskFiltersComponent, DeskFiltersDisplayComponent, DeskListComponent, DeskMapComponent, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -152674,7 +153104,7 @@ var DeskSelectModalComponent = class _DeskSelectModalComponent {
 })();
 
 // libs/bookings/src/lib/desk-list-field.component.ts
-var _c081 = () => [];
+var _c082 = () => [];
 var _c147 = () => ({ standalone: true });
 function DeskListFieldComponent_div_1_div_1_mat_checkbox_4_Template(rf, ctx) {
   if (rf & 1) {
@@ -152691,7 +153121,7 @@ function DeskListFieldComponent_div_1_div_1_mat_checkbox_4_Template(rf, ctx) {
   if (rf & 2) {
     const opt_r3 = ctx.$implicit;
     const ctx_r3 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("ngModel", (ctx_r3.selected_features || \u0275\u0275pureFunction0(3, _c081)).includes(opt_r3))("ngModelOptions", \u0275\u0275pureFunction0(4, _c147));
+    \u0275\u0275property("ngModel", (ctx_r3.selected_features || \u0275\u0275pureFunction0(3, _c082)).includes(opt_r3))("ngModelOptions", \u0275\u0275pureFunction0(4, _c147));
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", opt_r3, " ");
   }
@@ -152902,7 +153332,7 @@ var DeskListFieldComponent = class _DeskListFieldComponent {
         \u0275\u0275advance(6);
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(8, 2, "BOOKINGS.DESK_ADD"));
       }
-    }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatCheckbox, IconComponent, AuthenticatedImageDirective, MatRipple, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatCheckbox, AuthenticatedImageDirective, MatRipple, IconComponent, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -152910,7 +153340,7 @@ var DeskListFieldComponent = class _DeskListFieldComponent {
 })();
 
 // libs/bookings/src/lib/invite-visitor-form.component.ts
-var _c082 = () => ({ standalone: true });
+var _c083 = () => ({ standalone: true });
 var _c148 = (a0, a1) => ({ name: a0, count: a1 });
 var _c217 = (a0, a1, a2) => ({ location: a0, date: a1, time: a2 });
 function InviteVisitorFormComponent_ng_container_0_div_1_form_5_div_1_mat_option_8_Template(rf, ctx) {
@@ -152950,7 +153380,7 @@ function InviteVisitorFormComponent_ng_container_0_div_1_form_5_div_1_Template(r
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 4, "RESOURCE.BUILDING"), "");
     \u0275\u0275advance(5);
-    \u0275\u0275property("ngModel", ctx_r3.form.value.zones[0])("ngModelOptions", \u0275\u0275pureFunction0(8, _c082));
+    \u0275\u0275property("ngModel", ctx_r3.form.value.zones[0])("ngModelOptions", \u0275\u0275pureFunction0(8, _c083));
     \u0275\u0275advance();
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(9, 6, ctx_r3.buildings));
   }
@@ -153152,7 +153582,7 @@ function InviteVisitorFormComponent_ng_container_0_div_1_form_5_Template(rf, ctx
     \u0275\u0275advance(8);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(13, 19, "FORM.TIME_START"), " ");
     \u0275\u0275advance(4);
-    \u0275\u0275property("ngModel", ctx_r3.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(27, _c082))("disabled", ctx_r3.form.value.all_day)("use_24hr", ctx_r3.use_24hr);
+    \u0275\u0275property("ngModel", ctx_r3.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(27, _c083))("disabled", ctx_r3.form.value.all_day)("use_24hr", ctx_r3.use_24hr);
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(20, 21, "FORM.TIME_END"), " ");
     \u0275\u0275advance(4);
@@ -153545,7 +153975,7 @@ var InviteVisitorFormComponent = class _InviteVisitorFormComponent extends Async
         const send_state_r16 = \u0275\u0275reference(2);
         \u0275\u0275property("ngIf", !ctx.sent)("ngIfElse", send_state_r16);
       }
-    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, MatInput, MatFormField, MatError, MatProgressSpinner, MatAutocomplete, MatOption, MatAutocompleteTrigger, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, UserListFieldComponent, UserSearchFieldComponent, IconComponent, MatSelect, MatRipple, AsyncPipe, DatePipe, SafePipe, SanitizePipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, MatInput, MatFormField, MatError, MatProgressSpinner, MatAutocomplete, MatOption, MatAutocompleteTrigger, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, UserListFieldComponent, UserSearchFieldComponent, MatSelect, MatRipple, IconComponent, AsyncPipe, DatePipe, SafePipe, SanitizePipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -153553,7 +153983,7 @@ var InviteVisitorFormComponent = class _InviteVisitorFormComponent extends Async
 })();
 
 // libs/bookings/src/lib/locker-grid.component.ts
-var _c083 = () => [];
+var _c084 = () => [];
 function LockerGridComponent_button_1_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -153626,7 +154056,7 @@ var LockerGridComponent = class _LockerGridComponent {
       if (rf & 2) {
         \u0275\u0275styleProp("width", ctx.columns * 2.5 + "rem")("grid-template-columns", "repeat(" + ctx.columns + ", 5rem)")("grid-template-rows", "repeat(" + (ctx.bank == null ? null : ctx.bank.height) + ", 5rem)");
         \u0275\u0275advance();
-        \u0275\u0275property("ngForOf", (ctx.bank == null ? null : ctx.bank.lockers) || \u0275\u0275pureFunction0(7, _c083));
+        \u0275\u0275property("ngForOf", (ctx.bank == null ? null : ctx.bank.lockers) || \u0275\u0275pureFunction0(7, _c084));
       }
     }, dependencies: [NgForOf, MatRipple, MatTooltip], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n}\nbutton[disabled][_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n/*# sourceMappingURL=locker-grid.component.css.map */"] });
   }
@@ -153636,7 +154066,7 @@ var LockerGridComponent = class _LockerGridComponent {
 })();
 
 // libs/bookings/src/lib/locker-select-modal/locker-filters.component.ts
-var _c084 = () => ({ standalone: true });
+var _c085 = () => ({ standalone: true });
 var _c149 = () => [];
 function LockerFiltersComponent_button_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -153682,7 +154112,7 @@ function LockerFiltersComponent_div_12_mat_form_field_4_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", ctx_r1.region)("ngModelOptions", \u0275\u0275pureFunction0(8, _c084))("placeholder", \u0275\u0275pipeBind1(2, 4, "COMMON.REGION_ANY"));
+    \u0275\u0275property("ngModel", ctx_r1.region)("ngModelOptions", \u0275\u0275pureFunction0(8, _c085))("placeholder", \u0275\u0275pipeBind1(2, 4, "COMMON.REGION_ANY"));
     \u0275\u0275advance(2);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 6, ctx_r1.regions));
   }
@@ -153720,7 +154150,7 @@ function LockerFiltersComponent_div_12_mat_form_field_6_Template(rf, ctx) {
     let tmp_4_0;
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(2, 4, ctx_r1.building))("ngModelOptions", \u0275\u0275pureFunction0(12, _c084))("placeholder", ((tmp_4_0 = \u0275\u0275pipeBind1(3, 6, ctx_r1.building)) == null ? null : tmp_4_0.display_name) || ((tmp_4_0 = \u0275\u0275pipeBind1(4, 8, ctx_r1.building)) == null ? null : tmp_4_0.name));
+    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(2, 4, ctx_r1.building))("ngModelOptions", \u0275\u0275pureFunction0(12, _c085))("placeholder", ((tmp_4_0 = \u0275\u0275pipeBind1(3, 6, ctx_r1.building)) == null ? null : tmp_4_0.display_name) || ((tmp_4_0 = \u0275\u0275pipeBind1(4, 8, ctx_r1.building)) == null ? null : tmp_4_0.name));
     \u0275\u0275advance(4);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(6, 10, ctx_r1.buildings));
   }
@@ -153778,7 +154208,7 @@ function LockerFiltersComponent_div_12_mat_form_field_8_Template(rf, ctx) {
     let tmp_2_0;
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", (tmp_2_0 = \u0275\u0275pipeBind1(2, 4, ctx_r1.options)) == null ? null : tmp_2_0.zone_id)("ngModelOptions", \u0275\u0275pureFunction0(10, _c084))("placeholder", \u0275\u0275pipeBind1(3, 6, "COMMON.LEVEL_ANY"));
+    \u0275\u0275property("ngModel", (tmp_2_0 = \u0275\u0275pipeBind1(2, 4, ctx_r1.options)) == null ? null : tmp_2_0.zone_id)("ngModelOptions", \u0275\u0275pureFunction0(10, _c085))("placeholder", \u0275\u0275pipeBind1(3, 6, "COMMON.LEVEL_ANY"));
     \u0275\u0275advance(3);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(5, 8, ctx_r1.levels));
   }
@@ -153843,7 +154273,7 @@ function LockerFiltersComponent_div_23_div_6_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(3, 8, "FORM.TIME_END"));
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngModel", ctx_r1.form.value.duration)("ngModelOptions", \u0275\u0275pureFunction0(10, _c084))("time", (tmp_5_0 = ctx_r1.form.get("date")) == null ? null : tmp_5_0.value)("max", 10 * 60)("min", 60)("step", 60)("use_24hr", ctx_r1.use_24hr);
+    \u0275\u0275property("ngModel", ctx_r1.form.value.duration)("ngModelOptions", \u0275\u0275pureFunction0(10, _c085))("time", (tmp_5_0 = ctx_r1.form.get("date")) == null ? null : tmp_5_0.value)("max", 10 * 60)("min", 60)("step", 60)("use_24hr", ctx_r1.use_24hr);
   }
 }
 function LockerFiltersComponent_div_23_Template(rf, ctx) {
@@ -153868,7 +154298,7 @@ function LockerFiltersComponent_div_23_Template(rf, ctx) {
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 6, "FORM.TIME_START"));
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(8, _c084))("use_24hr", ctx_r1.use_24hr)("disabled", ctx_r1.disable_start);
+    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(8, _c085))("use_24hr", ctx_r1.use_24hr)("disabled", ctx_r1.disable_start);
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx_r1.hide_end);
   }
@@ -153890,7 +154320,7 @@ function LockerFiltersComponent_section_24_Template(rf, ctx) {
     let tmp_2_0;
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("name", \u0275\u0275pipeBind1(2, 3, "BOOKINGS.LOCKER_ACCESSIBLE_SHOW"))("ngModel", (tmp_2_0 = \u0275\u0275pipeBind1(3, 5, ctx_r1.options)) == null ? null : tmp_2_0.show_accessible)("ngModelOptions", \u0275\u0275pureFunction0(7, _c084));
+    \u0275\u0275property("name", \u0275\u0275pipeBind1(2, 3, "BOOKINGS.LOCKER_ACCESSIBLE_SHOW"))("ngModel", (tmp_2_0 = \u0275\u0275pipeBind1(3, 5, ctx_r1.options)) == null ? null : tmp_2_0.show_accessible)("ngModelOptions", \u0275\u0275pureFunction0(7, _c085));
   }
 }
 function LockerFiltersComponent_section_25_div_4_Template(rf, ctx) {
@@ -153910,7 +154340,7 @@ function LockerFiltersComponent_section_25_div_4_Template(rf, ctx) {
     const feat_r13 = ctx.$implicit;
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("name", feat_r13)("ngModel", (((tmp_4_0 = \u0275\u0275pipeBind1(2, 3, ctx_r1.options)) == null ? null : tmp_4_0.features) || \u0275\u0275pureFunction0(5, _c149)).includes(feat_r13))("ngModelOptions", \u0275\u0275pureFunction0(6, _c084));
+    \u0275\u0275property("name", feat_r13)("ngModel", (((tmp_4_0 = \u0275\u0275pipeBind1(2, 3, ctx_r1.options)) == null ? null : tmp_4_0.features) || \u0275\u0275pureFunction0(5, _c149)).includes(feat_r13))("ngModelOptions", \u0275\u0275pureFunction0(6, _c085));
   }
 }
 function LockerFiltersComponent_section_25_Template(rf, ctx) {
@@ -154098,7 +154528,7 @@ var LockerFiltersComponent = class _LockerFiltersComponent extends AsyncHandler 
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ctx.can_close);
       }
-    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, MatFormField, MatCheckbox, MatOption, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, IconComponent, SettingsToggleComponent, MatSelect, MatRipple, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  max-width: 100vw;\n}\n/*# sourceMappingURL=locker-filters.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, MatFormField, MatCheckbox, MatOption, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, MatSelect, MatRipple, IconComponent, SettingsToggleComponent, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  max-width: 100vw;\n}\n/*# sourceMappingURL=locker-filters.component.css.map */"] });
   }
 };
 (() => {
@@ -154106,7 +154536,7 @@ var LockerFiltersComponent = class _LockerFiltersComponent extends AsyncHandler 
 })();
 
 // libs/bookings/src/lib/locker-select-modal/locker-filters-display.component.ts
-var _c085 = () => [];
+var _c086 = () => [];
 function LockerFiltersDisplayComponent_div_19_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -154265,13 +154695,13 @@ var LockerFiltersDisplayComponent = class _LockerFiltersDisplayComponent extends
         \u0275\u0275advance(3);
         \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(17, 22, ctx.start, ctx.time_format), " \u2014 ", \u0275\u0275pipeBind2(18, 25, ctx.end, ctx.time_format), " ");
         \u0275\u0275advance(3);
-        \u0275\u0275property("ngForOf", ((tmp_7_0 = \u0275\u0275pipeBind1(20, 28, ctx.options)) == null ? null : tmp_7_0.features) || \u0275\u0275pureFunction0(34, _c085));
+        \u0275\u0275property("ngForOf", ((tmp_7_0 = \u0275\u0275pipeBind1(20, 28, ctx.options)) == null ? null : tmp_7_0.features) || \u0275\u0275pureFunction0(34, _c086));
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", (tmp_8_0 = \u0275\u0275pipeBind1(22, 30, ctx.options)) == null ? null : tmp_8_0.show_fav);
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", (tmp_9_0 = \u0275\u0275pipeBind1(24, 32, ctx.options)) == null ? null : tmp_9_0.show_accessible);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[filter-item][_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0 1rem;\n  height: 2rem;\n  font-size: 0.875rem;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 1.25rem;\n  margin-right: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n[filter-item][_ngcontent-%COMP%]:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n[filter-item][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%]    + *[_ngcontent-%COMP%] {\n  margin-left: 0.5rem;\n}\n/*# sourceMappingURL=locker-filters-display.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatRipple, IconComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[filter-item][_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0 1rem;\n  height: 2rem;\n  font-size: 0.875rem;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 1.25rem;\n  margin-right: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n[filter-item][_ngcontent-%COMP%]:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n[filter-item][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%]    + *[_ngcontent-%COMP%] {\n  margin-left: 0.5rem;\n}\n/*# sourceMappingURL=locker-filters-display.component.css.map */"] });
   }
 };
 (() => {
@@ -154279,7 +154709,7 @@ var LockerFiltersDisplayComponent = class _LockerFiltersDisplayComponent extends
 })();
 
 // libs/bookings/src/lib/locker-select-modal/locker-bank-list.component.ts
-var _c086 = (a0) => ({ count: a0 });
+var _c087 = (a0) => ({ count: a0 });
 var _c150 = (a0, a1) => ({ count: a0, total: a1 });
 function LockerBankListComponent_ng_container_7_ul_1_li_1_div_3_Template(rf, ctx) {
   if (rf & 1) {
@@ -154491,11 +154921,11 @@ var LockerBankListComponent = class _LockerBankListComponent {
         \u0275\u0275advance();
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(2, 4, "COMMON.RESULTS"));
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 8, "COMMON.RESULTS_COUNT", \u0275\u0275pureFunction1(13, _c086, ((tmp_3_0 = \u0275\u0275pipeBind1(5, 6, ctx.locker_banks)) == null ? null : tmp_3_0.length) || 0)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 8, "COMMON.RESULTS_COUNT", \u0275\u0275pureFunction1(13, _c087, ((tmp_3_0 = \u0275\u0275pipeBind1(5, 6, ctx.locker_banks)) == null ? null : tmp_3_0.length) || 0)), " ");
         \u0275\u0275advance(3);
         \u0275\u0275property("ngIf", !((tmp_4_0 = \u0275\u0275pipeBind1(8, 11, ctx.loading)) == null ? null : tmp_4_0.length))("ngIfElse", load_state_r6);
       }
-    }, dependencies: [NgForOf, NgIf, MatProgressSpinner, IconComponent, AuthenticatedImageDirective, MatRipple, AsyncPipe, LevelPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  background: rgba(0, 0, 0, 0.05);\n  overflow-y: auto;\n}\n/*# sourceMappingURL=locker-bank-list.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatProgressSpinner, AuthenticatedImageDirective, MatRipple, IconComponent, AsyncPipe, LevelPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  background: rgba(0, 0, 0, 0.05);\n  overflow-y: auto;\n}\n/*# sourceMappingURL=locker-bank-list.component.css.map */"] });
   }
 };
 (() => {
@@ -154503,7 +154933,7 @@ var LockerBankListComponent = class _LockerBankListComponent {
 })();
 
 // libs/bookings/src/lib/locker-select-modal/locker-map.component.ts
-var _c087 = () => ({ controls: true });
+var _c088 = () => ({ controls: true });
 var _c151 = () => ({ standalone: true });
 function LockerMapComponent_mat_form_field_1_mat_option_3_div_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -154711,7 +155141,7 @@ var LockerMapComponent = class _LockerMapComponent extends AsyncHandler {
         \u0275\u0275advance(3);
         \u0275\u0275property("src", ctx.map_url);
         \u0275\u0275twoWayProperty("zoom", ctx.zoom)("center", ctx.center);
-        \u0275\u0275property("styles", \u0275\u0275pipeBind1(5, 10, ctx.styles))("features", \u0275\u0275pipeBind1(6, 12, ctx.features))("actions", \u0275\u0275pipeBind1(7, 14, ctx.actions))("options", \u0275\u0275pureFunction0(16, _c087));
+        \u0275\u0275property("styles", \u0275\u0275pipeBind1(5, 10, ctx.styles))("features", \u0275\u0275pipeBind1(6, 12, ctx.features))("actions", \u0275\u0275pipeBind1(7, 14, ctx.actions))("options", \u0275\u0275pureFunction0(16, _c088));
       }
     }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatFormField, MatOption, InteractiveMapComponent, MatSelect, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  background: rgba(0, 0, 0, 0.05);\n  display: flex;\n  flex-direction: column;\n}\nbutton[_ngcontent-%COMP%] {\n  border-radius: 0;\n}\n/*# sourceMappingURL=locker-map.component.css.map */"] });
   }
@@ -154721,7 +155151,7 @@ var LockerMapComponent = class _LockerMapComponent extends AsyncHandler {
 })();
 
 // libs/bookings/src/lib/locker-select-modal/locker-select-modal.component.ts
-var _c088 = (a0) => ({ count: a0 });
+var _c089 = (a0) => ({ count: a0 });
 function LockerSelectModalComponent_ng_container_12_locker_bank_list_1_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
@@ -154961,7 +155391,7 @@ var LockerSelectModalComponent = class _LockerSelectModalComponent extends Async
         \u0275\u0275advance(5);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(25, 23, "COMMON.BACK_TO_FORM"), " ");
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(28, 25, "BOOKINGS.LOCKER_ADDED_COUNT", \u0275\u0275pureFunction1(30, _c088, ctx.selected.length)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(28, 25, "BOOKINGS.LOCKER_ADDED_COUNT", \u0275\u0275pureFunction1(30, _c089, ctx.selected.length)), " ");
         \u0275\u0275advance(3);
         \u0275\u0275property("ngIf", ctx.bank);
         \u0275\u0275advance();
@@ -154972,7 +155402,7 @@ var LockerSelectModalComponent = class _LockerSelectModalComponent extends Async
         \u0275\u0275advance(2);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(37, 28, ctx.isSelected(ctx.displayed == null ? null : ctx.displayed.id) ? "COMMON.REMOVE_FROM" : "COMMON.ADD_TO"), " ");
       }
-    }, dependencies: [NgIf, MatDialogClose, IconComponent, MatRipple, LockerGridComponent, LockerFiltersComponent, LockerFiltersDisplayComponent, LockerBankListComponent, LockerMapComponent, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatDialogClose, MatRipple, IconComponent, LockerGridComponent, LockerFiltersComponent, LockerFiltersDisplayComponent, LockerBankListComponent, LockerMapComponent, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -154980,7 +155410,7 @@ var LockerSelectModalComponent = class _LockerSelectModalComponent extends Async
 })();
 
 // libs/bookings/src/lib/locker-list-field.component.ts
-var _c089 = () => [];
+var _c090 = () => [];
 var _c152 = () => ({ standalone: true });
 function LockerListFieldComponent_div_1_div_1_mat_checkbox_5_Template(rf, ctx) {
   if (rf & 1) {
@@ -154997,7 +155427,7 @@ function LockerListFieldComponent_div_1_div_1_mat_checkbox_5_Template(rf, ctx) {
   if (rf & 2) {
     const opt_r3 = ctx.$implicit;
     const ctx_r3 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("ngModel", (ctx_r3.selected_features || \u0275\u0275pureFunction0(3, _c089)).includes(opt_r3))("ngModelOptions", \u0275\u0275pureFunction0(4, _c152));
+    \u0275\u0275property("ngModel", (ctx_r3.selected_features || \u0275\u0275pureFunction0(3, _c090)).includes(opt_r3))("ngModelOptions", \u0275\u0275pureFunction0(4, _c152));
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", opt_r3, " ");
   }
@@ -155217,7 +155647,7 @@ var LockerListFieldComponent = class _LockerListFieldComponent {
         \u0275\u0275advance(6);
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(8, 2, "BOOKINGS.LOCKER_ADD"));
       }
-    }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatCheckbox, IconComponent, AuthenticatedImageDirective, MatRipple, LevelPipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatCheckbox, AuthenticatedImageDirective, MatRipple, IconComponent, LevelPipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -155225,7 +155655,7 @@ var LockerListFieldComponent = class _LockerListFieldComponent {
 })();
 
 // libs/bookings/src/lib/parking-select-modal/parking-details.component.ts
-var _c090 = () => ({ disable_pan: true, disable_zoom: true });
+var _c091 = () => ({ disable_pan: true, disable_zoom: true });
 function ParkingSpaceDetailsComponent_ng_container_0_image_carousel_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "image-carousel", 17);
@@ -155244,7 +155674,7 @@ function ParkingSpaceDetailsComponent_ng_container_0_section_29_Template(rf, ctx
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275property("src", ctx_r1.map_url)("focus", ctx_r1.space.map_id)("features", ctx_r1.features)("options", \u0275\u0275pureFunction0(4, _c090));
+    \u0275\u0275property("src", ctx_r1.map_url)("focus", ctx_r1.space.map_id)("features", ctx_r1.features)("options", \u0275\u0275pureFunction0(4, _c091));
   }
 }
 function ParkingSpaceDetailsComponent_ng_container_0_Template(rf, ctx) {
@@ -155396,7 +155826,7 @@ var ParkingSpaceDetailsComponent = class _ParkingSpaceDetailsComponent {
         const empty_state_r3 = \u0275\u0275reference(2);
         \u0275\u0275property("ngIf", ctx.space)("ngIfElse", empty_state_r3);
       }
-    }, dependencies: [NgIf, IconComponent, InteractiveMapComponent, ImageCarouselComponent, MatRipple, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 30%;\n  min-width: 20rem;\n  height: 100%;\n  min-height: 65vh;\n}\n/*# sourceMappingURL=parking-details.component.css.map */"] });
+    }, dependencies: [NgIf, InteractiveMapComponent, ImageCarouselComponent, MatRipple, IconComponent, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 30%;\n  min-width: 20rem;\n  height: 100%;\n  min-height: 65vh;\n}\n/*# sourceMappingURL=parking-details.component.css.map */"] });
   }
 };
 (() => {
@@ -155404,7 +155834,7 @@ var ParkingSpaceDetailsComponent = class _ParkingSpaceDetailsComponent {
 })();
 
 // libs/bookings/src/lib/parking-select-modal/parking-filters.component.ts
-var _c091 = () => ({ standalone: true });
+var _c092 = () => ({ standalone: true });
 var _c153 = () => [];
 function ParkingSpaceFiltersComponent_button_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -155450,7 +155880,7 @@ function ParkingSpaceFiltersComponent_mat_form_field_16_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", ctx_r1.region)("ngModelOptions", \u0275\u0275pureFunction0(8, _c091))("placeholder", \u0275\u0275pipeBind1(2, 4, "COMMON.REGION_ANY"));
+    \u0275\u0275property("ngModel", ctx_r1.region)("ngModelOptions", \u0275\u0275pureFunction0(8, _c092))("placeholder", \u0275\u0275pipeBind1(2, 4, "COMMON.REGION_ANY"));
     \u0275\u0275advance(2);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(4, 6, ctx_r1.regions));
   }
@@ -155488,7 +155918,7 @@ function ParkingSpaceFiltersComponent_mat_form_field_18_Template(rf, ctx) {
     let tmp_3_0;
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(2, 4, ctx_r1.building))("ngModelOptions", \u0275\u0275pureFunction0(12, _c091))("placeholder", ((tmp_3_0 = \u0275\u0275pipeBind1(3, 6, ctx_r1.building)) == null ? null : tmp_3_0.display_name) || ((tmp_3_0 = \u0275\u0275pipeBind1(4, 8, ctx_r1.building)) == null ? null : tmp_3_0.name));
+    \u0275\u0275property("ngModel", \u0275\u0275pipeBind1(2, 4, ctx_r1.building))("ngModelOptions", \u0275\u0275pureFunction0(12, _c092))("placeholder", ((tmp_3_0 = \u0275\u0275pipeBind1(3, 6, ctx_r1.building)) == null ? null : tmp_3_0.display_name) || ((tmp_3_0 = \u0275\u0275pipeBind1(4, 8, ctx_r1.building)) == null ? null : tmp_3_0.name));
     \u0275\u0275advance(4);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(6, 10, ctx_r1.buildings));
   }
@@ -155546,7 +155976,7 @@ function ParkingSpaceFiltersComponent_mat_form_field_20_Template(rf, ctx) {
     let tmp_1_0;
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", (tmp_1_0 = \u0275\u0275pipeBind1(2, 4, ctx_r1.options)) == null ? null : tmp_1_0.zone_id)("ngModelOptions", \u0275\u0275pureFunction0(10, _c091))("placeholder", \u0275\u0275pipeBind1(3, 6, "COMMON.LEVEL_ANY"));
+    \u0275\u0275property("ngModel", (tmp_1_0 = \u0275\u0275pipeBind1(2, 4, ctx_r1.options)) == null ? null : tmp_1_0.zone_id)("ngModelOptions", \u0275\u0275pureFunction0(10, _c092))("placeholder", \u0275\u0275pipeBind1(3, 6, "COMMON.LEVEL_ANY"));
     \u0275\u0275advance(3);
     \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(5, 8, ctx_r1.levels));
   }
@@ -155567,7 +155997,7 @@ function ParkingSpaceFiltersComponent_div_28_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", ctx_r1.form.value.all_day)("ngModelOptions", \u0275\u0275pureFunction0(5, _c091));
+    \u0275\u0275property("ngModel", ctx_r1.form.value.all_day)("ngModelOptions", \u0275\u0275pureFunction0(5, _c092));
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 3, "COMMON.ALL_DAY"), " ");
   }
@@ -155604,11 +156034,11 @@ function ParkingSpaceFiltersComponent_div_29_Template(rf, ctx) {
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 14, "FORM.TIME_START"));
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(18, _c091))("use_24hr", ctx_r1.use_24hr)("timezone", ctx_r1.timezone);
+    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(18, _c092))("use_24hr", ctx_r1.use_24hr)("timezone", ctx_r1.timezone);
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(9, 16, "FORM.TIME_END"));
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngModel", ctx_r1.form.value.duration)("ngModelOptions", \u0275\u0275pureFunction0(19, _c091))("time", (tmp_9_0 = ctx_r1.form.get("date")) == null ? null : tmp_9_0.value)("max", 10 * 60)("min", 60)("step", 60)("use_24hr", ctx_r1.use_24hr)("timezone", ctx_r1.timezone);
+    \u0275\u0275property("ngModel", ctx_r1.form.value.duration)("ngModelOptions", \u0275\u0275pureFunction0(19, _c092))("time", (tmp_9_0 = ctx_r1.form.get("date")) == null ? null : tmp_9_0.value)("max", 10 * 60)("min", 60)("step", 60)("use_24hr", ctx_r1.use_24hr)("timezone", ctx_r1.timezone);
   }
 }
 function ParkingSpaceFiltersComponent_section_30_Template(rf, ctx) {
@@ -155634,7 +156064,7 @@ function ParkingSpaceFiltersComponent_section_30_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 4, "COMMON.FAVOURITES"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275property("name", \u0275\u0275pipeBind1(6, 6, "COMMON.FAVOURITES_ONLY"))("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(7, 8, ctx_r1.options)) == null ? null : tmp_3_0.show_fav)("ngModelOptions", \u0275\u0275pureFunction0(10, _c091));
+    \u0275\u0275property("name", \u0275\u0275pipeBind1(6, 6, "COMMON.FAVOURITES_ONLY"))("ngModel", (tmp_3_0 = \u0275\u0275pipeBind1(7, 8, ctx_r1.options)) == null ? null : tmp_3_0.show_fav)("ngModelOptions", \u0275\u0275pureFunction0(10, _c092));
   }
 }
 function ParkingSpaceFiltersComponent_section_31_div_4_Template(rf, ctx) {
@@ -155659,7 +156089,7 @@ function ParkingSpaceFiltersComponent_section_31_div_4_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(feat_r13);
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", (((tmp_4_0 = \u0275\u0275pipeBind1(4, 3, ctx_r1.options)) == null ? null : tmp_4_0.features) || \u0275\u0275pureFunction0(5, _c153)).includes(feat_r13))("ngModelOptions", \u0275\u0275pureFunction0(6, _c091));
+    \u0275\u0275property("ngModel", (((tmp_4_0 = \u0275\u0275pipeBind1(4, 3, ctx_r1.options)) == null ? null : tmp_4_0.features) || \u0275\u0275pureFunction0(5, _c153)).includes(feat_r13))("ngModelOptions", \u0275\u0275pureFunction0(6, _c092));
   }
 }
 function ParkingSpaceFiltersComponent_section_31_Template(rf, ctx) {
@@ -155825,7 +156255,7 @@ var ParkingSpaceFiltersComponent = class _ParkingSpaceFiltersComponent {
         \u0275\u0275advance(3);
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(24, 30, "FORM.DATE"));
         \u0275\u0275advance(2);
-        \u0275\u0275property("ngModel", ctx.form.getRawValue().date)("ngModelOptions", \u0275\u0275pureFunction0(36, _c091))("disabled", ctx.form.controls.date.disabled)("to", ctx.end_date)("timezone", ctx.timezone);
+        \u0275\u0275property("ngModel", ctx.form.getRawValue().date)("ngModelOptions", \u0275\u0275pureFunction0(36, _c092))("disabled", ctx.form.controls.date.disabled)("to", ctx.end_date)("timezone", ctx.timezone);
         \u0275\u0275advance();
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(27, 32, "FORM.DATE_ERROR"), " ");
         \u0275\u0275advance(2);
@@ -155839,7 +156269,7 @@ var ParkingSpaceFiltersComponent = class _ParkingSpaceFiltersComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ctx.can_close);
       }
-    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, MatFormField, MatCheckbox, MatOption, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, IconComponent, SettingsToggleComponent, MatSelect, MatRipple, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  max-width: 100vw;\n}\n/*# sourceMappingURL=parking-filters.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, MatFormField, MatCheckbox, MatOption, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, MatSelect, MatRipple, IconComponent, SettingsToggleComponent, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  max-width: 100vw;\n}\n/*# sourceMappingURL=parking-filters.component.css.map */"] });
   }
 };
 (() => {
@@ -155847,7 +156277,7 @@ var ParkingSpaceFiltersComponent = class _ParkingSpaceFiltersComponent {
 })();
 
 // libs/bookings/src/lib/parking-select-modal/parking-filters-display.component.ts
-var _c092 = (a0) => ({ count: a0 });
+var _c093 = (a0) => ({ count: a0 });
 function ParkingSpaceFiltersDisplayComponent_div_12_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 11);
@@ -155992,11 +156422,11 @@ var ParkingSpaceFiltersDisplayComponent = class _ParkingSpaceFiltersDisplayCompo
         \u0275\u0275advance(3);
         \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(18, 22, ctx.start, ctx.time_format), " \u2014 ", \u0275\u0275pipeBind2(19, 25, ctx.end, ctx.time_format), " ");
         \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(23, 30, "CALENDAR_EVENT.SPACE_SELECT_SIZE_X", \u0275\u0275pureFunction1(35, _c092, ((tmp_8_0 = \u0275\u0275pipeBind1(22, 28, ctx.options)) == null ? null : tmp_8_0.capcaity) || 2)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(23, 30, "CALENDAR_EVENT.SPACE_SELECT_SIZE_X", \u0275\u0275pureFunction1(35, _c093, ((tmp_8_0 = \u0275\u0275pipeBind1(22, 28, ctx.options)) == null ? null : tmp_8_0.capcaity) || 2)), " ");
         \u0275\u0275advance(3);
         \u0275\u0275property("ngForOf", (tmp_9_0 = \u0275\u0275pipeBind1(25, 33, ctx.options)) == null ? null : tmp_9_0.features);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[filter-item][_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0 1rem;\n  height: 2rem;\n  font-size: 0.875rem;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 1.25rem;\n  margin-right: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n[filter-item][_ngcontent-%COMP%]:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n[filter-item][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%]    + *[_ngcontent-%COMP%] {\n  margin-left: 0.5rem;\n}\n/*# sourceMappingURL=parking-filters-display.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatRipple, IconComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[filter-item][_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0 1rem;\n  height: 2rem;\n  font-size: 0.875rem;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 1.25rem;\n  margin-right: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n[filter-item][_ngcontent-%COMP%]:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n[filter-item][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%]    + *[_ngcontent-%COMP%] {\n  margin-left: 0.5rem;\n}\n/*# sourceMappingURL=parking-filters-display.component.css.map */"] });
   }
 };
 (() => {
@@ -156004,7 +156434,7 @@ var ParkingSpaceFiltersDisplayComponent = class _ParkingSpaceFiltersDisplayCompo
 })();
 
 // libs/bookings/src/lib/parking-select-modal/parking-list.component.ts
-var _c093 = (a0) => ({ count: a0 });
+var _c094 = (a0) => ({ count: a0 });
 function ParkingSpaceListComponent_ng_container_7_ul_1_li_1_div_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 19)(1, "app-icon");
@@ -156183,11 +156613,11 @@ var ParkingSpaceListComponent = class _ParkingSpaceListComponent {
         \u0275\u0275advance();
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(2, 4, "COMMON.RESULTS"));
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 8, "COMMON.RESULTS_COUNT", \u0275\u0275pureFunction1(13, _c093, ((tmp_3_0 = \u0275\u0275pipeBind1(5, 6, ctx.assets)) == null ? null : tmp_3_0.length) || 0)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(6, 8, "COMMON.RESULTS_COUNT", \u0275\u0275pureFunction1(13, _c094, ((tmp_3_0 = \u0275\u0275pipeBind1(5, 6, ctx.assets)) == null ? null : tmp_3_0.length) || 0)), " ");
         \u0275\u0275advance(3);
         \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(8, 11, ctx.loading))("ngIfElse", load_state_r6);
       }
-    }, dependencies: [NgForOf, NgIf, MatProgressSpinner, IconComponent, AuthenticatedImageDirective, MatRipple, AsyncPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  overflow: auto;\n}\n/*# sourceMappingURL=parking-list.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatProgressSpinner, AuthenticatedImageDirective, MatRipple, IconComponent, AsyncPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n  padding: 0.5rem;\n  overflow: auto;\n}\n/*# sourceMappingURL=parking-list.component.css.map */"] });
   }
 };
 (() => {
@@ -156317,7 +156747,7 @@ var ExploreParkingInfoComponent = class _ExploreParkingInfoComponent {
 })();
 
 // libs/bookings/src/lib/parking-select-modal/parking-map.component.ts
-var _c094 = () => ({ controls: true });
+var _c095 = () => ({ controls: true });
 var _c154 = () => ({ standalone: true });
 function ParkingSpaceMapComponent_mat_form_field_1_mat_option_3_div_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -156517,7 +156947,7 @@ var ParkingSpaceMapComponent = class _ParkingSpaceMapComponent extends AsyncHand
         \u0275\u0275advance(3);
         \u0275\u0275property("src", ctx.map_url);
         \u0275\u0275twoWayProperty("zoom", ctx.zoom)("center", ctx.center);
-        \u0275\u0275property("styles", \u0275\u0275pipeBind1(5, 10, ctx.styles))("features", \u0275\u0275pipeBind1(6, 12, ctx.features))("actions", \u0275\u0275pipeBind1(7, 14, ctx.actions))("options", \u0275\u0275pureFunction0(16, _c094));
+        \u0275\u0275property("styles", \u0275\u0275pipeBind1(5, 10, ctx.styles))("features", \u0275\u0275pipeBind1(6, 12, ctx.features))("actions", \u0275\u0275pipeBind1(7, 14, ctx.actions))("options", \u0275\u0275pureFunction0(16, _c095));
       }
     }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatFormField, MatOption, InteractiveMapComponent, MatSelect, AsyncPipe, BuildingPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  background: rgba(0, 0, 0, 0.05);\n  display: flex;\n  flex-direction: column;\n}\nbutton[_ngcontent-%COMP%] {\n  border-radius: 0;\n}\n/*# sourceMappingURL=parking-map.component.css.map */"] });
   }
@@ -156527,7 +156957,7 @@ var ParkingSpaceMapComponent = class _ParkingSpaceMapComponent extends AsyncHand
 })();
 
 // libs/bookings/src/lib/parking-select-modal/parking-select-modal.component.ts
-var _c095 = (a0) => ({ count: a0 });
+var _c096 = (a0) => ({ count: a0 });
 function ParkingSpaceSelectModalComponent_parking_space_list_19_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
@@ -156742,7 +157172,7 @@ var ParkingSpaceSelectModalComponent = class _ParkingSpaceSelectModalComponent {
         \u0275\u0275advance(5);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(33, 40, "COMMON.BACK_TO_FORM"), " ");
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(36, 42, "BOOKINGS.PARKING_ADDED_COUNT", \u0275\u0275pureFunction1(47, _c095, ctx.selected.length)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(36, 42, "BOOKINGS.PARKING_ADDED_COUNT", \u0275\u0275pureFunction1(47, _c096, ctx.selected.length)), " ");
         \u0275\u0275advance(2);
         \u0275\u0275classProp("inverse", ctx.isSelected(ctx.displayed == null ? null : ctx.displayed.id));
         \u0275\u0275property("disabled", !ctx.displayed);
@@ -156751,7 +157181,7 @@ var ParkingSpaceSelectModalComponent = class _ParkingSpaceSelectModalComponent {
         \u0275\u0275advance(2);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(43, 45, ctx.isSelected(ctx.displayed == null ? null : ctx.displayed.id) ? "COMMON.REMOVE_FROM" : "COMMON.ADD_TO"), " ");
       }
-    }, dependencies: [NgIf, MatDialogClose, IconComponent, MatRipple, ParkingSpaceFiltersComponent, ParkingSpaceFiltersDisplayComponent, ParkingSpaceListComponent, ParkingSpaceDetailsComponent, ParkingSpaceMapComponent, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatDialogClose, MatRipple, IconComponent, ParkingSpaceFiltersComponent, ParkingSpaceFiltersDisplayComponent, ParkingSpaceListComponent, ParkingSpaceDetailsComponent, ParkingSpaceMapComponent, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -156948,7 +157378,7 @@ var ParkingSpaceListFieldComponent = class _ParkingSpaceListFieldComponent {
         \u0275\u0275advance(6);
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(8, 2, "BOOKINGS.PARKING_ADD"));
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, AuthenticatedImageDirective, MatRipple, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, AuthenticatedImageDirective, MatRipple, IconComponent, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -157129,7 +157559,7 @@ var ExploreLockerBankModalComponent = class _ExploreLockerBankModalComponent {
         \u0275\u0275advance(5);
         \u0275\u0275property("bank", ctx.bank)("bank_status", ctx.lockers);
       }
-    }, dependencies: [IconComponent, MatRipple, MatDialogClose, LockerGridComponent], encapsulation: 2 });
+    }, dependencies: [MatRipple, MatDialogClose, IconComponent, LockerGridComponent], encapsulation: 2 });
   }
 };
 (() => {
@@ -157137,7 +157567,7 @@ var ExploreLockerBankModalComponent = class _ExploreLockerBankModalComponent {
 })();
 
 // libs/explore/src/lib/explore-locker-bank-info.component.ts
-var _c096 = (a0, a1) => ({ used: a0, count: a1 });
+var _c097 = (a0, a1) => ({ used: a0, count: a1 });
 function ExploreLockerBankInfoComponent_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 3)(1, "h3", 4);
@@ -157155,7 +157585,7 @@ function ExploreLockerBankInfoComponent_ng_template_2_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(ctx_r1.bank.name);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(5, 5, "EXPLORE.LOCKERS_USE", \u0275\u0275pureFunction2(8, _c096, ctx_r1.in_use_count, ctx_r1.bank.lockers.length || 1)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(5, 5, "EXPLORE.LOCKERS_USE", \u0275\u0275pureFunction2(8, _c097, ctx_r1.in_use_count, ctx_r1.bank.lockers.length || 1)), " ");
   }
 }
 var ExploreLockerBankInfoComponent = class _ExploreLockerBankInfoComponent {
@@ -157629,7 +158059,7 @@ var ExploreSensorInfoComponent = class _ExploreSensorInfoComponent extends Async
         const stats_r2 = \u0275\u0275reference(4);
         \u0275\u0275property("content", stats_r2);
       }
-    }, dependencies: [NgIf, IconComponent, CustomTooltipComponent, MatRipple], encapsulation: 2 });
+    }, dependencies: [NgIf, MatRipple, IconComponent, CustomTooltipComponent], encapsulation: 2 });
   }
 };
 (() => {
@@ -157846,7 +158276,7 @@ function getCenterPoint(points) {
 }
 
 // libs/explore/src/lib/explore-map-view.component.ts
-var _c097 = () => ({ controls: true });
+var _c098 = () => ({ controls: true });
 function ExploreMapViewComponent_div_6_div_2_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -158146,7 +158576,7 @@ var ExploreMapViewComponent = class _ExploreMapViewComponent extends AsyncHandle
         \u0275\u0275template(8, ExploreMapViewComponent_div_8_Template, 5, 4, "div", 2)(9, ExploreMapViewComponent_button_9_Template, 2, 0, "button", 3);
       }
       if (rf & 2) {
-        \u0275\u0275property("src", \u0275\u0275pipeBind1(1, 10, ctx.url))("styles", \u0275\u0275pipeBind1(2, 12, ctx.styles))("features", \u0275\u0275pipeBind1(3, 14, ctx.features))("actions", \u0275\u0275pipeBind1(4, 16, ctx.actions))("labels", \u0275\u0275pipeBind1(5, 18, ctx.labels))("focus", ctx.locate)("options", \u0275\u0275pureFunction0(22, _c097));
+        \u0275\u0275property("src", \u0275\u0275pipeBind1(1, 10, ctx.url))("styles", \u0275\u0275pipeBind1(2, 12, ctx.styles))("features", \u0275\u0275pipeBind1(3, 14, ctx.features))("actions", \u0275\u0275pipeBind1(4, 16, ctx.actions))("labels", \u0275\u0275pipeBind1(5, 18, ctx.labels))("focus", ctx.locate)("options", \u0275\u0275pureFunction0(22, _c098));
         \u0275\u0275advance(6);
         \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(7, 20, ctx.use_mapsindoors$));
         \u0275\u0275advance(2);
@@ -158347,7 +158777,7 @@ var ExploreSearchService = class _ExploreSearchService {
 };
 
 // libs/explore/src/lib/explore-search.component.ts
-var _c098 = ["input"];
+var _c099 = ["input"];
 var _c155 = ["button"];
 function ExploreSearchComponent_mat_spinner_9_Template(rf, ctx) {
   if (rf & 1) {
@@ -158492,7 +158922,7 @@ var ExploreSearchComponent = class _ExploreSearchComponent extends AsyncHandler 
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreSearchComponent, selectors: [["explore-search"]], viewQuery: function ExploreSearchComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c098, 5);
+        \u0275\u0275viewQuery(_c099, 5);
         \u0275\u0275viewQuery(_c155, 7);
       }
       if (rf & 2) {
@@ -158560,7 +158990,7 @@ var ExploreSearchComponent = class _ExploreSearchComponent extends AsyncHandler 
         \u0275\u0275advance(4);
         \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(14, 21, ctx.loading) !== true && (ctx.show || ctx.search_str));
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, VirtualKeyboardComponent, MatAutocomplete, MatOption, MatAutocompleteTrigger, MatAutocompleteOrigin, MatRipple, MatProgressSpinner, DefaultValueAccessor, NgControlStatus, NgModel, AsyncPipe, SlicePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  z-index: 99;\n  position: relative;\n}\n[role=search][_ngcontent-%COMP%] {\n  height: 3rem;\n  width: 0;\n  border-radius: 1.5rem;\n  border: 1px solid var(--b3);\n  transition: width 200ms opacity 200ms;\n  opacity: 0;\n  pointer-events: none;\n}\n[role=search].show[_ngcontent-%COMP%] {\n  width: 24rem;\n  opacity: 1;\n  pointer-events: auto;\n}\n/*# sourceMappingURL=explore-search.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, VirtualKeyboardComponent, MatAutocomplete, MatOption, MatAutocompleteTrigger, MatAutocompleteOrigin, MatRipple, MatProgressSpinner, IconComponent, DefaultValueAccessor, NgControlStatus, NgModel, AsyncPipe, SlicePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  z-index: 99;\n  position: relative;\n}\n[role=search][_ngcontent-%COMP%] {\n  height: 3rem;\n  width: 0;\n  border-radius: 1.5rem;\n  border: 1px solid var(--b3);\n  transition: width 200ms opacity 200ms;\n  opacity: 0;\n  pointer-events: none;\n}\n[role=search].show[_ngcontent-%COMP%] {\n  width: 24rem;\n  opacity: 1;\n  pointer-events: auto;\n}\n/*# sourceMappingURL=explore-search.component.css.map */"] });
   }
 };
 (() => {
@@ -158615,7 +159045,7 @@ var ExploreZoomControlComponent = class _ExploreZoomControlComponent {
         \u0275\u0275advance(4);
         \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(9, 7, "EXPLORE.ZOOM_RESET"));
       }
-    }, dependencies: [IconComponent, MatRipple, MatTooltip, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n}\nbutton[_ngcontent-%COMP%] {\n  border: 1px solid #9998;\n  border-radius: 0;\n}\nbutton[_ngcontent-%COMP%]:first-child {\n  border-radius: 0.25rem 0.25rem 0 0;\n  border-bottom: none;\n}\nbutton[_ngcontent-%COMP%]:last-child {\n  border-radius: 0 0 0.25rem 0.25rem;\n  border-top: none;\n}\n/*# sourceMappingURL=explore-zoom-control.component.css.map */"] });
+    }, dependencies: [MatRipple, MatTooltip, IconComponent, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n}\nbutton[_ngcontent-%COMP%] {\n  border: 1px solid #9998;\n  border-radius: 0;\n}\nbutton[_ngcontent-%COMP%]:first-child {\n  border-radius: 0.25rem 0.25rem 0 0;\n  border-bottom: none;\n}\nbutton[_ngcontent-%COMP%]:last-child {\n  border-radius: 0 0 0.25rem 0.25rem;\n  border-top: none;\n}\n/*# sourceMappingURL=explore-zoom-control.component.css.map */"] });
   }
 };
 (() => {
@@ -158646,6 +159076,7 @@ var SharedExploreModule = class _SharedExploreModule {
     ] });
   }
 };
+\u0275\u0275setComponentScope(ExploreBookingModalComponent, [NgIf, MatFormField, MatError, MatRipple, MatDialogClose, MatInput, MatProgressSpinner, IconComponent, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, DurationFieldComponent, UserSearchFieldComponent], [AsyncPipe, DatePipe, TranslatePipe]);
 
 // libs/assets/src/lib/asset-select-modal/asset-details.component.ts
 function AssetDetailsComponent_ng_container_0_Template(rf, ctx) {
@@ -158778,7 +159209,7 @@ var AssetDetailsComponent = class _AssetDetailsComponent {
         const empty_state_r3 = \u0275\u0275reference(2);
         \u0275\u0275property("ngIf", ctx.item)("ngIfElse", empty_state_r3);
       }
-    }, dependencies: [NgIf, CounterComponent, NgControlStatus, NgModel, IconComponent, ImageCarouselComponent, MatRipple], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 30%;\n  min-width: 20rem;\n  height: 100%;\n  min-height: 65vh;\n}\n/*# sourceMappingURL=asset-details.component.css.map */"] });
+    }, dependencies: [NgIf, CounterComponent, NgControlStatus, NgModel, ImageCarouselComponent, MatRipple, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 30%;\n  min-width: 20rem;\n  height: 100%;\n  min-height: 65vh;\n}\n/*# sourceMappingURL=asset-details.component.css.map */"] });
   }
 };
 (() => {
@@ -159017,7 +159448,7 @@ var AssetFiltersComponent = class _AssetFiltersComponent extends AsyncHandler {
         \u0275\u0275advance();
         \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(11, 13, ctx.categories));
       }
-    }, dependencies: [NgForOf, NgIf, DurationFieldComponent, DefaultValueAccessor, NgControlStatus, NgModel, IconComponent, MatOption, MatFormField, MatPrefix, MatSelect, MatInput, MatTooltip, MatCheckbox, AsyncPipe, DatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  min-width: 16rem;\n}\n/*# sourceMappingURL=asset-filters.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, DurationFieldComponent, DefaultValueAccessor, NgControlStatus, NgModel, MatOption, MatFormField, MatPrefix, MatSelect, MatInput, MatTooltip, MatCheckbox, IconComponent, AsyncPipe, DatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  min-width: 16rem;\n}\n/*# sourceMappingURL=asset-filters.component.css.map */"] });
   }
 };
 (() => {
@@ -159241,7 +159672,7 @@ var AssetListComponent = class _AssetListComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(7, 5, ctx.loading))("ngIfElse", load_state_r6);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, AuthenticatedImageDirective, MatRipple, MatProgressSpinner, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n}\n/*# sourceMappingURL=asset-list.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, AuthenticatedImageDirective, MatRipple, MatProgressSpinner, IconComponent, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n  height: 100%;\n}\n/*# sourceMappingURL=asset-list.component.css.map */"] });
   }
 };
 (() => {
@@ -159412,7 +159843,7 @@ var AssetSelectModalComponent = class _AssetSelectModalComponent {
         \u0275\u0275advance(2);
         \u0275\u0275textInterpolate1(" ", ctx.isSelected(ctx.displayed == null ? null : ctx.displayed.id) ? "Remove from Booking" : "Add to booking", " ");
       }
-    }, dependencies: [NgIf, IconComponent, MatRipple, MatDialogClose, AssetDetailsComponent, AssetFiltersComponent, AssetFiltersDisplayComponent, AssetListComponent], encapsulation: 2 });
+    }, dependencies: [NgIf, MatRipple, MatDialogClose, IconComponent, AssetDetailsComponent, AssetFiltersComponent, AssetFiltersDisplayComponent, AssetListComponent], encapsulation: 2 });
   }
 };
 (() => {
@@ -159420,7 +159851,7 @@ var AssetSelectModalComponent = class _AssetSelectModalComponent {
 })();
 
 // libs/assets/src/lib/asset-list-field.component.ts
-var _c099 = (a0, a1) => ({ date: a0, time: a1 });
+var _c0100 = (a0, a1) => ({ date: a0, time: a1 });
 function AssetListFieldComponent_div_1_div_9_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 13)(1, "app-icon");
@@ -159540,7 +159971,7 @@ function AssetListFieldComponent_div_1_Template(rf, ctx) {
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275classProp("border-error", ctx_r2.end_time < request_r2.deliver_at)("border-base-300", ctx_r2.end_time >= request_r2.deliver_at);
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(8, 19, "FORM.ASSETS_REQUESTED_FOR_DATE", \u0275\u0275pureFunction2(30, _c099, \u0275\u0275pipeBind2(6, 13, request_r2.deliver_at_time, "mediumDate"), \u0275\u0275pipeBind2(7, 16, request_r2.deliver_at_time, ctx_r2.time_format))), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(8, 19, "FORM.ASSETS_REQUESTED_FOR_DATE", \u0275\u0275pureFunction2(30, _c0100, \u0275\u0275pipeBind2(6, 13, request_r2.deliver_at_time, "mediumDate"), \u0275\u0275pipeBind2(7, 16, request_r2.deliver_at_time, ctx_r2.time_format))), " ");
     \u0275\u0275advance(4);
     \u0275\u0275property("ngIf", ctx_r2.end_time <= request_r2.deliver_at || ctx_r2.rejected_ids.includes(request_r2.id) || request_r2.conflict);
     \u0275\u0275advance();
@@ -159747,7 +160178,7 @@ var AssetListFieldComponent = class _AssetListFieldComponent {
         \u0275\u0275advance(5);
         \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(8, 3, "FORM.ASSETS_ADD"));
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, MatTooltip, DatePipe, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
+    }, dependencies: [NgForOf, NgIf, MatRipple, MatTooltip, IconComponent, DatePipe, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
   }
 };
 (() => {
@@ -179842,7 +180273,7 @@ var createVideoConferenceModule = (space = {}, overrides = {}) => new VideoConfe
 
 // libs/mocks/src/lib/systems-bindings.mock.ts
 function createSystem(space) {
-  xa(space.id, {
+  ka(space.id, {
     System: [createSystemModule(space)],
     Bookings: [createBookingsModule(space)],
     ContactTracing: [createContactTracingModule(space)],
@@ -180338,8 +180769,8 @@ function initSentry(dsn, sample_rate = 0.1) {
     // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
     tracePropagationTargets: [
       "localhost",
-      /^https:\/\/[a-zA-Z0-9_\-]*\.[a-zA-Z0-9]*\/api/,
-      /^https:\/\/[a-zA-Z0-9_\-]*\.placeos\.run*\/api/
+      /^https:\/\/[a-zA-Z0-9_-]*\.[a-zA-Z0-9]*\/api/,
+      /^https:\/\/[a-zA-Z0-9_-]*\.placeos\.run*\/api/
     ],
     // Session Replay
     replaysSessionSampleRate: sample_rate,
@@ -180348,7 +180779,6 @@ function initSentry(dsn, sample_rate = 0.1) {
     // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
   });
 }
-window.global = window;
 var AppComponent = class _AppComponent extends AsyncHandler {
   get debug() {
     return window.debug && this._settings.get("app.allow_debugging") === true;
@@ -180404,7 +180834,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
       });
       setNotifyOutlet(this._snackbar);
       setTranslationService(this._locale);
-      yield this._settings.initialised.pipe(first((_3) => _3)).toPromise();
+      yield lastValueFrom(this._settings.initialised.pipe(first((_3) => _3)));
       setAppName(this._settings.get("app.short_name"));
       const settings = this._settings.get("composer") || {};
       settings.mock = !!this._settings.get("mock") || location.origin.includes("demo.place.tech");
@@ -180416,7 +180846,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
         });
       }
       yield setupPlace(settings).catch((_3) => console.error(_3));
-      yield this._org.initialised.pipe(first((_3) => _3)).toPromise();
+      yield lastValueFrom(this._org.initialised.pipe(first((_3) => _3)));
       if (this._locale) {
         this._locale.zone_id = this._org.organisation.id;
         this._locale.init();
@@ -180425,7 +180855,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
       if (!settings.local_login) {
         this.timeout("wait_for_user", () => this.onInitError(), 30 * 1e3);
       }
-      yield current_user.pipe(first((_3) => !!_3)).toPromise();
+      yield lastValueFrom(current_user.pipe(first((_3) => !!_3)));
       this.clearTimeout("wait_for_user");
       this._initLocale();
       setInternalUserDomain(this._settings.get("app.internal_user_domain") || `@${currentUser()?.email?.split("@")[1]}`);
@@ -180436,6 +180866,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
         this._initUploads();
         this._initFixedDevice();
       } catch {
+        log("APP", "Failed to initialise background services.", void 0, "warn");
       }
     });
   }
@@ -180473,6 +180904,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
         }
       }
     } catch {
+      log("APP", "Failed to initialise locale service.", void 0, "warn");
     }
   }
   _pasteToken(tkn) {
@@ -180547,7 +180979,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 106 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 111 });
 })();
 
 // apps/map-kiosk/src/environments/environment.ts
@@ -180616,7 +181048,7 @@ var AccessibilityControlsComponent = class _AccessibilityControlsComponent exten
 })();
 
 // apps/map-kiosk/src/app/bootstrap.component.ts
-var _c0100 = ["bootstrap", ""];
+var _c0101 = ["bootstrap", ""];
 function BootstrapComponent_div_7_ng_container_1_mat_option_12_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "mat-option", 16)(1, "div", 17)(2, "div");
@@ -181077,7 +181509,7 @@ var BootstrapComponent = class _BootstrapComponent extends AsyncHandler {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BootstrapComponent, selectors: [["", "bootstrap", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c0100, decls: 11, vars: 3, consts: [["load_state", ""], ["select", ""], [1, "absolute", "inset-0", "z-0", "bg-base-200"], ["form", "", 1, "relative", "z-10", "mx-auto", "my-8", "w-[28rem]", "max-w-[calc(100%-2rem)]", "overflow-hidden", "rounded-lg", "border", "border-base-300", "bg-base-100", "shadow"], [1, "flex", "w-full", "items-center", "justify-between", "bg-secondary", "px-4", "py-3", "text-xl", "font-medium", "text-secondary-content"], [1, "rounded", "px-2", "py-1", "font-mono", "text-sm"], ["class", "flex flex-col space-y-2 px-4", 4, "ngIf", "ngIfElse"], ["class", "!mt-4 flex w-full items-center justify-end border-t border-base-300 px-4 py-2", 4, "ngIf"], [1, "flex", "flex-col", "space-y-2", "px-4"], [4, "ngIf"], ["appearance", "outline", 1, "no-subscript"], ["building", "", "placeholder", "Select region", 3, "ngModelChange", "ngModel"], [1, "flex", "items-center", "space-x-4"], [1, "flex-1", "truncate"], [1, "!mr-4", "rounded", "bg-base-200", "px-1.5", "font-mono", "text-[0.625rem]"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "leading-tight"], [1, "font-mono", "text-[0.625rem]", "opacity-30"], [1, "hidden"], ["building", "", "placeholder", "Select building", 3, "ngModelChange", "ngModel"], [1, "font-mono", "text-[0.625rem]", "opacity-60"], ["level", "", "placeholder", "Select level", 3, "ngModelChange", "ngModel"], ["placeholder", "Select orientation", 3, "valueChange", "value"], ["placeholder", "Select location", 3, "valueChange", "value"], [1, "!mt-4", "flex", "w-full", "items-center", "justify-end", "border-t", "border-base-300", "px-4", "py-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click", "disabled"], [1, "m-auto", "flex", "flex-col", "items-center", "p-8"], [3, "diameter"]], template: function BootstrapComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BootstrapComponent, selectors: [["", "bootstrap", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c0101, decls: 11, vars: 3, consts: [["load_state", ""], ["select", ""], [1, "absolute", "inset-0", "z-0", "bg-base-200"], ["form", "", 1, "relative", "z-10", "mx-auto", "my-8", "w-[28rem]", "max-w-[calc(100%-2rem)]", "overflow-hidden", "rounded-lg", "border", "border-base-300", "bg-base-100", "shadow"], [1, "flex", "w-full", "items-center", "justify-between", "bg-secondary", "px-4", "py-3", "text-xl", "font-medium", "text-secondary-content"], [1, "rounded", "px-2", "py-1", "font-mono", "text-sm"], ["class", "flex flex-col space-y-2 px-4", 4, "ngIf", "ngIfElse"], ["class", "!mt-4 flex w-full items-center justify-end border-t border-base-300 px-4 py-2", 4, "ngIf"], [1, "flex", "flex-col", "space-y-2", "px-4"], [4, "ngIf"], ["appearance", "outline", 1, "no-subscript"], ["building", "", "placeholder", "Select region", 3, "ngModelChange", "ngModel"], [1, "flex", "items-center", "space-x-4"], [1, "flex-1", "truncate"], [1, "!mr-4", "rounded", "bg-base-200", "px-1.5", "font-mono", "text-[0.625rem]"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "leading-tight"], [1, "font-mono", "text-[0.625rem]", "opacity-30"], [1, "hidden"], ["building", "", "placeholder", "Select building", 3, "ngModelChange", "ngModel"], [1, "font-mono", "text-[0.625rem]", "opacity-60"], ["level", "", "placeholder", "Select level", 3, "ngModelChange", "ngModel"], ["placeholder", "Select orientation", 3, "valueChange", "value"], ["placeholder", "Select location", 3, "valueChange", "value"], [1, "!mt-4", "flex", "w-full", "items-center", "justify-end", "border-t", "border-base-300", "px-4", "py-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click", "disabled"], [1, "m-auto", "flex", "flex-col", "items-center", "p-8"], [3, "diameter"]], template: function BootstrapComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275element(0, "div", 2);
         \u0275\u0275elementStart(1, "div", 3)(2, "header", 4)(3, "div");
@@ -181105,7 +181537,7 @@ var BootstrapComponent = class _BootstrapComponent extends AsyncHandler {
 })();
 
 // apps/map-kiosk/src/app/footer-menu.component.ts
-var _c0101 = () => ["/desks"];
+var _c0102 = () => ["/desks"];
 var _c156 = () => ["/explore"];
 var FooterMenuComponent = class _FooterMenuComponent {
   static {
@@ -181131,7 +181563,7 @@ var FooterMenuComponent = class _FooterMenuComponent {
       }
       if (rf & 2) {
         \u0275\u0275advance();
-        \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(2, _c0101));
+        \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(2, _c0102));
         \u0275\u0275advance(6);
         \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(3, _c156));
       }
@@ -181143,7 +181575,7 @@ var FooterMenuComponent = class _FooterMenuComponent {
 })();
 
 // apps/map-kiosk/src/app/desk-booking.component.ts
-var _c0102 = ["desk-booking", ""];
+var _c0103 = ["desk-booking", ""];
 var DeskBookingComponent = class _DeskBookingComponent extends AsyncHandler {
   get countdown_time() {
     return this._settings.get("app.kiosk_reset_delay") || 5 * 60 * 1e3;
@@ -181168,7 +181600,7 @@ var DeskBookingComponent = class _DeskBookingComponent extends AsyncHandler {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DeskBookingComponent, selectors: [["", "desk-booking", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c0102, decls: 1, vars: 0, template: function DeskBookingComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DeskBookingComponent, selectors: [["", "desk-booking", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c0103, decls: 1, vars: 0, template: function DeskBookingComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275element(0, "footer-menu");
       }
@@ -181180,7 +181612,7 @@ var DeskBookingComponent = class _DeskBookingComponent extends AsyncHandler {
 })();
 
 // apps/map-kiosk/src/app/explore.component.ts
-var _c0103 = ["app-explore", ""];
+var _c0104 = ["app-explore", ""];
 var _c157 = () => ({ controls: true });
 function ExploreComponent_explore_search_4_Template(rf, ctx) {
   if (rf & 1) {
@@ -181584,7 +182016,7 @@ var ExploreComponent = class _ExploreComponent extends AsyncHandler {
           module: "LocationServices"
         };
       }
-      const mod = Oa(locate_details.system_id, locate_details.module);
+      const mod = Ea(locate_details.system_id, locate_details.module);
       const locations = (yield mod.execute("locate_user", [
         user.email,
         user.username || user.id
@@ -181645,7 +182077,7 @@ var ExploreComponent = class _ExploreComponent extends AsyncHandler {
       ExploreZonesService,
       ExploreParkingService,
       SpacePipe
-    ]), \u0275\u0275InheritDefinitionFeature], attrs: _c0103, decls: 37, vars: 36, consts: [["accessibility_controls", ""], ["levelMenu", "matMenu"], ["legendMenu", "matMenu"], ["topbar", "", 1, "relative", "flex", "items-center", "justify-between", "border-b", "border-base-300", "bg-base-100", "px-4", "py-2", "text-base-content"], ["matRipple", "", "routerLink", "/", 1, "rounded", "p-2", "text-2xl"], ["auth", "", "alt", "Logo", 1, "h-12", 3, "source"], [1, "absolute", "right-2", "top-1/2", "flex", "-translate-y-1/2", "items-center"], [4, "ngIf"], ["icon", "", "matRipple", "", "customTooltip", "", 1, "flex", "bg-base-200", "sm:hidden", 3, "content"], [1, "flex", "h-1/2", "flex-1"], ["sidebar", "", 1, "hidden", "w-[20rem]", "border-r", "border-base-300", "bg-base-100", "px-2", "py-4", "text-base-content", "sm:block"], ["btn", "", "matRipple", "", 1, "items", "clear", "flex", "w-full", "space-x-4", "hover:bg-base-200", 3, "click"], [1, "text-2xl"], [1, "flex-1", "text-left", "font-medium"], [1, "px-8"], [1, "space-y-2", "py-4"], [1, "mx-auto", "w-[calc(100%-4rem)]"], [1, "relative", "h-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "labels", "options", "focus"], [1, "w-[18rem]", "rounded", "bg-base-100", "p-2"], ["options", "", 1, "flex", "items-center", "space-x-2", "bg-base-content", "p-2", "text-base-100", "sm:hidden"], ["btn", "", "matRipple", "", 1, "clear", "text-base-100", 3, "matMenuTriggerFor"], ["mat-menu-item", "", 3, "click", 4, "ngFor", "ngForOf"], ["mat-menu-item", "", 3, "click"], ["class", "flex w-full items-center space-x-4 rounded px-4 py-2 hover:bg-base-200", 4, "ngFor", "ngForOf"], [1, "flex", "w-full", "items-center", "space-x-4", "rounded", "px-4", "py-2", "hover:bg-base-200"], [1, "h-3", "w-3", "rounded-full"], [1, "text-left", "opacity-60"], ["btn", "", "matRipple", "", "class", "clear w-full hover:bg-base-200 hover:opacity-100", 3, "opacity-30", "click", 4, "ngFor", "ngForOf"], ["btn", "", "matRipple", "", 1, "clear", "w-full", "hover:bg-base-200", "hover:opacity-100", 3, "click"], [1, "w-full", "text-left"]], template: function ExploreComponent_Template(rf, ctx) {
+    ]), \u0275\u0275InheritDefinitionFeature], attrs: _c0104, decls: 37, vars: 36, consts: [["accessibility_controls", ""], ["levelMenu", "matMenu"], ["legendMenu", "matMenu"], ["topbar", "", 1, "relative", "flex", "items-center", "justify-between", "border-b", "border-base-300", "bg-base-100", "px-4", "py-2", "text-base-content"], ["matRipple", "", "routerLink", "/", 1, "rounded", "p-2", "text-2xl"], ["auth", "", "alt", "Logo", 1, "h-12", 3, "source"], [1, "absolute", "right-2", "top-1/2", "flex", "-translate-y-1/2", "items-center"], [4, "ngIf"], ["icon", "", "matRipple", "", "customTooltip", "", 1, "flex", "bg-base-200", "sm:hidden", 3, "content"], [1, "flex", "h-1/2", "flex-1"], ["sidebar", "", 1, "hidden", "w-[20rem]", "border-r", "border-base-300", "bg-base-100", "px-2", "py-4", "text-base-content", "sm:block"], ["btn", "", "matRipple", "", 1, "items", "clear", "flex", "w-full", "space-x-4", "hover:bg-base-200", 3, "click"], [1, "text-2xl"], [1, "flex-1", "text-left", "font-medium"], [1, "px-8"], [1, "space-y-2", "py-4"], [1, "mx-auto", "w-[calc(100%-4rem)]"], [1, "relative", "h-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "labels", "options", "focus"], [1, "w-[18rem]", "rounded", "bg-base-100", "p-2"], ["options", "", 1, "flex", "items-center", "space-x-2", "bg-base-content", "p-2", "text-base-100", "sm:hidden"], ["btn", "", "matRipple", "", 1, "clear", "text-base-100", 3, "matMenuTriggerFor"], ["mat-menu-item", "", 3, "click", 4, "ngFor", "ngForOf"], ["mat-menu-item", "", 3, "click"], ["class", "flex w-full items-center space-x-4 rounded px-4 py-2 hover:bg-base-200", 4, "ngFor", "ngForOf"], [1, "flex", "w-full", "items-center", "space-x-4", "rounded", "px-4", "py-2", "hover:bg-base-200"], [1, "h-3", "w-3", "rounded-full"], [1, "text-left", "opacity-60"], ["btn", "", "matRipple", "", "class", "clear w-full hover:bg-base-200 hover:opacity-100", 3, "opacity-30", "click", 4, "ngFor", "ngForOf"], ["btn", "", "matRipple", "", 1, "clear", "w-full", "hover:bg-base-200", "hover:opacity-100", 3, "click"], [1, "w-full", "text-left"]], template: function ExploreComponent_Template(rf, ctx) {
       if (rf & 1) {
         const _r1 = \u0275\u0275getCurrentView();
         \u0275\u0275elementStart(0, "div", 3)(1, "a", 4);
@@ -181725,7 +182157,7 @@ var ExploreComponent = class _ExploreComponent extends AsyncHandler {
         \u0275\u0275advance(5);
         \u0275\u0275property("src", \u0275\u0275pipeBind1(30, 21, ctx.url))("zoom", (tmp_10_0 = \u0275\u0275pipeBind1(31, 23, ctx.positions)) == null ? null : tmp_10_0.zoom)("center", (tmp_11_0 = \u0275\u0275pipeBind1(32, 25, ctx.positions)) == null ? null : tmp_11_0.center)("styles", \u0275\u0275pipeBind1(33, 27, ctx.styles))("features", \u0275\u0275pipeBind1(34, 29, ctx.features))("actions", \u0275\u0275pipeBind1(35, 31, ctx.actions))("labels", \u0275\u0275pipeBind1(36, 33, ctx.labels))("options", \u0275\u0275pureFunction0(35, _c157))("focus", ctx.locate);
       }
-    }, dependencies: [NgForOf, NgIf, RouterLink, MatRipple, IconComponent, InteractiveMapComponent, CustomTooltipComponent, AuthenticatedImageDirective, MatMenu, MatMenuItem, MatMenuTrigger, ExploreSearchComponent, AccessibilityControlsComponent, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: absolute;\n  display: flex;\n  flex-direction: column;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: var(--b2);\n}\nhr[_ngcontent-%COMP%] {\n  margin-top: 0.5rem !important;\n  margin-bottom: 0.5rem !important;\n}\n/*# sourceMappingURL=explore.component.css.map */"], data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
+    }, dependencies: [NgForOf, NgIf, RouterLink, MatRipple, InteractiveMapComponent, AuthenticatedImageDirective, MatMenu, MatMenuItem, MatMenuTrigger, IconComponent, CustomTooltipComponent, ExploreSearchComponent, AccessibilityControlsComponent, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: absolute;\n  display: flex;\n  flex-direction: column;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: var(--b2);\n}\nhr[_ngcontent-%COMP%] {\n  margin-top: 0.5rem !important;\n  margin-bottom: 0.5rem !important;\n}\n/*# sourceMappingURL=explore.component.css.map */"], data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
   }
 };
 (() => {
@@ -181825,7 +182257,7 @@ var ExploreLevelSelectComponent = class _ExploreLevelSelectComponent {
 })();
 
 // apps/map-kiosk/src/app/explore-map-stack.component.ts
-var _c0104 = () => ({});
+var _c0105 = () => ({});
 var _c158 = () => [];
 function ExploreMapStackComponent_interactive_map_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -181843,7 +182275,7 @@ function ExploreMapStackComponent_interactive_map_2_Template(rf, ctx) {
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275styleProp("top", -50 * (i_r2 - ctx_r2.active_index) + "%")("bottom", 50 * (i_r2 - ctx_r2.active_index) + "%");
     \u0275\u0275classProp("active", i_r2 === ctx_r2.active_index);
-    \u0275\u0275property("src", lvl_r1 == null ? null : lvl_r1.map_id)("zoom", \u0275\u0275pipeBind1(1, 13, ctx_r2.positions).zoom)("center", \u0275\u0275pipeBind1(2, 15, ctx_r2.positions).center)("styles", i_r2 === ctx_r2.active_index ? \u0275\u0275pipeBind1(3, 17, ctx_r2.styles) : \u0275\u0275pureFunction0(25, _c0104))("features", i_r2 === ctx_r2.active_index ? \u0275\u0275pipeBind1(4, 19, ctx_r2.features) : \u0275\u0275pureFunction0(26, _c158))("actions", i_r2 === ctx_r2.active_index ? \u0275\u0275pipeBind1(5, 21, ctx_r2.actions) : \u0275\u0275pureFunction0(27, _c158))("labels", i_r2 === ctx_r2.active_index ? \u0275\u0275pipeBind1(6, 23, ctx_r2.labels) : \u0275\u0275pureFunction0(28, _c158));
+    \u0275\u0275property("src", lvl_r1 == null ? null : lvl_r1.map_id)("zoom", \u0275\u0275pipeBind1(1, 13, ctx_r2.positions).zoom)("center", \u0275\u0275pipeBind1(2, 15, ctx_r2.positions).center)("styles", i_r2 === ctx_r2.active_index ? \u0275\u0275pipeBind1(3, 17, ctx_r2.styles) : \u0275\u0275pureFunction0(25, _c0105))("features", i_r2 === ctx_r2.active_index ? \u0275\u0275pipeBind1(4, 19, ctx_r2.features) : \u0275\u0275pureFunction0(26, _c158))("actions", i_r2 === ctx_r2.active_index ? \u0275\u0275pipeBind1(5, 21, ctx_r2.actions) : \u0275\u0275pureFunction0(27, _c158))("labels", i_r2 === ctx_r2.active_index ? \u0275\u0275pipeBind1(6, 23, ctx_r2.labels) : \u0275\u0275pureFunction0(28, _c158));
   }
 }
 var ExploreMapStackComponent = class _ExploreMapStackComponent {
