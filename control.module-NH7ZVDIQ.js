@@ -28,6 +28,7 @@ import {
   combineLatest,
   filter,
   map,
+  startWith,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
   ɵɵadvance,
@@ -60,7 +61,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-7HB5YGQC.js";
+} from "./chunk-D5JLLHYP.js";
 import "./chunk-4MWRP73S.js";
 
 // apps/workplace/src/app/control/list-item.component.ts
@@ -146,7 +147,7 @@ var ControlSpaceListItemComponent = class _ControlSpaceListItemComponent {
       if (rf & 2) {
         \u0275\u0275property("ngIf", ctx.space);
       }
-    }, dependencies: [NgIf, RouterLink, IconComponent, MatRipple, SafePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, RouterLink, MatRipple, IconComponent, SafePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -214,6 +215,8 @@ var ControlSpaceListComponent = class _ControlSpaceListComponent extends AsyncHa
       this.search
     ]).pipe(map(([list, s]) => {
       const search = (s || "").toLowerCase();
+      if (!search)
+        return list;
       return (list || []).filter((space) => {
         const bld = this._org.buildings.find((building) => building.id === space.level.parent_id);
         const space_name = (space.name || "").toLowerCase();
@@ -221,7 +224,7 @@ var ControlSpaceListComponent = class _ControlSpaceListComponent extends AsyncHa
         const bld_name = ((bld ? bld.name : "") || "").toLowerCase();
         return space_name.indexOf(search) >= 0 || level_name && level_name.indexOf(search) >= 0 || bld_name && bld_name.indexOf(search) >= 0;
       });
-    }));
+    }), startWith([]));
   }
   sortSpaces(first, second) {
     const bld_a = this._org.buildings.find((building) => building.id === first.level?.parent_id);
@@ -269,7 +272,7 @@ var ControlSpaceListComponent = class _ControlSpaceListComponent extends AsyncHa
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", spaces_r6.length)("ngIfElse", empty_state_r5);
       }
-    }, dependencies: [NgForOf, NgIf, DefaultValueAccessor, NgControlStatus, NgModel, IconComponent, MatFormField, MatPrefix, MatSuffix, MatInput, MatProgressSpinner, ControlSpaceListItemComponent, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\nmat-form-field[_ngcontent-%COMP%] {\n  width: 48rem;\n  max-width: calc(100% - 2rem);\n}\n/*# sourceMappingURL=space-list.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatFormField, MatPrefix, MatSuffix, MatInput, MatProgressSpinner, IconComponent, ControlSpaceListItemComponent, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\nmat-form-field[_ngcontent-%COMP%] {\n  width: 48rem;\n  max-width: calc(100% - 2rem);\n}\n/*# sourceMappingURL=space-list.component.css.map */"] });
   }
 };
 (() => {
@@ -329,4 +332,4 @@ var ControlModule = class _ControlModule {
 export {
   ControlModule
 };
-//# sourceMappingURL=control.module-ICADIVW6.js.map
+//# sourceMappingURL=control.module-NH7ZVDIQ.js.map

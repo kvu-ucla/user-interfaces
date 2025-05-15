@@ -1,6 +1,6 @@
 import {
   subMinutes
-} from "./chunk-SETK32OJ.js";
+} from "./chunk-53PGWIDG.js";
 import {
   ANIMATION_SHOW_CONTRACT_EXPAND,
   ActivatedRoute,
@@ -23,7 +23,6 @@ import {
   CounterComponent,
   CurrencyPipe,
   CustomTooltipComponent,
-  DAYS_OF_WEEK_INDEX,
   DateFieldComponent,
   DatePipe,
   DefaultValueAccessor,
@@ -152,6 +151,8 @@ import {
   formatDuration,
   formatRecurrence,
   forwardRef,
+  fromBookingRecurrence,
+  fromEventRecurrence,
   generateCalendarFileLink,
   generateGoogleCalendarLink,
   generateMicrosoftCalendarLink,
@@ -251,7 +252,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-7HB5YGQC.js";
+} from "./chunk-D5JLLHYP.js";
 import {
   __async,
   __spreadProps,
@@ -774,7 +775,7 @@ var CateringItemModalComponent = class _CateringItemModalComponent {
         \u0275\u0275advance(3);
         \u0275\u0275property("ngForOf", ctx.caterers);
       }
-    }, dependencies: [NgForOf, NgIf, MatAutocomplete, MatOption, MatAutocompleteTrigger, MatDialogClose, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, IconComponent, SettingsToggleComponent, MatFormField, MatError, MatRipple, MatInput, MatProgressSpinner, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow, CounterComponent, ImageListFieldComponent, TranslatePipe], styles: ["\n\n[list][_ngcontent-%COMP%]   mat-checkbox[_ngcontent-%COMP%] {\n  margin: 0.5rem;\n}\n/*# sourceMappingURL=catering-item-modal.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatAutocomplete, MatOption, MatAutocompleteTrigger, MatDialogClose, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, MatFormField, MatError, MatRipple, MatInput, MatProgressSpinner, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow, IconComponent, SettingsToggleComponent, CounterComponent, ImageListFieldComponent, TranslatePipe], styles: ["\n\n[list][_ngcontent-%COMP%]   mat-checkbox[_ngcontent-%COMP%] {\n  margin: 0.5rem;\n}\n/*# sourceMappingURL=catering-item-modal.component.css.map */"] });
   }
 };
 (() => {
@@ -782,9 +783,14 @@ var CateringItemModalComponent = class _CateringItemModalComponent {
 })();
 
 // libs/catering/src/lib/catering-orders.service.ts
+var SPACE_PIPE = new SpacePipe();
 function checkOrder(order, filters) {
   const s = (filters.search || "").toLowerCase();
-  return !!order.items.find((item) => (!filters?.caterer || filters.caterer === "<empty>" && !item.caterer || item.caterer === filters.caterer) && (item.name.toLowerCase().includes(s) || !!item.options.find((option) => option.name.toLowerCase().includes(s))));
+  const space = SPACE_PIPE.get(order.event?.extension_data.system_id);
+  const location2 = order.event?.location || space.display_name || space.name;
+  return !!order.items.find((item) => {
+    return (!filters?.caterer || filters.caterer === "<empty>" && !item.caterer || item.caterer === filters.caterer) && (item.name.toLowerCase().includes(s) || !!item.options.find((option) => option.name.toLowerCase().includes(s)) || location2.toLowerCase().includes(s));
+  });
 }
 var BOOKINGS = {};
 var CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
@@ -871,7 +877,7 @@ var CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
       }
       return unique(provider_list);
     }), shareReplay(1));
-    this.filtered = combineLatest([this.orders, this._filters]).pipe(tap(([l]) => console.log("Orders:", l)), map(([list, filters]) => list.filter((order) => checkOrder(order, filters)).sort((a, b) => a.deliver_at - b.deliver_at)));
+    this.filtered = combineLatest([this.orders, this._filters]).pipe(map(([list, filters]) => list.filter((order) => checkOrder(order, filters)).sort((a, b) => a.deliver_at - b.deliver_at)));
     this.subscription("changes", this.orders.subscribe());
   }
   /** Start polling for catering orders */
@@ -1062,7 +1068,7 @@ option-1,option,1 Sugar,20,Sugars,,,item-1,false`;
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", !ctx.loading)("ngIfElse", load_state_r3);
       }
-    }, dependencies: [NgIf, MatDialogClose, IconComponent, MatRipple, MatProgressSpinner, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatDialogClose, MatRipple, MatProgressSpinner, IconComponent, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -1301,7 +1307,7 @@ var CateringItemOptionModalComponent = class _CateringItemOptionModalComponent {
         \u0275\u0275advance(5);
         \u0275\u0275property("ngForOf", ctx.types);
       }
-    }, dependencies: [NgForOf, NgIf, MatAutocomplete, MatOption, MatAutocompleteTrigger, MatDialogClose, \u0275NgNoValidate, DefaultValueAccessor, NumberValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, IconComponent, SettingsToggleComponent, MatFormField, MatError, MatRipple, MatInput, MatProgressSpinner, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, MatAutocomplete, MatOption, MatAutocompleteTrigger, MatDialogClose, \u0275NgNoValidate, DefaultValueAccessor, NumberValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, MatFormField, MatError, MatRipple, MatInput, MatProgressSpinner, IconComponent, SettingsToggleComponent, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -1772,7 +1778,7 @@ var CateringOrderModalComponent = class _CateringOrderModalComponent extends Asy
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", !ctx.loading);
       }
-    }, dependencies: [NgForOf, NgIf, MatTab, MatTabGroup, MatDialogClose, MatTooltip, DefaultValueAccessor, NgControlStatus, NgModel, IconComponent, MatRipple, MatProgressSpinner, CounterComponent, CurrencyPipe, TranslatePipe], styles: ["\n\n.list[_ngcontent-%COMP%] {\n  height: 24em;\n  min-width: 32em;\n  max-width: calc(100vw - 1em);\n}\nfooter[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  min-width: 12em;\n}\ninput[_ngcontent-%COMP%] {\n  position: relative;\n  width: 100%;\n  padding: 1em;\n  border: none;\n  border-radius: 0 !important;\n  border-top: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n  outline: none;\n  font-size: 1em;\n}\ninput[_ngcontent-%COMP%]:focus {\n  border: none;\n  border-top: 2px solid var(--s);\n  border-bottom: 2px solid var(--s);\n  box-shadow: none;\n}\ninput.error[_ngcontent-%COMP%]::placeholder {\n  color: rgba(var(--error), 0.45);\n}\n/*# sourceMappingURL=catering-order-modal.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatTab, MatTabGroup, MatDialogClose, MatTooltip, DefaultValueAccessor, NgControlStatus, NgModel, MatRipple, MatProgressSpinner, IconComponent, CounterComponent, CurrencyPipe, TranslatePipe], styles: ["\n\n.list[_ngcontent-%COMP%] {\n  height: 24em;\n  min-width: 32em;\n  max-width: calc(100vw - 1em);\n}\nfooter[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  min-width: 12em;\n}\ninput[_ngcontent-%COMP%] {\n  position: relative;\n  width: 100%;\n  padding: 1em;\n  border: none;\n  border-radius: 0 !important;\n  border-top: 1px solid #ccc;\n  border-bottom: 1px solid #ccc;\n  outline: none;\n  font-size: 1em;\n}\ninput[_ngcontent-%COMP%]:focus {\n  border: none;\n  border-top: 2px solid var(--s);\n  border-bottom: 2px solid var(--s);\n  box-shadow: none;\n}\ninput.error[_ngcontent-%COMP%]::placeholder {\n  color: rgba(var(--error), 0.45);\n}\n/*# sourceMappingURL=catering-order-modal.component.css.map */"] });
   }
 };
 (() => {
@@ -1958,7 +1964,7 @@ var CateringOrderOptionsModalComponent = class _CateringOrderOptionsModalCompone
         \u0275\u0275advance(7);
         \u0275\u0275property("ngForOf", ctx.groups);
       }
-    }, dependencies: [NgForOf, NgIf, MatDialogClose, MatCheckbox, MatRadioGroup, MatRadioButton, NgControlStatus, NgModel, IconComponent, MatRipple, CurrencyPipe], styles: ["\n\nmain[_ngcontent-%COMP%] {\n  min-height: 24em;\n  width: 24rem;\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=catering-order-options-modal.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatDialogClose, MatCheckbox, MatRadioGroup, MatRadioButton, NgControlStatus, NgModel, MatRipple, IconComponent, CurrencyPipe], styles: ["\n\nmain[_ngcontent-%COMP%] {\n  min-height: 24em;\n  width: 24rem;\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=catering-order-options-modal.component.css.map */"] });
   }
 };
 (() => {
@@ -2554,7 +2560,7 @@ var CateringMenuComponent = class _CateringMenuComponent {
         const child_template_r15 = \u0275\u0275reference(13);
         \u0275\u0275property("data", ctx.menu)("columns", \u0275\u0275pureFunction6(31, _c6, \u0275\u0275pureFunction1(17, _c03, active_template_r12), \u0275\u0275pureFunction1(19, _c13, \u0275\u0275pipeBind1(1, 7, "FORM.NAME")), \u0275\u0275pureFunction1(21, _c2, \u0275\u0275pipeBind1(2, 9, "COMMON.CATEGORY")), \u0275\u0275pureFunction2(23, _c3, \u0275\u0275pipeBind1(3, 11, "CATERING.CATERER"), !(ctx.filters == null ? null : ctx.filters.caterer) && ctx.caterers.length > 1), \u0275\u0275pureFunction2(26, _c4, \u0275\u0275pipeBind1(4, 13, "CATERING.ITEM_PRICE"), price_template_r13), \u0275\u0275pureFunction1(29, _c5, actions_template_r14)))("filter", ctx.filters == null ? null : ctx.filters.search)("show_children", ctx.show_children)("child_template", child_template_r15)("sortable", true)("empty_message", \u0275\u0275pipeBind1(5, 15, "CATERING.ITEM_LIST_EMPTY"));
       }
-    }, dependencies: [NgForOf, NgIf, MatMenu, MatMenuItem, MatMenuTrigger, MatCheckbox, MatTooltip, NgControlStatus, NgModel, IconComponent, SimpleTableComponent, MatRipple, AsyncPipe, CurrencyPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 90%;\n  width: 100%;\n}\n/*# sourceMappingURL=catering-menu.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatMenu, MatMenuItem, MatMenuTrigger, MatCheckbox, MatTooltip, NgControlStatus, NgModel, SimpleTableComponent, MatRipple, IconComponent, AsyncPipe, CurrencyPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 90%;\n  width: 100%;\n}\n/*# sourceMappingURL=catering-menu.component.css.map */"] });
   }
 };
 (() => {
@@ -2661,7 +2667,7 @@ var CateringOrderItemComponent = class _CateringOrderItemComponent {
       if (rf & 2) {
         \u0275\u0275property("ngIf", ctx.item);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple], styles: ["\n\n[_nghost-%COMP%]:last-child    > div[_ngcontent-%COMP%] {\n  border: none !important;\n}\n/*# sourceMappingURL=catering-order-item.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatRipple, IconComponent], styles: ["\n\n[_nghost-%COMP%]:last-child    > div[_ngcontent-%COMP%] {\n  border: none !important;\n}\n/*# sourceMappingURL=catering-order-item.component.css.map */"] });
   }
 };
 (() => {
@@ -2754,7 +2760,7 @@ function CateringOrderListComponent_ng_template_15_Template(rf, ctx) {
     \u0275\u0275textInterpolate4(" ", \u0275\u0275pipeBind2(7, 11, row_r2 == null ? null : row_r2.event == null ? null : row_r2.event.date, "MMM d"), ", ", \u0275\u0275pipeBind2(8, 14, row_r2 == null ? null : row_r2.event == null ? null : row_r2.event.date, ctx_r2.time_format), " - ", \u0275\u0275pipeBind2(9, 17, row_r2 == null ? null : row_r2.event == null ? null : row_r2.event.date_end, "MMM d"), ", ", \u0275\u0275pipeBind2(10, 20, row_r2 == null ? null : row_r2.event == null ? null : row_r2.event.date_end, ctx_r2.time_format), " ");
   }
 }
-function CateringOrderListComponent_ng_template_17_span_3_Template(rf, ctx) {
+function CateringOrderListComponent_ng_template_17_Conditional_1_span_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span", 18);
     \u0275\u0275text(1);
@@ -2766,21 +2772,44 @@ function CateringOrderListComponent_ng_template_17_span_3_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CATERING.ORDERS_LOCATION_EMPTY"), " ");
   }
 }
-function CateringOrderListComponent_ng_template_17_Template(rf, ctx) {
+function CateringOrderListComponent_ng_template_17_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275declareLet(0);
-    \u0275\u0275elementStart(1, "div", 16);
-    \u0275\u0275text(2);
-    \u0275\u0275template(3, CateringOrderListComponent_ng_template_17_span_3_Template, 3, 3, "span", 17);
+    \u0275\u0275elementStart(0, "div", 16);
+    \u0275\u0275text(1);
+    \u0275\u0275template(2, CateringOrderListComponent_ng_template_17_Conditional_1_span_2_Template, 3, 3, "span", 17);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const data_r4 = ctx.data;
-    const space_r5 = data_r4 == null ? null : data_r4.system;
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", (space_r5 == null ? null : space_r5.display_name) || (space_r5 == null ? null : space_r5.name) || "", " ");
+    \u0275\u0275nextContext();
+    const space_r4 = \u0275\u0275readContextLet(0);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !((space_r5 == null ? null : space_r5.display_name) || (space_r5 == null ? null : space_r5.name)));
+    \u0275\u0275textInterpolate1(" ", (space_r4 == null ? null : space_r4.display_name) || (space_r4 == null ? null : space_r4.name) || "", " ");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !((space_r4 == null ? null : space_r4.display_name) || (space_r4 == null ? null : space_r4.name)));
+  }
+}
+function CateringOrderListComponent_ng_template_17_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 16);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const data_r5 = \u0275\u0275nextContext().data;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(data_r5 == null ? null : data_r5.location);
+  }
+}
+function CateringOrderListComponent_ng_template_17_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275declareLet(0);
+    \u0275\u0275template(1, CateringOrderListComponent_ng_template_17_Conditional_1_Template, 3, 2, "div", 16)(2, CateringOrderListComponent_ng_template_17_Conditional_2_Template, 2, 1, "div", 16);
+  }
+  if (rf & 2) {
+    const data_r5 = ctx.data;
+    const space_r6 = \u0275\u0275storeLet(data_r5 == null ? null : data_r5.system);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(space_r6 || !(data_r5 == null ? null : data_r5.location) ? 1 : 2);
   }
 }
 function CateringOrderListComponent_ng_template_19_span_3_Template(rf, ctx) {
@@ -2801,24 +2830,24 @@ function CateringOrderListComponent_ng_template_19_Template(rf, ctx) {
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const data_r6 = ctx.data;
+    const data_r7 = ctx.data;
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", (data_r6 == null ? null : data_r6.organiser == null ? null : data_r6.organiser.name) || (data_r6 == null ? null : data_r6.host) || "", " ");
+    \u0275\u0275textInterpolate1(" ", (data_r7 == null ? null : data_r7.organiser == null ? null : data_r7.organiser.name) || (data_r7 == null ? null : data_r7.host) || "", " ");
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !((data_r6 == null ? null : data_r6.organiser == null ? null : data_r6.organiser.name) || (data_r6 == null ? null : data_r6.host)));
+    \u0275\u0275property("ngIf", !((data_r7 == null ? null : data_r7.organiser == null ? null : data_r7.organiser.name) || (data_r7 == null ? null : data_r7.host)));
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", (data_r6 == null ? null : data_r6.organiser == null ? null : data_r6.organiser.email) || (data_r6 == null ? null : data_r6.host), " ");
+    \u0275\u0275textInterpolate1(" ", (data_r7 == null ? null : data_r7.organiser == null ? null : data_r7.organiser.email) || (data_r7 == null ? null : data_r7.host), " ");
   }
 }
 function CateringOrderListComponent_ng_template_21_button_8_Template(rf, ctx) {
   if (rf & 1) {
-    const _r7 = \u0275\u0275getCurrentView();
+    const _r8 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "button", 23);
     \u0275\u0275listener("click", function CateringOrderListComponent_ng_template_21_button_8_Template_button_click_0_listener() {
-      const status_r8 = \u0275\u0275restoreView(_r7).$implicit;
-      const row_r9 = \u0275\u0275nextContext().row;
+      const status_r9 = \u0275\u0275restoreView(_r8).$implicit;
+      const row_r10 = \u0275\u0275nextContext().row;
       const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.updateStatus(row_r9, status_r8.id));
+      return \u0275\u0275resetView(ctx_r2.updateStatus(row_r10, status_r9.id));
     });
     \u0275\u0275elementStart(1, "div", 24);
     \u0275\u0275element(2, "div", 25);
@@ -2827,11 +2856,11 @@ function CateringOrderListComponent_ng_template_21_button_8_Template(rf, ctx) {
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
-    const status_r8 = ctx.$implicit;
+    const status_r9 = ctx.$implicit;
     \u0275\u0275advance(2);
-    \u0275\u0275styleProp("background-color", status_r8.colour);
+    \u0275\u0275styleProp("background-color", status_r9.colour);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(status_r8.name);
+    \u0275\u0275textInterpolate(status_r9.name);
   }
 }
 function CateringOrderListComponent_ng_template_21_Template(rf, ctx) {
@@ -2849,14 +2878,14 @@ function CateringOrderListComponent_ng_template_21_Template(rf, ctx) {
   if (rf & 2) {
     let tmp_11_0;
     let tmp_13_0;
-    const data_r10 = ctx.data;
-    const menu_r11 = \u0275\u0275reference(7);
+    const data_r11 = ctx.data;
+    const menu_r12 = \u0275\u0275reference(7);
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275styleProp("background", (tmp_11_0 = ctx_r2.status(data_r10)) == null ? null : tmp_11_0.colour);
-    \u0275\u0275property("matMenuTriggerFor", menu_r11);
+    \u0275\u0275styleProp("background", (tmp_11_0 = ctx_r2.status(data_r11)) == null ? null : tmp_11_0.colour);
+    \u0275\u0275property("matMenuTriggerFor", menu_r12);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", (tmp_13_0 = ctx_r2.status(data_r10)) == null ? null : tmp_13_0.name, " ");
+    \u0275\u0275textInterpolate1(" ", (tmp_13_0 = ctx_r2.status(data_r11)) == null ? null : tmp_13_0.name, " ");
     \u0275\u0275advance(5);
     \u0275\u0275property("ngForOf", ctx_r2.statuses);
   }
@@ -2872,38 +2901,38 @@ function CateringOrderListComponent_ng_template_23_ng_template_4_Template(rf, ct
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const row_r13 = \u0275\u0275nextContext().row;
+    const row_r14 = \u0275\u0275nextContext().row;
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 2, "FORM.NOTES"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", row_r13.notes, " ");
+    \u0275\u0275textInterpolate1(" ", row_r14.notes, " ");
   }
 }
 function CateringOrderListComponent_ng_template_23_Template(rf, ctx) {
   if (rf & 1) {
-    const _r12 = \u0275\u0275getCurrentView();
+    const _r13 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 27)(1, "button", 28)(2, "app-icon");
     \u0275\u0275text(3, "description");
     \u0275\u0275elementEnd()();
     \u0275\u0275template(4, CateringOrderListComponent_ng_template_23_ng_template_4_Template, 6, 4, "ng-template", null, 8, \u0275\u0275templateRefExtractor);
     \u0275\u0275elementStart(6, "button", 29);
     \u0275\u0275listener("click", function CateringOrderListComponent_ng_template_23_Template_button_click_6_listener() {
-      const row_r13 = \u0275\u0275restoreView(_r12).row;
+      const row_r14 = \u0275\u0275restoreView(_r13).row;
       const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.show_children[row_r13.id] = !ctx_r2.show_children[row_r13.id]);
+      return \u0275\u0275resetView(ctx_r2.show_children[row_r14.id] = !ctx_r2.show_children[row_r14.id]);
     });
     \u0275\u0275elementStart(7, "app-icon");
     \u0275\u0275text(8);
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
-    const row_r13 = ctx.row;
-    const notes_template_r14 = \u0275\u0275reference(5);
+    const row_r14 = ctx.row;
+    const notes_template_r15 = \u0275\u0275reference(5);
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("hover", true)("content", notes_template_r14)("disabled", !row_r13.notes);
+    \u0275\u0275property("hover", true)("content", notes_template_r15)("disabled", !row_r14.notes);
     \u0275\u0275advance(7);
-    \u0275\u0275textInterpolate1(" ", ctx_r2.show_children[row_r13.id] ? "keyboard_arrow_down" : "chevron_right", " ");
+    \u0275\u0275textInterpolate1(" ", ctx_r2.show_children[row_r14.id] ? "keyboard_arrow_down" : "chevron_right", " ");
   }
 }
 function CateringOrderListComponent_ng_template_25_ul_0_li_1_Template(rf, ctx) {
@@ -2911,9 +2940,9 @@ function CateringOrderListComponent_ng_template_25_ul_0_li_1_Template(rf, ctx) {
     \u0275\u0275element(0, "li", 36);
   }
   if (rf & 2) {
-    const item_r15 = ctx.$implicit;
-    const row_r16 = \u0275\u0275nextContext(2).row;
-    \u0275\u0275property("order_id", row_r16 == null ? null : row_r16.id)("item", item_r15);
+    const item_r16 = ctx.$implicit;
+    const row_r17 = \u0275\u0275nextContext(2).row;
+    \u0275\u0275property("order_id", row_r17 == null ? null : row_r17.id)("item", item_r16);
   }
 }
 function CateringOrderListComponent_ng_template_25_ul_0_Template(rf, ctx) {
@@ -2923,9 +2952,9 @@ function CateringOrderListComponent_ng_template_25_ul_0_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const row_r16 = \u0275\u0275nextContext().row;
+    const row_r17 = \u0275\u0275nextContext().row;
     \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", row_r16.items);
+    \u0275\u0275property("ngForOf", row_r17.items);
   }
 }
 function CateringOrderListComponent_ng_template_25_Template(rf, ctx) {
@@ -2933,8 +2962,8 @@ function CateringOrderListComponent_ng_template_25_Template(rf, ctx) {
     \u0275\u0275template(0, CateringOrderListComponent_ng_template_25_ul_0_Template, 2, 1, "ul", 33);
   }
   if (rf & 2) {
-    const row_r16 = ctx.row;
-    \u0275\u0275property("ngIf", row_r16 == null ? null : row_r16.items.length);
+    const row_r17 = ctx.row;
+    \u0275\u0275property("ngIf", row_r17 == null ? null : row_r17.items.length);
   }
 }
 var CateringOrderListComponent = class _CateringOrderListComponent extends AsyncHandler {
@@ -2986,28 +3015,28 @@ var CateringOrderListComponent = class _CateringOrderListComponent extends Async
         \u0275\u0275pipe(10, "translate");
         \u0275\u0275pipe(11, "translate");
         \u0275\u0275pipe(12, "translate");
-        \u0275\u0275template(13, CateringOrderListComponent_ng_template_13_Template, 4, 0, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(15, CateringOrderListComponent_ng_template_15_Template, 11, 25, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(17, CateringOrderListComponent_ng_template_17_Template, 4, 2, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(19, CateringOrderListComponent_ng_template_19_Template, 6, 3, "ng-template", null, 3, \u0275\u0275templateRefExtractor)(21, CateringOrderListComponent_ng_template_21_Template, 9, 5, "ng-template", null, 4, \u0275\u0275templateRefExtractor)(23, CateringOrderListComponent_ng_template_23_Template, 9, 4, "ng-template", null, 5, \u0275\u0275templateRefExtractor)(25, CateringOrderListComponent_ng_template_25_Template, 1, 1, "ng-template", null, 6, \u0275\u0275templateRefExtractor);
+        \u0275\u0275template(13, CateringOrderListComponent_ng_template_13_Template, 4, 0, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(15, CateringOrderListComponent_ng_template_15_Template, 11, 25, "ng-template", null, 1, \u0275\u0275templateRefExtractor)(17, CateringOrderListComponent_ng_template_17_Template, 3, 2, "ng-template", null, 2, \u0275\u0275templateRefExtractor)(19, CateringOrderListComponent_ng_template_19_Template, 6, 3, "ng-template", null, 3, \u0275\u0275templateRefExtractor)(21, CateringOrderListComponent_ng_template_21_Template, 9, 5, "ng-template", null, 4, \u0275\u0275templateRefExtractor)(23, CateringOrderListComponent_ng_template_23_Template, 9, 4, "ng-template", null, 5, \u0275\u0275templateRefExtractor)(25, CateringOrderListComponent_ng_template_25_Template, 1, 1, "ng-template", null, 6, \u0275\u0275templateRefExtractor);
         \u0275\u0275elementEnd();
       }
       if (rf & 2) {
         let tmp_9_0;
-        const state_template_r17 = \u0275\u0275reference(14);
-        const time_template_r18 = \u0275\u0275reference(16);
-        const location_template_r19 = \u0275\u0275reference(18);
-        const host_template_r20 = \u0275\u0275reference(20);
-        const status_template_r21 = \u0275\u0275reference(22);
-        const actions_template_r22 = \u0275\u0275reference(24);
-        const child_template_r23 = \u0275\u0275reference(26);
+        const state_template_r18 = \u0275\u0275reference(14);
+        const time_template_r19 = \u0275\u0275reference(16);
+        const location_template_r20 = \u0275\u0275reference(18);
+        const host_template_r21 = \u0275\u0275reference(20);
+        const status_template_r22 = \u0275\u0275reference(22);
+        const actions_template_r23 = \u0275\u0275reference(24);
+        const child_template_r24 = \u0275\u0275reference(26);
         \u0275\u0275advance();
         \u0275\u0275classProp("opacity-0", !\u0275\u0275pipeBind1(2, 8, ctx.loading));
         \u0275\u0275advance(2);
-        \u0275\u0275property("data", ctx.order_list)("columns", \u0275\u0275pureFunctionV(51, _c8, [\u0275\u0275pureFunction1(28, _c05, state_template_r17), \u0275\u0275pureFunction2(30, _c14, \u0275\u0275pipeBind1(4, 10, "CATERING.CATERER"), !(ctx.filters == null ? null : ctx.filters.caterer) && ((tmp_9_0 = \u0275\u0275pipeBind1(5, 12, ctx.caterers)) == null ? null : tmp_9_0.length) > 1), \u0275\u0275pureFunction2(33, _c22, \u0275\u0275pipeBind1(6, 14, "COMMON.TIME"), time_template_r18), \u0275\u0275pureFunction2(36, _c32, \u0275\u0275pipeBind1(7, 16, "COMMON.LOCATION"), location_template_r19), \u0275\u0275pureFunction2(39, _c32, \u0275\u0275pipeBind1(8, 18, "FORM.HOST"), host_template_r20), \u0275\u0275pureFunction1(42, _c42, \u0275\u0275pipeBind1(9, 20, "CATERING.CHARGE_CODE")), \u0275\u0275pureFunction1(44, _c52, \u0275\u0275pipeBind1(10, 22, "CATERING.INVOICE_NUMBER")), \u0275\u0275pureFunction2(46, _c62, \u0275\u0275pipeBind1(11, 24, "COMMON.STATUS"), status_template_r21), \u0275\u0275pureFunction1(49, _c7, actions_template_r22)]))("sortable", true)("show_children", ctx.show_children)("child_template", child_template_r23)("empty_message", \u0275\u0275pipeBind1(12, 26, "CATERING.ORDERS_EMPTY"));
+        \u0275\u0275property("data", ctx.order_list)("columns", \u0275\u0275pureFunctionV(51, _c8, [\u0275\u0275pureFunction1(28, _c05, state_template_r18), \u0275\u0275pureFunction2(30, _c14, \u0275\u0275pipeBind1(4, 10, "CATERING.CATERER"), !(ctx.filters == null ? null : ctx.filters.caterer) && ((tmp_9_0 = \u0275\u0275pipeBind1(5, 12, ctx.caterers)) == null ? null : tmp_9_0.length) > 1), \u0275\u0275pureFunction2(33, _c22, \u0275\u0275pipeBind1(6, 14, "COMMON.TIME"), time_template_r19), \u0275\u0275pureFunction2(36, _c32, \u0275\u0275pipeBind1(7, 16, "COMMON.LOCATION"), location_template_r20), \u0275\u0275pureFunction2(39, _c32, \u0275\u0275pipeBind1(8, 18, "FORM.HOST"), host_template_r21), \u0275\u0275pureFunction1(42, _c42, \u0275\u0275pipeBind1(9, 20, "CATERING.CHARGE_CODE")), \u0275\u0275pureFunction1(44, _c52, \u0275\u0275pipeBind1(10, 22, "CATERING.INVOICE_NUMBER")), \u0275\u0275pureFunction2(46, _c62, \u0275\u0275pipeBind1(11, 24, "COMMON.STATUS"), status_template_r22), \u0275\u0275pureFunction1(49, _c7, actions_template_r23)]))("sortable", true)("show_children", ctx.show_children)("child_template", child_template_r24)("empty_message", \u0275\u0275pipeBind1(12, 26, "CATERING.ORDERS_EMPTY"));
       }
-    }, dependencies: [NgForOf, NgIf, MatMenu, MatMenuItem, MatMenuTrigger, IconComponent, CustomTooltipComponent, SimpleTableComponent, MatRipple, MatProgressBar, CateringOrderItemComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=catering-order-list.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatMenu, MatMenuItem, MatMenuTrigger, SimpleTableComponent, MatRipple, IconComponent, CustomTooltipComponent, MatProgressBar, CateringOrderItemComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=catering-order-list.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CateringOrderListComponent, { className: "CateringOrderListComponent", filePath: "libs/catering/src/lib/catering-order-list.component.ts", lineNumber: 234 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CateringOrderListComponent, { className: "CateringOrderListComponent", filePath: "libs/catering/src/lib/catering-order-list.component.ts", lineNumber: 238 });
 })();
 
 // libs/catering/src/lib/catering-order-modal/catering-order-state.service.ts
@@ -3255,7 +3284,7 @@ var CateringItemListItemComponent = class _CateringItemListItemComponent {
         \u0275\u0275advance(2);
         \u0275\u0275textInterpolate(ctx.favourite ? "favorite" : "favorite_border");
       }
-    }, dependencies: [NgIf, IconComponent, AuthenticatedImageDirective, MatRipple, CurrencyPipe], encapsulation: 2 });
+    }, dependencies: [NgIf, AuthenticatedImageDirective, MatRipple, IconComponent, CurrencyPipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -3812,7 +3841,7 @@ var CateringItemDetailsComponent = class _CateringItemDetailsComponent {
         const empty_state_r10 = \u0275\u0275reference(2);
         \u0275\u0275property("ngIf", ctx.item)("ngIfElse", empty_state_r10);
       }
-    }, dependencies: [NgForOf, NgIf, MatCheckbox, MatRadioGroup, MatRadioButton, NgControlStatus, NgModel, IconComponent, ImageCarouselComponent, MatRipple, CounterComponent, CurrencyPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 30%;\n  min-width: 20rem;\n  height: 100%;\n  min-height: 65vh;\n}\n/*# sourceMappingURL=catering-item-details.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatCheckbox, MatRadioGroup, MatRadioButton, NgControlStatus, NgModel, ImageCarouselComponent, MatRipple, IconComponent, CounterComponent, CurrencyPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 30%;\n  min-width: 20rem;\n  height: 100%;\n  min-height: 65vh;\n}\n/*# sourceMappingURL=catering-item-details.component.css.map */"] });
   }
 };
 (() => {
@@ -4190,7 +4219,7 @@ var CateringItemFiltersComponent = class _CateringItemFiltersComponent extends A
         \u0275\u0275advance();
         \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(14, 19, ctx.categories));
       }
-    }, dependencies: [NgForOf, NgIf, MatOption, MatCheckbox, MatTooltip, DefaultValueAccessor, NgControlStatus, NgModel, IconComponent, MatFormField, MatPrefix, MatSelect, MatInput, DurationFieldComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  min-width: 16rem;\n  overflow: auto;\n}\n/*# sourceMappingURL=catering-item-filters.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatOption, MatCheckbox, MatTooltip, DefaultValueAccessor, NgControlStatus, NgModel, MatFormField, MatPrefix, MatSelect, MatInput, IconComponent, DurationFieldComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  min-width: 16rem;\n  overflow: auto;\n}\n/*# sourceMappingURL=catering-item-filters.component.css.map */"] });
   }
 };
 (() => {
@@ -4380,7 +4409,7 @@ var NewCateringOrderModalComponent = class _NewCateringOrderModalComponent {
         \u0275\u0275advance(2);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(36, 40, ctx.isSelected(ctx.displayed == null ? null : ctx.displayed.custom_id) ? "COMMON.REMOVE_FROM" : "COMMON.ADD_TO"), " ");
       }
-    }, dependencies: [NgIf, MatDialogClose, IconComponent, MatRipple, CateringItemListComponent, CateringItemDetailsComponent, CateringItemFiltersComponent, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatDialogClose, MatRipple, IconComponent, CateringItemListComponent, CateringItemDetailsComponent, CateringItemFiltersComponent, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -4756,7 +4785,7 @@ var CateringListFieldComponent = class _CateringListFieldComponent {
         \u0275\u0275advance(5);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(8, 3, "CALENDAR_EVENT.CATERING_ORDER_ADD"), " ");
       }
-    }, dependencies: [NgForOf, NgIf, MatTooltip, IconComponent, MatRipple, CurrencyPipe, DatePipe, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
+    }, dependencies: [NgForOf, NgIf, MatTooltip, MatRipple, IconComponent, CurrencyPipe, DatePipe, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
   }
 };
 (() => {
@@ -4993,7 +5022,7 @@ code-2,Another Code`;
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", !ctx.loading);
       }
-    }, dependencies: [NgIf, MatDialogClose, MatTooltip, DefaultValueAccessor, NgControlStatus, NgModel, IconComponent, MatFormField, MatRipple, MatInput, MatProgressSpinner, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatDialogClose, MatTooltip, DefaultValueAccessor, NgControlStatus, NgModel, MatFormField, MatRipple, MatInput, MatProgressSpinner, IconComponent, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -6238,13 +6267,7 @@ var NewDeskFlowConfirmComponent = class _NewDeskFlowConfirmComponent extends Asy
     return `${level?.display_name || level?.name}${building ? "," : ""} ${building?.address || building?.display_name || building?.name || ""}`;
   }
   get formatted_recurrence() {
-    return formatRecurrence({
-      pattern: this.booking.recurrence_type,
-      start: this.booking.date,
-      end: this.booking.recurrence_end * 1e3,
-      interval: this.booking.recurrence_interval,
-      days_of_week: new Array(7).fill(0).map((_, i) => i).filter((i) => this.booking.recurrence_days & DAYS_OF_WEEK_INDEX[i])
-    });
+    return formatRecurrence(fromBookingRecurrence(this.booking));
   }
   constructor(_state, _org, _sheet_ref, _settings) {
     super();
@@ -6348,11 +6371,11 @@ var NewDeskFlowConfirmComponent = class _NewDeskFlowConfirmComponent extends Asy
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(33, 19, ctx.loading));
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, MatProgressSpinner, MatTooltip, AsyncPipe, DatePipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, MatRipple, MatProgressSpinner, MatTooltip, IconComponent, AsyncPipe, DatePipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewDeskFlowConfirmComponent, { className: "NewDeskFlowConfirmComponent", filePath: "apps/workplace/src/app/book/desk-flow/desk-flow-confirm.component.ts", lineNumber: 209 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewDeskFlowConfirmComponent, { className: "NewDeskFlowConfirmComponent", filePath: "apps/workplace/src/app/book/desk-flow/desk-flow-confirm.component.ts", lineNumber: 210 });
 })();
 
 // apps/workplace/src/app/book/desk-flow/desk-form-details.component.ts
@@ -6815,11 +6838,11 @@ var NewDeskFormDetailsComponent = class _NewDeskFormDetailsComponent extends Asy
       if (rf & 2) {
         \u0275\u0275property("ngIf", ctx.form);
       }
-    }, dependencies: [NgIf, IconComponent, MatFormField, MatError, MatRipple, MatInput, MatCheckbox, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, UserListFieldComponent, UserSearchFieldComponent, RecurrenceFieldComponent, DeskListFieldComponent, AssetListFieldComponent, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, AsyncPipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatFormField, MatError, MatRipple, MatInput, MatCheckbox, IconComponent, DateFieldComponent, DurationFieldComponent, RecurrenceFieldComponent, TimeFieldComponent, UserListFieldComponent, UserSearchFieldComponent, DeskListFieldComponent, AssetListFieldComponent, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, AsyncPipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewDeskFormDetailsComponent, { className: "NewDeskFormDetailsComponent", filePath: "apps/workplace/src/app/book/desk-flow/desk-form-details.component.ts", lineNumber: 260 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewDeskFormDetailsComponent, { className: "NewDeskFormDetailsComponent", filePath: "apps/workplace/src/app/book/desk-flow/desk-form-details.component.ts", lineNumber: 263 });
 })();
 
 // apps/workplace/src/app/book/desk-flow/desk-flow-form.component.ts
@@ -7140,7 +7163,7 @@ var NewDeskFlowSuccessComponent = class _NewDeskFlowSuccessComponent {
         \u0275\u0275advance();
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(13, 10, "APP.WORKPLACE.BOOKING_FINISHED"), " ");
       }
-    }, dependencies: [NgIf, IconComponent, MatRipple, RouterLink, DatePipe, SafePipe, SanitizePipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatRipple, IconComponent, RouterLink, DatePipe, SafePipe, SanitizePipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -7299,7 +7322,7 @@ var FlowSuccessComponent = class _FlowSuccessComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(11, _c27))("queryParams", \u0275\u0275pureFunction1(12, _c35, ctx.calendar));
       }
-    }, dependencies: [NgIf, IconComponent, MatRipple, RouterLink], encapsulation: 2 });
+    }, dependencies: [NgIf, MatRipple, IconComponent, RouterLink], encapsulation: 2 });
   }
 };
 (() => {
@@ -7503,7 +7526,7 @@ var BookLockerFlowConfirmComponent = class _BookLockerFlowConfirmComponent exten
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(31, 23, ctx.loading));
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, MatProgressSpinner, AsyncPipe, DatePipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, MatRipple, MatProgressSpinner, IconComponent, AsyncPipe, DatePipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -7995,7 +8018,7 @@ var BookLockerFlowSuccessComponent = class _BookLockerFlowSuccessComponent {
         \u0275\u0275advance();
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(16, 20, "APP.WORKPLACE.BOOKING_FINISHED"), " ");
       }
-    }, dependencies: [NgIf, IconComponent, MatRipple, RouterLink, DatePipe, SafePipe, SanitizePipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatRipple, IconComponent, RouterLink, DatePipe, SafePipe, SanitizePipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -8129,7 +8152,7 @@ var _c019 = (a0) => ({ count: a0 });
 var _c113 = (a0) => ({ time: a0 });
 function MeetingFlowConfirmModalComponent_button_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "button", 21)(1, "app-icon");
+    \u0275\u0275elementStart(0, "button", 22)(1, "app-icon");
     \u0275\u0275text(2, "close");
     \u0275\u0275elementEnd()();
   }
@@ -8151,7 +8174,7 @@ function MeetingFlowConfirmModalComponent_div_21_Template(rf, ctx) {
 }
 function MeetingFlowConfirmModalComponent_div_28_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 22);
+    \u0275\u0275elementStart(0, "div", 23);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -8209,7 +8232,7 @@ function MeetingFlowConfirmModalComponent_div_29_Template(rf, ctx) {
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275template(7, MeetingFlowConfirmModalComponent_div_29_ng_container_7_Template, 11, 8, "ng-container", 23)(8, MeetingFlowConfirmModalComponent_div_29_div_8_Template, 5, 1, "div", 13);
+    \u0275\u0275template(7, MeetingFlowConfirmModalComponent_div_29_ng_container_7_Template, 11, 8, "ng-container", 24)(8, MeetingFlowConfirmModalComponent_div_29_div_8_Template, 5, 1, "div", 13);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -8224,7 +8247,7 @@ function MeetingFlowConfirmModalComponent_div_29_Template(rf, ctx) {
 }
 function MeetingFlowConfirmModalComponent_div_30_mat_chip_10_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-chip")(1, "div", 27)(2, "app-icon", 28);
+    \u0275\u0275elementStart(0, "mat-chip")(1, "div", 28)(2, "app-icon", 29);
     \u0275\u0275text(3, "business");
     \u0275\u0275elementEnd();
     \u0275\u0275text(4);
@@ -8238,15 +8261,15 @@ function MeetingFlowConfirmModalComponent_div_30_mat_chip_10_Template(rf, ctx) {
 }
 function MeetingFlowConfirmModalComponent_div_30_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 24)(1, "div", 8)(2, "app-icon");
+    \u0275\u0275elementStart(0, "div", 25)(1, "div", 8)(2, "app-icon");
     \u0275\u0275text(3, "done");
     \u0275\u0275elementEnd()();
     \u0275\u0275elementStart(4, "h3", 9);
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "div", 25)(8, "mat-chip-list", 26, 0);
-    \u0275\u0275template(10, MeetingFlowConfirmModalComponent_div_30_mat_chip_10_Template, 5, 1, "mat-chip", 23);
+    \u0275\u0275elementStart(7, "div", 26)(8, "mat-chip-list", 27, 0);
+    \u0275\u0275template(10, MeetingFlowConfirmModalComponent_div_30_mat_chip_10_Template, 5, 1, "mat-chip", 24);
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
@@ -8259,7 +8282,7 @@ function MeetingFlowConfirmModalComponent_div_30_Template(rf, ctx) {
 }
 function MeetingFlowConfirmModalComponent_div_31_div_1_div_8_div_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 41)(1, "app-icon");
+    \u0275\u0275elementStart(0, "div", 42)(1, "app-icon");
     \u0275\u0275text(2, "priority_high");
     \u0275\u0275elementEnd()();
   }
@@ -8270,7 +8293,7 @@ function MeetingFlowConfirmModalComponent_div_31_div_1_div_8_div_7_Template(rf, 
 }
 function MeetingFlowConfirmModalComponent_div_31_div_1_div_8_div_16_span_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 45);
+    \u0275\u0275elementStart(0, "span", 46);
     \u0275\u0275text(1);
     \u0275\u0275pipe(2, "translate");
     \u0275\u0275elementEnd();
@@ -8285,19 +8308,19 @@ function MeetingFlowConfirmModalComponent_div_31_div_1_div_8_div_16_span_4_Templ
 }
 function MeetingFlowConfirmModalComponent_div_31_div_1_div_8_div_16_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 42)(1, "div", 43)(2, "span", 34);
+    \u0275\u0275elementStart(0, "div", 43)(1, "div", 44)(2, "span", 35);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(4, MeetingFlowConfirmModalComponent_div_31_div_1_div_8_div_16_span_4_Template, 3, 7, "span", 44);
+    \u0275\u0275template(4, MeetingFlowConfirmModalComponent_div_31_div_1_div_8_div_16_span_4_Template, 3, 7, "span", 45);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 37);
+    \u0275\u0275elementStart(5, "div", 38);
     \u0275\u0275text(6);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "div", 38);
+    \u0275\u0275elementStart(7, "div", 39);
     \u0275\u0275text(8);
     \u0275\u0275pipe(9, "currency");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "div", 38);
+    \u0275\u0275elementStart(10, "div", 39);
     \u0275\u0275text(11);
     \u0275\u0275pipe(12, "currency");
     \u0275\u0275elementEnd()();
@@ -8319,23 +8342,23 @@ function MeetingFlowConfirmModalComponent_div_31_div_1_div_8_div_16_Template(rf,
 }
 function MeetingFlowConfirmModalComponent_div_31_div_1_div_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 31)(1, "div", 32)(2, "div", 33)(3, "div", 34);
+    \u0275\u0275elementStart(0, "div", 32)(1, "div", 33)(2, "div", 34)(3, "div", 35);
     \u0275\u0275text(4);
     \u0275\u0275pipe(5, "date");
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275template(7, MeetingFlowConfirmModalComponent_div_31_div_1_div_8_div_7_Template, 3, 1, "div", 35);
-    \u0275\u0275element(8, "div", 36);
-    \u0275\u0275elementStart(9, "div", 37);
+    \u0275\u0275template(7, MeetingFlowConfirmModalComponent_div_31_div_1_div_8_div_7_Template, 3, 1, "div", 36);
+    \u0275\u0275element(8, "div", 37);
+    \u0275\u0275elementStart(9, "div", 38);
     \u0275\u0275text(10);
     \u0275\u0275pipe(11, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "div", 38);
+    \u0275\u0275elementStart(12, "div", 39);
     \u0275\u0275text(13);
     \u0275\u0275pipe(14, "currency");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(15, "div", 39);
-    \u0275\u0275template(16, MeetingFlowConfirmModalComponent_div_31_div_1_div_8_div_16_Template, 13, 11, "div", 40);
+    \u0275\u0275elementStart(15, "div", 40);
+    \u0275\u0275template(16, MeetingFlowConfirmModalComponent_div_31_div_1_div_8_div_16_Template, 13, 11, "div", 41);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
@@ -8363,8 +8386,8 @@ function MeetingFlowConfirmModalComponent_div_31_div_1_Template(rf, ctx) {
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "div", 29);
-    \u0275\u0275template(8, MeetingFlowConfirmModalComponent_div_31_div_1_div_8_Template, 17, 25, "div", 30);
+    \u0275\u0275elementStart(7, "div", 30);
+    \u0275\u0275template(8, MeetingFlowConfirmModalComponent_div_31_div_1_div_8_Template, 17, 25, "div", 31);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
@@ -8377,7 +8400,7 @@ function MeetingFlowConfirmModalComponent_div_31_div_1_Template(rf, ctx) {
 }
 function MeetingFlowConfirmModalComponent_div_31_div_2_div_7_div_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 41)(1, "app-icon");
+    \u0275\u0275elementStart(0, "div", 42)(1, "app-icon");
     \u0275\u0275text(2, "priority_high");
     \u0275\u0275elementEnd()();
   }
@@ -8389,10 +8412,10 @@ function MeetingFlowConfirmModalComponent_div_31_div_2_div_7_div_7_Template(rf, 
 }
 function MeetingFlowConfirmModalComponent_div_31_div_2_div_7_div_13_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 42)(1, "div", 43)(2, "span", 34);
+    \u0275\u0275elementStart(0, "div", 43)(1, "div", 44)(2, "span", 35);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(4, "div", 37);
+    \u0275\u0275elementStart(4, "div", 38);
     \u0275\u0275text(5);
     \u0275\u0275elementEnd()();
   }
@@ -8406,19 +8429,19 @@ function MeetingFlowConfirmModalComponent_div_31_div_2_div_7_div_13_Template(rf,
 }
 function MeetingFlowConfirmModalComponent_div_31_div_2_div_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 47)(1, "div", 32)(2, "div", 33)(3, "div", 34);
+    \u0275\u0275elementStart(0, "div", 48)(1, "div", 33)(2, "div", 34)(3, "div", 35);
     \u0275\u0275text(4);
     \u0275\u0275pipe(5, "date");
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275template(7, MeetingFlowConfirmModalComponent_div_31_div_2_div_7_div_7_Template, 3, 1, "div", 35);
-    \u0275\u0275element(8, "div", 36);
-    \u0275\u0275elementStart(9, "div", 37);
+    \u0275\u0275template(7, MeetingFlowConfirmModalComponent_div_31_div_2_div_7_div_7_Template, 3, 1, "div", 36);
+    \u0275\u0275element(8, "div", 37);
+    \u0275\u0275elementStart(9, "div", 38);
     \u0275\u0275text(10);
     \u0275\u0275pipe(11, "translate");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(12, "div", 39);
-    \u0275\u0275template(13, MeetingFlowConfirmModalComponent_div_31_div_2_div_7_div_13_Template, 6, 2, "div", 40);
+    \u0275\u0275elementStart(12, "div", 40);
+    \u0275\u0275template(13, MeetingFlowConfirmModalComponent_div_31_div_2_div_7_div_13_Template, 6, 2, "div", 41);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
@@ -8444,7 +8467,7 @@ function MeetingFlowConfirmModalComponent_div_31_div_2_Template(rf, ctx) {
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275template(7, MeetingFlowConfirmModalComponent_div_31_div_2_div_7_Template, 14, 21, "div", 46);
+    \u0275\u0275template(7, MeetingFlowConfirmModalComponent_div_31_div_2_div_7_Template, 14, 21, "div", 47);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -8475,14 +8498,14 @@ function MeetingFlowConfirmModalComponent_div_31_Template(rf, ctx) {
 }
 function MeetingFlowConfirmModalComponent_div_32_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 24)(1, "div", 8)(2, "app-icon");
+    \u0275\u0275elementStart(0, "div", 25)(1, "div", 8)(2, "app-icon");
     \u0275\u0275text(3, "done");
     \u0275\u0275elementEnd()();
     \u0275\u0275elementStart(4, "h3", 9);
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(7, "div", 48);
+    \u0275\u0275element(7, "div", 49);
     \u0275\u0275pipe(8, "sanitize");
     \u0275\u0275elementEnd();
   }
@@ -8494,11 +8517,23 @@ function MeetingFlowConfirmModalComponent_div_32_Template(rf, ctx) {
     \u0275\u0275property("innerHTML", \u0275\u0275pipeBind1(8, 4, ctx_r0.event.body), \u0275\u0275sanitizeHtml);
   }
 }
-function MeetingFlowConfirmModalComponent_footer_33_Template(rf, ctx) {
+function MeetingFlowConfirmModalComponent_div_33_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 50);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.APPROVAL_REQUIRED_MSG"), " ");
+  }
+}
+function MeetingFlowConfirmModalComponent_footer_34_Template(rf, ctx) {
   if (rf & 1) {
     const _r10 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "footer", 49)(1, "button", 50);
-    \u0275\u0275listener("click", function MeetingFlowConfirmModalComponent_footer_33_Template_button_click_1_listener() {
+    \u0275\u0275elementStart(0, "footer", 51)(1, "button", 52);
+    \u0275\u0275listener("click", function MeetingFlowConfirmModalComponent_footer_34_Template_button_click_1_listener() {
       \u0275\u0275restoreView(_r10);
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.postForm());
@@ -8515,6 +8550,9 @@ function MeetingFlowConfirmModalComponent_footer_33_Template(rf, ctx) {
 var MeetingFlowConfirmModalComponent = class _MeetingFlowConfirmModalComponent extends AsyncHandler {
   err_tooltip(request) {
     return request.conflict ? i18n("FORM.ASSETS_CLASH_ERROR") : i18n("FORM.ASSETS_TIME_ERROR");
+  }
+  get requires_approval() {
+    return this.event.resources.some((s) => s.approval);
   }
   get has_assets() {
     return !!this._settings.get("app.events.has_assets");
@@ -8573,9 +8611,9 @@ var MeetingFlowConfirmModalComponent = class _MeetingFlowConfirmModalComponent e
     return this._org.currency_code;
   }
   get formatted_recurrence() {
-    return formatRecurrence(__spreadProps(__spreadValues({}, this.event.recurrence), {
+    return formatRecurrence(fromEventRecurrence(__spreadProps(__spreadValues({}, this.event.recurrence), {
       start: this.event.date || this.event.recurrence.start
-    }));
+    })));
   }
   constructor(_event_form, _org, _space_pipe, _dialog_ref, _dialog, _settings) {
     super();
@@ -8657,7 +8695,7 @@ var MeetingFlowConfirmModalComponent = class _MeetingFlowConfirmModalComponent e
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MeetingFlowConfirmModalComponent, selectors: [["meeting-flow-confirm-modal"]], inputs: { show_close: "show_close" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe]), \u0275\u0275InheritDefinitionFeature], decls: 35, vars: 23, consts: [["chipList", ""], ["header", "", 1, "relative", "flex", "items-center", "justify-center", "border-b", "border-base-200", "p-4"], ["icon", "", "name", "close-meeting-confirm", "matRipple", "", "mat-dialog-close", "", "class", "absolute left-2 top-1/2 -translate-y-1/2", 4, "ngIf"], [1, "text-xl", "font-medium"], ["diameter", "32", 1, "absolute", "right-2", "top-1/2", "-translate-y-1/2"], [1, "max-h-[65vh]", "min-w-[48rem]", "flex-1", "space-y-4", "divide-y", "divide-base-200", "overflow-auto", "p-4"], [1, "flex", "divide-x", "divide-base-200"], [1, "relative", "flex-1", "space-y-2", "py-4", "pl-16", "pr-4"], [1, "absolute", "left-4", "top-4", "flex", "items-center", "justify-center", "rounded-full", "border", "border-success", "text-2xl", "text-success"], [1, "!mt-0", "text-xl"], [1, "flex", "items-center", "space-x-2"], [1, "text-2xl"], ["date", ""], ["class", "flex items-center space-x-2", 4, "ngIf"], [1, "flex", "flex-col", "leading-tight"], ["time", ""], ["class", "text-xs opacity-30", 4, "ngIf"], ["class", "relative flex-1 space-y-2 py-4 pl-16 pr-4", 4, "ngIf"], ["class", "relative space-y-2 py-4 pl-16 pr-4", 4, "ngIf"], ["class", "flex divide-x divide-base-200", 4, "ngIf"], ["class", "flex items-center justify-end border-t border-base-200 p-2", 4, "ngIf"], ["icon", "", "name", "close-meeting-confirm", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "left-2", "top-1/2", "-translate-y-1/2"], [1, "text-xs", "opacity-30"], [4, "ngFor", "ngForOf"], [1, "relative", "space-y-2", "py-4", "pl-16", "pr-4"], ["attendee-list", ""], ["aria-label", "User selection"], [1, "flex", "items-center"], [1, "mr-2"], [1, "flex", "flex-col", "space-y-2"], ["order", "", "class", "overflow-hidden rounded-xl border bg-base-100", 3, "border-error", "border-base-300", 4, "ngFor", "ngForOf"], ["order", "", 1, "overflow-hidden", "rounded-xl", "border", "bg-base-100"], [1, "flex", "items-center", "space-x-2", "p-3"], [1, "flex", "flex-1", "items-center", "space-x-2"], [1, "text-sm"], ["class", "flex h-6 w-6 items-center justify-center rounded-full bg-error text-error-content", 3, "matTooltip", 4, "ngIf"], [1, "flex-1"], [1, "rounded", "bg-success", "px-2", "py-1", "text-xs", "text-success-content"], [1, "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content"], [1, "flex", "flex-col", "divide-y", "divide-base-100", "bg-base-200"], ["class", "flex items-center space-x-2 px-3 py-1 hover:opacity-90", 4, "ngFor", "ngForOf"], [1, "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", "bg-error", "text-error-content", 3, "matTooltip"], [1, "flex", "items-center", "space-x-2", "px-3", "py-1", "hover:opacity-90"], [1, "flex", "flex-1", "items-center"], ["class", "ml-4 text-xs font-normal opacity-60", 3, "matTooltip", 4, "ngIf"], [1, "ml-4", "text-xs", "font-normal", "opacity-60", 3, "matTooltip"], ["request", "", "class", "overflow-hidden rounded-xl border bg-base-100", 3, "border-error", "border-base-300", 4, "ngFor", "ngForOf"], ["request", "", 1, "overflow-hidden", "rounded-xl", "border", "bg-base-100"], [3, "innerHTML"], [1, "flex", "items-center", "justify-end", "border-t", "border-base-200", "p-2"], ["btn", "", "name", "confirm-meeting", "matRipple", "", 1, "w-32", 3, "click"]], template: function MeetingFlowConfirmModalComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MeetingFlowConfirmModalComponent, selectors: [["meeting-flow-confirm-modal"]], inputs: { show_close: "show_close" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe]), \u0275\u0275InheritDefinitionFeature], decls: 36, vars: 24, consts: [["chipList", ""], ["header", "", 1, "relative", "flex", "items-center", "justify-center", "border-b", "border-base-200", "p-4"], ["icon", "", "name", "close-meeting-confirm", "matRipple", "", "mat-dialog-close", "", "class", "absolute left-2 top-1/2 -translate-y-1/2", 4, "ngIf"], [1, "text-xl", "font-medium"], ["diameter", "32", 1, "absolute", "right-2", "top-1/2", "-translate-y-1/2"], [1, "max-h-[65vh]", "min-w-[48rem]", "flex-1", "space-y-4", "divide-y", "divide-base-200", "overflow-auto", "p-4"], [1, "flex", "divide-x", "divide-base-200"], [1, "relative", "flex-1", "space-y-2", "py-4", "pl-16", "pr-4"], [1, "absolute", "left-4", "top-4", "flex", "items-center", "justify-center", "rounded-full", "border", "border-success", "text-2xl", "text-success"], [1, "!mt-0", "text-xl"], [1, "flex", "items-center", "space-x-2"], [1, "text-2xl"], ["date", ""], ["class", "flex items-center space-x-2", 4, "ngIf"], [1, "flex", "flex-col", "leading-tight"], ["time", ""], ["class", "text-xs opacity-30", 4, "ngIf"], ["class", "relative flex-1 space-y-2 py-4 pl-16 pr-4", 4, "ngIf"], ["class", "relative space-y-2 py-4 pl-16 pr-4", 4, "ngIf"], ["class", "flex divide-x divide-base-200", 4, "ngIf"], ["class", "mt-2 rounded !border-none bg-warning px-2 py-1 text-center text-sm text-warning-content", 4, "ngIf"], ["class", "flex items-center justify-end border-t border-base-200 p-2", 4, "ngIf"], ["icon", "", "name", "close-meeting-confirm", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "left-2", "top-1/2", "-translate-y-1/2"], [1, "text-xs", "opacity-30"], [4, "ngFor", "ngForOf"], [1, "relative", "space-y-2", "py-4", "pl-16", "pr-4"], ["attendee-list", ""], ["aria-label", "User selection"], [1, "flex", "items-center"], [1, "mr-2"], [1, "flex", "flex-col", "space-y-2"], ["order", "", "class", "overflow-hidden rounded-xl border bg-base-100", 3, "border-error", "border-base-300", 4, "ngFor", "ngForOf"], ["order", "", 1, "overflow-hidden", "rounded-xl", "border", "bg-base-100"], [1, "flex", "items-center", "space-x-2", "p-3"], [1, "flex", "flex-1", "items-center", "space-x-2"], [1, "text-sm"], ["class", "flex h-6 w-6 items-center justify-center rounded-full bg-error text-error-content", 3, "matTooltip", 4, "ngIf"], [1, "flex-1"], [1, "rounded", "bg-success", "px-2", "py-1", "text-xs", "text-success-content"], [1, "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content"], [1, "flex", "flex-col", "divide-y", "divide-base-100", "bg-base-200"], ["class", "flex items-center space-x-2 px-3 py-1 hover:opacity-90", 4, "ngFor", "ngForOf"], [1, "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", "bg-error", "text-error-content", 3, "matTooltip"], [1, "flex", "items-center", "space-x-2", "px-3", "py-1", "hover:opacity-90"], [1, "flex", "flex-1", "items-center"], ["class", "ml-4 text-xs font-normal opacity-60", 3, "matTooltip", 4, "ngIf"], [1, "ml-4", "text-xs", "font-normal", "opacity-60", 3, "matTooltip"], ["request", "", "class", "overflow-hidden rounded-xl border bg-base-100", 3, "border-error", "border-base-300", 4, "ngFor", "ngForOf"], ["request", "", 1, "overflow-hidden", "rounded-xl", "border", "bg-base-100"], [3, "innerHTML"], [1, "mt-2", "rounded", "!border-none", "bg-warning", "px-2", "py-1", "text-center", "text-sm", "text-warning-content"], [1, "flex", "items-center", "justify-end", "border-t", "border-base-200", "p-2"], ["btn", "", "name", "confirm-meeting", "matRipple", "", 1, "w-32", 3, "click"]], template: function MeetingFlowConfirmModalComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 1);
         \u0275\u0275template(1, MeetingFlowConfirmModalComponent_button_1_Template, 3, 0, "button", 2);
@@ -8692,22 +8730,22 @@ var MeetingFlowConfirmModalComponent = class _MeetingFlowConfirmModalComponent e
         \u0275\u0275elementEnd()()();
         \u0275\u0275template(29, MeetingFlowConfirmModalComponent_div_29_Template, 9, 5, "div", 17);
         \u0275\u0275elementEnd();
-        \u0275\u0275template(30, MeetingFlowConfirmModalComponent_div_30_Template, 11, 7, "div", 18)(31, MeetingFlowConfirmModalComponent_div_31_Template, 3, 2, "div", 19)(32, MeetingFlowConfirmModalComponent_div_32_Template, 9, 6, "div", 18);
+        \u0275\u0275template(30, MeetingFlowConfirmModalComponent_div_30_Template, 11, 7, "div", 18)(31, MeetingFlowConfirmModalComponent_div_31_Template, 3, 2, "div", 19)(32, MeetingFlowConfirmModalComponent_div_32_Template, 9, 6, "div", 18)(33, MeetingFlowConfirmModalComponent_div_33_Template, 3, 3, "div", 20);
         \u0275\u0275elementEnd();
-        \u0275\u0275template(33, MeetingFlowConfirmModalComponent_footer_33_Template, 4, 3, "footer", 20);
-        \u0275\u0275pipe(34, "async");
+        \u0275\u0275template(34, MeetingFlowConfirmModalComponent_footer_34_Template, 4, 3, "footer", 21);
+        \u0275\u0275pipe(35, "async");
       }
       if (rf & 2) {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.show_close);
         \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 14, "APP.WORKPLACE.MEETING_CONFIRM"), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 15, "APP.WORKPLACE.MEETING_CONFIRM"), " ");
         \u0275\u0275advance(2);
-        \u0275\u0275classProp("opacity-0", !\u0275\u0275pipeBind1(6, 16, ctx.loading));
+        \u0275\u0275classProp("opacity-0", !\u0275\u0275pipeBind1(6, 17, ctx.loading));
         \u0275\u0275advance(9);
         \u0275\u0275textInterpolate1(" ", ctx.event.title || "Meeting Details", " ");
         \u0275\u0275advance(5);
-        \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(20, 18, ctx.event.date, "fullDate"));
+        \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(20, 19, ctx.event.date, "fullDate"));
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ctx.event.recurrence == null ? null : ctx.event.recurrence.pattern);
         \u0275\u0275advance(6);
@@ -8723,13 +8761,15 @@ var MeetingFlowConfirmModalComponent = class _MeetingFlowConfirmModalComponent e
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.event.body);
         \u0275\u0275advance();
-        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(34, 21, ctx.loading));
+        \u0275\u0275property("ngIf", ctx.requires_approval);
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(35, 22, ctx.loading));
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, MatDialogClose, MatProgressSpinner, MatChip, MatTooltip, AsyncPipe, CurrencyPipe, DatePipe, SanitizePipe, LevelPipe, TranslatePipe, SpacePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, MatRipple, MatDialogClose, MatProgressSpinner, MatChip, MatTooltip, IconComponent, AsyncPipe, CurrencyPipe, DatePipe, SanitizePipe, LevelPipe, TranslatePipe, SpacePipe], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MeetingFlowConfirmModalComponent, { className: "MeetingFlowConfirmModalComponent", filePath: "apps/workplace/src/app/book/meeting-flow/meeting-flow-confirm-modal.component.ts", lineNumber: 380 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MeetingFlowConfirmModalComponent, { className: "MeetingFlowConfirmModalComponent", filePath: "apps/workplace/src/app/book/meeting-flow/meeting-flow-confirm-modal.component.ts", lineNumber: 388 });
 })();
 
 // apps/workplace/src/app/book/meeting-flow/meeting-flow-confirm.component.ts
@@ -8737,20 +8777,20 @@ var _c020 = (a0) => ({ count: a0 });
 function MeetingFlowConfirmComponent_button_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 18);
+    \u0275\u0275elementStart(0, "button", 20);
     \u0275\u0275listener("click", function MeetingFlowConfirmComponent_button_0_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.dismiss());
     });
-    \u0275\u0275elementStart(1, "app-icon");
+    \u0275\u0275elementStart(1, "icon", 8);
     \u0275\u0275text(2, "close");
     \u0275\u0275elementEnd()();
   }
 }
 function MeetingFlowConfirmComponent_mat_spinner_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "mat-spinner", 19);
+    \u0275\u0275element(0, "mat-spinner", 21);
   }
 }
 function MeetingFlowConfirmComponent_div_19_Template(rf, ctx) {
@@ -8770,7 +8810,7 @@ function MeetingFlowConfirmComponent_div_19_Template(rf, ctx) {
 }
 function MeetingFlowConfirmComponent_div_26_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 20);
+    \u0275\u0275elementStart(0, "div", 22);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -8782,7 +8822,7 @@ function MeetingFlowConfirmComponent_div_26_Template(rf, ctx) {
 }
 function MeetingFlowConfirmComponent_section_27_mat_chip_10_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-chip")(1, "div", 25)(2, "app-icon", 26);
+    \u0275\u0275elementStart(0, "mat-chip")(1, "div", 27)(2, "app-icon", 28);
     \u0275\u0275text(3, "business");
     \u0275\u0275elementEnd();
     \u0275\u0275text(4);
@@ -8796,15 +8836,15 @@ function MeetingFlowConfirmComponent_section_27_mat_chip_10_Template(rf, ctx) {
 }
 function MeetingFlowConfirmComponent_section_27_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "section", 21)(1, "app-icon", 5);
+    \u0275\u0275elementStart(0, "section", 23)(1, "app-icon", 5);
     \u0275\u0275text(2, "done");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(3, "div", 6)(4, "h3");
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "div", 22)(8, "mat-chip-list", 23, 0);
-    \u0275\u0275template(10, MeetingFlowConfirmComponent_section_27_mat_chip_10_Template, 5, 1, "mat-chip", 24);
+    \u0275\u0275elementStart(7, "div", 24)(8, "mat-chip-list", 25, 0);
+    \u0275\u0275template(10, MeetingFlowConfirmComponent_section_27_mat_chip_10_Template, 5, 1, "mat-chip", 26);
     \u0275\u0275elementEnd()()()();
   }
   if (rf & 2) {
@@ -8835,14 +8875,14 @@ function MeetingFlowConfirmComponent_section_28_ng_container_7_Template(rf, ctx)
 }
 function MeetingFlowConfirmComponent_section_28_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "section", 27)(1, "app-icon", 5);
+    \u0275\u0275elementStart(0, "section", 29)(1, "app-icon", 5);
     \u0275\u0275text(2, "done");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(3, "div", 6)(4, "h3");
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275template(7, MeetingFlowConfirmComponent_section_28_ng_container_7_Template, 6, 2, "ng-container", 24);
+    \u0275\u0275template(7, MeetingFlowConfirmComponent_section_28_ng_container_7_Template, 6, 2, "ng-container", 26);
     \u0275\u0275elementStart(8, "div", 7)(9, "app-icon", 8);
     \u0275\u0275text(10, "place");
     \u0275\u0275elementEnd();
@@ -8860,11 +8900,23 @@ function MeetingFlowConfirmComponent_section_28_Template(rf, ctx) {
     \u0275\u0275textInterpolate(ctx_r1.location);
   }
 }
-function MeetingFlowConfirmComponent_button_30_Template(rf, ctx) {
+function MeetingFlowConfirmComponent_div_30_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 30);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "CALENDAR_EVENT.APPROVAL_REQUIRED_MSG"), " ");
+  }
+}
+function MeetingFlowConfirmComponent_button_32_Template(rf, ctx) {
   if (rf & 1) {
     const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 28);
-    \u0275\u0275listener("click", function MeetingFlowConfirmComponent_button_30_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 31);
+    \u0275\u0275listener("click", function MeetingFlowConfirmComponent_button_32_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r5);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.postForm());
@@ -8879,6 +8931,9 @@ function MeetingFlowConfirmComponent_button_30_Template(rf, ctx) {
   }
 }
 var MeetingFlowConfirmComponent = class _MeetingFlowConfirmComponent extends AsyncHandler {
+  get requires_approval() {
+    return this.event.resources.some((s) => s.approval);
+  }
   formattedTime(tz) {
     const date = this.event.date;
     const date_end = this.event.date_end;
@@ -8911,9 +8966,9 @@ var MeetingFlowConfirmComponent = class _MeetingFlowConfirmComponent extends Asy
     return getTimezoneOffsetString(tz);
   }
   get formatted_recurrence() {
-    return formatRecurrence(__spreadProps(__spreadValues({}, this.event.recurrence), {
+    return formatRecurrence(fromEventRecurrence(__spreadProps(__spreadValues({}, this.event.recurrence), {
       start: this.event.date || this.event.recurrence.start
-    }));
+    })));
   }
   get event() {
     return this._event_form.form.getRawValue();
@@ -8973,7 +9028,7 @@ var MeetingFlowConfirmComponent = class _MeetingFlowConfirmComponent extends Asy
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MeetingFlowConfirmComponent, selectors: [["meeting-flow-confirm"]], inputs: { show_close: "show_close" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe]), \u0275\u0275InheritDefinitionFeature], decls: 32, vars: 20, consts: [["chipList", ""], ["icon", "", "matRipple", "", "name", "close-meeting-confirm", 3, "click", 4, "ngIf"], [1, "flex", "items-center", "justify-between", "px-2"], ["diameter", "32", 4, "ngIf"], ["period", "", 1, "flex", "space-x-1", "px-2"], [1, "mt-1", "text-success"], ["details", "", 1, "leading-6"], [1, "flex", "items-center", "space-x-2"], [1, "text-2xl"], ["date", ""], ["class", "flex items-center space-x-2", 4, "ngIf"], [1, "flex", "flex-col", "leading-tight"], ["time", ""], ["class", "text-xs opacity-30", 4, "ngIf"], ["attendees", "", "class", "flex space-x-1 px-2", 4, "ngIf"], ["spaces", "", "class", "flex space-x-1 px-2", 4, "ngIf"], [1, "mt-4", "w-full", "border-t", "border-base-200", "p-2"], ["btn", "", "name", "confirm-meeting", "matRipple", "", "class", "w-full", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", "name", "close-meeting-confirm", 3, "click"], ["diameter", "32"], [1, "text-xs", "opacity-30"], ["attendees", "", 1, "flex", "space-x-1", "px-2"], ["attendee-list", ""], ["aria-label", "User selection"], [4, "ngFor", "ngForOf"], [1, "flex", "items-center"], [1, "mr-2"], ["spaces", "", 1, "flex", "space-x-1", "px-2"], ["btn", "", "name", "confirm-meeting", "matRipple", "", 1, "w-full", 3, "click"]], template: function MeetingFlowConfirmComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MeetingFlowConfirmComponent, selectors: [["meeting-flow-confirm"]], inputs: { show_close: "show_close" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe]), \u0275\u0275InheritDefinitionFeature], decls: 34, vars: 21, consts: [["chipList", ""], ["icon", "", "matRipple", "", "class", "absolute right-2 top-2", 3, "click", 4, "ngIf"], [1, "mt-4", "flex", "items-center", "justify-between", "px-4"], ["diameter", "32", 4, "ngIf"], ["period", "", 1, "flex", "space-x-1", "px-2"], [1, "mt-1", "text-success"], ["details", "", 1, "leading-6"], [1, "flex", "items-center", "space-x-2"], [1, "text-2xl"], ["date", ""], ["class", "flex items-center space-x-2", 4, "ngIf"], [1, "flex", "flex-col", "leading-tight"], ["time", ""], ["class", "text-xs opacity-30", 4, "ngIf"], ["attendees", "", "class", "flex space-x-1 px-2", 4, "ngIf"], ["spaces", "", "class", "flex space-x-1 px-2", 4, "ngIf"], [1, "px-2", "pt-4"], ["class", "rounded !border-none bg-warning px-2 py-1 text-center text-sm text-warning-content", 4, "ngIf"], [1, "mt-4", "w-full", "border-t", "border-base-200", "p-2"], ["btn", "", "name", "confirm-meeting", "matRipple", "", "class", "w-full", 3, "click", 4, "ngIf"], ["icon", "", "matRipple", "", 1, "absolute", "right-2", "top-2", 3, "click"], ["diameter", "32"], [1, "text-xs", "opacity-30"], ["attendees", "", 1, "flex", "space-x-1", "px-2"], ["attendee-list", ""], ["aria-label", "User selection"], [4, "ngFor", "ngForOf"], [1, "flex", "items-center"], [1, "mr-2"], ["spaces", "", 1, "flex", "space-x-1", "px-2"], [1, "rounded", "!border-none", "bg-warning", "px-2", "py-1", "text-center", "text-sm", "text-warning-content"], ["btn", "", "name", "confirm-meeting", "matRipple", "", 1, "w-full", 3, "click"]], template: function MeetingFlowConfirmComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275template(0, MeetingFlowConfirmComponent_button_0_Template, 3, 0, "button", 1);
         \u0275\u0275elementStart(1, "header", 2)(2, "h2");
@@ -9006,21 +9061,24 @@ var MeetingFlowConfirmComponent = class _MeetingFlowConfirmComponent extends Asy
         \u0275\u0275template(26, MeetingFlowConfirmComponent_div_26_Template, 2, 1, "div", 13);
         \u0275\u0275elementEnd()()()();
         \u0275\u0275template(27, MeetingFlowConfirmComponent_section_27_Template, 11, 7, "section", 14)(28, MeetingFlowConfirmComponent_section_28_Template, 13, 5, "section", 15);
-        \u0275\u0275elementStart(29, "footer", 16);
-        \u0275\u0275template(30, MeetingFlowConfirmComponent_button_30_Template, 3, 3, "button", 17);
-        \u0275\u0275pipe(31, "async");
+        \u0275\u0275elementStart(29, "section", 16);
+        \u0275\u0275template(30, MeetingFlowConfirmComponent_div_30_Template, 3, 3, "div", 17);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(31, "footer", 18);
+        \u0275\u0275template(32, MeetingFlowConfirmComponent_button_32_Template, 3, 3, "button", 19);
+        \u0275\u0275pipe(33, "async");
         \u0275\u0275elementEnd();
       }
       if (rf & 2) {
         \u0275\u0275property("ngIf", ctx.show_close);
         \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 11, "APP.WORKPLACE.MEETING_CONFIRM"));
+        \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 12, "APP.WORKPLACE.MEETING_CONFIRM"));
         \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(6, 13, ctx.loading));
+        \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(6, 14, ctx.loading));
         \u0275\u0275advance(7);
         \u0275\u0275textInterpolate(ctx.event.title || "Meeting Details");
         \u0275\u0275advance(5);
-        \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(18, 15, ctx.event.date, "fullDate"));
+        \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(18, 16, ctx.event.date, "fullDate"));
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ctx.event.recurrence == null ? null : ctx.event.recurrence.pattern);
         \u0275\u0275advance(6);
@@ -9032,13 +9090,15 @@ var MeetingFlowConfirmComponent = class _MeetingFlowConfirmComponent extends Asy
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.space == null ? null : ctx.space.id);
         \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(31, 18, ctx.loading));
+        \u0275\u0275property("ngIf", ctx.requires_approval);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(33, 19, ctx.loading));
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, MatProgressSpinner, MatChip, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\nsection[_ngcontent-%COMP%]    > app-icon[_ngcontent-%COMP%] {\n  font-size: 1.5rem;\n}\nh2[_ngcontent-%COMP%] {\n  font-size: 1.5rem;\n  font-weight: medium;\n  margin-bottom: 0.5rem;\n}\nh3[_ngcontent-%COMP%] {\n  font-size: 1.25rem;\n  font-weight: medium;\n  margin: 0.5rem 0;\n}\n/*# sourceMappingURL=meeting-flow-confirm.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatRipple, MatProgressSpinner, MatChip, IconComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\nsection[_ngcontent-%COMP%]    > app-icon[_ngcontent-%COMP%] {\n  font-size: 1.5rem;\n}\nh2[_ngcontent-%COMP%] {\n  font-size: 1.5rem;\n  font-weight: medium;\n  margin-bottom: 0.5rem;\n}\nh3[_ngcontent-%COMP%] {\n  font-size: 1.25rem;\n  font-weight: medium;\n  margin: 0.5rem 0;\n}\n/*# sourceMappingURL=meeting-flow-confirm.component.css.map */"] });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MeetingFlowConfirmComponent, { className: "MeetingFlowConfirmComponent", filePath: "apps/workplace/src/app/book/meeting-flow/meeting-flow-confirm.component.ts", lineNumber: 154 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MeetingFlowConfirmComponent, { className: "MeetingFlowConfirmComponent", filePath: "apps/workplace/src/app/book/meeting-flow/meeting-flow-confirm.component.ts", lineNumber: 160 });
 })();
 
 // apps/workplace/src/app/book/meeting-flow/meeting-form-details.component.ts
@@ -9387,7 +9447,7 @@ var MeetingFormDetailsComponent = class _MeetingFormDetailsComponent {
       if (rf & 2) {
         \u0275\u0275property("ngIf", ctx.form);
       }
-    }, dependencies: [NgIf, MatFormField, MatError, MatInput, MatCheckbox, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, UserSearchFieldComponent, HostSelectFieldComponent, RecurrenceFieldComponent, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatFormField, MatError, MatInput, MatCheckbox, DateFieldComponent, DurationFieldComponent, HostSelectFieldComponent, RecurrenceFieldComponent, TimeFieldComponent, UserSearchFieldComponent, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -10024,7 +10084,7 @@ var MeetingFlowFormComponent = class _MeetingFlowFormComponent extends AsyncHand
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ctx.form);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatOption, MatFormField, MatError, MatSelect, MatRipple, MatInput, UserListFieldComponent, SpaceListFieldComponent, RichTextInputComponent, AssetListFieldComponent, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, CateringListFieldComponent, FormGroupDirective, FormControlName, MeetingFormDetailsComponent, AsyncPipe, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
+    }, dependencies: [NgForOf, NgIf, MatOption, MatFormField, MatError, MatSelect, MatRipple, MatInput, IconComponent, RichTextInputComponent, SpaceListFieldComponent, UserListFieldComponent, AssetListFieldComponent, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, CateringListFieldComponent, FormGroupDirective, FormControlName, MeetingFormDetailsComponent, AsyncPipe, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
   }
 };
 (() => {
@@ -10482,7 +10542,7 @@ var NewParkingFlowConfirmComponent = class _NewParkingFlowConfirmComponent exten
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(31, 23, ctx.loading));
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, MatProgressSpinner, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\nsection[_ngcontent-%COMP%]    > app-icon[_ngcontent-%COMP%] {\n  font-size: 1.5rem;\n  margin-top: 0.3rem;\n}\nh3[_ngcontent-%COMP%] {\n  font-size: 1.25rem;\n  font-weight: medium;\n  margin: 0.5rem 0;\n}\n/*# sourceMappingURL=parking-flow-confirm.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatRipple, MatProgressSpinner, IconComponent, AsyncPipe, DatePipe, TranslatePipe], styles: ["\n\nsection[_ngcontent-%COMP%]    > app-icon[_ngcontent-%COMP%] {\n  font-size: 1.5rem;\n  margin-top: 0.3rem;\n}\nh3[_ngcontent-%COMP%] {\n  font-size: 1.25rem;\n  font-weight: medium;\n  margin: 0.5rem 0;\n}\n/*# sourceMappingURL=parking-flow-confirm.component.css.map */"] });
   }
 };
 (() => {
@@ -10702,7 +10762,7 @@ var ParkingFormDetailsComponent = class _ParkingFormDetailsComponent extends Asy
       if (rf & 2) {
         \u0275\u0275property("ngIf", ctx.form);
       }
-    }, dependencies: [NgForOf, NgIf, MatOption, MatFormField, MatError, MatSelect, MatInput, MatCheckbox, DateFieldComponent, DurationFieldComponent, TimeFieldComponent, HostSelectFieldComponent, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, AsyncPipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, MatOption, MatFormField, MatError, MatSelect, MatInput, MatCheckbox, DateFieldComponent, DurationFieldComponent, HostSelectFieldComponent, TimeFieldComponent, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, AsyncPipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -10852,7 +10912,7 @@ var ParkingFlowFormComponent = class _ParkingFlowFormComponent extends AsyncHand
         \u0275\u0275advance(3);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(38, 19, ctx.form.value.id ? "FORM.RESET" : "FORM.CLEAR"), " ");
       }
-    }, dependencies: [IconComponent, MatRipple, ParkingSpaceListFieldComponent, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, ParkingFormDetailsComponent, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
+    }, dependencies: [MatRipple, IconComponent, ParkingSpaceListFieldComponent, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, ParkingFormDetailsComponent, TranslatePipe], encapsulation: 2, data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
   }
 };
 (() => {
@@ -10972,7 +11032,7 @@ var ParkingFlowSuccessComponent = class _ParkingFlowSuccessComponent {
         \u0275\u0275advance();
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(14, 16, "APP.WORKPLACE.BOOKING_FINISHED"), " ");
       }
-    }, dependencies: [NgIf, IconComponent, MatRipple, RouterLink, DatePipe, SafePipe, SanitizePipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatRipple, IconComponent, RouterLink, DatePipe, SafePipe, SanitizePipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -11200,4 +11260,4 @@ var BookModule = class _BookModule {
 export {
   BookModule
 };
-//# sourceMappingURL=book.module-LDCBXHFV.js.map
+//# sourceMappingURL=book.module-YBYR4TAM.js.map

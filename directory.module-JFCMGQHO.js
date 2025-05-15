@@ -68,7 +68,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-7HB5YGQC.js";
+} from "./chunk-D5JLLHYP.js";
 import "./chunk-4MWRP73S.js";
 
 // apps/workplace/src/app/directory/user-list.component.ts
@@ -279,7 +279,7 @@ var DirectoryUserListComponent = class _DirectoryUserListComponent extends Async
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", user_list_r8.length)("ngIfElse", empty_state_r7);
       }
-    }, dependencies: [NgForOf, NgIf, DefaultValueAccessor, NgControlStatus, NgModel, RouterLink, TopbarComponent, FooterMenuComponent, IconComponent, UserAvatarComponent, MatFormField, MatPrefix, MatSuffix, MatRipple, MatInput, MatProgressSpinner, AsyncPipe, SafePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n  background: #f0f0f0;\n}\nmat-form-field[_ngcontent-%COMP%] {\n  width: 48rem;\n  max-width: calc(100% - 2rem);\n}\n/*# sourceMappingURL=user-list.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, DefaultValueAccessor, NgControlStatus, NgModel, RouterLink, TopbarComponent, FooterMenuComponent, UserAvatarComponent, MatFormField, MatPrefix, MatSuffix, MatRipple, MatInput, MatProgressSpinner, IconComponent, AsyncPipe, SafePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n  background: #f0f0f0;\n}\nmat-form-field[_ngcontent-%COMP%] {\n  width: 48rem;\n  max-width: calc(100% - 2rem);\n}\n/*# sourceMappingURL=user-list.component.css.map */"] });
   }
 };
 (() => {
@@ -309,4 +309,4 @@ var DirectoryModule = class _DirectoryModule {
 export {
   DirectoryModule
 };
-//# sourceMappingURL=directory.module-VWUNIEE4.js.map
+//# sourceMappingURL=directory.module-JFCMGQHO.js.map

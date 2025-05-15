@@ -1,6 +1,6 @@
 import {
   ScheduleStateService
-} from "./chunk-GWJTQFTU.js";
+} from "./chunk-6CALFY7T.js";
 import {
   AsyncHandler,
   AsyncPipe,
@@ -13,6 +13,7 @@ import {
   CommonModule,
   DatePipe,
   DefaultValueAccessor,
+  Ea,
   EventCardComponent,
   EventFormService,
   ExploreSpacesService,
@@ -35,7 +36,6 @@ import {
   NgModel,
   NgSwitch,
   NgSwitchCase,
-  Oa,
   OrganisationService,
   Rc,
   Router,
@@ -127,7 +127,7 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-7HB5YGQC.js";
+} from "./chunk-D5JLLHYP.js";
 import {
   __async,
   __spreadProps,
@@ -228,7 +228,7 @@ var LandingStateService = class _LandingStateService extends AsyncHandler {
       resource: null
     }, rules)));
     this._space_statuses = this._filtered_spaces.pipe(tap((_) => this.unsubWith("bind:")), switchMap((list) => combineLatest((list || []).map((_) => {
-      const binding = Oa(_.id, "Bookings").binding("status");
+      const binding = Ea(_.id, "Bookings").binding("status");
       const obs = binding.listen();
       this.subscription(`bind:${_.id}`, binding.bind());
       return obs;
@@ -328,7 +328,7 @@ var LandingStateService = class _LandingStateService extends AsyncHandler {
       if (!occupancy)
         return;
       const { sys, module, index } = occupancy;
-      const mod = Oa(sys, module, index);
+      const mod = Ea(sys, module, index);
       if (!mod)
         return;
       if (this._occupancy_binding) {
@@ -614,7 +614,7 @@ var LandingAvailabilityComponent = class _LandingAvailabilityComponent {
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", !ctx.hide_rooms);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, AuthenticatedImageDirective, MatRipple, MatProgressSpinner, RouterLink, AsyncPipe, TranslatePipe, SpacePipe], styles: ["\n\n*[_ngcontent-%COMP%] {\n  flex-shrink: 0;\n}\n/*# sourceMappingURL=landing-availability.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, AuthenticatedImageDirective, MatRipple, MatProgressSpinner, IconComponent, RouterLink, AsyncPipe, TranslatePipe, SpacePipe], styles: ["\n\n*[_ngcontent-%COMP%] {\n  flex-shrink: 0;\n}\n/*# sourceMappingURL=landing-availability.component.css.map */"] });
   }
 };
 (() => {
@@ -935,7 +935,7 @@ var LandingColleaguesComponent = class _LandingColleaguesComponent extends Async
         \u0275\u0275advance(7);
         \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(20, 23, ctx.loading))("ngIfElse", load_state_r10);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, UserAvatarComponent, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, MatProgressSpinner, MatTooltip, DefaultValueAccessor, NgControlStatus, NgModel, AsyncPipe, TranslatePipe], styles: ["\n\n[user][_ngcontent-%COMP%]:hover   button[_ngcontent-%COMP%] {\n  opacity: 1;\n}\n[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n/*# sourceMappingURL=landing-colleagues.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, UserAvatarComponent, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, MatProgressSpinner, MatTooltip, IconComponent, DefaultValueAccessor, NgControlStatus, NgModel, AsyncPipe, TranslatePipe], styles: ["\n\n[user][_ngcontent-%COMP%]:hover   button[_ngcontent-%COMP%] {\n  opacity: 1;\n}\n[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n/*# sourceMappingURL=landing-colleagues.component.css.map */"] });
   }
 };
 (() => {
@@ -1292,7 +1292,7 @@ var LandingFavouritesComponent = class _LandingFavouritesComponent extends Async
         \u0275\u0275advance(4);
         \u0275\u0275property("ngIf", (ctx.spaces == null ? null : ctx.spaces.length) || ((tmp_2_0 = \u0275\u0275pipeBind1(7, 8, ctx.assets)) == null ? null : tmp_2_0.length))("ngIfElse", empty_state_r12);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, AuthenticatedImageDirective, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, AsyncPipe, TranslatePipe, SpacePipe], styles: ["\n\n[user][_ngcontent-%COMP%]:hover   button[_ngcontent-%COMP%] {\n  opacity: 1;\n}\n[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n/*# sourceMappingURL=landing-favourites.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, AuthenticatedImageDirective, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, IconComponent, AsyncPipe, TranslatePipe, SpacePipe], styles: ["\n\n[user][_ngcontent-%COMP%]:hover   button[_ngcontent-%COMP%] {\n  opacity: 1;\n}\n[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n/*# sourceMappingURL=landing-favourites.component.css.map */"] });
   }
 };
 (() => {
@@ -1804,7 +1804,7 @@ var LandingComponent = class _LandingComponent {
         \u0275\u0275advance(4);
         \u0275\u0275property("ngIf", !ctx.hide_nav);
       }
-    }, dependencies: [NgIf, TopbarComponent, FooterMenuComponent, IconComponent, MatRipple, LandingColleaguesComponent, LandingAvailabilityComponent, LandingUpcomingComponent, LandingFavouritesComponent, LandingQuickLinksComponent, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n}\nmain[_ngcontent-%COMP%] {\n  min-height: 50%;\n}\n/*# sourceMappingURL=landing.component.css.map */"] });
+    }, dependencies: [NgIf, TopbarComponent, FooterMenuComponent, MatRipple, IconComponent, LandingColleaguesComponent, LandingAvailabilityComponent, LandingUpcomingComponent, LandingFavouritesComponent, LandingQuickLinksComponent, DatePipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n}\nmain[_ngcontent-%COMP%] {\n  min-height: 50%;\n}\n/*# sourceMappingURL=landing.component.css.map */"] });
   }
 };
 (() => {
@@ -1834,4 +1834,4 @@ var AppLandingModule = class _AppLandingModule {
 export {
   AppLandingModule
 };
-//# sourceMappingURL=landing.module-HU6VH7GB.js.map
+//# sourceMappingURL=landing.module-MGPGWHNU.js.map

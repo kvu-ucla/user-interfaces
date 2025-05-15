@@ -79,7 +79,7 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-7HB5YGQC.js";
+} from "./chunk-D5JLLHYP.js";
 import {
   __async,
   __spreadValues
@@ -219,7 +219,7 @@ var GroupEventsFiltersListComponent = class _GroupEventsFiltersListComponent {
         \u0275\u0275advance(5);
         \u0275\u0275property("ngForOf", ((tmp_2_0 = \u0275\u0275pipeBind1(16, 22, ctx.filters)) == null ? null : tmp_2_0.tags) || \u0275\u0275pureFunction0(24, _c0));
       }
-    }, dependencies: [NgForOf, IconComponent, MatRipple, AsyncPipe, DatePipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, MatRipple, IconComponent, AsyncPipe, DatePipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -571,4 +571,4 @@ var GroupEventsModule = class _GroupEventsModule {
 export {
   GroupEventsModule
 };
-//# sourceMappingURL=group-events.module-EDZ2SP2B.js.map
+//# sourceMappingURL=group-events.module-HCBS5TQ4.js.map

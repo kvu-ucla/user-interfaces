@@ -3,8 +3,8 @@ import {
   BehaviorSubject,
   Booking,
   CalendarEvent,
+  Ea,
   MatDialog,
-  Oa,
   OrganisationService,
   ParkingService,
   SettingsService,
@@ -30,6 +30,7 @@ import {
   isAfter,
   isBefore,
   isSameDay,
+  lastValueFrom,
   loadLockerBanks,
   loadLockers,
   map,
@@ -39,6 +40,7 @@ import {
   queryBookings,
   queryEvents,
   requestSpacesForZone,
+  setHours,
   shareReplay,
   startOfDay,
   startOfMinute,
@@ -50,7 +52,7 @@ import {
   unique,
   ɵɵdefineInjectable,
   ɵɵinject
-} from "./chunk-7HB5YGQC.js";
+} from "./chunk-D5JLLHYP.js";
 import {
   __async,
   __spreadProps,
@@ -117,7 +119,7 @@ var ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
       switchMap((list) => {
         this._loading.next(false);
         return combineLatest((list || []).map((space) => {
-          const binding = Oa(space.id, "Bookings").binding("bookings");
+          const binding = Ea(space.id, "Bookings").binding("bookings");
           const obs = binding.listen().pipe(map((event_list) => (event_list || []).map((i) => new CalendarEvent(__spreadProps(__spreadValues({}, i), {
             resources: i.attendees.filter((_) => _.email === space.email || _.resource),
             system: space
@@ -287,28 +289,30 @@ var ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
       const is_home = user.location !== "wfo";
       const auto_release = this._settings.get("app.auto_release");
       if (auto_release && is_home && (auto_release.time_after || auto_release.time_before) && auto_release.resources?.length) {
-        const time_before = Math.min(60, auto_release.time_before || 0);
         for (const type of auto_release.resources) {
-          const bookings = yield queryBookings({
+          const time_after = auto_release[`${type}_time_after`] || auto_release.time_after;
+          const time_before = Math.min(60, auto_release[`${type}_time_before`] || auto_release.time_before || 0);
+          const bookings = yield lastValueFrom(queryBookings({
             period_start: getUnixTime(startOfMinute(Date.now())),
-            period_end: getUnixTime(addMinutes(Date.now(), (auto_release.time_after || 5) + time_before)),
+            period_end: getUnixTime(addMinutes(Date.now(), (time_after || 5) + time_before)),
             type
-          }).toPromise();
-          const check_block = (auto_release.time_after || 0) + time_before;
+          }));
+          const check_block = (time_after || 0) + time_before;
           for (const booking of bookings) {
             if (this._ignore_cancel.includes(booking.id) || booking.checked_in || booking.rejected) {
               continue;
             }
+            const start_time = booking.is_all_day ? setHours(booking.date, auto_release.all_day_start) : booking.date;
             this._dialog.closeAll();
-            const diff = differenceInMinutes(addMinutes(booking.date, auto_release.time_after || 0), Date.now());
+            const diff = differenceInMinutes(addMinutes(start_time, time_after || 0), Date.now());
             if (diff > check_block || diff < 0)
               continue;
-            const time = addMinutes(booking.date, auto_release.time_after || 0);
+            const time = addMinutes(start_time, time_after || 0);
             const close_after = differenceInMilliseconds(time.getTime() + 60 * 1e3, Date.now());
             const wording = type === "parking" ? "reservation" : "booking";
             const result = yield openConfirmModal({
               title: `Keep ${type} ${wording}`,
-              content: `You have indicated you are not in the office. 
+              content: `You have indicated you are not in the office.
                                 Your  ${wording} for "<i>${booking.asset_name || booking.title}</i>" at ${format(booking.date, this._settings.time_format)} will be cancelled at ${format(time, this._settings.time_format)}.<br/><br/>
                                 Do you wish to keep this ${wording}?`,
               icon: { content: "event_busy" },
@@ -320,7 +324,7 @@ var ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
               continue;
             }
             result.loading("Checking in booking...");
-            yield checkinBooking(booking.id, true).toPromise();
+            yield lastValueFrom(checkinBooking(booking.id, true));
             result.close();
           }
         }
@@ -403,4 +407,4 @@ var ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
 export {
   ScheduleStateService
 };
-//# sourceMappingURL=chunk-GWJTQFTU.js.map
+//# sourceMappingURL=chunk-6CALFY7T.js.map

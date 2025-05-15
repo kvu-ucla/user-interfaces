@@ -1,6 +1,6 @@
 import {
   ScheduleStateService
-} from "./chunk-GWJTQFTU.js";
+} from "./chunk-6CALFY7T.js";
 import {
   AsyncHandler,
   AsyncPipe,
@@ -97,7 +97,7 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵtextInterpolate2
-} from "./chunk-7HB5YGQC.js";
+} from "./chunk-D5JLLHYP.js";
 import {
   __async
 } from "./chunk-4MWRP73S.js";
@@ -375,7 +375,7 @@ var ScheduleFilterCardComponent = class _ScheduleFilterCardComponent {
         \u0275\u0275advance(3);
         \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(18, 10, "COMMON.APPLY"), " ");
       }
-    }, dependencies: [NgIf, IconComponent, MatRipple, MatCheckbox, NgControlStatus, NgModel, AsyncPipe, TranslatePipe], styles: ["\n\nmat-checkbox[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n/*# sourceMappingURL=schedule-filter-card.component.css.map */"] });
+    }, dependencies: [NgIf, MatRipple, MatCheckbox, IconComponent, NgControlStatus, NgModel, AsyncPipe, TranslatePipe], styles: ["\n\nmat-checkbox[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n/*# sourceMappingURL=schedule-filter-card.component.css.map */"] });
   }
 };
 (() => {
@@ -748,7 +748,7 @@ var ScheduleFiltersComponent = class _ScheduleFiltersComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngIf", ((tmp_12_0 = \u0275\u0275pipeBind1(33, 37, ctx.filters)) == null ? null : tmp_12_0.shown_types == null ? null : tmp_12_0.shown_types.includes("group-event")) && ctx.hasFeature("group-events"));
       }
-    }, dependencies: [NgIf, IconComponent, MatRipple, AsyncPipe, TranslatePipe], encapsulation: 2 });
+    }, dependencies: [NgIf, MatRipple, IconComponent, AsyncPipe, TranslatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -925,7 +925,7 @@ var ScheduleMobileCalendarComponent = class _ScheduleMobileCalendarComponent {
         \u0275\u0275advance(2);
         \u0275\u0275property("ngForOf", ctx.list);
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatRipple, SlicePipe, DatePipe], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, MatRipple, IconComponent, SlicePipe, DatePipe], encapsulation: 2 });
   }
 };
 (() => {
@@ -1303,7 +1303,7 @@ var ScheduleSidebarComponent = class _ScheduleSidebarComponent extends AsyncHand
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", ctx.hasFeature("group-events"));
       }
-    }, dependencies: [NgForOf, NgIf, IconComponent, MatOption, MatFormField, MatSelect, MatRipple, MatTooltip, MatCheckbox, DateCalendarComponent, NgControlStatus, NgModel, AsyncPipe, TranslatePipe], styles: ["\n\nmat-checkbox[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n/*# sourceMappingURL=schedule-sidebar.component.css.map */"] });
+    }, dependencies: [NgForOf, NgIf, MatOption, MatFormField, MatSelect, MatRipple, MatTooltip, MatCheckbox, IconComponent, DateCalendarComponent, NgControlStatus, NgModel, AsyncPipe, TranslatePipe], styles: ["\n\nmat-checkbox[_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n/*# sourceMappingURL=schedule-sidebar.component.css.map */"] });
   }
 };
 (() => {
@@ -1735,4 +1735,4 @@ var AppScheduleModule = class _AppScheduleModule {
 export {
   AppScheduleModule
 };
-//# sourceMappingURL=schedule.module-XTK4QRI2.js.map
+//# sourceMappingURL=schedule.module-TXJQCMWY.js.map

@@ -1,6 +1,6 @@
 import {
   subMinutes
-} from "./chunk-SETK32OJ.js";
+} from "./chunk-53PGWIDG.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -128,6 +128,8 @@ import {
   hn,
   isBefore,
   isMobileSafari,
+  ka,
+  lastValueFrom,
   ln,
   log,
   makeEnvironmentProviders,
@@ -165,7 +167,6 @@ import {
   throwError,
   timePeriodsIntersect,
   unique,
-  xa,
   ɵNgNoValidate,
   ɵPRE_STYLE,
   ɵsetClassDebugInfo,
@@ -203,7 +204,7 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-7HB5YGQC.js";
+} from "./chunk-D5JLLHYP.js";
 import {
   __async,
   __export,
@@ -7211,7 +7212,7 @@ var createVideoConferenceModule = (space = {}, overrides = {}) => new VideoConfe
 
 // libs/mocks/src/lib/systems-bindings.mock.ts
 function createSystem(space) {
-  xa(space.id, {
+  ka(space.id, {
     System: [createSystemModule(space)],
     Bookings: [createBookingsModule(space)],
     ContactTracing: [createContactTracingModule(space)],
@@ -25328,8 +25329,8 @@ function initSentry(dsn, sample_rate = 0.1) {
     // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
     tracePropagationTargets: [
       "localhost",
-      /^https:\/\/[a-zA-Z0-9_\-]*\.[a-zA-Z0-9]*\/api/,
-      /^https:\/\/[a-zA-Z0-9_\-]*\.placeos\.run*\/api/
+      /^https:\/\/[a-zA-Z0-9_-]*\.[a-zA-Z0-9]*\/api/,
+      /^https:\/\/[a-zA-Z0-9_-]*\.placeos\.run*\/api/
     ],
     // Session Replay
     replaysSessionSampleRate: sample_rate,
@@ -25338,7 +25339,6 @@ function initSentry(dsn, sample_rate = 0.1) {
     // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
   });
 }
-window.global = window;
 var AppComponent = class _AppComponent extends AsyncHandler {
   get debug() {
     return window.debug && this._settings.get("app.allow_debugging") === true;
@@ -25394,7 +25394,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
       });
       setNotifyOutlet(this._snackbar);
       setTranslationService(this._locale);
-      yield this._settings.initialised.pipe(first((_) => _)).toPromise();
+      yield lastValueFrom(this._settings.initialised.pipe(first((_) => _)));
       setAppName(this._settings.get("app.short_name"));
       const settings = this._settings.get("composer") || {};
       settings.mock = !!this._settings.get("mock") || location.origin.includes("demo.place.tech");
@@ -25406,7 +25406,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
         });
       }
       yield setupPlace(settings).catch((_) => console.error(_));
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
+      yield lastValueFrom(this._org.initialised.pipe(first((_) => _)));
       if (this._locale) {
         this._locale.zone_id = this._org.organisation.id;
         this._locale.init();
@@ -25415,7 +25415,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
       if (!settings.local_login) {
         this.timeout("wait_for_user", () => this.onInitError(), 30 * 1e3);
       }
-      yield current_user.pipe(first((_) => !!_)).toPromise();
+      yield lastValueFrom(current_user.pipe(first((_) => !!_)));
       this.clearTimeout("wait_for_user");
       this._initLocale();
       setInternalUserDomain(this._settings.get("app.internal_user_domain") || `@${currentUser()?.email?.split("@")[1]}`);
@@ -25426,6 +25426,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
         this._initUploads();
         this._initFixedDevice();
       } catch {
+        log("APP", "Failed to initialise background services.", void 0, "warn");
       }
     });
   }
@@ -25463,6 +25464,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
         }
       }
     } catch {
+      log("APP", "Failed to initialise locale service.", void 0, "warn");
     }
   }
   _pasteToken(tkn) {
@@ -25537,7 +25539,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 106 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 111 });
 })();
 
 // apps/workplace/src/environments/environment.ts
@@ -25554,43 +25556,43 @@ var routes = [
     path: "landing",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./landing.module-HU6VH7GB.js").then((m) => m.AppLandingModule)
+    loadChildren: () => import("./landing.module-MGPGWHNU.js").then((m) => m.AppLandingModule)
   },
   {
     path: "book",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./book.module-LDCBXHFV.js").then((m) => m.BookModule)
+    loadChildren: () => import("./book.module-YBYR4TAM.js").then((m) => m.BookModule)
   },
   {
     path: "explore",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./explore.module-5MRA45TP.js").then((m) => m.ExploreModule)
+    loadChildren: () => import("./explore.module-246FYGG5.js").then((m) => m.ExploreModule)
   },
   {
     path: "control",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./control.module-ICADIVW6.js").then((m) => m.ControlModule)
+    loadChildren: () => import("./control.module-NH7ZVDIQ.js").then((m) => m.ControlModule)
   },
   {
     path: "directory",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./directory.module-VWUNIEE4.js").then((m) => m.DirectoryModule)
+    loadChildren: () => import("./directory.module-JFCMGQHO.js").then((m) => m.DirectoryModule)
   },
   {
     path: "your-bookings",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./schedule.module-XTK4QRI2.js").then((m) => m.AppScheduleModule)
+    loadChildren: () => import("./schedule.module-TXJQCMWY.js").then((m) => m.AppScheduleModule)
   },
   {
     path: "group-events",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./group-events.module-EDZ2SP2B.js").then((m) => m.GroupEventsModule)
+    loadChildren: () => import("./group-events.module-HCBS5TQ4.js").then((m) => m.GroupEventsModule)
   },
   { path: "**", redirectTo: "-", pathMatch: "full" }
 ];
@@ -25802,7 +25804,7 @@ var RecurrenceModalComponent = class _RecurrenceModalComponent extends AsyncHand
         \u0275\u0275advance();
         \u0275\u0275property("ngIf", !ctx.loading);
       }
-    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, IconComponent, MatOption, MatFormField, MatSelect, MatRipple, MatDialogClose, MatDialogTitle, MatProgressSpinner, DateFieldComponent], encapsulation: 2 });
+    }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, NgControlStatus, NgControlStatusGroup, NgModel, FormGroupDirective, FormControlName, MatOption, MatFormField, MatSelect, MatRipple, MatDialogClose, MatDialogTitle, MatProgressSpinner, IconComponent, DateFieldComponent], encapsulation: 2 });
   }
 };
 (() => {
@@ -25976,7 +25978,7 @@ var UserAvailabilityModalComponent = class _UserAvailabilityModalComponent exten
         \u0275\u0275advance(5);
         \u0275\u0275property("disabled", ctx.is_past);
       }
-    }, dependencies: [NgIf, NgControlStatus, NgModel, VerticalTimelineComponent, EventTimelineComponent, IconComponent, MatRipple, MatDialogClose, MatDialogTitle, MatDialogActions, MatDialogContent, MatProgressSpinner, DateFieldComponent, MatButton], styles: ["\n\n.heading[_ngcontent-%COMP%] {\n  flex: 1;\n  text-align: center;\n}\n@media screen and (max-width: 639px) {\n  .not-mobile[_ngcontent-%COMP%] {\n    display: none;\n  }\n}\n@media screen and (min-width: 640px) {\n  .mobile-only[_ngcontent-%COMP%] {\n    display: none;\n  }\n}\n.date[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  margin-bottom: 1em;\n}\n.spinner[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n  height: 3em;\n}\n/*# sourceMappingURL=user-availability.modal.component.css.map */"] });
+    }, dependencies: [NgIf, NgControlStatus, NgModel, VerticalTimelineComponent, EventTimelineComponent, MatRipple, MatDialogClose, MatDialogTitle, MatDialogActions, MatDialogContent, MatProgressSpinner, IconComponent, DateFieldComponent, MatButton], styles: ["\n\n.heading[_ngcontent-%COMP%] {\n  flex: 1;\n  text-align: center;\n}\n@media screen and (max-width: 639px) {\n  .not-mobile[_ngcontent-%COMP%] {\n    display: none;\n  }\n}\n@media screen and (min-width: 640px) {\n  .mobile-only[_ngcontent-%COMP%] {\n    display: none;\n  }\n}\n.date[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  margin-bottom: 1em;\n}\n.spinner[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n  height: 3em;\n}\n/*# sourceMappingURL=user-availability.modal.component.css.map */"] });
   }
 };
 (() => {
@@ -26045,7 +26047,7 @@ var ViewAttendeesModalComponent = class _ViewAttendeesModalComponent extends Asy
         \u0275\u0275advance(5);
         \u0275\u0275property("ngForOf", ctx.attendees);
       }
-    }, dependencies: [NgForOf, IconComponent, MatRipple, MatDialogClose, MatDialogActions, MatDialogContent], styles: ['\n\n.body[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  row-gap: 0.5em;\n}\n.body[_ngcontent-%COMP%]   div[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 3em 1fr;\n  grid-template-rows: 1fr 1fr;\n  grid-template-areas: "icon name" "icon email";\n  margin-bottom: 0.5em;\n  align-items: center;\n}\n.body[_ngcontent-%COMP%]   div[_ngcontent-%COMP%]   app-icon[_ngcontent-%COMP%] {\n  margin: auto;\n  grid-area: icon;\n  font-size: 2em;\n}\n.body[_ngcontent-%COMP%]   div[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  grid-area: name;\n}\n.body[_ngcontent-%COMP%]   div[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  grid-area: email;\n}\n/*# sourceMappingURL=view-attendees-modal.component.css.map */'] });
+    }, dependencies: [NgForOf, MatRipple, MatDialogClose, MatDialogActions, MatDialogContent, IconComponent], styles: ['\n\n.body[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  row-gap: 0.5em;\n}\n.body[_ngcontent-%COMP%]   div[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 3em 1fr;\n  grid-template-rows: 1fr 1fr;\n  grid-template-areas: "icon name" "icon email";\n  margin-bottom: 0.5em;\n  align-items: center;\n}\n.body[_ngcontent-%COMP%]   div[_ngcontent-%COMP%]   app-icon[_ngcontent-%COMP%] {\n  margin: auto;\n  grid-area: icon;\n  font-size: 2em;\n}\n.body[_ngcontent-%COMP%]   div[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  grid-area: name;\n}\n.body[_ngcontent-%COMP%]   div[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  grid-area: email;\n}\n/*# sourceMappingURL=view-attendees-modal.component.css.map */'] });
   }
 };
 (() => {
@@ -26146,7 +26148,7 @@ var ViewCateringModalComponent = class _ViewCateringModalComponent extends Async
         \u0275\u0275advance(4);
         \u0275\u0275textInterpolate1(" ", ctx.catering_note, " ");
       }
-    }, dependencies: [NgForOf, IconComponent, MatDialogClose], styles: ["\n\n.body[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  row-gap: 0.5em;\n}\n.body[_ngcontent-%COMP%]   .note-box[_ngcontent-%COMP%], \n.body[_ngcontent-%COMP%]   .note-label[_ngcontent-%COMP%] {\n  grid-column: 1/-1;\n}\n.body[_ngcontent-%COMP%]   .note-label[_ngcontent-%COMP%] {\n  margin-top: 0.5em;\n}\n.body[_ngcontent-%COMP%]   .qty[_ngcontent-%COMP%], \n.body[_ngcontent-%COMP%]   .total[_ngcontent-%COMP%] {\n  text-align: right;\n}\n/*# sourceMappingURL=view-catering-modal.component.css.map */"] });
+    }, dependencies: [NgForOf, MatDialogClose, IconComponent], styles: ["\n\n.body[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  row-gap: 0.5em;\n}\n.body[_ngcontent-%COMP%]   .note-box[_ngcontent-%COMP%], \n.body[_ngcontent-%COMP%]   .note-label[_ngcontent-%COMP%] {\n  grid-column: 1/-1;\n}\n.body[_ngcontent-%COMP%]   .note-label[_ngcontent-%COMP%] {\n  margin-top: 0.5em;\n}\n.body[_ngcontent-%COMP%]   .qty[_ngcontent-%COMP%], \n.body[_ngcontent-%COMP%]   .total[_ngcontent-%COMP%] {\n  text-align: right;\n}\n/*# sourceMappingURL=view-catering-modal.component.css.map */"] });
   }
 };
 (() => {
