@@ -13,17 +13,14 @@ function initZone() {
     performance && performance["measure"] && performance["measure"](name, label);
   }
   mark("Zone");
-  class ZoneImpl {
-    static {
-      this.__symbol__ = __symbol__;
-    }
+  const _ZoneImpl = class _ZoneImpl {
     static assertZonePatched() {
       if (global["Promise"] !== patches["ZoneAwarePromise"]) {
         throw new Error("Zone.js has detected that ZoneAwarePromise `(window|global).Promise` has been overwritten.\nMost likely cause is that a Promise polyfill has been loaded after Zone.js (Polyfilling Promise api is not necessary when zone.js is loaded. If you must load one, do so before loading zone.js.)");
       }
     }
     static get root() {
-      let zone = ZoneImpl.current;
+      let zone = _ZoneImpl.current;
       while (zone.parent) {
         zone = zone.parent;
       }
@@ -45,7 +42,7 @@ function initZone() {
       } else if (!global["__Zone_disable_" + name]) {
         const perfName = "Zone:" + name;
         mark(perfName);
-        patches[name] = fn(global, ZoneImpl, _api);
+        patches[name] = fn(global, _ZoneImpl, _api);
         performanceMeasure(perfName, perfName);
       }
     }
@@ -234,7 +231,9 @@ function initZone() {
         zoneDelegates[i]._updateTaskCount(task.type, count);
       }
     }
-  }
+  };
+  _ZoneImpl.__symbol__ = __symbol__;
+  let ZoneImpl = _ZoneImpl;
   const DELEGATE_ZS = {
     name: "",
     onHasTask: (delegate, _, target, hasTaskState) => delegate.hasTask(target, hasTaskState),
@@ -1149,8 +1148,8 @@ function patchEventTarget(_global2, api, apis, patchOptions) {
         }
         const passive = passiveSupported && !!passiveEvents && passiveEvents.indexOf(eventName) !== -1;
         const options = copyEventListenerOptions(buildEventListenerOptions(arguments[2], passive));
-        const signal = options?.signal;
-        if (signal?.aborted) {
+        const signal = options == null ? void 0 : options.signal;
+        if (signal == null ? void 0 : signal.aborted) {
           return;
         }
         if (unpatchedEvents) {
@@ -1517,14 +1516,14 @@ function patchTimer(window2, setName, cancelName, nameSuffix) {
       task = tasksByHandleId[id];
       delete tasksByHandleId[id];
     } else {
-      task = id?.[taskSymbol];
+      task = id == null ? void 0 : id[taskSymbol];
       if (task) {
         id[taskSymbol] = null;
       } else {
         task = id;
       }
     }
-    if (task?.type) {
+    if (task == null ? void 0 : task.type) {
       if (task.cancelFn) {
         task.zone.cancelTask(task);
       }
@@ -2204,7 +2203,8 @@ function patchPromise(Zone2) {
         return ZoneAwarePromise;
       }
       then(onFulfilled, onRejected) {
-        let C = this.constructor?.[Symbol.species];
+        var _a;
+        let C = (_a = this.constructor) == null ? void 0 : _a[Symbol.species];
         if (!C || typeof C !== "function") {
           C = this.constructor || ZoneAwarePromise;
         }
@@ -2221,7 +2221,8 @@ function patchPromise(Zone2) {
         return this.then(null, onRejected);
       }
       finally(onFinally) {
-        let C = this.constructor?.[Symbol.species];
+        var _a;
+        let C = (_a = this.constructor) == null ? void 0 : _a[Symbol.species];
         if (!C || typeof C !== "function") {
           C = ZoneAwarePromise;
         }
