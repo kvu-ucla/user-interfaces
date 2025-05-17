@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1747477579873,
+  "timestamp": 1747484103274,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -197,7 +197,7 @@
     "./assets/yolov8x_web_model/model.json": "51607c6c0f465d41cdca4d65a17cfbf9c9f99c62",
     "./favicon.ico": "4e23d0f9b6ddaf3c9ddef90dbaed2342941297b5",
     "./index.html": "2bbcaf7231b43d6a862598710fc647b9b96aff51",
-    "./main.js": "ac5cf61539f4e986d4099cc5858527cfe8c46541",
+    "./main.js": "690ab79d59381519336204749141bd2aab5d397b",
     "./polyfills.js": "bbc5bc3958c959c3048bb84772b416a59bef38b5",
     "./styles.css": "e0302a01f51fbd7f722071372f61c9f9cf476f74"
   },
