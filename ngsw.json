@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1748914761584,
+  "timestamp": 1749034404128,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -93,6 +93,7 @@
         "./assets/logo-dark.svg",
         "./assets/logo-light.svg",
         "./assets/loop.png",
+        "./assets/loop_t.png",
         "./assets/maps/level_1.svg",
         "./assets/maps/level_2.svg",
         "./assets/maps/level_3.svg",
@@ -178,7 +179,8 @@
     "./assets/locale/zh.json": "078399d877e574be484e7a0fc1809f7b71da8ad1",
     "./assets/logo-dark.svg": "3c5dbbd620a781a0d1e3680cb697982dd44a1613",
     "./assets/logo-light.svg": "29908fafefe60c105f06b2f8d69f7c1eed436c17",
-    "./assets/loop.png": "ec8e34d87b69500616ae46933d5cc72207c9e5bf",
+    "./assets/loop.png": "3472b17f50755c020f1ce74097574cc65cd61a3a",
+    "./assets/loop_t.png": "ec8e34d87b69500616ae46933d5cc72207c9e5bf",
     "./assets/maps/level_1.svg": "ba165a2e4b967619f71aa625855113950c4cde53",
     "./assets/maps/level_2.svg": "9a6f3cf8a7cefa4c41187294cb8747b80db8e04d",
     "./assets/maps/level_3.svg": "017bd15f1d17e947d3cde810ded6f09d26c27bd9",
@@ -196,10 +198,10 @@
     "./assets/support/safari-logo.svg": "1c510b0c330f84f6662351e4a0abd7fb8af2f678",
     "./favicon.ico": "5d8cf2b09be186513f3621f4c03d98eea93822ba",
     "./index.html": "7020a64a91c9154cdea17968471ec878599cf8a8",
-    "./main.js": "12a033924523a75a27de67d2822dad75b7dd33a9",
+    "./main.js": "88c75fc51470e6ee516c31d22e5c5ae020f58728",
     "./manifest.webmanifest": "8c6fdda8ecb155f4951a7175bd0b695d39d23ad7",
     "./polyfills.js": "9289c0ea794d380b2a90872f60f97fad6ebe1f08",
-    "./styles.css": "cfc7ecc8fa5e46ab8d79447399f0105304bad483"
+    "./styles.css": "dba980a48aa30f22b240283d8a5e123c391e1bcf"
   },
   "navigationUrls": [
     {
