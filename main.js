@@ -191,7 +191,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-QKOOFFWV.js";
+} from "./chunk-QRLSRTMX.js";
 
 // node_modules/@angular/animations/fesm2022/browser.mjs
 var LINE_START = "\n - ";
@@ -26671,125 +26671,125 @@ var routes = [
   { path: "unauthorised", component: UnauthorisedComponent },
   {
     path: "book/rooms",
-    loadChildren: () => import("./day-view.module-EGX3FFSO.js").then((m) => m.DayViewModule),
+    loadChildren: () => import("./day-view.module-PLF5DOEE.js").then((m) => m.DayViewModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "facilities",
-    loadChildren: () => import("./facilities.module-LRG6X6OE.js").then((m) => m.FacilitiesModule),
+    loadChildren: () => import("./facilities.module-ADWD3NSL.js").then((m) => m.FacilitiesModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/visitors",
-    loadChildren: () => import("./visitors.module-NSKILTCY.js").then((m) => m.VisitorsModule),
+    loadChildren: () => import("./visitors.module-VXF3J5UY.js").then((m) => m.VisitorsModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/assets",
-    loadChildren: () => import("./asset-manager.module-HO5WX6CM.js").then((m) => m.AppAssetManangerModule),
+    loadChildren: () => import("./asset-manager.module-X7WFBQ7G.js").then((m) => m.AppAssetManangerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/desks",
-    loadChildren: () => import("./desks.module-BFKRIP56.js").then((m) => m.DesksModule),
+    loadChildren: () => import("./desks.module-GTJJUFUZ.js").then((m) => m.DesksModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/lockers",
-    loadChildren: () => import("./lockers.module-PYEYVXB7.js").then((m) => m.LockersModule),
+    loadChildren: () => import("./lockers.module-BAIPWK2S.js").then((m) => m.LockersModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "reports",
-    loadChildren: () => import("./reports.module-WR65VOYG.js").then((m) => m.ReportsModule),
+    loadChildren: () => import("./reports.module-YJZTH5XH.js").then((m) => m.ReportsModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "entertainment/events",
-    loadChildren: () => import("./events.module-RNW6VR2D.js").then((m) => m.EventsModule),
+    loadChildren: () => import("./events.module-EARMDVIC.js").then((m) => m.EventsModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "users/staff",
-    loadChildren: () => import("./staff.module-JIPWAEFT.js").then((m) => m.StaffModule),
+    loadChildren: () => import("./staff.module-JQ7E745R.js").then((m) => m.StaffModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/catering",
-    loadChildren: () => import("./catering.module-QG6UIG4X.js").then((m) => m.CateringModule),
+    loadChildren: () => import("./catering.module-SRM73OKN.js").then((m) => m.CateringModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "points-management",
-    loadChildren: () => import("./points.module-LJZLHDLO.js").then((m) => m.PointsModule),
+    loadChildren: () => import("./points.module-LI4X7II6.js").then((m) => m.PointsModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/parking",
-    loadChildren: () => import("./parking.module-6UKNWWUC.js").then((m) => m.AppParkingModule),
+    loadChildren: () => import("./parking.module-KNNJTOAE.js").then((m) => m.AppParkingModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "surveys",
-    loadChildren: () => import("./surveys.module-M4NY6ZYA.js").then((m) => m.SurveysModule),
+    loadChildren: () => import("./surveys.module-UMMYS76B.js").then((m) => m.SurveysModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "room-management",
-    loadChildren: () => import("./room-manager.module-YLYIMGZR.js").then((m) => m.RoomManagerModule),
+    loadChildren: () => import("./room-manager.module-5EQ2MYLN.js").then((m) => m.RoomManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "level-management",
-    loadChildren: () => import("./level-manager.module-3FLKYSJS.js").then((m) => m.LevelManagerModule),
+    loadChildren: () => import("./level-manager.module-X55ITTX5.js").then((m) => m.LevelManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "building-management",
-    loadChildren: () => import("./building-manager.module-YJO7HB2V.js").then((m) => m.BuildingManagerModule),
+    loadChildren: () => import("./building-manager.module-K4SUDX37.js").then((m) => m.BuildingManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "region-management",
-    loadChildren: () => import("./region-manager.module-ILLS4JYF.js").then((m) => m.RegionManagerModule),
+    loadChildren: () => import("./region-manager.module-U5A2BNXA.js").then((m) => m.RegionManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "email-templates",
-    loadChildren: () => import("./email-templates.module-WBTMMOHF.js").then((m) => m.EmailTemplatesModule)
+    loadChildren: () => import("./email-templates.module-DDWENJ4C.js").then((m) => m.EmailTemplatesModule)
   },
   {
     path: "points-of-interest",
-    loadChildren: () => import("./poi-manager.module-K6HEMHXR.js").then((m) => m.POIManagerModule),
+    loadChildren: () => import("./poi-manager.module-B6OOAJID.js").then((m) => m.POIManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "url-management",
-    loadChildren: () => import("./url-manager.module-KZYEBGWE.js").then((m) => m.UrlManagerModule),
+    loadChildren: () => import("./url-manager.module-ATP7WPXO.js").then((m) => m.UrlManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "signage",
-    loadChildren: () => import("./signage.module-3P73OSCW.js").then((m) => m.SignageModule),
+    loadChildren: () => import("./signage.module-K6GET2TS.js").then((m) => m.SignageModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
