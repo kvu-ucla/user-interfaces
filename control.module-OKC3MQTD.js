@@ -1,0 +1,336 @@
+import {
+  AsyncHandler,
+  AsyncPipe,
+  BehaviorSubject,
+  CommonModule,
+  DefaultValueAccessor,
+  FooterMenuComponent,
+  FormsModule,
+  IconComponent,
+  MatFormField,
+  MatInput,
+  MatPrefix,
+  MatProgressSpinner,
+  MatRipple,
+  MatSuffix,
+  NgControlStatus,
+  NgForOf,
+  NgIf,
+  NgModel,
+  OrganisationService,
+  RouterLink,
+  RouterModule,
+  SafePipe,
+  SettingsService,
+  SharedComponentModule,
+  SpacesService,
+  TopbarComponent,
+  combineLatest,
+  filter,
+  map,
+  startWith,
+  ɵsetClassDebugInfo,
+  ɵɵInheritDefinitionFeature,
+  ɵɵadvance,
+  ɵɵclassProp,
+  ɵɵdeclareLet,
+  ɵɵdefineComponent,
+  ɵɵdefineInjector,
+  ɵɵdefineNgModule,
+  ɵɵdirectiveInject,
+  ɵɵelement,
+  ɵɵelementEnd,
+  ɵɵelementStart,
+  ɵɵgetCurrentView,
+  ɵɵlistener,
+  ɵɵnextContext,
+  ɵɵpipe,
+  ɵɵpipeBind1,
+  ɵɵpipeBind2,
+  ɵɵproperty,
+  ɵɵpureFunction0,
+  ɵɵpureFunction1,
+  ɵɵreadContextLet,
+  ɵɵreference,
+  ɵɵresetView,
+  ɵɵrestoreView,
+  ɵɵsanitizeUrl,
+  ɵɵstoreLet,
+  ɵɵtemplate,
+  ɵɵtemplateRefExtractor,
+  ɵɵtext,
+  ɵɵtextInterpolate,
+  ɵɵtextInterpolate1
+} from "./chunk-WRFKOJTY.js";
+import "./chunk-4MWRP73S.js";
+
+// apps/workplace/src/app/control/list-item.component.ts
+var _c0 = () => ["/explore"];
+var _c1 = (a0) => ({ space: a0 });
+function ControlSpaceListItemComponent_div_0_a_16_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "a", 11);
+    \u0275\u0275text(1, " Find ");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(2, _c0))("queryParams", \u0275\u0275pureFunction1(3, _c1, ctx_r0.space.id));
+  }
+}
+function ControlSpaceListItemComponent_div_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 1)(1, "div", 2)(2, "div", 3);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 4)(5, "div", 5);
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "div", 6)(8, "icon", 7);
+    \u0275\u0275text(9, "account_circle");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "div");
+    \u0275\u0275text(11);
+    \u0275\u0275elementEnd()()()();
+    \u0275\u0275elementStart(12, "div", 8)(13, "a", 9);
+    \u0275\u0275pipe(14, "safe");
+    \u0275\u0275text(15, " Control ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(16, ControlSpaceListItemComponent_div_0_a_16_Template, 2, 5, "a", 10);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275classProp("with-image", ctx_r0.show_image);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", ctx_r0.space.display_name || ctx_r0.space.name, " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx_r0.location);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(ctx_r0.space.capacity || "0");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("href", \u0275\u0275pipeBind2(14, 7, ctx_r0.space.support_url, "url"), \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("ngIf", ctx_r0.allow_locate);
+  }
+}
+var ControlSpaceListItemComponent = class _ControlSpaceListItemComponent {
+  get show_image() {
+    return this._settings.get("app.spaces.show_images");
+  }
+  get allow_locate() {
+    return (this._settings.get("app.features") || []).includes("explore");
+  }
+  /** Display location of the space */
+  get location() {
+    if (!this.space) {
+      return "Unable to determine location";
+    }
+    const level = this.space.level;
+    const bld = this._org.buildings.find((building) => building.id === level.parent_id);
+    return `${bld ? (bld.display_name || bld.name) + ", " : ""}${level?.display_name || level?.name || "<No Level>"}`;
+  }
+  constructor(_settings, _org) {
+    this._settings = _settings;
+    this._org = _org;
+  }
+  static {
+    this.\u0275fac = function ControlSpaceListItemComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ControlSpaceListItemComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ControlSpaceListItemComponent, selectors: [["a-control-space-list-item"]], inputs: { space: "space" }, standalone: false, decls: 1, vars: 1, consts: [["class", "mx-auto mb-2 flex max-w-[40rem] flex-wrap items-center overflow-hidden rounded border border-base-200 bg-base-100 p-2 pl-4 hover:border-info sm:space-x-4", 3, "with-image", 4, "ngIf"], [1, "mx-auto", "mb-2", "flex", "max-w-[40rem]", "flex-wrap", "items-center", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-100", "p-2", "pl-4", "hover:border-info", "sm:space-x-4"], [1, "flex", "flex-1", "flex-col"], [1, "text-xl"], [1, "flex", "w-full", "items-center", "text-sm"], [1, "flex-1"], [1, "flex", "items-center", "space-x-2", "text-lg"], [1, "text-2xl"], [1, "mt-4", "flex", "w-full", "items-center", "space-x-2", "sm:mt-0", "sm:w-auto", "sm:flex-col", "sm:space-x-0", "sm:space-y-2"], ["btn", "", "matRipple", "", "control", "", 1, "w-32", "flex-1", "sm:flex-none", 3, "href"], ["btn", "", "matRipple", "", "locate", "", "class", "inverse w-32 flex-1 sm:flex-none", 3, "routerLink", "queryParams", 4, "ngIf"], ["btn", "", "matRipple", "", "locate", "", 1, "inverse", "w-32", "flex-1", "sm:flex-none", 3, "routerLink", "queryParams"]], template: function ControlSpaceListItemComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275template(0, ControlSpaceListItemComponent_div_0_Template, 17, 10, "div", 0);
+      }
+      if (rf & 2) {
+        \u0275\u0275property("ngIf", ctx.space);
+      }
+    }, dependencies: [NgIf, RouterLink, MatRipple, IconComponent, SafePipe], encapsulation: 2 });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ControlSpaceListItemComponent, { className: "ControlSpaceListItemComponent", filePath: "apps/workplace/src/app/control/list-item.component.ts", lineNumber: 56 });
+})();
+
+// apps/workplace/src/app/control/space-list.component.ts
+function ControlSpaceListComponent_mat_spinner_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "mat-spinner", 7);
+  }
+  if (rf & 2) {
+    \u0275\u0275property("diameter", 32);
+  }
+}
+function ControlSpaceListComponent_div_8_a_control_space_list_item_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "a-control-space-list-item", 10);
+  }
+  if (rf & 2) {
+    const space_r2 = ctx.$implicit;
+    \u0275\u0275property("space", space_r2);
+  }
+}
+function ControlSpaceListComponent_div_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 8);
+    \u0275\u0275template(1, ControlSpaceListComponent_div_8_a_control_space_list_item_1_Template, 1, 1, "a-control-space-list-item", 9);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275nextContext();
+    const spaces_r3 = \u0275\u0275readContextLet(6);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", spaces_r3);
+  }
+}
+function ControlSpaceListComponent_ng_template_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 11)(1, "icon", 12);
+    \u0275\u0275text(2, "no_meeting_room");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "p");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", ctx_r3.search_str ? ' No matches for "' + ctx_r3.search.getValue() + '"' : "No controllable spaces", " ");
+  }
+}
+var ControlSpaceListComponent = class _ControlSpaceListComponent extends AsyncHandler {
+  constructor(_spaces, _org) {
+    super();
+    this._spaces = _spaces;
+    this._org = _org;
+    this.search = new BehaviorSubject("");
+    this.space_list = combineLatest([
+      this._org.active_building,
+      this._spaces.all_spaces,
+      this._spaces.initialised
+    ]).pipe(filter(([_]) => !!_), map(([bld, list]) => list.filter((s) => !!s.support_url && s.zones.includes(bld.id))), map((spaces) => spaces.sort((a, b) => this.sortSpaces(a, b))));
+    this.filtered_spaces = combineLatest([
+      this.space_list,
+      this.search
+    ]).pipe(map(([list, s]) => {
+      const search = (s || "").toLowerCase();
+      if (!search)
+        return list;
+      return (list || []).filter((space) => {
+        const bld = this._org.buildings.find((building) => building.id === space.level.parent_id);
+        const space_name = (space.name || "").toLowerCase();
+        const level_name = ((space.level ? space.level.name : "") || "").toLowerCase();
+        const bld_name = ((bld ? bld.name : "") || "").toLowerCase();
+        return space_name.indexOf(search) >= 0 || level_name && level_name.indexOf(search) >= 0 || bld_name && bld_name.indexOf(search) >= 0;
+      });
+    }), startWith([]));
+  }
+  sortSpaces(first, second) {
+    const bld_a = this._org.buildings.find((building) => building.id === first.level?.parent_id);
+    const space_a_name = (first.name || "").toLowerCase();
+    const level_a_name = ((first.level ? first.level.name : "") || "").toLowerCase();
+    const bld_a_name = (bld_a?.name || "").toLowerCase();
+    const bld_b = this._org.buildings.find((building) => building.id === second.level?.parent_id);
+    const space_b_name = (second.name || "").toLowerCase();
+    const level_b_name = ((second.level ? second.level.name : "") || "").toLowerCase();
+    const bld_b_name = (bld_b?.name || "").toLowerCase();
+    return bld_a_name.localeCompare(bld_b_name) || level_a_name.localeCompare(level_b_name) || space_a_name.localeCompare(space_b_name);
+  }
+  static {
+    this.\u0275fac = function ControlSpaceListComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ControlSpaceListComponent)(\u0275\u0275directiveInject(SpacesService), \u0275\u0275directiveInject(OrganisationService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ControlSpaceListComponent, selectors: [["a-control-space-list"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 11, vars: 7, consts: [["empty_state", ""], [1, "flex", "w-full", "items-center", "justify-center", "border-b", "border-base-300", "bg-base-100", "p-2"], ["overlay", "", "appearance", "outline", 1, "h-12", "rounded"], ["matPrefix", "", 1, "text-xl"], ["matInput", "", "placeholder", "Search...", 3, "ngModelChange", "ngModel"], ["matSuffix", "", "class", "top-2", 3, "diameter", 4, "ngIf"], ["class", "flex w-full flex-1 flex-col overflow-auto p-4", 4, "ngIf", "ngIfElse"], ["matSuffix", "", 1, "top-2", 3, "diameter"], [1, "flex", "w-full", "flex-1", "flex-col", "overflow-auto", "p-4"], [3, "space", 4, "ngFor", "ngForOf"], [3, "space"], [1, "flex", "flex-col", "items-center", "space-y-4", "p-8", "opacity-30"], [1, "text-6xl"]], template: function ControlSpaceListComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275elementStart(0, "div", 1)(1, "mat-form-field", 2)(2, "icon", 3);
+        \u0275\u0275text(3, "search");
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(4, "input", 4);
+        \u0275\u0275listener("ngModelChange", function ControlSpaceListComponent_Template_input_ngModelChange_4_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.search.next($event));
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275template(5, ControlSpaceListComponent_mat_spinner_5_Template, 1, 1, "mat-spinner", 5);
+        \u0275\u0275elementEnd()();
+        \u0275\u0275declareLet(6);
+        \u0275\u0275pipe(7, "async");
+        \u0275\u0275template(8, ControlSpaceListComponent_div_8_Template, 2, 1, "div", 6)(9, ControlSpaceListComponent_ng_template_9_Template, 5, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+      }
+      if (rf & 2) {
+        const empty_state_r5 = \u0275\u0275reference(10);
+        \u0275\u0275advance(4);
+        \u0275\u0275property("ngModel", ctx.search.getValue());
+        \u0275\u0275advance();
+        \u0275\u0275property("ngIf", ctx.loading);
+        \u0275\u0275advance();
+        const spaces_r6 = \u0275\u0275storeLet(\u0275\u0275pipeBind1(7, 4, ctx.filtered_spaces));
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngIf", spaces_r6.length)("ngIfElse", empty_state_r5);
+      }
+    }, dependencies: [NgForOf, NgIf, DefaultValueAccessor, NgControlStatus, NgModel, MatFormField, MatPrefix, MatSuffix, MatInput, MatProgressSpinner, IconComponent, ControlSpaceListItemComponent, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\nmat-form-field[_ngcontent-%COMP%] {\n  width: 48rem;\n  max-width: calc(100% - 2rem);\n}\n/*# sourceMappingURL=space-list.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ControlSpaceListComponent, { className: "ControlSpaceListComponent", filePath: "apps/workplace/src/app/control/space-list.component.ts", lineNumber: 71 });
+})();
+
+// apps/workplace/src/app/control/control.component.ts
+var _c02 = ["app-control", ""];
+var ControlComponent = class _ControlComponent {
+  constructor(_settings) {
+    this._settings = _settings;
+  }
+  ngOnInit() {
+    this._settings.title = "Control";
+  }
+  static {
+    this.\u0275fac = function ControlComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ControlComponent)(\u0275\u0275directiveInject(SettingsService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ControlComponent, selectors: [["", "app-control", ""]], standalone: false, attrs: _c02, decls: 5, vars: 0, consts: [[1, "flex", "h-1/2", "flex-1", "flex-col-reverse", "sm:flex-row"], [1, "relative", "z-0", "flex", "h-1/2", "flex-1", "flex-col", "overflow-hidden", "sm:h-auto"]], template: function ControlComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275element(0, "topbar");
+        \u0275\u0275elementStart(1, "div", 0)(2, "main", 1);
+        \u0275\u0275element(3, "a-control-space-list");
+        \u0275\u0275elementEnd()();
+        \u0275\u0275element(4, "footer-menu");
+      }
+    }, dependencies: [TopbarComponent, FooterMenuComponent, ControlSpaceListComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n  background: #f0f0f0;\n}\n/*# sourceMappingURL=control.component.css.map */"] });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ControlComponent, { className: "ControlComponent", filePath: "apps/workplace/src/app/control/control.component.ts", lineNumber: 30 });
+})();
+
+// apps/workplace/src/app/control/control.module.ts
+var ROUTES = [{ path: "", component: ControlComponent }];
+var ControlModule = class _ControlModule {
+  static {
+    this.\u0275fac = function ControlModule_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _ControlModule)();
+    };
+  }
+  static {
+    this.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _ControlModule });
+  }
+  static {
+    this.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ imports: [
+      CommonModule,
+      FormsModule,
+      RouterModule.forChild(ROUTES),
+      SharedComponentModule
+    ] });
+  }
+};
+export {
+  ControlModule
+};
+//# sourceMappingURL=control.module-OKC3MQTD.js.map
