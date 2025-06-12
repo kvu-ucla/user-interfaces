@@ -80938,15 +80938,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "c996719",
-  "hash": "c996719",
+  "raw": "88a8cc2",
+  "hash": "88a8cc2",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "c996719",
+  "suffix": "88a8cc2",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1749694687164
+  "time": 1749695816679
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -95774,8 +95774,9 @@ function checkOrder(order, filters) {
   const s = (filters.search || "").toLowerCase();
   const space = SPACE_PIPE.get(order.event?.extension_data.system_id);
   const location2 = order.event?.location || space.display_name || space.name;
+  const host = order.event?.host || order.event?.organiser?.email || "";
   return !!order.items.find((item) => {
-    return (!filters?.caterer || filters.caterer === "<empty>" && !item.caterer || item.caterer === filters.caterer) && (item.name.toLowerCase().includes(s) || !!item.options.find((option) => option.name.toLowerCase().includes(s)) || location2.toLowerCase().includes(s));
+    return (!filters?.caterer || filters.caterer === "<empty>" && !item.caterer || item.caterer === filters.caterer) && (item.name.toLowerCase().includes(s) || !!item.options.find((option) => option.name.toLowerCase().includes(s)) || location2.toLowerCase().includes(s) || host.toLowerCase().includes(s));
   });
 }
 var BOOKINGS2 = {};
