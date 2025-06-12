@@ -24,13 +24,13 @@ import {
   setHours,
   showStaff,
   validateAssetRequestsForResource
-} from "./chunk-JFOYZGNY.js";
+} from "./chunk-4DA2IV4G.js";
 import {
   generateQRCode,
   querySpaceAvailability,
   removeEvent,
   saveEvent
-} from "./chunk-ZQHHOG5U.js";
+} from "./chunk-IYH4C2RH.js";
 import {
   A11yModule,
   ANIMATION_MODULE_TYPE,
@@ -292,7 +292,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-X5O7XV43.js";
+} from "./chunk-NAV3C563.js";
 import {
   __async,
   __spreadProps,
@@ -2644,8 +2644,78 @@ var ExploreStateService = class _ExploreStateService extends AsyncHandler {
   }
 };
 
+// libs/components/src/lib/cisco-map.component.ts
+var _c07 = ["map_container"];
+var DEFAULT_ZOOM = 18.5;
+var CiscoMapComponent = class _CiscoMapComponent extends AsyncHandler {
+  constructor(_org, _settings) {
+    super();
+    this._org = _org;
+    this._settings = _settings;
+    this.zoom = DEFAULT_ZOOM;
+    this.zoomChange = new EventEmitter();
+    this.zoneChange = new EventEmitter();
+  }
+  ngOnInit() {
+    this._injectScript();
+    this.timeout("init", () => this._initialiseMap());
+  }
+  _injectScript() {
+    if (document.getElementById("cisco-spaces-rich-maps-script"))
+      return;
+    const script = document.createElement("script");
+    script.id = "cisco-spaces-rich-maps-script";
+    script.src = "https://maps.ciscospaces.io/js/spaces-rich-maps-2.0-beta.min.js";
+    document.body.appendChild(script);
+  }
+  _initialiseMap() {
+    if (!SpacesRichMap) {
+      console.error("Cisco Spaces Rich Map is not defined");
+      return;
+    }
+    const config = this._settings.get("app.explore.cisco_maps");
+    this._map = new SpacesRichMap({
+      mapContainer: "cisco-map-container",
+      token: config.token,
+      tenantId: config.tenant_id,
+      locationId: config.location_id,
+      defaultFloor: 0,
+      initialPos: [0, 0],
+      initialZoom: 20,
+      initialPitch: 65,
+      initialBearing: 118,
+      poiLegendHolder: "poi-switch",
+      hideNavigationControls: true
+    });
+    console.log("Map initialized", this._map);
+  }
+  static {
+    this.\u0275fac = function CiscoMapComponent_Factory(__ngFactoryType__) {
+      return new (__ngFactoryType__ || _CiscoMapComponent)(\u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
+    };
+  }
+  static {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CiscoMapComponent, selectors: [["cisco-map"]], viewQuery: function CiscoMapComponent_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c07, 7);
+      }
+      if (rf & 2) {
+        let _t;
+        \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._mapContainer = _t.first);
+      }
+    }, inputs: { zone: "zone", metadata: "metadata", options: "options", focus: "focus", zoom: "zoom", reset: "reset" }, outputs: { zoomChange: "zoomChange", zoneChange: "zoneChange" }, features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 0, consts: [["map_container", ""], ["id", "cisco-map-container", 1, "absolute", "inset-0", "z-0"]], template: function CiscoMapComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275element(0, "div", 1, 0);
+      }
+    }, encapsulation: 2 });
+  }
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CiscoMapComponent, { className: "CiscoMapComponent", filePath: "libs/components/src/lib/cisco-map.component.ts", lineNumber: 29 });
+})();
+
 // libs/components/src/lib/map-renderer.component.ts
-var _c07 = ["outlet"];
+var _c08 = ["outlet"];
 var _c14 = ["feature"];
 function MapRendererComponent_ng_container_2_mat_spinner_1_Template(rf, ctx) {
   if (rf & 1) {
@@ -2979,7 +3049,7 @@ var MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapRendererComponent, selectors: [["map-renderer"]], viewQuery: function MapRendererComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c07, 5);
+        \u0275\u0275viewQuery(_c08, 5);
         \u0275\u0275viewQuery(_c14, 5);
       }
       if (rf & 2) {
@@ -3014,7 +3084,7 @@ var MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
 })();
 
 // libs/components/src/lib/maps-indoors.component.ts
-var _c08 = ["map_container"];
+var _c09 = ["map_container"];
 function MapsIndoorsComponent_button_2_mat_spinner_5_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "mat-spinner", 6);
@@ -3046,14 +3116,14 @@ function MapsIndoorsComponent_button_2_Template(rf, ctx) {
     \u0275\u0275property("ngIf", ctx_r1.loading_directions);
   }
 }
-var DEFAULT_ZOOM = 18.5;
+var DEFAULT_ZOOM2 = 18.5;
 var RESOURCE_MAP = {};
 var MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
   constructor(_maps_people, _org) {
     super();
     this._maps_people = _maps_people;
     this._org = _org;
-    this.zoom = DEFAULT_ZOOM;
+    this.zoom = DEFAULT_ZOOM2;
     this.zoomChange = new EventEmitter();
     this.zoneChange = new EventEmitter();
     this.show_directions = false;
@@ -3092,7 +3162,7 @@ var MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
       this._services?.map?.setZoom(this.zoom);
     }
     if (changes.reset) {
-      this._services?.map?.setZoom(DEFAULT_ZOOM);
+      this._services?.map?.setZoom(DEFAULT_ZOOM2);
       this._centerOnZone();
     }
     if (changes.options) {
@@ -3114,7 +3184,7 @@ var MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
     const view_options = {
       element: this._container.nativeElement,
       center: { lat: parseFloat(lat), lng: parseFloat(long) },
-      zoom: DEFAULT_ZOOM,
+      zoom: DEFAULT_ZOOM2,
       maxZoom: 24
     };
     let view_instance = null;
@@ -3148,7 +3218,7 @@ var MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
     };
     this._initialised.next(true);
     if (this.zone) {
-      this._services.map.setZoom(DEFAULT_ZOOM);
+      this._services.map.setZoom(DEFAULT_ZOOM2);
       this._centerOnZone();
     }
     this._addFloorSelector();
@@ -3159,7 +3229,7 @@ var MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
     this.timeout("resize", () => window.dispatchEvent(new Event("resize")), 100);
     window.maps_indoors = this._services;
     this.timeout("focus", () => this._focusOnLocation());
-    this.timeout("init_zoom", () => this._handleZoomChange(DEFAULT_ZOOM));
+    this.timeout("init_zoom", () => this._handleZoomChange(DEFAULT_ZOOM2));
   }
   clearDirections() {
     this._services.directions_renderer.setRoute(null);
@@ -3341,7 +3411,7 @@ var MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
       const item = items.find((_) => _.properties?.externalId === this.focus) || items[0];
       const bld = this._org.buildings.find((bld2) => bld2.id === this.zone.parent_id);
       const [lng, lat] = item.properties?.anchor?.coordinates || bld?.location.split(",") || [37.8136, 144.9631];
-      this._services.map.setZoom(DEFAULT_ZOOM);
+      this._services.map.setZoom(DEFAULT_ZOOM2);
       this._services.map.setCenter({ lat, lng });
       this._services.mapsindoors.setFloor(item.properties?.floor);
       this._services.mapsindoors.highlight([item.id]);
@@ -3398,7 +3468,7 @@ var MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapsIndoorsComponent, selectors: [["maps-indoors"]], viewQuery: function MapsIndoorsComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c08, 7);
+        \u0275\u0275viewQuery(_c09, 7);
       }
       if (rf & 2) {
         let _t;
@@ -3421,60 +3491,28 @@ var MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
 })();
 
 // libs/components/src/lib/interactive-map.component.ts
-var _c09 = ["*", "*"];
-function InteractiveMapComponent_ng_container_0_Template(rf, ctx) {
+var _c010 = ["*", "*", "*"];
+function InteractiveMapComponent_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "map-renderer", 3);
-    \u0275\u0275twoWayListener("zoomChange", function InteractiveMapComponent_ng_container_0_Template_map_renderer_zoomChange_1_listener($event) {
+    \u0275\u0275elementStart(0, "maps-indoors", 3);
+    \u0275\u0275listener("zoneChange", function InteractiveMapComponent_Conditional_0_Template_maps_indoors_zoneChange_0_listener($event) {
       \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      \u0275\u0275twoWayBindingSet(ctx_r1.zoom, $event) || (ctx_r1.zoom = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275listener("zoomChange", function InteractiveMapComponent_ng_container_0_Template_map_renderer_zoomChange_1_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.zoomChange.next($event));
-    })("mapInfo", function InteractiveMapComponent_ng_container_0_Template_map_renderer_mapInfo_1_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.mapInfo.next($event));
-    });
-    \u0275\u0275projection(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("src", ctx_r1.src);
-    \u0275\u0275twoWayProperty("zoom", ctx_r1.zoom);
-    \u0275\u0275property("reset", ctx_r1.reset)("styles", ctx_r1.styles || (ctx_r1.metadata == null ? null : ctx_r1.metadata.styles))("features", ctx_r1.features || (ctx_r1.metadata == null ? null : ctx_r1.metadata.features))("actions", ctx_r1.actions || (ctx_r1.metadata == null ? null : ctx_r1.metadata.actions))("labels", ctx_r1.labels || (ctx_r1.metadata == null ? null : ctx_r1.metadata.labels));
-  }
-}
-function InteractiveMapComponent_ng_template_2_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "maps-indoors", 4);
-    \u0275\u0275listener("zoneChange", function InteractiveMapComponent_ng_template_2_Template_maps_indoors_zoneChange_0_listener($event) {
-      \u0275\u0275restoreView(_r3);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onLevelChange($event));
     });
-    \u0275\u0275twoWayListener("zoomChange", function InteractiveMapComponent_ng_template_2_Template_maps_indoors_zoomChange_0_listener($event) {
-      \u0275\u0275restoreView(_r3);
+    \u0275\u0275twoWayListener("zoomChange", function InteractiveMapComponent_Conditional_0_Template_maps_indoors_zoomChange_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       \u0275\u0275twoWayBindingSet(ctx_r1.zoom, $event) || (ctx_r1.zoom = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275listener("zoomChange", function InteractiveMapComponent_ng_template_2_Template_maps_indoors_zoomChange_0_listener($event) {
-      \u0275\u0275restoreView(_r3);
+    \u0275\u0275listener("zoomChange", function InteractiveMapComponent_Conditional_0_Template_maps_indoors_zoomChange_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.zoomChange.next($event));
     });
-    \u0275\u0275projection(1, 1);
+    \u0275\u0275projection(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -3482,6 +3520,42 @@ function InteractiveMapComponent_ng_template_2_Template(rf, ctx) {
     \u0275\u0275property("zone", ctx_r1.location);
     \u0275\u0275twoWayProperty("zoom", ctx_r1.zoom);
     \u0275\u0275property("options", ctx_r1.options)("reset", ctx_r1.reset)("focus", ctx_r1.focus)("metadata", ctx_r1.metadata);
+  }
+}
+function InteractiveMapComponent_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "cisco-map");
+    \u0275\u0275projection(1, 1);
+    \u0275\u0275elementEnd();
+  }
+}
+function InteractiveMapComponent_Conditional_3_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "map-renderer", 4);
+    \u0275\u0275twoWayListener("zoomChange", function InteractiveMapComponent_Conditional_3_Template_map_renderer_zoomChange_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r1.zoom, $event) || (ctx_r1.zoom = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("zoomChange", function InteractiveMapComponent_Conditional_3_Template_map_renderer_zoomChange_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.zoomChange.next($event));
+    })("mapInfo", function InteractiveMapComponent_Conditional_3_Template_map_renderer_mapInfo_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.mapInfo.next($event));
+    });
+    \u0275\u0275projection(1, 2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("src", ctx_r1.src);
+    \u0275\u0275twoWayProperty("zoom", ctx_r1.zoom);
+    \u0275\u0275property("reset", ctx_r1.reset)("styles", ctx_r1.styles || (ctx_r1.metadata == null ? null : ctx_r1.metadata.styles))("features", ctx_r1.features || (ctx_r1.metadata == null ? null : ctx_r1.metadata.features))("actions", ctx_r1.actions || (ctx_r1.metadata == null ? null : ctx_r1.metadata.actions))("labels", ctx_r1.labels || (ctx_r1.metadata == null ? null : ctx_r1.metadata.labels));
   }
 }
 function InteractiveMapComponent_div_4_Template(rf, ctx) {
@@ -3532,8 +3606,12 @@ var InteractiveMapComponent = class _InteractiveMapComponent extends AsyncHandle
   get location() {
     return this._org.levels.find((_) => _.map_id === this.src);
   }
-  constructor(_mapspeople, _org, _explore) {
+  get use_cisco_maps() {
+    return this._settings.get("app.explore.use_cisco_maps");
+  }
+  constructor(_settings, _mapspeople, _org, _explore) {
     super();
+    this._settings = _settings;
     this._mapspeople = _mapspeople;
     this._org = _org;
     this._explore = _explore;
@@ -3563,20 +3641,19 @@ var InteractiveMapComponent = class _InteractiveMapComponent extends AsyncHandle
   }
   static {
     this.\u0275fac = function InteractiveMapComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _InteractiveMapComponent)(\u0275\u0275directiveInject(MapsPeopleService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(ExploreStateService));
+      return new (__ngFactoryType__ || _InteractiveMapComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(MapsPeopleService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(ExploreStateService));
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InteractiveMapComponent, selectors: [["interactive-map"]], inputs: { src: "src", zoom: "zoom", center: "center", reset: "reset", metadata: "metadata", styles: "styles", features: "features", labels: "labels", actions: "actions", options: "options", focus: "focus" }, outputs: { zoomChange: "zoomChange", centerChange: "centerChange", mapInfo: "mapInfo" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c09, decls: 5, vars: 5, consts: [["mapsindoors_template", ""], [4, "ngIf", "ngIfElse"], ["zoom", "", "class", "absolute bottom-16 right-1 flex flex-col divide-y divide-base-200 overflow-hidden rounded border border-base-200 bg-base-100 text-base-content shadow", 4, "ngIf"], [3, "zoomChange", "mapInfo", "src", "zoom", "reset", "styles", "features", "actions", "labels"], [3, "zoneChange", "zoomChange", "zone", "zoom", "options", "reset", "focus", "metadata"], ["zoom", "", 1, "absolute", "bottom-16", "right-1", "flex", "flex-col", "divide-y", "divide-base-200", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-100", "text-base-content", "shadow"], ["icon", "", "matRipple", "", "matTooltipPosition", "left", 1, "rounded-none", 3, "click", "matTooltip"]], template: function InteractiveMapComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InteractiveMapComponent, selectors: [["interactive-map"]], inputs: { src: "src", zoom: "zoom", center: "center", reset: "reset", metadata: "metadata", styles: "styles", features: "features", labels: "labels", actions: "actions", options: "options", focus: "focus" }, outputs: { zoomChange: "zoomChange", centerChange: "centerChange", mapInfo: "mapInfo" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c010, decls: 5, vars: 4, consts: [[3, "zone", "zoom", "options", "reset", "focus", "metadata"], [3, "src", "zoom", "reset", "styles", "features", "actions", "labels"], ["zoom", "", "class", "absolute bottom-16 right-1 flex flex-col divide-y divide-base-200 overflow-hidden rounded border border-base-200 bg-base-100 text-base-content shadow", 4, "ngIf"], [3, "zoneChange", "zoomChange", "zone", "zoom", "options", "reset", "focus", "metadata"], [3, "zoomChange", "mapInfo", "src", "zoom", "reset", "styles", "features", "actions", "labels"], ["zoom", "", 1, "absolute", "bottom-16", "right-1", "flex", "flex-col", "divide-y", "divide-base-200", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-100", "text-base-content", "shadow"], ["icon", "", "matRipple", "", "matTooltipPosition", "left", 1, "rounded-none", 3, "click", "matTooltip"]], template: function InteractiveMapComponent_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c09);
-        \u0275\u0275template(0, InteractiveMapComponent_ng_container_0_Template, 3, 7, "ng-container", 1);
+        \u0275\u0275projectionDef(_c010);
+        \u0275\u0275template(0, InteractiveMapComponent_Conditional_0_Template, 2, 6, "maps-indoors", 0);
         \u0275\u0275pipe(1, "async");
-        \u0275\u0275template(2, InteractiveMapComponent_ng_template_2_Template, 2, 6, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(4, InteractiveMapComponent_div_4_Template, 13, 9, "div", 2);
+        \u0275\u0275template(2, InteractiveMapComponent_Conditional_2_Template, 2, 0, "cisco-map")(3, InteractiveMapComponent_Conditional_3_Template, 2, 7, "map-renderer", 1)(4, InteractiveMapComponent_div_4_Template, 13, 9, "div", 2);
       }
       if (rf & 2) {
-        const mapsindoors_template_r5 = \u0275\u0275reference(3);
-        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(1, 3, ctx.use_mapsindoors$))("ngIfElse", mapsindoors_template_r5);
+        \u0275\u0275conditional(\u0275\u0275pipeBind1(1, 2, ctx.use_mapsindoors$) ? 0 : ctx.use_cisco_maps ? 2 : 3);
         \u0275\u0275advance(4);
         \u0275\u0275property("ngIf", ctx.options == null ? null : ctx.options.controls);
       }
@@ -3589,12 +3666,13 @@ var InteractiveMapComponent = class _InteractiveMapComponent extends AsyncHandle
       MatRippleModule,
       MatRipple,
       MapsIndoorsComponent,
-      MapRendererComponent
+      MapRendererComponent,
+      CiscoMapComponent
     ], encapsulation: 2 });
   }
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(InteractiveMapComponent, { className: "InteractiveMapComponent", filePath: "libs/components/src/lib/interactive-map.component.ts", lineNumber: 124 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(InteractiveMapComponent, { className: "InteractiveMapComponent", filePath: "libs/components/src/lib/interactive-map.component.ts", lineNumber: 132 });
 })();
 
 // libs/explore/src/lib/explore-desk-info.component.ts
@@ -3715,7 +3793,7 @@ var ExploreDeskInfoComponent = class _ExploreDeskInfoComponent {
 })();
 
 // libs/explore/src/lib/explore-device-info.component.ts
-var _c010 = ["explore-device-info", ""];
+var _c011 = ["explore-device-info", ""];
 function ExploreDeviceInfoComponent_ng_template_5_p_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "p", 15)(1, "label");
@@ -3939,7 +4017,7 @@ var ExploreDeviceInfoComponent = class _ExploreDeviceInfoComponent extends Async
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreDeviceInfoComponent, selectors: [["", "explore-device-info", ""]], features: [\u0275\u0275InheritDefinitionFeature], attrs: _c010, decls: 7, vars: 9, consts: [["dot", ""], ["device_tooltip", ""], ["name", "radius", 1, "radius", "center", "border-blue-600", "absolute", "rounded-full", "border-8", "border-dashed", "bg-info", "bg-opacity-25"], ["shadow", "", 1, "center", "absolute", "h-8", "w-8", "rounded-full", "bg-neutral"], ["name", "dot", 1, "center", "absolute", "h-3", "w-3", "rounded-full", "border-2", "border-white", "shadow"], ["customTooltip", "", 1, "pointer-events-auto", "absolute", "inset-0", 3, "mouseenter", "content", "backdrop", "xPosition", "yPosition", "hover"], ["name", "device-info", 1, "pointer-events-none", "left-0", "top-0", "mx-2", "w-64", "rounded", "bg-base-100", "p-4", "shadow", 3, "mouseleave"], [1, "arrow"], [1, "details"], ["class", "break-words", 4, "ngIf"], ["type", "", 4, "ngIf"], ["os", "", 4, "ngIf"], ["ssid", "", 4, "ngIf"], ["username", "", 4, "ngIf"], ["user", "", 4, "ngIf"], [1, "break-words"], ["type", ""], ["os", ""], ["ssid", ""], ["username", ""], ["user", ""]], template: function ExploreDeviceInfoComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreDeviceInfoComponent, selectors: [["", "explore-device-info", ""]], features: [\u0275\u0275InheritDefinitionFeature], attrs: _c011, decls: 7, vars: 9, consts: [["dot", ""], ["device_tooltip", ""], ["name", "radius", 1, "radius", "center", "border-blue-600", "absolute", "rounded-full", "border-8", "border-dashed", "bg-info", "bg-opacity-25"], ["shadow", "", 1, "center", "absolute", "h-8", "w-8", "rounded-full", "bg-neutral"], ["name", "dot", 1, "center", "absolute", "h-3", "w-3", "rounded-full", "border-2", "border-white", "shadow"], ["customTooltip", "", 1, "pointer-events-auto", "absolute", "inset-0", 3, "mouseenter", "content", "backdrop", "xPosition", "yPosition", "hover"], ["name", "device-info", 1, "pointer-events-none", "left-0", "top-0", "mx-2", "w-64", "rounded", "bg-base-100", "p-4", "shadow", 3, "mouseleave"], [1, "arrow"], [1, "details"], ["class", "break-words", 4, "ngIf"], ["type", "", 4, "ngIf"], ["os", "", 4, "ngIf"], ["ssid", "", 4, "ngIf"], ["username", "", 4, "ngIf"], ["user", "", 4, "ngIf"], [1, "break-words"], ["type", ""], ["os", ""], ["ssid", ""], ["username", ""], ["user", ""]], template: function ExploreDeviceInfoComponent_Template(rf, ctx) {
       if (rf & 1) {
         const _r1 = \u0275\u0275getCurrentView();
         \u0275\u0275element(0, "div", 2)(1, "div", 3)(2, "div", 4, 0);
@@ -4655,7 +4733,7 @@ var EventFormService = class _EventFormService extends AsyncHandler {
 };
 
 // libs/explore/src/lib/explore-book-qr.component.ts
-var _c011 = (a0) => ({ name: a0 });
+var _c012 = (a0) => ({ name: a0 });
 var DEFAULT_PATH = `workplace/#/explore?space={{id}}`;
 var ExploreBookQrComponent = class _ExploreBookQrComponent {
   constructor(_data, _settings) {
@@ -4686,7 +4764,7 @@ var ExploreBookQrComponent = class _ExploreBookQrComponent {
       }
       if (rf & 2) {
         \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 2, "EXPLORE.BOOK_RESOURCE", \u0275\u0275pureFunction1(5, _c011, ctx.space == null ? null : ctx.space.name)), " ");
+        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 2, "EXPLORE.BOOK_RESOURCE", \u0275\u0275pureFunction1(5, _c012, ctx.space == null ? null : ctx.space.name)), " ");
         \u0275\u0275advance(7);
         \u0275\u0275property("src", ctx.qr_code, \u0275\u0275sanitizeUrl);
       }
@@ -5792,7 +5870,7 @@ var ExploreMapControlComponent = class _ExploreMapControlComponent extends Async
 })();
 
 // libs/components/src/lib/map-pin.component.ts
-var _c012 = ["map-pin", ""];
+var _c013 = ["map-pin", ""];
 function MapPinComponent_div_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 3);
@@ -5844,7 +5922,7 @@ var MapPinComponent = class _MapPinComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapPinComponent, selectors: [["", "map-pin", ""]], standalone: false, attrs: _c012, decls: 3, vars: 2, consts: [[1, "-z-1", "absolute", "bottom-1/2", "left-1/2", "flex", "w-[24rem]", "-translate-x-1/2", "flex-col", "items-center"], ["name", "message", "class", "text-gray-700 m-2 rounded bg-base-100 p-2 shadow", 4, "ngIf"], ["name", "pin", "viewBox", "0 0 380 560", "class", "w-8", 3, "pointer-events-auto", "click", 4, "ngIf"], ["name", "message", 1, "text-gray-700", "m-2", "rounded", "bg-base-100", "p-2", "shadow"], ["name", "pin", "viewBox", "0 0 380 560", 1, "w-8", 3, "click"], ["stroke-width", "25", "d", "M182.9,551.7c0,0.1,0.2,0.3,0.2,0.3S358.3,283,358.3,194.6c0-130.1-88.8-186.7-175.4-186.9\n            C96.3,7.9,7.5,64.5,7.5,194.6c0,88.4,175.3,357.4,175.3,357.4S182.9,551.7,182.9,551.7z M122.2,187.2c0-33.6,27.2-60.8,60.8-60.8\n            c33.6,0,60.8,27.2,60.8,60.8S216.5,248,182.9,248C149.4,248,122.2,220.8,122.2,187.2z"]], template: function MapPinComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapPinComponent, selectors: [["", "map-pin", ""]], standalone: false, attrs: _c013, decls: 3, vars: 2, consts: [[1, "-z-1", "absolute", "bottom-1/2", "left-1/2", "flex", "w-[24rem]", "-translate-x-1/2", "flex-col", "items-center"], ["name", "message", "class", "text-gray-700 m-2 rounded bg-base-100 p-2 shadow", 4, "ngIf"], ["name", "pin", "viewBox", "0 0 380 560", "class", "w-8", 3, "pointer-events-auto", "click", 4, "ngIf"], ["name", "message", 1, "text-gray-700", "m-2", "rounded", "bg-base-100", "p-2", "shadow"], ["name", "pin", "viewBox", "0 0 380 560", 1, "w-8", 3, "click"], ["stroke-width", "25", "d", "M182.9,551.7c0,0.1,0.2,0.3,0.2,0.3S358.3,283,358.3,194.6c0-130.1-88.8-186.7-175.4-186.9\n            C96.3,7.9,7.5,64.5,7.5,194.6c0,88.4,175.3,357.4,175.3,357.4S182.9,551.7,182.9,551.7z M122.2,187.2c0-33.6,27.2-60.8,60.8-60.8\n            c33.6,0,60.8,27.2,60.8,60.8S216.5,248,182.9,248C149.4,248,122.2,220.8,122.2,187.2z"]], template: function MapPinComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 0);
         \u0275\u0275template(1, MapPinComponent_div_1_Template, 2, 1, "div", 1)(2, MapPinComponent__svg_svg_2_Template, 3, 6, "svg", 2);
@@ -5864,7 +5942,7 @@ var MapPinComponent = class _MapPinComponent {
 })();
 
 // libs/components/src/lib/map-radius.component.ts
-var _c013 = ["map-radius", ""];
+var _c014 = ["map-radius", ""];
 function MapRadiusComponent_ng_container_0_div_2_span_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span", 6);
@@ -5949,7 +6027,7 @@ var MapRadiusComponent = class _MapRadiusComponent {
     };
   }
   static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapRadiusComponent, selectors: [["", "map-radius", ""]], standalone: false, attrs: _c013, decls: 1, vars: 1, consts: [[3, "resize", 4, "ngIf"], [3, "resize"], ["radius", "", 1, "center", "rounded-full", "border-4", "border-dashed"], ["message", "", "class", "text-gray-700 whitespace-no-wrap absolute top-0 m-2 flex w-64 flex-col rounded bg-base-100 p-2 shadow", 3, "top", 4, "ngIf"], ["message", "", 1, "text-gray-700", "whitespace-no-wrap", "absolute", "top-0", "m-2", "flex", "w-64", "flex-col", "rounded", "bg-base-100", "p-2", "shadow"], ["class", "text-xs", 4, "ngIf"], [1, "text-xs"]], template: function MapRadiusComponent_Template(rf, ctx) {
+    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapRadiusComponent, selectors: [["", "map-radius", ""]], standalone: false, attrs: _c014, decls: 1, vars: 1, consts: [[3, "resize", 4, "ngIf"], [3, "resize"], ["radius", "", 1, "center", "rounded-full", "border-4", "border-dashed"], ["message", "", "class", "text-gray-700 whitespace-no-wrap absolute top-0 m-2 flex w-64 flex-col rounded bg-base-100 p-2 shadow", 3, "top", 4, "ngIf"], ["message", "", 1, "text-gray-700", "whitespace-no-wrap", "absolute", "top-0", "m-2", "flex", "w-64", "flex-col", "rounded", "bg-base-100", "p-2", "shadow"], ["class", "text-xs", 4, "ngIf"], [1, "text-xs"]], template: function MapRadiusComponent_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275template(0, MapRadiusComponent_ng_container_0_Template, 3, 9, "ng-container", 0);
       }
@@ -5981,7 +6059,7 @@ var MapLocation = class {
 };
 
 // libs/bookings/src/lib/locker-grid.component.ts
-var _c014 = () => [];
+var _c015 = () => [];
 function LockerGridComponent_button_1_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -6057,7 +6135,7 @@ var LockerGridComponent = class _LockerGridComponent {
       if (rf & 2) {
         \u0275\u0275styleProp("width", ctx.columns * 2.5 + "rem")("grid-template-columns", "repeat(" + ctx.columns + ", 5rem)")("grid-template-rows", "repeat(" + (ctx.bank == null ? null : ctx.bank.height) + ", 5rem)");
         \u0275\u0275advance();
-        \u0275\u0275property("ngForOf", (ctx.bank == null ? null : ctx.bank.lockers) || \u0275\u0275pureFunction0(7, _c014));
+        \u0275\u0275property("ngForOf", (ctx.bank == null ? null : ctx.bank.lockers) || \u0275\u0275pureFunction0(7, _c015));
       }
     }, dependencies: [CommonModule, NgForOf, MatRippleModule, MatRipple], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n}\nbutton[disabled][_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n/*# sourceMappingURL=locker-grid.component.css.map */"] });
   }
@@ -6114,7 +6192,7 @@ var ExploreLockerBankModalComponent = class _ExploreLockerBankModalComponent {
 })();
 
 // libs/explore/src/lib/explore-locker-bank-info.component.ts
-var _c015 = (a0, a1) => ({ used: a0, count: a1 });
+var _c016 = (a0, a1) => ({ used: a0, count: a1 });
 function ExploreLockerBankInfoComponent_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 3)(1, "h3", 4);
@@ -6132,7 +6210,7 @@ function ExploreLockerBankInfoComponent_ng_template_2_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(ctx_r1.bank.name);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(5, 5, "EXPLORE.LOCKERS_USE", \u0275\u0275pureFunction2(8, _c015, ctx_r1.in_use_count, ctx_r1.bank.lockers.length || 1)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(5, 5, "EXPLORE.LOCKERS_USE", \u0275\u0275pureFunction2(8, _c016, ctx_r1.in_use_count, ctx_r1.bank.lockers.length || 1)), " ");
   }
 }
 var ExploreLockerBankInfoComponent = class _ExploreLockerBankInfoComponent {
@@ -6647,7 +6725,7 @@ var ExploreParkingService = class _ExploreParkingService extends AsyncHandler {
 };
 
 // libs/components/src/lib/map-canvas.component.ts
-var _c016 = ["canvas"];
+var _c017 = ["canvas"];
 var _c15 = ["map-canvas", ""];
 var MapCanvasComponent = class _MapCanvasComponent extends AsyncHandler {
   get ratioed_height() {
@@ -6745,7 +6823,7 @@ var MapCanvasComponent = class _MapCanvasComponent extends AsyncHandler {
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapCanvasComponent, selectors: [["", "map-canvas", ""]], viewQuery: function MapCanvasComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c016, 7);
+        \u0275\u0275viewQuery(_c017, 7);
       }
       if (rf & 2) {
         let _t;
@@ -7068,7 +7146,7 @@ function getCenterPoint(points) {
 }
 
 // libs/explore/src/lib/explore-map-view.component.ts
-var _c017 = () => ({ controls: true });
+var _c018 = () => ({ controls: true });
 function ExploreMapViewComponent_div_6_div_2_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -7368,7 +7446,7 @@ var ExploreMapViewComponent = class _ExploreMapViewComponent extends AsyncHandle
         \u0275\u0275template(8, ExploreMapViewComponent_div_8_Template, 5, 4, "div", 2)(9, ExploreMapViewComponent_button_9_Template, 2, 0, "button", 3);
       }
       if (rf & 2) {
-        \u0275\u0275property("src", \u0275\u0275pipeBind1(1, 10, ctx.url))("styles", \u0275\u0275pipeBind1(2, 12, ctx.styles))("features", \u0275\u0275pipeBind1(3, 14, ctx.features))("actions", \u0275\u0275pipeBind1(4, 16, ctx.actions))("labels", \u0275\u0275pipeBind1(5, 18, ctx.labels))("focus", ctx.locate)("options", \u0275\u0275pureFunction0(22, _c017));
+        \u0275\u0275property("src", \u0275\u0275pipeBind1(1, 10, ctx.url))("styles", \u0275\u0275pipeBind1(2, 12, ctx.styles))("features", \u0275\u0275pipeBind1(3, 14, ctx.features))("actions", \u0275\u0275pipeBind1(4, 16, ctx.actions))("labels", \u0275\u0275pipeBind1(5, 18, ctx.labels))("focus", ctx.locate)("options", \u0275\u0275pureFunction0(22, _c018));
         \u0275\u0275advance(6);
         \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(7, 20, ctx.use_mapsindoors$));
         \u0275\u0275advance(2);
@@ -7580,7 +7658,7 @@ var ExploreSearchService = class _ExploreSearchService {
 };
 
 // libs/explore/src/lib/explore-search.component.ts
-var _c018 = ["input"];
+var _c019 = ["input"];
 var _c16 = ["button"];
 function ExploreSearchComponent_mat_spinner_9_Template(rf, ctx) {
   if (rf & 1) {
@@ -7725,7 +7803,7 @@ var ExploreSearchComponent = class _ExploreSearchComponent extends AsyncHandler 
   static {
     this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreSearchComponent, selectors: [["explore-search"]], viewQuery: function ExploreSearchComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c018, 5);
+        \u0275\u0275viewQuery(_c019, 5);
         \u0275\u0275viewQuery(_c16, 7);
       }
       if (rf & 2) {
@@ -7823,7 +7901,7 @@ var ExploreSearchComponent = class _ExploreSearchComponent extends AsyncHandler 
 })();
 
 // node_modules/@angular/material/fesm2022/tooltip.mjs
-var _c019 = ["tooltip"];
+var _c020 = ["tooltip"];
 var SCROLL_THROTTLE_MS = 20;
 function getMatTooltipInvalidPositionError(position) {
   return Error(`Tooltip position "${position}" is invalid.`);
@@ -8682,7 +8760,7 @@ var TooltipComponent = class _TooltipComponent {
     selectors: [["mat-tooltip-component"]],
     viewQuery: function TooltipComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c019, 7);
+        \u0275\u0275viewQuery(_c020, 7);
       }
       if (rf & 2) {
         let _t;
@@ -8996,7 +9074,7 @@ var ExploreLevelSelectComponent = class _ExploreLevelSelectComponent {
 })();
 
 // apps/map-kiosk/src/app/explore.component.ts
-var _c020 = ["app-explore", ""];
+var _c021 = ["app-explore", ""];
 var _c17 = () => ({ controls: true });
 function ExploreComponent_explore_search_4_Template(rf, ctx) {
   if (rf & 1) {
@@ -9461,7 +9539,7 @@ var ExploreComponent = class _ExploreComponent extends AsyncHandler {
       ExploreZonesService,
       ExploreParkingService,
       SpacePipe
-    ]), \u0275\u0275InheritDefinitionFeature], attrs: _c020, decls: 37, vars: 36, consts: [["accessibility_controls", ""], ["levelMenu", "matMenu"], ["legendMenu", "matMenu"], ["topbar", "", 1, "relative", "flex", "items-center", "justify-between", "border-b", "border-base-300", "bg-base-100", "px-4", "py-2", "text-base-content"], ["matRipple", "", "routerLink", "/", 1, "rounded", "p-2", "text-2xl"], ["auth", "", "alt", "Logo", 1, "h-12", 3, "source"], [1, "absolute", "right-2", "top-1/2", "flex", "-translate-y-1/2", "items-center"], [4, "ngIf"], ["icon", "", "matRipple", "", "customTooltip", "", 1, "flex", "bg-base-200", "sm:hidden", 3, "content"], [1, "flex", "h-1/2", "flex-1"], ["sidebar", "", 1, "hidden", "w-[20rem]", "border-r", "border-base-300", "bg-base-100", "px-2", "py-4", "text-base-content", "sm:block"], ["btn", "", "matRipple", "", 1, "items", "clear", "flex", "w-full", "space-x-4", "hover:bg-base-200", 3, "click"], [1, "text-2xl"], [1, "flex-1", "text-left", "font-medium"], [1, "px-8"], [1, "space-y-2", "py-4"], [1, "mx-auto", "w-[calc(100%-4rem)]"], [1, "relative", "h-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "labels", "options", "focus"], [1, "w-[18rem]", "rounded", "bg-base-100", "p-2"], ["options", "", 1, "flex", "items-center", "space-x-2", "bg-base-content", "p-2", "text-base-100", "sm:hidden"], ["btn", "", "matRipple", "", 1, "clear", "text-base-100", 3, "matMenuTriggerFor"], ["mat-menu-item", "", 3, "click", 4, "ngFor", "ngForOf"], ["mat-menu-item", "", 3, "click"], ["class", "flex w-full items-center space-x-4 rounded px-4 py-2 hover:bg-base-200", 4, "ngFor", "ngForOf"], [1, "flex", "w-full", "items-center", "space-x-4", "rounded", "px-4", "py-2", "hover:bg-base-200"], [1, "h-3", "w-3", "rounded-full"], [1, "text-left", "opacity-60"], ["btn", "", "matRipple", "", "class", "clear w-full hover:bg-base-200 hover:opacity-100", 3, "opacity-30", "click", 4, "ngFor", "ngForOf"], ["btn", "", "matRipple", "", 1, "clear", "w-full", "hover:bg-base-200", "hover:opacity-100", 3, "click"], [1, "w-full", "text-left"]], template: function ExploreComponent_Template(rf, ctx) {
+    ]), \u0275\u0275InheritDefinitionFeature], attrs: _c021, decls: 37, vars: 36, consts: [["accessibility_controls", ""], ["levelMenu", "matMenu"], ["legendMenu", "matMenu"], ["topbar", "", 1, "relative", "flex", "items-center", "justify-between", "border-b", "border-base-300", "bg-base-100", "px-4", "py-2", "text-base-content"], ["matRipple", "", "routerLink", "/", 1, "rounded", "p-2", "text-2xl"], ["auth", "", "alt", "Logo", 1, "h-12", 3, "source"], [1, "absolute", "right-2", "top-1/2", "flex", "-translate-y-1/2", "items-center"], [4, "ngIf"], ["icon", "", "matRipple", "", "customTooltip", "", 1, "flex", "bg-base-200", "sm:hidden", 3, "content"], [1, "flex", "h-1/2", "flex-1"], ["sidebar", "", 1, "hidden", "w-[20rem]", "border-r", "border-base-300", "bg-base-100", "px-2", "py-4", "text-base-content", "sm:block"], ["btn", "", "matRipple", "", 1, "items", "clear", "flex", "w-full", "space-x-4", "hover:bg-base-200", 3, "click"], [1, "text-2xl"], [1, "flex-1", "text-left", "font-medium"], [1, "px-8"], [1, "space-y-2", "py-4"], [1, "mx-auto", "w-[calc(100%-4rem)]"], [1, "relative", "h-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "labels", "options", "focus"], [1, "w-[18rem]", "rounded", "bg-base-100", "p-2"], ["options", "", 1, "flex", "items-center", "space-x-2", "bg-base-content", "p-2", "text-base-100", "sm:hidden"], ["btn", "", "matRipple", "", 1, "clear", "text-base-100", 3, "matMenuTriggerFor"], ["mat-menu-item", "", 3, "click", 4, "ngFor", "ngForOf"], ["mat-menu-item", "", 3, "click"], ["class", "flex w-full items-center space-x-4 rounded px-4 py-2 hover:bg-base-200", 4, "ngFor", "ngForOf"], [1, "flex", "w-full", "items-center", "space-x-4", "rounded", "px-4", "py-2", "hover:bg-base-200"], [1, "h-3", "w-3", "rounded-full"], [1, "text-left", "opacity-60"], ["btn", "", "matRipple", "", "class", "clear w-full hover:bg-base-200 hover:opacity-100", 3, "opacity-30", "click", 4, "ngFor", "ngForOf"], ["btn", "", "matRipple", "", 1, "clear", "w-full", "hover:bg-base-200", "hover:opacity-100", 3, "click"], [1, "w-full", "text-left"]], template: function ExploreComponent_Template(rf, ctx) {
       if (rf & 1) {
         const _r1 = \u0275\u0275getCurrentView();
         \u0275\u0275elementStart(0, "div", 3)(1, "a", 4);
@@ -9578,4 +9656,4 @@ var AppExploreModule = class _AppExploreModule {
 export {
   AppExploreModule
 };
-//# sourceMappingURL=explore.module-WP7V2VBZ.js.map
+//# sourceMappingURL=explore.module-Z3QBX3VF.js.map

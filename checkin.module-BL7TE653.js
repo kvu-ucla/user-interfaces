@@ -2,12 +2,12 @@ import {
   CheckinStateService,
   MatCheckbox,
   MatCheckboxModule
-} from "./chunk-HBJ6MOU3.js";
+} from "./chunk-NQDSMKL3.js";
 import {
   generateQRCode,
   showEventMetadata,
   updateEventMetadata
-} from "./chunk-ZQHHOG5U.js";
+} from "./chunk-IYH4C2RH.js";
 import {
   ActivatedRoute,
   AsyncHandler,
@@ -131,7 +131,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-X5O7XV43.js";
+} from "./chunk-NAV3C563.js";
 import {
   __async,
   __spreadProps,
@@ -2498,4 +2498,4 @@ var VisitorCheckinModule = class _VisitorCheckinModule {
 export {
   VisitorCheckinModule
 };
-//# sourceMappingURL=checkin.module-3MCMH6DP.js.map
+//# sourceMappingURL=checkin.module-BL7TE653.js.map
