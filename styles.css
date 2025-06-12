@@ -3489,6 +3489,9 @@ video {
 #placeos .h-\[calc\(100vh-9rem\)\] {
   height: calc(100vh - 9rem);
 }
+#placeos .h-\[calc\(3rem\+2px\)\] {
+  height: calc(3rem + 2px);
+}
 #placeos .h-\[calc\(50vh-2rem\)\] {
   height: calc(50vh - 2rem);
 }
