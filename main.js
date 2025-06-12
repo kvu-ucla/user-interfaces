@@ -76128,15 +76128,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "8ae12bd",
-  "hash": "8ae12bd",
+  "raw": "88a8cc2",
+  "hash": "88a8cc2",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "8ae12bd",
+  "suffix": "88a8cc2",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1749565611706
+  "time": 1749695755841
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -90786,6 +90786,7 @@ var _PanelStateService = class _PanelStateService extends AsyncHandler {
       }
       const min_duration = this._settings.getValue().min_duration;
       const space = yield this._space_pipe.transform(this.system);
+      this.timeout("reset_view", () => this._dialog.closeAll(), 2 * 60 * 1e3);
       const details = yield openBookingModal(__spreadProps(__spreadValues({}, this._settings.getValue()), {
         space,
         date: future ? date : startOfMinute(Date.now()).getTime() + 1e3,
@@ -90809,10 +90810,12 @@ var _PanelStateService = class _PanelStateService extends AsyncHandler {
       });
       this._events.clearForm();
       details.close();
+      this.clearTimeout("reset_view");
     });
   }
   confirmBookNow() {
     return __async(this, null, function* () {
+      this.timeout("reset_view", () => this._dialog.closeAll(), 2 * 60 * 1e3);
       const date = Date.now();
       const current = yield nextValueFrom(this._current);
       if (current && isAfter(date, current.date) && isBefore(date, addMinutes(current.date, current.duration))) {
@@ -90849,6 +90852,7 @@ var _PanelStateService = class _PanelStateService extends AsyncHandler {
         notifyError(`Error creating meeting. ${e2}`);
       }
       ref.close();
+      this.clearTimeout("reset_view");
     });
   }
   /**
@@ -90879,6 +90883,7 @@ var _PanelStateService = class _PanelStateService extends AsyncHandler {
    */
   confirmStart() {
     return __async(this, null, function* () {
+      this.timeout("reset_view", () => this._dialog.closeAll(), 2 * 60 * 1e3);
       const details = yield openConfirmModal({
         title: "Do you wish to start your meeting?",
         content: `If you don't start your meeting it will be cancelled ${this._settings.getValue().pending_period / 60} minutes after the start time.`,
@@ -90890,6 +90895,7 @@ var _PanelStateService = class _PanelStateService extends AsyncHandler {
       if (details.reason !== "done")
         return;
       this.startMeeting();
+      this.clearTimeout("reset_view");
     });
   }
   /**
@@ -90913,6 +90919,7 @@ var _PanelStateService = class _PanelStateService extends AsyncHandler {
    */
   confirmEnd() {
     return __async(this, null, function* () {
+      this.timeout("reset_view", () => this._dialog.closeAll(), 2 * 60 * 1e3);
       const details = yield openConfirmModal({
         title: "Are you sure want to end your meeting?",
         content: "Ending your meeting early will free up this room for others to use",
@@ -90926,6 +90933,7 @@ var _PanelStateService = class _PanelStateService extends AsyncHandler {
       details.loading("Ending Meeting...");
       yield this.endCurrent().catch();
       details.close();
+      this.clearTimeout("reset_view");
     });
   }
   /**
@@ -90980,6 +90988,7 @@ var _PanelStateService = class _PanelStateService extends AsyncHandler {
    */
   confirmWaiter() {
     return __async(this, null, function* () {
+      this.timeout("reset_view", () => this._dialog.closeAll(), 2 * 60 * 1e3);
       const details = yield openConfirmModal({
         title: "Do you wish to call a waiter?",
         content: `Note that it can take up to 15 minutes for them to turn up.`,
@@ -90991,6 +91000,7 @@ var _PanelStateService = class _PanelStateService extends AsyncHandler {
       if (details.reason !== "done")
         return;
       this.callWaiter();
+      this.clearTimeout("reset_view");
     });
   }
   /**
