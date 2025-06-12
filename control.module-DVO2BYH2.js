@@ -61,7 +61,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-SAOU53EX.js";
+} from "./chunk-6BYTXXAP.js";
 import "./chunk-4MWRP73S.js";
 
 // apps/workplace/src/app/control/list-item.component.ts
@@ -333,4 +333,4 @@ var ControlModule = class _ControlModule {
 export {
   ControlModule
 };
-//# sourceMappingURL=control.module-FHQP4ODI.js.map
+//# sourceMappingURL=control.module-DVO2BYH2.js.map

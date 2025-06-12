@@ -1,9 +1,9 @@
 import {
   subMinutes
-} from "./chunk-N6UWGHTL.js";
+} from "./chunk-TMJXQDCV.js";
 import {
   FindAvailabilityModalComponent
-} from "./chunk-RU4JFOZX.js";
+} from "./chunk-ZM7FTI67.js";
 import {
   ANIMATION_SHOW_CONTRACT_EXPAND,
   ActivatedRoute,
@@ -255,7 +255,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-SAOU53EX.js";
+} from "./chunk-6BYTXXAP.js";
 import {
   __async,
   __spreadProps,
@@ -829,8 +829,9 @@ function checkOrder(order, filters) {
   const s = (filters.search || "").toLowerCase();
   const space = SPACE_PIPE.get(order.event?.extension_data.system_id);
   const location2 = order.event?.location || space.display_name || space.name;
+  const host = order.event?.host || order.event?.organiser?.email || "";
   return !!order.items.find((item) => {
-    return (!filters?.caterer || filters.caterer === "<empty>" && !item.caterer || item.caterer === filters.caterer) && (item.name.toLowerCase().includes(s) || !!item.options.find((option) => option.name.toLowerCase().includes(s)) || location2.toLowerCase().includes(s));
+    return (!filters?.caterer || filters.caterer === "<empty>" && !item.caterer || item.caterer === filters.caterer) && (item.name.toLowerCase().includes(s) || !!item.options.find((option) => option.name.toLowerCase().includes(s)) || location2.toLowerCase().includes(s) || host.toLowerCase().includes(s));
   });
 }
 var BOOKINGS = {};
@@ -12848,4 +12849,4 @@ var BookModule = class _BookModule {
 export {
   BookModule
 };
-//# sourceMappingURL=book.module-7WSG7BVX.js.map
+//# sourceMappingURL=book.module-7INA3GVQ.js.map
