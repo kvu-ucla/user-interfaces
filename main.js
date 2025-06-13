@@ -5,11 +5,11 @@ import {
   VirtualKeyboardComponent,
   generateMockSpace,
   setHours
-} from "./chunk-4DA2IV4G.js";
+} from "./chunk-XDP2TPRI.js";
 import {
   CheckinStateService,
   MatCheckboxModule
-} from "./chunk-NQDSMKL3.js";
+} from "./chunk-QSHE5ANY.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -254,7 +254,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-NAV3C563.js";
+} from "./chunk-7L7HN73Q.js";
 import {
   __async,
   __export,
@@ -29276,11 +29276,11 @@ var routes = [
   { path: "register", component: VisitorRegistrationComponent },
   {
     path: "explore",
-    loadChildren: () => import("./explore.module-Z3QBX3VF.js").then((m) => m.AppExploreModule)
+    loadChildren: () => import("./explore.module-HL56NITR.js").then((m) => m.AppExploreModule)
   },
   {
     path: "checkin",
-    loadChildren: () => import("./checkin.module-BL7TE653.js").then((m) => m.VisitorCheckinModule)
+    loadChildren: () => import("./checkin.module-PGD3WFYT.js").then((m) => m.VisitorCheckinModule)
   },
   { path: "**", redirectTo: "bootstrap" }
 ];
