@@ -74525,6 +74525,7 @@ var APP = {
     SURVEY_QUESTION_EMPTY_ACTION: "Click + above to add some questions",
     SURVEY_DND_INFO: "Drag and drop questions from the question bank here",
     SURVEY_COMPLETE: "Thank you for completing the survey.",
+    SURVEY_BUILDER: "Builder",
     PARKING_HEADER: "Parking Management",
     PARKING_BOOK_HEADER: "Parking Reservations",
     PARKING_ADD: "Add Reservation",
@@ -76279,15 +76280,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "88a8cc2",
-  "hash": "88a8cc2",
+  "raw": "84a521c",
+  "hash": "84a521c",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "88a8cc2",
+  "suffix": "84a521c",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1749695759927
+  "time": 1749789584945
 };
 
 // libs/common/src/lib/settings.service.ts
