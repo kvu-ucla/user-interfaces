@@ -1,6 +1,6 @@
 import {
   subMinutes
-} from "./chunk-RNCUNLKR.js";
+} from "./chunk-ZEWXZMBA.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -190,7 +190,7 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-JIZRN2WB.js";
+} from "./chunk-6MYMCIEZ.js";
 import {
   __async,
   __export,
@@ -25642,6 +25642,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
     this._maps = _maps;
     this._tracing = _tracing;
     this._locale = _locale;
+    this._zone = "";
   }
   ngOnInit() {
     return __async(this, null, function* () {
@@ -25672,6 +25673,9 @@ var AppComponent = class _AppComponent extends AsyncHandler {
         }
         if (params.has("x-api-key")) {
           gs(params.get("x-api-key"));
+        }
+        if (params.has("building_id")) {
+          this._zone = params.get("building_id");
         }
       });
       setNotifyOutlet(this._snackbar);
@@ -25710,6 +25714,11 @@ var AppComponent = class _AppComponent extends AsyncHandler {
       } catch {
         log("APP", "Failed to initialise background services.", void 0, "warn");
       }
+      this.timeout("set_initial_building", () => {
+        const bld = this._org.buildings.find((b) => b.id === this._zone);
+        if (bld)
+          this._org.setBuilding(bld);
+      });
     });
   }
   onInitError() {
@@ -25835,43 +25844,43 @@ var routes = [
     path: "landing",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./landing.module-MK5RHMWX.js").then((m) => m.AppLandingModule)
+    loadChildren: () => import("./landing.module-GMMDXXEB.js").then((m) => m.AppLandingModule)
   },
   {
     path: "book",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./book.module-ODAKOK5Y.js").then((m) => m.BookModule)
+    loadChildren: () => import("./book.module-52CXSYLS.js").then((m) => m.BookModule)
   },
   {
     path: "explore",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./explore.module-DXG3GXDI.js").then((m) => m.ExploreModule)
+    loadChildren: () => import("./explore.module-4JEFPSAI.js").then((m) => m.ExploreModule)
   },
   {
     path: "control",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./control.module-N6FMX6MM.js").then((m) => m.ControlModule)
+    loadChildren: () => import("./control.module-BDOIUZOT.js").then((m) => m.ControlModule)
   },
   {
     path: "directory",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./directory.module-IQSNO4J4.js").then((m) => m.DirectoryModule)
+    loadChildren: () => import("./directory.module-A5FFZU2R.js").then((m) => m.DirectoryModule)
   },
   {
     path: "your-bookings",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./schedule.module-TP4HRNA7.js").then((m) => m.AppScheduleModule)
+    loadChildren: () => import("./schedule.module-GRDKDFBC.js").then((m) => m.AppScheduleModule)
   },
   {
     path: "group-events",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./group-events.module-UJXROIVX.js").then((m) => m.GroupEventsModule)
+    loadChildren: () => import("./group-events.module-HB7Y2643.js").then((m) => m.GroupEventsModule)
   },
   { path: "**", redirectTo: "-", pathMatch: "full" }
 ];

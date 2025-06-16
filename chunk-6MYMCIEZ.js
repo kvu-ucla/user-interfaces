@@ -65271,15 +65271,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "84a521c",
-  "hash": "84a521c",
+  "raw": "b05728d",
+  "hash": "b05728d",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "84a521c",
+  "suffix": "b05728d",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1749789529828
+  "time": 1750046974148
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -108626,7 +108626,7 @@ var WFHSettingsModalComponent = class _WFHSettingsModalComponent {
           };
         }
       }
-      if (!this._data.local) {
+      if (!this._data?.local) {
         const user = yield lastValueFrom(Rc("current"));
         yield lastValueFrom(Mc(user.id, __spreadProps(__spreadValues({}, user), {
           groups: user.groups.filter((_3) => !_3.startsWith("placeos_")),
@@ -108641,7 +108641,7 @@ var WFHSettingsModalComponent = class _WFHSettingsModalComponent {
       this.loading = false;
       this._dialog_ref.disableClose = false;
       if (close) {
-        if (!this._data.local)
+        if (!this._data?.local)
           reloadUserData();
         this._dialog_ref.close(new_settings);
       }
@@ -147316,6 +147316,9 @@ var ExploreSearchService = class _ExploreSearchService {
     this._space_search = this._filter.pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap((q3) => q3?.length > 2 ? sc({ q: q3, zone_id: this._org.organisation.id }).pipe(map(({ data }) => data.filter((_3) => _3.map_id).map((_3) => new Space(__spreadProps(__spreadValues({}, _3), {
       level: this._org.levelWithID(_3.zones)
     }))))) : of([])), catchError(() => []));
+    this._desk_search = combineLatest([
+      this._org.active_building
+    ]).pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap(([bld]) => bld ? mu(bld.id, { name: "desks" }).pipe(catchError(() => of([])), map((i) => flatten2(i.map((j3) => (j3.metadata.desks?.details || []).map((k3) => new Desk(__spreadProps(__spreadValues({}, k3), { zone: j3.zone }))))))) : of([])), catchError(() => []));
     this._maps_people_search = combineLatest([
       this._maps_people.available$,
       this._filter,
@@ -147372,13 +147375,14 @@ var ExploreSearchService = class _ExploreSearchService {
     this.search_results = combineLatest([
       this._filter,
       this._space_search,
+      this._desk_search,
       this._user_search,
       this._emergency_contacts,
       this._role_assigned_contacts,
       this._map_features,
       this._maps_people_search,
       this._points_of_interest
-    ]).pipe(map(([filter2, spaces, users, contacts, roled_contacts, features, mapspeople_items, points_of_interest]) => {
+    ]).pipe(map(([filter2, spaces, desks, users, contacts, roled_contacts, features, mapspeople_items, points_of_interest]) => {
       const search = filter2.toLowerCase();
       let results = [];
       if (!this.hideItem("mapspeople"))
@@ -147390,6 +147394,15 @@ var ExploreSearchService = class _ExploreSearchService {
           email: s.email,
           name: s.display_name || s.name,
           description: `Capacity: ${s.capacity} `
+        })));
+      }
+      if (!this.hideItem("desks")) {
+        results = results.concat(desks.map((s) => ({
+          id: s.id,
+          type: "feature",
+          email: s.assigned_to,
+          description: s.id,
+          name: s.name || s.id
         })));
       }
       if (!this.hideItem("emergency_contacts")) {
@@ -157567,4 +157580,4 @@ qr/esm/index.js:
   limitations under the License.
   *)
 */
-//# sourceMappingURL=chunk-JIZRN2WB.js.map
+//# sourceMappingURL=chunk-6MYMCIEZ.js.map
