@@ -81078,15 +81078,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "84a521c",
-  "hash": "84a521c",
+  "raw": "b05728d",
+  "hash": "b05728d",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "84a521c",
+  "suffix": "b05728d",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1749789571031
+  "time": 1750047040851
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -112947,7 +112947,7 @@ var WFHSettingsModalComponent = class _WFHSettingsModalComponent {
           };
         }
       }
-      if (!this._data.local) {
+      if (!this._data?.local) {
         const user = yield lastValueFrom(Rc("current"));
         yield lastValueFrom(Mc(user.id, __spreadProps(__spreadValues({}, user), {
           groups: user.groups.filter((_3) => !_3.startsWith("placeos_")),
@@ -112962,7 +112962,7 @@ var WFHSettingsModalComponent = class _WFHSettingsModalComponent {
       this.loading = false;
       this._dialog_ref.disableClose = false;
       if (close) {
-        if (!this._data.local)
+        if (!this._data?.local)
           reloadUserData();
         this._dialog_ref.close(new_settings);
       }
