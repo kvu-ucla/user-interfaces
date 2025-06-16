@@ -24,13 +24,13 @@ import {
   setHours,
   showStaff,
   validateAssetRequestsForResource
-} from "./chunk-XDP2TPRI.js";
+} from "./chunk-TQ3JX3PT.js";
 import {
   generateQRCode,
   querySpaceAvailability,
   removeEvent,
   saveEvent
-} from "./chunk-XKK2YTQO.js";
+} from "./chunk-V7D3SDIG.js";
 import {
   A11yModule,
   ANIMATION_MODULE_TYPE,
@@ -292,7 +292,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-7L7HN73Q.js";
+} from "./chunk-EXVEQXC2.js";
 import {
   __async,
   __spreadProps,
@@ -7496,6 +7496,9 @@ var ExploreSearchService = class _ExploreSearchService {
     this._space_search = this._filter.pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap((q) => q?.length > 2 ? sc({ q, zone_id: this._org.organisation.id }).pipe(map(({ data }) => data.filter((_) => _.map_id).map((_) => new Space(__spreadProps(__spreadValues({}, _), {
       level: this._org.levelWithID(_.zones)
     }))))) : of([])), catchError(() => []));
+    this._desk_search = combineLatest([
+      this._org.active_building
+    ]).pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap(([bld]) => bld ? mu(bld.id, { name: "desks" }).pipe(catchError(() => of([])), map((i) => flatten(i.map((j) => (j.metadata.desks?.details || []).map((k) => new Desk(__spreadProps(__spreadValues({}, k), { zone: j.zone }))))))) : of([])), catchError(() => []));
     this._maps_people_search = combineLatest([
       this._maps_people.available$,
       this._filter,
@@ -7552,13 +7555,14 @@ var ExploreSearchService = class _ExploreSearchService {
     this.search_results = combineLatest([
       this._filter,
       this._space_search,
+      this._desk_search,
       this._user_search,
       this._emergency_contacts,
       this._role_assigned_contacts,
       this._map_features,
       this._maps_people_search,
       this._points_of_interest
-    ]).pipe(map(([filter2, spaces, users, contacts, roled_contacts, features, mapspeople_items, points_of_interest]) => {
+    ]).pipe(map(([filter2, spaces, desks, users, contacts, roled_contacts, features, mapspeople_items, points_of_interest]) => {
       const search = filter2.toLowerCase();
       let results = [];
       if (!this.hideItem("mapspeople"))
@@ -7570,6 +7574,15 @@ var ExploreSearchService = class _ExploreSearchService {
           email: s.email,
           name: s.display_name || s.name,
           description: `Capacity: ${s.capacity} `
+        })));
+      }
+      if (!this.hideItem("desks")) {
+        results = results.concat(desks.map((s) => ({
+          id: s.id,
+          type: "feature",
+          email: s.assigned_to,
+          description: s.id,
+          name: s.name || s.id
         })));
       }
       if (!this.hideItem("emergency_contacts")) {
@@ -9656,4 +9669,4 @@ var AppExploreModule = class _AppExploreModule {
 export {
   AppExploreModule
 };
-//# sourceMappingURL=explore.module-HL56NITR.js.map
+//# sourceMappingURL=explore.module-FOSPBT6M.js.map

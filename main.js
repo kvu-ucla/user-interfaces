@@ -5,11 +5,11 @@ import {
   VirtualKeyboardComponent,
   generateMockSpace,
   setHours
-} from "./chunk-XDP2TPRI.js";
+} from "./chunk-TQ3JX3PT.js";
 import {
   CheckinStateService,
   MatCheckboxModule
-} from "./chunk-QSHE5ANY.js";
+} from "./chunk-BQ4BXFBM.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -254,7 +254,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-7L7HN73Q.js";
+} from "./chunk-EXVEQXC2.js";
 import {
   __async,
   __export,
@@ -28111,6 +28111,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
     this._maps = _maps;
     this._tracing = _tracing;
     this._locale = _locale;
+    this._zone = "";
   }
   ngOnInit() {
     return __async(this, null, function* () {
@@ -28141,6 +28142,9 @@ var AppComponent = class _AppComponent extends AsyncHandler {
         }
         if (params.has("x-api-key")) {
           gs(params.get("x-api-key"));
+        }
+        if (params.has("building_id")) {
+          this._zone = params.get("building_id");
         }
       });
       setNotifyOutlet(this._snackbar);
@@ -28179,6 +28183,11 @@ var AppComponent = class _AppComponent extends AsyncHandler {
       } catch {
         log("APP", "Failed to initialise background services.", void 0, "warn");
       }
+      this.timeout("set_initial_building", () => {
+        const bld = this._org.buildings.find((b) => b.id === this._zone);
+        if (bld)
+          this._org.setBuilding(bld);
+      });
     });
   }
   onInitError() {
@@ -29276,11 +29285,11 @@ var routes = [
   { path: "register", component: VisitorRegistrationComponent },
   {
     path: "explore",
-    loadChildren: () => import("./explore.module-HL56NITR.js").then((m) => m.AppExploreModule)
+    loadChildren: () => import("./explore.module-FOSPBT6M.js").then((m) => m.AppExploreModule)
   },
   {
     path: "checkin",
-    loadChildren: () => import("./checkin.module-PGD3WFYT.js").then((m) => m.VisitorCheckinModule)
+    loadChildren: () => import("./checkin.module-HBRFSLLQ.js").then((m) => m.VisitorCheckinModule)
   },
   { path: "**", redirectTo: "bootstrap" }
 ];

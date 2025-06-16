@@ -72172,15 +72172,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "84a521c",
-  "hash": "84a521c",
+  "raw": "b05728d",
+  "hash": "b05728d",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "84a521c",
+  "suffix": "b05728d",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1749789536645
+  "time": 1750047018504
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -82313,4 +82313,4 @@ js-yaml/dist/js-yaml.mjs:
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-7L7HN73Q.js.map
+//# sourceMappingURL=chunk-EXVEQXC2.js.map
