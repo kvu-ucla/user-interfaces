@@ -80939,15 +80939,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "4df2c3c",
-  "hash": "4df2c3c",
+  "raw": "b05728d",
+  "hash": "b05728d",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "4df2c3c",
+  "suffix": "b05728d",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1749793427820
+  "time": 1750046971114
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -128725,6 +128725,7 @@ var AppComponent = class _AppComponent extends AsyncHandler {
     this._maps = _maps;
     this._tracing = _tracing;
     this._locale = _locale;
+    this._zone = "";
   }
   ngOnInit() {
     return __async(this, null, function* () {
@@ -128755,6 +128756,9 @@ var AppComponent = class _AppComponent extends AsyncHandler {
         }
         if (params.has("x-api-key")) {
           gs(params.get("x-api-key"));
+        }
+        if (params.has("building_id")) {
+          this._zone = params.get("building_id");
         }
       });
       setNotifyOutlet(this._snackbar);
@@ -128793,6 +128797,11 @@ var AppComponent = class _AppComponent extends AsyncHandler {
       } catch {
         log("APP", "Failed to initialise background services.", void 0, "warn");
       }
+      this.timeout("set_initial_building", () => {
+        const bld = this._org.buildings.find((b2) => b2.id === this._zone);
+        if (bld)
+          this._org.setBuilding(bld);
+      });
     });
   }
   onInitError() {
