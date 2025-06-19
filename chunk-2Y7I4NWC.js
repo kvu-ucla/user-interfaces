@@ -4,6 +4,7 @@ import {
   Booking,
   CalendarEvent,
   Ea,
+  Injectable,
   MatDialog,
   OrganisationService,
   ParkingService,
@@ -40,6 +41,7 @@ import {
   queryBookings,
   queryEvents,
   requestSpacesForZone,
+  setClassMetadata,
   setHours,
   shareReplay,
   startOfDay,
@@ -51,7 +53,7 @@ import {
   unique,
   ɵɵdefineInjectable,
   ɵɵinject
-} from "./chunk-6MYMCIEZ.js";
+} from "./chunk-CCHNTUCX.js";
 import {
   __async,
   __spreadProps,
@@ -59,7 +61,7 @@ import {
 } from "./chunk-4MWRP73S.js";
 
 // apps/workplace/src/app/schedule/schedule-state.service.ts
-var ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
+var _ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
   setOptions(options) {
     this._options.next(options);
   }
@@ -381,17 +383,22 @@ var ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
       include_deleted: "recurring"
     }).pipe(catchError(() => of([])));
   }
-  static {
-    this.\u0275fac = function ScheduleStateService_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _ScheduleStateService)(\u0275\u0275inject(SettingsService), \u0275\u0275inject(OrganisationService), \u0275\u0275inject(MatDialog), \u0275\u0275inject(ParkingService));
-    };
-  }
-  static {
-    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ScheduleStateService, factory: _ScheduleStateService.\u0275fac, providedIn: "root" });
-  }
 };
+_ScheduleStateService.\u0275fac = function ScheduleStateService_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _ScheduleStateService)(\u0275\u0275inject(SettingsService), \u0275\u0275inject(OrganisationService), \u0275\u0275inject(MatDialog), \u0275\u0275inject(ParkingService));
+};
+_ScheduleStateService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ScheduleStateService, factory: _ScheduleStateService.\u0275fac, providedIn: "root" });
+var ScheduleStateService = _ScheduleStateService;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ScheduleStateService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], () => [{ type: SettingsService }, { type: OrganisationService }, { type: MatDialog }, { type: ParkingService }], null);
+})();
 
 export {
   ScheduleStateService
 };
-//# sourceMappingURL=chunk-VK2WKJRJ.js.map
+//# sourceMappingURL=chunk-2Y7I4NWC.js.map
