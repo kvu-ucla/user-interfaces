@@ -1,9 +1,9 @@
 import {
-  ANIMATION_MODULE_TYPE,
   ActiveDescendantKeyManager,
   Ar,
   AssetRequest,
   AsyncHandler,
+  AsyncPipe,
   BehaviorSubject,
   Bi,
   Booking,
@@ -16,13 +16,12 @@ import {
   CommonModule,
   Component,
   ContentChildren,
-  DOCUMENT,
+  CurrencyPipe,
   DOWN_ARROW,
   DatePipe,
   DefaultValueAccessor,
   Directionality,
   Directive,
-  DomSanitizer,
   ENTER,
   ESCAPE,
   ElementRef,
@@ -33,8 +32,11 @@ import {
   FormGroup,
   FormGroupDirective,
   FormsModule,
+  HostListener,
   IconComponent,
+  Injectable,
   InjectionToken,
+  Injector,
   Input,
   MAT_DIALOG_DATA,
   MAT_FORM_FIELD,
@@ -69,8 +71,6 @@ import {
   NavigationEnd,
   NgControlStatus,
   NgControlStatusGroup,
-  NgForOf,
-  NgIf,
   NgModel,
   NgModule,
   NgZone,
@@ -80,11 +80,13 @@ import {
   Overlay,
   OverlayConfig,
   OverlayModule,
+  Pipe,
   Platform,
   PortalModule,
   ReactiveFormsModule,
   Renderer2,
   Router,
+  SafePipe,
   SanitizePipe,
   SettingsService,
   Space,
@@ -106,8 +108,10 @@ import {
   ViewEncapsulation,
   ViewportRuler,
   _IdGenerator,
+  _animationsDisabled,
   _countGroupLabelsBeforeOption,
   _getEventTarget,
+  _getFocusedElementPierceShadowDom,
   _getOptionScrollPosition,
   addAriaReferencedId,
   addDays,
@@ -119,8 +123,12 @@ import {
   booleanAttribute,
   bt,
   catchError,
+  coerceArray,
   combineLatest,
   createBooking,
+  createFlexibleConnectedPositionStrategy,
+  createOverlayRef,
+  createRepositionScrollStrategy,
   currentUser,
   current_user,
   debounceTime,
@@ -189,6 +197,9 @@ import {
   ɵɵattribute,
   ɵɵclassMap,
   ɵɵclassProp,
+  ɵɵconditional,
+  ɵɵconditionalBranchCreate,
+  ɵɵconditionalCreate,
   ɵɵcontentQuery,
   ɵɵdefineComponent,
   ɵɵdefineDirective,
@@ -196,15 +207,11 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵdefinePipe,
-  ɵɵdirectiveInject,
   ɵɵelement,
-  ɵɵelementContainerEnd,
-  ɵɵelementContainerStart,
   ɵɵelementEnd,
   ɵɵelementStart,
   ɵɵgetCurrentView,
   ɵɵgetInheritedFactory,
-  ɵɵinject,
   ɵɵlistener,
   ɵɵloadQuery,
   ɵɵnextContext,
@@ -217,13 +224,15 @@ import {
   ɵɵpureFunction1,
   ɵɵqueryRefresh,
   ɵɵreference,
+  ɵɵrepeater,
+  ɵɵrepeaterCreate,
+  ɵɵrepeaterTrackByIdentity,
   ɵɵresetView,
   ɵɵresolveWindow,
   ɵɵrestoreView,
   ɵɵsanitizeHtml,
   ɵɵsanitizeUrl,
   ɵɵtemplate,
-  ɵɵtemplateRefExtractor,
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
@@ -233,7 +242,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-EXVEQXC2.js";
+} from "./chunk-7WZA3LU7.js";
 import {
   __async,
   __spreadProps,
@@ -262,67 +271,65 @@ function subHours(date, amount, options) {
 // libs/components/src/lib/virtual-keyboard.component.ts
 var _c0 = ["keyboard", ""];
 var _c1 = ["*"];
-function VirtualKeyboardComponent_ng_template_1_div_1_ng_container_1_div_3_Template(rf, ctx) {
+var _forTrack0 = ($index, $item) => $item[0];
+function VirtualKeyboardComponent_ng_template_1_For_2_For_2_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div", 7);
+    \u0275\u0275element(0, "div", 6);
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(4);
     \u0275\u0275classProp("bg-success", ctx_r1.state === "shift");
   }
 }
-function VirtualKeyboardComponent_ng_template_1_div_1_ng_container_1_Template(rf, ctx) {
+function VirtualKeyboardComponent_ng_template_1_For_2_For_2_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "button", 5);
-    \u0275\u0275listener("focus", function VirtualKeyboardComponent_ng_template_1_div_1_ng_container_1_Template_button_focus_1_listener() {
+    \u0275\u0275elementStart(0, "button", 4);
+    \u0275\u0275listener("focus", function VirtualKeyboardComponent_ng_template_1_For_2_For_2_Template_button_focus_0_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext(3);
       return \u0275\u0275resetView(ctx_r1.focusInput());
-    })("click", function VirtualKeyboardComponent_ng_template_1_div_1_ng_container_1_Template_button_click_1_listener() {
+    })("click", function VirtualKeyboardComponent_ng_template_1_For_2_For_2_Template_button_click_0_listener() {
       const key_r3 = \u0275\u0275restoreView(_r1).$implicit;
       const ctx_r1 = \u0275\u0275nextContext(3);
       return \u0275\u0275resetView(ctx_r1.handleKeyPress(key_r3));
     });
-    \u0275\u0275text(2);
-    \u0275\u0275template(3, VirtualKeyboardComponent_ng_template_1_div_1_ng_container_1_div_3_Template, 1, 2, "div", 6);
+    \u0275\u0275text(1);
+    \u0275\u0275conditionalCreate(2, VirtualKeyboardComponent_ng_template_1_For_2_For_2_Conditional_2_Template, 1, 2, "div", 5);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
     const key_r3 = ctx.$implicit;
-    \u0275\u0275advance();
     \u0275\u0275classProp("special", key_r3[0] === "{" && key_r3.length > 1)("space", key_r3 === "{space}");
     \u0275\u0275attribute("key", key_r3);
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", key_r3 === "{space}" ? "Space" : key_r3 === "{caps}" ? "Caps Lock" : key_r3 === "{backspace}" ? "Backspace" : key_r3, " ");
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", key_r3 === "{caps}");
+    \u0275\u0275conditional(key_r3 === "{caps}" ? 2 : -1);
   }
 }
-function VirtualKeyboardComponent_ng_template_1_div_1_Template(rf, ctx) {
+function VirtualKeyboardComponent_ng_template_1_For_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 3);
-    \u0275\u0275template(1, VirtualKeyboardComponent_ng_template_1_div_1_ng_container_1_Template, 4, 7, "ng-container", 4);
+    \u0275\u0275elementStart(0, "div", 2);
+    \u0275\u0275repeaterCreate(1, VirtualKeyboardComponent_ng_template_1_For_2_For_2_Template, 3, 7, "button", 3, \u0275\u0275repeaterTrackByIdentity);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
     const row_r4 = ctx.$implicit;
     \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", row_r4);
+    \u0275\u0275repeater(row_r4);
   }
 }
 function VirtualKeyboardComponent_ng_template_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 1);
-    \u0275\u0275template(1, VirtualKeyboardComponent_ng_template_1_div_1_Template, 2, 1, "div", 2);
+    \u0275\u0275repeaterCreate(1, VirtualKeyboardComponent_ng_template_1_For_2_Template, 3, 0, "div", 2, _forTrack0);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", ctx_r1.keyset);
+    \u0275\u0275repeater(ctx_r1.keyset);
   }
 }
 var DEFAULT_KEYS = [
@@ -332,11 +339,11 @@ var DEFAULT_KEYS = [
   "zxcvbnm".split(""),
   ["{caps}", "{space}", "{backspace}"]
 ];
-var VirtualKeyboardComponent = class _VirtualKeyboardComponent extends AsyncHandler {
-  constructor(_element, _overlay) {
+var _VirtualKeyboardComponent = class _VirtualKeyboardComponent extends AsyncHandler {
+  constructor() {
     super();
-    this._element = _element;
-    this._overlay = _overlay;
+    this._element = inject(ElementRef);
+    this._overlay = inject(Overlay);
     this.keyset = DEFAULT_KEYS;
     this.state = "normal";
     this._overlay_ref = null;
@@ -411,39 +418,97 @@ var VirtualKeyboardComponent = class _VirtualKeyboardComponent extends AsyncHand
   updateKeyState() {
     this.keyset = this.keyset.map((_2) => _2.map((k2) => k2.length > 1 ? k2 : k2[this.state !== "normal" ? "toUpperCase" : "toLowerCase"]()));
   }
-  static {
-    this.\u0275fac = function VirtualKeyboardComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _VirtualKeyboardComponent)(\u0275\u0275directiveInject(ElementRef), \u0275\u0275directiveInject(Overlay));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VirtualKeyboardComponent, selectors: [["input", "keyboard", ""], ["textarea", "keyboard", ""]], viewQuery: function VirtualKeyboardComponent_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(CdkPortal, 5);
-      }
-      if (rf & 2) {
-        let _t2;
-        \u0275\u0275queryRefresh(_t2 = \u0275\u0275loadQuery()) && (ctx._portal = _t2.first);
-      }
-    }, hostBindings: function VirtualKeyboardComponent_HostBindings(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275listener("focus", function VirtualKeyboardComponent_focus_HostBindingHandler() {
-          return ctx.onFocus();
-        })("blur", function VirtualKeyboardComponent_blur_HostBindingHandler() {
-          return ctx.onBlur();
-        });
-      }
-    }, inputs: { keyset: "keyset" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c0, ngContentSelectors: _c1, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["keyboard-view", "", 1, "flex", "w-screen", "flex-col", "space-y-4", "border-t", "border-base-200", "bg-base-200", "p-2"], ["row", "", "class", "flex items-center justify-center space-x-2", 4, "ngFor", "ngForOf"], ["row", "", 1, "flex", "items-center", "justify-center", "space-x-2"], [4, "ngFor", "ngForOf"], ["matRipple", "", "tabindex", "0", 1, "relative", "cursor-pointer", "rounded-xl", "border", "border-base-200", "bg-base-100", "p-2", 3, "focus", "click"], ["dot", "", "class", "absolute right-2 top-2 h-2 w-2 rounded-full bg-base-200", 3, "bg-success", 4, "ngIf"], ["dot", "", 1, "absolute", "right-2", "top-2", "h-2", "w-2", "rounded-full", "bg-base-200"]], template: function VirtualKeyboardComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275projection(0);
-        \u0275\u0275template(1, VirtualKeyboardComponent_ng_template_1_Template, 2, 1, "ng-template", 0);
-      }
-    }, dependencies: [CommonModule, NgForOf, NgIf, MatRippleModule, MatRipple, PortalModule, TemplatePortalDirective], styles: ["\n\n[key][_ngcontent-%COMP%] {\n  height: 3.5rem;\n  width: 4rem;\n  transition: box-shadow 200ms, top 200ms;\n  box-shadow: 0 4px 0 0.04px rgba(0, 0, 0, 0.1);\n}\n[key].special[_ngcontent-%COMP%] {\n  width: 10rem;\n}\n[key].space[_ngcontent-%COMP%] {\n  flex: 1;\n  min-width: 10rem;\n  max-width: 25rem;\n}\n[key][_ngcontent-%COMP%]:hover {\n  top: 2px;\n  box-shadow: 0 2px 0 0.04px rgba(0, 0, 0, 0.1);\n}\n[key][_ngcontent-%COMP%]:active {\n  top: 4px;\n  box-shadow: 0 0 0 0.04px rgba(0, 0, 0, 0.1);\n}\n/*# sourceMappingURL=virtual-keyboard.component.css.map */"] });
-  }
 };
+_VirtualKeyboardComponent.\u0275fac = function VirtualKeyboardComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _VirtualKeyboardComponent)();
+};
+_VirtualKeyboardComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VirtualKeyboardComponent, selectors: [["input", "keyboard", ""], ["textarea", "keyboard", ""]], viewQuery: function VirtualKeyboardComponent_Query(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275viewQuery(CdkPortal, 5);
+  }
+  if (rf & 2) {
+    let _t2;
+    \u0275\u0275queryRefresh(_t2 = \u0275\u0275loadQuery()) && (ctx._portal = _t2.first);
+  }
+}, hostBindings: function VirtualKeyboardComponent_HostBindings(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275listener("focus", function VirtualKeyboardComponent_focus_HostBindingHandler() {
+      return ctx.onFocus();
+    })("blur", function VirtualKeyboardComponent_blur_HostBindingHandler() {
+      return ctx.onBlur();
+    });
+  }
+}, inputs: { keyset: "keyset" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c0, ngContentSelectors: _c1, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["keyboard-view", "", 1, "flex", "w-screen", "flex-col", "space-y-4", "border-t", "border-base-200", "bg-base-200", "p-2"], ["row", "", 1, "flex", "items-center", "justify-center", "space-x-2"], ["matRipple", "", "tabindex", "0", 1, "relative", "cursor-pointer", "rounded-xl", "border", "border-base-200", "bg-base-100", "p-2", 3, "special", "space"], ["matRipple", "", "tabindex", "0", 1, "relative", "cursor-pointer", "rounded-xl", "border", "border-base-200", "bg-base-100", "p-2", 3, "focus", "click"], ["dot", "", 1, "absolute", "right-2", "top-2", "h-2", "w-2", "rounded-full", "bg-base-200", 3, "bg-success"], ["dot", "", 1, "absolute", "right-2", "top-2", "h-2", "w-2", "rounded-full", "bg-base-200"]], template: function VirtualKeyboardComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275projectionDef();
+    \u0275\u0275projection(0);
+    \u0275\u0275template(1, VirtualKeyboardComponent_ng_template_1_Template, 3, 0, "ng-template", 0);
+  }
+}, dependencies: [MatRippleModule, MatRipple, PortalModule, TemplatePortalDirective], styles: ["\n\n[key][_ngcontent-%COMP%] {\n  height: 3.5rem;\n  width: 4rem;\n  transition: box-shadow 200ms, top 200ms;\n  box-shadow: 0 4px 0 0.04px rgba(0, 0, 0, 0.1);\n}\n[key].special[_ngcontent-%COMP%] {\n  width: 10rem;\n}\n[key].space[_ngcontent-%COMP%] {\n  flex: 1;\n  min-width: 10rem;\n  max-width: 25rem;\n}\n[key][_ngcontent-%COMP%]:hover {\n  top: 2px;\n  box-shadow: 0 2px 0 0.04px rgba(0, 0, 0, 0.1);\n}\n[key][_ngcontent-%COMP%]:active {\n  top: 4px;\n  box-shadow: 0 0 0 0.04px rgba(0, 0, 0, 0.1);\n}\n/*# sourceMappingURL=virtual-keyboard.component.css.map */"] });
+var VirtualKeyboardComponent = _VirtualKeyboardComponent;
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(VirtualKeyboardComponent, { className: "VirtualKeyboardComponent", filePath: "libs/components/src/lib/virtual-keyboard.component.ts", lineNumber: 104 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(VirtualKeyboardComponent, [{
+    type: Component,
+    args: [{ selector: "input[keyboard],textarea[keyboard]", template: `
+        <ng-content></ng-content>
+        <ng-template cdk-portal>
+            <div
+                keyboard-view
+                class="flex w-screen flex-col space-y-4 border-t border-base-200 bg-base-200 p-2"
+            >
+                @for (row of keyset; track row[0]) {
+                    <div row class="flex items-center justify-center space-x-2">
+                        @for (key of row; track key) {
+                            <button
+                                matRipple
+                                [attr.key]="key"
+                                tabindex="0"
+                                class="relative cursor-pointer rounded-xl border border-base-200 bg-base-100 p-2"
+                                [class.special]="
+                                    key[0] === '{' && key.length > 1
+                                "
+                                [class.space]="key === '{space}'"
+                                (focus)="focusInput()"
+                                (click)="handleKeyPress(key)"
+                            >
+                                {{
+                                    key === '{space}'
+                                        ? 'Space'
+                                        : key === '{caps}'
+                                          ? 'Caps Lock'
+                                          : key === '{backspace}'
+                                            ? 'Backspace'
+                                            : key
+                                }}
+                                @if (key === '{caps}') {
+                                    <div
+                                        dot
+                                        class="absolute right-2 top-2 h-2 w-2 rounded-full bg-base-200"
+                                        [class.bg-success]="state === 'shift'"
+                                    ></div>
+                                }
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
+        </ng-template>
+    `, imports: [MatRippleModule, PortalModule], styles: ["/* angular:styles/component:css;7121e8e0f3a6ec31112fa4330c36a57119d4007e4a28e0345816f9f8d2c8ff0e;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/virtual-keyboard.component.ts */\n[key] {\n  height: 3.5rem;\n  width: 4rem;\n  transition: box-shadow 200ms, top 200ms;\n  box-shadow: 0 4px 0 0.04px rgba(0, 0, 0, 0.1);\n}\n[key].special {\n  width: 10rem;\n}\n[key].space {\n  flex: 1;\n  min-width: 10rem;\n  max-width: 25rem;\n}\n[key]:hover {\n  top: 2px;\n  box-shadow: 0 2px 0 0.04px rgba(0, 0, 0, 0.1);\n}\n[key]:active {\n  top: 4px;\n  box-shadow: 0 0 0 0.04px rgba(0, 0, 0, 0.1);\n}\n/*# sourceMappingURL=virtual-keyboard.component.css.map */\n"] }]
+  }], () => [], { keyset: [{
+    type: Input
+  }], _portal: [{
+    type: ViewChild,
+    args: [CdkPortal]
+  }], onFocus: [{
+    type: HostListener,
+    args: ["focus"]
+  }], onBlur: [{
+    type: HostListener,
+    args: ["blur"]
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(VirtualKeyboardComponent, { className: "VirtualKeyboardComponent", filePath: "libs/components/src/lib/virtual-keyboard.component.ts", lineNumber: 106 });
 })();
 
 // libs/users/src/lib/staff.fn.ts
@@ -501,16 +566,15 @@ function MAT_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY() {
     autoActiveFirstOption: false,
     autoSelectActiveOption: false,
     hideSingleSelectionIndicator: false,
-    requireSelection: false
+    requireSelection: false,
+    hasBackdrop: false
   };
 }
 var MatAutocomplete = class _MatAutocomplete {
   _changeDetectorRef = inject(ChangeDetectorRef);
   _elementRef = inject(ElementRef);
   _defaults = inject(MAT_AUTOCOMPLETE_DEFAULT_OPTIONS);
-  _animationsDisabled = inject(ANIMATION_MODULE_TYPE, {
-    optional: true
-  }) === "NoopAnimations";
+  _animationsDisabled = _animationsDisabled();
   _activeOptionChanges = Subscription.EMPTY;
   /** Manages active item in option list based on key events. */
   _keyManager;
@@ -648,7 +712,7 @@ var MatAutocomplete = class _MatAutocomplete {
   }
   /** Panel should hide itself when the option list is empty. */
   _setVisibility() {
-    this.showPanel = !!this.options.length;
+    this.showPanel = !!this.options?.length;
     this._changeDetectorRef.markForCheck();
   }
   /** Emits the `select` event. */
@@ -743,7 +807,7 @@ var MatAutocomplete = class _MatAutocomplete {
         \u0275\u0275template(0, MatAutocomplete_ng_template_0_Template, 3, 17, "ng-template");
       }
     },
-    styles: ["div.mat-mdc-autocomplete-panel{width:100%;max-height:256px;visibility:hidden;transform-origin:center top;overflow:auto;padding:8px 0;box-sizing:border-box;position:static;border-radius:var(--mat-autocomplete-container-shape, var(--mat-sys-corner-extra-small));box-shadow:var(--mat-autocomplete-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12));background-color:var(--mat-autocomplete-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-autocomplete-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{border-top-left-radius:0;border-top-right-radius:0}.mat-mdc-autocomplete-panel-above div.mat-mdc-autocomplete-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:center bottom}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-visible{visibility:visible}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-hidden{visibility:hidden;pointer-events:none}@keyframes _mat-autocomplete-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}.mat-autocomplete-panel-animations-enabled{animation:_mat-autocomplete-enter 120ms cubic-bezier(0, 0, 0.2, 1)}mat-autocomplete{display:none}"],
+    styles: ["div.mat-mdc-autocomplete-panel{width:100%;max-height:256px;visibility:hidden;transform-origin:center top;overflow:auto;padding:8px 0;box-sizing:border-box;position:relative;border-radius:var(--mat-autocomplete-container-shape, var(--mat-sys-corner-extra-small));box-shadow:var(--mat-autocomplete-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12));background-color:var(--mat-autocomplete-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-autocomplete-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{border-top-left-radius:0;border-top-right-radius:0}.mat-mdc-autocomplete-panel-above div.mat-mdc-autocomplete-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:center bottom}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-visible{visibility:visible}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-hidden{visibility:hidden;pointer-events:none}@keyframes _mat-autocomplete-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}.mat-autocomplete-panel-animations-enabled{animation:_mat-autocomplete-enter 120ms cubic-bezier(0, 0, 0.2, 1)}mat-autocomplete{display:none}\n"],
     encapsulation: 2,
     changeDetection: 0
   });
@@ -782,7 +846,7 @@ var MatAutocomplete = class _MatAutocomplete {
   </div>
 </ng-template>
 `,
-      styles: ["div.mat-mdc-autocomplete-panel{width:100%;max-height:256px;visibility:hidden;transform-origin:center top;overflow:auto;padding:8px 0;box-sizing:border-box;position:static;border-radius:var(--mat-autocomplete-container-shape, var(--mat-sys-corner-extra-small));box-shadow:var(--mat-autocomplete-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12));background-color:var(--mat-autocomplete-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-autocomplete-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{border-top-left-radius:0;border-top-right-radius:0}.mat-mdc-autocomplete-panel-above div.mat-mdc-autocomplete-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:center bottom}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-visible{visibility:visible}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-hidden{visibility:hidden;pointer-events:none}@keyframes _mat-autocomplete-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}.mat-autocomplete-panel-animations-enabled{animation:_mat-autocomplete-enter 120ms cubic-bezier(0, 0, 0.2, 1)}mat-autocomplete{display:none}"]
+      styles: ["div.mat-mdc-autocomplete-panel{width:100%;max-height:256px;visibility:hidden;transform-origin:center top;overflow:auto;padding:8px 0;box-sizing:border-box;position:relative;border-radius:var(--mat-autocomplete-container-shape, var(--mat-sys-corner-extra-small));box-shadow:var(--mat-autocomplete-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12));background-color:var(--mat-autocomplete-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-autocomplete-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{border-top-left-radius:0;border-top-right-radius:0}.mat-mdc-autocomplete-panel-above div.mat-mdc-autocomplete-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:center bottom}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-visible{visibility:visible}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-hidden{visibility:hidden;pointer-events:none}@keyframes _mat-autocomplete-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}.mat-autocomplete-panel-animations-enabled{animation:_mat-autocomplete-enter 120ms cubic-bezier(0, 0, 0.2, 1)}mat-autocomplete{display:none}\n"]
     }]
   }], () => [], {
     template: [{
@@ -902,22 +966,23 @@ function getMatAutocompleteMissingPanelError() {
 var MAT_AUTOCOMPLETE_SCROLL_STRATEGY = new InjectionToken("mat-autocomplete-scroll-strategy", {
   providedIn: "root",
   factory: () => {
-    const overlay = inject(Overlay);
-    return () => overlay.scrollStrategies.reposition();
+    const injector = inject(Injector);
+    return () => createRepositionScrollStrategy(injector);
   }
 });
-function MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY(overlay) {
-  return () => overlay.scrollStrategies.reposition();
+function MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY(_overlay) {
+  const injector = inject(Injector);
+  return () => createRepositionScrollStrategy(injector);
 }
 var MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   provide: MAT_AUTOCOMPLETE_SCROLL_STRATEGY,
-  deps: [Overlay],
+  deps: [],
   useFactory: MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY
 };
 var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
   _environmentInjector = inject(EnvironmentInjector);
   _element = inject(ElementRef);
-  _overlay = inject(Overlay);
+  _injector = inject(Injector);
   _viewContainerRef = inject(ViewContainerRef);
   _zone = inject(NgZone);
   _changeDetectorRef = inject(ChangeDetectorRef);
@@ -928,10 +993,10 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
     optional: true,
     host: true
   });
-  _document = inject(DOCUMENT);
   _viewportRuler = inject(ViewportRuler);
   _scrollStrategy = inject(MAT_AUTOCOMPLETE_SCROLL_STRATEGY);
   _renderer = inject(Renderer2);
+  _animationsDisabled = _animationsDisabled();
   _defaults = inject(MAT_AUTOCOMPLETE_DEFAULT_OPTIONS, {
     optional: true
   });
@@ -974,12 +1039,14 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
   _pendingAutoselectedOption;
   /** Stream of keyboard events that can close the panel. */
   _closeKeyEventStream = new Subject();
+  /** Classes to apply to the panel. Exposed as a public property for internal usage. */
+  _overlayPanelClass = coerceArray(this._defaults?.overlayPanelClass || []);
   /**
    * Event handler for when the window is blurred. Needs to be an
    * arrow function in order to preserve the context.
    */
   _windowBlurHandler = () => {
-    this._canOpenOnNextFocus = this._document.activeElement !== this._element.nativeElement || this.panelOpen;
+    this._canOpenOnNextFocus = this.panelOpen || !this._hasFocus();
   };
   /** `View -> model callback called when value changes` */
   _onChange = () => {
@@ -1121,7 +1188,7 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
         // true. Its main purpose is to handle the case where the input is focused from an
         // outside click which propagates up to the `body` listener within the same sequence
         // and causes the panel to close immediately (see #3106).
-        this._document.activeElement !== this._element.nativeElement && (!formField || !formField.contains(clickTarget)) && (!customOrigin || !customOrigin.contains(clickTarget)) && !!this._overlayRef && !this._overlayRef.overlayElement.contains(clickTarget)) {
+        !this._hasFocus() && (!formField || !formField.contains(clickTarget)) && (!customOrigin || !customOrigin.contains(clickTarget)) && !!this._overlayRef && !this._overlayRef.overlayElement.contains(clickTarget)) {
           observer.next(event);
         }
       };
@@ -1147,7 +1214,8 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
   setDisabledState(isDisabled) {
     this._element.nativeElement.disabled = isDisabled;
   }
-  _handleKeydown(event) {
+  _handleKeydown(e) {
+    const event = e;
     const keyCode = event.keyCode;
     const hasModifier = hasModifierKey(event);
     if (keyCode === ESCAPE && !hasModifier) {
@@ -1201,7 +1269,7 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
           }
         }
       }
-      if (this._canOpen() && this._document.activeElement === event.target) {
+      if (this._canOpen() && this._hasFocus()) {
         const valueOnAttach = this._valueOnLastKeydown ?? this._element.nativeElement.value;
         this._valueOnLastKeydown = null;
         this._openPanelInternal(valueOnAttach);
@@ -1221,6 +1289,10 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
     if (this._canOpen() && !this.panelOpen) {
       this._openPanelInternal();
     }
+  }
+  /** Whether the input currently has focus. */
+  _hasFocus() {
+    return _getFocusedElementPierceShadowDom() === this._element.nativeElement;
   }
   /**
    * In "auto" mode, the label will animate down as soon as focus is lost.
@@ -1259,12 +1331,12 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
         injector: this._environmentInjector
       });
     });
-    const optionChanges = this.autocomplete.options.changes.pipe(
+    const optionChanges = this.autocomplete.options?.changes.pipe(
       tap(() => this._positionStrategy.reapplyLastPosition()),
       // Defer emitting to the stream until the next tick, because changing
       // bindings in here will cause "changed after checked" errors.
       delay(0)
-    );
+    ) ?? of();
     return merge(initialRender, optionChanges).pipe(
       // create a new stream of panelClosingActions, replacing any previous streams
       // that were created, and flatten it so our stream only emits closing events...
@@ -1372,7 +1444,7 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
       this._portal = new TemplatePortal(this.autocomplete.template, this._viewContainerRef, {
         id: this._formField?.getLabelId()
       });
-      overlayRef = this._overlay.create(this._getOverlayConfig());
+      overlayRef = createOverlayRef(this._injector, this._getOverlayConfig());
       this._overlayRef = overlayRef;
       this._viewportSubscription = this._viewportRuler.change().subscribe(() => {
         if (this.panelOpen && overlayRef) {
@@ -1447,11 +1519,14 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
       scrollStrategy: this._scrollStrategy(),
       width: this._getPanelWidth(),
       direction: this._dir ?? void 0,
-      panelClass: this._defaults?.overlayPanelClass
+      hasBackdrop: this._defaults?.hasBackdrop,
+      backdropClass: this._defaults?.backdropClass,
+      panelClass: this._overlayPanelClass,
+      disableAnimations: this._animationsDisabled
     });
   }
   _getOverlayPosition() {
-    const strategy = this._overlay.position().flexibleConnectedTo(this._getConnectedElement()).withFlexibleDimensions(false).withPush(false);
+    const strategy = createFlexibleConnectedPositionStrategy(this._injector, this._getConnectedElement()).withFlexibleDimensions(false).withPush(false);
     this._setStrategyPositions(strategy);
     this._positionStrategy = strategy;
     return strategy;
@@ -1687,7 +1762,9 @@ var MatAutocompleteModule = class _MatAutocompleteModule {
     return new (__ngFactoryType__ || _MatAutocompleteModule)();
   };
   static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _MatAutocompleteModule
+    type: _MatAutocompleteModule,
+    imports: [OverlayModule, MatOptionModule, MatCommonModule, MatAutocomplete, MatAutocompleteTrigger, MatAutocompleteOrigin],
+    exports: [CdkScrollableModule, MatAutocomplete, MatOptionModule, MatCommonModule, MatAutocompleteTrigger, MatAutocompleteOrigin]
   });
   static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
     providers: [MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER],
@@ -1708,16 +1785,16 @@ var MatAutocompleteModule = class _MatAutocompleteModule {
 // libs/form-fields/src/lib/user-search-field.component.ts
 var _c03 = ["input"];
 var _c13 = (a0) => ({ name: a0 });
-function UserSearchFieldComponent_mat_spinner_6_Template(rf, ctx) {
+function UserSearchFieldComponent_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "mat-spinner", 10);
+    \u0275\u0275element(0, "mat-spinner", 5);
   }
 }
-function UserSearchFieldComponent_mat_option_9_span_5_Template(rf, ctx) {
+function UserSearchFieldComponent_For_10_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span");
     \u0275\u0275text(1, " (");
-    \u0275\u0275elementStart(2, "span", 15);
+    \u0275\u0275elementStart(2, "span", 12);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
     \u0275\u0275text(4, ") ");
@@ -1729,22 +1806,22 @@ function UserSearchFieldComponent_mat_option_9_span_5_Template(rf, ctx) {
     \u0275\u0275textInterpolate(option_r3.username);
   }
 }
-function UserSearchFieldComponent_mat_option_9_Template(rf, ctx) {
+function UserSearchFieldComponent_For_10_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-option", 11);
-    \u0275\u0275listener("click", function UserSearchFieldComponent_mat_option_9_Template_mat_option_click_0_listener() {
+    \u0275\u0275elementStart(0, "mat-option", 9);
+    \u0275\u0275listener("click", function UserSearchFieldComponent_For_10_Template_mat_option_click_0_listener() {
       const option_r3 = \u0275\u0275restoreView(_r2).$implicit;
       const ctx_r3 = \u0275\u0275nextContext();
       ctx_r3.setValue(option_r3);
       return \u0275\u0275resetView(ctx_r3.blurInput());
     });
-    \u0275\u0275elementStart(1, "div", 12);
+    \u0275\u0275elementStart(1, "div", 10);
     \u0275\u0275text(2);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div", 13);
+    \u0275\u0275elementStart(3, "div", 11);
     \u0275\u0275text(4);
-    \u0275\u0275template(5, UserSearchFieldComponent_mat_option_9_span_5_Template, 5, 1, "span", 14);
+    \u0275\u0275conditionalCreate(5, UserSearchFieldComponent_For_10_Conditional_5_Template, 5, 1, "span");
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
@@ -1754,29 +1831,29 @@ function UserSearchFieldComponent_mat_option_9_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", option_r3.email, " ");
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", option_r3.username && option_r3.username !== option_r3.email);
+    \u0275\u0275conditional(option_r3.username && option_r3.username !== option_r3.email ? 5 : -1);
   }
 }
-function UserSearchFieldComponent_mat_option_10_Template(rf, ctx) {
+function UserSearchFieldComponent_Conditional_11_Template(rf, ctx) {
   if (rf & 1) {
     const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-option", 16)(1, "div", 17);
-    \u0275\u0275listener("mousedown", function UserSearchFieldComponent_mat_option_10_Template_div_mousedown_1_listener($event) {
+    \u0275\u0275elementStart(0, "mat-option", 7)(1, "div", 13);
+    \u0275\u0275listener("mousedown", function UserSearchFieldComponent_Conditional_11_Template_div_mousedown_1_listener($event) {
       \u0275\u0275restoreView(_r5);
       $event.stopPropagation();
       return \u0275\u0275resetView($event.preventDefault());
-    })("touchstart", function UserSearchFieldComponent_mat_option_10_Template_div_touchstart_1_listener($event) {
+    })("touchstart", function UserSearchFieldComponent_Conditional_11_Template_div_touchstart_1_listener($event) {
       \u0275\u0275restoreView(_r5);
       $event.stopPropagation();
       return \u0275\u0275resetView($event.preventDefault());
-    })("click", function UserSearchFieldComponent_mat_option_10_Template_div_click_1_listener($event) {
+    })("click", function UserSearchFieldComponent_Conditional_11_Template_div_click_1_listener($event) {
       \u0275\u0275restoreView(_r5);
       const ctx_r3 = \u0275\u0275nextContext();
       ctx_r3.setValue(ctx_r3.search_str);
       $event.stopPropagation();
       return \u0275\u0275resetView($event.preventDefault());
     });
-    \u0275\u0275elementStart(2, "div", 18);
+    \u0275\u0275elementStart(2, "div", 14);
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd()()();
@@ -1787,11 +1864,11 @@ function UserSearchFieldComponent_mat_option_10_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 1, "FORM.USER_ADD_EXTERNAL", \u0275\u0275pureFunction1(4, _c13, ctx_r3.search_str)), " ");
   }
 }
-function UserSearchFieldComponent_mat_option_11_Template(rf, ctx) {
+function UserSearchFieldComponent_Conditional_12_Template(rf, ctx) {
   if (rf & 1) {
     const _r6 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-option", 19);
-    \u0275\u0275listener("click", function UserSearchFieldComponent_mat_option_11_Template_mat_option_click_0_listener() {
+    \u0275\u0275elementStart(0, "mat-option", 15);
+    \u0275\u0275listener("click", function UserSearchFieldComponent_Conditional_12_Template_mat_option_click_0_listener() {
       \u0275\u0275restoreView(_r6);
       const ctx_r3 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r3.empty_fn());
@@ -1807,10 +1884,10 @@ function UserSearchFieldComponent_mat_option_11_Template(rf, ctx) {
     \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind1(2, 3, ctx_r3.search_str ? "FORM.USER_EMPTY" : ""), " ", ctx_r3.error, " ");
   }
 }
-var UserSearchFieldComponent = class _UserSearchFieldComponent extends AsyncHandler {
-  constructor(_settings) {
+var _UserSearchFieldComponent = class _UserSearchFieldComponent extends AsyncHandler {
+  constructor() {
     super();
-    this._settings = _settings;
+    this._settings = inject(SettingsService);
     this.error = "";
     this.query_fn = (q2) => this._settings.get("app.basic_user_search") ? Tc({ q: q2, authority_id: bt()?.id }).pipe(map((_2) => _2.data.map((_3) => new User(_3))), catchError(() => of([]))) : searchStaff(q2).pipe(catchError(() => of([])));
     this.search$ = new Subject();
@@ -1875,118 +1952,231 @@ var UserSearchFieldComponent = class _UserSearchFieldComponent extends AsyncHand
   setDisabledState(disabled) {
     this.disabled = disabled;
   }
-  static {
-    this.\u0275fac = function UserSearchFieldComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _UserSearchFieldComponent)(\u0275\u0275directiveInject(SettingsService));
-    };
+};
+_UserSearchFieldComponent.\u0275fac = function UserSearchFieldComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _UserSearchFieldComponent)();
+};
+_UserSearchFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserSearchFieldComponent, selectors: [["a-user-search-field"]], viewQuery: function UserSearchFieldComponent_Query(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275viewQuery(_c03, 5, ElementRef);
   }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserSearchFieldComponent, selectors: [["a-user-search-field"]], viewQuery: function UserSearchFieldComponent_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(_c03, 5, ElementRef);
-      }
-      if (rf & 2) {
-        let _t2;
-        \u0275\u0275queryRefresh(_t2 = \u0275\u0275loadQuery()) && (ctx._input_el = _t2.first);
-      }
-    }, inputs: { disabled: "disabled", placeholder: "placeholder", options: "options", guests: "guests", error: "error", validate: "validate", empty_fn: "empty_fn", filter: "filter", query_fn: "query_fn" }, features: [\u0275\u0275ProvidersFeature([
+  if (rf & 2) {
+    let _t2;
+    \u0275\u0275queryRefresh(_t2 = \u0275\u0275loadQuery()) && (ctx._input_el = _t2.first);
+  }
+}, inputs: { disabled: "disabled", placeholder: "placeholder", options: "options", guests: "guests", error: "error", validate: "validate", empty_fn: "empty_fn", filter: "filter", query_fn: "query_fn" }, features: [\u0275\u0275ProvidersFeature([
+  {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => _UserSearchFieldComponent),
+    multi: true
+  }
+]), \u0275\u0275InheritDefinitionFeature], decls: 13, vars: 9, consts: [["input", ""], ["auto", "matAutocomplete"], ["appearance", "outline", 1, "no-subscript", "w-full"], ["matInput", "", "keyboard", "", "name", "user-search", 3, "ngModelChange", "keyup.enter", "blur", "focus", "ngModel", "disabled", "placeholder", "matAutocomplete"], ["matPrefix", "", 1, "relative", "text-2xl"], ["matSuffix", "", "diameter", "16"], [3, "optionSelected"], [1, "pointer-events-none", "relative"], [3, "disabled"], [3, "click"], [1, "leading-tight"], [1, "w-full", "text-xs", "opacity-60"], [1, "truncate"], [1, "pointer-events-auto", "absolute", "inset-0", "px-4", 3, "mousedown", "touchstart", "click"], [1, "pointer-events-none"], [3, "click", "disabled"]], template: function UserSearchFieldComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-form-field", 2)(1, "input", 3, 0);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275twoWayListener("ngModelChange", function UserSearchFieldComponent_Template_input_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      \u0275\u0275twoWayBindingSet(ctx.search_str, $event) || (ctx.search_str = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("ngModelChange", function UserSearchFieldComponent_Template_input_ngModelChange_1_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      return \u0275\u0275resetView(ctx.search$.next($event || ""));
+    })("keyup.enter", function UserSearchFieldComponent_Template_input_keyup_enter_1_listener() {
+      \u0275\u0275restoreView(_r1);
+      return \u0275\u0275resetView(ctx.validate && ctx.validate(ctx.search_str) ? ctx.setValue(ctx.search_str) : "");
+    })("blur", function UserSearchFieldComponent_Template_input_blur_1_listener() {
+      \u0275\u0275restoreView(_r1);
+      return \u0275\u0275resetView(ctx.resetSearchString());
+    })("focus", function UserSearchFieldComponent_Template_input_focus_1_listener() {
+      \u0275\u0275restoreView(_r1);
+      return \u0275\u0275resetView(ctx.cancelReset());
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "icon", 4);
+    \u0275\u0275text(5, "search");
+    \u0275\u0275elementEnd();
+    \u0275\u0275conditionalCreate(6, UserSearchFieldComponent_Conditional_6_Template, 1, 0, "mat-spinner", 5);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "mat-autocomplete", 6, 1);
+    \u0275\u0275listener("optionSelected", function UserSearchFieldComponent_Template_mat_autocomplete_optionSelected_7_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      return \u0275\u0275resetView(ctx.setValue($event.option.value));
+    });
+    \u0275\u0275repeaterCreate(9, UserSearchFieldComponent_For_10_Template, 6, 3, "mat-option", null, \u0275\u0275repeaterTrackByIdentity);
+    \u0275\u0275conditionalCreate(11, UserSearchFieldComponent_Conditional_11_Template, 5, 6, "mat-option", 7);
+    \u0275\u0275conditionalCreate(12, UserSearchFieldComponent_Conditional_12_Template, 3, 5, "mat-option", 8);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const auto_r7 = \u0275\u0275reference(8);
+    \u0275\u0275advance();
+    \u0275\u0275twoWayProperty("ngModel", ctx.search_str);
+    \u0275\u0275property("disabled", ctx.disabled)("placeholder", ctx.placeholder || \u0275\u0275pipeBind1(3, 7, "FORM.USER_SEARCH"))("matAutocomplete", auto_r7);
+    \u0275\u0275advance(5);
+    \u0275\u0275conditional(ctx.loading ? 6 : -1);
+    \u0275\u0275advance(3);
+    \u0275\u0275repeater(ctx.user_list);
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(ctx.search_str && ctx.validate && ctx.validate(ctx.search_str) ? 11 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(!(ctx.user_list == null ? null : ctx.user_list.length) && (ctx.search_str || ctx.error) ? 12 : -1);
+  }
+}, dependencies: [
+  MatFormFieldModule,
+  MatFormField,
+  MatPrefix,
+  MatSuffix,
+  MatInputModule,
+  MatInput,
+  MatProgressSpinnerModule,
+  MatProgressSpinner,
+  MatAutocompleteModule,
+  MatAutocomplete,
+  MatOption,
+  MatAutocompleteTrigger,
+  FormsModule,
+  DefaultValueAccessor,
+  NgControlStatus,
+  NgModel,
+  IconComponent,
+  TranslatePipe
+], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\nicon[_ngcontent-%COMP%] {\n  top: 0.15em;\n  left: -0.15em;\n}\n/*# sourceMappingURL=user-search-field.component.css.map */"] });
+var UserSearchFieldComponent = _UserSearchFieldComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UserSearchFieldComponent, [{
+    type: Component,
+    args: [{ selector: "a-user-search-field", template: `
+        <mat-form-field appearance="outline" class="no-subscript w-full">
+            <input
+                #input
+                matInput
+                keyboard
+                name="user-search"
+                [(ngModel)]="search_str"
+                (ngModelChange)="search$.next($event || '')"
+                [disabled]="disabled"
+                [placeholder]="placeholder || ('FORM.USER_SEARCH' | translate)"
+                [matAutocomplete]="auto"
+                (keyup.enter)="
+                    validate && validate(search_str) ? setValue(search_str) : ''
+                "
+                (blur)="resetSearchString()"
+                (focus)="cancelReset()"
+            />
+            <icon matPrefix class="relative text-2xl">search</icon>
+            @if (loading) {
+                <mat-spinner matSuffix diameter="16"></mat-spinner>
+            }
+        </mat-form-field>
+        <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="setValue($event.option.value)"
+        >
+            @for (option of user_list; track option) {
+                <mat-option (click)="setValue(option); blurInput()">
+                    <div class="leading-tight">{{ option.name }}</div>
+                    <div class="w-full text-xs opacity-60">
+                        {{ option.email }}
+                        @if (
+                            option.username && option.username !== option.email
+                        ) {
+                            <span>
+                                (<span class="truncate">{{
+                                    option.username
+                                }}</span
+                                >)
+                            </span>
+                        }
+                    </div>
+                </mat-option>
+            }
+            @if (search_str && validate && validate(search_str)) {
+                <mat-option class="pointer-events-none relative">
+                    <div
+                        class="pointer-events-auto absolute inset-0 px-4"
+                        (mousedown)="
+                            $event.stopPropagation(); $event.preventDefault()
+                        "
+                        (touchstart)="
+                            $event.stopPropagation(); $event.preventDefault()
+                        "
+                        (click)="
+                            setValue(search_str);
+                            $event.stopPropagation();
+                            $event.preventDefault()
+                        "
+                    >
+                        <div class="pointer-events-none">
+                            {{
+                                'FORM.USER_ADD_EXTERNAL'
+                                    | translate: { name: search_str }
+                            }}
+                        </div>
+                    </div>
+                </mat-option>
+            }
+            @if (!user_list?.length && (search_str || error)) {
+                <mat-option [disabled]="!empty_fn" (click)="empty_fn()">
+                    {{ (search_str ? 'FORM.USER_EMPTY' : '') | translate }}
+                    {{ error }}
+                </mat-option>
+            }
+        </mat-autocomplete>
+    `, providers: [
       {
         provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => _UserSearchFieldComponent),
+        useExisting: forwardRef(() => UserSearchFieldComponent),
         multi: true
       }
-    ]), \u0275\u0275InheritDefinitionFeature], decls: 12, vars: 10, consts: [["input", ""], ["auto", "matAutocomplete"], ["appearance", "outline", 1, "no-subscript", "w-full"], ["matInput", "", "keyboard", "", "name", "user-search", 3, "ngModelChange", "keyup.enter", "blur", "focus", "ngModel", "disabled", "placeholder", "matAutocomplete"], ["matPrefix", "", 1, "relative", "text-2xl"], ["matSuffix", "", "diameter", "16", 4, "ngIf"], [3, "optionSelected"], [3, "click", 4, "ngFor", "ngForOf"], ["class", "pointer-events-none relative", 4, "ngIf"], [3, "disabled", "click", 4, "ngIf"], ["matSuffix", "", "diameter", "16"], [3, "click"], [1, "leading-tight"], [1, "w-full", "text-xs", "opacity-60"], [4, "ngIf"], [1, "truncate"], [1, "pointer-events-none", "relative"], [1, "pointer-events-auto", "absolute", "inset-0", "px-4", 3, "mousedown", "touchstart", "click"], [1, "pointer-events-none"], [3, "click", "disabled"]], template: function UserSearchFieldComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "mat-form-field", 2)(1, "input", 3, 0);
-        \u0275\u0275pipe(3, "translate");
-        \u0275\u0275twoWayListener("ngModelChange", function UserSearchFieldComponent_Template_input_ngModelChange_1_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          \u0275\u0275twoWayBindingSet(ctx.search_str, $event) || (ctx.search_str = $event);
-          return \u0275\u0275resetView($event);
-        });
-        \u0275\u0275listener("ngModelChange", function UserSearchFieldComponent_Template_input_ngModelChange_1_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.search$.next($event || ""));
-        })("keyup.enter", function UserSearchFieldComponent_Template_input_keyup_enter_1_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.validate && ctx.validate(ctx.search_str) ? ctx.setValue(ctx.search_str) : "");
-        })("blur", function UserSearchFieldComponent_Template_input_blur_1_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.resetSearchString());
-        })("focus", function UserSearchFieldComponent_Template_input_focus_1_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.cancelReset());
-        });
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(4, "icon", 4);
-        \u0275\u0275text(5, "search");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(6, UserSearchFieldComponent_mat_spinner_6_Template, 1, 0, "mat-spinner", 5);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(7, "mat-autocomplete", 6, 1);
-        \u0275\u0275listener("optionSelected", function UserSearchFieldComponent_Template_mat_autocomplete_optionSelected_7_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.setValue($event.option.value));
-        });
-        \u0275\u0275template(9, UserSearchFieldComponent_mat_option_9_Template, 6, 3, "mat-option", 7)(10, UserSearchFieldComponent_mat_option_10_Template, 5, 6, "mat-option", 8)(11, UserSearchFieldComponent_mat_option_11_Template, 3, 5, "mat-option", 9);
-        \u0275\u0275elementEnd();
-      }
-      if (rf & 2) {
-        const auto_r7 = \u0275\u0275reference(8);
-        \u0275\u0275advance();
-        \u0275\u0275twoWayProperty("ngModel", ctx.search_str);
-        \u0275\u0275property("disabled", ctx.disabled)("placeholder", ctx.placeholder || \u0275\u0275pipeBind1(3, 8, "FORM.USER_SEARCH"))("matAutocomplete", auto_r7);
-        \u0275\u0275advance(5);
-        \u0275\u0275property("ngIf", ctx.loading);
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngForOf", ctx.user_list);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.search_str && ctx.validate && ctx.validate(ctx.search_str));
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", !(ctx.user_list == null ? null : ctx.user_list.length) && (ctx.search_str || ctx.error));
-      }
-    }, dependencies: [
-      CommonModule,
-      NgForOf,
-      NgIf,
+    ], imports: [
       MatFormFieldModule,
-      MatFormField,
-      MatPrefix,
-      MatSuffix,
       MatInputModule,
-      MatInput,
       MatProgressSpinnerModule,
-      MatProgressSpinner,
       MatAutocompleteModule,
-      MatAutocomplete,
-      MatOption,
-      MatAutocompleteTrigger,
       FormsModule,
-      DefaultValueAccessor,
-      NgControlStatus,
-      NgModel,
       IconComponent,
       TranslatePipe
-    ], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\nicon[_ngcontent-%COMP%] {\n  top: 0.15em;\n  left: -0.15em;\n}\n/*# sourceMappingURL=user-search-field.component.css.map */"] });
-  }
-};
+    ], styles: ["/* angular:styles/component:css;d84628be6394a4ab204c469dc548d2d04b7c619d7a49b10690a47d4a374a3d83;/home/runner/work/user-interfaces/user-interfaces/libs/form-fields/src/lib/user-search-field.component.ts */\n:host {\n  display: block;\n}\nicon {\n  top: 0.15em;\n  left: -0.15em;\n}\n/*# sourceMappingURL=user-search-field.component.css.map */\n"] }]
+  }], () => [], { disabled: [{
+    type: Input
+  }], placeholder: [{
+    type: Input
+  }], options: [{
+    type: Input
+  }], guests: [{
+    type: Input
+  }], error: [{
+    type: Input
+  }], validate: [{
+    type: Input
+  }], empty_fn: [{
+    type: Input
+  }], filter: [{
+    type: Input
+  }], query_fn: [{
+    type: Input
+  }], _input_el: [{
+    type: ViewChild,
+    args: ["input", { read: ElementRef }]
+  }] });
+})();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserSearchFieldComponent, { className: "UserSearchFieldComponent", filePath: "libs/form-fields/src/lib/user-search-field.component.ts", lineNumber: 146 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserSearchFieldComponent, { className: "UserSearchFieldComponent", filePath: "libs/form-fields/src/lib/user-search-field.component.ts", lineNumber: 145 });
 })();
 
 // node_modules/@placeos/svg-viewer/dist/index.es.js
 var ue = function(e, n) {
-  return ue = Object.setPrototypeOf || {
-    __proto__: []
-  } instanceof Array && function(t, r) {
+  return ue = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r) {
     t.__proto__ = r;
   } || function(t, r) {
     for (var o in r) Object.prototype.hasOwnProperty.call(r, o) && (t[o] = r[o]);
   }, ue(e, n);
 };
 function R(e, n) {
-  if (typeof n != "function" && n !== null) throw new TypeError("Class extends value " + String(n) + " is not a constructor or null");
+  if (typeof n != "function" && n !== null)
+    throw new TypeError("Class extends value " + String(n) + " is not a constructor or null");
   ue(e, n);
   function t() {
     this.constructor = e;
@@ -2021,15 +2211,10 @@ function pt(e, n, t, r) {
   });
 }
 function Ve(e, n) {
-  var t = {
-    label: 0,
-    sent: function() {
-      if (i[0] & 1) throw i[1];
-      return i[1];
-    },
-    trys: [],
-    ops: []
-  }, r, o, i, s = Object.create((typeof Iterator == "function" ? Iterator : Object).prototype);
+  var t = { label: 0, sent: function() {
+    if (i[0] & 1) throw i[1];
+    return i[1];
+  }, trys: [], ops: [] }, r, o, i, s = Object.create((typeof Iterator == "function" ? Iterator : Object).prototype);
   return s.next = c(0), s.throw = c(1), s.return = c(2), typeof Symbol == "function" && (s[Symbol.iterator] = function() {
     return this;
   }), s;
@@ -2048,10 +2233,7 @@ function Ve(e, n) {
           i = l;
           break;
         case 4:
-          return t.label++, {
-            value: l[1],
-            done: false
-          };
+          return t.label++, { value: l[1], done: false };
         case 5:
           t.label++, o = l[1], l = [0];
           continue;
@@ -2085,10 +2267,7 @@ function Ve(e, n) {
       r = i = 0;
     }
     if (l[0] & 5) throw l[1];
-    return {
-      value: l[0] ? l[1] : void 0,
-      done: true
-    };
+    return { value: l[0] ? l[1] : void 0, done: true };
   }
 }
 function I(e) {
@@ -2096,10 +2275,7 @@ function I(e) {
   if (t) return t.call(e);
   if (e && typeof e.length == "number") return {
     next: function() {
-      return e && r >= e.length && (e = void 0), {
-        value: e && e[r++],
-        done: !e
-      };
+      return e && r >= e.length && (e = void 0), { value: e && e[r++], done: !e };
     }
   };
   throw new TypeError(n ? "Object is not iterable." : "Symbol.iterator is not defined.");
@@ -2111,9 +2287,7 @@ function D(e, n) {
   try {
     for (; (n === void 0 || n-- > 0) && !(o = r.next()).done; ) i.push(o.value);
   } catch (c) {
-    s = {
-      error: c
-    };
+    s = { error: c };
   } finally {
     try {
       o && !o.done && (t = r.return) && t.call(r);
@@ -2124,7 +2298,8 @@ function D(e, n) {
   return i;
 }
 function ne(e, n, t) {
-  if (t || arguments.length === 2) for (var r = 0, o = n.length, i; r < o; r++) (i || !(r in n)) && (i || (i = Array.prototype.slice.call(n, 0, r)), i[r] = n[r]);
+  if (t || arguments.length === 2) for (var r = 0, o = n.length, i; r < o; r++)
+    (i || !(r in n)) && (i || (i = Array.prototype.slice.call(n, 0, r)), i[r] = n[r]);
   return e.concat(i || Array.prototype.slice.call(n));
 }
 function P(e) {
@@ -2183,10 +2358,7 @@ function gt(e) {
   }
   function o(i, s, c, a) {
     Promise.resolve(a).then(function(l) {
-      i({
-        value: l,
-        done: c
-      });
+      i({ value: l, done: c });
     }, s);
   }
 }
@@ -2223,29 +2395,31 @@ var J = function() {
     if (!this.closed) {
       this.closed = true;
       var s = this._parentage;
-      if (s) if (this._parentage = null, Array.isArray(s)) try {
-        for (var c = I(s), a = c.next(); !a.done; a = c.next()) {
-          var l = a.value;
-          l.remove(this);
-        }
-      } catch (y) {
-        n = {
-          error: y
-        };
-      } finally {
-        try {
-          a && !a.done && (t = c.return) && t.call(c);
-        } finally {
-          if (n) throw n.error;
-        }
-      }
-      else s.remove(this);
+      if (s)
+        if (this._parentage = null, Array.isArray(s))
+          try {
+            for (var c = I(s), a = c.next(); !a.done; a = c.next()) {
+              var l = a.value;
+              l.remove(this);
+            }
+          } catch (y) {
+            n = { error: y };
+          } finally {
+            try {
+              a && !a.done && (t = c.return) && t.call(c);
+            } finally {
+              if (n) throw n.error;
+            }
+          }
+        else
+          s.remove(this);
       var u = this.initialTeardown;
-      if (h(u)) try {
-        u();
-      } catch (y) {
-        i = y instanceof ae ? y.errors : [y];
-      }
+      if (h(u))
+        try {
+          u();
+        } catch (y) {
+          i = y instanceof ae ? y.errors : [y];
+        }
       var p = this._finalizers;
       if (p) {
         this._finalizers = null;
@@ -2259,9 +2433,7 @@ var J = function() {
             }
           }
         } catch (y) {
-          r = {
-            error: y
-          };
+          r = { error: y };
         } finally {
           try {
             f && !f.done && (o = d.return) && o.call(d);
@@ -2270,18 +2442,22 @@ var J = function() {
           }
         }
       }
-      if (i) throw new ae(i);
+      if (i)
+        throw new ae(i);
     }
   }, e.prototype.add = function(n) {
     var t;
-    if (n && n !== this) if (this.closed) Ce(n);
-    else {
-      if (n instanceof e) {
-        if (n.closed || n._hasParent(this)) return;
-        n._addParent(this);
+    if (n && n !== this)
+      if (this.closed)
+        Ce(n);
+      else {
+        if (n instanceof e) {
+          if (n.closed || n._hasParent(this))
+            return;
+          n._addParent(this);
+        }
+        (this._finalizers = (t = this._finalizers) !== null && t !== void 0 ? t : []).push(n);
       }
-      (this._finalizers = (t = this._finalizers) !== null && t !== void 0 ? t : []).push(n);
-    }
   }, e.prototype._hasParent = function(n) {
     var t = this._parentage;
     return t === n || Array.isArray(t) && t.includes(n);
@@ -2311,7 +2487,8 @@ var _t = {
 };
 var bt2 = {
   setTimeout: function(e, n) {
-    for (var t = [], r = 2; r < arguments.length; r++) t[r - 2] = arguments[r];
+    for (var t = [], r = 2; r < arguments.length; r++)
+      t[r - 2] = arguments[r];
     return setTimeout.apply(void 0, ne([e, n], D(t)));
   },
   clearTimeout: function(e) {
@@ -2367,26 +2544,30 @@ var wt = function() {
   }
   return e.prototype.next = function(n) {
     var t = this.partialObserver;
-    if (t.next) try {
-      t.next(n);
-    } catch (r) {
-      K(r);
-    }
+    if (t.next)
+      try {
+        t.next(n);
+      } catch (r) {
+        K(r);
+      }
   }, e.prototype.error = function(n) {
     var t = this.partialObserver;
-    if (t.error) try {
-      t.error(n);
-    } catch (r) {
-      K(r);
-    }
-    else K(n);
+    if (t.error)
+      try {
+        t.error(n);
+      } catch (r) {
+        K(r);
+      }
+    else
+      K(n);
   }, e.prototype.complete = function() {
     var n = this.partialObserver;
-    if (n.complete) try {
-      n.complete();
-    } catch (t) {
-      K(t);
-    }
+    if (n.complete)
+      try {
+        n.complete();
+      } catch (t) {
+        K(t);
+      }
   }, e;
 }();
 var de = function(e) {
@@ -2467,7 +2648,8 @@ var g = function() {
   }, e.prototype[we] = function() {
     return this;
   }, e.prototype.pipe = function() {
-    for (var n = [], t = 0; t < arguments.length; t++) n[t] = arguments[t];
+    for (var n = [], t = 0; t < arguments.length; t++)
+      n[t] = arguments[t];
     return Et(n)(this);
   }, e.prototype.toPromise = function(n) {
     var t = this;
@@ -2500,13 +2682,14 @@ function $t(e) {
 }
 function V(e) {
   return function(n) {
-    if ($t(n)) return n.lift(function(t) {
-      try {
-        return e(t, this);
-      } catch (r) {
-        this.error(r);
-      }
-    });
+    if ($t(n))
+      return n.lift(function(t) {
+        try {
+          return e(t, this);
+        } catch (r) {
+          this.error(r);
+        }
+      });
     throw new TypeError("Unable to lift unknown Observable type");
   };
 }
@@ -2564,7 +2747,8 @@ var xe = function(e) {
     var r = new Te(this, this);
     return r.operator = t, r;
   }, n.prototype._throwIfClosed = function() {
-    if (this.closed) throw new Ct();
+    if (this.closed)
+      throw new Ct();
   }, n.prototype.next = function(t) {
     var r = this;
     ee2(function() {
@@ -2577,9 +2761,7 @@ var xe = function(e) {
             a.next(t);
           }
         } catch (l) {
-          o = {
-            error: l
-          };
+          o = { error: l };
         } finally {
           try {
             c && !c.done && (i = s.return) && i.call(s);
@@ -2594,7 +2776,8 @@ var xe = function(e) {
     ee2(function() {
       if (r._throwIfClosed(), !r.isStopped) {
         r.hasError = r.isStopped = true, r.thrownError = t;
-        for (var o = r.observers; o.length; ) o.shift().error(t);
+        for (var o = r.observers; o.length; )
+          o.shift().error(t);
       }
     });
   }, n.prototype.complete = function() {
@@ -2602,7 +2785,8 @@ var xe = function(e) {
     ee2(function() {
       if (t._throwIfClosed(), !t.isStopped) {
         t.isStopped = true;
-        for (var r = t.observers; r.length; ) r.shift().complete();
+        for (var r = t.observers; r.length; )
+          r.shift().complete();
       }
     });
   }, n.prototype.unsubscribe = function() {
@@ -2670,7 +2854,8 @@ var De = function(e) {
     return !r.closed && t.next(this._value), r;
   }, n.prototype.getValue = function() {
     var t = this, r = t.hasError, o = t.thrownError, i = t._value;
-    if (r) throw o;
+    if (r)
+      throw o;
     return this._throwIfClosed(), i;
   }, n.prototype.next = function(t) {
     e.prototype.next.call(this, this._value = t);
@@ -2748,27 +2933,36 @@ function ke(e) {
   return h(e?.getReader);
 }
 function A(e) {
-  if (e instanceof g) return e;
+  if (e instanceof g)
+    return e;
   if (e != null) {
-    if (Je(e)) return qt(e);
-    if (Se(e)) return It(e);
-    if (Ge(e)) return Rt(e);
-    if (We(e)) return et(e);
-    if (Ke(e)) return Vt(e);
-    if (ke(e)) return jt(e);
+    if (Je(e))
+      return qt(e);
+    if (Se(e))
+      return It(e);
+    if (Ge(e))
+      return Rt(e);
+    if (We(e))
+      return et(e);
+    if (Ke(e))
+      return Vt(e);
+    if (ke(e))
+      return jt(e);
   }
   throw Xe(e);
 }
 function qt(e) {
   return new g(function(n) {
     var t = e[we]();
-    if (h(t.subscribe)) return t.subscribe(n);
+    if (h(t.subscribe))
+      return t.subscribe(n);
     throw new TypeError("Provided object does not correctly implement Symbol.observable");
   });
 }
 function It(e) {
   return new g(function(n) {
-    for (var t = 0; t < e.length && !n.closed; t++) n.next(e[t]);
+    for (var t = 0; t < e.length && !n.closed; t++)
+      n.next(e[t]);
     n.complete();
   });
 }
@@ -2787,12 +2981,11 @@ function Vt(e) {
     try {
       for (var o = I(e), i = o.next(); !i.done; i = o.next()) {
         var s = i.value;
-        if (n.next(s), n.closed) return;
+        if (n.next(s), n.closed)
+          return;
       }
     } catch (c) {
-      t = {
-        error: c
-      };
+      t = { error: c };
     } finally {
       try {
         i && !i.done && (r = o.return) && r.call(o);
@@ -2825,16 +3018,15 @@ function Bt(e, n) {
           return [4, t.next()];
         case 2:
           if (r = a.sent(), !!r.done) return [3, 4];
-          if (s = r.value, n.next(s), n.closed) return [2];
+          if (s = r.value, n.next(s), n.closed)
+            return [2];
           a.label = 3;
         case 3:
           return [3, 1];
         case 4:
           return [3, 11];
         case 5:
-          return c = a.sent(), o = {
-            error: c
-          }, [3, 11];
+          return c = a.sent(), o = { error: c }, [3, 11];
         case 6:
           return a.trys.push([6, , 9, 10]), r && !r.done && (i = t.return) ? [4, i.call(t)] : [3, 8];
         case 7:
@@ -2857,7 +3049,8 @@ function C(e, n, t, r, o) {
   var i = n.schedule(function() {
     t(), o ? e.add(this.schedule(null, r)) : this.unsubscribe();
   }, r);
-  if (e.add(i), !o) return i;
+  if (e.add(i), !o)
+    return i;
 }
 function tt(e, n) {
   return n === void 0 && (n = 0), V(function(t, r) {
@@ -2917,7 +3110,8 @@ function Dt(e, n) {
   });
 }
 function rt(e, n) {
-  if (!e) throw new Error("Iterable cannot be null");
+  if (!e)
+    throw new Error("Iterable cannot be null");
   return new g(function(t) {
     C(t, n, function() {
       var r = e[Symbol.asyncIterator]();
@@ -2934,12 +3128,18 @@ function Ht(e, n) {
 }
 function Gt(e, n) {
   if (e != null) {
-    if (Je(e)) return Nt(e, n);
-    if (Se(e)) return Yt(e, n);
-    if (Ge(e)) return Ut(e, n);
-    if (We(e)) return rt(e, n);
-    if (Ke(e)) return Dt(e, n);
-    if (ke(e)) return Ht(e, n);
+    if (Je(e))
+      return Nt(e, n);
+    if (Se(e))
+      return Yt(e, n);
+    if (Ge(e))
+      return Ut(e, n);
+    if (We(e))
+      return rt(e, n);
+    if (Ke(e))
+      return Dt(e, n);
+    if (ke(e))
+      return Ht(e, n);
   }
   throw Xe(e);
 }
@@ -2976,16 +3176,18 @@ function Kt(e, n, t, r, o, i, s, c) {
     }, function() {
       S = true;
     }, void 0, function() {
-      if (S) try {
-        l--;
-        for (var w = function() {
-          var z = a.shift();
-          s || m(z);
-        }; a.length && l < r; ) w();
-        d();
-      } catch (z) {
-        n.error(z);
-      }
+      if (S)
+        try {
+          l--;
+          for (var w = function() {
+            var z = a.shift();
+            s || m(z);
+          }; a.length && l < r; )
+            w();
+          d();
+        } catch (z) {
+          n.error(z);
+        }
     }));
   };
   return e.subscribe(O(n, f, function() {
@@ -3009,19 +3211,23 @@ var kt = ["addListener", "removeListener"];
 var en = ["addEventListener", "removeEventListener"];
 var tn = ["on", "off"];
 function ye(e, n, t, r) {
-  if (h(t) && (r = t, t = void 0), r) return ye(e, n, t).pipe(Zt(r));
+  if (h(t) && (r = t, t = void 0), r)
+    return ye(e, n, t).pipe(Zt(r));
   var o = D(on(e) ? en.map(function(c) {
     return function(a) {
       return e[c](n, a, t);
     };
   }) : nn(e) ? kt.map(Pe(e, n)) : rn(e) ? tn.map(Pe(e, n)) : [], 2), i = o[0], s = o[1];
-  if (!i && Se(e)) return Ee(function(c) {
-    return ye(c, n, t);
-  })(A(e));
-  if (!i) throw new TypeError("Invalid event target");
+  if (!i && Se(e))
+    return Ee(function(c) {
+      return ye(c, n, t);
+    })(A(e));
+  if (!i)
+    throw new TypeError("Invalid event target");
   return new g(function(c) {
     var a = function() {
-      for (var l = [], u = 0; u < arguments.length; u++) l[u] = arguments[u];
+      for (var l = [], u = 0; u < arguments.length; u++)
+        l[u] = arguments[u];
       return c.next(1 < l.length ? l : l[0]);
     };
     return i(a), function() {
@@ -3046,7 +3252,8 @@ function on(e) {
   return h(e.addEventListener) && h(e.removeEventListener);
 }
 function sn() {
-  for (var e = [], n = 0; n < arguments.length; n++) e[n] = arguments[n];
+  for (var e = [], n = 0; n < arguments.length; n++)
+    e[n] = arguments[n];
   var t = Pt(e), r = Ft(e, 1 / 0), o = e;
   return o.length ? o.length === 1 ? A(o[0]) : Qt(r)(Jt(o, t)) : Ot;
 }
@@ -3072,10 +3279,14 @@ function cn(e, n) {
 var U = {};
 var E = {};
 function T(e, n, t = 300) {
-  if (e && n && n instanceof Function) it(e), U[e] = setTimeout(() => {
-    n(), delete U[e];
-  }, t);
-  else throw new Error(e ? "Cannot create named timeout without a name" : "Cannot create a timeout without a callback");
+  if (e && n && n instanceof Function)
+    it(e), U[e] = setTimeout(() => {
+      n(), delete U[e];
+    }, t);
+  else
+    throw new Error(
+      e ? "Cannot create named timeout without a name" : "Cannot create a timeout without a callback"
+    );
 }
 function it(e) {
   U[e] && (clearTimeout(U[e]), delete U[e]);
@@ -3098,23 +3309,12 @@ function b(e, n, t, r = "debug", o = false, i = "SVG VIEWER") {
 function Le(e) {
   let n = e.replace(/[!"#$%&'()*+,.\/;<=>?@[\\\]^`{|}~]/g, "\\$&");
   const t = n.split(" ");
-  for (const r of t) t.splice(t.indexOf(r), 1, [r.replace(/^\\/g, "")]);
+  for (const r of t)
+    t.splice(t.indexOf(r), 1, [r.replace(/^\\/g, "")]);
   return n = t.join(" "), n;
 }
 function W(e) {
-  return e ? e instanceof MouseEvent ? {
-    x: e.clientX,
-    y: e.clientY
-  } : e.touches && e.touches.length > 0 ? {
-    x: e.touches[0].clientX,
-    y: e.touches[0].clientY
-  } : {
-    x: -1,
-    y: -1
-  } : {
-    x: -1,
-    y: -1
-  };
+  return e ? e instanceof MouseEvent ? { x: e.clientX, y: e.clientY } : e.touches && e.touches.length > 0 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : { x: -1, y: -1 } : { x: -1, y: -1 };
 }
 function ln(e) {
   if (!e) return {};
@@ -3145,11 +3345,9 @@ function un(e, n, t) {
       x: (c.left + c.width / 2 - s.left) / s.width,
       y: (c.top + c.height / 2 - s.top) / s.height
     };
-  } else b("DOM", `Unable to find element with ID ${n}`, void 0, "warn");
-  return {
-    x: -1,
-    y: -1
-  };
+  } else
+    b("DOM", `Unable to find element with ID ${n}`, void 0, "warn");
+  return { x: -1, y: -1 };
 }
 function ie(e, n, t, r = 1) {
   const o = e.element?.querySelector(".svg-viewer__svg-overlays");
@@ -3159,11 +3357,9 @@ function ie(e, n, t, r = 1) {
       x: Math.max(0, Math.min(1, (n.x - s.left) / s.width * r)),
       y: Math.max(0, Math.min(1, (n.y - s.top) / s.height * r))
     };
-  } else b("DOM", "Unable to find SVG element", void 0, "warn");
-  return {
-    x: -1,
-    y: -1
-  };
+  } else
+    b("DOM", "Unable to find SVG element", void 0, "warn");
+  return { x: -1, y: -1 };
 }
 function at(e, n) {
   return Math.sqrt(Math.pow(e.x - n.x, 2) + Math.pow(e.y - n.y, 2));
@@ -3177,21 +3373,30 @@ function lt(e, n, t) {
 function fn(e) {
   if (!e) return "";
   const n = __spreadValues({}, e);
-  for (const t in n) n[t] instanceof Object && (n[t] = `${n[t]}`);
+  for (const t in n)
+    n[t] instanceof Object && (n[t] = `${n[t]}`);
   return n;
 }
 function Q(e) {
   return e < 26 ? e + 65 : e < 52 ? e + 71 : e < 62 ? e - 4 : e === 62 ? 43 : e === 63 ? 47 : 65;
 }
 function hn(e) {
-  for (var n = 2, t = "", r = e.length, o = 0, i = 0; i < r; i++) n = i % 3, i > 0 && i * 4 / 3 % 76 === 0 && (t += `\r
-`), o |= e[i] << (16 >>> n & 24), (n === 2 || e.length - i === 1) && (t += String.fromCodePoint(Q(o >>> 18 & 63), Q(o >>> 12 & 63), Q(o >>> 6 & 63), Q(o & 63)), o = 0);
+  for (var n = 2, t = "", r = e.length, o = 0, i = 0; i < r; i++)
+    n = i % 3, i > 0 && i * 4 / 3 % 76 === 0 && (t += `\r
+`), o |= e[i] << (16 >>> n & 24), (n === 2 || e.length - i === 1) && (t += String.fromCodePoint(
+      Q(o >>> 18 & 63),
+      Q(o >>> 12 & 63),
+      Q(o >>> 6 & 63),
+      Q(o & 63)
+    ), o = 0);
   return t.substr(0, t.length - 2 + n) + (n === 2 ? "" : n === 1 ? "=" : "==");
 }
 function dn(e) {
-  for (var n, t, r = e.length, o = 0, i = 0; i < r; i++) t = e.codePointAt(i) ?? 0, t > 65536 && i++, o += t < 128 ? 1 : t < 2048 ? 2 : t < 65536 ? 3 : t < 2097152 ? 4 : t < 67108864 ? 5 : 6;
+  for (var n, t, r = e.length, o = 0, i = 0; i < r; i++)
+    t = e.codePointAt(i) ?? 0, t > 65536 && i++, o += t < 128 ? 1 : t < 2048 ? 2 : t < 65536 ? 3 : t < 2097152 ? 4 : t < 67108864 ? 5 : 6;
   n = new Uint8Array(o);
-  for (var s = 0, c = 0; s < o; c++) t = e.codePointAt(c) ?? 0, t < 128 ? n[s++] = t : t < 2048 ? (n[s++] = 192 + (t >>> 6), n[s++] = 128 + (t & 63)) : t < 65536 ? (n[s++] = 224 + (t >>> 12), n[s++] = 128 + (t >>> 6 & 63), n[s++] = 128 + (t & 63)) : t < 2097152 ? (n[s++] = 240 + (t >>> 18), n[s++] = 128 + (t >>> 12 & 63), n[s++] = 128 + (t >>> 6 & 63), n[s++] = 128 + (t & 63), c++) : t < 67108864 ? (n[s++] = 248 + (t >>> 24), n[s++] = 128 + (t >>> 18 & 63), n[s++] = 128 + (t >>> 12 & 63), n[s++] = 128 + (t >>> 6 & 63), n[s++] = 128 + (t & 63), c++) : (n[s++] = 252 + (t >>> 30), n[s++] = 128 + (t >>> 24 & 63), n[s++] = 128 + (t >>> 18 & 63), n[s++] = 128 + (t >>> 12 & 63), n[s++] = 128 + (t >>> 6 & 63), n[s++] = 128 + (t & 63), c++);
+  for (var s = 0, c = 0; s < o; c++)
+    t = e.codePointAt(c) ?? 0, t < 128 ? n[s++] = t : t < 2048 ? (n[s++] = 192 + (t >>> 6), n[s++] = 128 + (t & 63)) : t < 65536 ? (n[s++] = 224 + (t >>> 12), n[s++] = 128 + (t >>> 6 & 63), n[s++] = 128 + (t & 63)) : t < 2097152 ? (n[s++] = 240 + (t >>> 18), n[s++] = 128 + (t >>> 12 & 63), n[s++] = 128 + (t >>> 6 & 63), n[s++] = 128 + (t & 63), c++) : t < 67108864 ? (n[s++] = 248 + (t >>> 24), n[s++] = 128 + (t >>> 18 & 63), n[s++] = 128 + (t >>> 12 & 63), n[s++] = 128 + (t >>> 6 & 63), n[s++] = 128 + (t & 63), c++) : (n[s++] = 252 + (t >>> 30), n[s++] = 128 + (t >>> 24 & 63), n[s++] = 128 + (t >>> 18 & 63), n[s++] = 128 + (t >>> 12 & 63), n[s++] = 128 + (t >>> 6 & 63), n[s++] = 128 + (t & 63), c++);
   return n;
 }
 function yn(e) {
@@ -3210,7 +3415,9 @@ var v = class _v {
   static _hex(n) {
     const t = _v.hexChars, r = _v.hexOut;
     let o, i, s, c;
-    for (c = 0; c < 4; c += 1) for (i = c * 8, o = n[c], s = 0; s < 8; s += 2) r[i + 1 + s] = t.charAt(o & 15), o >>>= 4, r[i + 0 + s] = t.charAt(o & 15), o >>>= 4;
+    for (c = 0; c < 4; c += 1)
+      for (i = c * 8, o = n[c], s = 0; s < 8; s += 2)
+        r[i + 1 + s] = t.charAt(o & 15), o >>>= 4, r[i + 0 + s] = t.charAt(o & 15), o >>>= 4;
     return r.join("");
   }
   static _md5cycle(n, t) {
@@ -3234,11 +3441,15 @@ var v = class _v {
     const t = this._buffer8, r = this._buffer32;
     let o = this._bufferLength, i, s;
     for (s = 0; s < n.length; s += 1) {
-      if (i = n.charCodeAt(s), i < 128) t[o++] = i;
-      else if (i < 2048) t[o++] = (i >>> 6) + 192, t[o++] = i & 63 | 128;
-      else if (i < 55296 || i > 56319) t[o++] = (i >>> 12) + 224, t[o++] = i >>> 6 & 63 | 128, t[o++] = i & 63 | 128;
+      if (i = n.charCodeAt(s), i < 128)
+        t[o++] = i;
+      else if (i < 2048)
+        t[o++] = (i >>> 6) + 192, t[o++] = i & 63 | 128;
+      else if (i < 55296 || i > 56319)
+        t[o++] = (i >>> 12) + 224, t[o++] = i >>> 6 & 63 | 128, t[o++] = i & 63 | 128;
       else {
-        if (i = (i - 55296) * 1024 + (n.charCodeAt(++s) - 56320) + 65536, i > 1114111) throw new Error("Unicode standard supports code points up to U+10FFFF");
+        if (i = (i - 55296) * 1024 + (n.charCodeAt(++s) - 56320) + 65536, i > 1114111)
+          throw new Error("Unicode standard supports code points up to U+10FFFF");
         t[o++] = (i >>> 18) + 240, t[o++] = i >>> 12 & 63 | 128, t[o++] = i >>> 6 & 63 | 128, t[o++] = i & 63 | 128;
       }
       o >= 64 && (this._dataLength += 64, _v._md5cycle(this._state, r), o -= 64, r[0] = r[16]);
@@ -3253,8 +3464,10 @@ var v = class _v {
     const t = this._buffer8, r = this._buffer32;
     let o = this._bufferLength, i, s = 0;
     for (; ; ) {
-      for (i = Math.min(n.length - s, 64 - o); i--; ) t[o++] = n.charCodeAt(s++);
-      if (o < 64) break;
+      for (i = Math.min(n.length - s, 64 - o); i--; )
+        t[o++] = n.charCodeAt(s++);
+      if (o < 64)
+        break;
       this._dataLength += 64, _v._md5cycle(this._state, r), o = 0;
     }
     return this._bufferLength = o, this;
@@ -3267,8 +3480,10 @@ var v = class _v {
     const t = this._buffer8, r = this._buffer32;
     let o = this._bufferLength, i, s = 0;
     for (; ; ) {
-      for (i = Math.min(n.length - s, 64 - o); i--; ) t[o++] = n[s++];
-      if (o < 64) break;
+      for (i = Math.min(n.length - s, 64 - o); i--; )
+        t[o++] = n[s++];
+      if (o < 64)
+        break;
       this._dataLength += 64, _v._md5cycle(this._state, r), o = 0;
     }
     return this._bufferLength = o, this;
@@ -3292,7 +3507,8 @@ var v = class _v {
   setState(n) {
     const t = n.buffer, r = n.state, o = this._state;
     let i;
-    for (this._dataLength = n.length, this._bufferLength = n.buflen, o[0] = r[0], o[1] = r[1], o[2] = r[2], o[3] = r[3], i = 0; i < t.length; i += 1) this._buffer8[i] = t.charCodeAt(i);
+    for (this._dataLength = n.length, this._bufferLength = n.buflen, o[0] = r[0], o[1] = r[1], o[2] = r[2], o[3] = r[3], i = 0; i < t.length; i += 1)
+      this._buffer8[i] = t.charCodeAt(i);
   }
   /**
    * Hash the current state of the hash buffer and return the result
@@ -3302,10 +3518,12 @@ var v = class _v {
     const t = this._bufferLength, r = this._buffer8, o = this._buffer32, i = (t >> 2) + 1;
     this._dataLength += t;
     const s = this._dataLength * 8;
-    if (r[t] = 128, r[t + 1] = r[t + 2] = r[t + 3] = 0, o.set(_v.buffer32Identity.subarray(i), i), t > 55 && (_v._md5cycle(this._state, o), o.set(_v.buffer32Identity)), s <= 4294967295) o[14] = s;
+    if (r[t] = 128, r[t + 1] = r[t + 2] = r[t + 3] = 0, o.set(_v.buffer32Identity.subarray(i), i), t > 55 && (_v._md5cycle(this._state, o), o.set(_v.buffer32Identity)), s <= 4294967295)
+      o[14] = s;
     else {
       const c = s.toString(16).match(/(.*?)(.{0,8})$/);
-      if (c === null) return;
+      if (c === null)
+        return;
       const a = parseInt(c[2], 16), l = parseInt(c[1], 16) || 0;
       o[14] = a, o[15] = l;
     }
@@ -3317,13 +3535,9 @@ v.buffer32Identity = new Int32Array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 v.hexChars = "0123456789abcdef";
 v.hexOut = [];
 v.onePassHasher = new v();
-if (v.hashStr("hello") !== "5d41402abc4b2a76b9719d911017c592") throw new Error("Md5 self test failed.");
-var k = {
-  top: 0,
-  left: 0,
-  height: 0,
-  width: 0
-};
+if (v.hashStr("hello") !== "5d41402abc4b2a76b9719d911017c592")
+  throw new Error("Md5 self test failed.");
+var k = { top: 0, left: 0, height: 0, width: 0 };
 var te = class {
   /** Unique Identifier for the Viewer */
   id;
@@ -3377,13 +3591,7 @@ var te = class {
     this.svg_data.includes(`id="${n}"`);
   }
   constructor(n) {
-    if (this.id = n.id || `map-${Math.floor(Math.random() * 999999)}`, this.url = n.url || `local-${v.hashAsciiStr(n.svg_data || "")}`, this.element = n.element || null, this.labels = n.labels || [], this.features = n.features || [], this.actions = n.actions || [], this.styles = n.styles || {}, this.svg_data = n.svg_data || "", this.content_ratio = n.content_ratio || {
-      x: 1,
-      y: 1
-    }, this.zoom = n.zoom || 1, this.center = {
-      x: n.center?.x ?? 0.5,
-      y: n.center?.y ?? 0.5
-    }, this.rotate = n.rotate || 0, this.ratio = n.ratio || 1, this.svg_ratio = n.svg_ratio || 1, this.max_resolution = n.max_resolution || window.innerWidth * window.innerHeight * 10, this.focus = n.focus || null, this.options = n.options || {}, this.mappings = n.mappings || {}, this.box = {
+    if (this.id = n.id || `map-${Math.floor(Math.random() * 999999)}`, this.url = n.url || `local-${v.hashAsciiStr(n.svg_data || "")}`, this.element = n.element || null, this.labels = n.labels || [], this.features = n.features || [], this.actions = n.actions || [], this.styles = n.styles || {}, this.svg_data = n.svg_data || "", this.content_ratio = n.content_ratio || { x: 1, y: 1 }, this.zoom = n.zoom || 1, this.center = { x: n.center?.x ?? 0.5, y: n.center?.y ?? 0.5 }, this.rotate = n.rotate || 0, this.ratio = n.ratio || 1, this.svg_ratio = n.svg_ratio || 1, this.max_resolution = n.max_resolution || window.innerWidth * window.innerHeight * 10, this.focus = n.focus || null, this.options = n.options || {}, this.mappings = n.mappings || {}, this.box = {
       top: (n.box || k).top,
       left: (n.box || k).left,
       height: (n.box || k).height,
@@ -3423,7 +3631,11 @@ function x(e, n) {
   return ft(r), r.needs_update && T(`${e.id}_updating`, () => x(r, {}), 16), r;
 }
 function mn(e) {
-  return j.pipe(ot((n) => !!n.find((t) => t.id === e)), oe((n) => n.find((t) => t.id === e)), cn());
+  return j.pipe(
+    ot((n) => !!n.find((t) => t.id === e)),
+    oe((n) => n.find((t) => t.id === e)),
+    cn()
+  );
 }
 function ft(e) {
   const n = X().filter((t) => t.id !== e.id);
@@ -3447,23 +3659,34 @@ var L;
 var M;
 var _;
 var q;
-var _n = ["click", "mousedown", "mousemove", "mouseup", "touchstart", "touchmove", "touchend", "mousewheel", "wheel"];
-var bn = ["mousedown", "mousemove", "mousewheel", "wheel", "touchstart", "touchmove"];
+var _n = [
+  "click",
+  "mousedown",
+  "mousemove",
+  "mouseup",
+  "touchstart",
+  "touchmove",
+  "touchend",
+  "mousewheel",
+  "wheel"
+];
+var bn = [
+  "mousedown",
+  "mousemove",
+  "mousewheel",
+  "wheel",
+  "touchstart",
+  "touchmove"
+];
 var qe = false;
 window.addEventListener("blur", () => H());
 function wn(e) {
   const n = JSON.stringify(e.focus);
   if (e.focus && n !== Me[e.id]) {
-    let t = {
-      x: 0,
-      y: 0
-    };
+    let t = { x: 0, y: 0 };
     const r = Math.max(0.5, Math.min(10, e.focus.zoom_level || 1));
     typeof e.focus.location == "string" ? t = un(e, e.focus.location) : t = e.focus.location, Me[e.id] = n;
-    const o = {
-      x: 1 - t.x,
-      y: 1 - t.y
-    };
+    const o = { x: 1 - t.x, y: 1 - t.y };
     x(e, {
       center: o,
       desired_center: o,
@@ -3479,17 +3702,12 @@ function Sn(e, n = _n) {
   const t = Fe.getValue(), r = e.element;
   t[e.id] && t[e.id].unsubscribe();
   const o = [];
-  for (const i of n) o.push(ye(r, i).pipe(oe((s) => ({
-    id: e.id,
-    type: i,
-    event: s
-  }))));
+  for (const i of n)
+    o.push(
+      ye(r, i).pipe(oe((s) => ({ id: e.id, type: i, event: s })))
+    );
   t[e.id] = sn(...o).subscribe((i) => {
-    const {
-      id: s,
-      type: c,
-      event: a
-    } = i, l = a;
+    const { id: s, type: c, event: a } = i, l = a;
     switch (bn.includes(c) && l.preventDefault(), Cn(i), c) {
       case "touchstart":
       case "mousedown":
@@ -3522,48 +3740,45 @@ function Ie(e, n, t = Y) {
   const r = $(e);
   if (r) {
     const o = W(n), i = {
-      x: Math.max(0, Math.min(1, (o.x - t.x) / r.box.width / r.desired_zoom / r.svg_ratio + r.center.x)),
-      y: Math.max(0, Math.min(1, (o.y - t.y) / r.box.height / r.desired_zoom / r.svg_ratio + r.center.y))
+      x: Math.max(
+        0,
+        Math.min(
+          1,
+          (o.x - t.x) / r.box.width / r.desired_zoom / r.svg_ratio + r.center.x
+        )
+      ),
+      y: Math.max(
+        0,
+        Math.min(
+          1,
+          (o.y - t.y) / r.box.height / r.desired_zoom / r.svg_ratio + r.center.y
+        )
+      )
     };
-    Y = o, x(r, {
-      center: i,
-      desired_center: i
-    });
+    Y = o, x(r, { center: i, desired_center: i });
   }
 }
 function An(e, n) {
   b("INPUT", "Starting pinching..."), _ && window.removeEventListener("touchmove", _);
   const t = $(e);
   if (Z = true, t && !t.options.disable_zoom) {
-    const r = [{
-      x: n.touches[0].clientX,
-      y: n.touches[0].clientY
-    }, {
-      x: n.touches[1].clientX,
-      y: n.touches[1].clientY
-    }], o = r.map((c) => ie(t, c)), {
-      x: i,
-      y: s
-    } = {
+    const r = [
+      { x: n.touches[0].clientX, y: n.touches[0].clientY },
+      { x: n.touches[1].clientX, y: n.touches[1].clientY }
+    ], o = r.map((c) => ie(t, c)), { x: i, y: s } = {
       x: (o[0].x + o[1].x) / 2,
       y: (o[0].y + o[1].y) / 2
     };
-    F = {
-      x: 1 - i,
-      y: 1 - s
-    }, re = at(r[0], r[1]), n instanceof MouseEvent || (_ = (c) => c.touches.length >= 2 ? $n(e, c, re) : "", window.addEventListener("touchmove", _));
+    F = { x: 1 - i, y: 1 - s }, re = at(r[0], r[1]), n instanceof MouseEvent || (_ = (c) => c.touches.length >= 2 ? $n(e, c, re) : "", window.addEventListener("touchmove", _));
   }
 }
 function $n(e, n, t = re) {
   const r = $(e);
   if (r && !r.options.disable_zoom) {
-    const o = [{
-      x: n.touches[0].clientX,
-      y: n.touches[0].clientY
-    }, {
-      x: n.touches[1].clientX,
-      y: n.touches[1].clientY
-    }], i = at(o[0], o[1]), s = Math.max(0.5, Math.min(10, r.zoom * i / t)), c = 1 - r.zoom / s, a = s != r.zoom ? lt(r.center, F, c) : r.center;
+    const o = [
+      { x: n.touches[0].clientX, y: n.touches[0].clientY },
+      { x: n.touches[1].clientX, y: n.touches[1].clientY }
+    ], i = at(o[0], o[1]), s = Math.max(0.5, Math.min(10, r.zoom * i / t)), c = 1 - r.zoom / s, a = s != r.zoom ? lt(r.center, F, c) : r.center;
     re = i, x(r, {
       zoom: s,
       center: a,
@@ -3578,14 +3793,8 @@ function H() {
 function zn(e, n) {
   const t = $(e);
   if (t) {
-    const r = n.deltaY >= 0 ? -0.02 : 0.02, o = Math.min(10, Math.max(0.5, t.zoom * (1 + r))), {
-      x: i,
-      y: s
-    } = ie(t, W(n));
-    F = {
-      x: 1 - i,
-      y: 1 - s
-    }, T("clear_action_start", () => F = null);
+    const r = n.deltaY >= 0 ? -0.02 : 0.02, o = Math.min(10, Math.max(0.5, t.zoom * (1 + r))), { x: i, y: s } = ie(t, W(n));
+    F = { x: 1 - i, y: 1 - s }, T("clear_action_start", () => F = null);
     const c = 1 - t.zoom / o, a = o != t.zoom ? lt(t.center, F, c) : t.center;
     x(t, {
       zoom: o,
@@ -3596,13 +3805,11 @@ function zn(e, n) {
   }
 }
 function Cn(e) {
-  const {
-    id: n,
-    type: t,
-    event: r
-  } = e, o = $(n);
+  const { id: n, type: t, event: r } = e, o = $(n);
   if (!o || !o.actions?.length) return;
-  const s = o.actions.sort((c, a) => (a.priority || 0) - (c.priority || 0)).find((c) => c.action.includes(t) && (c.id === "*" || c.id === r.target?.id));
+  const s = o.actions.sort((c, a) => (a.priority || 0) - (c.priority || 0)).find(
+    (c) => c.action.includes(t) && (c.id === "*" || c.id === r.target?.id)
+  );
   s && s.callback(r, ie(o, W(r)));
 }
 var B = {};
@@ -3612,14 +3819,18 @@ var pe = {};
 var me = {};
 var G = {};
 var N = {};
-st("on_resize", vn.subscribe(() => {
-  const e = X();
-  for (const n of e) try {
-    T(`resize-${n.id}`, () => yt(n));
-  } catch (t) {
-    console.warn(t);
-  }
-}));
+st(
+  "on_resize",
+  vn.subscribe(() => {
+    const e = X();
+    for (const n of e)
+      try {
+        T(`resize-${n.id}`, () => yt(n));
+      } catch (t) {
+        console.warn(t);
+      }
+  })
+);
 function On(e) {
   return __async(this, null, function* () {
     const n = e.element;
@@ -3628,9 +3839,7 @@ function On(e) {
     i.appendChild(s), i.appendChild(c), t.appendChild(r), t.appendChild(o), o.appendChild(i), t.classList.add("svg-viewer"), t.id = e.id, r.id = e.id, a.id = "svg-display", a.classList.add("svg-viewer__iframe"), o.classList.add("svg-viewer__view-container"), i.classList.add("svg-viewer__render-container"), c.classList.add("svg-viewer__svg-overlays"), s.classList.add("svg-viewer__svg-output"), s.id = "svg-output", s.innerHTML = e.svg_data;
     const l = s.firstElementChild?.viewBox?.baseVal || {};
     o.style.width = `${l.width}px`, o.style.height = `${l.height}px`, c.style.width = `${l.width}px`, c.style.height = `${l.height}px`, c.appendChild(a), n.appendChild(t);
-    const u = o?.getBoundingClientRect() || {}, p = x(e, {
-      box: u
-    });
+    const u = o?.getBoundingClientRect() || {}, p = x(e, { box: u });
     p && (e = p, yield ht(e), Sn(e), xn(), yt(e));
   });
 }
@@ -3638,11 +3847,14 @@ function ht(e) {
   return new Promise((n) => {
     requestAnimationFrame(() => {
       const t = e.element?.querySelector("svg");
-      if (!t || !t.clientWidth) return T(`${e.id}-setup`, () => ht(e).then((o) => n()), 100);
+      if (!t || !t.clientWidth)
+        return T(
+          `${e.id}-setup`,
+          () => ht(e).then((o) => n()),
+          100
+        );
       const r = Re[e.url] || ln(t);
-      Re[e.url] = r, x(e, {
-        mappings: r
-      }), t.style.display = "none", Tn(e), Ae(e), n();
+      Re[e.url] = r, x(e, { mappings: r }), t.style.display = "none", Tn(e), Ae(e), n();
     });
   });
 }
@@ -3654,7 +3866,9 @@ function dt(e) {
       if (!r) throw new Error("No element set on viewer");
       const o = r.querySelector("style");
       let i = "";
-      const s = r.querySelector(".svg-viewer__render-container"), c = `scale(${e.zoom * e.svg_ratio})`;
+      const s = r.querySelector(
+        ".svg-viewer__render-container"
+      ), c = `scale(${e.zoom * e.svg_ratio})`;
       if (!s || !o) throw new Error("Viewer is not setup yet.");
       const a = (e.center.x - 0.5) * (100 * e.zoom * e.svg_ratio), l = (e.center.y - 0.5) * (100 * e.zoom * e.svg_ratio), u = e.use_gpu ? `translate3d(${a}%, ${l}%, 0)` : `translate(${a}%, ${l}%)`;
       s.style.transform = `${u} ${c} rotate(${e.rotate}deg)`, i += `#${e.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e.rotate}deg) scale(${1 / e.zoom * (1 / e.svg_ratio)}); }`, i += `#${e.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, ge(e), wn(e), Ae(e), delete B[e.id], cancelAnimationFrame(t), n();
@@ -3671,7 +3885,10 @@ function Tn(e) {
       if (!r) throw new Error("No iframe created for viewer");
       const i = o.firstElementChild?.viewBox?.baseVal || {};
       let s = `${e.svg_data}`;
-      s = /<svg[^>]*width="[^>]*>/.test(s) ? s : s.replace("<svg", `<svg width="${i.width}" height="${i.height}" `);
+      s = /<svg[^>]*width="[^>]*>/.test(s) ? s : s.replace(
+        "<svg",
+        `<svg width="${i.width}" height="${i.height}" `
+      );
       const c = `
 <script>
     function updateStyles(evt) {
@@ -3689,7 +3906,9 @@ function Tn(e) {
     } else {
         window.attachEvent("onmessage", updateStyles);
     }
-<\/script>`, a = {}, l = vt(__spreadValues(__spreadValues({}, e.styles), a)), d = "data:text/html;base64," + yn(`<html><head><style>*{overflow:hidden;}html,body{padding:0;margin:0;}</style><style id="style">${l}</style>${c}</head><body>${s}</body></html>`);
+<\/script>`, a = {}, l = vt(__spreadValues(__spreadValues({}, e.styles), a)), d = "data:text/html;base64," + yn(
+        `<html><head><style>*{overflow:hidden;}html,body{padding:0;margin:0;}</style><style id="style">${l}</style>${c}</head><body>${s}</body></html>`
+      );
       r.src = d, G[e.id] = n;
     }
   });
@@ -3710,47 +3929,53 @@ function ge(e) {
       const o = {};
       o[`[empty${Math.floor(Math.random() * 999999)}]`] = {};
       const i = vt(__spreadValues(__spreadValues({}, e.styles), o));
-      r.contentWindow.postMessage(JSON.stringify({
-        id: "svg-styles",
-        content: i
-      }), "*");
+      r.contentWindow.postMessage(
+        JSON.stringify({ id: "svg-styles", content: i }),
+        "*"
+      );
     }
   });
 }
 function yt(e) {
   return __async(this, null, function* () {
     return new Promise((n) => {
-      N[e.id] || (N[e.id] = []), N[e.id].push(n), T(`resize-${e.id}`, () => {
-        const t = e.element;
-        if (!t) throw new Error("No element set on viewer");
-        const r = t.querySelector(".svg-viewer__view-container"), o = t.querySelector(".svg-viewer__svg-overlays"), i = t.querySelector(`#${e.id}`), s = t.querySelector(".svg-viewer"), c = t.querySelector(".svg-viewer__svg-output"), a = t.querySelector("iframe"), l = s?.getBoundingClientRect() || {}, u = r?.getBoundingClientRect() || {};
-        if (!o || !c || !a || !r) throw new Error("Viewer elements not ready yet.");
-        requestAnimationFrame(() => __async(this, null, function* () {
-          const p = l.height / l.width, d = c.firstElementChild?.viewBox?.baseVal || {}, f = d.height / d.width;
-          c.firstElementChild && (c.firstElementChild.style.width = "200%");
-          const m = (l.width - 32) * Math.min(1, p / f), y = {
-            width: m,
-            height: m * f
-          };
-          o.style.width = d.width + "px", o.style.height = d.height + "px", r.style.width = d.width + "px", r.style.height = d.height + "px", a.style.width = d.width + "px", a.style.height = d.height + "px", a.width = `${d.width}`, a.height = `${d.height}`;
-          const S = Math.min(l.height / d.height, l.width / d.width), w = i?.getBoundingClientRect(), z = o?.getBoundingClientRect();
-          let $e = {
-            x: 1,
-            y: 1
-          };
-          w && z && ($e = {
-            x: z.width * S * 0.975 / w.width,
-            y: z.height * S * 0.975 / w.height
-          }), G[e.id] = "";
-          let ze = x(e, {
-            ratio: y.height / y.width,
-            svg_ratio: S,
-            box: u,
-            content_ratio: $e
-          });
-          !ze || (e = ze, !(yield dt(e).catch((ce) => (console.warn(ce), false)))) || (N[e.id].forEach((ce) => ce()), N[e.id] = []);
-        }));
-      }, 100);
+      N[e.id] || (N[e.id] = []), N[e.id].push(n), T(
+        `resize-${e.id}`,
+        () => {
+          const t = e.element;
+          if (!t) throw new Error("No element set on viewer");
+          const r = t.querySelector(
+            ".svg-viewer__view-container"
+          ), o = t.querySelector(
+            ".svg-viewer__svg-overlays"
+          ), i = t.querySelector(`#${e.id}`), s = t.querySelector(".svg-viewer"), c = t.querySelector(".svg-viewer__svg-output"), a = t.querySelector("iframe"), l = s?.getBoundingClientRect() || {}, u = r?.getBoundingClientRect() || {};
+          if (!o || !c || !a || !r)
+            throw new Error("Viewer elements not ready yet.");
+          requestAnimationFrame(() => __async(null, null, function* () {
+            const p = l.height / l.width, d = c.firstElementChild?.viewBox?.baseVal || {}, f = d.height / d.width;
+            c.firstElementChild && (c.firstElementChild.style.width = "200%");
+            const m = (l.width - 32) * Math.min(1, p / f), y = { width: m, height: m * f };
+            o.style.width = d.width + "px", o.style.height = d.height + "px", r.style.width = d.width + "px", r.style.height = d.height + "px", a.style.width = d.width + "px", a.style.height = d.height + "px", a.width = `${d.width}`, a.height = `${d.height}`;
+            const S = Math.min(
+              l.height / d.height,
+              l.width / d.width
+            ), w = i?.getBoundingClientRect(), z = o?.getBoundingClientRect();
+            let $e = { x: 1, y: 1 };
+            w && z && ($e = {
+              x: z.width * S * 0.975 / w.width,
+              y: z.height * S * 0.975 / w.height
+            }), G[e.id] = "";
+            let ze = x(e, {
+              ratio: y.height / y.width,
+              svg_ratio: S,
+              box: u,
+              content_ratio: $e
+            });
+            !ze || (e = ze, !(yield dt(e).catch((ce) => (console.warn(ce), false)))) || (N[e.id].forEach((ce) => ce()), N[e.id] = []);
+          }));
+        },
+        100
+      );
     });
   });
 }
@@ -3759,7 +3984,8 @@ function Ae(e) {
   if (!Object.keys(e.mappings || {}).length) return;
   const t = e.element?.querySelector(".svg-viewer__svg-overlays");
   if (!t || !n) return;
-  if (!t.getBoundingClientRect().width) return T(`${e.id}|render-overlays`, () => Ae(e), 50);
+  if (!t.getBoundingClientRect().width)
+    return T(`${e.id}|render-overlays`, () => Ae(e), 50);
   requestAnimationFrame(() => {
     Pn(e), Mn(e), Fn(e);
   });
@@ -3771,10 +3997,7 @@ function Pn(e) {
     if (!r) return;
     Array.from(r.querySelectorAll("[label]")).filter((i) => i.parentNode).forEach((i) => r.removeChild(i));
     for (const i of n) {
-      let s = {
-        x: 0,
-        y: 0
-      }, c = "~Nothing~";
+      let s = { x: 0, y: 0 }, c = "~Nothing~";
       typeof i.location == "string" ? (s = e.mappings[i.location] || s, c = `#${i.location}`) : (i.location?.y || i.location?.x) && (s = i.location, c = `loc-${s.x}-${s.y}`);
       const a = document.createElement("div");
       a.setAttribute("label", "true"), a.classList.add("svg-viewer__svg-overlay-item"), a.classList.add("label"), a.style.top = `${s.y * 100}%`, a.style.left = `${s.x * 100}%`;
@@ -3785,10 +4008,12 @@ function Pn(e) {
   }
 }
 function Fn(e) {
-  const n = JSON.stringify(e.features.map((t) => __spreadProps(__spreadValues({}, t), {
-    content: "",
-    data: fn(t.data)
-  })));
+  const n = JSON.stringify(
+    e.features.map((t) => __spreadProps(__spreadValues({}, t), {
+      content: "",
+      data: fn(t.data)
+    }))
+  );
   if (n !== pe[e.id]) {
     const t = e.element?.querySelector(".svg-viewer__svg-overlays");
     if (!t) return console.log("Unable to get overlay element.");
@@ -3800,13 +4025,7 @@ function Fn(e) {
     });
     for (const i of e.features) {
       if (!i.content || o.includes(i.content)) continue;
-      let s = {
-        x: 0,
-        y: 0
-      }, c = {
-        w: 0,
-        h: 0
-      };
+      let s = { x: 0, y: 0 }, c = { w: 0, h: 0 };
       const a = document.createElement("button");
       typeof i.location == "string" ? (a.id = `${i.location}`, s = e.mappings[i.location] || s, (i.hover || i.full_size) && (c = e.mappings[i.location] || c)) : (i.location?.y || i.location?.x) && (s = i.location), !(!s.x && !s.y) && (a.classList.add("svg-viewer__svg-overlay-item"), a.setAttribute("feature", "true"), a.setAttribute("track-id", `${i.track_id || "none"}`), a.classList.add("feature"), i.z_index && (a.style.zIndex = `${i.z_index}`), i.hover && a.classList.add("svg-viewer__svg-overlay-item__hover"), a.style.top = `${s.y * 100}%`, a.style.left = `${s.x * 100}%`, c.w || c.h ? (a.style.width = `${c.w * 100}%`, a.style.height = `${c.h * 100}%`) : (a.style.width = "1%", a.style.height = `${1 / e.ratio}%`), a.style.transform = "translate(-50%, -50%)", i.content instanceof Node && a.appendChild(i.content), t.appendChild(a));
     }
@@ -3814,9 +4033,7 @@ function Fn(e) {
   }
 }
 function Mn(e) {
-  const n = JSON.stringify(e.actions.map((t) => __spreadProps(__spreadValues({}, t), {
-    callback: ""
-  })));
+  const n = JSON.stringify(e.actions.map((t) => __spreadProps(__spreadValues({}, t), { callback: "" })));
   if (n !== me[e.id]) {
     const t = e.element?.querySelector(".svg-viewer__svg-overlays");
     if (!t) return;
@@ -3825,13 +4042,7 @@ function Mn(e) {
       if (!o.action || !o.id || o.id === "*" || o.zone === false) continue;
       const i = document.createElement("button");
       i.id = `${o.id}`;
-      const s = e.mappings[o.id] || {
-        x: 0,
-        y: 0
-      }, c = e.mappings[o.id] || {
-        w: 0,
-        h: 0
-      };
+      const s = e.mappings[o.id] || { x: 0, y: 0 }, c = e.mappings[o.id] || { w: 0, h: 0 };
       i.classList.add("svg-viewer__svg-overlay-item"), i.classList.add("action-zone"), i.style.top = `${s.y * 100}%`, i.style.left = `${s.x * 100}%`, (c.w || c.h) && (i.style.width = `${c.w * 100}%`, i.style.height = `${c.h * 100}%`, i.style.transform = "translate(-50%, -50%)"), t.appendChild(i);
     }
     me[e.id] = n;
@@ -3840,9 +4051,11 @@ function Mn(e) {
 function vt(e) {
   let n = "";
   for (const t in e) {
-    if (!e[t]) continue;
+    if (!e[t])
+      continue;
     let r = "";
-    for (const o in e[t]) e[t][o] && (r += `${o}: ${e[t][o]}; `);
+    for (const o in e[t])
+      e[t][o] && (r += `${o}: ${e[t][o]}; `);
     n += `svg ${t.split(" ").map((o) => Le(o)).join(" ")} { ${r} } `;
   }
   return n;
@@ -3850,16 +4063,20 @@ function vt(e) {
 var le = {};
 var _e = {};
 function Nn(e) {
-  for (const n in e) _e[n.toLowerCase()] = e[n];
+  for (const n in e)
+    _e[n.toLowerCase()] = e[n];
 }
 function Un(e) {
   return __async(this, null, function* () {
     let t = X().find((o) => o.url === e.url);
     if (t) return t.id;
     const r = e.svg_data || (yield qn(e.url));
-    return t = new te(__spreadProps(__spreadValues({}, e), {
-      svg_data: r
-    })), st(`${t.id}-render`, mn(t.id).subscribe((o) => dt(o).catch((i) => console.warn(i)))), ft(t), yield On(t), t.id;
+    return t = new te(__spreadProps(__spreadValues({}, e), { svg_data: r })), st(
+      `${t.id}-render`,
+      mn(t.id).subscribe(
+        (o) => dt(o).catch((i) => console.warn(i))
+      )
+    ), ft(t), yield On(t), t.id;
   });
 }
 function Yn(e, n) {
@@ -3874,15 +4091,13 @@ function Dn(e) {
 function qn(e = "") {
   return __async(this, null, function* () {
     const n = new Headers();
-    if (e.startsWith(location.origin) || e.startsWith("/")) for (const o in _e) n.append(o, _e[o]);
+    if (e.startsWith(location.origin) || e.startsWith("/"))
+      for (const o in _e)
+        n.append(o, _e[o]);
     if (le[e]) return le[e];
-    const r = yield (yield fetch(e, {
-      headers: n
-    }).catch((o) => (b("SVG VIEWER", "Failed to load map", o, "error"), {
-      text: () => __async(this, null, function* () {
-        return "";
-      })
-    }))).text();
+    const r = yield (yield fetch(e, { headers: n }).catch((o) => (b("SVG VIEWER", "Failed to load map", o, "error"), { text: () => __async(null, null, function* () {
+      return "";
+    }) }))).text();
     return le[e] = r, r;
   });
 }
@@ -4189,170 +4404,187 @@ function loadLockers(org, obs, banks$, useRegion) {
   }), shareReplay(1));
 }
 
-// libs/components/src/lib/safe.pipe.ts
-var SafePipe = class _SafePipe {
-  constructor(sanitizer) {
-    this.sanitizer = sanitizer;
-  }
-  /**
-   * Sanitizes the string allowing it to be injected into a template
-   * @param value String to sanitize
-   * @param type Type of value to sanitise. `resource`, `url`, `script`, `style` or `html`
-   */
-  transform(value, type = "html") {
-    switch (type) {
-      case "resource":
-        return this.sanitizer.bypassSecurityTrustResourceUrl(value);
-      case "url":
-        return this.sanitizer.bypassSecurityTrustUrl(value);
-      case "script":
-        return this.sanitizer.bypassSecurityTrustScript(value);
-      case "style":
-        return this.sanitizer.bypassSecurityTrustStyle(value);
-      default:
-        return this.sanitizer.bypassSecurityTrustHtml(value);
-    }
-  }
-  static {
-    this.\u0275fac = function SafePipe_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _SafePipe)(\u0275\u0275directiveInject(DomSanitizer, 16));
-    };
-  }
-  static {
-    this.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "safe", type: _SafePipe, pure: true });
-  }
-};
-
 // libs/bookings/src/lib/booking-link-modal.component.ts
-var BookingLinkModalComponent = class _BookingLinkModalComponent {
-  constructor(_event, _settings) {
-    this._event = _event;
-    this._settings = _settings;
+var _BookingLinkModalComponent = class _BookingLinkModalComponent {
+  constructor() {
+    this._event = inject(MAT_DIALOG_DATA);
+    this._settings = inject(SettingsService);
     this.outlook_link = generateMicrosoftCalendarLink(this._event);
     this.google_link = generateGoogleCalendarLink(this._event);
     this.ical_link = generateCalendarFileLink(this._event);
   }
-  static {
-    this.\u0275fac = function BookingLinkModalComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _BookingLinkModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(SettingsService));
-    };
+};
+_BookingLinkModalComponent.\u0275fac = function BookingLinkModalComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _BookingLinkModalComponent)();
+};
+_BookingLinkModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookingLinkModalComponent, selectors: [["booking-link-modal"]], decls: 26, vars: 24, consts: [[1, "w-full", "p-4", "pb-2"], [1, "relative", "flex", "flex-col", "items-center", "space-y-4", "p-4"], ["btn", "", "matRipple", "", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/outlook.svg", 1, "w-6"], ["src", "assets/icons/gcal.svg", 1, "w-6"], [1, "text-xl"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "right-0", "top-2"]], template: function BookingLinkModalComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 0);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "div", 1)(4, "a", 2);
+    \u0275\u0275pipe(5, "sanitize");
+    \u0275\u0275element(6, "img", 3);
+    \u0275\u0275elementStart(7, "span");
+    \u0275\u0275text(8);
+    \u0275\u0275pipe(9, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(10, "a", 2);
+    \u0275\u0275pipe(11, "sanitize");
+    \u0275\u0275element(12, "img", 4);
+    \u0275\u0275elementStart(13, "span");
+    \u0275\u0275text(14);
+    \u0275\u0275pipe(15, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(16, "a", 2);
+    \u0275\u0275pipe(17, "safe");
+    \u0275\u0275elementStart(18, "icon", 5);
+    \u0275\u0275text(19, "download");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(20, "span");
+    \u0275\u0275text(21);
+    \u0275\u0275pipe(22, "translate");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(23, "button", 6)(24, "icon");
+    \u0275\u0275text(25, "close");
+    \u0275\u0275elementEnd()();
   }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookingLinkModalComponent, selectors: [["booking-link-modal"]], decls: 26, vars: 24, consts: [[1, "w-full", "p-4", "pb-2"], [1, "relative", "flex", "flex-col", "items-center", "space-y-4", "p-4"], ["btn", "", "matRipple", "", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/outlook.svg", 1, "w-6"], ["src", "assets/icons/gcal.svg", 1, "w-6"], [1, "text-xl"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "right-0", "top-2"]], template: function BookingLinkModalComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "div", 0);
-        \u0275\u0275text(1);
-        \u0275\u0275pipe(2, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(3, "div", 1)(4, "a", 2);
-        \u0275\u0275pipe(5, "sanitize");
-        \u0275\u0275element(6, "img", 3);
-        \u0275\u0275elementStart(7, "span");
-        \u0275\u0275text(8);
-        \u0275\u0275pipe(9, "translate");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(10, "a", 2);
-        \u0275\u0275pipe(11, "sanitize");
-        \u0275\u0275element(12, "img", 4);
-        \u0275\u0275elementStart(13, "span");
-        \u0275\u0275text(14);
-        \u0275\u0275pipe(15, "translate");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(16, "a", 2);
-        \u0275\u0275pipe(17, "safe");
-        \u0275\u0275elementStart(18, "icon", 5);
-        \u0275\u0275text(19, "download");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(20, "span");
-        \u0275\u0275text(21);
-        \u0275\u0275pipe(22, "translate");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(23, "button", 6)(24, "icon");
-        \u0275\u0275text(25, "close");
-        \u0275\u0275elementEnd()();
-      }
-      if (rf & 2) {
-        \u0275\u0275advance();
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 7, "BOOKING.LINK_HEADER"), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275property("href", \u0275\u0275pipeBind2(5, 9, ctx.outlook_link, "url"), \u0275\u0275sanitizeUrl);
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(9, 12, "BOOKING.LINK_OUTLOOK"));
-        \u0275\u0275advance(2);
-        \u0275\u0275property("href", \u0275\u0275pipeBind2(11, 14, ctx.google_link, "url"), \u0275\u0275sanitizeUrl);
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(15, 17, "BOOKING.LINK_GOOGLE"));
-        \u0275\u0275advance(2);
-        \u0275\u0275property("href", \u0275\u0275pipeBind2(17, 19, ctx.ical_link, "url"), \u0275\u0275sanitizeUrl);
-        \u0275\u0275advance(5);
-        \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(22, 22, "BOOKING.LINK_ICAL"));
-      }
-    }, dependencies: [
-      CommonModule,
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 7, "BOOKING.LINK_HEADER"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275property("href", \u0275\u0275pipeBind2(5, 9, ctx.outlook_link, "url"), \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(9, 12, "BOOKING.LINK_OUTLOOK"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("href", \u0275\u0275pipeBind2(11, 14, ctx.google_link, "url"), \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(15, 17, "BOOKING.LINK_GOOGLE"));
+    \u0275\u0275advance(2);
+    \u0275\u0275property("href", \u0275\u0275pipeBind2(17, 19, ctx.ical_link, "url"), \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(22, 22, "BOOKING.LINK_ICAL"));
+  }
+}, dependencies: [
+  IconComponent,
+  TranslatePipe,
+  MatRippleModule,
+  MatRipple,
+  MatDialogModule,
+  MatDialogClose,
+  SafePipe,
+  SanitizePipe
+], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n}\n/*# sourceMappingURL=booking-link-modal.component.css.map */"] });
+var BookingLinkModalComponent = _BookingLinkModalComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BookingLinkModalComponent, [{
+    type: Component,
+    args: [{ selector: "booking-link-modal", template: `
+        <div class="w-full p-4 pb-2">
+            {{ 'BOOKING.LINK_HEADER' | translate }}
+        </div>
+        <div class="relative flex flex-col items-center space-y-4 p-4">
+            <a
+                btn
+                matRipple
+                class="inverse flex w-64 items-center space-x-2 rounded p-2 pr-4"
+                [href]="outlook_link | sanitize: 'url'"
+                target="_blank"
+                rel="noopener noreferer"
+            >
+                <img src="assets/icons/outlook.svg" class="w-6" />
+                <span>{{ 'BOOKING.LINK_OUTLOOK' | translate }}</span>
+            </a>
+            <a
+                btn
+                matRipple
+                class="inverse flex w-64 items-center space-x-2 rounded p-2 pr-4"
+                [href]="google_link | sanitize: 'url'"
+                target="_blank"
+                rel="noopener noreferer"
+            >
+                <img src="assets/icons/gcal.svg" class="w-6" />
+                <span>{{ 'BOOKING.LINK_GOOGLE' | translate }}</span>
+            </a>
+            <a
+                btn
+                matRipple
+                class="inverse flex w-64 items-center space-x-2 rounded p-2 pr-4"
+                [href]="ical_link | safe: 'url'"
+                target="_blank"
+                rel="noopener noreferer"
+            >
+                <icon class="text-xl">download</icon>
+                <span>{{ 'BOOKING.LINK_ICAL' | translate }}</span>
+            </a>
+        </div>
+        <button icon matRipple mat-dialog-close class="absolute right-0 top-2">
+            <icon>close</icon>
+        </button>
+    `, imports: [
       IconComponent,
       TranslatePipe,
       MatRippleModule,
-      MatRipple,
       MatDialogModule,
-      MatDialogClose,
       SafePipe,
       SanitizePipe
-    ], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n}\n/*# sourceMappingURL=booking-link-modal.component.css.map */"] });
-  }
-};
+    ], styles: ["/* angular:styles/component:css;726748c2414197d0b1210ead97f5552a150ccdc9b0475e0053e8ed5e76b597ad;/home/runner/work/user-interfaces/user-interfaces/libs/bookings/src/lib/booking-link-modal.component.ts */\n:host {\n  position: relative;\n}\n/*# sourceMappingURL=booking-link-modal.component.css.map */\n"] }]
+  }], null, null);
+})();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookingLinkModalComponent, { className: "BookingLinkModalComponent", filePath: "libs/bookings/src/lib/booking-link-modal.component.ts", lineNumber: 79 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookingLinkModalComponent, { className: "BookingLinkModalComponent", filePath: "libs/bookings/src/lib/booking-link-modal.component.ts", lineNumber: 77 });
 })();
 
 // libs/bookings/src/lib/desk-questions-modal.component.ts
-function DeskQuestionsModalComponent_div_0_Template(rf, ctx) {
+function DeskQuestionsModalComponent_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 2)(1, "h2", 3);
+    \u0275\u0275elementStart(0, "div", 0)(1, "h2", 2);
     \u0275\u0275text(2, "COVID-19 Questionnaire");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "main", 4)(4, "div", 5)(5, "label");
+    \u0275\u0275elementStart(3, "main", 3)(4, "div", 4)(5, "label");
     \u0275\u0275text(6, " Have you travelled overseas within the last 14 days?");
     \u0275\u0275elementStart(7, "span");
     \u0275\u0275text(8, "*");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(9, "mat-radio-group", 6)(10, "mat-radio-button", 7);
+    \u0275\u0275elementStart(9, "mat-radio-group", 5)(10, "mat-radio-button", 6);
     \u0275\u0275text(11, "Yes");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "mat-radio-button", 7);
+    \u0275\u0275elementStart(12, "mat-radio-button", 6);
     \u0275\u0275text(13, "No");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(14, "div", 5)(15, "label");
+    \u0275\u0275elementStart(14, "div", 4)(15, "label");
     \u0275\u0275text(16, " Are you unwell or experiencing any cold or flu-like symptoms?");
     \u0275\u0275elementStart(17, "span");
     \u0275\u0275text(18, "*");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(19, "mat-radio-group", 8)(20, "mat-radio-button", 7);
+    \u0275\u0275elementStart(19, "mat-radio-group", 7)(20, "mat-radio-button", 6);
     \u0275\u0275text(21, "Yes");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(22, "mat-radio-button", 7);
+    \u0275\u0275elementStart(22, "mat-radio-button", 6);
     \u0275\u0275text(23, "No");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(24, "div", 9)(25, "label");
+    \u0275\u0275elementStart(24, "div", 8)(25, "label");
     \u0275\u0275text(26, " Have you had contact with anyone with suspected COVID-19?");
     \u0275\u0275elementStart(27, "span");
     \u0275\u0275text(28, "*");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(29, "mat-radio-group", 10)(30, "mat-radio-button", 7);
+    \u0275\u0275elementStart(29, "mat-radio-group", 9)(30, "mat-radio-button", 6);
     \u0275\u0275text(31, "Yes");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(32, "mat-radio-button", 7);
+    \u0275\u0275elementStart(32, "mat-radio-button", 6);
     \u0275\u0275text(33, "No");
     \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(34, "footer", 11)(35, "button", 12);
-    \u0275\u0275listener("click", function DeskQuestionsModalComponent_div_0_Template_button_click_35_listener() {
+    \u0275\u0275elementStart(34, "footer", 10)(35, "button", 11);
+    \u0275\u0275listener("click", function DeskQuestionsModalComponent_Conditional_0_Template_button_click_35_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.submit());
     });
     \u0275\u0275text(36, "Submit");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(37, "button", 13)(38, "icon");
+    \u0275\u0275elementStart(37, "button", 12)(38, "icon");
     \u0275\u0275text(39, "close");
     \u0275\u0275elementEnd()()();
   }
@@ -4374,17 +4606,17 @@ function DeskQuestionsModalComponent_div_0_Template(rf, ctx) {
     \u0275\u0275property("value", false);
   }
 }
-function DeskQuestionsModalComponent_ng_template_1_Template(rf, ctx) {
+function DeskQuestionsModalComponent_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "main", 14)(1, "p", 15);
+    \u0275\u0275elementStart(0, "main", 1)(1, "p", 13);
     \u0275\u0275text(2, " Your request to work from the office has been rejected based on your response to the compulsory Covid-19 questions. Please feel free to submit a new request when circumstances change in a way that changes your answer to the questions. ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "button", 13)(4, "icon");
+    \u0275\u0275elementStart(3, "button", 12)(4, "icon");
     \u0275\u0275text(5, "close");
     \u0275\u0275elementEnd()()();
   }
 }
-var DeskQuestionsModalComponent = class _DeskQuestionsModalComponent {
+var _DeskQuestionsModalComponent = class _DeskQuestionsModalComponent {
   constructor() {
     this.event = new EventEmitter();
     this.form = new FormGroup({
@@ -4401,41 +4633,126 @@ var DeskQuestionsModalComponent = class _DeskQuestionsModalComponent {
     }
     this.event.emit({ reason: "done" });
   }
-  static {
-    this.\u0275fac = function DeskQuestionsModalComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _DeskQuestionsModalComponent)();
-    };
+};
+_DeskQuestionsModalComponent.\u0275fac = function DeskQuestionsModalComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _DeskQuestionsModalComponent)();
+};
+_DeskQuestionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DeskQuestionsModalComponent, selectors: [["desk-question-modal"]], outputs: { event: "event" }, decls: 2, vars: 1, consts: [[1, "relative"], ["failure", "", 1, "relative", "pt-8"], [1, "p-4", "text-xl"], [1, "p-4", 3, "formGroup"], [1, "mb-4", "flex", "flex-col"], ["formControlName", "travelled", 1, "space-x-2"], [3, "value"], ["formControlName", "unwell", 1, "space-x-2"], [1, "flex", "flex-col"], ["formControlName", "contact", 1, "space-x-2"], [1, "flex", "items-center", "justify-center", "p-2"], ["btn", "", "matRipple", "", 3, "click"], ["close", "", "icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "p-4"]], template: function DeskQuestionsModalComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275conditionalCreate(0, DeskQuestionsModalComponent_Conditional_0_Template, 40, 7, "div", 0)(1, DeskQuestionsModalComponent_Conditional_1_Template, 6, 0, "main", 1);
   }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DeskQuestionsModalComponent, selectors: [["desk-question-modal"]], outputs: { event: "event" }, decls: 3, vars: 2, consts: [["fail_state", ""], ["class", "relative", 4, "ngIf", "ngIfElse"], [1, "relative"], [1, "p-4", "text-xl"], [1, "p-4", 3, "formGroup"], [1, "mb-4", "flex", "flex-col"], ["formControlName", "travelled", 1, "space-x-2"], [3, "value"], ["formControlName", "unwell", 1, "space-x-2"], [1, "flex", "flex-col"], ["formControlName", "contact", 1, "space-x-2"], [1, "flex", "items-center", "justify-center", "p-2"], ["btn", "", "matRipple", "", 3, "click"], ["close", "", "icon", "", "matRipple", "", "mat-dialog-close", ""], ["failure", "", 1, "relative", "pt-8"], [1, "p-4"]], template: function DeskQuestionsModalComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275template(0, DeskQuestionsModalComponent_div_0_Template, 40, 7, "div", 1)(1, DeskQuestionsModalComponent_ng_template_1_Template, 6, 0, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        const fail_state_r3 = \u0275\u0275reference(2);
-        \u0275\u0275property("ngIf", !ctx.failure)("ngIfElse", fail_state_r3);
-      }
-    }, dependencies: [
-      CommonModule,
-      NgIf,
+  if (rf & 2) {
+    \u0275\u0275conditional(!ctx.failure ? 0 : 1);
+  }
+}, dependencies: [
+  IconComponent,
+  MatDialogModule,
+  MatDialogClose,
+  MatRippleModule,
+  MatRipple,
+  MatRadioModule,
+  MatRadioGroup,
+  MatRadioButton,
+  ReactiveFormsModule,
+  NgControlStatus,
+  NgControlStatusGroup,
+  FormGroupDirective,
+  FormControlName
+], styles: ["\n\nmain[_ngcontent-%COMP%] {\n  width: 24rem;\n  max-width: calc(100vw - 4.5rem);\n}\n[close][_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0.5rem;\n  right: 0.5rem;\n}\n/*# sourceMappingURL=desk-questions-modal.component.css.map */"] });
+var DeskQuestionsModalComponent = _DeskQuestionsModalComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DeskQuestionsModalComponent, [{
+    type: Component,
+    args: [{ selector: "desk-question-modal", template: `
+        @if (!failure) {
+            <div class="relative">
+                <h2 class="p-4 text-xl">COVID-19 Questionnaire</h2>
+                <main class="p-4" [formGroup]="form">
+                    <div class="mb-4 flex flex-col">
+                        <label>
+                            Have you travelled overseas within the last 14
+                            days?<span>*</span>
+                        </label>
+                        <mat-radio-group
+                            formControlName="travelled"
+                            class="space-x-2"
+                        >
+                            <mat-radio-button [value]="true"
+                                >Yes</mat-radio-button
+                            >
+                            <mat-radio-button [value]="false"
+                                >No</mat-radio-button
+                            >
+                        </mat-radio-group>
+                    </div>
+                    <div class="mb-4 flex flex-col">
+                        <label>
+                            Are you unwell or experiencing any cold or flu-like
+                            symptoms?<span>*</span>
+                        </label>
+                        <mat-radio-group
+                            formControlName="unwell"
+                            class="space-x-2"
+                        >
+                            <mat-radio-button [value]="true"
+                                >Yes</mat-radio-button
+                            >
+                            <mat-radio-button [value]="false"
+                                >No</mat-radio-button
+                            >
+                        </mat-radio-group>
+                    </div>
+                    <div class="flex flex-col">
+                        <label>
+                            Have you had contact with anyone with suspected
+                            COVID-19?<span>*</span>
+                        </label>
+                        <mat-radio-group
+                            formControlName="contact"
+                            class="space-x-2"
+                        >
+                            <mat-radio-button [value]="true"
+                                >Yes</mat-radio-button
+                            >
+                            <mat-radio-button [value]="false"
+                                >No</mat-radio-button
+                            >
+                        </mat-radio-group>
+                    </div>
+                </main>
+                <footer class="flex items-center justify-center p-2">
+                    <button btn matRipple (click)="submit()">Submit</button>
+                </footer>
+                <button close icon matRipple mat-dialog-close>
+                    <icon>close</icon>
+                </button>
+            </div>
+        } @else {
+            <main failure class="relative pt-8">
+                <p class="p-4">
+                    Your request to work from the office has been rejected based
+                    on your response to the compulsory Covid-19 questions.
+                    Please feel free to submit a new request when circumstances
+                    change in a way that changes your answer to the questions.
+                </p>
+                <button close icon matRipple mat-dialog-close>
+                    <icon>close</icon>
+                </button>
+            </main>
+        }
+    `, imports: [
       IconComponent,
       MatDialogModule,
-      MatDialogClose,
       MatRippleModule,
-      MatRipple,
       MatRadioModule,
-      MatRadioGroup,
-      MatRadioButton,
-      ReactiveFormsModule,
-      NgControlStatus,
-      NgControlStatusGroup,
-      FormGroupDirective,
-      FormControlName
-    ], styles: ["\n\nmain[_ngcontent-%COMP%] {\n  width: 24rem;\n  max-width: calc(100vw - 4.5rem);\n}\n[close][_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0.5rem;\n  right: 0.5rem;\n}\n/*# sourceMappingURL=desk-questions-modal.component.css.map */"] });
-  }
-};
+      ReactiveFormsModule
+    ], styles: ["/* angular:styles/component:css;c7f37c1e60a5fae4a31dda6fbae0d3cc845b39f17b3f09824fe872f6bf4e7f79;/home/runner/work/user-interfaces/user-interfaces/libs/bookings/src/lib/desk-questions-modal.component.ts */\nmain {\n  width: 24rem;\n  max-width: calc(100vw - 4.5rem);\n}\n[close] {\n  position: absolute;\n  top: 0.5rem;\n  right: 0.5rem;\n}\n/*# sourceMappingURL=desk-questions-modal.component.css.map */\n"] }]
+  }], null, { event: [{
+    type: Output
+  }] });
+})();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DeskQuestionsModalComponent, { className: "DeskQuestionsModalComponent", filePath: "libs/bookings/src/lib/desk-questions-modal.component.ts", lineNumber: 97 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DeskQuestionsModalComponent, { className: "DeskQuestionsModalComponent", filePath: "libs/bookings/src/lib/desk-questions-modal.component.ts", lineNumber: 111 });
 })();
 
 // libs/assets/src/lib/asset.class.ts
@@ -4595,7 +4912,7 @@ function validateAssetRequestsForResource(_0, _1) {
         event_id: from_booking ? "" : id
       });
     });
-    return () => __async(this, null, function* () {
+    return () => __async(null, null, function* () {
       yield Promise.all(changed_requests.map(([id2]) => removeBooking(id2).toPromise()));
       yield Promise.all(processed_requests.map((r) => r.toPromise()));
     });
@@ -4612,7 +4929,7 @@ function updateAssetGroupList(assetgroup_list) {
     }
   }
 }
-var AssetGroupPipe = class _AssetGroupPipe {
+var _AssetGroupPipe = class _AssetGroupPipe {
   /**
    * Get details of the assetgroup with the given ID
    * @param assetgroup_id ID or Email of the assetgroup
@@ -4636,15 +4953,20 @@ var AssetGroupPipe = class _AssetGroupPipe {
   updateAssetGroupList(assetgroup_list) {
     updateAssetGroupList(assetgroup_list);
   }
-  static {
-    this.\u0275fac = function AssetGroupPipe_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _AssetGroupPipe)();
-    };
-  }
-  static {
-    this.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "assetgroup", type: _AssetGroupPipe, pure: true });
-  }
 };
+_AssetGroupPipe.\u0275fac = function AssetGroupPipe_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _AssetGroupPipe)();
+};
+_AssetGroupPipe.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "assetgroup", type: _AssetGroupPipe, pure: true });
+var AssetGroupPipe = _AssetGroupPipe;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AssetGroupPipe, [{
+    type: Pipe,
+    args: [{
+      name: "assetgroup"
+    }]
+  }], null, null);
+})();
 
 // libs/assets/src/lib/asset.utilities.ts
 var RULE_REQUESTS = {};
@@ -4690,9 +5012,9 @@ function assetAvailable(item, rules, event) {
 }
 
 // libs/assets/src/lib/asset-state.service.ts
-var AssetStateService = class _AssetStateService {
-  constructor(_org) {
-    this._org = _org;
+var _AssetStateService = class _AssetStateService {
+  constructor() {
+    this._org = inject(OrganisationService);
     this._options = new BehaviorSubject({ date: Date.now() });
     this._search = new BehaviorSubject("");
     this._category = new BehaviorSubject([]);
@@ -4765,21 +5087,26 @@ var AssetStateService = class _AssetStateService {
   setOptions(options) {
     this._options.next(__spreadValues(__spreadValues({}, this._options.value), options));
   }
-  static {
-    this.\u0275fac = function AssetStateService_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _AssetStateService)(\u0275\u0275inject(OrganisationService));
-    };
-  }
-  static {
-    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _AssetStateService, factory: _AssetStateService.\u0275fac, providedIn: "root" });
-  }
 };
+_AssetStateService.\u0275fac = function AssetStateService_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _AssetStateService)();
+};
+_AssetStateService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _AssetStateService, factory: _AssetStateService.\u0275fac, providedIn: "root" });
+var AssetStateService = _AssetStateService;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AssetStateService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
 
 // libs/components/src/lib/confirm-modal.component.ts
-function ConfirmModalComponent_main_3_Template(rf, ctx) {
+function ConfirmModalComponent_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "main", 5);
-    \u0275\u0275element(1, "icon", 6)(2, "p", 7);
+    \u0275\u0275elementStart(0, "main", 2);
+    \u0275\u0275element(1, "icon", 5)(2, "p", 6);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -4790,15 +5117,29 @@ function ConfirmModalComponent_main_3_Template(rf, ctx) {
     \u0275\u0275property("innerHTML", ctx_r0.content, \u0275\u0275sanitizeHtml);
   }
 }
-function ConfirmModalComponent_footer_4_Template(rf, ctx) {
+function ConfirmModalComponent_Conditional_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "main", 3)(1, "div", 7);
+    \u0275\u0275element(2, "mat-spinner", 8);
+    \u0275\u0275elementStart(3, "p");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(ctx_r0.loading);
+  }
+}
+function ConfirmModalComponent_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "footer", 8)(1, "button", 9);
+    \u0275\u0275elementStart(0, "footer", 4)(1, "button", 9);
     \u0275\u0275text(2);
     \u0275\u0275pipe(3, "translate");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "button", 10);
-    \u0275\u0275listener("click", function ConfirmModalComponent_footer_4_Template_button_click_4_listener() {
+    \u0275\u0275listener("click", function ConfirmModalComponent_Conditional_5_Template_button_click_4_listener() {
       \u0275\u0275restoreView(_r2);
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.onConfirm());
@@ -4813,20 +5154,6 @@ function ConfirmModalComponent_footer_4_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 2, ctx_r0.cancel_text), " ");
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 4, ctx_r0.confirm_text), " ");
-  }
-}
-function ConfirmModalComponent_ng_template_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "main", 11)(1, "div", 12);
-    \u0275\u0275element(2, "mat-spinner", 13);
-    \u0275\u0275elementStart(3, "p");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd()()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(ctx_r0.loading);
   }
 }
 var CONFIRM_METADATA = {
@@ -4846,11 +5173,11 @@ function openConfirmModal(data, dialog) {
     });
   });
 }
-var ConfirmModalComponent = class _ConfirmModalComponent extends AsyncHandler {
-  constructor(_dialog_ref, _data) {
+var _ConfirmModalComponent = class _ConfirmModalComponent extends AsyncHandler {
+  constructor() {
     super();
-    this._dialog_ref = _dialog_ref;
-    this._data = _data;
+    this._dialog_ref = inject(MatDialogRef);
+    this._data = inject(MAT_DIALOG_DATA);
     this.event = new EventEmitter();
     this.title = this._data.title || "COMMON.CONFIRM";
     this.content = this._data.content || "Are you sure?";
@@ -4872,60 +5199,115 @@ var ConfirmModalComponent = class _ConfirmModalComponent extends AsyncHandler {
   onConfirm() {
     this.event.emit({ reason: "done" });
   }
-  static {
-    this.\u0275fac = function ConfirmModalComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _ConfirmModalComponent)(\u0275\u0275directiveInject(MatDialogRef), \u0275\u0275directiveInject(MAT_DIALOG_DATA));
-    };
+};
+_ConfirmModalComponent.\u0275fac = function ConfirmModalComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _ConfirmModalComponent)();
+};
+_ConfirmModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ConfirmModalComponent, selectors: [["confirm-modal"]], outputs: { event: "event" }, features: [\u0275\u0275InheritDefinitionFeature], decls: 6, vars: 3, consts: [[1, "sticky", "top-0", "z-10", "m-2", "h-14", "w-[calc(100%-1rem)]", "min-w-[20rem]", "rounded", "border-none", "bg-base-200", "p-2"], [1, "px-2", "text-xl", "font-medium"], [1, "flex", "w-[28rem]", "max-w-[85vw]", "flex-col", "items-center", "space-y-4", "p-4", "sm:h-auto"], ["loading", ""], [1, "sticky", "bottom-0", "m-2", "flex", "items-center", "justify-center", "space-x-2", "rounded", "border-none", "bg-base-200", "p-2"], [1, "text-5xl", 3, "icon"], ["content", "", 1, "text-center", 3, "innerHTML"], [1, "flex", "h-48", "w-full", "flex-col", "items-center", "justify-center", "space-y-4"], ["diameter", "32"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "inverse", "flex-1", "bg-base-100"], ["btn", "", "matRipple", "", "name", "accept", 1, "flex-1", 3, "click"]], template: function ConfirmModalComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "header", 0)(1, "h2", 1);
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275conditionalCreate(3, ConfirmModalComponent_Conditional_3_Template, 3, 2, "main", 2)(4, ConfirmModalComponent_Conditional_4_Template, 5, 1, "main", 3);
+    \u0275\u0275conditionalCreate(5, ConfirmModalComponent_Conditional_5_Template, 7, 6, "footer", 4);
   }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ConfirmModalComponent, selectors: [["confirm-modal"]], outputs: { event: "event" }, features: [\u0275\u0275InheritDefinitionFeature], decls: 7, vars: 4, consts: [["load_state", ""], [1, "sticky", "top-0", "z-10", "m-2", "h-14", "w-[calc(100%-1rem)]", "min-w-[20rem]", "rounded", "border-none", "bg-base-200", "p-2"], [1, "px-2", "text-xl", "font-medium"], ["class", "flex w-[28rem] max-w-[85vw] flex-col items-center space-y-4 p-4 sm:h-auto", 4, "ngIf", "ngIfElse"], ["class", "sticky bottom-0 m-2 flex items-center justify-center space-x-2 rounded border-none bg-base-200 p-2", 4, "ngIf"], [1, "flex", "w-[28rem]", "max-w-[85vw]", "flex-col", "items-center", "space-y-4", "p-4", "sm:h-auto"], [1, "text-5xl", 3, "icon"], ["content", "", 1, "text-center", 3, "innerHTML"], [1, "sticky", "bottom-0", "m-2", "flex", "items-center", "justify-center", "space-x-2", "rounded", "border-none", "bg-base-200", "p-2"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "inverse", "flex-1", "bg-base-100"], ["btn", "", "matRipple", "", "name", "accept", 1, "flex-1", 3, "click"], ["loading", ""], [1, "flex", "h-48", "w-full", "flex-col", "items-center", "justify-center", "space-y-4"], ["diameter", "32"]], template: function ConfirmModalComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "header", 1)(1, "h2", 2);
-        \u0275\u0275text(2);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275template(3, ConfirmModalComponent_main_3_Template, 3, 2, "main", 3)(4, ConfirmModalComponent_footer_4_Template, 7, 6, "footer", 4)(5, ConfirmModalComponent_ng_template_5_Template, 5, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        const load_state_r3 = \u0275\u0275reference(6);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate(ctx.title);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", !ctx.loading)("ngIfElse", load_state_r3);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", !ctx.loading);
-      }
-    }, dependencies: [
-      CommonModule,
-      NgIf,
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx.title);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(!ctx.loading ? 3 : 4);
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(!ctx.loading ? 5 : -1);
+  }
+}, dependencies: [
+  MatProgressSpinnerModule,
+  MatProgressSpinner,
+  TranslatePipe,
+  IconComponent,
+  MatRippleModule,
+  MatRipple,
+  MatDialogModule,
+  MatDialogClose
+], encapsulation: 2 });
+var ConfirmModalComponent = _ConfirmModalComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ConfirmModalComponent, [{
+    type: Component,
+    args: [{ selector: "confirm-modal", template: `
+        <header
+            class="sticky top-0 z-10 m-2 h-14 w-[calc(100%-1rem)] min-w-[20rem] rounded border-none bg-base-200 p-2"
+        >
+            <h2 class="px-2 text-xl font-medium">{{ title }}</h2>
+        </header>
+        @if (!loading) {
+            <main
+                class="flex w-[28rem] max-w-[85vw] flex-col items-center space-y-4 p-4 sm:h-auto"
+            >
+                <icon [icon]="icon" class="text-5xl"></icon>
+                <p content class="text-center" [innerHTML]="content"></p>
+            </main>
+        } @else {
+            <main loading>
+                <div
+                    class="flex h-48 w-full flex-col items-center justify-center space-y-4"
+                >
+                    <mat-spinner diameter="32"></mat-spinner>
+                    <p>{{ loading }}</p>
+                </div>
+            </main>
+        }
+        @if (!loading) {
+            <footer
+                class="sticky bottom-0 m-2 flex items-center justify-center space-x-2 rounded border-none bg-base-200 p-2"
+            >
+                <button
+                    btn
+                    matRipple
+                    class="inverse flex-1 bg-base-100"
+                    mat-dialog-close
+                >
+                    {{ cancel_text | translate }}
+                </button>
+                <button
+                    btn
+                    matRipple
+                    name="accept"
+                    class="flex-1"
+                    (click)="onConfirm()"
+                >
+                    {{ confirm_text | translate }}
+                </button>
+            </footer>
+        }
+    `, imports: [
       MatProgressSpinnerModule,
-      MatProgressSpinner,
       TranslatePipe,
       IconComponent,
       MatRippleModule,
-      MatRipple,
-      MatDialogModule,
-      MatDialogClose
-    ], encapsulation: 2 });
-  }
-};
+      MatDialogModule
+    ] }]
+  }], () => [], { event: [{
+    type: Output
+  }] });
+})();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ConfirmModalComponent, { className: "ConfirmModalComponent", filePath: "libs/components/src/lib/confirm-modal.component.ts", lineNumber: 124 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ConfirmModalComponent, { className: "ConfirmModalComponent", filePath: "libs/components/src/lib/confirm-modal.component.ts", lineNumber: 123 });
 })();
 
 // libs/payments/src/lib/card-input-field.component.ts
 var _c04 = ["input"];
-function CardInputFieldComponent_img_9_Template(rf, ctx) {
+function CardInputFieldComponent_Conditional_9_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "img", 20);
+    \u0275\u0275element(0, "img", 7);
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275property("src", "assets/icons/" + ctx_r1.card_type + ".svg", \u0275\u0275sanitizeUrl);
   }
 }
-function CardInputFieldComponent_mat_option_23_Template(rf, ctx) {
+function CardInputFieldComponent_For_24_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 21);
+    \u0275\u0275elementStart(0, "mat-option", 15);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -4936,9 +5318,9 @@ function CardInputFieldComponent_mat_option_23_Template(rf, ctx) {
     \u0275\u0275textInterpolate2(" ", item_r3[1], " (", item_r3[0], ") ");
   }
 }
-function CardInputFieldComponent_mat_option_31_Template(rf, ctx) {
+function CardInputFieldComponent_For_33_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 21);
+    \u0275\u0275elementStart(0, "mat-option", 15);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -4951,7 +5333,7 @@ function CardInputFieldComponent_mat_option_31_Template(rf, ctx) {
 }
 var BLANK_CARD = { card_number: "                ", cardholder: "", cvv: "" };
 var DATE_PIPE = new DatePipe("en-us", "");
-var CardInputFieldComponent = class _CardInputFieldComponent extends AsyncHandler {
+var _CardInputFieldComponent = class _CardInputFieldComponent extends AsyncHandler {
   constructor() {
     super(...arguments);
     this.details = new FormGroup({
@@ -5046,214 +5428,284 @@ var CardInputFieldComponent = class _CardInputFieldComponent extends AsyncHandle
   writeValue(value) {
     this.details.patchValue(value || BLANK_CARD);
   }
-  static {
-    this.\u0275fac = /* @__PURE__ */ (() => {
-      let \u0275CardInputFieldComponent_BaseFactory;
-      return function CardInputFieldComponent_Factory(__ngFactoryType__) {
-        return (\u0275CardInputFieldComponent_BaseFactory || (\u0275CardInputFieldComponent_BaseFactory = \u0275\u0275getInheritedFactory(_CardInputFieldComponent)))(__ngFactoryType__ || _CardInputFieldComponent);
-      };
-    })();
+};
+_CardInputFieldComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275CardInputFieldComponent_BaseFactory;
+  return function CardInputFieldComponent_Factory(__ngFactoryType__) {
+    return (\u0275CardInputFieldComponent_BaseFactory || (\u0275CardInputFieldComponent_BaseFactory = \u0275\u0275getInheritedFactory(_CardInputFieldComponent)))(__ngFactoryType__ || _CardInputFieldComponent);
+  };
+})();
+_CardInputFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CardInputFieldComponent, selectors: [["card-input-field"]], viewQuery: function CardInputFieldComponent_Query(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275viewQuery(_c04, 7);
   }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CardInputFieldComponent, selectors: [["card-input-field"]], viewQuery: function CardInputFieldComponent_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(_c04, 7);
-      }
-      if (rf & 2) {
-        let _t2;
-        \u0275\u0275queryRefresh(_t2 = \u0275\u0275loadQuery()) && (ctx._input_el = _t2.first);
-      }
-    }, features: [\u0275\u0275ProvidersFeature([
+  if (rf & 2) {
+    let _t2;
+    \u0275\u0275queryRefresh(_t2 = \u0275\u0275loadQuery()) && (ctx._input_el = _t2.first);
+  }
+}, features: [\u0275\u0275ProvidersFeature([
+  {
+    provide: NG_VALUE_ACCESSOR,
+    /* istanbul ignore next */
+    useExisting: forwardRef(() => _CardInputFieldComponent),
+    multi: true
+  }
+]), \u0275\u0275InheritDefinitionFeature], decls: 43, vars: 4, consts: [["input", ""], [3, "keyup", "formGroup"], [1, "flex", "flex-col"], ["for", "card-number"], ["tabindex", "0", 1, "relative", "mb-4", "flex", "h-12", "w-full", "items-center", "rounded", "border", "border-base-200", "p-2", "font-mono", "focus-within:border-base-200", "focus-within:shadow", 3, "focus"], [1, "flex-1"], ["type", "tel", "maxlength", "17", 1, "absolute", "hidden", 3, "keydown", "value"], [1, "h-8", 3, "src"], [1, "flex", "flex-1", "flex-col"], ["for", "cardholder"], ["appearance", "outline"], ["name", "cardholder", "matInput", "", "placeholder", "Mr John Smith", "formControlName", "cardholder"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "w-1/4", "flex-1", "flex-col"], ["placeholder", "MM", "formControlName", "exp_month"], [3, "value"], ["placeholder", "YYYY", "formControlName", "exp_year"], ["for", "cvv"], ["appearance", "outline", 1, "w-20"], ["name", "cvv", "matInput", "", "formControlName", "cvv", "maxlength", "4"]], template: function CardInputFieldComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "form", 1);
+    \u0275\u0275listener("keyup", function CardInputFieldComponent_Template_form_keyup_0_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      return \u0275\u0275resetView(ctx.onInput($event));
+    }, \u0275\u0275resolveWindow);
+    \u0275\u0275elementStart(1, "div", 2)(2, "label", 3);
+    \u0275\u0275text(3, "Card Number");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 4);
+    \u0275\u0275listener("focus", function CardInputFieldComponent_Template_div_focus_4_listener() {
+      \u0275\u0275restoreView(_r1);
+      return \u0275\u0275resetView(ctx.focusInput());
+    });
+    \u0275\u0275elementStart(5, "pre", 5);
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "input", 6, 0);
+    \u0275\u0275listener("keydown", function CardInputFieldComponent_Template_input_keydown_7_listener() {
+      \u0275\u0275restoreView(_r1);
+      return \u0275\u0275resetView(false);
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275conditionalCreate(9, CardInputFieldComponent_Conditional_9_Template, 1, 1, "img", 7);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(10, "div", 8)(11, "label", 9);
+    \u0275\u0275text(12, "Name on Card");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(13, "mat-form-field", 10);
+    \u0275\u0275element(14, "input", 11);
+    \u0275\u0275elementStart(15, "mat-error");
+    \u0275\u0275text(16, "Cardholder name is required");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(17, "div", 12)(18, "div", 13)(19, "label", 9);
+    \u0275\u0275text(20, "Expiry Month");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(21, "mat-form-field", 10)(22, "mat-select", 14);
+    \u0275\u0275repeaterCreate(23, CardInputFieldComponent_For_24_Template, 2, 3, "mat-option", 15, \u0275\u0275repeaterTrackByIdentity);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(25, "mat-error");
+    \u0275\u0275text(26, "Expiry month is required");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(27, "div", 13)(28, "label", 9);
+    \u0275\u0275text(29, "Expiry Year");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(30, "mat-form-field", 10)(31, "mat-select", 16);
+    \u0275\u0275repeaterCreate(32, CardInputFieldComponent_For_33_Template, 2, 2, "mat-option", 15, \u0275\u0275repeaterTrackByIdentity);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(34, "mat-error");
+    \u0275\u0275text(35, "Expiry year is required");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(36, "div", 2)(37, "label", 17);
+    \u0275\u0275text(38, "CVV");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(39, "mat-form-field", 18);
+    \u0275\u0275element(40, "input", 19);
+    \u0275\u0275elementStart(41, "mat-error");
+    \u0275\u0275text(42, "Invalid security code");
+    \u0275\u0275elementEnd()()()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275property("formGroup", ctx.details);
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate(ctx.card_display);
+    \u0275\u0275advance();
+    \u0275\u0275property("value", ctx.details.value.card_number == null ? null : ctx.details.value.card_number.trim());
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(ctx.card_type ? 9 : -1);
+    \u0275\u0275advance(14);
+    \u0275\u0275repeater(ctx.months);
+    \u0275\u0275advance(9);
+    \u0275\u0275repeater(ctx.years);
+  }
+}, dependencies: [MatFormFieldModule, MatFormField, MatError, MatInputModule, MatInput, MatSelectModule, MatSelect, MatOption, ReactiveFormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, MaxLengthValidator, FormGroupDirective, FormControlName], styles: ["\n\nmat-form-field[_ngcontent-%COMP%] {\n  height: 3.25rem;\n}\n/*# sourceMappingURL=card-input-field.component.css.map */"] });
+var CardInputFieldComponent = _CardInputFieldComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CardInputFieldComponent, [{
+    type: Component,
+    args: [{ selector: "card-input-field", template: `
+        <form [formGroup]="details" (window:keyup)="onInput($event)">
+            <div class="flex flex-col">
+                <label for="card-number">Card Number</label>
+                <div
+                    tabindex="0"
+                    class="relative mb-4 flex h-12 w-full items-center rounded border border-base-200 p-2 font-mono focus-within:border-base-200 focus-within:shadow"
+                    (focus)="focusInput()"
+                >
+                    <pre class="flex-1">{{ card_display }}</pre>
+                    <input
+                        #input
+                        class="absolute hidden"
+                        type="tel"
+                        [value]="details.value.card_number?.trim()"
+                        (keydown)="(false)"
+                        maxlength="17"
+                    />
+                    @if (card_type) {
+                        <img
+                            [src]="'assets/icons/' + card_type + '.svg'"
+                            class="h-8"
+                        />
+                    }
+                </div>
+            </div>
+            <div class="flex flex-1 flex-col">
+                <label for="cardholder">Name on Card</label>
+                <mat-form-field appearance="outline">
+                    <input
+                        name="cardholder"
+                        matInput
+                        placeholder="Mr John Smith"
+                        formControlName="cardholder"
+                    />
+                    <mat-error>Cardholder name is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="flex w-1/4 flex-1 flex-col">
+                    <label for="cardholder">Expiry Month</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select
+                            placeholder="MM"
+                            formControlName="exp_month"
+                        >
+                            @for (item of months; track item) {
+                                <mat-option [value]="item[0]">
+                                    {{ item[1] }} ({{ item[0] }})
+                                </mat-option>
+                            }
+                        </mat-select>
+                        <mat-error>Expiry month is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="flex w-1/4 flex-1 flex-col">
+                    <label for="cardholder">Expiry Year</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select
+                            placeholder="YYYY"
+                            formControlName="exp_year"
+                        >
+                            @for (item of years; track item) {
+                                <mat-option [value]="item">{{
+                                    item
+                                }}</mat-option>
+                            }
+                        </mat-select>
+                        <mat-error>Expiry year is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col">
+                    <label for="cvv">CVV</label>
+                    <mat-form-field appearance="outline" class="w-20">
+                        <input
+                            name="cvv"
+                            matInput
+                            formControlName="cvv"
+                            maxlength="4"
+                        />
+                        <mat-error>Invalid security code</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    `, providers: [
       {
         provide: NG_VALUE_ACCESSOR,
         /* istanbul ignore next */
-        useExisting: forwardRef(() => _CardInputFieldComponent),
+        useExisting: forwardRef(() => CardInputFieldComponent),
         multi: true
       }
-    ]), \u0275\u0275InheritDefinitionFeature], decls: 41, vars: 6, consts: [["input", ""], [3, "keyup", "formGroup"], [1, "flex", "flex-col"], ["for", "card-number"], ["tabindex", "0", 1, "relative", "mb-4", "flex", "h-12", "w-full", "items-center", "rounded", "border", "border-base-200", "p-2", "font-mono", "focus-within:border-base-200", "focus-within:shadow", 3, "focus"], [1, "flex-1"], ["type", "tel", "maxlength", "17", 1, "absolute", "hidden", 3, "keydown", "value"], ["class", "h-8", 3, "src", 4, "ngIf"], [1, "flex", "flex-1", "flex-col"], ["for", "cardholder"], ["appearance", "outline"], ["name", "cardholder", "matInput", "", "placeholder", "Mr John Smith", "formControlName", "cardholder"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "w-1/4", "flex-1", "flex-col"], ["placeholder", "MM", "formControlName", "exp_month"], [3, "value", 4, "ngFor", "ngForOf"], ["placeholder", "YYYY", "formControlName", "exp_year"], ["for", "cvv"], ["appearance", "outline", 1, "w-20"], ["name", "cvv", "matInput", "", "formControlName", "cvv", "maxlength", "4"], [1, "h-8", 3, "src"], [3, "value"]], template: function CardInputFieldComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275elementStart(0, "form", 1);
-        \u0275\u0275listener("keyup", function CardInputFieldComponent_Template_form_keyup_0_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.onInput($event));
-        }, false, \u0275\u0275resolveWindow);
-        \u0275\u0275elementStart(1, "div", 2)(2, "label", 3);
-        \u0275\u0275text(3, "Card Number");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(4, "div", 4);
-        \u0275\u0275listener("focus", function CardInputFieldComponent_Template_div_focus_4_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.focusInput());
-        });
-        \u0275\u0275elementStart(5, "pre", 5);
-        \u0275\u0275text(6);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(7, "input", 6, 0);
-        \u0275\u0275listener("keydown", function CardInputFieldComponent_Template_input_keydown_7_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(false);
-        });
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(9, CardInputFieldComponent_img_9_Template, 1, 1, "img", 7);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(10, "div", 8)(11, "label", 9);
-        \u0275\u0275text(12, "Name on Card");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(13, "mat-form-field", 10);
-        \u0275\u0275element(14, "input", 11);
-        \u0275\u0275elementStart(15, "mat-error");
-        \u0275\u0275text(16, "Cardholder name is required");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(17, "div", 12)(18, "div", 13)(19, "label", 9);
-        \u0275\u0275text(20, "Expiry Month");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(21, "mat-form-field", 10)(22, "mat-select", 14);
-        \u0275\u0275template(23, CardInputFieldComponent_mat_option_23_Template, 2, 3, "mat-option", 15);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(24, "mat-error");
-        \u0275\u0275text(25, "Expiry month is required");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(26, "div", 13)(27, "label", 9);
-        \u0275\u0275text(28, "Expiry Year");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(29, "mat-form-field", 10)(30, "mat-select", 16);
-        \u0275\u0275template(31, CardInputFieldComponent_mat_option_31_Template, 2, 2, "mat-option", 15);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(32, "mat-error");
-        \u0275\u0275text(33, "Expiry year is required");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275elementStart(34, "div", 2)(35, "label", 17);
-        \u0275\u0275text(36, "CVV");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(37, "mat-form-field", 18);
-        \u0275\u0275element(38, "input", 19);
-        \u0275\u0275elementStart(39, "mat-error");
-        \u0275\u0275text(40, "Invalid security code");
-        \u0275\u0275elementEnd()()()()();
-      }
-      if (rf & 2) {
-        \u0275\u0275property("formGroup", ctx.details);
-        \u0275\u0275advance(6);
-        \u0275\u0275textInterpolate(ctx.card_display);
-        \u0275\u0275advance();
-        \u0275\u0275property("value", ctx.details.value.card_number == null ? null : ctx.details.value.card_number.trim());
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", ctx.card_type);
-        \u0275\u0275advance(14);
-        \u0275\u0275property("ngForOf", ctx.months);
-        \u0275\u0275advance(8);
-        \u0275\u0275property("ngForOf", ctx.years);
-      }
-    }, dependencies: [MatFormFieldModule, MatFormField, MatError, MatInputModule, MatInput, MatSelectModule, MatSelect, MatOption, ReactiveFormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, MaxLengthValidator, FormGroupDirective, FormControlName], styles: ["\n\nmat-form-field[_ngcontent-%COMP%] {\n  height: 3.25rem;\n}\n/*# sourceMappingURL=card-input-field.component.css.map */"] });
-  }
-};
+    ], imports: [
+      MatFormFieldModule,
+      MatInputModule,
+      MatSelectModule,
+      ReactiveFormsModule
+    ], styles: ["/* angular:styles/component:css;2bc8ca7aace10e46f51053cb2cf4127500bd9fcd06c7c0d1d5dc88d70d997800;/home/runner/work/user-interfaces/user-interfaces/libs/payments/src/lib/card-input-field.component.ts */\nmat-form-field {\n  height: 3.25rem;\n}\n/*# sourceMappingURL=card-input-field.component.css.map */\n"] }]
+  }], null, { _input_el: [{
+    type: ViewChild,
+    args: ["input", { static: true }]
+  }] });
+})();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CardInputFieldComponent, { className: "CardInputFieldComponent", filePath: "libs/payments/src/lib/card-input-field.component.ts", lineNumber: 138 });
 })();
 
 // libs/payments/src/lib/payment-modal.component.ts
-function PaymentModalComponent_div_0_ng_container_1_ng_container_8_Template(rf, ctx) {
+function PaymentModalComponent_Conditional_0_Conditional_1_Conditional_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275text(1);
+    \u0275\u0275text(0);
+    \u0275\u0275pipe(1, "date");
     \u0275\u0275pipe(2, "date");
-    \u0275\u0275pipe(3, "date");
-    \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate2(" between ", \u0275\u0275pipeBind2(2, 2, ctx_r1.details.date, "shortTime"), " and ", \u0275\u0275pipeBind2(3, 5, ctx_r1.details.date + ctx_r1.details.duration * 60 * 1e3, "shortTime"), " ");
+    \u0275\u0275textInterpolate2(" between ", \u0275\u0275pipeBind2(1, 2, ctx_r1.details.date, "shortTime"), " and ", \u0275\u0275pipeBind2(2, 5, ctx_r1.details.date + ctx_r1.details.duration * 60 * 1e3, "shortTime"), " ");
   }
 }
-function PaymentModalComponent_div_0_ng_container_1_Template(rf, ctx) {
+function PaymentModalComponent_Conditional_0_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "main", 5)(2, "h2", 6);
-    \u0275\u0275text(3, "Booking Payment");
+    \u0275\u0275elementStart(0, "main", 2)(1, "h2", 3);
+    \u0275\u0275text(2, "Booking Payment");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(4, "img", 7);
-    \u0275\u0275elementStart(5, "p", 8);
-    \u0275\u0275text(6);
-    \u0275\u0275pipe(7, "date");
-    \u0275\u0275template(8, PaymentModalComponent_div_0_ng_container_1_ng_container_8_Template, 4, 8, "ng-container", 9);
+    \u0275\u0275element(3, "img", 4);
+    \u0275\u0275elementStart(4, "p", 5);
+    \u0275\u0275text(5);
+    \u0275\u0275pipe(6, "date");
+    \u0275\u0275conditionalCreate(7, PaymentModalComponent_Conditional_0_Conditional_1_Conditional_7_Template, 3, 8);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(9, "p", 10);
-    \u0275\u0275text(10, "You booking will cost:");
+    \u0275\u0275elementStart(8, "p", 6);
+    \u0275\u0275text(9, "You booking will cost:");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(11, "p", 11)(12, "strong");
-    \u0275\u0275text(13);
-    \u0275\u0275pipe(14, "currency");
+    \u0275\u0275elementStart(10, "p", 7)(11, "strong");
+    \u0275\u0275text(12);
+    \u0275\u0275pipe(13, "currency");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(15, "card-input-field", 12);
-    \u0275\u0275twoWayListener("ngModelChange", function PaymentModalComponent_div_0_ng_container_1_Template_card_input_field_ngModelChange_15_listener($event) {
+    \u0275\u0275elementStart(14, "card-input-field", 8);
+    \u0275\u0275twoWayListener("ngModelChange", function PaymentModalComponent_Conditional_0_Conditional_1_Template_card_input_field_ngModelChange_14_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext(2);
       \u0275\u0275twoWayBindingSet(ctx_r1.card_details, $event) || (ctx_r1.card_details = $event);
       return \u0275\u0275resetView($event);
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(16, "footer", 13)(17, "button", 14);
-    \u0275\u0275listener("click", function PaymentModalComponent_div_0_ng_container_1_Template_button_click_17_listener() {
+    \u0275\u0275elementStart(15, "footer", 9)(16, "button", 10);
+    \u0275\u0275listener("click", function PaymentModalComponent_Conditional_0_Conditional_1_Template_button_click_16_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.processPayment());
     });
-    \u0275\u0275text(18, " Make Payment ");
+    \u0275\u0275text(17, " Make Payment ");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(19, "button", 15)(20, "i", 16);
-    \u0275\u0275text(21, "close");
+    \u0275\u0275elementStart(18, "button", 11)(19, "i", 12);
+    \u0275\u0275text(20, "close");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate3(" You are requesting a ", ctx_r1.details.type, " booking in ", ctx_r1.details.resource_name, " for ", \u0275\u0275pipeBind2(7, 6, ctx_r1.details.date, "mediumDate"), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", !ctx_r1.details.all_day);
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(14, 9, ctx_r1.details.amount / 100, ctx_r1.code));
+    \u0275\u0275textInterpolate3(" You are requesting a ", ctx_r1.details.type, " booking in ", ctx_r1.details.resource_name, " for ", \u0275\u0275pipeBind2(6, 6, ctx_r1.details.date, "mediumDate"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(!ctx_r1.details.all_day ? 7 : -1);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(13, 9, ctx_r1.details.amount / 100, ctx_r1.code));
     \u0275\u0275advance(2);
     \u0275\u0275twoWayProperty("ngModel", ctx_r1.card_details);
   }
 }
-function PaymentModalComponent_div_0_Template(rf, ctx) {
+function PaymentModalComponent_Conditional_0_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 3);
-    \u0275\u0275template(1, PaymentModalComponent_div_0_ng_container_1_Template, 22, 12, "ng-container", 4);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    const success_state_r3 = \u0275\u0275reference(5);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", !ctx_r1.success)("ngIfElse", success_state_r3);
-  }
-}
-function PaymentModalComponent_ng_template_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 17);
-    \u0275\u0275element(1, "mat-spinner", 18);
-    \u0275\u0275elementStart(2, "p");
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 1, ctx_r1.loading));
-  }
-}
-function PaymentModalComponent_ng_template_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "main", 19)(1, "h2", 6);
+    \u0275\u0275elementStart(0, "main", 13)(1, "h2", 3);
     \u0275\u0275text(2, "Payment Successful");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "h3", 20);
+    \u0275\u0275elementStart(3, "h3", 14);
     \u0275\u0275text(4);
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(5, "p");
@@ -5272,13 +5724,13 @@ function PaymentModalComponent_ng_template_4_Template(rf, ctx) {
     \u0275\u0275pipe(15, "date");
     \u0275\u0275pipe(16, "date");
     \u0275\u0275elementEnd()();
-    \u0275\u0275element(17, "img", 21);
-    \u0275\u0275elementStart(18, "footer", 22)(19, "button", 23);
+    \u0275\u0275element(17, "img", 15);
+    \u0275\u0275elementStart(18, "footer", 16)(19, "button", 17);
     \u0275\u0275text(20, " Great, thanks. ");
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
+    const ctx_r1 = \u0275\u0275nextContext(2);
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate1(" Ref #", ctx_r1.transaction_id, " ");
     \u0275\u0275advance(2);
@@ -5291,18 +5743,45 @@ function PaymentModalComponent_ng_template_4_Template(rf, ctx) {
     \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(15, 12, ctx_r1.details.date, "shortTime"), " and ", \u0275\u0275pipeBind2(16, 15, ctx_r1.details.date + ctx_r1.details.duration * 60 * 1e3, "shortTime"), " ");
   }
 }
-var PaymentModalComponent = class _PaymentModalComponent {
-  get code() {
-    return this._org.currency_code;
+function PaymentModalComponent_Conditional_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 0);
+    \u0275\u0275conditionalCreate(1, PaymentModalComponent_Conditional_0_Conditional_1_Template, 21, 12)(2, PaymentModalComponent_Conditional_0_Conditional_2_Template, 21, 18);
+    \u0275\u0275elementEnd();
   }
-  constructor(_data, _org) {
-    this._data = _data;
-    this._org = _org;
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275conditional(!ctx_r1.success ? 1 : 2);
+  }
+}
+function PaymentModalComponent_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 1);
+    \u0275\u0275element(1, "mat-spinner", 18);
+    \u0275\u0275elementStart(2, "p");
+    \u0275\u0275text(3);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 1, ctx_r1.loading));
+  }
+}
+var _PaymentModalComponent = class _PaymentModalComponent {
+  constructor() {
+    this._data = inject(MAT_DIALOG_DATA);
+    this._org = inject(OrganisationService);
     this.event = new EventEmitter();
     this.details = this._data;
     this.loading = this._data.loading;
     this.success = false;
     this.transaction_id = "12345678";
+  }
+  get code() {
+    return this._org.currency_code;
   }
   processPayment() {
     return __async(this, null, function* () {
@@ -5316,45 +5795,141 @@ var PaymentModalComponent = class _PaymentModalComponent {
   _validCardDetails() {
     return (this.card_details?.cardholder.length || 0) > 0 && (this.card_details?.cvv.length || 0) >= 3;
   }
-  static {
-    this.\u0275fac = function PaymentModalComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _PaymentModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(OrganisationService));
-    };
+};
+_PaymentModalComponent.\u0275fac = function PaymentModalComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _PaymentModalComponent)();
+};
+_PaymentModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PaymentModalComponent, selectors: [["payment-modal"]], outputs: { event: "event" }, decls: 3, vars: 3, consts: [[1, "relative", "max-h-[100vh]", "overflow-auto"], [1, "flex", "h-full", "w-full", "flex-col", "items-center", "justify-center", "p-8"], [1, "relative", "flex", "w-[24rem]", "flex-col", "items-center", "space-y-2", "px-4", "pt-8"], [1, "text-2xl", "font-medium"], ["src", "assets/icons/cost.svg", 1, "w-1/2"], [1, "pb-2", "text-center", "text-sm"], [1, "text-sm"], [1, "text-center", "text-lg", "font-medium"], [1, "w-full", 3, "ngModelChange", "ngModel"], [1, "p-4"], ["matRipple", "", 1, "w-full", 3, "click"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "left-1", "top-1"], [1, "material-symbols-rounded", "text-2xl"], [1, "relative", "flex", "w-[24rem]", "flex-col", "px-8", "pt-8"], [1, "mb-2", "text-xl", "font-medium"], ["src", "assets/icons/payment-confirmed.svg", 1, "w-full"], [1, "border-t", "border-base-200", "p-4"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "w-full"], ["diameter", "32"]], template: function PaymentModalComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275conditionalCreate(0, PaymentModalComponent_Conditional_0_Template, 3, 1, "div", 0);
+    \u0275\u0275pipe(1, "async");
+    \u0275\u0275conditionalBranchCreate(2, PaymentModalComponent_Conditional_2_Template, 5, 3, "div", 1);
   }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PaymentModalComponent, selectors: [["payment-modal"]], outputs: { event: "event" }, decls: 6, vars: 4, consts: [["load_state", ""], ["success_state", ""], ["class", "relative max-h-[100vh] overflow-auto", 4, "ngIf", "ngIfElse"], [1, "relative", "max-h-[100vh]", "overflow-auto"], [4, "ngIf", "ngIfElse"], [1, "relative", "flex", "w-[24rem]", "flex-col", "items-center", "space-y-2", "px-4", "pt-8"], [1, "text-2xl", "font-medium"], ["src", "assets/icons/cost.svg", 1, "w-1/2"], [1, "pb-2", "text-center", "text-sm"], [4, "ngIf"], [1, "text-sm"], [1, "text-center", "text-lg", "font-medium"], [1, "w-full", 3, "ngModelChange", "ngModel"], [1, "p-4"], ["matRipple", "", 1, "w-full", 3, "click"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "left-1", "top-1"], [1, "material-symbols-rounded", "text-2xl"], [1, "flex", "h-full", "w-full", "flex-col", "items-center", "justify-center", "p-8"], ["diameter", "32"], [1, "relative", "flex", "w-[24rem]", "flex-col", "px-8", "pt-8"], [1, "mb-2", "text-xl", "font-medium"], ["src", "assets/icons/payment-confirmed.svg", 1, "w-full"], [1, "border-t", "border-base-200", "p-4"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "w-full"]], template: function PaymentModalComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275template(0, PaymentModalComponent_div_0_Template, 2, 2, "div", 2);
-        \u0275\u0275pipe(1, "async");
-        \u0275\u0275template(2, PaymentModalComponent_ng_template_2_Template, 5, 3, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(4, PaymentModalComponent_ng_template_4_Template, 21, 18, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        const load_state_r4 = \u0275\u0275reference(3);
-        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(1, 2, ctx.loading))("ngIfElse", load_state_r4);
-      }
-    }, dependencies: [
+  if (rf & 2) {
+    \u0275\u0275conditional(!\u0275\u0275pipeBind1(1, 1, ctx.loading) ? 0 : 2);
+  }
+}, dependencies: [
+  CommonModule,
+  AsyncPipe,
+  CurrencyPipe,
+  DatePipe,
+  CardInputFieldComponent,
+  MatProgressSpinnerModule,
+  MatProgressSpinner,
+  MatRippleModule,
+  MatRipple
+], encapsulation: 2 });
+var PaymentModalComponent = _PaymentModalComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PaymentModalComponent, [{
+    type: Component,
+    args: [{ selector: "payment-modal", template: `
+        @if (!(loading | async)) {
+            <div class="relative max-h-[100vh] overflow-auto">
+                @if (!success) {
+                    <main
+                        class="relative flex w-[24rem] flex-col items-center space-y-2 px-4 pt-8"
+                    >
+                        <h2 class="text-2xl font-medium">Booking Payment</h2>
+                        <img src="assets/icons/cost.svg" class="w-1/2" />
+                        <p class="pb-2 text-center text-sm">
+                            You are requesting a {{ details.type }} booking in
+                            {{ details.resource_name }} for
+                            {{ details.date | date: 'mediumDate' }}
+                            @if (!details.all_day) {
+                                between
+                                {{ details.date | date: 'shortTime' }} and
+                                {{
+                                    details.date + details.duration * 60 * 1000
+                                        | date: 'shortTime'
+                                }}
+                            }
+                        </p>
+                        <p class="text-sm">You booking will cost:</p>
+                        <p class="text-center text-lg font-medium">
+                            <strong>{{
+                                details.amount / 100 | currency: code
+                            }}</strong>
+                        </p>
+                        <card-input-field
+                            class="w-full"
+                            [(ngModel)]="card_details"
+                        ></card-input-field>
+                    </main>
+                    <footer class="p-4">
+                        <button
+                            matRipple
+                            class="w-full"
+                            (click)="processPayment()"
+                        >
+                            Make Payment
+                        </button>
+                    </footer>
+                    <button
+                        icon
+                        matRipple
+                        mat-dialog-close
+                        class="absolute left-1 top-1"
+                    >
+                        <i class="material-symbols-rounded text-2xl">close</i>
+                    </button>
+                } @else {
+                    <main class="relative flex w-[24rem] flex-col px-8 pt-8">
+                        <h2 class="text-2xl font-medium">Payment Successful</h2>
+                        <h3 class="mb-2 text-xl font-medium">
+                            Ref #{{ transaction_id }}
+                        </h3>
+                        <p>{{ details.amount / 100 | currency: code }} paid.</p>
+                        <p>{{ details.resource_name }} booked.</p>
+                        <p>{{ details.date | date: 'mediumDate' }}</p>
+                        <p>
+                            {{ details.date | date: 'shortTime' }} and
+                            {{
+                                details.date + details.duration * 60 * 1000
+                                    | date: 'shortTime'
+                            }}
+                        </p>
+                    </main>
+                    <img
+                        src="assets/icons/payment-confirmed.svg"
+                        class="w-full"
+                    />
+                    <footer class="border-t border-base-200 p-4">
+                        <button btn matRipple mat-dialog-close class="w-full">
+                            Great, thanks.
+                        </button>
+                    </footer>
+                }
+            </div>
+        } @else {
+            <div
+                class="flex h-full w-full flex-col items-center justify-center p-8"
+            >
+                <mat-spinner diameter="32"></mat-spinner>
+                <p>{{ loading | async }}</p>
+            </div>
+        }
+    `, imports: [
+      CommonModule,
       CardInputFieldComponent,
       MatProgressSpinnerModule,
-      MatProgressSpinner,
-      MatRippleModule,
-      MatRipple
-    ], encapsulation: 2 });
-  }
-};
+      MatRippleModule
+    ] }]
+  }], null, { event: [{
+    type: Output
+  }] });
+})();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PaymentModalComponent, { className: "PaymentModalComponent", filePath: "libs/payments/src/lib/payment-modal.component.ts", lineNumber: 118 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PaymentModalComponent, { className: "PaymentModalComponent", filePath: "libs/payments/src/lib/payment-modal.component.ts", lineNumber: 125 });
 })();
 
 // libs/payments/src/lib/payments.service.ts
 var STRIPE_MODULE = "Payment";
-var PaymentsService = class _PaymentsService {
-  get enabled() {
-    return !!this._org.module("payments", STRIPE_MODULE);
-  }
-  constructor(_org, _settings, _dialog) {
-    this._org = _org;
-    this._settings = _settings;
-    this._dialog = _dialog;
+var _PaymentsService = class _PaymentsService {
+  constructor() {
+    this._org = inject(OrganisationService);
+    this._settings = inject(SettingsService);
+    this._dialog = inject(MatDialog);
     this._loading = new BehaviorSubject("");
     this._active_card = new BehaviorSubject("");
     this.loading = this._loading.asObservable();
@@ -5364,6 +5939,9 @@ var PaymentsService = class _PaymentsService {
         return of([]);
       return mod.execute("list_payment_methods", ["card"]);
     }), tap((_2) => _2[0] ? this._active_card.next(_2[0].id) : ""), shareReplay(1));
+  }
+  get enabled() {
+    return !!this._org.module("payments", STRIPE_MODULE);
   }
   makePayment(details) {
     return __async(this, null, function* () {
@@ -5490,19 +6068,24 @@ var PaymentsService = class _PaymentsService {
       return id;
     });
   }
-  static {
-    this.\u0275fac = function PaymentsService_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _PaymentsService)(\u0275\u0275inject(OrganisationService), \u0275\u0275inject(SettingsService), \u0275\u0275inject(MatDialog));
-    };
-  }
-  static {
-    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _PaymentsService, factory: _PaymentsService.\u0275fac, providedIn: "root" });
-  }
 };
+_PaymentsService.\u0275fac = function PaymentsService_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _PaymentsService)();
+};
+_PaymentsService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _PaymentsService, factory: _PaymentsService.\u0275fac, providedIn: "root" });
+var PaymentsService = _PaymentsService;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PaymentsService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
 
 // libs/bookings/src/lib/booking-form.service.ts
 var BOOKING_TYPES = ["desk", "parking", "locker", "catering"];
-var BookingFormService = class _BookingFormService extends AsyncHandler {
+var _BookingFormService = class _BookingFormService extends AsyncHandler {
   get view() {
     return this._view.getValue();
   }
@@ -5543,14 +6126,14 @@ var BookingFormService = class _BookingFormService extends AsyncHandler {
       this.form.patchValue({ resources: new_list });
     }));
   }
-  constructor(_router, _settings, _org, _dialog, _payments, _assets) {
+  constructor() {
     super();
-    this._router = _router;
-    this._settings = _settings;
-    this._org = _org;
-    this._dialog = _dialog;
-    this._payments = _payments;
-    this._assets = _assets;
+    this._router = inject(Router);
+    this._settings = inject(SettingsService);
+    this._org = inject(OrganisationService);
+    this._dialog = inject(MatDialog);
+    this._payments = inject(PaymentsService);
+    this._assets = inject(AssetStateService);
     this._view = new BehaviorSubject("form");
     this._options = new BehaviorSubject({
       type: "desk"
@@ -5997,15 +6580,20 @@ var BookingFormService = class _BookingFormService extends AsyncHandler {
       return nearby_resources;
     });
   }
-  static {
-    this.\u0275fac = function BookingFormService_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _BookingFormService)(\u0275\u0275inject(Router), \u0275\u0275inject(SettingsService), \u0275\u0275inject(OrganisationService), \u0275\u0275inject(MatDialog), \u0275\u0275inject(PaymentsService), \u0275\u0275inject(AssetStateService));
-    };
-  }
-  static {
-    this.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _BookingFormService, factory: _BookingFormService.\u0275fac, providedIn: "root" });
-  }
 };
+_BookingFormService.\u0275fac = function BookingFormService_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _BookingFormService)();
+};
+_BookingFormService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _BookingFormService, factory: _BookingFormService.\u0275fac, providedIn: "root" });
+var BookingFormService = _BookingFormService;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BookingFormService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], () => [], null);
+})();
 
 // libs/spaces/src/lib/space.utilities.ts
 var SPACE_LIST_REQUESTS = {};
@@ -6067,7 +6655,6 @@ export {
   Dn,
   Hn,
   VirtualKeyboardComponent,
-  SafePipe,
   endInFuture,
   newBookingFromCalendarEvent,
   loadLockerBanks,
@@ -6083,4 +6670,4 @@ export {
   showStaff,
   UserSearchFieldComponent
 };
-//# sourceMappingURL=chunk-TQ3JX3PT.js.map
+//# sourceMappingURL=chunk-EVQYQ6PN.js.map

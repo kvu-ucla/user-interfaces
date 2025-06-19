@@ -5,15 +5,14 @@ import {
   VirtualKeyboardComponent,
   generateMockSpace,
   setHours
-} from "./chunk-TQ3JX3PT.js";
+} from "./chunk-EVQYQ6PN.js";
 import {
   CheckinStateService,
   MatCheckboxModule
-} from "./chunk-BQ4BXFBM.js";
+} from "./chunk-MPJTAEG2.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
-  APP_INITIALIZER,
   AUTO_STYLE,
   ActivatedRoute,
   AnimationGroupPlayer,
@@ -88,15 +87,13 @@ import {
   Ne,
   NgControlStatus,
   NgControlStatusGroup,
-  NgForOf,
-  NgIf,
   NgModel,
   NgModule,
   NgZone,
   NoopAnimationPlayer,
+  Observable,
   OrganisationService,
   Output,
-  Overlay,
   OverlayConfig,
   OverlayModule,
   Platform,
@@ -130,28 +127,27 @@ import {
   _CdkPrivateStyleLoader,
   _IdGenerator,
   _StructuralStylesLoader,
+  _animationsDisabled,
   addDays,
   addHours,
   addMinutes,
   addSeconds,
-  afterRender,
+  afterNextRender,
   booleanAttribute,
   bt,
   capitalizeFirstLetter,
   combineLatest,
-  concat,
+  createGlobalPositionStrategy,
+  createOverlayRef,
   currentUser,
   current_user,
   debounceTime,
-  defer,
-  delay,
   differenceInMinutes,
   enableProdMode,
   filter,
   first,
   flatten,
-  from,
-  fromEvent,
+  formatRuntimeError,
   getInvalidFields,
   getUnixTime,
   gs,
@@ -167,7 +163,6 @@ import {
   log,
   makeEnvironmentProviders,
   map,
-  merge,
   nextValueFrom,
   no,
   notifyError,
@@ -178,7 +173,7 @@ import {
   platformBrowser,
   pr,
   predictableRandomInt,
-  publish,
+  provideAppInitializer,
   randomInt,
   randomString,
   registerLocaleData,
@@ -201,7 +196,6 @@ import {
   take,
   takeUntil,
   tap,
-  throwError,
   timePeriodsIntersect,
   unique,
   vs,
@@ -213,6 +207,7 @@ import {
   ɵɵclassMap,
   ɵɵclassProp,
   ɵɵconditional,
+  ɵɵconditionalCreate,
   ɵɵdefineComponent,
   ɵɵdefineDirective,
   ɵɵdefineInjectable,
@@ -220,8 +215,6 @@ import {
   ɵɵdefineNgModule,
   ɵɵdirectiveInject,
   ɵɵelement,
-  ɵɵelementContainerEnd,
-  ɵɵelementContainerStart,
   ɵɵelementEnd,
   ɵɵelementStart,
   ɵɵgetCurrentView,
@@ -240,12 +233,14 @@ import {
   ɵɵpureFunction1,
   ɵɵqueryRefresh,
   ɵɵreference,
+  ɵɵrepeater,
+  ɵɵrepeaterCreate,
+  ɵɵrepeaterTrackByIdentity,
   ɵɵresetView,
   ɵɵrestoreView,
   ɵɵsanitizeHtml,
   ɵɵsanitizeUrl,
   ɵɵtemplate,
-  ɵɵtemplateRefExtractor,
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
@@ -254,7 +249,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-EXVEQXC2.js";
+} from "./chunk-7WZA3LU7.js";
 import {
   __async,
   __export,
@@ -263,7 +258,7 @@ import {
   __spreadValues
 } from "./chunk-XWLXMCJQ.js";
 
-// node_modules/@angular/animations/fesm2022/browser.mjs
+// node_modules/@angular/animations/fesm2022/util-CPU6TNml.mjs
 var LINE_START = "\n - ";
 function invalidTimingValue(exp) {
   return new RuntimeError(3e3, ngDevMode && `The provided timing value "${exp}" is invalid.`);
@@ -364,7 +359,207 @@ function transitionFailed(name, errors) {
   return new RuntimeError(3505, ngDevMode && `@${name} has failed due to:
  ${errors.map((err) => err.message).join("\n- ")}`);
 }
-var ANIMATABLE_PROP_SET = /* @__PURE__ */ new Set(["-moz-outline-radius", "-moz-outline-radius-bottomleft", "-moz-outline-radius-bottomright", "-moz-outline-radius-topleft", "-moz-outline-radius-topright", "-ms-grid-columns", "-ms-grid-rows", "-webkit-line-clamp", "-webkit-text-fill-color", "-webkit-text-stroke", "-webkit-text-stroke-color", "accent-color", "all", "backdrop-filter", "background", "background-color", "background-position", "background-size", "block-size", "border", "border-block-end", "border-block-end-color", "border-block-end-width", "border-block-start", "border-block-start-color", "border-block-start-width", "border-bottom", "border-bottom-color", "border-bottom-left-radius", "border-bottom-right-radius", "border-bottom-width", "border-color", "border-end-end-radius", "border-end-start-radius", "border-image-outset", "border-image-slice", "border-image-width", "border-inline-end", "border-inline-end-color", "border-inline-end-width", "border-inline-start", "border-inline-start-color", "border-inline-start-width", "border-left", "border-left-color", "border-left-width", "border-radius", "border-right", "border-right-color", "border-right-width", "border-start-end-radius", "border-start-start-radius", "border-top", "border-top-color", "border-top-left-radius", "border-top-right-radius", "border-top-width", "border-width", "bottom", "box-shadow", "caret-color", "clip", "clip-path", "color", "column-count", "column-gap", "column-rule", "column-rule-color", "column-rule-width", "column-width", "columns", "filter", "flex", "flex-basis", "flex-grow", "flex-shrink", "font", "font-size", "font-size-adjust", "font-stretch", "font-variation-settings", "font-weight", "gap", "grid-column-gap", "grid-gap", "grid-row-gap", "grid-template-columns", "grid-template-rows", "height", "inline-size", "input-security", "inset", "inset-block", "inset-block-end", "inset-block-start", "inset-inline", "inset-inline-end", "inset-inline-start", "left", "letter-spacing", "line-clamp", "line-height", "margin", "margin-block-end", "margin-block-start", "margin-bottom", "margin-inline-end", "margin-inline-start", "margin-left", "margin-right", "margin-top", "mask", "mask-border", "mask-position", "mask-size", "max-block-size", "max-height", "max-inline-size", "max-lines", "max-width", "min-block-size", "min-height", "min-inline-size", "min-width", "object-position", "offset", "offset-anchor", "offset-distance", "offset-path", "offset-position", "offset-rotate", "opacity", "order", "outline", "outline-color", "outline-offset", "outline-width", "padding", "padding-block-end", "padding-block-start", "padding-bottom", "padding-inline-end", "padding-inline-start", "padding-left", "padding-right", "padding-top", "perspective", "perspective-origin", "right", "rotate", "row-gap", "scale", "scroll-margin", "scroll-margin-block", "scroll-margin-block-end", "scroll-margin-block-start", "scroll-margin-bottom", "scroll-margin-inline", "scroll-margin-inline-end", "scroll-margin-inline-start", "scroll-margin-left", "scroll-margin-right", "scroll-margin-top", "scroll-padding", "scroll-padding-block", "scroll-padding-block-end", "scroll-padding-block-start", "scroll-padding-bottom", "scroll-padding-inline", "scroll-padding-inline-end", "scroll-padding-inline-start", "scroll-padding-left", "scroll-padding-right", "scroll-padding-top", "scroll-snap-coordinate", "scroll-snap-destination", "scrollbar-color", "shape-image-threshold", "shape-margin", "shape-outside", "tab-size", "text-decoration", "text-decoration-color", "text-decoration-thickness", "text-emphasis", "text-emphasis-color", "text-indent", "text-shadow", "text-underline-offset", "top", "transform", "transform-origin", "translate", "vertical-align", "visibility", "width", "word-spacing", "z-index", "zoom"]);
+var ANIMATABLE_PROP_SET = /* @__PURE__ */ new Set([
+  "-moz-outline-radius",
+  "-moz-outline-radius-bottomleft",
+  "-moz-outline-radius-bottomright",
+  "-moz-outline-radius-topleft",
+  "-moz-outline-radius-topright",
+  "-ms-grid-columns",
+  "-ms-grid-rows",
+  "-webkit-line-clamp",
+  "-webkit-text-fill-color",
+  "-webkit-text-stroke",
+  "-webkit-text-stroke-color",
+  "accent-color",
+  "all",
+  "backdrop-filter",
+  "background",
+  "background-color",
+  "background-position",
+  "background-size",
+  "block-size",
+  "border",
+  "border-block-end",
+  "border-block-end-color",
+  "border-block-end-width",
+  "border-block-start",
+  "border-block-start-color",
+  "border-block-start-width",
+  "border-bottom",
+  "border-bottom-color",
+  "border-bottom-left-radius",
+  "border-bottom-right-radius",
+  "border-bottom-width",
+  "border-color",
+  "border-end-end-radius",
+  "border-end-start-radius",
+  "border-image-outset",
+  "border-image-slice",
+  "border-image-width",
+  "border-inline-end",
+  "border-inline-end-color",
+  "border-inline-end-width",
+  "border-inline-start",
+  "border-inline-start-color",
+  "border-inline-start-width",
+  "border-left",
+  "border-left-color",
+  "border-left-width",
+  "border-radius",
+  "border-right",
+  "border-right-color",
+  "border-right-width",
+  "border-start-end-radius",
+  "border-start-start-radius",
+  "border-top",
+  "border-top-color",
+  "border-top-left-radius",
+  "border-top-right-radius",
+  "border-top-width",
+  "border-width",
+  "bottom",
+  "box-shadow",
+  "caret-color",
+  "clip",
+  "clip-path",
+  "color",
+  "column-count",
+  "column-gap",
+  "column-rule",
+  "column-rule-color",
+  "column-rule-width",
+  "column-width",
+  "columns",
+  "filter",
+  "flex",
+  "flex-basis",
+  "flex-grow",
+  "flex-shrink",
+  "font",
+  "font-size",
+  "font-size-adjust",
+  "font-stretch",
+  "font-variation-settings",
+  "font-weight",
+  "gap",
+  "grid-column-gap",
+  "grid-gap",
+  "grid-row-gap",
+  "grid-template-columns",
+  "grid-template-rows",
+  "height",
+  "inline-size",
+  "input-security",
+  "inset",
+  "inset-block",
+  "inset-block-end",
+  "inset-block-start",
+  "inset-inline",
+  "inset-inline-end",
+  "inset-inline-start",
+  "left",
+  "letter-spacing",
+  "line-clamp",
+  "line-height",
+  "margin",
+  "margin-block-end",
+  "margin-block-start",
+  "margin-bottom",
+  "margin-inline-end",
+  "margin-inline-start",
+  "margin-left",
+  "margin-right",
+  "margin-top",
+  "mask",
+  "mask-border",
+  "mask-position",
+  "mask-size",
+  "max-block-size",
+  "max-height",
+  "max-inline-size",
+  "max-lines",
+  "max-width",
+  "min-block-size",
+  "min-height",
+  "min-inline-size",
+  "min-width",
+  "object-position",
+  "offset",
+  "offset-anchor",
+  "offset-distance",
+  "offset-path",
+  "offset-position",
+  "offset-rotate",
+  "opacity",
+  "order",
+  "outline",
+  "outline-color",
+  "outline-offset",
+  "outline-width",
+  "padding",
+  "padding-block-end",
+  "padding-block-start",
+  "padding-bottom",
+  "padding-inline-end",
+  "padding-inline-start",
+  "padding-left",
+  "padding-right",
+  "padding-top",
+  "perspective",
+  "perspective-origin",
+  "right",
+  "rotate",
+  "row-gap",
+  "scale",
+  "scroll-margin",
+  "scroll-margin-block",
+  "scroll-margin-block-end",
+  "scroll-margin-block-start",
+  "scroll-margin-bottom",
+  "scroll-margin-inline",
+  "scroll-margin-inline-end",
+  "scroll-margin-inline-start",
+  "scroll-margin-left",
+  "scroll-margin-right",
+  "scroll-margin-top",
+  "scroll-padding",
+  "scroll-padding-block",
+  "scroll-padding-block-end",
+  "scroll-padding-block-start",
+  "scroll-padding-bottom",
+  "scroll-padding-inline",
+  "scroll-padding-inline-end",
+  "scroll-padding-inline-start",
+  "scroll-padding-left",
+  "scroll-padding-right",
+  "scroll-padding-top",
+  "scroll-snap-coordinate",
+  "scroll-snap-destination",
+  "scrollbar-color",
+  "shape-image-threshold",
+  "shape-margin",
+  "shape-outside",
+  "tab-size",
+  "text-decoration",
+  "text-decoration-color",
+  "text-decoration-thickness",
+  "text-emphasis",
+  "text-emphasis-color",
+  "text-indent",
+  "text-shadow",
+  "text-underline-offset",
+  "top",
+  "transform",
+  "transform-origin",
+  "translate",
+  "vertical-align",
+  "visibility",
+  "width",
+  "word-spacing",
+  "z-index",
+  "zoom"
+]);
 function optimizeGroupPlayer(players) {
   switch (players.length) {
     case 0:
@@ -438,15 +633,7 @@ function copyAnimationEvent(e2, phaseName, player) {
   return event;
 }
 function makeAnimationEvent(element, triggerName, fromState, toState, phaseName = "", totalTime = 0, disabled) {
-  return {
-    element,
-    triggerName,
-    fromState,
-    toState,
-    phaseName,
-    totalTime,
-    disabled: !!disabled
-  };
+  return { element, triggerName, fromState, toState, phaseName, totalTime, disabled: !!disabled };
 }
 function getOrSetDefaultValue(map2, key, defaultValue) {
   let value = map2.get(key);
@@ -514,66 +701,6 @@ function invokeQuery(element, selector, multi) {
   const elem = element.querySelector(selector);
   return elem ? [elem] : [];
 }
-var NoopAnimationDriver = class _NoopAnimationDriver {
-  /**
-   * @returns Whether `prop` is a valid CSS property
-   */
-  validateStyleProperty(prop) {
-    return validateStyleProperty(prop);
-  }
-  /**
-   *
-   * @returns Whether elm1 contains elm2.
-   */
-  containsElement(elm1, elm2) {
-    return containsElement(elm1, elm2);
-  }
-  /**
-   * @returns Rhe parent of the given element or `null` if the element is the `document`
-   */
-  getParentElement(element) {
-    return getParentElement(element);
-  }
-  /**
-   * @returns The result of the query selector on the element. The array will contain up to 1 item
-   *     if `multi` is  `false`.
-   */
-  query(element, selector, multi) {
-    return invokeQuery(element, selector, multi);
-  }
-  /**
-   * @returns The `defaultValue` or empty string
-   */
-  computeStyle(element, prop, defaultValue) {
-    return defaultValue || "";
-  }
-  /**
-   * @returns An `NoopAnimationPlayer`
-   */
-  animate(element, keyframes, duration, delay2, easing, previousPlayers = [], scrubberAccessRequested) {
-    return new NoopAnimationPlayer(duration, delay2);
-  }
-  static \u0275fac = function NoopAnimationDriver_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _NoopAnimationDriver)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _NoopAnimationDriver,
-    factory: _NoopAnimationDriver.\u0275fac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NoopAnimationDriver, [{
-    type: Injectable
-  }], null, null);
-})();
-var AnimationDriver = class {
-  /**
-   * @deprecated Use the NoopAnimationDriver class.
-   */
-  static NOOP = new NoopAnimationDriver();
-};
-var AnimationStyleNormalizer = class {
-};
 var ONE_SECOND = 1e3;
 var SUBSTITUTION_EXPR_START = "{{";
 var SUBSTITUTION_EXPR_END = "}}";
@@ -584,9 +711,11 @@ var NG_TRIGGER_SELECTOR = ".ng-trigger";
 var NG_ANIMATING_CLASSNAME = "ng-animating";
 var NG_ANIMATING_SELECTOR = ".ng-animating";
 function resolveTimingValue(value) {
-  if (typeof value == "number") return value;
+  if (typeof value == "number")
+    return value;
   const matches = value.match(/^(-?[\.\d]+)(m?s)/);
-  if (!matches || matches.length < 2) return 0;
+  if (!matches || matches.length < 2)
+    return 0;
   return _convertTimeValueToMS(parseFloat(matches[1]), matches[2]);
 }
 function _convertTimeValueToMS(value, unit) {
@@ -603,22 +732,18 @@ function resolveTiming(timings, errors, allowNegativeValues) {
 function parseTimeExpression(exp, errors, allowNegativeValues) {
   const regex = /^(-?[\.\d]+)(m?s)(?:\s+(-?[\.\d]+)(m?s))?(?:\s+([-a-z]+(?:\(.+?\))?))?$/i;
   let duration;
-  let delay2 = 0;
+  let delay = 0;
   let easing = "";
   if (typeof exp === "string") {
     const matches = exp.match(regex);
     if (matches === null) {
       errors.push(invalidTimingValue(exp));
-      return {
-        duration: 0,
-        delay: 0,
-        easing: ""
-      };
+      return { duration: 0, delay: 0, easing: "" };
     }
     duration = _convertTimeValueToMS(parseFloat(matches[1]), matches[2]);
     const delayMatch = matches[3];
     if (delayMatch != null) {
-      delay2 = _convertTimeValueToMS(parseFloat(delayMatch), matches[4]);
+      delay = _convertTimeValueToMS(parseFloat(delayMatch), matches[4]);
     }
     const easingVal = matches[5];
     if (easingVal) {
@@ -634,7 +759,7 @@ function parseTimeExpression(exp, errors, allowNegativeValues) {
       errors.push(negativeStepValue());
       containsErrors = true;
     }
-    if (delay2 < 0) {
+    if (delay < 0) {
       errors.push(negativeDelayValue());
       containsErrors = true;
     }
@@ -642,11 +767,7 @@ function parseTimeExpression(exp, errors, allowNegativeValues) {
       errors.splice(startIndex, 0, invalidTimingValue(exp));
     }
   }
-  return {
-    duration,
-    delay: delay2,
-    easing
-  };
+  return { duration, delay, easing };
 }
 function normalizeKeyframes(keyframes) {
   if (!keyframes.length) {
@@ -674,7 +795,8 @@ function eraseStyles(element, styles) {
 }
 function normalizeAnimationEntry(steps) {
   if (Array.isArray(steps)) {
-    if (steps.length == 1) return steps[0];
+    if (steps.length == 1)
+      return steps[0];
     return sequence(steps);
   }
   return steps;
@@ -721,8 +843,8 @@ function dashCaseToCamelCase(input) {
 function camelCaseToDashCase(input) {
   return input.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 }
-function allowPreviousPlayerStylesMerge(duration, delay2) {
-  return duration === 0 || delay2 === 0;
+function allowPreviousPlayerStylesMerge(duration, delay) {
+  return duration === 0 || delay === 0;
 }
 function balancePreviousStylesIntoKeyframes(element, keyframes, previousStyles) {
   if (previousStyles.size && keyframes.length) {
@@ -778,6 +900,68 @@ function visitDslNode(visitor, node, context) {
 function computeStyle(element, prop) {
   return window.getComputedStyle(element)[prop];
 }
+
+// node_modules/@angular/animations/fesm2022/browser.mjs
+var NoopAnimationDriver = class _NoopAnimationDriver {
+  /**
+   * @returns Whether `prop` is a valid CSS property
+   */
+  validateStyleProperty(prop) {
+    return validateStyleProperty(prop);
+  }
+  /**
+   *
+   * @returns Whether elm1 contains elm2.
+   */
+  containsElement(elm1, elm2) {
+    return containsElement(elm1, elm2);
+  }
+  /**
+   * @returns Rhe parent of the given element or `null` if the element is the `document`
+   */
+  getParentElement(element) {
+    return getParentElement(element);
+  }
+  /**
+   * @returns The result of the query selector on the element. The array will contain up to 1 item
+   *     if `multi` is  `false`.
+   */
+  query(element, selector, multi) {
+    return invokeQuery(element, selector, multi);
+  }
+  /**
+   * @returns The `defaultValue` or empty string
+   */
+  computeStyle(element, prop, defaultValue) {
+    return defaultValue || "";
+  }
+  /**
+   * @returns An `NoopAnimationPlayer`
+   */
+  animate(element, keyframes, duration, delay, easing, previousPlayers = [], scrubberAccessRequested) {
+    return new NoopAnimationPlayer(duration, delay);
+  }
+  static \u0275fac = function NoopAnimationDriver_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NoopAnimationDriver)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _NoopAnimationDriver,
+    factory: _NoopAnimationDriver.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NoopAnimationDriver, [{
+    type: Injectable
+  }], null, null);
+})();
+var AnimationDriver = class {
+  /**
+   * @deprecated Use the NoopAnimationDriver class.
+   */
+  static NOOP = new NoopAnimationDriver();
+};
+var AnimationStyleNormalizer = class {
+};
 var DIMENSIONAL_PROP_SET = /* @__PURE__ */ new Set(["width", "height", "minWidth", "minHeight", "maxWidth", "maxHeight", "left", "top", "bottom", "right", "fontSize", "outlineWidth", "outlineOffset", "paddingTop", "paddingLeft", "paddingBottom", "paddingRight", "marginTop", "marginLeft", "marginBottom", "marginRight", "borderRadius", "borderWidth", "borderTopWidth", "borderLeftWidth", "borderRightWidth", "borderBottomWidth", "textIndent", "perspective"]);
 var WebAnimationsStyleNormalizer = class extends AnimationStyleNormalizer {
   normalizePropertyName(propertyName, errors) {
@@ -1321,14 +1505,14 @@ function normalizeAnimationOptions(options) {
   }
   return options;
 }
-function makeTimingAst(duration, delay2, easing) {
+function makeTimingAst(duration, delay, easing) {
   return {
     duration,
-    delay: delay2,
+    delay,
     easing
   };
 }
-function createTimelineInstruction(element, keyframes, preStyleProps, postStyleProps, duration, delay2, easing = null, subTimeline = false) {
+function createTimelineInstruction(element, keyframes, preStyleProps, postStyleProps, duration, delay, easing = null, subTimeline = false) {
   return {
     type: 1,
     element,
@@ -1336,8 +1520,8 @@ function createTimelineInstruction(element, keyframes, preStyleProps, postStyleP
     preStyleProps,
     postStyleProps,
     duration,
-    delay: delay2,
-    totalTime: duration + delay2,
+    delay,
+    totalTime: duration + delay,
     easing,
     subTimeline
   };
@@ -1374,8 +1558,8 @@ var AnimationTimelineBuilderVisitor = class {
     subInstructions = subInstructions || new ElementInstructionMap();
     const context = new AnimationTimelineContext(driver, rootElement, subInstructions, enterClassName, leaveClassName, errors, []);
     context.options = options;
-    const delay2 = options.delay ? resolveTimingValue(options.delay) : 0;
-    context.currentTimeline.delayNextStep(delay2);
+    const delay = options.delay ? resolveTimingValue(options.delay) : 0;
+    context.currentTimeline.delayNextStep(delay);
     context.currentTimeline.setStyles([startingStyles], null, context.errors, options);
     visitDslNode(this, ast, context);
     const timelines = context.timelines.filter((timeline) => timeline.containsAnimation());
@@ -1392,7 +1576,7 @@ var AnimationTimelineBuilderVisitor = class {
         lastRootTimeline.setStyles([finalStyles], null, context.errors, options);
       }
     }
-    return timelines.length ? timelines.map((timeline) => timeline.buildKeyframes()) : [createTimelineInstruction(rootElement, [], [], [], 0, delay2, "", false)];
+    return timelines.length ? timelines.map((timeline) => timeline.buildKeyframes()) : [createTimelineInstruction(rootElement, [], [], [], 0, delay, "", false)];
   }
   visitTrigger(ast, context) {
   }
@@ -1433,10 +1617,10 @@ var AnimationTimelineBuilderVisitor = class {
     const startTime = context.currentTimeline.currentTime;
     let furthestTime = startTime;
     const duration = options.duration != null ? resolveTimingValue(options.duration) : null;
-    const delay2 = options.delay != null ? resolveTimingValue(options.delay) : null;
+    const delay = options.delay != null ? resolveTimingValue(options.delay) : null;
     if (duration !== 0) {
       instructions.forEach((instruction) => {
-        const instructionTimings = context.appendInstructionToTimeline(instruction, duration, delay2);
+        const instructionTimings = context.appendInstructionToTimeline(instruction, duration, delay);
         furthestTime = Math.max(furthestTime, instructionTimings.duration + instructionTimings.delay);
       });
     }
@@ -1459,8 +1643,8 @@ var AnimationTimelineBuilderVisitor = class {
           ctx.currentTimeline.snapshotCurrentStyles();
           ctx.previousNode = DEFAULT_NOOP_PREVIOUS_NODE;
         }
-        const delay2 = resolveTimingValue(options.delay);
-        ctx.delayNextStep(delay2);
+        const delay = resolveTimingValue(options.delay);
+        ctx.delayNextStep(delay);
       }
     }
     if (ast.steps.length) {
@@ -1475,11 +1659,11 @@ var AnimationTimelineBuilderVisitor = class {
   visitGroup(ast, context) {
     const innerTimelines = [];
     let furthestTime = context.currentTimeline.currentTime;
-    const delay2 = ast.options && ast.options.delay ? resolveTimingValue(ast.options.delay) : 0;
+    const delay = ast.options && ast.options.delay ? resolveTimingValue(ast.options.delay) : 0;
     ast.steps.forEach((s) => {
       const innerContext = context.createSubContext(ast.options);
-      if (delay2) {
-        innerContext.delayNextStep(delay2);
+      if (delay) {
+        innerContext.delayNextStep(delay);
       }
       visitDslNode(this, s, innerContext);
       furthestTime = Math.max(furthestTime, innerContext.currentTimeline.currentTime);
@@ -1554,8 +1738,8 @@ var AnimationTimelineBuilderVisitor = class {
   visitQuery(ast, context) {
     const startTime = context.currentTimeline.currentTime;
     const options = ast.options || {};
-    const delay2 = options.delay ? resolveTimingValue(options.delay) : 0;
-    if (delay2 && (context.previousNode.type === AnimationMetadataType.Style || startTime == 0 && context.currentTimeline.hasCurrentStyleProperties())) {
+    const delay = options.delay ? resolveTimingValue(options.delay) : 0;
+    if (delay && (context.previousNode.type === AnimationMetadataType.Style || startTime == 0 && context.currentTimeline.hasCurrentStyleProperties())) {
       context.currentTimeline.snapshotCurrentStyles();
       context.previousNode = DEFAULT_NOOP_PREVIOUS_NODE;
     }
@@ -1566,8 +1750,8 @@ var AnimationTimelineBuilderVisitor = class {
     elms.forEach((element, i) => {
       context.currentQueryIndex = i;
       const innerContext = context.createSubContext(ast.options, element);
-      if (delay2) {
-        innerContext.delayNextStep(delay2);
+      if (delay) {
+        innerContext.delayNextStep(delay);
       }
       if (element === context.element) {
         sameElementTimeline = innerContext.currentTimeline;
@@ -1592,19 +1776,19 @@ var AnimationTimelineBuilderVisitor = class {
     const timings = ast.timings;
     const duration = Math.abs(timings.duration);
     const maxTime = duration * (context.currentQueryTotal - 1);
-    let delay2 = duration * context.currentQueryIndex;
+    let delay = duration * context.currentQueryIndex;
     let staggerTransformer = timings.duration < 0 ? "reverse" : timings.easing;
     switch (staggerTransformer) {
       case "reverse":
-        delay2 = maxTime - delay2;
+        delay = maxTime - delay;
         break;
       case "full":
-        delay2 = parentContext.currentStaggerTime;
+        delay = parentContext.currentStaggerTime;
         break;
     }
     const timeline = context.currentTimeline;
-    if (delay2) {
-      timeline.delayNextStep(delay2);
+    if (delay) {
+      timeline.delayNextStep(delay);
     }
     const startingTime = timeline.currentTime;
     visitDslNode(this, ast.animation, context);
@@ -1699,10 +1883,10 @@ var AnimationTimelineContext = class _AnimationTimelineContext {
     this.timelines.push(this.currentTimeline);
     return this.currentTimeline;
   }
-  appendInstructionToTimeline(instruction, duration, delay2) {
+  appendInstructionToTimeline(instruction, duration, delay) {
     const updatedTimings = {
       duration: duration != null ? duration : instruction.duration,
-      delay: this.currentTimeline.currentTime + (delay2 != null ? delay2 : 0) + instruction.delay,
+      delay: this.currentTimeline.currentTime + (delay != null ? delay : 0) + instruction.delay,
       easing: ""
     };
     const builder = new SubTimelineBuilder(this._driver, instruction.element, instruction.keyframes, instruction.preStyleProps, instruction.postStyleProps, updatedTimings, instruction.stretchStartingKeyframe);
@@ -1712,9 +1896,9 @@ var AnimationTimelineContext = class _AnimationTimelineContext {
   incrementTime(time) {
     this.currentTimeline.forwardTime(this.currentTimeline.duration + time);
   }
-  delayNextStep(delay2) {
-    if (delay2 > 0) {
-      this.currentTimeline.delayNextStep(delay2);
+  delayNextStep(delay) {
+    if (delay > 0) {
+      this.currentTimeline.delayNextStep(delay);
     }
   }
   invokeQuery(selector, originalSelector, limit, includeSelf, optional, errors) {
@@ -1785,15 +1969,15 @@ var TimelineBuilder = class _TimelineBuilder {
   get currentTime() {
     return this.startTime + this.duration;
   }
-  delayNextStep(delay2) {
+  delayNextStep(delay) {
     const hasPreStyleStep = this._keyframes.size === 1 && this._pendingStyles.size;
     if (this.duration || hasPreStyleStep) {
-      this.forwardTime(this.currentTime + delay2);
+      this.forwardTime(this.currentTime + delay);
       if (hasPreStyleStep) {
         this.snapshotCurrentStyles();
       }
     } else {
-      this.startTime += delay2;
+      this.startTime += delay;
     }
   }
   fork(element, currentTime) {
@@ -1947,14 +2131,14 @@ var SubTimelineBuilder = class extends TimelineBuilder {
   buildKeyframes() {
     let keyframes = this.keyframes;
     let {
-      delay: delay2,
+      delay,
       duration,
       easing
     } = this.timings;
-    if (this._stretchStartingKeyframe && delay2) {
+    if (this._stretchStartingKeyframe && delay) {
       const newKeyframes = [];
-      const totalTime = duration + delay2;
-      const startingGap = delay2 / totalTime;
+      const totalTime = duration + delay;
+      const startingGap = delay / totalTime;
       const newFirstKeyframe = new Map(keyframes[0]);
       newFirstKeyframe.set("offset", 0);
       newKeyframes.push(newFirstKeyframe);
@@ -1965,16 +2149,16 @@ var SubTimelineBuilder = class extends TimelineBuilder {
       for (let i = 1; i <= limit; i++) {
         let kf = new Map(keyframes[i]);
         const oldOffset = kf.get("offset");
-        const timeAtKeyframe = delay2 + oldOffset * duration;
+        const timeAtKeyframe = delay + oldOffset * duration;
         kf.set("offset", roundOffset(timeAtKeyframe / totalTime));
         newKeyframes.push(kf);
       }
       duration = totalTime;
-      delay2 = 0;
+      delay = 0;
       easing = "";
       keyframes = newKeyframes;
     }
-    return createTimelineInstruction(this.element, keyframes, this.preStyleProps, this.postStyleProps, duration, delay2, easing, true);
+    return createTimelineInstruction(this.element, keyframes, this.preStyleProps, this.postStyleProps, duration, delay, easing, true);
   }
 };
 function roundOffset(offset, decimalPoints = 3) {
@@ -2173,7 +2357,7 @@ var AnimationTrigger = class {
     ast.transitions.forEach((ast2) => {
       this.transitionFactories.push(new AnimationTransitionFactory(name, ast2, this.states));
     });
-    this.fallbackTransition = createFallbackTransition(name, this.states, this._normalizer);
+    this.fallbackTransition = createFallbackTransition(name, this.states);
   }
   get containsQueries() {
     return this.ast.queryCount > 0;
@@ -2212,7 +2396,7 @@ function balanceProperties(stateMap, key1, key2) {
     stateMap.set(key1, stateMap.get(key2));
   }
 }
-var EMPTY_INSTRUCTION_MAP = new ElementInstructionMap();
+var EMPTY_INSTRUCTION_MAP = /* @__PURE__ */ new ElementInstructionMap();
 var TimelineAnimationEngine = class {
   bodyNode;
   _driver;
@@ -2400,7 +2584,7 @@ var StateValue = class {
   }
 };
 var VOID_VALUE = "void";
-var DEFAULT_STATE_VALUE = new StateValue(VOID_VALUE);
+var DEFAULT_STATE_VALUE = /* @__PURE__ */ new StateValue(VOID_VALUE);
 var AnimationTransitionNamespace = class {
   id;
   hostElement;
@@ -3992,11 +4176,11 @@ var WebAnimationsDriver = class {
   computeStyle(element, prop, defaultValue) {
     return computeStyle(element, prop);
   }
-  animate(element, keyframes, duration, delay2, easing, previousPlayers = []) {
-    const fill2 = delay2 == 0 ? "both" : "forwards";
+  animate(element, keyframes, duration, delay, easing, previousPlayers = []) {
+    const fill2 = delay == 0 ? "both" : "forwards";
     const playerOptions = {
       duration,
-      delay: delay2,
+      delay,
       fill: fill2
     };
     if (easing) {
@@ -4004,7 +4188,7 @@ var WebAnimationsDriver = class {
     }
     const previousStyles = /* @__PURE__ */ new Map();
     const previousWebAnimationPlayers = previousPlayers.filter((player) => player instanceof WebAnimationsPlayer);
-    if (allowPreviousPlayerStylesMerge(duration, delay2)) {
+    if (allowPreviousPlayerStylesMerge(duration, delay)) {
       previousWebAnimationPlayers.forEach((player) => {
         player.currentSnapshot.forEach((val, prop) => previousStyles.set(prop, val));
       });
@@ -4363,7 +4547,8 @@ var BrowserAnimationsModule = class _BrowserAnimationsModule {
     return new (__ngFactoryType__ || _BrowserAnimationsModule)();
   };
   static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _BrowserAnimationsModule
+    type: _BrowserAnimationsModule,
+    exports: [BrowserModule]
   });
   static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
     providers: BROWSER_ANIMATIONS_PROVIDERS,
@@ -4384,7 +4569,8 @@ var NoopAnimationsModule = class _NoopAnimationsModule {
     return new (__ngFactoryType__ || _NoopAnimationsModule)();
   };
   static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _NoopAnimationsModule
+    type: _NoopAnimationsModule,
+    exports: [BrowserModule]
   });
   static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
     providers: BROWSER_NOOP_ANIMATIONS_PROVIDERS,
@@ -4418,39 +4604,66 @@ function subSeconds(date, amount, options) {
 
 // node_modules/@angular/service-worker/fesm2022/service-worker.mjs
 var ERR_SW_NOT_SUPPORTED = "Service workers are disabled or not supported by this browser";
-function errorObservable(message) {
-  return defer(() => throwError(new Error(message)));
-}
 var NgswCommChannel = class {
   serviceWorker;
   worker;
   registration;
   events;
-  constructor(serviceWorker) {
+  constructor(serviceWorker, injector) {
     this.serviceWorker = serviceWorker;
     if (!serviceWorker) {
-      this.worker = this.events = this.registration = errorObservable(ERR_SW_NOT_SUPPORTED);
+      this.worker = this.events = this.registration = new Observable((subscriber) => subscriber.error(new RuntimeError(5601, (typeof ngDevMode === "undefined" || ngDevMode) && ERR_SW_NOT_SUPPORTED)));
     } else {
-      const controllerChangeEvents = fromEvent(serviceWorker, "controllerchange");
-      const controllerChanges = controllerChangeEvents.pipe(map(() => serviceWorker.controller));
-      const currentController = defer(() => of(serviceWorker.controller));
-      const controllerWithChanges = concat(currentController, controllerChanges);
-      this.worker = controllerWithChanges.pipe(filter((c) => !!c));
+      let currentWorker = null;
+      const workerSubject = new Subject();
+      this.worker = new Observable((subscriber) => {
+        if (currentWorker !== null) {
+          subscriber.next(currentWorker);
+        }
+        return workerSubject.subscribe((v) => subscriber.next(v));
+      });
+      const updateController = () => {
+        const {
+          controller
+        } = serviceWorker;
+        if (controller === null) {
+          return;
+        }
+        currentWorker = controller;
+        workerSubject.next(currentWorker);
+      };
+      serviceWorker.addEventListener("controllerchange", updateController);
+      updateController();
       this.registration = this.worker.pipe(switchMap(() => serviceWorker.getRegistration()));
-      const rawEvents = fromEvent(serviceWorker, "message");
-      const rawEventPayload = rawEvents.pipe(map((event) => event.data));
-      const eventsUnconnected = rawEventPayload.pipe(filter((event) => event && event.type));
-      const events = eventsUnconnected.pipe(publish());
-      events.connect();
-      this.events = events;
+      const _events = new Subject();
+      this.events = _events.asObservable();
+      const messageListener = (event) => {
+        const {
+          data
+        } = event;
+        if (data?.type) {
+          _events.next(data);
+        }
+      };
+      serviceWorker.addEventListener("message", messageListener);
+      const appRef = injector?.get(ApplicationRef, null, {
+        optional: true
+      });
+      appRef?.onDestroy(() => {
+        serviceWorker.removeEventListener("controllerchange", updateController);
+        serviceWorker.removeEventListener("message", messageListener);
+      });
     }
   }
   postMessage(action, payload) {
-    return this.worker.pipe(take(1), tap((sw) => {
-      sw.postMessage(__spreadValues({
-        action
-      }, payload));
-    })).toPromise().then(() => void 0);
+    return new Promise((resolve) => {
+      this.worker.pipe(take(1)).subscribe((sw) => {
+        sw.postMessage(__spreadValues({
+          action
+        }, payload));
+        resolve();
+      });
+    });
   }
   postMessageWithOperation(type, payload, operationNonce) {
     const waitForOperationCompleted = this.waitForOperationCompleted(operationNonce);
@@ -4473,12 +4686,17 @@ var NgswCommChannel = class {
     return this.eventsOfType(type).pipe(take(1));
   }
   waitForOperationCompleted(nonce) {
-    return this.eventsOfType("OPERATION_COMPLETED").pipe(filter((event) => event.nonce === nonce), take(1), map((event) => {
-      if (event.result !== void 0) {
-        return event.result;
-      }
-      throw new Error(event.error);
-    })).toPromise();
+    return new Promise((resolve, reject) => {
+      this.eventsOfType("OPERATION_COMPLETED").pipe(filter((event) => event.nonce === nonce), take(1), map((event) => {
+        if (event.result !== void 0) {
+          return event.result;
+        }
+        throw new Error(event.error);
+      })).subscribe({
+        next: resolve,
+        error: reject
+      });
+    });
   }
   get isEnabled() {
     return !!this.serviceWorker;
@@ -4529,7 +4747,14 @@ var SwPush = class _SwPush {
     this.notificationClicks = this.sw.eventsOfType("NOTIFICATION_CLICK").pipe(map((message) => message.data));
     this.pushManager = this.sw.registration.pipe(map((registration) => registration.pushManager));
     const workerDrivenSubscriptions = this.pushManager.pipe(switchMap((pm) => pm.getSubscription()));
-    this.subscription = merge(workerDrivenSubscriptions, this.subscriptionChanges);
+    this.subscription = new Observable((subscriber) => {
+      const workerDrivenSubscription = workerDrivenSubscriptions.subscribe(subscriber);
+      const subscriptionChanges = this.subscriptionChanges.subscribe(subscriber);
+      return () => {
+        workerDrivenSubscription.unsubscribe();
+        subscriptionChanges.unsubscribe();
+      };
+    });
   }
   /**
    * Subscribes to Web Push Notifications,
@@ -4551,9 +4776,14 @@ var SwPush = class _SwPush {
       applicationServerKey[i] = key.charCodeAt(i);
     }
     pushOptions.applicationServerKey = applicationServerKey;
-    return this.pushManager.pipe(switchMap((pm) => pm.subscribe(pushOptions)), take(1)).toPromise().then((sub) => {
-      this.subscriptionChanges.next(sub);
-      return sub;
+    return new Promise((resolve, reject) => {
+      this.pushManager.pipe(switchMap((pm) => pm.subscribe(pushOptions)), take(1)).subscribe({
+        next: (sub) => {
+          this.subscriptionChanges.next(sub);
+          resolve(sub);
+        },
+        error: reject
+      });
     });
   }
   /**
@@ -4568,16 +4798,21 @@ var SwPush = class _SwPush {
     }
     const doUnsubscribe = (sub) => {
       if (sub === null) {
-        throw new Error("Not subscribed to push notifications.");
+        throw new RuntimeError(5602, (typeof ngDevMode === "undefined" || ngDevMode) && "Not subscribed to push notifications.");
       }
       return sub.unsubscribe().then((success) => {
         if (!success) {
-          throw new Error("Unsubscribe failed!");
+          throw new RuntimeError(5603, (typeof ngDevMode === "undefined" || ngDevMode) && "Unsubscribe failed!");
         }
         this.subscriptionChanges.next(null);
       });
     };
-    return this.subscription.pipe(take(1), switchMap(doUnsubscribe)).toPromise();
+    return new Promise((resolve, reject) => {
+      this.subscription.pipe(take(1), switchMap(doUnsubscribe)).subscribe({
+        next: resolve,
+        error: reject
+      });
+    });
   }
   decodeBase64(input) {
     return atob(input);
@@ -4622,6 +4857,7 @@ var SwUpdate = class _SwUpdate {
   get isEnabled() {
     return this.sw.isEnabled;
   }
+  ongoingCheckForUpdate = null;
   constructor(sw) {
     this.sw = sw;
     if (!sw.isEnabled) {
@@ -4645,10 +4881,16 @@ var SwUpdate = class _SwUpdate {
     if (!this.sw.isEnabled) {
       return Promise.reject(new Error(ERR_SW_NOT_SUPPORTED));
     }
+    if (this.ongoingCheckForUpdate) {
+      return this.ongoingCheckForUpdate;
+    }
     const nonce = this.sw.generateNonce();
-    return this.sw.postMessageWithOperation("CHECK_FOR_UPDATES", {
+    this.ongoingCheckForUpdate = this.sw.postMessageWithOperation("CHECK_FOR_UPDATES", {
       nonce
-    }, nonce);
+    }, nonce).finally(() => {
+      this.ongoingCheckForUpdate = null;
+    });
+    return this.ongoingCheckForUpdate;
   }
   /**
    * Updates the current client (i.e. browser tab) to the latest version that is ready for
@@ -4676,7 +4918,7 @@ var SwUpdate = class _SwUpdate {
    */
   activateUpdate() {
     if (!this.sw.isEnabled) {
-      return Promise.reject(new Error(ERR_SW_NOT_SUPPORTED));
+      return Promise.reject(new RuntimeError(5601, (typeof ngDevMode === "undefined" || ngDevMode) && ERR_SW_NOT_SUPPORTED));
     }
     const nonce = this.sw.generateNonce();
     return this.sw.postMessageWithOperation("ACTIVATE_UPDATE", {
@@ -4699,57 +4941,66 @@ var SwUpdate = class _SwUpdate {
   }], null);
 })();
 var SCRIPT = new InjectionToken(ngDevMode ? "NGSW_REGISTER_SCRIPT" : "");
-function ngswAppInitializer(injector, script, options) {
-  return () => {
-    if (false) {
-      return;
-    }
-    if (!("serviceWorker" in navigator && options.enabled !== false)) {
-      return;
-    }
-    const ngZone = injector.get(NgZone);
-    const appRef = injector.get(ApplicationRef);
-    ngZone.runOutsideAngular(() => {
-      const sw = navigator.serviceWorker;
-      const onControllerChange = () => sw.controller?.postMessage({
-        action: "INITIALIZE"
-      });
-      sw.addEventListener("controllerchange", onControllerChange);
-      appRef.onDestroy(() => {
-        sw.removeEventListener("controllerchange", onControllerChange);
-      });
+function ngswAppInitializer() {
+  if (false) {
+    return;
+  }
+  const options = inject(SwRegistrationOptions);
+  if (!("serviceWorker" in navigator && options.enabled !== false)) {
+    return;
+  }
+  const script = inject(SCRIPT);
+  const ngZone = inject(NgZone);
+  const appRef = inject(ApplicationRef);
+  ngZone.runOutsideAngular(() => {
+    const sw = navigator.serviceWorker;
+    const onControllerChange = () => sw.controller?.postMessage({
+      action: "INITIALIZE"
     });
-    let readyToRegister$;
-    if (typeof options.registrationStrategy === "function") {
-      readyToRegister$ = options.registrationStrategy();
+    sw.addEventListener("controllerchange", onControllerChange);
+    appRef.onDestroy(() => {
+      sw.removeEventListener("controllerchange", onControllerChange);
+    });
+  });
+  ngZone.runOutsideAngular(() => {
+    let readyToRegister;
+    const {
+      registrationStrategy
+    } = options;
+    if (typeof registrationStrategy === "function") {
+      readyToRegister = new Promise((resolve) => registrationStrategy().subscribe(() => resolve()));
     } else {
-      const [strategy, ...args] = (options.registrationStrategy || "registerWhenStable:30000").split(":");
+      const [strategy, ...args] = (registrationStrategy || "registerWhenStable:30000").split(":");
       switch (strategy) {
         case "registerImmediately":
-          readyToRegister$ = of(null);
+          readyToRegister = Promise.resolve();
           break;
         case "registerWithDelay":
-          readyToRegister$ = delayWithTimeout(+args[0] || 0);
+          readyToRegister = delayWithTimeout(+args[0] || 0);
           break;
         case "registerWhenStable":
-          const whenStable$ = from(injector.get(ApplicationRef).whenStable());
-          readyToRegister$ = !args[0] ? whenStable$ : merge(whenStable$, delayWithTimeout(+args[0]));
+          readyToRegister = Promise.race([appRef.whenStable(), delayWithTimeout(+args[0])]);
           break;
         default:
-          throw new Error(`Unknown ServiceWorker registration strategy: ${options.registrationStrategy}`);
+          throw new RuntimeError(5600, (typeof ngDevMode === "undefined" || ngDevMode) && `Unknown ServiceWorker registration strategy: ${options.registrationStrategy}`);
       }
     }
-    ngZone.runOutsideAngular(() => readyToRegister$.pipe(take(1)).subscribe(() => navigator.serviceWorker.register(script, {
-      scope: options.scope
-    }).catch((err) => console.error("Service worker registration failed with:", err))));
-  };
+    readyToRegister.then(() => {
+      if (appRef.destroyed) {
+        return;
+      }
+      navigator.serviceWorker.register(script, {
+        scope: options.scope
+      }).catch((err) => console.error(formatRuntimeError(5604, (typeof ngDevMode === "undefined" || ngDevMode) && "Service worker registration failed with: " + err)));
+    });
+  });
 }
 function delayWithTimeout(timeout) {
-  return of(null).pipe(delay(timeout));
+  return new Promise((resolve) => setTimeout(resolve, timeout));
 }
-function ngswCommChannelFactory(opts) {
+function ngswCommChannelFactory(opts, injector) {
   const isBrowser2 = true;
-  return new NgswCommChannel(isBrowser2 && opts.enabled !== false ? navigator.serviceWorker : void 0);
+  return new NgswCommChannel(isBrowser2 && opts.enabled !== false ? navigator.serviceWorker : void 0, injector);
 }
 var SwRegistrationOptions = class {
   /**
@@ -4806,13 +5057,8 @@ function provideServiceWorker(script, options = {}) {
   }, {
     provide: NgswCommChannel,
     useFactory: ngswCommChannelFactory,
-    deps: [SwRegistrationOptions]
-  }, {
-    provide: APP_INITIALIZER,
-    useFactory: ngswAppInitializer,
-    deps: [Injector, SCRIPT, SwRegistrationOptions],
-    multi: true
-  }]);
+    deps: [SwRegistrationOptions, Injector]
+  }, provideAppInitializer(ngswAppInitializer)]);
 }
 var ServiceWorkerModule = class _ServiceWorkerModule {
   /**
@@ -4846,221 +5092,75 @@ var ServiceWorkerModule = class _ServiceWorkerModule {
   }], null, null);
 })();
 
-// node_modules/@angular/common/locales/ar.mjs
+// node_modules/@angular/common/locales/ar.js
 var u = void 0;
 function plural(val) {
   const n2 = val;
-  if (n2 === 0) return 0;
-  if (n2 === 1) return 1;
-  if (n2 === 2) return 2;
-  if (n2 % 100 === Math.floor(n2 % 100) && n2 % 100 >= 3 && n2 % 100 <= 10) return 3;
-  if (n2 % 100 === Math.floor(n2 % 100) && n2 % 100 >= 11 && n2 % 100 <= 99) return 4;
+  if (n2 === 0)
+    return 0;
+  if (n2 === 1)
+    return 1;
+  if (n2 === 2)
+    return 2;
+  if (n2 % 100 === Math.floor(n2 % 100) && (n2 % 100 >= 3 && n2 % 100 <= 10))
+    return 3;
+  if (n2 % 100 === Math.floor(n2 % 100) && (n2 % 100 >= 11 && n2 % 100 <= 99))
+    return 4;
   return 5;
 }
-var ar_default = ["ar", [["\u0635", "\u0645"], u, u], [["\u0635", "\u0645"], u, ["\u0635\u0628\u0627\u062D\u064B\u0627", "\u0645\u0633\u0627\u0621\u064B"]], [["\u062D", "\u0646", "\u062B", "\u0631", "\u062E", "\u062C", "\u0633"], ["\u0627\u0644\u0623\u062D\u062F", "\u0627\u0644\u0627\u062B\u0646\u064A\u0646", "\u0627\u0644\u062B\u0644\u0627\u062B\u0627\u0621", "\u0627\u0644\u0623\u0631\u0628\u0639\u0627\u0621", "\u0627\u0644\u062E\u0645\u064A\u0633", "\u0627\u0644\u062C\u0645\u0639\u0629", "\u0627\u0644\u0633\u0628\u062A"], u, ["\u0623\u062D\u062F", "\u0625\u062B\u0646\u064A\u0646", "\u062B\u0644\u0627\u062B\u0627\u0621", "\u0623\u0631\u0628\u0639\u0627\u0621", "\u062E\u0645\u064A\u0633", "\u062C\u0645\u0639\u0629", "\u0633\u0628\u062A"]], u, [["\u064A", "\u0641", "\u0645", "\u0623", "\u0648", "\u0646", "\u0644", "\u063A", "\u0633", "\u0643", "\u0628", "\u062F"], ["\u064A\u0646\u0627\u064A\u0631", "\u0641\u0628\u0631\u0627\u064A\u0631", "\u0645\u0627\u0631\u0633", "\u0623\u0628\u0631\u064A\u0644", "\u0645\u0627\u064A\u0648", "\u064A\u0648\u0646\u064A\u0648", "\u064A\u0648\u0644\u064A\u0648", "\u0623\u063A\u0633\u0637\u0633", "\u0633\u0628\u062A\u0645\u0628\u0631", "\u0623\u0643\u062A\u0648\u0628\u0631", "\u0646\u0648\u0641\u0645\u0628\u0631", "\u062F\u064A\u0633\u0645\u0628\u0631"], u], u, [["\u0642.\u0645", "\u0645"], u, ["\u0642\u0628\u0644 \u0627\u0644\u0645\u064A\u0644\u0627\u062F", "\u0645\u064A\u0644\u0627\u062F\u064A"]], 6, [5, 6], ["d\u200F/M\u200F/y", "dd\u200F/MM\u200F/y", "d MMMM y", "EEEE\u060C d MMMM y"], ["h:mm a", "h:mm:ss a", "h:mm:ss a z", "h:mm:ss a zzzz"], ["{1}, {0}", u, "{1} \u0641\u064A {0}", u], [".", ",", ";", "\u200E%\u200E", "\u200E+", "\u200E-", "E", "\xD7", "\u2030", "\u221E", "\u0644\u064A\u0633\xA0\u0631\u0642\u0645\u064B\u0627", ":"], ["#,##0.###", "#,##0%", "\xA4\xA0#,##0.00", "#E0"], "EGP", "\u062C.\u0645.\u200F", "\u062C\u0646\u064A\u0647 \u0645\u0635\u0631\u064A", {
-  "AED": ["\u062F.\u0625.\u200F"],
-  "ARS": [u, "AR$"],
-  "AUD": ["AU$"],
-  "BBD": [u, "BB$"],
-  "BHD": ["\u062F.\u0628.\u200F"],
-  "BMD": [u, "BM$"],
-  "BND": [u, "BN$"],
-  "BSD": [u, "BS$"],
-  "BYN": [u, "\u0440."],
-  "BZD": [u, "BZ$"],
-  "CAD": ["CA$"],
-  "CLP": [u, "CL$"],
-  "CNY": ["CN\xA5"],
-  "COP": [u, "CO$"],
-  "CUP": [u, "CU$"],
-  "DOP": [u, "DO$"],
-  "DZD": ["\u062F.\u062C.\u200F"],
-  "EGP": ["\u062C.\u0645.\u200F", "E\xA3"],
-  "FJD": [u, "FJ$"],
-  "GBP": ["UK\xA3"],
-  "GYD": [u, "GY$"],
-  "HKD": ["HK$"],
-  "IQD": ["\u062F.\u0639.\u200F"],
-  "IRR": ["\u0631.\u0625."],
-  "JMD": [u, "JM$"],
-  "JOD": ["\u062F.\u0623.\u200F"],
-  "JPY": ["JP\xA5"],
-  "KWD": ["\u062F.\u0643.\u200F"],
-  "KYD": [u, "KY$"],
-  "LBP": ["\u0644.\u0644.\u200F", "L\xA3"],
-  "LRD": [u, "$LR"],
-  "LYD": ["\u062F.\u0644.\u200F"],
-  "MAD": ["\u062F.\u0645.\u200F"],
-  "MRU": ["\u0623.\u0645."],
-  "MXN": ["MX$"],
-  "NZD": ["NZ$"],
-  "OMR": ["\u0631.\u0639.\u200F"],
-  "PHP": [u, "\u20B1"],
-  "QAR": ["\u0631.\u0642.\u200F"],
-  "SAR": ["\u0631.\u0633.\u200F"],
-  "SBD": [u, "SB$"],
-  "SDD": ["\u062F.\u0633.\u200F"],
-  "SDG": ["\u062C.\u0633."],
-  "SRD": [u, "SR$"],
-  "SYP": ["\u0644.\u0633.\u200F", "\xA3"],
-  "THB": ["\u0E3F"],
-  "TND": ["\u062F.\u062A.\u200F"],
-  "TTD": [u, "TT$"],
-  "TWD": ["NT$"],
-  "USD": ["US$"],
-  "UYU": [u, "UY$"],
-  "YER": ["\u0631.\u064A.\u200F"]
-}, "rtl", plural];
+var ar_default = ["ar", [["\u0635", "\u0645"], u, u], [["\u0635", "\u0645"], u, ["\u0635\u0628\u0627\u062D\u064B\u0627", "\u0645\u0633\u0627\u0621\u064B"]], [["\u062D", "\u0646", "\u062B", "\u0631", "\u062E", "\u062C", "\u0633"], ["\u0627\u0644\u0623\u062D\u062F", "\u0627\u0644\u0627\u062B\u0646\u064A\u0646", "\u0627\u0644\u062B\u0644\u0627\u062B\u0627\u0621", "\u0627\u0644\u0623\u0631\u0628\u0639\u0627\u0621", "\u0627\u0644\u062E\u0645\u064A\u0633", "\u0627\u0644\u062C\u0645\u0639\u0629", "\u0627\u0644\u0633\u0628\u062A"], u, ["\u0623\u062D\u062F", "\u0625\u062B\u0646\u064A\u0646", "\u062B\u0644\u0627\u062B\u0627\u0621", "\u0623\u0631\u0628\u0639\u0627\u0621", "\u062E\u0645\u064A\u0633", "\u062C\u0645\u0639\u0629", "\u0633\u0628\u062A"]], u, [["\u064A", "\u0641", "\u0645", "\u0623", "\u0648", "\u0646", "\u0644", "\u063A", "\u0633", "\u0643", "\u0628", "\u062F"], ["\u064A\u0646\u0627\u064A\u0631", "\u0641\u0628\u0631\u0627\u064A\u0631", "\u0645\u0627\u0631\u0633", "\u0623\u0628\u0631\u064A\u0644", "\u0645\u0627\u064A\u0648", "\u064A\u0648\u0646\u064A\u0648", "\u064A\u0648\u0644\u064A\u0648", "\u0623\u063A\u0633\u0637\u0633", "\u0633\u0628\u062A\u0645\u0628\u0631", "\u0623\u0643\u062A\u0648\u0628\u0631", "\u0646\u0648\u0641\u0645\u0628\u0631", "\u062F\u064A\u0633\u0645\u0628\u0631"], u], u, [["\u0642.\u0645", "\u0645"], u, ["\u0642\u0628\u0644 \u0627\u0644\u0645\u064A\u0644\u0627\u062F", "\u0645\u064A\u0644\u0627\u062F\u064A"]], 6, [5, 6], ["d\u200F/M\u200F/y", "dd\u200F/MM\u200F/y", "d MMMM y", "EEEE\u060C d MMMM y"], ["h:mm a", "h:mm:ss a", "h:mm:ss a z", "h:mm:ss a zzzz"], ["{1}, {0}", u, "{1} \u0641\u064A {0}", u], [".", ",", ";", "\u200E%\u200E", "\u200E+", "\u200E-", "E", "\xD7", "\u2030", "\u221E", "\u0644\u064A\u0633\xA0\u0631\u0642\u0645\u064B\u0627", ":"], ["#,##0.###", "#,##0%", "\xA4\xA0#,##0.00", "#E0"], "EGP", "\u062C.\u0645.\u200F", "\u062C\u0646\u064A\u0647 \u0645\u0635\u0631\u064A", { "AED": ["\u062F.\u0625.\u200F"], "ARS": [u, "AR$"], "AUD": ["AU$"], "BBD": [u, "BB$"], "BHD": ["\u062F.\u0628.\u200F"], "BMD": [u, "BM$"], "BND": [u, "BN$"], "BSD": [u, "BS$"], "BYN": [u, "\u0440."], "BZD": [u, "BZ$"], "CAD": ["CA$"], "CLP": [u, "CL$"], "CNY": ["CN\xA5"], "COP": [u, "CO$"], "CUP": [u, "CU$"], "DOP": [u, "DO$"], "DZD": ["\u062F.\u062C.\u200F"], "EGP": ["\u062C.\u0645.\u200F", "E\xA3"], "FJD": [u, "FJ$"], "GBP": ["UK\xA3"], "GYD": [u, "GY$"], "HKD": ["HK$"], "IQD": ["\u062F.\u0639.\u200F"], "IRR": ["\u0631.\u0625."], "JMD": [u, "JM$"], "JOD": ["\u062F.\u0623.\u200F"], "JPY": ["JP\xA5"], "KWD": ["\u062F.\u0643.\u200F"], "KYD": [u, "KY$"], "LBP": ["\u0644.\u0644.\u200F", "L\xA3"], "LRD": [u, "$LR"], "LYD": ["\u062F.\u0644.\u200F"], "MAD": ["\u062F.\u0645.\u200F"], "MRU": ["\u0623.\u0645."], "MXN": ["MX$"], "NZD": ["NZ$"], "OMR": ["\u0631.\u0639.\u200F"], "PHP": [u, "\u20B1"], "QAR": ["\u0631.\u0642.\u200F"], "SAR": ["\u0631.\u0633.\u200F"], "SBD": [u, "SB$"], "SDD": ["\u062F.\u0633.\u200F"], "SDG": ["\u062C.\u0633."], "SRD": [u, "SR$"], "SYP": ["\u0644.\u0633.\u200F", "\xA3"], "THB": ["\u0E3F"], "TND": ["\u062F.\u062A.\u200F"], "TTD": [u, "TT$"], "TWD": ["NT$"], "USD": ["US$"], "UYU": [u, "UY$"], "YER": ["\u0631.\u064A.\u200F"] }, "rtl", plural];
 
-// node_modules/@angular/common/locales/es.mjs
+// node_modules/@angular/common/locales/es.js
 var u2 = void 0;
 function plural2(val) {
   const n2 = val, i = Math.floor(Math.abs(val)), v = val.toString().replace(/^[^.]*\.?/, "").length, e2 = parseInt(val.toString().replace(/^[^e]*(e([-+]?\d+))?/, "$2")) || 0;
-  if (n2 === 1) return 1;
-  if (e2 === 0 && !(i === 0) && i % 1e6 === 0 && v === 0 || !(e2 >= 0 && e2 <= 5)) return 4;
+  if (n2 === 1)
+    return 1;
+  if (e2 === 0 && (!(i === 0) && (i % 1e6 === 0 && v === 0)) || !(e2 >= 0 && e2 <= 5))
+    return 4;
   return 5;
 }
-var es_default = ["es", [["a.\xA0m.", "p.\xA0m."], u2, u2], u2, [["D", "L", "M", "X", "J", "V", "S"], ["dom", "lun", "mar", "mi\xE9", "jue", "vie", "s\xE1b"], ["domingo", "lunes", "martes", "mi\xE9rcoles", "jueves", "viernes", "s\xE1bado"], ["DO", "LU", "MA", "MI", "JU", "VI", "SA"]], u2, [["E", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"], ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sept", "oct", "nov", "dic"], ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]], u2, [["a. C.", "d. C."], u2, ["antes de Cristo", "despu\xE9s de Cristo"]], 1, [6, 0], ["d/M/yy", "d MMM y", "d 'de' MMMM 'de' y", "EEEE, d 'de' MMMM 'de' y"], ["H:mm", "H:mm:ss", "H:mm:ss z", "H:mm:ss (zzzz)"], ["{1}, {0}", u2, u2, u2], [",", ".", ";", "%", "+", "-", "E", "\xD7", "\u2030", "\u221E", "NaN", ":"], ["#,##0.###", "#,##0\xA0%", "#,##0.00\xA0\xA4", "#E0"], "EUR", "\u20AC", "euro", {
-  "AUD": [u2, "$"],
-  "BRL": [u2, "R$"],
-  "BYN": [u2, "\u0440."],
-  "CAD": [u2, "$"],
-  "CNY": [u2, "\xA5"],
-  "EGP": [],
-  "ESP": ["\u20A7"],
-  "GBP": [u2, "\xA3"],
-  "HKD": [u2, "$"],
-  "ILS": [u2, "\u20AA"],
-  "INR": [u2, "\u20B9"],
-  "JPY": [u2, "\xA5"],
-  "KRW": [u2, "\u20A9"],
-  "MXN": [u2, "$"],
-  "NZD": [u2, "$"],
-  "PHP": [u2, "\u20B1"],
-  "RON": [u2, "L"],
-  "THB": ["\u0E3F"],
-  "TWD": [u2, "NT$"],
-  "USD": ["US$", "$"],
-  "XAF": [],
-  "XCD": [u2, "$"],
-  "XOF": []
-}, "ltr", plural2];
+var es_default = ["es", [["a.\xA0m.", "p.\xA0m."], u2, u2], u2, [["D", "L", "M", "X", "J", "V", "S"], ["dom", "lun", "mar", "mi\xE9", "jue", "vie", "s\xE1b"], ["domingo", "lunes", "martes", "mi\xE9rcoles", "jueves", "viernes", "s\xE1bado"], ["DO", "LU", "MA", "MI", "JU", "VI", "SA"]], u2, [["E", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"], ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sept", "oct", "nov", "dic"], ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]], u2, [["a. C.", "d. C."], u2, ["antes de Cristo", "despu\xE9s de Cristo"]], 1, [6, 0], ["d/M/yy", "d MMM y", "d 'de' MMMM 'de' y", "EEEE, d 'de' MMMM 'de' y"], ["H:mm", "H:mm:ss", "H:mm:ss z", "H:mm:ss (zzzz)"], ["{1}, {0}", u2, u2, u2], [",", ".", ";", "%", "+", "-", "E", "\xD7", "\u2030", "\u221E", "NaN", ":"], ["#,##0.###", "#,##0\xA0%", "#,##0.00\xA0\xA4", "#E0"], "EUR", "\u20AC", "euro", { "AUD": [u2, "$"], "BRL": [u2, "R$"], "BYN": [u2, "\u0440."], "CAD": [u2, "$"], "CNY": [u2, "\xA5"], "EGP": [], "ESP": ["\u20A7"], "GBP": [u2, "\xA3"], "HKD": [u2, "$"], "ILS": [u2, "\u20AA"], "INR": [u2, "\u20B9"], "JPY": [u2, "\xA5"], "KRW": [u2, "\u20A9"], "MXN": [u2, "$"], "NZD": [u2, "$"], "PHP": [u2, "\u20B1"], "RON": [u2, "L"], "THB": ["\u0E3F"], "TWD": [u2, "NT$"], "USD": ["US$", "$"], "XAF": [], "XCD": [u2, "$"], "XOF": [] }, "ltr", plural2];
 
-// node_modules/@angular/common/locales/fr.mjs
+// node_modules/@angular/common/locales/fr.js
 var u3 = void 0;
 function plural3(val) {
   const n2 = val, i = Math.floor(Math.abs(val)), v = val.toString().replace(/^[^.]*\.?/, "").length, e2 = parseInt(val.toString().replace(/^[^e]*(e([-+]?\d+))?/, "$2")) || 0;
-  if (i === 0 || i === 1) return 1;
-  if (e2 === 0 && !(i === 0) && i % 1e6 === 0 && v === 0 || !(e2 >= 0 && e2 <= 5)) return 4;
+  if (i === 0 || i === 1)
+    return 1;
+  if (e2 === 0 && (!(i === 0) && (i % 1e6 === 0 && v === 0)) || !(e2 >= 0 && e2 <= 5))
+    return 4;
   return 5;
 }
-var fr_default = ["fr", [["AM", "PM"], u3, u3], u3, [["D", "L", "M", "M", "J", "V", "S"], ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."], ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"], ["di", "lu", "ma", "me", "je", "ve", "sa"]], u3, [["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"], ["janv.", "f\xE9vr.", "mars", "avr.", "mai", "juin", "juil.", "ao\xFBt", "sept.", "oct.", "nov.", "d\xE9c."], ["janvier", "f\xE9vrier", "mars", "avril", "mai", "juin", "juillet", "ao\xFBt", "septembre", "octobre", "novembre", "d\xE9cembre"]], u3, [["av. J.-C.", "ap. J.-C."], u3, ["avant J\xE9sus-Christ", "apr\xE8s J\xE9sus-Christ"]], 1, [6, 0], ["dd/MM/y", "d MMM y", "d MMMM y", "EEEE d MMMM y"], ["HH:mm", "HH:mm:ss", "HH:mm:ss z", "HH:mm:ss zzzz"], ["{1} {0}", "{1}, {0}", "{1} '\xE0' {0}", u3], [",", "\u202F", ";", "%", "+", "-", "E", "\xD7", "\u2030", "\u221E", "NaN", ":"], ["#,##0.###", "#,##0\xA0%", "#,##0.00\xA0\xA4", "#E0"], "EUR", "\u20AC", "euro", {
-  "ARS": ["$AR", "$"],
-  "AUD": ["$AU", "$"],
-  "BEF": ["FB"],
-  "BMD": ["$BM", "$"],
-  "BND": ["$BN", "$"],
-  "BYN": [u3, "\u0440."],
-  "BZD": ["$BZ", "$"],
-  "CAD": ["$CA", "$"],
-  "CLP": ["$CL", "$"],
-  "CNY": [u3, "\xA5"],
-  "COP": ["$CO", "$"],
-  "CYP": ["\xA3CY"],
-  "EGP": [u3, "\xA3E"],
-  "FJD": ["$FJ", "$"],
-  "FKP": ["\xA3FK", "\xA3"],
-  "FRF": ["F"],
-  "GBP": ["\xA3GB", "\xA3"],
-  "GIP": ["\xA3GI", "\xA3"],
-  "HKD": [u3, "$"],
-  "IEP": ["\xA3IE"],
-  "ILP": ["\xA3IL"],
-  "ITL": ["\u20A4IT"],
-  "JPY": [u3, "\xA5"],
-  "KMF": [u3, "FC"],
-  "LBP": ["\xA3LB", "\xA3L"],
-  "MTP": ["\xA3MT"],
-  "MXN": ["$MX", "$"],
-  "NAD": ["$NA", "$"],
-  "NIO": [u3, "$C"],
-  "NZD": ["$NZ", "$"],
-  "PHP": [u3, "\u20B1"],
-  "RHD": ["$RH"],
-  "RON": [u3, "L"],
-  "RWF": [u3, "FR"],
-  "SBD": ["$SB", "$"],
-  "SGD": ["$SG", "$"],
-  "SRD": ["$SR", "$"],
-  "TOP": [u3, "$T"],
-  "TTD": ["$TT", "$"],
-  "TWD": [u3, "NT$"],
-  "USD": ["$US", "$"],
-  "UYU": ["$UY", "$"],
-  "WST": ["$WS"],
-  "XCD": [u3, "$"],
-  "XPF": ["FCFP"],
-  "ZMW": [u3, "Kw"]
-}, "ltr", plural3];
+var fr_default = ["fr", [["AM", "PM"], u3, u3], u3, [["D", "L", "M", "M", "J", "V", "S"], ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."], ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"], ["di", "lu", "ma", "me", "je", "ve", "sa"]], u3, [["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"], ["janv.", "f\xE9vr.", "mars", "avr.", "mai", "juin", "juil.", "ao\xFBt", "sept.", "oct.", "nov.", "d\xE9c."], ["janvier", "f\xE9vrier", "mars", "avril", "mai", "juin", "juillet", "ao\xFBt", "septembre", "octobre", "novembre", "d\xE9cembre"]], u3, [["av. J.-C.", "ap. J.-C."], u3, ["avant J\xE9sus-Christ", "apr\xE8s J\xE9sus-Christ"]], 1, [6, 0], ["dd/MM/y", "d MMM y", "d MMMM y", "EEEE d MMMM y"], ["HH:mm", "HH:mm:ss", "HH:mm:ss z", "HH:mm:ss zzzz"], ["{1} {0}", "{1}, {0}", "{1} '\xE0' {0}", u3], [",", "\u202F", ";", "%", "+", "-", "E", "\xD7", "\u2030", "\u221E", "NaN", ":"], ["#,##0.###", "#,##0\xA0%", "#,##0.00\xA0\xA4", "#E0"], "EUR", "\u20AC", "euro", { "ARS": ["$AR", "$"], "AUD": ["$AU", "$"], "BEF": ["FB"], "BMD": ["$BM", "$"], "BND": ["$BN", "$"], "BYN": [u3, "\u0440."], "BZD": ["$BZ", "$"], "CAD": ["$CA", "$"], "CLP": ["$CL", "$"], "CNY": [u3, "\xA5"], "COP": ["$CO", "$"], "CYP": ["\xA3CY"], "EGP": [u3, "\xA3E"], "FJD": ["$FJ", "$"], "FKP": ["\xA3FK", "\xA3"], "FRF": ["F"], "GBP": ["\xA3GB", "\xA3"], "GIP": ["\xA3GI", "\xA3"], "HKD": [u3, "$"], "IEP": ["\xA3IE"], "ILP": ["\xA3IL"], "ITL": ["\u20A4IT"], "JPY": [u3, "\xA5"], "KMF": [u3, "FC"], "LBP": ["\xA3LB", "\xA3L"], "MTP": ["\xA3MT"], "MXN": ["$MX", "$"], "NAD": ["$NA", "$"], "NIO": [u3, "$C"], "NZD": ["$NZ", "$"], "PHP": [u3, "\u20B1"], "RHD": ["$RH"], "RON": [u3, "L"], "RWF": [u3, "FR"], "SBD": ["$SB", "$"], "SGD": ["$SG", "$"], "SRD": ["$SR", "$"], "TOP": [u3, "$T"], "TTD": ["$TT", "$"], "TWD": [u3, "NT$"], "USD": ["$US", "$"], "UYU": ["$UY", "$"], "WST": ["$WS"], "XCD": [u3, "$"], "XPF": ["FCFP"], "ZMW": [u3, "Kw"] }, "ltr", plural3];
 
-// node_modules/@angular/common/locales/it.mjs
+// node_modules/@angular/common/locales/it.js
 var u4 = void 0;
 function plural4(val) {
   const n2 = val, i = Math.floor(Math.abs(val)), v = val.toString().replace(/^[^.]*\.?/, "").length, e2 = parseInt(val.toString().replace(/^[^e]*(e([-+]?\d+))?/, "$2")) || 0;
-  if (i === 1 && v === 0) return 1;
-  if (e2 === 0 && !(i === 0) && i % 1e6 === 0 && v === 0 || !(e2 >= 0 && e2 <= 5)) return 4;
+  if (i === 1 && v === 0)
+    return 1;
+  if (e2 === 0 && (!(i === 0) && (i % 1e6 === 0 && v === 0)) || !(e2 >= 0 && e2 <= 5))
+    return 4;
   return 5;
 }
-var it_default = ["it", [["m.", "p."], ["AM", "PM"], u4], u4, [["D", "L", "M", "M", "G", "V", "S"], ["dom", "lun", "mar", "mer", "gio", "ven", "sab"], ["domenica", "luned\xEC", "marted\xEC", "mercoled\xEC", "gioved\xEC", "venerd\xEC", "sabato"], ["dom", "lun", "mar", "mer", "gio", "ven", "sab"]], u4, [["G", "F", "M", "A", "M", "G", "L", "A", "S", "O", "N", "D"], ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"], ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"]], u4, [["aC", "dC"], ["a.C.", "d.C."], ["avanti Cristo", "dopo Cristo"]], 1, [6, 0], ["dd/MM/yy", "d MMM y", "d MMMM y", "EEEE d MMMM y"], ["HH:mm", "HH:mm:ss", "HH:mm:ss z", "HH:mm:ss zzzz"], ["{1}, {0}", u4, "{1} {0}", u4], [",", ".", ";", "%", "+", "-", "E", "\xD7", "\u2030", "\u221E", "NaN", ":"], ["#,##0.###", "#,##0%", "#,##0.00\xA0\xA4", "#E0"], "EUR", "\u20AC", "euro", {
-  "BRL": [u4, "R$"],
-  "BYN": [u4, "Br"],
-  "EGP": [u4, "\xA3E"],
-  "HKD": [u4, "$"],
-  "INR": [u4, "\u20B9"],
-  "JPY": [u4, "\xA5"],
-  "KRW": [u4, "\u20A9"],
-  "MXN": [u4, "$"],
-  "NOK": [u4, "NKr"],
-  "THB": ["\u0E3F"],
-  "TWD": [u4, "NT$"],
-  "USD": [u4, "$"],
-  "VND": [u4, "\u20AB"]
-}, "ltr", plural4];
+var it_default = ["it", [["m.", "p."], ["AM", "PM"], u4], u4, [["D", "L", "M", "M", "G", "V", "S"], ["dom", "lun", "mar", "mer", "gio", "ven", "sab"], ["domenica", "luned\xEC", "marted\xEC", "mercoled\xEC", "gioved\xEC", "venerd\xEC", "sabato"], ["dom", "lun", "mar", "mer", "gio", "ven", "sab"]], u4, [["G", "F", "M", "A", "M", "G", "L", "A", "S", "O", "N", "D"], ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"], ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"]], u4, [["aC", "dC"], ["a.C.", "d.C."], ["avanti Cristo", "dopo Cristo"]], 1, [6, 0], ["dd/MM/yy", "d MMM y", "d MMMM y", "EEEE d MMMM y"], ["HH:mm", "HH:mm:ss", "HH:mm:ss z", "HH:mm:ss zzzz"], ["{1}, {0}", u4, "{1} {0}", u4], [",", ".", ";", "%", "+", "-", "E", "\xD7", "\u2030", "\u221E", "NaN", ":"], ["#,##0.###", "#,##0%", "#,##0.00\xA0\xA4", "#E0"], "EUR", "\u20AC", "euro", { "BRL": [u4, "R$"], "BYN": [u4, "Br"], "EGP": [u4, "\xA3E"], "HKD": [u4, "$"], "INR": [u4, "\u20B9"], "JPY": [u4, "\xA5"], "KRW": [u4, "\u20A9"], "MXN": [u4, "$"], "NOK": [u4, "NKr"], "THB": ["\u0E3F"], "TWD": [u4, "NT$"], "USD": [u4, "$"], "VND": [u4, "\u20AB"] }, "ltr", plural4];
 
-// node_modules/@angular/common/locales/ja.mjs
+// node_modules/@angular/common/locales/ja.js
 var u5 = void 0;
 function plural5(val) {
   const n2 = val;
   return 5;
 }
-var ja_default = ["ja", [["\u5348\u524D", "\u5348\u5F8C"], u5, u5], u5, [["\u65E5", "\u6708", "\u706B", "\u6C34", "\u6728", "\u91D1", "\u571F"], u5, ["\u65E5\u66DC\u65E5", "\u6708\u66DC\u65E5", "\u706B\u66DC\u65E5", "\u6C34\u66DC\u65E5", "\u6728\u66DC\u65E5", "\u91D1\u66DC\u65E5", "\u571F\u66DC\u65E5"], ["\u65E5", "\u6708", "\u706B", "\u6C34", "\u6728", "\u91D1", "\u571F"]], u5, [["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"], ["1\u6708", "2\u6708", "3\u6708", "4\u6708", "5\u6708", "6\u6708", "7\u6708", "8\u6708", "9\u6708", "10\u6708", "11\u6708", "12\u6708"], u5], u5, [["BC", "AD"], ["\u7D00\u5143\u524D", "\u897F\u66A6"], u5], 0, [6, 0], ["y/MM/dd", u5, "y\u5E74M\u6708d\u65E5", "y\u5E74M\u6708d\u65E5EEEE"], ["H:mm", "H:mm:ss", "H:mm:ss z", "H\u6642mm\u5206ss\u79D2 zzzz"], ["{1} {0}", u5, u5, u5], [".", ",", ";", "%", "+", "-", "E", "\xD7", "\u2030", "\u221E", "NaN", ":"], ["#,##0.###", "#,##0%", "\xA4#,##0.00", "#E0"], "JPY", "\uFFE5", "\u65E5\u672C\u5186", {
-  "BYN": [u5, "\u0440."],
-  "CNY": ["\u5143", "\uFFE5"],
-  "JPY": ["\uFFE5"],
-  "PHP": [u5, "\u20B1"],
-  "RON": [u5, "\u30EC\u30A4"],
-  "XXX": []
-}, "ltr", plural5];
+var ja_default = ["ja", [["\u5348\u524D", "\u5348\u5F8C"], u5, u5], u5, [["\u65E5", "\u6708", "\u706B", "\u6C34", "\u6728", "\u91D1", "\u571F"], u5, ["\u65E5\u66DC\u65E5", "\u6708\u66DC\u65E5", "\u706B\u66DC\u65E5", "\u6C34\u66DC\u65E5", "\u6728\u66DC\u65E5", "\u91D1\u66DC\u65E5", "\u571F\u66DC\u65E5"], ["\u65E5", "\u6708", "\u706B", "\u6C34", "\u6728", "\u91D1", "\u571F"]], u5, [["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"], ["1\u6708", "2\u6708", "3\u6708", "4\u6708", "5\u6708", "6\u6708", "7\u6708", "8\u6708", "9\u6708", "10\u6708", "11\u6708", "12\u6708"], u5], u5, [["BC", "AD"], ["\u7D00\u5143\u524D", "\u897F\u66A6"], u5], 0, [6, 0], ["y/MM/dd", u5, "y\u5E74M\u6708d\u65E5", "y\u5E74M\u6708d\u65E5EEEE"], ["H:mm", "H:mm:ss", "H:mm:ss z", "H\u6642mm\u5206ss\u79D2 zzzz"], ["{1} {0}", u5, u5, u5], [".", ",", ";", "%", "+", "-", "E", "\xD7", "\u2030", "\u221E", "NaN", ":"], ["#,##0.###", "#,##0%", "\xA4#,##0.00", "#E0"], "JPY", "\uFFE5", "\u65E5\u672C\u5186", { "BYN": [u5, "\u0440."], "CNY": ["\u5143", "\uFFE5"], "JPY": ["\uFFE5"], "PHP": [u5, "\u20B1"], "RON": [u5, "\u30EC\u30A4"], "XXX": [] }, "ltr", plural5];
 
-// node_modules/@angular/common/locales/zh.mjs
+// node_modules/@angular/common/locales/zh.js
 var u6 = void 0;
 function plural6(val) {
   const n2 = val;
   return 5;
 }
-var zh_default = ["zh", [["\u4E0A\u5348", "\u4E0B\u5348"], u6, u6], u6, [["\u65E5", "\u4E00", "\u4E8C", "\u4E09", "\u56DB", "\u4E94", "\u516D"], ["\u5468\u65E5", "\u5468\u4E00", "\u5468\u4E8C", "\u5468\u4E09", "\u5468\u56DB", "\u5468\u4E94", "\u5468\u516D"], ["\u661F\u671F\u65E5", "\u661F\u671F\u4E00", "\u661F\u671F\u4E8C", "\u661F\u671F\u4E09", "\u661F\u671F\u56DB", "\u661F\u671F\u4E94", "\u661F\u671F\u516D"], ["\u5468\u65E5", "\u5468\u4E00", "\u5468\u4E8C", "\u5468\u4E09", "\u5468\u56DB", "\u5468\u4E94", "\u5468\u516D"]], u6, [["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"], ["1\u6708", "2\u6708", "3\u6708", "4\u6708", "5\u6708", "6\u6708", "7\u6708", "8\u6708", "9\u6708", "10\u6708", "11\u6708", "12\u6708"], ["\u4E00\u6708", "\u4E8C\u6708", "\u4E09\u6708", "\u56DB\u6708", "\u4E94\u6708", "\u516D\u6708", "\u4E03\u6708", "\u516B\u6708", "\u4E5D\u6708", "\u5341\u6708", "\u5341\u4E00\u6708", "\u5341\u4E8C\u6708"]], u6, [["\u516C\u5143\u524D", "\u516C\u5143"], u6, u6], 0, [6, 0], ["y/M/d", "y\u5E74M\u6708d\u65E5", u6, "y\u5E74M\u6708d\u65E5EEEE"], ["HH:mm", "HH:mm:ss", "z HH:mm:ss", "zzzz HH:mm:ss"], ["{1} {0}", u6, u6, u6], [".", ",", ";", "%", "+", "-", "E", "\xD7", "\u2030", "\u221E", "NaN", ":"], ["#,##0.###", "#,##0%", "\xA4#,##0.00", "#E0"], "CNY", "\xA5", "\u4EBA\u6C11\u5E01", {
-  "AUD": ["AU$", "$"],
-  "BYN": [u6, "\u0440."],
-  "CNY": ["\xA5"],
-  "ILR": ["ILS"],
-  "JPY": ["JP\xA5", "\xA5"],
-  "KRW": ["\uFFE6", "\u20A9"],
-  "PHP": [u6, "\u20B1"],
-  "RUR": [u6, "\u0440."],
-  "TWD": ["NT$"],
-  "USD": ["US$", "$"],
-  "XXX": []
-}, "ltr", plural6];
+var zh_default = ["zh", [["\u4E0A\u5348", "\u4E0B\u5348"], u6, u6], u6, [["\u65E5", "\u4E00", "\u4E8C", "\u4E09", "\u56DB", "\u4E94", "\u516D"], ["\u5468\u65E5", "\u5468\u4E00", "\u5468\u4E8C", "\u5468\u4E09", "\u5468\u56DB", "\u5468\u4E94", "\u5468\u516D"], ["\u661F\u671F\u65E5", "\u661F\u671F\u4E00", "\u661F\u671F\u4E8C", "\u661F\u671F\u4E09", "\u661F\u671F\u56DB", "\u661F\u671F\u4E94", "\u661F\u671F\u516D"], ["\u5468\u65E5", "\u5468\u4E00", "\u5468\u4E8C", "\u5468\u4E09", "\u5468\u56DB", "\u5468\u4E94", "\u5468\u516D"]], u6, [["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"], ["1\u6708", "2\u6708", "3\u6708", "4\u6708", "5\u6708", "6\u6708", "7\u6708", "8\u6708", "9\u6708", "10\u6708", "11\u6708", "12\u6708"], ["\u4E00\u6708", "\u4E8C\u6708", "\u4E09\u6708", "\u56DB\u6708", "\u4E94\u6708", "\u516D\u6708", "\u4E03\u6708", "\u516B\u6708", "\u4E5D\u6708", "\u5341\u6708", "\u5341\u4E00\u6708", "\u5341\u4E8C\u6708"]], u6, [["\u516C\u5143\u524D", "\u516C\u5143"], u6, u6], 0, [6, 0], ["y/M/d", "y\u5E74M\u6708d\u65E5", u6, "y\u5E74M\u6708d\u65E5EEEE"], ["HH:mm", "HH:mm:ss", "z HH:mm:ss", "zzzz HH:mm:ss"], ["{1} {0}", u6, u6, u6], [".", ",", ";", "%", "+", "-", "E", "\xD7", "\u2030", "\u221E", "NaN", ":"], ["#,##0.###", "#,##0%", "\xA4#,##0.00", "#E0"], "CNY", "\xA5", "\u4EBA\u6C11\u5E01", { "AUD": ["AU$", "$"], "BYN": [u6, "\u0440."], "CNY": ["\xA5"], "ILR": ["ILS"], "JPY": ["JP\xA5", "\xA5"], "KRW": ["\uFFE6", "\u20A9"], "PHP": [u6, "\u20B1"], "RUR": [u6, "\u0440."], "TWD": ["NT$"], "USD": ["US$", "$"], "XXX": [] }, "ltr", plural6];
 
 // node_modules/@angular/cdk/fesm2022/clipboard.mjs
 var PendingCopy = class {
@@ -5261,7 +5361,9 @@ var ClipboardModule = class _ClipboardModule {
     return new (__ngFactoryType__ || _ClipboardModule)();
   };
   static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _ClipboardModule
+    type: _ClipboardModule,
+    imports: [CdkCopyToClipboard],
+    exports: [CdkCopyToClipboard]
   });
   static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({});
 };
@@ -5275,76 +5377,38 @@ var ClipboardModule = class _ClipboardModule {
   }], null, null);
 })();
 
-// node_modules/@angular/material/fesm2022/button.mjs
-var _c0 = ["mat-button", ""];
-var _c1 = [[["", 8, "material-icons", 3, "iconPositionEnd", ""], ["mat-icon", 3, "iconPositionEnd", ""], ["", "matButtonIcon", "", 3, "iconPositionEnd", ""]], "*", [["", "iconPositionEnd", "", 8, "material-icons"], ["mat-icon", "iconPositionEnd", ""], ["", "matButtonIcon", "", "iconPositionEnd", ""]]];
-var _c2 = [".material-icons:not([iconPositionEnd]), mat-icon:not([iconPositionEnd]), [matButtonIcon]:not([iconPositionEnd])", "*", ".material-icons[iconPositionEnd], mat-icon[iconPositionEnd], [matButtonIcon][iconPositionEnd]"];
-var _c3 = '.mat-mdc-button-base{text-decoration:none}.mdc-button{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:64px;border:none;outline:none;line-height:inherit;-webkit-appearance:none;overflow:visible;vertical-align:middle;background:rgba(0,0,0,0);padding:0 8px}.mdc-button::-moz-focus-inner{padding:0;border:0}.mdc-button:active{outline:none}.mdc-button:hover{cursor:pointer}.mdc-button:disabled{cursor:default;pointer-events:none}.mdc-button[hidden]{display:none}.mdc-button .mdc-button__label{position:relative}.mat-mdc-button{padding:0 var(--mat-text-button-horizontal-padding, 12px);height:var(--mdc-text-button-container-height, 40px);font-family:var(--mdc-text-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-text-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-text-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-text-button-label-text-transform);font-weight:var(--mdc-text-button-label-text-weight, var(--mat-sys-label-large-weight))}.mat-mdc-button,.mat-mdc-button .mdc-button__ripple{border-radius:var(--mdc-text-button-container-shape, var(--mat-sys-corner-full))}.mat-mdc-button:not(:disabled){color:var(--mdc-text-button-label-text-color, var(--mat-sys-primary))}.mat-mdc-button[disabled],.mat-mdc-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-text-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-button:has(.material-icons,mat-icon,[matButtonIcon]){padding:0 var(--mat-text-button-with-icon-horizontal-padding, 16px)}.mat-mdc-button>.mat-icon{margin-right:var(--mat-text-button-icon-spacing, 8px);margin-left:var(--mat-text-button-icon-offset, -4px)}[dir=rtl] .mat-mdc-button>.mat-icon{margin-right:var(--mat-text-button-icon-offset, -4px);margin-left:var(--mat-text-button-icon-spacing, 8px)}.mat-mdc-button .mdc-button__label+.mat-icon{margin-right:var(--mat-text-button-icon-offset, -4px);margin-left:var(--mat-text-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-button .mdc-button__label+.mat-icon{margin-right:var(--mat-text-button-icon-spacing, 8px);margin-left:var(--mat-text-button-icon-offset, -4px)}.mat-mdc-button .mat-ripple-element{background-color:var(--mat-text-button-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-text-button-state-layer-color, var(--mat-sys-primary))}.mat-mdc-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-text-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-text-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-text-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-text-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-text-button-touch-target-display, block)}.mat-mdc-unelevated-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mdc-filled-button-container-height, 40px);font-family:var(--mdc-filled-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-filled-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-filled-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-filled-button-label-text-transform);font-weight:var(--mdc-filled-button-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-filled-button-horizontal-padding, 24px)}.mat-mdc-unelevated-button>.mat-icon{margin-right:var(--mat-filled-button-icon-spacing, 8px);margin-left:var(--mat-filled-button-icon-offset, -8px)}[dir=rtl] .mat-mdc-unelevated-button>.mat-icon{margin-right:var(--mat-filled-button-icon-offset, -8px);margin-left:var(--mat-filled-button-icon-spacing, 8px)}.mat-mdc-unelevated-button .mdc-button__label+.mat-icon{margin-right:var(--mat-filled-button-icon-offset, -8px);margin-left:var(--mat-filled-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-unelevated-button .mdc-button__label+.mat-icon{margin-right:var(--mat-filled-button-icon-spacing, 8px);margin-left:var(--mat-filled-button-icon-offset, -8px)}.mat-mdc-unelevated-button .mat-ripple-element{background-color:var(--mat-filled-button-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-filled-button-state-layer-color, var(--mat-sys-on-primary))}.mat-mdc-unelevated-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-filled-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-unelevated-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-filled-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-unelevated-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-filled-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-unelevated-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-filled-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-unelevated-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-filled-button-touch-target-display, block)}.mat-mdc-unelevated-button:not(:disabled){color:var(--mdc-filled-button-label-text-color, var(--mat-sys-on-primary));background-color:var(--mdc-filled-button-container-color, var(--mat-sys-primary))}.mat-mdc-unelevated-button,.mat-mdc-unelevated-button .mdc-button__ripple{border-radius:var(--mdc-filled-button-container-shape, var(--mat-sys-corner-full))}.mat-mdc-unelevated-button[disabled],.mat-mdc-unelevated-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-filled-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mdc-filled-button-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-unelevated-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-raised-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);box-shadow:var(--mdc-protected-button-container-elevation-shadow, var(--mat-sys-level1));height:var(--mdc-protected-button-container-height, 40px);font-family:var(--mdc-protected-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-protected-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-protected-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-protected-button-label-text-transform);font-weight:var(--mdc-protected-button-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-protected-button-horizontal-padding, 24px)}.mat-mdc-raised-button>.mat-icon{margin-right:var(--mat-protected-button-icon-spacing, 8px);margin-left:var(--mat-protected-button-icon-offset, -8px)}[dir=rtl] .mat-mdc-raised-button>.mat-icon{margin-right:var(--mat-protected-button-icon-offset, -8px);margin-left:var(--mat-protected-button-icon-spacing, 8px)}.mat-mdc-raised-button .mdc-button__label+.mat-icon{margin-right:var(--mat-protected-button-icon-offset, -8px);margin-left:var(--mat-protected-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-raised-button .mdc-button__label+.mat-icon{margin-right:var(--mat-protected-button-icon-spacing, 8px);margin-left:var(--mat-protected-button-icon-offset, -8px)}.mat-mdc-raised-button .mat-ripple-element{background-color:var(--mat-protected-button-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-protected-button-state-layer-color, var(--mat-sys-primary))}.mat-mdc-raised-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-protected-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-raised-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-protected-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-raised-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-protected-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-raised-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-protected-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-raised-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-protected-button-touch-target-display, block)}.mat-mdc-raised-button:not(:disabled){color:var(--mdc-protected-button-label-text-color, var(--mat-sys-primary));background-color:var(--mdc-protected-button-container-color, var(--mat-sys-surface))}.mat-mdc-raised-button,.mat-mdc-raised-button .mdc-button__ripple{border-radius:var(--mdc-protected-button-container-shape, var(--mat-sys-corner-full))}.mat-mdc-raised-button:hover{box-shadow:var(--mdc-protected-button-hover-container-elevation-shadow, var(--mat-sys-level2))}.mat-mdc-raised-button:focus{box-shadow:var(--mdc-protected-button-focus-container-elevation-shadow, var(--mat-sys-level1))}.mat-mdc-raised-button:active,.mat-mdc-raised-button:focus:active{box-shadow:var(--mdc-protected-button-pressed-container-elevation-shadow, var(--mat-sys-level1))}.mat-mdc-raised-button[disabled],.mat-mdc-raised-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-protected-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mdc-protected-button-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-raised-button[disabled].mat-mdc-button-disabled,.mat-mdc-raised-button.mat-mdc-button-disabled.mat-mdc-button-disabled{box-shadow:var(--mdc-protected-button-disabled-container-elevation-shadow, var(--mat-sys-level0))}.mat-mdc-raised-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-outlined-button{border-style:solid;transition:border 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mdc-outlined-button-container-height, 40px);font-family:var(--mdc-outlined-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-outlined-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-outlined-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-outlined-button-label-text-transform);font-weight:var(--mdc-outlined-button-label-text-weight, var(--mat-sys-label-large-weight));border-radius:var(--mdc-outlined-button-container-shape, var(--mat-sys-corner-full));border-width:var(--mdc-outlined-button-outline-width, 1px);padding:0 var(--mat-outlined-button-horizontal-padding, 24px)}.mat-mdc-outlined-button>.mat-icon{margin-right:var(--mat-outlined-button-icon-spacing, 8px);margin-left:var(--mat-outlined-button-icon-offset, -8px)}[dir=rtl] .mat-mdc-outlined-button>.mat-icon{margin-right:var(--mat-outlined-button-icon-offset, -8px);margin-left:var(--mat-outlined-button-icon-spacing, 8px)}.mat-mdc-outlined-button .mdc-button__label+.mat-icon{margin-right:var(--mat-outlined-button-icon-offset, -8px);margin-left:var(--mat-outlined-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-outlined-button .mdc-button__label+.mat-icon{margin-right:var(--mat-outlined-button-icon-spacing, 8px);margin-left:var(--mat-outlined-button-icon-offset, -8px)}.mat-mdc-outlined-button .mat-ripple-element{background-color:var(--mat-outlined-button-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-outlined-button-state-layer-color, var(--mat-sys-primary))}.mat-mdc-outlined-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-outlined-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-outlined-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-outlined-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-outlined-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-outlined-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-outlined-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-outlined-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-outlined-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-outlined-button-touch-target-display, block)}.mat-mdc-outlined-button:not(:disabled){color:var(--mdc-outlined-button-label-text-color, var(--mat-sys-primary));border-color:var(--mdc-outlined-button-outline-color, var(--mat-sys-outline))}.mat-mdc-outlined-button[disabled],.mat-mdc-outlined-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-outlined-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:var(--mdc-outlined-button-disabled-outline-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-outlined-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-button,.mat-mdc-unelevated-button,.mat-mdc-raised-button,.mat-mdc-outlined-button{-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-button .mat-mdc-button-ripple,.mat-mdc-button .mat-mdc-button-persistent-ripple,.mat-mdc-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button .mat-mdc-button-ripple,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button .mat-mdc-button-ripple,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-button .mat-mdc-button-ripple,.mat-mdc-unelevated-button .mat-mdc-button-ripple,.mat-mdc-raised-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-button .mdc-button__label,.mat-mdc-button .mat-icon,.mat-mdc-unelevated-button .mdc-button__label,.mat-mdc-unelevated-button .mat-icon,.mat-mdc-raised-button .mdc-button__label,.mat-mdc-raised-button .mat-icon,.mat-mdc-outlined-button .mdc-button__label,.mat-mdc-outlined-button .mat-icon{z-index:1;position:relative}.mat-mdc-button .mat-focus-indicator,.mat-mdc-unelevated-button .mat-focus-indicator,.mat-mdc-raised-button .mat-focus-indicator,.mat-mdc-outlined-button .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-button:focus>.mat-focus-indicator::before,.mat-mdc-unelevated-button:focus>.mat-focus-indicator::before,.mat-mdc-raised-button:focus>.mat-focus-indicator::before,.mat-mdc-outlined-button:focus>.mat-focus-indicator::before{content:""}.mat-mdc-button._mat-animation-noopable,.mat-mdc-unelevated-button._mat-animation-noopable,.mat-mdc-raised-button._mat-animation-noopable,.mat-mdc-outlined-button._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-button>.mat-icon,.mat-mdc-unelevated-button>.mat-icon,.mat-mdc-raised-button>.mat-icon,.mat-mdc-outlined-button>.mat-icon{display:inline-block;position:relative;vertical-align:top;font-size:1.125rem;height:1.125rem;width:1.125rem}.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mdc-button__ripple{top:-1px;left:-1px;bottom:-1px;right:-1px}.mat-mdc-unelevated-button .mat-focus-indicator::before,.mat-mdc-raised-button .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-outlined-button .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 3px)*-1)}';
-var _c4 = "@media(forced-colors: active){.mat-mdc-button:not(.mdc-button--outlined),.mat-mdc-unelevated-button:not(.mdc-button--outlined),.mat-mdc-raised-button:not(.mdc-button--outlined),.mat-mdc-outlined-button:not(.mdc-button--outlined),.mat-mdc-icon-button.mat-mdc-icon-button,.mat-mdc-outlined-button .mdc-button__ripple{outline:solid 1px}}";
-var _c5 = ["mat-fab", ""];
-var _c6 = ["mat-mini-fab", ""];
-var _c7 = '.mat-mdc-fab-base{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:56px;height:56px;padding:0;border:none;fill:currentColor;text-decoration:none;cursor:pointer;-moz-appearance:none;-webkit-appearance:none;overflow:visible;transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),opacity 15ms linear 30ms,transform 270ms 0ms cubic-bezier(0, 0, 0.2, 1);flex-shrink:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-fab-base .mat-mdc-button-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-fab-base .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-fab-base .mdc-button__label,.mat-mdc-fab-base .mat-icon{z-index:1;position:relative}.mat-mdc-fab-base .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-fab-base:focus>.mat-focus-indicator::before{content:""}.mat-mdc-fab-base._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-fab-base::before{position:absolute;box-sizing:border-box;width:100%;height:100%;top:0;left:0;border:1px solid rgba(0,0,0,0);border-radius:inherit;content:"";pointer-events:none}.mat-mdc-fab-base[hidden]{display:none}.mat-mdc-fab-base::-moz-focus-inner{padding:0;border:0}.mat-mdc-fab-base:active,.mat-mdc-fab-base:focus{outline:none}.mat-mdc-fab-base:hover{cursor:pointer}.mat-mdc-fab-base>svg{width:100%}.mat-mdc-fab-base .mat-icon,.mat-mdc-fab-base .material-icons{transition:transform 180ms 90ms cubic-bezier(0, 0, 0.2, 1);fill:currentColor;will-change:transform}.mat-mdc-fab-base .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base[disabled]:focus,.mat-mdc-fab-base.mat-mdc-button-disabled,.mat-mdc-fab-base.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-fab-base.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab{background-color:var(--mdc-fab-container-color, var(--mat-sys-primary-container));border-radius:var(--mdc-fab-container-shape, var(--mat-sys-corner-large));color:var(--mat-fab-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mdc-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:hover{box-shadow:var(--mdc-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-fab:focus{box-shadow:var(--mdc-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:active,.mat-mdc-fab:focus:active{box-shadow:var(--mdc-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab[disabled],.mat-mdc-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-fab-touch-target-display, block)}.mat-mdc-fab .mat-ripple-element{background-color:var(--mat-fab-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-disabled-state-layer-color)}.mat-mdc-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-mini-fab{width:40px;height:40px;background-color:var(--mdc-fab-small-container-color, var(--mat-sys-primary-container));border-radius:var(--mdc-fab-small-container-shape, var(--mat-sys-corner-medium));color:var(--mat-fab-small-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mdc-fab-small-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:hover{box-shadow:var(--mdc-fab-small-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-mini-fab:focus{box-shadow:var(--mdc-fab-small-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:active,.mat-mdc-mini-fab:focus:active{box-shadow:var(--mdc-fab-small-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab[disabled],.mat-mdc-mini-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-small-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-small-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-mini-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-fab-small-touch-target-display)}.mat-mdc-mini-fab .mat-ripple-element{background-color:var(--mat-fab-small-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-mini-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-mini-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-disabled-state-layer-color)}.mat-mdc-mini-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-mini-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-mini-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-extended-fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;border-radius:24px;padding-left:20px;padding-right:20px;width:auto;max-width:100%;line-height:normal;height:var(--mdc-extended-fab-container-height, 56px);border-radius:var(--mdc-extended-fab-container-shape, var(--mat-sys-corner-large));font-family:var(--mdc-extended-fab-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-extended-fab-label-text-size, var(--mat-sys-label-large-size));font-weight:var(--mdc-extended-fab-label-text-weight, var(--mat-sys-label-large-weight));letter-spacing:var(--mdc-extended-fab-label-text-tracking, var(--mat-sys-label-large-tracking));box-shadow:var(--mdc-extended-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:hover{box-shadow:var(--mdc-extended-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-extended-fab:focus{box-shadow:var(--mdc-extended-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:active,.mat-mdc-extended-fab:focus:active{box-shadow:var(--mdc-extended-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab[disabled]:focus,.mat-mdc-extended-fab.mat-mdc-button-disabled,.mat-mdc-extended-fab.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-extended-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.mat-icon,[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.material-icons,.mat-mdc-extended-fab>.mat-icon,.mat-mdc-extended-fab>.material-icons{margin-left:-8px;margin-right:12px}.mat-mdc-extended-fab .mdc-button__label+.mat-icon,.mat-mdc-extended-fab .mdc-button__label+.material-icons,[dir=rtl] .mat-mdc-extended-fab>.mat-icon,[dir=rtl] .mat-mdc-extended-fab>.material-icons{margin-left:12px;margin-right:-8px}.mat-mdc-extended-fab .mat-mdc-button-touch-target{width:100%}';
-var _c8 = ["mat-icon-button", ""];
-var _c9 = ["*"];
-var _c10 = '.mat-mdc-icon-button{-webkit-user-select:none;user-select:none;display:inline-block;position:relative;box-sizing:border-box;border:none;outline:none;background-color:rgba(0,0,0,0);fill:currentColor;color:inherit;text-decoration:none;cursor:pointer;z-index:0;overflow:visible;border-radius:50%;flex-shrink:0;text-align:center;width:var(--mdc-icon-button-state-layer-size, 40px);height:var(--mdc-icon-button-state-layer-size, 40px);padding:calc(calc(var(--mdc-icon-button-state-layer-size, 40px) - var(--mdc-icon-button-icon-size, 24px)) / 2);font-size:var(--mdc-icon-button-icon-size, 24px);color:var(--mdc-icon-button-icon-color, var(--mat-sys-on-surface-variant));-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-icon-button .mat-mdc-button-ripple,.mat-mdc-icon-button .mat-mdc-button-persistent-ripple,.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-icon-button .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-icon-button .mdc-button__label,.mat-mdc-icon-button .mat-icon{z-index:1;position:relative}.mat-mdc-icon-button .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-icon-button:focus>.mat-focus-indicator::before{content:""}.mat-mdc-icon-button .mat-ripple-element{background-color:var(--mat-icon-button-ripple-color, color-mix(in srgb, var(--mat-sys-on-surface-variant) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-icon-button-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-icon-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-icon-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-icon-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-icon-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-icon-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-icon-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-icon-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-icon-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-icon-button-touch-target-display, block)}.mat-mdc-icon-button._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-icon-button[disabled],.mat-mdc-icon-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-icon-button-disabled-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-icon-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-icon-button img,.mat-mdc-icon-button svg{width:var(--mdc-icon-button-icon-size, 24px);height:var(--mdc-icon-button-icon-size, 24px);vertical-align:baseline}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple{border-radius:50%}.mat-mdc-icon-button[hidden]{display:none}.mat-mdc-icon-button.mat-unthemed:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-primary:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-accent:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-warn:not(.mdc-ripple-upgraded):focus::before{background:rgba(0,0,0,0);opacity:1}';
+// node_modules/@angular/material/fesm2022/icon-button-DxiIc1ex.mjs
+var _c0 = ["mat-icon-button", ""];
+var _c1 = ["*"];
 var MAT_BUTTON_CONFIG = new InjectionToken("MAT_BUTTON_CONFIG");
-var MAT_BUTTON_HOST = {
-  "[attr.disabled]": "_getDisabledAttribute()",
-  "[attr.aria-disabled]": "_getAriaDisabled()",
-  "[class.mat-mdc-button-disabled]": "disabled",
-  "[class.mat-mdc-button-disabled-interactive]": "disabledInteractive",
-  "[class._mat-animation-noopable]": '_animationMode === "NoopAnimations"',
-  // MDC automatically applies the primary theme color to the button, but we want to support
-  // an unthemed version. If color is undefined, apply a CSS class that makes it easy to
-  // select and style this "theme".
-  "[class.mat-unthemed]": "!color",
-  // Add a class that applies to all buttons. This makes it easier to target if somebody
-  // wants to target all Material buttons.
-  "[class.mat-mdc-button-base]": "true",
-  "[class]": 'color ? "mat-" + color : ""'
-};
-var HOST_SELECTOR_MDC_CLASS_PAIR = [{
-  attribute: "mat-button",
-  mdcClasses: ["mdc-button", "mat-mdc-button"]
-}, {
-  attribute: "mat-flat-button",
-  mdcClasses: ["mdc-button", "mdc-button--unelevated", "mat-mdc-unelevated-button"]
-}, {
-  attribute: "mat-raised-button",
-  mdcClasses: ["mdc-button", "mdc-button--raised", "mat-mdc-raised-button"]
-}, {
-  attribute: "mat-stroked-button",
-  mdcClasses: ["mdc-button", "mdc-button--outlined", "mat-mdc-outlined-button"]
-}, {
-  attribute: "mat-fab",
-  mdcClasses: ["mdc-fab", "mat-mdc-fab-base", "mat-mdc-fab"]
-}, {
-  attribute: "mat-mini-fab",
-  mdcClasses: ["mdc-fab", "mat-mdc-fab-base", "mdc-fab--mini", "mat-mdc-mini-fab"]
-}, {
-  attribute: "mat-icon-button",
-  mdcClasses: ["mdc-icon-button", "mat-mdc-icon-button"]
-}];
+function transformTabIndex(value) {
+  return value == null ? void 0 : numberAttribute(value);
+}
 var MatButtonBase = class _MatButtonBase {
   _elementRef = inject(ElementRef);
   _ngZone = inject(NgZone);
-  _animationMode = inject(ANIMATION_MODULE_TYPE, {
+  _animationsDisabled = _animationsDisabled();
+  _config = inject(MAT_BUTTON_CONFIG, {
     optional: true
   });
   _focusMonitor = inject(FocusMonitor);
+  _cleanupClick;
+  _renderer = inject(Renderer2);
   /**
    * Handles the lazy creation of the MatButton ripple.
    * Used to improve initial load time of large applications.
    */
   _rippleLoader = inject(MatRippleLoader);
+  /** Whether the button is set on an anchor node. */
+  _isAnchor;
   /** Whether this button is a FAB. Used to apply the correct class on the ripple. */
   _isFab = false;
   /**
    * Theme color of the button. This API is supported in M2 themes only, it has
-   * no effect in M3 themes. For color customization in M3, see https://material.angular.io/components/button/styling.
+   * no effect in M3 themes. For color customization in M3, see https://material.angular.dev/components/button/styling.
    *
    * For information on applying color variants in M3, see
-   * https://material.angular.io/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
+   * https://material.angular.dev/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
    */
   color;
   /** Whether the ripple effect is disabled or not. */
@@ -5370,7 +5434,9 @@ var MatButtonBase = class _MatButtonBase {
   /**
    * Natively disabled buttons prevent focus and any pointer events from reaching the button.
    * In some scenarios this might not be desirable, because it can prevent users from finding out
-   * why the button is disabled (e.g. via tooltip).
+   * why the button is disabled (e.g. via tooltip). This is also useful for buttons that may
+   * become disabled when activated, which would cause focus to be transferred to the document
+   * body instead of remaining on the button.
    *
    * Enabling this input will change the button so that it is styled to be disabled and will be
    * marked as `aria-disabled`, but it will allow the button to receive events and focus.
@@ -5379,31 +5445,33 @@ var MatButtonBase = class _MatButtonBase {
    * meant to be tabbable and you have to prevent the button action (e.g. form submissions).
    */
   disabledInteractive;
+  /** Tab index for the button. */
+  tabIndex;
+  /**
+   * Backwards-compatibility input that handles pre-existing `[tabindex]` bindings.
+   * @docs-private
+   */
+  set _tabindex(value) {
+    this.tabIndex = value;
+  }
   constructor() {
     inject(_CdkPrivateStyleLoader).load(_StructuralStylesLoader);
-    const config = inject(MAT_BUTTON_CONFIG, {
-      optional: true
-    });
     const element = this._elementRef.nativeElement;
-    const classList = element.classList;
-    this.disabledInteractive = config?.disabledInteractive ?? false;
-    this.color = config?.color ?? null;
+    this._isAnchor = element.tagName === "A";
+    this.disabledInteractive = this._config?.disabledInteractive ?? false;
+    this.color = this._config?.color ?? null;
     this._rippleLoader?.configureRipple(element, {
       className: "mat-mdc-button-ripple"
     });
-    for (const {
-      attribute,
-      mdcClasses
-    } of HOST_SELECTOR_MDC_CLASS_PAIR) {
-      if (element.hasAttribute(attribute)) {
-        classList.add(...mdcClasses);
-      }
-    }
   }
   ngAfterViewInit() {
     this._focusMonitor.monitor(this._elementRef, true);
+    if (this._isAnchor) {
+      this._setupAsAnchor();
+    }
   }
   ngOnDestroy() {
+    this._cleanupClick?.();
     this._focusMonitor.stopMonitoring(this._elementRef);
     this._rippleLoader?.destroyRipple(this._elementRef.nativeElement);
   }
@@ -5419,6 +5487,9 @@ var MatButtonBase = class _MatButtonBase {
     if (this.ariaDisabled != null) {
       return this.ariaDisabled;
     }
+    if (this._isAnchor) {
+      return this.disabled || null;
+    }
     return this.disabled && this.disabledInteractive ? true : null;
   }
   _getDisabledAttribute() {
@@ -5427,23 +5498,63 @@ var MatButtonBase = class _MatButtonBase {
   _updateRippleDisabled() {
     this._rippleLoader?.setDisabled(this._elementRef.nativeElement, this.disableRipple || this.disabled);
   }
+  _getTabIndex() {
+    if (this._isAnchor) {
+      return this.disabled && !this.disabledInteractive ? -1 : this.tabIndex;
+    }
+    return this.tabIndex;
+  }
+  _setupAsAnchor() {
+    this._cleanupClick = this._ngZone.runOutsideAngular(() => this._renderer.listen(this._elementRef.nativeElement, "click", (event) => {
+      if (this.disabled) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }));
+  }
   static \u0275fac = function MatButtonBase_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _MatButtonBase)();
   };
   static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
     type: _MatButtonBase,
+    hostAttrs: [1, "mat-mdc-button-base"],
+    hostVars: 13,
+    hostBindings: function MatButtonBase_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("disabled", ctx._getDisabledAttribute())("aria-disabled", ctx._getAriaDisabled())("tabindex", ctx._getTabIndex());
+        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "");
+        \u0275\u0275classProp("mat-mdc-button-disabled", ctx.disabled)("mat-mdc-button-disabled-interactive", ctx.disabledInteractive)("mat-unthemed", !ctx.color)("_mat-animation-noopable", ctx._animationsDisabled);
+      }
+    },
     inputs: {
       color: "color",
       disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
       disabled: [2, "disabled", "disabled", booleanAttribute],
       ariaDisabled: [2, "aria-disabled", "ariaDisabled", booleanAttribute],
-      disabledInteractive: [2, "disabledInteractive", "disabledInteractive", booleanAttribute]
+      disabledInteractive: [2, "disabledInteractive", "disabledInteractive", booleanAttribute],
+      tabIndex: [2, "tabIndex", "tabIndex", transformTabIndex],
+      _tabindex: [2, "tabindex", "_tabindex", transformTabIndex]
     }
   });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatButtonBase, [{
-    type: Directive
+    type: Directive,
+    args: [{
+      host: {
+        // Add a class that applies to all buttons. This makes it easier to target if somebody
+        // wants to target all Material buttons.
+        "class": "mat-mdc-button-base",
+        "[class]": 'color ? "mat-" + color : ""',
+        "[attr.disabled]": "_getDisabledAttribute()",
+        "[attr.aria-disabled]": "_getAriaDisabled()",
+        "[attr.tabindex]": "_getTabIndex()",
+        "[class.mat-mdc-button-disabled]": "disabled",
+        "[class.mat-mdc-button-disabled-interactive]": "disabledInteractive",
+        "[class.mat-unthemed]": "!color",
+        "[class._mat-animation-noopable]": "_animationsDisabled"
+      }
+    }]
   }], () => [], {
     color: [{
       type: Input
@@ -5472,113 +5583,145 @@ var MatButtonBase = class _MatButtonBase {
       args: [{
         transform: booleanAttribute
       }]
-    }]
-  });
-})();
-var MAT_ANCHOR_HOST = {
-  // Note that this is basically a noop on anchors,
-  // but it appears that some internal apps depend on it.
-  "[attr.disabled]": "_getDisabledAttribute()",
-  "[class.mat-mdc-button-disabled]": "disabled",
-  "[class.mat-mdc-button-disabled-interactive]": "disabledInteractive",
-  "[class._mat-animation-noopable]": '_animationMode === "NoopAnimations"',
-  // Note that we ignore the user-specified tabindex when it's disabled for
-  // consistency with the `mat-button` applied on native buttons where even
-  // though they have an index, they're not tabbable.
-  "[attr.tabindex]": "disabled && !disabledInteractive ? -1 : tabIndex",
-  "[attr.aria-disabled]": "_getAriaDisabled()",
-  // MDC automatically applies the primary theme color to the button, but we want to support
-  // an unthemed version. If color is undefined, apply a CSS class that makes it easy to
-  // select and style this "theme".
-  "[class.mat-unthemed]": "!color",
-  // Add a class that applies to all buttons. This makes it easier to target if somebody
-  // wants to target all Material buttons.
-  "[class.mat-mdc-button-base]": "true",
-  "[class]": 'color ? "mat-" + color : ""'
-};
-var MatAnchorBase = class _MatAnchorBase extends MatButtonBase {
-  _renderer = inject(Renderer2);
-  _cleanupClick;
-  tabIndex;
-  ngOnInit() {
-    this._ngZone.runOutsideAngular(() => {
-      this._cleanupClick = this._renderer.listen(this._elementRef.nativeElement, "click", this._haltDisabledEvents);
-    });
-  }
-  ngOnDestroy() {
-    super.ngOnDestroy();
-    this._cleanupClick?.();
-  }
-  _haltDisabledEvents = (event) => {
-    if (this.disabled) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-    }
-  };
-  _getAriaDisabled() {
-    if (this.ariaDisabled != null) {
-      return this.ariaDisabled;
-    }
-    return this.disabled || null;
-  }
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275MatAnchorBase_BaseFactory;
-    return function MatAnchorBase_Factory(__ngFactoryType__) {
-      return (\u0275MatAnchorBase_BaseFactory || (\u0275MatAnchorBase_BaseFactory = \u0275\u0275getInheritedFactory(_MatAnchorBase)))(__ngFactoryType__ || _MatAnchorBase);
-    };
-  })();
-  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
-    type: _MatAnchorBase,
-    inputs: {
-      tabIndex: [2, "tabIndex", "tabIndex", (value) => {
-        return value == null ? void 0 : numberAttribute(value);
-      }]
-    },
-    features: [\u0275\u0275InheritDefinitionFeature]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatAnchorBase, [{
-    type: Directive
-  }], null, {
+    }],
     tabIndex: [{
       type: Input,
       args: [{
-        transform: (value) => {
-          return value == null ? void 0 : numberAttribute(value);
-        }
+        transform: transformTabIndex
+      }]
+    }],
+    _tabindex: [{
+      type: Input,
+      args: [{
+        alias: "tabindex",
+        transform: transformTabIndex
       }]
     }]
   });
 })();
-var MatButton = class _MatButton extends MatButtonBase {
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275MatButton_BaseFactory;
-    return function MatButton_Factory(__ngFactoryType__) {
-      return (\u0275MatButton_BaseFactory || (\u0275MatButton_BaseFactory = \u0275\u0275getInheritedFactory(_MatButton)))(__ngFactoryType__ || _MatButton);
-    };
-  })();
+var MatIconButton = class _MatIconButton extends MatButtonBase {
+  constructor() {
+    super();
+    this._rippleLoader.configureRipple(this._elementRef.nativeElement, {
+      centered: true
+    });
+  }
+  static \u0275fac = function MatIconButton_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatIconButton)();
+  };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _MatButton,
-    selectors: [["button", "mat-button", ""], ["button", "mat-raised-button", ""], ["button", "mat-flat-button", ""], ["button", "mat-stroked-button", ""]],
-    hostVars: 14,
-    hostBindings: function MatButton_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("disabled", ctx._getDisabledAttribute())("aria-disabled", ctx._getAriaDisabled());
-        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "");
-        \u0275\u0275classProp("mat-mdc-button-disabled", ctx.disabled)("mat-mdc-button-disabled-interactive", ctx.disabledInteractive)("_mat-animation-noopable", ctx._animationMode === "NoopAnimations")("mat-unthemed", !ctx.color)("mat-mdc-button-base", true);
-      }
-    },
-    exportAs: ["matButton"],
+    type: _MatIconButton,
+    selectors: [["button", "mat-icon-button", ""], ["a", "mat-icon-button", ""], ["button", "matIconButton", ""], ["a", "matIconButton", ""]],
+    hostAttrs: [1, "mdc-icon-button", "mat-mdc-icon-button"],
+    exportAs: ["matButton", "matAnchor"],
     features: [\u0275\u0275InheritDefinitionFeature],
     attrs: _c0,
+    ngContentSelectors: _c1,
+    decls: 4,
+    vars: 0,
+    consts: [[1, "mat-mdc-button-persistent-ripple", "mdc-icon-button__ripple"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
+    template: function MatIconButton_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275element(0, "span", 0);
+        \u0275\u0275projection(1);
+        \u0275\u0275element(2, "span", 1)(3, "span", 2);
+      }
+    },
+    styles: ['.mat-mdc-icon-button{-webkit-user-select:none;user-select:none;display:inline-block;position:relative;box-sizing:border-box;border:none;outline:none;background-color:rgba(0,0,0,0);fill:currentColor;text-decoration:none;cursor:pointer;z-index:0;overflow:visible;border-radius:var(--mat-icon-button-container-shape, var(--mat-sys-corner-full, 50%));flex-shrink:0;text-align:center;width:var(--mat-icon-button-state-layer-size, 40px);height:var(--mat-icon-button-state-layer-size, 40px);padding:calc(calc(var(--mat-icon-button-state-layer-size, 40px) - var(--mat-icon-button-icon-size, 24px)) / 2);font-size:var(--mat-icon-button-icon-size, 24px);color:var(--mat-icon-button-icon-color, var(--mat-sys-on-surface-variant));-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-icon-button .mat-mdc-button-ripple,.mat-mdc-icon-button .mat-mdc-button-persistent-ripple,.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-icon-button .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-icon-button .mdc-button__label,.mat-mdc-icon-button .mat-icon{z-index:1;position:relative}.mat-mdc-icon-button .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:inherit}.mat-mdc-icon-button:focus>.mat-focus-indicator::before{content:"";border-radius:inherit}.mat-mdc-icon-button .mat-ripple-element{background-color:var(--mat-icon-button-ripple-color, color-mix(in srgb, var(--mat-sys-on-surface-variant) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-icon-button-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-icon-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-icon-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-icon-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-icon-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-icon-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-icon-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-icon-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-icon-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-icon-button-touch-target-display, block);left:50%;width:48px;transform:translate(-50%, -50%)}.mat-mdc-icon-button._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-icon-button[disabled],.mat-mdc-icon-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-icon-button-disabled-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-icon-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-icon-button img,.mat-mdc-icon-button svg{width:var(--mat-icon-button-icon-size, 24px);height:var(--mat-icon-button-icon-size, 24px);vertical-align:baseline}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple{border-radius:var(--mat-icon-button-container-shape, var(--mat-sys-corner-full, 50%))}.mat-mdc-icon-button[hidden]{display:none}.mat-mdc-icon-button.mat-unthemed:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-primary:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-accent:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-warn:not(.mdc-ripple-upgraded):focus::before{background:rgba(0,0,0,0);opacity:1}\n', "@media(forced-colors: active){.mat-mdc-button:not(.mdc-button--outlined),.mat-mdc-unelevated-button:not(.mdc-button--outlined),.mat-mdc-raised-button:not(.mdc-button--outlined),.mat-mdc-outlined-button:not(.mdc-button--outlined),.mat-mdc-button-base.mat-tonal-button,.mat-mdc-icon-button.mat-mdc-icon-button,.mat-mdc-outlined-button .mdc-button__ripple{outline:solid 1px}}\n"],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatIconButton, [{
+    type: Component,
+    args: [{
+      selector: `button[mat-icon-button], a[mat-icon-button], button[matIconButton], a[matIconButton]`,
+      host: {
+        "class": "mdc-icon-button mat-mdc-icon-button"
+      },
+      exportAs: "matButton, matAnchor",
+      encapsulation: ViewEncapsulation.None,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      template: `<span class="mat-mdc-button-persistent-ripple mdc-icon-button__ripple"></span>
+
+<ng-content></ng-content>
+
+<!--
+  The indicator can't be directly on the button, because MDC uses ::before for high contrast
+  indication and it can't be on the ripple, because it has a border radius and overflow: hidden.
+-->
+<span class="mat-focus-indicator"></span>
+
+<span class="mat-mdc-button-touch-target"></span>
+`,
+      styles: ['.mat-mdc-icon-button{-webkit-user-select:none;user-select:none;display:inline-block;position:relative;box-sizing:border-box;border:none;outline:none;background-color:rgba(0,0,0,0);fill:currentColor;text-decoration:none;cursor:pointer;z-index:0;overflow:visible;border-radius:var(--mat-icon-button-container-shape, var(--mat-sys-corner-full, 50%));flex-shrink:0;text-align:center;width:var(--mat-icon-button-state-layer-size, 40px);height:var(--mat-icon-button-state-layer-size, 40px);padding:calc(calc(var(--mat-icon-button-state-layer-size, 40px) - var(--mat-icon-button-icon-size, 24px)) / 2);font-size:var(--mat-icon-button-icon-size, 24px);color:var(--mat-icon-button-icon-color, var(--mat-sys-on-surface-variant));-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-icon-button .mat-mdc-button-ripple,.mat-mdc-icon-button .mat-mdc-button-persistent-ripple,.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-icon-button .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-icon-button .mdc-button__label,.mat-mdc-icon-button .mat-icon{z-index:1;position:relative}.mat-mdc-icon-button .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:inherit}.mat-mdc-icon-button:focus>.mat-focus-indicator::before{content:"";border-radius:inherit}.mat-mdc-icon-button .mat-ripple-element{background-color:var(--mat-icon-button-ripple-color, color-mix(in srgb, var(--mat-sys-on-surface-variant) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-icon-button-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-icon-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-icon-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-icon-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-icon-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-icon-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-icon-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-icon-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-icon-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-icon-button-touch-target-display, block);left:50%;width:48px;transform:translate(-50%, -50%)}.mat-mdc-icon-button._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-icon-button[disabled],.mat-mdc-icon-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-icon-button-disabled-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-icon-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-icon-button img,.mat-mdc-icon-button svg{width:var(--mat-icon-button-icon-size, 24px);height:var(--mat-icon-button-icon-size, 24px);vertical-align:baseline}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple{border-radius:var(--mat-icon-button-container-shape, var(--mat-sys-corner-full, 50%))}.mat-mdc-icon-button[hidden]{display:none}.mat-mdc-icon-button.mat-unthemed:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-primary:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-accent:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-warn:not(.mdc-ripple-upgraded):focus::before{background:rgba(0,0,0,0);opacity:1}\n', "@media(forced-colors: active){.mat-mdc-button:not(.mdc-button--outlined),.mat-mdc-unelevated-button:not(.mdc-button--outlined),.mat-mdc-raised-button:not(.mdc-button--outlined),.mat-mdc-outlined-button:not(.mdc-button--outlined),.mat-mdc-button-base.mat-tonal-button,.mat-mdc-icon-button.mat-mdc-icon-button,.mat-mdc-outlined-button .mdc-button__ripple{outline:solid 1px}}\n"]
+    }]
+  }], () => [], null);
+})();
+
+// node_modules/@angular/material/fesm2022/button.mjs
+var _c02 = ["matButton", ""];
+var _c12 = [[["", 8, "material-icons", 3, "iconPositionEnd", ""], ["mat-icon", 3, "iconPositionEnd", ""], ["", "matButtonIcon", "", 3, "iconPositionEnd", ""]], "*", [["", "iconPositionEnd", "", 8, "material-icons"], ["mat-icon", "iconPositionEnd", ""], ["", "matButtonIcon", "", "iconPositionEnd", ""]]];
+var _c2 = [".material-icons:not([iconPositionEnd]), mat-icon:not([iconPositionEnd]), [matButtonIcon]:not([iconPositionEnd])", "*", ".material-icons[iconPositionEnd], mat-icon[iconPositionEnd], [matButtonIcon][iconPositionEnd]"];
+var _c3 = ["mat-fab", ""];
+var _c4 = ["mat-mini-fab", ""];
+var _c5 = '.mat-mdc-fab-base{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:56px;height:56px;padding:0;border:none;fill:currentColor;text-decoration:none;cursor:pointer;-moz-appearance:none;-webkit-appearance:none;overflow:visible;transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),opacity 15ms linear 30ms,transform 270ms 0ms cubic-bezier(0, 0, 0.2, 1);flex-shrink:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-fab-base .mat-mdc-button-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-fab-base .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-fab-base .mdc-button__label,.mat-mdc-fab-base .mat-icon{z-index:1;position:relative}.mat-mdc-fab-base .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-fab-base:focus>.mat-focus-indicator::before{content:""}.mat-mdc-fab-base._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-fab-base::before{position:absolute;box-sizing:border-box;width:100%;height:100%;top:0;left:0;border:1px solid rgba(0,0,0,0);border-radius:inherit;content:"";pointer-events:none}.mat-mdc-fab-base[hidden]{display:none}.mat-mdc-fab-base::-moz-focus-inner{padding:0;border:0}.mat-mdc-fab-base:active,.mat-mdc-fab-base:focus{outline:none}.mat-mdc-fab-base:hover{cursor:pointer}.mat-mdc-fab-base>svg{width:100%}.mat-mdc-fab-base .mat-icon,.mat-mdc-fab-base .material-icons{transition:transform 180ms 90ms cubic-bezier(0, 0, 0.2, 1);fill:currentColor;will-change:transform}.mat-mdc-fab-base .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base[disabled]:focus,.mat-mdc-fab-base.mat-mdc-button-disabled,.mat-mdc-fab-base.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-fab-base.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab{background-color:var(--mat-fab-container-color, var(--mat-sys-primary-container));border-radius:var(--mat-fab-container-shape, var(--mat-sys-corner-large));color:var(--mat-fab-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mat-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:hover{box-shadow:var(--mat-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-fab:focus{box-shadow:var(--mat-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:active,.mat-mdc-fab:focus:active{box-shadow:var(--mat-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab[disabled],.mat-mdc-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-fab-touch-target-display, block);left:50%;width:48px;transform:translate(-50%, -50%)}.mat-mdc-fab .mat-ripple-element{background-color:var(--mat-fab-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-disabled-state-layer-color)}.mat-mdc-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-mini-fab{width:40px;height:40px;background-color:var(--mat-fab-small-container-color, var(--mat-sys-primary-container));border-radius:var(--mat-fab-small-container-shape, var(--mat-sys-corner-medium));color:var(--mat-fab-small-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mat-fab-small-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:hover{box-shadow:var(--mat-fab-small-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-mini-fab:focus{box-shadow:var(--mat-fab-small-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:active,.mat-mdc-mini-fab:focus:active{box-shadow:var(--mat-fab-small-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab[disabled],.mat-mdc-mini-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-small-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-small-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-mini-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-fab-small-touch-target-display);left:50%;width:48px;transform:translate(-50%, -50%)}.mat-mdc-mini-fab .mat-ripple-element{background-color:var(--mat-fab-small-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-mini-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-mini-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-disabled-state-layer-color)}.mat-mdc-mini-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-mini-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-mini-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-extended-fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;padding-left:20px;padding-right:20px;width:auto;max-width:100%;line-height:normal;box-shadow:var(--mat-fab-extended-container-elevation-shadow, var(--mat-sys-level3));height:var(--mat-fab-extended-container-height, 56px);border-radius:var(--mat-fab-extended-container-shape, var(--mat-sys-corner-large));font-family:var(--mat-fab-extended-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-fab-extended-label-text-size, var(--mat-sys-label-large-size));font-weight:var(--mat-fab-extended-label-text-weight, var(--mat-sys-label-large-weight));letter-spacing:var(--mat-fab-extended-label-text-tracking, var(--mat-sys-label-large-tracking))}.mat-mdc-extended-fab:hover{box-shadow:var(--mat-fab-extended-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-extended-fab:focus{box-shadow:var(--mat-fab-extended-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:active,.mat-mdc-extended-fab:focus:active{box-shadow:var(--mat-fab-extended-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab[disabled]:focus,.mat-mdc-extended-fab.mat-mdc-button-disabled,.mat-mdc-extended-fab.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-extended-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.mat-icon,[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.material-icons,.mat-mdc-extended-fab>.mat-icon,.mat-mdc-extended-fab>.material-icons{margin-left:-8px;margin-right:12px}.mat-mdc-extended-fab .mdc-button__label+.mat-icon,.mat-mdc-extended-fab .mdc-button__label+.material-icons,[dir=rtl] .mat-mdc-extended-fab>.mat-icon,[dir=rtl] .mat-mdc-extended-fab>.material-icons{margin-left:12px;margin-right:-8px}.mat-mdc-extended-fab .mat-mdc-button-touch-target{width:100%}\n';
+var APPEARANCE_CLASSES = /* @__PURE__ */ new Map([["text", ["mat-mdc-button"]], ["filled", ["mdc-button--unelevated", "mat-mdc-unelevated-button"]], ["elevated", ["mdc-button--raised", "mat-mdc-raised-button"]], ["outlined", ["mdc-button--outlined", "mat-mdc-outlined-button"]], ["tonal", ["mat-tonal-button"]]]);
+var MatButton = class _MatButton extends MatButtonBase {
+  /** Appearance of the button. */
+  get appearance() {
+    return this._appearance;
+  }
+  set appearance(value) {
+    this.setAppearance(value || this._config?.defaultAppearance || "text");
+  }
+  _appearance = null;
+  constructor() {
+    super();
+    const inferredAppearance = _inferAppearance(this._elementRef.nativeElement);
+    if (inferredAppearance) {
+      this.setAppearance(inferredAppearance);
+    }
+  }
+  /** Programmatically sets the appearance of the button. */
+  setAppearance(appearance) {
+    if (appearance === this._appearance) {
+      return;
+    }
+    const classList = this._elementRef.nativeElement.classList;
+    const previousClasses = this._appearance ? APPEARANCE_CLASSES.get(this._appearance) : null;
+    const newClasses = APPEARANCE_CLASSES.get(appearance);
+    if ((typeof ngDevMode === "undefined" || ngDevMode) && !newClasses) {
+      throw new Error(`Unsupported MatButton appearance "${appearance}"`);
+    }
+    if (previousClasses) {
+      classList.remove(...previousClasses);
+    }
+    classList.add(...newClasses);
+    this._appearance = appearance;
+  }
+  static \u0275fac = function MatButton_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatButton)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _MatButton,
+    selectors: [["button", "matButton", ""], ["a", "matButton", ""], ["button", "mat-button", ""], ["button", "mat-raised-button", ""], ["button", "mat-flat-button", ""], ["button", "mat-stroked-button", ""], ["a", "mat-button", ""], ["a", "mat-raised-button", ""], ["a", "mat-flat-button", ""], ["a", "mat-stroked-button", ""]],
+    hostAttrs: [1, "mdc-button"],
+    inputs: {
+      appearance: [0, "matButton", "appearance"]
+    },
+    exportAs: ["matButton", "matAnchor"],
+    features: [\u0275\u0275InheritDefinitionFeature],
+    attrs: _c02,
     ngContentSelectors: _c2,
     decls: 7,
     vars: 4,
     consts: [[1, "mat-mdc-button-persistent-ripple"], [1, "mdc-button__label"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
     template: function MatButton_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c1);
+        \u0275\u0275projectionDef(_c12);
         \u0275\u0275element(0, "span", 0);
         \u0275\u0275projection(1);
         \u0275\u0275elementStart(2, "span", 1);
@@ -5591,7 +5734,7 @@ var MatButton = class _MatButton extends MatButtonBase {
         \u0275\u0275classProp("mdc-button__ripple", !ctx._isFab)("mdc-fab__ripple", ctx._isFab);
       }
     },
-    styles: ['.mat-mdc-button-base{text-decoration:none}.mdc-button{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:64px;border:none;outline:none;line-height:inherit;-webkit-appearance:none;overflow:visible;vertical-align:middle;background:rgba(0,0,0,0);padding:0 8px}.mdc-button::-moz-focus-inner{padding:0;border:0}.mdc-button:active{outline:none}.mdc-button:hover{cursor:pointer}.mdc-button:disabled{cursor:default;pointer-events:none}.mdc-button[hidden]{display:none}.mdc-button .mdc-button__label{position:relative}.mat-mdc-button{padding:0 var(--mat-text-button-horizontal-padding, 12px);height:var(--mdc-text-button-container-height, 40px);font-family:var(--mdc-text-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-text-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-text-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-text-button-label-text-transform);font-weight:var(--mdc-text-button-label-text-weight, var(--mat-sys-label-large-weight))}.mat-mdc-button,.mat-mdc-button .mdc-button__ripple{border-radius:var(--mdc-text-button-container-shape, var(--mat-sys-corner-full))}.mat-mdc-button:not(:disabled){color:var(--mdc-text-button-label-text-color, var(--mat-sys-primary))}.mat-mdc-button[disabled],.mat-mdc-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-text-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-button:has(.material-icons,mat-icon,[matButtonIcon]){padding:0 var(--mat-text-button-with-icon-horizontal-padding, 16px)}.mat-mdc-button>.mat-icon{margin-right:var(--mat-text-button-icon-spacing, 8px);margin-left:var(--mat-text-button-icon-offset, -4px)}[dir=rtl] .mat-mdc-button>.mat-icon{margin-right:var(--mat-text-button-icon-offset, -4px);margin-left:var(--mat-text-button-icon-spacing, 8px)}.mat-mdc-button .mdc-button__label+.mat-icon{margin-right:var(--mat-text-button-icon-offset, -4px);margin-left:var(--mat-text-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-button .mdc-button__label+.mat-icon{margin-right:var(--mat-text-button-icon-spacing, 8px);margin-left:var(--mat-text-button-icon-offset, -4px)}.mat-mdc-button .mat-ripple-element{background-color:var(--mat-text-button-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-text-button-state-layer-color, var(--mat-sys-primary))}.mat-mdc-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-text-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-text-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-text-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-text-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-text-button-touch-target-display, block)}.mat-mdc-unelevated-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mdc-filled-button-container-height, 40px);font-family:var(--mdc-filled-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-filled-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-filled-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-filled-button-label-text-transform);font-weight:var(--mdc-filled-button-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-filled-button-horizontal-padding, 24px)}.mat-mdc-unelevated-button>.mat-icon{margin-right:var(--mat-filled-button-icon-spacing, 8px);margin-left:var(--mat-filled-button-icon-offset, -8px)}[dir=rtl] .mat-mdc-unelevated-button>.mat-icon{margin-right:var(--mat-filled-button-icon-offset, -8px);margin-left:var(--mat-filled-button-icon-spacing, 8px)}.mat-mdc-unelevated-button .mdc-button__label+.mat-icon{margin-right:var(--mat-filled-button-icon-offset, -8px);margin-left:var(--mat-filled-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-unelevated-button .mdc-button__label+.mat-icon{margin-right:var(--mat-filled-button-icon-spacing, 8px);margin-left:var(--mat-filled-button-icon-offset, -8px)}.mat-mdc-unelevated-button .mat-ripple-element{background-color:var(--mat-filled-button-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-filled-button-state-layer-color, var(--mat-sys-on-primary))}.mat-mdc-unelevated-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-filled-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-unelevated-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-filled-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-unelevated-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-filled-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-unelevated-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-filled-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-unelevated-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-filled-button-touch-target-display, block)}.mat-mdc-unelevated-button:not(:disabled){color:var(--mdc-filled-button-label-text-color, var(--mat-sys-on-primary));background-color:var(--mdc-filled-button-container-color, var(--mat-sys-primary))}.mat-mdc-unelevated-button,.mat-mdc-unelevated-button .mdc-button__ripple{border-radius:var(--mdc-filled-button-container-shape, var(--mat-sys-corner-full))}.mat-mdc-unelevated-button[disabled],.mat-mdc-unelevated-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-filled-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mdc-filled-button-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-unelevated-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-raised-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);box-shadow:var(--mdc-protected-button-container-elevation-shadow, var(--mat-sys-level1));height:var(--mdc-protected-button-container-height, 40px);font-family:var(--mdc-protected-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-protected-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-protected-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-protected-button-label-text-transform);font-weight:var(--mdc-protected-button-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-protected-button-horizontal-padding, 24px)}.mat-mdc-raised-button>.mat-icon{margin-right:var(--mat-protected-button-icon-spacing, 8px);margin-left:var(--mat-protected-button-icon-offset, -8px)}[dir=rtl] .mat-mdc-raised-button>.mat-icon{margin-right:var(--mat-protected-button-icon-offset, -8px);margin-left:var(--mat-protected-button-icon-spacing, 8px)}.mat-mdc-raised-button .mdc-button__label+.mat-icon{margin-right:var(--mat-protected-button-icon-offset, -8px);margin-left:var(--mat-protected-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-raised-button .mdc-button__label+.mat-icon{margin-right:var(--mat-protected-button-icon-spacing, 8px);margin-left:var(--mat-protected-button-icon-offset, -8px)}.mat-mdc-raised-button .mat-ripple-element{background-color:var(--mat-protected-button-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-protected-button-state-layer-color, var(--mat-sys-primary))}.mat-mdc-raised-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-protected-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-raised-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-protected-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-raised-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-protected-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-raised-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-protected-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-raised-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-protected-button-touch-target-display, block)}.mat-mdc-raised-button:not(:disabled){color:var(--mdc-protected-button-label-text-color, var(--mat-sys-primary));background-color:var(--mdc-protected-button-container-color, var(--mat-sys-surface))}.mat-mdc-raised-button,.mat-mdc-raised-button .mdc-button__ripple{border-radius:var(--mdc-protected-button-container-shape, var(--mat-sys-corner-full))}.mat-mdc-raised-button:hover{box-shadow:var(--mdc-protected-button-hover-container-elevation-shadow, var(--mat-sys-level2))}.mat-mdc-raised-button:focus{box-shadow:var(--mdc-protected-button-focus-container-elevation-shadow, var(--mat-sys-level1))}.mat-mdc-raised-button:active,.mat-mdc-raised-button:focus:active{box-shadow:var(--mdc-protected-button-pressed-container-elevation-shadow, var(--mat-sys-level1))}.mat-mdc-raised-button[disabled],.mat-mdc-raised-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-protected-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mdc-protected-button-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-raised-button[disabled].mat-mdc-button-disabled,.mat-mdc-raised-button.mat-mdc-button-disabled.mat-mdc-button-disabled{box-shadow:var(--mdc-protected-button-disabled-container-elevation-shadow, var(--mat-sys-level0))}.mat-mdc-raised-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-outlined-button{border-style:solid;transition:border 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mdc-outlined-button-container-height, 40px);font-family:var(--mdc-outlined-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-outlined-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-outlined-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-outlined-button-label-text-transform);font-weight:var(--mdc-outlined-button-label-text-weight, var(--mat-sys-label-large-weight));border-radius:var(--mdc-outlined-button-container-shape, var(--mat-sys-corner-full));border-width:var(--mdc-outlined-button-outline-width, 1px);padding:0 var(--mat-outlined-button-horizontal-padding, 24px)}.mat-mdc-outlined-button>.mat-icon{margin-right:var(--mat-outlined-button-icon-spacing, 8px);margin-left:var(--mat-outlined-button-icon-offset, -8px)}[dir=rtl] .mat-mdc-outlined-button>.mat-icon{margin-right:var(--mat-outlined-button-icon-offset, -8px);margin-left:var(--mat-outlined-button-icon-spacing, 8px)}.mat-mdc-outlined-button .mdc-button__label+.mat-icon{margin-right:var(--mat-outlined-button-icon-offset, -8px);margin-left:var(--mat-outlined-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-outlined-button .mdc-button__label+.mat-icon{margin-right:var(--mat-outlined-button-icon-spacing, 8px);margin-left:var(--mat-outlined-button-icon-offset, -8px)}.mat-mdc-outlined-button .mat-ripple-element{background-color:var(--mat-outlined-button-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-outlined-button-state-layer-color, var(--mat-sys-primary))}.mat-mdc-outlined-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-outlined-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-outlined-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-outlined-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-outlined-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-outlined-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-outlined-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-outlined-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-outlined-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-outlined-button-touch-target-display, block)}.mat-mdc-outlined-button:not(:disabled){color:var(--mdc-outlined-button-label-text-color, var(--mat-sys-primary));border-color:var(--mdc-outlined-button-outline-color, var(--mat-sys-outline))}.mat-mdc-outlined-button[disabled],.mat-mdc-outlined-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-outlined-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:var(--mdc-outlined-button-disabled-outline-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-outlined-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-button,.mat-mdc-unelevated-button,.mat-mdc-raised-button,.mat-mdc-outlined-button{-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-button .mat-mdc-button-ripple,.mat-mdc-button .mat-mdc-button-persistent-ripple,.mat-mdc-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button .mat-mdc-button-ripple,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button .mat-mdc-button-ripple,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-button .mat-mdc-button-ripple,.mat-mdc-unelevated-button .mat-mdc-button-ripple,.mat-mdc-raised-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-button .mdc-button__label,.mat-mdc-button .mat-icon,.mat-mdc-unelevated-button .mdc-button__label,.mat-mdc-unelevated-button .mat-icon,.mat-mdc-raised-button .mdc-button__label,.mat-mdc-raised-button .mat-icon,.mat-mdc-outlined-button .mdc-button__label,.mat-mdc-outlined-button .mat-icon{z-index:1;position:relative}.mat-mdc-button .mat-focus-indicator,.mat-mdc-unelevated-button .mat-focus-indicator,.mat-mdc-raised-button .mat-focus-indicator,.mat-mdc-outlined-button .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-button:focus>.mat-focus-indicator::before,.mat-mdc-unelevated-button:focus>.mat-focus-indicator::before,.mat-mdc-raised-button:focus>.mat-focus-indicator::before,.mat-mdc-outlined-button:focus>.mat-focus-indicator::before{content:""}.mat-mdc-button._mat-animation-noopable,.mat-mdc-unelevated-button._mat-animation-noopable,.mat-mdc-raised-button._mat-animation-noopable,.mat-mdc-outlined-button._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-button>.mat-icon,.mat-mdc-unelevated-button>.mat-icon,.mat-mdc-raised-button>.mat-icon,.mat-mdc-outlined-button>.mat-icon{display:inline-block;position:relative;vertical-align:top;font-size:1.125rem;height:1.125rem;width:1.125rem}.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mdc-button__ripple{top:-1px;left:-1px;bottom:-1px;right:-1px}.mat-mdc-unelevated-button .mat-focus-indicator::before,.mat-mdc-raised-button .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-outlined-button .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 3px)*-1)}', "@media(forced-colors: active){.mat-mdc-button:not(.mdc-button--outlined),.mat-mdc-unelevated-button:not(.mdc-button--outlined),.mat-mdc-raised-button:not(.mdc-button--outlined),.mat-mdc-outlined-button:not(.mdc-button--outlined),.mat-mdc-icon-button.mat-mdc-icon-button,.mat-mdc-outlined-button .mdc-button__ripple{outline:solid 1px}}"],
+    styles: ['.mat-mdc-button-base{text-decoration:none}.mdc-button{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:64px;border:none;outline:none;line-height:inherit;-webkit-appearance:none;overflow:visible;vertical-align:middle;background:rgba(0,0,0,0);padding:0 8px}.mdc-button::-moz-focus-inner{padding:0;border:0}.mdc-button:active{outline:none}.mdc-button:hover{cursor:pointer}.mdc-button:disabled{cursor:default;pointer-events:none}.mdc-button[hidden]{display:none}.mdc-button .mdc-button__label{position:relative}.mat-mdc-button{padding:0 var(--mat-button-text-horizontal-padding, 12px);height:var(--mat-button-text-container-height, 40px);font-family:var(--mat-button-text-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-button-text-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mat-button-text-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mat-button-text-label-text-transform);font-weight:var(--mat-button-text-label-text-weight, var(--mat-sys-label-large-weight))}.mat-mdc-button,.mat-mdc-button .mdc-button__ripple{border-radius:var(--mat-button-text-container-shape, var(--mat-sys-corner-full))}.mat-mdc-button:not(:disabled){color:var(--mat-button-text-label-text-color, var(--mat-sys-primary))}.mat-mdc-button[disabled],.mat-mdc-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-button-text-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-button:has(.material-icons,mat-icon,[matButtonIcon]){padding:0 var(--mat-button-text-with-icon-horizontal-padding, 16px)}.mat-mdc-button>.mat-icon{margin-right:var(--mat-button-text-icon-spacing, 8px);margin-left:var(--mat-button-text-icon-offset, -4px)}[dir=rtl] .mat-mdc-button>.mat-icon{margin-right:var(--mat-button-text-icon-offset, -4px);margin-left:var(--mat-button-text-icon-spacing, 8px)}.mat-mdc-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-text-icon-offset, -4px);margin-left:var(--mat-button-text-icon-spacing, 8px)}[dir=rtl] .mat-mdc-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-text-icon-spacing, 8px);margin-left:var(--mat-button-text-icon-offset, -4px)}.mat-mdc-button .mat-ripple-element{background-color:var(--mat-button-text-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-text-state-layer-color, var(--mat-sys-primary))}.mat-mdc-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-text-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-text-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-text-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-text-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-button-text-touch-target-display, block);left:0;right:0;transform:translateY(-50%)}.mat-mdc-unelevated-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mat-button-filled-container-height, 40px);font-family:var(--mat-button-filled-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-button-filled-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mat-button-filled-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mat-button-filled-label-text-transform);font-weight:var(--mat-button-filled-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-button-filled-horizontal-padding, 24px)}.mat-mdc-unelevated-button>.mat-icon{margin-right:var(--mat-button-filled-icon-spacing, 8px);margin-left:var(--mat-button-filled-icon-offset, -8px)}[dir=rtl] .mat-mdc-unelevated-button>.mat-icon{margin-right:var(--mat-button-filled-icon-offset, -8px);margin-left:var(--mat-button-filled-icon-spacing, 8px)}.mat-mdc-unelevated-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-filled-icon-offset, -8px);margin-left:var(--mat-button-filled-icon-spacing, 8px)}[dir=rtl] .mat-mdc-unelevated-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-filled-icon-spacing, 8px);margin-left:var(--mat-button-filled-icon-offset, -8px)}.mat-mdc-unelevated-button .mat-ripple-element{background-color:var(--mat-button-filled-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-filled-state-layer-color, var(--mat-sys-on-primary))}.mat-mdc-unelevated-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-filled-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-unelevated-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-filled-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-unelevated-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-filled-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-unelevated-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-filled-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-unelevated-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-button-filled-touch-target-display, block);left:0;right:0;transform:translateY(-50%)}.mat-mdc-unelevated-button:not(:disabled){color:var(--mat-button-filled-label-text-color, var(--mat-sys-on-primary));background-color:var(--mat-button-filled-container-color, var(--mat-sys-primary))}.mat-mdc-unelevated-button,.mat-mdc-unelevated-button .mdc-button__ripple{border-radius:var(--mat-button-filled-container-shape, var(--mat-sys-corner-full))}.mat-mdc-unelevated-button[disabled],.mat-mdc-unelevated-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-button-filled-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-button-filled-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-unelevated-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-raised-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);box-shadow:var(--mat-button-protected-container-elevation-shadow, var(--mat-sys-level1));height:var(--mat-button-protected-container-height, 40px);font-family:var(--mat-button-protected-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-button-protected-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mat-button-protected-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mat-button-protected-label-text-transform);font-weight:var(--mat-button-protected-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-button-protected-horizontal-padding, 24px)}.mat-mdc-raised-button>.mat-icon{margin-right:var(--mat-button-protected-icon-spacing, 8px);margin-left:var(--mat-button-protected-icon-offset, -8px)}[dir=rtl] .mat-mdc-raised-button>.mat-icon{margin-right:var(--mat-button-protected-icon-offset, -8px);margin-left:var(--mat-button-protected-icon-spacing, 8px)}.mat-mdc-raised-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-protected-icon-offset, -8px);margin-left:var(--mat-button-protected-icon-spacing, 8px)}[dir=rtl] .mat-mdc-raised-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-protected-icon-spacing, 8px);margin-left:var(--mat-button-protected-icon-offset, -8px)}.mat-mdc-raised-button .mat-ripple-element{background-color:var(--mat-button-protected-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-protected-state-layer-color, var(--mat-sys-primary))}.mat-mdc-raised-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-protected-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-raised-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-protected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-raised-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-protected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-raised-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-protected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-raised-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-button-protected-touch-target-display, block);left:0;right:0;transform:translateY(-50%)}.mat-mdc-raised-button:not(:disabled){color:var(--mat-button-protected-label-text-color, var(--mat-sys-primary));background-color:var(--mat-button-protected-container-color, var(--mat-sys-surface))}.mat-mdc-raised-button,.mat-mdc-raised-button .mdc-button__ripple{border-radius:var(--mat-button-protected-container-shape, var(--mat-sys-corner-full))}.mat-mdc-raised-button:hover{box-shadow:var(--mat-button-protected-hover-container-elevation-shadow, var(--mat-sys-level2))}.mat-mdc-raised-button:focus{box-shadow:var(--mat-button-protected-focus-container-elevation-shadow, var(--mat-sys-level1))}.mat-mdc-raised-button:active,.mat-mdc-raised-button:focus:active{box-shadow:var(--mat-button-protected-pressed-container-elevation-shadow, var(--mat-sys-level1))}.mat-mdc-raised-button[disabled],.mat-mdc-raised-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-button-protected-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-button-protected-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-raised-button[disabled].mat-mdc-button-disabled,.mat-mdc-raised-button.mat-mdc-button-disabled.mat-mdc-button-disabled{box-shadow:var(--mat-button-protected-disabled-container-elevation-shadow, var(--mat-sys-level0))}.mat-mdc-raised-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-outlined-button{border-style:solid;transition:border 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mat-button-outlined-container-height, 40px);font-family:var(--mat-button-outlined-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-button-outlined-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mat-button-outlined-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mat-button-outlined-label-text-transform);font-weight:var(--mat-button-outlined-label-text-weight, var(--mat-sys-label-large-weight));border-radius:var(--mat-button-outlined-container-shape, var(--mat-sys-corner-full));border-width:var(--mat-button-outlined-outline-width, 1px);padding:0 var(--mat-button-outlined-horizontal-padding, 24px)}.mat-mdc-outlined-button>.mat-icon{margin-right:var(--mat-button-outlined-icon-spacing, 8px);margin-left:var(--mat-button-outlined-icon-offset, -8px)}[dir=rtl] .mat-mdc-outlined-button>.mat-icon{margin-right:var(--mat-button-outlined-icon-offset, -8px);margin-left:var(--mat-button-outlined-icon-spacing, 8px)}.mat-mdc-outlined-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-outlined-icon-offset, -8px);margin-left:var(--mat-button-outlined-icon-spacing, 8px)}[dir=rtl] .mat-mdc-outlined-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-outlined-icon-spacing, 8px);margin-left:var(--mat-button-outlined-icon-offset, -8px)}.mat-mdc-outlined-button .mat-ripple-element{background-color:var(--mat-button-outlined-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-outlined-state-layer-color, var(--mat-sys-primary))}.mat-mdc-outlined-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-outlined-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-outlined-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-outlined-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-outlined-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-outlined-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-outlined-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-outlined-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-outlined-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-button-outlined-touch-target-display, block);left:0;right:0;transform:translateY(-50%)}.mat-mdc-outlined-button:not(:disabled){color:var(--mat-button-outlined-label-text-color, var(--mat-sys-primary));border-color:var(--mat-button-outlined-outline-color, var(--mat-sys-outline))}.mat-mdc-outlined-button[disabled],.mat-mdc-outlined-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-button-outlined-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:var(--mat-button-outlined-disabled-outline-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-outlined-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-tonal-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mat-button-tonal-container-height, 40px);font-family:var(--mat-button-tonal-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-button-tonal-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mat-button-tonal-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mat-button-tonal-label-text-transform);font-weight:var(--mat-button-tonal-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-button-tonal-horizontal-padding, 24px)}.mat-tonal-button:not(:disabled){color:var(--mat-button-tonal-label-text-color, var(--mat-sys-on-secondary-container));background-color:var(--mat-button-tonal-container-color, var(--mat-sys-secondary-container))}.mat-tonal-button,.mat-tonal-button .mdc-button__ripple{border-radius:var(--mat-button-tonal-container-shape, var(--mat-sys-corner-full))}.mat-tonal-button[disabled],.mat-tonal-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-button-tonal-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-button-tonal-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-tonal-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-tonal-button>.mat-icon{margin-right:var(--mat-button-tonal-icon-spacing, 8px);margin-left:var(--mat-button-tonal-icon-offset, -8px)}[dir=rtl] .mat-tonal-button>.mat-icon{margin-right:var(--mat-button-tonal-icon-offset, -8px);margin-left:var(--mat-button-tonal-icon-spacing, 8px)}.mat-tonal-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-tonal-icon-offset, -8px);margin-left:var(--mat-button-tonal-icon-spacing, 8px)}[dir=rtl] .mat-tonal-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-tonal-icon-spacing, 8px);margin-left:var(--mat-button-tonal-icon-offset, -8px)}.mat-tonal-button .mat-ripple-element{background-color:var(--mat-button-tonal-ripple-color, color-mix(in srgb, var(--mat-sys-on-secondary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-tonal-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-tonal-state-layer-color, var(--mat-sys-on-secondary-container))}.mat-tonal-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-tonal-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-tonal-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-tonal-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-tonal-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-tonal-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-tonal-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-tonal-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-tonal-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-tonal-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-tonal-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-button-tonal-touch-target-display, block);left:0;right:0;transform:translateY(-50%)}.mat-mdc-button,.mat-mdc-unelevated-button,.mat-mdc-raised-button,.mat-mdc-outlined-button,.mat-tonal-button{-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-button .mat-mdc-button-ripple,.mat-mdc-button .mat-mdc-button-persistent-ripple,.mat-mdc-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button .mat-mdc-button-ripple,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button .mat-mdc-button-ripple,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before,.mat-tonal-button .mat-mdc-button-ripple,.mat-tonal-button .mat-mdc-button-persistent-ripple,.mat-tonal-button .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-button .mat-mdc-button-ripple,.mat-mdc-unelevated-button .mat-mdc-button-ripple,.mat-mdc-raised-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-tonal-button .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before,.mat-tonal-button .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-button .mdc-button__label,.mat-mdc-button .mat-icon,.mat-mdc-unelevated-button .mdc-button__label,.mat-mdc-unelevated-button .mat-icon,.mat-mdc-raised-button .mdc-button__label,.mat-mdc-raised-button .mat-icon,.mat-mdc-outlined-button .mdc-button__label,.mat-mdc-outlined-button .mat-icon,.mat-tonal-button .mdc-button__label,.mat-tonal-button .mat-icon{z-index:1;position:relative}.mat-mdc-button .mat-focus-indicator,.mat-mdc-unelevated-button .mat-focus-indicator,.mat-mdc-raised-button .mat-focus-indicator,.mat-mdc-outlined-button .mat-focus-indicator,.mat-tonal-button .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:inherit}.mat-mdc-button:focus>.mat-focus-indicator::before,.mat-mdc-unelevated-button:focus>.mat-focus-indicator::before,.mat-mdc-raised-button:focus>.mat-focus-indicator::before,.mat-mdc-outlined-button:focus>.mat-focus-indicator::before,.mat-tonal-button:focus>.mat-focus-indicator::before{content:"";border-radius:inherit}.mat-mdc-button._mat-animation-noopable,.mat-mdc-unelevated-button._mat-animation-noopable,.mat-mdc-raised-button._mat-animation-noopable,.mat-mdc-outlined-button._mat-animation-noopable,.mat-tonal-button._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-button>.mat-icon,.mat-mdc-unelevated-button>.mat-icon,.mat-mdc-raised-button>.mat-icon,.mat-mdc-outlined-button>.mat-icon,.mat-tonal-button>.mat-icon{display:inline-block;position:relative;vertical-align:top;font-size:1.125rem;height:1.125rem;width:1.125rem}.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mdc-button__ripple{top:-1px;left:-1px;bottom:-1px;right:-1px}.mat-mdc-unelevated-button .mat-focus-indicator::before,.mat-tonal-button .mat-focus-indicator::before,.mat-mdc-raised-button .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-outlined-button .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 3px)*-1)}\n', "@media(forced-colors: active){.mat-mdc-button:not(.mdc-button--outlined),.mat-mdc-unelevated-button:not(.mdc-button--outlined),.mat-mdc-raised-button:not(.mdc-button--outlined),.mat-mdc-outlined-button:not(.mdc-button--outlined),.mat-mdc-button-base.mat-tonal-button,.mat-mdc-icon-button.mat-mdc-icon-button,.mat-mdc-outlined-button .mdc-button__ripple{outline:solid 1px}}\n"],
     encapsulation: 2,
     changeDetection: 0
   });
@@ -5601,90 +5744,14 @@ var MatButton = class _MatButton extends MatButtonBase {
     type: Component,
     args: [{
       selector: `
-    button[mat-button], button[mat-raised-button], button[mat-flat-button],
-    button[mat-stroked-button]
+    button[matButton], a[matButton], button[mat-button], button[mat-raised-button],
+    button[mat-flat-button], button[mat-stroked-button], a[mat-button], a[mat-raised-button],
+    a[mat-flat-button], a[mat-stroked-button]
   `,
-      host: MAT_BUTTON_HOST,
-      exportAs: "matButton",
-      encapsulation: ViewEncapsulation.None,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      template: `<span
-    class="mat-mdc-button-persistent-ripple"
-    [class.mdc-button__ripple]="!_isFab"
-    [class.mdc-fab__ripple]="_isFab"></span>
-
-<ng-content select=".material-icons:not([iconPositionEnd]), mat-icon:not([iconPositionEnd]), [matButtonIcon]:not([iconPositionEnd])">
-</ng-content>
-
-<span class="mdc-button__label"><ng-content></ng-content></span>
-
-<ng-content select=".material-icons[iconPositionEnd], mat-icon[iconPositionEnd], [matButtonIcon][iconPositionEnd]">
-</ng-content>
-
-<!--
-  The indicator can't be directly on the button, because MDC uses ::before for high contrast
-  indication and it can't be on the ripple, because it has a border radius and overflow: hidden.
--->
-<span class="mat-focus-indicator"></span>
-
-<span class="mat-mdc-button-touch-target"></span>
-`,
-      styles: ['.mat-mdc-button-base{text-decoration:none}.mdc-button{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:64px;border:none;outline:none;line-height:inherit;-webkit-appearance:none;overflow:visible;vertical-align:middle;background:rgba(0,0,0,0);padding:0 8px}.mdc-button::-moz-focus-inner{padding:0;border:0}.mdc-button:active{outline:none}.mdc-button:hover{cursor:pointer}.mdc-button:disabled{cursor:default;pointer-events:none}.mdc-button[hidden]{display:none}.mdc-button .mdc-button__label{position:relative}.mat-mdc-button{padding:0 var(--mat-text-button-horizontal-padding, 12px);height:var(--mdc-text-button-container-height, 40px);font-family:var(--mdc-text-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-text-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-text-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-text-button-label-text-transform);font-weight:var(--mdc-text-button-label-text-weight, var(--mat-sys-label-large-weight))}.mat-mdc-button,.mat-mdc-button .mdc-button__ripple{border-radius:var(--mdc-text-button-container-shape, var(--mat-sys-corner-full))}.mat-mdc-button:not(:disabled){color:var(--mdc-text-button-label-text-color, var(--mat-sys-primary))}.mat-mdc-button[disabled],.mat-mdc-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-text-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-button:has(.material-icons,mat-icon,[matButtonIcon]){padding:0 var(--mat-text-button-with-icon-horizontal-padding, 16px)}.mat-mdc-button>.mat-icon{margin-right:var(--mat-text-button-icon-spacing, 8px);margin-left:var(--mat-text-button-icon-offset, -4px)}[dir=rtl] .mat-mdc-button>.mat-icon{margin-right:var(--mat-text-button-icon-offset, -4px);margin-left:var(--mat-text-button-icon-spacing, 8px)}.mat-mdc-button .mdc-button__label+.mat-icon{margin-right:var(--mat-text-button-icon-offset, -4px);margin-left:var(--mat-text-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-button .mdc-button__label+.mat-icon{margin-right:var(--mat-text-button-icon-spacing, 8px);margin-left:var(--mat-text-button-icon-offset, -4px)}.mat-mdc-button .mat-ripple-element{background-color:var(--mat-text-button-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-text-button-state-layer-color, var(--mat-sys-primary))}.mat-mdc-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-text-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-text-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-text-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-text-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-text-button-touch-target-display, block)}.mat-mdc-unelevated-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mdc-filled-button-container-height, 40px);font-family:var(--mdc-filled-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-filled-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-filled-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-filled-button-label-text-transform);font-weight:var(--mdc-filled-button-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-filled-button-horizontal-padding, 24px)}.mat-mdc-unelevated-button>.mat-icon{margin-right:var(--mat-filled-button-icon-spacing, 8px);margin-left:var(--mat-filled-button-icon-offset, -8px)}[dir=rtl] .mat-mdc-unelevated-button>.mat-icon{margin-right:var(--mat-filled-button-icon-offset, -8px);margin-left:var(--mat-filled-button-icon-spacing, 8px)}.mat-mdc-unelevated-button .mdc-button__label+.mat-icon{margin-right:var(--mat-filled-button-icon-offset, -8px);margin-left:var(--mat-filled-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-unelevated-button .mdc-button__label+.mat-icon{margin-right:var(--mat-filled-button-icon-spacing, 8px);margin-left:var(--mat-filled-button-icon-offset, -8px)}.mat-mdc-unelevated-button .mat-ripple-element{background-color:var(--mat-filled-button-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-filled-button-state-layer-color, var(--mat-sys-on-primary))}.mat-mdc-unelevated-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-filled-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-unelevated-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-filled-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-unelevated-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-filled-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-unelevated-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-filled-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-unelevated-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-filled-button-touch-target-display, block)}.mat-mdc-unelevated-button:not(:disabled){color:var(--mdc-filled-button-label-text-color, var(--mat-sys-on-primary));background-color:var(--mdc-filled-button-container-color, var(--mat-sys-primary))}.mat-mdc-unelevated-button,.mat-mdc-unelevated-button .mdc-button__ripple{border-radius:var(--mdc-filled-button-container-shape, var(--mat-sys-corner-full))}.mat-mdc-unelevated-button[disabled],.mat-mdc-unelevated-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-filled-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mdc-filled-button-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-unelevated-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-raised-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);box-shadow:var(--mdc-protected-button-container-elevation-shadow, var(--mat-sys-level1));height:var(--mdc-protected-button-container-height, 40px);font-family:var(--mdc-protected-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-protected-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-protected-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-protected-button-label-text-transform);font-weight:var(--mdc-protected-button-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-protected-button-horizontal-padding, 24px)}.mat-mdc-raised-button>.mat-icon{margin-right:var(--mat-protected-button-icon-spacing, 8px);margin-left:var(--mat-protected-button-icon-offset, -8px)}[dir=rtl] .mat-mdc-raised-button>.mat-icon{margin-right:var(--mat-protected-button-icon-offset, -8px);margin-left:var(--mat-protected-button-icon-spacing, 8px)}.mat-mdc-raised-button .mdc-button__label+.mat-icon{margin-right:var(--mat-protected-button-icon-offset, -8px);margin-left:var(--mat-protected-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-raised-button .mdc-button__label+.mat-icon{margin-right:var(--mat-protected-button-icon-spacing, 8px);margin-left:var(--mat-protected-button-icon-offset, -8px)}.mat-mdc-raised-button .mat-ripple-element{background-color:var(--mat-protected-button-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-protected-button-state-layer-color, var(--mat-sys-primary))}.mat-mdc-raised-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-protected-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-raised-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-protected-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-raised-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-protected-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-raised-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-protected-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-raised-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-protected-button-touch-target-display, block)}.mat-mdc-raised-button:not(:disabled){color:var(--mdc-protected-button-label-text-color, var(--mat-sys-primary));background-color:var(--mdc-protected-button-container-color, var(--mat-sys-surface))}.mat-mdc-raised-button,.mat-mdc-raised-button .mdc-button__ripple{border-radius:var(--mdc-protected-button-container-shape, var(--mat-sys-corner-full))}.mat-mdc-raised-button:hover{box-shadow:var(--mdc-protected-button-hover-container-elevation-shadow, var(--mat-sys-level2))}.mat-mdc-raised-button:focus{box-shadow:var(--mdc-protected-button-focus-container-elevation-shadow, var(--mat-sys-level1))}.mat-mdc-raised-button:active,.mat-mdc-raised-button:focus:active{box-shadow:var(--mdc-protected-button-pressed-container-elevation-shadow, var(--mat-sys-level1))}.mat-mdc-raised-button[disabled],.mat-mdc-raised-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-protected-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mdc-protected-button-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-raised-button[disabled].mat-mdc-button-disabled,.mat-mdc-raised-button.mat-mdc-button-disabled.mat-mdc-button-disabled{box-shadow:var(--mdc-protected-button-disabled-container-elevation-shadow, var(--mat-sys-level0))}.mat-mdc-raised-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-outlined-button{border-style:solid;transition:border 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mdc-outlined-button-container-height, 40px);font-family:var(--mdc-outlined-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-outlined-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-outlined-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-outlined-button-label-text-transform);font-weight:var(--mdc-outlined-button-label-text-weight, var(--mat-sys-label-large-weight));border-radius:var(--mdc-outlined-button-container-shape, var(--mat-sys-corner-full));border-width:var(--mdc-outlined-button-outline-width, 1px);padding:0 var(--mat-outlined-button-horizontal-padding, 24px)}.mat-mdc-outlined-button>.mat-icon{margin-right:var(--mat-outlined-button-icon-spacing, 8px);margin-left:var(--mat-outlined-button-icon-offset, -8px)}[dir=rtl] .mat-mdc-outlined-button>.mat-icon{margin-right:var(--mat-outlined-button-icon-offset, -8px);margin-left:var(--mat-outlined-button-icon-spacing, 8px)}.mat-mdc-outlined-button .mdc-button__label+.mat-icon{margin-right:var(--mat-outlined-button-icon-offset, -8px);margin-left:var(--mat-outlined-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-outlined-button .mdc-button__label+.mat-icon{margin-right:var(--mat-outlined-button-icon-spacing, 8px);margin-left:var(--mat-outlined-button-icon-offset, -8px)}.mat-mdc-outlined-button .mat-ripple-element{background-color:var(--mat-outlined-button-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-outlined-button-state-layer-color, var(--mat-sys-primary))}.mat-mdc-outlined-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-outlined-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-outlined-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-outlined-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-outlined-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-outlined-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-outlined-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-outlined-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-outlined-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-outlined-button-touch-target-display, block)}.mat-mdc-outlined-button:not(:disabled){color:var(--mdc-outlined-button-label-text-color, var(--mat-sys-primary));border-color:var(--mdc-outlined-button-outline-color, var(--mat-sys-outline))}.mat-mdc-outlined-button[disabled],.mat-mdc-outlined-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-outlined-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:var(--mdc-outlined-button-disabled-outline-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-outlined-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-button,.mat-mdc-unelevated-button,.mat-mdc-raised-button,.mat-mdc-outlined-button{-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-button .mat-mdc-button-ripple,.mat-mdc-button .mat-mdc-button-persistent-ripple,.mat-mdc-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button .mat-mdc-button-ripple,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button .mat-mdc-button-ripple,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-button .mat-mdc-button-ripple,.mat-mdc-unelevated-button .mat-mdc-button-ripple,.mat-mdc-raised-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-button .mdc-button__label,.mat-mdc-button .mat-icon,.mat-mdc-unelevated-button .mdc-button__label,.mat-mdc-unelevated-button .mat-icon,.mat-mdc-raised-button .mdc-button__label,.mat-mdc-raised-button .mat-icon,.mat-mdc-outlined-button .mdc-button__label,.mat-mdc-outlined-button .mat-icon{z-index:1;position:relative}.mat-mdc-button .mat-focus-indicator,.mat-mdc-unelevated-button .mat-focus-indicator,.mat-mdc-raised-button .mat-focus-indicator,.mat-mdc-outlined-button .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-button:focus>.mat-focus-indicator::before,.mat-mdc-unelevated-button:focus>.mat-focus-indicator::before,.mat-mdc-raised-button:focus>.mat-focus-indicator::before,.mat-mdc-outlined-button:focus>.mat-focus-indicator::before{content:""}.mat-mdc-button._mat-animation-noopable,.mat-mdc-unelevated-button._mat-animation-noopable,.mat-mdc-raised-button._mat-animation-noopable,.mat-mdc-outlined-button._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-button>.mat-icon,.mat-mdc-unelevated-button>.mat-icon,.mat-mdc-raised-button>.mat-icon,.mat-mdc-outlined-button>.mat-icon{display:inline-block;position:relative;vertical-align:top;font-size:1.125rem;height:1.125rem;width:1.125rem}.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mdc-button__ripple{top:-1px;left:-1px;bottom:-1px;right:-1px}.mat-mdc-unelevated-button .mat-focus-indicator::before,.mat-mdc-raised-button .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-outlined-button .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 3px)*-1)}', "@media(forced-colors: active){.mat-mdc-button:not(.mdc-button--outlined),.mat-mdc-unelevated-button:not(.mdc-button--outlined),.mat-mdc-raised-button:not(.mdc-button--outlined),.mat-mdc-outlined-button:not(.mdc-button--outlined),.mat-mdc-icon-button.mat-mdc-icon-button,.mat-mdc-outlined-button .mdc-button__ripple{outline:solid 1px}}"]
-    }]
-  }], null, null);
-})();
-var MatAnchor = class _MatAnchor extends MatAnchorBase {
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275MatAnchor_BaseFactory;
-    return function MatAnchor_Factory(__ngFactoryType__) {
-      return (\u0275MatAnchor_BaseFactory || (\u0275MatAnchor_BaseFactory = \u0275\u0275getInheritedFactory(_MatAnchor)))(__ngFactoryType__ || _MatAnchor);
-    };
-  })();
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _MatAnchor,
-    selectors: [["a", "mat-button", ""], ["a", "mat-raised-button", ""], ["a", "mat-flat-button", ""], ["a", "mat-stroked-button", ""]],
-    hostVars: 15,
-    hostBindings: function MatAnchor_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("disabled", ctx._getDisabledAttribute())("tabindex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex)("aria-disabled", ctx._getAriaDisabled());
-        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "");
-        \u0275\u0275classProp("mat-mdc-button-disabled", ctx.disabled)("mat-mdc-button-disabled-interactive", ctx.disabledInteractive)("_mat-animation-noopable", ctx._animationMode === "NoopAnimations")("mat-unthemed", !ctx.color)("mat-mdc-button-base", true);
-      }
-    },
-    exportAs: ["matButton", "matAnchor"],
-    features: [\u0275\u0275InheritDefinitionFeature],
-    attrs: _c0,
-    ngContentSelectors: _c2,
-    decls: 7,
-    vars: 4,
-    consts: [[1, "mat-mdc-button-persistent-ripple"], [1, "mdc-button__label"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
-    template: function MatAnchor_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef(_c1);
-        \u0275\u0275element(0, "span", 0);
-        \u0275\u0275projection(1);
-        \u0275\u0275elementStart(2, "span", 1);
-        \u0275\u0275projection(3, 1);
-        \u0275\u0275elementEnd();
-        \u0275\u0275projection(4, 2);
-        \u0275\u0275element(5, "span", 2)(6, "span", 3);
-      }
-      if (rf & 2) {
-        \u0275\u0275classProp("mdc-button__ripple", !ctx._isFab)("mdc-fab__ripple", ctx._isFab);
-      }
-    },
-    styles: [_c3, _c4],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatAnchor, [{
-    type: Component,
-    args: [{
-      selector: `a[mat-button], a[mat-raised-button], a[mat-flat-button], a[mat-stroked-button]`,
+      host: {
+        "class": "mdc-button"
+      },
       exportAs: "matButton, matAnchor",
-      host: MAT_ANCHOR_HOST,
       encapsulation: ViewEncapsulation.None,
       changeDetection: ChangeDetectionStrategy.OnPush,
       template: `<span
@@ -5708,10 +5775,30 @@ var MatAnchor = class _MatAnchor extends MatAnchorBase {
 
 <span class="mat-mdc-button-touch-target"></span>
 `,
-      styles: ['.mat-mdc-button-base{text-decoration:none}.mdc-button{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:64px;border:none;outline:none;line-height:inherit;-webkit-appearance:none;overflow:visible;vertical-align:middle;background:rgba(0,0,0,0);padding:0 8px}.mdc-button::-moz-focus-inner{padding:0;border:0}.mdc-button:active{outline:none}.mdc-button:hover{cursor:pointer}.mdc-button:disabled{cursor:default;pointer-events:none}.mdc-button[hidden]{display:none}.mdc-button .mdc-button__label{position:relative}.mat-mdc-button{padding:0 var(--mat-text-button-horizontal-padding, 12px);height:var(--mdc-text-button-container-height, 40px);font-family:var(--mdc-text-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-text-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-text-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-text-button-label-text-transform);font-weight:var(--mdc-text-button-label-text-weight, var(--mat-sys-label-large-weight))}.mat-mdc-button,.mat-mdc-button .mdc-button__ripple{border-radius:var(--mdc-text-button-container-shape, var(--mat-sys-corner-full))}.mat-mdc-button:not(:disabled){color:var(--mdc-text-button-label-text-color, var(--mat-sys-primary))}.mat-mdc-button[disabled],.mat-mdc-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-text-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-button:has(.material-icons,mat-icon,[matButtonIcon]){padding:0 var(--mat-text-button-with-icon-horizontal-padding, 16px)}.mat-mdc-button>.mat-icon{margin-right:var(--mat-text-button-icon-spacing, 8px);margin-left:var(--mat-text-button-icon-offset, -4px)}[dir=rtl] .mat-mdc-button>.mat-icon{margin-right:var(--mat-text-button-icon-offset, -4px);margin-left:var(--mat-text-button-icon-spacing, 8px)}.mat-mdc-button .mdc-button__label+.mat-icon{margin-right:var(--mat-text-button-icon-offset, -4px);margin-left:var(--mat-text-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-button .mdc-button__label+.mat-icon{margin-right:var(--mat-text-button-icon-spacing, 8px);margin-left:var(--mat-text-button-icon-offset, -4px)}.mat-mdc-button .mat-ripple-element{background-color:var(--mat-text-button-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-text-button-state-layer-color, var(--mat-sys-primary))}.mat-mdc-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-text-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-text-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-text-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-text-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-text-button-touch-target-display, block)}.mat-mdc-unelevated-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mdc-filled-button-container-height, 40px);font-family:var(--mdc-filled-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-filled-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-filled-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-filled-button-label-text-transform);font-weight:var(--mdc-filled-button-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-filled-button-horizontal-padding, 24px)}.mat-mdc-unelevated-button>.mat-icon{margin-right:var(--mat-filled-button-icon-spacing, 8px);margin-left:var(--mat-filled-button-icon-offset, -8px)}[dir=rtl] .mat-mdc-unelevated-button>.mat-icon{margin-right:var(--mat-filled-button-icon-offset, -8px);margin-left:var(--mat-filled-button-icon-spacing, 8px)}.mat-mdc-unelevated-button .mdc-button__label+.mat-icon{margin-right:var(--mat-filled-button-icon-offset, -8px);margin-left:var(--mat-filled-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-unelevated-button .mdc-button__label+.mat-icon{margin-right:var(--mat-filled-button-icon-spacing, 8px);margin-left:var(--mat-filled-button-icon-offset, -8px)}.mat-mdc-unelevated-button .mat-ripple-element{background-color:var(--mat-filled-button-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-filled-button-state-layer-color, var(--mat-sys-on-primary))}.mat-mdc-unelevated-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-filled-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-unelevated-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-filled-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-unelevated-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-filled-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-unelevated-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-filled-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-unelevated-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-filled-button-touch-target-display, block)}.mat-mdc-unelevated-button:not(:disabled){color:var(--mdc-filled-button-label-text-color, var(--mat-sys-on-primary));background-color:var(--mdc-filled-button-container-color, var(--mat-sys-primary))}.mat-mdc-unelevated-button,.mat-mdc-unelevated-button .mdc-button__ripple{border-radius:var(--mdc-filled-button-container-shape, var(--mat-sys-corner-full))}.mat-mdc-unelevated-button[disabled],.mat-mdc-unelevated-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-filled-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mdc-filled-button-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-unelevated-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-raised-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);box-shadow:var(--mdc-protected-button-container-elevation-shadow, var(--mat-sys-level1));height:var(--mdc-protected-button-container-height, 40px);font-family:var(--mdc-protected-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-protected-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-protected-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-protected-button-label-text-transform);font-weight:var(--mdc-protected-button-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-protected-button-horizontal-padding, 24px)}.mat-mdc-raised-button>.mat-icon{margin-right:var(--mat-protected-button-icon-spacing, 8px);margin-left:var(--mat-protected-button-icon-offset, -8px)}[dir=rtl] .mat-mdc-raised-button>.mat-icon{margin-right:var(--mat-protected-button-icon-offset, -8px);margin-left:var(--mat-protected-button-icon-spacing, 8px)}.mat-mdc-raised-button .mdc-button__label+.mat-icon{margin-right:var(--mat-protected-button-icon-offset, -8px);margin-left:var(--mat-protected-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-raised-button .mdc-button__label+.mat-icon{margin-right:var(--mat-protected-button-icon-spacing, 8px);margin-left:var(--mat-protected-button-icon-offset, -8px)}.mat-mdc-raised-button .mat-ripple-element{background-color:var(--mat-protected-button-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-protected-button-state-layer-color, var(--mat-sys-primary))}.mat-mdc-raised-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-protected-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-raised-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-protected-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-raised-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-protected-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-raised-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-protected-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-raised-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-protected-button-touch-target-display, block)}.mat-mdc-raised-button:not(:disabled){color:var(--mdc-protected-button-label-text-color, var(--mat-sys-primary));background-color:var(--mdc-protected-button-container-color, var(--mat-sys-surface))}.mat-mdc-raised-button,.mat-mdc-raised-button .mdc-button__ripple{border-radius:var(--mdc-protected-button-container-shape, var(--mat-sys-corner-full))}.mat-mdc-raised-button:hover{box-shadow:var(--mdc-protected-button-hover-container-elevation-shadow, var(--mat-sys-level2))}.mat-mdc-raised-button:focus{box-shadow:var(--mdc-protected-button-focus-container-elevation-shadow, var(--mat-sys-level1))}.mat-mdc-raised-button:active,.mat-mdc-raised-button:focus:active{box-shadow:var(--mdc-protected-button-pressed-container-elevation-shadow, var(--mat-sys-level1))}.mat-mdc-raised-button[disabled],.mat-mdc-raised-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-protected-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mdc-protected-button-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-raised-button[disabled].mat-mdc-button-disabled,.mat-mdc-raised-button.mat-mdc-button-disabled.mat-mdc-button-disabled{box-shadow:var(--mdc-protected-button-disabled-container-elevation-shadow, var(--mat-sys-level0))}.mat-mdc-raised-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-outlined-button{border-style:solid;transition:border 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mdc-outlined-button-container-height, 40px);font-family:var(--mdc-outlined-button-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-outlined-button-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mdc-outlined-button-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mdc-outlined-button-label-text-transform);font-weight:var(--mdc-outlined-button-label-text-weight, var(--mat-sys-label-large-weight));border-radius:var(--mdc-outlined-button-container-shape, var(--mat-sys-corner-full));border-width:var(--mdc-outlined-button-outline-width, 1px);padding:0 var(--mat-outlined-button-horizontal-padding, 24px)}.mat-mdc-outlined-button>.mat-icon{margin-right:var(--mat-outlined-button-icon-spacing, 8px);margin-left:var(--mat-outlined-button-icon-offset, -8px)}[dir=rtl] .mat-mdc-outlined-button>.mat-icon{margin-right:var(--mat-outlined-button-icon-offset, -8px);margin-left:var(--mat-outlined-button-icon-spacing, 8px)}.mat-mdc-outlined-button .mdc-button__label+.mat-icon{margin-right:var(--mat-outlined-button-icon-offset, -8px);margin-left:var(--mat-outlined-button-icon-spacing, 8px)}[dir=rtl] .mat-mdc-outlined-button .mdc-button__label+.mat-icon{margin-right:var(--mat-outlined-button-icon-spacing, 8px);margin-left:var(--mat-outlined-button-icon-offset, -8px)}.mat-mdc-outlined-button .mat-ripple-element{background-color:var(--mat-outlined-button-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-outlined-button-state-layer-color, var(--mat-sys-primary))}.mat-mdc-outlined-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-outlined-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-outlined-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-outlined-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-outlined-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-outlined-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-outlined-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-outlined-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-outlined-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:0;right:0;transform:translateY(-50%);display:var(--mat-outlined-button-touch-target-display, block)}.mat-mdc-outlined-button:not(:disabled){color:var(--mdc-outlined-button-label-text-color, var(--mat-sys-primary));border-color:var(--mdc-outlined-button-outline-color, var(--mat-sys-outline))}.mat-mdc-outlined-button[disabled],.mat-mdc-outlined-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-outlined-button-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:var(--mdc-outlined-button-disabled-outline-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-outlined-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-button,.mat-mdc-unelevated-button,.mat-mdc-raised-button,.mat-mdc-outlined-button{-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-button .mat-mdc-button-ripple,.mat-mdc-button .mat-mdc-button-persistent-ripple,.mat-mdc-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button .mat-mdc-button-ripple,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button .mat-mdc-button-ripple,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-button .mat-mdc-button-ripple,.mat-mdc-unelevated-button .mat-mdc-button-ripple,.mat-mdc-raised-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-button .mdc-button__label,.mat-mdc-button .mat-icon,.mat-mdc-unelevated-button .mdc-button__label,.mat-mdc-unelevated-button .mat-icon,.mat-mdc-raised-button .mdc-button__label,.mat-mdc-raised-button .mat-icon,.mat-mdc-outlined-button .mdc-button__label,.mat-mdc-outlined-button .mat-icon{z-index:1;position:relative}.mat-mdc-button .mat-focus-indicator,.mat-mdc-unelevated-button .mat-focus-indicator,.mat-mdc-raised-button .mat-focus-indicator,.mat-mdc-outlined-button .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-button:focus>.mat-focus-indicator::before,.mat-mdc-unelevated-button:focus>.mat-focus-indicator::before,.mat-mdc-raised-button:focus>.mat-focus-indicator::before,.mat-mdc-outlined-button:focus>.mat-focus-indicator::before{content:""}.mat-mdc-button._mat-animation-noopable,.mat-mdc-unelevated-button._mat-animation-noopable,.mat-mdc-raised-button._mat-animation-noopable,.mat-mdc-outlined-button._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-button>.mat-icon,.mat-mdc-unelevated-button>.mat-icon,.mat-mdc-raised-button>.mat-icon,.mat-mdc-outlined-button>.mat-icon{display:inline-block;position:relative;vertical-align:top;font-size:1.125rem;height:1.125rem;width:1.125rem}.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mdc-button__ripple{top:-1px;left:-1px;bottom:-1px;right:-1px}.mat-mdc-unelevated-button .mat-focus-indicator::before,.mat-mdc-raised-button .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-outlined-button .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 3px)*-1)}', "@media(forced-colors: active){.mat-mdc-button:not(.mdc-button--outlined),.mat-mdc-unelevated-button:not(.mdc-button--outlined),.mat-mdc-raised-button:not(.mdc-button--outlined),.mat-mdc-outlined-button:not(.mdc-button--outlined),.mat-mdc-icon-button.mat-mdc-icon-button,.mat-mdc-outlined-button .mdc-button__ripple{outline:solid 1px}}"]
+      styles: ['.mat-mdc-button-base{text-decoration:none}.mdc-button{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:64px;border:none;outline:none;line-height:inherit;-webkit-appearance:none;overflow:visible;vertical-align:middle;background:rgba(0,0,0,0);padding:0 8px}.mdc-button::-moz-focus-inner{padding:0;border:0}.mdc-button:active{outline:none}.mdc-button:hover{cursor:pointer}.mdc-button:disabled{cursor:default;pointer-events:none}.mdc-button[hidden]{display:none}.mdc-button .mdc-button__label{position:relative}.mat-mdc-button{padding:0 var(--mat-button-text-horizontal-padding, 12px);height:var(--mat-button-text-container-height, 40px);font-family:var(--mat-button-text-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-button-text-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mat-button-text-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mat-button-text-label-text-transform);font-weight:var(--mat-button-text-label-text-weight, var(--mat-sys-label-large-weight))}.mat-mdc-button,.mat-mdc-button .mdc-button__ripple{border-radius:var(--mat-button-text-container-shape, var(--mat-sys-corner-full))}.mat-mdc-button:not(:disabled){color:var(--mat-button-text-label-text-color, var(--mat-sys-primary))}.mat-mdc-button[disabled],.mat-mdc-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-button-text-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-button:has(.material-icons,mat-icon,[matButtonIcon]){padding:0 var(--mat-button-text-with-icon-horizontal-padding, 16px)}.mat-mdc-button>.mat-icon{margin-right:var(--mat-button-text-icon-spacing, 8px);margin-left:var(--mat-button-text-icon-offset, -4px)}[dir=rtl] .mat-mdc-button>.mat-icon{margin-right:var(--mat-button-text-icon-offset, -4px);margin-left:var(--mat-button-text-icon-spacing, 8px)}.mat-mdc-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-text-icon-offset, -4px);margin-left:var(--mat-button-text-icon-spacing, 8px)}[dir=rtl] .mat-mdc-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-text-icon-spacing, 8px);margin-left:var(--mat-button-text-icon-offset, -4px)}.mat-mdc-button .mat-ripple-element{background-color:var(--mat-button-text-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-text-state-layer-color, var(--mat-sys-primary))}.mat-mdc-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-text-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-text-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-text-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-text-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-button-text-touch-target-display, block);left:0;right:0;transform:translateY(-50%)}.mat-mdc-unelevated-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mat-button-filled-container-height, 40px);font-family:var(--mat-button-filled-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-button-filled-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mat-button-filled-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mat-button-filled-label-text-transform);font-weight:var(--mat-button-filled-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-button-filled-horizontal-padding, 24px)}.mat-mdc-unelevated-button>.mat-icon{margin-right:var(--mat-button-filled-icon-spacing, 8px);margin-left:var(--mat-button-filled-icon-offset, -8px)}[dir=rtl] .mat-mdc-unelevated-button>.mat-icon{margin-right:var(--mat-button-filled-icon-offset, -8px);margin-left:var(--mat-button-filled-icon-spacing, 8px)}.mat-mdc-unelevated-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-filled-icon-offset, -8px);margin-left:var(--mat-button-filled-icon-spacing, 8px)}[dir=rtl] .mat-mdc-unelevated-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-filled-icon-spacing, 8px);margin-left:var(--mat-button-filled-icon-offset, -8px)}.mat-mdc-unelevated-button .mat-ripple-element{background-color:var(--mat-button-filled-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-filled-state-layer-color, var(--mat-sys-on-primary))}.mat-mdc-unelevated-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-filled-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-unelevated-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-filled-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-unelevated-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-filled-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-unelevated-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-filled-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-unelevated-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-button-filled-touch-target-display, block);left:0;right:0;transform:translateY(-50%)}.mat-mdc-unelevated-button:not(:disabled){color:var(--mat-button-filled-label-text-color, var(--mat-sys-on-primary));background-color:var(--mat-button-filled-container-color, var(--mat-sys-primary))}.mat-mdc-unelevated-button,.mat-mdc-unelevated-button .mdc-button__ripple{border-radius:var(--mat-button-filled-container-shape, var(--mat-sys-corner-full))}.mat-mdc-unelevated-button[disabled],.mat-mdc-unelevated-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-button-filled-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-button-filled-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-unelevated-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-raised-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);box-shadow:var(--mat-button-protected-container-elevation-shadow, var(--mat-sys-level1));height:var(--mat-button-protected-container-height, 40px);font-family:var(--mat-button-protected-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-button-protected-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mat-button-protected-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mat-button-protected-label-text-transform);font-weight:var(--mat-button-protected-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-button-protected-horizontal-padding, 24px)}.mat-mdc-raised-button>.mat-icon{margin-right:var(--mat-button-protected-icon-spacing, 8px);margin-left:var(--mat-button-protected-icon-offset, -8px)}[dir=rtl] .mat-mdc-raised-button>.mat-icon{margin-right:var(--mat-button-protected-icon-offset, -8px);margin-left:var(--mat-button-protected-icon-spacing, 8px)}.mat-mdc-raised-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-protected-icon-offset, -8px);margin-left:var(--mat-button-protected-icon-spacing, 8px)}[dir=rtl] .mat-mdc-raised-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-protected-icon-spacing, 8px);margin-left:var(--mat-button-protected-icon-offset, -8px)}.mat-mdc-raised-button .mat-ripple-element{background-color:var(--mat-button-protected-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-protected-state-layer-color, var(--mat-sys-primary))}.mat-mdc-raised-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-protected-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-raised-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-protected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-raised-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-protected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-raised-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-protected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-raised-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-button-protected-touch-target-display, block);left:0;right:0;transform:translateY(-50%)}.mat-mdc-raised-button:not(:disabled){color:var(--mat-button-protected-label-text-color, var(--mat-sys-primary));background-color:var(--mat-button-protected-container-color, var(--mat-sys-surface))}.mat-mdc-raised-button,.mat-mdc-raised-button .mdc-button__ripple{border-radius:var(--mat-button-protected-container-shape, var(--mat-sys-corner-full))}.mat-mdc-raised-button:hover{box-shadow:var(--mat-button-protected-hover-container-elevation-shadow, var(--mat-sys-level2))}.mat-mdc-raised-button:focus{box-shadow:var(--mat-button-protected-focus-container-elevation-shadow, var(--mat-sys-level1))}.mat-mdc-raised-button:active,.mat-mdc-raised-button:focus:active{box-shadow:var(--mat-button-protected-pressed-container-elevation-shadow, var(--mat-sys-level1))}.mat-mdc-raised-button[disabled],.mat-mdc-raised-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-button-protected-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-button-protected-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-raised-button[disabled].mat-mdc-button-disabled,.mat-mdc-raised-button.mat-mdc-button-disabled.mat-mdc-button-disabled{box-shadow:var(--mat-button-protected-disabled-container-elevation-shadow, var(--mat-sys-level0))}.mat-mdc-raised-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-outlined-button{border-style:solid;transition:border 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mat-button-outlined-container-height, 40px);font-family:var(--mat-button-outlined-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-button-outlined-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mat-button-outlined-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mat-button-outlined-label-text-transform);font-weight:var(--mat-button-outlined-label-text-weight, var(--mat-sys-label-large-weight));border-radius:var(--mat-button-outlined-container-shape, var(--mat-sys-corner-full));border-width:var(--mat-button-outlined-outline-width, 1px);padding:0 var(--mat-button-outlined-horizontal-padding, 24px)}.mat-mdc-outlined-button>.mat-icon{margin-right:var(--mat-button-outlined-icon-spacing, 8px);margin-left:var(--mat-button-outlined-icon-offset, -8px)}[dir=rtl] .mat-mdc-outlined-button>.mat-icon{margin-right:var(--mat-button-outlined-icon-offset, -8px);margin-left:var(--mat-button-outlined-icon-spacing, 8px)}.mat-mdc-outlined-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-outlined-icon-offset, -8px);margin-left:var(--mat-button-outlined-icon-spacing, 8px)}[dir=rtl] .mat-mdc-outlined-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-outlined-icon-spacing, 8px);margin-left:var(--mat-button-outlined-icon-offset, -8px)}.mat-mdc-outlined-button .mat-ripple-element{background-color:var(--mat-button-outlined-ripple-color, color-mix(in srgb, var(--mat-sys-primary) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-outlined-state-layer-color, var(--mat-sys-primary))}.mat-mdc-outlined-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-outlined-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-outlined-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-outlined-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-outlined-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-outlined-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-outlined-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-outlined-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-outlined-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-button-outlined-touch-target-display, block);left:0;right:0;transform:translateY(-50%)}.mat-mdc-outlined-button:not(:disabled){color:var(--mat-button-outlined-label-text-color, var(--mat-sys-primary));border-color:var(--mat-button-outlined-outline-color, var(--mat-sys-outline))}.mat-mdc-outlined-button[disabled],.mat-mdc-outlined-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-button-outlined-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:var(--mat-button-outlined-disabled-outline-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-outlined-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-tonal-button{transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);height:var(--mat-button-tonal-container-height, 40px);font-family:var(--mat-button-tonal-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-button-tonal-label-text-size, var(--mat-sys-label-large-size));letter-spacing:var(--mat-button-tonal-label-text-tracking, var(--mat-sys-label-large-tracking));text-transform:var(--mat-button-tonal-label-text-transform);font-weight:var(--mat-button-tonal-label-text-weight, var(--mat-sys-label-large-weight));padding:0 var(--mat-button-tonal-horizontal-padding, 24px)}.mat-tonal-button:not(:disabled){color:var(--mat-button-tonal-label-text-color, var(--mat-sys-on-secondary-container));background-color:var(--mat-button-tonal-container-color, var(--mat-sys-secondary-container))}.mat-tonal-button,.mat-tonal-button .mdc-button__ripple{border-radius:var(--mat-button-tonal-container-shape, var(--mat-sys-corner-full))}.mat-tonal-button[disabled],.mat-tonal-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-button-tonal-disabled-label-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-button-tonal-disabled-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-tonal-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-tonal-button>.mat-icon{margin-right:var(--mat-button-tonal-icon-spacing, 8px);margin-left:var(--mat-button-tonal-icon-offset, -8px)}[dir=rtl] .mat-tonal-button>.mat-icon{margin-right:var(--mat-button-tonal-icon-offset, -8px);margin-left:var(--mat-button-tonal-icon-spacing, 8px)}.mat-tonal-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-tonal-icon-offset, -8px);margin-left:var(--mat-button-tonal-icon-spacing, 8px)}[dir=rtl] .mat-tonal-button .mdc-button__label+.mat-icon{margin-right:var(--mat-button-tonal-icon-spacing, 8px);margin-left:var(--mat-button-tonal-icon-offset, -8px)}.mat-tonal-button .mat-ripple-element{background-color:var(--mat-button-tonal-ripple-color, color-mix(in srgb, var(--mat-sys-on-secondary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-tonal-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-tonal-state-layer-color, var(--mat-sys-on-secondary-container))}.mat-tonal-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-button-tonal-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-tonal-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-tonal-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-tonal-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-tonal-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-tonal-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-tonal-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-tonal-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-button-tonal-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-tonal-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-button-tonal-touch-target-display, block);left:0;right:0;transform:translateY(-50%)}.mat-mdc-button,.mat-mdc-unelevated-button,.mat-mdc-raised-button,.mat-mdc-outlined-button,.mat-tonal-button{-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-button .mat-mdc-button-ripple,.mat-mdc-button .mat-mdc-button-persistent-ripple,.mat-mdc-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button .mat-mdc-button-ripple,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button .mat-mdc-button-ripple,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before,.mat-tonal-button .mat-mdc-button-ripple,.mat-tonal-button .mat-mdc-button-persistent-ripple,.mat-tonal-button .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-button .mat-mdc-button-ripple,.mat-mdc-unelevated-button .mat-mdc-button-ripple,.mat-mdc-raised-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-tonal-button .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-raised-button .mat-mdc-button-persistent-ripple::before,.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before,.mat-tonal-button .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-button .mdc-button__label,.mat-mdc-button .mat-icon,.mat-mdc-unelevated-button .mdc-button__label,.mat-mdc-unelevated-button .mat-icon,.mat-mdc-raised-button .mdc-button__label,.mat-mdc-raised-button .mat-icon,.mat-mdc-outlined-button .mdc-button__label,.mat-mdc-outlined-button .mat-icon,.mat-tonal-button .mdc-button__label,.mat-tonal-button .mat-icon{z-index:1;position:relative}.mat-mdc-button .mat-focus-indicator,.mat-mdc-unelevated-button .mat-focus-indicator,.mat-mdc-raised-button .mat-focus-indicator,.mat-mdc-outlined-button .mat-focus-indicator,.mat-tonal-button .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:inherit}.mat-mdc-button:focus>.mat-focus-indicator::before,.mat-mdc-unelevated-button:focus>.mat-focus-indicator::before,.mat-mdc-raised-button:focus>.mat-focus-indicator::before,.mat-mdc-outlined-button:focus>.mat-focus-indicator::before,.mat-tonal-button:focus>.mat-focus-indicator::before{content:"";border-radius:inherit}.mat-mdc-button._mat-animation-noopable,.mat-mdc-unelevated-button._mat-animation-noopable,.mat-mdc-raised-button._mat-animation-noopable,.mat-mdc-outlined-button._mat-animation-noopable,.mat-tonal-button._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-button>.mat-icon,.mat-mdc-unelevated-button>.mat-icon,.mat-mdc-raised-button>.mat-icon,.mat-mdc-outlined-button>.mat-icon,.mat-tonal-button>.mat-icon{display:inline-block;position:relative;vertical-align:top;font-size:1.125rem;height:1.125rem;width:1.125rem}.mat-mdc-outlined-button .mat-mdc-button-ripple,.mat-mdc-outlined-button .mdc-button__ripple{top:-1px;left:-1px;bottom:-1px;right:-1px}.mat-mdc-unelevated-button .mat-focus-indicator::before,.mat-tonal-button .mat-focus-indicator::before,.mat-mdc-raised-button .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-outlined-button .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 3px)*-1)}\n', "@media(forced-colors: active){.mat-mdc-button:not(.mdc-button--outlined),.mat-mdc-unelevated-button:not(.mdc-button--outlined),.mat-mdc-raised-button:not(.mdc-button--outlined),.mat-mdc-outlined-button:not(.mdc-button--outlined),.mat-mdc-button-base.mat-tonal-button,.mat-mdc-icon-button.mat-mdc-icon-button,.mat-mdc-outlined-button .mdc-button__ripple{outline:solid 1px}}\n"]
     }]
-  }], null, null);
+  }], () => [], {
+    appearance: [{
+      type: Input,
+      args: ["matButton"]
+    }]
+  });
 })();
+function _inferAppearance(button) {
+  if (button.hasAttribute("mat-raised-button")) {
+    return "elevated";
+  }
+  if (button.hasAttribute("mat-stroked-button")) {
+    return "outlined";
+  }
+  if (button.hasAttribute("mat-flat-button")) {
+    return "filled";
+  }
+  if (button.hasAttribute("mat-button")) {
+    return "text";
+  }
+  return null;
+}
 var MAT_FAB_DEFAULT_OPTIONS = new InjectionToken("mat-mdc-fab-default-options", {
   providedIn: "root",
   factory: MAT_FAB_DEFAULT_OPTIONS_FACTORY
@@ -5739,28 +5826,27 @@ var MatFabButton = class _MatFabButton extends MatButtonBase {
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
     type: _MatFabButton,
-    selectors: [["button", "mat-fab", ""]],
-    hostVars: 18,
+    selectors: [["button", "mat-fab", ""], ["a", "mat-fab", ""], ["button", "matFab", ""], ["a", "matFab", ""]],
+    hostAttrs: [1, "mdc-fab", "mat-mdc-fab-base", "mat-mdc-fab"],
+    hostVars: 4,
     hostBindings: function MatFabButton_HostBindings(rf, ctx) {
       if (rf & 2) {
-        \u0275\u0275attribute("disabled", ctx._getDisabledAttribute())("aria-disabled", ctx._getAriaDisabled());
-        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "");
-        \u0275\u0275classProp("mat-mdc-button-disabled", ctx.disabled)("mat-mdc-button-disabled-interactive", ctx.disabledInteractive)("_mat-animation-noopable", ctx._animationMode === "NoopAnimations")("mat-unthemed", !ctx.color)("mat-mdc-button-base", true)("mdc-fab--extended", ctx.extended)("mat-mdc-extended-fab", ctx.extended);
+        \u0275\u0275classProp("mdc-fab--extended", ctx.extended)("mat-mdc-extended-fab", ctx.extended);
       }
     },
     inputs: {
       extended: [2, "extended", "extended", booleanAttribute]
     },
-    exportAs: ["matButton"],
+    exportAs: ["matButton", "matAnchor"],
     features: [\u0275\u0275InheritDefinitionFeature],
-    attrs: _c5,
+    attrs: _c3,
     ngContentSelectors: _c2,
     decls: 7,
     vars: 4,
     consts: [[1, "mat-mdc-button-persistent-ripple"], [1, "mdc-button__label"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
     template: function MatFabButton_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c1);
+        \u0275\u0275projectionDef(_c12);
         \u0275\u0275element(0, "span", 0);
         \u0275\u0275projection(1);
         \u0275\u0275elementStart(2, "span", 1);
@@ -5773,7 +5859,7 @@ var MatFabButton = class _MatFabButton extends MatButtonBase {
         \u0275\u0275classProp("mdc-button__ripple", !ctx._isFab)("mdc-fab__ripple", ctx._isFab);
       }
     },
-    styles: ['.mat-mdc-fab-base{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:56px;height:56px;padding:0;border:none;fill:currentColor;text-decoration:none;cursor:pointer;-moz-appearance:none;-webkit-appearance:none;overflow:visible;transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),opacity 15ms linear 30ms,transform 270ms 0ms cubic-bezier(0, 0, 0.2, 1);flex-shrink:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-fab-base .mat-mdc-button-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-fab-base .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-fab-base .mdc-button__label,.mat-mdc-fab-base .mat-icon{z-index:1;position:relative}.mat-mdc-fab-base .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-fab-base:focus>.mat-focus-indicator::before{content:""}.mat-mdc-fab-base._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-fab-base::before{position:absolute;box-sizing:border-box;width:100%;height:100%;top:0;left:0;border:1px solid rgba(0,0,0,0);border-radius:inherit;content:"";pointer-events:none}.mat-mdc-fab-base[hidden]{display:none}.mat-mdc-fab-base::-moz-focus-inner{padding:0;border:0}.mat-mdc-fab-base:active,.mat-mdc-fab-base:focus{outline:none}.mat-mdc-fab-base:hover{cursor:pointer}.mat-mdc-fab-base>svg{width:100%}.mat-mdc-fab-base .mat-icon,.mat-mdc-fab-base .material-icons{transition:transform 180ms 90ms cubic-bezier(0, 0, 0.2, 1);fill:currentColor;will-change:transform}.mat-mdc-fab-base .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base[disabled]:focus,.mat-mdc-fab-base.mat-mdc-button-disabled,.mat-mdc-fab-base.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-fab-base.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab{background-color:var(--mdc-fab-container-color, var(--mat-sys-primary-container));border-radius:var(--mdc-fab-container-shape, var(--mat-sys-corner-large));color:var(--mat-fab-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mdc-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:hover{box-shadow:var(--mdc-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-fab:focus{box-shadow:var(--mdc-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:active,.mat-mdc-fab:focus:active{box-shadow:var(--mdc-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab[disabled],.mat-mdc-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-fab-touch-target-display, block)}.mat-mdc-fab .mat-ripple-element{background-color:var(--mat-fab-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-disabled-state-layer-color)}.mat-mdc-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-mini-fab{width:40px;height:40px;background-color:var(--mdc-fab-small-container-color, var(--mat-sys-primary-container));border-radius:var(--mdc-fab-small-container-shape, var(--mat-sys-corner-medium));color:var(--mat-fab-small-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mdc-fab-small-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:hover{box-shadow:var(--mdc-fab-small-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-mini-fab:focus{box-shadow:var(--mdc-fab-small-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:active,.mat-mdc-mini-fab:focus:active{box-shadow:var(--mdc-fab-small-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab[disabled],.mat-mdc-mini-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-small-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-small-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-mini-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-fab-small-touch-target-display)}.mat-mdc-mini-fab .mat-ripple-element{background-color:var(--mat-fab-small-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-mini-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-mini-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-disabled-state-layer-color)}.mat-mdc-mini-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-mini-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-mini-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-extended-fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;border-radius:24px;padding-left:20px;padding-right:20px;width:auto;max-width:100%;line-height:normal;height:var(--mdc-extended-fab-container-height, 56px);border-radius:var(--mdc-extended-fab-container-shape, var(--mat-sys-corner-large));font-family:var(--mdc-extended-fab-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-extended-fab-label-text-size, var(--mat-sys-label-large-size));font-weight:var(--mdc-extended-fab-label-text-weight, var(--mat-sys-label-large-weight));letter-spacing:var(--mdc-extended-fab-label-text-tracking, var(--mat-sys-label-large-tracking));box-shadow:var(--mdc-extended-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:hover{box-shadow:var(--mdc-extended-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-extended-fab:focus{box-shadow:var(--mdc-extended-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:active,.mat-mdc-extended-fab:focus:active{box-shadow:var(--mdc-extended-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab[disabled]:focus,.mat-mdc-extended-fab.mat-mdc-button-disabled,.mat-mdc-extended-fab.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-extended-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.mat-icon,[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.material-icons,.mat-mdc-extended-fab>.mat-icon,.mat-mdc-extended-fab>.material-icons{margin-left:-8px;margin-right:12px}.mat-mdc-extended-fab .mdc-button__label+.mat-icon,.mat-mdc-extended-fab .mdc-button__label+.material-icons,[dir=rtl] .mat-mdc-extended-fab>.mat-icon,[dir=rtl] .mat-mdc-extended-fab>.material-icons{margin-left:12px;margin-right:-8px}.mat-mdc-extended-fab .mat-mdc-button-touch-target{width:100%}'],
+    styles: ['.mat-mdc-fab-base{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:56px;height:56px;padding:0;border:none;fill:currentColor;text-decoration:none;cursor:pointer;-moz-appearance:none;-webkit-appearance:none;overflow:visible;transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),opacity 15ms linear 30ms,transform 270ms 0ms cubic-bezier(0, 0, 0.2, 1);flex-shrink:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-fab-base .mat-mdc-button-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-fab-base .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-fab-base .mdc-button__label,.mat-mdc-fab-base .mat-icon{z-index:1;position:relative}.mat-mdc-fab-base .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-fab-base:focus>.mat-focus-indicator::before{content:""}.mat-mdc-fab-base._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-fab-base::before{position:absolute;box-sizing:border-box;width:100%;height:100%;top:0;left:0;border:1px solid rgba(0,0,0,0);border-radius:inherit;content:"";pointer-events:none}.mat-mdc-fab-base[hidden]{display:none}.mat-mdc-fab-base::-moz-focus-inner{padding:0;border:0}.mat-mdc-fab-base:active,.mat-mdc-fab-base:focus{outline:none}.mat-mdc-fab-base:hover{cursor:pointer}.mat-mdc-fab-base>svg{width:100%}.mat-mdc-fab-base .mat-icon,.mat-mdc-fab-base .material-icons{transition:transform 180ms 90ms cubic-bezier(0, 0, 0.2, 1);fill:currentColor;will-change:transform}.mat-mdc-fab-base .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base[disabled]:focus,.mat-mdc-fab-base.mat-mdc-button-disabled,.mat-mdc-fab-base.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-fab-base.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab{background-color:var(--mat-fab-container-color, var(--mat-sys-primary-container));border-radius:var(--mat-fab-container-shape, var(--mat-sys-corner-large));color:var(--mat-fab-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mat-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:hover{box-shadow:var(--mat-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-fab:focus{box-shadow:var(--mat-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:active,.mat-mdc-fab:focus:active{box-shadow:var(--mat-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab[disabled],.mat-mdc-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-fab-touch-target-display, block);left:50%;width:48px;transform:translate(-50%, -50%)}.mat-mdc-fab .mat-ripple-element{background-color:var(--mat-fab-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-disabled-state-layer-color)}.mat-mdc-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-mini-fab{width:40px;height:40px;background-color:var(--mat-fab-small-container-color, var(--mat-sys-primary-container));border-radius:var(--mat-fab-small-container-shape, var(--mat-sys-corner-medium));color:var(--mat-fab-small-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mat-fab-small-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:hover{box-shadow:var(--mat-fab-small-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-mini-fab:focus{box-shadow:var(--mat-fab-small-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:active,.mat-mdc-mini-fab:focus:active{box-shadow:var(--mat-fab-small-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab[disabled],.mat-mdc-mini-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-small-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-small-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-mini-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-fab-small-touch-target-display);left:50%;width:48px;transform:translate(-50%, -50%)}.mat-mdc-mini-fab .mat-ripple-element{background-color:var(--mat-fab-small-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-mini-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-mini-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-disabled-state-layer-color)}.mat-mdc-mini-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-mini-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-mini-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-extended-fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;padding-left:20px;padding-right:20px;width:auto;max-width:100%;line-height:normal;box-shadow:var(--mat-fab-extended-container-elevation-shadow, var(--mat-sys-level3));height:var(--mat-fab-extended-container-height, 56px);border-radius:var(--mat-fab-extended-container-shape, var(--mat-sys-corner-large));font-family:var(--mat-fab-extended-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-fab-extended-label-text-size, var(--mat-sys-label-large-size));font-weight:var(--mat-fab-extended-label-text-weight, var(--mat-sys-label-large-weight));letter-spacing:var(--mat-fab-extended-label-text-tracking, var(--mat-sys-label-large-tracking))}.mat-mdc-extended-fab:hover{box-shadow:var(--mat-fab-extended-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-extended-fab:focus{box-shadow:var(--mat-fab-extended-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:active,.mat-mdc-extended-fab:focus:active{box-shadow:var(--mat-fab-extended-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab[disabled]:focus,.mat-mdc-extended-fab.mat-mdc-button-disabled,.mat-mdc-extended-fab.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-extended-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.mat-icon,[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.material-icons,.mat-mdc-extended-fab>.mat-icon,.mat-mdc-extended-fab>.material-icons{margin-left:-8px;margin-right:12px}.mat-mdc-extended-fab .mdc-button__label+.mat-icon,.mat-mdc-extended-fab .mdc-button__label+.material-icons,[dir=rtl] .mat-mdc-extended-fab>.mat-icon,[dir=rtl] .mat-mdc-extended-fab>.material-icons{margin-left:12px;margin-right:-8px}.mat-mdc-extended-fab .mat-mdc-button-touch-target{width:100%}\n'],
     encapsulation: 2,
     changeDetection: 0
   });
@@ -5782,12 +5868,13 @@ var MatFabButton = class _MatFabButton extends MatButtonBase {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatFabButton, [{
     type: Component,
     args: [{
-      selector: `button[mat-fab]`,
-      host: __spreadProps(__spreadValues({}, MAT_BUTTON_HOST), {
+      selector: `button[mat-fab], a[mat-fab], button[matFab], a[matFab]`,
+      host: {
+        "class": "mdc-fab mat-mdc-fab-base mat-mdc-fab",
         "[class.mdc-fab--extended]": "extended",
         "[class.mat-mdc-extended-fab]": "extended"
-      }),
-      exportAs: "matButton",
+      },
+      exportAs: "matButton, matAnchor",
       encapsulation: ViewEncapsulation.None,
       changeDetection: ChangeDetectionStrategy.OnPush,
       template: `<span
@@ -5811,7 +5898,7 @@ var MatFabButton = class _MatFabButton extends MatButtonBase {
 
 <span class="mat-mdc-button-touch-target"></span>
 `,
-      styles: ['.mat-mdc-fab-base{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:56px;height:56px;padding:0;border:none;fill:currentColor;text-decoration:none;cursor:pointer;-moz-appearance:none;-webkit-appearance:none;overflow:visible;transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),opacity 15ms linear 30ms,transform 270ms 0ms cubic-bezier(0, 0, 0.2, 1);flex-shrink:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-fab-base .mat-mdc-button-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-fab-base .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-fab-base .mdc-button__label,.mat-mdc-fab-base .mat-icon{z-index:1;position:relative}.mat-mdc-fab-base .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-fab-base:focus>.mat-focus-indicator::before{content:""}.mat-mdc-fab-base._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-fab-base::before{position:absolute;box-sizing:border-box;width:100%;height:100%;top:0;left:0;border:1px solid rgba(0,0,0,0);border-radius:inherit;content:"";pointer-events:none}.mat-mdc-fab-base[hidden]{display:none}.mat-mdc-fab-base::-moz-focus-inner{padding:0;border:0}.mat-mdc-fab-base:active,.mat-mdc-fab-base:focus{outline:none}.mat-mdc-fab-base:hover{cursor:pointer}.mat-mdc-fab-base>svg{width:100%}.mat-mdc-fab-base .mat-icon,.mat-mdc-fab-base .material-icons{transition:transform 180ms 90ms cubic-bezier(0, 0, 0.2, 1);fill:currentColor;will-change:transform}.mat-mdc-fab-base .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base[disabled]:focus,.mat-mdc-fab-base.mat-mdc-button-disabled,.mat-mdc-fab-base.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-fab-base.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab{background-color:var(--mdc-fab-container-color, var(--mat-sys-primary-container));border-radius:var(--mdc-fab-container-shape, var(--mat-sys-corner-large));color:var(--mat-fab-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mdc-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:hover{box-shadow:var(--mdc-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-fab:focus{box-shadow:var(--mdc-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:active,.mat-mdc-fab:focus:active{box-shadow:var(--mdc-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab[disabled],.mat-mdc-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-fab-touch-target-display, block)}.mat-mdc-fab .mat-ripple-element{background-color:var(--mat-fab-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-disabled-state-layer-color)}.mat-mdc-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-mini-fab{width:40px;height:40px;background-color:var(--mdc-fab-small-container-color, var(--mat-sys-primary-container));border-radius:var(--mdc-fab-small-container-shape, var(--mat-sys-corner-medium));color:var(--mat-fab-small-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mdc-fab-small-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:hover{box-shadow:var(--mdc-fab-small-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-mini-fab:focus{box-shadow:var(--mdc-fab-small-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:active,.mat-mdc-mini-fab:focus:active{box-shadow:var(--mdc-fab-small-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab[disabled],.mat-mdc-mini-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-small-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-small-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-mini-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-fab-small-touch-target-display)}.mat-mdc-mini-fab .mat-ripple-element{background-color:var(--mat-fab-small-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-mini-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-mini-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-disabled-state-layer-color)}.mat-mdc-mini-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-mini-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-mini-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-extended-fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;border-radius:24px;padding-left:20px;padding-right:20px;width:auto;max-width:100%;line-height:normal;height:var(--mdc-extended-fab-container-height, 56px);border-radius:var(--mdc-extended-fab-container-shape, var(--mat-sys-corner-large));font-family:var(--mdc-extended-fab-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-extended-fab-label-text-size, var(--mat-sys-label-large-size));font-weight:var(--mdc-extended-fab-label-text-weight, var(--mat-sys-label-large-weight));letter-spacing:var(--mdc-extended-fab-label-text-tracking, var(--mat-sys-label-large-tracking));box-shadow:var(--mdc-extended-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:hover{box-shadow:var(--mdc-extended-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-extended-fab:focus{box-shadow:var(--mdc-extended-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:active,.mat-mdc-extended-fab:focus:active{box-shadow:var(--mdc-extended-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab[disabled]:focus,.mat-mdc-extended-fab.mat-mdc-button-disabled,.mat-mdc-extended-fab.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-extended-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.mat-icon,[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.material-icons,.mat-mdc-extended-fab>.mat-icon,.mat-mdc-extended-fab>.material-icons{margin-left:-8px;margin-right:12px}.mat-mdc-extended-fab .mdc-button__label+.mat-icon,.mat-mdc-extended-fab .mdc-button__label+.material-icons,[dir=rtl] .mat-mdc-extended-fab>.mat-icon,[dir=rtl] .mat-mdc-extended-fab>.material-icons{margin-left:12px;margin-right:-8px}.mat-mdc-extended-fab .mat-mdc-button-touch-target{width:100%}']
+      styles: ['.mat-mdc-fab-base{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:56px;height:56px;padding:0;border:none;fill:currentColor;text-decoration:none;cursor:pointer;-moz-appearance:none;-webkit-appearance:none;overflow:visible;transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),opacity 15ms linear 30ms,transform 270ms 0ms cubic-bezier(0, 0, 0.2, 1);flex-shrink:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-fab-base .mat-mdc-button-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-fab-base .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-fab-base .mdc-button__label,.mat-mdc-fab-base .mat-icon{z-index:1;position:relative}.mat-mdc-fab-base .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-fab-base:focus>.mat-focus-indicator::before{content:""}.mat-mdc-fab-base._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-fab-base::before{position:absolute;box-sizing:border-box;width:100%;height:100%;top:0;left:0;border:1px solid rgba(0,0,0,0);border-radius:inherit;content:"";pointer-events:none}.mat-mdc-fab-base[hidden]{display:none}.mat-mdc-fab-base::-moz-focus-inner{padding:0;border:0}.mat-mdc-fab-base:active,.mat-mdc-fab-base:focus{outline:none}.mat-mdc-fab-base:hover{cursor:pointer}.mat-mdc-fab-base>svg{width:100%}.mat-mdc-fab-base .mat-icon,.mat-mdc-fab-base .material-icons{transition:transform 180ms 90ms cubic-bezier(0, 0, 0.2, 1);fill:currentColor;will-change:transform}.mat-mdc-fab-base .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base[disabled]:focus,.mat-mdc-fab-base.mat-mdc-button-disabled,.mat-mdc-fab-base.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-fab-base.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab{background-color:var(--mat-fab-container-color, var(--mat-sys-primary-container));border-radius:var(--mat-fab-container-shape, var(--mat-sys-corner-large));color:var(--mat-fab-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mat-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:hover{box-shadow:var(--mat-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-fab:focus{box-shadow:var(--mat-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:active,.mat-mdc-fab:focus:active{box-shadow:var(--mat-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab[disabled],.mat-mdc-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-fab-touch-target-display, block);left:50%;width:48px;transform:translate(-50%, -50%)}.mat-mdc-fab .mat-ripple-element{background-color:var(--mat-fab-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-disabled-state-layer-color)}.mat-mdc-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-mini-fab{width:40px;height:40px;background-color:var(--mat-fab-small-container-color, var(--mat-sys-primary-container));border-radius:var(--mat-fab-small-container-shape, var(--mat-sys-corner-medium));color:var(--mat-fab-small-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mat-fab-small-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:hover{box-shadow:var(--mat-fab-small-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-mini-fab:focus{box-shadow:var(--mat-fab-small-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:active,.mat-mdc-mini-fab:focus:active{box-shadow:var(--mat-fab-small-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab[disabled],.mat-mdc-mini-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-small-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-small-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-mini-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-fab-small-touch-target-display);left:50%;width:48px;transform:translate(-50%, -50%)}.mat-mdc-mini-fab .mat-ripple-element{background-color:var(--mat-fab-small-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-mini-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-mini-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-disabled-state-layer-color)}.mat-mdc-mini-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-mini-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-mini-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-extended-fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;padding-left:20px;padding-right:20px;width:auto;max-width:100%;line-height:normal;box-shadow:var(--mat-fab-extended-container-elevation-shadow, var(--mat-sys-level3));height:var(--mat-fab-extended-container-height, 56px);border-radius:var(--mat-fab-extended-container-shape, var(--mat-sys-corner-large));font-family:var(--mat-fab-extended-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-fab-extended-label-text-size, var(--mat-sys-label-large-size));font-weight:var(--mat-fab-extended-label-text-weight, var(--mat-sys-label-large-weight));letter-spacing:var(--mat-fab-extended-label-text-tracking, var(--mat-sys-label-large-tracking))}.mat-mdc-extended-fab:hover{box-shadow:var(--mat-fab-extended-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-extended-fab:focus{box-shadow:var(--mat-fab-extended-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:active,.mat-mdc-extended-fab:focus:active{box-shadow:var(--mat-fab-extended-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab[disabled]:focus,.mat-mdc-extended-fab.mat-mdc-button-disabled,.mat-mdc-extended-fab.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-extended-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.mat-icon,[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.material-icons,.mat-mdc-extended-fab>.mat-icon,.mat-mdc-extended-fab>.material-icons{margin-left:-8px;margin-right:12px}.mat-mdc-extended-fab .mdc-button__label+.mat-icon,.mat-mdc-extended-fab .mdc-button__label+.material-icons,[dir=rtl] .mat-mdc-extended-fab>.mat-icon,[dir=rtl] .mat-mdc-extended-fab>.material-icons{margin-left:12px;margin-right:-8px}.mat-mdc-extended-fab .mat-mdc-button-touch-target{width:100%}\n']
     }]
   }], () => [], {
     extended: [{
@@ -5837,25 +5924,18 @@ var MatMiniFabButton = class _MatMiniFabButton extends MatButtonBase {
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
     type: _MatMiniFabButton,
-    selectors: [["button", "mat-mini-fab", ""]],
-    hostVars: 14,
-    hostBindings: function MatMiniFabButton_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("disabled", ctx._getDisabledAttribute())("aria-disabled", ctx._getAriaDisabled());
-        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "");
-        \u0275\u0275classProp("mat-mdc-button-disabled", ctx.disabled)("mat-mdc-button-disabled-interactive", ctx.disabledInteractive)("_mat-animation-noopable", ctx._animationMode === "NoopAnimations")("mat-unthemed", !ctx.color)("mat-mdc-button-base", true);
-      }
-    },
-    exportAs: ["matButton"],
+    selectors: [["button", "mat-mini-fab", ""], ["a", "mat-mini-fab", ""], ["button", "matMiniFab", ""], ["a", "matMiniFab", ""]],
+    hostAttrs: [1, "mdc-fab", "mat-mdc-fab-base", "mdc-fab--mini", "mat-mdc-mini-fab"],
+    exportAs: ["matButton", "matAnchor"],
     features: [\u0275\u0275InheritDefinitionFeature],
-    attrs: _c6,
+    attrs: _c4,
     ngContentSelectors: _c2,
     decls: 7,
     vars: 4,
     consts: [[1, "mat-mdc-button-persistent-ripple"], [1, "mdc-button__label"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
     template: function MatMiniFabButton_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c1);
+        \u0275\u0275projectionDef(_c12);
         \u0275\u0275element(0, "span", 0);
         \u0275\u0275projection(1);
         \u0275\u0275elementStart(2, "span", 1);
@@ -5868,7 +5948,7 @@ var MatMiniFabButton = class _MatMiniFabButton extends MatButtonBase {
         \u0275\u0275classProp("mdc-button__ripple", !ctx._isFab)("mdc-fab__ripple", ctx._isFab);
       }
     },
-    styles: [_c7],
+    styles: [_c5],
     encapsulation: 2,
     changeDetection: 0
   });
@@ -5877,100 +5957,10 @@ var MatMiniFabButton = class _MatMiniFabButton extends MatButtonBase {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatMiniFabButton, [{
     type: Component,
     args: [{
-      selector: `button[mat-mini-fab]`,
-      host: MAT_BUTTON_HOST,
-      exportAs: "matButton",
-      encapsulation: ViewEncapsulation.None,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      template: `<span
-    class="mat-mdc-button-persistent-ripple"
-    [class.mdc-button__ripple]="!_isFab"
-    [class.mdc-fab__ripple]="_isFab"></span>
-
-<ng-content select=".material-icons:not([iconPositionEnd]), mat-icon:not([iconPositionEnd]), [matButtonIcon]:not([iconPositionEnd])">
-</ng-content>
-
-<span class="mdc-button__label"><ng-content></ng-content></span>
-
-<ng-content select=".material-icons[iconPositionEnd], mat-icon[iconPositionEnd], [matButtonIcon][iconPositionEnd]">
-</ng-content>
-
-<!--
-  The indicator can't be directly on the button, because MDC uses ::before for high contrast
-  indication and it can't be on the ripple, because it has a border radius and overflow: hidden.
--->
-<span class="mat-focus-indicator"></span>
-
-<span class="mat-mdc-button-touch-target"></span>
-`,
-      styles: ['.mat-mdc-fab-base{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:56px;height:56px;padding:0;border:none;fill:currentColor;text-decoration:none;cursor:pointer;-moz-appearance:none;-webkit-appearance:none;overflow:visible;transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),opacity 15ms linear 30ms,transform 270ms 0ms cubic-bezier(0, 0, 0.2, 1);flex-shrink:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-fab-base .mat-mdc-button-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-fab-base .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-fab-base .mdc-button__label,.mat-mdc-fab-base .mat-icon{z-index:1;position:relative}.mat-mdc-fab-base .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-fab-base:focus>.mat-focus-indicator::before{content:""}.mat-mdc-fab-base._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-fab-base::before{position:absolute;box-sizing:border-box;width:100%;height:100%;top:0;left:0;border:1px solid rgba(0,0,0,0);border-radius:inherit;content:"";pointer-events:none}.mat-mdc-fab-base[hidden]{display:none}.mat-mdc-fab-base::-moz-focus-inner{padding:0;border:0}.mat-mdc-fab-base:active,.mat-mdc-fab-base:focus{outline:none}.mat-mdc-fab-base:hover{cursor:pointer}.mat-mdc-fab-base>svg{width:100%}.mat-mdc-fab-base .mat-icon,.mat-mdc-fab-base .material-icons{transition:transform 180ms 90ms cubic-bezier(0, 0, 0.2, 1);fill:currentColor;will-change:transform}.mat-mdc-fab-base .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base[disabled]:focus,.mat-mdc-fab-base.mat-mdc-button-disabled,.mat-mdc-fab-base.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-fab-base.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab{background-color:var(--mdc-fab-container-color, var(--mat-sys-primary-container));border-radius:var(--mdc-fab-container-shape, var(--mat-sys-corner-large));color:var(--mat-fab-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mdc-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:hover{box-shadow:var(--mdc-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-fab:focus{box-shadow:var(--mdc-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:active,.mat-mdc-fab:focus:active{box-shadow:var(--mdc-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab[disabled],.mat-mdc-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-fab-touch-target-display, block)}.mat-mdc-fab .mat-ripple-element{background-color:var(--mat-fab-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-disabled-state-layer-color)}.mat-mdc-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-mini-fab{width:40px;height:40px;background-color:var(--mdc-fab-small-container-color, var(--mat-sys-primary-container));border-radius:var(--mdc-fab-small-container-shape, var(--mat-sys-corner-medium));color:var(--mat-fab-small-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mdc-fab-small-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:hover{box-shadow:var(--mdc-fab-small-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-mini-fab:focus{box-shadow:var(--mdc-fab-small-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:active,.mat-mdc-mini-fab:focus:active{box-shadow:var(--mdc-fab-small-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab[disabled],.mat-mdc-mini-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-small-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-small-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-mini-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-fab-small-touch-target-display)}.mat-mdc-mini-fab .mat-ripple-element{background-color:var(--mat-fab-small-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-mini-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-mini-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-disabled-state-layer-color)}.mat-mdc-mini-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-mini-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-mini-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-extended-fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;border-radius:24px;padding-left:20px;padding-right:20px;width:auto;max-width:100%;line-height:normal;height:var(--mdc-extended-fab-container-height, 56px);border-radius:var(--mdc-extended-fab-container-shape, var(--mat-sys-corner-large));font-family:var(--mdc-extended-fab-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-extended-fab-label-text-size, var(--mat-sys-label-large-size));font-weight:var(--mdc-extended-fab-label-text-weight, var(--mat-sys-label-large-weight));letter-spacing:var(--mdc-extended-fab-label-text-tracking, var(--mat-sys-label-large-tracking));box-shadow:var(--mdc-extended-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:hover{box-shadow:var(--mdc-extended-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-extended-fab:focus{box-shadow:var(--mdc-extended-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:active,.mat-mdc-extended-fab:focus:active{box-shadow:var(--mdc-extended-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab[disabled]:focus,.mat-mdc-extended-fab.mat-mdc-button-disabled,.mat-mdc-extended-fab.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-extended-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.mat-icon,[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.material-icons,.mat-mdc-extended-fab>.mat-icon,.mat-mdc-extended-fab>.material-icons{margin-left:-8px;margin-right:12px}.mat-mdc-extended-fab .mdc-button__label+.mat-icon,.mat-mdc-extended-fab .mdc-button__label+.material-icons,[dir=rtl] .mat-mdc-extended-fab>.mat-icon,[dir=rtl] .mat-mdc-extended-fab>.material-icons{margin-left:12px;margin-right:-8px}.mat-mdc-extended-fab .mat-mdc-button-touch-target{width:100%}']
-    }]
-  }], () => [], null);
-})();
-var MatFabAnchor = class _MatFabAnchor extends MatAnchor {
-  _options = inject(MAT_FAB_DEFAULT_OPTIONS, {
-    optional: true
-  });
-  _isFab = true;
-  extended;
-  constructor() {
-    super();
-    this._options = this._options || defaults;
-    this.color = this._options.color || defaults.color;
-  }
-  static \u0275fac = function MatFabAnchor_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatFabAnchor)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _MatFabAnchor,
-    selectors: [["a", "mat-fab", ""]],
-    hostVars: 19,
-    hostBindings: function MatFabAnchor_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("disabled", ctx._getDisabledAttribute())("tabindex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex)("aria-disabled", ctx._getAriaDisabled());
-        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "");
-        \u0275\u0275classProp("mat-mdc-button-disabled", ctx.disabled)("mat-mdc-button-disabled-interactive", ctx.disabledInteractive)("_mat-animation-noopable", ctx._animationMode === "NoopAnimations")("mat-unthemed", !ctx.color)("mat-mdc-button-base", true)("mdc-fab--extended", ctx.extended)("mat-mdc-extended-fab", ctx.extended);
-      }
-    },
-    inputs: {
-      extended: [2, "extended", "extended", booleanAttribute]
-    },
-    exportAs: ["matButton", "matAnchor"],
-    features: [\u0275\u0275InheritDefinitionFeature],
-    attrs: _c5,
-    ngContentSelectors: _c2,
-    decls: 7,
-    vars: 4,
-    consts: [[1, "mat-mdc-button-persistent-ripple"], [1, "mdc-button__label"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
-    template: function MatFabAnchor_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef(_c1);
-        \u0275\u0275element(0, "span", 0);
-        \u0275\u0275projection(1);
-        \u0275\u0275elementStart(2, "span", 1);
-        \u0275\u0275projection(3, 1);
-        \u0275\u0275elementEnd();
-        \u0275\u0275projection(4, 2);
-        \u0275\u0275element(5, "span", 2)(6, "span", 3);
-      }
-      if (rf & 2) {
-        \u0275\u0275classProp("mdc-button__ripple", !ctx._isFab)("mdc-fab__ripple", ctx._isFab);
-      }
-    },
-    styles: [_c7],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatFabAnchor, [{
-    type: Component,
-    args: [{
-      selector: `a[mat-fab]`,
-      host: __spreadProps(__spreadValues({}, MAT_ANCHOR_HOST), {
-        "[class.mdc-fab--extended]": "extended",
-        "[class.mat-mdc-extended-fab]": "extended"
-      }),
+      selector: `button[mat-mini-fab], a[mat-mini-fab], button[matMiniFab], a[matMiniFab]`,
+      host: {
+        "class": "mdc-fab mat-mdc-fab-base mdc-fab--mini mat-mdc-mini-fab"
+      },
       exportAs: "matButton, matAnchor",
       encapsulation: ViewEncapsulation.None,
       changeDetection: ChangeDetectionStrategy.OnPush,
@@ -5995,237 +5985,18 @@ var MatFabAnchor = class _MatFabAnchor extends MatAnchor {
 
 <span class="mat-mdc-button-touch-target"></span>
 `,
-      styles: ['.mat-mdc-fab-base{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:56px;height:56px;padding:0;border:none;fill:currentColor;text-decoration:none;cursor:pointer;-moz-appearance:none;-webkit-appearance:none;overflow:visible;transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),opacity 15ms linear 30ms,transform 270ms 0ms cubic-bezier(0, 0, 0.2, 1);flex-shrink:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-fab-base .mat-mdc-button-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-fab-base .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-fab-base .mdc-button__label,.mat-mdc-fab-base .mat-icon{z-index:1;position:relative}.mat-mdc-fab-base .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-fab-base:focus>.mat-focus-indicator::before{content:""}.mat-mdc-fab-base._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-fab-base::before{position:absolute;box-sizing:border-box;width:100%;height:100%;top:0;left:0;border:1px solid rgba(0,0,0,0);border-radius:inherit;content:"";pointer-events:none}.mat-mdc-fab-base[hidden]{display:none}.mat-mdc-fab-base::-moz-focus-inner{padding:0;border:0}.mat-mdc-fab-base:active,.mat-mdc-fab-base:focus{outline:none}.mat-mdc-fab-base:hover{cursor:pointer}.mat-mdc-fab-base>svg{width:100%}.mat-mdc-fab-base .mat-icon,.mat-mdc-fab-base .material-icons{transition:transform 180ms 90ms cubic-bezier(0, 0, 0.2, 1);fill:currentColor;will-change:transform}.mat-mdc-fab-base .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base[disabled]:focus,.mat-mdc-fab-base.mat-mdc-button-disabled,.mat-mdc-fab-base.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-fab-base.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab{background-color:var(--mdc-fab-container-color, var(--mat-sys-primary-container));border-radius:var(--mdc-fab-container-shape, var(--mat-sys-corner-large));color:var(--mat-fab-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mdc-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:hover{box-shadow:var(--mdc-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-fab:focus{box-shadow:var(--mdc-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:active,.mat-mdc-fab:focus:active{box-shadow:var(--mdc-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab[disabled],.mat-mdc-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-fab-touch-target-display, block)}.mat-mdc-fab .mat-ripple-element{background-color:var(--mat-fab-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-disabled-state-layer-color)}.mat-mdc-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-mini-fab{width:40px;height:40px;background-color:var(--mdc-fab-small-container-color, var(--mat-sys-primary-container));border-radius:var(--mdc-fab-small-container-shape, var(--mat-sys-corner-medium));color:var(--mat-fab-small-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mdc-fab-small-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:hover{box-shadow:var(--mdc-fab-small-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-mini-fab:focus{box-shadow:var(--mdc-fab-small-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:active,.mat-mdc-mini-fab:focus:active{box-shadow:var(--mdc-fab-small-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab[disabled],.mat-mdc-mini-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-small-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-small-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-mini-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-fab-small-touch-target-display)}.mat-mdc-mini-fab .mat-ripple-element{background-color:var(--mat-fab-small-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-mini-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-mini-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-disabled-state-layer-color)}.mat-mdc-mini-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-mini-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-mini-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-extended-fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;border-radius:24px;padding-left:20px;padding-right:20px;width:auto;max-width:100%;line-height:normal;height:var(--mdc-extended-fab-container-height, 56px);border-radius:var(--mdc-extended-fab-container-shape, var(--mat-sys-corner-large));font-family:var(--mdc-extended-fab-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-extended-fab-label-text-size, var(--mat-sys-label-large-size));font-weight:var(--mdc-extended-fab-label-text-weight, var(--mat-sys-label-large-weight));letter-spacing:var(--mdc-extended-fab-label-text-tracking, var(--mat-sys-label-large-tracking));box-shadow:var(--mdc-extended-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:hover{box-shadow:var(--mdc-extended-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-extended-fab:focus{box-shadow:var(--mdc-extended-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:active,.mat-mdc-extended-fab:focus:active{box-shadow:var(--mdc-extended-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab[disabled]:focus,.mat-mdc-extended-fab.mat-mdc-button-disabled,.mat-mdc-extended-fab.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-extended-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.mat-icon,[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.material-icons,.mat-mdc-extended-fab>.mat-icon,.mat-mdc-extended-fab>.material-icons{margin-left:-8px;margin-right:12px}.mat-mdc-extended-fab .mdc-button__label+.mat-icon,.mat-mdc-extended-fab .mdc-button__label+.material-icons,[dir=rtl] .mat-mdc-extended-fab>.mat-icon,[dir=rtl] .mat-mdc-extended-fab>.material-icons{margin-left:12px;margin-right:-8px}.mat-mdc-extended-fab .mat-mdc-button-touch-target{width:100%}']
-    }]
-  }], () => [], {
-    extended: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }]
-  });
-})();
-var MatMiniFabAnchor = class _MatMiniFabAnchor extends MatAnchor {
-  _options = inject(MAT_FAB_DEFAULT_OPTIONS, {
-    optional: true
-  });
-  _isFab = true;
-  constructor() {
-    super();
-    this._options = this._options || defaults;
-    this.color = this._options.color || defaults.color;
-  }
-  static \u0275fac = function MatMiniFabAnchor_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatMiniFabAnchor)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _MatMiniFabAnchor,
-    selectors: [["a", "mat-mini-fab", ""]],
-    hostVars: 15,
-    hostBindings: function MatMiniFabAnchor_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("disabled", ctx._getDisabledAttribute())("tabindex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex)("aria-disabled", ctx._getAriaDisabled());
-        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "");
-        \u0275\u0275classProp("mat-mdc-button-disabled", ctx.disabled)("mat-mdc-button-disabled-interactive", ctx.disabledInteractive)("_mat-animation-noopable", ctx._animationMode === "NoopAnimations")("mat-unthemed", !ctx.color)("mat-mdc-button-base", true);
-      }
-    },
-    exportAs: ["matButton", "matAnchor"],
-    features: [\u0275\u0275InheritDefinitionFeature],
-    attrs: _c6,
-    ngContentSelectors: _c2,
-    decls: 7,
-    vars: 4,
-    consts: [[1, "mat-mdc-button-persistent-ripple"], [1, "mdc-button__label"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
-    template: function MatMiniFabAnchor_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef(_c1);
-        \u0275\u0275element(0, "span", 0);
-        \u0275\u0275projection(1);
-        \u0275\u0275elementStart(2, "span", 1);
-        \u0275\u0275projection(3, 1);
-        \u0275\u0275elementEnd();
-        \u0275\u0275projection(4, 2);
-        \u0275\u0275element(5, "span", 2)(6, "span", 3);
-      }
-      if (rf & 2) {
-        \u0275\u0275classProp("mdc-button__ripple", !ctx._isFab)("mdc-fab__ripple", ctx._isFab);
-      }
-    },
-    styles: [_c7],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatMiniFabAnchor, [{
-    type: Component,
-    args: [{
-      selector: `a[mat-mini-fab]`,
-      host: MAT_ANCHOR_HOST,
-      exportAs: "matButton, matAnchor",
-      encapsulation: ViewEncapsulation.None,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      template: `<span
-    class="mat-mdc-button-persistent-ripple"
-    [class.mdc-button__ripple]="!_isFab"
-    [class.mdc-fab__ripple]="_isFab"></span>
-
-<ng-content select=".material-icons:not([iconPositionEnd]), mat-icon:not([iconPositionEnd]), [matButtonIcon]:not([iconPositionEnd])">
-</ng-content>
-
-<span class="mdc-button__label"><ng-content></ng-content></span>
-
-<ng-content select=".material-icons[iconPositionEnd], mat-icon[iconPositionEnd], [matButtonIcon][iconPositionEnd]">
-</ng-content>
-
-<!--
-  The indicator can't be directly on the button, because MDC uses ::before for high contrast
-  indication and it can't be on the ripple, because it has a border radius and overflow: hidden.
--->
-<span class="mat-focus-indicator"></span>
-
-<span class="mat-mdc-button-touch-target"></span>
-`,
-      styles: ['.mat-mdc-fab-base{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:56px;height:56px;padding:0;border:none;fill:currentColor;text-decoration:none;cursor:pointer;-moz-appearance:none;-webkit-appearance:none;overflow:visible;transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),opacity 15ms linear 30ms,transform 270ms 0ms cubic-bezier(0, 0, 0.2, 1);flex-shrink:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-fab-base .mat-mdc-button-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-fab-base .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-fab-base .mdc-button__label,.mat-mdc-fab-base .mat-icon{z-index:1;position:relative}.mat-mdc-fab-base .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-fab-base:focus>.mat-focus-indicator::before{content:""}.mat-mdc-fab-base._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-fab-base::before{position:absolute;box-sizing:border-box;width:100%;height:100%;top:0;left:0;border:1px solid rgba(0,0,0,0);border-radius:inherit;content:"";pointer-events:none}.mat-mdc-fab-base[hidden]{display:none}.mat-mdc-fab-base::-moz-focus-inner{padding:0;border:0}.mat-mdc-fab-base:active,.mat-mdc-fab-base:focus{outline:none}.mat-mdc-fab-base:hover{cursor:pointer}.mat-mdc-fab-base>svg{width:100%}.mat-mdc-fab-base .mat-icon,.mat-mdc-fab-base .material-icons{transition:transform 180ms 90ms cubic-bezier(0, 0, 0.2, 1);fill:currentColor;will-change:transform}.mat-mdc-fab-base .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base[disabled]:focus,.mat-mdc-fab-base.mat-mdc-button-disabled,.mat-mdc-fab-base.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-fab-base.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab{background-color:var(--mdc-fab-container-color, var(--mat-sys-primary-container));border-radius:var(--mdc-fab-container-shape, var(--mat-sys-corner-large));color:var(--mat-fab-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mdc-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:hover{box-shadow:var(--mdc-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-fab:focus{box-shadow:var(--mdc-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:active,.mat-mdc-fab:focus:active{box-shadow:var(--mdc-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab[disabled],.mat-mdc-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-fab-touch-target-display, block)}.mat-mdc-fab .mat-ripple-element{background-color:var(--mat-fab-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-disabled-state-layer-color)}.mat-mdc-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-mini-fab{width:40px;height:40px;background-color:var(--mdc-fab-small-container-color, var(--mat-sys-primary-container));border-radius:var(--mdc-fab-small-container-shape, var(--mat-sys-corner-medium));color:var(--mat-fab-small-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mdc-fab-small-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:hover{box-shadow:var(--mdc-fab-small-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-mini-fab:focus{box-shadow:var(--mdc-fab-small-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:active,.mat-mdc-mini-fab:focus:active{box-shadow:var(--mdc-fab-small-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab[disabled],.mat-mdc-mini-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-small-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-small-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-mini-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-fab-small-touch-target-display)}.mat-mdc-mini-fab .mat-ripple-element{background-color:var(--mat-fab-small-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-mini-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-mini-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-disabled-state-layer-color)}.mat-mdc-mini-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-mini-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-mini-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-extended-fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;border-radius:24px;padding-left:20px;padding-right:20px;width:auto;max-width:100%;line-height:normal;height:var(--mdc-extended-fab-container-height, 56px);border-radius:var(--mdc-extended-fab-container-shape, var(--mat-sys-corner-large));font-family:var(--mdc-extended-fab-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mdc-extended-fab-label-text-size, var(--mat-sys-label-large-size));font-weight:var(--mdc-extended-fab-label-text-weight, var(--mat-sys-label-large-weight));letter-spacing:var(--mdc-extended-fab-label-text-tracking, var(--mat-sys-label-large-tracking));box-shadow:var(--mdc-extended-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:hover{box-shadow:var(--mdc-extended-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-extended-fab:focus{box-shadow:var(--mdc-extended-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:active,.mat-mdc-extended-fab:focus:active{box-shadow:var(--mdc-extended-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab[disabled]:focus,.mat-mdc-extended-fab.mat-mdc-button-disabled,.mat-mdc-extended-fab.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-extended-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.mat-icon,[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.material-icons,.mat-mdc-extended-fab>.mat-icon,.mat-mdc-extended-fab>.material-icons{margin-left:-8px;margin-right:12px}.mat-mdc-extended-fab .mdc-button__label+.mat-icon,.mat-mdc-extended-fab .mdc-button__label+.material-icons,[dir=rtl] .mat-mdc-extended-fab>.mat-icon,[dir=rtl] .mat-mdc-extended-fab>.material-icons{margin-left:12px;margin-right:-8px}.mat-mdc-extended-fab .mat-mdc-button-touch-target{width:100%}']
+      styles: ['.mat-mdc-fab-base{-webkit-user-select:none;user-select:none;position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:56px;height:56px;padding:0;border:none;fill:currentColor;text-decoration:none;cursor:pointer;-moz-appearance:none;-webkit-appearance:none;overflow:visible;transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),opacity 15ms linear 30ms,transform 270ms 0ms cubic-bezier(0, 0, 0.2, 1);flex-shrink:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-fab-base .mat-mdc-button-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple,.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-fab-base .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-fab-base .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-fab-base .mdc-button__label,.mat-mdc-fab-base .mat-icon{z-index:1;position:relative}.mat-mdc-fab-base .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-fab-base:focus>.mat-focus-indicator::before{content:""}.mat-mdc-fab-base._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-fab-base::before{position:absolute;box-sizing:border-box;width:100%;height:100%;top:0;left:0;border:1px solid rgba(0,0,0,0);border-radius:inherit;content:"";pointer-events:none}.mat-mdc-fab-base[hidden]{display:none}.mat-mdc-fab-base::-moz-focus-inner{padding:0;border:0}.mat-mdc-fab-base:active,.mat-mdc-fab-base:focus{outline:none}.mat-mdc-fab-base:hover{cursor:pointer}.mat-mdc-fab-base>svg{width:100%}.mat-mdc-fab-base .mat-icon,.mat-mdc-fab-base .material-icons{transition:transform 180ms 90ms cubic-bezier(0, 0, 0.2, 1);fill:currentColor;will-change:transform}.mat-mdc-fab-base .mat-focus-indicator::before{margin:calc(calc(var(--mat-focus-indicator-border-width, 3px) + 2px)*-1)}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-fab-base[disabled],.mat-mdc-fab-base[disabled]:focus,.mat-mdc-fab-base.mat-mdc-button-disabled,.mat-mdc-fab-base.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-fab-base.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab{background-color:var(--mat-fab-container-color, var(--mat-sys-primary-container));border-radius:var(--mat-fab-container-shape, var(--mat-sys-corner-large));color:var(--mat-fab-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mat-fab-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:hover{box-shadow:var(--mat-fab-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-fab:focus{box-shadow:var(--mat-fab-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab:active,.mat-mdc-fab:focus:active{box-shadow:var(--mat-fab-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-fab[disabled],.mat-mdc-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-fab-touch-target-display, block);left:50%;width:48px;transform:translate(-50%, -50%)}.mat-mdc-fab .mat-ripple-element{background-color:var(--mat-fab-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-disabled-state-layer-color)}.mat-mdc-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-mini-fab{width:40px;height:40px;background-color:var(--mat-fab-small-container-color, var(--mat-sys-primary-container));border-radius:var(--mat-fab-small-container-shape, var(--mat-sys-corner-medium));color:var(--mat-fab-small-foreground-color, var(--mat-sys-on-primary-container, inherit));box-shadow:var(--mat-fab-small-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:hover{box-shadow:var(--mat-fab-small-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-mini-fab:focus{box-shadow:var(--mat-fab-small-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab:active,.mat-mdc-mini-fab:focus:active{box-shadow:var(--mat-fab-small-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-mini-fab[disabled],.mat-mdc-mini-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mat-fab-small-disabled-state-foreground-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));background-color:var(--mat-fab-small-disabled-state-container-color, color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent))}.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-mini-fab .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;display:var(--mat-fab-small-touch-target-display);left:50%;width:48px;transform:translate(-50%, -50%)}.mat-mdc-mini-fab .mat-ripple-element{background-color:var(--mat-fab-small-ripple-color, color-mix(in srgb, var(--mat-sys-on-primary-container) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-mini-fab .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-state-layer-color, var(--mat-sys-on-primary-container))}.mat-mdc-mini-fab.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-fab-small-disabled-state-layer-color)}.mat-mdc-mini-fab:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-mini-fab.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-mini-fab.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-mini-fab:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-fab-small-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-extended-fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;padding-left:20px;padding-right:20px;width:auto;max-width:100%;line-height:normal;box-shadow:var(--mat-fab-extended-container-elevation-shadow, var(--mat-sys-level3));height:var(--mat-fab-extended-container-height, 56px);border-radius:var(--mat-fab-extended-container-shape, var(--mat-sys-corner-large));font-family:var(--mat-fab-extended-label-text-font, var(--mat-sys-label-large-font));font-size:var(--mat-fab-extended-label-text-size, var(--mat-sys-label-large-size));font-weight:var(--mat-fab-extended-label-text-weight, var(--mat-sys-label-large-weight));letter-spacing:var(--mat-fab-extended-label-text-tracking, var(--mat-sys-label-large-tracking))}.mat-mdc-extended-fab:hover{box-shadow:var(--mat-fab-extended-hover-container-elevation-shadow, var(--mat-sys-level4))}.mat-mdc-extended-fab:focus{box-shadow:var(--mat-fab-extended-focus-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab:active,.mat-mdc-extended-fab:focus:active{box-shadow:var(--mat-fab-extended-pressed-container-elevation-shadow, var(--mat-sys-level3))}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab.mat-mdc-button-disabled{cursor:default;pointer-events:none}.mat-mdc-extended-fab[disabled],.mat-mdc-extended-fab[disabled]:focus,.mat-mdc-extended-fab.mat-mdc-button-disabled,.mat-mdc-extended-fab.mat-mdc-button-disabled:focus{box-shadow:none}.mat-mdc-extended-fab.mat-mdc-button-disabled-interactive{pointer-events:auto}[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.mat-icon,[dir=rtl] .mat-mdc-extended-fab .mdc-button__label+.material-icons,.mat-mdc-extended-fab>.mat-icon,.mat-mdc-extended-fab>.material-icons{margin-left:-8px;margin-right:12px}.mat-mdc-extended-fab .mdc-button__label+.mat-icon,.mat-mdc-extended-fab .mdc-button__label+.material-icons,[dir=rtl] .mat-mdc-extended-fab>.mat-icon,[dir=rtl] .mat-mdc-extended-fab>.material-icons{margin-left:12px;margin-right:-8px}.mat-mdc-extended-fab .mat-mdc-button-touch-target{width:100%}\n']
     }]
   }], () => [], null);
-})();
-var MatIconButton = class _MatIconButton extends MatButtonBase {
-  constructor() {
-    super();
-    this._rippleLoader.configureRipple(this._elementRef.nativeElement, {
-      centered: true
-    });
-  }
-  static \u0275fac = function MatIconButton_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatIconButton)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _MatIconButton,
-    selectors: [["button", "mat-icon-button", ""]],
-    hostVars: 14,
-    hostBindings: function MatIconButton_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("disabled", ctx._getDisabledAttribute())("aria-disabled", ctx._getAriaDisabled());
-        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "");
-        \u0275\u0275classProp("mat-mdc-button-disabled", ctx.disabled)("mat-mdc-button-disabled-interactive", ctx.disabledInteractive)("_mat-animation-noopable", ctx._animationMode === "NoopAnimations")("mat-unthemed", !ctx.color)("mat-mdc-button-base", true);
-      }
-    },
-    exportAs: ["matButton"],
-    features: [\u0275\u0275InheritDefinitionFeature],
-    attrs: _c8,
-    ngContentSelectors: _c9,
-    decls: 4,
-    vars: 0,
-    consts: [[1, "mat-mdc-button-persistent-ripple", "mdc-icon-button__ripple"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
-    template: function MatIconButton_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275element(0, "span", 0);
-        \u0275\u0275projection(1);
-        \u0275\u0275element(2, "span", 1)(3, "span", 2);
-      }
-    },
-    styles: ['.mat-mdc-icon-button{-webkit-user-select:none;user-select:none;display:inline-block;position:relative;box-sizing:border-box;border:none;outline:none;background-color:rgba(0,0,0,0);fill:currentColor;color:inherit;text-decoration:none;cursor:pointer;z-index:0;overflow:visible;border-radius:50%;flex-shrink:0;text-align:center;width:var(--mdc-icon-button-state-layer-size, 40px);height:var(--mdc-icon-button-state-layer-size, 40px);padding:calc(calc(var(--mdc-icon-button-state-layer-size, 40px) - var(--mdc-icon-button-icon-size, 24px)) / 2);font-size:var(--mdc-icon-button-icon-size, 24px);color:var(--mdc-icon-button-icon-color, var(--mat-sys-on-surface-variant));-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-icon-button .mat-mdc-button-ripple,.mat-mdc-icon-button .mat-mdc-button-persistent-ripple,.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-icon-button .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-icon-button .mdc-button__label,.mat-mdc-icon-button .mat-icon{z-index:1;position:relative}.mat-mdc-icon-button .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-icon-button:focus>.mat-focus-indicator::before{content:""}.mat-mdc-icon-button .mat-ripple-element{background-color:var(--mat-icon-button-ripple-color, color-mix(in srgb, var(--mat-sys-on-surface-variant) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-icon-button-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-icon-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-icon-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-icon-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-icon-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-icon-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-icon-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-icon-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-icon-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-icon-button-touch-target-display, block)}.mat-mdc-icon-button._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-icon-button[disabled],.mat-mdc-icon-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-icon-button-disabled-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-icon-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-icon-button img,.mat-mdc-icon-button svg{width:var(--mdc-icon-button-icon-size, 24px);height:var(--mdc-icon-button-icon-size, 24px);vertical-align:baseline}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple{border-radius:50%}.mat-mdc-icon-button[hidden]{display:none}.mat-mdc-icon-button.mat-unthemed:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-primary:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-accent:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-warn:not(.mdc-ripple-upgraded):focus::before{background:rgba(0,0,0,0);opacity:1}', _c4],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatIconButton, [{
-    type: Component,
-    args: [{
-      selector: `button[mat-icon-button]`,
-      host: MAT_BUTTON_HOST,
-      exportAs: "matButton",
-      encapsulation: ViewEncapsulation.None,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      template: `<span class="mat-mdc-button-persistent-ripple mdc-icon-button__ripple"></span>
-
-<ng-content></ng-content>
-
-<!--
-  The indicator can't be directly on the button, because MDC uses ::before for high contrast
-  indication and it can't be on the ripple, because it has a border radius and overflow: hidden.
--->
-<span class="mat-focus-indicator"></span>
-
-<span class="mat-mdc-button-touch-target"></span>
-`,
-      styles: ['.mat-mdc-icon-button{-webkit-user-select:none;user-select:none;display:inline-block;position:relative;box-sizing:border-box;border:none;outline:none;background-color:rgba(0,0,0,0);fill:currentColor;color:inherit;text-decoration:none;cursor:pointer;z-index:0;overflow:visible;border-radius:50%;flex-shrink:0;text-align:center;width:var(--mdc-icon-button-state-layer-size, 40px);height:var(--mdc-icon-button-state-layer-size, 40px);padding:calc(calc(var(--mdc-icon-button-state-layer-size, 40px) - var(--mdc-icon-button-icon-size, 24px)) / 2);font-size:var(--mdc-icon-button-icon-size, 24px);color:var(--mdc-icon-button-icon-color, var(--mat-sys-on-surface-variant));-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-icon-button .mat-mdc-button-ripple,.mat-mdc-icon-button .mat-mdc-button-persistent-ripple,.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-icon-button .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-icon-button .mdc-button__label,.mat-mdc-icon-button .mat-icon{z-index:1;position:relative}.mat-mdc-icon-button .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-icon-button:focus>.mat-focus-indicator::before{content:""}.mat-mdc-icon-button .mat-ripple-element{background-color:var(--mat-icon-button-ripple-color, color-mix(in srgb, var(--mat-sys-on-surface-variant) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-icon-button-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-icon-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-icon-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-icon-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-icon-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-icon-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-icon-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-icon-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-icon-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-icon-button-touch-target-display, block)}.mat-mdc-icon-button._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-icon-button[disabled],.mat-mdc-icon-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-icon-button-disabled-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-icon-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-icon-button img,.mat-mdc-icon-button svg{width:var(--mdc-icon-button-icon-size, 24px);height:var(--mdc-icon-button-icon-size, 24px);vertical-align:baseline}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple{border-radius:50%}.mat-mdc-icon-button[hidden]{display:none}.mat-mdc-icon-button.mat-unthemed:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-primary:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-accent:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-warn:not(.mdc-ripple-upgraded):focus::before{background:rgba(0,0,0,0);opacity:1}', "@media(forced-colors: active){.mat-mdc-button:not(.mdc-button--outlined),.mat-mdc-unelevated-button:not(.mdc-button--outlined),.mat-mdc-raised-button:not(.mdc-button--outlined),.mat-mdc-outlined-button:not(.mdc-button--outlined),.mat-mdc-icon-button.mat-mdc-icon-button,.mat-mdc-outlined-button .mdc-button__ripple{outline:solid 1px}}"]
-    }]
-  }], () => [], null);
-})();
-var MatIconAnchor = class _MatIconAnchor extends MatAnchorBase {
-  static \u0275fac = /* @__PURE__ */ (() => {
-    let \u0275MatIconAnchor_BaseFactory;
-    return function MatIconAnchor_Factory(__ngFactoryType__) {
-      return (\u0275MatIconAnchor_BaseFactory || (\u0275MatIconAnchor_BaseFactory = \u0275\u0275getInheritedFactory(_MatIconAnchor)))(__ngFactoryType__ || _MatIconAnchor);
-    };
-  })();
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _MatIconAnchor,
-    selectors: [["a", "mat-icon-button", ""]],
-    hostVars: 15,
-    hostBindings: function MatIconAnchor_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("disabled", ctx._getDisabledAttribute())("tabindex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex)("aria-disabled", ctx._getAriaDisabled());
-        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "");
-        \u0275\u0275classProp("mat-mdc-button-disabled", ctx.disabled)("mat-mdc-button-disabled-interactive", ctx.disabledInteractive)("_mat-animation-noopable", ctx._animationMode === "NoopAnimations")("mat-unthemed", !ctx.color)("mat-mdc-button-base", true);
-      }
-    },
-    exportAs: ["matButton", "matAnchor"],
-    features: [\u0275\u0275InheritDefinitionFeature],
-    attrs: _c8,
-    ngContentSelectors: _c9,
-    decls: 4,
-    vars: 0,
-    consts: [[1, "mat-mdc-button-persistent-ripple", "mdc-icon-button__ripple"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
-    template: function MatIconAnchor_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275element(0, "span", 0);
-        \u0275\u0275projection(1);
-        \u0275\u0275element(2, "span", 1)(3, "span", 2);
-      }
-    },
-    styles: [_c10, _c4],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatIconAnchor, [{
-    type: Component,
-    args: [{
-      selector: `a[mat-icon-button]`,
-      host: MAT_ANCHOR_HOST,
-      exportAs: "matButton, matAnchor",
-      encapsulation: ViewEncapsulation.None,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      template: `<span class="mat-mdc-button-persistent-ripple mdc-icon-button__ripple"></span>
-
-<ng-content></ng-content>
-
-<!--
-  The indicator can't be directly on the button, because MDC uses ::before for high contrast
-  indication and it can't be on the ripple, because it has a border radius and overflow: hidden.
--->
-<span class="mat-focus-indicator"></span>
-
-<span class="mat-mdc-button-touch-target"></span>
-`,
-      styles: ['.mat-mdc-icon-button{-webkit-user-select:none;user-select:none;display:inline-block;position:relative;box-sizing:border-box;border:none;outline:none;background-color:rgba(0,0,0,0);fill:currentColor;color:inherit;text-decoration:none;cursor:pointer;z-index:0;overflow:visible;border-radius:50%;flex-shrink:0;text-align:center;width:var(--mdc-icon-button-state-layer-size, 40px);height:var(--mdc-icon-button-state-layer-size, 40px);padding:calc(calc(var(--mdc-icon-button-state-layer-size, 40px) - var(--mdc-icon-button-icon-size, 24px)) / 2);font-size:var(--mdc-icon-button-icon-size, 24px);color:var(--mdc-icon-button-icon-color, var(--mat-sys-on-surface-variant));-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-icon-button .mat-mdc-button-ripple,.mat-mdc-icon-button .mat-mdc-button-persistent-ripple,.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-mdc-icon-button .mat-mdc-button-ripple{overflow:hidden}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{content:"";opacity:0}.mat-mdc-icon-button .mdc-button__label,.mat-mdc-icon-button .mat-icon{z-index:1;position:relative}.mat-mdc-icon-button .mat-focus-indicator{top:0;left:0;right:0;bottom:0;position:absolute}.mat-mdc-icon-button:focus>.mat-focus-indicator::before{content:""}.mat-mdc-icon-button .mat-ripple-element{background-color:var(--mat-icon-button-ripple-color, color-mix(in srgb, var(--mat-sys-on-surface-variant) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%), transparent))}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-icon-button-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-icon-button.mat-mdc-button-disabled .mat-mdc-button-persistent-ripple::before{background-color:var(--mat-icon-button-disabled-state-layer-color, var(--mat-sys-on-surface-variant))}.mat-mdc-icon-button:hover>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity))}.mat-mdc-icon-button.cdk-program-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-icon-button.cdk-keyboard-focused>.mat-mdc-button-persistent-ripple::before,.mat-mdc-icon-button.mat-mdc-button-disabled-interactive:focus>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity))}.mat-mdc-icon-button:active>.mat-mdc-button-persistent-ripple::before{opacity:var(--mat-icon-button-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity))}.mat-mdc-icon-button .mat-mdc-button-touch-target{position:absolute;top:50%;height:48px;left:50%;width:48px;transform:translate(-50%, -50%);display:var(--mat-icon-button-touch-target-display, block)}.mat-mdc-icon-button._mat-animation-noopable{transition:none !important;animation:none !important}.mat-mdc-icon-button[disabled],.mat-mdc-icon-button.mat-mdc-button-disabled{cursor:default;pointer-events:none;color:var(--mdc-icon-button-disabled-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-icon-button.mat-mdc-button-disabled-interactive{pointer-events:auto}.mat-mdc-icon-button img,.mat-mdc-icon-button svg{width:var(--mdc-icon-button-icon-size, 24px);height:var(--mdc-icon-button-icon-size, 24px);vertical-align:baseline}.mat-mdc-icon-button .mat-mdc-button-persistent-ripple{border-radius:50%}.mat-mdc-icon-button[hidden]{display:none}.mat-mdc-icon-button.mat-unthemed:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-primary:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-accent:not(.mdc-ripple-upgraded):focus::before,.mat-mdc-icon-button.mat-warn:not(.mdc-ripple-upgraded):focus::before{background:rgba(0,0,0,0);opacity:1}', "@media(forced-colors: active){.mat-mdc-button:not(.mdc-button--outlined),.mat-mdc-unelevated-button:not(.mdc-button--outlined),.mat-mdc-raised-button:not(.mdc-button--outlined),.mat-mdc-outlined-button:not(.mdc-button--outlined),.mat-mdc-icon-button.mat-mdc-icon-button,.mat-mdc-outlined-button .mdc-button__ripple{outline:solid 1px}}"]
-    }]
-  }], null, null);
 })();
 var MatButtonModule = class _MatButtonModule {
   static \u0275fac = function MatButtonModule_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _MatButtonModule)();
   };
   static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _MatButtonModule
+    type: _MatButtonModule,
+    imports: [MatCommonModule, MatRippleModule, MatButton, MatMiniFabButton, MatIconButton, MatFabButton],
+    exports: [MatCommonModule, MatButton, MatMiniFabButton, MatIconButton, MatFabButton]
   });
   static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
     imports: [MatCommonModule, MatRippleModule, MatCommonModule]
@@ -6235,8 +6006,8 @@ var MatButtonModule = class _MatButtonModule {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatButtonModule, [{
     type: NgModule,
     args: [{
-      imports: [MatCommonModule, MatRippleModule, MatAnchor, MatButton, MatIconAnchor, MatMiniFabAnchor, MatMiniFabButton, MatIconButton, MatFabAnchor, MatFabButton],
-      exports: [MatAnchor, MatButton, MatIconAnchor, MatIconButton, MatMiniFabAnchor, MatMiniFabButton, MatFabAnchor, MatFabButton, MatCommonModule]
+      imports: [MatCommonModule, MatRippleModule, MatButton, MatMiniFabButton, MatIconButton, MatFabButton],
+      exports: [MatCommonModule, MatButton, MatMiniFabButton, MatIconButton, MatFabButton]
     }]
   }], null, null);
 })();
@@ -6260,7 +6031,7 @@ function SimpleSnackBar_Conditional_2_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.data.action, " ");
   }
 }
-var _c02 = ["label"];
+var _c03 = ["label"];
 function MatSnackBarContainer_ng_template_4_Template(rf, ctx) {
 }
 var MAX_TIMEOUT = Math.pow(2, 31) - 1;
@@ -6355,7 +6126,7 @@ var MatSnackBarRef = class {
 var MAT_SNACK_BAR_DATA = new InjectionToken("MatSnackBarData");
 var MatSnackBarConfig = class {
   /** The politeness level for the MatAriaLiveAnnouncer announcement. */
-  politeness = "assertive";
+  politeness = "polite";
   /**
    * Message to be announced by the LiveAnnouncer. When opening a snackbar without a custom
    * component or template, the announcement message will default to the specified message.
@@ -6465,13 +6236,13 @@ var SimpleSnackBar = class _SimpleSnackBar {
     exportAs: ["matSnackBar"],
     decls: 3,
     vars: 2,
-    consts: [["matSnackBarLabel", ""], ["matSnackBarActions", ""], ["mat-button", "", "matSnackBarAction", "", 3, "click"]],
+    consts: [["matSnackBarLabel", ""], ["matSnackBarActions", ""], ["matButton", "", "matSnackBarAction", "", 3, "click"]],
     template: function SimpleSnackBar_Template(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275elementStart(0, "div", 0);
         \u0275\u0275text(1);
         \u0275\u0275elementEnd();
-        \u0275\u0275template(2, SimpleSnackBar_Conditional_2_Template, 3, 1, "div", 1);
+        \u0275\u0275conditionalCreate(2, SimpleSnackBar_Conditional_2_Template, 3, 1, "div", 1);
       }
       if (rf & 2) {
         \u0275\u0275advance();
@@ -6481,7 +6252,7 @@ var SimpleSnackBar = class _SimpleSnackBar {
       }
     },
     dependencies: [MatButton, MatSnackBarLabel, MatSnackBarActions, MatSnackBarAction],
-    styles: [".mat-mdc-simple-snack-bar{display:flex}"],
+    styles: [".mat-mdc-simple-snack-bar{display:flex}\n"],
     encapsulation: 2,
     changeDetection: 0
   });
@@ -6498,8 +6269,8 @@ var SimpleSnackBar = class _SimpleSnackBar {
       host: {
         "class": "mat-mdc-simple-snack-bar"
       },
-      template: '<div matSnackBarLabel>\n  {{data.message}}\n</div>\n\n@if (hasAction) {\n  <div matSnackBarActions>\n    <button mat-button matSnackBarAction (click)="action()">\n      {{data.action}}\n    </button>\n  </div>\n}\n',
-      styles: [".mat-mdc-simple-snack-bar{display:flex}"]
+      template: '<div matSnackBarLabel>\n  {{data.message}}\n</div>\n\n@if (hasAction) {\n  <div matSnackBarActions>\n    <button matButton matSnackBarAction (click)="action()">\n      {{data.action}}\n    </button>\n  </div>\n}\n',
+      styles: [".mat-mdc-simple-snack-bar{display:flex}\n"]
     }]
   }], () => [], null);
 })();
@@ -6510,16 +6281,13 @@ var MatSnackBarContainer = class _MatSnackBarContainer extends BasePortalOutlet 
   _elementRef = inject(ElementRef);
   _changeDetectorRef = inject(ChangeDetectorRef);
   _platform = inject(Platform);
-  _rendersRef;
-  _animationsDisabled = inject(ANIMATION_MODULE_TYPE, {
-    optional: true
-  }) === "NoopAnimations";
+  _animationsDisabled = _animationsDisabled();
   snackBarConfig = inject(MatSnackBarConfig);
   _document = inject(DOCUMENT);
   _trackedModals = /* @__PURE__ */ new Set();
   _enterFallback;
   _exitFallback;
-  _renders = new Subject();
+  _injector = inject(Injector);
   /** The number of milliseconds to wait before announcing the snack bar's content. */
   _announceDelay = 150;
   /** The timeout for announcing the snack bar's content. */
@@ -6569,9 +6337,6 @@ var MatSnackBarContainer = class _MatSnackBarContainer extends BasePortalOutlet 
         this._role = "alert";
       }
     }
-    this._rendersRef = afterRender(() => this._renders.next(), {
-      manualCleanup: true
-    });
   }
   /** Attach a component portal as content to this snack bar container. */
   attachComponentPortal(portal) {
@@ -6618,8 +6383,10 @@ var MatSnackBarContainer = class _MatSnackBarContainer extends BasePortalOutlet 
       this._changeDetectorRef.detectChanges();
       this._screenReaderAnnounce();
       if (this._animationsDisabled) {
-        this._renders.pipe(take(1)).subscribe(() => {
+        afterNextRender(() => {
           this._ngZone.run(() => queueMicrotask(() => this.onAnimationEnd(ENTER_ANIMATION)));
+        }, {
+          injector: this._injector
         });
       } else {
         clearTimeout(this._enterFallback);
@@ -6641,8 +6408,10 @@ var MatSnackBarContainer = class _MatSnackBarContainer extends BasePortalOutlet 
       this._elementRef.nativeElement.setAttribute("mat-exit", "");
       clearTimeout(this._announceTimeoutId);
       if (this._animationsDisabled) {
-        this._renders.pipe(take(1)).subscribe(() => {
+        afterNextRender(() => {
           this._ngZone.run(() => queueMicrotask(() => this.onAnimationEnd(EXIT_ANIMATION)));
+        }, {
+          injector: this._injector
         });
       } else {
         clearTimeout(this._exitFallback);
@@ -6656,8 +6425,6 @@ var MatSnackBarContainer = class _MatSnackBarContainer extends BasePortalOutlet 
     this._destroyed = true;
     this._clearFromModals();
     this._completeExit();
-    this._renders.complete();
-    this._rendersRef.destroy();
   }
   _completeExit() {
     clearTimeout(this._exitFallback);
@@ -6764,7 +6531,7 @@ var MatSnackBarContainer = class _MatSnackBarContainer extends BasePortalOutlet 
     viewQuery: function MatSnackBarContainer_Query(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275viewQuery(CdkPortalOutlet, 7);
-        \u0275\u0275viewQuery(_c02, 7);
+        \u0275\u0275viewQuery(_c03, 7);
       }
       if (rf & 2) {
         let _t;
@@ -6804,7 +6571,7 @@ var MatSnackBarContainer = class _MatSnackBarContainer extends BasePortalOutlet 
       }
     },
     dependencies: [CdkPortalOutlet],
-    styles: ["@keyframes _mat-snack-bar-enter{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}@keyframes _mat-snack-bar-exit{from{opacity:1}to{opacity:0}}.mat-mdc-snack-bar-container{display:flex;align-items:center;justify-content:center;box-sizing:border-box;-webkit-tap-highlight-color:rgba(0,0,0,0);margin:8px}.mat-mdc-snack-bar-handset .mat-mdc-snack-bar-container{width:100vw}.mat-snack-bar-container-animations-enabled{opacity:0}.mat-snack-bar-container-animations-enabled.mat-snack-bar-fallback-visible{opacity:1}.mat-snack-bar-container-animations-enabled.mat-snack-bar-container-enter{animation:_mat-snack-bar-enter 150ms cubic-bezier(0, 0, 0.2, 1) forwards}.mat-snack-bar-container-animations-enabled.mat-snack-bar-container-exit{animation:_mat-snack-bar-exit 75ms cubic-bezier(0.4, 0, 1, 1) forwards}.mat-mdc-snackbar-surface{box-shadow:0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);display:flex;align-items:center;justify-content:flex-start;box-sizing:border-box;padding-left:0;padding-right:8px}[dir=rtl] .mat-mdc-snackbar-surface{padding-right:0;padding-left:8px}.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface{min-width:344px;max-width:672px}.mat-mdc-snack-bar-handset .mat-mdc-snackbar-surface{width:100%;min-width:0}@media(forced-colors: active){.mat-mdc-snackbar-surface{outline:solid 1px}}.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface{color:var(--mdc-snackbar-supporting-text-color, var(--mat-sys-inverse-on-surface));border-radius:var(--mdc-snackbar-container-shape, var(--mat-sys-corner-extra-small));background-color:var(--mdc-snackbar-container-color, var(--mat-sys-inverse-surface))}.mdc-snackbar__label{width:100%;flex-grow:1;box-sizing:border-box;margin:0;padding:14px 8px 14px 16px}[dir=rtl] .mdc-snackbar__label{padding-left:8px;padding-right:16px}.mat-mdc-snack-bar-container .mdc-snackbar__label{font-family:var(--mdc-snackbar-supporting-text-font, var(--mat-sys-body-medium-font));font-size:var(--mdc-snackbar-supporting-text-size, var(--mat-sys-body-medium-size));font-weight:var(--mdc-snackbar-supporting-text-weight, var(--mat-sys-body-medium-weight));line-height:var(--mdc-snackbar-supporting-text-line-height, var(--mat-sys-body-medium-line-height))}.mat-mdc-snack-bar-actions{display:flex;flex-shrink:0;align-items:center;box-sizing:border-box}.mat-mdc-snack-bar-handset,.mat-mdc-snack-bar-container,.mat-mdc-snack-bar-label{flex:1 1 auto}.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled).mat-unthemed{color:var(--mat-snack-bar-button-color, var(--mat-sys-inverse-primary))}.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled){--mat-text-button-state-layer-color:currentColor;--mat-text-button-ripple-color:currentColor}.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) .mat-ripple-element{opacity:.1}"],
+    styles: ["@keyframes _mat-snack-bar-enter{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}@keyframes _mat-snack-bar-exit{from{opacity:1}to{opacity:0}}.mat-mdc-snack-bar-container{display:flex;align-items:center;justify-content:center;box-sizing:border-box;-webkit-tap-highlight-color:rgba(0,0,0,0);margin:8px}.mat-mdc-snack-bar-handset .mat-mdc-snack-bar-container{width:100vw}.mat-snack-bar-container-animations-enabled{opacity:0}.mat-snack-bar-container-animations-enabled.mat-snack-bar-fallback-visible{opacity:1}.mat-snack-bar-container-animations-enabled.mat-snack-bar-container-enter{animation:_mat-snack-bar-enter 150ms cubic-bezier(0, 0, 0.2, 1) forwards}.mat-snack-bar-container-animations-enabled.mat-snack-bar-container-exit{animation:_mat-snack-bar-exit 75ms cubic-bezier(0.4, 0, 1, 1) forwards}.mat-mdc-snackbar-surface{box-shadow:0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);display:flex;align-items:center;justify-content:flex-start;box-sizing:border-box;padding-left:0;padding-right:8px}[dir=rtl] .mat-mdc-snackbar-surface{padding-right:0;padding-left:8px}.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface{min-width:344px;max-width:672px}.mat-mdc-snack-bar-handset .mat-mdc-snackbar-surface{width:100%;min-width:0}@media(forced-colors: active){.mat-mdc-snackbar-surface{outline:solid 1px}}.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface{color:var(--mat-snack-bar-supporting-text-color, var(--mat-sys-inverse-on-surface));border-radius:var(--mat-snack-bar-container-shape, var(--mat-sys-corner-extra-small));background-color:var(--mat-snack-bar-container-color, var(--mat-sys-inverse-surface))}.mdc-snackbar__label{width:100%;flex-grow:1;box-sizing:border-box;margin:0;padding:14px 8px 14px 16px}[dir=rtl] .mdc-snackbar__label{padding-left:8px;padding-right:16px}.mat-mdc-snack-bar-container .mdc-snackbar__label{font-family:var(--mat-snack-bar-supporting-text-font, var(--mat-sys-body-medium-font));font-size:var(--mat-snack-bar-supporting-text-size, var(--mat-sys-body-medium-size));font-weight:var(--mat-snack-bar-supporting-text-weight, var(--mat-sys-body-medium-weight));line-height:var(--mat-snack-bar-supporting-text-line-height, var(--mat-sys-body-medium-line-height))}.mat-mdc-snack-bar-actions{display:flex;flex-shrink:0;align-items:center;box-sizing:border-box}.mat-mdc-snack-bar-handset,.mat-mdc-snack-bar-container,.mat-mdc-snack-bar-label{flex:1 1 auto}.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled).mat-unthemed{color:var(--mat-snack-bar-button-color, var(--mat-sys-inverse-primary))}.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled){--mat-button-text-state-layer-color: currentColor;--mat-button-text-ripple-color: currentColor}.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) .mat-ripple-element{opacity:.1}\n"],
     encapsulation: 2
   });
 };
@@ -6825,7 +6592,7 @@ var MatSnackBarContainer = class _MatSnackBarContainer extends BasePortalOutlet 
         "(animationcancel)": "onAnimationEnd($event.animationName)"
       },
       template: '<div class="mdc-snackbar__surface mat-mdc-snackbar-surface">\n  <!--\n    This outer label wrapper will have the class `mdc-snackbar__label` applied if\n    the attached template/component does not contain it.\n  -->\n  <div class="mat-mdc-snack-bar-label" #label>\n    <!-- Initialy holds the snack bar content, will be empty after announcing to screen readers. -->\n    <div aria-hidden="true">\n      <ng-template cdkPortalOutlet />\n    </div>\n\n    <!-- Will receive the snack bar content from the non-live div, move will happen a short delay after opening -->\n    <div [attr.aria-live]="_live" [attr.role]="_role" [attr.id]="_liveElementId"></div>\n  </div>\n</div>\n',
-      styles: ["@keyframes _mat-snack-bar-enter{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}@keyframes _mat-snack-bar-exit{from{opacity:1}to{opacity:0}}.mat-mdc-snack-bar-container{display:flex;align-items:center;justify-content:center;box-sizing:border-box;-webkit-tap-highlight-color:rgba(0,0,0,0);margin:8px}.mat-mdc-snack-bar-handset .mat-mdc-snack-bar-container{width:100vw}.mat-snack-bar-container-animations-enabled{opacity:0}.mat-snack-bar-container-animations-enabled.mat-snack-bar-fallback-visible{opacity:1}.mat-snack-bar-container-animations-enabled.mat-snack-bar-container-enter{animation:_mat-snack-bar-enter 150ms cubic-bezier(0, 0, 0.2, 1) forwards}.mat-snack-bar-container-animations-enabled.mat-snack-bar-container-exit{animation:_mat-snack-bar-exit 75ms cubic-bezier(0.4, 0, 1, 1) forwards}.mat-mdc-snackbar-surface{box-shadow:0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);display:flex;align-items:center;justify-content:flex-start;box-sizing:border-box;padding-left:0;padding-right:8px}[dir=rtl] .mat-mdc-snackbar-surface{padding-right:0;padding-left:8px}.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface{min-width:344px;max-width:672px}.mat-mdc-snack-bar-handset .mat-mdc-snackbar-surface{width:100%;min-width:0}@media(forced-colors: active){.mat-mdc-snackbar-surface{outline:solid 1px}}.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface{color:var(--mdc-snackbar-supporting-text-color, var(--mat-sys-inverse-on-surface));border-radius:var(--mdc-snackbar-container-shape, var(--mat-sys-corner-extra-small));background-color:var(--mdc-snackbar-container-color, var(--mat-sys-inverse-surface))}.mdc-snackbar__label{width:100%;flex-grow:1;box-sizing:border-box;margin:0;padding:14px 8px 14px 16px}[dir=rtl] .mdc-snackbar__label{padding-left:8px;padding-right:16px}.mat-mdc-snack-bar-container .mdc-snackbar__label{font-family:var(--mdc-snackbar-supporting-text-font, var(--mat-sys-body-medium-font));font-size:var(--mdc-snackbar-supporting-text-size, var(--mat-sys-body-medium-size));font-weight:var(--mdc-snackbar-supporting-text-weight, var(--mat-sys-body-medium-weight));line-height:var(--mdc-snackbar-supporting-text-line-height, var(--mat-sys-body-medium-line-height))}.mat-mdc-snack-bar-actions{display:flex;flex-shrink:0;align-items:center;box-sizing:border-box}.mat-mdc-snack-bar-handset,.mat-mdc-snack-bar-container,.mat-mdc-snack-bar-label{flex:1 1 auto}.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled).mat-unthemed{color:var(--mat-snack-bar-button-color, var(--mat-sys-inverse-primary))}.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled){--mat-text-button-state-layer-color:currentColor;--mat-text-button-ripple-color:currentColor}.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) .mat-ripple-element{opacity:.1}"]
+      styles: ["@keyframes _mat-snack-bar-enter{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}@keyframes _mat-snack-bar-exit{from{opacity:1}to{opacity:0}}.mat-mdc-snack-bar-container{display:flex;align-items:center;justify-content:center;box-sizing:border-box;-webkit-tap-highlight-color:rgba(0,0,0,0);margin:8px}.mat-mdc-snack-bar-handset .mat-mdc-snack-bar-container{width:100vw}.mat-snack-bar-container-animations-enabled{opacity:0}.mat-snack-bar-container-animations-enabled.mat-snack-bar-fallback-visible{opacity:1}.mat-snack-bar-container-animations-enabled.mat-snack-bar-container-enter{animation:_mat-snack-bar-enter 150ms cubic-bezier(0, 0, 0.2, 1) forwards}.mat-snack-bar-container-animations-enabled.mat-snack-bar-container-exit{animation:_mat-snack-bar-exit 75ms cubic-bezier(0.4, 0, 1, 1) forwards}.mat-mdc-snackbar-surface{box-shadow:0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);display:flex;align-items:center;justify-content:flex-start;box-sizing:border-box;padding-left:0;padding-right:8px}[dir=rtl] .mat-mdc-snackbar-surface{padding-right:0;padding-left:8px}.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface{min-width:344px;max-width:672px}.mat-mdc-snack-bar-handset .mat-mdc-snackbar-surface{width:100%;min-width:0}@media(forced-colors: active){.mat-mdc-snackbar-surface{outline:solid 1px}}.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface{color:var(--mat-snack-bar-supporting-text-color, var(--mat-sys-inverse-on-surface));border-radius:var(--mat-snack-bar-container-shape, var(--mat-sys-corner-extra-small));background-color:var(--mat-snack-bar-container-color, var(--mat-sys-inverse-surface))}.mdc-snackbar__label{width:100%;flex-grow:1;box-sizing:border-box;margin:0;padding:14px 8px 14px 16px}[dir=rtl] .mdc-snackbar__label{padding-left:8px;padding-right:16px}.mat-mdc-snack-bar-container .mdc-snackbar__label{font-family:var(--mat-snack-bar-supporting-text-font, var(--mat-sys-body-medium-font));font-size:var(--mat-snack-bar-supporting-text-size, var(--mat-sys-body-medium-size));font-weight:var(--mat-snack-bar-supporting-text-weight, var(--mat-sys-body-medium-weight));line-height:var(--mat-snack-bar-supporting-text-line-height, var(--mat-sys-body-medium-line-height))}.mat-mdc-snack-bar-actions{display:flex;flex-shrink:0;align-items:center;box-sizing:border-box}.mat-mdc-snack-bar-handset,.mat-mdc-snack-bar-container,.mat-mdc-snack-bar-label{flex:1 1 auto}.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled).mat-unthemed{color:var(--mat-snack-bar-button-color, var(--mat-sys-inverse-primary))}.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled){--mat-button-text-state-layer-color: currentColor;--mat-button-text-ripple-color: currentColor}.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) .mat-ripple-element{opacity:.1}\n"]
     }]
   }], () => [], {
     _portalOutlet: [{
@@ -6850,7 +6617,6 @@ var MAT_SNACK_BAR_DEFAULT_OPTIONS = new InjectionToken("mat-snack-bar-default-op
   factory: MAT_SNACK_BAR_DEFAULT_OPTIONS_FACTORY
 });
 var MatSnackBar = class _MatSnackBar {
-  _overlay = inject(Overlay);
   _live = inject(LiveAnnouncer);
   _injector = inject(Injector);
   _breakpointObserver = inject(BreakpointObserver);
@@ -6859,6 +6625,7 @@ var MatSnackBar = class _MatSnackBar {
     skipSelf: true
   });
   _defaultConfig = inject(MAT_SNACK_BAR_DEFAULT_OPTIONS);
+  _animationsDisabled = _animationsDisabled();
   /**
    * Reference to the current snack bar in the view *at this level* (in the Angular injector tree).
    * If there is a parent snack-bar service, all operations should delegate to that parent
@@ -7013,7 +6780,7 @@ var MatSnackBar = class _MatSnackBar {
   _createOverlay(config) {
     const overlayConfig = new OverlayConfig();
     overlayConfig.direction = config.direction;
-    let positionStrategy = this._overlay.position().global();
+    const positionStrategy = createGlobalPositionStrategy(this._injector);
     const isRtl = config.direction === "rtl";
     const isLeft = config.horizontalPosition === "left" || config.horizontalPosition === "start" && !isRtl || config.horizontalPosition === "end" && isRtl;
     const isRight = !isLeft && config.horizontalPosition !== "center";
@@ -7030,7 +6797,8 @@ var MatSnackBar = class _MatSnackBar {
       positionStrategy.bottom("0");
     }
     overlayConfig.positionStrategy = positionStrategy;
-    return this._overlay.create(overlayConfig);
+    overlayConfig.disableAnimations = this._animationsDisabled;
+    return createOverlayRef(this._injector, overlayConfig);
   }
   /**
    * Creates an injector to be used inside of a snack bar component.
@@ -7073,7 +6841,9 @@ var MatSnackBarModule = class _MatSnackBarModule {
     return new (__ngFactoryType__ || _MatSnackBarModule)();
   };
   static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _MatSnackBarModule
+    type: _MatSnackBarModule,
+    imports: [OverlayModule, PortalModule, MatButtonModule, MatCommonModule, SimpleSnackBar, MatSnackBarContainer, MatSnackBarLabel, MatSnackBarActions, MatSnackBarAction],
+    exports: [MatCommonModule, MatSnackBarContainer, MatSnackBarLabel, MatSnackBarActions, MatSnackBarAction]
   });
   static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
     providers: [MatSnackBar],
@@ -9982,7 +9752,7 @@ log("MOCKS", "Mocks included with application.");
 var DEBUG_BUILD = typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__;
 
 // node_modules/@sentry/core/build/esm/utils-hoist/version.js
-var SDK_VERSION = "9.19.0";
+var SDK_VERSION = "9.29.0";
 
 // node_modules/@sentry/core/build/esm/utils-hoist/worldwide.js
 var GLOBAL_OBJ = globalThis;
@@ -10176,7 +9946,15 @@ function getComponentName(elem) {
 
 // node_modules/@sentry/core/build/esm/utils-hoist/logger.js
 var PREFIX = "Sentry Logger ";
-var CONSOLE_LEVELS = ["debug", "info", "warn", "error", "log", "assert", "trace"];
+var CONSOLE_LEVELS = [
+  "debug",
+  "info",
+  "warn",
+  "error",
+  "log",
+  "assert",
+  "trace"
+];
 var originalConsoleMethods = {};
 function consoleSandbox(callback) {
   if (!("console" in GLOBAL_OBJ)) {
@@ -10396,19 +10174,19 @@ function uuid4(crypto = getCrypto()) {
     }
   } catch (_) {
   }
-  return ("10000000100040008000" + 1e11).replace(/[018]/g, (c) => (
-    // eslint-disable-next-line no-bitwise
-    (c ^ (getRandomByte() & 15) >> c / 4).toString(16)
-  ));
+  return ("10000000100040008000" + 1e11).replace(
+    /[018]/g,
+    (c) => (
+      // eslint-disable-next-line no-bitwise
+      (c ^ (getRandomByte() & 15) >> c / 4).toString(16)
+    )
+  );
 }
 function getFirstException(event) {
   return event.exception?.values?.[0];
 }
 function getEventDescription(event) {
-  const {
-    message,
-    event_id: eventId
-  } = event;
+  const { message, event_id: eventId } = event;
   if (message) {
     return message;
   }
@@ -10437,10 +10215,7 @@ function addExceptionMechanism(event, newMechanism) {
   if (!firstException) {
     return;
   }
-  const defaultMechanism = {
-    type: "generic",
-    handled: true
-  };
+  const defaultMechanism = { type: "generic", handled: true };
   const currentMechanism = firstException.mechanism;
   firstException.mechanism = __spreadValues(__spreadValues(__spreadValues({}, defaultMechanism), currentMechanism), newMechanism);
   if (newMechanism && "data" in newMechanism) {
@@ -10471,9 +10246,7 @@ function dateTimestampInSeconds() {
   return Date.now() / ONE_SECOND_IN_MS;
 }
 function createUnixTimestampInSecondsFunc() {
-  const {
-    performance: performance2
-  } = GLOBAL_OBJ;
+  const { performance: performance2 } = GLOBAL_OBJ;
   if (!performance2?.now) {
     return dateTimestampInSeconds;
   }
@@ -10486,9 +10259,7 @@ function createUnixTimestampInSecondsFunc() {
 var timestampInSeconds = createUnixTimestampInSecondsFunc();
 var cachedTimeOrigin;
 function getBrowserTimeOrigin() {
-  const {
-    performance: performance2
-  } = GLOBAL_OBJ;
+  const { performance: performance2 } = GLOBAL_OBJ;
   if (!performance2?.now) {
     return [void 0, "none"];
   }
@@ -10594,13 +10365,9 @@ function updateSession(session, context = {}) {
 function closeSession(session, status) {
   let context = {};
   if (status) {
-    context = {
-      status
-    };
+    context = { status };
   } else if (session.status === "ok") {
-    context = {
-      status: "exited"
-    };
+    context = { status: "exited" };
   }
   updateSession(session, context);
 }
@@ -10626,7 +10393,7 @@ function sessionToJSON(session) {
 }
 
 // node_modules/@sentry/core/build/esm/utils/merge.js
-function merge2(initialObj, mergeObj, levels = 2) {
+function merge(initialObj, mergeObj, levels = 2) {
   if (!mergeObj || typeof mergeObj !== "object" || levels <= 0) {
     return mergeObj;
   }
@@ -10636,7 +10403,7 @@ function merge2(initialObj, mergeObj, levels = 2) {
   const output = __spreadValues({}, initialObj);
   for (const key in mergeObj) {
     if (Object.prototype.hasOwnProperty.call(mergeObj, key)) {
-      output[key] = merge2(output[key], mergeObj[key], levels - 1);
+      output[key] = merge(output[key], mergeObj[key], levels - 1);
     }
   }
   return output;
@@ -10789,9 +10556,7 @@ var Scope = class _Scope {
       username: void 0
     };
     if (this._session) {
-      updateSession(this._session, {
-        user
-      });
+      updateSession(this._session, { user });
     }
     this._notifyScopeListeners();
     return this;
@@ -10815,9 +10580,7 @@ var Scope = class _Scope {
    * Set a single tag that will be sent as tags data with the event.
    */
   setTag(key, value) {
-    this._tags = __spreadProps(__spreadValues({}, this._tags), {
-      [key]: value
-    });
+    this._tags = __spreadProps(__spreadValues({}, this._tags), { [key]: value });
     this._notifyScopeListeners();
     return this;
   }
@@ -10834,9 +10597,7 @@ var Scope = class _Scope {
    * Set a single key:value extra entry that will be sent as extra data with the event.
    */
   setExtra(key, extra) {
-    this._extra = __spreadProps(__spreadValues({}, this._extra), {
-      [key]: extra
-    });
+    this._extra = __spreadProps(__spreadValues({}, this._extra), { [key]: extra });
     this._notifyScopeListeners();
     return this;
   }
@@ -10917,15 +10678,7 @@ var Scope = class _Scope {
     }
     const scopeToMerge = typeof captureContext === "function" ? captureContext(this) : captureContext;
     const scopeInstance = scopeToMerge instanceof _Scope ? scopeToMerge.getScopeData() : isPlainObject(scopeToMerge) ? captureContext : void 0;
-    const {
-      tags,
-      extra,
-      user,
-      contexts,
-      level,
-      fingerprint = [],
-      propagationContext
-    } = scopeInstance || {};
+    const { tags, extra, user, contexts, level, fingerprint = [], propagationContext } = scopeInstance || {};
     this._tags = __spreadValues(__spreadValues({}, this._tags), tags);
     this._extra = __spreadValues(__spreadValues({}, this._extra), extra);
     this._contexts = __spreadValues(__spreadValues({}, this._contexts), contexts);
@@ -10959,10 +10712,7 @@ var Scope = class _Scope {
     this._session = void 0;
     _setSpanForScope(this, void 0);
     this._attachments = [];
-    this.setPropagationContext({
-      traceId: generateTraceId(),
-      sampleRand: Math.random()
-    });
+    this.setPropagationContext({ traceId: generateTraceId(), sampleRand: Math.random() });
     this._notifyScopeListeners();
     return this;
   }
@@ -11041,7 +10791,7 @@ var Scope = class _Scope {
    * Add data which will be accessible during event processing but won't get sent to Sentry.
    */
   setSDKProcessingMetadata(newData) {
-    this._sdkProcessingMetadata = merge2(this._sdkProcessingMetadata, newData, 2);
+    this._sdkProcessingMetadata = merge(this._sdkProcessingMetadata, newData, 2);
     return this;
   }
   /**
@@ -11069,12 +10819,16 @@ var Scope = class _Scope {
       return eventId;
     }
     const syntheticException = new Error("Sentry syntheticException");
-    this._client.captureException(exception, __spreadProps(__spreadValues({
-      originalException: exception,
-      syntheticException
-    }, hint), {
-      event_id: eventId
-    }), this);
+    this._client.captureException(
+      exception,
+      __spreadProps(__spreadValues({
+        originalException: exception,
+        syntheticException
+      }, hint), {
+        event_id: eventId
+      }),
+      this
+    );
     return eventId;
   }
   /**
@@ -11089,12 +10843,17 @@ var Scope = class _Scope {
       return eventId;
     }
     const syntheticException = new Error(message);
-    this._client.captureMessage(message, level, __spreadProps(__spreadValues({
-      originalException: message,
-      syntheticException
-    }, hint), {
-      event_id: eventId
-    }), this);
+    this._client.captureMessage(
+      message,
+      level,
+      __spreadProps(__spreadValues({
+        originalException: message,
+        syntheticException
+      }, hint), {
+        event_id: eventId
+      }),
+      this
+    );
     return eventId;
   }
   /**
@@ -11108,9 +10867,7 @@ var Scope = class _Scope {
       logger.warn("No client configured on scope - will not capture event!");
       return eventId;
     }
-    this._client.captureEvent(event, __spreadProps(__spreadValues({}, hint), {
-      event_id: eventId
-    }), this);
+    this._client.captureEvent(event, __spreadProps(__spreadValues({}, hint), { event_id: eventId }), this);
     return eventId;
   }
   /**
@@ -11150,9 +10907,7 @@ var AsyncContextStack = class {
     } else {
       assignedIsolationScope = isolationScope;
     }
-    this._stack = [{
-      scope: assignedScope
-    }];
+    this._stack = [{ scope: assignedScope }];
     this._isolationScope = assignedIsolationScope;
   }
   /**
@@ -11168,13 +10923,16 @@ var AsyncContextStack = class {
       throw e2;
     }
     if (isThenable(maybePromiseResult)) {
-      return maybePromiseResult.then((res) => {
-        this._popScope();
-        return res;
-      }, (e2) => {
-        this._popScope();
-        throw e2;
-      });
+      return maybePromiseResult.then(
+        (res) => {
+          this._popScope();
+          return res;
+        },
+        (e2) => {
+          this._popScope();
+          throw e2;
+        }
+      );
     }
     this._popScope();
     return maybePromiseResult;
@@ -11295,11 +11053,7 @@ function getClient() {
 }
 function getTraceContextFromScope(scope) {
   const propagationContext = scope.getPropagationContext();
-  const {
-    traceId,
-    parentSpanId,
-    propagationSpanId
-  } = propagationContext;
+  const { traceId, parentSpanId, propagationSpanId } = propagationContext;
   const traceContext = {
     trace_id: traceId,
     span_id: propagationSpanId || generateSpanId()
@@ -11330,82 +11084,41 @@ var SPAN_STATUS_OK = 1;
 var SPAN_STATUS_ERROR = 2;
 function getSpanStatusFromHttpCode(httpStatus) {
   if (httpStatus < 400 && httpStatus >= 100) {
-    return {
-      code: SPAN_STATUS_OK
-    };
+    return { code: SPAN_STATUS_OK };
   }
   if (httpStatus >= 400 && httpStatus < 500) {
     switch (httpStatus) {
       case 401:
-        return {
-          code: SPAN_STATUS_ERROR,
-          message: "unauthenticated"
-        };
+        return { code: SPAN_STATUS_ERROR, message: "unauthenticated" };
       case 403:
-        return {
-          code: SPAN_STATUS_ERROR,
-          message: "permission_denied"
-        };
+        return { code: SPAN_STATUS_ERROR, message: "permission_denied" };
       case 404:
-        return {
-          code: SPAN_STATUS_ERROR,
-          message: "not_found"
-        };
+        return { code: SPAN_STATUS_ERROR, message: "not_found" };
       case 409:
-        return {
-          code: SPAN_STATUS_ERROR,
-          message: "already_exists"
-        };
+        return { code: SPAN_STATUS_ERROR, message: "already_exists" };
       case 413:
-        return {
-          code: SPAN_STATUS_ERROR,
-          message: "failed_precondition"
-        };
+        return { code: SPAN_STATUS_ERROR, message: "failed_precondition" };
       case 429:
-        return {
-          code: SPAN_STATUS_ERROR,
-          message: "resource_exhausted"
-        };
+        return { code: SPAN_STATUS_ERROR, message: "resource_exhausted" };
       case 499:
-        return {
-          code: SPAN_STATUS_ERROR,
-          message: "cancelled"
-        };
+        return { code: SPAN_STATUS_ERROR, message: "cancelled" };
       default:
-        return {
-          code: SPAN_STATUS_ERROR,
-          message: "invalid_argument"
-        };
+        return { code: SPAN_STATUS_ERROR, message: "invalid_argument" };
     }
   }
   if (httpStatus >= 500 && httpStatus < 600) {
     switch (httpStatus) {
       case 501:
-        return {
-          code: SPAN_STATUS_ERROR,
-          message: "unimplemented"
-        };
+        return { code: SPAN_STATUS_ERROR, message: "unimplemented" };
       case 503:
-        return {
-          code: SPAN_STATUS_ERROR,
-          message: "unavailable"
-        };
+        return { code: SPAN_STATUS_ERROR, message: "unavailable" };
       case 504:
-        return {
-          code: SPAN_STATUS_ERROR,
-          message: "deadline_exceeded"
-        };
+        return { code: SPAN_STATUS_ERROR, message: "deadline_exceeded" };
       default:
-        return {
-          code: SPAN_STATUS_ERROR,
-          message: "internal_error"
-        };
+        return { code: SPAN_STATUS_ERROR, message: "internal_error" };
     }
   }
-  return {
-    code: SPAN_STATUS_ERROR,
-    message: "unknown_error"
-  };
+  return { code: SPAN_STATUS_ERROR, message: "unknown_error" };
 }
 function setHttpStatus(span, httpStatus) {
   span.setAttribute("http.response.status_code", httpStatus);
@@ -11469,12 +11182,15 @@ function dynamicSamplingContextToSentryBaggageHeader(dynamicSamplingContext) {
   if (!dynamicSamplingContext) {
     return void 0;
   }
-  const sentryPrefixedDSC = Object.entries(dynamicSamplingContext).reduce((acc, [dscKey, dscValue]) => {
-    if (dscValue) {
-      acc[`${SENTRY_BAGGAGE_KEY_PREFIX}${dscKey}`] = dscValue;
-    }
-    return acc;
-  }, {});
+  const sentryPrefixedDSC = Object.entries(dynamicSamplingContext).reduce(
+    (acc, [dscKey, dscValue]) => {
+      if (dscValue) {
+        acc[`${SENTRY_BAGGAGE_KEY_PREFIX}${dscKey}`] = dscValue;
+      }
+      return acc;
+    },
+    {}
+  );
   return objectToBaggageHeader(sentryPrefixedDSC);
 }
 function parseBaggageHeader(baggageHeader) {
@@ -11493,13 +11209,15 @@ function parseBaggageHeader(baggageHeader) {
   return baggageHeaderToObject(baggageHeader);
 }
 function baggageHeaderToObject(baggageHeader) {
-  return baggageHeader.split(",").map((baggageEntry) => baggageEntry.split("=").map((keyOrValue) => {
-    try {
-      return decodeURIComponent(keyOrValue.trim());
-    } catch {
-      return;
-    }
-  })).reduce((acc, [key, value]) => {
+  return baggageHeader.split(",").map(
+    (baggageEntry) => baggageEntry.split("=").map((keyOrValue) => {
+      try {
+        return decodeURIComponent(keyOrValue.trim());
+      } catch {
+        return;
+      }
+    })
+  ).reduce((acc, [key, value]) => {
     if (key && value) {
       acc[key] = value;
     }
@@ -11514,7 +11232,9 @@ function objectToBaggageHeader(object) {
     const baggageEntry = `${encodeURIComponent(objectKey)}=${encodeURIComponent(objectValue)}`;
     const newBaggageHeader = currentIndex === 0 ? baggageEntry : `${baggageHeader},${baggageEntry}`;
     if (newBaggageHeader.length > MAX_BAGGAGE_STRING_LENGTH) {
-      DEBUG_BUILD && logger.warn(`Not adding key: ${objectKey} with val: ${objectValue} to baggage header due to exceeding baggage size limits.`);
+      DEBUG_BUILD && logger.warn(
+        `Not adding key: ${objectKey} with val: ${objectValue} to baggage header due to exceeding baggage size limits.`
+      );
       return baggageHeader;
     } else {
       return newBaggageHeader;
@@ -11523,7 +11243,10 @@ function objectToBaggageHeader(object) {
 }
 
 // node_modules/@sentry/core/build/esm/utils-hoist/tracing.js
-var TRACEPARENT_REGEXP = new RegExp("^[ \\t]*([0-9a-f]{32})?-?([0-9a-f]{16})?-?([01])?[ \\t]*$");
+var TRACEPARENT_REGEXP = new RegExp(
+  "^[ \\t]*([0-9a-f]{32})?-?([0-9a-f]{16})?-?([01])?[ \\t]*$"
+  // whitespace
+);
 function extractTraceparentData(traceparent) {
   if (!traceparent) {
     return void 0;
@@ -11557,11 +11280,7 @@ function propagationContextFromHeaders(sentryTrace, baggage) {
   if (dynamicSamplingContext) {
     dynamicSamplingContext.sample_rand = sampleRand.toString();
   }
-  const {
-    traceId,
-    parentSpanId,
-    parentSampled
-  } = traceparentData;
+  const { traceId, parentSpanId, parentSampled } = traceparentData;
   return {
     traceId,
     parentSpanId,
@@ -11602,18 +11321,8 @@ var TRACE_FLAG_NONE = 0;
 var TRACE_FLAG_SAMPLED = 1;
 var hasShownSpanDropWarning = false;
 function spanToTransactionTraceContext(span) {
-  const {
-    spanId: span_id,
-    traceId: trace_id
-  } = span.spanContext();
-  const {
-    data,
-    op,
-    parent_span_id,
-    status,
-    origin,
-    links
-  } = spanToJSON(span);
+  const { spanId: span_id, traceId: trace_id } = span.spanContext();
+  const { data, op, parent_span_id, status, origin, links } = spanToJSON(span);
   return {
     parent_span_id,
     span_id,
@@ -11626,11 +11335,7 @@ function spanToTransactionTraceContext(span) {
   };
 }
 function spanToTraceContext(span) {
-  const {
-    spanId,
-    traceId: trace_id,
-    isRemote
-  } = span.spanContext();
+  const { spanId, traceId: trace_id, isRemote } = span.spanContext();
   const parent_span_id = isRemote ? spanId : spanToJSON(span).parent_span_id;
   const scope = getCapturedScopesOnSpan(span).scope;
   const span_id = isRemote ? scope?.getPropagationContext().propagationSpanId || generateSpanId() : spanId;
@@ -11641,29 +11346,14 @@ function spanToTraceContext(span) {
   };
 }
 function spanToTraceHeader(span) {
-  const {
-    traceId,
-    spanId
-  } = span.spanContext();
+  const { traceId, spanId } = span.spanContext();
   const sampled = spanIsSampled(span);
   return generateSentryTraceHeader(traceId, spanId, sampled);
 }
 function convertSpanLinksForEnvelope(links) {
   if (links && links.length > 0) {
     return links.map((_a) => {
-      var _b = _a, {
-        context: _c
-      } = _b, _d = _c, {
-        spanId,
-        traceId,
-        traceFlags
-      } = _d, restContext = __objRest(_d, [
-        "spanId",
-        "traceId",
-        "traceFlags"
-      ]), {
-        attributes
-      } = _b;
+      var _b = _a, { context: _c } = _b, _d = _c, { spanId, traceId, traceFlags } = _d, restContext = __objRest(_d, ["spanId", "traceId", "traceFlags"]), { attributes } = _b;
       return __spreadValues({
         span_id: spanId,
         trace_id: traceId,
@@ -11695,19 +11385,9 @@ function spanToJSON(span) {
   if (spanIsSentrySpan(span)) {
     return span.getSpanJSON();
   }
-  const {
-    spanId: span_id,
-    traceId: trace_id
-  } = span.spanContext();
+  const { spanId: span_id, traceId: trace_id } = span.spanContext();
   if (spanIsOpenTelemetrySdkTraceBaseSpan(span)) {
-    const {
-      attributes,
-      startTime,
-      name,
-      endTime,
-      status,
-      links
-    } = span;
+    const { attributes, startTime, name, endTime, status, links } = span;
     const parentSpanId = "parentSpanId" in span ? span.parentSpanId : "parentSpanContext" in span ? span.parentSpanContext?.spanId : void 0;
     return {
       span_id,
@@ -11739,9 +11419,7 @@ function spanIsSentrySpan(span) {
   return typeof span.getSpanJSON === "function";
 }
 function spanIsSampled(span) {
-  const {
-    traceFlags
-  } = span.spanContext();
+  const { traceFlags } = span.spanContext();
   return traceFlags === TRACE_FLAG_SAMPLED;
 }
 function getStatusMessage(status) {
@@ -11799,7 +11477,9 @@ function getActiveSpan() {
 function showSpanDropWarning() {
   if (!hasShownSpanDropWarning) {
     consoleSandbox(() => {
-      console.warn("[Sentry] Returning null from `beforeSendSpan` is disallowed. To drop certain spans, configure the respective integrations directly.");
+      console.warn(
+        "[Sentry] Returning null from `beforeSendSpan` is disallowed. To drop certain spans, configure the respective integrations directly."
+      );
     });
     hasShownSpanDropWarning = true;
   }
@@ -11922,10 +11602,13 @@ function triggerHandlers(type, data) {
     try {
       handler(data);
     } catch (e2) {
-      DEBUG_BUILD && logger.error(`Error while triggering instrumentation handler.
+      DEBUG_BUILD && logger.error(
+        `Error while triggering instrumentation handler.
 Type: ${type}
 Name: ${getFunctionName(handler)}
-Error:`, e2);
+Error:`,
+        e2
+      );
     }
   }
 }
@@ -11992,10 +11675,7 @@ function errorCallback() {
   if (rootSpan) {
     const message = "internal_error";
     DEBUG_BUILD && logger.log(`[Tracing] Root span: ${message} -> Global error occurred`);
-    rootSpan.setStatus({
-      code: SPAN_STATUS_ERROR,
-      message
-    });
+    rootSpan.setStatus({ code: SPAN_STATUS_ERROR, message });
   }
 }
 errorCallback.tag = "sentry_tracingErrorCallback";
@@ -12013,6 +11693,93 @@ function hasSpansEnabled(maybeOptions) {
 // node_modules/@sentry/core/build/esm/constants.js
 var DEFAULT_ENVIRONMENT = "production";
 
+// node_modules/@sentry/core/build/esm/utils-hoist/dsn.js
+var ORG_ID_REGEX = /^o(\d+)\./;
+var DSN_REGEX = /^(?:(\w+):)\/\/(?:(\w+)(?::(\w+)?)?@)([\w.-]+)(?::(\d+))?\/(.+)/;
+function isValidProtocol(protocol) {
+  return protocol === "http" || protocol === "https";
+}
+function dsnToString(dsn, withPassword = false) {
+  const { host, path, pass, port, projectId, protocol, publicKey } = dsn;
+  return `${protocol}://${publicKey}${withPassword && pass ? `:${pass}` : ""}@${host}${port ? `:${port}` : ""}/${path ? `${path}/` : path}${projectId}`;
+}
+function dsnFromString(str) {
+  const match = DSN_REGEX.exec(str);
+  if (!match) {
+    consoleSandbox(() => {
+      console.error(`Invalid Sentry Dsn: ${str}`);
+    });
+    return void 0;
+  }
+  const [protocol, publicKey, pass = "", host = "", port = "", lastPath = ""] = match.slice(1);
+  let path = "";
+  let projectId = lastPath;
+  const split = projectId.split("/");
+  if (split.length > 1) {
+    path = split.slice(0, -1).join("/");
+    projectId = split.pop();
+  }
+  if (projectId) {
+    const projectMatch = projectId.match(/^\d+/);
+    if (projectMatch) {
+      projectId = projectMatch[0];
+    }
+  }
+  return dsnFromComponents({ host, pass, path, projectId, port, protocol, publicKey });
+}
+function dsnFromComponents(components) {
+  return {
+    protocol: components.protocol,
+    publicKey: components.publicKey || "",
+    pass: components.pass || "",
+    host: components.host,
+    port: components.port || "",
+    path: components.path || "",
+    projectId: components.projectId
+  };
+}
+function validateDsn(dsn) {
+  if (!DEBUG_BUILD) {
+    return true;
+  }
+  const { port, projectId, protocol } = dsn;
+  const requiredComponents = ["protocol", "publicKey", "host", "projectId"];
+  const hasMissingRequiredComponent = requiredComponents.find((component) => {
+    if (!dsn[component]) {
+      logger.error(`Invalid Sentry Dsn: ${component} missing`);
+      return true;
+    }
+    return false;
+  });
+  if (hasMissingRequiredComponent) {
+    return false;
+  }
+  if (!projectId.match(/^\d+$/)) {
+    logger.error(`Invalid Sentry Dsn: Invalid projectId ${projectId}`);
+    return false;
+  }
+  if (!isValidProtocol(protocol)) {
+    logger.error(`Invalid Sentry Dsn: Invalid protocol ${protocol}`);
+    return false;
+  }
+  if (port && isNaN(parseInt(port, 10))) {
+    logger.error(`Invalid Sentry Dsn: Invalid port ${port}`);
+    return false;
+  }
+  return true;
+}
+function extractOrgIdFromDsnHost(host) {
+  const match = host.match(ORG_ID_REGEX);
+  return match?.[1];
+}
+function makeDsn(from) {
+  const components = typeof from === "string" ? dsnFromString(from) : dsnFromComponents(from);
+  if (!components || !validateDsn(components)) {
+    return void 0;
+  }
+  return components;
+}
+
 // node_modules/@sentry/core/build/esm/tracing/dynamicSamplingContext.js
 var FROZEN_DSC_FIELD = "_frozenDsc";
 function freezeDscOnSpan(span, dsc) {
@@ -12021,14 +11788,19 @@ function freezeDscOnSpan(span, dsc) {
 }
 function getDynamicSamplingContextFromClient(trace_id, client) {
   const options = client.getOptions();
-  const {
-    publicKey: public_key
-  } = client.getDsn() || {};
+  const { publicKey: public_key, host } = client.getDsn() || {};
+  let org_id;
+  if (options.orgId) {
+    org_id = String(options.orgId);
+  } else if (host) {
+    org_id = extractOrgIdFromDsnHost(host);
+  }
   const dsc = {
     environment: options.environment || DEFAULT_ENVIRONMENT,
     release: options.release,
     public_key,
-    trace_id
+    trace_id,
+    org_id
   };
   client.emit("createDsc", dsc);
   return dsc;
@@ -12144,14 +11916,8 @@ var SentryNonRecordingSpan = class {
 // node_modules/@sentry/core/build/esm/tracing/logSpans.js
 function logSpanStart(span) {
   if (!DEBUG_BUILD) return;
-  const {
-    description = "< unknown name >",
-    op = "< unknown op >",
-    parent_span_id: parentSpanId
-  } = spanToJSON(span);
-  const {
-    spanId
-  } = span.spanContext();
+  const { description = "< unknown name >", op = "< unknown op >", parent_span_id: parentSpanId } = spanToJSON(span);
+  const { spanId } = span.spanContext();
   const sampled = spanIsSampled(span);
   const rootSpan = getRootSpan(span);
   const isRootSpan = rootSpan === span;
@@ -12161,10 +11927,7 @@ function logSpanStart(span) {
     infoParts.push(`parent ID: ${parentSpanId}`);
   }
   if (!isRootSpan) {
-    const {
-      op: op2,
-      description: description2
-    } = spanToJSON(rootSpan);
+    const { op: op2, description: description2 } = spanToJSON(rootSpan);
     infoParts.push(`root ID: ${rootSpan.spanContext().spanId}`);
     if (op2) {
       infoParts.push(`root op: ${op2}`);
@@ -12178,13 +11941,8 @@ function logSpanStart(span) {
 }
 function logSpanEnd(span) {
   if (!DEBUG_BUILD) return;
-  const {
-    description = "< unknown name >",
-    op = "< unknown op >"
-  } = spanToJSON(span);
-  const {
-    spanId
-  } = span.spanContext();
+  const { description = "< unknown name >", op = "< unknown op >" } = spanToJSON(span);
+  const { spanId } = span.spanContext();
   const rootSpan = getRootSpan(span);
   const isRootSpan = rootSpan === span;
   const msg = `[Tracing] Finishing "${op}" ${isRootSpan ? "root " : ""}span "${description}" with ID ${spanId}`;
@@ -12219,120 +11977,28 @@ function sampleSpan(options, samplingContext, sampleRand) {
   }
   const parsedSampleRate = parseSampleRate(sampleRate);
   if (parsedSampleRate === void 0) {
-    DEBUG_BUILD && logger.warn(`[Tracing] Discarding root span because of invalid sample rate. Sample rate must be a boolean or a number between 0 and 1. Got ${JSON.stringify(sampleRate)} of type ${JSON.stringify(typeof sampleRate)}.`);
+    DEBUG_BUILD && logger.warn(
+      `[Tracing] Discarding root span because of invalid sample rate. Sample rate must be a boolean or a number between 0 and 1. Got ${JSON.stringify(
+        sampleRate
+      )} of type ${JSON.stringify(typeof sampleRate)}.`
+    );
     return [false];
   }
   if (!parsedSampleRate) {
-    DEBUG_BUILD && logger.log(`[Tracing] Discarding transaction because ${typeof options.tracesSampler === "function" ? "tracesSampler returned 0 or false" : "a negative sampling decision was inherited or tracesSampleRate is set to 0"}`);
+    DEBUG_BUILD && logger.log(
+      `[Tracing] Discarding transaction because ${typeof options.tracesSampler === "function" ? "tracesSampler returned 0 or false" : "a negative sampling decision was inherited or tracesSampleRate is set to 0"}`
+    );
     return [false, parsedSampleRate, localSampleRateWasApplied];
   }
   const shouldSample = sampleRand < parsedSampleRate;
   if (!shouldSample) {
-    DEBUG_BUILD && logger.log(`[Tracing] Discarding transaction because it's not included in the random sample (sampling rate = ${Number(sampleRate)})`);
+    DEBUG_BUILD && logger.log(
+      `[Tracing] Discarding transaction because it's not included in the random sample (sampling rate = ${Number(
+        sampleRate
+      )})`
+    );
   }
   return [shouldSample, parsedSampleRate, localSampleRateWasApplied];
-}
-
-// node_modules/@sentry/core/build/esm/utils-hoist/dsn.js
-var DSN_REGEX = /^(?:(\w+):)\/\/(?:(\w+)(?::(\w+)?)?@)([\w.-]+)(?::(\d+))?\/(.+)/;
-function isValidProtocol(protocol) {
-  return protocol === "http" || protocol === "https";
-}
-function dsnToString(dsn, withPassword = false) {
-  const {
-    host,
-    path,
-    pass,
-    port,
-    projectId,
-    protocol,
-    publicKey
-  } = dsn;
-  return `${protocol}://${publicKey}${withPassword && pass ? `:${pass}` : ""}@${host}${port ? `:${port}` : ""}/${path ? `${path}/` : path}${projectId}`;
-}
-function dsnFromString(str) {
-  const match = DSN_REGEX.exec(str);
-  if (!match) {
-    consoleSandbox(() => {
-      console.error(`Invalid Sentry Dsn: ${str}`);
-    });
-    return void 0;
-  }
-  const [protocol, publicKey, pass = "", host = "", port = "", lastPath = ""] = match.slice(1);
-  let path = "";
-  let projectId = lastPath;
-  const split = projectId.split("/");
-  if (split.length > 1) {
-    path = split.slice(0, -1).join("/");
-    projectId = split.pop();
-  }
-  if (projectId) {
-    const projectMatch = projectId.match(/^\d+/);
-    if (projectMatch) {
-      projectId = projectMatch[0];
-    }
-  }
-  return dsnFromComponents({
-    host,
-    pass,
-    path,
-    projectId,
-    port,
-    protocol,
-    publicKey
-  });
-}
-function dsnFromComponents(components) {
-  return {
-    protocol: components.protocol,
-    publicKey: components.publicKey || "",
-    pass: components.pass || "",
-    host: components.host,
-    port: components.port || "",
-    path: components.path || "",
-    projectId: components.projectId
-  };
-}
-function validateDsn(dsn) {
-  if (!DEBUG_BUILD) {
-    return true;
-  }
-  const {
-    port,
-    projectId,
-    protocol
-  } = dsn;
-  const requiredComponents = ["protocol", "publicKey", "host", "projectId"];
-  const hasMissingRequiredComponent = requiredComponents.find((component) => {
-    if (!dsn[component]) {
-      logger.error(`Invalid Sentry Dsn: ${component} missing`);
-      return true;
-    }
-    return false;
-  });
-  if (hasMissingRequiredComponent) {
-    return false;
-  }
-  if (!projectId.match(/^\d+$/)) {
-    logger.error(`Invalid Sentry Dsn: Invalid projectId ${projectId}`);
-    return false;
-  }
-  if (!isValidProtocol(protocol)) {
-    logger.error(`Invalid Sentry Dsn: Invalid protocol ${protocol}`);
-    return false;
-  }
-  if (port && isNaN(parseInt(port, 10))) {
-    logger.error(`Invalid Sentry Dsn: Invalid port ${port}`);
-    return false;
-  }
-  return true;
-}
-function makeDsn(from2) {
-  const components = typeof from2 === "string" ? dsnFromString(from2) : dsnFromComponents(from2);
-  if (!components || !validateDsn(components)) {
-    return void 0;
-  }
-  return components;
 }
 
 // node_modules/@sentry/core/build/esm/utils-hoist/normalize.js
@@ -12340,9 +12006,7 @@ function normalize(input, depth = 100, maxProperties = Infinity) {
   try {
     return visit("", input, depth, maxProperties);
   } catch (err) {
-    return {
-      ERROR: `**non-serializable** (${err})`
-    };
+    return { ERROR: `**non-serializable** (${err})` };
   }
 }
 function normalizeToSize(object, depth = 3, maxSize = 100 * 1024) {
@@ -12537,13 +12201,16 @@ function createSpanEnvelopeItem(spanJson) {
 }
 function createAttachmentEnvelopeItem(attachment) {
   const buffer = typeof attachment.data === "string" ? encodeUTF8(attachment.data) : attachment.data;
-  return [{
-    type: "attachment",
-    length: buffer.length,
-    filename: attachment.filename,
-    content_type: attachment.contentType,
-    attachment_type: attachment.attachmentType
-  }, buffer];
+  return [
+    {
+      type: "attachment",
+      length: buffer.length,
+      filename: attachment.filename,
+      content_type: attachment.contentType,
+      attachment_type: attachment.attachmentType
+    },
+    buffer
+  ];
 }
 var ITEM_TYPE_TO_DATA_CATEGORY_MAP = {
   session: "session",
@@ -12570,25 +12237,15 @@ function getSdkMetadataForEnvelopeHeader(metadataOrEvent) {
   if (!metadataOrEvent?.sdk) {
     return;
   }
-  const {
-    name,
-    version
-  } = metadataOrEvent.sdk;
-  return {
-    name,
-    version
-  };
+  const { name, version } = metadataOrEvent.sdk;
+  return { name, version };
 }
 function createEventEnvelopeHeaders(event, sdkInfo, tunnel, dsn) {
   const dynamicSamplingContext = event.sdkProcessingMetadata?.dynamicSamplingContext;
   return __spreadValues(__spreadValues(__spreadValues({
     event_id: event.event_id,
     sent_at: (/* @__PURE__ */ new Date()).toISOString()
-  }, sdkInfo && {
-    sdk: sdkInfo
-  }), !!tunnel && dsn && {
-    dsn: dsnToString(dsn)
-  }), dynamicSamplingContext && {
+  }, sdkInfo && { sdk: sdkInfo }), !!tunnel && dsn && { dsn: dsnToString(dsn) }), dynamicSamplingContext && {
     trace: dynamicSamplingContext
   });
 }
@@ -12609,16 +12266,8 @@ function createSessionEnvelope(session, dsn, metadata, tunnel) {
   const sdkInfo = getSdkMetadataForEnvelopeHeader(metadata);
   const envelopeHeaders = __spreadValues(__spreadValues({
     sent_at: (/* @__PURE__ */ new Date()).toISOString()
-  }, sdkInfo && {
-    sdk: sdkInfo
-  }), !!tunnel && dsn && {
-    dsn: dsnToString(dsn)
-  });
-  const envelopeItem = "aggregates" in session ? [{
-    type: "sessions"
-  }, session] : [{
-    type: "session"
-  }, session.toJSON()];
+  }, sdkInfo && { sdk: sdkInfo }), !!tunnel && dsn && { dsn: dsnToString(dsn) });
+  const envelopeItem = "aggregates" in session ? [{ type: "sessions" }, session] : [{ type: "session" }, session.toJSON()];
   return createEnvelope(envelopeHeaders, [envelopeItem]);
 }
 function createEventEnvelope(event, dsn, metadata, tunnel) {
@@ -12627,9 +12276,7 @@ function createEventEnvelope(event, dsn, metadata, tunnel) {
   enhanceEventWithSdkInfo(event, metadata?.sdk);
   const envelopeHeaders = createEventEnvelopeHeaders(event, sdkInfo, tunnel, dsn);
   delete event.sdkProcessingMetadata;
-  const eventItem = [{
-    type: eventType
-  }, event];
+  const eventItem = [{ type: eventType }, event];
   return createEnvelope(envelopeHeaders, [eventItem]);
 }
 function createSpanEnvelope(spans, client) {
@@ -12641,11 +12288,7 @@ function createSpanEnvelope(spans, client) {
   const tunnel = client?.getOptions().tunnel;
   const headers = __spreadValues(__spreadValues({
     sent_at: (/* @__PURE__ */ new Date()).toISOString()
-  }, dscHasRequiredProps(dsc) && {
-    trace: dsc
-  }), !!tunnel && dsn && {
-    dsn: dsnToString(dsn)
-  });
+  }, dscHasRequiredProps(dsc) && { trace: dsc }), !!tunnel && dsn && { dsn: dsnToString(dsn) });
   const beforeSendSpan = client?.getOptions().beforeSendSpan;
   const convertToSpanJSON = beforeSendSpan ? (span) => {
     const spanJson = spanToJSON(span);
@@ -12687,10 +12330,7 @@ function timedEventsToMeasurements(events) {
     const unit = attributes[SEMANTIC_ATTRIBUTE_SENTRY_MEASUREMENT_UNIT];
     const value = attributes[SEMANTIC_ATTRIBUTE_SENTRY_MEASUREMENT_VALUE];
     if (typeof unit === "string" && typeof value === "number") {
-      measurements[event.name] = {
-        value,
-        unit
-      };
+      measurements[event.name] = { value, unit };
     }
   });
   return measurements;
@@ -12766,11 +12406,7 @@ var SentrySpan = class {
   }
   /** @inheritdoc */
   spanContext() {
-    const {
-      _spanId: spanId,
-      _traceId: traceId,
-      _sampled: sampled
-    } = this;
+    const { _spanId: spanId, _traceId: traceId, _sampled: sampled } = this;
     return {
       spanId,
       traceId,
@@ -12922,10 +12558,8 @@ var SentrySpan = class {
       DEBUG_BUILD && logger.warn("Transaction has no name, falling back to `<unlabeled transaction>`.");
       this._name = "<unlabeled transaction>";
     }
-    const {
-      scope: capturedSpanScope,
-      isolationScope: capturedSpanIsolationScope
-    } = getCapturedScopesOnSpan(this);
+    const { scope: capturedSpanScope, isolationScope: capturedSpanIsolationScope } = getCapturedScopesOnSpan(this);
+    const normalizedRequest = capturedSpanScope?.getScopeData().sdkProcessingMetadata?.normalizedRequest;
     if (this._sampled !== true) {
       return void 0;
     }
@@ -12953,7 +12587,8 @@ var SentrySpan = class {
         capturedSpanScope,
         capturedSpanIsolationScope,
         dynamicSamplingContext: getDynamicSamplingContextFromSpan(this)
-      }
+      },
+      request: normalizedRequest
     }, source && {
       transaction_info: {
         source
@@ -12962,7 +12597,10 @@ var SentrySpan = class {
     const measurements = timedEventsToMeasurements(this._events);
     const hasMeasurements = measurements && Object.keys(measurements).length;
     if (hasMeasurements) {
-      DEBUG_BUILD && logger.log("[Measurements] Adding measurements to transaction event", JSON.stringify(measurements, void 0, 2));
+      DEBUG_BUILD && logger.log(
+        "[Measurements] Adding measurements to transaction event",
+        JSON.stringify(measurements, void 0, 2)
+      );
       transaction.measurements = measurements;
     }
     return transaction;
@@ -12998,10 +12636,7 @@ function startInactiveSpan(options) {
     return acs.startInactiveSpan(options);
   }
   const spanArguments = parseSentrySpanArguments(options);
-  const {
-    forceTransaction,
-    parentSpan: customParentSpan
-  } = options;
+  const { forceTransaction, parentSpan: customParentSpan } = options;
   const wrapper = options.scope ? (callback) => withScope2(options.scope, callback) : customParentSpan !== void 0 ? (callback) => withActiveSpan(customParentSpan, callback) : (callback) => callback();
   return wrapper(() => {
     const scope = getCurrentScope();
@@ -13053,15 +12688,16 @@ function createChildOrRootSpan({
     addChildSpanToSpan(parentSpan, span);
   } else if (parentSpan) {
     const dsc = getDynamicSamplingContextFromSpan(parentSpan);
-    const {
-      traceId,
-      spanId: parentSpanId
-    } = parentSpan.spanContext();
+    const { traceId, spanId: parentSpanId } = parentSpan.spanContext();
     const parentSampled = spanIsSampled(parentSpan);
-    span = _startRootSpan(__spreadValues({
-      traceId,
-      parentSpanId
-    }, spanArguments), scope, parentSampled);
+    span = _startRootSpan(
+      __spreadValues({
+        traceId,
+        parentSpanId
+      }, spanArguments),
+      scope,
+      parentSampled
+    );
     freezeDscOnSpan(span, dsc);
   } else {
     const {
@@ -13070,10 +12706,14 @@ function createChildOrRootSpan({
       parentSpanId,
       sampled: parentSampled
     } = __spreadValues(__spreadValues({}, isolationScope.getPropagationContext()), scope.getPropagationContext());
-    span = _startRootSpan(__spreadValues({
-      traceId,
-      parentSpanId
-    }, spanArguments), scope, parentSampled);
+    span = _startRootSpan(
+      __spreadValues({
+        traceId,
+        parentSpanId
+      }, spanArguments),
+      scope,
+      parentSampled
+    );
     if (dsc) {
       freezeDscOnSpan(span, dsc);
     }
@@ -13102,26 +12742,22 @@ function getAcs() {
 function _startRootSpan(spanArguments, scope, parentSampled) {
   const client = getClient();
   const options = client?.getOptions() || {};
-  const {
-    name = ""
-  } = spanArguments;
-  const mutableSpanSamplingData = {
-    spanAttributes: __spreadValues({}, spanArguments.attributes),
-    spanName: name,
-    parentSampled
-  };
-  client?.emit("beforeSampling", mutableSpanSamplingData, {
-    decision: false
-  });
+  const { name = "" } = spanArguments;
+  const mutableSpanSamplingData = { spanAttributes: __spreadValues({}, spanArguments.attributes), spanName: name, parentSampled };
+  client?.emit("beforeSampling", mutableSpanSamplingData, { decision: false });
   const finalParentSampled = mutableSpanSamplingData.parentSampled ?? parentSampled;
   const finalAttributes = mutableSpanSamplingData.spanAttributes;
   const currentPropagationContext = scope.getPropagationContext();
-  const [sampled, sampleRate, localSampleRateWasApplied] = scope.getScopeData().sdkProcessingMetadata[SUPPRESS_TRACING_KEY] ? [false] : sampleSpan(options, {
-    name,
-    parentSampled: finalParentSampled,
-    attributes: finalAttributes,
-    parentSampleRate: parseSampleRate(currentPropagationContext.dsc?.sample_rate)
-  }, currentPropagationContext.sampleRand);
+  const [sampled, sampleRate, localSampleRateWasApplied] = scope.getScopeData().sdkProcessingMetadata[SUPPRESS_TRACING_KEY] ? [false] : sampleSpan(
+    options,
+    {
+      name,
+      parentSampled: finalParentSampled,
+      attributes: finalAttributes,
+      parentSampleRate: parseSampleRate(currentPropagationContext.dsc?.sample_rate)
+    },
+    currentPropagationContext.sampleRand
+  );
   const rootSpan = new SentrySpan(__spreadProps(__spreadValues({}, spanArguments), {
     attributes: __spreadValues({
       [SEMANTIC_ATTRIBUTE_SENTRY_SOURCE]: "custom",
@@ -13139,18 +12775,13 @@ function _startRootSpan(spanArguments, scope, parentSampled) {
   return rootSpan;
 }
 function _startChildSpan(parentSpan, scope, spanArguments) {
-  const {
-    spanId,
-    traceId
-  } = parentSpan.spanContext();
+  const { spanId, traceId } = parentSpan.spanContext();
   const sampled = scope.getScopeData().sdkProcessingMetadata[SUPPRESS_TRACING_KEY] ? false : spanIsSampled(parentSpan);
   const childSpan = sampled ? new SentrySpan(__spreadProps(__spreadValues({}, spanArguments), {
     parentSpanId: spanId,
     traceId,
     sampled
-  })) : new SentryNonRecordingSpan({
-    traceId
-  });
+  })) : new SentryNonRecordingSpan({ traceId });
   addChildSpanToSpan(parentSpan, childSpan);
   const client = getClient();
   if (client) {
@@ -13229,7 +12860,10 @@ function startIdleSpan(startSpanOptions, options = {}) {
       const childEndTimestamps = spans.map((span2) => spanToJSON(span2).timestamp).filter((timestamp2) => !!timestamp2);
       const latestSpanEndTimestamp = childEndTimestamps.length ? Math.max(...childEndTimestamps) : void 0;
       const spanStartTimestamp = spanToJSON(span).start_timestamp;
-      const endTimestamp = Math.min(spanStartTimestamp ? spanStartTimestamp + finalTimeout / 1e3 : Infinity, Math.max(spanStartTimestamp || -Infinity, Math.min(spanEndTimestamp, latestSpanEndTimestamp || Infinity)));
+      const endTimestamp = Math.min(
+        spanStartTimestamp ? spanStartTimestamp + finalTimeout / 1e3 : Infinity,
+        Math.max(spanStartTimestamp || -Infinity, Math.min(spanEndTimestamp, latestSpanEndTimestamp || Infinity))
+      );
       onIdleSpanEnded(endTimestamp);
       return Reflect.apply(target, thisArg, [endTimestamp, ...rest]);
     }
@@ -13278,9 +12912,7 @@ function startIdleSpan(startSpanOptions, options = {}) {
     _cleanupHooks.forEach((cleanup) => cleanup());
     _setSpanForScope(scope, previousActiveSpan);
     const spanJSON = spanToJSON(span);
-    const {
-      start_timestamp: startTimestamp
-    } = spanJSON;
+    const { start_timestamp: startTimestamp } = spanJSON;
     if (!startTimestamp) {
       return;
     }
@@ -13293,18 +12925,12 @@ function startIdleSpan(startSpanOptions, options = {}) {
     let discardedSpans = 0;
     childSpans.forEach((childSpan) => {
       if (childSpan.isRecording()) {
-        childSpan.setStatus({
-          code: SPAN_STATUS_ERROR,
-          message: "cancelled"
-        });
+        childSpan.setStatus({ code: SPAN_STATUS_ERROR, message: "cancelled" });
         childSpan.end(endTimestamp);
         DEBUG_BUILD && logger.log("[Tracing] Cancelling span since span ended early", JSON.stringify(childSpan, void 0, 2));
       }
       const childSpanJSON = spanToJSON(childSpan);
-      const {
-        timestamp: childEndTimestamp = 0,
-        start_timestamp: childStartTimestamp = 0
-      } = childSpanJSON;
+      const { timestamp: childEndTimestamp = 0, start_timestamp: childStartTimestamp = 0 } = childSpanJSON;
       const spanStartedBeforeIdleSpanEnd = childStartTimestamp <= endTimestamp;
       const timeoutWithMarginOfError = (finalTimeout + idleTimeout) / 1e3;
       const spanEndedBeforeFinalTimeout = childEndTimestamp - childStartTimestamp <= timeoutWithMarginOfError;
@@ -13325,39 +12951,42 @@ function startIdleSpan(startSpanOptions, options = {}) {
       span.setAttribute("sentry.idle_span_discarded_spans", discardedSpans);
     }
   }
-  _cleanupHooks.push(client.on("spanStart", (startedSpan) => {
-    if (_finished || startedSpan === span || !!spanToJSON(startedSpan).timestamp) {
-      return;
-    }
-    const allSpans = getSpanDescendants(span);
-    if (allSpans.includes(startedSpan)) {
-      _pushActivity(startedSpan.spanContext().spanId);
-    }
-  }));
-  _cleanupHooks.push(client.on("spanEnd", (endedSpan) => {
-    if (_finished) {
-      return;
-    }
-    _popActivity(endedSpan.spanContext().spanId);
-  }));
-  _cleanupHooks.push(client.on("idleSpanEnableAutoFinish", (spanToAllowAutoFinish) => {
-    if (spanToAllowAutoFinish === span) {
-      _autoFinishAllowed = true;
-      _restartIdleTimeout();
-      if (activities.size) {
-        _restartChildSpanTimeout();
+  _cleanupHooks.push(
+    client.on("spanStart", (startedSpan) => {
+      if (_finished || startedSpan === span || !!spanToJSON(startedSpan).timestamp) {
+        return;
       }
-    }
-  }));
+      const allSpans = getSpanDescendants(span);
+      if (allSpans.includes(startedSpan)) {
+        _pushActivity(startedSpan.spanContext().spanId);
+      }
+    })
+  );
+  _cleanupHooks.push(
+    client.on("spanEnd", (endedSpan) => {
+      if (_finished) {
+        return;
+      }
+      _popActivity(endedSpan.spanContext().spanId);
+    })
+  );
+  _cleanupHooks.push(
+    client.on("idleSpanEnableAutoFinish", (spanToAllowAutoFinish) => {
+      if (spanToAllowAutoFinish === span) {
+        _autoFinishAllowed = true;
+        _restartIdleTimeout();
+        if (activities.size) {
+          _restartChildSpanTimeout();
+        }
+      }
+    })
+  );
   if (!options.disableAutoFinish) {
     _restartIdleTimeout();
   }
   setTimeout(() => {
     if (!_finished) {
-      span.setStatus({
-        code: SPAN_STATUS_ERROR,
-        message: "deadline_exceeded"
-      });
+      span.setStatus({ code: SPAN_STATUS_ERROR, message: "deadline_exceeded" });
       _finishReason = FINISH_REASON_FINAL_TIMEOUT;
       span.end();
     }
@@ -13400,27 +13029,31 @@ var SyncPromise = class _SyncPromise {
   /** @inheritdoc */
   then(onfulfilled, onrejected) {
     return new _SyncPromise((resolve, reject) => {
-      this._handlers.push([false, (result) => {
-        if (!onfulfilled) {
-          resolve(result);
-        } else {
-          try {
-            resolve(onfulfilled(result));
-          } catch (e2) {
-            reject(e2);
+      this._handlers.push([
+        false,
+        (result) => {
+          if (!onfulfilled) {
+            resolve(result);
+          } else {
+            try {
+              resolve(onfulfilled(result));
+            } catch (e2) {
+              reject(e2);
+            }
+          }
+        },
+        (reason) => {
+          if (!onrejected) {
+            reject(reason);
+          } else {
+            try {
+              resolve(onrejected(reason));
+            } catch (e2) {
+              reject(e2);
+            }
           }
         }
-      }, (reason) => {
-        if (!onrejected) {
-          reject(reason);
-        } else {
-          try {
-            resolve(onrejected(reason));
-          } catch (e2) {
-            reject(e2);
-          }
-        }
-      }]);
+      ]);
       this._executeHandlers();
     });
   }
@@ -13433,19 +13066,22 @@ var SyncPromise = class _SyncPromise {
     return new _SyncPromise((resolve, reject) => {
       let val;
       let isRejected;
-      return this.then((value) => {
-        isRejected = false;
-        val = value;
-        if (onfinally) {
-          onfinally();
+      return this.then(
+        (value) => {
+          isRejected = false;
+          val = value;
+          if (onfinally) {
+            onfinally();
+          }
+        },
+        (reason) => {
+          isRejected = true;
+          val = reason;
+          if (onfinally) {
+            onfinally();
+          }
         }
-      }, (reason) => {
-        isRejected = true;
-        val = reason;
-        if (onfinally) {
-          onfinally();
-        }
-      }).then(() => {
+      ).then(() => {
         if (isRejected) {
           reject(val);
           return;
@@ -13561,12 +13197,7 @@ function getFilenameToDebugIdMap(stackParser) {
 
 // node_modules/@sentry/core/build/esm/utils/applyScopeDataToEvent.js
 function applyScopeDataToEvent(event, data) {
-  const {
-    fingerprint,
-    span,
-    breadcrumbs,
-    sdkProcessingMetadata
-  } = data;
+  const { fingerprint, span, breadcrumbs, sdkProcessingMetadata } = data;
   applyDataToEvent(event, data);
   if (span) {
     applySpanToEvent(event, span);
@@ -13595,7 +13226,7 @@ function mergeScopeData(data, mergeData) {
   mergeAndOverwriteScopeData(data, "tags", tags);
   mergeAndOverwriteScopeData(data, "user", user);
   mergeAndOverwriteScopeData(data, "contexts", contexts);
-  data.sdkProcessingMetadata = merge2(data.sdkProcessingMetadata, sdkProcessingMetadata, 2);
+  data.sdkProcessingMetadata = merge(data.sdkProcessingMetadata, sdkProcessingMetadata, 2);
   if (level) {
     data.level = level;
   }
@@ -13620,17 +13251,10 @@ function mergeScopeData(data, mergeData) {
   data.propagationContext = __spreadValues(__spreadValues({}, data.propagationContext), propagationContext);
 }
 function mergeAndOverwriteScopeData(data, prop, mergeVal) {
-  data[prop] = merge2(data[prop], mergeVal, 1);
+  data[prop] = merge(data[prop], mergeVal, 1);
 }
 function applyDataToEvent(event, data) {
-  const {
-    extra,
-    tags,
-    user,
-    contexts,
-    level,
-    transactionName
-  } = data;
+  const { extra, tags, user, contexts, level, transactionName } = data;
   if (Object.keys(extra).length) {
     event.extra = __spreadValues(__spreadValues({}, extra), event.extra);
   }
@@ -13682,10 +13306,7 @@ function applyFingerprintToEvent(event, fingerprint) {
 
 // node_modules/@sentry/core/build/esm/utils/prepareEvent.js
 function prepareEvent(options, event, hint, scope, client, isolationScope) {
-  const {
-    normalizeDepth = 3,
-    normalizeMaxBreadth = 1e3
-  } = options;
+  const { normalizeDepth = 3, normalizeMaxBreadth = 1e3 } = options;
   const prepared = __spreadProps(__spreadValues({}, event), {
     event_id: event.event_id || hint.event_id || uuid4(),
     timestamp: event.timestamp || dateTimestampInSeconds()
@@ -13735,12 +13356,7 @@ function prepareEvent(options, event, hint, scope, client, isolationScope) {
   });
 }
 function applyClientOptions(event, options) {
-  const {
-    environment: environment2,
-    release,
-    dist,
-    maxValueLength = 250
-  } = options;
+  const { environment: environment2, release, dist, maxValueLength = 250 } = options;
   event.environment = event.environment || environment2 || DEFAULT_ENVIRONMENT;
   if (!event.release && release) {
     event.release = release;
@@ -13843,9 +13459,7 @@ function parseEventHintOrCaptureContext(hint) {
     return void 0;
   }
   if (hintIsScopeOrFunction(hint)) {
-    return {
-      captureContext: hint
-    };
+    return { captureContext: hint };
   }
   if (hintIsScopeContext(hint)) {
     return {
@@ -13857,7 +13471,15 @@ function parseEventHintOrCaptureContext(hint) {
 function hintIsScopeOrFunction(hint) {
   return hint instanceof Scope || typeof hint === "function";
 }
-var captureContextKeys = ["user", "level", "extra", "contexts", "tags", "fingerprint", "propagationContext"];
+var captureContextKeys = [
+  "user",
+  "level",
+  "extra",
+  "contexts",
+  "tags",
+  "fingerprint",
+  "propagationContext"
+];
 function hintIsScopeContext(hint) {
   return Object.keys(hint).some((key) => captureContextKeys.includes(key));
 }
@@ -13885,19 +13507,13 @@ function addEventProcessor(callback) {
 function startSession(context) {
   const isolationScope = getIsolationScope();
   const currentScope = getCurrentScope();
-  const {
-    userAgent
-  } = GLOBAL_OBJ.navigator || {};
+  const { userAgent } = GLOBAL_OBJ.navigator || {};
   const session = makeSession(__spreadValues(__spreadValues({
     user: currentScope.getUser() || isolationScope.getUser()
-  }, userAgent && {
-    userAgent
-  }), context));
+  }, userAgent && { userAgent }), context));
   const currentSession = isolationScope.getSession();
   if (currentSession?.status === "ok") {
-    updateSession(currentSession, {
-      status: "exited"
-    });
+    updateSession(currentSession, { status: "exited" });
   }
   endSession();
   isolationScope.setSession(session);
@@ -13991,9 +13607,7 @@ var installedIntegrations = [];
 function filterDuplicates(integrations) {
   const integrationsByName = {};
   integrations.forEach((currentInstance) => {
-    const {
-      name
-    } = currentInstance;
+    const { name } = currentInstance;
     const existingInstance = integrationsByName[name];
     if (existingInstance && !existingInstance.isDefaultInstance && currentInstance.isDefaultInstance) {
       return;
@@ -14086,15 +13700,7 @@ function getPossibleEventMessages(event) {
 
 // node_modules/@sentry/core/build/esm/utils/transactionEvent.js
 function convertTransactionEventToSpanJson(event) {
-  const {
-    trace_id,
-    parent_span_id,
-    span_id,
-    status,
-    origin,
-    data,
-    op
-  } = event.contexts?.trace ?? {};
+  const { trace_id, parent_span_id, span_id, status, origin, data, op } = event.contexts?.trace ?? {};
   return {
     data: data ?? {},
     description: event.transaction,
@@ -14126,11 +13732,7 @@ function convertSpanJsonToTransactionEvent(span) {
         op: span.op,
         status: span.status,
         origin: span.origin,
-        data: __spreadValues(__spreadValues(__spreadValues({}, span.data), span.profile_id && {
-          [SEMANTIC_ATTRIBUTE_PROFILE_ID]: span.profile_id
-        }), span.exclusive_time && {
-          [SEMANTIC_ATTRIBUTE_EXCLUSIVE_TIME]: span.exclusive_time
-        })
+        data: __spreadValues(__spreadValues(__spreadValues({}, span.data), span.profile_id && { [SEMANTIC_ATTRIBUTE_PROFILE_ID]: span.profile_id }), span.exclusive_time && { [SEMANTIC_ATTRIBUTE_EXCLUSIVE_TIME]: span.exclusive_time })
       }
     },
     measurements: span.measurements
@@ -14139,15 +13741,14 @@ function convertSpanJsonToTransactionEvent(span) {
 
 // node_modules/@sentry/core/build/esm/utils-hoist/clientreport.js
 function createClientReportEnvelope(discarded_events, dsn, timestamp) {
-  const clientReportItem = [{
-    type: "client_report"
-  }, {
-    timestamp: timestamp || dateTimestampInSeconds(),
-    discarded_events
-  }];
-  return createEnvelope(dsn ? {
-    dsn
-  } : {}, [clientReportItem]);
+  const clientReportItem = [
+    { type: "client_report" },
+    {
+      timestamp: timestamp || dateTimestampInSeconds(),
+      discarded_events
+    }
+  ];
+  return createEnvelope(dsn ? { dsn } : {}, [clientReportItem]);
 }
 
 // node_modules/@sentry/core/build/esm/client.js
@@ -14198,7 +13799,11 @@ var Client = class {
       DEBUG_BUILD && logger.warn("No DSN provided, client will not send events.");
     }
     if (this._dsn) {
-      const url = getEnvelopeEndpointWithUrlEncodedAuth(this._dsn, options.tunnel, options._metadata ? options._metadata.sdk : void 0);
+      const url = getEnvelopeEndpointWithUrlEncodedAuth(
+        this._dsn,
+        options.tunnel,
+        options._metadata ? options._metadata.sdk : void 0
+      );
       this._transport = options.transport(__spreadProps(__spreadValues({
         tunnel: this._options.tunnel,
         recordDroppedEvent: this.recordDroppedEvent.bind(this)
@@ -14221,7 +13826,11 @@ var Client = class {
     const hintWithEventId = __spreadValues({
       event_id: eventId
     }, hint);
-    this._process(this.eventFromException(exception, hintWithEventId).then((event) => this._captureEvent(event, hintWithEventId, scope)));
+    this._process(
+      this.eventFromException(exception, hintWithEventId).then(
+        (event) => this._captureEvent(event, hintWithEventId, scope)
+      )
+    );
     return hintWithEventId.event_id;
   }
   /**
@@ -14255,7 +13864,9 @@ var Client = class {
     const sdkProcessingMetadata = event.sdkProcessingMetadata || {};
     const capturedSpanScope = sdkProcessingMetadata.capturedSpanScope;
     const capturedSpanIsolationScope = sdkProcessingMetadata.capturedSpanIsolationScope;
-    this._process(this._captureEvent(event, hintWithEventId, capturedSpanScope || currentScope, capturedSpanIsolationScope));
+    this._process(
+      this._captureEvent(event, hintWithEventId, capturedSpanScope || currentScope, capturedSpanIsolationScope)
+    );
     return hintWithEventId.event_id;
   }
   /**
@@ -14263,9 +13874,7 @@ var Client = class {
    */
   captureSession(session) {
     this.sendSession(session);
-    updateSession(session, {
-      init: false
-    });
+    updateSession(session, { init: false });
   }
   /**
    * Create a cron monitor check in and send it to Sentry. This method is not available on all clients.
@@ -14358,9 +13967,7 @@ var Client = class {
     // don't support the `spotlight` option there and rely on the users
     // adding the `spotlightBrowserIntegration()` to their integrations which
     // wouldn't get initialized with the check below when there's no DSN set.
-    this._options.integrations.some(({
-      name
-    }) => name.startsWith("Spotlight"))) {
+    this._options.integrations.some(({ name }) => name.startsWith("Spotlight"))) {
       this._setupIntegrations();
     }
   }
@@ -14404,10 +14011,7 @@ var Client = class {
    * Send a session or session aggregrates to Sentry.
    */
   sendSession(session) {
-    const {
-      release: clientReleaseOption,
-      environment: clientEnvironmentOption = DEFAULT_ENVIRONMENT
-    } = this._options;
+    const { release: clientReleaseOption, environment: clientEnvironmentOption = DEFAULT_ENVIRONMENT } = this._options;
     if ("aggregates" in session) {
       const sessionAttrs = session.attrs || {};
       if (!sessionAttrs.release && !clientReleaseOption) {
@@ -14485,9 +14089,7 @@ var Client = class {
   /* eslint-enable @typescript-eslint/unified-signatures */
   /** Setup integrations for this client. */
   _setupIntegrations() {
-    const {
-      integrations
-    } = this._options;
+    const { integrations } = this._options;
     this._integrations = setupIntegrations(this, integrations);
     afterSetupIntegrations(this, integrations);
   }
@@ -14509,9 +14111,7 @@ var Client = class {
     const sessionNonTerminal = session.status === "ok";
     const shouldUpdateAndSend = sessionNonTerminal && session.errors === 0 || sessionNonTerminal && crashed;
     if (shouldUpdateAndSend) {
-      updateSession(session, __spreadProps(__spreadValues({}, crashed && {
-        status: "crashed"
-      }), {
+      updateSession(session, __spreadProps(__spreadValues({}, crashed && { status: "crashed" }), {
         errors: session.errors || Number(errored || crashed)
       }));
       this.captureSession(session);
@@ -14598,20 +14198,23 @@ var Client = class {
     if (DEBUG_BUILD && isErrorEvent2(event)) {
       logger.log(`Captured error event \`${getPossibleEventMessages(event)[0] || "<unknown>"}\``);
     }
-    return this._processEvent(event, hint, currentScope, isolationScope).then((finalEvent) => {
-      return finalEvent.event_id;
-    }, (reason) => {
-      if (DEBUG_BUILD) {
-        if (_isDoNotSendEventError(reason)) {
-          logger.log(reason.message);
-        } else if (_isInternalError(reason)) {
-          logger.warn(reason.message);
-        } else {
-          logger.warn(reason);
+    return this._processEvent(event, hint, currentScope, isolationScope).then(
+      (finalEvent) => {
+        return finalEvent.event_id;
+      },
+      (reason) => {
+        if (DEBUG_BUILD) {
+          if (_isDoNotSendEventError(reason)) {
+            logger.log(reason.message);
+          } else if (_isInternalError(reason)) {
+            logger.warn(reason.message);
+          } else {
+            logger.warn(reason);
+          }
         }
+        return void 0;
       }
-      return void 0;
-    });
+    );
   }
   /**
    * Processes an event (either error or message) and sends it to Sentry.
@@ -14628,9 +14231,7 @@ var Client = class {
    */
   _processEvent(event, hint, currentScope, isolationScope) {
     const options = this.getOptions();
-    const {
-      sampleRate
-    } = options;
+    const { sampleRate } = options;
     const isTransaction = isTransactionEvent(event);
     const isError2 = isErrorEvent2(event);
     const eventType = event.type || "error";
@@ -14638,7 +14239,11 @@ var Client = class {
     const parsedSampleRate = typeof sampleRate === "undefined" ? void 0 : parseSampleRate(sampleRate);
     if (isError2 && typeof parsedSampleRate === "number" && Math.random() > parsedSampleRate) {
       this.recordDroppedEvent("sample_rate", "error");
-      return rejectedSyncPromise(_makeDoNotSendEventError(`Discarding event because it's not included in the random sample (sampling rate = ${sampleRate})`));
+      return rejectedSyncPromise(
+        _makeDoNotSendEventError(
+          `Discarding event because it's not included in the random sample (sampling rate = ${sampleRate})`
+        )
+      );
     }
     const dataCategory = eventType === "replay_event" ? "replay" : eventType;
     return this._prepareEvent(event, hint, currentScope, isolationScope).then((prepared) => {
@@ -14693,8 +14298,10 @@ var Client = class {
         },
         originalException: reason
       });
-      throw _makeInternalError(`Event processing pipeline threw an error, original event will not be sent. Details have been sent as a new event.
-Reason: ${reason}`);
+      throw _makeInternalError(
+        `Event processing pipeline threw an error, original event will not be sent. Details have been sent as a new event.
+Reason: ${reason}`
+      );
     });
   }
   /**
@@ -14702,13 +14309,16 @@ Reason: ${reason}`);
    */
   _process(promise) {
     this._numProcessing++;
-    void promise.then((value) => {
-      this._numProcessing--;
-      return value;
-    }, (reason) => {
-      this._numProcessing--;
-      return reason;
-    });
+    void promise.then(
+      (value) => {
+        this._numProcessing--;
+        return value;
+      },
+      (reason) => {
+        this._numProcessing--;
+        return reason;
+      }
+    );
   }
   /**
    * Clears outcomes on this client and returns them.
@@ -14750,25 +14360,24 @@ Reason: ${reason}`);
 function _validateBeforeSendResult(beforeSendResult, beforeSendLabel) {
   const invalidValueError = `${beforeSendLabel} must return \`null\` or a valid event.`;
   if (isThenable(beforeSendResult)) {
-    return beforeSendResult.then((event) => {
-      if (!isPlainObject(event) && event !== null) {
-        throw _makeInternalError(invalidValueError);
+    return beforeSendResult.then(
+      (event) => {
+        if (!isPlainObject(event) && event !== null) {
+          throw _makeInternalError(invalidValueError);
+        }
+        return event;
+      },
+      (e2) => {
+        throw _makeInternalError(`${beforeSendLabel} rejected with ${e2}`);
       }
-      return event;
-    }, (e2) => {
-      throw _makeInternalError(`${beforeSendLabel} rejected with ${e2}`);
-    });
+    );
   } else if (!isPlainObject(beforeSendResult) && beforeSendResult !== null) {
     throw _makeInternalError(invalidValueError);
   }
   return beforeSendResult;
 }
 function processBeforeSend(client, options, event, hint) {
-  const {
-    beforeSend,
-    beforeSendTransaction,
-    beforeSendSpan
-  } = options;
+  const { beforeSend, beforeSendTransaction, beforeSendSpan } = options;
   let processedEvent = event;
   if (isErrorEvent2(processedEvent) && beforeSend) {
     return beforeSend(processedEvent, hint);
@@ -14779,7 +14388,7 @@ function processBeforeSend(client, options, event, hint) {
       if (!processedRootSpanJson) {
         showSpanDropWarning();
       } else {
-        processedEvent = merge2(event, convertSpanJsonToTransactionEvent(processedRootSpanJson));
+        processedEvent = merge(event, convertSpanJsonToTransactionEvent(processedRootSpanJson));
       }
       if (processedEvent.spans) {
         const processedSpans = [];
@@ -14816,13 +14425,16 @@ function isTransactionEvent(event) {
 
 // node_modules/@sentry/core/build/esm/logs/envelope.js
 function createLogContainerEnvelopeItem(items) {
-  return [{
-    type: "log",
-    item_count: items.length,
-    content_type: "application/vnd.sentry.items.log+json"
-  }, {
-    items
-  }];
+  return [
+    {
+      type: "log",
+      item_count: items.length,
+      content_type: "application/vnd.sentry.items.log+json"
+    },
+    {
+      items
+    }
+  ];
 }
 function createLogEnvelope(logs, metadata, tunnel, dsn) {
   const headers = {};
@@ -14895,8 +14507,11 @@ function makePromiseBuffer(limit) {
     if (buffer.indexOf(task) === -1) {
       buffer.push(task);
     }
-    void task.then(() => remove(task)).then(null, () => remove(task).then(null, () => {
-    }));
+    void task.then(() => remove(task)).then(
+      null,
+      () => remove(task).then(null, () => {
+      })
+    );
     return task;
   }
   function drain(timeout) {
@@ -14946,10 +14561,7 @@ function disabledUntil(limits, dataCategory) {
 function isRateLimited(limits, dataCategory, now = Date.now()) {
   return disabledUntil(limits, dataCategory) > now;
 }
-function updateRateLimits(limits, {
-  statusCode,
-  headers
-}, now = Date.now()) {
+function updateRateLimits(limits, { statusCode, headers }, now = Date.now()) {
   const updatedRateLimits = __spreadValues({}, limits);
   const rateLimitHeader = headers?.["x-sentry-rate-limits"];
   const retryAfterHeader = headers?.["retry-after"];
@@ -14957,17 +14569,17 @@ function updateRateLimits(limits, {
     for (const limit of rateLimitHeader.trim().split(",")) {
       const [retryAfter, categories, , , namespaces] = limit.split(":", 5);
       const headerDelay = parseInt(retryAfter, 10);
-      const delay2 = (!isNaN(headerDelay) ? headerDelay : 60) * 1e3;
+      const delay = (!isNaN(headerDelay) ? headerDelay : 60) * 1e3;
       if (!categories) {
-        updatedRateLimits.all = now + delay2;
+        updatedRateLimits.all = now + delay;
       } else {
         for (const category of categories.split(";")) {
           if (category === "metric_bucket") {
             if (!namespaces || namespaces.split(";").includes("custom")) {
-              updatedRateLimits[category] = now + delay2;
+              updatedRateLimits[category] = now + delay;
             }
           } else {
-            updatedRateLimits[category] = now + delay2;
+            updatedRateLimits[category] = now + delay;
           }
         }
       }
@@ -14982,7 +14594,9 @@ function updateRateLimits(limits, {
 
 // node_modules/@sentry/core/build/esm/transports/base.js
 var DEFAULT_TRANSPORT_BUFFER_SIZE = 64;
-function createTransport(options, makeRequest, buffer = makePromiseBuffer(options.bufferSize || DEFAULT_TRANSPORT_BUFFER_SIZE)) {
+function createTransport(options, makeRequest, buffer = makePromiseBuffer(
+  options.bufferSize || DEFAULT_TRANSPORT_BUFFER_SIZE
+)) {
   let rateLimits = {};
   const flush2 = (timeout) => buffer.drain(timeout);
   function send(envelope) {
@@ -15004,28 +14618,32 @@ function createTransport(options, makeRequest, buffer = makePromiseBuffer(option
         options.recordDroppedEvent(reason, envelopeItemTypeToDataCategory(type));
       });
     };
-    const requestTask = () => makeRequest({
-      body: serializeEnvelope(filteredEnvelope)
-    }).then((response) => {
-      if (response.statusCode !== void 0 && (response.statusCode < 200 || response.statusCode >= 300)) {
-        DEBUG_BUILD && logger.warn(`Sentry responded with status code ${response.statusCode} to sent event.`);
-      }
-      rateLimits = updateRateLimits(rateLimits, response);
-      return response;
-    }, (error) => {
-      recordEnvelopeLoss("network_error");
-      DEBUG_BUILD && logger.error("Encountered error running transport request:", error);
-      throw error;
-    });
-    return buffer.add(requestTask).then((result) => result, (error) => {
-      if (error === SENTRY_BUFFER_FULL_ERROR) {
-        DEBUG_BUILD && logger.error("Skipped sending event because buffer is full.");
-        recordEnvelopeLoss("queue_overflow");
-        return resolvedSyncPromise({});
-      } else {
+    const requestTask = () => makeRequest({ body: serializeEnvelope(filteredEnvelope) }).then(
+      (response) => {
+        if (response.statusCode !== void 0 && (response.statusCode < 200 || response.statusCode >= 300)) {
+          DEBUG_BUILD && logger.warn(`Sentry responded with status code ${response.statusCode} to sent event.`);
+        }
+        rateLimits = updateRateLimits(rateLimits, response);
+        return response;
+      },
+      (error) => {
+        recordEnvelopeLoss("network_error");
+        DEBUG_BUILD && logger.error("Encountered error running transport request:", error);
         throw error;
       }
-    });
+    );
+    return buffer.add(requestTask).then(
+      (result) => result,
+      (error) => {
+        if (error === SENTRY_BUFFER_FULL_ERROR) {
+          DEBUG_BUILD && logger.error("Skipped sending event because buffer is full.");
+          recordEnvelopeLoss("queue_overflow");
+          return resolvedSyncPromise({});
+        } else {
+          throw error;
+        }
+      }
+    );
   }
   return {
     send,
@@ -15117,11 +14735,7 @@ function getTraceData(options = {}) {
   };
 }
 function scopeToTraceHeader(scope) {
-  const {
-    traceId,
-    sampled,
-    propagationSpanId
-  } = scope.getPropagationContext();
+  const { traceId, sampled, propagationSpanId } = scope.getPropagationContext();
   return generateSentryTraceHeader(traceId, propagationSpanId, sampled);
 }
 
@@ -15131,15 +14745,10 @@ function addBreadcrumb(breadcrumb, hint) {
   const client = getClient();
   const isolationScope = getIsolationScope();
   if (!client) return;
-  const {
-    beforeBreadcrumb = null,
-    maxBreadcrumbs = DEFAULT_BREADCRUMBS
-  } = client.getOptions();
+  const { beforeBreadcrumb = null, maxBreadcrumbs = DEFAULT_BREADCRUMBS } = client.getOptions();
   if (maxBreadcrumbs <= 0) return;
   const timestamp = dateTimestampInSeconds();
-  const mergedBreadcrumb = __spreadValues({
-    timestamp
-  }, breadcrumb);
+  const mergedBreadcrumb = __spreadValues({ timestamp }, breadcrumb);
   const finalBreadcrumb = beforeBreadcrumb ? consoleSandbox(() => beforeBreadcrumb(mergedBreadcrumb, hint)) : mergedBreadcrumb;
   if (finalBreadcrumb === null) return;
   if (client.emit) {
@@ -15223,38 +14832,58 @@ function _mergeOptions(internalOptions = {}, clientOptions = {}) {
   return {
     allowUrls: [...internalOptions.allowUrls || [], ...clientOptions.allowUrls || []],
     denyUrls: [...internalOptions.denyUrls || [], ...clientOptions.denyUrls || []],
-    ignoreErrors: [...internalOptions.ignoreErrors || [], ...clientOptions.ignoreErrors || [], ...internalOptions.disableErrorDefaults ? [] : DEFAULT_IGNORE_ERRORS],
+    ignoreErrors: [
+      ...internalOptions.ignoreErrors || [],
+      ...clientOptions.ignoreErrors || [],
+      ...internalOptions.disableErrorDefaults ? [] : DEFAULT_IGNORE_ERRORS
+    ],
     ignoreTransactions: [...internalOptions.ignoreTransactions || [], ...clientOptions.ignoreTransactions || []]
   };
 }
 function _shouldDropEvent(event, options) {
   if (!event.type) {
     if (_isIgnoredError(event, options.ignoreErrors)) {
-      DEBUG_BUILD && logger.warn(`Event dropped due to being matched by \`ignoreErrors\` option.
-Event: ${getEventDescription(event)}`);
+      DEBUG_BUILD && logger.warn(
+        `Event dropped due to being matched by \`ignoreErrors\` option.
+Event: ${getEventDescription(event)}`
+      );
       return true;
     }
     if (_isUselessError(event)) {
-      DEBUG_BUILD && logger.warn(`Event dropped due to not having an error message, error type or stacktrace.
-Event: ${getEventDescription(event)}`);
+      DEBUG_BUILD && logger.warn(
+        `Event dropped due to not having an error message, error type or stacktrace.
+Event: ${getEventDescription(
+          event
+        )}`
+      );
       return true;
     }
     if (_isDeniedUrl(event, options.denyUrls)) {
-      DEBUG_BUILD && logger.warn(`Event dropped due to being matched by \`denyUrls\` option.
-Event: ${getEventDescription(event)}.
-Url: ${_getEventFilterUrl(event)}`);
+      DEBUG_BUILD && logger.warn(
+        `Event dropped due to being matched by \`denyUrls\` option.
+Event: ${getEventDescription(
+          event
+        )}.
+Url: ${_getEventFilterUrl(event)}`
+      );
       return true;
     }
     if (!_isAllowedUrl(event, options.allowUrls)) {
-      DEBUG_BUILD && logger.warn(`Event dropped due to not being matched by \`allowUrls\` option.
-Event: ${getEventDescription(event)}.
-Url: ${_getEventFilterUrl(event)}`);
+      DEBUG_BUILD && logger.warn(
+        `Event dropped due to not being matched by \`allowUrls\` option.
+Event: ${getEventDescription(
+          event
+        )}.
+Url: ${_getEventFilterUrl(event)}`
+      );
       return true;
     }
   } else if (event.type === "transaction") {
     if (_isIgnoredTransaction(event, options.ignoreTransactions)) {
-      DEBUG_BUILD && logger.warn(`Event dropped due to being matched by \`ignoreTransactions\` option.
-Event: ${getEventDescription(event)}`);
+      DEBUG_BUILD && logger.warn(
+        `Event dropped due to being matched by \`ignoreTransactions\` option.
+Event: ${getEventDescription(event)}`
+      );
       return true;
     }
   }
@@ -15324,7 +14953,16 @@ function applyAggregateErrorsToEvent(exceptionFromErrorImplementation, parser, k
   }
   const originalException = event.exception.values.length > 0 ? event.exception.values[event.exception.values.length - 1] : void 0;
   if (originalException) {
-    event.exception.values = aggregateExceptionsFromError(exceptionFromErrorImplementation, parser, limit, hint.originalException, key, event.exception.values, originalException, 0);
+    event.exception.values = aggregateExceptionsFromError(
+      exceptionFromErrorImplementation,
+      parser,
+      limit,
+      hint.originalException,
+      key,
+      event.exception.values,
+      originalException,
+      0
+    );
   }
 }
 function aggregateExceptionsFromError(exceptionFromErrorImplementation, parser, limit, error, key, prevExceptions, exception, exceptionId) {
@@ -15337,7 +14975,16 @@ function aggregateExceptionsFromError(exceptionFromErrorImplementation, parser, 
     const newException = exceptionFromErrorImplementation(parser, error[key]);
     const newExceptionId = newExceptions.length;
     applyExceptionGroupFieldsForChildException(newException, key, newExceptionId, exceptionId);
-    newExceptions = aggregateExceptionsFromError(exceptionFromErrorImplementation, parser, limit, error[key], key, [newException, ...newExceptions], newException, newExceptionId);
+    newExceptions = aggregateExceptionsFromError(
+      exceptionFromErrorImplementation,
+      parser,
+      limit,
+      error[key],
+      key,
+      [newException, ...newExceptions],
+      newException,
+      newExceptionId
+    );
   }
   if (Array.isArray(error.errors)) {
     error.errors.forEach((childError, i) => {
@@ -15346,28 +14993,29 @@ function aggregateExceptionsFromError(exceptionFromErrorImplementation, parser, 
         const newException = exceptionFromErrorImplementation(parser, childError);
         const newExceptionId = newExceptions.length;
         applyExceptionGroupFieldsForChildException(newException, `errors[${i}]`, newExceptionId, exceptionId);
-        newExceptions = aggregateExceptionsFromError(exceptionFromErrorImplementation, parser, limit, childError, key, [newException, ...newExceptions], newException, newExceptionId);
+        newExceptions = aggregateExceptionsFromError(
+          exceptionFromErrorImplementation,
+          parser,
+          limit,
+          childError,
+          key,
+          [newException, ...newExceptions],
+          newException,
+          newExceptionId
+        );
       }
     });
   }
   return newExceptions;
 }
 function applyExceptionGroupFieldsForParentException(exception, exceptionId) {
-  exception.mechanism = exception.mechanism || {
-    type: "generic",
-    handled: true
-  };
-  exception.mechanism = __spreadProps(__spreadValues(__spreadValues({}, exception.mechanism), exception.type === "AggregateError" && {
-    is_exception_group: true
-  }), {
+  exception.mechanism = exception.mechanism || { type: "generic", handled: true };
+  exception.mechanism = __spreadProps(__spreadValues(__spreadValues({}, exception.mechanism), exception.type === "AggregateError" && { is_exception_group: true }), {
     exception_id: exceptionId
   });
 }
 function applyExceptionGroupFieldsForChildException(exception, source, exceptionId, parentId) {
-  exception.mechanism = exception.mechanism || {
-    type: "generic",
-    handled: true
-  };
+  exception.mechanism = exception.mechanism || { type: "generic", handled: true };
   exception.mechanism = __spreadProps(__spreadValues({}, exception.mechanism), {
     type: "chained",
     source,
@@ -15393,10 +15041,7 @@ function instrumentConsole() {
     fill(GLOBAL_OBJ.console, level, function(originalConsoleMethod) {
       originalConsoleMethods[level] = originalConsoleMethod;
       return function(...args) {
-        const handlerData = {
-          args,
-          level
-        };
+        const handlerData = { args, level };
         triggerHandlers("console", handlerData);
         const log2 = originalConsoleMethods[level];
         log2?.apply(GLOBAL_OBJ.console, args);
@@ -15598,10 +15243,7 @@ function instrumentFetchRequest(handlerData, shouldCreateSpan, shouldAttachHeade
   if (!handlerData.fetchData) {
     return void 0;
   }
-  const {
-    method,
-    url
-  } = handlerData.fetchData;
+  const { method, url } = handlerData.fetchData;
   const shouldCreateSpanResult = hasSpansEnabled() && shouldCreateSpan(url);
   if (handlerData.endTimestamp && shouldCreateSpanResult) {
     const spanId = handlerData.fetchData.__span;
@@ -15646,9 +15288,7 @@ function instrumentFetchRequest(handlerData, shouldCreateSpan, shouldAttachHeade
   return span;
 }
 function _addTracingHeadersToFetchRequest(request, fetchOptionsObj, span) {
-  const traceHeaders = getTraceData({
-    span
-  });
+  const traceHeaders = getTraceData({ span });
   const sentryTrace = traceHeaders["sentry-trace"];
   const baggage = traceHeaders.baggage;
   if (!sentryTrace) {
@@ -15676,7 +15316,9 @@ function _addTracingHeadersToFetchRequest(request, fetchOptionsObj, span) {
     if (!originalHeaders.find((header) => header[0] === "sentry-trace")) {
       newHeaders.push(["sentry-trace", sentryTrace]);
     }
-    const prevBaggageHeaderWithSentryValues = originalHeaders.find((header) => header[0] === "baggage" && baggageHeaderHasSentryBaggageValues(header[1]));
+    const prevBaggageHeaderWithSentryValues = originalHeaders.find(
+      (header) => header[0] === "baggage" && baggageHeaderHasSentryBaggageValues(header[1])
+    );
     if (baggage && !prevBaggageHeaderWithSentryValues) {
       newHeaders.push(["baggage", baggage]);
     }
@@ -15706,10 +15348,7 @@ function endSpan(span, handlerData) {
       }
     }
   } else if (handlerData.error) {
-    span.setStatus({
-      code: SPAN_STATUS_ERROR,
-      message: "internal_error"
-    });
+    span.setStatus({ code: SPAN_STATUS_ERROR, message: "internal_error" });
   }
   span.end();
 }
@@ -15767,7 +15406,7 @@ var WINDOW2 = GLOBAL_OBJ;
 function supportsHistory() {
   return "history" in WINDOW2 && !!WINDOW2.history;
 }
-function supportsFetch() {
+function _isFetchSupported() {
   if (!("fetch" in WINDOW2)) {
     return false;
   }
@@ -15787,7 +15426,7 @@ function supportsNativeFetch() {
   if (typeof EdgeRuntime === "string") {
     return true;
   }
-  if (!supportsFetch()) {
+  if (!_isFetchSupported()) {
     return false;
   }
   if (isNativeFunction(WINDOW2.fetch)) {
@@ -15829,10 +15468,7 @@ function instrumentFetch(onFetchResolved, skipNativeFetchCheck = false) {
   fill(GLOBAL_OBJ, "fetch", function(originalFetch) {
     return function(...args) {
       const virtualError = new Error();
-      const {
-        method,
-        url
-      } = parseFetchArgs(args);
+      const { method, url } = parseFetchArgs(args);
       const handlerData = {
         args,
         fetchData: {
@@ -15847,34 +15483,37 @@ function instrumentFetch(onFetchResolved, skipNativeFetchCheck = false) {
       if (!onFetchResolved) {
         triggerHandlers("fetch", __spreadValues({}, handlerData));
       }
-      return originalFetch.apply(GLOBAL_OBJ, args).then((response) => __async(this, null, function* () {
-        if (onFetchResolved) {
-          onFetchResolved(response);
-        } else {
+      return originalFetch.apply(GLOBAL_OBJ, args).then(
+        (response) => __async(null, null, function* () {
+          if (onFetchResolved) {
+            onFetchResolved(response);
+          } else {
+            triggerHandlers("fetch", __spreadProps(__spreadValues({}, handlerData), {
+              endTimestamp: timestampInSeconds() * 1e3,
+              response
+            }));
+          }
+          return response;
+        }),
+        (error) => {
           triggerHandlers("fetch", __spreadProps(__spreadValues({}, handlerData), {
             endTimestamp: timestampInSeconds() * 1e3,
-            response
+            error
           }));
-        }
-        return response;
-      }), (error) => {
-        triggerHandlers("fetch", __spreadProps(__spreadValues({}, handlerData), {
-          endTimestamp: timestampInSeconds() * 1e3,
-          error
-        }));
-        if (isError(error) && error.stack === void 0) {
-          error.stack = virtualError.stack;
-          addNonEnumerableProperty(error, "framesToPop", 1);
-        }
-        if (error instanceof TypeError && (error.message === "Failed to fetch" || error.message === "Load failed" || error.message === "NetworkError when attempting to fetch resource.")) {
-          try {
-            const url2 = new URL(handlerData.fetchData.url);
-            error.message = `${error.message} (${url2.host})`;
-          } catch {
+          if (isError(error) && error.stack === void 0) {
+            error.stack = virtualError.stack;
+            addNonEnumerableProperty(error, "framesToPop", 1);
           }
+          if (error instanceof TypeError && (error.message === "Failed to fetch" || error.message === "Load failed" || error.message === "NetworkError when attempting to fetch resource.")) {
+            try {
+              const url2 = new URL(handlerData.fetchData.url);
+              error.message = `${error.message} (${url2.host})`;
+            } catch {
+            }
+          }
+          throw error;
         }
-        throw error;
-      });
+      );
     };
   });
 }
@@ -15899,9 +15538,7 @@ function resolveResponse(res, onFinishedResolving) {
             body.cancel().then(null, () => {
             });
           }, 5e3);
-          const {
-            done
-          } = yield responseReader.read();
+          const { done } = yield responseReader.read();
           clearTimeout(chunkTimeout);
           if (done) {
             onFinishedResolving();
@@ -15954,10 +15591,7 @@ function getUrlFromResource(resource) {
 }
 function parseFetchArgs(fetchArgs) {
   if (fetchArgs.length === 0) {
-    return {
-      method: "GET",
-      url: ""
-    };
+    return { method: "GET", url: "" };
   }
   if (fetchArgs.length === 2) {
     const [url, options] = fetchArgs;
@@ -16087,6 +15721,17 @@ function wrap(fn, options = {}) {
   }
   return sentryWrapped;
 }
+function getHttpRequestData() {
+  const url = getLocationHref();
+  const { referrer } = WINDOW3.document || {};
+  const { userAgent } = WINDOW3.navigator || {};
+  const headers = __spreadValues(__spreadValues({}, referrer && { Referer: referrer }), userAgent && { "User-Agent": userAgent });
+  const request = {
+    url,
+    headers
+  };
+  return request;
+}
 
 // node_modules/@sentry/browser/build/npm/esm/eventbuilder.js
 function exceptionFromError(stackParser, ex) {
@@ -16096,9 +15741,7 @@ function exceptionFromError(stackParser, ex) {
     value: extractMessage(ex)
   };
   if (frames.length) {
-    exception.stacktrace = {
-      frames
-    };
+    exception.stacktrace = { frames };
   }
   if (exception.type === void 0 && exception.value === "") {
     exception.value = "Unrecoverable error caught";
@@ -16122,21 +15765,19 @@ function eventFromPlainObject(stackParser, exception, syntheticException, isUnha
   }
   const event = {
     exception: {
-      values: [{
-        type: isEvent(exception) ? exception.constructor.name : isUnhandledRejection ? "UnhandledRejection" : "Error",
-        value: getNonErrorObjectExceptionValue(exception, {
-          isUnhandledRejection
-        })
-      }]
+      values: [
+        {
+          type: isEvent(exception) ? exception.constructor.name : isUnhandledRejection ? "UnhandledRejection" : "Error",
+          value: getNonErrorObjectExceptionValue(exception, { isUnhandledRejection })
+        }
+      ]
     },
     extra
   };
   if (syntheticException) {
     const frames = parseStackFrames(stackParser, syntheticException);
     if (frames.length) {
-      event.exception.values[0].stacktrace = {
-        frames
-      };
+      event.exception.values[0].stacktrace = { frames };
     }
   }
   return event;
@@ -16238,9 +15879,7 @@ function eventFromUnknownInput(stackParser, exception, syntheticException, attac
       addExceptionTypeValue(event, message);
     }
     if ("code" in domException) {
-      event.tags = __spreadProps(__spreadValues({}, event.tags), {
-        "DOMException.code": `${domException.code}`
-      });
+      event.tags = __spreadProps(__spreadValues({}, event.tags), { "DOMException.code": `${domException.code}` });
     }
     return event;
   }
@@ -16268,23 +15907,13 @@ function eventFromString(stackParser, message, syntheticException, attachStacktr
     const frames = parseStackFrames(stackParser, syntheticException);
     if (frames.length) {
       event.exception = {
-        values: [{
-          value: message,
-          stacktrace: {
-            frames
-          }
-        }]
+        values: [{ value: message, stacktrace: { frames } }]
       };
     }
-    addExceptionMechanism(event, {
-      synthetic: true
-    });
+    addExceptionMechanism(event, { synthetic: true });
   }
   if (isParameterizedString(message)) {
-    const {
-      __sentry_template_string__,
-      __sentry_template_values__
-    } = message;
+    const { __sentry_template_string__, __sentry_template_values__ } = message;
     event.logentry = {
       message: __sentry_template_string__,
       params: __sentry_template_values__
@@ -16294,9 +15923,7 @@ function eventFromString(stackParser, message, syntheticException, attachStacktr
   event.message = message;
   return event;
 }
-function getNonErrorObjectExceptionValue(exception, {
-  isUnhandledRejection
-}) {
+function getNonErrorObjectExceptionValue(exception, { isUnhandledRejection }) {
   const keys = extractExceptionKeysForMessage(exception);
   const captureType = isUnhandledRejection ? "promise rejection" : "exception";
   if (isErrorEvent(exception)) {
@@ -16336,45 +15963,40 @@ var BrowserClient = class extends Client {
    * @param options Configuration options for this SDK.
    */
   constructor(options) {
-    const opts = __spreadValues({
-      // We default this to true, as it is the safer scenario
-      parentSpanIsAlwaysRootSpan: true
-    }, options);
+    const opts = applyDefaultOptions(options);
     const sdkSource = WINDOW3.SENTRY_SDK_SOURCE || getSDKSource();
     applySdkMetadata(opts, "browser", ["browser"], sdkSource);
     super(opts);
-    const client = this;
-    const {
-      sendDefaultPii,
-      _experiments
-    } = client._options;
+    const { sendDefaultPii, sendClientReports, _experiments } = this._options;
     const enableLogs = _experiments?.enableLogs;
-    if (opts.sendClientReports && WINDOW3.document) {
+    if (WINDOW3.document && (sendClientReports || enableLogs)) {
       WINDOW3.document.addEventListener("visibilitychange", () => {
         if (WINDOW3.document.visibilityState === "hidden") {
-          this._flushOutcomes();
+          if (sendClientReports) {
+            this._flushOutcomes();
+          }
           if (enableLogs) {
-            _INTERNAL_flushLogsBuffer(client);
+            _INTERNAL_flushLogsBuffer(this);
           }
         }
       });
     }
     if (enableLogs) {
-      client.on("flush", () => {
-        _INTERNAL_flushLogsBuffer(client);
+      this.on("flush", () => {
+        _INTERNAL_flushLogsBuffer(this);
       });
-      client.on("afterCaptureLog", () => {
-        if (client._logFlushIdleTimeout) {
-          clearTimeout(client._logFlushIdleTimeout);
+      this.on("afterCaptureLog", () => {
+        if (this._logFlushIdleTimeout) {
+          clearTimeout(this._logFlushIdleTimeout);
         }
-        client._logFlushIdleTimeout = setTimeout(() => {
-          _INTERNAL_flushLogsBuffer(client);
+        this._logFlushIdleTimeout = setTimeout(() => {
+          _INTERNAL_flushLogsBuffer(this);
         }, DEFAULT_FLUSH_INTERVAL);
       });
     }
     if (sendDefaultPii) {
-      client.on("postprocessEvent", addAutoIpAddressToUser);
-      client.on("beforeSendSession", addAutoIpAddressToSession);
+      this.on("postprocessEvent", addAutoIpAddressToUser);
+      this.on("beforeSendSession", addAutoIpAddressToSession);
     }
   }
   /**
@@ -16397,9 +16019,21 @@ var BrowserClient = class extends Client {
     return super._prepareEvent(event, hint, currentScope, isolationScope);
   }
 };
+function applyDefaultOptions(optionsArg) {
+  return __spreadValues({
+    release: typeof __SENTRY_RELEASE__ === "string" ? __SENTRY_RELEASE__ : WINDOW3.SENTRY_RELEASE?.id,
+    // This supports the variable that sentry-webpack-plugin injects
+    sendClientReports: true,
+    // We default this to true, as it is the safer scenario
+    parentSpanIsAlwaysRootSpan: true
+  }, optionsArg);
+}
 
 // node_modules/@sentry-internal/browser-utils/build/esm/debug-build.js
 var DEBUG_BUILD2 = typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__;
+
+// node_modules/@sentry-internal/browser-utils/build/esm/types.js
+var WINDOW4 = GLOBAL_OBJ;
 
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/bindReporter.js
 var getRating = (value, thresholds) => {
@@ -16417,7 +16051,7 @@ var bindReporter = (callback, metric, thresholds, reportAllChanges) => {
   return (forceReport) => {
     if (metric.value >= 0) {
       if (forceReport || reportAllChanges) {
-        delta = metric.value - (prevValue || 0);
+        delta = metric.value - (prevValue ?? 0);
         if (delta || prevValue === void 0) {
           prevValue = metric.value;
           metric.delta = delta;
@@ -16429,12 +16063,9 @@ var bindReporter = (callback, metric, thresholds, reportAllChanges) => {
   };
 };
 
-// node_modules/@sentry-internal/browser-utils/build/esm/types.js
-var WINDOW4 = GLOBAL_OBJ;
-
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/generateUniqueID.js
 var generateUniqueID = () => {
-  return `v4-${Date.now()}-${Math.floor(Math.random() * (9e12 - 1)) + 1e12}`;
+  return `v5-${Date.now()}-${Math.floor(Math.random() * (9e12 - 1)) + 1e12}`;
 };
 
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/getNavigationEntry.js
@@ -16452,11 +16083,11 @@ var getNavigationEntry = (checkResponseStart = true) => {
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/getActivationStart.js
 var getActivationStart = () => {
   const navEntry = getNavigationEntry();
-  return navEntry?.activationStart || 0;
+  return navEntry?.activationStart ?? 0;
 };
 
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/initMetric.js
-var initMetric = (name, value) => {
+var initMetric = (name, value = -1) => {
   const navEntry = getNavigationEntry();
   let navigationType = "navigate";
   if (navEntry) {
@@ -16471,7 +16102,7 @@ var initMetric = (name, value) => {
   const entries = [];
   return {
     name,
-    value: typeof value === "undefined" ? -1 : value,
+    value,
     rating: "good",
     // If needed, will be updated when reported. `const` to keep the type from widening to `string`.
     delta: 0,
@@ -16481,8 +16112,48 @@ var initMetric = (name, value) => {
   };
 };
 
+// node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/initUnique.js
+var instanceMap = /* @__PURE__ */ new WeakMap();
+function initUnique(identityObj, ClassObj) {
+  if (!instanceMap.get(identityObj)) {
+    instanceMap.set(identityObj, new ClassObj());
+  }
+  return instanceMap.get(identityObj);
+}
+
+// node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/LayoutShiftManager.js
+var LayoutShiftManager = class _LayoutShiftManager {
+  constructor() {
+    _LayoutShiftManager.prototype.__init.call(this);
+    _LayoutShiftManager.prototype.__init2.call(this);
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
+  // eslint-disable-next-line @sentry-internal/sdk/no-class-field-initializers, @typescript-eslint/explicit-member-accessibility
+  __init() {
+    this._sessionValue = 0;
+  }
+  // eslint-disable-next-line @sentry-internal/sdk/no-class-field-initializers, @typescript-eslint/explicit-member-accessibility
+  __init2() {
+    this._sessionEntries = [];
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
+  _processEntry(entry) {
+    if (entry.hadRecentInput) return;
+    const firstSessionEntry = this._sessionEntries[0];
+    const lastSessionEntry = this._sessionEntries.at(-1);
+    if (this._sessionValue && firstSessionEntry && lastSessionEntry && entry.startTime - lastSessionEntry.startTime < 1e3 && entry.startTime - firstSessionEntry.startTime < 5e3) {
+      this._sessionValue += entry.value;
+      this._sessionEntries.push(entry);
+    } else {
+      this._sessionValue = entry.value;
+      this._sessionEntries = [entry];
+    }
+    this._onAfterProcessingUnexpectedShift?.(entry);
+  }
+};
+
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/observe.js
-var observe = (type, callback, opts) => {
+var observe = (type, callback, opts = {}) => {
   try {
     if (PerformanceObserver.supportedEntryTypes.includes(type)) {
       const po2 = new PerformanceObserver((list) => {
@@ -16490,28 +16161,12 @@ var observe = (type, callback, opts) => {
           callback(list.getEntries());
         });
       });
-      po2.observe(Object.assign({
-        type,
-        buffered: true
-      }, opts || {}));
+      po2.observe(__spreadValues({ type, buffered: true }, opts));
       return po2;
     }
-  } catch (e2) {
+  } catch {
   }
   return;
-};
-
-// node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/onHidden.js
-var onHidden = (cb) => {
-  const onHiddenOrPageHide = (event) => {
-    if (event.type === "pagehide" || WINDOW4.document?.visibilityState === "hidden") {
-      cb(event);
-    }
-  };
-  if (WINDOW4.document) {
-    addEventListener("visibilitychange", onHiddenOrPageHide, true);
-    addEventListener("pagehide", onHiddenOrPageHide, true);
-  }
 };
 
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/runOnce.js
@@ -16528,7 +16183,7 @@ var runOnce = (cb) => {
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/getVisibilityWatcher.js
 var firstHiddenTime = -1;
 var initHiddenTime = () => {
-  return WINDOW4.document.visibilityState === "hidden" && !WINDOW4.document.prerendering ? 0 : Infinity;
+  return WINDOW4.document?.visibilityState === "hidden" && !WINDOW4.document?.prerendering ? 0 : Infinity;
 };
 var onVisibilityUpdate = (event) => {
   if (WINDOW4.document.visibilityState === "hidden" && firstHiddenTime > -1) {
@@ -16546,7 +16201,9 @@ var removeChangeListeners = () => {
 };
 var getVisibilityWatcher = () => {
   if (WINDOW4.document && firstHiddenTime < 0) {
-    firstHiddenTime = initHiddenTime();
+    const activationStart = getActivationStart();
+    const firstVisibilityStateHiddenTime = !WINDOW4.document.prerendering ? globalThis.performance.getEntriesByType("visibility-state").filter((e2) => e2.name === "hidden" && e2.startTime > activationStart)[0]?.startTime : void 0;
+    firstHiddenTime = firstVisibilityStateHiddenTime ?? initHiddenTime();
     addChangeListeners();
   }
   return {
@@ -16573,7 +16230,7 @@ var onFCP = (onReport, opts = {}) => {
     const metric = initMetric("FCP");
     let report;
     const handleEntries = (entries) => {
-      entries.forEach((entry) => {
+      for (const entry of entries) {
         if (entry.name === "first-contentful-paint") {
           po2.disconnect();
           if (entry.startTime < visibilityWatcher.firstHiddenTime) {
@@ -16582,7 +16239,7 @@ var onFCP = (onReport, opts = {}) => {
             report(true);
           }
         }
-      });
+      }
     };
     const po2 = observe("paint", handleEntries);
     if (po2) {
@@ -16594,41 +16251,47 @@ var onFCP = (onReport, opts = {}) => {
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/getCLS.js
 var CLSThresholds = [0.1, 0.25];
 var onCLS = (onReport, opts = {}) => {
-  onFCP(runOnce(() => {
-    const metric = initMetric("CLS", 0);
-    let report;
-    let sessionValue = 0;
-    let sessionEntries = [];
-    const handleEntries = (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.hadRecentInput) {
-          const firstSessionEntry = sessionEntries[0];
-          const lastSessionEntry = sessionEntries[sessionEntries.length - 1];
-          if (sessionValue && firstSessionEntry && lastSessionEntry && entry.startTime - lastSessionEntry.startTime < 1e3 && entry.startTime - firstSessionEntry.startTime < 5e3) {
-            sessionValue += entry.value;
-            sessionEntries.push(entry);
-          } else {
-            sessionValue = entry.value;
-            sessionEntries = [entry];
-          }
+  onFCP(
+    runOnce(() => {
+      const metric = initMetric("CLS", 0);
+      let report;
+      const layoutShiftManager = initUnique(opts, LayoutShiftManager);
+      const handleEntries = (entries) => {
+        for (const entry of entries) {
+          layoutShiftManager._processEntry(entry);
         }
-      });
-      if (sessionValue > metric.value) {
-        metric.value = sessionValue;
-        metric.entries = sessionEntries;
-        report();
+        if (layoutShiftManager._sessionValue > metric.value) {
+          metric.value = layoutShiftManager._sessionValue;
+          metric.entries = layoutShiftManager._sessionEntries;
+          report();
+        }
+      };
+      const po2 = observe("layout-shift", handleEntries);
+      if (po2) {
+        report = bindReporter(onReport, metric, CLSThresholds, opts.reportAllChanges);
+        WINDOW4.document?.addEventListener("visibilitychange", () => {
+          if (WINDOW4.document?.visibilityState === "hidden") {
+            handleEntries(po2.takeRecords());
+            report(true);
+          }
+        });
+        WINDOW4?.setTimeout?.(report);
       }
-    };
-    const po2 = observe("layout-shift", handleEntries);
-    if (po2) {
-      report = bindReporter(onReport, metric, CLSThresholds, opts.reportAllChanges);
-      onHidden(() => {
-        handleEntries(po2.takeRecords());
-        report(true);
-      });
-      setTimeout(report, 0);
+    })
+  );
+};
+
+// node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/onHidden.js
+var onHidden = (cb) => {
+  const onHiddenOrPageHide = (event) => {
+    if (event.type === "pagehide" || WINDOW4.document?.visibilityState === "hidden") {
+      cb(event);
     }
-  }));
+  };
+  if (WINDOW4.document) {
+    addEventListener("visibilitychange", onHiddenOrPageHide, true);
+    addEventListener("pagehide", onHiddenOrPageHide, true);
+  }
 };
 
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/getFID.js
@@ -16651,10 +16314,12 @@ var onFID = (onReport, opts = {}) => {
     const po2 = observe("first-input", handleEntries);
     report = bindReporter(onReport, metric, FIDThresholds, opts.reportAllChanges);
     if (po2) {
-      onHidden(runOnce(() => {
-        handleEntries(po2.takeRecords());
-        po2.disconnect();
-      }));
+      onHidden(
+        runOnce(() => {
+          handleEntries(po2.takeRecords());
+          po2.disconnect();
+        })
+      );
     }
   });
 };
@@ -16685,79 +16350,128 @@ var initInteractionCountPolyfill = () => {
   });
 };
 
-// node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/interactions.js
-var longestInteractionList = [];
-var longestInteractionMap = /* @__PURE__ */ new Map();
-var DEFAULT_DURATION_THRESHOLD = 40;
+// node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/InteractionManager.js
+var MAX_INTERACTIONS_TO_CONSIDER = 10;
 var prevInteractionCount = 0;
 var getInteractionCountForNavigation = () => {
   return getInteractionCount() - prevInteractionCount;
 };
-var estimateP98LongestInteraction = () => {
-  const candidateInteractionIndex = Math.min(longestInteractionList.length - 1, Math.floor(getInteractionCountForNavigation() / 50));
-  return longestInteractionList[candidateInteractionIndex];
-};
-var MAX_INTERACTIONS_TO_CONSIDER = 10;
-var entryPreProcessingCallbacks = [];
-var processInteractionEntry = (entry) => {
-  entryPreProcessingCallbacks.forEach((cb) => cb(entry));
-  if (!(entry.interactionId || entry.entryType === "first-input")) return;
-  const minLongestInteraction = longestInteractionList[longestInteractionList.length - 1];
-  const existingInteraction = longestInteractionMap.get(entry.interactionId);
-  if (existingInteraction || longestInteractionList.length < MAX_INTERACTIONS_TO_CONSIDER || minLongestInteraction && entry.duration > minLongestInteraction.latency) {
-    if (existingInteraction) {
-      if (entry.duration > existingInteraction.latency) {
-        existingInteraction.entries = [entry];
-        existingInteraction.latency = entry.duration;
-      } else if (entry.duration === existingInteraction.latency && entry.startTime === existingInteraction.entries[0]?.startTime) {
-        existingInteraction.entries.push(entry);
+var InteractionManager = class _InteractionManager {
+  constructor() {
+    _InteractionManager.prototype.__init.call(this);
+    _InteractionManager.prototype.__init2.call(this);
+  }
+  /**
+   * A list of longest interactions on the page (by latency) sorted so the
+   * longest one is first. The list is at most MAX_INTERACTIONS_TO_CONSIDER
+   * long.
+   */
+  // eslint-disable-next-line @sentry-internal/sdk/no-class-field-initializers, @typescript-eslint/explicit-member-accessibility
+  __init() {
+    this._longestInteractionList = [];
+  }
+  /**
+   * A mapping of longest interactions by their interaction ID.
+   * This is used for faster lookup.
+   */
+  // eslint-disable-next-line @sentry-internal/sdk/no-class-field-initializers, @typescript-eslint/explicit-member-accessibility
+  __init2() {
+    this._longestInteractionMap = /* @__PURE__ */ new Map();
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility, jsdoc/require-jsdoc
+  _resetInteractions() {
+    prevInteractionCount = getInteractionCount();
+    this._longestInteractionList.length = 0;
+    this._longestInteractionMap.clear();
+  }
+  /**
+   * Returns the estimated p98 longest interaction based on the stored
+   * interaction candidates and the interaction count for the current page.
+   */
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
+  _estimateP98LongestInteraction() {
+    const candidateInteractionIndex = Math.min(
+      this._longestInteractionList.length - 1,
+      Math.floor(getInteractionCountForNavigation() / 50)
+    );
+    return this._longestInteractionList[candidateInteractionIndex];
+  }
+  /**
+   * Takes a performance entry and adds it to the list of worst interactions
+   * if its duration is long enough to make it among the worst. If the
+   * entry is part of an existing interaction, it is merged and the latency
+   * and entries list is updated as needed.
+   */
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
+  _processEntry(entry) {
+    this._onBeforeProcessingEntry?.(entry);
+    if (!(entry.interactionId || entry.entryType === "first-input")) return;
+    const minLongestInteraction = this._longestInteractionList.at(-1);
+    let interaction = this._longestInteractionMap.get(entry.interactionId);
+    if (interaction || this._longestInteractionList.length < MAX_INTERACTIONS_TO_CONSIDER || // If the above conditions are false, `minLongestInteraction` will be set.
+    entry.duration > minLongestInteraction._latency) {
+      if (interaction) {
+        if (entry.duration > interaction._latency) {
+          interaction.entries = [entry];
+          interaction._latency = entry.duration;
+        } else if (entry.duration === interaction._latency && entry.startTime === interaction.entries[0].startTime) {
+          interaction.entries.push(entry);
+        }
+      } else {
+        interaction = {
+          id: entry.interactionId,
+          entries: [entry],
+          _latency: entry.duration
+        };
+        this._longestInteractionMap.set(interaction.id, interaction);
+        this._longestInteractionList.push(interaction);
       }
-    } else {
-      const interaction = {
-        id: entry.interactionId,
-        latency: entry.duration,
-        entries: [entry]
-      };
-      longestInteractionMap.set(interaction.id, interaction);
-      longestInteractionList.push(interaction);
-    }
-    longestInteractionList.sort((a, b) => b.latency - a.latency);
-    if (longestInteractionList.length > MAX_INTERACTIONS_TO_CONSIDER) {
-      longestInteractionList.splice(MAX_INTERACTIONS_TO_CONSIDER).forEach((i) => longestInteractionMap.delete(i.id));
+      this._longestInteractionList.sort((a, b) => b._latency - a._latency);
+      if (this._longestInteractionList.length > MAX_INTERACTIONS_TO_CONSIDER) {
+        const removedInteractions = this._longestInteractionList.splice(MAX_INTERACTIONS_TO_CONSIDER);
+        for (const interaction2 of removedInteractions) {
+          this._longestInteractionMap.delete(interaction2.id);
+        }
+      }
+      this._onAfterProcessingINPCandidate?.(interaction);
     }
   }
 };
 
-// node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/whenIdle.js
-var whenIdle = (cb) => {
+// node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/whenIdleOrHidden.js
+var whenIdleOrHidden = (cb) => {
   const rIC = WINDOW4.requestIdleCallback || WINDOW4.setTimeout;
-  let handle = -1;
-  cb = runOnce(cb);
   if (WINDOW4.document?.visibilityState === "hidden") {
     cb();
   } else {
-    handle = rIC(cb);
+    cb = runOnce(cb);
+    rIC(cb);
     onHidden(cb);
   }
-  return handle;
 };
 
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/getINP.js
 var INPThresholds = [200, 500];
+var DEFAULT_DURATION_THRESHOLD = 40;
 var onINP = (onReport, opts = {}) => {
-  if (!("PerformanceEventTiming" in WINDOW4 && "interactionId" in PerformanceEventTiming.prototype)) {
+  if (!(globalThis.PerformanceEventTiming && "interactionId" in PerformanceEventTiming.prototype)) {
     return;
   }
   whenActivated(() => {
     initInteractionCountPolyfill();
     const metric = initMetric("INP");
     let report;
+    const interactionManager = initUnique(opts, InteractionManager);
     const handleEntries = (entries) => {
-      whenIdle(() => {
-        entries.forEach(processInteractionEntry);
-        const inp = estimateP98LongestInteraction();
-        if (inp && inp.latency !== metric.value) {
-          metric.value = inp.latency;
+      whenIdleOrHidden(() => {
+        for (const entry of entries) {
+          interactionManager._processEntry(entry);
+        }
+        const inp = interactionManager._estimateP98LongestInteraction();
+        if (inp && inp._latency !== metric.value) {
+          metric.value = inp._latency;
           metric.entries = inp.entries;
           report();
         }
@@ -16770,14 +16484,11 @@ var onINP = (onReport, opts = {}) => {
       // and performance. Running this callback for any interaction that spans
       // just one or two frames is likely not worth the insight that could be
       // gained.
-      durationThreshold: opts.durationThreshold != null ? opts.durationThreshold : DEFAULT_DURATION_THRESHOLD
+      durationThreshold: opts.durationThreshold ?? DEFAULT_DURATION_THRESHOLD
     });
     report = bindReporter(onReport, metric, INPThresholds, opts.reportAllChanges);
     if (po2) {
-      po2.observe({
-        type: "first-input",
-        buffered: true
-      });
+      po2.observe({ type: "first-input", buffered: true });
       onHidden(() => {
         handleEntries(po2.takeRecords());
         report(true);
@@ -16786,46 +16497,52 @@ var onINP = (onReport, opts = {}) => {
   });
 };
 
+// node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/LCPEntryManager.js
+var LCPEntryManager = class {
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility, jsdoc/require-jsdoc
+  _processEntry(entry) {
+    this._onBeforeProcessingEntry?.(entry);
+  }
+};
+
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/getLCP.js
 var LCPThresholds = [2500, 4e3];
-var reportedMetricIDs = {};
 var onLCP = (onReport, opts = {}) => {
   whenActivated(() => {
     const visibilityWatcher = getVisibilityWatcher();
     const metric = initMetric("LCP");
     let report;
+    const lcpEntryManager = initUnique(opts, LCPEntryManager);
     const handleEntries = (entries) => {
       if (!opts.reportAllChanges) {
         entries = entries.slice(-1);
       }
-      entries.forEach((entry) => {
+      for (const entry of entries) {
+        lcpEntryManager._processEntry(entry);
         if (entry.startTime < visibilityWatcher.firstHiddenTime) {
           metric.value = Math.max(entry.startTime - getActivationStart(), 0);
           metric.entries = [entry];
           report();
         }
-      });
+      }
     };
     const po2 = observe("largest-contentful-paint", handleEntries);
     if (po2) {
       report = bindReporter(onReport, metric, LCPThresholds, opts.reportAllChanges);
       const stopListening = runOnce(() => {
-        if (!reportedMetricIDs[metric.id]) {
-          handleEntries(po2.takeRecords());
-          po2.disconnect();
-          reportedMetricIDs[metric.id] = true;
-          report(true);
-        }
+        handleEntries(po2.takeRecords());
+        po2.disconnect();
+        report(true);
       });
-      ["keydown", "click"].forEach((type) => {
+      for (const type of ["keydown", "click", "visibilitychange"]) {
         if (WINDOW4.document) {
-          addEventListener(type, () => whenIdle(stopListening), {
-            once: true,
-            capture: true
+          addEventListener(type, () => whenIdleOrHidden(stopListening), {
+            capture: true,
+            once: true
           });
         }
-      });
-      onHidden(stopListening);
+      }
     }
   });
 };
@@ -16838,7 +16555,7 @@ var whenReady = (callback) => {
   } else if (WINDOW4.document?.readyState !== "complete") {
     addEventListener("load", () => whenReady(callback), true);
   } else {
-    setTimeout(callback, 0);
+    setTimeout(callback);
   }
 };
 var onTTFB = (onReport, opts = {}) => {
@@ -16894,10 +16611,13 @@ function triggerHandlers2(type, data) {
     try {
       handler(data);
     } catch (e2) {
-      DEBUG_BUILD2 && logger.error(`Error while triggering instrumentation handler.
+      DEBUG_BUILD2 && logger.error(
+        `Error while triggering instrumentation handler.
 Type: ${type}
 Name: ${getFunctionName(handler)}
-Error:`, e2);
+Error:`,
+        e2
+      );
     }
   }
 }
@@ -16911,9 +16631,7 @@ function instrumentCls() {
     },
     // We want the callback to be called whenever the CLS value updates.
     // By default, the callback is only called when the tab goes to the background.
-    {
-      reportAllChanges: true
-    }
+    { reportAllChanges: true }
   );
 }
 function instrumentFid() {
@@ -16934,9 +16652,7 @@ function instrumentLcp() {
     },
     // We want the callback to be called whenever the LCP value updates.
     // By default, the callback is only called when the tab goes to the background.
-    {
-      reportAllChanges: true
-    }
+    { reportAllChanges: true }
   );
 }
 function instrumentTtfb() {
@@ -16963,9 +16679,7 @@ function addMetricObserver(type, callback, instrumentFn, previousValue, stopOnCa
     instrumented2[type] = true;
   }
   if (previousValue) {
-    callback({
-      metric: previousValue
-    });
+    callback({ metric: previousValue });
   }
   return getCleanupCallback(type, callback, stopOnCallback ? stopListening : void 0);
 }
@@ -16974,11 +16688,13 @@ function instrumentPerformanceObserver(type) {
   if (type === "event") {
     options.durationThreshold = 0;
   }
-  observe(type, (entries) => {
-    triggerHandlers2(type, {
-      entries
-    });
-  }, options);
+  observe(
+    type,
+    (entries) => {
+      triggerHandlers2(type, { entries });
+    },
+    options
+  );
 }
 function addHandler2(type, handler) {
   handlers2[type] = handlers2[type] || [];
@@ -17030,17 +16746,8 @@ function startStandaloneWebVitalSpan(options) {
   if (!client) {
     return;
   }
-  const {
-    name,
-    transaction,
-    attributes: passedAttributes,
-    startTime
-  } = options;
-  const {
-    release,
-    environment: environment2,
-    sendDefaultPii
-  } = client.getOptions();
+  const { name, transaction, attributes: passedAttributes, startTime } = options;
+  const { release, environment: environment2, sendDefaultPii } = client.getOptions();
   const replay = client.getIntegrationByName("Replay");
   const replayId = replay?.getReplayId();
   const scope = getCurrentScope();
@@ -17099,10 +16806,7 @@ function extractNetworkProtocol(nextHopProtocol) {
   if (_name === nextHopProtocol) {
     name = _name;
   }
-  return {
-    name,
-    version
-  };
+  return { name, version };
 }
 
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/cls.js
@@ -17124,9 +16828,7 @@ function trackClsAsStandaloneSpan() {
     }
     cleanupClsHandler();
   }
-  const cleanupClsHandler = addClsInstrumentationHandler(({
-    metric
-  }) => {
+  const cleanupClsHandler = addClsInstrumentationHandler(({ metric }) => {
     const entry = metric.entries[metric.entries.length - 1];
     if (!entry) {
       return;
@@ -17196,9 +16898,7 @@ var _performanceCursor = 0;
 var _measurements = {};
 var _lcpEntry;
 var _clsEntry;
-function startTrackingWebVitals({
-  recordClsStandaloneSpans
-}) {
+function startTrackingWebVitals({ recordClsStandaloneSpans }) {
   const performance2 = getBrowserPerformanceAPI();
   if (performance2 && browserPerformanceTimeOrigin()) {
     if (performance2.mark) {
@@ -17218,17 +16918,12 @@ function startTrackingWebVitals({
   return () => void 0;
 }
 function startTrackingLongTasks() {
-  addPerformanceInstrumentationHandler("longtask", ({
-    entries
-  }) => {
+  addPerformanceInstrumentationHandler("longtask", ({ entries }) => {
     const parent = getActiveSpan();
     if (!parent) {
       return;
     }
-    const {
-      op: parentOp,
-      start_timestamp: parentStartTimestamp
-    } = spanToJSON(parent);
+    const { op: parentOp, start_timestamp: parentStartTimestamp } = spanToJSON(parent);
     for (const entry of entries) {
       const startTime = msToSec(browserPerformanceTimeOrigin() + entry.startTime);
       const duration = msToSec(entry.duration);
@@ -17256,10 +16951,7 @@ function startTrackingLongAnimationFrames() {
         continue;
       }
       const startTime = msToSec(browserPerformanceTimeOrigin() + entry.startTime);
-      const {
-        start_timestamp: parentStartTimestamp,
-        op: parentOp
-      } = spanToJSON(parent);
+      const { start_timestamp: parentStartTimestamp, op: parentOp } = spanToJSON(parent);
       if (parentOp === "navigation" && parentStartTimestamp && startTime < parentStartTimestamp) {
         continue;
       }
@@ -17268,13 +16960,7 @@ function startTrackingLongAnimationFrames() {
         [SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: "auto.ui.browser.metrics"
       };
       const initialScript = entry.scripts[0];
-      const {
-        invoker,
-        invokerType,
-        sourceURL,
-        sourceFunctionName,
-        sourceCharPosition
-      } = initialScript;
+      const { invoker, invokerType, sourceURL, sourceFunctionName, sourceCharPosition } = initialScript;
       attributes["browser.script.invoker"] = invoker;
       attributes["browser.script.invoker_type"] = invokerType;
       if (sourceURL) {
@@ -17293,15 +16979,10 @@ function startTrackingLongAnimationFrames() {
       });
     }
   });
-  observer.observe({
-    type: "long-animation-frame",
-    buffered: true
-  });
+  observer.observe({ type: "long-animation-frame", buffered: true });
 }
 function startTrackingInteractions() {
-  addPerformanceInstrumentationHandler("event", ({
-    entries
-  }) => {
+  addPerformanceInstrumentationHandler("event", ({ entries }) => {
     const parent = getActiveSpan();
     if (!parent) {
       return;
@@ -17328,67 +17009,44 @@ function startTrackingInteractions() {
   });
 }
 function _trackCLS() {
-  return addClsInstrumentationHandler(({
-    metric
-  }) => {
+  return addClsInstrumentationHandler(({ metric }) => {
     const entry = metric.entries[metric.entries.length - 1];
     if (!entry) {
       return;
     }
-    _measurements["cls"] = {
-      value: metric.value,
-      unit: ""
-    };
+    _measurements["cls"] = { value: metric.value, unit: "" };
     _clsEntry = entry;
   }, true);
 }
 function _trackLCP() {
-  return addLcpInstrumentationHandler(({
-    metric
-  }) => {
+  return addLcpInstrumentationHandler(({ metric }) => {
     const entry = metric.entries[metric.entries.length - 1];
     if (!entry) {
       return;
     }
-    _measurements["lcp"] = {
-      value: metric.value,
-      unit: "millisecond"
-    };
+    _measurements["lcp"] = { value: metric.value, unit: "millisecond" };
     _lcpEntry = entry;
   }, true);
 }
 function _trackFID() {
-  return addFidInstrumentationHandler(({
-    metric
-  }) => {
+  return addFidInstrumentationHandler(({ metric }) => {
     const entry = metric.entries[metric.entries.length - 1];
     if (!entry) {
       return;
     }
     const timeOrigin = msToSec(browserPerformanceTimeOrigin());
     const startTime = msToSec(entry.startTime);
-    _measurements["fid"] = {
-      value: metric.value,
-      unit: "millisecond"
-    };
-    _measurements["mark.fid"] = {
-      value: timeOrigin + startTime,
-      unit: "second"
-    };
+    _measurements["fid"] = { value: metric.value, unit: "millisecond" };
+    _measurements["mark.fid"] = { value: timeOrigin + startTime, unit: "second" };
   });
 }
 function _trackTtfb() {
-  return addTtfbInstrumentationHandler(({
-    metric
-  }) => {
+  return addTtfbInstrumentationHandler(({ metric }) => {
     const entry = metric.entries[metric.entries.length - 1];
     if (!entry) {
       return;
     }
-    _measurements["ttfb"] = {
-      value: metric.value,
-      unit: "millisecond"
-    };
+    _measurements["ttfb"] = { value: metric.value, unit: "millisecond" };
   });
 }
 function addPerformanceEntries(span, options) {
@@ -17399,10 +17057,7 @@ function addPerformanceEntries(span, options) {
   }
   const timeOrigin = msToSec(origin);
   const performanceEntries = performance2.getEntries();
-  const {
-    op,
-    start_timestamp: transactionStartTime
-  } = spanToJSON(span);
+  const { op, start_timestamp: transactionStartTime } = spanToJSON(span);
   performanceEntries.slice(_performanceCursor).forEach((entry) => {
     const startTime = msToSec(entry.startTime);
     const duration = msToSec(
@@ -17423,25 +17078,27 @@ function addPerformanceEntries(span, options) {
       case "mark":
       case "paint":
       case "measure": {
-        _addMeasureSpans(span, entry, startTime, duration, timeOrigin);
+        _addMeasureSpans(span, entry, startTime, duration, timeOrigin, options.ignorePerformanceApiSpans);
         const firstHidden = getVisibilityWatcher();
         const shouldRecord = entry.startTime < firstHidden.firstHiddenTime;
         if (entry.name === "first-paint" && shouldRecord) {
-          _measurements["fp"] = {
-            value: entry.startTime,
-            unit: "millisecond"
-          };
+          _measurements["fp"] = { value: entry.startTime, unit: "millisecond" };
         }
         if (entry.name === "first-contentful-paint" && shouldRecord) {
-          _measurements["fcp"] = {
-            value: entry.startTime,
-            unit: "millisecond"
-          };
+          _measurements["fcp"] = { value: entry.startTime, unit: "millisecond" };
         }
         break;
       }
       case "resource": {
-        _addResourceSpans(span, entry, entry.name, startTime, duration, timeOrigin);
+        _addResourceSpans(
+          span,
+          entry,
+          entry.name,
+          startTime,
+          duration,
+          timeOrigin,
+          options.ignoreResourceSpans
+        );
         break;
       }
     }
@@ -17475,7 +17132,10 @@ function addPerformanceEntries(span, options) {
   _clsEntry = void 0;
   _measurements = {};
 }
-function _addMeasureSpans(span, entry, startTime, duration, timeOrigin) {
+function _addMeasureSpans(span, entry, startTime, duration, timeOrigin, ignorePerformanceApiSpans) {
+  if (["mark", "measure"].includes(entry.entryType) && stringMatchesSomePattern(entry.name, ignorePerformanceApiSpans)) {
+    return;
+  }
   const navEntry = getNavigationEntry(false);
   const requestTime = msToSec(navEntry ? navEntry.requestStart : 0);
   const measureStartTimestamp = timeOrigin + Math.max(startTime, requestTime);
@@ -17517,9 +17177,7 @@ function _addPerformanceNavigationTiming(span, entry, event, timeOrigin, name = 
     name: entry.name,
     attributes: __spreadValues({
       [SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: "auto.ui.browser.metrics"
-    }, event === "redirect" && entry.redirectCount != null ? {
-      "http.redirect_count": entry.redirectCount
-    } : {})
+    }, event === "redirect" && entry.redirectCount != null ? { "http.redirect_count": entry.redirectCount } : {})
   });
 }
 function _getEndPropertyNameForNavigationTiming(event) {
@@ -17552,8 +17210,12 @@ function _addRequest(span, entry, timeOrigin) {
     });
   }
 }
-function _addResourceSpans(span, entry, resourceUrl, startTime, duration, timeOrigin) {
+function _addResourceSpans(span, entry, resourceUrl, startTime, duration, timeOrigin, ignoreResourceSpans) {
   if (entry.initiatorType === "xmlhttprequest" || entry.initiatorType === "fetch") {
+    return;
+  }
+  const op = entry.initiatorType ? `resource.${entry.initiatorType}` : "resource.other";
+  if (ignoreResourceSpans?.includes(op)) {
     return;
   }
   const parsedUrl = parseUrl(resourceUrl);
@@ -17578,17 +17240,14 @@ function _addResourceSpans(span, entry, resourceUrl, startTime, duration, timeOr
     attributes["server.address"] = parsedUrl.host;
   }
   attributes["url.same_origin"] = resourceUrl.includes(WINDOW4.location.origin);
-  const {
-    name,
-    version
-  } = extractNetworkProtocol(entry.nextHopProtocol);
+  const { name, version } = extractNetworkProtocol(entry.nextHopProtocol);
   attributes["network.protocol.name"] = name;
   attributes["network.protocol.version"] = version;
   const startTimestamp = timeOrigin + startTime;
   const endTimestamp = startTimestamp + duration;
   startAndEndSpan(span, startTimestamp, endTimestamp, {
     name: resourceUrl.replace(WINDOW4.location.origin, ""),
-    op: entry.initiatorType ? `resource.${entry.initiatorType}` : "resource.other",
+    op,
     attributes
   });
 }
@@ -17606,10 +17265,7 @@ function _trackNavigator(span) {
       span.setAttribute("connectionType", connection.type);
     }
     if (isMeasurementValue(connection.rtt)) {
-      _measurements["connection.rtt"] = {
-        value: connection.rtt,
-        unit: "millisecond"
-      };
+      _measurements["connection.rtt"] = { value: connection.rtt, unit: "millisecond" };
     }
   }
   if (isMeasurementValue(navigator2.deviceMemory)) {
@@ -17639,7 +17295,9 @@ function _setWebVitalAttributes(span) {
     span.setAttribute("lcp.size", _lcpEntry.size);
   }
   if (_clsEntry?.sources) {
-    _clsEntry.sources.forEach((source, index) => span.setAttribute(`cls.source.${index + 1}`, htmlTreeAsString(source.node)));
+    _clsEntry.sources.forEach(
+      (source, index) => span.setAttribute(`cls.source.${index + 1}`, htmlTreeAsString(source.node))
+    );
   }
 }
 function setResourceEntrySizeData(attributes, entry, key, dataKey) {
@@ -17653,10 +17311,7 @@ function _addTtfbRequestTimeToMeasurements(_measurements2) {
   if (!navEntry) {
     return;
   }
-  const {
-    responseStart,
-    requestStart
-  } = navEntry;
+  const { responseStart, requestStart } = navEntry;
   if (requestStart <= responseStart) {
     _measurements2["ttfb.requestTime"] = {
       value: responseStart - requestStart,
@@ -17694,9 +17349,7 @@ function instrumentDOM() {
         if (type === "click" || type == "keypress") {
           try {
             const handlers4 = this.__sentry_instrumentation_handlers__ = this.__sentry_instrumentation_handlers__ || {};
-            const handlerForType = handlers4[type] = handlers4[type] || {
-              refCount: 0
-            };
+            const handlerForType = handlers4[type] = handlers4[type] || { refCount: 0 };
             if (!handlerForType.handler) {
               const handler = makeDOMEventHandler(triggerDOMHandler);
               handlerForType.handler = handler;
@@ -17709,29 +17362,33 @@ function instrumentDOM() {
         return originalAddEventListener.call(this, type, listener, options);
       };
     });
-    fill(proto, "removeEventListener", function(originalRemoveEventListener) {
-      return function(type, listener, options) {
-        if (type === "click" || type == "keypress") {
-          try {
-            const handlers4 = this.__sentry_instrumentation_handlers__ || {};
-            const handlerForType = handlers4[type];
-            if (handlerForType) {
-              handlerForType.refCount--;
-              if (handlerForType.refCount <= 0) {
-                originalRemoveEventListener.call(this, type, handlerForType.handler, options);
-                handlerForType.handler = void 0;
-                delete handlers4[type];
+    fill(
+      proto,
+      "removeEventListener",
+      function(originalRemoveEventListener) {
+        return function(type, listener, options) {
+          if (type === "click" || type == "keypress") {
+            try {
+              const handlers4 = this.__sentry_instrumentation_handlers__ || {};
+              const handlerForType = handlers4[type];
+              if (handlerForType) {
+                handlerForType.refCount--;
+                if (handlerForType.refCount <= 0) {
+                  originalRemoveEventListener.call(this, type, handlerForType.handler, options);
+                  handlerForType.handler = void 0;
+                  delete handlers4[type];
+                }
+                if (Object.keys(handlers4).length === 0) {
+                  delete this.__sentry_instrumentation_handlers__;
+                }
               }
-              if (Object.keys(handlers4).length === 0) {
-                delete this.__sentry_instrumentation_handlers__;
-              }
+            } catch (e2) {
             }
-          } catch (e2) {
           }
-        }
-        return originalRemoveEventListener.call(this, type, listener, options);
-      };
-    });
+          return originalRemoveEventListener.call(this, type, listener, options);
+        };
+      }
+    );
   });
 }
 function isSimilarToLastCapturedEvent(event) {
@@ -17773,11 +17430,7 @@ function makeDOMEventHandler(handler, globalListener = false) {
     }
     const name = event.type === "keypress" ? "input" : event.type;
     if (!isSimilarToLastCapturedEvent(event)) {
-      const handlerData = {
-        event,
-        name,
-        global: globalListener
-      };
+      const handlerData = { event, name, global: globalListener };
       handler(handlerData);
       lastCapturedEventType = event.type;
       lastCapturedEventTargetId = target ? target._sentryId : void 0;
@@ -17807,15 +17460,12 @@ function addHistoryInstrumentationHandler(handler) {
 function instrumentHistory() {
   WINDOW4.addEventListener("popstate", () => {
     const to = WINDOW4.location.href;
-    const from2 = lastHref;
+    const from = lastHref;
     lastHref = to;
-    if (from2 === to) {
+    if (from === to) {
       return;
     }
-    const handlerData = {
-      from: from2,
-      to
-    };
+    const handlerData = { from, to };
     triggerHandlers("history", handlerData);
   });
   if (!supportsHistory()) {
@@ -17825,16 +17475,13 @@ function instrumentHistory() {
     return function(...args) {
       const url = args.length > 2 ? args[2] : void 0;
       if (url) {
-        const from2 = lastHref;
-        const to = String(url);
+        const from = lastHref;
+        const to = getAbsoluteUrl(String(url));
         lastHref = to;
-        if (from2 === to) {
+        if (from === to) {
           return originalHistoryFunction.apply(this, args);
         }
-        const handlerData = {
-          from: from2,
-          to
-        };
+        const handlerData = { from, to };
         triggerHandlers("history", handlerData);
       }
       return originalHistoryFunction.apply(this, args);
@@ -17842,6 +17489,14 @@ function instrumentHistory() {
   }
   fill(WINDOW4.history, "pushState", historyReplacementFunction);
   fill(WINDOW4.history, "replaceState", historyReplacementFunction);
+}
+function getAbsoluteUrl(urlOrPath) {
+  try {
+    const url = new URL(urlOrPath, WINDOW4.location.origin);
+    return url.toString();
+  } catch {
+    return urlOrPath;
+  }
 }
 
 // node_modules/@sentry-internal/browser-utils/build/esm/getNativeImplementation.js
@@ -18017,6 +17672,7 @@ function getFetchRequestArgBody(fetchArgs = []) {
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/inp.js
 var LAST_INTERACTIONS = [];
 var INTERACTIONS_SPAN_MAP = /* @__PURE__ */ new Map();
+var MAX_PLAUSIBLE_INP_DURATION = 60;
 function startTrackingINP() {
   const performance2 = getBrowserPerformanceAPI();
   if (performance2 && browserPerformanceTimeOrigin()) {
@@ -18056,52 +17712,50 @@ var INP_ENTRY_MAP = {
   input: "press"
 };
 function _trackINP() {
-  return addInpInstrumentationHandler(({
-    metric
-  }) => {
-    if (metric.value == void 0) {
-      return;
-    }
-    const entry = metric.entries.find((entry2) => entry2.duration === metric.value && INP_ENTRY_MAP[entry2.name]);
-    if (!entry) {
-      return;
-    }
-    const {
-      interactionId
-    } = entry;
-    const interactionType = INP_ENTRY_MAP[entry.name];
-    const startTime = msToSec(browserPerformanceTimeOrigin() + entry.startTime);
-    const duration = msToSec(metric.value);
-    const activeSpan = getActiveSpan();
-    const rootSpan = activeSpan ? getRootSpan(activeSpan) : void 0;
-    const cachedSpan = interactionId != null ? INTERACTIONS_SPAN_MAP.get(interactionId) : void 0;
-    const spanToUse = cachedSpan || rootSpan;
-    const routeName = spanToUse ? spanToJSON(spanToUse).description : getCurrentScope().getScopeData().transactionName;
-    const name = htmlTreeAsString(entry.target);
-    const attributes = {
-      [SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: "auto.http.browser.inp",
-      [SEMANTIC_ATTRIBUTE_SENTRY_OP]: `ui.interaction.${interactionType}`,
-      [SEMANTIC_ATTRIBUTE_EXCLUSIVE_TIME]: entry.duration
-    };
-    const span = startStandaloneWebVitalSpan({
-      name,
-      transaction: routeName,
-      attributes,
-      startTime
-    });
-    if (span) {
-      span.addEvent("inp", {
-        [SEMANTIC_ATTRIBUTE_SENTRY_MEASUREMENT_UNIT]: "millisecond",
-        [SEMANTIC_ATTRIBUTE_SENTRY_MEASUREMENT_VALUE]: metric.value
-      });
-      span.end(startTime + duration);
-    }
-  });
+  return addInpInstrumentationHandler(_onInp);
 }
+var _onInp = ({ metric }) => {
+  if (metric.value == void 0) {
+    return;
+  }
+  const duration = msToSec(metric.value);
+  if (duration > MAX_PLAUSIBLE_INP_DURATION) {
+    return;
+  }
+  const entry = metric.entries.find((entry2) => entry2.duration === metric.value && INP_ENTRY_MAP[entry2.name]);
+  if (!entry) {
+    return;
+  }
+  const { interactionId } = entry;
+  const interactionType = INP_ENTRY_MAP[entry.name];
+  const startTime = msToSec(browserPerformanceTimeOrigin() + entry.startTime);
+  const activeSpan = getActiveSpan();
+  const rootSpan = activeSpan ? getRootSpan(activeSpan) : void 0;
+  const cachedSpan = interactionId != null ? INTERACTIONS_SPAN_MAP.get(interactionId) : void 0;
+  const spanToUse = cachedSpan || rootSpan;
+  const routeName = spanToUse ? spanToJSON(spanToUse).description : getCurrentScope().getScopeData().transactionName;
+  const name = htmlTreeAsString(entry.target);
+  const attributes = {
+    [SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: "auto.http.browser.inp",
+    [SEMANTIC_ATTRIBUTE_SENTRY_OP]: `ui.interaction.${interactionType}`,
+    [SEMANTIC_ATTRIBUTE_EXCLUSIVE_TIME]: entry.duration
+  };
+  const span = startStandaloneWebVitalSpan({
+    name,
+    transaction: routeName,
+    attributes,
+    startTime
+  });
+  if (span) {
+    span.addEvent("inp", {
+      [SEMANTIC_ATTRIBUTE_SENTRY_MEASUREMENT_UNIT]: "millisecond",
+      [SEMANTIC_ATTRIBUTE_SENTRY_MEASUREMENT_VALUE]: metric.value
+    });
+    span.end(startTime + duration);
+  }
+};
 function registerInpInteractionListener() {
-  const handleEntries = ({
-    entries
-  }) => {
+  const handleEntries = ({ entries }) => {
     const activeSpan = getActiveSpan();
     const activeRootSpan = activeSpan && getRootSpan(activeSpan);
     entries.forEach((entry) => {
@@ -18251,7 +17905,10 @@ var defaultStackParser = createStackParser(...defaultStackLineParsers);
 var extractSafariExtensionDetails = (func, filename) => {
   const isSafariExtension = func.indexOf("safari-extension") !== -1;
   const isSafariWebExtension = func.indexOf("safari-web-extension") !== -1;
-  return isSafariExtension || isSafariWebExtension ? [func.indexOf("@") !== -1 ? func.split("@")[0] : UNKNOWN_FUNCTION, isSafariExtension ? `safari-extension:${filename}` : `safari-web-extension:${filename}`] : [func, filename];
+  return isSafariExtension || isSafariWebExtension ? [
+    func.indexOf("@") !== -1 ? func.split("@")[0] : UNKNOWN_FUNCTION,
+    isSafariExtension ? `safari-extension:${filename}` : `safari-web-extension:${filename}`
+  ] : [func, filename];
 };
 
 // node_modules/@sentry/browser/build/npm/esm/debug-build.js
@@ -18299,14 +17956,17 @@ function _getSentryBreadcrumbHandler(client) {
     if (getClient() !== client) {
       return;
     }
-    addBreadcrumb({
-      category: `sentry.${event.type === "transaction" ? "transaction" : "event"}`,
-      event_id: event.event_id,
-      level: event.level,
-      message: getEventDescription(event)
-    }, {
-      event
-    });
+    addBreadcrumb(
+      {
+        category: `sentry.${event.type === "transaction" ? "transaction" : "event"}`,
+        event_id: event.event_id,
+        level: event.level,
+        message: getEventDescription(event)
+      },
+      {
+        event
+      }
+    );
   };
 }
 function _getDomBreadcrumbHandler(client, dom) {
@@ -18319,7 +17979,9 @@ function _getDomBreadcrumbHandler(client, dom) {
     let keyAttrs = typeof dom === "object" ? dom.serializeAttribute : void 0;
     let maxStringLength = typeof dom === "object" && typeof dom.maxStringLength === "number" ? dom.maxStringLength : void 0;
     if (maxStringLength && maxStringLength > MAX_ALLOWED_STRING_LENGTH) {
-      DEBUG_BUILD3 && logger.warn(`\`dom.maxStringLength\` cannot exceed ${MAX_ALLOWED_STRING_LENGTH}, but a value of ${maxStringLength} was configured. Sentry will use ${MAX_ALLOWED_STRING_LENGTH} instead.`);
+      DEBUG_BUILD3 && logger.warn(
+        `\`dom.maxStringLength\` cannot exceed ${MAX_ALLOWED_STRING_LENGTH}, but a value of ${maxStringLength} was configured. Sentry will use ${MAX_ALLOWED_STRING_LENGTH} instead.`
+      );
       maxStringLength = MAX_ALLOWED_STRING_LENGTH;
     }
     if (typeof keyAttrs === "string") {
@@ -18328,10 +17990,7 @@ function _getDomBreadcrumbHandler(client, dom) {
     try {
       const event = handlerData.event;
       const element = _isEvent(event) ? event.target : event;
-      target = htmlTreeAsString(element, {
-        keyAttrs,
-        maxStringLength
-      });
+      target = htmlTreeAsString(element, { keyAttrs, maxStringLength });
       componentName = getComponentName(element);
     } catch (e2) {
       target = "<unknown>";
@@ -18344,9 +18003,7 @@ function _getDomBreadcrumbHandler(client, dom) {
       message: target
     };
     if (componentName) {
-      breadcrumb.data = {
-        "ui.component_name": componentName
-      };
+      breadcrumb.data = { "ui.component_name": componentName };
     }
     addBreadcrumb(breadcrumb, {
       event: handlerData.event,
@@ -18388,20 +18045,12 @@ function _getXhrBreadcrumbHandler(client) {
     if (getClient() !== client) {
       return;
     }
-    const {
-      startTimestamp,
-      endTimestamp
-    } = handlerData;
+    const { startTimestamp, endTimestamp } = handlerData;
     const sentryXhrData = handlerData.xhr[SENTRY_XHR_DATA_KEY];
     if (!startTimestamp || !endTimestamp || !sentryXhrData) {
       return;
     }
-    const {
-      method,
-      url,
-      status_code,
-      body
-    } = sentryXhrData;
+    const { method, url, status_code, body } = sentryXhrData;
     const data = {
       method,
       url,
@@ -18428,10 +18077,7 @@ function _getFetchBreadcrumbHandler(client) {
     if (getClient() !== client) {
       return;
     }
-    const {
-      startTimestamp,
-      endTimestamp
-    } = handlerData;
+    const { startTimestamp, endTimestamp } = handlerData;
     if (!endTimestamp) {
       return;
     }
@@ -18488,10 +18134,10 @@ function _getHistoryBreadcrumbHandler(client) {
     if (getClient() !== client) {
       return;
     }
-    let from2 = handlerData.from;
+    let from = handlerData.from;
     let to = handlerData.to;
     const parsedLoc = parseUrl(WINDOW3.location.href);
-    let parsedFrom = from2 ? parseUrl(from2) : void 0;
+    let parsedFrom = from ? parseUrl(from) : void 0;
     const parsedTo = parseUrl(to);
     if (!parsedFrom?.path) {
       parsedFrom = parsedLoc;
@@ -18500,12 +18146,12 @@ function _getHistoryBreadcrumbHandler(client) {
       to = parsedTo.relative;
     }
     if (parsedLoc.protocol === parsedFrom.protocol && parsedLoc.host === parsedFrom.host) {
-      from2 = parsedFrom.relative;
+      from = parsedFrom.relative;
     }
     addBreadcrumb({
       category: "navigation",
       data: {
-        from: from2,
+        from,
         to
       }
     });
@@ -18516,7 +18162,39 @@ function _isEvent(event) {
 }
 
 // node_modules/@sentry/browser/build/npm/esm/integrations/browserapierrors.js
-var DEFAULT_EVENT_TARGET = ["EventTarget", "Window", "Node", "ApplicationCache", "AudioTrackList", "BroadcastChannel", "ChannelMergerNode", "CryptoOperation", "EventSource", "FileReader", "HTMLUnknownElement", "IDBDatabase", "IDBRequest", "IDBTransaction", "KeyOperation", "MediaController", "MessagePort", "ModalWindow", "Notification", "SVGElementInstance", "Screen", "SharedWorker", "TextTrack", "TextTrackCue", "TextTrackList", "WebSocket", "WebSocketWorker", "Worker", "XMLHttpRequest", "XMLHttpRequestEventTarget", "XMLHttpRequestUpload"];
+var DEFAULT_EVENT_TARGET = [
+  "EventTarget",
+  "Window",
+  "Node",
+  "ApplicationCache",
+  "AudioTrackList",
+  "BroadcastChannel",
+  "ChannelMergerNode",
+  "CryptoOperation",
+  "EventSource",
+  "FileReader",
+  "HTMLUnknownElement",
+  "IDBDatabase",
+  "IDBRequest",
+  "IDBTransaction",
+  "KeyOperation",
+  "MediaController",
+  "MessagePort",
+  "ModalWindow",
+  "Notification",
+  "SVGElementInstance",
+  "Screen",
+  "SharedWorker",
+  "TextTrack",
+  "TextTrackCue",
+  "TextTrackList",
+  "WebSocket",
+  "WebSocketWorker",
+  "Worker",
+  "XMLHttpRequest",
+  "XMLHttpRequestEventTarget",
+  "XMLHttpRequestUpload"
+];
 var INTEGRATION_NAME5 = "BrowserApiErrors";
 var _browserApiErrorsIntegration = (options = {}) => {
   const _options = __spreadValues({
@@ -18524,7 +18202,8 @@ var _browserApiErrorsIntegration = (options = {}) => {
     eventTarget: true,
     requestAnimationFrame: true,
     setInterval: true,
-    setTimeout: true
+    setTimeout: true,
+    unregisterOriginalCallbacks: false
   }, options);
   return {
     name: INTEGRATION_NAME5,
@@ -18546,7 +18225,7 @@ var _browserApiErrorsIntegration = (options = {}) => {
       const eventTargetOption = _options.eventTarget;
       if (eventTargetOption) {
         const eventTarget = Array.isArray(eventTargetOption) ? eventTargetOption : DEFAULT_EVENT_TARGET;
-        eventTarget.forEach(_wrapEventTarget);
+        eventTarget.forEach((target) => _wrapEventTarget(target, _options));
       }
     }
   };
@@ -18557,9 +18236,7 @@ function _wrapTimeFunction(original) {
     const originalCallback = args[0];
     args[0] = wrap(originalCallback, {
       mechanism: {
-        data: {
-          function: getFunctionName(original)
-        },
+        data: { function: getFunctionName(original) },
         handled: false,
         type: "instrument"
       }
@@ -18569,16 +18246,18 @@ function _wrapTimeFunction(original) {
 }
 function _wrapRAF(original) {
   return function(callback) {
-    return original.apply(this, [wrap(callback, {
-      mechanism: {
-        data: {
-          function: "requestAnimationFrame",
-          handler: getFunctionName(original)
-        },
-        handled: false,
-        type: "instrument"
-      }
-    })]);
+    return original.apply(this, [
+      wrap(callback, {
+        mechanism: {
+          data: {
+            function: "requestAnimationFrame",
+            handler: getFunctionName(original)
+          },
+          handled: false,
+          type: "instrument"
+        }
+      })
+    ]);
   };
 }
 function _wrapXHR(originalSend) {
@@ -18609,7 +18288,7 @@ function _wrapXHR(originalSend) {
     return originalSend.apply(this, args);
   };
 }
-function _wrapEventTarget(target) {
+function _wrapEventTarget(target, integrationOptions) {
   const globalObject = WINDOW3;
   const proto = globalObject[target]?.prototype;
   if (!proto?.hasOwnProperty?.("addEventListener")) {
@@ -18633,17 +18312,24 @@ function _wrapEventTarget(target) {
         }
       } catch {
       }
-      return original.apply(this, [eventName, wrap(fn, {
-        mechanism: {
-          data: {
-            function: "addEventListener",
-            handler: getFunctionName(fn),
-            target
-          },
-          handled: false,
-          type: "instrument"
-        }
-      }), options]);
+      if (integrationOptions.unregisterOriginalCallbacks) {
+        unregisterOriginalCallback(this, eventName, fn);
+      }
+      return original.apply(this, [
+        eventName,
+        wrap(fn, {
+          mechanism: {
+            data: {
+              function: "addEventListener",
+              handler: getFunctionName(fn),
+              target
+            },
+            handled: false,
+            type: "instrument"
+          }
+        }),
+        options
+      ]);
     };
   });
   fill(proto, "removeEventListener", function(originalRemoveEventListener) {
@@ -18662,6 +18348,11 @@ function _wrapEventTarget(target) {
 function isEventListenerObject(obj) {
   return typeof obj.handleEvent === "function";
 }
+function unregisterOriginalCallback(target, eventName, fn) {
+  if (target && typeof target === "object" && "removeEventListener" in target && typeof target.removeEventListener === "function") {
+    target.removeEventListener(eventName, fn);
+  }
+}
 
 // node_modules/@sentry/browser/build/npm/esm/integrations/browsersession.js
 var browserSessionIntegration = defineIntegration(() => {
@@ -18672,18 +18363,11 @@ var browserSessionIntegration = defineIntegration(() => {
         DEBUG_BUILD3 && logger.warn("Using the `browserSessionIntegration` in non-browser environments is not supported.");
         return;
       }
-      startSession({
-        ignoreDuration: true
-      });
+      startSession({ ignoreDuration: true });
       captureSession();
-      addHistoryInstrumentationHandler(({
-        from: from2,
-        to
-      }) => {
-        if (from2 !== void 0 && from2 !== to) {
-          startSession({
-            ignoreDuration: true
-          });
+      addHistoryInstrumentationHandler(({ from, to }) => {
+        if (from !== void 0 && from !== to) {
+          startSession({ ignoreDuration: true });
           captureSession();
         }
       });
@@ -18718,21 +18402,17 @@ var _globalHandlersIntegration = (options = {}) => {
 var globalHandlersIntegration = defineIntegration(_globalHandlersIntegration);
 function _installGlobalOnErrorHandler(client) {
   addGlobalErrorInstrumentationHandler((data) => {
-    const {
-      stackParser,
-      attachStacktrace
-    } = getOptions();
+    const { stackParser, attachStacktrace } = getOptions();
     if (getClient() !== client || shouldIgnoreOnError()) {
       return;
     }
-    const {
-      msg,
+    const { msg, url, line, column, error } = data;
+    const event = _enhanceEventWithInitialFrame(
+      eventFromUnknownInput(stackParser, error || msg, void 0, attachStacktrace, false),
       url,
       line,
-      column,
-      error
-    } = data;
-    const event = _enhanceEventWithInitialFrame(eventFromUnknownInput(stackParser, error || msg, void 0, attachStacktrace, false), url, line, column);
+      column
+    );
     event.level = "error";
     captureEvent(event, {
       originalException: error,
@@ -18745,10 +18425,7 @@ function _installGlobalOnErrorHandler(client) {
 }
 function _installGlobalOnUnhandledRejectionHandler(client) {
   addGlobalUnhandledRejectionInstrumentationHandler((e2) => {
-    const {
-      stackParser,
-      attachStacktrace
-    } = getOptions();
+    const { stackParser, attachStacktrace } = getOptions();
     if (getClient() !== client || shouldIgnoreOnError()) {
       return;
     }
@@ -18782,11 +18459,13 @@ function _getUnhandledRejectionError(error) {
 function _eventFromRejectionWithPrimitive(reason) {
   return {
     exception: {
-      values: [{
-        type: "UnhandledRejection",
-        // String() is needed because the Primitive type includes symbols (which can't be automatically stringified)
-        value: `Non-Error promise rejection captured with value: ${String(reason)}`
-      }]
+      values: [
+        {
+          type: "UnhandledRejection",
+          // String() is needed because the Primitive type includes symbols (which can't be automatically stringified)
+          value: `Non-Error promise rejection captured with value: ${String(reason)}`
+        }
+      ]
     }
   };
 }
@@ -18830,24 +18509,11 @@ var httpContextIntegration = defineIntegration(() => {
       if (!WINDOW3.navigator && !WINDOW3.location && !WINDOW3.document) {
         return;
       }
-      const url = event.request?.url || getLocationHref();
-      const {
-        referrer
-      } = WINDOW3.document || {};
-      const {
-        userAgent
-      } = WINDOW3.navigator || {};
-      const headers = __spreadValues(__spreadValues(__spreadValues({}, event.request?.headers), referrer && {
-        Referer: referrer
-      }), userAgent && {
-        "User-Agent": userAgent
-      });
-      const request = __spreadProps(__spreadValues(__spreadValues({}, event.request), url && {
-        url
-      }), {
+      const reqData = getHttpRequestData();
+      const headers = __spreadValues(__spreadValues({}, reqData.headers), event.request?.headers);
+      event.request = __spreadProps(__spreadValues(__spreadValues({}, reqData), event.request), {
         headers
       });
-      event.request = request;
     }
   };
 });
@@ -18877,6 +18543,38 @@ var _linkedErrorsIntegration = (options = {}) => {
 };
 var linkedErrorsIntegration = defineIntegration(_linkedErrorsIntegration);
 
+// node_modules/@sentry/browser/build/npm/esm/utils/detectBrowserExtension.js
+function checkAndWarnIfIsEmbeddedBrowserExtension() {
+  if (_isEmbeddedBrowserExtension()) {
+    if (DEBUG_BUILD3) {
+      consoleSandbox(() => {
+        console.error(
+          "[Sentry] You cannot use Sentry.init() in a browser extension, see: https://docs.sentry.io/platforms/javascript/best-practices/browser-extensions/"
+        );
+      });
+    }
+    return true;
+  }
+  return false;
+}
+function _isEmbeddedBrowserExtension() {
+  if (typeof WINDOW3.window === "undefined") {
+    return false;
+  }
+  const _window = WINDOW3;
+  if (_window.nw) {
+    return false;
+  }
+  const extensionObject = _window["chrome"] || _window["browser"];
+  if (!extensionObject?.runtime?.id) {
+    return false;
+  }
+  const href = getLocationHref();
+  const extensionProtocols = ["chrome-extension", "moz-extension", "ms-browser-extension", "safari-web-extension"];
+  const isDedicatedExtensionPage = WINDOW3 === WINDOW3.top && extensionProtocols.some((protocol) => href.startsWith(`${protocol}://`));
+  return !isDedicatedExtensionPage;
+}
+
 // node_modules/@sentry/browser/build/npm/esm/sdk.js
 function getDefaultIntegrations(_options) {
   return [
@@ -18893,90 +18591,47 @@ function getDefaultIntegrations(_options) {
     browserSessionIntegration()
   ];
 }
-function applyDefaultOptions(optionsArg = {}) {
-  const defaultOptions = {
-    defaultIntegrations: getDefaultIntegrations(),
-    release: typeof __SENTRY_RELEASE__ === "string" ? __SENTRY_RELEASE__ : WINDOW3.SENTRY_RELEASE?.id,
-    // This supports the variable that sentry-webpack-plugin injects
-    sendClientReports: true
-  };
-  return __spreadValues(__spreadValues({}, defaultOptions), dropTopLevelUndefinedKeys(optionsArg));
-}
-function dropTopLevelUndefinedKeys(obj) {
-  const mutatetedObj = {};
-  for (const k of Object.getOwnPropertyNames(obj)) {
-    const key = k;
-    if (obj[key] !== void 0) {
-      mutatetedObj[key] = obj[key];
-    }
-  }
-  return mutatetedObj;
-}
-function shouldShowBrowserExtensionError() {
-  const windowWithMaybeExtension = typeof WINDOW3.window !== "undefined" && WINDOW3;
-  if (!windowWithMaybeExtension) {
-    return false;
-  }
-  const extensionKey = windowWithMaybeExtension.chrome ? "chrome" : "browser";
-  const extensionObject = windowWithMaybeExtension[extensionKey];
-  const runtimeId = extensionObject?.runtime?.id;
-  const href = getLocationHref() || "";
-  const extensionProtocols = ["chrome-extension:", "moz-extension:", "ms-browser-extension:", "safari-web-extension:"];
-  const isDedicatedExtensionPage = !!runtimeId && WINDOW3 === WINDOW3.top && extensionProtocols.some((protocol) => href.startsWith(`${protocol}//`));
-  const isNWjs = typeof windowWithMaybeExtension.nw !== "undefined";
-  return !!runtimeId && !isDedicatedExtensionPage && !isNWjs;
-}
-function init(browserOptions = {}) {
-  const options = applyDefaultOptions(browserOptions);
-  if (!options.skipBrowserExtensionCheck && shouldShowBrowserExtensionError()) {
-    if (DEBUG_BUILD3) {
-      consoleSandbox(() => {
-        console.error("[Sentry] You cannot run Sentry this way in a browser extension, check: https://docs.sentry.io/platforms/javascript/best-practices/browser-extensions/");
-      });
-    }
-    return;
-  }
-  if (DEBUG_BUILD3 && !supportsFetch()) {
-    logger.warn("No Fetch API detected. The Sentry SDK requires a Fetch API compatible environment to send events. Please add a Fetch API polyfill.");
-  }
+function init(options = {}) {
+  const shouldDisableBecauseIsBrowserExtenstion = !options.skipBrowserExtensionCheck && checkAndWarnIfIsEmbeddedBrowserExtension();
   const clientOptions = __spreadProps(__spreadValues({}, options), {
+    enabled: shouldDisableBecauseIsBrowserExtenstion ? false : options.enabled,
     stackParser: stackParserFromStackParserOptions(options.stackParser || defaultStackParser),
-    integrations: getIntegrationsToSetup(options),
+    integrations: getIntegrationsToSetup({
+      integrations: options.integrations,
+      defaultIntegrations: options.defaultIntegrations == null ? getDefaultIntegrations() : options.defaultIntegrations
+    }),
     transport: options.transport || makeFetchTransport
   });
   return initAndBind(BrowserClient, clientOptions);
 }
+
+// node_modules/@sentry/browser/build/npm/esm/report-dialog.js
 function showReportDialog(options = {}) {
-  if (!WINDOW3.document) {
-    DEBUG_BUILD3 && logger.error("Global document not defined in showReportDialog call");
+  const optionalDocument = WINDOW3.document;
+  const injectionPoint = optionalDocument?.head || optionalDocument?.body;
+  if (!injectionPoint) {
+    DEBUG_BUILD3 && logger.error("[showReportDialog] Global document not defined");
     return;
   }
   const scope = getCurrentScope();
-  const client = scope.getClient();
+  const client = getClient();
   const dsn = client?.getDsn();
   if (!dsn) {
-    DEBUG_BUILD3 && logger.error("DSN not configured for showReportDialog call");
+    DEBUG_BUILD3 && logger.error("[showReportDialog] DSN not configured");
     return;
   }
-  if (scope) {
-    options.user = __spreadValues(__spreadValues({}, scope.getUser()), options.user);
-  }
-  if (!options.eventId) {
-    const eventId = lastEventId();
-    if (eventId) {
-      options.eventId = eventId;
-    }
-  }
+  const mergedOptions = __spreadProps(__spreadValues({}, options), {
+    user: __spreadValues(__spreadValues({}, scope.getUser()), options.user),
+    eventId: options.eventId || lastEventId()
+  });
   const script = WINDOW3.document.createElement("script");
   script.async = true;
   script.crossOrigin = "anonymous";
-  script.src = getReportDialogEndpoint(dsn, options);
-  if (options.onLoad) {
-    script.onload = options.onLoad;
+  script.src = getReportDialogEndpoint(dsn, mergedOptions);
+  const { onLoad: onLoad2, onClose } = mergedOptions;
+  if (onLoad2) {
+    script.onload = onLoad2;
   }
-  const {
-    onClose
-  } = options;
   if (onClose) {
     const reportDialogClosedMessageHandler = (event) => {
       if (event.data === "__sentry_reportdialog_closed__") {
@@ -18989,12 +18644,7 @@ function showReportDialog(options = {}) {
     };
     WINDOW3.addEventListener("message", reportDialogClosedMessageHandler);
   }
-  const injectionPoint = WINDOW3.document.head || WINDOW3.document.body;
-  if (injectionPoint) {
-    injectionPoint.appendChild(script);
-  } else {
-    DEBUG_BUILD3 && logger.error("Not injecting report dialog. No injection point found in HTML");
-  }
+  injectionPoint.appendChild(script);
 }
 
 // node_modules/@sentry-internal/replay/build/npm/esm/index.js
@@ -19018,12 +18668,7 @@ var MIN_REPLAY_DURATION = 4999;
 var MIN_REPLAY_DURATION_LIMIT = 15e3;
 var MAX_REPLAY_DURATION = 36e5;
 var __defProp$1 = Object.defineProperty;
-var __defNormalProp$1 = (obj, key, value) => key in obj ? __defProp$1(obj, key, {
-  enumerable: true,
-  configurable: true,
-  writable: true,
-  value
-}) : obj[key] = value;
+var __defNormalProp$1 = (obj, key, value) => key in obj ? __defProp$1(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField$1 = (obj, key, value) => __defNormalProp$1(obj, typeof key !== "symbol" ? key + "" : key, value);
 var NodeType$2 = /* @__PURE__ */ ((NodeType2) => {
   NodeType2[NodeType2["Document"] = 0] = "Document";
@@ -19046,14 +18691,15 @@ function isNativeShadowDom(shadowRoot) {
 }
 function fixBrowserCompatibilityIssuesInCSS(cssText) {
   if (cssText.includes(" background-clip: text;") && !cssText.includes(" -webkit-background-clip: text;")) {
-    cssText = cssText.replace(/\sbackground-clip:\s*text;/g, " -webkit-background-clip: text; background-clip: text;");
+    cssText = cssText.replace(
+      /\sbackground-clip:\s*text;/g,
+      " -webkit-background-clip: text; background-clip: text;"
+    );
   }
   return cssText;
 }
 function escapeImportStatement(rule) {
-  const {
-    cssText
-  } = rule;
+  const { cssText } = rule;
   if (cssText.split('"').length < 3) return cssText;
   const statement = ["@import", `url(${JSON.stringify(rule.href)})`];
   if (rule.layerName === "") {
@@ -19072,7 +18718,9 @@ function escapeImportStatement(rule) {
 function stringifyStylesheet(s2) {
   try {
     const rules2 = s2.rules || s2.cssRules;
-    return rules2 ? fixBrowserCompatibilityIssuesInCSS(Array.from(rules2, stringifyRule).join("")) : null;
+    return rules2 ? fixBrowserCompatibilityIssuesInCSS(
+      Array.from(rules2, stringifyRule).join("")
+    ) : null;
   } catch (error) {
     return null;
   }
@@ -19148,7 +18796,9 @@ var Mirror = class {
     const id = this.getId(n2);
     this.idNodeMap.delete(id);
     if (n2.childNodes) {
-      n2.childNodes.forEach((childNode) => this.removeNodeFromMap(childNode));
+      n2.childNodes.forEach(
+        (childNode) => this.removeNodeFromMap(childNode)
+      );
     }
   }
   has(id) {
@@ -19186,8 +18836,10 @@ function shouldMaskInput({
   if (tagName === "OPTION") {
     tagName = "SELECT";
   }
-  return Boolean(maskInputOptions[tagName.toLowerCase()] || type && maskInputOptions[type] || type === "password" || // Default to "text" option for inputs without a "type" attribute defined
-  tagName === "INPUT" && !type && maskInputOptions["text"]);
+  return Boolean(
+    maskInputOptions[tagName.toLowerCase()] || type && maskInputOptions[type] || type === "password" || // Default to "text" option for inputs without a "type" attribute defined
+    tagName === "INPUT" && !type && maskInputOptions["text"]
+  );
 }
 function maskInputValue({
   isMasked,
@@ -19221,7 +18873,13 @@ function is2DCanvasBlank(canvas) {
       const originalGetImageData = ORIGINAL_ATTRIBUTE_NAME in getImageData ? getImageData[ORIGINAL_ATTRIBUTE_NAME] : getImageData;
       const pixelBuffer = new Uint32Array(
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        originalGetImageData.call(ctx, x, y, Math.min(chunkSize, canvas.width - x), Math.min(chunkSize, canvas.height - y)).data.buffer
+        originalGetImageData.call(
+          ctx,
+          x,
+          y,
+          Math.min(chunkSize, canvas.width - x),
+          Math.min(chunkSize, canvas.height - y)
+        ).data.buffer
       );
       if (pixelBuffer.some((pixel) => pixel !== 0)) return false;
     }
@@ -19274,7 +18932,9 @@ function getImplementation$1(name) {
     } catch (e2) {
     }
   }
-  return cachedImplementations$1[name] = impl.bind(window);
+  return cachedImplementations$1[name] = impl.bind(
+    window
+  );
 }
 function setTimeout$2(...rest) {
   return getImplementation$1("setTimeout")(...rest);
@@ -19321,35 +18981,38 @@ var URL_PROTOCOL_MATCH = /^(?:[a-z+]+:)?\/\//i;
 var URL_WWW_MATCH = /^www\..*/i;
 var DATA_URI = /^(data:)([^,]*),(.*)/i;
 function absoluteToStylesheet(cssText, href) {
-  return (cssText || "").replace(URL_IN_CSS_REF, (origin, quote1, path1, quote2, path2, path3) => {
-    const filePath = path1 || path2 || path3;
-    const maybeQuote = quote1 || quote2 || "";
-    if (!filePath) {
-      return origin;
-    }
-    if (URL_PROTOCOL_MATCH.test(filePath) || URL_WWW_MATCH.test(filePath)) {
-      return `url(${maybeQuote}${filePath}${maybeQuote})`;
-    }
-    if (DATA_URI.test(filePath)) {
-      return `url(${maybeQuote}${filePath}${maybeQuote})`;
-    }
-    if (filePath[0] === "/") {
-      return `url(${maybeQuote}${extractOrigin(href) + filePath}${maybeQuote})`;
-    }
-    const stack = href.split("/");
-    const parts = filePath.split("/");
-    stack.pop();
-    for (const part of parts) {
-      if (part === ".") {
-        continue;
-      } else if (part === "..") {
-        stack.pop();
-      } else {
-        stack.push(part);
+  return (cssText || "").replace(
+    URL_IN_CSS_REF,
+    (origin, quote1, path1, quote2, path2, path3) => {
+      const filePath = path1 || path2 || path3;
+      const maybeQuote = quote1 || quote2 || "";
+      if (!filePath) {
+        return origin;
       }
+      if (URL_PROTOCOL_MATCH.test(filePath) || URL_WWW_MATCH.test(filePath)) {
+        return `url(${maybeQuote}${filePath}${maybeQuote})`;
+      }
+      if (DATA_URI.test(filePath)) {
+        return `url(${maybeQuote}${filePath}${maybeQuote})`;
+      }
+      if (filePath[0] === "/") {
+        return `url(${maybeQuote}${extractOrigin(href) + filePath}${maybeQuote})`;
+      }
+      const stack = href.split("/");
+      const parts = filePath.split("/");
+      stack.pop();
+      for (const part of parts) {
+        if (part === ".") {
+          continue;
+        } else if (part === "..") {
+          stack.pop();
+        } else {
+          stack.push(part);
+        }
+      }
+      return `url(${maybeQuote}${stack.join("/")}${maybeQuote})`;
     }
-    return `url(${maybeQuote}${stack.join("/")}${maybeQuote})`;
-  });
+  );
 }
 var SRCSET_NOT_SPACES = /^[^ \t\n\r\u000c]+/;
 var SRCSET_COMMAS_OR_SPACES = /^[, \t\n\r\u000c]+/;
@@ -19521,7 +19184,15 @@ function needMaskingText(node, maskTextClass, maskTextSelector, unmaskTextClass,
     if (el === null) return false;
     if (el.tagName === "INPUT") {
       const autocomplete = el.getAttribute("autocomplete");
-      const disallowedAutocompleteValues = ["current-password", "new-password", "cc-number", "cc-exp", "cc-exp-month", "cc-exp-year", "cc-csc"];
+      const disallowedAutocompleteValues = [
+        "current-password",
+        "new-password",
+        "cc-number",
+        "cc-exp",
+        "cc-exp-month",
+        "cc-exp-year",
+        "cc-csc"
+      ];
       if (disallowedAutocompleteValues.includes(autocomplete)) {
         return true;
       }
@@ -19529,17 +19200,31 @@ function needMaskingText(node, maskTextClass, maskTextSelector, unmaskTextClass,
     let maskDistance = -1;
     let unmaskDistance = -1;
     if (maskAllText) {
-      unmaskDistance = distanceToMatch(el, createMatchPredicate(unmaskTextClass, unmaskTextSelector));
+      unmaskDistance = distanceToMatch(
+        el,
+        createMatchPredicate(unmaskTextClass, unmaskTextSelector)
+      );
       if (unmaskDistance < 0) {
         return true;
       }
-      maskDistance = distanceToMatch(el, createMatchPredicate(maskTextClass, maskTextSelector), unmaskDistance >= 0 ? unmaskDistance : Infinity);
+      maskDistance = distanceToMatch(
+        el,
+        createMatchPredicate(maskTextClass, maskTextSelector),
+        unmaskDistance >= 0 ? unmaskDistance : Infinity
+      );
     } else {
-      maskDistance = distanceToMatch(el, createMatchPredicate(maskTextClass, maskTextSelector));
+      maskDistance = distanceToMatch(
+        el,
+        createMatchPredicate(maskTextClass, maskTextSelector)
+      );
       if (maskDistance < 0) {
         return false;
       }
-      unmaskDistance = distanceToMatch(el, createMatchPredicate(unmaskTextClass, unmaskTextSelector), maskDistance >= 0 ? maskDistance : Infinity);
+      unmaskDistance = distanceToMatch(
+        el,
+        createMatchPredicate(unmaskTextClass, unmaskTextSelector),
+        maskDistance >= 0 ? maskDistance : Infinity
+      );
     }
     return maskDistance >= 0 ? unmaskDistance >= 0 ? maskDistance <= unmaskDistance : true : unmaskDistance >= 0 ? false : !!maskAllText;
   } catch (e2) {
@@ -19723,17 +19408,29 @@ function serializeTextNode(n2, options) {
     try {
       if (n2.nextSibling || n2.previousSibling) {
       } else if (n2.parentNode.sheet?.cssRules) {
-        textContent = stringifyStylesheet(n2.parentNode.sheet);
+        textContent = stringifyStylesheet(
+          n2.parentNode.sheet
+        );
       }
     } catch (err) {
-      console.warn(`Cannot get CSS styles from text's parentNode. Error: ${err}`, n2);
+      console.warn(
+        `Cannot get CSS styles from text's parentNode. Error: ${err}`,
+        n2
+      );
     }
     textContent = absoluteToStylesheet(textContent, getHref(options.doc));
   }
   if (isScript) {
     textContent = "SCRIPT_PLACEHOLDER";
   }
-  const forceMask = needMaskingText(n2, maskTextClass, maskTextSelector, unmaskTextClass, unmaskTextSelector, maskAllText);
+  const forceMask = needMaskingText(
+    n2,
+    maskTextClass,
+    maskTextSelector,
+    unmaskTextClass,
+    unmaskTextSelector,
+    maskAllText
+  );
   if (!isStyle && !isScript && !isTextarea && textContent && forceMask) {
     textContent = maskTextFn ? maskTextFn(textContent, n2.parentElement) : textContent.replace(/[\S]/g, "*");
   }
@@ -19747,7 +19444,14 @@ function serializeTextNode(n2, options) {
       maskInputOptions
     });
     textContent = maskInputValue({
-      isMasked: needMaskingText(n2, maskTextClass, maskTextSelector, unmaskTextClass, unmaskTextSelector, isInputMasked),
+      isMasked: needMaskingText(
+        n2,
+        maskTextClass,
+        maskTextSelector,
+        unmaskTextClass,
+        unmaskTextSelector,
+        isInputMasked
+      ),
       element: n2,
       value: textContent,
       maskInputFn
@@ -19781,14 +19485,26 @@ function serializeElementNode(n2, options) {
     maskTextSelector,
     unmaskTextSelector
   } = options;
-  const needBlock = _isBlockedElement(n2, blockClass, blockSelector, unblockSelector);
+  const needBlock = _isBlockedElement(
+    n2,
+    blockClass,
+    blockSelector,
+    unblockSelector
+  );
   const tagName = getValidTagName$1(n2);
   let attributes2 = {};
   const len = n2.attributes.length;
   for (let i2 = 0; i2 < len; i2++) {
     const attr = n2.attributes[i2];
     if (attr.name && !ignoreAttribute(tagName, attr.name, attr.value)) {
-      attributes2[attr.name] = transformAttribute(doc, tagName, toLowerCase(attr.name), attr.value, n2, maskAttributeFn);
+      attributes2[attr.name] = transformAttribute(
+        doc,
+        tagName,
+        toLowerCase(attr.name),
+        attr.value,
+        n2,
+        maskAttributeFn
+      );
     }
   }
   if (tagName === "link" && inlineStylesheet) {
@@ -19808,7 +19524,9 @@ function serializeElementNode(n2, options) {
   }
   if (tagName === "style" && n2.sheet && // TODO: Currently we only try to get dynamic stylesheet when it is an empty style element
   !(n2.innerText || n2.textContent || "").trim().length) {
-    const cssText = stringifyStylesheet(n2.sheet);
+    const cssText = stringifyStylesheet(
+      n2.sheet
+    );
     if (cssText) {
       attributes2._cssText = absoluteToStylesheet(cssText, getHref(doc));
     }
@@ -19819,11 +19537,18 @@ function serializeElementNode(n2, options) {
     const value = getInputValue(el, toUpperCase(tagName), type);
     const checked = el.checked;
     if (type !== "submit" && type !== "button" && value) {
-      const forceMask = needMaskingText(el, maskTextClass, maskTextSelector, unmaskTextClass, unmaskTextSelector, shouldMaskInput({
-        type,
-        tagName: toUpperCase(tagName),
-        maskInputOptions
-      }));
+      const forceMask = needMaskingText(
+        el,
+        maskTextClass,
+        maskTextSelector,
+        unmaskTextClass,
+        unmaskTextSelector,
+        shouldMaskInput({
+          type,
+          tagName: toUpperCase(tagName),
+          maskInputOptions
+        })
+      );
       attributes2.value = maskInputValue({
         isMasked: forceMask,
         element: el,
@@ -19845,14 +19570,23 @@ function serializeElementNode(n2, options) {
   if (tagName === "canvas" && recordCanvas) {
     if (n2.__context === "2d") {
       if (!is2DCanvasBlank(n2)) {
-        attributes2.rr_dataURL = n2.toDataURL(dataURLOptions.type, dataURLOptions.quality);
+        attributes2.rr_dataURL = n2.toDataURL(
+          dataURLOptions.type,
+          dataURLOptions.quality
+        );
       }
     } else if (!("__context" in n2)) {
-      const canvasDataURL = n2.toDataURL(dataURLOptions.type, dataURLOptions.quality);
+      const canvasDataURL = n2.toDataURL(
+        dataURLOptions.type,
+        dataURLOptions.quality
+      );
       const blankCanvas = doc.createElement("canvas");
       blankCanvas.width = n2.width;
       blankCanvas.height = n2.height;
-      const blankCanvasDataURL = blankCanvas.toDataURL(dataURLOptions.type, dataURLOptions.quality);
+      const blankCanvasDataURL = blankCanvas.toDataURL(
+        dataURLOptions.type,
+        dataURLOptions.quality
+      );
       if (canvasDataURL !== blankCanvasDataURL) {
         attributes2.rr_dataURL = canvasDataURL;
       }
@@ -19872,15 +19606,21 @@ function serializeElementNode(n2, options) {
         canvasService.width = image.naturalWidth;
         canvasService.height = image.naturalHeight;
         canvasCtx.drawImage(image, 0, 0);
-        attributes2.rr_dataURL = canvasService.toDataURL(dataURLOptions.type, dataURLOptions.quality);
+        attributes2.rr_dataURL = canvasService.toDataURL(
+          dataURLOptions.type,
+          dataURLOptions.quality
+        );
       } catch (err) {
         if (image.crossOrigin !== "anonymous") {
           image.crossOrigin = "anonymous";
-          if (image.complete && image.naturalWidth !== 0) recordInlineImage();
+          if (image.complete && image.naturalWidth !== 0)
+            recordInlineImage();
           else image.addEventListener("load", recordInlineImage);
           return;
         } else {
-          console.warn(`Cannot inline img src=${imageSrc}! Error: ${err}`);
+          console.warn(
+            `Cannot inline img src=${imageSrc}! Error: ${err}`
+          );
         }
       }
       if (image.crossOrigin === "anonymous") {
@@ -19903,10 +19643,7 @@ function serializeElementNode(n2, options) {
     }
   }
   if (needBlock) {
-    const {
-      width,
-      height
-    } = n2.getBoundingClientRect();
+    const { width, height } = n2.getBoundingClientRect();
     attributes2 = {
       class: attributes2.class,
       rr_width: `${width}px`,
@@ -19951,7 +19688,9 @@ function slimDOMExcluded(sn, slimDOMOptions) {
     sn.tagName === "link" && (sn.attributes.rel === "preload" || sn.attributes.rel === "modulepreload") || // prefetch link
     sn.tagName === "link" && sn.attributes.rel === "prefetch" && typeof sn.attributes.href === "string" && extractFileExtension(sn.attributes.href) === "js")) {
       return true;
-    } else if (slimDOMOptions.headFavicon && (sn.tagName === "link" && sn.attributes.rel === "shortcut icon" || sn.tagName === "meta" && (lowerIfExists(sn.attributes.name).match(/^msapplication-tile(image|color)$/) || lowerIfExists(sn.attributes.name) === "application-name" || lowerIfExists(sn.attributes.rel) === "icon" || lowerIfExists(sn.attributes.rel) === "apple-touch-icon" || lowerIfExists(sn.attributes.rel) === "shortcut icon"))) {
+    } else if (slimDOMOptions.headFavicon && (sn.tagName === "link" && sn.attributes.rel === "shortcut icon" || sn.tagName === "meta" && (lowerIfExists(sn.attributes.name).match(
+      /^msapplication-tile(image|color)$/
+    ) || lowerIfExists(sn.attributes.name) === "application-name" || lowerIfExists(sn.attributes.rel) === "icon" || lowerIfExists(sn.attributes.rel) === "apple-touch-icon" || lowerIfExists(sn.attributes.rel) === "shortcut icon"))) {
       return true;
     } else if (sn.tagName === "meta") {
       if (slimDOMOptions.headMetaDescKeywords && lowerIfExists(sn.attributes.name).match(/^description|keywords$/)) {
@@ -20002,9 +19741,7 @@ function serializeNodeWithId(n2, options) {
     keepIframeSrcFn = () => false,
     newlyAddedElement = false
   } = options;
-  let {
-    preserveWhiteSpace = true
-  } = options;
+  let { preserveWhiteSpace = true } = options;
   const _serializedNode = serializeNode(n2, {
     doc,
     mirror: mirror2,
@@ -20039,9 +19776,7 @@ function serializeNodeWithId(n2, options) {
   } else {
     id = genId();
   }
-  const serializedNode2 = Object.assign(_serializedNode, {
-    id
-  });
+  const serializedNode2 = Object.assign(_serializedNode, { id });
   mirror2.add(n2, serializedNode2);
   if (id === IGNORED_NODE) {
     return null;
@@ -20054,7 +19789,8 @@ function serializeNodeWithId(n2, options) {
     recordChild = recordChild && !serializedNode2.needBlock;
     delete serializedNode2.needBlock;
     const shadowRoot = n2.shadowRoot;
-    if (shadowRoot && isNativeShadowDom(shadowRoot)) serializedNode2.isShadowHost = true;
+    if (shadowRoot && isNativeShadowDom(shadowRoot))
+      serializedNode2.isShadowHost = true;
   }
   if ((serializedNode2.type === NodeType$2.Document || serializedNode2.type === NodeType$2.Element) && recordChild) {
     if (slimDOMOptions.headWhitespace && serializedNode2.type === NodeType$2.Element && serializedNode2.tagName === "head") {
@@ -20108,82 +19844,101 @@ function serializeNodeWithId(n2, options) {
   if (n2.parentNode && isShadowRoot(n2.parentNode) && isNativeShadowDom(n2.parentNode)) {
     serializedNode2.isShadow = true;
   }
-  if (serializedNode2.type === NodeType$2.Element && serializedNode2.tagName === "iframe" && !_isBlockedElement(n2, blockClass, blockSelector, unblockSelector)) {
-    onceIframeLoaded(n2, () => {
-      const iframeDoc = getIframeContentDocument(n2);
-      if (iframeDoc && onIframeLoad) {
-        const serializedIframeNode = serializeNodeWithId(iframeDoc, {
-          doc: iframeDoc,
-          mirror: mirror2,
-          blockClass,
-          blockSelector,
-          unblockSelector,
-          maskAllText,
-          maskTextClass,
-          unmaskTextClass,
-          maskTextSelector,
-          unmaskTextSelector,
-          skipChild: false,
-          inlineStylesheet,
-          maskInputOptions,
-          maskAttributeFn,
-          maskTextFn,
-          maskInputFn,
-          slimDOMOptions,
-          dataURLOptions,
-          inlineImages,
-          recordCanvas,
-          preserveWhiteSpace,
-          onSerialize,
-          onIframeLoad,
-          iframeLoadTimeout,
-          onStylesheetLoad,
-          stylesheetLoadTimeout,
-          keepIframeSrcFn
-        });
-        if (serializedIframeNode) {
-          onIframeLoad(n2, serializedIframeNode);
+  if (serializedNode2.type === NodeType$2.Element && serializedNode2.tagName === "iframe" && !_isBlockedElement(
+    n2,
+    blockClass,
+    blockSelector,
+    unblockSelector
+  )) {
+    onceIframeLoaded(
+      n2,
+      () => {
+        const iframeDoc = getIframeContentDocument(n2);
+        if (iframeDoc && onIframeLoad) {
+          const serializedIframeNode = serializeNodeWithId(iframeDoc, {
+            doc: iframeDoc,
+            mirror: mirror2,
+            blockClass,
+            blockSelector,
+            unblockSelector,
+            maskAllText,
+            maskTextClass,
+            unmaskTextClass,
+            maskTextSelector,
+            unmaskTextSelector,
+            skipChild: false,
+            inlineStylesheet,
+            maskInputOptions,
+            maskAttributeFn,
+            maskTextFn,
+            maskInputFn,
+            slimDOMOptions,
+            dataURLOptions,
+            inlineImages,
+            recordCanvas,
+            preserveWhiteSpace,
+            onSerialize,
+            onIframeLoad,
+            iframeLoadTimeout,
+            onStylesheetLoad,
+            stylesheetLoadTimeout,
+            keepIframeSrcFn
+          });
+          if (serializedIframeNode) {
+            onIframeLoad(
+              n2,
+              serializedIframeNode
+            );
+          }
         }
-      }
-    }, iframeLoadTimeout);
+      },
+      iframeLoadTimeout
+    );
   }
   if (serializedNode2.type === NodeType$2.Element && serializedNode2.tagName === "link" && typeof serializedNode2.attributes.rel === "string" && (serializedNode2.attributes.rel === "stylesheet" || serializedNode2.attributes.rel === "preload" && typeof serializedNode2.attributes.href === "string" && extractFileExtension(serializedNode2.attributes.href) === "css")) {
-    onceStylesheetLoaded(n2, () => {
-      if (onStylesheetLoad) {
-        const serializedLinkNode = serializeNodeWithId(n2, {
-          doc,
-          mirror: mirror2,
-          blockClass,
-          blockSelector,
-          unblockSelector,
-          maskAllText,
-          maskTextClass,
-          unmaskTextClass,
-          maskTextSelector,
-          unmaskTextSelector,
-          skipChild: false,
-          inlineStylesheet,
-          maskInputOptions,
-          maskAttributeFn,
-          maskTextFn,
-          maskInputFn,
-          slimDOMOptions,
-          dataURLOptions,
-          inlineImages,
-          recordCanvas,
-          preserveWhiteSpace,
-          onSerialize,
-          onIframeLoad,
-          iframeLoadTimeout,
-          onStylesheetLoad,
-          stylesheetLoadTimeout,
-          keepIframeSrcFn
-        });
-        if (serializedLinkNode) {
-          onStylesheetLoad(n2, serializedLinkNode);
+    onceStylesheetLoaded(
+      n2,
+      () => {
+        if (onStylesheetLoad) {
+          const serializedLinkNode = serializeNodeWithId(n2, {
+            doc,
+            mirror: mirror2,
+            blockClass,
+            blockSelector,
+            unblockSelector,
+            maskAllText,
+            maskTextClass,
+            unmaskTextClass,
+            maskTextSelector,
+            unmaskTextSelector,
+            skipChild: false,
+            inlineStylesheet,
+            maskInputOptions,
+            maskAttributeFn,
+            maskTextFn,
+            maskInputFn,
+            slimDOMOptions,
+            dataURLOptions,
+            inlineImages,
+            recordCanvas,
+            preserveWhiteSpace,
+            onSerialize,
+            onIframeLoad,
+            iframeLoadTimeout,
+            onStylesheetLoad,
+            stylesheetLoadTimeout,
+            keepIframeSrcFn
+          });
+          if (serializedLinkNode) {
+            onStylesheetLoad(
+              n2,
+              serializedLinkNode
+            );
+          }
         }
-      }
-    }, stylesheetLoadTimeout);
+      },
+      stylesheetLoadTimeout
+    );
   }
   return serializedNode2;
 }
@@ -20280,10 +20035,7 @@ function snapshot(n2, options) {
   });
 }
 function on(type, fn, target = document) {
-  const options = {
-    capture: true,
-    passive: true
-  };
+  const options = { capture: true, passive: true };
   target.addEventListener(type, fn, options);
   return () => target.removeEventListener(type, fn, options);
 }
@@ -20347,16 +20099,20 @@ function throttle$1(func, wait, options = {}) {
 }
 function hookSetter(target, key, d, isRevoked, win = window) {
   const original = win.Object.getOwnPropertyDescriptor(target, key);
-  win.Object.defineProperty(target, key, isRevoked ? d : {
-    set(value) {
-      setTimeout$1(() => {
-        d.set.call(this, value);
-      }, 0);
-      if (original && original.set) {
-        original.set.call(this, value);
+  win.Object.defineProperty(
+    target,
+    key,
+    isRevoked ? d : {
+      set(value) {
+        setTimeout$1(() => {
+          d.set.call(this, value);
+        }, 0);
+        if (original && original.set) {
+          original.set.call(this, value);
+        }
       }
     }
-  });
+  );
   return () => hookSetter(target, key, original || {}, true);
 }
 function patch(source, name, replacement) {
@@ -20432,7 +20188,10 @@ function isBlocked(node, blockClass, blockSelector, unblockSelector, checkAncest
     return false;
   }
   if (unblockSelector) {
-    unblockDistance = distanceToMatch(el, createMatchPredicate(null, unblockSelector));
+    unblockDistance = distanceToMatch(
+      el,
+      createMatchPredicate(null, unblockSelector)
+    );
   }
   if (blockDistance > -1 && unblockDistance < 0) {
     return true;
@@ -20490,7 +20249,9 @@ function isSerializedIframe(n2, mirror2) {
   return Boolean(n2.nodeName === "IFRAME" && mirror2.getMeta(n2));
 }
 function isSerializedStylesheet(n2, mirror2) {
-  return Boolean(n2.nodeName === "LINK" && n2.nodeType === n2.ELEMENT_NODE && n2.getAttribute && n2.getAttribute("rel") === "stylesheet" && mirror2.getMeta(n2));
+  return Boolean(
+    n2.nodeName === "LINK" && n2.nodeType === n2.ELEMENT_NODE && n2.getAttribute && n2.getAttribute("rel") === "stylesheet" && mirror2.getMeta(n2)
+  );
 }
 function hasShadowRoot(n2) {
   return Boolean(n2?.shadowRoot);
@@ -20534,13 +20295,15 @@ var StyleSheetMirror = class {
 };
 function getShadowHost(n2) {
   let shadowHost = null;
-  if (n2.getRootNode?.()?.nodeType === Node.DOCUMENT_FRAGMENT_NODE && n2.getRootNode().host) shadowHost = n2.getRootNode().host;
+  if (n2.getRootNode?.()?.nodeType === Node.DOCUMENT_FRAGMENT_NODE && n2.getRootNode().host)
+    shadowHost = n2.getRootNode().host;
   return shadowHost;
 }
 function getRootShadowHost(n2) {
   let rootShadowHost = n2;
   let shadowHost;
-  while (shadowHost = getShadowHost(rootShadowHost)) rootShadowHost = shadowHost;
+  while (shadowHost = getShadowHost(rootShadowHost))
+    rootShadowHost = shadowHost;
   return rootShadowHost;
 }
 function shadowHostInDom(n2) {
@@ -20576,7 +20339,9 @@ function getImplementation(name) {
     } catch (e2) {
     }
   }
-  return cachedImplementations2[name] = impl.bind(window);
+  return cachedImplementations2[name] = impl.bind(
+    window
+  );
 }
 function onRequestAnimationFrame(...rest) {
   return getImplementation("requestAnimationFrame")(...rest);
@@ -20803,18 +20568,32 @@ var MutationBuffer = class {
           recordCanvas: this.recordCanvas,
           inlineImages: this.inlineImages,
           onSerialize: (currentN) => {
-            if (isSerializedIframe(currentN, this.mirror) && !isBlocked(currentN, this.blockClass, this.blockSelector, this.unblockSelector, false)) {
+            if (isSerializedIframe(currentN, this.mirror) && !isBlocked(
+              currentN,
+              this.blockClass,
+              this.blockSelector,
+              this.unblockSelector,
+              false
+            )) {
               this.iframeManager.addIframe(currentN);
             }
             if (isSerializedStylesheet(currentN, this.mirror)) {
-              this.stylesheetManager.trackLinkElement(currentN);
+              this.stylesheetManager.trackLinkElement(
+                currentN
+              );
             }
             if (hasShadowRoot(n2)) {
               this.shadowDomManager.addShadowRoot(n2.shadowRoot, this.doc);
             }
           },
           onIframeLoad: (iframe, childSn) => {
-            if (isBlocked(iframe, this.blockClass, this.blockSelector, this.unblockSelector, false)) {
+            if (isBlocked(
+              iframe,
+              this.blockClass,
+              this.blockSelector,
+              this.unblockSelector,
+              false
+            )) {
               return;
             }
             this.iframeManager.attachIframe(iframe, childSn);
@@ -20906,9 +20685,7 @@ var MutationBuffer = class {
           value: text.value
         })).filter((text) => !addedIds.has(text.id)).filter((text) => this.mirror.has(text.id)),
         attributes: this.attributes.map((attribute) => {
-          const {
-            attributes
-          } = attribute;
+          const { attributes } = attribute;
           if (typeof attributes.style === "string") {
             const diffAsStr = JSON.stringify(attribute.styleDiff);
             const unchangedAsStr = JSON.stringify(attribute._unchangedStyles);
@@ -20946,9 +20723,22 @@ var MutationBuffer = class {
       switch (m.type) {
         case "characterData": {
           const value = m.target.textContent;
-          if (!isBlocked(m.target, this.blockClass, this.blockSelector, this.unblockSelector, false) && value !== m.oldValue) {
+          if (!isBlocked(
+            m.target,
+            this.blockClass,
+            this.blockSelector,
+            this.unblockSelector,
+            false
+          ) && value !== m.oldValue) {
             this.texts.push({
-              value: needMaskingText(m.target, this.maskTextClass, this.maskTextSelector, this.unmaskTextClass, this.unmaskTextSelector, this.maskAllText) && value ? this.maskTextFn ? this.maskTextFn(value, closestElementOfNode(m.target)) : value.replace(/[\S]/g, "*") : value,
+              value: needMaskingText(
+                m.target,
+                this.maskTextClass,
+                this.maskTextSelector,
+                this.unmaskTextClass,
+                this.unmaskTextSelector,
+                this.maskAllText
+              ) && value ? this.maskTextFn ? this.maskTextFn(value, closestElementOfNode(m.target)) : value.replace(/[\S]/g, "*") : value,
               node: m.target
             });
           }
@@ -20967,7 +20757,14 @@ var MutationBuffer = class {
               tagName,
               type
             });
-            const forceMask = needMaskingText(m.target, this.maskTextClass, this.maskTextSelector, this.unmaskTextClass, this.unmaskTextSelector, isInputMasked);
+            const forceMask = needMaskingText(
+              m.target,
+              this.maskTextClass,
+              this.maskTextSelector,
+              this.unmaskTextClass,
+              this.unmaskTextSelector,
+              isInputMasked
+            );
             value = maskInputValue({
               isMasked: forceMask,
               element: target,
@@ -20975,12 +20772,20 @@ var MutationBuffer = class {
               maskInputFn: this.maskInputFn
             });
           }
-          if (isBlocked(m.target, this.blockClass, this.blockSelector, this.unblockSelector, false) || value === m.oldValue) {
+          if (isBlocked(
+            m.target,
+            this.blockClass,
+            this.blockSelector,
+            this.unblockSelector,
+            false
+          ) || value === m.oldValue) {
             return;
           }
           let item = this.attributeMap.get(m.target);
           if (target.tagName === "IFRAME" && attributeName === "src" && !this.keepIframeSrcFn(value)) {
-            const iframeDoc = getIFrameContentDocument(target);
+            const iframeDoc = getIFrameContentDocument(
+              target
+            );
             if (!iframeDoc) {
               attributeName = "rr_src";
             } else {
@@ -21001,7 +20806,14 @@ var MutationBuffer = class {
             target.setAttribute("data-rr-is-password", "true");
           }
           if (!ignoreAttribute(target.tagName, attributeName)) {
-            item.attributes[attributeName] = transformAttribute(this.doc, toLowerCase(target.tagName), toLowerCase(attributeName), value, target, this.maskAttributeFn);
+            item.attributes[attributeName] = transformAttribute(
+              this.doc,
+              toLowerCase(target.tagName),
+              toLowerCase(attributeName),
+              value,
+              target,
+              this.maskAttributeFn
+            );
             if (attributeName === "style") {
               if (!this.unattachedDoc) {
                 try {
@@ -21037,14 +20849,26 @@ var MutationBuffer = class {
           break;
         }
         case "childList": {
-          if (isBlocked(m.target, this.blockClass, this.blockSelector, this.unblockSelector, true)) {
+          if (isBlocked(
+            m.target,
+            this.blockClass,
+            this.blockSelector,
+            this.unblockSelector,
+            true
+          )) {
             return;
           }
           m.addedNodes.forEach((n2) => this.genAdds(n2, m.target));
           m.removedNodes.forEach((n2) => {
             const nodeId = this.mirror.getId(n2);
             const parentId = isShadowRoot(m.target) ? this.mirror.getId(m.target.host) : this.mirror.getId(m.target);
-            if (isBlocked(m.target, this.blockClass, this.blockSelector, this.unblockSelector, false) || isIgnored(n2, this.mirror) || !isSerialized(n2, this.mirror)) {
+            if (isBlocked(
+              m.target,
+              this.blockClass,
+              this.blockSelector,
+              this.unblockSelector,
+              false
+            ) || isIgnored(n2, this.mirror) || !isSerialized(n2, this.mirror)) {
               return;
             }
             if (this.addedSet.has(n2)) {
@@ -21086,7 +20910,13 @@ var MutationBuffer = class {
         this.addedSet.add(n2);
         this.droppedSet.delete(n2);
       }
-      if (!isBlocked(n2, this.blockClass, this.blockSelector, this.unblockSelector, false)) {
+      if (!isBlocked(
+        n2,
+        this.blockClass,
+        this.blockSelector,
+        this.unblockSelector,
+        false
+      )) {
         n2.childNodes.forEach((childN) => this.genAdds(childN));
         if (hasShadowRoot(n2)) {
           n2.shadowRoot.childNodes.forEach((childN) => {
@@ -21098,7 +20928,34 @@ var MutationBuffer = class {
     };
   }
   init(options) {
-    ["mutationCb", "blockClass", "blockSelector", "unblockSelector", "maskAllText", "maskTextClass", "unmaskTextClass", "maskTextSelector", "unmaskTextSelector", "inlineStylesheet", "maskInputOptions", "maskAttributeFn", "maskTextFn", "maskInputFn", "keepIframeSrcFn", "recordCanvas", "inlineImages", "slimDOMOptions", "dataURLOptions", "doc", "mirror", "iframeManager", "stylesheetManager", "shadowDomManager", "canvasManager", "processedNodeManager"].forEach((key) => {
+    [
+      "mutationCb",
+      "blockClass",
+      "blockSelector",
+      "unblockSelector",
+      "maskAllText",
+      "maskTextClass",
+      "unmaskTextClass",
+      "maskTextSelector",
+      "unmaskTextSelector",
+      "inlineStylesheet",
+      "maskInputOptions",
+      "maskAttributeFn",
+      "maskTextFn",
+      "maskInputFn",
+      "keepIframeSrcFn",
+      "recordCanvas",
+      "inlineImages",
+      "slimDOMOptions",
+      "dataURLOptions",
+      "doc",
+      "mirror",
+      "iframeManager",
+      "stylesheetManager",
+      "shadowDomManager",
+      "canvasManager",
+      "processedNodeManager"
+    ].forEach((key) => {
       this[key] = options[key];
     });
   }
@@ -21152,9 +21009,7 @@ function isAncestorInSet(set2, n2) {
   return _isAncestorInSet(set2, n2);
 }
 function _isAncestorInSet(set2, n2) {
-  const {
-    parentNode
-  } = n2;
+  const { parentNode } = n2;
   if (!parentNode) {
     return false;
   }
@@ -21219,12 +21074,14 @@ function initMutationObserver(options, rootEl) {
   if (angularZoneSymbol && window[angularZoneSymbol]) {
     mutationObserverCtor = window[angularZoneSymbol];
   }
-  const observer = new mutationObserverCtor(callbackWrapper((mutations) => {
-    if (options.onMutation && options.onMutation(mutations) === false) {
-      return;
-    }
-    mutationBuffer.processMutations.bind(mutationBuffer)(mutations);
-  }));
+  const observer = new mutationObserverCtor(
+    callbackWrapper((mutations) => {
+      if (options.onMutation && options.onMutation(mutations) === false) {
+        return;
+      }
+      mutationBuffer.processMutations.bind(mutationBuffer)(mutations);
+    })
+  );
   observer.observe(rootEl, {
     attributes: true,
     attributeOldValue: true,
@@ -21249,35 +21106,52 @@ function initMoveObserver({
   const callbackThreshold = typeof sampling.mousemoveCallback === "number" ? sampling.mousemoveCallback : 500;
   let positions = [];
   let timeBaseline;
-  const wrappedCb = throttle$1(callbackWrapper((source) => {
-    const totalOffset = Date.now() - timeBaseline;
-    mousemoveCb(positions.map((p) => {
-      p.timeOffset -= totalOffset;
-      return p;
-    }), source);
-    positions = [];
-    timeBaseline = null;
-  }), callbackThreshold);
-  const updatePosition = callbackWrapper(throttle$1(callbackWrapper((evt) => {
-    const target = getEventTarget2(evt);
-    const {
-      clientX,
-      clientY
-    } = legacy_isTouchEvent(evt) ? evt.changedTouches[0] : evt;
-    if (!timeBaseline) {
-      timeBaseline = nowTimestamp();
-    }
-    positions.push({
-      x: clientX,
-      y: clientY,
-      id: mirror2.getId(target),
-      timeOffset: nowTimestamp() - timeBaseline
-    });
-    wrappedCb(typeof DragEvent !== "undefined" && evt instanceof DragEvent ? IncrementalSource.Drag : evt instanceof MouseEvent ? IncrementalSource.MouseMove : IncrementalSource.TouchMove);
-  }), threshold, {
-    trailing: false
-  }));
-  const handlers4 = [on("mousemove", updatePosition, doc), on("touchmove", updatePosition, doc), on("drag", updatePosition, doc)];
+  const wrappedCb = throttle$1(
+    callbackWrapper(
+      (source) => {
+        const totalOffset = Date.now() - timeBaseline;
+        mousemoveCb(
+          positions.map((p) => {
+            p.timeOffset -= totalOffset;
+            return p;
+          }),
+          source
+        );
+        positions = [];
+        timeBaseline = null;
+      }
+    ),
+    callbackThreshold
+  );
+  const updatePosition = callbackWrapper(
+    throttle$1(
+      callbackWrapper((evt) => {
+        const target = getEventTarget2(evt);
+        const { clientX, clientY } = legacy_isTouchEvent(evt) ? evt.changedTouches[0] : evt;
+        if (!timeBaseline) {
+          timeBaseline = nowTimestamp();
+        }
+        positions.push({
+          x: clientX,
+          y: clientY,
+          id: mirror2.getId(target),
+          timeOffset: nowTimestamp() - timeBaseline
+        });
+        wrappedCb(
+          typeof DragEvent !== "undefined" && evt instanceof DragEvent ? IncrementalSource.Drag : evt instanceof MouseEvent ? IncrementalSource.MouseMove : IncrementalSource.TouchMove
+        );
+      }),
+      threshold,
+      {
+        trailing: false
+      }
+    )
+  );
+  const handlers4 = [
+    on("mousemove", updatePosition, doc),
+    on("touchmove", updatePosition, doc),
+    on("drag", updatePosition, doc)
+  ];
   return callbackWrapper(() => {
     handlers4.forEach((h) => h());
   });
@@ -21342,28 +21216,28 @@ function initMouseInteractionObserver({
         return;
       }
       const id = mirror2.getId(target);
-      const {
-        clientX,
-        clientY
-      } = e2;
+      const { clientX, clientY } = e2;
       callbackWrapper(mouseInteractionCb)(__spreadValues({
         type: MouseInteractions[thisEventKey],
         id,
         x: clientX,
         y: clientY
-      }, pointerType !== null && {
-        pointerType
-      }));
+      }, pointerType !== null && { pointerType }));
     };
   };
-  Object.keys(MouseInteractions).filter((key) => Number.isNaN(Number(key)) && !key.endsWith("_Departed") && disableMap[key] !== false).forEach((eventKey) => {
+  Object.keys(MouseInteractions).filter(
+    (key) => Number.isNaN(Number(key)) && !key.endsWith("_Departed") && disableMap[key] !== false
+  ).forEach((eventKey) => {
     let eventName = toLowerCase(eventKey);
     const handler = getHandler(eventKey);
     if (window.PointerEvent) {
       switch (MouseInteractions[eventKey]) {
         case MouseInteractions.MouseDown:
         case MouseInteractions.MouseUp:
-          eventName = eventName.replace("mouse", "pointer");
+          eventName = eventName.replace(
+            "mouse",
+            "pointer"
+          );
           break;
         case MouseInteractions.TouchStart:
         case MouseInteractions.TouchEnd:
@@ -21385,48 +21259,60 @@ function initScrollObserver({
   unblockSelector,
   sampling
 }) {
-  const updatePosition = callbackWrapper(throttle$1(callbackWrapper((evt) => {
-    const target = getEventTarget2(evt);
-    if (!target || isBlocked(target, blockClass, blockSelector, unblockSelector, true)) {
-      return;
-    }
-    const id = mirror2.getId(target);
-    if (target === doc && doc.defaultView) {
-      const scrollLeftTop = getWindowScroll(doc.defaultView);
-      scrollCb({
-        id,
-        x: scrollLeftTop.left,
-        y: scrollLeftTop.top
-      });
-    } else {
-      scrollCb({
-        id,
-        x: target.scrollLeft,
-        y: target.scrollTop
-      });
-    }
-  }), sampling.scroll || 100));
+  const updatePosition = callbackWrapper(
+    throttle$1(
+      callbackWrapper((evt) => {
+        const target = getEventTarget2(evt);
+        if (!target || isBlocked(
+          target,
+          blockClass,
+          blockSelector,
+          unblockSelector,
+          true
+        )) {
+          return;
+        }
+        const id = mirror2.getId(target);
+        if (target === doc && doc.defaultView) {
+          const scrollLeftTop = getWindowScroll(doc.defaultView);
+          scrollCb({
+            id,
+            x: scrollLeftTop.left,
+            y: scrollLeftTop.top
+          });
+        } else {
+          scrollCb({
+            id,
+            x: target.scrollLeft,
+            y: target.scrollTop
+          });
+        }
+      }),
+      sampling.scroll || 100
+    )
+  );
   return on("scroll", updatePosition, doc);
 }
-function initViewportResizeObserver({
-  viewportResizeCb
-}, {
-  win
-}) {
+function initViewportResizeObserver({ viewportResizeCb }, { win }) {
   let lastH = -1;
   let lastW = -1;
-  const updateDimension = callbackWrapper(throttle$1(callbackWrapper(() => {
-    const height = getWindowHeight();
-    const width = getWindowWidth();
-    if (lastH !== height || lastW !== width) {
-      viewportResizeCb({
-        width: Number(width),
-        height: Number(height)
-      });
-      lastH = height;
-      lastW = width;
-    }
-  }), 200));
+  const updateDimension = callbackWrapper(
+    throttle$1(
+      callbackWrapper(() => {
+        const height = getWindowHeight();
+        const width = getWindowWidth();
+        if (lastH !== height || lastW !== width) {
+          viewportResizeCb({
+            width: Number(width),
+            height: Number(height)
+          });
+          lastH = height;
+          lastW = width;
+        }
+      }),
+      200
+    )
+  );
   return on("resize", updateDimension, win);
 }
 var INPUT_TAGS = ["INPUT", "TEXTAREA", "SELECT"];
@@ -21454,7 +21340,13 @@ function initInputObserver({
     const userTriggered = event.isTrusted;
     const tagName = target && toUpperCase(target.tagName);
     if (tagName === "OPTION") target = target.parentElement;
-    if (!target || !tagName || INPUT_TAGS.indexOf(tagName) < 0 || isBlocked(target, blockClass, blockSelector, unblockSelector, true)) {
+    if (!target || !tagName || INPUT_TAGS.indexOf(tagName) < 0 || isBlocked(
+      target,
+      blockClass,
+      blockSelector,
+      unblockSelector,
+      true
+    )) {
       return;
     }
     const el = target;
@@ -21469,7 +21361,14 @@ function initInputObserver({
       tagName,
       type
     });
-    const forceMask = needMaskingText(target, maskTextClass, maskTextSelector, unmaskTextClass, unmaskTextSelector, isInputMasked);
+    const forceMask = needMaskingText(
+      target,
+      maskTextClass,
+      maskTextSelector,
+      unmaskTextClass,
+      unmaskTextSelector,
+      isInputMasked
+    );
     if (type === "radio" || type === "checkbox") {
       isChecked = target.checked;
     }
@@ -21479,14 +21378,10 @@ function initInputObserver({
       value: text,
       maskInputFn
     });
-    cbWithDedup(target, userTriggeredOnInput ? {
-      text,
-      isChecked,
-      userTriggered
-    } : {
-      text,
-      isChecked
-    });
+    cbWithDedup(
+      target,
+      userTriggeredOnInput ? { text, isChecked, userTriggered } : { text, isChecked }
+    );
     const name = target.name;
     if (type === "radio" && name && isChecked) {
       doc.querySelectorAll(`input[type="radio"][name="${name}"]`).forEach((el2) => {
@@ -21498,14 +21393,10 @@ function initInputObserver({
             value: getInputValue(el2, tagName, type),
             maskInputFn
           });
-          cbWithDedup(el2, userTriggeredOnInput ? {
-            text: text2,
-            isChecked: !isChecked,
-            userTriggered: false
-          } : {
-            text: text2,
-            isChecked: !isChecked
-          });
+          cbWithDedup(
+            el2,
+            userTriggeredOnInput ? { text: text2, isChecked: !isChecked, userTriggered: false } : { text: text2, isChecked: !isChecked }
+          );
         }
       });
     }
@@ -21521,14 +21412,19 @@ function initInputObserver({
     }
   }
   const events = sampling.input === "last" ? ["change"] : ["input", "change"];
-  const handlers4 = events.map((eventName) => on(eventName, callbackWrapper(eventHandler), doc));
+  const handlers4 = events.map(
+    (eventName) => on(eventName, callbackWrapper(eventHandler), doc)
+  );
   const currentWindow = doc.defaultView;
   if (!currentWindow) {
     return () => {
       handlers4.forEach((h) => h());
     };
   }
-  const propertyDescriptor = currentWindow.Object.getOwnPropertyDescriptor(currentWindow.HTMLInputElement.prototype, "value");
+  const propertyDescriptor = currentWindow.Object.getOwnPropertyDescriptor(
+    currentWindow.HTMLInputElement.prototype,
+    "value"
+  );
   const hookProperties = [
     [currentWindow.HTMLInputElement.prototype, "value"],
     [currentWindow.HTMLInputElement.prototype, "checked"],
@@ -21539,15 +21435,25 @@ function initInputObserver({
     [currentWindow.HTMLOptionElement.prototype, "selected"]
   ];
   if (propertyDescriptor && propertyDescriptor.set) {
-    handlers4.push(...hookProperties.map((p) => hookSetter(p[0], p[1], {
-      set() {
-        callbackWrapper(eventHandler)({
-          target: this,
-          isTrusted: false
-          // userTriggered to false as this could well be programmatic
-        });
-      }
-    }, false, currentWindow)));
+    handlers4.push(
+      ...hookProperties.map(
+        (p) => hookSetter(
+          p[0],
+          p[1],
+          {
+            set() {
+              callbackWrapper(eventHandler)({
+                target: this,
+                isTrusted: false
+                // userTriggered to false as this could well be programmatic
+              });
+            }
+          },
+          false,
+          currentWindow
+        )
+      )
+    );
   }
   return callbackWrapper(() => {
     handlers4.forEach((h) => h());
@@ -21557,7 +21463,9 @@ function getNestedCSSRulePositions(rule) {
   const positions = [];
   function recurse(childRule, pos) {
     if (hasNestedCSSRule("CSSGroupingRule") && childRule.parentRule instanceof CSSGroupingRule || hasNestedCSSRule("CSSMediaRule") && childRule.parentRule instanceof CSSMediaRule || hasNestedCSSRule("CSSSupportsRule") && childRule.parentRule instanceof CSSSupportsRule || hasNestedCSSRule("CSSConditionRule") && childRule.parentRule instanceof CSSConditionRule) {
-      const rules2 = Array.from(childRule.parentRule.cssRules);
+      const rules2 = Array.from(
+        childRule.parentRule.cssRules
+      );
       const index = rules2.indexOf(childRule);
       pos.unshift(index);
     } else if (childRule.parentStyleSheet) {
@@ -21579,98 +21487,99 @@ function getIdAndStyleId(sheet, mirror2, styleMirror) {
     id
   };
 }
-function initStyleSheetObserver({
-  styleSheetRuleCb,
-  mirror: mirror2,
-  stylesheetManager
-}, {
-  win
-}) {
+function initStyleSheetObserver({ styleSheetRuleCb, mirror: mirror2, stylesheetManager }, { win }) {
   if (!win.CSSStyleSheet || !win.CSSStyleSheet.prototype) {
     return () => {
     };
   }
   const insertRule = win.CSSStyleSheet.prototype.insertRule;
   win.CSSStyleSheet.prototype.insertRule = new Proxy(insertRule, {
-    apply: callbackWrapper((target, thisArg, argumentsList) => {
-      const [rule, index] = argumentsList;
-      const {
-        id,
-        styleId
-      } = getIdAndStyleId(thisArg, mirror2, stylesheetManager.styleMirror);
-      if (id && id !== -1 || styleId && styleId !== -1) {
-        styleSheetRuleCb({
-          id,
-          styleId,
-          adds: [{
-            rule,
-            index
-          }]
-        });
+    apply: callbackWrapper(
+      (target, thisArg, argumentsList) => {
+        const [rule, index] = argumentsList;
+        const { id, styleId } = getIdAndStyleId(
+          thisArg,
+          mirror2,
+          stylesheetManager.styleMirror
+        );
+        if (id && id !== -1 || styleId && styleId !== -1) {
+          styleSheetRuleCb({
+            id,
+            styleId,
+            adds: [{ rule, index }]
+          });
+        }
+        return target.apply(thisArg, argumentsList);
       }
-      return target.apply(thisArg, argumentsList);
-    })
+    )
   });
   const deleteRule = win.CSSStyleSheet.prototype.deleteRule;
   win.CSSStyleSheet.prototype.deleteRule = new Proxy(deleteRule, {
-    apply: callbackWrapper((target, thisArg, argumentsList) => {
-      const [index] = argumentsList;
-      const {
-        id,
-        styleId
-      } = getIdAndStyleId(thisArg, mirror2, stylesheetManager.styleMirror);
-      if (id && id !== -1 || styleId && styleId !== -1) {
-        styleSheetRuleCb({
-          id,
-          styleId,
-          removes: [{
-            index
-          }]
-        });
+    apply: callbackWrapper(
+      (target, thisArg, argumentsList) => {
+        const [index] = argumentsList;
+        const { id, styleId } = getIdAndStyleId(
+          thisArg,
+          mirror2,
+          stylesheetManager.styleMirror
+        );
+        if (id && id !== -1 || styleId && styleId !== -1) {
+          styleSheetRuleCb({
+            id,
+            styleId,
+            removes: [{ index }]
+          });
+        }
+        return target.apply(thisArg, argumentsList);
       }
-      return target.apply(thisArg, argumentsList);
-    })
+    )
   });
   let replace;
   if (win.CSSStyleSheet.prototype.replace) {
     replace = win.CSSStyleSheet.prototype.replace;
     win.CSSStyleSheet.prototype.replace = new Proxy(replace, {
-      apply: callbackWrapper((target, thisArg, argumentsList) => {
-        const [text] = argumentsList;
-        const {
-          id,
-          styleId
-        } = getIdAndStyleId(thisArg, mirror2, stylesheetManager.styleMirror);
-        if (id && id !== -1 || styleId && styleId !== -1) {
-          styleSheetRuleCb({
-            id,
-            styleId,
-            replace: text
-          });
+      apply: callbackWrapper(
+        (target, thisArg, argumentsList) => {
+          const [text] = argumentsList;
+          const { id, styleId } = getIdAndStyleId(
+            thisArg,
+            mirror2,
+            stylesheetManager.styleMirror
+          );
+          if (id && id !== -1 || styleId && styleId !== -1) {
+            styleSheetRuleCb({
+              id,
+              styleId,
+              replace: text
+            });
+          }
+          return target.apply(thisArg, argumentsList);
         }
-        return target.apply(thisArg, argumentsList);
-      })
+      )
     });
   }
   let replaceSync;
   if (win.CSSStyleSheet.prototype.replaceSync) {
     replaceSync = win.CSSStyleSheet.prototype.replaceSync;
     win.CSSStyleSheet.prototype.replaceSync = new Proxy(replaceSync, {
-      apply: callbackWrapper((target, thisArg, argumentsList) => {
-        const [text] = argumentsList;
-        const {
-          id,
-          styleId
-        } = getIdAndStyleId(thisArg, mirror2, stylesheetManager.styleMirror);
-        if (id && id !== -1 || styleId && styleId !== -1) {
-          styleSheetRuleCb({
-            id,
-            styleId,
-            replaceSync: text
-          });
+      apply: callbackWrapper(
+        (target, thisArg, argumentsList) => {
+          const [text] = argumentsList;
+          const { id, styleId } = getIdAndStyleId(
+            thisArg,
+            mirror2,
+            stylesheetManager.styleMirror
+          );
+          if (id && id !== -1 || styleId && styleId !== -1) {
+            styleSheetRuleCb({
+              id,
+              styleId,
+              replaceSync: text
+            });
+          }
+          return target.apply(thisArg, argumentsList);
         }
-        return target.apply(thisArg, argumentsList);
-      })
+      )
     });
   }
   const supportedNestedCSSRuleTypes = {};
@@ -21695,49 +21604,63 @@ function initStyleSheetObserver({
       // eslint-disable-next-line @typescript-eslint/unbound-method
       deleteRule: type.prototype.deleteRule
     };
-    type.prototype.insertRule = new Proxy(unmodifiedFunctions[typeKey].insertRule, {
-      apply: callbackWrapper((target, thisArg, argumentsList) => {
-        const [rule, index] = argumentsList;
-        const {
-          id,
-          styleId
-        } = getIdAndStyleId(thisArg.parentStyleSheet, mirror2, stylesheetManager.styleMirror);
-        if (id && id !== -1 || styleId && styleId !== -1) {
-          styleSheetRuleCb({
-            id,
-            styleId,
-            adds: [{
-              rule,
-              index: [
-                ...getNestedCSSRulePositions(thisArg),
-                index || 0
-                // defaults to 0
-              ]
-            }]
-          });
-        }
-        return target.apply(thisArg, argumentsList);
-      })
-    });
-    type.prototype.deleteRule = new Proxy(unmodifiedFunctions[typeKey].deleteRule, {
-      apply: callbackWrapper((target, thisArg, argumentsList) => {
-        const [index] = argumentsList;
-        const {
-          id,
-          styleId
-        } = getIdAndStyleId(thisArg.parentStyleSheet, mirror2, stylesheetManager.styleMirror);
-        if (id && id !== -1 || styleId && styleId !== -1) {
-          styleSheetRuleCb({
-            id,
-            styleId,
-            removes: [{
-              index: [...getNestedCSSRulePositions(thisArg), index]
-            }]
-          });
-        }
-        return target.apply(thisArg, argumentsList);
-      })
-    });
+    type.prototype.insertRule = new Proxy(
+      unmodifiedFunctions[typeKey].insertRule,
+      {
+        apply: callbackWrapper(
+          (target, thisArg, argumentsList) => {
+            const [rule, index] = argumentsList;
+            const { id, styleId } = getIdAndStyleId(
+              thisArg.parentStyleSheet,
+              mirror2,
+              stylesheetManager.styleMirror
+            );
+            if (id && id !== -1 || styleId && styleId !== -1) {
+              styleSheetRuleCb({
+                id,
+                styleId,
+                adds: [
+                  {
+                    rule,
+                    index: [
+                      ...getNestedCSSRulePositions(thisArg),
+                      index || 0
+                      // defaults to 0
+                    ]
+                  }
+                ]
+              });
+            }
+            return target.apply(thisArg, argumentsList);
+          }
+        )
+      }
+    );
+    type.prototype.deleteRule = new Proxy(
+      unmodifiedFunctions[typeKey].deleteRule,
+      {
+        apply: callbackWrapper(
+          (target, thisArg, argumentsList) => {
+            const [index] = argumentsList;
+            const { id, styleId } = getIdAndStyleId(
+              thisArg.parentStyleSheet,
+              mirror2,
+              stylesheetManager.styleMirror
+            );
+            if (id && id !== -1 || styleId && styleId !== -1) {
+              styleSheetRuleCb({
+                id,
+                styleId,
+                removes: [
+                  { index: [...getNestedCSSRulePositions(thisArg), index] }
+                ]
+              });
+            }
+            return target.apply(thisArg, argumentsList);
+          }
+        )
+      }
+    );
   });
   return callbackWrapper(() => {
     win.CSSStyleSheet.prototype.insertRule = insertRule;
@@ -21758,9 +21681,13 @@ function initAdoptedStyleSheetObserver({
   if (host.nodeName === "#document") hostId = mirror2.getId(host);
   else hostId = mirror2.getId(host.host);
   const patchTarget = host.nodeName === "#document" ? host.defaultView?.Document : host.ownerDocument?.defaultView?.ShadowRoot;
-  const originalPropertyDescriptor = patchTarget?.prototype ? Object.getOwnPropertyDescriptor(patchTarget?.prototype, "adoptedStyleSheets") : void 0;
-  if (hostId === null || hostId === -1 || !patchTarget || !originalPropertyDescriptor) return () => {
-  };
+  const originalPropertyDescriptor = patchTarget?.prototype ? Object.getOwnPropertyDescriptor(
+    patchTarget?.prototype,
+    "adoptedStyleSheets"
+  ) : void 0;
+  if (hostId === null || hostId === -1 || !patchTarget || !originalPropertyDescriptor)
+    return () => {
+    };
   Object.defineProperty(host, "adoptedStyleSheets", {
     configurable: originalPropertyDescriptor.configurable,
     enumerable: originalPropertyDescriptor.enumerable,
@@ -21794,60 +21721,64 @@ function initStyleDeclarationObserver({
   mirror: mirror2,
   ignoreCSSAttributes,
   stylesheetManager
-}, {
-  win
-}) {
+}, { win }) {
   const setProperty = win.CSSStyleDeclaration.prototype.setProperty;
   win.CSSStyleDeclaration.prototype.setProperty = new Proxy(setProperty, {
-    apply: callbackWrapper((target, thisArg, argumentsList) => {
-      const [property, value, priority] = argumentsList;
-      if (ignoreCSSAttributes.has(property)) {
-        return setProperty.apply(thisArg, [property, value, priority]);
+    apply: callbackWrapper(
+      (target, thisArg, argumentsList) => {
+        const [property, value, priority] = argumentsList;
+        if (ignoreCSSAttributes.has(property)) {
+          return setProperty.apply(thisArg, [property, value, priority]);
+        }
+        const { id, styleId } = getIdAndStyleId(
+          thisArg.parentRule?.parentStyleSheet,
+          mirror2,
+          stylesheetManager.styleMirror
+        );
+        if (id && id !== -1 || styleId && styleId !== -1) {
+          styleDeclarationCb({
+            id,
+            styleId,
+            set: {
+              property,
+              value,
+              priority
+            },
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            index: getNestedCSSRulePositions(thisArg.parentRule)
+          });
+        }
+        return target.apply(thisArg, argumentsList);
       }
-      const {
-        id,
-        styleId
-      } = getIdAndStyleId(thisArg.parentRule?.parentStyleSheet, mirror2, stylesheetManager.styleMirror);
-      if (id && id !== -1 || styleId && styleId !== -1) {
-        styleDeclarationCb({
-          id,
-          styleId,
-          set: {
-            property,
-            value,
-            priority
-          },
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          index: getNestedCSSRulePositions(thisArg.parentRule)
-        });
-      }
-      return target.apply(thisArg, argumentsList);
-    })
+    )
   });
   const removeProperty = win.CSSStyleDeclaration.prototype.removeProperty;
   win.CSSStyleDeclaration.prototype.removeProperty = new Proxy(removeProperty, {
-    apply: callbackWrapper((target, thisArg, argumentsList) => {
-      const [property] = argumentsList;
-      if (ignoreCSSAttributes.has(property)) {
-        return removeProperty.apply(thisArg, [property]);
+    apply: callbackWrapper(
+      (target, thisArg, argumentsList) => {
+        const [property] = argumentsList;
+        if (ignoreCSSAttributes.has(property)) {
+          return removeProperty.apply(thisArg, [property]);
+        }
+        const { id, styleId } = getIdAndStyleId(
+          thisArg.parentRule?.parentStyleSheet,
+          mirror2,
+          stylesheetManager.styleMirror
+        );
+        if (id && id !== -1 || styleId && styleId !== -1) {
+          styleDeclarationCb({
+            id,
+            styleId,
+            remove: {
+              property
+            },
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            index: getNestedCSSRulePositions(thisArg.parentRule)
+          });
+        }
+        return target.apply(thisArg, argumentsList);
       }
-      const {
-        id,
-        styleId
-      } = getIdAndStyleId(thisArg.parentRule?.parentStyleSheet, mirror2, stylesheetManager.styleMirror);
-      if (id && id !== -1 || styleId && styleId !== -1) {
-        styleDeclarationCb({
-          id,
-          styleId,
-          remove: {
-            property
-          },
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          index: getNestedCSSRulePositions(thisArg.parentRule)
-        });
-      }
-      return target.apply(thisArg, argumentsList);
-    })
+    )
   });
   return callbackWrapper(() => {
     win.CSSStyleDeclaration.prototype.setProperty = setProperty;
@@ -21863,35 +21794,44 @@ function initMediaInteractionObserver({
   sampling,
   doc
 }) {
-  const handler = callbackWrapper((type) => throttle$1(callbackWrapper((event) => {
-    const target = getEventTarget2(event);
-    if (!target || isBlocked(target, blockClass, blockSelector, unblockSelector, true)) {
-      return;
-    }
-    const {
-      currentTime,
-      volume,
-      muted,
-      playbackRate
-    } = target;
-    mediaInteractionCb({
-      type,
-      id: mirror2.getId(target),
-      currentTime,
-      volume,
-      muted,
-      playbackRate
-    });
-  }), sampling.media || 500));
-  const handlers4 = [on("play", handler(MediaInteractions.Play), doc), on("pause", handler(MediaInteractions.Pause), doc), on("seeked", handler(MediaInteractions.Seeked), doc), on("volumechange", handler(MediaInteractions.VolumeChange), doc), on("ratechange", handler(MediaInteractions.RateChange), doc)];
+  const handler = callbackWrapper(
+    (type) => throttle$1(
+      callbackWrapper((event) => {
+        const target = getEventTarget2(event);
+        if (!target || isBlocked(
+          target,
+          blockClass,
+          blockSelector,
+          unblockSelector,
+          true
+        )) {
+          return;
+        }
+        const { currentTime, volume, muted, playbackRate } = target;
+        mediaInteractionCb({
+          type,
+          id: mirror2.getId(target),
+          currentTime,
+          volume,
+          muted,
+          playbackRate
+        });
+      }),
+      sampling.media || 500
+    )
+  );
+  const handlers4 = [
+    on("play", handler(MediaInteractions.Play), doc),
+    on("pause", handler(MediaInteractions.Pause), doc),
+    on("seeked", handler(MediaInteractions.Seeked), doc),
+    on("volumechange", handler(MediaInteractions.VolumeChange), doc),
+    on("ratechange", handler(MediaInteractions.RateChange), doc)
+  ];
   return callbackWrapper(() => {
     handlers4.forEach((h) => h());
   });
 }
-function initFontObserver({
-  fontCb,
-  doc
-}) {
+function initFontObserver({ fontCb, doc }) {
   const win = doc.defaultView;
   if (!win) {
     return () => {
@@ -21910,18 +21850,25 @@ function initFontObserver({
     });
     return fontFace;
   };
-  const restoreHandler = patch(doc.fonts, "add", function(original) {
-    return function(fontFace) {
-      setTimeout$1(callbackWrapper(() => {
-        const p = fontMap.get(fontFace);
-        if (p) {
-          fontCb(p);
-          fontMap.delete(fontFace);
-        }
-      }), 0);
-      return original.apply(this, [fontFace]);
-    };
-  });
+  const restoreHandler = patch(
+    doc.fonts,
+    "add",
+    function(original) {
+      return function(fontFace) {
+        setTimeout$1(
+          callbackWrapper(() => {
+            const p = fontMap.get(fontFace);
+            if (p) {
+              fontCb(p);
+              fontMap.delete(fontFace);
+            }
+          }),
+          0
+        );
+        return original.apply(this, [fontFace]);
+      };
+    }
+  );
   handlers4.push(() => {
     win.FontFace = originalFontFace;
   });
@@ -21948,13 +21895,20 @@ function initSelectionObserver(param) {
     const count = selection.rangeCount || 0;
     for (let i2 = 0; i2 < count; i2++) {
       const range = selection.getRangeAt(i2);
-      const {
+      const { startContainer, startOffset, endContainer, endOffset } = range;
+      const blocked = isBlocked(
         startContainer,
-        startOffset,
+        blockClass,
+        blockSelector,
+        unblockSelector,
+        true
+      ) || isBlocked(
         endContainer,
-        endOffset
-      } = range;
-      const blocked = isBlocked(startContainer, blockClass, blockSelector, unblockSelector, true) || isBlocked(endContainer, blockClass, blockSelector, unblockSelector, true);
+        blockClass,
+        blockSelector,
+        unblockSelector,
+        true
+      );
       if (blocked) continue;
       ranges.push({
         start: mirror2.getId(startContainer),
@@ -21963,9 +21917,7 @@ function initSelectionObserver(param) {
         endOffset
       });
     }
-    selectionCb({
-      ranges
-    });
+    selectionCb({ ranges });
   });
   updateSelection();
   return on("selectionchange", updateSelection);
@@ -21977,19 +21929,23 @@ function initCustomElementObserver({
   const win = doc.defaultView;
   if (!win || !win.customElements) return () => {
   };
-  const restoreHandler = patch(win.customElements, "define", function(original) {
-    return function(name, constructor, options) {
-      try {
-        customElementCb({
-          define: {
-            name
-          }
-        });
-      } catch (e2) {
-      }
-      return original.apply(this, [name, constructor, options]);
-    };
-  });
+  const restoreHandler = patch(
+    win.customElements,
+    "define",
+    function(original) {
+      return function(name, constructor, options) {
+        try {
+          customElementCb({
+            define: {
+              name
+            }
+          });
+        } catch (e2) {
+        }
+        return original.apply(this, [name, constructor, options]);
+      };
+    }
+  );
   return restoreHandler;
 }
 function initObservers(o2, _hooks = {}) {
@@ -22019,9 +21975,7 @@ function initObservers(o2, _hooks = {}) {
   let fontObserver = () => {
   };
   if (o2.recordDOM) {
-    styleSheetObserver = initStyleSheetObserver(o2, {
-      win: currentWindow
-    });
+    styleSheetObserver = initStyleSheetObserver(o2, { win: currentWindow });
     adoptedStyleSheetObserver = initAdoptedStyleSheetObserver(o2, o2.doc);
     styleDeclarationObserver = initStyleDeclarationObserver(o2, {
       win: currentWindow
@@ -22034,7 +21988,9 @@ function initObservers(o2, _hooks = {}) {
   const customElementObserver = initCustomElementObserver(o2);
   const pluginHandlers = [];
   for (const plugin of o2.plugins) {
-    pluginHandlers.push(plugin.observer(plugin.callback, currentWindow, plugin.options));
+    pluginHandlers.push(
+      plugin.observer(plugin.callback, currentWindow, plugin.options)
+    );
   }
   return callbackWrapper(() => {
     mutationBuffers.forEach((b) => b.reset());
@@ -22058,9 +22014,11 @@ function hasNestedCSSRule(prop) {
   return typeof window[prop] !== "undefined";
 }
 function canMonkeyPatchNestedCSSRule(prop) {
-  return Boolean(typeof window[prop] !== "undefined" && // Note: Generally, this check _shouldn't_ be necessary
-  // However, in some scenarios (e.g. jsdom) this can sometimes fail, so we check for it here
-  window[prop].prototype && "insertRule" in window[prop].prototype && "deleteRule" in window[prop].prototype);
+  return Boolean(
+    typeof window[prop] !== "undefined" && // Note: Generally, this check _shouldn't_ be necessary
+    // However, in some scenarios (e.g. jsdom) this can sometimes fail, so we check for it here
+    window[prop].prototype && "insertRule" in window[prop].prototype && "deleteRule" in window[prop].prototype
+  );
 }
 var CrossOriginIframeMirror = class {
   constructor(generateIdFn) {
@@ -22082,7 +22040,9 @@ var CrossOriginIframeMirror = class {
   getIds(iframe, remoteId) {
     const idToRemoteIdMap = this.getIdToRemoteIdMap(iframe);
     const remoteIdToIdMap = this.getRemoteIdToIdMap(iframe);
-    return remoteId.map((id) => this.getId(iframe, id, idToRemoteIdMap, remoteIdToIdMap));
+    return remoteId.map(
+      (id) => this.getId(iframe, id, idToRemoteIdMap, remoteIdToIdMap)
+    );
   }
   getRemoteId(iframe, id, map2) {
     const remoteIdToIdMap = map2 || this.getRemoteIdToIdMap(iframe);
@@ -22143,7 +22103,11 @@ var IframeManager = class {
     this.wrappedEmit = options.wrappedEmit;
     this.stylesheetManager = options.stylesheetManager;
     this.recordCrossOriginIframes = options.recordCrossOriginIframes;
-    this.crossOriginIframeStyleMirror = new CrossOriginIframeMirror(this.stylesheetManager.styleMirror.generateId.bind(this.stylesheetManager.styleMirror));
+    this.crossOriginIframeStyleMirror = new CrossOriginIframeMirror(
+      this.stylesheetManager.styleMirror.generateId.bind(
+        this.stylesheetManager.styleMirror
+      )
+    );
     this.mirror = options.mirror;
     if (this.recordCrossOriginIframes) {
       window.addEventListener("message", this.handleMessage.bind(this));
@@ -22151,38 +22115,57 @@ var IframeManager = class {
   }
   addIframe(iframeEl) {
     this.iframes.set(iframeEl, true);
-    if (iframeEl.contentWindow) this.crossOriginIframeMap.set(iframeEl.contentWindow, iframeEl);
+    if (iframeEl.contentWindow)
+      this.crossOriginIframeMap.set(iframeEl.contentWindow, iframeEl);
   }
   addLoadListener(cb) {
     this.loadListener = cb;
   }
   attachIframe(iframeEl, childSn) {
     this.mutationCb({
-      adds: [{
-        parentId: this.mirror.getId(iframeEl),
-        nextId: null,
-        node: childSn
-      }],
+      adds: [
+        {
+          parentId: this.mirror.getId(iframeEl),
+          nextId: null,
+          node: childSn
+        }
+      ],
       removes: [],
       texts: [],
       attributes: [],
       isAttachIframe: true
     });
-    if (this.recordCrossOriginIframes) iframeEl.contentWindow?.addEventListener("message", this.handleMessage.bind(this));
+    if (this.recordCrossOriginIframes)
+      iframeEl.contentWindow?.addEventListener(
+        "message",
+        this.handleMessage.bind(this)
+      );
     this.loadListener?.(iframeEl);
     const iframeDoc = getIFrameContentDocument(iframeEl);
-    if (iframeDoc && iframeDoc.adoptedStyleSheets && iframeDoc.adoptedStyleSheets.length > 0) this.stylesheetManager.adoptStyleSheets(iframeDoc.adoptedStyleSheets, this.mirror.getId(iframeDoc));
+    if (iframeDoc && iframeDoc.adoptedStyleSheets && iframeDoc.adoptedStyleSheets.length > 0)
+      this.stylesheetManager.adoptStyleSheets(
+        iframeDoc.adoptedStyleSheets,
+        this.mirror.getId(iframeDoc)
+      );
   }
   handleMessage(message) {
     const crossOriginMessageEvent = message;
     if (crossOriginMessageEvent.data.type !== "rrweb" || // To filter out the rrweb messages which are forwarded by some sites.
-    crossOriginMessageEvent.origin !== crossOriginMessageEvent.data.origin) return;
+    crossOriginMessageEvent.origin !== crossOriginMessageEvent.data.origin)
+      return;
     const iframeSourceWindow = message.source;
     if (!iframeSourceWindow) return;
     const iframeEl = this.crossOriginIframeMap.get(message.source);
     if (!iframeEl) return;
-    const transformedEvent = this.transformCrossOriginEvent(iframeEl, crossOriginMessageEvent.data.event);
-    if (transformedEvent) this.wrappedEmit(transformedEvent, crossOriginMessageEvent.data.isCheckout);
+    const transformedEvent = this.transformCrossOriginEvent(
+      iframeEl,
+      crossOriginMessageEvent.data.event
+    );
+    if (transformedEvent)
+      this.wrappedEmit(
+        transformedEvent,
+        crossOriginMessageEvent.data.isCheckout
+      );
   }
   transformCrossOriginEvent(iframeEl, e2) {
     switch (e2.type) {
@@ -22198,11 +22181,13 @@ var IframeManager = class {
           type: EventType.IncrementalSnapshot,
           data: {
             source: IncrementalSource.Mutation,
-            adds: [{
-              parentId: this.mirror.getId(iframeEl),
-              nextId: null,
-              node: e2.data.node
-            }],
+            adds: [
+              {
+                parentId: this.mirror.getId(iframeEl),
+                nextId: null,
+                node: e2.data.node
+              }
+            ],
             removes: [],
             texts: [],
             attributes: [],
@@ -22219,14 +22204,22 @@ var IframeManager = class {
         return e2;
       }
       case EventType.Custom: {
-        this.replaceIds(e2.data.payload, iframeEl, ["id", "parentId", "previousId", "nextId"]);
+        this.replaceIds(
+          e2.data.payload,
+          iframeEl,
+          ["id", "parentId", "previousId", "nextId"]
+        );
         return e2;
       }
       case EventType.IncrementalSnapshot: {
         switch (e2.data.source) {
           case IncrementalSource.Mutation: {
             e2.data.adds.forEach((n2) => {
-              this.replaceIds(n2, iframeEl, ["parentId", "nextId", "previousId"]);
+              this.replaceIds(n2, iframeEl, [
+                "parentId",
+                "nextId",
+                "previousId"
+              ]);
               this.replaceIdOnNode(n2.node, iframeEl);
               const rootId = this.crossOriginIframeRootIdMap.get(iframeEl);
               rootId && this.patchRootIdOnNode(n2.node, rootId);
@@ -22293,7 +22286,10 @@ var IframeManager = class {
     for (const key of keys) {
       if (!Array.isArray(obj[key]) && typeof obj[key] !== "number") continue;
       if (Array.isArray(obj[key])) {
-        obj[key] = iframeMirror.getIds(iframeEl, obj[key]);
+        obj[key] = iframeMirror.getIds(
+          iframeEl,
+          obj[key]
+        );
       } else {
         obj[key] = iframeMirror.getId(iframeEl, obj[key]);
       }
@@ -22352,26 +22348,40 @@ var ShadowDomManager = class {
     if (this.shadowDoms.has(shadowRoot)) return;
     this.shadowDoms.add(shadowRoot);
     this.bypassOptions.canvasManager.addShadowRoot(shadowRoot);
-    const observer = initMutationObserver(__spreadProps(__spreadValues({}, this.bypassOptions), {
-      doc,
-      mutationCb: this.mutationCb,
-      mirror: this.mirror,
-      shadowDomManager: this
-    }), shadowRoot);
-    this.restoreHandlers.push(() => observer.disconnect());
-    this.restoreHandlers.push(initScrollObserver(__spreadProps(__spreadValues({}, this.bypassOptions), {
-      scrollCb: this.scrollCb,
-      // https://gist.github.com/praveenpuglia/0832da687ed5a5d7a0907046c9ef1813
-      // scroll is not allowed to pass the boundary, so we need to listen the shadow document
-      doc: shadowRoot,
-      mirror: this.mirror
-    })));
-    setTimeout$1(() => {
-      if (shadowRoot.adoptedStyleSheets && shadowRoot.adoptedStyleSheets.length > 0) this.bypassOptions.stylesheetManager.adoptStyleSheets(shadowRoot.adoptedStyleSheets, this.mirror.getId(shadowRoot.host));
-      this.restoreHandlers.push(initAdoptedStyleSheetObserver({
+    const observer = initMutationObserver(
+      __spreadProps(__spreadValues({}, this.bypassOptions), {
+        doc,
+        mutationCb: this.mutationCb,
         mirror: this.mirror,
-        stylesheetManager: this.bypassOptions.stylesheetManager
-      }, shadowRoot));
+        shadowDomManager: this
+      }),
+      shadowRoot
+    );
+    this.restoreHandlers.push(() => observer.disconnect());
+    this.restoreHandlers.push(
+      initScrollObserver(__spreadProps(__spreadValues({}, this.bypassOptions), {
+        scrollCb: this.scrollCb,
+        // https://gist.github.com/praveenpuglia/0832da687ed5a5d7a0907046c9ef1813
+        // scroll is not allowed to pass the boundary, so we need to listen the shadow document
+        doc: shadowRoot,
+        mirror: this.mirror
+      }))
+    );
+    setTimeout$1(() => {
+      if (shadowRoot.adoptedStyleSheets && shadowRoot.adoptedStyleSheets.length > 0)
+        this.bypassOptions.stylesheetManager.adoptStyleSheets(
+          shadowRoot.adoptedStyleSheets,
+          this.mirror.getId(shadowRoot.host)
+        );
+      this.restoreHandlers.push(
+        initAdoptedStyleSheetObserver(
+          {
+            mirror: this.mirror,
+            stylesheetManager: this.bypassOptions.stylesheetManager
+          },
+          shadowRoot
+        )
+      );
     }, 0);
   }
   /**
@@ -22381,20 +22391,30 @@ var ShadowDomManager = class {
     const iframeDoc = getIFrameContentDocument(iframeElement);
     const iframeWindow = getIFrameContentWindow(iframeElement);
     if (!iframeDoc || !iframeWindow) return;
-    this.patchAttachShadow(iframeWindow.Element, iframeDoc);
+    this.patchAttachShadow(
+      iframeWindow.Element,
+      iframeDoc
+    );
   }
   /**
    * Patch 'attachShadow' to observe newly added shadow doms.
    */
   patchAttachShadow(element, doc) {
     const manager = this;
-    this.restoreHandlers.push(patch(element.prototype, "attachShadow", function(original) {
-      return function(option) {
-        const shadowRoot = original.call(this, option);
-        if (this.shadowRoot && inDom(this)) manager.addShadowRoot(this.shadowRoot, doc);
-        return shadowRoot;
-      };
-    }));
+    this.restoreHandlers.push(
+      patch(
+        element.prototype,
+        "attachShadow",
+        function(original) {
+          return function(option) {
+            const shadowRoot = original.call(this, option);
+            if (this.shadowRoot && inDom(this))
+              manager.addShadowRoot(this.shadowRoot, doc);
+            return shadowRoot;
+          };
+        }
+      )
+    );
   }
   reset() {
     this.restoreHandlers.forEach((handler) => {
@@ -22442,15 +22462,18 @@ var StylesheetManager = class {
     this.adoptedStyleSheetCb = options.adoptedStyleSheetCb;
   }
   attachLinkElement(linkEl, childSn) {
-    if ("_cssText" in childSn.attributes) this.mutationCb({
-      adds: [],
-      removes: [],
-      texts: [],
-      attributes: [{
-        id: childSn.id,
-        attributes: childSn.attributes
-      }]
-    });
+    if ("_cssText" in childSn.attributes)
+      this.mutationCb({
+        adds: [],
+        removes: [],
+        texts: [],
+        attributes: [
+          {
+            id: childSn.id,
+            attributes: childSn.attributes
+          }
+        ]
+      });
     this.trackLinkElement(linkEl);
   }
   trackLinkElement(linkEl) {
@@ -22707,31 +22730,35 @@ function record(options = {}) {
     wrappedEmit
   });
   for (const plugin of plugins || []) {
-    if (plugin.getMirror) plugin.getMirror({
-      nodeMirror: mirror,
-      crossOriginIframeMirror: iframeManager.crossOriginIframeMirror,
-      crossOriginIframeStyleMirror: iframeManager.crossOriginIframeStyleMirror
-    });
+    if (plugin.getMirror)
+      plugin.getMirror({
+        nodeMirror: mirror,
+        crossOriginIframeMirror: iframeManager.crossOriginIframeMirror,
+        crossOriginIframeStyleMirror: iframeManager.crossOriginIframeStyleMirror
+      });
   }
   const processedNodeManager = new ProcessedNodeManager();
-  const canvasManager = _getCanvasManager(getCanvasManager, {
-    mirror,
-    win: window,
-    mutationCb: (p) => wrappedEmit({
-      type: EventType.IncrementalSnapshot,
-      data: __spreadValues({
-        source: IncrementalSource.CanvasMutation
-      }, p)
-    }),
-    recordCanvas,
-    blockClass,
-    blockSelector,
-    unblockSelector,
-    maxCanvasSize,
-    sampling: sampling["canvas"],
-    dataURLOptions,
-    errorHandler: errorHandler2
-  });
+  const canvasManager = _getCanvasManager(
+    getCanvasManager,
+    {
+      mirror,
+      win: window,
+      mutationCb: (p) => wrappedEmit({
+        type: EventType.IncrementalSnapshot,
+        data: __spreadValues({
+          source: IncrementalSource.CanvasMutation
+        }, p)
+      }),
+      recordCanvas,
+      blockClass,
+      blockSelector,
+      unblockSelector,
+      maxCanvasSize,
+      sampling: sampling["canvas"],
+      dataURLOptions,
+      errorHandler: errorHandler2
+    }
+  );
   const shadowDomManager = typeof __RRWEB_EXCLUDE_SHADOW_DOM__ === "boolean" && __RRWEB_EXCLUDE_SHADOW_DOM__ ? new ShadowDomManagerNoop() : new ShadowDomManager({
     mutationCb: wrappedMutationEmit,
     scrollCb: wrappedScrollEmit,
@@ -22767,14 +22794,17 @@ function record(options = {}) {
     if (!recordDOM) {
       return;
     }
-    wrappedEmit({
-      type: EventType.Meta,
-      data: {
-        href: window.location.href,
-        width: getWindowWidth(),
-        height: getWindowHeight()
-      }
-    }, isCheckout);
+    wrappedEmit(
+      {
+        type: EventType.Meta,
+        data: {
+          href: window.location.href,
+          width: getWindowWidth(),
+          height: getWindowHeight()
+        }
+      },
+      isCheckout
+    );
     stylesheetManager.reset();
     shadowDomManager.init();
     mutationBuffers.forEach((buf) => buf.lock());
@@ -22831,126 +22861,133 @@ function record(options = {}) {
       }
     });
     mutationBuffers.forEach((buf) => buf.unlock());
-    if (document.adoptedStyleSheets && document.adoptedStyleSheets.length > 0) stylesheetManager.adoptStyleSheets(document.adoptedStyleSheets, mirror.getId(document));
+    if (document.adoptedStyleSheets && document.adoptedStyleSheets.length > 0)
+      stylesheetManager.adoptStyleSheets(
+        document.adoptedStyleSheets,
+        mirror.getId(document)
+      );
   };
   _takeFullSnapshot = takeFullSnapshot2;
   try {
     const handlers4 = [];
     const observe2 = (doc) => {
-      return callbackWrapper(initObservers)({
-        onMutation,
-        mutationCb: wrappedMutationEmit,
-        mousemoveCb: (positions, source) => wrappedEmit({
-          type: EventType.IncrementalSnapshot,
-          data: {
-            source,
-            positions
-          }
-        }),
-        mouseInteractionCb: (d) => wrappedEmit({
-          type: EventType.IncrementalSnapshot,
-          data: __spreadValues({
-            source: IncrementalSource.MouseInteraction
-          }, d)
-        }),
-        scrollCb: wrappedScrollEmit,
-        viewportResizeCb: (d) => wrappedEmit({
-          type: EventType.IncrementalSnapshot,
-          data: __spreadValues({
-            source: IncrementalSource.ViewportResize
-          }, d)
-        }),
-        inputCb: (v2) => wrappedEmit({
-          type: EventType.IncrementalSnapshot,
-          data: __spreadValues({
-            source: IncrementalSource.Input
-          }, v2)
-        }),
-        mediaInteractionCb: (p) => wrappedEmit({
-          type: EventType.IncrementalSnapshot,
-          data: __spreadValues({
-            source: IncrementalSource.MediaInteraction
-          }, p)
-        }),
-        styleSheetRuleCb: (r2) => wrappedEmit({
-          type: EventType.IncrementalSnapshot,
-          data: __spreadValues({
-            source: IncrementalSource.StyleSheetRule
-          }, r2)
-        }),
-        styleDeclarationCb: (r2) => wrappedEmit({
-          type: EventType.IncrementalSnapshot,
-          data: __spreadValues({
-            source: IncrementalSource.StyleDeclaration
-          }, r2)
-        }),
-        canvasMutationCb: wrappedCanvasMutationEmit,
-        fontCb: (p) => wrappedEmit({
-          type: EventType.IncrementalSnapshot,
-          data: __spreadValues({
-            source: IncrementalSource.Font
-          }, p)
-        }),
-        selectionCb: (p) => {
-          wrappedEmit({
+      return callbackWrapper(initObservers)(
+        {
+          onMutation,
+          mutationCb: wrappedMutationEmit,
+          mousemoveCb: (positions, source) => wrappedEmit({
             type: EventType.IncrementalSnapshot,
-            data: __spreadValues({
-              source: IncrementalSource.Selection
-            }, p)
-          });
-        },
-        customElementCb: (c2) => {
-          wrappedEmit({
-            type: EventType.IncrementalSnapshot,
-            data: __spreadValues({
-              source: IncrementalSource.CustomElement
-            }, c2)
-          });
-        },
-        blockClass,
-        ignoreClass,
-        ignoreSelector,
-        maskAllText,
-        maskTextClass,
-        unmaskTextClass,
-        maskTextSelector,
-        unmaskTextSelector,
-        maskInputOptions,
-        inlineStylesheet,
-        sampling,
-        recordDOM,
-        recordCanvas,
-        inlineImages,
-        userTriggeredOnInput,
-        collectFonts,
-        doc,
-        maskAttributeFn,
-        maskInputFn,
-        maskTextFn,
-        keepIframeSrcFn,
-        blockSelector,
-        unblockSelector,
-        slimDOMOptions,
-        dataURLOptions,
-        mirror,
-        iframeManager,
-        stylesheetManager,
-        shadowDomManager,
-        processedNodeManager,
-        canvasManager,
-        ignoreCSSAttributes,
-        plugins: plugins?.filter((p) => p.observer)?.map((p) => ({
-          observer: p.observer,
-          options: p.options,
-          callback: (payload) => wrappedEmit({
-            type: EventType.Plugin,
             data: {
-              plugin: p.name,
-              payload
+              source,
+              positions
             }
-          })
-        })) || []
-      }, {});
+          }),
+          mouseInteractionCb: (d) => wrappedEmit({
+            type: EventType.IncrementalSnapshot,
+            data: __spreadValues({
+              source: IncrementalSource.MouseInteraction
+            }, d)
+          }),
+          scrollCb: wrappedScrollEmit,
+          viewportResizeCb: (d) => wrappedEmit({
+            type: EventType.IncrementalSnapshot,
+            data: __spreadValues({
+              source: IncrementalSource.ViewportResize
+            }, d)
+          }),
+          inputCb: (v2) => wrappedEmit({
+            type: EventType.IncrementalSnapshot,
+            data: __spreadValues({
+              source: IncrementalSource.Input
+            }, v2)
+          }),
+          mediaInteractionCb: (p) => wrappedEmit({
+            type: EventType.IncrementalSnapshot,
+            data: __spreadValues({
+              source: IncrementalSource.MediaInteraction
+            }, p)
+          }),
+          styleSheetRuleCb: (r2) => wrappedEmit({
+            type: EventType.IncrementalSnapshot,
+            data: __spreadValues({
+              source: IncrementalSource.StyleSheetRule
+            }, r2)
+          }),
+          styleDeclarationCb: (r2) => wrappedEmit({
+            type: EventType.IncrementalSnapshot,
+            data: __spreadValues({
+              source: IncrementalSource.StyleDeclaration
+            }, r2)
+          }),
+          canvasMutationCb: wrappedCanvasMutationEmit,
+          fontCb: (p) => wrappedEmit({
+            type: EventType.IncrementalSnapshot,
+            data: __spreadValues({
+              source: IncrementalSource.Font
+            }, p)
+          }),
+          selectionCb: (p) => {
+            wrappedEmit({
+              type: EventType.IncrementalSnapshot,
+              data: __spreadValues({
+                source: IncrementalSource.Selection
+              }, p)
+            });
+          },
+          customElementCb: (c2) => {
+            wrappedEmit({
+              type: EventType.IncrementalSnapshot,
+              data: __spreadValues({
+                source: IncrementalSource.CustomElement
+              }, c2)
+            });
+          },
+          blockClass,
+          ignoreClass,
+          ignoreSelector,
+          maskAllText,
+          maskTextClass,
+          unmaskTextClass,
+          maskTextSelector,
+          unmaskTextSelector,
+          maskInputOptions,
+          inlineStylesheet,
+          sampling,
+          recordDOM,
+          recordCanvas,
+          inlineImages,
+          userTriggeredOnInput,
+          collectFonts,
+          doc,
+          maskAttributeFn,
+          maskInputFn,
+          maskTextFn,
+          keepIframeSrcFn,
+          blockSelector,
+          unblockSelector,
+          slimDOMOptions,
+          dataURLOptions,
+          mirror,
+          iframeManager,
+          stylesheetManager,
+          shadowDomManager,
+          processedNodeManager,
+          canvasManager,
+          ignoreCSSAttributes,
+          plugins: plugins?.filter((p) => p.observer)?.map((p) => ({
+            observer: p.observer,
+            options: p.options,
+            callback: (payload) => wrappedEmit({
+              type: EventType.Plugin,
+              data: {
+                plugin: p.name,
+                payload
+              }
+            })
+          })) || []
+        },
+        {}
+      );
     };
     iframeManager.addLoadListener((iframeEl) => {
       try {
@@ -22966,20 +23003,28 @@ function record(options = {}) {
     if (document.readyState === "interactive" || document.readyState === "complete") {
       init3();
     } else {
-      handlers4.push(on("DOMContentLoaded", () => {
-        wrappedEmit({
-          type: EventType.DomContentLoaded,
-          data: {}
-        });
-        if (recordAfter === "DOMContentLoaded") init3();
-      }));
-      handlers4.push(on("load", () => {
-        wrappedEmit({
-          type: EventType.Load,
-          data: {}
-        });
-        if (recordAfter === "load") init3();
-      }, window));
+      handlers4.push(
+        on("DOMContentLoaded", () => {
+          wrappedEmit({
+            type: EventType.DomContentLoaded,
+            data: {}
+          });
+          if (recordAfter === "DOMContentLoaded") init3();
+        })
+      );
+      handlers4.push(
+        on(
+          "load",
+          () => {
+            wrappedEmit({
+              type: EventType.Load,
+              data: {}
+            });
+            if (recordAfter === "load") init3();
+          },
+          window
+        )
+      );
     }
     return () => {
       handlers4.forEach((h) => h());
@@ -23093,7 +23138,15 @@ function monkeyPatchWindowOpen() {
     };
   });
 }
-var IncrementalMutationSources = /* @__PURE__ */ new Set([IncrementalSource.Mutation, IncrementalSource.StyleSheetRule, IncrementalSource.StyleDeclaration, IncrementalSource.AdoptedStyleSheet, IncrementalSource.CanvasMutation, IncrementalSource.Selection, IncrementalSource.MediaInteraction]);
+var IncrementalMutationSources = /* @__PURE__ */ new Set([
+  IncrementalSource.Mutation,
+  IncrementalSource.StyleSheetRule,
+  IncrementalSource.StyleDeclaration,
+  IncrementalSource.AdoptedStyleSheet,
+  IncrementalSource.CanvasMutation,
+  IncrementalSource.Selection,
+  IncrementalSource.MediaInteraction
+]);
 function handleClick(clickDetector, clickBreadcrumb, node) {
   clickDetector.handleClick(clickBreadcrumb, node);
 }
@@ -23206,10 +23259,7 @@ var ClickDetector = class {
     const hadScroll = click.scrollAfter && click.scrollAfter <= this._scrollTimeout;
     const hadMutation = click.mutationAfter && click.mutationAfter <= this._threshold;
     const isSlowClick = !hadScroll && !hadMutation;
-    const {
-      clickCount,
-      clickBreadcrumb
-    } = click;
+    const { clickCount, clickBreadcrumb } = click;
     if (isSlowClick) {
       const timeAfterClickMs = Math.min(click.mutationAfter || this._timeout, this._timeout) * 1e3;
       const endReason = timeAfterClickMs < this._timeout * 1e3 ? "mutation" : "timeout";
@@ -23282,9 +23332,7 @@ function updateClickDetectorForRecordingEvent(clickDetector, event) {
     if (!isIncrementalEvent(event)) {
       return;
     }
-    const {
-      source
-    } = event.data;
+    const { source } = event.data;
     if (IncrementalMutationSources.has(source)) {
       clickDetector.registerMutation(event.timestamp);
     }
@@ -23292,10 +23340,7 @@ function updateClickDetectorForRecordingEvent(clickDetector, event) {
       clickDetector.registerScroll(event.timestamp);
     }
     if (isIncrementalMouseInteraction(event)) {
-      const {
-        type,
-        id
-      } = event.data;
+      const { type, id } = event.data;
       const node = record.mirror.getNode(id);
       if (node instanceof HTMLElement && type === MouseInteractions.Click) {
         clickDetector.registerClick(node);
@@ -23325,7 +23370,20 @@ var NodeType = /* @__PURE__ */ ((NodeType2) => {
   NodeType2[NodeType2["Comment"] = 5] = "Comment";
   return NodeType2;
 })(NodeType || {});
-var ATTRIBUTES_TO_RECORD = /* @__PURE__ */ new Set(["id", "class", "aria-label", "role", "name", "alt", "title", "data-test-id", "data-testid", "disabled", "aria-disabled", "data-sentry-component"]);
+var ATTRIBUTES_TO_RECORD = /* @__PURE__ */ new Set([
+  "id",
+  "class",
+  "aria-label",
+  "role",
+  "name",
+  "alt",
+  "title",
+  "data-test-id",
+  "data-testid",
+  "disabled",
+  "aria-disabled",
+  "data-sentry-component"
+]);
 function getAttributesToRecord(attributes) {
   const obj = {};
   if (!attributes["data-sentry-component"] && attributes["data-sentry-element"]) {
@@ -23354,7 +23412,11 @@ var handleDomListener = (replay) => {
     const isClick = handlerData.name === "click";
     const event = isClick ? handlerData.event : void 0;
     if (isClick && replay.clickDetector && event && event.target && !event.altKey && !event.metaKey && !event.ctrlKey && !event.shiftKey) {
-      handleClick(replay.clickDetector, result, getClickTargetNode(handlerData.event));
+      handleClick(
+        replay.clickDetector,
+        result,
+        getClickTargetNode(handlerData.event)
+      );
     }
     addBreadcrumbEvent(replay, result);
   };
@@ -23378,10 +23440,7 @@ function getBaseDomBreadcrumb(target, message) {
   };
 }
 function handleDom(handlerData) {
-  const {
-    target,
-    message
-  } = getDomTarget(handlerData);
+  const { target, message } = getDomTarget(handlerData);
   return createBreadcrumb(__spreadValues({
     category: `ui.${handlerData.name}`
   }, getBaseDomBreadcrumb(target, message)));
@@ -23392,16 +23451,11 @@ function getDomTarget(handlerData) {
   let target = null;
   try {
     target = isClick ? getClickTargetNode(handlerData.event) : getTargetNode(handlerData.event);
-    message = htmlTreeAsString(target, {
-      maxStringLength: 200
-    }) || "<unknown>";
+    message = htmlTreeAsString(target, { maxStringLength: 200 }) || "<unknown>";
   } catch (e2) {
     message = "<unknown>";
   }
-  return {
-    target,
-    message
-  };
+  return { target, message };
 }
 function isElement2(node) {
   return node.type === NodeType.Element;
@@ -23418,14 +23472,7 @@ function handleKeyboardEvent(replay, event) {
   addBreadcrumbEvent(replay, breadcrumb);
 }
 function getKeyboardBreadcrumb(event) {
-  const {
-    metaKey,
-    shiftKey,
-    ctrlKey,
-    altKey,
-    key,
-    target
-  } = event;
+  const { metaKey, shiftKey, ctrlKey, altKey, key, target } = event;
   if (!target || isInputElement(target) || !key) {
     return null;
   }
@@ -23434,9 +23481,7 @@ function getKeyboardBreadcrumb(event) {
   if (!hasModifierKey && isCharacterKey) {
     return null;
   }
-  const message = htmlTreeAsString(target, {
-    maxStringLength: 200
-  }) || "<unknown>";
+  const message = htmlTreeAsString(target, { maxStringLength: 200 }) || "<unknown>";
   const baseBreadcrumb = getBaseDomBreadcrumb(target, message);
   return createBreadcrumb({
     category: "ui.keyDown",
@@ -23461,9 +23506,7 @@ var ENTRY_TYPES = {
   navigation: createNavigationEntry
 };
 function webVitalHandler(getter, replay) {
-  return ({
-    metric
-  }) => void replay.replayPerformanceEntries.push(getter(metric));
+  return ({ metric }) => void replay.replayPerformanceEntries.push(getter(metric));
 }
 function createPerformanceEntries(entries) {
   return entries.map(createPerformanceEntry).filter(Boolean);
@@ -23479,12 +23522,7 @@ function getAbsoluteTime(time) {
   return ((browserPerformanceTimeOrigin() || WINDOW5.performance.timeOrigin) + time) / 1e3;
 }
 function createPaintEntry(entry) {
-  const {
-    duration,
-    entryType,
-    name,
-    startTime
-  } = entry;
+  const { duration, entryType, name, startTime } = entry;
   const start = getAbsoluteTime(startTime);
   return {
     type: entryType,
@@ -23586,10 +23624,7 @@ function getCumulativeLayoutShift(metric) {
           }
         }
       }
-      layoutShifts.push({
-        value: entry.value,
-        nodeIds: nodeIds.length ? nodeIds : void 0
-      });
+      layoutShifts.push({ value: entry.value, nodeIds: nodeIds.length ? nodeIds : void 0 });
     }
   }
   return getWebVital(metric, "cumulative-layout-shift", nodes, layoutShifts);
@@ -23628,16 +23663,19 @@ function setupPerformanceObserver(replay) {
       replay.performanceEntries.push(entry);
     }
   }
-  function onEntries({
-    entries
-  }) {
+  function onEntries({ entries }) {
     entries.forEach(addPerformanceEntry);
   }
   const clearCallbacks = [];
   ["navigation", "paint", "resource"].forEach((type) => {
     clearCallbacks.push(addPerformanceInstrumentationHandler(type, onEntries));
   });
-  clearCallbacks.push(addLcpInstrumentationHandler(webVitalHandler(getLargestContentfulPaint, replay)), addClsInstrumentationHandler(webVitalHandler(getCumulativeLayoutShift, replay)), addFidInstrumentationHandler(webVitalHandler(getFirstInputDelay, replay)), addInpInstrumentationHandler(webVitalHandler(getInteractionToNextPaint, replay)));
+  clearCallbacks.push(
+    addLcpInstrumentationHandler(webVitalHandler(getLargestContentfulPaint, replay)),
+    addClsInstrumentationHandler(webVitalHandler(getCumulativeLayoutShift, replay)),
+    addFidInstrumentationHandler(webVitalHandler(getFirstInputDelay, replay)),
+    addInpInstrumentationHandler(webVitalHandler(getInteractionToNextPaint, replay))
+  );
   return () => {
     clearCallbacks.forEach((clearCallback) => clearCallback());
   };
@@ -23651,16 +23689,17 @@ function e() {
 var CONSOLE_LEVELS2 = ["info", "warn", "error", "log"];
 var PREFIX2 = "[Replay] ";
 function _addBreadcrumb(message, level = "info") {
-  addBreadcrumb({
-    category: "console",
-    data: {
-      logger: "replay"
+  addBreadcrumb(
+    {
+      category: "console",
+      data: {
+        logger: "replay"
+      },
+      level,
+      message: `${PREFIX2}${message}`
     },
-    level,
-    message: `${PREFIX2}${message}`
-  }, {
-    level
-  });
+    { level }
+  );
 }
 function makeReplayLogger() {
   let _capture = false;
@@ -23782,22 +23821,24 @@ var WorkerHandler = class {
       return this._ensureReadyPromise;
     }
     this._ensureReadyPromise = new Promise((resolve, reject) => {
-      this._worker.addEventListener("message", ({
-        data
-      }) => {
-        if (data.success) {
-          resolve();
-        } else {
-          reject();
-        }
-      }, {
-        once: true
-      });
-      this._worker.addEventListener("error", (error) => {
-        reject(error);
-      }, {
-        once: true
-      });
+      this._worker.addEventListener(
+        "message",
+        ({ data }) => {
+          if (data.success) {
+            resolve();
+          } else {
+            reject();
+          }
+        },
+        { once: true }
+      );
+      this._worker.addEventListener(
+        "error",
+        (error) => {
+          reject(error);
+        },
+        { once: true }
+      );
     });
     return this._ensureReadyPromise;
   }
@@ -23814,9 +23855,7 @@ var WorkerHandler = class {
   postMessage(method, arg) {
     const id = this._getAndIncrementId();
     return new Promise((resolve, reject) => {
-      const listener = ({
-        data
-      }) => {
+      const listener = ({ data }) => {
         const response = data;
         if (response.method !== method) {
           return;
@@ -23833,11 +23872,7 @@ var WorkerHandler = class {
         resolve(response.response);
       };
       this._worker.addEventListener("message", listener);
-      this._worker.postMessage({
-        id,
-        method,
-        arg
-      });
+      this._worker.postMessage({ id, method, arg });
     });
   }
   /** Get the current ID and increment it for the next call. */
@@ -24009,11 +24044,7 @@ var EventBufferProxy = class {
   /** Switch the used buffer to the compression worker. */
   _switchToCompressionWorker() {
     return __async(this, null, function* () {
-      const {
-        events,
-        hasCheckout,
-        waitForCheckout
-      } = this._fallback;
+      const { events, hasCheckout, waitForCheckout } = this._fallback;
       const addEventPromises = [];
       for (const event of events) {
         addEventPromises.push(this._compression.addEvent(event));
@@ -24118,13 +24149,7 @@ function makeSession2(session) {
 function getSessionSampleType(sessionSampleRate, allowBuffering) {
   return isSampled(sessionSampleRate) ? "session" : allowBuffering ? "buffer" : false;
 }
-function createSession({
-  sessionSampleRate,
-  allowBuffering,
-  stickySession = false
-}, {
-  previousSessionId
-} = {}) {
+function createSession({ sessionSampleRate, allowBuffering, stickySession = false }, { previousSessionId } = {}) {
   const sampled = getSessionSampleType(sessionSampleRate, allowBuffering);
   const session = makeSession2({
     sampled,
@@ -24172,14 +24197,8 @@ function isSessionExpired(session, {
     isExpired(session.lastActivity, sessionIdleExpire, targetTime)
   );
 }
-function shouldRefreshSession(session, {
-  sessionIdleExpire,
-  maxReplayDuration
-}) {
-  if (!isSessionExpired(session, {
-    sessionIdleExpire,
-    maxReplayDuration
-  })) {
+function shouldRefreshSession(session, { sessionIdleExpire, maxReplayDuration }) {
+  if (!isSessionExpired(session, { sessionIdleExpire, maxReplayDuration })) {
     return false;
   }
   if (session.sampled === "buffer" && session.segmentId === 0) {
@@ -24195,20 +24214,13 @@ function loadOrCreateSession({
   const existingSession = sessionOptions.stickySession && fetchSession();
   if (!existingSession) {
     DEBUG_BUILD4 && logger2.infoTick("Creating new session");
-    return createSession(sessionOptions, {
-      previousSessionId
-    });
+    return createSession(sessionOptions, { previousSessionId });
   }
-  if (!shouldRefreshSession(existingSession, {
-    sessionIdleExpire,
-    maxReplayDuration
-  })) {
+  if (!shouldRefreshSession(existingSession, { sessionIdleExpire, maxReplayDuration })) {
     return existingSession;
   }
   DEBUG_BUILD4 && logger2.infoTick("Session in sessionStorage is expired, creating new one...");
-  return createSession(sessionOptions, {
-    previousSessionId: existingSession.id
-  });
+  return createSession(sessionOptions, { previousSessionId: existingSession.id });
 }
 function isCustomEvent(event) {
   return event.type === EventType.Custom;
@@ -24228,9 +24240,7 @@ function addEvent(replay, event, isCheckout) {
 }
 function _addEvent(replay, event, isCheckout) {
   return __async(this, null, function* () {
-    const {
-      eventBuffer
-    } = replay;
+    const { eventBuffer } = replay;
     if (!eventBuffer || eventBuffer.waitForCheckout && !isCheckout) {
       return null;
     }
@@ -24258,9 +24268,7 @@ function _addEvent(replay, event, isCheckout) {
         return null;
       }
       replay.handleException(error);
-      yield replay.stop({
-        reason
-      });
+      yield replay.stop({ reason });
       const client = getClient();
       if (client) {
         client.recordDroppedEvent("internal_sdk_error", "replay");
@@ -24335,13 +24343,11 @@ function handleErrorEvent(replay, event) {
   if (replay.recordingMode !== "buffer" || !event.tags || !event.tags.replayId) {
     return;
   }
-  const {
-    beforeErrorSampling
-  } = replay.getOptions();
+  const { beforeErrorSampling } = replay.getOptions();
   if (typeof beforeErrorSampling === "function" && !beforeErrorSampling(event)) {
     return;
   }
-  setTimeout2(() => __async(this, null, function* () {
+  setTimeout2(() => __async(null, null, function* () {
     try {
       yield replay.sendBufferedReplayOrFlush();
     } catch (err) {
@@ -24366,7 +24372,9 @@ function handleHydrationError(replay, event) {
     // Only matches errors in production builds of react-dom
     // Example https://reactjs.org/docs/error-decoder.html?invariant=423
     // With newer React versions, the messages changed to a different website https://react.dev/errors/418
-    exceptionValue.match(/(reactjs\.org\/docs\/error-decoder\.html\?invariant=|react\.dev\/errors\/)(418|419|422|423|425)/) || // Development builds of react-dom
+    exceptionValue.match(
+      /(reactjs\.org\/docs\/error-decoder\.html\?invariant=|react\.dev\/errors\/)(418|419|422|423|425)/
+    ) || // Development builds of react-dom
     // Error 1: Hydration failed because the initial UI does not match what was rendered on the server.
     // Error 2: Text content does not match server-rendered HTML. Warning: Text content did not match.
     exceptionValue.match(/(does not match server-rendered HTML|Hydration failed because)/i)
@@ -24447,11 +24455,7 @@ function normalizeConsoleBreadcrumb(breadcrumb) {
   return createBreadcrumb(__spreadProps(__spreadValues({}, breadcrumb), {
     data: __spreadValues(__spreadProps(__spreadValues({}, breadcrumb.data), {
       arguments: normalizedArgs
-    }), isTruncated ? {
-      _meta: {
-        warnings: ["CONSOLE_ARG_TRUNCATED"]
-      }
-    } : {})
+    }), isTruncated ? { _meta: { warnings: ["CONSOLE_ARG_TRUNCATED"] } } : {})
   }));
 }
 function isBreadcrumbWithCategory(breadcrumb) {
@@ -24514,52 +24518,45 @@ function shouldSampleForBufferEvent(replay, event) {
   return isSampled(replay.getOptions().errorSampleRate);
 }
 function handleGlobalEventListener(replay) {
-  return Object.assign((event, hint) => {
-    if (!replay.isEnabled() || replay.isPaused()) {
+  return Object.assign(
+    (event, hint) => {
+      if (!replay.isEnabled() || replay.isPaused()) {
+        return event;
+      }
+      if (isReplayEvent(event)) {
+        delete event.breadcrumbs;
+        return event;
+      }
+      if (!isErrorEvent3(event) && !isTransactionEvent2(event) && !isFeedbackEvent(event)) {
+        return event;
+      }
+      const isSessionActive = replay.checkAndHandleExpiredSession();
+      if (!isSessionActive) {
+        resetReplayIdOnDynamicSamplingContext();
+        return event;
+      }
+      if (isFeedbackEvent(event)) {
+        replay.flush();
+        event.contexts.feedback.replay_id = replay.getSessionId();
+        addFeedbackBreadcrumb(replay, event);
+        return event;
+      }
+      if (isRrwebError(event, hint) && !replay.getOptions()._experiments.captureExceptions) {
+        DEBUG_BUILD4 && logger2.log("Ignoring error from rrweb internals", event);
+        return null;
+      }
+      const isErrorEventSampled = shouldSampleForBufferEvent(replay, event);
+      const shouldTagReplayId = isErrorEventSampled || replay.recordingMode === "session";
+      if (shouldTagReplayId) {
+        event.tags = __spreadProps(__spreadValues({}, event.tags), { replayId: replay.getSessionId() });
+      }
       return event;
-    }
-    if (isReplayEvent(event)) {
-      delete event.breadcrumbs;
-      return event;
-    }
-    if (!isErrorEvent3(event) && !isTransactionEvent2(event) && !isFeedbackEvent(event)) {
-      return event;
-    }
-    const isSessionActive = replay.checkAndHandleExpiredSession();
-    if (!isSessionActive) {
-      resetReplayIdOnDynamicSamplingContext();
-      return event;
-    }
-    if (isFeedbackEvent(event)) {
-      replay.flush();
-      event.contexts.feedback.replay_id = replay.getSessionId();
-      addFeedbackBreadcrumb(replay, event);
-      return event;
-    }
-    if (isRrwebError(event, hint) && !replay.getOptions()._experiments.captureExceptions) {
-      DEBUG_BUILD4 && logger2.log("Ignoring error from rrweb internals", event);
-      return null;
-    }
-    const isErrorEventSampled = shouldSampleForBufferEvent(replay, event);
-    const shouldTagReplayId = isErrorEventSampled || replay.recordingMode === "session";
-    if (shouldTagReplayId) {
-      event.tags = __spreadProps(__spreadValues({}, event.tags), {
-        replayId: replay.getSessionId()
-      });
-    }
-    return event;
-  }, {
-    id: "Replay"
-  });
+    },
+    { id: "Replay" }
+  );
 }
 function createPerformanceSpans(replay, entries) {
-  return entries.map(({
-    type,
-    start,
-    end,
-    name,
-    data
-  }) => {
+  return entries.map(({ type, start, end, name, data }) => {
     const response = replay.throttledAddEvent({
       type: EventType.Custom,
       timestamp: start,
@@ -24578,10 +24575,7 @@ function createPerformanceSpans(replay, entries) {
   });
 }
 function handleHistory(handlerData) {
-  const {
-    from: from2,
-    to
-  } = handlerData;
+  const { from, to } = handlerData;
   const now = Date.now() / 1e3;
   return {
     type: "navigation.push",
@@ -24589,7 +24583,7 @@ function handleHistory(handlerData) {
     end: now,
     name: to,
     data: {
-      previous: from2
+      previous: from
     }
   };
 }
@@ -24684,15 +24678,7 @@ function makeNetworkReplayBreadcrumb(type, data) {
   if (!data) {
     return null;
   }
-  const {
-    startTimestamp,
-    endTimestamp,
-    url,
-    method,
-    statusCode,
-    request,
-    response
-  } = data;
+  const { startTimestamp, endTimestamp, url, method, statusCode, request, response } = data;
   const result = {
     type,
     start: startTimestamp / 1e3,
@@ -24735,10 +24721,7 @@ function buildNetworkRequestOrResponse(headers, bodySize, body) {
     headers,
     size: bodySize
   };
-  const {
-    body: normalizedBody,
-    warnings
-  } = normalizeNetworkBody(body);
+  const { body: normalizedBody, warnings } = normalizeNetworkBody(body);
   info.body = normalizedBody;
   if (warnings?.length) {
     info._meta = {
@@ -24825,10 +24808,7 @@ function captureFetchBreadcrumbToReplay(breadcrumb, hint, options) {
   });
 }
 function enrichFetchBreadcrumb(breadcrumb, hint) {
-  const {
-    input,
-    response
-  } = hint;
+  const { input, response } = hint;
   const body = input ? getFetchRequestArgBody(input) : void 0;
   const reqSize = getBodySize(body);
   const resSize = response ? parseContentLengthHeader(response.headers.get("content-length")) : void 0;
@@ -24842,10 +24822,7 @@ function enrichFetchBreadcrumb(breadcrumb, hint) {
 function _prepareFetchData(breadcrumb, hint, options) {
   return __async(this, null, function* () {
     const now = Date.now();
-    const {
-      startTimestamp = now,
-      endTimestamp = now
-    } = hint;
+    const { startTimestamp = now, endTimestamp = now } = hint;
     const {
       url,
       method,
@@ -24867,10 +24844,7 @@ function _prepareFetchData(breadcrumb, hint, options) {
     };
   });
 }
-function _getRequestInfo({
-  networkCaptureBodies,
-  networkRequestHeaders
-}, input, requestBodySize) {
+function _getRequestInfo({ networkCaptureBodies, networkRequestHeaders }, input, requestBodySize) {
   const headers = input ? getRequestHeaders(input, networkRequestHeaders) : {};
   if (!networkCaptureBodies) {
     return buildNetworkRequestOrResponse(headers, requestBodySize, void 0);
@@ -24991,7 +24965,10 @@ function _tryCloneResponse(response) {
 function _tryGetResponseText(response) {
   return new Promise((resolve, reject) => {
     const timeout = setTimeout2(() => reject(new Error("Timeout while trying to read response body")), 500);
-    _getResponseText(response).then((txt) => resolve(txt), (reason) => reject(reason)).finally(() => clearTimeout(timeout));
+    _getResponseText(response).then(
+      (txt) => resolve(txt),
+      (reason) => reject(reason)
+    ).finally(() => clearTimeout(timeout));
   });
 }
 function _getResponseText(response) {
@@ -25011,10 +24988,7 @@ function captureXhrBreadcrumbToReplay(breadcrumb, hint, options) {
   });
 }
 function enrichXhrBreadcrumb(breadcrumb, hint) {
-  const {
-    xhr,
-    input
-  } = hint;
+  const { xhr, input } = hint;
   if (!xhr) {
     return;
   }
@@ -25029,12 +25003,7 @@ function enrichXhrBreadcrumb(breadcrumb, hint) {
 }
 function _prepareXhrData(breadcrumb, hint, options) {
   const now = Date.now();
-  const {
-    startTimestamp = now,
-    endTimestamp = now,
-    input,
-    xhr
-  } = hint;
+  const { startTimestamp = now, endTimestamp = now, input, xhr } = hint;
   const {
     url,
     method,
@@ -25185,9 +25154,7 @@ function _isXhrHint(hint) {
 function _isFetchHint(hint) {
   return hint?.response;
 }
-function addGlobalListeners(replay, {
-  autoFlushOnFeedback
-}) {
+function addGlobalListeners(replay, { autoFlushOnFeedback }) {
   const client = getClient();
   addClickKeypressInstrumentationHandler(handleDomListener(replay));
   addHistoryInstrumentationHandler(handleHistorySpanListener(replay));
@@ -25213,7 +25180,7 @@ function addGlobalListeners(replay, {
     client.on("spanEnd", (span) => {
       replay.lastActiveSpan = span;
     });
-    client.on("beforeSendFeedback", (feedbackEvent, options) => __async(this, null, function* () {
+    client.on("beforeSendFeedback", (feedbackEvent, options) => __async(null, null, function* () {
       const replayId = replay.getSessionId();
       if (options?.includeReplay && replay.isEnabled() && replayId && feedbackEvent.contexts?.feedback) {
         if (feedbackEvent.contexts.feedback.source === "api" && autoFlushOnFeedback) {
@@ -25223,7 +25190,7 @@ function addGlobalListeners(replay, {
       }
     }));
     if (autoFlushOnFeedback) {
-      client.on("openFeedbackWidget", () => __async(this, null, function* () {
+      client.on("openFeedbackWidget", () => __async(null, null, function* () {
         yield replay.flush();
       }));
     }
@@ -25232,21 +25199,19 @@ function addGlobalListeners(replay, {
 function addMemoryEntry(replay) {
   return __async(this, null, function* () {
     try {
-      return Promise.all(createPerformanceSpans(replay, [
-        // @ts-expect-error memory doesn't exist on type Performance as the API is non-standard (we check that it exists above)
-        createMemoryEntry(WINDOW5.performance.memory)
-      ]));
+      return Promise.all(
+        createPerformanceSpans(replay, [
+          // @ts-expect-error memory doesn't exist on type Performance as the API is non-standard (we check that it exists above)
+          createMemoryEntry(WINDOW5.performance.memory)
+        ])
+      );
     } catch (error) {
       return [];
     }
   });
 }
 function createMemoryEntry(memoryEntry) {
-  const {
-    jsHeapSizeLimit,
-    totalJSHeapSize,
-    usedJSHeapSize
-  } = memoryEntry;
+  const { jsHeapSizeLimit, totalJSHeapSize, usedJSHeapSize } = memoryEntry;
   const time = Date.now() / 1e3;
   return {
     type: "memory",
@@ -25383,15 +25348,22 @@ function addSettingsEvent(replay, isCheckout) {
   addEventSync(replay, createOptionsEvent(replay), false);
 }
 function createReplayEnvelope(replayEvent, recordingData, dsn, tunnel) {
-  return createEnvelope(createEventEnvelopeHeaders(replayEvent, getSdkMetadataForEnvelopeHeader(replayEvent), tunnel, dsn), [[{
-    type: "replay_event"
-  }, replayEvent], [{
-    type: "replay_recording",
-    // If string then we need to encode to UTF8, otherwise will have
-    // wrong size. TextEncoder has similar browser support to
-    // MutationObserver, although it does not accept IE11.
-    length: typeof recordingData === "string" ? new TextEncoder().encode(recordingData).length : recordingData.length
-  }, recordingData]]);
+  return createEnvelope(
+    createEventEnvelopeHeaders(replayEvent, getSdkMetadataForEnvelopeHeader(replayEvent), tunnel, dsn),
+    [
+      [{ type: "replay_event" }, replayEvent],
+      [
+        {
+          type: "replay_recording",
+          // If string then we need to encode to UTF8, otherwise will have
+          // wrong size. TextEncoder has similar browser support to
+          // MutationObserver, although it does not accept IE11.
+          length: typeof recordingData === "string" ? new TextEncoder().encode(recordingData).length : recordingData.length
+        },
+        recordingData
+      ]
+    ]
+  );
 }
 function prepareRecordingData({
   recordingData,
@@ -25419,22 +25391,23 @@ function prepareReplayEvent(_0) {
     event
   }) {
     const integrations = typeof client["_integrations"] === "object" && client["_integrations"] !== null && !Array.isArray(client["_integrations"]) ? Object.keys(client["_integrations"]) : void 0;
-    const eventHint = {
-      event_id,
-      integrations
-    };
+    const eventHint = { event_id, integrations };
     client.emit("preprocessEvent", event, eventHint);
-    const preparedEvent = yield prepareEvent(client.getOptions(), event, eventHint, scope, client, getIsolationScope());
+    const preparedEvent = yield prepareEvent(
+      client.getOptions(),
+      event,
+      eventHint,
+      scope,
+      client,
+      getIsolationScope()
+    );
     if (!preparedEvent) {
       return null;
     }
     client.emit("postprocessEvent", preparedEvent, eventHint);
     preparedEvent.platform = preparedEvent.platform || "javascript";
     const metadata = client.getSdkMetadata();
-    const {
-      name,
-      version
-    } = metadata?.sdk || {};
+    const { name, version } = metadata?.sdk || {};
     preparedEvent.sdk = __spreadProps(__spreadValues({}, preparedEvent.sdk), {
       name: name || "sentry.javascript.unknown",
       version: version || "0.0.0"
@@ -25457,12 +25430,7 @@ function sendReplayRequest(_0) {
         segment_id
       }
     });
-    const {
-      urls,
-      errorIds,
-      traceIds,
-      initialTimestamp
-    } = eventContext;
+    const { urls, errorIds, traceIds, initialTimestamp } = eventContext;
     const client = getClient();
     const scope = getCurrentScope();
     const transport = client?.getTransport();
@@ -25481,12 +25449,7 @@ function sendReplayRequest(_0) {
       segment_id,
       replay_type: session.sampled
     };
-    const replayEvent = yield prepareReplayEvent({
-      scope,
-      client,
-      replayId,
-      event: baseEvent
-    });
+    const replayEvent = yield prepareReplayEvent({ scope, client, replayId, event: baseEvent });
     if (!replayEvent) {
       client.recordDroppedEvent("event_processor", "replay");
       DEBUG_BUILD4 && logger2.info("An event processor returned `null`, will not send event.");
@@ -25531,10 +25494,7 @@ function sendReplay(_0) {
     count: 0,
     interval: RETRY_BASE_INTERVAL
   }) {
-    const {
-      recordingData,
-      onError
-    } = replayData;
+    const { recordingData, onError } = replayData;
     if (!recordingData.length) {
       return;
     }
@@ -25561,7 +25521,7 @@ function sendReplay(_0) {
       }
       retryConfig.interval *= ++retryConfig.count;
       return new Promise((resolve, reject) => {
-        setTimeout2(() => __async(this, null, function* () {
+        setTimeout2(() => __async(null, null, function* () {
           try {
             yield sendReplay(replayData, retryConfig);
             resolve(true);
@@ -25693,10 +25653,7 @@ var ReplayContainer = class {
       // ... per 5s
       5
     );
-    const {
-      slowClickTimeout,
-      slowClickIgnoreSelectors
-    } = this.getOptions();
+    const { slowClickTimeout, slowClickIgnoreSelectors } = this.getOptions();
     const slowClickConfig = slowClickTimeout ? {
       threshold: Math.min(SLOW_CLICK_THRESHOLD, slowClickTimeout),
       timeout: slowClickTimeout,
@@ -25770,10 +25727,7 @@ var ReplayContainer = class {
    * called outside of constructor.
    */
   initializeSampling(previousSessionId) {
-    const {
-      errorSampleRate,
-      sessionSampleRate
-    } = this._options;
+    const { errorSampleRate, sessionSampleRate } = this._options;
     const requiresManualStart = errorSampleRate <= 0 && sessionSampleRate <= 0;
     this._requiresManualStart = requiresManualStart;
     if (requiresManualStart) {
@@ -25809,15 +25763,18 @@ var ReplayContainer = class {
     }
     DEBUG_BUILD4 && logger2.infoTick("Starting replay in session mode");
     this._updateUserActivity();
-    const session = loadOrCreateSession({
-      maxReplayDuration: this._options.maxReplayDuration,
-      sessionIdleExpire: this.timeouts.sessionIdleExpire
-    }, {
-      stickySession: this._options.stickySession,
-      // This is intentional: create a new session-based replay when calling `start()`
-      sessionSampleRate: 1,
-      allowBuffering: false
-    });
+    const session = loadOrCreateSession(
+      {
+        maxReplayDuration: this._options.maxReplayDuration,
+        sessionIdleExpire: this.timeouts.sessionIdleExpire
+      },
+      {
+        stickySession: this._options.stickySession,
+        // This is intentional: create a new session-based replay when calling `start()`
+        sessionSampleRate: 1,
+        allowBuffering: false
+      }
+    );
     this.session = session;
     this._initializeRecording();
   }
@@ -25831,14 +25788,17 @@ var ReplayContainer = class {
       return;
     }
     DEBUG_BUILD4 && logger2.infoTick("Starting replay in buffer mode");
-    const session = loadOrCreateSession({
-      sessionIdleExpire: this.timeouts.sessionIdleExpire,
-      maxReplayDuration: this._options.maxReplayDuration
-    }, {
-      stickySession: this._options.stickySession,
-      sessionSampleRate: 0,
-      allowBuffering: true
-    });
+    const session = loadOrCreateSession(
+      {
+        sessionIdleExpire: this.timeouts.sessionIdleExpire,
+        maxReplayDuration: this._options.maxReplayDuration
+      },
+      {
+        stickySession: this._options.stickySession,
+        sessionSampleRate: 0,
+        allowBuffering: true
+      }
+    );
     this.session = session;
     this.recordingMode = "buffer";
     this._initializeRecording();
@@ -25851,9 +25811,7 @@ var ReplayContainer = class {
   startRecording() {
     try {
       const canvasOptions = this._canvas;
-      this._stopRecording = record(__spreadValues(__spreadProps(__spreadValues(__spreadProps(__spreadValues(__spreadValues({}, this._recordingOptions), this.recordingMode === "buffer" ? {
-        checkoutEveryNms: BUFFER_CHECKOUT_TIME
-      } : (
+      this._stopRecording = record(__spreadValues(__spreadProps(__spreadValues(__spreadProps(__spreadValues(__spreadValues({}, this._recordingOptions), this.recordingMode === "buffer" ? { checkoutEveryNms: BUFFER_CHECKOUT_TIME } : (
         // Otherwise, use experimental option w/ min checkout time of 6 minutes
         // This is to improve playback seeking as there could potentially be
         // less mutations to process in the worse cases.
@@ -25902,10 +25860,7 @@ var ReplayContainer = class {
    * does not support a teardown
    */
   stop() {
-    return __async(this, arguments, function* ({
-      forceFlush = false,
-      reason
-    } = {}) {
+    return __async(this, arguments, function* ({ forceFlush = false, reason } = {}) {
       if (!this._isEnabled) {
         return;
       }
@@ -25917,9 +25872,7 @@ var ReplayContainer = class {
         this.stopRecording();
         this._debouncedFlush.cancel();
         if (forceFlush) {
-          yield this._flush({
-            force: true
-          });
+          yield this._flush({ force: true });
         }
         this.eventBuffer?.destroy();
         this.eventBuffer = null;
@@ -25964,9 +25917,7 @@ var ReplayContainer = class {
    * Otherwise, queue up a flush.
    */
   sendBufferedReplayOrFlush() {
-    return __async(this, arguments, function* ({
-      continueRecording = true
-    } = {}) {
+    return __async(this, arguments, function* ({ continueRecording = true } = {}) {
       if (this.recordingMode === "session") {
         return this.flushImmediate();
       }
@@ -26162,15 +26113,18 @@ var ReplayContainer = class {
    */
   _initializeSessionForSampling(previousSessionId) {
     const allowBuffering = this._options.errorSampleRate > 0;
-    const session = loadOrCreateSession({
-      sessionIdleExpire: this.timeouts.sessionIdleExpire,
-      maxReplayDuration: this._options.maxReplayDuration,
-      previousSessionId
-    }, {
-      stickySession: this._options.stickySession,
-      sessionSampleRate: this._options.sessionSampleRate,
-      allowBuffering
-    });
+    const session = loadOrCreateSession(
+      {
+        sessionIdleExpire: this.timeouts.sessionIdleExpire,
+        maxReplayDuration: this._options.maxReplayDuration,
+        previousSessionId
+      },
+      {
+        stickySession: this._options.stickySession,
+        sessionSampleRate: this._options.sessionSampleRate,
+        allowBuffering
+      }
+    );
     this.session = session;
   }
   /**
@@ -26201,9 +26155,7 @@ var ReplayContainer = class {
       if (!this._isEnabled) {
         return;
       }
-      yield this.stop({
-        reason: "refresh session"
-      });
+      yield this.stop({ reason: "refresh session" });
       this.initializeSampling(session.id);
     });
   }
@@ -26220,9 +26172,7 @@ var ReplayContainer = class {
         this.clickDetector.addListeners();
       }
       if (!this._hasInitializedCoreListeners) {
-        addGlobalListeners(this, {
-          autoFlushOnFeedback: this._options._experiments.autoFlushOnFeedback
-        });
+        addGlobalListeners(this, { autoFlushOnFeedback: this._options._experiments.autoFlushOnFeedback });
         this._hasInitializedCoreListeners = true;
       }
     } catch (err) {
@@ -26338,10 +26288,7 @@ var ReplayContainer = class {
   }
   /** Update the initial timestamp based on the buffer content. */
   _updateInitialTimestampFromEventBuffer() {
-    const {
-      session,
-      eventBuffer
-    } = this;
+    const { session, eventBuffer } = this;
     if (!session || !eventBuffer || this._requiresManualStart) {
       return;
     }
@@ -26414,9 +26361,7 @@ var ReplayContainer = class {
         });
       } catch (err) {
         this.handleException(err);
-        this.stop({
-          reason: "sendReplay"
-        });
+        this.stop({ reason: "sendReplay" });
         const client = getClient();
         if (client) {
           const dropReason = err instanceof RateLimitError ? "ratelimit_backoff" : "send_error";
@@ -26450,7 +26395,9 @@ var ReplayContainer = class {
       const tooShort = duration < this._options.minReplayDuration;
       const tooLong = duration > this._options.maxReplayDuration + 5e3;
       if (tooShort || tooLong) {
-        DEBUG_BUILD4 && logger2.info(`Session duration (${Math.floor(duration / 1e3)}s) is too ${tooShort ? "short" : "long"}, not sending replay.`);
+        DEBUG_BUILD4 && logger2.info(
+          `Session duration (${Math.floor(duration / 1e3)}s) is too ${tooShort ? "short" : "long"}, not sending replay.`
+        );
         if (tooShort) {
           this._debouncedFlush();
         }
@@ -26499,10 +26446,7 @@ var ReplayContainer = class {
       this._createCustomBreadcrumb(breadcrumb);
     }
     if (overMutationLimit) {
-      this.stop({
-        reason: "mutationLimit",
-        forceFlush: this.recordingMode === "session"
-      });
+      this.stop({ reason: "mutationLimit", forceFlush: this.recordingMode === "session" });
       return false;
     }
     return true;
@@ -26515,13 +26459,7 @@ function getOption(selectors, defaultSelectors) {
     ...defaultSelectors
   ].join(",");
 }
-function getPrivacyOptions({
-  mask,
-  unmask,
-  block,
-  unblock,
-  ignore
-}) {
+function getPrivacyOptions({ mask, unmask, block, unblock, ignore }) {
   const defaultBlockedElements = ["base", "iframe[srcdoc]:not([src])"];
   const maskSelector = getOption(mask, [".sentry-mask", "[data-sentry-mask]"]);
   const unmaskSelector = getOption(unmask, []);
@@ -26598,7 +26536,7 @@ var Replay = class {
     networkRequestHeaders = [],
     networkResponseHeaders = [],
     mask = [],
-    maskAttributes = ["title", "placeholder"],
+    maskAttributes = ["title", "placeholder", "aria-label"],
     unmask = [],
     block = [],
     unblock = [],
@@ -26619,9 +26557,7 @@ var Replay = class {
     this._recordingOptions = __spreadProps(__spreadValues({
       maskAllInputs,
       maskAllText,
-      maskInputOptions: {
-        password: true
-      },
+      maskInputOptions: { password: true },
       maskTextFn: maskFn,
       maskInputFn: maskFn,
       maskAttributeFn: (key, value, el) => maskAttribute({
@@ -26732,9 +26668,7 @@ var Replay = class {
     if (!this._replay) {
       return Promise.resolve();
     }
-    return this._replay.stop({
-      forceFlush: this._replay.recordingMode === "session"
-    });
+    return this._replay.stop({ forceFlush: this._replay.recordingMode === "session" });
   }
   /**
    * If not in "session" recording mode, flush event buffer which will create a new replay.
@@ -26817,7 +26751,9 @@ function loadReplayOptionsFromClient(initialOptions, client) {
   const replaysOnErrorSampleRate = parseSampleRate(opt.replaysOnErrorSampleRate);
   if (replaysSessionSampleRate == null && replaysOnErrorSampleRate == null) {
     consoleSandbox(() => {
-      console.warn("Replay is disabled because neither `replaysSessionSampleRate` nor `replaysOnErrorSampleRate` are set.");
+      console.warn(
+        "Replay is disabled because neither `replaysSessionSampleRate` nor `replaysOnErrorSampleRate` are set."
+      );
     });
   }
   if (replaysSessionSampleRate != null) {
@@ -26894,9 +26830,7 @@ function instrumentOutgoingRequests(client, _options) {
         if (enableHTTPTimings) {
           addHTTPTimings(createdSpan);
         }
-        onRequestSpanStart?.(createdSpan, {
-          headers: handlerData.headers
-        });
+        onRequestSpanStart?.(createdSpan, { headers: handlerData.headers });
       }
     });
   }
@@ -26912,9 +26846,7 @@ function instrumentOutgoingRequests(client, _options) {
           headers = new Headers(handlerData.xhr.__sentry_xhr_v3__?.request_headers);
         } catch {
         }
-        onRequestSpanStart?.(createdSpan, {
-          headers
-        });
+        onRequestSpanStart?.(createdSpan, { headers });
       }
     });
   }
@@ -26923,15 +26855,11 @@ function isPerformanceResourceTiming(entry) {
   return entry.entryType === "resource" && "initiatorType" in entry && typeof entry.nextHopProtocol === "string" && (entry.initiatorType === "fetch" || entry.initiatorType === "xmlhttprequest");
 }
 function addHTTPTimings(span) {
-  const {
-    url
-  } = spanToJSON(span).data;
+  const { url } = spanToJSON(span).data;
   if (!url || typeof url !== "string") {
     return;
   }
-  const cleanup = addPerformanceInstrumentationHandler("resource", ({
-    entries
-  }) => {
+  const cleanup = addPerformanceInstrumentationHandler("resource", ({ entries }) => {
     entries.forEach((entry) => {
       if (isPerformanceResourceTiming(entry) && entry.name.endsWith(url)) {
         const spanData = resourceTimingEntryToSpanData(entry);
@@ -26945,16 +26873,25 @@ function getAbsoluteTime2(time = 0) {
   return ((browserPerformanceTimeOrigin() || performance.timeOrigin) + time) / 1e3;
 }
 function resourceTimingEntryToSpanData(resourceTiming) {
-  const {
-    name,
-    version
-  } = extractNetworkProtocol(resourceTiming.nextHopProtocol);
+  const { name, version } = extractNetworkProtocol(resourceTiming.nextHopProtocol);
   const timingSpanData = [];
   timingSpanData.push(["network.protocol.version", version], ["network.protocol.name", name]);
   if (!browserPerformanceTimeOrigin()) {
     return timingSpanData;
   }
-  return [...timingSpanData, ["http.request.redirect_start", getAbsoluteTime2(resourceTiming.redirectStart)], ["http.request.fetch_start", getAbsoluteTime2(resourceTiming.fetchStart)], ["http.request.domain_lookup_start", getAbsoluteTime2(resourceTiming.domainLookupStart)], ["http.request.domain_lookup_end", getAbsoluteTime2(resourceTiming.domainLookupEnd)], ["http.request.connect_start", getAbsoluteTime2(resourceTiming.connectStart)], ["http.request.secure_connection_start", getAbsoluteTime2(resourceTiming.secureConnectionStart)], ["http.request.connection_end", getAbsoluteTime2(resourceTiming.connectEnd)], ["http.request.request_start", getAbsoluteTime2(resourceTiming.requestStart)], ["http.request.response_start", getAbsoluteTime2(resourceTiming.responseStart)], ["http.request.response_end", getAbsoluteTime2(resourceTiming.responseEnd)]];
+  return [
+    ...timingSpanData,
+    ["http.request.redirect_start", getAbsoluteTime2(resourceTiming.redirectStart)],
+    ["http.request.fetch_start", getAbsoluteTime2(resourceTiming.fetchStart)],
+    ["http.request.domain_lookup_start", getAbsoluteTime2(resourceTiming.domainLookupStart)],
+    ["http.request.domain_lookup_end", getAbsoluteTime2(resourceTiming.domainLookupEnd)],
+    ["http.request.connect_start", getAbsoluteTime2(resourceTiming.connectStart)],
+    ["http.request.secure_connection_start", getAbsoluteTime2(resourceTiming.secureConnectionStart)],
+    ["http.request.connection_end", getAbsoluteTime2(resourceTiming.connectEnd)],
+    ["http.request.request_start", getAbsoluteTime2(resourceTiming.requestStart)],
+    ["http.request.response_start", getAbsoluteTime2(resourceTiming.responseStart)],
+    ["http.request.response_end", getAbsoluteTime2(resourceTiming.responseEnd)]
+  ];
 }
 function shouldAttachHeaders(targetUrl, tracePropagationTargets) {
   const href = getLocationHref();
@@ -26988,10 +26925,7 @@ function xhrCallback(handlerData, shouldCreateSpan, shouldAttachHeaders2, spans)
   if (!xhr || xhr.__sentry_own_request__ || !sentryXhrData) {
     return void 0;
   }
-  const {
-    url,
-    method
-  } = sentryXhrData;
+  const { url, method } = sentryXhrData;
   const shouldCreateSpanResult = hasSpansEnabled() && shouldCreateSpan(url);
   if (handlerData.endTimestamp && shouldCreateSpanResult) {
     const spanId = xhr.__sentry_xhr_span_id__;
@@ -27018,11 +26952,7 @@ function xhrCallback(handlerData, shouldCreateSpan, shouldAttachHeaders2, spans)
       "server.address": parsedUrl?.host,
       [SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: "auto.http.browser",
       [SEMANTIC_ATTRIBUTE_SENTRY_OP]: "http.client"
-    }, parsedUrl?.search && {
-      "http.query": parsedUrl?.search
-    }), parsedUrl?.hash && {
-      "http.fragment": parsedUrl?.hash
-    })
+    }, parsedUrl?.search && { "http.query": parsedUrl?.search }), parsedUrl?.hash && { "http.fragment": parsedUrl?.hash })
   }) : new SentryNonRecordingSpan();
   xhr.__sentry_xhr_span_id__ = span.spanContext().spanId;
   spans[xhr.__sentry_xhr_span_id__] = span;
@@ -27042,12 +26972,7 @@ function xhrCallback(handlerData, shouldCreateSpan, shouldAttachHeaders2, spans)
   return span;
 }
 function addTracingHeadersToXhrRequest(xhr, span) {
-  const {
-    "sentry-trace": sentryTrace,
-    baggage
-  } = getTraceData({
-    span
-  });
+  const { "sentry-trace": sentryTrace, baggage } = getTraceData({ span });
   if (sentryTrace) {
     setHeaderOnXhr(xhr, sentryTrace, baggage);
   }
@@ -27091,18 +27016,12 @@ function registerBackgroundTabDetection() {
       const rootSpan = getRootSpan(activeSpan);
       if (WINDOW3.document.hidden && rootSpan) {
         const cancelledStatus = "cancelled";
-        const {
-          op,
-          status
-        } = spanToJSON(rootSpan);
+        const { op, status } = spanToJSON(rootSpan);
         if (DEBUG_BUILD3) {
           logger.log(`[Tracing] Transaction: ${cancelledStatus} -> since tab moved to the background, op: ${op}`);
         }
         if (!status) {
-          rootSpan.setStatus({
-            code: SPAN_STATUS_ERROR,
-            message: cancelledStatus
-          });
+          rootSpan.setStatus({ code: SPAN_STATUS_ERROR, message: cancelledStatus });
         }
         rootSpan.setAttribute("sentry.cancellation_reason", "document.hidden");
         rootSpan.end();
@@ -27184,9 +27103,11 @@ function addPreviousTraceSpanLink(previousTraceInfo, span, oldPropagationContext
   }
   if (Date.now() / 1e3 - previousTraceInfo.startTimestamp <= PREVIOUS_TRACE_MAX_DURATION) {
     if (DEBUG_BUILD3) {
-      logger.info(`Adding previous_trace ${previousTraceSpanCtx} link to span ${__spreadValues({
-        op: spanJson.op
-      }, span.spanContext())}`);
+      logger.info(
+        `Adding previous_trace ${previousTraceSpanCtx} link to span ${__spreadValues({
+          op: spanJson.op
+        }, span.spanContext())}`
+      );
     }
     span.addLink({
       context: previousTraceSpanCtx,
@@ -27194,7 +27115,10 @@ function addPreviousTraceSpanLink(previousTraceInfo, span, oldPropagationContext
         [SEMANTIC_LINK_ATTRIBUTE_LINK_TYPE]: "previous_trace"
       }
     });
-    span.setAttribute(PREVIOUS_TRACE_TMP_SPAN_ATTRIBUTE, `${previousTraceSpanCtx.traceId}-${previousTraceSpanCtx.spanId}-${spanContextSampled(previousTraceSpanCtx) ? 1 : 0}`);
+    span.setAttribute(
+      PREVIOUS_TRACE_TMP_SPAN_ATTRIBUTE,
+      `${previousTraceSpanCtx.traceId}-${previousTraceSpanCtx.spanId}-${spanContextSampled(previousTraceSpanCtx) ? 1 : 0}`
+    );
   }
   return updatedPreviousTraceInfo;
 }
@@ -27226,28 +27150,23 @@ var DEFAULT_BROWSER_TRACING_OPTIONS = __spreadValues(__spreadProps(__spreadValue
   enableLongTask: true,
   enableLongAnimationFrame: true,
   enableInp: true,
+  ignoreResourceSpans: [],
+  ignorePerformanceApiSpans: [],
   linkPreviousTrace: "in-memory",
   consistentTraceSampling: false,
   _experiments: {}
 }), defaultRequestInstrumentationOptions);
-var _hasBeenInitialized = false;
 var browserTracingIntegration = (_options = {}) => {
-  if (_hasBeenInitialized) {
-    consoleSandbox(() => {
-      console.warn("Multiple browserTracingIntegration instances are not supported.");
-    });
-  }
-  _hasBeenInitialized = true;
+  const latestRoute = {
+    name: void 0,
+    source: void 0
+  };
   const optionalWindowDocument = WINDOW3.document;
-  registerSpanErrorInstrumentation();
   const {
     enableInp,
     enableLongTask,
     enableLongAnimationFrame,
-    _experiments: {
-      enableInteractions,
-      enableStandaloneClsSpans
-    },
+    _experiments: { enableInteractions, enableStandaloneClsSpans },
     beforeStartSpan,
     idleTimeout,
     finalTimeout,
@@ -27258,30 +27177,15 @@ var browserTracingIntegration = (_options = {}) => {
     trackFetchStreamPerformance,
     shouldCreateSpanForRequest,
     enableHTTPTimings,
+    ignoreResourceSpans,
+    ignorePerformanceApiSpans,
     instrumentPageLoad,
     instrumentNavigation,
     linkPreviousTrace,
     consistentTraceSampling,
     onRequestSpanStart
   } = __spreadValues(__spreadValues({}, DEFAULT_BROWSER_TRACING_OPTIONS), _options);
-  const _collectWebVitals = startTrackingWebVitals({
-    recordClsStandaloneSpans: enableStandaloneClsSpans || false
-  });
-  if (enableInp) {
-    startTrackingINP();
-  }
-  if (enableLongAnimationFrame && GLOBAL_OBJ.PerformanceObserver && PerformanceObserver.supportedEntryTypes && PerformanceObserver.supportedEntryTypes.includes("long-animation-frame")) {
-    startTrackingLongAnimationFrames();
-  } else if (enableLongTask) {
-    startTrackingLongTasks();
-  }
-  if (enableInteractions) {
-    startTrackingInteractions();
-  }
-  const latestRoute = {
-    name: void 0,
-    source: void 0
-  };
+  let _collectWebVitals;
   function _createRouteSpan(client, startSpanOptions) {
     const isPageloadTransaction = startSpanOptions.op === "pageload";
     const finalStartSpanOptions = beforeStartSpan ? beforeStartSpan(startSpanOptions) : startSpanOptions;
@@ -27299,9 +27203,11 @@ var browserTracingIntegration = (_options = {}) => {
       // should wait for finish signal if it's a pageload transaction
       disableAutoFinish: isPageloadTransaction,
       beforeSpanEnd: (span) => {
-        _collectWebVitals();
+        _collectWebVitals?.();
         addPerformanceEntries(span, {
-          recordClsOnPageloadSpan: !enableStandaloneClsSpans
+          recordClsOnPageloadSpan: !enableStandaloneClsSpans,
+          ignoreResourceSpans,
+          ignorePerformanceApiSpans
         });
         setActiveIdleSpan(client, void 0);
         const scope = getCurrentScope();
@@ -27328,8 +27234,20 @@ var browserTracingIntegration = (_options = {}) => {
   }
   return {
     name: BROWSER_TRACING_INTEGRATION_ID,
-    afterAllSetup(client) {
-      let startingUrl = getLocationHref();
+    setup(client) {
+      registerSpanErrorInstrumentation();
+      _collectWebVitals = startTrackingWebVitals({ recordClsStandaloneSpans: enableStandaloneClsSpans || false });
+      if (enableInp) {
+        startTrackingINP();
+      }
+      if (enableLongAnimationFrame && GLOBAL_OBJ.PerformanceObserver && PerformanceObserver.supportedEntryTypes && PerformanceObserver.supportedEntryTypes.includes("long-animation-frame")) {
+        startTrackingLongAnimationFrames();
+      } else if (enableLongTask) {
+        startTrackingLongTasks();
+      }
+      if (enableInteractions) {
+        startTrackingInteractions();
+      }
       function maybeEndActiveSpan() {
         const activeSpan = getActiveIdleSpan(client);
         if (activeSpan && !spanToJSON(activeSpan).timestamp) {
@@ -27343,13 +27261,11 @@ var browserTracingIntegration = (_options = {}) => {
           return;
         }
         maybeEndActiveSpan();
-        getIsolationScope().setPropagationContext({
-          traceId: generateTraceId(),
-          sampleRand: Math.random()
-        });
-        getCurrentScope().setPropagationContext({
-          traceId: generateTraceId(),
-          sampleRand: Math.random()
+        getIsolationScope().setPropagationContext({ traceId: generateTraceId(), sampleRand: Math.random() });
+        const scope = getCurrentScope();
+        scope.setPropagationContext({ traceId: generateTraceId(), sampleRand: Math.random() });
+        scope.setSDKProcessingMetadata({
+          normalizedRequest: void 0
         });
         _createRouteSpan(client, __spreadValues({
           op: "navigation"
@@ -27363,16 +27279,20 @@ var browserTracingIntegration = (_options = {}) => {
         const sentryTrace = traceOptions.sentryTrace || getMetaContent("sentry-trace");
         const baggage = traceOptions.baggage || getMetaContent("baggage");
         const propagationContext = propagationContextFromHeaders(sentryTrace, baggage);
-        getCurrentScope().setPropagationContext(propagationContext);
+        const scope = getCurrentScope();
+        scope.setPropagationContext(propagationContext);
+        scope.setSDKProcessingMetadata({
+          normalizedRequest: getHttpRequestData()
+        });
         _createRouteSpan(client, __spreadValues({
           op: "pageload"
         }, startSpanOptions));
       });
+    },
+    afterAllSetup(client) {
+      let startingUrl = getLocationHref();
       if (linkPreviousTrace !== "off") {
-        linkTraces(client, {
-          linkPreviousTrace,
-          consistentTraceSampling
-        });
+        linkTraces(client, { linkPreviousTrace, consistentTraceSampling });
       }
       if (WINDOW3.location) {
         if (instrumentPageLoad) {
@@ -27388,24 +27308,26 @@ var browserTracingIntegration = (_options = {}) => {
           });
         }
         if (instrumentNavigation) {
-          addHistoryInstrumentationHandler(({
-            to,
-            from: from2
-          }) => {
-            if (from2 === void 0 && startingUrl?.indexOf(to) !== -1) {
+          addHistoryInstrumentationHandler(({ to, from }) => {
+            if (from === void 0 && startingUrl?.indexOf(to) !== -1) {
               startingUrl = void 0;
               return;
             }
-            if (from2 !== to) {
-              startingUrl = void 0;
-              startBrowserTracingNavigationSpan(client, {
-                name: WINDOW3.location.pathname,
-                attributes: {
-                  [SEMANTIC_ATTRIBUTE_SENTRY_SOURCE]: "url",
-                  [SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: "auto.navigation.browser"
-                }
-              });
-            }
+            startingUrl = void 0;
+            const parsed = parseStringToURLObject(to);
+            startBrowserTracingNavigationSpan(client, {
+              name: parsed?.pathname || WINDOW3.location.pathname,
+              attributes: {
+                [SEMANTIC_ATTRIBUTE_SENTRY_SOURCE]: "url",
+                [SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: "auto.navigation.browser"
+              }
+            });
+            getCurrentScope().setSDKProcessingMetadata({
+              normalizedRequest: __spreadProps(__spreadValues({}, getHttpRequestData()), {
+                // Ensure to set this, so this matches the target route even if the URL has not yet been updated
+                url: to
+              })
+            });
           });
         }
       }
@@ -27467,23 +27389,23 @@ function registerInteractionListener(client, idleTimeout, finalTimeout, childSpa
       DEBUG_BUILD3 && logger.warn(`[Tracing] Did not create ${op} transaction because _latestRouteName is missing.`);
       return void 0;
     }
-    inflightInteractionSpan = startIdleSpan({
-      name: latestRoute.name,
-      op,
-      attributes: {
-        [SEMANTIC_ATTRIBUTE_SENTRY_SOURCE]: latestRoute.source || "url"
+    inflightInteractionSpan = startIdleSpan(
+      {
+        name: latestRoute.name,
+        op,
+        attributes: {
+          [SEMANTIC_ATTRIBUTE_SENTRY_SOURCE]: latestRoute.source || "url"
+        }
+      },
+      {
+        idleTimeout,
+        finalTimeout,
+        childSpanTimeout
       }
-    }, {
-      idleTimeout,
-      finalTimeout,
-      childSpanTimeout
-    });
+    );
   };
   if (optionalWindowDocument) {
-    addEventListener("click", registerInteractionTransaction, {
-      once: false,
-      capture: true
-    });
+    addEventListener("click", registerInteractionTransaction, { once: false, capture: true });
   }
 }
 var ACTIVE_IDLE_SPAN_PROPERTY = "_sentry_idleSpan";
@@ -27873,7 +27795,9 @@ TraceModule.\u0275fac = function TraceModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || TraceModule)();
 };
 TraceModule.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-  type: TraceModule
+  type: TraceModule,
+  declarations: [TraceDirective],
+  exports: [TraceDirective]
 });
 TraceModule.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({});
 (() => {
@@ -27901,9 +27825,9 @@ function getParameterizedRouteFromSnapshot(route) {
 }
 
 // libs/components/src/lib/global-loading.component.ts
-function GlobalLoadingComponent_div_0_Template(rf, ctx) {
+function GlobalLoadingComponent_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 2);
+    \u0275\u0275elementStart(0, "div", 0);
     \u0275\u0275text(1);
     \u0275\u0275pipe(2, "translate");
     \u0275\u0275elementEnd();
@@ -27913,10 +27837,10 @@ function GlobalLoadingComponent_div_0_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "COMMON.SERVER_DOWN"), " ");
   }
 }
-function GlobalLoadingComponent_div_1_Template(rf, ctx) {
+function GlobalLoadingComponent_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 3);
-    \u0275\u0275element(1, "mat-spinner", 4);
+    \u0275\u0275elementStart(0, "div", 1);
+    \u0275\u0275element(1, "mat-spinner", 2);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -27924,14 +27848,14 @@ function GlobalLoadingComponent_div_1_Template(rf, ctx) {
     \u0275\u0275property("diameter", 64);
   }
 }
-var GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler {
+var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler {
   get online() {
     return vs();
   }
-  constructor(_org, _settings) {
+  constructor() {
     super();
-    this._org = _org;
-    this._settings = _settings;
+    this._org = inject(OrganisationService);
+    this._settings = inject(SettingsService);
   }
   ngOnInit() {
     return __async(this, null, function* () {
@@ -27946,22 +27870,21 @@ var GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler 
       }, 1e3);
     });
   }
-  static {
-    this.\u0275fac = function GlobalLoadingComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _GlobalLoadingComponent)(\u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
-    };
+};
+_GlobalLoadingComponent.\u0275fac = function GlobalLoadingComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _GlobalLoadingComponent)();
+};
+_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275conditionalCreate(0, GlobalLoadingComponent_Conditional_0_Template, 3, 3, "div", 0);
+    \u0275\u0275conditionalCreate(1, GlobalLoadingComponent_Conditional_1_Template, 2, 1, "div", 1);
   }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [["class", "fixed bottom-2 left-1/2 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow", 4, "ngIf"], ["loader", "", "class", "pointer-events-auto fixed inset-0 flex items-center justify-center bg-base-100", 4, "ngIf"], [1, "fixed", "bottom-2", "left-1/2", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275template(0, GlobalLoadingComponent_div_0_Template, 3, 3, "div", 0)(1, GlobalLoadingComponent_div_1_Template, 2, 1, "div", 1);
-      }
-      if (rf & 2) {
-        \u0275\u0275property("ngIf", !ctx.online);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.loading);
-      }
-    }, dependencies: [MatProgressSpinnerModule, MatProgressSpinner, CommonModule, NgIf, TranslatePipe], styles: [`
+  if (rf & 2) {
+    \u0275\u0275conditional(!ctx.online ? 0 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.loading ? 1 : -1);
+  }
+}, dependencies: [MatProgressSpinnerModule, MatProgressSpinner, TranslatePipe], styles: [`
 
 [_nghost-%COMP%] {
   pointer-events: none;
@@ -27971,14 +27894,44 @@ var GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler 
   background-image: url("data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 36 36' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M36 0H0v36h36V0zM15.126 2H2v13.126c.367.094.714.24 1.032.428L15.554 3.032c-.188-.318-.334-.665-.428-1.032zM18 4.874V18H4.874c-.094-.367-.24-.714-.428-1.032L16.968 4.446c.318.188.665.334 1.032.428zM22.874 2h11.712L20 16.586V4.874c1.406-.362 2.512-1.468 2.874-2.874zm10.252 18H20v13.126c.367.094.714.24 1.032.428l12.522-12.522c-.188-.318-.334-.665-.428-1.032zM36 22.874V36H22.874c-.094-.367-.24-.714-.428-1.032l12.522-12.522c.318.188.665.334 1.032.428zm0-7.748V3.414L21.414 18h11.712c.362-1.406 1.468-2.512 2.874-2.874zm-18 18V21.414L3.414 36h11.712c.362-1.406 1.468-2.512 2.874-2.874zM4.874 20h11.712L2 34.586V22.874c1.406-.362 2.512-1.468 2.874-2.874z' fill='%23000000' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 /*# sourceMappingURL=global-loading.component.css.map */`] });
-  }
-};
+var GlobalLoadingComponent = _GlobalLoadingComponent;
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalLoadingComponent, { className: "GlobalLoadingComponent", filePath: "libs/components/src/lib/global-loading.component.ts", lineNumber: 42 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GlobalLoadingComponent, [{
+    type: Component,
+    args: [{ selector: "global-loading", template: `
+        @if (!online) {
+            <div
+                class="fixed bottom-2 left-1/2 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
+            >
+                {{ 'COMMON.SERVER_DOWN' | translate }}
+            </div>
+        }
+        @if (loading) {
+            <div
+                loader
+                class="pointer-events-auto fixed inset-0 flex items-center justify-center bg-base-100"
+            >
+                <mat-spinner [diameter]="64"></mat-spinner>
+            </div>
+        }
+    `, imports: [MatProgressSpinnerModule, TranslatePipe], styles: [`/* angular:styles/component:css;0825f91c359e4a6ca469cfb1023a83513b0992159f505897bef6eb40859417eb;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-loading.component.ts */
+:host {
+  pointer-events: none;
+}
+:host > [loader] {
+  z-index: 997;
+  background-image: url("data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 36 36' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M36 0H0v36h36V0zM15.126 2H2v13.126c.367.094.714.24 1.032.428L15.554 3.032c-.188-.318-.334-.665-.428-1.032zM18 4.874V18H4.874c-.094-.367-.24-.714-.428-1.032L16.968 4.446c.318.188.665.334 1.032.428zM22.874 2h11.712L20 16.586V4.874c1.406-.362 2.512-1.468 2.874-2.874zm10.252 18H20v13.126c.367.094.714.24 1.032.428l12.522-12.522c-.188-.318-.334-.665-.428-1.032zM36 22.874V36H22.874c-.094-.367-.24-.714-.428-1.032l12.522-12.522c.318.188.665.334 1.032.428zm0-7.748V3.414L21.414 18h11.712c.362-1.406 1.468-2.512 2.874-2.874zm-18 18V21.414L3.414 36h11.712c.362-1.406 1.468-2.512 2.874-2.874zM4.874 20h11.712L2 34.586V22.874c1.406-.362 2.512-1.468 2.874-2.874z' fill='%23000000' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+/*# sourceMappingURL=global-loading.component.css.map */
+`] }]
+  }], () => [], null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalLoadingComponent, { className: "GlobalLoadingComponent", filePath: "libs/components/src/lib/global-loading.component.ts", lineNumber: 43 });
 })();
 
 // libs/components/src/lib/global-banner.component.ts
-function GlobalBannerComponent_div_0_Template(rf, ctx) {
+function GlobalBannerComponent_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 1);
@@ -27996,7 +27949,7 @@ function GlobalBannerComponent_div_0_Template(rf, ctx) {
     \u0275\u0275pipe(12, "async");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(13, "button", 3);
-    \u0275\u0275listener("click", function GlobalBannerComponent_div_0_Template_button_click_13_listener() {
+    \u0275\u0275listener("click", function GlobalBannerComponent_Conditional_0_Template_button_click_13_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.close());
@@ -28013,10 +27966,10 @@ function GlobalBannerComponent_div_0_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ((tmp_7_0 = \u0275\u0275pipeBind1(11, 29, ctx_r1.banner)) == null ? null : tmp_7_0.content) || ((tmp_7_0 = \u0275\u0275pipeBind1(12, 31, ctx_r1.banner)) == null ? null : tmp_7_0.message), " ");
   }
 }
-var GlobalBannerComponent = class _GlobalBannerComponent {
-  constructor(_settings, _org) {
-    this._settings = _settings;
-    this._org = _org;
+var _GlobalBannerComponent = class _GlobalBannerComponent {
+  constructor() {
+    this._settings = inject(SettingsService);
+    this._org = inject(OrganisationService);
     this._change = new BehaviorSubject(0);
     this.banner = this._org.active_building.pipe(debounceTime(500), map(() => this._settings.get("app.banner")), shareReplay(1));
     this.has_been_closed = combineLatest([
@@ -28033,30 +27986,56 @@ var GlobalBannerComponent = class _GlobalBannerComponent {
       this._change.next(Date.now());
     });
   }
-  static {
-    this.\u0275fac = function GlobalBannerComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _GlobalBannerComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalBannerComponent, selectors: [["global-banner"]], decls: 3, vars: 5, consts: [["class", "flex w-full items-center space-x-4 p-4 print:hidden", 3, "bg-info", "text-info-content", "bg-warning", "text-warning-content", "bg-error", "text-error-content", 4, "ngIf"], [1, "flex", "w-full", "items-center", "space-x-4", "p-4", "print:hidden"], [1, "flex-1"], ["icon", "", "matRipple", "", 3, "click"]], template: function GlobalBannerComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275template(0, GlobalBannerComponent_div_0_Template, 16, 33, "div", 0);
-        \u0275\u0275pipe(1, "async");
-        \u0275\u0275pipe(2, "async");
-      }
-      if (rf & 2) {
-        \u0275\u0275property("ngIf", !\u0275\u0275pipeBind1(1, 1, ctx.has_been_closed) && \u0275\u0275pipeBind1(2, 3, ctx.banner));
-      }
-    }, dependencies: [CommonModule, NgIf, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
-  }
 };
+_GlobalBannerComponent.\u0275fac = function GlobalBannerComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _GlobalBannerComponent)();
+};
+_GlobalBannerComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalBannerComponent, selectors: [["global-banner"]], decls: 3, vars: 5, consts: [[1, "flex", "w-full", "items-center", "space-x-4", "p-4", "print:hidden", 3, "bg-info", "text-info-content", "bg-warning", "text-warning-content", "bg-error", "text-error-content"], [1, "flex", "w-full", "items-center", "space-x-4", "p-4", "print:hidden"], [1, "flex-1"], ["icon", "", "matRipple", "", 3, "click"]], template: function GlobalBannerComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275conditionalCreate(0, GlobalBannerComponent_Conditional_0_Template, 16, 33, "div", 0);
+    \u0275\u0275pipe(1, "async");
+    \u0275\u0275pipe(2, "async");
+  }
+  if (rf & 2) {
+    \u0275\u0275conditional(!\u0275\u0275pipeBind1(1, 1, ctx.has_been_closed) && \u0275\u0275pipeBind1(2, 3, ctx.banner) ? 0 : -1);
+  }
+}, dependencies: [CommonModule, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
+var GlobalBannerComponent = _GlobalBannerComponent;
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 49 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GlobalBannerComponent, [{
+    type: Component,
+    args: [{ selector: "global-banner", template: `
+        @if (!(has_been_closed | async) && (banner | async)) {
+            <div
+                class="flex w-full items-center space-x-4 p-4 print:hidden"
+                [class.bg-info]="
+                    (banner | async).type === 'info' || !(banner | async).type
+                "
+                [class.text-info-content]="
+                    (banner | async).type === 'info' || !(banner | async).type
+                "
+                [class.bg-warning]="(banner | async).type === 'warn'"
+                [class.text-warning-content]="(banner | async).type === 'warn'"
+                [class.bg-error]="(banner | async).type === 'error'"
+                [class.text-error-content]="(banner | async).type === 'error'"
+            >
+                <div class="flex-1">
+                    {{ (banner | async)?.content || (banner | async)?.message }}
+                </div>
+                <button icon matRipple (click)="close()">
+                    <icon>close</icon>
+                </button>
+            </div>
+        }
+    `, imports: [CommonModule], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 50 });
 })();
 
 // libs/components/src/lib/app.component.ts
-function AppComponent_global_chat_3_Template(rf, ctx) {
+function AppComponent_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "global-chat");
   }
@@ -28090,28 +28069,28 @@ function initSentry(dsn, sample_rate = 0.1) {
     // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
   });
 }
-var AppComponent = class _AppComponent extends AsyncHandler {
+var _AppComponent = class _AppComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._zone = "";
+    this._analytics = inject(GoogleAnalyticsService, { optional: true });
+    this._locale = inject(LocaleService, { optional: true });
+    this._settings = inject(SettingsService);
+    this._org = inject(OrganisationService);
+    this._cache = inject(SwUpdate);
+    this._snackbar = inject(MatSnackBar);
+    this._hotkey = inject(HotkeysService);
+    this._clipboard = inject(Clipboard);
+    this._route = inject(ActivatedRoute);
+    this._router = inject(Router);
+    this._maps = inject(MapsPeopleService);
+    this._tracing = inject(TraceService);
+  }
   get debug() {
     return window.debug && this._settings.get("app.allow_debugging") === true;
   }
   get has_chat() {
     return this._settings.get("app.chat.enabled");
-  }
-  constructor(_analytics, _settings, _org, _cache, _snackbar, _hotkey, _clipboard, _route, _router, _maps, _tracing, _locale) {
-    super();
-    this._analytics = _analytics;
-    this._settings = _settings;
-    this._org = _org;
-    this._cache = _cache;
-    this._snackbar = _snackbar;
-    this._hotkey = _hotkey;
-    this._clipboard = _clipboard;
-    this._route = _route;
-    this._router = _router;
-    this._maps = _maps;
-    this._tracing = _tracing;
-    this._locale = _locale;
-    this._zone = "";
   }
   ngOnInit() {
     return __async(this, null, function* () {
@@ -28129,6 +28108,9 @@ var AppComponent = class _AppComponent extends AsyncHandler {
         notifySuccess("Successfully copied token.");
       });
       this._hotkey.listen(["Control", "Alt", "Shift", "KeyV"], () => {
+        navigator.clipboard?.readText().then((tkn) => this._pasteToken(tkn));
+      });
+      this._hotkey.listen(["Control", "Alt", "Shift", "KeyF"], () => {
         navigator.clipboard?.readText().then((tkn) => this._pasteToken(tkn));
       });
       window.pasteToken = (t) => this._pasteToken(t);
@@ -28186,8 +28168,8 @@ var AppComponent = class _AppComponent extends AsyncHandler {
       this.timeout("set_initial_building", () => {
         const bld = this._org.buildings.find((b) => b.id === this._zone);
         if (bld)
-          this._org.setBuilding(bld);
-      });
+          this._org.setBuilding(bld, true);
+      }, 1e3);
     });
   }
   onInitError() {
@@ -28273,30 +28255,46 @@ var AppComponent = class _AppComponent extends AsyncHandler {
       yield requestScreenWakeLock();
     });
   }
-  static {
-    this.\u0275fac = function AppComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _AppComponent)(\u0275\u0275directiveInject(GoogleAnalyticsService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SwUpdate), \u0275\u0275directiveInject(MatSnackBar), \u0275\u0275directiveInject(HotkeysService), \u0275\u0275directiveInject(Clipboard), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(MapsPeopleService), \u0275\u0275directiveInject(TraceService), \u0275\u0275directiveInject(LocaleService, 8));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 5, vars: 1, consts: [[1, "relative", "h-1/2", "w-full", "flex-1"], [4, "ngIf"]], template: function AppComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275element(0, "global-banner");
-        \u0275\u0275elementStart(1, "div", 0);
-        \u0275\u0275element(2, "router-outlet");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(3, AppComponent_global_chat_3_Template, 1, 0, "global-chat", 1);
-        \u0275\u0275element(4, "global-loading");
-      }
-      if (rf & 2) {
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngIf", ctx.has_chat);
-      }
-    }, dependencies: [NgIf, RouterOutlet, GlobalLoadingComponent, GlobalBannerComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=app.component.css.map */"] });
-  }
 };
+_AppComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275AppComponent_BaseFactory;
+  return function AppComponent_Factory(__ngFactoryType__) {
+    return (\u0275AppComponent_BaseFactory || (\u0275AppComponent_BaseFactory = \u0275\u0275getInheritedFactory(_AppComponent)))(__ngFactoryType__ || _AppComponent);
+  };
+})();
+_AppComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 5, vars: 1, consts: [[1, "relative", "h-1/2", "w-full", "flex-1"]], template: function AppComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "global-banner");
+    \u0275\u0275elementStart(1, "div", 0);
+    \u0275\u0275element(2, "router-outlet");
+    \u0275\u0275elementEnd();
+    \u0275\u0275conditionalCreate(3, AppComponent_Conditional_3_Template, 1, 0, "global-chat");
+    \u0275\u0275element(4, "global-loading");
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(3);
+    \u0275\u0275conditional(ctx.has_chat ? 3 : -1);
+  }
+}, dependencies: [RouterOutlet, GlobalLoadingComponent, GlobalBannerComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=app.component.css.map */"] });
+var AppComponent = _AppComponent;
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 111 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppComponent, [{
+    type: Component,
+    args: [{ selector: "app-root", template: `
+        <global-banner></global-banner>
+        <div class="relative h-1/2 w-full flex-1">
+            <router-outlet></router-outlet>
+        </div>
+        @if (has_chat) {
+            <global-chat></global-chat>
+        }
+        <global-loading></global-loading>
+        <!-- <debug-console *ngIf="debug"></debug-console> -->
+    `, standalone: false, styles: ["/* angular:styles/component:css;2c590c9e56511a088a1469fe4b227d8190323c208f95620a03712f1a8f5bae8d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/app.component.ts */\n:host {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=app.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 113 });
 })();
 
 // apps/visitor-kiosk/src/environments/environment.ts
@@ -28305,17 +28303,17 @@ var environment = {
 };
 
 // apps/visitor-kiosk/src/app/bootstrap.component.ts
-var _c03 = ["bootstrap", ""];
-function BootstrapComponent_div_11_ng_container_1_mat_option_14_Template(rf, ctx) {
+var _c04 = ["bootstrap", ""];
+function BootstrapComponent_Conditional_11_Conditional_1_For_14_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 18)(1, "div", 19)(2, "div");
+    \u0275\u0275elementStart(0, "mat-option", 15)(1, "div", 16)(2, "div");
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 20)(5, "span", 21);
+    \u0275\u0275elementStart(4, "div", 17)(5, "span", 18);
     \u0275\u0275text(6, "\xA0[");
     \u0275\u0275elementEnd();
     \u0275\u0275text(7);
-    \u0275\u0275elementStart(8, "span", 21);
+    \u0275\u0275elementStart(8, "span", 18);
     \u0275\u0275text(9, "]");
     \u0275\u0275elementEnd()()()();
   }
@@ -28328,63 +28326,61 @@ function BootstrapComponent_div_11_ng_container_1_mat_option_14_Template(rf, ctx
     \u0275\u0275textInterpolate(option_r3.id);
   }
 }
-function BootstrapComponent_div_11_ng_container_1_Template(rf, ctx) {
+function BootstrapComponent_Conditional_11_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "label");
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementStart(0, "label");
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "mat-form-field", 12)(5, "mat-select", 13, 1);
-    \u0275\u0275pipe(7, "translate");
-    \u0275\u0275twoWayListener("ngModelChange", function BootstrapComponent_div_11_ng_container_1_Template_mat_select_ngModelChange_5_listener($event) {
+    \u0275\u0275elementStart(3, "mat-form-field", 10)(4, "mat-select", 11, 0);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275twoWayListener("ngModelChange", function BootstrapComponent_Conditional_11_Conditional_1_Template_mat_select_ngModelChange_4_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext(2);
       \u0275\u0275twoWayBindingSet(ctx_r1.active_region, $event) || (ctx_r1.active_region = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275listener("ngModelChange", function BootstrapComponent_div_11_ng_container_1_Template_mat_select_ngModelChange_5_listener($event) {
+    \u0275\u0275listener("ngModelChange", function BootstrapComponent_Conditional_11_Conditional_1_Template_mat_select_ngModelChange_4_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.setRegion($event));
     });
-    \u0275\u0275elementStart(8, "mat-select-trigger")(9, "div", 14)(10, "div", 15);
-    \u0275\u0275text(11);
+    \u0275\u0275elementStart(7, "mat-select-trigger")(8, "div", 12)(9, "div", 13);
+    \u0275\u0275text(10);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "div", 16);
-    \u0275\u0275text(13);
+    \u0275\u0275elementStart(11, "div", 14);
+    \u0275\u0275text(12);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275template(14, BootstrapComponent_div_11_ng_container_1_mat_option_14_Template, 10, 3, "mat-option", 17);
+    \u0275\u0275repeaterCreate(13, BootstrapComponent_Conditional_11_Conditional_1_For_14_Template, 10, 3, "mat-option", 15, \u0275\u0275repeaterTrackByIdentity);
     \u0275\u0275pipe(15, "async");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 6, "APP.VISITOR_KIOSK.SELECT_REGION_MSG"), " ");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 5, "APP.VISITOR_KIOSK.SELECT_REGION_MSG"), " ");
     \u0275\u0275advance(3);
     \u0275\u0275twoWayProperty("ngModel", ctx_r1.active_region);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(7, 8, "APP.VISITOR_KIOSK.SELECT_REGION_MSG"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(6, 7, "APP.VISITOR_KIOSK.SELECT_REGION_MSG"));
     \u0275\u0275advance(6);
     \u0275\u0275textInterpolate1(" ", (ctx_r1.active_region == null ? null : ctx_r1.active_region.display_name) || (ctx_r1.active_region == null ? null : ctx_r1.active_region.name), " ");
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", ctx_r1.active_region == null ? null : ctx_r1.active_region.id, " ");
     \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(15, 10, ctx_r1.regions));
+    \u0275\u0275repeater(\u0275\u0275pipeBind1(15, 9, ctx_r1.regions));
   }
 }
-function BootstrapComponent_div_11_ng_container_3_mat_option_14_Template(rf, ctx) {
+function BootstrapComponent_Conditional_11_Conditional_3_For_14_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 18)(1, "div", 19)(2, "div");
+    \u0275\u0275elementStart(0, "mat-option", 15)(1, "div", 16)(2, "div");
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 22)(5, "span", 21);
+    \u0275\u0275elementStart(4, "div", 19)(5, "span", 18);
     \u0275\u0275text(6, "\xA0[");
     \u0275\u0275elementEnd();
     \u0275\u0275text(7);
-    \u0275\u0275elementStart(8, "span", 21);
+    \u0275\u0275elementStart(8, "span", 18);
     \u0275\u0275text(9, "]");
     \u0275\u0275elementEnd()()()();
   }
@@ -28397,63 +28393,61 @@ function BootstrapComponent_div_11_ng_container_3_mat_option_14_Template(rf, ctx
     \u0275\u0275textInterpolate(option_r5.id);
   }
 }
-function BootstrapComponent_div_11_ng_container_3_Template(rf, ctx) {
+function BootstrapComponent_Conditional_11_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275elementStart(1, "label");
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementStart(0, "label");
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "mat-form-field", 12)(5, "mat-select", 13, 1);
-    \u0275\u0275pipe(7, "translate");
-    \u0275\u0275twoWayListener("ngModelChange", function BootstrapComponent_div_11_ng_container_3_Template_mat_select_ngModelChange_5_listener($event) {
+    \u0275\u0275elementStart(3, "mat-form-field", 10)(4, "mat-select", 11, 0);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275twoWayListener("ngModelChange", function BootstrapComponent_Conditional_11_Conditional_3_Template_mat_select_ngModelChange_4_listener($event) {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext(2);
       \u0275\u0275twoWayBindingSet(ctx_r1.active_building, $event) || (ctx_r1.active_building = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275listener("ngModelChange", function BootstrapComponent_div_11_ng_container_3_Template_mat_select_ngModelChange_5_listener($event) {
+    \u0275\u0275listener("ngModelChange", function BootstrapComponent_Conditional_11_Conditional_3_Template_mat_select_ngModelChange_4_listener($event) {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.setBuilding($event));
     });
-    \u0275\u0275elementStart(8, "mat-select-trigger")(9, "div", 14)(10, "div", 15);
-    \u0275\u0275text(11);
+    \u0275\u0275elementStart(7, "mat-select-trigger")(8, "div", 12)(9, "div", 13);
+    \u0275\u0275text(10);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "div", 16);
-    \u0275\u0275text(13);
+    \u0275\u0275elementStart(11, "div", 14);
+    \u0275\u0275text(12);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275template(14, BootstrapComponent_div_11_ng_container_3_mat_option_14_Template, 10, 3, "mat-option", 17);
+    \u0275\u0275repeaterCreate(13, BootstrapComponent_Conditional_11_Conditional_3_For_14_Template, 10, 3, "mat-option", 15, \u0275\u0275repeaterTrackByIdentity);
     \u0275\u0275pipe(15, "async");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 6, "APP.VISITOR_KIOSK.SELECT_BUILDING_MSG"), " ");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 5, "APP.VISITOR_KIOSK.SELECT_BUILDING_MSG"), " ");
     \u0275\u0275advance(3);
     \u0275\u0275twoWayProperty("ngModel", ctx_r1.active_building);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(7, 8, "APP.VISITOR_KIOSK.SELECT_BUILDING"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(6, 7, "APP.VISITOR_KIOSK.SELECT_BUILDING"));
     \u0275\u0275advance(6);
     \u0275\u0275textInterpolate1(" ", (ctx_r1.active_building == null ? null : ctx_r1.active_building.display_name) || (ctx_r1.active_building == null ? null : ctx_r1.active_building.name), " ");
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", ctx_r1.active_building == null ? null : ctx_r1.active_building.id, " ");
     \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(15, 10, ctx_r1.buildings));
+    \u0275\u0275repeater(\u0275\u0275pipeBind1(15, 9, ctx_r1.buildings));
   }
 }
-function BootstrapComponent_div_11_ng_container_5_mat_option_15_Template(rf, ctx) {
+function BootstrapComponent_Conditional_11_Conditional_5_For_15_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 18)(1, "div", 19)(2, "div");
+    \u0275\u0275elementStart(0, "mat-option", 15)(1, "div", 16)(2, "div");
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 20)(5, "span", 21);
+    \u0275\u0275elementStart(4, "div", 17)(5, "span", 18);
     \u0275\u0275text(6, "\xA0[");
     \u0275\u0275elementEnd();
     \u0275\u0275text(7);
-    \u0275\u0275elementStart(8, "span", 21);
+    \u0275\u0275elementStart(8, "span", 18);
     \u0275\u0275text(9, "]");
     \u0275\u0275elementEnd()()()();
   }
@@ -28466,59 +28460,57 @@ function BootstrapComponent_div_11_ng_container_5_mat_option_15_Template(rf, ctx
     \u0275\u0275textInterpolate(option_r7.id);
   }
 }
-function BootstrapComponent_div_11_ng_container_5_Template(rf, ctx) {
+function BootstrapComponent_Conditional_11_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
     const _r6 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "div");
-    \u0275\u0275elementStart(2, "label");
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275element(0, "div");
+    \u0275\u0275elementStart(1, "label");
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "mat-form-field", 12)(6, "mat-select", 23, 1);
-    \u0275\u0275pipe(8, "translate");
-    \u0275\u0275twoWayListener("ngModelChange", function BootstrapComponent_div_11_ng_container_5_Template_mat_select_ngModelChange_6_listener($event) {
+    \u0275\u0275elementStart(4, "mat-form-field", 10)(5, "mat-select", 20, 0);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275twoWayListener("ngModelChange", function BootstrapComponent_Conditional_11_Conditional_5_Template_mat_select_ngModelChange_5_listener($event) {
       \u0275\u0275restoreView(_r6);
       const ctx_r1 = \u0275\u0275nextContext(2);
       \u0275\u0275twoWayBindingSet(ctx_r1.active_level, $event) || (ctx_r1.active_level = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275elementStart(9, "mat-select-trigger")(10, "div", 14)(11, "div", 15);
-    \u0275\u0275text(12);
+    \u0275\u0275elementStart(8, "mat-select-trigger")(9, "div", 12)(10, "div", 13);
+    \u0275\u0275text(11);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "div", 16);
-    \u0275\u0275text(14);
+    \u0275\u0275elementStart(12, "div", 14);
+    \u0275\u0275text(13);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275template(15, BootstrapComponent_div_11_ng_container_5_mat_option_15_Template, 10, 3, "mat-option", 17);
+    \u0275\u0275repeaterCreate(14, BootstrapComponent_Conditional_11_Conditional_5_For_15_Template, 10, 3, "mat-option", 15, \u0275\u0275repeaterTrackByIdentity);
     \u0275\u0275pipe(16, "async");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 6, "APP.VISITOR_KIOSK.SELECT_LEVEL_MSG"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 5, "APP.VISITOR_KIOSK.SELECT_LEVEL_MSG"), " ");
     \u0275\u0275advance(3);
     \u0275\u0275twoWayProperty("ngModel", ctx_r1.active_level);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(8, 8, "APP.VISITOR_KIOSK.SELECT_LEVEL"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(7, 7, "APP.VISITOR_KIOSK.SELECT_LEVEL"));
     \u0275\u0275advance(6);
     \u0275\u0275textInterpolate1(" ", (ctx_r1.active_level == null ? null : ctx_r1.active_level.display_name) || (ctx_r1.active_level == null ? null : ctx_r1.active_level.name), " ");
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", ctx_r1.active_level == null ? null : ctx_r1.active_level.id, " ");
     \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", \u0275\u0275pipeBind1(16, 10, ctx_r1.levels));
+    \u0275\u0275repeater(\u0275\u0275pipeBind1(16, 9, ctx_r1.levels));
   }
 }
-function BootstrapComponent_div_11_ng_container_7_mat_option_9_Template(rf, ctx) {
+function BootstrapComponent_Conditional_11_Conditional_7_For_9_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 18)(1, "div", 19)(2, "div");
+    \u0275\u0275elementStart(0, "mat-option", 15)(1, "div", 16)(2, "div");
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 20)(5, "span", 21);
+    \u0275\u0275elementStart(4, "div", 17)(5, "span", 18);
     \u0275\u0275text(6, "\xA0[");
     \u0275\u0275elementEnd();
     \u0275\u0275text(7);
-    \u0275\u0275elementStart(8, "span", 21);
+    \u0275\u0275elementStart(8, "span", 18);
     \u0275\u0275text(9, "]");
     \u0275\u0275elementEnd()()()();
   }
@@ -28531,48 +28523,46 @@ function BootstrapComponent_div_11_ng_container_7_mat_option_9_Template(rf, ctx)
     \u0275\u0275textInterpolate(option_r9.id);
   }
 }
-function BootstrapComponent_div_11_ng_container_7_Template(rf, ctx) {
+function BootstrapComponent_Conditional_11_Conditional_7_Template(rf, ctx) {
   if (rf & 1) {
     const _r8 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "div");
-    \u0275\u0275elementStart(2, "label");
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275element(0, "div");
+    \u0275\u0275elementStart(1, "label");
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "mat-form-field", 12)(6, "mat-select", 24, 1);
-    \u0275\u0275pipe(8, "translate");
-    \u0275\u0275twoWayListener("valueChange", function BootstrapComponent_div_11_ng_container_7_Template_mat_select_valueChange_6_listener($event) {
+    \u0275\u0275elementStart(4, "mat-form-field", 10)(5, "mat-select", 21, 0);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275twoWayListener("valueChange", function BootstrapComponent_Conditional_11_Conditional_7_Template_mat_select_valueChange_5_listener($event) {
       \u0275\u0275restoreView(_r8);
       const ctx_r1 = \u0275\u0275nextContext(2);
       \u0275\u0275twoWayBindingSet(ctx_r1.active_rotation, $event) || (ctx_r1.active_rotation = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275template(9, BootstrapComponent_div_11_ng_container_7_mat_option_9_Template, 10, 3, "mat-option", 17);
+    \u0275\u0275repeaterCreate(8, BootstrapComponent_Conditional_11_Conditional_7_For_9_Template, 10, 3, "mat-option", 15, \u0275\u0275repeaterTrackByIdentity);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 4, "APP.VISITOR_KIOSK.SELECT_ORIENTATION_MSG"), " Please select an orientation from the dropdown below ");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 3, "APP.VISITOR_KIOSK.SELECT_ORIENTATION_MSG"), " Please select an orientation from the dropdown below ");
     \u0275\u0275advance(3);
     \u0275\u0275twoWayProperty("value", ctx_r1.active_rotation);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(8, 6, "APP.VISITOR_KIOSK.SELECT_ORIENTATION"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(7, 5, "APP.VISITOR_KIOSK.SELECT_ORIENTATION"));
     \u0275\u0275advance(3);
-    \u0275\u0275property("ngForOf", ctx_r1.rotations);
+    \u0275\u0275repeater(ctx_r1.rotations);
   }
 }
-function BootstrapComponent_div_11_ng_container_8_mat_option_9_Template(rf, ctx) {
+function BootstrapComponent_Conditional_11_Conditional_8_For_9_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-option", 18)(1, "div", 19)(2, "div");
+    \u0275\u0275elementStart(0, "mat-option", 15)(1, "div", 16)(2, "div");
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 20)(5, "span", 21);
+    \u0275\u0275elementStart(4, "div", 17)(5, "span", 18);
     \u0275\u0275text(6, "\xA0[");
     \u0275\u0275elementEnd();
     \u0275\u0275text(7);
-    \u0275\u0275elementStart(8, "span", 21);
+    \u0275\u0275elementStart(8, "span", 18);
     \u0275\u0275text(9, "]");
     \u0275\u0275elementEnd()()()();
   }
@@ -28585,72 +28575,87 @@ function BootstrapComponent_div_11_ng_container_8_mat_option_9_Template(rf, ctx)
     \u0275\u0275textInterpolate(option_r11.id);
   }
 }
-function BootstrapComponent_div_11_ng_container_8_Template(rf, ctx) {
+function BootstrapComponent_Conditional_11_Conditional_8_Template(rf, ctx) {
   if (rf & 1) {
     const _r10 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementContainerStart(0);
-    \u0275\u0275element(1, "div");
-    \u0275\u0275elementStart(2, "label");
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275element(0, "div");
+    \u0275\u0275elementStart(1, "label");
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "mat-form-field", 12)(6, "mat-select", 24, 1);
-    \u0275\u0275pipe(8, "translate");
-    \u0275\u0275twoWayListener("valueChange", function BootstrapComponent_div_11_ng_container_8_Template_mat_select_valueChange_6_listener($event) {
+    \u0275\u0275elementStart(4, "mat-form-field", 10)(5, "mat-select", 21, 0);
+    \u0275\u0275pipe(7, "translate");
+    \u0275\u0275twoWayListener("valueChange", function BootstrapComponent_Conditional_11_Conditional_8_Template_mat_select_valueChange_5_listener($event) {
       \u0275\u0275restoreView(_r10);
       const ctx_r1 = \u0275\u0275nextContext(2);
       \u0275\u0275twoWayBindingSet(ctx_r1.active_location, $event) || (ctx_r1.active_location = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275template(9, BootstrapComponent_div_11_ng_container_8_mat_option_9_Template, 10, 3, "mat-option", 17);
+    \u0275\u0275repeaterCreate(8, BootstrapComponent_Conditional_11_Conditional_8_For_9_Template, 10, 3, "mat-option", 15, \u0275\u0275repeaterTrackByIdentity);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 4, "APP.VISITOR_KIOSK.SELECT_LOCATION_MSG"), " Please select an fixed location from the dropdown below ");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 3, "APP.VISITOR_KIOSK.SELECT_LOCATION_MSG"), " Please select an fixed location from the dropdown below ");
     \u0275\u0275advance(3);
     \u0275\u0275twoWayProperty("value", ctx_r1.active_location);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(8, 6, "APP.VISITOR_KIOSK.SELECT_LOCATION"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(7, 5, "APP.VISITOR_KIOSK.SELECT_LOCATION"));
     \u0275\u0275advance(3);
-    \u0275\u0275property("ngForOf", ctx_r1.locations);
+    \u0275\u0275repeater(ctx_r1.locations);
   }
 }
-function BootstrapComponent_div_11_Template(rf, ctx) {
+function BootstrapComponent_Conditional_11_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 10);
-    \u0275\u0275template(1, BootstrapComponent_div_11_ng_container_1_Template, 16, 12, "ng-container", 11);
+    \u0275\u0275elementStart(0, "div", 7);
+    \u0275\u0275conditionalCreate(1, BootstrapComponent_Conditional_11_Conditional_1_Template, 16, 11);
     \u0275\u0275pipe(2, "async");
-    \u0275\u0275template(3, BootstrapComponent_div_11_ng_container_3_Template, 16, 12, "ng-container", 11);
+    \u0275\u0275conditionalCreate(3, BootstrapComponent_Conditional_11_Conditional_3_Template, 16, 11);
     \u0275\u0275pipe(4, "async");
-    \u0275\u0275template(5, BootstrapComponent_div_11_ng_container_5_Template, 17, 12, "ng-container", 11);
+    \u0275\u0275conditionalCreate(5, BootstrapComponent_Conditional_11_Conditional_5_Template, 17, 11);
     \u0275\u0275pipe(6, "async");
-    \u0275\u0275template(7, BootstrapComponent_div_11_ng_container_7_Template, 10, 8, "ng-container", 11)(8, BootstrapComponent_div_11_ng_container_8_Template, 10, 8, "ng-container", 11);
+    \u0275\u0275conditionalCreate(7, BootstrapComponent_Conditional_11_Conditional_7_Template, 10, 7);
+    \u0275\u0275conditionalCreate(8, BootstrapComponent_Conditional_11_Conditional_8_Template, 10, 7);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
+    let tmp_1_0;
     let tmp_2_0;
     let tmp_3_0;
-    let tmp_4_0;
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ((tmp_2_0 = \u0275\u0275pipeBind1(2, 5, ctx_r1.regions)) == null ? null : tmp_2_0.length) > 1);
+    \u0275\u0275conditional(((tmp_1_0 = \u0275\u0275pipeBind1(2, 5, ctx_r1.regions)) == null ? null : tmp_1_0.length) > 1 ? 1 : -1);
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", (tmp_3_0 = \u0275\u0275pipeBind1(4, 7, ctx_r1.buildings)) == null ? null : tmp_3_0.length);
+    \u0275\u0275conditional(((tmp_2_0 = \u0275\u0275pipeBind1(4, 7, ctx_r1.buildings)) == null ? null : tmp_2_0.length) ? 3 : -1);
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ((tmp_4_0 = \u0275\u0275pipeBind1(6, 9, ctx_r1.levels)) == null ? null : tmp_4_0.length) && ctx_r1.active_building);
+    \u0275\u0275conditional(((tmp_3_0 = \u0275\u0275pipeBind1(6, 9, ctx_r1.levels)) == null ? null : tmp_3_0.length) && ctx_r1.active_building ? 5 : -1);
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", ctx_r1.rotations && ctx_r1.rotations.length);
+    \u0275\u0275conditional(ctx_r1.rotations && ctx_r1.rotations.length ? 7 : -1);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.locations && ctx_r1.locations.length);
+    \u0275\u0275conditional(ctx_r1.locations && ctx_r1.locations.length ? 8 : -1);
   }
 }
-function BootstrapComponent_div_12_Template(rf, ctx) {
+function BootstrapComponent_Conditional_12_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 8);
+    \u0275\u0275element(1, "mat-spinner", 22);
+    \u0275\u0275elementStart(2, "p");
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("diameter", 32);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r1.loading);
+  }
+}
+function BootstrapComponent_Conditional_13_Template(rf, ctx) {
   if (rf & 1) {
     const _r12 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 25)(1, "button", 26);
-    \u0275\u0275listener("click", function BootstrapComponent_div_12_Template_button_click_1_listener() {
+    \u0275\u0275elementStart(0, "div", 9)(1, "button", 23);
+    \u0275\u0275listener("click", function BootstrapComponent_Conditional_13_Template_button_click_1_listener() {
       \u0275\u0275restoreView(_r12);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.bootstrapKiosk());
@@ -28664,23 +28669,7 @@ function BootstrapComponent_div_12_Template(rf, ctx) {
     \u0275\u0275property("disabled", !ctx_r1.active_building && !ctx_r1.active_level);
   }
 }
-function BootstrapComponent_ng_template_13_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 27);
-    \u0275\u0275element(1, "mat-spinner", 28);
-    \u0275\u0275elementStart(2, "p");
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("diameter", 32);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r1.loading);
-  }
-}
-var BootstrapComponent = class _BootstrapComponent extends AsyncHandler {
+var _BootstrapComponent = class _BootstrapComponent extends AsyncHandler {
   setRegion(region) {
     this._org.region = region;
     this.active_building = void 0;
@@ -28794,101 +28783,414 @@ var BootstrapComponent = class _BootstrapComponent extends AsyncHandler {
     VirtualKeyboardComponent.enabled = localStorage.getItem("OSK.enabled") === "true";
     this.loading = null;
   }
-  static {
-    this.\u0275fac = function BootstrapComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _BootstrapComponent)(\u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(Router));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BootstrapComponent, selectors: [["", "bootstrap", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c03, decls: 15, vars: 9, consts: [["load_state", ""], ["select", ""], [1, "absolute", "inset-0", "z-0", "bg-base-200"], ["form", "", 1, "relative", "z-10", "mx-auto", "my-8", "w-[28rem]", "max-w-[calc(100%-2rem)]", "overflow-hidden", "rounded-lg", "border", "border-base-300", "bg-base-100", "shadow"], [1, "flex", "w-full", "items-center", "justify-between", "bg-secondary", "px-4", "py-3", "text-xl", "font-medium", "text-secondary-content"], [1, "relative", "overflow-hidden", "rounded", "px-2", "py-1"], [1, "absolute", "inset-0", "z-0", "bg-base-100", "opacity-10"], [1, "relative", "z-10", "font-mono", "text-sm", "uppercase"], ["class", "flex flex-col space-y-2 px-4", 4, "ngIf", "ngIfElse"], ["class", "!mt-4 flex w-full items-center justify-end border-t border-base-300 px-4 py-2", 4, "ngIf"], [1, "flex", "flex-col", "space-y-2", "px-4"], [4, "ngIf"], ["appearance", "outline", 1, "no-subscript"], ["building", "", 3, "ngModelChange", "ngModel", "placeholder"], [1, "flex", "items-center", "space-x-4"], [1, "flex-1", "truncate"], [1, "!mr-4", "rounded", "bg-base-200", "px-1.5", "font-mono", "text-[0.625rem]"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "leading-tight"], [1, "font-mono", "text-[0.625rem]", "opacity-30"], [1, "hidden"], [1, "font-mono", "text-[0.625rem]", "opacity-60"], ["level", "", 3, "ngModelChange", "ngModel", "placeholder"], [3, "valueChange", "value", "placeholder"], [1, "!mt-4", "flex", "w-full", "items-center", "justify-end", "border-t", "border-base-300", "px-4", "py-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click", "disabled"], [1, "m-auto", "flex", "flex-col", "items-center", "p-8"], [3, "diameter"]], template: function BootstrapComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275element(0, "div", 2);
-        \u0275\u0275elementStart(1, "div", 3)(2, "header", 4)(3, "div");
-        \u0275\u0275text(4);
-        \u0275\u0275pipe(5, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(6, "div", 5);
-        \u0275\u0275element(7, "div", 6);
-        \u0275\u0275elementStart(8, "div", 7);
-        \u0275\u0275text(9);
-        \u0275\u0275pipe(10, "translate");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275template(11, BootstrapComponent_div_11_Template, 9, 11, "div", 8)(12, BootstrapComponent_div_12_Template, 3, 1, "div", 9);
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(13, BootstrapComponent_ng_template_13_Template, 4, 2, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        const load_state_r13 = \u0275\u0275reference(14);
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 5, "APP.VISITOR_KIOSK.APP"));
-        \u0275\u0275advance(5);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 7, "COMMON.BOOTSTRAP_SETUP"), " ");
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !ctx.loading)("ngIfElse", load_state_r13);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", !ctx.loading);
-      }
-    }, dependencies: [NgForOf, NgIf, NgControlStatus, NgModel, MatProgressSpinner, MatRipple, MatFormField, MatSelect, MatSelectTrigger, MatOption, AsyncPipe, TranslatePipe], styles: ["\n\nmat-form-field[_ngcontent-%COMP%] {\n  width: 100%;\n}\nlabel[_ngcontent-%COMP%] {\n  padding-top: 1rem;\n}\n/*# sourceMappingURL=bootstrap.component.css.map */"] });
-  }
 };
+_BootstrapComponent.\u0275fac = function BootstrapComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _BootstrapComponent)(\u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(Router));
+};
+_BootstrapComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BootstrapComponent, selectors: [["", "bootstrap", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c04, decls: 14, vars: 8, consts: [["select", ""], [1, "absolute", "inset-0", "z-0", "bg-base-200"], ["form", "", 1, "relative", "z-10", "mx-auto", "my-8", "w-[28rem]", "max-w-[calc(100%-2rem)]", "overflow-hidden", "rounded-lg", "border", "border-base-300", "bg-base-100", "shadow"], [1, "flex", "w-full", "items-center", "justify-between", "bg-secondary", "px-4", "py-3", "text-xl", "font-medium", "text-secondary-content"], [1, "relative", "overflow-hidden", "rounded", "px-2", "py-1"], [1, "absolute", "inset-0", "z-0", "bg-base-100", "opacity-10"], [1, "relative", "z-10", "font-mono", "text-sm", "uppercase"], [1, "flex", "flex-col", "space-y-2", "px-4"], [1, "m-auto", "flex", "flex-col", "items-center", "p-8"], [1, "!mt-4", "flex", "w-full", "items-center", "justify-end", "border-t", "border-base-300", "px-4", "py-2"], ["appearance", "outline", 1, "no-subscript"], ["building", "", 3, "ngModelChange", "ngModel", "placeholder"], [1, "flex", "items-center", "space-x-4"], [1, "flex-1", "truncate"], [1, "!mr-4", "rounded", "bg-base-200", "px-1.5", "font-mono", "text-[0.625rem]"], [3, "value"], [1, "leading-tight"], [1, "font-mono", "text-[0.625rem]", "opacity-30"], [1, "hidden"], [1, "font-mono", "text-[0.625rem]", "opacity-60"], ["level", "", 3, "ngModelChange", "ngModel", "placeholder"], [3, "valueChange", "value", "placeholder"], [3, "diameter"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click", "disabled"]], template: function BootstrapComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 1);
+    \u0275\u0275elementStart(1, "div", 2)(2, "header", 3)(3, "div");
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "div", 4);
+    \u0275\u0275element(7, "div", 5);
+    \u0275\u0275elementStart(8, "div", 6);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "translate");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275conditionalCreate(11, BootstrapComponent_Conditional_11_Template, 9, 11, "div", 7)(12, BootstrapComponent_Conditional_12_Template, 4, 2, "div", 8);
+    \u0275\u0275conditionalCreate(13, BootstrapComponent_Conditional_13_Template, 3, 1, "div", 9);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 4, "APP.VISITOR_KIOSK.APP"));
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 6, "COMMON.BOOTSTRAP_SETUP"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(!ctx.loading ? 11 : 12);
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(!ctx.loading ? 13 : -1);
+  }
+}, dependencies: [NgControlStatus, NgModel, MatProgressSpinner, MatRipple, MatFormField, MatSelect, MatSelectTrigger, MatOption, AsyncPipe, TranslatePipe], styles: ["\n\nmat-form-field[_ngcontent-%COMP%] {\n  width: 100%;\n}\nlabel[_ngcontent-%COMP%] {\n  padding-top: 1rem;\n}\n/*# sourceMappingURL=bootstrap.component.css.map */"] });
+var BootstrapComponent = _BootstrapComponent;
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BootstrapComponent, { className: "BootstrapComponent", filePath: "apps/visitor-kiosk/src/app/bootstrap.component.ts", lineNumber: 302 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BootstrapComponent, [{
+    type: Component,
+    args: [{ selector: "[bootstrap]", template: `
+        <div class="absolute inset-0 z-0 bg-base-200"></div>
+        <div
+            form
+            class="relative z-10 mx-auto my-8 w-[28rem] max-w-[calc(100%-2rem)] overflow-hidden rounded-lg border border-base-300 bg-base-100 shadow"
+        >
+            <header
+                class="flex w-full items-center justify-between bg-secondary px-4 py-3 text-xl font-medium text-secondary-content"
+            >
+                <div>{{ 'APP.VISITOR_KIOSK.APP' | translate }}</div>
+                <div class="relative overflow-hidden rounded px-2 py-1">
+                    <div
+                        class="absolute inset-0 z-0 bg-base-100 opacity-10"
+                    ></div>
+                    <div class="relative z-10 font-mono text-sm uppercase">
+                        {{ 'COMMON.BOOTSTRAP_SETUP' | translate }}
+                    </div>
+                </div>
+            </header>
+            @if (!loading) {
+                <div class="flex flex-col space-y-2 px-4">
+                    @if ((regions | async)?.length > 1) {
+                        <label>
+                            {{
+                                'APP.VISITOR_KIOSK.SELECT_REGION_MSG'
+                                    | translate
+                            }}
+                        </label>
+                        <mat-form-field
+                            appearance="outline"
+                            class="no-subscript"
+                        >
+                            <mat-select
+                                #select
+                                building
+                                [(ngModel)]="active_region"
+                                (ngModelChange)="setRegion($event)"
+                                [placeholder]="
+                                    'APP.VISITOR_KIOSK.SELECT_REGION_MSG'
+                                        | translate
+                                "
+                            >
+                                <mat-select-trigger>
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex-1 truncate">
+                                            {{
+                                                active_region?.display_name ||
+                                                    active_region?.name
+                                            }}
+                                        </div>
+                                        <div
+                                            class="!mr-4 rounded bg-base-200 px-1.5 font-mono text-[0.625rem]"
+                                        >
+                                            {{ active_region?.id }}
+                                        </div>
+                                    </div>
+                                </mat-select-trigger>
+                                @for (option of regions | async; track option) {
+                                    <mat-option [value]="option">
+                                        <div class="leading-tight">
+                                            <div>
+                                                {{
+                                                    option.display_name ||
+                                                        option.name
+                                                }}
+                                            </div>
+                                            <div
+                                                class="font-mono text-[0.625rem] opacity-30"
+                                            >
+                                                <span class="hidden"
+                                                    >&nbsp;[</span
+                                                >{{ option.id
+                                                }}<span class="hidden">]</span>
+                                            </div>
+                                        </div>
+                                    </mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    }
+                    @if ((buildings | async)?.length) {
+                        <label>
+                            {{
+                                'APP.VISITOR_KIOSK.SELECT_BUILDING_MSG'
+                                    | translate
+                            }}
+                        </label>
+                        <mat-form-field
+                            appearance="outline"
+                            class="no-subscript"
+                        >
+                            <mat-select
+                                #select
+                                building
+                                [(ngModel)]="active_building"
+                                (ngModelChange)="setBuilding($event)"
+                                [placeholder]="
+                                    'APP.VISITOR_KIOSK.SELECT_BUILDING'
+                                        | translate
+                                "
+                            >
+                                <mat-select-trigger>
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex-1 truncate">
+                                            {{
+                                                active_building?.display_name ||
+                                                    active_building?.name
+                                            }}
+                                        </div>
+                                        <div
+                                            class="!mr-4 rounded bg-base-200 px-1.5 font-mono text-[0.625rem]"
+                                        >
+                                            {{ active_building?.id }}
+                                        </div>
+                                    </div>
+                                </mat-select-trigger>
+                                @for (
+                                    option of buildings | async;
+                                    track option
+                                ) {
+                                    <mat-option [value]="option">
+                                        <div class="leading-tight">
+                                            <div>
+                                                {{
+                                                    option.display_name ||
+                                                        option.name
+                                                }}
+                                            </div>
+                                            <div
+                                                class="font-mono text-[0.625rem] opacity-60"
+                                            >
+                                                <span class="hidden"
+                                                    >&nbsp;[</span
+                                                >{{ option.id
+                                                }}<span class="hidden">]</span>
+                                            </div>
+                                        </div>
+                                    </mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    }
+                    @if ((levels | async)?.length && active_building) {
+                        <div></div>
+                        <label>
+                            {{
+                                'APP.VISITOR_KIOSK.SELECT_LEVEL_MSG' | translate
+                            }}
+                        </label>
+                        <mat-form-field
+                            appearance="outline"
+                            class="no-subscript"
+                        >
+                            <mat-select
+                                #select
+                                level
+                                [(ngModel)]="active_level"
+                                [placeholder]="
+                                    'APP.VISITOR_KIOSK.SELECT_LEVEL' | translate
+                                "
+                            >
+                                <mat-select-trigger>
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex-1 truncate">
+                                            {{
+                                                active_level?.display_name ||
+                                                    active_level?.name
+                                            }}
+                                        </div>
+                                        <div
+                                            class="!mr-4 rounded bg-base-200 px-1.5 font-mono text-[0.625rem]"
+                                        >
+                                            {{ active_level?.id }}
+                                        </div>
+                                    </div>
+                                </mat-select-trigger>
+                                @for (option of levels | async; track option) {
+                                    <mat-option [value]="option">
+                                        <div class="leading-tight">
+                                            <div>
+                                                {{
+                                                    option.display_name ||
+                                                        option.name
+                                                }}
+                                            </div>
+                                            <div
+                                                class="font-mono text-[0.625rem] opacity-30"
+                                            >
+                                                <span class="hidden"
+                                                    >&nbsp;[</span
+                                                >{{ option.id
+                                                }}<span class="hidden">]</span>
+                                            </div>
+                                        </div>
+                                    </mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    }
+                    @if (rotations && rotations.length) {
+                        <div></div>
+                        <label>
+                            {{
+                                'APP.VISITOR_KIOSK.SELECT_ORIENTATION_MSG'
+                                    | translate
+                            }}
+                            Please select an orientation from the dropdown below
+                        </label>
+                        <mat-form-field
+                            appearance="outline"
+                            class="no-subscript"
+                        >
+                            <mat-select
+                                #select
+                                [(value)]="active_rotation"
+                                [placeholder]="
+                                    'APP.VISITOR_KIOSK.SELECT_ORIENTATION'
+                                        | translate
+                                "
+                            >
+                                @for (option of rotations; track option) {
+                                    <mat-option [value]="option">
+                                        <div class="leading-tight">
+                                            <div>
+                                                {{
+                                                    option.display_name ||
+                                                        option.name
+                                                }}
+                                            </div>
+                                            <div
+                                                class="font-mono text-[0.625rem] opacity-30"
+                                            >
+                                                <span class="hidden"
+                                                    >&nbsp;[</span
+                                                >{{ option.id
+                                                }}<span class="hidden">]</span>
+                                            </div>
+                                        </div>
+                                    </mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    }
+                    @if (locations && locations.length) {
+                        <div></div>
+                        <label>
+                            {{
+                                'APP.VISITOR_KIOSK.SELECT_LOCATION_MSG'
+                                    | translate
+                            }}
+                            Please select an fixed location from the dropdown
+                            below
+                        </label>
+                        <mat-form-field
+                            appearance="outline"
+                            class="no-subscript"
+                        >
+                            <mat-select
+                                #select
+                                [(value)]="active_location"
+                                [placeholder]="
+                                    'APP.VISITOR_KIOSK.SELECT_LOCATION'
+                                        | translate
+                                "
+                            >
+                                @for (option of locations; track option) {
+                                    <mat-option [value]="option">
+                                        <div class="leading-tight">
+                                            <div>
+                                                {{
+                                                    option.display_name ||
+                                                        option.name
+                                                }}
+                                            </div>
+                                            <div
+                                                class="font-mono text-[0.625rem] opacity-30"
+                                            >
+                                                <span class="hidden"
+                                                    >&nbsp;[</span
+                                                >{{ option.id
+                                                }}<span class="hidden">]</span>
+                                            </div>
+                                        </div>
+                                    </mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    }
+                </div>
+            } @else {
+                <div class="m-auto flex flex-col items-center p-8">
+                    <mat-spinner [diameter]="32"></mat-spinner>
+                    <p>{{ loading }}</p>
+                </div>
+            }
+            @if (!loading) {
+                <div
+                    class="!mt-4 flex w-full items-center justify-end border-t border-base-300 px-4 py-2"
+                >
+                    <button
+                        btn
+                        matRipple
+                        class="w-32"
+                        [disabled]="!active_building && !active_level"
+                        (click)="bootstrapKiosk()"
+                    >
+                        Finish Setup
+                    </button>
+                </div>
+            }
+        </div>
+    `, standalone: false, styles: ["/* angular:styles/component:css;b5cb44247b14df9ceaa1cde6e18e7655f7940be592d59e7ac7be62a75ddd59dd;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/bootstrap.component.ts */\nmat-form-field {\n  width: 100%;\n}\nlabel {\n  padding-top: 1rem;\n}\n/*# sourceMappingURL=bootstrap.component.css.map */\n"] }]
+  }], () => [{ type: OrganisationService }, { type: SettingsService }, { type: ActivatedRoute }, { type: Router }], null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BootstrapComponent, { className: "BootstrapComponent", filePath: "apps/visitor-kiosk/src/app/bootstrap.component.ts", lineNumber: 342 });
 })();
 
 // apps/visitor-kiosk/src/app/visitor-registration.component.ts
-var _c04 = () => ["/welcome"];
-function VisitorRegistrationComponent_div_3_Template(rf, ctx) {
+var _c05 = () => ["/welcome"];
+function VisitorRegistrationComponent_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 6)(1, "div", 7)(2, "h3", 8);
+    \u0275\u0275elementStart(0, "div", 3)(1, "div", 6)(2, "h3", 7);
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "a", 9)(6, "icon");
+    \u0275\u0275elementStart(5, "a", 8)(6, "icon");
     \u0275\u0275text(7, "close");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(8, "div", 10)(9, "label", 11);
+    \u0275\u0275elementStart(8, "div", 9)(9, "label", 10);
     \u0275\u0275text(10);
     \u0275\u0275pipe(11, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "mat-form-field", 12);
-    \u0275\u0275element(13, "input", 13);
+    \u0275\u0275elementStart(12, "mat-form-field", 11);
+    \u0275\u0275element(13, "input", 12);
     \u0275\u0275pipe(14, "translate");
     \u0275\u0275elementStart(15, "mat-error");
     \u0275\u0275text(16, "A valid email is required");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(17, "label", 14);
+    \u0275\u0275elementStart(17, "label", 13);
     \u0275\u0275text(18);
     \u0275\u0275pipe(19, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(20, "mat-form-field", 12);
-    \u0275\u0275element(21, "input", 15);
+    \u0275\u0275elementStart(20, "mat-form-field", 11);
+    \u0275\u0275element(21, "input", 14);
     \u0275\u0275pipe(22, "translate");
     \u0275\u0275elementStart(23, "mat-error");
     \u0275\u0275text(24, "A valid email is required");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(25, "label", 16);
+    \u0275\u0275elementStart(25, "label", 15);
     \u0275\u0275text(26, "Host");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(27, "a-user-search-field", 17);
-    \u0275\u0275elementStart(28, "label", 18);
+    \u0275\u0275element(27, "a-user-search-field", 16);
+    \u0275\u0275elementStart(28, "label", 17);
     \u0275\u0275text(29);
     \u0275\u0275pipe(30, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(31, "mat-form-field", 12);
-    \u0275\u0275element(32, "input", 19);
+    \u0275\u0275elementStart(31, "mat-form-field", 11);
+    \u0275\u0275element(32, "input", 18);
     \u0275\u0275pipe(33, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(34, "label", 20);
+    \u0275\u0275elementStart(34, "label", 19);
     \u0275\u0275text(35);
     \u0275\u0275pipe(36, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(37, "mat-form-field", 12);
-    \u0275\u0275element(38, "input", 21);
+    \u0275\u0275elementStart(37, "mat-form-field", 11);
+    \u0275\u0275element(38, "input", 20);
     \u0275\u0275pipe(39, "translate");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(40, "div", 22)(41, "button", 23);
-    \u0275\u0275listener("click", function VisitorRegistrationComponent_div_3_Template_button_click_41_listener() {
+    \u0275\u0275elementStart(40, "div", 21)(41, "button", 22);
+    \u0275\u0275listener("click", function VisitorRegistrationComponent_Conditional_3_Template_button_click_41_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.register());
@@ -28903,31 +29205,31 @@ function VisitorRegistrationComponent_div_3_Template(rf, ctx) {
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 12, "APP.VISITOR_KIOSK.REGISTRATION"), " ");
     \u0275\u0275advance(2);
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(32, _c04));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(32, _c05));
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(11, 14, "APP.VISITOR_KIOSK.NAME"), "");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(11, 14, "APP.VISITOR_KIOSK.NAME"));
     \u0275\u0275advance(3);
     \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(14, 16, "APP.VISITOR_KIOSK.NAME"));
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(19, 18, "APP.VISITOR_KIOSK.EMAIL"), "");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(19, 18, "APP.VISITOR_KIOSK.EMAIL"));
     \u0275\u0275advance(3);
     \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(22, 20, "APP.VISITOR_KIOSK.EMAIL"));
     \u0275\u0275advance(8);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(30, 22, "APP.VISITOR_KIOSK.PHONE"), "");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(30, 22, "APP.VISITOR_KIOSK.PHONE"));
     \u0275\u0275advance(3);
     \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(33, 24, "APP.VISITOR_KIOSK.PHONE"));
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(36, 26, "APP.VISITOR_KIOSK.ORGANISATION"), "");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(36, 26, "APP.VISITOR_KIOSK.ORGANISATION"));
     \u0275\u0275advance(3);
     \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(39, 28, "APP.VISITOR_KIOSK.ORGANISATION"));
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(43, 30, "APP.VISITOR_KIOSK.REGISTER"), " ");
   }
 }
-function VisitorRegistrationComponent_ng_template_8_Template(rf, ctx) {
+function VisitorRegistrationComponent_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 24);
-    \u0275\u0275element(1, "mat-spinner", 25);
+    \u0275\u0275elementStart(0, "div", 4);
+    \u0275\u0275element(1, "mat-spinner", 23);
     \u0275\u0275elementStart(2, "p");
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
@@ -28938,7 +29240,7 @@ function VisitorRegistrationComponent_ng_template_8_Template(rf, ctx) {
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 1, "APP.VISITOR_KIOSK.REGISTERING"));
   }
 }
-var VisitorRegistrationComponent = class _VisitorRegistrationComponent {
+var _VisitorRegistrationComponent = class _VisitorRegistrationComponent {
   get now() {
     return startOfMinute(Date.now());
   }
@@ -29018,45 +29320,155 @@ var VisitorRegistrationComponent = class _VisitorRegistrationComponent {
       this.loading = false;
     });
   }
-  static {
-    this.\u0275fac = function VisitorRegistrationComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _VisitorRegistrationComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(CheckinStateService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(OrganisationService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VisitorRegistrationComponent, selectors: [["visitor-registration"]], standalone: false, decls: 10, vars: 11, consts: [["load_state", ""], [1, "absolute", "inset-0", "flex", "items-center", "p-8"], [1, "absolute", "left-1/2", "top-1/2", "min-h-[100%]", "min-w-[100%]", "-translate-x-1/2", "-translate-y-1/2", 3, "src"], ["src", "assets/img/building.png", 1, "absolute", "bottom-0", "right-0", "w-[60%]"], ["class", "absolute left-4 top-1/2 max-h-[80vh] w-[32rem] max-w-[calc(100%-2rem)] -translate-y-1/2 overflow-auto rounded bg-base-100 shadow", 3, "formGroup", 4, "ngIf", "ngIfElse"], [1, "absolute", "right-4", "top-4", "text-2xl", "text-white"], [1, "absolute", "left-4", "top-1/2", "max-h-[80vh]", "w-[32rem]", "max-w-[calc(100%-2rem)]", "-translate-y-1/2", "overflow-auto", "rounded", "bg-base-100", "shadow", 3, "formGroup"], [1, "flex", "items-center", "justify-between", "space-x-4", "border-b", "border-base-300", "px-4", "py-2"], [1, "py-2", "text-lg", "font-medium"], ["icon", "", "matRipple", "", 3, "routerLink"], [1, "p-4"], ["for", "name"], ["appearance", "outline", 1, "w-full"], ["matInput", "", "name", "name", "formControlName", "asset_name", 3, "placeholder"], ["for", "email"], ["matInput", "", "name", "email", "formControlName", "asset_id", 3, "placeholder"], ["for", "user"], ["formControlName", "user", 1, "mb-4"], ["form", "phone"], ["matInput", "", "name", "phone", "type", "tel", "formControlName", "phone", 3, "placeholder"], ["form", "org"], ["matInput", "", "name", "org", "formControlName", "company", 3, "placeholder"], [1, "flex", "justify-end", "space-x-4", "border-t", "border-base-300", "px-4", "py-2"], ["btn", "", "matRipple", "", 1, "w-40", 3, "click"], [1, "absolute", "left-4", "top-1/2", "flex", "w-[24rem]", "-translate-y-1/2", "flex-col", "items-center", "justify-center", "space-y-4", "rounded", "bg-base-100", "p-16", "shadow"], ["diameter", "32"]], template: function VisitorRegistrationComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "div", 1);
-        \u0275\u0275element(1, "img", 2)(2, "img", 3);
-        \u0275\u0275template(3, VisitorRegistrationComponent_div_3_Template, 44, 33, "div", 4);
-        \u0275\u0275elementStart(4, "div", 5);
-        \u0275\u0275text(5);
-        \u0275\u0275pipe(6, "date");
-        \u0275\u0275pipe(7, "date");
-        \u0275\u0275elementEnd()();
-        \u0275\u0275template(8, VisitorRegistrationComponent_ng_template_8_Template, 5, 3, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-      }
-      if (rf & 2) {
-        const load_state_r3 = \u0275\u0275reference(9);
-        \u0275\u0275advance();
-        \u0275\u0275property("src", ctx.background, \u0275\u0275sanitizeUrl);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngIf", !ctx.loading)("ngIfElse", load_state_r3);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(6, 5, ctx.now, "mediumDate"), " ", \u0275\u0275pipeBind2(7, 8, ctx.now, "shortTime"), " ");
-      }
-    }, dependencies: [NgIf, RouterLink, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, MatProgressSpinner, MatRipple, MatFormField, MatError, MatInput, IconComponent, UserSearchFieldComponent, DatePipe, TranslatePipe], encapsulation: 2 });
-  }
 };
+_VisitorRegistrationComponent.\u0275fac = function VisitorRegistrationComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _VisitorRegistrationComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(CheckinStateService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(OrganisationService));
+};
+_VisitorRegistrationComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VisitorRegistrationComponent, selectors: [["visitor-registration"]], standalone: false, decls: 9, vars: 10, consts: [[1, "absolute", "inset-0", "flex", "items-center", "p-8"], [1, "absolute", "left-1/2", "top-1/2", "min-h-[100%]", "min-w-[100%]", "-translate-x-1/2", "-translate-y-1/2", 3, "src"], ["src", "assets/img/building.png", 1, "absolute", "bottom-0", "right-0", "w-[60%]"], [1, "absolute", "left-4", "top-1/2", "max-h-[80vh]", "w-[32rem]", "max-w-[calc(100%-2rem)]", "-translate-y-1/2", "overflow-auto", "rounded", "bg-base-100", "shadow", 3, "formGroup"], [1, "absolute", "left-4", "top-1/2", "flex", "w-[24rem]", "-translate-y-1/2", "flex-col", "items-center", "justify-center", "space-y-4", "rounded", "bg-base-100", "p-16", "shadow"], [1, "absolute", "right-4", "top-4", "text-2xl", "text-white"], [1, "flex", "items-center", "justify-between", "space-x-4", "border-b", "border-base-300", "px-4", "py-2"], [1, "py-2", "text-lg", "font-medium"], ["icon", "", "matRipple", "", 3, "routerLink"], [1, "p-4"], ["for", "name"], ["appearance", "outline", 1, "w-full"], ["matInput", "", "name", "name", "formControlName", "asset_name", 3, "placeholder"], ["for", "email"], ["matInput", "", "name", "email", "formControlName", "asset_id", 3, "placeholder"], ["for", "user"], ["formControlName", "user", 1, "mb-4"], ["form", "phone"], ["matInput", "", "name", "phone", "type", "tel", "formControlName", "phone", 3, "placeholder"], ["form", "org"], ["matInput", "", "name", "org", "formControlName", "company", 3, "placeholder"], [1, "flex", "justify-end", "space-x-4", "border-t", "border-base-300", "px-4", "py-2"], ["btn", "", "matRipple", "", 1, "w-40", 3, "click"], ["diameter", "32"]], template: function VisitorRegistrationComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 0);
+    \u0275\u0275element(1, "img", 1)(2, "img", 2);
+    \u0275\u0275conditionalCreate(3, VisitorRegistrationComponent_Conditional_3_Template, 44, 33, "div", 3)(4, VisitorRegistrationComponent_Conditional_4_Template, 5, 3, "div", 4);
+    \u0275\u0275elementStart(5, "div", 5);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "date");
+    \u0275\u0275pipe(8, "date");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275property("src", ctx.background, \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(!ctx.loading ? 3 : 4);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(7, 4, ctx.now, "mediumDate"), " ", \u0275\u0275pipeBind2(8, 7, ctx.now, "shortTime"), " ");
+  }
+}, dependencies: [RouterLink, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, MatProgressSpinner, MatRipple, MatFormField, MatError, MatInput, IconComponent, UserSearchFieldComponent, DatePipe, TranslatePipe], encapsulation: 2 });
+var VisitorRegistrationComponent = _VisitorRegistrationComponent;
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(VisitorRegistrationComponent, { className: "VisitorRegistrationComponent", filePath: "apps/visitor-kiosk/src/app/visitor-registration.component.ts", lineNumber: 132 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(VisitorRegistrationComponent, [{
+    type: Component,
+    args: [{ selector: "visitor-registration", template: `
+        <div class="absolute inset-0 flex items-center p-8">
+            <img
+                [src]="background"
+                class="absolute left-1/2 top-1/2 min-h-[100%] min-w-[100%] -translate-x-1/2 -translate-y-1/2"
+            />
+            <img
+                src="assets/img/building.png"
+                class="absolute bottom-0 right-0 w-[60%]"
+            />
+            @if (!loading) {
+                <div
+                    class="absolute left-4 top-1/2 max-h-[80vh] w-[32rem] max-w-[calc(100%-2rem)] -translate-y-1/2 overflow-auto rounded bg-base-100 shadow"
+                    [formGroup]="form"
+                >
+                    <div
+                        class="flex items-center justify-between space-x-4 border-b border-base-300 px-4 py-2"
+                    >
+                        <h3 class="py-2 text-lg font-medium">
+                            {{ 'APP.VISITOR_KIOSK.REGISTRATION' | translate }}
+                        </h3>
+                        <a icon matRipple [routerLink]="['/welcome']">
+                            <icon>close</icon>
+                        </a>
+                    </div>
+                    <div class="p-4">
+                        <label for="name">
+                            {{ 'APP.VISITOR_KIOSK.NAME' | translate }}</label
+                        >
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input
+                                matInput
+                                name="name"
+                                formControlName="asset_name"
+                                [placeholder]="
+                                    'APP.VISITOR_KIOSK.NAME' | translate
+                                "
+                            />
+                            <mat-error>A valid email is required</mat-error>
+                        </mat-form-field>
+                        <label for="email">
+                            {{ 'APP.VISITOR_KIOSK.EMAIL' | translate }}</label
+                        >
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input
+                                matInput
+                                name="email"
+                                formControlName="asset_id"
+                                [placeholder]="
+                                    'APP.VISITOR_KIOSK.EMAIL' | translate
+                                "
+                            />
+                            <mat-error>A valid email is required</mat-error>
+                        </mat-form-field>
+                        <label for="user">Host</label>
+                        <a-user-search-field
+                            formControlName="user"
+                            class="mb-4"
+                        ></a-user-search-field>
+                        <label form="phone">
+                            {{ 'APP.VISITOR_KIOSK.PHONE' | translate }}</label
+                        >
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input
+                                matInput
+                                name="phone"
+                                type="tel"
+                                formControlName="phone"
+                                [placeholder]="
+                                    'APP.VISITOR_KIOSK.PHONE' | translate
+                                "
+                            />
+                        </mat-form-field>
+                        <label form="org">
+                            {{
+                                'APP.VISITOR_KIOSK.ORGANISATION' | translate
+                            }}</label
+                        >
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input
+                                matInput
+                                name="org"
+                                formControlName="company"
+                                [placeholder]="
+                                    'APP.VISITOR_KIOSK.ORGANISATION' | translate
+                                "
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div
+                        class="flex justify-end space-x-4 border-t border-base-300 px-4 py-2"
+                    >
+                        <button btn matRipple class="w-40" (click)="register()">
+                            {{ 'APP.VISITOR_KIOSK.REGISTER' | translate }}
+                        </button>
+                    </div>
+                </div>
+            } @else {
+                <div
+                    class="absolute left-4 top-1/2 flex w-[24rem] -translate-y-1/2 flex-col items-center justify-center space-y-4 rounded bg-base-100 p-16 shadow"
+                >
+                    <mat-spinner diameter="32"></mat-spinner>
+                    <p>{{ 'APP.VISITOR_KIOSK.REGISTERING' | translate }}</p>
+                </div>
+            }
+            <div class="absolute right-4 top-4 text-2xl text-white">
+                {{ now | date: 'mediumDate' }} {{ now | date: 'shortTime' }}
+            </div>
+        </div>
+    `, standalone: false }]
+  }], () => [{ type: SettingsService }, { type: BookingFormService }, { type: CheckinStateService }, { type: Router }, { type: OrganisationService }], null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(VisitorRegistrationComponent, { className: "VisitorRegistrationComponent", filePath: "apps/visitor-kiosk/src/app/visitor-registration.component.ts", lineNumber: 134 });
 })();
 
 // apps/visitor-kiosk/src/app/welcome.component.ts
-var _c05 = () => ["/checkin"];
-var _c12 = () => ["/register"];
+var _c06 = () => ["/checkin"];
+var _c13 = () => ["/register"];
 var _c22 = (a0) => ["/explore", a0];
-function WelcomeComponent_a_14_Template(rf, ctx) {
+function WelcomeComponent_Conditional_14_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "a", 6)(1, "div", 7)(2, "div", 8);
     \u0275\u0275text(3);
@@ -29067,12 +29479,12 @@ function WelcomeComponent_a_14_Template(rf, ctx) {
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(4, _c12));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(4, _c13));
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 2, "APP.VISITOR_KIOSK.REGISTER"), " ");
   }
 }
-function WelcomeComponent_a_15_Template(rf, ctx) {
+function WelcomeComponent_Conditional_15_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "a", 6)(1, "div", 7)(2, "div", 8);
     \u0275\u0275text(3);
@@ -29089,26 +29501,26 @@ function WelcomeComponent_a_15_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 2, "APP.VISITOR_KIOSK.EXPLORE"), " ");
   }
 }
-function WelcomeComponent_button_20_div_8_Template(rf, ctx) {
+function WelcomeComponent_Conditional_20_Conditional_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 21);
-    \u0275\u0275text(1, " Language ");
+    \u0275\u0275elementStart(0, "div", 17);
+    \u0275\u0275text(1, "Language");
     \u0275\u0275elementEnd();
   }
 }
-function WelcomeComponent_button_20_Template(rf, ctx) {
+function WelcomeComponent_Conditional_20_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "button", 15)(1, "div", 16)(2, "icon", 17);
+    \u0275\u0275elementStart(0, "button", 11)(1, "div", 14)(2, "icon", 15);
     \u0275\u0275text(3, "language");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 18)(5, "div");
+    \u0275\u0275elementStart(4, "div", 16)(5, "div");
     \u0275\u0275text(6);
     \u0275\u0275pipe(7, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275template(8, WelcomeComponent_button_20_div_8_Template, 2, 0, "div", 19);
+    \u0275\u0275conditionalCreate(8, WelcomeComponent_Conditional_20_Conditional_8_Template, 2, 0, "div", 17);
     \u0275\u0275pipe(9, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "div", 20);
+    \u0275\u0275elementStart(10, "div", 18);
     \u0275\u0275pipe(11, "translate");
     \u0275\u0275text(12);
     \u0275\u0275pipe(13, "translate");
@@ -29121,16 +29533,16 @@ function WelcomeComponent_button_20_Template(rf, ctx) {
     \u0275\u0275advance(6);
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(7, 5, "COMMON.LANGUAGE"));
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(9, 7, "COMMON.LANGUAGE") !== "Language");
+    \u0275\u0275conditional(\u0275\u0275pipeBind1(9, 7, "COMMON.LANGUAGE") !== "Language" ? 8 : -1);
     \u0275\u0275advance(2);
     \u0275\u0275property("matTooltip", \u0275\u0275pipeBind1(11, 9, ctx_r0.active_locale));
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(13, 11, ctx_r0.active_locale), " ");
   }
 }
-function WelcomeComponent_button_23_div_7_Template(rf, ctx) {
+function WelcomeComponent_For_24_Conditional_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 21);
+    \u0275\u0275elementStart(0, "div", 17);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -29140,22 +29552,22 @@ function WelcomeComponent_button_23_div_7_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", lang_r4.local, " ");
   }
 }
-function WelcomeComponent_button_23_Template(rf, ctx) {
+function WelcomeComponent_For_24_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 22);
-    \u0275\u0275listener("click", function WelcomeComponent_button_23_Template_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "button", 19);
+    \u0275\u0275listener("click", function WelcomeComponent_For_24_Template_button_click_0_listener() {
       const lang_r4 = \u0275\u0275restoreView(_r3).$implicit;
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.setLocale(lang_r4.id));
     });
-    \u0275\u0275elementStart(1, "div", 23)(2, "div", 24);
+    \u0275\u0275elementStart(1, "div", 20)(2, "div", 21);
     \u0275\u0275pipe(3, "translate");
     \u0275\u0275elementStart(4, "div");
     \u0275\u0275text(5);
     \u0275\u0275pipe(6, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275template(7, WelcomeComponent_button_23_div_7_Template, 2, 1, "div", 19);
+    \u0275\u0275conditionalCreate(7, WelcomeComponent_For_24_Conditional_7_Template, 2, 1, "div", 17);
     \u0275\u0275pipe(8, "translate");
     \u0275\u0275elementEnd()()();
   }
@@ -29166,10 +29578,10 @@ function WelcomeComponent_button_23_Template(rf, ctx) {
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 6, lang_r4.name));
     \u0275\u0275advance(2);
-    \u0275\u0275property("ngIf", \u0275\u0275pipeBind1(8, 8, lang_r4.name) !== lang_r4.local);
+    \u0275\u0275conditional(\u0275\u0275pipeBind1(8, 8, lang_r4.name) !== lang_r4.local ? 7 : -1);
   }
 }
-var WelcomeComponent = class _WelcomeComponent extends AsyncHandler {
+var _WelcomeComponent = class _WelcomeComponent extends AsyncHandler {
   get background() {
     return this._settings.get("app.welcome_background");
   }
@@ -29216,66 +29628,192 @@ var WelcomeComponent = class _WelcomeComponent extends AsyncHandler {
     }));
     this.timeout("check", () => this._cdr.detectChanges(), 1e3);
   }
-  static {
-    this.\u0275fac = function WelcomeComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _WelcomeComponent)(\u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(LocaleService), \u0275\u0275directiveInject(ChangeDetectorRef));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _WelcomeComponent, selectors: [["app-welcome"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 25, vars: 24, consts: [["menu", "matMenu"], [1, "absolute", "inset-0", "flex", "items-center", "p-8"], ["auth", "", 1, "absolute", "left-1/2", "top-1/2", "min-h-[100%]", "min-w-[100%]", "-translate-x-1/2", "-translate-y-1/2", 3, "source"], [1, "z-10", "flex", "w-[60%]", "flex-col", "justify-center", "space-y-8"], [1, "mb-4", "space-y-4", "text-6xl", "text-white", 3, "innerHTML"], [1, "flex", "items-center", "space-x-4", "font-medium"], ["btn", "", "matRipple", "", 1, "w-40", "bg-base-100", "text-base-content", 3, "routerLink"], [1, "flex", "items-center", "space-x-2"], [1, "ml-2"], [1, "text-2xl"], ["btn", "", "matRipple", "", "class", "w-40 bg-base-100 text-base-content", 3, "routerLink", 4, "ngIf"], [1, "absolute", "right-4", "top-4", "text-2xl", "text-white"], ["class", "absolute left-4 top-4", 3, "matMenuTriggerFor", 4, "ngIf"], ["mat-menu-item", "", 3, "click", 4, "ngFor", "ngForOf"], ["src", "assets/img/building.png", 1, "absolute", "bottom-0", "right-0", "w-[60%]"], [1, "absolute", "left-4", "top-4", 3, "matMenuTriggerFor"], [1, "flex", "items-center", "justify-between"], [1, "text-2xl", "text-white"], [1, "ml-2", "text-left", "leading-tight", "text-white"], ["class", "text-xs opacity-30", 4, "ngIf"], [1, "ml-4", "max-w-24", "truncate", "rounded", "bg-base-200", "px-2", "py-1", "text-sm", 3, "matTooltip"], [1, "text-xs", "opacity-30"], ["mat-menu-item", "", 3, "click"], [1, "flex", "h-14", "min-w-[24rem]", "items-center", "justify-between", "space-x-8"], [1, "leading-tight"]], template: function WelcomeComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "div", 1);
-        \u0275\u0275element(1, "img", 2);
-        \u0275\u0275elementStart(2, "div", 3);
-        \u0275\u0275element(3, "h3", 4);
-        \u0275\u0275pipe(4, "translate");
-        \u0275\u0275pipe(5, "sanitize");
-        \u0275\u0275elementStart(6, "div", 5)(7, "a", 6)(8, "div", 7)(9, "div", 8);
-        \u0275\u0275text(10);
-        \u0275\u0275pipe(11, "translate");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(12, "icon", 9);
-        \u0275\u0275text(13, "chevron_right");
-        \u0275\u0275elementEnd()()();
-        \u0275\u0275template(14, WelcomeComponent_a_14_Template, 7, 5, "a", 10)(15, WelcomeComponent_a_15_Template, 7, 6, "a", 10);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275elementStart(16, "div", 11);
-        \u0275\u0275text(17);
-        \u0275\u0275pipe(18, "date");
-        \u0275\u0275pipe(19, "date");
-        \u0275\u0275elementEnd();
-        \u0275\u0275template(20, WelcomeComponent_button_20_Template, 14, 13, "button", 12);
-        \u0275\u0275elementStart(21, "mat-menu", null, 0);
-        \u0275\u0275template(23, WelcomeComponent_button_23_Template, 9, 10, "button", 13);
-        \u0275\u0275elementEnd();
-        \u0275\u0275element(24, "img", 14);
-        \u0275\u0275elementEnd();
-      }
-      if (rf & 2) {
-        \u0275\u0275advance();
-        \u0275\u0275property("source", ctx.background);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("innerHTML", \u0275\u0275pipeBind2(5, 12, ctx.welcome_message || \u0275\u0275pipeBind1(4, 10, "APP.VISITOR_KIOSK.WELCOME_MESSAGE"), "html"), \u0275\u0275sanitizeHtml);
-        \u0275\u0275advance(4);
-        \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(23, _c05));
-        \u0275\u0275advance(3);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(11, 15, "APP.VISITOR_KIOSK.CHECK_IN"), " ");
-        \u0275\u0275advance(4);
-        \u0275\u0275property("ngIf", ctx.can_register);
-        \u0275\u0275advance();
-        \u0275\u0275property("ngIf", ctx.level);
-        \u0275\u0275advance(2);
-        \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(18, 17, ctx.now, "mediumDate"), " ", \u0275\u0275pipeBind2(19, 20, ctx.now, "shortTime"), " ");
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngIf", ctx.locales.length > 1);
-        \u0275\u0275advance(3);
-        \u0275\u0275property("ngForOf", ctx.locales);
-      }
-    }, dependencies: [NgForOf, NgIf, RouterLink, MatRipple, MatMenu, MatMenuItem, MatMenuTrigger, IconComponent, AuthenticatedImageDirective, DatePipe, TranslatePipe, SanitizePipe], styles: ["\n\na[_ngcontent-%COMP%] {\n  height: 3.5rem;\n}\n/*# sourceMappingURL=welcome.component.css.map */"] });
-  }
 };
+_WelcomeComponent.\u0275fac = function WelcomeComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _WelcomeComponent)(\u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(LocaleService), \u0275\u0275directiveInject(ChangeDetectorRef));
+};
+_WelcomeComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _WelcomeComponent, selectors: [["app-welcome"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 26, vars: 23, consts: [["menu", "matMenu"], [1, "absolute", "inset-0", "flex", "items-center", "p-8"], ["auth", "", 1, "absolute", "left-1/2", "top-1/2", "min-h-[100%]", "min-w-[100%]", "-translate-x-1/2", "-translate-y-1/2", 3, "source"], [1, "z-10", "flex", "w-[60%]", "flex-col", "justify-center", "space-y-8"], [1, "mb-4", "space-y-4", "text-6xl", "text-white", 3, "innerHTML"], [1, "flex", "items-center", "space-x-4", "font-medium"], ["btn", "", "matRipple", "", 1, "w-40", "bg-base-100", "text-base-content", 3, "routerLink"], [1, "flex", "items-center", "space-x-2"], [1, "ml-2"], [1, "text-2xl"], [1, "absolute", "right-4", "top-4", "text-2xl", "text-white"], [1, "absolute", "left-4", "top-4", 3, "matMenuTriggerFor"], ["mat-menu-item", ""], ["src", "assets/img/building.png", 1, "absolute", "bottom-0", "right-0", "w-[60%]"], [1, "flex", "items-center", "justify-between"], [1, "text-2xl", "text-white"], [1, "ml-2", "text-left", "leading-tight", "text-white"], [1, "text-xs", "opacity-30"], [1, "ml-4", "max-w-24", "truncate", "rounded", "bg-base-200", "px-2", "py-1", "text-sm", 3, "matTooltip"], ["mat-menu-item", "", 3, "click"], [1, "flex", "h-14", "min-w-[24rem]", "items-center", "justify-between", "space-x-8"], [1, "leading-tight"]], template: function WelcomeComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 1);
+    \u0275\u0275element(1, "img", 2);
+    \u0275\u0275elementStart(2, "div", 3);
+    \u0275\u0275element(3, "h3", 4);
+    \u0275\u0275pipe(4, "translate");
+    \u0275\u0275pipe(5, "sanitize");
+    \u0275\u0275elementStart(6, "div", 5)(7, "a", 6)(8, "div", 7)(9, "div", 8);
+    \u0275\u0275text(10);
+    \u0275\u0275pipe(11, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(12, "icon", 9);
+    \u0275\u0275text(13, "chevron_right");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275conditionalCreate(14, WelcomeComponent_Conditional_14_Template, 7, 5, "a", 6);
+    \u0275\u0275conditionalCreate(15, WelcomeComponent_Conditional_15_Template, 7, 6, "a", 6);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(16, "div", 10);
+    \u0275\u0275text(17);
+    \u0275\u0275pipe(18, "date");
+    \u0275\u0275pipe(19, "date");
+    \u0275\u0275elementEnd();
+    \u0275\u0275conditionalCreate(20, WelcomeComponent_Conditional_20_Template, 14, 13, "button", 11);
+    \u0275\u0275elementStart(21, "mat-menu", null, 0);
+    \u0275\u0275repeaterCreate(23, WelcomeComponent_For_24_Template, 9, 10, "button", 12, \u0275\u0275repeaterTrackByIdentity);
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(25, "img", 13);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275property("source", ctx.background);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("innerHTML", \u0275\u0275pipeBind2(5, 11, ctx.welcome_message || \u0275\u0275pipeBind1(4, 9, "APP.VISITOR_KIOSK.WELCOME_MESSAGE"), "html"), \u0275\u0275sanitizeHtml);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(22, _c06));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(11, 14, "APP.VISITOR_KIOSK.CHECK_IN"), " ");
+    \u0275\u0275advance(4);
+    \u0275\u0275conditional(ctx.can_register ? 14 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.level ? 15 : -1);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind2(18, 16, ctx.now, "mediumDate"), " ", \u0275\u0275pipeBind2(19, 19, ctx.now, "shortTime"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275conditional(ctx.locales.length > 1 ? 20 : -1);
+    \u0275\u0275advance(3);
+    \u0275\u0275repeater(ctx.locales);
+  }
+}, dependencies: [RouterLink, MatRipple, MatMenu, MatMenuItem, MatMenuTrigger, IconComponent, AuthenticatedImageDirective, DatePipe, TranslatePipe, SanitizePipe], styles: ["\n\na[_ngcontent-%COMP%] {\n  height: 3.5rem;\n}\n/*# sourceMappingURL=welcome.component.css.map */"] });
+var WelcomeComponent = _WelcomeComponent;
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WelcomeComponent, { className: "WelcomeComponent", filePath: "apps/visitor-kiosk/src/app/welcome.component.ts", lineNumber: 139 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(WelcomeComponent, [{
+    type: Component,
+    args: [{ selector: "app-welcome", template: `
+        <div class="absolute inset-0 flex items-center p-8">
+            <img
+                auth
+                [source]="background"
+                class="absolute left-1/2 top-1/2 min-h-[100%] min-w-[100%] -translate-x-1/2 -translate-y-1/2"
+            />
+            <div class="z-10 flex w-[60%] flex-col justify-center space-y-8">
+                <h3
+                    class="mb-4 space-y-4 text-6xl text-white"
+                    [innerHTML]="
+                        welcome_message ||
+                            ('APP.VISITOR_KIOSK.WELCOME_MESSAGE' | translate)
+                            | sanitize: 'html'
+                    "
+                ></h3>
+                <div class="flex items-center space-x-4 font-medium">
+                    <a
+                        btn
+                        matRipple
+                        [routerLink]="['/checkin']"
+                        class="w-40 bg-base-100 text-base-content"
+                    >
+                        <div class="flex items-center space-x-2">
+                            <div class="ml-2">
+                                {{ 'APP.VISITOR_KIOSK.CHECK_IN' | translate }}
+                            </div>
+                            <icon class="text-2xl">chevron_right</icon>
+                        </div>
+                    </a>
+                    @if (can_register) {
+                        <a
+                            btn
+                            matRipple
+                            [routerLink]="['/register']"
+                            class="w-40 bg-base-100 text-base-content"
+                        >
+                            <div class="flex items-center space-x-2">
+                                <div class="ml-2">
+                                    {{
+                                        'APP.VISITOR_KIOSK.REGISTER' | translate
+                                    }}
+                                </div>
+                                <icon class="text-2xl">chevron_right</icon>
+                            </div>
+                        </a>
+                    }
+                    @if (level) {
+                        <a
+                            btn
+                            matRipple
+                            [routerLink]="['/explore', level]"
+                            class="w-40 bg-base-100 text-base-content"
+                        >
+                            <div class="flex items-center space-x-2">
+                                <div class="ml-2">
+                                    {{
+                                        'APP.VISITOR_KIOSK.EXPLORE' | translate
+                                    }}
+                                </div>
+                                <icon class="text-2xl">place</icon>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="absolute right-4 top-4 text-2xl text-white">
+                {{ now | date: 'mediumDate' }} {{ now | date: 'shortTime' }}
+            </div>
+            @if (locales.length > 1) {
+                <button
+                    class="absolute left-4 top-4"
+                    [matMenuTriggerFor]="menu"
+                >
+                    <div class="flex items-center justify-between">
+                        <icon class="text-2xl text-white">language</icon>
+                        <div class="ml-2 text-left leading-tight text-white">
+                            <div>{{ 'COMMON.LANGUAGE' | translate }}</div>
+                            @if (
+                                ('COMMON.LANGUAGE' | translate) !== 'Language'
+                            ) {
+                                <div class="text-xs opacity-30">Language</div>
+                            }
+                        </div>
+                        <div
+                            class="ml-4 max-w-24 truncate rounded bg-base-200 px-2 py-1 text-sm"
+                            [matTooltip]="active_locale | translate"
+                        >
+                            {{ active_locale | translate }}
+                        </div>
+                    </div>
+                </button>
+            }
+            <mat-menu #menu="matMenu">
+                @for (lang of locales; track lang) {
+                    <button mat-menu-item (click)="setLocale(lang.id)">
+                        <div
+                            class="flex h-14 min-w-[24rem] items-center justify-between space-x-8"
+                        >
+                            <div
+                                class="leading-tight"
+                                [class.mt-2]="
+                                    (lang.name | translate) !== lang.local
+                                "
+                            >
+                                <div>{{ lang.name | translate }}</div>
+                                @if ((lang.name | translate) !== lang.local) {
+                                    <div class="text-xs opacity-30">
+                                        {{ lang.local }}
+                                    </div>
+                                }
+                            </div>
+                            <!-- <div class="text-3xl">{{ lang.flag }}</div> -->
+                        </div>
+                    </button>
+                }
+            </mat-menu>
+            <img
+                src="assets/img/building.png"
+                class="absolute bottom-0 right-0 w-[60%]"
+            />
+        </div>
+    `, standalone: false, styles: ["/* angular:styles/component:css;cc9227079df7ac5301f9446791a6a855742622827223e39404093077fda285ac;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/welcome.component.ts */\na {\n  height: 3.5rem;\n}\n/*# sourceMappingURL=welcome.component.css.map */\n"] }]
+  }], () => [{ type: ActivatedRoute }, { type: SettingsService }, { type: LocaleService }, { type: ChangeDetectorRef }], null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WelcomeComponent, { className: "WelcomeComponent", filePath: "apps/visitor-kiosk/src/app/welcome.component.ts", lineNumber: 140 });
 })();
 
 // apps/visitor-kiosk/src/app/app-routing.module.ts
@@ -29285,31 +29823,35 @@ var routes = [
   { path: "register", component: VisitorRegistrationComponent },
   {
     path: "explore",
-    loadChildren: () => import("./explore.module-FOSPBT6M.js").then((m) => m.AppExploreModule)
+    loadChildren: () => import("./explore.module-B66EB3GB.js").then((m) => m.AppExploreModule)
   },
   {
     path: "checkin",
-    loadChildren: () => import("./checkin.module-HBRFSLLQ.js").then((m) => m.VisitorCheckinModule)
+    loadChildren: () => import("./checkin.module-BSNLHLDE.js").then((m) => m.VisitorCheckinModule)
   },
   { path: "**", redirectTo: "bootstrap" }
 ];
-var AppRoutingModule = class _AppRoutingModule {
-  static {
-    this.\u0275fac = function AppRoutingModule_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _AppRoutingModule)();
-    };
-  }
-  static {
-    this.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _AppRoutingModule });
-  }
-  static {
-    this.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ imports: [RouterModule.forRoot(routes, { useHash: true }), RouterModule] });
-  }
+var _AppRoutingModule = class _AppRoutingModule {
 };
+_AppRoutingModule.\u0275fac = function AppRoutingModule_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _AppRoutingModule)();
+};
+_AppRoutingModule.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _AppRoutingModule });
+_AppRoutingModule.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ imports: [RouterModule.forRoot(routes, { useHash: true }), RouterModule] });
+var AppRoutingModule = _AppRoutingModule;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppRoutingModule, [{
+    type: NgModule,
+    args: [{
+      imports: [RouterModule.forRoot(routes, { useHash: true })],
+      exports: [RouterModule]
+    }]
+  }], null, null);
+})();
 
 // apps/visitor-kiosk/src/app/components/topbar-header.component.ts
-var _c06 = () => ["/"];
-var TopbarHeaderComponent = class _TopbarHeaderComponent {
+var _c07 = () => ["/"];
+var _TopbarHeaderComponent = class _TopbarHeaderComponent {
   get time() {
     return startOfMinute(Date.now());
   }
@@ -29318,36 +29860,61 @@ var TopbarHeaderComponent = class _TopbarHeaderComponent {
     this._org = _org;
     this.logo = this._org.active_building.pipe(debounceTime(500), map(() => (this._settings.theme === "dark" ? this._settings.get("app.logo_dark") : this._settings.get("app.logo_light")) || {}));
   }
-  static {
-    this.\u0275fac = function TopbarHeaderComponent_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _TopbarHeaderComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
-    };
-  }
-  static {
-    this.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TopbarHeaderComponent, selectors: [["a-topbar-header"]], standalone: false, decls: 8, vars: 11, consts: [[1, "flex", "items-center", "justify-between", "bg-[hsl(237,37%,10%)]", "shadow"], ["matRipple", "", 1, "flex", "h-full", "flex-col", "justify-center", "px-4", 3, "routerLink"], ["auth", "", "alt", "Logo", 1, "my-2", "h-10", 3, "source"], [1, "ml-auto", "flex", "h-full", "flex-col", "justify-center", "px-4", "text-white"]], template: function TopbarHeaderComponent_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275elementStart(0, "div", 0)(1, "a", 1);
-        \u0275\u0275element(2, "img", 2);
-        \u0275\u0275pipe(3, "async");
-        \u0275\u0275pipe(4, "async");
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(5, "div", 3);
-        \u0275\u0275text(6);
-        \u0275\u0275pipe(7, "date");
-        \u0275\u0275elementEnd()();
-      }
-      if (rf & 2) {
-        let tmp_1_0;
-        \u0275\u0275advance();
-        \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(10, _c06));
-        \u0275\u0275advance();
-        \u0275\u0275property("source", ((tmp_1_0 = \u0275\u0275pipeBind1(3, 3, ctx.logo)) == null ? null : tmp_1_0.src) || \u0275\u0275pipeBind1(4, 5, ctx.logo));
-        \u0275\u0275advance(4);
-        \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(7, 7, ctx.time, "fullDate"), " ");
-      }
-    }, dependencies: [RouterLink, MatRipple, AuthenticatedImageDirective, AsyncPipe, DatePipe], styles: ["\n\n[_nghost-%COMP%]    > div[_ngcontent-%COMP%] {\n  height: 3.5rem;\n}\na[_ngcontent-%COMP%] {\n  border-radius: 0;\n}\nimg[_ngcontent-%COMP%] {\n  max-height: 2.5rem;\n  max-width: 50vw;\n}\n/*# sourceMappingURL=topbar-header.component.css.map */"] });
-  }
 };
+_TopbarHeaderComponent.\u0275fac = function TopbarHeaderComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _TopbarHeaderComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
+};
+_TopbarHeaderComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TopbarHeaderComponent, selectors: [["a-topbar-header"]], standalone: false, decls: 8, vars: 11, consts: [[1, "flex", "items-center", "justify-between", "bg-[hsl(237,37%,10%)]", "shadow"], ["matRipple", "", 1, "flex", "h-full", "flex-col", "justify-center", "px-4", 3, "routerLink"], ["auth", "", "alt", "Logo", 1, "my-2", "h-10", 3, "source"], [1, "ml-auto", "flex", "h-full", "flex-col", "justify-center", "px-4", "text-white"]], template: function TopbarHeaderComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 0)(1, "a", 1);
+    \u0275\u0275element(2, "img", 2);
+    \u0275\u0275pipe(3, "async");
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 3);
+    \u0275\u0275text(6);
+    \u0275\u0275pipe(7, "date");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    let tmp_1_0;
+    \u0275\u0275advance();
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(10, _c07));
+    \u0275\u0275advance();
+    \u0275\u0275property("source", ((tmp_1_0 = \u0275\u0275pipeBind1(3, 3, ctx.logo)) == null ? null : tmp_1_0.src) || \u0275\u0275pipeBind1(4, 5, ctx.logo));
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(7, 7, ctx.time, "fullDate"), " ");
+  }
+}, dependencies: [RouterLink, MatRipple, AuthenticatedImageDirective, AsyncPipe, DatePipe], styles: ["\n\n[_nghost-%COMP%]    > div[_ngcontent-%COMP%] {\n  height: 3.5rem;\n}\na[_ngcontent-%COMP%] {\n  border-radius: 0;\n}\nimg[_ngcontent-%COMP%] {\n  max-height: 2.5rem;\n  max-width: 50vw;\n}\n/*# sourceMappingURL=topbar-header.component.css.map */"] });
+var TopbarHeaderComponent = _TopbarHeaderComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TopbarHeaderComponent, [{
+    type: Component,
+    args: [{ selector: "a-topbar-header", template: `
+        <div
+            class="flex items-center justify-between bg-[hsl(237,37%,10%)] shadow"
+        >
+            <a
+                matRipple
+                [routerLink]="['/']"
+                class="flex h-full flex-col justify-center px-4"
+            >
+                <img
+                    auth
+                    class="my-2 h-10"
+                    alt="Logo"
+                    [source]="(logo | async)?.src || (logo | async)"
+                />
+            </a>
+            <div
+                class="ml-auto flex h-full flex-col justify-center px-4 text-white"
+            >
+                {{ time | date: 'fullDate' }}
+            </div>
+        </div>
+    `, standalone: false, styles: ["/* angular:styles/component:css;ca56a9c6ccb68d9eb4d7b426a55179b4fd968c7dab74ba6456a7b70739864a22;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/components/topbar-header.component.ts */\n:host > div {\n  height: 3.5rem;\n}\na {\n  border-radius: 0;\n}\nimg {\n  max-height: 2.5rem;\n  max-width: 50vw;\n}\n/*# sourceMappingURL=topbar-header.component.css.map */\n"] }]
+  }], () => [{ type: SettingsService }, { type: OrganisationService }], null);
+})();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TopbarHeaderComponent, { className: "TopbarHeaderComponent", filePath: "apps/visitor-kiosk/src/app/components/topbar-header.component.ts", lineNumber: 50 });
 })();
@@ -29362,7 +29929,16 @@ var MAT_MODULES = [
   MatMenuModule,
   MatCheckboxModule
 ];
-var AppModule = class _AppModule {
+var STANDALONE_COMPONENTS = [
+  GlobalLoadingComponent,
+  GlobalBannerComponent,
+  IconComponent,
+  TranslatePipe,
+  SanitizePipe,
+  AuthenticatedImageDirective,
+  UserSearchFieldComponent
+];
+var _AppModule = class _AppModule {
   constructor() {
     registerLocaleData(fr_default);
     registerLocaleData(ar_default);
@@ -29371,48 +29947,86 @@ var AppModule = class _AppModule {
     registerLocaleData(es_default);
     registerLocaleData(it_default);
   }
-  static {
-    this.\u0275fac = function AppModule_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _AppModule)();
-    };
-  }
-  static {
-    this.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _AppModule, bootstrap: [AppComponent] });
-  }
-  static {
-    this.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ providers: [
-      {
-        provide: ErrorHandler,
-        useValue: createErrorHandler({
-          showDialog: false
-        })
-      },
-      {
-        provide: TraceService,
-        deps: [Router]
-      },
-      {
-        provide: LOCALE_ID,
-        deps: [LocaleService],
-        useFactory: (localeService) => localeService.locale
-      }
-    ], imports: [
-      BrowserModule,
-      BrowserAnimationsModule,
-      AppRoutingModule,
-      ServiceWorkerModule.register("ngsw-worker.js", {
-        enabled: environment.production
-      }),
-      FormsModule,
-      ReactiveFormsModule,
-      MAT_MODULES,
-      GlobalLoadingComponent,
-      GlobalBannerComponent,
-      IconComponent,
-      UserSearchFieldComponent
-    ] });
-  }
 };
+_AppModule.\u0275fac = function AppModule_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _AppModule)();
+};
+_AppModule.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _AppModule, bootstrap: [AppComponent] });
+_AppModule.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ providers: [
+  {
+    provide: ErrorHandler,
+    useValue: createErrorHandler({
+      showDialog: false
+    })
+  },
+  {
+    provide: TraceService,
+    deps: [Router]
+  },
+  {
+    provide: LOCALE_ID,
+    deps: [LocaleService],
+    useFactory: (localeService) => localeService.locale
+  }
+], imports: [
+  BrowserModule,
+  BrowserAnimationsModule,
+  AppRoutingModule,
+  ServiceWorkerModule.register("ngsw-worker.js", {
+    enabled: environment.production
+  }),
+  FormsModule,
+  ReactiveFormsModule,
+  MAT_MODULES,
+  GlobalLoadingComponent,
+  GlobalBannerComponent,
+  UserSearchFieldComponent
+] });
+var AppModule = _AppModule;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppModule, [{
+    type: NgModule,
+    args: [{
+      declarations: [
+        AppComponent,
+        BootstrapComponent,
+        WelcomeComponent,
+        VisitorRegistrationComponent,
+        TopbarHeaderComponent
+      ],
+      bootstrap: [AppComponent],
+      imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        ServiceWorkerModule.register("ngsw-worker.js", {
+          enabled: environment.production
+        }),
+        FormsModule,
+        ReactiveFormsModule,
+        ...MAT_MODULES,
+        ...STANDALONE_COMPONENTS
+      ],
+      providers: [
+        {
+          provide: ErrorHandler,
+          useValue: createErrorHandler({
+            showDialog: false
+          })
+        },
+        {
+          provide: TraceService,
+          deps: [Router]
+        },
+        {
+          provide: LOCALE_ID,
+          deps: [LocaleService],
+          useFactory: (localeService) => localeService.locale
+        }
+      ]
+    }]
+  }], () => [], null);
+})();
 
 // apps/visitor-kiosk/src/main.ts
 if (environment.production) {
@@ -29421,23 +30035,18 @@ if (environment.production) {
 platformBrowser().bootstrapModule(AppModule).catch((err) => console.error(err));
 /*! Bundled license information:
 
+@angular/animations/fesm2022/util-CPU6TNml.mjs:
 @angular/animations/fesm2022/browser.mjs:
-  (**
-   * @license Angular v19.2.1
-   * (c) 2010-2025 Google LLC. https://angular.io/
-   * License: MIT
-   *)
-
 @angular/platform-browser/fesm2022/animations.mjs:
   (**
-   * @license Angular v19.2.1
+   * @license Angular v20.0.3
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/service-worker/fesm2022/service-worker.mjs:
   (**
-   * @license Angular v19.2.1
+   * @license Angular v20.0.3
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
@@ -29449,52 +30058,12 @@ platformBrowser().bootstrapModule(AppModule).catch((err) => console.error(err));
    * found in the LICENSE file at https://angular.dev/license
    *)
 
-@angular/common/locales/ar.mjs:
-  (**
-   * @license
-   * Copyright Google LLC All Rights Reserved.
-   *
-   * Use of this source code is governed by an MIT-style license that can be
-   * found in the LICENSE file at https://angular.dev/license
-   *)
-
-@angular/common/locales/es.mjs:
-  (**
-   * @license
-   * Copyright Google LLC All Rights Reserved.
-   *
-   * Use of this source code is governed by an MIT-style license that can be
-   * found in the LICENSE file at https://angular.dev/license
-   *)
-
-@angular/common/locales/fr.mjs:
-  (**
-   * @license
-   * Copyright Google LLC All Rights Reserved.
-   *
-   * Use of this source code is governed by an MIT-style license that can be
-   * found in the LICENSE file at https://angular.dev/license
-   *)
-
-@angular/common/locales/it.mjs:
-  (**
-   * @license
-   * Copyright Google LLC All Rights Reserved.
-   *
-   * Use of this source code is governed by an MIT-style license that can be
-   * found in the LICENSE file at https://angular.dev/license
-   *)
-
-@angular/common/locales/ja.mjs:
-  (**
-   * @license
-   * Copyright Google LLC All Rights Reserved.
-   *
-   * Use of this source code is governed by an MIT-style license that can be
-   * found in the LICENSE file at https://angular.dev/license
-   *)
-
-@angular/common/locales/zh.mjs:
+@angular/common/locales/ar.js:
+@angular/common/locales/es.js:
+@angular/common/locales/fr.js:
+@angular/common/locales/it.js:
+@angular/common/locales/ja.js:
+@angular/common/locales/zh.js:
   (**
    * @license
    * Copyright Google LLC All Rights Reserved.

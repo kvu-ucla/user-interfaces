@@ -14,7 +14,7 @@ import {
   map,
   of,
   toQueryString
-} from "./chunk-EXVEQXC2.js";
+} from "./chunk-7WZA3LU7.js";
 import {
   __spreadProps,
   __spreadValues
@@ -109,15 +109,14 @@ function querySpaceAvailability(id_list, start, duration, ignore, type, ignore_p
 }
 
 // node_modules/qr/esm/index.js
-var chCodes = {
-  newline: 10,
-  reset: 27
-};
+var chCodes = { newline: 10, reset: 27 };
 function assertNumber(n) {
-  if (!Number.isSafeInteger(n)) throw new Error(`integer expected: ${n}`);
+  if (!Number.isSafeInteger(n))
+    throw new Error(`integer expected: ${n}`);
 }
 function validateVersion(ver) {
-  if (!Number.isSafeInteger(ver) || ver < 1 || ver > 40) throw new Error(`Invalid version=${ver}. Expected number [1..40]`);
+  if (!Number.isSafeInteger(ver) || ver < 1 || ver > 40)
+    throw new Error(`Invalid version=${ver}. Expected number [1..40]`);
 }
 function bin(dec, pad) {
   return dec.toString(2).padStart(pad, "0");
@@ -131,19 +130,24 @@ function fillArr(length, val) {
 }
 function interleaveBytes(...blocks) {
   let len = 0;
-  for (const b of blocks) len = Math.max(len, b.length);
+  for (const b of blocks)
+    len = Math.max(len, b.length);
   const res = [];
   for (let i = 0; i < len; i++) {
     for (const b of blocks) {
-      if (i >= b.length) continue;
+      if (i >= b.length)
+        continue;
       res.push(b[i]);
     }
   }
   return new Uint8Array(res);
 }
 function includesAt(lst, pattern, index) {
-  if (index < 0 || index + pattern.length > lst.length) return false;
-  for (let i = 0; i < pattern.length; i++) if (pattern[i] !== lst[index + i]) return false;
+  if (index < 0 || index + pattern.length > lst.length)
+    return false;
+  for (let i = 0; i < pattern.length; i++)
+    if (pattern[i] !== lst[index + i])
+      return false;
   return true;
 }
 function best() {
@@ -151,7 +155,8 @@ function best() {
   let bestScore = Infinity;
   return {
     add(score, value) {
-      if (score >= bestScore) return;
+      if (score >= bestScore)
+        return;
       best2 = value;
       bestScore = score;
     },
@@ -163,19 +168,24 @@ function alphabet(alphabet2) {
   return {
     has: (char) => alphabet2.includes(char),
     decode: (input) => {
-      if (!Array.isArray(input) || input.length && typeof input[0] !== "string") throw new Error("alphabet.decode input should be array of strings");
+      if (!Array.isArray(input) || input.length && typeof input[0] !== "string")
+        throw new Error("alphabet.decode input should be array of strings");
       return input.map((letter) => {
-        if (typeof letter !== "string") throw new Error(`alphabet.decode: not string element=${letter}`);
+        if (typeof letter !== "string")
+          throw new Error(`alphabet.decode: not string element=${letter}`);
         const index = alphabet2.indexOf(letter);
-        if (index === -1) throw new Error(`Unknown letter: "${letter}". Allowed: ${alphabet2}`);
+        if (index === -1)
+          throw new Error(`Unknown letter: "${letter}". Allowed: ${alphabet2}`);
         return index;
       });
     },
     encode: (digits) => {
-      if (!Array.isArray(digits) || digits.length && typeof digits[0] !== "number") throw new Error("alphabet.encode input should be an array of numbers");
+      if (!Array.isArray(digits) || digits.length && typeof digits[0] !== "number")
+        throw new Error("alphabet.encode input should be an array of numbers");
       return digits.map((i) => {
         assertNumber(i);
-        if (i < 0 || i >= alphabet2.length) throw new Error(`Digit index outside alphabet: ${i} (alphabet: ${alphabet2.length})`);
+        if (i < 0 || i >= alphabet2.length)
+          throw new Error(`Digit index outside alphabet: ${i} (alphabet: ${alphabet2.length})`);
         return alphabet2[i];
       });
     }
@@ -183,12 +193,12 @@ function alphabet(alphabet2) {
 }
 var Bitmap = class _Bitmap {
   static size(size, limit) {
-    if (typeof size === "number") size = {
-      height: size,
-      width: size
-    };
-    if (!Number.isSafeInteger(size.height) && size.height !== Infinity) throw new Error(`Bitmap: invalid height=${size.height} (${typeof size.height})`);
-    if (!Number.isSafeInteger(size.width) && size.width !== Infinity) throw new Error(`Bitmap: invalid width=${size.width} (${typeof size.width})`);
+    if (typeof size === "number")
+      size = { height: size, width: size };
+    if (!Number.isSafeInteger(size.height) && size.height !== Infinity)
+      throw new Error(`Bitmap: invalid height=${size.height} (${typeof size.height})`);
+    if (!Number.isSafeInteger(size.width) && size.width !== Infinity)
+      throw new Error(`Bitmap: invalid width=${size.width} (${typeof size.width})`);
     if (limit !== void 0) {
       size = {
         width: Math.min(size.width, limit.width),
@@ -205,29 +215,26 @@ var Bitmap = class _Bitmap {
     let width;
     for (const line of lines) {
       const row = line.split("").map((i) => {
-        if (i === "X") return true;
-        if (i === " ") return false;
-        if (i === "?") return void 0;
+        if (i === "X")
+          return true;
+        if (i === " ")
+          return false;
+        if (i === "?")
+          return void 0;
         throw new Error(`Bitmap.fromString: unknown symbol=${i}`);
       });
-      if (width && row.length !== width) throw new Error(`Bitmap.fromString different row sizes: width=${width} cur=${row.length}`);
+      if (width && row.length !== width)
+        throw new Error(`Bitmap.fromString different row sizes: width=${width} cur=${row.length}`);
       width = row.length;
       data.push(row);
     }
-    if (!width) width = 0;
-    return new _Bitmap({
-      height,
-      width
-    }, data);
+    if (!width)
+      width = 0;
+    return new _Bitmap({ height, width }, data);
   }
   constructor(size, data) {
-    const {
-      height,
-      width
-    } = _Bitmap.size(size);
-    this.data = data || Array.from({
-      length: height
-    }, () => fillArr(width, void 0));
+    const { height, width } = _Bitmap.size(size);
+    this.data = data || Array.from({ length: height }, () => fillArr(width, void 0));
     this.height = height;
     this.width = width;
   }
@@ -238,49 +245,29 @@ var Bitmap = class _Bitmap {
     return 0 <= p.x && p.x < this.width && 0 <= p.y && p.y < this.height;
   }
   size(offset) {
-    if (!offset) return {
-      height: this.height,
-      width: this.width
-    };
-    const {
-      x,
-      y
-    } = this.xy(offset);
-    return {
-      height: this.height - y,
-      width: this.width - x
-    };
+    if (!offset)
+      return { height: this.height, width: this.width };
+    const { x, y } = this.xy(offset);
+    return { height: this.height - y, width: this.width - x };
   }
   xy(c) {
-    if (typeof c === "number") c = {
-      x: c,
-      y: c
-    };
-    if (!Number.isSafeInteger(c.x)) throw new Error(`Bitmap: invalid x=${c.x}`);
-    if (!Number.isSafeInteger(c.y)) throw new Error(`Bitmap: invalid y=${c.y}`);
+    if (typeof c === "number")
+      c = { x: c, y: c };
+    if (!Number.isSafeInteger(c.x))
+      throw new Error(`Bitmap: invalid x=${c.x}`);
+    if (!Number.isSafeInteger(c.y))
+      throw new Error(`Bitmap: invalid y=${c.y}`);
     c.x = mod(c.x, this.width);
     c.y = mod(c.y, this.height);
     return c;
   }
   // Basically every operation can be represented as rect
   rect(c, size, value) {
-    const {
-      x,
-      y
-    } = this.xy(c);
-    const {
-      height,
-      width
-    } = _Bitmap.size(size, this.size({
-      x,
-      y
-    }));
+    const { x, y } = this.xy(c);
+    const { height, width } = _Bitmap.size(size, this.size({ x, y }));
     for (let yPos = 0; yPos < height; yPos++) {
       for (let xPos = 0; xPos < width; xPos++) {
-        this.data[y + yPos][x + xPos] = typeof value === "function" ? value({
-          x: xPos,
-          y: yPos
-        }, this.data[y + yPos][x + xPos]) : value;
+        this.data[y + yPos][x + xPos] = typeof value === "function" ? value({ x: xPos, y: yPos }, this.data[y + yPos][x + xPos]) : value;
       }
     }
     return this;
@@ -294,97 +281,52 @@ var Bitmap = class _Bitmap {
   }
   // Horizontal & vertical lines
   hLine(c, len, value) {
-    return this.rect(c, {
-      width: len,
-      height: 1
-    }, value);
+    return this.rect(c, { width: len, height: 1 }, value);
   }
   vLine(c, len, value) {
-    return this.rect(c, {
-      width: 1,
-      height: len
-    }, value);
+    return this.rect(c, { width: 1, height: len }, value);
   }
   // add border
   border(border = 2, value) {
     const height = this.height + 2 * border;
     const width = this.width + 2 * border;
     const v = fillArr(border, value);
-    const h = Array.from({
-      length: border
-    }, () => fillArr(width, value));
-    return new _Bitmap({
-      height,
-      width
-    }, [...h, ...this.data.map((i) => [...v, ...i, ...v]), ...h]);
+    const h = Array.from({ length: border }, () => fillArr(width, value));
+    return new _Bitmap({ height, width }, [...h, ...this.data.map((i) => [...v, ...i, ...v]), ...h]);
   }
   // Embed another bitmap on coordinates
   embed(c, bm) {
-    return this.rect(c, bm.size(), ({
-      x,
-      y
-    }) => bm.data[y][x]);
+    return this.rect(c, bm.size(), ({ x, y }) => bm.data[y][x]);
   }
   // returns rectangular part of bitmap
   rectSlice(c, size = this.size()) {
     const rect = new _Bitmap(_Bitmap.size(size, this.size(this.xy(c))));
-    this.rect(c, size, ({
-      x,
-      y
-    }, cur) => rect.data[y][x] = cur);
+    this.rect(c, size, ({ x, y }, cur) => rect.data[y][x] = cur);
     return rect;
   }
   // Change shape, replace rows with columns (data[y][x] -> data[x][y])
   inverse() {
-    const {
-      height,
-      width
-    } = this;
-    const res = new _Bitmap({
-      height: width,
-      width: height
-    });
-    return res.rect({
-      x: 0,
-      y: 0
-    }, Infinity, ({
-      x,
-      y
-    }) => this.data[x][y]);
+    const { height, width } = this;
+    const res = new _Bitmap({ height: width, width: height });
+    return res.rect({ x: 0, y: 0 }, Infinity, ({ x, y }) => this.data[x][y]);
   }
   // Each pixel size is multiplied by factor
   scale(factor) {
-    if (!Number.isSafeInteger(factor) || factor > 1024) throw new Error(`invalid scale factor: ${factor}`);
-    const {
-      height,
-      width
-    } = this;
-    const res = new _Bitmap({
-      height: factor * height,
-      width: factor * width
-    });
-    return res.rect({
-      x: 0,
-      y: 0
-    }, Infinity, ({
-      x,
-      y
-    }) => this.data[Math.floor(y / factor)][Math.floor(x / factor)]);
+    if (!Number.isSafeInteger(factor) || factor > 1024)
+      throw new Error(`invalid scale factor: ${factor}`);
+    const { height, width } = this;
+    const res = new _Bitmap({ height: factor * height, width: factor * width });
+    return res.rect({ x: 0, y: 0 }, Infinity, ({ x, y }) => this.data[Math.floor(y / factor)][Math.floor(x / factor)]);
   }
   clone() {
     const res = new _Bitmap(this.size());
-    return res.rect({
-      x: 0,
-      y: 0
-    }, this.size(), ({
-      x,
-      y
-    }) => this.data[y][x]);
+    return res.rect({ x: 0, y: 0 }, this.size(), ({ x, y }) => this.data[y][x]);
   }
   // Ensure that there is no undefined values left
   assertDrawn() {
     this.rectRead(0, Infinity, (_, cur) => {
-      if (typeof cur !== "boolean") throw new Error(`Invalid color type=${typeof cur}`);
+      if (typeof cur !== "boolean")
+        throw new Error(`Invalid color type=${typeof cur}`);
     });
   }
   // Simple string representation for debugging
@@ -392,20 +334,20 @@ var Bitmap = class _Bitmap {
     return this.data.map((i) => i.map((j) => j === void 0 ? "?" : j ? "X" : " ").join("")).join(String.fromCharCode(chCodes.newline));
   }
   toASCII() {
-    const {
-      height,
-      width,
-      data
-    } = this;
+    const { height, width, data } = this;
     let out = "";
     for (let y = 0; y < height; y += 2) {
       for (let x = 0; x < width; x++) {
         const first = data[y][x];
         const second = y + 1 >= height ? true : data[y + 1][x];
-        if (!first && !second) out += "\u2588";
-        else if (!first && second) out += "\u2580";
-        else if (first && !second) out += "\u2584";
-        else if (first && second) out += " ";
+        if (!first && !second)
+          out += "\u2588";
+        else if (!first && second)
+          out += "\u2580";
+        else if (first && !second)
+          out += "\u2584";
+        else if (first && second)
+          out += " ";
       }
       out += String.fromCharCode(chCodes.newline);
     }
@@ -423,11 +365,9 @@ var Bitmap = class _Bitmap {
     let pathData = "";
     let prevPoint;
     this.rectRead(0, Infinity, (point, val) => {
-      if (!val) return;
-      const {
-        x,
-        y
-      } = point;
+      if (!val)
+        return;
+      const { x, y } = point;
       if (!optimize) {
         out += `<rect x="${x}" y="${y}" width="1" height="1" />`;
         return;
@@ -435,13 +375,15 @@ var Bitmap = class _Bitmap {
       let m = `M${x} ${y}`;
       if (prevPoint) {
         const relM = `m${x - prevPoint.x} ${y - prevPoint.y}`;
-        if (relM.length <= m.length) m = relM;
+        if (relM.length <= m.length)
+          m = relM;
       }
       const bH = x < 10 ? `H${x}` : "h-1";
       pathData += `${m}h1v1${bH}Z`;
       prevPoint = point;
     });
-    if (optimize) out += `<path d="${pathData}"/>`;
+    if (optimize)
+      out += `<path d="${pathData}"/>`;
     out += `</svg>`;
     return out;
   }
@@ -451,18 +393,39 @@ var Bitmap = class _Bitmap {
     const data = [];
     this.rectRead(0, Infinity, (_, cur) => data.push(+(cur === true)));
     const N = 126;
-    const bytes = [71, 73, 70, 56, 55, 97, ...dims, 246, 0, 0, 255, 255, 255, ...fillArr(3 * 127, 0), 44, 0, 0, 0, 0, ...dims, 0, 7];
+    const bytes = [
+      71,
+      73,
+      70,
+      56,
+      55,
+      97,
+      ...dims,
+      246,
+      0,
+      0,
+      255,
+      255,
+      255,
+      ...fillArr(3 * 127, 0),
+      44,
+      0,
+      0,
+      0,
+      0,
+      ...dims,
+      0,
+      7
+    ];
     const fullChunks = Math.floor(data.length / N);
-    for (let i = 0; i < fullChunks; i++) bytes.push(N + 1, 128, ...data.slice(N * i, N * (i + 1)).map((i2) => +i2));
+    for (let i = 0; i < fullChunks; i++)
+      bytes.push(N + 1, 128, ...data.slice(N * i, N * (i + 1)).map((i2) => +i2));
     bytes.push(data.length % N + 1, 128, ...data.slice(fullChunks * N).map((i) => +i));
     bytes.push(1, 129, 0, 59);
     return new Uint8Array(bytes);
   }
   toImage(isRGB = false) {
-    const {
-      height,
-      width
-    } = this.size();
+    const { height, width } = this.size();
     const data = new Uint8Array(height * width * (isRGB ? 3 : 4));
     let i = 0;
     for (let y = 0; y < height; y++) {
@@ -471,14 +434,11 @@ var Bitmap = class _Bitmap {
         data[i++] = value;
         data[i++] = value;
         data[i++] = value;
-        if (!isRGB) data[i++] = 255;
+        if (!isRGB)
+          data[i++] = 255;
       }
     }
-    return {
-      height,
-      width,
-      data
-    };
+    return { height, width, data };
   }
 };
 var ECMode = ["low", "medium", "quartile", "high"];
@@ -550,16 +510,20 @@ var info = {
   sizeType: (ver) => Math.floor((ver + 7) / 17),
   // Based on https://codereview.stackexchange.com/questions/74925/algorithm-to-generate-this-alignment-pattern-locations-table-for-qr-codes
   alignmentPatterns(ver) {
-    if (ver === 1) return [];
+    if (ver === 1)
+      return [];
     const first = 6;
     const last = info.size.encode(ver) - first - 1;
     const distance = last - first;
     const count = Math.ceil(distance / 28);
     let interval = Math.floor(distance / count);
-    if (interval % 2) interval += 1;
-    else if (distance % count * 2 >= count) interval += 2;
+    if (interval % 2)
+      interval += 1;
+    else if (distance % count * 2 >= count)
+      interval += 2;
     const res = [first];
-    for (let m = 1; m < count; m++) res.push(last - (count - m) * interval);
+    for (let m = 1; m < count; m++)
+      res.push(last - (count - m) * interval);
     res.push(last);
     return res;
   },
@@ -573,12 +537,14 @@ var info = {
   formatBits(ecc, maskIdx) {
     const data = info.ECCode[ecc] << 3 | maskIdx;
     let d = data;
-    for (let i = 0; i < 10; i++) d = d << 1 ^ (d >> 9) * 1335;
+    for (let i = 0; i < 10; i++)
+      d = d << 1 ^ (d >> 9) * 1335;
     return (data << 10 | d) ^ info.formatMask;
   },
   versionBits(ver) {
     let d = ver;
-    for (let i = 0; i < 12; i++) d = d << 1 ^ (d >> 11) * 7973;
+    for (let i = 0; i < 12; i++)
+      d = d << 1 ^ (d >> 11) * 7973;
     return ver << 12 | d;
   },
   alphabet: {
@@ -619,7 +585,16 @@ var info = {
     };
   }
 };
-var PATTERNS = [(x, y) => (x + y) % 2 == 0, (_x, y) => y % 2 == 0, (x, _y) => x % 3 == 0, (x, y) => (x + y) % 3 == 0, (x, y) => (Math.floor(y / 2) + Math.floor(x / 3)) % 2 == 0, (x, y) => x * y % 2 + x * y % 3 == 0, (x, y) => (x * y % 2 + x * y % 3) % 2 == 0, (x, y) => ((x + y) % 2 + x * y % 3) % 2 == 0];
+var PATTERNS = [
+  (x, y) => (x + y) % 2 == 0,
+  (_x, y) => y % 2 == 0,
+  (x, _y) => x % 3 == 0,
+  (x, y) => (x + y) % 3 == 0,
+  (x, y) => (Math.floor(y / 2) + Math.floor(x / 3)) % 2 == 0,
+  (x, y) => x * y % 2 + x * y % 3 == 0,
+  (x, y) => (x * y % 2 + x * y % 3) % 2 == 0,
+  (x, y) => ((x + y) % 2 + x * y % 3) % 2 == 0
+];
 var GF = {
   tables: ((p_poly) => {
     const exp = fillArr(256, 0);
@@ -628,38 +603,44 @@ var GF = {
       exp[i] = x;
       log[x] = i;
       x <<= 1;
-      if (x & 256) x ^= p_poly;
+      if (x & 256)
+        x ^= p_poly;
     }
-    return {
-      exp,
-      log
-    };
+    return { exp, log };
   })(285),
   exp: (x) => GF.tables.exp[x],
   log(x) {
-    if (x === 0) throw new Error(`GF.log: invalid arg=${x}`);
+    if (x === 0)
+      throw new Error(`GF.log: invalid arg=${x}`);
     return GF.tables.log[x] % 255;
   },
   mul(x, y) {
-    if (x === 0 || y === 0) return 0;
+    if (x === 0 || y === 0)
+      return 0;
     return GF.tables.exp[(GF.tables.log[x] + GF.tables.log[y]) % 255];
   },
   add: (x, y) => x ^ y,
   pow: (x, e) => GF.tables.exp[GF.tables.log[x] * e % 255],
   inv(x) {
-    if (x === 0) throw new Error(`GF.inverse: invalid arg=${x}`);
+    if (x === 0)
+      throw new Error(`GF.inverse: invalid arg=${x}`);
     return GF.tables.exp[255 - GF.tables.log[x]];
   },
   polynomial(poly) {
-    if (poly.length == 0) throw new Error("GF.polymomial: invalid length");
-    if (poly[0] !== 0) return poly;
+    if (poly.length == 0)
+      throw new Error("GF.polymomial: invalid length");
+    if (poly[0] !== 0)
+      return poly;
     let i = 0;
-    for (; i < poly.length - 1 && poly[i] == 0; i++) ;
+    for (; i < poly.length - 1 && poly[i] == 0; i++)
+      ;
     return poly.slice(i);
   },
   monomial(degree, coefficient) {
-    if (degree < 0) throw new Error(`GF.monomial: invalid degree=${degree}`);
-    if (coefficient == 0) return [0];
+    if (degree < 0)
+      throw new Error(`GF.monomial: invalid degree=${degree}`);
+    if (coefficient == 0)
+      return [0];
     let coefficients = fillArr(degree + 1, 0);
     coefficients[0] = coefficient;
     return GF.polynomial(coefficients);
@@ -667,7 +648,8 @@ var GF = {
   degree: (a) => a.length - 1,
   coefficient: (a, degree) => a[GF.degree(a) - degree],
   mulPoly(a, b) {
-    if (a[0] === 0 || b[0] === 0) return [0];
+    if (a[0] === 0 || b[0] === 0)
+      return [0];
     const res = fillArr(a.length + b.length - 1, 0);
     for (let i = 0; i < a.length; i++) {
       for (let j = 0; j < b.length; j++) {
@@ -677,57 +659,74 @@ var GF = {
     return GF.polynomial(res);
   },
   mulPolyScalar(a, scalar) {
-    if (scalar == 0) return [0];
-    if (scalar == 1) return a;
+    if (scalar == 0)
+      return [0];
+    if (scalar == 1)
+      return a;
     const res = fillArr(a.length, 0);
-    for (let i = 0; i < a.length; i++) res[i] = GF.mul(a[i], scalar);
+    for (let i = 0; i < a.length; i++)
+      res[i] = GF.mul(a[i], scalar);
     return GF.polynomial(res);
   },
   mulPolyMonomial(a, degree, coefficient) {
-    if (degree < 0) throw new Error("GF.mulPolyMonomial: invalid degree");
-    if (coefficient == 0) return [0];
+    if (degree < 0)
+      throw new Error("GF.mulPolyMonomial: invalid degree");
+    if (coefficient == 0)
+      return [0];
     const res = fillArr(a.length + degree, 0);
-    for (let i = 0; i < a.length; i++) res[i] = GF.mul(a[i], coefficient);
+    for (let i = 0; i < a.length; i++)
+      res[i] = GF.mul(a[i], coefficient);
     return GF.polynomial(res);
   },
   addPoly(a, b) {
-    if (a[0] === 0) return b;
-    if (b[0] === 0) return a;
+    if (a[0] === 0)
+      return b;
+    if (b[0] === 0)
+      return a;
     let smaller = a;
     let larger = b;
-    if (smaller.length > larger.length) [smaller, larger] = [larger, smaller];
+    if (smaller.length > larger.length)
+      [smaller, larger] = [larger, smaller];
     let sumDiff = fillArr(larger.length, 0);
     let lengthDiff = larger.length - smaller.length;
     let s = larger.slice(0, lengthDiff);
-    for (let i = 0; i < s.length; i++) sumDiff[i] = s[i];
-    for (let i = lengthDiff; i < larger.length; i++) sumDiff[i] = GF.add(smaller[i - lengthDiff], larger[i]);
+    for (let i = 0; i < s.length; i++)
+      sumDiff[i] = s[i];
+    for (let i = lengthDiff; i < larger.length; i++)
+      sumDiff[i] = GF.add(smaller[i - lengthDiff], larger[i]);
     return GF.polynomial(sumDiff);
   },
   remainderPoly(data, divisor) {
     const out = Array.from(data);
     for (let i = 0; i < data.length - divisor.length + 1; i++) {
       const elm = out[i];
-      if (elm === 0) continue;
+      if (elm === 0)
+        continue;
       for (let j = 1; j < divisor.length; j++) {
-        if (divisor[j] !== 0) out[i + j] = GF.add(out[i + j], GF.mul(divisor[j], elm));
+        if (divisor[j] !== 0)
+          out[i + j] = GF.add(out[i + j], GF.mul(divisor[j], elm));
       }
     }
     return out.slice(data.length - divisor.length + 1, out.length);
   },
   divisorPoly(degree) {
     let g = [1];
-    for (let i = 0; i < degree; i++) g = GF.mulPoly(g, [1, GF.pow(2, i)]);
+    for (let i = 0; i < degree; i++)
+      g = GF.mulPoly(g, [1, GF.pow(2, i)]);
     return g;
   },
   evalPoly(poly, a) {
-    if (a == 0) return GF.coefficient(poly, 0);
+    if (a == 0)
+      return GF.coefficient(poly, 0);
     let res = poly[0];
-    for (let i = 1; i < poly.length; i++) res = GF.add(GF.mul(a, res), poly[i]);
+    for (let i = 1; i < poly.length; i++)
+      res = GF.add(GF.mul(a, res), poly[i]);
     return res;
   },
   // TODO: cleanup
   euclidian(a, b, R) {
-    if (GF.degree(a) < GF.degree(b)) [a, b] = [b, a];
+    if (GF.degree(a) < GF.degree(b))
+      [a, b] = [b, a];
     let rLast = a;
     let r = b;
     let tLast = [0];
@@ -737,7 +736,8 @@ var GF = {
       let tLastLast = tLast;
       rLast = r;
       tLast = t;
-      if (rLast[0] === 0) throw new Error("rLast[0] === 0");
+      if (rLast[0] === 0)
+        throw new Error("rLast[0] === 0");
       r = rLastLast;
       let q = [0];
       const dltInverse = GF.inv(rLast[0]);
@@ -749,10 +749,12 @@ var GF = {
       }
       q = GF.mulPoly(q, tLast);
       t = GF.addPoly(q, tLastLast);
-      if (GF.degree(r) >= GF.degree(rLast)) throw new Error(`Division failed r: ${r}, rLast: ${rLast}`);
+      if (GF.degree(r) >= GF.degree(rLast))
+        throw new Error(`Division failed r: ${r}, rLast: ${rLast}`);
     }
     const sigmaTildeAtZero = GF.coefficient(t, 0);
-    if (sigmaTildeAtZero == 0) throw new Error("sigmaTilde(0) was zero");
+    if (sigmaTildeAtZero == 0)
+      throw new Error("sigmaTilde(0) was zero");
     const inverse = GF.inv(sigmaTildeAtZero);
     return [GF.mulPolyScalar(t, inverse), GF.mulPolyScalar(r, inverse)];
   }
@@ -773,25 +775,31 @@ function RS(eccWords) {
       for (let i = 0; i < eccWords; i++) {
         const evl = GF.evalPoly(poly, GF.exp(i));
         syndrome[syndrome.length - 1 - i] = evl;
-        if (evl !== 0) hasError = true;
+        if (evl !== 0)
+          hasError = true;
       }
-      if (!hasError) return res;
+      if (!hasError)
+        return res;
       syndrome = GF.polynomial(syndrome);
       const monomial = GF.monomial(eccWords, 1);
       const [errorLocator, errorEvaluator] = GF.euclidian(monomial, syndrome, eccWords);
       const locations = fillArr(GF.degree(errorLocator), 0);
       let e = 0;
       for (let i = 1; i < 256 && e < locations.length; i++) {
-        if (GF.evalPoly(errorLocator, i) === 0) locations[e++] = GF.inv(i);
+        if (GF.evalPoly(errorLocator, i) === 0)
+          locations[e++] = GF.inv(i);
       }
-      if (e !== locations.length) throw new Error("RS.decode: invalid errors number");
+      if (e !== locations.length)
+        throw new Error("RS.decode: invalid errors number");
       for (let i = 0; i < locations.length; i++) {
         const pos = res.length - 1 - GF.log(locations[i]);
-        if (pos < 0) throw new Error("RS.decode: invalid error location");
+        if (pos < 0)
+          throw new Error("RS.decode: invalid error location");
         const xiInverse = GF.inv(locations[i]);
         let denominator = 1;
         for (let j = 0; j < locations.length; j++) {
-          if (i === j) continue;
+          if (i === j)
+            continue;
           denominator = GF.mul(denominator, GF.add(1, GF.mul(locations[j], xiInverse)));
         }
         res[pos] = GF.add(res[pos], GF.mul(GF.evalPoly(errorEvaluator, xiInverse), GF.inv(denominator)));
@@ -801,13 +809,7 @@ function RS(eccWords) {
   };
 }
 function interleave(ver, ecc) {
-  const {
-    words,
-    shortBlocks,
-    numBlocks,
-    blockLen,
-    total
-  } = info.capacity(ver, ecc);
+  const { words, shortBlocks, numBlocks, blockLen, total } = info.capacity(ver, ecc);
   const rs = RS(words);
   return {
     encode(bytes) {
@@ -828,7 +830,8 @@ function interleave(ver, ecc) {
       return res;
     },
     decode(data) {
-      if (data.length !== total) throw new Error(`interleave.decode: len(data)=${data.length}, total=${total}`);
+      if (data.length !== total)
+        throw new Error(`interleave.decode: len(data)=${data.length}, total=${total}`);
       const blocks = [];
       for (let i = 0; i < numBlocks; i++) {
         const isShort = i < shortBlocks;
@@ -836,9 +839,11 @@ function interleave(ver, ecc) {
       }
       let pos = 0;
       for (let i = 0; i < blockLen; i++) {
-        for (let j = 0; j < numBlocks; j++) blocks[j][i] = data[pos++];
+        for (let j = 0; j < numBlocks; j++)
+          blocks[j][i] = data[pos++];
       }
-      for (let j = shortBlocks; j < numBlocks; j++) blocks[j][blockLen] = data[pos++];
+      for (let j = shortBlocks; j < numBlocks; j++)
+        blocks[j][blockLen] = data[pos++];
       for (let i = blockLen; i < blockLen + words; i++) {
         for (let j = 0; j < numBlocks; j++) {
           const isShort = j < shortBlocks;
@@ -846,7 +851,8 @@ function interleave(ver, ecc) {
         }
       }
       const res = [];
-      for (const block of blocks) res.push(...Array.from(rs.decode(block)).slice(0, -words));
+      for (const block of blocks)
+        res.push(...Array.from(rs.decode(block)).slice(0, -words));
       return Uint8Array.from(res);
     }
   };
@@ -855,45 +861,33 @@ function drawTemplate(ver, ecc, maskIdx, test = false) {
   const size = info.size.encode(ver);
   let b = new Bitmap(size + 2);
   const finder = new Bitmap(3).rect(0, 3, true).border(1, false).border(1, true).border(1, false);
-  b = b.embed(0, finder).embed({
-    x: -finder.width,
-    y: 0
-  }, finder).embed({
-    x: 0,
-    y: -finder.height
-  }, finder);
+  b = b.embed(0, finder).embed({ x: -finder.width, y: 0 }, finder).embed({ x: 0, y: -finder.height }, finder);
   b = b.rectSlice(1, size);
   const align = new Bitmap(1).rect(0, 1, true).border(1, false).border(1, true);
   const alignPos = info.alignmentPatterns(ver);
   for (const y of alignPos) {
     for (const x of alignPos) {
-      if (b.data[y][x] !== void 0) continue;
-      b.embed({
-        x: x - 2,
-        y: y - 2
-      }, align);
+      if (b.data[y][x] !== void 0)
+        continue;
+      b.embed({ x: x - 2, y: y - 2 }, align);
     }
   }
-  b = b.hLine({
-    x: 0,
-    y: 6
-  }, Infinity, ({
-    x
-  }, cur) => cur === void 0 ? x % 2 == 0 : cur).vLine({
-    x: 6,
-    y: 0
-  }, Infinity, ({
-    y
-  }, cur) => cur === void 0 ? y % 2 == 0 : cur);
+  b = b.hLine({ x: 0, y: 6 }, Infinity, ({ x }, cur) => cur === void 0 ? x % 2 == 0 : cur).vLine({ x: 6, y: 0 }, Infinity, ({ y }, cur) => cur === void 0 ? y % 2 == 0 : cur);
   {
     const bits = info.formatBits(ecc, maskIdx);
     const getBit = (i) => !test && (bits >> i & 1) == 1;
-    for (let i = 0; i < 6; i++) b.data[i][8] = getBit(i);
-    for (let i = 6; i < 8; i++) b.data[i + 1][8] = getBit(i);
-    for (let i = 8; i < 15; i++) b.data[size - 15 + i][8] = getBit(i);
-    for (let i = 0; i < 8; i++) b.data[8][size - i - 1] = getBit(i);
-    for (let i = 8; i < 9; i++) b.data[8][15 - i - 1 + 1] = getBit(i);
-    for (let i = 9; i < 15; i++) b.data[8][15 - i - 1] = getBit(i);
+    for (let i = 0; i < 6; i++)
+      b.data[i][8] = getBit(i);
+    for (let i = 6; i < 8; i++)
+      b.data[i + 1][8] = getBit(i);
+    for (let i = 8; i < 15; i++)
+      b.data[size - 15 + i][8] = getBit(i);
+    for (let i = 0; i < 8; i++)
+      b.data[8][size - i - 1] = getBit(i);
+    for (let i = 8; i < 9; i++)
+      b.data[8][15 - i - 1 + 1] = getBit(i);
+    for (let i = 9; i < 15; i++)
+      b.data[8][15 - i - 1] = getBit(i);
     b.data[size - 8][8] = !test;
   }
   if (ver >= 7) {
@@ -914,14 +908,17 @@ function zigzag(tpl, maskIdx, fn) {
   let dir = -1;
   let y = size - 1;
   for (let xOffset = size - 1; xOffset > 0; xOffset -= 2) {
-    if (xOffset == 6) xOffset = 5;
+    if (xOffset == 6)
+      xOffset = 5;
     for (; ; y += dir) {
       for (let j = 0; j < 2; j += 1) {
         const x = xOffset - j;
-        if (tpl.data[y][x] !== void 0) continue;
+        if (tpl.data[y][x] !== void 0)
+          continue;
         fn(x, y, pattern(x, y));
       }
-      if (y + dir < 0 || y + dir >= size) break;
+      if (y + dir < 0 || y + dir >= size)
+        break;
     }
     dir = -dir;
   }
@@ -929,14 +926,17 @@ function zigzag(tpl, maskIdx, fn) {
 function detectType(str) {
   let type = "numeric";
   for (let x of str) {
-    if (info.alphabet.numeric.has(x)) continue;
+    if (info.alphabet.numeric.has(x))
+      continue;
     type = "alphanumeric";
-    if (!info.alphabet.alphanumerc.has(x)) return "byte";
+    if (!info.alphabet.alphanumerc.has(x))
+      return "byte";
   }
   return type;
 }
 function utf8ToBytes(str) {
-  if (typeof str !== "string") throw new Error(`utf8ToBytes expected string, got ${typeof str}`);
+  if (typeof str !== "string")
+    throw new Error(`utf8ToBytes expected string, got ${typeof str}`);
   return new Uint8Array(new TextEncoder().encode(str));
 }
 function encode(ver, ecc, data, type) {
@@ -945,7 +945,8 @@ function encode(ver, ecc, data, type) {
   if (type === "numeric") {
     const t = info.alphabet.numeric.decode(data.split(""));
     const n = t.length;
-    for (let i = 0; i < n - 2; i += 3) encoded += bin(t[i] * 100 + t[i + 1] * 10 + t[i + 2], 10);
+    for (let i = 0; i < n - 2; i += 3)
+      encoded += bin(t[i] * 100 + t[i + 1] * 10 + t[i + 2], 10);
     if (n % 3 === 1) {
       encoded += bin(t[n - 1], 4);
     } else if (n % 3 === 2) {
@@ -954,8 +955,10 @@ function encode(ver, ecc, data, type) {
   } else if (type === "alphanumeric") {
     const t = info.alphabet.alphanumerc.decode(data.split(""));
     const n = t.length;
-    for (let i = 0; i < n - 1; i += 2) encoded += bin(t[i] * 45 + t[i + 1], 11);
-    if (n % 2 == 1) encoded += bin(t[n - 1], 6);
+    for (let i = 0; i < n - 1; i += 2)
+      encoded += bin(t[i] * 45 + t[i + 1], 11);
+    if (n % 2 == 1)
+      encoded += bin(t[n - 1], 6);
   } else if (type === "byte") {
     const utf8 = utf8ToBytes(data);
     dataLen = utf8.length;
@@ -963,16 +966,17 @@ function encode(ver, ecc, data, type) {
   } else {
     throw new Error("encode: unsupported type");
   }
-  const {
-    capacity
-  } = info.capacity(ver, ecc);
+  const { capacity } = info.capacity(ver, ecc);
   const len = bin(dataLen, info.lengthBits(ver, type));
   let bits = info.modeBits[type] + len + encoded;
-  if (bits.length > capacity) throw new Error("Capacity overflow");
+  if (bits.length > capacity)
+    throw new Error("Capacity overflow");
   bits += "0".repeat(Math.min(4, Math.max(0, capacity - bits.length)));
-  if (bits.length % 8) bits += "0".repeat(8 - bits.length % 8);
+  if (bits.length % 8)
+    bits += "0".repeat(8 - bits.length % 8);
   const padding = "1110110000010001";
-  for (let idx = 0; bits.length !== capacity; idx++) bits += padding[idx % padding.length];
+  for (let idx = 0; bits.length !== capacity; idx++)
+    bits += padding[idx % padding.length];
   const bytes = Uint8Array.from(bits.match(/(.{8})/g).map((i) => Number(`0b${i}`)));
   return interleave(ver, ecc).encode(bytes);
 }
@@ -988,7 +992,8 @@ function drawQR(ver, ecc, data, maskIdx, test = false) {
     }
     b.data[y][x] = value !== mask;
   });
-  if (i !== need) throw new Error("QR: bytes left after draw");
+  if (i !== need)
+    throw new Error("QR: bytes left after draw");
   return b;
 }
 function penalty(bm) {
@@ -998,9 +1003,11 @@ function penalty(bm) {
     for (let i = 0, same = 1, last = void 0; i < row.length; i++) {
       if (last === row[i]) {
         same++;
-        if (i !== row.length - 1) continue;
+        if (i !== row.length - 1)
+          continue;
       }
-      if (same >= 5) res += 3 + (same - 5);
+      if (same >= 5)
+        res += 3 + (same - 5);
       last = row[i];
       same = 1;
     }
@@ -1029,14 +1036,18 @@ function penalty(bm) {
     const p2 = [...lightPattern, ...finderPattern2];
     let res = 0;
     for (let i = 0; i < row.length; i++) {
-      if (includesAt(row, p1, i)) res += 40;
-      if (includesAt(row, p2, i)) res += 40;
+      if (includesAt(row, p1, i))
+        res += 40;
+      if (includesAt(row, p2, i))
+        res += 40;
     }
     return res;
   };
   let finder = 0;
-  for (const row of bm.data) finder += finderPattern(row);
-  for (const column of inverse.data) finder += finderPattern(column);
+  for (const row of bm.data)
+    finder += finderPattern(row);
+  for (const column of inverse.data)
+    finder += finderPattern(column);
   let darkPixels = 0;
   bm.rectRead(0, Infinity, (_c, val) => darkPixels += val ? 1 : 0);
   const darkPercent = darkPixels / (bm.height * bm.width) * 100;
@@ -1046,28 +1057,35 @@ function penalty(bm) {
 function drawQRBest(ver, ecc, data, maskIdx) {
   if (maskIdx === void 0) {
     const bestMask = best();
-    for (let mask = 0; mask < PATTERNS.length; mask++) bestMask.add(penalty(drawQR(ver, ecc, data, mask, true)), mask);
+    for (let mask = 0; mask < PATTERNS.length; mask++)
+      bestMask.add(penalty(drawQR(ver, ecc, data, mask, true)), mask);
     maskIdx = bestMask.get();
   }
-  if (maskIdx === void 0) throw new Error("Cannot find mask");
+  if (maskIdx === void 0)
+    throw new Error("Cannot find mask");
   return drawQR(ver, ecc, data, maskIdx);
 }
 function validateECC(ec) {
-  if (!ECMode.includes(ec)) throw new Error(`Invalid error correction mode=${ec}. Expected: ${ECMode}`);
+  if (!ECMode.includes(ec))
+    throw new Error(`Invalid error correction mode=${ec}. Expected: ${ECMode}`);
 }
 function validateEncoding(enc) {
-  if (!Encoding.includes(enc)) throw new Error(`Encoding: invalid mode=${enc}. Expected: ${Encoding}`);
-  if (enc === "kanji" || enc === "eci") throw new Error(`Encoding: ${enc} is not supported (yet?).`);
+  if (!Encoding.includes(enc))
+    throw new Error(`Encoding: invalid mode=${enc}. Expected: ${Encoding}`);
+  if (enc === "kanji" || enc === "eci")
+    throw new Error(`Encoding: ${enc} is not supported (yet?).`);
 }
 function validateMask(mask) {
-  if (![0, 1, 2, 3, 4, 5, 6, 7].includes(mask) || !PATTERNS[mask]) throw new Error(`Invalid mask=${mask}. Expected number [0..7]`);
+  if (![0, 1, 2, 3, 4, 5, 6, 7].includes(mask) || !PATTERNS[mask])
+    throw new Error(`Invalid mask=${mask}. Expected number [0..7]`);
 }
 function encodeQR(text, output = "raw", opts = {}) {
   const ecc = opts.ecc !== void 0 ? opts.ecc : "medium";
   validateECC(ecc);
   const encoding = opts.encoding !== void 0 ? opts.encoding : detectType(text);
   validateEncoding(encoding);
-  if (opts.mask !== void 0) validateMask(opts.mask);
+  if (opts.mask !== void 0)
+    validateMask(opts.mask);
   let ver = opts.version;
   let data, err = new Error("Unknown error");
   if (ver !== void 0) {
@@ -1084,19 +1102,28 @@ function encodeQR(text, output = "raw", opts = {}) {
       }
     }
   }
-  if (!ver || !data) throw err;
+  if (!ver || !data)
+    throw err;
   let res = drawQRBest(ver, ecc, data, opts.mask);
   res.assertDrawn();
   const border = opts.border === void 0 ? 2 : opts.border;
-  if (!Number.isSafeInteger(border)) throw new Error(`invalid border type=${typeof border}`);
+  if (!Number.isSafeInteger(border))
+    throw new Error(`invalid border type=${typeof border}`);
   res = res.border(border, false);
-  if (opts.scale !== void 0) res = res.scale(opts.scale);
-  if (output === "raw") return res.data;
-  else if (output === "ascii") return res.toASCII();
-  else if (output === "svg") return res.toSVG(opts.optimize);
-  else if (output === "gif") return res.toGIF();
-  else if (output === "term") return res.toTerm();
-  else throw new Error(`Unknown output: ${output}`);
+  if (opts.scale !== void 0)
+    res = res.scale(opts.scale);
+  if (output === "raw")
+    return res.data;
+  else if (output === "ascii")
+    return res.toASCII();
+  else if (output === "svg")
+    return res.toSVG(opts.optimize);
+  else if (output === "gif")
+    return res.toGIF();
+  else if (output === "term")
+    return res.toTerm();
+  else
+    throw new Error(`Unknown output: ${output}`);
 }
 
 // libs/common/src/lib/qr-code.ts
@@ -1135,4 +1162,4 @@ qr/esm/index.js:
   limitations under the License.
   *)
 */
-//# sourceMappingURL=chunk-V7D3SDIG.js.map
+//# sourceMappingURL=chunk-7LUL3VP5.js.map
