@@ -26,9 +26,9 @@ import {
   NgControlStatus,
   NgModel,
   NgModule,
+  Pc,
   Pipe,
   Renderer2,
-  Tc,
   TranslatePipe,
   User,
   UserAvatarComponent,
@@ -95,7 +95,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-CCHNTUCX.js";
+} from "./chunk-CGLZLVCS.js";
 import {
   __async
 } from "./chunk-4MWRP73S.js";
@@ -814,7 +814,7 @@ var _SelectUserModalComponent = class _SelectUserModalComponent {
   constructor() {
     this._dialog_ref = inject(MatDialogRef);
     this.search = new BehaviorSubject("");
-    this.users = this.search.pipe(debounceTime(300), switchMap((s) => Tc({ q: s }).pipe(map((o) => o.data), catchError(() => of([])))), startWith([]));
+    this.users = this.search.pipe(debounceTime(300), switchMap((s) => Pc({ q: s }).pipe(map((o) => o.data), catchError(() => of([])))), startWith([]));
   }
   select(user) {
     this._dialog_ref.close(user);
@@ -1028,4 +1028,4 @@ var SharedUsersModule = _SharedUsersModule;
 export {
   FindAvailabilityModalComponent
 };
-//# sourceMappingURL=chunk-FF3W3XAA.js.map
+//# sourceMappingURL=chunk-GPCY5PQ3.js.map

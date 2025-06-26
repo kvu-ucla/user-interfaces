@@ -1,7 +1,7 @@
-import "./chunk-FF3W3XAA.js";
+import "./chunk-GPCY5PQ3.js";
 import {
   ScheduleStateService
-} from "./chunk-2Y7I4NWC.js";
+} from "./chunk-5XQ4DZY6.js";
 import {
   AsyncHandler,
   AsyncPipe,
@@ -15,7 +15,6 @@ import {
   Component,
   DatePipe,
   DefaultValueAccessor,
-  Ea,
   EventCardComponent,
   EventFormService,
   ExploreSpacesService,
@@ -36,8 +35,9 @@ import {
   NgControlStatus,
   NgModel,
   NgModule,
+  Oa,
   OrganisationService,
-  Rc,
+  Pc,
   Router,
   RouterLink,
   RouterModule,
@@ -58,12 +58,12 @@ import {
   combineLatest,
   currentUser,
   debounceTime,
-  du,
   endOfDay,
   filter,
   filterResourcesFromRules,
   first,
   format,
+  fu,
   getUnixTime,
   hu,
   i18n,
@@ -103,12 +103,11 @@ import {
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
-  ɵɵdirectiveInject,
   ɵɵelement,
   ɵɵelementEnd,
   ɵɵelementStart,
   ɵɵgetCurrentView,
-  ɵɵinject,
+  ɵɵgetInheritedFactory,
   ɵɵlistener,
   ɵɵloadQuery,
   ɵɵnextContext,
@@ -133,7 +132,7 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-CCHNTUCX.js";
+} from "./chunk-CGLZLVCS.js";
 import {
   __async,
   __spreadProps,
@@ -216,18 +215,18 @@ var CalendarService = _CalendarService;
 
 // apps/workplace/src/app/landing/landing-state.service.ts
 var _LandingStateService = class _LandingStateService extends AsyncHandler {
-  constructor(_calendar, _schedule, _org, _settings) {
+  constructor() {
     super();
-    this._calendar = _calendar;
-    this._schedule = _schedule;
-    this._org = _org;
-    this._settings = _settings;
+    this._calendar = inject(CalendarService);
+    this._schedule = inject(ScheduleStateService);
+    this._org = inject(OrganisationService);
+    this._settings = inject(SettingsService);
     this._options = new BehaviorSubject({});
     this._loading = new BehaviorSubject("");
     this._loading_spaces = new BehaviorSubject(false);
     this._contacts = new BehaviorSubject([]);
     this._level_occupancy = new BehaviorSubject([]);
-    this._booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => hu(bld.id, `room_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
+    this._booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => fu(bld.id, `room_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
     this._space_list = this._org.active_building.pipe(filter((_) => !!_), switchMap((bld) => requestSpacesForZone(bld.id)), map((_) => _.filter((s) => s.bookable)), shareReplay(1));
     this._filtered_spaces = combineLatest([
       this._space_list,
@@ -239,7 +238,7 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
       resource: null
     }, rules)));
     this._space_statuses = this._filtered_spaces.pipe(tap((_) => this.unsubWith("bind:")), switchMap((list) => combineLatest((list || []).map((_) => {
-      const binding = Ea(_.id, "Bookings").binding("status");
+      const binding = Oa(_.id, "Bookings").binding("status");
       const obs = binding.listen();
       this.subscription(`bind:${_.id}`, binding.bind());
       return obs;
@@ -253,7 +252,7 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
     this.options = this._options.asObservable();
     this.loading = this._loading.asObservable();
     this.loading_spaces = this._loading_spaces.asObservable();
-    this.search_fn = (q) => this._settings.get("app.basic_user_search") || this._settings.get("app.colleagues_require_auth") !== false ? Tc({ q, authority_id: bt()?.id }).pipe(map(({ data }) => data.map((_) => new StaffUser(_)))) : searchStaff(q);
+    this.search_fn = (q) => this._settings.get("app.basic_user_search") || this._settings.get("app.colleagues_require_auth") !== false ? Pc({ q, authority_id: bt()?.id }).pipe(map(({ data }) => data.map((_) => new StaffUser(_)))) : searchStaff(q);
     this.search_results = this._options.pipe(debounceTime(500), switchMap(({ search }) => {
       this._loading.next("Loading users...");
       return search ? this.search_fn(search).pipe(catchError(() => of([]))) : of([]);
@@ -294,9 +293,9 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
   }
   updateContacts() {
     return __async(this, null, function* () {
-      const metadata = yield hu(currentUser().id, "contacts").toPromise();
+      const metadata = yield fu(currentUser().id, "contacts").toPromise();
       const list = metadata.details instanceof Array ? metadata.details : [];
-      const users = yield Promise.all(list.map((_) => Rc(_.email).pipe(catchError(() => of(_))).toPromise()));
+      const users = yield Promise.all(list.map((_) => Tc(_.email).pipe(catchError(() => of(_))).toPromise()));
       this._contacts.next(users.map((i) => new StaffUser(i)));
     });
   }
@@ -305,7 +304,7 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
       let users = [...this._contacts.getValue()];
       users.push(user);
       users = unique(users, "email");
-      yield du(currentUser().id, {
+      yield hu(currentUser().id, {
         name: "contacts",
         description: "Contacts for the User",
         details: users
@@ -317,7 +316,7 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
     return __async(this, null, function* () {
       let users = [...this._contacts.getValue()];
       users = users.filter((u) => u.email !== user.email);
-      yield du(currentUser().id, {
+      yield hu(currentUser().id, {
         name: "contacts",
         description: "Contacts for the User",
         details: users
@@ -339,7 +338,7 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
       if (!occupancy)
         return;
       const { sys, module, index } = occupancy;
-      const mod = Ea(sys, module, index);
+      const mod = Oa(sys, module, index);
       if (!mod)
         return;
       if (this._occupancy_binding) {
@@ -358,7 +357,7 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
   }
 };
 _LandingStateService.\u0275fac = function LandingStateService_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _LandingStateService)(\u0275\u0275inject(CalendarService), \u0275\u0275inject(ScheduleStateService), \u0275\u0275inject(OrganisationService), \u0275\u0275inject(SettingsService));
+  return new (__ngFactoryType__ || _LandingStateService)();
 };
 _LandingStateService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _LandingStateService, factory: _LandingStateService.\u0275fac, providedIn: "root" });
 var LandingStateService = _LandingStateService;
@@ -368,7 +367,7 @@ var LandingStateService = _LandingStateService;
     args: [{
       providedIn: "root"
     }]
-  }], () => [{ type: CalendarService }, { type: ScheduleStateService }, { type: OrganisationService }, { type: SettingsService }], null);
+  }], () => [], null);
 })();
 
 // apps/workplace/src/app/landing/landing-availability.component.ts
@@ -579,6 +578,16 @@ function LandingAvailabilityComponent_Conditional_5_Template(rf, ctx) {
   }
 }
 var _LandingAvailabilityComponent = class _LandingAvailabilityComponent {
+  constructor() {
+    this._state = inject(LandingStateService);
+    this._org = inject(OrganisationService);
+    this._settings = inject(SettingsService);
+    this._explore = inject(ExploreSpacesService);
+    this.space_list = this._state.free_space_list;
+    this.loading_spaces = this._state.loading_spaces;
+    this.levels_free = this._state.level_occupancy;
+    this.book = (s) => this._explore.bookSpace(s, true);
+  }
   trackBySpaceId(index, space) {
     return space.id;
   }
@@ -594,19 +603,9 @@ var _LandingAvailabilityComponent = class _LandingAvailabilityComponent {
   get hide_rooms() {
     return this._settings.get("app.hide_landing_rooms");
   }
-  constructor(_state, _org, _settings, _explore) {
-    this._state = _state;
-    this._org = _org;
-    this._settings = _settings;
-    this._explore = _explore;
-    this.space_list = this._state.free_space_list;
-    this.loading_spaces = this._state.loading_spaces;
-    this.levels_free = this._state.level_occupancy;
-    this.book = (s) => this._explore.bookSpace(s, true);
-  }
 };
 _LandingAvailabilityComponent.\u0275fac = function LandingAvailabilityComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _LandingAvailabilityComponent)(\u0275\u0275directiveInject(LandingStateService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(ExploreSpacesService));
+  return new (__ngFactoryType__ || _LandingAvailabilityComponent)();
 };
 _LandingAvailabilityComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LandingAvailabilityComponent, selectors: [["landing-availability"]], standalone: false, features: [\u0275\u0275ProvidersFeature([ExploreSpacesService])], decls: 6, vars: 5, consts: [[1, "py-2"], [1, "mb-2", "px-4", "font-medium", "sm:mb-4", "sm:text-lg"], [1, "flex", "items-center", "space-x-2", "px-4", "text-sm", "sm:text-base"], [1, "mx-4", "flex", "w-[calc(100%-2rem)]", "snap-x", "items-center", "space-x-2", "overflow-auto", "py-2", 3, "mb-4"], [1, "mx-4", "flex", "w-[calc(100%-2rem)]", "snap-x", "items-center", "space-x-2", "overflow-auto", "py-2"], ["name", "landing-view-space", "matRipple", "", 1, "flex", "w-64", "snap-start", "items-center", "space-x-4", "rounded", "border", "border-base-200", "bg-base-100", "p-2", "shadow", 3, "routerLink", "queryParams"], [1, "mb-2", "text-sm", "opacity-60"], [1, "flex", "h-16", "w-16", "min-w-[4rem]", "items-center", "justify-center", "overflow-hidden", "rounded", "bg-base-200"], ["auth", "", 1, "h-full", "w-full", "object-cover", "object-center", 3, "source"], ["src", "assets/icons/desk-placeholder.svg", 1, "h-1/2", "w-1/2", "object-contain", "object-center"], [1, "text-left"], [1, "max-w-full", "truncate", "px-1.5", "font-medium"], [1, "flex", "max-w-full", "items-center", "truncate", "text-sm", "opacity-60"], [1, "text-blue-500", "text-lg"], ["diameter", "24"], ["name", "landing-book-room", "matRipple", "", 1, "flex", "w-64", "snap-start", "items-center", "space-x-4", "rounded", "border", "border-base-200", "bg-base-100", "p-2", "shadow"], ["name", "landing-book-room", "matRipple", "", 1, "flex", "w-64", "snap-start", "items-center", "space-x-4", "rounded", "border", "border-base-200", "bg-base-100", "p-2", "shadow", 3, "click"], ["src", "assets/icons/room-placeholder.svg", 1, "h-1/2", "w-1/2", "object-contain", "object-center"]], template: function LandingAvailabilityComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -789,7 +788,7 @@ var LandingAvailabilityComponent = _LandingAvailabilityComponent;
             }
         </div>
     `, providers: [ExploreSpacesService], standalone: false, styles: ["/* angular:styles/component:css;b7324cf5d2bd111c6716f17409d2973f4d73ed32e9a74c743442372902ffea8c;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/landing/landing-availability.component.ts */\n* {\n  flex-shrink: 0;\n}\n/*# sourceMappingURL=landing-availability.component.css.map */\n"] }]
-  }], () => [{ type: LandingStateService }, { type: OrganisationService }, { type: SettingsService }, { type: ExploreSpacesService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LandingAvailabilityComponent, { className: "LandingAvailabilityComponent", filePath: "apps/workplace/src/app/landing/landing-availability.component.ts", lineNumber: 174 });
@@ -990,12 +989,12 @@ function LandingColleaguesComponent_Conditional_22_Template(rf, ctx) {
   }
 }
 var _LandingColleaguesComponent = class _LandingColleaguesComponent extends AsyncHandler {
-  constructor(_state, _settings, _event_form, _router) {
-    super();
-    this._state = _state;
-    this._settings = _settings;
-    this._event_form = _event_form;
-    this._router = _router;
+  constructor() {
+    super(...arguments);
+    this._state = inject(LandingStateService);
+    this._settings = inject(SettingsService);
+    this._event_form = inject(EventFormService);
+    this._router = inject(Router);
     this.show_search = false;
     this.contacts = this._state.contacts;
     this.search_results = combineLatest([
@@ -1030,9 +1029,12 @@ var _LandingColleaguesComponent = class _LandingColleaguesComponent extends Asyn
     this.timeout("open", () => this._input_el.nativeElement.focus(), 100);
   }
 };
-_LandingColleaguesComponent.\u0275fac = function LandingColleaguesComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _LandingColleaguesComponent)(\u0275\u0275directiveInject(LandingStateService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(Router));
-};
+_LandingColleaguesComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275LandingColleaguesComponent_BaseFactory;
+  return function LandingColleaguesComponent_Factory(__ngFactoryType__) {
+    return (\u0275LandingColleaguesComponent_BaseFactory || (\u0275LandingColleaguesComponent_BaseFactory = \u0275\u0275getInheritedFactory(_LandingColleaguesComponent)))(__ngFactoryType__ || _LandingColleaguesComponent);
+  };
+})();
 _LandingColleaguesComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LandingColleaguesComponent, selectors: [["landing-colleagues"]], viewQuery: function LandingColleaguesComponent_Query(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275viewQuery(_c02, 7);
@@ -1294,7 +1296,7 @@ var LandingColleaguesComponent = _LandingColleaguesComponent;
             }
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;ada4d8e106525fc2a6174594c2f22a46ab6eb32f3e34b0dc3ada2058cacb89f7;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/landing/landing-colleagues.component.ts */\n[user]:hover button {\n  opacity: 1;\n}\n:host {\n  height: 100%;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n/*# sourceMappingURL=landing-colleagues.component.css.map */\n"] }]
-  }], () => [{ type: LandingStateService }, { type: SettingsService }, { type: EventFormService }, { type: Router }], { _input_el: [{
+  }], null, { _input_el: [{
     type: ViewChild,
     args: ["search_input", { static: true }]
   }] });
@@ -1513,6 +1515,26 @@ function LandingFavouritesComponent_Conditional_8_Template(rf, ctx) {
 }
 var EMPTY = [];
 var _LandingFavouritesComponent = class _LandingFavouritesComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._org = inject(OrganisationService);
+    this._settings = inject(SettingsService);
+    this._space_pipe = inject(SpacePipe);
+    this._event_form = inject(EventFormService);
+    this._booking_form = inject(BookingFormService);
+    this._router = inject(Router);
+    this._change = new BehaviorSubject(0);
+    this.assets = combineLatest([
+      this._booking_form.loadResourceList("desks"),
+      this._booking_form.loadResourceList("parking-spaces"),
+      this._change
+    ]).pipe(map(([desks, parking]) => {
+      return [
+        ...desks.filter(({ id }) => this.desks.includes(id)).map((_) => __spreadProps(__spreadValues({}, _), { type: "desk" })),
+        ...parking.filter(({ id }) => this.parking_spaces.includes(id)).map((_) => __spreadProps(__spreadValues({}, _), { type: "parking" }))
+      ];
+    }), tap((_) => console.log(_)), shareReplay(1));
+  }
   get spaces() {
     return this._settings.get("favourite_spaces") || EMPTY;
   }
@@ -1533,29 +1555,9 @@ var _LandingFavouritesComponent = class _LandingFavouritesComponent extends Asyn
       return false;
     return this._room_alerts[id] ? this._room_alerts[id][0] === "closed" : false;
   }
-  constructor(_org, _settings, _space_pipe, _event_form, _booking_form, _router) {
-    super();
-    this._org = _org;
-    this._settings = _settings;
-    this._space_pipe = _space_pipe;
-    this._event_form = _event_form;
-    this._booking_form = _booking_form;
-    this._router = _router;
-    this._change = new BehaviorSubject(0);
-    this.assets = combineLatest([
-      this._booking_form.loadResourceList("desks"),
-      this._booking_form.loadResourceList("parking-spaces"),
-      this._change
-    ]).pipe(map(([desks, parking]) => {
-      return [
-        ...desks.filter(({ id }) => this.desks.includes(id)).map((_) => __spreadProps(__spreadValues({}, _), { type: "desk" })),
-        ...parking.filter(({ id }) => this.parking_spaces.includes(id)).map((_) => __spreadProps(__spreadValues({}, _), { type: "parking" }))
-      ];
-    }), tap((_) => console.log(_)), shareReplay(1));
-  }
   ngOnInit() {
     return __async(this, null, function* () {
-      this._room_alerts = yield hu(this._org.organisation.id, "room_alerts").pipe(map((v) => v.details)).toPromise();
+      this._room_alerts = yield fu(this._org.organisation.id, "room_alerts").pipe(map((v) => v.details)).toPromise();
     });
   }
   removeFavourite(type, id) {
@@ -1621,9 +1623,12 @@ var _LandingFavouritesComponent = class _LandingFavouritesComponent extends Asyn
     });
   }
 };
-_LandingFavouritesComponent.\u0275fac = function LandingFavouritesComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _LandingFavouritesComponent)(\u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(SpacePipe), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(Router));
-};
+_LandingFavouritesComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275LandingFavouritesComponent_BaseFactory;
+  return function LandingFavouritesComponent_Factory(__ngFactoryType__) {
+    return (\u0275LandingFavouritesComponent_BaseFactory || (\u0275LandingFavouritesComponent_BaseFactory = \u0275\u0275getInheritedFactory(_LandingFavouritesComponent)))(__ngFactoryType__ || _LandingFavouritesComponent);
+  };
+})();
 _LandingFavouritesComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LandingFavouritesComponent, selectors: [["landing-favourites"]], standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe]), \u0275\u0275InheritDefinitionFeature], decls: 9, vars: 11, consts: [["menu", "matMenu"], [1, "mx-2", "flex", "items-center", "justify-between", "rounded", "bg-base-200", "p-2", "text-sm"], [1, "h-1/2", "w-full", "flex-1", "space-y-2", "divide-y", "divide-base-200", "overflow-auto", "pt-4"], [1, "flex", "h-full", "w-full", "flex-col", "items-center", "justify-center", "space-y-2", "p-8"], ["item", "", 1, "relative", "mx-2", "flex", "flex-col", "items-center", "space-y-2", "pt-2"], [1, "relative", "flex", "w-full", "items-center", "space-x-2"], [1, "relative", "flex", "h-16", "w-16", "items-center", "justify-center", "overflow-hidden", "rounded", "bg-base-300"], ["auth", "", 1, "absolute", "left-1/2", "top-1/2", "min-h-full", "min-w-full", "-translate-x-1/2", "-translate-y-1/2", "object-cover", 3, "source"], ["src", "assets/icons/room-placeholder.svg", 1, "m-auto"], [1, "flex", "h-16", "w-1/2", "flex-1", "flex-col", "justify-center", "space-y-1"], [1, "w-full", "truncate", "pr-12"], [1, "flex", "items-center", "space-x-1", "text-xs", "opacity-60"], [1, "text-blue-500"], [1, "w-1/2", "flex-1", "truncate"], [1, "flex", "items-center", "space-x-2", "truncate", "text-xs", "opacity-60"], ["btn", "", "name", "book-favourite", "matRipple", "", 1, "inverse", "w-full", 3, "click", "disabled"], ["icon", "", "name", "favourite-more", 1, "absolute", "right-0", "top-2", "!m-0", "!rounded", "bg-base-200", 3, "matMenuTriggerFor"], ["xPosition", "before"], ["name", "landing-remove-favourite", "mat-menu-item", "", 3, "click"], [1, "flex", "items-center", "space-x-2"], [1, "text-2xl", "text-error"], [1, "m-auto", 3, "src"], [1, "truncate"], ["btn", "", "name", "book-favourite", "matRipple", "", 1, "inverse", "w-full", 3, "click"], ["icon", "", "name", "favourite-more", 1, "top-22", "absolute", "right-0", "!m-0", "!rounded", "bg-base-200", 3, "matMenuTriggerFor"], [1, "pr-4"], ["src", "assets/icons/no-favourites.svg"], [1, "text-center", "text-sm", "opacity-60"]], template: function LandingFavouritesComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 1)(1, "h2");
@@ -1886,7 +1891,7 @@ var LandingFavouritesComponent = _LandingFavouritesComponent;
             }
         </div>
     `, providers: [SpacePipe], standalone: false, styles: ["/* angular:styles/component:css;ada4d8e106525fc2a6174594c2f22a46ab6eb32f3e34b0dc3ada2058cacb89f7;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/landing/landing-favourites.component.ts */\n[user]:hover button {\n  opacity: 1;\n}\n:host {\n  height: 100%;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n/*# sourceMappingURL=landing-favourites.component.css.map */\n"] }]
-  }], () => [{ type: OrganisationService }, { type: SettingsService }, { type: SpacePipe }, { type: EventFormService }, { type: BookingFormService }, { type: Router }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LandingFavouritesComponent, { className: "LandingFavouritesComponent", filePath: "apps/workplace/src/app/landing/landing-favourites.component.ts", lineNumber: 278 });
@@ -1962,15 +1967,15 @@ function LandingQuickLinksComponent_Conditional_7_Template(rf, ctx) {
   }
 }
 var _LandingQuickLinksComponent = class _LandingQuickLinksComponent {
+  constructor() {
+    this._settings = inject(SettingsService);
+  }
   get features() {
     return this._settings.get("app.features") || [];
   }
-  constructor(_settings) {
-    this._settings = _settings;
-  }
 };
 _LandingQuickLinksComponent.\u0275fac = function LandingQuickLinksComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _LandingQuickLinksComponent)(\u0275\u0275directiveInject(SettingsService));
+  return new (__ngFactoryType__ || _LandingQuickLinksComponent)();
 };
 _LandingQuickLinksComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LandingQuickLinksComponent, selectors: [["landing-quick-links"]], standalone: false, decls: 8, vars: 7, consts: [[1, "mb-2", "px-4", "font-medium", "sm:mb-4", "sm:text-lg"], [1, "mx-4", "mb-4", "flex", "w-[calc(100%-2rem)]", "snap-x", "space-x-2", "overflow-auto"], ["matRipple", "", 1, "flex", "w-64", "min-w-64", "snap-start", "items-center", "space-x-4", "rounded", "border", "border-base-200", "bg-base-100", "p-2", "shadow", 3, "routerLink"], [1, "flex", "h-16", "min-w-[4rem]", "items-center", "justify-center", "rounded", "bg-base-200"], ["src", "assets/icons/room-placeholder.svg", 1, "h-1/2", "w-1/2", "object-contain", "object-center"], [1, "text-xl"], ["src", "assets/icons/desk-placeholder.svg", 1, "h-1/2", "w-1/2", "object-contain", "object-center"], ["src", "assets/icons/car-placeholder.svg", 1, "h-1/2", "w-1/2", "object-contain", "object-center"], ["src", "assets/icons/locker-placeholder.svg", 1, "h-1/2", "w-1/2", "object-contain", "object-center"]], template: function LandingQuickLinksComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -2087,7 +2092,7 @@ var LandingQuickLinksComponent = _LandingQuickLinksComponent;
             }
         </div>
     `, standalone: false }]
-  }], () => [{ type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LandingQuickLinksComponent, { className: "LandingQuickLinksComponent", filePath: "apps/workplace/src/app/landing/landing-quick-links.component.ts", lineNumber: 94 });
@@ -2152,22 +2157,22 @@ function LandingUpcomingComponent_Conditional_14_Template(rf, ctx) {
   }
 }
 var _LandingUpcomingComponent = class _LandingUpcomingComponent extends AsyncHandler {
-  type(event) {
-    return event instanceof Booking ? "booking" : "event";
-  }
-  constructor(_state, _event_form, _booking_form, _router, _dialog, _settings) {
-    super();
-    this._state = _state;
-    this._event_form = _event_form;
-    this._booking_form = _booking_form;
-    this._router = _router;
-    this._dialog = _dialog;
-    this._settings = _settings;
+  constructor() {
+    super(...arguments);
+    this._state = inject(LandingStateService);
+    this._event_form = inject(EventFormService);
+    this._booking_form = inject(BookingFormService);
+    this._router = inject(Router);
+    this._dialog = inject(MatDialog);
+    this._settings = inject(SettingsService);
     this.upcoming_events = this._state.upcoming_events;
     this.edit_fn = (i) => this.edit(i);
     this.edit_booking_fn = (i) => this.editBooking(i);
     this.remove_fn = (i, s) => this.remove(i, s);
     this.end_fn = (i) => this.end(i);
+  }
+  type(event) {
+    return event instanceof Booking ? "booking" : "event";
   }
   ngOnInit() {
     this.subscription("poll", this._state.pollUpcomingEvents());
@@ -2260,9 +2265,12 @@ var _LandingUpcomingComponent = class _LandingUpcomingComponent extends AsyncHan
     });
   }
 };
-_LandingUpcomingComponent.\u0275fac = function LandingUpcomingComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _LandingUpcomingComponent)(\u0275\u0275directiveInject(LandingStateService), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(SettingsService));
-};
+_LandingUpcomingComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275LandingUpcomingComponent_BaseFactory;
+  return function LandingUpcomingComponent_Factory(__ngFactoryType__) {
+    return (\u0275LandingUpcomingComponent_BaseFactory || (\u0275LandingUpcomingComponent_BaseFactory = \u0275\u0275getInheritedFactory(_LandingUpcomingComponent)))(__ngFactoryType__ || _LandingUpcomingComponent);
+  };
+})();
 _LandingUpcomingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LandingUpcomingComponent, selectors: [["landing-upcoming"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 15, vars: 16, consts: [[1, "py-2"], [1, "mb-2", "flex", "items-center", "justify-between", "px-4", "sm:mb-4"], [1, "font-medium", "sm:text-lg"], ["btn", "", "name", "upcoming-view-all", 1, "inverse", "hidden", "sm:flex", 3, "routerLink"], ["name", "upcoming-view-all-mobile", 1, "inverse", "text-blue-500", "relative", "top-8", "flex", "underline", "sm:hidden", 3, "routerLink"], [1, "space-y-4", "px-4"], [1, "flex", "w-full", "flex-col", "items-center", "justify-center", "space-y-4", "p-8"], [3, "event", "show_day", "edit_fn", "remove_fn"], [3, "booking", "show_day", "edit_fn", "remove_fn", "end_fn"], ["src", "assets/img/no-events.svg", 1, "mr-4"], [1, "opacity-30"]], template: function LandingUpcomingComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "div", 2);
@@ -2364,7 +2372,7 @@ var LandingUpcomingComponent = _LandingUpcomingComponent;
             </div>
         </div>
     `, standalone: false }]
-  }], () => [{ type: LandingStateService }, { type: EventFormService }, { type: BookingFormService }, { type: Router }, { type: MatDialog }, { type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LandingUpcomingComponent, { className: "LandingUpcomingComponent", filePath: "apps/workplace/src/app/landing/landing-upcoming.component.ts", lineNumber: 94 });
@@ -2471,6 +2479,11 @@ function LandingComponent_Conditional_19_Template(rf, ctx) {
   }
 }
 var _LandingComponent = class _LandingComponent {
+  constructor() {
+    this._org = inject(OrganisationService);
+    this._settings = inject(SettingsService);
+    this.tab = "people";
+  }
   get hide_nav() {
     return localStorage.getItem("PlaceOS.hide_nav") === "true";
   }
@@ -2492,14 +2505,9 @@ var _LandingComponent = class _LandingComponent {
   get show_quick_links() {
     return this._settings.get("app.show_quick_links");
   }
-  constructor(_org, _settings) {
-    this._org = _org;
-    this._settings = _settings;
-    this.tab = "people";
-  }
 };
 _LandingComponent.\u0275fac = function LandingComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _LandingComponent)(\u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
+  return new (__ngFactoryType__ || _LandingComponent)();
 };
 _LandingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LandingComponent, selectors: [["app-landing"]], standalone: false, decls: 20, vars: 15, consts: [[1, "z-10"], [1, "flex", "h-1/2", "flex-1", "bg-base-200"], [1, "relative", "hidden", "h-full", "w-[18rem]", "flex-col", "overflow-hidden", "border-r", "border-base-300", "bg-base-100", "sm:flex"], [1, "z-0", "h-full", "w-1/2", "flex-1", "overflow-auto", "sm:px-4"], [1, "sticky", "top-0", "z-50", "mb-4", "flex", "items-center", "justify-between", "overflow-hidden", "bg-ternary", "px-4", "sm:rounded-b"], [1, ""], [1, "font-medium", "sm:text-xl"], ["date", "", 1, "text-sm", "sm:text-base"], [1, "text-sm", "sm:text-base"], [1, "h-32", "pt-4"], ["src", "assets/img/landing.svg"], [1, "mx-4", "mb-2", "h-px", "w-[calc(100%-2rem)]", "bg-base-200"], [1, "flex", "items-center", "space-x-2", "p-2"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "inverse"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "click"], [1, "flex", "items-center", "space-x-2", "capitalize"], [1, "pr-2"], [1, "h-1/2", "w-full", "flex-1"]], template: function LandingComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -2546,7 +2554,7 @@ var LandingComponent = _LandingComponent;
     type: Component,
     args: [{ selector: "app-landing", template: `
         @if (!hide_nav) {
-            <topbar class="z-10"></topbar>
+            <topbar class="z-10" />
         }
         <div class="flex h-1/2 flex-1 bg-base-200">
             @if (!hide_landing_sidebar) {
@@ -2639,10 +2647,10 @@ var LandingComponent = _LandingComponent;
             </div>
         </div>
         @if (!hide_nav) {
-            <footer-menu></footer-menu>
+            <footer-menu />
         }
     `, standalone: false, styles: ["/* angular:styles/component:css;c3f1a32da175ad5f52496a52568ea49026350ffb8e17368a99aa31f897afc846;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/landing/landing.component.ts */\n:host {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n}\nmain {\n  min-height: 50%;\n}\n/*# sourceMappingURL=landing.component.css.map */\n"] }]
-  }], () => [{ type: OrganisationService }, { type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LandingComponent, { className: "LandingComponent", filePath: "apps/workplace/src/app/landing/landing.component.ts", lineNumber: 126 });
@@ -2688,4 +2696,4 @@ var AppLandingModule = _AppLandingModule;
 export {
   AppLandingModule
 };
-//# sourceMappingURL=landing.module-QLPDMT54.js.map
+//# sourceMappingURL=landing.module-HZXCNKO6.js.map

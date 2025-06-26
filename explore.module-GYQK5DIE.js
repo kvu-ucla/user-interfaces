@@ -11,6 +11,7 @@ import {
   SharedComponentModule,
   SharedExploreModule,
   TopbarComponent,
+  inject,
   setClassMetadata,
   ɵsetClassDebugInfo,
   ɵɵadvance,
@@ -19,11 +20,10 @@ import {
   ɵɵdefineComponent,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
-  ɵɵdirectiveInject,
   ɵɵelement,
   ɵɵelementEnd,
   ɵɵelementStart
-} from "./chunk-CCHNTUCX.js";
+} from "./chunk-CGLZLVCS.js";
 import "./chunk-4MWRP73S.js";
 
 // apps/workplace/src/app/explore/explore.component.ts
@@ -38,18 +38,18 @@ function ExploreComponent_Conditional_4_Template(rf, ctx) {
   }
 }
 var _ExploreComponent = class _ExploreComponent {
+  constructor() {
+    this._desks = inject(DesksService);
+  }
   get hide_nav() {
     return localStorage.getItem("PlaceOS.hide_nav") === "true";
-  }
-  constructor(_desks) {
-    this._desks = _desks;
   }
   ngOnInit() {
     this._desks.error_on_host = false;
   }
 };
 _ExploreComponent.\u0275fac = function ExploreComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ExploreComponent)(\u0275\u0275directiveInject(DesksService));
+  return new (__ngFactoryType__ || _ExploreComponent)();
 };
 _ExploreComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreComponent, selectors: [["app-explore"]], standalone: false, decls: 5, vars: 2, consts: [[1, "flex", "h-1/2", "flex-1", "flex-col-reverse", "bg-base-200", "sm:flex-row"], [1, "relative", "z-0", "flex", "h-1/2", "flex-1", "flex-col", "overflow-hidden", "sm:h-auto"]], template: function ExploreComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -71,7 +71,7 @@ var ExploreComponent = _ExploreComponent;
     type: Component,
     args: [{ selector: "app-explore", template: `
         @if (!hide_nav) {
-            <topbar></topbar>
+            <topbar />
         }
         <div class="flex h-1/2 flex-1 flex-col-reverse bg-base-200 sm:flex-row">
             <main
@@ -82,10 +82,10 @@ var ExploreComponent = _ExploreComponent;
         </div>
 
         @if (!hide_nav) {
-            <footer-menu></footer-menu>
+            <footer-menu />
         }
     `, standalone: false, styles: ["/* angular:styles/component:css;272d43022913da8b6c60debddc182b5c3d8e2877b2c9bac0eacbbdf7c40c19c6;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/explore/explore.component.ts */\n:host {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n}\n/*# sourceMappingURL=explore.component.css.map */\n"] }]
-  }], () => [{ type: DesksService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreComponent, { className: "ExploreComponent", filePath: "apps/workplace/src/app/explore/explore.component.ts", lineNumber: 38 });
@@ -129,4 +129,4 @@ var ExploreModule = _ExploreModule;
 export {
   ExploreModule
 };
-//# sourceMappingURL=explore.module-KS7TFNEZ.js.map
+//# sourceMappingURL=explore.module-GYQK5DIE.js.map

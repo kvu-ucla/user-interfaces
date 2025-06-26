@@ -1,6 +1,6 @@
 import {
   subMinutes
-} from "./chunk-N7I5HKLD.js";
+} from "./chunk-UCYJEE3S.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -23,12 +23,12 @@ import {
   DomRendererFactory2,
   ElementRef,
   ErrorHandler,
-  Et,
   EventEmitter,
   EventTimelineComponent,
   FormsModule,
   GlobalBannerComponent,
   GlobalLoadingComponent,
+  Go,
   GoogleAnalyticsService,
   HotkeysService,
   HttpErrorResponse,
@@ -68,6 +68,7 @@ import {
   NoopAnimationPlayer,
   Observable,
   OrganisationService,
+  Ot,
   Output,
   Qt,
   ReactiveFormsModule,
@@ -86,7 +87,6 @@ import {
   UnauthorisedComponent,
   VERSION,
   VerticalTimelineComponent,
-  Xo,
   Xt,
   Y,
   Yt,
@@ -107,18 +107,18 @@ import {
   formatRuntimeError,
   generateMockSpace,
   getUnixTime,
-  gs,
   hasNewVersion,
   hn,
   inject,
   isBefore,
   isMobileSafari,
-  ka,
   lastValueFrom,
   ln,
   log,
   makeEnvironmentProviders,
   map,
+  nextValueFrom,
+  nn,
   no,
   notifySuccess,
   padString,
@@ -131,7 +131,6 @@ import {
   randomString,
   registerLocaleData,
   requestScreenWakeLock,
-  rn,
   sequence,
   set,
   setAppName,
@@ -149,6 +148,8 @@ import {
   tap,
   timePeriodsIntersect,
   unique,
+  xa,
+  ys,
   ɵPRE_STYLE,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
@@ -185,7 +186,7 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-CCHNTUCX.js";
+} from "./chunk-CGLZLVCS.js";
 import {
   __async,
   __export,
@@ -6219,7 +6220,7 @@ function registerMocks4() {
         ];
       }
       MOCK_EVENTS.push(new_event);
-      const system = Xo(new_event.system?.id);
+      const system = Go(new_event.system?.id);
       system?.Bookings[0]?.$poll_bookings();
       return new_event;
     }
@@ -7444,7 +7445,7 @@ var createVideoConferenceModule = (space = {}, overrides = {}) => new VideoConfe
 
 // libs/mocks/src/lib/systems-bindings.mock.ts
 function createSystem(space) {
-  ka(space.id, {
+  xa(space.id, {
     System: [createSystemModule(space)],
     Bookings: [createBookingsModule(space)],
     ContactTracing: [createContactTracingModule(space)],
@@ -7459,7 +7460,7 @@ function createSystem(space) {
     Payment: [createPaymentsModule(space)],
     LockerLocations: [createLockerLocationsModule()]
   });
-  const system = Xo(space.id);
+  const system = Go(space.id);
   system.Bookings[0].$poll_bookings();
   setInterval(() => system.Bookings[0].$poll_bookings(), 30 * 1e3);
   system.AreaManagement[0].$update();
@@ -26025,6 +26026,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
   constructor() {
     super(...arguments);
     this._zone = "";
+    this._region = "";
     this._analytics = inject(GoogleAnalyticsService, { optional: true });
     this._locale = inject(LocaleService, { optional: true });
     this._settings = inject(SettingsService);
@@ -26056,7 +26058,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
         notifySuccess("Toggled dark mode.");
       });
       this._hotkey.listen(["Control", "Alt", "Shift", "KeyC"], () => {
-        this._clipboard.copy(`${Y()}|${rn()}`);
+        this._clipboard.copy(`${Y()}|${nn()}`);
         notifySuccess("Successfully copied token.");
       });
       this._hotkey.listen(["Control", "Alt", "Shift", "KeyV"], () => {
@@ -26075,11 +26077,16 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
           localStorage.setItem("PLACEOS.locale", locale);
         }
         if (params.has("x-api-key")) {
-          gs(params.get("x-api-key"));
+          ys(params.get("x-api-key"));
+        }
+        if (params.has("region_id")) {
+          this._region = params.get("region_id");
         }
         if (params.has("building_id")) {
           this._zone = params.get("building_id");
         }
+        if (this._region || this._zone)
+          this._setZones();
       });
       setNotifyOutlet(this._snackbar);
       setTranslationService(this._locale);
@@ -26117,11 +26124,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
       } catch {
         log("APP", "Failed to initialise background services.", void 0, "warn");
       }
-      this.timeout("set_initial_building", () => {
-        const bld = this._org.buildings.find((b) => b.id === this._zone);
-        if (bld)
-          this._org.setBuilding(bld, true);
-      }, 1e3);
+      this._setZones();
     });
   }
   onInitError() {
@@ -26180,7 +26183,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
     if (isMobileSafari())
       return;
     const tkn = Y();
-    Nn(tkn === "x-api-key" ? { "x-api-key": Et() } : { Authorization: `Bearer ${tkn}` });
+    Nn(tkn === "x-api-key" ? { "x-api-key": Ot() } : { Authorization: `Bearer ${tkn}` });
   }
   _initUploads(tries = 1) {
     if (!this._settings.get("app.has_uploads"))
@@ -26206,6 +26209,17 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
       this.interval("auto-update-version", () => this._checkReload(), 15 * 1e3);
       yield requestScreenWakeLock();
     });
+  }
+  _setZones() {
+    this.timeout("set_building+region", () => __async(this, null, function* () {
+      const region = this._org.regions.find((b) => b.id === this._region);
+      if (region)
+        this._org.setRegion(region);
+      const building_list = yield nextValueFrom(this._org.building_list);
+      const bld = building_list.find((b) => b.id === this._zone);
+      if (bld)
+        this._org.setBuilding(bld, true);
+    }), 1e3);
   }
 };
 _AppComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -26233,20 +26247,20 @@ var AppComponent = _AppComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppComponent, [{
     type: Component,
     args: [{ selector: "app-root", template: `
-        <global-banner></global-banner>
+        <global-banner />
         <div class="relative h-1/2 w-full flex-1">
             <router-outlet></router-outlet>
         </div>
         @if (has_chat) {
-            <global-chat></global-chat>
+            <global-chat />
         }
-        <global-loading></global-loading>
+        <global-loading />
         <!-- <debug-console *ngIf="debug"></debug-console> -->
     `, standalone: false, styles: ["/* angular:styles/component:css;2c590c9e56511a088a1469fe4b227d8190323c208f95620a03712f1a8f5bae8d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/app.component.ts */\n:host {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=app.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 113 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 114 });
 })();
 
 // apps/workplace/src/environments/environment.ts
@@ -26263,43 +26277,43 @@ var routes = [
     path: "landing",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./landing.module-QLPDMT54.js").then((m) => m.AppLandingModule)
+    loadChildren: () => import("./landing.module-HZXCNKO6.js").then((m) => m.AppLandingModule)
   },
   {
     path: "book",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./book.module-NJZ7XUYO.js").then((m) => m.BookModule)
+    loadChildren: () => import("./book.module-4TRE53OZ.js").then((m) => m.BookModule)
   },
   {
     path: "explore",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./explore.module-KS7TFNEZ.js").then((m) => m.ExploreModule)
+    loadChildren: () => import("./explore.module-GYQK5DIE.js").then((m) => m.ExploreModule)
   },
   {
     path: "control",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./control.module-YCXW6O3I.js").then((m) => m.ControlModule)
+    loadChildren: () => import("./control.module-LXDYDSPX.js").then((m) => m.ControlModule)
   },
   {
     path: "directory",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./directory.module-XXSBTSWR.js").then((m) => m.DirectoryModule)
+    loadChildren: () => import("./directory.module-DOLQ2DC3.js").then((m) => m.DirectoryModule)
   },
   {
     path: "your-bookings",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./schedule.module-US57NZW4.js").then((m) => m.AppScheduleModule)
+    loadChildren: () => import("./schedule.module-KAMPXS5L.js").then((m) => m.AppScheduleModule)
   },
   {
     path: "group-events",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./group-events.module-JFWLIY4M.js").then((m) => m.GroupEventsModule)
+    loadChildren: () => import("./group-events.module-YBC7SYOE.js").then((m) => m.GroupEventsModule)
   },
   { path: "**", redirectTo: "-", pathMatch: "full" }
 ];
@@ -26387,9 +26401,9 @@ function UserAvailabilityModalComponent_Conditional_10_Template(rf, ctx) {
   }
 }
 var _UserAvailabilityModalComponent = class _UserAvailabilityModalComponent extends AsyncHandler {
-  constructor(_data) {
-    super();
-    this._data = _data;
+  constructor() {
+    super(...arguments);
+    this._data = inject(MAT_DIALOG_DATA);
     this.event = new EventEmitter();
     this.date = (/* @__PURE__ */ new Date()).valueOf();
     this.date$ = new BehaviorSubject(this.date);
@@ -26449,9 +26463,12 @@ var _UserAvailabilityModalComponent = class _UserAvailabilityModalComponent exte
     });
   }
 };
-_UserAvailabilityModalComponent.\u0275fac = function UserAvailabilityModalComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _UserAvailabilityModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA));
-};
+_UserAvailabilityModalComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275UserAvailabilityModalComponent_BaseFactory;
+  return function UserAvailabilityModalComponent_Factory(__ngFactoryType__) {
+    return (\u0275UserAvailabilityModalComponent_BaseFactory || (\u0275UserAvailabilityModalComponent_BaseFactory = \u0275\u0275getInheritedFactory(_UserAvailabilityModalComponent)))(__ngFactoryType__ || _UserAvailabilityModalComponent);
+  };
+})();
 _UserAvailabilityModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserAvailabilityModalComponent, selectors: [["app-user-availability-modal"]], outputs: { event: "event" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 17, vars: 5, consts: [["mat-dialog-title", "", 1, "heading"], ["icon", "", "mat-dialog-close", ""], [3, "icon"], [1, "date"], ["name", "date", 3, "ngModelChange", "ngModel"], [1, "spinner"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "inverse"], ["mat-flat-button", "", "color", "primary", 3, "click", "disabled"], [1, "mobile-only"], [3, "dateChange", "durationChange", "groupsChange", "date", "duration", "groups"], [1, "not-mobile"], ["diameter", "32"]], template: function UserAvailabilityModalComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "header")(1, "div", 0);
@@ -26549,10 +26566,7 @@ var UserAvailabilityModalComponent = _UserAvailabilityModalComponent;
   </footer>
 </mat-dialog-actions>
 `, styles: ["/* apps/workplace/src/app/overlays/user-availability-modal/user-availability.modal.component.scss */\n.heading {\n  flex: 1;\n  text-align: center;\n}\n@media screen and (max-width: 639px) {\n  .not-mobile {\n    display: none;\n  }\n}\n@media screen and (min-width: 640px) {\n  .mobile-only {\n    display: none;\n  }\n}\n.date {\n  display: flex;\n  justify-content: center;\n  margin-bottom: 1em;\n}\n.spinner {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n  height: 3em;\n}\n/*# sourceMappingURL=user-availability.modal.component.css.map */\n"] }]
-  }], () => [{ type: void 0, decorators: [{
-    type: Inject,
-    args: [MAT_DIALOG_DATA]
-  }] }], { event: [{
+  }], null, { event: [{
     type: Output
   }] });
 })();
@@ -26587,9 +26601,9 @@ function ViewAttendeesModalComponent_For_7_Template(rf, ctx) {
   }
 }
 var _ViewAttendeesModalComponent = class _ViewAttendeesModalComponent extends AsyncHandler {
-  constructor(_data) {
-    super();
-    this._data = _data;
+  constructor() {
+    super(...arguments);
+    this._data = inject(MAT_DIALOG_DATA);
   }
   ngOnChanges() {
   }
@@ -26597,9 +26611,12 @@ var _ViewAttendeesModalComponent = class _ViewAttendeesModalComponent extends As
     this.attendees = this._data.attendees;
   }
 };
-_ViewAttendeesModalComponent.\u0275fac = function ViewAttendeesModalComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ViewAttendeesModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA));
-};
+_ViewAttendeesModalComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275ViewAttendeesModalComponent_BaseFactory;
+  return function ViewAttendeesModalComponent_Factory(__ngFactoryType__) {
+    return (\u0275ViewAttendeesModalComponent_BaseFactory || (\u0275ViewAttendeesModalComponent_BaseFactory = \u0275\u0275getInheritedFactory(_ViewAttendeesModalComponent)))(__ngFactoryType__ || _ViewAttendeesModalComponent);
+  };
+})();
 _ViewAttendeesModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ViewAttendeesModalComponent, selectors: [["schedule-view-attendees"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 12, vars: 2, consts: [[3, "icon"], [1, "body"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "inverse"], [3, "href"]], template: function ViewAttendeesModalComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "header");
@@ -26658,10 +26675,7 @@ var ViewAttendeesModalComponent = _ViewAttendeesModalComponent;
   </footer>
 </mat-dialog-actions>
 `, styles: ['/* apps/workplace/src/app/overlays/view-attendees-modal/view-attendees-modal.component.scss */\n.body {\n  display: flex;\n  flex-direction: column;\n  row-gap: 0.5em;\n}\n.body div {\n  display: grid;\n  grid-template-columns: 3em 1fr;\n  grid-template-rows: 1fr 1fr;\n  grid-template-areas: "icon name" "icon email";\n  margin-bottom: 0.5em;\n  align-items: center;\n}\n.body div icon {\n  margin: auto;\n  grid-area: icon;\n  font-size: 2em;\n}\n.body div label {\n  grid-area: name;\n}\n.body div a {\n  grid-area: email;\n}\n/*# sourceMappingURL=view-attendees-modal.component.css.map */\n'] }]
-  }], () => [{ type: void 0, decorators: [{
-    type: Inject,
-    args: [MAT_DIALOG_DATA]
-  }] }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ViewAttendeesModalComponent, { className: "ViewAttendeesModalComponent", filePath: "apps/workplace/src/app/overlays/view-attendees-modal/view-attendees-modal.component.ts", lineNumber: 13 });
@@ -26686,11 +26700,11 @@ function ViewCateringModalComponent_For_11_Template(rf, ctx) {
   }
 }
 var _ViewCateringModalComponent = class _ViewCateringModalComponent extends AsyncHandler {
-  constructor(_data, _router, _dialog) {
-    super();
-    this._data = _data;
-    this._router = _router;
-    this._dialog = _dialog;
+  constructor() {
+    super(...arguments);
+    this._data = inject(MAT_DIALOG_DATA);
+    this._router = inject(Router);
+    this._dialog = inject(MatDialog);
     this.catering_items_total = 0;
   }
   ngOnInit() {
@@ -26709,9 +26723,12 @@ var _ViewCateringModalComponent = class _ViewCateringModalComponent extends Asyn
     this._router.navigate(["/catering/"]);
   }
 };
-_ViewCateringModalComponent.\u0275fac = function ViewCateringModalComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ViewCateringModalComponent)(\u0275\u0275directiveInject(MAT_DIALOG_DATA), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(MatDialog));
-};
+_ViewCateringModalComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275ViewCateringModalComponent_BaseFactory;
+  return function ViewCateringModalComponent_Factory(__ngFactoryType__) {
+    return (\u0275ViewCateringModalComponent_BaseFactory || (\u0275ViewCateringModalComponent_BaseFactory = \u0275\u0275getInheritedFactory(_ViewCateringModalComponent)))(__ngFactoryType__ || _ViewCateringModalComponent);
+  };
+})();
 _ViewCateringModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ViewCateringModalComponent, selectors: [["view-catering-modal"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 25, vars: 2, consts: [[1, "body"], [1, "qty"], [1, "total"], [1, "note-label"], [1, "note-box"], ["mat-dialog-close", ""], [1, "black", 3, "click"]], template: function ViewCateringModalComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "header")(1, "icon");
@@ -26763,10 +26780,7 @@ var ViewCateringModalComponent = _ViewCateringModalComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ViewCateringModalComponent, [{
     type: Component,
     args: [{ selector: "view-catering-modal", standalone: false, template: '<header>\n  <icon>room_service</icon>\n  <h1>Catering</h1>\n</header>\n<div class="body">\n  <strong>Item</strong>\n  <strong class="qty">Quantity</strong>\n  @for (item of catering; track item) {\n    <label>\n      {{ item.item }}\n    </label>\n    <label class="qty">\n      {{ item.qty }}\n    </label>\n  }\n  <strong class="total">Total Items</strong>\n  <strong class="qty">{{ catering_items_total }}</strong>\n  <strong class="note-label"> Note: </strong>\n  <div class="note-box">\n    {{ catering_note }}\n  </div>\n</div>\n<footer>\n  <button mat-dialog-close>Close</button>\n  <button class="black" (click)="edit()">Edit</button>\n</footer>\n', styles: ["/* apps/workplace/src/app/overlays/view-catering-modal/view-catering-modal.component.scss */\n.body {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  row-gap: 0.5em;\n}\n.body .note-box,\n.body .note-label {\n  grid-column: 1/-1;\n}\n.body .note-label {\n  margin-top: 0.5em;\n}\n.body .qty,\n.body .total {\n  text-align: right;\n}\n/*# sourceMappingURL=view-catering-modal.component.css.map */\n"] }]
-  }], () => [{ type: void 0, decorators: [{
-    type: Inject,
-    args: [MAT_DIALOG_DATA]
-  }] }, { type: Router }, { type: MatDialog }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ViewCateringModalComponent, { className: "ViewCateringModalComponent", filePath: "apps/workplace/src/app/overlays/view-catering-modal/view-catering-modal.component.ts", lineNumber: 14 });

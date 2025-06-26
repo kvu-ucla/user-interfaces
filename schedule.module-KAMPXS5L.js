@@ -1,6 +1,6 @@
 import {
   ScheduleStateService
-} from "./chunk-2Y7I4NWC.js";
+} from "./chunk-5XQ4DZY6.js";
 import {
   AsyncHandler,
   AsyncPipe,
@@ -50,6 +50,7 @@ import {
   format,
   forwardRef,
   i18n,
+  inject,
   isBefore,
   isSameDay,
   isSameMonth,
@@ -76,11 +77,11 @@ import {
   ɵɵdefineComponent,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
-  ɵɵdirectiveInject,
   ɵɵelement,
   ɵɵelementEnd,
   ɵɵelementStart,
   ɵɵgetCurrentView,
+  ɵɵgetInheritedFactory,
   ɵɵlistener,
   ɵɵnextContext,
   ɵɵpipe,
@@ -97,7 +98,7 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵtextInterpolate2
-} from "./chunk-CCHNTUCX.js";
+} from "./chunk-CGLZLVCS.js";
 import {
   __async
 } from "./chunk-4MWRP73S.js";
@@ -314,20 +315,20 @@ function ScheduleFilterCardComponent_Conditional_14_Template(rf, ctx) {
   }
 }
 var _ScheduleFilterCardComponent = class _ScheduleFilterCardComponent {
-  hasFeature(feature) {
-    return this._settings.get("app.features")?.includes(feature);
-  }
-  constructor(_state, _settings, _sheet_ref) {
-    this._state = _state;
-    this._settings = _settings;
-    this._sheet_ref = _sheet_ref;
+  constructor() {
+    this._state = inject(ScheduleStateService);
+    this._settings = inject(SettingsService);
+    this._sheet_ref = inject(MatBottomSheetRef);
     this.filters = this._state.filters;
     this.toggleType = (t) => this._state.toggleType(t);
     this.dismiss = () => this._sheet_ref.dismiss();
   }
+  hasFeature(feature) {
+    return this._settings.get("app.features")?.includes(feature);
+  }
 };
 _ScheduleFilterCardComponent.\u0275fac = function ScheduleFilterCardComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ScheduleFilterCardComponent)(\u0275\u0275directiveInject(ScheduleStateService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(MatBottomSheetRef));
+  return new (__ngFactoryType__ || _ScheduleFilterCardComponent)();
 };
 _ScheduleFilterCardComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ScheduleFilterCardComponent, selectors: [["schedule-filter-card"]], standalone: false, decls: 19, vars: 12, consts: [[1, "mb-4", "flex", "items-center", "space-x-2", "border-b", "border-base-200", "text-xl"], ["icon", "", "matRipple", "", 3, "click"], [1, "w-1/2", "flex-1", "text-center"], [1, "mb-4", "space-y-4", "border-b", "border-base-200", "px-2", "pb-4"], ["matRipple", "", "name", "schedule-toggle-event-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left"], ["matRipple", "", "name", "schedule-toggle-desk-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left"], ["matRipple", "", "name", "schedule-toggle-parking-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left"], ["matRipple", "", "name", "schedule-toggle-visitor-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left"], ["matRipple", "", "name", "schedule-toggle-locker-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left"], [1, "px-2", "pb-2"], ["btn", "", "matRipple", "", "name", "schedule-apply-filter", 1, "w-full", 3, "click"], ["matRipple", "", "name", "schedule-toggle-event-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full", "bg-base-200", "text-2xl"], [1, "flex-1"], [1, ""], [1, "text-sm", "opacity-60"], [3, "ngModel"], ["matRipple", "", "name", "schedule-toggle-desk-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], ["src", "assets/icons/desk-outline.svg", 1, "w-6"], ["matRipple", "", "name", "schedule-toggle-parking-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], ["matRipple", "", "name", "schedule-toggle-visitor-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], ["matRipple", "", "name", "schedule-toggle-locker-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"]], template: function ScheduleFilterCardComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -585,7 +586,7 @@ var ScheduleFilterCardComponent = _ScheduleFilterCardComponent;
             </button>
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;c8f9d18253326e4ed43aff56311c0651df3afa940b60387869cba90c71ede5e2;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/schedule/schedule-filter-card.component.ts */\nmat-checkbox {\n  pointer-events: none;\n}\n/*# sourceMappingURL=schedule-filter-card.component.css.map */\n"] }]
-  }], () => [{ type: ScheduleStateService }, { type: SettingsService }, { type: MatBottomSheetRef }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ScheduleFilterCardComponent, { className: "ScheduleFilterCardComponent", filePath: "apps/workplace/src/app/schedule/schedule-filter-card.component.ts", lineNumber: 219 });
@@ -857,22 +858,22 @@ function ScheduleFiltersComponent_Conditional_32_Template(rf, ctx) {
   }
 }
 var _ScheduleFiltersComponent = class _ScheduleFiltersComponent {
-  hasFeature(feature) {
-    return this._settings.get("app.features")?.includes(feature);
-  }
-  constructor(_sheet, _state, _settings) {
-    this._sheet = _sheet;
-    this._state = _state;
-    this._settings = _settings;
+  constructor() {
+    this._sheet = inject(MatBottomSheet);
+    this._state = inject(ScheduleStateService);
+    this._settings = inject(SettingsService);
     this.filters = this._state.filters;
     this.toggleType = (t, c = false) => this._state.toggleType(t, c);
+  }
+  hasFeature(feature) {
+    return this._settings.get("app.features")?.includes(feature);
   }
   openFilters() {
     this._sheet.open(ScheduleFilterCardComponent);
   }
 };
 _ScheduleFiltersComponent.\u0275fac = function ScheduleFiltersComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ScheduleFiltersComponent)(\u0275\u0275directiveInject(MatBottomSheet), \u0275\u0275directiveInject(ScheduleStateService), \u0275\u0275directiveInject(SettingsService));
+  return new (__ngFactoryType__ || _ScheduleFiltersComponent)();
 };
 _ScheduleFiltersComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ScheduleFiltersComponent, selectors: [["schedule-filters"]], standalone: false, decls: 34, vars: 39, consts: [[1, "hidden", "rounded", "border", "border-base-200", "bg-base-100", "p-2", "sm:block"], [1, "mb-2", "font-medium"], [1, "flex", "flex-wrap"], [1, "m-1", "flex", "items-center", "rounded-3xl", "border", "border-base-200"], [1, "flex", "items-center", "space-x-2", "overflow-auto", "sm:hidden"], ["btn", "", "matRipple", "", "name", "schedule-open-filter-edit", 1, "min-w-12", "sm:w-24", 3, "click"], [1, "flex", "items-center", "justify-center", "space-x-2"], [1, "text-xl"], [1, "flex", "items-center", "rounded-3xl", "border", "border-base-200", "bg-base-100", "pl-2", "text-sm"], [1, "px-2"], ["icon", "", "name", "schedule-remove-event-filter", 3, "click"], ["icon", "", "name", "schedule-remove-desk-filter", 3, "click"], ["icon", "", "matRipple", "", "name", "schedule-remove-parking-filter", 3, "click"], ["icon", "", "matRipple", "", "name", "schedule-remove-visitor-filter", 3, "click"], ["icon", "", "matRipple", "", "name", "schedule-remove-locker-filter", 3, "click"], ["icon", "", "name", "schedule-remove-event-filter-mobile", 3, "click"], ["icon", "", "name", "schedule-remove-desk-filter-mobile", 3, "click"], ["icon", "", "name", "schedule-remove-parking-filter-mobile", 3, "click"], ["icon", "", "name", "schedule-remove-visitor-filter-mobile", 3, "click"], ["icon", "", "name", "schedule-remove-locker-filter-mobile", 3, "click"]], template: function ScheduleFiltersComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -1207,13 +1208,14 @@ var ScheduleFiltersComponent = _ScheduleFiltersComponent;
             }
         </div>
     `, standalone: false }]
-  }], () => [{ type: MatBottomSheet }, { type: ScheduleStateService }, { type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ScheduleFiltersComponent, { className: "ScheduleFiltersComponent", filePath: "apps/workplace/src/app/schedule/schedule-filters.component.ts", lineNumber: 259 });
 })();
 
 // apps/workplace/src/app/schedule/schedule-mobile-calendar.component.ts
+var _forTrack0 = ($index, $item) => $item.id;
 function ScheduleMobileCalendarComponent_For_17_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 6);
@@ -1368,9 +1370,9 @@ _ScheduleMobileCalendarComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineC
     \u0275\u0275text(14, "arrow_drop_down");
     \u0275\u0275elementEnd()()()();
     \u0275\u0275elementStart(15, "div", 5);
-    \u0275\u0275repeaterCreate(16, ScheduleMobileCalendarComponent_For_17_Template, 3, 4, "div", 6, \u0275\u0275repeaterTrackByIdentity);
+    \u0275\u0275repeaterCreate(16, ScheduleMobileCalendarComponent_For_17_Template, 3, 4, "div", 6, _forTrack0);
     \u0275\u0275pipe(18, "slice");
-    \u0275\u0275repeaterCreate(19, ScheduleMobileCalendarComponent_For_20_Template, 4, 15, "button", 7, \u0275\u0275repeaterTrackByIdentity);
+    \u0275\u0275repeaterCreate(19, ScheduleMobileCalendarComponent_For_20_Template, 4, 15, "button", 7, _forTrack0);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
@@ -1414,12 +1416,12 @@ var ScheduleMobileCalendarComponent = _ScheduleMobileCalendarComponent;
                 </div>
             </div>
             <div class="mb-2 grid grid-cols-7 gap-2">
-                @for (day of date_list | slice: 0 : 7; track day) {
+                @for (day of date_list | slice: 0 : 7; track day.id) {
                     <div class="mx-2 w-10 text-center opacity-60">
                         {{ day.id | date: 'EE' }}
                     </div>
                 }
-                @for (day of list; track day) {
+                @for (day of list; track day.id) {
                     <button
                         icon
                         matRipple
@@ -1732,6 +1734,18 @@ function ScheduleSidebarComponent_Conditional_19_Template(rf, ctx) {
   }
 }
 var _ScheduleSidebarComponent = class _ScheduleSidebarComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._org = inject(OrganisationService);
+    this._state = inject(ScheduleStateService);
+    this._settings = inject(SettingsService);
+    this.filters = this._state.filters;
+    this.date = this._state.date.pipe(map((_) => startOfDay(_)));
+    this.toggleType = (t) => this._state.toggleType(t);
+    this.setDate = (d) => this._state.setDate(d);
+    this.week_date = this._state.week_date;
+    this.week_options = this._state.week_options;
+  }
   get period() {
     return this._state.getOptions()?.period;
   }
@@ -1744,18 +1758,6 @@ var _ScheduleSidebarComponent = class _ScheduleSidebarComponent extends AsyncHan
   get offset_weekday() {
     return this._settings.get("app.week_start") || 0;
   }
-  constructor(_org, _state, _settings) {
-    super();
-    this._org = _org;
-    this._state = _state;
-    this._settings = _settings;
-    this.filters = this._state.filters;
-    this.date = this._state.date.pipe(map((_) => startOfDay(_)));
-    this.toggleType = (t) => this._state.toggleType(t);
-    this.setDate = (d) => this._state.setDate(d);
-    this.week_date = this._state.week_date;
-    this.week_options = this._state.week_options;
-  }
   ngOnInit() {
     this.subscription("building", this._org.active_building.pipe(filter((_) => !!_), debounceTime(1e3)).subscribe((_) => {
       this._state.setType("event", this.hasFeature("spaces"));
@@ -1767,9 +1769,12 @@ var _ScheduleSidebarComponent = class _ScheduleSidebarComponent extends AsyncHan
     }));
   }
 };
-_ScheduleSidebarComponent.\u0275fac = function ScheduleSidebarComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ScheduleSidebarComponent)(\u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(ScheduleStateService), \u0275\u0275directiveInject(SettingsService));
-};
+_ScheduleSidebarComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275ScheduleSidebarComponent_BaseFactory;
+  return function ScheduleSidebarComponent_Factory(__ngFactoryType__) {
+    return (\u0275ScheduleSidebarComponent_BaseFactory || (\u0275ScheduleSidebarComponent_BaseFactory = \u0275\u0275getInheritedFactory(_ScheduleSidebarComponent)))(__ngFactoryType__ || _ScheduleSidebarComponent);
+  };
+})();
 _ScheduleSidebarComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ScheduleSidebarComponent, selectors: [["schedule-sidebar"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 20, vars: 21, consts: [[1, "bg-base-100[#1F2021]", "flex", "h-full", "w-[18rem]", "flex-col", "overflow-hidden", "border-r", "border-base-200"], [1, "flex", "items-center", "space-x-2", "p-2"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "click"], [1, "border-b", "border-base-200", 3, "ngModel", "offset_weekday"], [1, "w-full", "px-2"], [1, "mx-4", "mt-4", "font-medium"], [1, "h-1/2", "flex-1", "space-y-4", "overflow-auto", "p-4"], ["matRipple", "", "name", "schedule-toggle-event-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left"], ["matRipple", "", "name", "schedule-toggle-desk-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left"], ["matRipple", "", "name", "schedule-toggle-parking-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left"], ["matRipple", "", "name", "schedule-toggle-visitor-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left"], ["matRipple", "", "name", "schedule-toggle-locker-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left"], [1, "border-b", "border-base-200", 3, "ngModelChange", "ngModel", "offset_weekday"], ["appearance", "outline", 1, "no-subscript", "w-full"], ["placeholder", "Select Week...", 3, "ngModelChange", "ngModel"], [1, "leading-tight", 3, "value"], [1, "px-1", "text-xs", "text-info", 3, "matTooltip"], ["matRipple", "", "name", "schedule-toggle-event-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full", "bg-base-200", "text-2xl"], [1, "flex-1"], [1, ""], [1, "text-sm", "opacity-60"], [3, "ngModel"], ["matRipple", "", "name", "schedule-toggle-desk-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], ["src", "assets/icons/desk-outline.svg", 1, "w-6"], ["matRipple", "", "name", "schedule-toggle-parking-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], ["matRipple", "", "name", "schedule-toggle-visitor-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"], ["matRipple", "", "name", "schedule-toggle-locker-filter", 1, "flex", "w-full", "items-center", "space-x-2", "text-left", 3, "click"]], template: function ScheduleSidebarComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "button", 2);
@@ -2101,14 +2106,14 @@ var ScheduleSidebarComponent = _ScheduleSidebarComponent;
             </div>
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;c8f9d18253326e4ed43aff56311c0651df3afa940b60387869cba90c71ede5e2;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/schedule/schedule-sidebar.component.ts */\nmat-checkbox {\n  pointer-events: none;\n}\n/*# sourceMappingURL=schedule-sidebar.component.css.map */\n"] }]
-  }], () => [{ type: OrganisationService }, { type: ScheduleStateService }, { type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ScheduleSidebarComponent, { className: "ScheduleSidebarComponent", filePath: "apps/workplace/src/app/schedule/schedule-sidebar.component.ts", lineNumber: 289 });
 })();
 
 // apps/workplace/src/app/schedule/schedule.component.ts
-var _forTrack0 = ($index, $item) => $item.date;
+var _forTrack02 = ($index, $item) => $item.date;
 var _forTrack1 = ($index, $item) => $item.id;
 function ScheduleComponent_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
@@ -2245,7 +2250,7 @@ function ScheduleComponent_Conditional_15_For_1_Template(rf, ctx) {
 }
 function ScheduleComponent_Conditional_15_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275repeaterCreate(0, ScheduleComponent_Conditional_15_For_1_Template, 6, 5, null, null, _forTrack0);
+    \u0275\u0275repeaterCreate(0, ScheduleComponent_Conditional_15_For_1_Template, 6, 5, null, null, _forTrack02);
     \u0275\u0275pipe(2, "async");
   }
   if (rf & 2) {
@@ -2281,23 +2286,14 @@ function ScheduleComponent_Conditional_20_Template(rf, ctx) {
   }
 }
 var _ScheduleComponent = class _ScheduleComponent extends AsyncHandler {
-  get period() {
-    return this._state.getOptions().period;
-  }
-  isEvent(item) {
-    return item instanceof CalendarEvent;
-  }
-  get hide_nav() {
-    return localStorage.getItem("PlaceOS.hide_nav") === "true";
-  }
-  constructor(_state, _event_form, _booking_form, _router, _dialog, _settings) {
-    super();
-    this._state = _state;
-    this._event_form = _event_form;
-    this._booking_form = _booking_form;
-    this._router = _router;
-    this._dialog = _dialog;
-    this._settings = _settings;
+  constructor() {
+    super(...arguments);
+    this._state = inject(ScheduleStateService);
+    this._event_form = inject(EventFormService);
+    this._booking_form = inject(BookingFormService);
+    this._router = inject(Router);
+    this._dialog = inject(MatDialog);
+    this._settings = inject(SettingsService);
     this.booking_dates = combineLatest([
       this._state.filtered_bookings,
       this._state.loading
@@ -2330,6 +2326,15 @@ var _ScheduleComponent = class _ScheduleComponent extends AsyncHandler {
     this.edit_booking_fn = (i) => this.editBooking(i);
     this.remove_fn = (i, t) => this.remove(i, t);
     this.end_fn = (i) => this.end(i);
+  }
+  get period() {
+    return this._state.getOptions().period;
+  }
+  isEvent(item) {
+    return item instanceof CalendarEvent;
+  }
+  get hide_nav() {
+    return localStorage.getItem("PlaceOS.hide_nav") === "true";
   }
   ngOnInit() {
     this._state.triggerPoll();
@@ -2432,9 +2437,12 @@ var _ScheduleComponent = class _ScheduleComponent extends AsyncHandler {
     });
   }
 };
-_ScheduleComponent.\u0275fac = function ScheduleComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ScheduleComponent)(\u0275\u0275directiveInject(ScheduleStateService), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(SettingsService));
-};
+_ScheduleComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275ScheduleComponent_BaseFactory;
+  return function ScheduleComponent_Factory(__ngFactoryType__) {
+    return (\u0275ScheduleComponent_BaseFactory || (\u0275ScheduleComponent_BaseFactory = \u0275\u0275getInheritedFactory(_ScheduleComponent)))(__ngFactoryType__ || _ScheduleComponent);
+  };
+})();
 _ScheduleComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ScheduleComponent, selectors: [["app-schedule"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 21, vars: 20, consts: [[1, "relative", "flex", "h-1/2", "flex-1", "flex-col", "bg-base-200", "sm:flex-row"], [1, "hidden", "bg-base-100", "sm:block"], [1, "w-full", "border-b", "border-neutral", "bg-base-100", "sm:hidden"], [1, "flex", "items-center", "space-x-2", "px-2", "pt-2"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "click"], [3, "ngModel"], [1, "my-2", "w-full", "px-2"], [1, "h-full", "flex-1", "space-y-2", "overflow-auto", "p-4"], [1, "flex", "w-full", "flex-col", "items-center", "justify-center", "space-y-4", "p-8"], ["mode", "indeterminate", 1, "absolute", "inset-x-0", "bottom-0"], [3, "ngModelChange", "ngModel"], ["appearance", "outline", 1, "no-subscript", "w-full"], [3, "ngModelChange", "ngModel", "placeholder"], [1, "leading-tight", 3, "value"], [1, "px-1", "text-xs", "text-info", 3, "matTooltip"], [1, "my-2", "font-medium"], [3, "event", "edit_fn", "remove_fn"], [3, "booking", "edit_fn", "remove_fn", "end_fn"], ["src", "assets/img/no-events.svg", 1, "mr-4"], [1, "opacity-30"]], template: function ScheduleComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, ScheduleComponent_Conditional_0_Template, 1, 0, "topbar");
@@ -2497,7 +2505,7 @@ var ScheduleComponent = _ScheduleComponent;
     type: Component,
     args: [{ selector: "app-schedule", template: `
         @if (!hide_nav) {
-            <topbar></topbar>
+            <topbar />
         }
         <div
             class="relative flex h-1/2 flex-1 flex-col bg-base-200 sm:flex-row"
@@ -2621,10 +2629,10 @@ var ScheduleComponent = _ScheduleComponent;
             }
         </div>
         @if (!hide_nav) {
-            <footer-menu></footer-menu>
+            <footer-menu />
         }
     `, standalone: false, styles: ["/* angular:styles/component:css;2c590c9e56511a088a1469fe4b227d8190323c208f95620a03712f1a8f5bae8d;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/schedule/schedule.component.ts */\n:host {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=schedule.component.css.map */\n"] }]
-  }], () => [{ type: ScheduleStateService }, { type: EventFormService }, { type: BookingFormService }, { type: Router }, { type: MatDialog }, { type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ScheduleComponent, { className: "ScheduleComponent", filePath: "apps/workplace/src/app/schedule/schedule.component.ts", lineNumber: 177 });
@@ -2674,4 +2682,4 @@ var AppScheduleModule = _AppScheduleModule;
 export {
   AppScheduleModule
 };
-//# sourceMappingURL=schedule.module-US57NZW4.js.map
+//# sourceMappingURL=schedule.module-KAMPXS5L.js.map

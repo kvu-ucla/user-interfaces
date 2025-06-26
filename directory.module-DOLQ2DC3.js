@@ -1,4 +1,4 @@
-import "./chunk-FF3W3XAA.js";
+import "./chunk-GPCY5PQ3.js";
 import {
   AsyncHandler,
   AsyncPipe,
@@ -28,6 +28,7 @@ import {
   catchError,
   debounceTime,
   distinctUntilChanged,
+  inject,
   map,
   of,
   searchStaff,
@@ -46,11 +47,11 @@ import {
   ɵɵdefineComponent,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
-  ɵɵdirectiveInject,
   ɵɵelement,
   ɵɵelementEnd,
   ɵɵelementStart,
   ɵɵgetCurrentView,
+  ɵɵgetInheritedFactory,
   ɵɵlistener,
   ɵɵnextContext,
   ɵɵpipe,
@@ -70,7 +71,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-CCHNTUCX.js";
+} from "./chunk-CGLZLVCS.js";
 import "./chunk-4MWRP73S.js";
 
 // apps/workplace/src/app/directory/user-list.component.ts
@@ -200,17 +201,9 @@ function DirectoryUserListComponent_Conditional_15_Template(rf, ctx) {
 }
 var LETTERS = `ABCDEFGHIJKLMNOPQRSTUVWXYZ`.split("");
 var _DirectoryUserListComponent = class _DirectoryUserListComponent extends AsyncHandler {
-  /** Minimum length of the search string needed to initial a search */
-  get min_search_length() {
-    const length = this._settings.get("app.users.min_search_length");
-    return typeof length === "number" && length >= 0 ? length : 3;
-  }
-  get show_image() {
-    return this._settings.get("app.users.show_avatars");
-  }
-  constructor(_settings) {
-    super();
-    this._settings = _settings;
+  constructor() {
+    super(...arguments);
+    this._settings = inject(SettingsService);
     this.letters = LETTERS;
     this.search$ = new BehaviorSubject("");
     this.search_results$ = this.search$.pipe(debounceTime(400), distinctUntilChanged(), switchMap((query) => {
@@ -222,6 +215,14 @@ var _DirectoryUserListComponent = class _DirectoryUserListComponent extends Asyn
     }), startWith([]), shareReplay(1));
     this.grouped_results$ = this.search_results$.pipe(map((list) => this.buildGroups(list)));
   }
+  /** Minimum length of the search string needed to initial a search */
+  get min_search_length() {
+    const length = this._settings.get("app.users.min_search_length");
+    return typeof length === "number" && length >= 0 ? length : 3;
+  }
+  get show_image() {
+    return this._settings.get("app.users.show_avatars");
+  }
   buildGroups(users) {
     const grouped_users = {};
     const sorted = users.sort((a, b) => a.name.localeCompare(b.name));
@@ -231,9 +232,12 @@ var _DirectoryUserListComponent = class _DirectoryUserListComponent extends Asyn
     return grouped_users;
   }
 };
-_DirectoryUserListComponent.\u0275fac = function DirectoryUserListComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _DirectoryUserListComponent)(\u0275\u0275directiveInject(SettingsService));
-};
+_DirectoryUserListComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275DirectoryUserListComponent_BaseFactory;
+  return function DirectoryUserListComponent_Factory(__ngFactoryType__) {
+    return (\u0275DirectoryUserListComponent_BaseFactory || (\u0275DirectoryUserListComponent_BaseFactory = \u0275\u0275getInheritedFactory(_DirectoryUserListComponent)))(__ngFactoryType__ || _DirectoryUserListComponent);
+  };
+})();
 _DirectoryUserListComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DirectoryUserListComponent, selectors: [["", "a-directory-user-list", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c0, decls: 17, vars: 8, consts: [[1, "flex", "h-1/2", "flex-1", "flex-col-reverse", "sm:flex-row"], [1, "relative", "z-0", "flex", "h-1/2", "flex-1", "flex-col", "overflow-hidden", "sm:h-auto"], [1, "flex", "w-full", "items-center", "justify-center", "p-2"], ["overlay", "", "appearance", "outline", 1, "rounded"], ["matPrefix", "", 1, "text-xl"], ["matInput", "", "placeholder", "Search for a person...", 3, "ngModelChange", "ngModel"], ["matSuffix", "", 1, "top-2", 3, "diameter"], [1, "h-1/2", "w-full", "flex-1"], [1, "flex", "flex-col", "items-center", "p-8"], [1, "px-4", "py-2", "font-medium"], ["user", "", 1, "mb-2", "flex", "flex-wrap", "items-center", "overflow-hidden", "bg-base-100", "p-4", "hover:bg-base-200", "sm:space-x-4", 3, "with-image"], ["user", "", 1, "mb-2", "flex", "flex-wrap", "items-center", "overflow-hidden", "bg-base-100", "p-4", "hover:bg-base-200", "sm:space-x-4"], [3, "user"], [1, "ml-4", "flex", "w-1/2", "flex-1", "flex-col", "sm:ml-0"], [1, "name"], ["name", "email", 1, "text-sm", "underline", 3, "href"], [1, "mt-4", "flex", "w-full", "items-center", "space-x-2", "sm:mt-0", "sm:w-auto", "sm:flex-col", "sm:space-x-0", "sm:space-y-2"], ["btn", "", "matRipple", "", 1, "w-32", "flex-1", "sm:flex-none", 3, "routerLink", "queryParams"], ["btn", "", "matRipple", "", 1, "sm:flex-nones", "w-32", "flex-1", 3, "href"], [1, "text-5xl"], [1, "text"]], template: function DirectoryUserListComponent_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -275,7 +279,7 @@ var DirectoryUserListComponent = _DirectoryUserListComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DirectoryUserListComponent, [{
     type: Component,
     args: [{ selector: "[a-directory-user-list]", template: `
-        <topbar></topbar>
+        <topbar />
         <div class="flex h-1/2 flex-1 flex-col-reverse sm:flex-row">
             <div
                 class="relative z-0 flex h-1/2 flex-1 flex-col overflow-hidden sm:h-auto"
@@ -394,9 +398,9 @@ var DirectoryUserListComponent = _DirectoryUserListComponent;
                 </main>
             </div>
         </div>
-        <footer-menu></footer-menu>
+        <footer-menu />
     `, standalone: false, styles: ["/* angular:styles/component:css;e2b40681428f504e90765c9b1d0c08e56afefc9250e31ac0ea417debac9edbfd;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/directory/user-list.component.ts */\n:host {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n  background: #f0f0f0;\n}\nmat-form-field {\n  width: 48rem;\n  max-width: calc(100% - 2rem);\n}\n/*# sourceMappingURL=user-list.component.css.map */\n"] }]
-  }], () => [{ type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DirectoryUserListComponent, { className: "DirectoryUserListComponent", filePath: "apps/workplace/src/app/directory/user-list.component.ts", lineNumber: 161 });
@@ -434,4 +438,4 @@ var DirectoryModule = _DirectoryModule;
 export {
   DirectoryModule
 };
-//# sourceMappingURL=directory.module-XXSBTSWR.js.map
+//# sourceMappingURL=directory.module-DOLQ2DC3.js.map

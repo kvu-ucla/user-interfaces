@@ -1,9 +1,9 @@
 import {
   subMinutes
-} from "./chunk-N7I5HKLD.js";
+} from "./chunk-UCYJEE3S.js";
 import {
   FindAvailabilityModalComponent
-} from "./chunk-FF3W3XAA.js";
+} from "./chunk-GPCY5PQ3.js";
 import {
   ANIMATION_SHOW_CONTRACT_EXPAND,
   ActivatedRoute,
@@ -102,7 +102,6 @@ import {
   NgModel,
   NgModule,
   NumberValueAccessor,
-  Optional,
   OrganisationService,
   Output,
   ParkingService,
@@ -137,7 +136,6 @@ import {
   addHours,
   addMinutes,
   catchError,
-  cc,
   checkinBooking,
   checkinEventGuest,
   combineLatest,
@@ -146,11 +144,11 @@ import {
   debounceTime,
   differenceInMinutes,
   downloadFile,
-  du,
   endOfDay,
   filter,
   findNearbyFeature,
   first,
+  firstTruthyValueFrom,
   flatten,
   format,
   formatDuration,
@@ -158,6 +156,7 @@ import {
   forwardRef,
   fromBookingRecurrence,
   fromEventRecurrence,
+  fu,
   generateCalendarFileLink,
   generateGoogleCalendarLink,
   generateMicrosoftCalendarLink,
@@ -169,6 +168,7 @@ import {
   inject,
   isAfter,
   isBefore,
+  lastValueFrom,
   loadLockerBanks,
   loadLockers,
   map,
@@ -195,6 +195,8 @@ import {
   stringToMinutes,
   switchMap,
   tap,
+  timer,
+  uc,
   unique,
   updateBooking,
   updateEventMetadata,
@@ -216,11 +218,11 @@ import {
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
-  ɵɵdirectiveInject,
   ɵɵelement,
   ɵɵelementEnd,
   ɵɵelementStart,
   ɵɵgetCurrentView,
+  ɵɵgetInheritedFactory,
   ɵɵlistener,
   ɵɵloadQuery,
   ɵɵnextContext,
@@ -259,7 +261,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-CCHNTUCX.js";
+} from "./chunk-CGLZLVCS.js";
 import {
   __async,
   __spreadProps,
@@ -1184,7 +1186,7 @@ var _CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
     this._org = inject(OrganisationService);
     this._poll = new BehaviorSubject(0);
     this._loading = new BehaviorSubject(false);
-    this._space_pipe = new SpacePipe(this._org);
+    this._space_pipe = new SpacePipe();
     this._filters = new BehaviorSubject({
       caterer: ""
     });
@@ -1251,6 +1253,7 @@ var _CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
       return unique(provider_list);
     }), shareReplay(1));
     this.filtered = combineLatest([this.orders, this._filters]).pipe(map(([list, filters]) => list.filter((order) => checkOrder(order, filters)).sort((a, b) => a.deliver_at - b.deliver_at)));
+    this._space_pipe.org = this._org;
     this.subscription("changes", this.orders.subscribe());
   }
   /** Start polling for catering orders */
@@ -1944,7 +1947,7 @@ function getCateringRulesForZone(zone_id, fresh = false) {
   if (!zone_id)
     return of([]);
   if (!RULE_REQUESTS[zone_id] || fresh)
-    RULE_REQUESTS[zone_id] = hu(zone_id, "catering_config").pipe(map((_) => _.details instanceof Array ? _.details : []), catchError((e2) => of([])));
+    RULE_REQUESTS[zone_id] = fu(zone_id, "catering_config").pipe(map((_) => _.details instanceof Array ? _.details : []), catchError((e2) => of([])));
   return RULE_REQUESTS[zone_id];
 }
 function cateringItemAvailable(item, rules, event) {
@@ -2956,7 +2959,7 @@ var _CateringStateService = class _CateringStateService extends AsyncHandler {
     this.settings = combineLatest([
       this._org.active_building,
       this._change
-    ]).pipe(filter(([_]) => !!_), switchMap(([_]) => hu(_.id, "catering-settings").pipe(catchError((_2) => of({})))), map((_) => _.details || {}), tap((_) => this._settings.post("require_catering_notes", !!_?.require_notes)), shareReplay(1));
+    ]).pipe(filter(([_]) => !!_), switchMap(([_]) => fu(_.id, "catering-settings").pipe(catchError((_2) => of({})))), map((_) => _.details || {}), tap((_) => this._settings.post("require_catering_notes", !!_?.require_notes)), shareReplay(1));
     this.charge_codes = this.settings.pipe(map((_) => _.charge_codes || []));
     this.availability = this.settings.pipe(map((_) => _.disabled_rooms || []));
     this.caterers = combineLatest([
@@ -3201,7 +3204,7 @@ var _CateringStateService = class _CateringStateService extends AsyncHandler {
     });
   }
   updateMenu(zone_id, menu) {
-    return du(zone_id, {
+    return hu(zone_id, {
       id: zone_id,
       name: "catering",
       details: menu,
@@ -3211,7 +3214,7 @@ var _CateringStateService = class _CateringStateService extends AsyncHandler {
   saveSettings(settings) {
     return __async(this, null, function* () {
       const old_settings = yield nextValueFrom(this.settings);
-      const result = yield du(this._org.building.id, {
+      const result = yield hu(this._org.building.id, {
         id: this._org.building.id,
         name: "catering-settings",
         details: __spreadValues(__spreadValues({}, old_settings), settings),
@@ -3223,18 +3226,18 @@ var _CateringStateService = class _CateringStateService extends AsyncHandler {
   }
   getCateringForZone(zone_id) {
     return __async(this, null, function* () {
-      const menu = (yield hu(zone_id, "catering").toPromise()).details;
+      const menu = (yield fu(zone_id, "catering").toPromise()).details;
       return menu instanceof Array ? menu : [];
     });
   }
   getCateringConfig() {
     return __async(this, arguments, function* (zone_id = this._org.building.id) {
-      const rules = (yield hu(zone_id, "catering_config").toPromise()).details;
+      const rules = (yield fu(zone_id, "catering_config").toPromise()).details;
       return rules instanceof Array ? rules : [];
     });
   }
   updateConfig(zone_id, config) {
-    return du(zone_id, {
+    return hu(zone_id, {
       id: zone_id,
       name: "catering_config",
       details: config,
@@ -3545,8 +3548,7 @@ var CateringMenuComponent = _CateringMenuComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CateringMenuComponent, [{
     type: Component,
     args: [{ selector: "catering-menu", template: `
-        <simple-table
-            class="block w-full min-w-[32rem] text-sm"
+        <simple-table class="block w-full min-w-[32rem] text-sm"
             [data]="menu"
             [columns]="[
                 {
@@ -3582,15 +3584,14 @@ var CateringMenuComponent = _CateringMenuComponent;
             [child_template]="child_template"
             [sortable]="true"
             [empty_message]="'CATERING.ITEM_LIST_EMPTY' | translate"
-        ></simple-table>
+         />
         <ng-template #active_template let-row="row">
-            <mat-checkbox
-                class="mx-auto"
+            <mat-checkbox class="mx-auto"
                 [matTooltip]="'CATERING.ORDER_ALLOW' | translate"
                 matTooltipPosition="right"
                 [ngModel]="isEnabled(row)"
                 (ngModelChange)="setEnabled(row, $event)"
-            ></mat-checkbox>
+             />
         </ng-template>
         <ng-template #price_template let-data="data">
             <div
@@ -3724,7 +3725,7 @@ var CateringMenuComponent = _CateringMenuComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CateringMenuComponent, { className: "CateringMenuComponent", filePath: "libs/catering/src/lib/catering-menu.component.ts", lineNumber: 210 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CateringMenuComponent, { className: "CateringMenuComponent", filePath: "libs/catering/src/lib/catering-menu.component.ts", lineNumber: 208 });
 })();
 
 // libs/catering/src/lib/catering-order-item.component.ts
@@ -5114,7 +5115,7 @@ var _CateringOrderStateService = class _CateringOrderStateService {
     this._loading = new BehaviorSubject("");
     this.loading = this._loading.asObservable();
     this.filters = this._filters.asObservable();
-    this.settings = this._org.active_building.pipe(filter((_) => !!_), switchMap((_) => hu(_.id, "catering-settings").pipe(catchError((_2) => of({})))), map((_) => _.details), tap((_) => this._settings.post("require_catering_notes", !!_?.require_notes)), shareReplay(1));
+    this.settings = this._org.active_building.pipe(filter((_) => !!_), switchMap((_) => fu(_.id, "catering-settings").pipe(catchError((_2) => of({})))), map((_) => _.details), tap((_) => this._settings.post("require_catering_notes", !!_?.require_notes)), shareReplay(1));
     this.charge_codes = this.settings.pipe(map((_) => _.charge_codes || []));
     this.availability = this.settings.pipe(map((_) => _.disabled_rooms || []));
     this.available_menu = combineLatest([
@@ -5122,7 +5123,7 @@ var _CateringOrderStateService = class _CateringOrderStateService {
       this._org.active_building
     ]).pipe(filter(([_, bld]) => !!bld), switchMap(([{ zone }, bld]) => {
       this._loading.next("[MENU]");
-      return hu(zone || bld.id, "catering").pipe(map((d) => (d.details instanceof Array ? d.details : []).map((_) => new CateringItem(_))), catchError((_) => []));
+      return fu(zone || bld.id, "catering").pipe(map((d) => (d.details instanceof Array ? d.details : []).map((_) => new CateringItem(_))), catchError((_) => []));
     }), tap((items) => {
       this._loading.next(this._loading.getValue().replace("[MENU]", ""));
       if (this._settings.get("app.catering_provider")) {
@@ -9707,7 +9708,7 @@ var BookComponent = _BookComponent;
     type: Component,
     args: [{ selector: "placeos-book", template: `
         @if (!hide_nav) {
-            <topbar></topbar>
+            <topbar />
         }
         <div class="flex h-1/2 flex-1 flex-col-reverse sm:flex-row">
             <main class="flex h-1/2 flex-1 flex-col overflow-hidden sm:h-auto">
@@ -9715,7 +9716,7 @@ var BookComponent = _BookComponent;
             </main>
         </div>
         @if (!hide_nav) {
-            <footer-menu class="z-10"></footer-menu>
+            <footer-menu class="z-10" />
         }
     `, standalone: false, styles: ["/* angular:styles/component:css;2c590c9e56511a088a1469fe4b227d8190323c208f95620a03712f1a8f5bae8d;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/book/book.component.ts */\n:host {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=book.component.css.map */\n"] }]
   }], null, null);
@@ -9769,14 +9770,14 @@ function CodeFlowErrorComponent_Conditional_13_Template(rf, ctx) {
     const ctx_r0 = \u0275\u0275nextContext();
     \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(5, _c33))("queryParams", \u0275\u0275pureFunction1(6, _c24, ctx_r0.asset_id));
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 3, "APP.WORKPLACE.BOOK"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 3, "COMMON.BOOK"), " ");
   }
 }
 var _CodeFlowErrorComponent = class _CodeFlowErrorComponent extends AsyncHandler {
-  constructor(_route, _state) {
-    super();
-    this._route = _route;
-    this._state = _state;
+  constructor() {
+    super(...arguments);
+    this._route = inject(ActivatedRoute);
+    this._state = inject(BookingFormService);
     this.type = "other";
     this.asset = null;
     this.asset_id = "";
@@ -9788,9 +9789,12 @@ var _CodeFlowErrorComponent = class _CodeFlowErrorComponent extends AsyncHandler
     }));
   }
 };
-_CodeFlowErrorComponent.\u0275fac = function CodeFlowErrorComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CodeFlowErrorComponent)(\u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(BookingFormService));
-};
+_CodeFlowErrorComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275CodeFlowErrorComponent_BaseFactory;
+  return function CodeFlowErrorComponent_Factory(__ngFactoryType__) {
+    return (\u0275CodeFlowErrorComponent_BaseFactory || (\u0275CodeFlowErrorComponent_BaseFactory = \u0275\u0275getInheritedFactory(_CodeFlowErrorComponent)))(__ngFactoryType__ || _CodeFlowErrorComponent);
+  };
+})();
 _CodeFlowErrorComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CodeFlowErrorComponent, selectors: [["code-flow-success"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 17, vars: 11, consts: [[1, "absolute", "inset-0", "z-50", "flex", "flex-col", "bg-base-100"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-2", "p-8"], [1, "text-2xl", "font-medium"], [1, "py-4"], ["src", "assets/icons/not-found.svg", 1, "h-64"], [1, "max-w-[32rem]", "text-center"], [1, "mt-4", "flex", "w-full", "items-center", "justify-center", "space-x-2", "border-t", "border-base-200", "p-2"], ["btn", "", "matRipple", "", 1, "w-full", "max-w-[32rem]", 3, "routerLink", "queryParams"], ["btn", "", "matRipple", "", 1, "inverse", "w-full", "max-w-[32rem]", 3, "routerLink"]], template: function CodeFlowErrorComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "main", 1)(2, "h2", 2);
@@ -9880,7 +9884,7 @@ var CodeFlowErrorComponent = _CodeFlowErrorComponent;
                         [routerLink]="['/book', 'desk']"
                         [queryParams]="{ asset_id: asset_id }"
                     >
-                        {{ 'APP.WORKPLACE.BOOK' | translate }}
+                        {{ 'COMMON.BOOK' | translate }}
                     </a>
                 }
                 <a
@@ -9894,7 +9898,7 @@ var CodeFlowErrorComponent = _CodeFlowErrorComponent;
             </footer>
         </div>
     `, standalone: false }]
-  }], () => [{ type: ActivatedRoute }, { type: BookingFormService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CodeFlowErrorComponent, { className: "CodeFlowErrorComponent", filePath: "apps/workplace/src/app/book/code-flow-error.component.ts", lineNumber: 76 });
@@ -10478,12 +10482,13 @@ function BookCodeFlowComponent_Conditional_1_Template(rf, ctx) {
   }
 }
 var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
-  constructor(_router, _route, _event_form, _booking_form) {
-    super();
-    this._router = _router;
-    this._route = _route;
-    this._event_form = _event_form;
-    this._booking_form = _booking_form;
+  constructor() {
+    super(...arguments);
+    this._router = inject(Router);
+    this._route = inject(ActivatedRoute);
+    this._event_form = inject(EventFormService);
+    this._booking_form = inject(BookingFormService);
+    this._org = inject(OrganisationService);
     this.menu = new EventEmitter(false);
     this.is_scanning = true;
     this.loading = false;
@@ -10495,12 +10500,15 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
     this._qr_scanner?.stop();
   }
   ngOnInit() {
-    this.subscription("route.query", this._route.queryParamMap.subscribe((params) => {
-      if (params.has("asset_id"))
-        this._checkinBooking(params.get("asset_id"));
-      if (params.has("space_id"))
-        this._checkinEvent(params.get("space_id"), params.get("email"));
-    }));
+    return __async(this, null, function* () {
+      yield firstTruthyValueFrom(this._org.initialised);
+      this.subscription("route.query", this._route.queryParamMap.subscribe((params) => {
+        if (params.has("asset_id"))
+          this._checkinBooking(params.get("asset_id"));
+        if (params.has("space_id"))
+          this._checkinEvent(params.get("space_id"), params.get("email"));
+      }));
+    });
   }
   ngAfterViewInit() {
     if (!navigator.mediaDevices?.getUserMedia || this.loading)
@@ -10592,7 +10600,7 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
         this._router.navigate(["/book", "code", "success"]);
         this.loading = false;
       } else {
-        const space = yield cc(space_id).toPromise();
+        const space = yield uc(space_id).toPromise();
         if (space) {
           this._event_form.newForm(new CalendarEvent({ system: space }));
         }
@@ -10602,9 +10610,12 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
     });
   }
 };
-_BookCodeFlowComponent.\u0275fac = function BookCodeFlowComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _BookCodeFlowComponent)(\u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(BookingFormService));
-};
+_BookCodeFlowComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275BookCodeFlowComponent_BaseFactory;
+  return function BookCodeFlowComponent_Factory(__ngFactoryType__) {
+    return (\u0275BookCodeFlowComponent_BaseFactory || (\u0275BookCodeFlowComponent_BaseFactory = \u0275\u0275getInheritedFactory(_BookCodeFlowComponent)))(__ngFactoryType__ || _BookCodeFlowComponent);
+  };
+})();
 _BookCodeFlowComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookCodeFlowComponent, selectors: [["book-code-flow"]], viewQuery: function BookCodeFlowComponent_Query(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275viewQuery(_c012, 5);
@@ -10723,7 +10734,7 @@ var BookCodeFlowComponent = _BookCodeFlowComponent;
             </div>
         }
     `, standalone: false, styles: ["/* angular:styles/component:css;234f9e46d27de0ca4f47b38a0a993410c486ecc5d4a4f2eed2857b2caf006ef8;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/book/code-flow.component.ts */\n:host {\n  position: relative;\n  width: 100%;\n  height: 100vh;\n  display: flex;\n  flex-direction: column;\n  background: #f0f0f0;\n}\n[box] {\n  box-shadow: 0px 0px 0px 100vw rgba(0, 0, 0, 0.5);\n}\n[box] > * {\n  display: none;\n}\n[box].input {\n  width: 32rem !important;\n  max-width: calc(100% - 2rem) !important;\n  padding: 1rem !important;\n  height: 4rem !important;\n  color: black !important;\n  background: white;\n  box-shadow: 0px 0px 0px 100vw rgba(0, 0, 0, 0.8);\n}\n[box].input > * {\n  display: initial;\n}\n[box] span {\n  font-family: var(--heading-font);\n  font-weight: 500;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n}\n/*# sourceMappingURL=code-flow.component.css.map */\n"] }]
-  }], () => [{ type: Router }, { type: ActivatedRoute }, { type: EventFormService }, { type: BookingFormService }], { menu: [{
+  }], null, { menu: [{
     type: Output
   }], _video_el: [{
     type: ViewChild,
@@ -10731,7 +10742,7 @@ var BookCodeFlowComponent = _BookCodeFlowComponent;
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookCodeFlowComponent, { className: "BookCodeFlowComponent", filePath: "apps/workplace/src/app/book/code-flow.component.ts", lineNumber: 172 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookCodeFlowComponent, { className: "BookCodeFlowComponent", filePath: "apps/workplace/src/app/book/code-flow.component.ts", lineNumber: 180 });
 })();
 
 // apps/workplace/src/app/book/desk-flow/desk-flow-confirm.component.ts
@@ -10952,6 +10963,30 @@ function NewDeskFlowConfirmComponent_Conditional_32_Template(rf, ctx) {
   }
 }
 var _NewDeskFlowConfirmComponent = class _NewDeskFlowConfirmComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._state = inject(BookingFormService);
+    this._org = inject(OrganisationService);
+    this._sheet_ref = inject(MatBottomSheetRef, { optional: true });
+    this._settings = inject(SettingsService);
+    this.show_close = false;
+    this._date = new DatePipe("en");
+    this.loading = this._state.loading;
+    this.is_group = this._state.options.pipe(map((_) => _.group));
+    this.postForm = () => __async(this, null, function* () {
+      try {
+        if ((yield nextValueFrom(this._state.options))?.group) {
+          yield this._state.postFormForGroup();
+        } else {
+          yield this._state.postForm();
+        }
+        this.dismiss(true);
+      } catch (e2) {
+        notifyError(typeof e2 === "string" ? e2 : i18n(`BOOKINGS.DESK_AVAILABLE_ERROR`));
+      }
+    });
+    this.dismiss = (e2) => this._sheet_ref?.dismiss(e2);
+  }
   err_tooltip(request) {
     return request.conflict ? i18n("FORM.ASSETS_CLASH_ERROR") : i18n("FORM.ASSETS_TIME_ERROR");
   }
@@ -11010,30 +11045,6 @@ var _NewDeskFlowConfirmComponent = class _NewDeskFlowConfirmComponent extends As
   get formatted_recurrence() {
     return formatRecurrence(fromBookingRecurrence(this.booking));
   }
-  constructor(_state, _org, _sheet_ref, _settings) {
-    super();
-    this._state = _state;
-    this._org = _org;
-    this._sheet_ref = _sheet_ref;
-    this._settings = _settings;
-    this.show_close = false;
-    this._date = new DatePipe("en");
-    this.loading = this._state.loading;
-    this.is_group = this._state.options.pipe(map((_) => _.group));
-    this.postForm = () => __async(this, null, function* () {
-      try {
-        if ((yield nextValueFrom(this._state.options))?.group) {
-          yield this._state.postFormForGroup();
-        } else {
-          yield this._state.postForm();
-        }
-        this.dismiss(true);
-      } catch (e2) {
-        notifyError(typeof e2 === "string" ? e2 : i18n(`BOOKINGS.DESK_AVAILABLE_ERROR`));
-      }
-    });
-    this.dismiss = (e2) => this._sheet_ref?.dismiss(e2);
-  }
   ngOnInit() {
     return __async(this, null, function* () {
       const resources = yield nextValueFrom(this._state.resources);
@@ -11042,9 +11053,12 @@ var _NewDeskFlowConfirmComponent = class _NewDeskFlowConfirmComponent extends As
     });
   }
 };
-_NewDeskFlowConfirmComponent.\u0275fac = function NewDeskFlowConfirmComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _NewDeskFlowConfirmComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(MatBottomSheetRef, 8), \u0275\u0275directiveInject(SettingsService));
-};
+_NewDeskFlowConfirmComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275NewDeskFlowConfirmComponent_BaseFactory;
+  return function NewDeskFlowConfirmComponent_Factory(__ngFactoryType__) {
+    return (\u0275NewDeskFlowConfirmComponent_BaseFactory || (\u0275NewDeskFlowConfirmComponent_BaseFactory = \u0275\u0275getInheritedFactory(_NewDeskFlowConfirmComponent)))(__ngFactoryType__ || _NewDeskFlowConfirmComponent);
+  };
+})();
 _NewDeskFlowConfirmComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _NewDeskFlowConfirmComponent, selectors: [["desk-flow-confirm"]], inputs: { show_close: "show_close" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 34, vars: 21, consts: [[1, "sticky", "top-2", "z-10", "mx-auto", "mb-4", "flex", "h-14", "w-full", "max-w-[calc(100%-1rem)]", "items-center", "justify-between", "rounded", "border-none", "bg-base-200", "p-2"], [1, "m-0", "flex-1", "px-2", "text-xl", "font-medium", "capitalize"], [1, ""], ["diameter", "32"], ["icon", "", "name", "close-desk-confirm", "matRipple", ""], ["period", "", 1, "flex", "space-x-1", "px-2", "py-4", "text-base"], [1, "text-2xl", "text-success"], ["details", "", 1, "space-y-2"], [1, "text-xl"], [1, "flex", "items-center", "space-x-2"], ["date", ""], ["time", ""], [1, "text-xs", "opacity-30"], ["desk", "", 1, "flex", "space-x-1", "border-t", "border-neutral", "px-2", "py-4", "text-base"], ["assets", "", 1, "flex", "max-h-[50vh]", "space-x-1", "overflow-auto", "border-t", "px-2", "py-4"], ["locker", "", 1, "flex", "space-x-1", "border-t", "px-2", "py-4"], [1, "mt-4", "w-full", "border-t", "border-base-200", "p-2"], ["name", "confirm-desk", "btn", "", "matRipple", "", 1, "w-full"], ["icon", "", "name", "close-desk-confirm", "matRipple", "", 3, "click"], [1, "text-2xl"], ["features", "", 1, "flex", "items-center", "space-x-2"], [1, "text-success"], ["details", "", 1, "w-1/2", "flex-1", "pr-2", "leading-6"], ["request", "", 1, "overflow-hidden", "rounded-xl", "border", "bg-base-100", 3, "border-error", "border-base-300"], ["request", "", 1, "overflow-hidden", "rounded-xl", "border", "bg-base-100"], [1, "flex", "items-center", "space-x-2", "p-3"], [1, "flex", "flex-1", "items-center", "space-x-2"], [1, "text-sm"], [1, "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", "bg-error", "text-error-content", 3, "matTooltip"], [1, "flex-1"], [1, "rounded", "bg-success", "px-2", "py-1", "text-xs", "text-success-content"], [1, "flex", "flex-col", "divide-y", "divide-base-100", "bg-base-200"], [1, "flex", "items-center", "space-x-2", "px-3", "py-1", "hover:opacity-90"], [1, "flex", "flex-1", "items-center"], ["details", "", 1, "leading-6"], [1, "flex", "space-x-2"], ["name", "confirm-desk", "btn", "", "matRipple", "", 1, "w-full", 3, "click"]], template: function NewDeskFlowConfirmComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "header", 0)(1, "h2", 1);
@@ -11311,9 +11325,7 @@ var NewDeskFlowConfirmComponent = _NewDeskFlowConfirmComponent;
             }
         </footer>
     `, standalone: false }]
-  }], () => [{ type: BookingFormService }, { type: OrganisationService }, { type: MatBottomSheetRef, decorators: [{
-    type: Optional
-  }] }, { type: SettingsService }], { show_close: [{
+  }], null, { show_close: [{
     type: Input
   }] });
 })();
@@ -11700,6 +11712,25 @@ function NewDeskFormDetailsComponent_Conditional_0_Template(rf, ctx) {
   }
 }
 var _NewDeskFormDetailsComponent = class _NewDeskFormDetailsComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._state = inject(BookingFormService);
+    this._org = inject(OrganisationService);
+    this._settings = inject(SettingsService);
+    this.find = new EventEmitter();
+    this.buildings = this._org.building_list;
+    this.levels = this._org.active_levels;
+    this.options = this._state.options;
+    this.features = this._state.features;
+    this.force_time = set(Date.now(), {
+      hours: 6,
+      minutes: 0
+    }).valueOf();
+    this.from_id = false;
+    this.recurrence_options = ["daily", "weekly", "monthly"];
+    this.setOptions = (o) => this._state.setOptions(o);
+    this.setFeature = (f, e2) => this._state.setFeature(f, e2);
+  }
   get building() {
     return this._org.building;
   }
@@ -11742,25 +11773,6 @@ var _NewDeskFormDetailsComponent = class _NewDeskFormDetailsComponent extends As
   get use_24hr() {
     return this._settings.get("app.use_24_hour_time");
   }
-  constructor(_state, _org, _settings) {
-    super();
-    this._state = _state;
-    this._org = _org;
-    this._settings = _settings;
-    this.find = new EventEmitter();
-    this.buildings = this._org.building_list;
-    this.levels = this._org.active_levels;
-    this.options = this._state.options;
-    this.features = this._state.features;
-    this.force_time = set(Date.now(), {
-      hours: 6,
-      minutes: 0
-    }).valueOf();
-    this.from_id = false;
-    this.recurrence_options = ["daily", "weekly", "monthly"];
-    this.setOptions = (o) => this._state.setOptions(o);
-    this.setFeature = (f, e2) => this._state.setFeature(f, e2);
-  }
   ngOnChanges(changes) {
     if (changes.form && this.form) {
       if (this.selected_desk?.id) {
@@ -11772,9 +11784,12 @@ var _NewDeskFormDetailsComponent = class _NewDeskFormDetailsComponent extends As
     this.form.patchValue(recurrence);
   }
 };
-_NewDeskFormDetailsComponent.\u0275fac = function NewDeskFormDetailsComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _NewDeskFormDetailsComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
-};
+_NewDeskFormDetailsComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275NewDeskFormDetailsComponent_BaseFactory;
+  return function NewDeskFormDetailsComponent_Factory(__ngFactoryType__) {
+    return (\u0275NewDeskFormDetailsComponent_BaseFactory || (\u0275NewDeskFormDetailsComponent_BaseFactory = \u0275\u0275getInheritedFactory(_NewDeskFormDetailsComponent)))(__ngFactoryType__ || _NewDeskFormDetailsComponent);
+  };
+})();
 _NewDeskFormDetailsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _NewDeskFormDetailsComponent, selectors: [["desk-form-details"]], inputs: { form: "form" }, outputs: { find: "find" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 1, vars: 1, consts: [[1, "space-y-2", "divide-y", "divide-base-200", 3, "formGroup"], [1, "flex", "items-center"], [1, "p-2"], [1, "mb-4", "flex", "items-center", "space-x-2"], [1, "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", "bg-base-200"], [1, "text-xl"], [1, "w-full"], [1, "flex", "flex-wrap", "items-center", "sm:space-x-2"], [1, "min-w-[256px]", "flex-1"], ["for", "title"], ["appearance", "outline", 1, "w-full"], ["matInput", "", "name", "title", "formControlName", "title", 3, "placeholder"], [1, "relative", "min-w-[256px]", "flex-1"], ["for", "date"], ["name", "date", "formControlName", "date", 3, "to", "timezone"], ["formControlName", "all_day", 1, "absolute", "-top-2", "right-0"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "flex-col"], ["matRipple", "", 1, "relative", "flex", "h-16", "flex-1", "items-center", "justify-center", "space-x-2", 3, "click"], [1, "text-2xl"], [1, ""], [1, "absolute", "inset-x-0", "bottom-0", "!m-0", "h-1"], ["formControlName", "user", 1, "mb-4"], [1, "w-1/3", "flex-1"], ["for", "start-time"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "use_24hr", "timezone"], ["for", "end-time"], ["name", "end-time", "formControlName", "duration", 3, "time", "max", "min", "step", "use_24hr", "timezone"], ["for", "recurrence"], ["name", "recurrence", 3, "ngModelChange", "date", "ngModel", "ngModelOptions"], ["formControlName", "update_master"], [3, "ngModelChange", "ngModel", "ngModelOptions"], [1, "w-px", "flex-1"], [1, "overflow-hidden"], [1, "mt-4", 3, "ngModelChange", "ngModel", "ngModelOptions"], ["formControlName", "resources"], [1, "rounded", "bg-warning", "px-2", "py-1", "text-center", "text-xs", "shadow"], ["formControlName", "assets", 3, "options"]], template: function NewDeskFormDetailsComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, NewDeskFormDetailsComponent_Conditional_0_Template, 42, 38, "div", 0);
@@ -12049,27 +12064,24 @@ var NewDeskFormDetailsComponent = _NewDeskFormDetailsComponent;
             </div>
         }
     `, standalone: false }]
-  }], () => [{ type: BookingFormService }, { type: OrganisationService }, { type: SettingsService }], { form: [{
+  }], null, { form: [{
     type: Input
   }], find: [{
     type: Output
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewDeskFormDetailsComponent, { className: "NewDeskFormDetailsComponent", filePath: "apps/workplace/src/app/book/desk-flow/desk-form-details.component.ts", lineNumber: 287 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewDeskFormDetailsComponent, { className: "NewDeskFormDetailsComponent", filePath: "apps/workplace/src/app/book/desk-flow/desk-form-details.component.ts", lineNumber: 280 });
 })();
 
 // apps/workplace/src/app/book/desk-flow/desk-flow-form.component.ts
 var _NewDeskFlowFormComponent = class _NewDeskFlowFormComponent {
-  get form() {
-    return this._state.form;
-  }
-  constructor(_state, _router, _org, _bottom_sheet, _settings) {
-    this._state = _state;
-    this._router = _router;
-    this._org = _org;
-    this._bottom_sheet = _bottom_sheet;
-    this._settings = _settings;
+  constructor() {
+    this._state = inject(BookingFormService);
+    this._router = inject(Router);
+    this._org = inject(OrganisationService);
+    this._bottom_sheet = inject(MatBottomSheet);
+    this._settings = inject(SettingsService);
     this.level = "";
     this.levels = [];
     this.clearForm = () => {
@@ -12095,6 +12107,9 @@ var _NewDeskFlowFormComponent = class _NewDeskFlowFormComponent {
       });
     };
   }
+  get form() {
+    return this._state.form;
+  }
   ngOnInit() {
     return __async(this, null, function* () {
       yield this._org.initialised.pipe(first((_) => _));
@@ -12117,7 +12132,7 @@ var _NewDeskFlowFormComponent = class _NewDeskFlowFormComponent {
   }
 };
 _NewDeskFlowFormComponent.\u0275fac = function NewDeskFlowFormComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _NewDeskFlowFormComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(MatBottomSheet), \u0275\u0275directiveInject(SettingsService));
+  return new (__ngFactoryType__ || _NewDeskFlowFormComponent)();
 };
 _NewDeskFlowFormComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _NewDeskFlowFormComponent, selectors: [["desk-flow-form"]], standalone: false, decls: 11, vars: 7, consts: [[1, "h-full", "w-full", "overflow-auto", "bg-base-200"], [1, "mx-auto", "w-[48rem]", "max-w-full", "border", "border-base-200", "bg-base-100", "sm:my-4"], [1, "w-full", "border-b", "border-base-200", "p-4", "text-2xl", "font-medium", "sm:px-16", "sm:py-4"], [1, "block", "p-0", "sm:px-16", "sm:py-4", 3, "form"], [1, "w-full", "border-b", "border-base-200", "sm:mb-2"], [1, "flex", "flex-col", "items-center", "p-2", "sm:mb-2", "sm:flex-row", "sm:space-x-2", "sm:px-16"], ["btn", "", "name", "open-desk-confirm", "matRipple", "", "confirm", "", 1, "w-full", "sm:w-auto", 3, "click"]], template: function NewDeskFlowFormComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -12179,7 +12194,7 @@ var NewDeskFlowFormComponent = _NewDeskFlowFormComponent;
             </div>
         </div>
     `, standalone: false }]
-  }], () => [{ type: BookingFormService }, { type: Router }, { type: OrganisationService }, { type: MatBottomSheet }, { type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewDeskFlowFormComponent, { className: "NewDeskFlowFormComponent", filePath: "apps/workplace/src/app/book/desk-flow/desk-flow-form.component.ts", lineNumber: 56 });
@@ -12338,6 +12353,14 @@ function NewDeskFlowSuccessComponent_Conditional_9_Template(rf, ctx) {
   }
 }
 var _NewDeskFlowSuccessComponent = class _NewDeskFlowSuccessComponent {
+  constructor() {
+    this._state = inject(BookingFormService);
+    this._settings = inject(SettingsService);
+    this.outlook_link = "";
+    this.google_link = "";
+    this.ical_link = "";
+    this.viewCalendarLinks = () => this._state.openBookingLinkModal();
+  }
   get location() {
     const desk = this.last_event?.extension_data?.booking_asset;
     if (!desk)
@@ -12359,14 +12382,6 @@ var _NewDeskFlowSuccessComponent = class _NewDeskFlowSuccessComponent {
   get time_format() {
     return this._settings.time_format;
   }
-  constructor(_state, _settings) {
-    this._state = _state;
-    this._settings = _settings;
-    this.outlook_link = "";
-    this.google_link = "";
-    this.ical_link = "";
-    this.viewCalendarLinks = () => this._state.openBookingLinkModal();
-  }
   ngOnInit() {
     const event = __spreadProps(__spreadValues({}, this.last_event), {
       location: `${this.location}, ${this.last_event.asset_name || ""}`
@@ -12377,7 +12392,7 @@ var _NewDeskFlowSuccessComponent = class _NewDeskFlowSuccessComponent {
   }
 };
 _NewDeskFlowSuccessComponent.\u0275fac = function NewDeskFlowSuccessComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _NewDeskFlowSuccessComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(SettingsService));
+  return new (__ngFactoryType__ || _NewDeskFlowSuccessComponent)();
 };
 _NewDeskFlowSuccessComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _NewDeskFlowSuccessComponent, selectors: [["desk-flow-success"]], standalone: false, decls: 14, vars: 15, consts: [[1, "absolute", "inset-0", "z-50", "flex", "flex-col", "overflow-auto", "bg-base-100"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-2", "p-8"], [1, "text-center", "text-2xl", "font-medium"], ["src", "assets/icons/success.svg"], [1, "text-center"], ["assets", ""], [1, "relative", "flex", "flex-col", "items-center", "space-y-4", "p-4"], [1, "sticky", "bottom-0", "mt-4", "flex", "w-full", "items-center", "justify-center", "border-t", "border-base-200", "bg-base-100", "p-2"], ["btn", "", "name", "desk-confirm-continue", "matRipple", "", 1, "mx-auto", "w-full", "max-w-[32rem]", 3, "routerLink"], ["btn", "", "matRipple", "", "name", "desk-outlook-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/outlook.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-google-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/gcal.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-ical-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], [1, "text-xl"]], template: function NewDeskFlowSuccessComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -12557,7 +12572,7 @@ var NewDeskFlowSuccessComponent = _NewDeskFlowSuccessComponent;
             </footer>
         </div>
     `, standalone: false }]
-  }], () => [{ type: BookingFormService }, { type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewDeskFlowSuccessComponent, { className: "NewDeskFlowSuccessComponent", filePath: "apps/workplace/src/app/book/desk-flow/desk-flow-success.component.ts", lineNumber: 155 });
@@ -12575,21 +12590,22 @@ function NewDeskFlowComponent_Case_2_Template(rf, ctx) {
   }
 }
 var _NewDeskFlowComponent = class _NewDeskFlowComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._state = inject(BookingFormService);
+    this._org = inject(OrganisationService);
+    this._route = inject(ActivatedRoute);
+  }
   get view() {
     return this._state.view;
   }
   get last_success() {
     return this._state.last_success;
   }
-  constructor(_state, _route, _org) {
-    super();
-    this._state = _state;
-    this._route = _route;
-    this._org = _org;
-  }
   ngOnInit() {
     return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
+      yield firstTruthyValueFrom(this._org.initialised);
+      yield lastValueFrom(timer(300));
       this._state.loadForm();
       this._state.setOptions({ type: "desk" });
       const { id, booking_type } = this._state.form.value;
@@ -12624,9 +12640,12 @@ var _NewDeskFlowComponent = class _NewDeskFlowComponent extends AsyncHandler {
     });
   }
 };
-_NewDeskFlowComponent.\u0275fac = function NewDeskFlowComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _NewDeskFlowComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(OrganisationService));
-};
+_NewDeskFlowComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275NewDeskFlowComponent_BaseFactory;
+  return function NewDeskFlowComponent_Factory(__ngFactoryType__) {
+    return (\u0275NewDeskFlowComponent_BaseFactory || (\u0275NewDeskFlowComponent_BaseFactory = \u0275\u0275getInheritedFactory(_NewDeskFlowComponent)))(__ngFactoryType__ || _NewDeskFlowComponent);
+  };
+})();
 _NewDeskFlowComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _NewDeskFlowComponent, selectors: [["placeos-new-book-desk-flow"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 3, vars: 1, consts: [[1, "z-50", "h-full", "w-full", "bg-base-100"]], template: function NewDeskFlowComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0);
@@ -12655,10 +12674,10 @@ var NewDeskFlowComponent = _NewDeskFlowComponent;
             }
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;8f663144e307d97d7c6361d75534b712825c70421a65c587eccbcb19333fd199;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/book/desk-flow.component.ts */\n:host {\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=desk-flow.component.css.map */\n"] }]
-  }], () => [{ type: BookingFormService }, { type: ActivatedRoute }, { type: OrganisationService }], null);
+  }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewDeskFlowComponent, { className: "NewDeskFlowComponent", filePath: "apps/workplace/src/app/book/desk-flow.component.ts", lineNumber: 32 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewDeskFlowComponent, { className: "NewDeskFlowComponent", filePath: "apps/workplace/src/app/book/desk-flow.component.ts", lineNumber: 37 });
 })();
 
 // apps/workplace/src/app/book/flow-success.component.ts
@@ -12867,6 +12886,28 @@ function BookLockerFlowConfirmComponent_Conditional_30_Template(rf, ctx) {
   }
 }
 var _BookLockerFlowConfirmComponent = class _BookLockerFlowConfirmComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._state = inject(BookingFormService);
+    this._org = inject(OrganisationService);
+    this._sheet_ref = inject(MatBottomSheetRef, { optional: true });
+    this._settings = inject(SettingsService);
+    this.show_close = false;
+    this.loading = this._state.loading;
+    this.postForm = () => __async(this, null, function* () {
+      try {
+        if ((yield nextValueFrom(this._state.options))?.group) {
+          yield this._state.postFormForGroup();
+        } else {
+          yield this._state.postForm();
+        }
+        this.dismiss(true);
+      } catch (e2) {
+        notifyError(e2);
+      }
+    });
+    this.dismiss = (e2) => this._sheet_ref?.dismiss(e2);
+  }
   get time_format() {
     return this._settings.time_format;
   }
@@ -12887,32 +12928,13 @@ var _BookLockerFlowConfirmComponent = class _BookLockerFlowConfirmComponent exte
     const level = this._org.levelWithID(this.booking_asset.zones);
     return `${level?.display_name || level?.name}${building ? "," : ""} ${building?.address || building?.display_name || building?.name || ""}`;
   }
-  constructor(_state, _org, _sheet_ref, _settings) {
-    super();
-    this._state = _state;
-    this._org = _org;
-    this._sheet_ref = _sheet_ref;
-    this._settings = _settings;
-    this.show_close = false;
-    this.loading = this._state.loading;
-    this.postForm = () => __async(this, null, function* () {
-      try {
-        if ((yield nextValueFrom(this._state.options))?.group) {
-          yield this._state.postFormForGroup();
-        } else {
-          yield this._state.postForm();
-        }
-        this.dismiss(true);
-      } catch (e2) {
-        notifyError(e2);
-      }
-    });
-    this.dismiss = (e2) => this._sheet_ref?.dismiss(e2);
-  }
 };
-_BookLockerFlowConfirmComponent.\u0275fac = function BookLockerFlowConfirmComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _BookLockerFlowConfirmComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(MatBottomSheetRef, 8), \u0275\u0275directiveInject(SettingsService));
-};
+_BookLockerFlowConfirmComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275BookLockerFlowConfirmComponent_BaseFactory;
+  return function BookLockerFlowConfirmComponent_Factory(__ngFactoryType__) {
+    return (\u0275BookLockerFlowConfirmComponent_BaseFactory || (\u0275BookLockerFlowConfirmComponent_BaseFactory = \u0275\u0275getInheritedFactory(_BookLockerFlowConfirmComponent)))(__ngFactoryType__ || _BookLockerFlowConfirmComponent);
+  };
+})();
 _BookLockerFlowConfirmComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookLockerFlowConfirmComponent, selectors: [["locker-flow-confirm"]], inputs: { show_close: "show_close" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 32, vars: 25, consts: [[1, "sticky", "top-2", "z-10", "mx-auto", "mb-4", "flex", "h-14", "w-full", "max-w-[calc(100%-1rem)]", "items-center", "justify-between", "rounded", "border-none", "bg-base-200", "p-2"], [1, "m-0", "flex-1", "px-2", "text-xl", "font-medium", "capitalize"], [1, ""], ["diameter", "32"], ["icon", "", "name", "close-locker-confirm", "matRipple", ""], ["period", "", 1, "flex", "space-x-1", "px-2", "py-4"], [1, "text-2xl", "text-success"], ["details", "", 1, "space-y-2", "text-base"], [1, "text-xl"], [1, "flex", "items-center", "space-x-2"], ["date", ""], ["time", ""], ["resource", "", 1, "flex", "space-x-1", "border-t", "px-2", "py-4", "text-base"], [1, "mt-4", "w-full", "border-t", "border-base-200", "p-2"], ["name", "confirm-locker", "btn", "", "matRipple", "", 1, "w-full"], ["icon", "", "name", "close-locker-confirm", "matRipple", "", 3, "click"], [1, "text-2xl"], ["features", "", 1, "flex", "items-center", "space-x-2"], ["name", "confirm-locker", "btn", "", "matRipple", "", 1, "w-full", 3, "click"]], template: function BookLockerFlowConfirmComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "header", 0)(1, "h2", 1);
@@ -13062,9 +13084,7 @@ var BookLockerFlowConfirmComponent = _BookLockerFlowConfirmComponent;
             }
         </footer>
     `, standalone: false }]
-  }], () => [{ type: BookingFormService }, { type: OrganisationService }, { type: MatBottomSheetRef, decorators: [{
-    type: Optional
-  }] }, { type: SettingsService }], { show_close: [{
+  }], null, { show_close: [{
     type: Input
   }] });
 })();
@@ -13241,6 +13261,23 @@ function LockerFormDetailsComponent_Conditional_0_Template(rf, ctx) {
   }
 }
 var _LockerFormDetailsComponent = class _LockerFormDetailsComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._state = inject(BookingFormService);
+    this._org = inject(OrganisationService);
+    this._settings = inject(SettingsService);
+    this._dialog = inject(MatDialog);
+    this.find = new EventEmitter();
+    this.buildings = this._org.building_list;
+    this.levels = this._org.active_levels;
+    this.options = this._state.options;
+    this.features = this._state.features;
+    this.from_id = false;
+    this.custom_durations = [];
+    this.recurrence_options = ["daily", "weekly", "monthly"];
+    this.setOptions = (o) => this._state.setOptions(o);
+    this.setFeature = (f, e2) => this._state.setFeature(f, e2);
+  }
   get building() {
     return this._org.building;
   }
@@ -13270,23 +13307,6 @@ var _LockerFormDetailsComponent = class _LockerFormDetailsComponent extends Asyn
   }
   get timezone() {
     return this._settings.get("app.bookings.use_building_timezone") || this._settings.get("app.lockers.use_building_timezone") ? this._org.building.timezone : "";
-  }
-  constructor(_state, _org, _settings, _dialog) {
-    super();
-    this._state = _state;
-    this._org = _org;
-    this._settings = _settings;
-    this._dialog = _dialog;
-    this.find = new EventEmitter();
-    this.buildings = this._org.building_list;
-    this.levels = this._org.active_levels;
-    this.options = this._state.options;
-    this.features = this._state.features;
-    this.from_id = false;
-    this.custom_durations = [];
-    this.recurrence_options = ["daily", "weekly", "monthly"];
-    this.setOptions = (o) => this._state.setOptions(o);
-    this.setFeature = (f, e2) => this._state.setFeature(f, e2);
   }
   ngOnInit() {
     return __async(this, null, function* () {
@@ -13340,9 +13360,12 @@ var _LockerFormDetailsComponent = class _LockerFormDetailsComponent extends Asyn
     });
   }
 };
-_LockerFormDetailsComponent.\u0275fac = function LockerFormDetailsComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _LockerFormDetailsComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(MatDialog));
-};
+_LockerFormDetailsComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275LockerFormDetailsComponent_BaseFactory;
+  return function LockerFormDetailsComponent_Factory(__ngFactoryType__) {
+    return (\u0275LockerFormDetailsComponent_BaseFactory || (\u0275LockerFormDetailsComponent_BaseFactory = \u0275\u0275getInheritedFactory(_LockerFormDetailsComponent)))(__ngFactoryType__ || _LockerFormDetailsComponent);
+  };
+})();
 _LockerFormDetailsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LockerFormDetailsComponent, selectors: [["new-locker-form-details"]], inputs: { form: "form" }, outputs: { find: "find" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 1, vars: 1, consts: [[1, "space-y-2", "divide-y", "divide-base-200", "p-0", "sm:px-16", "sm:py-4", 3, "formGroup"], [1, "p-2"], [1, "mb-4", "flex", "items-center", "space-x-2"], [1, "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", "bg-base-200"], [1, "text-xl"], [1, "flex", "flex-wrap", "items-center", "sm:space-x-2"], [1, "min-w-[256px]", "flex-1"], ["for", "date"], ["appearance", "outline", 1, "w-full"], ["placeholder", "Select Building", 3, "ngModelChange", "ngModel", "ngModelOptions"], [3, "value"], [1, "relative", "min-w-[256px]", "flex-1"], ["name", "date", "formControlName", "date", 3, "timezone"], ["formControlName", "all_day", 1, "absolute", "-top-2", "right-0"], [1, "flex", "items-center", "space-x-2"], [1, "w-1/3", "flex-1"], ["for", "start-time"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "use_24hr", "disabled", "timezone"], [1, "relative", "w-1/3", "flex-1"], ["for", "end-time"], ["name", "end-time", "formControlName", "duration", 3, "time", "max", "min", "step", "use_24hr", "custom_options", "timezone"], ["formControlName", "resources"]], template: function LockerFormDetailsComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, LockerFormDetailsComponent_Conditional_0_Template, 32, 24, "div", 0);
@@ -13479,26 +13502,23 @@ var LockerFormDetailsComponent = _LockerFormDetailsComponent;
             </div>
         }
     `, standalone: false }]
-  }], () => [{ type: BookingFormService }, { type: OrganisationService }, { type: SettingsService }, { type: MatDialog }], { form: [{
+  }], null, { form: [{
     type: Input
   }], find: [{
     type: Output
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerFormDetailsComponent, { className: "LockerFormDetailsComponent", filePath: "apps/workplace/src/app/book/locker-flow/locker-form-details.component.ts", lineNumber: 147 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerFormDetailsComponent, { className: "LockerFormDetailsComponent", filePath: "apps/workplace/src/app/book/locker-flow/locker-form-details.component.ts", lineNumber: 139 });
 })();
 
 // apps/workplace/src/app/book/locker-flow/locker-flow-form.component.ts
 var _BookLockerFlowFormComponent = class _BookLockerFlowFormComponent {
-  get form() {
-    return this._state.form;
-  }
-  constructor(_state, _router, _org, _bottom_sheet) {
-    this._state = _state;
-    this._router = _router;
-    this._org = _org;
-    this._bottom_sheet = _bottom_sheet;
+  constructor() {
+    this._state = inject(BookingFormService);
+    this._router = inject(Router);
+    this._org = inject(OrganisationService);
+    this._bottom_sheet = inject(MatBottomSheet);
     this.level = "";
     this.levels = [];
     this.clearForm = () => {
@@ -13520,6 +13540,9 @@ var _BookLockerFlowFormComponent = class _BookLockerFlowFormComponent {
       });
     };
   }
+  get form() {
+    return this._state.form;
+  }
   ngOnInit() {
     return __async(this, null, function* () {
       yield this._org.initialised.pipe(first((_) => _));
@@ -13537,7 +13560,7 @@ var _BookLockerFlowFormComponent = class _BookLockerFlowFormComponent {
   }
 };
 _BookLockerFlowFormComponent.\u0275fac = function BookLockerFlowFormComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _BookLockerFlowFormComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(MatBottomSheet));
+  return new (__ngFactoryType__ || _BookLockerFlowFormComponent)();
 };
 _BookLockerFlowFormComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookLockerFlowFormComponent, selectors: [["locker-flow-form"]], standalone: false, decls: 11, vars: 7, consts: [[1, "h-full", "w-full", "overflow-auto", "bg-base-200"], [1, "mx-auto", "w-[48rem]", "max-w-full", "border", "border-base-200", "bg-base-100", "sm:my-4"], [1, "w-full", "border-b", "border-base-200", "p-4", "text-2xl", "font-medium", "sm:px-16", "sm:py-4"], [3, "form"], [1, "w-full", "border-b", "border-base-200", "sm:mb-2"], [1, "flex", "flex-col", "items-center", "p-2", "sm:mb-2", "sm:flex-row", "sm:space-x-2", "sm:px-16"], ["btn", "", "name", "open-locker-confirm", "matRipple", "", "confirm", "", 1, "w-full", "sm:w-auto", 3, "click"]], template: function BookLockerFlowFormComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -13598,7 +13621,7 @@ var BookLockerFlowFormComponent = _BookLockerFlowFormComponent;
             </div>
         </div>
     `, standalone: false }]
-  }], () => [{ type: BookingFormService }, { type: Router }, { type: OrganisationService }, { type: MatBottomSheet }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookLockerFlowFormComponent, { className: "BookLockerFlowFormComponent", filePath: "apps/workplace/src/app/book/locker-flow/locker-flow-form.component.ts", lineNumber: 50 });
@@ -13651,6 +13674,15 @@ function BookLockerFlowSuccessComponent_Conditional_12_Template(rf, ctx) {
   }
 }
 var _BookLockerFlowSuccessComponent = class _BookLockerFlowSuccessComponent {
+  constructor() {
+    this._state = inject(BookingFormService);
+    this._settings = inject(SettingsService);
+    this._org = inject(OrganisationService);
+    this.outlook_link = "";
+    this.google_link = "";
+    this.ical_link = "";
+    this.viewCalendarLinks = () => this._state.openBookingLinkModal();
+  }
   get location() {
     if (!this.last_event)
       return "Unknown";
@@ -13667,15 +13699,6 @@ var _BookLockerFlowSuccessComponent = class _BookLockerFlowSuccessComponent {
   get time_format() {
     return this._settings.time_format;
   }
-  constructor(_state, _settings, _org) {
-    this._state = _state;
-    this._settings = _settings;
-    this._org = _org;
-    this.outlook_link = "";
-    this.google_link = "";
-    this.ical_link = "";
-    this.viewCalendarLinks = () => this._state.openBookingLinkModal();
-  }
   ngOnInit() {
     this.outlook_link = generateMicrosoftCalendarLink(this.last_event);
     this.google_link = generateGoogleCalendarLink(this.last_event);
@@ -13683,7 +13706,7 @@ var _BookLockerFlowSuccessComponent = class _BookLockerFlowSuccessComponent {
   }
 };
 _BookLockerFlowSuccessComponent.\u0275fac = function BookLockerFlowSuccessComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _BookLockerFlowSuccessComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
+  return new (__ngFactoryType__ || _BookLockerFlowSuccessComponent)();
 };
 _BookLockerFlowSuccessComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookLockerFlowSuccessComponent, selectors: [["locker-flow-success"]], standalone: false, decls: 17, vars: 30, consts: [[1, "absolute", "inset-0", "z-50", "flex", "flex-col", "overflow-auto", "bg-base-100"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-2", "p-8"], [1, "text-center", "text-2xl", "font-medium"], ["src", "assets/icons/locker-success.svg"], [1, "text-center"], [1, "relative", "flex", "flex-col", "items-center", "space-y-4", "p-4"], [1, "sticky", "bottom-0", "mt-4", "flex", "w-full", "items-center", "justify-center", "border-t", "border-base-200", "bg-base-100", "p-2"], ["btn", "", "name", "locker-confirm-continue", "matRipple", "", 1, "mx-auto", "w-full", "max-w-[32rem]", 3, "routerLink"], ["btn", "", "matRipple", "", "name", "locker-outlook-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/outlook.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "locker-google-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/gcal.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "locker-ical-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], [1, "text-xl"]], template: function BookLockerFlowSuccessComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -13825,7 +13848,7 @@ var BookLockerFlowSuccessComponent = _BookLockerFlowSuccessComponent;
             </footer>
         </div>
     `, standalone: false }]
-  }], () => [{ type: BookingFormService }, { type: SettingsService }, { type: OrganisationService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookLockerFlowSuccessComponent, { className: "BookLockerFlowSuccessComponent", filePath: "apps/workplace/src/app/book/locker-flow/locker-flow-success.component.ts", lineNumber: 118 });
@@ -13888,18 +13911,12 @@ function BookLockerFlowComponent_Conditional_3_Template(rf, ctx) {
   }
 }
 var _BookLockerFlowComponent = class _BookLockerFlowComponent extends AsyncHandler {
-  get view() {
-    return this._state.view;
-  }
-  get last_success() {
-    return this._state.last_success;
-  }
-  constructor(_state, _route, _org, _settings) {
-    super();
-    this._state = _state;
-    this._route = _route;
-    this._org = _org;
-    this._settings = _settings;
+  constructor() {
+    super(...arguments);
+    this._state = inject(BookingFormService);
+    this._route = inject(ActivatedRoute);
+    this._org = inject(OrganisationService);
+    this._settings = inject(SettingsService);
     this._lockers_banks = loadLockerBanks(this._org, combineLatest([this._org.active_building, this._org.active_region]), () => this._settings.get("app.use_region"));
     this._lockers = loadLockers(this._org, combineLatest([this._org.active_building, this._org.active_region]), this._lockers_banks, () => this._settings.get("app.use_region"));
     this.assigned_space = this._lockers.pipe(map((list) => list.find((_) => _.assigned_to?.toLowerCase() === currentUser().email?.toLowerCase())));
@@ -13908,6 +13925,12 @@ var _BookLockerFlowComponent = class _BookLockerFlowComponent extends AsyncHandl
       period_end: getUnixTime(addHours(endOfDay(Date.now()), -1)),
       type: "locker"
     }).pipe(map((_) => _.length > 0), shareReplay(1));
+  }
+  get view() {
+    return this._state.view;
+  }
+  get last_success() {
+    return this._state.last_success;
   }
   ngOnInit() {
     this._state.loadForm();
@@ -13925,9 +13948,12 @@ var _BookLockerFlowComponent = class _BookLockerFlowComponent extends AsyncHandl
     }));
   }
 };
-_BookLockerFlowComponent.\u0275fac = function BookLockerFlowComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _BookLockerFlowComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService));
-};
+_BookLockerFlowComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275BookLockerFlowComponent_BaseFactory;
+  return function BookLockerFlowComponent_Factory(__ngFactoryType__) {
+    return (\u0275BookLockerFlowComponent_BaseFactory || (\u0275BookLockerFlowComponent_BaseFactory = \u0275\u0275getInheritedFactory(_BookLockerFlowComponent)))(__ngFactoryType__ || _BookLockerFlowComponent);
+  };
+})();
 _BookLockerFlowComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookLockerFlowComponent, selectors: [["placeos-book-locker-flow"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 4, vars: 5, consts: [[1, "z-50", "h-full", "w-full", "bg-base-100"], [1, "z-50", "flex", "h-full", "w-full", "flex-col", "items-center", "justify-center", "space-y-4", "bg-base-100"], ["src", "assets/icons/parking-success.svg", 1, "h-64", "w-64"], ["btn", "", "matRipple", "", 1, "w-48", 3, "routerLink"]], template: function BookLockerFlowComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, BookLockerFlowComponent_Conditional_0_Template, 4, 1, "div", 0);
@@ -13976,7 +14002,7 @@ var BookLockerFlowComponent = _BookLockerFlowComponent;
             </div>
         }
     `, standalone: false, styles: ["/* angular:styles/component:css;8f663144e307d97d7c6361d75534b712825c70421a65c587eccbcb19333fd199;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/book/locker-flow.component.ts */\n:host {\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=locker-flow.component.css.map */\n"] }]
-  }], () => [{ type: BookingFormService }, { type: ActivatedRoute }, { type: OrganisationService }, { type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookLockerFlowComponent, { className: "BookLockerFlowComponent", filePath: "apps/workplace/src/app/book/locker-flow.component.ts", lineNumber: 60 });
@@ -14122,6 +14148,37 @@ function MeetingFlowConfirmComponent_Conditional_30_Template(rf, ctx) {
   }
 }
 var _MeetingFlowConfirmComponent = class _MeetingFlowConfirmComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._sheet_ref = inject(MatBottomSheetRef, { optional: true });
+    this._event_form = inject(EventFormService);
+    this._org = inject(OrganisationService);
+    this._space_pipe = inject(SpacePipe);
+    this._dialog = inject(MatDialog);
+    this._settings = inject(SettingsService);
+    this.show_close = false;
+    this._date = new DatePipe("en");
+    this.loading = this._event_form.loading$;
+    this.postForm = () => __async(this, null, function* () {
+      if (!this.space) {
+        const result = yield openConfirmModal({
+          title: i18n("APP.WORKPLACE.MEETING_WITHOUT_ROOM_TITLE"),
+          content: i18n("APP.WORKPLACE.MEETING_WITHOUT_ROOM_MSG"),
+          icon: { content: "event_available" }
+        }, this._dialog);
+        if (result.reason !== "done")
+          return;
+      }
+      yield this._event_form.postForm().catch((_) => {
+        notifyError(_);
+        throw _;
+      });
+      this.dismiss(true);
+    });
+    this.cancelPost = () => this._event_form.cancelPostForm();
+    this.dismiss = (e2) => this._sheet_ref?.dismiss(e2);
+    this._space = this.event.resources[0];
+  }
   get requires_approval() {
     return this.event.resources.some((s) => s.approval);
   }
@@ -14174,37 +14231,6 @@ var _MeetingFlowConfirmComponent = class _MeetingFlowConfirmComponent extends As
     const building = this._org.buildings.find((_) => this.space.zones.includes(_.id));
     return building?.address || building?.display_name || building?.name;
   }
-  constructor(_sheet_ref, _event_form, _org, _space_pipe, _dialog, _settings) {
-    super();
-    this._sheet_ref = _sheet_ref;
-    this._event_form = _event_form;
-    this._org = _org;
-    this._space_pipe = _space_pipe;
-    this._dialog = _dialog;
-    this._settings = _settings;
-    this.show_close = false;
-    this._date = new DatePipe("en");
-    this.loading = this._event_form.loading$;
-    this.postForm = () => __async(this, null, function* () {
-      if (!this.space) {
-        const result = yield openConfirmModal({
-          title: i18n("APP.WORKPLACE.MEETING_WITHOUT_ROOM_TITLE"),
-          content: i18n("APP.WORKPLACE.MEETING_WITHOUT_ROOM_MSG"),
-          icon: { content: "event_available" }
-        }, this._dialog);
-        if (result.reason !== "done")
-          return;
-      }
-      yield this._event_form.postForm().catch((_) => {
-        notifyError(_);
-        throw _;
-      });
-      this.dismiss(true);
-    });
-    this.cancelPost = () => this._event_form.cancelPostForm();
-    this.dismiss = (e2) => this._sheet_ref?.dismiss(e2);
-    this._space = this.event.resources[0];
-  }
   ngOnInit() {
     return __async(this, null, function* () {
       console.log("Event:", this.event.resources[0]);
@@ -14215,9 +14241,12 @@ var _MeetingFlowConfirmComponent = class _MeetingFlowConfirmComponent extends As
     return item.option_list?.map((_) => _.name).join("\n");
   }
 };
-_MeetingFlowConfirmComponent.\u0275fac = function MeetingFlowConfirmComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _MeetingFlowConfirmComponent)(\u0275\u0275directiveInject(MatBottomSheetRef, 8), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SpacePipe), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(SettingsService));
-};
+_MeetingFlowConfirmComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275MeetingFlowConfirmComponent_BaseFactory;
+  return function MeetingFlowConfirmComponent_Factory(__ngFactoryType__) {
+    return (\u0275MeetingFlowConfirmComponent_BaseFactory || (\u0275MeetingFlowConfirmComponent_BaseFactory = \u0275\u0275getInheritedFactory(_MeetingFlowConfirmComponent)))(__ngFactoryType__ || _MeetingFlowConfirmComponent);
+  };
+})();
 _MeetingFlowConfirmComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MeetingFlowConfirmComponent, selectors: [["meeting-flow-confirm"]], inputs: { show_close: "show_close" }, features: [\u0275\u0275ProvidersFeature([SpacePipe]), \u0275\u0275InheritDefinitionFeature], decls: 36, vars: 26, consts: [["chipList", ""], [1, "sticky", "top-2", "z-10", "mx-auto", "mb-4", "flex", "h-14", "w-full", "max-w-[calc(100%-1rem)]", "items-center", "justify-between", "rounded", "border-none", "bg-base-200", "px-4", "py-2"], [1, "m-0", "flex-1", "text-xl", "font-medium", "capitalize"], ["diameter", "32"], ["icon", "", "matRipple", ""], ["period", "", 1, "flex", "space-x-1", "px-2"], [1, "mt-1", "text-success"], ["details", "", 1, "leading-6"], [1, "flex", "items-center", "space-x-2"], [1, "text-2xl"], ["date", ""], [1, "flex", "flex-col", "leading-tight"], ["time", ""], [1, "text-xs", "opacity-30"], ["attendees", "", 1, "mt-2", "flex", "space-x-1", "px-2"], ["spaces", "", 1, "mt-2", "flex", "space-x-1", "px-2"], [1, "px-2", "pt-4"], [1, "mt-4", "w-full", "border-t", "border-base-200", "p-2"], ["btn", "", "name", "confirm-meeting", "matRipple", "", 1, "w-full", 3, "click", "disabled"], ["icon", "", "matRipple", "", 3, "click"], ["attendee-list", ""], ["aria-label", "User selection"], [1, "flex", "items-center"], [1, "mr-2"], [1, "max-w-[50vw]", "truncate"], [1, "rounded", "!border-none", "bg-warning", "px-2", "py-1", "text-center", "text-sm", "text-warning-content"]], template: function MeetingFlowConfirmComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "header", 1)(1, "h2", 2);
@@ -14440,9 +14469,7 @@ var MeetingFlowConfirmComponent = _MeetingFlowConfirmComponent;
       IconComponent,
       MatChipsModule
     ], styles: ["/* angular:styles/component:css;a93c902b46815fa2000ca074f182727fd7e16c31d125e94ab636c16b7f1bb572;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/book/meeting-flow/meeting-flow-confirm.component.ts */\nsection > icon {\n  font-size: 1.5rem;\n}\nh2 {\n  font-size: 1.5rem;\n  font-weight: medium;\n  margin-bottom: 0.5rem;\n}\nh3 {\n  font-size: 1.25rem;\n  font-weight: medium;\n  margin: 0.5rem 0;\n}\n/*# sourceMappingURL=meeting-flow-confirm.component.css.map */\n"] }]
-  }], () => [{ type: MatBottomSheetRef, decorators: [{
-    type: Optional
-  }] }, { type: EventFormService }, { type: OrganisationService }, { type: SpacePipe }, { type: MatDialog }, { type: SettingsService }], { show_close: [{
+  }], null, { show_close: [{
     type: Input
   }] });
 })();
@@ -14858,6 +14885,43 @@ function MeetingFlowConfirmModalComponent_Conditional_36_Template(rf, ctx) {
   }
 }
 var _MeetingFlowConfirmModalComponent = class _MeetingFlowConfirmModalComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._event_form = inject(EventFormService);
+    this._org = inject(OrganisationService);
+    this._space_pipe = inject(SpacePipe);
+    this._dialog_ref = inject(MatDialogRef, { optional: true });
+    this._dialog = inject(MatDialog);
+    this._settings = inject(SettingsService);
+    this.show_close = false;
+    this._loading = new BehaviorSubject(false);
+    this._date = new DatePipe("en");
+    this.loading = combineLatest([
+      this._event_form.loading$,
+      this._loading
+    ]).pipe(map(([a, b]) => a || b));
+    this.postForm = () => __async(this, null, function* () {
+      if (!this.space) {
+        const result = yield openConfirmModal({
+          title: i18n("APP.WORKPLACE.MEETING_WITHOUT_ROOM_TITLE"),
+          content: i18n("APP.WORKPLACE.MEETING_WITHOUT_ROOM_MSG"),
+          icon: { content: "event_available" }
+        }, this._dialog);
+        if (result.reason !== "done")
+          return;
+        result.close();
+      }
+      const resp = yield this._event_form.postForm().catch((_) => {
+        notifyError(_);
+        return false;
+      });
+      if (resp)
+        this.dismiss(true);
+    });
+    this.cancelPost = () => this._event_form.cancelPostForm();
+    this.dismiss = (e2) => this._dialog_ref?.close(e2);
+    this._space = this.event.resources[0];
+  }
   err_tooltip(request) {
     return request.conflict ? i18n("FORM.ASSETS_CLASH_ERROR") : i18n("FORM.ASSETS_TIME_ERROR");
   }
@@ -14925,43 +14989,6 @@ var _MeetingFlowConfirmModalComponent = class _MeetingFlowConfirmModalComponent 
       start: this.event.date || this.event.recurrence.start
     })));
   }
-  constructor(_event_form, _org, _space_pipe, _dialog_ref, _dialog, _settings) {
-    super();
-    this._event_form = _event_form;
-    this._org = _org;
-    this._space_pipe = _space_pipe;
-    this._dialog_ref = _dialog_ref;
-    this._dialog = _dialog;
-    this._settings = _settings;
-    this.show_close = false;
-    this._loading = new BehaviorSubject(false);
-    this._date = new DatePipe("en");
-    this.loading = combineLatest([
-      this._event_form.loading$,
-      this._loading
-    ]).pipe(map(([a, b]) => a || b));
-    this.postForm = () => __async(this, null, function* () {
-      if (!this.space) {
-        const result = yield openConfirmModal({
-          title: i18n("APP.WORKPLACE.MEETING_WITHOUT_ROOM_TITLE"),
-          content: i18n("APP.WORKPLACE.MEETING_WITHOUT_ROOM_MSG"),
-          icon: { content: "event_available" }
-        }, this._dialog);
-        if (result.reason !== "done")
-          return;
-        result.close();
-      }
-      const resp = yield this._event_form.postForm().catch((_) => {
-        notifyError(_);
-        return false;
-      });
-      if (resp)
-        this.dismiss(true);
-    });
-    this.cancelPost = () => this._event_form.cancelPostForm();
-    this.dismiss = (e2) => this._dialog_ref?.close(e2);
-    this._space = this.event.resources[0];
-  }
   ngOnInit() {
     return __async(this, null, function* () {
       const date = this.event.all_day ? startOfDay(this.event.date).valueOf() : this.event.date;
@@ -15000,9 +15027,12 @@ var _MeetingFlowConfirmModalComponent = class _MeetingFlowConfirmModalComponent 
     return item.option_list?.map((_) => _.name).join("\n");
   }
 };
-_MeetingFlowConfirmModalComponent.\u0275fac = function MeetingFlowConfirmModalComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _MeetingFlowConfirmModalComponent)(\u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SpacePipe), \u0275\u0275directiveInject(MatDialogRef, 8), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(SettingsService));
-};
+_MeetingFlowConfirmModalComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275MeetingFlowConfirmModalComponent_BaseFactory;
+  return function MeetingFlowConfirmModalComponent_Factory(__ngFactoryType__) {
+    return (\u0275MeetingFlowConfirmModalComponent_BaseFactory || (\u0275MeetingFlowConfirmModalComponent_BaseFactory = \u0275\u0275getInheritedFactory(_MeetingFlowConfirmModalComponent)))(__ngFactoryType__ || _MeetingFlowConfirmModalComponent);
+  };
+})();
 _MeetingFlowConfirmModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MeetingFlowConfirmModalComponent, selectors: [["meeting-flow-confirm-modal"]], inputs: { show_close: "show_close" }, standalone: false, features: [\u0275\u0275ProvidersFeature([SpacePipe]), \u0275\u0275InheritDefinitionFeature], decls: 38, vars: 25, consts: [["chipList", ""], [1, "sticky", "top-0", "z-10", "m-2", "flex", "h-14", "w-[40rem]", "max-w-full", "items-center", "justify-between", "rounded", "border-none", "bg-base-200", "px-4", "py-2"], [1, "text-xl", "font-medium", "capitalize"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], ["diameter", "32", 1, "absolute", "right-2", "top-1/2", "-translate-y-1/2"], [1, "max-w-screen", "grid", "max-h-[65vh]", "w-full", "flex-1", "grid-cols-2", "gap-4", "overflow-auto", "px-4", "py-2"], [1, "mb-2", "flex", "items-center", "space-x-4"], [1, "flex", "items-center", "justify-center", "rounded-full", "border", "border-success", "text-success"], [1, "text-2xl"], [1, "text-xl"], [1, "space-y-1", "pl-10"], [1, "flex", "items-center", "space-x-2"], ["date", ""], [1, "flex", "flex-col", "leading-tight"], ["time", ""], [1, "text-xs", "opacity-30"], [1, "col-span-2"], [1, "relative", "space-y-2", "py-4", "pl-16", "pr-4"], [1, "mt-2", "rounded", "!border-none", "bg-warning", "px-2", "py-1", "text-center", "text-sm", "text-warning-content"], [1, "flex", "items-center", "justify-end", "border-t", "border-base-200", "p-2"], ["attendee-list", "", 1, "pl-10"], ["aria-label", "User selection"], [1, "flex", "items-center"], [1, "mr-2"], [1, "w-full"], [1, "w-ull", "col-span-2"], [1, "flex", "w-full", "flex-col", "space-y-2", "pl-12"], ["order", "", 1, "overflow-hidden", "rounded-xl", "border", "bg-base-100", 3, "border-error", "border-base-300"], ["order", "", 1, "overflow-hidden", "rounded-xl", "border", "bg-base-100"], [1, "flex", "items-center", "space-x-2", "p-3"], [1, "flex", "flex-1", "items-center", "space-x-2"], [1, "text-sm"], [1, "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", "bg-error", "text-error-content", 3, "matTooltip"], [1, "flex-1"], [1, "rounded", "bg-success", "px-2", "py-1", "text-xs", "text-success-content"], [1, "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content"], [1, "flex", "flex-col", "divide-y", "divide-base-100", "bg-base-200"], [1, "flex", "items-center", "space-x-2", "px-3", "py-1", "hover:opacity-90"], [1, "flex", "flex-1", "items-center"], [1, "ml-4", "text-xs", "font-normal", "opacity-60", 3, "matTooltip"], ["request", "", 1, "w-full", "overflow-hidden", "rounded-xl", "border", "bg-base-100", 3, "border-error", "border-base-300"], ["request", "", 1, "w-full", "overflow-hidden", "rounded-xl", "border", "bg-base-100"], [1, "absolute", "left-4", "top-4", "flex", "items-center", "justify-center", "rounded-full", "border", "border-success", "text-2xl", "text-success"], [1, "!mt-0", "text-xl"], [3, "innerHTML"], ["btn", "", "name", "confirm-meeting", "matRipple", "", 1, "w-32", 3, "click"]], template: function MeetingFlowConfirmModalComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "header", 1)(1, "h2", 2);
@@ -15502,9 +15532,7 @@ var MeetingFlowConfirmModalComponent = _MeetingFlowConfirmModalComponent;
             </footer>
         }
     `, providers: [SpacePipe], standalone: false }]
-  }], () => [{ type: EventFormService }, { type: OrganisationService }, { type: SpacePipe }, { type: MatDialogRef, decorators: [{
-    type: Optional
-  }] }, { type: MatDialog }, { type: SettingsService }], { show_close: [{
+  }], null, { show_close: [{
     type: Input
   }] });
 })();
@@ -15798,6 +15826,25 @@ function MeetingFormDetailsComponent_Conditional_0_Template(rf, ctx) {
   }
 }
 var _MeetingFormDetailsComponent = class _MeetingFormDetailsComponent {
+  constructor() {
+    this._settings = inject(SettingsService);
+    this._event_form = inject(EventFormService);
+    this._org = inject(OrganisationService);
+    this.force_time = set(Date.now(), {
+      hours: 6,
+      minutes: 0
+    }).valueOf();
+    this.duration_info = (time) => {
+      const date = this.form.getRawValue().date;
+      if (format(date, "yyyy-MM-dd") !== format(time, "yyyy-MM-dd"))
+        return "";
+      const diff = differenceInMinutes(time, date);
+      return ` (${formatDuration({
+        hours: Math.floor(diff / 60),
+        minutes: diff % 60
+      })})`;
+    };
+  }
   get max_duration() {
     return this._settings.get("app.events.max_duration") || 480;
   }
@@ -15831,28 +15878,9 @@ var _MeetingFormDetailsComponent = class _MeetingFormDetailsComponent {
   get use_24hr() {
     return this._settings.get("app.use_24_hour_time");
   }
-  constructor(_settings, _event_form, _org) {
-    this._settings = _settings;
-    this._event_form = _event_form;
-    this._org = _org;
-    this.force_time = set(Date.now(), {
-      hours: 6,
-      minutes: 0
-    }).valueOf();
-    this.duration_info = (time) => {
-      const date = this.form.getRawValue().date;
-      if (format(date, "yyyy-MM-dd") !== format(time, "yyyy-MM-dd"))
-        return "";
-      const diff = differenceInMinutes(time, date);
-      return ` (${formatDuration({
-        hours: Math.floor(diff / 60),
-        minutes: diff % 60
-      })})`;
-    };
-  }
 };
 _MeetingFormDetailsComponent.\u0275fac = function MeetingFormDetailsComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _MeetingFormDetailsComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(OrganisationService));
+  return new (__ngFactoryType__ || _MeetingFormDetailsComponent)();
 };
 _MeetingFormDetailsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MeetingFormDetailsComponent, selectors: [["meeting-form-details"]], inputs: { form: "form" }, standalone: false, decls: 1, vars: 1, consts: [[3, "formGroup"], [1, "flex", "flex-wrap", "items-center", "sm:space-x-2"], [1, "min-w-[256px]", "flex-1"], ["for", "title"], ["appearance", "outline", 1, "w-full"], ["matInput", "", "name", "title", "formControlName", "title", 3, "placeholder"], [1, "relative", "min-w-[256px]", "flex-1"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "w-full", "flex-col"], ["for", "date"], ["name", "date", "formControlName", "date", 3, "to", "use_24hr", "timezone"], ["formControlName", "all_day", 1, "absolute", "-top-2", "right-2"], ["name", "date", "formControlName", "date", 3, "to", "use_24hr", "timezone", "range"], ["name", "date", "formControlName", "date_end", 3, "from", "to", "use_24hr", "timezone", "range"], [1, "w-1/3", "flex-1"], ["for", "start-time"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "disabled", "use_24hr", "timezone"], ["for", "end-time"], ["name", "end-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "from", "use_24hr", "extra_info_fn", "timezone"], ["name", "end-time", "formControlName", "duration", 3, "time", "max", "use_24hr", "timezone"], ["for", "host"], ["name", "host", "formControlName", "organiser"], ["for", "recurrence"], ["name", "recurrence", "type", "event", "formControlName", "recurrence", 3, "date"], ["formControlName", "update_master"]], template: function MeetingFormDetailsComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -16060,7 +16088,7 @@ var MeetingFormDetailsComponent = _MeetingFormDetailsComponent;
             </div>
         }
     `, standalone: false }]
-  }], () => [{ type: SettingsService }, { type: EventFormService }, { type: OrganisationService }], { form: [{
+  }], null, { form: [{
     type: Input
   }] });
 })();
@@ -16422,55 +16450,17 @@ function MeetingFlowFormComponent_Conditional_5_Template(rf, ctx) {
   }
 }
 var _MeetingFlowFormComponent = class _MeetingFlowFormComponent extends AsyncHandler {
-  get form() {
-    return this._state.form;
-  }
-  get event() {
-    return this._state.event;
-  }
-  get has_assets() {
-    return !!this._settings.get("app.events.has_assets");
-  }
-  get hide_notes() {
-    return !!this._settings.get("app.events.hide_notes");
-  }
-  get hide_attendees() {
-    return !!this._settings.get("app.events.hide_attendees");
-  }
-  get allow_externals() {
-    return this._settings.get("app.events.allow_externals");
-  }
-  get strict_capacity_check() {
-    return this._settings.get("app.events.strict_capacity_check");
-  }
-  get total_capacity() {
-    return this.form.value.resources?.reduce((c, i) => c + i.capacity, 0) || 0;
-  }
-  get allow_multiday() {
-    return this._settings.get("app.events.allow_multiday") || this._state.is_multiday;
-  }
-  get attendee_count() {
-    const user = currentUser();
-    let count = this.form.value.attendees?.length || 0;
-    if (!this.form.value.attendees.find((_) => _.email.toLowerCase() === user.email.toLowerCase())) {
-      count += 1;
-    }
-    return count;
-  }
-  get allow_daily_allday_recurrence() {
-    return this._settings.get("app.events.allow_daily_allday_recurrence");
-  }
-  constructor(_state, _catering, _assets, _settings, _router, _dialog, _bottom_sheet, _org, _idle) {
-    super();
-    this._state = _state;
-    this._catering = _catering;
-    this._assets = _assets;
-    this._settings = _settings;
-    this._router = _router;
-    this._dialog = _dialog;
-    this._bottom_sheet = _bottom_sheet;
-    this._org = _org;
-    this._idle = _idle;
+  constructor() {
+    super(...arguments);
+    this._state = inject(EventFormService);
+    this._catering = inject(CateringOrderStateService);
+    this._assets = inject(AssetStateService);
+    this._settings = inject(SettingsService);
+    this._router = inject(Router);
+    this._dialog = inject(MatDialog);
+    this._bottom_sheet = inject(MatBottomSheet);
+    this._org = inject(OrganisationService);
+    this._idle = inject(UserIdleTimeService);
     this.hide_block = {};
     this.code_filter = new BehaviorSubject("");
     this.invalid_assets = [];
@@ -16599,6 +16589,44 @@ var _MeetingFlowFormComponent = class _MeetingFlowFormComponent extends AsyncHan
       }
     });
   }
+  get form() {
+    return this._state.form;
+  }
+  get event() {
+    return this._state.event;
+  }
+  get has_assets() {
+    return !!this._settings.get("app.events.has_assets");
+  }
+  get hide_notes() {
+    return !!this._settings.get("app.events.hide_notes");
+  }
+  get hide_attendees() {
+    return !!this._settings.get("app.events.hide_attendees");
+  }
+  get allow_externals() {
+    return this._settings.get("app.events.allow_externals");
+  }
+  get strict_capacity_check() {
+    return this._settings.get("app.events.strict_capacity_check");
+  }
+  get total_capacity() {
+    return this.form.value.resources?.reduce((c, i) => c + i.capacity, 0) || 0;
+  }
+  get allow_multiday() {
+    return this._settings.get("app.events.allow_multiday") || this._state.is_multiday;
+  }
+  get attendee_count() {
+    const user = currentUser();
+    let count = this.form.value.attendees?.length || 0;
+    if (!this.form.value.attendees.find((_) => _.email.toLowerCase() === user.email.toLowerCase())) {
+      count += 1;
+    }
+    return count;
+  }
+  get allow_daily_allday_recurrence() {
+    return this._settings.get("app.events.allow_daily_allday_recurrence");
+  }
   _updateValidAssets() {
     this.invalid_assets = [];
     if (!this.event?.id)
@@ -16669,9 +16697,12 @@ var _MeetingFlowFormComponent = class _MeetingFlowFormComponent extends AsyncHan
     });
   }
 };
-_MeetingFlowFormComponent.\u0275fac = function MeetingFlowFormComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _MeetingFlowFormComponent)(\u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(CateringOrderStateService), \u0275\u0275directiveInject(AssetStateService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(MatBottomSheet), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(UserIdleTimeService));
-};
+_MeetingFlowFormComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275MeetingFlowFormComponent_BaseFactory;
+  return function MeetingFlowFormComponent_Factory(__ngFactoryType__) {
+    return (\u0275MeetingFlowFormComponent_BaseFactory || (\u0275MeetingFlowFormComponent_BaseFactory = \u0275\u0275getInheritedFactory(_MeetingFlowFormComponent)))(__ngFactoryType__ || _MeetingFlowFormComponent);
+  };
+})();
 _MeetingFlowFormComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MeetingFlowFormComponent, selectors: [["meeting-flow-form"]], viewQuery: function MeetingFlowFormComponent_Query(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275viewQuery(_c023, 5);
@@ -17130,7 +17161,7 @@ var MeetingFlowFormComponent = _MeetingFlowFormComponent;
             </div>
         </div>
     `, animations: [ANIMATION_SHOW_CONTRACT_EXPAND], standalone: false }]
-  }], () => [{ type: EventFormService }, { type: CateringOrderStateService }, { type: AssetStateService }, { type: SettingsService }, { type: Router }, { type: MatDialog }, { type: MatBottomSheet }, { type: OrganisationService }, { type: UserIdleTimeService }], { _confirm_ref: [{
+  }], null, { _confirm_ref: [{
     type: ViewChild,
     args: ["confirm_ref"]
   }], _input_el: [{
@@ -17139,7 +17170,7 @@ var MeetingFlowFormComponent = _MeetingFlowFormComponent;
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MeetingFlowFormComponent, { className: "MeetingFlowFormComponent", filePath: "apps/workplace/src/app/book/meeting-flow/meeting-flow-form.component.ts", lineNumber: 472 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MeetingFlowFormComponent, { className: "MeetingFlowFormComponent", filePath: "apps/workplace/src/app/book/meeting-flow/meeting-flow-form.component.ts", lineNumber: 466 });
 })();
 
 // apps/workplace/src/app/book/meeting-flow/meeting-flow-success.component.ts
@@ -17238,6 +17269,15 @@ function MeetingFlowSuccessComponent_Conditional_4_Template(rf, ctx) {
   }
 }
 var _MeetingFlowSuccessComponent = class _MeetingFlowSuccessComponent {
+  constructor() {
+    this._event_form = inject(EventFormService);
+    this._org = inject(OrganisationService);
+    this._settings = inject(SettingsService);
+    this._booking_form = inject(BookingFormService);
+    this._router = inject(Router);
+    this.loading = false;
+    this._space_pipe = new SpacePipe(this._org);
+  }
   get allow_desk_booking() {
     return this._settings.get("app.features").includes("desks");
   }
@@ -17252,15 +17292,6 @@ var _MeetingFlowSuccessComponent = class _MeetingFlowSuccessComponent {
   }
   get time_format() {
     return this._settings.time_format;
-  }
-  constructor(_event_form, _org, _settings, _booking_form, _router) {
-    this._event_form = _event_form;
-    this._org = _org;
-    this._settings = _settings;
-    this._booking_form = _booking_form;
-    this._router = _router;
-    this.loading = false;
-    this._space_pipe = new SpacePipe(this._org);
   }
   ngOnInit() {
     this.loading = true;
@@ -17305,7 +17336,7 @@ var _MeetingFlowSuccessComponent = class _MeetingFlowSuccessComponent {
   }
 };
 _MeetingFlowSuccessComponent.\u0275fac = function MeetingFlowSuccessComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _MeetingFlowSuccessComponent)(\u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(Router));
+  return new (__ngFactoryType__ || _MeetingFlowSuccessComponent)();
 };
 _MeetingFlowSuccessComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MeetingFlowSuccessComponent, selectors: [["meeting-flow-success"]], standalone: false, decls: 5, vars: 16, consts: [[1, "absolute", "inset-0", "z-50", "flex", "flex-col", "overflow-auto", "bg-base-100"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-2", "p-8"], [1, "text-2xl", "font-medium"], ["src", "assets/icons/success.svg"], [1, "max-w-[32rem]", "text-center"], [1, "h-4"], ["btn", "", "matRipple", "", 1, "w-48"], [1, "sticky", "bottom-0", "mt-4", "flex", "w-full", "items-center", "justify-center", "border-t", "border-base-200", "bg-base-100", "p-2"], ["btn", "", "name", "meeting-created-continue", "matRipple", "", 1, "w-full", "max-w-[32rem]", 3, "routerLink"], ["btn", "", "matRipple", "", 1, "w-48", 3, "click"]], template: function MeetingFlowSuccessComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -17405,7 +17436,7 @@ var MeetingFlowSuccessComponent = _MeetingFlowSuccessComponent;
             </div>
         }
     `, standalone: false }]
-  }], () => [{ type: EventFormService }, { type: OrganisationService }, { type: SettingsService }, { type: BookingFormService }, { type: Router }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MeetingFlowSuccessComponent, { className: "MeetingFlowSuccessComponent", filePath: "apps/workplace/src/app/book/meeting-flow/meeting-flow-success.component.ts", lineNumber: 101 });
@@ -17428,16 +17459,16 @@ function BookMeetingFlowComponent_Case_3_Template(rf, ctx) {
   }
 }
 var _BookMeetingFlowComponent = class _BookMeetingFlowComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._state = inject(EventFormService);
+    this._route = inject(ActivatedRoute);
+  }
   get view() {
     return this._state.view;
   }
   get last_success() {
     return this._state.last_success;
-  }
-  constructor(_state, _route) {
-    super();
-    this._state = _state;
-    this._route = _route;
   }
   ngOnInit() {
     this._state.loadForm();
@@ -17452,9 +17483,12 @@ var _BookMeetingFlowComponent = class _BookMeetingFlowComponent extends AsyncHan
     }));
   }
 };
-_BookMeetingFlowComponent.\u0275fac = function BookMeetingFlowComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _BookMeetingFlowComponent)(\u0275\u0275directiveInject(EventFormService), \u0275\u0275directiveInject(ActivatedRoute));
-};
+_BookMeetingFlowComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275BookMeetingFlowComponent_BaseFactory;
+  return function BookMeetingFlowComponent_Factory(__ngFactoryType__) {
+    return (\u0275BookMeetingFlowComponent_BaseFactory || (\u0275BookMeetingFlowComponent_BaseFactory = \u0275\u0275getInheritedFactory(_BookMeetingFlowComponent)))(__ngFactoryType__ || _BookMeetingFlowComponent);
+  };
+})();
 _BookMeetingFlowComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookMeetingFlowComponent, selectors: [["placeos-book-meeting-flow"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 4, vars: 1, consts: [[1, "z-50", "h-full", "w-full", "bg-base-100"]], template: function BookMeetingFlowComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0);
@@ -17486,7 +17520,7 @@ var BookMeetingFlowComponent = _BookMeetingFlowComponent;
             }
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;8f663144e307d97d7c6361d75534b712825c70421a65c587eccbcb19333fd199;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/book/meeting-flow.component.ts */\n:host {\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=meeting-flow.component.css.map */\n"] }]
-  }], () => [{ type: EventFormService }, { type: ActivatedRoute }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookMeetingFlowComponent, { className: "BookMeetingFlowComponent", filePath: "apps/workplace/src/app/book/meeting-flow.component.ts", lineNumber: 33 });
@@ -17582,6 +17616,24 @@ function NewParkingFlowConfirmComponent_Conditional_30_Template(rf, ctx) {
   }
 }
 var _NewParkingFlowConfirmComponent = class _NewParkingFlowConfirmComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._state = inject(BookingFormService);
+    this._org = inject(OrganisationService);
+    this._sheet_ref = inject(MatBottomSheetRef, { optional: true });
+    this._settings = inject(SettingsService);
+    this.show_close = false;
+    this.loading = this._state.loading;
+    this.postForm = () => __async(this, null, function* () {
+      const r = yield this._state.postForm().catch((_) => {
+        notifyError(`Unable to complete booking. ${_}`);
+      });
+      if (!r)
+        return;
+      this.dismiss(true);
+    });
+    this.dismiss = (e2) => this._sheet_ref?.dismiss(e2);
+  }
   get time_format() {
     return this._settings.time_format;
   }
@@ -17602,28 +17654,13 @@ var _NewParkingFlowConfirmComponent = class _NewParkingFlowConfirmComponent exte
     const level = this._org.levels.find((l) => l.id === this.booking_asset?.zone?.id);
     return `${level?.display_name || level?.name}${building ? "," : ""} ${building?.address || building?.display_name || building?.name || ""}`;
   }
-  constructor(_state, _org, _sheet_ref, _settings) {
-    super();
-    this._state = _state;
-    this._org = _org;
-    this._sheet_ref = _sheet_ref;
-    this._settings = _settings;
-    this.show_close = false;
-    this.loading = this._state.loading;
-    this.postForm = () => __async(this, null, function* () {
-      const r = yield this._state.postForm().catch((_) => {
-        notifyError(`Unable to complete booking. ${_}`);
-      });
-      if (!r)
-        return;
-      this.dismiss(true);
-    });
-    this.dismiss = (e2) => this._sheet_ref?.dismiss(e2);
-  }
 };
-_NewParkingFlowConfirmComponent.\u0275fac = function NewParkingFlowConfirmComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _NewParkingFlowConfirmComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(MatBottomSheetRef, 8), \u0275\u0275directiveInject(SettingsService));
-};
+_NewParkingFlowConfirmComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275NewParkingFlowConfirmComponent_BaseFactory;
+  return function NewParkingFlowConfirmComponent_Factory(__ngFactoryType__) {
+    return (\u0275NewParkingFlowConfirmComponent_BaseFactory || (\u0275NewParkingFlowConfirmComponent_BaseFactory = \u0275\u0275getInheritedFactory(_NewParkingFlowConfirmComponent)))(__ngFactoryType__ || _NewParkingFlowConfirmComponent);
+  };
+})();
 _NewParkingFlowConfirmComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _NewParkingFlowConfirmComponent, selectors: [["parking-flow-confirm"]], inputs: { show_close: "show_close" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 32, vars: 25, consts: [[1, "sticky", "top-2", "z-10", "mx-auto", "mb-4", "flex", "h-14", "w-full", "max-w-[calc(100%-1rem)]", "items-center", "justify-between", "rounded", "border-none", "bg-base-200", "px-4", "py-2"], [1, "m-0", "flex-1", "text-xl", "font-medium", "capitalize"], [1, ""], ["diameter", "32"], ["icon", "", "name", "close-locker-confirm", "matRipple", ""], ["period", "", 1, "flex", "space-x-1", "px-2", "py-4", "text-base"], [1, "text-2xl", "text-success"], ["details", "", 1, "space-y-2", "text-base"], [1, "text-xl"], [1, "flex", "items-center", "space-x-2"], ["date", ""], ["time", ""], ["resource", "", 1, "flex", "space-x-1", "border-t", "px-2", "py-4", "text-base"], [1, "mt-4", "w-full", "border-t", "border-base-200", "p-2"], ["confirm", "", "btn", "", "matRipple", "", 1, "w-full"], ["icon", "", "name", "close-locker-confirm", "matRipple", "", 3, "click"], [1, "text-2xl"], ["features", "", 1, "flex", "items-center", "space-x-2"], ["confirm", "", "btn", "", "matRipple", "", 1, "w-full", 3, "click"]], template: function NewParkingFlowConfirmComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "header", 0)(1, "h2", 1);
@@ -17773,9 +17810,7 @@ var NewParkingFlowConfirmComponent = _NewParkingFlowConfirmComponent;
             }
         </footer>
     `, standalone: false, styles: ["/* angular:styles/component:css;d8e0e1826953817bc38718c2e6f9d8a20c56c3d3f17bf3ea7d0dcbb90967a675;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/book/parking-flow/parking-flow-confirm.component.ts */\nsection > icon {\n  font-size: 1.5rem;\n  margin-top: 0.3rem;\n}\nh3 {\n  font-size: 1.25rem;\n  font-weight: medium;\n  margin: 0.5rem 0;\n}\n/*# sourceMappingURL=parking-flow-confirm.component.css.map */\n"] }]
-  }], () => [{ type: BookingFormService }, { type: OrganisationService }, { type: MatBottomSheetRef, decorators: [{
-    type: Optional
-  }] }, { type: SettingsService }], { show_close: [{
+  }], null, { show_close: [{
     type: Input
   }] });
 })();
@@ -17958,6 +17993,14 @@ function ParkingFormDetailsComponent_Conditional_0_Template(rf, ctx) {
   }
 }
 var _ParkingFormDetailsComponent = class _ParkingFormDetailsComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._settings = inject(SettingsService);
+    this._org = inject(OrganisationService);
+    this.building = this._org.active_building;
+    this.building_list = this._org.building_list;
+    this.setBuilding = (bld) => this._org.building = bld;
+  }
   get end_date() {
     return endOfDay(addDays(Date.now(), this._settings.get("app.parking.available_period") || 7));
   }
@@ -17976,18 +18019,13 @@ var _ParkingFormDetailsComponent = class _ParkingFormDetailsComponent extends As
   get timezone() {
     return this._settings.get("app.bookings.use_building_timezone") || this._settings.get("app.parking.use_building_timezone") ? this._org.building.timezone : "";
   }
-  constructor(_settings, _org) {
-    super();
-    this._settings = _settings;
-    this._org = _org;
-    this.building = this._org.active_building;
-    this.building_list = this._org.building_list;
-    this.setBuilding = (bld) => this._org.building = bld;
-  }
 };
-_ParkingFormDetailsComponent.\u0275fac = function ParkingFormDetailsComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ParkingFormDetailsComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
-};
+_ParkingFormDetailsComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275ParkingFormDetailsComponent_BaseFactory;
+  return function ParkingFormDetailsComponent_Factory(__ngFactoryType__) {
+    return (\u0275ParkingFormDetailsComponent_BaseFactory || (\u0275ParkingFormDetailsComponent_BaseFactory = \u0275\u0275getInheritedFactory(_ParkingFormDetailsComponent)))(__ngFactoryType__ || _ParkingFormDetailsComponent);
+  };
+})();
 _ParkingFormDetailsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ParkingFormDetailsComponent, selectors: [["parking-form-details"]], inputs: { form: "form" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 1, vars: 1, consts: [[3, "formGroup"], [1, "flex", "flex-wrap", "items-center", "sm:space-x-2"], [1, "min-w-[256px]", "flex-1"], ["for", "title"], ["appearance", "outline", 1, "w-full"], [3, "ngModelChange", "ngModel", "ngModelOptions"], [3, "value"], ["matInput", "", "name", "title", "formControlName", "title", "placeholder", "e.g. Team Meeting"], [1, "relative", "min-w-[256px]", "flex-1"], ["for", "date"], ["name", "date", "formControlName", "date", 3, "to", "timezone"], ["formControlName", "all_day", 1, "absolute", "-top-2", "right-0"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "w-full", "flex-col"], [1, "flex", "flex-col"], ["for", "plate-number"], ["matInput", "", "name", "plate-number", "formControlName", "plate_number", 3, "placeholder"], [1, "w-1/3", "flex-1"], ["for", "start-time"], ["name", "start-time", 3, "ngModelChange", "ngModel", "ngModelOptions", "use_24hr", "disabled", "timezone"], [1, "relative", "w-1/3", "flex-1"], ["for", "end-time"], ["name", "end-time", "formControlName", "duration", 3, "time", "max", "use_24hr", "timezone"], ["for", "host"], ["name", "host", "formControlName", "organiser"]], template: function ParkingFormDetailsComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, ParkingFormDetailsComponent_Conditional_0_Template, 50, 37, "div", 0);
@@ -18134,7 +18172,7 @@ var ParkingFormDetailsComponent = _ParkingFormDetailsComponent;
             </div>
         }
     `, standalone: false }]
-  }], () => [{ type: SettingsService }, { type: OrganisationService }], { form: [{
+  }], null, { form: [{
     type: Input
   }] });
 })();
@@ -18144,16 +18182,13 @@ var ParkingFormDetailsComponent = _ParkingFormDetailsComponent;
 
 // apps/workplace/src/app/book/parking-flow/parking-flow-form.component.ts
 var _ParkingFlowFormComponent = class _ParkingFlowFormComponent extends AsyncHandler {
-  get form() {
-    return this._state.form;
-  }
-  constructor(_state, _settings, _router, _bottom_sheet, _parking) {
-    super();
-    this._state = _state;
-    this._settings = _settings;
-    this._router = _router;
-    this._bottom_sheet = _bottom_sheet;
-    this._parking = _parking;
+  constructor() {
+    super(...arguments);
+    this._state = inject(BookingFormService);
+    this._settings = inject(SettingsService);
+    this._router = inject(Router);
+    this._bottom_sheet = inject(MatBottomSheet);
+    this._parking = inject(ParkingService);
     this.hide_block = {};
     this.clearForm = () => this._state.resetForm();
     this.viewConfirm = () => {
@@ -18188,6 +18223,9 @@ var _ParkingFlowFormComponent = class _ParkingFlowFormComponent extends AsyncHan
       });
     };
   }
+  get form() {
+    return this._state.form;
+  }
   ngOnInit() {
     return __async(this, null, function* () {
       this._state.setOptions({ type: "parking" });
@@ -18199,9 +18237,12 @@ var _ParkingFlowFormComponent = class _ParkingFlowFormComponent extends AsyncHan
     });
   }
 };
-_ParkingFlowFormComponent.\u0275fac = function ParkingFlowFormComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ParkingFlowFormComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(MatBottomSheet), \u0275\u0275directiveInject(ParkingService));
-};
+_ParkingFlowFormComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275ParkingFlowFormComponent_BaseFactory;
+  return function ParkingFlowFormComponent_Factory(__ngFactoryType__) {
+    return (\u0275ParkingFlowFormComponent_BaseFactory || (\u0275ParkingFlowFormComponent_BaseFactory = \u0275\u0275getInheritedFactory(_ParkingFlowFormComponent)))(__ngFactoryType__ || _ParkingFlowFormComponent);
+  };
+})();
 _ParkingFlowFormComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ParkingFlowFormComponent, selectors: [["parking-flow-form"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 39, vars: 21, consts: [[1, "h-full", "w-full", "overflow-auto", "bg-base-200"], [1, "mx-auto", "w-[48rem]", "max-w-full", "border", "border-base-200", "bg-base-100", "sm:my-4"], [1, "w-full", "border-b", "border-base-200", "p-4", "text-2xl", "font-medium", "sm:px-16", "sm:py-4"], [1, "space-y-2", "divide-y", "divide-base-200", "p-0", "sm:px-16", "sm:py-4", 3, "formGroup"], [1, "p-2"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", "bg-base-200"], [1, "text-xl"], [1, "w-px", "flex-1"], ["icon", "", "matRipple", "", 3, "click"], [1, "overflow-hidden"], [1, "mt-4", 3, "form"], ["formControlName", "resources"], [1, "flex", "flex-col", "items-center", "p-2", "sm:flex-row", "sm:space-x-2"], ["btn", "", "matRipple", "", "confirm", "", 1, "mb-2", "w-full", "sm:mb-0", "sm:w-auto", 3, "click"], ["btn", "", "matRipple", "", "clear-form", "", 1, "inverse", "w-full", "sm:w-auto", 3, "click"]], template: function ParkingFlowFormComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "h2", 2);
@@ -18403,7 +18444,7 @@ var ParkingFlowFormComponent = _ParkingFlowFormComponent;
             </div>
         </div>
     `, animations: [ANIMATION_SHOW_CONTRACT_EXPAND], standalone: false }]
-  }], () => [{ type: BookingFormService }, { type: SettingsService }, { type: Router }, { type: MatBottomSheet }, { type: ParkingService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ParkingFlowFormComponent, { className: "ParkingFlowFormComponent", filePath: "apps/workplace/src/app/book/parking-flow/parking-flow-form.component.ts", lineNumber: 138 });
@@ -18455,6 +18496,14 @@ function ParkingFlowSuccessComponent_Conditional_10_Template(rf, ctx) {
   }
 }
 var _ParkingFlowSuccessComponent = class _ParkingFlowSuccessComponent {
+  constructor() {
+    this._state = inject(BookingFormService);
+    this._settings = inject(SettingsService);
+    this._org = inject(OrganisationService);
+    this.outlook_link = "";
+    this.google_link = "";
+    this.ical_link = "";
+  }
   get location() {
     if (!this.last_event)
       return "Unknown";
@@ -18471,14 +18520,6 @@ var _ParkingFlowSuccessComponent = class _ParkingFlowSuccessComponent {
   get show_links() {
     return this._settings.get("app.parking.show_calendar_links");
   }
-  constructor(_state, _settings, _org) {
-    this._state = _state;
-    this._settings = _settings;
-    this._org = _org;
-    this.outlook_link = "";
-    this.google_link = "";
-    this.ical_link = "";
-  }
   ngOnInit() {
     const event = __spreadProps(__spreadValues({}, this.last_event), {
       location: `${this.location}, ${this.last_event.asset_name || ""}`
@@ -18489,7 +18530,7 @@ var _ParkingFlowSuccessComponent = class _ParkingFlowSuccessComponent {
   }
 };
 _ParkingFlowSuccessComponent.\u0275fac = function ParkingFlowSuccessComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ParkingFlowSuccessComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
+  return new (__ngFactoryType__ || _ParkingFlowSuccessComponent)();
 };
 _ParkingFlowSuccessComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ParkingFlowSuccessComponent, selectors: [["parking-flow-success"]], standalone: false, decls: 15, vars: 24, consts: [[1, "absolute", "inset-0", "z-50", "flex", "flex-col", "overflow-auto", "bg-base-100"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-2", "p-8"], [1, "text-2xl", "font-medium"], [1, "max-w-[32rem]", "text-center"], ["src", "assets/icons/parking-success.svg"], [1, "relative", "flex", "flex-col", "items-center", "space-y-4", "p-4"], [1, "sticky", "bottom-0", "mt-4", "flex", "w-full", "items-center", "justify-center", "border-t", "border-base-200", "bg-base-100", "p-2"], ["btn", "", "matRipple", "", 1, "w-full", "max-w-[32rem]", 3, "routerLink"], ["btn", "", "matRipple", "", "name", "desk-outlook-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/outlook.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-google-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], ["src", "assets/icons/gcal.svg", 1, "w-6"], ["btn", "", "matRipple", "", "name", "desk-ical-link", "target", "_blank", "rel", "noopener noreferer", 1, "inverse", "flex", "w-64", "items-center", "space-x-2", "rounded", "p-2", "pr-4", 3, "href"], [1, "text-xl"]], template: function ParkingFlowSuccessComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -18614,7 +18655,7 @@ var ParkingFlowSuccessComponent = _ParkingFlowSuccessComponent;
             </footer>
         </div>
     `, standalone: false }]
-  }], () => [{ type: BookingFormService }, { type: SettingsService }, { type: OrganisationService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ParkingFlowSuccessComponent, { className: "ParkingFlowSuccessComponent", filePath: "apps/workplace/src/app/book/parking-flow/parking-flow-success.component.ts", lineNumber: 105 });
@@ -18698,20 +18739,20 @@ function NewParkingFlowComponent_Conditional_2_Template(rf, ctx) {
   }
 }
 var _NewParkingFlowComponent = class _NewParkingFlowComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._state = inject(BookingFormService);
+    this._route = inject(ActivatedRoute);
+    this._parking = inject(ParkingService);
+    this.deny_parking_access = this._parking.deny_parking_access;
+    this.assigned_space = this._parking.assigned_space;
+    this.has_booking = this._parking.has_booking;
+  }
   get view() {
     return this._state.view;
   }
   get last_success() {
     return this._state.last_success;
-  }
-  constructor(_state, _route, _parking) {
-    super();
-    this._state = _state;
-    this._route = _route;
-    this._parking = _parking;
-    this.deny_parking_access = this._parking.deny_parking_access;
-    this.assigned_space = this._parking.assigned_space;
-    this.has_booking = this._parking.has_booking;
   }
   ngOnInit() {
     this._state.loadForm();
@@ -18729,9 +18770,12 @@ var _NewParkingFlowComponent = class _NewParkingFlowComponent extends AsyncHandl
     }));
   }
 };
-_NewParkingFlowComponent.\u0275fac = function NewParkingFlowComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _NewParkingFlowComponent)(\u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(ParkingService));
-};
+_NewParkingFlowComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275NewParkingFlowComponent_BaseFactory;
+  return function NewParkingFlowComponent_Factory(__ngFactoryType__) {
+    return (\u0275NewParkingFlowComponent_BaseFactory || (\u0275NewParkingFlowComponent_BaseFactory = \u0275\u0275getInheritedFactory(_NewParkingFlowComponent)))(__ngFactoryType__ || _NewParkingFlowComponent);
+  };
+})();
 _NewParkingFlowComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _NewParkingFlowComponent, selectors: [["placeos-parking-flow"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 3, vars: 3, consts: [[1, "z-50", "flex", "h-full", "w-full", "flex-col", "items-center", "justify-center", "space-y-4", "bg-base-100"], [1, "z-50", "h-full", "w-full", "bg-base-100"], ["src", "assets/icons/parking-success.svg", 1, "h-64", "w-64"], ["btn", "", "matRipple", "", 1, "w-48", 3, "routerLink"], ["src", "assets/icons/permission-none.svg", 1, "h-64", "w-64"]], template: function NewParkingFlowComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, NewParkingFlowComponent_Conditional_0_Template, 4, 5);
@@ -18799,7 +18843,7 @@ var NewParkingFlowComponent = _NewParkingFlowComponent;
             </div>
         }
     `, standalone: false, styles: ["/* angular:styles/component:css;8f663144e307d97d7c6361d75534b712825c70421a65c587eccbcb19333fd199;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/book/parking-flow.component.ts */\n:host {\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=parking-flow.component.css.map */\n"] }]
-  }], () => [{ type: BookingFormService }, { type: ActivatedRoute }, { type: ParkingService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewParkingFlowComponent, { className: "NewParkingFlowComponent", filePath: "apps/workplace/src/app/book/parking-flow.component.ts", lineNumber: 71 });
@@ -18807,15 +18851,15 @@ var NewParkingFlowComponent = _NewParkingFlowComponent;
 
 // apps/workplace/src/app/book/visitor-flow.component.ts
 var _VisitorFlowComponent = class _VisitorFlowComponent {
-  constructor(_router) {
-    this._router = _router;
+  constructor() {
+    this._router = inject(Router);
   }
   onDone() {
     this._router.navigate(["/"]);
   }
 };
 _VisitorFlowComponent.\u0275fac = function VisitorFlowComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _VisitorFlowComponent)(\u0275\u0275directiveInject(Router));
+  return new (__ngFactoryType__ || _VisitorFlowComponent)();
 };
 _VisitorFlowComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VisitorFlowComponent, selectors: [["placeos-book-space-flow"]], standalone: false, decls: 3, vars: 0, consts: [[1, "h-full", "w-full", "overflow-auto", "bg-base-200"], [1, "mx-auto", "h-full", "w-full", "max-w-[48rem]", "overflow-hidden", "border", "border-base-200", "bg-base-100", "shadow", "sm:my-4", "sm:h-auto"], [3, "done"]], template: function VisitorFlowComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -18839,7 +18883,7 @@ var VisitorFlowComponent = _VisitorFlowComponent;
             </div>
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;f26b881f8eefd87319c7388ff7bb3cecb37d07a0db8d3a808d3cfede99235935;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/book/visitor-flow.component.ts */\n:host {\n  position: relative;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=visitor-flow.component.css.map */\n"] }]
-  }], () => [{ type: Router }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(VisitorFlowComponent, { className: "VisitorFlowComponent", filePath: "apps/workplace/src/app/book/visitor-flow.component.ts", lineNumber: 26 });
@@ -18941,4 +18985,4 @@ var BookModule = _BookModule;
 export {
   BookModule
 };
-//# sourceMappingURL=book.module-NJZ7XUYO.js.map
+//# sourceMappingURL=book.module-4TRE53OZ.js.map

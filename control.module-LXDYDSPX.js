@@ -28,6 +28,7 @@ import {
   TopbarComponent,
   combineLatest,
   filter,
+  inject,
   map,
   setClassMetadata,
   startWith,
@@ -41,11 +42,11 @@ import {
   ɵɵdefineComponent,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
-  ɵɵdirectiveInject,
   ɵɵelement,
   ɵɵelementEnd,
   ɵɵelementStart,
   ɵɵgetCurrentView,
+  ɵɵgetInheritedFactory,
   ɵɵlistener,
   ɵɵnextContext,
   ɵɵpipe,
@@ -64,7 +65,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-CCHNTUCX.js";
+} from "./chunk-CGLZLVCS.js";
 import "./chunk-4MWRP73S.js";
 
 // apps/workplace/src/app/control/list-item.component.ts
@@ -118,6 +119,10 @@ function ControlSpaceListItemComponent_Conditional_0_Template(rf, ctx) {
   }
 }
 var _ControlSpaceListItemComponent = class _ControlSpaceListItemComponent {
+  constructor() {
+    this._settings = inject(SettingsService);
+    this._org = inject(OrganisationService);
+  }
   get show_image() {
     return this._settings.get("app.spaces.show_images");
   }
@@ -133,13 +138,9 @@ var _ControlSpaceListItemComponent = class _ControlSpaceListItemComponent {
     const bld = this._org.buildings.find((building) => building.id === level.parent_id);
     return `${bld ? (bld.display_name || bld.name) + ", " : ""}${level?.display_name || level?.name || "<No Level>"}`;
   }
-  constructor(_settings, _org) {
-    this._settings = _settings;
-    this._org = _org;
-  }
 };
 _ControlSpaceListItemComponent.\u0275fac = function ControlSpaceListItemComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ControlSpaceListItemComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
+  return new (__ngFactoryType__ || _ControlSpaceListItemComponent)();
 };
 _ControlSpaceListItemComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ControlSpaceListItemComponent, selectors: [["a-control-space-list-item"]], inputs: { space: "space" }, standalone: false, decls: 1, vars: 1, consts: [[1, "mx-auto", "mb-2", "flex", "max-w-[40rem]", "flex-wrap", "items-center", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-100", "p-2", "pl-4", "hover:border-info", "sm:space-x-4", 3, "with-image"], [1, "mx-auto", "mb-2", "flex", "max-w-[40rem]", "flex-wrap", "items-center", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-100", "p-2", "pl-4", "hover:border-info", "sm:space-x-4"], [1, "flex", "flex-1", "flex-col"], [1, "text-xl"], [1, "flex", "w-full", "items-center", "text-sm"], [1, "flex-1"], [1, "flex", "items-center", "space-x-2", "text-lg"], [1, "text-2xl"], [1, "mt-4", "flex", "w-full", "items-center", "space-x-2", "sm:mt-0", "sm:w-auto", "sm:flex-col", "sm:space-x-0", "sm:space-y-2"], ["btn", "", "matRipple", "", "control", "", 1, "w-32", "flex-1", "sm:flex-none", 3, "href"], ["btn", "", "matRipple", "", "locate", "", 1, "inverse", "w-32", "flex-1", "sm:flex-none", 3, "routerLink", "queryParams"]], template: function ControlSpaceListItemComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -199,7 +200,7 @@ var ControlSpaceListItemComponent = _ControlSpaceListItemComponent;
             </div>
         }
     `, standalone: false }]
-  }], () => [{ type: SettingsService }, { type: OrganisationService }], { space: [{
+  }], null, { space: [{
     type: Input
   }] });
 })();
@@ -255,10 +256,10 @@ function ControlSpaceListComponent_Conditional_9_Template(rf, ctx) {
   }
 }
 var _ControlSpaceListComponent = class _ControlSpaceListComponent extends AsyncHandler {
-  constructor(_spaces, _org) {
-    super();
-    this._spaces = _spaces;
-    this._org = _org;
+  constructor() {
+    super(...arguments);
+    this._spaces = inject(SpacesService);
+    this._org = inject(OrganisationService);
     this.search = new BehaviorSubject("");
     this.space_list = combineLatest([
       this._org.active_building,
@@ -293,9 +294,12 @@ var _ControlSpaceListComponent = class _ControlSpaceListComponent extends AsyncH
     return bld_a_name.localeCompare(bld_b_name) || level_a_name.localeCompare(level_b_name) || space_a_name.localeCompare(space_b_name);
   }
 };
-_ControlSpaceListComponent.\u0275fac = function ControlSpaceListComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ControlSpaceListComponent)(\u0275\u0275directiveInject(SpacesService), \u0275\u0275directiveInject(OrganisationService));
-};
+_ControlSpaceListComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275ControlSpaceListComponent_BaseFactory;
+  return function ControlSpaceListComponent_Factory(__ngFactoryType__) {
+    return (\u0275ControlSpaceListComponent_BaseFactory || (\u0275ControlSpaceListComponent_BaseFactory = \u0275\u0275getInheritedFactory(_ControlSpaceListComponent)))(__ngFactoryType__ || _ControlSpaceListComponent);
+  };
+})();
 _ControlSpaceListComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ControlSpaceListComponent, selectors: [["a-control-space-list"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 10, vars: 6, consts: [[1, "flex", "w-full", "items-center", "justify-center", "border-b", "border-base-300", "bg-base-100", "p-2"], ["overlay", "", "appearance", "outline", 1, "h-12", "rounded"], ["matPrefix", "", 1, "text-xl"], ["matInput", "", "placeholder", "Search...", 3, "ngModelChange", "ngModel"], ["matSuffix", "", 1, "top-2", 3, "diameter"], [1, "flex", "w-full", "flex-1", "flex-col", "overflow-auto", "p-4"], [1, "flex", "flex-col", "items-center", "space-y-4", "p-8", "opacity-30"], [3, "space"], [1, "text-6xl"]], template: function ControlSpaceListComponent_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -372,7 +376,7 @@ var ControlSpaceListComponent = _ControlSpaceListComponent;
             </div>
         }
     `, standalone: false, styles: ["/* angular:styles/component:css;72efec7db9e4775fcedb0dcf62af53bcc009951792b869c9087285830ca9607e;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/control/space-list.component.ts */\n:host {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\nmat-form-field {\n  width: 48rem;\n  max-width: calc(100% - 2rem);\n}\n/*# sourceMappingURL=space-list.component.css.map */\n"] }]
-  }], () => [{ type: SpacesService }, { type: OrganisationService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ControlSpaceListComponent, { className: "ControlSpaceListComponent", filePath: "apps/workplace/src/app/control/space-list.component.ts", lineNumber: 71 });
@@ -381,15 +385,15 @@ var ControlSpaceListComponent = _ControlSpaceListComponent;
 // apps/workplace/src/app/control/control.component.ts
 var _c02 = ["app-control", ""];
 var _ControlComponent = class _ControlComponent {
-  constructor(_settings) {
-    this._settings = _settings;
+  constructor() {
+    this._settings = inject(SettingsService);
   }
   ngOnInit() {
     this._settings.title = "Control";
   }
 };
 _ControlComponent.\u0275fac = function ControlComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ControlComponent)(\u0275\u0275directiveInject(SettingsService));
+  return new (__ngFactoryType__ || _ControlComponent)();
 };
 _ControlComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ControlComponent, selectors: [["", "app-control", ""]], standalone: false, attrs: _c02, decls: 5, vars: 0, consts: [[1, "flex", "h-1/2", "flex-1", "flex-col-reverse", "sm:flex-row"], [1, "relative", "z-0", "flex", "h-1/2", "flex-1", "flex-col", "overflow-hidden", "sm:h-auto"]], template: function ControlComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -405,7 +409,7 @@ var ControlComponent = _ControlComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ControlComponent, [{
     type: Component,
     args: [{ selector: "[app-control]", template: `
-        <topbar></topbar>
+        <topbar />
         <div class="flex h-1/2 flex-1 flex-col-reverse sm:flex-row">
             <main
                 class="relative z-0 flex h-1/2 flex-1 flex-col overflow-hidden sm:h-auto"
@@ -413,9 +417,9 @@ var ControlComponent = _ControlComponent;
                 <a-control-space-list></a-control-space-list>
             </main>
         </div>
-        <footer-menu></footer-menu>
+        <footer-menu />
     `, standalone: false, styles: ["/* angular:styles/component:css;5d6460723ad27e35d5af25e4c81c6e701df8a06f6f8a8f5e09050e089d59691a;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/control/control.component.ts */\n:host {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n  background: #f0f0f0;\n}\n/*# sourceMappingURL=control.component.css.map */\n"] }]
-  }], () => [{ type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ControlComponent, { className: "ControlComponent", filePath: "apps/workplace/src/app/control/control.component.ts", lineNumber: 30 });
@@ -457,4 +461,4 @@ var ControlModule = _ControlModule;
 export {
   ControlModule
 };
-//# sourceMappingURL=control.module-YCXW6O3I.js.map
+//# sourceMappingURL=control.module-LXDYDSPX.js.map

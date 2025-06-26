@@ -3,9 +3,9 @@ import {
   BehaviorSubject,
   Booking,
   CalendarEvent,
-  Ea,
   Injectable,
   MatDialog,
+  Oa,
   OrganisationService,
   ParkingService,
   SettingsService,
@@ -27,6 +27,7 @@ import {
   flatten,
   format,
   getUnixTime,
+  inject,
   interval,
   isAfter,
   isBefore,
@@ -51,9 +52,8 @@ import {
   switchMap,
   tap,
   unique,
-  ɵɵdefineInjectable,
-  ɵɵinject
-} from "./chunk-CCHNTUCX.js";
+  ɵɵdefineInjectable
+} from "./chunk-CGLZLVCS.js";
 import {
   __async,
   __spreadProps,
@@ -71,12 +71,12 @@ var _ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
   get offset_weekday() {
     return this._settings.get("app.week_start") || 0;
   }
-  constructor(_settings, _org, _dialog, _parking) {
+  constructor() {
     super();
-    this._settings = _settings;
-    this._org = _org;
-    this._dialog = _dialog;
-    this._parking = _parking;
+    this._settings = inject(SettingsService);
+    this._org = inject(OrganisationService);
+    this._dialog = inject(MatDialog);
+    this._parking = inject(ParkingService);
     this._poll = new BehaviorSubject(0);
     this._poll_type = new BehaviorSubject("api");
     this._loading = new BehaviorSubject(false);
@@ -108,7 +108,7 @@ var _ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
       switchMap((list) => {
         this._loading.next(false);
         return combineLatest((list || []).map((space) => {
-          const binding = Ea(space.id, "Bookings").binding("bookings");
+          const binding = Oa(space.id, "Bookings").binding("bookings");
           const obs = binding.listen().pipe(map((event_list) => (event_list || []).map((i) => new CalendarEvent(__spreadProps(__spreadValues({}, i), {
             resources: i.attendees.filter((_) => _.email === space.email || _.resource),
             system: space
@@ -385,7 +385,7 @@ var _ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
   }
 };
 _ScheduleStateService.\u0275fac = function ScheduleStateService_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ScheduleStateService)(\u0275\u0275inject(SettingsService), \u0275\u0275inject(OrganisationService), \u0275\u0275inject(MatDialog), \u0275\u0275inject(ParkingService));
+  return new (__ngFactoryType__ || _ScheduleStateService)();
 };
 _ScheduleStateService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ScheduleStateService, factory: _ScheduleStateService.\u0275fac, providedIn: "root" });
 var ScheduleStateService = _ScheduleStateService;
@@ -395,10 +395,10 @@ var ScheduleStateService = _ScheduleStateService;
     args: [{
       providedIn: "root"
     }]
-  }], () => [{ type: SettingsService }, { type: OrganisationService }, { type: MatDialog }, { type: ParkingService }], null);
+  }], () => [], null);
 })();
 
 export {
   ScheduleStateService
 };
-//# sourceMappingURL=chunk-2Y7I4NWC.js.map
+//# sourceMappingURL=chunk-5XQ4DZY6.js.map
