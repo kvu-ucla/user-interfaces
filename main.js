@@ -26,9 +26,9 @@ import {
   ENTER,
   ElementRef,
   ErrorHandler,
-  Et,
   GlobalBannerComponent,
   GlobalLoadingComponent,
+  Go,
   GoogleAnalyticsService,
   HotkeysService,
   HttpErrorResponse,
@@ -59,11 +59,12 @@ import {
   NoopAnimationPlayer,
   Observable,
   OrganisationService,
+  Ot,
   OverlayConfig,
   OverlayModule,
   Platform,
   PortalModule,
-  Qt2 as Qt,
+  Qt,
   RedirectComponent,
   RendererFactory2,
   ResolveEnd,
@@ -81,7 +82,6 @@ import {
   VERSION,
   ViewChild,
   ViewEncapsulation,
-  Xo,
   Xt,
   Y,
   Yt,
@@ -110,18 +110,18 @@ import {
   formatRuntimeError,
   generateMockSpace,
   getUnixTime,
-  gs,
   hasNewVersion,
   hn,
   inject,
   isBefore,
   isMobileSafari,
-  ka,
   lastValueFrom,
   ln,
   log,
   makeEnvironmentProviders,
   map,
+  nextValueFrom,
+  nn,
   no,
   notifySuccess,
   of,
@@ -135,7 +135,6 @@ import {
   randomString,
   registerLocaleData,
   requestScreenWakeLock,
-  rn,
   sequence,
   set,
   setAppName,
@@ -157,6 +156,8 @@ import {
   timePeriodsIntersect,
   unique,
   withInterceptorsFromDi,
+  xa,
+  ys,
   ɵPRE_STYLE,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
@@ -187,7 +188,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-GVI6AX5J.js";
+} from "./chunk-PA2AHTDC.js";
 
 // node_modules/@angular/animations/fesm2022/util-CPU6TNml.mjs
 var LINE_START = "\n - ";
@@ -7058,7 +7059,7 @@ function registerMocks4() {
         ];
       }
       MOCK_EVENTS.push(new_event);
-      const system = Xo(new_event.system?.id);
+      const system = Go(new_event.system?.id);
       system?.Bookings[0]?.$poll_bookings();
       return new_event;
     }
@@ -8283,7 +8284,7 @@ var createVideoConferenceModule = (space = {}, overrides = {}) => new VideoConfe
 
 // libs/mocks/src/lib/systems-bindings.mock.ts
 function createSystem(space) {
-  ka(space.id, {
+  xa(space.id, {
     System: [createSystemModule(space)],
     Bookings: [createBookingsModule(space)],
     ContactTracing: [createContactTracingModule(space)],
@@ -8298,7 +8299,7 @@ function createSystem(space) {
     Payment: [createPaymentsModule(space)],
     LockerLocations: [createLockerLocationsModule()]
   });
-  const system = Xo(space.id);
+  const system = Go(space.id);
   system.Bookings[0].$poll_bookings();
   setInterval(() => system.Bookings[0].$poll_bookings(), 30 * 1e3);
   system.AreaManagement[0].$update();
@@ -26864,6 +26865,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
   constructor() {
     super(...arguments);
     this._zone = "";
+    this._region = "";
     this._analytics = inject(GoogleAnalyticsService, { optional: true });
     this._locale = inject(LocaleService, { optional: true });
     this._settings = inject(SettingsService);
@@ -26895,7 +26897,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
         notifySuccess("Toggled dark mode.");
       });
       this._hotkey.listen(["Control", "Alt", "Shift", "KeyC"], () => {
-        this._clipboard.copy(`${Y()}|${rn()}`);
+        this._clipboard.copy(`${Y()}|${nn()}`);
         notifySuccess("Successfully copied token.");
       });
       this._hotkey.listen(["Control", "Alt", "Shift", "KeyV"], () => {
@@ -26914,11 +26916,16 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
           localStorage.setItem("PLACEOS.locale", locale);
         }
         if (params.has("x-api-key")) {
-          gs(params.get("x-api-key"));
+          ys(params.get("x-api-key"));
+        }
+        if (params.has("region_id")) {
+          this._region = params.get("region_id");
         }
         if (params.has("building_id")) {
           this._zone = params.get("building_id");
         }
+        if (this._region || this._zone)
+          this._setZones();
       });
       setNotifyOutlet(this._snackbar);
       setTranslationService(this._locale);
@@ -26956,11 +26963,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
       } catch {
         log("APP", "Failed to initialise background services.", void 0, "warn");
       }
-      this.timeout("set_initial_building", () => {
-        const bld = this._org.buildings.find((b) => b.id === this._zone);
-        if (bld)
-          this._org.setBuilding(bld, true);
-      }, 1e3);
+      this._setZones();
     });
   }
   onInitError() {
@@ -27019,7 +27022,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
     if (isMobileSafari())
       return;
     const tkn = Y();
-    Nn(tkn === "x-api-key" ? { "x-api-key": Et() } : { Authorization: `Bearer ${tkn}` });
+    Nn(tkn === "x-api-key" ? { "x-api-key": Ot() } : { Authorization: `Bearer ${tkn}` });
   }
   _initUploads(tries = 1) {
     if (!this._settings.get("app.has_uploads"))
@@ -27045,6 +27048,17 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
       this.interval("auto-update-version", () => this._checkReload(), 15 * 1e3);
       yield requestScreenWakeLock();
     });
+  }
+  _setZones() {
+    this.timeout("set_building+region", () => __async(this, null, function* () {
+      const region = this._org.regions.find((b) => b.id === this._region);
+      if (region)
+        this._org.setRegion(region);
+      const building_list = yield nextValueFrom(this._org.building_list);
+      const bld = building_list.find((b) => b.id === this._zone);
+      if (bld)
+        this._org.setBuilding(bld, true);
+    }), 1e3);
   }
 };
 _AppComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -27072,20 +27086,20 @@ var AppComponent = _AppComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppComponent, [{
     type: Component,
     args: [{ selector: "app-root", template: `
-        <global-banner></global-banner>
+        <global-banner />
         <div class="relative h-1/2 w-full flex-1">
             <router-outlet></router-outlet>
         </div>
         @if (has_chat) {
-            <global-chat></global-chat>
+            <global-chat />
         }
-        <global-loading></global-loading>
+        <global-loading />
         <!-- <debug-console *ngIf="debug"></debug-console> -->
     `, standalone: false, styles: ["/* angular:styles/component:css;2c590c9e56511a088a1469fe4b227d8190323c208f95620a03712f1a8f5bae8d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/app.component.ts */\n:host {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=app.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 113 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 114 });
 })();
 
 // apps/concierge/src/environments/environment.ts
@@ -27099,125 +27113,125 @@ var routes = [
   { path: "unauthorised", component: UnauthorisedComponent },
   {
     path: "book/rooms",
-    loadChildren: () => import("./day-view.module-KMPANIXR.js").then((m) => m.DayViewModule),
+    loadChildren: () => import("./day-view.module-GGFE55LI.js").then((m) => m.DayViewModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "facilities",
-    loadChildren: () => import("./facilities.module-DQSB534E.js").then((m) => m.FacilitiesModule),
+    loadChildren: () => import("./facilities.module-AQ2IZDN2.js").then((m) => m.FacilitiesModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/visitors",
-    loadChildren: () => import("./visitors.module-YVLPLBQX.js").then((m) => m.VisitorsModule),
+    loadChildren: () => import("./visitors.module-ZL35YOSO.js").then((m) => m.VisitorsModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/assets",
-    loadChildren: () => import("./asset-manager.module-W3KBKKR4.js").then((m) => m.AppAssetManangerModule),
+    loadChildren: () => import("./asset-manager.module-4CM2XZW5.js").then((m) => m.AppAssetManangerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/desks",
-    loadChildren: () => import("./desks.module-Y4WWCDTC.js").then((m) => m.DesksModule),
+    loadChildren: () => import("./desks.module-BQC4KODM.js").then((m) => m.DesksModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/lockers",
-    loadChildren: () => import("./lockers.module-JEO4OWNM.js").then((m) => m.LockersModule),
+    loadChildren: () => import("./lockers.module-II2ZZ46O.js").then((m) => m.LockersModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "reports",
-    loadChildren: () => import("./reports.module-IMAQFTLE.js").then((m) => m.ReportsModule),
+    loadChildren: () => import("./reports.module-OOIA4OWR.js").then((m) => m.ReportsModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "entertainment/events",
-    loadChildren: () => import("./events.module-MRI4YDOM.js").then((m) => m.EventsModule),
+    loadChildren: () => import("./events.module-JD7S2SN4.js").then((m) => m.EventsModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "users/staff",
-    loadChildren: () => import("./staff.module-JQ4WUH6C.js").then((m) => m.StaffModule),
+    loadChildren: () => import("./staff.module-OTTMAVBY.js").then((m) => m.StaffModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/catering",
-    loadChildren: () => import("./catering.module-CXC4UNDQ.js").then((m) => m.CateringModule),
+    loadChildren: () => import("./catering.module-LPUEOPXJ.js").then((m) => m.CateringModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "points-management",
-    loadChildren: () => import("./points.module-PJZ6X3G5.js").then((m) => m.PointsModule),
+    loadChildren: () => import("./points.module-PVOUC52R.js").then((m) => m.PointsModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/parking",
-    loadChildren: () => import("./parking.module-UJFYCPE5.js").then((m) => m.AppParkingModule),
+    loadChildren: () => import("./parking.module-G6ZRXCSF.js").then((m) => m.AppParkingModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "surveys",
-    loadChildren: () => import("./surveys.module-K5DWQSKX.js").then((m) => m.SurveysModule),
+    loadChildren: () => import("./surveys.module-SHEWSWUF.js").then((m) => m.SurveysModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "room-management",
-    loadChildren: () => import("./room-manager.module-W3D3KN6G.js").then((m) => m.RoomManagerModule),
+    loadChildren: () => import("./room-manager.module-DMNFCSJH.js").then((m) => m.RoomManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "level-management",
-    loadChildren: () => import("./level-manager.module-J4X3C7W5.js").then((m) => m.LevelManagerModule),
+    loadChildren: () => import("./level-manager.module-N5XPRGWX.js").then((m) => m.LevelManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "building-management",
-    loadChildren: () => import("./building-manager.module-2SS63R73.js").then((m) => m.BuildingManagerModule),
+    loadChildren: () => import("./building-manager.module-B63BSB7X.js").then((m) => m.BuildingManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "region-management",
-    loadChildren: () => import("./region-manager.module-TPV7NKC6.js").then((m) => m.RegionManagerModule),
+    loadChildren: () => import("./region-manager.module-M7AA66VW.js").then((m) => m.RegionManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "email-templates",
-    loadChildren: () => import("./email-templates.module-BMODOAY6.js").then((m) => m.EmailTemplatesModule)
+    loadChildren: () => import("./email-templates.module-CFPOOI35.js").then((m) => m.EmailTemplatesModule)
   },
   {
     path: "points-of-interest",
-    loadChildren: () => import("./poi-manager.module-NHOXWL6W.js").then((m) => m.POIManagerModule),
+    loadChildren: () => import("./poi-manager.module-IU544Q6M.js").then((m) => m.POIManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "url-management",
-    loadChildren: () => import("./url-manager.module-WKZFJHFS.js").then((m) => m.UrlManagerModule),
+    loadChildren: () => import("./url-manager.module-MDZV5A6L.js").then((m) => m.UrlManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "signage",
-    loadChildren: () => import("./signage.module-LIHYQ2RM.js").then((m) => m.SignageModule),
+    loadChildren: () => import("./signage.module-R4TZ7JEU.js").then((m) => m.SignageModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
