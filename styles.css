@@ -3197,6 +3197,12 @@ video {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
 }
+#placeos .line-clamp-5 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
 #placeos .line-clamp-6 {
   overflow: hidden;
   display: -webkit-box;
