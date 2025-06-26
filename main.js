@@ -5,11 +5,11 @@ import {
   VirtualKeyboardComponent,
   generateMockSpace,
   setHours
-} from "./chunk-EVQYQ6PN.js";
+} from "./chunk-5O4WLIIF.js";
 import {
   CheckinStateService,
   MatCheckboxModule
-} from "./chunk-MPJTAEG2.js";
+} from "./chunk-K6T5UAIR.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -39,12 +39,12 @@ import {
   DomRendererFactory2,
   ElementRef,
   ErrorHandler,
-  Et,
   EventEmitter,
   FocusMonitor,
   FormControlName,
   FormGroupDirective,
   FormsModule,
+  Go,
   GoogleAnalyticsService,
   HotkeysService,
   HttpErrorResponse,
@@ -93,6 +93,7 @@ import {
   NoopAnimationPlayer,
   Observable,
   OrganisationService,
+  Ot,
   Output,
   OverlayConfig,
   OverlayModule,
@@ -120,7 +121,6 @@ import {
   Validators,
   ViewChild,
   ViewEncapsulation,
-  Xo,
   Xt,
   Y,
   Yt,
@@ -157,13 +157,13 @@ import {
   inject,
   isBefore,
   isMobileSafari,
-  ka,
   lastValueFrom,
   ln,
   log,
   makeEnvironmentProviders,
   map,
   nextValueFrom,
+  nn,
   no,
   notifyError,
   notifySuccess,
@@ -178,7 +178,6 @@ import {
   randomString,
   registerLocaleData,
   requestScreenWakeLock,
-  rn,
   sequence,
   set,
   setAppName,
@@ -198,7 +197,8 @@ import {
   tap,
   timePeriodsIntersect,
   unique,
-  vs,
+  xa,
+  ys,
   ɵPRE_STYLE,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
@@ -249,7 +249,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-7WZA3LU7.js";
+} from "./chunk-267XGI7B.js";
 import {
   __async,
   __export,
@@ -8057,7 +8057,7 @@ function registerMocks4() {
         ];
       }
       MOCK_EVENTS.push(new_event);
-      const system = Xo(new_event.system?.id);
+      const system = Go(new_event.system?.id);
       system?.Bookings[0]?.$poll_bookings();
       return new_event;
     }
@@ -9282,7 +9282,7 @@ var createVideoConferenceModule = (space = {}, overrides = {}) => new VideoConfe
 
 // libs/mocks/src/lib/systems-bindings.mock.ts
 function createSystem(space) {
-  ka(space.id, {
+  xa(space.id, {
     System: [createSystemModule(space)],
     Bookings: [createBookingsModule(space)],
     ContactTracing: [createContactTracingModule(space)],
@@ -9297,7 +9297,7 @@ function createSystem(space) {
     Payment: [createPaymentsModule(space)],
     LockerLocations: [createLockerLocationsModule()]
   });
-  const system = Xo(space.id);
+  const system = Go(space.id);
   system.Bookings[0].$poll_bookings();
   setInterval(() => system.Bookings[0].$poll_bookings(), 30 * 1e3);
   system.AreaManagement[0].$update();
@@ -27850,7 +27850,7 @@ function GlobalLoadingComponent_Conditional_1_Template(rf, ctx) {
 }
 var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler {
   get online() {
-    return vs();
+    return gs();
   }
   constructor() {
     super();
@@ -28073,6 +28073,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
   constructor() {
     super(...arguments);
     this._zone = "";
+    this._region = "";
     this._analytics = inject(GoogleAnalyticsService, { optional: true });
     this._locale = inject(LocaleService, { optional: true });
     this._settings = inject(SettingsService);
@@ -28104,7 +28105,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
         notifySuccess("Toggled dark mode.");
       });
       this._hotkey.listen(["Control", "Alt", "Shift", "KeyC"], () => {
-        this._clipboard.copy(`${Y()}|${rn()}`);
+        this._clipboard.copy(`${Y()}|${nn()}`);
         notifySuccess("Successfully copied token.");
       });
       this._hotkey.listen(["Control", "Alt", "Shift", "KeyV"], () => {
@@ -28123,11 +28124,16 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
           localStorage.setItem("PLACEOS.locale", locale);
         }
         if (params.has("x-api-key")) {
-          gs(params.get("x-api-key"));
+          ys(params.get("x-api-key"));
+        }
+        if (params.has("region_id")) {
+          this._region = params.get("region_id");
         }
         if (params.has("building_id")) {
           this._zone = params.get("building_id");
         }
+        if (this._region || this._zone)
+          this._setZones();
       });
       setNotifyOutlet(this._snackbar);
       setTranslationService(this._locale);
@@ -28165,11 +28171,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
       } catch {
         log("APP", "Failed to initialise background services.", void 0, "warn");
       }
-      this.timeout("set_initial_building", () => {
-        const bld = this._org.buildings.find((b) => b.id === this._zone);
-        if (bld)
-          this._org.setBuilding(bld, true);
-      }, 1e3);
+      this._setZones();
     });
   }
   onInitError() {
@@ -28228,7 +28230,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
     if (isMobileSafari())
       return;
     const tkn = Y();
-    Nn(tkn === "x-api-key" ? { "x-api-key": Et() } : { Authorization: `Bearer ${tkn}` });
+    Nn(tkn === "x-api-key" ? { "x-api-key": Ot() } : { Authorization: `Bearer ${tkn}` });
   }
   _initUploads(tries = 1) {
     if (!this._settings.get("app.has_uploads"))
@@ -28254,6 +28256,17 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
       this.interval("auto-update-version", () => this._checkReload(), 15 * 1e3);
       yield requestScreenWakeLock();
     });
+  }
+  _setZones() {
+    this.timeout("set_building+region", () => __async(this, null, function* () {
+      const region = this._org.regions.find((b) => b.id === this._region);
+      if (region)
+        this._org.setRegion(region);
+      const building_list = yield nextValueFrom(this._org.building_list);
+      const bld = building_list.find((b) => b.id === this._zone);
+      if (bld)
+        this._org.setBuilding(bld, true);
+    }), 1e3);
   }
 };
 _AppComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -28281,20 +28294,20 @@ var AppComponent = _AppComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppComponent, [{
     type: Component,
     args: [{ selector: "app-root", template: `
-        <global-banner></global-banner>
+        <global-banner />
         <div class="relative h-1/2 w-full flex-1">
             <router-outlet></router-outlet>
         </div>
         @if (has_chat) {
-            <global-chat></global-chat>
+            <global-chat />
         }
-        <global-loading></global-loading>
+        <global-loading />
         <!-- <debug-console *ngIf="debug"></debug-console> -->
     `, standalone: false, styles: ["/* angular:styles/component:css;2c590c9e56511a088a1469fe4b227d8190323c208f95620a03712f1a8f5bae8d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/app.component.ts */\n:host {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=app.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 113 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 114 });
 })();
 
 // apps/visitor-kiosk/src/environments/environment.ts
@@ -28670,6 +28683,17 @@ function BootstrapComponent_Conditional_13_Template(rf, ctx) {
   }
 }
 var _BootstrapComponent = class _BootstrapComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._org = inject(OrganisationService);
+    this._settings = inject(SettingsService);
+    this._route = inject(ActivatedRoute);
+    this._router = inject(Router);
+    this.rotations = [];
+    this.regions = this._org.region_list;
+    this.buildings = this._org.active_buildings;
+    this.levels = this._org.active_levels;
+  }
   setRegion(region) {
     this._org.region = region;
     this.active_building = void 0;
@@ -28687,17 +28711,6 @@ var _BootstrapComponent = class _BootstrapComponent extends AsyncHandler {
       return [];
     }
     return this.active_level.locations || [];
-  }
-  constructor(_org, _settings, _route, _router) {
-    super();
-    this._org = _org;
-    this._settings = _settings;
-    this._route = _route;
-    this._router = _router;
-    this.rotations = [];
-    this.regions = this._org.region_list;
-    this.buildings = this._org.active_buildings;
-    this.levels = this._org.active_levels;
   }
   ngOnInit() {
     return __async(this, null, function* () {
@@ -28784,9 +28797,12 @@ var _BootstrapComponent = class _BootstrapComponent extends AsyncHandler {
     this.loading = null;
   }
 };
-_BootstrapComponent.\u0275fac = function BootstrapComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _BootstrapComponent)(\u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(Router));
-};
+_BootstrapComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275BootstrapComponent_BaseFactory;
+  return function BootstrapComponent_Factory(__ngFactoryType__) {
+    return (\u0275BootstrapComponent_BaseFactory || (\u0275BootstrapComponent_BaseFactory = \u0275\u0275getInheritedFactory(_BootstrapComponent)))(__ngFactoryType__ || _BootstrapComponent);
+  };
+})();
 _BootstrapComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BootstrapComponent, selectors: [["", "bootstrap", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c04, decls: 14, vars: 8, consts: [["select", ""], [1, "absolute", "inset-0", "z-0", "bg-base-200"], ["form", "", 1, "relative", "z-10", "mx-auto", "my-8", "w-[28rem]", "max-w-[calc(100%-2rem)]", "overflow-hidden", "rounded-lg", "border", "border-base-300", "bg-base-100", "shadow"], [1, "flex", "w-full", "items-center", "justify-between", "bg-secondary", "px-4", "py-3", "text-xl", "font-medium", "text-secondary-content"], [1, "relative", "overflow-hidden", "rounded", "px-2", "py-1"], [1, "absolute", "inset-0", "z-0", "bg-base-100", "opacity-10"], [1, "relative", "z-10", "font-mono", "text-sm", "uppercase"], [1, "flex", "flex-col", "space-y-2", "px-4"], [1, "m-auto", "flex", "flex-col", "items-center", "p-8"], [1, "!mt-4", "flex", "w-full", "items-center", "justify-end", "border-t", "border-base-300", "px-4", "py-2"], ["appearance", "outline", 1, "no-subscript"], ["building", "", 3, "ngModelChange", "ngModel", "placeholder"], [1, "flex", "items-center", "space-x-4"], [1, "flex-1", "truncate"], [1, "!mr-4", "rounded", "bg-base-200", "px-1.5", "font-mono", "text-[0.625rem]"], [3, "value"], [1, "leading-tight"], [1, "font-mono", "text-[0.625rem]", "opacity-30"], [1, "hidden"], [1, "font-mono", "text-[0.625rem]", "opacity-60"], ["level", "", 3, "ngModelChange", "ngModel", "placeholder"], [3, "valueChange", "value", "placeholder"], [3, "diameter"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click", "disabled"]], template: function BootstrapComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "div", 1);
@@ -29131,7 +29147,7 @@ var BootstrapComponent = _BootstrapComponent;
             }
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;b5cb44247b14df9ceaa1cde6e18e7655f7940be592d59e7ac7be62a75ddd59dd;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/bootstrap.component.ts */\nmat-form-field {\n  width: 100%;\n}\nlabel {\n  padding-top: 1rem;\n}\n/*# sourceMappingURL=bootstrap.component.css.map */\n"] }]
-  }], () => [{ type: OrganisationService }, { type: SettingsService }, { type: ActivatedRoute }, { type: Router }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BootstrapComponent, { className: "BootstrapComponent", filePath: "apps/visitor-kiosk/src/app/bootstrap.component.ts", lineNumber: 342 });
@@ -29241,6 +29257,15 @@ function VisitorRegistrationComponent_Conditional_4_Template(rf, ctx) {
   }
 }
 var _VisitorRegistrationComponent = class _VisitorRegistrationComponent {
+  constructor() {
+    this._settings = inject(SettingsService);
+    this._booking_form = inject(BookingFormService);
+    this._checkin = inject(CheckinStateService);
+    this._router = inject(Router);
+    this._org = inject(OrganisationService);
+    this.loading = false;
+    this.form = this._booking_form.form;
+  }
   get now() {
     return startOfMinute(Date.now());
   }
@@ -29252,15 +29277,6 @@ var _VisitorRegistrationComponent = class _VisitorRegistrationComponent {
   }
   get induction_after_details() {
     return this._settings.get("app.induction_after_details");
-  }
-  constructor(_settings, _booking_form, _checkin, _router, _org) {
-    this._settings = _settings;
-    this._booking_form = _booking_form;
-    this._checkin = _checkin;
-    this._router = _router;
-    this._org = _org;
-    this.loading = false;
-    this.form = this._booking_form.form;
   }
   ngOnInit() {
     this._booking_form.clearOldState();
@@ -29322,7 +29338,7 @@ var _VisitorRegistrationComponent = class _VisitorRegistrationComponent {
   }
 };
 _VisitorRegistrationComponent.\u0275fac = function VisitorRegistrationComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _VisitorRegistrationComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(BookingFormService), \u0275\u0275directiveInject(CheckinStateService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(OrganisationService));
+  return new (__ngFactoryType__ || _VisitorRegistrationComponent)();
 };
 _VisitorRegistrationComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VisitorRegistrationComponent, selectors: [["visitor-registration"]], standalone: false, decls: 9, vars: 10, consts: [[1, "absolute", "inset-0", "flex", "items-center", "p-8"], [1, "absolute", "left-1/2", "top-1/2", "min-h-[100%]", "min-w-[100%]", "-translate-x-1/2", "-translate-y-1/2", 3, "src"], ["src", "assets/img/building.png", 1, "absolute", "bottom-0", "right-0", "w-[60%]"], [1, "absolute", "left-4", "top-1/2", "max-h-[80vh]", "w-[32rem]", "max-w-[calc(100%-2rem)]", "-translate-y-1/2", "overflow-auto", "rounded", "bg-base-100", "shadow", 3, "formGroup"], [1, "absolute", "left-4", "top-1/2", "flex", "w-[24rem]", "-translate-y-1/2", "flex-col", "items-center", "justify-center", "space-y-4", "rounded", "bg-base-100", "p-16", "shadow"], [1, "absolute", "right-4", "top-4", "text-2xl", "text-white"], [1, "flex", "items-center", "justify-between", "space-x-4", "border-b", "border-base-300", "px-4", "py-2"], [1, "py-2", "text-lg", "font-medium"], ["icon", "", "matRipple", "", 3, "routerLink"], [1, "p-4"], ["for", "name"], ["appearance", "outline", 1, "w-full"], ["matInput", "", "name", "name", "formControlName", "asset_name", 3, "placeholder"], ["for", "email"], ["matInput", "", "name", "email", "formControlName", "asset_id", 3, "placeholder"], ["for", "user"], ["formControlName", "user", 1, "mb-4"], ["form", "phone"], ["matInput", "", "name", "phone", "type", "tel", "formControlName", "phone", 3, "placeholder"], ["form", "org"], ["matInput", "", "name", "org", "formControlName", "company", 3, "placeholder"], [1, "flex", "justify-end", "space-x-4", "border-t", "border-base-300", "px-4", "py-2"], ["btn", "", "matRipple", "", 1, "w-40", 3, "click"], ["diameter", "32"]], template: function VisitorRegistrationComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -29458,7 +29474,7 @@ var VisitorRegistrationComponent = _VisitorRegistrationComponent;
             </div>
         </div>
     `, standalone: false }]
-  }], () => [{ type: SettingsService }, { type: BookingFormService }, { type: CheckinStateService }, { type: Router }, { type: OrganisationService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(VisitorRegistrationComponent, { className: "VisitorRegistrationComponent", filePath: "apps/visitor-kiosk/src/app/visitor-registration.component.ts", lineNumber: 134 });
@@ -29582,6 +29598,20 @@ function WelcomeComponent_For_24_Template(rf, ctx) {
   }
 }
 var _WelcomeComponent = class _WelcomeComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this.route = inject(ActivatedRoute);
+    this._settings = inject(SettingsService);
+    this._locale = inject(LocaleService);
+    this._cdr = inject(ChangeDetectorRef);
+    this.now = Date.now();
+    this.level = "";
+    this.setLocale = (code) => {
+      this._locale.setLocale(code);
+      localStorage.setItem("PLACEOS.locale", code);
+      setTimeout(() => location.reload(), 300);
+    };
+  }
   get background() {
     return this._settings.get("app.welcome_background");
   }
@@ -29603,20 +29633,6 @@ var _WelcomeComponent = class _WelcomeComponent extends AsyncHandler {
   get locales() {
     return this._settings.get("app.locales") || [];
   }
-  constructor(route, _settings, _locale, _cdr) {
-    super();
-    this.route = route;
-    this._settings = _settings;
-    this._locale = _locale;
-    this._cdr = _cdr;
-    this.now = Date.now();
-    this.level = "";
-    this.setLocale = (code) => {
-      this._locale.setLocale(code);
-      localStorage.setItem("PLACEOS.locale", code);
-      setTimeout(() => location.reload(), 300);
-    };
-  }
   ngOnInit() {
     this.interval("time", () => this.now = Date.now(), 30 * 1e3);
     this.subscription("level", this._settings.listen("KIOSK.level").subscribe((lvl) => this.level = lvl));
@@ -29629,9 +29645,12 @@ var _WelcomeComponent = class _WelcomeComponent extends AsyncHandler {
     this.timeout("check", () => this._cdr.detectChanges(), 1e3);
   }
 };
-_WelcomeComponent.\u0275fac = function WelcomeComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _WelcomeComponent)(\u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(LocaleService), \u0275\u0275directiveInject(ChangeDetectorRef));
-};
+_WelcomeComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275WelcomeComponent_BaseFactory;
+  return function WelcomeComponent_Factory(__ngFactoryType__) {
+    return (\u0275WelcomeComponent_BaseFactory || (\u0275WelcomeComponent_BaseFactory = \u0275\u0275getInheritedFactory(_WelcomeComponent)))(__ngFactoryType__ || _WelcomeComponent);
+  };
+})();
 _WelcomeComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _WelcomeComponent, selectors: [["app-welcome"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 26, vars: 23, consts: [["menu", "matMenu"], [1, "absolute", "inset-0", "flex", "items-center", "p-8"], ["auth", "", 1, "absolute", "left-1/2", "top-1/2", "min-h-[100%]", "min-w-[100%]", "-translate-x-1/2", "-translate-y-1/2", 3, "source"], [1, "z-10", "flex", "w-[60%]", "flex-col", "justify-center", "space-y-8"], [1, "mb-4", "space-y-4", "text-6xl", "text-white", 3, "innerHTML"], [1, "flex", "items-center", "space-x-4", "font-medium"], ["btn", "", "matRipple", "", 1, "w-40", "bg-base-100", "text-base-content", 3, "routerLink"], [1, "flex", "items-center", "space-x-2"], [1, "ml-2"], [1, "text-2xl"], [1, "absolute", "right-4", "top-4", "text-2xl", "text-white"], [1, "absolute", "left-4", "top-4", 3, "matMenuTriggerFor"], ["mat-menu-item", ""], ["src", "assets/img/building.png", 1, "absolute", "bottom-0", "right-0", "w-[60%]"], [1, "flex", "items-center", "justify-between"], [1, "text-2xl", "text-white"], [1, "ml-2", "text-left", "leading-tight", "text-white"], [1, "text-xs", "opacity-30"], [1, "ml-4", "max-w-24", "truncate", "rounded", "bg-base-200", "px-2", "py-1", "text-sm", 3, "matTooltip"], ["mat-menu-item", "", 3, "click"], [1, "flex", "h-14", "min-w-[24rem]", "items-center", "justify-between", "space-x-8"], [1, "leading-tight"]], template: function WelcomeComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 1);
@@ -29810,7 +29829,7 @@ var WelcomeComponent = _WelcomeComponent;
             />
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;cc9227079df7ac5301f9446791a6a855742622827223e39404093077fda285ac;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/welcome.component.ts */\na {\n  height: 3.5rem;\n}\n/*# sourceMappingURL=welcome.component.css.map */\n"] }]
-  }], () => [{ type: ActivatedRoute }, { type: SettingsService }, { type: LocaleService }, { type: ChangeDetectorRef }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WelcomeComponent, { className: "WelcomeComponent", filePath: "apps/visitor-kiosk/src/app/welcome.component.ts", lineNumber: 140 });
@@ -29823,11 +29842,11 @@ var routes = [
   { path: "register", component: VisitorRegistrationComponent },
   {
     path: "explore",
-    loadChildren: () => import("./explore.module-B66EB3GB.js").then((m) => m.AppExploreModule)
+    loadChildren: () => import("./explore.module-XKVFBTOV.js").then((m) => m.AppExploreModule)
   },
   {
     path: "checkin",
-    loadChildren: () => import("./checkin.module-BSNLHLDE.js").then((m) => m.VisitorCheckinModule)
+    loadChildren: () => import("./checkin.module-EU7V3OS2.js").then((m) => m.VisitorCheckinModule)
   },
   { path: "**", redirectTo: "bootstrap" }
 ];
@@ -29852,17 +29871,17 @@ var AppRoutingModule = _AppRoutingModule;
 // apps/visitor-kiosk/src/app/components/topbar-header.component.ts
 var _c07 = () => ["/"];
 var _TopbarHeaderComponent = class _TopbarHeaderComponent {
+  constructor() {
+    this._settings = inject(SettingsService);
+    this._org = inject(OrganisationService);
+    this.logo = this._org.active_building.pipe(debounceTime(500), map(() => (this._settings.theme === "dark" ? this._settings.get("app.logo_dark") : this._settings.get("app.logo_light")) || {}));
+  }
   get time() {
     return startOfMinute(Date.now());
   }
-  constructor(_settings, _org) {
-    this._settings = _settings;
-    this._org = _org;
-    this.logo = this._org.active_building.pipe(debounceTime(500), map(() => (this._settings.theme === "dark" ? this._settings.get("app.logo_dark") : this._settings.get("app.logo_light")) || {}));
-  }
 };
 _TopbarHeaderComponent.\u0275fac = function TopbarHeaderComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _TopbarHeaderComponent)(\u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
+  return new (__ngFactoryType__ || _TopbarHeaderComponent)();
 };
 _TopbarHeaderComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TopbarHeaderComponent, selectors: [["a-topbar-header"]], standalone: false, decls: 8, vars: 11, consts: [[1, "flex", "items-center", "justify-between", "bg-[hsl(237,37%,10%)]", "shadow"], ["matRipple", "", 1, "flex", "h-full", "flex-col", "justify-center", "px-4", 3, "routerLink"], ["auth", "", "alt", "Logo", 1, "my-2", "h-10", 3, "source"], [1, "ml-auto", "flex", "h-full", "flex-col", "justify-center", "px-4", "text-white"]], template: function TopbarHeaderComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -29913,7 +29932,7 @@ var TopbarHeaderComponent = _TopbarHeaderComponent;
             </div>
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;ca56a9c6ccb68d9eb4d7b426a55179b4fd968c7dab74ba6456a7b70739864a22;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/components/topbar-header.component.ts */\n:host > div {\n  height: 3.5rem;\n}\na {\n  border-radius: 0;\n}\nimg {\n  max-height: 2.5rem;\n  max-width: 50vw;\n}\n/*# sourceMappingURL=topbar-header.component.css.map */\n"] }]
-  }], () => [{ type: SettingsService }, { type: OrganisationService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TopbarHeaderComponent, { className: "TopbarHeaderComponent", filePath: "apps/visitor-kiosk/src/app/components/topbar-header.component.ts", lineNumber: 50 });

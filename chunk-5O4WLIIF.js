@@ -80,6 +80,7 @@ import {
   Overlay,
   OverlayConfig,
   OverlayModule,
+  Pc,
   Pipe,
   Platform,
   PortalModule,
@@ -94,7 +95,6 @@ import {
   Subject,
   Subscription,
   TAB,
-  Tc,
   TemplatePortal,
   TemplatePortalDirective,
   TemplateRef,
@@ -113,6 +113,7 @@ import {
   _getEventTarget,
   _getFocusedElementPierceShadowDom,
   _getOptionScrollPosition,
+  _u,
   addAriaReferencedId,
   addDays,
   addHours,
@@ -145,13 +146,13 @@ import {
   forkJoin,
   format,
   forwardRef,
+  fu,
   generateCalendarFileLink,
   generateGoogleCalendarLink,
   generateMicrosoftCalendarLink,
   getInvalidFields,
   getUnixTime,
   hasModifierKey,
-  hu,
   i18n,
   inject,
   isAfter,
@@ -159,10 +160,10 @@ import {
   lastValueFrom,
   map,
   merge,
-  mu,
   nextValueFrom,
   notifyError,
   notifyWarn,
+  oc,
   of,
   predictableRandomInt,
   queryBookings,
@@ -171,7 +172,6 @@ import {
   roundToNearestMinutes,
   rulesForResource,
   saveBooking,
-  sc,
   searchGuests,
   setClassMetadata,
   setMonth,
@@ -242,7 +242,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-7WZA3LU7.js";
+} from "./chunk-267XGI7B.js";
 import {
   __async,
   __spreadProps,
@@ -450,7 +450,7 @@ var VirtualKeyboardComponent = _VirtualKeyboardComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(VirtualKeyboardComponent, [{
     type: Component,
     args: [{ selector: "input[keyboard],textarea[keyboard]", template: `
-        <ng-content></ng-content>
+        <ng-content />
         <ng-template cdk-portal>
             <div
                 keyboard-view
@@ -1889,7 +1889,7 @@ var _UserSearchFieldComponent = class _UserSearchFieldComponent extends AsyncHan
     super();
     this._settings = inject(SettingsService);
     this.error = "";
-    this.query_fn = (q2) => this._settings.get("app.basic_user_search") ? Tc({ q: q2, authority_id: bt()?.id }).pipe(map((_2) => _2.data.map((_3) => new User(_3))), catchError(() => of([]))) : searchStaff(q2).pipe(catchError(() => of([])));
+    this.query_fn = (q2) => this._settings.get("app.basic_user_search") ? Pc({ q: q2, authority_id: bt()?.id }).pipe(map((_2) => _2.data.map((_3) => new User(_3))), catchError(() => of([]))) : searchStaff(q2).pipe(catchError(() => of([])));
     this.search$ = new Subject();
     this.search_results$ = this.search$.pipe(debounceTime(400), distinctUntilChanged(), switchMap((query) => {
       this.loading = true;
@@ -2067,7 +2067,7 @@ var UserSearchFieldComponent = _UserSearchFieldComponent;
             />
             <icon matPrefix class="relative text-2xl">search</icon>
             @if (loading) {
-                <mat-spinner matSuffix diameter="16"></mat-spinner>
+                <mat-spinner matSuffix diameter="16" />
             }
         </mat-form-field>
         <mat-autocomplete
@@ -4383,11 +4383,11 @@ function newBookingFromCalendarEvent(event) {
   });
 }
 function loadLockerBanks(org, obs, useRegion) {
-  return obs.pipe(filter(([bld]) => !!bld), switchMap(([bld]) => useRegion() ? forkJoin(org.buildingsForRegion().map((building) => hu(building.id, "locker_banks").pipe(catchError(() => of(new Ar())), map((_2) => _2.details instanceof Array ? _2.details : [])))).pipe(map((_2) => flatten(_2))) : hu(bld.id, "locker_banks").pipe(catchError(() => of(new Ar())), map((_2) => _2.details instanceof Array ? _2.details : []))), shareReplay(1));
+  return obs.pipe(filter(([bld]) => !!bld), switchMap(([bld]) => useRegion() ? forkJoin(org.buildingsForRegion().map((building) => fu(building.id, "locker_banks").pipe(catchError(() => of(new Ar())), map((_2) => _2.details instanceof Array ? _2.details : [])))).pipe(map((_2) => flatten(_2))) : fu(bld.id, "locker_banks").pipe(catchError(() => of(new Ar())), map((_2) => _2.details instanceof Array ? _2.details : []))), shareReplay(1));
 }
 function loadLockers(org, obs, banks$, useRegion) {
   return obs.pipe(filter(([bld]) => !!bld), switchMap(([bld]) => combineLatest([
-    useRegion() ? forkJoin(org.buildingsForRegion().map((building) => hu(building.id, "lockers").pipe(catchError(() => of(new Ar())), map((_2) => _2.details instanceof Array ? _2.details : [])))).pipe(map((_2) => flatten(_2))) : hu(bld.id, "lockers").pipe(catchError(() => of(new Ar())), map((_2) => _2.details instanceof Array ? _2.details : [])),
+    useRegion() ? forkJoin(org.buildingsForRegion().map((building) => fu(building.id, "lockers").pipe(catchError(() => of(new Ar())), map((_2) => _2.details instanceof Array ? _2.details : [])))).pipe(map((_2) => flatten(_2))) : fu(bld.id, "lockers").pipe(catchError(() => of(new Ar())), map((_2) => _2.details instanceof Array ? _2.details : [])),
     banks$
   ])), map(([lockers, banks]) => {
     const locker_list = lockers;
@@ -4974,7 +4974,7 @@ function getAssetRulesForZone(zone_id, fresh = false) {
   if (!zone_id)
     return of([]);
   if (!RULE_REQUESTS[zone_id] || fresh)
-    RULE_REQUESTS[zone_id] = hu(zone_id, "assets_config").pipe(map((_2) => _2.details instanceof Array ? _2.details : []), catchError((e) => of([])));
+    RULE_REQUESTS[zone_id] = fu(zone_id, "assets_config").pipe(map((_2) => _2.details instanceof Array ? _2.details : []), catchError((e) => of([])));
   return RULE_REQUESTS[zone_id];
 }
 function assetAvailable(item, rules, event) {
@@ -5067,7 +5067,7 @@ var _AssetStateService = class _AssetStateService {
       const list = assets.filter((_2) => _2.assets?.length && (!category.length || category.includes(_2.category_id)) && (_2.name.toLowerCase().includes(s) || _2.description.toLowerCase().includes(s)) && assetAvailable(_2, rules, this._options.getValue()));
       return list;
     }), shareReplay(1));
-    this.settings = combineLatest([this._org.active_building]).pipe(filter(([_2]) => !!_2), switchMap(([_2]) => hu(_2.id, "assets-settings").pipe(catchError((_3) => of({})))), map((_2) => _2.details || {}), shareReplay(1));
+    this.settings = combineLatest([this._org.active_building]).pipe(filter(([_2]) => !!_2), switchMap(([_2]) => fu(_2.id, "assets-settings").pipe(catchError((_3) => of({})))), map((_2) => _2.details || {}), shareReplay(1));
     this.disabled_rooms = this.settings.pipe(map((_2) => _2.disabled_rooms || []));
   }
   setSearch(value) {
@@ -6172,7 +6172,7 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
       }
       return unique(list).sort((a, b2) => a.localeCompare(b2));
     }), shareReplay(1));
-    this.booking_rules = combineLatest([this._org.building_list, this._options]).pipe(switchMap(([list, { type }]) => Promise.all(list.map((bld) => hu(bld.id, `${type}_booking_rules`).toPromise()))), map((building_rules) => {
+    this.booking_rules = combineLatest([this._org.building_list, this._options]).pipe(switchMap(([list, { type }]) => Promise.all(list.map((bld) => fu(bld.id, `${type}_booking_rules`).toPromise()))), map((building_rules) => {
       const mapping = {};
       for (const rules of building_rules) {
         mapping[rules.id] = rules.details instanceof Array ? rules.details : [];
@@ -6560,9 +6560,9 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
     if (use_region) {
       const id2 = this._org.building.parent_id;
       const buildings = this._org.buildings.filter((_2) => _2.parent_id === id2);
-      return forkJoin(buildings.map((_2) => mu(_2.id, { name: type }).pipe(map((data) => flatten(data.map(map_metadata)))))).pipe(map((_2) => flatten(_2)));
+      return forkJoin(buildings.map((_2) => _u(_2.id, { name: type }).pipe(map((data) => flatten(data.map(map_metadata)))))).pipe(map((_2) => flatten(_2)));
     }
-    return mu(id, {
+    return _u(id, {
       name: type
     }).pipe(map((data) => flatten(data.map(map_metadata))));
   }
@@ -6602,7 +6602,7 @@ function requestSpacesForZone(id) {
     return of([]);
   if (SPACE_LIST_REQUESTS[id])
     return SPACE_LIST_REQUESTS[id];
-  SPACE_LIST_REQUESTS[id] = sc({
+  SPACE_LIST_REQUESTS[id] = oc({
     zone_id: id,
     limit: 500,
     signage: false
@@ -6670,4 +6670,4 @@ export {
   showStaff,
   UserSearchFieldComponent
 };
-//# sourceMappingURL=chunk-EVQYQ6PN.js.map
+//# sourceMappingURL=chunk-5O4WLIIF.js.map

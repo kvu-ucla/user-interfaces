@@ -23,13 +23,13 @@ import {
   setHours,
   showStaff,
   validateAssetRequestsForResource
-} from "./chunk-EVQYQ6PN.js";
+} from "./chunk-5O4WLIIF.js";
 import {
   generateQRCode,
   querySpaceAvailability,
   removeEvent,
   saveEvent
-} from "./chunk-7LUL3VP5.js";
+} from "./chunk-EYBYO4X5.js";
 import {
   A11yModule,
   ANIMATION_SHOW_CONTRACT_EXPAND,
@@ -55,9 +55,7 @@ import {
   Directionality,
   Directive,
   ESCAPE,
-  Ea,
   ElementRef,
-  Et,
   EventEmitter,
   FocusMonitor,
   FormControl,
@@ -110,10 +108,13 @@ import {
   NgModule,
   NgTemplateOutlet,
   NgZone,
+  Oa,
   OrganisationService,
+  Ot,
   Output,
   Overlay,
   OverlayModule,
+  Pc,
   Platform,
   PortalModule,
   ReactiveFormsModule,
@@ -128,7 +129,6 @@ import {
   Space,
   SpacePipe,
   Subject,
-  Tc,
   TemplatePortalDirective,
   TemplateRef,
   TranslatePipe,
@@ -145,6 +145,7 @@ import {
   _MatInternalFormField,
   _StructuralStylesLoader,
   _animationsDisabled,
+  _u,
   add,
   addDays,
   addMinutes,
@@ -155,7 +156,6 @@ import {
   bt,
   calculateDistance,
   catchError,
-  cc,
   coerceBooleanProperty,
   coerceNumberProperty,
   combineLatest,
@@ -182,6 +182,7 @@ import {
   format,
   formatDuration,
   forwardRef,
+  fu,
   generateCalendarFileLink,
   generateGoogleCalendarLink,
   generateMicrosoftCalendarLink,
@@ -192,7 +193,6 @@ import {
   getTimezoneOffsetString,
   getUnixTime,
   hasModifierKey,
-  hu,
   i18n,
   inject,
   input,
@@ -205,7 +205,6 @@ import {
   minutesInDay,
   minutesInMonth,
   model,
-  mu,
   nextValueFrom,
   normalizeDates,
   normalizePassiveListenerOptions,
@@ -213,6 +212,7 @@ import {
   notifySuccess,
   notifyWarn,
   numberAttribute,
+  oc,
   of,
   output,
   queryBookings,
@@ -221,7 +221,6 @@ import {
   roundToNearestMinutes,
   rulesForResource,
   saveBooking,
-  sc,
   set,
   setClassMetadata,
   setDefaultCreator,
@@ -236,6 +235,7 @@ import {
   tap,
   timer,
   toDate,
+  uc,
   unique,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
@@ -253,7 +253,6 @@ import {
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
-  ɵɵdirectiveInject,
   ɵɵdomProperty,
   ɵɵelement,
   ɵɵelementContainer,
@@ -301,7 +300,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-7WZA3LU7.js";
+} from "./chunk-267XGI7B.js";
 import {
   __async,
   __spreadProps,
@@ -1175,7 +1174,7 @@ var CustomTooltipComponent = _CustomTooltipComponent;
     args: [{
       selector: "[customTooltip]",
       template: `
-        <ng-content></ng-content>
+        <ng-content />
 
         <ng-template cdk-portal>
             <div custom-tooltip class="relative print:hidden">
@@ -1233,10 +1232,11 @@ var CustomTooltipComponent = _CustomTooltipComponent;
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CustomTooltipComponent, { className: "CustomTooltipComponent", filePath: "libs/components/src/lib/custom-tooltip.component.ts", lineNumber: 60 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CustomTooltipComponent, { className: "CustomTooltipComponent", filePath: "libs/components/src/lib/custom-tooltip.component.ts", lineNumber: 59 });
 })();
 
 // libs/form-fields/src/lib/date-calendar.component.ts
+var _forTrack0 = ($index, $item) => $item.id;
 function DateCalendarComponent_For_14_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 7);
@@ -1376,11 +1376,11 @@ _DateCalendarComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
     \u0275\u0275text(11, "chevron_right");
     \u0275\u0275elementEnd()()()();
     \u0275\u0275elementStart(12, "div", 6);
-    \u0275\u0275repeaterCreate(13, DateCalendarComponent_For_14_Template, 3, 4, "div", 7, \u0275\u0275repeaterTrackByIdentity);
+    \u0275\u0275repeaterCreate(13, DateCalendarComponent_For_14_Template, 3, 4, "div", 7, _forTrack0);
     \u0275\u0275pipe(15, "slice");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(16, "div", 8);
-    \u0275\u0275repeaterCreate(17, DateCalendarComponent_For_18_Template, 5, 18, "button", 9, \u0275\u0275repeaterTrackByIdentity);
+    \u0275\u0275repeaterCreate(17, DateCalendarComponent_For_18_Template, 5, 18, "button", 9, _forTrack0);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
@@ -1430,14 +1430,14 @@ var DateCalendarComponent = _DateCalendarComponent;
             <div
                 class="mb-2 flex items-center border-b border-base-200 pb-2 text-sm"
             >
-                @for (day of date_list | slice: 0 : 7; track day) {
+                @for (day of date_list | slice: 0 : 7; track day.id) {
                     <div class="flex-1 text-center opacity-60">
                         {{ day?.id | date: 'EE' }}
                     </div>
                 }
             </div>
             <div class="flex flex-wrap items-center justify-between">
-                @for (day of date_list; track day) {
+                @for (day of date_list; track day.id) {
                     <button
                         icon
                         name="schedule-set-date"
@@ -1846,7 +1846,7 @@ var DateFieldComponent = _DateFieldComponent;
 
 // libs/form-fields/src/lib/duration-field.component.ts
 var _c04 = ["*"];
-var _forTrack0 = ($index, $item) => $item.id;
+var _forTrack02 = ($index, $item) => $item.id;
 function DurationFieldComponent_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 4);
@@ -2062,7 +2062,7 @@ _DurationFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent(
     \u0275\u0275text(7, "arrow_drop_down");
     \u0275\u0275elementEnd()();
     \u0275\u0275elementStart(8, "mat-menu", 6, 0);
-    \u0275\u0275repeaterCreate(10, DurationFieldComponent_For_11_Template, 6, 3, "button", 7, _forTrack0);
+    \u0275\u0275repeaterCreate(10, DurationFieldComponent_For_11_Template, 6, 3, "button", 7, _forTrack02);
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(12, "mat-error");
     \u0275\u0275projection(13);
@@ -2158,7 +2158,7 @@ var DurationFieldComponent = _DurationFieldComponent;
                 </button>
             }
         </mat-menu>
-        <mat-error><ng-content></ng-content></mat-error>
+        <mat-error><ng-content /></mat-error>
     `, providers: [
       {
         provide: NG_VALUE_ACCESSOR,
@@ -2193,7 +2193,7 @@ var DurationFieldComponent = _DurationFieldComponent;
 // libs/form-fields/src/lib/time-field.component.ts
 var _c05 = ["select"];
 var _c13 = ["*"];
-var _forTrack02 = ($index, $item) => $item.id;
+var _forTrack03 = ($index, $item) => $item.id;
 function TimeFieldComponent_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 4);
@@ -2485,7 +2485,7 @@ _TimeFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ ty
     \u0275\u0275elementEnd()();
     \u0275\u0275elementStart(8, "mat-menu", 6, 0);
     \u0275\u0275conditionalCreate(10, TimeFieldComponent_Conditional_10_Template, 8, 7, "button", 7);
-    \u0275\u0275repeaterCreate(11, TimeFieldComponent_For_12_Template, 8, 8, "button", 7, _forTrack02);
+    \u0275\u0275repeaterCreate(11, TimeFieldComponent_For_12_Template, 8, 8, "button", 7, _forTrack03);
     \u0275\u0275elementEnd();
     \u0275\u0275conditionalCreate(13, TimeFieldComponent_Conditional_13_Template, 2, 0, "mat-error");
   }
@@ -2590,7 +2590,7 @@ var TimeFieldComponent = _TimeFieldComponent;
             }
         </mat-menu>
         @if (!no_error) {
-            <mat-error><ng-content></ng-content></mat-error>
+            <mat-error><ng-content /></mat-error>
         }
     `, providers: [
       {
@@ -3246,7 +3246,7 @@ var _ExploreDeviceInfoComponent = class _ExploreDeviceInfoComponent extends Asyn
     return __async(this, null, function* () {
       if (this.username)
         return;
-      const mod = Ea(this._details.system, "LocationServices");
+      const mod = Oa(this._details.system, "LocationServices");
       if (!mod)
         return;
       this.username = "Loading...";
@@ -3805,7 +3805,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     this._changed = new BehaviorSubject(0);
     this._event = new BehaviorSubject(new CalendarEvent());
     this._form = generateEventForm(void 0, this._settings);
-    this._space_pipe = new SpacePipe(this._org);
+    this._space_pipe = new SpacePipe();
     this.removeLoadingTag = (t) => this._loading.next(this._loading.getValue().replace(`[${t}]`, "").trim());
     this.addLoadingTag = (t) => t ? this._loading.next(`${this._loading.getValue().replace(`[${t}]`, "")}[${t}]`.trim()) : "";
     this._overflow = (id = "") => id ? this._settings.get(`app.events.overflow.${id}`) || {} : {
@@ -3818,7 +3818,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     this.loading$ = this._loading.asObservable();
     this.booking_rules$ = this._org.building_list.pipe(switchMap((list) => {
       this.addLoadingTag(Tags.BookingRules);
-      return forkJoin(list.map((bld) => hu(bld.id, "room_booking_rules").pipe(map((_) => ({
+      return forkJoin(list.map((bld) => fu(bld.id, "room_booking_rules").pipe(map((_) => ({
         id: bld.id,
         details: _.details instanceof Array ? _.details : []
       })), catchError(() => of({ id: bld.id, details: [] })))));
@@ -3836,7 +3836,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
       return requestSpacesForZone(zone.id).pipe(catchError(() => of([])));
     }), map((list) => list.filter((_) => _.bookable && _.email)), tap(() => this.removeLoadingTag(Tags.ListingRooms)), startWith([]), shareReplay(1));
     this.features = this.spaces$.pipe(map((l) => unique(flatten(l.map((_) => _.features)))));
-    this.room_alerts = this._changed.pipe(switchMap(() => hu(this._org.organisation.id, "room_alerts")), map((r) => r.details), startWith({}), shareReplay(1));
+    this.room_alerts = this._changed.pipe(switchMap(() => fu(this._org.organisation.id, "room_alerts")), map((r) => r.details), startWith({}), shareReplay(1));
     this.filtered_spaces = combineLatest([
       this.spaces$,
       this._options,
@@ -3882,6 +3882,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
         return list;
       }), catchError(() => of([])));
     }), tap(() => this.removeLoadingTag(Tags.Availability)), startWith([]), shareReplay(1));
+    this._space_pipe.org = this._org;
     this.init();
   }
   init() {
@@ -4931,8 +4932,9 @@ var _SpacesService = class _SpacesService {
     this.list = this._all_spaces.pipe(map((spaces) => spaces.filter((space) => space.map_id)), shareReplay(1));
     this.features = this.list.pipe(map((_) => unique(flatten(_.map((i) => i.features)))));
     this._compare = (space) => space.zones.includes(this._org.building.id);
-    const _org = this._org;
-    SPACE_PIPE = new SpacePipe(_org);
+    SPACE_PIPE = new SpacePipe();
+    if (!SPACE_PIPE.org)
+      SPACE_PIPE.org = this._org;
     this._init();
   }
   _init() {
@@ -4953,7 +4955,7 @@ var _SpacesService = class _SpacesService {
   }
   loadSpace(space_id) {
     return __async(this, null, function* () {
-      const system = yield lastValueFrom(cc(space_id));
+      const system = yield lastValueFrom(uc(space_id));
       const space = new Space(__spreadProps(__spreadValues({}, system), {
         level: this._org.levelWithID([...system.zones])
       }));
@@ -4969,7 +4971,7 @@ var _SpacesService = class _SpacesService {
   }
   loadSpaces() {
     return __async(this, null, function* () {
-      const systems = yield lastValueFrom(sc({
+      const systems = yield lastValueFrom(oc({
         zone_id: this._org.organisation.id,
         limit: 5e3
       })?.pipe(map((i) => i.data)));
@@ -5028,7 +5030,7 @@ var _ExploreStateService = class _ExploreStateService extends AsyncHandler {
     this.spaces = combineLatest([
       this._level,
       this._org.initialised
-    ]).pipe(filter(([_, initialised]) => initialised), switchMap(([level]) => sc({
+    ]).pipe(filter(([_, initialised]) => initialised), switchMap(([level]) => oc({
       zone_id: level?.id || this._org.organisation.id,
       limit: 50
     }).pipe(map(({ data }) => data.map((_) => new Space(_))), catchError((_) => of([])))), shareReplay(1));
@@ -5251,8 +5253,8 @@ var _ExploreSpacesService = class _ExploreSpacesService extends AsyncHandler {
     this._presence = {};
     this._panning = true;
     this._last_action = "";
-    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => hu(bld.id, `room_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
-    this.room_alerts = this._org.active_building.pipe(filter((bld) => !!bld), switchMap(() => hu(this._org.organisation.id, `room_alerts`).pipe(catchError(() => of({ details: {} })))), map((_) => _.details || {}), shareReplay(1));
+    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => fu(bld.id, `room_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
+    this.room_alerts = this._org.active_building.pipe(filter((bld) => !!bld), switchMap(() => fu(this._org.organisation.id, `room_alerts`).pipe(catchError(() => of({ details: {} })))), map((_) => _.details || {}), shareReplay(1));
     this._bind = combineLatest([
       this._state.spaces,
       this._state.options
@@ -5264,7 +5266,7 @@ var _ExploreSpacesService = class _ExploreSpacesService extends AsyncHandler {
       if (!list?.length)
         return;
       for (const space of list) {
-        const mod = Ea(space.id, "Bookings");
+        const mod = Oa(space.id, "Bookings");
         let binding = mod.binding("bookings");
         this.subscription(`b-${space.id}`, binding.listen().subscribe((d) => this.handleBookingsChange(list, space, d)));
         this.subscription(`b-bind-${space.id}`, binding.bind());
@@ -5456,8 +5458,8 @@ var _ExploreDesksService = class _ExploreDesksService extends AsyncHandler {
     this._users = {};
     this._departments = {};
     this._checked_in = new BehaviorSubject([]);
-    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => hu(bld.id, `desk_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
-    this.desk_list = this._state.level.pipe(debounceTime(50), switchMap((lvl) => hu(lvl.id, "desks").pipe(catchError(() => of({ details: [] })), map((i) => (i?.details instanceof Array ? i.details : []).map((j) => new Desk(__spreadProps(__spreadValues({}, j), { zone: lvl })))))), catchError((e) => []), shareReplay(1));
+    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => fu(bld.id, `desk_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
+    this.desk_list = this._state.level.pipe(debounceTime(50), switchMap((lvl) => fu(lvl.id, "desks").pipe(catchError(() => of({ details: [] })), map((i) => (i?.details instanceof Array ? i.details : []).map((j) => new Desk(__spreadProps(__spreadValues({}, j), { zone: lvl })))))), catchError((e) => []), shareReplay(1));
     this._bind = combineLatest([
       this._state.level,
       this._state.options
@@ -5726,7 +5728,7 @@ var ExploreDesksService = _ExploreDesksService;
 })();
 
 // libs/explore/src/lib/explore-map-control.component.ts
-var _forTrack03 = ($index, $item) => $item.id;
+var _forTrack04 = ($index, $item) => $item.id;
 function ExploreMapControlComponent_Conditional_1_For_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "mat-option", 4);
@@ -5750,7 +5752,7 @@ function ExploreMapControlComponent_Conditional_1_Template(rf, ctx) {
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.setBuilding($event));
     });
-    \u0275\u0275repeaterCreate(3, ExploreMapControlComponent_Conditional_1_For_4_Template, 2, 2, "mat-option", 4, _forTrack03);
+    \u0275\u0275repeaterCreate(3, ExploreMapControlComponent_Conditional_1_For_4_Template, 2, 2, "mat-option", 4, _forTrack04);
     \u0275\u0275pipe(5, "async");
     \u0275\u0275elementEnd()();
   }
@@ -5787,7 +5789,7 @@ function ExploreMapControlComponent_Conditional_3_Template(rf, ctx) {
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.setLevel($event));
     });
-    \u0275\u0275repeaterCreate(4, ExploreMapControlComponent_Conditional_3_For_5_Template, 2, 2, "mat-option", 4, _forTrack03);
+    \u0275\u0275repeaterCreate(4, ExploreMapControlComponent_Conditional_3_For_5_Template, 2, 2, "mat-option", 4, _forTrack04);
     \u0275\u0275pipe(6, "async");
     \u0275\u0275elementEnd()();
   }
@@ -6006,7 +6008,7 @@ var CiscoMapComponent = _CiscoMapComponent;
 // libs/components/src/lib/map-renderer.component.ts
 var _c010 = ["outlet"];
 var _c14 = ["feature"];
-var _forTrack04 = ($index, $item) => $item.track_id || $index;
+var _forTrack05 = ($index, $item) => $item.track_id || $index;
 function MapRendererComponent_Conditional_2_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "mat-spinner", 5);
@@ -6105,7 +6107,7 @@ function MapRendererComponent_Conditional_4_For_2_Template(rf, ctx) {
 function MapRendererComponent_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 4);
-    \u0275\u0275repeaterCreate(1, MapRendererComponent_Conditional_4_For_2_Template, 1, 1, null, null, _forTrack04);
+    \u0275\u0275repeaterCreate(1, MapRendererComponent_Conditional_4_For_2_Template, 1, 1, null, null, _forTrack05);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -6240,7 +6242,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         }
         this.updateFeatureList();
         const tkn = Y();
-        document.cookie = `${tkn === "x-api-key" ? "api-key=" + encodeURIComponent(Et()) : "bearer_token=" + encodeURIComponent(tkn)};max-age=30;path=/api/engine/v2/uploads;samesite=strict;${location.protocol === "https:" ? "secure;" : ""}`;
+        document.cookie = `${tkn === "x-api-key" ? "api-key=" + encodeURIComponent(Ot()) : "bearer_token=" + encodeURIComponent(tkn)};max-age=30;path=/api/engine/v2/uploads;samesite=strict;${location.protocol === "https:" ? "secure;" : ""}`;
         this.viewer = yield Un({
           element: this._outlet_el?.nativeElement,
           url: this.src,
@@ -6362,7 +6364,7 @@ var MapRendererComponent = _MapRendererComponent;
         ></div>
         @if (src) {
             @if (!viewer || loading) {
-                <mat-spinner class="absolute" [diameter]="48"></mat-spinner>
+                <mat-spinner class="absolute" [diameter]="48" />
             }
         } @else {
             <div class="absolute inset-0 flex items-center justify-center">
@@ -7093,11 +7095,11 @@ var InteractiveMapComponent = _InteractiveMapComponent;
                 [focus]="focus()"
                 [metadata]="metadata()"
             >
-                <ng-content></ng-content>
+                <ng-content />
             </maps-indoors>
         } @else if (use_cisco_maps) {
             <cisco-map>
-                <ng-content></ng-content>
+                <ng-content />
             </cisco-map>
         } @else {
             <map-renderer
@@ -7111,7 +7113,7 @@ var InteractiveMapComponent = _InteractiveMapComponent;
                 [labels]="labels() || metadata()?.labels"
                 (mapInfo)="mapInfo.emit($event)"
             >
-                <ng-content></ng-content>
+                <ng-content />
             </map-renderer>
         }
         @if (options()?.controls) {
@@ -7879,13 +7881,13 @@ var _ParkingService = class _ParkingService extends AsyncHandler {
     }));
     this.spaces = combineLatest([this.levels]).pipe(filter(([lvls]) => !!lvls[0]?.id), switchMap(([levels]) => {
       this._loading.next([...this._loading.getValue(), "spaces"]);
-      return forkJoin(levels.map((lvl) => hu(lvl.id, "parking-spaces").pipe(map((d) => (d.details instanceof Array ? d.details : []).map((s) => __spreadProps(__spreadValues({}, s), {
+      return forkJoin(levels.map((lvl) => fu(lvl.id, "parking-spaces").pipe(map((d) => (d.details instanceof Array ? d.details : []).map((s) => __spreadProps(__spreadValues({}, s), {
         zone_id: lvl.id
       }))))));
     }), map((list) => flatten(list)), tap(() => this._loading.next(this._loading.getValue().filter((_) => _ !== "spaces"))), shareReplay(1));
     this.users = combineLatest([this._org.active_building]).pipe(filter(([bld]) => !!bld?.id), switchMap(([bld]) => {
       this._loading.next([...this._loading.getValue(), "users"]);
-      return hu(bld.id, "parking-users");
+      return fu(bld.id, "parking-users");
     }), map((metadata) => metadata.details instanceof Array ? metadata.details : []), tap(() => this._loading.next(this._loading.getValue().filter((_) => _ !== "users"))), shareReplay(1));
     this.has_booking = queryBookings({
       period_start: getUnixTime(startOfDay(Date.now())),
@@ -8042,7 +8044,7 @@ var _ExploreParkingService = class _ExploreParkingService extends AsyncHandler {
     this.options = this._options.asObservable();
     this.on_book = null;
     this.levels = this._org.active_levels.pipe(map((l) => l.filter((_) => _.tags.includes("parking"))));
-    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => hu(bld.id, `parking_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
+    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => fu(bld.id, `parking_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
     this.events = combineLatest([
       this._org.active_building,
       this._state.options,
@@ -8061,7 +8063,7 @@ var _ExploreParkingService = class _ExploreParkingService extends AsyncHandler {
       type: "parking",
       email: _?.user || currentUser()?.email
     })), shareReplay(1));
-    this.spaces = this.levels.pipe(switchMap((_) => forkJoin(_.map((l) => hu(l.id, "parking-spaces").pipe(map((d) => (d.details instanceof Array ? d.details : []).map((s) => __spreadProps(__spreadValues({}, s), { zone_id: l.id }))))))), map((_) => flatten(_)), shareReplay(1));
+    this.spaces = this.levels.pipe(switchMap((_) => forkJoin(_.map((l) => fu(l.id, "parking-spaces").pipe(map((d) => (d.details instanceof Array ? d.details : []).map((s) => __spreadProps(__spreadValues({}, s), { zone_id: l.id }))))))), map((_) => flatten(_)), shareReplay(1));
     this.active_spaces = combineLatest([
       this.spaces,
       this._state.level
@@ -8575,7 +8577,7 @@ var _ExploreZonesService = class _ExploreZonesService extends AsyncHandler {
   init() {
     return __async(this, null, function* () {
       yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      const zone_metadata = yield Promise.all(this._org.levels.map((bld) => hu(bld.id, "map_regions").toPromise()));
+      const zone_metadata = yield Promise.all(this._org.levels.map((bld) => fu(bld.id, "map_regions").toPromise()));
       this._area_list = [];
       for (const zone of zone_metadata) {
         const areas = zone?.details?.areas;
@@ -9064,8 +9066,7 @@ var ExploreMapViewComponent = _ExploreMapViewComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ExploreMapViewComponent, [{
     type: Component,
     args: [{ selector: "explore-map-view", template: `
-        <interactive-map
-            [src]="url | async"
+        <interactive-map [src]="url | async"
             [styles]="styles | async"
             [features]="features | async"
             [actions]="actions | async"
@@ -9073,7 +9074,7 @@ var ExploreMapViewComponent = _ExploreMapViewComponent;
             [focus]="locate"
             [options]="{ controls: true }"
             (mapInfo)="map_info = $event || {}"
-        ></interactive-map>
+         />
         @if (!(use_mapsindoors$ | async)) {
             <div
                 controls
@@ -9143,7 +9144,7 @@ var ExploreMapViewComponent = _ExploreMapViewComponent;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreMapViewComponent, { className: "ExploreMapViewComponent", filePath: "libs/explore/src/lib/explore-map-view.component.ts", lineNumber: 138 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreMapViewComponent, { className: "ExploreMapViewComponent", filePath: "libs/explore/src/lib/explore-map-view.component.ts", lineNumber: 137 });
 })();
 
 // libs/explore/src/lib/explore-search.service.ts
@@ -9165,14 +9166,14 @@ var _ExploreSearchService = class _ExploreSearchService {
     this._filter = new BehaviorSubject("");
     this._loading = new BehaviorSubject(false);
     this.emergency_contacts = this._emergency_contacts.asObservable();
-    this._role_assigned_contacts = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => hu(bld.id, "emergency_contacts")), map(({ details }) => details?.contacts || []), shareReplay(1));
+    this._role_assigned_contacts = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => fu(bld.id, "emergency_contacts")), map(({ details }) => details?.contacts || []), shareReplay(1));
     this._user_search = this._filter.pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap((q) => q?.length > 2 ? this.search_fn(q).pipe(catchError(() => of([]))) : of([])), shareReplay(1));
-    this._space_search = this._filter.pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap((q) => q?.length > 2 ? sc({ q, zone_id: this._org.organisation.id }).pipe(map(({ data }) => data.filter((_) => _.map_id).map((_) => new Space(__spreadProps(__spreadValues({}, _), {
+    this._space_search = this._filter.pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap((q) => q?.length > 2 ? oc({ q, zone_id: this._org.organisation.id }).pipe(map(({ data }) => data.filter((_) => _.map_id).map((_) => new Space(__spreadProps(__spreadValues({}, _), {
       level: this._org.levelWithID(_.zones)
     }))))) : of([])), catchError(() => []));
     this._desk_search = combineLatest([
       this._org.active_building
-    ]).pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap(([bld]) => bld ? mu(bld.id, { name: "desks" }).pipe(catchError(() => of([])), map((i) => flatten(i.map((j) => (j.metadata.desks?.details || []).map((k) => new Desk(__spreadProps(__spreadValues({}, k), { zone: j.zone }))))))) : of([])), catchError(() => []));
+    ]).pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap(([bld]) => bld ? _u(bld.id, { name: "desks" }).pipe(catchError(() => of([])), map((i) => flatten(i.map((j) => (j.metadata.desks?.details || []).map((k) => new Desk(__spreadProps(__spreadValues({}, k), { zone: j.zone }))))))) : of([])), catchError(() => []));
     this._maps_people_search = combineLatest([
       this._maps_people.available$,
       this._filter,
@@ -9186,7 +9187,7 @@ var _ExploreSearchService = class _ExploreSearchService {
         description: `${_.properties?.roomId} , Level ${_.properties?.floorName}`
       }));
     }), shareReplay(1));
-    this._map_features = this._org.active_building.pipe(filter((bld) => !!bld), switchMap(() => mu(this._org.building.id, {
+    this._map_features = this._org.active_building.pipe(filter((bld) => !!bld), switchMap(() => _u(this._org.building.id, {
       name: "map_features"
     }).pipe(catchError(() => of({ details: [] })))), map((data) => {
       const list = [];
@@ -9207,7 +9208,7 @@ var _ExploreSearchService = class _ExploreSearchService {
       }
       return list;
     }));
-    this._poi_metadata = this._org.initialised.pipe(filter((_) => _), switchMap(() => hu(this._org.organisation.id, "points-of-interest").pipe(catchError((_) => of({ details: {} })))), shareReplay(1));
+    this._poi_metadata = this._org.initialised.pipe(filter((_) => _), switchMap(() => fu(this._org.organisation.id, "points-of-interest").pipe(catchError((_) => of({ details: {} })))), shareReplay(1));
     this._poi_list = combineLatest([
       this._org.active_building,
       this._poi_metadata
@@ -9305,7 +9306,7 @@ var _ExploreSearchService = class _ExploreSearchService {
       return results;
     }), tap(() => this._loading.next(false)), shareReplay(1));
     this.loading = this._loading.asObservable();
-    this.search_fn = (q) => this._settings.get("app.basic_user_search") ? Tc({ q, authority_id: bt()?.id }).pipe(map((_) => _.data)) : searchStaff(q);
+    this.search_fn = (q) => this._settings.get("app.basic_user_search") ? Pc({ q, authority_id: bt()?.id }).pipe(map((_) => _.data)) : searchStaff(q);
     this.search_results.subscribe();
     this.init();
   }
@@ -9353,7 +9354,7 @@ var ExploreSearchService = _ExploreSearchService;
 // libs/explore/src/lib/explore-search.component.ts
 var _c019 = ["input"];
 var _c16 = ["button"];
-var _forTrack05 = ($index, $item) => $item.name;
+var _forTrack06 = ($index, $item) => $item.name;
 function ExploreSearchComponent_Conditional_9_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "mat-spinner", 7);
@@ -9408,7 +9409,7 @@ function ExploreSearchComponent_Conditional_13_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, ExploreSearchComponent_Conditional_13_Conditional_0_Template, 3, 3, "mat-option", 8);
     \u0275\u0275pipe(1, "async");
-    \u0275\u0275repeaterCreate(2, ExploreSearchComponent_Conditional_13_For_3_Template, 9, 4, "mat-option", 9, _forTrack05);
+    \u0275\u0275repeaterCreate(2, ExploreSearchComponent_Conditional_13_For_3_Template, 9, 4, "mat-option", 9, _forTrack06);
     \u0275\u0275pipe(4, "async");
     \u0275\u0275pipe(5, "slice");
   }
@@ -10777,9 +10778,9 @@ var SharedExploreModule = _SharedExploreModule;
 
 // apps/map-kiosk/src/app/accessibility-controls.component.ts
 var _AccessibilityControlsComponent = class _AccessibilityControlsComponent extends AsyncHandler {
-  constructor(_settings) {
-    super();
-    this._settings = _settings;
+  constructor() {
+    super(...arguments);
+    this._settings = inject(SettingsService);
     this.applySetting = (n, v) => this.timeout("apply_setting", () => this._settings.saveUserSetting(n, v), 1e3);
   }
   get dark_mode() {
@@ -10804,9 +10805,12 @@ var _AccessibilityControlsComponent = class _AccessibilityControlsComponent exte
     }, 100);
   }
 };
-_AccessibilityControlsComponent.\u0275fac = function AccessibilityControlsComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _AccessibilityControlsComponent)(\u0275\u0275directiveInject(SettingsService));
-};
+_AccessibilityControlsComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275AccessibilityControlsComponent_BaseFactory;
+  return function AccessibilityControlsComponent_Factory(__ngFactoryType__) {
+    return (\u0275AccessibilityControlsComponent_BaseFactory || (\u0275AccessibilityControlsComponent_BaseFactory = \u0275\u0275getInheritedFactory(_AccessibilityControlsComponent)))(__ngFactoryType__ || _AccessibilityControlsComponent);
+  };
+})();
 _AccessibilityControlsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AccessibilityControlsComponent, selectors: [["accessibility-controls"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 4, vars: 1, consts: [["matRipple", "", 1, "flex", "w-full", "items-center", "justify-between", "rounded", "p-2", "hover:bg-base-200", 3, "click"], [3, "ngModelChange", "ngModel"]], template: function AccessibilityControlsComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "button", 0);
@@ -10877,7 +10881,7 @@ var AccessibilityControlsComponent = _AccessibilityControlsComponent;
             </div>
         </div> -->
     `, standalone: false }]
-  }], () => [{ type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AccessibilityControlsComponent, { className: "AccessibilityControlsComponent", filePath: "apps/map-kiosk/src/app/accessibility-controls.component.ts", lineNumber: 55 });
@@ -10913,9 +10917,9 @@ function ExploreLevelSelectComponent_For_2_Template(rf, ctx) {
   }
 }
 var _ExploreLevelSelectComponent = class _ExploreLevelSelectComponent {
-  constructor(_org, _state) {
-    this._org = _org;
-    this._state = _state;
+  constructor() {
+    this._org = inject(OrganisationService);
+    this._state = inject(ExploreStateService);
     this.levels = this._org.active_levels;
     this.level = this._state.level;
     this.setLevel = (lvl) => this._state.setLevel(lvl.id);
@@ -10928,7 +10932,7 @@ var _ExploreLevelSelectComponent = class _ExploreLevelSelectComponent {
   }
 };
 _ExploreLevelSelectComponent.\u0275fac = function ExploreLevelSelectComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ExploreLevelSelectComponent)(\u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(ExploreStateService));
+  return new (__ngFactoryType__ || _ExploreLevelSelectComponent)();
 };
 _ExploreLevelSelectComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreLevelSelectComponent, selectors: [["explore-level-select"]], standalone: false, decls: 4, vars: 2, consts: [[1, "m-2", "overflow-hidden", "rounded", "border", "border-solid", "border-base-300", "bg-base-100", "shadow"], ["matRipple", "", 1, "flex", "h-16", "w-16", "flex-col", "items-center", "justify-center", "border-none", "p-2", 3, "active"], ["matRipple", "", 1, "flex", "h-16", "w-16", "flex-col", "items-center", "justify-center", "border-none", "p-2", 3, "click"], [1, "text-2xl"], [1, "m-0", "whitespace-nowrap", "text-sm"]], template: function ExploreLevelSelectComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -10965,7 +10969,7 @@ var ExploreLevelSelectComponent = _ExploreLevelSelectComponent;
             }
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;9dc613e822670b6892e532a4fb58c590f8b1ea98aa6165dbcb2128676839d028;/home/runner/work/user-interfaces/user-interfaces/apps/map-kiosk/src/app/explore-level-select.component.ts */\n.active {\n  background: var(--s) !important;\n  color: #fff !important;\n}\nbutton:not(:first-child) {\n  border-top: 1px solid var(--b3) !important;\n}\n/*# sourceMappingURL=explore-level-select.component.css.map */\n"] }]
-  }], () => [{ type: OrganisationService }, { type: ExploreStateService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreLevelSelectComponent, { className: "ExploreLevelSelectComponent", filePath: "apps/map-kiosk/src/app/explore-level-select.component.ts", lineNumber: 42 });
@@ -11185,49 +11189,21 @@ function ExploreComponent_Conditional_16_Template(rf, ctx) {
   }
 }
 var _ExploreComponent = class _ExploreComponent extends AsyncHandler {
-  get logo() {
-    return this._settings.theme === "dark" ? this._settings.get("app.logo_dark") : this._settings.get("app.logo_light");
-  }
-  get time() {
-    return startOfMinute(Date.now());
-  }
-  get legend_visible() {
-    return this._settings.get("app.explore.show_legend") !== false;
-  }
-  get hide_zones() {
-    return this._settings.get("app.explore.hide_zones");
-  }
-  updateZoom(zoom) {
-    this._state.setPositions(zoom, this._state.positions.center);
-  }
-  updateCenter(center) {
-    this._state.setPositions(this._state.positions.zoom, center);
-  }
-  toggleZones(enabled) {
-    return __async(this, null, function* () {
-      const options = yield nextValueFrom(this.options);
-      const disable = !enabled ? unique([...options.disable || [], "zones", "devices"]) : options.disable.filter((_) => _ !== "zones" && _ !== "devices") || [];
-      this.setOptions({ disable });
-    });
-  }
-  get can_search() {
-    return !!this._settings.get("app.explore.search_enabled");
-  }
-  constructor(_state, _s, _desks, _zones, _parking, _settings, _org, _spaces, _dialog, _route, _router, _space_pipe, _maps) {
-    super();
-    this._state = _state;
-    this._s = _s;
-    this._desks = _desks;
-    this._zones = _zones;
-    this._parking = _parking;
-    this._settings = _settings;
-    this._org = _org;
-    this._spaces = _spaces;
-    this._dialog = _dialog;
-    this._route = _route;
-    this._router = _router;
-    this._space_pipe = _space_pipe;
-    this._maps = _maps;
+  constructor() {
+    super(...arguments);
+    this._state = inject(ExploreStateService);
+    this._s = inject(ExploreSpacesService);
+    this._desks = inject(ExploreDesksService);
+    this._zones = inject(ExploreZonesService);
+    this._parking = inject(ExploreParkingService);
+    this._settings = inject(SettingsService);
+    this._org = inject(OrganisationService);
+    this._spaces = inject(SpacesService);
+    this._dialog = inject(MatDialog);
+    this._route = inject(ActivatedRoute);
+    this._router = inject(Router);
+    this._space_pipe = inject(SpacePipe);
+    this._maps = inject(MapsPeopleService);
     this.reset_delay = 180;
     this.show_levels = true;
     this.show_legend = false;
@@ -11260,6 +11236,34 @@ var _ExploreComponent = class _ExploreComponent extends AsyncHandler {
     this.setOptions = (o) => this._state.setOptions(o);
     this.setLevel = (lvl) => this._state.setLevel(lvl.id);
     this.use_mapsindoors$ = this._maps.available$;
+  }
+  get logo() {
+    return this._settings.theme === "dark" ? this._settings.get("app.logo_dark") : this._settings.get("app.logo_light");
+  }
+  get time() {
+    return startOfMinute(Date.now());
+  }
+  get legend_visible() {
+    return this._settings.get("app.explore.show_legend") !== false;
+  }
+  get hide_zones() {
+    return this._settings.get("app.explore.hide_zones");
+  }
+  updateZoom(zoom) {
+    this._state.setPositions(zoom, this._state.positions.center);
+  }
+  updateCenter(center) {
+    this._state.setPositions(this._state.positions.zoom, center);
+  }
+  toggleZones(enabled) {
+    return __async(this, null, function* () {
+      const options = yield nextValueFrom(this.options);
+      const disable = !enabled ? unique([...options.disable || [], "zones", "devices"]) : options.disable.filter((_) => _ !== "zones" && _ !== "devices") || [];
+      this.setOptions({ disable });
+    });
+  }
+  get can_search() {
+    return !!this._settings.get("app.explore.search_enabled");
   }
   ngOnInit() {
     return __async(this, null, function* () {
@@ -11364,7 +11368,7 @@ var _ExploreComponent = class _ExploreComponent extends AsyncHandler {
           module: "LocationServices"
         };
       }
-      const mod = Ea(locate_details.system_id, locate_details.module);
+      const mod = Oa(locate_details.system_id, locate_details.module);
       const locations = (yield mod.execute("locate_user", [
         user.email,
         user.username || user.id
@@ -11406,9 +11410,12 @@ var _ExploreComponent = class _ExploreComponent extends AsyncHandler {
       this._router.navigate(["/"]);
   }
 };
-_ExploreComponent.\u0275fac = function ExploreComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ExploreComponent)(\u0275\u0275directiveInject(ExploreStateService), \u0275\u0275directiveInject(ExploreSpacesService), \u0275\u0275directiveInject(ExploreDesksService), \u0275\u0275directiveInject(ExploreZonesService), \u0275\u0275directiveInject(ExploreParkingService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(SpacesService), \u0275\u0275directiveInject(MatDialog), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(SpacePipe), \u0275\u0275directiveInject(MapsPeopleService));
-};
+_ExploreComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275ExploreComponent_BaseFactory;
+  return function ExploreComponent_Factory(__ngFactoryType__) {
+    return (\u0275ExploreComponent_BaseFactory || (\u0275ExploreComponent_BaseFactory = \u0275\u0275getInheritedFactory(_ExploreComponent)))(__ngFactoryType__ || _ExploreComponent);
+  };
+})();
 _ExploreComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreComponent, selectors: [["", "app-explore", ""]], hostBindings: function ExploreComponent_HostBindings(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275listener("mousedown", function ExploreComponent_mousedown_HostBindingHandler() {
@@ -11718,7 +11725,7 @@ var ExploreComponent = _ExploreComponent;
       ExploreParkingService,
       SpacePipe
     ], animations: [ANIMATION_SHOW_CONTRACT_EXPAND], standalone: false, styles: ["/* angular:styles/component:css;0efb63fb3533e4684cb691887ccc42ac31ccb02329247af79741317828cefb66;/home/runner/work/user-interfaces/user-interfaces/apps/map-kiosk/src/app/explore.component.ts */\n:host {\n  position: absolute;\n  display: flex;\n  flex-direction: column;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: var(--b2);\n}\nhr {\n  margin-top: 0.5rem !important;\n  margin-bottom: 0.5rem !important;\n}\n/*# sourceMappingURL=explore.component.css.map */\n"] }]
-  }], () => [{ type: ExploreStateService }, { type: ExploreSpacesService }, { type: ExploreDesksService }, { type: ExploreZonesService }, { type: ExploreParkingService }, { type: SettingsService }, { type: OrganisationService }, { type: SpacesService }, { type: MatDialog }, { type: ActivatedRoute }, { type: Router }, { type: SpacePipe }, { type: MapsPeopleService }], { onMouse: [{
+  }], null, { onMouse: [{
     type: HostListener,
     args: ["window:mousedown"]
   }], onTouch: [{
@@ -11780,4 +11787,4 @@ var AppExploreModule = _AppExploreModule;
 export {
   AppExploreModule
 };
-//# sourceMappingURL=explore.module-B66EB3GB.js.map
+//# sourceMappingURL=explore.module-XKVFBTOV.js.map

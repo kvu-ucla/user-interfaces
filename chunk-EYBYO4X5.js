@@ -1,10 +1,10 @@
 import {
-  Be,
   CalendarEvent,
   He,
   Ie,
-  Pt,
+  It,
   Space,
+  We,
   addMinutes,
   catchError,
   combineLatest,
@@ -14,7 +14,7 @@ import {
   map,
   of,
   toQueryString
-} from "./chunk-7WZA3LU7.js";
+} from "./chunk-267XGI7B.js";
 import {
   __spreadProps,
   __spreadValues
@@ -62,7 +62,7 @@ function createEvent(data) {
 }
 function updateEvent(id, data, q = {}, method = "patch") {
   const query = toQueryString(q);
-  return (method === "patch" ? Pt : He)(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}${query ? "?" + query : ""}`, new CalendarEvent(data).toJSON()).pipe(map((item) => new CalendarEvent(item)));
+  return (method === "patch" ? It : We)(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}${query ? "?" + query : ""}`, new CalendarEvent(data).toJSON()).pipe(map((item) => new CalendarEvent(item)));
 }
 var saveEvent = (data, q) => {
   const id = data.update_master ? data.recurring_event_id || data.id : data.id;
@@ -71,7 +71,7 @@ var saveEvent = (data, q) => {
 };
 function removeEvent(id, q = {}) {
   const query = toQueryString(q);
-  return Be(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}${query ? "?" + query : ""}`, {
+  return He(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}${query ? "?" + query : ""}`, {
     response_type: "void"
   });
 }
@@ -81,7 +81,7 @@ function showEventMetadata(id, system_id, query = {}) {
 }
 function updateEventMetadata(id, system_id, metadata, query = {}) {
   const q = toQueryString(__spreadValues({}, query));
-  return Pt(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}/metadata/${encodeURIComponent(system_id)}${q ? "?" + q : ""}`, metadata).pipe(map((item) => item));
+  return It(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}/metadata/${encodeURIComponent(system_id)}${q ? "?" + q : ""}`, metadata).pipe(map((item) => item));
 }
 function querySpaceAvailability(id_list, start, duration, ignore, type, ignore_period = [0, 0]) {
   const end = addMinutes(start, duration).valueOf();
@@ -1162,4 +1162,4 @@ qr/esm/index.js:
   limitations under the License.
   *)
 */
-//# sourceMappingURL=chunk-7LUL3VP5.js.map
+//# sourceMappingURL=chunk-EYBYO4X5.js.map

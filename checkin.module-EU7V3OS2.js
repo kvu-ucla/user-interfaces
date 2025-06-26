@@ -2,12 +2,12 @@ import {
   CheckinStateService,
   MatCheckbox,
   MatCheckboxModule
-} from "./chunk-MPJTAEG2.js";
+} from "./chunk-K6T5UAIR.js";
 import {
   generateQRCode,
   showEventMetadata,
   updateEventMetadata
-} from "./chunk-7LUL3VP5.js";
+} from "./chunk-EYBYO4X5.js";
 import {
   ActivatedRoute,
   AsyncHandler,
@@ -67,7 +67,8 @@ import {
   combineLatest,
   filter,
   first,
-  hu,
+  firstValueFrom,
+  fu,
   i18n,
   inject,
   lastValueFrom,
@@ -102,7 +103,6 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵdefinePipe,
-  ɵɵdirectiveInject,
   ɵɵelement,
   ɵɵelementEnd,
   ɵɵelementStart,
@@ -138,7 +138,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-7WZA3LU7.js";
+} from "./chunk-267XGI7B.js";
 import {
   __async,
   __spreadProps,
@@ -426,9 +426,9 @@ var TakePhotoComponent = _TakePhotoComponent;
 var _c02 = ["checkin-covid", ""];
 var _c12 = () => ["/welcome"];
 var _CheckinCovidComponent = class _CheckinCovidComponent {
-  constructor(_router, _checkin) {
-    this._router = _router;
-    this._checkin = _checkin;
+  constructor() {
+    this._router = inject(Router);
+    this._checkin = inject(CheckinStateService);
   }
   confirm() {
     if (!this.symptoms || !this.contact)
@@ -446,7 +446,7 @@ var _CheckinCovidComponent = class _CheckinCovidComponent {
   }
 };
 _CheckinCovidComponent.\u0275fac = function CheckinCovidComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CheckinCovidComponent)(\u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(CheckinStateService));
+  return new (__ngFactoryType__ || _CheckinCovidComponent)();
 };
 _CheckinCovidComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinCovidComponent, selectors: [["", "checkin-covid", ""]], standalone: false, attrs: _c02, decls: 55, vars: 5, consts: [[1, "relative", "overflow-y-auto", "overflow-x-hidden", "rounded", "bg-base-100", "p-4"], [1, "mb-4", "text-xl", "font-medium"], [1, "list-inside", "list-decimal"], [1, "mb-4", "list-inside", "list-disc", "px-4"], ["aria-label", "Has Symptoms", 3, "ngModelChange", "ngModel"], ["value", "true"], ["value", "false", 1, "ml-4"], [1, "my-4"], ["aria-label", "COVID contact or self-isolated", 3, "ngModelChange", "ngModel"], ["btn", "", "matRipple", "", 3, "click"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-0", 3, "routerLink"]], template: function CheckinCovidComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -605,7 +605,7 @@ var CheckinCovidComponent = _CheckinCovidComponent;
             </a>
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;00ca51ab2b0fca9ea7629e0f0e281c691c3476e0efceaf2ab9b0d2c29f476cb0;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/checkin/checkin-covid.component.ts */\n:host > div {\n  width: 32rem;\n  max-width: calc(100vw - 2rem);\n  max-height: calc(100% - 2rem);\n}\nbutton {\n  margin: 1rem 11rem 0;\n  width: 8rem;\n}\n/*# sourceMappingURL=checkin-covid.component.css.map */\n"] }]
-  }], () => [{ type: Router }, { type: CheckinStateService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinCovidComponent, { className: "CheckinCovidComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-covid.component.ts", lineNumber: 84 });
@@ -733,18 +733,18 @@ function CheckinDetailsComponent_Conditional_2_Template(rf, ctx) {
   }
 }
 var _CheckinDetailsComponent = class _CheckinDetailsComponent {
+  constructor() {
+    this._checkin = inject(CheckinStateService);
+    this._router = inject(Router);
+    this._settings = inject(SettingsService);
+    this.form = this._checkin.form;
+    this.loading = false;
+  }
   get induction_after_details() {
     return this._settings.get("app.induction_after_details");
   }
   get allow_user_photo() {
     return this._settings.get("app.allow_user_photo") && this._settings.get("app.allow_printing_label") !== false;
-  }
-  constructor(_checkin, _router, _settings) {
-    this._checkin = _checkin;
-    this._router = _router;
-    this._settings = _settings;
-    this.form = this._checkin.form;
-    this.loading = false;
   }
   ngOnInit() {
     return __async(this, null, function* () {
@@ -781,7 +781,7 @@ var _CheckinDetailsComponent = class _CheckinDetailsComponent {
   }
 };
 _CheckinDetailsComponent.\u0275fac = function CheckinDetailsComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CheckinDetailsComponent)(\u0275\u0275directiveInject(CheckinStateService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(SettingsService));
+  return new (__ngFactoryType__ || _CheckinDetailsComponent)();
 };
 _CheckinDetailsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinDetailsComponent, selectors: [["", "checkin-details", ""]], standalone: false, attrs: _c03, decls: 3, vars: 3, consts: [[1, "relative", "flex", "w-[36rem]", "flex-col", "items-center", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow", 3, "formGroup"], [1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center"], [1, "m-4", "text-2xl"], ["field", "", 1, "flex", "flex-col"], ["form", "host"], ["appearance", "outline"], ["matInput", "", "name", "host", "formControlName", "host", 3, "placeholder"], ["form", "name"], ["matInput", "", "name", "name", "formControlName", "name", 3, "placeholder"], ["form", "email"], ["matInput", "", "name", "email", "formControlName", "email", 3, "placeholder"], ["matInput", "", "name", "phone", "type", "tel", "formControlName", "phone", 3, "placeholder"], ["form", "org"], ["matInput", "", "name", "org", "formControlName", "organisation", 3, "placeholder"], ["next", "", "btn", "", "matRipple", "", 3, "click"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-0", 3, "routerLink"], [1, "flex", "flex-col", "items-center", "space-y-2", "rounded", "bg-base-100", "p-16", "shadow"], [3, "diameter"], [1, "my-4", "text-lg"]], template: function CheckinDetailsComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -910,7 +910,7 @@ var CheckinDetailsComponent = _CheckinDetailsComponent;
             </div>
         }
     `, standalone: false, styles: ["/* angular:styles/component:css;a33792e615dc48068535fd49c6ab78561fd4fd12d78fb032c7f5187e35f7c658;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/checkin/checkin-details.component.ts */\nform {\n  width: 32rem;\n  max-width: calc(100vw - 2rem);\n}\n[field] {\n  width: calc(100% - 2rem);\n}\nbutton {\n  margin-bottom: 1rem;\n  width: 8rem;\n}\n/*# sourceMappingURL=checkin-details.component.css.map */\n"] }]
-  }], () => [{ type: CheckinStateService }, { type: Router }, { type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinDetailsComponent, { className: "CheckinDetailsComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-details.component.ts", lineNumber: 141 });
@@ -932,13 +932,13 @@ function CheckinErrorComponent_Conditional_3_Template(rf, ctx) {
   }
 }
 var _CheckinErrorComponent = class _CheckinErrorComponent {
-  constructor(_checkin) {
-    this._checkin = _checkin;
+  constructor() {
+    this._checkin = inject(CheckinStateService);
     this.error = this._checkin.error;
   }
 };
 _CheckinErrorComponent.\u0275fac = function CheckinErrorComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CheckinErrorComponent)(\u0275\u0275directiveInject(CheckinStateService));
+  return new (__ngFactoryType__ || _CheckinErrorComponent)();
 };
 _CheckinErrorComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinErrorComponent, selectors: [["checkin-error"]], standalone: false, decls: 10, vars: 8, consts: [[1, "relative", "m-4", "flex", "flex-col", "items-center", "space-y-4", "overflow-hidden", "rounded", "bg-base-100", "px-16", "py-4", "text-center", "shadow"], [1, "pb-2", "text-2xl"], ["btn", "", "matRipple", "", 1, "w-32", 3, "routerLink"]], template: function CheckinErrorComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -982,7 +982,7 @@ var CheckinErrorComponent = _CheckinErrorComponent;
             </a>
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;34ad53ca058d4bf3dd80f3650a92e5ea3d6f6a240f4ad5727b63ca6d2e8f6f4b;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/checkin/checkin-error.component.ts */\n:host > div {\n  width: 28rem;\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=checkin-error.component.css.map */\n"] }]
-  }], () => [{ type: CheckinStateService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinErrorComponent, { className: "CheckinErrorComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-error.component.ts", lineNumber: 30 });
@@ -991,6 +991,15 @@ var CheckinErrorComponent = _CheckinErrorComponent;
 // apps/visitor-kiosk/src/app/checkin/checkin-induction.component.ts
 var _c05 = ["checkin-induction", ""];
 var _CheckinInductionComponent = class _CheckinInductionComponent {
+  constructor() {
+    this._checkin = inject(CheckinStateService);
+    this._router = inject(Router);
+    this._settings = inject(SettingsService);
+    this._org = inject(OrganisationService);
+    this.event = this._checkin.event;
+    this.agree = false;
+    this.loading = false;
+  }
   get induction_details() {
     return this._settings.get("app.induction_details");
   }
@@ -1002,15 +1011,6 @@ var _CheckinInductionComponent = class _CheckinInductionComponent {
   }
   get is_enabled() {
     return this._settings.get("app.induction_enabled") && this._settings.get("app.induction_details");
-  }
-  constructor(_checkin, _router, _settings, _org) {
-    this._checkin = _checkin;
-    this._router = _router;
-    this._settings = _settings;
-    this._org = _org;
-    this.event = this._checkin.event;
-    this.agree = false;
-    this.loading = false;
   }
   ngOnInit() {
     return __async(this, null, function* () {
@@ -1059,7 +1059,7 @@ var _CheckinInductionComponent = class _CheckinInductionComponent {
   }
 };
 _CheckinInductionComponent.\u0275fac = function CheckinInductionComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CheckinInductionComponent)(\u0275\u0275directiveInject(CheckinStateService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
+  return new (__ngFactoryType__ || _CheckinInductionComponent)();
 };
 _CheckinInductionComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinInductionComponent, selectors: [["", "checkin-induction", ""]], standalone: false, attrs: _c05, decls: 16, vars: 15, consts: [[1, "relative", "flex", "w-[32rem]", "flex-col", "items-center", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow"], [1, "my-4"], [1, "max-h-[50vh]", "w-full", "overflow-y-auto", "overflow-x-hidden", "whitespace-pre-wrap", "rounded", "border", "border-base-300", "p-4", "text-sm", "opacity-60"], [1, "my-4", 3, "ngModelChange", "ngModel"], [1, "flex", "items-center", "justify-center", "space-x-2"], ["btn", "", "matRipple", "", 1, "clear", "w-32", "underline", 3, "click"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click", "disabled"]], template: function CheckinInductionComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -1150,7 +1150,7 @@ var CheckinInductionComponent = _CheckinInductionComponent;
             </div>
         </div>
     `, standalone: false }]
-  }], () => [{ type: CheckinStateService }, { type: Router }, { type: SettingsService }, { type: OrganisationService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinInductionComponent, { className: "CheckinInductionComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-induction.component.ts", lineNumber: 54 });
@@ -1201,9 +1201,9 @@ function CheckinPhotoComponent_Conditional_1_Template(rf, ctx) {
   }
 }
 var _CheckinPhotoComponent = class _CheckinPhotoComponent {
-  constructor(_checkin, _router) {
-    this._checkin = _checkin;
-    this._router = _router;
+  constructor() {
+    this._checkin = inject(CheckinStateService);
+    this._router = inject(Router);
     this.loading = false;
   }
   ngOnInit() {
@@ -1224,7 +1224,7 @@ var _CheckinPhotoComponent = class _CheckinPhotoComponent {
   }
 };
 _CheckinPhotoComponent.\u0275fac = function CheckinPhotoComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CheckinPhotoComponent)(\u0275\u0275directiveInject(CheckinStateService), \u0275\u0275directiveInject(Router));
+  return new (__ngFactoryType__ || _CheckinPhotoComponent)();
 };
 _CheckinPhotoComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinPhotoComponent, selectors: [["checkin-photo"]], standalone: false, decls: 2, vars: 1, consts: [[1, "relative", "flex", "w-[24rem]", "flex-col", "items-center", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow"], [1, "m-auto", "flex", "flex-col", "items-center"], [1, "mb-4", "text-xl"], [3, "captured", "back", "back_text"], [3, "diameter"], [1, "my-4", "text-lg", "text-white"]], template: function CheckinPhotoComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -1261,7 +1261,7 @@ var CheckinPhotoComponent = _CheckinPhotoComponent;
             </div>
         }
     `, standalone: false }]
-  }], () => [{ type: CheckinStateService }, { type: Router }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinPhotoComponent, { className: "CheckinPhotoComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-photo.component.ts", lineNumber: 34 });
@@ -1363,17 +1363,17 @@ function CheckinPreferencesComponent_Conditional_1_Template(rf, ctx) {
   }
 }
 var _CheckinPreferencesComponent = class _CheckinPreferencesComponent extends AsyncHandler {
-  constructor(_route, _router, _checkin, _settings, _org) {
-    super();
-    this._route = _route;
-    this._router = _router;
-    this._checkin = _checkin;
-    this._settings = _settings;
-    this._org = _org;
+  constructor() {
+    super(...arguments);
+    this._route = inject(ActivatedRoute);
+    this._router = inject(Router);
+    this._checkin = inject(CheckinStateService);
+    this._settings = inject(SettingsService);
+    this._org = inject(OrganisationService);
     this.loading = false;
     this.type = "menu";
     this.event = this._checkin.event;
-    this.menu = this._org.active_building.pipe(filter((_) => !!_), switchMap((bld) => hu(bld.id, "catering").pipe(catchError(() => of({ details: [] })), map(({ details }) => details instanceof Array ? details : []), map((menu) => menu.map((i) => new CateringItem(i))))), map((menu) => menu.filter((_) => (_.tags || []).find((_2) => _2.toLowerCase() === "drink" || _2.toLowerCase() === "drinks" || _2.toLowerCase() === "beverage"))), startWith([]), shareReplay(1));
+    this.menu = this._org.active_building.pipe(filter((_) => !!_), switchMap((bld) => fu(bld.id, "catering").pipe(catchError(() => of({ details: [] })), map(({ details }) => details instanceof Array ? details : []), map((menu) => menu.map((i) => new CateringItem(i))))), map((menu) => menu.filter((_) => (_.tags || []).find((_2) => _2.toLowerCase() === "drink" || _2.toLowerCase() === "drinks" || _2.toLowerCase() === "beverage"))), startWith([]), shareReplay(1));
   }
   ngOnInit() {
     this.loading = true;
@@ -1487,9 +1487,12 @@ var _CheckinPreferencesComponent = class _CheckinPreferencesComponent extends As
     });
   }
 };
-_CheckinPreferencesComponent.\u0275fac = function CheckinPreferencesComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CheckinPreferencesComponent)(\u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(CheckinStateService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(OrganisationService));
-};
+_CheckinPreferencesComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275CheckinPreferencesComponent_BaseFactory;
+  return function CheckinPreferencesComponent_Factory(__ngFactoryType__) {
+    return (\u0275CheckinPreferencesComponent_BaseFactory || (\u0275CheckinPreferencesComponent_BaseFactory = \u0275\u0275getInheritedFactory(_CheckinPreferencesComponent)))(__ngFactoryType__ || _CheckinPreferencesComponent);
+  };
+})();
 _CheckinPreferencesComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinPreferencesComponent, selectors: [["checkin-preferences"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 1, consts: [[1, "relative", "flex", "w-[36rem]", "flex-col", "items-center", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow"], [1, "relative", "flex", "h-[20rem]", "w-[28rem]", "flex-col", "items-center", "justify-center", "space-y-2", "overflow-hidden", "rounded", "bg-base-100", "p-8", "shadow"], [1, "mb-2", "w-full", "text-xl"], [1, "w-full"], ["appearance", "outline", 1, "w-full"], [3, "ngModelChange", "ngModel", "placeholder"], [3, "value"], [1, "rounded", "bg-warning", "px-2", "py-1", "text-warning-content"], [1, "flex", "w-full", "items-center", "justify-end"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click", "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-2", "top-2", 3, "routerLink"], [3, "diameter"]], template: function CheckinPreferencesComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, CheckinPreferencesComponent_Conditional_0_Template, 21, 18, "div", 0)(1, CheckinPreferencesComponent_Conditional_1_Template, 5, 4, "div", 1);
@@ -1575,7 +1578,7 @@ var CheckinPreferencesComponent = _CheckinPreferencesComponent;
             </div>
         }
     `, standalone: false, styles: ["/* angular:styles/component:css;45a1e70cbb4b993091add757337674b51f7e2cd5d8c6d8ffd9f9f0736356a592;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/checkin/checkin-preferences.component.ts */\n:host > div {\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=checkin-preferences.component.css.map */\n"] }]
-  }], () => [{ type: ActivatedRoute }, { type: Router }, { type: CheckinStateService }, { type: SettingsService }, { type: OrganisationService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinPreferencesComponent, { className: "CheckinPreferencesComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-preferences.component.ts", lineNumber: 122 });
@@ -2005,18 +2008,18 @@ var _c07 = ["video"];
 var _c14 = ["checkin-qr-scan", ""];
 var _c2 = () => ["/welcome"];
 var _CheckinQRScanComponent = class _CheckinQRScanComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._checkin = inject(CheckinStateService);
+    this._router = inject(Router);
+    this._settings = inject(SettingsService);
+    this.checking_code = false;
+  }
   get is_induction_enabled() {
     return this._settings.get("app.induction_enabled") && this._settings.get("app.induction_details");
   }
   get induction_after_details() {
     return this._settings.get("app.induction_after_details");
-  }
-  constructor(_checkin, _router, _settings) {
-    super();
-    this._checkin = _checkin;
-    this._router = _router;
-    this._settings = _settings;
-    this.checking_code = false;
   }
   ngAfterViewInit() {
     this._checkin.metadata = "";
@@ -2118,9 +2121,12 @@ var _CheckinQRScanComponent = class _CheckinQRScanComponent extends AsyncHandler
     this._router.navigate(["/checkin", "error"]);
   }
 };
-_CheckinQRScanComponent.\u0275fac = function CheckinQRScanComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CheckinQRScanComponent)(\u0275\u0275directiveInject(CheckinStateService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(SettingsService));
-};
+_CheckinQRScanComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275CheckinQRScanComponent_BaseFactory;
+  return function CheckinQRScanComponent_Factory(__ngFactoryType__) {
+    return (\u0275CheckinQRScanComponent_BaseFactory || (\u0275CheckinQRScanComponent_BaseFactory = \u0275\u0275getInheritedFactory(_CheckinQRScanComponent)))(__ngFactoryType__ || _CheckinQRScanComponent);
+  };
+})();
 _CheckinQRScanComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinQRScanComponent, selectors: [["", "checkin-qr-scan", ""]], viewQuery: function CheckinQRScanComponent_Query(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275viewQuery(_c07, 7);
@@ -2275,13 +2281,13 @@ var CheckinQRScanComponent = _CheckinQRScanComponent;
             </p>
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;f8c4f94f51bad43854aa11f38704354ddfb3bca198dce0c82bd54a6e53c0dd17;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/checkin/checkin-qr-scan.component.ts */\nvideo {\n  width: 34rem;\n  height: 24rem;\n}\na {\n  position: absolute;\n}\n/*# sourceMappingURL=checkin-qr-scan.component.css.map */\n"] }]
-  }], () => [{ type: CheckinStateService }, { type: Router }, { type: SettingsService }], { _video_el: [{
+  }], null, { _video_el: [{
     type: ViewChild,
     args: ["video", { static: true }]
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinQRScanComponent, { className: "CheckinQRScanComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-qr-scan.component.ts", lineNumber: 105 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinQRScanComponent, { className: "CheckinQRScanComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-qr-scan.component.ts", lineNumber: 99 });
 })();
 
 // libs/components/src/lib/user-avatar.component.ts
@@ -2456,7 +2462,7 @@ var PrintableComponent = _PrintableComponent;
     args: [{
       selector: "[printable]",
       template: `
-        <ng-content></ng-content>
+        <ng-content />
 
         <ng-template cdk-portal>
             <div
@@ -2533,7 +2539,7 @@ function CheckinResultsComponent_Conditional_0_Conditional_50_Template(rf, ctx) 
 function CheckinResultsComponent_Conditional_0_Conditional_52_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 21);
+    \u0275\u0275elementStart(0, "button", 22);
     \u0275\u0275listener("click", function CheckinResultsComponent_Conditional_0_Conditional_52_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r3);
       const ctx_r1 = \u0275\u0275nextContext(2);
@@ -2546,6 +2552,24 @@ function CheckinResultsComponent_Conditional_0_Conditional_52_Template(rf, ctx) 
   if (rf & 2) {
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "APP.VISITOR_KIOSK.PRINT_LABEL"), " ");
+  }
+}
+function CheckinResultsComponent_Conditional_0_Conditional_53_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 23);
+    \u0275\u0275listener("click", function CheckinResultsComponent_Conditional_0_Conditional_53_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r1 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r1.next());
+    });
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "APP.VISITOR_KIOSK.BEVERAGES"), " ");
   }
 }
 function CheckinResultsComponent_Conditional_0_Template(rf, ctx) {
@@ -2610,14 +2634,15 @@ function CheckinResultsComponent_Conditional_0_Template(rf, ctx) {
     \u0275\u0275elementEnd()()();
     \u0275\u0275elementStart(51, "div", 19);
     \u0275\u0275conditionalCreate(52, CheckinResultsComponent_Conditional_0_Conditional_52_Template, 3, 3, "button", 20);
-    \u0275\u0275elementStart(53, "button", 21);
-    \u0275\u0275listener("click", function CheckinResultsComponent_Conditional_0_Template_button_click_53_listener() {
+    \u0275\u0275conditionalCreate(53, CheckinResultsComponent_Conditional_0_Conditional_53_Template, 3, 3, "button", 21);
+    \u0275\u0275elementStart(54, "button", 22);
+    \u0275\u0275listener("click", function CheckinResultsComponent_Conditional_0_Template_button_click_54_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.next());
+      return \u0275\u0275resetView(ctx_r1.done());
     });
-    \u0275\u0275text(54);
-    \u0275\u0275pipe(55, "translate");
+    \u0275\u0275text(55);
+    \u0275\u0275pipe(56, "translate");
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
@@ -2629,37 +2654,39 @@ function CheckinResultsComponent_Conditional_0_Template(rf, ctx) {
     let tmp_12_0;
     let tmp_13_0;
     const ctx_r1 = \u0275\u0275nextContext();
-    const details_r4 = \u0275\u0275pipeBind1(2, 15, ctx_r1.event);
+    const details_r5 = \u0275\u0275pipeBind1(2, 16, ctx_r1.event);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 17, (details_r4.extension_data == null ? null : details_r4.extension_data.self_registered) ? "APP.VISITOR_KIOSK.CHECKED_IN_MSG_SELF_REG" : "APP.VISITOR_KIOSK.CHECKED_IN_MSG"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 18, (details_r5.extension_data == null ? null : details_r5.extension_data.self_registered) ? "APP.VISITOR_KIOSK.CHECKED_IN_MSG_SELF_REG" : "APP.VISITOR_KIOSK.CHECKED_IN_MSG"), " ");
     \u0275\u0275advance(2);
-    \u0275\u0275property("innerHTML", \u0275\u0275pipeBind2(8, 21, \u0275\u0275pipeBind1(7, 19, ctx_r1.result_template), "html"), \u0275\u0275sanitizeHtml);
+    \u0275\u0275property("innerHTML", \u0275\u0275pipeBind2(8, 22, \u0275\u0275pipeBind1(7, 20, ctx_r1.result_template), "html"), \u0275\u0275sanitizeHtml);
     \u0275\u0275advance(6);
-    \u0275\u0275property("user", \u0275\u0275pureFunction3(64, _c09, ((tmp_4_0 = \u0275\u0275pipeBind1(13, 24, ctx_r1.event)) == null ? null : tmp_4_0.asset_name) || ((tmp_4_0 = \u0275\u0275pipeBind1(14, 26, ctx_r1.event)) == null ? null : tmp_4_0.description), (tmp_4_0 = \u0275\u0275pipeBind1(15, 28, ctx_r1.event)) == null ? null : tmp_4_0.asset_id, \u0275\u0275pipeBind1(16, 30, ctx_r1.photo)));
+    \u0275\u0275property("user", \u0275\u0275pureFunction3(65, _c09, ((tmp_4_0 = \u0275\u0275pipeBind1(13, 25, ctx_r1.event)) == null ? null : tmp_4_0.asset_name) || ((tmp_4_0 = \u0275\u0275pipeBind1(14, 27, ctx_r1.event)) == null ? null : tmp_4_0.description), (tmp_4_0 = \u0275\u0275pipeBind1(15, 29, ctx_r1.event)) == null ? null : tmp_4_0.asset_id, \u0275\u0275pipeBind1(16, 31, ctx_r1.photo)));
     \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate1(" ", ((tmp_5_0 = \u0275\u0275pipeBind1(19, 32, ctx_r1.event)) == null ? null : tmp_5_0.asset_name) || ((tmp_5_0 = \u0275\u0275pipeBind1(20, 34, ctx_r1.event)) == null ? null : tmp_5_0.description), " ");
+    \u0275\u0275textInterpolate1(" ", ((tmp_5_0 = \u0275\u0275pipeBind1(19, 33, ctx_r1.event)) == null ? null : tmp_5_0.asset_name) || ((tmp_5_0 = \u0275\u0275pipeBind1(20, 35, ctx_r1.event)) == null ? null : tmp_5_0.description), " ");
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(24, 38, "APP.VISITOR_KIOSK.LABEL_FOR", \u0275\u0275pureFunction1(68, _c16, (tmp_6_0 = \u0275\u0275pipeBind1(23, 36, ctx_r1.event)) == null ? null : tmp_6_0.title)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(24, 39, "APP.VISITOR_KIOSK.LABEL_FOR", \u0275\u0275pureFunction1(69, _c16, (tmp_6_0 = \u0275\u0275pipeBind1(23, 37, ctx_r1.event)) == null ? null : tmp_6_0.title)), " ");
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(28, 43, "APP.VISITOR_KIOSK.LABEL_HOST", \u0275\u0275pureFunction1(70, _c22, (tmp_7_0 = \u0275\u0275pipeBind1(27, 41, ctx_r1.event)) == null ? null : tmp_7_0.user_name)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(28, 44, "APP.VISITOR_KIOSK.LABEL_HOST", \u0275\u0275pureFunction1(71, _c22, (tmp_7_0 = \u0275\u0275pipeBind1(27, 42, ctx_r1.event)) == null ? null : tmp_7_0.user_name)), " ");
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(31, 46, "APP.VISITOR_KIOSK.VISITOR"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(31, 47, "APP.VISITOR_KIOSK.VISITOR"), " ");
     \u0275\u0275advance(3);
     \u0275\u0275property("src", (ctx_r1.logo == null ? null : ctx_r1.logo.src) || ctx_r1.logo, \u0275\u0275sanitizeUrl);
     \u0275\u0275advance();
-    \u0275\u0275conditional(\u0275\u0275pipeBind1(35, 48, ctx_r1.zones) ? 34 : -1);
+    \u0275\u0275conditional(\u0275\u0275pipeBind1(35, 49, ctx_r1.zones) ? 34 : -1);
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("                ", (tmp_11_0 = \u0275\u0275pipeBind1(38, 50, ctx_r1.event)) == null ? null : tmp_11_0.extension_data == null ? null : tmp_11_0.extension_data.extra_details, "\n                ");
+    \u0275\u0275textInterpolate1("                ", (tmp_11_0 = \u0275\u0275pipeBind1(38, 51, ctx_r1.event)) == null ? null : tmp_11_0.extension_data == null ? null : tmp_11_0.extension_data.extra_details, "\n                ");
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(44, 54, ((tmp_12_0 = \u0275\u0275pipeBind1(43, 52, ctx_r1.event)) == null ? null : tmp_12_0.date) || ctx_r1.date, "shortTime"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(44, 55, ((tmp_12_0 = \u0275\u0275pipeBind1(43, 53, ctx_r1.event)) == null ? null : tmp_12_0.date) || ctx_r1.date, "shortTime"), " ");
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(48, 59, ((tmp_13_0 = \u0275\u0275pipeBind1(47, 57, ctx_r1.event)) == null ? null : tmp_13_0.date) || ctx_r1.date, "mediumDate"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(48, 60, ((tmp_13_0 = \u0275\u0275pipeBind1(47, 58, ctx_r1.event)) == null ? null : tmp_13_0.date) || ctx_r1.date, "mediumDate"), " ");
     \u0275\u0275advance(4);
     \u0275\u0275conditional(ctx_r1.qr_code ? 50 : -1);
     \u0275\u0275advance(2);
     \u0275\u0275conditional(ctx_r1.allow_printing_label ? 52 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx_r1.allow_beverages ? 53 : -1);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(55, 62, "APP.VISITOR_KIOSK.CONFIRM"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(56, 63, "APP.VISITOR_KIOSK.CONFIRM"), " ");
   }
 }
 var DEFAULT_TEMPLATE = `
@@ -2670,28 +2697,17 @@ var DEFAULT_TEMPLATE = `
 <p>{{ can_use_lift }}</p>
 `;
 var _CheckinResultsComponent = class _CheckinResultsComponent extends AsyncHandler {
-  get time_format() {
-    return this._settings.time_format;
-  }
-  get now() {
-    return startOfMinute(roundToNearestMinutes(Date.now(), { nearestTo: 5 }));
-  }
-  get logo() {
-    return this._settings.theme === "dark" ? this._settings.get("app.logo_dark") : this._settings.get("app.logo_light");
-  }
-  get allow_printing_label() {
-    return this._settings.get("app.allow_printing_label") !== false;
-  }
-  constructor(_org, _checkin, _settings, _router, _date) {
-    super();
-    this._org = _org;
-    this._checkin = _checkin;
-    this._settings = _settings;
-    this._router = _router;
-    this._date = _date;
+  constructor() {
+    super(...arguments);
+    this._org = inject(OrganisationService);
+    this._settings = inject(SettingsService);
+    this._router = inject(Router);
+    this._date = inject(DatePipe);
+    this._checkin = inject(CheckinStateService);
     this.qr_code = "";
     this.date = Date.now();
     this.zones = [];
+    this.allow_beverages = false;
     this.event = this._checkin.event;
     this.guest = this._checkin.guest;
     this.photo = this._checkin.photo;
@@ -2719,18 +2735,36 @@ var _CheckinResultsComponent = class _CheckinResultsComponent extends AsyncHandl
       this.timeout("print", () => window.print());
     };
   }
+  get time_format() {
+    return this._settings.time_format;
+  }
+  get now() {
+    return startOfMinute(roundToNearestMinutes(Date.now(), { nearestTo: 5 }));
+  }
+  get logo() {
+    return this._settings.theme === "dark" ? this._settings.get("app.logo_dark") : this._settings.get("app.logo_light");
+  }
+  get allow_printing_label() {
+    return this._settings.get("app.allow_printing_label") !== false;
+  }
   ngOnInit() {
-    this.event.pipe(first()).subscribe((event) => {
+    return __async(this, null, function* () {
+      const event = yield firstValueFrom(this.event.pipe(first()));
       !event ? this.previous() : "";
-      if (event) {
-        this.date = event.date || event.booking_start * 1e3;
-        this.zones = event.zones;
-        this.e = event;
-      }
+      if (!event)
+        return;
+      this.date = event.date || event.booking_start * 1e3;
+      this.zones = event.zones;
+      this.e = event;
+      const standalone_location = this._settings.get("app.standalone_visitor_location");
+      this.allow_beverages = this._settings.get("app.allow_beverages") && (event.linked_event || standalone_location);
     });
   }
   previous() {
     this._router.navigate(["/checkin"]);
+  }
+  done() {
+    this._router.navigate(["/welcome"]);
   }
   next() {
     return __async(this, null, function* () {
@@ -2740,12 +2774,15 @@ var _CheckinResultsComponent = class _CheckinResultsComponent extends AsyncHandl
     });
   }
 };
-_CheckinResultsComponent.\u0275fac = function CheckinResultsComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CheckinResultsComponent)(\u0275\u0275directiveInject(OrganisationService), \u0275\u0275directiveInject(CheckinStateService), \u0275\u0275directiveInject(SettingsService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(DatePipe));
-};
-_CheckinResultsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinResultsComponent, selectors: [["checkin-results"]], standalone: false, features: [\u0275\u0275ProvidersFeature([DatePipe]), \u0275\u0275InheritDefinitionFeature], decls: 2, vars: 3, consts: [[1, "relative", "flex", "w-[36rem]", "flex-col", "items-center", "space-y-4", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow", "print:hidden"], [1, "text-xl"], [1, "", 3, "innerHTML"], ["printable", "", 1, "print-only", "relative", "m-4", "h-[14rem]", "w-[24rem]", "rounded-xl", "border", "border-neutral", "bg-base-100", "p-4"], [1, "flex", "h-full", "flex-col", "leading-tight"], [1, "mb-2", "flex", "h-[4.75rem]", "w-[4.75rem]", "items-center", "justify-center", "overflow-hidden", "rounded-full", "border-base-400", "bg-base-200", "text-3xl", "print:border-2"], [3, "user"], [1, "text-2xl"], [1, "text-sm"], [1, "text-sm", "opacity-60"], [1, "absolute", "bottom-4", "left-4", "mt-2", "w-32", "rounded-lg", "border", "border-black", "px-2", "py-1", "text-center", "text-sm", "font-medium", "uppercase", "text-black"], [1, "absolute", "right-4", "top-4", "flex", "flex-col", "items-end"], ["auth", "", "alt", "Logo", 1, "h-10", 3, "src"], [1, "text-right", "text-xs"], [1, "text-right"], [1, "absolute", "bottom-4", "right-4", "flex", "items-end", "space-x-2"], [1, "text-right", "font-medium", "leading-tight"], [1, "relative", "h-16", "w-16", "rounded-lg", "border", "border-base-200", "p-2"], [1, "h-12", "w-12", "object-contain", "object-center", 3, "src"], [1, "flex", "items-center", "space-x-2"], ["btn", "", "matRipple", "", 1, "w-32"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"]], template: function CheckinResultsComponent_Template(rf, ctx) {
+_CheckinResultsComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275CheckinResultsComponent_BaseFactory;
+  return function CheckinResultsComponent_Factory(__ngFactoryType__) {
+    return (\u0275CheckinResultsComponent_BaseFactory || (\u0275CheckinResultsComponent_BaseFactory = \u0275\u0275getInheritedFactory(_CheckinResultsComponent)))(__ngFactoryType__ || _CheckinResultsComponent);
+  };
+})();
+_CheckinResultsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinResultsComponent, selectors: [["checkin-results"]], standalone: false, features: [\u0275\u0275ProvidersFeature([DatePipe]), \u0275\u0275InheritDefinitionFeature], decls: 2, vars: 3, consts: [[1, "relative", "flex", "w-[36rem]", "flex-col", "items-center", "space-y-4", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow", "print:hidden"], [1, "text-xl"], [1, "", 3, "innerHTML"], ["printable", "", 1, "print-only", "relative", "m-4", "h-[14rem]", "w-[24rem]", "rounded-xl", "border", "border-neutral", "bg-base-100", "p-4"], [1, "flex", "h-full", "flex-col", "leading-tight"], [1, "mb-2", "flex", "h-[4.75rem]", "w-[4.75rem]", "items-center", "justify-center", "overflow-hidden", "rounded-full", "border-base-400", "bg-base-200", "text-3xl", "print:border-2"], [3, "user"], [1, "text-2xl"], [1, "text-sm"], [1, "text-sm", "opacity-60"], [1, "absolute", "bottom-4", "left-4", "mt-2", "w-32", "rounded-lg", "border", "border-black", "px-2", "py-1", "text-center", "text-sm", "font-medium", "uppercase", "text-black"], [1, "absolute", "right-4", "top-4", "flex", "flex-col", "items-end"], ["auth", "", "alt", "Logo", 1, "h-10", 3, "src"], [1, "text-right", "text-xs"], [1, "text-right"], [1, "absolute", "bottom-4", "right-4", "flex", "items-end", "space-x-2"], [1, "text-right", "font-medium", "leading-tight"], [1, "relative", "h-16", "w-16", "rounded-lg", "border", "border-base-200", "p-2"], [1, "h-12", "w-12", "object-contain", "object-center", 3, "src"], [1, "flex", "items-center", "space-x-2"], ["btn", "", "matRipple", "", 1, "w-32"], ["btn", "", "matRipple", "", 1, "inverse", "w-32"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"], ["btn", "", "matRipple", "", 1, "inverse", "w-32", 3, "click"]], template: function CheckinResultsComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, CheckinResultsComponent_Conditional_0_Template, 56, 72, "div", 0);
+    \u0275\u0275conditionalCreate(0, CheckinResultsComponent_Conditional_0_Template, 57, 73, "div", 0);
     \u0275\u0275pipe(1, "async");
   }
   if (rf & 2) {
@@ -2881,34 +2918,44 @@ var CheckinResultsComponent = _CheckinResultsComponent;
                             {{ 'APP.VISITOR_KIOSK.PRINT_LABEL' | translate }}
                         </button>
                     }
-                    <button btn matRipple class="w-32" (click)="next()">
+                    @if (allow_beverages) {
+                        <button
+                            btn
+                            matRipple
+                            class="inverse w-32"
+                            (click)="next()"
+                        >
+                            {{ 'APP.VISITOR_KIOSK.BEVERAGES' | translate }}
+                        </button>
+                    }
+                    <button btn matRipple class="w-32" (click)="done()">
                         {{ 'APP.VISITOR_KIOSK.CONFIRM' | translate }}
                     </button>
                 </div>
             </div>
         }
     `, providers: [DatePipe], standalone: false, styles: ["/* angular:styles/component:css;45a1e70cbb4b993091add757337674b51f7e2cd5d8c6d8ffd9f9f0736356a592;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/checkin/checkin-result.component.ts */\n:host > div {\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=checkin-result.component.css.map */\n"] }]
-  }], () => [{ type: OrganisationService }, { type: CheckinStateService }, { type: SettingsService }, { type: Router }, { type: DatePipe }], null);
+  }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinResultsComponent, { className: "CheckinResultsComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-result.component.ts", lineNumber: 164 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinResultsComponent, { className: "CheckinResultsComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-result.component.ts", lineNumber: 174 });
 })();
 
 // apps/visitor-kiosk/src/app/checkin/checkin.component.ts
 var _c010 = ["app-checkin", ""];
 var _CheckinComponent = class _CheckinComponent {
+  constructor() {
+    this._settings = inject(SettingsService);
+  }
   get now() {
     return startOfMinute(/* @__PURE__ */ new Date());
   }
   get background() {
     return this._settings.get("app.welcome_background");
   }
-  constructor(_settings) {
-    this._settings = _settings;
-  }
 };
 _CheckinComponent.\u0275fac = function CheckinComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CheckinComponent)(\u0275\u0275directiveInject(SettingsService));
+  return new (__ngFactoryType__ || _CheckinComponent)();
 };
 _CheckinComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinComponent, selectors: [["", "app-checkin", ""]], standalone: false, attrs: _c010, decls: 8, vars: 10, consts: [[1, "absolute", "inset-0", "flex", "items-center", "p-8", "print:hidden"], [1, "z-10", "flex", "w-full", "flex-col", "justify-center", "space-y-8"], [1, "absolute", "right-4", "top-4", "text-2xl", "text-white"], ["src", "assets/img/building.png", 1, "absolute", "bottom-0", "right-0", "w-[60%]"]], template: function CheckinComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -2951,7 +2998,7 @@ var CheckinComponent = _CheckinComponent;
             />
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;2c590c9e56511a088a1469fe4b227d8190323c208f95620a03712f1a8f5bae8d;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/checkin/checkin.component.ts */\n:host {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=checkin.component.css.map */\n"] }]
-  }], () => [{ type: SettingsService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinComponent, { className: "CheckinComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin.component.ts", lineNumber: 37 });
@@ -3011,10 +3058,10 @@ function CheckoutComponent_Conditional_1_Template(rf, ctx) {
   }
 }
 var _CheckoutComponent = class _CheckoutComponent {
-  constructor(_state, _router, _org) {
-    this._state = _state;
-    this._router = _router;
-    this._org = _org;
+  constructor() {
+    this._state = inject(CheckinStateService);
+    this._router = inject(Router);
+    this._org = inject(OrganisationService);
     this.loading = false;
   }
   ngOnInit() {
@@ -3038,7 +3085,7 @@ var _CheckoutComponent = class _CheckoutComponent {
   }
 };
 _CheckoutComponent.\u0275fac = function CheckoutComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CheckoutComponent)(\u0275\u0275directiveInject(CheckinStateService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(OrganisationService));
+  return new (__ngFactoryType__ || _CheckoutComponent)();
 };
 _CheckoutComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckoutComponent, selectors: [["app-checkout"]], standalone: false, decls: 2, vars: 1, consts: [[1, "relative", "flex", "w-[28rem]", "flex-col", "items-center", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow"], [1, "relative", "flex", "h-[20rem]", "w-[28rem]", "flex-col", "items-center", "justify-center", "space-y-2", "overflow-hidden", "rounded", "bg-base-100", "p-8", "shadow"], [1, "mb-2", "w-full", "text-xl"], [1, "mb-4", "mt-2", "w-full"], [1, "flex", "w-full", "items-center", "justify-end"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"], ["icon", "", "matRipple", "", 1, "absolute", "right-2", "top-2", 3, "routerLink"], [3, "diameter"]], template: function CheckoutComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -3088,7 +3135,7 @@ var CheckoutComponent = _CheckoutComponent;
             </div>
         }
     `, standalone: false, styles: ["/* angular:styles/component:css;45a1e70cbb4b993091add757337674b51f7e2cd5d8c6d8ffd9f9f0736356a592;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/checkin/checkout.component.ts */\n:host > div {\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=checkout.component.css.map */\n"] }]
-  }], () => [{ type: CheckinStateService }, { type: Router }, { type: OrganisationService }], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckoutComponent, { className: "CheckoutComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkout.component.ts", lineNumber: 55 });
@@ -3178,4 +3225,4 @@ var VisitorCheckinModule = _VisitorCheckinModule;
 export {
   VisitorCheckinModule
 };
-//# sourceMappingURL=checkin.module-BSNLHLDE.js.map
+//# sourceMappingURL=checkin.module-EU7V3OS2.js.map
