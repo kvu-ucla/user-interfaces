@@ -188,6 +188,7 @@ import {
   toQueryString,
   unique,
   updateSpaceList,
+  viewChild,
   ɵNgNoValidate,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
@@ -222,6 +223,7 @@ import {
   ɵɵprojectionDef,
   ɵɵproperty,
   ɵɵpureFunction1,
+  ɵɵqueryAdvance,
   ɵɵqueryRefresh,
   ɵɵreference,
   ɵɵrepeater,
@@ -241,8 +243,9 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
-  ɵɵviewQuery
-} from "./chunk-267XGI7B.js";
+  ɵɵviewQuery,
+  ɵɵviewQuerySignal
+} from "./chunk-XO3RYWF4.js";
 import {
   __async,
   __spreadProps,
@@ -347,6 +350,7 @@ var _VirtualKeyboardComponent = class _VirtualKeyboardComponent extends AsyncHan
     this.keyset = DEFAULT_KEYS;
     this.state = "normal";
     this._overlay_ref = null;
+    this._portal = viewChild(CdkPortal);
     this.onFocus = () => {
       if (!_VirtualKeyboardComponent.enabled)
         return;
@@ -372,12 +376,13 @@ var _VirtualKeyboardComponent = class _VirtualKeyboardComponent extends AsyncHan
   open() {
     if (this._overlay_ref)
       return;
-    if (!this._portal)
+    const _portal = this._portal();
+    if (!_portal)
       return;
     this._overlay_ref = this._overlay.create({
       positionStrategy: this._overlay.position().global().bottom().centerHorizontally()
     });
-    this._overlay_ref.attach(this._portal);
+    this._overlay_ref.attach(_portal);
   }
   close() {
     if (this._overlay_ref) {
@@ -424,11 +429,10 @@ _VirtualKeyboardComponent.\u0275fac = function VirtualKeyboardComponent_Factory(
 };
 _VirtualKeyboardComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VirtualKeyboardComponent, selectors: [["input", "keyboard", ""], ["textarea", "keyboard", ""]], viewQuery: function VirtualKeyboardComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(CdkPortal, 5);
+    \u0275\u0275viewQuerySignal(ctx._portal, CdkPortal, 5);
   }
   if (rf & 2) {
-    let _t2;
-    \u0275\u0275queryRefresh(_t2 = \u0275\u0275loadQuery()) && (ctx._portal = _t2.first);
+    \u0275\u0275queryAdvance();
   }
 }, hostBindings: function VirtualKeyboardComponent_HostBindings(rf, ctx) {
   if (rf & 1) {
@@ -496,9 +500,6 @@ var VirtualKeyboardComponent = _VirtualKeyboardComponent;
     `, imports: [MatRippleModule, PortalModule], styles: ["/* angular:styles/component:css;7121e8e0f3a6ec31112fa4330c36a57119d4007e4a28e0345816f9f8d2c8ff0e;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/virtual-keyboard.component.ts */\n[key] {\n  height: 3.5rem;\n  width: 4rem;\n  transition: box-shadow 200ms, top 200ms;\n  box-shadow: 0 4px 0 0.04px rgba(0, 0, 0, 0.1);\n}\n[key].special {\n  width: 10rem;\n}\n[key].space {\n  flex: 1;\n  min-width: 10rem;\n  max-width: 25rem;\n}\n[key]:hover {\n  top: 2px;\n  box-shadow: 0 2px 0 0.04px rgba(0, 0, 0, 0.1);\n}\n[key]:active {\n  top: 4px;\n  box-shadow: 0 0 0 0.04px rgba(0, 0, 0, 0.1);\n}\n/*# sourceMappingURL=virtual-keyboard.component.css.map */\n"] }]
   }], () => [], { keyset: [{
     type: Input
-  }], _portal: [{
-    type: ViewChild,
-    args: [CdkPortal]
   }], onFocus: [{
     type: HostListener,
     args: ["focus"]
@@ -1905,9 +1906,10 @@ var _UserSearchFieldComponent = class _UserSearchFieldComponent extends AsyncHan
     }));
     this.registerOnChange = (fn2) => this._onChange = fn2;
     this.registerOnTouched = (fn2) => this._onTouch = fn2;
+    this._input_el = viewChild("input", { read: ElementRef });
     this.cancelReset = () => this.clearTimeout("reset");
     this.blurInput = () => {
-      this.timeout("blur", () => this._input_el?.nativeElement?.blur());
+      this.timeout("blur", () => this._input_el()?.nativeElement?.blur());
     };
   }
   ngOnInit() {
@@ -1958,11 +1960,10 @@ _UserSearchFieldComponent.\u0275fac = function UserSearchFieldComponent_Factory(
 };
 _UserSearchFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserSearchFieldComponent, selectors: [["a-user-search-field"]], viewQuery: function UserSearchFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c03, 5, ElementRef);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c03, 5, ElementRef);
   }
   if (rf & 2) {
-    let _t2;
-    \u0275\u0275queryRefresh(_t2 = \u0275\u0275loadQuery()) && (ctx._input_el = _t2.first);
+    \u0275\u0275queryAdvance();
   }
 }, inputs: { disabled: "disabled", placeholder: "placeholder", options: "options", guests: "guests", error: "error", validate: "validate", empty_fn: "empty_fn", filter: "filter", query_fn: "query_fn" }, features: [\u0275\u0275ProvidersFeature([
   {
@@ -2157,9 +2158,6 @@ var UserSearchFieldComponent = _UserSearchFieldComponent;
     type: Input
   }], query_fn: [{
     type: Input
-  }], _input_el: [{
-    type: ViewChild,
-    args: ["input", { read: ElementRef }]
   }] });
 })();
 (() => {
@@ -5354,6 +5352,7 @@ var _CardInputFieldComponent = class _CardInputFieldComponent extends AsyncHandl
     this.years = Array(12).fill(0).map((_2, idx) => DATE_PIPE.transform(addYears(Date.now(), idx), "yyyy"));
     this.digits = Array(16).fill(0);
     this._index = 0;
+    this._input_el = viewChild.required("input");
     this.registerOnChange = (fn2) => this._onChange = fn2;
     this.registerOnTouched = (fn2) => this._onTouch = fn2;
     this.setDisabledState = (s) => this.disabled = s;
@@ -5379,14 +5378,15 @@ var _CardInputFieldComponent = class _CardInputFieldComponent extends AsyncHandl
     return this.is_amex ? `${no.substring(0, 4)}-${no.substring(4, 10)}-${no.substring(10)}` : `${no.substring(0, 4)}-${no.substring(4, 8)}-${no.substring(8, 12)}-${no.substring(12)}`;
   }
   get card_focused() {
-    return document.activeElement === this._input_el.nativeElement || document.activeElement === this._input_el.nativeElement.parentElement;
+    const _input_el = this._input_el();
+    return document.activeElement === _input_el.nativeElement || document.activeElement === _input_el.nativeElement.parentElement;
   }
   ngOnInit() {
     this.subscription("changes", this.details.valueChanges.subscribe((v2) => this.timeout("update", () => this.setValue(this.details.getRawValue()))));
   }
   focusInput() {
-    this._input_el.nativeElement.focus();
-    this._index = this._input_el.nativeElement.selectionStart || 0;
+    this._input_el().nativeElement.focus();
+    this._index = this._input_el().nativeElement.selectionStart || 0;
   }
   onInput(event) {
     if (!event || !this.card_focused)
@@ -5437,11 +5437,10 @@ _CardInputFieldComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _CardInputFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CardInputFieldComponent, selectors: [["card-input-field"]], viewQuery: function CardInputFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c04, 7);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c04, 5);
   }
   if (rf & 2) {
-    let _t2;
-    \u0275\u0275queryRefresh(_t2 = \u0275\u0275loadQuery()) && (ctx._input_el = _t2.first);
+    \u0275\u0275queryAdvance();
   }
 }, features: [\u0275\u0275ProvidersFeature([
   {
@@ -5628,10 +5627,7 @@ var CardInputFieldComponent = _CardInputFieldComponent;
       MatSelectModule,
       ReactiveFormsModule
     ], styles: ["/* angular:styles/component:css;2bc8ca7aace10e46f51053cb2cf4127500bd9fcd06c7c0d1d5dc88d70d997800;/home/runner/work/user-interfaces/user-interfaces/libs/payments/src/lib/card-input-field.component.ts */\nmat-form-field {\n  height: 3.25rem;\n}\n/*# sourceMappingURL=card-input-field.component.css.map */\n"] }]
-  }], null, { _input_el: [{
-    type: ViewChild,
-    args: ["input", { static: true }]
-  }] });
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CardInputFieldComponent, { className: "CardInputFieldComponent", filePath: "libs/payments/src/lib/card-input-field.component.ts", lineNumber: 138 });
@@ -6670,4 +6666,4 @@ export {
   showStaff,
   UserSearchFieldComponent
 };
-//# sourceMappingURL=chunk-5O4WLIIF.js.map
+//# sourceMappingURL=chunk-UYBMIPQS.js.map

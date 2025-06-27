@@ -2,12 +2,12 @@ import {
   CheckinStateService,
   MatCheckbox,
   MatCheckboxModule
-} from "./chunk-K6T5UAIR.js";
+} from "./chunk-YGF3V45T.js";
 import {
   generateQRCode,
   showEventMetadata,
   updateEventMetadata
-} from "./chunk-EYBYO4X5.js";
+} from "./chunk-WNYB3FI5.js";
 import {
   ActivatedRoute,
   AsyncHandler,
@@ -62,7 +62,6 @@ import {
   SettingsService,
   TemplatePortalDirective,
   TranslatePipe,
-  ViewChild,
   catchError,
   combineLatest,
   filter,
@@ -88,6 +87,7 @@ import {
   startWith,
   switchMap,
   updateBooking,
+  viewChild,
   ɵNgNoValidate,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
@@ -109,7 +109,6 @@ import {
   ɵɵgetCurrentView,
   ɵɵgetInheritedFactory,
   ɵɵlistener,
-  ɵɵloadQuery,
   ɵɵnextContext,
   ɵɵpipe,
   ɵɵpipeBind1,
@@ -120,7 +119,7 @@ import {
   ɵɵpureFunction0,
   ɵɵpureFunction1,
   ɵɵpureFunction3,
-  ɵɵqueryRefresh,
+  ɵɵqueryAdvance,
   ɵɵrepeater,
   ɵɵrepeaterCreate,
   ɵɵrepeaterTrackByIdentity,
@@ -137,8 +136,8 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
-  ɵɵviewQuery
-} from "./chunk-267XGI7B.js";
+  ɵɵviewQuerySignal
+} from "./chunk-XO3RYWF4.js";
 import {
   __async,
   __spreadProps,
@@ -229,6 +228,8 @@ var _TakePhotoComponent = class _TakePhotoComponent extends AsyncHandler {
     this.back = new EventEmitter();
     this.has_photo = false;
     this.loading = false;
+    this._video_el = viewChild("video");
+    this._canvas_el = viewChild("canvas");
     this.constraints = {
       audio: false,
       video: {
@@ -248,12 +249,12 @@ var _TakePhotoComponent = class _TakePhotoComponent extends AsyncHandler {
     return __async(this, null, function* () {
       this.image_url = null;
       const stream = yield navigator.mediaDevices?.getUserMedia(this.constraints);
-      this._video_el.nativeElement.srcObject = stream;
+      this._video_el().nativeElement.srcObject = stream;
       this.loading = false;
     });
   }
   stopCapture() {
-    const el = this._video_el.nativeElement;
+    const el = this._video_el().nativeElement;
     if (!el?.srcObject)
       return;
     const stream = el.srcObject;
@@ -263,9 +264,9 @@ var _TakePhotoComponent = class _TakePhotoComponent extends AsyncHandler {
   }
   takePhoto() {
     this.loading = true;
-    const canvas = this._canvas_el.nativeElement;
+    const canvas = this._canvas_el().nativeElement;
     const ctx = canvas.getContext("2d");
-    const vid_el = this._video_el.nativeElement;
+    const vid_el = this._video_el().nativeElement;
     const { videoWidth, videoHeight } = vid_el;
     const cw = canvas.width;
     const ch = canvas.height;
@@ -281,14 +282,14 @@ var _TakePhotoComponent = class _TakePhotoComponent extends AsyncHandler {
   }
   cancelPhoto() {
     this.loading = true;
-    const canvas = this._canvas_el.nativeElement;
+    const canvas = this._canvas_el().nativeElement;
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     this.has_photo = false;
     this.startCapture();
   }
   acceptPhoto() {
-    const canvas = this._canvas_el.nativeElement;
+    const canvas = this._canvas_el().nativeElement;
     try {
       this.image_url = canvas.toDataURL("image/jpeg", 0.75);
       this.captured.emit(this.image_url);
@@ -307,13 +308,11 @@ _TakePhotoComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _TakePhotoComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TakePhotoComponent, selectors: [["a-take-photo"]], viewQuery: function TakePhotoComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c0, 7);
-    \u0275\u0275viewQuery(_c1, 7);
+    \u0275\u0275viewQuerySignal(ctx._video_el, _c0, 5);
+    \u0275\u0275viewQuerySignal(ctx._canvas_el, _c1, 5);
   }
   if (rf & 2) {
-    let _t;
-    \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._video_el = _t.first);
-    \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._canvas_el = _t.first);
+    \u0275\u0275queryAdvance(2);
   }
 }, inputs: { back_text: "back_text" }, outputs: { captured: "captured", back: "back" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 9, vars: 6, consts: [["video", ""], ["canvas", ""], ["name", "camera", 1, "relative", "flex", "h-[22rem]", "w-[22rem]", "flex-col", "items-center", "justify-center", "overflow-hidden", "rounded-full", "border-2", "border-base-300", "bg-base-200"], ["id", "video", "autoplay", "", 1, "absolute", "left-1/2", "top-1/2", "mx-auto", "min-h-full", "min-w-full", "-translate-x-1/2", "-translate-y-1/2", "object-cover"], ["id", "canvas", "width", "400", "height", "400", 1, "absolute", "left-1/2", "top-1/2", "mx-auto", "h-full", "w-full", "-translate-x-1/2", "-translate-y-1/2", "object-cover"], [1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "space-y-4"], [1, "mt-4", "flex", "w-full", "items-center", "justify-center", "space-x-2"], ["diameter", "32"], [1, "text"], ["btn", "", "matRipple", "", 1, "inverse", "flex-1", 3, "click"], ["btn", "", "matRipple", "", 1, "take-photo", "flex-1", 3, "click"], ["btn", "", "matRipple", "", 1, "flex-1", 3, "click"]], template: function TakePhotoComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -410,12 +409,6 @@ var TakePhotoComponent = _TakePhotoComponent;
     type: Output
   }], back: [{
     type: Output
-  }], _video_el: [{
-    type: ViewChild,
-    args: ["video", { static: true }]
-  }], _canvas_el: [{
-    type: ViewChild,
-    args: ["canvas", { static: true }]
   }] });
 })();
 (() => {
@@ -2014,6 +2007,7 @@ var _CheckinQRScanComponent = class _CheckinQRScanComponent extends AsyncHandler
     this._router = inject(Router);
     this._settings = inject(SettingsService);
     this.checking_code = false;
+    this._video_el = viewChild("video");
   }
   get is_induction_enabled() {
     return this._settings.get("app.induction_enabled") && this._settings.get("app.induction_details");
@@ -2026,8 +2020,9 @@ var _CheckinQRScanComponent = class _CheckinQRScanComponent extends AsyncHandler
     this.setupQRReader();
   }
   ngOnDestroy() {
-    if (this._video_el.nativeElement.srcObject) {
-      this._video_el.nativeElement.srcObject.getTracks().forEach((track) => track?.stop());
+    const _video_el = this._video_el();
+    if (_video_el.nativeElement.srcObject) {
+      _video_el.nativeElement.srcObject.getTracks().forEach((track) => track?.stop());
     }
     this._reader?.stop();
   }
@@ -2105,14 +2100,15 @@ var _CheckinQRScanComponent = class _CheckinQRScanComponent extends AsyncHandler
   }
   setupQRReader() {
     this.timeout("setup_qr_reader", () => {
-      if (!this._video_el?.nativeElement)
+      const _video_el = this._video_el();
+      if (!_video_el?.nativeElement)
         return this.setupQRReader();
-      if (navigator.mediaDevices?.getUserMedia && !this._video_el.nativeElement.srcObject) {
-        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => this._video_el.nativeElement.srcObject = stream).catch((e2) => console.error("Unable to fetch media devices!", e2));
+      if (navigator.mediaDevices?.getUserMedia && !_video_el.nativeElement.srcObject) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => this._video_el().nativeElement.srcObject = stream).catch((e2) => console.error("Unable to fetch media devices!", e2));
       }
       if (!qr_scanner_min_default)
         return;
-      this._reader = new qr_scanner_min_default(this._video_el.nativeElement, (r) => this.checkQRCode(r.data), {});
+      this._reader = new qr_scanner_min_default(_video_el.nativeElement, (r) => this.checkQRCode(r.data), {});
       this._reader.start();
     });
   }
@@ -2129,11 +2125,10 @@ _CheckinQRScanComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _CheckinQRScanComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinQRScanComponent, selectors: [["", "checkin-qr-scan", ""]], viewQuery: function CheckinQRScanComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c07, 7);
+    \u0275\u0275viewQuerySignal(ctx._video_el, _c07, 5);
   }
   if (rf & 2) {
-    let _t;
-    \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._video_el = _t.first);
+    \u0275\u0275queryAdvance();
   }
 }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c14, decls: 30, vars: 22, consts: [["video", ""], [1, "relative", "flex", "w-[36rem]", "flex-col", "items-center", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow"], [1, "my-4"], [1, "flex", "w-full", "items-center", "space-x-2"], ["appearance", "outline", 1, "no-subscript", "w-px", "flex-1"], ["matInput", "", "placeholder", "Enter email...", "type", "email", "autocomplete", "off", 3, "ngModelChange", "blur", "keyup.enter", "ngModel"], ["btn", "", "matRipple", "", 3, "click"], [1, "relative", "mt-4", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-200"], [1, "absolute", "left-1/2", "top-1/2", "z-0", "flex", "-translate-x-1/2", "-translate-y-1/2", "flex-col", "items-center", "space-y-2", "opacity-30"], [1, "text-6xl"], [1, "text-center"], ["id", "qr-stream", "playsinline", "", "width", "640", "height", "480", "autoplay", "", 1, "relative", "z-10", "object-cover"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-0", 3, "routerLink"], [1, "relative", "flex", "flex-col", "items-center", "overflow-hidden", "rounded", "bg-base-100", "p-16", "shadow"], ["diameter", "32"]], template: function CheckinQRScanComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -2281,10 +2276,7 @@ var CheckinQRScanComponent = _CheckinQRScanComponent;
             </p>
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;f8c4f94f51bad43854aa11f38704354ddfb3bca198dce0c82bd54a6e53c0dd17;/home/runner/work/user-interfaces/user-interfaces/apps/visitor-kiosk/src/app/checkin/checkin-qr-scan.component.ts */\nvideo {\n  width: 34rem;\n  height: 24rem;\n}\na {\n  position: absolute;\n}\n/*# sourceMappingURL=checkin-qr-scan.component.css.map */\n"] }]
-  }], null, { _video_el: [{
-    type: ViewChild,
-    args: ["video", { static: true }]
-  }] });
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinQRScanComponent, { className: "CheckinQRScanComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-qr-scan.component.ts", lineNumber: 99 });
@@ -2396,6 +2388,7 @@ var _PrintableComponent = class _PrintableComponent extends AsyncHandler {
     this._elem = inject(ElementRef);
     this.content = "";
     this._overlay_ref = null;
+    this._portal = viewChild(CdkPortal);
   }
   ngOnInit() {
     this.open();
@@ -2411,7 +2404,8 @@ var _PrintableComponent = class _PrintableComponent extends AsyncHandler {
     this.timeout("open", () => {
       if (this._overlay_ref)
         this.close();
-      if (!this._portal)
+      const _portal = this._portal();
+      if (!_portal)
         return;
       const default_x = "end";
       const default_y = "top";
@@ -2426,7 +2420,7 @@ var _PrintableComponent = class _PrintableComponent extends AsyncHandler {
           }
         ])
       });
-      this._overlay_ref.attach(this._portal);
+      this._overlay_ref.attach(_portal);
     }, 50);
   }
   close() {
@@ -2442,11 +2436,10 @@ _PrintableComponent.\u0275fac = function PrintableComponent_Factory(__ngFactoryT
 };
 _PrintableComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PrintableComponent, selectors: [["", "printable", ""]], viewQuery: function PrintableComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(CdkPortal, 5);
+    \u0275\u0275viewQuerySignal(ctx._portal, CdkPortal, 5);
   }
   if (rf & 2) {
-    let _t;
-    \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._portal = _t.first);
+    \u0275\u0275queryAdvance();
   }
 }, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c08, ngContentSelectors: _c15, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["printable-view", "", 1, "pointer-events-none", "fixed", "left-0", "top-0", "hidden", "flex-col", "items-end", "print:flex", 3, "innerHTML"]], template: function PrintableComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -2474,10 +2467,7 @@ var PrintableComponent = _PrintableComponent;
     `,
       imports: [SanitizePipe, PortalModule]
     }]
-  }], () => [], { _portal: [{
-    type: ViewChild,
-    args: [CdkPortal]
-  }] });
+  }], () => [], null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PrintableComponent, { className: "PrintableComponent", filePath: "libs/components/src/lib/printable.component.ts", lineNumber: 31 });
@@ -3225,4 +3215,4 @@ var VisitorCheckinModule = _VisitorCheckinModule;
 export {
   VisitorCheckinModule
 };
-//# sourceMappingURL=checkin.module-EU7V3OS2.js.map
+//# sourceMappingURL=checkin.module-HCSTGMI4.js.map

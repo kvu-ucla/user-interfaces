@@ -5,11 +5,11 @@ import {
   VirtualKeyboardComponent,
   generateMockSpace,
   setHours
-} from "./chunk-5O4WLIIF.js";
+} from "./chunk-UYBMIPQS.js";
 import {
   CheckinStateService,
   MatCheckboxModule
-} from "./chunk-K6T5UAIR.js";
+} from "./chunk-YGF3V45T.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -249,7 +249,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-267XGI7B.js";
+} from "./chunk-XO3RYWF4.js";
 import {
   __async,
   __export,
@@ -29204,48 +29204,60 @@ function VisitorRegistrationComponent_Conditional_3_Template(rf, ctx) {
     \u0275\u0275elementStart(37, "mat-form-field", 11);
     \u0275\u0275element(38, "input", 20);
     \u0275\u0275pipe(39, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(40, "label", 19);
+    \u0275\u0275text(41);
+    \u0275\u0275pipe(42, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(43, "mat-form-field", 21);
+    \u0275\u0275element(44, "input", 22);
+    \u0275\u0275pipe(45, "translate");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(40, "div", 21)(41, "button", 22);
-    \u0275\u0275listener("click", function VisitorRegistrationComponent_Conditional_3_Template_button_click_41_listener() {
+    \u0275\u0275elementStart(46, "div", 23)(47, "button", 24);
+    \u0275\u0275listener("click", function VisitorRegistrationComponent_Conditional_3_Template_button_click_47_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.register());
     });
-    \u0275\u0275text(42);
-    \u0275\u0275pipe(43, "translate");
+    \u0275\u0275text(48);
+    \u0275\u0275pipe(49, "translate");
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275property("formGroup", ctx_r1.form);
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 12, "APP.VISITOR_KIOSK.REGISTRATION"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 14, "APP.VISITOR_KIOSK.REGISTRATION"), " ");
     \u0275\u0275advance(2);
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(32, _c05));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(38, _c05));
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(11, 14, "APP.VISITOR_KIOSK.NAME"));
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(11, 16, "APP.VISITOR_KIOSK.NAME"));
     \u0275\u0275advance(3);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(14, 16, "APP.VISITOR_KIOSK.NAME"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(14, 18, "APP.VISITOR_KIOSK.NAME"));
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(19, 18, "APP.VISITOR_KIOSK.EMAIL"));
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(19, 20, "APP.VISITOR_KIOSK.EMAIL"));
     \u0275\u0275advance(3);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(22, 20, "APP.VISITOR_KIOSK.EMAIL"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(22, 22, "APP.VISITOR_KIOSK.EMAIL"));
     \u0275\u0275advance(8);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(30, 22, "APP.VISITOR_KIOSK.PHONE"));
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(30, 24, "APP.VISITOR_KIOSK.PHONE"));
     \u0275\u0275advance(3);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(33, 24, "APP.VISITOR_KIOSK.PHONE"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(33, 26, "APP.VISITOR_KIOSK.PHONE"));
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(36, 26, "APP.VISITOR_KIOSK.ORGANISATION"));
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(36, 28, "APP.VISITOR_KIOSK.ORGANISATION"));
     \u0275\u0275advance(3);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(39, 28, "APP.VISITOR_KIOSK.ORGANISATION"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(39, 30, "APP.VISITOR_KIOSK.ORGANISATION"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(42, 32, "APP.VISITOR_KIOSK.REASON"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(45, 34, "APP.VISITOR_KIOSK.ORGANISATION"));
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(43, 30, "APP.VISITOR_KIOSK.REGISTER"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(49, 36, "APP.VISITOR_KIOSK.REGISTER"), " ");
   }
 }
 function VisitorRegistrationComponent_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 4);
-    \u0275\u0275element(1, "mat-spinner", 23);
+    \u0275\u0275element(1, "mat-spinner", 25);
     \u0275\u0275elementStart(2, "p");
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "translate");
@@ -29284,7 +29296,8 @@ var _VisitorRegistrationComponent = class _VisitorRegistrationComponent {
     this._booking_form.setOptions({ type: "visitor" });
     this.form.get("asset_id").setValidators([Validators.required, Validators.email]);
     this._booking_form.form.patchValue({
-      booking_type: "visitor"
+      booking_type: "visitor",
+      title: "Visit"
     });
     setTimeout(() => {
       if (this._settings.get("app.allow_self_registration"))
@@ -29306,6 +29319,7 @@ var _VisitorRegistrationComponent = class _VisitorRegistrationComponent {
         booking_type: "visitor",
         self_registered: true,
         name: value.asset_name,
+        description: value.description || value.title || "",
         attendees: [
           new User({
             name: value.asset_name,
@@ -29340,11 +29354,11 @@ var _VisitorRegistrationComponent = class _VisitorRegistrationComponent {
 _VisitorRegistrationComponent.\u0275fac = function VisitorRegistrationComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _VisitorRegistrationComponent)();
 };
-_VisitorRegistrationComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VisitorRegistrationComponent, selectors: [["visitor-registration"]], standalone: false, decls: 9, vars: 10, consts: [[1, "absolute", "inset-0", "flex", "items-center", "p-8"], [1, "absolute", "left-1/2", "top-1/2", "min-h-[100%]", "min-w-[100%]", "-translate-x-1/2", "-translate-y-1/2", 3, "src"], ["src", "assets/img/building.png", 1, "absolute", "bottom-0", "right-0", "w-[60%]"], [1, "absolute", "left-4", "top-1/2", "max-h-[80vh]", "w-[32rem]", "max-w-[calc(100%-2rem)]", "-translate-y-1/2", "overflow-auto", "rounded", "bg-base-100", "shadow", 3, "formGroup"], [1, "absolute", "left-4", "top-1/2", "flex", "w-[24rem]", "-translate-y-1/2", "flex-col", "items-center", "justify-center", "space-y-4", "rounded", "bg-base-100", "p-16", "shadow"], [1, "absolute", "right-4", "top-4", "text-2xl", "text-white"], [1, "flex", "items-center", "justify-between", "space-x-4", "border-b", "border-base-300", "px-4", "py-2"], [1, "py-2", "text-lg", "font-medium"], ["icon", "", "matRipple", "", 3, "routerLink"], [1, "p-4"], ["for", "name"], ["appearance", "outline", 1, "w-full"], ["matInput", "", "name", "name", "formControlName", "asset_name", 3, "placeholder"], ["for", "email"], ["matInput", "", "name", "email", "formControlName", "asset_id", 3, "placeholder"], ["for", "user"], ["formControlName", "user", 1, "mb-4"], ["form", "phone"], ["matInput", "", "name", "phone", "type", "tel", "formControlName", "phone", 3, "placeholder"], ["form", "org"], ["matInput", "", "name", "org", "formControlName", "company", 3, "placeholder"], [1, "flex", "justify-end", "space-x-4", "border-t", "border-base-300", "px-4", "py-2"], ["btn", "", "matRipple", "", 1, "w-40", 3, "click"], ["diameter", "32"]], template: function VisitorRegistrationComponent_Template(rf, ctx) {
+_VisitorRegistrationComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VisitorRegistrationComponent, selectors: [["visitor-registration"]], standalone: false, decls: 9, vars: 10, consts: [[1, "absolute", "inset-0", "flex", "items-center", "p-8"], [1, "absolute", "left-1/2", "top-1/2", "min-h-[100%]", "min-w-[100%]", "-translate-x-1/2", "-translate-y-1/2", 3, "src"], ["src", "assets/img/building.png", 1, "absolute", "bottom-0", "right-0", "w-[60%]"], [1, "absolute", "left-4", "top-1/2", "max-h-[80vh]", "w-[32rem]", "max-w-[calc(100%-2rem)]", "-translate-y-1/2", "overflow-auto", "rounded", "bg-base-100", "shadow", 3, "formGroup"], [1, "absolute", "left-4", "top-1/2", "flex", "w-[24rem]", "-translate-y-1/2", "flex-col", "items-center", "justify-center", "space-y-4", "rounded", "bg-base-100", "p-16", "shadow"], [1, "absolute", "right-4", "top-4", "text-2xl", "text-white"], [1, "sticky", "top-0", "z-10", "m-2", "flex", "w-[calc(100%-1rem)]", "items-center", "justify-between", "rounded", "border-none", "bg-base-200", "p-2"], [1, "px-2", "text-lg", "font-medium"], ["icon", "", "matRipple", "", 3, "routerLink"], [1, "p-4"], ["for", "name"], ["appearance", "outline", 1, "w-full"], ["matInput", "", "name", "name", "formControlName", "asset_name", 3, "placeholder"], ["for", "email"], ["matInput", "", "name", "email", "formControlName", "asset_id", 3, "placeholder"], ["for", "user"], ["formControlName", "user", 1, "mb-4"], ["form", "phone"], ["matInput", "", "name", "phone", "type", "tel", "formControlName", "phone", 3, "placeholder"], ["form", "org"], ["matInput", "", "name", "org", "formControlName", "company", 3, "placeholder"], ["appearance", "outline", 1, "no-subscript", "w-full"], ["matInput", "", "name", "reason", "formControlName", "title", 3, "placeholder"], [1, "sticky", "bottom-0", "z-10", "m-2", "flex", "w-[calc(100%-1rem)]", "items-center", "justify-end", "rounded", "border-none", "bg-base-200", "p-2"], ["btn", "", "matRipple", "", 1, "w-40", 3, "click"], ["diameter", "32"]], template: function VisitorRegistrationComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0);
     \u0275\u0275element(1, "img", 1)(2, "img", 2);
-    \u0275\u0275conditionalCreate(3, VisitorRegistrationComponent_Conditional_3_Template, 44, 33, "div", 3)(4, VisitorRegistrationComponent_Conditional_4_Template, 5, 3, "div", 4);
+    \u0275\u0275conditionalCreate(3, VisitorRegistrationComponent_Conditional_3_Template, 50, 39, "div", 3)(4, VisitorRegistrationComponent_Conditional_4_Template, 5, 3, "div", 4);
     \u0275\u0275elementStart(5, "div", 5);
     \u0275\u0275text(6);
     \u0275\u0275pipe(7, "date");
@@ -29380,9 +29394,9 @@ var VisitorRegistrationComponent = _VisitorRegistrationComponent;
                     [formGroup]="form"
                 >
                     <div
-                        class="flex items-center justify-between space-x-4 border-b border-base-300 px-4 py-2"
+                        class="sticky top-0 z-10 m-2 flex w-[calc(100%-1rem)] items-center justify-between rounded border-none bg-base-200 p-2"
                     >
-                        <h3 class="py-2 text-lg font-medium">
+                        <h3 class="px-2 text-lg font-medium">
                             {{ 'APP.VISITOR_KIOSK.REGISTRATION' | translate }}
                         </h3>
                         <a icon matRipple [routerLink]="['/welcome']">
@@ -29452,9 +29466,25 @@ var VisitorRegistrationComponent = _VisitorRegistrationComponent;
                                 "
                             />
                         </mat-form-field>
+                        <label form="org">
+                            {{ 'APP.VISITOR_KIOSK.REASON' | translate }}
+                        </label>
+                        <mat-form-field
+                            appearance="outline"
+                            class="no-subscript w-full"
+                        >
+                            <input
+                                matInput
+                                name="reason"
+                                formControlName="title"
+                                [placeholder]="
+                                    'APP.VISITOR_KIOSK.ORGANISATION' | translate
+                                "
+                            />
+                        </mat-form-field>
                     </div>
                     <div
-                        class="flex justify-end space-x-4 border-t border-base-300 px-4 py-2"
+                        class="sticky bottom-0 z-10 m-2 flex w-[calc(100%-1rem)] items-center justify-end rounded border-none bg-base-200 p-2"
                     >
                         <button btn matRipple class="w-40" (click)="register()">
                             {{ 'APP.VISITOR_KIOSK.REGISTER' | translate }}
@@ -29477,7 +29507,7 @@ var VisitorRegistrationComponent = _VisitorRegistrationComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(VisitorRegistrationComponent, { className: "VisitorRegistrationComponent", filePath: "apps/visitor-kiosk/src/app/visitor-registration.component.ts", lineNumber: 134 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(VisitorRegistrationComponent, { className: "VisitorRegistrationComponent", filePath: "apps/visitor-kiosk/src/app/visitor-registration.component.ts", lineNumber: 150 });
 })();
 
 // apps/visitor-kiosk/src/app/welcome.component.ts
@@ -29842,11 +29872,11 @@ var routes = [
   { path: "register", component: VisitorRegistrationComponent },
   {
     path: "explore",
-    loadChildren: () => import("./explore.module-XKVFBTOV.js").then((m) => m.AppExploreModule)
+    loadChildren: () => import("./explore.module-RF4RT755.js").then((m) => m.AppExploreModule)
   },
   {
     path: "checkin",
-    loadChildren: () => import("./checkin.module-EU7V3OS2.js").then((m) => m.VisitorCheckinModule)
+    loadChildren: () => import("./checkin.module-HCSTGMI4.js").then((m) => m.VisitorCheckinModule)
   },
   { path: "**", redirectTo: "bootstrap" }
 ];

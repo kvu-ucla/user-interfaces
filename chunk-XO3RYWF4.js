@@ -22741,6 +22741,10 @@ var viewChild = (() => {
   viewChildFn.required = viewChildRequiredFn;
   return viewChildFn;
 })();
+function viewChildren(locator, opts) {
+  ngDevMode && assertInInjectionContext(viewChildren);
+  return createMultiResultQuerySignalFn(opts);
+}
 function contentChildFn(locator, opts) {
   ngDevMode && assertInInjectionContext(contentChild);
   return createSingleResultOptionalQuerySignalFn(opts);
@@ -63983,6 +63987,7 @@ var APP = {
     HOST: "Host",
     PHONE: "Phone",
     ORGANISATION: "Organization",
+    REASON: "Reason for visit",
     CHECKED_IN_MSG: "You are checked in!",
     CHECKED_IN_MSG_SELF_REG: "Your registration is confirmed!",
     TAKE_PHOTO: "Take a photo to continue",
@@ -72171,15 +72176,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "0920604",
-  "hash": "0920604",
+  "raw": "9033b43",
+  "hash": "9033b43",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "0920604",
+  "suffix": "9033b43",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1750910606745
+  "time": 1750999830230
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -81469,7 +81474,7 @@ var Booking = class {
     this.parent_id = data.parent_id || "";
     this.asset_id = data.asset_id || "";
     this.asset_ids = data.asset_ids || [data.asset_id].filter((_2) => _2);
-    this.asset_name = data.asset_name || data.extension_data?.asset_name || data.description || data.asset_id || "";
+    this.asset_name = data.asset_name || data.extension_data?.asset_name || data.extension_data?.name || data.description || data.asset_id || "";
     this.zones = data.zones || [];
     this.booking_start = Math.floor(data.date / 1e3) || data.booking_start || getUnixTime(roundToNearestMinutes(addMinutes(Date.now(), 5), {
       nearestTo: 5
@@ -81688,7 +81693,7 @@ function createBookingsForEvent(event, type2, resources) {
         booking_type: type2,
         date: event.date,
         duration: event.duration,
-        description: item.name,
+        description: event.title || item.name,
         user_email: event.host,
         asset_id: item.email || item.id,
         asset_name: item.name,
@@ -82172,6 +82177,8 @@ export {
   ɵɵviewQuery,
   ɵɵqueryRefresh,
   ɵɵloadQuery,
+  ɵɵviewQuerySignal,
+  ɵɵqueryAdvance,
   ɵɵreference,
   ɵɵstyleProp,
   ɵɵclassProp,
@@ -82209,9 +82216,10 @@ export {
   HostAttributeToken,
   output,
   input,
+  viewChild,
+  viewChildren,
   model,
   ContentChildren,
-  ViewChildren,
   ViewChild,
   VERSION,
   enableProdMode,
@@ -82545,4 +82553,4 @@ export {
 js-yaml/dist/js-yaml.mjs:
   (*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT *)
 */
-//# sourceMappingURL=chunk-267XGI7B.js.map
+//# sourceMappingURL=chunk-XO3RYWF4.js.map
