@@ -73209,6 +73209,7 @@ var APP = {
     HOST: "Host",
     PHONE: "Phone",
     ORGANISATION: "Organization",
+    REASON: "Reason for visit",
     CHECKED_IN_MSG: "You are checked in!",
     CHECKED_IN_MSG_SELF_REG: "Your registration is confirmed!",
     TAKE_PHOTO: "Take a photo to continue",
@@ -74351,15 +74352,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "0920604",
-  "hash": "0920604",
+  "raw": "9033b43",
+  "hash": "9033b43",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "0920604",
+  "suffix": "9033b43",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1750910487794
+  "time": 1750999832695
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -116076,6 +116077,7 @@ var _CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler
     this.delay = 0;
     this.type = "template";
     this._overlay_ref = null;
+    this._portal = viewChild(CdkPortal);
     this.onClick = () => this.open();
     this.onTouch = () => this.open();
     this.onEnter = () => this.hover ? this.open() : "";
@@ -116101,7 +116103,8 @@ var _CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler
       this._updateType();
       if (this._overlay_ref)
         this.close();
-      if (!this._portal)
+      const _portal = this._portal();
+      if (!_portal)
         return;
       const pos = this._element.nativeElement.getBoundingClientRect();
       const default_x = "end";
@@ -116117,7 +116120,7 @@ var _CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler
           }
         ])
       });
-      this._overlay_ref.attach(this._portal);
+      this._overlay_ref.attach(_portal);
       if (this.backdrop) {
         this.subscription("backdrop", this._overlay_ref.backdropClick().subscribe(() => this.close()));
       }
@@ -116150,11 +116153,10 @@ _CustomTooltipComponent.\u0275fac = function CustomTooltipComponent_Factory(__ng
 };
 _CustomTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CustomTooltipComponent, selectors: [["", "customTooltip", ""]], viewQuery: function CustomTooltipComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(CdkPortal, 5);
+    \u0275\u0275viewQuerySignal(ctx._portal, CdkPortal, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._portal = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, hostBindings: function CustomTooltipComponent_HostBindings(rf, ctx) {
   if (rf & 1) {
@@ -116222,9 +116224,6 @@ var CustomTooltipComponent = _CustomTooltipComponent;
     type: Input
   }], delay: [{
     type: Input
-  }], _portal: [{
-    type: ViewChild,
-    args: [CdkPortal]
   }], onClick: [{
     type: HostListener,
     args: ["click"]
@@ -116272,6 +116271,7 @@ var _JoystickComponent = class _JoystickComponent extends AsyncHandler {
     this._renderer = inject(Renderer2);
     this.panChange = new EventEmitter();
     this.tiltChange = new EventEmitter();
+    this._panning_el = viewChild("panning_control");
   }
   get thumb_transform() {
     return `translate(${this.pan === JoystickPan.Stop ? "0" : this.pan === JoystickPan.Left ? "-50" : "50"}%, ${this.tilt === JoystickTilt.Stop ? "0" : this.tilt === JoystickTilt.Up ? "-50" : "50"}%)`;
@@ -116279,7 +116279,7 @@ var _JoystickComponent = class _JoystickComponent extends AsyncHandler {
   startPan(event) {
     const move_event = event instanceof MouseEvent ? "mousemove" : "touchmove";
     const end_event = event instanceof MouseEvent ? "mouseup" : "touchend";
-    this._box = this._panning_el.nativeElement.getBoundingClientRect();
+    this._box = this._panning_el().nativeElement.getBoundingClientRect();
     this.handlePan(event);
     this.subscription("on_move", this._renderer.listen("window", move_event, (e2) => this.handlePan(e2)));
     this.subscription("on_end", this._renderer.listen("window", end_event, (_3) => {
@@ -116321,11 +116321,10 @@ _JoystickComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _JoystickComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _JoystickComponent, selectors: [["joystick"]], viewQuery: function JoystickComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c018, 7);
+    \u0275\u0275viewQuerySignal(ctx._panning_el, _c018, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._panning_el = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, inputs: { pan: "pan", tilt: "tilt" }, outputs: { panChange: "panChange", tiltChange: "tiltChange" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 16, vars: 2, consts: [["panning_control", ""], ["joystick", "", 1, "relative", "h-48", "w-48", "rounded-full", "bg-base-300", "text-white", 3, "mousedown", "touchstart", "contextmenu", "click"], [1, "absolute", "inset-0", "flex", "items-center", "text-5xl"], [2, "transform", "translateX(-.5rem)"], [1, "absolute", "inset-0", "flex", "items-center", "justify-end", "text-5xl"], [2, "transform", "translateX(.5rem)"], [1, "absolute", "inset-0", "flex", "justify-center", "text-5xl"], [2, "transform", "translateY(-.5rem)"], [1, "absolute", "inset-0", "flex", "items-end", "justify-center", "text-5xl"], [2, "transform", "translateY(.5rem)"], [1, "absolute", "bottom-12", "left-12", "right-12", "top-12", "flex", "items-center", "justify-center", "rounded-full", "bg-base-100"], ["thumb", "", 1, "h-12", "w-12", "rounded-full", "bg-neutral"]], template: function JoystickComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -116416,9 +116415,6 @@ var JoystickComponent = _JoystickComponent;
     type: Output
   }], tiltChange: [{
     type: Output
-  }], _panning_el: [{
-    type: ViewChild,
-    args: ["panning_control", { static: true }]
   }] });
 })();
 (() => {
