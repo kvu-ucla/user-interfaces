@@ -75936,6 +75936,7 @@ var APP = {
     HOST: "Host",
     PHONE: "Phone",
     ORGANISATION: "Organization",
+    REASON: "Reason for visit",
     CHECKED_IN_MSG: "You are checked in!",
     CHECKED_IN_MSG_SELF_REG: "Your registration is confirmed!",
     TAKE_PHOTO: "Take a photo to continue",
@@ -80825,15 +80826,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "0920604",
-  "hash": "0920604",
+  "raw": "9033b43",
+  "hash": "9033b43",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "0920604",
+  "suffix": "9033b43",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1750910587931
+  "time": 1750999889524
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -91905,12 +91906,14 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
       this.upload_list,
       this.upload_ids
     ]).pipe(map(([list, ids]) => list.filter((i) => ids.includes(i.id))));
+    this._list_el = viewChild("image_list");
+    this._file_input = viewChild("file_input");
     this.registerOnChange = (fn3) => this._onChange = fn3;
     this.registerOnTouched = (fn3) => this._onTouch = fn3;
   }
   ngAfterViewInit() {
     this.timeout("init_view_space", () => {
-      const box = this._list_el.nativeElement.getBoundingClientRect();
+      const box = this._list_el().nativeElement.getBoundingClientRect();
       this.view_space = Math.floor(box.width / 152);
     }, 100);
     this.subscription("upload_changes", this.upload_list.subscribe((list) => {
@@ -91959,7 +91962,7 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
           for (let i = 0; i < files.length; i++) {
             const id = yield this._uploads.uploadFileWithPermissions(files[i]);
             this.upload_ids.next([...this.upload_ids.getValue(), id]);
-            this._file_input.nativeElement.value = "";
+            this._file_input().nativeElement.value = "";
           }
         }
       }
@@ -91997,13 +92000,11 @@ _ImageListFieldComponent.\u0275fac = function ImageListFieldComponent_Factory(__
 };
 _ImageListFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ImageListFieldComponent, selectors: [["image-list-field"]], viewQuery: function ImageListFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c016, 5);
-    \u0275\u0275viewQuery(_c111, 5);
+    \u0275\u0275viewQuerySignal(ctx._list_el, _c016, 5);
+    \u0275\u0275viewQuerySignal(ctx._file_input, _c111, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._list_el = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._file_input = _t4.first);
+    \u0275\u0275queryAdvance(2);
   }
 }, features: [\u0275\u0275ProvidersFeature([
   {
@@ -92230,13 +92231,7 @@ var ImageListFieldComponent = _ImageListFieldComponent;
       CommonModule,
       TranslatePipe
     ], styles: ["/* angular:styles/component:css;95dcaaaa826894df5bf437b6ea5774f7f209a30340873d0fad154aed06b72211;/home/runner/work/user-interfaces/user-interfaces/libs/form-fields/src/lib/image-list-field.component.ts */\n:host {\n  width: 100%;\n}\n[overlay] {\n  transition: background 200ms;\n}\n[image]:hover [actions],\n[image]:hover > icon {\n  opacity: 1 !important;\n}\n[image]:hover [bg] {\n  opacity: 0.4 !important;\n}\n[actions],\n[image] > icon {\n  transition: opacity 200ms;\n}\n[image] {\n  transition: transform 200ms;\n}\n/*# sourceMappingURL=image-list-field.component.css.map */\n"] }]
-  }], () => [], { _list_el: [{
-    type: ViewChild,
-    args: ["image_list"]
-  }], _file_input: [{
-    type: ViewChild,
-    args: ["file_input"]
-  }] });
+  }], () => [], null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageListFieldComponent, { className: "ImageListFieldComponent", filePath: "libs/form-fields/src/lib/image-list-field.component.ts", lineNumber: 228 });
@@ -96466,7 +96461,7 @@ var Booking = class {
     this.parent_id = data.parent_id || "";
     this.asset_id = data.asset_id || "";
     this.asset_ids = data.asset_ids || [data.asset_id].filter((_3) => _3);
-    this.asset_name = data.asset_name || data.extension_data?.asset_name || data.description || data.asset_id || "";
+    this.asset_name = data.asset_name || data.extension_data?.asset_name || data.extension_data?.name || data.description || data.asset_id || "";
     this.zones = data.zones || [];
     this.booking_start = Math.floor(data.date / 1e3) || data.booking_start || getUnixTime(roundToNearestMinutes(addMinutes(Date.now(), 5), {
       nearestTo: 5
@@ -104533,6 +104528,7 @@ var _CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler
     this.delay = 0;
     this.type = "template";
     this._overlay_ref = null;
+    this._portal = viewChild(CdkPortal);
     this.onClick = () => this.open();
     this.onTouch = () => this.open();
     this.onEnter = () => this.hover ? this.open() : "";
@@ -104558,7 +104554,8 @@ var _CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler
       this._updateType();
       if (this._overlay_ref)
         this.close();
-      if (!this._portal)
+      const _portal = this._portal();
+      if (!_portal)
         return;
       const pos = this._element.nativeElement.getBoundingClientRect();
       const default_x = "end";
@@ -104574,7 +104571,7 @@ var _CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler
           }
         ])
       });
-      this._overlay_ref.attach(this._portal);
+      this._overlay_ref.attach(_portal);
       if (this.backdrop) {
         this.subscription("backdrop", this._overlay_ref.backdropClick().subscribe(() => this.close()));
       }
@@ -104607,11 +104604,10 @@ _CustomTooltipComponent.\u0275fac = function CustomTooltipComponent_Factory(__ng
 };
 _CustomTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CustomTooltipComponent, selectors: [["", "customTooltip", ""]], viewQuery: function CustomTooltipComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(CdkPortal, 5);
+    \u0275\u0275viewQuerySignal(ctx._portal, CdkPortal, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._portal = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, hostBindings: function CustomTooltipComponent_HostBindings(rf, ctx) {
   if (rf & 1) {
@@ -104679,9 +104675,6 @@ var CustomTooltipComponent = _CustomTooltipComponent;
     type: Input
   }], delay: [{
     type: Input
-  }], _portal: [{
-    type: ViewChild,
-    args: [CdkPortal]
   }], onClick: [{
     type: HostListener,
     args: ["click"]
