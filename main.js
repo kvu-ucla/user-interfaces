@@ -1,6 +1,6 @@
 import {
   subMinutes
-} from "./chunk-UCYJEE3S.js";
+} from "./chunk-5SBCCPDV.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -186,7 +186,7 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-CGLZLVCS.js";
+} from "./chunk-CBEUJWHF.js";
 import {
   __async,
   __export,
@@ -26277,43 +26277,43 @@ var routes = [
     path: "landing",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./landing.module-HZXCNKO6.js").then((m) => m.AppLandingModule)
+    loadChildren: () => import("./landing.module-HFYCTORM.js").then((m) => m.AppLandingModule)
   },
   {
     path: "book",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./book.module-4TRE53OZ.js").then((m) => m.BookModule)
+    loadChildren: () => import("./book.module-DP2PSLHA.js").then((m) => m.BookModule)
   },
   {
     path: "explore",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./explore.module-GYQK5DIE.js").then((m) => m.ExploreModule)
+    loadChildren: () => import("./explore.module-ME6XBFVM.js").then((m) => m.ExploreModule)
   },
   {
     path: "control",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./control.module-LXDYDSPX.js").then((m) => m.ControlModule)
+    loadChildren: () => import("./control.module-PDSXT6EH.js").then((m) => m.ControlModule)
   },
   {
     path: "directory",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./directory.module-DOLQ2DC3.js").then((m) => m.DirectoryModule)
+    loadChildren: () => import("./directory.module-HBTZ77H6.js").then((m) => m.DirectoryModule)
   },
   {
     path: "your-bookings",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./schedule.module-KAMPXS5L.js").then((m) => m.AppScheduleModule)
+    loadChildren: () => import("./schedule.module-4MG3PLT2.js").then((m) => m.AppScheduleModule)
   },
   {
     path: "group-events",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./group-events.module-YBC7SYOE.js").then((m) => m.GroupEventsModule)
+    loadChildren: () => import("./group-events.module-H3YRLD4A.js").then((m) => m.GroupEventsModule)
   },
   { path: "**", redirectTo: "-", pathMatch: "full" }
 ];

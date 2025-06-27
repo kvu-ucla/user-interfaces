@@ -1,7 +1,7 @@
-import "./chunk-GPCY5PQ3.js";
+import "./chunk-C3E3KWWT.js";
 import {
   ScheduleStateService
-} from "./chunk-5XQ4DZY6.js";
+} from "./chunk-UZX7O3RW.js";
 import {
   AsyncHandler,
   AsyncPipe,
@@ -50,7 +50,6 @@ import {
   TopbarComponent,
   TranslatePipe,
   UserAvatarComponent,
-  ViewChild,
   addMinutes,
   bt,
   catchError,
@@ -89,6 +88,7 @@ import {
   switchMap,
   tap,
   unique,
+  viewChild,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
   ɵɵProvidersFeature,
@@ -109,7 +109,6 @@ import {
   ɵɵgetCurrentView,
   ɵɵgetInheritedFactory,
   ɵɵlistener,
-  ɵɵloadQuery,
   ɵɵnextContext,
   ɵɵpipe,
   ɵɵpipeBind1,
@@ -118,7 +117,7 @@ import {
   ɵɵproperty,
   ɵɵpureFunction0,
   ɵɵpureFunction1,
-  ɵɵqueryRefresh,
+  ɵɵqueryAdvance,
   ɵɵreadContextLet,
   ɵɵreference,
   ɵɵrepeater,
@@ -131,8 +130,8 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
-  ɵɵviewQuery
-} from "./chunk-CGLZLVCS.js";
+  ɵɵviewQuerySignal
+} from "./chunk-CBEUJWHF.js";
 import {
   __async,
   __spreadProps,
@@ -1013,6 +1012,7 @@ var _LandingColleaguesComponent = class _LandingColleaguesComponent extends Asyn
       notifySuccess(i18n("APP.WORKPLACE.COLLEAGUE_REMOVED", { name: u.name }));
     });
     this.updateSearch = (s) => this._state.setOptions({ search: s });
+    this._input_el = viewChild.required("search_input");
   }
   newMeeting(user) {
     this._event_form.newForm();
@@ -1026,7 +1026,7 @@ var _LandingColleaguesComponent = class _LandingColleaguesComponent extends Asyn
   openSearch() {
     this.updateSearch("");
     this.show_search = true;
-    this.timeout("open", () => this._input_el.nativeElement.focus(), 100);
+    this.timeout("open", () => this._input_el().nativeElement.focus(), 100);
   }
 };
 _LandingColleaguesComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -1037,11 +1037,10 @@ _LandingColleaguesComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _LandingColleaguesComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LandingColleaguesComponent, selectors: [["landing-colleagues"]], viewQuery: function LandingColleaguesComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c02, 7);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c02, 5);
   }
   if (rf & 2) {
-    let _t;
-    \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._input_el = _t.first);
+    \u0275\u0275queryAdvance();
   }
 }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 23, vars: 25, consts: [["search_input", ""], ["menu", "matMenu"], [1, "mx-2", "flex", "items-center", "justify-between", "rounded", "bg-base-200", "p-2", "text-sm"], [1, "h-1/2", "w-full", "flex-1", "space-y-4", "overflow-auto", "pt-4"], [1, "flex", "h-full", "w-full", "flex-col", "items-center", "justify-center", "space-y-2", "p-8"], ["btn", "", "name", "open-colleague-search", "matRipple", "", 1, "inverse", "m-2", "w-[calc(100%-1rem)]", 3, "click"], ["search", "", 1, "absolute", "inset-x-2", "bottom-16", "top-2", "flex", "flex-col", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-100"], [1, "w-full", "border-b", "border-base-200", "p-2", 3, "ngModelChange", "ngModel", "placeholder"], ["icon", "", "name", "close-colleague-search", 1, "absolute", "right-0", "top-0", 3, "click"], [1, "flex", "h-1/2", "flex-1", "flex-col", "space-y-2", "overflow-auto"], ["user", "", 1, "relative", "flex", "items-center", "space-x-2", "px-2"], [1, "relative", "text-xl"], [3, "user"], [1, "absolute", "bottom-1", "right-1", "h-3", "w-3", "rounded-full", "border", "border-white", 3, "bg-error", "bg-success", "bg-warning", "bg-neutral", "matTooltip"], [1, "w-1/2", "flex-1", "leading-tight"], [1, "truncate", 3, "matTooltip"], [1, "truncate", "text-sm", 3, "matTooltip"], [1, "truncate", "text-xs", "opacity-60"], ["icon", "", "name", "colleague-more", 1, "!rounded", "bg-base-200", 3, "matMenuTriggerFor"], ["xPosition", "before"], ["mat-menu-item", "", "name", "meeting-with-colleague", 3, "click"], [1, "flex", "items-center", "space-x-2"], [1, "text-2xl"], ["name", "remove-colleague", "mat-menu-item", "", 3, "click"], [1, "absolute", "bottom-1", "right-1", "h-3", "w-3", "rounded-full", "border", "border-white", 3, "matTooltip"], ["src", "assets/icons/no-contacts.svg"], [1, "text-center", "text-sm", "opacity-60"], ["matRipple", "", "name", "add-colleague", 1, "flex", "min-h-12", "w-full", "items-center", "space-x-2", "p-1", "text-left"], ["matRipple", "", "name", "add-colleague", 1, "flex", "min-h-12", "w-full", "items-center", "space-x-2", "p-1", "text-left", 3, "click"], [1, "relative", "text-base"], [1, "flex-1", "leading-tight"], [1, "truncate"], ["diameter", "32"]], template: function LandingColleaguesComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -1296,10 +1295,7 @@ var LandingColleaguesComponent = _LandingColleaguesComponent;
             }
         </div>
     `, standalone: false, styles: ["/* angular:styles/component:css;ada4d8e106525fc2a6174594c2f22a46ab6eb32f3e34b0dc3ada2058cacb89f7;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/landing/landing-colleagues.component.ts */\n[user]:hover button {\n  opacity: 1;\n}\n:host {\n  height: 100%;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n/*# sourceMappingURL=landing-colleagues.component.css.map */\n"] }]
-  }], null, { _input_el: [{
-    type: ViewChild,
-    args: ["search_input", { static: true }]
-  }] });
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LandingColleaguesComponent, { className: "LandingColleaguesComponent", filePath: "apps/workplace/src/app/landing/landing-colleagues.component.ts", lineNumber: 222 });
@@ -2696,4 +2692,4 @@ var AppLandingModule = _AppLandingModule;
 export {
   AppLandingModule
 };
-//# sourceMappingURL=landing.module-HZXCNKO6.js.map
+//# sourceMappingURL=landing.module-HFYCTORM.js.map

@@ -34,7 +34,6 @@ import {
   UserAvatarComponent,
   UserFormComponent,
   UserSearchFieldComponent,
-  ViewChild,
   WFHSettingsModalComponent,
   addMinutes,
   catchError,
@@ -58,6 +57,7 @@ import {
   startWith,
   switchMap,
   toDate,
+  viewChild,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
   ɵɵadvance,
@@ -73,14 +73,13 @@ import {
   ɵɵelementStart,
   ɵɵgetCurrentView,
   ɵɵlistener,
-  ɵɵloadQuery,
   ɵɵnextContext,
   ɵɵpipe,
   ɵɵpipeBind1,
   ɵɵpipeBind2,
   ɵɵproperty,
   ɵɵpureFunction0,
-  ɵɵqueryRefresh,
+  ɵɵqueryAdvance,
   ɵɵrepeater,
   ɵɵrepeaterCreate,
   ɵɵrepeaterTrackByIdentity,
@@ -94,8 +93,8 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
-  ɵɵviewQuery
-} from "./chunk-CGLZLVCS.js";
+  ɵɵviewQuerySignal
+} from "./chunk-CBEUJWHF.js";
 import {
   __async
 } from "./chunk-4MWRP73S.js";
@@ -319,6 +318,7 @@ var _FindAvailabilityModalComponent = class _FindAvailabilityModalComponent exte
       }
       return availability_map;
     }), defaultIfEmpty({}), shareReplay(1));
+    this._container_el = viewChild.required("container");
     this.move_time = false;
     this._start_time = 0;
     this._move_last = 0;
@@ -342,18 +342,18 @@ var _FindAvailabilityModalComponent = class _FindAvailabilityModalComponent exte
   ngAfterViewInit() {
     const date = new Date(this.date);
     this.timeout("init", () => {
-      const el = this._container_el.nativeElement.querySelector(`[hour="${date.getHours()}"]`);
+      const el = this._container_el().nativeElement.querySelector(`[hour="${date.getHours()}"]`);
       if (el) {
-        const rect = this._container_el.nativeElement.getBoundingClientRect();
+        const rect = this._container_el().nativeElement.getBoundingClientRect();
         const el_rect = el.getBoundingClientRect();
-        this._container_el.nativeElement.scrollTo(el_rect.left - 128 - rect.left, 0);
+        this._container_el().nativeElement.scrollTo(el_rect.left - 128 - rect.left, 0);
       }
       this.onScroll();
     }, 300);
   }
   onScroll() {
-    this.offset_x = this._container_el.nativeElement.scrollLeft;
-    this.offset_y = this._container_el.nativeElement.scrollTop;
+    this.offset_x = this._container_el().nativeElement.scrollLeft;
+    this.offset_y = this._container_el().nativeElement.scrollTop;
   }
   startMovePeriod(event) {
     event.preventDefault();
@@ -403,11 +403,10 @@ _FindAvailabilityModalComponent.\u0275fac = function FindAvailabilityModalCompon
 };
 _FindAvailabilityModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FindAvailabilityModalComponent, selectors: [["find-availability-modal"]], viewQuery: function FindAvailabilityModalComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c0, 7);
+    \u0275\u0275viewQuerySignal(ctx._container_el, _c0, 5);
   }
   if (rf & 2) {
-    let _t;
-    \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._container_el = _t.first);
+    \u0275\u0275queryAdvance();
   }
 }, features: [\u0275\u0275InheritDefinitionFeature], decls: 52, vars: 33, consts: [["container", ""], [1, "flex", "flex-col", "space-y-2", "p-2"], [1, "flex", "h-14", "w-full", "items-center", "justify-between", "space-x-2", "rounded", "border-none", "bg-base-200", "p-2"], [1, "flex-1", "px-2", "text-xl", "font-medium", "capitalize"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "flex", "h-[calc(100vh-9rem)]", "flex-col", "overflow-hidden", "rounded", "border", "border-base-300", "sm:h-[65vh]"], [1, "flex", "w-full", "flex-col", "space-y-2", "p-2", "sm:flex-row", "sm:space-x-2", "sm:space-y-0"], [1, "max-h-[3.25rem]", "flex-1", 3, "ngModelChange", "ngModel"], [1, "relative", "grid", "h-1/2", "w-full", "max-w-[100vw]", "flex-1", "divide-x", "divide-y", "divide-base-200", "overflow-hidden", "border-t", "border-base-200", "sm:max-w-[80vw]"], ["times", "", 1, "col-start-2", "flex", "h-10", "overflow-hidden", "border-l", "border-base-200"], ["hour", "", 1, "relative", "h-10", "min-w-[5rem]", "border-r", "border-base-200", "p-2", "text-sm", 3, "left"], ["users", "", 1, "row-start-2", "w-24", "overflow-hidden"], ["host", "", 1, "relative", "flex", "h-32", "w-24", "flex-col", "items-center", "justify-center", "border-b", "border-base-200", "py-2"], [1, "text-2xl", 3, "user"], [1, "max-w-full", "overflow-hidden", "break-words", "px-2", "text-center", "text-xs"], ["person", "", 1, "relative", "flex", "h-32", "w-24", "flex-col", "items-center", "justify-center", "border-b", "border-base-200", "py-2", 3, "top"], ["blocks", "", 1, "relative", "row-start-2", "overflow-hidden"], ["fixed", "", 1, "absolute", "inset-0", "flex", "overflow-hidden"], ["divider", "", 1, "relative", "h-full", "min-w-[5rem]", "border-l", "border-base-200", 3, "left"], ["selection", "", 1, "absolute", "inset-y-0", "z-20", "cursor-grab", "!border-x-2", "!border-info", "active:cursor-grabbing", 3, "mousedown", "touchstart"], [1, "absolute", "inset-0", "bg-info", "opacity-30"], ["handle", "", 1, "absolute", "-left-px", "top-1/2", "h-3", "w-3", "-translate-x-1/2", "-translate-y-1/2", "rounded-full", "bg-info"], ["handle", "", 1, "absolute", "-right-px", "top-1/2", "h-3", "w-3", "-translate-y-1/2", "translate-x-1/2", "rounded-full", "bg-info", "hover:h-4", "hover:w-4", "active:bg-secondary", 3, "mousedown", "touchstart"], [1, "absolute", "left-1/2", "top-2", "-translate-x-1/2", "whitespace-nowrap", "rounded", "border", "border-base-200", "bg-base-100", "p-2", "text-xs", "shadow"], [1, "absolute", "left-1/2", "top-12", "-translate-x-1/2", "whitespace-nowrap", "rounded", "border", "border-base-200", "bg-base-100", "p-2", "text-xs", "shadow"], ["scroll", "", 1, "absolute", "inset-0", "overflow-auto", 3, "scroll"], [1, "pointer-events-none", 3, "user", "date", "availability"], ["btn", "", "matRipple", "", 1, "clear", "text-secondary", 3, "mat-dialog-close"], [1, "flex", "items-center"], [1, "text-xl"], [1, "mr-1", "underline"], ["hour", "", 1, "relative", "h-10", "min-w-[5rem]", "border-r", "border-base-200", "p-2", "text-sm"], ["person", "", 1, "relative", "flex", "h-32", "w-24", "flex-col", "items-center", "justify-center", "border-b", "border-base-200", "py-2"], [1, "max-w-full", "break-words", "px-2", "text-center", "text-xs"], ["icon", "", 1, "absolute", "-left-1", "-top-1", 3, "click"], ["divider", "", 1, "relative", "h-full", "min-w-[5rem]", "border-l", "border-base-200"]], template: function FindAvailabilityModalComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -763,10 +762,7 @@ var FindAvailabilityModalComponent = _FindAvailabilityModalComponent;
       DurationPipe,
       FormsModule
     ], styles: ["/* angular:styles/component:css;76b970ea1fbd22f261c4ae1d7362a2a4be952fddab9217461619407a5e9eb6ef;/home/runner/work/user-interfaces/user-interfaces/libs/users/src/lib/find-availability-modal/find-availability-modal.component.ts */\n.grid {\n  grid-template-columns: 6rem 1fr;\n  grid-template-rows: 2.5rem minmax(0, 1fr);\n}\n[disabled=true],\n[disabled=true] [header] {\n  background: var(--b3) !important;\n  pointer-events: none;\n}\n[disabled=true] > * {\n  opacity: 0.3;\n}\n/*# sourceMappingURL=find-availability-modal.component.css.map */\n"] }]
-  }], () => [], { _container_el: [{
-    type: ViewChild,
-    args: ["container", { static: true }]
-  }] });
+  }], () => [], null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FindAvailabilityModalComponent, { className: "FindAvailabilityModalComponent", filePath: "libs/users/src/lib/find-availability-modal/find-availability-modal.component.ts", lineNumber: 286 });
@@ -1028,4 +1024,4 @@ var SharedUsersModule = _SharedUsersModule;
 export {
   FindAvailabilityModalComponent
 };
-//# sourceMappingURL=chunk-GPCY5PQ3.js.map
+//# sourceMappingURL=chunk-C3E3KWWT.js.map

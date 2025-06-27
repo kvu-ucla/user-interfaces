@@ -1,9 +1,9 @@
 import {
   subMinutes
-} from "./chunk-UCYJEE3S.js";
+} from "./chunk-5SBCCPDV.js";
 import {
   FindAvailabilityModalComponent
-} from "./chunk-GPCY5PQ3.js";
+} from "./chunk-C3E3KWWT.js";
 import {
   ANIMATION_SHOW_CONTRACT_EXPAND,
   ActivatedRoute,
@@ -131,7 +131,6 @@ import {
   UserListFieldComponent,
   UserSearchFieldComponent,
   Validators,
-  ViewChild,
   addDays,
   addHours,
   addMinutes,
@@ -201,6 +200,7 @@ import {
   updateBooking,
   updateEventMetadata,
   validateAssetRequestsForResource,
+  viewChild,
   ɵNgNoValidate,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
@@ -224,7 +224,6 @@ import {
   ɵɵgetCurrentView,
   ɵɵgetInheritedFactory,
   ɵɵlistener,
-  ɵɵloadQuery,
   ɵɵnextContext,
   ɵɵpipe,
   ɵɵpipeBind1,
@@ -237,7 +236,7 @@ import {
   ɵɵpureFunction4,
   ɵɵpureFunction6,
   ɵɵpureFunctionV,
-  ɵɵqueryRefresh,
+  ɵɵqueryAdvance,
   ɵɵreadContextLet,
   ɵɵreference,
   ɵɵrepeater,
@@ -260,8 +259,8 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
-  ɵɵviewQuery
-} from "./chunk-CGLZLVCS.js";
+  ɵɵviewQuerySignal
+} from "./chunk-CBEUJWHF.js";
 import {
   __async,
   __spreadProps,
@@ -10492,10 +10491,12 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
     this.menu = new EventEmitter(false);
     this.is_scanning = true;
     this.loading = false;
+    this._video_el = viewChild("video");
   }
   ngOnDestroy() {
-    if (this._video_el?.nativeElement?.srcObject) {
-      this._video_el.nativeElement.srcObject.getTracks().forEach((track) => track?.stop());
+    const _video_el = this._video_el();
+    if (_video_el?.nativeElement?.srcObject) {
+      _video_el.nativeElement.srcObject.getTracks().forEach((track) => track?.stop());
     }
     this._qr_scanner?.stop();
   }
@@ -10513,8 +10514,8 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
   ngAfterViewInit() {
     if (!navigator.mediaDevices?.getUserMedia || this.loading)
       return;
-    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => this._video_el.nativeElement.srcObject = stream).catch((e2) => console.error("Unable to fetch media devices!", e2));
-    this._qr_scanner = new qr_scanner_min_default(this._video_el.nativeElement, (r) => this.handleQrCode(r));
+    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => this._video_el().nativeElement.srcObject = stream).catch((e2) => console.error("Unable to fetch media devices!", e2));
+    this._qr_scanner = new qr_scanner_min_default(this._video_el().nativeElement, (r) => this.handleQrCode(r));
     this._qr_scanner.start();
   }
   handleQrCode(result) {
@@ -10618,11 +10619,10 @@ _BookCodeFlowComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _BookCodeFlowComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BookCodeFlowComponent, selectors: [["book-code-flow"]], viewQuery: function BookCodeFlowComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c012, 5);
+    \u0275\u0275viewQuerySignal(ctx._video_el, _c012, 5);
   }
   if (rf & 2) {
-    let _t;
-    \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._video_el = _t.first);
+    \u0275\u0275queryAdvance();
   }
 }, outputs: { menu: "menu" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 1, consts: [["video", ""], [1, "relative", "flex", "flex-1", "items-center", "justify-center", "overflow-hidden", "bg-neutral"], [1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "space-y-2"], ["id", "video", 1, "min-h-full", "min-w-full", "object-cover"], [1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "text-center", "text-white"], [1, "relative", "z-10", "flex", "flex-col", "items-center", "justify-end"], [1, "flex", "items-center", "justify-center"], ["box", "", 1, "m-8", "flex", "h-64", "w-64", "items-center", "justify-center", "space-x-2", "rounded-2xl", "p-8", "transition-all"], [1, "uppercase"], ["matInput", "", "name", "booking-id", "placeholder", "e.g. 12102910", 1, "w-full", "border-none", "bg-none", "text-left", "text-3xl", 3, "ngModelChange", "ngModel"], [1, "m-4", "flex", "items-center", "space-x-2", "rounded", "bg-base-100", "bg-opacity-50", "p-2"], ["matRipple", "", 3, "click"], [1, "mb-1", "text-3xl", "uppercase", "subpixel-antialiased"], [1, "mb-4"], [3, "diameter"]], template: function BookCodeFlowComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -10736,9 +10736,6 @@ var BookCodeFlowComponent = _BookCodeFlowComponent;
     `, standalone: false, styles: ["/* angular:styles/component:css;234f9e46d27de0ca4f47b38a0a993410c486ecc5d4a4f2eed2857b2caf006ef8;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/book/code-flow.component.ts */\n:host {\n  position: relative;\n  width: 100%;\n  height: 100vh;\n  display: flex;\n  flex-direction: column;\n  background: #f0f0f0;\n}\n[box] {\n  box-shadow: 0px 0px 0px 100vw rgba(0, 0, 0, 0.5);\n}\n[box] > * {\n  display: none;\n}\n[box].input {\n  width: 32rem !important;\n  max-width: calc(100% - 2rem) !important;\n  padding: 1rem !important;\n  height: 4rem !important;\n  color: black !important;\n  background: white;\n  box-shadow: 0px 0px 0px 100vw rgba(0, 0, 0, 0.8);\n}\n[box].input > * {\n  display: initial;\n}\n[box] span {\n  font-family: var(--heading-font);\n  font-weight: 500;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n}\n/*# sourceMappingURL=code-flow.component.css.map */\n"] }]
   }], null, { menu: [{
     type: Output
-  }], _video_el: [{
-    type: ViewChild,
-    args: ["video"]
   }] });
 })();
 (() => {
@@ -16588,6 +16585,8 @@ var _MeetingFlowFormComponent = class _MeetingFlowFormComponent extends AsyncHan
         });
       }
     });
+    this._confirm_ref = viewChild("confirm_ref");
+    this._input_el = viewChild("input");
   }
   get form() {
     return this._state.form;
@@ -16672,8 +16671,8 @@ var _MeetingFlowFormComponent = class _MeetingFlowFormComponent extends AsyncHan
   }
   focusInput() {
     this.timeout("input-focus", () => {
-      this._input_el.nativeElement.value = "";
-      this._input_el?.nativeElement?.focus();
+      this._input_el().nativeElement.value = "";
+      this._input_el()?.nativeElement?.focus();
     }, 300);
   }
   findAvailableTime() {
@@ -16705,13 +16704,11 @@ _MeetingFlowFormComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _MeetingFlowFormComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MeetingFlowFormComponent, selectors: [["meeting-flow-form"]], viewQuery: function MeetingFlowFormComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c023, 5);
-    \u0275\u0275viewQuery(_c114, 5);
+    \u0275\u0275viewQuerySignal(ctx._confirm_ref, _c023, 5);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c114, 5);
   }
   if (rf & 2) {
-    let _t;
-    \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._confirm_ref = _t.first);
-    \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._input_el = _t.first);
+    \u0275\u0275queryAdvance(2);
   }
 }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 6, vars: 4, consts: [["input", ""], [1, "h-full", "w-full", "overflow-auto", "bg-base-200"], [1, "mx-auto", "w-[48rem]", "max-w-full", "border", "border-base-300", "bg-base-100", "sm:my-4"], [1, "w-full", "border-b", "border-base-300", "p-4", "text-2xl", "font-medium", "sm:px-16", "sm:py-4"], [1, "space-y-2", "divide-y", "divide-base-200", "p-0", "sm:px-16", "sm:py-4", 3, "formGroup"], [1, "p-2"], [1, "flex", "items-center", "space-x-2"], [1, "flex", "h-6", "w-6", "items-center", "justify-center", "rounded-full", "bg-base-200"], [1, "text-xl"], [1, "w-px", "flex-1"], ["icon", "", "name", "toggle-details-meeting", "matRipple", "", 3, "click"], [1, "overflow-hidden"], [1, "mt-4", 3, "form"], ["icon", "", "name", "toggle-spaces-meeting", "matRipple", "", 3, "click"], [1, "flex", "flex-col", "items-center", "overflow-hidden"], [1, "mx-auto", "my-2", "inline-flex", "rounded", "bg-warning", "p-2", "text-xs", "text-warning-content", "shadow"], ["formControlName", "resources", 1, "w-full", 3, "multiday"], [1, "flex", "flex-col", "items-center", "p-2", "sm:flex-row", "sm:space-x-2"], ["btn", "", "name", "open-meeting-confirm", "matRipple", "", "confirm", "", 1, "mb-2", "w-full", "sm:mb-0", "sm:w-auto", 3, "click"], ["btn", "", "name", "clear-form-meeting", "matRipple", "", "clear-form", "", 1, "inverse", "w-full", "sm:w-auto", 3, "click"], ["matRipple", "", "name", "find-attendee-availability", 1, "bg-none", "text-xs", "text-info", "underline", 3, "click"], ["icon", "", "name", "toggle-attendees-meeting", "matRipple", "", 3, "click"], ["formControlName", "attendees", 1, "mt-4", 3, "time", "guests"], ["icon", "", "name", "toggle-catering-meeting", "matRipple", "", 3, "click"], ["formControlName", "catering", 3, "options"], ["appearance", "outline", 1, "mt-2", "w-full"], ["appearance", "outline", 1, "w-full", 3, "mt-2"], ["appearance", "outline", 1, "mt-2", "w-full", 3, "openedChange"], ["formControlName", "catering_charge_code", 3, "placeholder"], [1, "sticky", "top-0", "z-50", "w-full", "rounded-none", "border-x-0", "border-b", "border-t-0", "border-base-200", "bg-base-100", "px-4", "py-3", "text-base", "focus:border-b", 3, "ngModelChange", "ngModel", "ngModelOptions", "placeholder"], [1, "hidden"], [3, "value"], ["appearance", "outline", 1, "w-full"], ["matInput", "", "formControlName", "catering_notes", 3, "placeholder"], ["icon", "", "name", "toggle-assets-meeting", "matRipple", "", 3, "click"], ["formControlName", "assets", 3, "options", "rejected_ids"], [1, "mb-4", "flex", "items-center", "space-x-2"], [1, "flex", "w-full", "flex-col"], ["for", "notes"], ["name", "notes", "formControlName", "body", 3, "placeholder"]], template: function MeetingFlowFormComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -17161,16 +17158,10 @@ var MeetingFlowFormComponent = _MeetingFlowFormComponent;
             </div>
         </div>
     `, animations: [ANIMATION_SHOW_CONTRACT_EXPAND], standalone: false }]
-  }], null, { _confirm_ref: [{
-    type: ViewChild,
-    args: ["confirm_ref"]
-  }], _input_el: [{
-    type: ViewChild,
-    args: ["input"]
-  }] });
+  }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MeetingFlowFormComponent, { className: "MeetingFlowFormComponent", filePath: "apps/workplace/src/app/book/meeting-flow/meeting-flow-form.component.ts", lineNumber: 466 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MeetingFlowFormComponent, { className: "MeetingFlowFormComponent", filePath: "apps/workplace/src/app/book/meeting-flow/meeting-flow-form.component.ts", lineNumber: 473 });
 })();
 
 // apps/workplace/src/app/book/meeting-flow/meeting-flow-success.component.ts
@@ -18985,4 +18976,4 @@ var BookModule = _BookModule;
 export {
   BookModule
 };
-//# sourceMappingURL=book.module-4TRE53OZ.js.map
+//# sourceMappingURL=book.module-DP2PSLHA.js.map
