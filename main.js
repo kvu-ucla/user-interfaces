@@ -94130,6 +94130,7 @@ var APP = {
     HOST: "Host",
     PHONE: "Phone",
     ORGANISATION: "Organization",
+    REASON: "Reason for visit",
     CHECKED_IN_MSG: "You are checked in!",
     CHECKED_IN_MSG_SELF_REG: "Your registration is confirmed!",
     TAKE_PHOTO: "Take a photo to continue",
@@ -95264,15 +95265,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "0920604",
-  "hash": "0920604",
+  "raw": "9033b43",
+  "hash": "9033b43",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "0920604",
+  "suffix": "9033b43",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1750910582519
+  "time": 1750999827984
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -176266,6 +176267,10 @@ var _PanelViewComponent = class _PanelViewComponent extends AsyncHandler {
     this.messages = this._chat.messages;
     this.progress = this._chat.progress.pipe(tap(() => this._scrollToBottom()));
     this.waiting = this._chat.messages.pipe(map((_3) => _3.length !== 0 && _3[_3.length - 1]?.user_id === this.user?.id));
+    this._video_el = viewChild("video");
+    this._canvas_el = viewChild("canvas");
+    this._message_el = viewChild("message_element");
+    this._waveform_canvas_el = viewChild("waveform_canvas");
     this._spoken = false;
     this._last_text = "";
     this._frame_count = 0;
@@ -176281,7 +176286,7 @@ var _PanelViewComponent = class _PanelViewComponent extends AsyncHandler {
         window.removeEventListener("click", start_voice);
       };
       window.addEventListener("click", start_voice);
-      this._context = this._canvas_el.nativeElement.getContext("2d", {
+      this._context = this._canvas_el().nativeElement.getContext("2d", {
         willReadFrequently: true
       });
       this._setupWebcam();
@@ -176364,7 +176369,7 @@ var _PanelViewComponent = class _PanelViewComponent extends AsyncHandler {
     });
   }
   _webcamToTensor() {
-    const videoElement = this._video_el.nativeElement;
+    const videoElement = this._video_el().nativeElement;
     this._context.drawImage(videoElement, 0, 0, 640, 640);
     const imageData = this._context.getImageData(0, 0, 640, 640);
     const tensor2 = browser_exports2.fromPixels(imageData);
@@ -176401,7 +176406,7 @@ var _PanelViewComponent = class _PanelViewComponent extends AsyncHandler {
         const stream = yield navigator.mediaDevices.getUserMedia({
           video: true
         });
-        this._video_el.nativeElement.srcObject = stream;
+        this._video_el().nativeElement.srcObject = stream;
       } else {
         console.error("getUserMedia is not supported");
       }
@@ -176494,7 +176499,7 @@ var _PanelViewComponent = class _PanelViewComponent extends AsyncHandler {
   }
   _scrollToBottom() {
     this.timeout("scroll_to_bottom", () => {
-      const el = this._message_el.nativeElement;
+      const el = this._message_el().nativeElement;
       el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
     }, 50);
   }
@@ -176525,7 +176530,7 @@ var _PanelViewComponent = class _PanelViewComponent extends AsyncHandler {
   _drawWaveform() {
     if (!this.setup)
       return;
-    const canvas = this._waveform_canvas_el.nativeElement;
+    const canvas = this._waveform_canvas_el().nativeElement;
     const height = canvas.height;
     const width = canvas.width;
     const context2 = canvas.getContext("2d");
@@ -176553,17 +176558,13 @@ _PanelViewComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _PanelViewComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PanelViewComponent, selectors: [["app-panel-view"]], viewQuery: function PanelViewComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c011, 7);
-    \u0275\u0275viewQuery(_c17, 7);
-    \u0275\u0275viewQuery(_c24, 7);
-    \u0275\u0275viewQuery(_c34, 7);
+    \u0275\u0275viewQuerySignal(ctx._video_el, _c011, 5);
+    \u0275\u0275viewQuerySignal(ctx._canvas_el, _c17, 5);
+    \u0275\u0275viewQuerySignal(ctx._message_el, _c24, 5);
+    \u0275\u0275viewQuerySignal(ctx._waveform_canvas_el, _c34, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._video_el = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._canvas_el = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._message_el = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._waveform_canvas_el = _t4.first);
+    \u0275\u0275queryAdvance(4);
   }
 }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 28, vars: 22, consts: [["waveform_canvas", ""], ["video", ""], ["canvas", ""], ["message_element", ""], [1, "flex", "h-full", "w-full", "items-center", "justify-center"], [1, "relative", "flex", "h-full", "flex-1", "items-center", "justify-center", "bg-base-300", "p-8", 3, "click"], ["width", "256", "height", "128", 1, "h-32", "w-64"], [1, "absolute", "inset-x-0", "top-0", "p-8", "text-center"], [1, "text-sm"], [1, "absolute", "inset-x-0", "bottom-0", "p-4", "text-center"], [1, "absolute", "left-1/2", "top-2", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-center", "text-xs", "text-error-content"], ["autoplay", "", "playsinline", "", 1, "absolute", "bottom-4", "left-4", "h-48", "w-48", "rounded-xl", "border-[0.25rem]", "bg-base-200", "object-cover"], [1, "absolute", "bottom-4", "right-4", "flex", "h-12", "w-12", "items-center", "justify-center", "rounded-full", "bg-success", "text-success-content"], ["width", "640", "height", "640", 1, "pointer-events-none", "absolute", "opacity-0"], [1, "relative", "flex", "h-full", "w-[24rem]", "flex-col", "justify-end", "overflow-auto", "bg-base-100"], [1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "space-y-4"], [1, "max-h-full", "w-full", "overflow-auto"], [1, "my-2", "flex", "space-x-4", "p-2", "hover:bg-base-200", 3, "waiting-margin"], [1, "p-4"], [1, "absolute", "right-2", "flex", "items-center", "justify-center", "space-x-2", "rounded-2xl", "border", "border-neutral", "bg-base-100", "p-1", 3, "bottom"], ["icon", "", "matRipple", "", 1, "absolute", "left-2", "top-2", "h-12", "w-12", "bg-error", "text-error-content", "shadow"], ["splash", "", "matRipple", "", 1, "absolute", "inset-0", "z-20", "flex", "flex-col", "items-center", "justify-center", "text-white"], [1, "text-2xl"], ["src", "assets/icons/no-pending.svg", 1, "h-32", "w-32", "object-contain"], [1, "opacity-30"], [1, "my-2", "flex", "space-x-4", "p-2", "hover:bg-base-200", 3, "click"], [1, "text-xl", 3, "user"], [1, "flex", "flex-1", "flex-col", "space-y-1"], [1, "flex", "items-center", "space-x-4"], [1, "w-full", "px-2", "py-1", "text-right", "text-xs", "text-base-content", "opacity-40"], ["message", "", 1, "markdown", "selectable", "text-sm", 3, "innerHTML"], [1, "block", "w-full", "rounded", "border-base-300", "bg-info", "p-2", "text-info-content", 3, "click"], [1, "flex", "items-center", "space-x-2"], [1, "relative", "w-full", "overflow-hidden", "rounded"], [1, "absolute", "inset-0", "bg-base-100", "opacity-10"], [1, "text-mono", "break-words", "p-2", "text-left", "text-xs", 3, "innerHTML"], [1, "absolute", "right-2", "flex", "items-center", "justify-center", "space-x-2", "rounded-2xl", "border", "border-neutral", "bg-base-100", "p-1"], [1, "h-2", "w-2", "animate-bounce", "rounded-full", "bg-neutral"], [1, "anim-delay-1", "h-2", "w-2", "animate-bounce", "rounded-full", "bg-neutral"], [1, "anim-delay-2", "h-2", "w-2", "animate-bounce", "rounded-full", "bg-neutral"], [1, "sr-only"], ["icon", "", "matRipple", "", 1, "absolute", "left-2", "top-2", "h-12", "w-12", "bg-error", "text-error-content", "shadow", 3, "click"], ["splash", "", "matRipple", "", 1, "absolute", "inset-0", "z-20", "flex", "flex-col", "items-center", "justify-center", "text-white", 3, "click"], [1, "mb-4", "text-4xl", "font-light"]], template: function PanelViewComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -176825,19 +176826,7 @@ var PanelViewComponent = _PanelViewComponent;
             </button>
         }
     `, standalone: false, styles: ["/* angular:styles/component:css;099e564584534786c7186020472e49a963d411f3c0436eddcea746537614bad6;/home/runner/work/user-interfaces/user-interfaces/apps/assistant-panel/src/app/panel-view.component.ts */\n[splash] {\n  animation: crossfade 10s linear;\n  animation-iteration-count: infinite;\n}\n/*# sourceMappingURL=panel-view.component.css.map */\n"] }]
-  }], null, { _video_el: [{
-    type: ViewChild,
-    args: ["video", { static: true }]
-  }], _canvas_el: [{
-    type: ViewChild,
-    args: ["canvas", { static: true }]
-  }], _message_el: [{
-    type: ViewChild,
-    args: ["message_element", { static: true }]
-  }], _waveform_canvas_el: [{
-    type: ViewChild,
-    args: ["waveform_canvas", { static: true }]
-  }] });
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PanelViewComponent, { className: "PanelViewComponent", filePath: "apps/assistant-panel/src/app/panel-view.component.ts", lineNumber: 224 });
