@@ -69216,6 +69216,7 @@ var APP = {
     HOST: "Host",
     PHONE: "Phone",
     ORGANISATION: "Organization",
+    REASON: "Reason for visit",
     CHECKED_IN_MSG: "You are checked in!",
     CHECKED_IN_MSG_SELF_REG: "Your registration is confirmed!",
     TAKE_PHOTO: "Take a photo to continue",
@@ -70365,15 +70366,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "0920604",
-  "hash": "0920604",
+  "raw": "9033b43",
+  "hash": "9033b43",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "0920604",
+  "suffix": "9033b43",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1750910523955
+  "time": 1750999831731
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -101862,6 +101863,7 @@ var _VirtualKeyboardComponent = class _VirtualKeyboardComponent extends AsyncHan
     this.keyset = DEFAULT_KEYS;
     this.state = "normal";
     this._overlay_ref = null;
+    this._portal = viewChild(CdkPortal);
     this.onFocus = () => {
       if (!_VirtualKeyboardComponent.enabled)
         return;
@@ -101887,12 +101889,13 @@ var _VirtualKeyboardComponent = class _VirtualKeyboardComponent extends AsyncHan
   open() {
     if (this._overlay_ref)
       return;
-    if (!this._portal)
+    const _portal = this._portal();
+    if (!_portal)
       return;
     this._overlay_ref = this._overlay.create({
       positionStrategy: this._overlay.position().global().bottom().centerHorizontally()
     });
-    this._overlay_ref.attach(this._portal);
+    this._overlay_ref.attach(_portal);
   }
   close() {
     if (this._overlay_ref) {
@@ -101939,11 +101942,10 @@ _VirtualKeyboardComponent.\u0275fac = function VirtualKeyboardComponent_Factory(
 };
 _VirtualKeyboardComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VirtualKeyboardComponent, selectors: [["input", "keyboard", ""], ["textarea", "keyboard", ""]], viewQuery: function VirtualKeyboardComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(CdkPortal, 5);
+    \u0275\u0275viewQuerySignal(ctx._portal, CdkPortal, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._portal = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, hostBindings: function VirtualKeyboardComponent_HostBindings(rf, ctx) {
   if (rf & 1) {
@@ -102011,9 +102013,6 @@ var VirtualKeyboardComponent = _VirtualKeyboardComponent;
     `, imports: [MatRippleModule, PortalModule], styles: ["/* angular:styles/component:css;7121e8e0f3a6ec31112fa4330c36a57119d4007e4a28e0345816f9f8d2c8ff0e;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/virtual-keyboard.component.ts */\n[key] {\n  height: 3.5rem;\n  width: 4rem;\n  transition: box-shadow 200ms, top 200ms;\n  box-shadow: 0 4px 0 0.04px rgba(0, 0, 0, 0.1);\n}\n[key].special {\n  width: 10rem;\n}\n[key].space {\n  flex: 1;\n  min-width: 10rem;\n  max-width: 25rem;\n}\n[key]:hover {\n  top: 2px;\n  box-shadow: 0 2px 0 0.04px rgba(0, 0, 0, 0.1);\n}\n[key]:active {\n  top: 4px;\n  box-shadow: 0 0 0 0.04px rgba(0, 0, 0, 0.1);\n}\n/*# sourceMappingURL=virtual-keyboard.component.css.map */\n"] }]
   }], () => [], { keyset: [{
     type: Input
-  }], _portal: [{
-    type: ViewChild,
-    args: [CdkPortal]
   }], onFocus: [{
     type: HostListener,
     args: ["focus"]
@@ -103942,6 +103941,12 @@ var _MediaPlayerComponent = class _MediaPlayerComponent extends AsyncHandler {
     this._item_urls = {};
     this._item_start = 0;
     this._item_progress = 0;
+    this._previous_container = viewChild("previous_container");
+    this._previous_img_element = viewChild("previous_image_el");
+    this._previous_video_element = viewChild("previous_video_el");
+    this._container = viewChild("media_container");
+    this._image_element = viewChild("img_el");
+    this._video_element = viewChild("video_el");
   }
   get playlist_items() {
     return this._item_playlist;
@@ -103973,7 +103978,7 @@ var _MediaPlayerComponent = class _MediaPlayerComponent extends AsyncHandler {
       document.documentElement.style.setProperty("--transition-duration", `${this.animation_time || 3e3}ms`);
     }
     if (changes.muted) {
-      this._video_element.nativeElement.muted = !!this.muted;
+      this._video_element().nativeElement.muted = !!this.muted;
     }
   }
   url(id) {
@@ -103986,7 +103991,7 @@ var _MediaPlayerComponent = class _MediaPlayerComponent extends AsyncHandler {
   toggleMuted() {
     this.muted = !this.muted;
     this.mutedChange.emit(this.muted);
-    this._video_element.nativeElement.muted = this.muted;
+    this._video_element().nativeElement.muted = this.muted;
   }
   togglePause() {
     this.clearTimeout("re-start");
@@ -103995,14 +104000,14 @@ var _MediaPlayerComponent = class _MediaPlayerComponent extends AsyncHandler {
       this._item_progress = Date.now() - this._item_start;
       this._item_start = 0;
       if (this.active_item?.type === "video") {
-        this._video_element.nativeElement.pause();
+        this._video_element().nativeElement.pause();
       }
     } else {
       this.state = "PLAYING";
       this._item_start = Date.now() - this._item_progress;
       this._item_progress = 0;
       if (this.active_item?.type === "video") {
-        this._video_element.nativeElement.play();
+        this._video_element().nativeElement.play();
       }
       if (this.index === -1)
         this._updateItem();
@@ -104084,19 +104089,19 @@ var _MediaPlayerComponent = class _MediaPlayerComponent extends AsyncHandler {
       return;
     }
     if (item.type === "video") {
-      this._image_element.nativeElement.classList.add("hidden");
-      this._video_element.nativeElement.src = url.toString();
-      this._video_element.nativeElement.classList.remove("hidden");
+      this._image_element().nativeElement.classList.add("hidden");
+      this._video_element().nativeElement.src = url.toString();
+      this._video_element().nativeElement.classList.remove("hidden");
       try {
-        this._video_element.nativeElement.play();
+        this._video_element().nativeElement.play();
       } catch (e2) {
         this.nextItem();
       }
     } else {
-      this._video_element.nativeElement.classList.add("hidden");
-      this._image_element.nativeElement.src = url.toString();
-      this._image_element.nativeElement.classList.remove("hidden");
-      this._video_element.nativeElement.pause();
+      this._video_element().nativeElement.classList.add("hidden");
+      this._image_element().nativeElement.src = url.toString();
+      this._image_element().nativeElement.classList.remove("hidden");
+      this._video_element().nativeElement.pause();
     }
     this._transition();
   }
@@ -104143,8 +104148,8 @@ var _MediaPlayerComponent = class _MediaPlayerComponent extends AsyncHandler {
       return;
     }
     if (this.index !== -1) {
-      const img_el = this._previous_img_element.nativeElement;
-      const video_el = this._previous_video_element.nativeElement;
+      const img_el = this._previous_img_element().nativeElement;
+      const video_el = this._previous_video_element().nativeElement;
       let index = this.index - 1;
       if (index < 0)
         index = this._item_playlist.length - 1;
@@ -104163,8 +104168,8 @@ var _MediaPlayerComponent = class _MediaPlayerComponent extends AsyncHandler {
       }
     }
     const item = this.active_item;
-    const prev_container_el = this._previous_container.nativeElement;
-    const container_el = this._container.nativeElement;
+    const prev_container_el = this._previous_container().nativeElement;
+    const container_el = this._container().nativeElement;
     requestAnimationFrame(() => {
       switch (item.animation) {
         case Ir.SlideTop:
@@ -104197,11 +104202,11 @@ var _MediaPlayerComponent = class _MediaPlayerComponent extends AsyncHandler {
     });
   }
   _onTransitionEnd() {
-    const prev_container_el = this._previous_container.nativeElement;
-    const container_el = this._container.nativeElement;
+    const prev_container_el = this._previous_container().nativeElement;
+    const container_el = this._container().nativeElement;
     prev_container_el.classList.remove("opacity-0");
-    this._previous_video_element.nativeElement.classList.add("hidden");
-    this._previous_img_element.nativeElement.classList.add("hidden");
+    this._previous_video_element().nativeElement.classList.add("hidden");
+    this._previous_img_element().nativeElement.classList.add("hidden");
     prev_container_el.classList.remove("player-animate");
     container_el.classList.remove("player-animate");
     this.in_animation = false;
@@ -104216,21 +104221,15 @@ _MediaPlayerComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _MediaPlayerComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MediaPlayerComponent, selectors: [["media-player"]], viewQuery: function MediaPlayerComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c014, 7);
-    \u0275\u0275viewQuery(_c18, 7);
-    \u0275\u0275viewQuery(_c25, 7);
-    \u0275\u0275viewQuery(_c35, 7);
-    \u0275\u0275viewQuery(_c44, 7);
-    \u0275\u0275viewQuery(_c53, 7);
+    \u0275\u0275viewQuerySignal(ctx._previous_container, _c014, 5);
+    \u0275\u0275viewQuerySignal(ctx._previous_img_element, _c18, 5);
+    \u0275\u0275viewQuerySignal(ctx._previous_video_element, _c25, 5);
+    \u0275\u0275viewQuerySignal(ctx._container, _c35, 5);
+    \u0275\u0275viewQuerySignal(ctx._image_element, _c44, 5);
+    \u0275\u0275viewQuerySignal(ctx._video_element, _c53, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._previous_container = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._previous_img_element = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._previous_video_element = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._container = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._image_element = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._video_element = _t4.first);
+    \u0275\u0275queryAdvance(6);
   }
 }, inputs: { playlist: "playlist", controls: "controls", loop: "loop", shuffle: "shuffle", index: "index", animation_time: "animation_time", muted: "muted", state: "state" }, outputs: { stateChange: "stateChange", indexChange: "indexChange", mutedChange: "mutedChange" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 14, vars: 2, consts: [["previous_container", ""], ["previous_image_el", ""], ["previous_video_el", ""], ["media_container", ""], ["img_el", ""], ["video_el", ""], [1, "absolute", "left-0", "top-0", "h-full", "w-full"], [1, "absolute", "left-0", "top-0", "hidden", "h-full", "w-full", "object-contain", "object-center"], [1, "absolute", "left-0", "top-0", "h-full", "w-full", "object-contain", "object-center"], ["matTooltipPosition", "above", 1, "absolute", "bottom-[4.5rem]", "left-1/2", "w-56", "-translate-x-1/2", "overflow-hidden", "rounded-full", "border", "border-base-300", "bg-base-100", "p-1", 3, "matTooltip"], ["mode", "determinate", 1, "overflow-hidden", "rounded-full", 3, "value"], [1, "absolute", "inset-1", "rounded-full", "bg-success"], [1, "absolute", "bottom-2", "left-1/2", "flex", "-translate-x-1/2", "items-center", "space-x-2", "overflow-hidden", "rounded-full", "border", "border-base-300", "bg-base-100", "p-2", "text-lg"], ["icon", "", "matRipple", "", 1, "hover:bg-base-200", 3, "click", "matTooltip"], [1, "absolute", "bottom-24", "right-4", "top-4", "flex", "flex-col", "space-y-2", "overflow-auto", "rounded-xl", "border", "border-base-300", "bg-base-100", "p-2"], ["icon", "", "matRipple", "", 1, "absolute", "right-6", "top-6", "border", "border-base-200", "bg-base-100", "shadow", 3, "click"], [1, "flex", "items-center", "space-x-4", "p-2"], [1, "text-xs", "opacity-30"], ["matRipple", "", 1, "flex", "w-[20rem]", "items-center", "space-x-2", "rounded-lg", "p-2", "text-left", "hover:bg-base-200", 3, "overflow-visible", "pointer-events-none"], [1, "flex", "flex-col", "justify-end"], [1, "rounded-lg", "bg-base-300", "p-2", "text-center", "text-xs", "opacity-30"], ["matRipple", "", 1, "flex", "w-[20rem]", "items-center", "space-x-2", "rounded-lg", "p-2", "text-left", "hover:bg-base-200", 3, "click"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "rounded-full"], [1, "relative", "flex", "h-7", "w-7", "items-center", "justify-center"], [1, "absolute", "z-0", "inline-flex", "h-full", "w-full", "animate-ping", "rounded-full", "bg-info", "opacity-75"], [1, "relative", "z-10", "text-2xl"], [1, "flex", "w-1/2", "flex-1", "flex-col"], [1, "truncate"], [1, "rounded", "bg-info", "px-2", "py-1", "font-mono", "text-xs", "text-info-content"]], template: function MediaPlayerComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -104487,24 +104486,6 @@ var MediaPlayerComponent = _MediaPlayerComponent;
     type: Output
   }], mutedChange: [{
     type: Output
-  }], _previous_container: [{
-    type: ViewChild,
-    args: ["previous_container", { static: true }]
-  }], _previous_img_element: [{
-    type: ViewChild,
-    args: ["previous_image_el", { static: true }]
-  }], _previous_video_element: [{
-    type: ViewChild,
-    args: ["previous_video_el", { static: true }]
-  }], _container: [{
-    type: ViewChild,
-    args: ["media_container", { static: true }]
-  }], _image_element: [{
-    type: ViewChild,
-    args: ["img_el", { static: true }]
-  }], _video_element: [{
-    type: ViewChild,
-    args: ["video_el", { static: true }]
   }] });
 })();
 (() => {
