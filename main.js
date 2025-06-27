@@ -25667,6 +25667,10 @@ var viewChild = (() => {
   viewChildFn.required = viewChildRequiredFn;
   return viewChildFn;
 })();
+function viewChildren(locator, opts) {
+  ngDevMode && assertInInjectionContext(viewChildren);
+  return createMultiResultQuerySignalFn(opts);
+}
 function contentChildFn(locator, opts) {
   ngDevMode && assertInInjectionContext(contentChild);
   return createSingleResultOptionalQuerySignalFn(opts);
@@ -69625,6 +69629,7 @@ var APP = {
     HOST: "Host",
     PHONE: "Phone",
     ORGANISATION: "Organization",
+    REASON: "Reason for visit",
     CHECKED_IN_MSG: "You are checked in!",
     CHECKED_IN_MSG_SELF_REG: "Your registration is confirmed!",
     TAKE_PHOTO: "Take a photo to continue",
@@ -82865,15 +82870,15 @@ var MapsPeopleService = _MapsPeopleService;
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "0920604",
-  "hash": "0920604",
+  "raw": "9033b43",
+  "hash": "9033b43",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "0920604",
+  "suffix": "9033b43",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1750910597031
+  "time": 1750999827831
 };
 
 // libs/common/src/lib/vorlon.service.ts
@@ -92523,7 +92528,7 @@ var Booking = class {
     this.parent_id = data.parent_id || "";
     this.asset_id = data.asset_id || "";
     this.asset_ids = data.asset_ids || [data.asset_id].filter((_3) => _3);
-    this.asset_name = data.asset_name || data.extension_data?.asset_name || data.description || data.asset_id || "";
+    this.asset_name = data.asset_name || data.extension_data?.asset_name || data.extension_data?.name || data.description || data.asset_id || "";
     this.zones = data.zones || [];
     this.booking_start = Math.floor(data.date / 1e3) || data.booking_start || getUnixTime(roundToNearestMinutes(addMinutes(Date.now(), 5), {
       nearestTo: 5
@@ -92898,7 +92903,7 @@ function createBookingsForEvent(event, type2, resources) {
         booking_type: type2,
         date: event.date,
         duration: event.duration,
-        description: item.name,
+        description: event.title || item.name,
         user_email: event.host,
         asset_id: item.email || item.id,
         asset_name: item.name,
@@ -97039,9 +97044,10 @@ var _UserSearchFieldComponent = class _UserSearchFieldComponent extends AsyncHan
     }));
     this.registerOnChange = (fn3) => this._onChange = fn3;
     this.registerOnTouched = (fn3) => this._onTouch = fn3;
+    this._input_el = viewChild("input", { read: ElementRef });
     this.cancelReset = () => this.clearTimeout("reset");
     this.blurInput = () => {
-      this.timeout("blur", () => this._input_el?.nativeElement?.blur());
+      this.timeout("blur", () => this._input_el()?.nativeElement?.blur());
     };
   }
   ngOnInit() {
@@ -97092,11 +97098,10 @@ _UserSearchFieldComponent.\u0275fac = function UserSearchFieldComponent_Factory(
 };
 _UserSearchFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserSearchFieldComponent, selectors: [["a-user-search-field"]], viewQuery: function UserSearchFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c015, 5, ElementRef);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c015, 5, ElementRef);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._input_el = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, inputs: { disabled: "disabled", placeholder: "placeholder", options: "options", guests: "guests", error: "error", validate: "validate", empty_fn: "empty_fn", filter: "filter", query_fn: "query_fn" }, features: [\u0275\u0275ProvidersFeature([
   {
@@ -97291,9 +97296,6 @@ var UserSearchFieldComponent = _UserSearchFieldComponent;
     type: Input
   }], query_fn: [{
     type: Input
-  }], _input_el: [{
-    type: ViewChild,
-    args: ["input", { read: ElementRef }]
   }] });
 })();
 (() => {
@@ -97781,6 +97783,7 @@ var _CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler
     this.delay = 0;
     this.type = "template";
     this._overlay_ref = null;
+    this._portal = viewChild(CdkPortal);
     this.onClick = () => this.open();
     this.onTouch = () => this.open();
     this.onEnter = () => this.hover ? this.open() : "";
@@ -97806,7 +97809,8 @@ var _CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler
       this._updateType();
       if (this._overlay_ref)
         this.close();
-      if (!this._portal)
+      const _portal = this._portal();
+      if (!_portal)
         return;
       const pos = this._element.nativeElement.getBoundingClientRect();
       const default_x = "end";
@@ -97822,7 +97826,7 @@ var _CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler
           }
         ])
       });
-      this._overlay_ref.attach(this._portal);
+      this._overlay_ref.attach(_portal);
       if (this.backdrop) {
         this.subscription("backdrop", this._overlay_ref.backdropClick().subscribe(() => this.close()));
       }
@@ -97855,11 +97859,10 @@ _CustomTooltipComponent.\u0275fac = function CustomTooltipComponent_Factory(__ng
 };
 _CustomTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CustomTooltipComponent, selectors: [["", "customTooltip", ""]], viewQuery: function CustomTooltipComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(CdkPortal, 5);
+    \u0275\u0275viewQuerySignal(ctx._portal, CdkPortal, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._portal = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, hostBindings: function CustomTooltipComponent_HostBindings(rf, ctx) {
   if (rf & 1) {
@@ -97927,9 +97930,6 @@ var CustomTooltipComponent = _CustomTooltipComponent;
     type: Input
   }], delay: [{
     type: Input
-  }], _portal: [{
-    type: ViewChild,
-    args: [CdkPortal]
   }], onClick: [{
     type: HostListener,
     args: ["click"]
@@ -102062,6 +102062,7 @@ var _CiscoMapComponent = class _CiscoMapComponent extends AsyncHandler {
     this.zoom = DEFAULT_ZOOM;
     this.zoomChange = new EventEmitter();
     this.zoneChange = new EventEmitter();
+    this._mapContainer = viewChild.required("map_container");
   }
   ngOnInit() {
     this._injectScript();
@@ -102102,11 +102103,10 @@ _CiscoMapComponent.\u0275fac = function CiscoMapComponent_Factory(__ngFactoryTyp
 };
 _CiscoMapComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CiscoMapComponent, selectors: [["cisco-map"]], viewQuery: function CiscoMapComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c022, 7);
+    \u0275\u0275viewQuerySignal(ctx._mapContainer, _c022, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._mapContainer = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, inputs: { zone: "zone", metadata: "metadata", options: "options", focus: "focus", zoom: "zoom", reset: "reset" }, outputs: { zoomChange: "zoomChange", zoneChange: "zoneChange" }, features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 0, consts: [["map_container", ""], ["id", "cisco-map-container", 1, "absolute", "inset-0", "z-0"]], template: function CiscoMapComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -102140,9 +102140,6 @@ var CiscoMapComponent = _CiscoMapComponent;
     type: Output
   }], zoneChange: [{
     type: Output
-  }], _mapContainer: [{
-    type: ViewChild,
-    args: ["map_container", { static: true }]
   }] });
 })();
 (() => {
@@ -102290,6 +102287,8 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
       zoom$: this._on_changes.pipe(map((_3) => _3.zoom)),
       position: this._on_changes.pipe(map((_3) => _3.center))
     };
+    this._outlet_el = viewChild("outlet");
+    this._feature_list = viewChildren("feature");
   }
   ngOnInit() {
     Hn2();
@@ -102367,7 +102366,8 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
       const simp_url = this.src?.toLowerCase() || "";
       if (!simp_url.includes("svg") && !simp_url.includes("upload"))
         return;
-      if (this.src && this._outlet_el?.nativeElement && !this.loading) {
+      const _outlet_el = this._outlet_el();
+      if (this.src && _outlet_el?.nativeElement && !this.loading) {
         this.loading = true;
         if (this.viewer) {
           try {
@@ -102388,7 +102388,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         const tkn = Y2();
         document.cookie = `${tkn === "x-api-key" ? "api-key=" + encodeURIComponent(Ot()) : "bearer_token=" + encodeURIComponent(tkn)};max-age=30;path=/api/engine/v2/uploads;samesite=strict;${location.protocol === "https:" ? "secure;" : ""}`;
         this.viewer = yield Un2({
-          element: this._outlet_el?.nativeElement,
+          element: _outlet_el?.nativeElement,
           url: this.src,
           styles: this.styles,
           zoom: this.zoom,
@@ -102417,7 +102417,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         this.mapInfo.emit(viewer.mappings);
         if (this.focus)
           this.focusOn(this.focus);
-      } else if (this.src && !this._outlet_el?.nativeElement || this.loading) {
+      } else if (this.src && !_outlet_el?.nativeElement || this.loading) {
         this.timeout("create_view", () => this.createView().catch((e2) => console.warn(e2)));
       }
     });
@@ -102443,7 +102443,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
   }
   updateFeatureList() {
     this.feature_list = (this.features || []).map((f2, idx) => __spreadProps(__spreadValues({}, f2), {
-      content: this._feature_list.toArray()[idx]?.nativeElement
+      content: this._feature_list[idx]?.nativeElement
     })).filter((f2) => f2.content);
   }
   updateInjectors() {
@@ -102466,13 +102466,11 @@ _MapRendererComponent.\u0275fac = function MapRendererComponent_Factory(__ngFact
 };
 _MapRendererComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapRendererComponent, selectors: [["map-renderer"]], viewQuery: function MapRendererComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c023, 5);
-    \u0275\u0275viewQuery(_c113, 5);
+    \u0275\u0275viewQuerySignal(ctx._outlet_el, _c023, 5);
+    \u0275\u0275viewQuerySignal(ctx._feature_list, _c113, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._outlet_el = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._feature_list = _t4);
+    \u0275\u0275queryAdvance(2);
   }
 }, hostBindings: function MapRendererComponent_HostBindings(rf, ctx) {
   if (rf & 1) {
@@ -102592,19 +102590,13 @@ var MapRendererComponent = _MapRendererComponent;
     type: Output
   }], mapInfo: [{
     type: Output
-  }], _outlet_el: [{
-    type: ViewChild,
-    args: ["outlet"]
-  }], _feature_list: [{
-    type: ViewChildren,
-    args: ["feature"]
   }], onResize: [{
     type: HostListener,
     args: ["window:resize"]
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MapRendererComponent, { className: "MapRendererComponent", filePath: "libs/components/src/lib/map-renderer.component.ts", lineNumber: 135 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MapRendererComponent, { className: "MapRendererComponent", filePath: "libs/components/src/lib/map-renderer.component.ts", lineNumber: 134 });
 })();
 
 // libs/components/src/lib/maps-indoors.component.ts
@@ -102655,6 +102647,7 @@ var _MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
     this.loading_directions = false;
     this.ignore_zoom = false;
     this._floor_list = [];
+    this._container = viewChild("map_container");
     this._added_floor_selector = false;
     const data = sessionStorage.getItem("PLACEOS.mapsindoors.resources") || "{}";
     const value = JSON.parse(data);
@@ -102706,7 +102699,7 @@ var _MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
     }
     const [lat, long] = (this._org.building?.location || `-33.8567844,151.2152967`).split(",");
     const view_options = {
-      element: this._container.nativeElement,
+      element: this._container().nativeElement,
       center: { lat: parseFloat(lat), lng: parseFloat(long) },
       zoom: DEFAULT_ZOOM2,
       maxZoom: 24
@@ -102990,11 +102983,10 @@ _MapsIndoorsComponent.\u0275fac = function MapsIndoorsComponent_Factory(__ngFact
 };
 _MapsIndoorsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapsIndoorsComponent, selectors: [["maps-indoors"]], viewQuery: function MapsIndoorsComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c024, 7);
+    \u0275\u0275viewQuerySignal(ctx._container, _c024, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._container = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, inputs: { zone: "zone", metadata: "metadata", options: "options", focus: "focus", zoom: "zoom", reset: "reset" }, outputs: { zoomChange: "zoomChange", zoneChange: "zoneChange" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 3, vars: 1, consts: [["map_container", ""], [1, "absolute", "inset-0", "z-0"], ["btn", "", "matRipple", "", 1, "absolute", "bottom-2", "left-2", "z-10", "space-x-2", "border-base-200", "bg-base-100", "text-base-content", "shadow"], ["btn", "", "matRipple", "", 1, "absolute", "bottom-2", "left-2", "z-10", "space-x-2", "border-base-200", "bg-base-100", "text-base-content", "shadow", 3, "click"], [1, "pr-2"], ["diameter", "24"]], template: function MapsIndoorsComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -103045,9 +103037,6 @@ var MapsIndoorsComponent = _MapsIndoorsComponent;
     type: Output
   }], zoneChange: [{
     type: Output
-  }], _container: [{
-    type: ViewChild,
-    args: ["map_container", { static: true }]
   }] });
 })();
 (() => {
@@ -105011,6 +105000,7 @@ var _CardInputFieldComponent = class _CardInputFieldComponent extends AsyncHandl
     this.years = Array(12).fill(0).map((_3, idx) => DATE_PIPE.transform(addYears(Date.now(), idx), "yyyy"));
     this.digits = Array(16).fill(0);
     this._index = 0;
+    this._input_el = viewChild.required("input");
     this.registerOnChange = (fn3) => this._onChange = fn3;
     this.registerOnTouched = (fn3) => this._onTouch = fn3;
     this.setDisabledState = (s) => this.disabled = s;
@@ -105036,14 +105026,15 @@ var _CardInputFieldComponent = class _CardInputFieldComponent extends AsyncHandl
     return this.is_amex ? `${no2.substring(0, 4)}-${no2.substring(4, 10)}-${no2.substring(10)}` : `${no2.substring(0, 4)}-${no2.substring(4, 8)}-${no2.substring(8, 12)}-${no2.substring(12)}`;
   }
   get card_focused() {
-    return document.activeElement === this._input_el.nativeElement || document.activeElement === this._input_el.nativeElement.parentElement;
+    const _input_el = this._input_el();
+    return document.activeElement === _input_el.nativeElement || document.activeElement === _input_el.nativeElement.parentElement;
   }
   ngOnInit() {
     this.subscription("changes", this.details.valueChanges.subscribe((v3) => this.timeout("update", () => this.setValue(this.details.getRawValue()))));
   }
   focusInput() {
-    this._input_el.nativeElement.focus();
-    this._index = this._input_el.nativeElement.selectionStart || 0;
+    this._input_el().nativeElement.focus();
+    this._index = this._input_el().nativeElement.selectionStart || 0;
   }
   onInput(event) {
     if (!event || !this.card_focused)
@@ -105094,11 +105085,10 @@ _CardInputFieldComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _CardInputFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CardInputFieldComponent, selectors: [["card-input-field"]], viewQuery: function CardInputFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c029, 7);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c029, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._input_el = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, features: [\u0275\u0275ProvidersFeature([
   {
@@ -105285,10 +105275,7 @@ var CardInputFieldComponent = _CardInputFieldComponent;
       MatSelectModule,
       ReactiveFormsModule
     ], styles: ["/* angular:styles/component:css;2bc8ca7aace10e46f51053cb2cf4127500bd9fcd06c7c0d1d5dc88d70d997800;/home/runner/work/user-interfaces/user-interfaces/libs/payments/src/lib/card-input-field.component.ts */\nmat-form-field {\n  height: 3.25rem;\n}\n/*# sourceMappingURL=card-input-field.component.css.map */\n"] }]
-  }], null, { _input_el: [{
-    type: ViewChild,
-    args: ["input", { static: true }]
-  }] });
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CardInputFieldComponent, { className: "CardInputFieldComponent", filePath: "libs/payments/src/lib/card-input-field.component.ts", lineNumber: 138 });
@@ -106644,6 +106631,7 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
     this.now = Date.now();
     this._date_pipe = new DatePipe("en");
     this._local_tz = getTimezoneOffsetString(Intl.DateTimeFormat().resolvedOptions().timeZone);
+    this._tooltip = viewChild(CustomTooltipComponent);
   }
   /** First allowed date on the calendar */
   get from() {
@@ -106674,7 +106662,7 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
     if (this._onChange) {
       this._onChange(new_date);
     }
-    this._tooltip?.close();
+    this._tooltip()?.close();
   }
   /* istanbul ignore next */
   /**
@@ -106683,7 +106671,7 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
    */
   writeValue(value) {
     this.date = value;
-    this._tooltip?.close();
+    this._tooltip()?.close();
   }
   /* istanbul ignore next */
   /**
@@ -106710,11 +106698,10 @@ _DateFieldComponent.\u0275fac = function DateFieldComponent_Factory(__ngFactoryT
 };
 _DateFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DateFieldComponent, selectors: [["a-date-field"]], viewQuery: function DateFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(CustomTooltipComponent, 5);
+    \u0275\u0275viewQuerySignal(ctx._tooltip, CustomTooltipComponent, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._tooltip = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, inputs: { from_date: [0, "from", "from_date"], to_date: [0, "to", "to_date"], week_start: "week_start", use_24hr: "use_24hr", disabled: "disabled", short: "short", timezone: "timezone", range: "range" }, features: [\u0275\u0275ProvidersFeature([
   {
@@ -106852,9 +106839,6 @@ var DateFieldComponent = _DateFieldComponent;
     type: Input
   }], range: [{
     type: Input
-  }], _tooltip: [{
-    type: ViewChild,
-    args: [CustomTooltipComponent]
   }] });
 })();
 (() => {
@@ -106997,6 +106981,7 @@ var _TimeFieldComponent = class _TimeFieldComponent extends AsyncHandler {
     this.date = (/* @__PURE__ */ new Date()).valueOf();
     this.time = format(/* @__PURE__ */ new Date(), "HH:mm");
     this.active_time = Date.now();
+    this.select_field = viewChild("select");
     this._local_tz = getTimezoneOffsetString(Intl.DateTimeFormat().resolvedOptions().timeZone);
   }
   get time_format() {
@@ -107085,10 +107070,11 @@ var _TimeFieldComponent = class _TimeFieldComponent extends AsyncHandler {
   showSelect() {
     this.show_select = true;
     this.timeout("on_shown", () => {
-      if (this.select_field) {
-        this.select_field.focus();
-        this.select_field.open();
-        this.subscription("listen_close", this.select_field.openedChange.subscribe((state2) => {
+      const select_field = this.select_field();
+      if (select_field) {
+        select_field.focus();
+        select_field.open();
+        this.subscription("listen_close", select_field.openedChange.subscribe((state2) => {
           if (!state2) {
             this.show_select = false;
           }
@@ -107130,11 +107116,10 @@ _TimeFieldComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _TimeFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TimeFieldComponent, selectors: [["a-time-field"]], viewQuery: function TimeFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c031, 5);
+    \u0275\u0275viewQuerySignal(ctx.select_field, _c031, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.select_field = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, inputs: { step: "step", disabled: "disabled", no_past_times: "no_past_times", use_24hr: "use_24hr", force_time: "force_time", no_error: "no_error", extra_info_fn: "extra_info_fn", from: "from", timezone: "timezone" }, features: [\u0275\u0275ProvidersFeature([
   {
@@ -107288,9 +107273,6 @@ var TimeFieldComponent = _TimeFieldComponent;
     type: Input
   }], timezone: [{
     type: Input
-  }], select_field: [{
-    type: ViewChild,
-    args: ["select"]
   }] });
 })();
 (() => {
@@ -108338,6 +108320,7 @@ var _MapCanvasComponent = class _MapCanvasComponent extends AsyncHandler {
     this.ratio = 1;
     this.svg_ratio = 1;
     this.width = 1e4;
+    this.canvas_element = viewChild("canvas");
   }
   ngOnInit() {
     this.subscription("state", combineLatest([
@@ -108357,7 +108340,7 @@ var _MapCanvasComponent = class _MapCanvasComponent extends AsyncHandler {
       const height = this.width * this.ratio / 10;
       if (old_ratio === ratio)
         return;
-      const canvas = this.canvas_element.nativeElement;
+      const canvas = this.canvas_element().nativeElement;
       canvas.width = width;
       canvas.height = height;
       const polygons = yield nextValueFrom(this._data.polygons$);
@@ -108365,7 +108348,7 @@ var _MapCanvasComponent = class _MapCanvasComponent extends AsyncHandler {
     });
   }
   _handleStateChange(polygon_list) {
-    const canvas = this.canvas_element.nativeElement;
+    const canvas = this.canvas_element().nativeElement;
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     polygon_list.forEach((poly) => this._drawPolygon(poly));
@@ -108374,7 +108357,7 @@ var _MapCanvasComponent = class _MapCanvasComponent extends AsyncHandler {
     const points = polygon.points;
     if (!points?.length)
       return;
-    const canvas = this.canvas_element.nativeElement;
+    const canvas = this.canvas_element().nativeElement;
     const ctx = canvas.getContext("2d");
     const width = canvas.width;
     const height = canvas.height;
@@ -108421,11 +108404,10 @@ _MapCanvasComponent.\u0275fac = function MapCanvasComponent_Factory(__ngFactoryT
 };
 _MapCanvasComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapCanvasComponent, selectors: [["", "map-canvas", ""]], viewQuery: function MapCanvasComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c033, 7);
+    \u0275\u0275viewQuerySignal(ctx.canvas_element, _c033, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.canvas_element = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c116, decls: 2, vars: 4, consts: [["canvas", ""], [1, "absolute", "left-1/2", "top-1/2", "-translate-x-1/2", "-translate-y-1/2"]], template: function MapCanvasComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -108447,10 +108429,7 @@ var MapCanvasComponent = _MapCanvasComponent;
             [style.height]="width * svg_ratio * ratio * zoom + '%'"
         ></canvas>
     `, standalone: false }]
-  }], () => [], { canvas_element: [{
-    type: ViewChild,
-    args: ["canvas", { static: true }]
-  }] });
+  }], () => [], null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MapCanvasComponent, { className: "MapCanvasComponent", filePath: "libs/components/src/lib/map-canvas.component.ts", lineNumber: 49 });
@@ -109289,6 +109268,7 @@ var _VirtualKeyboardComponent = class _VirtualKeyboardComponent extends AsyncHan
     this.keyset = DEFAULT_KEYS;
     this.state = "normal";
     this._overlay_ref = null;
+    this._portal = viewChild(CdkPortal);
     this.onFocus = () => {
       if (!_VirtualKeyboardComponent.enabled)
         return;
@@ -109314,12 +109294,13 @@ var _VirtualKeyboardComponent = class _VirtualKeyboardComponent extends AsyncHan
   open() {
     if (this._overlay_ref)
       return;
-    if (!this._portal)
+    const _portal = this._portal();
+    if (!_portal)
       return;
     this._overlay_ref = this._overlay.create({
       positionStrategy: this._overlay.position().global().bottom().centerHorizontally()
     });
-    this._overlay_ref.attach(this._portal);
+    this._overlay_ref.attach(_portal);
   }
   close() {
     if (this._overlay_ref) {
@@ -109366,11 +109347,10 @@ _VirtualKeyboardComponent.\u0275fac = function VirtualKeyboardComponent_Factory(
 };
 _VirtualKeyboardComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VirtualKeyboardComponent, selectors: [["input", "keyboard", ""], ["textarea", "keyboard", ""]], viewQuery: function VirtualKeyboardComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(CdkPortal, 5);
+    \u0275\u0275viewQuerySignal(ctx._portal, CdkPortal, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._portal = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, hostBindings: function VirtualKeyboardComponent_HostBindings(rf, ctx) {
   if (rf & 1) {
@@ -109438,9 +109418,6 @@ var VirtualKeyboardComponent = _VirtualKeyboardComponent;
     `, imports: [MatRippleModule, PortalModule], styles: ["/* angular:styles/component:css;7121e8e0f3a6ec31112fa4330c36a57119d4007e4a28e0345816f9f8d2c8ff0e;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/virtual-keyboard.component.ts */\n[key] {\n  height: 3.5rem;\n  width: 4rem;\n  transition: box-shadow 200ms, top 200ms;\n  box-shadow: 0 4px 0 0.04px rgba(0, 0, 0, 0.1);\n}\n[key].special {\n  width: 10rem;\n}\n[key].space {\n  flex: 1;\n  min-width: 10rem;\n  max-width: 25rem;\n}\n[key]:hover {\n  top: 2px;\n  box-shadow: 0 2px 0 0.04px rgba(0, 0, 0, 0.1);\n}\n[key]:active {\n  top: 4px;\n  box-shadow: 0 0 0 0.04px rgba(0, 0, 0, 0.1);\n}\n/*# sourceMappingURL=virtual-keyboard.component.css.map */\n"] }]
   }], () => [], { keyset: [{
     type: Input
-  }], _portal: [{
-    type: ViewChild,
-    args: [CdkPortal]
   }], onFocus: [{
     type: HostListener,
     args: ["focus"]
@@ -109740,6 +109717,8 @@ var _ExploreSearchComponent = class _ExploreSearchComponent extends AsyncHandler
     this.results = this._search.search_results;
     this.loading = this._search.loading;
     this.setFilter = (s) => this._search.setFilter(s);
+    this._input_el = viewChild("input");
+    this._button_el = viewChild("button");
   }
   ngOnInit() {
     this.checkButtonPosition();
@@ -109755,8 +109734,8 @@ var _ExploreSearchComponent = class _ExploreSearchComponent extends AsyncHandler
     this.clearTimeout("clear");
   }
   focusInput() {
-    if (this._input_el?.nativeElement) {
-      this.timeout("focus", () => this._input_el.nativeElement.focus(), 300);
+    if (this._input_el()?.nativeElement) {
+      this.timeout("focus", () => this._input_el().nativeElement.focus(), 300);
     }
   }
   showSearch() {
@@ -109767,9 +109746,10 @@ var _ExploreSearchComponent = class _ExploreSearchComponent extends AsyncHandler
     this.show = false;
     this.search_str = "";
     this.setFilter("");
-    if (this._input_el?.nativeElement) {
-      this._input_el.nativeElement.focus();
-      this._input_el.nativeElement.blur();
+    const _input_el = this._input_el();
+    if (_input_el?.nativeElement) {
+      _input_el.nativeElement.focus();
+      _input_el.nativeElement.blur();
     }
   }
   select(item) {
@@ -109789,7 +109769,7 @@ var _ExploreSearchComponent = class _ExploreSearchComponent extends AsyncHandler
   }
   checkButtonPosition() {
     const window_width = window.innerWidth;
-    const button_rect = this._button_el.nativeElement.getBoundingClientRect();
+    const button_rect = this._button_el().nativeElement.getBoundingClientRect();
     const x_center = button_rect.left + button_rect.width / 2;
     this.right_size = x_center > window_width / 2;
   }
@@ -109799,13 +109779,11 @@ _ExploreSearchComponent.\u0275fac = function ExploreSearchComponent_Factory(__ng
 };
 _ExploreSearchComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreSearchComponent, selectors: [["explore-search"]], viewQuery: function ExploreSearchComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c036, 5);
-    \u0275\u0275viewQuery(_c118, 7);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c036, 5);
+    \u0275\u0275viewQuerySignal(ctx._button_el, _c118, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._input_el = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._button_el = _t4.first);
+    \u0275\u0275queryAdvance(2);
   }
 }, features: [\u0275\u0275InheritDefinitionFeature], decls: 15, vars: 23, consts: [["button", ""], ["origin", "matAutocompleteOrigin"], ["input", ""], ["auto", "matAutocomplete"], ["icon", "", "matRipple", "", 1, "m-2", "bg-base-200", 3, "resize", "click"], ["role", "search", "tabindex", "0", "matRipple", "", "matAutocompleteOrigin", "", 1, "absolute", "top-1/2", "z-10", "flex", "max-w-[calc(100vw-7rem)]", "-translate-y-1/2", "items-center", "overflow-hidden", "bg-base-100", "px-4", "outline-none", 3, "click"], ["keyboard", "", 1, "flex-1", "border-none", "text-base", "outline-none", 3, "ngModelChange", "focus", "blur", "ngModel", "placeholder", "matAutocomplete", "matAutocompleteConnectedTo"], [1, "mr-2", 3, "diameter"], [1, "pointer-events-none"], [3, "value"], [3, "click", "value"], [1, "flex", "w-[22rem]", "max-w-[calc(100vw-2rem)]", "items-center", "leading-tight"], [1, "w-1/2", "flex-1", "overflow-hidden"], [1, "w-full", "truncate"], [1, "text-xs"], [1, "rounded", "bg-base-300", "p-2", "text-xs", "font-bold", "capitalize", "text-white"]], template: function ExploreSearchComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -109976,13 +109954,7 @@ var ExploreSearchComponent = _ExploreSearchComponent;
       VirtualKeyboardComponent,
       FormsModule
     ], styles: ["/* angular:styles/component:css;4c21f033af2ef90561f15b32cccfcf54d8d96bf853a89d381116293bc1ac0ac7;/home/runner/work/user-interfaces/user-interfaces/libs/explore/src/lib/explore-search.component.ts */\n:host {\n  z-index: 99;\n  position: relative;\n}\n[role=search] {\n  height: 3rem;\n  width: 0;\n  border-radius: 1.5rem;\n  border: 1px solid var(--b3);\n  transition: width 200ms opacity 200ms;\n  opacity: 0;\n  pointer-events: none;\n}\n[role=search].show {\n  width: 24rem;\n  opacity: 1;\n  pointer-events: auto;\n}\n/*# sourceMappingURL=explore-search.component.css.map */\n"] }]
-  }], () => [], { _input_el: [{
-    type: ViewChild,
-    args: ["input"]
-  }], _button_el: [{
-    type: ViewChild,
-    args: ["button", { static: true }]
-  }] });
+  }], () => [], null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreSearchComponent, { className: "ExploreSearchComponent", filePath: "libs/explore/src/lib/explore-search.component.ts", lineNumber: 133 });
@@ -151175,6 +151147,8 @@ var _ChatComponent = class _ChatComponent extends AsyncHandler {
     this.messages = this._chat.messages;
     this.progress = this._chat.progress;
     this.waiting = this._chat.messages.pipe(map((_3) => _3.length !== 0 && _3[_3.length - 1]?.user_id === this.user?.id));
+    this._input_el = viewChild("input");
+    this._container_el = viewChild("container");
   }
   ngOnInit() {
     this.subscription("current_user", current_user.subscribe((user) => this.user = user));
@@ -151184,7 +151158,7 @@ var _ChatComponent = class _ChatComponent extends AsyncHandler {
     this.interval("offset", () => this.offset = this.offset ? 0 : 1, 20 * 1e3);
   }
   resizeInput() {
-    const el = this._input_el.nativeElement;
+    const el = this._input_el().nativeElement;
     this.height = Math.max(el.scrollHeight, 56);
   }
   sendMessage() {
@@ -151197,12 +151171,13 @@ var _ChatComponent = class _ChatComponent extends AsyncHandler {
     this._chat.sendMessage(this.message);
     this.message = "";
     this.height = 56;
-    setTimeout(() => this._input_el.nativeElement.focus(), 100);
+    setTimeout(() => this._input_el().nativeElement.focus(), 100);
   }
   scrollToBottom(delay2 = 300) {
     this.timeout("scroll", () => {
-      if (this._container_el?.nativeElement) {
-        this._container_el.nativeElement.scrollTop = this._container_el.nativeElement.scrollHeight;
+      const _container_el = this._container_el();
+      if (_container_el?.nativeElement) {
+        _container_el.nativeElement.scrollTop = _container_el.nativeElement.scrollHeight;
       }
     }, delay2);
   }
@@ -151212,13 +151187,11 @@ _ChatComponent.\u0275fac = function ChatComponent_Factory(__ngFactoryType__) {
 };
 _ChatComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ChatComponent, selectors: [["global-chat"]], viewQuery: function ChatComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c059, 5);
-    \u0275\u0275viewQuery(_c127, 5);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c059, 5);
+    \u0275\u0275viewQuerySignal(ctx._container_el, _c127, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._input_el = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._container_el = _t4.first);
+    \u0275\u0275queryAdvance(2);
   }
 }, features: [\u0275\u0275InheritDefinitionFeature], decls: 1, vars: 1, consts: [["container", ""], ["input", ""], [1, "absolute", "bottom-0", "right-0", "p-2"], ["icon", "", "matRipple", "", 1, "rounded-full", "border", "border-base-300", "bg-base-100", "shadow", 3, "click"], [1, "absolute", "bottom-2", "right-2", "w-[40rem]", "max-w-[calc(100vw-1rem)]", "overflow-hidden", "rounded-xl", "border", "border-base-300", "bg-base-200", "shadow"], [1, "flex", "w-full", "items-center", "justify-between", "border-b", "border-base-300", "bg-base-100", "p-2"], [1, "pl-4"], ["icon", "", "matRipple", "", 3, "click"], [1, "h-[32rem]", "max-h-[60vh]", "overflow-auto"], [1, "flex", "w-full", "flex-col", "items-center", "justify-center", "space-y-2", "p-8"], [1, "text-8xl"], [1, "text-center", "text-xl"], [1, "m-2", "rounded", "border-base-300", "bg-base-100", "p-4", "text-sm", "shadow"], [1, "m-2", "flex", "flex-col", 3, "pr-4", "pl-4", "items-left", "items-end", "waiting-margin"], [1, "p-4"], [1, "absolute", "right-2", "flex", "items-center", "justify-center", "space-x-2", "rounded-2xl", "border", "border-neutral", "bg-base-100", "p-1", 3, "bottom"], [1, "flex", "max-h-[10rem]", "overflow-y-auto", "border-t", "border-base-300", "bg-base-100", "outline-info", "focus-within:outline"], [1, "w-1/2", "flex-1", "resize-none", "overflow-hidden", "p-4", "focus:outline-none", 3, "ngModelChange", "keyup.enter", "placeholder", "ngModel"], ["icon", "", "matRipple", "", 1, "mt-2", 3, "click", "disabled"], [1, "m-2", "flex", "flex-col", 3, "click"], [1, "flex", "items-center", "space-x-2"], [1, "px-2", "py-1", "text-sm", "text-base-content", "opacity-60"], [1, "px-2", "py-1", "text-xs", "text-base-content", "opacity-40"], ["message", "", 1, "markdown", "selectable", "rounded", "border-base-300", "bg-base-100", "p-4", "text-sm", "shadow", 3, "innerHTML"], [1, "block", "w-full", "rounded", "border-base-300", "bg-info", "p-2", "text-info-content", 3, "click"], [1, "text-2xl"], [1, "text-sm"], [1, "relative", "w-full", "overflow-hidden", "rounded"], [1, "absolute", "inset-0", "bg-base-100", "opacity-10"], [1, "text-mono", "break-words", "p-2", "text-left", "text-xs", 3, "innerHTML"], [1, "absolute", "right-2", "flex", "items-center", "justify-center", "space-x-2", "rounded-2xl", "border", "border-neutral", "bg-base-100", "p-1"], [1, "h-2", "w-2", "animate-bounce", "rounded-full", "bg-neutral"], [1, "anim-delay-1", "h-2", "w-2", "animate-bounce", "rounded-full", "bg-neutral"], [1, "anim-delay-2", "h-2", "w-2", "animate-bounce", "rounded-full", "bg-neutral"], [1, "sr-only"]], template: function ChatComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -151436,13 +151409,7 @@ var ChatComponent = _ChatComponent;
       FormsModule,
       IconComponent
     ], styles: ["/* angular:styles/component:css;8d7ebb4af65d658f572d4c64ececfd821bd4e611d847fcf4fb27590ce7974604;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/chat/chat.component.ts */\n.anim-delay-1 {\n  animation-delay: 0.25s;\n}\n.anim-delay-2 {\n  animation-delay: 0.5s;\n}\n.waiting-margin:last-child {\n  padding-bottom: 2rem;\n}\n/*# sourceMappingURL=chat.component.css.map */\n"] }]
-  }], () => [], { _input_el: [{
-    type: ViewChild,
-    args: ["input"]
-  }], _container_el: [{
-    type: ViewChild,
-    args: ["container"]
-  }] });
+  }], () => [], null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ChatComponent, { className: "ChatComponent", filePath: "libs/components/src/lib/chat/chat.component.ts", lineNumber: 229 });
@@ -152533,6 +152500,8 @@ var _IndoorMapsComponent = class _IndoorMapsComponent extends AsyncHandler {
       ...this._org.levelsForBuilding(bld)
     ]));
     this.floor_mapping = {};
+    this.searchElement = viewChild("searchInput");
+    this.searchResults = viewChild("searchResultItems");
   }
   ngOnInit() {
     return __async(this, null, function* () {
@@ -152556,7 +152525,7 @@ var _IndoorMapsComponent = class _IndoorMapsComponent extends AsyncHandler {
         yield this.mapActions();
       }
       if (change.locate && this.locate && mapsindoors) {
-        const searchParams = { q: this.searchElement.nativeElement.value };
+        const searchParams = { q: this.searchElement().nativeElement.value };
         const locations = yield mapsindoors?.services.LocationsService.getLocations(searchParams);
         if (locations.length)
           this.getRoute(locations[0]);
@@ -152655,7 +152624,7 @@ var _IndoorMapsComponent = class _IndoorMapsComponent extends AsyncHandler {
     });
   }
   onSearch() {
-    const searchParams = { q: this.searchElement.nativeElement.value };
+    const searchParams = { q: this.searchElement().nativeElement.value };
     mapsindoors?.services.LocationsService.getLocations(searchParams).then((locations) => {
       this.search_result_items = locations;
     });
@@ -152815,13 +152784,11 @@ _IndoorMapsComponent.\u0275fac = function IndoorMapsComponent_Factory(__ngFactor
 };
 _IndoorMapsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IndoorMapsComponent, selectors: [["indoor-maps"]], viewQuery: function IndoorMapsComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c060, 7);
-    \u0275\u0275viewQuery(_c128, 5);
+    \u0275\u0275viewQuerySignal(ctx.searchElement, _c060, 5);
+    \u0275\u0275viewQuerySignal(ctx.searchResults, _c128, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.searchElement = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.searchResults = _t4.first);
+    \u0275\u0275queryAdvance(2);
   }
 }, inputs: { styles: "styles", actions: "actions", custom_coordinates: "custom_coordinates", locate: "locate", default_zoom: "default_zoom" }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 12, vars: 3, consts: [["searchInput", ""], ["id", "maps-indoors", 1, "absolute", "inset-0", "flex", "items-center", "justify-center"], [1, "absolute", "inset-0", "flex", "items-center", "justify-center"], [1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "space-y-2"], [1, "absolute", "left-2", "top-2", "z-50", "flex", "h-min", "w-min", "flex-col", "rounded-lg", "bg-base-100", "p-2", "text-base-content", "shadow"], ["appearance", "outline", 1, "map", "no-subscript"], ["matInput", "", "name", "location-search", "type", "text", "placeholder", "Search", 3, "keyup.enter"], ["matSuffix", "", 1, "relative", "h-10"], ["icon", "", "name", "indoor-map-search", "matRipple", "", "aria-label", "search button", "matTooltip", "Search...", 1, "hover:bg-base-200", 3, "click"], ["matPrefix", "", 1, "relative", "text-2xl"], [3, "diameter"], ["src", "assets/icons/not-found.svg", "alt", "graphic of magnifying glass", "width", "200px", 1, "items-center"], [1, "mt-10", "text-center", "text-sm", "opacity-60"], [1, "my-2", "flex", "items-center", "justify-between", "space-x-2", "px-2"], [1, "text-lg", "font-medium"], ["icon", "", "matRipple", "", "matTooltip", "Clear Results", 1, "hover:bg-base-200", 3, "click"], [1, "m-0", "max-h-[65vh]", "w-full", "list-none", "space-y-2", "overflow-auto", "p-0"], [1, "w-full", "rounded", "border", "border-base-200", "even:bg-base-200", "hover:bg-base-300"], [1, "flex", "w-full", "items-center", "space-x-2", "p-2", "text-left", 3, "click"], [1, "flex", "flex-1", "flex-col"], [1, "text-xs", "opacity-30"]], template: function IndoorMapsComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -152970,12 +152937,6 @@ var IndoorMapsComponent = _IndoorMapsComponent;
     type: Input
   }], default_zoom: [{
     type: Input
-  }], searchElement: [{
-    type: ViewChild,
-    args: ["searchInput", { static: true }]
-  }], searchResults: [{
-    type: ViewChild,
-    args: ["searchResultItems"]
   }] });
 })();
 (() => {
@@ -153296,6 +153257,7 @@ var _LoginComponent = class _LoginComponent {
       username: new FormControl("", [Validators.required]),
       password: new FormControl("", [Validators.required])
     });
+    this.pwd_field = viewChild("pass_field");
     this.logo = this._org.active_building.pipe(debounceTime(500), map(() => (this._settings.theme === "dark" ? this._settings.get("app.logo_dark") : this._settings.get("app.logo_light")) || {}));
   }
   ngOnInit() {
@@ -153307,8 +153269,9 @@ var _LoginComponent = class _LoginComponent {
   }
   /** Focus on the password field */
   toPassword() {
-    if (this.pwd_field && this.pwd_field.nativeElement) {
-      this.pwd_field.nativeElement.focus();
+    const pwd_field = this.pwd_field();
+    if (pwd_field && pwd_field.nativeElement) {
+      pwd_field.nativeElement.focus();
     }
   }
   /** Perform user login */
@@ -153322,11 +153285,10 @@ _LoginComponent.\u0275fac = function LoginComponent_Factory(__ngFactoryType__) {
 };
 _LoginComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LoginComponent, selectors: [["app-login"]], viewQuery: function LoginComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c061, 7);
+    \u0275\u0275viewQuerySignal(ctx.pwd_field, _c061, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.pwd_field = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, standalone: false, decls: 10, vars: 7, consts: [["username", ""], ["pass_field", ""], [1, "fixed", "inset-0", "overflow-auto"], [1, "mx-auto", "my-4", "flex", "flex-col", "items-center", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow"], [1, "flex", "items-center", "justify-center"], ["auth", "", "alt", "Logo", 1, "h-12", 3, "source"], [1, "relative", "h-1/3", "w-full", "flex-1"], [1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "space-y-2"], [1, "flex", "w-full", "items-center", "justify-center"], [1, "flex", "flex-col"], ["for", "username"], ["appearance", "outline"], ["formControlName", "username", 3, "keyup.enter"], ["for", "password"], ["formControlName", "password", 3, "keyup.enter"], ["diameter", "64"], ["btn", "", "matRipple", "", "color", "primary", 3, "click"]], template: function LoginComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -153448,10 +153410,7 @@ img {
 }
 /*# sourceMappingURL=login.component.css.map */
 `] }]
-  }], null, { pwd_field: [{
-    type: ViewChild,
-    args: ["pass_field", { static: true }]
-  }] });
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LoginComponent, { className: "LoginComponent", filePath: "libs/components/src/lib/login.component.ts", lineNumber: 100 });
@@ -153712,6 +153671,7 @@ var _PrintableComponent = class _PrintableComponent extends AsyncHandler {
     this._elem = inject(ElementRef);
     this.content = "";
     this._overlay_ref = null;
+    this._portal = viewChild(CdkPortal);
   }
   ngOnInit() {
     this.open();
@@ -153727,7 +153687,8 @@ var _PrintableComponent = class _PrintableComponent extends AsyncHandler {
     this.timeout("open", () => {
       if (this._overlay_ref)
         this.close();
-      if (!this._portal)
+      const _portal = this._portal();
+      if (!_portal)
         return;
       const default_x = "end";
       const default_y = "top";
@@ -153742,7 +153703,7 @@ var _PrintableComponent = class _PrintableComponent extends AsyncHandler {
           }
         ])
       });
-      this._overlay_ref.attach(this._portal);
+      this._overlay_ref.attach(_portal);
     }, 50);
   }
   close() {
@@ -153758,11 +153719,10 @@ _PrintableComponent.\u0275fac = function PrintableComponent_Factory(__ngFactoryT
 };
 _PrintableComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PrintableComponent, selectors: [["", "printable", ""]], viewQuery: function PrintableComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(CdkPortal, 5);
+    \u0275\u0275viewQuerySignal(ctx._portal, CdkPortal, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._portal = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c063, ngContentSelectors: _c129, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["printable-view", "", 1, "pointer-events-none", "fixed", "left-0", "top-0", "hidden", "flex-col", "items-end", "print:flex", 3, "innerHTML"]], template: function PrintableComponent_Template(rf, ctx) {
   if (rf & 1) {
@@ -153790,10 +153750,7 @@ var PrintableComponent = _PrintableComponent;
     `,
       imports: [SanitizePipe, PortalModule]
     }]
-  }], () => [], { _portal: [{
-    type: ViewChild,
-    args: [CdkPortal]
-  }] });
+  }], () => [], null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PrintableComponent, { className: "PrintableComponent", filePath: "libs/components/src/lib/printable.component.ts", lineNumber: 31 });
@@ -156099,12 +156056,14 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
       this.upload_list,
       this.upload_ids
     ]).pipe(map(([list2, ids]) => list2.filter((i) => ids.includes(i.id))));
+    this._list_el = viewChild("image_list");
+    this._file_input = viewChild("file_input");
     this.registerOnChange = (fn3) => this._onChange = fn3;
     this.registerOnTouched = (fn3) => this._onTouch = fn3;
   }
   ngAfterViewInit() {
     this.timeout("init_view_space", () => {
-      const box = this._list_el.nativeElement.getBoundingClientRect();
+      const box = this._list_el().nativeElement.getBoundingClientRect();
       this.view_space = Math.floor(box.width / 152);
     }, 100);
     this.subscription("upload_changes", this.upload_list.subscribe((list2) => {
@@ -156153,7 +156112,7 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
           for (let i = 0; i < files.length; i++) {
             const id = yield this._uploads.uploadFileWithPermissions(files[i]);
             this.upload_ids.next([...this.upload_ids.getValue(), id]);
-            this._file_input.nativeElement.value = "";
+            this._file_input().nativeElement.value = "";
           }
         }
       }
@@ -156191,13 +156150,11 @@ _ImageListFieldComponent.\u0275fac = function ImageListFieldComponent_Factory(__
 };
 _ImageListFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ImageListFieldComponent, selectors: [["image-list-field"]], viewQuery: function ImageListFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c066, 5);
-    \u0275\u0275viewQuery(_c132, 5);
+    \u0275\u0275viewQuerySignal(ctx._list_el, _c066, 5);
+    \u0275\u0275viewQuerySignal(ctx._file_input, _c132, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._list_el = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._file_input = _t4.first);
+    \u0275\u0275queryAdvance(2);
   }
 }, features: [\u0275\u0275ProvidersFeature([
   {
@@ -156424,13 +156381,7 @@ var ImageListFieldComponent = _ImageListFieldComponent;
       CommonModule,
       TranslatePipe
     ], styles: ["/* angular:styles/component:css;95dcaaaa826894df5bf437b6ea5774f7f209a30340873d0fad154aed06b72211;/home/runner/work/user-interfaces/user-interfaces/libs/form-fields/src/lib/image-list-field.component.ts */\n:host {\n  width: 100%;\n}\n[overlay] {\n  transition: background 200ms;\n}\n[image]:hover [actions],\n[image]:hover > icon {\n  opacity: 1 !important;\n}\n[image]:hover [bg] {\n  opacity: 0.4 !important;\n}\n[actions],\n[image] > icon {\n  transition: opacity 200ms;\n}\n[image] {\n  transition: transform 200ms;\n}\n/*# sourceMappingURL=image-list-field.component.css.map */\n"] }]
-  }], () => [], { _list_el: [{
-    type: ViewChild,
-    args: ["image_list"]
-  }], _file_input: [{
-    type: ViewChild,
-    args: ["file_input"]
-  }] });
+  }], () => [], null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageListFieldComponent, { className: "ImageListFieldComponent", filePath: "libs/form-fields/src/lib/image-list-field.component.ts", lineNumber: 228 });
@@ -165168,6 +165119,8 @@ var _RichTextInputComponent = class _RichTextInputComponent extends AsyncHandler
     this.placeholder = "";
     this.readonly = false;
     this.images_allowed = false;
+    this._container_el = viewChild("container");
+    this._editor_el = viewChild("editor");
     this._updateFn = () => this.setValue(this._editor.root.innerHTML);
     this.registerOnChange = (fn3) => this._onChange = fn3;
     this.registerOnTouched = (fn3) => this._onTouch = fn3;
@@ -165204,7 +165157,9 @@ var _RichTextInputComponent = class _RichTextInputComponent extends AsyncHandler
     });
   }
   _initialiseEditor() {
-    if (!this._editor_el?.nativeElement || !this._container_el?.nativeElement) {
+    const _editor_el = this._editor_el();
+    const _container_el = this._container_el();
+    if (!_editor_el?.nativeElement || !_container_el?.nativeElement) {
       return this.timeout("init", () => this._initialiseEditor());
     }
     const toolbarOptions = [
@@ -165220,11 +165175,11 @@ var _RichTextInputComponent = class _RichTextInputComponent extends AsyncHandler
     }
     if (this._editor) {
       this.unsub("changes");
-      this._editor_el.nativeElement.innerHTML = "";
+      _editor_el.nativeElement.innerHTML = "";
       delete this._editor;
     }
-    this._editor = new quill_default(this._editor_el.nativeElement, {
-      bounds: this._container_el.nativeElement,
+    this._editor = new quill_default(_editor_el.nativeElement, {
+      bounds: _container_el.nativeElement,
       placeholder: this.placeholder,
       modules: {
         toolbar: {
@@ -165290,13 +165245,11 @@ _RichTextInputComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _RichTextInputComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _RichTextInputComponent, selectors: [["rich-text-input"]], viewQuery: function RichTextInputComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c067, 5);
-    \u0275\u0275viewQuery(_c133, 5);
+    \u0275\u0275viewQuerySignal(ctx._container_el, _c067, 5);
+    \u0275\u0275viewQuerySignal(ctx._editor_el, _c133, 5);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._container_el = _t4.first);
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._editor_el = _t4.first);
+    \u0275\u0275queryAdvance(2);
   }
 }, inputs: { placeholder: "placeholder", readonly: "readonly", images_allowed: "images_allowed" }, features: [\u0275\u0275ProvidersFeature([
   {
@@ -165334,12 +165287,6 @@ var RichTextInputComponent = _RichTextInputComponent;
     type: Input
   }], images_allowed: [{
     type: Input
-  }], _container_el: [{
-    type: ViewChild,
-    args: ["container"]
-  }], _editor_el: [{
-    type: ViewChild,
-    args: ["editor"]
   }] });
 })();
 (() => {
