@@ -69950,6 +69950,7 @@ var APP = {
     HOST: "Host",
     PHONE: "Phone",
     ORGANISATION: "Organization",
+    REASON: "Reason for visit",
     CHECKED_IN_MSG: "You are checked in!",
     CHECKED_IN_MSG_SELF_REG: "Your registration is confirmed!",
     TAKE_PHOTO: "Take a photo to continue",
@@ -75141,15 +75142,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "0920604",
-  "hash": "0920604",
+  "raw": "9033b43",
+  "hash": "9033b43",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "0920604",
+  "suffix": "9033b43",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1750910522546
+  "time": 1750999831658
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -86990,14 +86991,14 @@ var Booking = class {
     return this._valid_asset_cache;
   }
   constructor(data = {}) {
-    var _a8, _b2, _c;
+    var _a8, _b2, _c, _d;
     this._valid_asset_cache = [];
     this._valid_cache_expiry = 0;
     this.id = data.id || "";
     this.parent_id = data.parent_id || "";
     this.asset_id = data.asset_id || "";
     this.asset_ids = data.asset_ids || [data.asset_id].filter((_3) => _3);
-    this.asset_name = data.asset_name || ((_a8 = data.extension_data) == null ? void 0 : _a8.asset_name) || data.description || data.asset_id || "";
+    this.asset_name = data.asset_name || ((_a8 = data.extension_data) == null ? void 0 : _a8.asset_name) || ((_b2 = data.extension_data) == null ? void 0 : _b2.name) || data.description || data.asset_id || "";
     this.zones = data.zones || [];
     this.booking_start = Math.floor(data.date / 1e3) || data.booking_start || getUnixTime(roundToNearestMinutes(addMinutes(Date.now(), 5), {
       nearestTo: 5
@@ -87025,11 +87026,11 @@ var Booking = class {
     this.approver_email = data.approver_email || "";
     this.approver_name = data.approver_name || "";
     this.extension_data = data.extension_data || {};
-    this.access = !!((_b2 = data.extension_data) == null ? void 0 : _b2.access);
+    this.access = !!((_c = data.extension_data) == null ? void 0 : _c.access);
     this.event_id = data.event_id;
     this.permission = (data.permission || "PRIVATE").toUpperCase();
     this.attendees = data.attendees || data.guests || data.members || [];
-    this.tags = data.tags || ((_c = data.extension_data) == null ? void 0 : _c.tags) || [];
+    this.tags = data.tags || ((_d = data.extension_data) == null ? void 0 : _d.tags) || [];
     this.images = data.images || [];
     this.all_day = data.all_day || this.duration >= 24 * 60;
     this.induction = data.induction || void 0;
@@ -87198,7 +87199,7 @@ function createBookingsForEvent(event, type2, resources) {
         booking_type: type2,
         date: event.date,
         duration: event.duration,
-        description: item.name,
+        description: event.title || item.name,
         user_email: event.host,
         asset_id: item.email || item.id,
         asset_name: item.name,
@@ -88859,11 +88860,12 @@ var _UserSearchFieldComponent = class _UserSearchFieldComponent extends AsyncHan
     }));
     this.registerOnChange = (fn3) => this._onChange = fn3;
     this.registerOnTouched = (fn3) => this._onTouch = fn3;
+    this._input_el = viewChild("input", { read: ElementRef });
     this.cancelReset = () => this.clearTimeout("reset");
     this.blurInput = () => {
       this.timeout("blur", () => {
         var _a8, _b2;
-        return (_b2 = (_a8 = this._input_el) == null ? void 0 : _a8.nativeElement) == null ? void 0 : _b2.blur();
+        return (_b2 = (_a8 = this._input_el()) == null ? void 0 : _a8.nativeElement) == null ? void 0 : _b2.blur();
       });
     };
   }
@@ -88918,11 +88920,10 @@ _UserSearchFieldComponent.\u0275fac = function UserSearchFieldComponent_Factory(
 };
 _UserSearchFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserSearchFieldComponent, selectors: [["a-user-search-field"]], viewQuery: function UserSearchFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuery(_c012, 5, ElementRef);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c012, 5, ElementRef);
   }
   if (rf & 2) {
-    let _t4;
-    \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._input_el = _t4.first);
+    \u0275\u0275queryAdvance();
   }
 }, inputs: { disabled: "disabled", placeholder: "placeholder", options: "options", guests: "guests", error: "error", validate: "validate", empty_fn: "empty_fn", filter: "filter", query_fn: "query_fn" }, features: [\u0275\u0275ProvidersFeature([
   {
@@ -89117,9 +89118,6 @@ var UserSearchFieldComponent = _UserSearchFieldComponent;
     type: Input
   }], query_fn: [{
     type: Input
-  }], _input_el: [{
-    type: ViewChild,
-    args: ["input", { read: ElementRef }]
   }] });
 })();
 (() => {
