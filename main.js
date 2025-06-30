@@ -75142,15 +75142,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "3a1cc4d",
-  "hash": "3a1cc4d",
+  "raw": "dd80368",
+  "hash": "dd80368",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "3a1cc4d",
+  "suffix": "dd80368",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1751254226341
+  "time": 1751262504669
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -117847,23 +117847,25 @@ function GlobalLoadingComponent_Conditional_1_Template(rf, ctx) {
   }
 }
 var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler {
-  get online() {
-    return gs();
-  }
   constructor() {
     super();
     this._org = inject(OrganisationService);
     this._settings = inject(SettingsService);
+    this.loading = signal(false);
+    this.online = signal(false);
   }
   ngOnInit() {
     return __async(this, null, function* () {
-      this.loading = true;
+      this.loading.set(true);
+      this.online.set(gs());
       yield firstTruthyValueFrom(this._org.initialised);
       yield firstTruthyValueFrom(this._settings.initialised);
       this.interval("has_token", () => {
+        this.online.set(gs());
         if (!bt() || !Y2())
           return;
-        this.loading = false;
+        this.loading.set(false);
+        this.online.set(gs());
         this.clearInterval("has_token");
       }, 1e3);
     });
@@ -117878,9 +117880,9 @@ _GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent(
     \u0275\u0275conditionalCreate(1, GlobalLoadingComponent_Conditional_1_Template, 2, 1, "div", 1);
   }
   if (rf & 2) {
-    \u0275\u0275conditional(!ctx.online ? 0 : -1);
+    \u0275\u0275conditional(!ctx.online() ? 0 : -1);
     \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.loading ? 1 : -1);
+    \u0275\u0275conditional(ctx.loading() ? 1 : -1);
   }
 }, dependencies: [MatProgressSpinnerModule, MatProgressSpinner, TranslatePipe], styles: [`
 
@@ -117897,14 +117899,14 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GlobalLoadingComponent, [{
     type: Component,
     args: [{ selector: "global-loading", template: `
-        @if (!online) {
+        @if (!online()) {
             <div
                 class="fixed bottom-2 left-1/2 z-50 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
             >
                 {{ 'COMMON.SERVER_DOWN' | translate }}
             </div>
         }
-        @if (loading) {
+        @if (loading()) {
             <div
                 loader
                 class="pointer-events-auto fixed inset-0 z-40 flex items-center justify-center bg-base-100"
