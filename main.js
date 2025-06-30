@@ -5,11 +5,11 @@ import {
   VirtualKeyboardComponent,
   generateMockSpace,
   setHours
-} from "./chunk-HKMWUTVX.js";
+} from "./chunk-WXLG6L3A.js";
 import {
   CheckinStateService,
   MatCheckboxModule
-} from "./chunk-FO7WVYUQ.js";
+} from "./chunk-GMBCAEPB.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -189,6 +189,7 @@ import {
   setupCache,
   setupPlace,
   shareReplay,
+  signal,
   startOfDay,
   startOfMinute,
   style,
@@ -250,7 +251,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-GWY2YVTJ.js";
+} from "./chunk-E4HKTSJD.js";
 import {
   __async,
   __export,
@@ -27850,23 +27851,25 @@ function GlobalLoadingComponent_Conditional_1_Template(rf, ctx) {
   }
 }
 var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler {
-  get online() {
-    return gs();
-  }
   constructor() {
     super();
     this._org = inject(OrganisationService);
     this._settings = inject(SettingsService);
+    this.loading = signal(false);
+    this.online = signal(false);
   }
   ngOnInit() {
     return __async(this, null, function* () {
-      this.loading = true;
+      this.loading.set(true);
+      this.online.set(gs());
       yield firstTruthyValueFrom(this._org.initialised);
       yield firstTruthyValueFrom(this._settings.initialised);
       this.interval("has_token", () => {
+        this.online.set(gs());
         if (!bt() || !Y())
           return;
-        this.loading = false;
+        this.loading.set(false);
+        this.online.set(gs());
         this.clearInterval("has_token");
       }, 1e3);
     });
@@ -27881,9 +27884,9 @@ _GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent(
     \u0275\u0275conditionalCreate(1, GlobalLoadingComponent_Conditional_1_Template, 2, 1, "div", 1);
   }
   if (rf & 2) {
-    \u0275\u0275conditional(!ctx.online ? 0 : -1);
+    \u0275\u0275conditional(!ctx.online() ? 0 : -1);
     \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.loading ? 1 : -1);
+    \u0275\u0275conditional(ctx.loading() ? 1 : -1);
   }
 }, dependencies: [MatProgressSpinnerModule, MatProgressSpinner, TranslatePipe], styles: [`
 
@@ -27900,14 +27903,14 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GlobalLoadingComponent, [{
     type: Component,
     args: [{ selector: "global-loading", template: `
-        @if (!online) {
+        @if (!online()) {
             <div
                 class="fixed bottom-2 left-1/2 z-50 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
             >
                 {{ 'COMMON.SERVER_DOWN' | translate }}
             </div>
         }
-        @if (loading) {
+        @if (loading()) {
             <div
                 loader
                 class="pointer-events-auto fixed inset-0 z-40 flex items-center justify-center bg-base-100"
@@ -29873,11 +29876,11 @@ var routes = [
   { path: "register", component: VisitorRegistrationComponent },
   {
     path: "explore",
-    loadChildren: () => import("./explore.module-QSI5JR6E.js").then((m) => m.AppExploreModule)
+    loadChildren: () => import("./explore.module-PSRYOPHV.js").then((m) => m.AppExploreModule)
   },
   {
     path: "checkin",
-    loadChildren: () => import("./checkin.module-ZIWE6J72.js").then((m) => m.VisitorCheckinModule)
+    loadChildren: () => import("./checkin.module-57KONDRX.js").then((m) => m.VisitorCheckinModule)
   },
   { path: "**", redirectTo: "bootstrap" }
 ];

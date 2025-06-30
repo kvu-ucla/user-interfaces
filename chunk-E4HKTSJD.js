@@ -72176,15 +72176,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "cd287e1",
-  "hash": "cd287e1",
+  "raw": "dd80368",
+  "hash": "dd80368",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "cd287e1",
+  "suffix": "dd80368",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1751253780795
+  "time": 1751262508071
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -82554,4 +82554,4 @@ export {
 js-yaml/dist/js-yaml.mjs:
   (*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT *)
 */
-//# sourceMappingURL=chunk-GWY2YVTJ.js.map
+//# sourceMappingURL=chunk-E4HKTSJD.js.map
