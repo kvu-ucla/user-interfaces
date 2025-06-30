@@ -1,6 +1,6 @@
 import {
   subMinutes
-} from "./chunk-5SBCCPDV.js";
+} from "./chunk-XSUURQ7R.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -103,6 +103,7 @@ import {
   endOfDay,
   filter,
   first,
+  firstTruthyValueFrom,
   flatten,
   formatRuntimeError,
   generateMockSpace,
@@ -186,7 +187,7 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-CBEUJWHF.js";
+} from "./chunk-SQI2JIII.js";
 import {
   __async,
   __export,
@@ -26090,7 +26091,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
       });
       setNotifyOutlet(this._snackbar);
       setTranslationService(this._locale);
-      yield lastValueFrom(this._settings.initialised.pipe(first((_) => _)));
+      yield firstTruthyValueFrom(this._settings.initialised);
       setAppName(this._settings.get("app.short_name"));
       const settings = this._settings.get("composer") || {};
       settings.mock = !!this._settings.get("mock") || location.origin.includes("demo.place.tech");
@@ -26260,7 +26261,7 @@ var AppComponent = _AppComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 114 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 115 });
 })();
 
 // apps/workplace/src/environments/environment.ts
@@ -26277,43 +26278,43 @@ var routes = [
     path: "landing",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./landing.module-HFYCTORM.js").then((m) => m.AppLandingModule)
+    loadChildren: () => import("./landing.module-SV3MX2HW.js").then((m) => m.AppLandingModule)
   },
   {
     path: "book",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./book.module-DP2PSLHA.js").then((m) => m.BookModule)
+    loadChildren: () => import("./book.module-LB6ARVFL.js").then((m) => m.BookModule)
   },
   {
     path: "explore",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./explore.module-ME6XBFVM.js").then((m) => m.ExploreModule)
+    loadChildren: () => import("./explore.module-RT43IQMK.js").then((m) => m.ExploreModule)
   },
   {
     path: "control",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./control.module-PDSXT6EH.js").then((m) => m.ControlModule)
+    loadChildren: () => import("./control.module-HSMFYMMF.js").then((m) => m.ControlModule)
   },
   {
     path: "directory",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./directory.module-HBTZ77H6.js").then((m) => m.DirectoryModule)
+    loadChildren: () => import("./directory.module-B6SH57C3.js").then((m) => m.DirectoryModule)
   },
   {
     path: "your-bookings",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./schedule.module-4MG3PLT2.js").then((m) => m.AppScheduleModule)
+    loadChildren: () => import("./schedule.module-O7JUBZH2.js").then((m) => m.AppScheduleModule)
   },
   {
     path: "group-events",
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard],
-    loadChildren: () => import("./group-events.module-H3YRLD4A.js").then((m) => m.GroupEventsModule)
+    loadChildren: () => import("./group-events.module-MIUJWXKN.js").then((m) => m.GroupEventsModule)
   },
   { path: "**", redirectTo: "-", pathMatch: "full" }
 ];
