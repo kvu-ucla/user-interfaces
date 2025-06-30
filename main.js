@@ -80378,15 +80378,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "9033b43",
-  "hash": "9033b43",
+  "raw": "cd287e1",
+  "hash": "cd287e1",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "9033b43",
+  "suffix": "cd287e1",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1750999827451
+  "time": 1751253784076
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -107896,8 +107896,8 @@ var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler
   ngOnInit() {
     return __async(this, null, function* () {
       this.loading = true;
-      yield this._org.initialised.pipe(first((_3) => _3)).toPromise();
-      yield this._settings.initialised.pipe(first((_3) => _3)).toPromise();
+      yield firstTruthyValueFrom(this._org.initialised);
+      yield firstTruthyValueFrom(this._settings.initialised);
       this.interval("has_token", () => {
         if (!bt() || !Y2())
           return;
@@ -107910,7 +107910,7 @@ var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler
 _GlobalLoadingComponent.\u0275fac = function GlobalLoadingComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _GlobalLoadingComponent)();
 };
-_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
+_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-50", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-40", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, GlobalLoadingComponent_Conditional_0_Template, 3, 3, "div", 0);
     \u0275\u0275conditionalCreate(1, GlobalLoadingComponent_Conditional_1_Template, 2, 1, "div", 1);
@@ -107937,7 +107937,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
     args: [{ selector: "global-loading", template: `
         @if (!online) {
             <div
-                class="fixed bottom-2 left-1/2 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
+                class="fixed bottom-2 left-1/2 z-50 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
             >
                 {{ 'COMMON.SERVER_DOWN' | translate }}
             </div>
@@ -107945,7 +107945,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
         @if (loading) {
             <div
                 loader
-                class="pointer-events-auto fixed inset-0 flex items-center justify-center bg-base-100"
+                class="pointer-events-auto fixed inset-0 z-40 flex items-center justify-center bg-base-100"
             >
                 <mat-spinner [diameter]="64"></mat-spinner>
             </div>
@@ -107963,7 +107963,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalLoadingComponent, { className: "GlobalLoadingComponent", filePath: "libs/components/src/lib/global-loading.component.ts", lineNumber: 43 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalLoadingComponent, { className: "GlobalLoadingComponent", filePath: "libs/components/src/lib/global-loading.component.ts", lineNumber: 46 });
 })();
 
 // libs/components/src/lib/help-tooltip.component.ts
