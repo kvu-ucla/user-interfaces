@@ -72176,15 +72176,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "9033b43",
-  "hash": "9033b43",
+  "raw": "cd287e1",
+  "hash": "cd287e1",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "9033b43",
+  "suffix": "cd287e1",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1750999830230
+  "time": 1751253780795
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -82355,6 +82355,7 @@ export {
   shiftColorTowards,
   formatDuration2 as formatDuration,
   nextValueFrom,
+  firstTruthyValueFrom,
   LOCAL_TIMEZONE,
   getTimezoneOffsetString,
   generateCalendarFileLink,
@@ -82553,4 +82554,4 @@ export {
 js-yaml/dist/js-yaml.mjs:
   (*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT *)
 */
-//# sourceMappingURL=chunk-XO3RYWF4.js.map
+//# sourceMappingURL=chunk-GWY2YVTJ.js.map

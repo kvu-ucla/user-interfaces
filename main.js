@@ -5,11 +5,11 @@ import {
   VirtualKeyboardComponent,
   generateMockSpace,
   setHours
-} from "./chunk-UYBMIPQS.js";
+} from "./chunk-HKMWUTVX.js";
 import {
   CheckinStateService,
   MatCheckboxModule
-} from "./chunk-YGF3V45T.js";
+} from "./chunk-FO7WVYUQ.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -146,6 +146,7 @@ import {
   enableProdMode,
   filter,
   first,
+  firstTruthyValueFrom,
   flatten,
   formatRuntimeError,
   getInvalidFields,
@@ -249,7 +250,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-XO3RYWF4.js";
+} from "./chunk-GWY2YVTJ.js";
 import {
   __async,
   __export,
@@ -27860,8 +27861,8 @@ var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler
   ngOnInit() {
     return __async(this, null, function* () {
       this.loading = true;
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      yield this._settings.initialised.pipe(first((_) => _)).toPromise();
+      yield firstTruthyValueFrom(this._org.initialised);
+      yield firstTruthyValueFrom(this._settings.initialised);
       this.interval("has_token", () => {
         if (!bt() || !Y())
           return;
@@ -27874,7 +27875,7 @@ var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler
 _GlobalLoadingComponent.\u0275fac = function GlobalLoadingComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _GlobalLoadingComponent)();
 };
-_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
+_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-50", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-40", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, GlobalLoadingComponent_Conditional_0_Template, 3, 3, "div", 0);
     \u0275\u0275conditionalCreate(1, GlobalLoadingComponent_Conditional_1_Template, 2, 1, "div", 1);
@@ -27901,7 +27902,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
     args: [{ selector: "global-loading", template: `
         @if (!online) {
             <div
-                class="fixed bottom-2 left-1/2 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
+                class="fixed bottom-2 left-1/2 z-50 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
             >
                 {{ 'COMMON.SERVER_DOWN' | translate }}
             </div>
@@ -27909,7 +27910,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
         @if (loading) {
             <div
                 loader
-                class="pointer-events-auto fixed inset-0 flex items-center justify-center bg-base-100"
+                class="pointer-events-auto fixed inset-0 z-40 flex items-center justify-center bg-base-100"
             >
                 <mat-spinner [diameter]="64"></mat-spinner>
             </div>
@@ -27927,7 +27928,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalLoadingComponent, { className: "GlobalLoadingComponent", filePath: "libs/components/src/lib/global-loading.component.ts", lineNumber: 43 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalLoadingComponent, { className: "GlobalLoadingComponent", filePath: "libs/components/src/lib/global-loading.component.ts", lineNumber: 46 });
 })();
 
 // libs/components/src/lib/global-banner.component.ts
@@ -28137,7 +28138,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
       });
       setNotifyOutlet(this._snackbar);
       setTranslationService(this._locale);
-      yield lastValueFrom(this._settings.initialised.pipe(first((_) => _)));
+      yield firstTruthyValueFrom(this._settings.initialised);
       setAppName(this._settings.get("app.short_name"));
       const settings = this._settings.get("composer") || {};
       settings.mock = !!this._settings.get("mock") || location.origin.includes("demo.place.tech");
@@ -28307,7 +28308,7 @@ var AppComponent = _AppComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 114 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "libs/components/src/lib/app.component.ts", lineNumber: 115 });
 })();
 
 // apps/visitor-kiosk/src/environments/environment.ts
@@ -29872,11 +29873,11 @@ var routes = [
   { path: "register", component: VisitorRegistrationComponent },
   {
     path: "explore",
-    loadChildren: () => import("./explore.module-RF4RT755.js").then((m) => m.AppExploreModule)
+    loadChildren: () => import("./explore.module-QSI5JR6E.js").then((m) => m.AppExploreModule)
   },
   {
     path: "checkin",
-    loadChildren: () => import("./checkin.module-HCSTGMI4.js").then((m) => m.VisitorCheckinModule)
+    loadChildren: () => import("./checkin.module-ZIWE6J72.js").then((m) => m.VisitorCheckinModule)
   },
   { path: "**", redirectTo: "bootstrap" }
 ];
