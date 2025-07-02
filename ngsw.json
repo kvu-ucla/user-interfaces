@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1751259413567,
+  "timestamp": 1751431840638,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -178,7 +178,7 @@
     "./assets/maps/level_G.svg": "34941af9a8f84b60d820fe3230f88d2c5374b8f1",
     "./assets/maps/level_P1.svg": "d143761b1d22330cb22c6d29ac1b0eb2dc37d29e",
     "./assets/maps/test.svg": "6b8cf2e8673469599a1a6d246b5e13650477aa2e",
-    "./assets/md5_worker.js": "012ff09e01e0f16503c19bc38294e6f3ee864d1c",
+    "./assets/md5_worker.js": "60219890928275f63cd389150e22f36e8f397812",
     "./assets/mocks/building1.jpg": "9170087fb243e25d0dbd5a29c58aafd4e1a4daee",
     "./assets/mocks/building2.jpg": "9fcdd5204d4294effd515b8b97fac937f494d7e4",
     "./assets/mocks/building3.jpg": "782111d26faa182f2c163fd972a021357fd384c8",
@@ -197,7 +197,7 @@
     "./assets/yolov8x_web_model/model.json": "51607c6c0f465d41cdca4d65a17cfbf9c9f99c62",
     "./favicon.ico": "4e23d0f9b6ddaf3c9ddef90dbaed2342941297b5",
     "./index.html": "efb08f64f538eb71d7a2d2b5a98c233aa387ea22",
-    "./main.js": "45bb7c9ee6d3ce20c7802e2a48f8986900d0dfc5",
+    "./main.js": "fd4f59fba6693aceb6b3d230ac51527035bb7de0",
     "./polyfills.js": "bc1e9994654c5f6b2b79941f98e76ced44787752",
     "./styles.css": "0b3f84fe76725da335ab46a20f2024d261e27723"
   },
