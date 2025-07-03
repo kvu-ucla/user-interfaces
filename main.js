@@ -12,6 +12,7 @@ import {
   BreakpointObserver,
   Breakpoints,
   BrowserModule,
+  Bt,
   COMMA,
   CdkPortalOutlet,
   ChangeDetectionStrategy,
@@ -28,7 +29,6 @@ import {
   ErrorHandler,
   GlobalBannerComponent,
   GlobalLoadingComponent,
-  Go,
   GoogleAnalyticsService,
   HotkeysService,
   HttpErrorResponse,
@@ -46,20 +46,18 @@ import {
   MatButton,
   MatButtonModule,
   MatCommonModule,
-  Mt,
   NEVER,
   NavigationCancel,
   NavigationEnd,
   NavigationError,
   NavigationStart,
-  Ne,
   NgModule,
   NgZone,
   Nn,
   NoopAnimationPlayer,
   Observable,
+  Oe,
   OrganisationService,
-  Ot,
   OverlayConfig,
   OverlayModule,
   Platform,
@@ -82,6 +80,7 @@ import {
   VERSION,
   ViewChild,
   ViewEncapsulation,
+  Xo,
   Xt,
   Y,
   Yt,
@@ -111,11 +110,13 @@ import {
   formatRuntimeError,
   generateMockSpace,
   getUnixTime,
+  gs,
   hasNewVersion,
   hn,
   inject,
   isBefore,
   isMobileSafari,
+  jt,
   lastValueFrom,
   ln,
   log,
@@ -123,7 +124,6 @@ import {
   map,
   nextValueFrom,
   nn,
-  no,
   notifySuccess,
   of,
   padString,
@@ -136,6 +136,7 @@ import {
   randomString,
   registerLocaleData,
   requestScreenWakeLock,
+  ro,
   sequence,
   set,
   setAppName,
@@ -158,7 +159,6 @@ import {
   unique,
   withInterceptorsFromDi,
   xa,
-  ys,
   ɵPRE_STYLE,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
@@ -189,7 +189,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-Z3OJY5SV.js";
+} from "./chunk-7ARVCWLO.js";
 
 // node_modules/@angular/animations/fesm2022/util-CPU6TNml.mjs
 var LINE_START = "\n - ";
@@ -6504,7 +6504,7 @@ var mockLevel = (id, idx, building, num = "10") => {
     display_name: ""
   };
 };
-var MOCK_LEVELS = MOCK_BUILDINGS.map((bld) => bld.levels.map((level, idx) => mockLevel(level, idx, bld, level.split("-")[1]))).reduce((p, c) => p.concat(c), [
+var MOCK_LEVELS = MOCK_BUILDINGS.map((bld) => bld.levels.map((level, idx) => mockLevel(level, idx, bld, level.split("-")[1]))).reduce((p, c2) => p.concat(c2), [
   // {
   //     id: 'test',
   //     parent_id: 'bld-01',
@@ -7060,7 +7060,7 @@ function registerMocks4() {
         ];
       }
       MOCK_EVENTS.push(new_event);
-      const system = Go(new_event.system?.id);
+      const system = Xo(new_event.system?.id);
       system?.Bookings[0]?.$poll_bookings();
       return new_event;
     }
@@ -7616,188 +7616,70 @@ var createSystemModule = (space, overrides = {}) => new RoomModule(__spreadValue
   env_sources
 }), overrides));
 
-// node_modules/ts-md5/dist/esm/md5.js
-var Md5 = class _Md5 {
+// node_modules/ts-md5/dist/index.es.js
+var c = new Int32Array(4);
+var h = class _h {
+  static hashStr(i, a = false) {
+    return this.onePassHasher.start().appendStr(i).end(a);
+  }
+  static hashAsciiStr(i, a = false) {
+    return this.onePassHasher.start().appendAsciiStr(i).end(a);
+  }
+  // Private Static Variables
+  static stateIdentity = new Int32Array([
+    1732584193,
+    -271733879,
+    -1732584194,
+    271733878
+  ]);
+  static buffer32Identity = new Int32Array([
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]);
+  static hexChars = "0123456789abcdef";
+  static hexOut = [];
+  // Permanent instance is to use for one-call hashing
+  static onePassHasher = new _h();
+  static _hex(i) {
+    const a = _h.hexChars, t = _h.hexOut;
+    let e2, s, r2, n2;
+    for (n2 = 0; n2 < 4; n2 += 1)
+      for (s = n2 * 8, e2 = i[n2], r2 = 0; r2 < 8; r2 += 2)
+        t[s + 1 + r2] = a.charAt(e2 & 15), e2 >>>= 4, t[s + 0 + r2] = a.charAt(e2 & 15), e2 >>>= 4;
+    return t.join("");
+  }
+  static _md5cycle(i, a) {
+    let t = i[0], e2 = i[1], s = i[2], r2 = i[3];
+    t += (e2 & s | ~e2 & r2) + a[0] - 680876936 | 0, t = (t << 7 | t >>> 25) + e2 | 0, r2 += (t & e2 | ~t & s) + a[1] - 389564586 | 0, r2 = (r2 << 12 | r2 >>> 20) + t | 0, s += (r2 & t | ~r2 & e2) + a[2] + 606105819 | 0, s = (s << 17 | s >>> 15) + r2 | 0, e2 += (s & r2 | ~s & t) + a[3] - 1044525330 | 0, e2 = (e2 << 22 | e2 >>> 10) + s | 0, t += (e2 & s | ~e2 & r2) + a[4] - 176418897 | 0, t = (t << 7 | t >>> 25) + e2 | 0, r2 += (t & e2 | ~t & s) + a[5] + 1200080426 | 0, r2 = (r2 << 12 | r2 >>> 20) + t | 0, s += (r2 & t | ~r2 & e2) + a[6] - 1473231341 | 0, s = (s << 17 | s >>> 15) + r2 | 0, e2 += (s & r2 | ~s & t) + a[7] - 45705983 | 0, e2 = (e2 << 22 | e2 >>> 10) + s | 0, t += (e2 & s | ~e2 & r2) + a[8] + 1770035416 | 0, t = (t << 7 | t >>> 25) + e2 | 0, r2 += (t & e2 | ~t & s) + a[9] - 1958414417 | 0, r2 = (r2 << 12 | r2 >>> 20) + t | 0, s += (r2 & t | ~r2 & e2) + a[10] - 42063 | 0, s = (s << 17 | s >>> 15) + r2 | 0, e2 += (s & r2 | ~s & t) + a[11] - 1990404162 | 0, e2 = (e2 << 22 | e2 >>> 10) + s | 0, t += (e2 & s | ~e2 & r2) + a[12] + 1804603682 | 0, t = (t << 7 | t >>> 25) + e2 | 0, r2 += (t & e2 | ~t & s) + a[13] - 40341101 | 0, r2 = (r2 << 12 | r2 >>> 20) + t | 0, s += (r2 & t | ~r2 & e2) + a[14] - 1502002290 | 0, s = (s << 17 | s >>> 15) + r2 | 0, e2 += (s & r2 | ~s & t) + a[15] + 1236535329 | 0, e2 = (e2 << 22 | e2 >>> 10) + s | 0, t += (e2 & r2 | s & ~r2) + a[1] - 165796510 | 0, t = (t << 5 | t >>> 27) + e2 | 0, r2 += (t & s | e2 & ~s) + a[6] - 1069501632 | 0, r2 = (r2 << 9 | r2 >>> 23) + t | 0, s += (r2 & e2 | t & ~e2) + a[11] + 643717713 | 0, s = (s << 14 | s >>> 18) + r2 | 0, e2 += (s & t | r2 & ~t) + a[0] - 373897302 | 0, e2 = (e2 << 20 | e2 >>> 12) + s | 0, t += (e2 & r2 | s & ~r2) + a[5] - 701558691 | 0, t = (t << 5 | t >>> 27) + e2 | 0, r2 += (t & s | e2 & ~s) + a[10] + 38016083 | 0, r2 = (r2 << 9 | r2 >>> 23) + t | 0, s += (r2 & e2 | t & ~e2) + a[15] - 660478335 | 0, s = (s << 14 | s >>> 18) + r2 | 0, e2 += (s & t | r2 & ~t) + a[4] - 405537848 | 0, e2 = (e2 << 20 | e2 >>> 12) + s | 0, t += (e2 & r2 | s & ~r2) + a[9] + 568446438 | 0, t = (t << 5 | t >>> 27) + e2 | 0, r2 += (t & s | e2 & ~s) + a[14] - 1019803690 | 0, r2 = (r2 << 9 | r2 >>> 23) + t | 0, s += (r2 & e2 | t & ~e2) + a[3] - 187363961 | 0, s = (s << 14 | s >>> 18) + r2 | 0, e2 += (s & t | r2 & ~t) + a[8] + 1163531501 | 0, e2 = (e2 << 20 | e2 >>> 12) + s | 0, t += (e2 & r2 | s & ~r2) + a[13] - 1444681467 | 0, t = (t << 5 | t >>> 27) + e2 | 0, r2 += (t & s | e2 & ~s) + a[2] - 51403784 | 0, r2 = (r2 << 9 | r2 >>> 23) + t | 0, s += (r2 & e2 | t & ~e2) + a[7] + 1735328473 | 0, s = (s << 14 | s >>> 18) + r2 | 0, e2 += (s & t | r2 & ~t) + a[12] - 1926607734 | 0, e2 = (e2 << 20 | e2 >>> 12) + s | 0, t += (e2 ^ s ^ r2) + a[5] - 378558 | 0, t = (t << 4 | t >>> 28) + e2 | 0, r2 += (t ^ e2 ^ s) + a[8] - 2022574463 | 0, r2 = (r2 << 11 | r2 >>> 21) + t | 0, s += (r2 ^ t ^ e2) + a[11] + 1839030562 | 0, s = (s << 16 | s >>> 16) + r2 | 0, e2 += (s ^ r2 ^ t) + a[14] - 35309556 | 0, e2 = (e2 << 23 | e2 >>> 9) + s | 0, t += (e2 ^ s ^ r2) + a[1] - 1530992060 | 0, t = (t << 4 | t >>> 28) + e2 | 0, r2 += (t ^ e2 ^ s) + a[4] + 1272893353 | 0, r2 = (r2 << 11 | r2 >>> 21) + t | 0, s += (r2 ^ t ^ e2) + a[7] - 155497632 | 0, s = (s << 16 | s >>> 16) + r2 | 0, e2 += (s ^ r2 ^ t) + a[10] - 1094730640 | 0, e2 = (e2 << 23 | e2 >>> 9) + s | 0, t += (e2 ^ s ^ r2) + a[13] + 681279174 | 0, t = (t << 4 | t >>> 28) + e2 | 0, r2 += (t ^ e2 ^ s) + a[0] - 358537222 | 0, r2 = (r2 << 11 | r2 >>> 21) + t | 0, s += (r2 ^ t ^ e2) + a[3] - 722521979 | 0, s = (s << 16 | s >>> 16) + r2 | 0, e2 += (s ^ r2 ^ t) + a[6] + 76029189 | 0, e2 = (e2 << 23 | e2 >>> 9) + s | 0, t += (e2 ^ s ^ r2) + a[9] - 640364487 | 0, t = (t << 4 | t >>> 28) + e2 | 0, r2 += (t ^ e2 ^ s) + a[12] - 421815835 | 0, r2 = (r2 << 11 | r2 >>> 21) + t | 0, s += (r2 ^ t ^ e2) + a[15] + 530742520 | 0, s = (s << 16 | s >>> 16) + r2 | 0, e2 += (s ^ r2 ^ t) + a[2] - 995338651 | 0, e2 = (e2 << 23 | e2 >>> 9) + s | 0, t += (s ^ (e2 | ~r2)) + a[0] - 198630844 | 0, t = (t << 6 | t >>> 26) + e2 | 0, r2 += (e2 ^ (t | ~s)) + a[7] + 1126891415 | 0, r2 = (r2 << 10 | r2 >>> 22) + t | 0, s += (t ^ (r2 | ~e2)) + a[14] - 1416354905 | 0, s = (s << 15 | s >>> 17) + r2 | 0, e2 += (r2 ^ (s | ~t)) + a[5] - 57434055 | 0, e2 = (e2 << 21 | e2 >>> 11) + s | 0, t += (s ^ (e2 | ~r2)) + a[12] + 1700485571 | 0, t = (t << 6 | t >>> 26) + e2 | 0, r2 += (e2 ^ (t | ~s)) + a[3] - 1894986606 | 0, r2 = (r2 << 10 | r2 >>> 22) + t | 0, s += (t ^ (r2 | ~e2)) + a[10] - 1051523 | 0, s = (s << 15 | s >>> 17) + r2 | 0, e2 += (r2 ^ (s | ~t)) + a[1] - 2054922799 | 0, e2 = (e2 << 21 | e2 >>> 11) + s | 0, t += (s ^ (e2 | ~r2)) + a[8] + 1873313359 | 0, t = (t << 6 | t >>> 26) + e2 | 0, r2 += (e2 ^ (t | ~s)) + a[15] - 30611744 | 0, r2 = (r2 << 10 | r2 >>> 22) + t | 0, s += (t ^ (r2 | ~e2)) + a[6] - 1560198380 | 0, s = (s << 15 | s >>> 17) + r2 | 0, e2 += (r2 ^ (s | ~t)) + a[13] + 1309151649 | 0, e2 = (e2 << 21 | e2 >>> 11) + s | 0, t += (s ^ (e2 | ~r2)) + a[4] - 145523070 | 0, t = (t << 6 | t >>> 26) + e2 | 0, r2 += (e2 ^ (t | ~s)) + a[11] - 1120210379 | 0, r2 = (r2 << 10 | r2 >>> 22) + t | 0, s += (t ^ (r2 | ~e2)) + a[2] + 718787259 | 0, s = (s << 15 | s >>> 17) + r2 | 0, e2 += (r2 ^ (s | ~t)) + a[9] - 343485551 | 0, e2 = (e2 << 21 | e2 >>> 11) + s | 0, i[0] = t + i[0] | 0, i[1] = e2 + i[1] | 0, i[2] = s + i[2] | 0, i[3] = r2 + i[3] | 0;
+  }
+  _dataLength = 0;
+  _bufferLength = 0;
+  _state = new Int32Array(4);
+  _buffer = new ArrayBuffer(68);
+  _buffer8;
+  _buffer32;
   constructor() {
-    this._dataLength = 0;
-    this._bufferLength = 0;
-    this._state = new Int32Array(4);
-    this._buffer = new ArrayBuffer(68);
-    this._buffer8 = new Uint8Array(this._buffer, 0, 68);
-    this._buffer32 = new Uint32Array(this._buffer, 0, 17);
-    this.start();
-  }
-  static hashStr(str, raw = false) {
-    return this.onePassHasher.start().appendStr(str).end(raw);
-  }
-  static hashAsciiStr(str, raw = false) {
-    return this.onePassHasher.start().appendAsciiStr(str).end(raw);
-  }
-  static _hex(x) {
-    const hc = _Md5.hexChars;
-    const ho = _Md5.hexOut;
-    let n2;
-    let offset;
-    let j;
-    let i;
-    for (i = 0; i < 4; i += 1) {
-      offset = i * 8;
-      n2 = x[i];
-      for (j = 0; j < 8; j += 2) {
-        ho[offset + 1 + j] = hc.charAt(n2 & 15);
-        n2 >>>= 4;
-        ho[offset + 0 + j] = hc.charAt(n2 & 15);
-        n2 >>>= 4;
-      }
-    }
-    return ho.join("");
-  }
-  static _md5cycle(x, k) {
-    let a = x[0];
-    let b = x[1];
-    let c = x[2];
-    let d = x[3];
-    a += (b & c | ~b & d) + k[0] - 680876936 | 0;
-    a = (a << 7 | a >>> 25) + b | 0;
-    d += (a & b | ~a & c) + k[1] - 389564586 | 0;
-    d = (d << 12 | d >>> 20) + a | 0;
-    c += (d & a | ~d & b) + k[2] + 606105819 | 0;
-    c = (c << 17 | c >>> 15) + d | 0;
-    b += (c & d | ~c & a) + k[3] - 1044525330 | 0;
-    b = (b << 22 | b >>> 10) + c | 0;
-    a += (b & c | ~b & d) + k[4] - 176418897 | 0;
-    a = (a << 7 | a >>> 25) + b | 0;
-    d += (a & b | ~a & c) + k[5] + 1200080426 | 0;
-    d = (d << 12 | d >>> 20) + a | 0;
-    c += (d & a | ~d & b) + k[6] - 1473231341 | 0;
-    c = (c << 17 | c >>> 15) + d | 0;
-    b += (c & d | ~c & a) + k[7] - 45705983 | 0;
-    b = (b << 22 | b >>> 10) + c | 0;
-    a += (b & c | ~b & d) + k[8] + 1770035416 | 0;
-    a = (a << 7 | a >>> 25) + b | 0;
-    d += (a & b | ~a & c) + k[9] - 1958414417 | 0;
-    d = (d << 12 | d >>> 20) + a | 0;
-    c += (d & a | ~d & b) + k[10] - 42063 | 0;
-    c = (c << 17 | c >>> 15) + d | 0;
-    b += (c & d | ~c & a) + k[11] - 1990404162 | 0;
-    b = (b << 22 | b >>> 10) + c | 0;
-    a += (b & c | ~b & d) + k[12] + 1804603682 | 0;
-    a = (a << 7 | a >>> 25) + b | 0;
-    d += (a & b | ~a & c) + k[13] - 40341101 | 0;
-    d = (d << 12 | d >>> 20) + a | 0;
-    c += (d & a | ~d & b) + k[14] - 1502002290 | 0;
-    c = (c << 17 | c >>> 15) + d | 0;
-    b += (c & d | ~c & a) + k[15] + 1236535329 | 0;
-    b = (b << 22 | b >>> 10) + c | 0;
-    a += (b & d | c & ~d) + k[1] - 165796510 | 0;
-    a = (a << 5 | a >>> 27) + b | 0;
-    d += (a & c | b & ~c) + k[6] - 1069501632 | 0;
-    d = (d << 9 | d >>> 23) + a | 0;
-    c += (d & b | a & ~b) + k[11] + 643717713 | 0;
-    c = (c << 14 | c >>> 18) + d | 0;
-    b += (c & a | d & ~a) + k[0] - 373897302 | 0;
-    b = (b << 20 | b >>> 12) + c | 0;
-    a += (b & d | c & ~d) + k[5] - 701558691 | 0;
-    a = (a << 5 | a >>> 27) + b | 0;
-    d += (a & c | b & ~c) + k[10] + 38016083 | 0;
-    d = (d << 9 | d >>> 23) + a | 0;
-    c += (d & b | a & ~b) + k[15] - 660478335 | 0;
-    c = (c << 14 | c >>> 18) + d | 0;
-    b += (c & a | d & ~a) + k[4] - 405537848 | 0;
-    b = (b << 20 | b >>> 12) + c | 0;
-    a += (b & d | c & ~d) + k[9] + 568446438 | 0;
-    a = (a << 5 | a >>> 27) + b | 0;
-    d += (a & c | b & ~c) + k[14] - 1019803690 | 0;
-    d = (d << 9 | d >>> 23) + a | 0;
-    c += (d & b | a & ~b) + k[3] - 187363961 | 0;
-    c = (c << 14 | c >>> 18) + d | 0;
-    b += (c & a | d & ~a) + k[8] + 1163531501 | 0;
-    b = (b << 20 | b >>> 12) + c | 0;
-    a += (b & d | c & ~d) + k[13] - 1444681467 | 0;
-    a = (a << 5 | a >>> 27) + b | 0;
-    d += (a & c | b & ~c) + k[2] - 51403784 | 0;
-    d = (d << 9 | d >>> 23) + a | 0;
-    c += (d & b | a & ~b) + k[7] + 1735328473 | 0;
-    c = (c << 14 | c >>> 18) + d | 0;
-    b += (c & a | d & ~a) + k[12] - 1926607734 | 0;
-    b = (b << 20 | b >>> 12) + c | 0;
-    a += (b ^ c ^ d) + k[5] - 378558 | 0;
-    a = (a << 4 | a >>> 28) + b | 0;
-    d += (a ^ b ^ c) + k[8] - 2022574463 | 0;
-    d = (d << 11 | d >>> 21) + a | 0;
-    c += (d ^ a ^ b) + k[11] + 1839030562 | 0;
-    c = (c << 16 | c >>> 16) + d | 0;
-    b += (c ^ d ^ a) + k[14] - 35309556 | 0;
-    b = (b << 23 | b >>> 9) + c | 0;
-    a += (b ^ c ^ d) + k[1] - 1530992060 | 0;
-    a = (a << 4 | a >>> 28) + b | 0;
-    d += (a ^ b ^ c) + k[4] + 1272893353 | 0;
-    d = (d << 11 | d >>> 21) + a | 0;
-    c += (d ^ a ^ b) + k[7] - 155497632 | 0;
-    c = (c << 16 | c >>> 16) + d | 0;
-    b += (c ^ d ^ a) + k[10] - 1094730640 | 0;
-    b = (b << 23 | b >>> 9) + c | 0;
-    a += (b ^ c ^ d) + k[13] + 681279174 | 0;
-    a = (a << 4 | a >>> 28) + b | 0;
-    d += (a ^ b ^ c) + k[0] - 358537222 | 0;
-    d = (d << 11 | d >>> 21) + a | 0;
-    c += (d ^ a ^ b) + k[3] - 722521979 | 0;
-    c = (c << 16 | c >>> 16) + d | 0;
-    b += (c ^ d ^ a) + k[6] + 76029189 | 0;
-    b = (b << 23 | b >>> 9) + c | 0;
-    a += (b ^ c ^ d) + k[9] - 640364487 | 0;
-    a = (a << 4 | a >>> 28) + b | 0;
-    d += (a ^ b ^ c) + k[12] - 421815835 | 0;
-    d = (d << 11 | d >>> 21) + a | 0;
-    c += (d ^ a ^ b) + k[15] + 530742520 | 0;
-    c = (c << 16 | c >>> 16) + d | 0;
-    b += (c ^ d ^ a) + k[2] - 995338651 | 0;
-    b = (b << 23 | b >>> 9) + c | 0;
-    a += (c ^ (b | ~d)) + k[0] - 198630844 | 0;
-    a = (a << 6 | a >>> 26) + b | 0;
-    d += (b ^ (a | ~c)) + k[7] + 1126891415 | 0;
-    d = (d << 10 | d >>> 22) + a | 0;
-    c += (a ^ (d | ~b)) + k[14] - 1416354905 | 0;
-    c = (c << 15 | c >>> 17) + d | 0;
-    b += (d ^ (c | ~a)) + k[5] - 57434055 | 0;
-    b = (b << 21 | b >>> 11) + c | 0;
-    a += (c ^ (b | ~d)) + k[12] + 1700485571 | 0;
-    a = (a << 6 | a >>> 26) + b | 0;
-    d += (b ^ (a | ~c)) + k[3] - 1894986606 | 0;
-    d = (d << 10 | d >>> 22) + a | 0;
-    c += (a ^ (d | ~b)) + k[10] - 1051523 | 0;
-    c = (c << 15 | c >>> 17) + d | 0;
-    b += (d ^ (c | ~a)) + k[1] - 2054922799 | 0;
-    b = (b << 21 | b >>> 11) + c | 0;
-    a += (c ^ (b | ~d)) + k[8] + 1873313359 | 0;
-    a = (a << 6 | a >>> 26) + b | 0;
-    d += (b ^ (a | ~c)) + k[15] - 30611744 | 0;
-    d = (d << 10 | d >>> 22) + a | 0;
-    c += (a ^ (d | ~b)) + k[6] - 1560198380 | 0;
-    c = (c << 15 | c >>> 17) + d | 0;
-    b += (d ^ (c | ~a)) + k[13] + 1309151649 | 0;
-    b = (b << 21 | b >>> 11) + c | 0;
-    a += (c ^ (b | ~d)) + k[4] - 145523070 | 0;
-    a = (a << 6 | a >>> 26) + b | 0;
-    d += (b ^ (a | ~c)) + k[11] - 1120210379 | 0;
-    d = (d << 10 | d >>> 22) + a | 0;
-    c += (a ^ (d | ~b)) + k[2] + 718787259 | 0;
-    c = (c << 15 | c >>> 17) + d | 0;
-    b += (d ^ (c | ~a)) + k[9] - 343485551 | 0;
-    b = (b << 21 | b >>> 11) + c | 0;
-    x[0] = a + x[0] | 0;
-    x[1] = b + x[1] | 0;
-    x[2] = c + x[2] | 0;
-    x[3] = d + x[3] | 0;
+    this._buffer8 = new Uint8Array(this._buffer, 0, 68), this._buffer32 = new Uint32Array(this._buffer, 0, 17), this.start();
   }
   /**
    * Initialise buffer to be hashed
    */
   start() {
-    this._dataLength = 0;
-    this._bufferLength = 0;
-    this._state.set(_Md5.stateIdentity);
-    return this;
+    return this._dataLength = 0, this._bufferLength = 0, this._state.set(_h.stateIdentity), this;
   }
   // Char to code point to to array conversion:
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt
@@ -7806,166 +7688,102 @@ var Md5 = class _Md5 {
    * Append a UTF-8 string to the hash buffer
    * @param str String to append
    */
-  appendStr(str) {
-    const buf8 = this._buffer8;
-    const buf32 = this._buffer32;
-    let bufLen = this._bufferLength;
-    let code;
-    let i;
-    for (i = 0; i < str.length; i += 1) {
-      code = str.charCodeAt(i);
-      if (code < 128) {
-        buf8[bufLen++] = code;
-      } else if (code < 2048) {
-        buf8[bufLen++] = (code >>> 6) + 192;
-        buf8[bufLen++] = code & 63 | 128;
-      } else if (code < 55296 || code > 56319) {
-        buf8[bufLen++] = (code >>> 12) + 224;
-        buf8[bufLen++] = code >>> 6 & 63 | 128;
-        buf8[bufLen++] = code & 63 | 128;
-      } else {
-        code = (code - 55296) * 1024 + (str.charCodeAt(++i) - 56320) + 65536;
-        if (code > 1114111) {
-          throw new Error("Unicode standard supports code points up to U+10FFFF");
-        }
-        buf8[bufLen++] = (code >>> 18) + 240;
-        buf8[bufLen++] = code >>> 12 & 63 | 128;
-        buf8[bufLen++] = code >>> 6 & 63 | 128;
-        buf8[bufLen++] = code & 63 | 128;
+  appendStr(i) {
+    const a = this._buffer8, t = this._buffer32;
+    let e2 = this._bufferLength, s, r2;
+    for (r2 = 0; r2 < i.length; r2 += 1) {
+      if (s = i.charCodeAt(r2), s < 128)
+        a[e2++] = s;
+      else if (s < 2048)
+        a[e2++] = (s >>> 6) + 192, a[e2++] = s & 63 | 128;
+      else if (s < 55296 || s > 56319)
+        a[e2++] = (s >>> 12) + 224, a[e2++] = s >>> 6 & 63 | 128, a[e2++] = s & 63 | 128;
+      else {
+        if (s = (s - 55296) * 1024 + (i.charCodeAt(++r2) - 56320) + 65536, s > 1114111)
+          throw new Error(
+            "Unicode standard supports code points up to U+10FFFF"
+          );
+        a[e2++] = (s >>> 18) + 240, a[e2++] = s >>> 12 & 63 | 128, a[e2++] = s >>> 6 & 63 | 128, a[e2++] = s & 63 | 128;
       }
-      if (bufLen >= 64) {
-        this._dataLength += 64;
-        _Md5._md5cycle(this._state, buf32);
-        bufLen -= 64;
-        buf32[0] = buf32[16];
-      }
+      e2 >= 64 && (this._dataLength += 64, _h._md5cycle(this._state, t), e2 -= 64, t[0] = t[16]);
     }
-    this._bufferLength = bufLen;
-    return this;
+    return this._bufferLength = e2, this;
   }
   /**
    * Append an ASCII string to the hash buffer
    * @param str String to append
    */
-  appendAsciiStr(str) {
-    const buf8 = this._buffer8;
-    const buf32 = this._buffer32;
-    let bufLen = this._bufferLength;
-    let i;
-    let j = 0;
+  appendAsciiStr(i) {
+    const a = this._buffer8, t = this._buffer32;
+    let e2 = this._bufferLength, s, r2 = 0;
     for (; ; ) {
-      i = Math.min(str.length - j, 64 - bufLen);
-      while (i--) {
-        buf8[bufLen++] = str.charCodeAt(j++);
-      }
-      if (bufLen < 64) {
+      for (s = Math.min(i.length - r2, 64 - e2); s--; )
+        a[e2++] = i.charCodeAt(r2++);
+      if (e2 < 64)
         break;
-      }
-      this._dataLength += 64;
-      _Md5._md5cycle(this._state, buf32);
-      bufLen = 0;
+      this._dataLength += 64, _h._md5cycle(this._state, t), e2 = 0;
     }
-    this._bufferLength = bufLen;
-    return this;
+    return this._bufferLength = e2, this;
   }
   /**
    * Append a byte array to the hash buffer
    * @param input array to append
    */
-  appendByteArray(input) {
-    const buf8 = this._buffer8;
-    const buf32 = this._buffer32;
-    let bufLen = this._bufferLength;
-    let i;
-    let j = 0;
+  appendByteArray(i) {
+    const a = this._buffer8, t = this._buffer32;
+    let e2 = this._bufferLength, s, r2 = 0;
     for (; ; ) {
-      i = Math.min(input.length - j, 64 - bufLen);
-      while (i--) {
-        buf8[bufLen++] = input[j++];
-      }
-      if (bufLen < 64) {
+      for (s = Math.min(i.length - r2, 64 - e2); s--; )
+        a[e2++] = i[r2++];
+      if (e2 < 64)
         break;
-      }
-      this._dataLength += 64;
-      _Md5._md5cycle(this._state, buf32);
-      bufLen = 0;
+      this._dataLength += 64, _h._md5cycle(this._state, t), e2 = 0;
     }
-    this._bufferLength = bufLen;
-    return this;
+    return this._bufferLength = e2, this;
   }
   /**
    * Get the state of the hash buffer
    */
   getState() {
-    const s = this._state;
+    const i = this._state;
     return {
       buffer: String.fromCharCode.apply(null, Array.from(this._buffer8)),
       buflen: this._bufferLength,
       length: this._dataLength,
-      state: [s[0], s[1], s[2], s[3]]
+      state: [i[0], i[1], i[2], i[3]]
     };
   }
   /**
    * Override the current state of the hash buffer
    * @param state New hash buffer state
    */
-  setState(state) {
-    const buf = state.buffer;
-    const x = state.state;
-    const s = this._state;
-    let i;
-    this._dataLength = state.length;
-    this._bufferLength = state.buflen;
-    s[0] = x[0];
-    s[1] = x[1];
-    s[2] = x[2];
-    s[3] = x[3];
-    for (i = 0; i < buf.length; i += 1) {
-      this._buffer8[i] = buf.charCodeAt(i);
-    }
+  setState(i) {
+    const a = i.buffer, t = i.state, e2 = this._state;
+    let s;
+    for (this._dataLength = i.length, this._bufferLength = i.buflen, e2[0] = t[0], e2[1] = t[1], e2[2] = t[2], e2[3] = t[3], s = 0; s < a.length; s += 1)
+      this._buffer8[s] = a.charCodeAt(s);
   }
   /**
    * Hash the current state of the hash buffer and return the result
    * @param raw Whether to return the value as an `Int32Array`
    */
-  end(raw = false) {
-    const bufLen = this._bufferLength;
-    const buf8 = this._buffer8;
-    const buf32 = this._buffer32;
-    const i = (bufLen >> 2) + 1;
-    this._dataLength += bufLen;
-    const dataBitsLen = this._dataLength * 8;
-    buf8[bufLen] = 128;
-    buf8[bufLen + 1] = buf8[bufLen + 2] = buf8[bufLen + 3] = 0;
-    buf32.set(_Md5.buffer32Identity.subarray(i), i);
-    if (bufLen > 55) {
-      _Md5._md5cycle(this._state, buf32);
-      buf32.set(_Md5.buffer32Identity);
+  end(i = false) {
+    const a = this._bufferLength, t = this._buffer8, e2 = this._buffer32, s = (a >> 2) + 1;
+    this._dataLength += a;
+    const r2 = this._dataLength * 8;
+    if (t[a] = 128, t[a + 1] = t[a + 2] = t[a + 3] = 0, e2.set(_h.buffer32Identity.subarray(s), s), a > 55 && (_h._md5cycle(this._state, e2), e2.set(_h.buffer32Identity)), r2 <= 4294967295)
+      e2[14] = r2;
+    else {
+      const n2 = r2.toString(16).match(/(.*?)(.{0,8})$/);
+      if (n2 === null) return i ? c : "";
+      const o = parseInt(n2[2], 16), _ = parseInt(n2[1], 16) || 0;
+      e2[14] = o, e2[15] = _;
     }
-    if (dataBitsLen <= 4294967295) {
-      buf32[14] = dataBitsLen;
-    } else {
-      const matches = dataBitsLen.toString(16).match(/(.*?)(.{0,8})$/);
-      if (matches === null) {
-        return;
-      }
-      const lo = parseInt(matches[2], 16);
-      const hi = parseInt(matches[1], 16) || 0;
-      buf32[14] = lo;
-      buf32[15] = hi;
-    }
-    _Md5._md5cycle(this._state, buf32);
-    return raw ? this._state : _Md5._hex(this._state);
+    return _h._md5cycle(this._state, e2), i ? this._state : _h._hex(this._state);
   }
 };
-Md5.stateIdentity = new Int32Array([1732584193, -271733879, -1732584194, 271733878]);
-Md5.buffer32Identity = new Int32Array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-Md5.hexChars = "0123456789abcdef";
-Md5.hexOut = [];
-Md5.onePassHasher = new Md5();
-if (Md5.hashStr("hello") !== "5d41402abc4b2a76b9719d911017c592") {
+if (h.hashStr("hello") !== "5d41402abc4b2a76b9719d911017c592")
   throw new Error("Md5 self test failed.");
-}
 
 // libs/mocks/src/lib/realtime/desks.ts
 var MockAreaManagementModule = class {
@@ -8002,8 +7820,8 @@ var MockLocationServicesModule = class {
     ];
   }
 };
-function padZero(no2, len = 3) {
-  let str = `${no2}`;
+function padZero(no, len = 3) {
+  let str = `${no}`;
   while (str.length < len) {
     str = "0" + str;
   }
@@ -8083,7 +7901,7 @@ function generateLocation(lvl, desks, users = MOCK_STAFF) {
     location: "desk",
     at_location: predictableRandomInt(9999) % 2 !== 0,
     map_id: desks[predictableRandomInt(desks.length)],
-    mac: Md5?.hashStr(usr || ""),
+    mac: h?.hashStr(usr || ""),
     level: lvl.id,
     building: lvl.parent_id
   } : {
@@ -8094,7 +7912,7 @@ function generateLocation(lvl, desks, users = MOCK_STAFF) {
     lon: 55.27476066828535,
     lat: 25.20106100633537,
     s2_cell_id: "3e5f4281459c",
-    mac: Md5?.hashStr(usr || ""),
+    mac: h?.hashStr(usr || ""),
     variance: 9.62534032222287,
     last_seen: Math.floor((/* @__PURE__ */ new Date()).valueOf() / 1e3),
     map_width: 100,
@@ -8300,7 +8118,7 @@ function createSystem(space) {
     Payment: [createPaymentsModule(space)],
     LockerLocations: [createLockerLocationsModule()]
   });
-  const system = Go(space.id);
+  const system = Xo(space.id);
   system.Bookings[0].$poll_bookings();
   setInterval(() => system.Bookings[0].$poll_bookings(), 30 * 1e3);
   system.AreaManagement[0].$update();
@@ -8754,11 +8572,11 @@ log("MOCKS", "Mocks included with application.");
 // node_modules/@sentry/core/build/esm/debug-build.js
 var DEBUG_BUILD = typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__;
 
-// node_modules/@sentry/core/build/esm/utils-hoist/version.js
-var SDK_VERSION = "9.29.0";
-
-// node_modules/@sentry/core/build/esm/utils-hoist/worldwide.js
+// node_modules/@sentry/core/build/esm/utils/worldwide.js
 var GLOBAL_OBJ = globalThis;
+
+// node_modules/@sentry/core/build/esm/utils/version.js
+var SDK_VERSION = "9.34.0";
 
 // node_modules/@sentry/core/build/esm/carrier.js
 function getMainCarrier() {
@@ -8776,7 +8594,243 @@ function getGlobalSingleton(name, creator, obj = GLOBAL_OBJ) {
   return carrier[name] || (carrier[name] = creator());
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/is.js
+// node_modules/@sentry/core/build/esm/utils/logger.js
+var PREFIX = "Sentry Logger ";
+var CONSOLE_LEVELS = [
+  "debug",
+  "info",
+  "warn",
+  "error",
+  "log",
+  "assert",
+  "trace"
+];
+var originalConsoleMethods = {};
+function consoleSandbox(callback) {
+  if (!("console" in GLOBAL_OBJ)) {
+    return callback();
+  }
+  const console2 = GLOBAL_OBJ.console;
+  const wrappedFuncs = {};
+  const wrappedLevels = Object.keys(originalConsoleMethods);
+  wrappedLevels.forEach((level) => {
+    const originalConsoleMethod = originalConsoleMethods[level];
+    wrappedFuncs[level] = console2[level];
+    console2[level] = originalConsoleMethod;
+  });
+  try {
+    return callback();
+  } finally {
+    wrappedLevels.forEach((level) => {
+      console2[level] = wrappedFuncs[level];
+    });
+  }
+}
+function makeLogger() {
+  let enabled = false;
+  const logger3 = {
+    enable: () => {
+      enabled = true;
+    },
+    disable: () => {
+      enabled = false;
+    },
+    isEnabled: () => enabled
+  };
+  if (DEBUG_BUILD) {
+    CONSOLE_LEVELS.forEach((name) => {
+      logger3[name] = (...args) => {
+        if (enabled) {
+          consoleSandbox(() => {
+            GLOBAL_OBJ.console[name](`${PREFIX}[${name}]:`, ...args);
+          });
+        }
+      };
+    });
+  } else {
+    CONSOLE_LEVELS.forEach((name) => {
+      logger3[name] = () => void 0;
+    });
+  }
+  return logger3;
+}
+var logger = getGlobalSingleton("logger", makeLogger);
+
+// node_modules/@sentry/core/build/esm/utils/stacktrace.js
+var STACKTRACE_FRAME_LIMIT = 50;
+var UNKNOWN_FUNCTION = "?";
+var WEBPACK_ERROR_REGEXP = /\(error: (.*)\)/;
+var STRIP_FRAME_REGEXP = /captureMessage|captureException/;
+function createStackParser(...parsers) {
+  const sortedParsers = parsers.sort((a, b) => a[0] - b[0]).map((p) => p[1]);
+  return (stack, skipFirstLines = 0, framesToPop = 0) => {
+    const frames = [];
+    const lines = stack.split("\n");
+    for (let i = skipFirstLines; i < lines.length; i++) {
+      const line = lines[i];
+      if (line.length > 1024) {
+        continue;
+      }
+      const cleanedLine = WEBPACK_ERROR_REGEXP.test(line) ? line.replace(WEBPACK_ERROR_REGEXP, "$1") : line;
+      if (cleanedLine.match(/\S*Error: /)) {
+        continue;
+      }
+      for (const parser of sortedParsers) {
+        const frame = parser(cleanedLine);
+        if (frame) {
+          frames.push(frame);
+          break;
+        }
+      }
+      if (frames.length >= STACKTRACE_FRAME_LIMIT + framesToPop) {
+        break;
+      }
+    }
+    return stripSentryFramesAndReverse(frames.slice(framesToPop));
+  };
+}
+function stackParserFromStackParserOptions(stackParser) {
+  if (Array.isArray(stackParser)) {
+    return createStackParser(...stackParser);
+  }
+  return stackParser;
+}
+function stripSentryFramesAndReverse(stack) {
+  if (!stack.length) {
+    return [];
+  }
+  const localStack = Array.from(stack);
+  if (/sentryWrapped/.test(getLastStackFrame(localStack).function || "")) {
+    localStack.pop();
+  }
+  localStack.reverse();
+  if (STRIP_FRAME_REGEXP.test(getLastStackFrame(localStack).function || "")) {
+    localStack.pop();
+    if (STRIP_FRAME_REGEXP.test(getLastStackFrame(localStack).function || "")) {
+      localStack.pop();
+    }
+  }
+  return localStack.slice(0, STACKTRACE_FRAME_LIMIT).map((frame) => __spreadProps(__spreadValues({}, frame), {
+    filename: frame.filename || getLastStackFrame(localStack).filename,
+    function: frame.function || UNKNOWN_FUNCTION
+  }));
+}
+function getLastStackFrame(arr) {
+  return arr[arr.length - 1] || {};
+}
+var defaultFunctionName = "<anonymous>";
+function getFunctionName(fn) {
+  try {
+    if (!fn || typeof fn !== "function") {
+      return defaultFunctionName;
+    }
+    return fn.name || defaultFunctionName;
+  } catch (e2) {
+    return defaultFunctionName;
+  }
+}
+function getFramesFromEvent(event) {
+  const exception = event.exception;
+  if (exception) {
+    const frames = [];
+    try {
+      exception.values.forEach((value) => {
+        if (value.stacktrace.frames) {
+          frames.push(...value.stacktrace.frames);
+        }
+      });
+      return frames;
+    } catch (_oO) {
+      return void 0;
+    }
+  }
+  return void 0;
+}
+
+// node_modules/@sentry/core/build/esm/instrument/handlers.js
+var handlers = {};
+var instrumented = {};
+function addHandler(type, handler) {
+  handlers[type] = handlers[type] || [];
+  handlers[type].push(handler);
+}
+function maybeInstrument(type, instrumentFn) {
+  if (!instrumented[type]) {
+    instrumented[type] = true;
+    try {
+      instrumentFn();
+    } catch (e2) {
+      DEBUG_BUILD && logger.error(`Error while instrumenting ${type}`, e2);
+    }
+  }
+}
+function triggerHandlers(type, data) {
+  const typeHandlers = type && handlers[type];
+  if (!typeHandlers) {
+    return;
+  }
+  for (const handler of typeHandlers) {
+    try {
+      handler(data);
+    } catch (e2) {
+      DEBUG_BUILD && logger.error(
+        `Error while triggering instrumentation handler.
+Type: ${type}
+Name: ${getFunctionName(handler)}
+Error:`,
+        e2
+      );
+    }
+  }
+}
+
+// node_modules/@sentry/core/build/esm/instrument/globalError.js
+var _oldOnErrorHandler = null;
+function addGlobalErrorInstrumentationHandler(handler) {
+  const type = "error";
+  addHandler(type, handler);
+  maybeInstrument(type, instrumentError);
+}
+function instrumentError() {
+  _oldOnErrorHandler = GLOBAL_OBJ.onerror;
+  GLOBAL_OBJ.onerror = function(msg, url, line, column, error) {
+    const handlerData = {
+      column,
+      error,
+      line,
+      msg,
+      url
+    };
+    triggerHandlers("error", handlerData);
+    if (_oldOnErrorHandler) {
+      return _oldOnErrorHandler.apply(this, arguments);
+    }
+    return false;
+  };
+  GLOBAL_OBJ.onerror.__SENTRY_INSTRUMENTED__ = true;
+}
+
+// node_modules/@sentry/core/build/esm/instrument/globalUnhandledRejection.js
+var _oldOnUnhandledRejectionHandler = null;
+function addGlobalUnhandledRejectionInstrumentationHandler(handler) {
+  const type = "unhandledrejection";
+  addHandler(type, handler);
+  maybeInstrument(type, instrumentUnhandledRejection);
+}
+function instrumentUnhandledRejection() {
+  _oldOnUnhandledRejectionHandler = GLOBAL_OBJ.onunhandledrejection;
+  GLOBAL_OBJ.onunhandledrejection = function(e2) {
+    const handlerData = e2;
+    triggerHandlers("unhandledrejection", handlerData);
+    if (_oldOnUnhandledRejectionHandler) {
+      return _oldOnUnhandledRejectionHandler.apply(this, arguments);
+    }
+    return true;
+  };
+  GLOBAL_OBJ.onunhandledrejection.__SENTRY_INSTRUMENTED__ = true;
+}
+
+// node_modules/@sentry/core/build/esm/utils/is.js
 var objectToString = Object.prototype.toString;
 function isError(wat) {
   switch (objectToString.call(wat)) {
@@ -8842,7 +8896,7 @@ function isRequest(request) {
   return typeof Request !== "undefined" && isInstanceOf(request, Request);
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/browser.js
+// node_modules/@sentry/core/build/esm/utils/browser.js
 var WINDOW = GLOBAL_OBJ;
 var DEFAULT_MAX_STRING_LENGTH = 80;
 function htmlTreeAsString(elem, options = {}) {
@@ -8903,8 +8957,8 @@ function _htmlElementAsString(el, keyAttrs) {
     const className = elem.className;
     if (className && isString(className)) {
       const classes = className.split(/\s+/);
-      for (const c of classes) {
-        out.push(`.${c}`);
+      for (const c2 of classes) {
+        out.push(`.${c2}`);
       }
     }
   }
@@ -8947,69 +9001,7 @@ function getComponentName(elem) {
   return null;
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/logger.js
-var PREFIX = "Sentry Logger ";
-var CONSOLE_LEVELS = [
-  "debug",
-  "info",
-  "warn",
-  "error",
-  "log",
-  "assert",
-  "trace"
-];
-var originalConsoleMethods = {};
-function consoleSandbox(callback) {
-  if (!("console" in GLOBAL_OBJ)) {
-    return callback();
-  }
-  const console2 = GLOBAL_OBJ.console;
-  const wrappedFuncs = {};
-  const wrappedLevels = Object.keys(originalConsoleMethods);
-  wrappedLevels.forEach((level) => {
-    const originalConsoleMethod = originalConsoleMethods[level];
-    wrappedFuncs[level] = console2[level];
-    console2[level] = originalConsoleMethod;
-  });
-  try {
-    return callback();
-  } finally {
-    wrappedLevels.forEach((level) => {
-      console2[level] = wrappedFuncs[level];
-    });
-  }
-}
-function makeLogger() {
-  let enabled = false;
-  const logger3 = {
-    enable: () => {
-      enabled = true;
-    },
-    disable: () => {
-      enabled = false;
-    },
-    isEnabled: () => enabled
-  };
-  if (DEBUG_BUILD) {
-    CONSOLE_LEVELS.forEach((name) => {
-      logger3[name] = (...args) => {
-        if (enabled) {
-          consoleSandbox(() => {
-            GLOBAL_OBJ.console[name](`${PREFIX}[${name}]:`, ...args);
-          });
-        }
-      };
-    });
-  } else {
-    CONSOLE_LEVELS.forEach((name) => {
-      logger3[name] = () => void 0;
-    });
-  }
-  return logger3;
-}
-var logger = getGlobalSingleton("logger", makeLogger);
-
-// node_modules/@sentry/core/build/esm/utils-hoist/string.js
+// node_modules/@sentry/core/build/esm/utils/string.js
 function truncate(str, max = 0) {
   if (typeof str !== "string" || max === 0) {
     return str;
@@ -9051,7 +9043,7 @@ function stringMatchesSomePattern(testString, patterns = [], requireExactStringM
   return patterns.some((pattern) => isMatchingPattern(testString, pattern, requireExactStringMatch));
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/object.js
+// node_modules/@sentry/core/build/esm/utils/object.js
 function fill(source, name, replacementFactory) {
   if (!(name in source)) {
     return;
@@ -9157,7 +9149,7 @@ function extractExceptionKeysForMessage(exception, maxLength = 40) {
   return "";
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/misc.js
+// node_modules/@sentry/core/build/esm/utils/misc.js
 function getCrypto() {
   const gbl = GLOBAL_OBJ;
   return gbl.crypto || gbl.msCrypto;
@@ -9179,9 +9171,9 @@ function uuid4(crypto = getCrypto()) {
   }
   return ("10000000100040008000" + 1e11).replace(
     /[018]/g,
-    (c) => (
+    (c2) => (
       // eslint-disable-next-line no-bitwise
-      (c ^ (getRandomByte() & 15) >> c / 4).toString(16)
+      (c2 ^ (getRandomByte() & 15) >> c2 / 4).toString(16)
     )
   );
 }
@@ -9243,7 +9235,7 @@ function isAlreadyCaptured(exception) {
   }
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/time.js
+// node_modules/@sentry/core/build/esm/utils/time.js
 var ONE_SECOND_IN_MS = 1e3;
 function dateTimestampInSeconds() {
   return Date.now() / ONE_SECOND_IN_MS;
@@ -9412,6 +9404,14 @@ function merge(initialObj, mergeObj, levels = 2) {
   return output;
 }
 
+// node_modules/@sentry/core/build/esm/utils/propagationContext.js
+function generateTraceId() {
+  return uuid4();
+}
+function generateSpanId() {
+  return uuid4().substring(16);
+}
+
 // node_modules/@sentry/core/build/esm/utils/spanOnScope.js
 var SCOPE_SPAN_FIELD = "_sentrySpan";
 function _setSpanForScope(scope, span) {
@@ -9423,14 +9423,6 @@ function _setSpanForScope(scope, span) {
 }
 function _getSpanForScope(scope) {
   return scope[SCOPE_SPAN_FIELD];
-}
-
-// node_modules/@sentry/core/build/esm/utils-hoist/propagationContext.js
-function generateTraceId() {
-  return uuid4();
-}
-function generateSpanId() {
-  return uuid4().substring(16);
 }
 
 // node_modules/@sentry/core/build/esm/scope.js
@@ -10147,19 +10139,7 @@ function getCapturedScopesOnSpan(span) {
   };
 }
 
-// node_modules/@sentry/core/build/esm/utils/parseSampleRate.js
-function parseSampleRate(sampleRate) {
-  if (typeof sampleRate === "boolean") {
-    return Number(sampleRate);
-  }
-  const rate = typeof sampleRate === "string" ? parseFloat(sampleRate) : sampleRate;
-  if (typeof rate !== "number" || isNaN(rate) || rate < 0 || rate > 1) {
-    return void 0;
-  }
-  return rate;
-}
-
-// node_modules/@sentry/core/build/esm/utils-hoist/baggage.js
+// node_modules/@sentry/core/build/esm/utils/baggage.js
 var SENTRY_BAGGAGE_KEY_PREFIX = "sentry-";
 var SENTRY_BAGGAGE_KEY_PREFIX_REGEX = /^sentry-/;
 var MAX_BAGGAGE_STRING_LENGTH = 8192;
@@ -10245,7 +10225,19 @@ function objectToBaggageHeader(object) {
   }, "");
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/tracing.js
+// node_modules/@sentry/core/build/esm/utils/parseSampleRate.js
+function parseSampleRate(sampleRate) {
+  if (typeof sampleRate === "boolean") {
+    return Number(sampleRate);
+  }
+  const rate = typeof sampleRate === "string" ? parseFloat(sampleRate) : sampleRate;
+  if (typeof rate !== "number" || isNaN(rate) || rate < 0 || rate > 1) {
+    return void 0;
+  }
+  return rate;
+}
+
+// node_modules/@sentry/core/build/esm/utils/tracing.js
 var TRACEPARENT_REGEXP = new RegExp(
   "^[ \\t]*([0-9a-f]{32})?-?([0-9a-f]{16})?-?([01])?[ \\t]*$"
   // whitespace
@@ -10488,180 +10480,6 @@ function showSpanDropWarning() {
   }
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/stacktrace.js
-var STACKTRACE_FRAME_LIMIT = 50;
-var UNKNOWN_FUNCTION = "?";
-var WEBPACK_ERROR_REGEXP = /\(error: (.*)\)/;
-var STRIP_FRAME_REGEXP = /captureMessage|captureException/;
-function createStackParser(...parsers) {
-  const sortedParsers = parsers.sort((a, b) => a[0] - b[0]).map((p) => p[1]);
-  return (stack, skipFirstLines = 0, framesToPop = 0) => {
-    const frames = [];
-    const lines = stack.split("\n");
-    for (let i = skipFirstLines; i < lines.length; i++) {
-      const line = lines[i];
-      if (line.length > 1024) {
-        continue;
-      }
-      const cleanedLine = WEBPACK_ERROR_REGEXP.test(line) ? line.replace(WEBPACK_ERROR_REGEXP, "$1") : line;
-      if (cleanedLine.match(/\S*Error: /)) {
-        continue;
-      }
-      for (const parser of sortedParsers) {
-        const frame = parser(cleanedLine);
-        if (frame) {
-          frames.push(frame);
-          break;
-        }
-      }
-      if (frames.length >= STACKTRACE_FRAME_LIMIT + framesToPop) {
-        break;
-      }
-    }
-    return stripSentryFramesAndReverse(frames.slice(framesToPop));
-  };
-}
-function stackParserFromStackParserOptions(stackParser) {
-  if (Array.isArray(stackParser)) {
-    return createStackParser(...stackParser);
-  }
-  return stackParser;
-}
-function stripSentryFramesAndReverse(stack) {
-  if (!stack.length) {
-    return [];
-  }
-  const localStack = Array.from(stack);
-  if (/sentryWrapped/.test(getLastStackFrame(localStack).function || "")) {
-    localStack.pop();
-  }
-  localStack.reverse();
-  if (STRIP_FRAME_REGEXP.test(getLastStackFrame(localStack).function || "")) {
-    localStack.pop();
-    if (STRIP_FRAME_REGEXP.test(getLastStackFrame(localStack).function || "")) {
-      localStack.pop();
-    }
-  }
-  return localStack.slice(0, STACKTRACE_FRAME_LIMIT).map((frame) => __spreadProps(__spreadValues({}, frame), {
-    filename: frame.filename || getLastStackFrame(localStack).filename,
-    function: frame.function || UNKNOWN_FUNCTION
-  }));
-}
-function getLastStackFrame(arr) {
-  return arr[arr.length - 1] || {};
-}
-var defaultFunctionName = "<anonymous>";
-function getFunctionName(fn) {
-  try {
-    if (!fn || typeof fn !== "function") {
-      return defaultFunctionName;
-    }
-    return fn.name || defaultFunctionName;
-  } catch (e2) {
-    return defaultFunctionName;
-  }
-}
-function getFramesFromEvent(event) {
-  const exception = event.exception;
-  if (exception) {
-    const frames = [];
-    try {
-      exception.values.forEach((value) => {
-        if (value.stacktrace.frames) {
-          frames.push(...value.stacktrace.frames);
-        }
-      });
-      return frames;
-    } catch (_oO) {
-      return void 0;
-    }
-  }
-  return void 0;
-}
-
-// node_modules/@sentry/core/build/esm/utils-hoist/instrument/handlers.js
-var handlers = {};
-var instrumented = {};
-function addHandler(type, handler) {
-  handlers[type] = handlers[type] || [];
-  handlers[type].push(handler);
-}
-function maybeInstrument(type, instrumentFn) {
-  if (!instrumented[type]) {
-    instrumented[type] = true;
-    try {
-      instrumentFn();
-    } catch (e2) {
-      DEBUG_BUILD && logger.error(`Error while instrumenting ${type}`, e2);
-    }
-  }
-}
-function triggerHandlers(type, data) {
-  const typeHandlers = type && handlers[type];
-  if (!typeHandlers) {
-    return;
-  }
-  for (const handler of typeHandlers) {
-    try {
-      handler(data);
-    } catch (e2) {
-      DEBUG_BUILD && logger.error(
-        `Error while triggering instrumentation handler.
-Type: ${type}
-Name: ${getFunctionName(handler)}
-Error:`,
-        e2
-      );
-    }
-  }
-}
-
-// node_modules/@sentry/core/build/esm/utils-hoist/instrument/globalError.js
-var _oldOnErrorHandler = null;
-function addGlobalErrorInstrumentationHandler(handler) {
-  const type = "error";
-  addHandler(type, handler);
-  maybeInstrument(type, instrumentError);
-}
-function instrumentError() {
-  _oldOnErrorHandler = GLOBAL_OBJ.onerror;
-  GLOBAL_OBJ.onerror = function(msg, url, line, column, error) {
-    const handlerData = {
-      column,
-      error,
-      line,
-      msg,
-      url
-    };
-    triggerHandlers("error", handlerData);
-    if (_oldOnErrorHandler) {
-      return _oldOnErrorHandler.apply(this, arguments);
-    }
-    return false;
-  };
-  GLOBAL_OBJ.onerror.__SENTRY_INSTRUMENTED__ = true;
-}
-
-// node_modules/@sentry/core/build/esm/utils-hoist/instrument/globalUnhandledRejection.js
-var _oldOnUnhandledRejectionHandler = null;
-function addGlobalUnhandledRejectionInstrumentationHandler(handler) {
-  const type = "unhandledrejection";
-  addHandler(type, handler);
-  maybeInstrument(type, instrumentUnhandledRejection);
-}
-function instrumentUnhandledRejection() {
-  _oldOnUnhandledRejectionHandler = GLOBAL_OBJ.onunhandledrejection;
-  GLOBAL_OBJ.onunhandledrejection = function(e2) {
-    const handlerData = e2;
-    triggerHandlers("unhandledrejection", handlerData);
-    if (_oldOnUnhandledRejectionHandler) {
-      return _oldOnUnhandledRejectionHandler.apply(this, arguments);
-    }
-    return true;
-  };
-  GLOBAL_OBJ.onunhandledrejection.__SENTRY_INSTRUMENTED__ = true;
-}
-
 // node_modules/@sentry/core/build/esm/tracing/errors.js
 var errorsInstrumented = false;
 function registerSpanErrorInstrumentation() {
@@ -10696,7 +10514,7 @@ function hasSpansEnabled(maybeOptions) {
 // node_modules/@sentry/core/build/esm/constants.js
 var DEFAULT_ENVIRONMENT = "production";
 
-// node_modules/@sentry/core/build/esm/utils-hoist/dsn.js
+// node_modules/@sentry/core/build/esm/utils/dsn.js
 var ORG_ID_REGEX = /^o(\d+)\./;
 var DSN_REGEX = /^(?:(\w+):)\/\/(?:(\w+)(?::(\w+)?)?@)([\w.-]+)(?::(\d+))?\/(.+)/;
 function isValidProtocol(protocol) {
@@ -11004,7 +10822,7 @@ function sampleSpan(options, samplingContext, sampleRand) {
   return [shouldSample, parsedSampleRate, localSampleRateWasApplied];
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/normalize.js
+// node_modules/@sentry/core/build/esm/utils/normalize.js
 function normalize(input, depth = 100, maxProperties = Infinity) {
   try {
     return visit("", input, depth, maxProperties);
@@ -11134,7 +10952,7 @@ function memoBuilder() {
   return [memoize, unmemoize];
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/envelope.js
+// node_modules/@sentry/core/build/esm/utils/envelope.js
 function createEnvelope(headers, items = []) {
   return [headers, items];
 }
@@ -12003,7 +11821,7 @@ function _startIdleSpan(options) {
   return span;
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/syncpromise.js
+// node_modules/@sentry/core/build/esm/utils/syncpromise.js
 var States;
 (function(States2) {
   const PENDING = 0;
@@ -12159,45 +11977,6 @@ function notifyEventProcessors(processors, event, hint, index = 0) {
   });
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/debug-ids.js
-var parsedStackResults;
-var lastKeysCount;
-var cachedFilenameDebugIds;
-function getFilenameToDebugIdMap(stackParser) {
-  const debugIdMap = GLOBAL_OBJ._sentryDebugIds;
-  if (!debugIdMap) {
-    return {};
-  }
-  const debugIdKeys = Object.keys(debugIdMap);
-  if (cachedFilenameDebugIds && debugIdKeys.length === lastKeysCount) {
-    return cachedFilenameDebugIds;
-  }
-  lastKeysCount = debugIdKeys.length;
-  cachedFilenameDebugIds = debugIdKeys.reduce((acc, stackKey) => {
-    if (!parsedStackResults) {
-      parsedStackResults = {};
-    }
-    const result = parsedStackResults[stackKey];
-    if (result) {
-      acc[result[0]] = result[1];
-    } else {
-      const parsedStack = stackParser(stackKey);
-      for (let i = parsedStack.length - 1; i >= 0; i--) {
-        const stackFrame = parsedStack[i];
-        const filename = stackFrame?.filename;
-        const debugId = debugIdMap[stackKey];
-        if (filename && debugId) {
-          acc[filename] = debugId;
-          parsedStackResults[stackKey] = [filename, debugId];
-          break;
-        }
-      }
-    }
-    return acc;
-  }, {});
-  return cachedFilenameDebugIds;
-}
-
 // node_modules/@sentry/core/build/esm/utils/applyScopeDataToEvent.js
 function applyScopeDataToEvent(event, data) {
   const { fingerprint, span, breadcrumbs, sdkProcessingMetadata } = data;
@@ -12305,6 +12084,45 @@ function applyFingerprintToEvent(event, fingerprint) {
   if (!event.fingerprint.length) {
     delete event.fingerprint;
   }
+}
+
+// node_modules/@sentry/core/build/esm/utils/debug-ids.js
+var parsedStackResults;
+var lastKeysCount;
+var cachedFilenameDebugIds;
+function getFilenameToDebugIdMap(stackParser) {
+  const debugIdMap = GLOBAL_OBJ._sentryDebugIds;
+  if (!debugIdMap) {
+    return {};
+  }
+  const debugIdKeys = Object.keys(debugIdMap);
+  if (cachedFilenameDebugIds && debugIdKeys.length === lastKeysCount) {
+    return cachedFilenameDebugIds;
+  }
+  lastKeysCount = debugIdKeys.length;
+  cachedFilenameDebugIds = debugIdKeys.reduce((acc, stackKey) => {
+    if (!parsedStackResults) {
+      parsedStackResults = {};
+    }
+    const result = parsedStackResults[stackKey];
+    if (result) {
+      acc[result[0]] = result[1];
+    } else {
+      const parsedStack = stackParser(stackKey);
+      for (let i = parsedStack.length - 1; i >= 0; i--) {
+        const stackFrame = parsedStack[i];
+        const filename = stackFrame?.filename;
+        const debugId = debugIdMap[stackKey];
+        if (filename && debugId) {
+          acc[filename] = debugId;
+          parsedStackResults[stackKey] = [filename, debugId];
+          break;
+        }
+      }
+    }
+    return acc;
+  }, {});
+  return cachedFilenameDebugIds;
 }
 
 // node_modules/@sentry/core/build/esm/utils/prepareEvent.js
@@ -12682,6 +12500,18 @@ function defineIntegration(fn) {
   return fn;
 }
 
+// node_modules/@sentry/core/build/esm/utils/clientreport.js
+function createClientReportEnvelope(discarded_events, dsn, timestamp) {
+  const clientReportItem = [
+    { type: "client_report" },
+    {
+      timestamp: timestamp || dateTimestampInSeconds(),
+      discarded_events
+    }
+  ];
+  return createEnvelope(dsn ? { dsn } : {}, [clientReportItem]);
+}
+
 // node_modules/@sentry/core/build/esm/utils/eventUtils.js
 function getPossibleEventMessages(event) {
   const possibleMessages = [];
@@ -12740,18 +12570,6 @@ function convertSpanJsonToTransactionEvent(span) {
     },
     measurements: span.measurements
   };
-}
-
-// node_modules/@sentry/core/build/esm/utils-hoist/clientreport.js
-function createClientReportEnvelope(discarded_events, dsn, timestamp) {
-  const clientReportItem = [
-    { type: "client_report" },
-    {
-      timestamp: timestamp || dateTimestampInSeconds(),
-      discarded_events
-    }
-  ];
-  return createEnvelope(dsn ? { dsn } : {}, [clientReportItem]);
 }
 
 // node_modules/@sentry/core/build/esm/client.js
@@ -13492,7 +13310,7 @@ function setCurrentClient(client) {
   getCurrentScope().setClient(client);
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/promisebuffer.js
+// node_modules/@sentry/core/build/esm/utils/promisebuffer.js
 var SENTRY_BUFFER_FULL_ERROR = Symbol.for("SentryBufferFullError");
 function makePromiseBuffer(limit) {
   const buffer = [];
@@ -13545,7 +13363,7 @@ function makePromiseBuffer(limit) {
   };
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/ratelimit.js
+// node_modules/@sentry/core/build/esm/utils/ratelimit.js
 var DEFAULT_RETRY_AFTER = 60 * 1e3;
 function parseRetryAfterHeader(header, now = Date.now()) {
   const headerDelay = parseInt(`${header}`, 10);
@@ -13713,7 +13531,7 @@ function applySdkMetadata(options, name, names = [name], source = "npm") {
 
 // node_modules/@sentry/core/build/esm/utils/traceData.js
 function getTraceData(options = {}) {
-  const client = getClient();
+  const client = options.client || getClient();
   if (!isEnabled() || !client) {
     return {};
   }
@@ -13722,7 +13540,7 @@ function getTraceData(options = {}) {
   if (acs.getTraceData) {
     return acs.getTraceData(options);
   }
-  const scope = getCurrentScope();
+  const scope = options.scope || getCurrentScope();
   const span = options.span || getActiveSpan();
   const sentryTrace = span ? spanToTraceHeader(span) : scopeToTraceHeader(scope);
   const dsc = span ? getDynamicSamplingContextFromSpan(span) : getDynamicSamplingContextFromScope(client, scope);
@@ -13740,6 +13558,44 @@ function getTraceData(options = {}) {
 function scopeToTraceHeader(scope) {
   const { traceId, sampled, propagationSpanId } = scope.getPropagationContext();
   return generateSentryTraceHeader(traceId, propagationSpanId, sampled);
+}
+
+// node_modules/@sentry/core/build/esm/utils/debounce.js
+function debounce(func, wait, options) {
+  let callbackReturnValue;
+  let timerId;
+  let maxTimerId;
+  const maxWait = options?.maxWait ? Math.max(options.maxWait, wait) : 0;
+  const setTimeoutImpl = options?.setTimeoutImpl || setTimeout;
+  function invokeFunc() {
+    cancelTimers();
+    callbackReturnValue = func();
+    return callbackReturnValue;
+  }
+  function cancelTimers() {
+    timerId !== void 0 && clearTimeout(timerId);
+    maxTimerId !== void 0 && clearTimeout(maxTimerId);
+    timerId = maxTimerId = void 0;
+  }
+  function flush2() {
+    if (timerId !== void 0 || maxTimerId !== void 0) {
+      return invokeFunc();
+    }
+    return callbackReturnValue;
+  }
+  function debounced() {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+    timerId = setTimeoutImpl(invokeFunc, wait);
+    if (maxWait && maxTimerId === void 0) {
+      maxTimerId = setTimeoutImpl(invokeFunc, maxWait);
+    }
+    return callbackReturnValue;
+  }
+  debounced.cancel = cancelTimers;
+  debounced.flush = flush2;
+  return debounced;
 }
 
 // node_modules/@sentry/core/build/esm/breadcrumbs.js
@@ -13949,7 +13805,7 @@ function _isUselessError(event) {
   );
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/aggregate-errors.js
+// node_modules/@sentry/core/build/esm/utils/aggregate-errors.js
 function applyAggregateErrorsToEvent(exceptionFromErrorImplementation, parser, key, limit, event, hint) {
   if (!event.exception?.values || !hint || !isInstanceOf(hint.originalException, Error)) {
     return;
@@ -14027,7 +13883,7 @@ function applyExceptionGroupFieldsForChildException(exception, source, exception
   });
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/instrument/console.js
+// node_modules/@sentry/core/build/esm/instrument/console.js
 function addConsoleInstrumentationHandler(handler) {
   const type = "console";
   addHandler(type, handler);
@@ -14053,7 +13909,7 @@ function instrumentConsole() {
   });
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/severity.js
+// node_modules/@sentry/core/build/esm/utils/severity.js
 function severityLevelFromString(level) {
   return level === "warn" ? "warning" : ["fatal", "error", "warning", "log", "info", "debug"].includes(level) ? level : "log";
 }
@@ -14173,7 +14029,7 @@ function _getExceptionFromEvent(event) {
   return event.exception?.values && event.exception.values[0];
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/url.js
+// node_modules/@sentry/core/build/esm/utils/url.js
 var DEFAULT_BASE_URL = "thismessage:/";
 function isURLObjectRelative(url) {
   return "isRelative" in url;
@@ -14391,7 +14247,7 @@ function getFetchSpanAttributes(url, parsedUrl, method, spanOrigin) {
   return attributes;
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/breadcrumb-log-level.js
+// node_modules/@sentry/core/build/esm/utils/breadcrumb-log-level.js
 function getBreadcrumbLogLevelFromHttpStatusCode(statusCode) {
   if (statusCode === void 0) {
     return void 0;
@@ -14404,7 +14260,7 @@ function getBreadcrumbLogLevelFromHttpStatusCode(statusCode) {
   }
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/supports.js
+// node_modules/@sentry/core/build/esm/utils/supports.js
 var WINDOW2 = GLOBAL_OBJ;
 function supportsHistory() {
   return "history" in WINDOW2 && !!WINDOW2.history;
@@ -14453,7 +14309,7 @@ function supportsNativeFetch() {
   return result;
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/instrument/fetch.js
+// node_modules/@sentry/core/build/esm/instrument/fetch.js
 function addFetchInstrumentationHandler(handler, skipNativeFetchCheck) {
   const type = "fetch";
   addHandler(type, handler);
@@ -14623,7 +14479,7 @@ function getHeadersFromFetchArgs(fetchArgs) {
   return;
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/env.js
+// node_modules/@sentry/core/build/esm/utils/env.js
 function isBrowserBundle() {
   return typeof __SENTRY_BROWSER_BUNDLE__ !== "undefined" && !!__SENTRY_BROWSER_BUNDLE__;
 }
@@ -14631,12 +14487,12 @@ function getSDKSource() {
   return "npm";
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/node.js
+// node_modules/@sentry/core/build/esm/utils/node.js
 function isNodeEnv() {
   return !isBrowserBundle() && Object.prototype.toString.call(typeof process !== "undefined" ? process : 0) === "[object process]";
 }
 
-// node_modules/@sentry/core/build/esm/utils-hoist/isBrowser.js
+// node_modules/@sentry/core/build/esm/utils/isBrowser.js
 function isBrowser() {
   return typeof window !== "undefined" && (!isNodeEnv() || isElectronNodeRenderer());
 }
@@ -15143,7 +14999,7 @@ var LayoutShiftManager = class _LayoutShiftManager {
   _processEntry(entry) {
     if (entry.hadRecentInput) return;
     const firstSessionEntry = this._sessionEntries[0];
-    const lastSessionEntry = this._sessionEntries.at(-1);
+    const lastSessionEntry = this._sessionEntries[this._sessionEntries.length - 1];
     if (this._sessionValue && firstSessionEntry && lastSessionEntry && entry.startTime - lastSessionEntry.startTime < 1e3 && entry.startTime - firstSessionEntry.startTime < 5e3) {
       this._sessionValue += entry.value;
       this._sessionEntries.push(entry);
@@ -15873,6 +15729,11 @@ function sendStandaloneClsSpan(clsValue, entry, pageloadSpanId) {
     // attach the pageload span id to the CLS span so that we can link them in the UI
     "sentry.pageload.span_id": pageloadSpanId
   };
+  if (entry?.sources) {
+    entry.sources.forEach((source, index) => {
+      attributes[`cls.source.${index + 1}`] = htmlTreeAsString(source.node);
+    });
+  }
   const span = startStandaloneWebVitalSpan({
     name,
     transaction: routeName,
@@ -15895,25 +15756,120 @@ function supportsLayoutShift() {
   }
 }
 
+// node_modules/@sentry-internal/browser-utils/build/esm/metrics/lcp.js
+function trackLcpAsStandaloneSpan() {
+  let standaloneLcpValue = 0;
+  let standaloneLcpEntry;
+  let pageloadSpanId;
+  if (!supportsLargestContentfulPaint()) {
+    return;
+  }
+  let sentSpan = false;
+  function _collectLcpOnce() {
+    if (sentSpan) {
+      return;
+    }
+    sentSpan = true;
+    if (pageloadSpanId) {
+      sendStandaloneLcpSpan(standaloneLcpValue, standaloneLcpEntry, pageloadSpanId);
+    }
+    cleanupLcpHandler();
+  }
+  const cleanupLcpHandler = addLcpInstrumentationHandler(({ metric }) => {
+    const entry = metric.entries[metric.entries.length - 1];
+    if (!entry) {
+      return;
+    }
+    standaloneLcpValue = metric.value;
+    standaloneLcpEntry = entry;
+  }, true);
+  onHidden(() => {
+    _collectLcpOnce();
+  });
+  setTimeout(() => {
+    const client = getClient();
+    if (!client) {
+      return;
+    }
+    const unsubscribeStartNavigation = client.on("startNavigationSpan", () => {
+      _collectLcpOnce();
+      unsubscribeStartNavigation?.();
+    });
+    const activeSpan = getActiveSpan();
+    if (activeSpan) {
+      const rootSpan = getRootSpan(activeSpan);
+      const spanJSON = spanToJSON(rootSpan);
+      if (spanJSON.op === "pageload") {
+        pageloadSpanId = rootSpan.spanContext().spanId;
+      }
+    }
+  }, 0);
+}
+function sendStandaloneLcpSpan(lcpValue, entry, pageloadSpanId) {
+  DEBUG_BUILD2 && logger.log(`Sending LCP span (${lcpValue})`);
+  const startTime = msToSec((browserPerformanceTimeOrigin() || 0) + (entry?.startTime || 0));
+  const routeName = getCurrentScope().getScopeData().transactionName;
+  const name = entry ? htmlTreeAsString(entry.element) : "Largest contentful paint";
+  const attributes = {
+    [SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: "auto.http.browser.lcp",
+    [SEMANTIC_ATTRIBUTE_SENTRY_OP]: "ui.webvital.lcp",
+    [SEMANTIC_ATTRIBUTE_EXCLUSIVE_TIME]: 0,
+    // LCP is a point-in-time metric
+    // attach the pageload span id to the LCP span so that we can link them in the UI
+    "sentry.pageload.span_id": pageloadSpanId
+  };
+  if (entry) {
+    attributes["lcp.element"] = htmlTreeAsString(entry.element);
+    attributes["lcp.id"] = entry.id;
+    attributes["lcp.url"] = entry.url;
+    attributes["lcp.loadTime"] = entry.loadTime;
+    attributes["lcp.renderTime"] = entry.renderTime;
+    attributes["lcp.size"] = entry.size;
+  }
+  const span = startStandaloneWebVitalSpan({
+    name,
+    transaction: routeName,
+    attributes,
+    startTime
+  });
+  if (span) {
+    span.addEvent("lcp", {
+      [SEMANTIC_ATTRIBUTE_SENTRY_MEASUREMENT_UNIT]: "millisecond",
+      [SEMANTIC_ATTRIBUTE_SENTRY_MEASUREMENT_VALUE]: lcpValue
+    });
+    span.end(startTime);
+  }
+}
+function supportsLargestContentfulPaint() {
+  try {
+    return PerformanceObserver.supportedEntryTypes.includes("largest-contentful-paint");
+  } catch {
+    return false;
+  }
+}
+
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/browserMetrics.js
 var MAX_INT_AS_BYTES = 2147483647;
 var _performanceCursor = 0;
 var _measurements = {};
 var _lcpEntry;
 var _clsEntry;
-function startTrackingWebVitals({ recordClsStandaloneSpans }) {
+function startTrackingWebVitals({
+  recordClsStandaloneSpans,
+  recordLcpStandaloneSpans
+}) {
   const performance2 = getBrowserPerformanceAPI();
   if (performance2 && browserPerformanceTimeOrigin()) {
     if (performance2.mark) {
       WINDOW4.performance.mark("sentry-tracing-init");
     }
     const fidCleanupCallback = _trackFID();
-    const lcpCleanupCallback = _trackLCP();
+    const lcpCleanupCallback = recordLcpStandaloneSpans ? trackLcpAsStandaloneSpan() : _trackLCP();
     const ttfbCleanupCallback = _trackTtfb();
     const clsCleanupCallback = recordClsStandaloneSpans ? trackClsAsStandaloneSpan() : _trackCLS();
     return () => {
       fidCleanupCallback();
-      lcpCleanupCallback();
+      lcpCleanupCallback?.();
       ttfbCleanupCallback();
       clsCleanupCallback?.();
     };
@@ -16124,12 +16080,15 @@ function addPerformanceEntries(span, options) {
     if (!("fcp" in _measurements) || !options.recordClsOnPageloadSpan) {
       delete _measurements.cls;
     }
+    if (!options.recordLcpOnPageloadSpan) {
+      delete _measurements.lcp;
+    }
     Object.entries(_measurements).forEach(([measurementName, measurement]) => {
       setMeasurement(measurementName, measurement.value, measurement.unit);
     });
     span.setAttribute("performance.timeOrigin", timeOrigin);
     span.setAttribute("performance.activationStart", getActivationStart());
-    _setWebVitalAttributes(span);
+    _setWebVitalAttributes(span, options);
   }
   _lcpEntry = void 0;
   _clsEntry = void 0;
@@ -16151,12 +16110,43 @@ function _addMeasureSpans(span, entry, startTime, duration, timeOrigin, ignorePe
     attributes["sentry.browser.measure_happened_before_request"] = true;
     attributes["sentry.browser.measure_start_time"] = measureStartTimestamp;
   }
+  _addDetailToSpanAttributes(attributes, entry);
   if (measureStartTimestamp <= measureEndTimestamp) {
     startAndEndSpan(span, measureStartTimestamp, measureEndTimestamp, {
       name: entry.name,
       op: entry.entryType,
       attributes
     });
+  }
+}
+function _addDetailToSpanAttributes(attributes, performanceMeasure) {
+  try {
+    const detail = performanceMeasure.detail;
+    if (!detail) {
+      return;
+    }
+    if (typeof detail === "object") {
+      for (const [key, value] of Object.entries(detail)) {
+        if (value && isPrimitive(value)) {
+          attributes[`sentry.browser.measure.detail.${key}`] = value;
+        } else if (value !== void 0) {
+          try {
+            attributes[`sentry.browser.measure.detail.${key}`] = JSON.stringify(value);
+          } catch {
+          }
+        }
+      }
+      return;
+    }
+    if (isPrimitive(detail)) {
+      attributes["sentry.browser.measure.detail"] = detail;
+      return;
+    }
+    try {
+      attributes["sentry.browser.measure.detail"] = JSON.stringify(detail);
+    } catch {
+    }
+  } catch {
   }
 }
 function _addNavigationSpans(span, entry, timeOrigin) {
@@ -16278,8 +16268,8 @@ function _trackNavigator(span) {
     span.setAttribute("hardwareConcurrency", String(navigator2.hardwareConcurrency));
   }
 }
-function _setWebVitalAttributes(span) {
-  if (_lcpEntry) {
+function _setWebVitalAttributes(span, options) {
+  if (_lcpEntry && options.recordLcpOnPageloadSpan) {
     if (_lcpEntry.element) {
       span.setAttribute("lcp.element", htmlTreeAsString(_lcpEntry.element));
     }
@@ -16297,7 +16287,7 @@ function _setWebVitalAttributes(span) {
     }
     span.setAttribute("lcp.size", _lcpEntry.size);
   }
-  if (_clsEntry?.sources) {
+  if (_clsEntry?.sources && options.recordClsOnPageloadSpan) {
     _clsEntry.sources.forEach(
       (source, index) => span.setAttribute(`cls.source.${index + 1}`, htmlTreeAsString(source.node))
     );
@@ -20156,7 +20146,7 @@ function initMoveObserver({
     on("drag", updatePosition, doc)
   ];
   return callbackWrapper(() => {
-    handlers4.forEach((h) => h());
+    handlers4.forEach((h2) => h2());
   });
 }
 function initMouseInteractionObserver({
@@ -20250,7 +20240,7 @@ function initMouseInteractionObserver({
     handlers4.push(on(eventName, handler, doc));
   });
   return callbackWrapper(() => {
-    handlers4.forEach((h) => h());
+    handlers4.forEach((h2) => h2());
   });
 }
 function initScrollObserver({
@@ -20421,7 +20411,7 @@ function initInputObserver({
   const currentWindow = doc.defaultView;
   if (!currentWindow) {
     return () => {
-      handlers4.forEach((h) => h());
+      handlers4.forEach((h2) => h2());
     };
   }
   const propertyDescriptor = currentWindow.Object.getOwnPropertyDescriptor(
@@ -20459,7 +20449,7 @@ function initInputObserver({
     );
   }
   return callbackWrapper(() => {
-    handlers4.forEach((h) => h());
+    handlers4.forEach((h2) => h2());
   });
 }
 function getNestedCSSRulePositions(rule) {
@@ -20831,7 +20821,7 @@ function initMediaInteractionObserver({
     on("ratechange", handler(MediaInteractions.RateChange), doc)
   ];
   return callbackWrapper(() => {
-    handlers4.forEach((h) => h());
+    handlers4.forEach((h2) => h2());
   });
 }
 function initFontObserver({ fontCb, doc }) {
@@ -20877,7 +20867,7 @@ function initFontObserver({ fontCb, doc }) {
   });
   handlers4.push(restoreHandler);
   return callbackWrapper(() => {
-    handlers4.forEach((h) => h());
+    handlers4.forEach((h2) => h2());
   });
 }
 function initSelectionObserver(param) {
@@ -21010,7 +21000,7 @@ function initObservers(o2, _hooks = {}) {
     fontObserver();
     selectionObserver();
     customElementObserver();
-    pluginHandlers.forEach((h) => h());
+    pluginHandlers.forEach((h2) => h2());
   });
 }
 function hasNestedCSSRule(prop) {
@@ -22030,7 +22020,7 @@ function record(options = {}) {
       );
     }
     return () => {
-      handlers4.forEach((h) => h());
+      handlers4.forEach((h2) => h2());
       processedNodeManager.destroy();
       _takeFullSnapshot = void 0;
       unregisterErrorHandler();
@@ -24230,40 +24220,11 @@ function createMemoryEntry(memoryEntry) {
     }
   };
 }
-function debounce(func, wait, options) {
-  let callbackReturnValue;
-  let timerId;
-  let maxTimerId;
-  const maxWait = options?.maxWait ? Math.max(options.maxWait, wait) : 0;
-  function invokeFunc() {
-    cancelTimers();
-    callbackReturnValue = func();
-    return callbackReturnValue;
-  }
-  function cancelTimers() {
-    timerId !== void 0 && clearTimeout(timerId);
-    maxTimerId !== void 0 && clearTimeout(maxTimerId);
-    timerId = maxTimerId = void 0;
-  }
-  function flush2() {
-    if (timerId !== void 0 || maxTimerId !== void 0) {
-      return invokeFunc();
-    }
-    return callbackReturnValue;
-  }
-  function debounced() {
-    if (timerId) {
-      clearTimeout(timerId);
-    }
-    timerId = setTimeout2(invokeFunc, wait);
-    if (maxWait && maxTimerId === void 0) {
-      maxTimerId = setTimeout2(invokeFunc, maxWait);
-    }
-    return callbackReturnValue;
-  }
-  debounced.cancel = cancelTimers;
-  debounced.flush = flush2;
-  return debounced;
+function debounce2(func, wait, options) {
+  return debounce(func, wait, __spreadProps(__spreadValues({}, options), {
+    // @ts-expect-error - Not quite sure why these types do not match, but this is fine
+    setTimeoutImpl: setTimeout2
+  }));
 }
 var NAVIGATOR = GLOBAL_OBJ.navigator;
 function getRecordingSamplingOptions() {
@@ -24646,7 +24607,7 @@ var ReplayContainer = class {
     };
     this._recordingOptions = recordingOptions;
     this._options = options;
-    this._debouncedFlush = debounce(() => this._flush(), this._options.flushMinDelay, {
+    this._debouncedFlush = debounce2(() => this._flush(), this._options.flushMinDelay, {
       maxWait: this._options.flushMaxDelay
     });
     this._throttledAddEvent = throttle(
@@ -26169,7 +26130,7 @@ var browserTracingIntegration = (_options = {}) => {
     enableInp,
     enableLongTask,
     enableLongAnimationFrame,
-    _experiments: { enableInteractions, enableStandaloneClsSpans },
+    _experiments: { enableInteractions, enableStandaloneClsSpans, enableStandaloneLcpSpans },
     beforeStartSpan,
     idleTimeout,
     finalTimeout,
@@ -26209,6 +26170,7 @@ var browserTracingIntegration = (_options = {}) => {
         _collectWebVitals?.();
         addPerformanceEntries(span, {
           recordClsOnPageloadSpan: !enableStandaloneClsSpans,
+          recordLcpOnPageloadSpan: !enableStandaloneLcpSpans,
           ignoreResourceSpans,
           ignorePerformanceApiSpans
         });
@@ -26239,7 +26201,10 @@ var browserTracingIntegration = (_options = {}) => {
     name: BROWSER_TRACING_INTEGRATION_ID,
     setup(client) {
       registerSpanErrorInstrumentation();
-      _collectWebVitals = startTrackingWebVitals({ recordClsStandaloneSpans: enableStandaloneClsSpans || false });
+      _collectWebVitals = startTrackingWebVitals({
+        recordClsStandaloneSpans: enableStandaloneClsSpans || false,
+        recordLcpStandaloneSpans: enableStandaloneLcpSpans || false
+      });
       if (enableInp) {
         startTrackingINP();
       }
@@ -26917,7 +26882,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
           localStorage.setItem("PLACEOS.locale", locale);
         }
         if (params.has("x-api-key")) {
-          ys(params.get("x-api-key"));
+          gs(params.get("x-api-key"));
         }
         if (params.has("region_id")) {
           this._region = params.get("region_id");
@@ -26935,7 +26900,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
       const settings = this._settings.get("composer") || {};
       settings.mock = !!this._settings.get("mock") || location.origin.includes("demo.place.tech");
       if (START_QUERY) {
-        const query = Ne(START_QUERY.substring(1));
+        const query = jt(START_QUERY.substring(1));
         this._router.navigate([], {
           relativeTo: this._route,
           queryParams: query
@@ -27006,7 +26971,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
   }
   _pasteToken(tkn) {
     const parts = tkn.split("|");
-    const id = no();
+    const id = ro();
     localStorage.setItem(`${id}_access_token`, `${parts[0]}`);
     localStorage.setItem(`${id}_refresh_token`, `${parts[1]}`);
     localStorage.setItem(`${id}_expires_at`, `${addHours(/* @__PURE__ */ new Date(), 6).valueOf()}`);
@@ -27023,14 +26988,14 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
     if (isMobileSafari())
       return;
     const tkn = Y();
-    Nn(tkn === "x-api-key" ? { "x-api-key": Ot() } : { Authorization: `Bearer ${tkn}` });
+    Nn(tkn === "x-api-key" ? { "x-api-key": Oe() } : { Authorization: `Bearer ${tkn}` });
   }
   _initUploads(tries = 1) {
     if (!this._settings.get("app.has_uploads"))
       return;
     this.timeout("init_uploads", () => {
       try {
-        Mt({
+        Bt({
           auto_start: true,
           token: Y(),
           endpoint: "/api/engine/v2/uploads",
@@ -27114,125 +27079,125 @@ var routes = [
   { path: "unauthorised", component: UnauthorisedComponent },
   {
     path: "book/rooms",
-    loadChildren: () => import("./day-view.module-HMANFWFA.js").then((m) => m.DayViewModule),
+    loadChildren: () => import("./day-view.module-FIBSNKLL.js").then((m) => m.DayViewModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "facilities",
-    loadChildren: () => import("./facilities.module-Q6OSVDOU.js").then((m) => m.FacilitiesModule),
+    loadChildren: () => import("./facilities.module-2K2T236M.js").then((m) => m.FacilitiesModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/visitors",
-    loadChildren: () => import("./visitors.module-EKVQYUTL.js").then((m) => m.VisitorsModule),
+    loadChildren: () => import("./visitors.module-GG4GK7PF.js").then((m) => m.VisitorsModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/assets",
-    loadChildren: () => import("./asset-manager.module-TMBAKRRQ.js").then((m) => m.AppAssetManangerModule),
+    loadChildren: () => import("./asset-manager.module-TRN4L7AO.js").then((m) => m.AppAssetManangerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/desks",
-    loadChildren: () => import("./desks.module-IJWF46V5.js").then((m) => m.DesksModule),
+    loadChildren: () => import("./desks.module-ZR5VVFUC.js").then((m) => m.DesksModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/lockers",
-    loadChildren: () => import("./lockers.module-IOSEW6N3.js").then((m) => m.LockersModule),
+    loadChildren: () => import("./lockers.module-677243CX.js").then((m) => m.LockersModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "reports",
-    loadChildren: () => import("./reports.module-EZS2Z4DV.js").then((m) => m.ReportsModule),
+    loadChildren: () => import("./reports.module-VONFONCS.js").then((m) => m.ReportsModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "entertainment/events",
-    loadChildren: () => import("./events.module-KGAAYJX3.js").then((m) => m.EventsModule),
+    loadChildren: () => import("./events.module-25YY3YRT.js").then((m) => m.EventsModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "users/staff",
-    loadChildren: () => import("./staff.module-EOHM4XQY.js").then((m) => m.StaffModule),
+    loadChildren: () => import("./staff.module-LPYLSERQ.js").then((m) => m.StaffModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/catering",
-    loadChildren: () => import("./catering.module-BQOT2VJS.js").then((m) => m.CateringModule),
+    loadChildren: () => import("./catering.module-AP7NBVOP.js").then((m) => m.CateringModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "points-management",
-    loadChildren: () => import("./points.module-OHUSR7AZ.js").then((m) => m.PointsModule),
+    loadChildren: () => import("./points.module-Y4SL3MML.js").then((m) => m.PointsModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "book/parking",
-    loadChildren: () => import("./parking.module-ZPXGZSJB.js").then((m) => m.AppParkingModule),
+    loadChildren: () => import("./parking.module-C3GKJKRD.js").then((m) => m.AppParkingModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "surveys",
-    loadChildren: () => import("./surveys.module-2M6T25IQ.js").then((m) => m.SurveysModule),
+    loadChildren: () => import("./surveys.module-YAWFFBEP.js").then((m) => m.SurveysModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "room-management",
-    loadChildren: () => import("./room-manager.module-YNCB7QOT.js").then((m) => m.RoomManagerModule),
+    loadChildren: () => import("./room-manager.module-EFUNT2M7.js").then((m) => m.RoomManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "level-management",
-    loadChildren: () => import("./level-manager.module-VHLG5B5Y.js").then((m) => m.LevelManagerModule),
+    loadChildren: () => import("./level-manager.module-BNRPIK7S.js").then((m) => m.LevelManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "building-management",
-    loadChildren: () => import("./building-manager.module-G55TWIS2.js").then((m) => m.BuildingManagerModule),
+    loadChildren: () => import("./building-manager.module-HWJYBJG7.js").then((m) => m.BuildingManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "region-management",
-    loadChildren: () => import("./region-manager.module-MP3WLLNA.js").then((m) => m.RegionManagerModule),
+    loadChildren: () => import("./region-manager.module-2E27CCHN.js").then((m) => m.RegionManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "email-templates",
-    loadChildren: () => import("./email-templates.module-PPQFFVOO.js").then((m) => m.EmailTemplatesModule)
+    loadChildren: () => import("./email-templates.module-BCRRL4SG.js").then((m) => m.EmailTemplatesModule)
   },
   {
     path: "points-of-interest",
-    loadChildren: () => import("./poi-manager.module-3KSGV2KC.js").then((m) => m.POIManagerModule),
+    loadChildren: () => import("./poi-manager.module-VMPPTZ4I.js").then((m) => m.POIManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "url-management",
-    loadChildren: () => import("./url-manager.module-NQ3VOJDD.js").then((m) => m.UrlManagerModule),
+    loadChildren: () => import("./url-manager.module-VHABN5YZ.js").then((m) => m.UrlManagerModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
   {
     path: "signage",
-    loadChildren: () => import("./signage.module-CGDUB3MX.js").then((m) => m.SignageModule),
+    loadChildren: () => import("./signage.module-AI5DPZOQ.js").then((m) => m.SignageModule),
     canActivate: [AuthorisedUserGuard],
     canLoad: [AuthorisedUserGuard]
   },
