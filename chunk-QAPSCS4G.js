@@ -1,20 +1,20 @@
 import {
   CalendarEvent,
-  He,
+  Ht,
   Ie,
   It,
   Space,
-  We,
+  Wt,
   addMinutes,
   catchError,
   combineLatest,
   differenceInMinutes,
-  ee,
   getUnixTime,
   map,
   of,
-  toQueryString
-} from "./chunk-E4HKTSJD.js";
+  toQueryString,
+  tt
+} from "./chunk-QSANQ2D4.js";
 import {
   __spreadProps,
   __spreadValues
@@ -44,7 +44,7 @@ var Calendar = class {
 var CALENDAR_ENDPOINT = "/api/staff/v1/calendars";
 function queryCalendarAvailability(q) {
   const query = toQueryString(q);
-  return ee(`${CALENDAR_ENDPOINT}/availability${query ? "?" + query : ""}`).pipe(map((i) => i.map((c) => new Calendar(c))));
+  return tt(`${CALENDAR_ENDPOINT}/availability${query ? "?" + query : ""}`).pipe(map((i) => i.map((c) => new Calendar(c))));
 }
 var calendarsToSpaces = (org) => map((list) => list.filter((cal) => !!cal.resource).map((cal) => new Space(__spreadProps(__spreadValues({}, cal.resource), {
   level: org?.levelWithID(cal.resource.zones),
@@ -52,17 +52,17 @@ var calendarsToSpaces = (org) => map((list) => list.filter((cal) => !!cal.resour
 }))).filter((space) => space.bookable));
 function querySpaceFreeBusy(q, org) {
   const query = toQueryString(q);
-  return ee(`${CALENDAR_ENDPOINT}/free_busy${query ? "?" + query : ""}`).pipe(map((i) => i.map((c) => new Calendar(c))), calendarsToSpaces(org));
+  return tt(`${CALENDAR_ENDPOINT}/free_busy${query ? "?" + query : ""}`).pipe(map((i) => i.map((c) => new Calendar(c))), calendarsToSpaces(org));
 }
 
 // libs/events/src/lib/events.fn.ts
 var EVENTS_ENDPOINT = `/api/staff/v1/events`;
 function createEvent(data) {
-  return Ie(`${EVENTS_ENDPOINT}`, new CalendarEvent(data).toJSON()).pipe(map((item) => new CalendarEvent(item)));
+  return It(`${EVENTS_ENDPOINT}`, new CalendarEvent(data).toJSON()).pipe(map((item) => new CalendarEvent(item)));
 }
 function updateEvent(id, data, q = {}, method = "patch") {
   const query = toQueryString(q);
-  return (method === "patch" ? It : We)(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}${query ? "?" + query : ""}`, new CalendarEvent(data).toJSON()).pipe(map((item) => new CalendarEvent(item)));
+  return (method === "patch" ? Ie : Wt)(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}${query ? "?" + query : ""}`, new CalendarEvent(data).toJSON()).pipe(map((item) => new CalendarEvent(item)));
 }
 var saveEvent = (data, q) => {
   const id = data.update_master ? data.recurring_event_id || data.id : data.id;
@@ -71,17 +71,17 @@ var saveEvent = (data, q) => {
 };
 function removeEvent(id, q = {}) {
   const query = toQueryString(q);
-  return He(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}${query ? "?" + query : ""}`, {
+  return Ht(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}${query ? "?" + query : ""}`, {
     response_type: "void"
   });
 }
 function showEventMetadata(id, system_id, query = {}) {
   const q = toQueryString(__spreadValues({}, query));
-  return ee(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}/metadata/${encodeURIComponent(system_id)}${q ? "?" + q : ""}`).pipe(map((item) => item));
+  return tt(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}/metadata/${encodeURIComponent(system_id)}${q ? "?" + q : ""}`).pipe(map((item) => item));
 }
 function updateEventMetadata(id, system_id, metadata, query = {}) {
   const q = toQueryString(__spreadValues({}, query));
-  return It(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}/metadata/${encodeURIComponent(system_id)}${q ? "?" + q : ""}`, metadata).pipe(map((item) => item));
+  return Ie(`${EVENTS_ENDPOINT}/${encodeURIComponent(id)}/metadata/${encodeURIComponent(system_id)}${q ? "?" + q : ""}`, metadata).pipe(map((item) => item));
 }
 function querySpaceAvailability(id_list, start, duration, ignore, type, ignore_period = [0, 0]) {
   const end = addMinutes(start, duration).valueOf();
@@ -1162,4 +1162,4 @@ qr/esm/index.js:
   limitations under the License.
   *)
 */
-//# sourceMappingURL=chunk-YRH4FJPJ.js.map
+//# sourceMappingURL=chunk-QAPSCS4G.js.map

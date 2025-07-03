@@ -2720,6 +2720,9 @@ video {
   top: 2rem;
   bottom: 2rem;
 }
+#placeos .-bottom-14 {
+  bottom: -3.5rem;
+}
 #placeos .-left-0\.5 {
   left: -0.125rem;
 }
@@ -4022,6 +4025,9 @@ video {
 #placeos .max-w-\[25\%\] {
   max-width: 25%;
 }
+#placeos .max-w-\[28rem\] {
+  max-width: 28rem;
+}
 #placeos .max-w-\[3\.5rem\] {
   max-width: 3.5rem;
 }
@@ -4342,6 +4348,11 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+#placeos :is(.space-y-5 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
 #placeos :is(.space-y-8 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-y-reverse: 0;
@@ -5030,6 +5041,10 @@ video {
     "Courier New",
     monospace;
 }
+#placeos .\!text-base {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
 #placeos .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -5072,9 +5087,6 @@ video {
 }
 #placeos .text-\[16px\] {
   font-size: 16px;
-}
-#placeos .text-\[1em\] {
-  font-size: 1em;
 }
 #placeos .text-\[8rem\] {
   font-size: 8rem;
@@ -5387,6 +5399,10 @@ body {
     max-width: 512px !important;
     min-height: 0 !important;
     overflow: hidden;
+  }
+  html,
+  body {
+    font-size: 4mm !important;
   }
   app-root {
     display: none;

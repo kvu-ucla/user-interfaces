@@ -2,12 +2,12 @@ import {
   CheckinStateService,
   MatCheckbox,
   MatCheckboxModule
-} from "./chunk-GMBCAEPB.js";
+} from "./chunk-MJHDVPGG.js";
 import {
   generateQRCode,
   showEventMetadata,
   updateEventMetadata
-} from "./chunk-YRH4FJPJ.js";
+} from "./chunk-QAPSCS4G.js";
 import {
   ActivatedRoute,
   AsyncHandler,
@@ -62,14 +62,17 @@ import {
   SettingsService,
   TemplatePortalDirective,
   TranslatePipe,
+  ViewEncapsulation,
   catchError,
   combineLatest,
   filter,
   first,
   firstValueFrom,
-  fu,
+  hu,
   i18n,
   inject,
+  input,
+  io,
   lastValueFrom,
   log,
   map,
@@ -78,7 +81,6 @@ import {
   notifyInfo,
   notifySuccess,
   of,
-  ro,
   roundToNearestMinutes,
   saveBooking,
   setClassMetadata,
@@ -118,8 +120,9 @@ import {
   ɵɵproperty,
   ɵɵpureFunction0,
   ɵɵpureFunction1,
-  ɵɵpureFunction3,
+  ɵɵpureFunctionV,
   ɵɵqueryAdvance,
+  ɵɵreadContextLet,
   ɵɵrepeater,
   ɵɵrepeaterCreate,
   ɵɵrepeaterTrackByIdentity,
@@ -127,6 +130,7 @@ import {
   ɵɵrestoreView,
   ɵɵsanitizeHtml,
   ɵɵsanitizeUrl,
+  ɵɵstoreLet,
   ɵɵstyleProp,
   ɵɵtemplate,
   ɵɵtext,
@@ -137,7 +141,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuerySignal
-} from "./chunk-E4HKTSJD.js";
+} from "./chunk-QSANQ2D4.js";
 import {
   __async,
   __spreadProps,
@@ -607,6 +611,24 @@ var CheckinCovidComponent = _CheckinCovidComponent;
 // apps/visitor-kiosk/src/app/checkin/checkin-details.component.ts
 var _c03 = ["checkin-details", ""];
 var _c13 = () => ["/welcome"];
+function CheckinDetailsComponent_Conditional_0_Conditional_47_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 3)(1, "label", 16);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "mat-form-field", 17);
+    \u0275\u0275element(5, "input", 18);
+    \u0275\u0275pipe(6, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 2, "BOOKINGS.VISITOR_PASS"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(6, 4, "BOOKINGS.VISITOR_PASS_PLACEHOLDER"));
+  }
+}
 function CheckinDetailsComponent_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -663,57 +685,60 @@ function CheckinDetailsComponent_Conditional_0_Template(rf, ctx) {
     \u0275\u0275element(45, "input", 13);
     \u0275\u0275pipe(46, "translate");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(47, "button", 14);
-    \u0275\u0275listener("click", function CheckinDetailsComponent_Conditional_0_Template_button_click_47_listener() {
+    \u0275\u0275conditionalCreate(47, CheckinDetailsComponent_Conditional_0_Conditional_47_Template, 7, 6, "div", 3);
+    \u0275\u0275elementStart(48, "button", 14);
+    \u0275\u0275listener("click", function CheckinDetailsComponent_Conditional_0_Template_button_click_48_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.updateGuest());
     });
-    \u0275\u0275text(48);
-    \u0275\u0275pipe(49, "translate");
+    \u0275\u0275text(49);
+    \u0275\u0275pipe(50, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(50, "a", 15)(51, "icon");
-    \u0275\u0275text(52, "close");
+    \u0275\u0275elementStart(51, "a", 15)(52, "icon");
+    \u0275\u0275text(53, "close");
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("formGroup", \u0275\u0275pipeBind1(1, 15, ctx_r1.form));
+    \u0275\u0275property("formGroup", \u0275\u0275pipeBind1(1, 16, ctx_r1.form));
     \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(7, 17, "APP.VISITOR_KIOSK.HOST"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(7, 18, "APP.VISITOR_KIOSK.HOST"));
     \u0275\u0275advance(3);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(10, 19, "APP.VISITOR_KIOSK.HOST"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(10, 20, "APP.VISITOR_KIOSK.HOST"));
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(13, 21, "APP.VISITOR_KIOSK.EMAIL_REQUIRED"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(13, 22, "APP.VISITOR_KIOSK.EMAIL_REQUIRED"), " ");
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(17, 23, "APP.VISITOR_KIOSK.NAME"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(17, 24, "APP.VISITOR_KIOSK.NAME"));
     \u0275\u0275advance(3);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(20, 25, "APP.VISITOR_KIOSK.NAME"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(20, 26, "APP.VISITOR_KIOSK.NAME"));
     \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(26, 27, "APP.VISITOR_KIOSK.NAME"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(26, 28, "APP.VISITOR_KIOSK.NAME"));
     \u0275\u0275advance(3);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(29, 29, "APP.VISITOR_KIOSK.EMAIL"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(29, 30, "APP.VISITOR_KIOSK.EMAIL"));
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(32, 31, "APP.VISITOR_KIOSK.EMAIL_REQUIRED"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(32, 32, "APP.VISITOR_KIOSK.EMAIL_REQUIRED"));
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(36, 33, "APP.VISITOR_KIOSK.PHONE"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(36, 34, "APP.VISITOR_KIOSK.PHONE"));
     \u0275\u0275advance(3);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(39, 35, "APP.VISITOR_KIOSK.PHONE"));
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(39, 36, "APP.VISITOR_KIOSK.PHONE"));
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(43, 37, "APP.VISITOR_KIOSK.ORGANISATION"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(43, 38, "APP.VISITOR_KIOSK.ORGANISATION"));
     \u0275\u0275advance(3);
-    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(46, 39, "APP.VISITOR_KIOSK.ORGANISATION"));
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(49, 41, "APP.VISITOR_KIOSK.CONTINUE"), " ");
+    \u0275\u0275property("placeholder", \u0275\u0275pipeBind1(46, 40, "APP.VISITOR_KIOSK.ORGANISATION"));
     \u0275\u0275advance(2);
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(43, _c13));
+    \u0275\u0275conditional(ctx_r1.allow_pass_number ? 47 : -1);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(50, 42, "APP.VISITOR_KIOSK.CONTINUE"), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(44, _c13));
   }
 }
 function CheckinDetailsComponent_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 1)(1, "div", 16);
-    \u0275\u0275element(2, "mat-spinner", 17);
-    \u0275\u0275elementStart(3, "div", 18);
+    \u0275\u0275elementStart(0, "div", 1)(1, "div", 19);
+    \u0275\u0275element(2, "mat-spinner", 20);
+    \u0275\u0275elementStart(3, "div", 21);
     \u0275\u0275text(4);
     \u0275\u0275pipe(5, "translate");
     \u0275\u0275elementEnd()()();
@@ -735,6 +760,9 @@ var _CheckinDetailsComponent = class _CheckinDetailsComponent {
   }
   get induction_after_details() {
     return this._settings.get("app.induction_after_details");
+  }
+  get allow_pass_number() {
+    return this._settings.get("app.allow_pass_number");
   }
   get allow_user_photo() {
     return this._settings.get("app.allow_user_photo") && this._settings.get("app.allow_printing_label") !== false;
@@ -776,9 +804,9 @@ var _CheckinDetailsComponent = class _CheckinDetailsComponent {
 _CheckinDetailsComponent.\u0275fac = function CheckinDetailsComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CheckinDetailsComponent)();
 };
-_CheckinDetailsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinDetailsComponent, selectors: [["", "checkin-details", ""]], standalone: false, attrs: _c03, decls: 3, vars: 3, consts: [[1, "relative", "flex", "w-[36rem]", "flex-col", "items-center", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow", 3, "formGroup"], [1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center"], [1, "m-4", "text-2xl"], ["field", "", 1, "flex", "flex-col"], ["form", "host"], ["appearance", "outline"], ["matInput", "", "name", "host", "formControlName", "host", 3, "placeholder"], ["form", "name"], ["matInput", "", "name", "name", "formControlName", "name", 3, "placeholder"], ["form", "email"], ["matInput", "", "name", "email", "formControlName", "email", 3, "placeholder"], ["matInput", "", "name", "phone", "type", "tel", "formControlName", "phone", 3, "placeholder"], ["form", "org"], ["matInput", "", "name", "org", "formControlName", "organisation", 3, "placeholder"], ["next", "", "btn", "", "matRipple", "", 3, "click"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-0", 3, "routerLink"], [1, "flex", "flex-col", "items-center", "space-y-2", "rounded", "bg-base-100", "p-16", "shadow"], [3, "diameter"], [1, "my-4", "text-lg"]], template: function CheckinDetailsComponent_Template(rf, ctx) {
+_CheckinDetailsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinDetailsComponent, selectors: [["", "checkin-details", ""]], standalone: false, attrs: _c03, decls: 3, vars: 3, consts: [[1, "relative", "flex", "w-[36rem]", "flex-col", "items-center", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow", 3, "formGroup"], [1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center"], [1, "m-4", "text-2xl"], ["field", "", 1, "flex", "flex-col"], ["form", "host"], ["appearance", "outline"], ["matInput", "", "name", "host", "formControlName", "host", 3, "placeholder"], ["form", "name"], ["matInput", "", "name", "name", "formControlName", "name", 3, "placeholder"], ["form", "email"], ["matInput", "", "name", "email", "formControlName", "email", 3, "placeholder"], ["matInput", "", "name", "phone", "type", "tel", "formControlName", "phone", 3, "placeholder"], ["form", "org"], ["matInput", "", "name", "org", "formControlName", "organisation", 3, "placeholder"], ["next", "", "btn", "", "matRipple", "", 3, "click"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-0", 3, "routerLink"], ["form", "pass"], ["appearance", "outline", 1, "no-subscript", "w-full"], ["matInput", "", "name", "pass", "formControlName", "pass_number", 3, "placeholder"], [1, "flex", "flex-col", "items-center", "space-y-2", "rounded", "bg-base-100", "p-16", "shadow"], [3, "diameter"], [1, "my-4", "text-lg"]], template: function CheckinDetailsComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, CheckinDetailsComponent_Conditional_0_Template, 53, 44, "form", 0);
+    \u0275\u0275conditionalCreate(0, CheckinDetailsComponent_Conditional_0_Template, 54, 45, "form", 0);
     \u0275\u0275pipe(1, "async");
     \u0275\u0275conditionalBranchCreate(2, CheckinDetailsComponent_Conditional_2_Template, 6, 4, "div", 1);
   }
@@ -876,6 +904,27 @@ var CheckinDetailsComponent = _CheckinDetailsComponent;
                         />
                     </mat-form-field>
                 </div>
+                @if (allow_pass_number) {
+                    <div field class="flex flex-col">
+                        <label form="pass">
+                            {{ 'BOOKINGS.VISITOR_PASS' | translate }}
+                        </label>
+                        <mat-form-field
+                            appearance="outline"
+                            class="no-subscript w-full"
+                        >
+                            <input
+                                matInput
+                                name="pass"
+                                formControlName="pass_number"
+                                [placeholder]="
+                                    'BOOKINGS.VISITOR_PASS_PLACEHOLDER'
+                                        | translate
+                                "
+                            />
+                        </mat-form-field>
+                    </div>
+                }
                 <button next btn matRipple (click)="updateGuest()">
                     {{ 'APP.VISITOR_KIOSK.CONTINUE' | translate }}
                 </button>
@@ -906,7 +955,7 @@ var CheckinDetailsComponent = _CheckinDetailsComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinDetailsComponent, { className: "CheckinDetailsComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-details.component.ts", lineNumber: 141 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinDetailsComponent, { className: "CheckinDetailsComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-details.component.ts", lineNumber: 162 });
 })();
 
 // apps/visitor-kiosk/src/app/checkin/checkin-error.component.ts
@@ -1366,7 +1415,7 @@ var _CheckinPreferencesComponent = class _CheckinPreferencesComponent extends As
     this.loading = false;
     this.type = "menu";
     this.event = this._checkin.event;
-    this.menu = this._org.active_building.pipe(filter((_) => !!_), switchMap((bld) => fu(bld.id, "catering").pipe(catchError(() => of({ details: [] })), map(({ details }) => details instanceof Array ? details : []), map((menu) => menu.map((i) => new CateringItem(i))))), map((menu) => menu.filter((_) => (_.tags || []).find((_2) => _2.toLowerCase() === "drink" || _2.toLowerCase() === "drinks" || _2.toLowerCase() === "beverage"))), startWith([]), shareReplay(1));
+    this.menu = this._org.active_building.pipe(filter((_) => !!_), switchMap((bld) => hu(bld.id, "catering").pipe(catchError(() => of({ details: [] })), map(({ details }) => details instanceof Array ? details : []), map((menu) => menu.map((i) => new CateringItem(i))))), map((menu) => menu.filter((_) => (_.tags || []).find((_2) => _2.toLowerCase() === "drink" || _2.toLowerCase() === "drinks" || _2.toLowerCase() === "beverage"))), startWith([]), shareReplay(1));
   }
   ngOnInit() {
     this.loading = true;
@@ -1378,7 +1427,7 @@ var _CheckinPreferencesComponent = class _CheckinPreferencesComponent extends As
         });
       }
       if (params.has("jwt"))
-        ro(params.get("jwt"));
+        io(params.get("jwt"));
     })));
     this.type = "menu";
     this.timeout("event", () => {
@@ -2282,92 +2331,6 @@ var CheckinQRScanComponent = _CheckinQRScanComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinQRScanComponent, { className: "CheckinQRScanComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-qr-scan.component.ts", lineNumber: 99 });
 })();
 
-// libs/components/src/lib/user-avatar.component.ts
-function UserAvatarComponent_Conditional_0_Conditional_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 1);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r0.initials, " ");
-  }
-}
-function UserAvatarComponent_Conditional_0_Conditional_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 2);
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("source", ctx_r0.user.photo);
-  }
-}
-function UserAvatarComponent_Conditional_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 0);
-    \u0275\u0275conditionalCreate(1, UserAvatarComponent_Conditional_0_Conditional_1_Template, 2, 1, "div", 1)(2, UserAvatarComponent_Conditional_0_Conditional_2_Template, 1, 1, "img", 2);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275attribute("user-id", ctx_r0.user.id);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(!ctx_r0.user.photo ? 1 : 2);
-  }
-}
-var _UserAvatarComponent = class _UserAvatarComponent {
-  get initials() {
-    if (!this.user)
-      return "NA";
-    const name = this.user.name || "";
-    const parts = name.replace(/[()[\]\-+=\\/]+/gi, "").split(" ");
-    return parts.length > 1 ? `${parts[0][0]}${parts[parts.length - 1][0]}` : name.slice(0, 2);
-  }
-};
-_UserAvatarComponent.\u0275fac = function UserAvatarComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _UserAvatarComponent)();
-};
-_UserAvatarComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserAvatarComponent, selectors: [["a-user-avatar"]], inputs: { user: "user" }, decls: 1, vars: 1, consts: [[1, "flex", "h-[2.5em]", "w-[2.5em]", "items-center", "justify-center", "overflow-hidden", "rounded-full", "border-2", "border-base-100", "bg-base-200"], ["initials", "", 1, "text-[1em]", "uppercase", "text-base-content", "opacity-60"], ["auth", "", 1, "h-full", "w-full", 3, "source"]], template: function UserAvatarComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, UserAvatarComponent_Conditional_0_Template, 3, 2, "div", 0);
-  }
-  if (rf & 2) {
-    \u0275\u0275conditional(ctx.user ? 0 : -1);
-  }
-}, dependencies: [AuthenticatedImageDirective], encapsulation: 2 });
-var UserAvatarComponent = _UserAvatarComponent;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UserAvatarComponent, [{
-    type: Component,
-    args: [{ selector: "a-user-avatar", template: `
-        @if (user) {
-            <div
-                class="flex h-[2.5em] w-[2.5em] items-center justify-center overflow-hidden rounded-full border-2 border-base-100 bg-base-200"
-                [attr.user-id]="user.id"
-            >
-                @if (!user.photo) {
-                    <div
-                        initials
-                        class="text-[1em] uppercase text-base-content opacity-60"
-                    >
-                        {{ initials }}
-                    </div>
-                } @else {
-                    <img auth class="h-full w-full" [source]="user.photo" />
-                }
-            </div>
-        }
-    `, imports: [AuthenticatedImageDirective] }]
-  }], null, { user: [{
-    type: Input
-  }] });
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserAvatarComponent, { className: "UserAvatarComponent", filePath: "libs/components/src/lib/user-avatar.component.ts", lineNumber: 29 });
-})();
-
 // libs/components/src/lib/printable.component.ts
 var _c08 = ["printable", ""];
 var _c15 = ["*"];
@@ -2496,44 +2459,343 @@ var LevelPipe = _LevelPipe;
   }], null, null);
 })();
 
-// apps/visitor-kiosk/src/app/checkin/checkin-result.component.ts
-var _c09 = (a0, a1, a2) => ({ name: a0, email: a1, photo: a2 });
-var _c16 = (a0) => ({ title: a0 });
-var _c22 = (a0) => ({ host_name: a0 });
-var _c3 = (a0) => ({ location: a0 });
-function CheckinResultsComponent_Conditional_0_Conditional_34_Template(rf, ctx) {
+// libs/components/src/lib/user-avatar.component.ts
+function UserAvatarComponent_Conditional_0_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 13);
+    \u0275\u0275elementStart(0, "div", 1);
     \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "level");
-    \u0275\u0275pipe(3, "level");
-    \u0275\u0275pipe(4, "translate");
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    let tmp_3_0;
-    const ctx_r1 = \u0275\u0275nextContext(2);
+    const ctx_r0 = \u0275\u0275nextContext(2);
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 5, "APP.VISITOR_KIOSK.LABEL_LOCATION", \u0275\u0275pureFunction1(8, _c3, ((tmp_3_0 = \u0275\u0275pipeBind1(2, 1, ctx_r1.zones)) == null ? null : tmp_3_0.display_name) || ((tmp_3_0 = \u0275\u0275pipeBind1(3, 3, ctx_r1.zones)) == null ? null : tmp_3_0.name))), " ");
+    \u0275\u0275textInterpolate1(" ", ctx_r0.initials, " ");
   }
 }
-function CheckinResultsComponent_Conditional_0_Conditional_50_Template(rf, ctx) {
+function UserAvatarComponent_Conditional_0_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "img", 18);
+    \u0275\u0275element(0, "img", 2);
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("src", ctx_r1.qr_code, \u0275\u0275sanitizeUrl);
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275property("source", ctx_r0.user.photo);
   }
 }
-function CheckinResultsComponent_Conditional_0_Conditional_52_Template(rf, ctx) {
+function UserAvatarComponent_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 22);
-    \u0275\u0275listener("click", function CheckinResultsComponent_Conditional_0_Conditional_52_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r1.print());
+    \u0275\u0275elementStart(0, "div", 0);
+    \u0275\u0275conditionalCreate(1, UserAvatarComponent_Conditional_0_Conditional_1_Template, 2, 1, "div", 1)(2, UserAvatarComponent_Conditional_0_Conditional_2_Template, 1, 1, "img", 2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275attribute("user-id", ctx_r0.user.id);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(!ctx_r0.user.photo ? 1 : 2);
+  }
+}
+var _UserAvatarComponent = class _UserAvatarComponent {
+  get initials() {
+    if (!this.user)
+      return "NA";
+    const name = this.user.name || "";
+    const parts = name.replace(/[()[\]\-+=\\/]+/gi, "").split(" ");
+    return parts.length > 1 ? `${parts[0][0]}${parts[parts.length - 1][0]}` : name.slice(0, 2);
+  }
+};
+_UserAvatarComponent.\u0275fac = function UserAvatarComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _UserAvatarComponent)();
+};
+_UserAvatarComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserAvatarComponent, selectors: [["a-user-avatar"]], inputs: { user: "user" }, decls: 1, vars: 1, consts: [[1, "flex", "h-[2.5em]", "w-[2.5em]", "items-center", "justify-center", "overflow-hidden", "rounded-full", "border-2", "border-base-100", "bg-base-200"], ["initials", "", 1, "uppercase", "text-base-content", "opacity-60"], ["auth", "", 1, "h-full", "w-full", "object-cover", "object-center", 3, "source"]], template: function UserAvatarComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275conditionalCreate(0, UserAvatarComponent_Conditional_0_Template, 3, 2, "div", 0);
+  }
+  if (rf & 2) {
+    \u0275\u0275conditional(ctx.user ? 0 : -1);
+  }
+}, dependencies: [AuthenticatedImageDirective], encapsulation: 2 });
+var UserAvatarComponent = _UserAvatarComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UserAvatarComponent, [{
+    type: Component,
+    args: [{ selector: "a-user-avatar", template: `
+        @if (user) {
+            <div
+                class="flex h-[2.5em] w-[2.5em] items-center justify-center overflow-hidden rounded-full border-2 border-base-100 bg-base-200"
+                [attr.user-id]="user.id"
+            >
+                @if (!user.photo) {
+                    <div
+                        initials
+                        class="uppercase text-base-content opacity-60"
+                    >
+                        {{ initials }}
+                    </div>
+                } @else {
+                    <img
+                        auth
+                        class="h-full w-full object-cover object-center"
+                        [source]="user.photo"
+                    />
+                }
+            </div>
+        }
+    `, imports: [AuthenticatedImageDirective] }]
+  }], null, { user: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserAvatarComponent, { className: "UserAvatarComponent", filePath: "libs/components/src/lib/user-avatar.component.ts", lineNumber: 33 });
+})();
+
+// libs/users/src/lib/user-label.component.ts
+var _c09 = (a0) => ({ title: a0 });
+var _c16 = (a0) => ({ host_name: a0 });
+var _c22 = (a0) => ({ location: a0 });
+function UserLabelComponent_Conditional_19_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 9);
+    \u0275\u0275text(1);
+    \u0275\u0275pipe(2, "translate");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275nextContext();
+    const level_r1 = \u0275\u0275readContextLet(17);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 1, "APP.VISITOR_KIOSK.LABEL_LOCATION", \u0275\u0275pureFunction1(4, _c22, level_r1.display_name || level_r1.name)), " ");
+  }
+}
+function UserLabelComponent_Conditional_31_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 14);
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275property("src", ctx_r1.user().qr_code, \u0275\u0275sanitizeUrl);
+  }
+}
+var _UserLabelComponent = class _UserLabelComponent {
+  constructor() {
+    this._settings = inject(SettingsService);
+    this.user = input({});
+  }
+  get landscape() {
+    return this._settings.get("app.label_landscape");
+  }
+  get logo() {
+    return this._settings.theme === "dark" ? this._settings.get("app.logo_dark") : this._settings.get("app.logo_light");
+  }
+};
+_UserLabelComponent.\u0275fac = function UserLabelComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _UserLabelComponent)();
+};
+_UserLabelComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserLabelComponent, selectors: [["user-label"]], inputs: { user: [1, "user"] }, decls: 32, vars: 42, consts: [[1, "user-label", "portrait", "relative", "m-2", "rounded-xl", "border", "border-neutral", "bg-base-100", "p-4"], [1, "flex", "h-full", "flex-col", "leading-tight"], [1, "mb-1", "flex", "h-20", "w-20", "items-center", "justify-center", "overflow-hidden", "rounded-full", "border", "border-base-400", "bg-base-200", "text-4xl"], [3, "user"], [1, "mb-1", "text-2xl"], [1, "opacity-60"], [1, "absolute", "bottom-4", "left-4", "mt-2", "w-32", "rounded-lg", "border", "border-black", "px-2", "py-1", "text-center", "font-medium", "uppercase", "text-black"], [1, "absolute", "right-4", "top-4", "flex", "flex-col", "items-end"], ["auth", "", "alt", "Logo", 1, "h-12", "object-contain", 3, "src"], [1, "text-right", "text-xs"], [1, "text-right"], [1, "absolute", "bottom-4", "right-4", "flex", "items-end"], [1, "text-right", "font-medium", "leading-tight"], [1, "relative", "flex", "h-16", "w-16", "items-center", "justify-center", "rounded-lg", "border", "border-base-200"], [1, "h-14", "w-14", "object-contain", "object-center", 3, "src"]], template: function UserLabelComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "div", 2);
+    \u0275\u0275element(3, "a-user-avatar", 3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "div", 4);
+    \u0275\u0275text(5);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "div");
+    \u0275\u0275text(7);
+    \u0275\u0275pipe(8, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(9, "div", 5);
+    \u0275\u0275text(10);
+    \u0275\u0275pipe(11, "translate");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(12, "div", 6);
+    \u0275\u0275text(13);
+    \u0275\u0275pipe(14, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(15, "div", 7);
+    \u0275\u0275element(16, "img", 8);
+    \u0275\u0275declareLet(17);
+    \u0275\u0275pipe(18, "level");
+    \u0275\u0275conditionalCreate(19, UserLabelComponent_Conditional_19_Template, 3, 6, "div", 9);
+    \u0275\u0275elementStart(20, "pre", 10);
+    \u0275\u0275text(21);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(22, "div", 11)(23, "div", 12)(24, "div");
+    \u0275\u0275text(25);
+    \u0275\u0275pipe(26, "date");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(27, "div");
+    \u0275\u0275text(28);
+    \u0275\u0275pipe(29, "date");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(30, "div", 13);
+    \u0275\u0275conditionalCreate(31, UserLabelComponent_Conditional_31_Template, 1, 1, "img", 14);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    let tmp_3_0;
+    let tmp_4_0;
+    let tmp_10_0;
+    \u0275\u0275classProp("landscape", ctx.landscape);
+    \u0275\u0275advance(3);
+    \u0275\u0275property("user", ctx.user());
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx.user().name);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(8, 21, "APP.VISITOR_KIOSK.LABEL_FOR", \u0275\u0275pureFunction1(38, _c09, (tmp_3_0 = ctx.user()) == null ? null : tmp_3_0.title)), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(11, 24, "APP.VISITOR_KIOSK.LABEL_HOST", \u0275\u0275pureFunction1(40, _c16, (tmp_4_0 = ctx.user()) == null ? null : tmp_4_0.user_name)), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(14, 27, "APP.VISITOR_KIOSK.VISITOR"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275styleProp("max-width", ctx.landscape ? "8rem" : "");
+    \u0275\u0275property("src", (ctx.logo == null ? null : ctx.logo.src) || ctx.logo, \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance();
+    const level_r3 = \u0275\u0275storeLet(\u0275\u0275pipeBind1(18, 29, ctx.user().zones));
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(level_r3 ? 19 : -1);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate((tmp_10_0 = ctx.user()) == null ? null : tmp_10_0.extra_details);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("space-x-2", !ctx.landscape)("space-y-2", ctx.landscape)("flex-col", ctx.landscape);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(26, 32, ctx.user().date, "shortTime"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(29, 35, ctx.user().date, "mediumDate"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275conditional(ctx.user().qr_code ? 31 : -1);
+  }
+}, dependencies: [
+  CommonModule,
+  DatePipe,
+  UserAvatarComponent,
+  TranslatePipe,
+  LevelPipe,
+  AuthenticatedImageDirective
+], styles: ["/* angular:styles/component:css;5c04361388d35df81bba08d5f28fa26d467424d6614f6aa9de2da6eea3b253d6;/home/runner/work/user-interfaces/user-interfaces/libs/users/src/lib/user-label.component.ts */\n:host {\n  font-size: 1cm;\n}\n.user-label.portrait {\n  width: 25rem;\n  height: 15rem;\n}\n.user-label.landscape {\n  width: 15rem;\n  height: 25rem;\n}\n/*# sourceMappingURL=user-label.component.css.map */\n"], encapsulation: 2 });
+var UserLabelComponent = _UserLabelComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UserLabelComponent, [{
+    type: Component,
+    args: [{ selector: `user-label`, template: `
+        <div
+            class="user-label portrait relative m-2 rounded-xl border border-neutral bg-base-100 p-4"
+            [class.landscape]="landscape"
+        >
+            <div class="flex h-full flex-col leading-tight">
+                <div
+                    class="mb-1 flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border border-base-400 bg-base-200 text-4xl"
+                >
+                    <a-user-avatar [user]="user()"></a-user-avatar>
+                </div>
+                <div class="mb-1 text-2xl">{{ user().name }}</div>
+                <div>
+                    {{
+                        'APP.VISITOR_KIOSK.LABEL_FOR'
+                            | translate: { title: user()?.title }
+                    }}
+                </div>
+                <div class="opacity-60">
+                    {{
+                        'APP.VISITOR_KIOSK.LABEL_HOST'
+                            | translate
+                                : {
+                                      host_name: user()?.user_name,
+                                  }
+                    }}
+                </div>
+            </div>
+            <div
+                class="absolute bottom-4 left-4 mt-2 w-32 rounded-lg border border-black px-2 py-1 text-center font-medium uppercase text-black"
+            >
+                {{ 'APP.VISITOR_KIOSK.VISITOR' | translate }}
+            </div>
+            <div class="absolute right-4 top-4 flex flex-col items-end">
+                <img
+                    auth
+                    class="h-12 object-contain"
+                    [style.max-width]="landscape ? '8rem' : ''"
+                    alt="Logo"
+                    [src]="logo?.src || logo"
+                />
+                @let level = user().zones | level;
+                @if (level) {
+                    <div class="text-right text-xs">
+                        {{
+                            'APP.VISITOR_KIOSK.LABEL_LOCATION'
+                                | translate
+                                    : {
+                                          location:
+                                              level.display_name || level.name,
+                                      }
+                        }}
+                    </div>
+                }
+                <pre class="text-right">{{ user()?.extra_details }}</pre>
+            </div>
+            <div
+                class="absolute bottom-4 right-4 flex items-end"
+                [class.space-x-2]="!landscape"
+                [class.space-y-2]="landscape"
+                [class.flex-col]="landscape"
+            >
+                <div class="text-right font-medium leading-tight">
+                    <div>
+                        {{ user().date | date: 'shortTime' }}
+                    </div>
+                    <div>
+                        {{ user().date | date: 'mediumDate' }}
+                    </div>
+                </div>
+                <div
+                    class="relative flex h-16 w-16 items-center justify-center rounded-lg border border-base-200"
+                >
+                    @if (user().qr_code) {
+                        <img
+                            class="h-14 w-14 object-contain object-center"
+                            [src]="user().qr_code"
+                        />
+                    }
+                </div>
+            </div>
+        </div>
+    `, encapsulation: ViewEncapsulation.None, imports: [
+      CommonModule,
+      UserAvatarComponent,
+      TranslatePipe,
+      LevelPipe,
+      AuthenticatedImageDirective
+    ], styles: ["/* angular:styles/component:css;5c04361388d35df81bba08d5f28fa26d467424d6614f6aa9de2da6eea3b253d6;/home/runner/work/user-interfaces/user-interfaces/libs/users/src/lib/user-label.component.ts */\n:host {\n  font-size: 1cm;\n}\n.user-label.portrait {\n  width: 25rem;\n  height: 15rem;\n}\n.user-label.landscape {\n  width: 15rem;\n  height: 25rem;\n}\n/*# sourceMappingURL=user-label.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UserLabelComponent, { className: "UserLabelComponent", filePath: "libs/users/src/lib/user-label.component.ts", lineNumber: 133 });
+})();
+
+// apps/visitor-kiosk/src/app/checkin/checkin-result.component.ts
+var _c010 = (a0, a1, a2, a3, a4, a5, a6, a7, a8) => ({ name: a0, email: a1, photo: a2, title: a3, host: a4, zones: a5, date: a6, extra_details: a7, qr_code: a8 });
+function CheckinResultsComponent_Conditional_0_Conditional_11_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 3);
+    \u0275\u0275element(1, "user-label", 8);
+    \u0275\u0275pipe(2, "async");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275nextContext();
+    const ev_r2 = \u0275\u0275readContextLet(9);
+    const ctx_r2 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275property("user", \u0275\u0275pureFunctionV(3, _c010, [(ev_r2 == null ? null : ev_r2.asset_name) || (ev_r2 == null ? null : ev_r2.description), ev_r2 == null ? null : ev_r2.asset_id, \u0275\u0275pipeBind1(2, 1, ctx_r2.photo), ev_r2 == null ? null : ev_r2.title, (ev_r2 == null ? null : ev_r2.user_name) || ev_r2.user_email, ctx_r2.zones, (ev_r2 == null ? null : ev_r2.date) || ctx_r2.date, ev_r2 == null ? null : ev_r2.extension_data == null ? null : ev_r2.extension_data.extra_details, ctx_r2.qr_code]));
+  }
+}
+function CheckinResultsComponent_Conditional_0_Conditional_13_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 7);
+    \u0275\u0275listener("click", function CheckinResultsComponent_Conditional_0_Conditional_13_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r4);
+      const ctx_r2 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r2.print());
     });
     \u0275\u0275text(1);
     \u0275\u0275pipe(2, "translate");
@@ -2544,14 +2806,14 @@ function CheckinResultsComponent_Conditional_0_Conditional_52_Template(rf, ctx) 
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "APP.VISITOR_KIOSK.PRINT_LABEL"), " ");
   }
 }
-function CheckinResultsComponent_Conditional_0_Conditional_53_Template(rf, ctx) {
+function CheckinResultsComponent_Conditional_0_Conditional_14_Template(rf, ctx) {
   if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 23);
-    \u0275\u0275listener("click", function CheckinResultsComponent_Conditional_0_Conditional_53_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r1.next());
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 9);
+    \u0275\u0275listener("click", function CheckinResultsComponent_Conditional_0_Conditional_14_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r5);
+      const ctx_r2 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r2.next());
     });
     \u0275\u0275text(1);
     \u0275\u0275pipe(2, "translate");
@@ -2575,108 +2837,39 @@ function CheckinResultsComponent_Conditional_0_Template(rf, ctx) {
     \u0275\u0275element(6, "div", 2);
     \u0275\u0275pipe(7, "async");
     \u0275\u0275pipe(8, "sanitize");
-    \u0275\u0275elementStart(9, "div", 3)(10, "div", 4)(11, "div", 5);
-    \u0275\u0275element(12, "a-user-avatar", 6);
-    \u0275\u0275pipe(13, "async");
-    \u0275\u0275pipe(14, "async");
-    \u0275\u0275pipe(15, "async");
-    \u0275\u0275pipe(16, "async");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(17, "div", 7);
-    \u0275\u0275text(18);
-    \u0275\u0275pipe(19, "async");
-    \u0275\u0275pipe(20, "async");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(21, "div", 8);
-    \u0275\u0275text(22);
-    \u0275\u0275pipe(23, "async");
-    \u0275\u0275pipe(24, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(25, "div", 9);
-    \u0275\u0275text(26);
-    \u0275\u0275pipe(27, "async");
-    \u0275\u0275pipe(28, "translate");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(29, "div", 10);
-    \u0275\u0275text(30);
-    \u0275\u0275pipe(31, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(32, "div", 11);
-    \u0275\u0275element(33, "img", 12);
-    \u0275\u0275conditionalCreate(34, CheckinResultsComponent_Conditional_0_Conditional_34_Template, 5, 10, "div", 13);
-    \u0275\u0275pipe(35, "level");
-    \u0275\u0275elementStart(36, "pre", 14);
-    \u0275\u0275text(37);
-    \u0275\u0275pipe(38, "async");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(39, "div", 15)(40, "div", 16)(41, "div");
-    \u0275\u0275text(42);
-    \u0275\u0275pipe(43, "async");
-    \u0275\u0275pipe(44, "date");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(45, "div");
-    \u0275\u0275text(46);
-    \u0275\u0275pipe(47, "async");
-    \u0275\u0275pipe(48, "date");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(49, "div", 17);
-    \u0275\u0275conditionalCreate(50, CheckinResultsComponent_Conditional_0_Conditional_50_Template, 1, 1, "img", 18);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(51, "div", 19);
-    \u0275\u0275conditionalCreate(52, CheckinResultsComponent_Conditional_0_Conditional_52_Template, 3, 3, "button", 20);
-    \u0275\u0275conditionalCreate(53, CheckinResultsComponent_Conditional_0_Conditional_53_Template, 3, 3, "button", 21);
-    \u0275\u0275elementStart(54, "button", 22);
-    \u0275\u0275listener("click", function CheckinResultsComponent_Conditional_0_Template_button_click_54_listener() {
+    \u0275\u0275declareLet(9);
+    \u0275\u0275pipe(10, "async");
+    \u0275\u0275conditionalCreate(11, CheckinResultsComponent_Conditional_0_Conditional_11_Template, 3, 13, "div", 3);
+    \u0275\u0275elementStart(12, "div", 4);
+    \u0275\u0275conditionalCreate(13, CheckinResultsComponent_Conditional_0_Conditional_13_Template, 3, 3, "button", 5);
+    \u0275\u0275conditionalCreate(14, CheckinResultsComponent_Conditional_0_Conditional_14_Template, 3, 3, "button", 6);
+    \u0275\u0275elementStart(15, "button", 7);
+    \u0275\u0275listener("click", function CheckinResultsComponent_Conditional_0_Template_button_click_15_listener() {
       \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.done());
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.done());
     });
-    \u0275\u0275text(55);
-    \u0275\u0275pipe(56, "translate");
+    \u0275\u0275text(16);
+    \u0275\u0275pipe(17, "translate");
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
-    let tmp_4_0;
-    let tmp_5_0;
-    let tmp_6_0;
-    let tmp_7_0;
-    let tmp_11_0;
-    let tmp_12_0;
-    let tmp_13_0;
-    const ctx_r1 = \u0275\u0275nextContext();
-    const details_r5 = \u0275\u0275pipeBind1(2, 16, ctx_r1.event);
+    const ctx_r2 = \u0275\u0275nextContext();
+    const details_r6 = \u0275\u0275pipeBind1(2, 6, ctx_r2.event);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 18, (details_r5.extension_data == null ? null : details_r5.extension_data.self_registered) ? "APP.VISITOR_KIOSK.CHECKED_IN_MSG_SELF_REG" : "APP.VISITOR_KIOSK.CHECKED_IN_MSG"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 8, (details_r6.extension_data == null ? null : details_r6.extension_data.self_registered) ? "APP.VISITOR_KIOSK.CHECKED_IN_MSG_SELF_REG" : "APP.VISITOR_KIOSK.CHECKED_IN_MSG"), " ");
     \u0275\u0275advance(2);
-    \u0275\u0275property("innerHTML", \u0275\u0275pipeBind2(8, 22, \u0275\u0275pipeBind1(7, 20, ctx_r1.result_template), "html"), \u0275\u0275sanitizeHtml);
-    \u0275\u0275advance(6);
-    \u0275\u0275property("user", \u0275\u0275pureFunction3(65, _c09, ((tmp_4_0 = \u0275\u0275pipeBind1(13, 25, ctx_r1.event)) == null ? null : tmp_4_0.asset_name) || ((tmp_4_0 = \u0275\u0275pipeBind1(14, 27, ctx_r1.event)) == null ? null : tmp_4_0.description), (tmp_4_0 = \u0275\u0275pipeBind1(15, 29, ctx_r1.event)) == null ? null : tmp_4_0.asset_id, \u0275\u0275pipeBind1(16, 31, ctx_r1.photo)));
-    \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate1(" ", ((tmp_5_0 = \u0275\u0275pipeBind1(19, 33, ctx_r1.event)) == null ? null : tmp_5_0.asset_name) || ((tmp_5_0 = \u0275\u0275pipeBind1(20, 35, ctx_r1.event)) == null ? null : tmp_5_0.description), " ");
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(24, 39, "APP.VISITOR_KIOSK.LABEL_FOR", \u0275\u0275pureFunction1(69, _c16, (tmp_6_0 = \u0275\u0275pipeBind1(23, 37, ctx_r1.event)) == null ? null : tmp_6_0.title)), " ");
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(28, 44, "APP.VISITOR_KIOSK.LABEL_HOST", \u0275\u0275pureFunction1(71, _c22, (tmp_7_0 = \u0275\u0275pipeBind1(27, 42, ctx_r1.event)) == null ? null : tmp_7_0.user_name)), " ");
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(31, 47, "APP.VISITOR_KIOSK.VISITOR"), " ");
+    \u0275\u0275property("innerHTML", \u0275\u0275pipeBind2(8, 12, \u0275\u0275pipeBind1(7, 10, ctx_r2.result_template), "html"), \u0275\u0275sanitizeHtml);
     \u0275\u0275advance(3);
-    \u0275\u0275property("src", (ctx_r1.logo == null ? null : ctx_r1.logo.src) || ctx_r1.logo, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(\u0275\u0275pipeBind1(35, 49, ctx_r1.zones) ? 34 : -1);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("                ", (tmp_11_0 = \u0275\u0275pipeBind1(38, 51, ctx_r1.event)) == null ? null : tmp_11_0.extension_data == null ? null : tmp_11_0.extension_data.extra_details, "\n                ");
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(44, 55, ((tmp_12_0 = \u0275\u0275pipeBind1(43, 53, ctx_r1.event)) == null ? null : tmp_12_0.date) || ctx_r1.date, "shortTime"), " ");
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(48, 60, ((tmp_13_0 = \u0275\u0275pipeBind1(47, 58, ctx_r1.event)) == null ? null : tmp_13_0.date) || ctx_r1.date, "mediumDate"), " ");
-    \u0275\u0275advance(4);
-    \u0275\u0275conditional(ctx_r1.qr_code ? 50 : -1);
+    \u0275\u0275storeLet(\u0275\u0275pipeBind1(10, 15, ctx_r2.event));
     \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx_r1.allow_printing_label ? 52 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r1.allow_beverages ? 53 : -1);
+    \u0275\u0275conditional(ctx_r2.printing ? 11 : -1);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(56, 63, "APP.VISITOR_KIOSK.CONFIRM"), " ");
+    \u0275\u0275conditional(ctx_r2.allow_printing_label ? 13 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx_r2.allow_beverages ? 14 : -1);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(17, 18, "APP.VISITOR_KIOSK.CONFIRM"), " ");
   }
 }
 var DEFAULT_TEMPLATE = `
@@ -2698,6 +2891,7 @@ var _CheckinResultsComponent = class _CheckinResultsComponent extends AsyncHandl
     this.date = Date.now();
     this.zones = [];
     this.allow_beverages = false;
+    this.printing = false;
     this.event = this._checkin.event;
     this.guest = this._checkin.guest;
     this.photo = this._checkin.photo;
@@ -2721,6 +2915,7 @@ var _CheckinResultsComponent = class _CheckinResultsComponent extends AsyncHandl
       return updated_template;
     }), startWith(DEFAULT_TEMPLATE));
     this.print = () => {
+      this.printing = true;
       this.qr_code = generateQRCode(this.e?.asset_id);
       this.timeout("print", () => window.print());
     };
@@ -2770,15 +2965,15 @@ _CheckinResultsComponent.\u0275fac = /* @__PURE__ */ (() => {
     return (\u0275CheckinResultsComponent_BaseFactory || (\u0275CheckinResultsComponent_BaseFactory = \u0275\u0275getInheritedFactory(_CheckinResultsComponent)))(__ngFactoryType__ || _CheckinResultsComponent);
   };
 })();
-_CheckinResultsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinResultsComponent, selectors: [["checkin-results"]], standalone: false, features: [\u0275\u0275ProvidersFeature([DatePipe]), \u0275\u0275InheritDefinitionFeature], decls: 2, vars: 3, consts: [[1, "relative", "flex", "w-[36rem]", "flex-col", "items-center", "space-y-4", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow", "print:hidden"], [1, "text-xl"], [1, "", 3, "innerHTML"], ["printable", "", 1, "print-only", "relative", "m-4", "h-[14rem]", "w-[24rem]", "rounded-xl", "border", "border-neutral", "bg-base-100", "p-4"], [1, "flex", "h-full", "flex-col", "leading-tight"], [1, "mb-2", "flex", "h-[4.75rem]", "w-[4.75rem]", "items-center", "justify-center", "overflow-hidden", "rounded-full", "border-base-400", "bg-base-200", "text-3xl", "print:border-2"], [3, "user"], [1, "text-2xl"], [1, "text-sm"], [1, "text-sm", "opacity-60"], [1, "absolute", "bottom-4", "left-4", "mt-2", "w-32", "rounded-lg", "border", "border-black", "px-2", "py-1", "text-center", "text-sm", "font-medium", "uppercase", "text-black"], [1, "absolute", "right-4", "top-4", "flex", "flex-col", "items-end"], ["auth", "", "alt", "Logo", 1, "h-10", 3, "src"], [1, "text-right", "text-xs"], [1, "text-right"], [1, "absolute", "bottom-4", "right-4", "flex", "items-end", "space-x-2"], [1, "text-right", "font-medium", "leading-tight"], [1, "relative", "h-16", "w-16", "rounded-lg", "border", "border-base-200", "p-2"], [1, "h-12", "w-12", "object-contain", "object-center", 3, "src"], [1, "flex", "items-center", "space-x-2"], ["btn", "", "matRipple", "", 1, "w-32"], ["btn", "", "matRipple", "", 1, "inverse", "w-32"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"], ["btn", "", "matRipple", "", 1, "inverse", "w-32", 3, "click"]], template: function CheckinResultsComponent_Template(rf, ctx) {
+_CheckinResultsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinResultsComponent, selectors: [["checkin-results"]], standalone: false, features: [\u0275\u0275ProvidersFeature([DatePipe]), \u0275\u0275InheritDefinitionFeature], decls: 2, vars: 3, consts: [[1, "relative", "flex", "w-[36rem]", "flex-col", "items-center", "space-y-4", "overflow-hidden", "rounded", "bg-base-100", "p-4", "shadow", "print:hidden"], [1, "text-xl"], [1, "", 3, "innerHTML"], ["printable", "", 1, "print-only"], [1, "flex", "items-center", "space-x-2"], ["btn", "", "matRipple", "", 1, "w-32"], ["btn", "", "matRipple", "", 1, "inverse", "w-32"], ["btn", "", "matRipple", "", 1, "w-32", 3, "click"], [1, "!text-base", 3, "user"], ["btn", "", "matRipple", "", 1, "inverse", "w-32", 3, "click"]], template: function CheckinResultsComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, CheckinResultsComponent_Conditional_0_Template, 57, 73, "div", 0);
+    \u0275\u0275conditionalCreate(0, CheckinResultsComponent_Conditional_0_Template, 18, 20, "div", 0);
     \u0275\u0275pipe(1, "async");
   }
   if (rf & 2) {
     \u0275\u0275conditional(\u0275\u0275pipeBind1(1, 1, ctx.event) ? 0 : -1);
   }
-}, dependencies: [MatRipple, UserAvatarComponent, PrintableComponent, AsyncPipe, DatePipe, TranslatePipe, LevelPipe, SanitizePipe], styles: ["\n\n[_nghost-%COMP%]    > div[_ngcontent-%COMP%] {\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=checkin-result.component.css.map */"] });
+}, dependencies: [MatRipple, PrintableComponent, UserLabelComponent, AsyncPipe, TranslatePipe, SanitizePipe], styles: ["\n\n[_nghost-%COMP%]    > div[_ngcontent-%COMP%] {\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=checkin-result.component.css.map */"] });
 var CheckinResultsComponent = _CheckinResultsComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CheckinResultsComponent, [{
@@ -2801,107 +2996,26 @@ var CheckinResultsComponent = _CheckinResultsComponent;
                     class=""
                     [innerHTML]="result_template | async | sanitize: 'html'"
                 ></div>
-                <div
-                    printable
-                    class="print-only relative m-4 h-[14rem] w-[24rem] rounded-xl border border-neutral bg-base-100 p-4"
-                >
-                    <div class="flex h-full flex-col leading-tight">
-                        <div
-                            class="mb-2 flex h-[4.75rem] w-[4.75rem] items-center justify-center overflow-hidden rounded-full border-base-400 bg-base-200 text-3xl print:border-2"
-                        >
-                            <a-user-avatar
-                                [user]="{
-                                    name:
-                                        (event | async)?.asset_name ||
-                                        (event | async)?.description,
-                                    email: (event | async)?.asset_id,
-                                    photo: photo | async,
-                                }"
-                            ></a-user-avatar>
-                        </div>
-                        <div class="text-2xl">
-                            {{
-                                (event | async)?.asset_name ||
-                                    (event | async)?.description
-                            }}
-                        </div>
-                        <div class="text-sm">
-                            {{
-                                'APP.VISITOR_KIOSK.LABEL_FOR'
-                                    | translate
-                                        : { title: (event | async)?.title }
-                            }}
-                        </div>
-                        <div class="text-sm opacity-60">
-                            {{
-                                'APP.VISITOR_KIOSK.LABEL_HOST'
-                                    | translate
-                                        : {
-                                              host_name: (event | async)
-                                                  ?.user_name,
-                                          }
-                            }}
-                        </div>
-                    </div>
-                    <div
-                        class="absolute bottom-4 left-4 mt-2 w-32 rounded-lg border border-black px-2 py-1 text-center text-sm font-medium uppercase text-black"
-                    >
-                        {{ 'APP.VISITOR_KIOSK.VISITOR' | translate }}
-                    </div>
-                    <div class="absolute right-4 top-4 flex flex-col items-end">
-                        <img
-                            auth
-                            class="h-10"
-                            alt="Logo"
-                            [src]="logo?.src || logo"
+                @let ev = event | async;
+                @if (printing) {
+                    <div printable class="print-only">
+                        <user-label
+                            [user]="{
+                                name: ev?.asset_name || ev?.description,
+                                email: ev?.asset_id,
+                                photo: photo | async,
+                                title: ev?.title,
+                                host: ev?.user_name || ev.user_email,
+                                zones: zones,
+                                date: ev?.date || date,
+                                extra_details:
+                                    ev?.extension_data?.extra_details,
+                                qr_code: qr_code,
+                            }"
+                            class="!text-base"
                         />
-                        @if (zones | level) {
-                            <div class="text-right text-xs">
-                                {{
-                                    'APP.VISITOR_KIOSK.LABEL_LOCATION'
-                                        | translate
-                                            : {
-                                                  location:
-                                                      (zones | level)
-                                                          ?.display_name ||
-                                                      (zones | level)?.name,
-                                              }
-                                }}
-                            </div>
-                        }
-                        <pre class="text-right">
-                {{ (event | async)?.extension_data?.extra_details }}
-                </pre>
                     </div>
-                    <div
-                        class="absolute bottom-4 right-4 flex items-end space-x-2"
-                    >
-                        <div class="text-right font-medium leading-tight">
-                            <div>
-                                {{
-                                    (event | async)?.date || date
-                                        | date: 'shortTime'
-                                }}
-                            </div>
-                            <div>
-                                {{
-                                    (event | async)?.date || date
-                                        | date: 'mediumDate'
-                                }}
-                            </div>
-                        </div>
-                        <div
-                            class="relative h-16 w-16 rounded-lg border border-base-200 p-2"
-                        >
-                            @if (qr_code) {
-                                <img
-                                    class="h-12 w-12 object-contain object-center"
-                                    [src]="qr_code"
-                                />
-                            }
-                        </div>
-                    </div>
-                </div>
+                }
                 <div class="flex items-center space-x-2">
                     @if (allow_printing_label) {
                         <button btn matRipple class="w-32" (click)="print()">
@@ -2928,11 +3042,11 @@ var CheckinResultsComponent = _CheckinResultsComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinResultsComponent, { className: "CheckinResultsComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-result.component.ts", lineNumber: 174 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinResultsComponent, { className: "CheckinResultsComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-result.component.ts", lineNumber: 93 });
 })();
 
 // apps/visitor-kiosk/src/app/checkin/checkin.component.ts
-var _c010 = ["app-checkin", ""];
+var _c011 = ["app-checkin", ""];
 var _CheckinComponent = class _CheckinComponent {
   constructor() {
     this._settings = inject(SettingsService);
@@ -2947,7 +3061,7 @@ var _CheckinComponent = class _CheckinComponent {
 _CheckinComponent.\u0275fac = function CheckinComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CheckinComponent)();
 };
-_CheckinComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinComponent, selectors: [["", "app-checkin", ""]], standalone: false, attrs: _c010, decls: 8, vars: 10, consts: [[1, "absolute", "inset-0", "flex", "items-center", "p-8", "print:hidden"], [1, "z-10", "flex", "w-full", "flex-col", "justify-center", "space-y-8"], [1, "absolute", "right-4", "top-4", "text-2xl", "text-white"], ["src", "assets/img/building.png", 1, "absolute", "bottom-0", "right-0", "w-[60%]"]], template: function CheckinComponent_Template(rf, ctx) {
+_CheckinComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CheckinComponent, selectors: [["", "app-checkin", ""]], standalone: false, attrs: _c011, decls: 8, vars: 10, consts: [[1, "absolute", "inset-0", "flex", "items-center", "p-8", "print:hidden"], [1, "z-10", "flex", "w-full", "flex-col", "justify-center", "space-y-8"], [1, "absolute", "right-4", "top-4", "text-2xl", "text-white"], ["src", "assets/img/building.png", 1, "absolute", "bottom-0", "right-0", "w-[60%]"]], template: function CheckinComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
     \u0275\u0275element(2, "router-outlet");
@@ -2995,7 +3109,7 @@ var CheckinComponent = _CheckinComponent;
 })();
 
 // apps/visitor-kiosk/src/app/checkin/checkout.component.ts
-var _c011 = () => ["/welcome"];
+var _c012 = () => ["/welcome"];
 function CheckoutComponent_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -3028,7 +3142,7 @@ function CheckoutComponent_Conditional_0_Template(rf, ctx) {
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(10, 8, "COMMON.CHECK_OUT"), " ");
     \u0275\u0275advance(2);
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(10, _c011));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(10, _c012));
   }
 }
 function CheckoutComponent_Conditional_1_Template(rf, ctx) {
@@ -3167,7 +3281,8 @@ var STANDALONE_COMPONENTS = [
   LevelPipe,
   UserAvatarComponent,
   PrintableComponent,
-  SanitizePipe
+  SanitizePipe,
+  UserLabelComponent
 ];
 var _VisitorCheckinModule = class _VisitorCheckinModule {
 };
@@ -3181,7 +3296,8 @@ _VisitorCheckinModule.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ i
   ReactiveFormsModule,
   RouterModule.forChild(ROUTES),
   MAT_MODULES,
-  PrintableComponent
+  PrintableComponent,
+  UserLabelComponent
 ] });
 var VisitorCheckinModule = _VisitorCheckinModule;
 (() => {
@@ -3215,4 +3331,4 @@ var VisitorCheckinModule = _VisitorCheckinModule;
 export {
   VisitorCheckinModule
 };
-//# sourceMappingURL=checkin.module-57KONDRX.js.map
+//# sourceMappingURL=checkin.module-JGIZDGGN.js.map

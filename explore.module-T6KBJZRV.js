@@ -14,22 +14,22 @@ import {
   Yn,
   endInFuture,
   endOfMinute,
+  gn,
   loadLockerBanks,
   loadLockers,
-  mn,
   newBookingFromCalendarEvent,
   requestSpacesForZone,
   searchStaff,
   setHours,
   showStaff,
   validateAssetRequestsForResource
-} from "./chunk-WXLG6L3A.js";
+} from "./chunk-F53EOGM4.js";
 import {
   generateQRCode,
   querySpaceAvailability,
   removeEvent,
   saveEvent
-} from "./chunk-YRH4FJPJ.js";
+} from "./chunk-QAPSCS4G.js";
 import {
   A11yModule,
   ANIMATION_SHOW_CONTRACT_EXPAND,
@@ -55,6 +55,7 @@ import {
   Directionality,
   Directive,
   ESCAPE,
+  Ea,
   ElementRef,
   EventEmitter,
   FocusMonitor,
@@ -108,13 +109,11 @@ import {
   NgModule,
   NgTemplateOutlet,
   NgZone,
-  Oa,
+  Oe,
   OrganisationService,
-  Ot,
   Output,
   Overlay,
   OverlayModule,
-  Pc,
   Platform,
   PortalModule,
   ReactiveFormsModule,
@@ -129,6 +128,7 @@ import {
   Space,
   SpacePipe,
   Subject,
+  Tc,
   TemplatePortalDirective,
   TemplateRef,
   TranslatePipe,
@@ -144,7 +144,6 @@ import {
   _MatInternalFormField,
   _StructuralStylesLoader,
   _animationsDisabled,
-  _u,
   add,
   addDays,
   addMinutes,
@@ -152,9 +151,9 @@ import {
   addYears,
   afterNextRender,
   booleanAttribute,
-  bt,
   calculateDistance,
   catchError,
+  cc,
   coerceBooleanProperty,
   coerceNumberProperty,
   combineLatest,
@@ -181,7 +180,6 @@ import {
   format,
   formatDuration,
   forwardRef,
-  fu,
   generateCalendarFileLink,
   generateGoogleCalendarLink,
   generateMicrosoftCalendarLink,
@@ -192,6 +190,7 @@ import {
   getTimezoneOffsetString,
   getUnixTime,
   hasModifierKey,
+  hu,
   i18n,
   inject,
   input,
@@ -204,6 +203,7 @@ import {
   minutesInDay,
   minutesInMonth,
   model,
+  mu,
   nextValueFrom,
   normalizeDates,
   normalizePassiveListenerOptions,
@@ -211,7 +211,6 @@ import {
   notifySuccess,
   notifyWarn,
   numberAttribute,
-  oc,
   of,
   output,
   queryBookings,
@@ -220,6 +219,7 @@ import {
   roundToNearestMinutes,
   rulesForResource,
   saveBooking,
+  sc,
   set,
   setClassMetadata,
   setDefaultCreator,
@@ -234,8 +234,8 @@ import {
   tap,
   timer,
   toDate,
-  uc,
   unique,
+  ve,
   viewChild,
   viewChildren,
   ɵsetClassDebugInfo,
@@ -303,7 +303,7 @@ import {
   ɵɵtwoWayProperty,
   ɵɵviewQuery,
   ɵɵviewQuerySignal
-} from "./chunk-E4HKTSJD.js";
+} from "./chunk-QSANQ2D4.js";
 import {
   __async,
   __spreadProps,
@@ -3242,7 +3242,7 @@ var _ExploreDeviceInfoComponent = class _ExploreDeviceInfoComponent extends Asyn
     return __async(this, null, function* () {
       if (this.username)
         return;
-      const mod = Oa(this._details.system, "LocationServices");
+      const mod = Ea(this._details.system, "LocationServices");
       if (!mod)
         return;
       this.username = "Loading...";
@@ -3814,7 +3814,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     this.loading$ = this._loading.asObservable();
     this.booking_rules$ = this._org.building_list.pipe(switchMap((list) => {
       this.addLoadingTag(Tags.BookingRules);
-      return forkJoin(list.map((bld) => fu(bld.id, "room_booking_rules").pipe(map((_) => ({
+      return forkJoin(list.map((bld) => hu(bld.id, "room_booking_rules").pipe(map((_) => ({
         id: bld.id,
         details: _.details instanceof Array ? _.details : []
       })), catchError(() => of({ id: bld.id, details: [] })))));
@@ -3832,7 +3832,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
       return requestSpacesForZone(zone.id).pipe(catchError(() => of([])));
     }), map((list) => list.filter((_) => _.bookable && _.email)), tap(() => this.removeLoadingTag(Tags.ListingRooms)), startWith([]), shareReplay(1));
     this.features = this.spaces$.pipe(map((l) => unique(flatten(l.map((_) => _.features)))));
-    this.room_alerts = this._changed.pipe(switchMap(() => fu(this._org.organisation.id, "room_alerts")), map((r) => r.details), startWith({}), shareReplay(1));
+    this.room_alerts = this._changed.pipe(switchMap(() => hu(this._org.organisation.id, "room_alerts")), map((r) => r.details), startWith({}), shareReplay(1));
     this.filtered_spaces = combineLatest([
       this.spaces$,
       this._options,
@@ -4951,7 +4951,7 @@ var _SpacesService = class _SpacesService {
   }
   loadSpace(space_id) {
     return __async(this, null, function* () {
-      const system = yield lastValueFrom(uc(space_id));
+      const system = yield lastValueFrom(cc(space_id));
       const space = new Space(__spreadProps(__spreadValues({}, system), {
         level: this._org.levelWithID([...system.zones])
       }));
@@ -4967,7 +4967,7 @@ var _SpacesService = class _SpacesService {
   }
   loadSpaces() {
     return __async(this, null, function* () {
-      const systems = yield lastValueFrom(oc({
+      const systems = yield lastValueFrom(sc({
         zone_id: this._org.organisation.id,
         limit: 5e3
       })?.pipe(map((i) => i.data)));
@@ -5026,7 +5026,7 @@ var _ExploreStateService = class _ExploreStateService extends AsyncHandler {
     this.spaces = combineLatest([
       this._level,
       this._org.initialised
-    ]).pipe(filter(([_, initialised]) => initialised), switchMap(([level]) => oc({
+    ]).pipe(filter(([_, initialised]) => initialised), switchMap(([level]) => sc({
       zone_id: level?.id || this._org.organisation.id,
       limit: 50
     }).pipe(map(({ data }) => data.map((_) => new Space(_))), catchError((_) => of([])))), shareReplay(1));
@@ -5249,8 +5249,8 @@ var _ExploreSpacesService = class _ExploreSpacesService extends AsyncHandler {
     this._presence = {};
     this._panning = true;
     this._last_action = "";
-    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => fu(bld.id, `room_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
-    this.room_alerts = this._org.active_building.pipe(filter((bld) => !!bld), switchMap(() => fu(this._org.organisation.id, `room_alerts`).pipe(catchError(() => of({ details: {} })))), map((_) => _.details || {}), shareReplay(1));
+    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => hu(bld.id, `room_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
+    this.room_alerts = this._org.active_building.pipe(filter((bld) => !!bld), switchMap(() => hu(this._org.organisation.id, `room_alerts`).pipe(catchError(() => of({ details: {} })))), map((_) => _.details || {}), shareReplay(1));
     this._bind = combineLatest([
       this._state.spaces,
       this._state.options
@@ -5262,7 +5262,7 @@ var _ExploreSpacesService = class _ExploreSpacesService extends AsyncHandler {
       if (!list?.length)
         return;
       for (const space of list) {
-        const mod = Oa(space.id, "Bookings");
+        const mod = Ea(space.id, "Bookings");
         let binding = mod.binding("bookings");
         this.subscription(`b-${space.id}`, binding.listen().subscribe((d) => this.handleBookingsChange(list, space, d)));
         this.subscription(`b-bind-${space.id}`, binding.bind());
@@ -5454,8 +5454,8 @@ var _ExploreDesksService = class _ExploreDesksService extends AsyncHandler {
     this._users = {};
     this._departments = {};
     this._checked_in = new BehaviorSubject([]);
-    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => fu(bld.id, `desk_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
-    this.desk_list = this._state.level.pipe(debounceTime(50), switchMap((lvl) => fu(lvl.id, "desks").pipe(catchError(() => of({ details: [] })), map((i) => (i?.details instanceof Array ? i.details : []).map((j) => new Desk(__spreadProps(__spreadValues({}, j), { zone: lvl })))))), catchError((e) => []), shareReplay(1));
+    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => hu(bld.id, `desk_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
+    this.desk_list = this._state.level.pipe(debounceTime(50), switchMap((lvl) => hu(lvl.id, "desks").pipe(catchError(() => of({ details: [] })), map((i) => (i?.details instanceof Array ? i.details : []).map((j) => new Desk(__spreadProps(__spreadValues({}, j), { zone: lvl })))))), catchError((e) => []), shareReplay(1));
     this._bind = combineLatest([
       this._state.level,
       this._state.options
@@ -6143,11 +6143,11 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
     this._feature_list = viewChildren("feature");
   }
   ngOnInit() {
-    Hn();
+    Dn();
   }
   ngOnDestroy() {
     if (this.viewer) {
-      Dn(this.viewer);
+      Hn(this.viewer);
     }
   }
   ngOnChanges(changes) {
@@ -6212,7 +6212,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
   }
   createView() {
     return __async(this, null, function* () {
-      if (!bt()) {
+      if (!ve()) {
         return this.timeout("create_view", () => this.createView().catch((e) => console.warn(e)), 300);
       }
       const simp_url = this.src?.toLowerCase() || "";
@@ -6230,7 +6230,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
               actions: this.actions,
               options: this.options
             });
-            Dn(this.viewer);
+            Hn(this.viewer);
           } catch (e) {
             console.warn(e);
             return;
@@ -6238,7 +6238,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         }
         this.updateFeatureList();
         const tkn = Y();
-        document.cookie = `${tkn === "x-api-key" ? "api-key=" + encodeURIComponent(Ot()) : "bearer_token=" + encodeURIComponent(tkn)};max-age=30;path=/api/engine/v2/uploads;samesite=strict;${location.protocol === "https:" ? "secure;" : ""}`;
+        document.cookie = `${tkn === "x-api-key" ? "api-key=" + encodeURIComponent(Oe()) : "bearer_token=" + encodeURIComponent(tkn)};max-age=30;path=/api/engine/v2/uploads;samesite=strict;${location.protocol === "https:" ? "secure;" : ""}`;
         this.viewer = yield Un({
           element: _outlet_el?.nativeElement,
           url: this.src,
@@ -6258,7 +6258,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         if (!this.viewer)
           return;
         this.loading = false;
-        this.subscription("view_changes", mn(this.viewer)?.subscribe((v) => {
+        this.subscription("view_changes", gn(this.viewer)?.subscribe((v) => {
           this._on_changes.next(__spreadValues({}, v));
           this.zoomChange.emit(v.zoom);
           this.zoom = v.zoom;
@@ -7866,13 +7866,13 @@ var _ParkingService = class _ParkingService extends AsyncHandler {
     }));
     this.spaces = combineLatest([this.levels]).pipe(filter(([lvls]) => !!lvls[0]?.id), switchMap(([levels]) => {
       this._loading.next([...this._loading.getValue(), "spaces"]);
-      return forkJoin(levels.map((lvl) => fu(lvl.id, "parking-spaces").pipe(map((d) => (d.details instanceof Array ? d.details : []).map((s) => __spreadProps(__spreadValues({}, s), {
+      return forkJoin(levels.map((lvl) => hu(lvl.id, "parking-spaces").pipe(map((d) => (d.details instanceof Array ? d.details : []).map((s) => __spreadProps(__spreadValues({}, s), {
         zone_id: lvl.id
       }))))));
     }), map((list) => flatten(list)), tap(() => this._loading.next(this._loading.getValue().filter((_) => _ !== "spaces"))), shareReplay(1));
     this.users = combineLatest([this._org.active_building]).pipe(filter(([bld]) => !!bld?.id), switchMap(([bld]) => {
       this._loading.next([...this._loading.getValue(), "users"]);
-      return fu(bld.id, "parking-users");
+      return hu(bld.id, "parking-users");
     }), map((metadata) => metadata.details instanceof Array ? metadata.details : []), tap(() => this._loading.next(this._loading.getValue().filter((_) => _ !== "users"))), shareReplay(1));
     this.has_booking = queryBookings({
       period_start: getUnixTime(startOfDay(Date.now())),
@@ -8029,7 +8029,7 @@ var _ExploreParkingService = class _ExploreParkingService extends AsyncHandler {
     this.options = this._options.asObservable();
     this.on_book = null;
     this.levels = this._org.active_levels.pipe(map((l) => l.filter((_) => _.tags.includes("parking"))));
-    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => fu(bld.id, `parking_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
+    this.booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => hu(bld.id, `parking_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
     this.events = combineLatest([
       this._org.active_building,
       this._state.options,
@@ -8048,7 +8048,7 @@ var _ExploreParkingService = class _ExploreParkingService extends AsyncHandler {
       type: "parking",
       email: _?.user || currentUser()?.email
     })), shareReplay(1));
-    this.spaces = this.levels.pipe(switchMap((_) => forkJoin(_.map((l) => fu(l.id, "parking-spaces").pipe(map((d) => (d.details instanceof Array ? d.details : []).map((s) => __spreadProps(__spreadValues({}, s), { zone_id: l.id }))))))), map((_) => flatten(_)), shareReplay(1));
+    this.spaces = this.levels.pipe(switchMap((_) => forkJoin(_.map((l) => hu(l.id, "parking-spaces").pipe(map((d) => (d.details instanceof Array ? d.details : []).map((s) => __spreadProps(__spreadValues({}, s), { zone_id: l.id }))))))), map((_) => flatten(_)), shareReplay(1));
     this.active_spaces = combineLatest([
       this.spaces,
       this._state.level
@@ -8559,7 +8559,7 @@ var _ExploreZonesService = class _ExploreZonesService extends AsyncHandler {
   init() {
     return __async(this, null, function* () {
       yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      const zone_metadata = yield Promise.all(this._org.levels.map((bld) => fu(bld.id, "map_regions").toPromise()));
+      const zone_metadata = yield Promise.all(this._org.levels.map((bld) => hu(bld.id, "map_regions").toPromise()));
       this._area_list = [];
       for (const zone of zone_metadata) {
         const areas = zone?.details?.areas;
@@ -9148,14 +9148,14 @@ var _ExploreSearchService = class _ExploreSearchService {
     this._filter = new BehaviorSubject("");
     this._loading = new BehaviorSubject(false);
     this.emergency_contacts = this._emergency_contacts.asObservable();
-    this._role_assigned_contacts = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => fu(bld.id, "emergency_contacts")), map(({ details }) => details?.contacts || []), shareReplay(1));
+    this._role_assigned_contacts = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => hu(bld.id, "emergency_contacts")), map(({ details }) => details?.contacts || []), shareReplay(1));
     this._user_search = this._filter.pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap((q) => q?.length > 2 ? this.search_fn(q).pipe(catchError(() => of([]))) : of([])), shareReplay(1));
-    this._space_search = this._filter.pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap((q) => q?.length > 2 ? oc({ q, zone_id: this._org.organisation.id }).pipe(map(({ data }) => data.filter((_) => _.map_id).map((_) => new Space(__spreadProps(__spreadValues({}, _), {
+    this._space_search = this._filter.pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap((q) => q?.length > 2 ? sc({ q, zone_id: this._org.organisation.id }).pipe(map(({ data }) => data.filter((_) => _.map_id).map((_) => new Space(__spreadProps(__spreadValues({}, _), {
       level: this._org.levelWithID(_.zones)
     }))))) : of([])), catchError(() => []));
     this._desk_search = combineLatest([
       this._org.active_building
-    ]).pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap(([bld]) => bld ? _u(bld.id, { name: "desks" }).pipe(catchError(() => of([])), map((i) => flatten(i.map((j) => (j.metadata.desks?.details || []).map((k) => new Desk(__spreadProps(__spreadValues({}, k), { zone: j.zone }))))))) : of([])), catchError(() => []));
+    ]).pipe(debounceTime(400), tap(() => this._loading.next(true)), switchMap(([bld]) => bld ? mu(bld.id, { name: "desks" }).pipe(catchError(() => of([])), map((i) => flatten(i.map((j) => (j.metadata.desks?.details || []).map((k) => new Desk(__spreadProps(__spreadValues({}, k), { zone: j.zone }))))))) : of([])), catchError(() => []));
     this._maps_people_search = combineLatest([
       this._maps_people.available$,
       this._filter,
@@ -9169,7 +9169,7 @@ var _ExploreSearchService = class _ExploreSearchService {
         description: `${_.properties?.roomId} , Level ${_.properties?.floorName}`
       }));
     }), shareReplay(1));
-    this._map_features = this._org.active_building.pipe(filter((bld) => !!bld), switchMap(() => _u(this._org.building.id, {
+    this._map_features = this._org.active_building.pipe(filter((bld) => !!bld), switchMap(() => mu(this._org.building.id, {
       name: "map_features"
     }).pipe(catchError(() => of({ details: [] })))), map((data) => {
       const list = [];
@@ -9190,7 +9190,7 @@ var _ExploreSearchService = class _ExploreSearchService {
       }
       return list;
     }));
-    this._poi_metadata = this._org.initialised.pipe(filter((_) => _), switchMap(() => fu(this._org.organisation.id, "points-of-interest").pipe(catchError((_) => of({ details: {} })))), shareReplay(1));
+    this._poi_metadata = this._org.initialised.pipe(filter((_) => _), switchMap(() => hu(this._org.organisation.id, "points-of-interest").pipe(catchError((_) => of({ details: {} })))), shareReplay(1));
     this._poi_list = combineLatest([
       this._org.active_building,
       this._poi_metadata
@@ -9288,7 +9288,7 @@ var _ExploreSearchService = class _ExploreSearchService {
       return results;
     }), tap(() => this._loading.next(false)), shareReplay(1));
     this.loading = this._loading.asObservable();
-    this.search_fn = (q) => this._settings.get("app.basic_user_search") ? Pc({ q, authority_id: bt()?.id }).pipe(map((_) => _.data)) : searchStaff(q);
+    this.search_fn = (q) => this._settings.get("app.basic_user_search") ? Tc({ q, authority_id: ve()?.id }).pipe(map((_) => _.data)) : searchStaff(q);
     this.search_results.subscribe();
     this.init();
   }
@@ -11345,7 +11345,7 @@ var _ExploreComponent = class _ExploreComponent extends AsyncHandler {
           module: "LocationServices"
         };
       }
-      const mod = Oa(locate_details.system_id, locate_details.module);
+      const mod = Ea(locate_details.system_id, locate_details.module);
       const locations = (yield mod.execute("locate_user", [
         user.email,
         user.username || user.id
@@ -11764,4 +11764,4 @@ var AppExploreModule = _AppExploreModule;
 export {
   AppExploreModule
 };
-//# sourceMappingURL=explore.module-PSRYOPHV.js.map
+//# sourceMappingURL=explore.module-T6KBJZRV.js.map

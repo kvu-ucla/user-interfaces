@@ -73,7 +73,7 @@ import {
   ɵɵresetView,
   ɵɵrestoreView,
   ɵɵviewQuery
-} from "./chunk-E4HKTSJD.js";
+} from "./chunk-QSANQ2D4.js";
 import {
   __async,
   __spreadProps,
@@ -803,9 +803,9 @@ var _CheckinStateService = class _CheckinStateService {
   /** Load guest and event data */
   loadGuestAndEvent(email, event_id) {
     return __async(this, null, function* () {
-      const guest = yield showGuest(email).toPromise();
+      const guest = yield lastValueFrom(showGuest(email));
       if (event_id) {
-        const event = yield showBooking(event_id).toPromise();
+        const event = yield lastValueFrom(showBooking(event_id));
         this._guest.next(guest);
         this._booking.next(event);
         this._form.next(generateGuestForm(guest, event.user_email));
@@ -817,11 +817,11 @@ var _CheckinStateService = class _CheckinStateService {
         this._form.next(generateGuestForm(guest, guest.booking.user_email));
         return { guest, event: guest.booking };
       }
-      let upcoming = yield queryAllBookings({
+      let upcoming = yield lastValueFrom(queryAllBookings({
         type: "visitor",
         period_start: getUnixTime(Date.now()),
         period_end: getUnixTime(addMinutes(Date.now(), 120))
-      }).toPromise();
+      }));
       upcoming = upcoming.filter((_) => _.user_email === email || _.asset_id === email);
       const today = /* @__PURE__ */ new Date();
       const todays_events = upcoming.filter((event) => isSameDay(new Date(event.date), today));
@@ -844,7 +844,7 @@ var _CheckinStateService = class _CheckinStateService {
       const booking = this._booking.getValue() || guest.extension_data.event;
       if (!booking || this.metadata || !form.value)
         return;
-      const updated_booking = yield updateBooking(booking.id, new Booking(__spreadProps(__spreadValues({}, booking), {
+      const updated_booking = yield lastValueFrom(updateBooking(booking.id, new Booking(__spreadProps(__spreadValues({}, booking), {
         asset_id: form.value.email || booking.asset_id,
         asset_name: form.value.name || booking.asset_name,
         description: form.value.name || booking.description,
@@ -852,7 +852,7 @@ var _CheckinStateService = class _CheckinStateService {
           organisation: form.value.organisation || booking.extension_data?.organisation,
           phone: form.value.phone || booking.extension_data?.phone
         })
-      })).toJSON()).toPromise();
+      })).toJSON()));
       this.setBooking(updated_booking);
     });
   }
@@ -862,7 +862,7 @@ var _CheckinStateService = class _CheckinStateService {
       const event = this._booking.getValue() || guest.extension_data.event;
       if (!guest || !event)
         return;
-      yield updateBookingInductionStatus(event.id, "accepted").toPromise();
+      yield lastValueFrom(updateBookingInductionStatus(event.id, "accepted"));
     });
   }
   declineInduction() {
@@ -871,7 +871,7 @@ var _CheckinStateService = class _CheckinStateService {
       const event = this._booking.getValue() || guest.extension_data.event;
       if (!guest || !event)
         return;
-      yield updateBookingInductionStatus(event.id, "declined").toPromise();
+      yield lastValueFrom(updateBookingInductionStatus(event.id, "declined"));
     });
   }
   checkinGuest(state = true) {
@@ -923,4 +923,4 @@ export {
   MatCheckbox,
   MatCheckboxModule
 };
-//# sourceMappingURL=chunk-GMBCAEPB.js.map
+//# sourceMappingURL=chunk-MJHDVPGG.js.map
