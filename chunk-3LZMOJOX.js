@@ -3,9 +3,9 @@ import {
   BehaviorSubject,
   Booking,
   CalendarEvent,
+  Ea,
   Injectable,
   MatDialog,
-  Oa,
   OrganisationService,
   ParkingService,
   SettingsService,
@@ -53,7 +53,7 @@ import {
   tap,
   unique,
   ɵɵdefineInjectable
-} from "./chunk-VHNWU2PC.js";
+} from "./chunk-O3SGNDMG.js";
 import {
   __async,
   __spreadProps,
@@ -108,7 +108,7 @@ var _ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
       switchMap((list) => {
         this._loading.next(false);
         return combineLatest((list || []).map((space) => {
-          const binding = Oa(space.id, "Bookings").binding("bookings");
+          const binding = Ea(space.id, "Bookings").binding("bookings");
           const obs = binding.listen().pipe(map((event_list) => (event_list || []).map((i) => new CalendarEvent(__spreadProps(__spreadValues({}, i), {
             resources: i.attendees.filter((_) => _.email === space.email || _.resource),
             system: space
@@ -401,4 +401,4 @@ var ScheduleStateService = _ScheduleStateService;
 export {
   ScheduleStateService
 };
-//# sourceMappingURL=chunk-YKJWK3HR.js.map
+//# sourceMappingURL=chunk-3LZMOJOX.js.map

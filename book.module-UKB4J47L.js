@@ -1,9 +1,9 @@
 import {
   subMinutes
-} from "./chunk-PK47H4PO.js";
+} from "./chunk-JA42KETZ.js";
 import {
   FindAvailabilityModalComponent
-} from "./chunk-DGTQOAMC.js";
+} from "./chunk-PUXNSRDK.js";
 import {
   ANIMATION_SHOW_CONTRACT_EXPAND,
   ActivatedRoute,
@@ -135,6 +135,7 @@ import {
   addHours,
   addMinutes,
   catchError,
+  cc,
   checkinBooking,
   checkinEventGuest,
   combineLatest,
@@ -143,6 +144,7 @@ import {
   debounceTime,
   differenceInMinutes,
   downloadFile,
+  du,
   endOfDay,
   filter,
   findNearbyFeature,
@@ -155,7 +157,6 @@ import {
   forwardRef,
   fromBookingRecurrence,
   fromEventRecurrence,
-  fu,
   generateCalendarFileLink,
   generateGoogleCalendarLink,
   generateMicrosoftCalendarLink,
@@ -195,7 +196,6 @@ import {
   switchMap,
   tap,
   timer,
-  uc,
   unique,
   updateBooking,
   updateEventMetadata,
@@ -260,7 +260,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuerySignal
-} from "./chunk-VHNWU2PC.js";
+} from "./chunk-O3SGNDMG.js";
 import {
   __async,
   __spreadProps,
@@ -1946,7 +1946,7 @@ function getCateringRulesForZone(zone_id, fresh = false) {
   if (!zone_id)
     return of([]);
   if (!RULE_REQUESTS[zone_id] || fresh)
-    RULE_REQUESTS[zone_id] = fu(zone_id, "catering_config").pipe(map((_) => _.details instanceof Array ? _.details : []), catchError((e2) => of([])));
+    RULE_REQUESTS[zone_id] = hu(zone_id, "catering_config").pipe(map((_) => _.details instanceof Array ? _.details : []), catchError((e2) => of([])));
   return RULE_REQUESTS[zone_id];
 }
 function cateringItemAvailable(item, rules, event) {
@@ -2958,7 +2958,7 @@ var _CateringStateService = class _CateringStateService extends AsyncHandler {
     this.settings = combineLatest([
       this._org.active_building,
       this._change
-    ]).pipe(filter(([_]) => !!_), switchMap(([_]) => fu(_.id, "catering-settings").pipe(catchError((_2) => of({})))), map((_) => _.details || {}), tap((_) => this._settings.post("require_catering_notes", !!_?.require_notes)), shareReplay(1));
+    ]).pipe(filter(([_]) => !!_), switchMap(([_]) => hu(_.id, "catering-settings").pipe(catchError((_2) => of({})))), map((_) => _.details || {}), tap((_) => this._settings.post("require_catering_notes", !!_?.require_notes)), shareReplay(1));
     this.charge_codes = this.settings.pipe(map((_) => _.charge_codes || []));
     this.availability = this.settings.pipe(map((_) => _.disabled_rooms || []));
     this.caterers = combineLatest([
@@ -3203,7 +3203,7 @@ var _CateringStateService = class _CateringStateService extends AsyncHandler {
     });
   }
   updateMenu(zone_id, menu) {
-    return hu(zone_id, {
+    return du(zone_id, {
       id: zone_id,
       name: "catering",
       details: menu,
@@ -3213,7 +3213,7 @@ var _CateringStateService = class _CateringStateService extends AsyncHandler {
   saveSettings(settings) {
     return __async(this, null, function* () {
       const old_settings = yield nextValueFrom(this.settings);
-      const result = yield hu(this._org.building.id, {
+      const result = yield du(this._org.building.id, {
         id: this._org.building.id,
         name: "catering-settings",
         details: __spreadValues(__spreadValues({}, old_settings), settings),
@@ -3225,18 +3225,18 @@ var _CateringStateService = class _CateringStateService extends AsyncHandler {
   }
   getCateringForZone(zone_id) {
     return __async(this, null, function* () {
-      const menu = (yield fu(zone_id, "catering").toPromise()).details;
+      const menu = (yield hu(zone_id, "catering").toPromise()).details;
       return menu instanceof Array ? menu : [];
     });
   }
   getCateringConfig() {
     return __async(this, arguments, function* (zone_id = this._org.building.id) {
-      const rules = (yield fu(zone_id, "catering_config").toPromise()).details;
+      const rules = (yield hu(zone_id, "catering_config").toPromise()).details;
       return rules instanceof Array ? rules : [];
     });
   }
   updateConfig(zone_id, config) {
-    return hu(zone_id, {
+    return du(zone_id, {
       id: zone_id,
       name: "catering_config",
       details: config,
@@ -5114,7 +5114,7 @@ var _CateringOrderStateService = class _CateringOrderStateService {
     this._loading = new BehaviorSubject("");
     this.loading = this._loading.asObservable();
     this.filters = this._filters.asObservable();
-    this.settings = this._org.active_building.pipe(filter((_) => !!_), switchMap((_) => fu(_.id, "catering-settings").pipe(catchError((_2) => of({})))), map((_) => _.details), tap((_) => this._settings.post("require_catering_notes", !!_?.require_notes)), shareReplay(1));
+    this.settings = this._org.active_building.pipe(filter((_) => !!_), switchMap((_) => hu(_.id, "catering-settings").pipe(catchError((_2) => of({})))), map((_) => _.details), tap((_) => this._settings.post("require_catering_notes", !!_?.require_notes)), shareReplay(1));
     this.charge_codes = this.settings.pipe(map((_) => _.charge_codes || []));
     this.availability = this.settings.pipe(map((_) => _.disabled_rooms || []));
     this.available_menu = combineLatest([
@@ -5122,7 +5122,7 @@ var _CateringOrderStateService = class _CateringOrderStateService {
       this._org.active_building
     ]).pipe(filter(([_, bld]) => !!bld), switchMap(([{ zone }, bld]) => {
       this._loading.next("[MENU]");
-      return fu(zone || bld.id, "catering").pipe(map((d) => (d.details instanceof Array ? d.details : []).map((_) => new CateringItem(_))), catchError((_) => []));
+      return hu(zone || bld.id, "catering").pipe(map((d) => (d.details instanceof Array ? d.details : []).map((_) => new CateringItem(_))), catchError((_) => []));
     }), tap((items) => {
       this._loading.next(this._loading.getValue().replace("[MENU]", ""));
       if (this._settings.get("app.catering_provider")) {
@@ -10601,7 +10601,7 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
         this._router.navigate(["/book", "code", "success"]);
         this.loading = false;
       } else {
-        const space = yield uc(space_id).toPromise();
+        const space = yield cc(space_id).toPromise();
         if (space) {
           this._event_form.newForm(new CalendarEvent({ system: space }));
         }
@@ -18976,4 +18976,4 @@ var BookModule = _BookModule;
 export {
   BookModule
 };
-//# sourceMappingURL=book.module-D57HZGN6.js.map
+//# sourceMappingURL=book.module-UKB4J47L.js.map

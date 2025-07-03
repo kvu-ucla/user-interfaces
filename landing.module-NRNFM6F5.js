@@ -1,7 +1,7 @@
-import "./chunk-DGTQOAMC.js";
+import "./chunk-PUXNSRDK.js";
 import {
   ScheduleStateService
-} from "./chunk-YKJWK3HR.js";
+} from "./chunk-3LZMOJOX.js";
 import {
   AsyncHandler,
   AsyncPipe,
@@ -15,6 +15,7 @@ import {
   Component,
   DatePipe,
   DefaultValueAccessor,
+  Ea,
   EventCardComponent,
   EventFormService,
   ExploreSpacesService,
@@ -32,12 +33,11 @@ import {
   MatProgressSpinner,
   MatRipple,
   MatTooltip,
+  Mc,
   NgControlStatus,
   NgModel,
   NgModule,
-  Oa,
   OrganisationService,
-  Pc,
   Router,
   RouterLink,
   RouterModule,
@@ -51,18 +51,17 @@ import {
   TranslatePipe,
   UserAvatarComponent,
   addMinutes,
-  bt,
   catchError,
   checkinBooking,
   combineLatest,
   currentUser,
   debounceTime,
+  du,
   endOfDay,
   filter,
   filterResourcesFromRules,
   first,
   format,
-  fu,
   getUnixTime,
   hu,
   i18n,
@@ -88,6 +87,7 @@ import {
   switchMap,
   tap,
   unique,
+  ve,
   viewChild,
   ɵsetClassDebugInfo,
   ɵɵInheritDefinitionFeature,
@@ -131,7 +131,7 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵviewQuerySignal
-} from "./chunk-VHNWU2PC.js";
+} from "./chunk-O3SGNDMG.js";
 import {
   __async,
   __spreadProps,
@@ -225,7 +225,7 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
     this._loading_spaces = new BehaviorSubject(false);
     this._contacts = new BehaviorSubject([]);
     this._level_occupancy = new BehaviorSubject([]);
-    this._booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => fu(bld.id, `room_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
+    this._booking_rules = this._org.active_building.pipe(filter((bld) => !!bld), switchMap((bld) => hu(bld.id, `room_booking_rules`).pipe(catchError(() => of({ details: [] })))), map((_) => _?.details instanceof Array ? _.details : []), shareReplay(1));
     this._space_list = this._org.active_building.pipe(filter((_) => !!_), switchMap((bld) => requestSpacesForZone(bld.id)), map((_) => _.filter((s) => s.bookable)), shareReplay(1));
     this._filtered_spaces = combineLatest([
       this._space_list,
@@ -237,7 +237,7 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
       resource: null
     }, rules)));
     this._space_statuses = this._filtered_spaces.pipe(tap((_) => this.unsubWith("bind:")), switchMap((list) => combineLatest((list || []).map((_) => {
-      const binding = Oa(_.id, "Bookings").binding("status");
+      const binding = Ea(_.id, "Bookings").binding("status");
       const obs = binding.listen();
       this.subscription(`bind:${_.id}`, binding.bind());
       return obs;
@@ -251,7 +251,7 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
     this.options = this._options.asObservable();
     this.loading = this._loading.asObservable();
     this.loading_spaces = this._loading_spaces.asObservable();
-    this.search_fn = (q) => this._settings.get("app.basic_user_search") || this._settings.get("app.colleagues_require_auth") !== false ? Pc({ q, authority_id: bt()?.id }).pipe(map(({ data }) => data.map((_) => new StaffUser(_)))) : searchStaff(q);
+    this.search_fn = (q) => this._settings.get("app.basic_user_search") || this._settings.get("app.colleagues_require_auth") !== false ? Tc({ q, authority_id: ve()?.id }).pipe(map(({ data }) => data.map((_) => new StaffUser(_)))) : searchStaff(q);
     this.search_results = this._options.pipe(debounceTime(500), switchMap(({ search }) => {
       this._loading.next("Loading users...");
       return search ? this.search_fn(search).pipe(catchError(() => of([]))) : of([]);
@@ -292,9 +292,9 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
   }
   updateContacts() {
     return __async(this, null, function* () {
-      const metadata = yield fu(currentUser().id, "contacts").toPromise();
+      const metadata = yield hu(currentUser().id, "contacts").toPromise();
       const list = metadata.details instanceof Array ? metadata.details : [];
-      const users = yield Promise.all(list.map((_) => Tc(_.email).pipe(catchError(() => of(_))).toPromise()));
+      const users = yield Promise.all(list.map((_) => Mc(_.email).pipe(catchError(() => of(_))).toPromise()));
       this._contacts.next(users.map((i) => new StaffUser(i)));
     });
   }
@@ -303,7 +303,7 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
       let users = [...this._contacts.getValue()];
       users.push(user);
       users = unique(users, "email");
-      yield hu(currentUser().id, {
+      yield du(currentUser().id, {
         name: "contacts",
         description: "Contacts for the User",
         details: users
@@ -315,7 +315,7 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
     return __async(this, null, function* () {
       let users = [...this._contacts.getValue()];
       users = users.filter((u) => u.email !== user.email);
-      yield hu(currentUser().id, {
+      yield du(currentUser().id, {
         name: "contacts",
         description: "Contacts for the User",
         details: users
@@ -337,7 +337,7 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
       if (!occupancy)
         return;
       const { sys, module, index } = occupancy;
-      const mod = Oa(sys, module, index);
+      const mod = Ea(sys, module, index);
       if (!mod)
         return;
       if (this._occupancy_binding) {
@@ -1553,7 +1553,7 @@ var _LandingFavouritesComponent = class _LandingFavouritesComponent extends Asyn
   }
   ngOnInit() {
     return __async(this, null, function* () {
-      this._room_alerts = yield fu(this._org.organisation.id, "room_alerts").pipe(map((v) => v.details)).toPromise();
+      this._room_alerts = yield hu(this._org.organisation.id, "room_alerts").pipe(map((v) => v.details)).toPromise();
     });
   }
   removeFavourite(type, id) {
@@ -2692,4 +2692,4 @@ var AppLandingModule = _AppLandingModule;
 export {
   AppLandingModule
 };
-//# sourceMappingURL=landing.module-YWXUMT3B.js.map
+//# sourceMappingURL=landing.module-NRNFM6F5.js.map
