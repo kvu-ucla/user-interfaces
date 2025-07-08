@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1751949304111,
+  "timestamp": 1751953537409,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -100,6 +100,9 @@
         "./assets/maps/level_G.svg",
         "./assets/maps/level_P1.svg",
         "./assets/maps/test.svg",
+        "./assets/material-symbols-outlined.woff2",
+        "./assets/material-symbols-rounded.woff2",
+        "./assets/material-symbols-sharp.woff2",
         "./assets/mocks/building1.jpg",
         "./assets/mocks/building2.jpg",
         "./assets/mocks/building3.jpg",
@@ -187,6 +190,9 @@
     "./assets/maps/level_G.svg": "34941af9a8f84b60d820fe3230f88d2c5374b8f1",
     "./assets/maps/level_P1.svg": "d143761b1d22330cb22c6d29ac1b0eb2dc37d29e",
     "./assets/maps/test.svg": "6b8cf2e8673469599a1a6d246b5e13650477aa2e",
+    "./assets/material-symbols-outlined.woff2": "bd542ec76d745a9c7f916eb2628c266e26daed5d",
+    "./assets/material-symbols-rounded.woff2": "81b53031546fbed2a135676294af73f9f1d74722",
+    "./assets/material-symbols-sharp.woff2": "ddf66c9927d80efeffc73c76472142cacaae7fba",
     "./assets/mocks/building1.jpg": "9170087fb243e25d0dbd5a29c58aafd4e1a4daee",
     "./assets/mocks/building2.jpg": "9fcdd5204d4294effd515b8b97fac937f494d7e4",
     "./assets/mocks/building3.jpg": "782111d26faa182f2c163fd972a021357fd384c8",
@@ -197,11 +203,11 @@
     "./assets/support/opera-logo.svg": "23f8e25409598ac843eefe81ea3c09b4f460844d",
     "./assets/support/safari-logo.svg": "1c510b0c330f84f6662351e4a0abd7fb8af2f678",
     "./favicon.ico": "5d8cf2b09be186513f3621f4c03d98eea93822ba",
-    "./index.html": "57818d67ae1cdd270d13b7e608335a8838d1847f",
-    "./main.js": "fc4e0eeff921205ef20cd28b893323367b2805bd",
+    "./index.html": "5682c0f08971b68c6dfaef5c9344668178168a42",
+    "./main.js": "6d9ccffdc6fe9adaaf1ee8f7c57f22a3d6d35562",
     "./manifest.webmanifest": "8c6fdda8ecb155f4951a7175bd0b695d39d23ad7",
-    "./polyfills.js": "9289c0ea794d380b2a90872f60f97fad6ebe1f08",
-    "./styles.css": "2afe2b43c769f5dacb4d7395c6c52c98b1d1ebfc"
+    "./polyfills.js": "6d1ef3a34315a412ed238c67a6b2e70b2d025059",
+    "./styles.css": "3650c9dd880cf8f928526a196ce1a8c047b694b3"
   },
   "navigationUrls": [
     {
