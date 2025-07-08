@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1751949304765,
+  "timestamp": 1751953536531,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -89,6 +89,9 @@
         "./assets/maps/level_G.svg",
         "./assets/maps/level_P1.svg",
         "./assets/maps/test.svg",
+        "./assets/material-symbols-outlined.woff2",
+        "./assets/material-symbols-rounded.woff2",
+        "./assets/material-symbols-sharp.woff2",
         "./assets/mocks/building1.jpg",
         "./assets/mocks/building2.jpg",
         "./assets/mocks/building3.jpg",
@@ -166,6 +169,9 @@
     "./assets/maps/level_G.svg": "34941af9a8f84b60d820fe3230f88d2c5374b8f1",
     "./assets/maps/level_P1.svg": "d143761b1d22330cb22c6d29ac1b0eb2dc37d29e",
     "./assets/maps/test.svg": "6b8cf2e8673469599a1a6d246b5e13650477aa2e",
+    "./assets/material-symbols-outlined.woff2": "bd542ec76d745a9c7f916eb2628c266e26daed5d",
+    "./assets/material-symbols-rounded.woff2": "81b53031546fbed2a135676294af73f9f1d74722",
+    "./assets/material-symbols-sharp.woff2": "ddf66c9927d80efeffc73c76472142cacaae7fba",
     "./assets/mocks/building1.jpg": "9170087fb243e25d0dbd5a29c58aafd4e1a4daee",
     "./assets/mocks/building2.jpg": "9fcdd5204d4294effd515b8b97fac937f494d7e4",
     "./assets/mocks/building3.jpg": "782111d26faa182f2c163fd972a021357fd384c8",
@@ -176,10 +182,10 @@
     "./assets/support/opera-logo.svg": "23f8e25409598ac843eefe81ea3c09b4f460844d",
     "./assets/support/safari-logo.svg": "1c510b0c330f84f6662351e4a0abd7fb8af2f678",
     "./favicon.ico": "4e23d0f9b6ddaf3c9ddef90dbaed2342941297b5",
-    "./index.html": "cfddc188f56d7034e60ec2fe8f1592f68d45a356",
-    "./main.js": "6a593544a01542105f92d3067c64387700710774",
+    "./index.html": "4fc1141deb3804cb781e70b47b466ccdc162c2f0",
+    "./main.js": "95aca177327c0b5789033ae290beb86d88940744",
     "./polyfills.js": "d45c76c5960bab3ace7fd6d211b9579456241f8a",
-    "./styles.css": "ad6fba08b9999b621f678725f0fab49029d259e6"
+    "./styles.css": "2caa340e203370d4e8cdb63b0a0d7afb6eaf19a5"
   },
   "navigationUrls": [
     {
