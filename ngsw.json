@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1751953573270,
+  "timestamp": 1751955091462,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -93,6 +93,7 @@
         "./assets/material-symbols-outlined.woff2",
         "./assets/material-symbols-rounded.woff2",
         "./assets/material-symbols-sharp.woff2",
+        "./assets/material-symbols.css",
         "./assets/mocks/building1.jpg",
         "./assets/mocks/building2.jpg",
         "./assets/mocks/building3.jpg",
@@ -178,6 +179,7 @@
     "./assets/material-symbols-outlined.woff2": "bd542ec76d745a9c7f916eb2628c266e26daed5d",
     "./assets/material-symbols-rounded.woff2": "81b53031546fbed2a135676294af73f9f1d74722",
     "./assets/material-symbols-sharp.woff2": "ddf66c9927d80efeffc73c76472142cacaae7fba",
+    "./assets/material-symbols.css": "ef3b5b997fdbaa68f4530042143533b070895a29",
     "./assets/mocks/building1.jpg": "9170087fb243e25d0dbd5a29c58aafd4e1a4daee",
     "./assets/mocks/building2.jpg": "9fcdd5204d4294effd515b8b97fac937f494d7e4",
     "./assets/mocks/building3.jpg": "782111d26faa182f2c163fd972a021357fd384c8",
@@ -193,11 +195,11 @@
     "./assets/tick.svg": "6cf0d60587d8a17cc39b91b6d1ba6743f45cb91f",
     "./assets/tick_success.svg": "84c88546933b8055d960b3194eca112f05ae685f",
     "./favicon.ico": "4e23d0f9b6ddaf3c9ddef90dbaed2342941297b5",
-    "./index.html": "4c309d5d0d2d19979784433e613a46d755291d00",
-    "./main.js": "a5d0df2f42fcf2fbb3e3fca94766cd277fcd0609",
+    "./index.html": "74fda7a08da697f6263bd2e277d6b994153fa49b",
+    "./main.js": "d59e5b581ed2e355b1a7efcdd98d029df2d429b0",
     "./manifest.webmanifest": "2014fddbdc89ea5ee44c8f7270013dada56d40e1",
     "./polyfills.js": "bc1e9994654c5f6b2b79941f98e76ced44787752",
-    "./styles.css": "d3f383f66a18235301efc61f05059087ed2c2d30"
+    "./styles.css": "f60e42c2a8150a2ea159516a1ef8b51245c7594c"
   },
   "navigationUrls": [
     {
