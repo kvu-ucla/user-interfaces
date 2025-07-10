@@ -56,26 +56,6 @@ var __toESM = (mod4, isNodeMode, target) => (target = mod4 != null ? __create(__
   isNodeMode || !mod4 || !mod4.__esModule ? __defProp(target, "default", { value: mod4, enumerable: true }) : target,
   mod4
 ));
-var __async = (__this, __arguments, generator2) => {
-  return new Promise((resolve, reject) => {
-    var fulfilled = (value) => {
-      try {
-        step4(generator2.next(value));
-      } catch (e2) {
-        reject(e2);
-      }
-    };
-    var rejected = (value) => {
-      try {
-        step4(generator2.throw(value));
-      } catch (e2) {
-        reject(e2);
-      }
-    };
-    var step4 = (x3) => x3.done ? resolve(x3.value) : Promise.resolve(x3.value).then(fulfilled, rejected);
-    step4((generator2 = generator2.apply(__this, __arguments)).next());
-  });
-};
 
 // node_modules/long/src/long.js
 var require_long = __commonJS({
@@ -20301,65 +20281,59 @@ function triggerDeferBlock(triggerType, lView, tNode) {
       }
   }
 }
-function triggerHydrationFromBlockName(injector, blockName, replayQueuedEventsFn) {
-  return __async(this, null, function* () {
-    const dehydratedBlockRegistry = injector.get(DEHYDRATED_BLOCK_REGISTRY);
-    const blocksBeingHydrated = dehydratedBlockRegistry.hydrating;
-    if (blocksBeingHydrated.has(blockName)) {
-      return;
-    }
-    const { parentBlockPromise, hydrationQueue } = getParentBlockHydrationQueue(blockName, injector);
-    if (hydrationQueue.length === 0)
-      return;
-    if (parentBlockPromise !== null) {
-      hydrationQueue.shift();
-    }
-    populateHydratingStateForQueue(dehydratedBlockRegistry, hydrationQueue);
-    if (parentBlockPromise !== null) {
-      yield parentBlockPromise;
-    }
-    const topmostParentBlock = hydrationQueue[0];
-    if (dehydratedBlockRegistry.has(topmostParentBlock)) {
-      yield triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn);
-    } else {
-      dehydratedBlockRegistry.awaitParentBlock(topmostParentBlock, () => __async(null, null, function* () {
-        return yield triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn);
-      }));
-    }
-  });
+async function triggerHydrationFromBlockName(injector, blockName, replayQueuedEventsFn) {
+  const dehydratedBlockRegistry = injector.get(DEHYDRATED_BLOCK_REGISTRY);
+  const blocksBeingHydrated = dehydratedBlockRegistry.hydrating;
+  if (blocksBeingHydrated.has(blockName)) {
+    return;
+  }
+  const { parentBlockPromise, hydrationQueue } = getParentBlockHydrationQueue(blockName, injector);
+  if (hydrationQueue.length === 0)
+    return;
+  if (parentBlockPromise !== null) {
+    hydrationQueue.shift();
+  }
+  populateHydratingStateForQueue(dehydratedBlockRegistry, hydrationQueue);
+  if (parentBlockPromise !== null) {
+    await parentBlockPromise;
+  }
+  const topmostParentBlock = hydrationQueue[0];
+  if (dehydratedBlockRegistry.has(topmostParentBlock)) {
+    await triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn);
+  } else {
+    dehydratedBlockRegistry.awaitParentBlock(topmostParentBlock, async () => await triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn));
+  }
 }
-function triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn) {
-  return __async(this, null, function* () {
-    const dehydratedBlockRegistry = injector.get(DEHYDRATED_BLOCK_REGISTRY);
-    const blocksBeingHydrated = dehydratedBlockRegistry.hydrating;
-    const pendingTasks = injector.get(PendingTasksInternal);
-    const taskId = pendingTasks.add();
-    for (let blockQueueIdx = 0; blockQueueIdx < hydrationQueue.length; blockQueueIdx++) {
-      const dehydratedBlockId = hydrationQueue[blockQueueIdx];
-      const dehydratedDeferBlock = dehydratedBlockRegistry.get(dehydratedBlockId);
-      if (dehydratedDeferBlock != null) {
-        yield triggerResourceLoadingForHydration(dehydratedDeferBlock);
-        yield nextRender(injector);
-        if (deferBlockHasErrored(dehydratedDeferBlock)) {
-          removeDehydratedViewList(dehydratedDeferBlock);
-          cleanupRemainingHydrationQueue(hydrationQueue.slice(blockQueueIdx), dehydratedBlockRegistry);
-          break;
-        }
-        blocksBeingHydrated.get(dehydratedBlockId).resolve();
-      } else {
-        cleanupParentContainer(blockQueueIdx, hydrationQueue, dehydratedBlockRegistry);
+async function triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn) {
+  const dehydratedBlockRegistry = injector.get(DEHYDRATED_BLOCK_REGISTRY);
+  const blocksBeingHydrated = dehydratedBlockRegistry.hydrating;
+  const pendingTasks = injector.get(PendingTasksInternal);
+  const taskId = pendingTasks.add();
+  for (let blockQueueIdx = 0; blockQueueIdx < hydrationQueue.length; blockQueueIdx++) {
+    const dehydratedBlockId = hydrationQueue[blockQueueIdx];
+    const dehydratedDeferBlock = dehydratedBlockRegistry.get(dehydratedBlockId);
+    if (dehydratedDeferBlock != null) {
+      await triggerResourceLoadingForHydration(dehydratedDeferBlock);
+      await nextRender(injector);
+      if (deferBlockHasErrored(dehydratedDeferBlock)) {
+        removeDehydratedViewList(dehydratedDeferBlock);
         cleanupRemainingHydrationQueue(hydrationQueue.slice(blockQueueIdx), dehydratedBlockRegistry);
         break;
       }
+      blocksBeingHydrated.get(dehydratedBlockId).resolve();
+    } else {
+      cleanupParentContainer(blockQueueIdx, hydrationQueue, dehydratedBlockRegistry);
+      cleanupRemainingHydrationQueue(hydrationQueue.slice(blockQueueIdx), dehydratedBlockRegistry);
+      break;
     }
-    const lastBlockName = hydrationQueue[hydrationQueue.length - 1];
-    yield blocksBeingHydrated.get(lastBlockName)?.promise;
-    pendingTasks.remove(taskId);
-    if (replayQueuedEventsFn) {
-      replayQueuedEventsFn(hydrationQueue);
-    }
-    cleanupHydratedDeferBlocks(dehydratedBlockRegistry.get(lastBlockName), hydrationQueue, dehydratedBlockRegistry, injector.get(ApplicationRef));
-  });
+  }
+  const lastBlockName = hydrationQueue[hydrationQueue.length - 1];
+  await blocksBeingHydrated.get(lastBlockName)?.promise;
+  pendingTasks.remove(taskId);
+  if (replayQueuedEventsFn) {
+    replayQueuedEventsFn(hydrationQueue);
+  }
+  cleanupHydratedDeferBlocks(dehydratedBlockRegistry.get(lastBlockName), hydrationQueue, dehydratedBlockRegistry, injector.get(ApplicationRef));
 }
 function deferBlockHasErrored(deferBlock) {
   return getLDeferBlockDetails(deferBlock.lView, deferBlock.tNode)[DEFER_BLOCK_STATE] === DeferBlockState.Error;
@@ -20386,14 +20360,12 @@ function populateHydratingStateForQueue(registry, queue) {
 function nextRender(injector) {
   return new Promise((resolveFn) => afterNextRender(resolveFn, { injector }));
 }
-function triggerResourceLoadingForHydration(dehydratedBlock) {
-  return __async(this, null, function* () {
-    const { tNode, lView } = dehydratedBlock;
-    const lDetails = getLDeferBlockDetails(lView, tNode);
-    return new Promise((resolve) => {
-      onDeferBlockCompletion(lDetails, resolve);
-      triggerDeferBlock(2, lView, tNode);
-    });
+async function triggerResourceLoadingForHydration(dehydratedBlock) {
+  const { tNode, lView } = dehydratedBlock;
+  const lDetails = getLDeferBlockDetails(lView, tNode);
+  return new Promise((resolve) => {
+    onDeferBlockCompletion(lDetails, resolve);
+    triggerDeferBlock(2, lView, tNode);
   });
 }
 function onDeferBlockCompletion(lDetails, callback) {
@@ -25619,6 +25591,20 @@ var ChangeDetectionSchedulerImpl = class _ChangeDetectionSchedulerImpl {
     args: [{ providedIn: "root" }]
   }], () => [], null);
 })();
+function provideZonelessChangeDetection() {
+  performanceMarkFeature("NgZoneless");
+  if ((typeof ngDevMode === "undefined" || ngDevMode) && typeof Zone !== "undefined" && Zone) {
+    const message2 = formatRuntimeError(914, `The application is using zoneless change detection, but is still loading Zone.js. Consider removing Zone.js to get the full benefits of zoneless. In applications using the Angular CLI, Zone.js is typically included in the "polyfills" section of the angular.json file.`);
+    console.warn(message2);
+  }
+  return makeEnvironmentProviders([
+    { provide: ChangeDetectionScheduler, useExisting: ChangeDetectionSchedulerImpl },
+    { provide: NgZone, useClass: NoopNgZone },
+    { provide: ZONELESS_ENABLED, useValue: true },
+    { provide: SCHEDULE_IN_ROOT_ZONE, useValue: false },
+    typeof ngDevMode === "undefined" || ngDevMode ? [{ provide: PROVIDED_ZONELESS, useValue: true }] : []
+  ]);
+}
 function getGlobalLocale() {
   if (false) {
     return goog.LOCALE;
@@ -26016,54 +26002,52 @@ var ResourceImpl = class extends BaseWritableResource {
       stream: void 0
     });
   }
-  loadEffect() {
-    return __async(this, null, function* () {
-      const extRequest = this.extRequest();
-      const { status: currentStatus, previousStatus } = untracked2(this.state);
-      if (extRequest.request === void 0) {
-        return;
-      } else if (currentStatus !== "loading") {
+  async loadEffect() {
+    const extRequest = this.extRequest();
+    const { status: currentStatus, previousStatus } = untracked2(this.state);
+    if (extRequest.request === void 0) {
+      return;
+    } else if (currentStatus !== "loading") {
+      return;
+    }
+    this.abortInProgressLoad();
+    let resolvePendingTask = this.resolvePendingTask = this.pendingTasks.add();
+    const { signal: abortSignal } = this.pendingController = new AbortController();
+    try {
+      const stream = await untracked2(() => {
+        return this.loaderFn({
+          params: extRequest.request,
+          // TODO(alxhub): cleanup after g3 removal of `request` alias.
+          request: extRequest.request,
+          abortSignal,
+          previous: {
+            status: previousStatus
+          }
+        });
+      });
+      if (abortSignal.aborted || untracked2(this.extRequest) !== extRequest) {
         return;
       }
-      this.abortInProgressLoad();
-      let resolvePendingTask = this.resolvePendingTask = this.pendingTasks.add();
-      const { signal: abortSignal } = this.pendingController = new AbortController();
-      try {
-        const stream = yield untracked2(() => {
-          return this.loaderFn({
-            params: extRequest.request,
-            // TODO(alxhub): cleanup after g3 removal of `request` alias.
-            request: extRequest.request,
-            abortSignal,
-            previous: {
-              status: previousStatus
-            }
-          });
-        });
-        if (abortSignal.aborted || untracked2(this.extRequest) !== extRequest) {
-          return;
-        }
-        this.state.set({
-          extRequest,
-          status: "resolved",
-          previousStatus: "resolved",
-          stream
-        });
-      } catch (err) {
-        if (abortSignal.aborted || untracked2(this.extRequest) !== extRequest) {
-          return;
-        }
-        this.state.set({
-          extRequest,
-          status: "resolved",
-          previousStatus: "error",
-          stream: signal({ error: encapsulateResourceError(err) })
-        });
-      } finally {
-        resolvePendingTask?.();
-        resolvePendingTask = void 0;
+      this.state.set({
+        extRequest,
+        status: "resolved",
+        previousStatus: "resolved",
+        stream
+      });
+    } catch (err) {
+      if (abortSignal.aborted || untracked2(this.extRequest) !== extRequest) {
+        return;
       }
-    });
+      this.state.set({
+        extRequest,
+        status: "resolved",
+        previousStatus: "error",
+        stream: signal({ error: encapsulateResourceError(err) })
+      });
+    } finally {
+      resolvePendingTask?.();
+      resolvePendingTask = void 0;
+    }
   }
   abortInProgressLoad() {
     untracked2(() => this.pendingController?.abort());
@@ -32754,18 +32738,16 @@ function assertNoLoaderParamsWithoutLoader(dir, imageLoader) {
     console.warn(formatRuntimeError(2963, `${imgDirectiveDetails(dir.ngSrc)} the \`loaderParams\` attribute is present but no image loader is configured (i.e. the default one is being used), which means that the loaderParams data will not be consumed and will not affect the URL. To fix this, provide a custom loader or remove the \`loaderParams\` attribute from the image.`));
   }
 }
-function assetPriorityCountBelowThreshold(appRef) {
-  return __async(this, null, function* () {
-    if (IMGS_WITH_PRIORITY_ATTR_COUNT === 0) {
-      IMGS_WITH_PRIORITY_ATTR_COUNT++;
-      yield appRef.whenStable();
-      if (IMGS_WITH_PRIORITY_ATTR_COUNT > PRIORITY_COUNT_THRESHOLD) {
-        console.warn(formatRuntimeError(2966, `NgOptimizedImage: The "priority" attribute is set to true more than ${PRIORITY_COUNT_THRESHOLD} times (${IMGS_WITH_PRIORITY_ATTR_COUNT} times). Marking too many images as "high" priority can hurt your application's LCP (https://web.dev/lcp). "Priority" should only be set on the image expected to be the page's LCP element.`));
-      }
-    } else {
-      IMGS_WITH_PRIORITY_ATTR_COUNT++;
+async function assetPriorityCountBelowThreshold(appRef) {
+  if (IMGS_WITH_PRIORITY_ATTR_COUNT === 0) {
+    IMGS_WITH_PRIORITY_ATTR_COUNT++;
+    await appRef.whenStable();
+    if (IMGS_WITH_PRIORITY_ATTR_COUNT > PRIORITY_COUNT_THRESHOLD) {
+      console.warn(formatRuntimeError(2966, `NgOptimizedImage: The "priority" attribute is set to true more than ${PRIORITY_COUNT_THRESHOLD} times (${IMGS_WITH_PRIORITY_ATTR_COUNT} times). Marking too many images as "high" priority can hurt your application's LCP (https://web.dev/lcp). "Priority" should only be set on the image expected to be the page's LCP element.`));
     }
-  });
+  } else {
+    IMGS_WITH_PRIORITY_ATTR_COUNT++;
+  }
 }
 function assertPlaceholderDimensions(dir, imgElement) {
   const computedStyle = window.getComputedStyle(imgElement);
@@ -35137,123 +35119,121 @@ var FetchBackend = class _FetchBackend {
       return () => aborter.abort();
     });
   }
-  doRequest(request, signal3, observer) {
-    return __async(this, null, function* () {
-      const init3 = this.createRequestInit(request);
-      let response;
+  async doRequest(request, signal3, observer) {
+    const init3 = this.createRequestInit(request);
+    let response;
+    try {
+      const fetchPromise = this.ngZone.runOutsideAngular(() => this.fetchImpl(request.urlWithParams, __spreadValues({
+        signal: signal3
+      }, init3)));
+      silenceSuperfluousUnhandledPromiseRejection(fetchPromise);
+      observer.next({
+        type: HttpEventType.Sent
+      });
+      response = await fetchPromise;
+    } catch (error) {
+      observer.error(new HttpErrorResponse({
+        error,
+        status: error.status ?? 0,
+        statusText: error.statusText,
+        url: request.urlWithParams,
+        headers: error.headers
+      }));
+      return;
+    }
+    const headers = new HttpHeaders(response.headers);
+    const statusText = response.statusText;
+    const url = getResponseUrl$1(response) ?? request.urlWithParams;
+    let status = response.status;
+    let body = null;
+    if (request.reportProgress) {
+      observer.next(new HttpHeaderResponse({
+        headers,
+        status,
+        statusText,
+        url
+      }));
+    }
+    if (response.body) {
+      const contentLength = response.headers.get("content-length");
+      const chunks = [];
+      const reader = response.body.getReader();
+      let receivedLength = 0;
+      let decoder;
+      let partialText;
+      const reqZone = typeof Zone !== "undefined" && Zone.current;
+      let canceled = false;
+      await this.ngZone.runOutsideAngular(async () => {
+        while (true) {
+          if (this.destroyed) {
+            await reader.cancel();
+            canceled = true;
+            break;
+          }
+          const {
+            done,
+            value
+          } = await reader.read();
+          if (done) {
+            break;
+          }
+          chunks.push(value);
+          receivedLength += value.length;
+          if (request.reportProgress) {
+            partialText = request.responseType === "text" ? (partialText ?? "") + (decoder ??= new TextDecoder()).decode(value, {
+              stream: true
+            }) : void 0;
+            const reportProgress = () => observer.next({
+              type: HttpEventType.DownloadProgress,
+              total: contentLength ? +contentLength : void 0,
+              loaded: receivedLength,
+              partialText
+            });
+            reqZone ? reqZone.run(reportProgress) : reportProgress();
+          }
+        }
+      });
+      if (canceled) {
+        observer.complete();
+        return;
+      }
+      const chunksAll = this.concatChunks(chunks, receivedLength);
       try {
-        const fetchPromise = this.ngZone.runOutsideAngular(() => this.fetchImpl(request.urlWithParams, __spreadValues({
-          signal: signal3
-        }, init3)));
-        silenceSuperfluousUnhandledPromiseRejection(fetchPromise);
-        observer.next({
-          type: HttpEventType.Sent
-        });
-        response = yield fetchPromise;
+        const contentType = response.headers.get(CONTENT_TYPE_HEADER) ?? "";
+        body = this.parseBody(request, chunksAll, contentType);
       } catch (error) {
         observer.error(new HttpErrorResponse({
           error,
-          status: error.status ?? 0,
-          statusText: error.statusText,
-          url: request.urlWithParams,
-          headers: error.headers
+          headers: new HttpHeaders(response.headers),
+          status: response.status,
+          statusText: response.statusText,
+          url: getResponseUrl$1(response) ?? request.urlWithParams
         }));
         return;
       }
-      const headers = new HttpHeaders(response.headers);
-      const statusText = response.statusText;
-      const url = getResponseUrl$1(response) ?? request.urlWithParams;
-      let status = response.status;
-      let body = null;
-      if (request.reportProgress) {
-        observer.next(new HttpHeaderResponse({
-          headers,
-          status,
-          statusText,
-          url
-        }));
-      }
-      if (response.body) {
-        const contentLength = response.headers.get("content-length");
-        const chunks = [];
-        const reader = response.body.getReader();
-        let receivedLength = 0;
-        let decoder;
-        let partialText;
-        const reqZone = typeof Zone !== "undefined" && Zone.current;
-        let canceled = false;
-        yield this.ngZone.runOutsideAngular(() => __async(this, null, function* () {
-          while (true) {
-            if (this.destroyed) {
-              yield reader.cancel();
-              canceled = true;
-              break;
-            }
-            const {
-              done,
-              value
-            } = yield reader.read();
-            if (done) {
-              break;
-            }
-            chunks.push(value);
-            receivedLength += value.length;
-            if (request.reportProgress) {
-              partialText = request.responseType === "text" ? (partialText ?? "") + (decoder ??= new TextDecoder()).decode(value, {
-                stream: true
-              }) : void 0;
-              const reportProgress = () => observer.next({
-                type: HttpEventType.DownloadProgress,
-                total: contentLength ? +contentLength : void 0,
-                loaded: receivedLength,
-                partialText
-              });
-              reqZone ? reqZone.run(reportProgress) : reportProgress();
-            }
-          }
-        }));
-        if (canceled) {
-          observer.complete();
-          return;
-        }
-        const chunksAll = this.concatChunks(chunks, receivedLength);
-        try {
-          const contentType = response.headers.get(CONTENT_TYPE_HEADER) ?? "";
-          body = this.parseBody(request, chunksAll, contentType);
-        } catch (error) {
-          observer.error(new HttpErrorResponse({
-            error,
-            headers: new HttpHeaders(response.headers),
-            status: response.status,
-            statusText: response.statusText,
-            url: getResponseUrl$1(response) ?? request.urlWithParams
-          }));
-          return;
-        }
-      }
-      if (status === 0) {
-        status = body ? HTTP_STATUS_CODE_OK : 0;
-      }
-      const ok = status >= 200 && status < 300;
-      if (ok) {
-        observer.next(new HttpResponse({
-          body,
-          headers,
-          status,
-          statusText,
-          url
-        }));
-        observer.complete();
-      } else {
-        observer.error(new HttpErrorResponse({
-          error: body,
-          headers,
-          status,
-          statusText,
-          url
-        }));
-      }
-    });
+    }
+    if (status === 0) {
+      status = body ? HTTP_STATUS_CODE_OK : 0;
+    }
+    const ok = status >= 200 && status < 300;
+    if (ok) {
+      observer.next(new HttpResponse({
+        body,
+        headers,
+        status,
+        statusText,
+        url
+      }));
+      observer.complete();
+    } else {
+      observer.error(new HttpErrorResponse({
+        error: body,
+        headers,
+        status,
+        statusText,
+        url
+      }));
+    }
   }
   parseBody(request, binContent, contentType) {
     switch (request.responseType) {
@@ -53512,8 +53492,8 @@ var RouterScroller = class _RouterScroller {
     });
   }
   scheduleScrollEvent(routerEvent, anchor) {
-    this.zone.runOutsideAngular(() => __async(this, null, function* () {
-      yield new Promise((resolve) => {
+    this.zone.runOutsideAngular(async () => {
+      await new Promise((resolve) => {
         setTimeout(resolve);
         if (typeof requestAnimationFrame !== "undefined") {
           requestAnimationFrame(resolve);
@@ -53522,7 +53502,7 @@ var RouterScroller = class _RouterScroller {
       this.zone.run(() => {
         this.transitions.events.next(new Scroll(routerEvent, this.lastSource === "popstate" ? this.store[this.restoredId] : null, anchor));
       });
-    }));
+    });
   }
   /** @docs-private */
   ngOnDestroy() {
@@ -74284,7 +74264,7 @@ function instrumentFetch(onFetchResolved, skipNativeFetchCheck = false) {
         triggerHandlers("fetch", __spreadValues({}, handlerData));
       }
       return originalFetch.apply(GLOBAL_OBJ, args).then(
-        (response) => __async(null, null, function* () {
+        async (response) => {
           if (onFetchResolved) {
             onFetchResolved(response);
           } else {
@@ -74294,7 +74274,7 @@ function instrumentFetch(onFetchResolved, skipNativeFetchCheck = false) {
             }));
           }
           return response;
-        }),
+        },
         (error) => {
           triggerHandlers("fetch", __spreadProps(__spreadValues({}, handlerData), {
             endTimestamp: timestampInSeconds() * 1e3,
@@ -74317,45 +74297,43 @@ function instrumentFetch(onFetchResolved, skipNativeFetchCheck = false) {
     };
   });
 }
-function resolveResponse(res, onFinishedResolving) {
-  return __async(this, null, function* () {
-    if (res?.body) {
-      const body = res.body;
-      const responseReader = body.getReader();
-      const maxFetchDurationTimeout = setTimeout(
-        () => {
+async function resolveResponse(res, onFinishedResolving) {
+  if (res?.body) {
+    const body = res.body;
+    const responseReader = body.getReader();
+    const maxFetchDurationTimeout = setTimeout(
+      () => {
+        body.cancel().then(null, () => {
+        });
+      },
+      90 * 1e3
+      // 90s
+    );
+    let readingActive = true;
+    while (readingActive) {
+      let chunkTimeout;
+      try {
+        chunkTimeout = setTimeout(() => {
           body.cancel().then(null, () => {
           });
-        },
-        90 * 1e3
-        // 90s
-      );
-      let readingActive = true;
-      while (readingActive) {
-        let chunkTimeout;
-        try {
-          chunkTimeout = setTimeout(() => {
-            body.cancel().then(null, () => {
-            });
-          }, 5e3);
-          const { done } = yield responseReader.read();
-          clearTimeout(chunkTimeout);
-          if (done) {
-            onFinishedResolving();
-            readingActive = false;
-          }
-        } catch (error) {
+        }, 5e3);
+        const { done } = await responseReader.read();
+        clearTimeout(chunkTimeout);
+        if (done) {
+          onFinishedResolving();
           readingActive = false;
-        } finally {
-          clearTimeout(chunkTimeout);
         }
+      } catch (error) {
+        readingActive = false;
+      } finally {
+        clearTimeout(chunkTimeout);
       }
-      clearTimeout(maxFetchDurationTimeout);
-      responseReader.releaseLock();
-      body.cancel().then(null, () => {
-      });
     }
-  });
+    clearTimeout(maxFetchDurationTimeout);
+    responseReader.releaseLock();
+    body.cancel().then(null, () => {
+    });
+  }
 }
 function streamHandler(response) {
   let clonedResponseForResolving;
@@ -82708,15 +82686,13 @@ var EventBufferArray = class {
     this.events = [];
   }
   /** @inheritdoc */
-  addEvent(event) {
-    return __async(this, null, function* () {
-      const eventSize = JSON.stringify(event).length;
-      this._totalSize += eventSize;
-      if (this._totalSize > REPLAY_MAX_EVENT_BUFFER_SIZE) {
-        throw new EventBufferSizeExceededError();
-      }
-      this.events.push(event);
-    });
+  async addEvent(event) {
+    const eventSize = JSON.stringify(event).length;
+    this._totalSize += eventSize;
+    if (this._totalSize > REPLAY_MAX_EVENT_BUFFER_SIZE) {
+      throw new EventBufferSizeExceededError();
+    }
+    this.events.push(event);
   }
   /** @inheritdoc */
   finish() {
@@ -82890,13 +82866,11 @@ var EventBufferCompressionWorker = class {
   /**
    * Finish the request and return the compressed data from the worker.
    */
-  _finishRequest() {
-    return __async(this, null, function* () {
-      const response = yield this._worker.postMessage("finish");
-      this._earliestTimestamp = null;
-      this._totalSize = 0;
-      return response;
-    });
+  async _finishRequest() {
+    const response = await this._worker.postMessage("finish");
+    this._earliestTimestamp = null;
+    this._totalSize = 0;
+    return response;
   }
 };
 var EventBufferProxy = class {
@@ -82953,46 +82927,40 @@ var EventBufferProxy = class {
     return this._used.addEvent(event);
   }
   /** @inheritDoc */
-  finish() {
-    return __async(this, null, function* () {
-      yield this.ensureWorkerIsLoaded();
-      return this._used.finish();
-    });
+  async finish() {
+    await this.ensureWorkerIsLoaded();
+    return this._used.finish();
   }
   /** Ensure the worker has loaded. */
   ensureWorkerIsLoaded() {
     return this._ensureWorkerIsLoadedPromise;
   }
   /** Actually check if the worker has been loaded. */
-  _ensureWorkerIsLoaded() {
-    return __async(this, null, function* () {
-      try {
-        yield this._compression.ensureReady();
-      } catch (error) {
-        DEBUG_BUILD4 && logger2.exception(error, "Failed to load the compression worker, falling back to simple buffer");
-        return;
-      }
-      yield this._switchToCompressionWorker();
-    });
+  async _ensureWorkerIsLoaded() {
+    try {
+      await this._compression.ensureReady();
+    } catch (error) {
+      DEBUG_BUILD4 && logger2.exception(error, "Failed to load the compression worker, falling back to simple buffer");
+      return;
+    }
+    await this._switchToCompressionWorker();
   }
   /** Switch the used buffer to the compression worker. */
-  _switchToCompressionWorker() {
-    return __async(this, null, function* () {
-      const { events, hasCheckout, waitForCheckout } = this._fallback;
-      const addEventPromises = [];
-      for (const event of events) {
-        addEventPromises.push(this._compression.addEvent(event));
-      }
-      this._compression.hasCheckout = hasCheckout;
-      this._compression.waitForCheckout = waitForCheckout;
-      this._used = this._compression;
-      try {
-        yield Promise.all(addEventPromises);
-        this._fallback.clear();
-      } catch (error) {
-        DEBUG_BUILD4 && logger2.exception(error, "Failed to add events when switching buffers.");
-      }
-    });
+  async _switchToCompressionWorker() {
+    const { events, hasCheckout, waitForCheckout } = this._fallback;
+    const addEventPromises = [];
+    for (const event of events) {
+      addEventPromises.push(this._compression.addEvent(event));
+    }
+    this._compression.hasCheckout = hasCheckout;
+    this._compression.waitForCheckout = waitForCheckout;
+    this._used = this._compression;
+    try {
+      await Promise.all(addEventPromises);
+      this._fallback.clear();
+    } catch (error) {
+      DEBUG_BUILD4 && logger2.exception(error, "Failed to add events when switching buffers.");
+    }
   }
 };
 function createEventBuffer({
@@ -83172,43 +83140,41 @@ function addEvent(replay, event, isCheckout) {
   }
   return _addEvent(replay, event, isCheckout);
 }
-function _addEvent(replay, event, isCheckout) {
-  return __async(this, null, function* () {
-    const { eventBuffer } = replay;
-    if (!eventBuffer || eventBuffer.waitForCheckout && !isCheckout) {
+async function _addEvent(replay, event, isCheckout) {
+  const { eventBuffer } = replay;
+  if (!eventBuffer || eventBuffer.waitForCheckout && !isCheckout) {
+    return null;
+  }
+  const isBufferMode = replay.recordingMode === "buffer";
+  try {
+    if (isCheckout && isBufferMode) {
+      eventBuffer.clear();
+    }
+    if (isCheckout) {
+      eventBuffer.hasCheckout = true;
+      eventBuffer.waitForCheckout = false;
+    }
+    const replayOptions = replay.getOptions();
+    const eventAfterPossibleCallback = maybeApplyCallback(event, replayOptions.beforeAddRecordingEvent);
+    if (!eventAfterPossibleCallback) {
+      return;
+    }
+    return await eventBuffer.addEvent(eventAfterPossibleCallback);
+  } catch (error) {
+    const isExceeded = error && error instanceof EventBufferSizeExceededError;
+    const reason = isExceeded ? "addEventSizeExceeded" : "addEvent";
+    if (isExceeded && isBufferMode) {
+      eventBuffer.clear();
+      eventBuffer.waitForCheckout = true;
       return null;
     }
-    const isBufferMode = replay.recordingMode === "buffer";
-    try {
-      if (isCheckout && isBufferMode) {
-        eventBuffer.clear();
-      }
-      if (isCheckout) {
-        eventBuffer.hasCheckout = true;
-        eventBuffer.waitForCheckout = false;
-      }
-      const replayOptions = replay.getOptions();
-      const eventAfterPossibleCallback = maybeApplyCallback(event, replayOptions.beforeAddRecordingEvent);
-      if (!eventAfterPossibleCallback) {
-        return;
-      }
-      return yield eventBuffer.addEvent(eventAfterPossibleCallback);
-    } catch (error) {
-      const isExceeded = error && error instanceof EventBufferSizeExceededError;
-      const reason = isExceeded ? "addEventSizeExceeded" : "addEvent";
-      if (isExceeded && isBufferMode) {
-        eventBuffer.clear();
-        eventBuffer.waitForCheckout = true;
-        return null;
-      }
-      replay.handleException(error);
-      yield replay.stop({ reason });
-      const client = getClient();
-      if (client) {
-        client.recordDroppedEvent("internal_sdk_error", "replay");
-      }
+    replay.handleException(error);
+    await replay.stop({ reason });
+    const client = getClient();
+    if (client) {
+      client.recordDroppedEvent("internal_sdk_error", "replay");
     }
-  });
+  }
 }
 function shouldAddEvent(replay, event) {
   if (!replay.eventBuffer || replay.isPaused() || !replay.isEnabled()) {
@@ -83281,13 +83247,13 @@ function handleErrorEvent(replay, event) {
   if (typeof beforeErrorSampling === "function" && !beforeErrorSampling(event)) {
     return;
   }
-  setTimeout2(() => __async(null, null, function* () {
+  setTimeout2(async () => {
     try {
-      yield replay.sendBufferedReplayOrFlush();
+      await replay.sendBufferedReplayOrFlush();
     } catch (err) {
       replay.handleException(err);
     }
-  }));
+  });
 }
 function handleBeforeSendEvent(replay) {
   return (event) => {
@@ -83730,16 +83696,14 @@ function getFullUrl(url, baseURI = WINDOW5.document.baseURI) {
   }
   return fullUrl;
 }
-function captureFetchBreadcrumbToReplay(breadcrumb, hint, options2) {
-  return __async(this, null, function* () {
-    try {
-      const data = yield _prepareFetchData(breadcrumb, hint, options2);
-      const result = makeNetworkReplayBreadcrumb("resource.fetch", data);
-      addNetworkBreadcrumb(options2.replay, result);
-    } catch (error) {
-      DEBUG_BUILD4 && logger2.exception(error, "Failed to capture fetch breadcrumb");
-    }
-  });
+async function captureFetchBreadcrumbToReplay(breadcrumb, hint, options2) {
+  try {
+    const data = await _prepareFetchData(breadcrumb, hint, options2);
+    const result = makeNetworkReplayBreadcrumb("resource.fetch", data);
+    addNetworkBreadcrumb(options2.replay, result);
+  } catch (error) {
+    DEBUG_BUILD4 && logger2.exception(error, "Failed to capture fetch breadcrumb");
+  }
 }
 function enrichFetchBreadcrumb(breadcrumb, hint) {
   const { input: input3, response } = hint;
@@ -83753,30 +83717,28 @@ function enrichFetchBreadcrumb(breadcrumb, hint) {
     breadcrumb.data.response_body_size = resSize;
   }
 }
-function _prepareFetchData(breadcrumb, hint, options2) {
-  return __async(this, null, function* () {
-    const now2 = Date.now();
-    const { startTimestamp = now2, endTimestamp = now2 } = hint;
-    const {
-      url,
-      method,
-      status_code: statusCode = 0,
-      request_body_size: requestBodySize,
-      response_body_size: responseBodySize
-    } = breadcrumb.data;
-    const captureDetails = urlMatches(url, options2.networkDetailAllowUrls) && !urlMatches(url, options2.networkDetailDenyUrls);
-    const request = captureDetails ? _getRequestInfo(options2, hint.input, requestBodySize) : buildSkippedNetworkRequestOrResponse(requestBodySize);
-    const response = yield _getResponseInfo(captureDetails, options2, hint.response, responseBodySize);
-    return {
-      startTimestamp,
-      endTimestamp,
-      url,
-      method,
-      statusCode,
-      request,
-      response
-    };
-  });
+async function _prepareFetchData(breadcrumb, hint, options2) {
+  const now2 = Date.now();
+  const { startTimestamp = now2, endTimestamp = now2 } = hint;
+  const {
+    url,
+    method,
+    status_code: statusCode = 0,
+    request_body_size: requestBodySize,
+    response_body_size: responseBodySize
+  } = breadcrumb.data;
+  const captureDetails = urlMatches(url, options2.networkDetailAllowUrls) && !urlMatches(url, options2.networkDetailDenyUrls);
+  const request = captureDetails ? _getRequestInfo(options2, hint.input, requestBodySize) : buildSkippedNetworkRequestOrResponse(requestBodySize);
+  const response = await _getResponseInfo(captureDetails, options2, hint.response, responseBodySize);
+  return {
+    startTimestamp,
+    endTimestamp,
+    url,
+    method,
+    statusCode,
+    request,
+    response
+  };
 }
 function _getRequestInfo({ networkCaptureBodies, networkRequestHeaders }, input3, requestBodySize) {
   const headers = input3 ? getRequestHeaders(input3, networkRequestHeaders) : {};
@@ -83791,30 +83753,28 @@ function _getRequestInfo({ networkCaptureBodies, networkRequestHeaders }, input3
   }
   return data;
 }
-function _getResponseInfo(_0, _1, _22, _3) {
-  return __async(this, arguments, function* (captureDetails, {
+async function _getResponseInfo(captureDetails, {
+  networkCaptureBodies,
+  networkResponseHeaders
+}, response, responseBodySize) {
+  if (!captureDetails && responseBodySize !== void 0) {
+    return buildSkippedNetworkRequestOrResponse(responseBodySize);
+  }
+  const headers = response ? getAllHeaders(response.headers, networkResponseHeaders) : {};
+  if (!response || !networkCaptureBodies && responseBodySize !== void 0) {
+    return buildNetworkRequestOrResponse(headers, responseBodySize, void 0);
+  }
+  const [bodyText, warning] = await _parseFetchResponseBody(response);
+  const result = getResponseData(bodyText, {
     networkCaptureBodies,
-    networkResponseHeaders
-  }, response, responseBodySize) {
-    if (!captureDetails && responseBodySize !== void 0) {
-      return buildSkippedNetworkRequestOrResponse(responseBodySize);
-    }
-    const headers = response ? getAllHeaders(response.headers, networkResponseHeaders) : {};
-    if (!response || !networkCaptureBodies && responseBodySize !== void 0) {
-      return buildNetworkRequestOrResponse(headers, responseBodySize, void 0);
-    }
-    const [bodyText, warning] = yield _parseFetchResponseBody(response);
-    const result = getResponseData(bodyText, {
-      networkCaptureBodies,
-      responseBodySize,
-      captureDetails,
-      headers
-    });
-    if (warning) {
-      return mergeWarning(result, warning);
-    }
-    return result;
+    responseBodySize,
+    captureDetails,
+    headers
   });
+  if (warning) {
+    return mergeWarning(result, warning);
+  }
+  return result;
 }
 function getResponseData(bodyText, {
   networkCaptureBodies,
@@ -83836,24 +83796,22 @@ function getResponseData(bodyText, {
     return buildNetworkRequestOrResponse(headers, responseBodySize, void 0);
   }
 }
-function _parseFetchResponseBody(response) {
-  return __async(this, null, function* () {
-    const res = _tryCloneResponse(response);
-    if (!res) {
-      return [void 0, "BODY_PARSE_ERROR"];
+async function _parseFetchResponseBody(response) {
+  const res = _tryCloneResponse(response);
+  if (!res) {
+    return [void 0, "BODY_PARSE_ERROR"];
+  }
+  try {
+    const text = await _tryGetResponseText(res);
+    return [text];
+  } catch (error) {
+    if (error instanceof Error && error.message.indexOf("Timeout") > -1) {
+      DEBUG_BUILD4 && logger2.warn("Parsing text body from response timed out");
+      return [void 0, "BODY_PARSE_TIMEOUT"];
     }
-    try {
-      const text = yield _tryGetResponseText(res);
-      return [text];
-    } catch (error) {
-      if (error instanceof Error && error.message.indexOf("Timeout") > -1) {
-        DEBUG_BUILD4 && logger2.warn("Parsing text body from response timed out");
-        return [void 0, "BODY_PARSE_TIMEOUT"];
-      }
-      DEBUG_BUILD4 && logger2.exception(error, "Failed to get text body from response");
-      return [void 0, "BODY_PARSE_ERROR"];
-    }
-  });
+    DEBUG_BUILD4 && logger2.exception(error, "Failed to get text body from response");
+    return [void 0, "BODY_PARSE_ERROR"];
+  }
 }
 function getAllHeaders(headers, allowedHeaders) {
   const allHeaders = {};
@@ -83905,21 +83863,17 @@ function _tryGetResponseText(response) {
     ).finally(() => clearTimeout(timeout));
   });
 }
-function _getResponseText(response) {
-  return __async(this, null, function* () {
-    return yield response.text();
-  });
+async function _getResponseText(response) {
+  return await response.text();
 }
-function captureXhrBreadcrumbToReplay(breadcrumb, hint, options2) {
-  return __async(this, null, function* () {
-    try {
-      const data = _prepareXhrData(breadcrumb, hint, options2);
-      const result = makeNetworkReplayBreadcrumb("resource.xhr", data);
-      addNetworkBreadcrumb(options2.replay, result);
-    } catch (error) {
-      DEBUG_BUILD4 && logger2.exception(error, "Failed to capture xhr breadcrumb");
-    }
-  });
+async function captureXhrBreadcrumbToReplay(breadcrumb, hint, options2) {
+  try {
+    const data = _prepareXhrData(breadcrumb, hint, options2);
+    const result = makeNetworkReplayBreadcrumb("resource.xhr", data);
+    addNetworkBreadcrumb(options2.replay, result);
+  } catch (error) {
+    DEBUG_BUILD4 && logger2.exception(error, "Failed to capture xhr breadcrumb");
+  }
 }
 function enrichXhrBreadcrumb(breadcrumb, hint) {
   const { xhr, input: input3 } = hint;
@@ -84114,35 +84068,33 @@ function addGlobalListeners(replay, { autoFlushOnFeedback }) {
     client.on("spanEnd", (span) => {
       replay.lastActiveSpan = span;
     });
-    client.on("beforeSendFeedback", (feedbackEvent, options2) => __async(null, null, function* () {
+    client.on("beforeSendFeedback", async (feedbackEvent, options2) => {
       const replayId = replay.getSessionId();
       if (options2?.includeReplay && replay.isEnabled() && replayId && feedbackEvent.contexts?.feedback) {
         if (feedbackEvent.contexts.feedback.source === "api" && autoFlushOnFeedback) {
-          yield replay.flush();
+          await replay.flush();
         }
         feedbackEvent.contexts.feedback.replay_id = replayId;
       }
-    }));
+    });
     if (autoFlushOnFeedback) {
-      client.on("openFeedbackWidget", () => __async(null, null, function* () {
-        yield replay.flush();
-      }));
+      client.on("openFeedbackWidget", async () => {
+        await replay.flush();
+      });
     }
   }
 }
-function addMemoryEntry(replay) {
-  return __async(this, null, function* () {
-    try {
-      return Promise.all(
-        createPerformanceSpans(replay, [
-          // @ts-expect-error memory doesn't exist on type Performance as the API is non-standard (we check that it exists above)
-          createMemoryEntry(WINDOW5.performance.memory)
-        ])
-      );
-    } catch (error) {
-      return [];
-    }
-  });
+async function addMemoryEntry(replay) {
+  try {
+    return Promise.all(
+      createPerformanceSpans(replay, [
+        // @ts-expect-error memory doesn't exist on type Performance as the API is non-standard (we check that it exists above)
+        createMemoryEntry(WINDOW5.performance.memory)
+      ])
+    );
+  } catch (error) {
+    return [];
+  }
 }
 function createMemoryEntry(memoryEntry) {
   const { jsHeapSizeLimit, totalJSHeapSize, usedJSHeapSize } = memoryEntry;
@@ -84288,100 +84240,96 @@ function prepareRecordingData({
   }
   return payloadWithSequence;
 }
-function prepareReplayEvent(_0) {
-  return __async(this, arguments, function* ({
-    client,
+async function prepareReplayEvent({
+  client,
+  scope,
+  replayId: event_id,
+  event
+}) {
+  const integrations = typeof client["_integrations"] === "object" && client["_integrations"] !== null && !Array.isArray(client["_integrations"]) ? Object.keys(client["_integrations"]) : void 0;
+  const eventHint = { event_id, integrations };
+  client.emit("preprocessEvent", event, eventHint);
+  const preparedEvent = await prepareEvent(
+    client.getOptions(),
+    event,
+    eventHint,
     scope,
-    replayId: event_id,
-    event
-  }) {
-    const integrations = typeof client["_integrations"] === "object" && client["_integrations"] !== null && !Array.isArray(client["_integrations"]) ? Object.keys(client["_integrations"]) : void 0;
-    const eventHint = { event_id, integrations };
-    client.emit("preprocessEvent", event, eventHint);
-    const preparedEvent = yield prepareEvent(
-      client.getOptions(),
-      event,
-      eventHint,
-      scope,
-      client,
-      getIsolationScope()
-    );
-    if (!preparedEvent) {
-      return null;
-    }
-    client.emit("postprocessEvent", preparedEvent, eventHint);
-    preparedEvent.platform = preparedEvent.platform || "javascript";
-    const metadata = client.getSdkMetadata();
-    const { name, version: version8 } = metadata?.sdk || {};
-    preparedEvent.sdk = __spreadProps(__spreadValues({}, preparedEvent.sdk), {
-      name: name || "sentry.javascript.unknown",
-      version: version8 || "0.0.0"
-    });
-    return preparedEvent;
+    client,
+    getIsolationScope()
+  );
+  if (!preparedEvent) {
+    return null;
+  }
+  client.emit("postprocessEvent", preparedEvent, eventHint);
+  preparedEvent.platform = preparedEvent.platform || "javascript";
+  const metadata = client.getSdkMetadata();
+  const { name, version: version8 } = metadata?.sdk || {};
+  preparedEvent.sdk = __spreadProps(__spreadValues({}, preparedEvent.sdk), {
+    name: name || "sentry.javascript.unknown",
+    version: version8 || "0.0.0"
   });
+  return preparedEvent;
 }
-function sendReplayRequest(_0) {
-  return __async(this, arguments, function* ({
+async function sendReplayRequest({
+  recordingData,
+  replayId,
+  segmentId: segment_id,
+  eventContext,
+  timestamp: timestamp2,
+  session
+}) {
+  const preparedRecordingData = prepareRecordingData({
     recordingData,
-    replayId,
-    segmentId: segment_id,
-    eventContext,
-    timestamp: timestamp2,
-    session
-  }) {
-    const preparedRecordingData = prepareRecordingData({
-      recordingData,
-      headers: {
-        segment_id
-      }
-    });
-    const { urls, errorIds, traceIds, initialTimestamp } = eventContext;
-    const client = getClient();
-    const scope = getCurrentScope();
-    const transport = client?.getTransport();
-    const dsn = client?.getDsn();
-    if (!client || !transport || !dsn || !session.sampled) {
-      return resolvedSyncPromise({});
+    headers: {
+      segment_id
     }
-    const baseEvent = {
-      type: REPLAY_EVENT_NAME,
-      replay_start_timestamp: initialTimestamp / 1e3,
-      timestamp: timestamp2 / 1e3,
-      error_ids: errorIds,
-      trace_ids: traceIds,
-      urls,
-      replay_id: replayId,
-      segment_id,
-      replay_type: session.sampled
-    };
-    const replayEvent = yield prepareReplayEvent({ scope, client, replayId, event: baseEvent });
-    if (!replayEvent) {
-      client.recordDroppedEvent("event_processor", "replay");
-      DEBUG_BUILD4 && logger2.info("An event processor returned `null`, will not send event.");
-      return resolvedSyncPromise({});
-    }
-    delete replayEvent.sdkProcessingMetadata;
-    const envelope = createReplayEnvelope(replayEvent, preparedRecordingData, dsn, client.getOptions().tunnel);
-    let response;
-    try {
-      response = yield transport.send(envelope);
-    } catch (err) {
-      const error = new Error(UNABLE_TO_SEND_REPLAY);
-      try {
-        error.cause = err;
-      } catch {
-      }
-      throw error;
-    }
-    if (typeof response.statusCode === "number" && (response.statusCode < 200 || response.statusCode >= 300)) {
-      throw new TransportStatusCodeError(response.statusCode);
-    }
-    const rateLimits = updateRateLimits({}, response);
-    if (isRateLimited(rateLimits, "replay")) {
-      throw new RateLimitError(rateLimits);
-    }
-    return response;
   });
+  const { urls, errorIds, traceIds, initialTimestamp } = eventContext;
+  const client = getClient();
+  const scope = getCurrentScope();
+  const transport = client?.getTransport();
+  const dsn = client?.getDsn();
+  if (!client || !transport || !dsn || !session.sampled) {
+    return resolvedSyncPromise({});
+  }
+  const baseEvent = {
+    type: REPLAY_EVENT_NAME,
+    replay_start_timestamp: initialTimestamp / 1e3,
+    timestamp: timestamp2 / 1e3,
+    error_ids: errorIds,
+    trace_ids: traceIds,
+    urls,
+    replay_id: replayId,
+    segment_id,
+    replay_type: session.sampled
+  };
+  const replayEvent = await prepareReplayEvent({ scope, client, replayId, event: baseEvent });
+  if (!replayEvent) {
+    client.recordDroppedEvent("event_processor", "replay");
+    DEBUG_BUILD4 && logger2.info("An event processor returned `null`, will not send event.");
+    return resolvedSyncPromise({});
+  }
+  delete replayEvent.sdkProcessingMetadata;
+  const envelope = createReplayEnvelope(replayEvent, preparedRecordingData, dsn, client.getOptions().tunnel);
+  let response;
+  try {
+    response = await transport.send(envelope);
+  } catch (err) {
+    const error = new Error(UNABLE_TO_SEND_REPLAY);
+    try {
+      error.cause = err;
+    } catch {
+    }
+    throw error;
+  }
+  if (typeof response.statusCode === "number" && (response.statusCode < 200 || response.statusCode >= 300)) {
+    throw new TransportStatusCodeError(response.statusCode);
+  }
+  const rateLimits = updateRateLimits({}, response);
+  if (isRateLimited(rateLimits, "replay")) {
+    throw new RateLimitError(rateLimits);
+  }
+  return response;
 }
 var TransportStatusCodeError = class extends Error {
   constructor(statusCode) {
@@ -84394,49 +84342,47 @@ var RateLimitError = class extends Error {
     this.rateLimits = rateLimits;
   }
 };
-function sendReplay(_0) {
-  return __async(this, arguments, function* (replayData, retryConfig = {
-    count: 0,
-    interval: RETRY_BASE_INTERVAL
-  }) {
-    const { recordingData, onError } = replayData;
-    if (!recordingData.length) {
-      return;
+async function sendReplay(replayData, retryConfig = {
+  count: 0,
+  interval: RETRY_BASE_INTERVAL
+}) {
+  const { recordingData, onError } = replayData;
+  if (!recordingData.length) {
+    return;
+  }
+  try {
+    await sendReplayRequest(replayData);
+    return true;
+  } catch (err) {
+    if (err instanceof TransportStatusCodeError || err instanceof RateLimitError) {
+      throw err;
     }
-    try {
-      yield sendReplayRequest(replayData);
-      return true;
-    } catch (err) {
-      if (err instanceof TransportStatusCodeError || err instanceof RateLimitError) {
-        throw err;
+    setContext("Replays", {
+      _retryCount: retryConfig.count
+    });
+    if (onError) {
+      onError(err);
+    }
+    if (retryConfig.count >= RETRY_MAX_COUNT) {
+      const error = new Error(`${UNABLE_TO_SEND_REPLAY} - max retries exceeded`);
+      try {
+        error.cause = err;
+      } catch {
       }
-      setContext("Replays", {
-        _retryCount: retryConfig.count
-      });
-      if (onError) {
-        onError(err);
-      }
-      if (retryConfig.count >= RETRY_MAX_COUNT) {
-        const error = new Error(`${UNABLE_TO_SEND_REPLAY} - max retries exceeded`);
+      throw error;
+    }
+    retryConfig.interval *= ++retryConfig.count;
+    return new Promise((resolve, reject) => {
+      setTimeout2(async () => {
         try {
-          error.cause = err;
-        } catch {
+          await sendReplay(replayData, retryConfig);
+          resolve(true);
+        } catch (err2) {
+          reject(err2);
         }
-        throw error;
-      }
-      retryConfig.interval *= ++retryConfig.count;
-      return new Promise((resolve, reject) => {
-        setTimeout2(() => __async(null, null, function* () {
-          try {
-            yield sendReplay(replayData, retryConfig);
-            resolve(true);
-          } catch (err2) {
-            reject(err2);
-          }
-        }), retryConfig.interval);
-      });
-    }
-  });
+      }, retryConfig.interval);
+    });
+  }
 }
 var THROTTLED = "__THROTTLED";
 var SKIPPED = "__SKIPPED";
@@ -84764,28 +84710,26 @@ var ReplayContainer = class {
    * Currently, this needs to be manually called (e.g. for tests). Sentry SDK
    * does not support a teardown
    */
-  stop() {
-    return __async(this, arguments, function* ({ forceFlush = false, reason } = {}) {
-      if (!this._isEnabled) {
-        return;
+  async stop({ forceFlush = false, reason } = {}) {
+    if (!this._isEnabled) {
+      return;
+    }
+    this._isEnabled = false;
+    try {
+      DEBUG_BUILD4 && logger2.info(`Stopping Replay${reason ? ` triggered by ${reason}` : ""}`);
+      resetReplayIdOnDynamicSamplingContext();
+      this._removeListeners();
+      this.stopRecording();
+      this._debouncedFlush.cancel();
+      if (forceFlush) {
+        await this._flush({ force: true });
       }
-      this._isEnabled = false;
-      try {
-        DEBUG_BUILD4 && logger2.info(`Stopping Replay${reason ? ` triggered by ${reason}` : ""}`);
-        resetReplayIdOnDynamicSamplingContext();
-        this._removeListeners();
-        this.stopRecording();
-        this._debouncedFlush.cancel();
-        if (forceFlush) {
-          yield this._flush({ force: true });
-        }
-        this.eventBuffer?.destroy();
-        this.eventBuffer = null;
-        clearSession(this);
-      } catch (err) {
-        this.handleException(err);
-      }
-    });
+      this.eventBuffer?.destroy();
+      this.eventBuffer = null;
+      clearSession(this);
+    } catch (err) {
+      this.handleException(err);
+    }
   }
   /**
    * Pause some replay functionality. See comments for `_isPaused`.
@@ -84821,29 +84765,27 @@ var ReplayContainer = class {
    *
    * Otherwise, queue up a flush.
    */
-  sendBufferedReplayOrFlush() {
-    return __async(this, arguments, function* ({ continueRecording = true } = {}) {
-      if (this.recordingMode === "session") {
-        return this.flushImmediate();
-      }
-      const activityTime = Date.now();
-      DEBUG_BUILD4 && logger2.info("Converting buffer to session");
-      yield this.flushImmediate();
-      const hasStoppedRecording = this.stopRecording();
-      if (!continueRecording || !hasStoppedRecording) {
-        return;
-      }
-      if (this.recordingMode === "session") {
-        return;
-      }
-      this.recordingMode = "session";
-      if (this.session) {
-        this._updateUserActivity(activityTime);
-        this._updateSessionActivity(activityTime);
-        this._maybeSaveSession();
-      }
-      this.startRecording();
-    });
+  async sendBufferedReplayOrFlush({ continueRecording = true } = {}) {
+    if (this.recordingMode === "session") {
+      return this.flushImmediate();
+    }
+    const activityTime = Date.now();
+    DEBUG_BUILD4 && logger2.info("Converting buffer to session");
+    await this.flushImmediate();
+    const hasStoppedRecording = this.stopRecording();
+    if (!continueRecording || !hasStoppedRecording) {
+      return;
+    }
+    if (this.recordingMode === "session") {
+      return;
+    }
+    this.recordingMode = "session";
+    if (this.session) {
+      this._updateUserActivity(activityTime);
+      this._updateSessionActivity(activityTime);
+      this._maybeSaveSession();
+    }
+    this.startRecording();
   }
   /**
    * We want to batch uploads of replay events. Save events only if
@@ -85055,14 +84997,12 @@ var ReplayContainer = class {
    * This stops the current session (without forcing a flush, as that would never work since we are expired),
    * and then does a new sampling based on the refreshed session.
    */
-  _refreshSession(session) {
-    return __async(this, null, function* () {
-      if (!this._isEnabled) {
-        return;
-      }
-      yield this.stop({ reason: "refresh session" });
-      this.initializeSampling(session.id);
-    });
+  async _refreshSession(session) {
+    if (!this._isEnabled) {
+      return;
+    }
+    await this.stop({ reason: "refresh session" });
+    this.initializeSampling(session.id);
   }
   /**
    * Adds listeners to record events for the replay
@@ -85227,106 +85167,102 @@ var ReplayContainer = class {
    *
    * Should never be called directly, only by `flush`
    */
-  _runFlush() {
-    return __async(this, null, function* () {
-      const replayId = this.getSessionId();
-      if (!this.session || !this.eventBuffer || !replayId) {
-        DEBUG_BUILD4 && logger2.error("No session or eventBuffer found to flush.");
-        return;
+  async _runFlush() {
+    const replayId = this.getSessionId();
+    if (!this.session || !this.eventBuffer || !replayId) {
+      DEBUG_BUILD4 && logger2.error("No session or eventBuffer found to flush.");
+      return;
+    }
+    await this._addPerformanceEntries();
+    if (!this.eventBuffer?.hasEvents) {
+      return;
+    }
+    await addMemoryEntry(this);
+    if (!this.eventBuffer) {
+      return;
+    }
+    if (replayId !== this.getSessionId()) {
+      return;
+    }
+    try {
+      this._updateInitialTimestampFromEventBuffer();
+      const timestamp2 = Date.now();
+      if (timestamp2 - this._context.initialTimestamp > this._options.maxReplayDuration + 3e4) {
+        throw new Error("Session is too long, not sending replay");
       }
-      yield this._addPerformanceEntries();
-      if (!this.eventBuffer?.hasEvents) {
-        return;
+      const eventContext = this._popEventContext();
+      const segmentId = this.session.segmentId++;
+      this._maybeSaveSession();
+      const recordingData = await this.eventBuffer.finish();
+      await sendReplay({
+        replayId,
+        recordingData,
+        segmentId,
+        eventContext,
+        session: this.session,
+        timestamp: timestamp2,
+        onError: (err) => this.handleException(err)
+      });
+    } catch (err) {
+      this.handleException(err);
+      this.stop({ reason: "sendReplay" });
+      const client = getClient();
+      if (client) {
+        const dropReason = err instanceof RateLimitError ? "ratelimit_backoff" : "send_error";
+        client.recordDroppedEvent(dropReason, "replay");
       }
-      yield addMemoryEntry(this);
-      if (!this.eventBuffer) {
-        return;
-      }
-      if (replayId !== this.getSessionId()) {
-        return;
-      }
-      try {
-        this._updateInitialTimestampFromEventBuffer();
-        const timestamp2 = Date.now();
-        if (timestamp2 - this._context.initialTimestamp > this._options.maxReplayDuration + 3e4) {
-          throw new Error("Session is too long, not sending replay");
-        }
-        const eventContext = this._popEventContext();
-        const segmentId = this.session.segmentId++;
-        this._maybeSaveSession();
-        const recordingData = yield this.eventBuffer.finish();
-        yield sendReplay({
-          replayId,
-          recordingData,
-          segmentId,
-          eventContext,
-          session: this.session,
-          timestamp: timestamp2,
-          onError: (err) => this.handleException(err)
-        });
-      } catch (err) {
-        this.handleException(err);
-        this.stop({ reason: "sendReplay" });
-        const client = getClient();
-        if (client) {
-          const dropReason = err instanceof RateLimitError ? "ratelimit_backoff" : "send_error";
-          client.recordDroppedEvent(dropReason, "replay");
-        }
-      }
-    });
+    }
   }
   /**
    * Flush recording data to Sentry. Creates a lock so that only a single flush
    * can be active at a time. Do not call this directly.
    */
-  _flush() {
-    return __async(this, arguments, function* ({
-      force = false
-    } = {}) {
-      if (!this._isEnabled && !force) {
-        return;
+  async _flush({
+    force = false
+  } = {}) {
+    if (!this._isEnabled && !force) {
+      return;
+    }
+    if (!this.checkAndHandleExpiredSession()) {
+      DEBUG_BUILD4 && logger2.error("Attempting to finish replay event after session expired.");
+      return;
+    }
+    if (!this.session) {
+      return;
+    }
+    const start = this.session.started;
+    const now2 = Date.now();
+    const duration = now2 - start;
+    this._debouncedFlush.cancel();
+    const tooShort = duration < this._options.minReplayDuration;
+    const tooLong = duration > this._options.maxReplayDuration + 5e3;
+    if (tooShort || tooLong) {
+      DEBUG_BUILD4 && logger2.info(
+        `Session duration (${Math.floor(duration / 1e3)}s) is too ${tooShort ? "short" : "long"}, not sending replay.`
+      );
+      if (tooShort) {
+        this._debouncedFlush();
       }
-      if (!this.checkAndHandleExpiredSession()) {
-        DEBUG_BUILD4 && logger2.error("Attempting to finish replay event after session expired.");
-        return;
+      return;
+    }
+    const eventBuffer = this.eventBuffer;
+    if (eventBuffer && this.session.segmentId === 0 && !eventBuffer.hasCheckout) {
+      DEBUG_BUILD4 && logger2.info("Flushing initial segment without checkout.");
+    }
+    const _flushInProgress = !!this._flushLock;
+    if (!this._flushLock) {
+      this._flushLock = this._runFlush();
+    }
+    try {
+      await this._flushLock;
+    } catch (err) {
+      this.handleException(err);
+    } finally {
+      this._flushLock = void 0;
+      if (_flushInProgress) {
+        this._debouncedFlush();
       }
-      if (!this.session) {
-        return;
-      }
-      const start = this.session.started;
-      const now2 = Date.now();
-      const duration = now2 - start;
-      this._debouncedFlush.cancel();
-      const tooShort = duration < this._options.minReplayDuration;
-      const tooLong = duration > this._options.maxReplayDuration + 5e3;
-      if (tooShort || tooLong) {
-        DEBUG_BUILD4 && logger2.info(
-          `Session duration (${Math.floor(duration / 1e3)}s) is too ${tooShort ? "short" : "long"}, not sending replay.`
-        );
-        if (tooShort) {
-          this._debouncedFlush();
-        }
-        return;
-      }
-      const eventBuffer = this.eventBuffer;
-      if (eventBuffer && this.session.segmentId === 0 && !eventBuffer.hasCheckout) {
-        DEBUG_BUILD4 && logger2.info("Flushing initial segment without checkout.");
-      }
-      const _flushInProgress = !!this._flushLock;
-      if (!this._flushLock) {
-        this._flushLock = this._runFlush();
-      }
-      try {
-        yield this._flushLock;
-      } catch (err) {
-        this.handleException(err);
-      } finally {
-        this._flushLock = void 0;
-        if (_flushInProgress) {
-          this._debouncedFlush();
-        }
-      }
-    });
+    }
   }
   /** Save the session, if it is sticky */
   _maybeSaveSession() {
@@ -89179,10 +89115,10 @@ function dn(e2 = 0) {
       {
         credentials: "same-origin"
       }
-    ).subscribe((i) => __async(null, null, function* () {
+    ).subscribe(async (i) => {
       if (!i.ok)
-        return r2(yield i.text().catch((s) => s));
-      F13 = yield i.json(), an = /[2-9]\.[0-9]+\.[0-9]+/g.test(
+        return r2(await i.text().catch((s) => s));
+      F13 = await i.json(), an = /[2-9]\.[0-9]+\.[0-9]+/g.test(
         F13.version || ""
       ) ? "/api/engine/v2" : "/control/api", d("Auth", "Loaded authority.", [], "group"), F13 && (d("Auth", `Name: ${F13.name}`), d("Auth", `Version: ${F13.version}`), d("Auth", `Domain: ${F13.domain}`), d("Auth", `Session: ${F13.session}`), d("Auth", `Production: ${F13.production}`), d(
         "Auth",
@@ -89192,16 +89128,14 @@ function dn(e2 = 0) {
         ut.next(true), d("Auth", "Application set online."), t();
       };
       delete v.load_authority, mr("").then(o, o);
-    }), r2);
+    }, r2);
   })), v.load_authority;
 }
-function co(e2) {
-  return __async(this, null, function* () {
-    const t = ho(e2);
-    if (g.use_iframe)
-      return ao(t);
-    window.location?.assign(t);
-  });
+async function co(e2) {
+  const t = ho(e2);
+  if (g.use_iframe)
+    return ao(t);
+  window.location?.assign(t);
 }
 function ao(e2) {
   return v.iframe_auth || (v.iframe_auth = new Promise((t, n2) => {
@@ -89246,9 +89180,9 @@ function yr(e2) {
   delete v.authorise;
 }
 function lo() {
-  return v.check_token || (v.check_token = new Promise((e2, t) => __async(null, null, function* () {
-    Y2() ? (d("Auth", "Valid token found."), e2(Y2())) : (d("Auth", "No token. Checking URL for auth credentials..."), (yield fo()) ? e2(true) : t()), delete v.check_token;
-  }))), v.check_token;
+  return v.check_token || (v.check_token = new Promise(async (e2, t) => {
+    Y2() ? (d("Auth", "Valid token found."), e2(Y2())) : (d("Auth", "No token. Checking URL for auth credentials..."), await fo() ? e2(true) : t()), delete v.check_token;
+  })), v.check_token;
 }
 function fo() {
   return v.check_params || (v.check_params = new Promise((e2) => {
@@ -89336,11 +89270,11 @@ function vr(e2, t = "") {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       }
-    }).subscribe((o) => __async(null, null, function* () {
+    }).subscribe(async (o) => {
       if (!o.ok) return i(o);
-      const s = yield o.json();
+      const s = await o.json();
       pn(s), n2(), delete v.generate_tokens;
-    }), i);
+    }, i);
   })), v.generate_tokens;
 }
 function pn(e2) {
@@ -89432,21 +89366,19 @@ function Wt(e2, t, n2, r2 = Bt) {
 function Ie(e2, t, n2, r2 = Bt) {
   return n2 || (n2 = { response_type: "json" }), r2("PATCH", e2, __spreadValues({ body: t, response_type: "json" }, n2));
 }
-function Ao(_0, _1) {
-  return __async(this, arguments, function* (e2, t, n2 = br) {
-    if (e2.headers) {
-      const r2 = {};
-      e2.headers.forEach ? e2.headers.forEach((i, o) => r2[o.toLowerCase()] = i) : Object.keys(e2.headers).forEach(
-        (i) => r2[i.toLowerCase()] = e2.headers[i]
-      ), n2[e2.url || ""] = r2;
-    }
-    switch (t) {
-      case "json":
-        return yield e2.json().catch(() => ({}));
-      case "text":
-        return yield e2.text();
-    }
-  });
+async function Ao(e2, t, n2 = br) {
+  if (e2.headers) {
+    const r2 = {};
+    e2.headers.forEach ? e2.headers.forEach((i, o) => r2[o.toLowerCase()] = i) : Object.keys(e2.headers).forEach(
+      (i) => r2[i.toLowerCase()] = e2.headers[i]
+    ), n2[e2.url || ""] = r2;
+  }
+  switch (t) {
+    case "json":
+      return await e2.json().catch(() => ({}));
+    case "text":
+      return await e2.text();
+  }
 }
 var Sr = () => {
   hn(), _r().then(
@@ -90532,16 +90464,14 @@ var ds = class {
   /**
    * Rebind to the status variable
    */
-  rebind() {
-    return __async(this, null, function* () {
-      !this._stale_bindings && this._pending !== 1 || nt(
-        `rebind:${JSON.stringify(this.binding())}`,
-        () => __async(this, null, function* () {
-          yield Nn(this.binding()), this._binding_count = this._stale_bindings || 1, this._stale_bindings = 0;
-        }),
-        100
-      );
-    });
+  async rebind() {
+    !this._stale_bindings && this._pending !== 1 || nt(
+      `rebind:${JSON.stringify(this.binding())}`,
+      async () => {
+        await Nn(this.binding()), this._binding_count = this._stale_bindings || 1, this._stale_bindings = 0;
+      },
+      100
+    );
   }
   /**
    * Generate binding details for the status variable
@@ -94465,34 +94395,32 @@ var _LocaleService = class _LocaleService {
     localStorage.setItem(`${STORE_KEY}`, locale);
     log("LOCALE", `Locale set to "${locale}"`);
   }
-  _loadLocale(locale) {
-    return __async(this, null, function* () {
-      const existing = JSON.parse(localStorage.getItem(`${STORE_KEY}.${locale}`) || "{}");
-      if (!existing.expiry || existing.expiry < Date.now()) {
-        localStorage.removeItem(`${STORE_KEY}.${locale}`);
-        const resp = yield fetch(`${this.locale_folder}/${locale}.json`);
-        if (!resp.ok) {
-          delete this._load_promises[locale];
-          return console.error(`Failed to loaded locale file for "${locale}".`, resp);
-        }
-        const locale_data = yield resp.json();
-        const locale_override_data = this.zone_id ? yield hu(this.zone_id, `locale_${locale}`).toPromise() : { details: {} };
-        const base_locale_values = removeNesting(locale_data);
-        const override_locale_values = removeNesting(locale_override_data.details);
-        this._locale_mappings[locale] = __spreadValues(__spreadValues({}, base_locale_values), override_locale_values);
-        if (!window.debug) {
-          const store2 = {
-            expiry: Date.now() + this._cache_time,
-            locale,
-            mappings: this._locale_mappings[locale]
-          };
-          localStorage.setItem(`${STORE_KEY}.${locale}`, JSON.stringify(store2));
-        }
-      } else {
-        this._locale_mappings[locale] = existing.mappings;
+  async _loadLocale(locale) {
+    const existing = JSON.parse(localStorage.getItem(`${STORE_KEY}.${locale}`) || "{}");
+    if (!existing.expiry || existing.expiry < Date.now()) {
+      localStorage.removeItem(`${STORE_KEY}.${locale}`);
+      const resp = await fetch(`${this.locale_folder}/${locale}.json`);
+      if (!resp.ok) {
+        delete this._load_promises[locale];
+        return console.error(`Failed to loaded locale file for "${locale}".`, resp);
       }
-      delete this._load_promises[locale];
-    });
+      const locale_data = await resp.json();
+      const locale_override_data = this.zone_id ? await hu(this.zone_id, `locale_${locale}`).toPromise() : { details: {} };
+      const base_locale_values = removeNesting(locale_data);
+      const override_locale_values = removeNesting(locale_override_data.details);
+      this._locale_mappings[locale] = __spreadValues(__spreadValues({}, base_locale_values), override_locale_values);
+      if (!window.debug) {
+        const store2 = {
+          expiry: Date.now() + this._cache_time,
+          locale,
+          mappings: this._locale_mappings[locale]
+        };
+        localStorage.setItem(`${STORE_KEY}.${locale}`, JSON.stringify(store2));
+      }
+    } else {
+      this._locale_mappings[locale] = existing.mappings;
+    }
+    delete this._load_promises[locale];
   }
 };
 _LocaleService.\u0275fac = function LocaleService_Factory(__ngFactoryType__) {
@@ -94685,16 +94613,14 @@ function setupCache(cache, interval3 = 5 * 60 * 1e3) {
     }, interval3);
   }
 }
-function activateUpdate(cache) {
-  return __async(this, null, function* () {
-    if (cache.isEnabled && (yield cache.checkForUpdate())) {
-      log("CACHE", `Activating changes to the cache...`);
-      if (!(yield cache.activateUpdate()))
-        return;
-      _new_version = true;
-      notifyInfo("Newer version of the application is available", "Refresh", () => location.reload());
-    }
-  });
+async function activateUpdate(cache) {
+  if (cache.isEnabled && await cache.checkForUpdate()) {
+    log("CACHE", `Activating changes to the cache...`);
+    if (!await cache.activateUpdate())
+      return;
+    _new_version = true;
+    notifyInfo("Newer version of the application is available", "Refresh", () => location.reload());
+  }
 }
 
 // libs/common/src/lib/async-handler.class.ts
@@ -94823,24 +94749,22 @@ var AsyncHandler = _AsyncHandler;
 
 // libs/common/src/lib/fixed-device-helpers.ts
 var _wake_lock = null;
-function requestScreenWakeLock() {
-  return __async(this, null, function* () {
-    if (!pr())
-      return;
-    if (_wake_lock)
-      yield _wake_lock.release();
-    try {
-      _wake_lock = yield navigator.wakeLock.request("screen");
-    } catch (err) {
-      throw err;
-    }
-  });
-}
-document.addEventListener("visibilitychange", () => __async(null, null, function* () {
-  if (_wake_lock !== null && document.visibilityState === "visible") {
-    _wake_lock = yield navigator.wakeLock.request("screen");
+async function requestScreenWakeLock() {
+  if (!pr())
+    return;
+  if (_wake_lock)
+    await _wake_lock.release();
+  try {
+    _wake_lock = await navigator.wakeLock.request("screen");
+  } catch (err) {
+    throw err;
   }
-}));
+}
+document.addEventListener("visibilitychange", async () => {
+  if (_wake_lock !== null && document.visibilityState === "visible") {
+    _wake_lock = await navigator.wakeLock.request("screen");
+  }
+});
 
 // libs/common/src/lib/google-analytics.service.ts
 var _GoogleAnalyticsService = class _GoogleAnalyticsService {
@@ -95352,15 +95276,15 @@ var LOCAL_TIMEZONE = Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone || "Aus
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "863feac",
-  "hash": "863feac",
+  "raw": "ecafbbc",
+  "hash": "ecafbbc",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "863feac",
+  "suffix": "ecafbbc",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752122787457
+  "time": 1752125224139
 };
 
 // libs/common/src/lib/vorlon.service.ts
@@ -95370,20 +95294,18 @@ var _VorlonService = class _VorlonService extends AsyncHandler {
     this._settings = inject(SettingsService);
     this.load();
   }
-  load() {
-    return __async(this, null, function* () {
-      const system = this._settings.get("app.vorlon.system");
-      if (system) {
-        const module2 = Ea(system, "Vorlon");
-        if (module2) {
-          const binding = module2.binding("enabled");
-          this.subscription("binding", binding.bind());
-          this.subscription("binding_value", binding.listen().subscribe((state2) => {
-            state2 ? this.injectVorlonScript() : this.removeVorlonScript();
-          }));
-        }
+  async load() {
+    const system = this._settings.get("app.vorlon.system");
+    if (system) {
+      const module2 = Ea(system, "Vorlon");
+      if (module2) {
+        const binding = module2.binding("enabled");
+        this.subscription("binding", binding.bind());
+        this.subscription("binding_value", binding.listen().subscribe((state2) => {
+          state2 ? this.injectVorlonScript() : this.removeVorlonScript();
+        }));
       }
-    });
+    }
   }
   injectVorlonScript() {
     this.removeVorlonScript();
@@ -95597,33 +95519,31 @@ var ANIMATION_SHOW_CONTRACT_EXPAND = trigger("show", [
 ]);
 
 // libs/common/src/lib/placeos.ts
-function setupPlace(settings) {
-  return __async(this, null, function* () {
-    const protocol = settings.protocol || location.protocol;
-    const host = settings.domain || location.hostname;
-    const port = settings.port || location.port;
-    const url = settings.use_domain ? `${protocol}//${host}:${port}` : location.origin;
-    const route = (location.pathname + "/").replace("//", "/");
-    const mock = settings.mock || location.href.includes("mock=true") || localStorage.getItem("mock") === "true";
-    const config2 = {
-      auth_type: "auth_code",
-      scope: "public",
-      host: `${host}${port ? ":" + port : ""}`,
-      auth_uri: `${url}/auth/oauth/authorize`,
-      token_uri: `${url}/auth/oauth/token`,
-      redirect_uri: `${location.origin}${route}oauth-resp.html`,
-      handle_login: !settings.local_login,
-      use_iframe: true,
-      mock
-    };
-    if (localStorage) {
-      localStorage.setItem("mock", `${!!mock && !location.href.includes("mock=false")}`);
-    }
-    if (mock) {
-      notifyInfo("Application in mock mode.");
-    }
-    return Ss(config2);
-  });
+async function setupPlace(settings) {
+  const protocol = settings.protocol || location.protocol;
+  const host = settings.domain || location.hostname;
+  const port = settings.port || location.port;
+  const url = settings.use_domain ? `${protocol}//${host}:${port}` : location.origin;
+  const route = (location.pathname + "/").replace("//", "/");
+  const mock = settings.mock || location.href.includes("mock=true") || localStorage.getItem("mock") === "true";
+  const config2 = {
+    auth_type: "auth_code",
+    scope: "public",
+    host: `${host}${port ? ":" + port : ""}`,
+    auth_uri: `${url}/auth/oauth/authorize`,
+    token_uri: `${url}/auth/oauth/token`,
+    redirect_uri: `${location.origin}${route}oauth-resp.html`,
+    handle_login: !settings.local_login,
+    use_iframe: true,
+    mock
+  };
+  if (localStorage) {
+    localStorage.setItem("mock", `${!!mock && !location.href.includes("mock=false")}`);
+  }
+  if (mock) {
+    notifyInfo("Application in mock mode.");
+  }
+  return Ss(config2);
 }
 
 // libs/common/src/lib/timezones.ts
@@ -96616,27 +96536,21 @@ var _FeatureAvailableGuard = class _FeatureAvailableGuard {
     this._settings = inject(SettingsService);
     this._org = inject(OrganisationService);
   }
-  canActivate() {
-    return __async(this, null, function* () {
-      return this.checkFeature();
-    });
+  async canActivate() {
+    return this.checkFeature();
   }
-  canLoad() {
-    return __async(this, null, function* () {
-      return this.checkFeature();
-    });
+  async canLoad() {
+    return this.checkFeature();
   }
-  checkFeature() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_3) => _3)).toPromise();
-      yield this._settings.initialised.pipe(first((_3) => _3)).toPromise();
-      const features = this._settings.get("app.disabled_features") || [];
-      const can_activate = !features.find((_3) => this._router.url.includes(_3));
-      if (!can_activate) {
-        this._router.navigate(["/"]);
-      }
-      return !!can_activate;
-    });
+  async checkFeature() {
+    await this._org.initialised.pipe(first((_3) => _3)).toPromise();
+    await this._settings.initialised.pipe(first((_3) => _3)).toPromise();
+    const features = this._settings.get("app.disabled_features") || [];
+    const can_activate = !features.find((_3) => this._router.url.includes(_3));
+    if (!can_activate) {
+      this._router.navigate(["/"]);
+    }
+    return !!can_activate;
   }
 };
 _FeatureAvailableGuard.\u0275fac = function FeatureAvailableGuard_Factory(__ngFactoryType__) {
@@ -96744,11 +96658,11 @@ var _RemoteLoggingService = class _RemoteLoggingService extends AsyncHandler {
     this._events = new Subject();
     this._event_history = this._events.pipe(shareReplay(2e4));
     this._metadata = null;
-    this._logging_bindings = this._system_id.pipe(filter((_3) => !!_3), switchMap((id) => combineLatest([of(id), this._bindTo(id, "enabled")])), filter(([_3, enabled]) => !!enabled), map(([id]) => this.subscription("post_events", this._event_history.subscribe((d2) => __async(this, null, function* () {
+    this._logging_bindings = this._system_id.pipe(filter((_3) => !!_3), switchMap((id) => combineLatest([of(id), this._bindTo(id, "enabled")])), filter(([_3, enabled]) => !!enabled), map(([id]) => this.subscription("post_events", this._event_history.subscribe(async (d2) => {
       this._disable_handling = true;
-      yield Ea(id, "Logger").execute("post_event", [d2]).catch();
+      await Ea(id, "Logger").execute("post_event", [d2]).catch();
       this._disable_handling = false;
-    })))));
+    }))));
     this.history = this._event_history;
     localStorage.setItem("PLACEOS.DEVICE_ID", DEVICE_ID);
     this._patchConsoleMethods();
@@ -97691,123 +97605,107 @@ var V2 = class {
   get encoded_id() {
     return encodeURIComponent(`${this.upload_id || ""}`);
   }
-  initialise() {
-    return __async(this, null, function* () {
-      const { signal: r2 } = this._abort_ctrl, { file: t, mime_type: e2 } = this._upload;
-      this._params.file_size = `${t.size}`, this._params.file_name = t.name, e2 && e2 !== "binary/octet-stream" && (this._params.file_mime = e2), this._params = __spreadValues(__spreadValues({}, this._params), this._upload.params), t.dir_path?.length > 0 && (this._params.file_path = t.dir_path);
-      const s = this.base_request_headers, i = R2(this._params);
-      return (yield fetch(
-        `${this._endpoint}/new${i ? "?" + i : ""}`,
-        {
-          headers: s,
-          signal: r2
-        }
-      )).json();
-    });
-  }
-  create(r2) {
-    return __async(this, null, function* () {
-      const { signal: t } = this._abort_ctrl, e2 = this.base_request_headers;
-      r2.file_id && (this._params.file_id = r2.file_id), this._upload.mime_type && (this._params.file_mime = r2.mime_type), r2.parameters && (this._params.parameters = r2.parameters), r2.permissions && (this._params.permissions = r2.permissions), r2.public && (this._params.public = r2.public), r2.expires && (this._params.expires = r2.expires || 0);
-      const i = yield (yield fetch(`${this._endpoint}`, {
-        body: JSON.stringify(this._params),
-        method: "POST",
-        headers: e2,
-        signal: t
-      })).json();
-      return this.upload_id = i.upload_id, i;
-    });
-  }
-  sign(r2, t = "") {
-    return __async(this, null, function* () {
-      if (!this.upload_id) throw new Error("Upload resource not initialised");
-      const { signal: e2 } = this._abort_ctrl, s = this.base_request_headers, i = new URLSearchParams();
-      return i.set("part", r2.toString()), t && i.set("file_id", encodeURIComponent(t)), yield (yield fetch(
-        `${this._endpoint}/${this.encoded_id}/edit?${i.toString()}`,
-        {
-          method: "GET",
-          headers: s,
-          signal: e2
-        }
-      )).json();
-    });
-  }
-  update() {
-    return __async(this, arguments, function* (r2 = {}) {
-      if (!this.upload_id) throw new Error("Upload resource not initialised");
-      const { signal: t } = this._abort_ctrl, e2 = this.base_request_headers;
-      return yield (yield fetch(`${this._endpoint}/${this.encoded_id}`, {
-        body: JSON.stringify(r2),
-        method: "PUT",
-        headers: e2,
-        signal: t
-      })).json();
-    });
-  }
-  signedRequest(r2) {
-    return __async(this, null, function* () {
-      const e2 = { body: yield (yield fetch(r2.signature.url, {
-        body: r2.data,
-        method: r2.signature.verb,
-        headers: r2.signature.headers
-      })).text(), responseXML: null };
-      try {
-        e2.responseXML = new window.DOMParser().parseFromString(
-          e2.body,
-          "text/xml"
-        );
-      } catch {
+  async initialise() {
+    const { signal: r2 } = this._abort_ctrl, { file: t, mime_type: e2 } = this._upload;
+    this._params.file_size = `${t.size}`, this._params.file_name = t.name, e2 && e2 !== "binary/octet-stream" && (this._params.file_mime = e2), this._params = __spreadValues(__spreadValues({}, this._params), this._upload.params), t.dir_path?.length > 0 && (this._params.file_path = t.dir_path);
+    const s = this.base_request_headers, i = R2(this._params);
+    return (await fetch(
+      `${this._endpoint}/new${i ? "?" + i : ""}`,
+      {
+        headers: s,
+        signal: r2
       }
-      return e2;
-    });
+    )).json();
   }
-  signNextChunk(r2, t, e2, s = null) {
-    return __async(this, null, function* () {
-      if (!this.upload_id) throw new Error("Upload resource not initialised");
-      const { signal: i } = this._abort_ctrl, o = { part_list: e2 };
-      s && (o.part_data = s);
-      const a = this.base_request_headers, h3 = R2({
-        part: `${r2}`,
-        file_id: t,
-        file_mime: this._upload.mime_type
-      });
-      return yield (yield fetch(
-        `${this._endpoint}/${this.encoded_id}${h3 ? "?" + h3 : ""}`,
-        {
-          body: JSON.stringify(o),
-          method: "PUT",
-          headers: a,
-          signal: i
-        }
-      )).json();
-    });
+  async create(r2) {
+    const { signal: t } = this._abort_ctrl, e2 = this.base_request_headers;
+    r2.file_id && (this._params.file_id = r2.file_id), this._upload.mime_type && (this._params.file_mime = r2.mime_type), r2.parameters && (this._params.parameters = r2.parameters), r2.permissions && (this._params.permissions = r2.permissions), r2.public && (this._params.public = r2.public), r2.expires && (this._params.expires = r2.expires || 0);
+    const i = await (await fetch(`${this._endpoint}`, {
+      body: JSON.stringify(this._params),
+      method: "POST",
+      headers: e2,
+      signal: t
+    })).json();
+    return this.upload_id = i.upload_id, i;
   }
-  signChunk(r2, t = null) {
-    return __async(this, null, function* () {
-      const { signal: e2 } = this._abort_ctrl, s = this.base_request_headers, i = R2({
-        part: `${r2}`,
-        file_id: t
-      });
-      return yield (yield fetch(
-        `${this._endpoint}/edit${i ? "?" + i : ""}`,
-        {
-          headers: s,
-          signal: e2
-        }
-      )).json();
-    });
+  async sign(r2, t = "") {
+    if (!this.upload_id) throw new Error("Upload resource not initialised");
+    const { signal: e2 } = this._abort_ctrl, s = this.base_request_headers, i = new URLSearchParams();
+    return i.set("part", r2.toString()), t && i.set("file_id", encodeURIComponent(t)), await (await fetch(
+      `${this._endpoint}/${this.encoded_id}/edit?${i.toString()}`,
+      {
+        method: "GET",
+        headers: s,
+        signal: e2
+      }
+    )).json();
   }
-  updateStatus() {
-    return __async(this, arguments, function* (r2 = {}) {
-      if (!this.upload_id) throw new Error("Upload resource not initialised");
-      const { signal: t } = this._abort_ctrl, e2 = this.base_request_headers;
-      return yield (yield fetch(`${this._endpoint}/${this.encoded_id}`, {
-        headers: e2,
+  async update(r2 = {}) {
+    if (!this.upload_id) throw new Error("Upload resource not initialised");
+    const { signal: t } = this._abort_ctrl, e2 = this.base_request_headers;
+    return await (await fetch(`${this._endpoint}/${this.encoded_id}`, {
+      body: JSON.stringify(r2),
+      method: "PUT",
+      headers: e2,
+      signal: t
+    })).json();
+  }
+  async signedRequest(r2) {
+    const e2 = { body: await (await fetch(r2.signature.url, {
+      body: r2.data,
+      method: r2.signature.verb,
+      headers: r2.signature.headers
+    })).text(), responseXML: null };
+    try {
+      e2.responseXML = new window.DOMParser().parseFromString(
+        e2.body,
+        "text/xml"
+      );
+    } catch {
+    }
+    return e2;
+  }
+  async signNextChunk(r2, t, e2, s = null) {
+    if (!this.upload_id) throw new Error("Upload resource not initialised");
+    const { signal: i } = this._abort_ctrl, o = { part_list: e2 };
+    s && (o.part_data = s);
+    const a = this.base_request_headers, h3 = R2({
+      part: `${r2}`,
+      file_id: t,
+      file_mime: this._upload.mime_type
+    });
+    return await (await fetch(
+      `${this._endpoint}/${this.encoded_id}${h3 ? "?" + h3 : ""}`,
+      {
+        body: JSON.stringify(o),
         method: "PUT",
-        body: JSON.stringify(r2),
-        signal: t
-      })).json();
+        headers: a,
+        signal: i
+      }
+    )).json();
+  }
+  async signChunk(r2, t = null) {
+    const { signal: e2 } = this._abort_ctrl, s = this.base_request_headers, i = R2({
+      part: `${r2}`,
+      file_id: t
     });
+    return await (await fetch(
+      `${this._endpoint}/edit${i ? "?" + i : ""}`,
+      {
+        headers: s,
+        signal: e2
+      }
+    )).json();
+  }
+  async updateStatus(r2 = {}) {
+    if (!this.upload_id) throw new Error("Upload resource not initialised");
+    const { signal: t } = this._abort_ctrl, e2 = this.base_request_headers;
+    return await (await fetch(`${this._endpoint}/${this.encoded_id}`, {
+      headers: e2,
+      method: "PUT",
+      body: JSON.stringify(r2),
+      signal: t
+    })).json();
   }
   abort() {
     this._abort_ctrl.abort();
@@ -97920,18 +97818,16 @@ var Tt = class {
     this._state.next(__spreadProps(__spreadValues({}, t), { status: "error", error: r2 }));
   }
   /** Resume uploading the resource */
-  resume(r2) {
-    return __async(this, null, function* () {
-      const t = this._state.getValue();
-      if (!["complete", "uploading", "cancelled"].includes(t.status)) {
-        if (r2 && (this.parallel = r2), !this._provider) {
-          this._request = new V2(this, this._endpoint);
-          const { residence: e2 } = yield this._request.initialise(), s = Ct(e2);
-          s ? (this._provider = new s(this._request, this), this._state.next(__spreadProps(__spreadValues({}, t), { status: "uploading" }))) : this.onError("No provider available to upload to");
-        }
-        this._provider?.start();
+  async resume(r2) {
+    const t = this._state.getValue();
+    if (!["complete", "uploading", "cancelled"].includes(t.status)) {
+      if (r2 && (this.parallel = r2), !this._provider) {
+        this._request = new V2(this, this._endpoint);
+        const { residence: e2 } = await this._request.initialise(), s = Ct(e2);
+        s ? (this._provider = new s(this._request, this), this._state.next(__spreadProps(__spreadValues({}, t), { status: "uploading" }))) : this.onError("No provider available to upload to");
       }
-    });
+      this._provider?.start();
+    }
   }
   /** Pause the uploading of the resource */
   pause() {
@@ -98063,28 +97959,24 @@ var q2 = class {
     this._upload.onProgress(r2);
   }
   /* istanbul ignore next */
-  _finalise() {
-    return __async(this, null, function* () {
-      this._request.updateStatus().then(
-        () => this._upload.onComplete(),
-        (r2) => this._onError(r2)
-      );
-    });
+  async _finalise() {
+    this._request.updateStatus().then(
+      () => this._upload.onComplete(),
+      (r2) => this._onError(r2)
+    );
   }
   /* istanbul ignore next */
-  _hashPart(r2, t, e2) {
-    return __async(this, null, function* () {
-      const s = this._memoization[r2], i = t();
-      return s ? {
-        data: i,
-        md5: s.md5,
-        part: s.part
-      } : e2(i).then((o) => (this._memoization[r2] = o, {
-        data: i,
-        md5: o.md5,
-        part: o.part
-      }));
-    });
+  async _hashPart(r2, t, e2) {
+    const s = this._memoization[r2], i = t();
+    return s ? {
+      data: i,
+      md5: s.md5,
+      part: s.part
+    } : e2(i).then((o) => (this._memoization[r2] = o, {
+      data: i,
+      md5: o.md5,
+      part: o.part
+    }));
   }
   /* istanbul ignore next */
   _getPartData() {
@@ -98102,26 +97994,24 @@ var Xt2 = class extends q2 {
   static lookup = "AmazonS3";
   // 5MiB part size
   _part_size = 5242880;
-  _start() {
-    return __async(this, null, function* () {
-      if (this._strategy === void 0) {
-        if (this.state = l.Uploading, this._strategy = null, this._part_size * 9999 < this.size && (this._part_size = Math.floor(this.size / 9999), this._part_size > 5 * 1024 * 1024 * 1024)) {
-          this._upload.cancel(), this._onError("file exceeds maximum size");
-          return;
-        }
-        const r2 = yield this._processPart(1).catch(
-          (e2) => this._onError(e2)
-        );
-        if (!r2 || this.state !== l.Uploading) return;
-        const t = yield this._request.create({
-          file_id: window.btoa(w2(r2.md5))
-        }).catch((e2) => this._onError(e2));
-        if (!t) return;
-        this._strategy = t.type, t.signature && this._upload.setAccessUrl(
-          (t.signature.url || "").split("?")[0]
-        ), t.type === "direct_upload" ? this._direct(t, r2) : this._resume(t, r2);
-      } else this.state === l.Paused && this._resume();
-    });
+  async _start() {
+    if (this._strategy === void 0) {
+      if (this.state = l.Uploading, this._strategy = null, this._part_size * 9999 < this.size && (this._part_size = Math.floor(this.size / 9999), this._part_size > 5 * 1024 * 1024 * 1024)) {
+        this._upload.cancel(), this._onError("file exceeds maximum size");
+        return;
+      }
+      const r2 = await this._processPart(1).catch(
+        (e2) => this._onError(e2)
+      );
+      if (!r2 || this.state !== l.Uploading) return;
+      const t = await this._request.create({
+        file_id: window.btoa(w2(r2.md5))
+      }).catch((e2) => this._onError(e2));
+      if (!t) return;
+      this._strategy = t.type, t.signature && this._upload.setAccessUrl(
+        (t.signature.url || "").split("?")[0]
+      ), t.type === "direct_upload" ? this._direct(t, r2) : this._resume(t, r2);
+    } else this.state === l.Paused && this._resume();
   }
   // Calculates the MD5 of the part of the file we are uploading
   _processPart(r2) {
@@ -98140,33 +98030,31 @@ var Xt2 = class extends q2 {
       }))
     );
   }
-  _resume(r2 = null, t = null) {
-    return __async(this, null, function* () {
-      let e2;
-      if (r2)
-        if (r2.type === "parts")
-          for (this._pending_parts = r2.part_list, r2.part_data && (this._memoization = r2.part_data), e2 = 0; e2 < this._upload.parallel; e2 += 1)
-            this._nextPart();
-        else {
-          const s = yield this._request.signedRequest(r2).catch((a) => {
-            this._restart(), this._onError(a);
-          });
-          if (!s) return;
-          const i = s.responseXML.getElementsByTagName("UploadId")[0].textContent, o = yield this._request.updateStatus({
-            resumable_id: i,
-            file_id: window.btoa(w2(t.md5)),
-            part: 1
-          }).catch((a) => {
-            this._restart(), this._onError(a);
-          });
-          if (!o) return;
-          for (this._nextPartIndex(), this._setPart(o, t), e2 = 1; e2 < this._upload.parallel; e2 += 1)
-            this._nextPart();
-        }
-      else
-        for (e2 = 0; e2 < this._upload.parallel; e2 += 1)
+  async _resume(r2 = null, t = null) {
+    let e2;
+    if (r2)
+      if (r2.type === "parts")
+        for (this._pending_parts = r2.part_list, r2.part_data && (this._memoization = r2.part_data), e2 = 0; e2 < this._upload.parallel; e2 += 1)
           this._nextPart();
-    });
+      else {
+        const s = await this._request.signedRequest(r2).catch((a) => {
+          this._restart(), this._onError(a);
+        });
+        if (!s) return;
+        const i = s.responseXML.getElementsByTagName("UploadId")[0].textContent, o = await this._request.updateStatus({
+          resumable_id: i,
+          file_id: window.btoa(w2(t.md5)),
+          part: 1
+        }).catch((a) => {
+          this._restart(), this._onError(a);
+        });
+        if (!o) return;
+        for (this._nextPartIndex(), this._setPart(o, t), e2 = 1; e2 < this._upload.parallel; e2 += 1)
+          this._nextPart();
+      }
+    else
+      for (e2 = 0; e2 < this._upload.parallel; e2 += 1)
+        this._nextPart();
   }
   _generatePartManifest() {
     let r2 = "<CompleteMultipartUpload>", t, e2;
@@ -100494,16 +100382,16 @@ var _UploadsService = class _UploadsService {
       const ref = this._dialog.open(UploadPermissionsModalComponent, {
         data: { file }
       });
-      ref.afterClosed().subscribe((details) => __async(this, null, function* () {
+      ref.afterClosed().subscribe(async (details) => {
         if (details) {
-          const id = yield this.uploadFile(details.file, details.is_public, details.permissions).catch((e2) => {
+          const id = await this.uploadFile(details.file, details.is_public, details.permissions).catch((e2) => {
             reject(e2);
             throw e2;
           });
           resolve(id);
         } else
           reject();
-      }));
+      });
     });
   }
   uploadFile(file, pub = true, permissions = "none") {
@@ -100756,8 +100644,7 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
   }
   get theme() {
     const allow_dark_mode = this.get("app.allow_dark_mode");
-    const theme = allow_dark_mode ? this.get("theme") : "light";
-    return theme;
+    return allow_dark_mode ? this.get("theme") : "light";
   }
   /** Get observable for key */
   listen(name) {
@@ -100809,31 +100696,31 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
   /**
    * Initialise the settings
    */
-  init() {
-    return __async(this, null, function* () {
-      if (this.get("debug"))
-        window.debug = true;
-      if (this.get("app")?.name) {
-        this._app_name = this.get("app").name;
-      }
-      this._app_name = location.pathname.replace(/[\\/]/g, "").trim() || this._app_name;
-      setAppName(this._app_name.split("-").join("_").toUpperCase());
-      log("Settings", "Successfully loaded settings");
-      this._initialised.next(true);
-      if (window.debug) {
-        if (!window.application)
-          window.application = {};
-        window.application.settings = this;
-        window.setting = (key) => this.get(key);
-      }
-      const user = yield firstTruthyValueFrom(current_user);
-      const data = yield lastValueFrom(hu(user.id, "settings"));
-      this._user_settings.next(data.details || {});
+  async init() {
+    if (this.get("debug"))
+      window.debug = true;
+    if (this.get("app")?.name) {
+      this._app_name = this.get("app").name;
+    }
+    this._app_name = location.pathname.replace(/[\\/]/g, "").trim() || this._app_name;
+    setAppName(this._app_name.split("-").join("_").toUpperCase());
+    log("Settings", "Successfully loaded settings");
+    this._initialised.next(true);
+    if (window.debug) {
+      if (!window.application)
+        window.application = {};
+      window.application.settings = this;
+      window.setting = (key) => this.get(key);
+    }
+    const user = await firstTruthyValueFrom(current_user);
+    const data = await lastValueFrom(hu(user.id, "settings"));
+    this._user_settings.next(data.details || {});
+    this.timeout("init", () => {
       this._initDarkMode();
       this._applyTheme();
       this._setFontSize();
       this._setPrintFontSize();
-    });
+    }, 1e3);
   }
   /** Whether settings service has initialised */
   get app_name() {
@@ -100899,19 +100786,17 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
     }
     element.innerText = css_string;
   }
-  _savePendingChanges() {
-    return __async(this, null, function* () {
-      const user = currentUser();
-      if (!user?.id || !Object.keys(this._pending_settings).length)
-        return;
-      yield lastValueFrom(du(user.id, {
-        name: "settings",
-        description: "",
-        details: __spreadValues(__spreadValues({}, this._user_settings.getValue()), this._pending_settings)
-      }));
-      this._user_settings.next(__spreadValues(__spreadValues({}, this._user_settings.getValue()), this._pending_settings));
-      this._pending_settings = {};
-    });
+  async _savePendingChanges() {
+    const user = currentUser();
+    if (!user?.id || !Object.keys(this._pending_settings).length)
+      return;
+    await lastValueFrom(du(user.id, {
+      name: "settings",
+      description: "",
+      details: __spreadValues(__spreadValues({}, this._user_settings.getValue()), this._pending_settings)
+    }));
+    this._user_settings.next(__spreadValues(__spreadValues({}, this._user_settings.getValue()), this._pending_settings));
+    this._pending_settings = {};
   }
   _setFontSize() {
     if (!this.get("font_size"))
@@ -100920,14 +100805,18 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
   }
   _applyTheme() {
     const allow_dark_mode = this.get("app.allow_dark_mode");
-    const theme = allow_dark_mode ? this.theme : "light";
+    this._clearTheme();
+    if (!allow_dark_mode)
+      return;
+    document.body.classList.add(`theme-${this.theme}`);
+  }
+  _clearTheme() {
     const class_list = document.body.classList.value.split(" ");
     for (const item of class_list) {
       if (item.startsWith("theme-")) {
         document.body.classList.remove(item);
       }
     }
-    document.body.classList.add(`theme-${theme}`);
   }
   _setPrintFontSize() {
     let print_style_el = document.getElementById("placeos-print-block");
@@ -100939,7 +100828,7 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
     print_style_el.innerText = `@media print { html, body { font-size: ${this.get("app.print_font_size") || "4mm"}; } }`;
   }
   _initDarkMode() {
-    if (this.theme || true)
+    if (this.theme)
       return;
     const os_dark = window?.matchMedia ? window?.matchMedia("(prefers-color-scheme: dark)")?.matches : false;
     this.setTheme(os_dark ? "dark" : "");
@@ -103598,19 +103487,17 @@ var _OrganisationService = class _OrganisationService {
   set region(item) {
     this.setRegion(item);
   }
-  setRegion(item) {
-    return __async(this, null, function* () {
-      if (!item || this._active_region.value?.id == item.id)
-        return;
-      this._active_region.next(item);
-      yield this.loadRegionData(item);
-      this._setBuildingFromTimezone();
-      if (this.building?.parent_id !== item.id && this.buildingsForRegion(item).length) {
-        this.building = this.buildingsForRegion(item)[0];
-      } else
-        this._updateSettingOverrides();
-      localStorage.setItem("PLACEOS.region", item.id);
-    });
+  async setRegion(item) {
+    if (!item || this._active_region.value?.id == item.id)
+      return;
+    this._active_region.next(item);
+    await this.loadRegionData(item);
+    this._setBuildingFromTimezone();
+    if (this.building?.parent_id !== item.id && this.buildingsForRegion(item).length) {
+      this.building = this.buildingsForRegion(item)[0];
+    } else
+      this._updateSettingOverrides();
+    localStorage.setItem("PLACEOS.region", item.id);
   }
   /** List of available buildings */
   get buildings() {
@@ -103756,174 +103643,156 @@ var _OrganisationService = class _OrganisationService {
       console.warn("Unable to remove zone as it is missing the required tag.", zone.id);
     }
   }
-  init(tries = 0) {
-    return __async(this, null, function* () {
-      this._initialised.next(false);
-      yield this.load().catch((err) => {
-        notifyError("Error loading organisation data. Retrying...");
-        setTimeout(() => this.init(tries), Math.min(1e4, 300 * ++tries));
-        throw err;
-      });
-      setTimeout(() => {
-        if (localStorage.getItem("PLACEOS.region")) {
-          this.region = this.regions.find((region) => region.id === localStorage.getItem("PLACEOS.region"));
-        }
-        if (localStorage.getItem("PLACEOS.building")) {
-          this.building = this.buildings.find((bld) => bld.id === localStorage.getItem("PLACEOS.building"));
-        }
-      }, 1e3);
-      if (window.debug) {
-        if (!window.application)
-          window.application = {};
-        window.application.orgs = this;
-      }
-      this._initialised.next(true);
+  async init(tries = 0) {
+    this._initialised.next(false);
+    await this.load().catch((err) => {
+      notifyError("Error loading organisation data. Retrying...");
+      setTimeout(() => this.init(tries), Math.min(1e4, 300 * ++tries));
+      throw err;
     });
+    setTimeout(() => {
+      if (localStorage.getItem("PLACEOS.region")) {
+        this.region = this.regions.find((region) => region.id === localStorage.getItem("PLACEOS.region"));
+      }
+      if (localStorage.getItem("PLACEOS.building")) {
+        this.building = this.buildings.find((bld) => bld.id === localStorage.getItem("PLACEOS.building"));
+      }
+    }, 1e3);
+    if (window.debug) {
+      if (!window.application)
+        window.application = {};
+      window.application.orgs = this;
+    }
+    this._initialised.next(true);
   }
   /**
    * Initialise service data
    */
-  load() {
-    return __async(this, null, function* () {
-      yield this.loadOrganisation();
-      yield this.loadRegions();
-      if (!this._regions.getValue().length) {
-        this._buildings.next(yield this.loadBuildings());
-      } else {
-        for (const region of this._regions.getValue()) {
-          const blds = yield this.loadBuildings(region.id);
-          if (blds.length) {
-            this._buildings.next(blds);
-            break;
-          }
+  async load() {
+    await this.loadOrganisation();
+    await this.loadRegions();
+    if (!this._regions.getValue().length) {
+      this._buildings.next(await this.loadBuildings());
+    } else {
+      for (const region of this._regions.getValue()) {
+        const blds = await this.loadBuildings(region.id);
+        if (blds.length) {
+          this._buildings.next(blds);
+          break;
         }
       }
-      yield this.loadSettings();
-      if (!this._buildings.getValue()?.length) {
-        log("ORG", "Unable to find any building zones");
-      }
-      yield this.loadLevels();
-      this._updateSettingOverrides();
-    });
+    }
+    await this.loadSettings();
+    if (!this._buildings.getValue()?.length) {
+      log("ORG", "Unable to find any building zones");
+    }
+    await this.loadLevels();
+    this._updateSettingOverrides();
   }
   /**
    * Load organisation data for application
    */
-  loadOrganisation() {
-    return __async(this, null, function* () {
-      const org_list = yield Cc({ tags: "org" }).pipe(map((i) => i.data)).toPromise();
-      if (org_list.length) {
-        const auth = ve();
-        const org = org_list.find((list2) => ln() || list2.id === auth?.config?.org_zone) || org_list[0];
-        const load_metadata = !this._service.get("dont_load_metadata");
-        const bindings = (yield (load_metadata ? hu(org.id, "bindings") : of({ details: {} })).toPromise())?.details;
-        this._organisation = new Organisation(__spreadProps(__spreadValues({}, org), { bindings }));
-      } else {
-        log("ORG", "Unable to find organisation");
-        this._router.navigate(["/misconfigured"]);
-      }
-    });
+  async loadOrganisation() {
+    const org_list = await Cc({ tags: "org" }).pipe(map((i) => i.data)).toPromise();
+    if (org_list.length) {
+      const auth = ve();
+      const org = org_list.find((list2) => ln() || list2.id === auth?.config?.org_zone) || org_list[0];
+      const load_metadata = !this._service.get("dont_load_metadata");
+      const bindings = (await (load_metadata ? hu(org.id, "bindings") : of({ details: {} })).toPromise())?.details;
+      this._organisation = new Organisation(__spreadProps(__spreadValues({}, org), { bindings }));
+    } else {
+      log("ORG", "Unable to find organisation");
+      this._router.navigate(["/misconfigured"]);
+    }
   }
   /**
    * Load region data for the organisation
    */
-  loadRegions() {
-    return __async(this, null, function* () {
-      const list2 = yield Cc({
-        tags: "region",
-        parent_id: this._organisation?.id || "",
-        limit: 500
-      }).pipe(map((i) => i.data.map((_3) => new Region(_3))), catchError(() => of([]))).toPromise();
-      this._regions.next(list2);
-    });
+  async loadRegions() {
+    const list2 = await Cc({
+      tags: "region",
+      parent_id: this._organisation?.id || "",
+      limit: 500
+    }).pipe(map((i) => i.data.map((_3) => new Region(_3))), catchError(() => of([]))).toPromise();
+    this._regions.next(list2);
   }
-  loadRegionData(region) {
-    return __async(this, null, function* () {
-      if (this._loaded_data[region.id])
-        return;
-      const load_metadata = !this._service.get("dont_load_metadata");
-      const settings_request = load_metadata ? hu(region.id, this.app_key) : of(new Ar());
-      const bindings_request = load_metadata ? hu(region.id, "bindings") : of(new Ar());
-      const [settings, bindings, buildings] = yield Promise.all([
-        settings_request.pipe(map((_3) => _3?.details)).toPromise(),
-        bindings_request.pipe(map((_3) => _3?.details)).toPromise(),
-        this.loadBuildings(region.id)
-      ]);
-      this._buildings.next(unique([...this._buildings.getValue(), ...buildings], "id"));
-      this._loaded_data[region.id] = true;
-      region.bindings = bindings;
-      this._region_settings[region.id] = settings;
-    });
+  async loadRegionData(region) {
+    if (this._loaded_data[region.id])
+      return;
+    const load_metadata = !this._service.get("dont_load_metadata");
+    const settings_request = load_metadata ? hu(region.id, this.app_key) : of(new Ar());
+    const bindings_request = load_metadata ? hu(region.id, "bindings") : of(new Ar());
+    const [settings, bindings, buildings] = await Promise.all([
+      settings_request.pipe(map((_3) => _3?.details)).toPromise(),
+      bindings_request.pipe(map((_3) => _3?.details)).toPromise(),
+      this.loadBuildings(region.id)
+    ]);
+    this._buildings.next(unique([...this._buildings.getValue(), ...buildings], "id"));
+    this._loaded_data[region.id] = true;
+    region.bindings = bindings;
+    this._region_settings[region.id] = settings;
   }
   /**
    * Load buildings data for the organisation
    */
-  loadBuildings() {
-    return __async(this, arguments, function* (parent_id = this._organisation?.id) {
-      const building_list = yield Cc({
-        tags: "building",
-        parent_id,
-        limit: 500
-      }).pipe(map((i) => i.data.map((_3) => new Building(_3)))).toPromise();
-      return building_list;
-    });
+  async loadBuildings(parent_id = this._organisation?.id) {
+    const building_list = await Cc({
+      tags: "building",
+      parent_id,
+      limit: 500
+    }).pipe(map((i) => i.data.map((_3) => new Building(_3)))).toPromise();
+    return building_list;
   }
-  loadBuildingData(bld) {
-    return __async(this, null, function* () {
-      if (!bld || this._loaded_data[bld.id])
-        return;
-      const [settings, bindings, booking_rules, driver_settings] = yield Promise.all([
-        hu(bld.id, this.app_key).pipe(map((_3) => _3?.details), catchError(() => of({}))).toPromise(),
-        hu(bld.id, "bindings").pipe(map((_3) => _3?.details), catchError(() => of({}))).toPromise(),
-        hu(bld.id, "booking_rules").pipe(map((_3) => _3?.details), catchError(() => of({}))).toPromise(),
-        (this.app_key.includes("concierge") ? tc({ parent_id: bld.id }) : of({ data: {} })).pipe(catchError(() => of({ data: {} })), map((_3) => {
-          try {
-            return load2(_3?.data.find((_4) => _4.encryption_level === Pt.None) || { settings_string: "" });
-          } catch {
-            return {};
-          }
-        })).toPromise()
-      ]);
-      this._building_settings[bld.id] = __spreadValues(__spreadValues({}, driver_settings || {}), settings || {});
-      bld.bindings = bindings;
-      bld.booking_rules = booking_rules;
-      this._loaded_data[bld.id] = true;
-      this._updateSettingOverrides();
-    });
+  async loadBuildingData(bld) {
+    if (!bld || this._loaded_data[bld.id])
+      return;
+    const [settings, bindings, booking_rules, driver_settings] = await Promise.all([
+      hu(bld.id, this.app_key).pipe(map((_3) => _3?.details), catchError(() => of({}))).toPromise(),
+      hu(bld.id, "bindings").pipe(map((_3) => _3?.details), catchError(() => of({}))).toPromise(),
+      hu(bld.id, "booking_rules").pipe(map((_3) => _3?.details), catchError(() => of({}))).toPromise(),
+      (this.app_key.includes("concierge") ? tc({ parent_id: bld.id }) : of({ data: {} })).pipe(catchError(() => of({ data: {} })), map((_3) => {
+        try {
+          return load2(_3?.data.find((_4) => _4.encryption_level === Pt.None) || { settings_string: "" });
+        } catch {
+          return {};
+        }
+      })).toPromise()
+    ]);
+    this._building_settings[bld.id] = __spreadValues(__spreadValues({}, driver_settings || {}), settings || {});
+    bld.bindings = bindings;
+    bld.booking_rules = booking_rules;
+    this._loaded_data[bld.id] = true;
+    this._updateSettingOverrides();
   }
   /**
    * Load levels data for the buildings
    */
-  loadLevels() {
-    return __async(this, null, function* () {
-      let level_list = yield Cc({
-        tags: "level",
-        authority_id: ve().id,
-        limit: 2500
-      }).pipe(map((i) => i.data)).toPromise();
-      level_list = level_list.filter((_3) => _3.parent_id);
-      if (!level_list?.length) {
-        this._router.navigate(["/misconfigured"]);
-      }
-      let levels = level_list.map((lvl) => new BuildingLevel(lvl));
-      levels = levels.sort((a, b3) => (a.name || "").localeCompare(b3.name || ""));
-      this._levels.next(levels);
-    });
+  async loadLevels() {
+    let level_list = await Cc({
+      tags: "level",
+      authority_id: ve().id,
+      limit: 2500
+    }).pipe(map((i) => i.data)).toPromise();
+    level_list = level_list.filter((_3) => _3.parent_id);
+    if (!level_list?.length) {
+      this._router.navigate(["/misconfigured"]);
+    }
+    let levels = level_list.map((lvl) => new BuildingLevel(lvl));
+    levels = levels.sort((a, b3) => (a.name || "").localeCompare(b3.name || ""));
+    this._levels.next(levels);
   }
   get available_room_configs() {
     return this.buildings.map((m2) => [...m2.room_configurations]).reduce((prev, curr) => prev.concat(curr), []).sort((a, b3) => a.name.localeCompare(b3.name));
   }
-  loadSettings() {
-    return __async(this, null, function* () {
-      if (!this._organisation)
-        return;
-      const app_settings = (yield hu(this._organisation?.id, this.app_key).toPromise())?.details;
-      const global_settings = (yield hu(this._organisation?.id, "settings").toPromise())?.details;
-      this._settings = [global_settings, app_settings];
-      this._service.overrides = [...this._settings];
-      yield this._initialiseActiveBuilding();
-      this._updateSettingOverrides();
-    });
+  async loadSettings() {
+    if (!this._organisation)
+      return;
+    const app_settings = (await hu(this._organisation?.id, this.app_key).toPromise())?.details;
+    const global_settings = (await hu(this._organisation?.id, "settings").toPromise())?.details;
+    this._settings = [global_settings, app_settings];
+    this._service.overrides = [...this._settings];
+    await this._initialiseActiveBuilding();
+    this._updateSettingOverrides();
   }
   _initialiseActiveBuilding() {
     return new Promise((resolve) => {
@@ -103967,39 +103836,35 @@ var _OrganisationService = class _OrganisationService {
       }
     });
   }
-  _setDefaultBuilding() {
-    return __async(this, null, function* () {
-      if (!this.buildings.length)
-        return;
-      const region_id = localStorage.getItem(`PLACEOS.region`);
-      yield region_id ? this.setRegion(this._regions.getValue().find((_3) => _3.id === region_id)) : this._setRegionFromTimezone();
-      this._setBuildingFromTimezone();
-      if (this.building)
-        return;
-      const bld_id = this._service.get("app.default_building");
-      if (bld_id) {
-        this.building = this.buildings.find(({ id }) => id === bld_id);
-      }
-      if (!this.building)
-        this.building = this.buildings[0];
-    });
+  async _setDefaultBuilding() {
+    if (!this.buildings.length)
+      return;
+    const region_id = localStorage.getItem(`PLACEOS.region`);
+    await (region_id ? this.setRegion(this._regions.getValue().find((_3) => _3.id === region_id)) : this._setRegionFromTimezone());
+    this._setBuildingFromTimezone();
+    if (this.building)
+      return;
+    const bld_id = this._service.get("app.default_building");
+    if (bld_id) {
+      this.building = this.buildings.find(({ id }) => id === bld_id);
+    }
+    if (!this.building)
+      this.building = this.buildings[0];
   }
-  _setRegionFromTimezone() {
-    return __async(this, null, function* () {
-      const region_list = this.regions;
-      const timezone = this.timezone;
-      for (const region of region_list) {
-        if (region.timezone === timezone) {
-          return yield this.setRegion(region);
-        }
+  async _setRegionFromTimezone() {
+    const region_list = this.regions;
+    const timezone = this.timezone;
+    for (const region of region_list) {
+      if (region.timezone === timezone) {
+        return await this.setRegion(region);
       }
-      const tz_start = timezone.split("/")[0];
-      for (const region of region_list) {
-        if (region.timezone.startsWith(tz_start)) {
-          return yield this.setRegion(region);
-        }
+    }
+    const tz_start = timezone.split("/")[0];
+    for (const region of region_list) {
+      if (region.timezone.startsWith(tz_start)) {
+        return await this.setRegion(region);
       }
-    });
+    }
   }
   _setBuildingFromTimezone() {
     const bld_list = this.buildings.filter((bld) => !this.region || bld.parent_id === this.region?.id);
@@ -104532,42 +104397,40 @@ var _SpacePipe = class _SpacePipe {
    * Get details of the space with the given ID
    * @param space_id ID or Email of the space
    */
-  transform(space_id) {
-    return __async(this, null, function* () {
-      if (this.org) {
-        yield firstTruthyValueFrom(this.org.initialised.pipe(first((_3) => _3)));
-      }
-      const is_email = space_id?.includes("@");
-      if (!space_id)
-        return EMPTY_SPACE;
-      let space = SPACE_LIST.find(({ id, email }) => id === space_id || email === space_id);
-      if (space)
-        return space;
-      if (ATTEMPT_COUNT[space_id])
-        return EMPTY_SPACE;
-      if (!is_email) {
-        const system = yield cc(space_id).toPromise().catch((_3) => null);
-        if (system) {
-          space = new Space(__spreadProps(__spreadValues({}, system), {
-            level: this.org?.levelWithID([...system.zones])
-          }));
-          SPACE_LIST.push(space);
-          return space;
-        }
-      }
-      const systems = (yield lastValueFrom(uc({
-        in: space_id,
-        zone_id: this.org?.organisation.id
-      }))).data;
-      if (systems.length === 1) {
-        space = new Space(__spreadProps(__spreadValues({}, systems[0]), {
-          level: this.org?.levelWithID([...systems[0].zones])
+  async transform(space_id) {
+    if (this.org) {
+      await firstTruthyValueFrom(this.org.initialised.pipe(first((_3) => _3)));
+    }
+    const is_email = space_id?.includes("@");
+    if (!space_id)
+      return EMPTY_SPACE;
+    let space = SPACE_LIST.find(({ id, email }) => id === space_id || email === space_id);
+    if (space)
+      return space;
+    if (ATTEMPT_COUNT[space_id])
+      return EMPTY_SPACE;
+    if (!is_email) {
+      const system = await cc(space_id).toPromise().catch((_3) => null);
+      if (system) {
+        space = new Space(__spreadProps(__spreadValues({}, system), {
+          level: this.org?.levelWithID([...system.zones])
         }));
         SPACE_LIST.push(space);
         return space;
       }
-      return EMPTY_SPACE;
-    });
+    }
+    const systems = (await lastValueFrom(uc({
+      in: space_id,
+      zone_id: this.org?.organisation.id
+    }))).data;
+    if (systems.length === 1) {
+      space = new Space(__spreadProps(__spreadValues({}, systems[0]), {
+        level: this.org?.levelWithID([...systems[0].zones])
+      }));
+      SPACE_LIST.push(space);
+      return space;
+    }
+    return EMPTY_SPACE;
   }
   get(space_id) {
     return SPACE_LIST.find(({ id, email }) => id === space_id || email === space_id) || EMPTY_SPACE;
@@ -107016,7 +106879,7 @@ function R3(e2, n2) {
   }
   e2.prototype = n2 === null ? Object.create(n2) : (t.prototype = n2.prototype, new t());
 }
-function q3(e2) {
+function I4(e2) {
   var n2 = typeof Symbol == "function" && Symbol.iterator, t = n2 && e2[n2], r2 = 0;
   if (t) return t.call(e2);
   if (e2 && typeof e2.length == "number") return {
@@ -107084,7 +106947,7 @@ var G3 = function() {
       if (s)
         if (this._parentage = null, Array.isArray(s))
           try {
-            for (var c3 = q3(s), a = c3.next(); !a.done; a = c3.next()) {
+            for (var c3 = I4(s), a = c3.next(); !a.done; a = c3.next()) {
               var l3 = a.value;
               l3.remove(this);
             }
@@ -107110,7 +106973,7 @@ var G3 = function() {
       if (v3) {
         this._finalizers = null;
         try {
-          for (var d2 = q3(v3), f2 = d2.next(); !f2.done; f2 = d2.next()) {
+          for (var d2 = I4(v3), f2 = d2.next(); !f2.done; f2 = d2.next()) {
             var p2 = f2.value;
             try {
               Ce(p2);
@@ -107442,7 +107305,7 @@ var xe2 = function(e2) {
       if (r2._throwIfClosed(), !r2.isStopped) {
         r2.currentObservers || (r2.currentObservers = Array.from(r2.observers));
         try {
-          for (var s = q3(r2.currentObservers), c3 = s.next(); !c3.done; c3 = s.next()) {
+          for (var s = I4(r2.currentObservers), c3 = s.next(); !c3.done; c3 = s.next()) {
             var a = c3.value;
             a.next(t);
           }
@@ -107885,7 +107748,7 @@ var P4;
 var A4;
 var k2;
 var _2;
-var I4;
+var q3;
 window.addEventListener("blur", () => H4());
 function xn2(e2) {
   const n2 = JSON.stringify(e2.focus);
@@ -107903,7 +107766,7 @@ function xn2(e2) {
   }
 }
 function H4() {
-  b2("INPUT", "Ending pinch/pan..."), it3("pan_start"), X4 = false, se2 = false, A4 && window.removeEventListener("mousemove", A4), k2 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), I4 && window.removeEventListener("touchend", I4), A4 = k2 = _2 = I4 = P4 = null;
+  b2("INPUT", "Ending pinch/pan..."), it3("pan_start"), X4 = false, se2 = false, A4 && window.removeEventListener("mousemove", A4), k2 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), q3 && window.removeEventListener("touchend", q3), A4 = k2 = _2 = q3 = P4 = null;
 }
 var F14 = {};
 var ve2 = {};
@@ -107934,95 +107797,110 @@ function dt3(e2) {
       const s = r2.querySelector(
         ".svg-viewer__render-container"
       ), c3 = `scale(${e2.zoom * e2.svg_ratio})`;
-      if (!s || !o) throw new Error("Viewer is not setup yet.");
+      if (!s || !o)
+        throw new Error("Viewer is not setup yet.");
       const a = (e2.center.x - 0.5) * (100 * e2.zoom * e2.svg_ratio), l3 = (e2.center.y - 0.5) * (100 * e2.zoom * e2.svg_ratio), u3 = e2.use_gpu ? `translate3d(${a}%, ${l3}%, 0)` : `translate(${a}%, ${l3}%)`;
       s.style.transform = `${u3} ${c3} rotate(${e2.rotate}deg)`, i += `#${e2.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e2.rotate}deg) scale(${1 / e2.zoom * (1 / e2.svg_ratio)}); }`, i += `#${e2.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e2.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, ge2(e2), xn2(e2), Le2(e2), delete F14[e2.id], cancelAnimationFrame(t), n2();
     });
   })), F14[e2.id];
 }
-function ge2(e2) {
-  return __async(this, null, function* () {
-    if ((JSON.stringify(__spreadValues({}, e2.styles)) || "").localeCompare(D3[e2.id])) {
-      const t = e2.element;
-      if (!t) throw new Error("No element set on viewer");
-      const r2 = t.querySelector(".svg-viewer__iframe");
-      if (!r2) throw new Error("No iframe created for viewer");
-      if (!r2.contentWindow) {
-        r2.onload = () => {
-          setTimeout(() => ge2(e2), 50), setTimeout(() => ge2(e2), 500);
-        };
-        return;
-      }
-      const o = {};
-      o[`[empty${Math.floor(Math.random() * 999999)}]`] = {};
-      const i = vt3(__spreadValues(__spreadValues({}, e2.styles), o));
-      r2.contentWindow.postMessage(
-        JSON.stringify({ id: "svg-styles", content: i }),
-        "*"
-      );
+async function ge2(e2) {
+  if ((JSON.stringify(__spreadValues({}, e2.styles)) || "").localeCompare(D3[e2.id])) {
+    const t = e2.element;
+    if (!t) throw new Error("No element set on viewer");
+    const r2 = t.querySelector(
+      ".svg-viewer__iframe"
+    );
+    if (!r2) throw new Error("No iframe created for viewer");
+    if (!r2.contentWindow) {
+      r2.onload = () => {
+        setTimeout(() => ge2(e2), 50), setTimeout(() => ge2(e2), 500);
+      };
+      return;
     }
-  });
+    const o = {};
+    o[`[empty${Math.floor(Math.random() * 999999)}]`] = {};
+    const i = vt3(__spreadValues(__spreadValues({}, e2.styles), o));
+    r2.contentWindow.postMessage(
+      JSON.stringify({ id: "svg-styles", content: i }),
+      "*"
+    );
+  }
 }
-function yt3(e2) {
-  return __async(this, null, function* () {
-    return new Promise((n2) => {
-      B4[e2.id] || (B4[e2.id] = []), B4[e2.id].push(n2), M4(
-        `resize-${e2.id}`,
-        () => {
-          const t = e2.element;
-          if (!t) throw new Error("No element set on viewer");
-          const r2 = t.querySelector(
-            ".svg-viewer__view-container"
-          ), o = t.querySelector(
-            ".svg-viewer__svg-overlays"
-          ), i = t.querySelector(`#${e2.id}`), s = t.querySelector(".svg-viewer"), c3 = t.querySelector(".svg-viewer__svg-output"), a = t.querySelector("iframe"), l3 = s?.getBoundingClientRect() || {}, u3 = r2?.getBoundingClientRect() || {};
-          if (!o || !c3 || !a || !r2)
-            throw new Error("Viewer elements not ready yet.");
-          requestAnimationFrame(() => __async(null, null, function* () {
-            const v3 = l3.height / l3.width, d2 = c3.firstElementChild?.viewBox?.baseVal || {}, f2 = d2.height / d2.width;
-            c3.firstElementChild && (c3.firstElementChild.style.width = "200%");
-            const p2 = (l3.width - 32) * Math.min(1, v3 / f2), y2 = { width: p2, height: p2 * f2 };
-            o.style.width = d2.width + "px", o.style.height = d2.height + "px", r2.style.width = d2.width + "px", r2.style.height = d2.height + "px", a.style.width = d2.width + "px", a.style.height = d2.height + "px", a.width = `${d2.width}`, a.height = `${d2.height}`;
-            const S3 = Math.min(
-              l3.height / d2.height,
-              l3.width / d2.width
-            ), w3 = i?.getBoundingClientRect(), z3 = o?.getBoundingClientRect();
-            let $e2 = { x: 1, y: 1 };
-            w3 && z3 && ($e2 = {
-              x: z3.width * S3 * 0.975 / w3.width,
-              y: z3.height * S3 * 0.975 / w3.height
-            }), D3[e2.id] = "";
-            let ze = x2(e2, {
-              ratio: y2.height / y2.width,
-              svg_ratio: S3,
-              box: u3,
-              content_ratio: $e2
-            });
-            !ze || (e2 = ze, !(yield dt3(e2).catch((ce2) => (console.warn(ce2), false)))) || (B4[e2.id].forEach((ce2) => ce2()), B4[e2.id] = []);
-          }));
-        },
-        100
-      );
-    });
+async function yt3(e2) {
+  return new Promise((n2) => {
+    B4[e2.id] || (B4[e2.id] = []), B4[e2.id].push(n2), M4(
+      `resize-${e2.id}`,
+      () => {
+        const t = e2.element;
+        if (!t) throw new Error("No element set on viewer");
+        const r2 = t.querySelector(
+          ".svg-viewer__view-container"
+        ), o = t.querySelector(".svg-viewer__svg-overlays"), i = t.querySelector(
+          `#${e2.id}`
+        ), s = t.querySelector(
+          ".svg-viewer"
+        ), c3 = t.querySelector(
+          ".svg-viewer__svg-output"
+        ), a = t.querySelector("iframe"), l3 = s?.getBoundingClientRect() || {}, u3 = r2?.getBoundingClientRect() || {};
+        if (!o || !c3 || !a || !r2)
+          throw new Error("Viewer elements not ready yet.");
+        requestAnimationFrame(async () => {
+          const v3 = l3.height / l3.width, d2 = c3.firstElementChild?.viewBox?.baseVal || {}, f2 = d2.height / d2.width;
+          c3.firstElementChild && (c3.firstElementChild.style.width = "200%");
+          const p2 = (l3.width - 32) * Math.min(1, v3 / f2), y2 = { width: p2, height: p2 * f2 };
+          o.style.width = d2.width + "px", o.style.height = d2.height + "px", r2.style.width = d2.width + "px", r2.style.height = d2.height + "px", a.style.width = d2.width + "px", a.style.height = d2.height + "px", a.width = `${d2.width}`, a.height = `${d2.height}`;
+          const S3 = Math.min(
+            l3.height / d2.height,
+            l3.width / d2.width
+          ), w3 = i?.getBoundingClientRect(), z3 = o?.getBoundingClientRect();
+          let $e2 = { x: 1, y: 1 };
+          w3 && z3 && ($e2 = {
+            x: z3.width * S3 * 0.975 / w3.width,
+            y: z3.height * S3 * 0.975 / w3.height
+          }), D3[e2.id] = "";
+          let ze = x2(e2, {
+            ratio: y2.height / y2.width,
+            svg_ratio: S3,
+            box: u3,
+            content_ratio: $e2
+          });
+          !ze || (e2 = ze, !await dt3(e2).catch((ce2) => (console.warn(ce2), false))) || (B4[e2.id].forEach((ce2) => ce2()), B4[e2.id] = []);
+        });
+      },
+      100
+    );
   });
 }
 function Le2(e2) {
   const n2 = e2.element?.querySelector("svg");
   if (!Object.keys(e2.mappings || {}).length) return;
-  const t = e2.element?.querySelector(".svg-viewer__svg-overlays");
+  const t = e2.element?.querySelector(
+    ".svg-viewer__svg-overlays"
+  );
   if (!t || !n2) return;
   if (!t.getBoundingClientRect().width)
-    return M4(`${e2.id}|render-overlays`, () => Le2(e2), 50);
+    return M4(
+      `${e2.id}|render-overlays`,
+      () => Le2(e2),
+      50
+    );
   requestAnimationFrame(() => {
-    Pn2(e2), In2(e2), kn2(e2);
+    Pn2(e2), qn2(e2), kn2(e2);
   });
 }
 function Pn2(e2) {
-  const n2 = e2.labels.filter((r2) => !r2.zoom_level || r2.zoom_level <= e2.zoom), t = JSON.stringify(n2);
+  const n2 = e2.labels.filter(
+    (r2) => !r2.zoom_level || r2.zoom_level <= e2.zoom
+  ), t = JSON.stringify(n2);
   if (t !== ve2[e2.id]) {
-    const r2 = e2.element?.querySelector(".svg-viewer__svg-overlays");
+    const r2 = e2.element?.querySelector(
+      ".svg-viewer__svg-overlays"
+    );
     if (!r2) return;
-    Array.from(r2.querySelectorAll("[label]")).filter((i) => i.parentNode).forEach((i) => r2.removeChild(i));
+    Array.from(
+      r2.querySelectorAll("[label]")
+    ).filter((i) => i.parentNode).forEach((i) => r2.removeChild(i));
     for (const i of n2) {
       let s = { x: 0, y: 0 }, c3 = "~Nothing~";
       typeof i.location == "string" ? (s = e2.mappings[i.location] || s, c3 = `#${i.location}`) : (i.location?.y || i.location?.x) && (s = i.location, c3 = `loc-${s.x}-${s.y}`);
@@ -108042,7 +107920,9 @@ function kn2(e2) {
     }))
   );
   if (n2 !== pe2[e2.id]) {
-    const t = e2.element?.querySelector(".svg-viewer__svg-overlays");
+    const t = e2.element?.querySelector(
+      ".svg-viewer__svg-overlays"
+    );
     if (!t) return console.log("Unable to get overlay element.");
     const r2 = t.querySelectorAll(".feature"), o = [];
     window.overlay_el = t, r2.forEach((i) => {
@@ -108051,26 +107931,38 @@ function kn2(e2) {
       s === "none" || !e2.features.find((c3) => c3.track_id === s) ? t.removeChild(i) : o.push(i);
     });
     for (const i of e2.features) {
-      if (!i.content || o.includes(i.content)) continue;
+      if (!i.content || o.includes(i.content))
+        continue;
       let s = { x: 0, y: 0 }, c3 = { w: 0, h: 0 };
       const a = document.createElement("button");
-      typeof i.location == "string" ? (a.id = `${i.location}`, s = e2.mappings[i.location] || s, (i.hover || i.full_size) && (c3 = e2.mappings[i.location] || c3)) : (i.location?.y || i.location?.x) && (s = i.location), !(!s.x && !s.y) && (a.classList.add("svg-viewer__svg-overlay-item"), a.setAttribute("feature", "true"), a.setAttribute("track-id", `${i.track_id || "none"}`), a.classList.add("feature"), i.z_index && (a.style.zIndex = `${i.z_index}`), i.hover && a.classList.add("svg-viewer__svg-overlay-item__hover"), a.style.top = `${s.y * 100}%`, a.style.left = `${s.x * 100}%`, c3.w || c3.h ? (a.style.width = `${c3.w * 100}%`, a.style.height = `${c3.h * 100}%`) : (a.style.width = "1%", a.style.height = `${1 / e2.ratio}%`), a.style.transform = "translate(-50%, -50%)", i.content instanceof Node && a.appendChild(i.content), t.appendChild(a));
+      typeof i.location == "string" ? (a.id = `${i.location}`, s = e2.mappings[i.location] || s, (i.hover || i.full_size) && (c3 = e2.mappings[i.location] || c3)) : (i.location?.y || i.location?.x) && (s = i.location), !(!s.x && !s.y) && (a.classList.add("svg-viewer__svg-overlay-item"), a.setAttribute("feature", "true"), a.setAttribute(
+        "track-id",
+        `${i.track_id || "none"}`
+      ), a.classList.add("feature"), i.z_index && (a.style.zIndex = `${i.z_index}`), i.hover && a.classList.add(
+        "svg-viewer__svg-overlay-item__hover"
+      ), a.style.top = `${s.y * 100}%`, a.style.left = `${s.x * 100}%`, c3.w || c3.h ? (a.style.width = `${c3.w * 100}%`, a.style.height = `${c3.h * 100}%`) : (a.style.width = "1%", a.style.height = `${1 / e2.ratio}%`), a.style.transform = "translate(-50%, -50%)", i.content instanceof Node && a.appendChild(i.content), t.appendChild(a));
     }
     b2("RENDER", `Added ${e2.features.length} features to view.`), pe2[e2.id] = n2;
   }
 }
-function In2(e2) {
-  const n2 = JSON.stringify(e2.actions.map((t) => __spreadProps(__spreadValues({}, t), { callback: "" })));
+function qn2(e2) {
+  const n2 = JSON.stringify(
+    e2.actions.map((t) => __spreadProps(__spreadValues({}, t), { callback: "" }))
+  );
   if (n2 !== me2[e2.id]) {
-    const t = e2.element?.querySelector(".svg-viewer__svg-overlays");
+    const t = e2.element?.querySelector(
+      ".svg-viewer__svg-overlays"
+    );
     if (!t) return;
-    Array.from(t.querySelectorAll(".action-zone")).filter((o) => o.parentNode && t.contains(o.parentNode)).forEach((o) => t.removeChild(o));
+    Array.from(
+      t.querySelectorAll(".action-zone")
+    ).filter((o) => o.parentNode && t.contains(o.parentNode)).forEach((o) => t.removeChild(o));
     for (const o of e2.actions) {
-      if (!o.action || !o.id || o.id === "*" || o.zone === false) continue;
-      const i = document.createElement("button");
-      i.id = `${o.id}`;
-      const s = e2.mappings[o.id] || { x: 0, y: 0 }, c3 = e2.mappings[o.id] || { w: 0, h: 0 };
-      i.classList.add("svg-viewer__svg-overlay-item"), i.classList.add("action-zone"), i.style.top = `${s.y * 100}%`, i.style.left = `${s.x * 100}%`, (c3.w || c3.h) && (i.style.width = `${c3.w * 100}%`, i.style.height = `${c3.h * 100}%`, i.style.transform = "translate(-50%, -50%)"), t.appendChild(i);
+      if (!o.action || !o.id || o.id === "*" || o.zone === false || t.querySelector(`#${o.id}`)) continue;
+      const s = document.createElement("button");
+      s.id = `${o.id}`;
+      const c3 = e2.mappings[o.id] || { x: 0, y: 0 }, a = e2.mappings[o.id] || { w: 0, h: 0 };
+      s.classList.add("svg-viewer__svg-overlay-item"), s.classList.add("action-zone"), s.style.top = `${c3.y * 100}%`, s.style.left = `${c3.x * 100}%`, (a.w || a.h) && (s.style.width = `${a.w * 100}%`, s.style.height = `${a.h * 100}%`, s.style.transform = "translate(-50%, -50%)"), t.appendChild(s);
     }
     me2[e2.id] = n2;
   }
@@ -108431,21 +108323,19 @@ var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler
     this.loading = signal(false);
     this.online = signal(false);
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      this.loading.set(true);
+  async ngOnInit() {
+    this.loading.set(true);
+    this.online.set(vs());
+    await firstTruthyValueFrom(this._org.initialised);
+    await firstTruthyValueFrom(this._settings.initialised);
+    this.interval("has_token", () => {
       this.online.set(vs());
-      yield firstTruthyValueFrom(this._org.initialised);
-      yield firstTruthyValueFrom(this._settings.initialised);
-      this.interval("has_token", () => {
-        this.online.set(vs());
-        if (!ve() || !Y2())
-          return;
-        this.loading.set(false);
-        this.online.set(vs());
-        this.clearInterval("has_token");
-      }, 1e3);
-    });
+      if (!ve() || !Y2())
+        return;
+      this.loading.set(false);
+      this.online.set(vs());
+      this.clearInterval("has_token");
+    }, 1e3);
   }
 };
 _GlobalLoadingComponent.\u0275fac = function GlobalLoadingComponent_Factory(__ngFactoryType__) {
@@ -108556,12 +108446,10 @@ var _GlobalBannerComponent = class _GlobalBannerComponent {
       return !banner?.content && !banner?.message || localStorage.getItem("PLACE.last_banner") === banner.id;
     }), shareReplay(1));
   }
-  close() {
-    return __async(this, null, function* () {
-      const banner = yield nextValueFrom(this.banner);
-      localStorage.setItem("PLACE.last_banner", banner?.id || "");
-      this._change.next(Date.now());
-    });
+  async close() {
+    const banner = await nextValueFrom(this.banner);
+    localStorage.setItem("PLACE.last_banner", banner?.id || "");
+    this._change.next(Date.now());
   }
 };
 _GlobalBannerComponent.\u0275fac = function GlobalBannerComponent_Factory(__ngFactoryType__) {
@@ -108670,86 +108558,84 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
   get has_chat() {
     return this._settings.get("app.chat.enabled");
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      log("APP", "MOCKS:", mocks_exports);
-      this._hotkey.listen(["Control", "Alt", "Shift", "KeyM"], () => {
-        localStorage.setItem("mock", `${localStorage.getItem("mock") !== "true"}`);
-        location.reload();
-      });
-      this._hotkey.listen(["Control", "Alt", "Shift", "KeyD"], () => {
-        this._settings.saveUserSetting("dark_mode", !this._settings.get("dark_mode"));
-        notifySuccess("Toggled dark mode.");
-      });
-      this._hotkey.listen(["Control", "Alt", "Shift", "KeyC"], () => {
-        this._clipboard.copy(`${Y2()}|${nn()}`);
-        notifySuccess("Successfully copied token.");
-      });
-      this._hotkey.listen(["Control", "Alt", "Shift", "KeyV"], () => {
-        navigator.clipboard?.readText().then((tkn) => this._pasteToken(tkn));
-      });
-      this._hotkey.listen(["Control", "Alt", "Shift", "KeyF"], () => {
-        navigator.clipboard?.readText().then((tkn) => this._pasteToken(tkn));
-      });
-      window.pasteToken = (t) => this._pasteToken(t);
-      this._route.queryParamMap.subscribe((params) => {
-        if (params.has("hide_nav"))
-          localStorage.setItem("PlaceOS.hide_nav", "true");
-        if (params.has("lang")) {
-          const locale = params.get("lang");
-          this._locale?.setLocale(locale);
-          localStorage.setItem("PLACEOS.locale", locale);
-        }
-        if (params.has("x-api-key")) {
-          gs(params.get("x-api-key"));
-        }
-        if (params.has("region_id")) {
-          this._region = params.get("region_id");
-        }
-        if (params.has("building_id")) {
-          this._zone = params.get("building_id");
-        }
-        if (this._region || this._zone)
-          this._setZones();
-      });
-      setNotifyOutlet(this._snackbar);
-      setTranslationService(this._locale);
-      yield firstTruthyValueFrom(this._settings.initialised);
-      setAppName(this._settings.get("app.short_name"));
-      const settings = this._settings.get("composer") || {};
-      settings.mock = !!this._settings.get("mock") || location.origin.includes("demo.place.tech");
-      if (START_QUERY) {
-        const query2 = jt(START_QUERY.substring(1));
-        this._router.navigate([], {
-          relativeTo: this._route,
-          queryParams: query2
-        });
-      }
-      yield setupPlace(settings).catch((_3) => console.error(_3));
-      yield lastValueFrom(this._org.initialised.pipe(first((_3) => _3)));
-      if (this._locale) {
-        this._locale.zone_id = this._org.organisation.id;
-        this._locale.init();
-      }
-      setupCache(this._cache);
-      if (!settings.local_login) {
-        this.timeout("wait_for_user", () => this.onInitError(), 30 * 1e3);
-      }
-      yield lastValueFrom(current_user.pipe(first((_3) => !!_3)));
-      this.clearTimeout("wait_for_user");
-      this._initLocale();
-      setInternalUserDomain(this._settings.get("app.internal_user_domain") || `@${currentUser()?.email?.split("@")[1]}`);
-      this._initAnalytics();
-      initSentry(this._settings.get("app.sentry_dsn"));
-      try {
-        this._setSafariHeaders();
-        this._initUploads();
-        this._initFixedDevice();
-      } catch {
-        log("APP", "Failed to initialise background services.", void 0, "warn");
-      }
-      this._setZones();
+  async ngOnInit() {
+    log("APP", "MOCKS:", mocks_exports);
+    this._hotkey.listen(["Control", "Alt", "Shift", "KeyM"], () => {
+      localStorage.setItem("mock", `${localStorage.getItem("mock") !== "true"}`);
+      location.reload();
     });
+    this._hotkey.listen(["Control", "Alt", "Shift", "KeyD"], () => {
+      this._settings.saveUserSetting("dark_mode", !this._settings.get("dark_mode"));
+      notifySuccess("Toggled dark mode.");
+    });
+    this._hotkey.listen(["Control", "Alt", "Shift", "KeyC"], () => {
+      this._clipboard.copy(`${Y2()}|${nn()}`);
+      notifySuccess("Successfully copied token.");
+    });
+    this._hotkey.listen(["Control", "Alt", "Shift", "KeyV"], () => {
+      navigator.clipboard?.readText().then((tkn) => this._pasteToken(tkn));
+    });
+    this._hotkey.listen(["Control", "Alt", "Shift", "KeyF"], () => {
+      navigator.clipboard?.readText().then((tkn) => this._pasteToken(tkn));
+    });
+    window.pasteToken = (t) => this._pasteToken(t);
+    this._route.queryParamMap.subscribe((params) => {
+      if (params.has("hide_nav"))
+        localStorage.setItem("PlaceOS.hide_nav", "true");
+      if (params.has("lang")) {
+        const locale = params.get("lang");
+        this._locale?.setLocale(locale);
+        localStorage.setItem("PLACEOS.locale", locale);
+      }
+      if (params.has("x-api-key")) {
+        gs(params.get("x-api-key"));
+      }
+      if (params.has("region_id")) {
+        this._region = params.get("region_id");
+      }
+      if (params.has("building_id")) {
+        this._zone = params.get("building_id");
+      }
+      if (this._region || this._zone)
+        this._setZones();
+    });
+    setNotifyOutlet(this._snackbar);
+    setTranslationService(this._locale);
+    await firstTruthyValueFrom(this._settings.initialised);
+    setAppName(this._settings.get("app.short_name"));
+    const settings = this._settings.get("composer") || {};
+    settings.mock = !!this._settings.get("mock") || location.origin.includes("demo.place.tech");
+    if (START_QUERY) {
+      const query2 = jt(START_QUERY.substring(1));
+      this._router.navigate([], {
+        relativeTo: this._route,
+        queryParams: query2
+      });
+    }
+    await setupPlace(settings).catch((_3) => console.error(_3));
+    await lastValueFrom(this._org.initialised.pipe(first((_3) => _3)));
+    if (this._locale) {
+      this._locale.zone_id = this._org.organisation.id;
+      this._locale.init();
+    }
+    setupCache(this._cache);
+    if (!settings.local_login) {
+      this.timeout("wait_for_user", () => this.onInitError(), 30 * 1e3);
+    }
+    await lastValueFrom(current_user.pipe(first((_3) => !!_3)));
+    this.clearTimeout("wait_for_user");
+    this._initLocale();
+    setInternalUserDomain(this._settings.get("app.internal_user_domain") || `@${currentUser()?.email?.split("@")[1]}`);
+    this._initAnalytics();
+    initSentry(this._settings.get("app.sentry_dsn"));
+    try {
+      this._setSafariHeaders();
+      this._initUploads();
+      this._initFixedDevice();
+    } catch {
+      log("APP", "Failed to initialise background services.", void 0, "warn");
+    }
+    this._setZones();
   }
   onInitError() {
     if (ln() || currentUser()?.is_logged_in)
@@ -108826,24 +108712,22 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
       }
     });
   }
-  _initFixedDevice() {
-    return __async(this, null, function* () {
-      if (!pr())
-        return;
-      this.interval("auto-update-version", () => this._checkReload(), 15 * 1e3);
-      yield requestScreenWakeLock();
-    });
+  async _initFixedDevice() {
+    if (!pr())
+      return;
+    this.interval("auto-update-version", () => this._checkReload(), 15 * 1e3);
+    await requestScreenWakeLock();
   }
   _setZones() {
-    this.timeout("set_building+region", () => __async(this, null, function* () {
+    this.timeout("set_building+region", async () => {
       const region = this._org.regions.find((b3) => b3.id === this._region);
       if (region)
         this._org.setRegion(region);
-      const building_list = yield nextValueFrom(this._org.building_list);
+      const building_list = await nextValueFrom(this._org.building_list);
       const bld = building_list.find((b3) => b3.id === this._zone);
       if (bld)
         this._org.setBuilding(bld, true);
-    }), 1e3);
+    }, 1e3);
   }
 };
 _AppComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -110304,19 +110188,17 @@ var _BootstrapComponent = class _BootstrapComponent extends AsyncHandler {
     this.bootstrap = () => this.configure(this.system_id$.getValue());
     this.clearBootstrap = () => localStorage.removeItem(SYS_ID_KEY);
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      this.subscription("route.query", this._route.queryParamMap.subscribe((params) => {
-        if (params.has("clear") && !!params.get("clear")) {
-          this.clearBootstrap();
-        }
-        if (params.has("system_id") || params.has("sys_id")) {
-          this.system_id$.next(params.get("system_id") || params.get("sys_id"));
-          this.bootstrap();
-        }
-      }));
-      this.checkBootstrapped();
-    });
+  async ngOnInit() {
+    this.subscription("route.query", this._route.queryParamMap.subscribe((params) => {
+      if (params.has("clear") && !!params.get("clear")) {
+        this.clearBootstrap();
+      }
+      if (params.has("system_id") || params.has("sys_id")) {
+        this.system_id$.next(params.get("system_id") || params.get("sys_id"));
+        this.bootstrap();
+      }
+    }));
+    this.checkBootstrapped();
   }
   /**
    * Save the bootstrapped ID and redirect to the panel for that ID
@@ -113651,14 +113533,12 @@ var Environment = class {
       this.set(flagName, flagValue);
     }
   }
-  getAsync(flagName) {
-    return __async(this, null, function* () {
-      if (flagName in this.flags) {
-        return this.flags[flagName];
-      }
-      this.flags[flagName] = yield this.evaluateFlag(flagName);
+  async getAsync(flagName) {
+    if (flagName in this.flags) {
       return this.flags[flagName];
-    });
+    }
+    this.flags[flagName] = await this.evaluateFlag(flagName);
+    return this.flags[flagName];
   }
   get(flagName) {
     if (flagName in this.flags) {
@@ -114780,11 +114660,9 @@ var Tensor = class {
    *
    * @doc {heading: 'Tensors', subheading: 'Classes'}
    */
-  buffer() {
-    return __async(this, null, function* () {
-      const vals = yield this.data();
-      return opHandler.buffer(this.shape, this.dtype, vals);
-    });
+  async buffer() {
+    const vals = await this.data();
+    return opHandler.buffer(this.shape, this.dtype, vals);
   }
   /**
    * Returns a `tf.TensorBuffer` that holds the underlying data.
@@ -114799,11 +114677,9 @@ var Tensor = class {
    *
    * @doc {heading: 'Tensors', subheading: 'Classes'}
    */
-  array() {
-    return __async(this, null, function* () {
-      const vals = yield this.data();
-      return toNestedArray(this.shape, vals, this.dtype === "complex64");
-    });
+  async array() {
+    const vals = await this.data();
+    return toNestedArray(this.shape, vals, this.dtype === "complex64");
   }
   /**
    * Returns the tensor data as a nested array. The transfer of data is done
@@ -114820,20 +114696,18 @@ var Tensor = class {
    *
    * @doc {heading: 'Tensors', subheading: 'Classes'}
    */
-  data() {
-    return __async(this, null, function* () {
-      this.throwIfDisposed();
-      const data = trackerFn().read(this.dataId);
-      if (this.dtype === "string") {
-        const bytes = yield data;
-        try {
-          return bytes.map((b3) => decodeString(b3));
-        } catch (_a) {
-          throw new Error("Failed to decode the string bytes into utf-8. To get the original bytes, call tensor.bytes().");
-        }
+  async data() {
+    this.throwIfDisposed();
+    const data = trackerFn().read(this.dataId);
+    if (this.dtype === "string") {
+      const bytes = await data;
+      try {
+        return bytes.map((b3) => decodeString(b3));
+      } catch (_a) {
+        throw new Error("Failed to decode the string bytes into utf-8. To get the original bytes, call tensor.bytes().");
       }
-      return data;
-    });
+    }
+    return data;
   }
   /**
    * Copy the tensor's data to a new GPU resource. Comparing to the `dataSync()`
@@ -114892,16 +114766,14 @@ var Tensor = class {
     return data;
   }
   /** Returns the underlying bytes of the tensor's data. */
-  bytes() {
-    return __async(this, null, function* () {
-      this.throwIfDisposed();
-      const data = yield trackerFn().read(this.dataId);
-      if (this.dtype === "string") {
-        return data;
-      } else {
-        return new Uint8Array(data.buffer);
-      }
-    });
+  async bytes() {
+    this.throwIfDisposed();
+    const data = await trackerFn().read(this.dataId);
+    if (this.dtype === "string") {
+      return data;
+    } else {
+      return new Uint8Array(data.buffer);
+    }
   }
   /**
    * Disposes `tf.Tensor` from memory.
@@ -115175,26 +115047,24 @@ var Engine = class _Engine {
     this.pendingBackendInitId = 0;
     this.state = new EngineState();
   }
-  ready() {
-    return __async(this, null, function* () {
-      if (this.pendingBackendInit != null) {
-        return this.pendingBackendInit.then(() => {
-        });
-      }
-      if (this.backendInstance != null) {
+  async ready() {
+    if (this.pendingBackendInit != null) {
+      return this.pendingBackendInit.then(() => {
+      });
+    }
+    if (this.backendInstance != null) {
+      return;
+    }
+    const sortedBackends = this.getSortedBackends();
+    for (let i = 0; i < sortedBackends.length; i++) {
+      const backendName = sortedBackends[i];
+      const success = await this.initializeBackend(backendName).success;
+      if (success) {
+        await this.setBackend(backendName);
         return;
       }
-      const sortedBackends = this.getSortedBackends();
-      for (let i = 0; i < sortedBackends.length; i++) {
-        const backendName = sortedBackends[i];
-        const success = yield this.initializeBackend(backendName).success;
-        if (success) {
-          yield this.setBackend(backendName);
-          return;
-        }
-      }
-      throw new Error(`Could not initialize any backends, all backend initializations failed.`);
-    });
+    }
+    throw new Error(`Could not initialize any backends, all backend initializations failed.`);
   }
   get backend() {
     if (this.pendingBackendInit != null) {
@@ -115239,25 +115109,23 @@ var Engine = class _Engine {
     this.registryFactory[backendName] = { factory, priority };
     return true;
   }
-  setBackend(backendName) {
-    return __async(this, null, function* () {
-      if (this.registryFactory[backendName] == null) {
-        throw new Error(`Backend name '${backendName}' not found in registry`);
+  async setBackend(backendName) {
+    if (this.registryFactory[backendName] == null) {
+      throw new Error(`Backend name '${backendName}' not found in registry`);
+    }
+    this.backendName = backendName;
+    if (this.registry[backendName] == null) {
+      this.backendInstance = null;
+      const { success, asyncInit } = this.initializeBackend(backendName);
+      const result = asyncInit ? await success : success;
+      if (!result) {
+        return false;
       }
-      this.backendName = backendName;
-      if (this.registry[backendName] == null) {
-        this.backendInstance = null;
-        const { success, asyncInit } = this.initializeBackend(backendName);
-        const result = asyncInit ? yield success : success;
-        if (!result) {
-          return false;
-        }
-      }
-      this.backendInstance = this.registry[backendName];
-      this.setupRegisteredKernels();
-      this.profiler = new Profiler(this.backendInstance);
-      return true;
-    });
+    }
+    this.backendInstance = this.registry[backendName];
+    this.setupRegisteredKernels();
+    this.profiler = new Profiler(this.backendInstance);
+    return true;
   }
   setupRegisteredKernels() {
     const kernels = getKernelsForBackend(this.backendName);
@@ -115751,23 +115619,21 @@ var Engine = class _Engine {
     }
     return info;
   }
-  profile(query2) {
-    return __async(this, null, function* () {
-      this.state.profiling = true;
-      const startBytes = this.state.numBytes;
-      const startNumTensors = this.state.numTensors;
-      this.state.activeProfile.kernels = [];
-      this.state.activeProfile.result = yield query2();
-      this.state.profiling = false;
-      this.state.activeProfile.peakBytes = Math.max(...this.state.activeProfile.kernels.map((d2) => d2.totalBytesSnapshot));
-      this.state.activeProfile.newBytes = this.state.numBytes - startBytes;
-      this.state.activeProfile.newTensors = this.state.numTensors - startNumTensors;
-      for (const kernel of this.state.activeProfile.kernels) {
-        kernel.kernelTimeMs = yield kernel.kernelTimeMs;
-        kernel.extraInfo = yield kernel.extraInfo;
-      }
-      return this.state.activeProfile;
-    });
+  async profile(query2) {
+    this.state.profiling = true;
+    const startBytes = this.state.numBytes;
+    const startNumTensors = this.state.numTensors;
+    this.state.activeProfile.kernels = [];
+    this.state.activeProfile.result = await query2();
+    this.state.profiling = false;
+    this.state.activeProfile.peakBytes = Math.max(...this.state.activeProfile.kernels.map((d2) => d2.totalBytesSnapshot));
+    this.state.activeProfile.newBytes = this.state.numBytes - startBytes;
+    this.state.activeProfile.newTensors = this.state.numTensors - startNumTensors;
+    for (const kernel of this.state.activeProfile.kernels) {
+      kernel.kernelTimeMs = await kernel.kernelTimeMs;
+      kernel.extraInfo = await kernel.extraInfo;
+    }
+    return this.state.activeProfile;
   }
   isTapeOn() {
     return this.state.gradientDepth > 0 && this.state.kernelDepth === 0;
@@ -115928,13 +115794,11 @@ var Engine = class _Engine {
     const info = this.state.tensorInfo.get(dataId);
     return info.backend.readToGPU(dataId, options2);
   }
-  time(query2) {
-    return __async(this, null, function* () {
-      const start = now();
-      const timingInfo = yield this.backend.time(query2);
-      timingInfo.wallMs = now() - start;
-      return timingInfo;
-    });
+  async time(query2) {
+    const start = now();
+    const timingInfo = await this.backend.time(query2);
+    timingInfo.wallMs = now() - start;
+    return timingInfo;
   }
   /**
    * Tracks a Tensor in the current scope to be automatically cleaned up
@@ -116393,46 +116257,44 @@ function backend() {
 
 // node_modules/@tensorflow/tfjs-core/dist/io/io_utils.js
 var NUM_BYTES_STRING_LENGTH = 4;
-function encodeWeights(tensors, group2) {
-  return __async(this, null, function* () {
-    const specs = [];
-    const dataPromises = [];
-    const names = Array.isArray(tensors) ? tensors.map((tensor2) => tensor2.name) : Object.keys(tensors);
-    for (let i = 0; i < names.length; ++i) {
-      const name = names[i];
-      const t = Array.isArray(tensors) ? tensors[i].tensor : tensors[name];
-      if (t.dtype !== "float32" && t.dtype !== "int32" && t.dtype !== "bool" && t.dtype !== "string" && t.dtype !== "complex64") {
-        throw new Error(`Unsupported dtype in weight '${name}': ${t.dtype}`);
-      }
-      const spec = { name, shape: t.shape, dtype: t.dtype };
-      if (t.dtype === "string") {
-        const utf8bytes = new Promise((resolve) => __async(null, null, function* () {
-          const vals = yield t.bytes();
-          const totalNumBytes = vals.reduce((p2, c3) => p2 + c3.length, 0) + NUM_BYTES_STRING_LENGTH * vals.length;
-          const bytes = new Uint8Array(totalNumBytes);
-          let offset = 0;
-          for (let i2 = 0; i2 < vals.length; i2++) {
-            const val = vals[i2];
-            const bytesOfLength = new Uint8Array(new Uint32Array([val.length]).buffer);
-            bytes.set(bytesOfLength, offset);
-            offset += NUM_BYTES_STRING_LENGTH;
-            bytes.set(val, offset);
-            offset += val.length;
-          }
-          resolve(bytes);
-        }));
-        dataPromises.push(utf8bytes);
-      } else {
-        dataPromises.push(t.data());
-      }
-      if (group2 != null) {
-        spec.group = group2;
-      }
-      specs.push(spec);
+async function encodeWeights(tensors, group2) {
+  const specs = [];
+  const dataPromises = [];
+  const names = Array.isArray(tensors) ? tensors.map((tensor2) => tensor2.name) : Object.keys(tensors);
+  for (let i = 0; i < names.length; ++i) {
+    const name = names[i];
+    const t = Array.isArray(tensors) ? tensors[i].tensor : tensors[name];
+    if (t.dtype !== "float32" && t.dtype !== "int32" && t.dtype !== "bool" && t.dtype !== "string" && t.dtype !== "complex64") {
+      throw new Error(`Unsupported dtype in weight '${name}': ${t.dtype}`);
     }
-    const tensorValues = yield Promise.all(dataPromises);
-    return { data: concatenateTypedArrays(tensorValues), specs };
-  });
+    const spec = { name, shape: t.shape, dtype: t.dtype };
+    if (t.dtype === "string") {
+      const utf8bytes = new Promise(async (resolve) => {
+        const vals = await t.bytes();
+        const totalNumBytes = vals.reduce((p2, c3) => p2 + c3.length, 0) + NUM_BYTES_STRING_LENGTH * vals.length;
+        const bytes = new Uint8Array(totalNumBytes);
+        let offset = 0;
+        for (let i2 = 0; i2 < vals.length; i2++) {
+          const val = vals[i2];
+          const bytesOfLength = new Uint8Array(new Uint32Array([val.length]).buffer);
+          bytes.set(bytesOfLength, offset);
+          offset += NUM_BYTES_STRING_LENGTH;
+          bytes.set(val, offset);
+          offset += val.length;
+        }
+        resolve(bytes);
+      });
+      dataPromises.push(utf8bytes);
+    } else {
+      dataPromises.push(t.data());
+    }
+    if (group2 != null) {
+      spec.group = group2;
+    }
+    specs.push(spec);
+  }
+  const tensorValues = await Promise.all(dataPromises);
+  return { data: concatenateTypedArrays(tensorValues), specs };
 }
 function decodeWeights(weightData, specs) {
   const compositeBuffer = new CompositeArrayBuffer(weightData);
@@ -116464,24 +116326,22 @@ function getWeightBytelength(spec, slice4) {
   }
   return size * bytesPerValue;
 }
-function getWeightBytelengthAsync(spec, slice4) {
-  return __async(this, null, function* () {
-    const size = sizeFromShape(spec.shape);
-    let bytesPerValue;
-    if ("quantization" in spec) {
-      const quantization = spec.quantization;
-      bytesPerValue = DTYPE_VALUE_SIZE_MAP[quantization.dtype];
-    } else if (spec.dtype === "string") {
-      let byteLength = 0;
-      for (let i = 0; i < size; i++) {
-        byteLength += NUM_BYTES_STRING_LENGTH + new Uint32Array(yield slice4(byteLength, byteLength + NUM_BYTES_STRING_LENGTH))[0];
-      }
-      return byteLength;
-    } else {
-      bytesPerValue = DTYPE_VALUE_SIZE_MAP[spec.dtype];
+async function getWeightBytelengthAsync(spec, slice4) {
+  const size = sizeFromShape(spec.shape);
+  let bytesPerValue;
+  if ("quantization" in spec) {
+    const quantization = spec.quantization;
+    bytesPerValue = DTYPE_VALUE_SIZE_MAP[quantization.dtype];
+  } else if (spec.dtype === "string") {
+    let byteLength = 0;
+    for (let i = 0; i < size; i++) {
+      byteLength += NUM_BYTES_STRING_LENGTH + new Uint32Array(await slice4(byteLength, byteLength + NUM_BYTES_STRING_LENGTH))[0];
     }
-    return size * bytesPerValue;
-  });
+    return byteLength;
+  } else {
+    bytesPerValue = DTYPE_VALUE_SIZE_MAP[spec.dtype];
+  }
+  return size * bytesPerValue;
 }
 function decodeWeight(spec, byteBuffer) {
   const name = spec.name;
@@ -116570,47 +116430,43 @@ function decodeWeight(spec, byteBuffer) {
   }
   return tensor(values, shape, dtype);
 }
-function readToLength(reader, initialData, length) {
-  return __async(this, null, function* () {
-    let data = new Uint8Array(initialData);
-    while (data.byteLength < length) {
-      const { done, value } = yield reader.read();
-      if (done && value == null) {
-        const missing = length - data.byteLength;
-        throw new Error(`Reader is done but ${missing} bytes are still expected`);
-      }
-      const newData = new Uint8Array(data.length + value.byteLength);
-      newData.set(data, 0);
-      newData.set(new Uint8Array(value), data.length);
-      data = newData;
+async function readToLength(reader, initialData, length) {
+  let data = new Uint8Array(initialData);
+  while (data.byteLength < length) {
+    const { done, value } = await reader.read();
+    if (done && value == null) {
+      const missing = length - data.byteLength;
+      throw new Error(`Reader is done but ${missing} bytes are still expected`);
     }
-    return data.buffer;
-  });
+    const newData = new Uint8Array(data.length + value.byteLength);
+    newData.set(data, 0);
+    newData.set(new Uint8Array(value), data.length);
+    data = newData;
+  }
+  return data.buffer;
 }
-function decodeWeightsStream(weightStream, specs) {
-  return __async(this, null, function* () {
-    const tensors = {};
-    const reader = weightStream.getReader();
-    let data = new ArrayBuffer(0);
-    for (const spec of specs) {
-      const byteLength = yield getWeightBytelengthAsync(spec, (start, end) => __async(null, null, function* () {
-        data = yield readToLength(reader, data, end);
-        return data.slice(start, end);
-      }));
-      data = yield readToLength(reader, data, byteLength);
-      const tensorData = data.slice(0, byteLength);
-      data = data.slice(byteLength);
-      const weightTensor = decodeWeight(spec, tensorData);
-      tensors[spec.name] = weightTensor;
-      if (getBackend() === "webgpu") {
-        const b3 = backend();
-        if ("uploadToGPU" in b3 && sizeFromShape(weightTensor.shape) >= env().get("WEBGPU_CPU_HANDOFF_SIZE_THRESHOLD")) {
-          b3.uploadToGPU(weightTensor.dataId);
-        }
+async function decodeWeightsStream(weightStream, specs) {
+  const tensors = {};
+  const reader = weightStream.getReader();
+  let data = new ArrayBuffer(0);
+  for (const spec of specs) {
+    const byteLength = await getWeightBytelengthAsync(spec, async (start, end) => {
+      data = await readToLength(reader, data, end);
+      return data.slice(start, end);
+    });
+    data = await readToLength(reader, data, byteLength);
+    const tensorData = data.slice(0, byteLength);
+    data = data.slice(byteLength);
+    const weightTensor = decodeWeight(spec, tensorData);
+    tensors[spec.name] = weightTensor;
+    if (getBackend() === "webgpu") {
+      const b3 = backend();
+      if ("uploadToGPU" in b3 && sizeFromShape(weightTensor.shape) >= env().get("WEBGPU_CPU_HANDOFF_SIZE_THRESHOLD")) {
+        b3.uploadToGPU(weightTensor.dataId);
       }
     }
-    return tensors;
-  });
+  }
+  return tensors;
 }
 function concatenateTypedArrays(xs) {
   if (xs === null) {
@@ -116734,15 +116590,13 @@ function getModelArtifactsForJSONSync(modelJSON, weightSpecs, weightData) {
   }
   return modelArtifacts;
 }
-function getModelArtifactsForJSON(modelJSON, loadWeights2) {
-  return __async(this, null, function* () {
-    let weightSpecs;
-    let weightData;
-    if (modelJSON.weightsManifest != null) {
-      [weightSpecs, weightData] = yield loadWeights2(modelJSON.weightsManifest);
-    }
-    return getModelArtifactsForJSONSync(modelJSON, weightSpecs, weightData);
-  });
+async function getModelArtifactsForJSON(modelJSON, loadWeights2) {
+  let weightSpecs;
+  let weightData;
+  if (modelJSON.weightsManifest != null) {
+    [weightSpecs, weightData] = await loadWeights2(modelJSON.weightsManifest);
+  }
+  return getModelArtifactsForJSONSync(modelJSON, weightSpecs, weightData);
 }
 function getModelArtifactsInfoForJSON(modelArtifacts) {
   if (modelArtifacts.modelTopology instanceof ArrayBuffer) {
@@ -116921,18 +116775,14 @@ var BrowserIndexedDB = class {
     }
     this.modelPath = modelPath;
   }
-  save(modelArtifacts) {
-    return __async(this, null, function* () {
-      if (modelArtifacts.modelTopology instanceof ArrayBuffer) {
-        throw new Error("BrowserLocalStorage.save() does not support saving model topology in binary formats yet.");
-      }
-      return this.databaseAction(this.modelPath, modelArtifacts);
-    });
+  async save(modelArtifacts) {
+    if (modelArtifacts.modelTopology instanceof ArrayBuffer) {
+      throw new Error("BrowserLocalStorage.save() does not support saving model topology in binary formats yet.");
+    }
+    return this.databaseAction(this.modelPath, modelArtifacts);
   }
-  load() {
-    return __async(this, null, function* () {
-      return this.databaseAction(this.modelPath);
-    });
+  async load() {
+    return this.databaseAction(this.modelPath);
   }
   /**
    * Perform database action to put model artifacts into or read model artifacts
@@ -117051,80 +116901,76 @@ var BrowserIndexedDBManager = class {
   constructor() {
     this.indexedDB = getIndexedDBFactory();
   }
-  listModels() {
-    return __async(this, null, function* () {
-      return new Promise((resolve, reject) => {
-        const openRequest = this.indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
-        openRequest.onupgradeneeded = () => setUpDatabase(openRequest);
-        openRequest.onsuccess = () => {
-          const db = openRequest.result;
-          const tx = db.transaction(INFO_STORE_NAME, "readonly");
-          const store2 = tx.objectStore(INFO_STORE_NAME);
-          const getAllInfoRequest = store2.getAll();
-          getAllInfoRequest.onsuccess = () => {
-            const out = {};
-            for (const item of getAllInfoRequest.result) {
-              out[item.modelPath] = item.modelArtifactsInfo;
-            }
-            resolve(out);
-          };
-          getAllInfoRequest.onerror = (error) => {
-            db.close();
-            return reject(getAllInfoRequest.error);
-          };
-          tx.oncomplete = () => db.close();
+  async listModels() {
+    return new Promise((resolve, reject) => {
+      const openRequest = this.indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
+      openRequest.onupgradeneeded = () => setUpDatabase(openRequest);
+      openRequest.onsuccess = () => {
+        const db = openRequest.result;
+        const tx = db.transaction(INFO_STORE_NAME, "readonly");
+        const store2 = tx.objectStore(INFO_STORE_NAME);
+        const getAllInfoRequest = store2.getAll();
+        getAllInfoRequest.onsuccess = () => {
+          const out = {};
+          for (const item of getAllInfoRequest.result) {
+            out[item.modelPath] = item.modelArtifactsInfo;
+          }
+          resolve(out);
         };
-        openRequest.onerror = (error) => reject(openRequest.error);
-      });
+        getAllInfoRequest.onerror = (error) => {
+          db.close();
+          return reject(getAllInfoRequest.error);
+        };
+        tx.oncomplete = () => db.close();
+      };
+      openRequest.onerror = (error) => reject(openRequest.error);
     });
   }
-  removeModel(path) {
-    return __async(this, null, function* () {
-      path = maybeStripScheme(path);
-      return new Promise((resolve, reject) => {
-        const openRequest = this.indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
-        openRequest.onupgradeneeded = () => setUpDatabase(openRequest);
-        openRequest.onsuccess = () => {
-          const db = openRequest.result;
-          const infoTx = db.transaction(INFO_STORE_NAME, "readwrite");
-          const infoStore = infoTx.objectStore(INFO_STORE_NAME);
-          const getInfoRequest = infoStore.get(path);
-          let modelTx;
-          getInfoRequest.onsuccess = () => {
-            if (getInfoRequest.result == null) {
-              db.close();
-              return reject(new Error(`Cannot find model with path '${path}' in IndexedDB.`));
-            } else {
-              const deleteInfoRequest = infoStore.delete(path);
-              const deleteModelData = () => {
-                modelTx = db.transaction(MODEL_STORE_NAME, "readwrite");
-                const modelStore = modelTx.objectStore(MODEL_STORE_NAME);
-                const deleteModelRequest = modelStore.delete(path);
-                deleteModelRequest.onsuccess = () => resolve(getInfoRequest.result.modelArtifactsInfo);
-                deleteModelRequest.onerror = (error) => reject(getInfoRequest.error);
-              };
-              deleteInfoRequest.onsuccess = deleteModelData;
-              deleteInfoRequest.onerror = (error) => {
-                deleteModelData();
-                db.close();
-                return reject(getInfoRequest.error);
-              };
-            }
-          };
-          getInfoRequest.onerror = (error) => {
+  async removeModel(path) {
+    path = maybeStripScheme(path);
+    return new Promise((resolve, reject) => {
+      const openRequest = this.indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
+      openRequest.onupgradeneeded = () => setUpDatabase(openRequest);
+      openRequest.onsuccess = () => {
+        const db = openRequest.result;
+        const infoTx = db.transaction(INFO_STORE_NAME, "readwrite");
+        const infoStore = infoTx.objectStore(INFO_STORE_NAME);
+        const getInfoRequest = infoStore.get(path);
+        let modelTx;
+        getInfoRequest.onsuccess = () => {
+          if (getInfoRequest.result == null) {
             db.close();
-            return reject(getInfoRequest.error);
-          };
-          infoTx.oncomplete = () => {
-            if (modelTx == null) {
+            return reject(new Error(`Cannot find model with path '${path}' in IndexedDB.`));
+          } else {
+            const deleteInfoRequest = infoStore.delete(path);
+            const deleteModelData = () => {
+              modelTx = db.transaction(MODEL_STORE_NAME, "readwrite");
+              const modelStore = modelTx.objectStore(MODEL_STORE_NAME);
+              const deleteModelRequest = modelStore.delete(path);
+              deleteModelRequest.onsuccess = () => resolve(getInfoRequest.result.modelArtifactsInfo);
+              deleteModelRequest.onerror = (error) => reject(getInfoRequest.error);
+            };
+            deleteInfoRequest.onsuccess = deleteModelData;
+            deleteInfoRequest.onerror = (error) => {
+              deleteModelData();
               db.close();
-            } else {
-              modelTx.oncomplete = () => db.close();
-            }
-          };
+              return reject(getInfoRequest.error);
+            };
+          }
         };
-        openRequest.onerror = (error) => reject(openRequest.error);
-      });
+        getInfoRequest.onerror = (error) => {
+          db.close();
+          return reject(getInfoRequest.error);
+        };
+        infoTx.oncomplete = () => {
+          if (modelTx == null) {
+            db.close();
+          } else {
+            modelTx.oncomplete = () => db.close();
+          }
+        };
+      };
+      openRequest.onerror = (error) => reject(openRequest.error);
     });
   }
 };
@@ -117182,38 +117028,36 @@ var BrowserLocalStorage = class {
    * @param modelArtifacts The model artifacts to be stored.
    * @returns An instance of SaveResult.
    */
-  save(modelArtifacts) {
-    return __async(this, null, function* () {
-      if (modelArtifacts.modelTopology instanceof ArrayBuffer) {
-        throw new Error("BrowserLocalStorage.save() does not support saving model topology in binary formats yet.");
-      } else {
-        const topology = JSON.stringify(modelArtifacts.modelTopology);
-        const weightSpecs = JSON.stringify(modelArtifacts.weightSpecs);
-        const modelArtifactsInfo = getModelArtifactsInfoForJSON(modelArtifacts);
-        const weightBuffer = CompositeArrayBuffer.join(modelArtifacts.weightData);
-        try {
-          this.LS.setItem(this.keys.info, JSON.stringify(modelArtifactsInfo));
-          this.LS.setItem(this.keys.topology, topology);
-          this.LS.setItem(this.keys.weightSpecs, weightSpecs);
-          this.LS.setItem(this.keys.weightData, arrayBufferToBase64String(weightBuffer));
-          const metadata = {
-            format: modelArtifacts.format,
-            generatedBy: modelArtifacts.generatedBy,
-            convertedBy: modelArtifacts.convertedBy,
-            signature: modelArtifacts.signature != null ? modelArtifacts.signature : void 0,
-            userDefinedMetadata: modelArtifacts.userDefinedMetadata != null ? modelArtifacts.userDefinedMetadata : void 0,
-            modelInitializer: modelArtifacts.modelInitializer != null ? modelArtifacts.modelInitializer : void 0,
-            initializerSignature: modelArtifacts.initializerSignature != null ? modelArtifacts.initializerSignature : void 0,
-            trainingConfig: modelArtifacts.trainingConfig != null ? modelArtifacts.trainingConfig : void 0
-          };
-          this.LS.setItem(this.keys.modelMetadata, JSON.stringify(metadata));
-          return { modelArtifactsInfo };
-        } catch (err) {
-          removeItems(this.keys);
-          throw new Error(`Failed to save model '${this.modelPath}' to local storage: size quota being exceeded is a possible cause of this failure: modelTopologyBytes=${modelArtifactsInfo.modelTopologyBytes}, weightSpecsBytes=${modelArtifactsInfo.weightSpecsBytes}, weightDataBytes=${modelArtifactsInfo.weightDataBytes}.`);
-        }
+  async save(modelArtifacts) {
+    if (modelArtifacts.modelTopology instanceof ArrayBuffer) {
+      throw new Error("BrowserLocalStorage.save() does not support saving model topology in binary formats yet.");
+    } else {
+      const topology = JSON.stringify(modelArtifacts.modelTopology);
+      const weightSpecs = JSON.stringify(modelArtifacts.weightSpecs);
+      const modelArtifactsInfo = getModelArtifactsInfoForJSON(modelArtifacts);
+      const weightBuffer = CompositeArrayBuffer.join(modelArtifacts.weightData);
+      try {
+        this.LS.setItem(this.keys.info, JSON.stringify(modelArtifactsInfo));
+        this.LS.setItem(this.keys.topology, topology);
+        this.LS.setItem(this.keys.weightSpecs, weightSpecs);
+        this.LS.setItem(this.keys.weightData, arrayBufferToBase64String(weightBuffer));
+        const metadata = {
+          format: modelArtifacts.format,
+          generatedBy: modelArtifacts.generatedBy,
+          convertedBy: modelArtifacts.convertedBy,
+          signature: modelArtifacts.signature != null ? modelArtifacts.signature : void 0,
+          userDefinedMetadata: modelArtifacts.userDefinedMetadata != null ? modelArtifacts.userDefinedMetadata : void 0,
+          modelInitializer: modelArtifacts.modelInitializer != null ? modelArtifacts.modelInitializer : void 0,
+          initializerSignature: modelArtifacts.initializerSignature != null ? modelArtifacts.initializerSignature : void 0,
+          trainingConfig: modelArtifacts.trainingConfig != null ? modelArtifacts.trainingConfig : void 0
+        };
+        this.LS.setItem(this.keys.modelMetadata, JSON.stringify(metadata));
+        return { modelArtifactsInfo };
+      } catch (err) {
+        removeItems(this.keys);
+        throw new Error(`Failed to save model '${this.modelPath}' to local storage: size quota being exceeded is a possible cause of this failure: modelTopologyBytes=${modelArtifactsInfo.modelTopologyBytes}, weightSpecsBytes=${modelArtifactsInfo.weightSpecsBytes}, weightDataBytes=${modelArtifactsInfo.weightDataBytes}.`);
       }
-    });
+    }
   }
   /**
    * Load a model from local storage.
@@ -117223,55 +117067,53 @@ var BrowserLocalStorage = class {
    *
    * @returns The loaded model (if loading succeeds).
    */
-  load() {
-    return __async(this, null, function* () {
-      const info = JSON.parse(this.LS.getItem(this.keys.info));
-      if (info == null) {
-        throw new Error(`In local storage, there is no model with name '${this.modelPath}'`);
+  async load() {
+    const info = JSON.parse(this.LS.getItem(this.keys.info));
+    if (info == null) {
+      throw new Error(`In local storage, there is no model with name '${this.modelPath}'`);
+    }
+    if (info.modelTopologyType !== "JSON") {
+      throw new Error("BrowserLocalStorage does not support loading non-JSON model topology yet.");
+    }
+    const out = {};
+    const topology = JSON.parse(this.LS.getItem(this.keys.topology));
+    if (topology == null) {
+      throw new Error(`In local storage, the topology of model '${this.modelPath}' is missing.`);
+    }
+    out.modelTopology = topology;
+    const weightSpecs = JSON.parse(this.LS.getItem(this.keys.weightSpecs));
+    if (weightSpecs == null) {
+      throw new Error(`In local storage, the weight specs of model '${this.modelPath}' are missing.`);
+    }
+    out.weightSpecs = weightSpecs;
+    const metadataString = this.LS.getItem(this.keys.modelMetadata);
+    if (metadataString != null) {
+      const metadata = JSON.parse(metadataString);
+      out.format = metadata.format;
+      out.generatedBy = metadata.generatedBy;
+      out.convertedBy = metadata.convertedBy;
+      if (metadata.signature != null) {
+        out.signature = metadata.signature;
       }
-      if (info.modelTopologyType !== "JSON") {
-        throw new Error("BrowserLocalStorage does not support loading non-JSON model topology yet.");
+      if (metadata.userDefinedMetadata != null) {
+        out.userDefinedMetadata = metadata.userDefinedMetadata;
       }
-      const out = {};
-      const topology = JSON.parse(this.LS.getItem(this.keys.topology));
-      if (topology == null) {
-        throw new Error(`In local storage, the topology of model '${this.modelPath}' is missing.`);
+      if (metadata.modelInitializer != null) {
+        out.modelInitializer = metadata.modelInitializer;
       }
-      out.modelTopology = topology;
-      const weightSpecs = JSON.parse(this.LS.getItem(this.keys.weightSpecs));
-      if (weightSpecs == null) {
-        throw new Error(`In local storage, the weight specs of model '${this.modelPath}' are missing.`);
+      if (metadata.initializerSignature != null) {
+        out.initializerSignature = metadata.initializerSignature;
       }
-      out.weightSpecs = weightSpecs;
-      const metadataString = this.LS.getItem(this.keys.modelMetadata);
-      if (metadataString != null) {
-        const metadata = JSON.parse(metadataString);
-        out.format = metadata.format;
-        out.generatedBy = metadata.generatedBy;
-        out.convertedBy = metadata.convertedBy;
-        if (metadata.signature != null) {
-          out.signature = metadata.signature;
-        }
-        if (metadata.userDefinedMetadata != null) {
-          out.userDefinedMetadata = metadata.userDefinedMetadata;
-        }
-        if (metadata.modelInitializer != null) {
-          out.modelInitializer = metadata.modelInitializer;
-        }
-        if (metadata.initializerSignature != null) {
-          out.initializerSignature = metadata.initializerSignature;
-        }
-        if (metadata.trainingConfig != null) {
-          out.trainingConfig = metadata.trainingConfig;
-        }
+      if (metadata.trainingConfig != null) {
+        out.trainingConfig = metadata.trainingConfig;
       }
-      const weightDataBase64 = this.LS.getItem(this.keys.weightData);
-      if (weightDataBase64 == null) {
-        throw new Error(`In local storage, the binary weight values of model '${this.modelPath}' are missing.`);
-      }
-      out.weightData = base64StringToArrayBuffer(weightDataBase64);
-      return out;
-    });
+    }
+    const weightDataBase64 = this.LS.getItem(this.keys.weightData);
+    if (weightDataBase64 == null) {
+      throw new Error(`In local storage, the binary weight values of model '${this.modelPath}' are missing.`);
+    }
+    out.weightData = base64StringToArrayBuffer(weightDataBase64);
+    return out;
   }
 };
 BrowserLocalStorage.URL_SCHEME = "localstorage://";
@@ -117297,32 +117139,28 @@ var BrowserLocalStorageManager = class {
     assert(typeof window === "undefined" || typeof window.localStorage !== "undefined", () => "Current browser does not appear to support localStorage");
     this.LS = window.localStorage;
   }
-  listModels() {
-    return __async(this, null, function* () {
-      const out = {};
-      const prefix = PATH_PREFIX + PATH_SEPARATOR;
-      const suffix = PATH_SEPARATOR + INFO_SUFFIX;
-      for (let i = 0; i < this.LS.length; ++i) {
-        const key = this.LS.key(i);
-        if (key.startsWith(prefix) && key.endsWith(suffix)) {
-          const modelPath = getModelPathFromKey(key);
-          out[modelPath] = JSON.parse(this.LS.getItem(key));
-        }
+  async listModels() {
+    const out = {};
+    const prefix = PATH_PREFIX + PATH_SEPARATOR;
+    const suffix = PATH_SEPARATOR + INFO_SUFFIX;
+    for (let i = 0; i < this.LS.length; ++i) {
+      const key = this.LS.key(i);
+      if (key.startsWith(prefix) && key.endsWith(suffix)) {
+        const modelPath = getModelPathFromKey(key);
+        out[modelPath] = JSON.parse(this.LS.getItem(key));
       }
-      return out;
-    });
+    }
+    return out;
   }
-  removeModel(path) {
-    return __async(this, null, function* () {
-      path = maybeStripScheme2(path);
-      const keys = getModelKeys(path);
-      if (this.LS.getItem(keys.info) == null) {
-        throw new Error(`Cannot find model at path '${path}'`);
-      }
-      const info = JSON.parse(this.LS.getItem(keys.info));
-      removeItems(keys);
-      return info;
-    });
+  async removeModel(path) {
+    path = maybeStripScheme2(path);
+    const keys = getModelKeys(path);
+    if (this.LS.getItem(keys.info) == null) {
+      throw new Error(`Cannot find model at path '${path}'`);
+    }
+    const info = JSON.parse(this.LS.getItem(keys.info));
+    removeItems(keys);
+    return info;
   }
 };
 
@@ -117374,63 +117212,53 @@ function parseURL(url) {
     path: url.split(URL_SCHEME_SUFFIX)[1]
   };
 }
-function cloneModelInternal(sourceURL, destURL, deleteSource = false) {
-  return __async(this, null, function* () {
-    assert(sourceURL !== destURL, () => `Old path and new path are the same: '${sourceURL}'`);
-    const loadHandlers = IORouterRegistry.getLoadHandlers(sourceURL);
-    assert(loadHandlers.length > 0, () => `Copying failed because no load handler is found for source URL ${sourceURL}.`);
-    assert(loadHandlers.length < 2, () => `Copying failed because more than one (${loadHandlers.length}) load handlers for source URL ${sourceURL}.`);
-    const loadHandler = loadHandlers[0];
-    const saveHandlers = IORouterRegistry.getSaveHandlers(destURL);
-    assert(saveHandlers.length > 0, () => `Copying failed because no save handler is found for destination URL ${destURL}.`);
-    assert(saveHandlers.length < 2, () => `Copying failed because more than one (${loadHandlers.length}) save handlers for destination URL ${destURL}.`);
-    const saveHandler = saveHandlers[0];
-    const sourceScheme = parseURL(sourceURL).scheme;
-    const sourcePath = parseURL(sourceURL).path;
-    const sameMedium = sourceScheme === parseURL(sourceURL).scheme;
-    const modelArtifacts = yield loadHandler.load();
-    if (deleteSource && sameMedium) {
-      yield ModelStoreManagerRegistry.getManager(sourceScheme).removeModel(sourcePath);
+async function cloneModelInternal(sourceURL, destURL, deleteSource = false) {
+  assert(sourceURL !== destURL, () => `Old path and new path are the same: '${sourceURL}'`);
+  const loadHandlers = IORouterRegistry.getLoadHandlers(sourceURL);
+  assert(loadHandlers.length > 0, () => `Copying failed because no load handler is found for source URL ${sourceURL}.`);
+  assert(loadHandlers.length < 2, () => `Copying failed because more than one (${loadHandlers.length}) load handlers for source URL ${sourceURL}.`);
+  const loadHandler = loadHandlers[0];
+  const saveHandlers = IORouterRegistry.getSaveHandlers(destURL);
+  assert(saveHandlers.length > 0, () => `Copying failed because no save handler is found for destination URL ${destURL}.`);
+  assert(saveHandlers.length < 2, () => `Copying failed because more than one (${loadHandlers.length}) save handlers for destination URL ${destURL}.`);
+  const saveHandler = saveHandlers[0];
+  const sourceScheme = parseURL(sourceURL).scheme;
+  const sourcePath = parseURL(sourceURL).path;
+  const sameMedium = sourceScheme === parseURL(sourceURL).scheme;
+  const modelArtifacts = await loadHandler.load();
+  if (deleteSource && sameMedium) {
+    await ModelStoreManagerRegistry.getManager(sourceScheme).removeModel(sourcePath);
+  }
+  const saveResult = await saveHandler.save(modelArtifacts);
+  if (deleteSource && !sameMedium) {
+    await ModelStoreManagerRegistry.getManager(sourceScheme).removeModel(sourcePath);
+  }
+  return saveResult.modelArtifactsInfo;
+}
+async function listModels() {
+  const schemes = ModelStoreManagerRegistry.getSchemes();
+  const out = {};
+  for (const scheme of schemes) {
+    const schemeOut = await ModelStoreManagerRegistry.getManager(scheme).listModels();
+    for (const path in schemeOut) {
+      const url = scheme + URL_SCHEME_SUFFIX + path;
+      out[url] = schemeOut[path];
     }
-    const saveResult = yield saveHandler.save(modelArtifacts);
-    if (deleteSource && !sameMedium) {
-      yield ModelStoreManagerRegistry.getManager(sourceScheme).removeModel(sourcePath);
-    }
-    return saveResult.modelArtifactsInfo;
-  });
+  }
+  return out;
 }
-function listModels() {
-  return __async(this, null, function* () {
-    const schemes = ModelStoreManagerRegistry.getSchemes();
-    const out = {};
-    for (const scheme of schemes) {
-      const schemeOut = yield ModelStoreManagerRegistry.getManager(scheme).listModels();
-      for (const path in schemeOut) {
-        const url = scheme + URL_SCHEME_SUFFIX + path;
-        out[url] = schemeOut[path];
-      }
-    }
-    return out;
-  });
+async function removeModel(url) {
+  const schemeAndPath = parseURL(url);
+  const manager = ModelStoreManagerRegistry.getManager(schemeAndPath.scheme);
+  return manager.removeModel(schemeAndPath.path);
 }
-function removeModel(url) {
-  return __async(this, null, function* () {
-    const schemeAndPath = parseURL(url);
-    const manager = ModelStoreManagerRegistry.getManager(schemeAndPath.scheme);
-    return manager.removeModel(schemeAndPath.path);
-  });
+async function copyModel(sourceURL, destURL) {
+  const deleteSource = false;
+  return cloneModelInternal(sourceURL, destURL, deleteSource);
 }
-function copyModel(sourceURL, destURL) {
-  return __async(this, null, function* () {
-    const deleteSource = false;
-    return cloneModelInternal(sourceURL, destURL, deleteSource);
-  });
-}
-function moveModel(sourceURL, destURL) {
-  return __async(this, null, function* () {
-    const deleteSource = true;
-    return cloneModelInternal(sourceURL, destURL, deleteSource);
-  });
+async function moveModel(sourceURL, destURL) {
+  const deleteSource = true;
+  return cloneModelInternal(sourceURL, destURL, deleteSource);
 }
 
 // node_modules/@tensorflow/tfjs-core/dist/platforms/platform_browser.js
@@ -120379,33 +120207,31 @@ function separableConv2d_(x3, depthwiseFilter, pointwiseFilter, strides, pad2, d
 var separableConv2d = /* @__PURE__ */ op({ separableConv2d_ });
 
 // node_modules/@tensorflow/tfjs-core/dist/ops/setdiff1d_async.js
-function setdiff1dAsync_(x3, y2) {
-  return __async(this, null, function* () {
-    const $x = convertToTensor(x3, "x", "setdiff1d");
-    const $y = convertToTensor(y2, "y", "setdiff1d");
-    assert($x.dtype === $y.dtype, () => `x and y should have the same dtype, but got x (${$x.dtype}) and y (${$y.dtype}).`);
-    assert($x.rank === 1, () => `x should be 1D tensor, but got x (${$x.shape}).`);
-    assert($y.rank === 1, () => `y should be 1D tensor, but got y (${$y.shape}).`);
-    const xVals = yield $x.data();
-    const yVals = yield $y.data();
-    const ySet = new Set(yVals);
-    let outputSize = 0;
-    for (let i = 0; i < xVals.length; i++) {
-      if (!ySet.has(xVals[i])) {
-        outputSize++;
-      }
+async function setdiff1dAsync_(x3, y2) {
+  const $x = convertToTensor(x3, "x", "setdiff1d");
+  const $y = convertToTensor(y2, "y", "setdiff1d");
+  assert($x.dtype === $y.dtype, () => `x and y should have the same dtype, but got x (${$x.dtype}) and y (${$y.dtype}).`);
+  assert($x.rank === 1, () => `x should be 1D tensor, but got x (${$x.shape}).`);
+  assert($y.rank === 1, () => `y should be 1D tensor, but got y (${$y.shape}).`);
+  const xVals = await $x.data();
+  const yVals = await $y.data();
+  const ySet = new Set(yVals);
+  let outputSize = 0;
+  for (let i = 0; i < xVals.length; i++) {
+    if (!ySet.has(xVals[i])) {
+      outputSize++;
     }
-    const buffer2 = new TensorBuffer([outputSize], $x.dtype);
-    const indices = new TensorBuffer([outputSize], "int32");
-    for (let i = 0, p2 = 0; i < xVals.length; i++) {
-      if (!ySet.has(xVals[i])) {
-        buffer2.values[p2] = xVals[i];
-        indices.values[p2] = i;
-        p2++;
-      }
+  }
+  const buffer2 = new TensorBuffer([outputSize], $x.dtype);
+  const indices = new TensorBuffer([outputSize], "int32");
+  for (let i = 0, p2 = 0; i < xVals.length; i++) {
+    if (!ySet.has(xVals[i])) {
+      buffer2.values[p2] = xVals[i];
+      indices.values[p2] = i;
+      p2++;
     }
-    return [buffer2.toTensor(), indices.toTensor()];
-  });
+  }
+  return [buffer2.toTensor(), indices.toTensor()];
 }
 var setdiff1dAsync = setdiff1dAsync_;
 
@@ -120906,51 +120732,47 @@ function whereImpl(condShape, condVals) {
 }
 
 // node_modules/@tensorflow/tfjs-core/dist/ops/where_async.js
-function whereAsync_(condition) {
-  return __async(this, null, function* () {
-    const $condition = convertToTensor(condition, "condition", "whereAsync", "bool");
-    const vals = yield $condition.data();
-    const res = whereImpl($condition.shape, vals);
-    if (condition !== $condition) {
-      $condition.dispose();
-    }
-    return res;
-  });
+async function whereAsync_(condition) {
+  const $condition = convertToTensor(condition, "condition", "whereAsync", "bool");
+  const vals = await $condition.data();
+  const res = whereImpl($condition.shape, vals);
+  if (condition !== $condition) {
+    $condition.dispose();
+  }
+  return res;
 }
 var whereAsync = whereAsync_;
 
 // node_modules/@tensorflow/tfjs-core/dist/ops/boolean_mask.js
-function booleanMaskAsync_(tensor2, mask, axis) {
-  return __async(this, null, function* () {
-    const $tensor = convertToTensor(tensor2, "tensor", "boolMask");
-    const $mask = convertToTensor(mask, "mask", "boolMask", "bool");
-    const axisFrom = axis == null ? 0 : axis;
-    const maskDim = $mask.rank;
-    const tensorShape = $tensor.shape;
-    assert(maskDim > 0, () => "mask cannot be scalar");
-    assertShapesMatch(tensorShape.slice(axisFrom, axisFrom + maskDim), $mask.shape, `mask's shape must match the first K dimensions of tensor's shape,`);
-    let leadingSize = 1;
-    for (let i = axisFrom; i < axisFrom + maskDim; i++) {
-      leadingSize *= tensorShape[i];
-    }
-    const targetTensorShape = tensorShape.slice(0, axisFrom).concat([leadingSize], tensorShape.slice(axisFrom + maskDim));
-    const reshapedTensor = reshape($tensor, targetTensorShape);
-    const reshapedMask = reshape($mask, [-1]);
-    const positivePositions = yield whereAsync(reshapedMask);
-    const indices = squeeze(positivePositions, [1]);
-    const res = gather(reshapedTensor, indices, axisFrom);
-    if (tensor2 !== $tensor) {
-      $tensor.dispose();
-    }
-    if (mask !== $mask) {
-      $mask.dispose();
-    }
-    indices.dispose();
-    reshapedTensor.dispose();
-    reshapedMask.dispose();
-    positivePositions.dispose();
-    return res;
-  });
+async function booleanMaskAsync_(tensor2, mask, axis) {
+  const $tensor = convertToTensor(tensor2, "tensor", "boolMask");
+  const $mask = convertToTensor(mask, "mask", "boolMask", "bool");
+  const axisFrom = axis == null ? 0 : axis;
+  const maskDim = $mask.rank;
+  const tensorShape = $tensor.shape;
+  assert(maskDim > 0, () => "mask cannot be scalar");
+  assertShapesMatch(tensorShape.slice(axisFrom, axisFrom + maskDim), $mask.shape, `mask's shape must match the first K dimensions of tensor's shape,`);
+  let leadingSize = 1;
+  for (let i = axisFrom; i < axisFrom + maskDim; i++) {
+    leadingSize *= tensorShape[i];
+  }
+  const targetTensorShape = tensorShape.slice(0, axisFrom).concat([leadingSize], tensorShape.slice(axisFrom + maskDim));
+  const reshapedTensor = reshape($tensor, targetTensorShape);
+  const reshapedMask = reshape($mask, [-1]);
+  const positivePositions = await whereAsync(reshapedMask);
+  const indices = squeeze(positivePositions, [1]);
+  const res = gather(reshapedTensor, indices, axisFrom);
+  if (tensor2 !== $tensor) {
+    $tensor.dispose();
+  }
+  if (mask !== $mask) {
+    $mask.dispose();
+  }
+  indices.dispose();
+  reshapedTensor.dispose();
+  reshapedMask.dispose();
+  positivePositions.dispose();
+  return res;
 }
 var booleanMaskAsync = booleanMaskAsync_;
 
@@ -121116,43 +120938,41 @@ function cosineWindow(windowLength, a, b3) {
 }
 
 // node_modules/@tensorflow/tfjs-core/dist/ops/in_top_k.js
-function inTopKAsync_(predictions, targets, k3 = 1) {
-  return __async(this, null, function* () {
-    const $predictions = convertToTensor(predictions, "predictions", "inTopK");
-    const $targets = convertToTensor(targets, "targets", "inTopK");
-    assert($predictions.rank > 1, () => `inTopK() expects the predictions to be of rank 2 or higher, but got ${$predictions.rank}`);
-    assert($predictions.rank - 1 === $targets.rank, () => `predictions rank should be 1 larger than targets rank, but got predictions rank ${$predictions.rank} and targets rank ${$targets.rank}`);
-    assertShapesMatch($predictions.shape.slice(0, $predictions.shape.length - 1), $targets.shape, `predictions's shape should be align with the targets' shape, except the last dimension.`);
-    const lastDim = $predictions.shape[$predictions.shape.length - 1];
-    assert(k3 > 0 && k3 <= lastDim, () => `'k' passed to inTopK() must be > 0 && <= the predictions last dimension (${lastDim}), but got ${k3}`);
-    const predictionsVals = yield $predictions.data();
-    const targetsVals = yield $targets.data();
-    const [batch, size] = [predictionsVals.length / lastDim, lastDim];
-    const precision2 = getTypedArrayFromDType("bool", batch);
-    for (let b3 = 0; b3 < batch; b3++) {
-      const offset = b3 * size;
-      const vals = predictionsVals.subarray(offset, offset + size);
-      const valAndInd = [];
-      for (let i = 0; i < vals.length; i++) {
-        valAndInd.push({ value: vals[i], index: i });
-      }
-      valAndInd.sort((a, b4) => b4.value - a.value);
-      precision2[b3] = 0;
-      for (let i = 0; i < k3; i++) {
-        if (valAndInd[i].index === targetsVals[b3]) {
-          precision2[b3] = 1;
-          break;
-        }
+async function inTopKAsync_(predictions, targets, k3 = 1) {
+  const $predictions = convertToTensor(predictions, "predictions", "inTopK");
+  const $targets = convertToTensor(targets, "targets", "inTopK");
+  assert($predictions.rank > 1, () => `inTopK() expects the predictions to be of rank 2 or higher, but got ${$predictions.rank}`);
+  assert($predictions.rank - 1 === $targets.rank, () => `predictions rank should be 1 larger than targets rank, but got predictions rank ${$predictions.rank} and targets rank ${$targets.rank}`);
+  assertShapesMatch($predictions.shape.slice(0, $predictions.shape.length - 1), $targets.shape, `predictions's shape should be align with the targets' shape, except the last dimension.`);
+  const lastDim = $predictions.shape[$predictions.shape.length - 1];
+  assert(k3 > 0 && k3 <= lastDim, () => `'k' passed to inTopK() must be > 0 && <= the predictions last dimension (${lastDim}), but got ${k3}`);
+  const predictionsVals = await $predictions.data();
+  const targetsVals = await $targets.data();
+  const [batch, size] = [predictionsVals.length / lastDim, lastDim];
+  const precision2 = getTypedArrayFromDType("bool", batch);
+  for (let b3 = 0; b3 < batch; b3++) {
+    const offset = b3 * size;
+    const vals = predictionsVals.subarray(offset, offset + size);
+    const valAndInd = [];
+    for (let i = 0; i < vals.length; i++) {
+      valAndInd.push({ value: vals[i], index: i });
+    }
+    valAndInd.sort((a, b4) => b4.value - a.value);
+    precision2[b3] = 0;
+    for (let i = 0; i < k3; i++) {
+      if (valAndInd[i].index === targetsVals[b3]) {
+        precision2[b3] = 1;
+        break;
       }
     }
-    if (predictions !== $predictions) {
-      $predictions.dispose();
-    }
-    if (targets !== $targets) {
-      $targets.dispose();
-    }
-    return tensor(precision2, $targets.shape, "bool");
-  });
+  }
+  if (predictions !== $predictions) {
+    $predictions.dispose();
+  }
+  if (targets !== $targets) {
+    $targets.dispose();
+  }
+  return tensor(precision2, $targets.shape, "bool");
 }
 var inTopKAsync = inTopKAsync_;
 
@@ -121889,26 +121709,24 @@ function ascendingComparator(c1, c22) {
 }
 
 // node_modules/@tensorflow/tfjs-core/dist/ops/image/non_max_suppression_async.js
-function nonMaxSuppressionAsync_(_0, _1, _22) {
-  return __async(this, arguments, function* (boxes, scores, maxOutputSize, iouThreshold = 0.5, scoreThreshold = Number.NEGATIVE_INFINITY) {
-    const $boxes = convertToTensor(boxes, "boxes", "nonMaxSuppressionAsync");
-    const $scores = convertToTensor(scores, "scores", "nonMaxSuppressionAsync");
-    const inputs = nonMaxSuppSanityCheck($boxes, $scores, maxOutputSize, iouThreshold, scoreThreshold);
-    maxOutputSize = inputs.maxOutputSize;
-    iouThreshold = inputs.iouThreshold;
-    scoreThreshold = inputs.scoreThreshold;
-    const boxesAndScores = yield Promise.all([$boxes.data(), $scores.data()]);
-    const boxesVals = boxesAndScores[0];
-    const scoresVals = boxesAndScores[1];
-    const { selectedIndices } = nonMaxSuppressionV3Impl(boxesVals, scoresVals, maxOutputSize, iouThreshold, scoreThreshold);
-    if ($boxes !== boxes) {
-      $boxes.dispose();
-    }
-    if ($scores !== scores) {
-      $scores.dispose();
-    }
-    return tensor1d(selectedIndices, "int32");
-  });
+async function nonMaxSuppressionAsync_(boxes, scores, maxOutputSize, iouThreshold = 0.5, scoreThreshold = Number.NEGATIVE_INFINITY) {
+  const $boxes = convertToTensor(boxes, "boxes", "nonMaxSuppressionAsync");
+  const $scores = convertToTensor(scores, "scores", "nonMaxSuppressionAsync");
+  const inputs = nonMaxSuppSanityCheck($boxes, $scores, maxOutputSize, iouThreshold, scoreThreshold);
+  maxOutputSize = inputs.maxOutputSize;
+  iouThreshold = inputs.iouThreshold;
+  scoreThreshold = inputs.scoreThreshold;
+  const boxesAndScores = await Promise.all([$boxes.data(), $scores.data()]);
+  const boxesVals = boxesAndScores[0];
+  const scoresVals = boxesAndScores[1];
+  const { selectedIndices } = nonMaxSuppressionV3Impl(boxesVals, scoresVals, maxOutputSize, iouThreshold, scoreThreshold);
+  if ($boxes !== boxes) {
+    $boxes.dispose();
+  }
+  if ($scores !== scores) {
+    $scores.dispose();
+  }
+  return tensor1d(selectedIndices, "int32");
 }
 var nonMaxSuppressionAsync = nonMaxSuppressionAsync_;
 
@@ -121929,30 +121747,28 @@ function nonMaxSuppressionWithScore_(boxes, scores, maxOutputSize, iouThreshold 
 var nonMaxSuppressionWithScore = /* @__PURE__ */ op({ nonMaxSuppressionWithScore_ });
 
 // node_modules/@tensorflow/tfjs-core/dist/ops/image/non_max_suppression_with_score_async.js
-function nonMaxSuppressionWithScoreAsync_(_0, _1, _22) {
-  return __async(this, arguments, function* (boxes, scores, maxOutputSize, iouThreshold = 0.5, scoreThreshold = Number.NEGATIVE_INFINITY, softNmsSigma = 0) {
-    const $boxes = convertToTensor(boxes, "boxes", "nonMaxSuppressionAsync");
-    const $scores = convertToTensor(scores, "scores", "nonMaxSuppressionAsync");
-    const params = nonMaxSuppSanityCheck($boxes, $scores, maxOutputSize, iouThreshold, scoreThreshold, softNmsSigma);
-    maxOutputSize = params.maxOutputSize;
-    iouThreshold = params.iouThreshold;
-    scoreThreshold = params.scoreThreshold;
-    softNmsSigma = params.softNmsSigma;
-    const boxesAndScores = yield Promise.all([$boxes.data(), $scores.data()]);
-    const boxesVals = boxesAndScores[0];
-    const scoresVals = boxesAndScores[1];
-    const { selectedIndices, selectedScores } = nonMaxSuppressionV5Impl(boxesVals, scoresVals, maxOutputSize, iouThreshold, scoreThreshold, softNmsSigma);
-    if ($boxes !== boxes) {
-      $boxes.dispose();
-    }
-    if ($scores !== scores) {
-      $scores.dispose();
-    }
-    return {
-      selectedIndices: tensor1d(selectedIndices, "int32"),
-      selectedScores: tensor1d(selectedScores)
-    };
-  });
+async function nonMaxSuppressionWithScoreAsync_(boxes, scores, maxOutputSize, iouThreshold = 0.5, scoreThreshold = Number.NEGATIVE_INFINITY, softNmsSigma = 0) {
+  const $boxes = convertToTensor(boxes, "boxes", "nonMaxSuppressionAsync");
+  const $scores = convertToTensor(scores, "scores", "nonMaxSuppressionAsync");
+  const params = nonMaxSuppSanityCheck($boxes, $scores, maxOutputSize, iouThreshold, scoreThreshold, softNmsSigma);
+  maxOutputSize = params.maxOutputSize;
+  iouThreshold = params.iouThreshold;
+  scoreThreshold = params.scoreThreshold;
+  softNmsSigma = params.softNmsSigma;
+  const boxesAndScores = await Promise.all([$boxes.data(), $scores.data()]);
+  const boxesVals = boxesAndScores[0];
+  const scoresVals = boxesAndScores[1];
+  const { selectedIndices, selectedScores } = nonMaxSuppressionV5Impl(boxesVals, scoresVals, maxOutputSize, iouThreshold, scoreThreshold, softNmsSigma);
+  if ($boxes !== boxes) {
+    $boxes.dispose();
+  }
+  if ($scores !== scores) {
+    $scores.dispose();
+  }
+  return {
+    selectedIndices: tensor1d(selectedIndices, "int32"),
+    selectedScores: tensor1d(selectedScores)
+  };
 }
 var nonMaxSuppressionWithScoreAsync = nonMaxSuppressionWithScoreAsync_;
 
@@ -121985,35 +121801,33 @@ function nonMaxSuppressionPadded_(boxes, scores, maxOutputSize, iouThreshold = 0
 var nonMaxSuppressionPadded = /* @__PURE__ */ op({ nonMaxSuppressionPadded_ });
 
 // node_modules/@tensorflow/tfjs-core/dist/ops/image/non_max_suppression_padded_async.js
-function nonMaxSuppressionPaddedAsync_(_0, _1, _22) {
-  return __async(this, arguments, function* (boxes, scores, maxOutputSize, iouThreshold = 0.5, scoreThreshold = Number.NEGATIVE_INFINITY, padToMaxOutputSize = false) {
-    const $boxes = convertToTensor(boxes, "boxes", "nonMaxSuppressionAsync");
-    const $scores = convertToTensor(scores, "scores", "nonMaxSuppressionAsync");
-    const params = nonMaxSuppSanityCheck(
-      $boxes,
-      $scores,
-      maxOutputSize,
-      iouThreshold,
-      scoreThreshold,
-      null
-      /* softNmsSigma */
-    );
-    const $maxOutputSize = params.maxOutputSize;
-    const $iouThreshold = params.iouThreshold;
-    const $scoreThreshold = params.scoreThreshold;
-    const [boxesVals, scoresVals] = yield Promise.all([$boxes.data(), $scores.data()]);
-    const { selectedIndices, validOutputs } = nonMaxSuppressionV4Impl(boxesVals, scoresVals, $maxOutputSize, $iouThreshold, $scoreThreshold, padToMaxOutputSize);
-    if ($boxes !== boxes) {
-      $boxes.dispose();
-    }
-    if ($scores !== scores) {
-      $scores.dispose();
-    }
-    return {
-      selectedIndices: tensor1d(selectedIndices, "int32"),
-      validOutputs: scalar(validOutputs, "int32")
-    };
-  });
+async function nonMaxSuppressionPaddedAsync_(boxes, scores, maxOutputSize, iouThreshold = 0.5, scoreThreshold = Number.NEGATIVE_INFINITY, padToMaxOutputSize = false) {
+  const $boxes = convertToTensor(boxes, "boxes", "nonMaxSuppressionAsync");
+  const $scores = convertToTensor(scores, "scores", "nonMaxSuppressionAsync");
+  const params = nonMaxSuppSanityCheck(
+    $boxes,
+    $scores,
+    maxOutputSize,
+    iouThreshold,
+    scoreThreshold,
+    null
+    /* softNmsSigma */
+  );
+  const $maxOutputSize = params.maxOutputSize;
+  const $iouThreshold = params.iouThreshold;
+  const $scoreThreshold = params.scoreThreshold;
+  const [boxesVals, scoresVals] = await Promise.all([$boxes.data(), $scores.data()]);
+  const { selectedIndices, validOutputs } = nonMaxSuppressionV4Impl(boxesVals, scoresVals, $maxOutputSize, $iouThreshold, $scoreThreshold, padToMaxOutputSize);
+  if ($boxes !== boxes) {
+    $boxes.dispose();
+  }
+  if ($scores !== scores) {
+    $scores.dispose();
+  }
+  return {
+    selectedIndices: tensor1d(selectedIndices, "int32"),
+    validOutputs: scalar(validOutputs, "int32")
+  };
 }
 var nonMaxSuppressionPaddedAsync = nonMaxSuppressionPaddedAsync_;
 
@@ -122888,27 +122702,21 @@ var Optimizer = class extends Serializable {
       dispose(this.iterations_);
     }
   }
-  saveIterations() {
-    return __async(this, null, function* () {
-      if (this.iterations_ == null) {
-        this.iterations_ = 0;
-      }
-      return {
-        name: "iter",
-        // TODO(cais): Use 'int64' type when available.
-        tensor: scalar(this.iterations_, "int32")
-      };
-    });
+  async saveIterations() {
+    if (this.iterations_ == null) {
+      this.iterations_ = 0;
+    }
+    return {
+      name: "iter",
+      // TODO(cais): Use 'int64' type when available.
+      tensor: scalar(this.iterations_, "int32")
+    };
   }
-  getWeights() {
-    return __async(this, null, function* () {
-      throw new Error("getWeights() is not implemented for this optimizer yet.");
-    });
+  async getWeights() {
+    throw new Error("getWeights() is not implemented for this optimizer yet.");
   }
-  setWeights(weightValues) {
-    return __async(this, null, function* () {
-      throw new Error(`setWeights() is not implemented for this optimizer class ${this.getClassName()}`);
-    });
+  async setWeights(weightValues) {
+    throw new Error(`setWeights() is not implemented for this optimizer class ${this.getClassName()}`);
   }
   /**
    * Extract the first element of the weight values and set it
@@ -122917,11 +122725,9 @@ var Optimizer = class extends Serializable {
    * @param weightValues
    * @returns Weight values with the first element consumed and excluded.
    */
-  extractIterations(weightValues) {
-    return __async(this, null, function* () {
-      this.iterations_ = (yield weightValues[0].tensor.data())[0];
-      return weightValues.slice(1);
-    });
+  async extractIterations(weightValues) {
+    this.iterations_ = (await weightValues[0].tensor.data())[0];
+    return weightValues.slice(1);
   }
 };
 Object.defineProperty(Optimizer, Symbol.hasInstance, {
@@ -122988,26 +122794,22 @@ var AdadeltaOptimizer = class extends Optimizer {
       dispose(this.accumulatedUpdates.map((v3) => v3.variable));
     }
   }
-  getWeights() {
-    return __async(this, null, function* () {
-      const variables = [...this.accumulatedGrads, ...this.accumulatedUpdates];
-      return [yield this.saveIterations()].concat(variables.map((v3) => ({ name: v3.originalName, tensor: v3.variable })));
-    });
+  async getWeights() {
+    const variables = [...this.accumulatedGrads, ...this.accumulatedUpdates];
+    return [await this.saveIterations()].concat(variables.map((v3) => ({ name: v3.originalName, tensor: v3.variable })));
   }
-  setWeights(weightValues) {
-    return __async(this, null, function* () {
-      weightValues = yield this.extractIterations(weightValues);
-      const variableCount = weightValues.length / 2;
-      const trainable = false;
-      this.accumulatedGrads = weightValues.slice(0, variableCount).map((v3) => ({
-        originalName: v3.name,
-        variable: v3.tensor.variable(trainable)
-      }));
-      this.accumulatedUpdates = weightValues.slice(variableCount, variableCount * 2).map((v3) => ({
-        originalName: v3.name,
-        variable: v3.tensor.variable(trainable)
-      }));
-    });
+  async setWeights(weightValues) {
+    weightValues = await this.extractIterations(weightValues);
+    const variableCount = weightValues.length / 2;
+    const trainable = false;
+    this.accumulatedGrads = weightValues.slice(0, variableCount).map((v3) => ({
+      originalName: v3.name,
+      variable: v3.tensor.variable(trainable)
+    }));
+    this.accumulatedUpdates = weightValues.slice(variableCount, variableCount * 2).map((v3) => ({
+      originalName: v3.name,
+      variable: v3.tensor.variable(trainable)
+    }));
   }
   getConfig() {
     return {
@@ -123064,17 +122866,13 @@ var AdagradOptimizer = class extends Optimizer {
       dispose(this.accumulatedGrads.map((v3) => v3.variable));
     }
   }
-  getWeights() {
-    return __async(this, null, function* () {
-      return [yield this.saveIterations()].concat(this.accumulatedGrads.map((v3) => ({ name: v3.originalName, tensor: v3.variable })));
-    });
+  async getWeights() {
+    return [await this.saveIterations()].concat(this.accumulatedGrads.map((v3) => ({ name: v3.originalName, tensor: v3.variable })));
   }
-  setWeights(weightValues) {
-    return __async(this, null, function* () {
-      weightValues = yield this.extractIterations(weightValues);
-      const trainable = false;
-      this.accumulatedGrads = weightValues.map((v3) => ({ originalName: v3.name, variable: v3.tensor.variable(trainable) }));
-    });
+  async setWeights(weightValues) {
+    weightValues = await this.extractIterations(weightValues);
+    const trainable = false;
+    this.accumulatedGrads = weightValues.map((v3) => ({ originalName: v3.name, variable: v3.tensor.variable(trainable) }));
   }
   getConfig() {
     return {
@@ -123160,30 +122958,26 @@ var AdamOptimizer = class extends Optimizer {
       dispose(this.accumulatedSecondMoment.map((v3) => v3.variable));
     }
   }
-  getWeights() {
-    return __async(this, null, function* () {
-      const variables = [...this.accumulatedFirstMoment, ...this.accumulatedSecondMoment];
-      return [yield this.saveIterations()].concat(variables.map((v3) => ({ name: v3.originalName, tensor: v3.variable })));
-    });
+  async getWeights() {
+    const variables = [...this.accumulatedFirstMoment, ...this.accumulatedSecondMoment];
+    return [await this.saveIterations()].concat(variables.map((v3) => ({ name: v3.originalName, tensor: v3.variable })));
   }
-  setWeights(weightValues) {
-    return __async(this, null, function* () {
-      weightValues = yield this.extractIterations(weightValues);
-      tidy(() => {
-        this.accBeta1.assign(pow(this.beta1, this.iterations_ + 1));
-        this.accBeta2.assign(pow(this.beta2, this.iterations_ + 1));
-      });
-      const variableCount = weightValues.length / 2;
-      const trainable = false;
-      this.accumulatedFirstMoment = weightValues.slice(0, variableCount).map((v3) => ({
-        originalName: v3.name,
-        variable: v3.tensor.variable(trainable)
-      }));
-      this.accumulatedSecondMoment = weightValues.slice(variableCount, variableCount * 2).map((v3) => ({
-        originalName: v3.name,
-        variable: v3.tensor.variable(trainable)
-      }));
+  async setWeights(weightValues) {
+    weightValues = await this.extractIterations(weightValues);
+    tidy(() => {
+      this.accBeta1.assign(pow(this.beta1, this.iterations_ + 1));
+      this.accBeta2.assign(pow(this.beta2, this.iterations_ + 1));
     });
+    const variableCount = weightValues.length / 2;
+    const trainable = false;
+    this.accumulatedFirstMoment = weightValues.slice(0, variableCount).map((v3) => ({
+      originalName: v3.name,
+      variable: v3.tensor.variable(trainable)
+    }));
+    this.accumulatedSecondMoment = weightValues.slice(variableCount, variableCount * 2).map((v3) => ({
+      originalName: v3.name,
+      variable: v3.tensor.variable(trainable)
+    }));
   }
   getConfig() {
     return {
@@ -123272,15 +123066,11 @@ var AdamaxOptimizer = class extends Optimizer {
       dispose(this.accumulatedWeightedInfNorm.map((v3) => v3.variable));
     }
   }
-  getWeights() {
-    return __async(this, null, function* () {
-      throw new Error("getWeights() is not implemented for Adamax yet.");
-    });
+  async getWeights() {
+    throw new Error("getWeights() is not implemented for Adamax yet.");
   }
-  setWeights(weightValues) {
-    return __async(this, null, function* () {
-      throw new Error("setWeights() is not implemented for Adamax yet.");
-    });
+  async setWeights(weightValues) {
+    throw new Error("setWeights() is not implemented for Adamax yet.");
   }
   getConfig() {
     return {
@@ -123336,18 +123126,14 @@ var SGDOptimizer = class extends Optimizer {
   dispose() {
     this.c.dispose();
   }
-  getWeights() {
-    return __async(this, null, function* () {
-      return [yield this.saveIterations()];
-    });
+  async getWeights() {
+    return [await this.saveIterations()];
   }
-  setWeights(weightValues) {
-    return __async(this, null, function* () {
-      weightValues = yield this.extractIterations(weightValues);
-      if (weightValues.length !== 0) {
-        throw new Error("SGD optimizer does not have settable weights.");
-      }
-    });
+  async setWeights(weightValues) {
+    weightValues = await this.extractIterations(weightValues);
+    if (weightValues.length !== 0) {
+      throw new Error("SGD optimizer does not have settable weights.");
+    }
   }
   getConfig() {
     return { "learningRate": this.learningRate };
@@ -123417,17 +123203,13 @@ var MomentumOptimizer = class extends SGDOptimizer {
   setMomentum(momentum) {
     this.momentum = momentum;
   }
-  getWeights() {
-    return __async(this, null, function* () {
-      return [yield this.saveIterations()].concat(this.accumulations.map((v3) => ({ name: v3.originalName, tensor: v3.variable })));
-    });
+  async getWeights() {
+    return [await this.saveIterations()].concat(this.accumulations.map((v3) => ({ name: v3.originalName, tensor: v3.variable })));
   }
-  setWeights(weightValues) {
-    return __async(this, null, function* () {
-      weightValues = yield this.extractIterations(weightValues);
-      const trainable = false;
-      this.accumulations = weightValues.map((v3) => ({ originalName: v3.name, variable: v3.tensor.variable(trainable) }));
-    });
+  async setWeights(weightValues) {
+    weightValues = await this.extractIterations(weightValues);
+    const trainable = false;
+    this.accumulations = weightValues.map((v3) => ({ originalName: v3.name, variable: v3.tensor.variable(trainable) }));
   }
   getConfig() {
     return {
@@ -123529,35 +123311,31 @@ var RMSPropOptimizer = class extends Optimizer {
       dispose(this.accumulatedMoments.map((v3) => v3.variable));
     }
   }
-  getWeights() {
-    return __async(this, null, function* () {
-      const variables = [...this.accumulatedMeanSquares, ...this.accumulatedMoments];
-      if (this.centered) {
-        variables.push(...this.accumulatedMeanGrads);
-      }
-      return [yield this.saveIterations()].concat(variables.map((v3) => ({ name: v3.originalName, tensor: v3.variable })));
-    });
+  async getWeights() {
+    const variables = [...this.accumulatedMeanSquares, ...this.accumulatedMoments];
+    if (this.centered) {
+      variables.push(...this.accumulatedMeanGrads);
+    }
+    return [await this.saveIterations()].concat(variables.map((v3) => ({ name: v3.originalName, tensor: v3.variable })));
   }
-  setWeights(weightValues) {
-    return __async(this, null, function* () {
-      weightValues = yield this.extractIterations(weightValues);
-      const variableCount = this.centered ? weightValues.length / 3 : weightValues.length / 2;
-      const trainable = false;
-      this.accumulatedMeanSquares = weightValues.slice(0, variableCount).map((v3) => ({
+  async setWeights(weightValues) {
+    weightValues = await this.extractIterations(weightValues);
+    const variableCount = this.centered ? weightValues.length / 3 : weightValues.length / 2;
+    const trainable = false;
+    this.accumulatedMeanSquares = weightValues.slice(0, variableCount).map((v3) => ({
+      originalName: v3.name,
+      variable: v3.tensor.variable(trainable)
+    }));
+    this.accumulatedMoments = weightValues.slice(variableCount, variableCount * 2).map((v3) => ({
+      originalName: v3.name,
+      variable: v3.tensor.variable(trainable)
+    }));
+    if (this.centered) {
+      this.accumulatedMeanGrads = weightValues.slice(variableCount * 2, variableCount * 3).map((v3) => ({
         originalName: v3.name,
         variable: v3.tensor.variable(trainable)
       }));
-      this.accumulatedMoments = weightValues.slice(variableCount, variableCount * 2).map((v3) => ({
-        originalName: v3.name,
-        variable: v3.tensor.variable(trainable)
-      }));
-      if (this.centered) {
-        this.accumulatedMeanGrads = weightValues.slice(variableCount * 2, variableCount * 3).map((v3) => ({
-          originalName: v3.name,
-          variable: v3.tensor.variable(trainable)
-        }));
-      }
-    });
+    }
   }
   getConfig() {
     return {
@@ -123643,35 +123421,33 @@ var BrowserDownloads = class _BrowserDownloads {
     this.modelJsonFileName = fileNamePrefix + DEFAULT_JSON_EXTENSION_NAME;
     this.weightDataFileName = fileNamePrefix + DEFAULT_WEIGHT_DATA_EXTENSION_NAME;
   }
-  save(modelArtifacts) {
-    return __async(this, null, function* () {
-      if (typeof document === "undefined") {
-        throw new Error("Browser downloads are not supported in this environment since `document` is not present");
+  async save(modelArtifacts) {
+    if (typeof document === "undefined") {
+      throw new Error("Browser downloads are not supported in this environment since `document` is not present");
+    }
+    const weightBuffer = CompositeArrayBuffer.join(modelArtifacts.weightData);
+    const weightsURL = window.URL.createObjectURL(new Blob([weightBuffer], { type: "application/octet-stream" }));
+    if (modelArtifacts.modelTopology instanceof ArrayBuffer) {
+      throw new Error("BrowserDownloads.save() does not support saving model topology in binary formats yet.");
+    } else {
+      const weightsManifest = [{
+        paths: ["./" + this.weightDataFileName],
+        weights: modelArtifacts.weightSpecs
+      }];
+      const modelJSON = getModelJSONForModelArtifacts(modelArtifacts, weightsManifest);
+      const modelJsonURL = window.URL.createObjectURL(new Blob([JSON.stringify(modelJSON)], { type: "application/json" }));
+      const jsonAnchor = this.modelJsonAnchor == null ? document.createElement("a") : this.modelJsonAnchor;
+      jsonAnchor.download = this.modelJsonFileName;
+      jsonAnchor.href = modelJsonURL;
+      await defer2(() => jsonAnchor.dispatchEvent(new MouseEvent("click")));
+      if (modelArtifacts.weightData != null) {
+        const weightDataAnchor = this.weightDataAnchor == null ? document.createElement("a") : this.weightDataAnchor;
+        weightDataAnchor.download = this.weightDataFileName;
+        weightDataAnchor.href = weightsURL;
+        await defer2(() => weightDataAnchor.dispatchEvent(new MouseEvent("click")));
       }
-      const weightBuffer = CompositeArrayBuffer.join(modelArtifacts.weightData);
-      const weightsURL = window.URL.createObjectURL(new Blob([weightBuffer], { type: "application/octet-stream" }));
-      if (modelArtifacts.modelTopology instanceof ArrayBuffer) {
-        throw new Error("BrowserDownloads.save() does not support saving model topology in binary formats yet.");
-      } else {
-        const weightsManifest = [{
-          paths: ["./" + this.weightDataFileName],
-          weights: modelArtifacts.weightSpecs
-        }];
-        const modelJSON = getModelJSONForModelArtifacts(modelArtifacts, weightsManifest);
-        const modelJsonURL = window.URL.createObjectURL(new Blob([JSON.stringify(modelJSON)], { type: "application/json" }));
-        const jsonAnchor = this.modelJsonAnchor == null ? document.createElement("a") : this.modelJsonAnchor;
-        jsonAnchor.download = this.modelJsonFileName;
-        jsonAnchor.href = modelJsonURL;
-        yield defer2(() => jsonAnchor.dispatchEvent(new MouseEvent("click")));
-        if (modelArtifacts.weightData != null) {
-          const weightDataAnchor = this.weightDataAnchor == null ? document.createElement("a") : this.weightDataAnchor;
-          weightDataAnchor.download = this.weightDataFileName;
-          weightDataAnchor.href = weightsURL;
-          yield defer2(() => weightDataAnchor.dispatchEvent(new MouseEvent("click")));
-        }
-        return { modelArtifactsInfo: getModelArtifactsInfoForJSON(modelArtifacts) };
-      }
-    });
+      return { modelArtifactsInfo: getModelArtifactsInfoForJSON(modelArtifacts) };
+    }
   }
 };
 BrowserDownloads.URL_SCHEME = "downloads://";
@@ -123683,32 +123459,30 @@ var BrowserFiles = class {
     this.jsonFile = files[0];
     this.weightsFiles = files.slice(1);
   }
-  load() {
-    return __async(this, null, function* () {
-      return new Promise((resolve, reject) => {
-        const jsonReader = new FileReader();
-        jsonReader.onload = (event) => {
-          const modelJSON = JSON.parse(event.target.result);
-          const modelTopology = modelJSON.modelTopology;
-          if (modelTopology == null) {
-            reject(new Error(`modelTopology field is missing from file ${this.jsonFile.name}`));
-            return;
-          }
-          const weightsManifest = modelJSON.weightsManifest;
-          if (weightsManifest == null) {
-            reject(new Error(`weightManifest field is missing from file ${this.jsonFile.name}`));
-            return;
-          }
-          if (this.weightsFiles.length === 0) {
-            resolve({ modelTopology });
-            return;
-          }
-          const modelArtifactsPromise = getModelArtifactsForJSON(modelJSON, (weightsManifest2) => this.loadWeights(weightsManifest2));
-          resolve(modelArtifactsPromise);
-        };
-        jsonReader.onerror = (error) => reject(`Failed to read model topology and weights manifest JSON from file '${this.jsonFile.name}'. BrowserFiles supports loading Keras-style tf.Model artifacts only.`);
-        jsonReader.readAsText(this.jsonFile);
-      });
+  async load() {
+    return new Promise((resolve, reject) => {
+      const jsonReader = new FileReader();
+      jsonReader.onload = (event) => {
+        const modelJSON = JSON.parse(event.target.result);
+        const modelTopology = modelJSON.modelTopology;
+        if (modelTopology == null) {
+          reject(new Error(`modelTopology field is missing from file ${this.jsonFile.name}`));
+          return;
+        }
+        const weightsManifest = modelJSON.weightsManifest;
+        if (weightsManifest == null) {
+          reject(new Error(`weightManifest field is missing from file ${this.jsonFile.name}`));
+          return;
+        }
+        if (this.weightsFiles.length === 0) {
+          resolve({ modelTopology });
+          return;
+        }
+        const modelArtifactsPromise = getModelArtifactsForJSON(modelJSON, (weightsManifest2) => this.loadWeights(weightsManifest2));
+        resolve(modelArtifactsPromise);
+      };
+      jsonReader.onerror = (error) => reject(`Failed to read model topology and weights manifest JSON from file '${this.jsonFile.name}'. BrowserFiles supports loading Keras-style tf.Model artifacts only.`);
+      jsonReader.readAsText(this.jsonFile);
     });
   }
   loadWeights(weightsManifest) {
@@ -123806,22 +123580,20 @@ function monitorPromisesProgress(promises, onProgress, startFraction, endFractio
 }
 
 // node_modules/@tensorflow/tfjs-core/dist/io/weights_loader.js
-function loadWeightsAsArrayBuffer(fetchURLs, loadOptions) {
-  return __async(this, null, function* () {
-    if (loadOptions == null) {
-      loadOptions = {};
-    }
-    const fetchFunc = loadOptions.fetchFunc == null ? env().platform.fetch : loadOptions.fetchFunc;
-    const requests = fetchURLs.map((fetchURL) => fetchFunc(fetchURL, loadOptions.requestInit, { isBinary: true }));
-    const fetchStartFraction = 0;
-    const fetchEndFraction = 0.5;
-    const responses = loadOptions.onProgress == null ? yield Promise.all(requests) : yield monitorPromisesProgress(requests, loadOptions.onProgress, fetchStartFraction, fetchEndFraction);
-    const bufferPromises = responses.map((response) => response.arrayBuffer());
-    const bufferStartFraction = 0.5;
-    const bufferEndFraction = 1;
-    const buffers = loadOptions.onProgress == null ? yield Promise.all(bufferPromises) : yield monitorPromisesProgress(bufferPromises, loadOptions.onProgress, bufferStartFraction, bufferEndFraction);
-    return buffers;
-  });
+async function loadWeightsAsArrayBuffer(fetchURLs, loadOptions) {
+  if (loadOptions == null) {
+    loadOptions = {};
+  }
+  const fetchFunc = loadOptions.fetchFunc == null ? env().platform.fetch : loadOptions.fetchFunc;
+  const requests = fetchURLs.map((fetchURL) => fetchFunc(fetchURL, loadOptions.requestInit, { isBinary: true }));
+  const fetchStartFraction = 0;
+  const fetchEndFraction = 0.5;
+  const responses = loadOptions.onProgress == null ? await Promise.all(requests) : await monitorPromisesProgress(requests, loadOptions.onProgress, fetchStartFraction, fetchEndFraction);
+  const bufferPromises = responses.map((response) => response.arrayBuffer());
+  const bufferStartFraction = 0.5;
+  const bufferEndFraction = 1;
+  const buffers = loadOptions.onProgress == null ? await Promise.all(bufferPromises) : await monitorPromisesProgress(bufferPromises, loadOptions.onProgress, bufferStartFraction, bufferEndFraction);
+  return buffers;
 }
 function streamWeights(fetchURLs, loadOptions) {
   var _a;
@@ -123830,14 +123602,14 @@ function streamWeights(fetchURLs, loadOptions) {
   let chunkReader;
   (_a = loadOptions.onProgress) === null || _a === void 0 ? void 0 : _a.call(loadOptions, 0);
   return new ReadableStream({
-    pull: (controller) => __async(null, null, function* () {
+    pull: async (controller) => {
       var _a2;
       while (fetchIndex < fetchURLs.length) {
         if (!chunkReader) {
-          const body = (yield fetchFunc(fetchURLs[fetchIndex], loadOptions.requestInit, { isBinary: true })).body;
+          const body = (await fetchFunc(fetchURLs[fetchIndex], loadOptions.requestInit, { isBinary: true })).body;
           chunkReader = body.getReader();
         }
-        const { done, value } = yield chunkReader.read();
+        const { done, value } = await chunkReader.read();
         if (done) {
           fetchIndex++;
           chunkReader = void 0;
@@ -123848,18 +123620,16 @@ function streamWeights(fetchURLs, loadOptions) {
         return;
       }
       controller.close();
-    })
+    }
   });
 }
-function loadWeights(manifest, filePathPrefix = "", weightNames, requestInit) {
-  return __async(this, null, function* () {
-    const fetchWeights = (fetchUrls) => loadWeightsAsArrayBuffer(fetchUrls, { requestInit });
-    const loadWeights2 = weightsLoaderFactory(fetchWeights);
-    return loadWeights2(manifest, filePathPrefix, weightNames);
-  });
+async function loadWeights(manifest, filePathPrefix = "", weightNames, requestInit) {
+  const fetchWeights = (fetchUrls) => loadWeightsAsArrayBuffer(fetchUrls, { requestInit });
+  const loadWeights2 = weightsLoaderFactory(fetchWeights);
+  return loadWeights2(manifest, filePathPrefix, weightNames);
 }
 function weightsLoaderFactory(fetchWeightsFunction) {
-  return (manifest, filePathPrefix = "", weightNames) => __async(null, null, function* () {
+  return async (manifest, filePathPrefix = "", weightNames) => {
     const groupIndicesToFetchMap = manifest.map(() => false);
     const groupWeightsToFetch = {};
     const weightsFound = weightNames != null ? weightNames.map(() => false) : [];
@@ -123912,7 +123682,7 @@ Manifest JSON has weights with names: ${allManifestWeightNames.join(", ")}.`);
         fetchUrls.push(fetchUrl);
       });
     });
-    const buffers = yield fetchWeightsFunction(fetchUrls);
+    const buffers = await fetchWeightsFunction(fetchUrls);
     const weightsTensorMap = {};
     let bufferIndexOffset = 0;
     groupIndicesToFetch.forEach((i) => {
@@ -123929,7 +123699,7 @@ Manifest JSON has weights with names: ${allManifestWeightNames.join(", ")}.`);
       bufferIndexOffset += numBuffers;
     });
     return weightsTensorMap;
-  });
+  };
 }
 
 // node_modules/@tensorflow/tfjs-core/dist/io/http.js
@@ -123960,59 +123730,55 @@ var HTTPRequest = class {
     this.requestInit = loadOptions.requestInit || {};
     this.loadOptions = loadOptions;
   }
-  save(modelArtifacts) {
-    return __async(this, null, function* () {
-      if (modelArtifacts.modelTopology instanceof ArrayBuffer) {
-        throw new Error("BrowserHTTPRequest.save() does not support saving model topology in binary formats yet.");
-      }
-      const init3 = Object.assign({ method: this.DEFAULT_METHOD }, this.requestInit);
-      init3.body = new FormData();
-      const weightsManifest = [{
-        paths: ["./model.weights.bin"],
-        weights: modelArtifacts.weightSpecs
-      }];
-      const modelTopologyAndWeightManifest = getModelJSONForModelArtifacts(modelArtifacts, weightsManifest);
-      init3.body.append("model.json", new Blob([JSON.stringify(modelTopologyAndWeightManifest)], { type: JSON_TYPE }), "model.json");
-      if (modelArtifacts.weightData != null) {
-        const weightBuffer = CompositeArrayBuffer.join(modelArtifacts.weightData);
-        init3.body.append("model.weights.bin", new Blob([weightBuffer], { type: OCTET_STREAM_MIME_TYPE }), "model.weights.bin");
-      }
-      const response = yield this.fetch(this.path, init3);
-      if (response.ok) {
-        return {
-          modelArtifactsInfo: getModelArtifactsInfoForJSON(modelArtifacts),
-          responses: [response]
-        };
-      } else {
-        throw new Error(`BrowserHTTPRequest.save() failed due to HTTP response status ${response.status}.`);
-      }
-    });
+  async save(modelArtifacts) {
+    if (modelArtifacts.modelTopology instanceof ArrayBuffer) {
+      throw new Error("BrowserHTTPRequest.save() does not support saving model topology in binary formats yet.");
+    }
+    const init3 = Object.assign({ method: this.DEFAULT_METHOD }, this.requestInit);
+    init3.body = new FormData();
+    const weightsManifest = [{
+      paths: ["./model.weights.bin"],
+      weights: modelArtifacts.weightSpecs
+    }];
+    const modelTopologyAndWeightManifest = getModelJSONForModelArtifacts(modelArtifacts, weightsManifest);
+    init3.body.append("model.json", new Blob([JSON.stringify(modelTopologyAndWeightManifest)], { type: JSON_TYPE }), "model.json");
+    if (modelArtifacts.weightData != null) {
+      const weightBuffer = CompositeArrayBuffer.join(modelArtifacts.weightData);
+      init3.body.append("model.weights.bin", new Blob([weightBuffer], { type: OCTET_STREAM_MIME_TYPE }), "model.weights.bin");
+    }
+    const response = await this.fetch(this.path, init3);
+    if (response.ok) {
+      return {
+        modelArtifactsInfo: getModelArtifactsInfoForJSON(modelArtifacts),
+        responses: [response]
+      };
+    } else {
+      throw new Error(`BrowserHTTPRequest.save() failed due to HTTP response status ${response.status}.`);
+    }
   }
-  loadModelJSON() {
-    return __async(this, null, function* () {
-      const modelConfigRequest = yield this.fetch(this.path, this.requestInit);
-      if (!modelConfigRequest.ok) {
-        throw new Error(`Request to ${this.path} failed with status code ${modelConfigRequest.status}. Please verify this URL points to the model JSON of the model to load.`);
+  async loadModelJSON() {
+    const modelConfigRequest = await this.fetch(this.path, this.requestInit);
+    if (!modelConfigRequest.ok) {
+      throw new Error(`Request to ${this.path} failed with status code ${modelConfigRequest.status}. Please verify this URL points to the model JSON of the model to load.`);
+    }
+    let modelJSON;
+    try {
+      modelJSON = await modelConfigRequest.json();
+    } catch (e2) {
+      let message2 = `Failed to parse model JSON of response from ${this.path}.`;
+      if (this.path.endsWith(".pb")) {
+        message2 += " Your path contains a .pb file extension. Support for .pb models have been removed in TensorFlow.js 1.0 in favor of .json models. You can re-convert your Python TensorFlow model using the TensorFlow.js 1.0 conversion scripts or you can convert your.pb models with the 'pb2json'NPM script in the tensorflow/tfjs-converter repository.";
+      } else {
+        message2 += " Please make sure the server is serving valid JSON for this request.";
       }
-      let modelJSON;
-      try {
-        modelJSON = yield modelConfigRequest.json();
-      } catch (e2) {
-        let message2 = `Failed to parse model JSON of response from ${this.path}.`;
-        if (this.path.endsWith(".pb")) {
-          message2 += " Your path contains a .pb file extension. Support for .pb models have been removed in TensorFlow.js 1.0 in favor of .json models. You can re-convert your Python TensorFlow model using the TensorFlow.js 1.0 conversion scripts or you can convert your.pb models with the 'pb2json'NPM script in the tensorflow/tfjs-converter repository.";
-        } else {
-          message2 += " Please make sure the server is serving valid JSON for this request.";
-        }
-        throw new Error(message2);
-      }
-      const modelTopology = modelJSON.modelTopology;
-      const weightsManifest = modelJSON.weightsManifest;
-      if (modelTopology == null && weightsManifest == null) {
-        throw new Error(`The JSON from HTTP path ${this.path} contains neither model topology or manifest for weights.`);
-      }
-      return modelJSON;
-    });
+      throw new Error(message2);
+    }
+    const modelTopology = modelJSON.modelTopology;
+    const weightsManifest = modelJSON.weightsManifest;
+    if (modelTopology == null && weightsManifest == null) {
+      throw new Error(`The JSON from HTTP path ${this.path} contains neither model topology or manifest for weights.`);
+    }
+    return modelJSON;
   }
   /**
    * Load model artifacts via HTTP request(s).
@@ -124022,53 +123788,45 @@ var HTTPRequest = class {
    *
    * @returns The loaded model artifacts (if loading succeeds).
    */
-  load() {
-    return __async(this, null, function* () {
-      if (this.loadOptions.streamWeights) {
-        return this.loadStream();
-      }
-      const modelJSON = yield this.loadModelJSON();
-      return getModelArtifactsForJSON(modelJSON, (weightsManifest) => this.loadWeights(weightsManifest));
-    });
+  async load() {
+    if (this.loadOptions.streamWeights) {
+      return this.loadStream();
+    }
+    const modelJSON = await this.loadModelJSON();
+    return getModelArtifactsForJSON(modelJSON, (weightsManifest) => this.loadWeights(weightsManifest));
   }
-  loadStream() {
-    return __async(this, null, function* () {
-      const modelJSON = yield this.loadModelJSON();
-      const fetchURLs = yield this.getWeightUrls(modelJSON.weightsManifest);
-      const weightSpecs = getWeightSpecs(modelJSON.weightsManifest);
-      const stream = () => streamWeights(fetchURLs, this.loadOptions);
-      return Object.assign(Object.assign({}, modelJSON), { weightSpecs, getWeightStream: stream });
-    });
+  async loadStream() {
+    const modelJSON = await this.loadModelJSON();
+    const fetchURLs = await this.getWeightUrls(modelJSON.weightsManifest);
+    const weightSpecs = getWeightSpecs(modelJSON.weightsManifest);
+    const stream = () => streamWeights(fetchURLs, this.loadOptions);
+    return Object.assign(Object.assign({}, modelJSON), { weightSpecs, getWeightStream: stream });
   }
-  getWeightUrls(weightsManifest) {
-    return __async(this, null, function* () {
-      const weightPath = Array.isArray(this.path) ? this.path[1] : this.path;
-      const [prefix, suffix] = parseUrl2(weightPath);
-      const pathPrefix = this.weightPathPrefix || prefix;
-      const fetchURLs = [];
-      const urlPromises = [];
-      for (const weightsGroup of weightsManifest) {
-        for (const path of weightsGroup.paths) {
-          if (this.weightUrlConverter != null) {
-            urlPromises.push(this.weightUrlConverter(path));
-          } else {
-            fetchURLs.push(pathPrefix + path + suffix);
-          }
+  async getWeightUrls(weightsManifest) {
+    const weightPath = Array.isArray(this.path) ? this.path[1] : this.path;
+    const [prefix, suffix] = parseUrl2(weightPath);
+    const pathPrefix = this.weightPathPrefix || prefix;
+    const fetchURLs = [];
+    const urlPromises = [];
+    for (const weightsGroup of weightsManifest) {
+      for (const path of weightsGroup.paths) {
+        if (this.weightUrlConverter != null) {
+          urlPromises.push(this.weightUrlConverter(path));
+        } else {
+          fetchURLs.push(pathPrefix + path + suffix);
         }
       }
-      if (this.weightUrlConverter) {
-        fetchURLs.push(...yield Promise.all(urlPromises));
-      }
-      return fetchURLs;
-    });
+    }
+    if (this.weightUrlConverter) {
+      fetchURLs.push(...await Promise.all(urlPromises));
+    }
+    return fetchURLs;
   }
-  loadWeights(weightsManifest) {
-    return __async(this, null, function* () {
-      const fetchURLs = yield this.getWeightUrls(weightsManifest);
-      const weightSpecs = getWeightSpecs(weightsManifest);
-      const buffers = yield loadWeightsAsArrayBuffer(fetchURLs, this.loadOptions);
-      return [weightSpecs, buffers];
-    });
+  async loadWeights(weightsManifest) {
+    const fetchURLs = await this.getWeightUrls(weightsManifest);
+    const weightSpecs = getWeightSpecs(weightsManifest);
+    const buffers = await loadWeightsAsArrayBuffer(fetchURLs, this.loadOptions);
+    return [weightSpecs, buffers];
   }
 };
 HTTPRequest.URL_SCHEME_REGEX = /^https?:\/\//;
@@ -124262,26 +124020,24 @@ function isNonEmptyPixels(pixels) {
 function canWrapPixelsToImageBitmap(pixels) {
   return isImageBitmapFullySupported() && !(pixels instanceof ImageBitmap) && isNonEmptyPixels(pixels) && !isPixelData(pixels);
 }
-function fromPixelsAsync(pixels, numChannels = 3) {
-  return __async(this, null, function* () {
-    let inputs = null;
-    if (env().getBool("WRAP_TO_IMAGEBITMAP") && canWrapPixelsToImageBitmap(pixels)) {
-      let imageBitmap;
-      try {
-        imageBitmap = yield createImageBitmap(pixels, { premultiplyAlpha: "none" });
-      } catch (e2) {
-        imageBitmap = null;
-      }
-      if (imageBitmap != null && imageBitmap.width === pixels.width && imageBitmap.height === pixels.height) {
-        inputs = imageBitmap;
-      } else {
-        inputs = pixels;
-      }
+async function fromPixelsAsync(pixels, numChannels = 3) {
+  let inputs = null;
+  if (env().getBool("WRAP_TO_IMAGEBITMAP") && canWrapPixelsToImageBitmap(pixels)) {
+    let imageBitmap;
+    try {
+      imageBitmap = await createImageBitmap(pixels, { premultiplyAlpha: "none" });
+    } catch (e2) {
+      imageBitmap = null;
+    }
+    if (imageBitmap != null && imageBitmap.width === pixels.width && imageBitmap.height === pixels.height) {
+      inputs = imageBitmap;
     } else {
       inputs = pixels;
     }
-    return fromPixels_(inputs, numChannels);
-  });
+  } else {
+    inputs = pixels;
+  }
+  return fromPixels_(inputs, numChannels);
 }
 function validateImgTensor(img) {
   if (img.rank !== 2 && img.rank !== 3) {
@@ -124301,66 +124057,64 @@ function validateImageOptions(imageOptions) {
     throw new Error(`Alpha value ${alpha} is suppoed to be in range [0 - 1].`);
   }
 }
-function toPixels(img, canvas) {
-  return __async(this, null, function* () {
-    let $img = convertToTensor(img, "img", "toPixels");
-    if (!(img instanceof Tensor)) {
-      const originalImgTensor = $img;
-      $img = cast(originalImgTensor, "int32");
-      originalImgTensor.dispose();
-    }
-    validateImgTensor($img);
-    const [height, width] = $img.shape.slice(0, 2);
-    const depth = $img.rank === 2 ? 1 : $img.shape[2];
-    const data = yield $img.data();
-    const multiplier = $img.dtype === "float32" ? 255 : 1;
-    const bytes = new Uint8ClampedArray(width * height * 4);
-    for (let i = 0; i < height * width; ++i) {
-      const rgba = [0, 0, 0, 255];
-      for (let d2 = 0; d2 < depth; d2++) {
-        const value = data[i * depth + d2];
-        if ($img.dtype === "float32") {
-          if (value < 0 || value > 1) {
-            throw new Error(`Tensor values for a float32 Tensor must be in the range [0 - 1] but encountered ${value}.`);
-          }
-        } else if ($img.dtype === "int32") {
-          if (value < 0 || value > 255) {
-            throw new Error(`Tensor values for a int32 Tensor must be in the range [0 - 255] but encountered ${value}.`);
-          }
+async function toPixels(img, canvas) {
+  let $img = convertToTensor(img, "img", "toPixels");
+  if (!(img instanceof Tensor)) {
+    const originalImgTensor = $img;
+    $img = cast(originalImgTensor, "int32");
+    originalImgTensor.dispose();
+  }
+  validateImgTensor($img);
+  const [height, width] = $img.shape.slice(0, 2);
+  const depth = $img.rank === 2 ? 1 : $img.shape[2];
+  const data = await $img.data();
+  const multiplier = $img.dtype === "float32" ? 255 : 1;
+  const bytes = new Uint8ClampedArray(width * height * 4);
+  for (let i = 0; i < height * width; ++i) {
+    const rgba = [0, 0, 0, 255];
+    for (let d2 = 0; d2 < depth; d2++) {
+      const value = data[i * depth + d2];
+      if ($img.dtype === "float32") {
+        if (value < 0 || value > 1) {
+          throw new Error(`Tensor values for a float32 Tensor must be in the range [0 - 1] but encountered ${value}.`);
         }
-        if (depth === 1) {
-          rgba[0] = value * multiplier;
-          rgba[1] = value * multiplier;
-          rgba[2] = value * multiplier;
-        } else {
-          rgba[d2] = value * multiplier;
+      } else if ($img.dtype === "int32") {
+        if (value < 0 || value > 255) {
+          throw new Error(`Tensor values for a int32 Tensor must be in the range [0 - 255] but encountered ${value}.`);
         }
       }
-      const j3 = i * 4;
-      bytes[j3 + 0] = Math.round(rgba[0]);
-      bytes[j3 + 1] = Math.round(rgba[1]);
-      bytes[j3 + 2] = Math.round(rgba[2]);
-      bytes[j3 + 3] = Math.round(rgba[3]);
-    }
-    if (canvas != null) {
-      if (!hasToPixelsWarned) {
-        const kernel = getKernel(Draw, ENGINE.backendName);
-        if (kernel != null) {
-          console.warn("tf.browser.toPixels is not efficient to draw tensor on canvas. Please try tf.browser.draw instead.");
-          hasToPixelsWarned = true;
-        }
+      if (depth === 1) {
+        rgba[0] = value * multiplier;
+        rgba[1] = value * multiplier;
+        rgba[2] = value * multiplier;
+      } else {
+        rgba[d2] = value * multiplier;
       }
-      canvas.width = width;
-      canvas.height = height;
-      const ctx = canvas.getContext("2d");
-      const imageData = new ImageData(bytes, width, height);
-      ctx.putImageData(imageData, 0, 0);
     }
-    if ($img !== img) {
-      $img.dispose();
+    const j3 = i * 4;
+    bytes[j3 + 0] = Math.round(rgba[0]);
+    bytes[j3 + 1] = Math.round(rgba[1]);
+    bytes[j3 + 2] = Math.round(rgba[2]);
+    bytes[j3 + 3] = Math.round(rgba[3]);
+  }
+  if (canvas != null) {
+    if (!hasToPixelsWarned) {
+      const kernel = getKernel(Draw, ENGINE.backendName);
+      if (kernel != null) {
+        console.warn("tf.browser.toPixels is not efficient to draw tensor on canvas. Please try tf.browser.draw instead.");
+        hasToPixelsWarned = true;
+      }
     }
-    return bytes;
-  });
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    const imageData = new ImageData(bytes, width, height);
+    ctx.putImageData(imageData, 0, 0);
+  }
+  if ($img !== img) {
+    $img.dispose();
+  }
+  return bytes;
 }
 function draw(image2, canvas, options2) {
   let $img = convertToTensor(image2, "img", "draw");
@@ -131251,31 +131005,29 @@ function getConstraint(identifier) {
 }
 
 // node_modules/@tensorflow/tfjs-layers/dist/logs.js
-function resolveScalarsInLogs(logs) {
-  return __async(this, null, function* () {
-    if (logs == null) {
-      return;
+async function resolveScalarsInLogs(logs) {
+  if (logs == null) {
+    return;
+  }
+  const promises = [];
+  const keys = [];
+  const scalarsToDispose = [];
+  for (const key in logs) {
+    const value = logs[key];
+    if (typeof value !== "number") {
+      const valueScalar = value;
+      promises.push(valueScalar.data());
+      keys.push(key);
+      scalarsToDispose.push(valueScalar);
     }
-    const promises = [];
-    const keys = [];
-    const scalarsToDispose = [];
-    for (const key in logs) {
-      const value = logs[key];
-      if (typeof value !== "number") {
-        const valueScalar = value;
-        promises.push(valueScalar.data());
-        keys.push(key);
-        scalarsToDispose.push(valueScalar);
-      }
+  }
+  if (promises.length > 0) {
+    const values = await Promise.all(promises);
+    for (let i = 0; i < values.length; ++i) {
+      logs[keys[i]] = values[i][0];
     }
-    if (promises.length > 0) {
-      const values = yield Promise.all(promises);
-      for (let i = 0; i < values.length; ++i) {
-        logs[keys[i]] = values[i][0];
-      }
-      dispose(scalarsToDispose);
-    }
-  });
+    dispose(scalarsToDispose);
+  }
 }
 function disposeTensorsInLogs(logs) {
   if (logs == null) {
@@ -131303,29 +131055,17 @@ var BaseCallback = class {
   setParams(params) {
     this.params = params;
   }
-  onEpochBegin(epoch2, logs) {
-    return __async(this, null, function* () {
-    });
+  async onEpochBegin(epoch2, logs) {
   }
-  onEpochEnd(epoch2, logs) {
-    return __async(this, null, function* () {
-    });
+  async onEpochEnd(epoch2, logs) {
   }
-  onBatchBegin(batch, logs) {
-    return __async(this, null, function* () {
-    });
+  async onBatchBegin(batch, logs) {
   }
-  onBatchEnd(batch, logs) {
-    return __async(this, null, function* () {
-    });
+  async onBatchEnd(batch, logs) {
   }
-  onTrainBegin(logs) {
-    return __async(this, null, function* () {
-    });
+  async onTrainBegin(logs) {
   }
-  onTrainEnd(logs) {
-    return __async(this, null, function* () {
-    });
+  async onTrainEnd(logs) {
   }
   // LayersModel needs to call Callback.setModel(), but cannot actually depend
   // on Callback because that creates a cyclic dependency.  Providing this no-op
@@ -131374,199 +131114,175 @@ var CallbackList = class {
    * @param epoch Index of epoch.
    * @param logs Dictionary of logs.
    */
-  onEpochBegin(epoch2, logs) {
-    return __async(this, null, function* () {
-      if (logs == null) {
-        logs = {};
-      }
-      for (const callback of this.callbacks) {
-        yield callback.onEpochBegin(epoch2, logs);
-      }
-    });
+  async onEpochBegin(epoch2, logs) {
+    if (logs == null) {
+      logs = {};
+    }
+    for (const callback of this.callbacks) {
+      await callback.onEpochBegin(epoch2, logs);
+    }
   }
   /**
    * Called at the end of an epoch.
    * @param epoch Index of epoch.
    * @param logs Dictionary of logs.
    */
-  onEpochEnd(epoch2, logs) {
-    return __async(this, null, function* () {
-      if (logs == null) {
-        logs = {};
-      }
-      for (const callback of this.callbacks) {
-        yield callback.onEpochEnd(epoch2, logs);
-      }
-    });
+  async onEpochEnd(epoch2, logs) {
+    if (logs == null) {
+      logs = {};
+    }
+    for (const callback of this.callbacks) {
+      await callback.onEpochEnd(epoch2, logs);
+    }
   }
   /**
    * Called  right before processing a batch.
    * @param batch Index of batch within the current epoch.
    * @param logs Dictionary of logs.
    */
-  onBatchBegin(batch, logs) {
-    return __async(this, null, function* () {
-      if (logs == null) {
-        logs = {};
-      }
-      for (const callback of this.callbacks) {
-        yield callback.onBatchBegin(batch, logs);
-      }
-    });
+  async onBatchBegin(batch, logs) {
+    if (logs == null) {
+      logs = {};
+    }
+    for (const callback of this.callbacks) {
+      await callback.onBatchBegin(batch, logs);
+    }
   }
   /**
    * Called at the end of a batch.
    * @param batch Index of batch within the current epoch.
    * @param logs Dictionary of logs.
    */
-  onBatchEnd(batch, logs) {
-    return __async(this, null, function* () {
-      if (logs == null) {
-        logs = {};
-      }
-      for (const callback of this.callbacks) {
-        yield callback.onBatchEnd(batch, logs);
-      }
-    });
+  async onBatchEnd(batch, logs) {
+    if (logs == null) {
+      logs = {};
+    }
+    for (const callback of this.callbacks) {
+      await callback.onBatchEnd(batch, logs);
+    }
   }
   /**
    * Called at the beginning of training.
    * @param logs Dictionary of logs.
    */
-  onTrainBegin(logs) {
-    return __async(this, null, function* () {
-      if (logs == null) {
-        logs = {};
-      }
-      for (const callback of this.callbacks) {
-        yield callback.onTrainBegin(logs);
-      }
-    });
+  async onTrainBegin(logs) {
+    if (logs == null) {
+      logs = {};
+    }
+    for (const callback of this.callbacks) {
+      await callback.onTrainBegin(logs);
+    }
   }
   /**
    * Called at the end of training.
    * @param logs Dictionary of logs.
    */
-  onTrainEnd(logs) {
-    return __async(this, null, function* () {
-      if (logs == null) {
-        logs = {};
-      }
-      for (const callback of this.callbacks) {
-        yield callback.onTrainEnd(logs);
-      }
-    });
+  async onTrainEnd(logs) {
+    if (logs == null) {
+      logs = {};
+    }
+    for (const callback of this.callbacks) {
+      await callback.onTrainEnd(logs);
+    }
   }
 };
 var BaseLogger = class extends BaseCallback {
   constructor() {
     super();
   }
-  onEpochBegin(epoch2) {
-    return __async(this, null, function* () {
-      this.seen = 0;
-      this.totals = {};
-    });
+  async onEpochBegin(epoch2) {
+    this.seen = 0;
+    this.totals = {};
   }
-  onBatchEnd(batch, logs) {
-    return __async(this, null, function* () {
-      if (logs == null) {
-        logs = {};
-      }
-      const batchSize = logs["size"] == null ? 0 : logs["size"];
-      this.seen += batchSize;
-      for (const key in logs) {
-        const value = logs[key];
-        if (typeof value === "number") {
-          if (!this.totals.hasOwnProperty(key)) {
-            this.totals[key] = 0;
-          }
-          this.totals[key] = this.totals[key] + value * batchSize;
+  async onBatchEnd(batch, logs) {
+    if (logs == null) {
+      logs = {};
+    }
+    const batchSize = logs["size"] == null ? 0 : logs["size"];
+    this.seen += batchSize;
+    for (const key in logs) {
+      const value = logs[key];
+      if (typeof value === "number") {
+        if (!this.totals.hasOwnProperty(key)) {
+          this.totals[key] = 0;
+        }
+        this.totals[key] = this.totals[key] + value * batchSize;
+      } else {
+        let oldTotalsToDispose;
+        if (key in this.totals) {
+          oldTotalsToDispose = this.totals[key];
         } else {
-          let oldTotalsToDispose;
-          if (key in this.totals) {
-            oldTotalsToDispose = this.totals[key];
-          } else {
-            this.totals[key] = 0;
-          }
-          const total = tidy(() => add2(this.totals[key], mul(value, batchSize)));
-          this.totals[key] = total;
-          if (oldTotalsToDispose != null) {
-            oldTotalsToDispose.dispose();
-          }
+          this.totals[key] = 0;
+        }
+        const total = tidy(() => add2(this.totals[key], mul(value, batchSize)));
+        this.totals[key] = total;
+        if (oldTotalsToDispose != null) {
+          oldTotalsToDispose.dispose();
         }
       }
-    });
+    }
   }
-  onEpochEnd(epoch2, logs) {
-    return __async(this, null, function* () {
-      if (logs != null) {
-        for (const key of this.params["metrics"]) {
-          if (this.totals[key] == null) {
-            continue;
-          }
-          if (typeof this.totals[key] === "number") {
-            logs[key] = this.totals[key] / this.seen;
-          } else {
-            tidy(() => {
-              const log6 = mul(div(1, this.seen), this.totals[key]);
-              logs[key] = log6;
-              this.totals[key].dispose();
-              keep(logs[key]);
-            });
-          }
+  async onEpochEnd(epoch2, logs) {
+    if (logs != null) {
+      for (const key of this.params["metrics"]) {
+        if (this.totals[key] == null) {
+          continue;
+        }
+        if (typeof this.totals[key] === "number") {
+          logs[key] = this.totals[key] / this.seen;
+        } else {
+          tidy(() => {
+            const log6 = mul(div(1, this.seen), this.totals[key]);
+            logs[key] = log6;
+            this.totals[key].dispose();
+            keep(logs[key]);
+          });
         }
       }
-    });
+    }
   }
 };
 var History = class extends BaseCallback {
-  onTrainBegin(logs) {
-    return __async(this, null, function* () {
-      this.epoch = [];
-      this.history = {};
-    });
+  async onTrainBegin(logs) {
+    this.epoch = [];
+    this.history = {};
   }
-  onEpochEnd(epoch2, logs) {
-    return __async(this, null, function* () {
-      if (logs == null) {
-        logs = {};
+  async onEpochEnd(epoch2, logs) {
+    if (logs == null) {
+      logs = {};
+    }
+    this.epoch.push(epoch2);
+    for (const key in logs) {
+      if (this.history[key] == null) {
+        this.history[key] = [];
       }
-      this.epoch.push(epoch2);
-      for (const key in logs) {
-        if (this.history[key] == null) {
-          this.history[key] = [];
-        }
-        this.history[key].push(logs[key]);
-      }
-    });
+      this.history[key].push(logs[key]);
+    }
   }
   /**
    * Await the values of all losses and metrics.
    */
-  syncData() {
-    return __async(this, null, function* () {
-      const promises = [];
-      const keys = [];
-      const indices = [];
-      for (const key in this.history) {
-        const valueArray = this.history[key];
-        for (let i = 0; i < valueArray.length; ++i) {
-          if (typeof valueArray[i] !== "number") {
-            const valueScalar = valueArray[i];
-            promises.push(valueScalar.data());
-            keys.push(key);
-            indices.push(i);
-          }
+  async syncData() {
+    const promises = [];
+    const keys = [];
+    const indices = [];
+    for (const key in this.history) {
+      const valueArray = this.history[key];
+      for (let i = 0; i < valueArray.length; ++i) {
+        if (typeof valueArray[i] !== "number") {
+          const valueScalar = valueArray[i];
+          promises.push(valueScalar.data());
+          keys.push(key);
+          indices.push(i);
         }
       }
-      const values = yield Promise.all(promises);
-      for (let n2 = 0; n2 < values.length; ++n2) {
-        const tensorToDispose = this.history[keys[n2]][indices[n2]];
-        tensorToDispose.dispose();
-        this.history[keys[n2]][indices[n2]] = values[n2][0];
-      }
-    });
+    }
+    const values = await Promise.all(promises);
+    for (let n2 = 0; n2 < values.length; ++n2) {
+      const tensorToDispose = this.history[keys[n2]][indices[n2]];
+      tensorToDispose.dispose();
+      this.history[keys[n2]][indices[n2]] = values[n2][0];
+    }
   }
 };
 var CustomCallback = class extends BaseCallback {
@@ -131593,77 +131309,63 @@ var CustomCallback = class extends BaseCallback {
     this.batchEnd = args.onBatchEnd;
     this.yield = args.onYield;
   }
-  maybeWait(epoch2, batch, logs) {
-    return __async(this, null, function* () {
-      const ps2 = [];
-      if (this.yield != null) {
-        yield resolveScalarsInLogs(logs);
-        ps2.push(this.yield(epoch2, batch, logs));
-      }
+  async maybeWait(epoch2, batch, logs) {
+    const ps2 = [];
+    if (this.yield != null) {
+      await resolveScalarsInLogs(logs);
+      ps2.push(this.yield(epoch2, batch, logs));
+    }
+    ps2.push(this.nextFrameFunc());
+    await Promise.all(ps2);
+  }
+  async onEpochBegin(epoch2, logs) {
+    this.currentEpoch = epoch2;
+    if (this.epochBegin != null) {
+      await resolveScalarsInLogs(logs);
+      await this.epochBegin(epoch2, logs);
+    }
+  }
+  async onEpochEnd(epoch2, logs) {
+    const ps2 = [];
+    if (this.epochEnd != null) {
+      await resolveScalarsInLogs(logs);
+      ps2.push(this.epochEnd(epoch2, logs));
+    }
+    if (this.yieldEvery === "epoch") {
       ps2.push(this.nextFrameFunc());
-      yield Promise.all(ps2);
-    });
+    }
+    await Promise.all(ps2);
   }
-  onEpochBegin(epoch2, logs) {
-    return __async(this, null, function* () {
-      this.currentEpoch = epoch2;
-      if (this.epochBegin != null) {
-        yield resolveScalarsInLogs(logs);
-        yield this.epochBegin(epoch2, logs);
-      }
-    });
+  async onBatchBegin(batch, logs) {
+    if (this.batchBegin != null) {
+      await resolveScalarsInLogs(logs);
+      await this.batchBegin(batch, logs);
+    }
   }
-  onEpochEnd(epoch2, logs) {
-    return __async(this, null, function* () {
-      const ps2 = [];
-      if (this.epochEnd != null) {
-        yield resolveScalarsInLogs(logs);
-        ps2.push(this.epochEnd(epoch2, logs));
-      }
-      if (this.yieldEvery === "epoch") {
-        ps2.push(this.nextFrameFunc());
-      }
-      yield Promise.all(ps2);
-    });
+  async onBatchEnd(batch, logs) {
+    const ps2 = [];
+    if (this.batchEnd != null) {
+      await resolveScalarsInLogs(logs);
+      ps2.push(this.batchEnd(batch, logs));
+    }
+    if (this.yieldEvery === "batch") {
+      ps2.push(this.nextFrameFunc());
+    } else if (util_exports.isNumber(this.yieldEvery)) {
+      ps2.push(this.maybeWait(this.currentEpoch, batch, logs));
+    }
+    await Promise.all(ps2);
   }
-  onBatchBegin(batch, logs) {
-    return __async(this, null, function* () {
-      if (this.batchBegin != null) {
-        yield resolveScalarsInLogs(logs);
-        yield this.batchBegin(batch, logs);
-      }
-    });
+  async onTrainBegin(logs) {
+    if (this.trainBegin != null) {
+      await resolveScalarsInLogs(logs);
+      await this.trainBegin(logs);
+    }
   }
-  onBatchEnd(batch, logs) {
-    return __async(this, null, function* () {
-      const ps2 = [];
-      if (this.batchEnd != null) {
-        yield resolveScalarsInLogs(logs);
-        ps2.push(this.batchEnd(batch, logs));
-      }
-      if (this.yieldEvery === "batch") {
-        ps2.push(this.nextFrameFunc());
-      } else if (util_exports.isNumber(this.yieldEvery)) {
-        ps2.push(this.maybeWait(this.currentEpoch, batch, logs));
-      }
-      yield Promise.all(ps2);
-    });
-  }
-  onTrainBegin(logs) {
-    return __async(this, null, function* () {
-      if (this.trainBegin != null) {
-        yield resolveScalarsInLogs(logs);
-        yield this.trainBegin(logs);
-      }
-    });
-  }
-  onTrainEnd(logs) {
-    return __async(this, null, function* () {
-      if (this.trainEnd != null) {
-        yield resolveScalarsInLogs(logs);
-        yield this.trainEnd(logs);
-      }
-    });
+  async onTrainEnd(logs) {
+    if (this.trainEnd != null) {
+      await resolveScalarsInLogs(logs);
+      await this.trainEnd(logs);
+    }
   }
 };
 function standardizeCallbacks(callbacks2, yieldEvery) {
@@ -133259,43 +132961,41 @@ function standardizeSampleOrClassWeights(xWeight, outputNames, weightType) {
 function standardizeClassWeights(classWeight, outputNames) {
   return standardizeSampleOrClassWeights(classWeight, outputNames, "classWeight");
 }
-function standardizeWeights(y2, sampleWeight, classWeight, sampleWeightMode) {
-  return __async(this, null, function* () {
-    if (sampleWeight != null || sampleWeightMode != null) {
-      throw new Error("Support sampleWeight is not implemented yet");
-    }
-    if (classWeight != null) {
-      const yClasses = tidy(() => {
-        if (y2.shape.length === 1) {
-          return clone(y2);
-        } else if (y2.shape.length === 2) {
-          if (y2.shape[1] > 1) {
-            const axis = 1;
-            return argMax(y2, axis);
-          } else if (y2.shape[1] === 1) {
-            return reshape(y2, [y2.shape[0]]);
-          } else {
-            throw new Error(`Encountered unexpected last-dimension size (${y2.shape[1]}) during handling of class weights. The size is expected to be >= 1.`);
-          }
+async function standardizeWeights(y2, sampleWeight, classWeight, sampleWeightMode) {
+  if (sampleWeight != null || sampleWeightMode != null) {
+    throw new Error("Support sampleWeight is not implemented yet");
+  }
+  if (classWeight != null) {
+    const yClasses = tidy(() => {
+      if (y2.shape.length === 1) {
+        return clone(y2);
+      } else if (y2.shape.length === 2) {
+        if (y2.shape[1] > 1) {
+          const axis = 1;
+          return argMax(y2, axis);
+        } else if (y2.shape[1] === 1) {
+          return reshape(y2, [y2.shape[0]]);
         } else {
-          throw new Error(`Unexpected rank of target (y) tensor (${y2.rank}) during handling of class weights. The rank is expected to be 1 or 2.`);
+          throw new Error(`Encountered unexpected last-dimension size (${y2.shape[1]}) during handling of class weights. The size is expected to be >= 1.`);
         }
-      });
-      const yClassIndices = Array.from(yield yClasses.data());
-      dispose(yClasses);
-      const classSampleWeight = [];
-      yClassIndices.forEach((classIndex) => {
-        if (classWeight[classIndex] == null) {
-          throw new Error(`classWeight must contain all classes in the training data. The class ${classIndex} exists in the data but not in classWeight`);
-        } else {
-          classSampleWeight.push(classWeight[classIndex]);
-        }
-      });
-      return tensor1d(classSampleWeight, "float32");
-    } else {
-      return null;
-    }
-  });
+      } else {
+        throw new Error(`Unexpected rank of target (y) tensor (${y2.rank}) during handling of class weights. The rank is expected to be 1 or 2.`);
+      }
+    });
+    const yClassIndices = Array.from(await yClasses.data());
+    dispose(yClasses);
+    const classSampleWeight = [];
+    yClassIndices.forEach((classIndex) => {
+      if (classWeight[classIndex] == null) {
+        throw new Error(`classWeight must contain all classes in the training data. The class ${classIndex} exists in the data but not in classWeight`);
+      } else {
+        classSampleWeight.push(classWeight[classIndex]);
+      }
+    });
+    return tensor1d(classSampleWeight, "float32");
+  } else {
+    return null;
+  }
 }
 function computeWeightedLoss2(losses2, sampleWeights) {
   return mul(losses2, sampleWeights);
@@ -133346,138 +133046,136 @@ function standardizeTensorValidationData(data) {
   }
   return { xs: data[0], ys: data[1] };
 }
-function fitDataset(model3, dataset, args) {
-  return __async(this, null, function* () {
-    const hasBatchesPerEpoch = args.batchesPerEpoch != null;
-    util_exports.assert(model3.optimizer != null, () => "You must compile a model before training/testing. Use LayersModel.compile(modelCompileConfig).");
-    util_exports.assert(args != null, () => `For fitDataset(), the 2nd argument (config) is required, but it is not provided in this call.`);
-    util_exports.assert(args.epochs != null && args.epochs > 0 && Number.isInteger(args.epochs), () => `For fitDataset(), config.epochs is expected to be a positive integer, but got ${args.epochs}`);
-    util_exports.assert(!hasBatchesPerEpoch || args.batchesPerEpoch > 0 && Number.isInteger(args.batchesPerEpoch), () => `For fitDataset(), config.batchesPerEpoch is expected to be a positive integer if specified, but got ${args.batchesPerEpoch}`);
-    util_exports.assert(
-      // tslint:disable-next-line:no-any
-      args["validationSplit"] == null,
-      () => "`validationSplit` is not supported by `fitDataset()`. Use validationData instead."
-    );
-    if (model3.isTraining) {
-      throw new Error("Cannot start training because another fit() call is ongoing.");
-    }
-    model3.isTraining = true;
-    try {
-      const doValidation = args.validationData != null;
-      let valXs;
-      let valYs;
-      if (doValidation) {
-        if (isDatasetObject(args.validationData)) {
-          util_exports.assert(args.validationBatches == null || args.validationBatches > 0 && Number.isInteger(args.validationBatches), () => `For fitDataset() with dataset-based validation, config.validationBatches is expected not to be provided, or to be a positive integer, but got ${args.validationBatches}`);
-        } else {
-          const validationData = standardizeTensorValidationData(args.validationData);
-          valXs = validationData.xs;
-          valYs = validationData.ys;
-        }
-      }
-      const trainFunction = model3.makeTrainFunction();
-      const outLabels = model3.getDedupedMetricsNames();
-      let callbackMetrics;
-      if (doValidation) {
-        callbackMetrics = outLabels.slice().concat(outLabels.map((n2) => "val_" + n2));
+async function fitDataset(model3, dataset, args) {
+  const hasBatchesPerEpoch = args.batchesPerEpoch != null;
+  util_exports.assert(model3.optimizer != null, () => "You must compile a model before training/testing. Use LayersModel.compile(modelCompileConfig).");
+  util_exports.assert(args != null, () => `For fitDataset(), the 2nd argument (config) is required, but it is not provided in this call.`);
+  util_exports.assert(args.epochs != null && args.epochs > 0 && Number.isInteger(args.epochs), () => `For fitDataset(), config.epochs is expected to be a positive integer, but got ${args.epochs}`);
+  util_exports.assert(!hasBatchesPerEpoch || args.batchesPerEpoch > 0 && Number.isInteger(args.batchesPerEpoch), () => `For fitDataset(), config.batchesPerEpoch is expected to be a positive integer if specified, but got ${args.batchesPerEpoch}`);
+  util_exports.assert(
+    // tslint:disable-next-line:no-any
+    args["validationSplit"] == null,
+    () => "`validationSplit` is not supported by `fitDataset()`. Use validationData instead."
+  );
+  if (model3.isTraining) {
+    throw new Error("Cannot start training because another fit() call is ongoing.");
+  }
+  model3.isTraining = true;
+  try {
+    const doValidation = args.validationData != null;
+    let valXs;
+    let valYs;
+    if (doValidation) {
+      if (isDatasetObject(args.validationData)) {
+        util_exports.assert(args.validationBatches == null || args.validationBatches > 0 && Number.isInteger(args.validationBatches), () => `For fitDataset() with dataset-based validation, config.validationBatches is expected not to be provided, or to be a positive integer, but got ${args.validationBatches}`);
       } else {
-        callbackMetrics = outLabels.slice();
+        const validationData = standardizeTensorValidationData(args.validationData);
+        valXs = validationData.xs;
+        valYs = validationData.ys;
       }
-      const callbacks2 = standardizeCallbacks(args.callbacks, args.yieldEvery);
-      const verbose = args.verbose == null ? 1 : args.verbose;
-      const { callbackList, history } = configureCallbacks(
-        callbacks2,
-        verbose,
-        args.epochs,
-        null,
-        null,
-        getStepsPerEpoch(dataset, args),
-        null,
-        // Batch size determined by the dataset itself.
-        doValidation,
-        callbackMetrics
-      );
-      callbackList.setModel(model3);
-      model3.history = history;
-      yield callbackList.onTrainBegin();
-      model3.stopTraining_ = false;
-      let epoch2 = args.initialEpoch == null ? 0 : args.initialEpoch;
-      let dataIterator = yield dataset.iterator();
-      while (epoch2 < args.epochs) {
-        const epochLogs = {};
-        yield callbackList.onEpochBegin(epoch2);
-        let stepsDone = 0;
-        let batchIndex = 0;
-        if (!hasBatchesPerEpoch) {
-          dataIterator = yield dataset.iterator();
+    }
+    const trainFunction = model3.makeTrainFunction();
+    const outLabels = model3.getDedupedMetricsNames();
+    let callbackMetrics;
+    if (doValidation) {
+      callbackMetrics = outLabels.slice().concat(outLabels.map((n2) => "val_" + n2));
+    } else {
+      callbackMetrics = outLabels.slice();
+    }
+    const callbacks2 = standardizeCallbacks(args.callbacks, args.yieldEvery);
+    const verbose = args.verbose == null ? 1 : args.verbose;
+    const { callbackList, history } = configureCallbacks(
+      callbacks2,
+      verbose,
+      args.epochs,
+      null,
+      null,
+      getStepsPerEpoch(dataset, args),
+      null,
+      // Batch size determined by the dataset itself.
+      doValidation,
+      callbackMetrics
+    );
+    callbackList.setModel(model3);
+    model3.history = history;
+    await callbackList.onTrainBegin();
+    model3.stopTraining_ = false;
+    let epoch2 = args.initialEpoch == null ? 0 : args.initialEpoch;
+    let dataIterator = await dataset.iterator();
+    while (epoch2 < args.epochs) {
+      const epochLogs = {};
+      await callbackList.onEpochBegin(epoch2);
+      let stepsDone = 0;
+      let batchIndex = 0;
+      if (!hasBatchesPerEpoch) {
+        dataIterator = await dataset.iterator();
+      }
+      while (hasBatchesPerEpoch ? stepsDone < args.batchesPerEpoch : true) {
+        const iteratorOut = await dataIterator.next();
+        if (hasBatchesPerEpoch && iteratorOut.done) {
+          console.warn(`You provided \`batchesPerEpoch\` as ${args.batchesPerEpoch}, but your dataset iterator ran out of data after ${stepsDone} batches; interrupting training. Make sure that your dataset can generate at least \`batchesPerEpoch * epochs\` batches (in this case, ${args.batchesPerEpoch * args.epochs} batches). You may need to use the repeat() function when building your dataset.`);
+          break;
         }
-        while (hasBatchesPerEpoch ? stepsDone < args.batchesPerEpoch : true) {
-          const iteratorOut = yield dataIterator.next();
-          if (hasBatchesPerEpoch && iteratorOut.done) {
-            console.warn(`You provided \`batchesPerEpoch\` as ${args.batchesPerEpoch}, but your dataset iterator ran out of data after ${stepsDone} batches; interrupting training. Make sure that your dataset can generate at least \`batchesPerEpoch * epochs\` batches (in this case, ${args.batchesPerEpoch * args.epochs} batches). You may need to use the repeat() function when building your dataset.`);
-            break;
-          }
-          if (iteratorOut.value != null) {
-            const { xs, ys } = standardizeDataIteratorOutput(model3, iteratorOut.value);
-            const batchLogs = {};
-            batchLogs["batch"] = batchIndex;
-            batchLogs["size"] = xs[0].shape[0];
-            yield callbackList.onBatchBegin(batchIndex, batchLogs);
-            const sampleWeights = [];
-            if (args.classWeight != null) {
-              const standardClassWeights = standardizeClassWeights(args.classWeight, model3.outputNames);
-              for (let i = 0; i < standardClassWeights.length; ++i) {
-                sampleWeights.push(yield standardizeWeights(ys[i], null, standardClassWeights[i]));
-              }
+        if (iteratorOut.value != null) {
+          const { xs, ys } = standardizeDataIteratorOutput(model3, iteratorOut.value);
+          const batchLogs = {};
+          batchLogs["batch"] = batchIndex;
+          batchLogs["size"] = xs[0].shape[0];
+          await callbackList.onBatchBegin(batchIndex, batchLogs);
+          const sampleWeights = [];
+          if (args.classWeight != null) {
+            const standardClassWeights = standardizeClassWeights(args.classWeight, model3.outputNames);
+            for (let i = 0; i < standardClassWeights.length; ++i) {
+              sampleWeights.push(await standardizeWeights(ys[i], null, standardClassWeights[i]));
             }
-            const ins = xs.concat(ys).concat(sampleWeights);
-            const outs = trainFunction(ins);
-            dispose(ins);
-            for (let i = 0; i < outLabels.length; ++i) {
-              const label = outLabels[i];
-              const out = outs[i];
-              batchLogs[label] = out;
-              keep(out);
-            }
-            yield callbackList.onBatchEnd(batchIndex, batchLogs);
-            disposeTensorsInLogs(batchLogs);
-            batchIndex++;
-            stepsDone++;
           }
-          if (hasBatchesPerEpoch ? stepsDone >= args.batchesPerEpoch : iteratorOut.done) {
-            if (doValidation) {
-              let valOuts;
-              if (isDatasetObject(args.validationData)) {
-                valOuts = toList(yield model3.evaluateDataset(args.validationData, { batches: args.validationBatches }));
-              } else {
-                valOuts = toList(model3.evaluate(valXs, valYs, {
-                  batchSize: args.validationBatchSize == null ? DEFAULT_VALIDATION_BATCH_SIZE : args.validationBatchSize,
-                  verbose: 0
-                }));
-              }
-              for (let i = 0; i < model3.metricsNames.length; ++i) {
-                epochLogs[`val_${model3.metricsNames[i]}`] = valOuts[i];
-              }
-            }
-            break;
+          const ins = xs.concat(ys).concat(sampleWeights);
+          const outs = trainFunction(ins);
+          dispose(ins);
+          for (let i = 0; i < outLabels.length; ++i) {
+            const label = outLabels[i];
+            const out = outs[i];
+            batchLogs[label] = out;
+            keep(out);
           }
-          if (model3.stopTraining_) {
-            break;
-          }
+          await callbackList.onBatchEnd(batchIndex, batchLogs);
+          disposeTensorsInLogs(batchLogs);
+          batchIndex++;
+          stepsDone++;
         }
-        yield callbackList.onEpochEnd(epoch2, epochLogs);
-        epoch2++;
+        if (hasBatchesPerEpoch ? stepsDone >= args.batchesPerEpoch : iteratorOut.done) {
+          if (doValidation) {
+            let valOuts;
+            if (isDatasetObject(args.validationData)) {
+              valOuts = toList(await model3.evaluateDataset(args.validationData, { batches: args.validationBatches }));
+            } else {
+              valOuts = toList(model3.evaluate(valXs, valYs, {
+                batchSize: args.validationBatchSize == null ? DEFAULT_VALIDATION_BATCH_SIZE : args.validationBatchSize,
+                verbose: 0
+              }));
+            }
+            for (let i = 0; i < model3.metricsNames.length; ++i) {
+              epochLogs[`val_${model3.metricsNames[i]}`] = valOuts[i];
+            }
+          }
+          break;
+        }
         if (model3.stopTraining_) {
           break;
         }
       }
-      yield callbackList.onTrainEnd();
-      yield model3.history.syncData();
-      return model3.history;
-    } finally {
-      model3.isTraining = false;
+      await callbackList.onEpochEnd(epoch2, epochLogs);
+      epoch2++;
+      if (model3.stopTraining_) {
+        break;
+      }
     }
-  });
+    await callbackList.onTrainEnd();
+    await model3.history.syncData();
+    return model3.history;
+  } finally {
+    model3.isTraining = false;
+  }
 }
 function getStepsPerEpoch(dataset, args) {
   let stepsPerEpoch = null;
@@ -133494,61 +133192,59 @@ function isDatasetObject(dataset) {
 function isLazyIteratorObject(iterator2) {
   return typeof iterator2.next === "function";
 }
-function evaluateDataset(model3, dataset, args) {
-  return __async(this, null, function* () {
-    args = args || {};
-    const hasBatches = args.batches != null;
-    const f2 = model3.testFunction;
-    let outs = [];
-    if (args.verbose > 0) {
-      throw new NotImplementedError("Verbose mode is not implemented yet.");
-    }
-    util_exports.assert(!hasBatches || args.batches > 0 && Number.isInteger(args.batches), () => `Test loop expects \`batches\` to be a positive integer, but received ${JSON.stringify(args.batches)}`);
-    const dataIterator = isLazyIteratorObject(dataset) ? dataset : yield dataset.iterator();
-    let numExamples = 0;
-    let batch = 0;
-    while (hasBatches ? batch < args.batches : true) {
-      const iteratorOut = yield dataIterator.next();
-      outs = tidy(() => {
-        if (iteratorOut.value) {
-          const { xs, ys } = standardizeDataIteratorOutput(model3, iteratorOut.value);
-          const xsAndYs = xs.concat(ys);
-          const batchOuts = tidy(() => f2(xsAndYs));
-          dispose(xsAndYs);
-          if (batch === 0) {
-            for (let i = 0; i < batchOuts.length; ++i) {
-              outs.push(scalar(0));
-            }
-          }
-          const batchSize = xsAndYs[0].shape[0];
+async function evaluateDataset(model3, dataset, args) {
+  args = args || {};
+  const hasBatches = args.batches != null;
+  const f2 = model3.testFunction;
+  let outs = [];
+  if (args.verbose > 0) {
+    throw new NotImplementedError("Verbose mode is not implemented yet.");
+  }
+  util_exports.assert(!hasBatches || args.batches > 0 && Number.isInteger(args.batches), () => `Test loop expects \`batches\` to be a positive integer, but received ${JSON.stringify(args.batches)}`);
+  const dataIterator = isLazyIteratorObject(dataset) ? dataset : await dataset.iterator();
+  let numExamples = 0;
+  let batch = 0;
+  while (hasBatches ? batch < args.batches : true) {
+    const iteratorOut = await dataIterator.next();
+    outs = tidy(() => {
+      if (iteratorOut.value) {
+        const { xs, ys } = standardizeDataIteratorOutput(model3, iteratorOut.value);
+        const xsAndYs = xs.concat(ys);
+        const batchOuts = tidy(() => f2(xsAndYs));
+        dispose(xsAndYs);
+        if (batch === 0) {
           for (let i = 0; i < batchOuts.length; ++i) {
-            const batchOut = batchOuts[i];
-            const oldScalar = outs[i];
-            outs[i] = tidy(() => add2(outs[i], mul(batchSize, batchOut)));
-            if (batch > 0) {
-              dispose(oldScalar);
-            }
+            outs.push(scalar(0));
           }
-          dispose(batchOuts);
-          numExamples += batchSize;
-          ++batch;
         }
-        return outs;
-      });
-      if (iteratorOut.done) {
-        if (hasBatches) {
-          console.warn(`Your dataset iterator ran out of data during evaluateDataset(). Interrupting evalution. Make sure that your dataset can generate at least \`batches\` batches (in this case, ${args.batches} batches). You may need to use the repeat() function when building your dataset.`);
+        const batchSize = xsAndYs[0].shape[0];
+        for (let i = 0; i < batchOuts.length; ++i) {
+          const batchOut = batchOuts[i];
+          const oldScalar = outs[i];
+          outs[i] = tidy(() => add2(outs[i], mul(batchSize, batchOut)));
+          if (batch > 0) {
+            dispose(oldScalar);
+          }
         }
-        break;
+        dispose(batchOuts);
+        numExamples += batchSize;
+        ++batch;
       }
+      return outs;
+    });
+    if (iteratorOut.done) {
+      if (hasBatches) {
+        console.warn(`Your dataset iterator ran out of data during evaluateDataset(). Interrupting evalution. Make sure that your dataset can generate at least \`batches\` batches (in this case, ${args.batches} batches). You may need to use the repeat() function when building your dataset.`);
+      }
+      break;
     }
-    for (let i = 0; i < outs.length; ++i) {
-      const oldScalar = outs[i];
-      outs[i] = div(outs[i], numExamples);
-      dispose(oldScalar);
-    }
-    return singletonOrArray(outs);
-  });
+  }
+  for (let i = 0; i < outs.length; ++i) {
+    const oldScalar = outs[i];
+    outs[i] = div(outs[i], numExamples);
+    dispose(oldScalar);
+  }
+  return singletonOrArray(outs);
 }
 
 // node_modules/@tensorflow/tfjs-layers/dist/engine/training_tensors.js
@@ -134115,11 +133811,9 @@ var LayersModel = class extends Container {
    *
    * @doc {heading: 'Models', subheading: 'Classes'}
    */
-  evaluateDataset(dataset, args) {
-    return __async(this, null, function* () {
-      this.makeTestFunction();
-      return evaluateDataset(this, dataset, args);
-    });
+  async evaluateDataset(dataset, args) {
+    this.makeTestFunction();
+    return evaluateDataset(this, dataset, args);
   }
   /**
    * Get number of samples provided for training, evaluation or prediction.
@@ -134345,22 +134039,20 @@ var LayersModel = class extends Container {
     }
     return [x3, y2];
   }
-  standardizeUserData(x3, y2, sampleWeight, classWeight, checkBatchAxis = true, batchSize) {
-    return __async(this, null, function* () {
-      const [standardXs, standardYs] = this.standardizeUserDataXY(x3, y2, checkBatchAxis, batchSize);
-      if (sampleWeight != null) {
-        throw new Error("sample weight is not supported yet.");
+  async standardizeUserData(x3, y2, sampleWeight, classWeight, checkBatchAxis = true, batchSize) {
+    const [standardXs, standardYs] = this.standardizeUserDataXY(x3, y2, checkBatchAxis, batchSize);
+    if (sampleWeight != null) {
+      throw new Error("sample weight is not supported yet.");
+    }
+    let standardSampleWeights = null;
+    if (classWeight != null) {
+      const classWeights = standardizeClassWeights(classWeight, this.outputNames);
+      standardSampleWeights = [];
+      for (let i = 0; i < classWeights.length; ++i) {
+        standardSampleWeights.push(await standardizeWeights(standardYs[i], null, classWeights[i]));
       }
-      let standardSampleWeights = null;
-      if (classWeight != null) {
-        const classWeights = standardizeClassWeights(classWeight, this.outputNames);
-        standardSampleWeights = [];
-        for (let i = 0; i < classWeights.length; ++i) {
-          standardSampleWeights.push(yield standardizeWeights(standardYs[i], null, classWeights[i]));
-        }
-      }
-      return [standardXs, standardYs, standardSampleWeights];
-    });
+    }
+    return [standardXs, standardYs, standardSampleWeights];
   }
   /**
    * Loop over some test data in batches.
@@ -134557,100 +134249,98 @@ var LayersModel = class extends Container {
    *
    * @doc {heading: 'Models', subheading: 'Classes'}
    */
-  fit(_0, _1) {
-    return __async(this, arguments, function* (x3, y2, args = {}) {
-      if (this.isTraining) {
-        throw new Error("Cannot start training because another fit() call is ongoing.");
-      }
-      this.isTraining = true;
-      let inputs;
-      let targets;
-      let originalInputs;
-      let originalTargets;
-      let inputValX;
-      let inputValY;
-      let valX;
-      let valY;
-      let sampleWeights;
-      try {
-        const batchSize = args.batchSize == null ? 32 : args.batchSize;
-        checkBatchSize(batchSize);
-        const checkBatchAxis = false;
-        const standardizedOuts = yield this.standardizeUserData(x3, y2, args.sampleWeight, args.classWeight, checkBatchAxis, batchSize);
-        inputs = standardizedOuts[0];
-        targets = standardizedOuts[1];
-        sampleWeights = standardizedOuts[2];
-        let doValidation = false;
-        let valIns;
-        if (args.validationData != null && args.validationData.length > 0) {
-          doValidation = true;
-          if (args.validationData.length === 2) {
-            inputValX = args.validationData[0];
-            inputValY = args.validationData[1];
-          } else if (args.validationData.length === 3) {
-            throw new NotImplementedError("validationData including sample weights is not supported yet.");
-          } else {
-            throw new ValueError(`When passing validation data, it must contain 2 (valX, valY) or 3 (valX, valY, valSampleWeight) items; ${args.validationData} is invalid.`);
-          }
-          const checkBatchAxis2 = true;
-          const valStandardized = yield this.standardizeUserData(
-            inputValX,
-            inputValY,
-            null,
-            /** Unused sample weights. */
-            null,
-            /** Unused class weights. */
-            checkBatchAxis2,
-            batchSize
-          );
-          valX = valStandardized[0];
-          valY = valStandardized[1];
-          valIns = valX.concat(valY);
-        } else if (args.validationSplit != null && args.validationSplit > 0 && args.validationSplit < 1) {
-          doValidation = true;
-          const splitAt = Math.floor(inputs[0].shape[0] * (1 - args.validationSplit));
-          const originalBatchSize = inputs[0].shape[0];
-          valX = sliceArrays(inputs, splitAt, originalBatchSize);
-          originalInputs = inputs;
-          inputs = sliceArrays(inputs, 0, splitAt);
-          valY = sliceArrays(targets, splitAt, originalBatchSize);
-          originalTargets = targets;
-          targets = sliceArrays(targets, 0, splitAt);
-          valIns = valX.concat(valY);
-        } else if (args.validationSteps != null) {
-          doValidation = true;
-        }
-        const ins = inputs.concat(targets).concat(sampleWeights);
-        this.checkTrainableWeightsConsistency();
-        const trainFunction = this.makeTrainFunction();
-        const outLabels = this.getDedupedMetricsNames();
-        let valFunction;
-        let callbackMetrics;
-        if (doValidation) {
-          this.makeTestFunction();
-          valFunction = this.testFunction;
-          callbackMetrics = outLabels.slice().concat(outLabels.map((n2) => "val_" + n2));
+  async fit(x3, y2, args = {}) {
+    if (this.isTraining) {
+      throw new Error("Cannot start training because another fit() call is ongoing.");
+    }
+    this.isTraining = true;
+    let inputs;
+    let targets;
+    let originalInputs;
+    let originalTargets;
+    let inputValX;
+    let inputValY;
+    let valX;
+    let valY;
+    let sampleWeights;
+    try {
+      const batchSize = args.batchSize == null ? 32 : args.batchSize;
+      checkBatchSize(batchSize);
+      const checkBatchAxis = false;
+      const standardizedOuts = await this.standardizeUserData(x3, y2, args.sampleWeight, args.classWeight, checkBatchAxis, batchSize);
+      inputs = standardizedOuts[0];
+      targets = standardizedOuts[1];
+      sampleWeights = standardizedOuts[2];
+      let doValidation = false;
+      let valIns;
+      if (args.validationData != null && args.validationData.length > 0) {
+        doValidation = true;
+        if (args.validationData.length === 2) {
+          inputValX = args.validationData[0];
+          inputValY = args.validationData[1];
+        } else if (args.validationData.length === 3) {
+          throw new NotImplementedError("validationData including sample weights is not supported yet.");
         } else {
-          valFunction = null;
-          valIns = [];
-          callbackMetrics = outLabels.slice();
+          throw new ValueError(`When passing validation data, it must contain 2 (valX, valY) or 3 (valX, valY, valSampleWeight) items; ${args.validationData} is invalid.`);
         }
-        const callbacks2 = standardizeCallbacks(args.callbacks, args.yieldEvery);
-        const out = yield this.fitLoop(trainFunction, ins, outLabels, batchSize, args.epochs, args.verbose, callbacks2, valFunction, valIns, args.shuffle, callbackMetrics, args.initialEpoch, null, null);
-        return out;
-      } finally {
-        this.isTraining = false;
-        disposeNewTensors(inputs, x3);
-        disposeNewTensors(targets, y2);
-        disposeNewTensors(originalInputs, x3);
-        disposeNewTensors(originalTargets, y2);
-        disposeNewTensors(valX, inputValX);
-        disposeNewTensors(valY, inputValY);
-        if (sampleWeights != null) {
-          dispose(sampleWeights);
-        }
+        const checkBatchAxis2 = true;
+        const valStandardized = await this.standardizeUserData(
+          inputValX,
+          inputValY,
+          null,
+          /** Unused sample weights. */
+          null,
+          /** Unused class weights. */
+          checkBatchAxis2,
+          batchSize
+        );
+        valX = valStandardized[0];
+        valY = valStandardized[1];
+        valIns = valX.concat(valY);
+      } else if (args.validationSplit != null && args.validationSplit > 0 && args.validationSplit < 1) {
+        doValidation = true;
+        const splitAt = Math.floor(inputs[0].shape[0] * (1 - args.validationSplit));
+        const originalBatchSize = inputs[0].shape[0];
+        valX = sliceArrays(inputs, splitAt, originalBatchSize);
+        originalInputs = inputs;
+        inputs = sliceArrays(inputs, 0, splitAt);
+        valY = sliceArrays(targets, splitAt, originalBatchSize);
+        originalTargets = targets;
+        targets = sliceArrays(targets, 0, splitAt);
+        valIns = valX.concat(valY);
+      } else if (args.validationSteps != null) {
+        doValidation = true;
       }
-    });
+      const ins = inputs.concat(targets).concat(sampleWeights);
+      this.checkTrainableWeightsConsistency();
+      const trainFunction = this.makeTrainFunction();
+      const outLabels = this.getDedupedMetricsNames();
+      let valFunction;
+      let callbackMetrics;
+      if (doValidation) {
+        this.makeTestFunction();
+        valFunction = this.testFunction;
+        callbackMetrics = outLabels.slice().concat(outLabels.map((n2) => "val_" + n2));
+      } else {
+        valFunction = null;
+        valIns = [];
+        callbackMetrics = outLabels.slice();
+      }
+      const callbacks2 = standardizeCallbacks(args.callbacks, args.yieldEvery);
+      const out = await this.fitLoop(trainFunction, ins, outLabels, batchSize, args.epochs, args.verbose, callbacks2, valFunction, valIns, args.shuffle, callbackMetrics, args.initialEpoch, null, null);
+      return out;
+    } finally {
+      this.isTraining = false;
+      disposeNewTensors(inputs, x3);
+      disposeNewTensors(targets, y2);
+      disposeNewTensors(originalInputs, x3);
+      disposeNewTensors(originalTargets, y2);
+      disposeNewTensors(valX, inputValX);
+      disposeNewTensors(valY, inputValY);
+      if (sampleWeights != null) {
+        dispose(sampleWeights);
+      }
+    }
   }
   /**
    * Abstract fit function for `f(ins)`.
@@ -134679,102 +134369,100 @@ var LayersModel = class extends Container {
    *   doing validation from data tensors). Not applicable for tfjs-layers.
    * @returns A `History` object.
    */
-  fitLoop(f2, ins, outLabels, batchSize, epochs, verbose, callbacks2, valF, valIns, shuffle2, callbackMetrics, initialEpoch, stepsPerEpoch, validationSteps) {
-    return __async(this, null, function* () {
-      if (batchSize == null) {
-        batchSize = 32;
+  async fitLoop(f2, ins, outLabels, batchSize, epochs, verbose, callbacks2, valF, valIns, shuffle2, callbackMetrics, initialEpoch, stepsPerEpoch, validationSteps) {
+    if (batchSize == null) {
+      batchSize = 32;
+    }
+    if (epochs == null) {
+      epochs = 1;
+    }
+    if (shuffle2 == null) {
+      shuffle2 = true;
+    }
+    if (initialEpoch == null) {
+      initialEpoch = 0;
+    }
+    let doValidation = false;
+    if (valF != null && valIns != null) {
+      doValidation = true;
+    }
+    if (validationSteps != null) {
+      doValidation = true;
+      if (stepsPerEpoch == null) {
+        throw new ValueError("Can only use `validationSteps` when doing step-wise training, i.e., `stepsPerEpoch` must be set.");
       }
-      if (epochs == null) {
-        epochs = 1;
-      }
-      if (shuffle2 == null) {
-        shuffle2 = true;
-      }
-      if (initialEpoch == null) {
-        initialEpoch = 0;
-      }
-      let doValidation = false;
-      if (valF != null && valIns != null) {
-        doValidation = true;
-      }
-      if (validationSteps != null) {
-        doValidation = true;
-        if (stepsPerEpoch == null) {
-          throw new ValueError("Can only use `validationSteps` when doing step-wise training, i.e., `stepsPerEpoch` must be set.");
+    }
+    const numTrainSamples = this.checkNumSamples(ins, batchSize, stepsPerEpoch, "steps_per_epoch");
+    let indexArray;
+    if (numTrainSamples != null) {
+      indexArray = range3(0, numTrainSamples);
+    }
+    if (verbose == null) {
+      verbose = 1;
+    }
+    const { callbackList, history } = configureCallbacks(callbacks2, verbose, epochs, initialEpoch, numTrainSamples, stepsPerEpoch, batchSize, doValidation, callbackMetrics);
+    callbackList.setModel(this);
+    this.history = history;
+    await callbackList.onTrainBegin();
+    this.stopTraining_ = false;
+    for (let epoch2 = initialEpoch; epoch2 < epochs; ++epoch2) {
+      await callbackList.onEpochBegin(epoch2);
+      const epochLogs = {};
+      if (stepsPerEpoch != null) {
+        throw new NotImplementedError("stepsPerEpoch mode is not implemented yet.");
+      } else {
+        if (shuffle2 === "batch") {
+          throw new NotImplementedError("batch shuffling is not implemneted yet");
+        } else if (shuffle2) {
+          util_exports.shuffle(indexArray);
         }
-      }
-      const numTrainSamples = this.checkNumSamples(ins, batchSize, stepsPerEpoch, "steps_per_epoch");
-      let indexArray;
-      if (numTrainSamples != null) {
-        indexArray = range3(0, numTrainSamples);
-      }
-      if (verbose == null) {
-        verbose = 1;
-      }
-      const { callbackList, history } = configureCallbacks(callbacks2, verbose, epochs, initialEpoch, numTrainSamples, stepsPerEpoch, batchSize, doValidation, callbackMetrics);
-      callbackList.setModel(this);
-      this.history = history;
-      yield callbackList.onTrainBegin();
-      this.stopTraining_ = false;
-      for (let epoch2 = initialEpoch; epoch2 < epochs; ++epoch2) {
-        yield callbackList.onEpochBegin(epoch2);
-        const epochLogs = {};
-        if (stepsPerEpoch != null) {
-          throw new NotImplementedError("stepsPerEpoch mode is not implemented yet.");
-        } else {
-          if (shuffle2 === "batch") {
-            throw new NotImplementedError("batch shuffling is not implemneted yet");
-          } else if (shuffle2) {
-            util_exports.shuffle(indexArray);
-          }
-          const epochIndexArray1D = tensor1d(indexArray);
-          const batches = makeBatches(numTrainSamples, batchSize);
-          for (let batchIndex = 0; batchIndex < batches.length; ++batchIndex) {
-            const batchLogs = {};
-            yield callbackList.onBatchBegin(batchIndex, batchLogs);
-            tidy(() => {
-              const batchStart = batches[batchIndex][0];
-              const batchEnd = batches[batchIndex][1];
-              const batchIds = sliceAlongFirstAxis(epochIndexArray1D, batchStart, batchEnd - batchStart);
-              batchLogs["batch"] = batchIndex;
-              batchLogs["size"] = batchEnd - batchStart;
-              const insBatch = sliceArraysByIndices(ins, batchIds);
-              const outs = f2(insBatch);
-              for (let i = 0; i < outLabels.length; ++i) {
-                const label = outLabels[i];
-                const out = outs[i];
-                batchLogs[label] = out;
-                keep(out);
-              }
-              if (batchIndex === batches.length - 1) {
-                if (doValidation) {
-                  const valOuts = this.testLoop(valF, valIns, batchSize);
-                  for (let i = 0; i < outLabels.length; ++i) {
-                    const label = outLabels[i];
-                    const out = valOuts[i];
-                    keep(out);
-                    epochLogs["val_" + label] = out;
-                  }
+        const epochIndexArray1D = tensor1d(indexArray);
+        const batches = makeBatches(numTrainSamples, batchSize);
+        for (let batchIndex = 0; batchIndex < batches.length; ++batchIndex) {
+          const batchLogs = {};
+          await callbackList.onBatchBegin(batchIndex, batchLogs);
+          tidy(() => {
+            const batchStart = batches[batchIndex][0];
+            const batchEnd = batches[batchIndex][1];
+            const batchIds = sliceAlongFirstAxis(epochIndexArray1D, batchStart, batchEnd - batchStart);
+            batchLogs["batch"] = batchIndex;
+            batchLogs["size"] = batchEnd - batchStart;
+            const insBatch = sliceArraysByIndices(ins, batchIds);
+            const outs = f2(insBatch);
+            for (let i = 0; i < outLabels.length; ++i) {
+              const label = outLabels[i];
+              const out = outs[i];
+              batchLogs[label] = out;
+              keep(out);
+            }
+            if (batchIndex === batches.length - 1) {
+              if (doValidation) {
+                const valOuts = this.testLoop(valF, valIns, batchSize);
+                for (let i = 0; i < outLabels.length; ++i) {
+                  const label = outLabels[i];
+                  const out = valOuts[i];
+                  keep(out);
+                  epochLogs["val_" + label] = out;
                 }
               }
-            });
-            yield callbackList.onBatchEnd(batchIndex, batchLogs);
-            disposeTensorsInLogs(batchLogs);
-            if (this.stopTraining_) {
-              break;
             }
+          });
+          await callbackList.onBatchEnd(batchIndex, batchLogs);
+          disposeTensorsInLogs(batchLogs);
+          if (this.stopTraining_) {
+            break;
           }
-          epochIndexArray1D.dispose();
         }
-        yield callbackList.onEpochEnd(epoch2, epochLogs);
-        if (this.stopTraining_) {
-          break;
-        }
+        epochIndexArray1D.dispose();
       }
-      yield callbackList.onTrainEnd();
-      yield this.history.syncData();
-      return this.history;
-    });
+      await callbackList.onEpochEnd(epoch2, epochLogs);
+      if (this.stopTraining_) {
+        break;
+      }
+    }
+    await callbackList.onTrainEnd();
+    await this.history.syncData();
+    return this.history;
   }
   // TODO(cais): Add code snippet below when it's possible to instantiate
   //   actual dataset objects.
@@ -134799,10 +134487,8 @@ var LayersModel = class extends Container {
    *
    * @doc {heading: 'Models', subheading: 'Classes'}
    */
-  fitDataset(dataset, args) {
-    return __async(this, null, function* () {
-      return fitDataset(this, dataset, args);
-    });
+  async fitDataset(dataset, args) {
+    return fitDataset(this, dataset, args);
   }
   /**
    * Runs a single gradient update on a single batch of data.
@@ -134827,23 +134513,21 @@ var LayersModel = class extends Container {
    *
    * @doc {heading: 'Models', subheading: 'Classes'}
    */
-  trainOnBatch(x3, y2) {
-    return __async(this, null, function* () {
-      const standardizeOut = yield this.standardizeUserData(x3, y2);
-      const inputs = standardizeOut[0];
-      const targets = standardizeOut[1];
-      const trainFunction = this.makeTrainFunction();
-      const losses2 = trainFunction(inputs.concat(targets));
-      const lossValues = [];
-      for (const loss of losses2) {
-        const v3 = yield loss.data();
-        lossValues.push(v3[0]);
-      }
-      dispose(losses2);
-      disposeNewTensors(standardizeOut[0], x3);
-      disposeNewTensors(standardizeOut[1], y2);
-      return singletonOrArray(lossValues);
-    });
+  async trainOnBatch(x3, y2) {
+    const standardizeOut = await this.standardizeUserData(x3, y2);
+    const inputs = standardizeOut[0];
+    const targets = standardizeOut[1];
+    const trainFunction = this.makeTrainFunction();
+    const losses2 = trainFunction(inputs.concat(targets));
+    const lossValues = [];
+    for (const loss of losses2) {
+      const v3 = await loss.data();
+      lossValues.push(v3[0]);
+    }
+    dispose(losses2);
+    disposeNewTensors(standardizeOut[0], x3);
+    disposeNewTensors(standardizeOut[1], y2);
+    return singletonOrArray(lossValues);
   }
   /**
    * Extract weight values of the model.
@@ -135084,47 +134768,45 @@ var LayersModel = class extends Container {
    *
    * @doc {heading: 'Models', subheading: 'Classes', ignoreCI: true}
    */
-  save(handlerOrURL, config2) {
-    return __async(this, null, function* () {
-      if (typeof handlerOrURL === "string") {
-        const handlers4 = io_exports.getSaveHandlers(handlerOrURL);
-        if (handlers4.length === 0) {
-          throw new ValueError(`Cannot find any save handlers for URL '${handlerOrURL}'`);
-        } else if (handlers4.length > 1) {
-          throw new ValueError(`Found more than one (${handlers4.length}) save handlers for URL '${handlerOrURL}'`);
-        }
-        handlerOrURL = handlers4[0];
+  async save(handlerOrURL, config2) {
+    if (typeof handlerOrURL === "string") {
+      const handlers4 = io_exports.getSaveHandlers(handlerOrURL);
+      if (handlers4.length === 0) {
+        throw new ValueError(`Cannot find any save handlers for URL '${handlerOrURL}'`);
+      } else if (handlers4.length > 1) {
+        throw new ValueError(`Found more than one (${handlers4.length}) save handlers for URL '${handlerOrURL}'`);
       }
-      if (handlerOrURL.save == null) {
-        throw new ValueError("LayersModel.save() cannot proceed because the IOHandler provided does not have the `save` attribute defined.");
-      }
-      const weightDataAndSpecs = yield io_exports.encodeWeights(this.getNamedWeights(config2));
-      const returnString = false;
-      const unusedArg = null;
-      const modelConfig = this.toJSON(unusedArg, returnString);
-      const modelArtifacts = {
-        modelTopology: modelConfig,
-        format: LAYERS_MODEL_FORMAT_NAME,
-        generatedBy: `TensorFlow.js tfjs-layers v${version}`,
-        convertedBy: null
-      };
-      const includeOptimizer = config2 == null ? false : config2.includeOptimizer;
-      if (includeOptimizer && this.optimizer != null) {
-        modelArtifacts.trainingConfig = this.getTrainingConfig();
-        const weightType = "optimizer";
-        const { data: optimizerWeightData, specs: optimizerWeightSpecs } = yield io_exports.encodeWeights(yield this.optimizer.getWeights(), weightType);
-        weightDataAndSpecs.specs.push(...optimizerWeightSpecs);
-        weightDataAndSpecs.data = io_exports.concatenateArrayBuffers([weightDataAndSpecs.data, optimizerWeightData]);
-      }
-      if (this.userDefinedMetadata != null) {
-        const checkSize = true;
-        checkUserDefinedMetadata(this.userDefinedMetadata, this.name, checkSize);
-        modelArtifacts.userDefinedMetadata = this.userDefinedMetadata;
-      }
-      modelArtifacts.weightData = weightDataAndSpecs.data;
-      modelArtifacts.weightSpecs = weightDataAndSpecs.specs;
-      return handlerOrURL.save(modelArtifacts);
-    });
+      handlerOrURL = handlers4[0];
+    }
+    if (handlerOrURL.save == null) {
+      throw new ValueError("LayersModel.save() cannot proceed because the IOHandler provided does not have the `save` attribute defined.");
+    }
+    const weightDataAndSpecs = await io_exports.encodeWeights(this.getNamedWeights(config2));
+    const returnString = false;
+    const unusedArg = null;
+    const modelConfig = this.toJSON(unusedArg, returnString);
+    const modelArtifacts = {
+      modelTopology: modelConfig,
+      format: LAYERS_MODEL_FORMAT_NAME,
+      generatedBy: `TensorFlow.js tfjs-layers v${version}`,
+      convertedBy: null
+    };
+    const includeOptimizer = config2 == null ? false : config2.includeOptimizer;
+    if (includeOptimizer && this.optimizer != null) {
+      modelArtifacts.trainingConfig = this.getTrainingConfig();
+      const weightType = "optimizer";
+      const { data: optimizerWeightData, specs: optimizerWeightSpecs } = await io_exports.encodeWeights(await this.optimizer.getWeights(), weightType);
+      weightDataAndSpecs.specs.push(...optimizerWeightSpecs);
+      weightDataAndSpecs.data = io_exports.concatenateArrayBuffers([weightDataAndSpecs.data, optimizerWeightData]);
+    }
+    if (this.userDefinedMetadata != null) {
+      const checkSize = true;
+      checkUserDefinedMetadata(this.userDefinedMetadata, this.name, checkSize);
+      modelArtifacts.userDefinedMetadata = this.userDefinedMetadata;
+    }
+    modelArtifacts.weightData = weightDataAndSpecs.data;
+    modelArtifacts.weightSpecs = weightDataAndSpecs.specs;
+    return handlerOrURL.save(modelArtifacts);
   }
   /**
    * Set user-defined metadata.
@@ -135434,13 +135116,11 @@ var Sequential = class _Sequential extends LayersModel {
    *
    * @doc {heading: 'Models', subheading: 'Classes'}
    */
-  evaluateDataset(dataset, args) {
-    return __async(this, null, function* () {
-      if (!this.built) {
-        throw new RuntimeError2("The model needs to be compiled before being used.");
-      }
-      return this.model.evaluateDataset(dataset, args);
-    });
+  async evaluateDataset(dataset, args) {
+    if (!this.built) {
+      throw new RuntimeError2("The model needs to be compiled before being used.");
+    }
+    return this.model.evaluateDataset(dataset, args);
   }
   /**
    * Generates output predictions for the input samples.
@@ -135540,13 +135220,11 @@ var Sequential = class _Sequential extends LayersModel {
    *
    * @doc {heading: 'Models', subheading: 'Classes'}
    */
-  fit(_0, _1) {
-    return __async(this, arguments, function* (x3, y2, args = {}) {
-      if (!this.built) {
-        throw new RuntimeError2("The model needs to be compiled before being used.");
-      }
-      return this.model.fit(x3, y2, args);
-    });
+  async fit(x3, y2, args = {}) {
+    if (!this.built) {
+      throw new RuntimeError2("The model needs to be compiled before being used.");
+    }
+    return this.model.fit(x3, y2, args);
   }
   /**
    * Trains the model using a dataset object.
@@ -135633,13 +135311,11 @@ var Sequential = class _Sequential extends LayersModel {
    *
    * @doc {heading: 'Models', subheading: 'Classes', ignoreCI: true}
    */
-  fitDataset(dataset, args) {
-    return __async(this, null, function* () {
-      if (!this.built) {
-        throw new RuntimeError2("The model needs to be compiled before being used.");
-      }
-      return this.model.fitDataset(dataset, args);
-    });
+  async fitDataset(dataset, args) {
+    if (!this.built) {
+      throw new RuntimeError2("The model needs to be compiled before being used.");
+    }
+    return this.model.fitDataset(dataset, args);
   }
   /**
    * Runs a single gradient update on a single batch of data.
@@ -135664,10 +135340,8 @@ var Sequential = class _Sequential extends LayersModel {
    *
    * @doc {heading: 'Models', subheading: 'Classes'}
    */
-  trainOnBatch(x3, y2) {
-    return __async(this, null, function* () {
-      return this.model.trainOnBatch(x3, y2);
-    });
+  async trainOnBatch(x3, y2) {
+    return this.model.trainOnBatch(x3, y2);
   }
   /* See parent class for JsDoc */
   /** @nocollapse */
@@ -149027,7 +148701,7 @@ function split3(tensor2, length, elementShape) {
 }
 
 // node_modules/@tensorflow/tfjs-converter/dist/operations/executors/control_executor.js
-var executeOp3 = (node, tensorMap, context2) => __async(null, null, function* () {
+var executeOp3 = async (node, tensorMap, context2) => {
   switch (node.op) {
     case "If":
     case "StatelessIf": {
@@ -149035,7 +148709,7 @@ var executeOp3 = (node, tensorMap, context2) => __async(null, null, function* ()
       const elseFunc = getParamValue("elseBranch", node, tensorMap, context2);
       const cond = getParamValue("cond", node, tensorMap, context2);
       const args = getParamValue("args", node, tensorMap, context2);
-      const condValue = yield cond.data();
+      const condValue = await cond.data();
       if (condValue[0]) {
         return context2.functionMap[thenFunc].executeFunctionAsync(args, context2.tensorArrayMap, context2.tensorListMap);
       } else {
@@ -149047,9 +148721,9 @@ var executeOp3 = (node, tensorMap, context2) => __async(null, null, function* ()
       const bodyFunc = getParamValue("body", node, tensorMap, context2);
       const condFunc = getParamValue("cond", node, tensorMap, context2);
       const args = getParamValue("args", node, tensorMap, context2);
-      const condResult = yield context2.functionMap[condFunc].executeFunctionAsync(args, context2.tensorArrayMap, context2.tensorListMap);
+      const condResult = await context2.functionMap[condFunc].executeFunctionAsync(args, context2.tensorArrayMap, context2.tensorListMap);
       const argIds = args.map((tensor2) => tensor2.id);
-      let condValue = yield condResult[0].data();
+      let condValue = await condResult[0].data();
       condResult.forEach((tensor2) => {
         if (!tensor2.kept && argIds.indexOf(tensor2.id) === -1) {
           tensor2.dispose();
@@ -149058,15 +148732,15 @@ var executeOp3 = (node, tensorMap, context2) => __async(null, null, function* ()
       let result = args;
       while (condValue[0]) {
         const origResult = result;
-        result = yield context2.functionMap[bodyFunc].executeFunctionAsync(result, context2.tensorArrayMap, context2.tensorListMap);
+        result = await context2.functionMap[bodyFunc].executeFunctionAsync(result, context2.tensorArrayMap, context2.tensorListMap);
         const resultIds = result.map((tensor2) => tensor2.id);
         origResult.forEach((tensor2) => {
           if (!tensor2.kept && argIds.indexOf(tensor2.id) === -1 && resultIds.indexOf(tensor2.id) === -1) {
             tensor2.dispose();
           }
         });
-        const condResult2 = yield context2.functionMap[condFunc].executeFunctionAsync(result, context2.tensorArrayMap, context2.tensorListMap);
-        condValue = yield condResult2[0].data();
+        const condResult2 = await context2.functionMap[condFunc].executeFunctionAsync(result, context2.tensorArrayMap, context2.tensorListMap);
+        condValue = await condResult2[0].data();
         condResult2.forEach((tensor2) => {
           if (!tensor2.kept && argIds.indexOf(tensor2.id) === -1 && resultIds.indexOf(tensor2.id) === -1) {
             tensor2.dispose();
@@ -149085,7 +148759,7 @@ var executeOp3 = (node, tensorMap, context2) => __async(null, null, function* ()
       if (!data.kept) {
         data = cloneTensor(data);
       }
-      return (yield pred.data())[0] ? [void 0, data] : [data, void 0];
+      return (await pred.data())[0] ? [void 0, data] : [data, void 0];
     }
     case "Merge": {
       const inputName = node.inputNames.find((name) => getTensor(name, tensorMap, context2) !== void 0);
@@ -149289,7 +148963,7 @@ var executeOp3 = (node, tensorMap, context2) => __async(null, null, function* ()
     default:
       throw TypeError(`Node type ${node.op} is not implemented`);
   }
-});
+};
 
 // node_modules/@tensorflow/tfjs-converter/dist/operations/executors/convolution_executor.js
 function fusedConvAndDepthWiseParams(node, tensorMap, context2) {
@@ -149545,27 +149219,27 @@ function nmsParams(node, tensorMap, context2) {
     softNmsSigma
   };
 }
-var executeOp6 = (_0, _1, _22, _3, ..._4) => __async(null, [_0, _1, _22, _3, ..._4], function* (node, tensorMap, context2, resourceManager, ops = ops_for_converter_exports) {
+var executeOp6 = async (node, tensorMap, context2, resourceManager, ops = ops_for_converter_exports) => {
   switch (node.op) {
     case "NonMaxSuppressionV5": {
       const { boxes, scores, maxOutputSize, iouThreshold, scoreThreshold, softNmsSigma } = nmsParams(node, tensorMap, context2);
-      const result = yield ops.image.nonMaxSuppressionWithScoreAsync(boxes, scores, maxOutputSize, iouThreshold, scoreThreshold, softNmsSigma);
+      const result = await ops.image.nonMaxSuppressionWithScoreAsync(boxes, scores, maxOutputSize, iouThreshold, scoreThreshold, softNmsSigma);
       return [result.selectedIndices, result.selectedScores];
     }
     case "NonMaxSuppressionV4": {
       const { boxes, scores, maxOutputSize, iouThreshold, scoreThreshold } = nmsParams(node, tensorMap, context2);
       const padToMaxOutputSize = getParamValue("padToMaxOutputSize", node, tensorMap, context2);
-      const result = yield ops.image.nonMaxSuppressionPaddedAsync(boxes, scores, maxOutputSize, iouThreshold, scoreThreshold, padToMaxOutputSize);
+      const result = await ops.image.nonMaxSuppressionPaddedAsync(boxes, scores, maxOutputSize, iouThreshold, scoreThreshold, padToMaxOutputSize);
       return [result.selectedIndices, result.validOutputs];
     }
     case "NonMaxSuppressionV3":
     case "NonMaxSuppressionV2": {
       const { boxes, scores, maxOutputSize, iouThreshold, scoreThreshold } = nmsParams(node, tensorMap, context2);
-      return [yield ops.image.nonMaxSuppressionAsync(boxes, scores, maxOutputSize, iouThreshold, scoreThreshold)];
+      return [await ops.image.nonMaxSuppressionAsync(boxes, scores, maxOutputSize, iouThreshold, scoreThreshold)];
     }
     case "Where": {
       const condition = ops.cast(getParamValue("condition", node, tensorMap, context2), "bool");
-      const result = [yield ops.whereAsync(condition)];
+      const result = [await ops.whereAsync(condition)];
       condition.dispose();
       return result;
     }
@@ -149575,7 +149249,7 @@ var executeOp6 = (_0, _1, _22, _3, ..._4) => __async(null, [_0, _1, _22, _3, ...
     default:
       throw TypeError(`Node type ${node.op} is not implemented`);
   }
-});
+};
 
 // node_modules/@tensorflow/tfjs-converter/dist/operations/executors/evaluation_executor.js
 var executeOp7 = (node, tensorMap, context2, ops = ops_for_converter_exports) => {
@@ -149704,25 +149378,23 @@ var HashTable = class {
    * @param keys Keys to store in the hashtable.
    * @param values Values to store in the hashtable.
    */
-  import(keys, values) {
-    return __async(this, null, function* () {
-      this.checkKeyAndValueTensor(keys, values);
-      const $keys = yield keys.data();
-      this.tensorMap.forEach((value) => value.dispose());
-      this.tensorMap.clear();
-      return tidy(() => {
-        const $values = unstack(values);
-        const keysLength = $keys.length;
-        const valuesLength = $values.length;
-        util_exports.assert(keysLength === valuesLength, () => `The number of elements doesn't match, keys has ${keysLength} elements, the values has ${valuesLength} elements.`);
-        for (let i = 0; i < keysLength; i++) {
-          const key = $keys[i];
-          const value = $values[i];
-          keep(value);
-          this.tensorMap.set(key, value);
-        }
-        return this.handle;
-      });
+  async import(keys, values) {
+    this.checkKeyAndValueTensor(keys, values);
+    const $keys = await keys.data();
+    this.tensorMap.forEach((value) => value.dispose());
+    this.tensorMap.clear();
+    return tidy(() => {
+      const $values = unstack(values);
+      const keysLength = $keys.length;
+      const valuesLength = $values.length;
+      util_exports.assert(keysLength === valuesLength, () => `The number of elements doesn't match, keys has ${keysLength} elements, the values has ${valuesLength} elements.`);
+      for (let i = 0; i < keysLength; i++) {
+        const key = $keys[i];
+        const value = $values[i];
+        keep(value);
+        this.tensorMap.set(key, value);
+      }
+      return this.handle;
     });
   }
   /**
@@ -149740,19 +149412,17 @@ var HashTable = class {
    *     not present in the table. It must also be of the same type as the
    *     table values.
    */
-  find(keys, defaultValue) {
-    return __async(this, null, function* () {
-      this.checkKeyAndValueTensor(keys, defaultValue);
-      const $keys = yield keys.data();
-      return tidy(() => {
-        const result = [];
-        for (let i = 0; i < $keys.length; i++) {
-          const key = $keys[i];
-          const value = this.findWithDefault(key, defaultValue);
-          result.push(value);
-        }
-        return stack(result);
-      });
+  async find(keys, defaultValue) {
+    this.checkKeyAndValueTensor(keys, defaultValue);
+    const $keys = await keys.data();
+    return tidy(() => {
+      const result = [];
+      for (let i = 0; i < $keys.length; i++) {
+        const key = $keys[i];
+        const value = this.findWithDefault(key, defaultValue);
+        result.push(value);
+      }
+      return stack(result);
     });
   }
   // tslint:disable-next-line: no-any
@@ -149771,7 +149441,7 @@ var HashTable = class {
 };
 
 // node_modules/@tensorflow/tfjs-converter/dist/operations/executors/hash_table_executor.js
-var executeOp9 = (node, tensorMap, context2, resourceManager) => __async(null, null, function* () {
+var executeOp9 = async (node, tensorMap, context2, resourceManager) => {
   switch (node.op) {
     case "HashTable":
     case "HashTableV2": {
@@ -149794,7 +149464,7 @@ var executeOp9 = (node, tensorMap, context2, resourceManager) => __async(null, n
       const keys = getParamValue("keys", node, tensorMap, context2);
       const values = getParamValue("values", node, tensorMap, context2);
       const hashTable = resourceManager.getHashTableById(handle.id);
-      return [yield hashTable.import(keys, values)];
+      return [await hashTable.import(keys, values)];
     }
     case "LookupTableFind":
     case "LookupTableFindV2": {
@@ -149802,7 +149472,7 @@ var executeOp9 = (node, tensorMap, context2, resourceManager) => __async(null, n
       const keys = getParamValue("keys", node, tensorMap, context2);
       const defaultValue = getParamValue("defaultValue", node, tensorMap, context2);
       const hashTable = resourceManager.getHashTableById(handle.id);
-      return [yield hashTable.find(keys, defaultValue)];
+      return [await hashTable.find(keys, defaultValue)];
     }
     case "LookupTableSize":
     case "LookupTableSizeV2": {
@@ -149813,7 +149483,7 @@ var executeOp9 = (node, tensorMap, context2, resourceManager) => __async(null, n
     default:
       throw TypeError(`Node type ${node.op} is not implemented`);
   }
-});
+};
 
 // node_modules/@tensorflow/tfjs-converter/dist/operations/executors/image_executor.js
 var executeOp10 = (node, tensorMap, context2, ops = ops_for_converter_exports) => {
@@ -150967,10 +150637,8 @@ var GraphExecutor = class _GraphExecutor {
    * inspect intermediate nodes of the model by adding them to the outputs
    * array.
    */
-  executeAsync(inputs, outputs) {
-    return __async(this, null, function* () {
-      return this._executeAsync(inputs, outputs);
-    });
+  async executeAsync(inputs, outputs) {
+    return this._executeAsync(inputs, outputs);
   }
   disposeIntermediateTensors() {
     if (!this.clonedTensorsMap) {
@@ -151002,52 +150670,48 @@ var GraphExecutor = class _GraphExecutor {
    * @param tensorArrayMap Optional global TensorList map by id. Used for
    * function execution.
    */
-  _executeAsync(_0, _1) {
-    return __async(this, arguments, function* (inputs, outputs, isFunctionExecution = false, tensorArrayMap = {}, tensorListMap = {}) {
-      this.disposeIntermediateTensors();
-      if (!isFunctionExecution) {
-        inputs = this.mapInputs(inputs);
-        this.checkInputs(inputs);
-        this.checkInputShapeAndType(inputs);
-        outputs = this.mapOutputs(outputs);
-        this.checkOutputs(outputs);
-      }
-      try {
-        this.keepIntermediateTensors = env().getBool("KEEP_INTERMEDIATE_TENSORS");
-      } catch (e2) {
-        this.keepIntermediateTensors = false;
-        console.warn(e2.message);
-      }
-      const context2 = new ExecutionContext(this.weightMap, tensorArrayMap, tensorListMap, this.functionExecutorMap, this.parseNodeNameCache);
-      if (this.keepIntermediateTensors) {
-        this.clonedTensorsMap = this.cloneTensorMap(this.weightMap);
-      }
-      const tensorsMap = yield this.executeWithControlFlow(inputs, context2, outputs, isFunctionExecution);
-      const results = outputs.map((name) => getTensor(name, tensorsMap, context2));
-      const outputIds = results.map((t) => t.id);
-      const inputIds = Object.keys(inputs).map((name) => inputs[name].id);
-      const keepIds = /* @__PURE__ */ new Set([...outputIds, ...inputIds, ...this.weightIds]);
-      Object.values(tensorsMap).forEach((tensorsList) => {
-        tensorsList.forEach((tensor2) => {
-          if (tensor2 && !tensor2.isDisposed && !keepIds.has(tensor2.id)) {
-            tensor2.dispose();
-          }
-        });
+  async _executeAsync(inputs, outputs, isFunctionExecution = false, tensorArrayMap = {}, tensorListMap = {}) {
+    this.disposeIntermediateTensors();
+    if (!isFunctionExecution) {
+      inputs = this.mapInputs(inputs);
+      this.checkInputs(inputs);
+      this.checkInputShapeAndType(inputs);
+      outputs = this.mapOutputs(outputs);
+      this.checkOutputs(outputs);
+    }
+    try {
+      this.keepIntermediateTensors = env().getBool("KEEP_INTERMEDIATE_TENSORS");
+    } catch (e2) {
+      this.keepIntermediateTensors = false;
+      console.warn(e2.message);
+    }
+    const context2 = new ExecutionContext(this.weightMap, tensorArrayMap, tensorListMap, this.functionExecutorMap, this.parseNodeNameCache);
+    if (this.keepIntermediateTensors) {
+      this.clonedTensorsMap = this.cloneTensorMap(this.weightMap);
+    }
+    const tensorsMap = await this.executeWithControlFlow(inputs, context2, outputs, isFunctionExecution);
+    const results = outputs.map((name) => getTensor(name, tensorsMap, context2));
+    const outputIds = results.map((t) => t.id);
+    const inputIds = Object.keys(inputs).map((name) => inputs[name].id);
+    const keepIds = /* @__PURE__ */ new Set([...outputIds, ...inputIds, ...this.weightIds]);
+    Object.values(tensorsMap).forEach((tensorsList) => {
+      tensorsList.forEach((tensor2) => {
+        if (tensor2 && !tensor2.isDisposed && !keepIds.has(tensor2.id)) {
+          tensor2.dispose();
+        }
       });
-      if (this.parent == null) {
-        context2.dispose(keepIds);
-      }
-      return results;
     });
+    if (this.parent == null) {
+      context2.dispose(keepIds);
+    }
+    return results;
   }
-  executeFunctionAsync(inputs, tensorArrayMap, tensorListMap) {
-    return __async(this, null, function* () {
-      const mappedInputs = inputs.reduce((map3, tensor2, index) => {
-        map3[this.inputs[index].name] = tensor2;
-        return map3;
-      }, {});
-      return this._executeAsync(mappedInputs, this.outputNodes, true, tensorArrayMap, tensorListMap);
-    });
+  async executeFunctionAsync(inputs, tensorArrayMap, tensorListMap) {
+    const mappedInputs = inputs.reduce((map3, tensor2, index) => {
+      map3[this.inputs[index].name] = tensor2;
+      return map3;
+    }, {});
+    return this._executeAsync(mappedInputs, this.outputNodes, true, tensorArrayMap, tensorListMap);
   }
   /**
    * When there are control flow nodes in the graph, the graph execution use
@@ -151060,51 +150724,49 @@ var GraphExecutor = class _GraphExecutor {
    * the outputs array.
    * @param isFunctionExecution Flag for executing a function.
    */
-  executeWithControlFlow(inputs, context2, outputNames, isFunctionExecution) {
-    return __async(this, null, function* () {
-      const names = Object.keys(inputs);
-      const inputNodes = names.map((name) => this.graph.nodes[parseNodeName(name)[0]]);
-      const outputNodeNames = outputNames.map((name) => parseNodeName(name)[0]);
-      const outputNodeNameSet = new Set(outputNodeNames);
-      let outputNodes = outputNodeNames.map((name) => this.graph.nodes[name]);
-      if (outputNodes.length === 0) {
-        outputNodes = this._outputs;
-      }
-      const { usedNodes, missingInputs, dynamicNode, syncInputs } = getExecutionSubgraph(inputs, outputNodes, this.weightMap, this._initNodes);
-      const stack2 = [
-        ...inputNodes,
-        ...this.graph.weights,
-        ...this._initNodes || []
-      ].map((node) => {
-        return { node, contexts: context2.currentContext };
-      });
-      const tensorsMap = Object.assign({}, this.weightMap);
-      Object.keys(inputs).forEach((name) => {
-        const [nodeName, index] = parseNodeName(name);
-        const tensors = [];
-        tensors[index] = inputs[name];
-        tensorsMap[nodeName] = tensors;
-      });
-      const intermediateTensorConsumerCount = {};
-      const tensorsToKeep = this.getFrozenTensorIds(tensorsMap);
-      const added = {};
-      while (stack2.length > 0) {
-        const promises = this.processStack(inputNodes, stack2, context2, tensorsMap, added, tensorsToKeep, outputNodeNameSet, intermediateTensorConsumerCount, usedNodes);
-        yield Promise.all(promises);
-      }
-      if (dynamicNode == null && !isFunctionExecution) {
-        console.warn(`This model execution did not contain any nodes with control flow or dynamic output shapes. You can use model.execute() instead.`);
-      }
-      const missingOutputs = outputNodes.filter((node) => !isControlFlow(node) && !getTensor(node.name, tensorsMap, context2)).map((node) => node.name);
-      if (missingOutputs.length > 0) {
-        let alternativeMsg = "";
-        if (dynamicNode != null) {
-          alternativeMsg = `Alternatively, to avoid the dynamic ops, use model.execute() and specify the inputs [${syncInputs}]`;
-        }
-        throw new Error(`Cannot compute the outputs [${missingOutputs}] from the provided inputs [${names}]. Consider providing the following inputs: [${missingInputs}]. ${alternativeMsg}`);
-      }
-      return tensorsMap;
+  async executeWithControlFlow(inputs, context2, outputNames, isFunctionExecution) {
+    const names = Object.keys(inputs);
+    const inputNodes = names.map((name) => this.graph.nodes[parseNodeName(name)[0]]);
+    const outputNodeNames = outputNames.map((name) => parseNodeName(name)[0]);
+    const outputNodeNameSet = new Set(outputNodeNames);
+    let outputNodes = outputNodeNames.map((name) => this.graph.nodes[name]);
+    if (outputNodes.length === 0) {
+      outputNodes = this._outputs;
+    }
+    const { usedNodes, missingInputs, dynamicNode, syncInputs } = getExecutionSubgraph(inputs, outputNodes, this.weightMap, this._initNodes);
+    const stack2 = [
+      ...inputNodes,
+      ...this.graph.weights,
+      ...this._initNodes || []
+    ].map((node) => {
+      return { node, contexts: context2.currentContext };
     });
+    const tensorsMap = Object.assign({}, this.weightMap);
+    Object.keys(inputs).forEach((name) => {
+      const [nodeName, index] = parseNodeName(name);
+      const tensors = [];
+      tensors[index] = inputs[name];
+      tensorsMap[nodeName] = tensors;
+    });
+    const intermediateTensorConsumerCount = {};
+    const tensorsToKeep = this.getFrozenTensorIds(tensorsMap);
+    const added = {};
+    while (stack2.length > 0) {
+      const promises = this.processStack(inputNodes, stack2, context2, tensorsMap, added, tensorsToKeep, outputNodeNameSet, intermediateTensorConsumerCount, usedNodes);
+      await Promise.all(promises);
+    }
+    if (dynamicNode == null && !isFunctionExecution) {
+      console.warn(`This model execution did not contain any nodes with control flow or dynamic output shapes. You can use model.execute() instead.`);
+    }
+    const missingOutputs = outputNodes.filter((node) => !isControlFlow(node) && !getTensor(node.name, tensorsMap, context2)).map((node) => node.name);
+    if (missingOutputs.length > 0) {
+      let alternativeMsg = "";
+      if (dynamicNode != null) {
+        alternativeMsg = `Alternatively, to avoid the dynamic ops, use model.execute() and specify the inputs [${syncInputs}]`;
+      }
+      throw new Error(`Cannot compute the outputs [${missingOutputs}] from the provided inputs [${names}]. Consider providing the following inputs: [${missingInputs}]. ${alternativeMsg}`);
+    }
+    return tensorsMap;
   }
   processStack(inputNodes, stack2, context2, tensorMap, added, tensorsToKeep, outputNodeNameSet, intermediateTensorConsumerCount, usedNodes) {
     const promises = [];
@@ -151376,14 +151038,12 @@ var GraphModel = class {
     const weightMap = this.io.decodeWeights(artifacts.weightData, artifacts.weightSpecs);
     return this.loadWithWeightMap(artifacts, weightMap);
   }
-  loadStreaming(artifacts) {
-    return __async(this, null, function* () {
-      if (artifacts.getWeightStream == null) {
-        throw new Error("Model artifacts missing streamWeights function");
-      }
-      const weightMap = yield decodeWeightsStream(artifacts.getWeightStream(), artifacts.weightSpecs);
-      return this.loadWithWeightMap(artifacts, weightMap);
-    });
+  async loadStreaming(artifacts) {
+    if (artifacts.getWeightStream == null) {
+      throw new Error("Model artifacts missing streamWeights function");
+    }
+    const weightMap = await decodeWeightsStream(artifacts.getWeightStream(), artifacts.weightSpecs);
+    return this.loadWithWeightMap(artifacts, weightMap);
   }
   loadWithWeightMap(artifacts, weightMap) {
     this.artifacts = artifacts;
@@ -151456,22 +151116,20 @@ var GraphModel = class {
    *
    * @doc {heading: 'Models', subheading: 'Classes', ignoreCI: true}
    */
-  save(handlerOrURL, config2) {
-    return __async(this, null, function* () {
-      if (typeof handlerOrURL === "string") {
-        const handlers4 = this.io.getSaveHandlers(handlerOrURL);
-        if (handlers4.length === 0) {
-          throw new Error(`Cannot find any save handlers for URL '${handlerOrURL}'`);
-        } else if (handlers4.length > 1) {
-          throw new Error(`Found more than one (${handlers4.length}) save handlers for URL '${handlerOrURL}'`);
-        }
-        handlerOrURL = handlers4[0];
+  async save(handlerOrURL, config2) {
+    if (typeof handlerOrURL === "string") {
+      const handlers4 = this.io.getSaveHandlers(handlerOrURL);
+      if (handlers4.length === 0) {
+        throw new Error(`Cannot find any save handlers for URL '${handlerOrURL}'`);
+      } else if (handlers4.length > 1) {
+        throw new Error(`Found more than one (${handlers4.length}) save handlers for URL '${handlerOrURL}'`);
       }
-      if (handlerOrURL.save == null) {
-        throw new Error("GraphModel.save() cannot proceed because the IOHandler provided does not have the `save` attribute defined.");
-      }
-      return handlerOrURL.save(this.artifacts);
-    });
+      handlerOrURL = handlers4[0];
+    }
+    if (handlerOrURL.save == null) {
+      throw new Error("GraphModel.save() cannot proceed because the IOHandler provided does not have the `save` attribute defined.");
+    }
+    return handlerOrURL.save(this.artifacts);
   }
   addStructuredOutputNames(outputTensors) {
     if (this.structuredOutputKeys) {
@@ -151565,11 +151223,9 @@ var GraphModel = class {
    *
    * @doc {heading: 'Models', subheading: 'Classes'}
    */
-  predictAsync(inputs, config2) {
-    return __async(this, null, function* () {
-      const outputTensors = yield this.executeAsync(inputs, this.outputNodes);
-      return this.addStructuredOutputNames(outputTensors);
-    });
+  async predictAsync(inputs, config2) {
+    const outputTensors = await this.executeAsync(inputs, this.outputNodes);
+    return this.addStructuredOutputNames(outputTensors);
   }
   normalizeInputs(inputs) {
     var _a;
@@ -151616,17 +151272,15 @@ var GraphModel = class {
       return this.initializer.execute({}, Object.keys(this.initializerSignature.outputs));
     }
   }
-  executeInitializerGraphAsync() {
-    return __async(this, null, function* () {
-      if (this.initializer == null) {
-        return [];
-      }
-      if (this.initializerSignature == null) {
-        return this.initializer.executeAsync({}, []);
-      } else {
-        return this.initializer.executeAsync({}, Object.keys(this.initializerSignature.outputs));
-      }
-    });
+  async executeInitializerGraphAsync() {
+    if (this.initializer == null) {
+      return [];
+    }
+    if (this.initializerSignature == null) {
+      return this.initializer.executeAsync({}, []);
+    } else {
+      return this.initializer.executeAsync({}, Object.keys(this.initializerSignature.outputs));
+    }
   }
   setResourceIdToCapturedInput(outputs) {
     this.resourceIdToCapturedInput = {};
@@ -151681,16 +151335,14 @@ var GraphModel = class {
    *
    * @doc {heading: 'Models', subheading: 'Classes'}
    */
-  executeAsync(inputs, outputs) {
-    return __async(this, null, function* () {
-      if (this.resourceIdToCapturedInput == null) {
-        this.setResourceIdToCapturedInput(yield this.executeInitializerGraphAsync());
-      }
-      inputs = this.normalizeInputs(inputs);
-      outputs = this.normalizeOutputs(outputs);
-      const result = yield this.executor.executeAsync(inputs, outputs);
-      return result.length > 1 ? result : result[0];
-    });
+  async executeAsync(inputs, outputs) {
+    if (this.resourceIdToCapturedInput == null) {
+      this.setResourceIdToCapturedInput(await this.executeInitializerGraphAsync());
+    }
+    inputs = this.normalizeInputs(inputs);
+    outputs = this.normalizeOutputs(outputs);
+    const result = await this.executor.executeAsync(inputs, outputs);
+    return result.length > 1 ? result : result[0];
   }
   /**
    * Get intermediate tensors for model debugging mode (flag
@@ -151732,21 +151384,19 @@ var GraphModel = class {
     this.resourceManager.dispose();
   }
 };
-function loadGraphModel(_0) {
-  return __async(this, arguments, function* (modelUrl, options2 = {}, tfio = io_exports) {
-    if (modelUrl == null) {
-      throw new Error("modelUrl in loadGraphModel() cannot be null. Please provide a url or an IOHandler that loads the model");
-    }
-    if (options2 == null) {
-      options2 = {};
-    }
-    if (options2.fromTFHub && typeof modelUrl === "string") {
-      modelUrl = getTFHubUrl(modelUrl);
-    }
-    const model3 = new GraphModel(modelUrl, options2, tfio);
-    yield model3.load();
-    return model3;
-  });
+async function loadGraphModel(modelUrl, options2 = {}, tfio = io_exports) {
+  if (modelUrl == null) {
+    throw new Error("modelUrl in loadGraphModel() cannot be null. Please provide a url or an IOHandler that loads the model");
+  }
+  if (options2 == null) {
+    options2 = {};
+  }
+  if (options2.fromTFHub && typeof modelUrl === "string") {
+    modelUrl = getTFHubUrl(modelUrl);
+  }
+  const model3 = new GraphModel(modelUrl, options2, tfio);
+  await model3.load();
+  return model3;
 }
 function getTFHubUrl(modelUrl) {
   if (!modelUrl.endsWith("/")) {
@@ -152070,16 +151720,14 @@ var LazyIterator = class {
    * @returns A Promise for an array of stream elements, which will resolve
    *   when the stream is exhausted.
    */
-  toArray() {
-    return __async(this, null, function* () {
-      const result = [];
-      let x3 = yield this.next();
-      while (!x3.done) {
-        result.push(x3.value);
-        x3 = yield this.next();
-      }
-      return result;
-    });
+  async toArray() {
+    const result = [];
+    let x3 = await this.next();
+    while (!x3.done) {
+      result.push(x3.value);
+      x3 = await this.next();
+    }
+    return result;
   }
   /**
    * Collect all elements of this dataset into an array with prefetching 100
@@ -152092,17 +151740,15 @@ var LazyIterator = class {
    * @returns A Promise for an array of stream elements, which will resolve
    *   when the stream is exhausted.
    */
-  toArrayForTest() {
-    return __async(this, null, function* () {
-      const stream = this.prefetch(100);
-      const result = [];
-      let x3 = yield stream.next();
-      while (!x3.done) {
-        result.push(x3.value);
-        x3 = yield stream.next();
-      }
-      return result;
-    });
+  async toArrayForTest() {
+    const stream = this.prefetch(100);
+    const result = [];
+    let x3 = await stream.next();
+    while (!x3.done) {
+      result.push(x3.value);
+      x3 = await stream.next();
+    }
+    return result;
   }
   /**
    * Draw items from the stream until it is exhausted.
@@ -152111,13 +151757,11 @@ var LazyIterator = class {
    * that case, calling this function guarantees that the stream will be
    * fully processed.
    */
-  resolveFully() {
-    return __async(this, null, function* () {
-      let x3 = yield this.next();
-      while (!x3.done) {
-        x3 = yield this.next();
-      }
-    });
+  async resolveFully() {
+    let x3 = await this.next();
+    while (!x3.done) {
+      x3 = await this.next();
+    }
   }
   /**
    * Draw items from the stream until it is exhausted, or a predicate fails.
@@ -152126,15 +151770,13 @@ var LazyIterator = class {
    * that case, calling this function guarantees that the stream will be
    * fully processed.
    */
-  resolveWhile(predicate) {
-    return __async(this, null, function* () {
-      let x3 = yield this.next();
-      let shouldContinue = predicate(x3.value);
-      while (!x3.done && shouldContinue) {
-        x3 = yield this.next();
-        shouldContinue = predicate(x3.value);
-      }
-    });
+  async resolveWhile(predicate) {
+    let x3 = await this.next();
+    let shouldContinue = predicate(x3.value);
+    while (!x3.done && shouldContinue) {
+      x3 = await this.next();
+      shouldContinue = predicate(x3.value);
+    }
   }
   /**
    * Handles errors thrown on this stream using a provided handler function.
@@ -152212,10 +151854,8 @@ var LazyIterator = class {
    *
    * @param f A function to apply to each stream element.
    */
-  forEachAsync(f2) {
-    return __async(this, null, function* () {
-      return this.map(f2).resolveFully();
-    });
+  async forEachAsync(f2) {
+    return this.map(f2).resolveFully();
   }
   /**
    * Apply a function to every element of the stream, forcing serial execution.
@@ -152224,10 +151864,8 @@ var LazyIterator = class {
    *   to indicate that the stream should continue, or 'false' to cause it to
    *   terminate.
    */
-  serialForEach(f2) {
-    return __async(this, null, function* () {
-      return this.serialMapAsync(f2).resolveWhile((x3) => x3 === true);
-    });
+  async serialForEach(f2) {
+    return this.serialMapAsync(f2).resolveWhile((x3) => x3 === true);
   }
   /**
    * Groups elements into batches, represented as arrays of elements.
@@ -152365,15 +152003,13 @@ var ArrayIterator = class extends LazyIterator {
   summary() {
     return `Array of ${this.items.length} items`;
   }
-  next() {
-    return __async(this, null, function* () {
-      if (this.trav >= this.items.length) {
-        return { value: null, done: true };
-      }
-      const item = this.items[this.trav];
-      this.trav++;
-      return { value: deepClone(item), done: false };
-    });
+  async next() {
+    if (this.trav >= this.items.length) {
+      return { value: null, done: true };
+    }
+    const item = this.items[this.trav];
+    this.trav++;
+    return { value: deepClone(item), done: false };
   }
 };
 var FunctionCallIterator = class extends LazyIterator {
@@ -152384,15 +152020,13 @@ var FunctionCallIterator = class extends LazyIterator {
   summary() {
     return `Function call`;
   }
-  next() {
-    return __async(this, null, function* () {
-      try {
-        return this.nextFn();
-      } catch (e2) {
-        e2.message = `Error thrown while iterating through a dataset: ${e2.message}`;
-        throw e2;
-      }
-    });
+  async next() {
+    try {
+      return this.nextFn();
+    } catch (e2) {
+      e2.message = `Error thrown while iterating through a dataset: ${e2.message}`;
+      throw e2;
+    }
   }
 };
 var SerialIterator = class extends LazyIterator {
@@ -152404,16 +152038,12 @@ var SerialIterator = class extends LazyIterator {
   summary() {
     return `${this.upstream.summary()} -> Serial`;
   }
-  next() {
-    return __async(this, null, function* () {
-      this.lastRead = this.lastRead.then(() => this.serialNext());
-      return this.lastRead;
-    });
+  async next() {
+    this.lastRead = this.lastRead.then(() => this.serialNext());
+    return this.lastRead;
   }
-  serialNext() {
-    return __async(this, null, function* () {
-      return this.upstream.next();
-    });
+  async serialNext() {
+    return this.upstream.next();
   }
 };
 var SkipIterator = class extends LazyIterator {
@@ -152427,23 +152057,19 @@ var SkipIterator = class extends LazyIterator {
   summary() {
     return `${this.upstream.summary()} -> Skip`;
   }
-  next() {
-    return __async(this, null, function* () {
-      this.lastRead = this.lastRead.then(() => this.serialNext());
-      return this.lastRead;
-    });
+  async next() {
+    this.lastRead = this.lastRead.then(() => this.serialNext());
+    return this.lastRead;
   }
-  serialNext() {
-    return __async(this, null, function* () {
-      while (this.count++ < this.maxCount) {
-        const skipped = yield this.upstream.next();
-        if (skipped.done) {
-          return skipped;
-        }
-        dispose(skipped.value);
+  async serialNext() {
+    while (this.count++ < this.maxCount) {
+      const skipped = await this.upstream.next();
+      if (skipped.done) {
+        return skipped;
       }
-      return this.upstream.next();
-    });
+      dispose(skipped.value);
+    }
+    return this.upstream.next();
   }
 };
 var TakeIterator = class extends LazyIterator {
@@ -152456,13 +152082,11 @@ var TakeIterator = class extends LazyIterator {
   summary() {
     return `${this.upstream.summary()} -> Take`;
   }
-  next() {
-    return __async(this, null, function* () {
-      if (this.count++ >= this.maxCount) {
-        return { value: null, done: true };
-      }
-      return this.upstream.next();
-    });
+  async next() {
+    if (this.count++ >= this.maxCount) {
+      return { value: null, done: true };
+    }
+    return this.upstream.next();
   }
 };
 var RowMajorBatchIterator = class extends LazyIterator {
@@ -152476,27 +152100,23 @@ var RowMajorBatchIterator = class extends LazyIterator {
   summary() {
     return `${this.upstream.summary()} -> RowMajorBatch`;
   }
-  next() {
-    return __async(this, null, function* () {
-      this.lastRead = this.lastRead.then(() => this.serialNext());
-      return this.lastRead;
-    });
+  async next() {
+    this.lastRead = this.lastRead.then(() => this.serialNext());
+    return this.lastRead;
   }
-  serialNext() {
-    return __async(this, null, function* () {
-      const batch = [];
-      while (batch.length < this.batchSize) {
-        const item = yield this.upstream.next();
-        if (item.done) {
-          if (this.enableSmallLastBatch && batch.length > 0) {
-            return { value: batch, done: false };
-          }
-          return { value: null, done: true };
+  async serialNext() {
+    const batch = [];
+    while (batch.length < this.batchSize) {
+      const item = await this.upstream.next();
+      if (item.done) {
+        if (this.enableSmallLastBatch && batch.length > 0) {
+          return { value: batch, done: false };
         }
-        batch.push(item.value);
+        return { value: null, done: true };
       }
-      return { value: batch, done: false };
-    });
+      batch.push(item.value);
+    }
+    return { value: batch, done: false };
   }
 };
 var FilterIterator = class extends LazyIterator {
@@ -152509,22 +152129,18 @@ var FilterIterator = class extends LazyIterator {
   summary() {
     return `${this.upstream.summary()} -> Filter`;
   }
-  next() {
-    return __async(this, null, function* () {
-      this.lastRead = this.lastRead.then(() => this.serialNext());
-      return this.lastRead;
-    });
+  async next() {
+    this.lastRead = this.lastRead.then(() => this.serialNext());
+    return this.lastRead;
   }
-  serialNext() {
-    return __async(this, null, function* () {
-      while (true) {
-        const item = yield this.upstream.next();
-        if (item.done || this.predicate(item.value)) {
-          return item;
-        }
-        dispose(item.value);
+  async serialNext() {
+    while (true) {
+      const item = await this.upstream.next();
+      if (item.done || this.predicate(item.value)) {
+        return item;
       }
-    });
+      dispose(item.value);
+    }
   }
 };
 var MapIterator = class extends LazyIterator {
@@ -152536,22 +152152,20 @@ var MapIterator = class extends LazyIterator {
   summary() {
     return `${this.upstream.summary()} -> Map`;
   }
-  next() {
-    return __async(this, null, function* () {
-      const item = yield this.upstream.next();
-      if (item.done) {
-        return { value: null, done: true };
+  async next() {
+    const item = await this.upstream.next();
+    if (item.done) {
+      return { value: null, done: true };
+    }
+    const inputTensors = tensor_util_exports.getTensorsInContainer(item.value);
+    const mapped = this.transform(item.value);
+    const outputTensors = tensor_util_exports.getTensorsInContainer(mapped);
+    for (const t of inputTensors) {
+      if (!tensor_util_exports.isTensorInList(t, outputTensors)) {
+        t.dispose();
       }
-      const inputTensors = tensor_util_exports.getTensorsInContainer(item.value);
-      const mapped = this.transform(item.value);
-      const outputTensors = tensor_util_exports.getTensorsInContainer(mapped);
-      for (const t of inputTensors) {
-        if (!tensor_util_exports.isTensorInList(t, outputTensors)) {
-          t.dispose();
-        }
-      }
-      return { value: mapped, done: false };
-    });
+    }
+    return { value: mapped, done: false };
   }
 };
 var ErrorHandlingLazyIterator = class extends LazyIterator {
@@ -152565,24 +152179,20 @@ var ErrorHandlingLazyIterator = class extends LazyIterator {
   summary() {
     return `${this.upstream.summary()} -> handleErrors`;
   }
-  next() {
-    return __async(this, null, function* () {
-      this.lastRead = this.lastRead.then(() => this.serialNext());
-      return this.lastRead;
-    });
+  async next() {
+    this.lastRead = this.lastRead.then(() => this.serialNext());
+    return this.lastRead;
   }
-  serialNext() {
-    return __async(this, null, function* () {
-      while (true) {
-        try {
-          return yield this.upstream.next();
-        } catch (e2) {
-          if (!this.handler(e2)) {
-            return { value: null, done: true };
-          }
+  async serialNext() {
+    while (true) {
+      try {
+        return await this.upstream.next();
+      } catch (e2) {
+        if (!this.handler(e2)) {
+          return { value: null, done: true };
         }
       }
-    });
+    }
   }
 };
 var AsyncMapIterator = class extends LazyIterator {
@@ -152594,22 +152204,20 @@ var AsyncMapIterator = class extends LazyIterator {
   summary() {
     return `${this.upstream.summary()} -> AsyncMap`;
   }
-  next() {
-    return __async(this, null, function* () {
-      const item = yield this.upstream.next();
-      if (item.done) {
-        return { value: null, done: true };
+  async next() {
+    const item = await this.upstream.next();
+    if (item.done) {
+      return { value: null, done: true };
+    }
+    const inputTensors = tensor_util_exports.getTensorsInContainer(item.value);
+    const mapped = await this.transform(item.value);
+    const outputTensors = tensor_util_exports.getTensorsInContainer(mapped);
+    for (const t of inputTensors) {
+      if (!tensor_util_exports.isTensorInList(t, outputTensors)) {
+        t.dispose();
       }
-      const inputTensors = tensor_util_exports.getTensorsInContainer(item.value);
-      const mapped = yield this.transform(item.value);
-      const outputTensors = tensor_util_exports.getTensorsInContainer(mapped);
-      for (const t of inputTensors) {
-        if (!tensor_util_exports.isTensorInList(t, outputTensors)) {
-          t.dispose();
-        }
-      }
-      return { value: mapped, done: false };
-    });
+    }
+    return { value: mapped, done: false };
   }
 };
 var OneToManyIterator = class extends LazyIterator {
@@ -152618,21 +152226,17 @@ var OneToManyIterator = class extends LazyIterator {
     this.outputQueue = new GrowingRingBuffer();
     this.lastRead = Promise.resolve({ value: null, done: false });
   }
-  next() {
-    return __async(this, null, function* () {
-      this.lastRead = this.lastRead.then(() => this.serialNext());
-      return this.lastRead;
-    });
+  async next() {
+    this.lastRead = this.lastRead.then(() => this.serialNext());
+    return this.lastRead;
   }
-  serialNext() {
-    return __async(this, null, function* () {
-      while (this.outputQueue.length() === 0) {
-        if (!(yield this.pump())) {
-          return { value: null, done: true };
-        }
+  async serialNext() {
+    while (this.outputQueue.length() === 0) {
+      if (!await this.pump()) {
+        return { value: null, done: true };
       }
-      return { value: this.outputQueue.shift(), done: false };
-    });
+    }
+    return { value: this.outputQueue.shift(), done: false };
   }
 };
 var FlatmapIterator = class extends OneToManyIterator {
@@ -152644,23 +152248,21 @@ var FlatmapIterator = class extends OneToManyIterator {
   summary() {
     return `${this.upstream.summary()} -> Flatmap`;
   }
-  pump() {
-    return __async(this, null, function* () {
-      const item = yield this.upstream.next();
-      if (item.done) {
-        return false;
+  async pump() {
+    const item = await this.upstream.next();
+    if (item.done) {
+      return false;
+    }
+    const inputTensors = tensor_util_exports.getTensorsInContainer(item.value);
+    const mappedArray = this.transform(item.value);
+    const outputTensors = tensor_util_exports.getTensorsInContainer(mappedArray);
+    this.outputQueue.pushAll(mappedArray);
+    for (const t of inputTensors) {
+      if (!tensor_util_exports.isTensorInList(t, outputTensors)) {
+        t.dispose();
       }
-      const inputTensors = tensor_util_exports.getTensorsInContainer(item.value);
-      const mappedArray = this.transform(item.value);
-      const outputTensors = tensor_util_exports.getTensorsInContainer(mappedArray);
-      this.outputQueue.pushAll(mappedArray);
-      for (const t of inputTensors) {
-        if (!tensor_util_exports.isTensorInList(t, outputTensors)) {
-          t.dispose();
-        }
-      }
-      return true;
-    });
+    }
+    return true;
   }
 };
 var ChainedIterator = class extends LazyIterator {
@@ -152675,32 +152277,28 @@ var ChainedIterator = class extends LazyIterator {
     const upstreamSummaries = "TODO: fill in upstream of chained summaries";
     return `${upstreamSummaries} -> Chained`;
   }
-  next() {
-    return __async(this, null, function* () {
-      this.lastRead = this.readFromChain(this.lastRead);
-      return this.lastRead;
-    });
+  async next() {
+    this.lastRead = this.readFromChain(this.lastRead);
+    return this.lastRead;
   }
-  readFromChain(lastRead) {
-    return __async(this, null, function* () {
-      yield lastRead;
-      if (this.iterator == null) {
-        const iteratorResult = yield this.moreIterators.next();
-        if (iteratorResult.done) {
-          return { value: null, done: true };
-        }
-        this.iterator = iteratorResult.value;
-        if (this.baseErrorHandler != null) {
-          this.iterator = this.iterator.handleErrors(this.baseErrorHandler);
-        }
+  async readFromChain(lastRead) {
+    await lastRead;
+    if (this.iterator == null) {
+      const iteratorResult = await this.moreIterators.next();
+      if (iteratorResult.done) {
+        return { value: null, done: true };
       }
-      const itemResult = yield this.iterator.next();
-      if (itemResult.done) {
-        this.iterator = null;
-        return this.readFromChain(lastRead);
+      this.iterator = iteratorResult.value;
+      if (this.baseErrorHandler != null) {
+        this.iterator = this.iterator.handleErrors(this.baseErrorHandler);
       }
-      return itemResult;
-    });
+    }
+    const itemResult = await this.iterator.next();
+    if (itemResult.done) {
+      this.iterator = null;
+      return this.readFromChain(lastRead);
+    }
+    return itemResult;
   }
 };
 var ZipMismatchMode;
@@ -152743,11 +152341,9 @@ var ShuffleIterator = class extends PrefetchIterator {
     this.random = seedrandom2.alea(seed2 || util_exports.now().toString());
     this.lastRead = Promise.resolve({ value: null, done: false });
   }
-  next() {
-    return __async(this, null, function* () {
-      this.lastRead = this.lastRead.then(() => this.serialNext());
-      return this.lastRead;
-    });
+  async next() {
+    this.lastRead = this.lastRead.then(() => this.serialNext());
+    return this.lastRead;
   }
   randomInt(max5) {
     return Math.floor(this.random() * max5);
@@ -152755,23 +152351,21 @@ var ShuffleIterator = class extends PrefetchIterator {
   chooseIndex() {
     return this.randomInt(this.buffer.length());
   }
-  serialNext() {
-    return __async(this, null, function* () {
-      if (!this.upstreamExhausted) {
+  async serialNext() {
+    if (!this.upstreamExhausted) {
+      this.refill();
+    }
+    while (!this.buffer.isEmpty()) {
+      const chosenIndex = this.chooseIndex();
+      const result = await this.buffer.shuffleExcise(chosenIndex);
+      if (result.done) {
+        this.upstreamExhausted = true;
+      } else {
         this.refill();
+        return result;
       }
-      while (!this.buffer.isEmpty()) {
-        const chosenIndex = this.chooseIndex();
-        const result = yield this.buffer.shuffleExcise(chosenIndex);
-        if (result.done) {
-          this.upstreamExhausted = true;
-        } else {
-          this.refill();
-          return result;
-        }
-      }
-      return { value: null, done: true };
-    });
+    }
+    return { value: null, done: true };
   }
 };
 
@@ -152852,9 +152446,9 @@ var Dataset = class {
     } else {
       size = Math.floor(this.size / batchSize);
     }
-    return datasetFromIteratorFn(() => __async(this, null, function* () {
-      return (yield base.iterator()).columnMajorBatch(batchSize, smallLastBatch, deepBatchConcat);
-    }), size);
+    return datasetFromIteratorFn(async () => {
+      return (await base.iterator()).columnMajorBatch(batchSize, smallLastBatch, deepBatchConcat);
+    }, size);
   }
   /**
    * Concatenates this `Dataset` with another.
@@ -152881,9 +152475,7 @@ var Dataset = class {
     } else {
       size = null;
     }
-    return datasetFromIteratorFn(() => __async(this, null, function* () {
-      return (yield base.iterator()).concatenate(yield dataset.iterator());
-    }), size);
+    return datasetFromIteratorFn(async () => (await base.iterator()).concatenate(await dataset.iterator()), size);
   }
   /**
    * Filters this dataset according to `predicate`.
@@ -152909,9 +152501,9 @@ var Dataset = class {
     } else {
       size = null;
     }
-    return datasetFromIteratorFn(() => __async(this, null, function* () {
-      return (yield base.iterator()).filter((x3) => tidy(() => predicate(x3)));
-    }), size);
+    return datasetFromIteratorFn(async () => {
+      return (await base.iterator()).filter((x3) => tidy(() => predicate(x3)));
+    }, size);
   }
   /**
    * Apply a function to every element of the dataset.
@@ -152929,10 +152521,8 @@ var Dataset = class {
    *
    * @doc {heading: 'Data', subheading: 'Classes'}
    */
-  forEachAsync(f2) {
-    return __async(this, null, function* () {
-      return (yield this.iterator()).forEachAsync(f2);
-    });
+  async forEachAsync(f2) {
+    return (await this.iterator()).forEachAsync(f2);
   }
   /**
    * Maps this dataset through a 1-to-1 transform.
@@ -152951,9 +152541,9 @@ var Dataset = class {
    */
   map(transform4) {
     const base = this;
-    return datasetFromIteratorFn(() => __async(this, null, function* () {
-      return (yield base.iterator()).map((x3) => tidy(() => transform4(x3)));
-    }), this.size);
+    return datasetFromIteratorFn(async () => {
+      return (await base.iterator()).map((x3) => tidy(() => transform4(x3)));
+    }, this.size);
   }
   /**
    * Maps this dataset through an async 1-to-1 transform.
@@ -152980,9 +152570,9 @@ var Dataset = class {
    */
   mapAsync(transform4) {
     const base = this;
-    return datasetFromIteratorFn(() => __async(this, null, function* () {
-      return (yield base.iterator()).mapAsync(transform4);
-    }), this.size);
+    return datasetFromIteratorFn(async () => {
+      return (await base.iterator()).mapAsync(transform4);
+    }, this.size);
   }
   /**
    *  Creates a `Dataset` that prefetches elements from this dataset.
@@ -152998,9 +152588,7 @@ var Dataset = class {
       throw new RangeError("`Dataset.prefetch()` requires bufferSize to be specified.");
     }
     const base = this;
-    return datasetFromIteratorFn(() => __async(this, null, function* () {
-      return (yield base.iterator()).prefetch(bufferSize);
-    }), this.size);
+    return datasetFromIteratorFn(async () => (await base.iterator()).prefetch(bufferSize), this.size);
   }
   /**
    * Repeats this dataset `count` times.
@@ -153032,12 +152620,10 @@ var Dataset = class {
     } else {
       size = null;
     }
-    return datasetFromIteratorFn(() => __async(this, null, function* () {
-      const iteratorIterator = iteratorFromFunction(() => __async(this, null, function* () {
-        return { value: yield base.iterator(), done: false };
-      }));
+    return datasetFromIteratorFn(async () => {
+      const iteratorIterator = iteratorFromFunction(async () => ({ value: await base.iterator(), done: false }));
       return iteratorFromConcatenated(iteratorIterator.take(count2));
-    }), size);
+    }, size);
   }
   /**
    * Creates a `Dataset` that skips `count` initial elements from this dataset.
@@ -153066,9 +152652,7 @@ var Dataset = class {
     } else {
       size = null;
     }
-    return datasetFromIteratorFn(() => __async(this, null, function* () {
-      return (yield base.iterator()).skip(count2);
-    }), size);
+    return datasetFromIteratorFn(async () => (await base.iterator()).skip(count2), size);
   }
   /**
    * Pseudorandomly shuffles the elements of this dataset. This is done in a
@@ -153101,13 +152685,13 @@ var Dataset = class {
     }
     const base = this;
     const random = seedrandom3.alea(seed2 || util_exports.now().toString());
-    return datasetFromIteratorFn(() => __async(this, null, function* () {
+    return datasetFromIteratorFn(async () => {
       let seed22 = random.int32();
       if (reshuffleEachIteration) {
         seed22 += random.int32();
       }
-      return (yield base.iterator()).shuffle(bufferSize, seed22.toString());
-    }), this.size);
+      return (await base.iterator()).shuffle(bufferSize, seed22.toString());
+    }, this.size);
   }
   /**
    * Creates a `Dataset` with at most `count` initial elements from this
@@ -153136,9 +152720,7 @@ var Dataset = class {
     } else {
       size = null;
     }
-    return datasetFromIteratorFn(() => __async(this, null, function* () {
-      return (yield base.iterator()).take(count2);
-    }), size);
+    return datasetFromIteratorFn(async () => (await base.iterator()).take(count2), size);
   }
   /**
    * Collect all elements of this dataset into an array.
@@ -153156,13 +152738,11 @@ var Dataset = class {
    *
    * @doc {heading: 'Data', subheading: 'Classes'}
    */
-  toArray() {
-    return __async(this, null, function* () {
-      if (this.size === Infinity) {
-        throw new Error("Can not convert infinite data stream to array.");
-      }
-      return (yield this.iterator()).toArray();
-    });
+  async toArray() {
+    if (this.size === Infinity) {
+      throw new Error("Can not convert infinite data stream to array.");
+    }
+    return (await this.iterator()).toArray();
   }
   /**
    * Collect all elements of this dataset into an array with prefetching 100
@@ -153175,13 +152755,11 @@ var Dataset = class {
    * @returns A Promise for an array of elements, which will resolve
    *   when a new stream has been obtained and fully consumed.
    */
-  toArrayForTest() {
-    return __async(this, null, function* () {
-      if (this.size === Infinity) {
-        throw new Error("Can not convert infinite data stream to array.");
-      }
-      return (yield this.iterator()).toArrayForTest();
-    });
+  async toArrayForTest() {
+    if (this.size === Infinity) {
+      throw new Error("Can not convert infinite data stream to array.");
+    }
+    return (await this.iterator()).toArrayForTest();
   }
 };
 Dataset.MAX_BUFFER_SIZE = 1e4;
@@ -153195,10 +152773,8 @@ function datasetFromIteratorFn(iteratorFn, size = null) {
      * Provide a new stream of elements.  Note this will also start new streams
      * from any underlying `Dataset`s.
      */
-    iterator() {
-      return __async(this, null, function* () {
-        return iteratorFn();
-      });
+    async iterator() {
+      return iteratorFn();
     }
   }();
 }
@@ -153308,10 +152884,8 @@ var MathBackendCPU = class _MathBackendCPU extends KernelBackend {
   numDataIds() {
     return this.data.numDataIds();
   }
-  read(dataId) {
-    return __async(this, null, function* () {
-      return this.readSync(dataId);
-    });
+  async read(dataId) {
+    return this.readSync(dataId);
   }
   readSync(dataId) {
     const { dtype, complexTensorInfos } = this.data.get(dataId);
@@ -153362,13 +152936,11 @@ var MathBackendCPU = class _MathBackendCPU extends KernelBackend {
   disposeIntermediateTensorInfo(tensorInfo) {
     this.disposeData(tensorInfo.dataId);
   }
-  time(f2) {
-    return __async(this, null, function* () {
-      const start = util_exports.now();
-      f2();
-      const kernelMs = util_exports.now() - start;
-      return { kernelMs };
-    });
+  async time(f2) {
+    const start = util_exports.now();
+    f2();
+    const kernelMs = util_exports.now() - start;
+    return { kernelMs };
   }
   memory() {
     return {
@@ -164089,14 +163661,12 @@ var GPGPUContext = class {
     const ext = this.getQueryTimerExtensionWebGL1();
     ext.endQueryEXT(ext.TIME_ELAPSED_EXT);
   }
-  waitForQueryAndGetTime(query2) {
-    return __async(this, null, function* () {
-      yield util_exports.repeatedTry(() => this.disposed || // while testing contexts are created / disposed
-      // in rapid succession, so without this check we
-      // may poll for the query timer indefinitely
-      this.isQueryAvailable(query2, env().getNumber("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION")));
-      return this.getQueryTime(query2, env().getNumber("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION"));
-    });
+  async waitForQueryAndGetTime(query2) {
+    await util_exports.repeatedTry(() => this.disposed || // while testing contexts are created / disposed
+    // in rapid succession, so without this check we
+    // may poll for the query timer indefinitely
+    this.isQueryAvailable(query2, env().getNumber("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION")));
+    return this.getQueryTime(query2, env().getNumber("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION"));
   }
   getQueryTime(query2, queryTimerVersion) {
     if (queryTimerVersion === 0) {
@@ -164871,80 +164441,78 @@ var MathBackendWebGL = class _MathBackendWebGL extends KernelBackend {
     }
     return this.convertAndCacheOnCPU(dataId, result);
   }
-  read(dataId) {
-    return __async(this, null, function* () {
-      if (this.pendingRead.has(dataId)) {
-        const subscribers2 = this.pendingRead.get(dataId);
-        return new Promise((resolve) => subscribers2.push(resolve));
-      }
-      const texData = this.texData.get(dataId);
-      const { values, shape, slice: slice4, dtype, complexTensorInfos, isPacked } = texData;
-      if (slice4 != null) {
-        let program;
-        if (isPacked) {
-          program = new UnaryOpPackedProgram(shape, CLONE);
-        } else {
-          program = new UnaryOpProgram(shape, CLONE);
-        }
-        const res = this.runWebGLProgram(program, [{ dataId, shape, dtype }], dtype);
-        const data = this.read(res.dataId);
-        this.disposeIntermediateTensorInfo(res);
-        return data;
-      }
-      if (values != null) {
-        return this.convertAndCacheOnCPU(dataId);
-      }
-      if (env().getBool("DEBUG")) {
-        if (!env().getBool("WEBGL_DOWNLOAD_FLOAT_ENABLED") && env().getNumber("WEBGL_VERSION") === 2) {
-          throw new Error(`tensor.data() with WEBGL_DOWNLOAD_FLOAT_ENABLED=false and WEBGL_VERSION=2 not yet supported.`);
-        }
-      }
-      let buffer2 = null;
-      let tmpDownloadTarget;
-      if (dtype !== "complex64" && env().get("WEBGL_BUFFER_SUPPORTED")) {
-        tmpDownloadTarget = this.decode(dataId);
-        const tmpData = this.texData.get(tmpDownloadTarget.dataId);
-        buffer2 = this.gpgpu.createBufferFromTexture(tmpData.texture.texture, ...getDenseTexShape(shape));
-      }
-      this.pendingRead.set(dataId, []);
-      if (dtype !== "complex64") {
-        yield this.gpgpu.createAndWaitForFence();
-      }
-      let vals;
-      if (dtype === "complex64") {
-        const ps2 = yield Promise.all([
-          this.read(complexTensorInfos.real.dataId),
-          this.read(complexTensorInfos.imag.dataId)
-        ]);
-        const realValues = ps2[0];
-        const imagValues = ps2[1];
-        vals = backend_util_exports.mergeRealAndImagArrays(realValues, imagValues);
-      } else if (buffer2 == null) {
-        vals = this.getValuesFromTexture(dataId);
+  async read(dataId) {
+    if (this.pendingRead.has(dataId)) {
+      const subscribers2 = this.pendingRead.get(dataId);
+      return new Promise((resolve) => subscribers2.push(resolve));
+    }
+    const texData = this.texData.get(dataId);
+    const { values, shape, slice: slice4, dtype, complexTensorInfos, isPacked } = texData;
+    if (slice4 != null) {
+      let program;
+      if (isPacked) {
+        program = new UnaryOpPackedProgram(shape, CLONE);
       } else {
-        const size = util_exports.sizeFromShape(shape);
-        vals = this.gpgpu.downloadFloat32MatrixFromBuffer(buffer2, size);
+        program = new UnaryOpProgram(shape, CLONE);
       }
-      if (tmpDownloadTarget != null) {
-        this.disposeIntermediateTensorInfo(tmpDownloadTarget);
+      const res = this.runWebGLProgram(program, [{ dataId, shape, dtype }], dtype);
+      const data = this.read(res.dataId);
+      this.disposeIntermediateTensorInfo(res);
+      return data;
+    }
+    if (values != null) {
+      return this.convertAndCacheOnCPU(dataId);
+    }
+    if (env().getBool("DEBUG")) {
+      if (!env().getBool("WEBGL_DOWNLOAD_FLOAT_ENABLED") && env().getNumber("WEBGL_VERSION") === 2) {
+        throw new Error(`tensor.data() with WEBGL_DOWNLOAD_FLOAT_ENABLED=false and WEBGL_VERSION=2 not yet supported.`);
       }
-      if (buffer2 != null) {
-        const gl = this.gpgpu.gl;
-        callAndCheck(gl, () => gl.deleteBuffer(buffer2));
+    }
+    let buffer2 = null;
+    let tmpDownloadTarget;
+    if (dtype !== "complex64" && env().get("WEBGL_BUFFER_SUPPORTED")) {
+      tmpDownloadTarget = this.decode(dataId);
+      const tmpData = this.texData.get(tmpDownloadTarget.dataId);
+      buffer2 = this.gpgpu.createBufferFromTexture(tmpData.texture.texture, ...getDenseTexShape(shape));
+    }
+    this.pendingRead.set(dataId, []);
+    if (dtype !== "complex64") {
+      await this.gpgpu.createAndWaitForFence();
+    }
+    let vals;
+    if (dtype === "complex64") {
+      const ps2 = await Promise.all([
+        this.read(complexTensorInfos.real.dataId),
+        this.read(complexTensorInfos.imag.dataId)
+      ]);
+      const realValues = ps2[0];
+      const imagValues = ps2[1];
+      vals = backend_util_exports.mergeRealAndImagArrays(realValues, imagValues);
+    } else if (buffer2 == null) {
+      vals = this.getValuesFromTexture(dataId);
+    } else {
+      const size = util_exports.sizeFromShape(shape);
+      vals = this.gpgpu.downloadFloat32MatrixFromBuffer(buffer2, size);
+    }
+    if (tmpDownloadTarget != null) {
+      this.disposeIntermediateTensorInfo(tmpDownloadTarget);
+    }
+    if (buffer2 != null) {
+      const gl = this.gpgpu.gl;
+      callAndCheck(gl, () => gl.deleteBuffer(buffer2));
+    }
+    const dTypeVals = this.convertAndCacheOnCPU(dataId, vals);
+    const subscribers = this.pendingRead.get(dataId);
+    this.pendingRead.delete(dataId);
+    subscribers.forEach((resolve) => resolve(dTypeVals));
+    if (this.pendingDisposal.has(dataId)) {
+      this.pendingDisposal.delete(dataId);
+      if (this.disposeData(dataId)) {
+        engine().removeDataId(dataId, this);
       }
-      const dTypeVals = this.convertAndCacheOnCPU(dataId, vals);
-      const subscribers = this.pendingRead.get(dataId);
-      this.pendingRead.delete(dataId);
-      subscribers.forEach((resolve) => resolve(dTypeVals));
-      if (this.pendingDisposal.has(dataId)) {
-        this.pendingDisposal.delete(dataId);
-        if (this.disposeData(dataId)) {
-          engine().removeDataId(dataId, this);
-        }
-        this.pendingDeletes--;
-      }
-      return dTypeVals;
-    });
+      this.pendingDeletes--;
+    }
+    return dTypeVals;
   }
   /**
    * Read tensor to a new texture that is densely packed for ease of use.
@@ -165056,9 +164624,9 @@ var MathBackendWebGL = class _MathBackendWebGL extends KernelBackend {
       wallMs: null
       // will be filled by the engine
     };
-    return (() => __async(this, null, function* () {
+    return (async () => {
       if (env().getNumber("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_RELIABLE") > 0) {
-        const kernelMs = yield Promise.all(flattenedActiveTimerQueries);
+        const kernelMs = await Promise.all(flattenedActiveTimerQueries);
         res["kernelMs"] = util_exports.sum(kernelMs);
         res["getExtraProfileInfo"] = () => kernelMs.map((d2, i) => ({ name: flattenedActiveTimerNames[i], ms: d2 })).map((d2) => `${d2.name}: ${d2.ms}`).join(", ");
       } else {
@@ -165069,7 +164637,7 @@ var MathBackendWebGL = class _MathBackendWebGL extends KernelBackend {
       this.uploadWaitMs = 0;
       this.downloadWaitMs = 0;
       return res;
-    }))();
+    })();
   }
   memory() {
     return {
@@ -165093,14 +164661,12 @@ var MathBackendWebGL = class _MathBackendWebGL extends KernelBackend {
     query2.endMs = util_exports.now();
     return query2;
   }
-  getQueryTime(query2) {
-    return __async(this, null, function* () {
-      if (env().getNumber("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_RELIABLE") > 0) {
-        return this.gpgpu.waitForQueryAndGetTime(query2);
-      }
-      const timerQuery = query2;
-      return timerQuery.endMs - timerQuery.startMs;
-    });
+  async getQueryTime(query2) {
+    if (env().getNumber("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_RELIABLE") > 0) {
+      return this.gpgpu.waitForQueryAndGetTime(query2);
+    }
+    const timerQuery = query2;
+    return timerQuery.endMs - timerQuery.startMs;
   }
   /**
    * Decrease the RefCount on the dataId and dispose the memory if the dataId
@@ -165504,39 +165070,35 @@ var MathBackendWebGL = class _MathBackendWebGL extends KernelBackend {
       this.checkCompletion_(binary2);
     }
   }
-  checkCompileCompletionAsync() {
-    return __async(this, null, function* () {
-      const ps2 = [];
-      if (this.gpgpu.parallelCompilationExtension) {
-        for (const [, binary2] of Object.entries(this.binaryCache)) {
-          ps2.push(this.checkCompletionAsync_(binary2));
-        }
-        return Promise.all(ps2);
-      } else {
-        for (const [, binary2] of Object.entries(this.binaryCache)) {
-          const p2 = new Promise((resolve) => {
-            try {
-              this.checkCompletion_(binary2);
-              resolve(true);
-            } catch (error) {
-              throw error;
-            }
-          });
-          ps2.push(p2);
-        }
-        return Promise.all(ps2);
+  async checkCompileCompletionAsync() {
+    const ps2 = [];
+    if (this.gpgpu.parallelCompilationExtension) {
+      for (const [, binary2] of Object.entries(this.binaryCache)) {
+        ps2.push(this.checkCompletionAsync_(binary2));
       }
-    });
+      return Promise.all(ps2);
+    } else {
+      for (const [, binary2] of Object.entries(this.binaryCache)) {
+        const p2 = new Promise((resolve) => {
+          try {
+            this.checkCompletion_(binary2);
+            resolve(true);
+          } catch (error) {
+            throw error;
+          }
+        });
+        ps2.push(p2);
+      }
+      return Promise.all(ps2);
+    }
   }
-  checkCompletionAsync_(binary2) {
-    return __async(this, null, function* () {
-      if (this.gpgpu.gl.getProgramParameter(binary2.webGLProgram, this.gpgpu.parallelCompilationExtension.COMPLETION_STATUS_KHR)) {
-        return this.checkCompletion_(binary2);
-      } else {
-        yield nextFrame();
-        return this.checkCompletionAsync_(binary2);
-      }
-    });
+  async checkCompletionAsync_(binary2) {
+    if (this.gpgpu.gl.getProgramParameter(binary2.webGLProgram, this.gpgpu.parallelCompilationExtension.COMPLETION_STATUS_KHR)) {
+      return this.checkCompletion_(binary2);
+    } else {
+      await nextFrame();
+      return this.checkCompletionAsync_(binary2);
+    }
   }
   checkCompletion_(binary2) {
     if (this.gpgpu.gl.getProgramParameter(binary2.webGLProgram, this.gpgpu.gl.LINK_STATUS) === false) {
@@ -176374,35 +175936,33 @@ var _PanelViewComponent = class _PanelViewComponent extends AsyncHandler {
   get user() {
     return currentUser();
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_3) => !!_3)).toPromise();
-      const start_voice = () => {
-        this._setupVoiceRecognition();
-        window.removeEventListener("click", start_voice);
-      };
-      window.addEventListener("click", start_voice);
-      this._context = this._canvas_el().nativeElement.getContext("2d", {
-        willReadFrequently: true
-      });
-      this._setupWebcam();
-      this._chat.startChat();
-      this.subscription("chat.messages", this._chat.messages.subscribe((list2) => {
-        this._scrollToBottom();
-        const msg_list = list2.filter((_3) => _3.user_id !== this.user?.id);
-        const last_message = msg_list[msg_list.length - 1];
-        if (msg_list.length < 1 || this._last_message === last_message.id)
-          return;
-        this._last_message = last_message.id;
-        this._speakText(last_message.message);
-      }));
-      this.interval("process_frame", () => this._processWebcamFrame(), 500);
-      this.subscription("route.query", this._route.queryParamMap.subscribe((p2) => {
-        if (p2.has("debug"))
-          this.debug = p2.get("debug") === "true";
-      }));
-      this._listen();
+  async ngOnInit() {
+    await this._org.initialised.pipe(first((_3) => !!_3)).toPromise();
+    const start_voice = () => {
+      this._setupVoiceRecognition();
+      window.removeEventListener("click", start_voice);
+    };
+    window.addEventListener("click", start_voice);
+    this._context = this._canvas_el().nativeElement.getContext("2d", {
+      willReadFrequently: true
     });
+    this._setupWebcam();
+    this._chat.startChat();
+    this.subscription("chat.messages", this._chat.messages.subscribe((list2) => {
+      this._scrollToBottom();
+      const msg_list = list2.filter((_3) => _3.user_id !== this.user?.id);
+      const last_message = msg_list[msg_list.length - 1];
+      if (msg_list.length < 1 || this._last_message === last_message.id)
+        return;
+      this._last_message = last_message.id;
+      this._speakText(last_message.message);
+    }));
+    this.interval("process_frame", () => this._processWebcamFrame(), 500);
+    this.subscription("route.query", this._route.queryParamMap.subscribe((p2) => {
+      if (p2.has("debug"))
+        this.debug = p2.get("debug") === "true";
+    }));
+    this._listen();
   }
   startListening() {
     if (this.listening || !this.person_in_view)
@@ -176418,50 +175978,46 @@ var _PanelViewComponent = class _PanelViewComponent extends AsyncHandler {
     this._spoken = false;
     this._chat.close();
   }
-  _loadModel() {
-    return __async(this, null, function* () {
-      setBackend("webgl");
-      this._model = yield loadGraphModel(`${location.origin}${location.pathname}assets/yolov8x_web_model/model.json`);
-    });
+  async _loadModel() {
+    setBackend("webgl");
+    this._model = await loadGraphModel(`${location.origin}${location.pathname}assets/yolov8x_web_model/model.json`);
   }
-  _processWebcamFrame() {
-    return __async(this, null, function* () {
-      if (!this.setup)
-        return;
-      if (!this._model)
-        yield this._loadModel();
-      tidy(() => {
-        const tensor2 = this._webcamToTensor();
-        const predictions = this._model.predict(tensor2);
-        const detections = this._processPredictions(predictions, {
-          0: "person"
-        });
-        const old_state = this.person_in_view;
-        this.person_in_view = false;
-        for (const { box, label } of detections) {
-          if (label === "person") {
-            this.person_in_view = true;
-            if (this.setup && !this._spoken) {
-              this._speakText("Hello, how may I help you?");
-              this._spoken = true;
-              this.clearTimeout("clean_chat");
-            }
-            return;
-          }
-        }
-        if (old_state !== this.person_in_view && this._recognition) {
-          if (this.person_in_view) {
-            this._recognition.start();
-            this.listening = true;
-          } else {
-            this._recognition.stop();
-            this.listening = false;
-            this._last_text = "";
-            this._spoken = false;
-            this.timeout("clean_chat", () => this._chat.close(), 15 * 1e3);
-          }
-        }
+  async _processWebcamFrame() {
+    if (!this.setup)
+      return;
+    if (!this._model)
+      await this._loadModel();
+    tidy(() => {
+      const tensor2 = this._webcamToTensor();
+      const predictions = this._model.predict(tensor2);
+      const detections = this._processPredictions(predictions, {
+        0: "person"
       });
+      const old_state = this.person_in_view;
+      this.person_in_view = false;
+      for (const { box, label } of detections) {
+        if (label === "person") {
+          this.person_in_view = true;
+          if (this.setup && !this._spoken) {
+            this._speakText("Hello, how may I help you?");
+            this._spoken = true;
+            this.clearTimeout("clean_chat");
+          }
+          return;
+        }
+      }
+      if (old_state !== this.person_in_view && this._recognition) {
+        if (this.person_in_view) {
+          this._recognition.start();
+          this.listening = true;
+        } else {
+          this._recognition.stop();
+          this.listening = false;
+          this._last_text = "";
+          this._spoken = false;
+          this.timeout("clean_chat", () => this._chat.close(), 15 * 1e3);
+        }
+      }
     });
   }
   _webcamToTensor() {
@@ -176496,51 +176052,47 @@ var _PanelViewComponent = class _PanelViewComponent extends AsyncHandler {
     const topLeftY = sub(yCenter, div(height, 2));
     return concat2([topLeftX, topLeftY, width, height], 2).squeeze();
   }
-  _setupWebcam() {
-    return __async(this, null, function* () {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        const stream = yield navigator.mediaDevices.getUserMedia({
-          video: true
-        });
-        this._video_el().nativeElement.srcObject = stream;
-      } else {
-        console.error("getUserMedia is not supported");
-      }
-    });
+  async _setupWebcam() {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true
+      });
+      this._video_el().nativeElement.srcObject = stream;
+    } else {
+      console.error("getUserMedia is not supported");
+    }
   }
-  _setupVoiceRecognition() {
-    return __async(this, null, function* () {
-      if (!loadVosklet) {
-        return this.timeout("loadVosklet", () => this._setupVoiceRecognition());
-      }
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      const recognition = new SpeechRecognition();
-      recognition.interimResults = true;
-      recognition.lang = "en-US";
-      recognition.onresult = (event) => {
-        const { transcript } = event.results[0][0];
-        this.current_text = transcript;
-        this.timeout("on_end", () => this._handleEnd(), 3e3);
-      };
-      recognition.onerror = (event) => {
-        console.warn("Speech Recognition Error:", event);
-        if (event.error === "no-speech") {
-          this.current_text = "";
-          this.listening = false;
-          return;
-        }
-        this.error.speech_recognition = true;
-      };
-      recognition.onend = (event) => {
-        this._handleEnd();
+  async _setupVoiceRecognition() {
+    if (!loadVosklet) {
+      return this.timeout("loadVosklet", () => this._setupVoiceRecognition());
+    }
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
+    recognition.lang = "en-US";
+    recognition.onresult = (event) => {
+      const { transcript } = event.results[0][0];
+      this.current_text = transcript;
+      this.timeout("on_end", () => this._handleEnd(), 3e3);
+    };
+    recognition.onerror = (event) => {
+      console.warn("Speech Recognition Error:", event);
+      if (event.error === "no-speech") {
+        this.current_text = "";
         this.listening = false;
-      };
-      this._recognition = recognition;
-      recognition.start();
-      this.setup = true;
-      this.listening = true;
-      this.interval("check_listening", () => this.startListening(), 500);
-    });
+        return;
+      }
+      this.error.speech_recognition = true;
+    };
+    recognition.onend = (event) => {
+      this._handleEnd();
+      this.listening = false;
+    };
+    this._recognition = recognition;
+    recognition.start();
+    this.setup = true;
+    this.listening = true;
+    this.interval("check_listening", () => this.startListening(), 500);
   }
   _speakText(text) {
     if (this._last_text === text)
@@ -176599,21 +176151,19 @@ var _PanelViewComponent = class _PanelViewComponent extends AsyncHandler {
       el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
     }, 50);
   }
-  _listen() {
-    return __async(this, null, function* () {
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia)
-        return;
-      const stream = yield navigator.mediaDevices.getUserMedia({
-        audio: true
-      });
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      this._audio_context = new AudioContext();
-      this._analyser = this._audio_context.createAnalyser();
-      this._audio_bytes = new Uint8Array(this._analyser.frequencyBinCount);
-      this._audio_source = this._audio_context.createMediaStreamSource(stream);
-      this._audio_source.connect(this._analyser);
-      this._frame_id = requestAnimationFrame(() => this._processWaveform());
+  async _listen() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia)
+      return;
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: true
     });
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    this._audio_context = new AudioContext();
+    this._analyser = this._audio_context.createAnalyser();
+    this._audio_bytes = new Uint8Array(this._analyser.frequencyBinCount);
+    this._audio_source = this._audio_context.createMediaStreamSource(stream);
+    this._audio_source.connect(this._analyser);
+    this._frame_id = requestAnimationFrame(() => this._processWaveform());
   }
   _processWaveform() {
     if (this._frame_count % 2 === 0) {
@@ -176953,6 +176503,7 @@ _AppModule.\u0275fac = function AppModule_Factory(__ngFactoryType__) {
 };
 _AppModule.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _AppModule, bootstrap: [AppComponent] });
 _AppModule.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ providers: [
+  provideZonelessChangeDetection(),
   {
     provide: ErrorHandler,
     useValue: createErrorHandler({
@@ -177000,6 +176551,7 @@ var AppModule = _AppModule;
         })
       ],
       providers: [
+        provideZonelessChangeDetection(),
         {
           provide: ErrorHandler,
           useValue: createErrorHandler({
