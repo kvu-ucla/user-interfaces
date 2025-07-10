@@ -74307,15 +74307,15 @@ var LOCAL_TIMEZONE = ((_b = (_a4 = Intl == null ? void 0 : Intl.DateTimeFormat()
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "f493650",
-  "hash": "f493650",
+  "raw": "863feac",
+  "hash": "863feac",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "f493650",
+  "suffix": "863feac",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752028601778
+  "time": 1752122794603
 };
 
 // libs/common/src/lib/vorlon.service.ts
@@ -84557,6 +84557,12 @@ Plug your laptop into the HDMI to stream it to the screen, or access the CMS to 
         inputs: ["VidConf_1"],
         help: "vidconf-help",
         controls: "vidconf-controls"
+      },
+      {
+        icon: "call",
+        name: "Zoom Phone",
+        inputs: ["Zoom_1"],
+        controls: "zoom-phone"
       }
     ];
     this.volume = 0;
@@ -123842,7 +123848,7 @@ var _ZoomPhoneControlsComponent = class _ZoomPhoneControlsComponent {
 _ZoomPhoneControlsComponent.\u0275fac = function ZoomPhoneControlsComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ZoomPhoneControlsComponent)();
 };
-_ZoomPhoneControlsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ZoomPhoneControlsComponent, selectors: [["zoom-phone-controls"]], inputs: { mod: [1, "mod"] }, decls: 2, vars: 0, consts: [[1, "h-full", "w-full", "overflow-hidden"], ["src", \u0275\u0275trustConstantResourceUrl`https://applications.zoom.us/integration/phone/embeddablephone/home`, "id", "zoom-embeddable-phone-iframe", "allow", "clipboard-read; clipboard-write https://applications.zoom.us"]], template: function ZoomPhoneControlsComponent_Template(rf, ctx) {
+_ZoomPhoneControlsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ZoomPhoneControlsComponent, selectors: [["zoom-phone-controls"]], inputs: { mod: [1, "mod"] }, decls: 2, vars: 0, consts: [[1, "h-full", "w-full", "overflow-hidden"], ["src", \u0275\u0275trustConstantResourceUrl`https://applications.zoom.us/integration/phone/embeddablephone/home`, "id", "zoom-embeddable-phone-iframe", "allow", "clipboard-read; clipboard-write https://applications.zoom.us", 1, "h-full", "w-full"]], template: function ZoomPhoneControlsComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0);
     \u0275\u0275element(1, "iframe", 1);
@@ -123859,13 +123865,14 @@ var ZoomPhoneControlsComponent = _ZoomPhoneControlsComponent;
                 src="https://applications.zoom.us/integration/phone/embeddablephone/home"
                 id="zoom-embeddable-phone-iframe"
                 allow="clipboard-read; clipboard-write https://applications.zoom.us"
+                class="h-full w-full"
             ></iframe>
         </div>
     ` }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ZoomPhoneControlsComponent, { className: "ZoomPhoneControlsComponent", filePath: "apps/control/src/app/ui/zoom-phone-controls.component.ts", lineNumber: 16 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ZoomPhoneControlsComponent, { className: "ZoomPhoneControlsComponent", filePath: "apps/control/src/app/ui/zoom-phone-controls.component.ts", lineNumber: 17 });
 })();
 
 // apps/control/src/app/video-call/video-call-page.component.ts
