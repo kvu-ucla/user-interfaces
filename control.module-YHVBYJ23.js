@@ -65,8 +65,8 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-ZNAP3QRE.js";
-import "./chunk-4MWRP73S.js";
+} from "./chunk-W5ZSL5WJ.js";
+import "./chunk-KWSTWQNB.js";
 
 // apps/workplace/src/app/control/list-item.component.ts
 var _c0 = () => ["/explore"];
@@ -461,4 +461,4 @@ var ControlModule = _ControlModule;
 export {
   ControlModule
 };
-//# sourceMappingURL=control.module-WPUAQDCA.js.map
+//# sourceMappingURL=control.module-YHVBYJ23.js.map

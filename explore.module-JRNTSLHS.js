@@ -23,8 +23,8 @@ import {
   ɵɵelement,
   ɵɵelementEnd,
   ɵɵelementStart
-} from "./chunk-ZNAP3QRE.js";
-import "./chunk-4MWRP73S.js";
+} from "./chunk-W5ZSL5WJ.js";
+import "./chunk-KWSTWQNB.js";
 
 // apps/workplace/src/app/explore/explore.component.ts
 function ExploreComponent_Conditional_0_Template(rf, ctx) {
@@ -129,4 +129,4 @@ var ExploreModule = _ExploreModule;
 export {
   ExploreModule
 };
-//# sourceMappingURL=explore.module-QT3Y4GUC.js.map
+//# sourceMappingURL=explore.module-JRNTSLHS.js.map

@@ -94,10 +94,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuerySignal
-} from "./chunk-ZNAP3QRE.js";
-import {
-  __async
-} from "./chunk-4MWRP73S.js";
+} from "./chunk-W5ZSL5WJ.js";
 
 // node_modules/date-fns/fromUnixTime.js
 function fromUnixTime(unixTime, options) {
@@ -945,25 +942,23 @@ var _UserPipe = class _UserPipe {
    * Get details of the user with the given ID
    * @param user_id ID or Email of the user
    */
-  transform(user_id) {
-    return __async(this, null, function* () {
-      if (!user_id)
-        return EMPTY_USER;
-      let user = USER_LIST.find(({ id, email }) => id === user_id || email === user_id);
-      if (user)
-        return user;
-      user = yield showStaff(user_id).toPromise().catch(() => null);
-      if (user) {
-        USER_LIST.push(user);
-        return user;
-      }
-      user = yield showGuest(user_id).toPromise().catch(() => null);
-      if (user) {
-        USER_LIST.push(user);
-        return user;
-      }
+  async transform(user_id) {
+    if (!user_id)
       return EMPTY_USER;
-    });
+    let user = USER_LIST.find(({ id, email }) => id === user_id || email === user_id);
+    if (user)
+      return user;
+    user = await showStaff(user_id).toPromise().catch(() => null);
+    if (user) {
+      USER_LIST.push(user);
+      return user;
+    }
+    user = await showGuest(user_id).toPromise().catch(() => null);
+    if (user) {
+      USER_LIST.push(user);
+      return user;
+    }
+    return EMPTY_USER;
   }
 };
 _UserPipe.\u0275fac = function UserPipe_Factory(__ngFactoryType__) {
@@ -1019,4 +1014,4 @@ var SharedUsersModule = _SharedUsersModule;
 export {
   FindAvailabilityModalComponent
 };
-//# sourceMappingURL=chunk-3EDRUEFC.js.map
+//# sourceMappingURL=chunk-DS3L22F2.js.map

@@ -53,12 +53,11 @@ import {
   tap,
   unique,
   ɵɵdefineInjectable
-} from "./chunk-ZNAP3QRE.js";
+} from "./chunk-W5ZSL5WJ.js";
 import {
-  __async,
   __spreadProps,
   __spreadValues
-} from "./chunk-4MWRP73S.js";
+} from "./chunk-KWSTWQNB.js";
 
 // apps/workplace/src/app/schedule/schedule-state.service.ts
 var _ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
@@ -205,13 +204,13 @@ var _ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
     this.lockers = combineLatest([
       this._lockers,
       this._org.active_building.pipe(filter((_) => !!_), distinctUntilKeyChanged("id"))
-    ]).pipe(debounceTime(300), switchMap((_0) => __async(this, [_0], function* ([lockers]) {
+    ]).pipe(debounceTime(300), switchMap(async ([lockers]) => {
       const mod = this._org.module("lockers", "LockerLocations");
       if (!mod)
         return [[], lockers];
-      const my_lockers = yield mod.execute("lockers_allocated_to_me").catch(() => []);
+      const my_lockers = await mod.execute("lockers_allocated_to_me").catch(() => []);
       return [my_lockers, lockers];
-    })), map(([my_lockers, lockers]) => {
+    }), map(([my_lockers, lockers]) => {
       return my_lockers.map((i) => {
         const locker = lockers.find((lkr) => lkr.id === i.locker_id);
         if (!locker && (!i.level || !i.building))
@@ -274,14 +273,14 @@ var _ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
     this._checkCancel = combineLatest([
       current_user,
       interval(60 * 1e3).pipe(startWith(0))
-    ]).pipe(filter(([u]) => !!u), map((_0) => __async(this, [_0], function* ([user]) {
+    ]).pipe(filter(([u]) => !!u), map(async ([user]) => {
       const is_home = user.location !== "wfo";
       const auto_release = this._settings.get("app.auto_release");
       if (auto_release && is_home && (auto_release.time_after || auto_release.time_before) && auto_release.resources?.length) {
         for (const type of auto_release.resources) {
           const time_after = auto_release[`${type}_time_after`] || auto_release.time_after;
           const time_before = Math.min(60, auto_release[`${type}_time_before`] || auto_release.time_before || 0);
-          const bookings = yield lastValueFrom(queryBookings({
+          const bookings = await lastValueFrom(queryBookings({
             period_start: getUnixTime(startOfMinute(Date.now())),
             period_end: getUnixTime(addMinutes(Date.now(), (time_after || 5) + time_before)),
             type
@@ -299,7 +298,7 @@ var _ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
             const time = addMinutes(start_time, time_after || 0);
             const close_after = differenceInMilliseconds(time.getTime() + 60 * 1e3, Date.now());
             const wording = type === "parking" ? "reservation" : "booking";
-            const result = yield openConfirmModal({
+            const result = await openConfirmModal({
               title: `Keep ${type} ${wording}`,
               content: `You have indicated you are not in the office.
                                 Your  ${wording} for "<i>${booking.asset_name || booking.title}</i>" at ${format(booking.date, this._settings.time_format)} will be cancelled at ${format(time, this._settings.time_format)}.<br/><br/>
@@ -313,12 +312,12 @@ var _ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
               continue;
             }
             result.loading("Checking in booking...");
-            yield lastValueFrom(checkinBooking(booking.id, true));
+            await lastValueFrom(checkinBooking(booking.id, true));
             result.close();
           }
         }
       }
-    })));
+    }));
     this.subscription("poll_type", this._org.active_building.subscribe(() => this._poll_type.next(this._settings.get("app.schedule.use_websocket") ? "ws" : "api")));
     this.subscription("chat_event", this._settings.listen("CHAT:task_complete").subscribe(() => this.triggerPoll()));
     this.subscription("wfh_checks", this._checkCancel.subscribe());
@@ -355,20 +354,18 @@ var _ScheduleStateService = class _ScheduleStateService extends AsyncHandler {
       shown_types: new_types
     }));
   }
-  toggleType(name, clear = false) {
-    return __async(this, null, function* () {
-      const filters = this._filters.getValue() || { shown_types: [] };
-      const { shown_types } = filters;
-      if (shown_types && (shown_types.includes(name) || clear)) {
-        this._filters.next(__spreadProps(__spreadValues({}, filters), {
-          shown_types: shown_types.filter((_) => _ !== name)
-        }));
-      } else {
-        this._filters.next(__spreadProps(__spreadValues({}, filters), {
-          shown_types: [...shown_types, name]
-        }));
-      }
-    });
+  async toggleType(name, clear = false) {
+    const filters = this._filters.getValue() || { shown_types: [] };
+    const { shown_types } = filters;
+    if (shown_types && (shown_types.includes(name) || clear)) {
+      this._filters.next(__spreadProps(__spreadValues({}, filters), {
+        shown_types: shown_types.filter((_) => _ !== name)
+      }));
+    } else {
+      this._filters.next(__spreadProps(__spreadValues({}, filters), {
+        shown_types: [...shown_types, name]
+      }));
+    }
   }
   _bookingQuery(type, period, date) {
     return queryBookings({
@@ -401,4 +398,4 @@ var ScheduleStateService = _ScheduleStateService;
 export {
   ScheduleStateService
 };
-//# sourceMappingURL=chunk-DE3E7V7K.js.map
+//# sourceMappingURL=chunk-7RZXJLHS.js.map

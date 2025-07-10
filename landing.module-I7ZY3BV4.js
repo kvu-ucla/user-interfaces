@@ -1,7 +1,7 @@
-import "./chunk-3EDRUEFC.js";
+import "./chunk-DS3L22F2.js";
 import {
   ScheduleStateService
-} from "./chunk-DE3E7V7K.js";
+} from "./chunk-7RZXJLHS.js";
 import {
   AsyncHandler,
   AsyncPipe,
@@ -131,12 +131,11 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵviewQuerySignal
-} from "./chunk-ZNAP3QRE.js";
+} from "./chunk-W5ZSL5WJ.js";
 import {
-  __async,
   __spreadProps,
   __spreadValues
-} from "./chunk-4MWRP73S.js";
+} from "./chunk-KWSTWQNB.js";
 
 // libs/calendar/src/lib/calendar.service.ts
 var _CalendarService = class _CalendarService extends AsyncHandler {
@@ -151,12 +150,10 @@ var _CalendarService = class _CalendarService extends AsyncHandler {
     this.availability = (q) => queryCalendarAvailability(q);
     this._org.initialised.pipe(first((_) => _)).subscribe(() => this.init());
   }
-  init() {
-    return __async(this, null, function* () {
-      if (this._settings.get("app.events.use_bookings"))
-        return;
-      this._initialised.next(true);
-    });
+  async init() {
+    if (this._settings.get("app.events.use_bookings"))
+      return;
+    this._initialised.next(true);
   }
   get calendars() {
     return this._calendars.getValue();
@@ -173,29 +170,27 @@ var _CalendarService = class _CalendarService extends AsyncHandler {
     }, this._org);
   }
   /** Check rooms availability */
-  checkSpacesAvailability(system_ids, period_start, period_end, old_booking) {
-    return __async(this, null, function* () {
-      const result = yield queryCalendarAvailability({
-        period_start,
-        period_end,
-        system_ids: system_ids.join(",")
-      }).toPromise();
-      const start = new Date(old_booking?.date).valueOf();
-      const end = addMinutes(start, old_booking?.duration).valueOf();
-      const available = result.every((i) => {
-        const availability = i.availability;
-        if (old_booking && i.id === old_booking.system?.email) {
-          const index = availability.findIndex((block) => {
-            return block.date >= start && addMinutes(block.date, block.duration).valueOf() <= end;
-          });
-          if (index !== -1) {
-            availability.splice(index, 1);
-          }
+  async checkSpacesAvailability(system_ids, period_start, period_end, old_booking) {
+    const result = await queryCalendarAvailability({
+      period_start,
+      period_end,
+      system_ids: system_ids.join(",")
+    }).toPromise();
+    const start = new Date(old_booking?.date).valueOf();
+    const end = addMinutes(start, old_booking?.duration).valueOf();
+    const available = result.every((i) => {
+      const availability = i.availability;
+      if (old_booking && i.id === old_booking.system?.email) {
+        const index = availability.findIndex((block) => {
+          return block.date >= start && addMinutes(block.date, block.duration).valueOf() <= end;
+        });
+        if (index !== -1) {
+          availability.splice(index, 1);
         }
-        return !availability.length;
-      });
-      return !!available;
+      }
+      return !availability.length;
     });
+    return !!available;
   }
 };
 _CalendarService.\u0275fac = function CalendarService_Factory(__ngFactoryType__) {
@@ -259,21 +254,19 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
     this.level_occupancy = this._level_occupancy.asObservable();
     this.init();
   }
-  init() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      this.updateContacts();
-      this.subscription("building", this._org.active_building.pipe(filter((bld) => !!bld)).subscribe(() => {
-        this.updateBuildingMetadata();
-        this.updateOccupancy({});
-      }));
-      const mod = this._org.module("area_management", "AreaManagement");
-      if (!mod)
-        return;
-      const binding = mod.binding("overview");
-      binding.listen().subscribe((d) => this.updateOccupancy(d || {}));
-      binding.bind();
-    });
+  async init() {
+    await this._org.initialised.pipe(first((_) => _)).toPromise();
+    this.updateContacts();
+    this.subscription("building", this._org.active_building.pipe(filter((bld) => !!bld)).subscribe(() => {
+      this.updateBuildingMetadata();
+      this.updateOccupancy({});
+    }));
+    const mod = this._org.module("area_management", "AreaManagement");
+    if (!mod)
+      return;
+    const binding = mod.binding("overview");
+    binding.listen().subscribe((d) => this.updateOccupancy(d || {}));
+    binding.bind();
   }
   setOptions(options) {
     this._options.next(__spreadValues(__spreadValues({}, this._options.getValue()), options));
@@ -290,69 +283,59 @@ var _LandingStateService = class _LandingStateService extends AsyncHandler {
     this._schedule.setDate(Date.now());
     this._schedule.triggerPoll();
   }
-  updateContacts() {
-    return __async(this, null, function* () {
-      const metadata = yield hu(currentUser().id, "contacts").toPromise();
-      const list = metadata.details instanceof Array ? metadata.details : [];
-      const users = yield Promise.all(list.map((_) => Mc(_.email).pipe(catchError(() => of(_))).toPromise()));
-      this._contacts.next(users.map((i) => new StaffUser(i)));
-    });
+  async updateContacts() {
+    const metadata = await hu(currentUser().id, "contacts").toPromise();
+    const list = metadata.details instanceof Array ? metadata.details : [];
+    const users = await Promise.all(list.map((_) => Mc(_.email).pipe(catchError(() => of(_))).toPromise()));
+    this._contacts.next(users.map((i) => new StaffUser(i)));
   }
-  addContact(user) {
-    return __async(this, null, function* () {
-      let users = [...this._contacts.getValue()];
-      users.push(user);
-      users = unique(users, "email");
-      yield du(currentUser().id, {
-        name: "contacts",
-        description: "Contacts for the User",
-        details: users
-      }).toPromise();
-      this.updateContacts();
-    });
+  async addContact(user) {
+    let users = [...this._contacts.getValue()];
+    users.push(user);
+    users = unique(users, "email");
+    await du(currentUser().id, {
+      name: "contacts",
+      description: "Contacts for the User",
+      details: users
+    }).toPromise();
+    this.updateContacts();
   }
-  removeContact(user) {
-    return __async(this, null, function* () {
-      let users = [...this._contacts.getValue()];
-      users = users.filter((u) => u.email !== user.email);
-      yield du(currentUser().id, {
-        name: "contacts",
-        description: "Contacts for the User",
-        details: users
-      }).toPromise();
-      this.updateContacts();
-    });
+  async removeContact(user) {
+    let users = [...this._contacts.getValue()];
+    users = users.filter((u) => u.email !== user.email);
+    await du(currentUser().id, {
+      name: "contacts",
+      description: "Contacts for the User",
+      details: users
+    }).toPromise();
+    this.updateContacts();
   }
-  updateOccupancy(map2) {
-    return __async(this, null, function* () {
-      const levels = this._org.levelsForBuilding() || [];
-      levels.sort((a, b) => map2[a.id]?.recommendation - map2[b.id]?.recommendation);
-      this._level_occupancy.next(levels);
-    });
+  async updateOccupancy(map2) {
+    const levels = this._org.levelsForBuilding() || [];
+    levels.sort((a, b) => map2[a.id]?.recommendation - map2[b.id]?.recommendation);
+    this._level_occupancy.next(levels);
   }
-  updateBuildingMetadata() {
-    return __async(this, null, function* () {
-      this._level_occupancy.next([]);
-      const occupancy = this._org.binding("occupancy");
-      if (!occupancy)
-        return;
-      const { sys, module, index } = occupancy;
-      const mod = Ea(sys, module, index);
-      if (!mod)
-        return;
-      if (this._occupancy_binding) {
-        this._occupancy_binding.unbind();
-      }
-      this._occupancy_binding = mod.binding("occupancy");
-      this._occupancy_binding.bind();
-      this.subscription("occupancy_binding", this._occupancy_binding.listen().subscribe((value) => {
-        const levels = Object.keys(value).map((key) => __spreadValues({
-          id: key
-        }, value[key]));
-        levels.sort((a, b) => a.recommendation_factor - b.recommendation_factor);
-        this._level_occupancy.next(levels.map((i) => this._org.levelWithID([i.id])));
-      }));
-    });
+  async updateBuildingMetadata() {
+    this._level_occupancy.next([]);
+    const occupancy = this._org.binding("occupancy");
+    if (!occupancy)
+      return;
+    const { sys, module, index } = occupancy;
+    const mod = Ea(sys, module, index);
+    if (!mod)
+      return;
+    if (this._occupancy_binding) {
+      this._occupancy_binding.unbind();
+    }
+    this._occupancy_binding = mod.binding("occupancy");
+    this._occupancy_binding.bind();
+    this.subscription("occupancy_binding", this._occupancy_binding.listen().subscribe((value) => {
+      const levels = Object.keys(value).map((key) => __spreadValues({
+        id: key
+      }, value[key]));
+      levels.sort((a, b) => a.recommendation_factor - b.recommendation_factor);
+      this._level_occupancy.next(levels.map((i) => this._org.levelWithID([i.id])));
+    }));
   }
 };
 _LandingStateService.\u0275fac = function LandingStateService_Factory(__ngFactoryType__) {
@@ -1002,15 +985,15 @@ var _LandingColleaguesComponent = class _LandingColleaguesComponent extends Asyn
     ]).pipe(map(([list, contacts]) => list.filter((_) => !contacts.find((user) => user.id === _.id || user.email === _.email))));
     this.options = this._state.options;
     this.loading = this._state.loading;
-    this.addUser = (u) => __async(this, null, function* () {
-      yield this._state.addContact(u);
+    this.addUser = async (u) => {
+      await this._state.addContact(u);
       notifySuccess(i18n("APP.WORKPLACE.COLLEAGUE_ADDED", { name: u.name }));
       this.show_search = false;
-    });
-    this.removeUser = (u) => __async(this, null, function* () {
-      yield this._state.removeContact(u);
+    };
+    this.removeUser = async (u) => {
+      await this._state.removeContact(u);
       notifySuccess(i18n("APP.WORKPLACE.COLLEAGUE_REMOVED", { name: u.name }));
-    });
+    };
     this.updateSearch = (s) => this._state.setOptions({ search: s });
     this._input_el = viewChild.required("search_input");
   }
@@ -1551,10 +1534,8 @@ var _LandingFavouritesComponent = class _LandingFavouritesComponent extends Asyn
       return false;
     return this._room_alerts[id] ? this._room_alerts[id][0] === "closed" : false;
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      this._room_alerts = yield hu(this._org.organisation.id, "room_alerts").pipe(map((v) => v.details)).toPromise();
-    });
+  async ngOnInit() {
+    this._room_alerts = await hu(this._org.organisation.id, "room_alerts").pipe(map((v) => v.details)).toPromise();
   }
   removeFavourite(type, id) {
     let fav_list = this.spaces;
@@ -1576,47 +1557,43 @@ var _LandingFavouritesComponent = class _LandingFavouritesComponent extends Asyn
     this._settings.saveUserSetting(key, fav_list.filter((_) => _ !== id));
     this._change.next(Date.now());
   }
-  newSpaceMeeting(id) {
-    return __async(this, null, function* () {
-      const space = yield this._space_pipe.transform(id);
-      if (!space)
-        return;
-      this._event_form.newForm();
-      if (this._settings.get("app.new_features")) {
-        this._router.navigate(["/book", "meeting"]);
-      } else {
-        this._router.navigate(["/book", "spaces"]);
-      }
-      setTimeout(() => {
-        this._event_form.form.patchValue({ resources: [space] });
-      }, 300);
-    });
+  async newSpaceMeeting(id) {
+    const space = await this._space_pipe.transform(id);
+    if (!space)
+      return;
+    this._event_form.newForm();
+    if (this._settings.get("app.new_features")) {
+      this._router.navigate(["/book", "meeting"]);
+    } else {
+      this._router.navigate(["/book", "spaces"]);
+    }
+    setTimeout(() => {
+      this._event_form.form.patchValue({ resources: [space] });
+    }, 300);
   }
-  newBooking(type, item) {
-    return __async(this, null, function* () {
-      if (!item)
-        return;
-      if (this._settings.get("app.new_features")) {
-        this._router.navigate([
-          "/book",
-          type === "desk" ? "desk" : type === "locker" ? "locker" : "parking"
-        ]);
-      } else {
-        this._router.navigate([
-          "/book",
-          type === "desk" ? "desks" : type === "locker" ? "locker" : "parking"
-        ]);
-      }
-      setTimeout(() => {
-        this._booking_form.newForm(type);
-        this._booking_form.setOptions({ type });
-        this._booking_form.form.patchValue({
-          resources: [item],
-          asset_id: item.id,
-          booking_type: type
-        });
-      }, 100);
-    });
+  async newBooking(type, item) {
+    if (!item)
+      return;
+    if (this._settings.get("app.new_features")) {
+      this._router.navigate([
+        "/book",
+        type === "desk" ? "desk" : type === "locker" ? "locker" : "parking"
+      ]);
+    } else {
+      this._router.navigate([
+        "/book",
+        type === "desk" ? "desks" : type === "locker" ? "locker" : "parking"
+      ]);
+    }
+    setTimeout(() => {
+      this._booking_form.newForm(type);
+      this._booking_form.setOptions({ type });
+      this._booking_form.form.patchValue({
+        resources: [item],
+        asset_id: item.id,
+        booking_type: type
+      });
+    }, 100);
   }
 };
 _LandingFavouritesComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -2176,19 +2153,17 @@ var _LandingUpcomingComponent = class _LandingUpcomingComponent extends AsyncHan
   trackByFn(_, item) {
     return item?.id;
   }
-  edit(event) {
-    return __async(this, null, function* () {
-      console.log("Edit Event:", event);
-      this._router.navigate(["/book", "meeting", "form"]);
-      if (event.creator !== event.mailbox) {
-        event = (yield queryEvents({
-          period_start: event.event_start,
-          period_end: event.event_end,
-          ical_uid: event.ical_uid
-        }).toPromise()).find((_) => _.ical_uid === event.ical_uid) || event;
-      }
-      setTimeout(() => this._event_form.newForm(event), 300);
-    });
+  async edit(event) {
+    console.log("Edit Event:", event);
+    this._router.navigate(["/book", "meeting", "form"]);
+    if (event.creator !== event.mailbox) {
+      event = (await queryEvents({
+        period_start: event.event_start,
+        period_end: event.event_end,
+        ical_uid: event.ical_uid
+      }).toPromise()).find((_) => _.ical_uid === event.ical_uid) || event;
+    }
+    setTimeout(() => this._event_form.newForm(event), 300);
   }
   editBooking(event) {
     this._router.navigate(["/book", `${event.type}`]);
@@ -2205,60 +2180,56 @@ var _LandingUpcomingComponent = class _LandingUpcomingComponent extends AsyncHan
       });
     }, 100);
   }
-  remove(item, remove_series = false) {
-    return __async(this, null, function* () {
-      const time = `${format(item.date, "dd MMM yyyy h:mma")}`;
-      const resource_name = item instanceof CalendarEvent ? item.space?.display_name : item.asset_name || item.asset_id;
-      const resp = yield openConfirmModal({
-        title: i18n("APP.WORKPLACE.SCHEDULE_REMOVE_TITLE"),
-        content: i18n("APP.WORKPLACE.SCHEDULE_REMOVE_MSG", {
-          name: resource_name,
-          time
-        }),
-        icon: { content: "delete" }
-      }, this._dialog);
-      if (resp.reason !== "done")
-        return;
-      resp.loading(i18n("APP.WORKPLACE.SCHEDULE_REMOVE_LOADING"));
-      yield (item instanceof CalendarEvent ? removeEvent : removeBooking)(item.id, {
-        calendar: this._settings.get("app.events.use_bookings") ? null : currentUser()?.email,
-        system_id: item.system?.id,
-        instance: remove_series ? void 0 : !!item.instance,
-        start_time: item.instance ? item.booking_start : void 0
-      }).toPromise().catch((e) => {
-        notifyError(i18n("APP.WORKPLACE.SCHEDULE_REMOVE_ERROR", { error: e }));
-        resp.close();
-        throw e;
-      });
-      notifySuccess(i18n("APP.WORKPLACE.SCHEDULE_REMOVE_SUCCESS"));
-      this._state.refreshUpcomingEvents();
-      this._dialog.closeAll();
+  async remove(item, remove_series = false) {
+    const time = `${format(item.date, "dd MMM yyyy h:mma")}`;
+    const resource_name = item instanceof CalendarEvent ? item.space?.display_name : item.asset_name || item.asset_id;
+    const resp = await openConfirmModal({
+      title: i18n("APP.WORKPLACE.SCHEDULE_REMOVE_TITLE"),
+      content: i18n("APP.WORKPLACE.SCHEDULE_REMOVE_MSG", {
+        name: resource_name,
+        time
+      }),
+      icon: { content: "delete" }
+    }, this._dialog);
+    if (resp.reason !== "done")
+      return;
+    resp.loading(i18n("APP.WORKPLACE.SCHEDULE_REMOVE_LOADING"));
+    await (item instanceof CalendarEvent ? removeEvent : removeBooking)(item.id, {
+      calendar: this._settings.get("app.events.use_bookings") ? null : currentUser()?.email,
+      system_id: item.system?.id,
+      instance: remove_series ? void 0 : !!item.instance,
+      start_time: item.instance ? item.booking_start : void 0
+    }).toPromise().catch((e) => {
+      notifyError(i18n("APP.WORKPLACE.SCHEDULE_REMOVE_ERROR", { error: e }));
+      resp.close();
+      throw e;
     });
+    notifySuccess(i18n("APP.WORKPLACE.SCHEDULE_REMOVE_SUCCESS"));
+    this._state.refreshUpcomingEvents();
+    this._dialog.closeAll();
   }
-  end(item) {
-    return __async(this, null, function* () {
-      const time = `${format(item.date, "dd MMM yyyy h:mma")}`;
-      const resource_name = item.asset_name || item.asset_id;
-      const resp = yield openConfirmModal({
-        title: i18n("APP.WORKPLACE.SCHEDULE_END_TITLE"),
-        content: i18n("APP.WORKPLACE.SCHEDULE_END_MSG", {
-          name: resource_name,
-          time
-        }),
-        icon: { content: "event_busy" }
-      }, this._dialog);
-      if (resp.reason !== "done")
-        return;
-      resp.loading(i18n("APP.WORKPLACE.SCHEDULE_END_LOADING"));
-      yield checkinBooking(item.id, false).toPromise().catch((e) => {
-        notifyError(i18n("APP.WORKPLACE.SCHEDULE_END_ERROR", { error: e }));
-        resp.close();
-        throw e;
-      });
-      notifySuccess(i18n("APP.WORKPLACE.SCHEDULE_END_SUCCESS"));
-      this._state.refreshUpcomingEvents();
-      this._dialog.closeAll();
+  async end(item) {
+    const time = `${format(item.date, "dd MMM yyyy h:mma")}`;
+    const resource_name = item.asset_name || item.asset_id;
+    const resp = await openConfirmModal({
+      title: i18n("APP.WORKPLACE.SCHEDULE_END_TITLE"),
+      content: i18n("APP.WORKPLACE.SCHEDULE_END_MSG", {
+        name: resource_name,
+        time
+      }),
+      icon: { content: "event_busy" }
+    }, this._dialog);
+    if (resp.reason !== "done")
+      return;
+    resp.loading(i18n("APP.WORKPLACE.SCHEDULE_END_LOADING"));
+    await checkinBooking(item.id, false).toPromise().catch((e) => {
+      notifyError(i18n("APP.WORKPLACE.SCHEDULE_END_ERROR", { error: e }));
+      resp.close();
+      throw e;
     });
+    notifySuccess(i18n("APP.WORKPLACE.SCHEDULE_END_SUCCESS"));
+    this._state.refreshUpcomingEvents();
+    this._dialog.closeAll();
   }
 };
 _LandingUpcomingComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -2692,4 +2663,4 @@ var AppLandingModule = _AppLandingModule;
 export {
   AppLandingModule
 };
-//# sourceMappingURL=landing.module-DJCKYJR2.js.map
+//# sourceMappingURL=landing.module-I7ZY3BV4.js.map

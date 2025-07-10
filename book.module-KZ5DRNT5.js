@@ -1,9 +1,9 @@
 import {
   subMinutes
-} from "./chunk-3NTZDZDB.js";
+} from "./chunk-CJDI56TN.js";
 import {
   FindAvailabilityModalComponent
-} from "./chunk-3EDRUEFC.js";
+} from "./chunk-DS3L22F2.js";
 import {
   ANIMATION_SHOW_CONTRACT_EXPAND,
   ActivatedRoute,
@@ -263,12 +263,11 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuerySignal
-} from "./chunk-ZNAP3QRE.js";
+} from "./chunk-W5ZSL5WJ.js";
 import {
-  __async,
   __spreadProps,
   __spreadValues
-} from "./chunk-4MWRP73S.js";
+} from "./chunk-KWSTWQNB.js";
 
 // libs/catering/src/lib/catering-item-modal.component.ts
 var _c0 = () => ({ standalone: true });
@@ -1272,36 +1271,34 @@ var _CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
    * @param order Order to update
    * @param status New order status
    */
-  updateStatus(order, status) {
-    return __async(this, null, function* () {
-      order.status = status;
-      const updated_order = new CateringOrder(__spreadProps(__spreadValues({}, order), {
-        status,
-        event: null
-      }));
-      updated_order._status = status;
-      const catering = [
-        ...(order.event.extension_data.catering || []).filter((o) => o.id !== order.id),
-        updated_order
-      ].map((i) => new CateringOrder(__spreadValues({}, i)).toJSON());
-      const system_id = order.event?.resources[0]?.id || order.event?.system?.id;
-      const extension_data = yield showEventMetadata(order.event.id, system_id).toPromise();
-      const event = new CalendarEvent(__spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, order.event), { extension_data })), {
-        catering
-      }));
-      const booking = yield updateEventMetadata(event.id, system_id, event.extension_data).toPromise();
-      if (this.using_bookings) {
-        const booking2 = BOOKINGS[order.id];
-        yield updateBooking(booking2.id, __spreadProps(__spreadValues({}, booking2.toJSON()), {
-          extension_data: __spreadProps(__spreadValues({}, booking2.extension_data), {
-            details: updated_order.toJSON()
-          })
-        })).toPromise();
-      }
-      this.timeout("refresh-list", () => this._poll.next(Date.now()), 1e3);
-      order.status = status;
-      return booking;
-    });
+  async updateStatus(order, status) {
+    order.status = status;
+    const updated_order = new CateringOrder(__spreadProps(__spreadValues({}, order), {
+      status,
+      event: null
+    }));
+    updated_order._status = status;
+    const catering = [
+      ...(order.event.extension_data.catering || []).filter((o) => o.id !== order.id),
+      updated_order
+    ].map((i) => new CateringOrder(__spreadValues({}, i)).toJSON());
+    const system_id = order.event?.resources[0]?.id || order.event?.system?.id;
+    const extension_data = await showEventMetadata(order.event.id, system_id).toPromise();
+    const event = new CalendarEvent(__spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, order.event), { extension_data })), {
+      catering
+    }));
+    const booking = await updateEventMetadata(event.id, system_id, event.extension_data).toPromise();
+    if (this.using_bookings) {
+      const booking2 = BOOKINGS[order.id];
+      await updateBooking(booking2.id, __spreadProps(__spreadValues({}, booking2.toJSON()), {
+        extension_data: __spreadProps(__spreadValues({}, booking2.extension_data), {
+          details: updated_order.toJSON()
+        })
+      })).toPromise();
+    }
+    this.timeout("refresh-list", () => this._poll.next(Date.now()), 1e3);
+    order.status = status;
+    return booking;
   }
 };
 _CateringOrdersService.\u0275fac = function CateringOrdersService_Factory(__ngFactoryType__) {
@@ -2297,25 +2294,23 @@ var _CateringOrderModalComponent = class _CateringOrderModalComponent extends As
     this.categories = [];
     this.loading = i18n("CATERING.MENU_LOADING");
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      this.loading = i18n("CATERING.MENU_LOADING");
-      this.order = new CateringOrder(this._data.order);
-      this.rules = yield this._data.getCateringConfig(this.order.event?.space?.level?.parent_id);
-      this._data.menu.subscribe((list) => {
-        this.loading = "Loading menu...";
-        const categories = unique(list.map((item) => item.category));
-        const map2 = {};
-        for (const cat of categories) {
-          map2[cat] = list.filter((item) => {
-            return item.category === cat && cateringItemAvailable(item, this.rules, this.order.event);
-          });
-        }
-        this.categories = categories;
-        this.menu_items = map2;
-        this.updateMenuQuantities();
-        this.timeout("clear_loading", () => this.loading = "", 1e3);
-      });
+  async ngOnInit() {
+    this.loading = i18n("CATERING.MENU_LOADING");
+    this.order = new CateringOrder(this._data.order);
+    this.rules = await this._data.getCateringConfig(this.order.event?.space?.level?.parent_id);
+    this._data.menu.subscribe((list) => {
+      this.loading = "Loading menu...";
+      const categories = unique(list.map((item) => item.category));
+      const map2 = {};
+      for (const cat of categories) {
+        map2[cat] = list.filter((item) => {
+          return item.category === cat && cateringItemAvailable(item, this.rules, this.order.event);
+        });
+      }
+      this.categories = categories;
+      this.menu_items = map2;
+      this.updateMenuQuantities();
+      this.timeout("clear_loading", () => this.loading = "", 1e3);
     });
   }
   addItem(item, choose_options = true) {
@@ -2979,68 +2974,64 @@ var _CateringStateService = class _CateringStateService extends AsyncHandler {
       return provider_list;
     }), shareReplay(1));
     this.zone = "";
-    this.subscription("building", this._org.active_building.subscribe((bld) => __async(this, null, function* () {
+    this.subscription("building", this._org.active_building.subscribe(async (bld) => {
       if (bld) {
         this._loading.next(true);
         this._menu.next([]);
-        const menu = (yield this.getCateringForZone(bld.id).catch(() => [])).map((i) => new CateringItem(i));
+        const menu = (await this.getCateringForZone(bld.id).catch(() => [])).map((i) => new CateringItem(i));
         this._currency.next(this._settings.get("app.currency") || bld.currency || "USD");
         this._loading.next(false);
         this.timeout("loaded", () => this._menu.next(menu), 1e3);
       }
-    })));
+    }));
   }
   /**
    * Create/Edit catering order
    * @param order Order to manipulate
    */
-  manageCateringOrder(order) {
-    return __async(this, null, function* () {
-      const ref = this._dialog.open(CateringOrderModalComponent, {
-        data: {
-          code: this._currency.getValue(),
-          order,
-          menu: this.menu,
-          loading: this.loading,
-          getCateringConfig: (_) => this.getCateringConfig(_),
-          selectOptions: (_) => this.selectOptions(_)
-        }
-      });
-      const details = yield Promise.race([
-        ref.componentInstance.event.pipe(first((_) => _.reason === "done")).toPromise(),
-        ref.afterClosed().toPromise()
-      ]);
-      ref.close();
-      return details?.metadata?.order || order;
-    });
-  }
-  addItem() {
-    return __async(this, arguments, function* (item = new CateringItem()) {
-      const ref = this._dialog.open(CateringItemModalComponent, {
-        data: {
-          item,
-          categories: this.categories,
-          caterers: this.caterer_list
-        }
-      });
-      const details = yield Promise.race([
-        ref.componentInstance.event.pipe(first((_) => _.reason === "done")).toPromise(),
-        ref.afterClosed().toPromise()
-      ]);
-      if (details?.reason !== "done")
-        return;
-      const menu = this._menu.getValue();
-      const index = menu.findIndex((itm) => itm.id === item.id);
-      if (index >= 0) {
-        menu.splice(index, 1, details.metadata.item);
-      } else {
-        menu.push(details.metadata.item);
+  async manageCateringOrder(order) {
+    const ref = this._dialog.open(CateringOrderModalComponent, {
+      data: {
+        code: this._currency.getValue(),
+        order,
+        menu: this.menu,
+        loading: this.loading,
+        getCateringConfig: (_) => this.getCateringConfig(_),
+        selectOptions: (_) => this.selectOptions(_)
       }
-      this.updateMenu(this._org.building.id, menu).then(() => {
-        this._menu.next([...menu]);
-        ref.close();
-      }, () => ref.componentInstance.loading = false);
     });
+    const details = await Promise.race([
+      ref.componentInstance.event.pipe(first((_) => _.reason === "done")).toPromise(),
+      ref.afterClosed().toPromise()
+    ]);
+    ref.close();
+    return details?.metadata?.order || order;
+  }
+  async addItem(item = new CateringItem()) {
+    const ref = this._dialog.open(CateringItemModalComponent, {
+      data: {
+        item,
+        categories: this.categories,
+        caterers: this.caterer_list
+      }
+    });
+    const details = await Promise.race([
+      ref.componentInstance.event.pipe(first((_) => _.reason === "done")).toPromise(),
+      ref.afterClosed().toPromise()
+    ]);
+    if (details?.reason !== "done")
+      return;
+    const menu = this._menu.getValue();
+    const index = menu.findIndex((itm) => itm.id === item.id);
+    if (index >= 0) {
+      menu.splice(index, 1, details.metadata.item);
+    } else {
+      menu.push(details.metadata.item);
+    }
+    this.updateMenu(this._org.building.id, menu).then(() => {
+      this._menu.next([...menu]);
+      ref.close();
+    }, () => ref.componentInstance.loading = false);
   }
   updateItem(item) {
     const menu = this._menu.getValue();
@@ -3051,159 +3042,147 @@ var _CateringStateService = class _CateringStateService extends AsyncHandler {
       menu.push(item);
     this.updateMenu(this._org.building.id, menu).then(() => this._menu.next([...menu]));
   }
-  addOption(_0) {
-    return __async(this, arguments, function* (item, option = {}) {
-      const types = unique(item.options.map((i) => i.group));
-      const ref = this._dialog.open(CateringItemOptionModalComponent, {
-        data: {
-          parent: item,
-          option,
-          types
-        }
-      });
-      const details = yield Promise.race([
-        ref.componentInstance.event.pipe(first((_) => _.reason === "done")).toPromise(),
-        ref.afterClosed().toPromise()
-      ]);
-      if (details?.reason !== "done")
-        return;
-      const menu = this._menu.getValue();
-      const index = menu.findIndex((itm) => itm.id === item.id);
-      if (index >= 0) {
-        menu.splice(index, 1, details.metadata.item);
-      } else {
-        menu.push(details.metadata.item);
+  async addOption(item, option = {}) {
+    const types = unique(item.options.map((i) => i.group));
+    const ref = this._dialog.open(CateringItemOptionModalComponent, {
+      data: {
+        parent: item,
+        option,
+        types
       }
-      this.updateMenu(this._org.building.id, menu).then(() => {
-        this._menu.next([...menu]);
-        ref.close();
-      }, () => ref.componentInstance.loading = false);
     });
-  }
-  selectOptions(options) {
-    return __async(this, null, function* () {
-      const ref = this._dialog.open(CateringOrderOptionsModalComponent, {
-        data: {
-          code: this._currency.getValue(),
-          options
-        }
-      });
-      const details = yield Promise.race([
-        ref.componentInstance.event.pipe(first((_) => _.reason === "done")).toPromise(),
-        ref.afterClosed().toPromise()
-      ]);
-      if (details?.reason !== "done")
-        return [];
+    const details = await Promise.race([
+      ref.componentInstance.event.pipe(first((_) => _.reason === "done")).toPromise(),
+      ref.afterClosed().toPromise()
+    ]);
+    if (details?.reason !== "done")
+      return;
+    const menu = this._menu.getValue();
+    const index = menu.findIndex((itm) => itm.id === item.id);
+    if (index >= 0) {
+      menu.splice(index, 1, details.metadata.item);
+    } else {
+      menu.push(details.metadata.item);
+    }
+    this.updateMenu(this._org.building.id, menu).then(() => {
+      this._menu.next([...menu]);
       ref.close();
-      return details.metadata.options;
+    }, () => ref.componentInstance.loading = false);
+  }
+  async selectOptions(options) {
+    const ref = this._dialog.open(CateringOrderOptionsModalComponent, {
+      data: {
+        code: this._currency.getValue(),
+        options
+      }
+    });
+    const details = await Promise.race([
+      ref.componentInstance.event.pipe(first((_) => _.reason === "done")).toPromise(),
+      ref.afterClosed().toPromise()
+    ]);
+    if (details?.reason !== "done")
+      return [];
+    ref.close();
+    return details.metadata.options;
+  }
+  async deleteItem(item) {
+    const details = await openConfirmModal({
+      title: i18n("CATERING.ITEM_REMOVE"),
+      content: i18n("CATERING.ITEM_REMOVE_MSG", { name: item.name }),
+      icon: {
+        type: "icon",
+        class: "material-symbols-outlined",
+        content: "delete"
+      }
+    }, this._dialog);
+    if (details.reason !== "done")
+      return;
+    details.loading(i18n("CATERING.ITEM_REMOVE_LOADING"));
+    const menu = this._menu.getValue().filter((itm) => item.id !== itm.id);
+    this.updateMenu(this._org.building.id, menu).then(() => {
+      this._menu.next([...menu]);
+      notifySuccess(i18n("CATERING.ITEM_REMOVE_SUCCESS"));
+      details.close();
+    }, (e2) => {
+      notifyError(i18n("CATERING.ITEM_REMOVE_ERROR", { error: e2 }));
+      details.loading("");
     });
   }
-  deleteItem(item) {
-    return __async(this, null, function* () {
-      const details = yield openConfirmModal({
-        title: i18n("CATERING.ITEM_REMOVE"),
-        content: i18n("CATERING.ITEM_REMOVE_MSG", { name: item.name }),
-        icon: {
-          type: "icon",
-          class: "material-symbols-outlined",
-          content: "delete"
-        }
-      }, this._dialog);
-      if (details.reason !== "done")
-        return;
-      details.loading(i18n("CATERING.ITEM_REMOVE_LOADING"));
-      const menu = this._menu.getValue().filter((itm) => item.id !== itm.id);
-      this.updateMenu(this._org.building.id, menu).then(() => {
-        this._menu.next([...menu]);
-        notifySuccess(i18n("CATERING.ITEM_REMOVE_SUCCESS"));
-        details.close();
-      }, (e2) => {
-        notifyError(i18n("CATERING.ITEM_REMOVE_ERROR", { error: e2 }));
-        details.loading("");
-      });
-    });
-  }
-  deleteOption(item, option) {
-    return __async(this, null, function* () {
-      const details = yield openConfirmModal({
-        title: i18n("CATERING.ITEM_OPTION_REMOVE"),
-        content: i18n("CATERING.ITEM_OPTION_REMOVE", {
-          name: option.name,
-          item: item.name
-        }),
-        icon: {
-          type: "icon",
-          class: "material-symbols-outlined",
-          content: "delete"
-        }
-      }, this._dialog);
-      if (details.reason !== "done")
-        return;
-      details.loading(i18n("CATERING.ITEM_OPTION_REMOVE_LOADING"));
-      const menu = this._menu.getValue();
-      menu.splice(menu.findIndex((itm) => itm.id === item.id), 1, new CateringItem(__spreadProps(__spreadValues({}, item), {
-        options: item.options.filter((opt) => opt.id !== option.id)
-      })));
-      this.updateMenu(this._org.building.id, menu).then(() => {
-        this._menu.next([...menu]);
-        notifySuccess(i18n("CATERING.ITEM_OPTION_REMOVE_SUCCESS", {
-          item: item.name
-        }));
-        details.close();
-      }, () => {
-        notifySuccess(i18n("CATERING.ITEM_OPTION_REMOVE_ERROR", {
-          item: item.name
-        }));
-        details.loading("");
-      });
-    });
-  }
-  editConfig() {
-    return __async(this, null, function* () {
-      const config = yield this.getCateringConfig(this._org.building.id);
-      const { require_notes } = yield nextValueFrom(this.settings);
-      const menu = this._menu.getValue();
-      const types = unique(flatten(menu.map((i) => [i.category, ...i.tags])));
-      const ref = this._dialog.open(AttachedResourceConfigModalComponent, {
-        data: {
-          config,
-          types,
-          require_notes,
-          saveNotes: (b) => this.saveSettings({ require_notes: b })
-        }
-      });
-      const details = yield Promise.race([
-        ref.componentInstance.event.pipe(first((_) => _.reason === "done")).toPromise(),
-        ref.afterClosed().toPromise()
-      ]);
-      if (details?.reason !== "done")
-        return;
-      this.updateConfig(this._org.building.id, details.metadata).then(() => ref.close(), () => ref.componentInstance.loading = false);
-    });
-  }
-  importMenu() {
-    return __async(this, null, function* () {
-      const ref = this._dialog.open(CateringImportMenuModalComponent);
-      const details = yield Promise.race([
-        ref.componentInstance.event.pipe(first((_) => _.reason === "done")).toPromise(),
-        ref.afterClosed().toPromise()
-      ]);
-      if (details?.reason !== "done")
-        return;
-      ref.componentInstance.loading = i18n("CATERING.MENU_IMPORT_LOADING");
-      const menu = this._menu.getValue();
-      const bld = this._org.building;
-      const updated_menu = unique(details.metadata.concat(menu), "id");
-      yield this.updateMenu(bld.id, updated_menu).catch((_) => {
-        notifyError(i18n("CATERING.MENU_IMPORT_ERROR"));
-        ref.close();
-        throw _;
-      });
-      notifySuccess(i18n("CATERING.MENU_IMPORT_SUCCESS", {
-        count: details.metadata.length
+  async deleteOption(item, option) {
+    const details = await openConfirmModal({
+      title: i18n("CATERING.ITEM_OPTION_REMOVE"),
+      content: i18n("CATERING.ITEM_OPTION_REMOVE", {
+        name: option.name,
+        item: item.name
+      }),
+      icon: {
+        type: "icon",
+        class: "material-symbols-outlined",
+        content: "delete"
+      }
+    }, this._dialog);
+    if (details.reason !== "done")
+      return;
+    details.loading(i18n("CATERING.ITEM_OPTION_REMOVE_LOADING"));
+    const menu = this._menu.getValue();
+    menu.splice(menu.findIndex((itm) => itm.id === item.id), 1, new CateringItem(__spreadProps(__spreadValues({}, item), {
+      options: item.options.filter((opt) => opt.id !== option.id)
+    })));
+    this.updateMenu(this._org.building.id, menu).then(() => {
+      this._menu.next([...menu]);
+      notifySuccess(i18n("CATERING.ITEM_OPTION_REMOVE_SUCCESS", {
+        item: item.name
       }));
-      ref.close();
+      details.close();
+    }, () => {
+      notifySuccess(i18n("CATERING.ITEM_OPTION_REMOVE_ERROR", {
+        item: item.name
+      }));
+      details.loading("");
     });
+  }
+  async editConfig() {
+    const config = await this.getCateringConfig(this._org.building.id);
+    const { require_notes } = await nextValueFrom(this.settings);
+    const menu = this._menu.getValue();
+    const types = unique(flatten(menu.map((i) => [i.category, ...i.tags])));
+    const ref = this._dialog.open(AttachedResourceConfigModalComponent, {
+      data: {
+        config,
+        types,
+        require_notes,
+        saveNotes: (b) => this.saveSettings({ require_notes: b })
+      }
+    });
+    const details = await Promise.race([
+      ref.componentInstance.event.pipe(first((_) => _.reason === "done")).toPromise(),
+      ref.afterClosed().toPromise()
+    ]);
+    if (details?.reason !== "done")
+      return;
+    this.updateConfig(this._org.building.id, details.metadata).then(() => ref.close(), () => ref.componentInstance.loading = false);
+  }
+  async importMenu() {
+    const ref = this._dialog.open(CateringImportMenuModalComponent);
+    const details = await Promise.race([
+      ref.componentInstance.event.pipe(first((_) => _.reason === "done")).toPromise(),
+      ref.afterClosed().toPromise()
+    ]);
+    if (details?.reason !== "done")
+      return;
+    ref.componentInstance.loading = i18n("CATERING.MENU_IMPORT_LOADING");
+    const menu = this._menu.getValue();
+    const bld = this._org.building;
+    const updated_menu = unique(details.metadata.concat(menu), "id");
+    await this.updateMenu(bld.id, updated_menu).catch((_) => {
+      notifyError(i18n("CATERING.MENU_IMPORT_ERROR"));
+      ref.close();
+      throw _;
+    });
+    notifySuccess(i18n("CATERING.MENU_IMPORT_SUCCESS", {
+      count: details.metadata.length
+    }));
+    ref.close();
   }
   updateMenu(zone_id, menu) {
     return du(zone_id, {
@@ -3213,30 +3192,24 @@ var _CateringStateService = class _CateringStateService extends AsyncHandler {
       description: `Catering menu for ${zone_id}`
     }).toPromise();
   }
-  saveSettings(settings) {
-    return __async(this, null, function* () {
-      const old_settings = yield nextValueFrom(this.settings);
-      const result = yield du(this._org.building.id, {
-        id: this._org.building.id,
-        name: "catering-settings",
-        details: __spreadValues(__spreadValues({}, old_settings), settings),
-        description: `Catering settings for ${this._org.building.id}`
-      }).toPromise();
-      this._change.next(Date.now());
-      return result;
-    });
+  async saveSettings(settings) {
+    const old_settings = await nextValueFrom(this.settings);
+    const result = await du(this._org.building.id, {
+      id: this._org.building.id,
+      name: "catering-settings",
+      details: __spreadValues(__spreadValues({}, old_settings), settings),
+      description: `Catering settings for ${this._org.building.id}`
+    }).toPromise();
+    this._change.next(Date.now());
+    return result;
   }
-  getCateringForZone(zone_id) {
-    return __async(this, null, function* () {
-      const menu = (yield hu(zone_id, "catering").toPromise()).details;
-      return menu instanceof Array ? menu : [];
-    });
+  async getCateringForZone(zone_id) {
+    const menu = (await hu(zone_id, "catering").toPromise()).details;
+    return menu instanceof Array ? menu : [];
   }
-  getCateringConfig() {
-    return __async(this, arguments, function* (zone_id = this._org.building.id) {
-      const rules = (yield hu(zone_id, "catering_config").toPromise()).details;
-      return rules instanceof Array ? rules : [];
-    });
+  async getCateringConfig(zone_id = this._org.building.id) {
+    const rules = (await hu(zone_id, "catering_config").toPromise()).details;
+    return rules instanceof Array ? rules : [];
   }
   updateConfig(zone_id, config) {
     return du(zone_id, {
@@ -3550,7 +3523,8 @@ var CateringMenuComponent = _CateringMenuComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CateringMenuComponent, [{
     type: Component,
     args: [{ selector: "catering-menu", template: `
-        <simple-table class="block w-full min-w-[32rem] text-sm"
+        <simple-table
+            class="block w-full min-w-[32rem] text-sm"
             [data]="menu"
             [columns]="[
                 {
@@ -3586,14 +3560,15 @@ var CateringMenuComponent = _CateringMenuComponent;
             [child_template]="child_template"
             [sortable]="true"
             [empty_message]="'CATERING.ITEM_LIST_EMPTY' | translate"
-         />
+        />
         <ng-template #active_template let-row="row">
-            <mat-checkbox class="mx-auto"
+            <mat-checkbox
+                class="mx-auto"
                 [matTooltip]="'CATERING.ORDER_ALLOW' | translate"
                 matTooltipPosition="right"
                 [ngModel]="isEnabled(row)"
                 (ngModelChange)="setEnabled(row, $event)"
-             />
+            />
         </ng-template>
         <ng-template #price_template let-data="data">
             <div
@@ -3727,7 +3702,7 @@ var CateringMenuComponent = _CateringMenuComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CateringMenuComponent, { className: "CateringMenuComponent", filePath: "libs/catering/src/lib/catering-menu.component.ts", lineNumber: 208 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CateringMenuComponent, { className: "CateringMenuComponent", filePath: "libs/catering/src/lib/catering-menu.component.ts", lineNumber: 210 });
 })();
 
 // libs/catering/src/lib/catering-order-item.component.ts
@@ -4196,10 +4171,10 @@ var _CateringOrderListComponent = class _CateringOrderListComponent extends Asyn
     this.caterers = this._orders.caterers;
     this.statuses = [];
     this.show_children = {};
-    this.updateStatus = (order, s) => __async(this, null, function* () {
-      yield this._orders.updateStatus(order, s);
+    this.updateStatus = async (order, s) => {
+      await this._orders.updateStatus(order, s);
       this.timeout("status-change", () => order.status = s);
-    });
+    };
   }
   ngOnInit() {
     this.statuses = statusList();
@@ -5136,8 +5111,8 @@ var _CateringOrderStateService = class _CateringOrderStateService {
     this.filtered_menu = combineLatest([
       this._filters,
       this.available_menu
-    ]).pipe(debounceTime(300), switchMap((_0) => __async(this, [_0], function* ([{ search, tags, categories, zone_id, date, duration, resources, caterer }, l]) {
-      const rules = yield getCateringRulesForZone(zone_id).toPromise();
+    ]).pipe(debounceTime(300), switchMap(async ([{ search, tags, categories, zone_id, date, duration, resources, caterer }, l]) => {
+      const rules = await getCateringRulesForZone(zone_id).toPromise();
       search = search.toLowerCase();
       let list = search ? l.filter((_) => _.name.toLowerCase().includes(search)) : l;
       list = tags.length ? list.filter((_) => tags.every((t) => _.tags.includes(t))) : list;
@@ -5149,7 +5124,7 @@ var _CateringOrderStateService = class _CateringOrderStateService {
         resources
       }));
       return list;
-    })), shareReplay(1));
+    }), shareReplay(1));
   }
   get currency_code() {
     return this._org.currency_code;
@@ -5450,25 +5425,21 @@ var _CateringItemFiltersComponent = class _CateringItemFiltersComponent extends 
     }));
     this._updateDayOptions();
   }
-  toggleCategory(name) {
-    return __async(this, null, function* () {
-      const { categories } = yield nextValueFrom(this.filters);
-      if (categories.includes(name))
-        this.setFilters({
-          categories: categories.filter((_) => _ !== name)
-        });
-      else
-        this.setFilters({ categories: [...categories, name] });
-    });
+  async toggleCategory(name) {
+    const { categories } = await nextValueFrom(this.filters);
+    if (categories.includes(name))
+      this.setFilters({
+        categories: categories.filter((_) => _ !== name)
+      });
+    else
+      this.setFilters({ categories: [...categories, name] });
   }
-  toggleTag(tag) {
-    return __async(this, null, function* () {
-      const { tags } = yield nextValueFrom(this.filters);
-      if (tags.includes(tag))
-        this.setFilters({ tags: tags.filter((_) => _ !== tag) });
-      else
-        this.setFilters({ tags: [...tags, tag] });
-    });
+  async toggleTag(tag) {
+    const { tags } = await nextValueFrom(this.filters);
+    if (tags.includes(tag))
+      this.setFilters({ tags: tags.filter((_) => _ !== tag) });
+    else
+      this.setFilters({ tags: [...tags, tag] });
   }
   _updateDayOptions() {
     const { date, duration } = this._state.getFilters();
@@ -7433,25 +7404,21 @@ var _NewCateringItemFiltersComponent = class _NewCateringItemFiltersComponent ex
     }));
     this._updateDayOptions();
   }
-  toggleCategory(name) {
-    return __async(this, null, function* () {
-      const { categories } = yield nextValueFrom(this.filters);
-      if (categories.includes(name))
-        this.setFilters({
-          categories: categories.filter((_) => _ !== name)
-        });
-      else
-        this.setFilters({ categories: [...categories, name] });
-    });
+  async toggleCategory(name) {
+    const { categories } = await nextValueFrom(this.filters);
+    if (categories.includes(name))
+      this.setFilters({
+        categories: categories.filter((_) => _ !== name)
+      });
+    else
+      this.setFilters({ categories: [...categories, name] });
   }
-  toggleTag(tag) {
-    return __async(this, null, function* () {
-      const { tags } = yield nextValueFrom(this.filters);
-      if (tags.includes(tag))
-        this.setFilters({ tags: tags.filter((_) => _ !== tag) });
-      else
-        this.setFilters({ tags: [...tags, tag] });
-    });
+  async toggleTag(tag) {
+    const { tags } = await nextValueFrom(this.filters);
+    if (tags.includes(tag))
+      this.setFilters({ tags: tags.filter((_) => _ !== tag) });
+    else
+      this.setFilters({ tags: [...tags, tag] });
   }
   _updateDayOptions() {
     const { date, duration } = this._state.getFilters();
@@ -9331,10 +9298,8 @@ var _ChargeCodeListModalComponent = class _ChargeCodeListModalComponent {
     this.charge_codes = signal([]);
     this.loading = signal(false);
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      this.charge_codes.set((yield nextValueFrom(this._state.charge_codes)) || []);
-    });
+  async ngOnInit() {
+    this.charge_codes.set(await nextValueFrom(this._state.charge_codes) || []);
   }
   newCode() {
     this.charge_codes.update((l) => {
@@ -9383,13 +9348,11 @@ code-1,Some Code
 code-2,Another Code`;
     downloadFile("template.csv", template);
   }
-  saveChargeCodes() {
-    return __async(this, null, function* () {
-      this.loading.set(true);
-      const cleaned_codes = this.charge_codes().filter((_) => _ && _.trim());
-      yield this._state.saveSettings({ charge_codes: cleaned_codes });
-      this._dialog_ref.close();
-    });
+  async saveChargeCodes() {
+    this.loading.set(true);
+    const cleaned_codes = this.charge_codes().filter((_) => _ && _.trim());
+    await this._state.saveSettings({ charge_codes: cleaned_codes });
+    this._dialog_ref.close();
   }
 };
 _ChargeCodeListModalComponent.\u0275fac = function ChargeCodeListModalComponent_Factory(__ngFactoryType__) {
@@ -9953,70 +9916,56 @@ var e = class _e {
   static set WORKER_PATH(a) {
     console.warn("Setting QrScanner.WORKER_PATH is not required and not supported anymore. Have a look at the README for new setup instructions.");
   }
-  static hasCamera() {
-    return __async(this, null, function* () {
-      try {
-        return !!(yield _e.listCameras(false)).length;
-      } catch (a) {
-        return false;
-      }
-    });
+  static async hasCamera() {
+    try {
+      return !!(await _e.listCameras(false)).length;
+    } catch (a) {
+      return false;
+    }
   }
-  static listCameras(a = false) {
-    return __async(this, null, function* () {
-      if (!navigator.mediaDevices) return [];
-      let b = () => __async(null, null, function* () {
-        return (yield navigator.mediaDevices.enumerateDevices()).filter((d) => "videoinput" === d.kind);
-      }), c;
-      try {
-        a && (yield b()).every((d) => !d.label) && (c = yield navigator.mediaDevices.getUserMedia({ audio: false, video: true }));
-      } catch (d) {
-      }
-      try {
-        return (yield b()).map((d, f) => ({ id: d.deviceId, label: d.label || (0 === f ? "Default Camera" : `Camera ${f + 1}`) }));
-      } finally {
-        c && (console.warn("Call listCameras after successfully starting a QR scanner to avoid creating a temporary video stream"), _e._stopVideoStream(c));
-      }
-    });
+  static async listCameras(a = false) {
+    if (!navigator.mediaDevices) return [];
+    let b = async () => (await navigator.mediaDevices.enumerateDevices()).filter((d) => "videoinput" === d.kind), c;
+    try {
+      a && (await b()).every((d) => !d.label) && (c = await navigator.mediaDevices.getUserMedia({ audio: false, video: true }));
+    } catch (d) {
+    }
+    try {
+      return (await b()).map((d, f) => ({ id: d.deviceId, label: d.label || (0 === f ? "Default Camera" : `Camera ${f + 1}`) }));
+    } finally {
+      c && (console.warn("Call listCameras after successfully starting a QR scanner to avoid creating a temporary video stream"), _e._stopVideoStream(c));
+    }
   }
-  hasFlash() {
-    return __async(this, null, function* () {
-      let a;
-      try {
-        if (this.$video.srcObject) {
-          if (!(this.$video.srcObject instanceof MediaStream)) return false;
-          a = this.$video.srcObject;
-        } else a = (yield this._getCameraStream()).stream;
-        return "torch" in a.getVideoTracks()[0].getSettings();
-      } catch (b) {
-        return false;
-      } finally {
-        a && a !== this.$video.srcObject && (console.warn("Call hasFlash after successfully starting the scanner to avoid creating a temporary video stream"), _e._stopVideoStream(a));
-      }
-    });
+  async hasFlash() {
+    let a;
+    try {
+      if (this.$video.srcObject) {
+        if (!(this.$video.srcObject instanceof MediaStream)) return false;
+        a = this.$video.srcObject;
+      } else a = (await this._getCameraStream()).stream;
+      return "torch" in a.getVideoTracks()[0].getSettings();
+    } catch (b) {
+      return false;
+    } finally {
+      a && a !== this.$video.srcObject && (console.warn("Call hasFlash after successfully starting the scanner to avoid creating a temporary video stream"), _e._stopVideoStream(a));
+    }
   }
   isFlashOn() {
     return this._flashOn;
   }
-  toggleFlash() {
-    return __async(this, null, function* () {
-      this._flashOn ? yield this.turnFlashOff() : yield this.turnFlashOn();
-    });
+  async toggleFlash() {
+    this._flashOn ? await this.turnFlashOff() : await this.turnFlashOn();
   }
-  turnFlashOn() {
-    return __async(this, null, function* () {
-      if (!this._flashOn && !this._destroyed && (this._flashOn = true, this._active && !this._paused)) try {
-        if (!(yield this.hasFlash())) throw "No flash available";
-        yield this.$video.srcObject.getVideoTracks()[0].applyConstraints({ advanced: [{ torch: true }] });
-      } catch (a) {
-        throw this._flashOn = false, a;
-      }
-    });
+  async turnFlashOn() {
+    if (!this._flashOn && !this._destroyed && (this._flashOn = true, this._active && !this._paused)) try {
+      if (!await this.hasFlash()) throw "No flash available";
+      await this.$video.srcObject.getVideoTracks()[0].applyConstraints({ advanced: [{ torch: true }] });
+    } catch (a) {
+      throw this._flashOn = false, a;
+    }
   }
-  turnFlashOff() {
-    return __async(this, null, function* () {
-      this._flashOn && (this._flashOn = false, yield this._restartVideoStream());
-    });
+  async turnFlashOff() {
+    this._flashOn && (this._flashOn = false, await this._restartVideoStream());
   }
   destroy() {
     this.$video.removeEventListener("loadedmetadata", this._onLoadedMetaData);
@@ -10031,96 +9980,88 @@ var e = class _e {
     this.stop();
     _e._postWorkerMessage(this._qrEnginePromise, "close");
   }
-  start() {
-    return __async(this, null, function* () {
-      if (this._destroyed) throw Error("The QR scanner can not be started as it had been destroyed.");
-      if (!this._active || this._paused) {
-        if ("https:" !== window.location.protocol && console.warn("The camera stream is only accessible if the page is transferred via https."), this._active = true, !document.hidden) if (this._paused = false, this.$video.srcObject) yield this.$video.play();
-        else try {
-          let { stream: a, facingMode: b } = yield this._getCameraStream();
-          !this._active || this._paused ? _e._stopVideoStream(a) : (this._setVideoMirror(b), this.$video.srcObject = a, yield this.$video.play(), this._flashOn && (this._flashOn = false, this.turnFlashOn().catch(() => {
-          })));
-        } catch (a) {
-          if (!this._paused) throw this._active = false, a;
-        }
+  async start() {
+    if (this._destroyed) throw Error("The QR scanner can not be started as it had been destroyed.");
+    if (!this._active || this._paused) {
+      if ("https:" !== window.location.protocol && console.warn("The camera stream is only accessible if the page is transferred via https."), this._active = true, !document.hidden) if (this._paused = false, this.$video.srcObject) await this.$video.play();
+      else try {
+        let { stream: a, facingMode: b } = await this._getCameraStream();
+        !this._active || this._paused ? _e._stopVideoStream(a) : (this._setVideoMirror(b), this.$video.srcObject = a, await this.$video.play(), this._flashOn && (this._flashOn = false, this.turnFlashOn().catch(() => {
+        })));
+      } catch (a) {
+        if (!this._paused) throw this._active = false, a;
       }
-    });
+    }
   }
   stop() {
     this.pause();
     this._active = false;
   }
-  pause(a = false) {
-    return __async(this, null, function* () {
-      this._paused = true;
-      if (!this._active) return true;
-      this.$video.pause();
-      this.$overlay && (this.$overlay.style.display = "none");
-      let b = () => {
-        this.$video.srcObject instanceof MediaStream && (_e._stopVideoStream(this.$video.srcObject), this.$video.srcObject = null);
-      };
-      if (a) return b(), true;
-      yield new Promise((c) => setTimeout(c, 300));
-      if (!this._paused) return false;
-      b();
-      return true;
-    });
+  async pause(a = false) {
+    this._paused = true;
+    if (!this._active) return true;
+    this.$video.pause();
+    this.$overlay && (this.$overlay.style.display = "none");
+    let b = () => {
+      this.$video.srcObject instanceof MediaStream && (_e._stopVideoStream(this.$video.srcObject), this.$video.srcObject = null);
+    };
+    if (a) return b(), true;
+    await new Promise((c) => setTimeout(c, 300));
+    if (!this._paused) return false;
+    b();
+    return true;
   }
-  setCamera(a) {
-    return __async(this, null, function* () {
-      a !== this._preferredCamera && (this._preferredCamera = a, yield this._restartVideoStream());
-    });
+  async setCamera(a) {
+    a !== this._preferredCamera && (this._preferredCamera = a, await this._restartVideoStream());
   }
-  static scanImage(a, b, c, d, f = false, h = false) {
-    return __async(this, null, function* () {
-      let m, n = false;
-      b && ("scanRegion" in b || "qrEngine" in b || "canvas" in b || "disallowCanvasResizing" in b || "alsoTryWithoutScanRegion" in b || "returnDetailedScanResult" in b) ? (m = b.scanRegion, c = b.qrEngine, d = b.canvas, f = b.disallowCanvasResizing || false, h = b.alsoTryWithoutScanRegion || false, n = true) : b || c || d || f || h ? console.warn("You're using a deprecated api for scanImage which will be removed in the future.") : console.warn("Note that the return type of scanImage will change in the future. To already switch to the new api today, you can pass returnDetailedScanResult: true.");
-      b = !!c;
-      try {
-        let p, k;
-        [c, p] = yield Promise.all([c || _e.createQrEngine(), _e._loadImage(a)]);
-        [d, k] = _e._drawToCanvas(p, m, d, f);
-        let q;
-        if (c instanceof Worker) {
-          let g = c;
-          b || _e._postWorkerMessageSync(g, "inversionMode", "both");
-          q = yield new Promise((l, v) => {
-            let w, u, r, y = -1;
-            u = (t) => {
-              t.data.id === y && (g.removeEventListener("message", u), g.removeEventListener("error", r), clearTimeout(w), null !== t.data.data ? l({ data: t.data.data, cornerPoints: _e._convertPoints(t.data.cornerPoints, m) }) : v(_e.NO_QR_CODE_FOUND));
-            };
-            r = (t) => {
-              g.removeEventListener("message", u);
-              g.removeEventListener("error", r);
-              clearTimeout(w);
-              v("Scanner error: " + (t ? t.message || t : "Unknown Error"));
-            };
-            g.addEventListener("message", u);
-            g.addEventListener("error", r);
-            w = setTimeout(() => r("timeout"), 1e4);
-            let x = k.getImageData(0, 0, d.width, d.height);
-            y = _e._postWorkerMessageSync(g, "decode", x, [x.data.buffer]);
-          });
-        } else q = yield Promise.race([new Promise((g, l) => window.setTimeout(() => l("Scanner error: timeout"), 1e4)), (() => __async(null, null, function* () {
-          try {
-            var [g] = yield c.detect(d);
-            if (!g) throw _e.NO_QR_CODE_FOUND;
-            return { data: g.rawValue, cornerPoints: _e._convertPoints(g.cornerPoints, m) };
-          } catch (l) {
-            g = l.message || l;
-            if (/not implemented|service unavailable/.test(g)) return _e._disableBarcodeDetector = true, _e.scanImage(a, { scanRegion: m, canvas: d, disallowCanvasResizing: f, alsoTryWithoutScanRegion: h });
-            throw `Scanner error: ${g}`;
-          }
-        }))()]);
-        return n ? q : q.data;
-      } catch (p) {
-        if (!m || !h) throw p;
-        let k = yield _e.scanImage(a, { qrEngine: c, canvas: d, disallowCanvasResizing: f });
-        return n ? k : k.data;
-      } finally {
-        b || _e._postWorkerMessage(c, "close");
-      }
-    });
+  static async scanImage(a, b, c, d, f = false, h = false) {
+    let m, n = false;
+    b && ("scanRegion" in b || "qrEngine" in b || "canvas" in b || "disallowCanvasResizing" in b || "alsoTryWithoutScanRegion" in b || "returnDetailedScanResult" in b) ? (m = b.scanRegion, c = b.qrEngine, d = b.canvas, f = b.disallowCanvasResizing || false, h = b.alsoTryWithoutScanRegion || false, n = true) : b || c || d || f || h ? console.warn("You're using a deprecated api for scanImage which will be removed in the future.") : console.warn("Note that the return type of scanImage will change in the future. To already switch to the new api today, you can pass returnDetailedScanResult: true.");
+    b = !!c;
+    try {
+      let p, k;
+      [c, p] = await Promise.all([c || _e.createQrEngine(), _e._loadImage(a)]);
+      [d, k] = _e._drawToCanvas(p, m, d, f);
+      let q;
+      if (c instanceof Worker) {
+        let g = c;
+        b || _e._postWorkerMessageSync(g, "inversionMode", "both");
+        q = await new Promise((l, v) => {
+          let w, u, r, y = -1;
+          u = (t) => {
+            t.data.id === y && (g.removeEventListener("message", u), g.removeEventListener("error", r), clearTimeout(w), null !== t.data.data ? l({ data: t.data.data, cornerPoints: _e._convertPoints(t.data.cornerPoints, m) }) : v(_e.NO_QR_CODE_FOUND));
+          };
+          r = (t) => {
+            g.removeEventListener("message", u);
+            g.removeEventListener("error", r);
+            clearTimeout(w);
+            v("Scanner error: " + (t ? t.message || t : "Unknown Error"));
+          };
+          g.addEventListener("message", u);
+          g.addEventListener("error", r);
+          w = setTimeout(() => r("timeout"), 1e4);
+          let x = k.getImageData(0, 0, d.width, d.height);
+          y = _e._postWorkerMessageSync(g, "decode", x, [x.data.buffer]);
+        });
+      } else q = await Promise.race([new Promise((g, l) => window.setTimeout(() => l("Scanner error: timeout"), 1e4)), (async () => {
+        try {
+          var [g] = await c.detect(d);
+          if (!g) throw _e.NO_QR_CODE_FOUND;
+          return { data: g.rawValue, cornerPoints: _e._convertPoints(g.cornerPoints, m) };
+        } catch (l) {
+          g = l.message || l;
+          if (/not implemented|service unavailable/.test(g)) return _e._disableBarcodeDetector = true, _e.scanImage(a, { scanRegion: m, canvas: d, disallowCanvasResizing: f, alsoTryWithoutScanRegion: h });
+          throw `Scanner error: ${g}`;
+        }
+      })()]);
+      return n ? q : q.data;
+    } catch (p) {
+      if (!m || !h) throw p;
+      let k = await _e.scanImage(a, { qrEngine: c, canvas: d, disallowCanvasResizing: f });
+      return n ? k : k.data;
+    } finally {
+      b || _e._postWorkerMessage(c, "close");
+    }
   }
   setGrayscaleWeights(a, b, c, d = true) {
     _e._postWorkerMessage(this._qrEnginePromise, "grayscaleWeights", {
@@ -10133,14 +10074,12 @@ var e = class _e {
   setInversionMode(a) {
     _e._postWorkerMessage(this._qrEnginePromise, "inversionMode", a);
   }
-  static createQrEngine(a) {
-    return __async(this, null, function* () {
-      a && console.warn("Specifying a worker path is not required and not supported anymore.");
-      a = () => import("./qr-scanner-worker.min-PJS7GZMQ.js").then((c) => c.createWorker());
-      if (!(!_e._disableBarcodeDetector && "BarcodeDetector" in window && BarcodeDetector.getSupportedFormats && (yield BarcodeDetector.getSupportedFormats()).includes("qr_code"))) return a();
-      let b = navigator.userAgentData;
-      return b && b.brands.some(({ brand: c }) => /Chromium/i.test(c)) && /mac ?OS/i.test(b.platform) && (yield b.getHighEntropyValues(["architecture", "platformVersion"]).then(({ architecture: c, platformVersion: d }) => /arm/i.test(c || "arm") && 13 <= parseInt(d || "13")).catch(() => true)) ? a() : new BarcodeDetector({ formats: ["qr_code"] });
-    });
+  static async createQrEngine(a) {
+    a && console.warn("Specifying a worker path is not required and not supported anymore.");
+    a = () => import("./qr-scanner-worker.min-MMGMILTK.js").then((c) => c.createWorker());
+    if (!(!_e._disableBarcodeDetector && "BarcodeDetector" in window && BarcodeDetector.getSupportedFormats && (await BarcodeDetector.getSupportedFormats()).includes("qr_code"))) return a();
+    let b = navigator.userAgentData;
+    return b && b.brands.some(({ brand: c }) => /Chromium/i.test(c)) && /mac ?OS/i.test(b.platform) && await b.getHighEntropyValues(["architecture", "platformVersion"]).then(({ architecture: c, platformVersion: d }) => /arm/i.test(c || "arm") && 13 <= parseInt(d || "13")).catch(() => true) ? a() : new BarcodeDetector({ formats: ["qr_code"] });
   }
   _onPlay() {
     this._scanRegion = this._calculateScanRegion(this.$video);
@@ -10201,46 +10140,42 @@ var e = class _e {
     return a;
   }
   _scanFrame() {
-    !this._active || this.$video.paused || this.$video.ended || ("requestVideoFrameCallback" in this.$video ? this.$video.requestVideoFrameCallback.bind(this.$video) : requestAnimationFrame)(() => __async(this, null, function* () {
+    !this._active || this.$video.paused || this.$video.ended || ("requestVideoFrameCallback" in this.$video ? this.$video.requestVideoFrameCallback.bind(this.$video) : requestAnimationFrame)(async () => {
       if (!(1 >= this.$video.readyState)) {
         var a = Date.now() - this._lastScanTimestamp, b = 1e3 / this._maxScansPerSecond;
-        a < b && (yield new Promise((d) => setTimeout(d, b - a)));
+        a < b && await new Promise((d) => setTimeout(d, b - a));
         this._lastScanTimestamp = Date.now();
         try {
-          var c = yield _e.scanImage(this.$video, { scanRegion: this._scanRegion, qrEngine: this._qrEnginePromise, canvas: this.$canvas });
+          var c = await _e.scanImage(this.$video, { scanRegion: this._scanRegion, qrEngine: this._qrEnginePromise, canvas: this.$canvas });
         } catch (d) {
           if (!this._active) return;
           this._onDecodeError(d);
         }
-        !_e._disableBarcodeDetector || (yield this._qrEnginePromise) instanceof Worker || (this._qrEnginePromise = _e.createQrEngine());
+        !_e._disableBarcodeDetector || await this._qrEnginePromise instanceof Worker || (this._qrEnginePromise = _e.createQrEngine());
         c ? (this._onDecode ? this._onDecode(c) : this._legacyOnDecode && this._legacyOnDecode(c.data), this.$codeOutlineHighlight && (clearTimeout(this._codeOutlineHighlightRemovalTimeout), this._codeOutlineHighlightRemovalTimeout = void 0, this.$codeOutlineHighlight.setAttribute("viewBox", `${this._scanRegion.x || 0} ${this._scanRegion.y || 0} ${this._scanRegion.width || this.$video.videoWidth} ${this._scanRegion.height || this.$video.videoHeight}`), this.$codeOutlineHighlight.firstElementChild.setAttribute(
           "points",
           c.cornerPoints.map(({ x: d, y: f }) => `${d},${f}`).join(" ")
         ), this.$codeOutlineHighlight.style.display = "")) : this.$codeOutlineHighlight && !this._codeOutlineHighlightRemovalTimeout && (this._codeOutlineHighlightRemovalTimeout = setTimeout(() => this.$codeOutlineHighlight.style.display = "none", 100));
       }
       this._scanFrame();
-    }));
+    });
   }
   _onDecodeError(a) {
     a !== _e.NO_QR_CODE_FOUND && console.log(a);
   }
-  _getCameraStream() {
-    return __async(this, null, function* () {
-      if (!navigator.mediaDevices) throw "Camera not found.";
-      let a = /^(environment|user)$/.test(this._preferredCamera) ? "facingMode" : "deviceId", b = [{ width: { min: 1024 } }, { width: { min: 768 } }, {}], c = b.map((d) => Object.assign({}, d, { [a]: { exact: this._preferredCamera } }));
-      for (let d of [...c, ...b]) try {
-        let f = yield navigator.mediaDevices.getUserMedia({ video: d, audio: false }), h = this._getFacingMode(f) || (d.facingMode ? this._preferredCamera : "environment" === this._preferredCamera ? "user" : "environment");
-        return { stream: f, facingMode: h };
-      } catch (f) {
-      }
-      throw "Camera not found.";
-    });
+  async _getCameraStream() {
+    if (!navigator.mediaDevices) throw "Camera not found.";
+    let a = /^(environment|user)$/.test(this._preferredCamera) ? "facingMode" : "deviceId", b = [{ width: { min: 1024 } }, { width: { min: 768 } }, {}], c = b.map((d) => Object.assign({}, d, { [a]: { exact: this._preferredCamera } }));
+    for (let d of [...c, ...b]) try {
+      let f = await navigator.mediaDevices.getUserMedia({ video: d, audio: false }), h = this._getFacingMode(f) || (d.facingMode ? this._preferredCamera : "environment" === this._preferredCamera ? "user" : "environment");
+      return { stream: f, facingMode: h };
+    } catch (f) {
+    }
+    throw "Camera not found.";
   }
-  _restartVideoStream() {
-    return __async(this, null, function* () {
-      let a = this._paused;
-      (yield this.pause(true)) && !a && this._active && (yield this.start());
-    });
+  async _restartVideoStream() {
+    let a = this._paused;
+    await this.pause(true) && !a && this._active && await this.start();
   }
   static _stopVideoStream(a) {
     for (let b of a.getTracks()) b.stop(), a.removeTrack(b);
@@ -10260,38 +10195,32 @@ var e = class _e {
     b.drawImage(a, f, h, m, n, 0, 0, c.width, c.height);
     return [c, b];
   }
-  static _loadImage(a) {
-    return __async(this, null, function* () {
-      if (a instanceof Image) return yield _e._awaitImageLoad(a), a;
-      if (a instanceof HTMLVideoElement || a instanceof HTMLCanvasElement || a instanceof SVGImageElement || "OffscreenCanvas" in window && a instanceof OffscreenCanvas || "ImageBitmap" in window && a instanceof ImageBitmap) return a;
-      if (a instanceof File || a instanceof Blob || a instanceof URL || "string" === typeof a) {
-        let b = new Image();
-        b.src = a instanceof File || a instanceof Blob ? URL.createObjectURL(a) : a.toString();
-        try {
-          return yield _e._awaitImageLoad(b), b;
-        } finally {
-          (a instanceof File || a instanceof Blob) && URL.revokeObjectURL(b.src);
-        }
-      } else throw "Unsupported image type.";
+  static async _loadImage(a) {
+    if (a instanceof Image) return await _e._awaitImageLoad(a), a;
+    if (a instanceof HTMLVideoElement || a instanceof HTMLCanvasElement || a instanceof SVGImageElement || "OffscreenCanvas" in window && a instanceof OffscreenCanvas || "ImageBitmap" in window && a instanceof ImageBitmap) return a;
+    if (a instanceof File || a instanceof Blob || a instanceof URL || "string" === typeof a) {
+      let b = new Image();
+      b.src = a instanceof File || a instanceof Blob ? URL.createObjectURL(a) : a.toString();
+      try {
+        return await _e._awaitImageLoad(b), b;
+      } finally {
+        (a instanceof File || a instanceof Blob) && URL.revokeObjectURL(b.src);
+      }
+    } else throw "Unsupported image type.";
+  }
+  static async _awaitImageLoad(a) {
+    a.complete && 0 !== a.naturalWidth || await new Promise((b, c) => {
+      let d = (f) => {
+        a.removeEventListener("load", d);
+        a.removeEventListener("error", d);
+        f instanceof ErrorEvent ? c("Image load error") : b();
+      };
+      a.addEventListener("load", d);
+      a.addEventListener("error", d);
     });
   }
-  static _awaitImageLoad(a) {
-    return __async(this, null, function* () {
-      a.complete && 0 !== a.naturalWidth || (yield new Promise((b, c) => {
-        let d = (f) => {
-          a.removeEventListener("load", d);
-          a.removeEventListener("error", d);
-          f instanceof ErrorEvent ? c("Image load error") : b();
-        };
-        a.addEventListener("load", d);
-        a.addEventListener("error", d);
-      }));
-    });
-  }
-  static _postWorkerMessage(a, b, c, d) {
-    return __async(this, null, function* () {
-      return _e._postWorkerMessageSync(yield a, b, c, d);
-    });
+  static async _postWorkerMessage(a, b, c, d) {
+    return _e._postWorkerMessageSync(await a, b, c, d);
   }
   static _postWorkerMessageSync(a, b, c, d) {
     if (!(a instanceof Worker)) return -1;
@@ -10413,16 +10342,14 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
     }
     this._qr_scanner?.stop();
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield firstTruthyValueFrom(this._org.initialised);
-      this.subscription("route.query", this._route.queryParamMap.subscribe((params) => {
-        if (params.has("asset_id"))
-          this._checkinBooking(params.get("asset_id"));
-        if (params.has("space_id"))
-          this._checkinEvent(params.get("space_id"), params.get("email"));
-      }));
-    });
+  async ngOnInit() {
+    await firstTruthyValueFrom(this._org.initialised);
+    this.subscription("route.query", this._route.queryParamMap.subscribe((params) => {
+      if (params.has("asset_id"))
+        this._checkinBooking(params.get("asset_id"));
+      if (params.has("space_id"))
+        this._checkinEvent(params.get("space_id"), params.get("email"));
+    }));
   }
   ngAfterViewInit() {
     if (!navigator.mediaDevices?.getUserMedia || this.loading)
@@ -10444,84 +10371,80 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
       this._router.navigate([url.split("/#")[1].split("?")[0]], params);
     }
   }
-  _checkinBooking(asset_id, type = "desk") {
-    return __async(this, null, function* () {
-      this.loading = true;
-      let bookings = yield queryBookings({
+  async _checkinBooking(asset_id, type = "desk") {
+    this.loading = true;
+    let bookings = await queryBookings({
+      period_start: getUnixTime(Date.now()),
+      period_end: getUnixTime(addMinutes(Date.now(), 5)),
+      type,
+      email: currentUser().email
+    }).toPromise().catch((_) => []);
+    const item = bookings.find((_) => _.asset_id === asset_id);
+    if (item) {
+      await checkinBooking(item.id, true).toPromise().catch((_) => {
+        notifyError(`Unable to checkin booking with resource "${asset_id}"`);
+        this.loading = false;
+        throw _;
+      });
+      this._router.navigate(["/book", "code", "success"]);
+    } else {
+      bookings = await queryBookings({
+        period_start: getUnixTime(Date.now()),
+        period_end: getUnixTime(endOfDay(Date.now())),
+        type
+      }).toPromise().catch((_) => []);
+      let item2 = bookings.find((_) => _.asset_id === asset_id);
+      if (item2) {
+        this._router.navigate(["/book", "code", "error"], {
+          queryParams: { type: "not_started", asset_id }
+        });
+        return;
+      }
+      bookings = await queryBookings({
         period_start: getUnixTime(Date.now()),
         period_end: getUnixTime(addMinutes(Date.now(), 5)),
-        type,
-        email: currentUser().email
+        type
       }).toPromise().catch((_) => []);
-      const item = bookings.find((_) => _.asset_id === asset_id);
-      if (item) {
-        yield checkinBooking(item.id, true).toPromise().catch((_) => {
-          notifyError(`Unable to checkin booking with resource "${asset_id}"`);
-          this.loading = false;
-          throw _;
-        });
-        this._router.navigate(["/book", "code", "success"]);
-      } else {
-        bookings = yield queryBookings({
-          period_start: getUnixTime(Date.now()),
-          period_end: getUnixTime(endOfDay(Date.now())),
-          type
-        }).toPromise().catch((_) => []);
-        let item2 = bookings.find((_) => _.asset_id === asset_id);
-        if (item2) {
-          this._router.navigate(["/book", "code", "error"], {
-            queryParams: { type: "not_started", asset_id }
-          });
-          return;
-        }
-        bookings = yield queryBookings({
-          period_start: getUnixTime(Date.now()),
-          period_end: getUnixTime(addMinutes(Date.now(), 5)),
-          type
-        }).toPromise().catch((_) => []);
-        item2 = bookings.find((_) => _.asset_id === asset_id);
-        if (item2) {
-          this._router.navigate(["/book", "code", "error"], {
-            queryParams: { type: "wrong_resource", asset_id }
-          });
-          return;
-        }
+      item2 = bookings.find((_) => _.asset_id === asset_id);
+      if (item2) {
         this._router.navigate(["/book", "code", "error"], {
-          queryParams: { type: "no_booking", asset_id }
+          queryParams: { type: "wrong_resource", asset_id }
         });
-        this._booking_form.newForm(type, new Booking({ asset_id, type }));
-        this._booking_form.setOptions({ type });
+        return;
       }
-      this.loading = false;
-    });
+      this._router.navigate(["/book", "code", "error"], {
+        queryParams: { type: "no_booking", asset_id }
+      });
+      this._booking_form.newForm(type, new Booking({ asset_id, type }));
+      this._booking_form.setOptions({ type });
+    }
+    this.loading = false;
   }
-  _checkinEvent(space_id, email) {
-    return __async(this, null, function* () {
-      if (!email)
-        email = currentUser().email;
-      this.loading = true;
-      const bookings = yield queryEvents({
-        period_start: getUnixTime(Date.now()),
-        period_end: getUnixTime(Date.now() + 5 * 60 * 1e3)
-      }).toPromise().catch((_) => []);
-      const item = bookings.find((_) => _.resources.find((s) => s.id === space_id || s.email === space_id));
-      if (item) {
-        yield checkinEventGuest(item.id, email, true).toPromise().catch((_) => {
-          notifyError(`Unable to checkin event with resource "${space_id}"`);
-          this.loading = false;
-          throw _;
-        });
-        this._router.navigate(["/book", "code", "success"]);
+  async _checkinEvent(space_id, email) {
+    if (!email)
+      email = currentUser().email;
+    this.loading = true;
+    const bookings = await queryEvents({
+      period_start: getUnixTime(Date.now()),
+      period_end: getUnixTime(Date.now() + 5 * 60 * 1e3)
+    }).toPromise().catch((_) => []);
+    const item = bookings.find((_) => _.resources.find((s) => s.id === space_id || s.email === space_id));
+    if (item) {
+      await checkinEventGuest(item.id, email, true).toPromise().catch((_) => {
+        notifyError(`Unable to checkin event with resource "${space_id}"`);
         this.loading = false;
-      } else {
-        const space = yield cc(space_id).toPromise();
-        if (space) {
-          this._event_form.newForm(new CalendarEvent({ system: space }));
-        }
-        this._router.navigate(["/book", "meeting"]);
-      }
+        throw _;
+      });
+      this._router.navigate(["/book", "code", "success"]);
       this.loading = false;
-    });
+    } else {
+      const space = await cc(space_id).toPromise();
+      if (space) {
+        this._event_form.newForm(new CalendarEvent({ system: space }));
+      }
+      this._router.navigate(["/book", "meeting"]);
+    }
+    this.loading = false;
   }
 };
 _BookCodeFlowComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -10881,18 +10804,18 @@ var _NewDeskFlowConfirmComponent = class _NewDeskFlowConfirmComponent extends As
     this._date = new DatePipe("en");
     this.loading = this._state.loading;
     this.is_group = this._state.options.pipe(map((_) => _.group));
-    this.postForm = () => __async(this, null, function* () {
+    this.postForm = async () => {
       try {
-        if ((yield nextValueFrom(this._state.options))?.group) {
-          yield this._state.postFormForGroup();
+        if ((await nextValueFrom(this._state.options))?.group) {
+          await this._state.postFormForGroup();
         } else {
-          yield this._state.postForm();
+          await this._state.postForm();
         }
         this.dismiss(true);
       } catch (e2) {
         notifyError(typeof e2 === "string" ? e2 : i18n(`BOOKINGS.DESK_AVAILABLE_ERROR`));
       }
-    });
+    };
     this.dismiss = (e2) => this._sheet_ref?.dismiss(e2);
   }
   err_tooltip(request) {
@@ -10953,12 +10876,10 @@ var _NewDeskFlowConfirmComponent = class _NewDeskFlowConfirmComponent extends As
   get formatted_recurrence() {
     return formatRecurrence(fromBookingRecurrence(this.booking));
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      const resources = yield nextValueFrom(this._state.resources);
-      const asset = this.booking.booking_asset;
-      this.booking_asset = resources.find((_) => _.id == asset.id);
-    });
+  async ngOnInit() {
+    const resources = await nextValueFrom(this._state.resources);
+    const asset = this.booking.booking_asset;
+    this.booking_asset = resources.find((_) => _.id == asset.id);
   }
 };
 _NewDeskFlowConfirmComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -11716,7 +11637,10 @@ var NewDeskFormDetailsComponent = _NewDeskFormDetailsComponent;
         able to check-in.
         </div> -->
         @if (form()) {
-            <div class="space-y-2 divide-y divide-base-200" [formGroup]="form()">
+            <div
+                class="space-y-2 divide-y divide-base-200"
+                [formGroup]="form()"
+            >
                 @if (allow_groups) {
                     <section class="flex items-center">
                         <button
@@ -11879,7 +11803,9 @@ var NewDeskFormDetailsComponent = _NewDeskFormDetailsComponent;
                         <div class="flex items-center space-x-2">
                             <div class="w-1/3 flex-1">
                                 <mat-checkbox
-                                    [ngModel]="!!form().value.secondary_resource"
+                                    [ngModel]="
+                                        !!form().value.secondary_resource
+                                    "
                                     (ngModelChange)="
                                         form().patchValue({
                                             secondary_resource: $event
@@ -11975,7 +11901,7 @@ var NewDeskFormDetailsComponent = _NewDeskFormDetailsComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewDeskFormDetailsComponent, { className: "NewDeskFormDetailsComponent", filePath: "apps/workplace/src/app/book/desk-flow/desk-form-details.component.ts", lineNumber: 280 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(NewDeskFormDetailsComponent, { className: "NewDeskFormDetailsComponent", filePath: "apps/workplace/src/app/book/desk-flow/desk-form-details.component.ts", lineNumber: 292 });
 })();
 
 // apps/workplace/src/app/book/desk-flow/desk-flow-form.component.ts
@@ -12014,25 +11940,23 @@ var _NewDeskFlowFormComponent = class _NewDeskFlowFormComponent {
   get form() {
     return this._state.form;
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _));
-      yield this._org.active_levels.pipe(first((_) => _?.length > 0));
-      this._state.setOptions({ type: "desk" });
-      this.level = this._org.building?.id;
-      this.levels = [
-        { id: this._org.building?.id, name: "Any Level" },
-        ...this._org.levelsForBuilding(this._org.building)
-      ];
-      if (isBefore(this.form.value.date, Date.now())) {
-        this.form.patchValue({ date: startOfMinute(Date.now()).valueOf() });
-      }
-      if (!this.form.value.id) {
-        this.form.patchValue({
-          duration: this._settings.get("app.desks.default_duration") || 60
-        });
-      }
-    });
+  async ngOnInit() {
+    await this._org.initialised.pipe(first((_) => _));
+    await this._org.active_levels.pipe(first((_) => _?.length > 0));
+    this._state.setOptions({ type: "desk" });
+    this.level = this._org.building?.id;
+    this.levels = [
+      { id: this._org.building?.id, name: "Any Level" },
+      ...this._org.levelsForBuilding(this._org.building)
+    ];
+    if (isBefore(this.form.value.date, Date.now())) {
+      this.form.patchValue({ date: startOfMinute(Date.now()).valueOf() });
+    }
+    if (!this.form.value.id) {
+      this.form.patchValue({
+        duration: this._settings.get("app.desks.default_duration") || 60
+      });
+    }
   }
 };
 _NewDeskFlowFormComponent.\u0275fac = function NewDeskFlowFormComponent_Factory(__ngFactoryType__) {
@@ -12506,42 +12430,40 @@ var _NewDeskFlowComponent = class _NewDeskFlowComponent extends AsyncHandler {
   get last_success() {
     return this._state.last_success;
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield firstTruthyValueFrom(this._org.initialised);
-      yield lastValueFrom(timer(300));
-      this._state.loadForm();
-      this._state.setOptions({ type: "desk" });
-      const { id, booking_type } = this._state.form.value;
-      if (!id || booking_type !== "desk")
-        this._state.newForm("desk");
-      this._state.form.patchValue({ booking_type: "desk" });
-      this.subscription("route.params", this._route.paramMap.subscribe((param) => {
-        if (param.has("step"))
-          this._state.setView(param.get("step"));
-      }));
-      this.subscription("route.query", this._route.queryParamMap.subscribe((params) => __async(this, null, function* () {
-        if (params.has("success")) {
-          this._state.setView(params.get("success"));
+  async ngOnInit() {
+    await firstTruthyValueFrom(this._org.initialised);
+    await lastValueFrom(timer(300));
+    this._state.loadForm();
+    this._state.setOptions({ type: "desk" });
+    const { id, booking_type } = this._state.form.value;
+    if (!id || booking_type !== "desk")
+      this._state.newForm("desk");
+    this._state.form.patchValue({ booking_type: "desk" });
+    this.subscription("route.params", this._route.paramMap.subscribe((param) => {
+      if (param.has("step"))
+        this._state.setView(param.get("step"));
+    }));
+    this.subscription("route.query", this._route.queryParamMap.subscribe(async (params) => {
+      if (params.has("success")) {
+        this._state.setView(params.get("success"));
+      }
+      if (params.has("asset_id")) {
+        const id2 = params.get("asset_id");
+        const resources = await nextValueFrom(this._state.resources);
+        const asset = resources.find((_) => _.id === id2);
+        if (!asset) {
+          return notifyInfo("Unable to find desk with given asset ID.");
         }
-        if (params.has("asset_id")) {
-          const id2 = params.get("asset_id");
-          const resources = yield nextValueFrom(this._state.resources);
-          const asset = resources.find((_) => _.id === id2);
-          if (!asset) {
-            return notifyInfo("Unable to find desk with given asset ID.");
-          }
-          this._state.form.patchValue({
-            resources: [
-              new Desk({
-                id: asset.id,
-                name: asset.name || asset.id
-              })
-            ]
-          });
-        }
-      })));
-    });
+        this._state.form.patchValue({
+          resources: [
+            new Desk({
+              id: asset.id,
+              name: asset.name || asset.id
+            })
+          ]
+        });
+      }
+    }));
   }
 };
 _NewDeskFlowComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -12791,18 +12713,18 @@ var _BookLockerFlowConfirmComponent = class _BookLockerFlowConfirmComponent exte
     this._settings = inject(SettingsService);
     this.show_close = model(false);
     this.loading = this._state.loading;
-    this.postForm = () => __async(this, null, function* () {
+    this.postForm = async () => {
       try {
-        if ((yield nextValueFrom(this._state.options))?.group) {
-          yield this._state.postFormForGroup();
+        if ((await nextValueFrom(this._state.options))?.group) {
+          await this._state.postFormForGroup();
         } else {
-          yield this._state.postForm();
+          await this._state.postForm();
         }
         this.dismiss(true);
       } catch (e2) {
         notifyError(e2);
       }
-    });
+    };
     this.dismiss = (e2) => this._sheet_ref?.dismiss(e2);
   }
   get time_format() {
@@ -13204,24 +13126,22 @@ var _LockerFormDetailsComponent = class _LockerFormDetailsComponent extends Asyn
   get timezone() {
     return this._settings.get("app.bookings.use_building_timezone") || this._settings.get("app.lockers.use_building_timezone") ? this._org.building.timezone : "";
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => !!_)).toPromise();
-      this._state.form.patchValue({
-        all_day: !this.allow_time_changes || this._state.form.value.all_day
-      });
-      this.subscription("bld", combineLatest([
-        this._org.active_building,
-        this._dialog.afterAllClosed,
-        this.form().controls.duration.valueChanges
-      ]).subscribe(() => {
-        this.timeout("disable", () => {
-          if (this.disable_date) {
-            this.form().controls.date.disable();
-          }
-        }, 50);
-      }));
+  async ngOnInit() {
+    await this._org.initialised.pipe(first((_) => !!_)).toPromise();
+    this._state.form.patchValue({
+      all_day: !this.allow_time_changes || this._state.form.value.all_day
     });
+    this.subscription("bld", combineLatest([
+      this._org.active_building,
+      this._dialog.afterAllClosed,
+      this.form().controls.duration.valueChanges
+    ]).subscribe(() => {
+      this.timeout("disable", () => {
+        if (this.disable_date) {
+          this.form().controls.date.disable();
+        }
+      }, 50);
+    }));
   }
   ngOnChanges(changes) {
     const form = this.form();
@@ -13402,7 +13322,7 @@ var LockerFormDetailsComponent = _LockerFormDetailsComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerFormDetailsComponent, { className: "LockerFormDetailsComponent", filePath: "apps/workplace/src/app/book/locker-flow/locker-form-details.component.ts", lineNumber: 139 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LockerFormDetailsComponent, { className: "LockerFormDetailsComponent", filePath: "apps/workplace/src/app/book/locker-flow/locker-form-details.component.ts", lineNumber: 147 });
 })();
 
 // apps/workplace/src/app/book/locker-flow/locker-flow-form.component.ts
@@ -13436,20 +13356,18 @@ var _BookLockerFlowFormComponent = class _BookLockerFlowFormComponent {
   get form() {
     return this._state.form;
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield firstTruthyValueFrom(this._org.initialised);
-      yield nextValueFrom(this._org.active_levels.pipe(first((_) => _?.length > 0)));
-      this._state.setOptions({ type: "locker" });
-      this.level = this._org.building?.id;
-      this.levels = [
-        { id: this._org.building?.id, name: "Any Level" },
-        ...this._org.levelsForBuilding(this._org.building)
-      ];
-      if (isBefore(this.form.value.date, Date.now())) {
-        this.form.patchValue({ date: startOfMinute(Date.now()).valueOf() });
-      }
-    });
+  async ngOnInit() {
+    await firstTruthyValueFrom(this._org.initialised);
+    await nextValueFrom(this._org.active_levels.pipe(first((_) => _?.length > 0)));
+    this._state.setOptions({ type: "locker" });
+    this.level = this._org.building?.id;
+    this.levels = [
+      { id: this._org.building?.id, name: "Any Level" },
+      ...this._org.levelsForBuilding(this._org.building)
+    ];
+    if (isBefore(this.form.value.date, Date.now())) {
+      this.form.patchValue({ date: startOfMinute(Date.now()).valueOf() });
+    }
   }
 };
 _BookLockerFlowFormComponent.\u0275fac = function BookLockerFlowFormComponent_Factory(__ngFactoryType__) {
@@ -14052,9 +13970,9 @@ var _MeetingFlowConfirmComponent = class _MeetingFlowConfirmComponent extends As
     this.show_close = input(false);
     this._date = new DatePipe("en");
     this.loading = this._event_form.loading$;
-    this.postForm = () => __async(this, null, function* () {
+    this.postForm = async () => {
       if (!this.space) {
-        const result = yield openConfirmModal({
+        const result = await openConfirmModal({
           title: i18n("APP.WORKPLACE.MEETING_WITHOUT_ROOM_TITLE"),
           content: i18n("APP.WORKPLACE.MEETING_WITHOUT_ROOM_MSG"),
           icon: { content: "event_available" }
@@ -14062,12 +13980,12 @@ var _MeetingFlowConfirmComponent = class _MeetingFlowConfirmComponent extends As
         if (result.reason !== "done")
           return;
       }
-      yield this._event_form.postForm().catch((_) => {
+      await this._event_form.postForm().catch((_) => {
         notifyError(_);
         throw _;
       });
       this.dismiss(true);
-    });
+    };
     this.cancelPost = () => this._event_form.cancelPostForm();
     this.dismiss = (e2) => this._sheet_ref?.dismiss(e2);
     this._space = this.event.resources[0];
@@ -14124,11 +14042,9 @@ var _MeetingFlowConfirmComponent = class _MeetingFlowConfirmComponent extends As
     const building = this._org.buildings.find((_) => this.space.zones.includes(_.id));
     return building?.address || building?.display_name || building?.name;
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      console.log("Event:", this.event.resources[0]);
-      this._space = (yield this._space_pipe.transform(this.event.resources[0]?.email)) || this._space;
-    });
+  async ngOnInit() {
+    console.log("Event:", this.event.resources[0]);
+    this._space = await this._space_pipe.transform(this.event.resources[0]?.email) || this._space;
   }
   optionList(item) {
     return item.option_list?.map((_) => _.name).join("\n");
@@ -14788,9 +14704,9 @@ var _MeetingFlowConfirmModalComponent = class _MeetingFlowConfirmModalComponent 
       this._event_form.loading$,
       this._loading
     ]).pipe(map(([a, b]) => a || b));
-    this.postForm = () => __async(this, null, function* () {
+    this.postForm = async () => {
       if (!this.space) {
-        const result = yield openConfirmModal({
+        const result = await openConfirmModal({
           title: i18n("APP.WORKPLACE.MEETING_WITHOUT_ROOM_TITLE"),
           content: i18n("APP.WORKPLACE.MEETING_WITHOUT_ROOM_MSG"),
           icon: { content: "event_available" }
@@ -14799,13 +14715,13 @@ var _MeetingFlowConfirmModalComponent = class _MeetingFlowConfirmModalComponent 
           return;
         result.close();
       }
-      const resp = yield this._event_form.postForm().catch((_) => {
+      const resp = await this._event_form.postForm().catch((_) => {
         notifyError(_);
         return false;
       });
       if (resp)
         this.dismiss(true);
-    });
+    };
     this.cancelPost = () => this._event_form.cancelPostForm();
     this.dismiss = (e2) => this._dialog_ref?.close(e2);
     this._space = this.event.resources[0];
@@ -14877,39 +14793,37 @@ var _MeetingFlowConfirmModalComponent = class _MeetingFlowConfirmModalComponent 
       start: this.event.date || this.event.recurrence.start
     })));
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      const date = this.event.all_day ? startOfDay(this.event.date).valueOf() : this.event.date;
-      this.catering_orders = this.event.catering?.map((order) => new CateringOrder(__spreadProps(__spreadValues({}, order), {
-        event: __spreadProps(__spreadValues({}, this.event), {
-          date,
-          date_end: addMinutes(date, this.event.duration).valueOf()
-        })
-      })));
-      this.assets = this.event.assets?.map((_) => new AssetRequest(__spreadProps(__spreadValues({}, _), { event: this.event })));
-      this._space = (yield this._space_pipe.transform(this.event.resources[0]?.email)) || this._space;
-      const changed_spaces = !this._event_form.event || this.event.resources[0]?.id !== this._event_form.event?.space?.id;
-      const changed_times = !this._event_form.event || this.event.date !== this._event_form.event.date || this.event.date_end !== this._event_form.event.date_end;
-      const event = this._event_form.form.getRawValue();
-      this._loading.next(true);
-      if (this.has_assets && event.assets?.length) {
-        yield validateAssetRequestsForResource(this._event_form.event || {}, {
-          date: this.event.date,
-          duration: this.event.duration,
-          host: this.event.host,
-          all_day: this.event.all_day,
-          location_name: this._space?.display_name || this._space?.name || "",
-          location_id: this._space?.id || "",
-          zones: this._space?.level?.parent_id ? [this._space?.level?.parent_id] : [this._org.building?.id],
-          reset_state: changed_times
-        }, event.assets, changed_spaces || changed_times).catch((e2) => notifyError(e2));
-        this.timeout("update_assets", () => {
-          this.assets = event.assets?.map((_) => new AssetRequest(__spreadProps(__spreadValues({}, _), { event })));
-          this._event_form.form.patchValue({ assets: event.assets });
-        }, 100);
-      }
-      this._loading.next(false);
-    });
+  async ngOnInit() {
+    const date = this.event.all_day ? startOfDay(this.event.date).valueOf() : this.event.date;
+    this.catering_orders = this.event.catering?.map((order) => new CateringOrder(__spreadProps(__spreadValues({}, order), {
+      event: __spreadProps(__spreadValues({}, this.event), {
+        date,
+        date_end: addMinutes(date, this.event.duration).valueOf()
+      })
+    })));
+    this.assets = this.event.assets?.map((_) => new AssetRequest(__spreadProps(__spreadValues({}, _), { event: this.event })));
+    this._space = await this._space_pipe.transform(this.event.resources[0]?.email) || this._space;
+    const changed_spaces = !this._event_form.event || this.event.resources[0]?.id !== this._event_form.event?.space?.id;
+    const changed_times = !this._event_form.event || this.event.date !== this._event_form.event.date || this.event.date_end !== this._event_form.event.date_end;
+    const event = this._event_form.form.getRawValue();
+    this._loading.next(true);
+    if (this.has_assets && event.assets?.length) {
+      await validateAssetRequestsForResource(this._event_form.event || {}, {
+        date: this.event.date,
+        duration: this.event.duration,
+        host: this.event.host,
+        all_day: this.event.all_day,
+        location_name: this._space?.display_name || this._space?.name || "",
+        location_id: this._space?.id || "",
+        zones: this._space?.level?.parent_id ? [this._space?.level?.parent_id] : [this._org.building?.id],
+        reset_state: changed_times
+      }, event.assets, changed_spaces || changed_times).catch((e2) => notifyError(e2));
+      this.timeout("update_assets", () => {
+        this.assets = event.assets?.map((_) => new AssetRequest(__spreadProps(__spreadValues({}, _), { event })));
+        this._event_form.form.patchValue({ assets: event.assets });
+      }, 100);
+    }
+    this._loading.next(false);
   }
   optionList(item) {
     return item.option_list?.map((_) => _.name).join("\n");
@@ -16425,7 +16339,7 @@ var _MeetingFlowFormComponent = class _MeetingFlowFormComponent extends AsyncHan
       }));
     }));
     this.clearForm = () => this._state.resetForm();
-    this.viewConfirm = () => __async(this, null, function* () {
+    this.viewConfirm = async () => {
       if (!this.form.value.host)
         this.form.patchValue({ host: currentUser()?.email });
       if (this.strict_capacity_check && this.attendee_count > this.total_capacity) {
@@ -16434,7 +16348,7 @@ var _MeetingFlowFormComponent = class _MeetingFlowFormComponent extends AsyncHan
       if (!this.allow_daily_allday_recurrence && this.form.value.all_day && this.form.value.recurrence?.pattern === "daily") {
         return notifyError(i18n("CALENDAR_EVENT.DAILY_RECURR_ERROR"));
       }
-      const has_codes = yield nextValueFrom(this.has_codes);
+      const has_codes = await nextValueFrom(this.has_codes);
       if (!has_codes) {
         this.form.get("catering_charge_code").setValidators([]);
         this.form.updateValueAndValidity();
@@ -16469,7 +16383,7 @@ var _MeetingFlowFormComponent = class _MeetingFlowFormComponent extends AsyncHan
           }
         });
       }
-    });
+    };
     this._confirm_ref = viewChild("confirm_ref");
     this._input_el = viewChild("input");
   }
@@ -16519,40 +16433,38 @@ var _MeetingFlowFormComponent = class _MeetingFlowFormComponent extends AsyncHan
     const linked_bookings = this.event?.linked_bookings || [];
     this.invalid_assets = requested_assets.filter((_) => !_._changed && !linked_bookings.find((bkn) => bkn.extension_data?.request_id === _.id)).map((_) => _.id);
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      this.subscription("asset_changes", this.form.controls.assets.valueChanges.subscribe(() => this._updateValidAssets()));
-      for (const key of ["resources", "date", "duration", "date_end"]) {
-        this.subscription(`${key}_changes`, this.form.controls[key].valueChanges.subscribe(() => this.timeout("check_resources", () => this._space_list.next(this.form.value.resources || []))));
-      }
-      this._catering.setOptions({ zone: "" });
-      this._space_list.next(this.form.value.resources || []);
-      this.subscription("assets_available", this._assets_available.subscribe((a) => {
-        if (!a)
-          this.form.controls.assets.disable();
-        else
-          this.form.controls.assets.enable();
-      }));
-      this.subscription("catering_available", this._catering_available.subscribe((a) => {
-        if (!a)
-          this.form.controls.catering.disable();
-        else
-          this.form.controls.catering.enable();
-      }));
-      this.subscription("idle-listen", this._idle.idleFor((this._settings.get("app.idle_timeout") || 5) * 60 * 1e3).subscribe(() => __async(this, null, function* () {
-        this.unsub("idle");
-        yield openConfirmModal({
-          title: i18n("APP.WORKPLACE.MEETING_IDLE_TITLE"),
-          content: i18n("APP.WORKPLACE.MEETING_IDLE_MSG"),
-          icon: { content: "update" },
-          confirm_text: i18n("COMMON.REFRESH")
-        }, this._dialog);
-        this._state.newForm();
-        location.reload();
-      })));
-      this.timeout("init_valid_assets", () => this._updateValidAssets(), 1e3);
-    });
+  async ngOnInit() {
+    await this._org.initialised.pipe(first((_) => _)).toPromise();
+    this.subscription("asset_changes", this.form.controls.assets.valueChanges.subscribe(() => this._updateValidAssets()));
+    for (const key of ["resources", "date", "duration", "date_end"]) {
+      this.subscription(`${key}_changes`, this.form.controls[key].valueChanges.subscribe(() => this.timeout("check_resources", () => this._space_list.next(this.form.value.resources || []))));
+    }
+    this._catering.setOptions({ zone: "" });
+    this._space_list.next(this.form.value.resources || []);
+    this.subscription("assets_available", this._assets_available.subscribe((a) => {
+      if (!a)
+        this.form.controls.assets.disable();
+      else
+        this.form.controls.assets.enable();
+    }));
+    this.subscription("catering_available", this._catering_available.subscribe((a) => {
+      if (!a)
+        this.form.controls.catering.disable();
+      else
+        this.form.controls.catering.enable();
+    }));
+    this.subscription("idle-listen", this._idle.idleFor((this._settings.get("app.idle_timeout") || 5) * 60 * 1e3).subscribe(async () => {
+      this.unsub("idle");
+      await openConfirmModal({
+        title: i18n("APP.WORKPLACE.MEETING_IDLE_TITLE"),
+        content: i18n("APP.WORKPLACE.MEETING_IDLE_MSG"),
+        icon: { content: "update" },
+        confirm_text: i18n("COMMON.REFRESH")
+      }, this._dialog);
+      this._state.newForm();
+      location.reload();
+    }));
+    this.timeout("init_valid_assets", () => this._updateValidAssets(), 1e3);
   }
   focusInput() {
     this.timeout("input-focus", () => {
@@ -17175,9 +17087,9 @@ var _MeetingFlowSuccessComponent = class _MeetingFlowSuccessComponent {
   }
   startDeskBooking() {
     this._router.navigate(["/book", "desks", "form"]);
-    setTimeout(() => __async(this, null, function* () {
+    setTimeout(async () => {
       this._booking_form.newForm("desk");
-      const space = yield this._space_pipe.transform(this.space.id || this.space.email);
+      const space = await this._space_pipe.transform(this.space.id || this.space.email);
       const level = this._org.levelWithID(space?.zones);
       this._booking_form.setOptions({ type: "desk", zone_id: level?.id });
       this._booking_form.form.patchValue({
@@ -17190,9 +17102,9 @@ var _MeetingFlowSuccessComponent = class _MeetingFlowSuccessComponent {
         booking_type: "desk",
         user: currentUser()
       });
-      const resources = yield nextValueFrom(this._booking_form.available_resources);
+      const resources = await nextValueFrom(this._booking_form.available_resources);
       const bookable_desks = resources.map((_) => _.map_id || _.id).filter((i) => i);
-      const nearby = yield findNearbyFeature(level.map_id, space?.map_id, bookable_desks);
+      const nearby = await findNearbyFeature(level.map_id, space?.map_id, bookable_desks);
       if (!nearby)
         return notifyError(i18n("APP.WORKPLACE.MEETING_DESK_ERROR"));
       const resource = resources.find((_) => _.map_id === nearby);
@@ -17208,7 +17120,7 @@ var _MeetingFlowSuccessComponent = class _MeetingFlowSuccessComponent {
         asset_name: resource.name,
         resources: [resource]
       });
-    }), 50);
+    }, 50);
   }
 };
 _MeetingFlowSuccessComponent.\u0275fac = function MeetingFlowSuccessComponent_Factory(__ngFactoryType__) {
@@ -17500,14 +17412,14 @@ var _NewParkingFlowConfirmComponent = class _NewParkingFlowConfirmComponent exte
     this._settings = inject(SettingsService);
     this.show_close = input(false);
     this.loading = this._state.loading;
-    this.postForm = () => __async(this, null, function* () {
-      const r = yield this._state.postForm().catch((_) => {
+    this.postForm = async () => {
+      const r = await this._state.postForm().catch((_) => {
         notifyError(`Unable to complete booking. ${_}`);
       });
       if (!r)
         return;
       this.dismiss(true);
-    });
+    };
     this.dismiss = (e2) => this._sheet_ref?.dismiss(e2);
   }
   get time_format() {
@@ -18099,15 +18011,13 @@ var _ParkingFlowFormComponent = class _ParkingFlowFormComponent extends AsyncHan
   get form() {
     return this._state.form;
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      this._state.setOptions({ type: "parking" });
-      this.form.patchValue({ user: currentUser() });
-      const user = yield nextValueFrom(this._parking.user_details);
-      if (user?.email && !this.form.value.plate_number) {
-        this.form.patchValue({ plate_number: user.plate_number });
-      }
-    });
+  async ngOnInit() {
+    this._state.setOptions({ type: "parking" });
+    this.form.patchValue({ user: currentUser() });
+    const user = await nextValueFrom(this._parking.user_details);
+    if (user?.email && !this.form.value.plate_number) {
+      this.form.patchValue({ plate_number: user.plate_number });
+    }
   }
 };
 _ParkingFlowFormComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -18858,4 +18768,4 @@ var BookModule = _BookModule;
 export {
   BookModule
 };
-//# sourceMappingURL=book.module-ZT4G3WVT.js.map
+//# sourceMappingURL=book.module-KZ5DRNT5.js.map

@@ -82,11 +82,10 @@ import {
   ɵɵtwoWayBindingSet,
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty
-} from "./chunk-ZNAP3QRE.js";
+} from "./chunk-W5ZSL5WJ.js";
 import {
-  __async,
   __spreadValues
-} from "./chunk-4MWRP73S.js";
+} from "./chunk-KWSTWQNB.js";
 
 // apps/workplace/src/app/events/group-events-state.service.ts
 var _GroupEventsStateService = class _GroupEventsStateService {
@@ -185,11 +184,9 @@ var _GroupEventsFiltersListComponent = class _GroupEventsFiltersListComponent {
     }));
     this.period = this._state.options.pipe(map(({ date, end }) => Math.abs(differenceInDays(date, end || Date.now())) > 7 ? "month" : "week"));
   }
-  removeTag(tag) {
-    return __async(this, null, function* () {
-      const tags = (yield nextValueFrom(this.filters))?.tags || [];
-      this._state.setFilters({ tags: tags.filter((_) => _ !== tag) });
-    });
+  async removeTag(tag) {
+    const tags = (await nextValueFrom(this.filters))?.tags || [];
+    this._state.setFilters({ tags: tags.filter((_) => _ !== tag) });
   }
 };
 _GroupEventsFiltersListComponent.\u0275fac = function GroupEventsFiltersListComponent_Factory(__ngFactoryType__) {
@@ -356,15 +353,13 @@ var _GroupEventsSidebarComponent = class _GroupEventsSidebarComponent extends As
       this.selected_range = this.period_list[0].id;
     }
   }
-  toggleTag(tag) {
-    return __async(this, null, function* () {
-      const tags = (yield nextValueFrom(this.filters))?.tags || [];
-      if (tags.includes(tag)) {
-        this._state.setFilters({ tags: tags.filter((_) => _ !== tag) });
-      } else {
-        this._state.setFilters({ tags: [...tags, tag] });
-      }
-    });
+  async toggleTag(tag) {
+    const tags = (await nextValueFrom(this.filters))?.tags || [];
+    if (tags.includes(tag)) {
+      this._state.setFilters({ tags: tags.filter((_) => _ !== tag) });
+    } else {
+      this._state.setFilters({ tags: [...tags, tag] });
+    }
   }
   setPeriodFromDate(date) {
     for (const period of this.period_list) {
@@ -765,4 +760,4 @@ var GroupEventsModule = _GroupEventsModule;
 export {
   GroupEventsModule
 };
-//# sourceMappingURL=group-events.module-YGXEY5WM.js.map
+//# sourceMappingURL=group-events.module-BJ5RLFPR.js.map

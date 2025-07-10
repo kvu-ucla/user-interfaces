@@ -1,6 +1,6 @@
 import {
   ScheduleStateService
-} from "./chunk-DE3E7V7K.js";
+} from "./chunk-7RZXJLHS.js";
 import {
   AsyncHandler,
   AsyncPipe,
@@ -98,10 +98,8 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵtextInterpolate2
-} from "./chunk-ZNAP3QRE.js";
-import {
-  __async
-} from "./chunk-4MWRP73S.js";
+} from "./chunk-W5ZSL5WJ.js";
+import "./chunk-KWSTWQNB.js";
 
 // apps/workplace/src/app/schedule/schedule-filter-card.component.ts
 function ScheduleFilterCardComponent_Conditional_9_Template(rf, ctx) {
@@ -2346,19 +2344,17 @@ var _ScheduleComponent = class _ScheduleComponent extends AsyncHandler {
   setOptions(options) {
     this._state.setOptions(options);
   }
-  edit(event) {
-    return __async(this, null, function* () {
-      console.log("Edit Event:", event);
-      this._router.navigate(["/book", "meeting", "form"]);
-      if (event.creator !== event.mailbox) {
-        event = (yield queryEvents({
-          period_start: event.event_start,
-          period_end: event.event_end,
-          ical_uid: event.ical_uid
-        }).toPromise()).find((_) => _.ical_uid === event.ical_uid) || event;
-      }
-      setTimeout(() => this._event_form.newForm(event), 300);
-    });
+  async edit(event) {
+    console.log("Edit Event:", event);
+    this._router.navigate(["/book", "meeting", "form"]);
+    if (event.creator !== event.mailbox) {
+      event = (await queryEvents({
+        period_start: event.event_start,
+        period_end: event.event_end,
+        ical_uid: event.ical_uid
+      }).toPromise()).find((_) => _.ical_uid === event.ical_uid) || event;
+    }
+    setTimeout(() => this._event_form.newForm(event), 300);
   }
   editBooking(event) {
     console.log("Edit Booking:", event.type);
@@ -2376,65 +2372,61 @@ var _ScheduleComponent = class _ScheduleComponent extends AsyncHandler {
       });
     }, 100);
   }
-  remove(item, remove_series = false) {
-    return __async(this, null, function* () {
-      const time = `${format(item.date, "dd MMM yyyy h:mma")}`;
-      const resource_name = item instanceof CalendarEvent ? item.space?.display_name : item.asset_name || item.asset_id;
-      const resp = yield openConfirmModal({
-        title: i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_TITLE" : "APP.WORKPLACE.SCHEDULE_REMOVE_TITLE", { name: resource_name, time }),
-        content: i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_MSG" : "APP.WORKPLACE.SCHEDULE_REMOVE_MSG", { name: resource_name, time }),
-        icon: { content: "delete" }
-      }, this._dialog);
-      if (item instanceof CalendarEvent && item.creator !== item.mailbox) {
-        item = (yield queryEvents({
-          period_start: item.event_start,
-          period_end: item.event_end,
-          ical_uid: item.ical_uid
-        }).toPromise()).find((_) => _.ical_uid === item.ical_uid) || item;
-      }
-      if (resp.reason !== "done")
-        return;
-      resp.loading(i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_LOADING" : "APP.WORKPLACE.SCHEDULE_REMOVE_LOADING"));
-      yield (item instanceof CalendarEvent ? removeEvent : removeBooking)(remove_series ? item.recurring_event_id || item.id : item.id, {
-        calendar: this._settings.get("app.events.use_bookings") ? null : item.calendar || currentUser()?.email,
-        system_id: item.system?.id,
-        instance: remove_series ? void 0 : !!item.instance,
-        start_time: item.instance ? item.instance : void 0
-      }).toPromise().catch((e) => {
-        notifyError(i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_ERROR" : "APP.WORKPLACE.SCHEDULE_REMOVE_ERROR", { error: e }));
-        resp.close();
-        throw e;
-      });
-      notifySuccess(i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_SUCCESS" : "APP.WORKPLACE.SCHEDULE_REMOVE_SUCCESS"));
-      this._state.removeItem(item);
-      this._dialog.closeAll();
+  async remove(item, remove_series = false) {
+    const time = `${format(item.date, "dd MMM yyyy h:mma")}`;
+    const resource_name = item instanceof CalendarEvent ? item.space?.display_name : item.asset_name || item.asset_id;
+    const resp = await openConfirmModal({
+      title: i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_TITLE" : "APP.WORKPLACE.SCHEDULE_REMOVE_TITLE", { name: resource_name, time }),
+      content: i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_MSG" : "APP.WORKPLACE.SCHEDULE_REMOVE_MSG", { name: resource_name, time }),
+      icon: { content: "delete" }
+    }, this._dialog);
+    if (item instanceof CalendarEvent && item.creator !== item.mailbox) {
+      item = (await queryEvents({
+        period_start: item.event_start,
+        period_end: item.event_end,
+        ical_uid: item.ical_uid
+      }).toPromise()).find((_) => _.ical_uid === item.ical_uid) || item;
+    }
+    if (resp.reason !== "done")
+      return;
+    resp.loading(i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_LOADING" : "APP.WORKPLACE.SCHEDULE_REMOVE_LOADING"));
+    await (item instanceof CalendarEvent ? removeEvent : removeBooking)(remove_series ? item.recurring_event_id || item.id : item.id, {
+      calendar: this._settings.get("app.events.use_bookings") ? null : item.calendar || currentUser()?.email,
+      system_id: item.system?.id,
+      instance: remove_series ? void 0 : !!item.instance,
+      start_time: item.instance ? item.instance : void 0
+    }).toPromise().catch((e) => {
+      notifyError(i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_ERROR" : "APP.WORKPLACE.SCHEDULE_REMOVE_ERROR", { error: e }));
+      resp.close();
+      throw e;
     });
+    notifySuccess(i18n(remove_series ? "APP.WORKPLACE.SCHEDULE_REMOVE_SERIES_SUCCESS" : "APP.WORKPLACE.SCHEDULE_REMOVE_SUCCESS"));
+    this._state.removeItem(item);
+    this._dialog.closeAll();
   }
-  end(item) {
-    return __async(this, null, function* () {
-      const time = `${format(item.date, "dd MMM yyyy h:mma")}`;
-      const resource_name = item.asset_name || item.asset_id;
-      const resp = yield openConfirmModal({
-        title: i18n("APP.WORKPLACE.SCHEDULE_END_TITLE"),
-        content: i18n("APP.WORKPLACE.SCHEDULE_END_MSG", {
-          name: resource_name,
-          time
-        }),
-        icon: { content: "event_busy" }
-      }, this._dialog);
-      if (resp.reason !== "done")
-        return;
-      resp.loading(i18n("APP.WORKPLACE.SCHEDULE_END_LOADING"));
-      const promise = (item.instance ? checkinBookingInstance(item.id, item.instance, false) : checkinBooking(item.id, false)).toPromise().catch((e) => {
-        notifyError(i18n("APP.WORKPLACE.SCHEDULE_END_ERROR", { error: e }));
-        resp.close();
-        throw e;
-      });
-      yield promise;
-      notifySuccess(i18n("APP.WORKPLACE.SCHEDULE_END_SUCCESS"));
-      this._state.removeItem(item);
-      this._dialog.closeAll();
+  async end(item) {
+    const time = `${format(item.date, "dd MMM yyyy h:mma")}`;
+    const resource_name = item.asset_name || item.asset_id;
+    const resp = await openConfirmModal({
+      title: i18n("APP.WORKPLACE.SCHEDULE_END_TITLE"),
+      content: i18n("APP.WORKPLACE.SCHEDULE_END_MSG", {
+        name: resource_name,
+        time
+      }),
+      icon: { content: "event_busy" }
+    }, this._dialog);
+    if (resp.reason !== "done")
+      return;
+    resp.loading(i18n("APP.WORKPLACE.SCHEDULE_END_LOADING"));
+    const promise = (item.instance ? checkinBookingInstance(item.id, item.instance, false) : checkinBooking(item.id, false)).toPromise().catch((e) => {
+      notifyError(i18n("APP.WORKPLACE.SCHEDULE_END_ERROR", { error: e }));
+      resp.close();
+      throw e;
     });
+    await promise;
+    notifySuccess(i18n("APP.WORKPLACE.SCHEDULE_END_SUCCESS"));
+    this._state.removeItem(item);
+    this._dialog.closeAll();
   }
 };
 _ScheduleComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -2682,4 +2674,4 @@ var AppScheduleModule = _AppScheduleModule;
 export {
   AppScheduleModule
 };
-//# sourceMappingURL=schedule.module-RKA3B2SZ.js.map
+//# sourceMappingURL=schedule.module-ZBLB7NPY.js.map
