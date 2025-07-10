@@ -1,9 +1,8 @@
 import {
-  __async,
   __export,
   __spreadProps,
   __spreadValues
-} from "./chunk-XWLXMCJQ.js";
+} from "./chunk-653SOEEV.js";
 
 // node_modules/@angular/core/fesm2022/primitives/di.mjs
 var _currentInjector = void 0;
@@ -16812,65 +16811,59 @@ function triggerDeferBlock(triggerType, lView, tNode) {
       }
   }
 }
-function triggerHydrationFromBlockName(injector, blockName, replayQueuedEventsFn) {
-  return __async(this, null, function* () {
-    const dehydratedBlockRegistry = injector.get(DEHYDRATED_BLOCK_REGISTRY);
-    const blocksBeingHydrated = dehydratedBlockRegistry.hydrating;
-    if (blocksBeingHydrated.has(blockName)) {
-      return;
-    }
-    const { parentBlockPromise, hydrationQueue } = getParentBlockHydrationQueue(blockName, injector);
-    if (hydrationQueue.length === 0)
-      return;
-    if (parentBlockPromise !== null) {
-      hydrationQueue.shift();
-    }
-    populateHydratingStateForQueue(dehydratedBlockRegistry, hydrationQueue);
-    if (parentBlockPromise !== null) {
-      yield parentBlockPromise;
-    }
-    const topmostParentBlock = hydrationQueue[0];
-    if (dehydratedBlockRegistry.has(topmostParentBlock)) {
-      yield triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn);
-    } else {
-      dehydratedBlockRegistry.awaitParentBlock(topmostParentBlock, () => __async(null, null, function* () {
-        return yield triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn);
-      }));
-    }
-  });
+async function triggerHydrationFromBlockName(injector, blockName, replayQueuedEventsFn) {
+  const dehydratedBlockRegistry = injector.get(DEHYDRATED_BLOCK_REGISTRY);
+  const blocksBeingHydrated = dehydratedBlockRegistry.hydrating;
+  if (blocksBeingHydrated.has(blockName)) {
+    return;
+  }
+  const { parentBlockPromise, hydrationQueue } = getParentBlockHydrationQueue(blockName, injector);
+  if (hydrationQueue.length === 0)
+    return;
+  if (parentBlockPromise !== null) {
+    hydrationQueue.shift();
+  }
+  populateHydratingStateForQueue(dehydratedBlockRegistry, hydrationQueue);
+  if (parentBlockPromise !== null) {
+    await parentBlockPromise;
+  }
+  const topmostParentBlock = hydrationQueue[0];
+  if (dehydratedBlockRegistry.has(topmostParentBlock)) {
+    await triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn);
+  } else {
+    dehydratedBlockRegistry.awaitParentBlock(topmostParentBlock, async () => await triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn));
+  }
 }
-function triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn) {
-  return __async(this, null, function* () {
-    const dehydratedBlockRegistry = injector.get(DEHYDRATED_BLOCK_REGISTRY);
-    const blocksBeingHydrated = dehydratedBlockRegistry.hydrating;
-    const pendingTasks = injector.get(PendingTasksInternal);
-    const taskId = pendingTasks.add();
-    for (let blockQueueIdx = 0; blockQueueIdx < hydrationQueue.length; blockQueueIdx++) {
-      const dehydratedBlockId = hydrationQueue[blockQueueIdx];
-      const dehydratedDeferBlock = dehydratedBlockRegistry.get(dehydratedBlockId);
-      if (dehydratedDeferBlock != null) {
-        yield triggerResourceLoadingForHydration(dehydratedDeferBlock);
-        yield nextRender(injector);
-        if (deferBlockHasErrored(dehydratedDeferBlock)) {
-          removeDehydratedViewList(dehydratedDeferBlock);
-          cleanupRemainingHydrationQueue(hydrationQueue.slice(blockQueueIdx), dehydratedBlockRegistry);
-          break;
-        }
-        blocksBeingHydrated.get(dehydratedBlockId).resolve();
-      } else {
-        cleanupParentContainer(blockQueueIdx, hydrationQueue, dehydratedBlockRegistry);
+async function triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn) {
+  const dehydratedBlockRegistry = injector.get(DEHYDRATED_BLOCK_REGISTRY);
+  const blocksBeingHydrated = dehydratedBlockRegistry.hydrating;
+  const pendingTasks = injector.get(PendingTasksInternal);
+  const taskId = pendingTasks.add();
+  for (let blockQueueIdx = 0; blockQueueIdx < hydrationQueue.length; blockQueueIdx++) {
+    const dehydratedBlockId = hydrationQueue[blockQueueIdx];
+    const dehydratedDeferBlock = dehydratedBlockRegistry.get(dehydratedBlockId);
+    if (dehydratedDeferBlock != null) {
+      await triggerResourceLoadingForHydration(dehydratedDeferBlock);
+      await nextRender(injector);
+      if (deferBlockHasErrored(dehydratedDeferBlock)) {
+        removeDehydratedViewList(dehydratedDeferBlock);
         cleanupRemainingHydrationQueue(hydrationQueue.slice(blockQueueIdx), dehydratedBlockRegistry);
         break;
       }
+      blocksBeingHydrated.get(dehydratedBlockId).resolve();
+    } else {
+      cleanupParentContainer(blockQueueIdx, hydrationQueue, dehydratedBlockRegistry);
+      cleanupRemainingHydrationQueue(hydrationQueue.slice(blockQueueIdx), dehydratedBlockRegistry);
+      break;
     }
-    const lastBlockName = hydrationQueue[hydrationQueue.length - 1];
-    yield blocksBeingHydrated.get(lastBlockName)?.promise;
-    pendingTasks.remove(taskId);
-    if (replayQueuedEventsFn) {
-      replayQueuedEventsFn(hydrationQueue);
-    }
-    cleanupHydratedDeferBlocks(dehydratedBlockRegistry.get(lastBlockName), hydrationQueue, dehydratedBlockRegistry, injector.get(ApplicationRef));
-  });
+  }
+  const lastBlockName = hydrationQueue[hydrationQueue.length - 1];
+  await blocksBeingHydrated.get(lastBlockName)?.promise;
+  pendingTasks.remove(taskId);
+  if (replayQueuedEventsFn) {
+    replayQueuedEventsFn(hydrationQueue);
+  }
+  cleanupHydratedDeferBlocks(dehydratedBlockRegistry.get(lastBlockName), hydrationQueue, dehydratedBlockRegistry, injector.get(ApplicationRef));
 }
 function deferBlockHasErrored(deferBlock) {
   return getLDeferBlockDetails(deferBlock.lView, deferBlock.tNode)[DEFER_BLOCK_STATE] === DeferBlockState.Error;
@@ -16897,14 +16890,12 @@ function populateHydratingStateForQueue(registry, queue) {
 function nextRender(injector) {
   return new Promise((resolveFn) => afterNextRender(resolveFn, { injector }));
 }
-function triggerResourceLoadingForHydration(dehydratedBlock) {
-  return __async(this, null, function* () {
-    const { tNode, lView } = dehydratedBlock;
-    const lDetails = getLDeferBlockDetails(lView, tNode);
-    return new Promise((resolve) => {
-      onDeferBlockCompletion(lDetails, resolve);
-      triggerDeferBlock(2, lView, tNode);
-    });
+async function triggerResourceLoadingForHydration(dehydratedBlock) {
+  const { tNode, lView } = dehydratedBlock;
+  const lDetails = getLDeferBlockDetails(lView, tNode);
+  return new Promise((resolve) => {
+    onDeferBlockCompletion(lDetails, resolve);
+    triggerDeferBlock(2, lView, tNode);
   });
 }
 function onDeferBlockCompletion(lDetails, callback) {
@@ -22141,6 +22132,20 @@ var ChangeDetectionSchedulerImpl = class _ChangeDetectionSchedulerImpl {
     args: [{ providedIn: "root" }]
   }], () => [], null);
 })();
+function provideZonelessChangeDetection() {
+  performanceMarkFeature("NgZoneless");
+  if ((typeof ngDevMode === "undefined" || ngDevMode) && typeof Zone !== "undefined" && Zone) {
+    const message2 = formatRuntimeError(914, `The application is using zoneless change detection, but is still loading Zone.js. Consider removing Zone.js to get the full benefits of zoneless. In applications using the Angular CLI, Zone.js is typically included in the "polyfills" section of the angular.json file.`);
+    console.warn(message2);
+  }
+  return makeEnvironmentProviders([
+    { provide: ChangeDetectionScheduler, useExisting: ChangeDetectionSchedulerImpl },
+    { provide: NgZone, useClass: NoopNgZone },
+    { provide: ZONELESS_ENABLED, useValue: true },
+    { provide: SCHEDULE_IN_ROOT_ZONE, useValue: false },
+    typeof ngDevMode === "undefined" || ngDevMode ? [{ provide: PROVIDED_ZONELESS, useValue: true }] : []
+  ]);
+}
 function getGlobalLocale() {
   if (false) {
     return goog.LOCALE;
@@ -22538,54 +22543,52 @@ var ResourceImpl = class extends BaseWritableResource {
       stream: void 0
     });
   }
-  loadEffect() {
-    return __async(this, null, function* () {
-      const extRequest = this.extRequest();
-      const { status: currentStatus, previousStatus } = untracked2(this.state);
-      if (extRequest.request === void 0) {
-        return;
-      } else if (currentStatus !== "loading") {
+  async loadEffect() {
+    const extRequest = this.extRequest();
+    const { status: currentStatus, previousStatus } = untracked2(this.state);
+    if (extRequest.request === void 0) {
+      return;
+    } else if (currentStatus !== "loading") {
+      return;
+    }
+    this.abortInProgressLoad();
+    let resolvePendingTask = this.resolvePendingTask = this.pendingTasks.add();
+    const { signal: abortSignal } = this.pendingController = new AbortController();
+    try {
+      const stream = await untracked2(() => {
+        return this.loaderFn({
+          params: extRequest.request,
+          // TODO(alxhub): cleanup after g3 removal of `request` alias.
+          request: extRequest.request,
+          abortSignal,
+          previous: {
+            status: previousStatus
+          }
+        });
+      });
+      if (abortSignal.aborted || untracked2(this.extRequest) !== extRequest) {
         return;
       }
-      this.abortInProgressLoad();
-      let resolvePendingTask = this.resolvePendingTask = this.pendingTasks.add();
-      const { signal: abortSignal } = this.pendingController = new AbortController();
-      try {
-        const stream = yield untracked2(() => {
-          return this.loaderFn({
-            params: extRequest.request,
-            // TODO(alxhub): cleanup after g3 removal of `request` alias.
-            request: extRequest.request,
-            abortSignal,
-            previous: {
-              status: previousStatus
-            }
-          });
-        });
-        if (abortSignal.aborted || untracked2(this.extRequest) !== extRequest) {
-          return;
-        }
-        this.state.set({
-          extRequest,
-          status: "resolved",
-          previousStatus: "resolved",
-          stream
-        });
-      } catch (err) {
-        if (abortSignal.aborted || untracked2(this.extRequest) !== extRequest) {
-          return;
-        }
-        this.state.set({
-          extRequest,
-          status: "resolved",
-          previousStatus: "error",
-          stream: signal({ error: encapsulateResourceError(err) })
-        });
-      } finally {
-        resolvePendingTask?.();
-        resolvePendingTask = void 0;
+      this.state.set({
+        extRequest,
+        status: "resolved",
+        previousStatus: "resolved",
+        stream
+      });
+    } catch (err) {
+      if (abortSignal.aborted || untracked2(this.extRequest) !== extRequest) {
+        return;
       }
-    });
+      this.state.set({
+        extRequest,
+        status: "resolved",
+        previousStatus: "error",
+        stream: signal({ error: encapsulateResourceError(err) })
+      });
+    } finally {
+      resolvePendingTask?.();
+      resolvePendingTask = void 0;
+    }
   }
   abortInProgressLoad() {
     untracked2(() => this.pendingController?.abort());
@@ -29287,18 +29290,16 @@ function assertNoLoaderParamsWithoutLoader(dir, imageLoader) {
     console.warn(formatRuntimeError(2963, `${imgDirectiveDetails(dir.ngSrc)} the \`loaderParams\` attribute is present but no image loader is configured (i.e. the default one is being used), which means that the loaderParams data will not be consumed and will not affect the URL. To fix this, provide a custom loader or remove the \`loaderParams\` attribute from the image.`));
   }
 }
-function assetPriorityCountBelowThreshold(appRef) {
-  return __async(this, null, function* () {
-    if (IMGS_WITH_PRIORITY_ATTR_COUNT === 0) {
-      IMGS_WITH_PRIORITY_ATTR_COUNT++;
-      yield appRef.whenStable();
-      if (IMGS_WITH_PRIORITY_ATTR_COUNT > PRIORITY_COUNT_THRESHOLD) {
-        console.warn(formatRuntimeError(2966, `NgOptimizedImage: The "priority" attribute is set to true more than ${PRIORITY_COUNT_THRESHOLD} times (${IMGS_WITH_PRIORITY_ATTR_COUNT} times). Marking too many images as "high" priority can hurt your application's LCP (https://web.dev/lcp). "Priority" should only be set on the image expected to be the page's LCP element.`));
-      }
-    } else {
-      IMGS_WITH_PRIORITY_ATTR_COUNT++;
+async function assetPriorityCountBelowThreshold(appRef) {
+  if (IMGS_WITH_PRIORITY_ATTR_COUNT === 0) {
+    IMGS_WITH_PRIORITY_ATTR_COUNT++;
+    await appRef.whenStable();
+    if (IMGS_WITH_PRIORITY_ATTR_COUNT > PRIORITY_COUNT_THRESHOLD) {
+      console.warn(formatRuntimeError(2966, `NgOptimizedImage: The "priority" attribute is set to true more than ${PRIORITY_COUNT_THRESHOLD} times (${IMGS_WITH_PRIORITY_ATTR_COUNT} times). Marking too many images as "high" priority can hurt your application's LCP (https://web.dev/lcp). "Priority" should only be set on the image expected to be the page's LCP element.`));
     }
-  });
+  } else {
+    IMGS_WITH_PRIORITY_ATTR_COUNT++;
+  }
 }
 function assertPlaceholderDimensions(dir, imgElement) {
   const computedStyle = window.getComputedStyle(imgElement);
@@ -31670,123 +31671,121 @@ var FetchBackend = class _FetchBackend {
       return () => aborter.abort();
     });
   }
-  doRequest(request, signal2, observer) {
-    return __async(this, null, function* () {
-      const init = this.createRequestInit(request);
-      let response;
+  async doRequest(request, signal2, observer) {
+    const init = this.createRequestInit(request);
+    let response;
+    try {
+      const fetchPromise = this.ngZone.runOutsideAngular(() => this.fetchImpl(request.urlWithParams, __spreadValues({
+        signal: signal2
+      }, init)));
+      silenceSuperfluousUnhandledPromiseRejection(fetchPromise);
+      observer.next({
+        type: HttpEventType.Sent
+      });
+      response = await fetchPromise;
+    } catch (error) {
+      observer.error(new HttpErrorResponse({
+        error,
+        status: error.status ?? 0,
+        statusText: error.statusText,
+        url: request.urlWithParams,
+        headers: error.headers
+      }));
+      return;
+    }
+    const headers = new HttpHeaders(response.headers);
+    const statusText = response.statusText;
+    const url = getResponseUrl$1(response) ?? request.urlWithParams;
+    let status = response.status;
+    let body = null;
+    if (request.reportProgress) {
+      observer.next(new HttpHeaderResponse({
+        headers,
+        status,
+        statusText,
+        url
+      }));
+    }
+    if (response.body) {
+      const contentLength = response.headers.get("content-length");
+      const chunks = [];
+      const reader = response.body.getReader();
+      let receivedLength = 0;
+      let decoder;
+      let partialText;
+      const reqZone = typeof Zone !== "undefined" && Zone.current;
+      let canceled = false;
+      await this.ngZone.runOutsideAngular(async () => {
+        while (true) {
+          if (this.destroyed) {
+            await reader.cancel();
+            canceled = true;
+            break;
+          }
+          const {
+            done,
+            value
+          } = await reader.read();
+          if (done) {
+            break;
+          }
+          chunks.push(value);
+          receivedLength += value.length;
+          if (request.reportProgress) {
+            partialText = request.responseType === "text" ? (partialText ?? "") + (decoder ??= new TextDecoder()).decode(value, {
+              stream: true
+            }) : void 0;
+            const reportProgress = () => observer.next({
+              type: HttpEventType.DownloadProgress,
+              total: contentLength ? +contentLength : void 0,
+              loaded: receivedLength,
+              partialText
+            });
+            reqZone ? reqZone.run(reportProgress) : reportProgress();
+          }
+        }
+      });
+      if (canceled) {
+        observer.complete();
+        return;
+      }
+      const chunksAll = this.concatChunks(chunks, receivedLength);
       try {
-        const fetchPromise = this.ngZone.runOutsideAngular(() => this.fetchImpl(request.urlWithParams, __spreadValues({
-          signal: signal2
-        }, init)));
-        silenceSuperfluousUnhandledPromiseRejection(fetchPromise);
-        observer.next({
-          type: HttpEventType.Sent
-        });
-        response = yield fetchPromise;
+        const contentType = response.headers.get(CONTENT_TYPE_HEADER) ?? "";
+        body = this.parseBody(request, chunksAll, contentType);
       } catch (error) {
         observer.error(new HttpErrorResponse({
           error,
-          status: error.status ?? 0,
-          statusText: error.statusText,
-          url: request.urlWithParams,
-          headers: error.headers
+          headers: new HttpHeaders(response.headers),
+          status: response.status,
+          statusText: response.statusText,
+          url: getResponseUrl$1(response) ?? request.urlWithParams
         }));
         return;
       }
-      const headers = new HttpHeaders(response.headers);
-      const statusText = response.statusText;
-      const url = getResponseUrl$1(response) ?? request.urlWithParams;
-      let status = response.status;
-      let body = null;
-      if (request.reportProgress) {
-        observer.next(new HttpHeaderResponse({
-          headers,
-          status,
-          statusText,
-          url
-        }));
-      }
-      if (response.body) {
-        const contentLength = response.headers.get("content-length");
-        const chunks = [];
-        const reader = response.body.getReader();
-        let receivedLength = 0;
-        let decoder;
-        let partialText;
-        const reqZone = typeof Zone !== "undefined" && Zone.current;
-        let canceled = false;
-        yield this.ngZone.runOutsideAngular(() => __async(this, null, function* () {
-          while (true) {
-            if (this.destroyed) {
-              yield reader.cancel();
-              canceled = true;
-              break;
-            }
-            const {
-              done,
-              value
-            } = yield reader.read();
-            if (done) {
-              break;
-            }
-            chunks.push(value);
-            receivedLength += value.length;
-            if (request.reportProgress) {
-              partialText = request.responseType === "text" ? (partialText ?? "") + (decoder ??= new TextDecoder()).decode(value, {
-                stream: true
-              }) : void 0;
-              const reportProgress = () => observer.next({
-                type: HttpEventType.DownloadProgress,
-                total: contentLength ? +contentLength : void 0,
-                loaded: receivedLength,
-                partialText
-              });
-              reqZone ? reqZone.run(reportProgress) : reportProgress();
-            }
-          }
-        }));
-        if (canceled) {
-          observer.complete();
-          return;
-        }
-        const chunksAll = this.concatChunks(chunks, receivedLength);
-        try {
-          const contentType = response.headers.get(CONTENT_TYPE_HEADER) ?? "";
-          body = this.parseBody(request, chunksAll, contentType);
-        } catch (error) {
-          observer.error(new HttpErrorResponse({
-            error,
-            headers: new HttpHeaders(response.headers),
-            status: response.status,
-            statusText: response.statusText,
-            url: getResponseUrl$1(response) ?? request.urlWithParams
-          }));
-          return;
-        }
-      }
-      if (status === 0) {
-        status = body ? HTTP_STATUS_CODE_OK : 0;
-      }
-      const ok = status >= 200 && status < 300;
-      if (ok) {
-        observer.next(new HttpResponse({
-          body,
-          headers,
-          status,
-          statusText,
-          url
-        }));
-        observer.complete();
-      } else {
-        observer.error(new HttpErrorResponse({
-          error: body,
-          headers,
-          status,
-          statusText,
-          url
-        }));
-      }
-    });
+    }
+    if (status === 0) {
+      status = body ? HTTP_STATUS_CODE_OK : 0;
+    }
+    const ok = status >= 200 && status < 300;
+    if (ok) {
+      observer.next(new HttpResponse({
+        body,
+        headers,
+        status,
+        statusText,
+        url
+      }));
+      observer.complete();
+    } else {
+      observer.error(new HttpErrorResponse({
+        error: body,
+        headers,
+        status,
+        statusText,
+        url
+      }));
+    }
   }
   parseBody(request, binContent, contentType) {
     switch (request.responseType) {
@@ -45457,8 +45456,8 @@ var RouterScroller = class _RouterScroller {
     });
   }
   scheduleScrollEvent(routerEvent, anchor) {
-    this.zone.runOutsideAngular(() => __async(this, null, function* () {
-      yield new Promise((resolve) => {
+    this.zone.runOutsideAngular(async () => {
+      await new Promise((resolve) => {
         setTimeout(resolve);
         if (typeof requestAnimationFrame !== "undefined") {
           requestAnimationFrame(resolve);
@@ -45467,7 +45466,7 @@ var RouterScroller = class _RouterScroller {
       this.zone.run(() => {
         this.transitions.events.next(new Scroll(routerEvent, this.lastSource === "popstate" ? this.store[this.restoredId] : null, anchor));
       });
-    }));
+    });
   }
   /** @docs-private */
   ngOnDestroy() {
@@ -66282,10 +66281,10 @@ function dn(e = 0) {
       {
         credentials: "same-origin"
       }
-    ).subscribe((i) => __async(null, null, function* () {
+    ).subscribe(async (i) => {
       if (!i.ok)
-        return r(yield i.text().catch((s) => s));
-      F13 = yield i.json(), an = /[2-9]\.[0-9]+\.[0-9]+/g.test(
+        return r(await i.text().catch((s) => s));
+      F13 = await i.json(), an = /[2-9]\.[0-9]+\.[0-9]+/g.test(
         F13.version || ""
       ) ? "/api/engine/v2" : "/control/api", d("Auth", "Loaded authority.", [], "group"), F13 && (d("Auth", `Name: ${F13.name}`), d("Auth", `Version: ${F13.version}`), d("Auth", `Domain: ${F13.domain}`), d("Auth", `Session: ${F13.session}`), d("Auth", `Production: ${F13.production}`), d(
         "Auth",
@@ -66295,16 +66294,14 @@ function dn(e = 0) {
         ut.next(true), d("Auth", "Application set online."), t();
       };
       delete v.load_authority, mr("").then(o, o);
-    }), r);
+    }, r);
   })), v.load_authority;
 }
-function co(e) {
-  return __async(this, null, function* () {
-    const t = ho(e);
-    if (g.use_iframe)
-      return ao(t);
-    window.location?.assign(t);
-  });
+async function co(e) {
+  const t = ho(e);
+  if (g.use_iframe)
+    return ao(t);
+  window.location?.assign(t);
 }
 function ao(e) {
   return v.iframe_auth || (v.iframe_auth = new Promise((t, n) => {
@@ -66349,9 +66346,9 @@ function yr(e) {
   delete v.authorise;
 }
 function lo() {
-  return v.check_token || (v.check_token = new Promise((e, t) => __async(null, null, function* () {
-    Y2() ? (d("Auth", "Valid token found."), e(Y2())) : (d("Auth", "No token. Checking URL for auth credentials..."), (yield fo()) ? e(true) : t()), delete v.check_token;
-  }))), v.check_token;
+  return v.check_token || (v.check_token = new Promise(async (e, t) => {
+    Y2() ? (d("Auth", "Valid token found."), e(Y2())) : (d("Auth", "No token. Checking URL for auth credentials..."), await fo() ? e(true) : t()), delete v.check_token;
+  })), v.check_token;
 }
 function fo() {
   return v.check_params || (v.check_params = new Promise((e) => {
@@ -66439,11 +66436,11 @@ function vr(e, t = "") {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       }
-    }).subscribe((o) => __async(null, null, function* () {
+    }).subscribe(async (o) => {
       if (!o.ok) return i(o);
-      const s = yield o.json();
+      const s = await o.json();
       pn(s), n(), delete v.generate_tokens;
-    }), i);
+    }, i);
   })), v.generate_tokens;
 }
 function pn(e) {
@@ -66541,21 +66538,19 @@ function Ie(e, t, n, r = Bt) {
 function Ht(e, t, n = Bt) {
   return t || (t = { response_type: "void" }), n("DELETE", e, __spreadValues({ response_type: "void" }, t));
 }
-function Ao(_0, _1) {
-  return __async(this, arguments, function* (e, t, n = br) {
-    if (e.headers) {
-      const r = {};
-      e.headers.forEach ? e.headers.forEach((i, o) => r[o.toLowerCase()] = i) : Object.keys(e.headers).forEach(
-        (i) => r[i.toLowerCase()] = e.headers[i]
-      ), n[e.url || ""] = r;
-    }
-    switch (t) {
-      case "json":
-        return yield e.json().catch(() => ({}));
-      case "text":
-        return yield e.text();
-    }
-  });
+async function Ao(e, t, n = br) {
+  if (e.headers) {
+    const r = {};
+    e.headers.forEach ? e.headers.forEach((i, o) => r[o.toLowerCase()] = i) : Object.keys(e.headers).forEach(
+      (i) => r[i.toLowerCase()] = e.headers[i]
+    ), n[e.url || ""] = r;
+  }
+  switch (t) {
+    case "json":
+      return await e.json().catch(() => ({}));
+    case "text":
+      return await e.text();
+  }
 }
 var Sr = () => {
   hn(), _r().then(
@@ -67683,16 +67678,14 @@ var ds = class {
   /**
    * Rebind to the status variable
    */
-  rebind() {
-    return __async(this, null, function* () {
-      !this._stale_bindings && this._pending !== 1 || nt(
-        `rebind:${JSON.stringify(this.binding())}`,
-        () => __async(this, null, function* () {
-          yield Nn(this.binding()), this._binding_count = this._stale_bindings || 1, this._stale_bindings = 0;
-        }),
-        100
-      );
-    });
+  async rebind() {
+    !this._stale_bindings && this._pending !== 1 || nt(
+      `rebind:${JSON.stringify(this.binding())}`,
+      async () => {
+        await Nn(this.binding()), this._binding_count = this._stale_bindings || 1, this._stale_bindings = 0;
+      },
+      100
+    );
   }
   /**
    * Generate binding details for the status variable
@@ -69903,34 +69896,32 @@ var _LocaleService = class _LocaleService {
     localStorage.setItem(`${STORE_KEY}`, locale);
     log("LOCALE", `Locale set to "${locale}"`);
   }
-  _loadLocale(locale) {
-    return __async(this, null, function* () {
-      const existing = JSON.parse(localStorage.getItem(`${STORE_KEY}.${locale}`) || "{}");
-      if (!existing.expiry || existing.expiry < Date.now()) {
-        localStorage.removeItem(`${STORE_KEY}.${locale}`);
-        const resp = yield fetch(`${this.locale_folder}/${locale}.json`);
-        if (!resp.ok) {
-          delete this._load_promises[locale];
-          return console.error(`Failed to loaded locale file for "${locale}".`, resp);
-        }
-        const locale_data = yield resp.json();
-        const locale_override_data = this.zone_id ? yield hu(this.zone_id, `locale_${locale}`).toPromise() : { details: {} };
-        const base_locale_values = removeNesting(locale_data);
-        const override_locale_values = removeNesting(locale_override_data.details);
-        this._locale_mappings[locale] = __spreadValues(__spreadValues({}, base_locale_values), override_locale_values);
-        if (!window.debug) {
-          const store2 = {
-            expiry: Date.now() + this._cache_time,
-            locale,
-            mappings: this._locale_mappings[locale]
-          };
-          localStorage.setItem(`${STORE_KEY}.${locale}`, JSON.stringify(store2));
-        }
-      } else {
-        this._locale_mappings[locale] = existing.mappings;
+  async _loadLocale(locale) {
+    const existing = JSON.parse(localStorage.getItem(`${STORE_KEY}.${locale}`) || "{}");
+    if (!existing.expiry || existing.expiry < Date.now()) {
+      localStorage.removeItem(`${STORE_KEY}.${locale}`);
+      const resp = await fetch(`${this.locale_folder}/${locale}.json`);
+      if (!resp.ok) {
+        delete this._load_promises[locale];
+        return console.error(`Failed to loaded locale file for "${locale}".`, resp);
       }
-      delete this._load_promises[locale];
-    });
+      const locale_data = await resp.json();
+      const locale_override_data = this.zone_id ? await hu(this.zone_id, `locale_${locale}`).toPromise() : { details: {} };
+      const base_locale_values = removeNesting(locale_data);
+      const override_locale_values = removeNesting(locale_override_data.details);
+      this._locale_mappings[locale] = __spreadValues(__spreadValues({}, base_locale_values), override_locale_values);
+      if (!window.debug) {
+        const store2 = {
+          expiry: Date.now() + this._cache_time,
+          locale,
+          mappings: this._locale_mappings[locale]
+        };
+        localStorage.setItem(`${STORE_KEY}.${locale}`, JSON.stringify(store2));
+      }
+    } else {
+      this._locale_mappings[locale] = existing.mappings;
+    }
+    delete this._load_promises[locale];
   }
 };
 _LocaleService.\u0275fac = function LocaleService_Factory(__ngFactoryType__) {
@@ -71107,38 +71098,36 @@ var _AuthenticatedImageDirective = class _AuthenticatedImageDirective extends As
     if (changes.source && this.source())
       this._loadImage();
   }
-  _loadImage() {
-    return __async(this, null, function* () {
-      const source = this.source();
-      if (typeof source !== "string")
-        return;
-      if (!this._element || !ve()) {
-        return this.timeout("load", () => this._loadImage(), 300);
-      }
-      if (!source.includes("/api/engine/v2/uploads")) {
-        this._element.nativeElement.src = source;
-        return;
-      }
-      if (IMAGE_STORE.has(source)) {
-        this._element.nativeElement.src = IMAGE_STORE.get(source);
-        return;
-      }
-      const tkn = Y2();
-      document.cookie = `${tkn === "x-api-key" ? "api-key=" + encodeURIComponent(Oe()) : "bearer_token=" + encodeURIComponent(tkn)};max-age=30;path=/api/engine/v2/uploads;samesite=strict;${location.protocol === "https:" ? "secure;" : ""}`;
-      let response = null;
-      try {
-        response = yield fetch(source).catch((_2) => null);
-      } catch {
-      }
-      if (!response || !response.ok) {
-        console.info("Failed to load image:", source);
-        return;
-      }
-      const blob = yield response.blob();
-      const url = URL.createObjectURL(blob);
-      IMAGE_STORE.set(source, url);
-      this._element.nativeElement.src = url;
-    });
+  async _loadImage() {
+    const source = this.source();
+    if (typeof source !== "string")
+      return;
+    if (!this._element || !ve()) {
+      return this.timeout("load", () => this._loadImage(), 300);
+    }
+    if (!source.includes("/api/engine/v2/uploads")) {
+      this._element.nativeElement.src = source;
+      return;
+    }
+    if (IMAGE_STORE.has(source)) {
+      this._element.nativeElement.src = IMAGE_STORE.get(source);
+      return;
+    }
+    const tkn = Y2();
+    document.cookie = `${tkn === "x-api-key" ? "api-key=" + encodeURIComponent(Oe()) : "bearer_token=" + encodeURIComponent(tkn)};max-age=30;path=/api/engine/v2/uploads;samesite=strict;${location.protocol === "https:" ? "secure;" : ""}`;
+    let response = null;
+    try {
+      response = await fetch(source).catch((_2) => null);
+    } catch {
+    }
+    if (!response || !response.ok) {
+      console.info("Failed to load image:", source);
+      return;
+    }
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    IMAGE_STORE.set(source, url);
+    this._element.nativeElement.src = url;
   }
 };
 _AuthenticatedImageDirective.\u0275fac = function AuthenticatedImageDirective_Factory(__ngFactoryType__) {
@@ -74809,19 +74798,17 @@ var _OrganisationService = class _OrganisationService {
   set region(item) {
     this.setRegion(item);
   }
-  setRegion(item) {
-    return __async(this, null, function* () {
-      if (!item || this._active_region.value?.id == item.id)
-        return;
-      this._active_region.next(item);
-      yield this.loadRegionData(item);
-      this._setBuildingFromTimezone();
-      if (this.building?.parent_id !== item.id && this.buildingsForRegion(item).length) {
-        this.building = this.buildingsForRegion(item)[0];
-      } else
-        this._updateSettingOverrides();
-      localStorage.setItem("PLACEOS.region", item.id);
-    });
+  async setRegion(item) {
+    if (!item || this._active_region.value?.id == item.id)
+      return;
+    this._active_region.next(item);
+    await this.loadRegionData(item);
+    this._setBuildingFromTimezone();
+    if (this.building?.parent_id !== item.id && this.buildingsForRegion(item).length) {
+      this.building = this.buildingsForRegion(item)[0];
+    } else
+      this._updateSettingOverrides();
+    localStorage.setItem("PLACEOS.region", item.id);
   }
   /** List of available buildings */
   get buildings() {
@@ -74967,174 +74954,156 @@ var _OrganisationService = class _OrganisationService {
       console.warn("Unable to remove zone as it is missing the required tag.", zone.id);
     }
   }
-  init(tries = 0) {
-    return __async(this, null, function* () {
-      this._initialised.next(false);
-      yield this.load().catch((err) => {
-        notifyError("Error loading organisation data. Retrying...");
-        setTimeout(() => this.init(tries), Math.min(1e4, 300 * ++tries));
-        throw err;
-      });
-      setTimeout(() => {
-        if (localStorage.getItem("PLACEOS.region")) {
-          this.region = this.regions.find((region) => region.id === localStorage.getItem("PLACEOS.region"));
-        }
-        if (localStorage.getItem("PLACEOS.building")) {
-          this.building = this.buildings.find((bld) => bld.id === localStorage.getItem("PLACEOS.building"));
-        }
-      }, 1e3);
-      if (window.debug) {
-        if (!window.application)
-          window.application = {};
-        window.application.orgs = this;
-      }
-      this._initialised.next(true);
+  async init(tries = 0) {
+    this._initialised.next(false);
+    await this.load().catch((err) => {
+      notifyError("Error loading organisation data. Retrying...");
+      setTimeout(() => this.init(tries), Math.min(1e4, 300 * ++tries));
+      throw err;
     });
+    setTimeout(() => {
+      if (localStorage.getItem("PLACEOS.region")) {
+        this.region = this.regions.find((region) => region.id === localStorage.getItem("PLACEOS.region"));
+      }
+      if (localStorage.getItem("PLACEOS.building")) {
+        this.building = this.buildings.find((bld) => bld.id === localStorage.getItem("PLACEOS.building"));
+      }
+    }, 1e3);
+    if (window.debug) {
+      if (!window.application)
+        window.application = {};
+      window.application.orgs = this;
+    }
+    this._initialised.next(true);
   }
   /**
    * Initialise service data
    */
-  load() {
-    return __async(this, null, function* () {
-      yield this.loadOrganisation();
-      yield this.loadRegions();
-      if (!this._regions.getValue().length) {
-        this._buildings.next(yield this.loadBuildings());
-      } else {
-        for (const region of this._regions.getValue()) {
-          const blds = yield this.loadBuildings(region.id);
-          if (blds.length) {
-            this._buildings.next(blds);
-            break;
-          }
+  async load() {
+    await this.loadOrganisation();
+    await this.loadRegions();
+    if (!this._regions.getValue().length) {
+      this._buildings.next(await this.loadBuildings());
+    } else {
+      for (const region of this._regions.getValue()) {
+        const blds = await this.loadBuildings(region.id);
+        if (blds.length) {
+          this._buildings.next(blds);
+          break;
         }
       }
-      yield this.loadSettings();
-      if (!this._buildings.getValue()?.length) {
-        log("ORG", "Unable to find any building zones");
-      }
-      yield this.loadLevels();
-      this._updateSettingOverrides();
-    });
+    }
+    await this.loadSettings();
+    if (!this._buildings.getValue()?.length) {
+      log("ORG", "Unable to find any building zones");
+    }
+    await this.loadLevels();
+    this._updateSettingOverrides();
   }
   /**
    * Load organisation data for application
    */
-  loadOrganisation() {
-    return __async(this, null, function* () {
-      const org_list = yield Cc({ tags: "org" }).pipe(map((i) => i.data)).toPromise();
-      if (org_list.length) {
-        const auth = ve();
-        const org = org_list.find((list) => ln() || list.id === auth?.config?.org_zone) || org_list[0];
-        const load_metadata = !this._service.get("dont_load_metadata");
-        const bindings = (yield (load_metadata ? hu(org.id, "bindings") : of({ details: {} })).toPromise())?.details;
-        this._organisation = new Organisation(__spreadProps(__spreadValues({}, org), { bindings }));
-      } else {
-        log("ORG", "Unable to find organisation");
-        this._router.navigate(["/misconfigured"]);
-      }
-    });
+  async loadOrganisation() {
+    const org_list = await Cc({ tags: "org" }).pipe(map((i) => i.data)).toPromise();
+    if (org_list.length) {
+      const auth = ve();
+      const org = org_list.find((list) => ln() || list.id === auth?.config?.org_zone) || org_list[0];
+      const load_metadata = !this._service.get("dont_load_metadata");
+      const bindings = (await (load_metadata ? hu(org.id, "bindings") : of({ details: {} })).toPromise())?.details;
+      this._organisation = new Organisation(__spreadProps(__spreadValues({}, org), { bindings }));
+    } else {
+      log("ORG", "Unable to find organisation");
+      this._router.navigate(["/misconfigured"]);
+    }
   }
   /**
    * Load region data for the organisation
    */
-  loadRegions() {
-    return __async(this, null, function* () {
-      const list = yield Cc({
-        tags: "region",
-        parent_id: this._organisation?.id || "",
-        limit: 500
-      }).pipe(map((i) => i.data.map((_2) => new Region(_2))), catchError(() => of([]))).toPromise();
-      this._regions.next(list);
-    });
+  async loadRegions() {
+    const list = await Cc({
+      tags: "region",
+      parent_id: this._organisation?.id || "",
+      limit: 500
+    }).pipe(map((i) => i.data.map((_2) => new Region(_2))), catchError(() => of([]))).toPromise();
+    this._regions.next(list);
   }
-  loadRegionData(region) {
-    return __async(this, null, function* () {
-      if (this._loaded_data[region.id])
-        return;
-      const load_metadata = !this._service.get("dont_load_metadata");
-      const settings_request = load_metadata ? hu(region.id, this.app_key) : of(new Ar());
-      const bindings_request = load_metadata ? hu(region.id, "bindings") : of(new Ar());
-      const [settings, bindings, buildings] = yield Promise.all([
-        settings_request.pipe(map((_2) => _2?.details)).toPromise(),
-        bindings_request.pipe(map((_2) => _2?.details)).toPromise(),
-        this.loadBuildings(region.id)
-      ]);
-      this._buildings.next(unique([...this._buildings.getValue(), ...buildings], "id"));
-      this._loaded_data[region.id] = true;
-      region.bindings = bindings;
-      this._region_settings[region.id] = settings;
-    });
+  async loadRegionData(region) {
+    if (this._loaded_data[region.id])
+      return;
+    const load_metadata = !this._service.get("dont_load_metadata");
+    const settings_request = load_metadata ? hu(region.id, this.app_key) : of(new Ar());
+    const bindings_request = load_metadata ? hu(region.id, "bindings") : of(new Ar());
+    const [settings, bindings, buildings] = await Promise.all([
+      settings_request.pipe(map((_2) => _2?.details)).toPromise(),
+      bindings_request.pipe(map((_2) => _2?.details)).toPromise(),
+      this.loadBuildings(region.id)
+    ]);
+    this._buildings.next(unique([...this._buildings.getValue(), ...buildings], "id"));
+    this._loaded_data[region.id] = true;
+    region.bindings = bindings;
+    this._region_settings[region.id] = settings;
   }
   /**
    * Load buildings data for the organisation
    */
-  loadBuildings() {
-    return __async(this, arguments, function* (parent_id = this._organisation?.id) {
-      const building_list = yield Cc({
-        tags: "building",
-        parent_id,
-        limit: 500
-      }).pipe(map((i) => i.data.map((_2) => new Building(_2)))).toPromise();
-      return building_list;
-    });
+  async loadBuildings(parent_id = this._organisation?.id) {
+    const building_list = await Cc({
+      tags: "building",
+      parent_id,
+      limit: 500
+    }).pipe(map((i) => i.data.map((_2) => new Building(_2)))).toPromise();
+    return building_list;
   }
-  loadBuildingData(bld) {
-    return __async(this, null, function* () {
-      if (!bld || this._loaded_data[bld.id])
-        return;
-      const [settings, bindings, booking_rules, driver_settings] = yield Promise.all([
-        hu(bld.id, this.app_key).pipe(map((_2) => _2?.details), catchError(() => of({}))).toPromise(),
-        hu(bld.id, "bindings").pipe(map((_2) => _2?.details), catchError(() => of({}))).toPromise(),
-        hu(bld.id, "booking_rules").pipe(map((_2) => _2?.details), catchError(() => of({}))).toPromise(),
-        (this.app_key.includes("concierge") ? tc({ parent_id: bld.id }) : of({ data: {} })).pipe(catchError(() => of({ data: {} })), map((_2) => {
-          try {
-            return load2(_2?.data.find((_3) => _3.encryption_level === Pt.None) || { settings_string: "" });
-          } catch {
-            return {};
-          }
-        })).toPromise()
-      ]);
-      this._building_settings[bld.id] = __spreadValues(__spreadValues({}, driver_settings || {}), settings || {});
-      bld.bindings = bindings;
-      bld.booking_rules = booking_rules;
-      this._loaded_data[bld.id] = true;
-      this._updateSettingOverrides();
-    });
+  async loadBuildingData(bld) {
+    if (!bld || this._loaded_data[bld.id])
+      return;
+    const [settings, bindings, booking_rules, driver_settings] = await Promise.all([
+      hu(bld.id, this.app_key).pipe(map((_2) => _2?.details), catchError(() => of({}))).toPromise(),
+      hu(bld.id, "bindings").pipe(map((_2) => _2?.details), catchError(() => of({}))).toPromise(),
+      hu(bld.id, "booking_rules").pipe(map((_2) => _2?.details), catchError(() => of({}))).toPromise(),
+      (this.app_key.includes("concierge") ? tc({ parent_id: bld.id }) : of({ data: {} })).pipe(catchError(() => of({ data: {} })), map((_2) => {
+        try {
+          return load2(_2?.data.find((_3) => _3.encryption_level === Pt.None) || { settings_string: "" });
+        } catch {
+          return {};
+        }
+      })).toPromise()
+    ]);
+    this._building_settings[bld.id] = __spreadValues(__spreadValues({}, driver_settings || {}), settings || {});
+    bld.bindings = bindings;
+    bld.booking_rules = booking_rules;
+    this._loaded_data[bld.id] = true;
+    this._updateSettingOverrides();
   }
   /**
    * Load levels data for the buildings
    */
-  loadLevels() {
-    return __async(this, null, function* () {
-      let level_list = yield Cc({
-        tags: "level",
-        authority_id: ve().id,
-        limit: 2500
-      }).pipe(map((i) => i.data)).toPromise();
-      level_list = level_list.filter((_2) => _2.parent_id);
-      if (!level_list?.length) {
-        this._router.navigate(["/misconfigured"]);
-      }
-      let levels = level_list.map((lvl) => new BuildingLevel(lvl));
-      levels = levels.sort((a, b2) => (a.name || "").localeCompare(b2.name || ""));
-      this._levels.next(levels);
-    });
+  async loadLevels() {
+    let level_list = await Cc({
+      tags: "level",
+      authority_id: ve().id,
+      limit: 2500
+    }).pipe(map((i) => i.data)).toPromise();
+    level_list = level_list.filter((_2) => _2.parent_id);
+    if (!level_list?.length) {
+      this._router.navigate(["/misconfigured"]);
+    }
+    let levels = level_list.map((lvl) => new BuildingLevel(lvl));
+    levels = levels.sort((a, b2) => (a.name || "").localeCompare(b2.name || ""));
+    this._levels.next(levels);
   }
   get available_room_configs() {
     return this.buildings.map((m) => [...m.room_configurations]).reduce((prev, curr) => prev.concat(curr), []).sort((a, b2) => a.name.localeCompare(b2.name));
   }
-  loadSettings() {
-    return __async(this, null, function* () {
-      if (!this._organisation)
-        return;
-      const app_settings = (yield hu(this._organisation?.id, this.app_key).toPromise())?.details;
-      const global_settings = (yield hu(this._organisation?.id, "settings").toPromise())?.details;
-      this._settings = [global_settings, app_settings];
-      this._service.overrides = [...this._settings];
-      yield this._initialiseActiveBuilding();
-      this._updateSettingOverrides();
-    });
+  async loadSettings() {
+    if (!this._organisation)
+      return;
+    const app_settings = (await hu(this._organisation?.id, this.app_key).toPromise())?.details;
+    const global_settings = (await hu(this._organisation?.id, "settings").toPromise())?.details;
+    this._settings = [global_settings, app_settings];
+    this._service.overrides = [...this._settings];
+    await this._initialiseActiveBuilding();
+    this._updateSettingOverrides();
   }
   _initialiseActiveBuilding() {
     return new Promise((resolve) => {
@@ -75178,39 +75147,35 @@ var _OrganisationService = class _OrganisationService {
       }
     });
   }
-  _setDefaultBuilding() {
-    return __async(this, null, function* () {
-      if (!this.buildings.length)
-        return;
-      const region_id = localStorage.getItem(`PLACEOS.region`);
-      yield region_id ? this.setRegion(this._regions.getValue().find((_2) => _2.id === region_id)) : this._setRegionFromTimezone();
-      this._setBuildingFromTimezone();
-      if (this.building)
-        return;
-      const bld_id = this._service.get("app.default_building");
-      if (bld_id) {
-        this.building = this.buildings.find(({ id }) => id === bld_id);
-      }
-      if (!this.building)
-        this.building = this.buildings[0];
-    });
+  async _setDefaultBuilding() {
+    if (!this.buildings.length)
+      return;
+    const region_id = localStorage.getItem(`PLACEOS.region`);
+    await (region_id ? this.setRegion(this._regions.getValue().find((_2) => _2.id === region_id)) : this._setRegionFromTimezone());
+    this._setBuildingFromTimezone();
+    if (this.building)
+      return;
+    const bld_id = this._service.get("app.default_building");
+    if (bld_id) {
+      this.building = this.buildings.find(({ id }) => id === bld_id);
+    }
+    if (!this.building)
+      this.building = this.buildings[0];
   }
-  _setRegionFromTimezone() {
-    return __async(this, null, function* () {
-      const region_list = this.regions;
-      const timezone = this.timezone;
-      for (const region of region_list) {
-        if (region.timezone === timezone) {
-          return yield this.setRegion(region);
-        }
+  async _setRegionFromTimezone() {
+    const region_list = this.regions;
+    const timezone = this.timezone;
+    for (const region of region_list) {
+      if (region.timezone === timezone) {
+        return await this.setRegion(region);
       }
-      const tz_start = timezone.split("/")[0];
-      for (const region of region_list) {
-        if (region.timezone.startsWith(tz_start)) {
-          return yield this.setRegion(region);
-        }
+    }
+    const tz_start = timezone.split("/")[0];
+    for (const region of region_list) {
+      if (region.timezone.startsWith(tz_start)) {
+        return await this.setRegion(region);
       }
-    });
+    }
   }
   _setBuildingFromTimezone() {
     const bld_list = this.buildings.filter((bld) => !this.region || bld.parent_id === this.region?.id);
@@ -75348,15 +75313,15 @@ var MapsPeopleService = _MapsPeopleService;
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "863feac",
-  "hash": "863feac",
+  "raw": "ecafbbc",
+  "hash": "ecafbbc",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "863feac",
+  "suffix": "ecafbbc",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752122831769
+  "time": 1752125224414
 };
 
 // libs/common/src/lib/vorlon.service.ts
@@ -75366,20 +75331,18 @@ var _VorlonService = class _VorlonService extends AsyncHandler {
     this._settings = inject(SettingsService);
     this.load();
   }
-  load() {
-    return __async(this, null, function* () {
-      const system = this._settings.get("app.vorlon.system");
-      if (system) {
-        const module = Ea(system, "Vorlon");
-        if (module) {
-          const binding = module.binding("enabled");
-          this.subscription("binding", binding.bind());
-          this.subscription("binding_value", binding.listen().subscribe((state2) => {
-            state2 ? this.injectVorlonScript() : this.removeVorlonScript();
-          }));
-        }
+  async load() {
+    const system = this._settings.get("app.vorlon.system");
+    if (system) {
+      const module = Ea(system, "Vorlon");
+      if (module) {
+        const binding = module.binding("enabled");
+        this.subscription("binding", binding.bind());
+        this.subscription("binding_value", binding.listen().subscribe((state2) => {
+          state2 ? this.injectVorlonScript() : this.removeVorlonScript();
+        }));
       }
-    });
+    }
   }
   injectVorlonScript() {
     this.removeVorlonScript();
@@ -75867,46 +75830,42 @@ function setupCache(cache, interval2 = 5 * 60 * 1e3) {
     }, interval2);
   }
 }
-function activateUpdate(cache) {
-  return __async(this, null, function* () {
-    if (cache.isEnabled && (yield cache.checkForUpdate())) {
-      log("CACHE", `Activating changes to the cache...`);
-      if (!(yield cache.activateUpdate()))
-        return;
-      _new_version = true;
-      notifyInfo("Newer version of the application is available", "Refresh", () => location.reload());
-    }
-  });
+async function activateUpdate(cache) {
+  if (cache.isEnabled && await cache.checkForUpdate()) {
+    log("CACHE", `Activating changes to the cache...`);
+    if (!await cache.activateUpdate())
+      return;
+    _new_version = true;
+    notifyInfo("Newer version of the application is available", "Refresh", () => location.reload());
+  }
 }
 
 // libs/common/src/lib/placeos.ts
-function setupPlace(settings) {
-  return __async(this, null, function* () {
-    const protocol = settings.protocol || location.protocol;
-    const host = settings.domain || location.hostname;
-    const port = settings.port || location.port;
-    const url = settings.use_domain ? `${protocol}//${host}:${port}` : location.origin;
-    const route = (location.pathname + "/").replace("//", "/");
-    const mock = settings.mock || location.href.includes("mock=true") || localStorage.getItem("mock") === "true";
-    const config2 = {
-      auth_type: "auth_code",
-      scope: "public",
-      host: `${host}${port ? ":" + port : ""}`,
-      auth_uri: `${url}/auth/oauth/authorize`,
-      token_uri: `${url}/auth/oauth/token`,
-      redirect_uri: `${location.origin}${route}oauth-resp.html`,
-      handle_login: !settings.local_login,
-      use_iframe: true,
-      mock
-    };
-    if (localStorage) {
-      localStorage.setItem("mock", `${!!mock && !location.href.includes("mock=false")}`);
-    }
-    if (mock) {
-      notifyInfo("Application in mock mode.");
-    }
-    return Ss(config2);
-  });
+async function setupPlace(settings) {
+  const protocol = settings.protocol || location.protocol;
+  const host = settings.domain || location.hostname;
+  const port = settings.port || location.port;
+  const url = settings.use_domain ? `${protocol}//${host}:${port}` : location.origin;
+  const route = (location.pathname + "/").replace("//", "/");
+  const mock = settings.mock || location.href.includes("mock=true") || localStorage.getItem("mock") === "true";
+  const config2 = {
+    auth_type: "auth_code",
+    scope: "public",
+    host: `${host}${port ? ":" + port : ""}`,
+    auth_uri: `${url}/auth/oauth/authorize`,
+    token_uri: `${url}/auth/oauth/token`,
+    redirect_uri: `${location.origin}${route}oauth-resp.html`,
+    handle_login: !settings.local_login,
+    use_iframe: true,
+    mock
+  };
+  if (localStorage) {
+    localStorage.setItem("mock", `${!!mock && !location.href.includes("mock=false")}`);
+  }
+  if (mock) {
+    notifyInfo("Application in mock mode.");
+  }
+  return Ss(config2);
 }
 
 // libs/common/src/lib/timezones.ts
@@ -76899,27 +76858,21 @@ var _FeatureAvailableGuard = class _FeatureAvailableGuard {
     this._settings = inject(SettingsService);
     this._org = inject(OrganisationService);
   }
-  canActivate() {
-    return __async(this, null, function* () {
-      return this.checkFeature();
-    });
+  async canActivate() {
+    return this.checkFeature();
   }
-  canLoad() {
-    return __async(this, null, function* () {
-      return this.checkFeature();
-    });
+  async canLoad() {
+    return this.checkFeature();
   }
-  checkFeature() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_2) => _2)).toPromise();
-      yield this._settings.initialised.pipe(first((_2) => _2)).toPromise();
-      const features = this._settings.get("app.disabled_features") || [];
-      const can_activate = !features.find((_2) => this._router.url.includes(_2));
-      if (!can_activate) {
-        this._router.navigate(["/"]);
-      }
-      return !!can_activate;
-    });
+  async checkFeature() {
+    await this._org.initialised.pipe(first((_2) => _2)).toPromise();
+    await this._settings.initialised.pipe(first((_2) => _2)).toPromise();
+    const features = this._settings.get("app.disabled_features") || [];
+    const can_activate = !features.find((_2) => this._router.url.includes(_2));
+    if (!can_activate) {
+      this._router.navigate(["/"]);
+    }
+    return !!can_activate;
   }
 };
 _FeatureAvailableGuard.\u0275fac = function FeatureAvailableGuard_Factory(__ngFactoryType__) {
@@ -76938,24 +76891,22 @@ var FeatureAvailableGuard = _FeatureAvailableGuard;
 
 // libs/common/src/lib/fixed-device-helpers.ts
 var _wake_lock = null;
-function requestScreenWakeLock() {
-  return __async(this, null, function* () {
-    if (!pr())
-      return;
-    if (_wake_lock)
-      yield _wake_lock.release();
-    try {
-      _wake_lock = yield navigator.wakeLock.request("screen");
-    } catch (err) {
-      throw err;
-    }
-  });
-}
-document.addEventListener("visibilitychange", () => __async(null, null, function* () {
-  if (_wake_lock !== null && document.visibilityState === "visible") {
-    _wake_lock = yield navigator.wakeLock.request("screen");
+async function requestScreenWakeLock() {
+  if (!pr())
+    return;
+  if (_wake_lock)
+    await _wake_lock.release();
+  try {
+    _wake_lock = await navigator.wakeLock.request("screen");
+  } catch (err) {
+    throw err;
   }
-}));
+}
+document.addEventListener("visibilitychange", async () => {
+  if (_wake_lock !== null && document.visibilityState === "visible") {
+    _wake_lock = await navigator.wakeLock.request("screen");
+  }
+});
 
 // libs/common/src/lib/keep-alive.service.ts
 var _KeepAliveService = class _KeepAliveService extends AsyncHandler {
@@ -77048,11 +76999,11 @@ var _RemoteLoggingService = class _RemoteLoggingService extends AsyncHandler {
     this._events = new Subject();
     this._event_history = this._events.pipe(shareReplay(2e4));
     this._metadata = null;
-    this._logging_bindings = this._system_id.pipe(filter((_2) => !!_2), switchMap((id) => combineLatest([of(id), this._bindTo(id, "enabled")])), filter(([_2, enabled]) => !!enabled), map(([id]) => this.subscription("post_events", this._event_history.subscribe((d2) => __async(this, null, function* () {
+    this._logging_bindings = this._system_id.pipe(filter((_2) => !!_2), switchMap((id) => combineLatest([of(id), this._bindTo(id, "enabled")])), filter(([_2, enabled]) => !!enabled), map(([id]) => this.subscription("post_events", this._event_history.subscribe(async (d2) => {
       this._disable_handling = true;
-      yield Ea(id, "Logger").execute("post_event", [d2]).catch();
+      await Ea(id, "Logger").execute("post_event", [d2]).catch();
       this._disable_handling = false;
-    })))));
+    }))));
     this.history = this._event_history;
     localStorage.setItem("PLACEOS.DEVICE_ID", DEVICE_ID);
     this._patchConsoleMethods();
@@ -77995,123 +77946,107 @@ var V2 = class {
   get encoded_id() {
     return encodeURIComponent(`${this.upload_id || ""}`);
   }
-  initialise() {
-    return __async(this, null, function* () {
-      const { signal: r } = this._abort_ctrl, { file: t, mime_type: e } = this._upload;
-      this._params.file_size = `${t.size}`, this._params.file_name = t.name, e && e !== "binary/octet-stream" && (this._params.file_mime = e), this._params = __spreadValues(__spreadValues({}, this._params), this._upload.params), t.dir_path?.length > 0 && (this._params.file_path = t.dir_path);
-      const s = this.base_request_headers, i = R2(this._params);
-      return (yield fetch(
-        `${this._endpoint}/new${i ? "?" + i : ""}`,
-        {
-          headers: s,
-          signal: r
-        }
-      )).json();
-    });
-  }
-  create(r) {
-    return __async(this, null, function* () {
-      const { signal: t } = this._abort_ctrl, e = this.base_request_headers;
-      r.file_id && (this._params.file_id = r.file_id), this._upload.mime_type && (this._params.file_mime = r.mime_type), r.parameters && (this._params.parameters = r.parameters), r.permissions && (this._params.permissions = r.permissions), r.public && (this._params.public = r.public), r.expires && (this._params.expires = r.expires || 0);
-      const i = yield (yield fetch(`${this._endpoint}`, {
-        body: JSON.stringify(this._params),
-        method: "POST",
-        headers: e,
-        signal: t
-      })).json();
-      return this.upload_id = i.upload_id, i;
-    });
-  }
-  sign(r, t = "") {
-    return __async(this, null, function* () {
-      if (!this.upload_id) throw new Error("Upload resource not initialised");
-      const { signal: e } = this._abort_ctrl, s = this.base_request_headers, i = new URLSearchParams();
-      return i.set("part", r.toString()), t && i.set("file_id", encodeURIComponent(t)), yield (yield fetch(
-        `${this._endpoint}/${this.encoded_id}/edit?${i.toString()}`,
-        {
-          method: "GET",
-          headers: s,
-          signal: e
-        }
-      )).json();
-    });
-  }
-  update() {
-    return __async(this, arguments, function* (r = {}) {
-      if (!this.upload_id) throw new Error("Upload resource not initialised");
-      const { signal: t } = this._abort_ctrl, e = this.base_request_headers;
-      return yield (yield fetch(`${this._endpoint}/${this.encoded_id}`, {
-        body: JSON.stringify(r),
-        method: "PUT",
-        headers: e,
-        signal: t
-      })).json();
-    });
-  }
-  signedRequest(r) {
-    return __async(this, null, function* () {
-      const e = { body: yield (yield fetch(r.signature.url, {
-        body: r.data,
-        method: r.signature.verb,
-        headers: r.signature.headers
-      })).text(), responseXML: null };
-      try {
-        e.responseXML = new window.DOMParser().parseFromString(
-          e.body,
-          "text/xml"
-        );
-      } catch {
+  async initialise() {
+    const { signal: r } = this._abort_ctrl, { file: t, mime_type: e } = this._upload;
+    this._params.file_size = `${t.size}`, this._params.file_name = t.name, e && e !== "binary/octet-stream" && (this._params.file_mime = e), this._params = __spreadValues(__spreadValues({}, this._params), this._upload.params), t.dir_path?.length > 0 && (this._params.file_path = t.dir_path);
+    const s = this.base_request_headers, i = R2(this._params);
+    return (await fetch(
+      `${this._endpoint}/new${i ? "?" + i : ""}`,
+      {
+        headers: s,
+        signal: r
       }
-      return e;
-    });
+    )).json();
   }
-  signNextChunk(r, t, e, s = null) {
-    return __async(this, null, function* () {
-      if (!this.upload_id) throw new Error("Upload resource not initialised");
-      const { signal: i } = this._abort_ctrl, o = { part_list: e };
-      s && (o.part_data = s);
-      const a = this.base_request_headers, h = R2({
-        part: `${r}`,
-        file_id: t,
-        file_mime: this._upload.mime_type
-      });
-      return yield (yield fetch(
-        `${this._endpoint}/${this.encoded_id}${h ? "?" + h : ""}`,
-        {
-          body: JSON.stringify(o),
-          method: "PUT",
-          headers: a,
-          signal: i
-        }
-      )).json();
-    });
+  async create(r) {
+    const { signal: t } = this._abort_ctrl, e = this.base_request_headers;
+    r.file_id && (this._params.file_id = r.file_id), this._upload.mime_type && (this._params.file_mime = r.mime_type), r.parameters && (this._params.parameters = r.parameters), r.permissions && (this._params.permissions = r.permissions), r.public && (this._params.public = r.public), r.expires && (this._params.expires = r.expires || 0);
+    const i = await (await fetch(`${this._endpoint}`, {
+      body: JSON.stringify(this._params),
+      method: "POST",
+      headers: e,
+      signal: t
+    })).json();
+    return this.upload_id = i.upload_id, i;
   }
-  signChunk(r, t = null) {
-    return __async(this, null, function* () {
-      const { signal: e } = this._abort_ctrl, s = this.base_request_headers, i = R2({
-        part: `${r}`,
-        file_id: t
-      });
-      return yield (yield fetch(
-        `${this._endpoint}/edit${i ? "?" + i : ""}`,
-        {
-          headers: s,
-          signal: e
-        }
-      )).json();
-    });
+  async sign(r, t = "") {
+    if (!this.upload_id) throw new Error("Upload resource not initialised");
+    const { signal: e } = this._abort_ctrl, s = this.base_request_headers, i = new URLSearchParams();
+    return i.set("part", r.toString()), t && i.set("file_id", encodeURIComponent(t)), await (await fetch(
+      `${this._endpoint}/${this.encoded_id}/edit?${i.toString()}`,
+      {
+        method: "GET",
+        headers: s,
+        signal: e
+      }
+    )).json();
   }
-  updateStatus() {
-    return __async(this, arguments, function* (r = {}) {
-      if (!this.upload_id) throw new Error("Upload resource not initialised");
-      const { signal: t } = this._abort_ctrl, e = this.base_request_headers;
-      return yield (yield fetch(`${this._endpoint}/${this.encoded_id}`, {
-        headers: e,
+  async update(r = {}) {
+    if (!this.upload_id) throw new Error("Upload resource not initialised");
+    const { signal: t } = this._abort_ctrl, e = this.base_request_headers;
+    return await (await fetch(`${this._endpoint}/${this.encoded_id}`, {
+      body: JSON.stringify(r),
+      method: "PUT",
+      headers: e,
+      signal: t
+    })).json();
+  }
+  async signedRequest(r) {
+    const e = { body: await (await fetch(r.signature.url, {
+      body: r.data,
+      method: r.signature.verb,
+      headers: r.signature.headers
+    })).text(), responseXML: null };
+    try {
+      e.responseXML = new window.DOMParser().parseFromString(
+        e.body,
+        "text/xml"
+      );
+    } catch {
+    }
+    return e;
+  }
+  async signNextChunk(r, t, e, s = null) {
+    if (!this.upload_id) throw new Error("Upload resource not initialised");
+    const { signal: i } = this._abort_ctrl, o = { part_list: e };
+    s && (o.part_data = s);
+    const a = this.base_request_headers, h = R2({
+      part: `${r}`,
+      file_id: t,
+      file_mime: this._upload.mime_type
+    });
+    return await (await fetch(
+      `${this._endpoint}/${this.encoded_id}${h ? "?" + h : ""}`,
+      {
+        body: JSON.stringify(o),
         method: "PUT",
-        body: JSON.stringify(r),
-        signal: t
-      })).json();
+        headers: a,
+        signal: i
+      }
+    )).json();
+  }
+  async signChunk(r, t = null) {
+    const { signal: e } = this._abort_ctrl, s = this.base_request_headers, i = R2({
+      part: `${r}`,
+      file_id: t
     });
+    return await (await fetch(
+      `${this._endpoint}/edit${i ? "?" + i : ""}`,
+      {
+        headers: s,
+        signal: e
+      }
+    )).json();
+  }
+  async updateStatus(r = {}) {
+    if (!this.upload_id) throw new Error("Upload resource not initialised");
+    const { signal: t } = this._abort_ctrl, e = this.base_request_headers;
+    return await (await fetch(`${this._endpoint}/${this.encoded_id}`, {
+      headers: e,
+      method: "PUT",
+      body: JSON.stringify(r),
+      signal: t
+    })).json();
   }
   abort() {
     this._abort_ctrl.abort();
@@ -78224,18 +78159,16 @@ var Tt = class {
     this._state.next(__spreadProps(__spreadValues({}, t), { status: "error", error: r }));
   }
   /** Resume uploading the resource */
-  resume(r) {
-    return __async(this, null, function* () {
-      const t = this._state.getValue();
-      if (!["complete", "uploading", "cancelled"].includes(t.status)) {
-        if (r && (this.parallel = r), !this._provider) {
-          this._request = new V2(this, this._endpoint);
-          const { residence: e } = yield this._request.initialise(), s = Ct(e);
-          s ? (this._provider = new s(this._request, this), this._state.next(__spreadProps(__spreadValues({}, t), { status: "uploading" }))) : this.onError("No provider available to upload to");
-        }
-        this._provider?.start();
+  async resume(r) {
+    const t = this._state.getValue();
+    if (!["complete", "uploading", "cancelled"].includes(t.status)) {
+      if (r && (this.parallel = r), !this._provider) {
+        this._request = new V2(this, this._endpoint);
+        const { residence: e } = await this._request.initialise(), s = Ct(e);
+        s ? (this._provider = new s(this._request, this), this._state.next(__spreadProps(__spreadValues({}, t), { status: "uploading" }))) : this.onError("No provider available to upload to");
       }
-    });
+      this._provider?.start();
+    }
   }
   /** Pause the uploading of the resource */
   pause() {
@@ -78367,28 +78300,24 @@ var q2 = class {
     this._upload.onProgress(r);
   }
   /* istanbul ignore next */
-  _finalise() {
-    return __async(this, null, function* () {
-      this._request.updateStatus().then(
-        () => this._upload.onComplete(),
-        (r) => this._onError(r)
-      );
-    });
+  async _finalise() {
+    this._request.updateStatus().then(
+      () => this._upload.onComplete(),
+      (r) => this._onError(r)
+    );
   }
   /* istanbul ignore next */
-  _hashPart(r, t, e) {
-    return __async(this, null, function* () {
-      const s = this._memoization[r], i = t();
-      return s ? {
-        data: i,
-        md5: s.md5,
-        part: s.part
-      } : e(i).then((o) => (this._memoization[r] = o, {
-        data: i,
-        md5: o.md5,
-        part: o.part
-      }));
-    });
+  async _hashPart(r, t, e) {
+    const s = this._memoization[r], i = t();
+    return s ? {
+      data: i,
+      md5: s.md5,
+      part: s.part
+    } : e(i).then((o) => (this._memoization[r] = o, {
+      data: i,
+      md5: o.md5,
+      part: o.part
+    }));
   }
   /* istanbul ignore next */
   _getPartData() {
@@ -78406,26 +78335,24 @@ var Xt2 = class extends q2 {
   static lookup = "AmazonS3";
   // 5MiB part size
   _part_size = 5242880;
-  _start() {
-    return __async(this, null, function* () {
-      if (this._strategy === void 0) {
-        if (this.state = l.Uploading, this._strategy = null, this._part_size * 9999 < this.size && (this._part_size = Math.floor(this.size / 9999), this._part_size > 5 * 1024 * 1024 * 1024)) {
-          this._upload.cancel(), this._onError("file exceeds maximum size");
-          return;
-        }
-        const r = yield this._processPart(1).catch(
-          (e) => this._onError(e)
-        );
-        if (!r || this.state !== l.Uploading) return;
-        const t = yield this._request.create({
-          file_id: window.btoa(w2(r.md5))
-        }).catch((e) => this._onError(e));
-        if (!t) return;
-        this._strategy = t.type, t.signature && this._upload.setAccessUrl(
-          (t.signature.url || "").split("?")[0]
-        ), t.type === "direct_upload" ? this._direct(t, r) : this._resume(t, r);
-      } else this.state === l.Paused && this._resume();
-    });
+  async _start() {
+    if (this._strategy === void 0) {
+      if (this.state = l.Uploading, this._strategy = null, this._part_size * 9999 < this.size && (this._part_size = Math.floor(this.size / 9999), this._part_size > 5 * 1024 * 1024 * 1024)) {
+        this._upload.cancel(), this._onError("file exceeds maximum size");
+        return;
+      }
+      const r = await this._processPart(1).catch(
+        (e) => this._onError(e)
+      );
+      if (!r || this.state !== l.Uploading) return;
+      const t = await this._request.create({
+        file_id: window.btoa(w2(r.md5))
+      }).catch((e) => this._onError(e));
+      if (!t) return;
+      this._strategy = t.type, t.signature && this._upload.setAccessUrl(
+        (t.signature.url || "").split("?")[0]
+      ), t.type === "direct_upload" ? this._direct(t, r) : this._resume(t, r);
+    } else this.state === l.Paused && this._resume();
   }
   // Calculates the MD5 of the part of the file we are uploading
   _processPart(r) {
@@ -78444,33 +78371,31 @@ var Xt2 = class extends q2 {
       }))
     );
   }
-  _resume(r = null, t = null) {
-    return __async(this, null, function* () {
-      let e;
-      if (r)
-        if (r.type === "parts")
-          for (this._pending_parts = r.part_list, r.part_data && (this._memoization = r.part_data), e = 0; e < this._upload.parallel; e += 1)
-            this._nextPart();
-        else {
-          const s = yield this._request.signedRequest(r).catch((a) => {
-            this._restart(), this._onError(a);
-          });
-          if (!s) return;
-          const i = s.responseXML.getElementsByTagName("UploadId")[0].textContent, o = yield this._request.updateStatus({
-            resumable_id: i,
-            file_id: window.btoa(w2(t.md5)),
-            part: 1
-          }).catch((a) => {
-            this._restart(), this._onError(a);
-          });
-          if (!o) return;
-          for (this._nextPartIndex(), this._setPart(o, t), e = 1; e < this._upload.parallel; e += 1)
-            this._nextPart();
-        }
-      else
-        for (e = 0; e < this._upload.parallel; e += 1)
+  async _resume(r = null, t = null) {
+    let e;
+    if (r)
+      if (r.type === "parts")
+        for (this._pending_parts = r.part_list, r.part_data && (this._memoization = r.part_data), e = 0; e < this._upload.parallel; e += 1)
           this._nextPart();
-    });
+      else {
+        const s = await this._request.signedRequest(r).catch((a) => {
+          this._restart(), this._onError(a);
+        });
+        if (!s) return;
+        const i = s.responseXML.getElementsByTagName("UploadId")[0].textContent, o = await this._request.updateStatus({
+          resumable_id: i,
+          file_id: window.btoa(w2(t.md5)),
+          part: 1
+        }).catch((a) => {
+          this._restart(), this._onError(a);
+        });
+        if (!o) return;
+        for (this._nextPartIndex(), this._setPart(o, t), e = 1; e < this._upload.parallel; e += 1)
+          this._nextPart();
+      }
+    else
+      for (e = 0; e < this._upload.parallel; e += 1)
+        this._nextPart();
   }
   _generatePartManifest() {
     let r = "<CompleteMultipartUpload>", t, e;
@@ -80798,16 +80723,16 @@ var _UploadsService = class _UploadsService {
       const ref = this._dialog.open(UploadPermissionsModalComponent, {
         data: { file }
       });
-      ref.afterClosed().subscribe((details) => __async(this, null, function* () {
+      ref.afterClosed().subscribe(async (details) => {
         if (details) {
-          const id = yield this.uploadFile(details.file, details.is_public, details.permissions).catch((e) => {
+          const id = await this.uploadFile(details.file, details.is_public, details.permissions).catch((e) => {
             reject(e);
             throw e;
           });
           resolve(id);
         } else
           reject();
-      }));
+      });
     });
   }
   uploadFile(file, pub = true, permissions = "none") {
@@ -81086,8 +81011,7 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
   }
   get theme() {
     const allow_dark_mode = this.get("app.allow_dark_mode");
-    const theme = allow_dark_mode ? this.get("theme") : "light";
-    return theme;
+    return allow_dark_mode ? this.get("theme") : "light";
   }
   /** Get observable for key */
   listen(name) {
@@ -81139,31 +81063,31 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
   /**
    * Initialise the settings
    */
-  init() {
-    return __async(this, null, function* () {
-      if (this.get("debug"))
-        window.debug = true;
-      if (this.get("app")?.name) {
-        this._app_name = this.get("app").name;
-      }
-      this._app_name = location.pathname.replace(/[\\/]/g, "").trim() || this._app_name;
-      setAppName(this._app_name.split("-").join("_").toUpperCase());
-      log("Settings", "Successfully loaded settings");
-      this._initialised.next(true);
-      if (window.debug) {
-        if (!window.application)
-          window.application = {};
-        window.application.settings = this;
-        window.setting = (key) => this.get(key);
-      }
-      const user = yield firstTruthyValueFrom(current_user);
-      const data = yield lastValueFrom(hu(user.id, "settings"));
-      this._user_settings.next(data.details || {});
+  async init() {
+    if (this.get("debug"))
+      window.debug = true;
+    if (this.get("app")?.name) {
+      this._app_name = this.get("app").name;
+    }
+    this._app_name = location.pathname.replace(/[\\/]/g, "").trim() || this._app_name;
+    setAppName(this._app_name.split("-").join("_").toUpperCase());
+    log("Settings", "Successfully loaded settings");
+    this._initialised.next(true);
+    if (window.debug) {
+      if (!window.application)
+        window.application = {};
+      window.application.settings = this;
+      window.setting = (key) => this.get(key);
+    }
+    const user = await firstTruthyValueFrom(current_user);
+    const data = await lastValueFrom(hu(user.id, "settings"));
+    this._user_settings.next(data.details || {});
+    this.timeout("init", () => {
       this._initDarkMode();
       this._applyTheme();
       this._setFontSize();
       this._setPrintFontSize();
-    });
+    }, 1e3);
   }
   /** Whether settings service has initialised */
   get app_name() {
@@ -81229,19 +81153,17 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
     }
     element.innerText = css_string;
   }
-  _savePendingChanges() {
-    return __async(this, null, function* () {
-      const user = currentUser();
-      if (!user?.id || !Object.keys(this._pending_settings).length)
-        return;
-      yield lastValueFrom(du(user.id, {
-        name: "settings",
-        description: "",
-        details: __spreadValues(__spreadValues({}, this._user_settings.getValue()), this._pending_settings)
-      }));
-      this._user_settings.next(__spreadValues(__spreadValues({}, this._user_settings.getValue()), this._pending_settings));
-      this._pending_settings = {};
-    });
+  async _savePendingChanges() {
+    const user = currentUser();
+    if (!user?.id || !Object.keys(this._pending_settings).length)
+      return;
+    await lastValueFrom(du(user.id, {
+      name: "settings",
+      description: "",
+      details: __spreadValues(__spreadValues({}, this._user_settings.getValue()), this._pending_settings)
+    }));
+    this._user_settings.next(__spreadValues(__spreadValues({}, this._user_settings.getValue()), this._pending_settings));
+    this._pending_settings = {};
   }
   _setFontSize() {
     if (!this.get("font_size"))
@@ -81250,14 +81172,18 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
   }
   _applyTheme() {
     const allow_dark_mode = this.get("app.allow_dark_mode");
-    const theme = allow_dark_mode ? this.theme : "light";
+    this._clearTheme();
+    if (!allow_dark_mode)
+      return;
+    document.body.classList.add(`theme-${this.theme}`);
+  }
+  _clearTheme() {
     const class_list = document.body.classList.value.split(" ");
     for (const item of class_list) {
       if (item.startsWith("theme-")) {
         document.body.classList.remove(item);
       }
     }
-    document.body.classList.add(`theme-${theme}`);
   }
   _setPrintFontSize() {
     let print_style_el = document.getElementById("placeos-print-block");
@@ -81269,7 +81195,7 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
     print_style_el.innerText = `@media print { html, body { font-size: ${this.get("app.print_font_size") || "4mm"}; } }`;
   }
   _initDarkMode() {
-    if (this.theme || true)
+    if (this.theme)
       return;
     const os_dark = window?.matchMedia ? window?.matchMedia("(prefers-color-scheme: dark)")?.matches : false;
     this.setTheme(os_dark ? "dark" : "");
@@ -81351,42 +81277,40 @@ var _SpacePipe = class _SpacePipe {
    * Get details of the space with the given ID
    * @param space_id ID or Email of the space
    */
-  transform(space_id) {
-    return __async(this, null, function* () {
-      if (this.org) {
-        yield firstTruthyValueFrom(this.org.initialised.pipe(first((_2) => _2)));
-      }
-      const is_email = space_id?.includes("@");
-      if (!space_id)
-        return EMPTY_SPACE;
-      let space = SPACE_LIST.find(({ id, email }) => id === space_id || email === space_id);
-      if (space)
-        return space;
-      if (ATTEMPT_COUNT[space_id])
-        return EMPTY_SPACE;
-      if (!is_email) {
-        const system = yield cc(space_id).toPromise().catch((_2) => null);
-        if (system) {
-          space = new Space(__spreadProps(__spreadValues({}, system), {
-            level: this.org?.levelWithID([...system.zones])
-          }));
-          SPACE_LIST.push(space);
-          return space;
-        }
-      }
-      const systems = (yield lastValueFrom(uc({
-        in: space_id,
-        zone_id: this.org?.organisation.id
-      }))).data;
-      if (systems.length === 1) {
-        space = new Space(__spreadProps(__spreadValues({}, systems[0]), {
-          level: this.org?.levelWithID([...systems[0].zones])
+  async transform(space_id) {
+    if (this.org) {
+      await firstTruthyValueFrom(this.org.initialised.pipe(first((_2) => _2)));
+    }
+    const is_email = space_id?.includes("@");
+    if (!space_id)
+      return EMPTY_SPACE;
+    let space = SPACE_LIST.find(({ id, email }) => id === space_id || email === space_id);
+    if (space)
+      return space;
+    if (ATTEMPT_COUNT[space_id])
+      return EMPTY_SPACE;
+    if (!is_email) {
+      const system = await cc(space_id).toPromise().catch((_2) => null);
+      if (system) {
+        space = new Space(__spreadProps(__spreadValues({}, system), {
+          level: this.org?.levelWithID([...system.zones])
         }));
         SPACE_LIST.push(space);
         return space;
       }
-      return EMPTY_SPACE;
-    });
+    }
+    const systems = (await lastValueFrom(uc({
+      in: space_id,
+      zone_id: this.org?.organisation.id
+    }))).data;
+    if (systems.length === 1) {
+      space = new Space(__spreadProps(__spreadValues({}, systems[0]), {
+        level: this.org?.levelWithID([...systems[0].zones])
+      }));
+      SPACE_LIST.push(space);
+      return space;
+    }
+    return EMPTY_SPACE;
   }
   get(space_id) {
     return SPACE_LIST.find(({ id, email }) => id === space_id || email === space_id) || EMPTY_SPACE;
@@ -81675,18 +81599,18 @@ function queryAllBookings(q3) {
     fn: (item) => new Booking(item),
     endpoint: BOOKINGS_ENDPOINT,
     path: ""
-  }).pipe(switchMap((_0) => __async(null, [_0], function* ({ data, next }) {
+  }).pipe(switchMap(async ({ data, next }) => {
     let list = [...data];
     let count = 1;
     while (next && count <= MAX_PAGES) {
-      const resp = yield next().toPromise();
+      const resp = await next().toPromise();
       data = resp.data;
       next = resp.next;
       list = [...list, ...data];
       count += 1;
     }
     return unique(list, "id");
-  })), catchError((_2) => of([])));
+  }), catchError((_2) => of([])));
 }
 function showBooking(id) {
   return tt(`${BOOKINGS_ENDPOINT}/${encodeURIComponent(id)}`).pipe(map((item) => new Booking(item)));
@@ -81727,10 +81651,10 @@ function removeBookingInstance(id, start_time) {
 }
 function checkinBooking(id, state2) {
   const query2 = toQueryString({ state: state2 });
-  return It(`${BOOKINGS_ENDPOINT}/${encodeURIComponent(id)}/check_in?${query2}`, "").pipe(map((item) => new Booking(item)), catchError((e) => __async(null, null, function* () {
-    const body = yield e.json();
+  return It(`${BOOKINGS_ENDPOINT}/${encodeURIComponent(id)}/check_in?${query2}`, "").pipe(map((item) => new Booking(item)), catchError(async (e) => {
+    const body = await e.json();
     throw body.error || body.message || body;
-  })));
+  }));
 }
 function queryResourceAvailability(id_list, start, duration, ignore, type2 = "room", ignore_period = [0, 0]) {
   return queryBookings({
@@ -81739,41 +81663,39 @@ function queryResourceAvailability(id_list, start, duration, ignore, type2 = "ro
     period_end: getUnixTime(addMinutes(start, duration))
   }).pipe(map((_2) => id_list.map((id) => !_2.find((b2) => b2.asset_id === id && (!ignore || ignore !== b2.id)))));
 }
-function createBookingsForEvent(event, type2, resources) {
-  return __async(this, null, function* () {
-    const bookings = yield queryBookings({
+async function createBookingsForEvent(event, type2, resources) {
+  const bookings = await queryBookings({
+    type: type2,
+    period_start: getUnixTime(event.date),
+    period_end: getUnixTime(addMinutes(event.date, event.duration))
+  }).pipe(map((_2) => _2.filter((_3) => _3.parent_id === event.id))).toPromise();
+  await Promise.all(bookings.map((_2) => removeBooking(_2.id).toPromise()));
+  await Promise.all(event.linked_bookings.filter((_2) => _2.booking_type === type2).map((_2) => removeBooking(_2.id).toPromise()));
+  const zones = event.system?.zones || unique(flatten2(event.resources.map((_2) => _2.zones))) || [];
+  await Promise.all(resources.map((item) => {
+    const booking = bookings.find((_2) => _2.asset_ids.find((id) => item.items?.find((i) => i.item_ids.includes(id))));
+    return lastValueFrom(createBooking(new Booking({
       type: type2,
-      period_start: getUnixTime(event.date),
-      period_end: getUnixTime(addMinutes(event.date, event.duration))
-    }).pipe(map((_2) => _2.filter((_3) => _3.parent_id === event.id))).toPromise();
-    yield Promise.all(bookings.map((_2) => removeBooking(_2.id).toPromise()));
-    yield Promise.all(event.linked_bookings.filter((_2) => _2.booking_type === type2).map((_2) => removeBooking(_2.id).toPromise()));
-    const zones = event.system?.zones || unique(flatten2(event.resources.map((_2) => _2.zones))) || [];
-    yield Promise.all(resources.map((item) => {
-      const booking = bookings.find((_2) => _2.asset_ids.find((id) => item.items?.find((i) => i.item_ids.includes(id))));
-      return lastValueFrom(createBooking(new Booking({
-        type: type2,
-        booking_type: type2,
-        date: event.date,
-        duration: event.duration,
-        description: event.title || item.name,
-        user_email: event.host,
-        asset_id: item.email || item.id,
-        asset_name: item.name,
-        title: event.title,
-        attendees: item.email ? [item] : [],
-        approved: booking?.approved && !item._changed,
-        rejected: booking?.rejected && !item._changed,
-        extension_data: {
-          parent_id: event.id,
-          name: item.name,
-          location_id: event.location,
-          details: item
-        },
-        zones
-      }), { ical_uid: event.ical_uid, event_id: event.id }));
-    }));
-  });
+      booking_type: type2,
+      date: event.date,
+      duration: event.duration,
+      description: event.title || item.name,
+      user_email: event.host,
+      asset_id: item.email || item.id,
+      asset_name: item.name,
+      title: event.title,
+      attendees: item.email ? [item] : [],
+      approved: booking?.approved && !item._changed,
+      rejected: booking?.rejected && !item._changed,
+      extension_data: {
+        parent_id: event.id,
+        name: item.name,
+        location_id: event.location,
+        details: item
+      },
+      zones
+    }), { ical_uid: event.ical_uid, event_id: event.id }));
+  }));
 }
 
 // libs/catering/src/lib/catering-item.class.ts
@@ -82276,6 +82198,7 @@ export {
   Output,
   HostListener,
   NgModule,
+  provideZonelessChangeDetection,
   LOCALE_ID,
   computed,
   HostAttributeToken,
@@ -82619,4 +82542,4 @@ export {
 js-yaml/dist/js-yaml.mjs:
   (*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT *)
 */
-//# sourceMappingURL=chunk-IPNUB35F.js.map
+//# sourceMappingURL=chunk-3RERMB4V.js.map

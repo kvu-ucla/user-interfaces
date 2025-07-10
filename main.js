@@ -5,11 +5,11 @@ import {
   VirtualKeyboardComponent,
   generateMockSpace,
   setHours
-} from "./chunk-YCEH6UEA.js";
+} from "./chunk-SQYVM4WQ.js";
 import {
   CheckinStateService,
   MatCheckboxModule
-} from "./chunk-MC2BORTQ.js";
+} from "./chunk-GBKP47ZP.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -173,6 +173,7 @@ import {
   pr,
   predictableRandomInt,
   provideAppInitializer,
+  provideZonelessChangeDetection,
   randomInt,
   randomString,
   registerLocaleData,
@@ -251,14 +252,13 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-IPNUB35F.js";
+} from "./chunk-3RERMB4V.js";
 import {
-  __async,
   __export,
   __objRest,
   __spreadProps,
   __spreadValues
-} from "./chunk-XWLXMCJQ.js";
+} from "./chunk-653SOEEV.js";
 
 // node_modules/@angular/animations/fesm2022/util-CPU6TNml.mjs
 var LINE_START = "\n - ";
@@ -15348,7 +15348,7 @@ function instrumentFetch(onFetchResolved, skipNativeFetchCheck = false) {
         triggerHandlers("fetch", __spreadValues({}, handlerData));
       }
       return originalFetch.apply(GLOBAL_OBJ, args).then(
-        (response) => __async(null, null, function* () {
+        async (response) => {
           if (onFetchResolved) {
             onFetchResolved(response);
           } else {
@@ -15358,7 +15358,7 @@ function instrumentFetch(onFetchResolved, skipNativeFetchCheck = false) {
             }));
           }
           return response;
-        }),
+        },
         (error) => {
           triggerHandlers("fetch", __spreadProps(__spreadValues({}, handlerData), {
             endTimestamp: timestampInSeconds() * 1e3,
@@ -15381,45 +15381,43 @@ function instrumentFetch(onFetchResolved, skipNativeFetchCheck = false) {
     };
   });
 }
-function resolveResponse(res, onFinishedResolving) {
-  return __async(this, null, function* () {
-    if (res?.body) {
-      const body = res.body;
-      const responseReader = body.getReader();
-      const maxFetchDurationTimeout = setTimeout(
-        () => {
+async function resolveResponse(res, onFinishedResolving) {
+  if (res?.body) {
+    const body = res.body;
+    const responseReader = body.getReader();
+    const maxFetchDurationTimeout = setTimeout(
+      () => {
+        body.cancel().then(null, () => {
+        });
+      },
+      90 * 1e3
+      // 90s
+    );
+    let readingActive = true;
+    while (readingActive) {
+      let chunkTimeout;
+      try {
+        chunkTimeout = setTimeout(() => {
           body.cancel().then(null, () => {
           });
-        },
-        90 * 1e3
-        // 90s
-      );
-      let readingActive = true;
-      while (readingActive) {
-        let chunkTimeout;
-        try {
-          chunkTimeout = setTimeout(() => {
-            body.cancel().then(null, () => {
-            });
-          }, 5e3);
-          const { done } = yield responseReader.read();
-          clearTimeout(chunkTimeout);
-          if (done) {
-            onFinishedResolving();
-            readingActive = false;
-          }
-        } catch (error) {
+        }, 5e3);
+        const { done } = await responseReader.read();
+        clearTimeout(chunkTimeout);
+        if (done) {
+          onFinishedResolving();
           readingActive = false;
-        } finally {
-          clearTimeout(chunkTimeout);
         }
+      } catch (error) {
+        readingActive = false;
+      } finally {
+        clearTimeout(chunkTimeout);
       }
-      clearTimeout(maxFetchDurationTimeout);
-      responseReader.releaseLock();
-      body.cancel().then(null, () => {
-      });
     }
-  });
+    clearTimeout(maxFetchDurationTimeout);
+    responseReader.releaseLock();
+    body.cancel().then(null, () => {
+    });
+  }
 }
 function streamHandler(response) {
   let clonedResponseForResolving;
@@ -23772,15 +23770,13 @@ var EventBufferArray = class {
     this.events = [];
   }
   /** @inheritdoc */
-  addEvent(event) {
-    return __async(this, null, function* () {
-      const eventSize = JSON.stringify(event).length;
-      this._totalSize += eventSize;
-      if (this._totalSize > REPLAY_MAX_EVENT_BUFFER_SIZE) {
-        throw new EventBufferSizeExceededError();
-      }
-      this.events.push(event);
-    });
+  async addEvent(event) {
+    const eventSize = JSON.stringify(event).length;
+    this._totalSize += eventSize;
+    if (this._totalSize > REPLAY_MAX_EVENT_BUFFER_SIZE) {
+      throw new EventBufferSizeExceededError();
+    }
+    this.events.push(event);
   }
   /** @inheritdoc */
   finish() {
@@ -23954,13 +23950,11 @@ var EventBufferCompressionWorker = class {
   /**
    * Finish the request and return the compressed data from the worker.
    */
-  _finishRequest() {
-    return __async(this, null, function* () {
-      const response = yield this._worker.postMessage("finish");
-      this._earliestTimestamp = null;
-      this._totalSize = 0;
-      return response;
-    });
+  async _finishRequest() {
+    const response = await this._worker.postMessage("finish");
+    this._earliestTimestamp = null;
+    this._totalSize = 0;
+    return response;
   }
 };
 var EventBufferProxy = class {
@@ -24017,46 +24011,40 @@ var EventBufferProxy = class {
     return this._used.addEvent(event);
   }
   /** @inheritDoc */
-  finish() {
-    return __async(this, null, function* () {
-      yield this.ensureWorkerIsLoaded();
-      return this._used.finish();
-    });
+  async finish() {
+    await this.ensureWorkerIsLoaded();
+    return this._used.finish();
   }
   /** Ensure the worker has loaded. */
   ensureWorkerIsLoaded() {
     return this._ensureWorkerIsLoadedPromise;
   }
   /** Actually check if the worker has been loaded. */
-  _ensureWorkerIsLoaded() {
-    return __async(this, null, function* () {
-      try {
-        yield this._compression.ensureReady();
-      } catch (error) {
-        DEBUG_BUILD4 && logger2.exception(error, "Failed to load the compression worker, falling back to simple buffer");
-        return;
-      }
-      yield this._switchToCompressionWorker();
-    });
+  async _ensureWorkerIsLoaded() {
+    try {
+      await this._compression.ensureReady();
+    } catch (error) {
+      DEBUG_BUILD4 && logger2.exception(error, "Failed to load the compression worker, falling back to simple buffer");
+      return;
+    }
+    await this._switchToCompressionWorker();
   }
   /** Switch the used buffer to the compression worker. */
-  _switchToCompressionWorker() {
-    return __async(this, null, function* () {
-      const { events, hasCheckout, waitForCheckout } = this._fallback;
-      const addEventPromises = [];
-      for (const event of events) {
-        addEventPromises.push(this._compression.addEvent(event));
-      }
-      this._compression.hasCheckout = hasCheckout;
-      this._compression.waitForCheckout = waitForCheckout;
-      this._used = this._compression;
-      try {
-        yield Promise.all(addEventPromises);
-        this._fallback.clear();
-      } catch (error) {
-        DEBUG_BUILD4 && logger2.exception(error, "Failed to add events when switching buffers.");
-      }
-    });
+  async _switchToCompressionWorker() {
+    const { events, hasCheckout, waitForCheckout } = this._fallback;
+    const addEventPromises = [];
+    for (const event of events) {
+      addEventPromises.push(this._compression.addEvent(event));
+    }
+    this._compression.hasCheckout = hasCheckout;
+    this._compression.waitForCheckout = waitForCheckout;
+    this._used = this._compression;
+    try {
+      await Promise.all(addEventPromises);
+      this._fallback.clear();
+    } catch (error) {
+      DEBUG_BUILD4 && logger2.exception(error, "Failed to add events when switching buffers.");
+    }
   }
 };
 function createEventBuffer({
@@ -24236,43 +24224,41 @@ function addEvent(replay, event, isCheckout) {
   }
   return _addEvent(replay, event, isCheckout);
 }
-function _addEvent(replay, event, isCheckout) {
-  return __async(this, null, function* () {
-    const { eventBuffer } = replay;
-    if (!eventBuffer || eventBuffer.waitForCheckout && !isCheckout) {
+async function _addEvent(replay, event, isCheckout) {
+  const { eventBuffer } = replay;
+  if (!eventBuffer || eventBuffer.waitForCheckout && !isCheckout) {
+    return null;
+  }
+  const isBufferMode = replay.recordingMode === "buffer";
+  try {
+    if (isCheckout && isBufferMode) {
+      eventBuffer.clear();
+    }
+    if (isCheckout) {
+      eventBuffer.hasCheckout = true;
+      eventBuffer.waitForCheckout = false;
+    }
+    const replayOptions = replay.getOptions();
+    const eventAfterPossibleCallback = maybeApplyCallback(event, replayOptions.beforeAddRecordingEvent);
+    if (!eventAfterPossibleCallback) {
+      return;
+    }
+    return await eventBuffer.addEvent(eventAfterPossibleCallback);
+  } catch (error) {
+    const isExceeded = error && error instanceof EventBufferSizeExceededError;
+    const reason = isExceeded ? "addEventSizeExceeded" : "addEvent";
+    if (isExceeded && isBufferMode) {
+      eventBuffer.clear();
+      eventBuffer.waitForCheckout = true;
       return null;
     }
-    const isBufferMode = replay.recordingMode === "buffer";
-    try {
-      if (isCheckout && isBufferMode) {
-        eventBuffer.clear();
-      }
-      if (isCheckout) {
-        eventBuffer.hasCheckout = true;
-        eventBuffer.waitForCheckout = false;
-      }
-      const replayOptions = replay.getOptions();
-      const eventAfterPossibleCallback = maybeApplyCallback(event, replayOptions.beforeAddRecordingEvent);
-      if (!eventAfterPossibleCallback) {
-        return;
-      }
-      return yield eventBuffer.addEvent(eventAfterPossibleCallback);
-    } catch (error) {
-      const isExceeded = error && error instanceof EventBufferSizeExceededError;
-      const reason = isExceeded ? "addEventSizeExceeded" : "addEvent";
-      if (isExceeded && isBufferMode) {
-        eventBuffer.clear();
-        eventBuffer.waitForCheckout = true;
-        return null;
-      }
-      replay.handleException(error);
-      yield replay.stop({ reason });
-      const client = getClient();
-      if (client) {
-        client.recordDroppedEvent("internal_sdk_error", "replay");
-      }
+    replay.handleException(error);
+    await replay.stop({ reason });
+    const client = getClient();
+    if (client) {
+      client.recordDroppedEvent("internal_sdk_error", "replay");
     }
-  });
+  }
 }
 function shouldAddEvent(replay, event) {
   if (!replay.eventBuffer || replay.isPaused() || !replay.isEnabled()) {
@@ -24345,13 +24331,13 @@ function handleErrorEvent(replay, event) {
   if (typeof beforeErrorSampling === "function" && !beforeErrorSampling(event)) {
     return;
   }
-  setTimeout2(() => __async(null, null, function* () {
+  setTimeout2(async () => {
     try {
-      yield replay.sendBufferedReplayOrFlush();
+      await replay.sendBufferedReplayOrFlush();
     } catch (err) {
       replay.handleException(err);
     }
-  }));
+  });
 }
 function handleBeforeSendEvent(replay) {
   return (event) => {
@@ -24794,16 +24780,14 @@ function getFullUrl(url, baseURI = WINDOW5.document.baseURI) {
   }
   return fullUrl;
 }
-function captureFetchBreadcrumbToReplay(breadcrumb, hint, options) {
-  return __async(this, null, function* () {
-    try {
-      const data = yield _prepareFetchData(breadcrumb, hint, options);
-      const result = makeNetworkReplayBreadcrumb("resource.fetch", data);
-      addNetworkBreadcrumb(options.replay, result);
-    } catch (error) {
-      DEBUG_BUILD4 && logger2.exception(error, "Failed to capture fetch breadcrumb");
-    }
-  });
+async function captureFetchBreadcrumbToReplay(breadcrumb, hint, options) {
+  try {
+    const data = await _prepareFetchData(breadcrumb, hint, options);
+    const result = makeNetworkReplayBreadcrumb("resource.fetch", data);
+    addNetworkBreadcrumb(options.replay, result);
+  } catch (error) {
+    DEBUG_BUILD4 && logger2.exception(error, "Failed to capture fetch breadcrumb");
+  }
 }
 function enrichFetchBreadcrumb(breadcrumb, hint) {
   const { input, response } = hint;
@@ -24817,30 +24801,28 @@ function enrichFetchBreadcrumb(breadcrumb, hint) {
     breadcrumb.data.response_body_size = resSize;
   }
 }
-function _prepareFetchData(breadcrumb, hint, options) {
-  return __async(this, null, function* () {
-    const now = Date.now();
-    const { startTimestamp = now, endTimestamp = now } = hint;
-    const {
-      url,
-      method,
-      status_code: statusCode = 0,
-      request_body_size: requestBodySize,
-      response_body_size: responseBodySize
-    } = breadcrumb.data;
-    const captureDetails = urlMatches(url, options.networkDetailAllowUrls) && !urlMatches(url, options.networkDetailDenyUrls);
-    const request = captureDetails ? _getRequestInfo(options, hint.input, requestBodySize) : buildSkippedNetworkRequestOrResponse(requestBodySize);
-    const response = yield _getResponseInfo(captureDetails, options, hint.response, responseBodySize);
-    return {
-      startTimestamp,
-      endTimestamp,
-      url,
-      method,
-      statusCode,
-      request,
-      response
-    };
-  });
+async function _prepareFetchData(breadcrumb, hint, options) {
+  const now = Date.now();
+  const { startTimestamp = now, endTimestamp = now } = hint;
+  const {
+    url,
+    method,
+    status_code: statusCode = 0,
+    request_body_size: requestBodySize,
+    response_body_size: responseBodySize
+  } = breadcrumb.data;
+  const captureDetails = urlMatches(url, options.networkDetailAllowUrls) && !urlMatches(url, options.networkDetailDenyUrls);
+  const request = captureDetails ? _getRequestInfo(options, hint.input, requestBodySize) : buildSkippedNetworkRequestOrResponse(requestBodySize);
+  const response = await _getResponseInfo(captureDetails, options, hint.response, responseBodySize);
+  return {
+    startTimestamp,
+    endTimestamp,
+    url,
+    method,
+    statusCode,
+    request,
+    response
+  };
 }
 function _getRequestInfo({ networkCaptureBodies, networkRequestHeaders }, input, requestBodySize) {
   const headers = input ? getRequestHeaders(input, networkRequestHeaders) : {};
@@ -24855,30 +24837,28 @@ function _getRequestInfo({ networkCaptureBodies, networkRequestHeaders }, input,
   }
   return data;
 }
-function _getResponseInfo(_0, _1, _2, _3) {
-  return __async(this, arguments, function* (captureDetails, {
+async function _getResponseInfo(captureDetails, {
+  networkCaptureBodies,
+  networkResponseHeaders
+}, response, responseBodySize) {
+  if (!captureDetails && responseBodySize !== void 0) {
+    return buildSkippedNetworkRequestOrResponse(responseBodySize);
+  }
+  const headers = response ? getAllHeaders(response.headers, networkResponseHeaders) : {};
+  if (!response || !networkCaptureBodies && responseBodySize !== void 0) {
+    return buildNetworkRequestOrResponse(headers, responseBodySize, void 0);
+  }
+  const [bodyText, warning] = await _parseFetchResponseBody(response);
+  const result = getResponseData(bodyText, {
     networkCaptureBodies,
-    networkResponseHeaders
-  }, response, responseBodySize) {
-    if (!captureDetails && responseBodySize !== void 0) {
-      return buildSkippedNetworkRequestOrResponse(responseBodySize);
-    }
-    const headers = response ? getAllHeaders(response.headers, networkResponseHeaders) : {};
-    if (!response || !networkCaptureBodies && responseBodySize !== void 0) {
-      return buildNetworkRequestOrResponse(headers, responseBodySize, void 0);
-    }
-    const [bodyText, warning] = yield _parseFetchResponseBody(response);
-    const result = getResponseData(bodyText, {
-      networkCaptureBodies,
-      responseBodySize,
-      captureDetails,
-      headers
-    });
-    if (warning) {
-      return mergeWarning(result, warning);
-    }
-    return result;
+    responseBodySize,
+    captureDetails,
+    headers
   });
+  if (warning) {
+    return mergeWarning(result, warning);
+  }
+  return result;
 }
 function getResponseData(bodyText, {
   networkCaptureBodies,
@@ -24900,24 +24880,22 @@ function getResponseData(bodyText, {
     return buildNetworkRequestOrResponse(headers, responseBodySize, void 0);
   }
 }
-function _parseFetchResponseBody(response) {
-  return __async(this, null, function* () {
-    const res = _tryCloneResponse(response);
-    if (!res) {
-      return [void 0, "BODY_PARSE_ERROR"];
+async function _parseFetchResponseBody(response) {
+  const res = _tryCloneResponse(response);
+  if (!res) {
+    return [void 0, "BODY_PARSE_ERROR"];
+  }
+  try {
+    const text = await _tryGetResponseText(res);
+    return [text];
+  } catch (error) {
+    if (error instanceof Error && error.message.indexOf("Timeout") > -1) {
+      DEBUG_BUILD4 && logger2.warn("Parsing text body from response timed out");
+      return [void 0, "BODY_PARSE_TIMEOUT"];
     }
-    try {
-      const text = yield _tryGetResponseText(res);
-      return [text];
-    } catch (error) {
-      if (error instanceof Error && error.message.indexOf("Timeout") > -1) {
-        DEBUG_BUILD4 && logger2.warn("Parsing text body from response timed out");
-        return [void 0, "BODY_PARSE_TIMEOUT"];
-      }
-      DEBUG_BUILD4 && logger2.exception(error, "Failed to get text body from response");
-      return [void 0, "BODY_PARSE_ERROR"];
-    }
-  });
+    DEBUG_BUILD4 && logger2.exception(error, "Failed to get text body from response");
+    return [void 0, "BODY_PARSE_ERROR"];
+  }
 }
 function getAllHeaders(headers, allowedHeaders) {
   const allHeaders = {};
@@ -24969,21 +24947,17 @@ function _tryGetResponseText(response) {
     ).finally(() => clearTimeout(timeout));
   });
 }
-function _getResponseText(response) {
-  return __async(this, null, function* () {
-    return yield response.text();
-  });
+async function _getResponseText(response) {
+  return await response.text();
 }
-function captureXhrBreadcrumbToReplay(breadcrumb, hint, options) {
-  return __async(this, null, function* () {
-    try {
-      const data = _prepareXhrData(breadcrumb, hint, options);
-      const result = makeNetworkReplayBreadcrumb("resource.xhr", data);
-      addNetworkBreadcrumb(options.replay, result);
-    } catch (error) {
-      DEBUG_BUILD4 && logger2.exception(error, "Failed to capture xhr breadcrumb");
-    }
-  });
+async function captureXhrBreadcrumbToReplay(breadcrumb, hint, options) {
+  try {
+    const data = _prepareXhrData(breadcrumb, hint, options);
+    const result = makeNetworkReplayBreadcrumb("resource.xhr", data);
+    addNetworkBreadcrumb(options.replay, result);
+  } catch (error) {
+    DEBUG_BUILD4 && logger2.exception(error, "Failed to capture xhr breadcrumb");
+  }
 }
 function enrichXhrBreadcrumb(breadcrumb, hint) {
   const { xhr, input } = hint;
@@ -25178,35 +25152,33 @@ function addGlobalListeners(replay, { autoFlushOnFeedback }) {
     client.on("spanEnd", (span) => {
       replay.lastActiveSpan = span;
     });
-    client.on("beforeSendFeedback", (feedbackEvent, options) => __async(null, null, function* () {
+    client.on("beforeSendFeedback", async (feedbackEvent, options) => {
       const replayId = replay.getSessionId();
       if (options?.includeReplay && replay.isEnabled() && replayId && feedbackEvent.contexts?.feedback) {
         if (feedbackEvent.contexts.feedback.source === "api" && autoFlushOnFeedback) {
-          yield replay.flush();
+          await replay.flush();
         }
         feedbackEvent.contexts.feedback.replay_id = replayId;
       }
-    }));
+    });
     if (autoFlushOnFeedback) {
-      client.on("openFeedbackWidget", () => __async(null, null, function* () {
-        yield replay.flush();
-      }));
+      client.on("openFeedbackWidget", async () => {
+        await replay.flush();
+      });
     }
   }
 }
-function addMemoryEntry(replay) {
-  return __async(this, null, function* () {
-    try {
-      return Promise.all(
-        createPerformanceSpans(replay, [
-          // @ts-expect-error memory doesn't exist on type Performance as the API is non-standard (we check that it exists above)
-          createMemoryEntry(WINDOW5.performance.memory)
-        ])
-      );
-    } catch (error) {
-      return [];
-    }
-  });
+async function addMemoryEntry(replay) {
+  try {
+    return Promise.all(
+      createPerformanceSpans(replay, [
+        // @ts-expect-error memory doesn't exist on type Performance as the API is non-standard (we check that it exists above)
+        createMemoryEntry(WINDOW5.performance.memory)
+      ])
+    );
+  } catch (error) {
+    return [];
+  }
 }
 function createMemoryEntry(memoryEntry) {
   const { jsHeapSizeLimit, totalJSHeapSize, usedJSHeapSize } = memoryEntry;
@@ -25352,100 +25324,96 @@ function prepareRecordingData({
   }
   return payloadWithSequence;
 }
-function prepareReplayEvent(_0) {
-  return __async(this, arguments, function* ({
-    client,
+async function prepareReplayEvent({
+  client,
+  scope,
+  replayId: event_id,
+  event
+}) {
+  const integrations = typeof client["_integrations"] === "object" && client["_integrations"] !== null && !Array.isArray(client["_integrations"]) ? Object.keys(client["_integrations"]) : void 0;
+  const eventHint = { event_id, integrations };
+  client.emit("preprocessEvent", event, eventHint);
+  const preparedEvent = await prepareEvent(
+    client.getOptions(),
+    event,
+    eventHint,
     scope,
-    replayId: event_id,
-    event
-  }) {
-    const integrations = typeof client["_integrations"] === "object" && client["_integrations"] !== null && !Array.isArray(client["_integrations"]) ? Object.keys(client["_integrations"]) : void 0;
-    const eventHint = { event_id, integrations };
-    client.emit("preprocessEvent", event, eventHint);
-    const preparedEvent = yield prepareEvent(
-      client.getOptions(),
-      event,
-      eventHint,
-      scope,
-      client,
-      getIsolationScope()
-    );
-    if (!preparedEvent) {
-      return null;
-    }
-    client.emit("postprocessEvent", preparedEvent, eventHint);
-    preparedEvent.platform = preparedEvent.platform || "javascript";
-    const metadata = client.getSdkMetadata();
-    const { name, version } = metadata?.sdk || {};
-    preparedEvent.sdk = __spreadProps(__spreadValues({}, preparedEvent.sdk), {
-      name: name || "sentry.javascript.unknown",
-      version: version || "0.0.0"
-    });
-    return preparedEvent;
+    client,
+    getIsolationScope()
+  );
+  if (!preparedEvent) {
+    return null;
+  }
+  client.emit("postprocessEvent", preparedEvent, eventHint);
+  preparedEvent.platform = preparedEvent.platform || "javascript";
+  const metadata = client.getSdkMetadata();
+  const { name, version } = metadata?.sdk || {};
+  preparedEvent.sdk = __spreadProps(__spreadValues({}, preparedEvent.sdk), {
+    name: name || "sentry.javascript.unknown",
+    version: version || "0.0.0"
   });
+  return preparedEvent;
 }
-function sendReplayRequest(_0) {
-  return __async(this, arguments, function* ({
+async function sendReplayRequest({
+  recordingData,
+  replayId,
+  segmentId: segment_id,
+  eventContext,
+  timestamp,
+  session
+}) {
+  const preparedRecordingData = prepareRecordingData({
     recordingData,
-    replayId,
-    segmentId: segment_id,
-    eventContext,
-    timestamp,
-    session
-  }) {
-    const preparedRecordingData = prepareRecordingData({
-      recordingData,
-      headers: {
-        segment_id
-      }
-    });
-    const { urls, errorIds, traceIds, initialTimestamp } = eventContext;
-    const client = getClient();
-    const scope = getCurrentScope();
-    const transport = client?.getTransport();
-    const dsn = client?.getDsn();
-    if (!client || !transport || !dsn || !session.sampled) {
-      return resolvedSyncPromise({});
+    headers: {
+      segment_id
     }
-    const baseEvent = {
-      type: REPLAY_EVENT_NAME,
-      replay_start_timestamp: initialTimestamp / 1e3,
-      timestamp: timestamp / 1e3,
-      error_ids: errorIds,
-      trace_ids: traceIds,
-      urls,
-      replay_id: replayId,
-      segment_id,
-      replay_type: session.sampled
-    };
-    const replayEvent = yield prepareReplayEvent({ scope, client, replayId, event: baseEvent });
-    if (!replayEvent) {
-      client.recordDroppedEvent("event_processor", "replay");
-      DEBUG_BUILD4 && logger2.info("An event processor returned `null`, will not send event.");
-      return resolvedSyncPromise({});
-    }
-    delete replayEvent.sdkProcessingMetadata;
-    const envelope = createReplayEnvelope(replayEvent, preparedRecordingData, dsn, client.getOptions().tunnel);
-    let response;
-    try {
-      response = yield transport.send(envelope);
-    } catch (err) {
-      const error = new Error(UNABLE_TO_SEND_REPLAY);
-      try {
-        error.cause = err;
-      } catch {
-      }
-      throw error;
-    }
-    if (typeof response.statusCode === "number" && (response.statusCode < 200 || response.statusCode >= 300)) {
-      throw new TransportStatusCodeError(response.statusCode);
-    }
-    const rateLimits = updateRateLimits({}, response);
-    if (isRateLimited(rateLimits, "replay")) {
-      throw new RateLimitError(rateLimits);
-    }
-    return response;
   });
+  const { urls, errorIds, traceIds, initialTimestamp } = eventContext;
+  const client = getClient();
+  const scope = getCurrentScope();
+  const transport = client?.getTransport();
+  const dsn = client?.getDsn();
+  if (!client || !transport || !dsn || !session.sampled) {
+    return resolvedSyncPromise({});
+  }
+  const baseEvent = {
+    type: REPLAY_EVENT_NAME,
+    replay_start_timestamp: initialTimestamp / 1e3,
+    timestamp: timestamp / 1e3,
+    error_ids: errorIds,
+    trace_ids: traceIds,
+    urls,
+    replay_id: replayId,
+    segment_id,
+    replay_type: session.sampled
+  };
+  const replayEvent = await prepareReplayEvent({ scope, client, replayId, event: baseEvent });
+  if (!replayEvent) {
+    client.recordDroppedEvent("event_processor", "replay");
+    DEBUG_BUILD4 && logger2.info("An event processor returned `null`, will not send event.");
+    return resolvedSyncPromise({});
+  }
+  delete replayEvent.sdkProcessingMetadata;
+  const envelope = createReplayEnvelope(replayEvent, preparedRecordingData, dsn, client.getOptions().tunnel);
+  let response;
+  try {
+    response = await transport.send(envelope);
+  } catch (err) {
+    const error = new Error(UNABLE_TO_SEND_REPLAY);
+    try {
+      error.cause = err;
+    } catch {
+    }
+    throw error;
+  }
+  if (typeof response.statusCode === "number" && (response.statusCode < 200 || response.statusCode >= 300)) {
+    throw new TransportStatusCodeError(response.statusCode);
+  }
+  const rateLimits = updateRateLimits({}, response);
+  if (isRateLimited(rateLimits, "replay")) {
+    throw new RateLimitError(rateLimits);
+  }
+  return response;
 }
 var TransportStatusCodeError = class extends Error {
   constructor(statusCode) {
@@ -25458,49 +25426,47 @@ var RateLimitError = class extends Error {
     this.rateLimits = rateLimits;
   }
 };
-function sendReplay(_0) {
-  return __async(this, arguments, function* (replayData, retryConfig = {
-    count: 0,
-    interval: RETRY_BASE_INTERVAL
-  }) {
-    const { recordingData, onError } = replayData;
-    if (!recordingData.length) {
-      return;
+async function sendReplay(replayData, retryConfig = {
+  count: 0,
+  interval: RETRY_BASE_INTERVAL
+}) {
+  const { recordingData, onError } = replayData;
+  if (!recordingData.length) {
+    return;
+  }
+  try {
+    await sendReplayRequest(replayData);
+    return true;
+  } catch (err) {
+    if (err instanceof TransportStatusCodeError || err instanceof RateLimitError) {
+      throw err;
     }
-    try {
-      yield sendReplayRequest(replayData);
-      return true;
-    } catch (err) {
-      if (err instanceof TransportStatusCodeError || err instanceof RateLimitError) {
-        throw err;
+    setContext("Replays", {
+      _retryCount: retryConfig.count
+    });
+    if (onError) {
+      onError(err);
+    }
+    if (retryConfig.count >= RETRY_MAX_COUNT) {
+      const error = new Error(`${UNABLE_TO_SEND_REPLAY} - max retries exceeded`);
+      try {
+        error.cause = err;
+      } catch {
       }
-      setContext("Replays", {
-        _retryCount: retryConfig.count
-      });
-      if (onError) {
-        onError(err);
-      }
-      if (retryConfig.count >= RETRY_MAX_COUNT) {
-        const error = new Error(`${UNABLE_TO_SEND_REPLAY} - max retries exceeded`);
+      throw error;
+    }
+    retryConfig.interval *= ++retryConfig.count;
+    return new Promise((resolve, reject) => {
+      setTimeout2(async () => {
         try {
-          error.cause = err;
-        } catch {
+          await sendReplay(replayData, retryConfig);
+          resolve(true);
+        } catch (err2) {
+          reject(err2);
         }
-        throw error;
-      }
-      retryConfig.interval *= ++retryConfig.count;
-      return new Promise((resolve, reject) => {
-        setTimeout2(() => __async(null, null, function* () {
-          try {
-            yield sendReplay(replayData, retryConfig);
-            resolve(true);
-          } catch (err2) {
-            reject(err2);
-          }
-        }), retryConfig.interval);
-      });
-    }
-  });
+      }, retryConfig.interval);
+    });
+  }
 }
 var THROTTLED = "__THROTTLED";
 var SKIPPED = "__SKIPPED";
@@ -25828,28 +25794,26 @@ var ReplayContainer = class {
    * Currently, this needs to be manually called (e.g. for tests). Sentry SDK
    * does not support a teardown
    */
-  stop() {
-    return __async(this, arguments, function* ({ forceFlush = false, reason } = {}) {
-      if (!this._isEnabled) {
-        return;
+  async stop({ forceFlush = false, reason } = {}) {
+    if (!this._isEnabled) {
+      return;
+    }
+    this._isEnabled = false;
+    try {
+      DEBUG_BUILD4 && logger2.info(`Stopping Replay${reason ? ` triggered by ${reason}` : ""}`);
+      resetReplayIdOnDynamicSamplingContext();
+      this._removeListeners();
+      this.stopRecording();
+      this._debouncedFlush.cancel();
+      if (forceFlush) {
+        await this._flush({ force: true });
       }
-      this._isEnabled = false;
-      try {
-        DEBUG_BUILD4 && logger2.info(`Stopping Replay${reason ? ` triggered by ${reason}` : ""}`);
-        resetReplayIdOnDynamicSamplingContext();
-        this._removeListeners();
-        this.stopRecording();
-        this._debouncedFlush.cancel();
-        if (forceFlush) {
-          yield this._flush({ force: true });
-        }
-        this.eventBuffer?.destroy();
-        this.eventBuffer = null;
-        clearSession(this);
-      } catch (err) {
-        this.handleException(err);
-      }
-    });
+      this.eventBuffer?.destroy();
+      this.eventBuffer = null;
+      clearSession(this);
+    } catch (err) {
+      this.handleException(err);
+    }
   }
   /**
    * Pause some replay functionality. See comments for `_isPaused`.
@@ -25885,29 +25849,27 @@ var ReplayContainer = class {
    *
    * Otherwise, queue up a flush.
    */
-  sendBufferedReplayOrFlush() {
-    return __async(this, arguments, function* ({ continueRecording = true } = {}) {
-      if (this.recordingMode === "session") {
-        return this.flushImmediate();
-      }
-      const activityTime = Date.now();
-      DEBUG_BUILD4 && logger2.info("Converting buffer to session");
-      yield this.flushImmediate();
-      const hasStoppedRecording = this.stopRecording();
-      if (!continueRecording || !hasStoppedRecording) {
-        return;
-      }
-      if (this.recordingMode === "session") {
-        return;
-      }
-      this.recordingMode = "session";
-      if (this.session) {
-        this._updateUserActivity(activityTime);
-        this._updateSessionActivity(activityTime);
-        this._maybeSaveSession();
-      }
-      this.startRecording();
-    });
+  async sendBufferedReplayOrFlush({ continueRecording = true } = {}) {
+    if (this.recordingMode === "session") {
+      return this.flushImmediate();
+    }
+    const activityTime = Date.now();
+    DEBUG_BUILD4 && logger2.info("Converting buffer to session");
+    await this.flushImmediate();
+    const hasStoppedRecording = this.stopRecording();
+    if (!continueRecording || !hasStoppedRecording) {
+      return;
+    }
+    if (this.recordingMode === "session") {
+      return;
+    }
+    this.recordingMode = "session";
+    if (this.session) {
+      this._updateUserActivity(activityTime);
+      this._updateSessionActivity(activityTime);
+      this._maybeSaveSession();
+    }
+    this.startRecording();
   }
   /**
    * We want to batch uploads of replay events. Save events only if
@@ -26119,14 +26081,12 @@ var ReplayContainer = class {
    * This stops the current session (without forcing a flush, as that would never work since we are expired),
    * and then does a new sampling based on the refreshed session.
    */
-  _refreshSession(session) {
-    return __async(this, null, function* () {
-      if (!this._isEnabled) {
-        return;
-      }
-      yield this.stop({ reason: "refresh session" });
-      this.initializeSampling(session.id);
-    });
+  async _refreshSession(session) {
+    if (!this._isEnabled) {
+      return;
+    }
+    await this.stop({ reason: "refresh session" });
+    this.initializeSampling(session.id);
   }
   /**
    * Adds listeners to record events for the replay
@@ -26291,106 +26251,102 @@ var ReplayContainer = class {
    *
    * Should never be called directly, only by `flush`
    */
-  _runFlush() {
-    return __async(this, null, function* () {
-      const replayId = this.getSessionId();
-      if (!this.session || !this.eventBuffer || !replayId) {
-        DEBUG_BUILD4 && logger2.error("No session or eventBuffer found to flush.");
-        return;
+  async _runFlush() {
+    const replayId = this.getSessionId();
+    if (!this.session || !this.eventBuffer || !replayId) {
+      DEBUG_BUILD4 && logger2.error("No session or eventBuffer found to flush.");
+      return;
+    }
+    await this._addPerformanceEntries();
+    if (!this.eventBuffer?.hasEvents) {
+      return;
+    }
+    await addMemoryEntry(this);
+    if (!this.eventBuffer) {
+      return;
+    }
+    if (replayId !== this.getSessionId()) {
+      return;
+    }
+    try {
+      this._updateInitialTimestampFromEventBuffer();
+      const timestamp = Date.now();
+      if (timestamp - this._context.initialTimestamp > this._options.maxReplayDuration + 3e4) {
+        throw new Error("Session is too long, not sending replay");
       }
-      yield this._addPerformanceEntries();
-      if (!this.eventBuffer?.hasEvents) {
-        return;
+      const eventContext = this._popEventContext();
+      const segmentId = this.session.segmentId++;
+      this._maybeSaveSession();
+      const recordingData = await this.eventBuffer.finish();
+      await sendReplay({
+        replayId,
+        recordingData,
+        segmentId,
+        eventContext,
+        session: this.session,
+        timestamp,
+        onError: (err) => this.handleException(err)
+      });
+    } catch (err) {
+      this.handleException(err);
+      this.stop({ reason: "sendReplay" });
+      const client = getClient();
+      if (client) {
+        const dropReason = err instanceof RateLimitError ? "ratelimit_backoff" : "send_error";
+        client.recordDroppedEvent(dropReason, "replay");
       }
-      yield addMemoryEntry(this);
-      if (!this.eventBuffer) {
-        return;
-      }
-      if (replayId !== this.getSessionId()) {
-        return;
-      }
-      try {
-        this._updateInitialTimestampFromEventBuffer();
-        const timestamp = Date.now();
-        if (timestamp - this._context.initialTimestamp > this._options.maxReplayDuration + 3e4) {
-          throw new Error("Session is too long, not sending replay");
-        }
-        const eventContext = this._popEventContext();
-        const segmentId = this.session.segmentId++;
-        this._maybeSaveSession();
-        const recordingData = yield this.eventBuffer.finish();
-        yield sendReplay({
-          replayId,
-          recordingData,
-          segmentId,
-          eventContext,
-          session: this.session,
-          timestamp,
-          onError: (err) => this.handleException(err)
-        });
-      } catch (err) {
-        this.handleException(err);
-        this.stop({ reason: "sendReplay" });
-        const client = getClient();
-        if (client) {
-          const dropReason = err instanceof RateLimitError ? "ratelimit_backoff" : "send_error";
-          client.recordDroppedEvent(dropReason, "replay");
-        }
-      }
-    });
+    }
   }
   /**
    * Flush recording data to Sentry. Creates a lock so that only a single flush
    * can be active at a time. Do not call this directly.
    */
-  _flush() {
-    return __async(this, arguments, function* ({
-      force = false
-    } = {}) {
-      if (!this._isEnabled && !force) {
-        return;
+  async _flush({
+    force = false
+  } = {}) {
+    if (!this._isEnabled && !force) {
+      return;
+    }
+    if (!this.checkAndHandleExpiredSession()) {
+      DEBUG_BUILD4 && logger2.error("Attempting to finish replay event after session expired.");
+      return;
+    }
+    if (!this.session) {
+      return;
+    }
+    const start = this.session.started;
+    const now = Date.now();
+    const duration = now - start;
+    this._debouncedFlush.cancel();
+    const tooShort = duration < this._options.minReplayDuration;
+    const tooLong = duration > this._options.maxReplayDuration + 5e3;
+    if (tooShort || tooLong) {
+      DEBUG_BUILD4 && logger2.info(
+        `Session duration (${Math.floor(duration / 1e3)}s) is too ${tooShort ? "short" : "long"}, not sending replay.`
+      );
+      if (tooShort) {
+        this._debouncedFlush();
       }
-      if (!this.checkAndHandleExpiredSession()) {
-        DEBUG_BUILD4 && logger2.error("Attempting to finish replay event after session expired.");
-        return;
+      return;
+    }
+    const eventBuffer = this.eventBuffer;
+    if (eventBuffer && this.session.segmentId === 0 && !eventBuffer.hasCheckout) {
+      DEBUG_BUILD4 && logger2.info("Flushing initial segment without checkout.");
+    }
+    const _flushInProgress = !!this._flushLock;
+    if (!this._flushLock) {
+      this._flushLock = this._runFlush();
+    }
+    try {
+      await this._flushLock;
+    } catch (err) {
+      this.handleException(err);
+    } finally {
+      this._flushLock = void 0;
+      if (_flushInProgress) {
+        this._debouncedFlush();
       }
-      if (!this.session) {
-        return;
-      }
-      const start = this.session.started;
-      const now = Date.now();
-      const duration = now - start;
-      this._debouncedFlush.cancel();
-      const tooShort = duration < this._options.minReplayDuration;
-      const tooLong = duration > this._options.maxReplayDuration + 5e3;
-      if (tooShort || tooLong) {
-        DEBUG_BUILD4 && logger2.info(
-          `Session duration (${Math.floor(duration / 1e3)}s) is too ${tooShort ? "short" : "long"}, not sending replay.`
-        );
-        if (tooShort) {
-          this._debouncedFlush();
-        }
-        return;
-      }
-      const eventBuffer = this.eventBuffer;
-      if (eventBuffer && this.session.segmentId === 0 && !eventBuffer.hasCheckout) {
-        DEBUG_BUILD4 && logger2.info("Flushing initial segment without checkout.");
-      }
-      const _flushInProgress = !!this._flushLock;
-      if (!this._flushLock) {
-        this._flushLock = this._runFlush();
-      }
-      try {
-        yield this._flushLock;
-      } catch (err) {
-        this.handleException(err);
-      } finally {
-        this._flushLock = void 0;
-        if (_flushInProgress) {
-          this._debouncedFlush();
-        }
-      }
-    });
+    }
   }
   /** Save the session, if it is sticky */
   _maybeSaveSession() {
@@ -27829,21 +27785,19 @@ var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler
     this.loading = signal(false);
     this.online = signal(false);
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      this.loading.set(true);
+  async ngOnInit() {
+    this.loading.set(true);
+    this.online.set(vs());
+    await firstTruthyValueFrom(this._org.initialised);
+    await firstTruthyValueFrom(this._settings.initialised);
+    this.interval("has_token", () => {
       this.online.set(vs());
-      yield firstTruthyValueFrom(this._org.initialised);
-      yield firstTruthyValueFrom(this._settings.initialised);
-      this.interval("has_token", () => {
-        this.online.set(vs());
-        if (!ve() || !Y())
-          return;
-        this.loading.set(false);
-        this.online.set(vs());
-        this.clearInterval("has_token");
-      }, 1e3);
-    });
+      if (!ve() || !Y())
+        return;
+      this.loading.set(false);
+      this.online.set(vs());
+      this.clearInterval("has_token");
+    }, 1e3);
   }
 };
 _GlobalLoadingComponent.\u0275fac = function GlobalLoadingComponent_Factory(__ngFactoryType__) {
@@ -27954,12 +27908,10 @@ var _GlobalBannerComponent = class _GlobalBannerComponent {
       return !banner?.content && !banner?.message || localStorage.getItem("PLACE.last_banner") === banner.id;
     }), shareReplay(1));
   }
-  close() {
-    return __async(this, null, function* () {
-      const banner = yield nextValueFrom(this.banner);
-      localStorage.setItem("PLACE.last_banner", banner?.id || "");
-      this._change.next(Date.now());
-    });
+  async close() {
+    const banner = await nextValueFrom(this.banner);
+    localStorage.setItem("PLACE.last_banner", banner?.id || "");
+    this._change.next(Date.now());
   }
 };
 _GlobalBannerComponent.\u0275fac = function GlobalBannerComponent_Factory(__ngFactoryType__) {
@@ -28068,86 +28020,84 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
   get has_chat() {
     return this._settings.get("app.chat.enabled");
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      log("APP", "MOCKS:", mocks_exports);
-      this._hotkey.listen(["Control", "Alt", "Shift", "KeyM"], () => {
-        localStorage.setItem("mock", `${localStorage.getItem("mock") !== "true"}`);
-        location.reload();
-      });
-      this._hotkey.listen(["Control", "Alt", "Shift", "KeyD"], () => {
-        this._settings.saveUserSetting("dark_mode", !this._settings.get("dark_mode"));
-        notifySuccess("Toggled dark mode.");
-      });
-      this._hotkey.listen(["Control", "Alt", "Shift", "KeyC"], () => {
-        this._clipboard.copy(`${Y()}|${nn()}`);
-        notifySuccess("Successfully copied token.");
-      });
-      this._hotkey.listen(["Control", "Alt", "Shift", "KeyV"], () => {
-        navigator.clipboard?.readText().then((tkn) => this._pasteToken(tkn));
-      });
-      this._hotkey.listen(["Control", "Alt", "Shift", "KeyF"], () => {
-        navigator.clipboard?.readText().then((tkn) => this._pasteToken(tkn));
-      });
-      window.pasteToken = (t) => this._pasteToken(t);
-      this._route.queryParamMap.subscribe((params) => {
-        if (params.has("hide_nav"))
-          localStorage.setItem("PlaceOS.hide_nav", "true");
-        if (params.has("lang")) {
-          const locale = params.get("lang");
-          this._locale?.setLocale(locale);
-          localStorage.setItem("PLACEOS.locale", locale);
-        }
-        if (params.has("x-api-key")) {
-          gs(params.get("x-api-key"));
-        }
-        if (params.has("region_id")) {
-          this._region = params.get("region_id");
-        }
-        if (params.has("building_id")) {
-          this._zone = params.get("building_id");
-        }
-        if (this._region || this._zone)
-          this._setZones();
-      });
-      setNotifyOutlet(this._snackbar);
-      setTranslationService(this._locale);
-      yield firstTruthyValueFrom(this._settings.initialised);
-      setAppName(this._settings.get("app.short_name"));
-      const settings = this._settings.get("composer") || {};
-      settings.mock = !!this._settings.get("mock") || location.origin.includes("demo.place.tech");
-      if (START_QUERY) {
-        const query = jt(START_QUERY.substring(1));
-        this._router.navigate([], {
-          relativeTo: this._route,
-          queryParams: query
-        });
-      }
-      yield setupPlace(settings).catch((_) => console.error(_));
-      yield lastValueFrom(this._org.initialised.pipe(first((_) => _)));
-      if (this._locale) {
-        this._locale.zone_id = this._org.organisation.id;
-        this._locale.init();
-      }
-      setupCache(this._cache);
-      if (!settings.local_login) {
-        this.timeout("wait_for_user", () => this.onInitError(), 30 * 1e3);
-      }
-      yield lastValueFrom(current_user.pipe(first((_) => !!_)));
-      this.clearTimeout("wait_for_user");
-      this._initLocale();
-      setInternalUserDomain(this._settings.get("app.internal_user_domain") || `@${currentUser()?.email?.split("@")[1]}`);
-      this._initAnalytics();
-      initSentry(this._settings.get("app.sentry_dsn"));
-      try {
-        this._setSafariHeaders();
-        this._initUploads();
-        this._initFixedDevice();
-      } catch {
-        log("APP", "Failed to initialise background services.", void 0, "warn");
-      }
-      this._setZones();
+  async ngOnInit() {
+    log("APP", "MOCKS:", mocks_exports);
+    this._hotkey.listen(["Control", "Alt", "Shift", "KeyM"], () => {
+      localStorage.setItem("mock", `${localStorage.getItem("mock") !== "true"}`);
+      location.reload();
     });
+    this._hotkey.listen(["Control", "Alt", "Shift", "KeyD"], () => {
+      this._settings.saveUserSetting("dark_mode", !this._settings.get("dark_mode"));
+      notifySuccess("Toggled dark mode.");
+    });
+    this._hotkey.listen(["Control", "Alt", "Shift", "KeyC"], () => {
+      this._clipboard.copy(`${Y()}|${nn()}`);
+      notifySuccess("Successfully copied token.");
+    });
+    this._hotkey.listen(["Control", "Alt", "Shift", "KeyV"], () => {
+      navigator.clipboard?.readText().then((tkn) => this._pasteToken(tkn));
+    });
+    this._hotkey.listen(["Control", "Alt", "Shift", "KeyF"], () => {
+      navigator.clipboard?.readText().then((tkn) => this._pasteToken(tkn));
+    });
+    window.pasteToken = (t) => this._pasteToken(t);
+    this._route.queryParamMap.subscribe((params) => {
+      if (params.has("hide_nav"))
+        localStorage.setItem("PlaceOS.hide_nav", "true");
+      if (params.has("lang")) {
+        const locale = params.get("lang");
+        this._locale?.setLocale(locale);
+        localStorage.setItem("PLACEOS.locale", locale);
+      }
+      if (params.has("x-api-key")) {
+        gs(params.get("x-api-key"));
+      }
+      if (params.has("region_id")) {
+        this._region = params.get("region_id");
+      }
+      if (params.has("building_id")) {
+        this._zone = params.get("building_id");
+      }
+      if (this._region || this._zone)
+        this._setZones();
+    });
+    setNotifyOutlet(this._snackbar);
+    setTranslationService(this._locale);
+    await firstTruthyValueFrom(this._settings.initialised);
+    setAppName(this._settings.get("app.short_name"));
+    const settings = this._settings.get("composer") || {};
+    settings.mock = !!this._settings.get("mock") || location.origin.includes("demo.place.tech");
+    if (START_QUERY) {
+      const query = jt(START_QUERY.substring(1));
+      this._router.navigate([], {
+        relativeTo: this._route,
+        queryParams: query
+      });
+    }
+    await setupPlace(settings).catch((_) => console.error(_));
+    await lastValueFrom(this._org.initialised.pipe(first((_) => _)));
+    if (this._locale) {
+      this._locale.zone_id = this._org.organisation.id;
+      this._locale.init();
+    }
+    setupCache(this._cache);
+    if (!settings.local_login) {
+      this.timeout("wait_for_user", () => this.onInitError(), 30 * 1e3);
+    }
+    await lastValueFrom(current_user.pipe(first((_) => !!_)));
+    this.clearTimeout("wait_for_user");
+    this._initLocale();
+    setInternalUserDomain(this._settings.get("app.internal_user_domain") || `@${currentUser()?.email?.split("@")[1]}`);
+    this._initAnalytics();
+    initSentry(this._settings.get("app.sentry_dsn"));
+    try {
+      this._setSafariHeaders();
+      this._initUploads();
+      this._initFixedDevice();
+    } catch {
+      log("APP", "Failed to initialise background services.", void 0, "warn");
+    }
+    this._setZones();
   }
   onInitError() {
     if (ln() || currentUser()?.is_logged_in)
@@ -28224,24 +28174,22 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
       }
     });
   }
-  _initFixedDevice() {
-    return __async(this, null, function* () {
-      if (!pr())
-        return;
-      this.interval("auto-update-version", () => this._checkReload(), 15 * 1e3);
-      yield requestScreenWakeLock();
-    });
+  async _initFixedDevice() {
+    if (!pr())
+      return;
+    this.interval("auto-update-version", () => this._checkReload(), 15 * 1e3);
+    await requestScreenWakeLock();
   }
   _setZones() {
-    this.timeout("set_building+region", () => __async(this, null, function* () {
+    this.timeout("set_building+region", async () => {
       const region = this._org.regions.find((b) => b.id === this._region);
       if (region)
         this._org.setRegion(region);
-      const building_list = yield nextValueFrom(this._org.building_list);
+      const building_list = await nextValueFrom(this._org.building_list);
       const bld = building_list.find((b) => b.id === this._zone);
       if (bld)
         this._org.setBuilding(bld, true);
-    }), 1e3);
+    }, 1e3);
   }
 };
 _AppComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -28687,30 +28635,28 @@ var _BootstrapComponent = class _BootstrapComponent extends AsyncHandler {
     }
     return this.active_level.locations || [];
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      this.active_region = this._org.region;
-      this.subscription("route.query", this._route.queryParamMap.subscribe((params) => {
-        if (params.has("osk")) {
-          const osk_enabled = params.get("osk") === "true";
-          localStorage.setItem("OSK.enabled", `${osk_enabled}`);
+  async ngOnInit() {
+    await this._org.initialised.pipe(first((_) => _)).toPromise();
+    this.active_region = this._org.region;
+    this.subscription("route.query", this._route.queryParamMap.subscribe((params) => {
+      if (params.has("osk")) {
+        const osk_enabled = params.get("osk") === "true";
+        localStorage.setItem("OSK.enabled", `${osk_enabled}`);
+      }
+      if (params.has("clear") && params.get("clear") === "true") {
+        localStorage.removeItem("KIOSK.building");
+        localStorage.removeItem("KIOSK.level");
+        localStorage.removeItem("KIOSK.orientation");
+      }
+      if (params.has("level")) {
+        const level = this._org.levelWithID([params.get("level")]);
+        if (level) {
+          this.active_level = level;
+          this.bootstrapKiosk();
         }
-        if (params.has("clear") && params.get("clear") === "true") {
-          localStorage.removeItem("KIOSK.building");
-          localStorage.removeItem("KIOSK.level");
-          localStorage.removeItem("KIOSK.orientation");
-        }
-        if (params.has("level")) {
-          const level = this._org.levelWithID([params.get("level")]);
-          if (level) {
-            this.active_level = level;
-            this.bootstrapKiosk();
-          }
-        }
-      }));
-      this.checkBootstrap();
-    });
+      }
+    }));
+    this.checkBootstrap();
   }
   updateRotations() {
     this.rotations = [];
@@ -29306,50 +29252,48 @@ var _VisitorRegistrationComponent = class _VisitorRegistrationComponent {
       this._router.navigate(["/welcome"]);
     }, 1e3);
   }
-  register() {
-    return __async(this, null, function* () {
-      this.form.markAllAsTouched();
-      if (!this.form.valid) {
-        return notifyError(i18n("FORM.INVALID_FIELDS", {
-          field_list: getInvalidFields(this.form).join(", ")
-        }));
-      }
-      this.loading = true;
-      const value = this.form.value;
-      this._booking_form.form.patchValue({
-        booking_type: "visitor",
-        self_registered: true,
-        name: value.asset_name,
-        description: value.description || value.title || "",
-        attendees: [
-          new User({
-            name: value.asset_name,
-            email: value.asset_id,
-            organisation: value.company,
-            phone: value.phone
-          })
-        ],
-        zones: unique([
-          this._org.organisation.id,
-          this._org.region?.id,
-          this._org.building?.id
-        ])
-      });
-      const result = yield this._booking_form.postForm(true).catch((e2) => {
-        notifyError(i18n("APP.VISITOR_KIOSK.REGISTRATION_ERROR", {
-          error: e2?.statusText || e2
-        }));
-        this.loading = false;
-        throw e2;
-      });
-      this._checkin.setBooking(result, "registered");
-      if (result.induction !== "accepted" && this.is_induction_enabled && !this.induction_after_details) {
-        this._router.navigate(["/checkin", "induction"]);
-      } else {
-        this._router.navigate(["/checkin", "details"]);
-      }
-      this.loading = false;
+  async register() {
+    this.form.markAllAsTouched();
+    if (!this.form.valid) {
+      return notifyError(i18n("FORM.INVALID_FIELDS", {
+        field_list: getInvalidFields(this.form).join(", ")
+      }));
+    }
+    this.loading = true;
+    const value = this.form.value;
+    this._booking_form.form.patchValue({
+      booking_type: "visitor",
+      self_registered: true,
+      name: value.asset_name,
+      description: value.description || value.title || "",
+      attendees: [
+        new User({
+          name: value.asset_name,
+          email: value.asset_id,
+          organisation: value.company,
+          phone: value.phone
+        })
+      ],
+      zones: unique([
+        this._org.organisation.id,
+        this._org.region?.id,
+        this._org.building?.id
+      ])
     });
+    const result = await this._booking_form.postForm(true).catch((e2) => {
+      notifyError(i18n("APP.VISITOR_KIOSK.REGISTRATION_ERROR", {
+        error: e2?.statusText || e2
+      }));
+      this.loading = false;
+      throw e2;
+    });
+    this._checkin.setBooking(result, "registered");
+    if (result.induction !== "accepted" && this.is_induction_enabled && !this.induction_after_details) {
+      this._router.navigate(["/checkin", "induction"]);
+    } else {
+      this._router.navigate(["/checkin", "details"]);
+    }
+    this.loading = false;
   }
 };
 _VisitorRegistrationComponent.\u0275fac = function VisitorRegistrationComponent_Factory(__ngFactoryType__) {
@@ -29884,7 +29828,7 @@ var WelcomeComponent = _WelcomeComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WelcomeComponent, { className: "WelcomeComponent", filePath: "apps/visitor-kiosk/src/app/welcome.component.ts", lineNumber: 140 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WelcomeComponent, { className: "WelcomeComponent", filePath: "apps/visitor-kiosk/src/app/welcome.component.ts", lineNumber: 146 });
 })();
 
 // apps/visitor-kiosk/src/app/app-routing.module.ts
@@ -29894,11 +29838,11 @@ var routes = [
   { path: "register", component: VisitorRegistrationComponent },
   {
     path: "explore",
-    loadChildren: () => import("./explore.module-VIREFR44.js").then((m) => m.AppExploreModule)
+    loadChildren: () => import("./explore.module-L5GDJSP4.js").then((m) => m.AppExploreModule)
   },
   {
     path: "checkin",
-    loadChildren: () => import("./checkin.module-XOIVRUND.js").then((m) => m.VisitorCheckinModule)
+    loadChildren: () => import("./checkin.module-TO3GV2SA.js").then((m) => m.VisitorCheckinModule)
   },
   { path: "**", redirectTo: "bootstrap" }
 ];
@@ -30024,6 +29968,7 @@ _AppModule.\u0275fac = function AppModule_Factory(__ngFactoryType__) {
 };
 _AppModule.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _AppModule, bootstrap: [AppComponent] });
 _AppModule.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ providers: [
+  provideZonelessChangeDetection(),
   {
     provide: ErrorHandler,
     useValue: createErrorHandler({
@@ -30079,6 +30024,7 @@ var AppModule = _AppModule;
         ...STANDALONE_COMPONENTS
       ],
       providers: [
+        provideZonelessChangeDetection(),
         {
           provide: ErrorHandler,
           useValue: createErrorHandler({

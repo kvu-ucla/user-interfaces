@@ -23,13 +23,13 @@ import {
   setHours,
   showStaff,
   validateAssetRequestsForResource
-} from "./chunk-YCEH6UEA.js";
+} from "./chunk-SQYVM4WQ.js";
 import {
   generateQRCode,
   querySpaceAvailability,
   removeEvent,
   saveEvent
-} from "./chunk-UWKBAE6K.js";
+} from "./chunk-V36NOPWC.js";
 import {
   A11yModule,
   ANIMATION_SHOW_CONTRACT_EXPAND,
@@ -225,6 +225,7 @@ import {
   setDefaultCreator,
   shareReplay,
   shiftColorTowards,
+  signal,
   startOfDay,
   startOfMinute,
   startOfWeek,
@@ -303,12 +304,11 @@ import {
   ɵɵtwoWayProperty,
   ɵɵviewQuery,
   ɵɵviewQuerySignal
-} from "./chunk-IPNUB35F.js";
+} from "./chunk-3RERMB4V.js";
 import {
-  __async,
   __spreadProps,
   __spreadValues
-} from "./chunk-XWLXMCJQ.js";
+} from "./chunk-653SOEEV.js";
 
 // node_modules/@angular/material/fesm2022/slide-toggle.mjs
 var _c0 = ["switch"];
@@ -1060,12 +1060,16 @@ var CustomTooltipData = _CustomTooltipData;
 })();
 var _CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler {
   constructor() {
-    super();
+    super(...arguments);
     this._element = inject(ElementRef);
     this._overlay = inject(Overlay);
     this._injector = inject(Injector);
-    this.x_pos = input("end", { alias: "xPosition" });
-    this.y_pos = input("top", { alias: "yPosition" });
+    this.x_pos = input("end", {
+      alias: "xPosition"
+    });
+    this.y_pos = input("top", {
+      alias: "yPosition"
+    });
     this.content = input(void 0);
     this.data = input(void 0);
     this.backdrop = input(true);
@@ -1074,10 +1078,19 @@ var _CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler
     this.type = "template";
     this._overlay_ref = null;
     this._portal = viewChild(CdkPortal);
-    this.onClick = () => this.open();
-    this.onTouch = () => this.open();
-    this.onEnter = () => this.hover() ? this.open() : "";
-    this.onLeave = () => this.hover() ? this.close() : "";
+  }
+  ngOnInit() {
+    const open = () => this.open();
+    const hover_open = () => this.hover() ? this.open() : "";
+    const hover_close = () => this.hover() ? this.close() : "";
+    this._element.nativeElement.addEventListener("click", open);
+    this._element.nativeElement.addEventListener("touchend", open);
+    this._element.nativeElement.addEventListener("mouseenter", hover_open);
+    this._element.nativeElement.addEventListener("mouseleave", hover_close);
+    this.subscription("click", () => this._element.nativeElement.removeEventListener("click", open));
+    this.subscription("touchend", () => this._element.nativeElement.removeEventListener("touchend", open));
+    this.subscription("mouseenter", () => this._element.nativeElement.removeEventListener("mouseenter", hover_open));
+    this.subscription("mouseleave", () => this._element.nativeElement.removeEventListener("mouseleave", hover_close));
   }
   ngOnChanges(changes) {
     this._updateInjector();
@@ -1148,9 +1161,12 @@ var _CustomTooltipComponent = class _CustomTooltipComponent extends AsyncHandler
     });
   }
 };
-_CustomTooltipComponent.\u0275fac = function CustomTooltipComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _CustomTooltipComponent)();
-};
+_CustomTooltipComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275CustomTooltipComponent_BaseFactory;
+  return function CustomTooltipComponent_Factory(__ngFactoryType__) {
+    return (\u0275CustomTooltipComponent_BaseFactory || (\u0275CustomTooltipComponent_BaseFactory = \u0275\u0275getInheritedFactory(_CustomTooltipComponent)))(__ngFactoryType__ || _CustomTooltipComponent);
+  };
+})();
 _CustomTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CustomTooltipComponent, selectors: [["", "customTooltip", ""]], viewQuery: function CustomTooltipComponent_Query(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275viewQuerySignal(ctx._portal, CdkPortal, 5);
@@ -1158,34 +1174,19 @@ _CustomTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent(
   if (rf & 2) {
     \u0275\u0275queryAdvance();
   }
-}, hostBindings: function CustomTooltipComponent_HostBindings(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275listener("click", function CustomTooltipComponent_click_HostBindingHandler() {
-      return ctx.onClick();
-    })("touchend", function CustomTooltipComponent_touchend_HostBindingHandler() {
-      return ctx.onTouch();
-    })("mouseenter", function CustomTooltipComponent_mouseenter_HostBindingHandler() {
-      return ctx.onEnter();
-    })("mouseleave", function CustomTooltipComponent_mouseleave_HostBindingHandler() {
-      return ctx.onLeave();
-    });
-  }
 }, inputs: { x_pos: [1, "xPosition", "x_pos"], y_pos: [1, "yPosition", "y_pos"], content: [1, "content"], data: [1, "data"], backdrop: [1, "backdrop"], hover: [1, "hover"], delay: [1, "delay"] }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c02, ngContentSelectors: _c12, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["custom-tooltip", "", 1, "relative", "print:hidden"], [3, "innerHTML"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function CustomTooltipComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projectionDef();
     \u0275\u0275projection(0);
     \u0275\u0275template(1, CustomTooltipComponent_ng_template_1_Template, 4, 1, "ng-template", 0);
   }
-}, dependencies: [CommonModule, NgComponentOutlet, NgTemplateOutlet, PortalModule, TemplatePortalDirective, SanitizePipe], encapsulation: 2 });
+}, dependencies: [CommonModule, NgComponentOutlet, NgTemplateOutlet, PortalModule, TemplatePortalDirective, SanitizePipe], styles: ["\n\n[_nghost-%COMP%] {\n  pointer-events: auto !important;\n}\n/*# sourceMappingURL=custom-tooltip.component.css.map */"] });
 var CustomTooltipComponent = _CustomTooltipComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CustomTooltipComponent, [{
     type: Component,
-    args: [{
-      selector: "[customTooltip]",
-      template: `
+    args: [{ selector: "[customTooltip]", template: `
         <ng-content />
-
         <ng-template cdk-portal>
             <div custom-tooltip class="relative print:hidden">
                 @switch (type) {
@@ -1205,25 +1206,11 @@ var CustomTooltipComponent = _CustomTooltipComponent;
                 }
             </div>
         </ng-template>
-    `,
-      imports: [CommonModule, PortalModule, SanitizePipe]
-    }]
-  }], () => [], { onClick: [{
-    type: HostListener,
-    args: ["click"]
-  }], onTouch: [{
-    type: HostListener,
-    args: ["touchend"]
-  }], onEnter: [{
-    type: HostListener,
-    args: ["mouseenter"]
-  }], onLeave: [{
-    type: HostListener,
-    args: ["mouseleave"]
-  }] });
+    `, imports: [CommonModule, PortalModule, SanitizePipe], styles: ["/* angular:styles/component:css;9f88acd9967d2b0ebf3bc5241107eaa7c3672b233611fbb42832362998689b5f;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/custom-tooltip.component.ts */\n:host {\n  pointer-events: auto !important;\n}\n/*# sourceMappingURL=custom-tooltip.component.css.map */\n"] }]
+  }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CustomTooltipComponent, { className: "CustomTooltipComponent", filePath: "libs/components/src/lib/custom-tooltip.component.ts", lineNumber: 59 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CustomTooltipComponent, { className: "CustomTooltipComponent", filePath: "libs/components/src/lib/custom-tooltip.component.ts", lineNumber: 65 });
 })();
 
 // libs/form-fields/src/lib/date-calendar.component.ts
@@ -3177,17 +3164,15 @@ var _ExploreDeviceInfoComponent = class _ExploreDeviceInfoComponent extends Asyn
       this.subscription("zoom", this._details.zoom$.subscribe((_) => this.zoom = _));
     }, 200);
   }
-  loadUser() {
-    return __async(this, null, function* () {
-      if (this.username)
-        return;
-      const mod = Ea(this._details.system, "LocationServices");
-      if (!mod)
-        return;
-      this.username = "Loading...";
-      const details = yield mod.execute("check_ownership_of", [this.mac]).catch(() => null);
-      this.username = details && details.assigned_to ? details.assigned_to : "";
-    });
+  async loadUser() {
+    if (this.username)
+      return;
+    const mod = Ea(this._details.system, "LocationServices");
+    if (!mod)
+      return;
+    this.username = "Loading...";
+    const details = await mod.execute("check_ownership_of", [this.mac]).catch(() => null);
+    this.username = details && details.assigned_to ? details.assigned_to : "";
   }
 };
 _ExploreDeviceInfoComponent.\u0275fac = function ExploreDeviceInfoComponent_Factory(__ngFactoryType__) {
@@ -3820,29 +3805,27 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     this._space_pipe.org = this._org;
     this.init();
   }
-  init() {
-    return __async(this, null, function* () {
-      yield current_user.pipe(first((_) => !!_)).toPromise();
-      setDefaultCreator(currentUser());
-      this.form.controls.date.valueChanges.subscribe((date) => this.setOptions({ date }));
-      this.form.controls.duration.valueChanges.subscribe((duration) => this.setOptions({ duration }));
-      this.subscription("router.events", this._router.events.subscribe((event) => {
-        if (event instanceof NavigationEnd && !BOOKING_URLS.some((_) => event.url.includes(_))) {
-          this.clearForm();
-        }
-      }));
-      const previous = {};
-      this.form.valueChanges.subscribe(({ date, duration }) => {
-        if (date && date !== previous["date"] || duration && duration !== previous["duration"]) {
-          this._assets.setOptions({
-            date: this.form.value.date,
-            duration: this.form.value.duration
-          });
-          previous["date"] = date;
-          previous["duration"] = duration;
-        }
-        this.storeForm();
-      });
+  async init() {
+    await current_user.pipe(first((_) => !!_)).toPromise();
+    setDefaultCreator(currentUser());
+    this.form.controls.date.valueChanges.subscribe((date) => this.setOptions({ date }));
+    this.form.controls.duration.valueChanges.subscribe((duration) => this.setOptions({ duration }));
+    this.subscription("router.events", this._router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd && !BOOKING_URLS.some((_) => event.url.includes(_))) {
+        this.clearForm();
+      }
+    }));
+    const previous = {};
+    this.form.valueChanges.subscribe(({ date, duration }) => {
+      if (date && date !== previous["date"] || duration && duration !== previous["duration"]) {
+        this._assets.setOptions({
+          date: this.form.value.date,
+          duration: this.form.value.duration
+        });
+        previous["date"] = date;
+        previous["duration"] = duration;
+      }
+      this.storeForm();
     });
   }
   setView(value) {
@@ -3897,170 +3880,160 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
   }
   cancelPostForm() {
   }
-  postForm() {
-    return __async(this, arguments, function* (force = false, ignore_space_check = [], ignore_owner = false) {
-      this.form.markAllAsTouched();
-      if (this.form.invalid && !force) {
-        throw i18n("FORM.INVALID_FIELDS", {
-          field_list: getInvalidFields(this.form).join(", ")
-        });
-      }
-      const on_error = (e) => {
-        this.removeLoadingTag(Tags.PostBooking);
-        throw e;
-      };
-      this.addLoadingTag(Tags.PostBooking);
-      const event = this._event.getValue();
-      const space_list = this.form.value.resources || [];
-      let spaces = space_list.filter((_) => !ignore_space_check.includes(_.id));
-      const recurr = this.form.value.recurrence;
-      this.form.patchValue({
-        recurring: recurr?._pattern && recurr?._pattern !== "none"
+  async postForm(force = false, ignore_space_check = [], ignore_owner = false) {
+    this.form.markAllAsTouched();
+    if (this.form.invalid && !force) {
+      throw i18n("FORM.INVALID_FIELDS", {
+        field_list: getInvalidFields(this.form).join(", ")
       });
-      if (!this.form.value.recurring) {
-        this.form.patchValue({ recurrence: null });
-      }
-      const changed_spaces = spaces.filter((_) => !event.resources.find((s) => s.id === _.id));
-      const has_time_changed = !event.id || event.date !== this.form.value.date || event.duration !== this.form.value.duration;
-      if (spaces.length && has_time_changed) {
-        const space_list2 = yield Promise.all(changed_spaces.map((_) => this._space_pipe.transform(_.email)));
-        yield this._checkResourcesAvailable(space_list2, this.form.value.all_day ? startOfDay(this.form.value.date).valueOf() : this.form.value.date, this.form.value.all_day ? Math.max(24 * 60, this.form.value.duration) : this.form.value.duration, event.ical_uid || event.id || "").catch(on_error);
-      } else if (!space_list.length && this.lone_space) {
-        spaces = [yield this._space_pipe.transform(this.lone_space)];
-        this.form.patchValue({ resources: spaces });
-      }
-      this.form.patchValue({
-        attendees: unique([
-          ...this.form.value.attendees,
-          this.form.value.organiser || currentUser()
-        ], "email")
-      });
-      if (!spaces.length && this.form.value.attendees.find((_) => _.is_external)) {
-        this.removeLoadingTag(Tags.PostBooking);
-        throw i18n("CALENDAR_EVENT.SPACE_EXTERNALS_ERROR");
-      }
-      const default_oflow = this._overflow();
-      let [setup, breakdown] = [
-        this.form.value.setup_time || default_oflow.setup,
-        this.form.value.breakdown_time || default_oflow.breakdown
-      ];
-      for (const space of spaces) {
-        const overflow = this._overflow(space.id);
-        setup = Math.max(overflow.setup || 0, setup);
-        breakdown = Math.max(overflow.breakdown || 0, breakdown);
-      }
-      this.form.patchValue({ setup_time: setup, breakdown_time: breakdown });
-      for (const order of this.form.value.catering || []) {
-        order.notes = this.form.value.catering_notes;
-        order.charge_code = this.form.value.catering_charge_code;
-      }
-      const query = event.id ? {
-        system_id: event?.resources[0]?.id || event?.system?.id || spaces[0]?.id
-      } : {};
-      const is_owner = this.form.value.host === currentUser()?.email || this.form.value.creator === currentUser()?.email;
-      if (is_owner && !ignore_owner)
-        query.calendar = this.form.value.host || this.form.value.creator;
-      const processed_assets = (this.form.value.assets || []).map((_) => new AssetRequest(_).toJSON());
-      const host = this._host(this.form.value.host, spaces[0]?.email);
-      const ext = {
-        department: this.form.value.organiser?.department || currentUser()?.department
-      };
-      if (this.form.value.host !== host)
-        ext.host_override = this.form.value.host;
-      const value = this.form.getRawValue();
-      const created_event = yield this._performBooking(new CalendarEvent(__spreadProps(__spreadValues({}, this.form.getRawValue()), {
-        old_system: event?.system,
-        host,
-        title: this.form.value.title || "Space Booking",
-        attendees: this.form.value.attendees.map((_) => {
-          const v = __spreadValues({}, _);
-          delete v.visit_expected;
-          return v;
-        }),
-        assets: processed_assets,
-        extension_data: ext
-      })), query).catch(on_error);
-      const domain = (currentUser()?.email || "@").split("@")[1];
-      const visitors = this.form.value.attendees.filter((user) => user.is_external && user.email !== event.host && !user.email.includes(domain) && user.visit_expected);
-      if (visitors.length) {
-        yield createBookingsForEvent(created_event, "visitor", visitors).catch((e) => this._removeBookingAfterError(!event.id, created_event, false, e));
-      }
-      if (this.form.value.catering?.length) {
-        yield createBookingsForEvent(created_event, "catering-order", this.form.value.catering).catch((e) => this._removeBookingAfterError(!event.id, created_event, false, e));
-      }
-      const assets = this.form.value.assets || event.extension_data.assets || [];
-      if (assets.length) {
-        const requests = yield validateAssetRequestsForResource(created_event, {
-          date: value.date,
-          duration: value.duration,
-          host: value.host,
-          all_day: value.all_day,
-          location_name: spaces[0]?.display_name || spaces[0]?.name || "",
-          location_id: spaces[0]?.id || "",
-          zones: unique([
-            this._org.organisation.id,
-            this._org.region?.id,
-            this._org.building?.id,
-            ...spaces[0]?.zones || []
-          ]).filter((_) => !!_),
-          reset_state: has_time_changed
-        }, assets, changed_spaces.length > 0 || has_time_changed).catch((e) => this._removeBookingAfterError(!event.id, created_event, true, e));
-        if (!requests)
-          throw i18n("CALENDAR_EVENT.ASSETS_INVALID_ERROR");
-        yield requests();
-      }
-      this.clearForm();
-      sessionStorage.setItem("PLACEOS.last_modified_event", JSON.stringify(created_event.toJSON()));
-      return true;
-    });
-  }
-  _handlePayments() {
-    return __async(this, null, function* () {
-      return "INV-000_001";
-    });
-  }
-  _checkResourcesAvailable(spaces, date, duration, ignore) {
-    return __async(this, null, function* () {
-      if (!spaces?.length)
-        return true;
-      const event = this._event.getValue();
-      const id_list = spaces.map((_) => _.id);
-      const response = yield lastValueFrom(this.book_internal ? queryResourceAvailability(id_list, date, duration, ignore) : querySpaceAvailability(id_list, date, duration, event?.resources[0]?.id || event?.system?.id || event?.id || void 0, void 0, [event?.date, event?.duration]));
-      if (!response.every((_) => _)) {
-        throw i18n(spaces.length > 1 ? "CALENDAR_EVENT.SPACES_UNAVAILABLE" : "CALENDAR_EVENT.SPACE_UNAVAILABLE");
-      }
-      return true;
-    });
-  }
-  _performBooking(event, query) {
-    return __async(this, null, function* () {
-      this._updateVisitorList(event.attendees);
-      const old_system = event.old_system?.id || event.old_system?.email || event.resources[0]?.email;
-      const system_id = event.system?.id || event.system?.email || event.resources[0]?.email;
-      if (old_system !== system_id) {
-        event.attendees = event.attendees.filter((_) => _.email !== old_system || _.id !== old_system);
-      }
-      return (this.book_internal ? saveBooking(newBookingFromCalendarEvent(__spreadProps(__spreadValues({}, event.toJSON()), {
-        status: this._settings.get("app.bookings.no_approval") === true ? "approved" : "tentative"
-      }))).pipe(map((_) => newCalendarEventFromBooking(_))) : saveEvent(event, query))?.toPromise();
-    });
-  }
-  _removeBookingAfterError(is_new, event, assets = false, e) {
-    return __async(this, null, function* () {
-      if (is_new) {
-        yield removeEvent(event.id, event.resources.length ? {
-          calendar: this.form.value.host || currentUser()?.email,
-          system_id: event.resources[0].id
-        } : {})?.toPromise();
-        throw e?.status === 409 ? i18n("CALENDAR_EVENT.ASSETS_CLASH_ERROR") : i18n("CALENDAR_EVENT.ASSETS_ERROR");
-      } else if (assets) {
-        throw i18n("CALENDAR_EVENT.ASSETS_PARTIAL_ERROR", {
-          error: e
-        });
-      }
+    }
+    const on_error = (e) => {
       this.removeLoadingTag(Tags.PostBooking);
       throw e;
+    };
+    this.addLoadingTag(Tags.PostBooking);
+    const event = this._event.getValue();
+    const space_list = this.form.value.resources || [];
+    let spaces = space_list.filter((_) => !ignore_space_check.includes(_.id));
+    const recurr = this.form.value.recurrence;
+    this.form.patchValue({
+      recurring: recurr?._pattern && recurr?._pattern !== "none"
     });
+    if (!this.form.value.recurring) {
+      this.form.patchValue({ recurrence: null });
+    }
+    const changed_spaces = spaces.filter((_) => !event.resources.find((s) => s.id === _.id));
+    const has_time_changed = !event.id || event.date !== this.form.value.date || event.duration !== this.form.value.duration;
+    if (spaces.length && has_time_changed) {
+      const space_list2 = await Promise.all(changed_spaces.map((_) => this._space_pipe.transform(_.email)));
+      await this._checkResourcesAvailable(space_list2, this.form.value.all_day ? startOfDay(this.form.value.date).valueOf() : this.form.value.date, this.form.value.all_day ? Math.max(24 * 60, this.form.value.duration) : this.form.value.duration, event.ical_uid || event.id || "").catch(on_error);
+    } else if (!space_list.length && this.lone_space) {
+      spaces = [await this._space_pipe.transform(this.lone_space)];
+      this.form.patchValue({ resources: spaces });
+    }
+    this.form.patchValue({
+      attendees: unique([
+        ...this.form.value.attendees,
+        this.form.value.organiser || currentUser()
+      ], "email")
+    });
+    if (!spaces.length && this.form.value.attendees.find((_) => _.is_external)) {
+      this.removeLoadingTag(Tags.PostBooking);
+      throw i18n("CALENDAR_EVENT.SPACE_EXTERNALS_ERROR");
+    }
+    const default_oflow = this._overflow();
+    let [setup, breakdown] = [
+      this.form.value.setup_time || default_oflow.setup,
+      this.form.value.breakdown_time || default_oflow.breakdown
+    ];
+    for (const space of spaces) {
+      const overflow = this._overflow(space.id);
+      setup = Math.max(overflow.setup || 0, setup);
+      breakdown = Math.max(overflow.breakdown || 0, breakdown);
+    }
+    this.form.patchValue({ setup_time: setup, breakdown_time: breakdown });
+    for (const order of this.form.value.catering || []) {
+      order.notes = this.form.value.catering_notes;
+      order.charge_code = this.form.value.catering_charge_code;
+    }
+    const query = event.id ? {
+      system_id: event?.resources[0]?.id || event?.system?.id || spaces[0]?.id
+    } : {};
+    const is_owner = this.form.value.host === currentUser()?.email || this.form.value.creator === currentUser()?.email;
+    if (is_owner && !ignore_owner)
+      query.calendar = this.form.value.host || this.form.value.creator;
+    const processed_assets = (this.form.value.assets || []).map((_) => new AssetRequest(_).toJSON());
+    const host = this._host(this.form.value.host, spaces[0]?.email);
+    const ext = {
+      department: this.form.value.organiser?.department || currentUser()?.department
+    };
+    if (this.form.value.host !== host)
+      ext.host_override = this.form.value.host;
+    const value = this.form.getRawValue();
+    const created_event = await this._performBooking(new CalendarEvent(__spreadProps(__spreadValues({}, this.form.getRawValue()), {
+      old_system: event?.system,
+      host,
+      title: this.form.value.title || "Space Booking",
+      attendees: this.form.value.attendees.map((_) => {
+        const v = __spreadValues({}, _);
+        delete v.visit_expected;
+        return v;
+      }),
+      assets: processed_assets,
+      extension_data: ext
+    })), query).catch(on_error);
+    const domain = (currentUser()?.email || "@").split("@")[1];
+    const visitors = this.form.value.attendees.filter((user) => user.is_external && user.email !== event.host && !user.email.includes(domain) && user.visit_expected);
+    if (visitors.length) {
+      await createBookingsForEvent(created_event, "visitor", visitors).catch((e) => this._removeBookingAfterError(!event.id, created_event, false, e));
+    }
+    if (this.form.value.catering?.length) {
+      await createBookingsForEvent(created_event, "catering-order", this.form.value.catering).catch((e) => this._removeBookingAfterError(!event.id, created_event, false, e));
+    }
+    const assets = this.form.value.assets || event.extension_data.assets || [];
+    if (assets.length) {
+      const requests = await validateAssetRequestsForResource(created_event, {
+        date: value.date,
+        duration: value.duration,
+        host: value.host,
+        all_day: value.all_day,
+        location_name: spaces[0]?.display_name || spaces[0]?.name || "",
+        location_id: spaces[0]?.id || "",
+        zones: unique([
+          this._org.organisation.id,
+          this._org.region?.id,
+          this._org.building?.id,
+          ...spaces[0]?.zones || []
+        ]).filter((_) => !!_),
+        reset_state: has_time_changed
+      }, assets, changed_spaces.length > 0 || has_time_changed).catch((e) => this._removeBookingAfterError(!event.id, created_event, true, e));
+      if (!requests)
+        throw i18n("CALENDAR_EVENT.ASSETS_INVALID_ERROR");
+      await requests();
+    }
+    this.clearForm();
+    sessionStorage.setItem("PLACEOS.last_modified_event", JSON.stringify(created_event.toJSON()));
+    return true;
+  }
+  async _handlePayments() {
+    return "INV-000_001";
+  }
+  async _checkResourcesAvailable(spaces, date, duration, ignore) {
+    if (!spaces?.length)
+      return true;
+    const event = this._event.getValue();
+    const id_list = spaces.map((_) => _.id);
+    const response = await lastValueFrom(this.book_internal ? queryResourceAvailability(id_list, date, duration, ignore) : querySpaceAvailability(id_list, date, duration, event?.resources[0]?.id || event?.system?.id || event?.id || void 0, void 0, [event?.date, event?.duration]));
+    if (!response.every((_) => _)) {
+      throw i18n(spaces.length > 1 ? "CALENDAR_EVENT.SPACES_UNAVAILABLE" : "CALENDAR_EVENT.SPACE_UNAVAILABLE");
+    }
+    return true;
+  }
+  async _performBooking(event, query) {
+    this._updateVisitorList(event.attendees);
+    const old_system = event.old_system?.id || event.old_system?.email || event.resources[0]?.email;
+    const system_id = event.system?.id || event.system?.email || event.resources[0]?.email;
+    if (old_system !== system_id) {
+      event.attendees = event.attendees.filter((_) => _.email !== old_system || _.id !== old_system);
+    }
+    return (this.book_internal ? saveBooking(newBookingFromCalendarEvent(__spreadProps(__spreadValues({}, event.toJSON()), {
+      status: this._settings.get("app.bookings.no_approval") === true ? "approved" : "tentative"
+    }))).pipe(map((_) => newCalendarEventFromBooking(_))) : saveEvent(event, query))?.toPromise();
+  }
+  async _removeBookingAfterError(is_new, event, assets = false, e) {
+    if (is_new) {
+      await removeEvent(event.id, event.resources.length ? {
+        calendar: this.form.value.host || currentUser()?.email,
+        system_id: event.resources[0].id
+      } : {})?.toPromise();
+      throw e?.status === 409 ? i18n("CALENDAR_EVENT.ASSETS_CLASH_ERROR") : i18n("CALENDAR_EVENT.ASSETS_ERROR");
+    } else if (assets) {
+      throw i18n("CALENDAR_EVENT.ASSETS_PARTIAL_ERROR", {
+        error: e
+      });
+    }
+    this.removeLoadingTag(Tags.PostBooking);
+    throw e;
   }
   _updateVisitorList(attendees) {
     const visitors = attendees.filter((user) => user.is_external);
@@ -4342,19 +4315,17 @@ var _ExploreBookingModalComponent = class _ExploreBookingModalComponent {
       organiser: currentUser()
     });
   }
-  save() {
-    return __async(this, null, function* () {
-      yield this._event_form.postForm().catch((_) => {
-        notifyError(_);
-        throw _;
-      });
-      if (this._settings.app_name.toLowerCase().includes("workplace")) {
-        this._router.navigate(["/book", "meeting", "success"]);
-      } else {
-        notifySuccess(i18n("EXPLORE.BOOKING_SUCCESS"));
-      }
-      this._dialog_ref.close();
+  async save() {
+    await this._event_form.postForm().catch((_) => {
+      notifyError(_);
+      throw _;
     });
+    if (this._settings.app_name.toLowerCase().includes("workplace")) {
+      this._router.navigate(["/book", "meeting", "success"]);
+    } else {
+      notifySuccess(i18n("EXPLORE.BOOKING_SUCCESS"));
+    }
+    this._dialog_ref.close();
   }
 };
 _ExploreBookingModalComponent.\u0275fac = function ExploreBookingModalComponent_Factory(__ngFactoryType__) {
@@ -4872,14 +4843,12 @@ var _SpacesService = class _SpacesService {
       SPACE_PIPE.org = this._org;
     this._init();
   }
-  _init() {
-    return __async(this, null, function* () {
-      yield lastValueFrom(this._org.initialised.pipe(first((_) => _)));
-      if (!this._settings.get("app.prevent_space_init"))
-        this.loadSpaces();
-      else
-        this._initialised.next(true);
-    });
+  async _init() {
+    await lastValueFrom(this._org.initialised.pipe(first((_) => _)));
+    if (!this._settings.get("app.prevent_space_init"))
+      this.loadSpaces();
+    else
+      this._initialised.next(true);
   }
   /**
    * Get a filtered list of the available spaces
@@ -4888,14 +4857,12 @@ var _SpacesService = class _SpacesService {
   filter(predicate = this._compare) {
     return this.space_list.filter((_) => predicate(_));
   }
-  loadSpace(space_id) {
-    return __async(this, null, function* () {
-      const system = yield lastValueFrom(cc(space_id));
-      const space = new Space(__spreadProps(__spreadValues({}, system), {
-        level: this._org.levelWithID([...system.zones])
-      }));
-      SPACE_PIPE.updateSpaceList([space]);
-    });
+  async loadSpace(space_id) {
+    const system = await lastValueFrom(cc(space_id));
+    const space = new Space(__spreadProps(__spreadValues({}, system), {
+      level: this._org.levelWithID([...system.zones])
+    }));
+    SPACE_PIPE.updateSpaceList([space]);
   }
   /**
    * Find space with given id/email
@@ -4904,19 +4871,17 @@ var _SpacesService = class _SpacesService {
   find(space_id) {
     return this.space_list.find(({ id }) => space_id === id);
   }
-  loadSpaces() {
-    return __async(this, null, function* () {
-      const systems = yield lastValueFrom(sc({
-        zone_id: this._org.organisation.id,
-        limit: 5e3
-      })?.pipe(map((i) => i.data)));
-      const space_list = systems.map((sys) => new Space(__spreadProps(__spreadValues({}, sys), {
-        level: this._org.levelWithID([...sys.zones])
-      })));
-      this._all_spaces.next(space_list);
-      SPACE_PIPE.updateSpaceList(this.space_list);
-      this._initialised.next(true);
-    });
+  async loadSpaces() {
+    const systems = await lastValueFrom(sc({
+      zone_id: this._org.organisation.id,
+      limit: 5e3
+    })?.pipe(map((i) => i.data)));
+    const space_list = systems.map((sys) => new Space(__spreadProps(__spreadValues({}, sys), {
+      level: this._org.levelWithID([...sys.zones])
+    })));
+    this._all_spaces.next(space_list);
+    SPACE_PIPE.updateSpaceList(this.space_list);
+    this._initialised.next(true);
   }
 };
 _SpacesService.\u0275fac = function SpacesService_Factory(__ngFactoryType__) {
@@ -5026,36 +4991,34 @@ var _ExploreStateService = class _ExploreStateService extends AsyncHandler {
     this.options = this._options.asObservable();
     this.init();
   }
-  init() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      this._org.active_levels.pipe(filter((_) => !!_)).subscribe((level_list) => {
-        const level = this._level.getValue();
-        const has_level = level_list.find((lvl) => level?.id === lvl.id);
-        if (!has_level && level_list.length) {
-          this.setLevel(level_list[0].id);
-        }
-        if (this._settings.get("app.explore.disable_actions")) {
-          this.setOptions({
-            disable_actions: this._settings.get("app.explore.disable_actions")
-          });
-        }
-        if (this._settings.get("app.explore.disable_labels")) {
-          this.setOptions({
-            disable_labels: this._settings.get("app.explore.disable_labels")
-          });
-        }
-        if (this._settings.get("app.explore.disable_features")) {
-          this.setOptions({
-            disable_features: this._settings.get("app.explore.disable_features")
-          });
-        }
-        if (this._settings.get("app.explore.disable_styles")) {
-          this.setOptions({
-            disable_styles: this._settings.get("app.explore.disable_styles")
-          });
-        }
-      });
+  async init() {
+    await this._org.initialised.pipe(first((_) => _)).toPromise();
+    this._org.active_levels.pipe(filter((_) => !!_)).subscribe((level_list) => {
+      const level = this._level.getValue();
+      const has_level = level_list.find((lvl) => level?.id === lvl.id);
+      if (!has_level && level_list.length) {
+        this.setLevel(level_list[0].id);
+      }
+      if (this._settings.get("app.explore.disable_actions")) {
+        this.setOptions({
+          disable_actions: this._settings.get("app.explore.disable_actions")
+        });
+      }
+      if (this._settings.get("app.explore.disable_labels")) {
+        this.setOptions({
+          disable_labels: this._settings.get("app.explore.disable_labels")
+        });
+      }
+      if (this._settings.get("app.explore.disable_features")) {
+        this.setOptions({
+          disable_features: this._settings.get("app.explore.disable_features")
+        });
+      }
+      if (this._settings.get("app.explore.disable_styles")) {
+        this.setOptions({
+          disable_styles: this._settings.get("app.explore.disable_styles")
+        });
+      }
     });
   }
   setOptions(options) {
@@ -5217,40 +5180,38 @@ var _ExploreSpacesService = class _ExploreSpacesService extends AsyncHandler {
     }));
     this.subscription("spaces", this._bind.subscribe());
   }
-  bookSpace(space, force = false) {
-    return __async(this, null, function* () {
-      if (this._panning && this._last_action === "down")
-        return;
-      const booking_rules = yield nextValueFrom(this.booking_rules);
-      const room_alerts = yield nextValueFrom(this.room_alerts);
-      const { hidden } = rulesForResource({
-        date: Date.now(),
-        duration: 60,
-        resource: space,
-        host: currentUser()
-      }, booking_rules) || {};
-      if (hidden) {
-        return notifyError(i18n("EXPLORE.SPACES_PERMISSIONS_ERROR"));
-      }
-      if (this._statuses[space.id] !== "free" && !force || !space.bookable) {
-        return notifyError(i18n("EXPLORE.SPACES_UNAVAILABLE_ERROR", {
-          name: space.display_name || space.name
-        }));
-      }
-      this._event_form.newForm();
-      this._event_form.form.patchValue({
-        host: currentUser()?.email,
-        resources: [space]
-      });
-      if (room_alerts[space.id]?.[0] === "closed") {
-        return notifyError(`${room_alerts[space.id][1]}`);
-      }
-      if (this._settings.get("app.events.booking_unavailable")) {
-        return this._event_form.openEventLinkModal();
-      }
-      this._dialog.open(this._settings.get("app.explore.show_booking_qr") ? ExploreBookQrComponent : ExploreBookingModalComponent, {
-        data: { space, alert: room_alerts[space.id] }
-      });
+  async bookSpace(space, force = false) {
+    if (this._panning && this._last_action === "down")
+      return;
+    const booking_rules = await nextValueFrom(this.booking_rules);
+    const room_alerts = await nextValueFrom(this.room_alerts);
+    const { hidden } = rulesForResource({
+      date: Date.now(),
+      duration: 60,
+      resource: space,
+      host: currentUser()
+    }, booking_rules) || {};
+    if (hidden) {
+      return notifyError(i18n("EXPLORE.SPACES_PERMISSIONS_ERROR"));
+    }
+    if (this._statuses[space.id] !== "free" && !force || !space.bookable) {
+      return notifyError(i18n("EXPLORE.SPACES_UNAVAILABLE_ERROR", {
+        name: space.display_name || space.name
+      }));
+    }
+    this._event_form.newForm();
+    this._event_form.form.patchValue({
+      host: currentUser()?.email,
+      resources: [space]
+    });
+    if (room_alerts[space.id]?.[0] === "closed") {
+      return notifyError(`${room_alerts[space.id][1]}`);
+    }
+    if (this._settings.get("app.events.booking_unavailable")) {
+      return this._event_form.openEventLinkModal();
+    }
+    this._dialog.open(this._settings.get("app.explore.show_booking_qr") ? ExploreBookQrComponent : ExploreBookingModalComponent, {
+      data: { space, alert: room_alerts[space.id] }
     });
   }
   handleBookingsChange(spaces, space, bookings) {
@@ -5274,21 +5235,19 @@ var _ExploreSpacesService = class _ExploreSpacesService extends AsyncHandler {
     this._presence[space.id] = presence;
     this.timeout("update_icons", () => this._updateIcons(spaces), 100);
   }
-  _updateStatus(spaces) {
-    return __async(this, null, function* () {
-      const style_map = {};
-      const colours = this._settings.get("app.explore.colors") || {};
-      for (const space of spaces) {
-        if (!this._statuses[space.id])
-          continue;
-        const status = this._statuses[space.id];
-        style_map[`#${space.map_id}`] = {
-          fill: colours[`space-${status}`] || colours[`${status}`] || DEFAULT_COLOURS[`${status}`],
-          opacity: 0.6
-        };
-      }
-      this._state.setStyles("spaces", style_map);
-    });
+  async _updateStatus(spaces) {
+    const style_map = {};
+    const colours = this._settings.get("app.explore.colors") || {};
+    for (const space of spaces) {
+      if (!this._statuses[space.id])
+        continue;
+      const status = this._statuses[space.id];
+      style_map[`#${space.map_id}`] = {
+        fill: colours[`space-${status}`] || colours[`${status}`] || DEFAULT_COLOURS[`${status}`],
+        opacity: 0.6
+      };
+    }
+    this._state.setStyles("spaces", style_map);
   }
   _updateHoverElements(spaces) {
     const features = [];
@@ -5431,9 +5390,9 @@ var _ExploreDesksService = class _ExploreDesksService extends AsyncHandler {
       this._signs_of_life,
       this.booking_rules,
       this._options
-    ]).pipe(debounceTime(50), map((_0) => __async(this, [_0], function* ([desks, in_use, presence, checked_in, signs, restrictions]) {
+    ]).pipe(debounceTime(50), map(async ([desks, in_use, presence, checked_in, signs, restrictions]) => {
       this._statuses = {};
-      const level = yield nextValueFrom(this._state.level);
+      const level = await nextValueFrom(this._state.level);
       for (const { id, bookable, map_id } of desks) {
         const d_id = map_id || id;
         const is_used = in_use.some((i) => d_id === i);
@@ -5452,21 +5411,19 @@ var _ExploreDesksService = class _ExploreDesksService extends AsyncHandler {
         this._statuses[d_id] = bookable && !is_restricted ? !is_used && !has_presence && !is_checked_in ? has_signs ? "signs-of-life" : "free" : !has_presence && !is_checked_in ? "pending" : "busy" : "not-bookable";
       }
       this.processDesks(desks);
-    })));
+    }));
     this.init();
   }
-  init() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      this.setOptions({
-        enable_booking: this._settings.get("app.desks.enable_maps") !== false
-      });
-      this.subscription("bookings", this._booking_list.subscribe());
-      this.subscription("bind", this._bind.subscribe());
-      this.subscription("booking_rules", this.booking_rules.subscribe());
-      this.subscription("changes", this._state_change.subscribe());
-      this.subscription("desks", this.desk_list.subscribe((desks) => this.processDesks(desks)));
+  async init() {
+    await this._org.initialised.pipe(first((_) => _)).toPromise();
+    this.setOptions({
+      enable_booking: this._settings.get("app.desks.enable_maps") !== false
     });
+    this.subscription("bookings", this._booking_list.subscribe());
+    this.subscription("bind", this._bind.subscribe());
+    this.subscription("booking_rules", this.booking_rules.subscribe());
+    this.subscription("changes", this._state_change.subscribe());
+    this.subscription("desks", this.desk_list.subscribe((desks) => this.processDesks(desks)));
   }
   setOptions(options) {
     this._options.next(__spreadValues(__spreadValues({}, this._options.getValue()), options));
@@ -5544,11 +5501,11 @@ var _ExploreDesksService = class _ExploreDesksService extends AsyncHandler {
       if (!desk.bookable)
         continue;
       let can_book = true;
-      const book_fn = () => __async(this, null, function* () {
+      const book_fn = async () => {
         if (!can_book)
           return;
-        yield this._bookDesk(desk, options);
-      });
+        await this._bookDesk(desk, options);
+      };
       ["mousedown", "touchstart"].forEach((event) => actions.push({
         id: desk.map_id || desk.id,
         action: event,
@@ -5569,86 +5526,82 @@ var _ExploreDesksService = class _ExploreDesksService extends AsyncHandler {
     this._state.setFeatures("desks", list);
     this.timeout("update", () => this.updateStatus(), 100);
   }
-  _setBookingTime(date, duration, host = false, resource = null) {
-    return __async(this, null, function* () {
-      let user = null;
-      if (!!this._settings.get("app.desks.allow_time_changes")) {
-        const until = endOfDay(addDays(Date.now(), this._settings.get("app.desks.available_period") || 90));
-        const ref = this._dialog.open(SetDatetimeModalComponent, {
-          data: { date, duration, until, host, resource }
-        });
-        const details = yield ref.afterClosed().toPromise();
-        if (!details)
-          throw "User cancelled";
-        date = details.date;
-        duration = details.duration;
-        user = details.user;
-      }
-      return { date, duration, user };
-    });
+  async _setBookingTime(date, duration, host = false, resource = null) {
+    let user = null;
+    if (!!this._settings.get("app.desks.allow_time_changes")) {
+      const until = endOfDay(addDays(Date.now(), this._settings.get("app.desks.available_period") || 90));
+      const ref = this._dialog.open(SetDatetimeModalComponent, {
+        data: { date, duration, until, host, resource }
+      });
+      const details = await ref.afterClosed().toPromise();
+      if (!details)
+        throw "User cancelled";
+      date = details.date;
+      duration = details.duration;
+      user = details.user;
+    }
+    return { date, duration, user };
   }
-  _bookDesk(desk, options) {
-    return __async(this, null, function* () {
-      if (this._statuses[desk.id] !== "free") {
-        return notifyError(i18n("EXPLORE.DESK_AVAILABLE_ERROR", {
-          name: desk.name || "Desk"
-        }));
-      }
-      if (desk.groups?.length && !desk.groups.find((_) => currentUser().groups.includes(_))) {
-        return notifyError(i18n("EXPLORE.DESK_GROUP_ERROR", { name: desk.name || "Desk" }));
-      }
-      this._bookings.newForm("desk");
-      this._bookings.setOptions({ type: "desk" });
-      if (options.date) {
-        this._bookings.form.patchValue({
-          date: options.date
-        });
-        this._bookings.form.patchValue({
-          all_day: !!options.all_day
-        });
-      }
-      let { date, duration, user } = yield this._setBookingTime(this._bookings.form.value.date, this._bookings.form.value.duration, this._options.getValue()?.custom ?? false, desk);
-      user = user || options.host || currentUser();
-      const user_email = user?.email;
+  async _bookDesk(desk, options) {
+    if (this._statuses[desk.id] !== "free") {
+      return notifyError(i18n("EXPLORE.DESK_AVAILABLE_ERROR", {
+        name: desk.name || "Desk"
+      }));
+    }
+    if (desk.groups?.length && !desk.groups.find((_) => currentUser().groups.includes(_))) {
+      return notifyError(i18n("EXPLORE.DESK_GROUP_ERROR", { name: desk.name || "Desk" }));
+    }
+    this._bookings.newForm("desk");
+    this._bookings.setOptions({ type: "desk" });
+    if (options.date) {
       this._bookings.form.patchValue({
-        resources: [desk],
-        asset_id: desk.id,
-        asset_name: desk.name,
-        date,
-        duration: options.all_day ? 12 * 60 : duration,
-        map_id: desk?.map_id || desk?.id,
-        description: desk.name,
-        user,
-        user_email,
-        booking_type: "desk",
-        zones: desk.zone ? [desk.zone?.parent_id, desk.zone?.id] : []
+        date: options.date
       });
-      const restrictions = yield nextValueFrom(this.booking_rules);
-      const is_restricted = rulesForResource({
-        date,
-        duration,
-        host: currentUser(),
-        resource: {
-          id: desk.id,
-          zones: [desk.zone?.parent_id, desk.zone?.id]
-        }
-      }, restrictions)?.hidden;
-      if (is_restricted) {
-        return notifyError(i18n("EXPLORE.DESK_RESTRICTION_ERROR", {
-          name: desk.name || "Desk"
-        }));
-      }
-      yield this._bookings.confirmPost().catch((e) => {
-        console.log(e);
-        notifyError(i18n("EXPLORE.DESK_BOOKING_ERROR", {
-          name: desk.name || "Desk",
-          error: e.message || e.error || e
-        }));
-        throw e;
+      this._bookings.form.patchValue({
+        all_day: !!options.all_day
       });
-      this._users[desk.map_id] = (options.host || currentUser())?.name;
-      notifySuccess(i18n("EXPLORE.DESK_BOOKING_SUCCESS", { name: desk.name || "Desk" }));
+    }
+    let { date, duration, user } = await this._setBookingTime(this._bookings.form.value.date, this._bookings.form.value.duration, this._options.getValue()?.custom ?? false, desk);
+    user = user || options.host || currentUser();
+    const user_email = user?.email;
+    this._bookings.form.patchValue({
+      resources: [desk],
+      asset_id: desk.id,
+      asset_name: desk.name,
+      date,
+      duration: options.all_day ? 12 * 60 : duration,
+      map_id: desk?.map_id || desk?.id,
+      description: desk.name,
+      user,
+      user_email,
+      booking_type: "desk",
+      zones: desk.zone ? [desk.zone?.parent_id, desk.zone?.id] : []
     });
+    const restrictions = await nextValueFrom(this.booking_rules);
+    const is_restricted = rulesForResource({
+      date,
+      duration,
+      host: currentUser(),
+      resource: {
+        id: desk.id,
+        zones: [desk.zone?.parent_id, desk.zone?.id]
+      }
+    }, restrictions)?.hidden;
+    if (is_restricted) {
+      return notifyError(i18n("EXPLORE.DESK_RESTRICTION_ERROR", {
+        name: desk.name || "Desk"
+      }));
+    }
+    await this._bookings.confirmPost().catch((e) => {
+      console.log(e);
+      notifyError(i18n("EXPLORE.DESK_BOOKING_ERROR", {
+        name: desk.name || "Desk",
+        error: e.message || e.error || e
+      }));
+      throw e;
+    });
+    this._users[desk.map_id] = (options.host || currentUser())?.name;
+    notifySuccess(i18n("EXPLORE.DESK_BOOKING_SUCCESS", { name: desk.name || "Desk" }));
   }
 };
 _ExploreDesksService.\u0275fac = function ExploreDesksService_Factory(__ngFactoryType__) {
@@ -5758,11 +5711,9 @@ var _ExploreMapControlComponent = class _ExploreMapControlComponent extends Asyn
     };
     this.setBuilding = (bld) => this._org.building = bld;
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      this.subscription("route.query", this._route.queryParamMap.subscribe((params) => params.has("zone") ? this._state.setLevel(params.get("zone")) : ""));
-    });
+  async ngOnInit() {
+    await this._org.initialised.pipe(first((_) => _)).toPromise();
+    this.subscription("route.query", this._route.queryParamMap.subscribe((params) => params.has("zone") ? this._state.setLevel(params.get("zone")) : ""));
   }
 };
 _ExploreMapControlComponent.\u0275fac = function ExploreMapControlComponent_Factory(__ngFactoryType__) {
@@ -6075,7 +6026,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
       position: this._on_changes.pipe(map((_) => _.center))
     };
     this._outlet_el = viewChild("outlet");
-    this._feature_list = viewChildren("feature");
+    this._feature_list = viewChildren("feature", {});
   }
   ngOnInit() {
     Dn();
@@ -6146,75 +6097,73 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
       return this.timeout("update_display", () => this.updateDisplay());
     }
   }
-  createView() {
-    return __async(this, null, function* () {
-      if (!ve()) {
-        return this.timeout("create_view", () => this.createView().catch((e) => console.warn(e)), 300);
-      }
-      const simp_url = this.src()?.toLowerCase() || "";
-      if (!simp_url.includes("svg") && !simp_url.includes("upload"))
-        return;
-      const _outlet_el = this._outlet_el();
-      const src = this.src();
-      if (src && _outlet_el?.nativeElement && !this.loading) {
-        this.loading = true;
-        const styles = this.styles();
-        const labels = this.labels();
-        const actions = this.actions();
-        const options = this.options();
-        if (this.viewer) {
-          try {
-            Yn(this.viewer, {
-              styles,
-              features: [],
-              labels,
-              actions,
-              options
-            });
-            Hn(this.viewer);
-          } catch (e) {
-            console.warn(e);
-            return;
-          }
-        }
-        this.updateFeatureList();
-        const tkn = Y();
-        document.cookie = `${tkn === "x-api-key" ? "api-key=" + encodeURIComponent(Oe()) : "bearer_token=" + encodeURIComponent(tkn)};max-age=30;path=/api/engine/v2/uploads;samesite=strict;${location.protocol === "https:" ? "secure;" : ""}`;
-        this.viewer = yield Un({
-          element: _outlet_el?.nativeElement,
-          url: src,
-          styles,
-          zoom: this.zoom(),
-          desired_zoom: this.zoom(),
-          center: this.center(),
-          features: this.feature_list,
-          labels,
-          actions,
-          options
-        }).catch((e) => {
+  async createView() {
+    if (!ve()) {
+      return this.timeout("create_view", () => this.createView().catch((e) => console.warn(e)), 300);
+    }
+    const simp_url = this.src()?.toLowerCase() || "";
+    if (!simp_url.includes("svg") && !simp_url.includes("upload"))
+      return;
+    const _outlet_el = this._outlet_el();
+    const src = this.src();
+    if (src && _outlet_el?.nativeElement && !this.loading) {
+      this.loading = true;
+      const styles = this.styles();
+      const labels = this.labels();
+      const actions = this.actions();
+      const options = this.options();
+      if (this.viewer) {
+        try {
+          Yn(this.viewer, {
+            styles,
+            features: [],
+            labels,
+            actions,
+            options
+          });
+          Hn(this.viewer);
+        } catch (e) {
           console.warn(e);
-          return "";
-        });
-        this.loading = false;
-        if (!this.viewer)
           return;
-        this.loading = false;
-        this.subscription("view_changes", gn(this.viewer)?.subscribe((v) => {
-          this._on_changes.next(__spreadValues({}, v));
-          this.zoomChange.emit(v.zoom);
-          this.zoom.set(v.zoom);
-          this.centerChange.emit(v.center);
-          this.center.set(v.center);
-        }));
-        const viewer = $(this.viewer);
-        this.mapInfo.emit(viewer.mappings);
-        const focus = this.focus();
-        if (focus)
-          this.focusOn(focus);
-      } else if (src && !_outlet_el?.nativeElement || this.loading) {
-        this.timeout("create_view", () => this.createView().catch((e) => console.warn(e)));
+        }
       }
-    });
+      this.updateFeatureList();
+      const tkn = Y();
+      document.cookie = `${tkn === "x-api-key" ? "api-key=" + encodeURIComponent(Oe()) : "bearer_token=" + encodeURIComponent(tkn)};max-age=30;path=/api/engine/v2/uploads;samesite=strict;${location.protocol === "https:" ? "secure;" : ""}`;
+      this.viewer = await Un({
+        element: _outlet_el?.nativeElement,
+        url: src,
+        styles,
+        zoom: this.zoom(),
+        desired_zoom: this.zoom(),
+        center: this.center(),
+        features: this.feature_list,
+        labels,
+        actions,
+        options
+      }).catch((e) => {
+        console.warn(e);
+        return "";
+      });
+      this.loading = false;
+      if (!this.viewer)
+        return;
+      this.loading = false;
+      this.subscription("view_changes", gn(this.viewer)?.subscribe((v) => {
+        this._on_changes.next(__spreadValues({}, v));
+        this.zoomChange.emit(v.zoom);
+        this.zoom.set(v.zoom);
+        this.centerChange.emit(v.center);
+        this.center.set(v.center);
+      }));
+      const viewer = $(this.viewer);
+      this.mapInfo.emit(viewer.mappings);
+      const focus = this.focus();
+      if (focus)
+        this.focusOn(focus);
+    } else if (src && !_outlet_el?.nativeElement || this.loading) {
+      this.timeout("create_view", () => this.createView().catch((e) => console.warn(e)));
+    }
   }
   focusOn(id) {
     if (!id || !this.viewer)
@@ -6231,13 +6180,10 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
     });
     this.updateDisplay();
   }
-  /* istanbul ignore next */
-  trackByFn(index, feature) {
-    return feature?.track_id;
-  }
   updateFeatureList() {
+    const feature_elements = this._feature_list();
     this.feature_list = (this.features() || []).map((f, idx) => __spreadProps(__spreadValues({}, f), {
-      content: this._feature_list[idx]?.nativeElement
+      content: feature_elements[idx]?.nativeElement
     })).filter((f) => f.content);
   }
   updateInjectors() {
@@ -6526,70 +6472,66 @@ var _MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
     this._services.directions_renderer.setRoute(null);
     this.viewing_directions = false;
   }
-  toggleDirections() {
-    return __async(this, null, function* () {
-      if (this.viewing_directions) {
-        this.clearDirections();
-        this._focusOnLocation();
-        return;
-      }
-      const focus = this.focus();
-      if (!focus)
-        return;
-      const items = yield this._search(focus);
-      if (!items?.length) {
-        notifyError(i18n("EXPLORE.LOCATE_FAILED", { name: focus }));
-        return;
-      }
-      this.loading_directions = true;
-      const item = items[0];
-      const bld = this._org.buildings.find((bld2) => bld2.id === this.zone().parent_id);
-      const [d_lng, d_lat] = item.properties?.anchor?.coordinates || bld?.location.split(",") || [37.8136, 144.9631];
-      const options = { timeout: 1e4, enableHighAccuracy: true };
-      navigator.geolocation.getCurrentPosition((position) => __async(this, null, function* () {
-        this._last_position = position;
+  async toggleDirections() {
+    if (this.viewing_directions) {
+      this.clearDirections();
+      this._focusOnLocation();
+      return;
+    }
+    const focus = this.focus();
+    if (!focus)
+      return;
+    const items = await this._search(focus);
+    if (!items?.length) {
+      notifyError(i18n("EXPLORE.LOCATE_FAILED", { name: focus }));
+      return;
+    }
+    this.loading_directions = true;
+    const item = items[0];
+    const bld = this._org.buildings.find((bld2) => bld2.id === this.zone().parent_id);
+    const [d_lng, d_lat] = item.properties?.anchor?.coordinates || bld?.location.split(",") || [37.8136, 144.9631];
+    const options = { timeout: 1e4, enableHighAccuracy: true };
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      this._last_position = position;
+      this.setDirectionsFromLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }, { lat: d_lat, lng: d_lng });
+    }, () => {
+      if (this._last_position) {
         this.setDirectionsFromLocation({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lat: this._last_position.coords.latitude,
+          lng: this._last_position.coords.longitude
         }, { lat: d_lat, lng: d_lng });
-      }), () => {
-        if (this._last_position) {
-          this.setDirectionsFromLocation({
-            lat: this._last_position.coords.latitude,
-            lng: this._last_position.coords.longitude
-          }, { lat: d_lat, lng: d_lng });
-        } else
-          notifyError(i18n("EXPLORE.LOCATE_CURRENT_FAILED"));
-      }, options);
-    });
+      } else
+        notifyError(i18n("EXPLORE.LOCATE_CURRENT_FAILED"));
+    }, options);
   }
-  setDirectionsFromLocation(from, to) {
-    return __async(this, null, function* () {
-      const distance = calculateDistance(to.lat, to.lng, from.lat, from.lng);
-      const routeParameters = {
-        origin: {
-          lat: from.lat,
-          lng: from.lng
-        },
-        destination: { lat: to.lat, lng: to.lng },
-        travelMode: distance < 2 ? "WALKING" : "DRIVING"
-      };
-      const result = yield this._services.directions.getRoute(routeParameters).catch((e) => {
-        log("MapsIndoors", "Error fetching route: ", e.message || e, "warn");
-        const origin_error = e instanceof TypeError && e.message?.includes("origin");
-        this.loading_directions = false;
-        if (!origin_error)
-          return;
-        notifyError(i18n("EXPLORE.LOCATE_ROUTE_FAILED", {
-          error: i18n("EXPLORE.LOCATE_ORIGIN_ERROR")
-        }));
-      });
-      if (!result)
-        return;
-      this._services.directions_renderer.setRoute(result);
-      this.viewing_directions = true;
+  async setDirectionsFromLocation(from, to) {
+    const distance = calculateDistance(to.lat, to.lng, from.lat, from.lng);
+    const routeParameters = {
+      origin: {
+        lat: from.lat,
+        lng: from.lng
+      },
+      destination: { lat: to.lat, lng: to.lng },
+      travelMode: distance < 2 ? "WALKING" : "DRIVING"
+    };
+    const result = await this._services.directions.getRoute(routeParameters).catch((e) => {
+      log("MapsIndoors", "Error fetching route: ", e.message || e, "warn");
+      const origin_error = e instanceof TypeError && e.message?.includes("origin");
       this.loading_directions = false;
+      if (!origin_error)
+        return;
+      notifyError(i18n("EXPLORE.LOCATE_ROUTE_FAILED", {
+        error: i18n("EXPLORE.LOCATE_ORIGIN_ERROR")
+      }));
     });
+    if (!result)
+      return;
+    this._services.directions_renderer.setRoute(result);
+    this.viewing_directions = true;
+    this.loading_directions = false;
   }
   _handleZoomChange(level) {
     this.timeout("zoom_change", () => {
@@ -6621,22 +6563,20 @@ var _MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
     this._org.building = bld;
     this._last_building = bld.id;
   }
-  _handleLevelChange(index) {
-    return __async(this, null, function* () {
-      log("MapsIndoors", `Level switched to "${index}"`);
-      const floor = this._floor_list.find((_) => _.index === index);
-      const id = floor?.externalId || floor?.id;
-      if (!this._services)
-        return;
-      const levels = yield nextValueFrom(this._org.active_levels);
-      if (!levels)
-        return;
-      const new_level = levels.find((_) => _.map_id === id || _.id === id);
-      if (!new_level)
-        return;
-      this.zone.set(new_level);
-      this.zoneChange.emit(new_level);
-    });
+  async _handleLevelChange(index) {
+    log("MapsIndoors", `Level switched to "${index}"`);
+    const floor = this._floor_list.find((_) => _.index === index);
+    const id = floor?.externalId || floor?.id;
+    if (!this._services)
+      return;
+    const levels = await nextValueFrom(this._org.active_levels);
+    if (!levels)
+      return;
+    const new_level = levels.find((_) => _.map_id === id || _.id === id);
+    if (!new_level)
+      return;
+    this.zone.set(new_level);
+    this.zoneChange.emit(new_level);
   }
   _handleUserClick(event) {
     log("MapsIndoors", `Click occurred`, event);
@@ -6651,64 +6591,58 @@ var _MapsIndoorsComponent = class _MapsIndoorsComponent extends AsyncHandler {
       }
     }
   }
-  _search(query) {
-    return __async(this, null, function* () {
-      if (!this._services)
-        return;
-      return mapsindoors?.services.LocationsService.getLocations({
-        q: query
-      });
+  async _search(query) {
+    if (!this._services)
+      return;
+    return mapsindoors?.services.LocationsService.getLocations({
+      q: query
     });
   }
-  _updateMapStyling() {
-    return __async(this, null, function* () {
-      if (!this._services)
-        return;
-      const styles = this.metadata()?.styles || {};
-      for (const id in styles) {
-        if (!styles[id].fill)
+  async _updateMapStyling() {
+    if (!this._services)
+      return;
+    const styles = this.metadata()?.styles || {};
+    for (const id in styles) {
+      if (!styles[id].fill)
+        continue;
+      let resource = RESOURCE_MAP[id];
+      if (!resource) {
+        const id_simple = id.replace(/#/, "");
+        const list = await this._search(id_simple);
+        if (!list.length)
           continue;
-        let resource = RESOURCE_MAP[id];
-        if (!resource) {
-          const id_simple = id.replace(/#/, "");
-          const list = yield this._search(id_simple);
-          if (!list.length)
-            continue;
-          resource = list.find((_) => _.properties?.externalId === id_simple || _.properties?.roomId === id_simple || _.id === id_simple);
-          if (resource)
-            this._setResource(id, resource);
-        }
-        if (!resource)
-          continue;
-        const value = {
-          extrusionHeight: 0,
-          extrusionVisible: false,
-          polygonVisible: true,
-          polygonFillColor: styles[id].fill
-        };
-        this._services.mapsindoors.setDisplayRule(resource.id, value);
+        resource = list.find((_) => _.properties?.externalId === id_simple || _.properties?.roomId === id_simple || _.id === id_simple);
+        if (resource)
+          this._setResource(id, resource);
       }
-    });
+      if (!resource)
+        continue;
+      const value = {
+        extrusionHeight: 0,
+        extrusionVisible: false,
+        polygonVisible: true,
+        polygonFillColor: styles[id].fill
+      };
+      this._services.mapsindoors.setDisplayRule(resource.id, value);
+    }
   }
-  _focusOnLocation() {
-    return __async(this, null, function* () {
-      const focus = this.focus();
-      if (!focus)
-        return;
-      const items = yield this._search(focus);
-      this.clearDirections();
-      if (!items?.length) {
-        notifyError(i18n("EXPLORE.LOCATE_FAILED", { name: focus }));
-        return;
-      }
-      const item = items.find((_) => _.properties?.externalId === this.focus()) || items[0];
-      const bld = this._org.buildings.find((bld2) => bld2.id === this.zone().parent_id);
-      const [lng, lat] = item.properties?.anchor?.coordinates || bld?.location.split(",") || [37.8136, 144.9631];
-      this._services.map.setZoom(DEFAULT_ZOOM2);
-      this._services.map.setCenter({ lat, lng });
-      this._services.mapsindoors.setFloor(item.properties?.floor);
-      this._services.mapsindoors.highlight([item.id]);
-    });
+  async _focusOnLocation() {
+    const focus = this.focus();
+    if (!focus)
+      return;
+    const items = await this._search(focus);
+    this.clearDirections();
+    if (!items?.length) {
+      notifyError(i18n("EXPLORE.LOCATE_FAILED", { name: focus }));
+      return;
+    }
+    const item = items.find((_) => _.properties?.externalId === this.focus()) || items[0];
+    const bld = this._org.buildings.find((bld2) => bld2.id === this.zone().parent_id);
+    const [lng, lat] = item.properties?.anchor?.coordinates || bld?.location.split(",") || [37.8136, 144.9631];
+    this._services.map.setZoom(DEFAULT_ZOOM2);
+    this._services.map.setCenter({ lat, lng });
+    this._services.mapsindoors.setFloor(item.properties?.floor);
+    this._services.mapsindoors.highlight([item.id]);
   }
   _centerOnZone() {
     const zone = this.zone();
@@ -7106,10 +7040,12 @@ var _MapPinComponent = class _MapPinComponent {
     this.fill = this._details.fill || "#e53935";
     this.stroke = this._details.stroke || "#fff";
     this.action = this._details.action || null;
+    this.show = signal(false);
+    this.show_message = signal(false);
   }
   ngOnInit() {
-    setTimeout(() => this.show = true, 300);
-    setTimeout(() => this.show_message = true, 1e3);
+    setTimeout(() => this.show.set(true), 300);
+    setTimeout(() => this.show_message.set(true), 1e3);
   }
 };
 _MapPinComponent.\u0275fac = function MapPinComponent_Factory(__ngFactoryType__) {
@@ -7124,9 +7060,9 @@ _MapPinComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type:
   }
   if (rf & 2) {
     \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.message && ctx.show_message ? 1 : -1);
+    \u0275\u0275conditional(ctx.message && ctx.show_message() ? 1 : -1);
     \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.show ? 2 : -1);
+    \u0275\u0275conditional(ctx.show() ? 2 : -1);
   }
 }, styles: ["\n\n[name=message][_ngcontent-%COMP%], \n[name=pin][_ngcontent-%COMP%] {\n  animation: _ngcontent-%COMP%_fade-in-top 1s;\n}\n@keyframes _ngcontent-%COMP%_fade-in-top {\n  0% {\n    opacity: 0;\n    transform: translateY(-100%);\n  }\n  100% {\n    opacity: 1;\n    transform: translateY(0%);\n  }\n}\n/*# sourceMappingURL=map-pin.component.css.map */"] });
 var MapPinComponent = _MapPinComponent;
@@ -7137,7 +7073,7 @@ var MapPinComponent = _MapPinComponent;
         <div
             class="-z-1 absolute bottom-1/2 left-1/2 flex w-[24rem] -translate-x-1/2 flex-col items-center"
         >
-            @if (message && show_message) {
+            @if (message && show_message()) {
                 <div
                     name="message"
                     class="text-gray-700 m-2 rounded bg-base-100 p-2 shadow"
@@ -7145,7 +7081,7 @@ var MapPinComponent = _MapPinComponent;
                     {{ message }}
                 </div>
             }
-            @if (show) {
+            @if (show()) {
                 <svg
                     name="pin"
                     viewBox="0 0 380 560"
@@ -8002,140 +7938,136 @@ var _ExploreParkingService = class _ExploreParkingService extends AsyncHandler {
   setOptions(options) {
     this._options.next(__spreadValues(__spreadValues({}, this._options.getValue()), options));
   }
-  _updateParkingSpaces(spaces, available) {
-    return __async(this, null, function* () {
-      const styles = {};
-      const features = [];
-      const actions = [];
-      const colours = this._settings.get("app.explore.colors") || {};
-      let options = this._options.getValue();
-      const assigned_space = yield nextValueFrom(this._parking.assigned_space);
-      const deny_parking_access = yield nextValueFrom(this._parking.deny_parking_access);
-      const booked_space = yield nextValueFrom(this._parking.booked_space);
-      for (const space of spaces) {
-        const can_book = !!available.find((_) => _.id === space.id);
-        const is_workplace = this._settings.app_name.toLowerCase().includes("workplace") || this._settings.app_name.toLowerCase().includes("staff");
-        const is_assigned = is_workplace ? false : !!space.assigned_to;
-        const id = space.map_id || space.id;
-        const status = is_assigned ? can_book ? "pending" : "busy" : can_book ? "free" : "busy";
-        styles[`#${id}`] = {
-          fill: colours[`parking-${status}`] || colours[`${status}`] || DEFAULT_COLOURS[`${status}`],
-          opacity: 0.6
-        };
-        features.push({
-          location: `${id}`,
-          content: ExploreParkingInfoComponent,
-          z_index: 20,
-          hover: true,
-          data: __spreadProps(__spreadValues({}, space), {
-            user: this._users[space.id],
-            plate_number: this._plate_numbers[space.id],
-            status: status === "pending" && is_assigned ? "reserved" : status
-          })
-        });
-        if (!can_book)
-          continue;
-        const book_fn = () => __async(this, null, function* () {
-          if (this.on_book) {
-            yield this.on_book(space);
-            this._poll.next(Date.now());
-            return;
-          }
-          if (deny_parking_access) {
-            return notifyError(i18n("EXPLORE.PARKING_PERMISSIONS_ERROR", {
-              name: space.zone?.display_name || space.zone?.name
-            }));
-          }
-          console.log("Booked Space:", booked_space);
-          if (assigned_space && booked_space) {
-            return notifyError(i18n("EXPLORE.PARKING_ASSIGNED_ERROR", {
-              name: space.name || space.id
-            }));
-          }
-          if (booked_space) {
-            return notifyError(i18n("EXPLORE.PARKING_EXISTING_ERROR"));
-          }
-          if (status !== "free") {
-            return notifyError(i18n("EXPLORE.PARKING_AVAILABLE_ERROR", {
-              name: space.name || "Parking Space"
-            }));
-          }
-          if (space.groups?.length && !space.groups.find((_) => currentUser().groups.includes(_))) {
-            return notifyError(i18n("EXPLORE.PARKING_GROUP_ERROR", {
-              name: space.name
-            }));
-          }
-          this._bookings.newForm("parking");
-          this._bookings.setOptions({ type: "parking" });
-          options = this._options.getValue();
-          let user = options.host || currentUser();
-          const user_email = user?.email;
-          const zone = this._org.levelWithID([
-            space.zone_id || space.zone
-          ]) || this._state.active_level;
-          const date = !options.date || isSameDay(options.date, Date.now()) ? startOfMinute(Date.now()).valueOf() : setHours(options.date, 8).valueOf();
-          this._bookings.form.patchValue({
-            resources: [space],
-            asset_id: space.id,
-            asset_name: space.name,
-            date,
-            duration: 11 * 60,
-            all_day: true,
-            map_id: space?.map_id || space?.id,
-            description: space.name,
-            user,
-            user_email,
-            booking_type: "parking",
-            zones: [
-              this._org.organisation.id,
-              this._org.region?.id,
-              zone.parent_id,
-              zone.id
-            ]
-          });
-          yield this._bookings.confirmPost().catch((e) => {
-            if (e === "User cancelled")
-              throw e;
-            notifyError(i18n("EXPLORE.PARKING_BOOKING_ERROR", {
-              name: space.name || space.id,
-              error: e.message || e.error || e
-            }));
-            throw e;
-          });
-          notifySuccess(i18n("EXPLORE.PARKING_BOOKING_SUCCESS", {
+  async _updateParkingSpaces(spaces, available) {
+    const styles = {};
+    const features = [];
+    const actions = [];
+    const colours = this._settings.get("app.explore.colors") || {};
+    let options = this._options.getValue();
+    const assigned_space = await nextValueFrom(this._parking.assigned_space);
+    const deny_parking_access = await nextValueFrom(this._parking.deny_parking_access);
+    const booked_space = await nextValueFrom(this._parking.booked_space);
+    for (const space of spaces) {
+      const can_book = !!available.find((_) => _.id === space.id);
+      const is_workplace = this._settings.app_name.toLowerCase().includes("workplace") || this._settings.app_name.toLowerCase().includes("staff");
+      const is_assigned = is_workplace ? false : !!space.assigned_to;
+      const id = space.map_id || space.id;
+      const status = is_assigned ? can_book ? "pending" : "busy" : can_book ? "free" : "busy";
+      styles[`#${id}`] = {
+        fill: colours[`parking-${status}`] || colours[`${status}`] || DEFAULT_COLOURS[`${status}`],
+        opacity: 0.6
+      };
+      features.push({
+        location: `${id}`,
+        content: ExploreParkingInfoComponent,
+        z_index: 20,
+        hover: true,
+        data: __spreadProps(__spreadValues({}, space), {
+          user: this._users[space.id],
+          plate_number: this._plate_numbers[space.id],
+          status: status === "pending" && is_assigned ? "reserved" : status
+        })
+      });
+      if (!can_book)
+        continue;
+      const book_fn = async () => {
+        if (this.on_book) {
+          await this.on_book(space);
+          this._poll.next(Date.now());
+          return;
+        }
+        if (deny_parking_access) {
+          return notifyError(i18n("EXPLORE.PARKING_PERMISSIONS_ERROR", {
+            name: space.zone?.display_name || space.zone?.name
+          }));
+        }
+        console.log("Booked Space:", booked_space);
+        if (assigned_space && booked_space) {
+          return notifyError(i18n("EXPLORE.PARKING_ASSIGNED_ERROR", {
             name: space.name || space.id
           }));
-          this.timeout("poll", () => this._poll.next(Date.now()), 1e3);
+        }
+        if (booked_space) {
+          return notifyError(i18n("EXPLORE.PARKING_EXISTING_ERROR"));
+        }
+        if (status !== "free") {
+          return notifyError(i18n("EXPLORE.PARKING_AVAILABLE_ERROR", {
+            name: space.name || "Parking Space"
+          }));
+        }
+        if (space.groups?.length && !space.groups.find((_) => currentUser().groups.includes(_))) {
+          return notifyError(i18n("EXPLORE.PARKING_GROUP_ERROR", {
+            name: space.name
+          }));
+        }
+        this._bookings.newForm("parking");
+        this._bookings.setOptions({ type: "parking" });
+        options = this._options.getValue();
+        let user = options.host || currentUser();
+        const user_email = user?.email;
+        const zone = this._org.levelWithID([
+          space.zone_id || space.zone
+        ]) || this._state.active_level;
+        const date = !options.date || isSameDay(options.date, Date.now()) ? startOfMinute(Date.now()).valueOf() : setHours(options.date, 8).valueOf();
+        this._bookings.form.patchValue({
+          resources: [space],
+          asset_id: space.id,
+          asset_name: space.name,
+          date,
+          duration: 11 * 60,
+          all_day: true,
+          map_id: space?.map_id || space?.id,
+          description: space.name,
+          user,
+          user_email,
+          booking_type: "parking",
+          zones: [
+            this._org.organisation.id,
+            this._org.region?.id,
+            zone.parent_id,
+            zone.id
+          ]
         });
-        actions.push({
-          id,
-          action: "click",
-          priority: 10,
-          callback: book_fn
+        await this._bookings.confirmPost().catch((e) => {
+          if (e === "User cancelled")
+            throw e;
+          notifyError(i18n("EXPLORE.PARKING_BOOKING_ERROR", {
+            name: space.name || space.id,
+            error: e.message || e.error || e
+          }));
+          throw e;
         });
-      }
-      this._state.setActions("parking", options.enable_booking ? actions : []);
-      this._state.setStyles("parking", styles);
-      this._state.setFeatures("parking", features);
-    });
+        notifySuccess(i18n("EXPLORE.PARKING_BOOKING_SUCCESS", {
+          name: space.name || space.id
+        }));
+        this.timeout("poll", () => this._poll.next(Date.now()), 1e3);
+      };
+      actions.push({
+        id,
+        action: "click",
+        priority: 10,
+        callback: book_fn
+      });
+    }
+    this._state.setActions("parking", options.enable_booking ? actions : []);
+    this._state.setStyles("parking", styles);
+    this._state.setFeatures("parking", features);
   }
-  _setBookingTime(date, duration, host = false, resource = null) {
-    return __async(this, null, function* () {
-      let user = null;
-      if (!!this._settings.get("app.parking.allow_time_changes")) {
-        const until = endOfDay(addDays(Date.now(), this._settings.get("app.parking.available_period") || 90));
-        const ref = this._dialog.open(SetDatetimeModalComponent, {
-          data: { date, duration, until, host, resource }
-        });
-        const details = yield ref.afterClosed().toPromise();
-        if (!details)
-          throw "User cancelled";
-        date = details.date;
-        duration = details.duration;
-        user = details.user;
-      }
-      return { date, duration, user };
-    });
+  async _setBookingTime(date, duration, host = false, resource = null) {
+    let user = null;
+    if (!!this._settings.get("app.parking.allow_time_changes")) {
+      const until = endOfDay(addDays(Date.now(), this._settings.get("app.parking.available_period") || 90));
+      const ref = this._dialog.open(SetDatetimeModalComponent, {
+        data: { date, duration, until, host, resource }
+      });
+      const details = await ref.afterClosed().toPromise();
+      if (!details)
+        throw "User cancelled";
+      date = details.date;
+      duration = details.duration;
+      user = details.user;
+    }
+    return { date, duration, user };
   }
 };
 _ExploreParkingService.\u0275fac = function ExploreParkingService_Factory(__ngFactoryType__) {
@@ -8173,22 +8105,20 @@ var _MapCanvasComponent = class _MapCanvasComponent extends AsyncHandler {
     ]).subscribe(([ratio, zoom, sr]) => this._handleMapChange(ratio, zoom, sr)));
     this.subscription("polygons", this._data.polygons$.subscribe((list) => this._handleStateChange(list)));
   }
-  _handleMapChange(ratio, zoom, svg_ratio) {
-    return __async(this, null, function* () {
-      const old_ratio = this.ratio;
-      this.zoom = zoom;
-      this.ratio = ratio;
-      this.svg_ratio = svg_ratio;
-      const width = this.width / 10;
-      const height = this.width * this.ratio / 10;
-      if (old_ratio === ratio)
-        return;
-      const canvas = this.canvas_element().nativeElement;
-      canvas.width = width;
-      canvas.height = height;
-      const polygons = yield nextValueFrom(this._data.polygons$);
-      this._handleStateChange(polygons);
-    });
+  async _handleMapChange(ratio, zoom, svg_ratio) {
+    const old_ratio = this.ratio;
+    this.zoom = zoom;
+    this.ratio = ratio;
+    this.svg_ratio = svg_ratio;
+    const width = this.width / 10;
+    const height = this.width * this.ratio / 10;
+    if (old_ratio === ratio)
+      return;
+    const canvas = this.canvas_element().nativeElement;
+    canvas.width = width;
+    canvas.height = height;
+    const polygons = await nextValueFrom(this._data.polygons$);
+    this._handleStateChange(polygons);
   }
   _handleStateChange(polygon_list) {
     const canvas = this.canvas_element().nativeElement;
@@ -8459,42 +8389,40 @@ var _ExploreZonesService = class _ExploreZonesService extends AsyncHandler {
     }));
     this.init();
   }
-  init() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      const zone_metadata = yield Promise.all(this._org.levels.map((bld) => hu(bld.id, "map_regions").toPromise()));
-      this._area_list = [];
-      for (const zone of zone_metadata) {
-        const areas = zone?.details?.areas;
-        if (!areas)
-          continue;
-        for (const area of areas) {
-          const { capacity, hide_label, label_location, draw_polygon, area_count_key } = area.properties || {};
-          const { coordinates } = area.geometry || {};
-          this._capacity[area.id] = capacity || 100;
-          this._count_key[area.id] = area_count_key || "";
-          this._location[area.id] = coordinates?.length ? getCenterPoint(coordinates) : null;
-          this._label_location[area.id] = hide_label === false ? label_location || this._location[area.id] : null;
-          this._draw[area.id] = !!draw_polygon || this._settings.get("app.explore.use_zone_polygons");
-          this._points[area.id] = coordinates || [];
-          this._area_list.push(area.map_id || area.id);
+  async init() {
+    await this._org.initialised.pipe(first((_) => _)).toPromise();
+    const zone_metadata = await Promise.all(this._org.levels.map((bld) => hu(bld.id, "map_regions").toPromise()));
+    this._area_list = [];
+    for (const zone of zone_metadata) {
+      const areas = zone?.details?.areas;
+      if (!areas)
+        continue;
+      for (const area of areas) {
+        const { capacity, hide_label, label_location, draw_polygon, area_count_key } = area.properties || {};
+        const { coordinates } = area.geometry || {};
+        this._capacity[area.id] = capacity || 100;
+        this._count_key[area.id] = area_count_key || "";
+        this._location[area.id] = coordinates?.length ? getCenterPoint(coordinates) : null;
+        this._label_location[area.id] = hide_label === false ? label_location || this._location[area.id] : null;
+        this._draw[area.id] = !!draw_polygon || this._settings.get("app.explore.use_zone_polygons");
+        this._points[area.id] = coordinates || [];
+        this._area_list.push(area.map_id || area.id);
+      }
+    }
+    this._state.setFeatures("zones-canvas", [
+      {
+        track_id: "zones-canvas",
+        location: { x: 0.5, y: 0.5 },
+        content: MapCanvasComponent,
+        data: {
+          polygons$: this._polygons$,
+          draw_points: false,
+          draw_labels: false
         }
       }
-      this._state.setFeatures("zones-canvas", [
-        {
-          track_id: "zones-canvas",
-          location: { x: 0.5, y: 0.5 },
-          content: MapCanvasComponent,
-          data: {
-            polygons$: this._polygons$,
-            draw_points: false,
-            draw_labels: false
-          }
-        }
-      ]);
-      this.updateStatus();
-      this.subscription("bind", this._bind.subscribe());
-    });
+    ]);
+    this.updateStatus();
+    this.subscription("bind", this._bind.subscribe());
   }
   parseData(value = []) {
     const labels = [];
@@ -8716,12 +8644,10 @@ function ExploreMapViewComponent_Conditional_9_Template(rf, ctx) {
 }
 var EMPTY2 = [];
 var _ExploreMapViewComponent = class _ExploreMapViewComponent extends AsyncHandler {
-  toggleZones(enabled) {
-    return __async(this, null, function* () {
-      const options = yield nextValueFrom(this.options);
-      const disable = !enabled ? unique([...options?.disable || [], "zones", "devices"]) : options?.disable?.filter((_) => _ !== "zones" && _ !== "devices") || [];
-      this.setOptions({ disable });
-    });
+  async toggleZones(enabled) {
+    const options = await nextValueFrom(this.options);
+    const disable = !enabled ? unique([...options?.disable || [], "zones", "devices"]) : options?.disable?.filter((_) => _ !== "zones" && _ !== "devices") || [];
+    this.setOptions({ disable });
   }
   get show_legend() {
     return !!this._settings.get("app.explore.show_legend");
@@ -8760,46 +8686,44 @@ var _ExploreMapViewComponent = class _ExploreMapViewComponent extends AsyncHandl
     this.map_info = {};
     this.use_mapsindoors$ = this._maps.available$;
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      this._state.reset();
-      yield this._spaces.initialised.pipe(first((_) => _)).toPromise();
-      this.toggleZones(false);
-      this.subscription("parking_poll", this._parking.startPolling());
-      this.subscription("route.query", this._route.queryParamMap.subscribe((params) => __async(this, null, function* () {
-        if (params.has("level") || params.has("zone")) {
-          this._state.setLevel(params.get("level") || params.get("zone"));
+  async ngOnInit() {
+    this._state.reset();
+    await this._spaces.initialised.pipe(first((_) => _)).toPromise();
+    this.toggleZones(false);
+    this.subscription("parking_poll", this._parking.startPolling());
+    this.subscription("route.query", this._route.queryParamMap.subscribe(async (params) => {
+      if (params.has("level") || params.has("zone")) {
+        this._state.setLevel(params.get("level") || params.get("zone"));
+      }
+      this._state.setFeatures("_located", []);
+      if (params.has("space")) {
+        this.locateSpace(params.get("space"));
+      } else if (params.has("user")) {
+        let user = this._settings.value("last_search");
+        if (!user || params.get("user") !== user.email) {
+          user = null;
+          user = await showStaff(params.get("user")).toPromise();
         }
-        this._state.setFeatures("_located", []);
-        if (params.has("space")) {
-          this.locateSpace(params.get("space"));
-        } else if (params.has("user")) {
-          let user = this._settings.value("last_search");
-          if (!user || params.get("user") !== user.email) {
-            user = null;
-            user = yield showStaff(params.get("user")).toPromise();
-          }
-          if (!user)
-            return notifyError(i18n("EXPLORE.LOCATE_USER_FAILED", {
-              name: params.get("user")
-            }));
-          this.locateUser(user instanceof Array ? user[0] : user).catch((e) => {
-            notifyError(e);
-            this._router.navigate([], {
-              relativeTo: this._route,
-              queryParams: { user: "" },
-              queryParamsHandling: "preserve"
-            });
+        if (!user)
+          return notifyError(i18n("EXPLORE.LOCATE_USER_FAILED", {
+            name: params.get("user")
+          }));
+        this.locateUser(user instanceof Array ? user[0] : user).catch((e) => {
+          notifyError(e);
+          this._router.navigate([], {
+            relativeTo: this._route,
+            queryParams: { user: "" },
+            queryParamsHandling: "preserve"
           });
-        } else if (params.has("locate")) {
-          this._locateFeature(params.get("locate"), params.get("name"));
-        } else {
-          this.timeout("update_location", () => {
-            this._state.setFeatures("_located", []);
-          });
-        }
-      })));
-    });
+        });
+      } else if (params.has("locate")) {
+        this._locateFeature(params.get("locate"), params.get("name"));
+      } else {
+        this.timeout("update_location", () => {
+          this._state.setFeatures("_located", []);
+        });
+      }
+    }));
   }
   updateZoom(zoom) {
     this._state.setPositions(zoom, this._state.positions.center);
@@ -8836,67 +8760,63 @@ var _ExploreMapViewComponent = class _ExploreMapViewComponent extends AsyncHandl
       this._state.setFeatures("_located", [feature]);
     });
   }
-  locateSpace(id) {
-    return __async(this, null, function* () {
-      const space = yield this._space_pipe.transform(id);
-      if (!space)
-        return notifyError(i18n("EXPLORE.LOCATE_SPACE_DETAILS_FAILED"));
-      this._state.setLevel(this._org.levelWithID(space.zones)?.id);
-      const feature = {
-        track_id: `locate-${space.id}`,
-        location: space.map_id,
-        content: MapPinComponent,
-        z_index: 99,
-        data: {
-          message: `${space.display_name || space.name} is here`
-        }
-      };
-      this.timeout("update_location", () => {
-        this.locate = id;
-        this._state.setFeatures("_located", [feature]);
-      });
+  async locateSpace(id) {
+    const space = await this._space_pipe.transform(id);
+    if (!space)
+      return notifyError(i18n("EXPLORE.LOCATE_SPACE_DETAILS_FAILED"));
+    this._state.setLevel(this._org.levelWithID(space.zones)?.id);
+    const feature = {
+      track_id: `locate-${space.id}`,
+      location: space.map_id,
+      content: MapPinComponent,
+      z_index: 99,
+      data: {
+        message: `${space.display_name || space.name} is here`
+      }
+    };
+    this.timeout("update_location", () => {
+      this.locate = id;
+      this._state.setFeatures("_located", [feature]);
     });
   }
-  locateUser(user) {
-    return __async(this, null, function* () {
-      const binding = this._org.binding("location_services");
-      const mod = this._org.module("location_services", "LocationServices");
-      if (!mod)
-        throw i18n("EXPLORE.LOCATE_SERVICE_UNAVAILABLE");
-      const priority = binding?.priority || [];
-      const locations = (yield mod.execute("locate_user", [
-        user.email,
-        user.username || user.id
-      ])).map((i) => new MapLocation(i));
-      locations.sort((a, b) => (priority.includes(a.type) ? priority.indexOf(a.type) : 999) - (priority.includes(b.type) ? priority.indexOf(b.type) : 999));
-      if (!locations?.length)
-        throw i18n("EXPLORE.LOCATE_USER_NOT_FOUND");
-      let loc = locations.find(({ position }) => typeof position !== "string" || position in this.map_info);
-      if (!loc) {
-        loc = locations[0];
-        notifyWarn(i18n(`EXPLORE.LOCATE_USER_FOUND_NO_PIN`));
+  async locateUser(user) {
+    const binding = this._org.binding("location_services");
+    const mod = this._org.module("location_services", "LocationServices");
+    if (!mod)
+      throw i18n("EXPLORE.LOCATE_SERVICE_UNAVAILABLE");
+    const priority = binding?.priority || [];
+    const locations = (await mod.execute("locate_user", [
+      user.email,
+      user.username || user.id
+    ])).map((i) => new MapLocation(i));
+    locations.sort((a, b) => (priority.includes(a.type) ? priority.indexOf(a.type) : 999) - (priority.includes(b.type) ? priority.indexOf(b.type) : 999));
+    if (!locations?.length)
+      throw i18n("EXPLORE.LOCATE_USER_NOT_FOUND");
+    let loc = locations.find(({ position }) => typeof position !== "string" || position in this.map_info);
+    if (!loc) {
+      loc = locations[0];
+      notifyWarn(i18n(`EXPLORE.LOCATE_USER_FOUND_NO_PIN`));
+    }
+    this._state.setLevel(this._org.levelWithID([locations[0]?.level])?.id);
+    const pos = loc.position;
+    const { coordinates_from } = loc;
+    const feature = {
+      track_id: `locate-${user.id}`,
+      location: locations[0].type === "wireless" ? {
+        x: coordinates_from?.includes("right") ? 1 - pos.x : pos.x,
+        y: coordinates_from?.includes("bottom") ? 1 - pos.y : pos.y
+      } : pos,
+      content: loc.type === "wireless" ? MapRadiusComponent : MapPinComponent,
+      z_index: 99,
+      data: {
+        message: i18n("EXPLORE.LOCATE_USER", { name: user.name }),
+        radius: loc.variance,
+        last_seen: loc.last_seen
       }
-      this._state.setLevel(this._org.levelWithID([locations[0]?.level])?.id);
-      const pos = loc.position;
-      const { coordinates_from } = loc;
-      const feature = {
-        track_id: `locate-${user.id}`,
-        location: locations[0].type === "wireless" ? {
-          x: coordinates_from?.includes("right") ? 1 - pos.x : pos.x,
-          y: coordinates_from?.includes("bottom") ? 1 - pos.y : pos.y
-        } : pos,
-        content: loc.type === "wireless" ? MapRadiusComponent : MapPinComponent,
-        z_index: 99,
-        data: {
-          message: i18n("EXPLORE.LOCATE_USER", { name: user.name }),
-          radius: loc.variance,
-          last_seen: loc.last_seen
-        }
-      };
-      this.timeout("update_location", () => {
-        this.locate = user.id || user.email;
-        this._state.setFeatures("_located", [feature]);
-      });
+    };
+    this.timeout("update_location", () => {
+      this.locate = user.id || user.email;
+      this._state.setFeatures("_located", [feature]);
     });
   }
 };
@@ -8951,7 +8871,8 @@ var ExploreMapViewComponent = _ExploreMapViewComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ExploreMapViewComponent, [{
     type: Component,
     args: [{ selector: "explore-map-view", template: `
-        <interactive-map [src]="url | async"
+        <interactive-map
+            [src]="url | async"
             [styles]="styles | async"
             [features]="features | async"
             [actions]="actions | async"
@@ -8959,7 +8880,7 @@ var ExploreMapViewComponent = _ExploreMapViewComponent;
             [focus]="locate"
             [options]="{ controls: true }"
             (mapInfo)="map_info = $event || {}"
-         />
+        />
         @if (!(use_mapsindoors$ | async)) {
             <div
                 controls
@@ -9029,7 +8950,7 @@ var ExploreMapViewComponent = _ExploreMapViewComponent;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreMapViewComponent, { className: "ExploreMapViewComponent", filePath: "libs/explore/src/lib/explore-map-view.component.ts", lineNumber: 137 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreMapViewComponent, { className: "ExploreMapViewComponent", filePath: "libs/explore/src/lib/explore-map-view.component.ts", lineNumber: 138 });
 })();
 
 // libs/explore/src/lib/explore-search.service.ts
@@ -9195,28 +9116,26 @@ var _ExploreSearchService = class _ExploreSearchService {
     this.search_results.subscribe();
     this.init();
   }
-  init() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      yield timer(500).toPromise();
-      const { is_public } = yield nextValueFrom(this._state.options);
-      if (is_public)
-        return;
-      const mod = this._org.module("location_services", "LocationServices");
-      if (mod) {
-        const binding = mod.binding("emergency_contacts");
-        binding.listen().subscribe((contacts_map) => {
-          const list = [];
-          for (const type in contacts_map) {
-            for (const user of contacts_map[type]) {
-              list.push(__spreadProps(__spreadValues({}, user), { type }));
-            }
+  async init() {
+    await this._org.initialised.pipe(first((_) => _)).toPromise();
+    await timer(500).toPromise();
+    const { is_public } = await nextValueFrom(this._state.options);
+    if (is_public)
+      return;
+    const mod = this._org.module("location_services", "LocationServices");
+    if (mod) {
+      const binding = mod.binding("emergency_contacts");
+      binding.listen().subscribe((contacts_map) => {
+        const list = [];
+        for (const type in contacts_map) {
+          for (const user of contacts_map[type]) {
+            list.push(__spreadProps(__spreadValues({}, user), { type }));
           }
-          this._emergency_contacts.next(list);
-        });
-        binding.bind();
-      }
-    });
+        }
+        this._emergency_contacts.next(list);
+      });
+      binding.bind();
+    }
   }
   setFilter(str) {
     this._filter.next(str);
@@ -10804,11 +10723,9 @@ var _ExploreLevelSelectComponent = class _ExploreLevelSelectComponent {
     this.level = this._state.level;
     this.setLevel = (lvl) => this._state.setLevel(lvl.id);
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      const levels = yield nextValueFrom(this._org.active_levels);
-    });
+  async ngOnInit() {
+    await this._org.initialised.pipe(first((_) => _)).toPromise();
+    const levels = await nextValueFrom(this._org.active_levels);
   }
 };
 _ExploreLevelSelectComponent.\u0275fac = function ExploreLevelSelectComponent_Factory(__ngFactoryType__) {
@@ -11135,147 +11052,139 @@ var _ExploreComponent = class _ExploreComponent extends AsyncHandler {
   updateCenter(center) {
     this._state.setPositions(this._state.positions.zoom, center);
   }
-  toggleZones(enabled) {
-    return __async(this, null, function* () {
-      const options = yield nextValueFrom(this.options);
-      const disable = !enabled ? unique([...options.disable || [], "zones", "devices"]) : options.disable.filter((_) => _ !== "zones" && _ !== "devices") || [];
-      this.setOptions({ disable });
-    });
+  async toggleZones(enabled) {
+    const options = await nextValueFrom(this.options);
+    const disable = !enabled ? unique([...options.disable || [], "zones", "devices"]) : options.disable.filter((_) => _ !== "zones" && _ !== "devices") || [];
+    this.setOptions({ disable });
   }
   get can_search() {
     return !!this._settings.get("app.explore.search_enabled");
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      if (location.hash.includes("public=true") || location.search.includes("public=true")) {
-        this._state.setOptions({ is_public: true });
+  async ngOnInit() {
+    if (location.hash.includes("public=true") || location.search.includes("public=true")) {
+      this._state.setOptions({ is_public: true });
+    }
+    await this._spaces.initialised.pipe(first((_) => _)).toPromise();
+    this._desks.setOptions({ custom: true });
+    this.reset_delay = this._settings.get("app.inactivity_timeout_secs") || 180;
+    this.resetKiosk(false);
+    VirtualKeyboardComponent.enabled = localStorage.getItem("OSK.enabled") === "true";
+    this.subscription("level", this._state.level.subscribe(() => this.timeout("update_location", () => {
+      this._state.setFeatures("_located", []);
+    })));
+    this.subscription("route.query", this._route.queryParamMap.subscribe(async (params) => {
+      if (params.has("level")) {
+        log("Explore", "Level changed to:", params.get("level"));
+        this._state.setLevel(params.get("level"));
+        const level = this._org.levelWithID([params.get("level")]);
+        if (!level)
+          return;
+        const bld = this._org.buildings.find((_) => level.parent_id === _.id);
+        if (!bld)
+          return;
+        this._org.building = bld;
       }
-      yield this._spaces.initialised.pipe(first((_) => _)).toPromise();
-      this._desks.setOptions({ custom: true });
-      this.reset_delay = this._settings.get("app.inactivity_timeout_secs") || 180;
-      this.resetKiosk(false);
-      VirtualKeyboardComponent.enabled = localStorage.getItem("OSK.enabled") === "true";
-      this.subscription("level", this._state.level.subscribe(() => this.timeout("update_location", () => {
-        this._state.setFeatures("_located", []);
-      })));
-      this.subscription("route.query", this._route.queryParamMap.subscribe((params) => __async(this, null, function* () {
-        if (params.has("level")) {
-          log("Explore", "Level changed to:", params.get("level"));
-          this._state.setLevel(params.get("level"));
-          const level = this._org.levelWithID([params.get("level")]);
-          if (!level)
-            return;
-          const bld = this._org.buildings.find((_) => level.parent_id === _.id);
-          if (!bld)
-            return;
-          this._org.building = bld;
+      this._state.setFeatures("_located", []);
+      if (params.has("space")) {
+        log("Explore", "Focusing on space:", params.get("space"));
+        this.locateSpace(params.get("space"));
+      } else if (params.has("user")) {
+        log("Explore", "Focusing on user:", params.get("user"));
+        let user = this._settings.value("last_search");
+        if (!user || params.get("user") !== user.email) {
+          user = null;
+          user = await showStaff(params.get("user")).toPromise();
         }
-        this._state.setFeatures("_located", []);
-        if (params.has("space")) {
-          log("Explore", "Focusing on space:", params.get("space"));
-          this.locateSpace(params.get("space"));
-        } else if (params.has("user")) {
-          log("Explore", "Focusing on user:", params.get("user"));
-          let user = this._settings.value("last_search");
-          if (!user || params.get("user") !== user.email) {
-            user = null;
-            user = yield showStaff(params.get("user")).toPromise();
-          }
-          if (!user)
-            return notifyError(`Unable to user details for ${params.get("user")}`);
-          this.locateUser(user instanceof Array ? user[0] : user).catch((_) => {
-            notifyError(`Unable to locate ${params.get("user")}`);
-            this._router.navigate([], {
-              relativeTo: this._route,
-              queryParams: {}
-            });
+        if (!user)
+          return notifyError(`Unable to user details for ${params.get("user")}`);
+        this.locateUser(user instanceof Array ? user[0] : user).catch((_) => {
+          notifyError(`Unable to locate ${params.get("user")}`);
+          this._router.navigate([], {
+            relativeTo: this._route,
+            queryParams: {}
           });
-        } else if (params.has("feature")) {
-          log("Explore", "Focusing on feature:", params.get("feature"));
-          this.timeout("update_location", () => {
-            this._state.setFeatures("_located", [
-              {
-                location: params.get("feature"),
-                content: MapPinComponent,
-                data: {}
-              }
-            ]);
-          });
-        } else if (params.has("locate")) {
-          log("Explore", "Focusing on location:", params.get("locate"));
-          this.locate = params.get("locate");
-          this.timeout("update_location", () => {
-            this._state.setFeatures("_located", [
-              {
-                location: params.get("locate"),
-                content: MapPinComponent,
-                data: {}
-              }
-            ]);
-          });
-        } else {
-          this.timeout("update_location", () => {
-            this._state.setFeatures("_located", []);
-          });
-        }
-      })));
-    });
+        });
+      } else if (params.has("feature")) {
+        log("Explore", "Focusing on feature:", params.get("feature"));
+        this.timeout("update_location", () => {
+          this._state.setFeatures("_located", [
+            {
+              location: params.get("feature"),
+              content: MapPinComponent,
+              data: {}
+            }
+          ]);
+        });
+      } else if (params.has("locate")) {
+        log("Explore", "Focusing on location:", params.get("locate"));
+        this.locate = params.get("locate");
+        this.timeout("update_location", () => {
+          this._state.setFeatures("_located", [
+            {
+              location: params.get("locate"),
+              content: MapPinComponent,
+              data: {}
+            }
+          ]);
+        });
+      } else {
+        this.timeout("update_location", () => {
+          this._state.setFeatures("_located", []);
+        });
+      }
+    }));
   }
-  locateSpace(id) {
-    return __async(this, null, function* () {
-      const space = yield this._space_pipe.transform(id);
-      if (!space)
-        return;
-      this._state.setLevel(this._org.levelWithID(space.zones)?.id);
-      const feature = {
-        location: space.map_id,
-        content: MapPinComponent,
-        data: {
-          message: `${space.display_name || space.name} is here`
-        }
-      };
-      this.timeout("update_location", () => this._state.setFeatures("_located", [feature]));
-    });
+  async locateSpace(id) {
+    const space = await this._space_pipe.transform(id);
+    if (!space)
+      return;
+    this._state.setLevel(this._org.levelWithID(space.zones)?.id);
+    const feature = {
+      location: space.map_id,
+      content: MapPinComponent,
+      data: {
+        message: `${space.display_name || space.name} is here`
+      }
+    };
+    this.timeout("update_location", () => this._state.setFeatures("_located", [feature]));
   }
-  locateUser(user) {
-    return __async(this, null, function* () {
-      let locate_details = this._org.binding("location_services");
-      if (!locate_details)
-        return;
-      if (typeof locate_details === "string") {
-        locate_details = {
-          system_id: locate_details,
-          module: "LocationServices"
-        };
-      }
-      const mod = Ea(locate_details.system_id, locate_details.module);
-      const locations = (yield mod.execute("locate_user", [
-        user.email,
-        user.username || user.id
-      ])).map((i) => new MapLocation(i));
-      locations.sort((a, b) => locate_details.priority.indexOf(a.type) - locate_details.priority.indexOf(b.type));
-      if (!locations?.length) {
-        throw "No locations for the given user";
-      }
-      this._state.setLevel(this._org.levelWithID([locations[0]?.level])?.id);
-      const pos = locations[0].position;
-      const { coordinates_from } = locations[0];
-      const feature = {
-        location: locations[0].type === "wireless" ? {
-          x: coordinates_from?.includes("right") ? 1 - pos.x : pos.x,
-          y: coordinates_from?.includes("bottom") ? 1 - pos.y : pos.y
-        } : pos,
-        content: locations[0].type === "wireless" ? MapRadiusComponent : MapPinComponent,
-        z_index: 99,
-        data: {
-          message: `${user.name} is here`,
-          radius: locations[0].variance,
-          last_seen: locations[0].last_seen
-        }
+  async locateUser(user) {
+    let locate_details = this._org.binding("location_services");
+    if (!locate_details)
+      return;
+    if (typeof locate_details === "string") {
+      locate_details = {
+        system_id: locate_details,
+        module: "LocationServices"
       };
-      this.timeout("update_location", () => {
-        this._state.setFeatures("_located", [feature]);
-      });
+    }
+    const mod = Ea(locate_details.system_id, locate_details.module);
+    const locations = (await mod.execute("locate_user", [
+      user.email,
+      user.username || user.id
+    ])).map((i) => new MapLocation(i));
+    locations.sort((a, b) => locate_details.priority.indexOf(a.type) - locate_details.priority.indexOf(b.type));
+    if (!locations?.length) {
+      throw "No locations for the given user";
+    }
+    this._state.setLevel(this._org.levelWithID([locations[0]?.level])?.id);
+    const pos = locations[0].position;
+    const { coordinates_from } = locations[0];
+    const feature = {
+      location: locations[0].type === "wireless" ? {
+        x: coordinates_from?.includes("right") ? 1 - pos.x : pos.x,
+        y: coordinates_from?.includes("bottom") ? 1 - pos.y : pos.y
+      } : pos,
+      content: locations[0].type === "wireless" ? MapRadiusComponent : MapPinComponent,
+      z_index: 99,
+      data: {
+        message: `${user.name} is here`,
+        radius: locations[0].variance,
+        last_seen: locations[0].last_seen
+      }
+    };
+    this.timeout("update_location", () => {
+      this._state.setFeatures("_located", [feature]);
     });
   }
   resetKiosk(navigate = true) {
@@ -11310,7 +11219,7 @@ _ExploreComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type
   ExploreZonesService,
   ExploreParkingService,
   SpacePipe
-]), \u0275\u0275InheritDefinitionFeature], attrs: _c021, decls: 37, vars: 36, consts: [["accessibility_controls", ""], ["levelMenu", "matMenu"], ["legendMenu", "matMenu"], ["topbar", "", 1, "relative", "flex", "items-center", "justify-between", "border-b", "border-base-300", "bg-base-100", "px-4", "py-2", "text-base-content"], ["matRipple", "", "routerLink", "/", 1, "rounded", "p-2", "text-2xl"], ["auth", "", "alt", "Logo", 1, "h-12", 3, "source"], [1, "absolute", "right-2", "top-1/2", "flex", "-translate-y-1/2", "items-center"], ["icon", "", "matRipple", "", "customTooltip", "", 1, "flex", "bg-base-200", "sm:hidden", 3, "content"], ["options", "", 1, "flex", "items-center", "space-x-2", "bg-base-content", "p-2", "text-base-100", "sm:hidden"], [1, "flex", "h-1/2", "flex-1"], ["sidebar", "", 1, "hidden", "w-[20rem]", "border-r", "border-base-300", "bg-base-100", "px-2", "py-4", "text-base-content", "sm:block"], ["btn", "", "matRipple", "", 1, "items", "clear", "flex", "w-full", "space-x-4", "hover:bg-base-200", 3, "click"], [1, "text-2xl"], [1, "flex-1", "text-left", "font-medium"], [1, "px-8"], [1, "space-y-2", "py-4"], [1, "mx-auto", "w-[calc(100%-4rem)]"], [1, "relative", "h-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "labels", "options", "focus"], [1, "w-[18rem]", "rounded", "bg-base-100", "p-2"], ["btn", "", "matRipple", "", 1, "clear", "text-base-100", 3, "matMenuTriggerFor"], ["mat-menu-item", ""], ["mat-menu-item", "", 3, "click"], [1, "flex", "w-full", "items-center", "space-x-4", "rounded", "px-4", "py-2", "hover:bg-base-200"], [1, "h-3", "w-3", "rounded-full"], [1, "text-left", "opacity-60"], ["btn", "", "matRipple", "", 1, "clear", "w-full", "hover:bg-base-200", "hover:opacity-100", 3, "opacity-30"], ["btn", "", "matRipple", "", 1, "clear", "w-full", "hover:bg-base-200", "hover:opacity-100", 3, "click"], [1, "w-full", "text-left"]], template: function ExploreComponent_Template(rf, ctx) {
+]), \u0275\u0275InheritDefinitionFeature], attrs: _c021, decls: 37, vars: 36, consts: [["accessibility_controls", ""], ["levelMenu", "matMenu"], ["legendMenu", "matMenu"], ["topbar", "", 1, "relative", "flex", "items-center", "justify-between", "border-b", "border-base-300", "bg-base-100", "px-4", "py-2", "text-base-content"], ["matRipple", "", "routerLink", "/", 1, "rounded", "p-2", "text-2xl"], ["auth", "", "alt", "Logo", 1, "h-12", 3, "source"], [1, "absolute", "right-2", "top-1/2", "flex", "-translate-y-1/2", "items-center"], ["icon", "", "matRipple", "", "customTooltip", "", 1, "flex", "bg-base-200", "sm:hidden", 3, "content"], ["options", "", 1, "flex", "items-center", "space-x-2", "bg-base-content", "p-2", "text-base-100", "sm:hidden"], [1, "flex", "h-1/2", "flex-1"], ["sidebar", "", 1, "hidden", "w-[20rem]", "overflow-auto", "border-r", "border-base-300", "bg-base-100", "px-2", "py-4", "text-base-content", "sm:block"], ["btn", "", "matRipple", "", 1, "items", "clear", "flex", "w-full", "space-x-4", "hover:bg-base-200", 3, "click"], [1, "text-2xl"], [1, "flex-1", "text-left", "font-medium"], [1, "px-8"], [1, "space-y-2", "py-4"], [1, "mx-auto", "w-[calc(100%-4rem)]"], [1, "relative", "h-full", "flex-1"], [3, "zoomChange", "centerChange", "src", "zoom", "center", "styles", "features", "actions", "labels", "options", "focus"], [1, "w-[18rem]", "rounded", "bg-base-100", "p-2"], ["btn", "", "matRipple", "", 1, "clear", "text-base-100", 3, "matMenuTriggerFor"], ["mat-menu-item", ""], ["mat-menu-item", "", 3, "click"], [1, "flex", "w-full", "items-center", "space-x-4", "rounded", "px-4", "py-2", "hover:bg-base-200"], [1, "h-3", "w-3", "rounded-full"], [1, "text-left", "opacity-60"], ["btn", "", "matRipple", "", 1, "clear", "w-full", "hover:bg-base-200", "hover:opacity-100", 3, "opacity-30"], ["btn", "", "matRipple", "", 1, "clear", "w-full", "hover:bg-base-200", "hover:opacity-100", 3, "click"], [1, "w-full", "text-left"]], template: function ExploreComponent_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 3)(1, "a", 4);
@@ -11390,7 +11299,7 @@ _ExploreComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type
     \u0275\u0275advance(5);
     \u0275\u0275property("src", \u0275\u0275pipeBind1(30, 21, ctx.url))("zoom", (tmp_10_0 = \u0275\u0275pipeBind1(31, 23, ctx.positions)) == null ? null : tmp_10_0.zoom)("center", (tmp_11_0 = \u0275\u0275pipeBind1(32, 25, ctx.positions)) == null ? null : tmp_11_0.center)("styles", \u0275\u0275pipeBind1(33, 27, ctx.styles))("features", \u0275\u0275pipeBind1(34, 29, ctx.features))("actions", \u0275\u0275pipeBind1(35, 31, ctx.actions))("labels", \u0275\u0275pipeBind1(36, 33, ctx.labels))("options", \u0275\u0275pureFunction0(35, _c17))("focus", ctx.locate);
   }
-}, dependencies: [RouterLink, ExploreSearchComponent, InteractiveMapComponent, IconComponent, CustomTooltipComponent, AuthenticatedImageDirective, AccessibilityControlsComponent, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: absolute;\n  display: flex;\n  flex-direction: column;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: var(--b2);\n}\nhr[_ngcontent-%COMP%] {\n  margin-top: 0.5rem !important;\n  margin-bottom: 0.5rem !important;\n}\n/*# sourceMappingURL=explore.component.css.map */"], data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
+}, dependencies: [RouterLink, ExploreSearchComponent, MatMenu, MatMenuItem, MatMenuTrigger, InteractiveMapComponent, IconComponent, CustomTooltipComponent, AuthenticatedImageDirective, AccessibilityControlsComponent, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  position: absolute;\n  display: flex;\n  flex-direction: column;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: var(--b2);\n}\nhr[_ngcontent-%COMP%] {\n  margin-top: 0.5rem !important;\n  margin-bottom: 0.5rem !important;\n}\n/*# sourceMappingURL=explore.component.css.map */"], data: { animation: [ANIMATION_SHOW_CONTRACT_EXPAND] } });
 var ExploreComponent = _ExploreComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ExploreComponent, [{
@@ -11484,7 +11393,7 @@ var ExploreComponent = _ExploreComponent;
         <div class="flex h-1/2 flex-1">
             <div
                 sidebar
-                class="hidden w-[20rem] border-r border-base-300 bg-base-100 px-2 py-4 text-base-content sm:block"
+                class="hidden w-[20rem] overflow-auto border-r border-base-300 bg-base-100 px-2 py-4 text-base-content sm:block"
             >
                 @if ((levels | async)?.length) {
                     <button
@@ -11639,6 +11548,7 @@ _AppExploreModule.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ impor
   RouterModule.forChild(ROUTES),
   SharedExploreModule,
   FormsModule,
+  MatMenuModule,
   MatSlideToggleModule,
   InteractiveMapComponent,
   CustomTooltipComponent
@@ -11658,6 +11568,7 @@ var AppExploreModule = _AppExploreModule;
         RouterModule.forChild(ROUTES),
         SharedExploreModule,
         FormsModule,
+        MatMenuModule,
         MatSlideToggleModule,
         ...STANDALONE_COMPONENTS2
       ]
@@ -11667,4 +11578,4 @@ var AppExploreModule = _AppExploreModule;
 export {
   AppExploreModule
 };
-//# sourceMappingURL=explore.module-VIREFR44.js.map
+//# sourceMappingURL=explore.module-L5GDJSP4.js.map

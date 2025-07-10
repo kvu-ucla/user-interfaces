@@ -249,12 +249,11 @@ import {
   ɵɵtwoWayProperty,
   ɵɵviewQuery,
   ɵɵviewQuerySignal
-} from "./chunk-IPNUB35F.js";
+} from "./chunk-3RERMB4V.js";
 import {
-  __async,
   __spreadProps,
   __spreadValues
-} from "./chunk-XWLXMCJQ.js";
+} from "./chunk-653SOEEV.js";
 
 // node_modules/date-fns/endOfMinute.js
 function endOfMinute(date, options) {
@@ -2264,7 +2263,7 @@ function Ve(e, n) {
     return { value: l[0] ? l[1] : void 0, done: true };
   }
 }
-function q(e) {
+function I(e) {
   var n = typeof Symbol == "function" && Symbol.iterator, t = n && e[n], r = 0;
   if (t) return t.call(e);
   if (e && typeof e.length == "number") return {
@@ -2340,7 +2339,7 @@ function mt(e, n, t) {
 function gt(e) {
   if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
   var n = e[Symbol.asyncIterator], t;
-  return n ? n.call(e) : (e = typeof q == "function" ? q(e) : e[Symbol.iterator](), t = {}, r("next"), r("throw"), r("return"), t[Symbol.asyncIterator] = function() {
+  return n ? n.call(e) : (e = typeof I == "function" ? I(e) : e[Symbol.iterator](), t = {}, r("next"), r("throw"), r("return"), t[Symbol.asyncIterator] = function() {
     return this;
   }, t);
   function r(i) {
@@ -2392,7 +2391,7 @@ var G = function() {
       if (s)
         if (this._parentage = null, Array.isArray(s))
           try {
-            for (var c = q(s), a = c.next(); !a.done; a = c.next()) {
+            for (var c = I(s), a = c.next(); !a.done; a = c.next()) {
               var l = a.value;
               l.remove(this);
             }
@@ -2418,7 +2417,7 @@ var G = function() {
       if (v) {
         this._finalizers = null;
         try {
-          for (var d = q(v), f = d.next(); !f.done; f = d.next()) {
+          for (var d = I(v), f = d.next(); !f.done; f = d.next()) {
             var p = f.value;
             try {
               Ce(p);
@@ -2750,7 +2749,7 @@ var xe = function(e) {
       if (r._throwIfClosed(), !r.isStopped) {
         r.currentObservers || (r.currentObservers = Array.from(r.observers));
         try {
-          for (var s = q(r.currentObservers), c = s.next(); !c.done; c = s.next()) {
+          for (var s = I(r.currentObservers), c = s.next(); !c.done; c = s.next()) {
             var a = c.value;
             a.next(t);
           }
@@ -2931,9 +2930,9 @@ function L(e) {
     return e;
   if (e != null) {
     if (Ge(e))
-      return It(e);
-    if (Se(e))
       return qt(e);
+    if (Se(e))
+      return It(e);
     if (De(e))
       return Rt(e);
     if (Je(e))
@@ -2945,7 +2944,7 @@ function L(e) {
   }
   throw We(e);
 }
-function It(e) {
+function qt(e) {
   return new g(function(n) {
     var t = e[we]();
     if (h(t.subscribe))
@@ -2953,7 +2952,7 @@ function It(e) {
     throw new TypeError("Provided object does not correctly implement Symbol.observable");
   });
 }
-function qt(e) {
+function It(e) {
   return new g(function(n) {
     for (var t = 0; t < e.length && !n.closed; t++)
       n.next(e[t]);
@@ -2973,7 +2972,7 @@ function Vt(e) {
   return new g(function(n) {
     var t, r;
     try {
-      for (var o = q(e), i = o.next(); !i.done; i = o.next()) {
+      for (var o = I(e), i = o.next(); !i.done; i = o.next()) {
         var s = i.value;
         if (n.next(s), n.closed)
           return;
@@ -3684,7 +3683,7 @@ var re;
 var A;
 var k;
 var _;
-var I;
+var q;
 var bn = [
   "click",
   "mousedown",
@@ -3704,7 +3703,7 @@ var wn = [
   "touchstart",
   "touchmove"
 ];
-var Ie = false;
+var qe = false;
 window.addEventListener("blur", () => H());
 function xn(e) {
   const n = JSON.stringify(e.focus);
@@ -3722,7 +3721,7 @@ function xn(e) {
   }
 }
 function Sn() {
-  Ie || (window.addEventListener("resize", () => mn("resize")), window.addEventListener("blur", () => H()), Ie = true);
+  qe || (window.addEventListener("resize", () => mn("resize")), window.addEventListener("blur", () => H()), qe = true);
 }
 function En(e, n = bn) {
   const t = Pe.getValue(), r = e.element;
@@ -3758,9 +3757,9 @@ function Ln(e, n) {
   if (X) return;
   b("INPUT", "Starting panning...");
   const t = $(e);
-  A && window.removeEventListener("mousemove", A), A && window.removeEventListener("mouseup", k), _ && window.removeEventListener("touchmove", _), _ && window.removeEventListener("touchend", I), t && !t.options.disable_pan && (U = J(n), n instanceof MouseEvent ? (A = (r) => qe(e, r, U), k = () => H(), window.addEventListener("mousemove", A), window.addEventListener("mouseup", k)) : (_ = (r) => qe(e, r, U), I = () => H(), window.addEventListener("touchmove", _), window.addEventListener("touchend", I)), M("pan_start", () => se = true, 200));
+  A && window.removeEventListener("mousemove", A), A && window.removeEventListener("mouseup", k), _ && window.removeEventListener("touchmove", _), _ && window.removeEventListener("touchend", q), t && !t.options.disable_pan && (U = J(n), n instanceof MouseEvent ? (A = (r) => Ie(e, r, U), k = () => H(), window.addEventListener("mousemove", A), window.addEventListener("mouseup", k)) : (_ = (r) => Ie(e, r, U), q = () => H(), window.addEventListener("touchmove", _), window.addEventListener("touchend", q)), M("pan_start", () => se = true, 200));
 }
-function qe(e, n, t = U) {
+function Ie(e, n, t = U) {
   if (X) return;
   se = true;
   const r = $(e);
@@ -3814,7 +3813,7 @@ function zn(e, n, t = re) {
   }
 }
 function H() {
-  b("INPUT", "Ending pinch/pan..."), it("pan_start"), X = false, se = false, A && window.removeEventListener("mousemove", A), k && window.removeEventListener("mouseup", k), _ && window.removeEventListener("touchmove", _), I && window.removeEventListener("touchend", I), A = k = _ = I = P = null;
+  b("INPUT", "Ending pinch/pan..."), it("pan_start"), X = false, se = false, A && window.removeEventListener("mousemove", A), k && window.removeEventListener("mouseup", k), _ && window.removeEventListener("touchmove", _), q && window.removeEventListener("touchend", q), A = k = _ = q = P = null;
 }
 function Cn(e, n) {
   const t = $(e);
@@ -3857,22 +3856,22 @@ st(
       }
   })
 );
-function Mn(e) {
-  return __async(this, null, function* () {
-    const n = e.element;
-    if (!n) throw new Error("No element set on viewer");
-    const t = document.createElement("div"), r = document.createElement("style"), o = document.createElement("div"), i = document.createElement("div"), s = document.createElement("div"), c = document.createElement("div"), a = document.createElement("iframe");
-    i.appendChild(s), i.appendChild(c), t.appendChild(r), t.appendChild(o), o.appendChild(i), t.classList.add("svg-viewer"), t.id = e.id, r.id = e.id, a.id = "svg-display", a.classList.add("svg-viewer__iframe"), o.classList.add("svg-viewer__view-container"), i.classList.add("svg-viewer__render-container"), c.classList.add("svg-viewer__svg-overlays"), s.classList.add("svg-viewer__svg-output"), s.id = "svg-output", s.innerHTML = e.svg_data;
-    const l = s.firstElementChild?.viewBox?.baseVal || {};
-    o.style.width = `${l.width}px`, o.style.height = `${l.height}px`, c.style.width = `${l.width}px`, c.style.height = `${l.height}px`, c.appendChild(a), n.appendChild(t);
-    const u = o?.getBoundingClientRect() || {}, v = x(e, { box: u });
-    v && (e = v, yield ht(e), En(e), Sn(), yt(e));
-  });
+async function Mn(e) {
+  const n = e.element;
+  if (!n) throw new Error("No element set on viewer");
+  const t = document.createElement("div"), r = document.createElement("style"), o = document.createElement("div"), i = document.createElement("div"), s = document.createElement("div"), c = document.createElement("div"), a = document.createElement("iframe");
+  i.appendChild(s), i.appendChild(c), t.appendChild(r), t.appendChild(o), o.appendChild(i), t.classList.add("svg-viewer"), t.id = e.id, r.id = e.id, a.id = "svg-display", a.classList.add("svg-viewer__iframe"), o.classList.add("svg-viewer__view-container"), i.classList.add("svg-viewer__render-container"), c.classList.add("svg-viewer__svg-overlays"), s.classList.add("svg-viewer__svg-output"), s.id = "svg-output", s.innerHTML = e.svg_data;
+  const l = s.firstElementChild?.viewBox?.baseVal || {};
+  o.style.width = `${l.width}px`, o.style.height = `${l.height}px`, c.style.width = `${l.width}px`, c.style.height = `${l.height}px`, c.appendChild(a), n.appendChild(t);
+  const u = o?.getBoundingClientRect() || {}, v = x(e, { box: u });
+  v && (e = v, await ht(e), En(e), Sn(), yt(e));
 }
 function ht(e) {
   return new Promise((n) => {
     requestAnimationFrame(() => {
-      const t = e.element?.querySelector("svg");
+      const t = e.element?.querySelector(
+        "svg"
+      );
       if (!t || !t.clientWidth)
         return M(
           `${e.id}-setup`,
@@ -3895,27 +3894,31 @@ function dt(e) {
       const s = r.querySelector(
         ".svg-viewer__render-container"
       ), c = `scale(${e.zoom * e.svg_ratio})`;
-      if (!s || !o) throw new Error("Viewer is not setup yet.");
+      if (!s || !o)
+        throw new Error("Viewer is not setup yet.");
       const a = (e.center.x - 0.5) * (100 * e.zoom * e.svg_ratio), l = (e.center.y - 0.5) * (100 * e.zoom * e.svg_ratio), u = e.use_gpu ? `translate3d(${a}%, ${l}%, 0)` : `translate(${a}%, ${l}%)`;
       s.style.transform = `${u} ${c} rotate(${e.rotate}deg)`, i += `#${e.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e.rotate}deg) scale(${1 / e.zoom * (1 / e.svg_ratio)}); }`, i += `#${e.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, ge(e), xn(e), Le(e), delete F[e.id], cancelAnimationFrame(t), n();
     });
   })), F[e.id];
 }
-function Tn(e) {
-  return __async(this, null, function* () {
-    const n = JSON.stringify(__spreadValues({}, e.styles)) || "";
-    if (n.localeCompare(D[e.id])) {
-      const t = e.element;
-      if (!t) throw new Error("No element set on viewer");
-      const r = t.querySelector(".svg-viewer__iframe"), o = t.querySelector(".svg-viewer__svg-output");
-      if (!r) throw new Error("No iframe created for viewer");
-      const i = o.firstElementChild?.viewBox?.baseVal || {};
-      let s = `${e.svg_data}`;
-      s = /<svg[^>]*width="[^>]*>/.test(s) ? s : s.replace(
-        "<svg",
-        `<svg width="${i.width}" height="${i.height}" `
-      );
-      const c = `
+async function Tn(e) {
+  const n = JSON.stringify(__spreadValues({}, e.styles)) || "";
+  if (n.localeCompare(D[e.id])) {
+    const t = e.element;
+    if (!t) throw new Error("No element set on viewer");
+    const r = t.querySelector(
+      ".svg-viewer__iframe"
+    ), o = t.querySelector(
+      ".svg-viewer__svg-output"
+    );
+    if (!r) throw new Error("No iframe created for viewer");
+    const i = o.firstElementChild?.viewBox?.baseVal || {};
+    let s = `${e.svg_data}`;
+    s = /<svg[^>]*width="[^>]*>/.test(s) ? s : s.replace(
+      "<svg",
+      `<svg width="${i.width}" height="${i.height}" `
+    );
+    const c = `
 <script>
     function updateStyles(evt) {
         try {
@@ -3933,95 +3936,108 @@ function Tn(e) {
         window.attachEvent("onmessage", updateStyles);
     }
 <\/script>`, a = {}, l = vt(__spreadValues(__spreadValues({}, e.styles), a)), d = "data:text/html;base64," + yn(
-        `<html><head><style>*{overflow:hidden;}html,body{padding:0;margin:0;}</style><style id="style">${l}</style>${c}</head><body>${s}</body></html>`
-      );
-      r.src = d, D[e.id] = n;
-    }
-  });
+      `<html><head><style>*{overflow:hidden;}html,body{padding:0;margin:0;}</style><style id="style">${l}</style>${c}</head><body>${s}</body></html>`
+    );
+    r.src = d, D[e.id] = n;
+  }
 }
-function ge(e) {
-  return __async(this, null, function* () {
-    if ((JSON.stringify(__spreadValues({}, e.styles)) || "").localeCompare(D[e.id])) {
-      const t = e.element;
-      if (!t) throw new Error("No element set on viewer");
-      const r = t.querySelector(".svg-viewer__iframe");
-      if (!r) throw new Error("No iframe created for viewer");
-      if (!r.contentWindow) {
-        r.onload = () => {
-          setTimeout(() => ge(e), 50), setTimeout(() => ge(e), 500);
-        };
-        return;
-      }
-      const o = {};
-      o[`[empty${Math.floor(Math.random() * 999999)}]`] = {};
-      const i = vt(__spreadValues(__spreadValues({}, e.styles), o));
-      r.contentWindow.postMessage(
-        JSON.stringify({ id: "svg-styles", content: i }),
-        "*"
-      );
+async function ge(e) {
+  if ((JSON.stringify(__spreadValues({}, e.styles)) || "").localeCompare(D[e.id])) {
+    const t = e.element;
+    if (!t) throw new Error("No element set on viewer");
+    const r = t.querySelector(
+      ".svg-viewer__iframe"
+    );
+    if (!r) throw new Error("No iframe created for viewer");
+    if (!r.contentWindow) {
+      r.onload = () => {
+        setTimeout(() => ge(e), 50), setTimeout(() => ge(e), 500);
+      };
+      return;
     }
-  });
+    const o = {};
+    o[`[empty${Math.floor(Math.random() * 999999)}]`] = {};
+    const i = vt(__spreadValues(__spreadValues({}, e.styles), o));
+    r.contentWindow.postMessage(
+      JSON.stringify({ id: "svg-styles", content: i }),
+      "*"
+    );
+  }
 }
-function yt(e) {
-  return __async(this, null, function* () {
-    return new Promise((n) => {
-      B[e.id] || (B[e.id] = []), B[e.id].push(n), M(
-        `resize-${e.id}`,
-        () => {
-          const t = e.element;
-          if (!t) throw new Error("No element set on viewer");
-          const r = t.querySelector(
-            ".svg-viewer__view-container"
-          ), o = t.querySelector(
-            ".svg-viewer__svg-overlays"
-          ), i = t.querySelector(`#${e.id}`), s = t.querySelector(".svg-viewer"), c = t.querySelector(".svg-viewer__svg-output"), a = t.querySelector("iframe"), l = s?.getBoundingClientRect() || {}, u = r?.getBoundingClientRect() || {};
-          if (!o || !c || !a || !r)
-            throw new Error("Viewer elements not ready yet.");
-          requestAnimationFrame(() => __async(null, null, function* () {
-            const v = l.height / l.width, d = c.firstElementChild?.viewBox?.baseVal || {}, f = d.height / d.width;
-            c.firstElementChild && (c.firstElementChild.style.width = "200%");
-            const p = (l.width - 32) * Math.min(1, v / f), y = { width: p, height: p * f };
-            o.style.width = d.width + "px", o.style.height = d.height + "px", r.style.width = d.width + "px", r.style.height = d.height + "px", a.style.width = d.width + "px", a.style.height = d.height + "px", a.width = `${d.width}`, a.height = `${d.height}`;
-            const S = Math.min(
-              l.height / d.height,
-              l.width / d.width
-            ), w = i?.getBoundingClientRect(), z = o?.getBoundingClientRect();
-            let $e = { x: 1, y: 1 };
-            w && z && ($e = {
-              x: z.width * S * 0.975 / w.width,
-              y: z.height * S * 0.975 / w.height
-            }), D[e.id] = "";
-            let ze = x(e, {
-              ratio: y.height / y.width,
-              svg_ratio: S,
-              box: u,
-              content_ratio: $e
-            });
-            !ze || (e = ze, !(yield dt(e).catch((ce) => (console.warn(ce), false)))) || (B[e.id].forEach((ce) => ce()), B[e.id] = []);
-          }));
-        },
-        100
-      );
-    });
+async function yt(e) {
+  return new Promise((n) => {
+    B[e.id] || (B[e.id] = []), B[e.id].push(n), M(
+      `resize-${e.id}`,
+      () => {
+        const t = e.element;
+        if (!t) throw new Error("No element set on viewer");
+        const r = t.querySelector(
+          ".svg-viewer__view-container"
+        ), o = t.querySelector(".svg-viewer__svg-overlays"), i = t.querySelector(
+          `#${e.id}`
+        ), s = t.querySelector(
+          ".svg-viewer"
+        ), c = t.querySelector(
+          ".svg-viewer__svg-output"
+        ), a = t.querySelector("iframe"), l = s?.getBoundingClientRect() || {}, u = r?.getBoundingClientRect() || {};
+        if (!o || !c || !a || !r)
+          throw new Error("Viewer elements not ready yet.");
+        requestAnimationFrame(async () => {
+          const v = l.height / l.width, d = c.firstElementChild?.viewBox?.baseVal || {}, f = d.height / d.width;
+          c.firstElementChild && (c.firstElementChild.style.width = "200%");
+          const p = (l.width - 32) * Math.min(1, v / f), y = { width: p, height: p * f };
+          o.style.width = d.width + "px", o.style.height = d.height + "px", r.style.width = d.width + "px", r.style.height = d.height + "px", a.style.width = d.width + "px", a.style.height = d.height + "px", a.width = `${d.width}`, a.height = `${d.height}`;
+          const S = Math.min(
+            l.height / d.height,
+            l.width / d.width
+          ), w = i?.getBoundingClientRect(), z = o?.getBoundingClientRect();
+          let $e = { x: 1, y: 1 };
+          w && z && ($e = {
+            x: z.width * S * 0.975 / w.width,
+            y: z.height * S * 0.975 / w.height
+          }), D[e.id] = "";
+          let ze = x(e, {
+            ratio: y.height / y.width,
+            svg_ratio: S,
+            box: u,
+            content_ratio: $e
+          });
+          !ze || (e = ze, !await dt(e).catch((ce) => (console.warn(ce), false))) || (B[e.id].forEach((ce) => ce()), B[e.id] = []);
+        });
+      },
+      100
+    );
   });
 }
 function Le(e) {
   const n = e.element?.querySelector("svg");
   if (!Object.keys(e.mappings || {}).length) return;
-  const t = e.element?.querySelector(".svg-viewer__svg-overlays");
+  const t = e.element?.querySelector(
+    ".svg-viewer__svg-overlays"
+  );
   if (!t || !n) return;
   if (!t.getBoundingClientRect().width)
-    return M(`${e.id}|render-overlays`, () => Le(e), 50);
+    return M(
+      `${e.id}|render-overlays`,
+      () => Le(e),
+      50
+    );
   requestAnimationFrame(() => {
-    Pn(e), In(e), kn(e);
+    Pn(e), qn(e), kn(e);
   });
 }
 function Pn(e) {
-  const n = e.labels.filter((r) => !r.zoom_level || r.zoom_level <= e.zoom), t = JSON.stringify(n);
+  const n = e.labels.filter(
+    (r) => !r.zoom_level || r.zoom_level <= e.zoom
+  ), t = JSON.stringify(n);
   if (t !== ve2[e.id]) {
-    const r = e.element?.querySelector(".svg-viewer__svg-overlays");
+    const r = e.element?.querySelector(
+      ".svg-viewer__svg-overlays"
+    );
     if (!r) return;
-    Array.from(r.querySelectorAll("[label]")).filter((i) => i.parentNode).forEach((i) => r.removeChild(i));
+    Array.from(
+      r.querySelectorAll("[label]")
+    ).filter((i) => i.parentNode).forEach((i) => r.removeChild(i));
     for (const i of n) {
       let s = { x: 0, y: 0 }, c = "~Nothing~";
       typeof i.location == "string" ? (s = e.mappings[i.location] || s, c = `#${i.location}`) : (i.location?.y || i.location?.x) && (s = i.location, c = `loc-${s.x}-${s.y}`);
@@ -4041,7 +4057,9 @@ function kn(e) {
     }))
   );
   if (n !== pe[e.id]) {
-    const t = e.element?.querySelector(".svg-viewer__svg-overlays");
+    const t = e.element?.querySelector(
+      ".svg-viewer__svg-overlays"
+    );
     if (!t) return console.log("Unable to get overlay element.");
     const r = t.querySelectorAll(".feature"), o = [];
     window.overlay_el = t, r.forEach((i) => {
@@ -4050,26 +4068,38 @@ function kn(e) {
       s === "none" || !e.features.find((c) => c.track_id === s) ? t.removeChild(i) : o.push(i);
     });
     for (const i of e.features) {
-      if (!i.content || o.includes(i.content)) continue;
+      if (!i.content || o.includes(i.content))
+        continue;
       let s = { x: 0, y: 0 }, c = { w: 0, h: 0 };
       const a = document.createElement("button");
-      typeof i.location == "string" ? (a.id = `${i.location}`, s = e.mappings[i.location] || s, (i.hover || i.full_size) && (c = e.mappings[i.location] || c)) : (i.location?.y || i.location?.x) && (s = i.location), !(!s.x && !s.y) && (a.classList.add("svg-viewer__svg-overlay-item"), a.setAttribute("feature", "true"), a.setAttribute("track-id", `${i.track_id || "none"}`), a.classList.add("feature"), i.z_index && (a.style.zIndex = `${i.z_index}`), i.hover && a.classList.add("svg-viewer__svg-overlay-item__hover"), a.style.top = `${s.y * 100}%`, a.style.left = `${s.x * 100}%`, c.w || c.h ? (a.style.width = `${c.w * 100}%`, a.style.height = `${c.h * 100}%`) : (a.style.width = "1%", a.style.height = `${1 / e.ratio}%`), a.style.transform = "translate(-50%, -50%)", i.content instanceof Node && a.appendChild(i.content), t.appendChild(a));
+      typeof i.location == "string" ? (a.id = `${i.location}`, s = e.mappings[i.location] || s, (i.hover || i.full_size) && (c = e.mappings[i.location] || c)) : (i.location?.y || i.location?.x) && (s = i.location), !(!s.x && !s.y) && (a.classList.add("svg-viewer__svg-overlay-item"), a.setAttribute("feature", "true"), a.setAttribute(
+        "track-id",
+        `${i.track_id || "none"}`
+      ), a.classList.add("feature"), i.z_index && (a.style.zIndex = `${i.z_index}`), i.hover && a.classList.add(
+        "svg-viewer__svg-overlay-item__hover"
+      ), a.style.top = `${s.y * 100}%`, a.style.left = `${s.x * 100}%`, c.w || c.h ? (a.style.width = `${c.w * 100}%`, a.style.height = `${c.h * 100}%`) : (a.style.width = "1%", a.style.height = `${1 / e.ratio}%`), a.style.transform = "translate(-50%, -50%)", i.content instanceof Node && a.appendChild(i.content), t.appendChild(a));
     }
     b("RENDER", `Added ${e.features.length} features to view.`), pe[e.id] = n;
   }
 }
-function In(e) {
-  const n = JSON.stringify(e.actions.map((t) => __spreadProps(__spreadValues({}, t), { callback: "" })));
+function qn(e) {
+  const n = JSON.stringify(
+    e.actions.map((t) => __spreadProps(__spreadValues({}, t), { callback: "" }))
+  );
   if (n !== me[e.id]) {
-    const t = e.element?.querySelector(".svg-viewer__svg-overlays");
+    const t = e.element?.querySelector(
+      ".svg-viewer__svg-overlays"
+    );
     if (!t) return;
-    Array.from(t.querySelectorAll(".action-zone")).filter((o) => o.parentNode && t.contains(o.parentNode)).forEach((o) => t.removeChild(o));
+    Array.from(
+      t.querySelectorAll(".action-zone")
+    ).filter((o) => o.parentNode && t.contains(o.parentNode)).forEach((o) => t.removeChild(o));
     for (const o of e.actions) {
-      if (!o.action || !o.id || o.id === "*" || o.zone === false) continue;
-      const i = document.createElement("button");
-      i.id = `${o.id}`;
-      const s = e.mappings[o.id] || { x: 0, y: 0 }, c = e.mappings[o.id] || { w: 0, h: 0 };
-      i.classList.add("svg-viewer__svg-overlay-item"), i.classList.add("action-zone"), i.style.top = `${s.y * 100}%`, i.style.left = `${s.x * 100}%`, (c.w || c.h) && (i.style.width = `${c.w * 100}%`, i.style.height = `${c.h * 100}%`, i.style.transform = "translate(-50%, -50%)"), t.appendChild(i);
+      if (!o.action || !o.id || o.id === "*" || o.zone === false || t.querySelector(`#${o.id}`)) continue;
+      const s = document.createElement("button");
+      s.id = `${o.id}`;
+      const c = e.mappings[o.id] || { x: 0, y: 0 }, a = e.mappings[o.id] || { w: 0, h: 0 };
+      s.classList.add("svg-viewer__svg-overlay-item"), s.classList.add("action-zone"), s.style.top = `${c.y * 100}%`, s.style.left = `${c.x * 100}%`, (a.w || a.h) && (s.style.width = `${a.w * 100}%`, s.style.height = `${a.h * 100}%`, s.style.transform = "translate(-50%, -50%)"), t.appendChild(s);
     }
     me[e.id] = n;
   }
@@ -4092,18 +4122,16 @@ function Nn(e) {
   for (const n in e)
     _e[n.toLowerCase()] = e[n];
 }
-function Un(e) {
-  return __async(this, null, function* () {
-    let t = W().find((o) => o.url === e.url);
-    if (t) return t.id;
-    const r = e.svg_data || (yield qn(e.url));
-    return t = new te(__spreadProps(__spreadValues({}, e), { svg_data: r })), st(
-      `${t.id}-render`,
-      gn(t.id).subscribe(
-        (o) => dt(o).catch((i) => console.warn(i))
-      )
-    ), ft(t), yield Mn(t), t.id;
-  });
+async function Un(e) {
+  let t = W().find((o) => o.url === e.url);
+  if (t) return t.id;
+  const r = e.svg_data || await In(e.url);
+  return t = new te(__spreadProps(__spreadValues({}, e), { svg_data: r })), st(
+    `${t.id}-render`,
+    gn(t.id).subscribe(
+      (o) => dt(o).catch((i) => console.warn(i))
+    )
+  ), ft(t), await Mn(t), t.id;
 }
 function Yn(e, n) {
   return x(e, n);
@@ -4114,18 +4142,14 @@ function Hn(e) {
   const t = n.element?.querySelector(".svg-viewer");
   t && (n.element.removeChild(t), _n(n), an(`${e}`));
 }
-function qn(e = "") {
-  return __async(this, null, function* () {
-    const n = new Headers();
-    if (e.startsWith(location.origin) || e.startsWith("/"))
-      for (const o in _e)
-        n.append(o, _e[o]);
-    if (le[e]) return le[e];
-    const r = yield (yield fetch(e, { headers: n }).catch((o) => (b("SVG VIEWER", "Failed to load map", o, "error"), { text: () => __async(null, null, function* () {
-      return "";
-    }) }))).text();
-    return le[e] = r, r;
-  });
+async function In(e = "") {
+  const n = new Headers();
+  if (e.startsWith(location.origin) || e.startsWith("/"))
+    for (const o in _e)
+      n.append(o, _e[o]);
+  if (le[e]) return le[e];
+  const r = await (await fetch(e, { headers: n }).catch((o) => (b("SVG VIEWER", "Failed to load map", o, "error"), { text: async () => "" }))).text();
+  return le[e] = r, r;
 }
 function Dn() {
   let e = document.getElementById("svg-viewer-global");
@@ -4369,34 +4393,32 @@ function generateBookingForm(booking = new Booking()) {
     form.get("date").disable();
   return form;
 }
-function findNearbyFeature(_0, _1) {
-  return __async(this, arguments, function* (map_url, centered_at, desk_ids = []) {
-    const element = document.createElement("div");
-    element.style.position = "absolute";
-    element.style.top = "-9999px";
-    element.style.width = "1000px";
-    element.style.height = "1000px";
-    document.body.appendChild(element);
-    const id = yield Un({
-      url: map_url,
-      element
-    });
-    const viewer = $(id);
-    const point = (typeof centered_at === "string" ? viewer.mappings[centered_at] : centered_at) || { x: 0.5, y: 0.5 };
-    let dist = 10;
-    let closest = "";
-    for (const desk of desk_ids) {
-      const { x: x2, y } = viewer.mappings[desk] || { x: 2, y: 2 };
-      const d = Math.sqrt((x2 - point.x) * (x2 - point.x) + (y - point.y) * (y - point.y));
-      if (d < dist) {
-        dist = d;
-        closest = desk;
-      }
-    }
-    document.body.removeChild(element);
-    Hn(id);
-    return closest;
+async function findNearbyFeature(map_url, centered_at, desk_ids = []) {
+  const element = document.createElement("div");
+  element.style.position = "absolute";
+  element.style.top = "-9999px";
+  element.style.width = "1000px";
+  element.style.height = "1000px";
+  document.body.appendChild(element);
+  const id = await Un({
+    url: map_url,
+    element
   });
+  const viewer = $(id);
+  const point = (typeof centered_at === "string" ? viewer.mappings[centered_at] : centered_at) || { x: 0.5, y: 0.5 };
+  let dist = 10;
+  let closest = "";
+  for (const desk of desk_ids) {
+    const { x: x2, y } = viewer.mappings[desk] || { x: 2, y: 2 };
+    const d = Math.sqrt((x2 - point.x) * (x2 - point.x) + (y - point.y) * (y - point.y));
+    if (d < dist) {
+      dist = d;
+      closest = desk;
+    }
+  }
+  document.body.removeChild(element);
+  Hn(id);
+  return closest;
 }
 function newBookingFromCalendarEvent(event) {
   return new Booking({
@@ -4844,106 +4866,104 @@ function differenceBetweenAssetRequests(new_assets, old_assets, reset_state = fa
   }
   return changed;
 }
-function validateAssetRequestsForResource(_0, _1) {
-  return __async(this, arguments, function* ({ id, ical_uid, from_booking }, { date, duration, all_day, host, location_name, location_id, zones, reset_state }, new_assets = [], force_create = false) {
-    const requests = yield queryBookings({
-      period_start: getUnixTime(all_day ? startOfDay(date) : date),
-      period_end: getUnixTime(all_day ? endOfDay(addMinutes(date, duration)) : addMinutes(date, duration)),
-      type: "asset-request",
-      zones: zones.join(",")
-    }).toPromise();
-    const bookings = id && ical_uid ? yield queryBookings({
-      period_start: getUnixTime(startOfDay(date)),
-      period_end: getUnixTime(endOfDay(date)),
-      type: "asset-request",
-      email: host,
-      event_id: from_booking ? "" : id,
-      booking_id: from_booking ? id : "",
-      ical_uid
-    }).toPromise() : [];
-    const booking_list = bookings.map((_2) => [
-      _2.id,
-      new AssetRequest(_2.extension_data.request)
+async function validateAssetRequestsForResource({ id, ical_uid, from_booking }, { date, duration, all_day, host, location_name, location_id, zones, reset_state }, new_assets = [], force_create = false) {
+  const requests = await queryBookings({
+    period_start: getUnixTime(all_day ? startOfDay(date) : date),
+    period_end: getUnixTime(all_day ? endOfDay(addMinutes(date, duration)) : addMinutes(date, duration)),
+    type: "asset-request",
+    zones: zones.join(",")
+  }).toPromise();
+  const bookings = id && ical_uid ? await queryBookings({
+    period_start: getUnixTime(startOfDay(date)),
+    period_end: getUnixTime(endOfDay(date)),
+    type: "asset-request",
+    email: host,
+    event_id: from_booking ? "" : id,
+    booking_id: from_booking ? id : "",
+    ical_uid
+  }).toPromise() : [];
+  const booking_list = bookings.map((_2) => [
+    _2.id,
+    new AssetRequest(_2.extension_data.request)
+  ]);
+  new_assets?.forEach((_2) => _2.conflict = false);
+  let changed = force_create ? new_assets.map((_2) => _2.id) : differenceBetweenAssetRequests(new_assets, booking_list.map(([_2, r]) => r), reset_state);
+  if (reset_state) {
+    const has_state = bookings.filter((_2) => _2.approved || _2.rejected);
+    changed = unique([
+      ...changed,
+      ...has_state.map((_2) => _2.extension_data.request_id)
     ]);
-    new_assets?.forEach((_2) => _2.conflict = false);
-    let changed = force_create ? new_assets.map((_2) => _2.id) : differenceBetweenAssetRequests(new_assets, booking_list.map(([_2, r]) => r), reset_state);
-    if (reset_state) {
-      const has_state = bookings.filter((_2) => _2.approved || _2.rejected);
-      changed = unique([
-        ...changed,
-        ...has_state.map((_2) => _2.extension_data.request_id)
-      ]);
-    }
-    const unchanged = booking_list.filter(([_2, request]) => !changed.includes(request.id));
-    const changed_requests = booking_list.filter(([_2, { id: id2 }]) => changed.includes(id2));
-    const changed_assets = new_assets.filter(({ id: id2 }) => changed.includes(id2));
-    const filtered = requests.filter((req) => !req.rejected && (!bookings.find((b2) => b2.id === req.id) || unchanged.find(([id2]) => req.event_id === id2)));
-    let used_ids = flatten(filtered.map((_2) => _2.asset_ids));
-    for (const [_2, request] of unchanged) {
-      used_ids = [
-        ...used_ids,
-        ...flatten(request.items.map((_3) => _3.item_ids))
-      ];
-    }
-    const available_groups = yield queryGroupAvailability({
-      period_start: getUnixTime(all_day ? startOfDay(date) : date),
-      period_end: getUnixTime(all_day ? endOfDay(addMinutes(date, duration)) : addMinutes(date, duration)),
-      type: "asset-request"
-    }, bookings.map((_2) => _2.id)).toPromise();
-    const processed_requests = changed_assets.map((request) => {
-      let asset_ids = flatten(request.items.map(({ id: id2, item_ids, quantity }) => {
-        const assets = available_groups.find((_2) => _2.id === id2)?.assets;
-        if (!assets)
-          return item_ids;
-        const list = [];
-        return new Array(quantity).fill(0).map((_2, idx) => {
-          const item = used_ids.includes(item_ids[idx]) || list.includes(item_ids[idx]) || !item_ids[idx] ? assets?.find(({ id: id3 }) => {
-            return !used_ids.includes(id3) && !list.includes(id3);
-          })?.id : item_ids[idx];
-          if (!item) {
-            request.conflict = true;
-            throw "Unable to find available asset for request";
-          }
-          list.push(item);
-          return item;
-        });
-      }));
-      const booking = bookings.find((_2) => _2.asset_ids.find((id2) => request.items?.find((i) => i.item_ids.includes(id2))));
-      used_ids = [...used_ids, ...asset_ids];
-      const asset_data = {
-        type: "asset-request",
-        booking_type: "asset-request",
-        date,
-        duration,
-        all_day,
-        description: location_name,
-        user_email: host,
-        asset_id: asset_ids[0],
-        asset_ids,
-        asset_name: request.items.map((_2) => _2.name).join(", "),
-        title: request.items.map((_2) => _2.name).join(", "),
-        approved: !reset_state && booking?.approved && !request._changed,
-        rejected: !reset_state && booking?.rejected && !request._changed,
-        extension_data: {
-          parent_id: id,
-          request_id: request.id,
-          location_id,
-          request: new AssetRequest(__spreadProps(__spreadValues({}, request), { event: null }))
-        },
-        zones: zones || []
-      };
-      if (from_booking)
-        asset_data.parent_id = id;
-      return createBooking(new Booking(asset_data), {
-        ical_uid,
-        event_id: from_booking ? "" : id
+  }
+  const unchanged = booking_list.filter(([_2, request]) => !changed.includes(request.id));
+  const changed_requests = booking_list.filter(([_2, { id: id2 }]) => changed.includes(id2));
+  const changed_assets = new_assets.filter(({ id: id2 }) => changed.includes(id2));
+  const filtered = requests.filter((req) => !req.rejected && (!bookings.find((b2) => b2.id === req.id) || unchanged.find(([id2]) => req.event_id === id2)));
+  let used_ids = flatten(filtered.map((_2) => _2.asset_ids));
+  for (const [_2, request] of unchanged) {
+    used_ids = [
+      ...used_ids,
+      ...flatten(request.items.map((_3) => _3.item_ids))
+    ];
+  }
+  const available_groups = await queryGroupAvailability({
+    period_start: getUnixTime(all_day ? startOfDay(date) : date),
+    period_end: getUnixTime(all_day ? endOfDay(addMinutes(date, duration)) : addMinutes(date, duration)),
+    type: "asset-request"
+  }, bookings.map((_2) => _2.id)).toPromise();
+  const processed_requests = changed_assets.map((request) => {
+    let asset_ids = flatten(request.items.map(({ id: id2, item_ids, quantity }) => {
+      const assets = available_groups.find((_2) => _2.id === id2)?.assets;
+      if (!assets)
+        return item_ids;
+      const list = [];
+      return new Array(quantity).fill(0).map((_2, idx) => {
+        const item = used_ids.includes(item_ids[idx]) || list.includes(item_ids[idx]) || !item_ids[idx] ? assets?.find(({ id: id3 }) => {
+          return !used_ids.includes(id3) && !list.includes(id3);
+        })?.id : item_ids[idx];
+        if (!item) {
+          request.conflict = true;
+          throw "Unable to find available asset for request";
+        }
+        list.push(item);
+        return item;
       });
-    });
-    return () => __async(null, null, function* () {
-      yield Promise.all(changed_requests.map(([id2]) => removeBooking(id2).toPromise()));
-      yield Promise.all(processed_requests.map((r) => r.toPromise()));
+    }));
+    const booking = bookings.find((_2) => _2.asset_ids.find((id2) => request.items?.find((i) => i.item_ids.includes(id2))));
+    used_ids = [...used_ids, ...asset_ids];
+    const asset_data = {
+      type: "asset-request",
+      booking_type: "asset-request",
+      date,
+      duration,
+      all_day,
+      description: location_name,
+      user_email: host,
+      asset_id: asset_ids[0],
+      asset_ids,
+      asset_name: request.items.map((_2) => _2.name).join(", "),
+      title: request.items.map((_2) => _2.name).join(", "),
+      approved: !reset_state && booking?.approved && !request._changed,
+      rejected: !reset_state && booking?.rejected && !request._changed,
+      extension_data: {
+        parent_id: id,
+        request_id: request.id,
+        location_id,
+        request: new AssetRequest(__spreadProps(__spreadValues({}, request), { event: null }))
+      },
+      zones: zones || []
+    };
+    if (from_booking)
+      asset_data.parent_id = id;
+    return createBooking(new Booking(asset_data), {
+      ical_uid,
+      event_id: from_booking ? "" : id
     });
   });
+  return async () => {
+    await Promise.all(changed_requests.map(([id2]) => removeBooking(id2).toPromise()));
+    await Promise.all(processed_requests.map((r) => r.toPromise()));
+  };
 }
 
 // libs/assets/src/lib/asset-group.pipe.ts
@@ -4961,21 +4981,19 @@ var _AssetGroupPipe = class _AssetGroupPipe {
    * Get details of the assetgroup with the given ID
    * @param assetgroup_id ID or Email of the assetgroup
    */
-  transform(group_id) {
-    return __async(this, null, function* () {
-      if (!group_id)
-        return EMPTY_ASSET_GROUP;
-      let asset_group = ASSET_GROUP_LIST.find(({ id }) => id === group_id);
-      if (asset_group)
-        return asset_group;
-      const group = yield lastValueFrom(showAssetGroup(group_id)).catch(() => null);
-      if (group) {
-        asset_group = __spreadValues({}, group);
-        ASSET_GROUP_LIST.push(asset_group);
-        return asset_group;
-      }
+  async transform(group_id) {
+    if (!group_id)
       return EMPTY_ASSET_GROUP;
-    });
+    let asset_group = ASSET_GROUP_LIST.find(({ id }) => id === group_id);
+    if (asset_group)
+      return asset_group;
+    const group = await lastValueFrom(showAssetGroup(group_id)).catch(() => null);
+    if (group) {
+      asset_group = __spreadValues({}, group);
+      ASSET_GROUP_LIST.push(asset_group);
+      return asset_group;
+    }
+    return EMPTY_ASSET_GROUP;
   }
   updateAssetGroupList(assetgroup_list) {
     updateAssetGroupList(assetgroup_list);
@@ -5186,18 +5204,16 @@ function ConfirmModalComponent_Conditional_5_Template(rf, ctx) {
 var CONFIRM_METADATA = {
   height: "auto"
 };
-function openConfirmModal(data, dialog) {
-  return __async(this, null, function* () {
-    const ref = dialog.open(ConfirmModalComponent, __spreadProps(__spreadValues({}, CONFIRM_METADATA), {
-      data
-    }));
-    return __spreadProps(__spreadValues({}, yield Promise.race([
-      ref.componentInstance.event.pipe(first((_2) => _2.reason === "done")).toPromise(),
-      ref.afterClosed().toPromise()
-    ])), {
-      loading: (s) => ref.componentInstance.loading = s,
-      close: () => ref.close()
-    });
+async function openConfirmModal(data, dialog) {
+  const ref = dialog.open(ConfirmModalComponent, __spreadProps(__spreadValues({}, CONFIRM_METADATA), {
+    data
+  }));
+  return __spreadProps(__spreadValues({}, await Promise.race([
+    ref.componentInstance.event.pipe(first((_2) => _2.reason === "done")).toPromise(),
+    ref.afterClosed().toPromise()
+  ])), {
+    loading: (s) => ref.componentInstance.loading = s,
+    close: () => ref.close()
   });
 }
 var _ConfirmModalComponent = class _ConfirmModalComponent extends AsyncHandler {
@@ -5808,14 +5824,12 @@ var _PaymentModalComponent = class _PaymentModalComponent {
   get code() {
     return this._org.currency_code;
   }
-  processPayment() {
-    return __async(this, null, function* () {
-      if (!this.card_details || !this._validCardDetails())
-        return;
-      this.event.emit(this.card_details);
-      yield this._data.makePayment(this.card_details);
-      this.success = true;
-    });
+  async processPayment() {
+    if (!this.card_details || !this._validCardDetails())
+      return;
+    this.event.emit(this.card_details);
+    await this._data.makePayment(this.card_details);
+    this.success = true;
   }
   _validCardDetails() {
     return (this.card_details?.cardholder.length || 0) > 0 && (this.card_details?.cvv.length || 0) >= 3;
@@ -5966,130 +5980,120 @@ var _PaymentsService = class _PaymentsService {
   get enabled() {
     return !!this._org.module("payments", STRIPE_MODULE);
   }
-  makePayment(details) {
-    return __async(this, null, function* () {
-      if (!this._org.module("payments", STRIPE_MODULE))
-        throw "Payments not enabled";
-      const [cost, period] = yield this._getCostOfProduct(details?.type).catch((_2) => [0, 60]);
-      console.log("Cost:", cost, period);
-      if (cost <= 0)
-        return;
-      let customer_id = this._settings.get("STRIPE_Customer_ID");
-      if (!customer_id)
-        customer_id = yield this._newCustomerID();
-      this._settings.saveUserSetting("STRIPE_Customer_ID", customer_id);
-      const amount = cost * (details.duration / period);
-      let result = void 0;
-      const makePayment = (c) => __async(this, null, function* () {
-        result = yield this._processPayment(amount, customer_id, c).catch((e) => {
-          this._loading.next("");
-          throw e;
-        });
+  async makePayment(details) {
+    if (!this._org.module("payments", STRIPE_MODULE))
+      throw "Payments not enabled";
+    const [cost, period] = await this._getCostOfProduct(details?.type).catch((_2) => [0, 60]);
+    console.log("Cost:", cost, period);
+    if (cost <= 0)
+      return;
+    let customer_id = this._settings.get("STRIPE_Customer_ID");
+    if (!customer_id)
+      customer_id = await this._newCustomerID();
+    this._settings.saveUserSetting("STRIPE_Customer_ID", customer_id);
+    const amount = cost * (details.duration / period);
+    let result = void 0;
+    const makePayment = async (c) => {
+      result = await this._processPayment(amount, customer_id, c).catch((e) => {
+        this._loading.next("");
+        throw e;
       });
-      const data = __spreadProps(__spreadValues({}, details), {
-        rate: `$${(cost / 100).toFixed(2)} per hour`,
-        amount,
-        makePayment,
-        loading: this.loading
-      });
-      const ref = this._dialog.open(PaymentModalComponent, { data });
-      yield ref.afterClosed().toPromise();
-      return result;
+    };
+    const data = __spreadProps(__spreadValues({}, details), {
+      rate: `$${(cost / 100).toFixed(2)} per hour`,
+      amount,
+      makePayment,
+      loading: this.loading
     });
+    const ref = this._dialog.open(PaymentModalComponent, { data });
+    await ref.afterClosed().toPromise();
+    return result;
   }
-  _addPaymentMethod(card) {
-    return __async(this, null, function* () {
-      const mod = this._org.module("payments", STRIPE_MODULE);
-      if (!mod)
-        throw "Unable to load module";
-      const payment_method = yield mod.execute("add_payment_method", [
-        "card",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        card
-      ]);
-      return payment_method.id || payment_method;
-    });
+  async _addPaymentMethod(card) {
+    const mod = this._org.module("payments", STRIPE_MODULE);
+    if (!mod)
+      throw "Unable to load module";
+    const payment_method = await mod.execute("add_payment_method", [
+      "card",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      card
+    ]);
+    return payment_method.id || payment_method;
   }
-  _getCostOfProduct(type) {
-    return __async(this, null, function* () {
-      const price = [0, 60];
-      const mod = this._org.module("payments", STRIPE_MODULE);
-      if (!mod)
-        return price;
-      const product_list = yield mod.execute("get_product_prices", [
-        null,
-        null,
-        type
-      ]);
-      if (!product_list.length)
-        return price;
-      return product_list;
-    });
+  async _getCostOfProduct(type) {
+    const price = [0, 60];
+    const mod = this._org.module("payments", STRIPE_MODULE);
+    if (!mod)
+      return price;
+    const product_list = await mod.execute("get_product_prices", [
+      null,
+      null,
+      type
+    ]);
+    if (!product_list.length)
+      return price;
+    return product_list;
   }
-  _processPayment(amount, customer_id, card_details) {
-    return __async(this, null, function* () {
-      this._loading.next("Checking payment method...");
-      console.log("Getting payment method...");
-      const source = card_details ? yield this._addPaymentMethod(card_details) : this._active_card.getValue();
-      if (!source)
-        throw "No payment source selected";
-      this._loading.next("Processing payment...");
-      console.log("Processing payment...");
-      const mod = this._org.module("payments", STRIPE_MODULE);
-      if (!mod)
-        throw "Unable to load module";
-      const id = yield mod.execute("create_payment_intent", [
-        amount,
-        this._org.building.currency || "USD",
-        null,
-        null,
-        customer_id,
-        null,
-        null,
-        null,
-        currentUser()?.email
-      ]);
-      if (!id)
-        throw "Failed to create payment";
-      console.log("Confirming payment...");
-      yield mod.execute("confirm_payment_intent", [id, source]);
-      this._loading.next("");
-      return {
-        success: true,
-        state: "approved",
-        invoice_id: id,
-        amount,
-        created_at: Date.now(),
-        updated_at: Date.now()
-      };
-    });
+  async _processPayment(amount, customer_id, card_details) {
+    this._loading.next("Checking payment method...");
+    console.log("Getting payment method...");
+    const source = card_details ? await this._addPaymentMethod(card_details) : this._active_card.getValue();
+    if (!source)
+      throw "No payment source selected";
+    this._loading.next("Processing payment...");
+    console.log("Processing payment...");
+    const mod = this._org.module("payments", STRIPE_MODULE);
+    if (!mod)
+      throw "Unable to load module";
+    const id = await mod.execute("create_payment_intent", [
+      amount,
+      this._org.building.currency || "USD",
+      null,
+      null,
+      customer_id,
+      null,
+      null,
+      null,
+      currentUser()?.email
+    ]);
+    if (!id)
+      throw "Failed to create payment";
+    console.log("Confirming payment...");
+    await mod.execute("confirm_payment_intent", [id, source]);
+    this._loading.next("");
+    return {
+      success: true,
+      state: "approved",
+      invoice_id: id,
+      amount,
+      created_at: Date.now(),
+      updated_at: Date.now()
+    };
   }
-  _newCustomerID() {
-    return __async(this, null, function* () {
-      const mod = this._org.module("payments", STRIPE_MODULE);
-      if (!mod)
-        throw "Unable to load module";
-      const user = currentUser();
-      const id = yield mod.execute("create_customer", [
-        0,
-        null,
-        null,
-        null,
-        `${user.id}|${user.name}|FromPlaceOS`,
-        user.email
-      ]);
-      return id;
-    });
+  async _newCustomerID() {
+    const mod = this._org.module("payments", STRIPE_MODULE);
+    if (!mod)
+      throw "Unable to load module";
+    const user = currentUser();
+    const id = await mod.execute("create_customer", [
+      0,
+      null,
+      null,
+      null,
+      `${user.id}|${user.name}|FromPlaceOS`,
+      user.email
+    ]);
+    return id;
   }
 };
 _PaymentsService.\u0275fac = function PaymentsService_Factory(__ngFactoryType__) {
@@ -6132,22 +6136,20 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
       this._assets.setOptions({ date, duration });
       this.storeForm();
     }));
-    this.timeout("date", () => __async(this, null, function* () {
-      return this.form.patchValue({
-        date: booking.date,
-        duration: booking.duration
-      });
+    this.timeout("date", async () => this.form.patchValue({
+      date: booking.date,
+      duration: booking.duration
     }));
     this._booking.next(new Booking(booking));
     this._options.next({ type: this._options.getValue().type });
-    this.timeout("set-resource", () => __async(this, null, function* () {
+    this.timeout("set-resource", async () => {
       const resources = this.form.getRawValue().resources;
       if (!resources?.length)
         return;
-      const item_list = yield nextValueFrom(this.resources);
+      const item_list = await nextValueFrom(this.resources);
       const new_list = resources.map((asset) => item_list.find((_2) => _2.id == asset.id) || asset);
       this.form.patchValue({ resources: new_list });
-    }));
+    });
   }
   constructor() {
     super();
@@ -6328,250 +6330,240 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
     const event = new Booking(__spreadValues(__spreadValues({}, this.booking), this.form.getRawValue()));
     this._dialog.open(BookingLinkModalComponent, { data: event });
   }
-  confirmPost() {
-    return __async(this, null, function* () {
-      yield this.checkQuestions();
-      const options = this._options.getValue();
-      const value = this.form.getRawValue();
-      console.log("i18n:", i18n("BOOKINGS.CONFIRM_MSG"));
-      const content = i18n(options.group ? "BOOKINGS.CONFIRM_MSG_GROUP" : "BOOKINGS.CONFIRM_MSG", {
-        type: options.type,
-        date: format(value.date, "dd MMM yyyy") + (value.duration < 12 * 60 ? " at " + format(value.date, "h:mm a") : "")
-      });
-      const details = yield openConfirmModal({
-        title: i18n("BOOKINGS.CONFIRM_TITLE", { type: options.type }),
-        content,
-        icon: { content: "event_available" }
-      }, this._dialog);
-      if (details?.reason !== "done")
-        throw "User cancelled";
-      details.loading(i18n("BOOKINGS.CONFIRM_LOADING"));
-      if (options.group) {
-        yield this.postFormForGroup().catch((_2) => {
-          notifyError(JSON.stringify(_2));
-          details.close();
-          throw _2;
-        });
-      } else
-        yield this.postForm().catch((_2) => {
-          notifyError(JSON.stringify(_2));
-          details.close();
-          throw _2;
-        });
-      details.close();
+  async confirmPost() {
+    await this.checkQuestions();
+    const options = this._options.getValue();
+    const value = this.form.getRawValue();
+    console.log("i18n:", i18n("BOOKINGS.CONFIRM_MSG"));
+    const content = i18n(options.group ? "BOOKINGS.CONFIRM_MSG_GROUP" : "BOOKINGS.CONFIRM_MSG", {
+      type: options.type,
+      date: format(value.date, "dd MMM yyyy") + (value.duration < 12 * 60 ? " at " + format(value.date, "h:mm a") : "")
     });
-  }
-  postForm(ignore_check = false) {
-    return __async(this, null, function* () {
-      if (!this.form)
-        throw "No form for booking";
-      if (!this.form.valid)
-        throw `Some form fields are invalid. [${getInvalidFields(this.form).join(", ")}]`;
-      this.form.patchValue({
-        booking_type: this.form.getRawValue().booking_type || this._options.getValue().type
+    const details = await openConfirmModal({
+      title: i18n("BOOKINGS.CONFIRM_TITLE", { type: options.type }),
+      content,
+      icon: { content: "event_available" }
+    }, this._dialog);
+    if (details?.reason !== "done")
+      throw "User cancelled";
+    details.loading(i18n("BOOKINGS.CONFIRM_LOADING"));
+    if (options.group) {
+      await this.postFormForGroup().catch((_2) => {
+        notifyError(JSON.stringify(_2));
+        details.close();
+        throw _2;
       });
-      const value = this.form.getRawValue();
-      const booking = this._booking.getValue() || new Booking();
-      if (!ignore_check) {
-        yield this.checkResourceAvailable(__spreadProps(__spreadValues(__spreadValues({}, booking), value), {
-          user_email: value.user?.email || value.user_email || currentUser()?.email
-        }), this._options.getValue().type);
+    } else
+      await this.postForm().catch((_2) => {
+        notifyError(JSON.stringify(_2));
+        details.close();
+        throw _2;
+      });
+    details.close();
+  }
+  async postForm(ignore_check = false) {
+    if (!this.form)
+      throw "No form for booking";
+    if (!this.form.valid)
+      throw `Some form fields are invalid. [${getInvalidFields(this.form).join(", ")}]`;
+    this.form.patchValue({
+      booking_type: this.form.getRawValue().booking_type || this._options.getValue().type
+    });
+    const value = this.form.getRawValue();
+    const booking = this._booking.getValue() || new Booking();
+    if (!ignore_check) {
+      await this.checkResourceAvailable(__spreadProps(__spreadValues(__spreadValues({}, booking), value), {
+        user_email: value.user?.email || value.user_email || currentUser()?.email
+      }), this._options.getValue().type);
+    }
+    if (this._payments.enabled) {
+      const receipt = await this._payments.makePayment({
+        type: this._options.getValue().type,
+        resource_name: value.asset_name,
+        date: value.date,
+        duration: value.duration,
+        all_day: value.all_day
+      });
+      if (!receipt?.success)
+        return;
+      value.extension_data = {
+        invoice: receipt,
+        invoice_id: receipt.invoice_id
+      };
+    }
+    value.zones = unique([
+      ...value?.zones || [],
+      ...this._booking.getValue()?.zones || [],
+      ...value.booking_asset?.zones || []
+    ].filter((_2) => _2));
+    this._loading.next("Saving booking");
+    delete value.booking_asset;
+    if (value.all_day) {
+      value.date = startOfDay(value.date).valueOf();
+      value.duration = 24 * 60 - 1;
+    }
+    const { event_id, parent_id } = value;
+    delete value.event_id;
+    const resources = value.resources || [];
+    const zone = this._org.levelWithID(resources[0]?.zone_id) || resources[0]?.zone;
+    const zones = zone && zone instanceof Object ? unique([
+      this._org.organisation.id,
+      this._org.region?.id,
+      zone.parent_id,
+      zone.id
+    ]) : [this._org.organisation.id, this._org.region?.id];
+    const q2 = event_id ? { ical_uid: value.ical_uid, event_id } : parent_id ? { booking_id: parent_id } : {};
+    if (booking.instance && !value.update_master) {
+      q2.instance = true;
+      q2.start_time = booking.booking_start;
+    }
+    if (value.recurrence_type && value.recurrence_type !== "none") {
+      const available_period = getUnixTime(endOfDay(addDays(Date.now(), this._settings.get(`app.${value.booking_type}s.available_period`) || 90)));
+      if (!value.recurrence_end || value.recurrence_end > available_period) {
+        value.recurrence_end = available_period;
       }
-      if (this._payments.enabled) {
-        const receipt = yield this._payments.makePayment({
-          type: this._options.getValue().type,
-          resource_name: value.asset_name,
-          date: value.date,
-          duration: value.duration,
-          all_day: value.all_day
-        });
-        if (!receipt?.success)
-          return;
-        value.extension_data = {
-          invoice: receipt,
-          invoice_id: receipt.invoice_id
-        };
-      }
-      value.zones = unique([
-        ...value?.zones || [],
-        ...this._booking.getValue()?.zones || [],
-        ...value.booking_asset?.zones || []
-      ].filter((_2) => _2));
-      this._loading.next("Saving booking");
-      delete value.booking_asset;
-      if (value.all_day) {
-        value.date = startOfDay(value.date).valueOf();
-        value.duration = 24 * 60 - 1;
-      }
-      const { event_id, parent_id } = value;
-      delete value.event_id;
-      const resources = value.resources || [];
-      const zone = this._org.levelWithID(resources[0]?.zone_id) || resources[0]?.zone;
-      const zones = zone && zone instanceof Object ? unique([
-        this._org.organisation.id,
-        this._org.region?.id,
-        zone.parent_id,
-        zone.id
-      ]) : [this._org.organisation.id, this._org.region?.id];
-      const q2 = event_id ? { ical_uid: value.ical_uid, event_id } : parent_id ? { booking_id: parent_id } : {};
-      if (booking.instance && !value.update_master) {
-        q2.instance = true;
-        q2.start_time = booking.booking_start;
-      }
-      if (value.recurrence_type && value.recurrence_type !== "none") {
-        const available_period = getUnixTime(endOfDay(addDays(Date.now(), this._settings.get(`app.${value.booking_type}s.available_period`) || 90)));
-        if (!value.recurrence_end || value.recurrence_end > available_period) {
-          value.recurrence_end = available_period;
-        }
-      }
-      const result = yield lastValueFrom(saveBooking(new Booking(__spreadProps(__spreadValues(__spreadValues({}, this._options.getValue()), value), {
-        description: value.asset_name || value.description,
-        user_name: value.user?.name || value.user_name,
-        user_email: value.user?.email || value.user_email,
-        extension_data: __spreadProps(__spreadValues({}, value.extension_data || {}), {
-          assets: value.assets.map((_2) => _2.toJSON()),
-          group: value.group,
-          phone: value.phone,
-          department: value.user?.department || currentUser()?.department
-        }),
-        approved: this._settings.get("app.bookings.no_approval") === true,
+    }
+    const result = await lastValueFrom(saveBooking(new Booking(__spreadProps(__spreadValues(__spreadValues({}, this._options.getValue()), value), {
+      description: value.asset_name || value.description,
+      user_name: value.user?.name || value.user_name,
+      user_email: value.user?.email || value.user_email,
+      extension_data: __spreadProps(__spreadValues({}, value.extension_data || {}), {
+        assets: value.assets.map((_2) => _2.toJSON()),
+        group: value.group,
+        phone: value.phone,
+        department: value.user?.department || currentUser()?.department
+      }),
+      approved: this._settings.get("app.bookings.no_approval") === true,
+      zones: unique([...zones, ...value.zones || []]).filter((_2) => _2)
+    })), q2)).catch((e) => {
+      this._loading.next("");
+      throw e?.error || e;
+    });
+    if (value.assets?.length || booking.extension_data.assets?.length) {
+      const requests = await validateAssetRequestsForResource(__spreadProps(__spreadValues({}, result), { from_booking: true }), {
+        date: value.date,
+        duration: value.duration,
+        all_day: value.all_day,
+        host: value.booked_by_email,
         zones: unique([...zones, ...value.zones || []]).filter((_2) => _2)
-      })), q2)).catch((e) => {
+      }, value.assets).catch((e) => {
+        console.error("Couldn't update asset requests", e);
+        if (e?.status === 409) {
+          notifyError(i18n("BOOKINGS.ASSETS_CLASH_ERROR"));
+        }
         this._loading.next("");
         throw e?.error || e;
       });
-      if (value.assets?.length || booking.extension_data.assets?.length) {
-        const requests = yield validateAssetRequestsForResource(__spreadProps(__spreadValues({}, result), { from_booking: true }), {
-          date: value.date,
-          duration: value.duration,
-          all_day: value.all_day,
-          host: value.booked_by_email,
-          zones: unique([...zones, ...value.zones || []]).filter((_2) => _2)
-        }, value.assets).catch((e) => {
-          console.error("Couldn't update asset requests", e);
-          if (e?.status === 409) {
-            notifyError(i18n("BOOKINGS.ASSETS_CLASH_ERROR"));
-          }
-          this._loading.next("");
-          throw e?.error || e;
-        });
-        if (!requests)
-          throw i18n("BOOKINGS.ASSETS_INVALID_ERROR");
-        yield requests();
-      }
-      this._loading.next("");
-      const { booking_type } = value;
-      this.clearForm();
-      this.form?.patchValue({ booking_type });
-      this.last_success = result;
-      sessionStorage.setItem("PLACEOS.last_booked_booking", JSON.stringify(result));
-      this.setView("success");
-      return result;
-    });
+      if (!requests)
+        throw i18n("BOOKINGS.ASSETS_INVALID_ERROR");
+      await requests();
+    }
+    this._loading.next("");
+    const { booking_type } = value;
+    this.clearForm();
+    this.form?.patchValue({ booking_type });
+    this.last_success = result;
+    sessionStorage.setItem("PLACEOS.last_booked_booking", JSON.stringify(result));
+    this.setView("success");
+    return result;
   }
-  postFormForGroup() {
-    return __async(this, null, function* () {
-      const { members, group, type } = this._options.getValue();
-      if (!group)
-        throw i18n("BOOKINGS.GROUP_NOT_SET");
-      const extra_members = members.filter((_2) => _2.email !== currentUser().email);
-      if (extra_members.length <= 0)
-        throw i18n("BOOKINGS.GROUP_NO_MEMBERS");
-      const form = this.form.getRawValue();
-      const asset_list = yield nextValueFrom(this.available_resources);
-      const active_resource = asset_list.find((_2) => _2.id === form.asset_id || _2.map_id === form.asset_id);
-      const level = this._org.levelWithID([active_resource.zone?.id]);
-      const resources = [
-        active_resource,
-        ...yield this._getNearbyResources(level.map_id, form.asset_id, asset_list, extra_members.length)
-      ];
-      const group_members = unique([currentUser(), ...extra_members], "email");
-      const available = yield Promise.all(group_members.map((_2, idx) => this.checkResourceAvailable(__spreadProps(__spreadValues({}, form), {
-        asset_id: resources[idx].map_id || resources[idx].id,
-        user_email: _2.email
-      }), type)));
-      const unavailable = group_members.filter((_2, idx) => !available[idx]);
-      const group_name = `${currentUser().email}[${format(Date.now(), "yyyy-MM-dd")}]`;
-      let id = "";
-      for (let i = 0; i < group_members.length; i++) {
-        if (!available[i])
-          continue;
-        const user = group_members[i];
-        const asset = resources[i];
-        const assets = user.email == currentUser().email ? form.assets : [];
-        this.form.patchValue(__spreadProps(__spreadValues({}, form), {
-          assets,
-          parent_id: id,
-          user,
-          user_email: user.email,
-          user_id: user.id,
-          asset_id: asset?.id,
-          asset_name: asset.name,
-          description: asset.name,
-          map_id: asset?.map_id || asset?.id,
-          group: group_name,
-          zones: (asset.zone ? unique([
-            this._org.organisation.id,
-            this._org.region?.id,
-            asset?.zone?.parent_id,
-            asset?.zone?.id
-          ]) : [this._org.organisation.id, this._org.region?.id]).filter((_2) => _2)
-        }));
-        const bkn = yield this.postForm(true);
-        if (bkn.id && !id)
-          id = bkn.id;
-      }
-      if (unavailable.length) {
-        notifyWarn(i18n("BOOKINGS.GROUP_SOME_HAVE_BOOKINGS", {
-          members: unavailable.map((_2) => _2.name || _2.email)?.join(", ")
-        }));
-      }
-    });
+  async postFormForGroup() {
+    const { members, group, type } = this._options.getValue();
+    if (!group)
+      throw i18n("BOOKINGS.GROUP_NOT_SET");
+    const extra_members = members.filter((_2) => _2.email !== currentUser().email);
+    if (extra_members.length <= 0)
+      throw i18n("BOOKINGS.GROUP_NO_MEMBERS");
+    const form = this.form.getRawValue();
+    const asset_list = await nextValueFrom(this.available_resources);
+    const active_resource = asset_list.find((_2) => _2.id === form.asset_id || _2.map_id === form.asset_id);
+    const level = this._org.levelWithID([active_resource.zone?.id]);
+    const resources = [
+      active_resource,
+      ...await this._getNearbyResources(level.map_id, form.asset_id, asset_list, extra_members.length)
+    ];
+    const group_members = unique([currentUser(), ...extra_members], "email");
+    const available = await Promise.all(group_members.map((_2, idx) => this.checkResourceAvailable(__spreadProps(__spreadValues({}, form), {
+      asset_id: resources[idx].map_id || resources[idx].id,
+      user_email: _2.email
+    }), type)));
+    const unavailable = group_members.filter((_2, idx) => !available[idx]);
+    const group_name = `${currentUser().email}[${format(Date.now(), "yyyy-MM-dd")}]`;
+    let id = "";
+    for (let i = 0; i < group_members.length; i++) {
+      if (!available[i])
+        continue;
+      const user = group_members[i];
+      const asset = resources[i];
+      const assets = user.email == currentUser().email ? form.assets : [];
+      this.form.patchValue(__spreadProps(__spreadValues({}, form), {
+        assets,
+        parent_id: id,
+        user,
+        user_email: user.email,
+        user_id: user.id,
+        asset_id: asset?.id,
+        asset_name: asset.name,
+        description: asset.name,
+        map_id: asset?.map_id || asset?.id,
+        group: group_name,
+        zones: (asset.zone ? unique([
+          this._org.organisation.id,
+          this._org.region?.id,
+          asset?.zone?.parent_id,
+          asset?.zone?.id
+        ]) : [this._org.organisation.id, this._org.region?.id]).filter((_2) => _2)
+      }));
+      const bkn = await this.postForm(true);
+      if (bkn.id && !id)
+        id = bkn.id;
+    }
+    if (unavailable.length) {
+      notifyWarn(i18n("BOOKINGS.GROUP_SOME_HAVE_BOOKINGS", {
+        members: unavailable.map((_2) => _2.name || _2.email)?.join(", ")
+      }));
+    }
   }
-  checkQuestions() {
-    return __async(this, null, function* () {
-      if (this._settings.get("app.desks.ignore_questions") !== false)
-        return;
-      const ref = this._dialog.open(DeskQuestionsModalComponent);
-      const result = yield Promise.race([
-        ref.componentInstance.event.pipe(first((_2) => _2.reason === "done")).toPromise(),
-        ref.afterClosed().toPromise()
-      ]);
-      if (result?.reason !== "done")
-        throw "User cancelled";
-      const form = ref.componentInstance.form.getRawValue();
-      for (const key in form) {
-        if (form[key])
-          throw "User failed questionaire";
-      }
-      ref.close();
-    });
+  async checkQuestions() {
+    if (this._settings.get("app.desks.ignore_questions") !== false)
+      return;
+    const ref = this._dialog.open(DeskQuestionsModalComponent);
+    const result = await Promise.race([
+      ref.componentInstance.event.pipe(first((_2) => _2.reason === "done")).toPromise(),
+      ref.afterClosed().toPromise()
+    ]);
+    if (result?.reason !== "done")
+      throw "User cancelled";
+    const form = ref.componentInstance.form.getRawValue();
+    for (const key in form) {
+      if (form[key])
+        throw "User failed questionaire";
+    }
+    ref.close();
   }
   /** Check if the given resource is available for the selected user to book */
-  checkResourceAvailable(_0, _1) {
-    return __async(this, arguments, function* ({ id, asset_id, date, duration, user_email }, type) {
-      if (!user_email)
-        throw i18n("BOOKINGS.NO_USER");
-      if (type === "group-event")
-        return true;
-      const bookings = yield queryBookings({
-        period_start: getUnixTime(date),
-        period_end: getUnixTime(date + duration * 60 * 1e3),
-        type,
-        email: user_email,
-        limit: 1e3
-      }).toPromise();
-      const active_bookings = bookings.filter((_2) => _2.status !== "declined" && _2.status !== "cancelled" && !_2.rejected);
-      if (active_bookings.find((_2) => _2.asset_id === asset_id && id !== _2.id)) {
-        throw i18n(asset_id.includes("@") ? "BOOKINGS.VISITOR_BOOKED" : "BOOKINGS.RESOURCE_BOOKED", { name: asset_id });
-      }
-      const allowed_bookings = this._settings.get(`app.bookings.allowed_daily_${type}_count`) ?? 1;
-      if (allowed_bookings > 0 && active_bookings.filter((_2) => _2.user_email.toLowerCase() === (user_email || currentUser()?.email || "").toLowerCase() && _2.id !== id).length >= allowed_bookings) {
-        const current = user_email === currentUser()?.email;
-        throw i18n(current ? "BOOKINGS.CLASH_CURRENT_USER" : "BOOKINGS.CLASH_OTHER_USER", { name: user_email });
-      }
+  async checkResourceAvailable({ id, asset_id, date, duration, user_email }, type) {
+    if (!user_email)
+      throw i18n("BOOKINGS.NO_USER");
+    if (type === "group-event")
       return true;
-    });
+    const bookings = await queryBookings({
+      period_start: getUnixTime(date),
+      period_end: getUnixTime(date + duration * 60 * 1e3),
+      type,
+      email: user_email,
+      limit: 1e3
+    }).toPromise();
+    const active_bookings = bookings.filter((_2) => _2.status !== "declined" && _2.status !== "cancelled" && !_2.rejected);
+    if (active_bookings.find((_2) => _2.asset_id === asset_id && id !== _2.id)) {
+      throw i18n(asset_id.includes("@") ? "BOOKINGS.VISITOR_BOOKED" : "BOOKINGS.RESOURCE_BOOKED", { name: asset_id });
+    }
+    const allowed_bookings = this._settings.get(`app.bookings.allowed_daily_${type}_count`) ?? 1;
+    if (allowed_bookings > 0 && active_bookings.filter((_2) => _2.user_email.toLowerCase() === (user_email || currentUser()?.email || "").toLowerCase() && _2.id !== id).length >= allowed_bookings) {
+      const current = user_email === currentUser()?.email;
+      throw i18n(current ? "BOOKINGS.CLASH_CURRENT_USER" : "BOOKINGS.CLASH_OTHER_USER", { name: user_email });
+    }
+    return true;
   }
   loadResourceList(type) {
     const use_region = this._settings.get("app.use_region");
@@ -6589,19 +6581,17 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
       name: type
     }).pipe(map((data) => flatten(data.map(map_metadata))));
   }
-  _getNearbyResources(map_url, id, resources, count) {
-    return __async(this, null, function* () {
-      const nearby_resources = [];
-      let asset_list = resources.filter((_2) => _2.id !== id && _2.map_id !== id);
-      for (let i = 0; i < count; i++) {
-        const item = yield findNearbyFeature(map_url, id, asset_list.map((_2) => _2.map_id || _2.id));
-        if (item) {
-          nearby_resources.push(resources.find((_2) => _2.id === item || _2.map_id === item));
-          asset_list = asset_list.filter((_2) => _2.id !== item && _2.map_id !== item);
-        }
+  async _getNearbyResources(map_url, id, resources, count) {
+    const nearby_resources = [];
+    let asset_list = resources.filter((_2) => _2.id !== id && _2.map_id !== id);
+    for (let i = 0; i < count; i++) {
+      const item = await findNearbyFeature(map_url, id, asset_list.map((_2) => _2.map_id || _2.id));
+      if (item) {
+        nearby_resources.push(resources.find((_2) => _2.id === item || _2.map_id === item));
+        asset_list = asset_list.filter((_2) => _2.id !== item && _2.map_id !== item);
       }
-      return nearby_resources;
-    });
+    }
+    return nearby_resources;
   }
 };
 _BookingFormService.\u0275fac = function BookingFormService_Factory(__ngFactoryType__) {
@@ -6693,4 +6683,4 @@ export {
   showStaff,
   UserSearchFieldComponent
 };
-//# sourceMappingURL=chunk-YCEH6UEA.js.map
+//# sourceMappingURL=chunk-SQYVM4WQ.js.map

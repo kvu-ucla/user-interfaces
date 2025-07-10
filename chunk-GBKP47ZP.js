@@ -73,12 +73,11 @@ import {
   ɵɵresetView,
   ɵɵrestoreView,
   ɵɵviewQuery
-} from "./chunk-IPNUB35F.js";
+} from "./chunk-3RERMB4V.js";
 import {
-  __async,
   __spreadProps,
   __spreadValues
-} from "./chunk-XWLXMCJQ.js";
+} from "./chunk-653SOEEV.js";
 
 // node_modules/@angular/material/fesm2022/checkbox.mjs
 var _c0 = ["input"];
@@ -801,100 +800,90 @@ var _CheckinStateService = class _CheckinStateService {
     this._error.next(message);
   }
   /** Load guest and event data */
-  loadGuestAndEvent(email, event_id) {
-    return __async(this, null, function* () {
-      const guest = yield lastValueFrom(showGuest(email));
-      if (event_id) {
-        const event = yield lastValueFrom(showBooking(event_id));
-        this._guest.next(guest);
-        this._booking.next(event);
-        this._form.next(generateGuestForm(guest, event.user_email));
-        return { guest, event };
-      }
-      if (guest.booking) {
-        this._guest.next(guest);
-        this._booking.next(guest.booking);
-        this._form.next(generateGuestForm(guest, guest.booking.user_email));
-        return { guest, event: guest.booking };
-      }
-      let upcoming = yield lastValueFrom(queryAllBookings({
-        type: "visitor",
-        period_start: getUnixTime(Date.now()),
-        period_end: getUnixTime(addMinutes(Date.now(), 120))
-      }));
-      upcoming = upcoming.filter((_) => _.user_email === email || _.asset_id === email);
-      const today = /* @__PURE__ */ new Date();
-      const todays_events = upcoming.filter((event) => isSameDay(new Date(event.date), today));
-      todays_events.sort((a, b) => a.date - b.date);
-      if (todays_events.length <= 0) {
-        throw new Error(i18n("APP.VISITOR_KIOSK.NOT_FOUND", { email }));
-      }
+  async loadGuestAndEvent(email, event_id) {
+    const guest = await lastValueFrom(showGuest(email));
+    if (event_id) {
+      const event = await lastValueFrom(showBooking(event_id));
       this._guest.next(guest);
-      this._booking.next(todays_events[0]);
-      this._form.next(generateGuestForm(guest, todays_events[0].user_email));
-      return { guest, event: todays_events[0] };
-    });
+      this._booking.next(event);
+      this._form.next(generateGuestForm(guest, event.user_email));
+      return { guest, event };
+    }
+    if (guest.booking) {
+      this._guest.next(guest);
+      this._booking.next(guest.booking);
+      this._form.next(generateGuestForm(guest, guest.booking.user_email));
+      return { guest, event: guest.booking };
+    }
+    let upcoming = await lastValueFrom(queryAllBookings({
+      type: "visitor",
+      period_start: getUnixTime(Date.now()),
+      period_end: getUnixTime(addMinutes(Date.now(), 120))
+    }));
+    upcoming = upcoming.filter((_) => _.user_email === email || _.asset_id === email);
+    const today = /* @__PURE__ */ new Date();
+    const todays_events = upcoming.filter((event) => isSameDay(new Date(event.date), today));
+    todays_events.sort((a, b) => a.date - b.date);
+    if (todays_events.length <= 0) {
+      throw new Error(i18n("APP.VISITOR_KIOSK.NOT_FOUND", { email }));
+    }
+    this._guest.next(guest);
+    this._booking.next(todays_events[0]);
+    this._form.next(generateGuestForm(guest, todays_events[0].user_email));
+    return { guest, event: todays_events[0] };
   }
-  updateGuest(data) {
-    return __async(this, null, function* () {
-      const guest = this._guest.getValue();
-      const form = this._form.getValue();
-      if (!guest || !form)
-        return;
-      const booking = this._booking.getValue() || guest.extension_data.event;
-      if (!booking || this.metadata || !form.value)
-        return;
-      const updated_booking = yield lastValueFrom(updateBooking(booking.id, new Booking(__spreadProps(__spreadValues({}, booking), {
-        asset_id: form.value.email || booking.asset_id,
-        asset_name: form.value.name || booking.asset_name,
-        description: form.value.name || booking.description,
-        extension_data: __spreadProps(__spreadValues({}, booking.extension_data), {
-          pass_number: form.value.pass_number || booking.extension_data?.pass_number,
-          organisation: form.value.organisation || booking.extension_data?.organisation,
-          phone: form.value.phone || booking.extension_data?.phone
-        })
-      })).toJSON()));
-      this.setBooking(updated_booking);
-    });
+  async updateGuest(data) {
+    const guest = this._guest.getValue();
+    const form = this._form.getValue();
+    if (!guest || !form)
+      return;
+    const booking = this._booking.getValue() || guest.extension_data.event;
+    if (!booking || this.metadata || !form.value)
+      return;
+    const updated_booking = await lastValueFrom(updateBooking(booking.id, new Booking(__spreadProps(__spreadValues({}, booking), {
+      asset_id: form.value.email || booking.asset_id,
+      asset_name: form.value.name || booking.asset_name,
+      description: form.value.name || booking.description,
+      extension_data: __spreadProps(__spreadValues({}, booking.extension_data), {
+        pass_number: form.value.pass_number || booking.extension_data?.pass_number,
+        organisation: form.value.organisation || booking.extension_data?.organisation,
+        phone: form.value.phone || booking.extension_data?.phone
+      })
+    })).toJSON()));
+    this.setBooking(updated_booking);
   }
-  completeInduction() {
-    return __async(this, null, function* () {
-      const guest = this._guest.getValue();
-      const event = this._booking.getValue() || guest.extension_data.event;
-      if (!guest || !event)
-        return;
-      yield lastValueFrom(updateBookingInductionStatus(event.id, "accepted"));
-    });
+  async completeInduction() {
+    const guest = this._guest.getValue();
+    const event = this._booking.getValue() || guest.extension_data.event;
+    if (!guest || !event)
+      return;
+    await lastValueFrom(updateBookingInductionStatus(event.id, "accepted"));
   }
-  declineInduction() {
-    return __async(this, null, function* () {
-      const guest = this._guest.getValue();
-      const event = this._booking.getValue() || guest.extension_data.event;
-      if (!guest || !event)
-        return;
-      yield lastValueFrom(updateBookingInductionStatus(event.id, "declined"));
-    });
+  async declineInduction() {
+    const guest = this._guest.getValue();
+    const event = this._booking.getValue() || guest.extension_data.event;
+    if (!guest || !event)
+      return;
+    await lastValueFrom(updateBookingInductionStatus(event.id, "declined"));
   }
-  checkinGuest(state = true) {
-    return __async(this, null, function* () {
-      const guest = this._guest.getValue();
-      const event = this._booking.getValue() || guest.extension_data.event;
-      if (!guest || !event)
-        return;
-      const checkin_fn = lastValueFrom(checkinBooking(event.id, state));
-      const vars = {
-        guest: guest.name,
-        host: event.user_name || event.user_email
-      };
-      const result = yield checkin_fn.catch((e) => __async(this, null, function* () {
-        notifyError(e || i18n("APP.VISITOR_KIOSK.ERROR_CHECKIN", vars));
-        throw e;
-      }));
-      if (!result)
-        return;
-      notifySuccess(i18n("APP.VISITOR_KIOSK.SUCCESS_CHECKIN", vars));
-      this.metadata = "";
+  async checkinGuest(state = true) {
+    const guest = this._guest.getValue();
+    const event = this._booking.getValue() || guest.extension_data.event;
+    if (!guest || !event)
+      return;
+    const checkin_fn = lastValueFrom(checkinBooking(event.id, state));
+    const vars = {
+      guest: guest.name,
+      host: event.user_name || event.user_email
+    };
+    const result = await checkin_fn.catch(async (e) => {
+      notifyError(e || i18n("APP.VISITOR_KIOSK.ERROR_CHECKIN", vars));
+      throw e;
     });
+    if (!result)
+      return;
+    notifySuccess(i18n("APP.VISITOR_KIOSK.SUCCESS_CHECKIN", vars));
+    this.metadata = "";
   }
   printPass() {
     try {
@@ -924,4 +913,4 @@ export {
   MatCheckbox,
   MatCheckboxModule
 };
-//# sourceMappingURL=chunk-MC2BORTQ.js.map
+//# sourceMappingURL=chunk-GBKP47ZP.js.map

@@ -2,12 +2,12 @@ import {
   CheckinStateService,
   MatCheckbox,
   MatCheckboxModule
-} from "./chunk-MC2BORTQ.js";
+} from "./chunk-GBKP47ZP.js";
 import {
   generateQRCode,
   showEventMetadata,
   updateEventMetadata
-} from "./chunk-UWKBAE6K.js";
+} from "./chunk-V36NOPWC.js";
 import {
   ActivatedRoute,
   AsyncHandler,
@@ -83,6 +83,7 @@ import {
   saveBooking,
   setClassMetadata,
   shareReplay,
+  signal,
   startOfMinute,
   startWith,
   switchMap,
@@ -139,12 +140,11 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuerySignal
-} from "./chunk-IPNUB35F.js";
+} from "./chunk-3RERMB4V.js";
 import {
-  __async,
   __spreadProps,
   __spreadValues
-} from "./chunk-XWLXMCJQ.js";
+} from "./chunk-653SOEEV.js";
 
 // apps/visitor-kiosk/src/app/components/take-photo.component.ts
 var _c0 = ["video"];
@@ -247,13 +247,11 @@ var _TakePhotoComponent = class _TakePhotoComponent extends AsyncHandler {
   ngOnDestroy() {
     this.stopCapture();
   }
-  startCapture() {
-    return __async(this, null, function* () {
-      this.image_url = null;
-      const stream = yield navigator.mediaDevices?.getUserMedia(this.constraints);
-      this._video_el().nativeElement.srcObject = stream;
-      this.loading = false;
-    });
+  async startCapture() {
+    this.image_url = null;
+    const stream = await navigator.mediaDevices?.getUserMedia(this.constraints);
+    this._video_el().nativeElement.srcObject = stream;
+    this.loading = false;
   }
   stopCapture() {
     const el = this._video_el().nativeElement;
@@ -759,35 +757,31 @@ var _CheckinDetailsComponent = class _CheckinDetailsComponent {
   get allow_user_photo() {
     return this._settings.get("app.allow_user_photo") && this._settings.get("app.allow_printing_label") !== false;
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      const form = yield nextValueFrom(this.form.pipe(first()));
-      const event = yield nextValueFrom(this._checkin.event.pipe(first()));
-      if (this._checkin.metadata === "registered") {
-        this.updateGuest(false);
-      } else {
-        !form || !form.value.email ? this.previous() : "";
-      }
-    });
+  async ngOnInit() {
+    const form = await nextValueFrom(this.form.pipe(first()));
+    const event = await nextValueFrom(this._checkin.event.pipe(first()));
+    if (this._checkin.metadata === "registered") {
+      this.updateGuest(false);
+    } else {
+      !form || !form.value.email ? this.previous() : "";
+    }
   }
-  updateGuest(update = true) {
-    return __async(this, null, function* () {
-      this.loading = true;
-      if (update)
-        yield this._checkin.updateGuest();
-      const result = yield this._checkin.checkinGuest().then(() => true).catch(() => false);
-      this.loading = false;
-      if (!result)
-        return;
-      if (this.induction_after_details) {
-        this._router.navigate(["/checkin", "induction"]);
-      } else {
-        this._router.navigate([
-          "/checkin",
-          this.allow_user_photo ? "photo" : "results"
-        ]);
-      }
-    });
+  async updateGuest(update = true) {
+    this.loading = true;
+    if (update)
+      await this._checkin.updateGuest();
+    const result = await this._checkin.checkinGuest().then(() => true).catch(() => false);
+    this.loading = false;
+    if (!result)
+      return;
+    if (this.induction_after_details) {
+      this._router.navigate(["/checkin", "induction"]);
+    } else {
+      this._router.navigate([
+        "/checkin",
+        this.allow_user_photo ? "photo" : "results"
+      ]);
+    }
   }
   previous() {
     this._router.navigate(["/checkin", "scan"]);
@@ -1043,50 +1037,44 @@ var _CheckinInductionComponent = class _CheckinInductionComponent {
   get is_enabled() {
     return this._settings.get("app.induction_enabled") && this._settings.get("app.induction_details");
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      const event = yield this.event.pipe(first()).toPromise();
-      if (!event)
-        this._router.navigate(["/checkin"]);
-      if (!this.is_enabled || event.induction === "accepted") {
-        if (this.induction_after_details) {
-          this._router.navigate(["/checkin", "results"]);
-        } else {
-          this._router.navigate(["/checkin", "details"]);
-        }
-      }
-    });
-  }
-  decline() {
-    return __async(this, null, function* () {
-      this.loading = true;
-      yield this._checkin.declineInduction().catch((err) => {
-        notifyError("Error declining induction", err);
-        throw err;
-      });
-      this._checkin.setError("You have declined the induction.");
-      notifyInfo("Induction declined successfully");
-      this._router.navigate(["/checkin", "error"]);
-    });
-  }
-  continue() {
-    return __async(this, null, function* () {
-      this.loading = true;
-      yield this._checkin.completeInduction().catch((err) => {
-        notifyError("Error completing induction", err);
-        throw err;
-      });
-      notifySuccess("Induction completed successfully");
+  async ngOnInit() {
+    await this._org.initialised.pipe(first((_) => _)).toPromise();
+    const event = await this.event.pipe(first()).toPromise();
+    if (!event)
+      this._router.navigate(["/checkin"]);
+    if (!this.is_enabled || event.induction === "accepted") {
       if (this.induction_after_details) {
-        this._router.navigate([
-          "/checkin",
-          this.allow_user_photo ? "photo" : "results"
-        ]);
+        this._router.navigate(["/checkin", "results"]);
       } else {
         this._router.navigate(["/checkin", "details"]);
       }
+    }
+  }
+  async decline() {
+    this.loading = true;
+    await this._checkin.declineInduction().catch((err) => {
+      notifyError("Error declining induction", err);
+      throw err;
     });
+    this._checkin.setError("You have declined the induction.");
+    notifyInfo("Induction declined successfully");
+    this._router.navigate(["/checkin", "error"]);
+  }
+  async continue() {
+    this.loading = true;
+    await this._checkin.completeInduction().catch((err) => {
+      notifyError("Error completing induction", err);
+      throw err;
+    });
+    notifySuccess("Induction completed successfully");
+    if (this.induction_after_details) {
+      this._router.navigate([
+        "/checkin",
+        this.allow_user_photo ? "photo" : "results"
+      ]);
+    } else {
+      this._router.navigate(["/checkin", "details"]);
+    }
   }
 };
 _CheckinInductionComponent.\u0275fac = function CheckinInductionComponent_Factory(__ngFactoryType__) {
@@ -1243,15 +1231,13 @@ var _CheckinPhotoComponent = class _CheckinPhotoComponent {
   skip() {
     this._router.navigate(["/checkin", "results"]);
   }
-  handlePhoto(event) {
-    return __async(this, null, function* () {
-      if (!event)
-        return notifyError("Error saving image, please try again");
-      this.loading = true;
-      this._checkin.setPhoto(event);
-      this.loading = false;
-      this._router.navigate(["/checkin", "results"]);
-    });
+  async handlePhoto(event) {
+    if (!event)
+      return notifyError("Error saving image, please try again");
+    this.loading = true;
+    this._checkin.setPhoto(event);
+    this.loading = false;
+    this._router.navigate(["/checkin", "results"]);
   }
 };
 _CheckinPhotoComponent.\u0275fac = function CheckinPhotoComponent_Factory(__ngFactoryType__) {
@@ -1390,7 +1376,7 @@ function CheckinPreferencesComponent_Conditional_1_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275property("diameter", 32);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 2, ctx_r1.type === "menu" ? "APP.VISITOR_KIOSK.BEVERAGE_MENU_LOADING" : "APP.VISITOR_KIOSK.BEVERAGE_LOADING"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 2, ctx_r1.type() === "menu" ? "APP.VISITOR_KIOSK.BEVERAGE_MENU_LOADING" : "APP.VISITOR_KIOSK.BEVERAGE_LOADING"), " ");
   }
 }
 var _CheckinPreferencesComponent = class _CheckinPreferencesComponent extends AsyncHandler {
@@ -1401,24 +1387,24 @@ var _CheckinPreferencesComponent = class _CheckinPreferencesComponent extends As
     this._checkin = inject(CheckinStateService);
     this._settings = inject(SettingsService);
     this._org = inject(OrganisationService);
-    this.loading = false;
-    this.type = "menu";
+    this.loading = signal(false);
+    this.type = signal("menu");
     this.event = this._checkin.event;
     this.menu = this._org.active_building.pipe(filter((_) => !!_), switchMap((bld) => hu(bld.id, "catering").pipe(catchError(() => of({ details: [] })), map(({ details }) => details instanceof Array ? details : []), map((menu) => menu.map((i) => new CateringItem(i))))), map((menu) => menu.filter((_) => (_.tags || []).find((_2) => _2.toLowerCase() === "drink" || _2.toLowerCase() === "drinks" || _2.toLowerCase() === "beverage"))), startWith([]), shareReplay(1));
   }
   ngOnInit() {
-    this.loading = true;
-    this.subscription("", this._route.queryParamMap.subscribe((params) => __async(this, null, function* () {
+    this.loading.set(true);
+    this.subscription("", this._route.queryParamMap.subscribe(async (params) => {
       if (params.has("email")) {
-        yield this._checkin.loadGuestAndEvent(params.get("email"), params.get("event_id")).catch((err) => {
+        await this._checkin.loadGuestAndEvent(params.get("email"), params.get("event_id")).catch((err) => {
           this.handleError("Unable to find visitor or a meeting associated with the given email address.");
           throw err;
         });
       }
       if (params.has("jwt"))
         io(params.get("jwt"));
-    })));
-    this.type = "menu";
+    }));
+    this.type.set("menu");
     this.timeout("event", () => {
       this.event.pipe(first()).subscribe((event) => {
         if (!event)
@@ -1428,42 +1414,50 @@ var _CheckinPreferencesComponent = class _CheckinPreferencesComponent extends As
         }
       });
     }, 1e3);
-    this.subscription("menu", this.menu.subscribe((l) => l.length ? this.loading = false : ""));
-  }
-  update() {
-    return __async(this, null, function* () {
-      this.type = "save";
-      if (!this.beverage)
-        return this.next();
-      this.loading = true;
-      const booking = yield nextValueFrom(this._checkin.event);
-      if (!booking)
-        return notifyError(i18n("APP.VISITOR_KIOSK.LOAD_ERROR"));
-      yield lastValueFrom(updateBooking(booking.id, __spreadProps(__spreadValues({}, booking.toJSON()), {
-        extension_data: __spreadProps(__spreadValues({}, booking.extension_data), {
-          beverage: this.beverage
-        })
-      })));
-      if (booking.linked_event) {
-        const event = booking.linked_event;
-        const metadata = yield lastValueFrom(showEventMetadata(event.event_id, event.system_id));
-        const order_list = metadata.catering || [];
-        let order = order_list.find((_) => _.caterer == this.beverage.caterer) || new CateringOrder({ caterer: this.beverage.caterer });
-        order = yield this._createCateringOrder(booking, order, event);
-        yield lastValueFrom(updateEventMetadata(event.event_id, event.system_id, __spreadProps(__spreadValues({}, metadata), {
-          catering: [
-            ...metadata.catering?.filter((_) => _.id !== order.id) || [],
-            order
-          ]
-        }), { ical_uid: event.ical_uid }));
+    this.subscription("menu", this.menu.subscribe((l) => {
+      if (l.length) {
+        this.loading.set(false);
+        this.clearTimeout("no_menu");
       } else {
-        const standalone_location = this._settings.get("app.standalone_visitor_location");
-        this._createCateringOrder(booking, booking.linked_bookings[0] ? booking.linked_bookings[0].extension_data.details : void 0, void 0, standalone_location);
+        this.timeout("no_menu", () => {
+          notifyError("No menu available");
+          this.next();
+        }, 1e3);
       }
-      notifySuccess(i18n("APP.VISITOR_KIOSK.BEVERAGE_SUCCESS"));
-      this.loading = false;
-      this.next();
-    });
+    }));
+  }
+  async update() {
+    this.type.set("save");
+    if (!this.beverage)
+      return this.next();
+    this.loading.set(true);
+    const booking = await nextValueFrom(this._checkin.event);
+    if (!booking)
+      return notifyError(i18n("APP.VISITOR_KIOSK.LOAD_ERROR"));
+    await lastValueFrom(updateBooking(booking.id, __spreadProps(__spreadValues({}, booking.toJSON()), {
+      extension_data: __spreadProps(__spreadValues({}, booking.extension_data), {
+        beverage: this.beverage
+      })
+    })));
+    if (booking.linked_event) {
+      const event = booking.linked_event;
+      const metadata = await lastValueFrom(showEventMetadata(event.event_id, event.system_id));
+      const order_list = metadata.catering || [];
+      let order = order_list.find((_) => _.caterer == this.beverage.caterer) || new CateringOrder({ caterer: this.beverage.caterer });
+      order = await this._createCateringOrder(booking, order, event);
+      await lastValueFrom(updateEventMetadata(event.event_id, event.system_id, __spreadProps(__spreadValues({}, metadata), {
+        catering: [
+          ...metadata.catering?.filter((_) => _.id !== order.id) || [],
+          order
+        ]
+      }), { ical_uid: event.ical_uid }));
+    } else {
+      const standalone_location = this._settings.get("app.standalone_visitor_location");
+      this._createCateringOrder(booking, booking.linked_bookings[0] ? booking.linked_bookings[0].extension_data.details : void 0, void 0, standalone_location);
+    }
+    notifySuccess(i18n("APP.VISITOR_KIOSK.BEVERAGE_SUCCESS"));
+    this.loading.set(false);
+    this.next();
   }
   next() {
     this._router.navigate(["/welcome"]);
@@ -1472,50 +1466,48 @@ var _CheckinPreferencesComponent = class _CheckinPreferencesComponent extends As
     this._checkin.setError(message?.statusText || message);
     this._router.navigate(["/checkin", "error"]);
   }
-  _createCateringOrder(_0) {
-    return __async(this, arguments, function* (parent, old_order = new CateringOrder(), event, location) {
-      const existing_item = old_order.items.find((_) => _.custom_id === this.beverage.custom_id);
-      if (existing_item)
-        existing_item.quantity += 1;
-      const order = new CateringOrder(__spreadProps(__spreadValues({}, old_order), {
-        caterer: this.beverage.caterer,
-        items: existing_item ? [...old_order.items] : [
-          ...old_order.items,
-          new CateringItem(__spreadProps(__spreadValues({}, this.beverage), {
-            quantity: 1
-          }))
-        ]
-      }));
-      const booking = new Booking({
-        type: "catering-order",
-        booking_type: "catering-order",
-        date: parent.date,
-        duration: parent.duration,
-        description: parent.title,
-        user_id: parent.user_id,
-        user_email: parent.user_email,
-        booked_by_email: parent.asset_id,
-        asset_id: order.id,
-        title: `Catering order for ${parent.user_name}`,
-        attendees: [],
-        approved: true,
-        extension_data: {
-          parent_id: parent.id,
-          details: order,
-          location: location || parent.location
-        },
+  async _createCateringOrder(parent, old_order = new CateringOrder(), event, location) {
+    const existing_item = old_order.items.find((_) => _.custom_id === this.beverage.custom_id);
+    if (existing_item)
+      existing_item.quantity += 1;
+    const order = new CateringOrder(__spreadProps(__spreadValues({}, old_order), {
+      caterer: this.beverage.caterer,
+      items: existing_item ? [...old_order.items] : [
+        ...old_order.items,
+        new CateringItem(__spreadProps(__spreadValues({}, this.beverage), {
+          quantity: 1
+        }))
+      ]
+    }));
+    const booking = new Booking({
+      type: "catering-order",
+      booking_type: "catering-order",
+      date: parent.date,
+      duration: parent.duration,
+      description: parent.title,
+      user_id: parent.user_id,
+      user_email: parent.user_email,
+      booked_by_email: parent.asset_id,
+      asset_id: order.id,
+      title: `Catering order for ${parent.user_name}`,
+      attendees: [],
+      approved: true,
+      extension_data: {
         parent_id: parent.id,
-        zones: parent.zones,
+        details: order,
         location: location || parent.location
-      });
-      const query = { booking_id: booking.id };
-      if (event) {
-        query.event_id = event.id;
-        query.ical_uid = event.ical_uid;
-      }
-      yield lastValueFrom(saveBooking(booking, query));
-      return order;
+      },
+      parent_id: parent.id,
+      zones: parent.zones,
+      location: location || parent.location
     });
+    const query = { booking_id: booking.id };
+    if (event) {
+      query.event_id = event.id;
+      query.ical_uid = event.ical_uid;
+    }
+    await lastValueFrom(saveBooking(booking, query));
+    return order;
   }
 };
 _CheckinPreferencesComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -1529,7 +1521,7 @@ _CheckinPreferencesComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineCompo
     \u0275\u0275conditionalCreate(0, CheckinPreferencesComponent_Conditional_0_Template, 21, 18, "div", 0)(1, CheckinPreferencesComponent_Conditional_1_Template, 5, 4, "div", 1);
   }
   if (rf & 2) {
-    \u0275\u0275conditional(!ctx.loading ? 0 : 1);
+    \u0275\u0275conditional(!ctx.loading() ? 0 : 1);
   }
 }, dependencies: [NgControlStatus, NgModel, RouterLink, MatProgressSpinner, MatRipple, MatFormField, MatSelect, MatOption, IconComponent, AsyncPipe, TranslatePipe], styles: ["\n\n[_nghost-%COMP%]    > div[_ngcontent-%COMP%] {\n  max-width: calc(100vw - 2rem);\n}\n/*# sourceMappingURL=checkin-preferences.component.css.map */"] });
 var CheckinPreferencesComponent = _CheckinPreferencesComponent;
@@ -1537,7 +1529,7 @@ var CheckinPreferencesComponent = _CheckinPreferencesComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CheckinPreferencesComponent, [{
     type: Component,
     args: [{ selector: "checkin-preferences", template: `
-        @if (!loading) {
+        @if (!loading()) {
             <div
                 class="relative flex w-[36rem] flex-col items-center overflow-hidden rounded bg-base-100 p-4 shadow"
             >
@@ -1600,7 +1592,7 @@ var CheckinPreferencesComponent = _CheckinPreferencesComponent;
                 <mat-spinner [diameter]="32"></mat-spinner>
                 <div>
                     {{
-                        (type === 'menu'
+                        (type() === 'menu'
                             ? 'APP.VISITOR_KIOSK.BEVERAGE_MENU_LOADING'
                             : 'APP.VISITOR_KIOSK.BEVERAGE_LOADING'
                         ) | translate
@@ -1612,7 +1604,7 @@ var CheckinPreferencesComponent = _CheckinPreferencesComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinPreferencesComponent, { className: "CheckinPreferencesComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-preferences.component.ts", lineNumber: 122 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinPreferencesComponent, { className: "CheckinPreferencesComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-preferences.component.ts", lineNumber: 123 });
 })();
 
 // node_modules/qr-scanner/qr-scanner.min.js
@@ -1681,70 +1673,56 @@ var e = class _e {
   static set WORKER_PATH(a) {
     console.warn("Setting QrScanner.WORKER_PATH is not required and not supported anymore. Have a look at the README for new setup instructions.");
   }
-  static hasCamera() {
-    return __async(this, null, function* () {
-      try {
-        return !!(yield _e.listCameras(false)).length;
-      } catch (a) {
-        return false;
-      }
-    });
+  static async hasCamera() {
+    try {
+      return !!(await _e.listCameras(false)).length;
+    } catch (a) {
+      return false;
+    }
   }
-  static listCameras(a = false) {
-    return __async(this, null, function* () {
-      if (!navigator.mediaDevices) return [];
-      let b = () => __async(null, null, function* () {
-        return (yield navigator.mediaDevices.enumerateDevices()).filter((d) => "videoinput" === d.kind);
-      }), c;
-      try {
-        a && (yield b()).every((d) => !d.label) && (c = yield navigator.mediaDevices.getUserMedia({ audio: false, video: true }));
-      } catch (d) {
-      }
-      try {
-        return (yield b()).map((d, f) => ({ id: d.deviceId, label: d.label || (0 === f ? "Default Camera" : `Camera ${f + 1}`) }));
-      } finally {
-        c && (console.warn("Call listCameras after successfully starting a QR scanner to avoid creating a temporary video stream"), _e._stopVideoStream(c));
-      }
-    });
+  static async listCameras(a = false) {
+    if (!navigator.mediaDevices) return [];
+    let b = async () => (await navigator.mediaDevices.enumerateDevices()).filter((d) => "videoinput" === d.kind), c;
+    try {
+      a && (await b()).every((d) => !d.label) && (c = await navigator.mediaDevices.getUserMedia({ audio: false, video: true }));
+    } catch (d) {
+    }
+    try {
+      return (await b()).map((d, f) => ({ id: d.deviceId, label: d.label || (0 === f ? "Default Camera" : `Camera ${f + 1}`) }));
+    } finally {
+      c && (console.warn("Call listCameras after successfully starting a QR scanner to avoid creating a temporary video stream"), _e._stopVideoStream(c));
+    }
   }
-  hasFlash() {
-    return __async(this, null, function* () {
-      let a;
-      try {
-        if (this.$video.srcObject) {
-          if (!(this.$video.srcObject instanceof MediaStream)) return false;
-          a = this.$video.srcObject;
-        } else a = (yield this._getCameraStream()).stream;
-        return "torch" in a.getVideoTracks()[0].getSettings();
-      } catch (b) {
-        return false;
-      } finally {
-        a && a !== this.$video.srcObject && (console.warn("Call hasFlash after successfully starting the scanner to avoid creating a temporary video stream"), _e._stopVideoStream(a));
-      }
-    });
+  async hasFlash() {
+    let a;
+    try {
+      if (this.$video.srcObject) {
+        if (!(this.$video.srcObject instanceof MediaStream)) return false;
+        a = this.$video.srcObject;
+      } else a = (await this._getCameraStream()).stream;
+      return "torch" in a.getVideoTracks()[0].getSettings();
+    } catch (b) {
+      return false;
+    } finally {
+      a && a !== this.$video.srcObject && (console.warn("Call hasFlash after successfully starting the scanner to avoid creating a temporary video stream"), _e._stopVideoStream(a));
+    }
   }
   isFlashOn() {
     return this._flashOn;
   }
-  toggleFlash() {
-    return __async(this, null, function* () {
-      this._flashOn ? yield this.turnFlashOff() : yield this.turnFlashOn();
-    });
+  async toggleFlash() {
+    this._flashOn ? await this.turnFlashOff() : await this.turnFlashOn();
   }
-  turnFlashOn() {
-    return __async(this, null, function* () {
-      if (!this._flashOn && !this._destroyed && (this._flashOn = true, this._active && !this._paused)) try {
-        if (!(yield this.hasFlash())) throw "No flash available";
-        yield this.$video.srcObject.getVideoTracks()[0].applyConstraints({ advanced: [{ torch: true }] });
-      } catch (a) {
-        throw this._flashOn = false, a;
-      }
-    });
+  async turnFlashOn() {
+    if (!this._flashOn && !this._destroyed && (this._flashOn = true, this._active && !this._paused)) try {
+      if (!await this.hasFlash()) throw "No flash available";
+      await this.$video.srcObject.getVideoTracks()[0].applyConstraints({ advanced: [{ torch: true }] });
+    } catch (a) {
+      throw this._flashOn = false, a;
+    }
   }
-  turnFlashOff() {
-    return __async(this, null, function* () {
-      this._flashOn && (this._flashOn = false, yield this._restartVideoStream());
-    });
+  async turnFlashOff() {
+    this._flashOn && (this._flashOn = false, await this._restartVideoStream());
   }
   destroy() {
     this.$video.removeEventListener("loadedmetadata", this._onLoadedMetaData);
@@ -1759,96 +1737,88 @@ var e = class _e {
     this.stop();
     _e._postWorkerMessage(this._qrEnginePromise, "close");
   }
-  start() {
-    return __async(this, null, function* () {
-      if (this._destroyed) throw Error("The QR scanner can not be started as it had been destroyed.");
-      if (!this._active || this._paused) {
-        if ("https:" !== window.location.protocol && console.warn("The camera stream is only accessible if the page is transferred via https."), this._active = true, !document.hidden) if (this._paused = false, this.$video.srcObject) yield this.$video.play();
-        else try {
-          let { stream: a, facingMode: b } = yield this._getCameraStream();
-          !this._active || this._paused ? _e._stopVideoStream(a) : (this._setVideoMirror(b), this.$video.srcObject = a, yield this.$video.play(), this._flashOn && (this._flashOn = false, this.turnFlashOn().catch(() => {
-          })));
-        } catch (a) {
-          if (!this._paused) throw this._active = false, a;
-        }
+  async start() {
+    if (this._destroyed) throw Error("The QR scanner can not be started as it had been destroyed.");
+    if (!this._active || this._paused) {
+      if ("https:" !== window.location.protocol && console.warn("The camera stream is only accessible if the page is transferred via https."), this._active = true, !document.hidden) if (this._paused = false, this.$video.srcObject) await this.$video.play();
+      else try {
+        let { stream: a, facingMode: b } = await this._getCameraStream();
+        !this._active || this._paused ? _e._stopVideoStream(a) : (this._setVideoMirror(b), this.$video.srcObject = a, await this.$video.play(), this._flashOn && (this._flashOn = false, this.turnFlashOn().catch(() => {
+        })));
+      } catch (a) {
+        if (!this._paused) throw this._active = false, a;
       }
-    });
+    }
   }
   stop() {
     this.pause();
     this._active = false;
   }
-  pause(a = false) {
-    return __async(this, null, function* () {
-      this._paused = true;
-      if (!this._active) return true;
-      this.$video.pause();
-      this.$overlay && (this.$overlay.style.display = "none");
-      let b = () => {
-        this.$video.srcObject instanceof MediaStream && (_e._stopVideoStream(this.$video.srcObject), this.$video.srcObject = null);
-      };
-      if (a) return b(), true;
-      yield new Promise((c) => setTimeout(c, 300));
-      if (!this._paused) return false;
-      b();
-      return true;
-    });
+  async pause(a = false) {
+    this._paused = true;
+    if (!this._active) return true;
+    this.$video.pause();
+    this.$overlay && (this.$overlay.style.display = "none");
+    let b = () => {
+      this.$video.srcObject instanceof MediaStream && (_e._stopVideoStream(this.$video.srcObject), this.$video.srcObject = null);
+    };
+    if (a) return b(), true;
+    await new Promise((c) => setTimeout(c, 300));
+    if (!this._paused) return false;
+    b();
+    return true;
   }
-  setCamera(a) {
-    return __async(this, null, function* () {
-      a !== this._preferredCamera && (this._preferredCamera = a, yield this._restartVideoStream());
-    });
+  async setCamera(a) {
+    a !== this._preferredCamera && (this._preferredCamera = a, await this._restartVideoStream());
   }
-  static scanImage(a, b, c, d, f = false, h = false) {
-    return __async(this, null, function* () {
-      let m, n = false;
-      b && ("scanRegion" in b || "qrEngine" in b || "canvas" in b || "disallowCanvasResizing" in b || "alsoTryWithoutScanRegion" in b || "returnDetailedScanResult" in b) ? (m = b.scanRegion, c = b.qrEngine, d = b.canvas, f = b.disallowCanvasResizing || false, h = b.alsoTryWithoutScanRegion || false, n = true) : b || c || d || f || h ? console.warn("You're using a deprecated api for scanImage which will be removed in the future.") : console.warn("Note that the return type of scanImage will change in the future. To already switch to the new api today, you can pass returnDetailedScanResult: true.");
-      b = !!c;
-      try {
-        let p, k;
-        [c, p] = yield Promise.all([c || _e.createQrEngine(), _e._loadImage(a)]);
-        [d, k] = _e._drawToCanvas(p, m, d, f);
-        let q;
-        if (c instanceof Worker) {
-          let g = c;
-          b || _e._postWorkerMessageSync(g, "inversionMode", "both");
-          q = yield new Promise((l, v) => {
-            let w, u, r, y = -1;
-            u = (t) => {
-              t.data.id === y && (g.removeEventListener("message", u), g.removeEventListener("error", r), clearTimeout(w), null !== t.data.data ? l({ data: t.data.data, cornerPoints: _e._convertPoints(t.data.cornerPoints, m) }) : v(_e.NO_QR_CODE_FOUND));
-            };
-            r = (t) => {
-              g.removeEventListener("message", u);
-              g.removeEventListener("error", r);
-              clearTimeout(w);
-              v("Scanner error: " + (t ? t.message || t : "Unknown Error"));
-            };
-            g.addEventListener("message", u);
-            g.addEventListener("error", r);
-            w = setTimeout(() => r("timeout"), 1e4);
-            let x = k.getImageData(0, 0, d.width, d.height);
-            y = _e._postWorkerMessageSync(g, "decode", x, [x.data.buffer]);
-          });
-        } else q = yield Promise.race([new Promise((g, l) => window.setTimeout(() => l("Scanner error: timeout"), 1e4)), (() => __async(null, null, function* () {
-          try {
-            var [g] = yield c.detect(d);
-            if (!g) throw _e.NO_QR_CODE_FOUND;
-            return { data: g.rawValue, cornerPoints: _e._convertPoints(g.cornerPoints, m) };
-          } catch (l) {
-            g = l.message || l;
-            if (/not implemented|service unavailable/.test(g)) return _e._disableBarcodeDetector = true, _e.scanImage(a, { scanRegion: m, canvas: d, disallowCanvasResizing: f, alsoTryWithoutScanRegion: h });
-            throw `Scanner error: ${g}`;
-          }
-        }))()]);
-        return n ? q : q.data;
-      } catch (p) {
-        if (!m || !h) throw p;
-        let k = yield _e.scanImage(a, { qrEngine: c, canvas: d, disallowCanvasResizing: f });
-        return n ? k : k.data;
-      } finally {
-        b || _e._postWorkerMessage(c, "close");
-      }
-    });
+  static async scanImage(a, b, c, d, f = false, h = false) {
+    let m, n = false;
+    b && ("scanRegion" in b || "qrEngine" in b || "canvas" in b || "disallowCanvasResizing" in b || "alsoTryWithoutScanRegion" in b || "returnDetailedScanResult" in b) ? (m = b.scanRegion, c = b.qrEngine, d = b.canvas, f = b.disallowCanvasResizing || false, h = b.alsoTryWithoutScanRegion || false, n = true) : b || c || d || f || h ? console.warn("You're using a deprecated api for scanImage which will be removed in the future.") : console.warn("Note that the return type of scanImage will change in the future. To already switch to the new api today, you can pass returnDetailedScanResult: true.");
+    b = !!c;
+    try {
+      let p, k;
+      [c, p] = await Promise.all([c || _e.createQrEngine(), _e._loadImage(a)]);
+      [d, k] = _e._drawToCanvas(p, m, d, f);
+      let q;
+      if (c instanceof Worker) {
+        let g = c;
+        b || _e._postWorkerMessageSync(g, "inversionMode", "both");
+        q = await new Promise((l, v) => {
+          let w, u, r, y = -1;
+          u = (t) => {
+            t.data.id === y && (g.removeEventListener("message", u), g.removeEventListener("error", r), clearTimeout(w), null !== t.data.data ? l({ data: t.data.data, cornerPoints: _e._convertPoints(t.data.cornerPoints, m) }) : v(_e.NO_QR_CODE_FOUND));
+          };
+          r = (t) => {
+            g.removeEventListener("message", u);
+            g.removeEventListener("error", r);
+            clearTimeout(w);
+            v("Scanner error: " + (t ? t.message || t : "Unknown Error"));
+          };
+          g.addEventListener("message", u);
+          g.addEventListener("error", r);
+          w = setTimeout(() => r("timeout"), 1e4);
+          let x = k.getImageData(0, 0, d.width, d.height);
+          y = _e._postWorkerMessageSync(g, "decode", x, [x.data.buffer]);
+        });
+      } else q = await Promise.race([new Promise((g, l) => window.setTimeout(() => l("Scanner error: timeout"), 1e4)), (async () => {
+        try {
+          var [g] = await c.detect(d);
+          if (!g) throw _e.NO_QR_CODE_FOUND;
+          return { data: g.rawValue, cornerPoints: _e._convertPoints(g.cornerPoints, m) };
+        } catch (l) {
+          g = l.message || l;
+          if (/not implemented|service unavailable/.test(g)) return _e._disableBarcodeDetector = true, _e.scanImage(a, { scanRegion: m, canvas: d, disallowCanvasResizing: f, alsoTryWithoutScanRegion: h });
+          throw `Scanner error: ${g}`;
+        }
+      })()]);
+      return n ? q : q.data;
+    } catch (p) {
+      if (!m || !h) throw p;
+      let k = await _e.scanImage(a, { qrEngine: c, canvas: d, disallowCanvasResizing: f });
+      return n ? k : k.data;
+    } finally {
+      b || _e._postWorkerMessage(c, "close");
+    }
   }
   setGrayscaleWeights(a, b, c, d = true) {
     _e._postWorkerMessage(this._qrEnginePromise, "grayscaleWeights", {
@@ -1861,14 +1831,12 @@ var e = class _e {
   setInversionMode(a) {
     _e._postWorkerMessage(this._qrEnginePromise, "inversionMode", a);
   }
-  static createQrEngine(a) {
-    return __async(this, null, function* () {
-      a && console.warn("Specifying a worker path is not required and not supported anymore.");
-      a = () => import("./qr-scanner-worker.min-RPZLPVY7.js").then((c) => c.createWorker());
-      if (!(!_e._disableBarcodeDetector && "BarcodeDetector" in window && BarcodeDetector.getSupportedFormats && (yield BarcodeDetector.getSupportedFormats()).includes("qr_code"))) return a();
-      let b = navigator.userAgentData;
-      return b && b.brands.some(({ brand: c }) => /Chromium/i.test(c)) && /mac ?OS/i.test(b.platform) && (yield b.getHighEntropyValues(["architecture", "platformVersion"]).then(({ architecture: c, platformVersion: d }) => /arm/i.test(c || "arm") && 13 <= parseInt(d || "13")).catch(() => true)) ? a() : new BarcodeDetector({ formats: ["qr_code"] });
-    });
+  static async createQrEngine(a) {
+    a && console.warn("Specifying a worker path is not required and not supported anymore.");
+    a = () => import("./qr-scanner-worker.min-WQ5Z743D.js").then((c) => c.createWorker());
+    if (!(!_e._disableBarcodeDetector && "BarcodeDetector" in window && BarcodeDetector.getSupportedFormats && (await BarcodeDetector.getSupportedFormats()).includes("qr_code"))) return a();
+    let b = navigator.userAgentData;
+    return b && b.brands.some(({ brand: c }) => /Chromium/i.test(c)) && /mac ?OS/i.test(b.platform) && await b.getHighEntropyValues(["architecture", "platformVersion"]).then(({ architecture: c, platformVersion: d }) => /arm/i.test(c || "arm") && 13 <= parseInt(d || "13")).catch(() => true) ? a() : new BarcodeDetector({ formats: ["qr_code"] });
   }
   _onPlay() {
     this._scanRegion = this._calculateScanRegion(this.$video);
@@ -1929,46 +1897,42 @@ var e = class _e {
     return a;
   }
   _scanFrame() {
-    !this._active || this.$video.paused || this.$video.ended || ("requestVideoFrameCallback" in this.$video ? this.$video.requestVideoFrameCallback.bind(this.$video) : requestAnimationFrame)(() => __async(this, null, function* () {
+    !this._active || this.$video.paused || this.$video.ended || ("requestVideoFrameCallback" in this.$video ? this.$video.requestVideoFrameCallback.bind(this.$video) : requestAnimationFrame)(async () => {
       if (!(1 >= this.$video.readyState)) {
         var a = Date.now() - this._lastScanTimestamp, b = 1e3 / this._maxScansPerSecond;
-        a < b && (yield new Promise((d) => setTimeout(d, b - a)));
+        a < b && await new Promise((d) => setTimeout(d, b - a));
         this._lastScanTimestamp = Date.now();
         try {
-          var c = yield _e.scanImage(this.$video, { scanRegion: this._scanRegion, qrEngine: this._qrEnginePromise, canvas: this.$canvas });
+          var c = await _e.scanImage(this.$video, { scanRegion: this._scanRegion, qrEngine: this._qrEnginePromise, canvas: this.$canvas });
         } catch (d) {
           if (!this._active) return;
           this._onDecodeError(d);
         }
-        !_e._disableBarcodeDetector || (yield this._qrEnginePromise) instanceof Worker || (this._qrEnginePromise = _e.createQrEngine());
+        !_e._disableBarcodeDetector || await this._qrEnginePromise instanceof Worker || (this._qrEnginePromise = _e.createQrEngine());
         c ? (this._onDecode ? this._onDecode(c) : this._legacyOnDecode && this._legacyOnDecode(c.data), this.$codeOutlineHighlight && (clearTimeout(this._codeOutlineHighlightRemovalTimeout), this._codeOutlineHighlightRemovalTimeout = void 0, this.$codeOutlineHighlight.setAttribute("viewBox", `${this._scanRegion.x || 0} ${this._scanRegion.y || 0} ${this._scanRegion.width || this.$video.videoWidth} ${this._scanRegion.height || this.$video.videoHeight}`), this.$codeOutlineHighlight.firstElementChild.setAttribute(
           "points",
           c.cornerPoints.map(({ x: d, y: f }) => `${d},${f}`).join(" ")
         ), this.$codeOutlineHighlight.style.display = "")) : this.$codeOutlineHighlight && !this._codeOutlineHighlightRemovalTimeout && (this._codeOutlineHighlightRemovalTimeout = setTimeout(() => this.$codeOutlineHighlight.style.display = "none", 100));
       }
       this._scanFrame();
-    }));
+    });
   }
   _onDecodeError(a) {
     a !== _e.NO_QR_CODE_FOUND && console.log(a);
   }
-  _getCameraStream() {
-    return __async(this, null, function* () {
-      if (!navigator.mediaDevices) throw "Camera not found.";
-      let a = /^(environment|user)$/.test(this._preferredCamera) ? "facingMode" : "deviceId", b = [{ width: { min: 1024 } }, { width: { min: 768 } }, {}], c = b.map((d) => Object.assign({}, d, { [a]: { exact: this._preferredCamera } }));
-      for (let d of [...c, ...b]) try {
-        let f = yield navigator.mediaDevices.getUserMedia({ video: d, audio: false }), h = this._getFacingMode(f) || (d.facingMode ? this._preferredCamera : "environment" === this._preferredCamera ? "user" : "environment");
-        return { stream: f, facingMode: h };
-      } catch (f) {
-      }
-      throw "Camera not found.";
-    });
+  async _getCameraStream() {
+    if (!navigator.mediaDevices) throw "Camera not found.";
+    let a = /^(environment|user)$/.test(this._preferredCamera) ? "facingMode" : "deviceId", b = [{ width: { min: 1024 } }, { width: { min: 768 } }, {}], c = b.map((d) => Object.assign({}, d, { [a]: { exact: this._preferredCamera } }));
+    for (let d of [...c, ...b]) try {
+      let f = await navigator.mediaDevices.getUserMedia({ video: d, audio: false }), h = this._getFacingMode(f) || (d.facingMode ? this._preferredCamera : "environment" === this._preferredCamera ? "user" : "environment");
+      return { stream: f, facingMode: h };
+    } catch (f) {
+    }
+    throw "Camera not found.";
   }
-  _restartVideoStream() {
-    return __async(this, null, function* () {
-      let a = this._paused;
-      (yield this.pause(true)) && !a && this._active && (yield this.start());
-    });
+  async _restartVideoStream() {
+    let a = this._paused;
+    await this.pause(true) && !a && this._active && await this.start();
   }
   static _stopVideoStream(a) {
     for (let b of a.getTracks()) b.stop(), a.removeTrack(b);
@@ -1988,38 +1952,32 @@ var e = class _e {
     b.drawImage(a, f, h, m, n, 0, 0, c.width, c.height);
     return [c, b];
   }
-  static _loadImage(a) {
-    return __async(this, null, function* () {
-      if (a instanceof Image) return yield _e._awaitImageLoad(a), a;
-      if (a instanceof HTMLVideoElement || a instanceof HTMLCanvasElement || a instanceof SVGImageElement || "OffscreenCanvas" in window && a instanceof OffscreenCanvas || "ImageBitmap" in window && a instanceof ImageBitmap) return a;
-      if (a instanceof File || a instanceof Blob || a instanceof URL || "string" === typeof a) {
-        let b = new Image();
-        b.src = a instanceof File || a instanceof Blob ? URL.createObjectURL(a) : a.toString();
-        try {
-          return yield _e._awaitImageLoad(b), b;
-        } finally {
-          (a instanceof File || a instanceof Blob) && URL.revokeObjectURL(b.src);
-        }
-      } else throw "Unsupported image type.";
+  static async _loadImage(a) {
+    if (a instanceof Image) return await _e._awaitImageLoad(a), a;
+    if (a instanceof HTMLVideoElement || a instanceof HTMLCanvasElement || a instanceof SVGImageElement || "OffscreenCanvas" in window && a instanceof OffscreenCanvas || "ImageBitmap" in window && a instanceof ImageBitmap) return a;
+    if (a instanceof File || a instanceof Blob || a instanceof URL || "string" === typeof a) {
+      let b = new Image();
+      b.src = a instanceof File || a instanceof Blob ? URL.createObjectURL(a) : a.toString();
+      try {
+        return await _e._awaitImageLoad(b), b;
+      } finally {
+        (a instanceof File || a instanceof Blob) && URL.revokeObjectURL(b.src);
+      }
+    } else throw "Unsupported image type.";
+  }
+  static async _awaitImageLoad(a) {
+    a.complete && 0 !== a.naturalWidth || await new Promise((b, c) => {
+      let d = (f) => {
+        a.removeEventListener("load", d);
+        a.removeEventListener("error", d);
+        f instanceof ErrorEvent ? c("Image load error") : b();
+      };
+      a.addEventListener("load", d);
+      a.addEventListener("error", d);
     });
   }
-  static _awaitImageLoad(a) {
-    return __async(this, null, function* () {
-      a.complete && 0 !== a.naturalWidth || (yield new Promise((b, c) => {
-        let d = (f) => {
-          a.removeEventListener("load", d);
-          a.removeEventListener("error", d);
-          f instanceof ErrorEvent ? c("Image load error") : b();
-        };
-        a.addEventListener("load", d);
-        a.addEventListener("error", d);
-      }));
-    });
-  }
-  static _postWorkerMessage(a, b, c, d) {
-    return __async(this, null, function* () {
-      return _e._postWorkerMessageSync(yield a, b, c, d);
-    });
+  static async _postWorkerMessage(a, b, c, d) {
+    return _e._postWorkerMessageSync(await a, b, c, d);
   }
   static _postWorkerMessageSync(a, b, c, d) {
     if (!(a instanceof Worker)) return -1;
@@ -2064,64 +2022,31 @@ var _CheckinQRScanComponent = class _CheckinQRScanComponent extends AsyncHandler
     }
     this._reader?.stop();
   }
-  checkQRCode(raw_text) {
-    return __async(this, null, function* () {
-      if (this.checking_code)
-        return;
-      this.timeout("check_qr_code", () => __async(this, null, function* () {
-        this._reader?.stop();
-        this.checking_code = true;
-        const chunks = raw_text.split(",");
-        let [visit_block, system_id, event_id, host_email] = chunks;
-        const [_, visitor_email] = visit_block.split(":");
-        if (!visitor_email && !event_id) {
-          notifyError("Invalid QRCode");
-          this.setupQRReader();
-          this.checking_code = false;
-          return;
-        }
-        if (!/^\d+$/.test(event_id))
-          event_id = void 0;
-        yield this._checkin.loadGuestAndEvent(visitor_email, event_id).catch((err) => {
-          this.handleError(err.message || err);
-          this.checking_code = false;
-          throw err;
-        });
-        const event = yield nextValueFrom(this._checkin.event);
-        if (event.rejected) {
-          this.handleError("Your meeting has been rejected.");
-          this.checking_code = false;
-          return;
-        }
-        if (event.checked_in_at) {
-          this._router.navigate(["/checkin", "checkout"]);
-          return;
-        }
-        if (event.checked_out_at) {
-          this.handleError("Your meeting has already finished.");
-          this.checking_code = false;
-          return;
-        }
-        if (this.is_induction_enabled && event?.induction !== "accepted") {
-          this._router.navigate(["/checkin", "induction"]);
-        } else {
-          this._router.navigate(["/checkin", "details"]);
-        }
+  async checkQRCode(raw_text) {
+    if (this.checking_code)
+      return;
+    this.timeout("check_qr_code", async () => {
+      this._reader?.stop();
+      this.checking_code = true;
+      const chunks = raw_text.split(",");
+      let [visit_block, system_id, event_id, host_email] = chunks;
+      const [_, visitor_email] = visit_block.split(":");
+      if (!visitor_email && !event_id) {
+        notifyError("Invalid QRCode");
+        this.setupQRReader();
         this.checking_code = false;
-      }));
-    });
-  }
-  checkEmail(email) {
-    return __async(this, null, function* () {
-      if (!email || !email.includes("@") || email.length < 5)
         return;
-      yield this._checkin.loadGuestAndEvent(email).catch((err) => {
-        this.handleError("Unable to find visitor or a meeting associated with the given email address.");
+      }
+      if (!/^\d+$/.test(event_id))
+        event_id = void 0;
+      await this._checkin.loadGuestAndEvent(visitor_email, event_id).catch((err) => {
+        this.handleError(err.message || err);
+        this.checking_code = false;
         throw err;
       });
-      const event = yield nextValueFrom(this._checkin.event);
-      if (event.checked_out_at) {
-        this.handleError("Your meeting has already finished.");
+      const event = await nextValueFrom(this._checkin.event);
+      if (event.rejected) {
+        this.handleError("Your meeting has been rejected.");
         this.checking_code = false;
         return;
       }
@@ -2129,12 +2054,41 @@ var _CheckinQRScanComponent = class _CheckinQRScanComponent extends AsyncHandler
         this._router.navigate(["/checkin", "checkout"]);
         return;
       }
-      if (event.induction !== "accepted" && this.is_induction_enabled && !this.induction_after_details) {
+      if (event.checked_out_at) {
+        this.handleError("Your meeting has already finished.");
+        this.checking_code = false;
+        return;
+      }
+      if (this.is_induction_enabled && event?.induction !== "accepted") {
         this._router.navigate(["/checkin", "induction"]);
       } else {
         this._router.navigate(["/checkin", "details"]);
       }
+      this.checking_code = false;
     });
+  }
+  async checkEmail(email) {
+    if (!email || !email.includes("@") || email.length < 5)
+      return;
+    await this._checkin.loadGuestAndEvent(email).catch((err) => {
+      this.handleError("Unable to find visitor or a meeting associated with the given email address.");
+      throw err;
+    });
+    const event = await nextValueFrom(this._checkin.event);
+    if (event.checked_out_at) {
+      this.handleError("Your meeting has already finished.");
+      this.checking_code = false;
+      return;
+    }
+    if (event.checked_in_at) {
+      this._router.navigate(["/checkin", "checkout"]);
+      return;
+    }
+    if (event.induction !== "accepted" && this.is_induction_enabled && !this.induction_after_details) {
+      this._router.navigate(["/checkin", "induction"]);
+    } else {
+      this._router.navigate(["/checkin", "details"]);
+    }
   }
   setupQRReader() {
     this.timeout("setup_qr_reader", () => {
@@ -2317,7 +2271,7 @@ var CheckinQRScanComponent = _CheckinQRScanComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinQRScanComponent, { className: "CheckinQRScanComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-qr-scan.component.ts", lineNumber: 99 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CheckinQRScanComponent, { className: "CheckinQRScanComponent", filePath: "apps/visitor-kiosk/src/app/checkin/checkin-qr-scan.component.ts", lineNumber: 106 });
 })();
 
 // libs/components/src/lib/printable.component.ts
@@ -2948,18 +2902,16 @@ var _CheckinResultsComponent = class _CheckinResultsComponent extends AsyncHandl
   get allow_printing_label() {
     return this._settings.get("app.allow_printing_label") !== false;
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      const event = yield firstValueFrom(this.event.pipe(first()));
-      !event ? this.previous() : "";
-      if (!event)
-        return;
-      this.date = event.date || event.booking_start * 1e3;
-      this.zones = event.zones;
-      this.e = event;
-      const standalone_location = this._settings.get("app.standalone_visitor_location");
-      this.allow_beverages = this._settings.get("app.allow_beverages") && (event.linked_event || standalone_location);
-    });
+  async ngOnInit() {
+    const event = await firstValueFrom(this.event.pipe(first()));
+    !event ? this.previous() : "";
+    if (!event)
+      return;
+    this.date = event.date || event.booking_start * 1e3;
+    this.zones = event.zones;
+    this.e = event;
+    const standalone_location = this._settings.get("app.standalone_visitor_location");
+    this.allow_beverages = this._settings.get("app.allow_beverages") && (event.linked_event || standalone_location);
   }
   previous() {
     this._router.navigate(["/checkin"]);
@@ -2967,12 +2919,10 @@ var _CheckinResultsComponent = class _CheckinResultsComponent extends AsyncHandl
   done() {
     this._router.navigate(["/welcome"]);
   }
-  next() {
-    return __async(this, null, function* () {
-      const event = yield nextValueFrom(this.event);
-      const standalone_location = this._settings.get("app.standalone_visitor_location");
-      this._settings.get("app.allow_beverages") && (event.linked_event || standalone_location) ? this._router.navigate(["/checkin", "preferences"]) : this._router.navigate(["/welcome"]);
-    });
+  async next() {
+    const event = await nextValueFrom(this.event);
+    const standalone_location = this._settings.get("app.standalone_visitor_location");
+    this._settings.get("app.allow_beverages") && (event.linked_event || standalone_location) ? this._router.navigate(["/checkin", "preferences"]) : this._router.navigate(["/welcome"]);
   }
 };
 _CheckinResultsComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -3185,24 +3135,20 @@ var _CheckoutComponent = class _CheckoutComponent {
     this._org = inject(OrganisationService);
     this.loading = false;
   }
-  ngOnInit() {
-    return __async(this, null, function* () {
-      yield this._org.initialised.pipe(first((_) => _)).toPromise();
-      const event = yield this._state.event.pipe(first()).toPromise();
-      if (!event)
-        this._router.navigate(["/checkin"]);
-    });
+  async ngOnInit() {
+    await this._org.initialised.pipe(first((_) => _)).toPromise();
+    const event = await this._state.event.pipe(first()).toPromise();
+    if (!event)
+      this._router.navigate(["/checkin"]);
   }
-  checkout() {
-    return __async(this, null, function* () {
-      this.loading = true;
-      const result = yield this._state.checkinGuest(false).then(() => true).catch(() => false);
-      this.loading = false;
-      if (!result)
-        return;
-      this._router.navigate(["/welcome"]);
-      notifySuccess(i18n("APP.VISITOR_KIOSK.CHECKOUT_SUCCESS"));
-    });
+  async checkout() {
+    this.loading = true;
+    const result = await this._state.checkinGuest(false).then(() => true).catch(() => false);
+    this.loading = false;
+    if (!result)
+      return;
+    this._router.navigate(["/welcome"]);
+    notifySuccess(i18n("APP.VISITOR_KIOSK.CHECKOUT_SUCCESS"));
   }
 };
 _CheckoutComponent.\u0275fac = function CheckoutComponent_Factory(__ngFactoryType__) {
@@ -3348,4 +3294,4 @@ var VisitorCheckinModule = _VisitorCheckinModule;
 export {
   VisitorCheckinModule
 };
-//# sourceMappingURL=checkin.module-XOIVRUND.js.map
+//# sourceMappingURL=checkin.module-TO3GV2SA.js.map
