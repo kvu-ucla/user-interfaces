@@ -74307,15 +74307,15 @@ var LOCAL_TIMEZONE = ((_b = (_a4 = Intl == null ? void 0 : Intl.DateTimeFormat()
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "863feac",
-  "hash": "863feac",
+  "raw": "bae6c9e",
+  "hash": "bae6c9e",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "863feac",
+  "suffix": "bae6c9e",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752122794603
+  "time": 1752125188987
 };
 
 // libs/common/src/lib/vorlon.service.ts
@@ -123840,18 +123840,42 @@ var CameraControlsComponent = _CameraControlsComponent;
 })();
 
 // apps/control/src/app/ui/zoom-phone-controls.component.ts
-var _ZoomPhoneControlsComponent = class _ZoomPhoneControlsComponent {
+var _c028 = ["zoom_phone"];
+var _ZoomPhoneControlsComponent = class _ZoomPhoneControlsComponent extends AsyncHandler {
   constructor() {
+    super(...arguments);
     this.mod = input("");
+    this.zoom_phone_el = viewChild("zoom_phone");
+  }
+  ngOnInit() {
+    const on_event = (e2) => this._handleMessage(e2);
+    window.addEventListener("message", on_event);
+    this.subscription("zoom_frame_messages", () => window.removeEventListener("message", on_event));
+  }
+  _handleMessage(event) {
+    const data = event.data;
+    if (!data)
+      return;
+    console.log("Zoom Phone Message Received:", data);
   }
 };
-_ZoomPhoneControlsComponent.\u0275fac = function ZoomPhoneControlsComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ZoomPhoneControlsComponent)();
-};
-_ZoomPhoneControlsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ZoomPhoneControlsComponent, selectors: [["zoom-phone-controls"]], inputs: { mod: [1, "mod"] }, decls: 2, vars: 0, consts: [[1, "h-full", "w-full", "overflow-hidden"], ["src", \u0275\u0275trustConstantResourceUrl`https://applications.zoom.us/integration/phone/embeddablephone/home`, "id", "zoom-embeddable-phone-iframe", "allow", "clipboard-read; clipboard-write https://applications.zoom.us", 1, "h-full", "w-full"]], template: function ZoomPhoneControlsComponent_Template(rf, ctx) {
+_ZoomPhoneControlsComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275ZoomPhoneControlsComponent_BaseFactory;
+  return function ZoomPhoneControlsComponent_Factory(__ngFactoryType__) {
+    return (\u0275ZoomPhoneControlsComponent_BaseFactory || (\u0275ZoomPhoneControlsComponent_BaseFactory = \u0275\u0275getInheritedFactory(_ZoomPhoneControlsComponent)))(__ngFactoryType__ || _ZoomPhoneControlsComponent);
+  };
+})();
+_ZoomPhoneControlsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ZoomPhoneControlsComponent, selectors: [["zoom-phone-controls"]], viewQuery: function ZoomPhoneControlsComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 0);
-    \u0275\u0275element(1, "iframe", 1);
+    \u0275\u0275viewQuerySignal(ctx.zoom_phone_el, _c028, 5);
+  }
+  if (rf & 2) {
+    \u0275\u0275queryAdvance();
+  }
+}, inputs: { mod: [1, "mod"] }, features: [\u0275\u0275InheritDefinitionFeature], decls: 3, vars: 0, consts: [["zoom_phone", ""], [1, "h-full", "w-full", "overflow-hidden"], ["src", \u0275\u0275trustConstantResourceUrl`https://applications.zoom.us/integration/phone/embeddablephone/home`, "id", "zoom-embeddable-phone-iframe", "allow", "clipboard-read; clipboard-write https://applications.zoom.us", 1, "h-full", "w-full"]], template: function ZoomPhoneControlsComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 1);
+    \u0275\u0275element(1, "iframe", 2, 0);
     \u0275\u0275elementEnd();
   }
 }, encapsulation: 2 });
@@ -123862,6 +123886,7 @@ var ZoomPhoneControlsComponent = _ZoomPhoneControlsComponent;
     args: [{ selector: "zoom-phone-controls", template: `
         <div class="h-full w-full overflow-hidden">
             <iframe
+                #zoom_phone
                 src="https://applications.zoom.us/integration/phone/embeddablephone/home"
                 id="zoom-embeddable-phone-iframe"
                 allow="clipboard-read; clipboard-write https://applications.zoom.us"
@@ -123872,11 +123897,11 @@ var ZoomPhoneControlsComponent = _ZoomPhoneControlsComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ZoomPhoneControlsComponent, { className: "ZoomPhoneControlsComponent", filePath: "apps/control/src/app/ui/zoom-phone-controls.component.ts", lineNumber: 17 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ZoomPhoneControlsComponent, { className: "ZoomPhoneControlsComponent", filePath: "apps/control/src/app/ui/zoom-phone-controls.component.ts", lineNumber: 19 });
 })();
 
 // apps/control/src/app/video-call/video-call-page.component.ts
-var _c028 = ["video-call-page", ""];
+var _c029 = ["video-call-page", ""];
 function VideoCallPageComponent_Conditional_0_Conditional_3_For_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "mat-option", 12);
@@ -124210,7 +124235,7 @@ _VideoCallPageComponent.\u0275fac = /* @__PURE__ */ (() => {
     return (\u0275VideoCallPageComponent_BaseFactory || (\u0275VideoCallPageComponent_BaseFactory = \u0275\u0275getInheritedFactory(_VideoCallPageComponent)))(__ngFactoryType__ || _VideoCallPageComponent);
   };
 })();
-_VideoCallPageComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VideoCallPageComponent, selectors: [["", "video-call-page", ""]], inputs: { redirect: [1, "redirect"], present_output: [1, "present_output"] }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c028, decls: 2, vars: 1, consts: [[1, "h-full", "w-full", "p-2"], [1, "flex", "h-full", "w-full", "flex-col", "items-center", "justify-center", "space-y-2", "p-24", "text-black"], [1, "flex", "h-1/2", "flex-1"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-2", "p-2"], ["appearance", "outline", 1, "h-12", "w-full"], ["appearance", "outline", 1, "h-[3.5rem]", "w-full"], [1, "pb-2"], ["placeholder", "Select HDMI content destination", 3, "ngModelChange", "ngModel"], ["value", "None"], ["value", "Local"], ["value", "Remote"], [3, "ngModelChange", "ngModel", "placeholder"], [3, "value"], [1, "flex", "flex-1", "items-center", "justify-center", "p-2"], [3, "pressed", "backspace"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-4", "p-2"], ["btn", "", "matRipple", "", 1, "error", "w-full", 3, "click"], [1, "flex", "items-center", "space-x-4"], ["btn", "", "matRipple", "", 1, "w-full", 3, "click"], ["placeholder", "Select Camera", 3, "ngModelChange", "ngModel"], ["ngModel", "", "placeholder", "Select presentation source", 3, "ngModelChange"], [3, "diameter"]], template: function VideoCallPageComponent_Template(rf, ctx) {
+_VideoCallPageComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _VideoCallPageComponent, selectors: [["", "video-call-page", ""]], inputs: { redirect: [1, "redirect"], present_output: [1, "present_output"] }, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c029, decls: 2, vars: 1, consts: [[1, "h-full", "w-full", "p-2"], [1, "flex", "h-full", "w-full", "flex-col", "items-center", "justify-center", "space-y-2", "p-24", "text-black"], [1, "flex", "h-1/2", "flex-1"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-2", "p-2"], ["appearance", "outline", 1, "h-12", "w-full"], ["appearance", "outline", 1, "h-[3.5rem]", "w-full"], [1, "pb-2"], ["placeholder", "Select HDMI content destination", 3, "ngModelChange", "ngModel"], ["value", "None"], ["value", "Local"], ["value", "Remote"], [3, "ngModelChange", "ngModel", "placeholder"], [3, "value"], [1, "flex", "flex-1", "items-center", "justify-center", "p-2"], [3, "pressed", "backspace"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-4", "p-2"], ["btn", "", "matRipple", "", 1, "error", "w-full", 3, "click"], [1, "flex", "items-center", "space-x-4"], ["btn", "", "matRipple", "", 1, "w-full", 3, "click"], ["placeholder", "Select Camera", 3, "ngModelChange", "ngModel"], ["ngModel", "", "placeholder", "Select presentation source", 3, "ngModelChange"], [3, "diameter"]], template: function VideoCallPageComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, VideoCallPageComponent_Conditional_0_Template, 71, 70, "div", 0)(1, VideoCallPageComponent_Conditional_1_Template, 4, 2, "div", 1);
   }
@@ -124811,7 +124836,7 @@ var MarkdownPipe = _MarkdownPipe;
 })();
 
 // apps/control/src/app/tabbed-view/tab-outlet.component.ts
-var _c029 = (a0, a1) => ["/tabbed", a0, a1];
+var _c030 = (a0, a1) => ["/tabbed", a0, a1];
 function TabOutletComponent_For_5_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -124831,7 +124856,7 @@ function TabOutletComponent_For_5_Template(rf, ctx) {
   if (rf & 2) {
     const tab_r3 = ctx.$implicit;
     const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction2(3, _c029, ctx_r1.id, tab_r3.id || tab_r3.name));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction2(3, _c030, ctx_r1.id, tab_r3.id || tab_r3.name));
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(tab_r3.icon);
     \u0275\u0275advance(2);
@@ -125410,7 +125435,7 @@ var TabOutletComponent = _TabOutletComponent;
 })();
 
 // apps/control/src/app/tabbed-view/tabbed-view.component.ts
-var _c030 = (a0) => ({ id: a0 });
+var _c031 = (a0) => ({ id: a0 });
 function ControlTabbedViewComponent_Conditional_0_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 1);
@@ -125532,7 +125557,7 @@ function ControlTabbedViewComponent_Conditional_2_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275property("diameter", 64);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 2, "APP.CONTROL.CONNECTING", \u0275\u0275pureFunction1(5, _c030, ctx_r1.id)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 2, "APP.CONTROL.CONNECTING", \u0275\u0275pureFunction1(5, _c031, ctx_r1.id)), " ");
   }
 }
 var _ControlTabbedViewComponent = class _ControlTabbedViewComponent extends AsyncHandler {
@@ -125695,7 +125720,7 @@ var ControlTabbedViewComponent = _ControlTabbedViewComponent;
 })();
 
 // apps/control/src/app/video-call/video-call-view.component.ts
-var _c031 = (a0) => ({ id: a0 });
+var _c032 = (a0) => ({ id: a0 });
 function ControlVideoCallViewComponent_Conditional_0_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 1);
@@ -125764,7 +125789,7 @@ function ControlVideoCallViewComponent_Conditional_2_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275property("diameter", 64);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 2, "APP.CONTROL.CONNECTING", \u0275\u0275pureFunction1(5, _c031, ctx_r1.id)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 2, "APP.CONTROL.CONNECTING", \u0275\u0275pureFunction1(5, _c032, ctx_r1.id)), " ");
   }
 }
 var _ControlVideoCallViewComponent = class _ControlVideoCallViewComponent extends AsyncHandler {
@@ -125917,7 +125942,7 @@ var AppRoutingModule = _AppRoutingModule;
 })();
 
 // apps/control/src/app/ui/help-tooltip.component.ts
-var _c032 = (a0, a1, a2) => ({ contact: a0, email: a1, phone: a2 });
+var _c033 = (a0, a1, a2) => ({ contact: a0, email: a1, phone: a2 });
 var _HelpTooltipComponent = class _HelpTooltipComponent {
   constructor() {
     this._state = inject(ControlStateService);
@@ -125943,7 +125968,7 @@ _HelpTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ 
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 2, "APP.CONTROL.HELP_CONTACT"), " ");
     \u0275\u0275advance(2);
-    \u0275\u0275property("innerHTML", \u0275\u0275pipeBind1(6, 7, \u0275\u0275pipeBind2(5, 4, "APP.CONTROL.HELP_CONTACT_MSG", \u0275\u0275pureFunction3(9, _c032, ctx.support_contact || " your administrator", ctx.support_email || "support@place.tech", ctx.support_phone || "0412345678"))), \u0275\u0275sanitizeHtml);
+    \u0275\u0275property("innerHTML", \u0275\u0275pipeBind1(6, 7, \u0275\u0275pipeBind2(5, 4, "APP.CONTROL.HELP_CONTACT_MSG", \u0275\u0275pureFunction3(9, _c033, ctx.support_contact || " your administrator", ctx.support_email || "support@place.tech", ctx.support_phone || "0412345678"))), \u0275\u0275sanitizeHtml);
   }
 }, dependencies: [TranslatePipe, SanitizePipe], styles: ["\n\na[_ngcontent-%COMP%] {\n  text-decoration-line: underline;\n}\n/*# sourceMappingURL=help-tooltip.component.css.map */"] });
 var HelpTooltipComponent = _HelpTooltipComponent;
