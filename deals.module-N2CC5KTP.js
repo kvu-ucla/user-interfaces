@@ -1,0 +1,673 @@
+import {
+  AsyncPipe,
+  AuthenticatedImageDirective,
+  BehaviorSubject,
+  CommonModule,
+  Component,
+  DatePipe,
+  FooterMenuComponent,
+  FormFieldsModule,
+  FormsModule,
+  IconComponent,
+  Injectable,
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogClose,
+  MatDialogModule,
+  MatDialogRef,
+  MatMenu,
+  MatMenuItem,
+  MatMenuTrigger,
+  MatRipple,
+  MatRippleModule,
+  NgModule,
+  OrganisationService,
+  RouterModule,
+  SharedComponentModule,
+  TopbarComponent,
+  TranslatePipe,
+  catchError,
+  combineLatest,
+  filter,
+  hu,
+  inject,
+  map,
+  of,
+  output,
+  setClassMetadata,
+  shareReplay,
+  signal,
+  startWith,
+  switchMap,
+  tap,
+  unique,
+  ɵsetClassDebugInfo,
+  ɵɵadvance,
+  ɵɵclassProp,
+  ɵɵconditional,
+  ɵɵconditionalCreate,
+  ɵɵdeclareLet,
+  ɵɵdefineComponent,
+  ɵɵdefineInjectable,
+  ɵɵdefineInjector,
+  ɵɵdefineNgModule,
+  ɵɵelement,
+  ɵɵelementEnd,
+  ɵɵelementStart,
+  ɵɵgetCurrentView,
+  ɵɵlistener,
+  ɵɵnextContext,
+  ɵɵpipe,
+  ɵɵpipeBind1,
+  ɵɵpipeBind2,
+  ɵɵpipeBind3,
+  ɵɵproperty,
+  ɵɵpureFunction1,
+  ɵɵreference,
+  ɵɵrepeater,
+  ɵɵrepeaterCreate,
+  ɵɵresetView,
+  ɵɵrestoreView,
+  ɵɵsanitizeUrl,
+  ɵɵtext,
+  ɵɵtextInterpolate,
+  ɵɵtextInterpolate1
+} from "./chunk-N6R76AGS.js";
+import "./chunk-KWSTWQNB.js";
+
+// apps/workplace/src/app/deals/deal-details-modal.component.ts
+function DealDetailsModalComponent_Conditional_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 3);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r0.deal.details, " ");
+  }
+}
+var _DealDetailsModalComponent = class _DealDetailsModalComponent {
+  constructor() {
+    this.deal = inject(MAT_DIALOG_DATA);
+    this._dialog_ref = inject(MatDialogRef);
+    this.remove = output();
+  }
+  close() {
+    this._dialog_ref.close();
+  }
+};
+_DealDetailsModalComponent.\u0275fac = function DealDetailsModalComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _DealDetailsModalComponent)();
+};
+_DealDetailsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DealDetailsModalComponent, selectors: [["deal-details-modal"]], outputs: { remove: "remove" }, decls: 27, vars: 15, consts: [[1, "relative", "bg-base-100"], [1, "relative", "h-48", "w-[32rem]", "max-w-[calc(100vw-2rem)]"], ["auth", "", "alt", "Deal Image", 1, "h-full", "w-full", "object-cover", 3, "source"], [1, "absolute", "bottom-2", "left-2", "max-w-full", "truncate", "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content", "shadow"], [1, "flex", "space-x-2", "p-2"], [1, "w-auto", "px-2", "text-xl", "font-medium"], [1, "flex-1"], [1, "space-y-2", "p-4"], [1, "font-medium"], [1, "pb-4", "text-sm"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "right-2", "top-2", "bg-base-100"]], template: function DealDetailsModalComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
+    \u0275\u0275element(2, "img", 2);
+    \u0275\u0275conditionalCreate(3, DealDetailsModalComponent_Conditional_3_Template, 2, 1, "div", 3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "header", 4)(5, "h3", 5);
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(7, "div", 6);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "div", 7)(9, "h4", 8);
+    \u0275\u0275text(10);
+    \u0275\u0275pipe(11, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(12, "p", 9);
+    \u0275\u0275text(13);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(14, "h4", 8);
+    \u0275\u0275text(15, "Validity Period");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(16, "p", 9);
+    \u0275\u0275text(17);
+    \u0275\u0275pipe(18, "date");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(19, "h4", 8);
+    \u0275\u0275text(20);
+    \u0275\u0275pipe(21, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(22, "p", 9);
+    \u0275\u0275text(23);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(24, "button", 10)(25, "icon");
+    \u0275\u0275text(26, "close");
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275property("source", ctx.deal.image);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.deal.details ? 3 : -1);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx.deal.name);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(11, 8, "COMMON.DESCRIPTION"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx.deal.description);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(18, 10, ctx.deal.expires_at, "mediumDate"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(21, 13, "COMMON.TERMS"));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate(ctx.deal.description);
+  }
+}, dependencies: [
+  CommonModule,
+  DatePipe,
+  MatDialogModule,
+  MatDialogClose,
+  AuthenticatedImageDirective,
+  TranslatePipe,
+  IconComponent,
+  RouterModule,
+  MatRippleModule,
+  MatRipple
+], encapsulation: 2 });
+var DealDetailsModalComponent = _DealDetailsModalComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DealDetailsModalComponent, [{
+    type: Component,
+    args: [{ selector: "deal-details-modal", template: `
+        <div class="relative bg-base-100">
+            <div class="relative h-48 w-[32rem] max-w-[calc(100vw-2rem)]">
+                <img
+                    class="h-full w-full object-cover"
+                    auth
+                    [source]="deal.image"
+                    alt="Deal Image"
+                />
+                @if (deal.details) {
+                    <div
+                        class="absolute bottom-2 left-2 max-w-full truncate rounded bg-info px-2 py-1 text-xs text-info-content shadow"
+                    >
+                        {{ deal.details }}
+                    </div>
+                }
+            </div>
+            <header class="flex space-x-2 p-2">
+                <h3 class="w-auto px-2 text-xl font-medium">{{ deal.name }}</h3>
+                <div class="flex-1"></div>
+                <!-- <button
+                    btn
+                    matRipple
+                    class="inverse error space-x-2"
+                    (click)="remove.emit()"
+                >
+                    <icon class="text-2xl text-error">delete</icon>
+                    <div class="pr-2">{{ 'COMMON.REMOVE' | translate }}</div>
+                </button> -->
+            </header>
+            <div class="space-y-2 p-4">
+                <h4 class="font-medium">
+                    {{ 'COMMON.DESCRIPTION' | translate }}
+                </h4>
+                <p class="pb-4 text-sm">{{ deal.description }}</p>
+                <h4 class="font-medium">Validity Period</h4>
+                <p class="pb-4 text-sm">
+                    {{ deal.expires_at | date: 'mediumDate' }}
+                </p>
+                <h4 class="font-medium">{{ 'COMMON.TERMS' | translate }}</h4>
+                <p class="pb-4 text-sm">{{ deal.description }}</p>
+            </div>
+            <button
+                icon
+                matRipple
+                mat-dialog-close
+                class="absolute right-2 top-2 bg-base-100"
+            >
+                <icon>close</icon>
+            </button>
+        </div>
+    `, imports: [
+      CommonModule,
+      MatDialogModule,
+      AuthenticatedImageDirective,
+      TranslatePipe,
+      IconComponent,
+      RouterModule,
+      MatRippleModule
+    ] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DealDetailsModalComponent, { className: "DealDetailsModalComponent", filePath: "apps/workplace/src/app/deals/deal-details-modal.component.ts", lineNumber: 79 });
+})();
+
+// apps/workplace/src/app/deals/deals.service.ts
+var _DealsService = class _DealsService {
+  constructor() {
+    this._org = inject(OrganisationService);
+    this._dialog = inject(MatDialog);
+    this.loading = signal(false);
+    this.deals$ = combineLatest([
+      this._org.active_building
+    ]).pipe(filter(([b]) => !!b?.id), switchMap(([bld]) => {
+      this.loading.set(true);
+      return hu(bld.id, "deals-n-offers").pipe(catchError(() => of({ details: [] })));
+    }), map(({ details }) => details instanceof Array ? details : []), tap(() => this.loading.set(false)), startWith([]), shareReplay(1));
+  }
+  viewDeal(deal) {
+    this._dialog.open(DealDetailsModalComponent, { data: deal });
+  }
+};
+_DealsService.\u0275fac = function DealsService_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _DealsService)();
+};
+_DealsService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _DealsService, factory: _DealsService.\u0275fac, providedIn: "root" });
+var DealsService = _DealsService;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DealsService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
+// apps/workplace/src/app/deals/deals.component.ts
+var _c0 = (a0) => ({ count: a0 });
+function _forTrack0($index, $item) {
+  return this.type;
+}
+var _forTrack1 = ($index, $item) => $item.id;
+function DealsComponent_For_12_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 5);
+    \u0275\u0275listener("click", function DealsComponent_For_12_Template_button_click_0_listener() {
+      const t_r3 = \u0275\u0275restoreView(_r2).$implicit;
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.type.next(t_r3));
+    });
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const t_r3 = ctx.$implicit;
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275classProp("bg-base-100", ctx_r3.type.value === t_r3);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", t_r3, " ");
+  }
+}
+function DealsComponent_For_36_Conditional_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 16);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const deal_r6 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", deal_r6.details, " ");
+  }
+}
+function DealsComponent_For_36_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r5 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div")(1, "button", 13);
+    \u0275\u0275listener("click", function DealsComponent_For_36_Template_button_click_1_listener() {
+      const deal_r6 = \u0275\u0275restoreView(_r5).$implicit;
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.view(deal_r6));
+    });
+    \u0275\u0275elementStart(2, "div", 14);
+    \u0275\u0275element(3, "img", 15);
+    \u0275\u0275conditionalCreate(4, DealsComponent_For_36_Conditional_4_Template, 2, 1, "div", 16);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 17)(6, "h3", 18);
+    \u0275\u0275text(7);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(8, "p", 19);
+    \u0275\u0275text(9);
+    \u0275\u0275pipe(10, "date");
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const deal_r6 = ctx.$implicit;
+    \u0275\u0275advance(3);
+    \u0275\u0275property("src", deal_r6.image, \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(deal_r6.details ? 4 : -1);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", deal_r6.name, " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" Valid until ", \u0275\u0275pipeBind2(10, 4, deal_r6.expires_at, "mediumDate"), " ");
+  }
+}
+function DealsComponent_Conditional_37_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 12);
+    \u0275\u0275element(1, "img", 20);
+    \u0275\u0275elementStart(2, "div", 21)(3, "p", 22);
+    \u0275\u0275text(4, " No Deals or Offers Available ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "p", 19);
+    \u0275\u0275text(6, " We're working on bringing you exciting deals and offers. Please check back later or explore other sections. ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "button", 23)(8, "icon");
+    \u0275\u0275text(9, "refresh");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "div");
+    \u0275\u0275text(11);
+    \u0275\u0275pipe(12, "translate");
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(11);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(12, 1, "COMMON.REFRESH"), " ");
+  }
+}
+var _DealsComponent = class _DealsComponent {
+  constructor() {
+    this._service = inject(DealsService);
+    this.deals$ = this._service.deals$;
+    this.types = this._service.deals$.pipe(map((deals) => unique(deals.map((_) => _.type).sort((a, b) => a.localeCompare(b)))));
+    this.type = new BehaviorSubject("");
+    this.sort_type = new BehaviorSubject("");
+    this.filtered_deals$ = combineLatest([
+      this.deals$,
+      this.type,
+      this.sort_type
+    ]).pipe(map(([deals, type, sort_type]) => deals.filter((deal) => !type || deal.type === type).sort((a, b) => sort_type === "date_asc" ? a.expires_at - b.expires_at : sort_type === "date_desc" ? b.expires_at - a.expires_at : 0)));
+    this.view = (d) => this._service.viewDeal(d);
+  }
+  sort(type) {
+    this.sort_type.next(type);
+  }
+};
+_DealsComponent.\u0275fac = function DealsComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _DealsComponent)();
+};
+_DealsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DealsComponent, selectors: [["deals-n-offers"]], standalone: false, decls: 39, vars: 27, consts: [["sortMenu", "matMenu"], [1, "absolute", "inset-0", "flex", "flex-col", "overflow-auto"], [1, "min-h-1/2", "flex", "h-1/2", "flex-1", "flex-col", "overflow-auto", "bg-base-200", "px-4"], [1, "sticky", "top-0", "mx-auto", "mb-2", "w-[40rem]", "max-w-full"], [1, "flex", "flex-wrap", "py-4"], ["matRipple", "", 1, "m-1", "rounded-full", "border", "border-base-300", "px-4", "py-1", 3, "click"], ["matRipple", "", 1, "m-1", "rounded-full", "border", "border-base-300", "px-4", "py-1", 3, "bg-base-100"], [1, "flex", "items-center", "justify-between", "text-base"], ["matRipple", "", 1, "flex", "items-center", "rounded", "p-2", 3, "matMenuTriggerFor"], [1, "ml-2", "text-xl"], ["mat-menu-item", "", 3, "click"], [1, "mx-auto", "grid", "w-[40rem]", "max-w-full", "grid-cols-1", "gap-4", "sm:grid-cols-2", "lg:grid-cols-3"], [1, "col-span-6", "flex", "w-full", "flex-col", "items-center", "justify-center", "rounded-lg", "bg-base-200", "p-16"], [1, "flex", "w-full", "flex-col", "items-center", "overflow-hidden", "rounded-lg", "border", "border-base-300", "bg-base-100", "shadow", 3, "click"], [1, "relative", "h-48", "w-full", "max-w-full", "overflow-hidden", "rounded-b-lg", "bg-base-200"], ["alt", "Deal Image", 1, "h-full", "w-full", "object-cover", 3, "src"], [1, "absolute", "bottom-2", "left-2", "max-w-full", "truncate", "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content", "shadow"], [1, "w-full", "px-4", "py-2", "text-left"], [1, "truncate", "font-bold"], [1, "text-sm", "opacity-50"], ["src", "assets/icons/no-deals.svg", "alt", "No Deals or Offers Available", 1, "mb-8", "w-48"], [1, "flex", "flex-col", "items-center", "space-y-4", "text-center"], [1, "text-lg", "font-bold"], ["btn", "", "matRipple", ""]], template: function DealsComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 1);
+    \u0275\u0275element(1, "topbar");
+    \u0275\u0275elementStart(2, "main", 2);
+    \u0275\u0275declareLet(3);
+    \u0275\u0275pipe(4, "async");
+    \u0275\u0275elementStart(5, "div", 3)(6, "div", 4);
+    \u0275\u0275declareLet(7);
+    \u0275\u0275pipe(8, "async");
+    \u0275\u0275elementStart(9, "button", 5);
+    \u0275\u0275listener("click", function DealsComponent_Template_button_click_9_listener() {
+      \u0275\u0275restoreView(_r1);
+      return \u0275\u0275resetView(ctx.type.next(""));
+    });
+    \u0275\u0275text(10, " All ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275repeaterCreate(11, DealsComponent_For_12_Template, 2, 3, "button", 6, _forTrack0, true);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(13, "div", 7)(14, "div");
+    \u0275\u0275text(15);
+    \u0275\u0275pipe(16, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(17, "button", 8)(18, "div");
+    \u0275\u0275text(19);
+    \u0275\u0275pipe(20, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(21, "icon", 9);
+    \u0275\u0275text(22, "keyboard_arrow_down");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(23, "mat-menu", null, 0)(25, "button", 10);
+    \u0275\u0275listener("click", function DealsComponent_Template_button_click_25_listener() {
+      \u0275\u0275restoreView(_r1);
+      return \u0275\u0275resetView(ctx.sort("relevance"));
+    });
+    \u0275\u0275text(26);
+    \u0275\u0275pipe(27, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(28, "button", 10);
+    \u0275\u0275listener("click", function DealsComponent_Template_button_click_28_listener() {
+      \u0275\u0275restoreView(_r1);
+      return \u0275\u0275resetView(ctx.sort("date_desc"));
+    });
+    \u0275\u0275text(29);
+    \u0275\u0275pipe(30, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(31, "button", 10);
+    \u0275\u0275listener("click", function DealsComponent_Template_button_click_31_listener() {
+      \u0275\u0275restoreView(_r1);
+      return \u0275\u0275resetView(ctx.sort("date_asc"));
+    });
+    \u0275\u0275text(32);
+    \u0275\u0275pipe(33, "translate");
+    \u0275\u0275elementEnd()()()();
+    \u0275\u0275elementStart(34, "div", 11);
+    \u0275\u0275repeaterCreate(35, DealsComponent_For_36_Template, 11, 7, "div", null, _forTrack1);
+    \u0275\u0275conditionalCreate(37, DealsComponent_Conditional_37_Template, 13, 3, "div", 12);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275element(38, "footer-menu");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const sortMenu_r7 = \u0275\u0275reference(24);
+    const deal_list_r8 = \u0275\u0275pipeBind1(4, 9, ctx.filtered_deals$);
+    const type_list_r9 = \u0275\u0275pipeBind1(8, 11, ctx.types);
+    \u0275\u0275advance(9);
+    \u0275\u0275classProp("bg-base-100", ctx.type.value === "");
+    \u0275\u0275advance(2);
+    \u0275\u0275repeater(type_list_r9);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind3(16, 13, "APP.WORKPLACE.DEAL_COUNT", \u0275\u0275pureFunction1(25, _c0, deal_list_r8.length), deal_list_r8.length), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275property("matMenuTriggerFor", sortMenu_r7);
+    const sort_t_r10 = ctx.sort_type.getValue();
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(20, 17, sort_t_r10 === "date_desc" ? "APP.WORKPLACE.SORT_BY_DATE_DESC" : sort_t_r10 === "date_asc" ? "APP.WORKPLACE.SORT_BY_DATE_ASC" : "APP.WORKPLACE.SORT_BY_RELEVANCE"), " ");
+    \u0275\u0275advance(7);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(27, 19, "APP.WORKPLACE.SORT_BY_RELEVANCE"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(30, 21, "APP.WORKPLACE.SORT_BY_DATE_DESC"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(33, 23, "APP.WORKPLACE.SORT_BY_DATE_ASC"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275repeater(deal_list_r8);
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional((deal_list_r8 == null ? null : deal_list_r8.length) <= 0 ? 37 : -1);
+  }
+}, dependencies: [TopbarComponent, FooterMenuComponent, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, IconComponent, AsyncPipe, DatePipe, TranslatePipe], encapsulation: 2 });
+var DealsComponent = _DealsComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DealsComponent, [{
+    type: Component,
+    args: [{ selector: "deals-n-offers", template: `
+        <div class="absolute inset-0 flex flex-col overflow-auto">
+            <topbar />
+            <main
+                class="min-h-1/2 flex h-1/2 flex-1 flex-col overflow-auto bg-base-200 px-4"
+            >
+                @let deal_list = filtered_deals$ | async;
+                <div class="sticky top-0 mx-auto mb-2 w-[40rem] max-w-full">
+                    <div class="flex flex-wrap py-4">
+                        @let type_list = types | async;
+                        <button
+                            matRipple
+                            class="m-1 rounded-full border border-base-300 px-4 py-1"
+                            [class.bg-base-100]="type.value === ''"
+                            (click)="type.next('')"
+                        >
+                            All
+                        </button>
+                        @for (t of type_list; track type) {
+                            <button
+                                matRipple
+                                class="m-1 rounded-full border border-base-300 px-4 py-1"
+                                [class.bg-base-100]="type.value === t"
+                                (click)="type.next(t)"
+                            >
+                                {{ t }}
+                            </button>
+                        }
+                    </div>
+                    <div class="flex items-center justify-between text-base">
+                        <div>
+                            {{
+                                'APP.WORKPLACE.DEAL_COUNT'
+                                    | translate
+                                        : { count: deal_list.length }
+                                        : deal_list.length
+                            }}
+                        </div>
+                        <button
+                            matRipple
+                            class="flex items-center rounded p-2"
+                            [matMenuTriggerFor]="sortMenu"
+                        >
+                            <div>
+                                @let sort_t = sort_type.getValue();
+                                {{
+                                    (sort_t === 'date_desc'
+                                        ? 'APP.WORKPLACE.SORT_BY_DATE_DESC'
+                                        : sort_t === 'date_asc'
+                                          ? 'APP.WORKPLACE.SORT_BY_DATE_ASC'
+                                          : 'APP.WORKPLACE.SORT_BY_RELEVANCE'
+                                    ) | translate
+                                }}
+                            </div>
+                            <icon class="ml-2 text-xl"
+                                >keyboard_arrow_down</icon
+                            >
+                        </button>
+                        <mat-menu #sortMenu="matMenu">
+                            <button mat-menu-item (click)="sort('relevance')">
+                                {{
+                                    'APP.WORKPLACE.SORT_BY_RELEVANCE'
+                                        | translate
+                                }}
+                            </button>
+                            <button mat-menu-item (click)="sort('date_desc')">
+                                {{
+                                    'APP.WORKPLACE.SORT_BY_DATE_DESC'
+                                        | translate
+                                }}
+                            </button>
+                            <button mat-menu-item (click)="sort('date_asc')">
+                                {{
+                                    'APP.WORKPLACE.SORT_BY_DATE_ASC' | translate
+                                }}
+                            </button>
+                        </mat-menu>
+                    </div>
+                </div>
+                <div
+                    class="mx-auto grid w-[40rem] max-w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                >
+                    @for (deal of deal_list; track deal.id) {
+                        <div>
+                            <button
+                                class="flex w-full flex-col items-center overflow-hidden rounded-lg border border-base-300 bg-base-100 shadow"
+                                (click)="view(deal)"
+                            >
+                                <div
+                                    class="relative h-48 w-full max-w-full overflow-hidden rounded-b-lg bg-base-200"
+                                >
+                                    <img
+                                        [src]="deal.image"
+                                        alt="Deal Image"
+                                        class="h-full w-full object-cover"
+                                    />
+                                    @if (deal.details) {
+                                        <div
+                                            class="absolute bottom-2 left-2 max-w-full truncate rounded bg-info px-2 py-1 text-xs text-info-content shadow"
+                                        >
+                                            {{ deal.details }}
+                                        </div>
+                                    }
+                                </div>
+                                <div class="w-full px-4 py-2 text-left">
+                                    <h3 class="truncate font-bold">
+                                        {{ deal.name }}
+                                    </h3>
+                                    <p class="text-sm opacity-50">
+                                        Valid until
+                                        {{
+                                            deal.expires_at | date: 'mediumDate'
+                                        }}
+                                    </p>
+                                </div>
+                            </button>
+                        </div>
+                    }
+                    @if (deal_list?.length <= 0) {
+                        <div
+                            class="col-span-6 flex w-full flex-col items-center justify-center rounded-lg bg-base-200 p-16"
+                        >
+                            <img
+                                src="assets/icons/no-deals.svg"
+                                alt="No Deals or Offers Available"
+                                class="mb-8 w-48"
+                            />
+                            <div
+                                class="flex flex-col items-center space-y-4 text-center"
+                            >
+                                <p class="text-lg font-bold">
+                                    No Deals or Offers Available
+                                </p>
+                                <p class="text-sm opacity-50">
+                                    We're working on bringing you exciting deals
+                                    and offers. Please check back later or
+                                    explore other sections.
+                                </p>
+                                <button btn matRipple>
+                                    <icon>refresh</icon>
+                                    <div>
+                                        {{ 'COMMON.REFRESH' | translate }}
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </main>
+            <footer-menu />
+        </div>
+    `, standalone: false }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DealsComponent, { className: "DealsComponent", filePath: "apps/workplace/src/app/deals/deals.component.ts", lineNumber: 163 });
+})();
+
+// apps/workplace/src/app/deals/deals.module.ts
+var ROUTES = [{ path: "", component: DealsComponent }];
+var _DealsModule = class _DealsModule {
+};
+_DealsModule.\u0275fac = function DealsModule_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _DealsModule)();
+};
+_DealsModule.\u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _DealsModule });
+_DealsModule.\u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ imports: [
+  CommonModule,
+  FormsModule,
+  FormFieldsModule,
+  SharedComponentModule,
+  DealDetailsModalComponent,
+  RouterModule.forChild(ROUTES)
+] });
+var DealsModule = _DealsModule;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DealsModule, [{
+    type: NgModule,
+    args: [{
+      declarations: [DealsComponent],
+      imports: [
+        CommonModule,
+        FormsModule,
+        FormFieldsModule,
+        SharedComponentModule,
+        DealDetailsModalComponent,
+        RouterModule.forChild(ROUTES)
+      ]
+    }]
+  }], null, null);
+})();
+export {
+  DealsModule
+};
+//# sourceMappingURL=deals.module-N2CC5KTP.js.map

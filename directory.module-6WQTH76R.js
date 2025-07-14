@@ -1,4 +1,4 @@
-import "./chunk-BIZHSPYD.js";
+import "./chunk-FX2OZCAG.js";
 import {
   AsyncHandler,
   AsyncPipe,
@@ -71,7 +71,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-IRN2SDI2.js";
+} from "./chunk-N6R76AGS.js";
 import "./chunk-KWSTWQNB.js";
 
 // apps/workplace/src/app/directory/user-list.component.ts
@@ -438,4 +438,4 @@ var DirectoryModule = _DirectoryModule;
 export {
   DirectoryModule
 };
-//# sourceMappingURL=directory.module-I76QF32K.js.map
+//# sourceMappingURL=directory.module-6WQTH76R.js.map

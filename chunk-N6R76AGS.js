@@ -63617,6 +63617,7 @@ var APP = {
     MENU_CONTROL: "Room Control",
     MENU_EXPLORE: "Spaces",
     MENU_EVENTS: "Events",
+    MENU_DEALS: "Deals & Offers",
     GLOBAL_SEARCH: "Search for people or spaces...",
     GLOBAL_SEARCH_EMPTY: "No matches found.",
     GLOBAL_SEARCH_START: "Start typing to search...",
@@ -63705,7 +63706,12 @@ var APP = {
     CHAT_WAITING: "Waiting for a reply...",
     CHAT_MESSAGE_PLACEHOLDER: "New message...",
     RESOURCE_CHECKED_IN_FAILED: "Failed to check in resource",
-    RESOURCE_CHECKED_IN: "Successfully checked in resource"
+    RESOURCE_CHECKED_IN: "Successfully checked in resource",
+    DEAL_COUNT_1: "{{ count }} Offer",
+    DEAL_COUNT_N: "{{ count }} Offers",
+    SORT_BY_DATE_DESC: "Sort by Date (Newest First)",
+    SORT_BY_DATE_ASC: "Sort by Date (Oldest First)",
+    SORT_BY_RELEVANCE: "Sort by Relevance"
   },
   CONCIERGE: {
     MENU_BOOKINGS: "Bookings",
@@ -70377,15 +70383,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "c7604ce",
-  "hash": "c7604ce",
+  "raw": "0a8f38b",
+  "hash": "0a8f38b",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "c7604ce",
+  "suffix": "0a8f38b",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752211892448
+  "time": 1752462581434
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -162584,7 +162590,7 @@ var _ExploreSearchService = class _ExploreSearchService {
     this._poi_list = combineLatest([
       this._org.active_building,
       this._poi_metadata
-    ]).pipe(filter(([bld]) => !!bld.id), map(([bld, metadata]) => {
+    ]).pipe(filter(([bld]) => !!bld?.id), map(([bld, metadata]) => {
       const mapping = metadata.details || {};
       const levels2 = this._org.levelsForBuilding(bld);
       const list2 = flatten2(levels2.map((lvl) => mapping[lvl.id] || []));
@@ -174323,6 +174329,12 @@ var _TopMenuComponent = class _TopMenuComponent extends AsyncHandler {
         route: "/group-events",
         icon: "local_activity",
         name: i18n("APP.WORKPLACE.MENU_EVENTS")
+      },
+      {
+        id: "deals-n-offers",
+        route: "/deals-n-offers",
+        icon: "confirmation_number",
+        name: i18n("APP.WORKPLACE.MENU_DEALS")
       }
     ];
   }
@@ -175532,4 +175544,4 @@ qr/esm/index.js:
   limitations under the License.
   *)
 */
-//# sourceMappingURL=chunk-IRN2SDI2.js.map
+//# sourceMappingURL=chunk-N6R76AGS.js.map
