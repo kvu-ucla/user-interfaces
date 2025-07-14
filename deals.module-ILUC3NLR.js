@@ -72,7 +72,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-N6R76AGS.js";
+} from "./chunk-SMI3JQDD.js";
 import "./chunk-KWSTWQNB.js";
 
 // apps/workplace/src/app/deals/deal-details-modal.component.ts
@@ -270,15 +270,16 @@ var DealsService = _DealsService;
 
 // apps/workplace/src/app/deals/deals.component.ts
 var _c0 = (a0) => ({ count: a0 });
+var _c1 = (a0) => ({ date: a0 });
 function _forTrack0($index, $item) {
   return this.type;
 }
 var _forTrack1 = ($index, $item) => $item.id;
-function DealsComponent_For_12_Template(rf, ctx) {
+function DealsComponent_For_13_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "button", 5);
-    \u0275\u0275listener("click", function DealsComponent_For_12_Template_button_click_0_listener() {
+    \u0275\u0275listener("click", function DealsComponent_For_13_Template_button_click_0_listener() {
       const t_r3 = \u0275\u0275restoreView(_r2).$implicit;
       const ctx_r3 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r3.type.next(t_r3));
@@ -294,7 +295,7 @@ function DealsComponent_For_12_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", t_r3, " ");
   }
 }
-function DealsComponent_For_36_Conditional_4_Template(rf, ctx) {
+function DealsComponent_For_37_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 16);
     \u0275\u0275text(1);
@@ -306,18 +307,18 @@ function DealsComponent_For_36_Conditional_4_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", deal_r6.details, " ");
   }
 }
-function DealsComponent_For_36_Template(rf, ctx) {
+function DealsComponent_For_37_Template(rf, ctx) {
   if (rf & 1) {
     const _r5 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div")(1, "button", 13);
-    \u0275\u0275listener("click", function DealsComponent_For_36_Template_button_click_1_listener() {
+    \u0275\u0275listener("click", function DealsComponent_For_37_Template_button_click_1_listener() {
       const deal_r6 = \u0275\u0275restoreView(_r5).$implicit;
       const ctx_r3 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r3.view(deal_r6));
     });
     \u0275\u0275elementStart(2, "div", 14);
     \u0275\u0275element(3, "img", 15);
-    \u0275\u0275conditionalCreate(4, DealsComponent_For_36_Conditional_4_Template, 2, 1, "div", 16);
+    \u0275\u0275conditionalCreate(4, DealsComponent_For_37_Conditional_4_Template, 2, 1, "div", 16);
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(5, "div", 17)(6, "h3", 18);
     \u0275\u0275text(7);
@@ -325,6 +326,7 @@ function DealsComponent_For_36_Template(rf, ctx) {
     \u0275\u0275elementStart(8, "p", 19);
     \u0275\u0275text(9);
     \u0275\u0275pipe(10, "date");
+    \u0275\u0275pipe(11, "translate");
     \u0275\u0275elementEnd()()()();
   }
   if (rf & 2) {
@@ -336,30 +338,36 @@ function DealsComponent_For_36_Template(rf, ctx) {
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1(" ", deal_r6.name, " ");
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" Valid until ", \u0275\u0275pipeBind2(10, 4, deal_r6.expires_at, "mediumDate"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(11, 7, "COMMON.VALID_UNTIL_DATE", \u0275\u0275pureFunction1(10, _c1, \u0275\u0275pipeBind2(10, 4, deal_r6.expires_at, "mediumDate"))), " ");
   }
 }
-function DealsComponent_Conditional_37_Template(rf, ctx) {
+function DealsComponent_Conditional_38_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 12);
     \u0275\u0275element(1, "img", 20);
     \u0275\u0275elementStart(2, "div", 21)(3, "p", 22);
-    \u0275\u0275text(4, " No Deals or Offers Available ");
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "p", 19);
-    \u0275\u0275text(6, " We're working on bringing you exciting deals and offers. Please check back later or explore other sections. ");
+    \u0275\u0275elementStart(6, "p", 19);
+    \u0275\u0275text(7);
+    \u0275\u0275pipe(8, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "button", 23)(8, "icon");
-    \u0275\u0275text(9, "refresh");
+    \u0275\u0275elementStart(9, "button", 23)(10, "icon");
+    \u0275\u0275text(11, "refresh");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "div");
-    \u0275\u0275text(11);
-    \u0275\u0275pipe(12, "translate");
+    \u0275\u0275elementStart(12, "div");
+    \u0275\u0275text(13);
+    \u0275\u0275pipe(14, "translate");
     \u0275\u0275elementEnd()()()();
   }
   if (rf & 2) {
-    \u0275\u0275advance(11);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(12, 1, "COMMON.REFRESH"), " ");
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(5, 3, "APP.WORKPLACE.DEALS_EMPTY_TITLE"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(8, 5, "APP.WORKPLACE.DEALS_EMPTY_BODY"), " ");
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(14, 7, "COMMON.REFRESH"), " ");
   }
 }
 var _DealsComponent = class _DealsComponent {
@@ -383,7 +391,7 @@ var _DealsComponent = class _DealsComponent {
 _DealsComponent.\u0275fac = function DealsComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _DealsComponent)();
 };
-_DealsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DealsComponent, selectors: [["deals-n-offers"]], standalone: false, decls: 39, vars: 27, consts: [["sortMenu", "matMenu"], [1, "absolute", "inset-0", "flex", "flex-col", "overflow-auto"], [1, "min-h-1/2", "flex", "h-1/2", "flex-1", "flex-col", "overflow-auto", "bg-base-200", "px-4"], [1, "sticky", "top-0", "mx-auto", "mb-2", "w-[40rem]", "max-w-full"], [1, "flex", "flex-wrap", "py-4"], ["matRipple", "", 1, "m-1", "rounded-full", "border", "border-base-300", "px-4", "py-1", 3, "click"], ["matRipple", "", 1, "m-1", "rounded-full", "border", "border-base-300", "px-4", "py-1", 3, "bg-base-100"], [1, "flex", "items-center", "justify-between", "text-base"], ["matRipple", "", 1, "flex", "items-center", "rounded", "p-2", 3, "matMenuTriggerFor"], [1, "ml-2", "text-xl"], ["mat-menu-item", "", 3, "click"], [1, "mx-auto", "grid", "w-[40rem]", "max-w-full", "grid-cols-1", "gap-4", "sm:grid-cols-2", "lg:grid-cols-3"], [1, "col-span-6", "flex", "w-full", "flex-col", "items-center", "justify-center", "rounded-lg", "bg-base-200", "p-16"], [1, "flex", "w-full", "flex-col", "items-center", "overflow-hidden", "rounded-lg", "border", "border-base-300", "bg-base-100", "shadow", 3, "click"], [1, "relative", "h-48", "w-full", "max-w-full", "overflow-hidden", "rounded-b-lg", "bg-base-200"], ["alt", "Deal Image", 1, "h-full", "w-full", "object-cover", 3, "src"], [1, "absolute", "bottom-2", "left-2", "max-w-full", "truncate", "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content", "shadow"], [1, "w-full", "px-4", "py-2", "text-left"], [1, "truncate", "font-bold"], [1, "text-sm", "opacity-50"], ["src", "assets/icons/no-deals.svg", "alt", "No Deals or Offers Available", 1, "mb-8", "w-48"], [1, "flex", "flex-col", "items-center", "space-y-4", "text-center"], [1, "text-lg", "font-bold"], ["btn", "", "matRipple", ""]], template: function DealsComponent_Template(rf, ctx) {
+_DealsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DealsComponent, selectors: [["deals-n-offers"]], standalone: false, decls: 40, vars: 30, consts: [["sortMenu", "matMenu"], [1, "absolute", "inset-0", "flex", "flex-col", "overflow-auto"], [1, "min-h-1/2", "flex", "h-1/2", "flex-1", "flex-col", "overflow-auto", "bg-base-200", "px-4", "pt-2"], [1, "sticky", "top-0", "mx-auto", "mb-2", "w-[40rem]", "max-w-full"], [1, "-mx-2", "flex", "flex-wrap", "py-2"], ["matRipple", "", 1, "m-1", "rounded-full", "border", "border-base-300", "px-4", "py-1", 3, "click"], ["matRipple", "", 1, "m-1", "rounded-full", "border", "border-base-300", "px-4", "py-1", 3, "bg-base-100"], [1, "flex", "items-center", "justify-between", "text-base"], ["matRipple", "", 1, "flex", "items-center", "rounded", "p-2", 3, "matMenuTriggerFor"], [1, "ml-2", "text-xl"], ["mat-menu-item", "", 3, "click"], [1, "mx-auto", "grid", "w-[40rem]", "max-w-full", "grid-cols-1", "gap-4", "sm:grid-cols-2", "lg:grid-cols-3"], [1, "col-span-6", "flex", "w-full", "flex-col", "items-center", "justify-center", "rounded-lg", "bg-base-200", "p-16"], [1, "flex", "w-full", "flex-col", "items-center", "overflow-hidden", "rounded-lg", "border", "border-base-300", "bg-base-100", "shadow", 3, "click"], [1, "relative", "h-48", "w-full", "max-w-full", "overflow-hidden", "rounded-b-lg", "bg-base-200"], ["alt", "Deal Image", 1, "h-full", "w-full", "object-cover", 3, "src"], [1, "absolute", "bottom-2", "left-2", "max-w-full", "truncate", "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content", "shadow"], [1, "w-full", "px-4", "py-2", "text-left"], [1, "truncate", "font-bold"], [1, "text-sm", "opacity-50"], ["src", "assets/icons/no-deals.svg", "alt", "No Deals or Offers Available", 1, "mb-8", "w-48"], [1, "flex", "flex-col", "items-center", "space-y-4", "text-center"], [1, "text-lg", "font-bold"], ["btn", "", "matRipple", ""]], template: function DealsComponent_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 1);
@@ -399,77 +407,80 @@ _DealsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: 
       \u0275\u0275restoreView(_r1);
       return \u0275\u0275resetView(ctx.type.next(""));
     });
-    \u0275\u0275text(10, " All ");
+    \u0275\u0275text(10);
+    \u0275\u0275pipe(11, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275repeaterCreate(11, DealsComponent_For_12_Template, 2, 3, "button", 6, _forTrack0, true);
+    \u0275\u0275repeaterCreate(12, DealsComponent_For_13_Template, 2, 3, "button", 6, _forTrack0, true);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "div", 7)(14, "div");
-    \u0275\u0275text(15);
-    \u0275\u0275pipe(16, "translate");
+    \u0275\u0275elementStart(14, "div", 7)(15, "div");
+    \u0275\u0275text(16);
+    \u0275\u0275pipe(17, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(17, "button", 8)(18, "div");
-    \u0275\u0275text(19);
-    \u0275\u0275pipe(20, "translate");
+    \u0275\u0275elementStart(18, "button", 8)(19, "div");
+    \u0275\u0275text(20);
+    \u0275\u0275pipe(21, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(21, "icon", 9);
-    \u0275\u0275text(22, "keyboard_arrow_down");
+    \u0275\u0275elementStart(22, "icon", 9);
+    \u0275\u0275text(23, "keyboard_arrow_down");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(23, "mat-menu", null, 0)(25, "button", 10);
-    \u0275\u0275listener("click", function DealsComponent_Template_button_click_25_listener() {
+    \u0275\u0275elementStart(24, "mat-menu", null, 0)(26, "button", 10);
+    \u0275\u0275listener("click", function DealsComponent_Template_button_click_26_listener() {
       \u0275\u0275restoreView(_r1);
       return \u0275\u0275resetView(ctx.sort("relevance"));
     });
-    \u0275\u0275text(26);
-    \u0275\u0275pipe(27, "translate");
+    \u0275\u0275text(27);
+    \u0275\u0275pipe(28, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(28, "button", 10);
-    \u0275\u0275listener("click", function DealsComponent_Template_button_click_28_listener() {
+    \u0275\u0275elementStart(29, "button", 10);
+    \u0275\u0275listener("click", function DealsComponent_Template_button_click_29_listener() {
       \u0275\u0275restoreView(_r1);
       return \u0275\u0275resetView(ctx.sort("date_desc"));
     });
-    \u0275\u0275text(29);
-    \u0275\u0275pipe(30, "translate");
+    \u0275\u0275text(30);
+    \u0275\u0275pipe(31, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(31, "button", 10);
-    \u0275\u0275listener("click", function DealsComponent_Template_button_click_31_listener() {
+    \u0275\u0275elementStart(32, "button", 10);
+    \u0275\u0275listener("click", function DealsComponent_Template_button_click_32_listener() {
       \u0275\u0275restoreView(_r1);
       return \u0275\u0275resetView(ctx.sort("date_asc"));
     });
-    \u0275\u0275text(32);
-    \u0275\u0275pipe(33, "translate");
+    \u0275\u0275text(33);
+    \u0275\u0275pipe(34, "translate");
     \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(34, "div", 11);
-    \u0275\u0275repeaterCreate(35, DealsComponent_For_36_Template, 11, 7, "div", null, _forTrack1);
-    \u0275\u0275conditionalCreate(37, DealsComponent_Conditional_37_Template, 13, 3, "div", 12);
+    \u0275\u0275elementStart(35, "div", 11);
+    \u0275\u0275repeaterCreate(36, DealsComponent_For_37_Template, 12, 12, "div", null, _forTrack1);
+    \u0275\u0275conditionalCreate(38, DealsComponent_Conditional_38_Template, 15, 9, "div", 12);
     \u0275\u0275elementEnd()();
-    \u0275\u0275element(38, "footer-menu");
+    \u0275\u0275element(39, "footer-menu");
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const sortMenu_r7 = \u0275\u0275reference(24);
-    const deal_list_r8 = \u0275\u0275pipeBind1(4, 9, ctx.filtered_deals$);
-    const type_list_r9 = \u0275\u0275pipeBind1(8, 11, ctx.types);
+    const sortMenu_r7 = \u0275\u0275reference(25);
+    const deal_list_r8 = \u0275\u0275pipeBind1(4, 10, ctx.filtered_deals$);
+    const type_list_r9 = \u0275\u0275pipeBind1(8, 12, ctx.types);
     \u0275\u0275advance(9);
     \u0275\u0275classProp("bg-base-100", ctx.type.value === "");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(11, 14, "COMMON.ALL"), " ");
     \u0275\u0275advance(2);
     \u0275\u0275repeater(type_list_r9);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind3(16, 13, "APP.WORKPLACE.DEAL_COUNT", \u0275\u0275pureFunction1(25, _c0, deal_list_r8.length), deal_list_r8.length), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind3(17, 16, "APP.WORKPLACE.DEAL_COUNT", \u0275\u0275pureFunction1(28, _c0, deal_list_r8.length), deal_list_r8.length), " ");
     \u0275\u0275advance(2);
     \u0275\u0275property("matMenuTriggerFor", sortMenu_r7);
     const sort_t_r10 = ctx.sort_type.getValue();
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(20, 17, sort_t_r10 === "date_desc" ? "APP.WORKPLACE.SORT_BY_DATE_DESC" : sort_t_r10 === "date_asc" ? "APP.WORKPLACE.SORT_BY_DATE_ASC" : "APP.WORKPLACE.SORT_BY_RELEVANCE"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(21, 20, sort_t_r10 === "date_desc" ? "APP.WORKPLACE.SORT_BY_DATE_DESC" : sort_t_r10 === "date_asc" ? "APP.WORKPLACE.SORT_BY_DATE_ASC" : "APP.WORKPLACE.SORT_BY_RELEVANCE"), " ");
     \u0275\u0275advance(7);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(27, 19, "APP.WORKPLACE.SORT_BY_RELEVANCE"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(28, 22, "APP.WORKPLACE.SORT_BY_RELEVANCE"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(30, 21, "APP.WORKPLACE.SORT_BY_DATE_DESC"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(31, 24, "APP.WORKPLACE.SORT_BY_DATE_DESC"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(33, 23, "APP.WORKPLACE.SORT_BY_DATE_ASC"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(34, 26, "APP.WORKPLACE.SORT_BY_DATE_ASC"), " ");
     \u0275\u0275advance(3);
     \u0275\u0275repeater(deal_list_r8);
     \u0275\u0275advance(2);
-    \u0275\u0275conditional((deal_list_r8 == null ? null : deal_list_r8.length) <= 0 ? 37 : -1);
+    \u0275\u0275conditional((deal_list_r8 == null ? null : deal_list_r8.length) <= 0 ? 38 : -1);
   }
 }, dependencies: [TopbarComponent, FooterMenuComponent, MatMenu, MatMenuItem, MatMenuTrigger, MatRipple, IconComponent, AsyncPipe, DatePipe, TranslatePipe], encapsulation: 2 });
 var DealsComponent = _DealsComponent;
@@ -480,11 +491,11 @@ var DealsComponent = _DealsComponent;
         <div class="absolute inset-0 flex flex-col overflow-auto">
             <topbar />
             <main
-                class="min-h-1/2 flex h-1/2 flex-1 flex-col overflow-auto bg-base-200 px-4"
+                class="min-h-1/2 flex h-1/2 flex-1 flex-col overflow-auto bg-base-200 px-4 pt-2"
             >
                 @let deal_list = filtered_deals$ | async;
                 <div class="sticky top-0 mx-auto mb-2 w-[40rem] max-w-full">
-                    <div class="flex flex-wrap py-4">
+                    <div class="-mx-2 flex flex-wrap py-2">
                         @let type_list = types | async;
                         <button
                             matRipple
@@ -492,7 +503,7 @@ var DealsComponent = _DealsComponent;
                             [class.bg-base-100]="type.value === ''"
                             (click)="type.next('')"
                         >
-                            All
+                            {{ 'COMMON.ALL' | translate }}
                         </button>
                         @for (t of type_list; track type) {
                             <button
@@ -585,9 +596,15 @@ var DealsComponent = _DealsComponent;
                                         {{ deal.name }}
                                     </h3>
                                     <p class="text-sm opacity-50">
-                                        Valid until
                                         {{
-                                            deal.expires_at | date: 'mediumDate'
+                                            'COMMON.VALID_UNTIL_DATE'
+                                                | translate
+                                                    : {
+                                                          date:
+                                                              deal.expires_at
+                                                              | date
+                                                                  : 'mediumDate',
+                                                      }
                                         }}
                                     </p>
                                 </div>
@@ -607,12 +624,16 @@ var DealsComponent = _DealsComponent;
                                 class="flex flex-col items-center space-y-4 text-center"
                             >
                                 <p class="text-lg font-bold">
-                                    No Deals or Offers Available
+                                    {{
+                                        'APP.WORKPLACE.DEALS_EMPTY_TITLE'
+                                            | translate
+                                    }}
                                 </p>
                                 <p class="text-sm opacity-50">
-                                    We're working on bringing you exciting deals
-                                    and offers. Please check back later or
-                                    explore other sections.
+                                    {{
+                                        'APP.WORKPLACE.DEALS_EMPTY_BODY'
+                                            | translate
+                                    }}
                                 </p>
                                 <button btn matRipple>
                                     <icon>refresh</icon>
@@ -631,7 +652,7 @@ var DealsComponent = _DealsComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DealsComponent, { className: "DealsComponent", filePath: "apps/workplace/src/app/deals/deals.component.ts", lineNumber: 163 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DealsComponent, { className: "DealsComponent", filePath: "apps/workplace/src/app/deals/deals.component.ts", lineNumber: 173 });
 })();
 
 // apps/workplace/src/app/deals/deals.module.ts
@@ -670,4 +691,4 @@ var DealsModule = _DealsModule;
 export {
   DealsModule
 };
-//# sourceMappingURL=deals.module-N2CC5KTP.js.map
+//# sourceMappingURL=deals.module-ILUC3NLR.js.map

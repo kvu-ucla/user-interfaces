@@ -62825,6 +62825,7 @@ var COMMON = {
   OPTIONS: "Options",
   COLUMN: "Column",
   ROW: "Row",
+  ALL: "All",
   DUPLICATE: "Duplicate",
   HEIGHT: "Height",
   WIDTH: "Width",
@@ -63053,6 +63054,7 @@ var COMMON = {
   END_OF_LIST: "End of list",
   NO_DESCRIPTION: "No description",
   VALID_UNTIL: "Valid until",
+  VALID_UNTIL_DATE: "Valid until {{ date }}",
   TERMS: "Terms & Conditions"
 };
 var LANGUAGE = {
@@ -63711,7 +63713,9 @@ var APP = {
     DEAL_COUNT_N: "{{ count }} Offers",
     SORT_BY_DATE_DESC: "Sort by Date (Newest First)",
     SORT_BY_DATE_ASC: "Sort by Date (Oldest First)",
-    SORT_BY_RELEVANCE: "Sort by Relevance"
+    SORT_BY_RELEVANCE: "Sort by Relevance",
+    DEALS_EMPTY_HEADER: "No Deals or Offers Available",
+    DEALS_EMPTY_BODY: "We're working on bringing you exciting deals and offers. Please check back later or explore other sections."
   },
   CONCIERGE: {
     MENU_BOOKINGS: "Bookings",
@@ -64217,6 +64221,8 @@ var APP = {
     DEALS_REMOVE_BODY: "Are you sure you want to remove this deal/offer?",
     DEALS_SAVE_ERROR: "Failed to save deal/offer details. Error: {{ error }}",
     DEALS_SAVED: "Successfully saved deal/offer details.",
+    DEALS_EMPTY_HEADER: "No Deals or Offers Available",
+    DEALS_EMPTY_BODY: "Add a new deal or offer to get started.",
     LOCKERS_HEADER: "Locker Management",
     LOCKERS_BOOK_HEADER: "Locker Bookings",
     LOCKERS_BOOK_NEW: "New Locker Booking",
@@ -70383,15 +70389,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "0a8f38b",
-  "hash": "0a8f38b",
+  "raw": "5985d17",
+  "hash": "5985d17",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "0a8f38b",
+  "suffix": "5985d17",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752462581434
+  "time": 1752471836551
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -175544,4 +175550,4 @@ qr/esm/index.js:
   limitations under the License.
   *)
 */
-//# sourceMappingURL=chunk-N6R76AGS.js.map
+//# sourceMappingURL=chunk-SMI3JQDD.js.map

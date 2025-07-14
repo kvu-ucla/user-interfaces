@@ -23,7 +23,7 @@ import {
   ɵɵelement,
   ɵɵelementEnd,
   ɵɵelementStart
-} from "./chunk-N6R76AGS.js";
+} from "./chunk-SMI3JQDD.js";
 import "./chunk-KWSTWQNB.js";
 
 // apps/workplace/src/app/explore/explore.component.ts
@@ -129,4 +129,4 @@ var ExploreModule = _ExploreModule;
 export {
   ExploreModule
 };
-//# sourceMappingURL=explore.module-OJAAELK6.js.map
+//# sourceMappingURL=explore.module-4XRBRXSW.js.map
