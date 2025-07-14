@@ -72576,6 +72576,7 @@ var APP = {
     MENU_CONTROL: "Room Control",
     MENU_EXPLORE: "Spaces",
     MENU_EVENTS: "Events",
+    MENU_DEALS: "Deals & Offers",
     GLOBAL_SEARCH: "Search for people or spaces...",
     GLOBAL_SEARCH_EMPTY: "No matches found.",
     GLOBAL_SEARCH_START: "Start typing to search...",
@@ -72664,7 +72665,12 @@ var APP = {
     CHAT_WAITING: "Waiting for a reply...",
     CHAT_MESSAGE_PLACEHOLDER: "New message...",
     RESOURCE_CHECKED_IN_FAILED: "Failed to check in resource",
-    RESOURCE_CHECKED_IN: "Successfully checked in resource"
+    RESOURCE_CHECKED_IN: "Successfully checked in resource",
+    DEAL_COUNT_1: "{{ count }} Offer",
+    DEAL_COUNT_N: "{{ count }} Offers",
+    SORT_BY_DATE_DESC: "Sort by Date (Newest First)",
+    SORT_BY_DATE_ASC: "Sort by Date (Oldest First)",
+    SORT_BY_RELEVANCE: "Sort by Relevance"
   },
   CONCIERGE: {
     MENU_BOOKINGS: "Bookings",
@@ -75118,15 +75124,15 @@ var MapsPeopleService = _MapsPeopleService;
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "c7604ce",
-  "hash": "c7604ce",
+  "raw": "0a8f38b",
+  "hash": "0a8f38b",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "c7604ce",
+  "suffix": "0a8f38b",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752211905198
+  "time": 1752462541422
 };
 
 // libs/common/src/lib/vorlon.service.ts
