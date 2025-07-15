@@ -242,7 +242,8 @@
         "WFH": "Work from Home",
         "AOL": "Away on Leave",
         "END_OF_LIST": "End of list",
-        "NO_DESCRIPTION": "No description"
+        "NO_DESCRIPTION": "No description",
+        "LOCATABLE": "Location tracking"
     },
     "LANGUAGE": {
         "ENGLISH": "English",
@@ -585,7 +586,9 @@
         "ASSETS_DELIVER_TOGGLE": "Exact Time",
         "ASSETS_DELIVER_DATE": "Delivery Date",
         "ASSETS_DELIVER_TIME": "Deliver After",
-        "ASSETS_AVAILABLE": "{{ count }} available"
+        "ASSETS_AVAILABLE": "{{ count }} available",
+        "RULES_HIDDEN_1": "The selected {{ type }} is unavailable for the selected time or duration",
+        "RULES_HIDDEN_N": "Some of the selected {{ type }}s are unavailable for the selected time or duration"
     },
     "CALENDAR_EVENT": {
         "CATERING": "Catering",
@@ -659,6 +662,8 @@
         "SPACE_LEVEL_ANY": "Any level",
         "SPACE_SELECT_EMPTY": "No available spaces for selected time and/or filters",
         "SPACE_SELECT_LOADING": "Finding available spaces...",
+        "SPACE_BOOKING_RULES_HIDDEN_1": "The selected room is not available for the selected time or duration",
+        "SPACE_BOOKING_RULES_HIDDEN_N": "Some of the selected rooms are not available for the selected time or duration",
         "CONFIRM_DETAILS": "Confirm Meeting",
         "FINISHED": "Return home",
         "LOADING": "Creating meeting requests...",
