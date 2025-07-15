@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": ["angular:styles/component:css;72efec7db9e4775fcedb0dcf62af53bcc009951792b869c9087285830ca9607e;/home/runner/work/user-interfaces/user-interfaces/apps/workplace/src/app/control/space-list.component.ts"],
-  "sourcesContent": ["\n            :host {\n                display: flex;\n                flex-direction: column;\n                height: 100%;\n                width: 100%;\n            }\n\n            mat-form-field {\n                width: 48rem;\n                max-width: calc(100% - 2rem);\n            }\n        "],
-  "mappings": "AACY,MACI,QAAS,KACT,eAAgB,OAChB,OAAQ,KACR,MAAO,IACX,CAEA,eACI,MAAO,MACP,UAAW,KAAK,KAAK,EAAE,KAC3B",
+  "sources": ["angular:styles/component:css;24f101a51156c4881e8f3ec7d9a4da55f6e3c3a951b1bce21fa7949a1a188821;/home/runner/work/user-interfaces/user-interfaces/libs/spaces/src/lib/space-select-modal/space-list.component.ts"],
+  "sourcesContent": ["\n            :host {\n                width: 100%;\n                height: 100%;\n                padding: 0.5rem;\n                overflow: auto;\n            }\n        "],
+  "mappings": "AACY,MACI,MAAO,KACP,OAAQ,KAHxB,QAIyB,MACT,SAAU,IACd",
   "names": []
 }
