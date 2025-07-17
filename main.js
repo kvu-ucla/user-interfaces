@@ -73993,6 +73993,7 @@ var COMMON = {
   OPTIONS: "Options",
   COLUMN: "Column",
   ROW: "Row",
+  ALL: "All",
   DUPLICATE: "Duplicate",
   HEIGHT: "Height",
   WIDTH: "Width",
@@ -74221,6 +74222,7 @@ var COMMON = {
   END_OF_LIST: "End of list",
   NO_DESCRIPTION: "No description",
   VALID_UNTIL: "Valid until",
+  VALID_UNTIL_DATE: "Valid until {{ date }}",
   TERMS: "Terms & Conditions"
 };
 var LANGUAGE = {
@@ -74785,6 +74787,7 @@ var APP = {
     MENU_CONTROL: "Room Control",
     MENU_EXPLORE: "Spaces",
     MENU_EVENTS: "Events",
+    MENU_DEALS: "Deals & Offers",
     GLOBAL_SEARCH: "Search for people or spaces...",
     GLOBAL_SEARCH_EMPTY: "No matches found.",
     GLOBAL_SEARCH_START: "Start typing to search...",
@@ -74873,7 +74876,14 @@ var APP = {
     CHAT_WAITING: "Waiting for a reply...",
     CHAT_MESSAGE_PLACEHOLDER: "New message...",
     RESOURCE_CHECKED_IN_FAILED: "Failed to check in resource",
-    RESOURCE_CHECKED_IN: "Successfully checked in resource"
+    RESOURCE_CHECKED_IN: "Successfully checked in resource",
+    DEAL_COUNT_1: "{{ count }} Offer",
+    DEAL_COUNT_N: "{{ count }} Offers",
+    SORT_BY_DATE_DESC: "Sort by Date (Newest First)",
+    SORT_BY_DATE_ASC: "Sort by Date (Oldest First)",
+    SORT_BY_RELEVANCE: "Sort by Relevance",
+    DEALS_EMPTY_HEADER: "No Deals or Offers Available",
+    DEALS_EMPTY_BODY: "We're working on bringing you exciting deals and offers. Please check back later or explore other sections."
   },
   CONCIERGE: {
     MENU_BOOKINGS: "Bookings",
@@ -75379,6 +75389,8 @@ var APP = {
     DEALS_REMOVE_BODY: "Are you sure you want to remove this deal/offer?",
     DEALS_SAVE_ERROR: "Failed to save deal/offer details. Error: {{ error }}",
     DEALS_SAVED: "Successfully saved deal/offer details.",
+    DEALS_EMPTY_HEADER: "No Deals or Offers Available",
+    DEALS_EMPTY_BODY: "Add a new deal or offer to get started.",
     LOCKERS_HEADER: "Locker Management",
     LOCKERS_BOOK_HEADER: "Locker Bookings",
     LOCKERS_BOOK_NEW: "New Locker Booking",
@@ -80869,15 +80881,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "c7604ce",
-  "hash": "c7604ce",
+  "raw": "17624a7",
+  "hash": "17624a7",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "c7604ce",
+  "suffix": "17624a7",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752211901930
+  "time": 1752722770075
 };
 
 // libs/common/src/lib/settings.service.ts
