@@ -871,8 +871,8 @@ var require_long = __commonJS({
         return this;
       return fromBits(this.low, this.high, true);
     };
-    LongPrototype.toBytes = function toBytes(le2) {
-      return le2 ? this.toBytesLE() : this.toBytesBE();
+    LongPrototype.toBytes = function toBytes(le3) {
+      return le3 ? this.toBytesLE() : this.toBytesBE();
     };
     LongPrototype.toBytesLE = function toBytesLE() {
       var hi2 = this.high, lo2 = this.low;
@@ -900,8 +900,8 @@ var require_long = __commonJS({
         lo2 & 255
       ];
     };
-    Long2.fromBytes = function fromBytes(bytes, unsigned, le2) {
-      return le2 ? Long2.fromBytesLE(bytes, unsigned) : Long2.fromBytesBE(bytes, unsigned);
+    Long2.fromBytes = function fromBytes(bytes, unsigned, le3) {
+      return le3 ? Long2.fromBytesLE(bytes, unsigned) : Long2.fromBytesBE(bytes, unsigned);
     };
     Long2.fromBytesLE = function fromBytesLE(bytes, unsigned) {
       return new Long2(
@@ -45798,8 +45798,8 @@ function checkNonAnimatableInTimelines(timelines, triggerName, driver) {
 function oneOrMoreTransitionsMatch(matchFns, currentState, nextState, element, params) {
   return matchFns.some((fn3) => fn3(currentState, nextState, element, params));
 }
-function applyParamDefaults(userParams, defaults2) {
-  const result = __spreadValues({}, defaults2);
+function applyParamDefaults(userParams, defaults3) {
+  const result = __spreadValues({}, defaults3);
   Object.entries(userParams).forEach(([key, value]) => {
     if (value != null) {
       result[key] = value;
@@ -54329,6 +54329,67 @@ var ServiceWorkerModule = class _ServiceWorkerModule {
   }], null, null);
 })();
 
+// node_modules/@angular/material/fesm2022/internal-form-field-D5iFxU6d.mjs
+var _c0 = ["mat-internal-form-field", ""];
+var _c1 = ["*"];
+var _MatInternalFormField = class __MatInternalFormField {
+  /** Position of the label relative to the content. */
+  labelPosition;
+  static \u0275fac = function _MatInternalFormField_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || __MatInternalFormField)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: __MatInternalFormField,
+    selectors: [["div", "mat-internal-form-field", ""]],
+    hostAttrs: [1, "mdc-form-field", "mat-internal-form-field"],
+    hostVars: 2,
+    hostBindings: function _MatInternalFormField_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275classProp("mdc-form-field--align-end", ctx.labelPosition === "before");
+      }
+    },
+    inputs: {
+      labelPosition: "labelPosition"
+    },
+    attrs: _c0,
+    ngContentSelectors: _c1,
+    decls: 1,
+    vars: 0,
+    template: function _MatInternalFormField_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275projection(0);
+      }
+    },
+    styles: [".mat-internal-form-field{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-flex;align-items:center;vertical-align:middle}.mat-internal-form-field>label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0;order:0}[dir=rtl] .mat-internal-form-field>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px}.mdc-form-field--align-end>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px;order:-1}[dir=rtl] .mdc-form-field--align-end .mdc-form-field--align-end label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0}\n"],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(_MatInternalFormField, [{
+    type: Component,
+    args: [{
+      selector: "div[mat-internal-form-field]",
+      template: "<ng-content></ng-content>",
+      encapsulation: ViewEncapsulation.None,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      host: {
+        "class": "mdc-form-field mat-internal-form-field",
+        "[class.mdc-form-field--align-end]": 'labelPosition === "before"'
+      },
+      styles: [".mat-internal-form-field{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-flex;align-items:center;vertical-align:middle}.mat-internal-form-field>label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0;order:0}[dir=rtl] .mat-internal-form-field>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px}.mdc-form-field--align-end>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px;order:-1}[dir=rtl] .mdc-form-field--align-end .mdc-form-field--align-end label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0}\n"]
+    }]
+  }], null, {
+    labelPosition: [{
+      type: Input,
+      args: [{
+        required: true
+      }]
+    }]
+  });
+})();
+
 // node_modules/@angular/cdk/fesm2022/platform-DNDzkVcI.mjs
 var hasV8BreakIterator;
 try {
@@ -58447,8 +58508,8 @@ var MatPseudoCheckbox = class _MatPseudoCheckbox {
 })();
 
 // node_modules/@angular/material/fesm2022/option-BzhYL_xC.mjs
-var _c0 = ["*", [["mat-option"], ["ng-container"]]];
-var _c1 = ["*", "mat-option, ng-container"];
+var _c02 = ["*", [["mat-option"], ["ng-container"]]];
+var _c12 = ["*", "mat-option, ng-container"];
 var _c2 = ["text"];
 var _c3 = [[["mat-icon"]], "*"];
 var _c4 = ["mat-icon", "*"];
@@ -58521,13 +58582,13 @@ var MatOptgroup = class _MatOptgroup {
       provide: MAT_OPTGROUP,
       useExisting: _MatOptgroup
     }])],
-    ngContentSelectors: _c1,
+    ngContentSelectors: _c12,
     decls: 5,
     vars: 4,
     consts: [["role", "presentation", 1, "mat-mdc-optgroup-label", 3, "id"], [1, "mdc-list-item__primary-text"]],
     template: function MatOptgroup_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c0);
+        \u0275\u0275projectionDef(_c02);
         \u0275\u0275elementStart(0, "span", 0)(1, "span", 1);
         \u0275\u0275text(2);
         \u0275\u0275projection(3);
@@ -59633,8 +59694,8 @@ var SharedResizeObserver = class _SharedResizeObserver {
 })();
 
 // node_modules/@angular/material/fesm2022/form-field-C9DZXojn.mjs
-var _c02 = ["notch"];
-var _c12 = ["matFormFieldNotchedOutline", ""];
+var _c03 = ["notch"];
+var _c13 = ["matFormFieldNotchedOutline", ""];
 var _c22 = ["*"];
 var _c32 = ["iconPrefixContainer"];
 var _c42 = ["textPrefixContainer"];
@@ -60169,7 +60230,7 @@ var MatFormFieldNotchedOutline = class _MatFormFieldNotchedOutline {
     selectors: [["div", "matFormFieldNotchedOutline", ""]],
     viewQuery: function MatFormFieldNotchedOutline_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c02, 5);
+        \u0275\u0275viewQuery(_c03, 5);
       }
       if (rf & 2) {
         let _t4;
@@ -60186,7 +60247,7 @@ var MatFormFieldNotchedOutline = class _MatFormFieldNotchedOutline {
     inputs: {
       open: [0, "matFormFieldNotchedOutlineOpen", "open"]
     },
-    attrs: _c12,
+    attrs: _c13,
     ngContentSelectors: _c22,
     decls: 5,
     vars: 0,
@@ -60425,14 +60486,14 @@ var MatFormField = class _MatFormField {
   _describedByChanges;
   _animationsDisabled = _animationsDisabled();
   constructor() {
-    const defaults2 = this._defaults;
-    if (defaults2) {
-      if (defaults2.appearance) {
-        this.appearance = defaults2.appearance;
+    const defaults3 = this._defaults;
+    if (defaults3) {
+      if (defaults3.appearance) {
+        this.appearance = defaults3.appearance;
       }
-      this._hideRequiredMarker = Boolean(defaults2?.hideRequiredMarker);
-      if (defaults2.color) {
-        this.color = defaults2.color;
+      this._hideRequiredMarker = Boolean(defaults3?.hideRequiredMarker);
+      if (defaults3.color) {
+        this.color = defaults3.color;
       }
     }
     this._syncOutlineLabelOffset();
@@ -62072,8 +62133,8 @@ var MatInputModule = class _MatInputModule {
 })();
 
 // node_modules/@angular/material/fesm2022/icon-button-DxiIc1ex.mjs
-var _c03 = ["mat-icon-button", ""];
-var _c13 = ["*"];
+var _c04 = ["mat-icon-button", ""];
+var _c14 = ["*"];
 var MAT_BUTTON_CONFIG = new InjectionToken("MAT_BUTTON_CONFIG");
 function transformTabIndex(value) {
   return value == null ? void 0 : numberAttribute(value);
@@ -62309,8 +62370,8 @@ var MatIconButton = class _MatIconButton extends MatButtonBase {
     hostAttrs: [1, "mdc-icon-button", "mat-mdc-icon-button"],
     exportAs: ["matButton", "matAnchor"],
     features: [\u0275\u0275InheritDefinitionFeature],
-    attrs: _c03,
-    ngContentSelectors: _c13,
+    attrs: _c04,
+    ngContentSelectors: _c14,
     decls: 4,
     vars: 0,
     consts: [[1, "mat-mdc-button-persistent-ripple", "mdc-icon-button__ripple"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
@@ -62356,8 +62417,8 @@ var MatIconButton = class _MatIconButton extends MatButtonBase {
 })();
 
 // node_modules/@angular/material/fesm2022/button.mjs
-var _c04 = ["matButton", ""];
-var _c14 = [[["", 8, "material-icons", 3, "iconPositionEnd", ""], ["mat-icon", 3, "iconPositionEnd", ""], ["", "matButtonIcon", "", 3, "iconPositionEnd", ""]], "*", [["", "iconPositionEnd", "", 8, "material-icons"], ["mat-icon", "iconPositionEnd", ""], ["", "matButtonIcon", "", "iconPositionEnd", ""]]];
+var _c05 = ["matButton", ""];
+var _c15 = [[["", 8, "material-icons", 3, "iconPositionEnd", ""], ["mat-icon", 3, "iconPositionEnd", ""], ["", "matButtonIcon", "", 3, "iconPositionEnd", ""]], "*", [["", "iconPositionEnd", "", 8, "material-icons"], ["mat-icon", "iconPositionEnd", ""], ["", "matButtonIcon", "", "iconPositionEnd", ""]]];
 var _c23 = [".material-icons:not([iconPositionEnd]), mat-icon:not([iconPositionEnd]), [matButtonIcon]:not([iconPositionEnd])", "*", ".material-icons[iconPositionEnd], mat-icon[iconPositionEnd], [matButtonIcon][iconPositionEnd]"];
 var _c33 = ["mat-fab", ""];
 var _c43 = ["mat-mini-fab", ""];
@@ -62408,14 +62469,14 @@ var MatButton = class _MatButton extends MatButtonBase {
     },
     exportAs: ["matButton", "matAnchor"],
     features: [\u0275\u0275InheritDefinitionFeature],
-    attrs: _c04,
+    attrs: _c05,
     ngContentSelectors: _c23,
     decls: 7,
     vars: 4,
     consts: [[1, "mat-mdc-button-persistent-ripple"], [1, "mdc-button__label"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
     template: function MatButton_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c14);
+        \u0275\u0275projectionDef(_c15);
         \u0275\u0275element(0, "span", 0);
         \u0275\u0275projection(1);
         \u0275\u0275elementStart(2, "span", 1);
@@ -62540,7 +62601,7 @@ var MatFabButton = class _MatFabButton extends MatButtonBase {
     consts: [[1, "mat-mdc-button-persistent-ripple"], [1, "mdc-button__label"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
     template: function MatFabButton_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c14);
+        \u0275\u0275projectionDef(_c15);
         \u0275\u0275element(0, "span", 0);
         \u0275\u0275projection(1);
         \u0275\u0275elementStart(2, "span", 1);
@@ -62629,7 +62690,7 @@ var MatMiniFabButton = class _MatMiniFabButton extends MatButtonBase {
     consts: [[1, "mat-mdc-button-persistent-ripple"], [1, "mdc-button__label"], [1, "mat-focus-indicator"], [1, "mat-mdc-button-touch-target"]],
     template: function MatMiniFabButton_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c14);
+        \u0275\u0275projectionDef(_c15);
         \u0275\u0275element(0, "span", 0);
         \u0275\u0275projection(1);
         \u0275\u0275elementStart(2, "span", 1);
@@ -63383,8 +63444,8 @@ var _RecycleViewRepeaterStrategy = class {
 };
 
 // node_modules/@angular/cdk/fesm2022/scrolling.mjs
-var _c05 = ["contentWrapper"];
-var _c15 = ["*"];
+var _c06 = ["contentWrapper"];
+var _c16 = ["*"];
 var VIRTUAL_SCROLL_STRATEGY = new InjectionToken("VIRTUAL_SCROLL_STRATEGY");
 var FixedSizeVirtualScrollStrategy = class {
   _scrolledIndexChange = new Subject();
@@ -64363,7 +64424,7 @@ var CdkVirtualScrollViewport = class _CdkVirtualScrollViewport extends CdkVirtua
     selectors: [["cdk-virtual-scroll-viewport"]],
     viewQuery: function CdkVirtualScrollViewport_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c05, 7);
+        \u0275\u0275viewQuery(_c06, 7);
       }
       if (rf & 2) {
         let _t4;
@@ -64389,7 +64450,7 @@ var CdkVirtualScrollViewport = class _CdkVirtualScrollViewport extends CdkVirtua
       useFactory: (virtualScrollable, viewport) => virtualScrollable || viewport,
       deps: [[new Optional(), new Inject(VIRTUAL_SCROLLABLE)], _CdkVirtualScrollViewport]
     }]), \u0275\u0275InheritDefinitionFeature],
-    ngContentSelectors: _c15,
+    ngContentSelectors: _c16,
     decls: 4,
     vars: 4,
     consts: [["contentWrapper", ""], [1, "cdk-virtual-scroll-content-wrapper"], [1, "cdk-virtual-scroll-spacer"]],
@@ -67660,7 +67721,7 @@ function SimpleSnackBar_Conditional_2_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.data.action, " ");
   }
 }
-var _c06 = ["label"];
+var _c07 = ["label"];
 function MatSnackBarContainer_ng_template_4_Template(rf, ctx) {
 }
 var MAX_TIMEOUT = Math.pow(2, 31) - 1;
@@ -68160,7 +68221,7 @@ var MatSnackBarContainer = class _MatSnackBarContainer extends BasePortalOutlet 
     viewQuery: function MatSnackBarContainer_Query(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275viewQuery(CdkPortalOutlet, 7);
-        \u0275\u0275viewQuery(_c06, 7);
+        \u0275\u0275viewQuery(_c07, 7);
       }
       if (rf & 2) {
         let _t4;
@@ -88490,13 +88551,13 @@ function Di() {
         3329325298
       ]);
       function r2(p2, a, h3, f2, S3) {
-        for (var m2, k3, x3, W4, R4, O4, G4, U3, j3, D4, Ct3, Nt, ue2; S3 >= 64; ) {
+        for (var m2, k3, x3, W4, R4, O4, G4, U3, j3, D4, Ct3, Nt, ue; S3 >= 64; ) {
           for (m2 = a[0], k3 = a[1], x3 = a[2], W4 = a[3], R4 = a[4], O4 = a[5], G4 = a[6], U3 = a[7], D4 = 0; D4 < 16; D4++)
             Ct3 = f2 + D4 * 4, p2[D4] = (h3[Ct3] & 255) << 24 | (h3[Ct3 + 1] & 255) << 16 | (h3[Ct3 + 2] & 255) << 8 | h3[Ct3 + 3] & 255;
           for (D4 = 16; D4 < 64; D4++)
-            j3 = p2[D4 - 2], Nt = (j3 >>> 17 | j3 << 15) ^ (j3 >>> 19 | j3 << 13) ^ j3 >>> 10, j3 = p2[D4 - 15], ue2 = (j3 >>> 7 | j3 << 25) ^ (j3 >>> 18 | j3 << 14) ^ j3 >>> 3, p2[D4] = (Nt + p2[D4 - 7] | 0) + (ue2 + p2[D4 - 16] | 0);
+            j3 = p2[D4 - 2], Nt = (j3 >>> 17 | j3 << 15) ^ (j3 >>> 19 | j3 << 13) ^ j3 >>> 10, j3 = p2[D4 - 15], ue = (j3 >>> 7 | j3 << 25) ^ (j3 >>> 18 | j3 << 14) ^ j3 >>> 3, p2[D4] = (Nt + p2[D4 - 7] | 0) + (ue + p2[D4 - 16] | 0);
           for (D4 = 0; D4 < 64; D4++)
-            Nt = (((R4 >>> 6 | R4 << 26) ^ (R4 >>> 11 | R4 << 21) ^ (R4 >>> 25 | R4 << 7)) + (R4 & O4 ^ ~R4 & G4) | 0) + (U3 + (n2[D4] + p2[D4] | 0) | 0) | 0, ue2 = ((m2 >>> 2 | m2 << 30) ^ (m2 >>> 13 | m2 << 19) ^ (m2 >>> 22 | m2 << 10)) + (m2 & k3 ^ m2 & x3 ^ k3 & x3) | 0, U3 = G4, G4 = O4, O4 = R4, R4 = W4 + Nt | 0, W4 = x3, x3 = k3, k3 = m2, m2 = Nt + ue2 | 0;
+            Nt = (((R4 >>> 6 | R4 << 26) ^ (R4 >>> 11 | R4 << 21) ^ (R4 >>> 25 | R4 << 7)) + (R4 & O4 ^ ~R4 & G4) | 0) + (U3 + (n2[D4] + p2[D4] | 0) | 0) | 0, ue = ((m2 >>> 2 | m2 << 30) ^ (m2 >>> 13 | m2 << 19) ^ (m2 >>> 22 | m2 << 10)) + (m2 & k3 ^ m2 & x3 ^ k3 & x3) | 0, U3 = G4, G4 = O4, O4 = R4, R4 = W4 + Nt | 0, W4 = x3, x3 = k3, k3 = m2, m2 = Nt + ue | 0;
           a[0] += m2, a[1] += k3, a[2] += x3, a[3] += W4, a[4] += R4, a[5] += O4, a[6] += G4, a[7] += U3, f2 += 64, S3 -= 64;
         }
         return f2;
@@ -89896,6 +89957,16 @@ function te(e2) {
 }
 function Mc(e2, t = {}) {
   return $({ id: e2, query_params: t, fn: te, path: Dt });
+}
+function Uc(e2, t, n2 = "patch") {
+  return N2({
+    id: e2,
+    form_data: t,
+    query_params: {},
+    method: n2,
+    fn: te,
+    path: Dt
+  });
 }
 var ft = "zones";
 function Le(e2) {
@@ -92308,6 +92379,7 @@ var COMMON = {
   OPTIONS: "Options",
   COLUMN: "Column",
   ROW: "Row",
+  ALL: "All",
   DUPLICATE: "Duplicate",
   HEIGHT: "Height",
   WIDTH: "Width",
@@ -92362,7 +92434,7 @@ var COMMON = {
   FAVOURITES: "Favourites",
   FAVOURITES_ONLY: "Favourites Only",
   FAVOURITES_ADD: "Add to favourites",
-  FAVOURITES_REMOVE: "Add to favourites",
+  FAVOURITES_REMOVE: "Remove from favourites",
   ACCESSIBLE_ONLY: "Accessible Only",
   LANGUAGE: "Language",
   LANGUAGE_SELECT: "Select a language",
@@ -92450,7 +92522,7 @@ var COMMON = {
   SUPPORT_HEADER: "Raise a support ticket",
   SUPPORT_LOCATION: "Location",
   SUPPORT_TYPE: "Issue Type",
-  SUPPORT_DESCRIPTION: " Issue Description",
+  SUPPORT_DESCRIPTION: "Issue Description",
   SUPPORT_DESCRIPTION_REQUIRED: " A description is required",
   SUPPORT_IMAGES: "Images",
   SUPPORT_LOADING: "Sending support ticket...",
@@ -92536,7 +92608,9 @@ var COMMON = {
   END_OF_LIST: "End of list",
   NO_DESCRIPTION: "No description",
   VALID_UNTIL: "Valid until",
-  TERMS: "Terms & Conditions"
+  VALID_UNTIL_DATE: "Valid until {{ date }}",
+  TERMS: "Terms & Conditions",
+  LOCATABLE: "Location tracking"
 };
 var LANGUAGE = {
   ENGLISH: "English",
@@ -92545,7 +92619,7 @@ var LANGUAGE = {
   FRENCH: "French",
   FRENCH_CA: "French (Canadian)",
   SPANISH: "Spanish",
-  PORTUGESE: "Portugese",
+  PORTUGUESE: "Portuguese",
   ITALIAN: "Italian",
   CHINESE: "Chinese",
   ARABIC: "Arabic",
@@ -92666,13 +92740,13 @@ var EXPLORE = {
   LOCATE_CURRENT_FAILED: "Failed to retrieve your current location.",
   LOCATE_USER_FAILED: 'Failed to locate user "{{ name }}".',
   LOCATE_USER_NOT_FOUND: "No location for the given user",
-  LOCATE_USER_FOUND_NO_PIN: "Unable to resolve user's exact location on this level",
+  LOCATE_USER_FOUND_NO_PIN: "User is on this level but with an inaccurate method. {{ type }}",
   LOCATE_USER_DETAILS_FAILED: 'Failed to find user details for "{{ name }}".',
   LOCATE_SPACE_DETAILS_FAILED: "Failed to find space details.",
-  LOCATE_SERVICE_UNAVAILABLE: "Location services is not setup for this application.",
+  LOCATE_SERVICE_UNAVAILABLE: "Location services is not set up for this application.",
   ZOOM_IN: "Zoom in",
   ZOOM_OUT: "Zoom out",
-  ZOOM_RESET: "Reset zoom & center",
+  ZOOM_RESET: "Reset zoom & centre",
   DEVICE_COUNT: "{{ count }} user device(s)",
   SENSORS_TEMP: "Temperature: {{ value }}",
   SENSORS_PEOPLE: "{{ count }} people",
@@ -92710,6 +92784,7 @@ var EXPLORE = {
   BOOK_RESOURCE: "Book - {{ name }}",
   MAPSINDOORS_INIT_FAILED: "Failed to initialise map view.",
   MAP_EMPTY: "No map is set to display",
+  MAP_FAILED_TO_LOAD: "Failed to load map",
   COORDINATES: "Coordinates",
   MAP_ID: "Map ID",
   MAP_ID_EMPTY: "No map ID",
@@ -92778,7 +92853,7 @@ var BOOKINGS = {
   LOADING_AVAILABILITY: "Checking {{ type }} availability...",
   CONFIRM_TITLE: "Book {{ type }}",
   CONFIRM_MSG: "Would you like to book the {{ type }} for {{ date }}?",
-  CONFIRM_MSG_GROUP: "Would you like to book the {{ type }} for {{ date }}? <br>You group members will be assigned desks nearby your selected desk.",
+  CONFIRM_MSG_GROUP: "Would you like to book the {{ type }} for {{ date }}? <br>Your group members will be assigned desks nearby your selected desk.",
   CONFIRM_LOADING: "Processing booking request...",
   ASSETS_CLASH_ERROR: "Some assets are already booked for the selected time",
   ASSETS_INVALID_ERROR: "Failed to validate asset requests",
@@ -92810,15 +92885,15 @@ var BOOKINGS = {
   DESK_AVAILABLE_ERROR: "Desk is unavailable at this time.",
   DESK_LIST_LOADING: "Finding available desks...",
   DESK_LIST_EMPTY: "No available desks for selected time and/or filters",
-  DESK_SELECT_MSG: "Select a desk to view it's details",
+  DESK_SELECT_MSG: "Select a desk to view its details",
   ITEM_BOOKED: "{{ name }} booked!",
-  DESK_SUCCESS_LONE: "You desk booking has been successfully booked for {{ date }} at {{ time }}",
-  DESK_SUCCESS_GROUP: "You group of {{ size }} desks have been successfully booked for {{ date }} at {{ time }}",
-  DESK_SUCCESS_LONE_ALLDAY: "You desk booking has been successfully booked for {{ date }}",
-  DESK_SUCCESS_GROUP_ALLDAY: "You group of {{ size }} desks have been successfully booked for {{ date }}",
+  DESK_SUCCESS_LONE: "Your desk booking has been successfully booked for {{ date }} at {{ time }}",
+  DESK_SUCCESS_GROUP: "Your group of {{ size }} desks have been successfully booked for {{ date }} at {{ time }}",
+  DESK_SUCCESS_LONE_ALLDAY: "Your desk booking has been successfully booked for {{ date }}",
+  DESK_SUCCESS_GROUP_ALLDAY: "Your group of {{ size }} desks have been successfully booked for {{ date }}",
   ASSETS_BOOKED: "Booking includes {{ count }} asset(s)",
-  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for you booking to be approved.",
-  LINK_HEADER: "Add to event to your calendar",
+  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for your booking to be approved.",
+  LINK_HEADER: "Add event to your calendar",
   LINK_OUTLOOK: "Add to Outlook",
   LINK_GOOGLE: "Add to Google Calendar",
   LINK_ICAL: "Download iCal File",
@@ -92845,7 +92920,7 @@ var BOOKINGS = {
   PARKING_PLATE_NUMBER_REQUIRED: "A plate number is required",
   PARKING_LIST_LOADING: "Finding available parking spaces...",
   PARKING_LIST_EMPTY: "No available parking spaces for selected time and/or filters",
-  PARKING_SELECT_MSG: "Select a parking space to view it's details",
+  PARKING_SELECT_MSG: "Select a parking space to view its details",
   VISITOR_INVITE_TITLE: "Invite Visitor",
   VISITOR_LIST: "Visitors",
   VISITOR_NAME: "Visitor Name",
@@ -92872,14 +92947,16 @@ var BOOKINGS = {
   ASSETS_ADD_HEADER: "Add Assets",
   ASSETS_ADD: "Add this Asset",
   ASSETS_REMOVE: "Remove this Asset",
-  ASSETS_SELECT: "Select an asset to view it's details",
+  ASSETS_SELECT: "Select an asset to view its details",
   ASSETS_SEARCH: "Search assets...",
   ASSETS_LOADING: "Finding assets...",
   ASSETS_EMPTY: "No available assets for selected time and/or filters",
   ASSETS_DELIVER_TOGGLE: "Exact Time",
   ASSETS_DELIVER_DATE: "Delivery Date",
   ASSETS_DELIVER_TIME: "Deliver After",
-  ASSETS_AVAILABLE: "{{ count }} available"
+  ASSETS_AVAILABLE: "{{ count }} available",
+  RULES_HIDDEN_1: "The selected {{ type }} is unavailable for the selected time or duration",
+  RULES_HIDDEN_N: "Some of the selected {{ type }}s are unavailable for the selected time or duration"
 };
 var CALENDAR_EVENT = {
   CATERING: "Catering",
@@ -92906,7 +92983,7 @@ var CALENDAR_EVENT = {
   ACTION_DELETE: "Delete event",
   ACTION_PRINT: "Print event",
   ACTION_DELETE_SERIES: "Delete series",
-  NO_LONG_EDIT_MSG: "Editing bookings long than \n a day is not available",
+  NO_LONG_EDIT_MSG: "Editing bookings longer than \n a day is not available",
   SPACE_LOADING: "Loading space list for location...",
   SPACE_STATUS_LOADING: "Updating available spaces...",
   SPACE_EXTERNALS_ERROR: "External attendees require a space to be booked",
@@ -92919,7 +92996,7 @@ var CALENDAR_EVENT = {
   CAPACITY_WARNING: "The selected room has less capacity than the number of meeting attendees.",
   CAPACITY_ERROR: "Attendee count is greater than the capacity of the selected rooms",
   CATERING_CHARGE_CODE: "Charge Code",
-  CATERING_CHARGE_CODE_SEACH: "Search for charge code...",
+  CATERING_CHARGE_CODE_SEARCH: "Search for charge code...",
   CATERING_CHARGE_CODE_REQUIRED: "Catering charge code is required",
   CATERING_NOTES: "Extra catering details. e.g. Dietary requirements etc.",
   CATERING_NOTES_REQUIRED: "Catering order notes are required",
@@ -92933,9 +93010,9 @@ var CALENDAR_EVENT = {
   SUCCESS: "Successfully created event",
   SUCCESS_WITH_SPACE: "You room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }} at {{ time }}",
   SUCCESS_WITHOUT_SPACE: "You meeting has been successfully booked for {{ date }} at {{ time }}",
-  SUCCESS_WITH_SPACE_ALLDAY: "You room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }}",
-  SUCCESS_WITHOUT_SPACE_ALLDAY: "You meeting has been successfully booked for {{ date }}",
-  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for you booking to be approved.",
+  SUCCESS_WITH_SPACE_ALLDAY: "Your room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }}",
+  SUCCESS_WITHOUT_SPACE_ALLDAY: "Your meeting has been successfully booked for {{ date }}",
+  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for your booking to be approved.",
   BOOK_NEARBY_DESK: "Book nearby desk",
   SPACE_SELECT_SIZE: "Select room size",
   SPACE_SELECT_SIZE_X: "Min. {{ count }} people",
@@ -92947,12 +93024,14 @@ var CALENDAR_EVENT = {
   FACILITIES: "Room Facilities",
   SPACE_REMOVE: "Remove this room",
   SPACE_ADD_TO: "Add this room",
-  SPACE_LIST_INFO: "Select a room to view it's details",
+  SPACE_LIST_INFO: "Select a room to view its details",
   SPACE_LOCATION: "Location",
   SPACE_REGION_ANY: "Any region",
   SPACE_LEVEL_ANY: "Any level",
   SPACE_SELECT_EMPTY: "No available spaces for selected time and/or filters",
   SPACE_SELECT_LOADING: "Finding available spaces...",
+  SPACE_BOOKING_RULES_HIDDEN_1: "The selected room is not available for the selected time or duration",
+  SPACE_BOOKING_RULES_HIDDEN_N: "Some of the selected rooms are not available for the selected time or duration",
   CONFIRM_DETAILS: "Confirm Meeting",
   FINISHED: "Return home",
   LOADING: "Creating meeting requests...",
@@ -92965,14 +93044,14 @@ var CALENDAR_EVENT = {
   GROUP_FEATURED: "Featured",
   GROUP_INTERESTED: "Interested",
   GROUP_NOT_INTERESTED: "Not Interested",
-  GROUP_INTEREST_ADD: "Indictate Interest",
+  GROUP_INTEREST_ADD: "Indicate Interest",
   GROUP_INTEREST_REMOVE: "Revoke Interest",
   GROUP_ATTENDING_FIELD: "Attending",
   GROUP_GOING: "Going",
   GROUP_NOT_GOING: "Not Going",
-  GROUP_GOING_ADD: "Indictate Going",
+  GROUP_GOING_ADD: "Indicate Going",
   GROUP_GOING_REMOVE: "Revoke Going",
-  GROUP_PREMOTE: "Premote Event",
+  GROUP_PROMOTE: "Promote Event",
   GROUP_EDIT: "Edit Event",
   GROUP_COPY_URL: "Copy URL",
   GROUP_DELETE: "Delete Event",
@@ -93047,7 +93126,7 @@ var CATERING = {
   ORDER_ITEMS_LOADING: "Finding available menu items...",
   ORDER_ITEM_REMOVE: "Remove this item",
   ORDER_ITEM_ADD: "Add this item",
-  ORDER_ITEM_SELECT: "Select an item to view it's details",
+  ORDER_ITEM_SELECT: "Select an item to view its details",
   ORDER_ALLOW: "Allow ordering this item from this zone",
   ORDERS_EMPTY: "No catering orders for the selected date.",
   ORDERS_DELIVER_TIME: "Deliver at {{ time }}",
@@ -93174,9 +93253,9 @@ var APP = {
     PARKING_NEW_HEADER: "New Parking Reservation",
     PARKING_EDIT_HEADER: "Edit Parking Reservation",
     PARKING_ASSIGNED: 'You are already assigned a parking space "{{ name }}"',
-    PARKING_SUCCESS_MSG: 'Your parking space reservation for "{{ name }}" at {{ place }} has been successfully booked for the {{ date }} at {{ time }}',
+    PARKING_SUCCESS_MSG: 'Your parking space reservation for "{{ name }}" has been successfully booked for the {{ date }} at {{ time }}',
     PARKING_CONFIRM_TITLE: "Confirm Parking Reservation",
-    DESK_ASSIGNED: 'You are already assigned a parking space "{{ name }}"',
+    DESK_ASSIGNED: 'You are already assigned a desk "{{ name }}"',
     DESK_CONFIRM_TITLE: "Confirm Desk Booking",
     VIEW_SCHEDULE: "View your Bookings",
     BOOKING_FINISHED: "Return home",
@@ -93188,13 +93267,16 @@ var APP = {
     CHAT_ASSISTANT: "Assistant",
     CHAT_WAITING: "Waiting for a reply...",
     CHAT_MESSAGE_PLACEHOLDER: "New message...",
-    RESOURCE_CHECKED_IN_FAILED: "Failed to check in resource",
-    RESOURCE_CHECKED_IN: "Successfully checked in resource",
     DEAL_COUNT_1: "{{ count }} Offer",
     DEAL_COUNT_N: "{{ count }} Offers",
     SORT_BY_DATE_DESC: "Sort by Date (Newest First)",
     SORT_BY_DATE_ASC: "Sort by Date (Oldest First)",
-    SORT_BY_RELEVANCE: "Sort by Relevance"
+    SORT_BY_RELEVANCE: "Sort by Relevance",
+    DEALS_EMPTY_HEADER: "No Deals or Offers Available",
+    DEALS_EMPTY_BODY: "We're working on bringing you exciting deals and offers. Please check back later or explore other sections.",
+    RESOURCE_CHECKED_IN_FAILED: "No booking found",
+    RESOURCE_CHECKED_IN: "Successfully checked in resource",
+    RESOURCE_CHECKED_IN_MESSAGE: "Resource checked in successfully"
   },
   CONCIERGE: {
     MENU_BOOKINGS: "Bookings",
@@ -93547,7 +93629,7 @@ var APP = {
     EMAIL_TEMPLATES_SAVE: "Save Template",
     EMAIL_TEMPLATES_SEND_TEST: "Send test Email",
     EMAIL_TEMPLATES_SENT_TEST: "Successfully sent test email.",
-    EMAIL_TEMPLATES_CONFIG_ERROR: "Mailing system is not configured fot this application",
+    EMAIL_TEMPLATES_CONFIG_ERROR: "Mailing system is not configured for this application",
     EMAIL_TEMPLATES_SAVE_SUCCESS: "Successfully saved email template.",
     EMAIL_TEMPLATES_SAVE_ERROR: "Failed to save email template. Error: {{ error }}",
     EMAIL_TEMPLATES_REMOVE_SUCCESS: "Successfully removed email template",
@@ -93700,6 +93782,8 @@ var APP = {
     DEALS_REMOVE_BODY: "Are you sure you want to remove this deal/offer?",
     DEALS_SAVE_ERROR: "Failed to save deal/offer details. Error: {{ error }}",
     DEALS_SAVED: "Successfully saved deal/offer details.",
+    DEALS_EMPTY_HEADER: "No Deals or Offers Available",
+    DEALS_EMPTY_BODY: "Add a new deal or offer to get started.",
     LOCKERS_HEADER: "Locker Management",
     LOCKERS_BOOK_HEADER: "Locker Bookings",
     LOCKERS_BOOK_NEW: "New Locker Booking",
@@ -93776,7 +93860,7 @@ var APP = {
     LOCKERS_RELEASE_ALL_SUCCESS: "Successfully released all locker",
     LOCKERS_SHARE_ERROR: 'Failed to share locker with "{{ name }}". Error: {{ error }}',
     LOCKERS_SHARE_SUCCESS: 'Successfully shared locker "{{ name }}" with {{ user }}',
-    LOCKERS_NO_DRIVER: "Driver is not setup for lockers",
+    LOCKERS_NO_DRIVER: "Driver is not set up for lockers",
     LOCKERS_POSITION_INVALID: "Position of the locker overlaps with another locker",
     LOCKERS_SIZE_INVALID: "Locker overlaps with another locker",
     SIGNAGE_HEADER: "Digital Signage Management",
@@ -94069,6 +94153,11 @@ var APP = {
     APPROVER: "Approver",
     VALID_FROM: "Valid From",
     VALID_UNTIL: "Valid Until",
+    PLAY_FROM: "Play From",
+    PLAY_UNTIL: "Play Until",
+    PLAY_AT: "Play At",
+    PLAY_CRON: "Play Schedule",
+    PLAY_DURATION: "Play For",
     AVAILABLE_ROOMS_HEADER: "Set {{ type }} availability for rooms",
     AVAILABLE_ROOMS_SAVING: "Saving room availability for {{ type }}...",
     AVAILABLE_ROOMS_ENABLE: "Enable Selected",
@@ -94149,7 +94238,7 @@ var APP = {
     ACTION_HELP: "Help",
     ACTION_JOIN_ROOMS: "Join Rooms",
     ACTION_POWER: "Power",
-    OUTPUTS_EMPTY: "No output devices setup for this system.",
+    OUTPUTS_EMPTY: "No output devices set up for this system.",
     CONTROLS_EMPTY: "No controls available for this input source",
     INPUT_EMPTY: "No input source",
     INPUT_CATEGORY_EMPTY: "No inputs available for category",
@@ -94229,7 +94318,7 @@ var APP = {
     PREVIOUS: "Previous Media",
     PLAY: "Playing",
     PAUSE: "Paused",
-    NEXT: "Previous Media",
+    NEXT: "Next Media",
     VOLUME: "Volume [{{ state }}]",
     LOOP_ALL: "Loop [All]",
     LOOP_ONE: "Loop [One]",
@@ -94273,7 +94362,7 @@ var APP = {
     CAMERA_UNAVAILABLE: "Camera feed loading...",
     HOST: "Host",
     PHONE: "Phone",
-    ORGANISATION: "Organization",
+    ORGANISATION: "Organisation",
     REASON: "Reason for visit",
     CHECKED_IN_MSG: "You are checked in!",
     CHECKED_IN_MSG_SELF_REG: "Your registration is confirmed!",
@@ -94302,7 +94391,7 @@ var APP = {
     BEVERAGE_LOADING: "Requesting drink...",
     BEVERAGE_SUCCESS: "Successfully requested drink. Your request should show up at your meeting shortly after the start time.",
     ERROR_PRINT: "Failed to print visitor label.",
-    ERROR_CHECKIN: "Failed to check-in {{ guest }} for {{ host }}'s meeting.",
+    ERROR_CHECKIN: "Failed to check in {{ guest }} for {{ host }}'s meeting.",
     SUCCESS_CHECKIN: "Successfully checked in {{ guest }} for {{ host }}'s meeting",
     NOT_FOUND: 'No meetings for guest "{{ email }}" today',
     LOAD_ERROR: "Failed to load booking for guest.",
@@ -95304,15 +95393,15 @@ var LOCAL_TIMEZONE = Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone || "Aus
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "0a8f38b",
-  "hash": "0a8f38b",
+  "raw": "34c199c",
+  "hash": "34c199c",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "0a8f38b",
+  "suffix": "34c199c",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752462541590
+  "time": 1753234040572
 };
 
 // libs/common/src/lib/vorlon.service.ts
@@ -98448,7 +98537,7 @@ function uploadFile(file, pub = true, permissions = "none") {
       });
       const upload = upload_list[0];
       const upload_details = {
-        id: randomInt(999999999999),
+        id: upload?.id || `uploads-${randomString(8)}`,
         name: file.name,
         progress: 0,
         link: "",
@@ -99052,8 +99141,8 @@ var Dialog = class _Dialog {
   constructor() {
   }
   open(componentOrTemplateRef, config2) {
-    const defaults2 = this._defaultOptions || new DialogConfig();
-    config2 = __spreadValues(__spreadValues({}, defaults2), config2);
+    const defaults3 = this._defaultOptions || new DialogConfig();
+    config2 = __spreadValues(__spreadValues({}, defaults3), config2);
     config2.id = config2.id || this._idGenerator.getId("cdk-dialog-");
     if (config2.id && this.getDialogById(config2.id) && (typeof ngDevMode === "undefined" || ngDevMode)) {
       throw Error(`Dialog with id "${config2.id}" exists already. The dialog id must be unique.`);
@@ -100245,28 +100334,2682 @@ var MatDialogModule = class _MatDialogModule {
   }], null, null);
 })();
 
+// node_modules/@angular/cdk/fesm2022/selection-model-BCgC8uEN.mjs
+var SelectionModel = class {
+  _multiple;
+  _emitChanges;
+  compareWith;
+  /** Currently-selected values. */
+  _selection = /* @__PURE__ */ new Set();
+  /** Keeps track of the deselected options that haven't been emitted by the change event. */
+  _deselectedToEmit = [];
+  /** Keeps track of the selected options that haven't been emitted by the change event. */
+  _selectedToEmit = [];
+  /** Cache for the array value of the selected items. */
+  _selected;
+  /** Selected values. */
+  get selected() {
+    if (!this._selected) {
+      this._selected = Array.from(this._selection.values());
+    }
+    return this._selected;
+  }
+  /** Event emitted when the value has changed. */
+  changed = new Subject();
+  constructor(_multiple = false, initiallySelectedValues, _emitChanges = true, compareWith) {
+    this._multiple = _multiple;
+    this._emitChanges = _emitChanges;
+    this.compareWith = compareWith;
+    if (initiallySelectedValues && initiallySelectedValues.length) {
+      if (_multiple) {
+        initiallySelectedValues.forEach((value) => this._markSelected(value));
+      } else {
+        this._markSelected(initiallySelectedValues[0]);
+      }
+      this._selectedToEmit.length = 0;
+    }
+  }
+  /**
+   * Selects a value or an array of values.
+   * @param values The values to select
+   * @return Whether the selection changed as a result of this call
+   */
+  select(...values) {
+    this._verifyValueAssignment(values);
+    values.forEach((value) => this._markSelected(value));
+    const changed = this._hasQueuedChanges();
+    this._emitChangeEvent();
+    return changed;
+  }
+  /**
+   * Deselects a value or an array of values.
+   * @param values The values to deselect
+   * @return Whether the selection changed as a result of this call
+   */
+  deselect(...values) {
+    this._verifyValueAssignment(values);
+    values.forEach((value) => this._unmarkSelected(value));
+    const changed = this._hasQueuedChanges();
+    this._emitChangeEvent();
+    return changed;
+  }
+  /**
+   * Sets the selected values
+   * @param values The new selected values
+   * @return Whether the selection changed as a result of this call
+   */
+  setSelection(...values) {
+    this._verifyValueAssignment(values);
+    const oldValues = this.selected;
+    const newSelectedSet = new Set(values.map((value) => this._getConcreteValue(value)));
+    values.forEach((value) => this._markSelected(value));
+    oldValues.filter((value) => !newSelectedSet.has(this._getConcreteValue(value, newSelectedSet))).forEach((value) => this._unmarkSelected(value));
+    const changed = this._hasQueuedChanges();
+    this._emitChangeEvent();
+    return changed;
+  }
+  /**
+   * Toggles a value between selected and deselected.
+   * @param value The value to toggle
+   * @return Whether the selection changed as a result of this call
+   */
+  toggle(value) {
+    return this.isSelected(value) ? this.deselect(value) : this.select(value);
+  }
+  /**
+   * Clears all of the selected values.
+   * @param flushEvent Whether to flush the changes in an event.
+   *   If false, the changes to the selection will be flushed along with the next event.
+   * @return Whether the selection changed as a result of this call
+   */
+  clear(flushEvent = true) {
+    this._unmarkAll();
+    const changed = this._hasQueuedChanges();
+    if (flushEvent) {
+      this._emitChangeEvent();
+    }
+    return changed;
+  }
+  /**
+   * Determines whether a value is selected.
+   */
+  isSelected(value) {
+    return this._selection.has(this._getConcreteValue(value));
+  }
+  /**
+   * Determines whether the model does not have a value.
+   */
+  isEmpty() {
+    return this._selection.size === 0;
+  }
+  /**
+   * Determines whether the model has a value.
+   */
+  hasValue() {
+    return !this.isEmpty();
+  }
+  /**
+   * Sorts the selected values based on a predicate function.
+   */
+  sort(predicate) {
+    if (this._multiple && this.selected) {
+      this._selected.sort(predicate);
+    }
+  }
+  /**
+   * Gets whether multiple values can be selected.
+   */
+  isMultipleSelection() {
+    return this._multiple;
+  }
+  /** Emits a change event and clears the records of selected and deselected values. */
+  _emitChangeEvent() {
+    this._selected = null;
+    if (this._selectedToEmit.length || this._deselectedToEmit.length) {
+      this.changed.next({
+        source: this,
+        added: this._selectedToEmit,
+        removed: this._deselectedToEmit
+      });
+      this._deselectedToEmit = [];
+      this._selectedToEmit = [];
+    }
+  }
+  /** Selects a value. */
+  _markSelected(value) {
+    value = this._getConcreteValue(value);
+    if (!this.isSelected(value)) {
+      if (!this._multiple) {
+        this._unmarkAll();
+      }
+      if (!this.isSelected(value)) {
+        this._selection.add(value);
+      }
+      if (this._emitChanges) {
+        this._selectedToEmit.push(value);
+      }
+    }
+  }
+  /** Deselects a value. */
+  _unmarkSelected(value) {
+    value = this._getConcreteValue(value);
+    if (this.isSelected(value)) {
+      this._selection.delete(value);
+      if (this._emitChanges) {
+        this._deselectedToEmit.push(value);
+      }
+    }
+  }
+  /** Clears out the selected values. */
+  _unmarkAll() {
+    if (!this.isEmpty()) {
+      this._selection.forEach((value) => this._unmarkSelected(value));
+    }
+  }
+  /**
+   * Verifies the value assignment and throws an error if the specified value array is
+   * including multiple values while the selection model is not supporting multiple values.
+   */
+  _verifyValueAssignment(values) {
+    if (values.length > 1 && !this._multiple && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw getMultipleValuesInSingleSelectionError();
+    }
+  }
+  /** Whether there are queued up change to be emitted. */
+  _hasQueuedChanges() {
+    return !!(this._deselectedToEmit.length || this._selectedToEmit.length);
+  }
+  /** Returns a value that is comparable to inputValue by applying compareWith function, returns the same inputValue otherwise. */
+  _getConcreteValue(inputValue, selection) {
+    if (!this.compareWith) {
+      return inputValue;
+    } else {
+      selection = selection ?? this._selection;
+      for (let selectedValue of selection) {
+        if (this.compareWith(inputValue, selectedValue)) {
+          return selectedValue;
+        }
+      }
+      return inputValue;
+    }
+  }
+};
+function getMultipleValuesInSingleSelectionError() {
+  return Error("Cannot pass multiple values into SelectionModel with single-value mode.");
+}
+
+// node_modules/@angular/material/fesm2022/module-BDiw_nWS.mjs
+var _c08 = ["trigger"];
+var _c17 = ["panel"];
+var _c24 = [[["mat-select-trigger"]], "*"];
+var _c34 = ["mat-select-trigger", "*"];
+function MatSelect_Conditional_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 4);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.placeholder);
+  }
+}
+function MatSelect_Conditional_5_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275projection(0);
+  }
+}
+function MatSelect_Conditional_5_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 11);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.triggerValue);
+  }
+}
+function MatSelect_Conditional_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 5);
+    \u0275\u0275conditionalCreate(1, MatSelect_Conditional_5_Conditional_1_Template, 1, 0)(2, MatSelect_Conditional_5_Conditional_2_Template, 2, 1, "span", 11);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx_r1.customTrigger ? 1 : 2);
+  }
+}
+function MatSelect_ng_template_10_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 12, 1);
+    \u0275\u0275listener("keydown", function MatSelect_ng_template_10_Template_div_keydown_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1._handleKeydown($event));
+    });
+    \u0275\u0275projection(2, 1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(\u0275\u0275interpolate1("mat-mdc-select-panel mdc-menu-surface mdc-menu-surface--open ", ctx_r1._getPanelTheme()));
+    \u0275\u0275classProp("mat-select-panel-animations-enabled", !ctx_r1._animationsDisabled);
+    \u0275\u0275property("ngClass", ctx_r1.panelClass);
+    \u0275\u0275attribute("id", ctx_r1.id + "-panel")("aria-multiselectable", ctx_r1.multiple)("aria-label", ctx_r1.ariaLabel || null)("aria-labelledby", ctx_r1._getPanelAriaLabelledby());
+  }
+}
+function getMatSelectDynamicMultipleError() {
+  return Error("Cannot change `multiple` mode of select after initialization.");
+}
+function getMatSelectNonArrayValueError() {
+  return Error("Value must be an array in multiple-selection mode.");
+}
+function getMatSelectNonFunctionValueError() {
+  return Error("`compareWith` must be a function.");
+}
+var MAT_SELECT_SCROLL_STRATEGY = new InjectionToken("mat-select-scroll-strategy", {
+  providedIn: "root",
+  factory: () => {
+    const injector = inject(Injector);
+    return () => createRepositionScrollStrategy(injector);
+  }
+});
+function MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY(_overlay) {
+  const injector = inject(Injector);
+  return () => createRepositionScrollStrategy(injector);
+}
+var MAT_SELECT_CONFIG = new InjectionToken("MAT_SELECT_CONFIG");
+var MAT_SELECT_SCROLL_STRATEGY_PROVIDER = {
+  provide: MAT_SELECT_SCROLL_STRATEGY,
+  deps: [],
+  useFactory: MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY
+};
+var MAT_SELECT_TRIGGER = new InjectionToken("MatSelectTrigger");
+var MatSelectChange = class {
+  source;
+  value;
+  constructor(source, value) {
+    this.source = source;
+    this.value = value;
+  }
+};
+var MatSelect = class _MatSelect {
+  _viewportRuler = inject(ViewportRuler);
+  _changeDetectorRef = inject(ChangeDetectorRef);
+  _elementRef = inject(ElementRef);
+  _dir = inject(Directionality, {
+    optional: true
+  });
+  _idGenerator = inject(_IdGenerator);
+  _renderer = inject(Renderer2);
+  _parentFormField = inject(MAT_FORM_FIELD, {
+    optional: true
+  });
+  ngControl = inject(NgControl, {
+    self: true,
+    optional: true
+  });
+  _liveAnnouncer = inject(LiveAnnouncer);
+  _defaultOptions = inject(MAT_SELECT_CONFIG, {
+    optional: true
+  });
+  _animationsDisabled = _animationsDisabled();
+  _initialized = new Subject();
+  _cleanupDetach;
+  /** All of the defined select options. */
+  options;
+  // TODO(crisbeto): this is only necessary for the non-MDC select, but it's technically a
+  // public API so we have to keep it. It should be deprecated and removed eventually.
+  /** All of the defined groups of options. */
+  optionGroups;
+  /** User-supplied override of the trigger element. */
+  customTrigger;
+  /**
+   * This position config ensures that the top "start" corner of the overlay
+   * is aligned with with the top "start" of the origin by default (overlapping
+   * the trigger completely). If the panel cannot fit below the trigger, it
+   * will fall back to a position above the trigger.
+   */
+  _positions = [{
+    originX: "start",
+    originY: "bottom",
+    overlayX: "start",
+    overlayY: "top"
+  }, {
+    originX: "end",
+    originY: "bottom",
+    overlayX: "end",
+    overlayY: "top"
+  }, {
+    originX: "start",
+    originY: "top",
+    overlayX: "start",
+    overlayY: "bottom",
+    panelClass: "mat-mdc-select-panel-above"
+  }, {
+    originX: "end",
+    originY: "top",
+    overlayX: "end",
+    overlayY: "bottom",
+    panelClass: "mat-mdc-select-panel-above"
+  }];
+  /** Scrolls a particular option into the view. */
+  _scrollOptionIntoView(index) {
+    const option = this.options.toArray()[index];
+    if (option) {
+      const panel = this.panel.nativeElement;
+      const labelCount = _countGroupLabelsBeforeOption(index, this.options, this.optionGroups);
+      const element = option._getHostElement();
+      if (index === 0 && labelCount === 1) {
+        panel.scrollTop = 0;
+      } else {
+        panel.scrollTop = _getOptionScrollPosition(element.offsetTop, element.offsetHeight, panel.scrollTop, panel.offsetHeight);
+      }
+    }
+  }
+  /** Called when the panel has been opened and the overlay has settled on its final position. */
+  _positioningSettled() {
+    this._scrollOptionIntoView(this._keyManager.activeItemIndex || 0);
+  }
+  /** Creates a change event object that should be emitted by the select. */
+  _getChangeEvent(value) {
+    return new MatSelectChange(this, value);
+  }
+  /** Factory function used to create a scroll strategy for this select. */
+  _scrollStrategyFactory = inject(MAT_SELECT_SCROLL_STRATEGY);
+  /** Whether or not the overlay panel is open. */
+  _panelOpen = false;
+  /** Comparison function to specify which option is displayed. Defaults to object equality. */
+  _compareWith = (o1, o2) => o1 === o2;
+  /** Unique id for this input. */
+  _uid = this._idGenerator.getId("mat-select-");
+  /** Current `aria-labelledby` value for the select trigger. */
+  _triggerAriaLabelledBy = null;
+  /**
+   * Keeps track of the previous form control assigned to the select.
+   * Used to detect if it has changed.
+   */
+  _previousControl;
+  /** Emits whenever the component is destroyed. */
+  _destroy = new Subject();
+  /** Tracks the error state of the select. */
+  _errorStateTracker;
+  /**
+   * Emits whenever the component state changes and should cause the parent
+   * form-field to update. Implemented as part of `MatFormFieldControl`.
+   * @docs-private
+   */
+  stateChanges = new Subject();
+  /**
+   * Disable the automatic labeling to avoid issues like #27241.
+   * @docs-private
+   */
+  disableAutomaticLabeling = true;
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  userAriaDescribedBy;
+  /** Deals with the selection logic. */
+  _selectionModel;
+  /** Manages keyboard events for options in the panel. */
+  _keyManager;
+  /** Ideal origin for the overlay panel. */
+  _preferredOverlayOrigin;
+  /** Width of the overlay panel. */
+  _overlayWidth;
+  /** `View -> model callback called when value changes` */
+  _onChange = () => {
+  };
+  /** `View -> model callback called when select has been touched` */
+  _onTouched = () => {
+  };
+  /** ID for the DOM node containing the select's value. */
+  _valueId = this._idGenerator.getId("mat-select-value-");
+  /** Strategy that will be used to handle scrolling while the select panel is open. */
+  _scrollStrategy;
+  _overlayPanelClass = this._defaultOptions?.overlayPanelClass || "";
+  /** Whether the select is focused. */
+  get focused() {
+    return this._focused || this._panelOpen;
+  }
+  _focused = false;
+  /** A name for this control that can be used by `mat-form-field`. */
+  controlType = "mat-select";
+  /** Trigger that opens the select. */
+  trigger;
+  /** Panel containing the select options. */
+  panel;
+  /** Overlay pane containing the options. */
+  _overlayDir;
+  /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
+  panelClass;
+  /** Whether the select is disabled. */
+  disabled = false;
+  /** Whether ripples in the select are disabled. */
+  get disableRipple() {
+    return this._disableRipple();
+  }
+  set disableRipple(value) {
+    this._disableRipple.set(value);
+  }
+  _disableRipple = signal(false);
+  /** Tab index of the select. */
+  tabIndex = 0;
+  /** Whether checkmark indicator for single-selection options is hidden. */
+  get hideSingleSelectionIndicator() {
+    return this._hideSingleSelectionIndicator;
+  }
+  set hideSingleSelectionIndicator(value) {
+    this._hideSingleSelectionIndicator = value;
+    this._syncParentProperties();
+  }
+  _hideSingleSelectionIndicator = this._defaultOptions?.hideSingleSelectionIndicator ?? false;
+  /** Placeholder to be shown if no value has been selected. */
+  get placeholder() {
+    return this._placeholder;
+  }
+  set placeholder(value) {
+    this._placeholder = value;
+    this.stateChanges.next();
+  }
+  _placeholder;
+  /** Whether the component is required. */
+  get required() {
+    return this._required ?? this.ngControl?.control?.hasValidator(Validators.required) ?? false;
+  }
+  set required(value) {
+    this._required = value;
+    this.stateChanges.next();
+  }
+  _required;
+  /** Whether the user should be allowed to select multiple options. */
+  get multiple() {
+    return this._multiple;
+  }
+  set multiple(value) {
+    if (this._selectionModel && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw getMatSelectDynamicMultipleError();
+    }
+    this._multiple = value;
+  }
+  _multiple = false;
+  /** Whether to center the active option over the trigger. */
+  disableOptionCentering = this._defaultOptions?.disableOptionCentering ?? false;
+  /**
+   * Function to compare the option values with the selected values. The first argument
+   * is a value from an option. The second is a value from the selection. A boolean
+   * should be returned.
+   */
+  get compareWith() {
+    return this._compareWith;
+  }
+  set compareWith(fn3) {
+    if (typeof fn3 !== "function" && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw getMatSelectNonFunctionValueError();
+    }
+    this._compareWith = fn3;
+    if (this._selectionModel) {
+      this._initializeSelection();
+    }
+  }
+  /** Value of the select control. */
+  get value() {
+    return this._value;
+  }
+  set value(newValue) {
+    const hasAssigned = this._assignValue(newValue);
+    if (hasAssigned) {
+      this._onChange(newValue);
+    }
+  }
+  _value;
+  /** Aria label of the select. */
+  ariaLabel = "";
+  /** Input that can be used to specify the `aria-labelledby` attribute. */
+  ariaLabelledby;
+  /** Object used to control when error messages are shown. */
+  get errorStateMatcher() {
+    return this._errorStateTracker.matcher;
+  }
+  set errorStateMatcher(value) {
+    this._errorStateTracker.matcher = value;
+  }
+  /** Time to wait in milliseconds after the last keystroke before moving focus to an item. */
+  typeaheadDebounceInterval;
+  /**
+   * Function used to sort the values in a select in multiple mode.
+   * Follows the same logic as `Array.prototype.sort`.
+   */
+  sortComparator;
+  /** Unique id of the element. */
+  get id() {
+    return this._id;
+  }
+  set id(value) {
+    this._id = value || this._uid;
+    this.stateChanges.next();
+  }
+  _id;
+  /** Whether the select is in an error state. */
+  get errorState() {
+    return this._errorStateTracker.errorState;
+  }
+  set errorState(value) {
+    this._errorStateTracker.errorState = value;
+  }
+  /**
+   * Width of the panel. If set to `auto`, the panel will match the trigger width.
+   * If set to null or an empty string, the panel will grow to match the longest option's text.
+   */
+  panelWidth = this._defaultOptions && typeof this._defaultOptions.panelWidth !== "undefined" ? this._defaultOptions.panelWidth : "auto";
+  /**
+   * By default selecting an option with a `null` or `undefined` value will reset the select's
+   * value. Enable this option if the reset behavior doesn't match your requirements and instead
+   * the nullable options should become selected. The value of this input can be controlled app-wide
+   * using the `MAT_SELECT_CONFIG` injection token.
+   */
+  canSelectNullableOptions = this._defaultOptions?.canSelectNullableOptions ?? false;
+  /** Combined stream of all of the child options' change events. */
+  optionSelectionChanges = defer(() => {
+    const options2 = this.options;
+    if (options2) {
+      return options2.changes.pipe(startWith(options2), switchMap(() => merge(...options2.map((option) => option.onSelectionChange))));
+    }
+    return this._initialized.pipe(switchMap(() => this.optionSelectionChanges));
+  });
+  /** Event emitted when the select panel has been toggled. */
+  openedChange = new EventEmitter();
+  /** Event emitted when the select has been opened. */
+  _openedStream = this.openedChange.pipe(filter((o) => o), map(() => {
+  }));
+  /** Event emitted when the select has been closed. */
+  _closedStream = this.openedChange.pipe(filter((o) => !o), map(() => {
+  }));
+  /** Event emitted when the selected value has been changed by the user. */
+  selectionChange = new EventEmitter();
+  /**
+   * Event that emits whenever the raw value of the select changes. This is here primarily
+   * to facilitate the two-way binding for the `value` input.
+   * @docs-private
+   */
+  valueChange = new EventEmitter();
+  constructor() {
+    const defaultErrorStateMatcher = inject(ErrorStateMatcher);
+    const parentForm = inject(NgForm, {
+      optional: true
+    });
+    const parentFormGroup = inject(FormGroupDirective, {
+      optional: true
+    });
+    const tabIndex = inject(new HostAttributeToken("tabindex"), {
+      optional: true
+    });
+    if (this.ngControl) {
+      this.ngControl.valueAccessor = this;
+    }
+    if (this._defaultOptions?.typeaheadDebounceInterval != null) {
+      this.typeaheadDebounceInterval = this._defaultOptions.typeaheadDebounceInterval;
+    }
+    this._errorStateTracker = new _ErrorStateTracker(defaultErrorStateMatcher, this.ngControl, parentFormGroup, parentForm, this.stateChanges);
+    this._scrollStrategy = this._scrollStrategyFactory();
+    this.tabIndex = tabIndex == null ? 0 : parseInt(tabIndex) || 0;
+    this.id = this.id;
+  }
+  ngOnInit() {
+    this._selectionModel = new SelectionModel(this.multiple);
+    this.stateChanges.next();
+    this._viewportRuler.change().pipe(takeUntil(this._destroy)).subscribe(() => {
+      if (this.panelOpen) {
+        this._overlayWidth = this._getOverlayWidth(this._preferredOverlayOrigin);
+        this._changeDetectorRef.detectChanges();
+      }
+    });
+  }
+  ngAfterContentInit() {
+    this._initialized.next();
+    this._initialized.complete();
+    this._initKeyManager();
+    this._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
+      event.added.forEach((option) => option.select());
+      event.removed.forEach((option) => option.deselect());
+    });
+    this.options.changes.pipe(startWith(null), takeUntil(this._destroy)).subscribe(() => {
+      this._resetOptions();
+      this._initializeSelection();
+    });
+  }
+  ngDoCheck() {
+    const newAriaLabelledby = this._getTriggerAriaLabelledby();
+    const ngControl = this.ngControl;
+    if (newAriaLabelledby !== this._triggerAriaLabelledBy) {
+      const element = this._elementRef.nativeElement;
+      this._triggerAriaLabelledBy = newAriaLabelledby;
+      if (newAriaLabelledby) {
+        element.setAttribute("aria-labelledby", newAriaLabelledby);
+      } else {
+        element.removeAttribute("aria-labelledby");
+      }
+    }
+    if (ngControl) {
+      if (this._previousControl !== ngControl.control) {
+        if (this._previousControl !== void 0 && ngControl.disabled !== null && ngControl.disabled !== this.disabled) {
+          this.disabled = ngControl.disabled;
+        }
+        this._previousControl = ngControl.control;
+      }
+      this.updateErrorState();
+    }
+  }
+  ngOnChanges(changes) {
+    if (changes["disabled"] || changes["userAriaDescribedBy"]) {
+      this.stateChanges.next();
+    }
+    if (changes["typeaheadDebounceInterval"] && this._keyManager) {
+      this._keyManager.withTypeAhead(this.typeaheadDebounceInterval);
+    }
+  }
+  ngOnDestroy() {
+    this._cleanupDetach?.();
+    this._keyManager?.destroy();
+    this._destroy.next();
+    this._destroy.complete();
+    this.stateChanges.complete();
+    this._clearFromModal();
+  }
+  /** Toggles the overlay panel open or closed. */
+  toggle() {
+    this.panelOpen ? this.close() : this.open();
+  }
+  /** Opens the overlay panel. */
+  open() {
+    if (!this._canOpen()) {
+      return;
+    }
+    if (this._parentFormField) {
+      this._preferredOverlayOrigin = this._parentFormField.getConnectedOverlayOrigin();
+    }
+    this._cleanupDetach?.();
+    this._overlayWidth = this._getOverlayWidth(this._preferredOverlayOrigin);
+    this._applyModalPanelOwnership();
+    this._panelOpen = true;
+    this._overlayDir.positionChange.pipe(take(1)).subscribe(() => {
+      this._changeDetectorRef.detectChanges();
+      this._positioningSettled();
+    });
+    this._overlayDir.attachOverlay();
+    this._keyManager.withHorizontalOrientation(null);
+    this._highlightCorrectOption();
+    this._changeDetectorRef.markForCheck();
+    this.stateChanges.next();
+    Promise.resolve().then(() => this.openedChange.emit(true));
+  }
+  /**
+   * Track which modal we have modified the `aria-owns` attribute of. When the combobox trigger is
+   * inside an aria-modal, we apply aria-owns to the parent modal with the `id` of the options
+   * panel. Track the modal we have changed so we can undo the changes on destroy.
+   */
+  _trackedModal = null;
+  /**
+   * If the autocomplete trigger is inside of an `aria-modal` element, connect
+   * that modal to the options panel with `aria-owns`.
+   *
+   * For some browser + screen reader combinations, when navigation is inside
+   * of an `aria-modal` element, the screen reader treats everything outside
+   * of that modal as hidden or invisible.
+   *
+   * This causes a problem when the combobox trigger is _inside_ of a modal, because the
+   * options panel is rendered _outside_ of that modal, preventing screen reader navigation
+   * from reaching the panel.
+   *
+   * We can work around this issue by applying `aria-owns` to the modal with the `id` of
+   * the options panel. This effectively communicates to assistive technology that the
+   * options panel is part of the same interaction as the modal.
+   *
+   * At time of this writing, this issue is present in VoiceOver.
+   * See https://github.com/angular/components/issues/20694
+   */
+  _applyModalPanelOwnership() {
+    const modal = this._elementRef.nativeElement.closest('body > .cdk-overlay-container [aria-modal="true"]');
+    if (!modal) {
+      return;
+    }
+    const panelId = `${this.id}-panel`;
+    if (this._trackedModal) {
+      removeAriaReferencedId(this._trackedModal, "aria-owns", panelId);
+    }
+    addAriaReferencedId(modal, "aria-owns", panelId);
+    this._trackedModal = modal;
+  }
+  /** Clears the reference to the listbox overlay element from the modal it was added to. */
+  _clearFromModal() {
+    if (!this._trackedModal) {
+      return;
+    }
+    const panelId = `${this.id}-panel`;
+    removeAriaReferencedId(this._trackedModal, "aria-owns", panelId);
+    this._trackedModal = null;
+  }
+  /** Closes the overlay panel and focuses the host element. */
+  close() {
+    if (this._panelOpen) {
+      this._panelOpen = false;
+      this._exitAndDetach();
+      this._keyManager.withHorizontalOrientation(this._isRtl() ? "rtl" : "ltr");
+      this._changeDetectorRef.markForCheck();
+      this._onTouched();
+      this.stateChanges.next();
+      Promise.resolve().then(() => this.openedChange.emit(false));
+    }
+  }
+  /** Triggers the exit animation and detaches the overlay at the end. */
+  _exitAndDetach() {
+    if (this._animationsDisabled || !this.panel) {
+      this._detachOverlay();
+      return;
+    }
+    this._cleanupDetach?.();
+    this._cleanupDetach = () => {
+      cleanupEvent();
+      clearTimeout(exitFallbackTimer);
+      this._cleanupDetach = void 0;
+    };
+    const panel = this.panel.nativeElement;
+    const cleanupEvent = this._renderer.listen(panel, "animationend", (event) => {
+      if (event.animationName === "_mat-select-exit") {
+        this._cleanupDetach?.();
+        this._detachOverlay();
+      }
+    });
+    const exitFallbackTimer = setTimeout(() => {
+      this._cleanupDetach?.();
+      this._detachOverlay();
+    }, 200);
+    panel.classList.add("mat-select-panel-exit");
+  }
+  /** Detaches the current overlay directive. */
+  _detachOverlay() {
+    this._overlayDir.detachOverlay();
+    this._changeDetectorRef.markForCheck();
+  }
+  /**
+   * Sets the select's value. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param value New value to be written to the model.
+   */
+  writeValue(value) {
+    this._assignValue(value);
+  }
+  /**
+   * Saves a callback function to be invoked when the select's value
+   * changes from user input. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the value changes.
+   */
+  registerOnChange(fn3) {
+    this._onChange = fn3;
+  }
+  /**
+   * Saves a callback function to be invoked when the select is blurred
+   * by the user. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the component has been touched.
+   */
+  registerOnTouched(fn3) {
+    this._onTouched = fn3;
+  }
+  /**
+   * Disables the select. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param isDisabled Sets whether the component is disabled.
+   */
+  setDisabledState(isDisabled) {
+    this.disabled = isDisabled;
+    this._changeDetectorRef.markForCheck();
+    this.stateChanges.next();
+  }
+  /** Whether or not the overlay panel is open. */
+  get panelOpen() {
+    return this._panelOpen;
+  }
+  /** The currently selected option. */
+  get selected() {
+    return this.multiple ? this._selectionModel?.selected || [] : this._selectionModel?.selected[0];
+  }
+  /** The value displayed in the trigger. */
+  get triggerValue() {
+    if (this.empty) {
+      return "";
+    }
+    if (this._multiple) {
+      const selectedOptions = this._selectionModel.selected.map((option) => option.viewValue);
+      if (this._isRtl()) {
+        selectedOptions.reverse();
+      }
+      return selectedOptions.join(", ");
+    }
+    return this._selectionModel.selected[0].viewValue;
+  }
+  /** Refreshes the error state of the select. */
+  updateErrorState() {
+    this._errorStateTracker.updateErrorState();
+  }
+  /** Whether the element is in RTL mode. */
+  _isRtl() {
+    return this._dir ? this._dir.value === "rtl" : false;
+  }
+  /** Handles all keydown events on the select. */
+  _handleKeydown(event) {
+    if (!this.disabled) {
+      this.panelOpen ? this._handleOpenKeydown(event) : this._handleClosedKeydown(event);
+    }
+  }
+  /** Handles keyboard events while the select is closed. */
+  _handleClosedKeydown(event) {
+    const keyCode = event.keyCode;
+    const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW || keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW;
+    const isOpenKey = keyCode === ENTER || keyCode === SPACE;
+    const manager = this._keyManager;
+    if (!manager.isTyping() && isOpenKey && !hasModifierKey(event) || (this.multiple || event.altKey) && isArrowKey) {
+      event.preventDefault();
+      this.open();
+    } else if (!this.multiple) {
+      const previouslySelectedOption = this.selected;
+      manager.onKeydown(event);
+      const selectedOption = this.selected;
+      if (selectedOption && previouslySelectedOption !== selectedOption) {
+        this._liveAnnouncer.announce(selectedOption.viewValue, 1e4);
+      }
+    }
+  }
+  /** Handles keyboard events when the selected is open. */
+  _handleOpenKeydown(event) {
+    const manager = this._keyManager;
+    const keyCode = event.keyCode;
+    const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
+    const isTyping = manager.isTyping();
+    if (isArrowKey && event.altKey) {
+      event.preventDefault();
+      this.close();
+    } else if (!isTyping && (keyCode === ENTER || keyCode === SPACE) && manager.activeItem && !hasModifierKey(event)) {
+      event.preventDefault();
+      manager.activeItem._selectViaInteraction();
+    } else if (!isTyping && this._multiple && keyCode === A && event.ctrlKey) {
+      event.preventDefault();
+      const hasDeselectedOptions = this.options.some((opt) => !opt.disabled && !opt.selected);
+      this.options.forEach((option) => {
+        if (!option.disabled) {
+          hasDeselectedOptions ? option.select() : option.deselect();
+        }
+      });
+    } else {
+      const previouslyFocusedIndex = manager.activeItemIndex;
+      manager.onKeydown(event);
+      if (this._multiple && isArrowKey && event.shiftKey && manager.activeItem && manager.activeItemIndex !== previouslyFocusedIndex) {
+        manager.activeItem._selectViaInteraction();
+      }
+    }
+  }
+  /** Handles keyboard events coming from the overlay. */
+  _handleOverlayKeydown(event) {
+    if (event.keyCode === ESCAPE && !hasModifierKey(event)) {
+      event.preventDefault();
+      this.close();
+    }
+  }
+  _onFocus() {
+    if (!this.disabled) {
+      this._focused = true;
+      this.stateChanges.next();
+    }
+  }
+  /**
+   * Calls the touched callback only if the panel is closed. Otherwise, the trigger will
+   * "blur" to the panel when it opens, causing a false positive.
+   */
+  _onBlur() {
+    this._focused = false;
+    this._keyManager?.cancelTypeahead();
+    if (!this.disabled && !this.panelOpen) {
+      this._onTouched();
+      this._changeDetectorRef.markForCheck();
+      this.stateChanges.next();
+    }
+  }
+  /** Returns the theme to be used on the panel. */
+  _getPanelTheme() {
+    return this._parentFormField ? `mat-${this._parentFormField.color}` : "";
+  }
+  /** Whether the select has a value. */
+  get empty() {
+    return !this._selectionModel || this._selectionModel.isEmpty();
+  }
+  _initializeSelection() {
+    Promise.resolve().then(() => {
+      if (this.ngControl) {
+        this._value = this.ngControl.value;
+      }
+      this._setSelectionByValue(this._value);
+      this.stateChanges.next();
+    });
+  }
+  /**
+   * Sets the selected option based on a value. If no option can be
+   * found with the designated value, the select trigger is cleared.
+   */
+  _setSelectionByValue(value) {
+    this.options.forEach((option) => option.setInactiveStyles());
+    this._selectionModel.clear();
+    if (this.multiple && value) {
+      if (!Array.isArray(value) && (typeof ngDevMode === "undefined" || ngDevMode)) {
+        throw getMatSelectNonArrayValueError();
+      }
+      value.forEach((currentValue) => this._selectOptionByValue(currentValue));
+      this._sortValues();
+    } else {
+      const correspondingOption = this._selectOptionByValue(value);
+      if (correspondingOption) {
+        this._keyManager.updateActiveItem(correspondingOption);
+      } else if (!this.panelOpen) {
+        this._keyManager.updateActiveItem(-1);
+      }
+    }
+    this._changeDetectorRef.markForCheck();
+  }
+  /**
+   * Finds and selects and option based on its value.
+   * @returns Option that has the corresponding value.
+   */
+  _selectOptionByValue(value) {
+    const correspondingOption = this.options.find((option) => {
+      if (this._selectionModel.isSelected(option)) {
+        return false;
+      }
+      try {
+        return (option.value != null || this.canSelectNullableOptions) && this._compareWith(option.value, value);
+      } catch (error) {
+        if (typeof ngDevMode === "undefined" || ngDevMode) {
+          console.warn(error);
+        }
+        return false;
+      }
+    });
+    if (correspondingOption) {
+      this._selectionModel.select(correspondingOption);
+    }
+    return correspondingOption;
+  }
+  /** Assigns a specific value to the select. Returns whether the value has changed. */
+  _assignValue(newValue) {
+    if (newValue !== this._value || this._multiple && Array.isArray(newValue)) {
+      if (this.options) {
+        this._setSelectionByValue(newValue);
+      }
+      this._value = newValue;
+      return true;
+    }
+    return false;
+  }
+  // `skipPredicate` determines if key manager should avoid putting a given option in the tab
+  // order. Allow disabled list items to receive focus via keyboard to align with WAI ARIA
+  // recommendation.
+  //
+  // Normally WAI ARIA's instructions are to exclude disabled items from the tab order, but it
+  // makes a few exceptions for compound widgets.
+  //
+  // From [Developing a Keyboard Interface](
+  // https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/):
+  //   "For the following composite widget elements, keep them focusable when disabled: Options in a
+  //   Listbox..."
+  //
+  // The user can focus disabled options using the keyboard, but the user cannot click disabled
+  // options.
+  _skipPredicate = (option) => {
+    if (this.panelOpen) {
+      return false;
+    }
+    return option.disabled;
+  };
+  /** Gets how wide the overlay panel should be. */
+  _getOverlayWidth(preferredOrigin) {
+    if (this.panelWidth === "auto") {
+      const refToMeasure = preferredOrigin instanceof CdkOverlayOrigin ? preferredOrigin.elementRef : preferredOrigin || this._elementRef;
+      return refToMeasure.nativeElement.getBoundingClientRect().width;
+    }
+    return this.panelWidth === null ? "" : this.panelWidth;
+  }
+  /** Syncs the parent state with the individual options. */
+  _syncParentProperties() {
+    if (this.options) {
+      for (const option of this.options) {
+        option._changeDetectorRef.markForCheck();
+      }
+    }
+  }
+  /** Sets up a key manager to listen to keyboard events on the overlay panel. */
+  _initKeyManager() {
+    this._keyManager = new ActiveDescendantKeyManager(this.options).withTypeAhead(this.typeaheadDebounceInterval).withVerticalOrientation().withHorizontalOrientation(this._isRtl() ? "rtl" : "ltr").withHomeAndEnd().withPageUpDown().withAllowedModifierKeys(["shiftKey"]).skipPredicate(this._skipPredicate);
+    this._keyManager.tabOut.subscribe(() => {
+      if (this.panelOpen) {
+        if (!this.multiple && this._keyManager.activeItem) {
+          this._keyManager.activeItem._selectViaInteraction();
+        }
+        this.focus();
+        this.close();
+      }
+    });
+    this._keyManager.change.subscribe(() => {
+      if (this._panelOpen && this.panel) {
+        this._scrollOptionIntoView(this._keyManager.activeItemIndex || 0);
+      } else if (!this._panelOpen && !this.multiple && this._keyManager.activeItem) {
+        this._keyManager.activeItem._selectViaInteraction();
+      }
+    });
+  }
+  /** Drops current option subscriptions and IDs and resets from scratch. */
+  _resetOptions() {
+    const changedOrDestroyed = merge(this.options.changes, this._destroy);
+    this.optionSelectionChanges.pipe(takeUntil(changedOrDestroyed)).subscribe((event) => {
+      this._onSelect(event.source, event.isUserInput);
+      if (event.isUserInput && !this.multiple && this._panelOpen) {
+        this.close();
+        this.focus();
+      }
+    });
+    merge(...this.options.map((option) => option._stateChanges)).pipe(takeUntil(changedOrDestroyed)).subscribe(() => {
+      this._changeDetectorRef.detectChanges();
+      this.stateChanges.next();
+    });
+  }
+  /** Invoked when an option is clicked. */
+  _onSelect(option, isUserInput) {
+    const wasSelected = this._selectionModel.isSelected(option);
+    if (!this.canSelectNullableOptions && option.value == null && !this._multiple) {
+      option.deselect();
+      this._selectionModel.clear();
+      if (this.value != null) {
+        this._propagateChanges(option.value);
+      }
+    } else {
+      if (wasSelected !== option.selected) {
+        option.selected ? this._selectionModel.select(option) : this._selectionModel.deselect(option);
+      }
+      if (isUserInput) {
+        this._keyManager.setActiveItem(option);
+      }
+      if (this.multiple) {
+        this._sortValues();
+        if (isUserInput) {
+          this.focus();
+        }
+      }
+    }
+    if (wasSelected !== this._selectionModel.isSelected(option)) {
+      this._propagateChanges();
+    }
+    this.stateChanges.next();
+  }
+  /** Sorts the selected values in the selected based on their order in the panel. */
+  _sortValues() {
+    if (this.multiple) {
+      const options2 = this.options.toArray();
+      this._selectionModel.sort((a, b3) => {
+        return this.sortComparator ? this.sortComparator(a, b3, options2) : options2.indexOf(a) - options2.indexOf(b3);
+      });
+      this.stateChanges.next();
+    }
+  }
+  /** Emits change event to set the model value. */
+  _propagateChanges(fallbackValue) {
+    let valueToEmit;
+    if (this.multiple) {
+      valueToEmit = this.selected.map((option) => option.value);
+    } else {
+      valueToEmit = this.selected ? this.selected.value : fallbackValue;
+    }
+    this._value = valueToEmit;
+    this.valueChange.emit(valueToEmit);
+    this._onChange(valueToEmit);
+    this.selectionChange.emit(this._getChangeEvent(valueToEmit));
+    this._changeDetectorRef.markForCheck();
+  }
+  /**
+   * Highlights the selected item. If no option is selected, it will highlight
+   * the first *enabled* option.
+   */
+  _highlightCorrectOption() {
+    if (this._keyManager) {
+      if (this.empty) {
+        let firstEnabledOptionIndex = -1;
+        for (let index = 0; index < this.options.length; index++) {
+          const option = this.options.get(index);
+          if (!option.disabled) {
+            firstEnabledOptionIndex = index;
+            break;
+          }
+        }
+        this._keyManager.setActiveItem(firstEnabledOptionIndex);
+      } else {
+        this._keyManager.setActiveItem(this._selectionModel.selected[0]);
+      }
+    }
+  }
+  /** Whether the panel is allowed to open. */
+  _canOpen() {
+    return !this._panelOpen && !this.disabled && this.options?.length > 0 && !!this._overlayDir;
+  }
+  /** Focuses the select element. */
+  focus(options2) {
+    this._elementRef.nativeElement.focus(options2);
+  }
+  /** Gets the aria-labelledby for the select panel. */
+  _getPanelAriaLabelledby() {
+    if (this.ariaLabel) {
+      return null;
+    }
+    const labelId = this._parentFormField?.getLabelId() || null;
+    const labelExpression = labelId ? labelId + " " : "";
+    return this.ariaLabelledby ? labelExpression + this.ariaLabelledby : labelId;
+  }
+  /** Determines the `aria-activedescendant` to be set on the host. */
+  _getAriaActiveDescendant() {
+    if (this.panelOpen && this._keyManager && this._keyManager.activeItem) {
+      return this._keyManager.activeItem.id;
+    }
+    return null;
+  }
+  /** Gets the aria-labelledby of the select component trigger. */
+  _getTriggerAriaLabelledby() {
+    if (this.ariaLabel) {
+      return null;
+    }
+    let value = this._parentFormField?.getLabelId() || "";
+    if (this.ariaLabelledby) {
+      value += " " + this.ariaLabelledby;
+    }
+    if (!value) {
+      value = this._valueId;
+    }
+    return value;
+  }
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  get describedByIds() {
+    const element = this._elementRef.nativeElement;
+    const existingDescribedBy = element.getAttribute("aria-describedby");
+    return existingDescribedBy?.split(" ") || [];
+  }
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  setDescribedByIds(ids) {
+    if (ids.length) {
+      this._elementRef.nativeElement.setAttribute("aria-describedby", ids.join(" "));
+    } else {
+      this._elementRef.nativeElement.removeAttribute("aria-describedby");
+    }
+  }
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  onContainerClick() {
+    this.focus();
+    this.open();
+  }
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  get shouldLabelFloat() {
+    return this.panelOpen || !this.empty || this.focused && !!this.placeholder;
+  }
+  static \u0275fac = function MatSelect_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatSelect)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _MatSelect,
+    selectors: [["mat-select"]],
+    contentQueries: function MatSelect_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, MAT_SELECT_TRIGGER, 5);
+        \u0275\u0275contentQuery(dirIndex, MatOption, 5);
+        \u0275\u0275contentQuery(dirIndex, MAT_OPTGROUP, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.customTrigger = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.options = _t4);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.optionGroups = _t4);
+      }
+    },
+    viewQuery: function MatSelect_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c08, 5);
+        \u0275\u0275viewQuery(_c17, 5);
+        \u0275\u0275viewQuery(CdkConnectedOverlay, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.trigger = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.panel = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._overlayDir = _t4.first);
+      }
+    },
+    hostAttrs: ["role", "combobox", "aria-haspopup", "listbox", 1, "mat-mdc-select"],
+    hostVars: 19,
+    hostBindings: function MatSelect_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("keydown", function MatSelect_keydown_HostBindingHandler($event) {
+          return ctx._handleKeydown($event);
+        })("focus", function MatSelect_focus_HostBindingHandler() {
+          return ctx._onFocus();
+        })("blur", function MatSelect_blur_HostBindingHandler() {
+          return ctx._onBlur();
+        });
+      }
+      if (rf & 2) {
+        \u0275\u0275attribute("id", ctx.id)("tabindex", ctx.disabled ? -1 : ctx.tabIndex)("aria-controls", ctx.panelOpen ? ctx.id + "-panel" : null)("aria-expanded", ctx.panelOpen)("aria-label", ctx.ariaLabel || null)("aria-required", ctx.required.toString())("aria-disabled", ctx.disabled.toString())("aria-invalid", ctx.errorState)("aria-activedescendant", ctx._getAriaActiveDescendant());
+        \u0275\u0275classProp("mat-mdc-select-disabled", ctx.disabled)("mat-mdc-select-invalid", ctx.errorState)("mat-mdc-select-required", ctx.required)("mat-mdc-select-empty", ctx.empty)("mat-mdc-select-multiple", ctx.multiple);
+      }
+    },
+    inputs: {
+      userAriaDescribedBy: [0, "aria-describedby", "userAriaDescribedBy"],
+      panelClass: "panelClass",
+      disabled: [2, "disabled", "disabled", booleanAttribute],
+      disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
+      tabIndex: [2, "tabIndex", "tabIndex", (value) => value == null ? 0 : numberAttribute(value)],
+      hideSingleSelectionIndicator: [2, "hideSingleSelectionIndicator", "hideSingleSelectionIndicator", booleanAttribute],
+      placeholder: "placeholder",
+      required: [2, "required", "required", booleanAttribute],
+      multiple: [2, "multiple", "multiple", booleanAttribute],
+      disableOptionCentering: [2, "disableOptionCentering", "disableOptionCentering", booleanAttribute],
+      compareWith: "compareWith",
+      value: "value",
+      ariaLabel: [0, "aria-label", "ariaLabel"],
+      ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
+      errorStateMatcher: "errorStateMatcher",
+      typeaheadDebounceInterval: [2, "typeaheadDebounceInterval", "typeaheadDebounceInterval", numberAttribute],
+      sortComparator: "sortComparator",
+      id: "id",
+      panelWidth: "panelWidth",
+      canSelectNullableOptions: [2, "canSelectNullableOptions", "canSelectNullableOptions", booleanAttribute]
+    },
+    outputs: {
+      openedChange: "openedChange",
+      _openedStream: "opened",
+      _closedStream: "closed",
+      selectionChange: "selectionChange",
+      valueChange: "valueChange"
+    },
+    exportAs: ["matSelect"],
+    features: [\u0275\u0275ProvidersFeature([{
+      provide: MatFormFieldControl,
+      useExisting: _MatSelect
+    }, {
+      provide: MAT_OPTION_PARENT_COMPONENT,
+      useExisting: _MatSelect
+    }]), \u0275\u0275NgOnChangesFeature],
+    ngContentSelectors: _c34,
+    decls: 11,
+    vars: 9,
+    consts: [["fallbackOverlayOrigin", "cdkOverlayOrigin", "trigger", ""], ["panel", ""], ["cdk-overlay-origin", "", 1, "mat-mdc-select-trigger", 3, "click"], [1, "mat-mdc-select-value"], [1, "mat-mdc-select-placeholder", "mat-mdc-select-min-line"], [1, "mat-mdc-select-value-text"], [1, "mat-mdc-select-arrow-wrapper"], [1, "mat-mdc-select-arrow"], ["viewBox", "0 0 24 24", "width", "24px", "height", "24px", "focusable", "false", "aria-hidden", "true"], ["d", "M7 10l5 5 5-5z"], ["cdk-connected-overlay", "", "cdkConnectedOverlayLockPosition", "", "cdkConnectedOverlayHasBackdrop", "", "cdkConnectedOverlayBackdropClass", "cdk-overlay-transparent-backdrop", 3, "detach", "backdropClick", "overlayKeydown", "cdkConnectedOverlayDisableClose", "cdkConnectedOverlayPanelClass", "cdkConnectedOverlayScrollStrategy", "cdkConnectedOverlayOrigin", "cdkConnectedOverlayPositions", "cdkConnectedOverlayWidth", "cdkConnectedOverlayFlexibleDimensions"], [1, "mat-mdc-select-min-line"], ["role", "listbox", "tabindex", "-1", 3, "keydown", "ngClass"]],
+    template: function MatSelect_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275projectionDef(_c24);
+        \u0275\u0275elementStart(0, "div", 2, 0);
+        \u0275\u0275listener("click", function MatSelect_Template_div_click_0_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.open());
+        });
+        \u0275\u0275elementStart(3, "div", 3);
+        \u0275\u0275conditionalCreate(4, MatSelect_Conditional_4_Template, 2, 1, "span", 4)(5, MatSelect_Conditional_5_Template, 3, 1, "span", 5);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(6, "div", 6)(7, "div", 7);
+        \u0275\u0275namespaceSVG();
+        \u0275\u0275elementStart(8, "svg", 8);
+        \u0275\u0275element(9, "path", 9);
+        \u0275\u0275elementEnd()()()();
+        \u0275\u0275template(10, MatSelect_ng_template_10_Template, 3, 10, "ng-template", 10);
+        \u0275\u0275listener("detach", function MatSelect_Template_ng_template_detach_10_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.close());
+        })("backdropClick", function MatSelect_Template_ng_template_backdropClick_10_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.close());
+        })("overlayKeydown", function MatSelect_Template_ng_template_overlayKeydown_10_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._handleOverlayKeydown($event));
+        });
+      }
+      if (rf & 2) {
+        const fallbackOverlayOrigin_r4 = \u0275\u0275reference(1);
+        \u0275\u0275advance(3);
+        \u0275\u0275attribute("id", ctx._valueId);
+        \u0275\u0275advance();
+        \u0275\u0275conditional(ctx.empty ? 4 : 5);
+        \u0275\u0275advance(6);
+        \u0275\u0275property("cdkConnectedOverlayDisableClose", true)("cdkConnectedOverlayPanelClass", ctx._overlayPanelClass)("cdkConnectedOverlayScrollStrategy", ctx._scrollStrategy)("cdkConnectedOverlayOrigin", ctx._preferredOverlayOrigin || fallbackOverlayOrigin_r4)("cdkConnectedOverlayPositions", ctx._positions)("cdkConnectedOverlayWidth", ctx._overlayWidth)("cdkConnectedOverlayFlexibleDimensions", true);
+      }
+    },
+    dependencies: [CdkOverlayOrigin, CdkConnectedOverlay, NgClass],
+    styles: ['@keyframes _mat-select-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}@keyframes _mat-select-exit{from{opacity:1}to{opacity:0}}.mat-mdc-select{display:inline-block;width:100%;outline:none;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;color:var(--mat-select-enabled-trigger-text-color, var(--mat-sys-on-surface));font-family:var(--mat-select-trigger-text-font, var(--mat-sys-body-large-font));line-height:var(--mat-select-trigger-text-line-height, var(--mat-sys-body-large-line-height));font-size:var(--mat-select-trigger-text-size, var(--mat-sys-body-large-size));font-weight:var(--mat-select-trigger-text-weight, var(--mat-sys-body-large-weight));letter-spacing:var(--mat-select-trigger-text-tracking, var(--mat-sys-body-large-tracking))}div.mat-mdc-select-panel{box-shadow:var(--mat-select-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12))}.mat-mdc-select-disabled{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-disabled .mat-mdc-select-placeholder{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-trigger{display:inline-flex;align-items:center;cursor:pointer;position:relative;box-sizing:border-box;width:100%}.mat-mdc-select-disabled .mat-mdc-select-trigger{-webkit-user-select:none;user-select:none;cursor:default}.mat-mdc-select-value{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mat-mdc-select-value-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mat-mdc-select-arrow-wrapper{height:24px;flex-shrink:0;display:inline-flex;align-items:center}.mat-form-field-appearance-fill .mdc-text-field--no-label .mat-mdc-select-arrow-wrapper{transform:none}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-invalid .mat-mdc-select-arrow,.mat-form-field-invalid:not(.mat-form-field-disabled) .mat-mdc-form-field-infix::after{color:var(--mat-select-invalid-arrow-color, var(--mat-sys-error))}.mat-mdc-select-arrow{width:10px;height:5px;position:relative;color:var(--mat-select-enabled-arrow-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field.mat-focused .mat-mdc-select-arrow{color:var(--mat-select-focused-arrow-color, var(--mat-sys-primary))}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-disabled .mat-mdc-select-arrow{color:var(--mat-select-disabled-arrow-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-arrow svg{fill:currentColor;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)}@media(forced-colors: active){.mat-mdc-select-arrow svg{fill:CanvasText}.mat-mdc-select-disabled .mat-mdc-select-arrow svg{fill:GrayText}}div.mat-mdc-select-panel{width:100%;max-height:275px;outline:0;overflow:auto;padding:8px 0;border-radius:4px;box-sizing:border-box;position:relative;background-color:var(--mat-select-panel-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-select-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel{border-top-left-radius:0;border-top-right-radius:0;transform-origin:top center}.mat-mdc-select-panel-above div.mat-mdc-select-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:bottom center}.mat-select-panel-animations-enabled{animation:_mat-select-enter 120ms cubic-bezier(0, 0, 0.2, 1)}.mat-select-panel-animations-enabled.mat-select-panel-exit{animation:_mat-select-exit 100ms linear}.mat-mdc-select-placeholder{transition:color 400ms 133.3333333333ms cubic-bezier(0.25, 0.8, 0.25, 1);color:var(--mat-select-placeholder-text-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field:not(.mat-form-field-animations-enabled) .mat-mdc-select-placeholder,._mat-animation-noopable .mat-mdc-select-placeholder{transition:none}.mat-form-field-hide-placeholder .mat-mdc-select-placeholder{color:rgba(0,0,0,0);-webkit-text-fill-color:rgba(0,0,0,0);transition:none;display:block}.mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{cursor:pointer}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mat-mdc-floating-label{max-width:calc(100% - 18px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mdc-floating-label--float-above{max-width:calc(100%/0.75 - 24px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-notched-outline__notch{max-width:calc(100% - 60px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-text-field--label-floating .mdc-notched-outline__notch{max-width:calc(100% - 24px)}.mat-mdc-select-min-line:empty::before{content:" ";white-space:pre;width:1px;display:inline-block;visibility:hidden}.mat-form-field-appearance-fill .mat-mdc-select-arrow-wrapper{transform:var(--mat-select-arrow-transform, translateY(-8px))}\n'],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatSelect, [{
+    type: Component,
+    args: [{
+      selector: "mat-select",
+      exportAs: "matSelect",
+      encapsulation: ViewEncapsulation.None,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      host: {
+        "role": "combobox",
+        "aria-haspopup": "listbox",
+        "class": "mat-mdc-select",
+        "[attr.id]": "id",
+        "[attr.tabindex]": "disabled ? -1 : tabIndex",
+        "[attr.aria-controls]": 'panelOpen ? id + "-panel" : null',
+        "[attr.aria-expanded]": "panelOpen",
+        "[attr.aria-label]": "ariaLabel || null",
+        "[attr.aria-required]": "required.toString()",
+        "[attr.aria-disabled]": "disabled.toString()",
+        "[attr.aria-invalid]": "errorState",
+        "[attr.aria-activedescendant]": "_getAriaActiveDescendant()",
+        "[class.mat-mdc-select-disabled]": "disabled",
+        "[class.mat-mdc-select-invalid]": "errorState",
+        "[class.mat-mdc-select-required]": "required",
+        "[class.mat-mdc-select-empty]": "empty",
+        "[class.mat-mdc-select-multiple]": "multiple",
+        "(keydown)": "_handleKeydown($event)",
+        "(focus)": "_onFocus()",
+        "(blur)": "_onBlur()"
+      },
+      providers: [{
+        provide: MatFormFieldControl,
+        useExisting: MatSelect
+      }, {
+        provide: MAT_OPTION_PARENT_COMPONENT,
+        useExisting: MatSelect
+      }],
+      imports: [CdkOverlayOrigin, CdkConnectedOverlay, NgClass],
+      template: `<div cdk-overlay-origin
+     class="mat-mdc-select-trigger"
+     (click)="open()"
+     #fallbackOverlayOrigin="cdkOverlayOrigin"
+     #trigger>
+
+  <div class="mat-mdc-select-value" [attr.id]="_valueId">
+    @if (empty) {
+      <span class="mat-mdc-select-placeholder mat-mdc-select-min-line">{{placeholder}}</span>
+    } @else {
+      <span class="mat-mdc-select-value-text">
+        @if (customTrigger) {
+          <ng-content select="mat-select-trigger"></ng-content>
+        } @else {
+          <span class="mat-mdc-select-min-line">{{triggerValue}}</span>
+        }
+      </span>
+    }
+  </div>
+
+  <div class="mat-mdc-select-arrow-wrapper">
+    <div class="mat-mdc-select-arrow">
+      <!-- Use an inline SVG, because it works better than a CSS triangle in high contrast mode. -->
+      <svg viewBox="0 0 24 24" width="24px" height="24px" focusable="false" aria-hidden="true">
+        <path d="M7 10l5 5 5-5z"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<ng-template
+  cdk-connected-overlay
+  cdkConnectedOverlayLockPosition
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayDisableClose]="true"
+  [cdkConnectedOverlayPanelClass]="_overlayPanelClass"
+  [cdkConnectedOverlayScrollStrategy]="_scrollStrategy"
+  [cdkConnectedOverlayOrigin]="_preferredOverlayOrigin || fallbackOverlayOrigin"
+  [cdkConnectedOverlayPositions]="_positions"
+  [cdkConnectedOverlayWidth]="_overlayWidth"
+  [cdkConnectedOverlayFlexibleDimensions]="true"
+  (detach)="close()"
+  (backdropClick)="close()"
+  (overlayKeydown)="_handleOverlayKeydown($event)">
+  <div
+    #panel
+    role="listbox"
+    tabindex="-1"
+    class="mat-mdc-select-panel mdc-menu-surface mdc-menu-surface--open {{ _getPanelTheme() }}"
+    [class.mat-select-panel-animations-enabled]="!_animationsDisabled"
+    [attr.id]="id + '-panel'"
+    [attr.aria-multiselectable]="multiple"
+    [attr.aria-label]="ariaLabel || null"
+    [attr.aria-labelledby]="_getPanelAriaLabelledby()"
+    [ngClass]="panelClass"
+    (keydown)="_handleKeydown($event)">
+    <ng-content></ng-content>
+  </div>
+</ng-template>
+`,
+      styles: ['@keyframes _mat-select-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}@keyframes _mat-select-exit{from{opacity:1}to{opacity:0}}.mat-mdc-select{display:inline-block;width:100%;outline:none;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;color:var(--mat-select-enabled-trigger-text-color, var(--mat-sys-on-surface));font-family:var(--mat-select-trigger-text-font, var(--mat-sys-body-large-font));line-height:var(--mat-select-trigger-text-line-height, var(--mat-sys-body-large-line-height));font-size:var(--mat-select-trigger-text-size, var(--mat-sys-body-large-size));font-weight:var(--mat-select-trigger-text-weight, var(--mat-sys-body-large-weight));letter-spacing:var(--mat-select-trigger-text-tracking, var(--mat-sys-body-large-tracking))}div.mat-mdc-select-panel{box-shadow:var(--mat-select-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12))}.mat-mdc-select-disabled{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-disabled .mat-mdc-select-placeholder{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-trigger{display:inline-flex;align-items:center;cursor:pointer;position:relative;box-sizing:border-box;width:100%}.mat-mdc-select-disabled .mat-mdc-select-trigger{-webkit-user-select:none;user-select:none;cursor:default}.mat-mdc-select-value{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mat-mdc-select-value-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mat-mdc-select-arrow-wrapper{height:24px;flex-shrink:0;display:inline-flex;align-items:center}.mat-form-field-appearance-fill .mdc-text-field--no-label .mat-mdc-select-arrow-wrapper{transform:none}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-invalid .mat-mdc-select-arrow,.mat-form-field-invalid:not(.mat-form-field-disabled) .mat-mdc-form-field-infix::after{color:var(--mat-select-invalid-arrow-color, var(--mat-sys-error))}.mat-mdc-select-arrow{width:10px;height:5px;position:relative;color:var(--mat-select-enabled-arrow-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field.mat-focused .mat-mdc-select-arrow{color:var(--mat-select-focused-arrow-color, var(--mat-sys-primary))}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-disabled .mat-mdc-select-arrow{color:var(--mat-select-disabled-arrow-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-arrow svg{fill:currentColor;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)}@media(forced-colors: active){.mat-mdc-select-arrow svg{fill:CanvasText}.mat-mdc-select-disabled .mat-mdc-select-arrow svg{fill:GrayText}}div.mat-mdc-select-panel{width:100%;max-height:275px;outline:0;overflow:auto;padding:8px 0;border-radius:4px;box-sizing:border-box;position:relative;background-color:var(--mat-select-panel-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-select-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel{border-top-left-radius:0;border-top-right-radius:0;transform-origin:top center}.mat-mdc-select-panel-above div.mat-mdc-select-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:bottom center}.mat-select-panel-animations-enabled{animation:_mat-select-enter 120ms cubic-bezier(0, 0, 0.2, 1)}.mat-select-panel-animations-enabled.mat-select-panel-exit{animation:_mat-select-exit 100ms linear}.mat-mdc-select-placeholder{transition:color 400ms 133.3333333333ms cubic-bezier(0.25, 0.8, 0.25, 1);color:var(--mat-select-placeholder-text-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field:not(.mat-form-field-animations-enabled) .mat-mdc-select-placeholder,._mat-animation-noopable .mat-mdc-select-placeholder{transition:none}.mat-form-field-hide-placeholder .mat-mdc-select-placeholder{color:rgba(0,0,0,0);-webkit-text-fill-color:rgba(0,0,0,0);transition:none;display:block}.mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{cursor:pointer}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mat-mdc-floating-label{max-width:calc(100% - 18px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mdc-floating-label--float-above{max-width:calc(100%/0.75 - 24px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-notched-outline__notch{max-width:calc(100% - 60px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-text-field--label-floating .mdc-notched-outline__notch{max-width:calc(100% - 24px)}.mat-mdc-select-min-line:empty::before{content:" ";white-space:pre;width:1px;display:inline-block;visibility:hidden}.mat-form-field-appearance-fill .mat-mdc-select-arrow-wrapper{transform:var(--mat-select-arrow-transform, translateY(-8px))}\n']
+    }]
+  }], () => [], {
+    options: [{
+      type: ContentChildren,
+      args: [MatOption, {
+        descendants: true
+      }]
+    }],
+    optionGroups: [{
+      type: ContentChildren,
+      args: [MAT_OPTGROUP, {
+        descendants: true
+      }]
+    }],
+    customTrigger: [{
+      type: ContentChild,
+      args: [MAT_SELECT_TRIGGER]
+    }],
+    userAriaDescribedBy: [{
+      type: Input,
+      args: ["aria-describedby"]
+    }],
+    trigger: [{
+      type: ViewChild,
+      args: ["trigger"]
+    }],
+    panel: [{
+      type: ViewChild,
+      args: ["panel"]
+    }],
+    _overlayDir: [{
+      type: ViewChild,
+      args: [CdkConnectedOverlay]
+    }],
+    panelClass: [{
+      type: Input
+    }],
+    disabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    disableRipple: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    tabIndex: [{
+      type: Input,
+      args: [{
+        transform: (value) => value == null ? 0 : numberAttribute(value)
+      }]
+    }],
+    hideSingleSelectionIndicator: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    placeholder: [{
+      type: Input
+    }],
+    required: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    multiple: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    disableOptionCentering: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    compareWith: [{
+      type: Input
+    }],
+    value: [{
+      type: Input
+    }],
+    ariaLabel: [{
+      type: Input,
+      args: ["aria-label"]
+    }],
+    ariaLabelledby: [{
+      type: Input,
+      args: ["aria-labelledby"]
+    }],
+    errorStateMatcher: [{
+      type: Input
+    }],
+    typeaheadDebounceInterval: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    sortComparator: [{
+      type: Input
+    }],
+    id: [{
+      type: Input
+    }],
+    panelWidth: [{
+      type: Input
+    }],
+    canSelectNullableOptions: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    openedChange: [{
+      type: Output
+    }],
+    _openedStream: [{
+      type: Output,
+      args: ["opened"]
+    }],
+    _closedStream: [{
+      type: Output,
+      args: ["closed"]
+    }],
+    selectionChange: [{
+      type: Output
+    }],
+    valueChange: [{
+      type: Output
+    }]
+  });
+})();
+var MatSelectTrigger = class _MatSelectTrigger {
+  static \u0275fac = function MatSelectTrigger_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatSelectTrigger)();
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _MatSelectTrigger,
+    selectors: [["mat-select-trigger"]],
+    features: [\u0275\u0275ProvidersFeature([{
+      provide: MAT_SELECT_TRIGGER,
+      useExisting: _MatSelectTrigger
+    }])]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatSelectTrigger, [{
+    type: Directive,
+    args: [{
+      selector: "mat-select-trigger",
+      providers: [{
+        provide: MAT_SELECT_TRIGGER,
+        useExisting: MatSelectTrigger
+      }]
+    }]
+  }], null, null);
+})();
+var MatSelectModule = class _MatSelectModule {
+  static \u0275fac = function MatSelectModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatSelectModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatSelectModule,
+    imports: [OverlayModule, MatOptionModule, MatCommonModule, MatSelect, MatSelectTrigger],
+    exports: [CdkScrollableModule, MatFormFieldModule, MatSelect, MatSelectTrigger, MatOptionModule, MatCommonModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    providers: [MAT_SELECT_SCROLL_STRATEGY_PROVIDER],
+    imports: [OverlayModule, MatOptionModule, MatCommonModule, CdkScrollableModule, MatFormFieldModule, MatOptionModule, MatCommonModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatSelectModule, [{
+    type: NgModule,
+    args: [{
+      imports: [OverlayModule, MatOptionModule, MatCommonModule, MatSelect, MatSelectTrigger],
+      exports: [CdkScrollableModule, MatFormFieldModule, MatSelect, MatSelectTrigger, MatOptionModule, MatCommonModule],
+      providers: [MAT_SELECT_SCROLL_STRATEGY_PROVIDER]
+    }]
+  }], null, null);
+})();
+
+// libs/components/src/lib/safe.pipe.ts
+var _SafePipe = class _SafePipe {
+  constructor() {
+    this.sanitizer = inject(DomSanitizer);
+  }
+  /**
+   * Sanitizes the string allowing it to be injected into a template
+   * @param value String to sanitize
+   * @param type Type of value to sanitise. `resource`, `url`, `script`, `style` or `html`
+   */
+  transform(value, type2 = "html") {
+    switch (type2) {
+      case "resource":
+        return this.sanitizer.bypassSecurityTrustResourceUrl(value);
+      case "url":
+        return this.sanitizer.bypassSecurityTrustUrl(value);
+      case "script":
+        return this.sanitizer.bypassSecurityTrustScript(value);
+      case "style":
+        return this.sanitizer.bypassSecurityTrustStyle(value);
+      default:
+        return this.sanitizer.bypassSecurityTrustHtml(value);
+    }
+  }
+};
+_SafePipe.\u0275fac = function SafePipe_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _SafePipe)();
+};
+_SafePipe.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "safe", type: _SafePipe, pure: true });
+var SafePipe = _SafePipe;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SafePipe, [{
+    type: Pipe,
+    args: [{
+      name: "safe"
+    }]
+  }], null, null);
+})();
+
+// libs/components/src/lib/icon.component.ts
+var _c09 = ["*"];
+function IconComponent_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "i");
+    \u0275\u0275text(1);
+    \u0275\u0275projection(2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_1_0;
+    let tmp_2_0;
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(((tmp_1_0 = ctx_r0.icon()) == null ? null : tmp_1_0.class) || ctx_r0.className());
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", (tmp_2_0 = ctx_r0.icon()) == null ? null : tmp_2_0.content, " ");
+  }
+}
+function IconComponent_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 2);
+    \u0275\u0275pipe(1, "safe");
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("src", \u0275\u0275pipeBind2(1, 1, ctx_r0.icon().src, "resource"), \u0275\u0275sanitizeUrl);
+  }
+}
+var _IconComponent = class _IconComponent {
+  constructor() {
+    this.className = input("material-symbols-rounded");
+    this.icon = input(void 0);
+  }
+};
+_IconComponent.\u0275fac = function IconComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _IconComponent)();
+};
+_IconComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["icon"], ["i", "icon", ""]], inputs: { className: [1, "className"], icon: [1, "icon"] }, ngContentSelectors: _c09, decls: 3, vars: 2, consts: [[1, "flex", "h-[1.25em]", "w-[1.25em]", "items-center", "justify-center", "overflow-hidden"], [3, "class"], [1, "h-[1em]", "w-[1em]", 3, "src"]], template: function IconComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275projectionDef();
+    \u0275\u0275elementStart(0, "div", 0);
+    \u0275\u0275conditionalCreate(1, IconComponent_Conditional_1_Template, 3, 3, "i", 1);
+    \u0275\u0275conditionalCreate(2, IconComponent_Conditional_2_Template, 2, 4, "img", 2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275conditional(!ctx.icon() || ctx.icon().type !== "img" ? 1 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.icon() && ctx.icon().type === "img" ? 2 : -1);
+  }
+}, dependencies: [SafePipe], styles: ["\n\ni[_ngcontent-%COMP%] {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */"] });
+var IconComponent = _IconComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IconComponent, [{
+    type: Component,
+    args: [{ selector: "icon,i[icon]", template: `
+        <div
+            class="flex h-[1.25em] w-[1.25em] items-center justify-center overflow-hidden"
+        >
+            @if (!icon() || icon().type !== 'img') {
+                <i [class]="icon()?.class || className()">
+                    {{ icon()?.content }}
+                    <ng-content></ng-content>
+                </i>
+            }
+            @if (icon() && icon().type === 'img') {
+                <img
+                    class="h-[1em] w-[1em]"
+                    [src]="icon().src | safe: 'resource'"
+                />
+            }
+        </div>
+    `, imports: [SafePipe], styles: ["/* angular:styles/component:css;9dcb326dcc2b3d8b68e7d89ef488eb28abc701fb0e2ab3f372b27f7bf732088c;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/icon.component.ts */\ni {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IconComponent, { className: "IconComponent", filePath: "libs/components/src/lib/icon.component.ts", lineNumber: 34 });
+})();
+
+// node_modules/@angular/material/fesm2022/checkbox.mjs
+var _c010 = ["input"];
+var _c18 = ["label"];
+var _c25 = ["*"];
+var MAT_CHECKBOX_DEFAULT_OPTIONS = new InjectionToken("mat-checkbox-default-options", {
+  providedIn: "root",
+  factory: MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY
+});
+function MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY() {
+  return {
+    color: "accent",
+    clickAction: "check-indeterminate",
+    disabledInteractive: false
+  };
+}
+var TransitionCheckState;
+(function(TransitionCheckState2) {
+  TransitionCheckState2[TransitionCheckState2["Init"] = 0] = "Init";
+  TransitionCheckState2[TransitionCheckState2["Checked"] = 1] = "Checked";
+  TransitionCheckState2[TransitionCheckState2["Unchecked"] = 2] = "Unchecked";
+  TransitionCheckState2[TransitionCheckState2["Indeterminate"] = 3] = "Indeterminate";
+})(TransitionCheckState || (TransitionCheckState = {}));
+var MatCheckboxChange = class {
+  /** The source checkbox of the event. */
+  source;
+  /** The new `checked` value of the checkbox. */
+  checked;
+};
+var defaults2 = MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY();
+var MatCheckbox = class _MatCheckbox {
+  _elementRef = inject(ElementRef);
+  _changeDetectorRef = inject(ChangeDetectorRef);
+  _ngZone = inject(NgZone);
+  _animationsDisabled = _animationsDisabled();
+  _options = inject(MAT_CHECKBOX_DEFAULT_OPTIONS, {
+    optional: true
+  });
+  /** Focuses the checkbox. */
+  focus() {
+    this._inputElement.nativeElement.focus();
+  }
+  /** Creates the change event that will be emitted by the checkbox. */
+  _createChangeEvent(isChecked) {
+    const event = new MatCheckboxChange();
+    event.source = this;
+    event.checked = isChecked;
+    return event;
+  }
+  /** Gets the element on which to add the animation CSS classes. */
+  _getAnimationTargetElement() {
+    return this._inputElement?.nativeElement;
+  }
+  /** CSS classes to add when transitioning between the different checkbox states. */
+  _animationClasses = {
+    uncheckedToChecked: "mdc-checkbox--anim-unchecked-checked",
+    uncheckedToIndeterminate: "mdc-checkbox--anim-unchecked-indeterminate",
+    checkedToUnchecked: "mdc-checkbox--anim-checked-unchecked",
+    checkedToIndeterminate: "mdc-checkbox--anim-checked-indeterminate",
+    indeterminateToChecked: "mdc-checkbox--anim-indeterminate-checked",
+    indeterminateToUnchecked: "mdc-checkbox--anim-indeterminate-unchecked"
+  };
+  /**
+   * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
+   * take precedence so this may be omitted.
+   */
+  ariaLabel = "";
+  /**
+   * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
+   */
+  ariaLabelledby = null;
+  /** The 'aria-describedby' attribute is read after the element's label and field type. */
+  ariaDescribedby;
+  /**
+   * Users can specify the `aria-expanded` attribute which will be forwarded to the input element
+   */
+  ariaExpanded;
+  /**
+   * Users can specify the `aria-controls` attribute which will be forwarded to the input element
+   */
+  ariaControls;
+  /** Users can specify the `aria-owns` attribute which will be forwarded to the input element */
+  ariaOwns;
+  _uniqueId;
+  /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
+  id;
+  /** Returns the unique id for the visual hidden input. */
+  get inputId() {
+    return `${this.id || this._uniqueId}-input`;
+  }
+  /** Whether the checkbox is required. */
+  required;
+  /** Whether the label should appear after or before the checkbox. Defaults to 'after' */
+  labelPosition = "after";
+  /** Name value will be applied to the input element if present */
+  name = null;
+  /** Event emitted when the checkbox's `checked` value changes. */
+  change = new EventEmitter();
+  /** Event emitted when the checkbox's `indeterminate` value changes. */
+  indeterminateChange = new EventEmitter();
+  /** The value attribute of the native input element */
+  value;
+  /** Whether the checkbox has a ripple. */
+  disableRipple;
+  /** The native `<input type="checkbox">` element */
+  _inputElement;
+  /** The native `<label>` element */
+  _labelElement;
+  /** Tabindex for the checkbox. */
+  tabIndex;
+  // TODO(crisbeto): this should be a ThemePalette, but some internal apps were abusing
+  // the lack of type checking previously and assigning random strings.
+  /**
+   * Theme color of the checkbox. This API is supported in M2 themes only, it
+   * has no effect in M3 themes. For color customization in M3, see https://material.angular.dev/components/checkbox/styling.
+   *
+   * For information on applying color variants in M3, see
+   * https://material.angular.dev/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
+   */
+  color;
+  /** Whether the checkbox should remain interactive when it is disabled. */
+  disabledInteractive;
+  /**
+   * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
+   * @docs-private
+   */
+  _onTouched = () => {
+  };
+  _currentAnimationClass = "";
+  _currentCheckState = TransitionCheckState.Init;
+  _controlValueAccessorChangeFn = () => {
+  };
+  _validatorChangeFn = () => {
+  };
+  constructor() {
+    inject(_CdkPrivateStyleLoader).load(_StructuralStylesLoader);
+    const tabIndex = inject(new HostAttributeToken("tabindex"), {
+      optional: true
+    });
+    this._options = this._options || defaults2;
+    this.color = this._options.color || defaults2.color;
+    this.tabIndex = tabIndex == null ? 0 : parseInt(tabIndex) || 0;
+    this.id = this._uniqueId = inject(_IdGenerator).getId("mat-mdc-checkbox-");
+    this.disabledInteractive = this._options?.disabledInteractive ?? false;
+  }
+  ngOnChanges(changes) {
+    if (changes["required"]) {
+      this._validatorChangeFn();
+    }
+  }
+  ngAfterViewInit() {
+    this._syncIndeterminate(this.indeterminate);
+  }
+  /** Whether the checkbox is checked. */
+  get checked() {
+    return this._checked;
+  }
+  set checked(value) {
+    if (value != this.checked) {
+      this._checked = value;
+      this._changeDetectorRef.markForCheck();
+    }
+  }
+  _checked = false;
+  /** Whether the checkbox is disabled. */
+  get disabled() {
+    return this._disabled;
+  }
+  set disabled(value) {
+    if (value !== this.disabled) {
+      this._disabled = value;
+      this._changeDetectorRef.markForCheck();
+    }
+  }
+  _disabled = false;
+  /**
+   * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
+   * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
+   * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
+   * set to false.
+   */
+  get indeterminate() {
+    return this._indeterminate();
+  }
+  set indeterminate(value) {
+    const changed = value != this._indeterminate();
+    this._indeterminate.set(value);
+    if (changed) {
+      if (value) {
+        this._transitionCheckState(TransitionCheckState.Indeterminate);
+      } else {
+        this._transitionCheckState(this.checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
+      }
+      this.indeterminateChange.emit(value);
+    }
+    this._syncIndeterminate(value);
+  }
+  _indeterminate = signal(false);
+  _isRippleDisabled() {
+    return this.disableRipple || this.disabled;
+  }
+  /** Method being called whenever the label text changes. */
+  _onLabelTextChange() {
+    this._changeDetectorRef.detectChanges();
+  }
+  // Implemented as part of ControlValueAccessor.
+  writeValue(value) {
+    this.checked = !!value;
+  }
+  // Implemented as part of ControlValueAccessor.
+  registerOnChange(fn3) {
+    this._controlValueAccessorChangeFn = fn3;
+  }
+  // Implemented as part of ControlValueAccessor.
+  registerOnTouched(fn3) {
+    this._onTouched = fn3;
+  }
+  // Implemented as part of ControlValueAccessor.
+  setDisabledState(isDisabled) {
+    this.disabled = isDisabled;
+  }
+  // Implemented as a part of Validator.
+  validate(control) {
+    return this.required && control.value !== true ? {
+      "required": true
+    } : null;
+  }
+  // Implemented as a part of Validator.
+  registerOnValidatorChange(fn3) {
+    this._validatorChangeFn = fn3;
+  }
+  _transitionCheckState(newState) {
+    let oldState = this._currentCheckState;
+    let element = this._getAnimationTargetElement();
+    if (oldState === newState || !element) {
+      return;
+    }
+    if (this._currentAnimationClass) {
+      element.classList.remove(this._currentAnimationClass);
+    }
+    this._currentAnimationClass = this._getAnimationClassForCheckStateTransition(oldState, newState);
+    this._currentCheckState = newState;
+    if (this._currentAnimationClass.length > 0) {
+      element.classList.add(this._currentAnimationClass);
+      const animationClass = this._currentAnimationClass;
+      this._ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          element.classList.remove(animationClass);
+        }, 1e3);
+      });
+    }
+  }
+  _emitChangeEvent() {
+    this._controlValueAccessorChangeFn(this.checked);
+    this.change.emit(this._createChangeEvent(this.checked));
+    if (this._inputElement) {
+      this._inputElement.nativeElement.checked = this.checked;
+    }
+  }
+  /** Toggles the `checked` state of the checkbox. */
+  toggle() {
+    this.checked = !this.checked;
+    this._controlValueAccessorChangeFn(this.checked);
+  }
+  _handleInputClick() {
+    const clickAction = this._options?.clickAction;
+    if (!this.disabled && clickAction !== "noop") {
+      if (this.indeterminate && clickAction !== "check") {
+        Promise.resolve().then(() => {
+          this._indeterminate.set(false);
+          this.indeterminateChange.emit(false);
+        });
+      }
+      this._checked = !this._checked;
+      this._transitionCheckState(this._checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
+      this._emitChangeEvent();
+    } else if (this.disabled && this.disabledInteractive || !this.disabled && clickAction === "noop") {
+      this._inputElement.nativeElement.checked = this.checked;
+      this._inputElement.nativeElement.indeterminate = this.indeterminate;
+    }
+  }
+  _onInteractionEvent(event) {
+    event.stopPropagation();
+  }
+  _onBlur() {
+    Promise.resolve().then(() => {
+      this._onTouched();
+      this._changeDetectorRef.markForCheck();
+    });
+  }
+  _getAnimationClassForCheckStateTransition(oldState, newState) {
+    if (this._animationsDisabled) {
+      return "";
+    }
+    switch (oldState) {
+      case TransitionCheckState.Init:
+        if (newState === TransitionCheckState.Checked) {
+          return this._animationClasses.uncheckedToChecked;
+        } else if (newState == TransitionCheckState.Indeterminate) {
+          return this._checked ? this._animationClasses.checkedToIndeterminate : this._animationClasses.uncheckedToIndeterminate;
+        }
+        break;
+      case TransitionCheckState.Unchecked:
+        return newState === TransitionCheckState.Checked ? this._animationClasses.uncheckedToChecked : this._animationClasses.uncheckedToIndeterminate;
+      case TransitionCheckState.Checked:
+        return newState === TransitionCheckState.Unchecked ? this._animationClasses.checkedToUnchecked : this._animationClasses.checkedToIndeterminate;
+      case TransitionCheckState.Indeterminate:
+        return newState === TransitionCheckState.Checked ? this._animationClasses.indeterminateToChecked : this._animationClasses.indeterminateToUnchecked;
+    }
+    return "";
+  }
+  /**
+   * Syncs the indeterminate value with the checkbox DOM node.
+   *
+   * We sync `indeterminate` directly on the DOM node, because in Ivy the check for whether a
+   * property is supported on an element boils down to `if (propName in element)`. Domino's
+   * HTMLInputElement doesn't have an `indeterminate` property so Ivy will warn during
+   * server-side rendering.
+   */
+  _syncIndeterminate(value) {
+    const nativeCheckbox = this._inputElement;
+    if (nativeCheckbox) {
+      nativeCheckbox.nativeElement.indeterminate = value;
+    }
+  }
+  _onInputClick() {
+    this._handleInputClick();
+  }
+  _onTouchTargetClick() {
+    this._handleInputClick();
+    if (!this.disabled) {
+      this._inputElement.nativeElement.focus();
+    }
+  }
+  /**
+   *  Prevent click events that come from the `<label/>` element from bubbling. This prevents the
+   *  click handler on the host from triggering twice when clicking on the `<label/>` element. After
+   *  the click event on the `<label/>` propagates, the browsers dispatches click on the associated
+   *  `<input/>`. By preventing clicks on the label by bubbling, we ensure only one click event
+   *  bubbles when the label is clicked.
+   */
+  _preventBubblingFromLabel(event) {
+    if (!!event.target && this._labelElement.nativeElement.contains(event.target)) {
+      event.stopPropagation();
+    }
+  }
+  static \u0275fac = function MatCheckbox_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatCheckbox)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _MatCheckbox,
+    selectors: [["mat-checkbox"]],
+    viewQuery: function MatCheckbox_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c010, 5);
+        \u0275\u0275viewQuery(_c18, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._inputElement = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._labelElement = _t4.first);
+      }
+    },
+    hostAttrs: [1, "mat-mdc-checkbox"],
+    hostVars: 16,
+    hostBindings: function MatCheckbox_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275domProperty("id", ctx.id);
+        \u0275\u0275attribute("tabindex", null)("aria-label", null)("aria-labelledby", null);
+        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "mat-accent");
+        \u0275\u0275classProp("_mat-animation-noopable", ctx._animationsDisabled)("mdc-checkbox--disabled", ctx.disabled)("mat-mdc-checkbox-disabled", ctx.disabled)("mat-mdc-checkbox-checked", ctx.checked)("mat-mdc-checkbox-disabled-interactive", ctx.disabledInteractive);
+      }
+    },
+    inputs: {
+      ariaLabel: [0, "aria-label", "ariaLabel"],
+      ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
+      ariaDescribedby: [0, "aria-describedby", "ariaDescribedby"],
+      ariaExpanded: [2, "aria-expanded", "ariaExpanded", booleanAttribute],
+      ariaControls: [0, "aria-controls", "ariaControls"],
+      ariaOwns: [0, "aria-owns", "ariaOwns"],
+      id: "id",
+      required: [2, "required", "required", booleanAttribute],
+      labelPosition: "labelPosition",
+      name: "name",
+      value: "value",
+      disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
+      tabIndex: [2, "tabIndex", "tabIndex", (value) => value == null ? void 0 : numberAttribute(value)],
+      color: "color",
+      disabledInteractive: [2, "disabledInteractive", "disabledInteractive", booleanAttribute],
+      checked: [2, "checked", "checked", booleanAttribute],
+      disabled: [2, "disabled", "disabled", booleanAttribute],
+      indeterminate: [2, "indeterminate", "indeterminate", booleanAttribute]
+    },
+    outputs: {
+      change: "change",
+      indeterminateChange: "indeterminateChange"
+    },
+    exportAs: ["matCheckbox"],
+    features: [\u0275\u0275ProvidersFeature([{
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => _MatCheckbox),
+      multi: true
+    }, {
+      provide: NG_VALIDATORS,
+      useExisting: _MatCheckbox,
+      multi: true
+    }]), \u0275\u0275NgOnChangesFeature],
+    ngContentSelectors: _c25,
+    decls: 15,
+    vars: 23,
+    consts: [["checkbox", ""], ["input", ""], ["label", ""], ["mat-internal-form-field", "", 3, "click", "labelPosition"], [1, "mdc-checkbox"], [1, "mat-mdc-checkbox-touch-target", 3, "click"], ["type", "checkbox", 1, "mdc-checkbox__native-control", 3, "blur", "click", "change", "checked", "indeterminate", "disabled", "id", "required", "tabIndex"], [1, "mdc-checkbox__ripple"], [1, "mdc-checkbox__background"], ["focusable", "false", "viewBox", "0 0 24 24", "aria-hidden", "true", 1, "mdc-checkbox__checkmark"], ["fill", "none", "d", "M1.73,12.91 8.1,19.28 22.79,4.59", 1, "mdc-checkbox__checkmark-path"], [1, "mdc-checkbox__mixedmark"], ["mat-ripple", "", 1, "mat-mdc-checkbox-ripple", "mat-focus-indicator", 3, "matRippleTrigger", "matRippleDisabled", "matRippleCentered"], [1, "mdc-label", 3, "for"]],
+    template: function MatCheckbox_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275projectionDef();
+        \u0275\u0275elementStart(0, "div", 3);
+        \u0275\u0275listener("click", function MatCheckbox_Template_div_click_0_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._preventBubblingFromLabel($event));
+        });
+        \u0275\u0275elementStart(1, "div", 4, 0)(3, "div", 5);
+        \u0275\u0275listener("click", function MatCheckbox_Template_div_click_3_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onTouchTargetClick());
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(4, "input", 6, 1);
+        \u0275\u0275listener("blur", function MatCheckbox_Template_input_blur_4_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onBlur());
+        })("click", function MatCheckbox_Template_input_click_4_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onInputClick());
+        })("change", function MatCheckbox_Template_input_change_4_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onInteractionEvent($event));
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(6, "div", 7);
+        \u0275\u0275elementStart(7, "div", 8);
+        \u0275\u0275namespaceSVG();
+        \u0275\u0275elementStart(8, "svg", 9);
+        \u0275\u0275element(9, "path", 10);
+        \u0275\u0275elementEnd();
+        \u0275\u0275namespaceHTML();
+        \u0275\u0275element(10, "div", 11);
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(11, "div", 12);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(12, "label", 13, 2);
+        \u0275\u0275projection(14);
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        const checkbox_r2 = \u0275\u0275reference(2);
+        \u0275\u0275property("labelPosition", ctx.labelPosition);
+        \u0275\u0275advance(4);
+        \u0275\u0275classProp("mdc-checkbox--selected", ctx.checked);
+        \u0275\u0275property("checked", ctx.checked)("indeterminate", ctx.indeterminate)("disabled", ctx.disabled && !ctx.disabledInteractive)("id", ctx.inputId)("required", ctx.required)("tabIndex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex);
+        \u0275\u0275attribute("aria-label", ctx.ariaLabel || null)("aria-labelledby", ctx.ariaLabelledby)("aria-describedby", ctx.ariaDescribedby)("aria-checked", ctx.indeterminate ? "mixed" : null)("aria-controls", ctx.ariaControls)("aria-disabled", ctx.disabled && ctx.disabledInteractive ? true : null)("aria-expanded", ctx.ariaExpanded)("aria-owns", ctx.ariaOwns)("name", ctx.name)("value", ctx.value);
+        \u0275\u0275advance(7);
+        \u0275\u0275property("matRippleTrigger", checkbox_r2)("matRippleDisabled", ctx.disableRipple || ctx.disabled)("matRippleCentered", true);
+        \u0275\u0275advance();
+        \u0275\u0275property("for", ctx.inputId);
+      }
+    },
+    dependencies: [MatRipple, _MatInternalFormField],
+    styles: ['.mdc-checkbox{display:inline-block;position:relative;flex:0 0 18px;box-sizing:content-box;width:18px;height:18px;line-height:0;white-space:nowrap;cursor:pointer;vertical-align:bottom;padding:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);margin:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox:hover>.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:hover>.mat-mdc-checkbox-ripple>.mat-ripple-element{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control+.mdc-checkbox__ripple{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control{position:absolute;margin:0;padding:0;opacity:0;cursor:inherit;z-index:1;width:var(--mat-checkbox-state-layer-size, 40px);height:var(--mat-checkbox-state-layer-size, 40px);top:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);right:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox--disabled{cursor:default;pointer-events:none}@media(forced-colors: active){.mdc-checkbox--disabled{opacity:.5}}.mdc-checkbox__background{display:inline-flex;position:absolute;align-items:center;justify-content:center;box-sizing:border-box;width:18px;height:18px;border:2px solid currentColor;border-radius:2px;background-color:rgba(0,0,0,0);pointer-events:none;will-change:background-color,border-color;transition:background-color 90ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms cubic-bezier(0.4, 0, 0.6, 1);-webkit-print-color-adjust:exact;color-adjust:exact;border-color:var(--mat-checkbox-unselected-icon-color, var(--mat-sys-on-surface-variant));top:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2)}.mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox__native-control:disabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:disabled:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:checked)~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-hover-icon-color, var(--mat-sys-on-surface));background-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary))}.mdc-checkbox__native-control:focus:focus:not(:checked)~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-focus-icon-color, var(--mat-sys-on-surface))}.mdc-checkbox__native-control:focus:focus:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox:hover>.mdc-checkbox__native-control~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox__checkmark{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0;transition:opacity 180ms cubic-bezier(0.4, 0, 0.6, 1);color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}@media(forced-colors: active){.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox__checkmark-path{transition:stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1);stroke:currentColor;stroke-width:3.12px;stroke-dashoffset:29.7833385;stroke-dasharray:29.7833385}.mdc-checkbox__mixedmark{width:100%;height:0;transform:scaleX(0) rotate(0deg);border-width:1px;border-style:solid;opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1);border-color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__mixedmark{margin:0 1px}}.mdc-checkbox--disabled .mdc-checkbox__mixedmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__mixedmark{border-color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background,.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background,.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background,.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background{animation-duration:180ms;animation-timing-function:linear}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-unchecked-checked-checkmark-path 180ms linear;transition:none}.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-unchecked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-checked-unchecked-checkmark-path 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__checkmark{animation:mdc-checkbox-checked-indeterminate-checkmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-checked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__checkmark{animation:mdc-checkbox-indeterminate-checked-checkmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-checked-mixedmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-unchecked-mixedmark 300ms linear;transition:none}.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{transition:border-color 90ms cubic-bezier(0, 0, 0.2, 1),background-color 90ms cubic-bezier(0, 0, 0.2, 1)}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path{stroke-dashoffset:0}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark{transition:opacity 180ms cubic-bezier(0, 0, 0.2, 1),transform 180ms cubic-bezier(0, 0, 0.2, 1);opacity:1}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(-45deg)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark{transform:rotate(45deg);opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(0deg);opacity:1}@keyframes mdc-checkbox-unchecked-checked-checkmark-path{0%,50%{stroke-dashoffset:29.7833385}50%{animation-timing-function:cubic-bezier(0, 0, 0.2, 1)}100%{stroke-dashoffset:0}}@keyframes mdc-checkbox-unchecked-indeterminate-mixedmark{0%,68.2%{transform:scaleX(0)}68.2%{animation-timing-function:cubic-bezier(0, 0, 0, 1)}100%{transform:scaleX(1)}}@keyframes mdc-checkbox-checked-unchecked-checkmark-path{from{animation-timing-function:cubic-bezier(0.4, 0, 1, 1);opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:-29.7833385}}@keyframes mdc-checkbox-checked-indeterminate-checkmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(45deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-checked-checkmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(45deg);opacity:0}to{transform:rotate(360deg);opacity:1}}@keyframes mdc-checkbox-checked-indeterminate-mixedmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(-45deg);opacity:0}to{transform:rotate(0deg);opacity:1}}@keyframes mdc-checkbox-indeterminate-checked-mixedmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(315deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-unchecked-mixedmark{0%{animation-timing-function:linear;transform:scaleX(1);opacity:1}32.8%,100%{transform:scaleX(0);opacity:0}}.mat-mdc-checkbox{display:inline-block;position:relative;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-touch-target,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__native-control,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__ripple,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-ripple::before,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__mixedmark{transition:none !important;animation:none !important}.mat-mdc-checkbox label{cursor:pointer}.mat-mdc-checkbox .mat-internal-form-field{color:var(--mat-checkbox-label-text-color, var(--mat-sys-on-surface));font-family:var(--mat-checkbox-label-text-font, var(--mat-sys-body-medium-font));line-height:var(--mat-checkbox-label-text-line-height, var(--mat-sys-body-medium-line-height));font-size:var(--mat-checkbox-label-text-size, var(--mat-sys-body-medium-size));letter-spacing:var(--mat-checkbox-label-text-tracking, var(--mat-sys-body-medium-tracking));font-weight:var(--mat-checkbox-label-text-weight, var(--mat-sys-body-medium-weight))}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive{pointer-events:auto}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive input{cursor:default}.mat-mdc-checkbox.mat-mdc-checkbox-disabled label{cursor:default;color:var(--mat-checkbox-disabled-label-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-checkbox label:empty{display:none}.mat-mdc-checkbox .mdc-checkbox__ripple{opacity:0}.mat-mdc-checkbox .mat-mdc-checkbox-ripple,.mdc-checkbox__ripple{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:50%;pointer-events:none}.mat-mdc-checkbox .mat-mdc-checkbox-ripple:not(:empty),.mdc-checkbox__ripple:not(:empty){transform:translateZ(0)}.mat-mdc-checkbox-ripple .mat-ripple-element{opacity:.1}.mat-mdc-checkbox-touch-target{position:absolute;top:50%;left:50%;height:48px;width:48px;transform:translate(-50%, -50%);display:var(--mat-checkbox-touch-target-display, block)}.mat-mdc-checkbox .mat-mdc-checkbox-ripple::before{border-radius:50%}.mdc-checkbox__native-control:focus~.mat-focus-indicator::before{content:""}\n'],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCheckbox, [{
+    type: Component,
+    args: [{
+      selector: "mat-checkbox",
+      host: {
+        "class": "mat-mdc-checkbox",
+        "[attr.tabindex]": "null",
+        "[attr.aria-label]": "null",
+        "[attr.aria-labelledby]": "null",
+        "[class._mat-animation-noopable]": "_animationsDisabled",
+        "[class.mdc-checkbox--disabled]": "disabled",
+        "[id]": "id",
+        // Add classes that users can use to more easily target disabled or checked checkboxes.
+        "[class.mat-mdc-checkbox-disabled]": "disabled",
+        "[class.mat-mdc-checkbox-checked]": "checked",
+        "[class.mat-mdc-checkbox-disabled-interactive]": "disabledInteractive",
+        "[class]": 'color ? "mat-" + color : "mat-accent"'
+      },
+      providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => MatCheckbox),
+        multi: true
+      }, {
+        provide: NG_VALIDATORS,
+        useExisting: MatCheckbox,
+        multi: true
+      }],
+      exportAs: "matCheckbox",
+      encapsulation: ViewEncapsulation.None,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      imports: [MatRipple, _MatInternalFormField],
+      template: `<div mat-internal-form-field [labelPosition]="labelPosition" (click)="_preventBubblingFromLabel($event)">
+  <div #checkbox class="mdc-checkbox">
+    <!-- Render this element first so the input is on top. -->
+    <div class="mat-mdc-checkbox-touch-target" (click)="_onTouchTargetClick()"></div>
+    <input #input
+           type="checkbox"
+           class="mdc-checkbox__native-control"
+           [class.mdc-checkbox--selected]="checked"
+           [attr.aria-label]="ariaLabel || null"
+           [attr.aria-labelledby]="ariaLabelledby"
+           [attr.aria-describedby]="ariaDescribedby"
+           [attr.aria-checked]="indeterminate ? 'mixed' : null"
+           [attr.aria-controls]="ariaControls"
+           [attr.aria-disabled]="disabled && disabledInteractive ? true : null"
+           [attr.aria-expanded]="ariaExpanded"
+           [attr.aria-owns]="ariaOwns"
+           [attr.name]="name"
+           [attr.value]="value"
+           [checked]="checked"
+           [indeterminate]="indeterminate"
+           [disabled]="disabled && !disabledInteractive"
+           [id]="inputId"
+           [required]="required"
+           [tabIndex]="disabled && !disabledInteractive ? -1 : tabIndex"
+           (blur)="_onBlur()"
+           (click)="_onInputClick()"
+           (change)="_onInteractionEvent($event)"/>
+    <div class="mdc-checkbox__ripple"></div>
+    <div class="mdc-checkbox__background">
+      <svg class="mdc-checkbox__checkmark"
+           focusable="false"
+           viewBox="0 0 24 24"
+           aria-hidden="true">
+        <path class="mdc-checkbox__checkmark-path"
+              fill="none"
+              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+      </svg>
+      <div class="mdc-checkbox__mixedmark"></div>
+    </div>
+    <div class="mat-mdc-checkbox-ripple mat-focus-indicator" mat-ripple
+      [matRippleTrigger]="checkbox"
+      [matRippleDisabled]="disableRipple || disabled"
+      [matRippleCentered]="true"></div>
+  </div>
+  <!--
+    Avoid putting a click handler on the <label/> to fix duplicate navigation stop on Talk Back
+    (#14385). Putting a click handler on the <label/> caused this bug because the browser produced
+    an unnecessary accessibility tree node.
+  -->
+  <label class="mdc-label" #label [for]="inputId">
+    <ng-content></ng-content>
+  </label>
+</div>
+`,
+      styles: ['.mdc-checkbox{display:inline-block;position:relative;flex:0 0 18px;box-sizing:content-box;width:18px;height:18px;line-height:0;white-space:nowrap;cursor:pointer;vertical-align:bottom;padding:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);margin:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox:hover>.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:hover>.mat-mdc-checkbox-ripple>.mat-ripple-element{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control+.mdc-checkbox__ripple{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control{position:absolute;margin:0;padding:0;opacity:0;cursor:inherit;z-index:1;width:var(--mat-checkbox-state-layer-size, 40px);height:var(--mat-checkbox-state-layer-size, 40px);top:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);right:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox--disabled{cursor:default;pointer-events:none}@media(forced-colors: active){.mdc-checkbox--disabled{opacity:.5}}.mdc-checkbox__background{display:inline-flex;position:absolute;align-items:center;justify-content:center;box-sizing:border-box;width:18px;height:18px;border:2px solid currentColor;border-radius:2px;background-color:rgba(0,0,0,0);pointer-events:none;will-change:background-color,border-color;transition:background-color 90ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms cubic-bezier(0.4, 0, 0.6, 1);-webkit-print-color-adjust:exact;color-adjust:exact;border-color:var(--mat-checkbox-unselected-icon-color, var(--mat-sys-on-surface-variant));top:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2)}.mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox__native-control:disabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:disabled:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:checked)~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-hover-icon-color, var(--mat-sys-on-surface));background-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary))}.mdc-checkbox__native-control:focus:focus:not(:checked)~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-focus-icon-color, var(--mat-sys-on-surface))}.mdc-checkbox__native-control:focus:focus:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox:hover>.mdc-checkbox__native-control~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox__checkmark{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0;transition:opacity 180ms cubic-bezier(0.4, 0, 0.6, 1);color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}@media(forced-colors: active){.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox__checkmark-path{transition:stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1);stroke:currentColor;stroke-width:3.12px;stroke-dashoffset:29.7833385;stroke-dasharray:29.7833385}.mdc-checkbox__mixedmark{width:100%;height:0;transform:scaleX(0) rotate(0deg);border-width:1px;border-style:solid;opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1);border-color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__mixedmark{margin:0 1px}}.mdc-checkbox--disabled .mdc-checkbox__mixedmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__mixedmark{border-color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background,.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background,.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background,.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background{animation-duration:180ms;animation-timing-function:linear}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-unchecked-checked-checkmark-path 180ms linear;transition:none}.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-unchecked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-checked-unchecked-checkmark-path 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__checkmark{animation:mdc-checkbox-checked-indeterminate-checkmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-checked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__checkmark{animation:mdc-checkbox-indeterminate-checked-checkmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-checked-mixedmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-unchecked-mixedmark 300ms linear;transition:none}.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{transition:border-color 90ms cubic-bezier(0, 0, 0.2, 1),background-color 90ms cubic-bezier(0, 0, 0.2, 1)}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path{stroke-dashoffset:0}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark{transition:opacity 180ms cubic-bezier(0, 0, 0.2, 1),transform 180ms cubic-bezier(0, 0, 0.2, 1);opacity:1}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(-45deg)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark{transform:rotate(45deg);opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(0deg);opacity:1}@keyframes mdc-checkbox-unchecked-checked-checkmark-path{0%,50%{stroke-dashoffset:29.7833385}50%{animation-timing-function:cubic-bezier(0, 0, 0.2, 1)}100%{stroke-dashoffset:0}}@keyframes mdc-checkbox-unchecked-indeterminate-mixedmark{0%,68.2%{transform:scaleX(0)}68.2%{animation-timing-function:cubic-bezier(0, 0, 0, 1)}100%{transform:scaleX(1)}}@keyframes mdc-checkbox-checked-unchecked-checkmark-path{from{animation-timing-function:cubic-bezier(0.4, 0, 1, 1);opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:-29.7833385}}@keyframes mdc-checkbox-checked-indeterminate-checkmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(45deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-checked-checkmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(45deg);opacity:0}to{transform:rotate(360deg);opacity:1}}@keyframes mdc-checkbox-checked-indeterminate-mixedmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(-45deg);opacity:0}to{transform:rotate(0deg);opacity:1}}@keyframes mdc-checkbox-indeterminate-checked-mixedmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(315deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-unchecked-mixedmark{0%{animation-timing-function:linear;transform:scaleX(1);opacity:1}32.8%,100%{transform:scaleX(0);opacity:0}}.mat-mdc-checkbox{display:inline-block;position:relative;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-touch-target,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__native-control,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__ripple,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-ripple::before,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__mixedmark{transition:none !important;animation:none !important}.mat-mdc-checkbox label{cursor:pointer}.mat-mdc-checkbox .mat-internal-form-field{color:var(--mat-checkbox-label-text-color, var(--mat-sys-on-surface));font-family:var(--mat-checkbox-label-text-font, var(--mat-sys-body-medium-font));line-height:var(--mat-checkbox-label-text-line-height, var(--mat-sys-body-medium-line-height));font-size:var(--mat-checkbox-label-text-size, var(--mat-sys-body-medium-size));letter-spacing:var(--mat-checkbox-label-text-tracking, var(--mat-sys-body-medium-tracking));font-weight:var(--mat-checkbox-label-text-weight, var(--mat-sys-body-medium-weight))}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive{pointer-events:auto}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive input{cursor:default}.mat-mdc-checkbox.mat-mdc-checkbox-disabled label{cursor:default;color:var(--mat-checkbox-disabled-label-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-checkbox label:empty{display:none}.mat-mdc-checkbox .mdc-checkbox__ripple{opacity:0}.mat-mdc-checkbox .mat-mdc-checkbox-ripple,.mdc-checkbox__ripple{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:50%;pointer-events:none}.mat-mdc-checkbox .mat-mdc-checkbox-ripple:not(:empty),.mdc-checkbox__ripple:not(:empty){transform:translateZ(0)}.mat-mdc-checkbox-ripple .mat-ripple-element{opacity:.1}.mat-mdc-checkbox-touch-target{position:absolute;top:50%;left:50%;height:48px;width:48px;transform:translate(-50%, -50%);display:var(--mat-checkbox-touch-target-display, block)}.mat-mdc-checkbox .mat-mdc-checkbox-ripple::before{border-radius:50%}.mdc-checkbox__native-control:focus~.mat-focus-indicator::before{content:""}\n']
+    }]
+  }], () => [], {
+    ariaLabel: [{
+      type: Input,
+      args: ["aria-label"]
+    }],
+    ariaLabelledby: [{
+      type: Input,
+      args: ["aria-labelledby"]
+    }],
+    ariaDescribedby: [{
+      type: Input,
+      args: ["aria-describedby"]
+    }],
+    ariaExpanded: [{
+      type: Input,
+      args: [{
+        alias: "aria-expanded",
+        transform: booleanAttribute
+      }]
+    }],
+    ariaControls: [{
+      type: Input,
+      args: ["aria-controls"]
+    }],
+    ariaOwns: [{
+      type: Input,
+      args: ["aria-owns"]
+    }],
+    id: [{
+      type: Input
+    }],
+    required: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    labelPosition: [{
+      type: Input
+    }],
+    name: [{
+      type: Input
+    }],
+    change: [{
+      type: Output
+    }],
+    indeterminateChange: [{
+      type: Output
+    }],
+    value: [{
+      type: Input
+    }],
+    disableRipple: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    _inputElement: [{
+      type: ViewChild,
+      args: ["input"]
+    }],
+    _labelElement: [{
+      type: ViewChild,
+      args: ["label"]
+    }],
+    tabIndex: [{
+      type: Input,
+      args: [{
+        transform: (value) => value == null ? void 0 : numberAttribute(value)
+      }]
+    }],
+    color: [{
+      type: Input
+    }],
+    disabledInteractive: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    checked: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    disabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    indeterminate: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }]
+  });
+})();
+var MatCheckboxModule = class _MatCheckboxModule {
+  static \u0275fac = function MatCheckboxModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatCheckboxModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatCheckboxModule,
+    imports: [MatCheckbox, MatCommonModule],
+    exports: [MatCheckbox, MatCommonModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [MatCheckbox, MatCommonModule, MatCommonModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCheckboxModule, [{
+    type: NgModule,
+    args: [{
+      imports: [MatCheckbox, MatCommonModule],
+      exports: [MatCheckbox, MatCommonModule]
+    }]
+  }], null, null);
+})();
+
+// libs/components/src/lib/settings-toggle.component.ts
+var _c011 = ["*"];
+function SettingsToggleComponent_Conditional_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "icon", 2);
+    \u0275\u0275text(1, "info");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("matTooltip", ctx_r0.info());
+  }
+}
+function SettingsToggleComponent_Conditional_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 3);
+  }
+}
+function SettingsToggleComponent_Conditional_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 4)(1, "div", 6)(2, "div", 7)(3, "icon");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275classProp("bg-base-300", !ctx_r0.value)("bg-info", ctx_r0.value)("!border-info", ctx_r0.value);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("left-1", !ctx_r0.value)("left-5", ctx_r0.value)("bg-base-400", !ctx_r0.value)("bg-info-light", ctx_r0.value);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r0.value ? "done" : "remove");
+  }
+}
+function SettingsToggleComponent_Conditional_8_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-checkbox", 8);
+    \u0275\u0275twoWayListener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r0.value, $event) || (ctx_r0.value = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.setValue($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275twoWayProperty("ngModel", ctx_r0.value);
+  }
+}
+var _SettingsToggleComponent = class _SettingsToggleComponent {
+  constructor() {
+    this.toggle = input(void 0);
+    this.name = input(void 0);
+    this.info = input(void 0);
+    this.registerOnChange = (fn3) => this._onChange = fn3;
+    this.registerOnTouched = (fn3) => this._onTouch = fn3;
+  }
+  /**
+   * Update the form field value
+   * @param new_value New value to set on the form field
+   */
+  setValue(new_value) {
+    this.value = new_value;
+    if (this._onChange)
+      this._onChange(new_value);
+  }
+  /* istanbul ignore next */
+  /**
+   * Update local value when form control value is changed
+   * @param value The new value for the component
+   */
+  writeValue(value) {
+    this.value = value;
+  }
+};
+_SettingsToggleComponent.\u0275fac = function SettingsToggleComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _SettingsToggleComponent)();
+};
+_SettingsToggleComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SettingsToggleComponent, selectors: [["settings-toggle"]], inputs: { toggle: [1, "toggle"], name: [1, "name"], info: [1, "info"] }, features: [\u0275\u0275ProvidersFeature([
+  {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => _SettingsToggleComponent),
+    multi: true
+  }
+])], ngContentSelectors: _c011, decls: 9, vars: 8, consts: [["matRipple", "", 1, "relative", "flex", "flex-1", "items-center", "space-x-2", "overflow-hidden", "rounded", "border", "py-1", "pl-2", "pr-1", "hover:bg-base-200", 3, "click"], [1, "z-10", "flex", "flex-1", "items-center", "space-x-2", "p-2", "text-left"], [3, "matTooltip"], [1, "absolute", "inset-0", "z-0", "!m-0", "bg-info", "opacity-10"], [1, "px-2"], [1, "pointer-events-none", 3, "ngModel"], ["toggle", "", 1, "relative", "h-8", "w-12", "rounded-full", "border-2", "border-base-400"], [1, "absolute", "top-1/2", "flex", "h-6", "w-6", "-translate-x-0.5", "-translate-y-1/2", "items-center", "justify-center", "rounded-full", "text-black", "shadow"], [1, "pointer-events-none", 3, "ngModelChange", "ngModel"]], template: function SettingsToggleComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275projectionDef();
+    \u0275\u0275elementStart(0, "button", 0);
+    \u0275\u0275listener("click", function SettingsToggleComponent_Template_button_click_0_listener() {
+      return ctx.setValue(!ctx.value);
+    });
+    \u0275\u0275elementStart(1, "div", 1)(2, "div");
+    \u0275\u0275text(3);
+    \u0275\u0275projection(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275conditionalCreate(5, SettingsToggleComponent_Conditional_5_Template, 2, 1, "icon", 2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275conditionalCreate(6, SettingsToggleComponent_Conditional_6_Template, 1, 0, "div", 3);
+    \u0275\u0275conditionalCreate(7, SettingsToggleComponent_Conditional_7_Template, 5, 15, "div", 4)(8, SettingsToggleComponent_Conditional_8_Template, 1, 1, "mat-checkbox", 5);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275classProp("border-base-300", !ctx.value)("border-info", ctx.value);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", ctx.name(), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(ctx.info() ? 5 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.value ? 6 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.toggle() ? 7 : 8);
+  }
+}, dependencies: [MatCheckboxModule, MatCheckbox, FormsModule, NgControlStatus, NgModel, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n}\n[toggle][_ngcontent-%COMP%] {\n  transition: background 200ms, left 200ms;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */"] });
+var SettingsToggleComponent = _SettingsToggleComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SettingsToggleComponent, [{
+    type: Component,
+    args: [{ selector: "settings-toggle", template: `
+        <button
+            matRipple
+            class="relative flex flex-1 items-center space-x-2 overflow-hidden rounded border py-1 pl-2 pr-1 hover:bg-base-200"
+            [class.border-base-300]="!value"
+            [class.border-info]="value"
+            (click)="setValue(!value)"
+        >
+            <div class="z-10 flex flex-1 items-center space-x-2 p-2 text-left">
+                <div>
+                    {{ name() }}
+                    <ng-content></ng-content>
+                </div>
+                @if (info()) {
+                    <icon [matTooltip]="info()">info</icon>
+                }
+            </div>
+            @if (value) {
+                <div class="absolute inset-0 z-0 !m-0 bg-info opacity-10"></div>
+            }
+            @if (toggle()) {
+                <div class="px-2">
+                    <div
+                        toggle
+                        class="relative h-8 w-12 rounded-full border-2 border-base-400"
+                        [class.bg-base-300]="!value"
+                        [class.bg-info]="value"
+                        [class.!border-info]="value"
+                    >
+                        <div
+                            class="absolute top-1/2 flex h-6 w-6 -translate-x-0.5 -translate-y-1/2 items-center justify-center rounded-full text-black shadow"
+                            [class.left-1]="!value"
+                            [class.left-5]="value"
+                            [class.bg-base-400]="!value"
+                            [class.bg-info-light]="value"
+                        >
+                            <icon>{{ value ? 'done' : 'remove' }}</icon>
+                        </div>
+                    </div>
+                </div>
+            } @else {
+                <mat-checkbox
+                    [(ngModel)]="value"
+                    (ngModelChange)="setValue($event)"
+                    class="pointer-events-none"
+                ></mat-checkbox>
+            }
+        </button>
+    `, providers: [
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => SettingsToggleComponent),
+        multi: true
+      }
+    ], imports: [MatCheckboxModule, FormsModule, IconComponent], styles: ["/* angular:styles/component:css;09d472dfc67150cf01347a580874515fc3cc343b61a90041f2b167ad15a01cf4;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/settings-toggle.component.ts */\n:host {\n  display: flex;\n}\n[toggle] {\n  transition: background 200ms, left 200ms;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SettingsToggleComponent, { className: "SettingsToggleComponent", filePath: "libs/components/src/lib/settings-toggle.component.ts", lineNumber: 83 });
+})();
+
 // libs/components/src/lib/upload-permissions-modal.component.ts
-var _c07 = (a0, a12, a22) => ({ file: a0, is_public: a12, permissions: a22 });
+var _c012 = (a0, a12, a22) => ({ file: a0, is_public: a12, permissions: a22 });
 function UploadPermissionsModalComponent_Conditional_15_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 2)(1, "label");
+    \u0275\u0275elementStart(0, "div", 8)(1, "label");
     \u0275\u0275text(2, "Permissions");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "mat-form-field", 3)(4, "mat-select", 6);
+    \u0275\u0275elementStart(3, "mat-form-field", 12)(4, "mat-select", 7);
     \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Conditional_15_Template_mat_select_ngModelChange_4_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       \u0275\u0275twoWayBindingSet(ctx_r1.permissions, $event) || (ctx_r1.permissions = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275elementStart(5, "mat-option", 10);
+    \u0275\u0275elementStart(5, "mat-option", 13);
     \u0275\u0275text(6, "None");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "mat-option", 11);
+    \u0275\u0275elementStart(7, "mat-option", 14);
     \u0275\u0275text(8, "Support");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(9, "mat-option", 12);
+    \u0275\u0275elementStart(9, "mat-option", 15);
     \u0275\u0275text(10, "Admin");
     \u0275\u0275elementEnd()()()();
   }
@@ -100292,33 +103035,33 @@ var _UploadPermissionsModalComponent = class _UploadPermissionsModalComponent {
 _UploadPermissionsModalComponent.\u0275fac = function UploadPermissionsModalComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _UploadPermissionsModalComponent)();
 };
-_UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadPermissionsModalComponent, selectors: [["upload-permissions-modal"]], decls: 21, vars: 8, consts: [["btn", "", "icon", "", "mat-dialog-close", ""], [1, "min-w-[20rem]", "p-4"], [1, "flex", "flex-col", "space-y-2"], ["appearance", "outline"], ["matInput", "", "disabled", "true", "placeholder", "File Name", 3, "ngModel"], [1, "pb-4"], [3, "ngModelChange", "ngModel"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", 1, "w-32", 3, "mat-dialog-close"], ["value", "none"], ["value", "support"], ["value", "admin"]], template: function UploadPermissionsModalComponent_Template(rf, ctx) {
+_UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadPermissionsModalComponent, selectors: [["upload-permissions-modal"]], decls: 21, vars: 8, consts: [[1, "sticky", "top-0", "z-10", "m-2", "w-[calc(100%-1rem)]", "rounded", "border-none", "bg-base-200", "p-2"], [1, "px-2", "text-xl", "font-medium"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "min-w-[20rem]", "space-y-2", "px-4", "py-2"], [1, "flex", "flex-col"], ["appearance", "outline", 1, "no-subscript"], ["matInput", "", "disabled", "true", "placeholder", "File Name", 3, "ngModel"], [3, "ngModelChange", "ngModel"], [1, "flex", "flex-col", "space-y-2"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", "matRipple", "", 1, "w-32", 3, "mat-dialog-close"], ["appearance", "outline"], ["value", "none"], ["value", "support"], ["value", "admin"]], template: function UploadPermissionsModalComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "header")(1, "h2");
+    \u0275\u0275elementStart(0, "header", 0)(1, "h2", 1);
     \u0275\u0275text(2, "Upload File");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "button", 0)(4, "icon");
+    \u0275\u0275elementStart(3, "button", 2)(4, "icon");
     \u0275\u0275text(5, "close");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(6, "main", 1)(7, "div", 2)(8, "label");
+    \u0275\u0275elementStart(6, "main", 3)(7, "div", 4)(8, "label");
     \u0275\u0275text(9, "File Name");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "mat-form-field", 3);
-    \u0275\u0275element(11, "input", 4);
+    \u0275\u0275elementStart(10, "mat-form-field", 5);
+    \u0275\u0275element(11, "input", 6);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(12, "div", 5)(13, "mat-checkbox", 6);
-    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Template_mat_checkbox_ngModelChange_13_listener($event) {
+    \u0275\u0275elementStart(12, "div")(13, "settings-toggle", 7);
+    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Template_settings_toggle_ngModelChange_13_listener($event) {
       \u0275\u0275twoWayBindingSet(ctx.is_public, $event) || (ctx.is_public = $event);
       return $event;
     });
     \u0275\u0275text(14, "Public");
     \u0275\u0275elementEnd()();
-    \u0275\u0275conditionalCreate(15, UploadPermissionsModalComponent_Conditional_15_Template, 11, 1, "div", 2);
+    \u0275\u0275conditionalCreate(15, UploadPermissionsModalComponent_Conditional_15_Template, 11, 1, "div", 8);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(16, "footer", 7)(17, "button", 8);
-    \u0275\u0275text(18, "Cancel");
+    \u0275\u0275elementStart(16, "footer", 9)(17, "button", 10);
+    \u0275\u0275text(18, " Cancel ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(19, "button", 9);
+    \u0275\u0275elementStart(19, "button", 11);
     \u0275\u0275text(20, " Upload ");
     \u0275\u0275elementEnd()();
   }
@@ -100330,24 +103073,44 @@ _UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineC
     \u0275\u0275advance(2);
     \u0275\u0275conditional(!ctx.is_public ? 15 : -1);
     \u0275\u0275advance(4);
-    \u0275\u0275property("mat-dialog-close", \u0275\u0275pureFunction3(4, _c07, ctx.file, ctx.is_public, ctx.permissions));
+    \u0275\u0275property("mat-dialog-close", \u0275\u0275pureFunction3(4, _c012, ctx.file, ctx.is_public, ctx.permissions));
   }
-}, dependencies: [MatDialogModule, MatDialogClose, MatFormFieldModule, MatFormField, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel], encapsulation: 2 });
+}, dependencies: [
+  MatDialogModule,
+  MatDialogClose,
+  MatFormFieldModule,
+  MatFormField,
+  FormsModule,
+  DefaultValueAccessor,
+  NgControlStatus,
+  NgModel,
+  MatSelectModule,
+  MatSelect,
+  MatOption,
+  SettingsToggleComponent,
+  IconComponent,
+  MatInputModule,
+  MatInput,
+  MatRippleModule,
+  MatRipple
+], encapsulation: 2 });
 var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UploadPermissionsModalComponent, [{
     type: Component,
     args: [{ selector: "upload-permissions-modal", template: `
-        <header>
-            <h2>Upload File</h2>
-            <button btn icon mat-dialog-close>
+        <header
+            class="sticky top-0 z-10 m-2 w-[calc(100%-1rem)] rounded border-none bg-base-200 p-2"
+        >
+            <h2 class="px-2 text-xl font-medium">Upload File</h2>
+            <button icon matRipple mat-dialog-close>
                 <icon>close</icon>
             </button>
         </header>
-        <main class="min-w-[20rem] p-4">
-            <div class="flex flex-col space-y-2">
+        <main class="min-w-[20rem] space-y-2 px-4 py-2">
+            <div class="flex flex-col">
                 <label>File Name</label>
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="no-subscript">
                     <input
                         matInput
                         [ngModel]="file.name"
@@ -100356,8 +103119,10 @@ var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
                     />
                 </mat-form-field>
             </div>
-            <div class="pb-4">
-                <mat-checkbox [(ngModel)]="is_public">Public</mat-checkbox>
+            <div>
+                <settings-toggle [(ngModel)]="is_public"
+                    >Public</settings-toggle
+                >
             </div>
             @if (!is_public) {
                 <div class="flex flex-col space-y-2">
@@ -100375,20 +103140,32 @@ var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
         <footer
             class="flex items-center justify-end space-x-2 border-t border-base-200 px-4 py-2"
         >
-            <button btn class="inverse w-32" mat-dialog-close>Cancel</button>
+            <button btn matRipple class="inverse w-32" mat-dialog-close>
+                Cancel
+            </button>
             <button
                 btn
+                matRipple
                 class="w-32"
                 [mat-dialog-close]="{ file, is_public, permissions }"
             >
                 Upload
             </button>
         </footer>
-    `, schemas: [NO_ERRORS_SCHEMA], imports: [MatDialogModule, MatFormFieldModule, FormsModule] }]
+    `, schemas: [NO_ERRORS_SCHEMA], imports: [
+      MatDialogModule,
+      MatFormFieldModule,
+      FormsModule,
+      MatSelectModule,
+      SettingsToggleComponent,
+      IconComponent,
+      MatInputModule,
+      MatRippleModule
+    ] }]
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadPermissionsModalComponent, { className: "UploadPermissionsModalComponent", filePath: "libs/components/src/lib/upload-permissions-modal.component.ts", lineNumber: 65 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadPermissionsModalComponent, { className: "UploadPermissionsModalComponent", filePath: "libs/components/src/lib/upload-permissions-modal.component.ts", lineNumber: 86 });
 })();
 
 // libs/common/src/lib/uploads.service.ts
@@ -100427,7 +103204,7 @@ var _UploadsService = class _UploadsService {
       let resolved2 = false;
       const update_fn = (details) => {
         if (!resolved2) {
-          resolve(details.id);
+          resolve(details.upload?.id || details.id);
           resolved2 = true;
         }
         this._upload_list.next([
@@ -100531,6 +103308,7 @@ var User = class {
     this.checked_in = !!data.checked_in;
     this.required = data.required ?? true;
     this.resource = data.resource ?? false;
+    this.locatable = data.locatable ?? false;
     this.response_status = data.response_status || "";
     const groups = data.groups || [];
     this.department = data.department ?? "";
@@ -100657,6 +103435,12 @@ setTimeout(() => {
   }
   combineLatest([Mc("current"), _change]).pipe(delay(1e3), retry(10), map(([i]) => new StaffUser(i))).subscribe((user) => _current_user.next(user));
 }, 300);
+function reloadUserData() {
+  setTimeout(async () => {
+    const user = await lastValueFrom(Mc("current"));
+    _current_user.next(new StaffUser(user));
+  }, 300);
+}
 function currentUser() {
   return _current_user.getValue() || EMPTY_USER;
 }
@@ -100782,6 +103566,10 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
     if (name === "font_size")
       this._setFontSize();
     this.timeout("save_settings", () => this._savePendingChanges(), 2400);
+  }
+  async updateLocatable(locatable) {
+    await lastValueFrom(Uc(currentUser().id, { locatable }, "patch"));
+    reloadUserData();
   }
   overrideCssVariable(key, value, important = false) {
     let element = document.getElementById(`css-var-overrides+${key}`);
@@ -100994,12 +103782,12 @@ function makeSnippet(mark, options2) {
   if (typeof options2.indent !== "number") options2.indent = 1;
   if (typeof options2.linesBefore !== "number") options2.linesBefore = 3;
   if (typeof options2.linesAfter !== "number") options2.linesAfter = 2;
-  var re = /\r?\n|\r|\0/g;
+  var re2 = /\r?\n|\r|\0/g;
   var lineStarts = [0];
   var lineEnds = [];
   var match3;
   var foundLineNo = -1;
-  while (match3 = re.exec(mark.buffer)) {
+  while (match3 = re2.exec(mark.buffer)) {
     lineEnds.push(match3.index);
     lineStarts.push(match3.index + match3[0].length);
     if (mark.position <= match3.index && foundLineNo < 0) {
@@ -106885,23 +109673,23 @@ var mocks_default = {
 log("MOCKS", "Mocks included with application.");
 
 // node_modules/@placeos/svg-viewer/dist/index.es.js
-var ue = function(e2, n2) {
-  return ue = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r2) {
+var fe2 = function(e2, n2) {
+  return fe2 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r2) {
     t.__proto__ = r2;
   } || function(t, r2) {
     for (var o in r2) Object.prototype.hasOwnProperty.call(r2, o) && (t[o] = r2[o]);
-  }, ue(e2, n2);
+  }, fe2(e2, n2);
 };
-function R3(e2, n2) {
+function V3(e2, n2) {
   if (typeof n2 != "function" && n2 !== null)
     throw new TypeError("Class extends value " + String(n2) + " is not a constructor or null");
-  ue(e2, n2);
+  fe2(e2, n2);
   function t() {
     this.constructor = e2;
   }
   e2.prototype = n2 === null ? Object.create(n2) : (t.prototype = n2.prototype, new t());
 }
-function I4(e2) {
+function q3(e2) {
   var n2 = typeof Symbol == "function" && Symbol.iterator, t = n2 && e2[n2], r2 = 0;
   if (t) return t.call(e2);
   if (e2 && typeof e2.length == "number") return {
@@ -106928,7 +109716,7 @@ function Y4(e2, n2) {
   }
   return i;
 }
-function ne(e2, n2, t) {
+function re(e2, n2, t) {
   if (t || arguments.length === 2) for (var r2 = 0, o = n2.length, i; r2 < o; r2++)
     (i || !(r2 in n2)) && (i || (i = Array.prototype.slice.call(n2, 0, r2)), i[r2] = n2[r2]);
   return e2.concat(i || Array.prototype.slice.call(n2));
@@ -106936,13 +109724,13 @@ function ne(e2, n2, t) {
 function h2(e2) {
   return typeof e2 == "function";
 }
-function je(e2) {
+function Fe(e2) {
   var n2 = function(r2) {
     Error.call(r2), r2.stack = new Error().stack;
   }, t = e2(n2);
   return t.prototype = Object.create(Error.prototype), t.prototype.constructor = t, t;
 }
-var ae2 = je(function(e2) {
+var le2 = Fe(function(e2) {
   return function(t) {
     e2(this), this.message = t ? t.length + ` errors occurred during unsubscription:
 ` + t.map(function(r2, o) {
@@ -106951,7 +109739,7 @@ var ae2 = je(function(e2) {
   `) : "", this.name = "UnsubscriptionError", this.errors = t;
   };
 });
-function fe2(e2, n2) {
+function he2(e2, n2) {
   if (e2) {
     var t = e2.indexOf(n2);
     0 <= t && e2.splice(t, 1);
@@ -106969,7 +109757,7 @@ var G3 = function() {
       if (s)
         if (this._parentage = null, Array.isArray(s))
           try {
-            for (var c3 = I4(s), a = c3.next(); !a.done; a = c3.next()) {
+            for (var c3 = q3(s), a = c3.next(); !a.done; a = c3.next()) {
               var l3 = a.value;
               l3.remove(this);
             }
@@ -106989,18 +109777,18 @@ var G3 = function() {
         try {
           u3();
         } catch (y2) {
-          i = y2 instanceof ae2 ? y2.errors : [y2];
+          i = y2 instanceof le2 ? y2.errors : [y2];
         }
       var v3 = this._finalizers;
       if (v3) {
         this._finalizers = null;
         try {
-          for (var d2 = I4(v3), f2 = d2.next(); !f2.done; f2 = d2.next()) {
+          for (var d2 = q3(v3), f2 = d2.next(); !f2.done; f2 = d2.next()) {
             var p2 = f2.value;
             try {
               Ce(p2);
             } catch (y2) {
-              i = i ?? [], y2 instanceof ae2 ? i = ne(ne([], Y4(i)), Y4(y2.errors)) : i.push(y2);
+              i = i ?? [], y2 instanceof le2 ? i = re(re([], Y4(i)), Y4(y2.errors)) : i.push(y2);
             }
           }
         } catch (y2) {
@@ -107014,7 +109802,7 @@ var G3 = function() {
         }
       }
       if (i)
-        throw new ae2(i);
+        throw new le2(i);
     }
   }, e2.prototype.add = function(n2) {
     var t;
@@ -107037,16 +109825,16 @@ var G3 = function() {
     this._parentage = Array.isArray(t) ? (t.push(n2), t) : t ? [t, n2] : n2;
   }, e2.prototype._removeParent = function(n2) {
     var t = this._parentage;
-    t === n2 ? this._parentage = null : Array.isArray(t) && fe2(t, n2);
+    t === n2 ? this._parentage = null : Array.isArray(t) && he2(t, n2);
   }, e2.prototype.remove = function(n2) {
     var t = this._finalizers;
-    t && fe2(t, n2), n2 instanceof e2 && n2._removeParent(this);
+    t && he2(t, n2), n2 instanceof e2 && n2._removeParent(this);
   }, e2.EMPTY = function() {
     var n2 = new e2();
     return n2.closed = true, n2;
   }(), e2;
 }();
-var Fe = G3.EMPTY;
+var je = G3.EMPTY;
 function Be(e2) {
   return e2 instanceof G3 || e2 && "closed" in e2 && h2(e2.remove) && h2(e2.add) && h2(e2.unsubscribe);
 }
@@ -107060,7 +109848,7 @@ var bt3 = {
   setTimeout: function(e2, n2) {
     for (var t = [], r2 = 2; r2 < arguments.length; r2++)
       t[r2 - 2] = arguments[r2];
-    return setTimeout.apply(void 0, ne([e2, n2], Y4(t)));
+    return setTimeout.apply(void 0, re([e2, n2], Y4(t)));
   },
   clearTimeout: function(e2) {
     return clearTimeout(e2);
@@ -107072,19 +109860,19 @@ function Ne(e2) {
     throw e2;
   });
 }
-function he2() {
+function de2() {
 }
-function ee(e2) {
+function te2(e2) {
   e2();
 }
-var be2 = function(e2) {
-  R3(n2, e2);
+var we2 = function(e2) {
+  V3(n2, e2);
   function n2(t) {
     var r2 = e2.call(this) || this;
     return r2.isStopped = false, t ? (r2.destination = t, Be(t) && t.add(r2)) : r2.destination = St3, r2;
   }
   return n2.create = function(t, r2, o) {
-    return new de2(t, r2, o);
+    return new ye(t, r2, o);
   }, n2.prototype.next = function(t) {
     this.isStopped || this._next(t);
   }, n2.prototype.error = function(t) {
@@ -107119,7 +109907,7 @@ var wt3 = function() {
       try {
         t.next(n2);
       } catch (r2) {
-        Z4(r2);
+        K3(r2);
       }
   }, e2.prototype.error = function(n2) {
     var t = this.partialObserver;
@@ -107127,22 +109915,22 @@ var wt3 = function() {
       try {
         t.error(n2);
       } catch (r2) {
-        Z4(r2);
+        K3(r2);
       }
     else
-      Z4(n2);
+      K3(n2);
   }, e2.prototype.complete = function() {
     var n2 = this.partialObserver;
     if (n2.complete)
       try {
         n2.complete();
       } catch (t) {
-        Z4(t);
+        K3(t);
       }
   }, e2;
 }();
-var de2 = function(e2) {
-  R3(n2, e2);
+var ye = function(e2) {
+  V3(n2, e2);
   function n2(t, r2, o) {
     var i = e2.call(this) || this, s;
     return h2(t) || !t ? s = {
@@ -107152,8 +109940,8 @@ var de2 = function(e2) {
     } : s = t, i.destination = new wt3(s), i;
   }
   return n2;
-}(be2);
-function Z4(e2) {
+}(we2);
+function K3(e2) {
   Ne(e2);
 }
 function xt3(e2) {
@@ -107161,11 +109949,11 @@ function xt3(e2) {
 }
 var St3 = {
   closed: true,
-  next: he2,
+  next: de2,
   error: xt3,
-  complete: he2
+  complete: de2
 };
-var we2 = function() {
+var xe2 = function() {
   return typeof Symbol == "function" && Symbol.observable || "@@observable";
 }();
 function Ue(e2) {
@@ -107186,8 +109974,8 @@ var g2 = function() {
     var t = new e2();
     return t.source = this, t.operator = n2, t;
   }, e2.prototype.subscribe = function(n2, t, r2) {
-    var o = this, i = Lt3(n2) ? n2 : new de2(n2, t, r2);
-    return ee(function() {
+    var o = this, i = Lt3(n2) ? n2 : new ye(n2, t, r2);
+    return te2(function() {
       var s = o, c3 = s.operator, a = s.source;
       i.add(c3 ? c3.call(i, a) : a ? o._subscribe(i) : o._trySubscribe(i));
     }), i;
@@ -107200,7 +109988,7 @@ var g2 = function() {
   }, e2.prototype.forEach = function(n2, t) {
     var r2 = this;
     return t = Oe2(t), new t(function(o, i) {
-      var s = new de2({
+      var s = new ye({
         next: function(c3) {
           try {
             n2(c3);
@@ -107216,7 +110004,7 @@ var g2 = function() {
   }, e2.prototype._subscribe = function(n2) {
     var t;
     return (t = this.source) === null || t === void 0 ? void 0 : t.subscribe(n2);
-  }, e2.prototype[we2] = function() {
+  }, e2.prototype[xe2] = function() {
     return this;
   }, e2.prototype.pipe = function() {
     for (var n2 = [], t = 0; t < arguments.length; t++)
@@ -107246,12 +110034,12 @@ function At3(e2) {
   return e2 && h2(e2.next) && h2(e2.error) && h2(e2.complete);
 }
 function Lt3(e2) {
-  return e2 && e2 instanceof be2 || At3(e2) && Be(e2);
+  return e2 && e2 instanceof we2 || At3(e2) && Be(e2);
 }
 function $t3(e2) {
   return h2(e2?.lift);
 }
-function V3(e2) {
+function R3(e2) {
   return function(n2) {
     if ($t3(n2))
       return n2.lift(function(t) {
@@ -107268,7 +110056,7 @@ function O3(e2, n2, t, r2, o) {
   return new zt3(e2, n2, t, r2, o);
 }
 var zt3 = function(e2) {
-  R3(n2, e2);
+  V3(n2, e2);
   function n2(t, r2, o, i, s, c3) {
     var a = e2.call(this, t) || this;
     return a.onFinalize = s, a.shouldUnsubscribe = c3, a._next = r2 ? function(l3) {
@@ -107302,32 +110090,32 @@ var zt3 = function(e2) {
       e2.prototype.unsubscribe.call(this), !r2 && ((t = this.onFinalize) === null || t === void 0 || t.call(this));
     }
   }, n2;
-}(be2);
-var Ct2 = je(function(e2) {
+}(we2);
+var Ct2 = Fe(function(e2) {
   return function() {
     e2(this), this.name = "ObjectUnsubscribedError", this.message = "object unsubscribed";
   };
 });
-var xe2 = function(e2) {
-  R3(n2, e2);
+var Se2 = function(e2) {
+  V3(n2, e2);
   function n2() {
     var t = e2.call(this) || this;
     return t.closed = false, t.currentObservers = null, t.observers = [], t.isStopped = false, t.hasError = false, t.thrownError = null, t;
   }
   return n2.prototype.lift = function(t) {
-    var r2 = new Me(this, this);
+    var r2 = new Te(this, this);
     return r2.operator = t, r2;
   }, n2.prototype._throwIfClosed = function() {
     if (this.closed)
       throw new Ct2();
   }, n2.prototype.next = function(t) {
     var r2 = this;
-    ee(function() {
+    te2(function() {
       var o, i;
       if (r2._throwIfClosed(), !r2.isStopped) {
         r2.currentObservers || (r2.currentObservers = Array.from(r2.observers));
         try {
-          for (var s = I4(r2.currentObservers), c3 = s.next(); !c3.done; c3 = s.next()) {
+          for (var s = q3(r2.currentObservers), c3 = s.next(); !c3.done; c3 = s.next()) {
             var a = c3.value;
             a.next(t);
           }
@@ -107344,7 +110132,7 @@ var xe2 = function(e2) {
     });
   }, n2.prototype.error = function(t) {
     var r2 = this;
-    ee(function() {
+    te2(function() {
       if (r2._throwIfClosed(), !r2.isStopped) {
         r2.hasError = r2.isStopped = true, r2.thrownError = t;
         for (var o = r2.observers; o.length; )
@@ -107353,7 +110141,7 @@ var xe2 = function(e2) {
     });
   }, n2.prototype.complete = function() {
     var t = this;
-    ee(function() {
+    te2(function() {
       if (t._throwIfClosed(), !t.isStopped) {
         t.isStopped = true;
         for (var r2 = t.observers; r2.length; )
@@ -107375,8 +110163,8 @@ var xe2 = function(e2) {
     return this._throwIfClosed(), this._checkFinalizedStatuses(t), this._innerSubscribe(t);
   }, n2.prototype._innerSubscribe = function(t) {
     var r2 = this, o = this, i = o.hasError, s = o.isStopped, c3 = o.observers;
-    return i || s ? Fe : (this.currentObservers = null, c3.push(t), new G3(function() {
-      r2.currentObservers = null, fe2(c3, t);
+    return i || s ? je : (this.currentObservers = null, c3.push(t), new G3(function() {
+      r2.currentObservers = null, he2(c3, t);
     }));
   }, n2.prototype._checkFinalizedStatuses = function(t) {
     var r2 = this, o = r2.hasError, i = r2.thrownError, s = r2.isStopped;
@@ -107385,11 +110173,11 @@ var xe2 = function(e2) {
     var t = new g2();
     return t.source = this, t;
   }, n2.create = function(t, r2) {
-    return new Me(t, r2);
+    return new Te(t, r2);
   }, n2;
 }(g2);
-var Me = function(e2) {
-  R3(n2, e2);
+var Te = function(e2) {
+  V3(n2, e2);
   function n2(t, r2) {
     var o = e2.call(this) || this;
     return o.destination = t, o.source = r2, o;
@@ -107405,11 +110193,11 @@ var Me = function(e2) {
     (r2 = (t = this.destination) === null || t === void 0 ? void 0 : t.complete) === null || r2 === void 0 || r2.call(t);
   }, n2.prototype._subscribe = function(t) {
     var r2, o;
-    return (o = (r2 = this.source) === null || r2 === void 0 ? void 0 : r2.subscribe(t)) !== null && o !== void 0 ? o : Fe;
+    return (o = (r2 = this.source) === null || r2 === void 0 ? void 0 : r2.subscribe(t)) !== null && o !== void 0 ? o : je;
   }, n2;
-}(xe2);
+}(Se2);
 var Ye2 = function(e2) {
-  R3(n2, e2);
+  V3(n2, e2);
   function n2(t) {
     var r2 = e2.call(this) || this;
     return r2._value = t, r2;
@@ -107431,7 +110219,7 @@ var Ye2 = function(e2) {
   }, n2.prototype.next = function(t) {
     e2.prototype.next.call(this, this._value = t);
   }, n2;
-}(xe2);
+}(Se2);
 var Ot3 = new g2(function(e2) {
   return e2.complete();
 });
@@ -107439,9 +110227,9 @@ function kt3() {
   return typeof Symbol != "function" || !Symbol.iterator ? "@@iterator" : Symbol.iterator;
 }
 var Xe2 = kt3();
-var Jt2 = Array.isArray;
+var Wt2 = Array.isArray;
 function ot3(e2, n2) {
-  return V3(function(t, r2) {
+  return R3(function(t, r2) {
     var o = 0;
     t.subscribe(O3(r2, function(i) {
       return e2.call(n2, i, o++) && r2.next(i);
@@ -107450,7 +110238,7 @@ function ot3(e2, n2) {
 }
 var N4 = {};
 var E3 = {};
-function M4(e2, n2, t = 300) {
+function T3(e2, n2, t = 300) {
   if (e2 && n2 && n2 instanceof Function)
     it3(e2), N4[e2] = setTimeout(() => {
       n2(), delete N4[e2];
@@ -107475,7 +110263,7 @@ function b2(e2, n2, t, r2 = "debug", o = false, i = "SVG VIEWER") {
     t ? console[r2](`%c[${i}]%c[${e2}] %c${n2}`, ...s, t) : console[r2](`%c[${i}]%c[${e2}] %c${n2}`, ...s);
   }
 }
-function Ae2(e2) {
+function W3(e2) {
   let n2 = e2.replace(/[!"#$%&'()*+,.\/;<=>?@[\\\]^`{|}~]/g, "\\$&");
   const t = n2.split(" ");
   for (const r2 of t)
@@ -107483,7 +110271,7 @@ function Ae2(e2) {
   return n2 = t.join(" "), n2;
 }
 function un2(e2, n2, t) {
-  const r2 = e2.element?.querySelector(".svg-viewer__svg-overlays"), o = e2.element?.querySelector("svg"), i = o?.querySelector(`#${Ae2(n2)}`);
+  const r2 = e2.element?.querySelector(".svg-viewer__svg-overlays"), o = e2.element?.querySelector("svg"), i = o?.querySelector(`#${W3(n2)}`);
   if (i && o && r2) {
     const s = t || r2?.getBoundingClientRect() || {}, c3 = i?.getBoundingClientRect() || {};
     return {
@@ -107668,8 +110456,8 @@ var m = class _m {
 };
 if (m.hashStr("hello") !== "5d41402abc4b2a76b9719d911017c592")
   throw new Error("Md5 self test failed.");
-var Q4 = { top: 0, left: 0, height: 0, width: 0 };
-var te2 = class {
+var ee = { top: 0, left: 0, height: 0, width: 0 };
+var ne = class {
   /** Unique Identifier for the Viewer */
   id;
   /** URL associated with the map data */
@@ -107723,10 +110511,10 @@ var te2 = class {
   }
   constructor(n2) {
     if (this.id = n2.id || `map-${Math.floor(Math.random() * 999999)}`, this.url = n2.url || `local-${m.hashAsciiStr(n2.svg_data || "")}`, this.element = n2.element || null, this.labels = n2.labels || [], this.features = n2.features || [], this.actions = n2.actions || [], this.styles = n2.styles || {}, this.svg_data = n2.svg_data || "", this.content_ratio = n2.content_ratio || { x: 1, y: 1 }, this.zoom = n2.zoom || 1, this.center = { x: n2.center?.x ?? 0.5, y: n2.center?.y ?? 0.5 }, this.rotate = n2.rotate || 0, this.ratio = n2.ratio || 1, this.svg_ratio = n2.svg_ratio || 1, this.max_resolution = n2.max_resolution || window.innerWidth * window.innerHeight * 10, this.focus = n2.focus || null, this.options = n2.options || {}, this.mappings = n2.mappings || {}, this.box = {
-      top: (n2.box || Q4).top,
-      left: (n2.box || Q4).left,
-      height: (n2.box || Q4).height,
-      width: (n2.box || Q4).width
+      top: (n2.box || ee).top,
+      left: (n2.box || ee).left,
+      height: (n2.box || ee).height,
+      width: (n2.box || ee).width
     }, this.desired_zoom = n2.desired_zoom || n2.zoom || this.zoom, this.desired_center = {
       x: n2.desired_center?.x || this.center.x,
       y: n2.desired_center?.y || this.center.y
@@ -107746,31 +110534,31 @@ var te2 = class {
     this.needs_update = this.desired_zoom !== this.zoom || this.desired_center.x !== this.center.x || this.desired_center.y !== this.center.y, this.use_gpu = n2?.use_gpu ?? true;
   }
 };
-var j2 = new Ye2([]);
-var ut3 = new xe2();
+var F14 = new Ye2([]);
+var ut3 = new Se2();
 var pn2 = ut3.pipe(ot3((e2) => e2 === "resize"));
 function x2(e2, n2) {
-  if (e2 = W3().find((o) => o.id === (e2 instanceof te2 ? e2.id : e2)), !(e2 instanceof te2)) return null;
+  if (e2 = X4().find((o) => o.id === (e2 instanceof ne ? e2.id : e2)), !(e2 instanceof ne)) return null;
   delete n2.url;
-  const r2 = new te2(__spreadValues(__spreadValues({}, e2), n2));
-  return ft3(r2), r2.needs_update && M4(`${e2.id}_updating`, () => x2(r2, {}), 16), r2;
+  const r2 = new ne(__spreadValues(__spreadValues({}, e2), n2));
+  return ft3(r2), r2.needs_update && T3(`${e2.id}_updating`, () => x2(r2, {}), 16), r2;
 }
 function ft3(e2) {
-  const n2 = W3().filter((t) => t.id !== e2.id);
-  n2.push(e2), j2.next(n2);
+  const n2 = X4().filter((t) => t.id !== e2.id);
+  n2.push(e2), F14.next(n2);
 }
-function W3() {
-  return j2.getValue();
+function X4() {
+  return F14.getValue();
 }
 var Pe2 = new Ye2({});
 var ke2 = {};
-var X4 = false;
-var se2 = false;
+var Z4 = false;
+var ce2 = false;
 var P4;
 var A4;
 var k2;
 var _2;
-var q3;
+var I4;
 window.addEventListener("blur", () => H4());
 function xn2(e2) {
   const n2 = JSON.stringify(e2.focus);
@@ -107788,30 +110576,30 @@ function xn2(e2) {
   }
 }
 function H4() {
-  b2("INPUT", "Ending pinch/pan..."), it3("pan_start"), X4 = false, se2 = false, A4 && window.removeEventListener("mousemove", A4), k2 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), q3 && window.removeEventListener("touchend", q3), A4 = k2 = _2 = q3 = P4 = null;
+  b2("INPUT", "Ending pinch/pan..."), it3("pan_start"), Z4 = false, ce2 = false, A4 && window.removeEventListener("mousemove", A4), k2 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), I4 && window.removeEventListener("touchend", I4), A4 = k2 = _2 = I4 = P4 = null;
 }
-var F14 = {};
-var ve2 = {};
+var j2 = {};
 var pe2 = {};
 var me2 = {};
+var ge2 = {};
 var D3 = {};
 var B4 = {};
 st2(
   "on_resize",
   pn2.subscribe(() => {
-    const e2 = W3();
+    const e2 = X4();
     for (const n2 of e2)
       try {
-        M4(`resize-${n2.id}`, () => yt3(n2));
+        T3(`resize-${n2.id}`, () => yt3(n2));
       } catch (t) {
         console.warn(t);
       }
   })
 );
 function dt3(e2) {
-  return F14[e2.id] || (F14[e2.id] = new Promise((n2) => {
+  return j2[e2.id] || (j2[e2.id] = new Promise((n2) => {
     const t = requestAnimationFrame(() => {
-      if (!F14[e2.id]) return;
+      if (!j2[e2.id]) return;
       const r2 = e2.element;
       if (!r2) throw new Error("No element set on viewer");
       const o = r2.querySelector("style");
@@ -107822,11 +110610,11 @@ function dt3(e2) {
       if (!s || !o)
         throw new Error("Viewer is not setup yet.");
       const a = (e2.center.x - 0.5) * (100 * e2.zoom * e2.svg_ratio), l3 = (e2.center.y - 0.5) * (100 * e2.zoom * e2.svg_ratio), u3 = e2.use_gpu ? `translate3d(${a}%, ${l3}%, 0)` : `translate(${a}%, ${l3}%)`;
-      s.style.transform = `${u3} ${c3} rotate(${e2.rotate}deg)`, i += `#${e2.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e2.rotate}deg) scale(${1 / e2.zoom * (1 / e2.svg_ratio)}); }`, i += `#${e2.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e2.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, ge2(e2), xn2(e2), Le2(e2), delete F14[e2.id], cancelAnimationFrame(t), n2();
+      s.style.transform = `${u3} ${c3} rotate(${e2.rotate}deg)`, i += `#${e2.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e2.rotate}deg) scale(${1 / e2.zoom * (1 / e2.svg_ratio)}); }`, i += `#${e2.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e2.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, _e2(e2), xn2(e2), Le2(e2), delete j2[e2.id], cancelAnimationFrame(t), n2();
     });
-  })), F14[e2.id];
+  })), j2[e2.id];
 }
-async function ge2(e2) {
+async function _e2(e2) {
   if ((JSON.stringify(__spreadValues({}, e2.styles)) || "").localeCompare(D3[e2.id])) {
     const t = e2.element;
     if (!t) throw new Error("No element set on viewer");
@@ -107836,7 +110624,7 @@ async function ge2(e2) {
     if (!r2) throw new Error("No iframe created for viewer");
     if (!r2.contentWindow) {
       r2.onload = () => {
-        setTimeout(() => ge2(e2), 50), setTimeout(() => ge2(e2), 500);
+        setTimeout(() => _e2(e2), 50), setTimeout(() => _e2(e2), 500);
       };
       return;
     }
@@ -107851,7 +110639,7 @@ async function ge2(e2) {
 }
 async function yt3(e2) {
   return new Promise((n2) => {
-    B4[e2.id] || (B4[e2.id] = []), B4[e2.id].push(n2), M4(
+    B4[e2.id] || (B4[e2.id] = []), B4[e2.id].push(n2), T3(
       `resize-${e2.id}`,
       () => {
         const t = e2.element;
@@ -107859,7 +110647,7 @@ async function yt3(e2) {
         const r2 = t.querySelector(
           ".svg-viewer__view-container"
         ), o = t.querySelector(".svg-viewer__svg-overlays"), i = t.querySelector(
-          `#${e2.id}`
+          `#${W3(e2.id)}`
         ), s = t.querySelector(
           ".svg-viewer"
         ), c3 = t.querySelector(
@@ -107887,7 +110675,7 @@ async function yt3(e2) {
             box: u3,
             content_ratio: $e2
           });
-          !ze || (e2 = ze, !await dt3(e2).catch((ce2) => (console.warn(ce2), false))) || (B4[e2.id].forEach((ce2) => ce2()), B4[e2.id] = []);
+          !ze || (e2 = ze, !await dt3(e2).catch((ae2) => (console.warn(ae2), false))) || (B4[e2.id].forEach((ae2) => ae2()), B4[e2.id] = []);
         });
       },
       100
@@ -107902,20 +110690,20 @@ function Le2(e2) {
   );
   if (!t || !n2) return;
   if (!t.getBoundingClientRect().width)
-    return M4(
+    return T3(
       `${e2.id}|render-overlays`,
       () => Le2(e2),
       50
     );
   requestAnimationFrame(() => {
-    Pn2(e2), qn2(e2), kn2(e2);
+    Pn2(e2), In2(e2), kn2(e2);
   });
 }
 function Pn2(e2) {
   const n2 = e2.labels.filter(
     (r2) => !r2.zoom_level || r2.zoom_level <= e2.zoom
   ), t = JSON.stringify(n2);
-  if (t !== ve2[e2.id]) {
+  if (t !== pe2[e2.id]) {
     const r2 = e2.element?.querySelector(
       ".svg-viewer__svg-overlays"
     );
@@ -107931,7 +110719,7 @@ function Pn2(e2) {
       const l3 = document.createElement("div"), u3 = document.createElement("label");
       u3.classList.add("svg-viewer__label"), u3.setAttribute("for", c3), i.css_class?.length && u3.classList.add(...i.css_class), i.z_index && (a.style.zIndex = `${i.z_index}`), u3.textContent = i.content, l3.appendChild(u3), a.appendChild(l3), r2.appendChild(a);
     }
-    b2("RENDER", `Added ${e2.labels.length} labels to view.`), ve2[e2.id] = t;
+    b2("RENDER", `Added ${e2.labels.length} labels to view.`), pe2[e2.id] = t;
   }
 }
 function kn2(e2) {
@@ -107941,7 +110729,7 @@ function kn2(e2) {
       data: fn2(t.data)
     }))
   );
-  if (n2 !== pe2[e2.id]) {
+  if (n2 !== me2[e2.id]) {
     const t = e2.element?.querySelector(
       ".svg-viewer__svg-overlays"
     );
@@ -107964,14 +110752,14 @@ function kn2(e2) {
         "svg-viewer__svg-overlay-item__hover"
       ), a.style.top = `${s.y * 100}%`, a.style.left = `${s.x * 100}%`, c3.w || c3.h ? (a.style.width = `${c3.w * 100}%`, a.style.height = `${c3.h * 100}%`) : (a.style.width = "1%", a.style.height = `${1 / e2.ratio}%`), a.style.transform = "translate(-50%, -50%)", i.content instanceof Node && a.appendChild(i.content), t.appendChild(a));
     }
-    b2("RENDER", `Added ${e2.features.length} features to view.`), pe2[e2.id] = n2;
+    b2("RENDER", `Added ${e2.features.length} features to view.`), me2[e2.id] = n2;
   }
 }
-function qn2(e2) {
+function In2(e2) {
   const n2 = JSON.stringify(
     e2.actions.map((t) => __spreadProps(__spreadValues({}, t), { callback: "" }))
   );
-  if (n2 !== me2[e2.id]) {
+  if (n2 !== ge2[e2.id]) {
     const t = e2.element?.querySelector(
       ".svg-viewer__svg-overlays"
     );
@@ -107980,13 +110768,15 @@ function qn2(e2) {
       t.querySelectorAll(".action-zone")
     ).filter((o) => o.parentNode && t.contains(o.parentNode)).forEach((o) => t.removeChild(o));
     for (const o of e2.actions) {
-      if (!o.action || !o.id || o.id === "*" || o.zone === false || t.querySelector(`#${o.id}`)) continue;
+      if (!o.action || !o.id || o.id === "*" || o.zone === false || t.querySelector(
+        `#${W3(o.id)}`
+      )) continue;
       const s = document.createElement("button");
       s.id = `${o.id}`;
       const c3 = e2.mappings[o.id] || { x: 0, y: 0 }, a = e2.mappings[o.id] || { w: 0, h: 0 };
       s.classList.add("svg-viewer__svg-overlay-item"), s.classList.add("action-zone"), s.style.top = `${c3.y * 100}%`, s.style.left = `${c3.x * 100}%`, (a.w || a.h) && (s.style.width = `${a.w * 100}%`, s.style.height = `${a.h * 100}%`, s.style.transform = "translate(-50%, -50%)"), t.appendChild(s);
     }
-    me2[e2.id] = n2;
+    ge2[e2.id] = n2;
   }
 }
 function vt3(e2) {
@@ -107997,18 +110787,18 @@ function vt3(e2) {
     let r2 = "";
     for (const o in e2[t])
       e2[t][o] && (r2 += `${o}: ${e2[t][o]}; `);
-    n2 += `svg ${t.split(" ").map((o) => Ae2(o)).join(" ")} { ${r2} } `;
+    n2 += `svg ${t.split(" ").map((o) => W3(o)).join(" ")} { ${r2} } `;
   }
   return n2;
 }
-var _e2 = {};
+var be2 = {};
 function Nn2(e2) {
   for (const n2 in e2)
-    _e2[n2.toLowerCase()] = e2[n2];
+    be2[n2.toLowerCase()] = e2[n2];
 }
 
 // node_modules/@angular/material/fesm2022/progress-spinner.mjs
-var _c08 = ["determinateSpinner"];
+var _c013 = ["determinateSpinner"];
 function MatProgressSpinner_ng_template_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275namespaceSVG();
@@ -108058,18 +110848,18 @@ var MatProgressSpinner = class _MatProgressSpinner {
   /** The element of the determinate spinner. */
   _determinateCircle;
   constructor() {
-    const defaults2 = inject(MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS);
-    this._noopAnimations = _animationsDisabled() && !!defaults2 && !defaults2._forceAnimations;
+    const defaults3 = inject(MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS);
+    this._noopAnimations = _animationsDisabled() && !!defaults3 && !defaults3._forceAnimations;
     this.mode = this._elementRef.nativeElement.nodeName.toLowerCase() === "mat-spinner" ? "indeterminate" : "determinate";
-    if (defaults2) {
-      if (defaults2.color) {
-        this.color = this._defaultColor = defaults2.color;
+    if (defaults3) {
+      if (defaults3.color) {
+        this.color = this._defaultColor = defaults3.color;
       }
-      if (defaults2.diameter) {
-        this.diameter = defaults2.diameter;
+      if (defaults3.diameter) {
+        this.diameter = defaults3.diameter;
       }
-      if (defaults2.strokeWidth) {
-        this.strokeWidth = defaults2.strokeWidth;
+      if (defaults3.strokeWidth) {
+        this.strokeWidth = defaults3.strokeWidth;
       }
     }
   }
@@ -108137,7 +110927,7 @@ var MatProgressSpinner = class _MatProgressSpinner {
     selectors: [["mat-progress-spinner"], ["mat-spinner"]],
     viewQuery: function MatProgressSpinner_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c08, 5);
+        \u0275\u0275viewQuery(_c013, 5);
       }
       if (rf & 2) {
         let _t4;
@@ -108296,7 +111086,7 @@ var _TranslatePipe = class _TranslatePipe {
     this._locale = inject(LocaleService);
   }
   transform(value, args = {}, plural2) {
-    return this._locale.get(value, args, plural2);
+    return this._locale.get(value, args, plural2) || value;
   }
 };
 _TranslatePipe.\u0275fac = function TranslatePipe_Factory(__ngFactoryType__) {
@@ -108342,7 +111132,7 @@ var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler
     super(...arguments);
     this._org = inject(OrganisationService);
     this._settings = inject(SettingsService);
-    this.loading = signal(false);
+    this.loading = signal(true);
     this.online = signal(true);
   }
   async ngOnInit() {
@@ -108366,7 +111156,7 @@ _GlobalLoadingComponent.\u0275fac = /* @__PURE__ */ (() => {
     return (\u0275GlobalLoadingComponent_BaseFactory || (\u0275GlobalLoadingComponent_BaseFactory = \u0275\u0275getInheritedFactory(_GlobalLoadingComponent)))(__ngFactoryType__ || _GlobalLoadingComponent);
   };
 })();
-_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-50", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-40", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
+_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-[9999]", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-[9998]", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, GlobalLoadingComponent_Conditional_0_Template, 3, 3, "div", 0);
     \u0275\u0275conditionalCreate(1, GlobalLoadingComponent_Conditional_1_Template, 2, 1, "div", 1);
@@ -108393,7 +111183,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
     args: [{ selector: "global-loading", template: `
         @if (!online()) {
             <div
-                class="fixed bottom-2 left-1/2 z-50 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
+                class="fixed bottom-2 left-1/2 z-[9999] -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
             >
                 {{ 'COMMON.SERVER_DOWN' | translate }}
             </div>
@@ -108401,7 +111191,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
         @if (loading()) {
             <div
                 loader
-                class="pointer-events-auto fixed inset-0 z-40 flex items-center justify-center bg-base-100"
+                class="pointer-events-auto fixed inset-0 z-[9998] flex items-center justify-center bg-base-100"
             >
                 <mat-spinner [diameter]="64"></mat-spinner>
             </div>
@@ -108489,7 +111279,7 @@ _GlobalBannerComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
   if (rf & 2) {
     \u0275\u0275conditional(!\u0275\u0275pipeBind1(1, 1, ctx.has_been_closed) && \u0275\u0275pipeBind1(2, 3, ctx.banner) ? 0 : -1);
   }
-}, dependencies: [CommonModule, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
+}, dependencies: [CommonModule, AsyncPipe, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
 var GlobalBannerComponent = _GlobalBannerComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GlobalBannerComponent, [{
@@ -108517,11 +111307,11 @@ var GlobalBannerComponent = _GlobalBannerComponent;
                 </button>
             </div>
         }
-    `, imports: [CommonModule], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
+    `, imports: [CommonModule, IconComponent], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 50 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 51 });
 })();
 
 // libs/components/src/lib/app.component.ts
@@ -108802,8 +111592,8 @@ var environment = {
 };
 
 // node_modules/@angular/material/fesm2022/autocomplete.mjs
-var _c09 = ["panel"];
-var _c16 = ["*"];
+var _c014 = ["panel"];
+var _c19 = ["*"];
 function MatAutocomplete_ng_template_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 1, 0);
@@ -109035,7 +111825,7 @@ var MatAutocomplete = class _MatAutocomplete {
     viewQuery: function MatAutocomplete_Query(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275viewQuery(TemplateRef, 7);
-        \u0275\u0275viewQuery(_c09, 5);
+        \u0275\u0275viewQuery(_c014, 5);
       }
       if (rf & 2) {
         let _t4;
@@ -109067,7 +111857,7 @@ var MatAutocomplete = class _MatAutocomplete {
       provide: MAT_OPTION_PARENT_COMPONENT,
       useExisting: _MatAutocomplete
     }])],
-    ngContentSelectors: _c16,
+    ngContentSelectors: _c19,
     decls: 1,
     vars: 0,
     consts: [["panel", ""], ["role", "listbox", 1, "mat-mdc-autocomplete-panel", "mdc-menu-surface", "mdc-menu-surface--open", 3, "id"]],
@@ -121979,16 +124769,16 @@ function bandPart_(a, numLower, numUpper) {
   const $a = convertToTensor(a, "a", "bandPart");
   assert($a.rank >= 2, () => `bandPart(): Rank must be at least 2, got ${$a.rank}.`);
   const shape = $a.shape;
-  const [M5, N5] = $a.shape.slice(-2);
+  const [M4, N5] = $a.shape.slice(-2);
   let $numLower;
   let $numUpper;
   if (typeof numLower === "number") {
     assert(numLower % 1 === 0, () => `bandPart(): numLower must be an integer, got ${numLower}.`);
-    assert(numLower <= M5, () => `bandPart(): numLower (${numLower}) must not be greater than the number of rows (${M5}).`);
-    $numLower = convertToTensor(numLower < 0 ? M5 : numLower, "numLower", "bandPart");
+    assert(numLower <= M4, () => `bandPart(): numLower (${numLower}) must not be greater than the number of rows (${M4}).`);
+    $numLower = convertToTensor(numLower < 0 ? M4 : numLower, "numLower", "bandPart");
   } else {
     assert(numLower.dtype === "int32", () => `bandPart(): numLower's dtype must be an int32.`);
-    $numLower = where(less(numLower, 0), M5, minimum(numLower, M5));
+    $numLower = where(less(numLower, 0), M4, minimum(numLower, M4));
   }
   if (typeof numUpper === "number") {
     assert(numUpper % 1 === 0, () => `bandPart(): numUpper must be an integer, got ${numUpper}.`);
@@ -121998,12 +124788,12 @@ function bandPart_(a, numLower, numUpper) {
     assert(numUpper.dtype === "int32", () => `bandPart(): numUpper's dtype must be an int32.`);
     $numUpper = where(less(numUpper, 0), N5, minimum(numUpper, N5));
   }
-  const i = reshape(range2(0, M5, 1, "int32"), [-1, 1]);
+  const i = reshape(range2(0, M4, 1, "int32"), [-1, 1]);
   const j3 = range2(0, N5, 1, "int32");
   const ij = sub(i, j3);
   const inBand = logicalAnd(lessEqual(ij, $numLower), greaterEqual(ij, neg($numUpper)));
-  const zero = zeros([M5, N5], $a.dtype);
-  return reshape(stack(unstack(reshape($a, [-1, M5, N5])).map((mat) => where(inBand, mat, zero))), shape);
+  const zero = zeros([M4, N5], $a.dtype);
+  return reshape(stack(unstack(reshape($a, [-1, M4, N5])).map((mat) => where(inBand, mat, zero))), shape);
 }
 var bandPart = /* @__PURE__ */ op({ bandPart_ });
 
@@ -175630,130 +178420,11 @@ for (const kernelConfig of kernelConfigs2) {
   registerKernel(kernelConfig);
 }
 
-// libs/components/src/lib/safe.pipe.ts
-var _SafePipe = class _SafePipe {
-  constructor() {
-    this.sanitizer = inject(DomSanitizer);
-  }
-  /**
-   * Sanitizes the string allowing it to be injected into a template
-   * @param value String to sanitize
-   * @param type Type of value to sanitise. `resource`, `url`, `script`, `style` or `html`
-   */
-  transform(value, type2 = "html") {
-    switch (type2) {
-      case "resource":
-        return this.sanitizer.bypassSecurityTrustResourceUrl(value);
-      case "url":
-        return this.sanitizer.bypassSecurityTrustUrl(value);
-      case "script":
-        return this.sanitizer.bypassSecurityTrustScript(value);
-      case "style":
-        return this.sanitizer.bypassSecurityTrustStyle(value);
-      default:
-        return this.sanitizer.bypassSecurityTrustHtml(value);
-    }
-  }
-};
-_SafePipe.\u0275fac = function SafePipe_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _SafePipe)();
-};
-_SafePipe.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "safe", type: _SafePipe, pure: true });
-var SafePipe = _SafePipe;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SafePipe, [{
-    type: Pipe,
-    args: [{
-      name: "safe"
-    }]
-  }], null, null);
-})();
-
-// libs/components/src/lib/icon.component.ts
-var _c010 = ["*"];
-function IconComponent_Conditional_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "i");
-    \u0275\u0275text(1);
-    \u0275\u0275projection(2);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    let tmp_1_0;
-    let tmp_2_0;
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275classMap(((tmp_1_0 = ctx_r0.icon()) == null ? null : tmp_1_0.class) || ctx_r0.className());
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", (tmp_2_0 = ctx_r0.icon()) == null ? null : tmp_2_0.content, " ");
-  }
-}
-function IconComponent_Conditional_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 2);
-    \u0275\u0275pipe(1, "safe");
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("src", \u0275\u0275pipeBind2(1, 1, ctx_r0.icon().src, "resource"), \u0275\u0275sanitizeUrl);
-  }
-}
-var _IconComponent = class _IconComponent {
-  constructor() {
-    this.className = input("material-symbols-rounded");
-    this.icon = input(void 0);
-  }
-};
-_IconComponent.\u0275fac = function IconComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _IconComponent)();
-};
-_IconComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["icon"], ["i", "icon", ""]], inputs: { className: [1, "className"], icon: [1, "icon"] }, ngContentSelectors: _c010, decls: 3, vars: 2, consts: [[1, "flex", "h-[1.25em]", "w-[1.25em]", "items-center", "justify-center", "overflow-hidden"], [3, "class"], [1, "h-[1em]", "w-[1em]", 3, "src"]], template: function IconComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275projectionDef();
-    \u0275\u0275elementStart(0, "div", 0);
-    \u0275\u0275conditionalCreate(1, IconComponent_Conditional_1_Template, 3, 3, "i", 1);
-    \u0275\u0275conditionalCreate(2, IconComponent_Conditional_2_Template, 2, 4, "img", 2);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275conditional(!ctx.icon() || ctx.icon().type !== "img" ? 1 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.icon() && ctx.icon().type === "img" ? 2 : -1);
-  }
-}, dependencies: [SafePipe], styles: ["\n\ni[_ngcontent-%COMP%] {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */"] });
-var IconComponent = _IconComponent;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IconComponent, [{
-    type: Component,
-    args: [{ selector: "icon,i[icon]", template: `
-        <div
-            class="flex h-[1.25em] w-[1.25em] items-center justify-center overflow-hidden"
-        >
-            @if (!icon() || icon().type !== 'img') {
-                <i [class]="icon()?.class || className()">
-                    {{ icon()?.content }}
-                    <ng-content></ng-content>
-                </i>
-            }
-            @if (icon() && icon().type === 'img') {
-                <img
-                    class="h-[1em] w-[1em]"
-                    [src]="icon().src | safe: 'resource'"
-                />
-            }
-        </div>
-    `, imports: [SafePipe], styles: ["/* angular:styles/component:css;9dcb326dcc2b3d8b68e7d89ef488eb28abc701fb0e2ab3f372b27f7bf732088c;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/icon.component.ts */\ni {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */\n"] }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IconComponent, { className: "IconComponent", filePath: "libs/components/src/lib/icon.component.ts", lineNumber: 34 });
-})();
-
 // apps/assistant-panel/src/app/panel-view.component.ts
-var _c011 = ["video"];
-var _c17 = ["canvas"];
-var _c24 = ["message_element"];
-var _c34 = ["waveform_canvas"];
+var _c015 = ["video"];
+var _c110 = ["canvas"];
+var _c26 = ["message_element"];
+var _c35 = ["waveform_canvas"];
 var _c44 = (a0, a12) => ({ name: a0, photo: a12 });
 function PanelViewComponent_Conditional_8_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
@@ -176229,10 +178900,10 @@ _PanelViewComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _PanelViewComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PanelViewComponent, selectors: [["app-panel-view"]], viewQuery: function PanelViewComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx._video_el, _c011, 5);
-    \u0275\u0275viewQuerySignal(ctx._canvas_el, _c17, 5);
-    \u0275\u0275viewQuerySignal(ctx._message_el, _c24, 5);
-    \u0275\u0275viewQuerySignal(ctx._waveform_canvas_el, _c34, 5);
+    \u0275\u0275viewQuerySignal(ctx._video_el, _c015, 5);
+    \u0275\u0275viewQuerySignal(ctx._canvas_el, _c110, 5);
+    \u0275\u0275viewQuerySignal(ctx._message_el, _c26, 5);
+    \u0275\u0275viewQuerySignal(ctx._waveform_canvas_el, _c35, 5);
   }
   if (rf & 2) {
     \u0275\u0275queryAdvance(4);
