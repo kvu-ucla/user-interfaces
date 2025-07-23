@@ -155,10 +155,10 @@ function producerUpdatesAllowed() {
   return (activeConsumer == null ? void 0 : activeConsumer.consumerAllowSignalWrites) !== false;
 }
 function consumerMarkDirty(node) {
-  var _a8;
+  var _a9;
   node.dirty = true;
   producerNotifyConsumers(node);
-  (_a8 = node.consumerMarkedDirty) == null ? void 0 : _a8.call(node, node);
+  (_a9 = node.consumerMarkedDirty) == null ? void 0 : _a9.call(node, node);
 }
 function producerMarkClean(node) {
   node.dirty = false;
@@ -244,8 +244,8 @@ function producerRemoveLiveConsumerAtIndex(node, idx) {
   }
 }
 function consumerIsLive(node) {
-  var _a8;
-  return node.consumerIsAlwaysLive || (((_a8 = node == null ? void 0 : node.liveConsumerNode) == null ? void 0 : _a8.length) ?? 0) > 0;
+  var _a9;
+  return node.consumerIsAlwaysLive || (((_a9 = node == null ? void 0 : node.liveConsumerNode) == null ? void 0 : _a9.length) ?? 0) > 0;
 }
 function assertConsumerNode(node) {
   node.producerNode ?? (node.producerNode = []);
@@ -473,7 +473,7 @@ var Subscription = class _Subscription {
     }
   }
   add(teardown) {
-    var _a8;
+    var _a9;
     if (teardown && teardown !== this) {
       if (this.closed) {
         execFinalizer(teardown);
@@ -484,7 +484,7 @@ var Subscription = class _Subscription {
           }
           teardown._addParent(this);
         }
-        (this._finalizers = (_a8 = this._finalizers) !== null && _a8 !== void 0 ? _a8 : []).push(teardown);
+        (this._finalizers = (_a9 = this._finalizers) !== null && _a9 !== void 0 ? _a9 : []).push(teardown);
       }
     }
   }
@@ -838,8 +838,8 @@ var Observable = class _Observable {
     });
   }
   _subscribe(subscriber) {
-    var _a8;
-    return (_a8 = this.source) === null || _a8 === void 0 ? void 0 : _a8.subscribe(subscriber);
+    var _a9;
+    return (_a9 = this.source) === null || _a9 === void 0 ? void 0 : _a9.subscribe(subscriber);
   }
   [observable]() {
     return this;
@@ -859,8 +859,8 @@ Observable.create = (subscribe) => {
   return new Observable(subscribe);
 };
 function getPromiseCtor(promiseCtor) {
-  var _a8;
-  return (_a8 = promiseCtor !== null && promiseCtor !== void 0 ? promiseCtor : config.Promise) !== null && _a8 !== void 0 ? _a8 : Promise;
+  var _a9;
+  return (_a9 = promiseCtor !== null && promiseCtor !== void 0 ? promiseCtor : config.Promise) !== null && _a9 !== void 0 ? _a9 : Promise;
 }
 function isObserver(value) {
   return value && isFunction(value.next) && isFunction(value.error) && isFunction(value.complete);
@@ -924,11 +924,11 @@ var OperatorSubscriber = class extends Subscriber {
     } : super._complete;
   }
   unsubscribe() {
-    var _a8;
+    var _a9;
     if (!this.shouldUnsubscribe || this.shouldUnsubscribe()) {
       const { closed } = this;
       super.unsubscribe();
-      !closed && ((_a8 = this.onFinalize) === null || _a8 === void 0 ? void 0 : _a8.call(this));
+      !closed && ((_a9 = this.onFinalize) === null || _a9 === void 0 ? void 0 : _a9.call(this));
     }
   }
 };
@@ -1109,8 +1109,8 @@ var Subject = class extends Observable {
     this.observers = this.currentObservers = null;
   }
   get observed() {
-    var _a8;
-    return ((_a8 = this.observers) === null || _a8 === void 0 ? void 0 : _a8.length) > 0;
+    var _a9;
+    return ((_a9 = this.observers) === null || _a9 === void 0 ? void 0 : _a9.length) > 0;
   }
   _trySubscribe(subscriber) {
     this._throwIfClosed();
@@ -1157,20 +1157,20 @@ var AnonymousSubject = class extends Subject {
     this.source = source;
   }
   next(value) {
-    var _a8, _b2;
-    (_b2 = (_a8 = this.destination) === null || _a8 === void 0 ? void 0 : _a8.next) === null || _b2 === void 0 ? void 0 : _b2.call(_a8, value);
+    var _a9, _b3;
+    (_b3 = (_a9 = this.destination) === null || _a9 === void 0 ? void 0 : _a9.next) === null || _b3 === void 0 ? void 0 : _b3.call(_a9, value);
   }
   error(err) {
-    var _a8, _b2;
-    (_b2 = (_a8 = this.destination) === null || _a8 === void 0 ? void 0 : _a8.error) === null || _b2 === void 0 ? void 0 : _b2.call(_a8, err);
+    var _a9, _b3;
+    (_b3 = (_a9 = this.destination) === null || _a9 === void 0 ? void 0 : _a9.error) === null || _b3 === void 0 ? void 0 : _b3.call(_a9, err);
   }
   complete() {
-    var _a8, _b2;
-    (_b2 = (_a8 = this.destination) === null || _a8 === void 0 ? void 0 : _a8.complete) === null || _b2 === void 0 ? void 0 : _b2.call(_a8);
+    var _a9, _b3;
+    (_b3 = (_a9 = this.destination) === null || _a9 === void 0 ? void 0 : _a9.complete) === null || _b3 === void 0 ? void 0 : _b3.call(_a9);
   }
   _subscribe(subscriber) {
-    var _a8, _b2;
-    return (_b2 = (_a8 = this.source) === null || _a8 === void 0 ? void 0 : _a8.subscribe(subscriber)) !== null && _b2 !== void 0 ? _b2 : EMPTY_SUBSCRIPTION;
+    var _a9, _b3;
+    return (_b3 = (_a9 = this.source) === null || _a9 === void 0 ? void 0 : _a9.subscribe(subscriber)) !== null && _b3 !== void 0 ? _b3 : EMPTY_SUBSCRIPTION;
   }
 };
 
@@ -1293,7 +1293,7 @@ var AsyncAction = class extends Action {
     this.pending = false;
   }
   schedule(state2, delay2 = 0) {
-    var _a8;
+    var _a9;
     if (this.closed) {
       return this;
     }
@@ -1305,7 +1305,7 @@ var AsyncAction = class extends Action {
     }
     this.pending = true;
     this.delay = delay2;
-    this.id = (_a8 = this.id) !== null && _a8 !== void 0 ? _a8 : this.requestAsyncId(scheduler, this.id, delay2);
+    this.id = (_a9 = this.id) !== null && _a9 !== void 0 ? _a9 : this.requestAsyncId(scheduler, this.id, delay2);
     return this;
   }
   requestAsyncId(scheduler, _id2, delay2 = 0) {
@@ -1417,12 +1417,12 @@ var AsapAction = class extends AsyncAction {
     return scheduler._scheduled || (scheduler._scheduled = immediateProvider.setImmediate(scheduler.flush.bind(scheduler, void 0)));
   }
   recycleAsyncId(scheduler, id, delay2 = 0) {
-    var _a8;
+    var _a9;
     if (delay2 != null ? delay2 > 0 : this.delay > 0) {
       return super.recycleAsyncId(scheduler, id, delay2);
     }
     const { actions } = scheduler;
-    if (id != null && ((_a8 = actions[actions.length - 1]) === null || _a8 === void 0 ? void 0 : _a8.id) !== id) {
+    if (id != null && ((_a9 = actions[actions.length - 1]) === null || _a9 === void 0 ? void 0 : _a9.id) !== id) {
       immediateProvider.clearImmediate(id);
       if (scheduler._scheduled === id) {
         scheduler._scheduled = void 0;
@@ -1520,12 +1520,12 @@ var AnimationFrameAction = class extends AsyncAction {
     return scheduler._scheduled || (scheduler._scheduled = animationFrameProvider.requestAnimationFrame(() => scheduler.flush(void 0)));
   }
   recycleAsyncId(scheduler, id, delay2 = 0) {
-    var _a8;
+    var _a9;
     if (delay2 != null ? delay2 > 0 : this.delay > 0) {
       return super.recycleAsyncId(scheduler, id, delay2);
     }
     const { actions } = scheduler;
-    if (id != null && id === scheduler._scheduled && ((_a8 = actions[actions.length - 1]) === null || _a8 === void 0 ? void 0 : _a8.id) !== id) {
+    if (id != null && id === scheduler._scheduled && ((_a9 = actions[actions.length - 1]) === null || _a9 === void 0 ? void 0 : _a9.id) !== id) {
       animationFrameProvider.cancelAnimationFrame(id);
       scheduler._scheduled = void 0;
     }
@@ -1823,7 +1823,7 @@ function fromReadableStreamLike(readableStream) {
 }
 function process2(asyncIterable, subscriber) {
   var asyncIterable_1, asyncIterable_1_1;
-  var e_1, _a8;
+  var e_1, _a9;
   return __awaiter(this, void 0, void 0, function* () {
     try {
       for (asyncIterable_1 = __asyncValues(asyncIterable); asyncIterable_1_1 = yield asyncIterable_1.next(), !asyncIterable_1_1.done; ) {
@@ -1837,7 +1837,7 @@ function process2(asyncIterable, subscriber) {
       e_1 = { error: e_1_1 };
     } finally {
       try {
-        if (asyncIterable_1_1 && !asyncIterable_1_1.done && (_a8 = asyncIterable_1.return)) yield _a8.call(asyncIterable_1);
+        if (asyncIterable_1_1 && !asyncIterable_1_1.done && (_a9 = asyncIterable_1.return)) yield _a9.call(asyncIterable_1);
       } finally {
         if (e_1) throw e_1.error;
       }
@@ -2803,29 +2803,29 @@ function takeWhile(predicate, inclusive = false) {
 function tap(observerOrNext, error, complete) {
   const tapObserver = isFunction(observerOrNext) || error || complete ? { next: observerOrNext, error, complete } : observerOrNext;
   return tapObserver ? operate((source, subscriber) => {
-    var _a8;
-    (_a8 = tapObserver.subscribe) === null || _a8 === void 0 ? void 0 : _a8.call(tapObserver);
+    var _a9;
+    (_a9 = tapObserver.subscribe) === null || _a9 === void 0 ? void 0 : _a9.call(tapObserver);
     let isUnsub = true;
     source.subscribe(createOperatorSubscriber(subscriber, (value) => {
-      var _a9;
-      (_a9 = tapObserver.next) === null || _a9 === void 0 ? void 0 : _a9.call(tapObserver, value);
+      var _a10;
+      (_a10 = tapObserver.next) === null || _a10 === void 0 ? void 0 : _a10.call(tapObserver, value);
       subscriber.next(value);
     }, () => {
-      var _a9;
+      var _a10;
       isUnsub = false;
-      (_a9 = tapObserver.complete) === null || _a9 === void 0 ? void 0 : _a9.call(tapObserver);
+      (_a10 = tapObserver.complete) === null || _a10 === void 0 ? void 0 : _a10.call(tapObserver);
       subscriber.complete();
     }, (err) => {
-      var _a9;
+      var _a10;
       isUnsub = false;
-      (_a9 = tapObserver.error) === null || _a9 === void 0 ? void 0 : _a9.call(tapObserver, err);
+      (_a10 = tapObserver.error) === null || _a10 === void 0 ? void 0 : _a10.call(tapObserver, err);
       subscriber.error(err);
     }, () => {
-      var _a9, _b2;
+      var _a10, _b3;
       if (isUnsub) {
-        (_a9 = tapObserver.unsubscribe) === null || _a9 === void 0 ? void 0 : _a9.call(tapObserver);
+        (_a10 = tapObserver.unsubscribe) === null || _a10 === void 0 ? void 0 : _a10.call(tapObserver);
       }
-      (_b2 = tapObserver.finalize) === null || _b2 === void 0 ? void 0 : _b2.call(tapObserver);
+      (_b3 = tapObserver.finalize) === null || _b3 === void 0 ? void 0 : _b3.call(tapObserver);
     }));
   }) : identity;
 }
@@ -4535,12 +4535,12 @@ function walkUpViews(nestingLevel, currentView) {
   return currentView;
 }
 function requiresRefreshOrTraversal(lView) {
-  var _a8;
-  return !!(lView[FLAGS] & (1024 | 8192) || ((_a8 = lView[REACTIVE_TEMPLATE_CONSUMER]) == null ? void 0 : _a8.dirty));
+  var _a9;
+  return !!(lView[FLAGS] & (1024 | 8192) || ((_a9 = lView[REACTIVE_TEMPLATE_CONSUMER]) == null ? void 0 : _a9.dirty));
 }
 function updateAncestorTraversalFlagsOnAttach(lView) {
-  var _a8;
-  (_a8 = lView[ENVIRONMENT].changeDetectionScheduler) == null ? void 0 : _a8.notify(8);
+  var _a9;
+  (_a9 = lView[ENVIRONMENT].changeDetectionScheduler) == null ? void 0 : _a9.notify(8);
   if (lView[FLAGS] & 64) {
     lView[FLAGS] |= 1024;
   }
@@ -4549,8 +4549,8 @@ function updateAncestorTraversalFlagsOnAttach(lView) {
   }
 }
 function markAncestorsForTraversal(lView) {
-  var _a8;
-  (_a8 = lView[ENVIRONMENT].changeDetectionScheduler) == null ? void 0 : _a8.notify(0);
+  var _a9;
+  (_a9 = lView[ENVIRONMENT].changeDetectionScheduler) == null ? void 0 : _a9.notify(0);
   let parent = getLViewParent(lView);
   while (parent !== null) {
     if (parent[FLAGS] & 8192) {
@@ -6825,9 +6825,9 @@ var QueryList = class {
   }
   /** internal */
   setDirty() {
-    var _a8;
+    var _a9;
     this.dirty = true;
-    (_a8 = this._onDirty) == null ? void 0 : _a8.call(this);
+    (_a9 = this._onDirty) == null ? void 0 : _a9.call(this);
   }
   /** internal */
   destroy() {
@@ -7289,8 +7289,8 @@ var ANIMATION_MODULE_TYPE = new InjectionToken(ngDevMode ? "AnimationModuleType"
 var CSP_NONCE = new InjectionToken(ngDevMode ? "CSP nonce" : "", {
   providedIn: "root",
   factory: () => {
-    var _a8, _b2;
-    return ((_b2 = (_a8 = getDocument().body) == null ? void 0 : _a8.querySelector("[ngCspNonce]")) == null ? void 0 : _b2.getAttribute("ngCspNonce")) || null;
+    var _a9, _b3;
+    return ((_b3 = (_a9 = getDocument().body) == null ? void 0 : _a9.querySelector("[ngCspNonce]")) == null ? void 0 : _b3.getAttribute("ngCspNonce")) || null;
   }
 });
 var IMAGE_CONFIG_DEFAULTS = {
@@ -7666,12 +7666,12 @@ function getPolicy$1() {
   return policy$1;
 }
 function trustedHTMLFromString(html) {
-  var _a8;
-  return ((_a8 = getPolicy$1()) == null ? void 0 : _a8.createHTML(html)) || html;
+  var _a9;
+  return ((_a9 = getPolicy$1()) == null ? void 0 : _a9.createHTML(html)) || html;
 }
 function trustedScriptURLFromString(url) {
-  var _a8;
-  return ((_a8 = getPolicy$1()) == null ? void 0 : _a8.createScriptURL(url)) || url;
+  var _a9;
+  return ((_a9 = getPolicy$1()) == null ? void 0 : _a9.createScriptURL(url)) || url;
 }
 var policy;
 function getPolicy() {
@@ -7691,16 +7691,16 @@ function getPolicy() {
   return policy;
 }
 function trustedHTMLFromStringBypass(html) {
-  var _a8;
-  return ((_a8 = getPolicy()) == null ? void 0 : _a8.createHTML(html)) || html;
+  var _a9;
+  return ((_a9 = getPolicy()) == null ? void 0 : _a9.createHTML(html)) || html;
 }
 function trustedScriptFromStringBypass(script) {
-  var _a8;
-  return ((_a8 = getPolicy()) == null ? void 0 : _a8.createScript(script)) || script;
+  var _a9;
+  return ((_a9 = getPolicy()) == null ? void 0 : _a9.createScript(script)) || script;
 }
 function trustedScriptURLFromStringBypass(url) {
-  var _a8;
-  return ((_a8 = getPolicy()) == null ? void 0 : _a8.createScriptURL(url)) || url;
+  var _a9;
+  return ((_a9 = getPolicy()) == null ? void 0 : _a9.createScriptURL(url)) || url;
 }
 var SafeValueImpl = class {
   changingThisBreaksApplicationSecurity;
@@ -7776,14 +7776,14 @@ var DOMParserHelper = class {
     this.inertDocumentHelper = inertDocumentHelper;
   }
   getInertBodyElement(html) {
-    var _a8;
+    var _a9;
     html = "<body><remove></remove>" + html;
     try {
       const body = new window.DOMParser().parseFromString(trustedHTMLFromString(html), "text/html").body;
       if (body === null) {
         return this.inertDocumentHelper.getInertBodyElement(html);
       }
-      (_a8 = body.firstChild) == null ? void 0 : _a8.remove();
+      (_a9 = body.firstChild) == null ? void 0 : _a9.remove();
       return body;
     } catch {
       return null;
@@ -8241,10 +8241,10 @@ function isHostComponentStandalone(lView) {
   return !!(componentDef == null ? void 0 : componentDef.standalone);
 }
 function getTemplateLocationDetails(lView) {
-  var _a8;
+  var _a9;
   !ngDevMode && throwError2("Must never be called in production mode");
   const hostComponentDef = getDeclarationComponentDef(lView);
-  const componentClassName = (_a8 = hostComponentDef == null ? void 0 : hostComponentDef.type) == null ? void 0 : _a8.name;
+  const componentClassName = (_a9 = hostComponentDef == null ? void 0 : hostComponentDef.type) == null ? void 0 : _a9.name;
   return componentClassName ? ` (used in the '${componentClassName}' component template)` : "";
 }
 var KNOWN_CONTROL_FLOW_DIRECTIVES = /* @__PURE__ */ new Map([
@@ -8291,9 +8291,9 @@ function throwMultipleComponentError(tNode, first2, second) {
   throw new RuntimeError(-300, `Multiple components match node with tagname ${tNode.value}: ${stringifyForError(first2)} and ${stringifyForError(second)}`);
 }
 function throwErrorIfNoChangesMode(creationMode, oldValue, currValue, propName, lView) {
-  var _a8;
+  var _a9;
   const hostComponentDef = getDeclarationComponentDef(lView);
-  const componentClassName = (_a8 = hostComponentDef == null ? void 0 : hostComponentDef.type) == null ? void 0 : _a8.name;
+  const componentClassName = (_a9 = hostComponentDef == null ? void 0 : hostComponentDef.type) == null ? void 0 : _a9.name;
   const field = propName ? ` for '${propName}'` : "";
   let msg = `ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value${field}: '${formatValue(oldValue)}'. Current value: '${formatValue(currValue)}'.${componentClassName ? ` Expression location: ${componentClassName} component` : ""}`;
   if (creationMode) {
@@ -8969,13 +8969,13 @@ function setNgReflectProperty(lView, tNode, attrName, value) {
   }
 }
 function setNgReflectProperties(lView, tView, tNode, publicName, value) {
-  var _a8, _b2;
+  var _a9, _b3;
   const environment2 = lView[ENVIRONMENT];
   if (!environment2.ngReflect || !(tNode.type & (3 | 4))) {
     return;
   }
-  const inputConfig = (_a8 = tNode.inputs) == null ? void 0 : _a8[publicName];
-  const hostInputConfig = (_b2 = tNode.hostDirectiveInputs) == null ? void 0 : _b2[publicName];
+  const inputConfig = (_a9 = tNode.inputs) == null ? void 0 : _a9[publicName];
+  const hostInputConfig = (_b3 = tNode.hostDirectiveInputs) == null ? void 0 : _b3[publicName];
   if (hostInputConfig) {
     for (let i = 0; i < hostInputConfig.length; i += 2) {
       const index = hostInputConfig[i];
@@ -9110,9 +9110,9 @@ function setInputsFromAttrs(lView, directiveIndex, instance, def, tNode, initial
   }
 }
 function storePropertyBindingMetadata(tData, tNode, propertyName, bindingIndex, ...interpolationParts) {
-  var _a8, _b2;
+  var _a9, _b3;
   if (tData[bindingIndex] === null) {
-    if (!((_a8 = tNode.inputs) == null ? void 0 : _a8[propertyName]) && !((_b2 = tNode.hostDirectiveInputs) == null ? void 0 : _b2[propertyName])) {
+    if (!((_a9 = tNode.inputs) == null ? void 0 : _a9[propertyName]) && !((_b3 = tNode.hostDirectiveInputs) == null ? void 0 : _b3[propertyName])) {
       const propBindingIdxs = tNode.propertyBindings || (tNode.propertyBindings = []);
       propBindingIdxs.push(bindingIndex);
       let bindingMetadata = propertyName;
@@ -9138,9 +9138,9 @@ function handleUncaughtError(lView, error) {
   errorHandler3 == null ? void 0 : errorHandler3(error);
 }
 function setAllInputsForProperty(tNode, tView, lView, publicName, value) {
-  var _a8, _b2;
-  const inputs = (_a8 = tNode.inputs) == null ? void 0 : _a8[publicName];
-  const hostDirectiveInputs = (_b2 = tNode.hostDirectiveInputs) == null ? void 0 : _b2[publicName];
+  var _a9, _b3;
+  const inputs = (_a9 = tNode.inputs) == null ? void 0 : _a9[publicName];
+  const hostDirectiveInputs = (_b3 = tNode.hostDirectiveInputs) == null ? void 0 : _b3[publicName];
   let hasMatch = false;
   if (hostDirectiveInputs) {
     for (let i = 0; i < hostDirectiveInputs.length; i += 2) {
@@ -9185,7 +9185,7 @@ function syncViewWithBlueprint(tView, lView) {
   }
 }
 function renderView(tView, lView, context2) {
-  var _a8;
+  var _a9;
   ngDevMode && assertEqual(isCreationMode(lView), true, "Should be run in creation mode");
   ngDevMode && assertNotReactive(renderView.name);
   enterView(lView);
@@ -9201,7 +9201,7 @@ function renderView(tView, lView, context2) {
     if (tView.firstCreatePass) {
       tView.firstCreatePass = false;
     }
-    (_a8 = lView[QUERIES]) == null ? void 0 : _a8.finishViewCreation(tView);
+    (_a9 = lView[QUERIES]) == null ? void 0 : _a9.finishViewCreation(tView);
     if (tView.staticContentQueries) {
       refreshContentQueries(tView, lView);
     }
@@ -9313,8 +9313,8 @@ function addViewToDOM(tView, parentTNode, renderer, lView, parentNativeNode, bef
   applyView(tView, lView, renderer, 1, parentNativeNode, beforeNode);
 }
 function detachViewFromDOM(tView, lView) {
-  var _a8;
-  (_a8 = lView[ENVIRONMENT].changeDetectionScheduler) == null ? void 0 : _a8.notify(9);
+  var _a9;
+  (_a9 = lView[ENVIRONMENT].changeDetectionScheduler) == null ? void 0 : _a9.notify(9);
   applyView(tView, lView, lView[RENDERER], 2, null, null);
 }
 function destroyViewTree(rootView) {
@@ -9837,18 +9837,18 @@ function runEffectsInView(view) {
 }
 var MAXIMUM_REFRESH_RERUNS$1 = 100;
 function detectChangesInternal(lView, mode = 0) {
-  var _a8, _b2;
+  var _a9, _b3;
   const environment2 = lView[ENVIRONMENT];
   const rendererFactory = environment2.rendererFactory;
   const checkNoChangesMode = !!ngDevMode && isInCheckNoChangesMode();
   if (!checkNoChangesMode) {
-    (_a8 = rendererFactory.begin) == null ? void 0 : _a8.call(rendererFactory);
+    (_a9 = rendererFactory.begin) == null ? void 0 : _a9.call(rendererFactory);
   }
   try {
     detectChangesInViewWhileDirty(lView, mode);
   } finally {
     if (!checkNoChangesMode) {
-      (_b2 = rendererFactory.end) == null ? void 0 : _b2.call(rendererFactory);
+      (_b3 = rendererFactory.end) == null ? void 0 : _b3.call(rendererFactory);
     }
   }
 }
@@ -10143,7 +10143,7 @@ function processHostBindingOpCodes(tView, lView) {
   }
 }
 function markViewDirty(lView, source) {
-  var _a8;
+  var _a9;
   const dirtyBitsToUse = isRefreshingViews() ? (
     // When we are actively refreshing views, we only use the `Dirty` bit to mark a view
     64
@@ -10155,7 +10155,7 @@ function markViewDirty(lView, source) {
     // changes in a view when the render factory flushes.
     1024 | 64
   );
-  (_a8 = lView[ENVIRONMENT].changeDetectionScheduler) == null ? void 0 : _a8.notify(source);
+  (_a9 = lView[ENVIRONMENT].changeDetectionScheduler) == null ? void 0 : _a9.notify(source);
   while (lView) {
     lView[FLAGS] |= dirtyBitsToUse;
     const parent = getLViewParent(lView);
@@ -10611,8 +10611,8 @@ var TemplateRef = class {
    * @internal
    */
   get ssrId() {
-    var _a8;
-    return ((_a8 = this._declarationTContainer.tView) == null ? void 0 : _a8.ssrId) || null;
+    var _a9;
+    return ((_a9 = this._declarationTContainer.tView) == null ? void 0 : _a9.ssrId) || null;
   }
   /**
    * Instantiates an unattached embedded view based on this template.
@@ -12865,13 +12865,13 @@ function loadQueryInternal(lView, queryIndex) {
   return lView[QUERIES].queries[queryIndex].queryList;
 }
 function createLQuery(tView, lView, flags) {
-  var _a8;
+  var _a9;
   const queryList = new QueryList(
     (flags & 4) === 4
     /* QueryFlags.emitDistinctChangesOnly */
   );
   storeCleanupWithContext(tView, lView, queryList, queryList.destroy);
-  const lQueries = (lView[_a8 = QUERIES] ?? (lView[_a8] = new LQueries_())).queries;
+  const lQueries = (lView[_a9 = QUERIES] ?? (lView[_a9] = new LQueries_())).queries;
   return lQueries.push(new LQuery_(queryList)) - 1;
 }
 function createViewQuery(predicate, flags, read) {
@@ -13006,7 +13006,7 @@ function resolveComponentResources(resourceResolver) {
     return promise;
   }
   componentResourceResolutionQueue.forEach((component, type2) => {
-    var _a8, _b2;
+    var _a9, _b3;
     const promises = [];
     if (component.templateUrl) {
       promises.push(cachedResourceResolve(component.templateUrl).then((template) => {
@@ -13015,9 +13015,9 @@ function resolveComponentResources(resourceResolver) {
     }
     const styles = typeof component.styles === "string" ? [component.styles] : component.styles || [];
     component.styles = styles;
-    if (component.styleUrl && ((_a8 = component.styleUrls) == null ? void 0 : _a8.length)) {
+    if (component.styleUrl && ((_a9 = component.styleUrls) == null ? void 0 : _a9.length)) {
       throw new Error("@Component cannot define both `styleUrl` and `styleUrls`. Use `styleUrl` if the component has one stylesheet, or `styleUrls` if it has multiple");
-    } else if ((_b2 = component.styleUrls) == null ? void 0 : _b2.length) {
+    } else if ((_b3 = component.styleUrls) == null ? void 0 : _b3.length) {
       const styleOffset = component.styles.length;
       const styleUrls = component.styleUrls;
       component.styleUrls.forEach((styleUrl, index) => {
@@ -13096,12 +13096,12 @@ To fix this, switch the \`${attrName}\` binding to a static attribute in a templ
 }
 var markedFeatures = /* @__PURE__ */ new Set();
 function performanceMarkFeature(feature) {
-  var _a8;
+  var _a9;
   if (markedFeatures.has(feature)) {
     return;
   }
   markedFeatures.add(feature);
-  (_a8 = performance == null ? void 0 : performance.mark) == null ? void 0 : _a8.call(performance, "mark_feature_usage", { detail: { feature } });
+  (_a9 = performance == null ? void 0 : performance.mark) == null ? void 0 : _a9.call(performance, "mark_feature_usage", { detail: { feature } });
 }
 var NgModuleRef$1 = class NgModuleRef {
 };
@@ -13398,8 +13398,8 @@ function getNgDirectiveDef(directiveDefinition) {
   };
 }
 function initFeatures(definition) {
-  var _a8;
-  (_a8 = definition.features) == null ? void 0 : _a8.forEach((fn3) => fn3(definition));
+  var _a9;
+  (_a9 = definition.features) == null ? void 0 : _a9.forEach((fn3) => fn3(definition));
 }
 function extractDefListOrFactory(dependencies, pipeDef) {
   if (!dependencies) {
@@ -13894,15 +13894,15 @@ var EventEmitter_ = class extends Subject {
     }
   }
   subscribe(observerOrNext, error, complete) {
-    var _a8, _b2, _c;
+    var _a9, _b3, _c10;
     let nextFn = observerOrNext;
     let errorFn = error || (() => null);
     let completeFn = complete;
     if (observerOrNext && typeof observerOrNext === "object") {
       const observer = observerOrNext;
-      nextFn = (_a8 = observer.next) == null ? void 0 : _a8.bind(observer);
-      errorFn = (_b2 = observer.error) == null ? void 0 : _b2.bind(observer);
-      completeFn = (_c = observer.complete) == null ? void 0 : _c.bind(observer);
+      nextFn = (_a9 = observer.next) == null ? void 0 : _a9.bind(observer);
+      errorFn = (_b3 = observer.error) == null ? void 0 : _b3.bind(observer);
+      completeFn = (_c10 = observer.complete) == null ? void 0 : _c10.bind(observer);
     }
     if (this.__isAsync) {
       errorFn = this.wrapInTimeout(errorFn);
@@ -13921,15 +13921,15 @@ var EventEmitter_ = class extends Subject {
   }
   wrapInTimeout(fn3) {
     return (value) => {
-      var _a8;
-      const taskId = (_a8 = this.pendingTasks) == null ? void 0 : _a8.add();
+      var _a9;
+      const taskId = (_a9 = this.pendingTasks) == null ? void 0 : _a9.add();
       setTimeout(() => {
-        var _a9;
+        var _a10;
         try {
           fn3(value);
         } finally {
           if (taskId !== void 0) {
-            (_a9 = this.pendingTasks) == null ? void 0 : _a9.remove(taskId);
+            (_a10 = this.pendingTasks) == null ? void 0 : _a10.remove(taskId);
           }
         }
       });
@@ -14282,14 +14282,14 @@ function isSchedulerTick(applyArgs) {
   return hasApplyArgsData(applyArgs, "__scheduler_tick__");
 }
 function hasApplyArgsData(applyArgs, key) {
-  var _a8, _b2;
+  var _a9, _b3;
   if (!Array.isArray(applyArgs)) {
     return false;
   }
   if (applyArgs.length !== 1) {
     return false;
   }
-  return ((_b2 = (_a8 = applyArgs[0]) == null ? void 0 : _a8.data) == null ? void 0 : _b2[key]) === true;
+  return ((_b3 = (_a9 = applyArgs[0]) == null ? void 0 : _a9.data) == null ? void 0 : _b3[key]) === true;
 }
 function getNgZone(ngZoneToUse = "zone.js", options) {
   if (ngZoneToUse === "noop") {
@@ -14303,8 +14303,8 @@ function getNgZone(ngZoneToUse = "zone.js", options) {
 var AfterRenderManager = class _AfterRenderManager {
   impl = null;
   execute() {
-    var _a8;
-    (_a8 = this.impl) == null ? void 0 : _a8.execute();
+    var _a9;
+    (_a9 = this.impl) == null ? void 0 : _a9.execute();
   }
   /** @nocollapse */
   static \u0275prov = (
@@ -14340,7 +14340,7 @@ var AfterRenderImpl = class _AfterRenderImpl {
    * might be scheduled.
    */
   execute() {
-    var _a8;
+    var _a9;
     const hasSequencesToExecute = this.sequences.size > 0;
     if (hasSequencesToExecute) {
       profiler(
@@ -14362,7 +14362,7 @@ var AfterRenderImpl = class _AfterRenderImpl {
           }, sequence2.snapshot));
         } catch (err) {
           sequence2.erroredOrDestroyed = true;
-          (_a8 = this.errorHandler) == null ? void 0 : _a8.handleError(err);
+          (_a9 = this.errorHandler) == null ? void 0 : _a9.handleError(err);
         }
       }
     }
@@ -14392,10 +14392,10 @@ var AfterRenderImpl = class _AfterRenderImpl {
     }
   }
   register(sequence2) {
-    var _a8;
+    var _a9;
     const { view } = sequence2;
     if (view !== void 0) {
-      (view[_a8 = AFTER_RENDER_SEQUENCES_TO_ADD] ?? (view[_a8] = [])).push(sequence2);
+      (view[_a9 = AFTER_RENDER_SEQUENCES_TO_ADD] ?? (view[_a9] = [])).push(sequence2);
       markAncestorsForTraversal(view);
       view[FLAGS] |= 8192;
     } else if (!this.executing) {
@@ -14460,17 +14460,17 @@ var AfterRenderSequence = class {
     this.unregisterOnDestroy = destroyRef == null ? void 0 : destroyRef.onDestroy(() => this.destroy());
   }
   afterRun() {
-    var _a8;
+    var _a9;
     this.erroredOrDestroyed = false;
     this.pipelinedValue = void 0;
-    (_a8 = this.snapshot) == null ? void 0 : _a8.dispose();
+    (_a9 = this.snapshot) == null ? void 0 : _a9.dispose();
     this.snapshot = null;
   }
   destroy() {
-    var _a8, _b2;
+    var _a9, _b3;
     this.impl.unregister(this);
-    (_a8 = this.unregisterOnDestroy) == null ? void 0 : _a8.call(this);
-    const scheduled2 = (_b2 = this.view) == null ? void 0 : _b2[AFTER_RENDER_SEQUENCES_TO_ADD];
+    (_a9 = this.unregisterOnDestroy) == null ? void 0 : _a9.call(this);
+    const scheduled2 = (_b3 = this.view) == null ? void 0 : _b3[AFTER_RENDER_SEQUENCES_TO_ADD];
     if (scheduled2) {
       this.view[AFTER_RENDER_SEQUENCES_TO_ADD] = scheduled2.filter((s) => s !== this);
     }
@@ -14580,17 +14580,17 @@ function getTemplateIndexForState(newState, hostLView, tNode) {
   }
 }
 function getMinimumDurationForState(tDetails, currentState) {
-  var _a8, _b2;
+  var _a9, _b3;
   if (currentState === DeferBlockState.Placeholder) {
-    return ((_a8 = tDetails.placeholderBlockConfig) == null ? void 0 : _a8[MINIMUM_SLOT]) ?? null;
+    return ((_a9 = tDetails.placeholderBlockConfig) == null ? void 0 : _a9[MINIMUM_SLOT]) ?? null;
   } else if (currentState === DeferBlockState.Loading) {
-    return ((_b2 = tDetails.loadingBlockConfig) == null ? void 0 : _b2[MINIMUM_SLOT]) ?? null;
+    return ((_b3 = tDetails.loadingBlockConfig) == null ? void 0 : _b3[MINIMUM_SLOT]) ?? null;
   }
   return null;
 }
 function getLoadingBlockAfter(tDetails) {
-  var _a8;
-  return ((_a8 = tDetails.loadingBlockConfig) == null ? void 0 : _a8[LOADING_AFTER_SLOT]) ?? null;
+  var _a9;
+  return ((_a9 = tDetails.loadingBlockConfig) == null ? void 0 : _a9[LOADING_AFTER_SLOT]) ?? null;
 }
 function addDepsToRegistry(currentDeps, newDeps) {
   if (!currentDeps || currentDeps.length === 0) {
@@ -14613,10 +14613,10 @@ function isTDeferBlockDetails(value) {
   return value !== null && typeof value === "object" && typeof value.primaryTmplIndex === "number";
 }
 function trackTriggerForDebugging(tView, tNode, textRepresentation) {
-  var _a8;
+  var _a9;
   const tDetails = getTDeferBlockDetails(tView, tNode);
   tDetails.debug ?? (tDetails.debug = {});
-  (_a8 = tDetails.debug).triggers ?? (_a8.triggers = /* @__PURE__ */ new Set());
+  (_a9 = tDetails.debug).triggers ?? (_a9.triggers = /* @__PURE__ */ new Set());
   tDetails.debug.triggers.add(textRepresentation);
 }
 function onViewportWrapper(trigger2, callback, injector) {
@@ -14982,13 +14982,13 @@ function renderDeferBlockState(newState, tNode, lContainer, skipTimerScheduling 
   }
 }
 function findMatchingDehydratedViewForDeferBlock(lContainer, lDetails) {
-  var _a8;
-  const dehydratedViewIx = ((_a8 = lContainer[DEHYDRATED_VIEWS]) == null ? void 0 : _a8.findIndex((view) => view.data[DEFER_BLOCK_STATE$1] === lDetails[DEFER_BLOCK_STATE])) ?? -1;
+  var _a9;
+  const dehydratedViewIx = ((_a9 = lContainer[DEHYDRATED_VIEWS]) == null ? void 0 : _a9.findIndex((view) => view.data[DEFER_BLOCK_STATE$1] === lDetails[DEFER_BLOCK_STATE])) ?? -1;
   const dehydratedView = dehydratedViewIx > -1 ? lContainer[DEHYDRATED_VIEWS][dehydratedViewIx] : null;
   return { dehydratedView, dehydratedViewIx };
 }
 function applyDeferBlockState(newState, lDetails, lContainer, tNode, hostLView) {
-  var _a8;
+  var _a9;
   profiler(
     20
     /* ProfilerEvent.DeferBlockStateStart */
@@ -15021,7 +15021,7 @@ function applyDeferBlockState(newState, lDetails, lContainer, tNode, hostLView) 
       /* NotificationSource.DeferBlockStateUpdate */
     );
     if (dehydratedViewIx > -1) {
-      (_a8 = lContainer[DEHYDRATED_VIEWS]) == null ? void 0 : _a8.splice(dehydratedViewIx, 1);
+      (_a9 = lContainer[DEHYDRATED_VIEWS]) == null ? void 0 : _a9.splice(dehydratedViewIx, 1);
     }
     if ((newState === DeferBlockState.Complete || newState === DeferBlockState.Error) && Array.isArray(lDetails[ON_COMPLETE_FNS])) {
       for (const callback of lDetails[ON_COMPLETE_FNS]) {
@@ -15325,16 +15325,16 @@ function getDeferBlocks$1(lView, deferBlocks) {
   }
 }
 function getDeferBlocks(node) {
-  var _a8;
+  var _a9;
   const results = [];
-  const lView = (_a8 = getLContext(node)) == null ? void 0 : _a8.lView;
+  const lView = (_a9 = getLContext(node)) == null ? void 0 : _a9.lView;
   if (lView) {
     findDeferBlocks(node, lView, results);
   }
   return results;
 }
 function findDeferBlocks(node, lView, results) {
-  var _a8, _b2, _c, _d;
+  var _a9, _b3, _c10, _d2;
   const viewInjector = lView[INJECTOR];
   const registry = viewInjector.get(DEHYDRATED_BLOCK_REGISTRY, null, { optional: true });
   const blocks = [];
@@ -15372,14 +15372,14 @@ function findDeferBlocks(node, lView, results) {
       hasErrorBlock: tDetails.errorTmplIndex !== null,
       loadingBlock: {
         exists: tDetails.loadingTmplIndex !== null,
-        minimumTime: ((_a8 = tDetails.loadingBlockConfig) == null ? void 0 : _a8[MINIMUM_SLOT]) ?? null,
-        afterTime: ((_b2 = tDetails.loadingBlockConfig) == null ? void 0 : _b2[LOADING_AFTER_SLOT]) ?? null
+        minimumTime: ((_a9 = tDetails.loadingBlockConfig) == null ? void 0 : _a9[MINIMUM_SLOT]) ?? null,
+        afterTime: ((_b3 = tDetails.loadingBlockConfig) == null ? void 0 : _b3[LOADING_AFTER_SLOT]) ?? null
       },
       placeholderBlock: {
         exists: tDetails.placeholderTmplIndex !== null,
-        minimumTime: ((_c = tDetails.placeholderBlockConfig) == null ? void 0 : _c[MINIMUM_SLOT]) ?? null
+        minimumTime: ((_c10 = tDetails.placeholderBlockConfig) == null ? void 0 : _c10[MINIMUM_SLOT]) ?? null
       },
-      triggers: ((_d = tDetails.debug) == null ? void 0 : _d.triggers) ? Array.from(tDetails.debug.triggers).sort() : [],
+      triggers: ((_d2 = tDetails.debug) == null ? void 0 : _d2.triggers) ? Array.from(tDetails.debug.triggers).sort() : [],
       rootNodes
     };
     results.push(data);
@@ -15476,17 +15476,17 @@ function getDependenciesFromInjectable(injector, token) {
   return { instance, dependencies };
 }
 function getDependenciesForTokenInInjector(token, injector) {
-  var _a8, _b2;
+  var _a9, _b3;
   const { resolverToTokenToDependencies } = getFrameworkDIDebugData();
   if (!(injector instanceof NodeInjector)) {
-    return ((_b2 = (_a8 = resolverToTokenToDependencies.get(injector)) == null ? void 0 : _a8.get) == null ? void 0 : _b2.call(_a8, token)) ?? [];
+    return ((_b3 = (_a9 = resolverToTokenToDependencies.get(injector)) == null ? void 0 : _a9.get) == null ? void 0 : _b3.call(_a9, token)) ?? [];
   }
   const lView = getNodeInjectorLView(injector);
   const tokenDependencyMap = resolverToTokenToDependencies.get(lView);
   const dependencies = (tokenDependencyMap == null ? void 0 : tokenDependencyMap.get(token)) ?? [];
   return dependencies.filter((dependency) => {
-    var _a9;
-    const dependencyNode = (_a9 = dependency.injectedIn) == null ? void 0 : _a9.tNode;
+    var _a10;
+    const dependencyNode = (_a10 = dependency.injectedIn) == null ? void 0 : _a10.tNode;
     if (dependencyNode === void 0) {
       return false;
     }
@@ -15541,13 +15541,13 @@ function walkProviderTreeToDiscoverImportPaths(providerToPath, visitedContainers
         const lastContainerAddedToPath = existingImportPath[0];
         let isNextStepInPath = false;
         deepForEach(containerDef.imports, (moduleImport) => {
-          var _a8;
+          var _a9;
           if (isNextStepInPath) {
             return;
           }
           isNextStepInPath = moduleImport.ngModule === lastContainerAddedToPath || moduleImport === lastContainerAddedToPath;
           if (isNextStepInPath) {
-            (_a8 = providerToPath.get(prov)) == null ? void 0 : _a8.unshift(container);
+            (_a9 = providerToPath.get(prov)) == null ? void 0 : _a9.unshift(container);
           }
         });
       }
@@ -15635,7 +15635,7 @@ function getInjectorResolutionPathHelper(injector, resolutionPath) {
   return resolutionPath;
 }
 function getInjectorParent(injector) {
-  var _a8;
+  var _a9;
   if (injector instanceof R3Injector) {
     return injector.parent;
   }
@@ -15663,7 +15663,7 @@ function getInjectorParent(injector) {
     return new NodeInjector(parentTNode, parentLView);
   } else {
     const chainedInjector = lView[INJECTOR];
-    const injectorParent = (_a8 = chainedInjector.injector) == null ? void 0 : _a8.parent;
+    const injectorParent = (_a9 = chainedInjector.injector) == null ? void 0 : _a9.parent;
     if (injectorParent instanceof NodeInjector) {
       return injectorParent;
     }
@@ -15708,7 +15708,7 @@ function getTemplateConsumer(injector) {
   return null;
 }
 function getNodesAndEdgesFromSignalMap(signalMap) {
-  var _a8, _b2, _c, _d;
+  var _a9, _b3, _c10, _d2;
   const nodes = Array.from(signalMap.keys());
   const debugSignalGraphNodes = [];
   const edges = [];
@@ -15722,7 +15722,7 @@ function getNodesAndEdgesFromSignalMap(signalMap) {
       });
     } else if (isTemplateEffectNode(consumer)) {
       debugSignalGraphNodes.push({
-        label: consumer.debugName ?? ((_d = (_c = (_b2 = (_a8 = consumer.lView) == null ? void 0 : _a8[HOST]) == null ? void 0 : _b2.tagName) == null ? void 0 : _c.toLowerCase) == null ? void 0 : _d.call(_c)),
+        label: consumer.debugName ?? ((_d2 = (_c10 = (_b3 = (_a9 = consumer.lView) == null ? void 0 : _a9[HOST]) == null ? void 0 : _b3.tagName) == null ? void 0 : _c10.toLowerCase) == null ? void 0 : _d2.call(_c10)),
         kind: consumer.kind
       });
     } else if (isEffectNode(consumer)) {
@@ -15979,7 +15979,7 @@ var Testability = class _Testability {
     });
   }
   _watchAngularEvents() {
-    var _a8;
+    var _a9;
     const onUnstableSubscription = this._ngZone.onUnstable.subscribe({
       next: () => {
         this._isZoneStable = false;
@@ -15994,7 +15994,7 @@ var Testability = class _Testability {
         });
       }
     }));
-    (_a8 = this._destroyRef) == null ? void 0 : _a8.onDestroy(() => {
+    (_a9 = this._destroyRef) == null ? void 0 : _a9.onDestroy(() => {
       onUnstableSubscription.unsubscribe();
       onStableSubscription.unsubscribe();
     });
@@ -16483,7 +16483,7 @@ var ApplicationRef = class _ApplicationRef {
     }
   }
   tickImpl = () => {
-    var _a8;
+    var _a9;
     (typeof ngDevMode === "undefined" || ngDevMode) && warnIfDestroyed(this._destroyed);
     if (this._runningTick) {
       throw new RuntimeError(101, ngDevMode && "ApplicationRef.tick is called recursively");
@@ -16499,7 +16499,7 @@ var ApplicationRef = class _ApplicationRef {
       }
     } finally {
       this._runningTick = false;
-      (_a8 = this.tracingSnapshot) == null ? void 0 : _a8.dispose();
+      (_a9 = this.tracingSnapshot) == null ? void 0 : _a9.dispose();
       this.tracingSnapshot = null;
       setActiveConsumer(prevConsumer);
       this.afterTick.next();
@@ -16537,7 +16537,7 @@ var ApplicationRef = class _ApplicationRef {
    * Perform a single synchronization pass.
    */
   synchronizeOnce() {
-    var _a8, _b2, _c, _d;
+    var _a9, _b3, _c10, _d2;
     if (this.dirtyFlags & 16) {
       this.dirtyFlags &= ~16;
       this.rootEffectScheduler.flush();
@@ -16571,8 +16571,8 @@ var ApplicationRef = class _ApplicationRef {
       }
     }
     if (!ranDetectChanges) {
-      (_b2 = (_a8 = this._rendererFactory) == null ? void 0 : _a8.begin) == null ? void 0 : _b2.call(_a8);
-      (_d = (_c = this._rendererFactory) == null ? void 0 : _c.end) == null ? void 0 : _d.call(_c);
+      (_b3 = (_a9 = this._rendererFactory) == null ? void 0 : _a9.begin) == null ? void 0 : _b3.call(_a9);
+      (_d2 = (_c10 = this._rendererFactory) == null ? void 0 : _c10.end) == null ? void 0 : _d2.call(_c10);
     }
     if (this.dirtyFlags & 8) {
       this.dirtyFlags &= ~8;
@@ -16885,7 +16885,7 @@ async function triggerHydrationFromBlockName(injector, blockName, replayQueuedEv
   }
 }
 async function triggerHydrationForBlockQueue(injector, hydrationQueue, replayQueuedEventsFn) {
-  var _a8;
+  var _a9;
   const dehydratedBlockRegistry = injector.get(DEHYDRATED_BLOCK_REGISTRY);
   const blocksBeingHydrated = dehydratedBlockRegistry.hydrating;
   const pendingTasks = injector.get(PendingTasksInternal);
@@ -16909,7 +16909,7 @@ async function triggerHydrationForBlockQueue(injector, hydrationQueue, replayQue
     }
   }
   const lastBlockName = hydrationQueue[hydrationQueue.length - 1];
-  await ((_a8 = blocksBeingHydrated.get(lastBlockName)) == null ? void 0 : _a8.promise);
+  await ((_a9 = blocksBeingHydrated.get(lastBlockName)) == null ? void 0 : _a9.promise);
   pendingTasks.remove(taskId);
   if (replayQueuedEventsFn) {
     replayQueuedEventsFn(hydrationQueue);
@@ -16927,10 +16927,10 @@ function cleanupParentContainer(currentBlockIdx, hydrationQueue, dehydratedBlock
   }
 }
 function cleanupRemainingHydrationQueue(hydrationQueue, dehydratedBlockRegistry) {
-  var _a8;
+  var _a9;
   const blocksBeingHydrated = dehydratedBlockRegistry.hydrating;
   for (const dehydratedBlockId in hydrationQueue) {
-    (_a8 = blocksBeingHydrated.get(dehydratedBlockId)) == null ? void 0 : _a8.reject();
+    (_a9 = blocksBeingHydrated.get(dehydratedBlockId)) == null ? void 0 : _a9.reject();
   }
   dehydratedBlockRegistry.cleanup(hydrationQueue);
 }
@@ -16987,7 +16987,7 @@ function getHydrateTriggers(tView, tNode) {
   return tDetails.hydrateTriggers ?? (tDetails.hydrateTriggers = /* @__PURE__ */ new Map());
 }
 function \u0275\u0275defer(index, primaryTmplIndex, dependencyResolverFn, loadingTmplIndex, placeholderTmplIndex, errorTmplIndex, loadingConfigIndex, placeholderConfigIndex, enableTimerScheduling, flags) {
-  var _a8;
+  var _a9;
   const lView = getLView();
   const tView = getTView();
   const adjustedIndex = index + HEADER_OFFSET;
@@ -17025,7 +17025,7 @@ function \u0275\u0275defer(index, primaryTmplIndex, dependencyResolverFn, loadin
   populateDehydratedViewsInLContainer(lContainer, tNode, lView);
   let ssrBlockState = null;
   let ssrUniqueId = null;
-  if (((_a8 = lContainer[DEHYDRATED_VIEWS]) == null ? void 0 : _a8.length) > 0) {
+  if (((_a9 = lContainer[DEHYDRATED_VIEWS]) == null ? void 0 : _a9.length) > 0) {
     const info2 = lContainer[DEHYDRATED_VIEWS][0].data;
     ssrUniqueId = info2[DEFER_BLOCK_ID] ?? null;
     ssrBlockState = info2[DEFER_BLOCK_STATE$1];
@@ -17912,24 +17912,24 @@ var LiveCollectionLContainerImpl = class extends LiveCollection {
     return detachExistingView(this.lContainer, index);
   }
   create(index, value) {
-    var _a8;
+    var _a9;
     const dehydratedView = findMatchingDehydratedView(this.lContainer, this.templateTNode.tView.ssrId);
     const embeddedLView = createAndRenderEmbeddedLView(this.hostLView, this.templateTNode, new RepeaterContext(this.lContainer, value, index), { dehydratedView });
-    (_a8 = this.operationsCounter) == null ? void 0 : _a8.recordCreate();
+    (_a9 = this.operationsCounter) == null ? void 0 : _a9.recordCreate();
     return embeddedLView;
   }
   destroy(lView) {
-    var _a8;
+    var _a9;
     destroyLView(lView[TVIEW], lView);
-    (_a8 = this.operationsCounter) == null ? void 0 : _a8.recordDestroy();
+    (_a9 = this.operationsCounter) == null ? void 0 : _a9.recordDestroy();
   }
   updateValue(index, value) {
     this.getLView(index)[CONTEXT].$implicit = value;
   }
   reset() {
-    var _a8;
+    var _a9;
     this.needsIndexUpdate = false;
-    (_a8 = this.operationsCounter) == null ? void 0 : _a8.reset();
+    (_a9 = this.operationsCounter) == null ? void 0 : _a9.reset();
   }
   updateIndexes() {
     if (this.needsIndexUpdate) {
@@ -17943,7 +17943,7 @@ var LiveCollectionLContainerImpl = class extends LiveCollection {
   }
 };
 function \u0275\u0275repeater(collection) {
-  var _a8;
+  var _a9;
   const prevConsumer = setActiveConsumer(null);
   const metadataSlotIdx = getSelectedIndex();
   try {
@@ -17960,7 +17960,7 @@ function \u0275\u0275repeater(collection) {
     }
     const liveCollection = metadata.liveCollection;
     reconcile(liveCollection, collection, metadata.trackByFn);
-    if (ngDevMode && metadata.trackByFn === \u0275\u0275repeaterTrackByIdentity && ((_a8 = liveCollection.operationsCounter) == null ? void 0 : _a8.wasReCreated(liveCollection.length)) && isViewExpensiveToRecreate(getExistingLViewFromLContainer(lContainer, 0))) {
+    if (ngDevMode && metadata.trackByFn === \u0275\u0275repeaterTrackByIdentity && ((_a9 = liveCollection.operationsCounter) == null ? void 0 : _a9.wasReCreated(liveCollection.length)) && isViewExpensiveToRecreate(getExistingLViewFromLContainer(lContainer, 0))) {
       const message2 = formatRuntimeError(-956, `The configured tracking expression (track by identity) caused re-creation of the entire collection of size ${liveCollection.length}. This is an expensive operation requiring destruction and subsequent creation of DOM nodes, directives, components etc. Please review the "track expression" and make sure that it uniquely identifies items in a collection.`);
       console.warn(message2);
     }
@@ -19294,7 +19294,7 @@ function \u0275\u0275syntheticHostListener(eventName, listenerFn) {
   return \u0275\u0275syntheticHostListener;
 }
 function listenerInternal(tView, lView, renderer, tNode, eventName, listenerFn, eventTargetResolver) {
-  var _a8, _b2;
+  var _a9, _b3;
   ngDevMode && assertTNodeType(
     tNode,
     3 | 12
@@ -19310,8 +19310,8 @@ function listenerInternal(tView, lView, renderer, tNode, eventName, listenerFn, 
     }
   }
   if (processOutputs) {
-    const outputConfig = (_a8 = tNode.outputs) == null ? void 0 : _a8[eventName];
-    const hostDirectiveOutputConfig = (_b2 = tNode.hostDirectiveOutputs) == null ? void 0 : _b2[eventName];
+    const outputConfig = (_a9 = tNode.outputs) == null ? void 0 : _a9[eventName];
+    const hostDirectiveOutputConfig = (_b3 = tNode.hostDirectiveOutputs) == null ? void 0 : _b3[eventName];
     if (hostDirectiveOutputConfig && hostDirectiveOutputConfig.length) {
       for (let i = 0; i < hostDirectiveOutputConfig.length; i += 2) {
         const index = hostDirectiveOutputConfig[i];
@@ -20783,8 +20783,8 @@ function recreateMatchingLViews(importMeta, id, newDef, oldDef, rootLView) {
   }
 }
 function clearRendererCache(factory, def) {
-  var _a8;
-  (_a8 = factory.componentReplaced) == null ? void 0 : _a8.call(factory, def.id);
+  var _a9;
+  (_a9 = factory.componentReplaced) == null ? void 0 : _a9.call(factory, def.id);
 }
 function recreateLView(importMeta, id, newDef, oldDef, lView) {
   const instance = lView[CONTEXT];
@@ -20837,14 +20837,14 @@ function recreateLView(importMeta, id, newDef, oldDef, lView) {
   }
 }
 function executeWithInvalidateFallback(importMeta, id, callback) {
-  var _a8, _b2;
+  var _a9, _b3;
   try {
     callback();
   } catch (e2) {
     const error = e2;
     if (id !== null && error.message) {
       const toLog = error.message + (error.stack ? "\n" + error.stack : "");
-      (_b2 = (_a8 = importMeta == null ? void 0 : importMeta.hot) == null ? void 0 : _a8.send) == null ? void 0 : _b2.call(_a8, "angular:invalidate", { id, message: toLog, error: true });
+      (_b3 = (_a9 = importMeta == null ? void 0 : importMeta.hot) == null ? void 0 : _a9.send) == null ? void 0 : _b3.call(_a9, "angular:invalidate", { id, message: toLog, error: true });
     }
     throw e2;
   }
@@ -21603,7 +21603,7 @@ function extendsDirectlyFromObject(type2) {
   return Object.getPrototypeOf(type2.prototype) === Object.prototype;
 }
 function directiveMetadata(type2, metadata) {
-  var _a8;
+  var _a9;
   const reflect = getReflect();
   const propMetadata = reflect.ownPropMetadata(type2);
   return {
@@ -21623,7 +21623,7 @@ function directiveMetadata(type2, metadata) {
     viewQueries: extractQueriesMetadata(type2, propMetadata, isViewQuery),
     isStandalone: metadata.standalone === void 0 ? true : !!metadata.standalone,
     isSignal: !!metadata.signals,
-    hostDirectives: ((_a8 = metadata.hostDirectives) == null ? void 0 : _a8.map((directive) => typeof directive === "function" ? { directive } : directive)) || null
+    hostDirectives: ((_a9 = metadata.hostDirectives) == null ? void 0 : _a9.map((directive) => typeof directive === "function" ? { directive } : directive)) || null
   };
 }
 function addDirectiveDefToUndecoratedParents(type2) {
@@ -21893,8 +21893,8 @@ var NgZoneChangeDetectionScheduler = class _NgZoneChangeDetectionScheduler {
     });
   }
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this._onMicrotaskEmptySubscription) == null ? void 0 : _a8.unsubscribe();
+    var _a9;
+    (_a9 = this._onMicrotaskEmptySubscription) == null ? void 0 : _a9.unsubscribe();
   }
   static \u0275fac = function NgZoneChangeDetectionScheduler_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _NgZoneChangeDetectionScheduler)();
@@ -22056,7 +22056,7 @@ var ChangeDetectionSchedulerImpl = class _ChangeDetectionSchedulerImpl {
     !this.zoneIsDefined));
   }
   notify(source) {
-    var _a8;
+    var _a9;
     if (!this.zonelessEnabled && source === 5) {
       return;
     }
@@ -22101,7 +22101,7 @@ var ChangeDetectionSchedulerImpl = class _ChangeDetectionSchedulerImpl {
         this.appRef.dirtyFlags |= 8;
       }
     }
-    this.appRef.tracingSnapshot = ((_a8 = this.tracing) == null ? void 0 : _a8.snapshot(this.appRef.tracingSnapshot)) ?? null;
+    this.appRef.tracingSnapshot = ((_a9 = this.tracing) == null ? void 0 : _a9.snapshot(this.appRef.tracingSnapshot)) ?? null;
     if (!this.shouldScheduleTick(force)) {
       return;
     }
@@ -22176,9 +22176,9 @@ var ChangeDetectionSchedulerImpl = class _ChangeDetectionSchedulerImpl {
     this.cleanup();
   }
   cleanup() {
-    var _a8;
+    var _a9;
     this.runningTick = false;
-    (_a8 = this.cancelScheduledCallback) == null ? void 0 : _a8.call(this);
+    (_a9 = this.cancelScheduledCallback) == null ? void 0 : _a9.call(this);
     this.cancelScheduledCallback = null;
     if (this.pendingRenderTaskId !== null) {
       const taskId = this.pendingRenderTaskId;
@@ -22255,17 +22255,17 @@ var OutputEmitterRef = class {
     (this.listeners ?? (this.listeners = [])).push(callback);
     return {
       unsubscribe: () => {
-        var _a8, _b2;
-        const idx = (_a8 = this.listeners) == null ? void 0 : _a8.indexOf(callback);
+        var _a9, _b3;
+        const idx = (_a9 = this.listeners) == null ? void 0 : _a9.indexOf(callback);
         if (idx !== void 0 && idx !== -1) {
-          (_b2 = this.listeners) == null ? void 0 : _b2.splice(idx, 1);
+          (_b3 = this.listeners) == null ? void 0 : _b3.splice(idx, 1);
         }
       }
     };
   }
   /** Emits a new value to the output. */
   emit(value) {
-    var _a8;
+    var _a9;
     if (this.destroyed) {
       console.warn(formatRuntimeError(953, ngDevMode && "Unexpected emit for destroyed `OutputRef`. The owning directive/component is destroyed."));
       return;
@@ -22279,7 +22279,7 @@ var OutputEmitterRef = class {
         try {
           listenerFn(value);
         } catch (err) {
-          (_a8 = this.errorHandler) == null ? void 0 : _a8.handleError(err);
+          (_a9 = this.errorHandler) == null ? void 0 : _a9.handleError(err);
         }
       }
     } finally {
@@ -22374,8 +22374,8 @@ var BASE_EFFECT_NODE = /* @__PURE__ */ (() => __spreadProps(__spreadValues({}, R
     }
   },
   maybeCleanup() {
-    var _a8;
-    if (!((_a8 = this.cleanupFns) == null ? void 0 : _a8.length)) {
+    var _a9;
+    if (!((_a9 = this.cleanupFns) == null ? void 0 : _a9.length)) {
       return;
     }
     const prevConsumer = setActiveConsumer(null);
@@ -22414,21 +22414,21 @@ var VIEW_EFFECT_NODE = /* @__PURE__ */ (() => __spreadProps(__spreadValues({}, B
     );
   },
   destroy() {
-    var _a8;
+    var _a9;
     consumerDestroy(this);
     this.onDestroyFn();
     this.maybeCleanup();
-    (_a8 = this.view[EFFECTS]) == null ? void 0 : _a8.delete(this);
+    (_a9 = this.view[EFFECTS]) == null ? void 0 : _a9.delete(this);
   }
 }))();
 function createViewEffect(view, notifier, fn3) {
-  var _a8;
+  var _a9;
   const node = Object.create(VIEW_EFFECT_NODE);
   node.view = view;
   node.zone = typeof Zone !== "undefined" ? Zone.current : null;
   node.notifier = notifier;
   node.fn = fn3;
-  view[_a8 = EFFECTS] ?? (view[_a8] = /* @__PURE__ */ new Set());
+  view[_a9 = EFFECTS] ?? (view[_a9] = /* @__PURE__ */ new Set());
   view[EFFECTS].add(node);
   node.consumerMarkedDirty(node);
   return node;
@@ -22514,8 +22514,8 @@ var ResourceImpl = class extends BaseWritableResource {
       // Feed a computed signal for the value to `BaseWritableResource`, which will upgrade it to a
       // `WritableSignal` that delegates to `ResourceImpl.set`.
       computed(() => {
-        var _a8, _b2;
-        const streamValue = (_b2 = (_a8 = this.state()).stream) == null ? void 0 : _b2.call(_a8);
+        var _a9, _b3;
+        const streamValue = (_b3 = (_a9 = this.state()).stream) == null ? void 0 : _b3.call(_a9);
         if (!streamValue) {
           return defaultValue;
         }
@@ -22571,8 +22571,8 @@ var ResourceImpl = class extends BaseWritableResource {
   }
   status = computed(() => projectStatusOfState(this.state()));
   error = computed(() => {
-    var _a8, _b2;
-    const stream = (_b2 = (_a8 = this.state()).stream) == null ? void 0 : _b2.call(_a8);
+    var _a9, _b3;
+    const stream = (_b3 = (_a9 = this.state()).stream) == null ? void 0 : _b3.call(_a9);
     return stream && !isResolved(stream) ? stream.error : void 0;
   });
   /**
@@ -22663,13 +22663,13 @@ var ResourceImpl = class extends BaseWritableResource {
     }
   }
   abortInProgressLoad() {
-    var _a8;
+    var _a9;
     untracked2(() => {
-      var _a9;
-      return (_a9 = this.pendingController) == null ? void 0 : _a9.abort();
+      var _a10;
+      return (_a10 = this.pendingController) == null ? void 0 : _a10.abort();
     });
     this.pendingController = void 0;
-    (_a8 = this.resolvePendingTask) == null ? void 0 : _a8.call(this);
+    (_a9 = this.resolvePendingTask) == null ? void 0 : _a9.call(this);
     this.resolvePendingTask = void 0;
   }
 };
@@ -22968,8 +22968,8 @@ var ImagePerformanceWarning = class _ImagePerformanceWarning {
   options = inject(IMAGE_CONFIG);
   lcpImageUrl;
   start() {
-    var _a8, _b2;
-    if (typeof PerformanceObserver === "undefined" || ((_a8 = this.options) == null ? void 0 : _a8.disableImageSizeWarning) && ((_b2 = this.options) == null ? void 0 : _b2.disableImageLazyLoadWarning)) {
+    var _a9, _b3;
+    if (typeof PerformanceObserver === "undefined" || ((_a9 = this.options) == null ? void 0 : _a9.disableImageSizeWarning) && ((_b3 = this.options) == null ? void 0 : _b3.disableImageLazyLoadWarning)) {
       return;
     }
     this.observer = this.initPerformanceObserver();
@@ -22981,11 +22981,11 @@ var ImagePerformanceWarning = class _ImagePerformanceWarning {
         setTimeout(this.scanImages.bind(this), SCAN_DELAY);
       };
       const setup = () => {
-        var _a9;
+        var _a10;
         if (doc.readyState === "complete") {
           waitToScan();
         } else {
-          (_a9 = this.window) == null ? void 0 : _a9.addEventListener("load", waitToScan, { once: true });
+          (_a10 = this.window) == null ? void 0 : _a10.addEventListener("load", waitToScan, { once: true });
         }
       };
       if (typeof Zone !== "undefined") {
@@ -22996,20 +22996,20 @@ var ImagePerformanceWarning = class _ImagePerformanceWarning {
     }
   }
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this.observer) == null ? void 0 : _a8.disconnect();
+    var _a9;
+    (_a9 = this.observer) == null ? void 0 : _a9.disconnect();
   }
   initPerformanceObserver() {
     if (typeof PerformanceObserver === "undefined") {
       return null;
     }
     const observer = new PerformanceObserver((entryList) => {
-      var _a8;
+      var _a9;
       const entries = entryList.getEntries();
       if (entries.length === 0)
         return;
       const lcpElement = entries[entries.length - 1];
-      const imgSrc = ((_a8 = lcpElement.element) == null ? void 0 : _a8.src) ?? "";
+      const imgSrc = ((_a9 = lcpElement.element) == null ? void 0 : _a9.src) ?? "";
       if (imgSrc.startsWith("data:") || imgSrc.startsWith("blob:"))
         return;
       this.lcpImageUrl = imgSrc;
@@ -23018,17 +23018,17 @@ var ImagePerformanceWarning = class _ImagePerformanceWarning {
     return observer;
   }
   scanImages() {
-    var _a8;
+    var _a9;
     const images = getDocument().querySelectorAll("img");
     let lcpElementFound, lcpElementLoadedCorrectly = false;
     images.forEach((image) => {
-      var _a9, _b2;
-      if (!((_a9 = this.options) == null ? void 0 : _a9.disableImageSizeWarning)) {
+      var _a10, _b3;
+      if (!((_a10 = this.options) == null ? void 0 : _a10.disableImageSizeWarning)) {
         if (!image.getAttribute("ng-img") && this.isOversized(image)) {
           logOversizedImageWarning(image.src);
         }
       }
-      if (!((_b2 = this.options) == null ? void 0 : _b2.disableImageLazyLoadWarning) && this.lcpImageUrl) {
+      if (!((_b3 = this.options) == null ? void 0 : _b3.disableImageLazyLoadWarning) && this.lcpImageUrl) {
         if (image.src === this.lcpImageUrl) {
           lcpElementFound = true;
           if (image.loading !== "lazy" || image.getAttribute("ng-img")) {
@@ -23037,7 +23037,7 @@ var ImagePerformanceWarning = class _ImagePerformanceWarning {
         }
       }
     });
-    if (lcpElementFound && !lcpElementLoadedCorrectly && this.lcpImageUrl && !((_a8 = this.options) == null ? void 0 : _a8.disableImageLazyLoadWarning)) {
+    if (lcpElementFound && !lcpElementLoadedCorrectly && this.lcpImageUrl && !((_a9 = this.options) == null ? void 0 : _a9.disableImageLazyLoadWarning)) {
       logLazyLCPWarning(this.lcpImageUrl);
     }
   }
@@ -24375,7 +24375,7 @@ var AFTER_RENDER_PHASE_EFFECT_NODE = /* @__PURE__ */ (() => __spreadProps(__spre
     );
   },
   phaseFn(previousValue) {
-    var _a8;
+    var _a9;
     this.sequence.lastPhase = this.phase;
     if (!this.dirty) {
       return this.signal;
@@ -24389,7 +24389,7 @@ var AFTER_RENDER_PHASE_EFFECT_NODE = /* @__PURE__ */ (() => __spreadProps(__spre
         cleanupFn();
       }
     } finally {
-      (_a8 = this.cleanup) == null ? void 0 : _a8.clear();
+      (_a9 = this.cleanup) == null ? void 0 : _a9.clear();
     }
     const args = [];
     if (previousValue !== void 0) {
@@ -24690,10 +24690,10 @@ var PathLocationStrategy = class _PathLocationStrategy extends LocationStrategy 
   _baseHref;
   _removeListenerFns = [];
   constructor(_platformLocation, href) {
-    var _a8;
+    var _a9;
     super();
     this._platformLocation = _platformLocation;
-    this._baseHref = href ?? this._platformLocation.getBaseHrefFromDOM() ?? ((_a8 = inject(DOCUMENT).location) == null ? void 0 : _a8.origin) ?? "";
+    this._baseHref = href ?? this._platformLocation.getBaseHrefFromDOM() ?? ((_a9 = inject(DOCUMENT).location) == null ? void 0 : _a9.origin) ?? "";
   }
   /** @docs-private */
   ngOnDestroy() {
@@ -24733,8 +24733,8 @@ var PathLocationStrategy = class _PathLocationStrategy extends LocationStrategy 
     return this._platformLocation.getState();
   }
   historyGo(relativePosition = 0) {
-    var _a8, _b2;
-    (_b2 = (_a8 = this._platformLocation).historyGo) == null ? void 0 : _b2.call(_a8, relativePosition);
+    var _a9, _b3;
+    (_b3 = (_a9 = this._platformLocation).historyGo) == null ? void 0 : _b3.call(_a9, relativePosition);
   }
   static \u0275fac = function PathLocationStrategy_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _PathLocationStrategy)(\u0275\u0275inject(PlatformLocation), \u0275\u0275inject(APP_BASE_HREF, 8));
@@ -24789,8 +24789,8 @@ var Location = class _Location {
   }
   /** @docs-private */
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this._urlChangeSubscription) == null ? void 0 : _a8.unsubscribe();
+    var _a9;
+    (_a9 = this._urlChangeSubscription) == null ? void 0 : _a9.unsubscribe();
     this._urlChangeListeners = [];
   }
   /**
@@ -24901,8 +24901,8 @@ var Location = class _Location {
    * @see https://developer.mozilla.org/en-US/docs/Web/API/History_API#Moving_to_a_specific_point_in_history
    */
   historyGo(relativePosition = 0) {
-    var _a8, _b2;
-    (_b2 = (_a8 = this._locationStrategy).historyGo) == null ? void 0 : _b2.call(_a8, relativePosition);
+    var _a9, _b3;
+    (_b3 = (_a9 = this._locationStrategy).historyGo) == null ? void 0 : _b3.call(_a9, relativePosition);
   }
   /**
    * Registers a URL change listener. Use to catch updates performed by the Angular
@@ -24917,11 +24917,11 @@ var Location = class _Location {
       this._notifyUrlChangeListeners(v3.url, v3.state);
     }));
     return () => {
-      var _a8;
+      var _a9;
       const fnIndex = this._urlChangeListeners.indexOf(fn3);
       this._urlChangeListeners.splice(fnIndex, 1);
       if (this._urlChangeListeners.length === 0) {
-        (_a8 = this._urlChangeSubscription) == null ? void 0 : _a8.unsubscribe();
+        (_a9 = this._urlChangeSubscription) == null ? void 0 : _a9.unsubscribe();
         this._urlChangeSubscription = null;
       }
     };
@@ -25074,8 +25074,8 @@ var HashLocationStrategy = class _HashLocationStrategy extends LocationStrategy 
     return this._platformLocation.getState();
   }
   historyGo(relativePosition = 0) {
-    var _a8, _b2;
-    (_b2 = (_a8 = this._platformLocation).historyGo) == null ? void 0 : _b2.call(_a8, relativePosition);
+    var _a9, _b3;
+    (_b3 = (_a9 = this._platformLocation).historyGo) == null ? void 0 : _b3.call(_a9, relativePosition);
   }
   static \u0275fac = function HashLocationStrategy_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _HashLocationStrategy)(\u0275\u0275inject(PlatformLocation), \u0275\u0275inject(APP_BASE_HREF, 8));
@@ -26607,8 +26607,8 @@ var NgComponentOutlet = class _NgComponentOutlet {
    * Will be null if no component has been rendered.
    */
   get componentInstance() {
-    var _a8;
-    return ((_a8 = this._componentRef) == null ? void 0 : _a8.instance) ?? null;
+    var _a9;
+    return ((_a9 = this._componentRef) == null ? void 0 : _a9.instance) ?? null;
   }
   constructor(_viewContainerRef) {
     this._viewContainerRef = _viewContainerRef;
@@ -26621,7 +26621,7 @@ var NgComponentOutlet = class _NgComponentOutlet {
   }
   /** @docs-private */
   ngOnChanges(changes) {
-    var _a8;
+    var _a9;
     if (this._needToReCreateComponentInstance(changes)) {
       this._viewContainerRef.clear();
       this._inputsUsed.clear();
@@ -26629,7 +26629,7 @@ var NgComponentOutlet = class _NgComponentOutlet {
       if (this.ngComponentOutlet) {
         const injector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
         if (this._needToReCreateNgModuleInstance(changes)) {
-          (_a8 = this._moduleRef) == null ? void 0 : _a8.destroy();
+          (_a9 = this._moduleRef) == null ? void 0 : _a9.destroy();
           if (this.ngComponentOutletNgModule) {
             this._moduleRef = createNgModule(this.ngComponentOutletNgModule, getParentInjector(injector));
           } else if (this.ngComponentOutletNgModuleFactory) {
@@ -26659,8 +26659,8 @@ var NgComponentOutlet = class _NgComponentOutlet {
   }
   /** @docs-private */
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this._moduleRef) == null ? void 0 : _a8.destroy();
+    var _a9;
+    (_a9 = this._moduleRef) == null ? void 0 : _a9.destroy();
   }
   _applyInputStateDiff(componentRef) {
     for (const [inputName, touched] of this._inputsUsed) {
@@ -27576,11 +27576,11 @@ var AsyncPipe = class _AsyncPipe {
     this._obj = null;
   }
   _updateLatestValue(async2, value) {
-    var _a8;
+    var _a9;
     if (async2 === this._obj) {
       this._latestValue = value;
       if (this.markForCheckOnValueUpdate) {
-        (_a8 = this._ref) == null ? void 0 : _a8.markForCheck();
+        (_a9 = this._ref) == null ? void 0 : _a9.markForCheck();
       }
     }
   }
@@ -27693,11 +27693,11 @@ var DatePipe = class _DatePipe {
     this.defaultOptions = defaultOptions2;
   }
   transform(value, format3, timezone, locale) {
-    var _a8, _b2;
+    var _a9, _b3;
     if (value == null || value === "" || value !== value) return null;
     try {
-      const _format = format3 ?? ((_a8 = this.defaultOptions) == null ? void 0 : _a8.dateFormat) ?? DEFAULT_DATE_FORMAT;
-      const _timezone = timezone ?? ((_b2 = this.defaultOptions) == null ? void 0 : _b2.timezone) ?? this.defaultTimezone ?? void 0;
+      const _format = format3 ?? ((_a9 = this.defaultOptions) == null ? void 0 : _a9.dateFormat) ?? DEFAULT_DATE_FORMAT;
+      const _timezone = timezone ?? ((_b3 = this.defaultOptions) == null ? void 0 : _b3.timezone) ?? this.defaultTimezone ?? void 0;
       return formatDate(value, _format, locale || this.locale, _timezone);
     } catch (error) {
       throw invalidPipeArgumentError(_DatePipe, error.message);
@@ -28352,13 +28352,13 @@ function isCloudinaryUrl(url) {
 }
 var provideCloudinaryLoader = createImageLoader(createCloudinaryUrl, ngDevMode ? ["https://res.cloudinary.com/mysite", "https://mysite.cloudinary.com", "https://subdomain.mysite.com"] : void 0);
 function createCloudinaryUrl(path, config2) {
-  var _a8;
+  var _a9;
   const quality = config2.isPlaceholder ? "q_auto:low" : "q_auto";
   let params = `f_auto,${quality}`;
   if (config2.width) {
     params += `,w_${config2.width}`;
   }
-  if ((_a8 = config2.loaderParams) == null ? void 0 : _a8["rounded"]) {
+  if ((_a9 = config2.loaderParams) == null ? void 0 : _a9["rounded"]) {
     params += `,r_max`;
   }
   return `${path}/image/upload/${params}/${config2.src}`;
@@ -28442,11 +28442,11 @@ var LCPImageObserver = class _LCPImageObserver {
    */
   initPerformanceObserver() {
     const observer = new PerformanceObserver((entryList) => {
-      var _a8;
+      var _a9;
       const entries = entryList.getEntries();
       if (entries.length === 0) return;
       const lcpElement = entries[entries.length - 1];
-      const imgSrc = ((_a8 = lcpElement.element) == null ? void 0 : _a8.src) ?? "";
+      const imgSrc = ((_a9 = lcpElement.element) == null ? void 0 : _a9.src) ?? "";
       if (imgSrc.startsWith("data:") || imgSrc.startsWith("blob:")) return;
       const img = this.images.get(imgSrc);
       if (!img) return;
@@ -28580,8 +28580,8 @@ var PreconnectLinkChecker = class _PreconnectLinkChecker {
     return preconnectUrls;
   }
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this.preconnectLinks) == null ? void 0 : _a8.clear();
+    var _a9;
+    (_a9 = this.preconnectLinks) == null ? void 0 : _a9.clear();
     this.alreadySeen.clear();
   }
   static \u0275fac = function PreconnectLinkChecker_Factory(__ngFactoryType__) {
@@ -28876,7 +28876,7 @@ var NgOptimizedImage = class _NgOptimizedImage {
   }
   /** @docs-private */
   ngOnChanges(changes) {
-    var _a8;
+    var _a9;
     if (ngDevMode) {
       assertNoPostInitInputChange(this, changes, ["ngSrcset", "width", "height", "priority", "fill", "loading", "sizes", "loaderParams", "disableOptimizedSrcset"]);
     }
@@ -28893,7 +28893,7 @@ var NgOptimizedImage = class _NgOptimizedImage {
         }
       }
     }
-    if (ngDevMode && ((_a8 = changes["placeholder"]) == null ? void 0 : _a8.currentValue) && true && true) {
+    if (ngDevMode && ((_a9 = changes["placeholder"]) == null ? void 0 : _a9.currentValue) && true && true) {
       assertPlaceholderDimensions(this, this.imgElement);
     }
   }
@@ -28942,12 +28942,12 @@ var NgOptimizedImage = class _NgOptimizedImage {
     }
   }
   getResponsiveSrcset() {
-    var _a8;
+    var _a9;
     const {
       breakpoints
     } = this.config;
     let filteredBreakpoints = breakpoints;
-    if (((_a8 = this.sizes) == null ? void 0 : _a8.trim()) === "100vw") {
+    if (((_a9 = this.sizes) == null ? void 0 : _a9.trim()) === "100vw") {
       filteredBreakpoints = breakpoints.filter((bp) => bp >= VIEWPORT_BREAKPOINT_CUTOFF);
     }
     const finalSrcs = filteredBreakpoints.map((bp) => `${this.callImageLoader({
@@ -29517,8 +29517,8 @@ function createStyleElement(style2, doc) {
   return styleElement;
 }
 function addServerStyles(doc, appId, inline, external) {
-  var _a8;
-  const elements = (_a8 = doc.head) == null ? void 0 : _a8.querySelectorAll(`style[${APP_ID_ATTRIBUTE_NAME}="${appId}"],link[${APP_ID_ATTRIBUTE_NAME}="${appId}"]`);
+  var _a9;
+  const elements = (_a9 = doc.head) == null ? void 0 : _a9.querySelectorAll(`style[${APP_ID_ATTRIBUTE_NAME}="${appId}"],link[${APP_ID_ATTRIBUTE_NAME}="${appId}"]`);
   if (elements) {
     for (const styleElement of elements) {
       styleElement.removeAttribute(APP_ID_ATTRIBUTE_NAME);
@@ -29996,7 +29996,7 @@ var DefaultDomRenderer2 = class {
     node.nodeValue = value;
   }
   listen(target, event, callback, options) {
-    var _a8;
+    var _a9;
     (typeof ngDevMode === "undefined" || ngDevMode) && this.throwOnSyntheticProps && checkNoSyntheticProp(event, "listener");
     if (typeof target === "string") {
       target = getDOM().getGlobalEventTarget(this.doc, target);
@@ -30005,7 +30005,7 @@ var DefaultDomRenderer2 = class {
       }
     }
     let wrappedCallback = this.decoratePreventDefault(callback);
-    if ((_a8 = this.tracingService) == null ? void 0 : _a8.wrapEventListener) {
+    if ((_a9 = this.tracingService) == null ? void 0 : _a9.wrapEventListener) {
       wrappedCallback = this.tracingService.wrapEventListener(target, event, wrappedCallback);
     }
     return this.eventManager.addEventListener(target, event, wrappedCallback, options);
@@ -30039,7 +30039,7 @@ var ShadowDomRenderer = class extends DefaultDomRenderer2 {
   hostEl;
   shadowRoot;
   constructor(eventManager, sharedStylesHost, hostEl, component, doc, ngZone, nonce, platformIsServer, tracingService) {
-    var _a8;
+    var _a9;
     super(eventManager, doc, ngZone, platformIsServer, tracingService);
     this.sharedStylesHost = sharedStylesHost;
     this.hostEl = hostEl;
@@ -30061,7 +30061,7 @@ var ShadowDomRenderer = class extends DefaultDomRenderer2 {
       styleEl.textContent = style2;
       this.shadowRoot.appendChild(styleEl);
     }
-    const styleUrls = (_a8 = component.getExternalStyles) == null ? void 0 : _a8.call(component);
+    const styleUrls = (_a9 = component.getExternalStyles) == null ? void 0 : _a9.call(component);
     if (styleUrls) {
       for (const styleUrl of styleUrls) {
         const linkEl = createLinkElement(styleUrl, doc);
@@ -30097,7 +30097,7 @@ var NoneEncapsulationDomRenderer = class extends DefaultDomRenderer2 {
   styles;
   styleUrls;
   constructor(eventManager, sharedStylesHost, component, removeStylesOnCompDestroy, doc, ngZone, platformIsServer, tracingService, compId) {
-    var _a8;
+    var _a9;
     super(eventManager, doc, ngZone, platformIsServer, tracingService);
     this.sharedStylesHost = sharedStylesHost;
     this.removeStylesOnCompDestroy = removeStylesOnCompDestroy;
@@ -30107,7 +30107,7 @@ var NoneEncapsulationDomRenderer = class extends DefaultDomRenderer2 {
       styles = addBaseHrefToCssSourceMap(baseHref, styles);
     }
     this.styles = compId ? shimStylesContent(compId, styles) : styles;
-    this.styleUrls = (_a8 = component.getExternalStyles) == null ? void 0 : _a8.call(component, compId);
+    this.styleUrls = (_a9 = component.getExternalStyles) == null ? void 0 : _a9.call(component, compId);
   }
   applyStyles() {
     this.sharedStylesHost.addStyles(this.styles, this.styleUrls);
@@ -33973,8 +33973,8 @@ function emailValidator(control) {
 }
 function minLengthValidator(minLength) {
   return (control) => {
-    var _a8;
-    const length = ((_a8 = control.value) == null ? void 0 : _a8.length) ?? lengthOrSize(control.value);
+    var _a9;
+    const length = ((_a9 = control.value) == null ? void 0 : _a9.length) ?? lengthOrSize(control.value);
     if (length === null || length === 0) {
       return null;
     }
@@ -33988,8 +33988,8 @@ function minLengthValidator(minLength) {
 }
 function maxLengthValidator(maxLength) {
   return (control) => {
-    var _a8;
-    const length = ((_a8 = control.value) == null ? void 0 : _a8.length) ?? lengthOrSize(control.value);
+    var _a9;
+    const length = ((_a9 = control.value) == null ? void 0 : _a9.length) ?? lengthOrSize(control.value);
     if (length !== null && length > maxLength) {
       return {
         "maxlength": {
@@ -34431,40 +34431,40 @@ var AbstractControlStatus = class {
     this._cd = cd;
   }
   get isTouched() {
-    var _a8, _b2, _c, _d, _e3;
-    (_c = (_b2 = (_a8 = this._cd) == null ? void 0 : _a8.control) == null ? void 0 : _b2._touched) == null ? void 0 : _c.call(_b2);
-    return !!((_e3 = (_d = this._cd) == null ? void 0 : _d.control) == null ? void 0 : _e3.touched);
+    var _a9, _b3, _c10, _d2, _e3;
+    (_c10 = (_b3 = (_a9 = this._cd) == null ? void 0 : _a9.control) == null ? void 0 : _b3._touched) == null ? void 0 : _c10.call(_b3);
+    return !!((_e3 = (_d2 = this._cd) == null ? void 0 : _d2.control) == null ? void 0 : _e3.touched);
   }
   get isUntouched() {
-    var _a8, _b2;
-    return !!((_b2 = (_a8 = this._cd) == null ? void 0 : _a8.control) == null ? void 0 : _b2.untouched);
+    var _a9, _b3;
+    return !!((_b3 = (_a9 = this._cd) == null ? void 0 : _a9.control) == null ? void 0 : _b3.untouched);
   }
   get isPristine() {
-    var _a8, _b2, _c, _d, _e3;
-    (_c = (_b2 = (_a8 = this._cd) == null ? void 0 : _a8.control) == null ? void 0 : _b2._pristine) == null ? void 0 : _c.call(_b2);
-    return !!((_e3 = (_d = this._cd) == null ? void 0 : _d.control) == null ? void 0 : _e3.pristine);
+    var _a9, _b3, _c10, _d2, _e3;
+    (_c10 = (_b3 = (_a9 = this._cd) == null ? void 0 : _a9.control) == null ? void 0 : _b3._pristine) == null ? void 0 : _c10.call(_b3);
+    return !!((_e3 = (_d2 = this._cd) == null ? void 0 : _d2.control) == null ? void 0 : _e3.pristine);
   }
   get isDirty() {
-    var _a8, _b2;
-    return !!((_b2 = (_a8 = this._cd) == null ? void 0 : _a8.control) == null ? void 0 : _b2.dirty);
+    var _a9, _b3;
+    return !!((_b3 = (_a9 = this._cd) == null ? void 0 : _a9.control) == null ? void 0 : _b3.dirty);
   }
   get isValid() {
-    var _a8, _b2, _c, _d, _e3;
-    (_c = (_b2 = (_a8 = this._cd) == null ? void 0 : _a8.control) == null ? void 0 : _b2._status) == null ? void 0 : _c.call(_b2);
-    return !!((_e3 = (_d = this._cd) == null ? void 0 : _d.control) == null ? void 0 : _e3.valid);
+    var _a9, _b3, _c10, _d2, _e3;
+    (_c10 = (_b3 = (_a9 = this._cd) == null ? void 0 : _a9.control) == null ? void 0 : _b3._status) == null ? void 0 : _c10.call(_b3);
+    return !!((_e3 = (_d2 = this._cd) == null ? void 0 : _d2.control) == null ? void 0 : _e3.valid);
   }
   get isInvalid() {
-    var _a8, _b2;
-    return !!((_b2 = (_a8 = this._cd) == null ? void 0 : _a8.control) == null ? void 0 : _b2.invalid);
+    var _a9, _b3;
+    return !!((_b3 = (_a9 = this._cd) == null ? void 0 : _a9.control) == null ? void 0 : _b3.invalid);
   }
   get isPending() {
-    var _a8, _b2;
-    return !!((_b2 = (_a8 = this._cd) == null ? void 0 : _a8.control) == null ? void 0 : _b2.pending);
+    var _a9, _b3;
+    return !!((_b3 = (_a9 = this._cd) == null ? void 0 : _a9.control) == null ? void 0 : _b3.pending);
   }
   get isSubmitted() {
-    var _a8, _b2, _c;
-    (_b2 = (_a8 = this._cd) == null ? void 0 : _a8._submitted) == null ? void 0 : _b2.call(_a8);
-    return !!((_c = this._cd) == null ? void 0 : _c.submitted);
+    var _a9, _b3, _c10;
+    (_b3 = (_a9 = this._cd) == null ? void 0 : _a9._submitted) == null ? void 0 : _b3.call(_a9);
+    return !!((_c10 = this._cd) == null ? void 0 : _c10.submitted);
   }
 };
 var ngControlStatusHost = {
@@ -35494,10 +35494,10 @@ var AbstractControl = class {
     }
   }
   _cancelExistingSubscription() {
-    var _a8, _b2;
+    var _a9, _b3;
     if (this._asyncValidationSubscription) {
       this._asyncValidationSubscription.unsubscribe();
-      const shouldHaveEmitted = (((_a8 = this._hasOwnPendingAsyncValidator) == null ? void 0 : _a8.emitEvent) || ((_b2 = this._hasOwnPendingAsyncValidator) == null ? void 0 : _b2.shouldHaveEmitted)) ?? false;
+      const shouldHaveEmitted = (((_a9 = this._hasOwnPendingAsyncValidator) == null ? void 0 : _a9.emitEvent) || ((_b3 = this._hasOwnPendingAsyncValidator) == null ? void 0 : _b3.shouldHaveEmitted)) ?? false;
       this._hasOwnPendingAsyncValidator = null;
       return shouldHaveEmitted;
     }
@@ -36057,7 +36057,7 @@ function controlPath(name, parent) {
   return [...parent.path, name];
 }
 function setUpControl(control, dir, callSetDisabledState = setDisabledStateDefault) {
-  var _a8, _b2;
+  var _a9, _b3;
   if (typeof ngDevMode === "undefined" || ngDevMode) {
     if (!control) _throwError(dir, "Cannot find control with");
     if (!dir.valueAccessor) _throwMissingValueAccessorError(dir);
@@ -36065,7 +36065,7 @@ function setUpControl(control, dir, callSetDisabledState = setDisabledStateDefau
   setUpValidators(control, dir);
   dir.valueAccessor.writeValue(control.value);
   if (control.disabled || callSetDisabledState === "always") {
-    (_b2 = (_a8 = dir.valueAccessor).setDisabledState) == null ? void 0 : _b2.call(_a8, control.disabled);
+    (_b3 = (_a9 = dir.valueAccessor).setDisabledState) == null ? void 0 : _b3.call(_a9, control.disabled);
   }
   setUpViewChangePipeline(control, dir);
   setUpModelChangePipeline(control, dir);
@@ -36456,12 +36456,12 @@ var NgForm = class _NgForm extends ControlContainer {
    * @param $event The "submit" event object
    */
   onSubmit($event) {
-    var _a8;
+    var _a9;
     this.submittedReactive.set(true);
     syncPendingControls(this.form, this._directives);
     this.ngSubmit.emit($event);
     this.form._events.next(new FormSubmittedEvent(this.control));
-    return ((_a8 = $event == null ? void 0 : $event.target) == null ? void 0 : _a8.method) === "dialog";
+    return ((_a9 = $event == null ? void 0 : $event.target) == null ? void 0 : _a9.method) === "dialog";
   }
   /**
    * @description
@@ -37023,24 +37023,24 @@ var NgModel = class _NgModel extends NgControl {
   }
   _updateValue(value) {
     resolvedPromise.then(() => {
-      var _a8;
+      var _a9;
       this.control.setValue(value, {
         emitViewToModelChange: false
       });
-      (_a8 = this._changeDetectorRef) == null ? void 0 : _a8.markForCheck();
+      (_a9 = this._changeDetectorRef) == null ? void 0 : _a9.markForCheck();
     });
   }
   _updateDisabled(changes) {
     const disabledValue = changes["isDisabled"].currentValue;
     const isDisabled = disabledValue !== 0 && booleanAttribute(disabledValue);
     resolvedPromise.then(() => {
-      var _a8;
+      var _a9;
       if (isDisabled && !this.control.disabled) {
         this.control.disable();
       } else if (!isDisabled && this.control.disabled) {
         this.control.enable();
       }
-      (_a8 = this._changeDetectorRef) == null ? void 0 : _a8.markForCheck();
+      (_a9 = this._changeDetectorRef) == null ? void 0 : _a9.markForCheck();
     });
   }
   _getPath(controlName) {
@@ -37931,12 +37931,12 @@ var FormGroupDirective = class _FormGroupDirective extends ControlContainer {
    * @param $event The "submit" event object
    */
   onSubmit($event) {
-    var _a8;
+    var _a9;
     this._submittedReactive.set(true);
     syncPendingControls(this.form, this.directives);
     this.ngSubmit.emit($event);
     this.form._events.next(new FormSubmittedEvent(this.control));
-    return ((_a8 = $event == null ? void 0 : $event.target) == null ? void 0 : _a8.method) === "dialog";
+    return ((_a9 = $event == null ? void 0 : $event.target) == null ? void 0 : _a9.method) === "dialog";
   }
   /**
    * @description
@@ -38208,8 +38208,8 @@ var FormArrayName = class _FormArrayName extends ControlContainer {
    * @docs-private
    */
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this.formDirective) == null ? void 0 : _a8.removeFormArray(this);
+    var _a9;
+    (_a9 = this.formDirective) == null ? void 0 : _a9.removeFormArray(this);
   }
   /**
    * @description
@@ -42390,7 +42390,7 @@ var AnimationTransitionFactory = class {
     return styler ? styler.buildStyles(params, errors) : /* @__PURE__ */ new Map();
   }
   build(driver, element, currentState, nextState, enterClassName, leaveClassName, currentOptions, nextOptions, subInstructions, skipAstBuild) {
-    var _a8;
+    var _a9;
     const errors = [];
     const transitionAnimationParams = this.ast.options && this.ast.options.params || EMPTY_OBJECT;
     const currentAnimationParams = currentOptions && currentOptions.params || EMPTY_OBJECT;
@@ -42403,7 +42403,7 @@ var AnimationTransitionFactory = class {
     const isRemoval = nextState === "void";
     const animationOptions = {
       params: applyParamDefaults(nextAnimationParams, transitionAnimationParams),
-      delay: (_a8 = this.ast.options) == null ? void 0 : _a8.delay
+      delay: (_a9 = this.ast.options) == null ? void 0 : _a9.delay
     };
     const timelines = skipAstBuild ? [] : buildAnimationTimelines(driver, element, this.ast.animation, enterClassName, leaveClassName, currentStateStyles, nextStateStyles, animationOptions, subInstructions, errors);
     let totalTime = 0;
@@ -42468,8 +42468,8 @@ function checkNonAnimatableInTimelines(timelines, triggerName, driver) {
 function oneOrMoreTransitionsMatch(matchFns, currentState, nextState, element, params) {
   return matchFns.some((fn3) => fn3(currentState, nextState, element, params));
 }
-function applyParamDefaults(userParams, defaults2) {
-  const result = __spreadValues({}, defaults2);
+function applyParamDefaults(userParams, defaults3) {
+  const result = __spreadValues({}, defaults3);
   Object.entries(userParams).forEach(([key, value]) => {
     if (value != null) {
       result[key] = value;
@@ -42728,9 +42728,9 @@ var StateValue = class {
     const value = isObj ? input2["value"] : input2;
     this.value = normalizeTriggerValue(value);
     if (isObj) {
-      const _a8 = input2, {
+      const _a9 = input2, {
         value: value2
-      } = _a8, options = __objRest(_a8, [
+      } = _a9, options = __objRest(_a9, [
         "value"
       ]);
       this.options = options;
@@ -43301,7 +43301,7 @@ var TransitionAnimationEngine = class {
     });
   }
   processLeaveNode(element) {
-    var _a8;
+    var _a9;
     const details = element[REMOVAL_FLAG];
     if (details && details.setForRemoval) {
       element[REMOVAL_FLAG] = NULL_REMOVAL_STATE;
@@ -43314,7 +43314,7 @@ var TransitionAnimationEngine = class {
       }
       this._onRemovalComplete(element, details.setForRemoval);
     }
-    if ((_a8 = element.classList) == null ? void 0 : _a8.contains(DISABLED_CLASSNAME)) {
+    if ((_a9 = element.classList) == null ? void 0 : _a9.contains(DISABLED_CLASSNAME)) {
       this.markElementAsDisabled(element, false);
     }
     this.driver.query(element, DISABLED_SELECTOR, true).forEach((node) => {
@@ -43944,12 +43944,12 @@ function buildRootMap(roots, nodes) {
   return rootMap;
 }
 function addClass(element, className) {
-  var _a8;
-  (_a8 = element.classList) == null ? void 0 : _a8.add(className);
+  var _a9;
+  (_a9 = element.classList) == null ? void 0 : _a9.add(className);
 }
 function removeClass(element, className) {
-  var _a8;
-  (_a8 = element.classList) == null ? void 0 : _a8.remove(className);
+  var _a9;
+  (_a9 = element.classList) == null ? void 0 : _a9.remove(className);
 }
 function removeNodesAfterAnimationDone(engine, element, players) {
   optimizeGroupPlayer(players).onDone(() => engine.processLeaveNode(element));
@@ -44392,18 +44392,18 @@ var BaseAnimationRenderer = class {
     return this.delegate.data;
   }
   destroyNode(node) {
-    var _a8, _b2;
-    (_b2 = (_a8 = this.delegate).destroyNode) == null ? void 0 : _b2.call(_a8, node);
+    var _a9, _b3;
+    (_b3 = (_a9 = this.delegate).destroyNode) == null ? void 0 : _b3.call(_a9, node);
   }
   destroy() {
-    var _a8;
+    var _a9;
     this.engine.destroy(this.namespaceId, this.delegate);
     this.engine.afterFlushAnimationsDone(() => {
       queueMicrotask(() => {
         this.delegate.destroy();
       });
     });
-    (_a8 = this._onDestroy) == null ? void 0 : _a8.call(this);
+    (_a9 = this._onDestroy) == null ? void 0 : _a9.call(this);
   }
   createElement(name, namespace) {
     return this.delegate.createElement(name, namespace);
@@ -44542,10 +44542,10 @@ var AnimationRendererFactory = class {
     };
   }
   createRenderer(hostElement, type2) {
-    var _a8;
+    var _a9;
     const EMPTY_NAMESPACE_ID = "";
     const delegate = this.delegate.createRenderer(hostElement, type2);
-    if (!hostElement || !((_a8 = type2 == null ? void 0 : type2.data) == null ? void 0 : _a8["animation"])) {
+    if (!hostElement || !((_a9 = type2 == null ? void 0 : type2.data) == null ? void 0 : _a9["animation"])) {
       const cache = this._rendererCache;
       let renderer = cache.get(delegate);
       if (!renderer) {
@@ -44621,9 +44621,9 @@ var AnimationRendererFactory = class {
    * @param componentId ID of the component that is being replaced.
    */
   componentReplaced(componentId) {
-    var _a8, _b2;
+    var _a9, _b3;
     this.engine.flush();
-    (_b2 = (_a8 = this.delegate).componentReplaced) == null ? void 0 : _b2.call(_a8, componentId);
+    (_b3 = (_a9 = this.delegate).componentReplaced) == null ? void 0 : _b3.call(_a9, componentId);
   }
 };
 
@@ -45913,16 +45913,16 @@ function isPublicRouterEvent(e2) {
   return !(e2 instanceof BeforeActivateRoutes) && !(e2 instanceof RedirectRequest);
 }
 function stringifyEvent(routerEvent) {
-  var _a8, _b2, _c, _d;
+  var _a9, _b3, _c10, _d2;
   switch (routerEvent.type) {
     case EventType.ActivationEnd:
-      return `ActivationEnd(path: '${((_a8 = routerEvent.snapshot.routeConfig) == null ? void 0 : _a8.path) || ""}')`;
+      return `ActivationEnd(path: '${((_a9 = routerEvent.snapshot.routeConfig) == null ? void 0 : _a9.path) || ""}')`;
     case EventType.ActivationStart:
-      return `ActivationStart(path: '${((_b2 = routerEvent.snapshot.routeConfig) == null ? void 0 : _b2.path) || ""}')`;
+      return `ActivationStart(path: '${((_b3 = routerEvent.snapshot.routeConfig) == null ? void 0 : _b3.path) || ""}')`;
     case EventType.ChildActivationEnd:
-      return `ChildActivationEnd(path: '${((_c = routerEvent.snapshot.routeConfig) == null ? void 0 : _c.path) || ""}')`;
+      return `ChildActivationEnd(path: '${((_c10 = routerEvent.snapshot.routeConfig) == null ? void 0 : _c10.path) || ""}')`;
     case EventType.ChildActivationStart:
-      return `ChildActivationStart(path: '${((_d = routerEvent.snapshot.routeConfig) == null ? void 0 : _d.path) || ""}')`;
+      return `ChildActivationStart(path: '${((_d2 = routerEvent.snapshot.routeConfig) == null ? void 0 : _d2.path) || ""}')`;
     case EventType.GuardsCheckEnd:
       return `GuardsCheckEnd(id: ${routerEvent.id}, url: '${routerEvent.url}', urlAfterRedirects: '${routerEvent.urlAfterRedirects}', state: ${routerEvent.state}, shouldActivate: ${routerEvent.shouldActivate})`;
     case EventType.GuardsCheckStart:
@@ -46060,9 +46060,9 @@ function sortByMatchingOutlets(routes2, outletName) {
   return sortedConfig;
 }
 function getClosestRouteInjector(snapshot2) {
-  var _a8;
+  var _a9;
   if (!snapshot2) return null;
-  if ((_a8 = snapshot2.routeConfig) == null ? void 0 : _a8._injector) {
+  if ((_a9 = snapshot2.routeConfig) == null ? void 0 : _a9._injector) {
     return snapshot2.routeConfig._injector;
   }
   for (let s = snapshot2.parent; s; s = s.parent) {
@@ -46079,8 +46079,8 @@ var OutletContext = class {
   children;
   attachRef = null;
   get injector() {
-    var _a8;
-    return getClosestRouteInjector((_a8 = this.route) == null ? void 0 : _a8.snapshot) ?? this.rootInjector;
+    var _a9;
+    return getClosestRouteInjector((_a9 = this.route) == null ? void 0 : _a9.snapshot) ?? this.rootInjector;
   }
   constructor(rootInjector) {
     this.rootInjector = rootInjector;
@@ -46301,7 +46301,7 @@ var ActivatedRoute = class {
   data;
   /** @internal */
   constructor(urlSubject, paramsSubject, queryParamsSubject, fragmentSubject, dataSubject, outlet, component, futureSnapshot) {
-    var _a8;
+    var _a9;
     this.urlSubject = urlSubject;
     this.paramsSubject = paramsSubject;
     this.queryParamsSubject = queryParamsSubject;
@@ -46310,7 +46310,7 @@ var ActivatedRoute = class {
     this.outlet = outlet;
     this.component = component;
     this._futureSnapshot = futureSnapshot;
-    this.title = ((_a8 = this.dataSubject) == null ? void 0 : _a8.pipe(map((d2) => d2[RouteTitleKey]))) ?? of(void 0);
+    this.title = ((_a9 = this.dataSubject) == null ? void 0 : _a9.pipe(map((d2) => d2[RouteTitleKey]))) ?? of(void 0);
     this.url = urlSubject;
     this.params = paramsSubject;
     this.queryParams = queryParamsSubject;
@@ -46363,14 +46363,14 @@ var ActivatedRoute = class {
   }
 };
 function getInherited(route, parent, paramsInheritanceStrategy = "emptyOnly") {
-  var _a8;
+  var _a9;
   let inherited;
   const {
     routeConfig
   } = route;
   if (parent !== null && (paramsInheritanceStrategy === "always" || // inherit parent data if route is empty path
   (routeConfig == null ? void 0 : routeConfig.path) === "" || // inherit parent data if parent was componentless
-  !parent.component && !((_a8 = parent.routeConfig) == null ? void 0 : _a8.loadComponent))) {
+  !parent.component && !((_a9 = parent.routeConfig) == null ? void 0 : _a9.loadComponent))) {
     inherited = {
       params: __spreadValues(__spreadValues({}, parent.params), route.params),
       data: __spreadValues(__spreadValues({}, parent.data), route.data),
@@ -46410,8 +46410,8 @@ var ActivatedRouteSnapshot = class {
   _queryParamMap;
   /** The resolved route title */
   get title() {
-    var _a8;
-    return (_a8 = this.data) == null ? void 0 : _a8[RouteTitleKey];
+    var _a9;
+    return (_a9 = this.data) == null ? void 0 : _a9[RouteTitleKey];
   }
   /** @internal */
   constructor(url, params, queryParams, fragment, data, outlet, component, routeConfig, resolve) {
@@ -46570,15 +46570,15 @@ var RouterOutlet = class _RouterOutlet {
   }
   /** @docs-private */
   ngOnDestroy() {
-    var _a8;
+    var _a9;
     if (this.isTrackedInParentContexts(this.name)) {
       this.parentContexts.onChildOutletDestroyed(this.name);
     }
-    (_a8 = this.inputBinder) == null ? void 0 : _a8.unsubscribeFromRouteData(this);
+    (_a9 = this.inputBinder) == null ? void 0 : _a9.unsubscribeFromRouteData(this);
   }
   isTrackedInParentContexts(outletName) {
-    var _a8;
-    return ((_a8 = this.parentContexts.getContext(outletName)) == null ? void 0 : _a8.outlet) === this;
+    var _a9;
+    return ((_a9 = this.parentContexts.getContext(outletName)) == null ? void 0 : _a9.outlet) === this;
   }
   /** @docs-private */
   ngOnInit() {
@@ -46635,11 +46635,11 @@ var RouterOutlet = class _RouterOutlet {
    * Called when the `RouteReuseStrategy` instructs to re-attach a previously detached subtree
    */
   attach(ref, activatedRoute) {
-    var _a8;
+    var _a9;
     this.activated = ref;
     this._activatedRoute = activatedRoute;
     this.location.insert(ref.hostView);
-    (_a8 = this.inputBinder) == null ? void 0 : _a8.bindActivatedRouteToOutletComponent(this);
+    (_a9 = this.inputBinder) == null ? void 0 : _a9.bindActivatedRouteToOutletComponent(this);
     this.attachEvents.emit(ref.instance);
   }
   deactivate() {
@@ -46652,7 +46652,7 @@ var RouterOutlet = class _RouterOutlet {
     }
   }
   activateWith(activatedRoute, environmentInjector) {
-    var _a8;
+    var _a9;
     if (this.isActivated) {
       throw new RuntimeError(4013, (typeof ngDevMode === "undefined" || ngDevMode) && "Cannot activate an already activated outlet");
     }
@@ -46668,7 +46668,7 @@ var RouterOutlet = class _RouterOutlet {
       environmentInjector
     });
     this.changeDetector.markForCheck();
-    (_a8 = this.inputBinder) == null ? void 0 : _a8.bindActivatedRouteToOutletComponent(this);
+    (_a9 = this.inputBinder) == null ? void 0 : _a9.bindActivatedRouteToOutletComponent(this);
     this.activateEvents.emit(this.activated.instance);
   }
   static \u0275fac = function RouterOutlet_Factory(__ngFactoryType__) {
@@ -46752,8 +46752,8 @@ var RoutedComponentInputBinder = class _RoutedComponentInputBinder {
     this.subscribeToRouteData(outlet);
   }
   unsubscribeFromRouteData(outlet) {
-    var _a8;
-    (_a8 = this.outletDataSubscriptions.get(outlet)) == null ? void 0 : _a8.unsubscribe();
+    var _a9;
+    (_a9 = this.outletDataSubscriptions.get(outlet)) == null ? void 0 : _a9.unsubscribe();
     this.outletDataSubscriptions.delete(outlet);
   }
   subscribeToRouteData(outlet) {
@@ -48289,13 +48289,13 @@ var NavigationTransitions = class _NavigationTransitions {
     });
   }
   complete() {
-    var _a8;
-    (_a8 = this.transitions) == null ? void 0 : _a8.complete();
+    var _a9;
+    (_a9 = this.transitions) == null ? void 0 : _a9.complete();
   }
   handleNavigationRequest(request) {
-    var _a8;
+    var _a9;
     const id = ++this.navigationId;
-    (_a8 = this.transitions) == null ? void 0 : _a8.next(__spreadProps(__spreadValues({}, request), {
+    (_a9 = this.transitions) == null ? void 0 : _a9.next(__spreadProps(__spreadValues({}, request), {
       extractedUrl: this.urlHandlingStrategy.extract(request.rawUrl),
       targetSnapshot: null,
       targetRouterState: null,
@@ -48447,9 +48447,9 @@ var NavigationTransitions = class _NavigationTransitions {
           // --- LOAD COMPONENTS ---
           switchTap((t) => {
             const loadComponents = (route) => {
-              var _a8;
+              var _a9;
               const loaders = [];
-              if (((_a8 = route.routeConfig) == null ? void 0 : _a8.loadComponent) && !route.routeConfig._loadedComponent) {
+              if (((_a9 = route.routeConfig) == null ? void 0 : _a9.loadComponent) && !route.routeConfig._loadedComponent) {
                 loaders.push(this.configLoader.loadComponent(route.routeConfig).pipe(tap((loadedComponent) => {
                   route.component = loadedComponent;
                 }), map(() => void 0)));
@@ -48463,12 +48463,12 @@ var NavigationTransitions = class _NavigationTransitions {
           }),
           switchTap(() => this.afterPreactivation()),
           switchMap(() => {
-            var _a8;
+            var _a9;
             const {
               currentSnapshot,
               targetSnapshot
             } = overallTransitionState;
-            const viewTransitionStarted = (_a8 = this.createViewTransition) == null ? void 0 : _a8.call(this, this.environmentInjector, currentSnapshot.root, targetSnapshot.root);
+            const viewTransitionStarted = (_a9 = this.createViewTransition) == null ? void 0 : _a9.call(this, this.environmentInjector, currentSnapshot.root, targetSnapshot.root);
             return viewTransitionStarted ? from(viewTransitionStarted).pipe(map(() => overallTransitionState)) : of(overallTransitionState);
           }),
           map((t) => {
@@ -48501,11 +48501,11 @@ var NavigationTransitions = class _NavigationTransitions {
           )),
           tap({
             next: (t) => {
-              var _a8;
+              var _a9;
               completedOrAborted = true;
               this.lastSuccessfulNavigation = this.currentNavigation;
               this.events.next(new NavigationEnd(t.id, this.urlSerializer.serialize(t.extractedUrl), this.urlSerializer.serialize(t.urlAfterRedirects)));
-              (_a8 = this.titleStrategy) == null ? void 0 : _a8.updateTitle(t.targetRouterState.snapshot);
+              (_a9 = this.titleStrategy) == null ? void 0 : _a9.updateTitle(t.targetRouterState.snapshot);
               t.resolve(true);
             },
             complete: () => {
@@ -48523,12 +48523,12 @@ var NavigationTransitions = class _NavigationTransitions {
             throw err;
           }))),
           finalize(() => {
-            var _a8;
+            var _a9;
             if (!completedOrAborted) {
               const cancelationReason = typeof ngDevMode === "undefined" || ngDevMode ? `Navigation ID ${overallTransitionState.id} is not equal to the current navigation id ${this.navigationId}` : "";
               this.cancelNavigationTransition(overallTransitionState, cancelationReason, NavigationCancellationCode.SupersededByNewNavigation);
             }
-            if (((_a8 = this.currentTransition) == null ? void 0 : _a8.id) === overallTransitionState.id) {
+            if (((_a9 = this.currentTransition) == null ? void 0 : _a9.id) === overallTransitionState.id) {
               this.currentNavigation = null;
               this.currentTransition = null;
             }
@@ -48550,8 +48550,8 @@ var NavigationTransitions = class _NavigationTransitions {
               const navigationError = new NavigationError(overallTransitionState.id, this.urlSerializer.serialize(overallTransitionState.extractedUrl), e2, overallTransitionState.targetSnapshot ?? void 0);
               try {
                 const navigationErrorHandlerResult = runInInjectionContext(this.environmentInjector, () => {
-                  var _a8;
-                  return (_a8 = this.navigationErrorHandler) == null ? void 0 : _a8.call(this, navigationError);
+                  var _a9;
+                  return (_a9 = this.navigationErrorHandler) == null ? void 0 : _a9.call(this, navigationError);
                 });
                 if (navigationErrorHandlerResult instanceof RedirectCommand) {
                   const {
@@ -48588,8 +48588,8 @@ var NavigationTransitions = class _NavigationTransitions {
    * currently set to.
    */
   isUpdatingInternalState() {
-    var _a8, _b2;
-    return ((_a8 = this.currentTransition) == null ? void 0 : _a8.extractedUrl.toString()) !== ((_b2 = this.currentTransition) == null ? void 0 : _b2.currentUrlTree.toString());
+    var _a9, _b3;
+    return ((_a9 = this.currentTransition) == null ? void 0 : _a9.extractedUrl.toString()) !== ((_b3 = this.currentTransition) == null ? void 0 : _b3.currentUrlTree.toString());
   }
   /**
    * @returns Whether we're updating the browser URL to something new (navigation is going
@@ -48597,10 +48597,10 @@ var NavigationTransitions = class _NavigationTransitions {
    * bar if navigation succeeds).
    */
   isUpdatedBrowserUrl() {
-    var _a8, _b2, _c;
+    var _a9, _b3, _c10;
     const currentBrowserUrl = this.urlHandlingStrategy.extract(this.urlSerializer.parse(this.location.path(true)));
-    const targetBrowserUrl = ((_a8 = this.currentNavigation) == null ? void 0 : _a8.targetBrowserUrl) ?? ((_b2 = this.currentNavigation) == null ? void 0 : _b2.extractedUrl);
-    return currentBrowserUrl.toString() !== (targetBrowserUrl == null ? void 0 : targetBrowserUrl.toString()) && !((_c = this.currentNavigation) == null ? void 0 : _c.extras.skipLocationChange);
+    const targetBrowserUrl = ((_a9 = this.currentNavigation) == null ? void 0 : _a9.targetBrowserUrl) ?? ((_b3 = this.currentNavigation) == null ? void 0 : _b3.extractedUrl);
+    return currentBrowserUrl.toString() !== (targetBrowserUrl == null ? void 0 : targetBrowserUrl.toString()) && !((_c10 = this.currentNavigation) == null ? void 0 : _c10.extras.skipLocationChange);
   }
   static \u0275fac = function NavigationTransitions_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _NavigationTransitions)();
@@ -48827,11 +48827,11 @@ var HistoryStateManager = class _HistoryStateManager extends StateManager {
    * page id in the browser history is 1 more than the previous entry.
    */
   get browserPageId() {
-    var _a8;
+    var _a9;
     if (this.canceledNavigationResolution !== "computed") {
       return this.currentPageId;
     }
-    return ((_a8 = this.restoredState()) == null ? void 0 : _a8.\u0275routerPageId) ?? this.currentPageId;
+    return ((_a9 = this.restoredState()) == null ? void 0 : _a9.\u0275routerPageId) ?? this.currentPageId;
   }
   registerNonRouterCurrentEntryChangeListener(listener) {
     return this.location.subscribe((event) => {
@@ -49524,7 +49524,7 @@ var RouterLink = class _RouterLink {
     optional: true
   });
   constructor(router, route, tabIndexAttribute, renderer, el, locationStrategy) {
-    var _a8, _b2, _c, _d;
+    var _a9, _b3, _c10, _d2;
     this.router = router;
     this.route = route;
     this.tabIndexAttribute = tabIndexAttribute;
@@ -49534,11 +49534,11 @@ var RouterLink = class _RouterLink {
     this.reactiveHref.set(inject(new HostAttributeToken("href"), {
       optional: true
     }));
-    const tagName = (_a8 = el.nativeElement.tagName) == null ? void 0 : _a8.toLowerCase();
+    const tagName = (_a9 = el.nativeElement.tagName) == null ? void 0 : _a9.toLowerCase();
     this.isAnchorElement = tagName === "a" || tagName === "area" || !!// Avoid breaking in an SSR context where customElements might not be defined.
     (typeof customElements === "object" && // observedAttributes is an optional static property/getter on a custom element.
     // The spec states that this must be an array of strings.
-    ((_d = (_c = (_b2 = customElements.get(tagName)) == null ? void 0 : _b2.observedAttributes) == null ? void 0 : _c.includes) == null ? void 0 : _d.call(_c, "href")));
+    ((_d2 = (_c10 = (_b3 = customElements.get(tagName)) == null ? void 0 : _b3.observedAttributes) == null ? void 0 : _c10.includes) == null ? void 0 : _d2.call(_c10, "href")));
     if (!this.isAnchorElement) {
       this.subscribeToNavigationEventsIfNecessary();
     } else {
@@ -49546,14 +49546,14 @@ var RouterLink = class _RouterLink {
     }
   }
   subscribeToNavigationEventsIfNecessary() {
-    var _a8;
+    var _a9;
     if (this.subscription !== void 0 || !this.isAnchorElement) {
       return;
     }
     let createSubcription = this.preserveFragment;
     const dependsOnRouterState = (handling) => handling === "merge" || handling === "preserve";
     createSubcription || (createSubcription = dependsOnRouterState(this.queryParamsHandling));
-    createSubcription || (createSubcription = !this.queryParamsHandling && !dependsOnRouterState((_a8 = this.options) == null ? void 0 : _a8.defaultQueryParamsHandling));
+    createSubcription || (createSubcription = !this.queryParamsHandling && !dependsOnRouterState((_a9 = this.options) == null ? void 0 : _a9.defaultQueryParamsHandling));
     if (!createSubcription) {
       return;
     }
@@ -49631,7 +49631,7 @@ var RouterLink = class _RouterLink {
   }
   /** @docs-private */
   onClick(button, ctrlKey, shiftKey, altKey, metaKey) {
-    var _a8;
+    var _a9;
     const urlTree = this.urlTree;
     if (urlTree === null) {
       return true;
@@ -49650,20 +49650,20 @@ var RouterLink = class _RouterLink {
       state: this.state,
       info: this.info
     };
-    (_a8 = this.router.navigateByUrl(urlTree, extras)) == null ? void 0 : _a8.catch((e2) => {
+    (_a9 = this.router.navigateByUrl(urlTree, extras)) == null ? void 0 : _a9.catch((e2) => {
       this.applicationErrorHandler(e2);
     });
     return !this.isAnchorElement;
   }
   /** @docs-private */
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this.subscription) == null ? void 0 : _a8.unsubscribe();
+    var _a9;
+    (_a9 = this.subscription) == null ? void 0 : _a9.unsubscribe();
   }
   updateHref() {
-    var _a8;
+    var _a9;
     const urlTree = this.urlTree;
-    this.reactiveHref.set(urlTree !== null && this.locationStrategy ? ((_a8 = this.locationStrategy) == null ? void 0 : _a8.prepareExternalUrl(this.router.serializeUrl(urlTree))) ?? "" : null);
+    this.reactiveHref.set(urlTree !== null && this.locationStrategy ? ((_a9 = this.locationStrategy) == null ? void 0 : _a9.prepareExternalUrl(this.router.serializeUrl(urlTree))) ?? "" : null);
   }
   applyAttributeValue(attrName, attrValue) {
     const renderer = this.renderer;
@@ -49869,8 +49869,8 @@ var RouterLinkActive = class _RouterLinkActive {
     });
   }
   subscribeToEachLinkOnChanges() {
-    var _a8;
-    (_a8 = this.linkInputChangesSubscription) == null ? void 0 : _a8.unsubscribe();
+    var _a9;
+    (_a9 = this.linkInputChangesSubscription) == null ? void 0 : _a9.unsubscribe();
     const allLinkChanges = [...this.links.toArray(), this.link].filter((link) => !!link).map((link) => link.onChanges);
     this.linkInputChangesSubscription = from(allLinkChanges).pipe(mergeAll()).subscribe((link) => {
       if (this._isActive !== this.isLinkActive(this.router)(link)) {
@@ -49888,9 +49888,9 @@ var RouterLinkActive = class _RouterLinkActive {
   }
   /** @docs-private */
   ngOnDestroy() {
-    var _a8;
+    var _a9;
     this.routerEventsSubscription.unsubscribe();
-    (_a8 = this.linkInputChangesSubscription) == null ? void 0 : _a8.unsubscribe();
+    (_a9 = this.linkInputChangesSubscription) == null ? void 0 : _a9.unsubscribe();
   }
   update() {
     if (!this.links || !this.router.navigated) return;
@@ -50214,9 +50214,9 @@ var RouterScroller = class _RouterScroller {
   }
   /** @docs-private */
   ngOnDestroy() {
-    var _a8, _b2;
-    (_a8 = this.routerEventsSubscription) == null ? void 0 : _a8.unsubscribe();
-    (_b2 = this.scrollEventsSubscription) == null ? void 0 : _b2.unsubscribe();
+    var _a9, _b3;
+    (_a9 = this.routerEventsSubscription) == null ? void 0 : _a9.unsubscribe();
+    (_b3 = this.scrollEventsSubscription) == null ? void 0 : _b3.unsubscribe();
   }
   static \u0275fac = function RouterScroller_Factory(__ngFactoryType__) {
     \u0275\u0275invalidFactory();
@@ -50257,7 +50257,7 @@ var ROUTER_IS_PROVIDED = new InjectionToken("", {
 function getBootstrapListener() {
   const injector = inject(Injector);
   return (bootstrappedComponentRef) => {
-    var _a8, _b2;
+    var _a9, _b3;
     const ref = injector.get(ApplicationRef);
     if (bootstrappedComponentRef !== ref.components[0]) {
       return;
@@ -50267,12 +50267,12 @@ function getBootstrapListener() {
     if (injector.get(INITIAL_NAVIGATION) === 1) {
       router.initialNavigation();
     }
-    (_a8 = injector.get(ROUTER_PRELOADER, null, {
+    (_a9 = injector.get(ROUTER_PRELOADER, null, {
       optional: true
-    })) == null ? void 0 : _a8.setUpPreloading();
-    (_b2 = injector.get(ROUTER_SCROLLER, null, {
+    })) == null ? void 0 : _a9.setUpPreloading();
+    (_b3 = injector.get(ROUTER_SCROLLER, null, {
       optional: true
-    })) == null ? void 0 : _b2.init();
+    })) == null ? void 0 : _b3.init();
     router.resetRootComponentType(ref.componentTypes[0]);
     if (!bootstrapDone.closed) {
       bootstrapDone.next();
@@ -50335,11 +50335,11 @@ function withDebugTracing() {
       useFactory: () => {
         const router = inject(Router);
         return () => router.events.subscribe((e2) => {
-          var _a8, _b2;
-          (_a8 = console.group) == null ? void 0 : _a8.call(console, `Router Event: ${e2.constructor.name}`);
+          var _a9, _b3;
+          (_a9 = console.group) == null ? void 0 : _a9.call(console, `Router Event: ${e2.constructor.name}`);
           console.log(stringifyEvent(e2));
           console.log(e2);
-          (_b2 = console.groupEnd) == null ? void 0 : _b2.call(console);
+          (_b3 = console.groupEnd) == null ? void 0 : _b3.call(console);
         });
       }
     }];
@@ -50903,8 +50903,8 @@ function ngswAppInitializer() {
   ngZone.runOutsideAngular(() => {
     const sw = navigator.serviceWorker;
     const onControllerChange = () => {
-      var _a8;
-      return (_a8 = sw.controller) == null ? void 0 : _a8.postMessage({
+      var _a9;
+      return (_a9 = sw.controller) == null ? void 0 : _a9.postMessage({
         action: "INITIALIZE"
       });
     };
@@ -51242,8 +51242,8 @@ var InputModalityDetector = class _InputModalityDetector {
    * bound.
    */
   _onKeydown = (event) => {
-    var _a8, _b2;
-    if ((_b2 = (_a8 = this._options) == null ? void 0 : _a8.ignoreKeys) == null ? void 0 : _b2.some((keyCode) => keyCode === event.keyCode)) {
+    var _a9, _b3;
+    if ((_b3 = (_a9 = this._options) == null ? void 0 : _a9.ignoreKeys) == null ? void 0 : _b3.some((keyCode) => keyCode === event.keyCode)) {
       return;
     }
     this._modality.next("keyboard");
@@ -51290,9 +51290,9 @@ var InputModalityDetector = class _InputModalityDetector {
     }
   }
   ngOnDestroy() {
-    var _a8;
+    var _a9;
     this._modality.complete();
-    (_a8 = this._listenerCleanups) == null ? void 0 : _a8.forEach((cleanup) => cleanup());
+    (_a9 = this._listenerCleanups) == null ? void 0 : _a9.forEach((cleanup) => cleanup());
   }
   static \u0275fac = function InputModalityDetector_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _InputModalityDetector)();
@@ -51711,8 +51711,8 @@ var _CdkPrivateStyleLoader = class __CdkPrivateStyleLoader {
       };
       appsWithLoaders.set(appRef, data);
       appRef.onDestroy(() => {
-        var _a8;
-        (_a8 = appsWithLoaders.get(appRef)) == null ? void 0 : _a8.refs.forEach((ref) => ref.destroy());
+        var _a9;
+        (_a9 = appsWithLoaders.get(appRef)) == null ? void 0 : _a9.refs.forEach((ref) => ref.destroy());
         appsWithLoaders.delete(appRef);
       });
     }
@@ -52128,8 +52128,8 @@ var CdkObserveContent = class _CdkObserveContent {
     this._currentSubscription = (this.debounce ? stream.pipe(debounceTime(this.debounce)) : stream).subscribe(this.event);
   }
   _unsubscribe() {
-    var _a8;
-    (_a8 = this._currentSubscription) == null ? void 0 : _a8.unsubscribe();
+    var _a9;
+    (_a9 = this._currentSubscription) == null ? void 0 : _a9.unsubscribe();
   }
   static \u0275fac = function CdkObserveContent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _CdkObserveContent)();
@@ -52639,8 +52639,8 @@ var CdkTrapFocus = class _CdkTrapFocus {
   _previouslyFocusedElement = null;
   /** Whether the focus trap is active. */
   get enabled() {
-    var _a8;
-    return ((_a8 = this.focusTrap) == null ? void 0 : _a8.enabled) || false;
+    var _a9;
+    return ((_a9 = this.focusTrap) == null ? void 0 : _a9.enabled) || false;
   }
   set enabled(value) {
     if (this.focusTrap) {
@@ -52659,16 +52659,16 @@ var CdkTrapFocus = class _CdkTrapFocus {
     }
   }
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this.focusTrap) == null ? void 0 : _a8.destroy();
+    var _a9;
+    (_a9 = this.focusTrap) == null ? void 0 : _a9.destroy();
     if (this._previouslyFocusedElement) {
       this._previouslyFocusedElement.focus();
       this._previouslyFocusedElement = null;
     }
   }
   ngAfterContentInit() {
-    var _a8;
-    (_a8 = this.focusTrap) == null ? void 0 : _a8.attachAnchors();
+    var _a9;
+    (_a9 = this.focusTrap) == null ? void 0 : _a9.attachAnchors();
     if (this.autoCapture) {
       this._captureFocus();
     }
@@ -52679,16 +52679,16 @@ var CdkTrapFocus = class _CdkTrapFocus {
     }
   }
   ngOnChanges(changes) {
-    var _a8;
+    var _a9;
     const autoCaptureChange = changes["autoCapture"];
-    if (autoCaptureChange && !autoCaptureChange.firstChange && this.autoCapture && ((_a8 = this.focusTrap) == null ? void 0 : _a8.hasAttached())) {
+    if (autoCaptureChange && !autoCaptureChange.firstChange && this.autoCapture && ((_a9 = this.focusTrap) == null ? void 0 : _a9.hasAttached())) {
       this._captureFocus();
     }
   }
   _captureFocus() {
-    var _a8;
+    var _a9;
     this._previouslyFocusedElement = _getFocusedElementPierceShadowDom();
-    (_a8 = this.focusTrap) == null ? void 0 : _a8.focusInitialElementWhenReady();
+    (_a9 = this.focusTrap) == null ? void 0 : _a9.focusInitialElementWhenReady();
   }
   static \u0275fac = function CdkTrapFocus_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _CdkTrapFocus)();
@@ -52780,12 +52780,12 @@ var LiveAnnouncer = class _LiveAnnouncer {
       }
       clearTimeout(this._previousTimeout);
       this._previousTimeout = setTimeout(() => {
-        var _a8;
+        var _a9;
         this._liveElement.textContent = message2;
         if (typeof duration === "number") {
           this._previousTimeout = setTimeout(() => this.clear(), duration);
         }
-        (_a8 = this._currentResolve) == null ? void 0 : _a8.call(this);
+        (_a9 = this._currentResolve) == null ? void 0 : _a9.call(this);
         this._currentPromise = this._currentResolve = void 0;
       }, 100);
       return this._currentPromise;
@@ -52802,11 +52802,11 @@ var LiveAnnouncer = class _LiveAnnouncer {
     }
   }
   ngOnDestroy() {
-    var _a8, _b2;
+    var _a9, _b3;
     clearTimeout(this._previousTimeout);
-    (_a8 = this._liveElement) == null ? void 0 : _a8.remove();
+    (_a9 = this._liveElement) == null ? void 0 : _a9.remove();
     this._liveElement = null;
-    (_b2 = this._currentResolve) == null ? void 0 : _b2.call(this);
+    (_b3 = this._currentResolve) == null ? void 0 : _b3.call(this);
     this._currentPromise = this._currentResolve = void 0;
   }
   _createLiveElement() {
@@ -53130,11 +53130,11 @@ var Typeahead = class {
   }
   _setupKeyHandler(typeAheadInterval) {
     this._letterKeyStream.pipe(tap((letter) => this._pressedLetters.push(letter)), debounceTime(typeAheadInterval), filter(() => this._pressedLetters.length > 0), map(() => this._pressedLetters.join("").toLocaleUpperCase())).subscribe((inputString) => {
-      var _a8, _b2;
+      var _a9, _b3;
       for (let i = 1; i < this._items.length + 1; i++) {
         const index = (this._selectedItemIndex + i) % this._items.length;
         const item = this._items[index];
-        if (!((_a8 = this._skipPredicateFn) == null ? void 0 : _a8.call(this, item)) && ((_b2 = item.getLabel) == null ? void 0 : _b2.call(item).toLocaleUpperCase().trim().indexOf(inputString)) === 0) {
+        if (!((_a9 = this._skipPredicateFn) == null ? void 0 : _a9.call(this, item)) && ((_b3 = item.getLabel) == null ? void 0 : _b3.call(item).toLocaleUpperCase().trim().indexOf(inputString)) === 0) {
           this._selectedItem.next(item);
           break;
         }
@@ -53257,8 +53257,8 @@ var ListKeyManager = class {
   }
   /** Cancels the current typeahead sequence. */
   cancelTypeahead() {
-    var _a8;
-    (_a8 = this._typeahead) == null ? void 0 : _a8.reset();
+    var _a9;
+    (_a9 = this._typeahead) == null ? void 0 : _a9.reset();
     return this;
   }
   /**
@@ -53292,7 +53292,7 @@ var ListKeyManager = class {
    * @param event Keyboard event to be used for determining which element should be active.
    */
   onKeydown(event) {
-    var _a8, _b2;
+    var _a9, _b3;
     const keyCode = event.keyCode;
     const modifiers = ["altKey", "ctrlKey", "metaKey", "shiftKey"];
     const isModifierAllowed = modifiers.every((modifier) => {
@@ -53363,11 +53363,11 @@ var ListKeyManager = class {
         }
       default:
         if (isModifierAllowed || hasModifierKey(event, "shiftKey")) {
-          (_a8 = this._typeahead) == null ? void 0 : _a8.handleKey(event);
+          (_a9 = this._typeahead) == null ? void 0 : _a9.handleKey(event);
         }
         return;
     }
-    (_b2 = this._typeahead) == null ? void 0 : _b2.reset();
+    (_b3 = this._typeahead) == null ? void 0 : _b3.reset();
     event.preventDefault();
   }
   /** Index of the currently active item. */
@@ -53399,21 +53399,21 @@ var ListKeyManager = class {
     this._activeItemIndex() < 0 && this._wrap ? this.setLastItemActive() : this._setActiveItemByDelta(-1);
   }
   updateActiveItem(item) {
-    var _a8;
+    var _a9;
     const itemArray = this._getItemsArray();
     const index = typeof item === "number" ? item : itemArray.indexOf(item);
     const activeItem = itemArray[index];
     this._activeItem.set(activeItem == null ? null : activeItem);
     this._activeItemIndex.set(index);
-    (_a8 = this._typeahead) == null ? void 0 : _a8.setCurrentSelectedItemIndex(index);
+    (_a9 = this._typeahead) == null ? void 0 : _a9.setCurrentSelectedItemIndex(index);
   }
   /** Cleans up the key manager. */
   destroy() {
-    var _a8, _b2, _c;
+    var _a9, _b3, _c10;
     this._typeaheadSubscription.unsubscribe();
-    (_a8 = this._itemChangesSubscription) == null ? void 0 : _a8.unsubscribe();
-    (_b2 = this._effectRef) == null ? void 0 : _b2.destroy();
-    (_c = this._typeahead) == null ? void 0 : _c.destroy();
+    (_a9 = this._itemChangesSubscription) == null ? void 0 : _a9.unsubscribe();
+    (_b3 = this._effectRef) == null ? void 0 : _b3.destroy();
+    (_c10 = this._typeahead) == null ? void 0 : _c10.destroy();
     this.tabOut.complete();
     this.change.complete();
   }
@@ -53476,14 +53476,14 @@ var ListKeyManager = class {
   }
   /** Callback for when the items have changed. */
   _itemsChanged(newItems) {
-    var _a8, _b2;
-    (_a8 = this._typeahead) == null ? void 0 : _a8.setItems(newItems);
+    var _a9, _b3;
+    (_a9 = this._typeahead) == null ? void 0 : _a9.setItems(newItems);
     const activeItem = this._activeItem();
     if (activeItem) {
       const newIndex = newItems.indexOf(activeItem);
       if (newIndex > -1 && newIndex !== this._activeItemIndex()) {
         this._activeItemIndex.set(newIndex);
-        (_b2 = this._typeahead) == null ? void 0 : _b2.setCurrentSelectedItemIndex(newIndex);
+        (_b3 = this._typeahead) == null ? void 0 : _b3.setCurrentSelectedItemIndex(newIndex);
       }
     }
   }
@@ -53581,7 +53581,7 @@ var AriaDescriber = class _AriaDescriber {
     }
   }
   removeDescription(hostElement, message2, role) {
-    var _a8;
+    var _a9;
     if (!message2 || !this._isElementNode(hostElement)) {
       return;
     }
@@ -53595,20 +53595,20 @@ var AriaDescriber = class _AriaDescriber {
         this._deleteMessageElement(key);
       }
     }
-    if (((_a8 = this._messagesContainer) == null ? void 0 : _a8.childNodes.length) === 0) {
+    if (((_a9 = this._messagesContainer) == null ? void 0 : _a9.childNodes.length) === 0) {
       this._messagesContainer.remove();
       this._messagesContainer = null;
     }
   }
   /** Unregisters all created message elements and removes the message container. */
   ngOnDestroy() {
-    var _a8;
+    var _a9;
     const describedElements = this._document.querySelectorAll(`[${CDK_DESCRIBEDBY_HOST_ATTRIBUTE}="${this._id}"]`);
     for (let i = 0; i < describedElements.length; i++) {
       this._removeCdkDescribedByReferenceIds(describedElements[i]);
       describedElements[i].removeAttribute(CDK_DESCRIBEDBY_HOST_ATTRIBUTE);
     }
-    (_a8 = this._messagesContainer) == null ? void 0 : _a8.remove();
+    (_a9 = this._messagesContainer) == null ? void 0 : _a9.remove();
     this._messagesContainer = null;
     this._messageRegistry.clear();
   }
@@ -53632,8 +53632,8 @@ var AriaDescriber = class _AriaDescriber {
   }
   /** Deletes the message element from the global messages container. */
   _deleteMessageElement(key) {
-    var _a8, _b2;
-    (_b2 = (_a8 = this._messageRegistry.get(key)) == null ? void 0 : _a8.messageElement) == null ? void 0 : _b2.remove();
+    var _a9, _b3;
+    (_b3 = (_a9 = this._messageRegistry.get(key)) == null ? void 0 : _a9.messageElement) == null ? void 0 : _b3.remove();
     this._messageRegistry.delete(key);
   }
   /** Creates the global container for all aria-describedby messages. */
@@ -53795,10 +53795,10 @@ var EventListenerFocusTrapInertStrategy = class {
    * so all this code runs outside Angular as well.
    */
   _trapFocus(focusTrap, event) {
-    var _a8;
+    var _a9;
     const target = event.target;
     const focusTrapRoot = focusTrap._element;
-    if (target && !focusTrapRoot.contains(target) && !((_a8 = target.closest) == null ? void 0 : _a8.call(target, "div.cdk-overlay-pane"))) {
+    if (target && !focusTrapRoot.contains(target) && !((_a9 = target.closest) == null ? void 0 : _a9.call(target, "div.cdk-overlay-pane"))) {
       setTimeout(() => {
         if (focusTrap.enabled && !focusTrapRoot.contains(focusTrap._document.activeElement)) {
           focusTrap.focusFirstTabbableElement();
@@ -54079,8 +54079,8 @@ var Breakpoints = {
 // node_modules/@angular/material/fesm2022/animation-DfMFjxHu.mjs
 var MATERIAL_ANIMATIONS = new InjectionToken("MATERIAL_ANIMATIONS");
 function _animationsDisabled() {
-  var _a8;
-  if (((_a8 = inject(MATERIAL_ANIMATIONS, { optional: true })) == null ? void 0 : _a8.animationsDisabled) || inject(ANIMATION_MODULE_TYPE, { optional: true }) === "NoopAnimations") {
+  var _a9;
+  if (((_a9 = inject(MATERIAL_ANIMATIONS, { optional: true })) == null ? void 0 : _a9.animationsDisabled) || inject(ANIMATION_MODULE_TYPE, { optional: true }) === "NoopAnimations") {
     return true;
   }
   const mediaMatcher = inject(MediaMatcher);
@@ -54157,10 +54157,10 @@ var RippleEventManager = class {
   }
   /** Event handler that is bound and which dispatches the events to the different targets. */
   _delegateEventHandler = (event) => {
-    var _a8;
+    var _a9;
     const target = _getEventTarget(event);
     if (target) {
-      (_a8 = this._events.get(event.type)) == null ? void 0 : _a8.forEach((handlers4, element) => {
+      (_a9 = this._events.get(event.type)) == null ? void 0 : _a9.forEach((handlers4, element) => {
         if (element === target || element.contains(target)) {
           handlers4.forEach((handler) => handler.handleEvent(event));
         }
@@ -54941,8 +54941,8 @@ var MatOption = class _MatOption {
   _disabled = signal(false);
   /** Whether ripples for the option are disabled. */
   get disableRipple() {
-    var _a8;
-    return this._signalDisableRipple ? this._parent.disableRipple() : !!((_a8 = this._parent) == null ? void 0 : _a8.disableRipple);
+    var _a9;
+    return this._signalDisableRipple ? this._parent.disableRipple() : !!((_a9 = this._parent) == null ? void 0 : _a9.disableRipple);
   }
   /** Whether to display checkmark for single-selection. */
   get hideSingleSelectionIndicator() {
@@ -54975,8 +54975,8 @@ var MatOption = class _MatOption {
    * select's trigger.
    */
   get viewValue() {
-    var _a8;
-    return (((_a8 = this._text) == null ? void 0 : _a8.nativeElement.textContent) || "").trim();
+    var _a9;
+    return (((_a9 = this._text) == null ? void 0 : _a9.nativeElement.textContent) || "").trim();
   }
   /** Selects the option. */
   select(emitEvent = true) {
@@ -55820,19 +55820,19 @@ var ScrollDispatcher = class _ScrollDispatcher {
       const subscription = auditTimeInMs > 0 ? this._scrolled.pipe(auditTime(auditTimeInMs)).subscribe(observer) : this._scrolled.subscribe(observer);
       this._scrolledCount++;
       return () => {
-        var _a8;
+        var _a9;
         subscription.unsubscribe();
         this._scrolledCount--;
         if (!this._scrolledCount) {
-          (_a8 = this._cleanupGlobalListener) == null ? void 0 : _a8.call(this);
+          (_a9 = this._cleanupGlobalListener) == null ? void 0 : _a9.call(this);
           this._cleanupGlobalListener = void 0;
         }
       };
     });
   }
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this._cleanupGlobalListener) == null ? void 0 : _a8.call(this);
+    var _a9;
+    (_a9 = this._cleanupGlobalListener) == null ? void 0 : _a9.call(this);
     this._cleanupGlobalListener = void 0;
     this.scrollContainers.forEach((_3, container) => this.deregister(container));
     this._scrolled.complete();
@@ -55904,8 +55904,8 @@ var CdkScrollable = class _CdkScrollable {
     this.scrollDispatcher.register(this);
   }
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this._cleanupScroll) == null ? void 0 : _a8.call(this);
+    var _a9;
+    (_a9 = this._cleanupScroll) == null ? void 0 : _a9.call(this);
     this._elementScrolled.complete();
     this.scrollDispatcher.deregister(this);
     this._destroyed.next();
@@ -56053,8 +56053,8 @@ var ViewportRuler = class _ViewportRuler {
     });
   }
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this._listeners) == null ? void 0 : _a8.forEach((cleanup) => cleanup());
+    var _a9;
+    (_a9 = this._listeners) == null ? void 0 : _a9.forEach((cleanup) => cleanup());
     this._change.complete();
   }
   /** Returns the viewport's width and height. */
@@ -56449,11 +56449,11 @@ var CdkVirtualScrollViewport = class _CdkVirtualScrollViewport extends CdkVirtua
    * @param from The edge to measure from.
    */
   measureViewportOffset(from2) {
-    var _a8;
+    var _a9;
     let fromRect;
     const LEFT = "left";
     const RIGHT = "right";
-    const isRtl = ((_a8 = this.dir) == null ? void 0 : _a8.value) == "rtl";
+    const isRtl = ((_a9 = this.dir) == null ? void 0 : _a9.value) == "rtl";
     if (from2 == "start") {
       fromRect = isRtl ? RIGHT : LEFT;
     } else if (from2 == "end") {
@@ -57951,9 +57951,9 @@ var OverlayKeyboardDispatcher = class _OverlayKeyboardDispatcher extends BaseOve
   }
   /** Detaches the global keyboard event listener. */
   detach() {
-    var _a8;
+    var _a9;
     if (this._isAttached) {
-      (_a8 = this._cleanupKeydown) == null ? void 0 : _a8.call(this);
+      (_a9 = this._cleanupKeydown) == null ? void 0 : _a9.call(this);
       this._isAttached = false;
     }
   }
@@ -58015,9 +58015,9 @@ var OverlayOutsideClickDispatcher = class _OverlayOutsideClickDispatcher extends
   }
   /** Detaches the global keyboard event listener. */
   detach() {
-    var _a8;
+    var _a9;
     if (this._isAttached) {
-      (_a8 = this._cleanups) == null ? void 0 : _a8.forEach((cleanup) => cleanup());
+      (_a9 = this._cleanups) == null ? void 0 : _a9.forEach((cleanup) => cleanup());
       this._cleanups = void 0;
       if (this._platform.IOS && this._cursorStyleIsSet) {
         this._document.body.style.cursor = this._cursorOriginalValue;
@@ -58122,8 +58122,8 @@ var OverlayContainer = class _OverlayContainer {
   constructor() {
   }
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this._containerElement) == null ? void 0 : _a8.remove();
+    var _a9;
+    (_a9 = this._containerElement) == null ? void 0 : _a9.remove();
   }
   /**
    * This method returns the overlay container element. It will lazily
@@ -58197,10 +58197,10 @@ var BackdropRef = class {
   }
   detach() {
     this._ngZone.runOutsideAngular(() => {
-      var _a8;
+      var _a9;
       const element = this.element;
       clearTimeout(this._fallbackTimeout);
-      (_a8 = this._cleanupTransitionEnd) == null ? void 0 : _a8.call(this);
+      (_a9 = this._cleanupTransitionEnd) == null ? void 0 : _a9.call(this);
       this._cleanupTransitionEnd = this._renderer.listen(element, "transitionend", this.dispose);
       this._fallbackTimeout = setTimeout(this.dispose, 500);
       element.style.pointerEvents = "none";
@@ -58208,10 +58208,10 @@ var BackdropRef = class {
     });
   }
   dispose = () => {
-    var _a8, _b2;
+    var _a9, _b3;
     clearTimeout(this._fallbackTimeout);
-    (_a8 = this._cleanupClick) == null ? void 0 : _a8.call(this);
-    (_b2 = this._cleanupTransitionEnd) == null ? void 0 : _b2.call(this);
+    (_a9 = this._cleanupClick) == null ? void 0 : _a9.call(this);
+    (_b3 = this._cleanupTransitionEnd) == null ? void 0 : _b3.call(this);
     this._cleanupClick = this._cleanupTransitionEnd = this._fallbackTimeout = void 0;
     this.element.remove();
   };
@@ -58274,8 +58274,8 @@ var OverlayRef = class {
   }
   /** The overlay's backdrop HTML element. */
   get backdropElement() {
-    var _a8;
-    return ((_a8 = this._backdropRef) == null ? void 0 : _a8.element) || null;
+    var _a9;
+    return ((_a9 = this._backdropRef) == null ? void 0 : _a9.element) || null;
   }
   /**
    * Wrapper around the panel element. Can be used for advanced
@@ -58293,7 +58293,7 @@ var OverlayRef = class {
    * @returns The portal attachment result.
    */
   attach(portal) {
-    var _a8;
+    var _a9;
     if (!this._host.parentElement && this._previousHostParent) {
       this._previousHostParent.appendChild(this._host);
     }
@@ -58307,7 +58307,7 @@ var OverlayRef = class {
     if (this._scrollStrategy) {
       this._scrollStrategy.enable();
     }
-    (_a8 = this._afterNextRenderRef) == null ? void 0 : _a8.destroy();
+    (_a9 = this._afterNextRenderRef) == null ? void 0 : _a9.destroy();
     this._afterNextRenderRef = afterNextRender(() => {
       if (this.hasAttached()) {
         this.updatePosition();
@@ -58365,13 +58365,13 @@ var OverlayRef = class {
   }
   /** Cleans up the overlay from the DOM. */
   dispose() {
-    var _a8, _b2, _c;
+    var _a9, _b3, _c10;
     const isAttached = this.hasAttached();
     if (this._positionStrategy) {
       this._positionStrategy.dispose();
     }
     this._disposeScrollStrategy();
-    (_a8 = this._backdropRef) == null ? void 0 : _a8.dispose();
+    (_a9 = this._backdropRef) == null ? void 0 : _a9.dispose();
     this._locationChanges.unsubscribe();
     this._keyboardDispatcher.remove(this);
     this._portalOutlet.dispose();
@@ -58380,8 +58380,8 @@ var OverlayRef = class {
     this._keydownEvents.complete();
     this._outsidePointerEvents.complete();
     this._outsideClickDispatcher.remove(this);
-    (_b2 = this._host) == null ? void 0 : _b2.remove();
-    (_c = this._afterNextRenderRef) == null ? void 0 : _c.destroy();
+    (_b3 = this._host) == null ? void 0 : _b3.remove();
+    (_c10 = this._afterNextRenderRef) == null ? void 0 : _c10.destroy();
     this._previousHostParent = this._pane = this._host = this._backdropRef = null;
     if (isAttached) {
       this._detachments.next();
@@ -58506,9 +58506,9 @@ var OverlayRef = class {
   }
   /** Attaches a backdrop for this overlay. */
   _attachBackdrop() {
-    var _a8;
+    var _a9;
     const showingClass = "cdk-overlay-backdrop-showing";
-    (_a8 = this._backdropRef) == null ? void 0 : _a8.dispose();
+    (_a9 = this._backdropRef) == null ? void 0 : _a9.dispose();
     this._backdropRef = new BackdropRef(this._document, this._renderer, this._ngZone, (event) => {
       this._backdropClick.next(event);
     });
@@ -58522,8 +58522,8 @@ var OverlayRef = class {
     if (!this._animationsDisabled && typeof requestAnimationFrame !== "undefined") {
       this._ngZone.runOutsideAngular(() => {
         requestAnimationFrame(() => {
-          var _a9;
-          return (_a9 = this._backdropRef) == null ? void 0 : _a9.element.classList.add(showingClass);
+          var _a10;
+          return (_a10 = this._backdropRef) == null ? void 0 : _a10.element.classList.add(showingClass);
         });
       });
     } else {
@@ -58544,12 +58544,12 @@ var OverlayRef = class {
   }
   /** Detaches the backdrop (if any) associated with the overlay. */
   detachBackdrop() {
-    var _a8, _b2;
+    var _a9, _b3;
     if (this._animationsDisabled) {
-      (_a8 = this._backdropRef) == null ? void 0 : _a8.dispose();
+      (_a9 = this._backdropRef) == null ? void 0 : _a9.dispose();
       this._backdropRef = null;
     } else {
-      (_b2 = this._backdropRef) == null ? void 0 : _b2.detach();
+      (_b3 = this._backdropRef) == null ? void 0 : _b3.detach();
     }
   }
   /** Toggles a single CSS class or an array of classes on an element. */
@@ -58597,17 +58597,17 @@ var OverlayRef = class {
     }
   }
   _completeDetachContent() {
-    var _a8, _b2;
-    (_a8 = this._detachContentAfterRenderRef) == null ? void 0 : _a8.destroy();
+    var _a9, _b3;
+    (_a9 = this._detachContentAfterRenderRef) == null ? void 0 : _a9.destroy();
     this._detachContentAfterRenderRef = void 0;
-    (_b2 = this._detachContentMutationObserver) == null ? void 0 : _b2.disconnect();
+    (_b3 = this._detachContentMutationObserver) == null ? void 0 : _b3.disconnect();
   }
   /** Disposes of a scroll strategy. */
   _disposeScrollStrategy() {
-    var _a8;
+    var _a9;
     const scrollStrategy = this._scrollStrategy;
     scrollStrategy == null ? void 0 : scrollStrategy.disable();
-    (_a8 = scrollStrategy == null ? void 0 : scrollStrategy.detach) == null ? void 0 : _a8.call(scrollStrategy);
+    (_a9 = scrollStrategy == null ? void 0 : scrollStrategy.detach) == null ? void 0 : _a9.call(scrollStrategy);
   }
 };
 var boundingBoxClass = "cdk-overlay-connected-position-bounding-box";
@@ -59952,18 +59952,18 @@ var CdkConnectedOverlay = class _CdkConnectedOverlay {
     return this._dir ? this._dir.value : "ltr";
   }
   ngOnDestroy() {
-    var _a8;
+    var _a9;
     this._attachSubscription.unsubscribe();
     this._detachSubscription.unsubscribe();
     this._backdropSubscription.unsubscribe();
     this._positionSubscription.unsubscribe();
-    (_a8 = this._overlayRef) == null ? void 0 : _a8.dispose();
+    (_a9 = this._overlayRef) == null ? void 0 : _a9.dispose();
   }
   ngOnChanges(changes) {
-    var _a8;
+    var _a9;
     if (this._position) {
       this._updatePositionStrategy(this._position);
-      (_a8 = this._overlayRef) == null ? void 0 : _a8.updateSize({
+      (_a9 = this._overlayRef) == null ? void 0 : _a9.updateSize({
         width: this.width,
         minWidth: this.minWidth,
         height: this.height,
@@ -60098,8 +60098,8 @@ var CdkConnectedOverlay = class _CdkConnectedOverlay {
   }
   /** Detaches the overlay. */
   detachOverlay() {
-    var _a8;
-    (_a8 = this._overlayRef) == null ? void 0 : _a8.detach();
+    var _a9;
+    (_a9 = this._overlayRef) == null ? void 0 : _a9.detach();
     this._backdropSubscription.unsubscribe();
     this._positionSubscription.unsubscribe();
     this.open = false;
@@ -60322,17 +60322,17 @@ var FullscreenOverlayContainer = class _FullscreenOverlayContainer extends Overl
     super();
   }
   ngOnDestroy() {
-    var _a8;
+    var _a9;
     super.ngOnDestroy();
-    (_a8 = this._cleanupFullScreenListener) == null ? void 0 : _a8.call(this);
+    (_a9 = this._cleanupFullScreenListener) == null ? void 0 : _a9.call(this);
   }
   _createContainer() {
-    var _a8;
+    var _a9;
     const eventName = this._getEventName();
     super._createContainer();
     this._adjustParentForFullscreenChange();
     if (eventName) {
-      (_a8 = this._cleanupFullScreenListener) == null ? void 0 : _a8.call(this);
+      (_a9 = this._cleanupFullScreenListener) == null ? void 0 : _a9.call(this);
       this._cleanupFullScreenListener = this._renderer.listen("document", eventName, () => {
         this._adjustParentForFullscreenChange();
       });
@@ -60416,14 +60416,14 @@ var SingleBoxSharedResizeObserver = class {
   observe(target) {
     if (!this._elementObservables.has(target)) {
       this._elementObservables.set(target, new Observable((observer) => {
-        var _a8;
+        var _a9;
         const subscription = this._resizeSubject.subscribe(observer);
-        (_a8 = this._resizeObserver) == null ? void 0 : _a8.observe(target, {
+        (_a9 = this._resizeObserver) == null ? void 0 : _a9.observe(target, {
           box: this._box
         });
         return () => {
-          var _a9;
-          (_a9 = this._resizeObserver) == null ? void 0 : _a9.unobserve(target);
+          var _a10;
+          (_a10 = this._resizeObserver) == null ? void 0 : _a10.unobserve(target);
           subscription.unsubscribe();
           this._elementObservables.delete(target);
         };
@@ -60464,12 +60464,12 @@ var SharedResizeObserver = class _SharedResizeObserver {
     }
   }
   ngOnDestroy() {
-    var _a8;
+    var _a9;
     for (const [, observer] of this._observers) {
       observer.destroy();
     }
     this._observers.clear();
-    (_a8 = this._cleanupErrorListener) == null ? void 0 : _a8.call(this);
+    (_a9 = this._cleanupErrorListener) == null ? void 0 : _a9.call(this);
   }
   /**
    * Gets a stream of resize events for the given target element and box type.
@@ -61224,8 +61224,8 @@ var MatFormField = class _MatFormField {
   color = "primary";
   /** Whether the label should always float or float as the user types. */
   get floatLabel() {
-    var _a8;
-    return this._floatLabel || ((_a8 = this._defaults) == null ? void 0 : _a8.floatLabel) || DEFAULT_FLOAT_LABEL;
+    var _a9;
+    return this._floatLabel || ((_a9 = this._defaults) == null ? void 0 : _a9.floatLabel) || DEFAULT_FLOAT_LABEL;
   }
   set floatLabel(value) {
     if (value !== this._floatLabel) {
@@ -61239,8 +61239,8 @@ var MatFormField = class _MatFormField {
     return this._appearanceSignal();
   }
   set appearance(value) {
-    var _a8;
-    const newAppearance = value || ((_a8 = this._defaults) == null ? void 0 : _a8.appearance) || DEFAULT_APPEARANCE;
+    var _a9;
+    const newAppearance = value || ((_a9 = this._defaults) == null ? void 0 : _a9.appearance) || DEFAULT_APPEARANCE;
     if (typeof ngDevMode === "undefined" || ngDevMode) {
       if (newAppearance !== "fill" && newAppearance !== "outline") {
         throw new Error(`MatFormField: Invalid appearance "${newAppearance}", valid values are "fill" or "outline".`);
@@ -61255,12 +61255,12 @@ var MatFormField = class _MatFormField {
    * Note that when using dynamic sizing, layout shifts will occur when hint/error text changes.
    */
   get subscriptSizing() {
-    var _a8;
-    return this._subscriptSizing || ((_a8 = this._defaults) == null ? void 0 : _a8.subscriptSizing) || DEFAULT_SUBSCRIPT_SIZING;
+    var _a9;
+    return this._subscriptSizing || ((_a9 = this._defaults) == null ? void 0 : _a9.subscriptSizing) || DEFAULT_SUBSCRIPT_SIZING;
   }
   set subscriptSizing(value) {
-    var _a8;
-    this._subscriptSizing = value || ((_a8 = this._defaults) == null ? void 0 : _a8.subscriptSizing) || DEFAULT_SUBSCRIPT_SIZING;
+    var _a9;
+    this._subscriptSizing = value || ((_a9 = this._defaults) == null ? void 0 : _a9.subscriptSizing) || DEFAULT_SUBSCRIPT_SIZING;
   }
   _subscriptSizing = null;
   /** Text for the form field hint. */
@@ -61299,14 +61299,14 @@ var MatFormField = class _MatFormField {
   _describedByChanges;
   _animationsDisabled = _animationsDisabled();
   constructor() {
-    const defaults2 = this._defaults;
-    if (defaults2) {
-      if (defaults2.appearance) {
-        this.appearance = defaults2.appearance;
+    const defaults3 = this._defaults;
+    if (defaults3) {
+      if (defaults3.appearance) {
+        this.appearance = defaults3.appearance;
       }
-      this._hideRequiredMarker = Boolean(defaults2 == null ? void 0 : defaults2.hideRequiredMarker);
-      if (defaults2.color) {
-        this.color = defaults2.color;
+      this._hideRequiredMarker = Boolean(defaults3 == null ? void 0 : defaults3.hideRequiredMarker);
+      if (defaults3.color) {
+        this.color = defaults3.color;
       }
     }
     this._syncOutlineLabelOffset();
@@ -61344,11 +61344,11 @@ var MatFormField = class _MatFormField {
     }
   }
   ngOnDestroy() {
-    var _a8, _b2, _c, _d;
-    (_a8 = this._outlineLabelOffsetResizeObserver) == null ? void 0 : _a8.disconnect();
-    (_b2 = this._stateChanges) == null ? void 0 : _b2.unsubscribe();
-    (_c = this._valueChanges) == null ? void 0 : _c.unsubscribe();
-    (_d = this._describedByChanges) == null ? void 0 : _d.unsubscribe();
+    var _a9, _b3, _c10, _d2;
+    (_a9 = this._outlineLabelOffsetResizeObserver) == null ? void 0 : _a9.disconnect();
+    (_b3 = this._stateChanges) == null ? void 0 : _b3.unsubscribe();
+    (_c10 = this._valueChanges) == null ? void 0 : _c10.unsubscribe();
+    (_d2 = this._describedByChanges) == null ? void 0 : _d2.unsubscribe();
     this._destroyed.next();
     this._destroyed.complete();
   }
@@ -61371,7 +61371,7 @@ var MatFormField = class _MatFormField {
   }
   /** Initializes the registered form field control. */
   _initializeControl(previousControl) {
-    var _a8, _b2, _c;
+    var _a9, _b3, _c10;
     const control = this._control;
     const classPrefix = "mat-mdc-form-field-type-";
     if (previousControl) {
@@ -61380,16 +61380,16 @@ var MatFormField = class _MatFormField {
     if (control.controlType) {
       this._elementRef.nativeElement.classList.add(classPrefix + control.controlType);
     }
-    (_a8 = this._stateChanges) == null ? void 0 : _a8.unsubscribe();
+    (_a9 = this._stateChanges) == null ? void 0 : _a9.unsubscribe();
     this._stateChanges = control.stateChanges.subscribe(() => {
       this._updateFocusState();
       this._changeDetectorRef.markForCheck();
     });
-    (_b2 = this._describedByChanges) == null ? void 0 : _b2.unsubscribe();
+    (_b3 = this._describedByChanges) == null ? void 0 : _b3.unsubscribe();
     this._describedByChanges = control.stateChanges.pipe(startWith([void 0, void 0]), map(() => [control.errorState, control.userAriaDescribedBy]), pairwise(), filter(([[prevErrorState, prevDescribedBy], [currentErrorState, currentDescribedBy]]) => {
       return prevErrorState !== currentErrorState || prevDescribedBy !== currentDescribedBy;
     })).subscribe(() => this._syncDescribedByIds());
-    (_c = this._valueChanges) == null ? void 0 : _c.unsubscribe();
+    (_c10 = this._valueChanges) == null ? void 0 : _c10.unsubscribe();
     if (control.ngControl && control.ngControl.valueChanges) {
       this._valueChanges = control.ngControl.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => this._changeDetectorRef.markForCheck());
     }
@@ -61432,15 +61432,15 @@ var MatFormField = class _MatFormField {
     }
   }
   _updateFocusState() {
-    var _a8, _b2, _c;
+    var _a9, _b3, _c10;
     if (this._control.focused && !this._isFocused) {
       this._isFocused = true;
-      (_a8 = this._lineRipple) == null ? void 0 : _a8.activate();
+      (_a9 = this._lineRipple) == null ? void 0 : _a9.activate();
     } else if (!this._control.focused && (this._isFocused || this._isFocused === null)) {
       this._isFocused = false;
-      (_b2 = this._lineRipple) == null ? void 0 : _b2.deactivate();
+      (_b3 = this._lineRipple) == null ? void 0 : _b3.deactivate();
     }
-    (_c = this._textField) == null ? void 0 : _c.nativeElement.classList.toggle("mdc-text-field--focused", this._control.focused);
+    (_c10 = this._textField) == null ? void 0 : _c10.nativeElement.classList.toggle("mdc-text-field--focused", this._control.focused);
   }
   _outlineLabelOffsetResizeObserver = null;
   /**
@@ -61452,9 +61452,9 @@ var MatFormField = class _MatFormField {
   _syncOutlineLabelOffset() {
     afterRenderEffect({
       earlyRead: () => {
-        var _a8;
+        var _a9;
         if (this._appearanceSignal() !== "outline") {
-          (_a8 = this._outlineLabelOffsetResizeObserver) == null ? void 0 : _a8.disconnect();
+          (_a9 = this._outlineLabelOffsetResizeObserver) == null ? void 0 : _a9.disconnect();
           return null;
         }
         if (globalThis.ResizeObserver) {
@@ -61515,11 +61515,11 @@ var MatFormField = class _MatFormField {
   }
   /** Refreshes the width of the outline-notch, if present. */
   _refreshOutlineNotchWidth() {
-    var _a8, _b2;
+    var _a9, _b3;
     if (!this._hasOutline() || !this._floatingLabel || !this._shouldLabelFloat()) {
-      (_a8 = this._notchedOutline) == null ? void 0 : _a8._setNotchWidth(0);
+      (_a9 = this._notchedOutline) == null ? void 0 : _a9._setNotchWidth(0);
     } else {
-      (_b2 = this._notchedOutline) == null ? void 0 : _b2._setNotchWidth(this._floatingLabel.getWidth());
+      (_b3 = this._notchedOutline) == null ? void 0 : _b3._setNotchWidth(this._floatingLabel.getWidth());
     }
   }
   /** Does any extra processing that is required when handling the hints. */
@@ -61598,7 +61598,7 @@ var MatFormField = class _MatFormField {
    * incorporate the horizontal offset into their default text-field styles.
    */
   _getOutlinedLabelOffset() {
-    var _a8, _b2, _c, _d;
+    var _a9, _b3, _c10, _d2;
     const dir = this._dir.valueSignal();
     if (!this._hasOutline() || !this._floatingLabel) {
       return null;
@@ -61609,10 +61609,10 @@ var MatFormField = class _MatFormField {
     if (!this._isAttachedToDom()) {
       return null;
     }
-    const iconPrefixContainer = (_a8 = this._iconPrefixContainer) == null ? void 0 : _a8.nativeElement;
-    const textPrefixContainer = (_b2 = this._textPrefixContainer) == null ? void 0 : _b2.nativeElement;
-    const iconSuffixContainer = (_c = this._iconSuffixContainer) == null ? void 0 : _c.nativeElement;
-    const textSuffixContainer = (_d = this._textSuffixContainer) == null ? void 0 : _d.nativeElement;
+    const iconPrefixContainer = (_a9 = this._iconPrefixContainer) == null ? void 0 : _a9.nativeElement;
+    const textPrefixContainer = (_b3 = this._textPrefixContainer) == null ? void 0 : _b3.nativeElement;
+    const iconSuffixContainer = (_c10 = this._iconSuffixContainer) == null ? void 0 : _c10.nativeElement;
+    const textSuffixContainer = (_d2 = this._textSuffixContainer) == null ? void 0 : _d2.nativeElement;
     const iconPrefixContainerWidth = (iconPrefixContainer == null ? void 0 : iconPrefixContainer.getBoundingClientRect().width) ?? 0;
     const textPrefixContainerWidth = (textPrefixContainer == null ? void 0 : textPrefixContainer.getBoundingClientRect().width) ?? 0;
     const iconSuffixContainerWidth = (iconSuffixContainer == null ? void 0 : iconSuffixContainer.getBoundingClientRect().width) ?? 0;
@@ -61627,14 +61627,14 @@ var MatFormField = class _MatFormField {
   }
   /** Writes the styles produced by `_getOutlineLabelOffset` synchronously to the DOM. */
   _writeOutlinedLabelStyles(styles) {
-    var _a8;
+    var _a9;
     if (styles !== null) {
       const [floatingLabelTransform, notchedOutlineWidth] = styles;
       if (this._floatingLabel) {
         this._floatingLabel.element.style.transform = floatingLabelTransform;
       }
       if (notchedOutlineWidth !== null) {
-        (_a8 = this._notchedOutline) == null ? void 0 : _a8._setMaxWidth(notchedOutlineWidth);
+        (_a9 = this._notchedOutline) == null ? void 0 : _a9._setMaxWidth(notchedOutlineWidth);
       }
     }
   }
@@ -62183,8 +62183,8 @@ var MatAutocomplete = class _MatAutocomplete {
     this._setVisibility();
   }
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this._keyManager) == null ? void 0 : _a8.destroy();
+    var _a9;
+    (_a9 = this._keyManager) == null ? void 0 : _a9.destroy();
     this._activeOptionChanges.unsubscribe();
   }
   /**
@@ -62202,8 +62202,8 @@ var MatAutocomplete = class _MatAutocomplete {
   }
   /** Panel should hide itself when the option list is empty. */
   _setVisibility() {
-    var _a8;
-    this.showPanel = !!((_a8 = this.options) == null ? void 0 : _a8.length);
+    var _a9;
+    this.showPanel = !!((_a9 = this.options) == null ? void 0 : _a9.length);
     this._changeDetectorRef.markForCheck();
   }
   /** Emits the `select` event. */
@@ -62589,8 +62589,8 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
     }
   }
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this._cleanupWindowBlur) == null ? void 0 : _a8.call(this);
+    var _a9;
+    (_a9 = this._cleanupWindowBlur) == null ? void 0 : _a9.call(this);
     this._handsetLandscapeSubscription.unsubscribe();
     this._viewportSubscription.unsubscribe();
     this._componentDestroyed = true;
@@ -62740,7 +62740,7 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
     }
   }
   _handleInput(event) {
-    var _a8;
+    var _a9;
     let target = event.target;
     let value = target.value;
     if (target.type === "number") {
@@ -62755,7 +62755,7 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
       if (!value) {
         this._clearPreviousSelectedOption(null, false);
       } else if (this.panelOpen && !this.autocomplete.requireSelection) {
-        const selectedOption = (_a8 = this.autocomplete.options) == null ? void 0 : _a8.find((option) => option.selected);
+        const selectedOption = (_a9 = this.autocomplete.options) == null ? void 0 : _a9.find((option) => option.selected);
         if (selectedOption) {
           const display = this._getDisplayValue(selectedOption.value);
           if (value !== display) {
@@ -62818,7 +62818,7 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
    * stream every time the option list changes.
    */
   _subscribeToClosingActions() {
-    var _a8;
+    var _a9;
     const initialRender = new Observable((subscriber) => {
       afterNextRender(() => {
         subscriber.next();
@@ -62826,7 +62826,7 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
         injector: this._environmentInjector
       });
     });
-    const optionChanges = ((_a8 = this.autocomplete.options) == null ? void 0 : _a8.changes.pipe(
+    const optionChanges = ((_a9 = this.autocomplete.options) == null ? void 0 : _a9.changes.pipe(
       tap(() => this._positionStrategy.reapplyLastPosition()),
       // Defer emitting to the stream until the next tick, because changing
       // bindings in here will cause "changed after checked" errors.
@@ -62916,8 +62916,8 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
    * Clear any previous selected option and emit a selection change event for this option
    */
   _clearPreviousSelectedOption(skip2, emitEvent) {
-    var _a8, _b2;
-    (_b2 = (_a8 = this.autocomplete) == null ? void 0 : _a8.options) == null ? void 0 : _b2.forEach((option) => {
+    var _a9, _b3;
+    (_b3 = (_a9 = this.autocomplete) == null ? void 0 : _a9.options) == null ? void 0 : _b3.forEach((option) => {
       if (option !== skip2 && option.selected) {
         option.deselect(emitEvent);
       }
@@ -62932,14 +62932,14 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
     }
   }
   _attachOverlay(valueOnAttach) {
-    var _a8, _b2;
+    var _a9, _b3;
     if (!this.autocomplete && (typeof ngDevMode === "undefined" || ngDevMode)) {
       throw getMatAutocompleteMissingPanelError();
     }
     let overlayRef = this._overlayRef;
     if (!overlayRef) {
       this._portal = new TemplatePortal(this.autocomplete.template, this._viewContainerRef, {
-        id: (_a8 = this._formField) == null ? void 0 : _a8.getLabelId()
+        id: (_a9 = this._formField) == null ? void 0 : _a9.getLabelId()
       });
       overlayRef = createOverlayRef(this._injector, this._getOverlayConfig());
       this._overlayRef = overlayRef;
@@ -62973,7 +62973,7 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
     const wasOpen = this.panelOpen;
     this.autocomplete._isOpen = this._overlayAttached = true;
     this.autocomplete._latestOpeningTrigger = this;
-    this.autocomplete._setColor((_b2 = this._formField) == null ? void 0 : _b2.color);
+    this.autocomplete._setColor((_b3 = this._formField) == null ? void 0 : _b3.color);
     this._updatePanelState();
     this._applyModalPanelOwnership();
     if (this.panelOpen && wasOpen !== this.panelOpen) {
@@ -62995,7 +62995,7 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
   };
   /** Updates the panel's visibility state and any trigger state tied to id. */
   _updatePanelState() {
-    var _a8, _b2;
+    var _a9, _b3;
     this.autocomplete._setVisibility();
     if (this.panelOpen) {
       const overlayRef = this._overlayRef;
@@ -63006,20 +63006,20 @@ var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
         this._outsideClickSubscription = overlayRef.outsidePointerEvents().subscribe();
       }
     } else {
-      (_a8 = this._keydownSubscription) == null ? void 0 : _a8.unsubscribe();
-      (_b2 = this._outsideClickSubscription) == null ? void 0 : _b2.unsubscribe();
+      (_a9 = this._keydownSubscription) == null ? void 0 : _a9.unsubscribe();
+      (_b3 = this._outsideClickSubscription) == null ? void 0 : _b3.unsubscribe();
       this._keydownSubscription = this._outsideClickSubscription = null;
     }
   }
   _getOverlayConfig() {
-    var _a8, _b2;
+    var _a9, _b3;
     return new OverlayConfig({
       positionStrategy: this._getOverlayPosition(),
       scrollStrategy: this._scrollStrategy(),
       width: this._getPanelWidth(),
       direction: this._dir ?? void 0,
-      hasBackdrop: (_a8 = this._defaults) == null ? void 0 : _a8.hasBackdrop,
-      backdropClass: (_b2 = this._defaults) == null ? void 0 : _b2.backdropClass,
+      hasBackdrop: (_a9 = this._defaults) == null ? void 0 : _a9.hasBackdrop,
+      backdropClass: (_b3 = this._defaults) == null ? void 0 : _b3.backdropClass,
       panelClass: this._overlayPanelClass,
       disableAnimations: this._animationsDisabled
     });
@@ -63557,8 +63557,8 @@ var CdkTextareaAutosize = class _CdkTextareaAutosize {
     }
   }
   ngOnDestroy() {
-    var _a8;
-    (_a8 = this._listenerCleanups) == null ? void 0 : _a8.forEach((cleanup) => cleanup());
+    var _a9;
+    (_a9 = this._listenerCleanups) == null ? void 0 : _a9.forEach((cleanup) => cleanup());
     this._resizeEvents.complete();
     this._destroyed.next();
     this._destroyed.complete();
@@ -63942,8 +63942,8 @@ var MatInput = class _MatInput {
    * @docs-private
    */
   get required() {
-    var _a8, _b2;
-    return this._required ?? ((_b2 = (_a8 = this.ngControl) == null ? void 0 : _a8.control) == null ? void 0 : _b2.hasValidator(Validators.required)) ?? false;
+    var _a9, _b3;
+    return this._required ?? ((_b3 = (_a9 = this.ngControl) == null ? void 0 : _a9.control) == null ? void 0 : _b3.hasValidator(Validators.required)) ?? false;
   }
   set required(value) {
     this._required = coerceBooleanProperty(value);
@@ -64013,7 +64013,7 @@ var MatInput = class _MatInput {
   }
   _neverEmptyInputTypes = ["date", "datetime", "datetime-local", "month", "time", "week"].filter((t) => getSupportedInputTypes().has(t));
   constructor() {
-    var _a8;
+    var _a9;
     const parentForm = inject(NgForm, {
       optional: true
     });
@@ -64048,7 +64048,7 @@ var MatInput = class _MatInput {
     this._isNativeSelect = nodeName === "select";
     this._isTextarea = nodeName === "textarea";
     this._isInFormField = !!this._formField;
-    this.disabledInteractive = ((_a8 = this._config) == null ? void 0 : _a8.disabledInteractive) || false;
+    this.disabledInteractive = ((_a9 = this._config) == null ? void 0 : _a9.disabledInteractive) || false;
     if (this._isNativeSelect) {
       this.controlType = element.multiple ? "mat-native-select-multiple" : "mat-native-select";
     }
@@ -64071,13 +64071,13 @@ var MatInput = class _MatInput {
     this.stateChanges.next();
   }
   ngOnDestroy() {
-    var _a8, _b2;
+    var _a9, _b3;
     this.stateChanges.complete();
     if (this._platform.isBrowser) {
       this._autofillMonitor.stopMonitoring(this._elementRef.nativeElement);
     }
-    (_a8 = this._cleanupIosKeyup) == null ? void 0 : _a8.call(this);
-    (_b2 = this._cleanupWebkitWheel) == null ? void 0 : _b2.call(this);
+    (_a9 = this._cleanupIosKeyup) == null ? void 0 : _a9.call(this);
+    (_b3 = this._cleanupWebkitWheel) == null ? void 0 : _b3.call(this);
   }
   ngDoCheck() {
     if (this.ngControl) {
@@ -64228,8 +64228,8 @@ var MatInput = class _MatInput {
    * @docs-private
    */
   _ensureWheelDefaultBehavior() {
-    var _a8;
-    (_a8 = this._cleanupWebkitWheel) == null ? void 0 : _a8.call(this);
+    var _a9;
+    (_a9 = this._cleanupWebkitWheel) == null ? void 0 : _a9.call(this);
     if (this._type === "number" && (this._platform.BLINK || this._platform.WEBKIT)) {
       this._cleanupWebkitWheel = this._renderer.listen(this._elementRef.nativeElement, "wheel", this._webkitBlinkWheelListener);
     }
@@ -64431,8 +64431,8 @@ var MatRippleLoader = class _MatRippleLoader {
    * element so that it can later be retrived & used when the ripple is actually created.
    */
   configureRipple(host, config2) {
-    var _a8;
-    host.setAttribute(matRippleUninitialized, ((_a8 = this._globalRippleOptions) == null ? void 0 : _a8.namespace) ?? "");
+    var _a9;
+    host.setAttribute(matRippleUninitialized, ((_a9 = this._globalRippleOptions) == null ? void 0 : _a9.namespace) ?? "");
     if (config2.className || !host.hasAttribute(matRippleClassName)) {
       host.setAttribute(matRippleClassName, config2.className || "");
     }
@@ -64463,10 +64463,10 @@ var MatRippleLoader = class _MatRippleLoader {
    * when a component is initially interacted with.
    */
   _onInteraction = (event) => {
-    var _a8;
+    var _a9;
     const eventTarget = _getEventTarget(event);
     if (eventTarget instanceof HTMLElement) {
-      const element = eventTarget.closest(`[${matRippleUninitialized}="${((_a8 = this._globalRippleOptions) == null ? void 0 : _a8.namespace) ?? ""}"]`);
+      const element = eventTarget.closest(`[${matRippleUninitialized}="${((_a9 = this._globalRippleOptions) == null ? void 0 : _a9.namespace) ?? ""}"]`);
       if (element) {
         this._createRipple(element);
       }
@@ -64474,17 +64474,17 @@ var MatRippleLoader = class _MatRippleLoader {
   };
   /** Creates a MatRipple and appends it to the given element. */
   _createRipple(host) {
-    var _a8, _b2, _c;
+    var _a9, _b3, _c10;
     if (!this._document || this._hosts.has(host)) {
       return;
     }
-    (_a8 = host.querySelector(".mat-ripple")) == null ? void 0 : _a8.remove();
+    (_a9 = host.querySelector(".mat-ripple")) == null ? void 0 : _a9.remove();
     const rippleEl = this._document.createElement("span");
     rippleEl.classList.add("mat-ripple", host.getAttribute(matRippleClassName));
     host.append(rippleEl);
     const globalOptions = this._globalRippleOptions;
-    const enterDuration = this._animationsDisabled ? 0 : ((_b2 = globalOptions == null ? void 0 : globalOptions.animation) == null ? void 0 : _b2.enterDuration) ?? defaultRippleAnimationConfig.enterDuration;
-    const exitDuration = this._animationsDisabled ? 0 : ((_c = globalOptions == null ? void 0 : globalOptions.animation) == null ? void 0 : _c.exitDuration) ?? defaultRippleAnimationConfig.exitDuration;
+    const enterDuration = this._animationsDisabled ? 0 : ((_b3 = globalOptions == null ? void 0 : globalOptions.animation) == null ? void 0 : _b3.enterDuration) ?? defaultRippleAnimationConfig.enterDuration;
+    const exitDuration = this._animationsDisabled ? 0 : ((_c10 = globalOptions == null ? void 0 : globalOptions.animation) == null ? void 0 : _c10.exitDuration) ?? defaultRippleAnimationConfig.exitDuration;
     const target = {
       rippleDisabled: this._animationsDisabled || (globalOptions == null ? void 0 : globalOptions.disabled) || host.hasAttribute(matRippleDisabled),
       rippleConfig: {
@@ -64611,13 +64611,13 @@ var MatButtonBase = class _MatButtonBase {
     this.tabIndex = value;
   }
   constructor() {
-    var _a8, _b2, _c;
+    var _a9, _b3, _c10;
     inject(_CdkPrivateStyleLoader).load(_StructuralStylesLoader);
     const element = this._elementRef.nativeElement;
     this._isAnchor = element.tagName === "A";
-    this.disabledInteractive = ((_a8 = this._config) == null ? void 0 : _a8.disabledInteractive) ?? false;
-    this.color = ((_b2 = this._config) == null ? void 0 : _b2.color) ?? null;
-    (_c = this._rippleLoader) == null ? void 0 : _c.configureRipple(element, {
+    this.disabledInteractive = ((_a9 = this._config) == null ? void 0 : _a9.disabledInteractive) ?? false;
+    this.color = ((_b3 = this._config) == null ? void 0 : _b3.color) ?? null;
+    (_c10 = this._rippleLoader) == null ? void 0 : _c10.configureRipple(element, {
       className: "mat-mdc-button-ripple"
     });
   }
@@ -64628,10 +64628,10 @@ var MatButtonBase = class _MatButtonBase {
     }
   }
   ngOnDestroy() {
-    var _a8, _b2;
-    (_a8 = this._cleanupClick) == null ? void 0 : _a8.call(this);
+    var _a9, _b3;
+    (_a9 = this._cleanupClick) == null ? void 0 : _a9.call(this);
     this._focusMonitor.stopMonitoring(this._elementRef);
-    (_b2 = this._rippleLoader) == null ? void 0 : _b2.destroyRipple(this._elementRef.nativeElement);
+    (_b3 = this._rippleLoader) == null ? void 0 : _b3.destroyRipple(this._elementRef.nativeElement);
   }
   /** Focuses the button. */
   focus(origin = "program", options) {
@@ -64654,8 +64654,8 @@ var MatButtonBase = class _MatButtonBase {
     return this.disabledInteractive || !this.disabled ? null : true;
   }
   _updateRippleDisabled() {
-    var _a8;
-    (_a8 = this._rippleLoader) == null ? void 0 : _a8.setDisabled(this._elementRef.nativeElement, this.disableRipple || this.disabled);
+    var _a9;
+    (_a9 = this._rippleLoader) == null ? void 0 : _a9.setDisabled(this._elementRef.nativeElement, this.disableRipple || this.disabled);
   }
   _getTabIndex() {
     if (this._isAnchor) {
@@ -64834,8 +64834,8 @@ var MatButton = class _MatButton extends MatButtonBase {
     return this._appearance;
   }
   set appearance(value) {
-    var _a8;
-    this.setAppearance(value || ((_a8 = this._config) == null ? void 0 : _a8.defaultAppearance) || "text");
+    var _a9;
+    this.setAppearance(value || ((_a9 = this._config) == null ? void 0 : _a9.defaultAppearance) || "text");
   }
   _appearance = null;
   constructor() {
@@ -67627,13 +67627,13 @@ function Di() {
         3329325298
       ]);
       function r2(p, a, h3, f2, S3) {
-        for (var m2, k3, x3, W4, R4, O4, G4, U3, j3, D4, Ct3, Nt, ue2; S3 >= 64; ) {
+        for (var m2, k3, x3, W4, R4, O4, G4, U3, j3, D4, Ct3, Nt, ue; S3 >= 64; ) {
           for (m2 = a[0], k3 = a[1], x3 = a[2], W4 = a[3], R4 = a[4], O4 = a[5], G4 = a[6], U3 = a[7], D4 = 0; D4 < 16; D4++)
             Ct3 = f2 + D4 * 4, p[D4] = (h3[Ct3] & 255) << 24 | (h3[Ct3 + 1] & 255) << 16 | (h3[Ct3 + 2] & 255) << 8 | h3[Ct3 + 3] & 255;
           for (D4 = 16; D4 < 64; D4++)
-            j3 = p[D4 - 2], Nt = (j3 >>> 17 | j3 << 15) ^ (j3 >>> 19 | j3 << 13) ^ j3 >>> 10, j3 = p[D4 - 15], ue2 = (j3 >>> 7 | j3 << 25) ^ (j3 >>> 18 | j3 << 14) ^ j3 >>> 3, p[D4] = (Nt + p[D4 - 7] | 0) + (ue2 + p[D4 - 16] | 0);
+            j3 = p[D4 - 2], Nt = (j3 >>> 17 | j3 << 15) ^ (j3 >>> 19 | j3 << 13) ^ j3 >>> 10, j3 = p[D4 - 15], ue = (j3 >>> 7 | j3 << 25) ^ (j3 >>> 18 | j3 << 14) ^ j3 >>> 3, p[D4] = (Nt + p[D4 - 7] | 0) + (ue + p[D4 - 16] | 0);
           for (D4 = 0; D4 < 64; D4++)
-            Nt = (((R4 >>> 6 | R4 << 26) ^ (R4 >>> 11 | R4 << 21) ^ (R4 >>> 25 | R4 << 7)) + (R4 & O4 ^ ~R4 & G4) | 0) + (U3 + (n2[D4] + p[D4] | 0) | 0) | 0, ue2 = ((m2 >>> 2 | m2 << 30) ^ (m2 >>> 13 | m2 << 19) ^ (m2 >>> 22 | m2 << 10)) + (m2 & k3 ^ m2 & x3 ^ k3 & x3) | 0, U3 = G4, G4 = O4, O4 = R4, R4 = W4 + Nt | 0, W4 = x3, x3 = k3, k3 = m2, m2 = Nt + ue2 | 0;
+            Nt = (((R4 >>> 6 | R4 << 26) ^ (R4 >>> 11 | R4 << 21) ^ (R4 >>> 25 | R4 << 7)) + (R4 & O4 ^ ~R4 & G4) | 0) + (U3 + (n2[D4] + p[D4] | 0) | 0) | 0, ue = ((m2 >>> 2 | m2 << 30) ^ (m2 >>> 13 | m2 << 19) ^ (m2 >>> 22 | m2 << 10)) + (m2 & k3 ^ m2 & x3 ^ k3 & x3) | 0, U3 = G4, G4 = O4, O4 = R4, R4 = W4 + Nt | 0, W4 = x3, x3 = k3, k3 = m2, m2 = Nt + ue | 0;
           a[0] += m2, a[1] += k3, a[2] += x3, a[3] += W4, a[4] += R4, a[5] += O4, a[6] += G4, a[7] += U3, f2 += 64, S3 -= 64;
         }
         return f2;
@@ -67991,9 +67991,9 @@ function Rn() {
   return !(document.documentMode || /Edge/.test(navigator.userAgent));
 }
 function hr() {
-  var _a8, _b2, _c, _d, _e3, _f;
-  const e2 = ((_a8 = window.location) == null ? void 0 : _a8.hash) ? (_b2 = window.location) == null ? void 0 : _b2.hash.slice(1) : ((_c = window.location) == null ? void 0 : _c.href.split("#")[1]) || "";
-  let t = ((_d = window.location) == null ? void 0 : _d.search) ? (_e3 = window.location) == null ? void 0 : _e3.search.slice(1) : ((_f = window.location) == null ? void 0 : _f.href.split("?")[1]) || "", n2 = {};
+  var _a9, _b3, _c10, _d2, _e3, _f;
+  const e2 = ((_a9 = window.location) == null ? void 0 : _a9.hash) ? (_b3 = window.location) == null ? void 0 : _b3.hash.slice(1) : ((_c10 = window.location) == null ? void 0 : _c10.href.split("#")[1]) || "";
+  let t = ((_d2 = window.location) == null ? void 0 : _d2.search) ? (_e3 = window.location) == null ? void 0 : _e3.search.slice(1) : ((_f = window.location) == null ? void 0 : _f.href.split("?")[1]) || "", n2 = {};
   if (e2)
     if (e2.indexOf("?") >= 0) {
       const i = e2.split("?");
@@ -68023,12 +68023,12 @@ function Hi(e2 = 40) {
   return t;
 }
 function dt(e2) {
-  var _a8, _b2, _c, _d, _e3;
-  const t = (((_a8 = window.location) == null ? void 0 : _a8.hash) || "").replace(new RegExp(`${e2}[a-zA-Z0-9_+-.%=]*&?`, "g"), "").replace(/&&/g, "&").replace(/#&/g, "#").replace(/&$/g, "#"), n2 = (((_b2 = window.location) == null ? void 0 : _b2.search) || "").replace(new RegExp(`${e2}[a-zA-Z0-9_+-.%=]*&?`, "g"), "").replace(/&&/g, "&").replace(/\?&/g, "#").replace(/&$/g, "#");
-  ((_c = window.history) == null ? void 0 : _c.replaceState) && ((_e3 = window.history) == null ? void 0 : _e3.replaceState(
+  var _a9, _b3, _c10, _d2, _e3;
+  const t = (((_a9 = window.location) == null ? void 0 : _a9.hash) || "").replace(new RegExp(`${e2}[a-zA-Z0-9_+-.%=]*&?`, "g"), "").replace(/&&/g, "&").replace(/#&/g, "#").replace(/&$/g, "#"), n2 = (((_b3 = window.location) == null ? void 0 : _b3.search) || "").replace(new RegExp(`${e2}[a-zA-Z0-9_+-.%=]*&?`, "g"), "").replace(/&&/g, "&").replace(/\?&/g, "#").replace(/&$/g, "#");
+  ((_c10 = window.history) == null ? void 0 : _c10.replaceState) && ((_e3 = window.history) == null ? void 0 : _e3.replaceState(
     null,
     "",
-    `${(_d = window.location) == null ? void 0 : _d.pathname}${t}${n2}`
+    `${(_d2 = window.location) == null ? void 0 : _d2.pathname}${t}${n2}`
   ));
 }
 function Bi(e2) {
@@ -68119,8 +68119,8 @@ var ut = new at(false);
 var eo = ut.asObservable();
 var ge = 0;
 function bt() {
-  var _a8, _b2;
-  return `${`${g.secure || ((_a8 = window.location) == null ? void 0 : _a8.protocol.indexOf("https")) >= 0 ? "https:" : "http:"}//${g.host || ((_b2 = window.location) == null ? void 0 : _b2.host)}`}${dr()}`;
+  var _a9, _b3;
+  return `${`${g.secure || ((_a9 = window.location) == null ? void 0 : _a9.protocol.indexOf("https")) >= 0 ? "https:" : "http:"}//${g.host || ((_b3 = window.location) == null ? void 0 : _b3.host)}`}${dr()}`;
 }
 function dr() {
   return g.version === "ACA Engine" ? "/control/api" : an;
@@ -68157,8 +68157,8 @@ function nn() {
   return we.getValue() || A2.getItem(`${w}_refresh_token`) || "";
 }
 function rn() {
-  var _a8;
-  return g.host || ((_a8 = window.location) == null ? void 0 : _a8.host);
+  var _a9;
+  return g.host || ((_a9 = window.location) == null ? void 0 : _a9.host);
 }
 function oo() {
   return !!Y2();
@@ -68237,13 +68237,13 @@ function mr(e2, t = F13) {
 }
 function dn(e2 = 0) {
   return v.load_authority || (v.load_authority = new Promise((t) => {
-    var _a8;
+    var _a9;
     if (ut.next(false), g.mock) {
       F13 = to, d("Auth", "System in mock mode"), ut.next(true), t();
       return;
     }
     d("Auth", `Fixed: ${pr()} | Trusted: ${fn()}`), d("Auth", "Loading authority...");
-    const n2 = g.secure || ((_a8 = window.location) == null ? void 0 : _a8.protocol.indexOf("https")) >= 0, r2 = (i) => {
+    const n2 = g.secure || ((_a9 = window.location) == null ? void 0 : _a9.protocol.indexOf("https")) >= 0, r2 = (i) => {
       d("Auth", `Failed to load authority(${i})`), ut.next(false), nt(
         "load_authority",
         () => {
@@ -68274,11 +68274,11 @@ function dn(e2 = 0) {
   })), v.load_authority;
 }
 async function co(e2) {
-  var _a8;
+  var _a9;
   const t = ho(e2);
   if (g.use_iframe)
     return ao(t);
-  (_a8 = window.location) == null ? void 0 : _a8.assign(t);
+  (_a9 = window.location) == null ? void 0 : _a9.assign(t);
 }
 function ao(e2) {
   return v.iframe_auth || (v.iframe_auth = new Promise((t, n2) => {
@@ -68286,8 +68286,8 @@ function ao(e2) {
     const r2 = document.createElement("iframe");
     r2.style.position = "absolute", r2.style.top = "0", r2.style.left = "0", r2.style.height = "1px", r2.style.width = "1px", r2.style.zIndex = "-1", r2.id = "place-authorize", r2.src = `${e2}`;
     const i = (o) => {
-      var _a8;
-      if (o.origin === ((_a8 = window.location) == null ? void 0 : _a8.origin) && o.data.type === "place-os") {
+      var _a9;
+      if (o.origin === ((_a9 = window.location) == null ? void 0 : _a9.origin) && o.data.type === "place-os") {
         const s = o.data;
         if (d("Auth", "Received credentials from iFrame..."), document.body.removeChild(r2), vt("iframe_auth"), window.removeEventListener("message", i), delete v.iframe_auth, s.token)
           return t(), pn(__spreadValues({
@@ -68312,16 +68312,16 @@ function ao(e2) {
 }
 var Dn = false;
 function yr(e2) {
-  var _a8, _b2;
+  var _a9, _b3;
   if (g.handle_login !== false && !Dn) {
     d("Auth", "Redirecting to login page...");
-    const t = (_b2 = e2.login_url) == null ? void 0 : _b2.replace(
+    const t = (_b3 = e2.login_url) == null ? void 0 : _b3.replace(
       "{{url}}",
-      encodeURIComponent((_a8 = window.location) == null ? void 0 : _a8.href)
+      encodeURIComponent((_a9 = window.location) == null ? void 0 : _a9.href)
     );
     throw setTimeout(() => {
-      var _a9;
-      return (_a9 = window.location) == null ? void 0 : _a9.assign(t);
+      var _a10;
+      return (_a10 = window.location) == null ? void 0 : _a10.assign(t);
     }, 300), Dn = true, new Error("Redirecting to login page...");
   } else
     d("Auth", "Login being handled locally.");
@@ -69034,12 +69034,14 @@ var Ho = class extends B2 {
   work_overrides;
   /** ID of the user's photo in the PlaceOS uploads service */
   photo_upload_id;
+  /** Whether the user has opted in to location tracking */
+  locatable;
   /** Password */
   password = "";
   /** Password */
   confirm_password = "";
   constructor(t = {}) {
-    super(t), this.authority_id = t.authority_id || "", this.email = t.email || "", this.email_digest = t.email_digest || "", this.phone = t.phone || "", this.country = t.country || "", this.building = t.building || "", this.image = t.image || "", this.metadata = t.metadata || "", this.login_name = t.login_name || "", this.staff_id = t.staff_id || "", this.first_name = t.first_name || "", this.last_name = t.last_name || "", this.support = !!t.support, this.sys_admin = !!t.sys_admin, this.ui_theme = t.ui_theme || "", this.card_number = t.card_number || "", this.groups = t.groups || [], this.department = t.department || "", this.photo_upload_id = t.photo_upload_id || "", this.work_preferences = t.work_preferences || [], this.work_overrides = t.work_overrides || {};
+    super(t), this.authority_id = t.authority_id || "", this.email = t.email || "", this.email_digest = t.email_digest || "", this.phone = t.phone || "", this.country = t.country || "", this.building = t.building || "", this.image = t.image || "", this.metadata = t.metadata || "", this.login_name = t.login_name || "", this.staff_id = t.staff_id || "", this.first_name = t.first_name || "", this.last_name = t.last_name || "", this.support = !!t.support, this.sys_admin = !!t.sys_admin, this.ui_theme = t.ui_theme || "", this.card_number = t.card_number || "", this.groups = t.groups || [], this.department = t.department || "", this.photo_upload_id = t.photo_upload_id || "", this.work_preferences = t.work_preferences || [], this.work_overrides = t.work_overrides || {}, this.locatable = t.locatable ?? true;
   }
 };
 var Dt = "users";
@@ -69051,6 +69053,16 @@ function Tc(e2 = {}) {
 }
 function Mc(e2, t = {}) {
   return $({ id: e2, query_params: t, fn: te, path: Dt });
+}
+function Uc(e2, t, n2 = "patch") {
+  return N2({
+    id: e2,
+    form_data: t,
+    query_params: {},
+    method: n2,
+    fn: te,
+    path: Dt
+  });
 }
 var ft = "zones";
 function Le(e2) {
@@ -69995,9 +70007,9 @@ function getDefaultOptions() {
 
 // node_modules/date-fns/startOfWeek.js
 function startOfWeek(date, options) {
-  var _a8, _b2, _c, _d;
+  var _a9, _b3, _c10, _d2;
   const defaultOptions2 = getDefaultOptions();
-  const weekStartsOn = (options == null ? void 0 : options.weekStartsOn) ?? ((_b2 = (_a8 = options == null ? void 0 : options.locale) == null ? void 0 : _a8.options) == null ? void 0 : _b2.weekStartsOn) ?? defaultOptions2.weekStartsOn ?? ((_d = (_c = defaultOptions2.locale) == null ? void 0 : _c.options) == null ? void 0 : _d.weekStartsOn) ?? 0;
+  const weekStartsOn = (options == null ? void 0 : options.weekStartsOn) ?? ((_b3 = (_a9 = options == null ? void 0 : options.locale) == null ? void 0 : _a9.options) == null ? void 0 : _b3.weekStartsOn) ?? defaultOptions2.weekStartsOn ?? ((_d2 = (_c10 = defaultOptions2.locale) == null ? void 0 : _c10.options) == null ? void 0 : _d2.weekStartsOn) ?? 0;
   const _date = toDate2(date, options == null ? void 0 : options.in);
   const day = _date.getDay();
   const diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
@@ -70705,11 +70717,11 @@ function getISOWeek(date, options) {
 
 // node_modules/date-fns/getWeekYear.js
 function getWeekYear(date, options) {
-  var _a8, _b2, _c, _d;
+  var _a9, _b3, _c10, _d2;
   const _date = toDate2(date, options == null ? void 0 : options.in);
   const year = _date.getFullYear();
   const defaultOptions2 = getDefaultOptions();
-  const firstWeekContainsDate = (options == null ? void 0 : options.firstWeekContainsDate) ?? ((_b2 = (_a8 = options == null ? void 0 : options.locale) == null ? void 0 : _a8.options) == null ? void 0 : _b2.firstWeekContainsDate) ?? defaultOptions2.firstWeekContainsDate ?? ((_d = (_c = defaultOptions2.locale) == null ? void 0 : _c.options) == null ? void 0 : _d.firstWeekContainsDate) ?? 1;
+  const firstWeekContainsDate = (options == null ? void 0 : options.firstWeekContainsDate) ?? ((_b3 = (_a9 = options == null ? void 0 : options.locale) == null ? void 0 : _a9.options) == null ? void 0 : _b3.firstWeekContainsDate) ?? defaultOptions2.firstWeekContainsDate ?? ((_d2 = (_c10 = defaultOptions2.locale) == null ? void 0 : _c10.options) == null ? void 0 : _d2.firstWeekContainsDate) ?? 1;
   const firstWeekOfNextYear = constructFrom((options == null ? void 0 : options.in) || date, 0);
   firstWeekOfNextYear.setFullYear(year + 1, 0, firstWeekContainsDate);
   firstWeekOfNextYear.setHours(0, 0, 0, 0);
@@ -70729,9 +70741,9 @@ function getWeekYear(date, options) {
 
 // node_modules/date-fns/startOfWeekYear.js
 function startOfWeekYear(date, options) {
-  var _a8, _b2, _c, _d;
+  var _a9, _b3, _c10, _d2;
   const defaultOptions2 = getDefaultOptions();
-  const firstWeekContainsDate = (options == null ? void 0 : options.firstWeekContainsDate) ?? ((_b2 = (_a8 = options == null ? void 0 : options.locale) == null ? void 0 : _a8.options) == null ? void 0 : _b2.firstWeekContainsDate) ?? defaultOptions2.firstWeekContainsDate ?? ((_d = (_c = defaultOptions2.locale) == null ? void 0 : _c.options) == null ? void 0 : _d.firstWeekContainsDate) ?? 1;
+  const firstWeekContainsDate = (options == null ? void 0 : options.firstWeekContainsDate) ?? ((_b3 = (_a9 = options == null ? void 0 : options.locale) == null ? void 0 : _a9.options) == null ? void 0 : _b3.firstWeekContainsDate) ?? defaultOptions2.firstWeekContainsDate ?? ((_d2 = (_c10 = defaultOptions2.locale) == null ? void 0 : _c10.options) == null ? void 0 : _d2.firstWeekContainsDate) ?? 1;
   const year = getWeekYear(date, options);
   const firstWeek = constructFrom((options == null ? void 0 : options.in) || date, 0);
   firstWeek.setFullYear(year, 0, firstWeekContainsDate);
@@ -71544,10 +71556,10 @@ var escapedStringRegExp = /^'([^]*?)'?$/;
 var doubleQuoteRegExp = /''/g;
 var unescapedLatinCharacterRegExp = /[a-zA-Z]/;
 function format(date, formatStr, options) {
-  var _a8, _b2, _c, _d, _e3, _f, _g, _h;
+  var _a9, _b3, _c10, _d2, _e3, _f, _g, _h;
   const defaultOptions2 = getDefaultOptions();
   const locale = (options == null ? void 0 : options.locale) ?? defaultOptions2.locale ?? enUS;
-  const firstWeekContainsDate = (options == null ? void 0 : options.firstWeekContainsDate) ?? ((_b2 = (_a8 = options == null ? void 0 : options.locale) == null ? void 0 : _a8.options) == null ? void 0 : _b2.firstWeekContainsDate) ?? defaultOptions2.firstWeekContainsDate ?? ((_d = (_c = defaultOptions2.locale) == null ? void 0 : _c.options) == null ? void 0 : _d.firstWeekContainsDate) ?? 1;
+  const firstWeekContainsDate = (options == null ? void 0 : options.firstWeekContainsDate) ?? ((_b3 = (_a9 = options == null ? void 0 : options.locale) == null ? void 0 : _a9.options) == null ? void 0 : _b3.firstWeekContainsDate) ?? defaultOptions2.firstWeekContainsDate ?? ((_d2 = (_c10 = defaultOptions2.locale) == null ? void 0 : _c10.options) == null ? void 0 : _d2.firstWeekContainsDate) ?? 1;
   const weekStartsOn = (options == null ? void 0 : options.weekStartsOn) ?? ((_f = (_e3 = options == null ? void 0 : options.locale) == null ? void 0 : _e3.options) == null ? void 0 : _f.weekStartsOn) ?? defaultOptions2.weekStartsOn ?? ((_h = (_g = defaultOptions2.locale) == null ? void 0 : _g.options) == null ? void 0 : _h.weekStartsOn) ?? 0;
   const originalDate = toDate2(date, options == null ? void 0 : options.in);
   if (!isValid(originalDate)) {
@@ -71834,7 +71846,7 @@ var COMMON = {
   FAVOURITES: "Favourites",
   FAVOURITES_ONLY: "Favourites Only",
   FAVOURITES_ADD: "Add to favourites",
-  FAVOURITES_REMOVE: "Add to favourites",
+  FAVOURITES_REMOVE: "Remove from favourites",
   ACCESSIBLE_ONLY: "Accessible Only",
   LANGUAGE: "Language",
   LANGUAGE_SELECT: "Select a language",
@@ -71921,7 +71933,7 @@ var COMMON = {
   SUPPORT_HEADER: "Raise a support ticket",
   SUPPORT_LOCATION: "Location",
   SUPPORT_TYPE: "Issue Type",
-  SUPPORT_DESCRIPTION: " Issue Description",
+  SUPPORT_DESCRIPTION: "Issue Description",
   SUPPORT_DESCRIPTION_REQUIRED: " A description is required",
   SUPPORT_IMAGES: "Images",
   SUPPORT_LOADING: "Sending support ticket...",
@@ -72005,7 +72017,8 @@ var COMMON = {
   WFH: "Work from Home",
   AOL: "Away on Leave",
   END_OF_LIST: "End of list",
-  NO_DESCRIPTION: "No description"
+  NO_DESCRIPTION: "No description",
+  LOCATABLE: "Location tracking"
 };
 var LANGUAGE = {
   ENGLISH: "English",
@@ -72014,7 +72027,7 @@ var LANGUAGE = {
   FRENCH: "French",
   FRENCH_CA: "French (Canadian)",
   SPANISH: "Spanish",
-  PORTUGESE: "Portugese",
+  PORTUGUESE: "Portuguese",
   ITALIAN: "Italian",
   CHINESE: "Chinese",
   ARABIC: "Arabic",
@@ -72134,13 +72147,13 @@ var EXPLORE = {
   LOCATE_CURRENT_FAILED: "Failed to retrieve your current location.",
   LOCATE_USER_FAILED: 'Failed to locate user "{{ name }}".',
   LOCATE_USER_NOT_FOUND: "No location for the given user",
-  LOCATE_USER_FOUND_NO_PIN: "Unable to resolve user's exact location on this level",
+  LOCATE_USER_FOUND_NO_PIN: "User is on this level but with an inaccurate method. {{ type }}",
   LOCATE_USER_DETAILS_FAILED: 'Failed to find user details for "{{ name }}".',
   LOCATE_SPACE_DETAILS_FAILED: "Failed to find space details.",
-  LOCATE_SERVICE_UNAVAILABLE: "Location services is not setup for this application.",
+  LOCATE_SERVICE_UNAVAILABLE: "Location services is not set up for this application.",
   ZOOM_IN: "Zoom in",
   ZOOM_OUT: "Zoom out",
-  ZOOM_RESET: "Reset zoom & center",
+  ZOOM_RESET: "Reset zoom & centre",
   DEVICE_COUNT: "{{ count }} user device(s)",
   SENSORS_TEMP: "Temperature: {{ value }}",
   SENSORS_PEOPLE: "{{ count }} people",
@@ -72178,6 +72191,7 @@ var EXPLORE = {
   BOOK_RESOURCE: "Book - {{ name }}",
   MAPSINDOORS_INIT_FAILED: "Failed to initialise map view.",
   MAP_EMPTY: "No map is set to display",
+  MAP_FAILED_TO_LOAD: "Failed to load map",
   COORDINATES: "Coordinates",
   MAP_ID: "Map ID",
   MAP_ID_EMPTY: "No map ID",
@@ -72246,7 +72260,7 @@ var BOOKINGS = {
   LOADING_AVAILABILITY: "Checking {{ type }} availability...",
   CONFIRM_TITLE: "Book {{ type }}",
   CONFIRM_MSG: "Would you like to book the {{ type }} for {{ date }}?",
-  CONFIRM_MSG_GROUP: "Would you like to book the {{ type }} for {{ date }}? <br>You group members will be assigned desks nearby your selected desk.",
+  CONFIRM_MSG_GROUP: "Would you like to book the {{ type }} for {{ date }}? <br>Your group members will be assigned desks nearby your selected desk.",
   CONFIRM_LOADING: "Processing booking request...",
   ASSETS_CLASH_ERROR: "Some assets are already booked for the selected time",
   ASSETS_INVALID_ERROR: "Failed to validate asset requests",
@@ -72278,15 +72292,15 @@ var BOOKINGS = {
   DESK_AVAILABLE_ERROR: "Desk is unavailable at this time.",
   DESK_LIST_LOADING: "Finding available desks...",
   DESK_LIST_EMPTY: "No available desks for selected time and/or filters",
-  DESK_SELECT_MSG: "Select a desk to view it's details",
+  DESK_SELECT_MSG: "Select a desk to view its details",
   ITEM_BOOKED: "{{ name }} booked!",
-  DESK_SUCCESS_LONE: "You desk booking has been successfully booked for {{ date }} at {{ time }}",
-  DESK_SUCCESS_GROUP: "You group of {{ size }} desks have been successfully booked for {{ date }} at {{ time }}",
-  DESK_SUCCESS_LONE_ALLDAY: "You desk booking has been successfully booked for {{ date }}",
-  DESK_SUCCESS_GROUP_ALLDAY: "You group of {{ size }} desks have been successfully booked for {{ date }}",
+  DESK_SUCCESS_LONE: "Your desk booking has been successfully booked for {{ date }} at {{ time }}",
+  DESK_SUCCESS_GROUP: "Your group of {{ size }} desks have been successfully booked for {{ date }} at {{ time }}",
+  DESK_SUCCESS_LONE_ALLDAY: "Your desk booking has been successfully booked for {{ date }}",
+  DESK_SUCCESS_GROUP_ALLDAY: "Your group of {{ size }} desks have been successfully booked for {{ date }}",
   ASSETS_BOOKED: "Booking includes {{ count }} asset(s)",
-  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for you booking to be approved.",
-  LINK_HEADER: "Add to event to your calendar",
+  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for your booking to be approved.",
+  LINK_HEADER: "Add event to your calendar",
   LINK_OUTLOOK: "Add to Outlook",
   LINK_GOOGLE: "Add to Google Calendar",
   LINK_ICAL: "Download iCal File",
@@ -72313,7 +72327,7 @@ var BOOKINGS = {
   PARKING_PLATE_NUMBER_REQUIRED: "A plate number is required",
   PARKING_LIST_LOADING: "Finding available parking spaces...",
   PARKING_LIST_EMPTY: "No available parking spaces for selected time and/or filters",
-  PARKING_SELECT_MSG: "Select a parking space to view it's details",
+  PARKING_SELECT_MSG: "Select a parking space to view its details",
   VISITOR_INVITE_TITLE: "Invite Visitor",
   VISITOR_LIST: "Visitors",
   VISITOR_NAME: "Visitor Name",
@@ -72340,14 +72354,16 @@ var BOOKINGS = {
   ASSETS_ADD_HEADER: "Add Assets",
   ASSETS_ADD: "Add this Asset",
   ASSETS_REMOVE: "Remove this Asset",
-  ASSETS_SELECT: "Select an asset to view it's details",
+  ASSETS_SELECT: "Select an asset to view its details",
   ASSETS_SEARCH: "Search assets...",
   ASSETS_LOADING: "Finding assets...",
   ASSETS_EMPTY: "No available assets for selected time and/or filters",
   ASSETS_DELIVER_TOGGLE: "Exact Time",
   ASSETS_DELIVER_DATE: "Delivery Date",
   ASSETS_DELIVER_TIME: "Deliver After",
-  ASSETS_AVAILABLE: "{{ count }} available"
+  ASSETS_AVAILABLE: "{{ count }} available",
+  RULES_HIDDEN_1: "The selected {{ type }} is unavailable for the selected time or duration",
+  RULES_HIDDEN_N: "Some of the selected {{ type }}s are unavailable for the selected time or duration"
 };
 var CALENDAR_EVENT = {
   CATERING: "Catering",
@@ -72374,7 +72390,7 @@ var CALENDAR_EVENT = {
   ACTION_DELETE: "Delete event",
   ACTION_PRINT: "Print event",
   ACTION_DELETE_SERIES: "Delete series",
-  NO_LONG_EDIT_MSG: "Editing bookings long than \n a day is not available",
+  NO_LONG_EDIT_MSG: "Editing bookings longer than \n a day is not available",
   SPACE_LOADING: "Loading space list for location...",
   SPACE_STATUS_LOADING: "Updating available spaces...",
   SPACE_EXTERNALS_ERROR: "External attendees require a space to be booked",
@@ -72387,7 +72403,7 @@ var CALENDAR_EVENT = {
   CAPACITY_WARNING: "The selected room has less capacity than the number of meeting attendees.",
   CAPACITY_ERROR: "Attendee count is greater than the capacity of the selected rooms",
   CATERING_CHARGE_CODE: "Charge Code",
-  CATERING_CHARGE_CODE_SEACH: "Search for charge code...",
+  CATERING_CHARGE_CODE_SEARCH: "Search for charge code...",
   CATERING_CHARGE_CODE_REQUIRED: "Catering charge code is required",
   CATERING_NOTES: "Extra catering details. e.g. Dietary requirements etc.",
   CATERING_NOTES_REQUIRED: "Catering order notes are required",
@@ -72401,9 +72417,9 @@ var CALENDAR_EVENT = {
   SUCCESS: "Successfully created event",
   SUCCESS_WITH_SPACE: "You room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }} at {{ time }}",
   SUCCESS_WITHOUT_SPACE: "You meeting has been successfully booked for {{ date }} at {{ time }}",
-  SUCCESS_WITH_SPACE_ALLDAY: "You room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }}",
-  SUCCESS_WITHOUT_SPACE_ALLDAY: "You meeting has been successfully booked for {{ date }}",
-  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for you booking to be approved.",
+  SUCCESS_WITH_SPACE_ALLDAY: "Your room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }}",
+  SUCCESS_WITHOUT_SPACE_ALLDAY: "Your meeting has been successfully booked for {{ date }}",
+  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for your booking to be approved.",
   BOOK_NEARBY_DESK: "Book nearby desk",
   SPACE_SELECT_SIZE: "Select room size",
   SPACE_SELECT_SIZE_X: "Min. {{ count }} people",
@@ -72415,12 +72431,14 @@ var CALENDAR_EVENT = {
   FACILITIES: "Room Facilities",
   SPACE_REMOVE: "Remove this room",
   SPACE_ADD_TO: "Add this room",
-  SPACE_LIST_INFO: "Select a room to view it's details",
+  SPACE_LIST_INFO: "Select a room to view its details",
   SPACE_LOCATION: "Location",
   SPACE_REGION_ANY: "Any region",
   SPACE_LEVEL_ANY: "Any level",
   SPACE_SELECT_EMPTY: "No available spaces for selected time and/or filters",
   SPACE_SELECT_LOADING: "Finding available spaces...",
+  SPACE_BOOKING_RULES_HIDDEN_1: "The selected room is not available for the selected time or duration",
+  SPACE_BOOKING_RULES_HIDDEN_N: "Some of the selected rooms are not available for the selected time or duration",
   CONFIRM_DETAILS: "Confirm Meeting",
   FINISHED: "Return home",
   LOADING: "Creating meeting requests...",
@@ -72433,14 +72451,14 @@ var CALENDAR_EVENT = {
   GROUP_FEATURED: "Featured",
   GROUP_INTERESTED: "Interested",
   GROUP_NOT_INTERESTED: "Not Interested",
-  GROUP_INTEREST_ADD: "Indictate Interest",
+  GROUP_INTEREST_ADD: "Indicate Interest",
   GROUP_INTEREST_REMOVE: "Revoke Interest",
   GROUP_ATTENDING_FIELD: "Attending",
   GROUP_GOING: "Going",
   GROUP_NOT_GOING: "Not Going",
-  GROUP_GOING_ADD: "Indictate Going",
+  GROUP_GOING_ADD: "Indicate Going",
   GROUP_GOING_REMOVE: "Revoke Going",
-  GROUP_PREMOTE: "Premote Event",
+  GROUP_PROMOTE: "Promote Event",
   GROUP_EDIT: "Edit Event",
   GROUP_COPY_URL: "Copy URL",
   GROUP_DELETE: "Delete Event",
@@ -72515,7 +72533,7 @@ var CATERING = {
   ORDER_ITEMS_LOADING: "Finding available menu items...",
   ORDER_ITEM_REMOVE: "Remove this item",
   ORDER_ITEM_ADD: "Add this item",
-  ORDER_ITEM_SELECT: "Select an item to view it's details",
+  ORDER_ITEM_SELECT: "Select an item to view its details",
   ORDER_ALLOW: "Allow ordering this item from this zone",
   ORDERS_EMPTY: "No catering orders for the selected date.",
   ORDERS_DELIVER_TIME: "Deliver at {{ time }}",
@@ -72641,9 +72659,9 @@ var APP = {
     PARKING_NEW_HEADER: "New Parking Reservation",
     PARKING_EDIT_HEADER: "Edit Parking Reservation",
     PARKING_ASSIGNED: 'You are already assigned a parking space "{{ name }}"',
-    PARKING_SUCCESS_MSG: 'Your parking space reservation for "{{ name }}" at {{ place }} has been successfully booked for the {{ date }} at {{ time }}',
+    PARKING_SUCCESS_MSG: 'Your parking space reservation for "{{ name }}" has been successfully booked for the {{ date }} at {{ time }}',
     PARKING_CONFIRM_TITLE: "Confirm Parking Reservation",
-    DESK_ASSIGNED: 'You are already assigned a parking space "{{ name }}"',
+    DESK_ASSIGNED: 'You are already assigned a desk "{{ name }}"',
     DESK_CONFIRM_TITLE: "Confirm Desk Booking",
     VIEW_SCHEDULE: "View your Bookings",
     BOOKING_FINISHED: "Return home",
@@ -72655,8 +72673,9 @@ var APP = {
     CHAT_ASSISTANT: "Assistant",
     CHAT_WAITING: "Waiting for a reply...",
     CHAT_MESSAGE_PLACEHOLDER: "New message...",
-    RESOURCE_CHECKED_IN_FAILED: "Failed to check in resource",
-    RESOURCE_CHECKED_IN: "Successfully checked in resource"
+    RESOURCE_CHECKED_IN_FAILED: "No booking found",
+    RESOURCE_CHECKED_IN: "Successfully checked in resource",
+    RESOURCE_CHECKED_IN_MESSAGE: "Resource checked in successfully"
   },
   CONCIERGE: {
     MENU_BOOKINGS: "Bookings",
@@ -73008,7 +73027,7 @@ var APP = {
     EMAIL_TEMPLATES_SAVE: "Save Template",
     EMAIL_TEMPLATES_SEND_TEST: "Send test Email",
     EMAIL_TEMPLATES_SENT_TEST: "Successfully sent test email.",
-    EMAIL_TEMPLATES_CONFIG_ERROR: "Mailing system is not configured fot this application",
+    EMAIL_TEMPLATES_CONFIG_ERROR: "Mailing system is not configured for this application",
     EMAIL_TEMPLATES_SAVE_SUCCESS: "Successfully saved email template.",
     EMAIL_TEMPLATES_SAVE_ERROR: "Failed to save email template. Error: {{ error }}",
     EMAIL_TEMPLATES_REMOVE_SUCCESS: "Successfully removed email template",
@@ -73224,7 +73243,7 @@ var APP = {
     LOCKERS_RELEASE_ALL_SUCCESS: "Successfully released all locker",
     LOCKERS_SHARE_ERROR: 'Failed to share locker with "{{ name }}". Error: {{ error }}',
     LOCKERS_SHARE_SUCCESS: 'Successfully shared locker "{{ name }}" with {{ user }}',
-    LOCKERS_NO_DRIVER: "Driver is not setup for lockers",
+    LOCKERS_NO_DRIVER: "Driver is not set up for lockers",
     LOCKERS_POSITION_INVALID: "Position of the locker overlaps with another locker",
     LOCKERS_SIZE_INVALID: "Locker overlaps with another locker",
     SIGNAGE_HEADER: "Digital Signage Management",
@@ -73517,6 +73536,11 @@ var APP = {
     APPROVER: "Approver",
     VALID_FROM: "Valid From",
     VALID_UNTIL: "Valid Until",
+    PLAY_FROM: "Play From",
+    PLAY_UNTIL: "Play Until",
+    PLAY_AT: "Play At",
+    PLAY_CRON: "Play Schedule",
+    PLAY_DURATION: "Play For",
     AVAILABLE_ROOMS_HEADER: "Set {{ type }} availability for rooms",
     AVAILABLE_ROOMS_SAVING: "Saving room availability for {{ type }}...",
     AVAILABLE_ROOMS_ENABLE: "Enable Selected",
@@ -73597,7 +73621,7 @@ var APP = {
     ACTION_HELP: "Help",
     ACTION_JOIN_ROOMS: "Join Rooms",
     ACTION_POWER: "Power",
-    OUTPUTS_EMPTY: "No output devices setup for this system.",
+    OUTPUTS_EMPTY: "No output devices set up for this system.",
     CONTROLS_EMPTY: "No controls available for this input source",
     INPUT_EMPTY: "No input source",
     INPUT_CATEGORY_EMPTY: "No inputs available for category",
@@ -73677,7 +73701,7 @@ var APP = {
     PREVIOUS: "Previous Media",
     PLAY: "Playing",
     PAUSE: "Paused",
-    NEXT: "Previous Media",
+    NEXT: "Next Media",
     VOLUME: "Volume [{{ state }}]",
     LOOP_ALL: "Loop [All]",
     LOOP_ONE: "Loop [One]",
@@ -73721,7 +73745,7 @@ var APP = {
     CAMERA_UNAVAILABLE: "Camera feed loading...",
     HOST: "Host",
     PHONE: "Phone",
-    ORGANISATION: "Organization",
+    ORGANISATION: "Organisation",
     REASON: "Reason for visit",
     CHECKED_IN_MSG: "You are checked in!",
     CHECKED_IN_MSG_SELF_REG: "Your registration is confirmed!",
@@ -73750,7 +73774,7 @@ var APP = {
     BEVERAGE_LOADING: "Requesting drink...",
     BEVERAGE_SUCCESS: "Successfully requested drink. Your request should show up at your meeting shortly after the start time.",
     ERROR_PRINT: "Failed to print visitor label.",
-    ERROR_CHECKIN: "Failed to check-in {{ guest }} for {{ host }}'s meeting.",
+    ERROR_CHECKIN: "Failed to check in {{ guest }} for {{ host }}'s meeting.",
     SUCCESS_CHECKIN: "Successfully checked in {{ guest }} for {{ host }}'s meeting",
     NOT_FOUND: 'No meetings for guest "{{ email }}" today',
     LOAD_ERROR: "Failed to load booking for guest.",
@@ -74332,16 +74356,16 @@ function addToDate(add2, date = /* @__PURE__ */ new Date()) {
 }
 function filterResourcesFromRules(resources, details, ruleset_list) {
   return resources.filter((_3) => {
-    var _a8;
-    return !((_a8 = rulesForResource(__spreadProps(__spreadValues({}, details), { resource: _3 }), ruleset_list)) == null ? void 0 : _a8.hidden);
+    var _a9;
+    return !((_a9 = rulesForResource(__spreadProps(__spreadValues({}, details), { resource: _3 }), ruleset_list)) == null ? void 0 : _a9.hidden);
   });
 }
 function rulesForResource(details, ruleset_list) {
-  var _a8, _b2;
+  var _a9, _b3;
   if (!(ruleset_list instanceof Array))
     return DEFAULT_RULES;
   for (const ruleset of ruleset_list) {
-    if (ruleset.zone === "*" || ruleset.zone === ((_a8 = details.resource.zone) == null ? void 0 : _a8.id) || ((_b2 = details.resource.zones) == null ? void 0 : _b2.includes(ruleset.zone))) {
+    if (ruleset.zone === "*" || ruleset.zone === ((_a9 = details.resource.zone) == null ? void 0 : _a9.id) || ((_b3 = details.resource.zones) == null ? void 0 : _b3.includes(ruleset.zone))) {
       if (checkRulesMatch(details, ruleset)) {
         return ruleset.rules;
       }
@@ -74356,8 +74380,8 @@ function checkRulesMatch({ date, duration, host, resource: resource2 }, ruleset)
   if (!conditions)
     return true;
   if (conditions.groups instanceof Array && conditions.groups.every((_3) => {
-    var _a8;
-    return (_a8 = host == null ? void 0 : host.groups) == null ? void 0 : _a8.includes(_3);
+    var _a9;
+    return (_a9 = host == null ? void 0 : host.groups) == null ? void 0 : _a9.includes(_3);
   }))
     matches += 1;
   if (conditions.is_before && isBefore(addMinutes(date, duration), addToDate(conditions.is_before)))
@@ -74641,7 +74665,7 @@ function escapeText(text) {
   });
 }
 function generateCalendarFileLink(event) {
-  var _a8;
+  var _a9;
   if (!event)
     return "data:text/calendar;charset=utf8,";
   const chunks = [];
@@ -74669,7 +74693,7 @@ function generateCalendarFileLink(event) {
   chunks.push(["DESCRIPTION", description]);
   chunks.push(["LOCATION", location2]);
   const hostEmail = event.host || event.user_email || `no-reply@place.tech`;
-  const hostName = ((_a8 = event.organiser) == null ? void 0 : _a8.name) || hostEmail.split("@")[0] || "Staff";
+  const hostName = ((_a9 = event.organiser) == null ? void 0 : _a9.name) || hostEmail.split("@")[0] || "Staff";
   chunks.push([
     "ORGANIZER",
     `CN=${escapeText(hostName)}:mailto:${hostEmail}`
@@ -74681,7 +74705,7 @@ function generateCalendarFileLink(event) {
   return `data:text/calendar;charset=utf8,${url_data}`;
 }
 function generateGoogleCalendarLink(event) {
-  var _a8;
+  var _a9;
   const fmt = event.all_day ? formatAllDay : formatUTC;
   const details = {
     action: "TEMPLATE",
@@ -74692,7 +74716,7 @@ function generateGoogleCalendarLink(event) {
     dates: `${fmt(event.date)}/${fmt(addMinutes(event.date, event.duration ?? 60))}`
   };
   const emails = (event.attendees || []).map((_3) => _3.email || _3);
-  const resources = ((((_a8 = event.resources) == null ? void 0 : _a8.length) ? event.resources : null) || [event.system]).map((_3) => (_3 == null ? void 0 : _3.email) || _3);
+  const resources = ((((_a9 = event.resources) == null ? void 0 : _a9.length) ? event.resources : null) || [event.system]).map((_3) => (_3 == null ? void 0 : _3.email) || _3);
   if (emails.length || resources.length)
     details.add = unique([...emails, ...resources]).join();
   return `https://calendar.google.com/calendar/render?${toQueryString(details)}`;
@@ -74701,7 +74725,7 @@ function dateToISO(date) {
   return `${format(date, "yyyy-MM-dd")}T${format(date, "HH:mm:ss")}`;
 }
 function generateMicrosoftCalendarLink(event, type2 = "office", status = "free") {
-  var _a8;
+  var _a9;
   if (!event.date)
     event.date = Date.now();
   const data = {
@@ -74719,7 +74743,7 @@ function generateMicrosoftCalendarLink(event, type2 = "office", status = "free")
   if (event.all_day)
     delete data.enddt;
   const emails = (event.attendees || []).map((_3) => _3.email || _3);
-  const resources = ((((_a8 = event.resources) == null ? void 0 : _a8.length) ? event.resources : null) || [event.system]).map((_3) => (_3 == null ? void 0 : _3.email) || _3);
+  const resources = ((((_a9 = event.resources) == null ? void 0 : _a9.length) ? event.resources : null) || [event.system]).map((_3) => (_3 == null ? void 0 : _3.email) || _3);
   if (emails.length || resources.length)
     data.to = unique([...emails, ...resources]).filter((_3) => !!_3).join(",");
   return type2 === "office" ? `https://outlook.office.com/calendar/deeplink/compose?${toQueryString(data)}` : `https://outlook.live.com/calendar/deeplink/compose?${toQueryString(data)}`;
@@ -74755,9 +74779,9 @@ var _HotkeysService = class _HotkeysService {
       }
     });
     window.addEventListener("keyup", (event) => {
-      var _a8;
+      var _a9;
       const code = this.mapKey((event.code || "").toLowerCase());
-      (_a8 = this.keydown_states[code]) == null ? void 0 : _a8.next(null);
+      (_a9 = this.keydown_states[code]) == null ? void 0 : _a9.next(null);
       if (this.last_down === code) {
         this.last_down = null;
       }
@@ -74853,7 +74877,7 @@ var HotkeysService = _HotkeysService;
 // libs/organisation/src/lib/level.class.ts
 var BuildingLevel = class {
   constructor(_data = {}) {
-    var _a8;
+    var _a9;
     this.settings = {};
     this.id = _data.id || "";
     this.parent_id = _data.parent_id || "";
@@ -74867,7 +74891,7 @@ var BuildingLevel = class {
     this.images = _data.images || [];
     this.code = _data.code || "";
     const parts = this.display_name.split(" ");
-    this.number = (((_a8 = parts.length >= 2 ? parts[parts.length - 1] : this.display_name[0]) == null ? void 0 : _a8.toUpperCase()) || "").substring(0, 2);
+    this.number = (((_a9 = parts.length >= 2 ? parts[parts.length - 1] : this.display_name[0]) == null ? void 0 : _a9.toUpperCase()) || "").substring(0, 2);
   }
 };
 
@@ -75096,15 +75120,15 @@ var MapsPeopleService = _MapsPeopleService;
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "ecafbbc",
-  "hash": "ecafbbc",
+  "raw": "57828e4",
+  "hash": "57828e4",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "ecafbbc",
+  "suffix": "57828e4",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752125226074
+  "time": 1753234283689
 };
 
 // libs/common/src/lib/vorlon.service.ts
@@ -75300,8 +75324,8 @@ var RendererAnimationPlayer = class {
     this._command("setPosition", p);
   }
   getPosition() {
-    var _a8, _b2, _c;
-    return ((_c = (_b2 = (_a8 = unwrapAnimationRenderer(this._renderer)) == null ? void 0 : _a8.engine) == null ? void 0 : _b2.players[this.id]) == null ? void 0 : _c.getPosition()) ?? 0;
+    var _a9, _b3, _c10;
+    return ((_c10 = (_b3 = (_a9 = unwrapAnimationRenderer(this._renderer)) == null ? void 0 : _a9.engine) == null ? void 0 : _b3.players[this.id]) == null ? void 0 : _c10.getPosition()) ?? 0;
   }
   totalTime = 0;
 };
@@ -77195,7 +77219,7 @@ var kt2 = function(n2) {
   }, r2;
 }(Z3);
 var At2 = new Int32Array(4);
-var c = class _c {
+var c = class _c10 {
   static hashStr(r2, t = false) {
     return this.onePassHasher.start().appendStr(r2).end(t);
   }
@@ -77230,9 +77254,9 @@ var c = class _c {
   static hexChars = "0123456789abcdef";
   static hexOut = [];
   // Permanent instance is to use for one-call hashing
-  static onePassHasher = new _c();
+  static onePassHasher = new _c10();
   static _hex(r2) {
-    const t = _c.hexChars, e2 = _c.hexOut;
+    const t = _c10.hexChars, e2 = _c10.hexOut;
     let s, i, o, a;
     for (a = 0; a < 4; a += 1)
       for (i = a * 8, s = r2[a], o = 0; o < 8; o += 2)
@@ -77256,7 +77280,7 @@ var c = class _c {
    * Initialise buffer to be hashed
    */
   start() {
-    return this._dataLength = 0, this._bufferLength = 0, this._state.set(_c.stateIdentity), this;
+    return this._dataLength = 0, this._bufferLength = 0, this._state.set(_c10.stateIdentity), this;
   }
   // Char to code point to to array conversion:
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt
@@ -77282,7 +77306,7 @@ var c = class _c {
           );
         t[s++] = (i >>> 18) + 240, t[s++] = i >>> 12 & 63 | 128, t[s++] = i >>> 6 & 63 | 128, t[s++] = i & 63 | 128;
       }
-      s >= 64 && (this._dataLength += 64, _c._md5cycle(this._state, e2), s -= 64, e2[0] = e2[16]);
+      s >= 64 && (this._dataLength += 64, _c10._md5cycle(this._state, e2), s -= 64, e2[0] = e2[16]);
     }
     return this._bufferLength = s, this;
   }
@@ -77298,7 +77322,7 @@ var c = class _c {
         t[s++] = r2.charCodeAt(o++);
       if (s < 64)
         break;
-      this._dataLength += 64, _c._md5cycle(this._state, e2), s = 0;
+      this._dataLength += 64, _c10._md5cycle(this._state, e2), s = 0;
     }
     return this._bufferLength = s, this;
   }
@@ -77314,7 +77338,7 @@ var c = class _c {
         t[s++] = r2[o++];
       if (s < 64)
         break;
-      this._dataLength += 64, _c._md5cycle(this._state, e2), s = 0;
+      this._dataLength += 64, _c10._md5cycle(this._state, e2), s = 0;
     }
     return this._bufferLength = s, this;
   }
@@ -77348,7 +77372,7 @@ var c = class _c {
     const t = this._bufferLength, e2 = this._buffer8, s = this._buffer32, i = (t >> 2) + 1;
     this._dataLength += t;
     const o = this._dataLength * 8;
-    if (e2[t] = 128, e2[t + 1] = e2[t + 2] = e2[t + 3] = 0, s.set(_c.buffer32Identity.subarray(i), i), t > 55 && (_c._md5cycle(this._state, s), s.set(_c.buffer32Identity)), o <= 4294967295)
+    if (e2[t] = 128, e2[t + 1] = e2[t + 2] = e2[t + 3] = 0, s.set(_c10.buffer32Identity.subarray(i), i), t > 55 && (_c10._md5cycle(this._state, s), s.set(_c10.buffer32Identity)), o <= 4294967295)
       s[14] = o;
     else {
       const a = o.toString(16).match(/(.*?)(.{0,8})$/);
@@ -77356,7 +77380,7 @@ var c = class _c {
       const h3 = parseInt(a[2], 16), p = parseInt(a[1], 16) || 0;
       s[14] = h3, s[15] = p;
     }
-    return _c._md5cycle(this._state, s), r2 ? this._state : _c._hex(this._state);
+    return _c10._md5cycle(this._state, s), r2 ? this._state : _c10._hex(this._state);
   }
 };
 if (c.hashStr("hello") !== "5d41402abc4b2a76b9719d911017c592")
@@ -77398,9 +77422,9 @@ var Ot2 = class {
   }
   // Hash result is returned from the worker
   _recievedMessage(r2) {
-    var _a8, _b2;
+    var _a9, _b3;
     const t = r2.data;
-    t.success ? (_a8 = this._processing) == null ? void 0 : _a8.resolve(t.result) : (_b2 = this._processing) == null ? void 0 : _b2.reject(t.result), this._processing = void 0, this._processNext();
+    t.success ? (_a9 = this._processing) == null ? void 0 : _a9.resolve(t.result) : (_b3 = this._processing) == null ? void 0 : _b3.reject(t.result), this._processing = void 0, this._processNext();
   }
 };
 var P3 = [];
@@ -77473,9 +77497,9 @@ var V2 = class {
     return encodeURIComponent(`${this.upload_id || ""}`);
   }
   async initialise() {
-    var _a8;
+    var _a9;
     const { signal: r2 } = this._abort_ctrl, { file: t, mime_type: e2 } = this._upload;
-    this._params.file_size = `${t.size}`, this._params.file_name = t.name, e2 && e2 !== "binary/octet-stream" && (this._params.file_mime = e2), this._params = __spreadValues(__spreadValues({}, this._params), this._upload.params), ((_a8 = t.dir_path) == null ? void 0 : _a8.length) > 0 && (this._params.file_path = t.dir_path);
+    this._params.file_size = `${t.size}`, this._params.file_name = t.name, e2 && e2 !== "binary/octet-stream" && (this._params.file_mime = e2), this._params = __spreadValues(__spreadValues({}, this._params), this._upload.params), ((_a9 = t.dir_path) == null ? void 0 : _a9.length) > 0 && (this._params.file_path = t.dir_path);
     const s = this.base_request_headers, i = R2(this._params);
     return (await fetch(
       `${this._endpoint}/new${i ? "?" + i : ""}`,
@@ -77644,8 +77668,8 @@ var Tt = class {
   mime_type = "binary/octet-stream";
   metadata;
   get id() {
-    var _a8;
-    return (_a8 = this._request) == null ? void 0 : _a8.upload_id;
+    var _a9;
+    return (_a9 = this._request) == null ? void 0 : _a9.upload_id;
   }
   /** URL of the uploaded resource */
   get access_url() {
@@ -77653,18 +77677,18 @@ var Tt = class {
   }
   /** Whether resource is waiting to be uploaded */
   get waiting() {
-    var _a8;
-    return ((_a8 = this._state.getValue()) == null ? void 0 : _a8.status) === "waiting";
+    var _a9;
+    return ((_a9 = this._state.getValue()) == null ? void 0 : _a9.status) === "waiting";
   }
   /** Whether resource is currently being uploaded */
   get in_progress() {
-    var _a8;
-    return ((_a8 = this._state.getValue()) == null ? void 0 : _a8.status) === "uploading";
+    var _a9;
+    return ((_a9 = this._state.getValue()) == null ? void 0 : _a9.status) === "uploading";
   }
   /** Whether resource has been uploaded to the provider */
   get completed() {
-    var _a8;
-    return ((_a8 = this._state.getValue()) == null ? void 0 : _a8.status) === "complete";
+    var _a9;
+    return ((_a9 = this._state.getValue()) == null ? void 0 : _a9.status) === "complete";
   }
   /** @hidden */
   setAccessUrl(r2) {
@@ -77691,7 +77715,7 @@ var Tt = class {
   }
   /** Resume uploading the resource */
   async resume(r2) {
-    var _a8;
+    var _a9;
     const t = this._state.getValue();
     if (!["complete", "uploading", "cancelled"].includes(t.status)) {
       if (r2 && (this.parallel = r2), !this._provider) {
@@ -77699,20 +77723,20 @@ var Tt = class {
         const { residence: e2 } = await this._request.initialise(), s = Ct(e2);
         s ? (this._provider = new s(this._request, this), this._state.next(__spreadProps(__spreadValues({}, t), { status: "uploading" }))) : this.onError("No provider available to upload to");
       }
-      (_a8 = this._provider) == null ? void 0 : _a8.start();
+      (_a9 = this._provider) == null ? void 0 : _a9.start();
     }
   }
   /** Pause the uploading of the resource */
   pause() {
-    var _a8;
+    var _a9;
     const r2 = this._state.getValue();
-    r2.status === "uploading" && ((_a8 = this._provider) == null ? void 0 : _a8.pause(), this._state.next(__spreadProps(__spreadValues({}, r2), { status: "paused" })));
+    r2.status === "uploading" && ((_a9 = this._provider) == null ? void 0 : _a9.pause(), this._state.next(__spreadProps(__spreadValues({}, r2), { status: "paused" })));
   }
   /** Cancel the upload of the resource */
   cancel() {
-    var _a8;
+    var _a9;
     const r2 = this._state.getValue();
-    ["complete", "cancelled"].includes(r2.status) || (r2.status === "uploading" && ((_a8 = this._provider) == null ? void 0 : _a8.destroy()), this._state.next(__spreadProps(__spreadValues({}, r2), { status: "cancelled" })));
+    ["complete", "cancelled"].includes(r2.status) || (r2.status === "uploading" && ((_a9 = this._provider) == null ? void 0 : _a9.destroy()), this._state.next(__spreadProps(__spreadValues({}, r2), { status: "cancelled" })));
   }
 };
 var nt2 = {
@@ -78295,7 +78319,7 @@ function uploadFile(file, pub = true, permissions = "none") {
       });
       const upload = upload_list[0];
       const upload_details = {
-        id: randomInt(999999999999),
+        id: (upload == null ? void 0 : upload.id) || `uploads-${randomString(8)}`,
         name: file.name,
         progress: 0,
         link: "",
@@ -78597,7 +78621,7 @@ var CdkDialogContainer = class _CdkDialogContainer extends BasePortalOutlet {
       return;
     }
     afterNextRender(() => {
-      var _a8;
+      var _a9;
       const element = this._elementRef.nativeElement;
       switch (this._config.autoFocus) {
         case false:
@@ -78608,7 +78632,7 @@ var CdkDialogContainer = class _CdkDialogContainer extends BasePortalOutlet {
           break;
         case true:
         case "first-tabbable":
-          const focusedSuccessfully = (_a8 = this._focusTrap) == null ? void 0 : _a8.focusInitialElement(options);
+          const focusedSuccessfully = (_a9 = this._focusTrap) == null ? void 0 : _a9.focusInitialElement(options);
           if (!focusedSuccessfully) {
             this._focusDialogContainer(options);
           }
@@ -78653,8 +78677,8 @@ var CdkDialogContainer = class _CdkDialogContainer extends BasePortalOutlet {
   }
   /** Focuses the dialog container. */
   _focusDialogContainer(options) {
-    var _a8, _b2;
-    (_b2 = (_a8 = this._elementRef.nativeElement).focus) == null ? void 0 : _b2.call(_a8, options);
+    var _a9, _b3;
+    (_b3 = (_a9 = this._elementRef.nativeElement).focus) == null ? void 0 : _b3.call(_a9, options);
   }
   /** Returns whether focus is inside the dialog. */
   _containsFocus() {
@@ -78783,13 +78807,13 @@ var DialogRef = class {
       }
     });
     this.backdropClick.subscribe(() => {
-      var _a8, _b2;
+      var _a9, _b3;
       if (!this.disableClose && this._canClose()) {
         this.close(void 0, {
           focusOrigin: "mouse"
         });
       } else {
-        (_b2 = (_a8 = this.containerInstance)._recaptureFocus) == null ? void 0 : _b2.call(_a8);
+        (_b3 = (_a9 = this.containerInstance)._recaptureFocus) == null ? void 0 : _b3.call(_a9);
       }
     });
     this._detachSubscription = overlayRef.detachments().subscribe(() => {
@@ -78902,8 +78926,8 @@ var Dialog = class _Dialog {
   constructor() {
   }
   open(componentOrTemplateRef, config2) {
-    const defaults2 = this._defaultOptions || new DialogConfig();
-    config2 = __spreadValues(__spreadValues({}, defaults2), config2);
+    const defaults3 = this._defaultOptions || new DialogConfig();
+    config2 = __spreadValues(__spreadValues({}, defaults3), config2);
     config2.id = config2.id || this._idGenerator.getId("cdk-dialog-");
     if (config2.id && this.getDialogById(config2.id) && (typeof ngDevMode === "undefined" || ngDevMode)) {
       throw Error(`Dialog with id "${config2.id}" exists already. The dialog id must be unique.`);
@@ -78979,8 +79003,8 @@ var Dialog = class _Dialog {
    * @returns A promise resolving to a ComponentRef for the attached container.
    */
   _attachContainer(overlay, dialogRef, config2) {
-    var _a8;
-    const userInjector = config2.injector || ((_a8 = config2.viewContainerRef) == null ? void 0 : _a8.injector);
+    var _a9;
+    const userInjector = config2.injector || ((_a9 = config2.viewContainerRef) == null ? void 0 : _a9.injector);
     const providers = [{
       provide: DialogConfig,
       useValue: config2
@@ -79046,8 +79070,8 @@ var Dialog = class _Dialog {
    * @returns The custom injector that can be used inside the dialog.
    */
   _createInjector(config2, dialogRef, dialogContainer, fallbackInjector) {
-    var _a8;
-    const userInjector = config2.injector || ((_a8 = config2.viewContainerRef) == null ? void 0 : _a8.injector);
+    var _a9;
+    const userInjector = config2.injector || ((_a9 = config2.viewContainerRef) == null ? void 0 : _a9.injector);
     const providers = [{
       provide: DIALOG_DATA,
       useValue: config2.data
@@ -79710,7 +79734,7 @@ var MatDialog = class _MatDialog {
     this._dialogDataToken = MAT_DIALOG_DATA;
   }
   open(componentOrTemplateRef, config2) {
-    var _a8, _b2;
+    var _a9, _b3;
     let dialogRef;
     config2 = __spreadValues(__spreadValues({}, this._defaultOptions || new MatDialogConfig()), config2);
     config2.id = config2.id || this._idGenerator.getId("mat-mdc-dialog-");
@@ -79728,7 +79752,7 @@ var MatDialog = class _MatDialog {
       // Disable closing on detachments so that we can sync up the animation.
       // The Material dialog ref handles this manually.
       closeOnOverlayDetachments: false,
-      disableAnimations: this._animationsDisabled || ((_a8 = config2.enterAnimationDuration) == null ? void 0 : _a8.toLocaleString()) === "0" || ((_b2 = config2.exitAnimationDuration) == null ? void 0 : _b2.toString()) === "0",
+      disableAnimations: this._animationsDisabled || ((_a9 = config2.enterAnimationDuration) == null ? void 0 : _a9.toLocaleString()) === "0" || ((_b3 = config2.exitAnimationDuration) == null ? void 0 : _b3.toString()) === "0",
       container: {
         type: this._dialogContainerType,
         providers: () => [
@@ -79924,8 +79948,8 @@ var MatDialogLayoutSection = class _MatDialogLayoutSection {
     }
   }
   ngOnDestroy() {
-    var _a8;
-    const instance = (_a8 = this._dialogRef) == null ? void 0 : _a8._containerInstance;
+    var _a9;
+    const instance = (_a9 = this._dialogRef) == null ? void 0 : _a9._containerInstance;
     if (instance) {
       Promise.resolve().then(() => {
         this._onRemove();
@@ -79947,12 +79971,12 @@ var MatDialogLayoutSection = class _MatDialogLayoutSection {
 var MatDialogTitle = class _MatDialogTitle extends MatDialogLayoutSection {
   id = inject(_IdGenerator).getId("mat-mdc-dialog-title-");
   _onAdd() {
-    var _a8, _b2;
-    (_b2 = (_a8 = this._dialogRef._containerInstance) == null ? void 0 : _a8._addAriaLabelledBy) == null ? void 0 : _b2.call(_a8, this.id);
+    var _a9, _b3;
+    (_b3 = (_a9 = this._dialogRef._containerInstance) == null ? void 0 : _a9._addAriaLabelledBy) == null ? void 0 : _b3.call(_a9, this.id);
   }
   _onRemove() {
-    var _a8, _b2, _c;
-    (_c = (_b2 = (_a8 = this._dialogRef) == null ? void 0 : _a8._containerInstance) == null ? void 0 : _b2._removeAriaLabelledBy) == null ? void 0 : _c.call(_b2, this.id);
+    var _a9, _b3, _c10;
+    (_c10 = (_b3 = (_a9 = this._dialogRef) == null ? void 0 : _a9._containerInstance) == null ? void 0 : _b3._removeAriaLabelledBy) == null ? void 0 : _c10.call(_b3, this.id);
   }
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275MatDialogTitle_BaseFactory;
@@ -80023,12 +80047,12 @@ var MatDialogActions = class _MatDialogActions extends MatDialogLayoutSection {
    */
   align;
   _onAdd() {
-    var _a8, _b2;
-    (_b2 = (_a8 = this._dialogRef._containerInstance) == null ? void 0 : _a8._updateActionSectionCount) == null ? void 0 : _b2.call(_a8, 1);
+    var _a9, _b3;
+    (_b3 = (_a9 = this._dialogRef._containerInstance) == null ? void 0 : _a9._updateActionSectionCount) == null ? void 0 : _b3.call(_a9, 1);
   }
   _onRemove() {
-    var _a8, _b2;
-    (_b2 = (_a8 = this._dialogRef._containerInstance) == null ? void 0 : _a8._updateActionSectionCount) == null ? void 0 : _b2.call(_a8, -1);
+    var _a9, _b3;
+    (_b3 = (_a9 = this._dialogRef._containerInstance) == null ? void 0 : _a9._updateActionSectionCount) == null ? void 0 : _b3.call(_a9, -1);
   }
   static \u0275fac = /* @__PURE__ */ (() => {
     let \u0275MatDialogActions_BaseFactory;
@@ -80103,28 +80127,3299 @@ var MatDialogModule = class _MatDialogModule {
   }], null, null);
 })();
 
+// node_modules/@angular/material/fesm2022/internal-form-field-D5iFxU6d.mjs
+var _c08 = ["mat-internal-form-field", ""];
+var _c17 = ["*"];
+var _MatInternalFormField = class __MatInternalFormField {
+  /** Position of the label relative to the content. */
+  labelPosition;
+  static \u0275fac = function _MatInternalFormField_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || __MatInternalFormField)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: __MatInternalFormField,
+    selectors: [["div", "mat-internal-form-field", ""]],
+    hostAttrs: [1, "mdc-form-field", "mat-internal-form-field"],
+    hostVars: 2,
+    hostBindings: function _MatInternalFormField_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275classProp("mdc-form-field--align-end", ctx.labelPosition === "before");
+      }
+    },
+    inputs: {
+      labelPosition: "labelPosition"
+    },
+    attrs: _c08,
+    ngContentSelectors: _c17,
+    decls: 1,
+    vars: 0,
+    template: function _MatInternalFormField_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275projection(0);
+      }
+    },
+    styles: [".mat-internal-form-field{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-flex;align-items:center;vertical-align:middle}.mat-internal-form-field>label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0;order:0}[dir=rtl] .mat-internal-form-field>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px}.mdc-form-field--align-end>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px;order:-1}[dir=rtl] .mdc-form-field--align-end .mdc-form-field--align-end label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0}\n"],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(_MatInternalFormField, [{
+    type: Component,
+    args: [{
+      selector: "div[mat-internal-form-field]",
+      template: "<ng-content></ng-content>",
+      encapsulation: ViewEncapsulation.None,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      host: {
+        "class": "mdc-form-field mat-internal-form-field",
+        "[class.mdc-form-field--align-end]": 'labelPosition === "before"'
+      },
+      styles: [".mat-internal-form-field{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-flex;align-items:center;vertical-align:middle}.mat-internal-form-field>label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0;order:0}[dir=rtl] .mat-internal-form-field>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px}.mdc-form-field--align-end>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px;order:-1}[dir=rtl] .mdc-form-field--align-end .mdc-form-field--align-end label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0}\n"]
+    }]
+  }], null, {
+    labelPosition: [{
+      type: Input,
+      args: [{
+        required: true
+      }]
+    }]
+  });
+})();
+
+// node_modules/@angular/material/fesm2022/date-formats-K6TQue-Y.mjs
+var MAT_DATE_LOCALE = new InjectionToken("MAT_DATE_LOCALE", {
+  providedIn: "root",
+  factory: MAT_DATE_LOCALE_FACTORY
+});
+function MAT_DATE_LOCALE_FACTORY() {
+  return inject(LOCALE_ID);
+}
+var NOT_IMPLEMENTED = "Method not implemented";
+var DateAdapter = class {
+  /** The locale to use for all dates. */
+  locale;
+  _localeChanges = new Subject();
+  /** A stream that emits when the locale changes. */
+  localeChanges = this._localeChanges;
+  /**
+   * Sets the time of one date to the time of another.
+   * @param target Date whose time will be set.
+   * @param hours New hours to set on the date object.
+   * @param minutes New minutes to set on the date object.
+   * @param seconds New seconds to set on the date object.
+   */
+  setTime(target, hours, minutes, seconds) {
+    throw new Error(NOT_IMPLEMENTED);
+  }
+  /**
+   * Gets the hours component of the given date.
+   * @param date The date to extract the hours from.
+   */
+  getHours(date) {
+    throw new Error(NOT_IMPLEMENTED);
+  }
+  /**
+   * Gets the minutes component of the given date.
+   * @param date The date to extract the minutes from.
+   */
+  getMinutes(date) {
+    throw new Error(NOT_IMPLEMENTED);
+  }
+  /**
+   * Gets the seconds component of the given date.
+   * @param date The date to extract the seconds from.
+   */
+  getSeconds(date) {
+    throw new Error(NOT_IMPLEMENTED);
+  }
+  /**
+   * Parses a date with a specific time from a user-provided value.
+   * @param value The value to parse.
+   * @param parseFormat The expected format of the value being parsed
+   *     (type is implementation-dependent).
+   */
+  parseTime(value, parseFormat) {
+    throw new Error(NOT_IMPLEMENTED);
+  }
+  /**
+   * Adds an amount of seconds to the specified date.
+   * @param date Date to which to add the seconds.
+   * @param amount Amount of seconds to add to the date.
+   */
+  addSeconds(date, amount) {
+    throw new Error(NOT_IMPLEMENTED);
+  }
+  /**
+   * Given a potential date object, returns that same date object if it is
+   * a valid date, or `null` if it's not a valid date.
+   * @param obj The object to check.
+   * @returns A date or `null`.
+   */
+  getValidDateOrNull(obj) {
+    return this.isDateInstance(obj) && this.isValid(obj) ? obj : null;
+  }
+  /**
+   * Attempts to deserialize a value to a valid date object. This is different from parsing in that
+   * deserialize should only accept non-ambiguous, locale-independent formats (e.g. a ISO 8601
+   * string). The default implementation does not allow any deserialization, it simply checks that
+   * the given value is already a valid date object or null. The `<mat-datepicker>` will call this
+   * method on all of its `@Input()` properties that accept dates. It is therefore possible to
+   * support passing values from your backend directly to these properties by overriding this method
+   * to also deserialize the format used by your backend.
+   * @param value The value to be deserialized into a date object.
+   * @returns The deserialized date object, either a valid date, null if the value can be
+   *     deserialized into a null date (e.g. the empty string), or an invalid date.
+   */
+  deserialize(value) {
+    if (value == null || this.isDateInstance(value) && this.isValid(value)) {
+      return value;
+    }
+    return this.invalid();
+  }
+  /**
+   * Sets the locale used for all dates.
+   * @param locale The new locale.
+   */
+  setLocale(locale) {
+    this.locale = locale;
+    this._localeChanges.next();
+  }
+  /**
+   * Compares two dates.
+   * @param first The first date to compare.
+   * @param second The second date to compare.
+   * @returns 0 if the dates are equal, a number less than 0 if the first date is earlier,
+   *     a number greater than 0 if the first date is later.
+   */
+  compareDate(first2, second) {
+    return this.getYear(first2) - this.getYear(second) || this.getMonth(first2) - this.getMonth(second) || this.getDate(first2) - this.getDate(second);
+  }
+  /**
+   * Compares the time values of two dates.
+   * @param first First date to compare.
+   * @param second Second date to compare.
+   * @returns 0 if the times are equal, a number less than 0 if the first time is earlier,
+   *     a number greater than 0 if the first time is later.
+   */
+  compareTime(first2, second) {
+    return this.getHours(first2) - this.getHours(second) || this.getMinutes(first2) - this.getMinutes(second) || this.getSeconds(first2) - this.getSeconds(second);
+  }
+  /**
+   * Checks if two dates are equal.
+   * @param first The first date to check.
+   * @param second The second date to check.
+   * @returns Whether the two dates are equal.
+   *     Null dates are considered equal to other null dates.
+   */
+  sameDate(first2, second) {
+    if (first2 && second) {
+      let firstValid = this.isValid(first2);
+      let secondValid = this.isValid(second);
+      if (firstValid && secondValid) {
+        return !this.compareDate(first2, second);
+      }
+      return firstValid == secondValid;
+    }
+    return first2 == second;
+  }
+  /**
+   * Checks if the times of two dates are equal.
+   * @param first The first date to check.
+   * @param second The second date to check.
+   * @returns Whether the times of the two dates are equal.
+   *     Null dates are considered equal to other null dates.
+   */
+  sameTime(first2, second) {
+    if (first2 && second) {
+      const firstValid = this.isValid(first2);
+      const secondValid = this.isValid(second);
+      if (firstValid && secondValid) {
+        return !this.compareTime(first2, second);
+      }
+      return firstValid == secondValid;
+    }
+    return first2 == second;
+  }
+  /**
+   * Clamp the given date between min and max dates.
+   * @param date The date to clamp.
+   * @param min The minimum value to allow. If null or omitted no min is enforced.
+   * @param max The maximum value to allow. If null or omitted no max is enforced.
+   * @returns `min` if `date` is less than `min`, `max` if date is greater than `max`,
+   *     otherwise `date`.
+   */
+  clampDate(date, min, max) {
+    if (min && this.compareDate(date, min) < 0) {
+      return min;
+    }
+    if (max && this.compareDate(date, max) > 0) {
+      return max;
+    }
+    return date;
+  }
+};
+var MAT_DATE_FORMATS = new InjectionToken("mat-date-formats");
+
+// node_modules/@angular/material/fesm2022/core.mjs
+var VERSION7 = new Version("20.0.3");
+var ISO_8601_REGEX = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|(?:(?:\+|-)\d{2}:\d{2}))?)?$/;
+var TIME_REGEX = /^(\d?\d)[:.](\d?\d)(?:[:.](\d?\d))?\s*(AM|PM)?$/i;
+function range(length, valueFunction) {
+  const valuesArray = Array(length);
+  for (let i = 0; i < length; i++) {
+    valuesArray[i] = valueFunction(i);
+  }
+  return valuesArray;
+}
+var NativeDateAdapter = class _NativeDateAdapter extends DateAdapter {
+  /**
+   * @deprecated No longer being used. To be removed.
+   * @breaking-change 14.0.0
+   */
+  useUtcForDisplay = false;
+  /** The injected locale. */
+  _matDateLocale = inject(MAT_DATE_LOCALE, {
+    optional: true
+  });
+  constructor() {
+    super();
+    const matDateLocale = inject(MAT_DATE_LOCALE, {
+      optional: true
+    });
+    if (matDateLocale !== void 0) {
+      this._matDateLocale = matDateLocale;
+    }
+    super.setLocale(this._matDateLocale);
+  }
+  getYear(date) {
+    return date.getFullYear();
+  }
+  getMonth(date) {
+    return date.getMonth();
+  }
+  getDate(date) {
+    return date.getDate();
+  }
+  getDayOfWeek(date) {
+    return date.getDay();
+  }
+  getMonthNames(style2) {
+    const dtf = new Intl.DateTimeFormat(this.locale, {
+      month: style2,
+      timeZone: "utc"
+    });
+    return range(12, (i) => this._format(dtf, new Date(2017, i, 1)));
+  }
+  getDateNames() {
+    const dtf = new Intl.DateTimeFormat(this.locale, {
+      day: "numeric",
+      timeZone: "utc"
+    });
+    return range(31, (i) => this._format(dtf, new Date(2017, 0, i + 1)));
+  }
+  getDayOfWeekNames(style2) {
+    const dtf = new Intl.DateTimeFormat(this.locale, {
+      weekday: style2,
+      timeZone: "utc"
+    });
+    return range(7, (i) => this._format(dtf, new Date(2017, 0, i + 1)));
+  }
+  getYearName(date) {
+    const dtf = new Intl.DateTimeFormat(this.locale, {
+      year: "numeric",
+      timeZone: "utc"
+    });
+    return this._format(dtf, date);
+  }
+  getFirstDayOfWeek() {
+    var _a9, _b3;
+    if (typeof Intl !== "undefined" && Intl.Locale) {
+      const locale = new Intl.Locale(this.locale);
+      const firstDay = ((_b3 = ((_a9 = locale.getWeekInfo) == null ? void 0 : _a9.call(locale)) || locale.weekInfo) == null ? void 0 : _b3.firstDay) ?? 0;
+      return firstDay === 7 ? 0 : firstDay;
+    }
+    return 0;
+  }
+  getNumDaysInMonth(date) {
+    return this.getDate(this._createDateWithOverflow(this.getYear(date), this.getMonth(date) + 1, 0));
+  }
+  clone(date) {
+    return new Date(date.getTime());
+  }
+  createDate(year, month, date) {
+    if (typeof ngDevMode === "undefined" || ngDevMode) {
+      if (month < 0 || month > 11) {
+        throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
+      }
+      if (date < 1) {
+        throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
+      }
+    }
+    let result = this._createDateWithOverflow(year, month, date);
+    if (result.getMonth() != month && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw Error(`Invalid date "${date}" for month with index "${month}".`);
+    }
+    return result;
+  }
+  today() {
+    return /* @__PURE__ */ new Date();
+  }
+  parse(value, parseFormat) {
+    if (typeof value == "number") {
+      return new Date(value);
+    }
+    return value ? new Date(Date.parse(value)) : null;
+  }
+  format(date, displayFormat) {
+    if (!this.isValid(date)) {
+      throw Error("NativeDateAdapter: Cannot format invalid date.");
+    }
+    const dtf = new Intl.DateTimeFormat(this.locale, __spreadProps(__spreadValues({}, displayFormat), {
+      timeZone: "utc"
+    }));
+    return this._format(dtf, date);
+  }
+  addCalendarYears(date, years) {
+    return this.addCalendarMonths(date, years * 12);
+  }
+  addCalendarMonths(date, months) {
+    let newDate = this._createDateWithOverflow(this.getYear(date), this.getMonth(date) + months, this.getDate(date));
+    if (this.getMonth(newDate) != ((this.getMonth(date) + months) % 12 + 12) % 12) {
+      newDate = this._createDateWithOverflow(this.getYear(newDate), this.getMonth(newDate), 0);
+    }
+    return newDate;
+  }
+  addCalendarDays(date, days) {
+    return this._createDateWithOverflow(this.getYear(date), this.getMonth(date), this.getDate(date) + days);
+  }
+  toIso8601(date) {
+    return [date.getUTCFullYear(), this._2digit(date.getUTCMonth() + 1), this._2digit(date.getUTCDate())].join("-");
+  }
+  /**
+   * Returns the given value if given a valid Date or null. Deserializes valid ISO 8601 strings
+   * (https://www.ietf.org/rfc/rfc3339.txt) into valid Dates and empty string into null. Returns an
+   * invalid date for all other values.
+   */
+  deserialize(value) {
+    if (typeof value === "string") {
+      if (!value) {
+        return null;
+      }
+      if (ISO_8601_REGEX.test(value)) {
+        let date = new Date(value);
+        if (this.isValid(date)) {
+          return date;
+        }
+      }
+    }
+    return super.deserialize(value);
+  }
+  isDateInstance(obj) {
+    return obj instanceof Date;
+  }
+  isValid(date) {
+    return !isNaN(date.getTime());
+  }
+  invalid() {
+    return /* @__PURE__ */ new Date(NaN);
+  }
+  setTime(target, hours, minutes, seconds) {
+    if (typeof ngDevMode === "undefined" || ngDevMode) {
+      if (!inRange(hours, 0, 23)) {
+        throw Error(`Invalid hours "${hours}". Hours value must be between 0 and 23.`);
+      }
+      if (!inRange(minutes, 0, 59)) {
+        throw Error(`Invalid minutes "${minutes}". Minutes value must be between 0 and 59.`);
+      }
+      if (!inRange(seconds, 0, 59)) {
+        throw Error(`Invalid seconds "${seconds}". Seconds value must be between 0 and 59.`);
+      }
+    }
+    const clone = this.clone(target);
+    clone.setHours(hours, minutes, seconds, 0);
+    return clone;
+  }
+  getHours(date) {
+    return date.getHours();
+  }
+  getMinutes(date) {
+    return date.getMinutes();
+  }
+  getSeconds(date) {
+    return date.getSeconds();
+  }
+  parseTime(userValue, parseFormat) {
+    if (typeof userValue !== "string") {
+      return userValue instanceof Date ? new Date(userValue.getTime()) : null;
+    }
+    const value = userValue.trim();
+    if (value.length === 0) {
+      return null;
+    }
+    let result = this._parseTimeString(value);
+    if (result === null) {
+      const withoutExtras = value.replace(/[^0-9:(AM|PM)]/gi, "").trim();
+      if (withoutExtras.length > 0) {
+        result = this._parseTimeString(withoutExtras);
+      }
+    }
+    return result || this.invalid();
+  }
+  addSeconds(date, amount) {
+    return new Date(date.getTime() + amount * 1e3);
+  }
+  /** Creates a date but allows the month and date to overflow. */
+  _createDateWithOverflow(year, month, date) {
+    const d2 = /* @__PURE__ */ new Date();
+    d2.setFullYear(year, month, date);
+    d2.setHours(0, 0, 0, 0);
+    return d2;
+  }
+  /**
+   * Pads a number to make it two digits.
+   * @param n The number to pad.
+   * @returns The padded number.
+   */
+  _2digit(n2) {
+    return ("00" + n2).slice(-2);
+  }
+  /**
+   * When converting Date object to string, javascript built-in functions may return wrong
+   * results because it applies its internal DST rules. The DST rules around the world change
+   * very frequently, and the current valid rule is not always valid in previous years though.
+   * We work around this problem building a new Date object which has its internal UTC
+   * representation with the local date and time.
+   * @param dtf Intl.DateTimeFormat object, containing the desired string format. It must have
+   *    timeZone set to 'utc' to work fine.
+   * @param date Date from which we want to get the string representation according to dtf
+   * @returns A Date object with its UTC representation based on the passed in date info
+   */
+  _format(dtf, date) {
+    const d2 = /* @__PURE__ */ new Date();
+    d2.setUTCFullYear(date.getFullYear(), date.getMonth(), date.getDate());
+    d2.setUTCHours(date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
+    return dtf.format(d2);
+  }
+  /**
+   * Attempts to parse a time string into a date object. Returns null if it cannot be parsed.
+   * @param value Time string to parse.
+   */
+  _parseTimeString(value) {
+    const parsed = value.toUpperCase().match(TIME_REGEX);
+    if (parsed) {
+      let hours = parseInt(parsed[1]);
+      const minutes = parseInt(parsed[2]);
+      let seconds = parsed[3] == null ? void 0 : parseInt(parsed[3]);
+      const amPm = parsed[4];
+      if (hours === 12) {
+        hours = amPm === "AM" ? 0 : hours;
+      } else if (amPm === "PM") {
+        hours += 12;
+      }
+      if (inRange(hours, 0, 23) && inRange(minutes, 0, 59) && (seconds == null || inRange(seconds, 0, 59))) {
+        return this.setTime(this.today(), hours, minutes, seconds || 0);
+      }
+    }
+    return null;
+  }
+  static \u0275fac = function NativeDateAdapter_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NativeDateAdapter)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _NativeDateAdapter,
+    factory: _NativeDateAdapter.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NativeDateAdapter, [{
+    type: Injectable
+  }], () => [], null);
+})();
+function inRange(value, min, max) {
+  return !isNaN(value) && value >= min && value <= max;
+}
+var MAT_NATIVE_DATE_FORMATS = {
+  parse: {
+    dateInput: null,
+    timeInput: null
+  },
+  display: {
+    dateInput: {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric"
+    },
+    timeInput: {
+      hour: "numeric",
+      minute: "numeric"
+    },
+    monthYearLabel: {
+      year: "numeric",
+      month: "short"
+    },
+    dateA11yLabel: {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    },
+    monthYearA11yLabel: {
+      year: "numeric",
+      month: "long"
+    },
+    timeOptionLabel: {
+      hour: "numeric",
+      minute: "numeric"
+    }
+  }
+};
+var NativeDateModule = class _NativeDateModule {
+  static \u0275fac = function NativeDateModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NativeDateModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _NativeDateModule
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    providers: [{
+      provide: DateAdapter,
+      useClass: NativeDateAdapter
+    }]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NativeDateModule, [{
+    type: NgModule,
+    args: [{
+      providers: [{
+        provide: DateAdapter,
+        useClass: NativeDateAdapter
+      }]
+    }]
+  }], null, null);
+})();
+var MatNativeDateModule = class _MatNativeDateModule {
+  static \u0275fac = function MatNativeDateModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatNativeDateModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatNativeDateModule
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    providers: [provideNativeDateAdapter()]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatNativeDateModule, [{
+    type: NgModule,
+    args: [{
+      providers: [provideNativeDateAdapter()]
+    }]
+  }], null, null);
+})();
+function provideNativeDateAdapter(formats = MAT_NATIVE_DATE_FORMATS) {
+  return [{
+    provide: DateAdapter,
+    useClass: NativeDateAdapter
+  }, {
+    provide: MAT_DATE_FORMATS,
+    useValue: formats
+  }];
+}
+
+// node_modules/@angular/cdk/fesm2022/selection-model-BCgC8uEN.mjs
+var SelectionModel = class {
+  _multiple;
+  _emitChanges;
+  compareWith;
+  /** Currently-selected values. */
+  _selection = /* @__PURE__ */ new Set();
+  /** Keeps track of the deselected options that haven't been emitted by the change event. */
+  _deselectedToEmit = [];
+  /** Keeps track of the selected options that haven't been emitted by the change event. */
+  _selectedToEmit = [];
+  /** Cache for the array value of the selected items. */
+  _selected;
+  /** Selected values. */
+  get selected() {
+    if (!this._selected) {
+      this._selected = Array.from(this._selection.values());
+    }
+    return this._selected;
+  }
+  /** Event emitted when the value has changed. */
+  changed = new Subject();
+  constructor(_multiple = false, initiallySelectedValues, _emitChanges = true, compareWith) {
+    this._multiple = _multiple;
+    this._emitChanges = _emitChanges;
+    this.compareWith = compareWith;
+    if (initiallySelectedValues && initiallySelectedValues.length) {
+      if (_multiple) {
+        initiallySelectedValues.forEach((value) => this._markSelected(value));
+      } else {
+        this._markSelected(initiallySelectedValues[0]);
+      }
+      this._selectedToEmit.length = 0;
+    }
+  }
+  /**
+   * Selects a value or an array of values.
+   * @param values The values to select
+   * @return Whether the selection changed as a result of this call
+   */
+  select(...values) {
+    this._verifyValueAssignment(values);
+    values.forEach((value) => this._markSelected(value));
+    const changed = this._hasQueuedChanges();
+    this._emitChangeEvent();
+    return changed;
+  }
+  /**
+   * Deselects a value or an array of values.
+   * @param values The values to deselect
+   * @return Whether the selection changed as a result of this call
+   */
+  deselect(...values) {
+    this._verifyValueAssignment(values);
+    values.forEach((value) => this._unmarkSelected(value));
+    const changed = this._hasQueuedChanges();
+    this._emitChangeEvent();
+    return changed;
+  }
+  /**
+   * Sets the selected values
+   * @param values The new selected values
+   * @return Whether the selection changed as a result of this call
+   */
+  setSelection(...values) {
+    this._verifyValueAssignment(values);
+    const oldValues = this.selected;
+    const newSelectedSet = new Set(values.map((value) => this._getConcreteValue(value)));
+    values.forEach((value) => this._markSelected(value));
+    oldValues.filter((value) => !newSelectedSet.has(this._getConcreteValue(value, newSelectedSet))).forEach((value) => this._unmarkSelected(value));
+    const changed = this._hasQueuedChanges();
+    this._emitChangeEvent();
+    return changed;
+  }
+  /**
+   * Toggles a value between selected and deselected.
+   * @param value The value to toggle
+   * @return Whether the selection changed as a result of this call
+   */
+  toggle(value) {
+    return this.isSelected(value) ? this.deselect(value) : this.select(value);
+  }
+  /**
+   * Clears all of the selected values.
+   * @param flushEvent Whether to flush the changes in an event.
+   *   If false, the changes to the selection will be flushed along with the next event.
+   * @return Whether the selection changed as a result of this call
+   */
+  clear(flushEvent = true) {
+    this._unmarkAll();
+    const changed = this._hasQueuedChanges();
+    if (flushEvent) {
+      this._emitChangeEvent();
+    }
+    return changed;
+  }
+  /**
+   * Determines whether a value is selected.
+   */
+  isSelected(value) {
+    return this._selection.has(this._getConcreteValue(value));
+  }
+  /**
+   * Determines whether the model does not have a value.
+   */
+  isEmpty() {
+    return this._selection.size === 0;
+  }
+  /**
+   * Determines whether the model has a value.
+   */
+  hasValue() {
+    return !this.isEmpty();
+  }
+  /**
+   * Sorts the selected values based on a predicate function.
+   */
+  sort(predicate) {
+    if (this._multiple && this.selected) {
+      this._selected.sort(predicate);
+    }
+  }
+  /**
+   * Gets whether multiple values can be selected.
+   */
+  isMultipleSelection() {
+    return this._multiple;
+  }
+  /** Emits a change event and clears the records of selected and deselected values. */
+  _emitChangeEvent() {
+    this._selected = null;
+    if (this._selectedToEmit.length || this._deselectedToEmit.length) {
+      this.changed.next({
+        source: this,
+        added: this._selectedToEmit,
+        removed: this._deselectedToEmit
+      });
+      this._deselectedToEmit = [];
+      this._selectedToEmit = [];
+    }
+  }
+  /** Selects a value. */
+  _markSelected(value) {
+    value = this._getConcreteValue(value);
+    if (!this.isSelected(value)) {
+      if (!this._multiple) {
+        this._unmarkAll();
+      }
+      if (!this.isSelected(value)) {
+        this._selection.add(value);
+      }
+      if (this._emitChanges) {
+        this._selectedToEmit.push(value);
+      }
+    }
+  }
+  /** Deselects a value. */
+  _unmarkSelected(value) {
+    value = this._getConcreteValue(value);
+    if (this.isSelected(value)) {
+      this._selection.delete(value);
+      if (this._emitChanges) {
+        this._deselectedToEmit.push(value);
+      }
+    }
+  }
+  /** Clears out the selected values. */
+  _unmarkAll() {
+    if (!this.isEmpty()) {
+      this._selection.forEach((value) => this._unmarkSelected(value));
+    }
+  }
+  /**
+   * Verifies the value assignment and throws an error if the specified value array is
+   * including multiple values while the selection model is not supporting multiple values.
+   */
+  _verifyValueAssignment(values) {
+    if (values.length > 1 && !this._multiple && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw getMultipleValuesInSingleSelectionError();
+    }
+  }
+  /** Whether there are queued up change to be emitted. */
+  _hasQueuedChanges() {
+    return !!(this._deselectedToEmit.length || this._selectedToEmit.length);
+  }
+  /** Returns a value that is comparable to inputValue by applying compareWith function, returns the same inputValue otherwise. */
+  _getConcreteValue(inputValue, selection) {
+    if (!this.compareWith) {
+      return inputValue;
+    } else {
+      selection = selection ?? this._selection;
+      for (let selectedValue of selection) {
+        if (this.compareWith(inputValue, selectedValue)) {
+          return selectedValue;
+        }
+      }
+      return inputValue;
+    }
+  }
+};
+function getMultipleValuesInSingleSelectionError() {
+  return Error("Cannot pass multiple values into SelectionModel with single-value mode.");
+}
+
+// node_modules/@angular/material/fesm2022/module-BDiw_nWS.mjs
+var _c09 = ["trigger"];
+var _c18 = ["panel"];
+var _c24 = [[["mat-select-trigger"]], "*"];
+var _c34 = ["mat-select-trigger", "*"];
+function MatSelect_Conditional_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 4);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.placeholder);
+  }
+}
+function MatSelect_Conditional_5_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275projection(0);
+  }
+}
+function MatSelect_Conditional_5_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 11);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.triggerValue);
+  }
+}
+function MatSelect_Conditional_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 5);
+    \u0275\u0275conditionalCreate(1, MatSelect_Conditional_5_Conditional_1_Template, 1, 0)(2, MatSelect_Conditional_5_Conditional_2_Template, 2, 1, "span", 11);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx_r1.customTrigger ? 1 : 2);
+  }
+}
+function MatSelect_ng_template_10_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 12, 1);
+    \u0275\u0275listener("keydown", function MatSelect_ng_template_10_Template_div_keydown_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1._handleKeydown($event));
+    });
+    \u0275\u0275projection(2, 1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(\u0275\u0275interpolate1("mat-mdc-select-panel mdc-menu-surface mdc-menu-surface--open ", ctx_r1._getPanelTheme()));
+    \u0275\u0275classProp("mat-select-panel-animations-enabled", !ctx_r1._animationsDisabled);
+    \u0275\u0275property("ngClass", ctx_r1.panelClass);
+    \u0275\u0275attribute("id", ctx_r1.id + "-panel")("aria-multiselectable", ctx_r1.multiple)("aria-label", ctx_r1.ariaLabel || null)("aria-labelledby", ctx_r1._getPanelAriaLabelledby());
+  }
+}
+function getMatSelectDynamicMultipleError() {
+  return Error("Cannot change `multiple` mode of select after initialization.");
+}
+function getMatSelectNonArrayValueError() {
+  return Error("Value must be an array in multiple-selection mode.");
+}
+function getMatSelectNonFunctionValueError() {
+  return Error("`compareWith` must be a function.");
+}
+var MAT_SELECT_SCROLL_STRATEGY = new InjectionToken("mat-select-scroll-strategy", {
+  providedIn: "root",
+  factory: () => {
+    const injector = inject(Injector);
+    return () => createRepositionScrollStrategy(injector);
+  }
+});
+function MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY(_overlay) {
+  const injector = inject(Injector);
+  return () => createRepositionScrollStrategy(injector);
+}
+var MAT_SELECT_CONFIG = new InjectionToken("MAT_SELECT_CONFIG");
+var MAT_SELECT_SCROLL_STRATEGY_PROVIDER = {
+  provide: MAT_SELECT_SCROLL_STRATEGY,
+  deps: [],
+  useFactory: MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY
+};
+var MAT_SELECT_TRIGGER = new InjectionToken("MatSelectTrigger");
+var MatSelectChange = class {
+  source;
+  value;
+  constructor(source, value) {
+    this.source = source;
+    this.value = value;
+  }
+};
+var _a6, _b2, _c, _d;
+var MatSelect = class _MatSelect {
+  _viewportRuler = inject(ViewportRuler);
+  _changeDetectorRef = inject(ChangeDetectorRef);
+  _elementRef = inject(ElementRef);
+  _dir = inject(Directionality, {
+    optional: true
+  });
+  _idGenerator = inject(_IdGenerator);
+  _renderer = inject(Renderer2);
+  _parentFormField = inject(MAT_FORM_FIELD, {
+    optional: true
+  });
+  ngControl = inject(NgControl, {
+    self: true,
+    optional: true
+  });
+  _liveAnnouncer = inject(LiveAnnouncer);
+  _defaultOptions = inject(MAT_SELECT_CONFIG, {
+    optional: true
+  });
+  _animationsDisabled = _animationsDisabled();
+  _initialized = new Subject();
+  _cleanupDetach;
+  /** All of the defined select options. */
+  options;
+  // TODO(crisbeto): this is only necessary for the non-MDC select, but it's technically a
+  // public API so we have to keep it. It should be deprecated and removed eventually.
+  /** All of the defined groups of options. */
+  optionGroups;
+  /** User-supplied override of the trigger element. */
+  customTrigger;
+  /**
+   * This position config ensures that the top "start" corner of the overlay
+   * is aligned with with the top "start" of the origin by default (overlapping
+   * the trigger completely). If the panel cannot fit below the trigger, it
+   * will fall back to a position above the trigger.
+   */
+  _positions = [{
+    originX: "start",
+    originY: "bottom",
+    overlayX: "start",
+    overlayY: "top"
+  }, {
+    originX: "end",
+    originY: "bottom",
+    overlayX: "end",
+    overlayY: "top"
+  }, {
+    originX: "start",
+    originY: "top",
+    overlayX: "start",
+    overlayY: "bottom",
+    panelClass: "mat-mdc-select-panel-above"
+  }, {
+    originX: "end",
+    originY: "top",
+    overlayX: "end",
+    overlayY: "bottom",
+    panelClass: "mat-mdc-select-panel-above"
+  }];
+  /** Scrolls a particular option into the view. */
+  _scrollOptionIntoView(index) {
+    const option = this.options.toArray()[index];
+    if (option) {
+      const panel = this.panel.nativeElement;
+      const labelCount = _countGroupLabelsBeforeOption(index, this.options, this.optionGroups);
+      const element = option._getHostElement();
+      if (index === 0 && labelCount === 1) {
+        panel.scrollTop = 0;
+      } else {
+        panel.scrollTop = _getOptionScrollPosition(element.offsetTop, element.offsetHeight, panel.scrollTop, panel.offsetHeight);
+      }
+    }
+  }
+  /** Called when the panel has been opened and the overlay has settled on its final position. */
+  _positioningSettled() {
+    this._scrollOptionIntoView(this._keyManager.activeItemIndex || 0);
+  }
+  /** Creates a change event object that should be emitted by the select. */
+  _getChangeEvent(value) {
+    return new MatSelectChange(this, value);
+  }
+  /** Factory function used to create a scroll strategy for this select. */
+  _scrollStrategyFactory = inject(MAT_SELECT_SCROLL_STRATEGY);
+  /** Whether or not the overlay panel is open. */
+  _panelOpen = false;
+  /** Comparison function to specify which option is displayed. Defaults to object equality. */
+  _compareWith = (o1, o2) => o1 === o2;
+  /** Unique id for this input. */
+  _uid = this._idGenerator.getId("mat-select-");
+  /** Current `aria-labelledby` value for the select trigger. */
+  _triggerAriaLabelledBy = null;
+  /**
+   * Keeps track of the previous form control assigned to the select.
+   * Used to detect if it has changed.
+   */
+  _previousControl;
+  /** Emits whenever the component is destroyed. */
+  _destroy = new Subject();
+  /** Tracks the error state of the select. */
+  _errorStateTracker;
+  /**
+   * Emits whenever the component state changes and should cause the parent
+   * form-field to update. Implemented as part of `MatFormFieldControl`.
+   * @docs-private
+   */
+  stateChanges = new Subject();
+  /**
+   * Disable the automatic labeling to avoid issues like #27241.
+   * @docs-private
+   */
+  disableAutomaticLabeling = true;
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  userAriaDescribedBy;
+  /** Deals with the selection logic. */
+  _selectionModel;
+  /** Manages keyboard events for options in the panel. */
+  _keyManager;
+  /** Ideal origin for the overlay panel. */
+  _preferredOverlayOrigin;
+  /** Width of the overlay panel. */
+  _overlayWidth;
+  /** `View -> model callback called when value changes` */
+  _onChange = () => {
+  };
+  /** `View -> model callback called when select has been touched` */
+  _onTouched = () => {
+  };
+  /** ID for the DOM node containing the select's value. */
+  _valueId = this._idGenerator.getId("mat-select-value-");
+  /** Strategy that will be used to handle scrolling while the select panel is open. */
+  _scrollStrategy;
+  _overlayPanelClass = ((_a6 = this._defaultOptions) == null ? void 0 : _a6.overlayPanelClass) || "";
+  /** Whether the select is focused. */
+  get focused() {
+    return this._focused || this._panelOpen;
+  }
+  _focused = false;
+  /** A name for this control that can be used by `mat-form-field`. */
+  controlType = "mat-select";
+  /** Trigger that opens the select. */
+  trigger;
+  /** Panel containing the select options. */
+  panel;
+  /** Overlay pane containing the options. */
+  _overlayDir;
+  /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
+  panelClass;
+  /** Whether the select is disabled. */
+  disabled = false;
+  /** Whether ripples in the select are disabled. */
+  get disableRipple() {
+    return this._disableRipple();
+  }
+  set disableRipple(value) {
+    this._disableRipple.set(value);
+  }
+  _disableRipple = signal(false);
+  /** Tab index of the select. */
+  tabIndex = 0;
+  /** Whether checkmark indicator for single-selection options is hidden. */
+  get hideSingleSelectionIndicator() {
+    return this._hideSingleSelectionIndicator;
+  }
+  set hideSingleSelectionIndicator(value) {
+    this._hideSingleSelectionIndicator = value;
+    this._syncParentProperties();
+  }
+  _hideSingleSelectionIndicator = ((_b2 = this._defaultOptions) == null ? void 0 : _b2.hideSingleSelectionIndicator) ?? false;
+  /** Placeholder to be shown if no value has been selected. */
+  get placeholder() {
+    return this._placeholder;
+  }
+  set placeholder(value) {
+    this._placeholder = value;
+    this.stateChanges.next();
+  }
+  _placeholder;
+  /** Whether the component is required. */
+  get required() {
+    var _a9, _b3;
+    return this._required ?? ((_b3 = (_a9 = this.ngControl) == null ? void 0 : _a9.control) == null ? void 0 : _b3.hasValidator(Validators.required)) ?? false;
+  }
+  set required(value) {
+    this._required = value;
+    this.stateChanges.next();
+  }
+  _required;
+  /** Whether the user should be allowed to select multiple options. */
+  get multiple() {
+    return this._multiple;
+  }
+  set multiple(value) {
+    if (this._selectionModel && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw getMatSelectDynamicMultipleError();
+    }
+    this._multiple = value;
+  }
+  _multiple = false;
+  /** Whether to center the active option over the trigger. */
+  disableOptionCentering = ((_c = this._defaultOptions) == null ? void 0 : _c.disableOptionCentering) ?? false;
+  /**
+   * Function to compare the option values with the selected values. The first argument
+   * is a value from an option. The second is a value from the selection. A boolean
+   * should be returned.
+   */
+  get compareWith() {
+    return this._compareWith;
+  }
+  set compareWith(fn3) {
+    if (typeof fn3 !== "function" && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw getMatSelectNonFunctionValueError();
+    }
+    this._compareWith = fn3;
+    if (this._selectionModel) {
+      this._initializeSelection();
+    }
+  }
+  /** Value of the select control. */
+  get value() {
+    return this._value;
+  }
+  set value(newValue) {
+    const hasAssigned = this._assignValue(newValue);
+    if (hasAssigned) {
+      this._onChange(newValue);
+    }
+  }
+  _value;
+  /** Aria label of the select. */
+  ariaLabel = "";
+  /** Input that can be used to specify the `aria-labelledby` attribute. */
+  ariaLabelledby;
+  /** Object used to control when error messages are shown. */
+  get errorStateMatcher() {
+    return this._errorStateTracker.matcher;
+  }
+  set errorStateMatcher(value) {
+    this._errorStateTracker.matcher = value;
+  }
+  /** Time to wait in milliseconds after the last keystroke before moving focus to an item. */
+  typeaheadDebounceInterval;
+  /**
+   * Function used to sort the values in a select in multiple mode.
+   * Follows the same logic as `Array.prototype.sort`.
+   */
+  sortComparator;
+  /** Unique id of the element. */
+  get id() {
+    return this._id;
+  }
+  set id(value) {
+    this._id = value || this._uid;
+    this.stateChanges.next();
+  }
+  _id;
+  /** Whether the select is in an error state. */
+  get errorState() {
+    return this._errorStateTracker.errorState;
+  }
+  set errorState(value) {
+    this._errorStateTracker.errorState = value;
+  }
+  /**
+   * Width of the panel. If set to `auto`, the panel will match the trigger width.
+   * If set to null or an empty string, the panel will grow to match the longest option's text.
+   */
+  panelWidth = this._defaultOptions && typeof this._defaultOptions.panelWidth !== "undefined" ? this._defaultOptions.panelWidth : "auto";
+  /**
+   * By default selecting an option with a `null` or `undefined` value will reset the select's
+   * value. Enable this option if the reset behavior doesn't match your requirements and instead
+   * the nullable options should become selected. The value of this input can be controlled app-wide
+   * using the `MAT_SELECT_CONFIG` injection token.
+   */
+  canSelectNullableOptions = ((_d = this._defaultOptions) == null ? void 0 : _d.canSelectNullableOptions) ?? false;
+  /** Combined stream of all of the child options' change events. */
+  optionSelectionChanges = defer(() => {
+    const options = this.options;
+    if (options) {
+      return options.changes.pipe(startWith(options), switchMap(() => merge(...options.map((option) => option.onSelectionChange))));
+    }
+    return this._initialized.pipe(switchMap(() => this.optionSelectionChanges));
+  });
+  /** Event emitted when the select panel has been toggled. */
+  openedChange = new EventEmitter();
+  /** Event emitted when the select has been opened. */
+  _openedStream = this.openedChange.pipe(filter((o) => o), map(() => {
+  }));
+  /** Event emitted when the select has been closed. */
+  _closedStream = this.openedChange.pipe(filter((o) => !o), map(() => {
+  }));
+  /** Event emitted when the selected value has been changed by the user. */
+  selectionChange = new EventEmitter();
+  /**
+   * Event that emits whenever the raw value of the select changes. This is here primarily
+   * to facilitate the two-way binding for the `value` input.
+   * @docs-private
+   */
+  valueChange = new EventEmitter();
+  constructor() {
+    var _a9;
+    const defaultErrorStateMatcher = inject(ErrorStateMatcher);
+    const parentForm = inject(NgForm, {
+      optional: true
+    });
+    const parentFormGroup = inject(FormGroupDirective, {
+      optional: true
+    });
+    const tabIndex = inject(new HostAttributeToken("tabindex"), {
+      optional: true
+    });
+    if (this.ngControl) {
+      this.ngControl.valueAccessor = this;
+    }
+    if (((_a9 = this._defaultOptions) == null ? void 0 : _a9.typeaheadDebounceInterval) != null) {
+      this.typeaheadDebounceInterval = this._defaultOptions.typeaheadDebounceInterval;
+    }
+    this._errorStateTracker = new _ErrorStateTracker(defaultErrorStateMatcher, this.ngControl, parentFormGroup, parentForm, this.stateChanges);
+    this._scrollStrategy = this._scrollStrategyFactory();
+    this.tabIndex = tabIndex == null ? 0 : parseInt(tabIndex) || 0;
+    this.id = this.id;
+  }
+  ngOnInit() {
+    this._selectionModel = new SelectionModel(this.multiple);
+    this.stateChanges.next();
+    this._viewportRuler.change().pipe(takeUntil(this._destroy)).subscribe(() => {
+      if (this.panelOpen) {
+        this._overlayWidth = this._getOverlayWidth(this._preferredOverlayOrigin);
+        this._changeDetectorRef.detectChanges();
+      }
+    });
+  }
+  ngAfterContentInit() {
+    this._initialized.next();
+    this._initialized.complete();
+    this._initKeyManager();
+    this._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
+      event.added.forEach((option) => option.select());
+      event.removed.forEach((option) => option.deselect());
+    });
+    this.options.changes.pipe(startWith(null), takeUntil(this._destroy)).subscribe(() => {
+      this._resetOptions();
+      this._initializeSelection();
+    });
+  }
+  ngDoCheck() {
+    const newAriaLabelledby = this._getTriggerAriaLabelledby();
+    const ngControl = this.ngControl;
+    if (newAriaLabelledby !== this._triggerAriaLabelledBy) {
+      const element = this._elementRef.nativeElement;
+      this._triggerAriaLabelledBy = newAriaLabelledby;
+      if (newAriaLabelledby) {
+        element.setAttribute("aria-labelledby", newAriaLabelledby);
+      } else {
+        element.removeAttribute("aria-labelledby");
+      }
+    }
+    if (ngControl) {
+      if (this._previousControl !== ngControl.control) {
+        if (this._previousControl !== void 0 && ngControl.disabled !== null && ngControl.disabled !== this.disabled) {
+          this.disabled = ngControl.disabled;
+        }
+        this._previousControl = ngControl.control;
+      }
+      this.updateErrorState();
+    }
+  }
+  ngOnChanges(changes) {
+    if (changes["disabled"] || changes["userAriaDescribedBy"]) {
+      this.stateChanges.next();
+    }
+    if (changes["typeaheadDebounceInterval"] && this._keyManager) {
+      this._keyManager.withTypeAhead(this.typeaheadDebounceInterval);
+    }
+  }
+  ngOnDestroy() {
+    var _a9, _b3;
+    (_a9 = this._cleanupDetach) == null ? void 0 : _a9.call(this);
+    (_b3 = this._keyManager) == null ? void 0 : _b3.destroy();
+    this._destroy.next();
+    this._destroy.complete();
+    this.stateChanges.complete();
+    this._clearFromModal();
+  }
+  /** Toggles the overlay panel open or closed. */
+  toggle() {
+    this.panelOpen ? this.close() : this.open();
+  }
+  /** Opens the overlay panel. */
+  open() {
+    var _a9;
+    if (!this._canOpen()) {
+      return;
+    }
+    if (this._parentFormField) {
+      this._preferredOverlayOrigin = this._parentFormField.getConnectedOverlayOrigin();
+    }
+    (_a9 = this._cleanupDetach) == null ? void 0 : _a9.call(this);
+    this._overlayWidth = this._getOverlayWidth(this._preferredOverlayOrigin);
+    this._applyModalPanelOwnership();
+    this._panelOpen = true;
+    this._overlayDir.positionChange.pipe(take(1)).subscribe(() => {
+      this._changeDetectorRef.detectChanges();
+      this._positioningSettled();
+    });
+    this._overlayDir.attachOverlay();
+    this._keyManager.withHorizontalOrientation(null);
+    this._highlightCorrectOption();
+    this._changeDetectorRef.markForCheck();
+    this.stateChanges.next();
+    Promise.resolve().then(() => this.openedChange.emit(true));
+  }
+  /**
+   * Track which modal we have modified the `aria-owns` attribute of. When the combobox trigger is
+   * inside an aria-modal, we apply aria-owns to the parent modal with the `id` of the options
+   * panel. Track the modal we have changed so we can undo the changes on destroy.
+   */
+  _trackedModal = null;
+  /**
+   * If the autocomplete trigger is inside of an `aria-modal` element, connect
+   * that modal to the options panel with `aria-owns`.
+   *
+   * For some browser + screen reader combinations, when navigation is inside
+   * of an `aria-modal` element, the screen reader treats everything outside
+   * of that modal as hidden or invisible.
+   *
+   * This causes a problem when the combobox trigger is _inside_ of a modal, because the
+   * options panel is rendered _outside_ of that modal, preventing screen reader navigation
+   * from reaching the panel.
+   *
+   * We can work around this issue by applying `aria-owns` to the modal with the `id` of
+   * the options panel. This effectively communicates to assistive technology that the
+   * options panel is part of the same interaction as the modal.
+   *
+   * At time of this writing, this issue is present in VoiceOver.
+   * See https://github.com/angular/components/issues/20694
+   */
+  _applyModalPanelOwnership() {
+    const modal = this._elementRef.nativeElement.closest('body > .cdk-overlay-container [aria-modal="true"]');
+    if (!modal) {
+      return;
+    }
+    const panelId = `${this.id}-panel`;
+    if (this._trackedModal) {
+      removeAriaReferencedId(this._trackedModal, "aria-owns", panelId);
+    }
+    addAriaReferencedId(modal, "aria-owns", panelId);
+    this._trackedModal = modal;
+  }
+  /** Clears the reference to the listbox overlay element from the modal it was added to. */
+  _clearFromModal() {
+    if (!this._trackedModal) {
+      return;
+    }
+    const panelId = `${this.id}-panel`;
+    removeAriaReferencedId(this._trackedModal, "aria-owns", panelId);
+    this._trackedModal = null;
+  }
+  /** Closes the overlay panel and focuses the host element. */
+  close() {
+    if (this._panelOpen) {
+      this._panelOpen = false;
+      this._exitAndDetach();
+      this._keyManager.withHorizontalOrientation(this._isRtl() ? "rtl" : "ltr");
+      this._changeDetectorRef.markForCheck();
+      this._onTouched();
+      this.stateChanges.next();
+      Promise.resolve().then(() => this.openedChange.emit(false));
+    }
+  }
+  /** Triggers the exit animation and detaches the overlay at the end. */
+  _exitAndDetach() {
+    var _a9;
+    if (this._animationsDisabled || !this.panel) {
+      this._detachOverlay();
+      return;
+    }
+    (_a9 = this._cleanupDetach) == null ? void 0 : _a9.call(this);
+    this._cleanupDetach = () => {
+      cleanupEvent();
+      clearTimeout(exitFallbackTimer);
+      this._cleanupDetach = void 0;
+    };
+    const panel = this.panel.nativeElement;
+    const cleanupEvent = this._renderer.listen(panel, "animationend", (event) => {
+      var _a10;
+      if (event.animationName === "_mat-select-exit") {
+        (_a10 = this._cleanupDetach) == null ? void 0 : _a10.call(this);
+        this._detachOverlay();
+      }
+    });
+    const exitFallbackTimer = setTimeout(() => {
+      var _a10;
+      (_a10 = this._cleanupDetach) == null ? void 0 : _a10.call(this);
+      this._detachOverlay();
+    }, 200);
+    panel.classList.add("mat-select-panel-exit");
+  }
+  /** Detaches the current overlay directive. */
+  _detachOverlay() {
+    this._overlayDir.detachOverlay();
+    this._changeDetectorRef.markForCheck();
+  }
+  /**
+   * Sets the select's value. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param value New value to be written to the model.
+   */
+  writeValue(value) {
+    this._assignValue(value);
+  }
+  /**
+   * Saves a callback function to be invoked when the select's value
+   * changes from user input. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the value changes.
+   */
+  registerOnChange(fn3) {
+    this._onChange = fn3;
+  }
+  /**
+   * Saves a callback function to be invoked when the select is blurred
+   * by the user. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the component has been touched.
+   */
+  registerOnTouched(fn3) {
+    this._onTouched = fn3;
+  }
+  /**
+   * Disables the select. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param isDisabled Sets whether the component is disabled.
+   */
+  setDisabledState(isDisabled) {
+    this.disabled = isDisabled;
+    this._changeDetectorRef.markForCheck();
+    this.stateChanges.next();
+  }
+  /** Whether or not the overlay panel is open. */
+  get panelOpen() {
+    return this._panelOpen;
+  }
+  /** The currently selected option. */
+  get selected() {
+    var _a9, _b3;
+    return this.multiple ? ((_a9 = this._selectionModel) == null ? void 0 : _a9.selected) || [] : (_b3 = this._selectionModel) == null ? void 0 : _b3.selected[0];
+  }
+  /** The value displayed in the trigger. */
+  get triggerValue() {
+    if (this.empty) {
+      return "";
+    }
+    if (this._multiple) {
+      const selectedOptions = this._selectionModel.selected.map((option) => option.viewValue);
+      if (this._isRtl()) {
+        selectedOptions.reverse();
+      }
+      return selectedOptions.join(", ");
+    }
+    return this._selectionModel.selected[0].viewValue;
+  }
+  /** Refreshes the error state of the select. */
+  updateErrorState() {
+    this._errorStateTracker.updateErrorState();
+  }
+  /** Whether the element is in RTL mode. */
+  _isRtl() {
+    return this._dir ? this._dir.value === "rtl" : false;
+  }
+  /** Handles all keydown events on the select. */
+  _handleKeydown(event) {
+    if (!this.disabled) {
+      this.panelOpen ? this._handleOpenKeydown(event) : this._handleClosedKeydown(event);
+    }
+  }
+  /** Handles keyboard events while the select is closed. */
+  _handleClosedKeydown(event) {
+    const keyCode = event.keyCode;
+    const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW || keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW;
+    const isOpenKey = keyCode === ENTER || keyCode === SPACE;
+    const manager = this._keyManager;
+    if (!manager.isTyping() && isOpenKey && !hasModifierKey(event) || (this.multiple || event.altKey) && isArrowKey) {
+      event.preventDefault();
+      this.open();
+    } else if (!this.multiple) {
+      const previouslySelectedOption = this.selected;
+      manager.onKeydown(event);
+      const selectedOption = this.selected;
+      if (selectedOption && previouslySelectedOption !== selectedOption) {
+        this._liveAnnouncer.announce(selectedOption.viewValue, 1e4);
+      }
+    }
+  }
+  /** Handles keyboard events when the selected is open. */
+  _handleOpenKeydown(event) {
+    const manager = this._keyManager;
+    const keyCode = event.keyCode;
+    const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
+    const isTyping = manager.isTyping();
+    if (isArrowKey && event.altKey) {
+      event.preventDefault();
+      this.close();
+    } else if (!isTyping && (keyCode === ENTER || keyCode === SPACE) && manager.activeItem && !hasModifierKey(event)) {
+      event.preventDefault();
+      manager.activeItem._selectViaInteraction();
+    } else if (!isTyping && this._multiple && keyCode === A && event.ctrlKey) {
+      event.preventDefault();
+      const hasDeselectedOptions = this.options.some((opt) => !opt.disabled && !opt.selected);
+      this.options.forEach((option) => {
+        if (!option.disabled) {
+          hasDeselectedOptions ? option.select() : option.deselect();
+        }
+      });
+    } else {
+      const previouslyFocusedIndex = manager.activeItemIndex;
+      manager.onKeydown(event);
+      if (this._multiple && isArrowKey && event.shiftKey && manager.activeItem && manager.activeItemIndex !== previouslyFocusedIndex) {
+        manager.activeItem._selectViaInteraction();
+      }
+    }
+  }
+  /** Handles keyboard events coming from the overlay. */
+  _handleOverlayKeydown(event) {
+    if (event.keyCode === ESCAPE && !hasModifierKey(event)) {
+      event.preventDefault();
+      this.close();
+    }
+  }
+  _onFocus() {
+    if (!this.disabled) {
+      this._focused = true;
+      this.stateChanges.next();
+    }
+  }
+  /**
+   * Calls the touched callback only if the panel is closed. Otherwise, the trigger will
+   * "blur" to the panel when it opens, causing a false positive.
+   */
+  _onBlur() {
+    var _a9;
+    this._focused = false;
+    (_a9 = this._keyManager) == null ? void 0 : _a9.cancelTypeahead();
+    if (!this.disabled && !this.panelOpen) {
+      this._onTouched();
+      this._changeDetectorRef.markForCheck();
+      this.stateChanges.next();
+    }
+  }
+  /** Returns the theme to be used on the panel. */
+  _getPanelTheme() {
+    return this._parentFormField ? `mat-${this._parentFormField.color}` : "";
+  }
+  /** Whether the select has a value. */
+  get empty() {
+    return !this._selectionModel || this._selectionModel.isEmpty();
+  }
+  _initializeSelection() {
+    Promise.resolve().then(() => {
+      if (this.ngControl) {
+        this._value = this.ngControl.value;
+      }
+      this._setSelectionByValue(this._value);
+      this.stateChanges.next();
+    });
+  }
+  /**
+   * Sets the selected option based on a value. If no option can be
+   * found with the designated value, the select trigger is cleared.
+   */
+  _setSelectionByValue(value) {
+    this.options.forEach((option) => option.setInactiveStyles());
+    this._selectionModel.clear();
+    if (this.multiple && value) {
+      if (!Array.isArray(value) && (typeof ngDevMode === "undefined" || ngDevMode)) {
+        throw getMatSelectNonArrayValueError();
+      }
+      value.forEach((currentValue) => this._selectOptionByValue(currentValue));
+      this._sortValues();
+    } else {
+      const correspondingOption = this._selectOptionByValue(value);
+      if (correspondingOption) {
+        this._keyManager.updateActiveItem(correspondingOption);
+      } else if (!this.panelOpen) {
+        this._keyManager.updateActiveItem(-1);
+      }
+    }
+    this._changeDetectorRef.markForCheck();
+  }
+  /**
+   * Finds and selects and option based on its value.
+   * @returns Option that has the corresponding value.
+   */
+  _selectOptionByValue(value) {
+    const correspondingOption = this.options.find((option) => {
+      if (this._selectionModel.isSelected(option)) {
+        return false;
+      }
+      try {
+        return (option.value != null || this.canSelectNullableOptions) && this._compareWith(option.value, value);
+      } catch (error) {
+        if (typeof ngDevMode === "undefined" || ngDevMode) {
+          console.warn(error);
+        }
+        return false;
+      }
+    });
+    if (correspondingOption) {
+      this._selectionModel.select(correspondingOption);
+    }
+    return correspondingOption;
+  }
+  /** Assigns a specific value to the select. Returns whether the value has changed. */
+  _assignValue(newValue) {
+    if (newValue !== this._value || this._multiple && Array.isArray(newValue)) {
+      if (this.options) {
+        this._setSelectionByValue(newValue);
+      }
+      this._value = newValue;
+      return true;
+    }
+    return false;
+  }
+  // `skipPredicate` determines if key manager should avoid putting a given option in the tab
+  // order. Allow disabled list items to receive focus via keyboard to align with WAI ARIA
+  // recommendation.
+  //
+  // Normally WAI ARIA's instructions are to exclude disabled items from the tab order, but it
+  // makes a few exceptions for compound widgets.
+  //
+  // From [Developing a Keyboard Interface](
+  // https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/):
+  //   "For the following composite widget elements, keep them focusable when disabled: Options in a
+  //   Listbox..."
+  //
+  // The user can focus disabled options using the keyboard, but the user cannot click disabled
+  // options.
+  _skipPredicate = (option) => {
+    if (this.panelOpen) {
+      return false;
+    }
+    return option.disabled;
+  };
+  /** Gets how wide the overlay panel should be. */
+  _getOverlayWidth(preferredOrigin) {
+    if (this.panelWidth === "auto") {
+      const refToMeasure = preferredOrigin instanceof CdkOverlayOrigin ? preferredOrigin.elementRef : preferredOrigin || this._elementRef;
+      return refToMeasure.nativeElement.getBoundingClientRect().width;
+    }
+    return this.panelWidth === null ? "" : this.panelWidth;
+  }
+  /** Syncs the parent state with the individual options. */
+  _syncParentProperties() {
+    if (this.options) {
+      for (const option of this.options) {
+        option._changeDetectorRef.markForCheck();
+      }
+    }
+  }
+  /** Sets up a key manager to listen to keyboard events on the overlay panel. */
+  _initKeyManager() {
+    this._keyManager = new ActiveDescendantKeyManager(this.options).withTypeAhead(this.typeaheadDebounceInterval).withVerticalOrientation().withHorizontalOrientation(this._isRtl() ? "rtl" : "ltr").withHomeAndEnd().withPageUpDown().withAllowedModifierKeys(["shiftKey"]).skipPredicate(this._skipPredicate);
+    this._keyManager.tabOut.subscribe(() => {
+      if (this.panelOpen) {
+        if (!this.multiple && this._keyManager.activeItem) {
+          this._keyManager.activeItem._selectViaInteraction();
+        }
+        this.focus();
+        this.close();
+      }
+    });
+    this._keyManager.change.subscribe(() => {
+      if (this._panelOpen && this.panel) {
+        this._scrollOptionIntoView(this._keyManager.activeItemIndex || 0);
+      } else if (!this._panelOpen && !this.multiple && this._keyManager.activeItem) {
+        this._keyManager.activeItem._selectViaInteraction();
+      }
+    });
+  }
+  /** Drops current option subscriptions and IDs and resets from scratch. */
+  _resetOptions() {
+    const changedOrDestroyed = merge(this.options.changes, this._destroy);
+    this.optionSelectionChanges.pipe(takeUntil(changedOrDestroyed)).subscribe((event) => {
+      this._onSelect(event.source, event.isUserInput);
+      if (event.isUserInput && !this.multiple && this._panelOpen) {
+        this.close();
+        this.focus();
+      }
+    });
+    merge(...this.options.map((option) => option._stateChanges)).pipe(takeUntil(changedOrDestroyed)).subscribe(() => {
+      this._changeDetectorRef.detectChanges();
+      this.stateChanges.next();
+    });
+  }
+  /** Invoked when an option is clicked. */
+  _onSelect(option, isUserInput) {
+    const wasSelected = this._selectionModel.isSelected(option);
+    if (!this.canSelectNullableOptions && option.value == null && !this._multiple) {
+      option.deselect();
+      this._selectionModel.clear();
+      if (this.value != null) {
+        this._propagateChanges(option.value);
+      }
+    } else {
+      if (wasSelected !== option.selected) {
+        option.selected ? this._selectionModel.select(option) : this._selectionModel.deselect(option);
+      }
+      if (isUserInput) {
+        this._keyManager.setActiveItem(option);
+      }
+      if (this.multiple) {
+        this._sortValues();
+        if (isUserInput) {
+          this.focus();
+        }
+      }
+    }
+    if (wasSelected !== this._selectionModel.isSelected(option)) {
+      this._propagateChanges();
+    }
+    this.stateChanges.next();
+  }
+  /** Sorts the selected values in the selected based on their order in the panel. */
+  _sortValues() {
+    if (this.multiple) {
+      const options = this.options.toArray();
+      this._selectionModel.sort((a, b3) => {
+        return this.sortComparator ? this.sortComparator(a, b3, options) : options.indexOf(a) - options.indexOf(b3);
+      });
+      this.stateChanges.next();
+    }
+  }
+  /** Emits change event to set the model value. */
+  _propagateChanges(fallbackValue) {
+    let valueToEmit;
+    if (this.multiple) {
+      valueToEmit = this.selected.map((option) => option.value);
+    } else {
+      valueToEmit = this.selected ? this.selected.value : fallbackValue;
+    }
+    this._value = valueToEmit;
+    this.valueChange.emit(valueToEmit);
+    this._onChange(valueToEmit);
+    this.selectionChange.emit(this._getChangeEvent(valueToEmit));
+    this._changeDetectorRef.markForCheck();
+  }
+  /**
+   * Highlights the selected item. If no option is selected, it will highlight
+   * the first *enabled* option.
+   */
+  _highlightCorrectOption() {
+    if (this._keyManager) {
+      if (this.empty) {
+        let firstEnabledOptionIndex = -1;
+        for (let index = 0; index < this.options.length; index++) {
+          const option = this.options.get(index);
+          if (!option.disabled) {
+            firstEnabledOptionIndex = index;
+            break;
+          }
+        }
+        this._keyManager.setActiveItem(firstEnabledOptionIndex);
+      } else {
+        this._keyManager.setActiveItem(this._selectionModel.selected[0]);
+      }
+    }
+  }
+  /** Whether the panel is allowed to open. */
+  _canOpen() {
+    var _a9;
+    return !this._panelOpen && !this.disabled && ((_a9 = this.options) == null ? void 0 : _a9.length) > 0 && !!this._overlayDir;
+  }
+  /** Focuses the select element. */
+  focus(options) {
+    this._elementRef.nativeElement.focus(options);
+  }
+  /** Gets the aria-labelledby for the select panel. */
+  _getPanelAriaLabelledby() {
+    var _a9;
+    if (this.ariaLabel) {
+      return null;
+    }
+    const labelId = ((_a9 = this._parentFormField) == null ? void 0 : _a9.getLabelId()) || null;
+    const labelExpression = labelId ? labelId + " " : "";
+    return this.ariaLabelledby ? labelExpression + this.ariaLabelledby : labelId;
+  }
+  /** Determines the `aria-activedescendant` to be set on the host. */
+  _getAriaActiveDescendant() {
+    if (this.panelOpen && this._keyManager && this._keyManager.activeItem) {
+      return this._keyManager.activeItem.id;
+    }
+    return null;
+  }
+  /** Gets the aria-labelledby of the select component trigger. */
+  _getTriggerAriaLabelledby() {
+    var _a9;
+    if (this.ariaLabel) {
+      return null;
+    }
+    let value = ((_a9 = this._parentFormField) == null ? void 0 : _a9.getLabelId()) || "";
+    if (this.ariaLabelledby) {
+      value += " " + this.ariaLabelledby;
+    }
+    if (!value) {
+      value = this._valueId;
+    }
+    return value;
+  }
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  get describedByIds() {
+    const element = this._elementRef.nativeElement;
+    const existingDescribedBy = element.getAttribute("aria-describedby");
+    return (existingDescribedBy == null ? void 0 : existingDescribedBy.split(" ")) || [];
+  }
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  setDescribedByIds(ids) {
+    if (ids.length) {
+      this._elementRef.nativeElement.setAttribute("aria-describedby", ids.join(" "));
+    } else {
+      this._elementRef.nativeElement.removeAttribute("aria-describedby");
+    }
+  }
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  onContainerClick() {
+    this.focus();
+    this.open();
+  }
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  get shouldLabelFloat() {
+    return this.panelOpen || !this.empty || this.focused && !!this.placeholder;
+  }
+  static \u0275fac = function MatSelect_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatSelect)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _MatSelect,
+    selectors: [["mat-select"]],
+    contentQueries: function MatSelect_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, MAT_SELECT_TRIGGER, 5);
+        \u0275\u0275contentQuery(dirIndex, MatOption, 5);
+        \u0275\u0275contentQuery(dirIndex, MAT_OPTGROUP, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.customTrigger = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.options = _t4);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.optionGroups = _t4);
+      }
+    },
+    viewQuery: function MatSelect_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c09, 5);
+        \u0275\u0275viewQuery(_c18, 5);
+        \u0275\u0275viewQuery(CdkConnectedOverlay, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.trigger = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.panel = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._overlayDir = _t4.first);
+      }
+    },
+    hostAttrs: ["role", "combobox", "aria-haspopup", "listbox", 1, "mat-mdc-select"],
+    hostVars: 19,
+    hostBindings: function MatSelect_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("keydown", function MatSelect_keydown_HostBindingHandler($event) {
+          return ctx._handleKeydown($event);
+        })("focus", function MatSelect_focus_HostBindingHandler() {
+          return ctx._onFocus();
+        })("blur", function MatSelect_blur_HostBindingHandler() {
+          return ctx._onBlur();
+        });
+      }
+      if (rf & 2) {
+        \u0275\u0275attribute("id", ctx.id)("tabindex", ctx.disabled ? -1 : ctx.tabIndex)("aria-controls", ctx.panelOpen ? ctx.id + "-panel" : null)("aria-expanded", ctx.panelOpen)("aria-label", ctx.ariaLabel || null)("aria-required", ctx.required.toString())("aria-disabled", ctx.disabled.toString())("aria-invalid", ctx.errorState)("aria-activedescendant", ctx._getAriaActiveDescendant());
+        \u0275\u0275classProp("mat-mdc-select-disabled", ctx.disabled)("mat-mdc-select-invalid", ctx.errorState)("mat-mdc-select-required", ctx.required)("mat-mdc-select-empty", ctx.empty)("mat-mdc-select-multiple", ctx.multiple);
+      }
+    },
+    inputs: {
+      userAriaDescribedBy: [0, "aria-describedby", "userAriaDescribedBy"],
+      panelClass: "panelClass",
+      disabled: [2, "disabled", "disabled", booleanAttribute],
+      disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
+      tabIndex: [2, "tabIndex", "tabIndex", (value) => value == null ? 0 : numberAttribute(value)],
+      hideSingleSelectionIndicator: [2, "hideSingleSelectionIndicator", "hideSingleSelectionIndicator", booleanAttribute],
+      placeholder: "placeholder",
+      required: [2, "required", "required", booleanAttribute],
+      multiple: [2, "multiple", "multiple", booleanAttribute],
+      disableOptionCentering: [2, "disableOptionCentering", "disableOptionCentering", booleanAttribute],
+      compareWith: "compareWith",
+      value: "value",
+      ariaLabel: [0, "aria-label", "ariaLabel"],
+      ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
+      errorStateMatcher: "errorStateMatcher",
+      typeaheadDebounceInterval: [2, "typeaheadDebounceInterval", "typeaheadDebounceInterval", numberAttribute],
+      sortComparator: "sortComparator",
+      id: "id",
+      panelWidth: "panelWidth",
+      canSelectNullableOptions: [2, "canSelectNullableOptions", "canSelectNullableOptions", booleanAttribute]
+    },
+    outputs: {
+      openedChange: "openedChange",
+      _openedStream: "opened",
+      _closedStream: "closed",
+      selectionChange: "selectionChange",
+      valueChange: "valueChange"
+    },
+    exportAs: ["matSelect"],
+    features: [\u0275\u0275ProvidersFeature([{
+      provide: MatFormFieldControl,
+      useExisting: _MatSelect
+    }, {
+      provide: MAT_OPTION_PARENT_COMPONENT,
+      useExisting: _MatSelect
+    }]), \u0275\u0275NgOnChangesFeature],
+    ngContentSelectors: _c34,
+    decls: 11,
+    vars: 9,
+    consts: [["fallbackOverlayOrigin", "cdkOverlayOrigin", "trigger", ""], ["panel", ""], ["cdk-overlay-origin", "", 1, "mat-mdc-select-trigger", 3, "click"], [1, "mat-mdc-select-value"], [1, "mat-mdc-select-placeholder", "mat-mdc-select-min-line"], [1, "mat-mdc-select-value-text"], [1, "mat-mdc-select-arrow-wrapper"], [1, "mat-mdc-select-arrow"], ["viewBox", "0 0 24 24", "width", "24px", "height", "24px", "focusable", "false", "aria-hidden", "true"], ["d", "M7 10l5 5 5-5z"], ["cdk-connected-overlay", "", "cdkConnectedOverlayLockPosition", "", "cdkConnectedOverlayHasBackdrop", "", "cdkConnectedOverlayBackdropClass", "cdk-overlay-transparent-backdrop", 3, "detach", "backdropClick", "overlayKeydown", "cdkConnectedOverlayDisableClose", "cdkConnectedOverlayPanelClass", "cdkConnectedOverlayScrollStrategy", "cdkConnectedOverlayOrigin", "cdkConnectedOverlayPositions", "cdkConnectedOverlayWidth", "cdkConnectedOverlayFlexibleDimensions"], [1, "mat-mdc-select-min-line"], ["role", "listbox", "tabindex", "-1", 3, "keydown", "ngClass"]],
+    template: function MatSelect_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275projectionDef(_c24);
+        \u0275\u0275elementStart(0, "div", 2, 0);
+        \u0275\u0275listener("click", function MatSelect_Template_div_click_0_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.open());
+        });
+        \u0275\u0275elementStart(3, "div", 3);
+        \u0275\u0275conditionalCreate(4, MatSelect_Conditional_4_Template, 2, 1, "span", 4)(5, MatSelect_Conditional_5_Template, 3, 1, "span", 5);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(6, "div", 6)(7, "div", 7);
+        \u0275\u0275namespaceSVG();
+        \u0275\u0275elementStart(8, "svg", 8);
+        \u0275\u0275element(9, "path", 9);
+        \u0275\u0275elementEnd()()()();
+        \u0275\u0275template(10, MatSelect_ng_template_10_Template, 3, 10, "ng-template", 10);
+        \u0275\u0275listener("detach", function MatSelect_Template_ng_template_detach_10_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.close());
+        })("backdropClick", function MatSelect_Template_ng_template_backdropClick_10_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.close());
+        })("overlayKeydown", function MatSelect_Template_ng_template_overlayKeydown_10_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._handleOverlayKeydown($event));
+        });
+      }
+      if (rf & 2) {
+        const fallbackOverlayOrigin_r4 = \u0275\u0275reference(1);
+        \u0275\u0275advance(3);
+        \u0275\u0275attribute("id", ctx._valueId);
+        \u0275\u0275advance();
+        \u0275\u0275conditional(ctx.empty ? 4 : 5);
+        \u0275\u0275advance(6);
+        \u0275\u0275property("cdkConnectedOverlayDisableClose", true)("cdkConnectedOverlayPanelClass", ctx._overlayPanelClass)("cdkConnectedOverlayScrollStrategy", ctx._scrollStrategy)("cdkConnectedOverlayOrigin", ctx._preferredOverlayOrigin || fallbackOverlayOrigin_r4)("cdkConnectedOverlayPositions", ctx._positions)("cdkConnectedOverlayWidth", ctx._overlayWidth)("cdkConnectedOverlayFlexibleDimensions", true);
+      }
+    },
+    dependencies: [CdkOverlayOrigin, CdkConnectedOverlay, NgClass],
+    styles: ['@keyframes _mat-select-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}@keyframes _mat-select-exit{from{opacity:1}to{opacity:0}}.mat-mdc-select{display:inline-block;width:100%;outline:none;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;color:var(--mat-select-enabled-trigger-text-color, var(--mat-sys-on-surface));font-family:var(--mat-select-trigger-text-font, var(--mat-sys-body-large-font));line-height:var(--mat-select-trigger-text-line-height, var(--mat-sys-body-large-line-height));font-size:var(--mat-select-trigger-text-size, var(--mat-sys-body-large-size));font-weight:var(--mat-select-trigger-text-weight, var(--mat-sys-body-large-weight));letter-spacing:var(--mat-select-trigger-text-tracking, var(--mat-sys-body-large-tracking))}div.mat-mdc-select-panel{box-shadow:var(--mat-select-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12))}.mat-mdc-select-disabled{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-disabled .mat-mdc-select-placeholder{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-trigger{display:inline-flex;align-items:center;cursor:pointer;position:relative;box-sizing:border-box;width:100%}.mat-mdc-select-disabled .mat-mdc-select-trigger{-webkit-user-select:none;user-select:none;cursor:default}.mat-mdc-select-value{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mat-mdc-select-value-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mat-mdc-select-arrow-wrapper{height:24px;flex-shrink:0;display:inline-flex;align-items:center}.mat-form-field-appearance-fill .mdc-text-field--no-label .mat-mdc-select-arrow-wrapper{transform:none}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-invalid .mat-mdc-select-arrow,.mat-form-field-invalid:not(.mat-form-field-disabled) .mat-mdc-form-field-infix::after{color:var(--mat-select-invalid-arrow-color, var(--mat-sys-error))}.mat-mdc-select-arrow{width:10px;height:5px;position:relative;color:var(--mat-select-enabled-arrow-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field.mat-focused .mat-mdc-select-arrow{color:var(--mat-select-focused-arrow-color, var(--mat-sys-primary))}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-disabled .mat-mdc-select-arrow{color:var(--mat-select-disabled-arrow-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-arrow svg{fill:currentColor;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)}@media(forced-colors: active){.mat-mdc-select-arrow svg{fill:CanvasText}.mat-mdc-select-disabled .mat-mdc-select-arrow svg{fill:GrayText}}div.mat-mdc-select-panel{width:100%;max-height:275px;outline:0;overflow:auto;padding:8px 0;border-radius:4px;box-sizing:border-box;position:relative;background-color:var(--mat-select-panel-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-select-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel{border-top-left-radius:0;border-top-right-radius:0;transform-origin:top center}.mat-mdc-select-panel-above div.mat-mdc-select-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:bottom center}.mat-select-panel-animations-enabled{animation:_mat-select-enter 120ms cubic-bezier(0, 0, 0.2, 1)}.mat-select-panel-animations-enabled.mat-select-panel-exit{animation:_mat-select-exit 100ms linear}.mat-mdc-select-placeholder{transition:color 400ms 133.3333333333ms cubic-bezier(0.25, 0.8, 0.25, 1);color:var(--mat-select-placeholder-text-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field:not(.mat-form-field-animations-enabled) .mat-mdc-select-placeholder,._mat-animation-noopable .mat-mdc-select-placeholder{transition:none}.mat-form-field-hide-placeholder .mat-mdc-select-placeholder{color:rgba(0,0,0,0);-webkit-text-fill-color:rgba(0,0,0,0);transition:none;display:block}.mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{cursor:pointer}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mat-mdc-floating-label{max-width:calc(100% - 18px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mdc-floating-label--float-above{max-width:calc(100%/0.75 - 24px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-notched-outline__notch{max-width:calc(100% - 60px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-text-field--label-floating .mdc-notched-outline__notch{max-width:calc(100% - 24px)}.mat-mdc-select-min-line:empty::before{content:" ";white-space:pre;width:1px;display:inline-block;visibility:hidden}.mat-form-field-appearance-fill .mat-mdc-select-arrow-wrapper{transform:var(--mat-select-arrow-transform, translateY(-8px))}\n'],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatSelect, [{
+    type: Component,
+    args: [{
+      selector: "mat-select",
+      exportAs: "matSelect",
+      encapsulation: ViewEncapsulation.None,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      host: {
+        "role": "combobox",
+        "aria-haspopup": "listbox",
+        "class": "mat-mdc-select",
+        "[attr.id]": "id",
+        "[attr.tabindex]": "disabled ? -1 : tabIndex",
+        "[attr.aria-controls]": 'panelOpen ? id + "-panel" : null',
+        "[attr.aria-expanded]": "panelOpen",
+        "[attr.aria-label]": "ariaLabel || null",
+        "[attr.aria-required]": "required.toString()",
+        "[attr.aria-disabled]": "disabled.toString()",
+        "[attr.aria-invalid]": "errorState",
+        "[attr.aria-activedescendant]": "_getAriaActiveDescendant()",
+        "[class.mat-mdc-select-disabled]": "disabled",
+        "[class.mat-mdc-select-invalid]": "errorState",
+        "[class.mat-mdc-select-required]": "required",
+        "[class.mat-mdc-select-empty]": "empty",
+        "[class.mat-mdc-select-multiple]": "multiple",
+        "(keydown)": "_handleKeydown($event)",
+        "(focus)": "_onFocus()",
+        "(blur)": "_onBlur()"
+      },
+      providers: [{
+        provide: MatFormFieldControl,
+        useExisting: MatSelect
+      }, {
+        provide: MAT_OPTION_PARENT_COMPONENT,
+        useExisting: MatSelect
+      }],
+      imports: [CdkOverlayOrigin, CdkConnectedOverlay, NgClass],
+      template: `<div cdk-overlay-origin
+     class="mat-mdc-select-trigger"
+     (click)="open()"
+     #fallbackOverlayOrigin="cdkOverlayOrigin"
+     #trigger>
+
+  <div class="mat-mdc-select-value" [attr.id]="_valueId">
+    @if (empty) {
+      <span class="mat-mdc-select-placeholder mat-mdc-select-min-line">{{placeholder}}</span>
+    } @else {
+      <span class="mat-mdc-select-value-text">
+        @if (customTrigger) {
+          <ng-content select="mat-select-trigger"></ng-content>
+        } @else {
+          <span class="mat-mdc-select-min-line">{{triggerValue}}</span>
+        }
+      </span>
+    }
+  </div>
+
+  <div class="mat-mdc-select-arrow-wrapper">
+    <div class="mat-mdc-select-arrow">
+      <!-- Use an inline SVG, because it works better than a CSS triangle in high contrast mode. -->
+      <svg viewBox="0 0 24 24" width="24px" height="24px" focusable="false" aria-hidden="true">
+        <path d="M7 10l5 5 5-5z"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<ng-template
+  cdk-connected-overlay
+  cdkConnectedOverlayLockPosition
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayDisableClose]="true"
+  [cdkConnectedOverlayPanelClass]="_overlayPanelClass"
+  [cdkConnectedOverlayScrollStrategy]="_scrollStrategy"
+  [cdkConnectedOverlayOrigin]="_preferredOverlayOrigin || fallbackOverlayOrigin"
+  [cdkConnectedOverlayPositions]="_positions"
+  [cdkConnectedOverlayWidth]="_overlayWidth"
+  [cdkConnectedOverlayFlexibleDimensions]="true"
+  (detach)="close()"
+  (backdropClick)="close()"
+  (overlayKeydown)="_handleOverlayKeydown($event)">
+  <div
+    #panel
+    role="listbox"
+    tabindex="-1"
+    class="mat-mdc-select-panel mdc-menu-surface mdc-menu-surface--open {{ _getPanelTheme() }}"
+    [class.mat-select-panel-animations-enabled]="!_animationsDisabled"
+    [attr.id]="id + '-panel'"
+    [attr.aria-multiselectable]="multiple"
+    [attr.aria-label]="ariaLabel || null"
+    [attr.aria-labelledby]="_getPanelAriaLabelledby()"
+    [ngClass]="panelClass"
+    (keydown)="_handleKeydown($event)">
+    <ng-content></ng-content>
+  </div>
+</ng-template>
+`,
+      styles: ['@keyframes _mat-select-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}@keyframes _mat-select-exit{from{opacity:1}to{opacity:0}}.mat-mdc-select{display:inline-block;width:100%;outline:none;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;color:var(--mat-select-enabled-trigger-text-color, var(--mat-sys-on-surface));font-family:var(--mat-select-trigger-text-font, var(--mat-sys-body-large-font));line-height:var(--mat-select-trigger-text-line-height, var(--mat-sys-body-large-line-height));font-size:var(--mat-select-trigger-text-size, var(--mat-sys-body-large-size));font-weight:var(--mat-select-trigger-text-weight, var(--mat-sys-body-large-weight));letter-spacing:var(--mat-select-trigger-text-tracking, var(--mat-sys-body-large-tracking))}div.mat-mdc-select-panel{box-shadow:var(--mat-select-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12))}.mat-mdc-select-disabled{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-disabled .mat-mdc-select-placeholder{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-trigger{display:inline-flex;align-items:center;cursor:pointer;position:relative;box-sizing:border-box;width:100%}.mat-mdc-select-disabled .mat-mdc-select-trigger{-webkit-user-select:none;user-select:none;cursor:default}.mat-mdc-select-value{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mat-mdc-select-value-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mat-mdc-select-arrow-wrapper{height:24px;flex-shrink:0;display:inline-flex;align-items:center}.mat-form-field-appearance-fill .mdc-text-field--no-label .mat-mdc-select-arrow-wrapper{transform:none}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-invalid .mat-mdc-select-arrow,.mat-form-field-invalid:not(.mat-form-field-disabled) .mat-mdc-form-field-infix::after{color:var(--mat-select-invalid-arrow-color, var(--mat-sys-error))}.mat-mdc-select-arrow{width:10px;height:5px;position:relative;color:var(--mat-select-enabled-arrow-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field.mat-focused .mat-mdc-select-arrow{color:var(--mat-select-focused-arrow-color, var(--mat-sys-primary))}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-disabled .mat-mdc-select-arrow{color:var(--mat-select-disabled-arrow-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-arrow svg{fill:currentColor;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)}@media(forced-colors: active){.mat-mdc-select-arrow svg{fill:CanvasText}.mat-mdc-select-disabled .mat-mdc-select-arrow svg{fill:GrayText}}div.mat-mdc-select-panel{width:100%;max-height:275px;outline:0;overflow:auto;padding:8px 0;border-radius:4px;box-sizing:border-box;position:relative;background-color:var(--mat-select-panel-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-select-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel{border-top-left-radius:0;border-top-right-radius:0;transform-origin:top center}.mat-mdc-select-panel-above div.mat-mdc-select-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:bottom center}.mat-select-panel-animations-enabled{animation:_mat-select-enter 120ms cubic-bezier(0, 0, 0.2, 1)}.mat-select-panel-animations-enabled.mat-select-panel-exit{animation:_mat-select-exit 100ms linear}.mat-mdc-select-placeholder{transition:color 400ms 133.3333333333ms cubic-bezier(0.25, 0.8, 0.25, 1);color:var(--mat-select-placeholder-text-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field:not(.mat-form-field-animations-enabled) .mat-mdc-select-placeholder,._mat-animation-noopable .mat-mdc-select-placeholder{transition:none}.mat-form-field-hide-placeholder .mat-mdc-select-placeholder{color:rgba(0,0,0,0);-webkit-text-fill-color:rgba(0,0,0,0);transition:none;display:block}.mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{cursor:pointer}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mat-mdc-floating-label{max-width:calc(100% - 18px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mdc-floating-label--float-above{max-width:calc(100%/0.75 - 24px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-notched-outline__notch{max-width:calc(100% - 60px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-text-field--label-floating .mdc-notched-outline__notch{max-width:calc(100% - 24px)}.mat-mdc-select-min-line:empty::before{content:" ";white-space:pre;width:1px;display:inline-block;visibility:hidden}.mat-form-field-appearance-fill .mat-mdc-select-arrow-wrapper{transform:var(--mat-select-arrow-transform, translateY(-8px))}\n']
+    }]
+  }], () => [], {
+    options: [{
+      type: ContentChildren,
+      args: [MatOption, {
+        descendants: true
+      }]
+    }],
+    optionGroups: [{
+      type: ContentChildren,
+      args: [MAT_OPTGROUP, {
+        descendants: true
+      }]
+    }],
+    customTrigger: [{
+      type: ContentChild,
+      args: [MAT_SELECT_TRIGGER]
+    }],
+    userAriaDescribedBy: [{
+      type: Input,
+      args: ["aria-describedby"]
+    }],
+    trigger: [{
+      type: ViewChild,
+      args: ["trigger"]
+    }],
+    panel: [{
+      type: ViewChild,
+      args: ["panel"]
+    }],
+    _overlayDir: [{
+      type: ViewChild,
+      args: [CdkConnectedOverlay]
+    }],
+    panelClass: [{
+      type: Input
+    }],
+    disabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    disableRipple: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    tabIndex: [{
+      type: Input,
+      args: [{
+        transform: (value) => value == null ? 0 : numberAttribute(value)
+      }]
+    }],
+    hideSingleSelectionIndicator: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    placeholder: [{
+      type: Input
+    }],
+    required: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    multiple: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    disableOptionCentering: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    compareWith: [{
+      type: Input
+    }],
+    value: [{
+      type: Input
+    }],
+    ariaLabel: [{
+      type: Input,
+      args: ["aria-label"]
+    }],
+    ariaLabelledby: [{
+      type: Input,
+      args: ["aria-labelledby"]
+    }],
+    errorStateMatcher: [{
+      type: Input
+    }],
+    typeaheadDebounceInterval: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    sortComparator: [{
+      type: Input
+    }],
+    id: [{
+      type: Input
+    }],
+    panelWidth: [{
+      type: Input
+    }],
+    canSelectNullableOptions: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    openedChange: [{
+      type: Output
+    }],
+    _openedStream: [{
+      type: Output,
+      args: ["opened"]
+    }],
+    _closedStream: [{
+      type: Output,
+      args: ["closed"]
+    }],
+    selectionChange: [{
+      type: Output
+    }],
+    valueChange: [{
+      type: Output
+    }]
+  });
+})();
+var MatSelectTrigger = class _MatSelectTrigger {
+  static \u0275fac = function MatSelectTrigger_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatSelectTrigger)();
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _MatSelectTrigger,
+    selectors: [["mat-select-trigger"]],
+    features: [\u0275\u0275ProvidersFeature([{
+      provide: MAT_SELECT_TRIGGER,
+      useExisting: _MatSelectTrigger
+    }])]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatSelectTrigger, [{
+    type: Directive,
+    args: [{
+      selector: "mat-select-trigger",
+      providers: [{
+        provide: MAT_SELECT_TRIGGER,
+        useExisting: MatSelectTrigger
+      }]
+    }]
+  }], null, null);
+})();
+var MatSelectModule = class _MatSelectModule {
+  static \u0275fac = function MatSelectModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatSelectModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatSelectModule,
+    imports: [OverlayModule, MatOptionModule, MatCommonModule, MatSelect, MatSelectTrigger],
+    exports: [CdkScrollableModule, MatFormFieldModule, MatSelect, MatSelectTrigger, MatOptionModule, MatCommonModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    providers: [MAT_SELECT_SCROLL_STRATEGY_PROVIDER],
+    imports: [OverlayModule, MatOptionModule, MatCommonModule, CdkScrollableModule, MatFormFieldModule, MatOptionModule, MatCommonModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatSelectModule, [{
+    type: NgModule,
+    args: [{
+      imports: [OverlayModule, MatOptionModule, MatCommonModule, MatSelect, MatSelectTrigger],
+      exports: [CdkScrollableModule, MatFormFieldModule, MatSelect, MatSelectTrigger, MatOptionModule, MatCommonModule],
+      providers: [MAT_SELECT_SCROLL_STRATEGY_PROVIDER]
+    }]
+  }], null, null);
+})();
+
+// libs/components/src/lib/safe.pipe.ts
+var _SafePipe = class _SafePipe {
+  constructor() {
+    this.sanitizer = inject(DomSanitizer);
+  }
+  /**
+   * Sanitizes the string allowing it to be injected into a template
+   * @param value String to sanitize
+   * @param type Type of value to sanitise. `resource`, `url`, `script`, `style` or `html`
+   */
+  transform(value, type2 = "html") {
+    switch (type2) {
+      case "resource":
+        return this.sanitizer.bypassSecurityTrustResourceUrl(value);
+      case "url":
+        return this.sanitizer.bypassSecurityTrustUrl(value);
+      case "script":
+        return this.sanitizer.bypassSecurityTrustScript(value);
+      case "style":
+        return this.sanitizer.bypassSecurityTrustStyle(value);
+      default:
+        return this.sanitizer.bypassSecurityTrustHtml(value);
+    }
+  }
+};
+_SafePipe.\u0275fac = function SafePipe_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _SafePipe)();
+};
+_SafePipe.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "safe", type: _SafePipe, pure: true });
+var SafePipe = _SafePipe;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SafePipe, [{
+    type: Pipe,
+    args: [{
+      name: "safe"
+    }]
+  }], null, null);
+})();
+
+// libs/components/src/lib/icon.component.ts
+var _c010 = ["*"];
+function IconComponent_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "i");
+    \u0275\u0275text(1);
+    \u0275\u0275projection(2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_1_0;
+    let tmp_2_0;
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(((tmp_1_0 = ctx_r0.icon()) == null ? null : tmp_1_0.class) || ctx_r0.className());
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", (tmp_2_0 = ctx_r0.icon()) == null ? null : tmp_2_0.content, " ");
+  }
+}
+function IconComponent_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 2);
+    \u0275\u0275pipe(1, "safe");
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("src", \u0275\u0275pipeBind2(1, 1, ctx_r0.icon().src, "resource"), \u0275\u0275sanitizeUrl);
+  }
+}
+var _IconComponent = class _IconComponent {
+  constructor() {
+    this.className = input("material-symbols-rounded");
+    this.icon = input(void 0);
+  }
+};
+_IconComponent.\u0275fac = function IconComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _IconComponent)();
+};
+_IconComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["icon"], ["i", "icon", ""]], inputs: { className: [1, "className"], icon: [1, "icon"] }, ngContentSelectors: _c010, decls: 3, vars: 2, consts: [[1, "flex", "h-[1.25em]", "w-[1.25em]", "items-center", "justify-center", "overflow-hidden"], [3, "class"], [1, "h-[1em]", "w-[1em]", 3, "src"]], template: function IconComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275projectionDef();
+    \u0275\u0275elementStart(0, "div", 0);
+    \u0275\u0275conditionalCreate(1, IconComponent_Conditional_1_Template, 3, 3, "i", 1);
+    \u0275\u0275conditionalCreate(2, IconComponent_Conditional_2_Template, 2, 4, "img", 2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275conditional(!ctx.icon() || ctx.icon().type !== "img" ? 1 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.icon() && ctx.icon().type === "img" ? 2 : -1);
+  }
+}, dependencies: [SafePipe], styles: ["\n\ni[_ngcontent-%COMP%] {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */"] });
+var IconComponent = _IconComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IconComponent, [{
+    type: Component,
+    args: [{ selector: "icon,i[icon]", template: `
+        <div
+            class="flex h-[1.25em] w-[1.25em] items-center justify-center overflow-hidden"
+        >
+            @if (!icon() || icon().type !== 'img') {
+                <i [class]="icon()?.class || className()">
+                    {{ icon()?.content }}
+                    <ng-content></ng-content>
+                </i>
+            }
+            @if (icon() && icon().type === 'img') {
+                <img
+                    class="h-[1em] w-[1em]"
+                    [src]="icon().src | safe: 'resource'"
+                />
+            }
+        </div>
+    `, imports: [SafePipe], styles: ["/* angular:styles/component:css;9dcb326dcc2b3d8b68e7d89ef488eb28abc701fb0e2ab3f372b27f7bf732088c;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/icon.component.ts */\ni {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IconComponent, { className: "IconComponent", filePath: "libs/components/src/lib/icon.component.ts", lineNumber: 34 });
+})();
+
+// node_modules/@angular/material/fesm2022/checkbox.mjs
+var _c011 = ["input"];
+var _c19 = ["label"];
+var _c25 = ["*"];
+var MAT_CHECKBOX_DEFAULT_OPTIONS = new InjectionToken("mat-checkbox-default-options", {
+  providedIn: "root",
+  factory: MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY
+});
+function MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY() {
+  return {
+    color: "accent",
+    clickAction: "check-indeterminate",
+    disabledInteractive: false
+  };
+}
+var TransitionCheckState;
+(function(TransitionCheckState2) {
+  TransitionCheckState2[TransitionCheckState2["Init"] = 0] = "Init";
+  TransitionCheckState2[TransitionCheckState2["Checked"] = 1] = "Checked";
+  TransitionCheckState2[TransitionCheckState2["Unchecked"] = 2] = "Unchecked";
+  TransitionCheckState2[TransitionCheckState2["Indeterminate"] = 3] = "Indeterminate";
+})(TransitionCheckState || (TransitionCheckState = {}));
+var MatCheckboxChange = class {
+  /** The source checkbox of the event. */
+  source;
+  /** The new `checked` value of the checkbox. */
+  checked;
+};
+var defaults2 = MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY();
+var MatCheckbox = class _MatCheckbox {
+  _elementRef = inject(ElementRef);
+  _changeDetectorRef = inject(ChangeDetectorRef);
+  _ngZone = inject(NgZone);
+  _animationsDisabled = _animationsDisabled();
+  _options = inject(MAT_CHECKBOX_DEFAULT_OPTIONS, {
+    optional: true
+  });
+  /** Focuses the checkbox. */
+  focus() {
+    this._inputElement.nativeElement.focus();
+  }
+  /** Creates the change event that will be emitted by the checkbox. */
+  _createChangeEvent(isChecked) {
+    const event = new MatCheckboxChange();
+    event.source = this;
+    event.checked = isChecked;
+    return event;
+  }
+  /** Gets the element on which to add the animation CSS classes. */
+  _getAnimationTargetElement() {
+    var _a9;
+    return (_a9 = this._inputElement) == null ? void 0 : _a9.nativeElement;
+  }
+  /** CSS classes to add when transitioning between the different checkbox states. */
+  _animationClasses = {
+    uncheckedToChecked: "mdc-checkbox--anim-unchecked-checked",
+    uncheckedToIndeterminate: "mdc-checkbox--anim-unchecked-indeterminate",
+    checkedToUnchecked: "mdc-checkbox--anim-checked-unchecked",
+    checkedToIndeterminate: "mdc-checkbox--anim-checked-indeterminate",
+    indeterminateToChecked: "mdc-checkbox--anim-indeterminate-checked",
+    indeterminateToUnchecked: "mdc-checkbox--anim-indeterminate-unchecked"
+  };
+  /**
+   * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
+   * take precedence so this may be omitted.
+   */
+  ariaLabel = "";
+  /**
+   * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
+   */
+  ariaLabelledby = null;
+  /** The 'aria-describedby' attribute is read after the element's label and field type. */
+  ariaDescribedby;
+  /**
+   * Users can specify the `aria-expanded` attribute which will be forwarded to the input element
+   */
+  ariaExpanded;
+  /**
+   * Users can specify the `aria-controls` attribute which will be forwarded to the input element
+   */
+  ariaControls;
+  /** Users can specify the `aria-owns` attribute which will be forwarded to the input element */
+  ariaOwns;
+  _uniqueId;
+  /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
+  id;
+  /** Returns the unique id for the visual hidden input. */
+  get inputId() {
+    return `${this.id || this._uniqueId}-input`;
+  }
+  /** Whether the checkbox is required. */
+  required;
+  /** Whether the label should appear after or before the checkbox. Defaults to 'after' */
+  labelPosition = "after";
+  /** Name value will be applied to the input element if present */
+  name = null;
+  /** Event emitted when the checkbox's `checked` value changes. */
+  change = new EventEmitter();
+  /** Event emitted when the checkbox's `indeterminate` value changes. */
+  indeterminateChange = new EventEmitter();
+  /** The value attribute of the native input element */
+  value;
+  /** Whether the checkbox has a ripple. */
+  disableRipple;
+  /** The native `<input type="checkbox">` element */
+  _inputElement;
+  /** The native `<label>` element */
+  _labelElement;
+  /** Tabindex for the checkbox. */
+  tabIndex;
+  // TODO(crisbeto): this should be a ThemePalette, but some internal apps were abusing
+  // the lack of type checking previously and assigning random strings.
+  /**
+   * Theme color of the checkbox. This API is supported in M2 themes only, it
+   * has no effect in M3 themes. For color customization in M3, see https://material.angular.dev/components/checkbox/styling.
+   *
+   * For information on applying color variants in M3, see
+   * https://material.angular.dev/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
+   */
+  color;
+  /** Whether the checkbox should remain interactive when it is disabled. */
+  disabledInteractive;
+  /**
+   * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
+   * @docs-private
+   */
+  _onTouched = () => {
+  };
+  _currentAnimationClass = "";
+  _currentCheckState = TransitionCheckState.Init;
+  _controlValueAccessorChangeFn = () => {
+  };
+  _validatorChangeFn = () => {
+  };
+  constructor() {
+    var _a9;
+    inject(_CdkPrivateStyleLoader).load(_StructuralStylesLoader);
+    const tabIndex = inject(new HostAttributeToken("tabindex"), {
+      optional: true
+    });
+    this._options = this._options || defaults2;
+    this.color = this._options.color || defaults2.color;
+    this.tabIndex = tabIndex == null ? 0 : parseInt(tabIndex) || 0;
+    this.id = this._uniqueId = inject(_IdGenerator).getId("mat-mdc-checkbox-");
+    this.disabledInteractive = ((_a9 = this._options) == null ? void 0 : _a9.disabledInteractive) ?? false;
+  }
+  ngOnChanges(changes) {
+    if (changes["required"]) {
+      this._validatorChangeFn();
+    }
+  }
+  ngAfterViewInit() {
+    this._syncIndeterminate(this.indeterminate);
+  }
+  /** Whether the checkbox is checked. */
+  get checked() {
+    return this._checked;
+  }
+  set checked(value) {
+    if (value != this.checked) {
+      this._checked = value;
+      this._changeDetectorRef.markForCheck();
+    }
+  }
+  _checked = false;
+  /** Whether the checkbox is disabled. */
+  get disabled() {
+    return this._disabled;
+  }
+  set disabled(value) {
+    if (value !== this.disabled) {
+      this._disabled = value;
+      this._changeDetectorRef.markForCheck();
+    }
+  }
+  _disabled = false;
+  /**
+   * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
+   * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
+   * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
+   * set to false.
+   */
+  get indeterminate() {
+    return this._indeterminate();
+  }
+  set indeterminate(value) {
+    const changed = value != this._indeterminate();
+    this._indeterminate.set(value);
+    if (changed) {
+      if (value) {
+        this._transitionCheckState(TransitionCheckState.Indeterminate);
+      } else {
+        this._transitionCheckState(this.checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
+      }
+      this.indeterminateChange.emit(value);
+    }
+    this._syncIndeterminate(value);
+  }
+  _indeterminate = signal(false);
+  _isRippleDisabled() {
+    return this.disableRipple || this.disabled;
+  }
+  /** Method being called whenever the label text changes. */
+  _onLabelTextChange() {
+    this._changeDetectorRef.detectChanges();
+  }
+  // Implemented as part of ControlValueAccessor.
+  writeValue(value) {
+    this.checked = !!value;
+  }
+  // Implemented as part of ControlValueAccessor.
+  registerOnChange(fn3) {
+    this._controlValueAccessorChangeFn = fn3;
+  }
+  // Implemented as part of ControlValueAccessor.
+  registerOnTouched(fn3) {
+    this._onTouched = fn3;
+  }
+  // Implemented as part of ControlValueAccessor.
+  setDisabledState(isDisabled) {
+    this.disabled = isDisabled;
+  }
+  // Implemented as a part of Validator.
+  validate(control) {
+    return this.required && control.value !== true ? {
+      "required": true
+    } : null;
+  }
+  // Implemented as a part of Validator.
+  registerOnValidatorChange(fn3) {
+    this._validatorChangeFn = fn3;
+  }
+  _transitionCheckState(newState) {
+    let oldState = this._currentCheckState;
+    let element = this._getAnimationTargetElement();
+    if (oldState === newState || !element) {
+      return;
+    }
+    if (this._currentAnimationClass) {
+      element.classList.remove(this._currentAnimationClass);
+    }
+    this._currentAnimationClass = this._getAnimationClassForCheckStateTransition(oldState, newState);
+    this._currentCheckState = newState;
+    if (this._currentAnimationClass.length > 0) {
+      element.classList.add(this._currentAnimationClass);
+      const animationClass = this._currentAnimationClass;
+      this._ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          element.classList.remove(animationClass);
+        }, 1e3);
+      });
+    }
+  }
+  _emitChangeEvent() {
+    this._controlValueAccessorChangeFn(this.checked);
+    this.change.emit(this._createChangeEvent(this.checked));
+    if (this._inputElement) {
+      this._inputElement.nativeElement.checked = this.checked;
+    }
+  }
+  /** Toggles the `checked` state of the checkbox. */
+  toggle() {
+    this.checked = !this.checked;
+    this._controlValueAccessorChangeFn(this.checked);
+  }
+  _handleInputClick() {
+    var _a9;
+    const clickAction = (_a9 = this._options) == null ? void 0 : _a9.clickAction;
+    if (!this.disabled && clickAction !== "noop") {
+      if (this.indeterminate && clickAction !== "check") {
+        Promise.resolve().then(() => {
+          this._indeterminate.set(false);
+          this.indeterminateChange.emit(false);
+        });
+      }
+      this._checked = !this._checked;
+      this._transitionCheckState(this._checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
+      this._emitChangeEvent();
+    } else if (this.disabled && this.disabledInteractive || !this.disabled && clickAction === "noop") {
+      this._inputElement.nativeElement.checked = this.checked;
+      this._inputElement.nativeElement.indeterminate = this.indeterminate;
+    }
+  }
+  _onInteractionEvent(event) {
+    event.stopPropagation();
+  }
+  _onBlur() {
+    Promise.resolve().then(() => {
+      this._onTouched();
+      this._changeDetectorRef.markForCheck();
+    });
+  }
+  _getAnimationClassForCheckStateTransition(oldState, newState) {
+    if (this._animationsDisabled) {
+      return "";
+    }
+    switch (oldState) {
+      case TransitionCheckState.Init:
+        if (newState === TransitionCheckState.Checked) {
+          return this._animationClasses.uncheckedToChecked;
+        } else if (newState == TransitionCheckState.Indeterminate) {
+          return this._checked ? this._animationClasses.checkedToIndeterminate : this._animationClasses.uncheckedToIndeterminate;
+        }
+        break;
+      case TransitionCheckState.Unchecked:
+        return newState === TransitionCheckState.Checked ? this._animationClasses.uncheckedToChecked : this._animationClasses.uncheckedToIndeterminate;
+      case TransitionCheckState.Checked:
+        return newState === TransitionCheckState.Unchecked ? this._animationClasses.checkedToUnchecked : this._animationClasses.checkedToIndeterminate;
+      case TransitionCheckState.Indeterminate:
+        return newState === TransitionCheckState.Checked ? this._animationClasses.indeterminateToChecked : this._animationClasses.indeterminateToUnchecked;
+    }
+    return "";
+  }
+  /**
+   * Syncs the indeterminate value with the checkbox DOM node.
+   *
+   * We sync `indeterminate` directly on the DOM node, because in Ivy the check for whether a
+   * property is supported on an element boils down to `if (propName in element)`. Domino's
+   * HTMLInputElement doesn't have an `indeterminate` property so Ivy will warn during
+   * server-side rendering.
+   */
+  _syncIndeterminate(value) {
+    const nativeCheckbox = this._inputElement;
+    if (nativeCheckbox) {
+      nativeCheckbox.nativeElement.indeterminate = value;
+    }
+  }
+  _onInputClick() {
+    this._handleInputClick();
+  }
+  _onTouchTargetClick() {
+    this._handleInputClick();
+    if (!this.disabled) {
+      this._inputElement.nativeElement.focus();
+    }
+  }
+  /**
+   *  Prevent click events that come from the `<label/>` element from bubbling. This prevents the
+   *  click handler on the host from triggering twice when clicking on the `<label/>` element. After
+   *  the click event on the `<label/>` propagates, the browsers dispatches click on the associated
+   *  `<input/>`. By preventing clicks on the label by bubbling, we ensure only one click event
+   *  bubbles when the label is clicked.
+   */
+  _preventBubblingFromLabel(event) {
+    if (!!event.target && this._labelElement.nativeElement.contains(event.target)) {
+      event.stopPropagation();
+    }
+  }
+  static \u0275fac = function MatCheckbox_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatCheckbox)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _MatCheckbox,
+    selectors: [["mat-checkbox"]],
+    viewQuery: function MatCheckbox_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c011, 5);
+        \u0275\u0275viewQuery(_c19, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._inputElement = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._labelElement = _t4.first);
+      }
+    },
+    hostAttrs: [1, "mat-mdc-checkbox"],
+    hostVars: 16,
+    hostBindings: function MatCheckbox_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275domProperty("id", ctx.id);
+        \u0275\u0275attribute("tabindex", null)("aria-label", null)("aria-labelledby", null);
+        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "mat-accent");
+        \u0275\u0275classProp("_mat-animation-noopable", ctx._animationsDisabled)("mdc-checkbox--disabled", ctx.disabled)("mat-mdc-checkbox-disabled", ctx.disabled)("mat-mdc-checkbox-checked", ctx.checked)("mat-mdc-checkbox-disabled-interactive", ctx.disabledInteractive);
+      }
+    },
+    inputs: {
+      ariaLabel: [0, "aria-label", "ariaLabel"],
+      ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
+      ariaDescribedby: [0, "aria-describedby", "ariaDescribedby"],
+      ariaExpanded: [2, "aria-expanded", "ariaExpanded", booleanAttribute],
+      ariaControls: [0, "aria-controls", "ariaControls"],
+      ariaOwns: [0, "aria-owns", "ariaOwns"],
+      id: "id",
+      required: [2, "required", "required", booleanAttribute],
+      labelPosition: "labelPosition",
+      name: "name",
+      value: "value",
+      disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
+      tabIndex: [2, "tabIndex", "tabIndex", (value) => value == null ? void 0 : numberAttribute(value)],
+      color: "color",
+      disabledInteractive: [2, "disabledInteractive", "disabledInteractive", booleanAttribute],
+      checked: [2, "checked", "checked", booleanAttribute],
+      disabled: [2, "disabled", "disabled", booleanAttribute],
+      indeterminate: [2, "indeterminate", "indeterminate", booleanAttribute]
+    },
+    outputs: {
+      change: "change",
+      indeterminateChange: "indeterminateChange"
+    },
+    exportAs: ["matCheckbox"],
+    features: [\u0275\u0275ProvidersFeature([{
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => _MatCheckbox),
+      multi: true
+    }, {
+      provide: NG_VALIDATORS,
+      useExisting: _MatCheckbox,
+      multi: true
+    }]), \u0275\u0275NgOnChangesFeature],
+    ngContentSelectors: _c25,
+    decls: 15,
+    vars: 23,
+    consts: [["checkbox", ""], ["input", ""], ["label", ""], ["mat-internal-form-field", "", 3, "click", "labelPosition"], [1, "mdc-checkbox"], [1, "mat-mdc-checkbox-touch-target", 3, "click"], ["type", "checkbox", 1, "mdc-checkbox__native-control", 3, "blur", "click", "change", "checked", "indeterminate", "disabled", "id", "required", "tabIndex"], [1, "mdc-checkbox__ripple"], [1, "mdc-checkbox__background"], ["focusable", "false", "viewBox", "0 0 24 24", "aria-hidden", "true", 1, "mdc-checkbox__checkmark"], ["fill", "none", "d", "M1.73,12.91 8.1,19.28 22.79,4.59", 1, "mdc-checkbox__checkmark-path"], [1, "mdc-checkbox__mixedmark"], ["mat-ripple", "", 1, "mat-mdc-checkbox-ripple", "mat-focus-indicator", 3, "matRippleTrigger", "matRippleDisabled", "matRippleCentered"], [1, "mdc-label", 3, "for"]],
+    template: function MatCheckbox_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275projectionDef();
+        \u0275\u0275elementStart(0, "div", 3);
+        \u0275\u0275listener("click", function MatCheckbox_Template_div_click_0_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._preventBubblingFromLabel($event));
+        });
+        \u0275\u0275elementStart(1, "div", 4, 0)(3, "div", 5);
+        \u0275\u0275listener("click", function MatCheckbox_Template_div_click_3_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onTouchTargetClick());
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(4, "input", 6, 1);
+        \u0275\u0275listener("blur", function MatCheckbox_Template_input_blur_4_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onBlur());
+        })("click", function MatCheckbox_Template_input_click_4_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onInputClick());
+        })("change", function MatCheckbox_Template_input_change_4_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onInteractionEvent($event));
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(6, "div", 7);
+        \u0275\u0275elementStart(7, "div", 8);
+        \u0275\u0275namespaceSVG();
+        \u0275\u0275elementStart(8, "svg", 9);
+        \u0275\u0275element(9, "path", 10);
+        \u0275\u0275elementEnd();
+        \u0275\u0275namespaceHTML();
+        \u0275\u0275element(10, "div", 11);
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(11, "div", 12);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(12, "label", 13, 2);
+        \u0275\u0275projection(14);
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        const checkbox_r2 = \u0275\u0275reference(2);
+        \u0275\u0275property("labelPosition", ctx.labelPosition);
+        \u0275\u0275advance(4);
+        \u0275\u0275classProp("mdc-checkbox--selected", ctx.checked);
+        \u0275\u0275property("checked", ctx.checked)("indeterminate", ctx.indeterminate)("disabled", ctx.disabled && !ctx.disabledInteractive)("id", ctx.inputId)("required", ctx.required)("tabIndex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex);
+        \u0275\u0275attribute("aria-label", ctx.ariaLabel || null)("aria-labelledby", ctx.ariaLabelledby)("aria-describedby", ctx.ariaDescribedby)("aria-checked", ctx.indeterminate ? "mixed" : null)("aria-controls", ctx.ariaControls)("aria-disabled", ctx.disabled && ctx.disabledInteractive ? true : null)("aria-expanded", ctx.ariaExpanded)("aria-owns", ctx.ariaOwns)("name", ctx.name)("value", ctx.value);
+        \u0275\u0275advance(7);
+        \u0275\u0275property("matRippleTrigger", checkbox_r2)("matRippleDisabled", ctx.disableRipple || ctx.disabled)("matRippleCentered", true);
+        \u0275\u0275advance();
+        \u0275\u0275property("for", ctx.inputId);
+      }
+    },
+    dependencies: [MatRipple, _MatInternalFormField],
+    styles: ['.mdc-checkbox{display:inline-block;position:relative;flex:0 0 18px;box-sizing:content-box;width:18px;height:18px;line-height:0;white-space:nowrap;cursor:pointer;vertical-align:bottom;padding:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);margin:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox:hover>.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:hover>.mat-mdc-checkbox-ripple>.mat-ripple-element{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control+.mdc-checkbox__ripple{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control{position:absolute;margin:0;padding:0;opacity:0;cursor:inherit;z-index:1;width:var(--mat-checkbox-state-layer-size, 40px);height:var(--mat-checkbox-state-layer-size, 40px);top:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);right:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox--disabled{cursor:default;pointer-events:none}@media(forced-colors: active){.mdc-checkbox--disabled{opacity:.5}}.mdc-checkbox__background{display:inline-flex;position:absolute;align-items:center;justify-content:center;box-sizing:border-box;width:18px;height:18px;border:2px solid currentColor;border-radius:2px;background-color:rgba(0,0,0,0);pointer-events:none;will-change:background-color,border-color;transition:background-color 90ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms cubic-bezier(0.4, 0, 0.6, 1);-webkit-print-color-adjust:exact;color-adjust:exact;border-color:var(--mat-checkbox-unselected-icon-color, var(--mat-sys-on-surface-variant));top:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2)}.mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox__native-control:disabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:disabled:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:checked)~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-hover-icon-color, var(--mat-sys-on-surface));background-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary))}.mdc-checkbox__native-control:focus:focus:not(:checked)~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-focus-icon-color, var(--mat-sys-on-surface))}.mdc-checkbox__native-control:focus:focus:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox:hover>.mdc-checkbox__native-control~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox__checkmark{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0;transition:opacity 180ms cubic-bezier(0.4, 0, 0.6, 1);color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}@media(forced-colors: active){.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox__checkmark-path{transition:stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1);stroke:currentColor;stroke-width:3.12px;stroke-dashoffset:29.7833385;stroke-dasharray:29.7833385}.mdc-checkbox__mixedmark{width:100%;height:0;transform:scaleX(0) rotate(0deg);border-width:1px;border-style:solid;opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1);border-color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__mixedmark{margin:0 1px}}.mdc-checkbox--disabled .mdc-checkbox__mixedmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__mixedmark{border-color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background,.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background,.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background,.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background{animation-duration:180ms;animation-timing-function:linear}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-unchecked-checked-checkmark-path 180ms linear;transition:none}.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-unchecked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-checked-unchecked-checkmark-path 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__checkmark{animation:mdc-checkbox-checked-indeterminate-checkmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-checked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__checkmark{animation:mdc-checkbox-indeterminate-checked-checkmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-checked-mixedmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-unchecked-mixedmark 300ms linear;transition:none}.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{transition:border-color 90ms cubic-bezier(0, 0, 0.2, 1),background-color 90ms cubic-bezier(0, 0, 0.2, 1)}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path{stroke-dashoffset:0}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark{transition:opacity 180ms cubic-bezier(0, 0, 0.2, 1),transform 180ms cubic-bezier(0, 0, 0.2, 1);opacity:1}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(-45deg)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark{transform:rotate(45deg);opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(0deg);opacity:1}@keyframes mdc-checkbox-unchecked-checked-checkmark-path{0%,50%{stroke-dashoffset:29.7833385}50%{animation-timing-function:cubic-bezier(0, 0, 0.2, 1)}100%{stroke-dashoffset:0}}@keyframes mdc-checkbox-unchecked-indeterminate-mixedmark{0%,68.2%{transform:scaleX(0)}68.2%{animation-timing-function:cubic-bezier(0, 0, 0, 1)}100%{transform:scaleX(1)}}@keyframes mdc-checkbox-checked-unchecked-checkmark-path{from{animation-timing-function:cubic-bezier(0.4, 0, 1, 1);opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:-29.7833385}}@keyframes mdc-checkbox-checked-indeterminate-checkmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(45deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-checked-checkmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(45deg);opacity:0}to{transform:rotate(360deg);opacity:1}}@keyframes mdc-checkbox-checked-indeterminate-mixedmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(-45deg);opacity:0}to{transform:rotate(0deg);opacity:1}}@keyframes mdc-checkbox-indeterminate-checked-mixedmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(315deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-unchecked-mixedmark{0%{animation-timing-function:linear;transform:scaleX(1);opacity:1}32.8%,100%{transform:scaleX(0);opacity:0}}.mat-mdc-checkbox{display:inline-block;position:relative;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-touch-target,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__native-control,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__ripple,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-ripple::before,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__mixedmark{transition:none !important;animation:none !important}.mat-mdc-checkbox label{cursor:pointer}.mat-mdc-checkbox .mat-internal-form-field{color:var(--mat-checkbox-label-text-color, var(--mat-sys-on-surface));font-family:var(--mat-checkbox-label-text-font, var(--mat-sys-body-medium-font));line-height:var(--mat-checkbox-label-text-line-height, var(--mat-sys-body-medium-line-height));font-size:var(--mat-checkbox-label-text-size, var(--mat-sys-body-medium-size));letter-spacing:var(--mat-checkbox-label-text-tracking, var(--mat-sys-body-medium-tracking));font-weight:var(--mat-checkbox-label-text-weight, var(--mat-sys-body-medium-weight))}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive{pointer-events:auto}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive input{cursor:default}.mat-mdc-checkbox.mat-mdc-checkbox-disabled label{cursor:default;color:var(--mat-checkbox-disabled-label-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-checkbox label:empty{display:none}.mat-mdc-checkbox .mdc-checkbox__ripple{opacity:0}.mat-mdc-checkbox .mat-mdc-checkbox-ripple,.mdc-checkbox__ripple{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:50%;pointer-events:none}.mat-mdc-checkbox .mat-mdc-checkbox-ripple:not(:empty),.mdc-checkbox__ripple:not(:empty){transform:translateZ(0)}.mat-mdc-checkbox-ripple .mat-ripple-element{opacity:.1}.mat-mdc-checkbox-touch-target{position:absolute;top:50%;left:50%;height:48px;width:48px;transform:translate(-50%, -50%);display:var(--mat-checkbox-touch-target-display, block)}.mat-mdc-checkbox .mat-mdc-checkbox-ripple::before{border-radius:50%}.mdc-checkbox__native-control:focus~.mat-focus-indicator::before{content:""}\n'],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCheckbox, [{
+    type: Component,
+    args: [{
+      selector: "mat-checkbox",
+      host: {
+        "class": "mat-mdc-checkbox",
+        "[attr.tabindex]": "null",
+        "[attr.aria-label]": "null",
+        "[attr.aria-labelledby]": "null",
+        "[class._mat-animation-noopable]": "_animationsDisabled",
+        "[class.mdc-checkbox--disabled]": "disabled",
+        "[id]": "id",
+        // Add classes that users can use to more easily target disabled or checked checkboxes.
+        "[class.mat-mdc-checkbox-disabled]": "disabled",
+        "[class.mat-mdc-checkbox-checked]": "checked",
+        "[class.mat-mdc-checkbox-disabled-interactive]": "disabledInteractive",
+        "[class]": 'color ? "mat-" + color : "mat-accent"'
+      },
+      providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => MatCheckbox),
+        multi: true
+      }, {
+        provide: NG_VALIDATORS,
+        useExisting: MatCheckbox,
+        multi: true
+      }],
+      exportAs: "matCheckbox",
+      encapsulation: ViewEncapsulation.None,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      imports: [MatRipple, _MatInternalFormField],
+      template: `<div mat-internal-form-field [labelPosition]="labelPosition" (click)="_preventBubblingFromLabel($event)">
+  <div #checkbox class="mdc-checkbox">
+    <!-- Render this element first so the input is on top. -->
+    <div class="mat-mdc-checkbox-touch-target" (click)="_onTouchTargetClick()"></div>
+    <input #input
+           type="checkbox"
+           class="mdc-checkbox__native-control"
+           [class.mdc-checkbox--selected]="checked"
+           [attr.aria-label]="ariaLabel || null"
+           [attr.aria-labelledby]="ariaLabelledby"
+           [attr.aria-describedby]="ariaDescribedby"
+           [attr.aria-checked]="indeterminate ? 'mixed' : null"
+           [attr.aria-controls]="ariaControls"
+           [attr.aria-disabled]="disabled && disabledInteractive ? true : null"
+           [attr.aria-expanded]="ariaExpanded"
+           [attr.aria-owns]="ariaOwns"
+           [attr.name]="name"
+           [attr.value]="value"
+           [checked]="checked"
+           [indeterminate]="indeterminate"
+           [disabled]="disabled && !disabledInteractive"
+           [id]="inputId"
+           [required]="required"
+           [tabIndex]="disabled && !disabledInteractive ? -1 : tabIndex"
+           (blur)="_onBlur()"
+           (click)="_onInputClick()"
+           (change)="_onInteractionEvent($event)"/>
+    <div class="mdc-checkbox__ripple"></div>
+    <div class="mdc-checkbox__background">
+      <svg class="mdc-checkbox__checkmark"
+           focusable="false"
+           viewBox="0 0 24 24"
+           aria-hidden="true">
+        <path class="mdc-checkbox__checkmark-path"
+              fill="none"
+              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+      </svg>
+      <div class="mdc-checkbox__mixedmark"></div>
+    </div>
+    <div class="mat-mdc-checkbox-ripple mat-focus-indicator" mat-ripple
+      [matRippleTrigger]="checkbox"
+      [matRippleDisabled]="disableRipple || disabled"
+      [matRippleCentered]="true"></div>
+  </div>
+  <!--
+    Avoid putting a click handler on the <label/> to fix duplicate navigation stop on Talk Back
+    (#14385). Putting a click handler on the <label/> caused this bug because the browser produced
+    an unnecessary accessibility tree node.
+  -->
+  <label class="mdc-label" #label [for]="inputId">
+    <ng-content></ng-content>
+  </label>
+</div>
+`,
+      styles: ['.mdc-checkbox{display:inline-block;position:relative;flex:0 0 18px;box-sizing:content-box;width:18px;height:18px;line-height:0;white-space:nowrap;cursor:pointer;vertical-align:bottom;padding:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);margin:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox:hover>.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:hover>.mat-mdc-checkbox-ripple>.mat-ripple-element{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control+.mdc-checkbox__ripple{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control{position:absolute;margin:0;padding:0;opacity:0;cursor:inherit;z-index:1;width:var(--mat-checkbox-state-layer-size, 40px);height:var(--mat-checkbox-state-layer-size, 40px);top:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);right:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox--disabled{cursor:default;pointer-events:none}@media(forced-colors: active){.mdc-checkbox--disabled{opacity:.5}}.mdc-checkbox__background{display:inline-flex;position:absolute;align-items:center;justify-content:center;box-sizing:border-box;width:18px;height:18px;border:2px solid currentColor;border-radius:2px;background-color:rgba(0,0,0,0);pointer-events:none;will-change:background-color,border-color;transition:background-color 90ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms cubic-bezier(0.4, 0, 0.6, 1);-webkit-print-color-adjust:exact;color-adjust:exact;border-color:var(--mat-checkbox-unselected-icon-color, var(--mat-sys-on-surface-variant));top:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2)}.mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox__native-control:disabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:disabled:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:checked)~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-hover-icon-color, var(--mat-sys-on-surface));background-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary))}.mdc-checkbox__native-control:focus:focus:not(:checked)~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-focus-icon-color, var(--mat-sys-on-surface))}.mdc-checkbox__native-control:focus:focus:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox:hover>.mdc-checkbox__native-control~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox__checkmark{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0;transition:opacity 180ms cubic-bezier(0.4, 0, 0.6, 1);color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}@media(forced-colors: active){.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox__checkmark-path{transition:stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1);stroke:currentColor;stroke-width:3.12px;stroke-dashoffset:29.7833385;stroke-dasharray:29.7833385}.mdc-checkbox__mixedmark{width:100%;height:0;transform:scaleX(0) rotate(0deg);border-width:1px;border-style:solid;opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1);border-color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__mixedmark{margin:0 1px}}.mdc-checkbox--disabled .mdc-checkbox__mixedmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__mixedmark{border-color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background,.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background,.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background,.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background{animation-duration:180ms;animation-timing-function:linear}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-unchecked-checked-checkmark-path 180ms linear;transition:none}.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-unchecked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-checked-unchecked-checkmark-path 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__checkmark{animation:mdc-checkbox-checked-indeterminate-checkmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-checked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__checkmark{animation:mdc-checkbox-indeterminate-checked-checkmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-checked-mixedmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-unchecked-mixedmark 300ms linear;transition:none}.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{transition:border-color 90ms cubic-bezier(0, 0, 0.2, 1),background-color 90ms cubic-bezier(0, 0, 0.2, 1)}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path{stroke-dashoffset:0}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark{transition:opacity 180ms cubic-bezier(0, 0, 0.2, 1),transform 180ms cubic-bezier(0, 0, 0.2, 1);opacity:1}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(-45deg)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark{transform:rotate(45deg);opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(0deg);opacity:1}@keyframes mdc-checkbox-unchecked-checked-checkmark-path{0%,50%{stroke-dashoffset:29.7833385}50%{animation-timing-function:cubic-bezier(0, 0, 0.2, 1)}100%{stroke-dashoffset:0}}@keyframes mdc-checkbox-unchecked-indeterminate-mixedmark{0%,68.2%{transform:scaleX(0)}68.2%{animation-timing-function:cubic-bezier(0, 0, 0, 1)}100%{transform:scaleX(1)}}@keyframes mdc-checkbox-checked-unchecked-checkmark-path{from{animation-timing-function:cubic-bezier(0.4, 0, 1, 1);opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:-29.7833385}}@keyframes mdc-checkbox-checked-indeterminate-checkmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(45deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-checked-checkmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(45deg);opacity:0}to{transform:rotate(360deg);opacity:1}}@keyframes mdc-checkbox-checked-indeterminate-mixedmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(-45deg);opacity:0}to{transform:rotate(0deg);opacity:1}}@keyframes mdc-checkbox-indeterminate-checked-mixedmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(315deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-unchecked-mixedmark{0%{animation-timing-function:linear;transform:scaleX(1);opacity:1}32.8%,100%{transform:scaleX(0);opacity:0}}.mat-mdc-checkbox{display:inline-block;position:relative;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-touch-target,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__native-control,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__ripple,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-ripple::before,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__mixedmark{transition:none !important;animation:none !important}.mat-mdc-checkbox label{cursor:pointer}.mat-mdc-checkbox .mat-internal-form-field{color:var(--mat-checkbox-label-text-color, var(--mat-sys-on-surface));font-family:var(--mat-checkbox-label-text-font, var(--mat-sys-body-medium-font));line-height:var(--mat-checkbox-label-text-line-height, var(--mat-sys-body-medium-line-height));font-size:var(--mat-checkbox-label-text-size, var(--mat-sys-body-medium-size));letter-spacing:var(--mat-checkbox-label-text-tracking, var(--mat-sys-body-medium-tracking));font-weight:var(--mat-checkbox-label-text-weight, var(--mat-sys-body-medium-weight))}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive{pointer-events:auto}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive input{cursor:default}.mat-mdc-checkbox.mat-mdc-checkbox-disabled label{cursor:default;color:var(--mat-checkbox-disabled-label-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-checkbox label:empty{display:none}.mat-mdc-checkbox .mdc-checkbox__ripple{opacity:0}.mat-mdc-checkbox .mat-mdc-checkbox-ripple,.mdc-checkbox__ripple{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:50%;pointer-events:none}.mat-mdc-checkbox .mat-mdc-checkbox-ripple:not(:empty),.mdc-checkbox__ripple:not(:empty){transform:translateZ(0)}.mat-mdc-checkbox-ripple .mat-ripple-element{opacity:.1}.mat-mdc-checkbox-touch-target{position:absolute;top:50%;left:50%;height:48px;width:48px;transform:translate(-50%, -50%);display:var(--mat-checkbox-touch-target-display, block)}.mat-mdc-checkbox .mat-mdc-checkbox-ripple::before{border-radius:50%}.mdc-checkbox__native-control:focus~.mat-focus-indicator::before{content:""}\n']
+    }]
+  }], () => [], {
+    ariaLabel: [{
+      type: Input,
+      args: ["aria-label"]
+    }],
+    ariaLabelledby: [{
+      type: Input,
+      args: ["aria-labelledby"]
+    }],
+    ariaDescribedby: [{
+      type: Input,
+      args: ["aria-describedby"]
+    }],
+    ariaExpanded: [{
+      type: Input,
+      args: [{
+        alias: "aria-expanded",
+        transform: booleanAttribute
+      }]
+    }],
+    ariaControls: [{
+      type: Input,
+      args: ["aria-controls"]
+    }],
+    ariaOwns: [{
+      type: Input,
+      args: ["aria-owns"]
+    }],
+    id: [{
+      type: Input
+    }],
+    required: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    labelPosition: [{
+      type: Input
+    }],
+    name: [{
+      type: Input
+    }],
+    change: [{
+      type: Output
+    }],
+    indeterminateChange: [{
+      type: Output
+    }],
+    value: [{
+      type: Input
+    }],
+    disableRipple: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    _inputElement: [{
+      type: ViewChild,
+      args: ["input"]
+    }],
+    _labelElement: [{
+      type: ViewChild,
+      args: ["label"]
+    }],
+    tabIndex: [{
+      type: Input,
+      args: [{
+        transform: (value) => value == null ? void 0 : numberAttribute(value)
+      }]
+    }],
+    color: [{
+      type: Input
+    }],
+    disabledInteractive: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    checked: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    disabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    indeterminate: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }]
+  });
+})();
+var MatCheckboxModule = class _MatCheckboxModule {
+  static \u0275fac = function MatCheckboxModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatCheckboxModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatCheckboxModule,
+    imports: [MatCheckbox, MatCommonModule],
+    exports: [MatCheckbox, MatCommonModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [MatCheckbox, MatCommonModule, MatCommonModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCheckboxModule, [{
+    type: NgModule,
+    args: [{
+      imports: [MatCheckbox, MatCommonModule],
+      exports: [MatCheckbox, MatCommonModule]
+    }]
+  }], null, null);
+})();
+
+// libs/components/src/lib/settings-toggle.component.ts
+var _c012 = ["*"];
+function SettingsToggleComponent_Conditional_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "icon", 2);
+    \u0275\u0275text(1, "info");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("matTooltip", ctx_r0.info());
+  }
+}
+function SettingsToggleComponent_Conditional_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 3);
+  }
+}
+function SettingsToggleComponent_Conditional_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 4)(1, "div", 6)(2, "div", 7)(3, "icon");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275classProp("bg-base-300", !ctx_r0.value)("bg-info", ctx_r0.value)("!border-info", ctx_r0.value);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("left-1", !ctx_r0.value)("left-5", ctx_r0.value)("bg-base-400", !ctx_r0.value)("bg-info-light", ctx_r0.value);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r0.value ? "done" : "remove");
+  }
+}
+function SettingsToggleComponent_Conditional_8_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-checkbox", 8);
+    \u0275\u0275twoWayListener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r0.value, $event) || (ctx_r0.value = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.setValue($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275twoWayProperty("ngModel", ctx_r0.value);
+  }
+}
+var _SettingsToggleComponent = class _SettingsToggleComponent {
+  constructor() {
+    this.toggle = input(void 0);
+    this.name = input(void 0);
+    this.info = input(void 0);
+    this.registerOnChange = (fn3) => this._onChange = fn3;
+    this.registerOnTouched = (fn3) => this._onTouch = fn3;
+  }
+  /**
+   * Update the form field value
+   * @param new_value New value to set on the form field
+   */
+  setValue(new_value) {
+    this.value = new_value;
+    if (this._onChange)
+      this._onChange(new_value);
+  }
+  /* istanbul ignore next */
+  /**
+   * Update local value when form control value is changed
+   * @param value The new value for the component
+   */
+  writeValue(value) {
+    this.value = value;
+  }
+};
+_SettingsToggleComponent.\u0275fac = function SettingsToggleComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _SettingsToggleComponent)();
+};
+_SettingsToggleComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SettingsToggleComponent, selectors: [["settings-toggle"]], inputs: { toggle: [1, "toggle"], name: [1, "name"], info: [1, "info"] }, features: [\u0275\u0275ProvidersFeature([
+  {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => _SettingsToggleComponent),
+    multi: true
+  }
+])], ngContentSelectors: _c012, decls: 9, vars: 8, consts: [["matRipple", "", 1, "relative", "flex", "flex-1", "items-center", "space-x-2", "overflow-hidden", "rounded", "border", "py-1", "pl-2", "pr-1", "hover:bg-base-200", 3, "click"], [1, "z-10", "flex", "flex-1", "items-center", "space-x-2", "p-2", "text-left"], [3, "matTooltip"], [1, "absolute", "inset-0", "z-0", "!m-0", "bg-info", "opacity-10"], [1, "px-2"], [1, "pointer-events-none", 3, "ngModel"], ["toggle", "", 1, "relative", "h-8", "w-12", "rounded-full", "border-2", "border-base-400"], [1, "absolute", "top-1/2", "flex", "h-6", "w-6", "-translate-x-0.5", "-translate-y-1/2", "items-center", "justify-center", "rounded-full", "text-black", "shadow"], [1, "pointer-events-none", 3, "ngModelChange", "ngModel"]], template: function SettingsToggleComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275projectionDef();
+    \u0275\u0275elementStart(0, "button", 0);
+    \u0275\u0275listener("click", function SettingsToggleComponent_Template_button_click_0_listener() {
+      return ctx.setValue(!ctx.value);
+    });
+    \u0275\u0275elementStart(1, "div", 1)(2, "div");
+    \u0275\u0275text(3);
+    \u0275\u0275projection(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275conditionalCreate(5, SettingsToggleComponent_Conditional_5_Template, 2, 1, "icon", 2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275conditionalCreate(6, SettingsToggleComponent_Conditional_6_Template, 1, 0, "div", 3);
+    \u0275\u0275conditionalCreate(7, SettingsToggleComponent_Conditional_7_Template, 5, 15, "div", 4)(8, SettingsToggleComponent_Conditional_8_Template, 1, 1, "mat-checkbox", 5);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275classProp("border-base-300", !ctx.value)("border-info", ctx.value);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", ctx.name(), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(ctx.info() ? 5 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.value ? 6 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.toggle() ? 7 : 8);
+  }
+}, dependencies: [MatCheckboxModule, MatCheckbox, FormsModule, NgControlStatus, NgModel, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n}\n[toggle][_ngcontent-%COMP%] {\n  transition: background 200ms, left 200ms;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */"] });
+var SettingsToggleComponent = _SettingsToggleComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SettingsToggleComponent, [{
+    type: Component,
+    args: [{ selector: "settings-toggle", template: `
+        <button
+            matRipple
+            class="relative flex flex-1 items-center space-x-2 overflow-hidden rounded border py-1 pl-2 pr-1 hover:bg-base-200"
+            [class.border-base-300]="!value"
+            [class.border-info]="value"
+            (click)="setValue(!value)"
+        >
+            <div class="z-10 flex flex-1 items-center space-x-2 p-2 text-left">
+                <div>
+                    {{ name() }}
+                    <ng-content></ng-content>
+                </div>
+                @if (info()) {
+                    <icon [matTooltip]="info()">info</icon>
+                }
+            </div>
+            @if (value) {
+                <div class="absolute inset-0 z-0 !m-0 bg-info opacity-10"></div>
+            }
+            @if (toggle()) {
+                <div class="px-2">
+                    <div
+                        toggle
+                        class="relative h-8 w-12 rounded-full border-2 border-base-400"
+                        [class.bg-base-300]="!value"
+                        [class.bg-info]="value"
+                        [class.!border-info]="value"
+                    >
+                        <div
+                            class="absolute top-1/2 flex h-6 w-6 -translate-x-0.5 -translate-y-1/2 items-center justify-center rounded-full text-black shadow"
+                            [class.left-1]="!value"
+                            [class.left-5]="value"
+                            [class.bg-base-400]="!value"
+                            [class.bg-info-light]="value"
+                        >
+                            <icon>{{ value ? 'done' : 'remove' }}</icon>
+                        </div>
+                    </div>
+                </div>
+            } @else {
+                <mat-checkbox
+                    [(ngModel)]="value"
+                    (ngModelChange)="setValue($event)"
+                    class="pointer-events-none"
+                ></mat-checkbox>
+            }
+        </button>
+    `, providers: [
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => SettingsToggleComponent),
+        multi: true
+      }
+    ], imports: [MatCheckboxModule, FormsModule, IconComponent], styles: ["/* angular:styles/component:css;09d472dfc67150cf01347a580874515fc3cc343b61a90041f2b167ad15a01cf4;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/settings-toggle.component.ts */\n:host {\n  display: flex;\n}\n[toggle] {\n  transition: background 200ms, left 200ms;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SettingsToggleComponent, { className: "SettingsToggleComponent", filePath: "libs/components/src/lib/settings-toggle.component.ts", lineNumber: 83 });
+})();
+
 // libs/components/src/lib/upload-permissions-modal.component.ts
-var _c08 = (a0, a1, a2) => ({ file: a0, is_public: a1, permissions: a2 });
+var _c013 = (a0, a1, a2) => ({ file: a0, is_public: a1, permissions: a2 });
 function UploadPermissionsModalComponent_Conditional_15_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 2)(1, "label");
+    \u0275\u0275elementStart(0, "div", 8)(1, "label");
     \u0275\u0275text(2, "Permissions");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "mat-form-field", 3)(4, "mat-select", 6);
+    \u0275\u0275elementStart(3, "mat-form-field", 12)(4, "mat-select", 7);
     \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Conditional_15_Template_mat_select_ngModelChange_4_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       \u0275\u0275twoWayBindingSet(ctx_r1.permissions, $event) || (ctx_r1.permissions = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275elementStart(5, "mat-option", 10);
+    \u0275\u0275elementStart(5, "mat-option", 13);
     \u0275\u0275text(6, "None");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "mat-option", 11);
+    \u0275\u0275elementStart(7, "mat-option", 14);
     \u0275\u0275text(8, "Support");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(9, "mat-option", 12);
+    \u0275\u0275elementStart(9, "mat-option", 15);
     \u0275\u0275text(10, "Admin");
     \u0275\u0275elementEnd()()()();
   }
@@ -80150,33 +83445,33 @@ var _UploadPermissionsModalComponent = class _UploadPermissionsModalComponent {
 _UploadPermissionsModalComponent.\u0275fac = function UploadPermissionsModalComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _UploadPermissionsModalComponent)();
 };
-_UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadPermissionsModalComponent, selectors: [["upload-permissions-modal"]], decls: 21, vars: 8, consts: [["btn", "", "icon", "", "mat-dialog-close", ""], [1, "min-w-[20rem]", "p-4"], [1, "flex", "flex-col", "space-y-2"], ["appearance", "outline"], ["matInput", "", "disabled", "true", "placeholder", "File Name", 3, "ngModel"], [1, "pb-4"], [3, "ngModelChange", "ngModel"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", 1, "w-32", 3, "mat-dialog-close"], ["value", "none"], ["value", "support"], ["value", "admin"]], template: function UploadPermissionsModalComponent_Template(rf, ctx) {
+_UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadPermissionsModalComponent, selectors: [["upload-permissions-modal"]], decls: 21, vars: 8, consts: [[1, "sticky", "top-0", "z-10", "m-2", "w-[calc(100%-1rem)]", "rounded", "border-none", "bg-base-200", "p-2"], [1, "px-2", "text-xl", "font-medium"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "min-w-[20rem]", "space-y-2", "px-4", "py-2"], [1, "flex", "flex-col"], ["appearance", "outline", 1, "no-subscript"], ["matInput", "", "disabled", "true", "placeholder", "File Name", 3, "ngModel"], [3, "ngModelChange", "ngModel"], [1, "flex", "flex-col", "space-y-2"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", "matRipple", "", 1, "w-32", 3, "mat-dialog-close"], ["appearance", "outline"], ["value", "none"], ["value", "support"], ["value", "admin"]], template: function UploadPermissionsModalComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "header")(1, "h2");
+    \u0275\u0275elementStart(0, "header", 0)(1, "h2", 1);
     \u0275\u0275text(2, "Upload File");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "button", 0)(4, "icon");
+    \u0275\u0275elementStart(3, "button", 2)(4, "icon");
     \u0275\u0275text(5, "close");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(6, "main", 1)(7, "div", 2)(8, "label");
+    \u0275\u0275elementStart(6, "main", 3)(7, "div", 4)(8, "label");
     \u0275\u0275text(9, "File Name");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "mat-form-field", 3);
-    \u0275\u0275element(11, "input", 4);
+    \u0275\u0275elementStart(10, "mat-form-field", 5);
+    \u0275\u0275element(11, "input", 6);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(12, "div", 5)(13, "mat-checkbox", 6);
-    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Template_mat_checkbox_ngModelChange_13_listener($event) {
+    \u0275\u0275elementStart(12, "div")(13, "settings-toggle", 7);
+    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Template_settings_toggle_ngModelChange_13_listener($event) {
       \u0275\u0275twoWayBindingSet(ctx.is_public, $event) || (ctx.is_public = $event);
       return $event;
     });
     \u0275\u0275text(14, "Public");
     \u0275\u0275elementEnd()();
-    \u0275\u0275conditionalCreate(15, UploadPermissionsModalComponent_Conditional_15_Template, 11, 1, "div", 2);
+    \u0275\u0275conditionalCreate(15, UploadPermissionsModalComponent_Conditional_15_Template, 11, 1, "div", 8);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(16, "footer", 7)(17, "button", 8);
-    \u0275\u0275text(18, "Cancel");
+    \u0275\u0275elementStart(16, "footer", 9)(17, "button", 10);
+    \u0275\u0275text(18, " Cancel ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(19, "button", 9);
+    \u0275\u0275elementStart(19, "button", 11);
     \u0275\u0275text(20, " Upload ");
     \u0275\u0275elementEnd()();
   }
@@ -80188,24 +83483,44 @@ _UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineC
     \u0275\u0275advance(2);
     \u0275\u0275conditional(!ctx.is_public ? 15 : -1);
     \u0275\u0275advance(4);
-    \u0275\u0275property("mat-dialog-close", \u0275\u0275pureFunction3(4, _c08, ctx.file, ctx.is_public, ctx.permissions));
+    \u0275\u0275property("mat-dialog-close", \u0275\u0275pureFunction3(4, _c013, ctx.file, ctx.is_public, ctx.permissions));
   }
-}, dependencies: [MatDialogModule, MatDialogClose, MatFormFieldModule, MatFormField, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel], encapsulation: 2 });
+}, dependencies: [
+  MatDialogModule,
+  MatDialogClose,
+  MatFormFieldModule,
+  MatFormField,
+  FormsModule,
+  DefaultValueAccessor,
+  NgControlStatus,
+  NgModel,
+  MatSelectModule,
+  MatSelect,
+  MatOption,
+  SettingsToggleComponent,
+  IconComponent,
+  MatInputModule,
+  MatInput,
+  MatRippleModule,
+  MatRipple
+], encapsulation: 2 });
 var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UploadPermissionsModalComponent, [{
     type: Component,
     args: [{ selector: "upload-permissions-modal", template: `
-        <header>
-            <h2>Upload File</h2>
-            <button btn icon mat-dialog-close>
+        <header
+            class="sticky top-0 z-10 m-2 w-[calc(100%-1rem)] rounded border-none bg-base-200 p-2"
+        >
+            <h2 class="px-2 text-xl font-medium">Upload File</h2>
+            <button icon matRipple mat-dialog-close>
                 <icon>close</icon>
             </button>
         </header>
-        <main class="min-w-[20rem] p-4">
-            <div class="flex flex-col space-y-2">
+        <main class="min-w-[20rem] space-y-2 px-4 py-2">
+            <div class="flex flex-col">
                 <label>File Name</label>
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="no-subscript">
                     <input
                         matInput
                         [ngModel]="file.name"
@@ -80214,8 +83529,10 @@ var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
                     />
                 </mat-form-field>
             </div>
-            <div class="pb-4">
-                <mat-checkbox [(ngModel)]="is_public">Public</mat-checkbox>
+            <div>
+                <settings-toggle [(ngModel)]="is_public"
+                    >Public</settings-toggle
+                >
             </div>
             @if (!is_public) {
                 <div class="flex flex-col space-y-2">
@@ -80233,20 +83550,32 @@ var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
         <footer
             class="flex items-center justify-end space-x-2 border-t border-base-200 px-4 py-2"
         >
-            <button btn class="inverse w-32" mat-dialog-close>Cancel</button>
+            <button btn matRipple class="inverse w-32" mat-dialog-close>
+                Cancel
+            </button>
             <button
                 btn
+                matRipple
                 class="w-32"
                 [mat-dialog-close]="{ file, is_public, permissions }"
             >
                 Upload
             </button>
         </footer>
-    `, schemas: [NO_ERRORS_SCHEMA], imports: [MatDialogModule, MatFormFieldModule, FormsModule] }]
+    `, schemas: [NO_ERRORS_SCHEMA], imports: [
+      MatDialogModule,
+      MatFormFieldModule,
+      FormsModule,
+      MatSelectModule,
+      SettingsToggleComponent,
+      IconComponent,
+      MatInputModule,
+      MatRippleModule
+    ] }]
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadPermissionsModalComponent, { className: "UploadPermissionsModalComponent", filePath: "libs/components/src/lib/upload-permissions-modal.component.ts", lineNumber: 65 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadPermissionsModalComponent, { className: "UploadPermissionsModalComponent", filePath: "libs/components/src/lib/upload-permissions-modal.component.ts", lineNumber: 86 });
 })();
 
 // libs/common/src/lib/uploads.service.ts
@@ -80284,8 +83613,9 @@ var _UploadsService = class _UploadsService {
     return new Promise((resolve) => {
       let resolved2 = false;
       const update_fn = (details) => {
+        var _a9;
         if (!resolved2) {
-          resolve(details.id);
+          resolve(((_a9 = details.upload) == null ? void 0 : _a9.id) || details.id);
           resolved2 = true;
         }
         this._upload_list.next([
@@ -80374,7 +83704,7 @@ function setInternalUserDomain(domain) {
 // libs/users/src/lib/user.class.ts
 var User = class {
   constructor(data = {}) {
-    var _a8, _b2;
+    var _a9, _b3;
     this.id = data.id || data.email || `USER::${randomString(8)}`;
     this.name = data.name || "";
     this.email = data.email || "";
@@ -80390,6 +83720,7 @@ var User = class {
     this.checked_in = !!data.checked_in;
     this.required = data.required ?? true;
     this.resource = data.resource ?? false;
+    this.locatable = data.locatable ?? false;
     this.response_status = data.response_status || "";
     const groups = data.groups || [];
     this.department = data.department ?? "";
@@ -80402,9 +83733,9 @@ var User = class {
     this.groups = groups;
     this.extension_data = data.extension_data || {};
     this.extension_data.assistance_required = data.assistance_required || this.extension_data.assistance_required;
-    this.is_external = !((_a8 = this.email) == null ? void 0 : _a8.endsWith(`${USER_DOMAIN}`));
+    this.is_external = !((_a9 = this.email) == null ? void 0 : _a9.endsWith(`${USER_DOMAIN}`));
     this.visit_expected = data.visit_expected ?? true;
-    this.assistance_required = !!((_b2 = this.extension_data) == null ? void 0 : _b2.assistance_required);
+    this.assistance_required = !!((_b3 = this.extension_data) == null ? void 0 : _b3.assistance_required);
     for (const key in data) {
       if (!(key in this))
         this.extension_data[key] = data[key];
@@ -80413,12 +83744,12 @@ var User = class {
 };
 var GuestUser = class extends User {
   constructor(data = {}) {
-    var _a8, _b2, _c, _d;
+    var _a9, _b3, _c10, _d2;
     super(data);
     this.preferred_beverage = data.preferred_beverage || "";
     this.accepted_terms_conditions = data.accepted_terms_conditions || false;
-    this.attachments = ((_a8 = data.extension_data) == null ? void 0 : _a8.attachments) || data.attachments || [];
-    this.status = ((_b2 = data.booking) == null ? void 0 : _b2.approved) ? "approved" : ((_c = data.booking) == null ? void 0 : _c.rejected) ? "declined" : ((_d = data.extension_data) == null ? void 0 : _d.status) || data.status || "pending";
+    this.attachments = ((_a9 = data.extension_data) == null ? void 0 : _a9.attachments) || data.attachments || [];
+    this.status = ((_b3 = data.booking) == null ? void 0 : _b3.approved) ? "approved" : ((_c10 = data.booking) == null ? void 0 : _c10.rejected) ? "declined" : ((_d2 = data.extension_data) == null ? void 0 : _d2.status) || data.status || "pending";
     this.booking = data.booking;
     this.extension_data.event = data.event_metadata;
   }
@@ -80428,13 +83759,13 @@ var StaffUser = class extends User {
     return this.location_time(Date.now());
   }
   work_preference(datetime) {
-    var _a8, _b2, _c;
+    var _a9, _b3, _c10;
     if (!datetime)
       datetime = Date.now();
     const date = new Date(datetime);
     const day = date.getDay();
     const date_string = format(date, "yyyy-MM-dd");
-    if ((_b2 = (_a8 = this.work_overrides[date_string]) == null ? void 0 : _a8.blocks) == null ? void 0 : _b2.length) {
+    if ((_b3 = (_a9 = this.work_overrides[date_string]) == null ? void 0 : _a9.blocks) == null ? void 0 : _b3.length) {
       for (const block of this.work_overrides[date_string].blocks) {
         const start = block.start_time;
         const end = block.end_time;
@@ -80444,7 +83775,7 @@ var StaffUser = class extends User {
       }
     }
     for (const pref of this.work_preferences) {
-      if (pref.day_of_week === day && ((_c = pref.blocks) == null ? void 0 : _c.length)) {
+      if (pref.day_of_week === day && ((_c10 = pref.blocks) == null ? void 0 : _c10.length)) {
         for (const block of pref.blocks) {
           if (block.start_time <= date.getHours() + date.getMinutes() / 60 && block.end_time >= date.getHours() + date.getMinutes() / 60) {
             return block;
@@ -80454,8 +83785,8 @@ var StaffUser = class extends User {
     }
   }
   location_time(datetime = Date.now()) {
-    var _a8;
-    return ((_a8 = this.work_preference(datetime)) == null ? void 0 : _a8.location) || "ooo";
+    var _a9;
+    return ((_a9 = this.work_preference(datetime)) == null ? void 0 : _a9.location) || "ooo";
   }
   get location_name() {
     return this.location_name_time();
@@ -80530,6 +83861,12 @@ setTimeout(() => {
   }
   combineLatest([Mc("current"), _change]).pipe(delay(1e3), retry(10), map(([i]) => new StaffUser(i))).subscribe((user) => _current_user.next(user));
 }, 300);
+function reloadUserData() {
+  setTimeout(async () => {
+    const user = await lastValueFrom(Mc("current"));
+    _current_user.next(new StaffUser(user));
+  }, 300);
+}
 function currentUser() {
   return _current_user.getValue() || EMPTY_USER;
 }
@@ -80571,12 +83908,12 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
     return this._title.getTitle();
   }
   set title(value) {
-    var _a8;
+    var _a9;
     this._title.setTitle(`${value} | ${this.get("app.name") || this._app_name}`);
     const tracking_id = this.get("app.analytics.tracking_id");
     if (!tracking_id)
       return;
-    (_a8 = this._analytics) == null ? void 0 : _a8.send("pagename", { title: value });
+    (_a9 = this._analytics) == null ? void 0 : _a9.send("pagename", { title: value });
   }
   constructor() {
     super();
@@ -80599,10 +83936,10 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
    * Initialise the settings
    */
   async init() {
-    var _a8;
+    var _a9;
     if (this.get("debug"))
       window.debug = true;
-    if ((_a8 = this.get("app")) == null ? void 0 : _a8.name) {
+    if ((_a9 = this.get("app")) == null ? void 0 : _a9.name) {
       this._app_name = this.get("app").name;
     }
     this._app_name = location.pathname.replace(/[\\/]/g, "").trim() || this._app_name;
@@ -80657,6 +83994,10 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
     if (name === "font_size")
       this._setFontSize();
     this.timeout("save_settings", () => this._savePendingChanges(), 2400);
+  }
+  async updateLocatable(locatable) {
+    await lastValueFrom(Uc(currentUser().id, { locatable }, "patch"));
+    reloadUserData();
   }
   overrideCssVariable(key, value, important = false) {
     let element = document.getElementById(`css-var-overrides+${key}`);
@@ -80731,10 +84072,10 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
     print_style_el.innerText = `@media print { html, body { font-size: ${this.get("app.print_font_size") || "4mm"}; } }`;
   }
   _initDarkMode() {
-    var _a8;
+    var _a9;
     if (this.theme)
       return;
-    const os_dark = (window == null ? void 0 : window.matchMedia) ? (_a8 = window == null ? void 0 : window.matchMedia("(prefers-color-scheme: dark)")) == null ? void 0 : _a8.matches : false;
+    const os_dark = (window == null ? void 0 : window.matchMedia) ? (_a9 = window == null ? void 0 : window.matchMedia("(prefers-color-scheme: dark)")) == null ? void 0 : _a9.matches : false;
     this.setTheme(os_dark ? "dark" : "");
   }
 };
@@ -80857,12 +84198,12 @@ function makeSnippet(mark, options) {
   if (typeof options.indent !== "number") options.indent = 1;
   if (typeof options.linesBefore !== "number") options.linesBefore = 3;
   if (typeof options.linesAfter !== "number") options.linesAfter = 2;
-  var re = /\r?\n|\r|\0/g;
+  var re2 = /\r?\n|\r|\0/g;
   var lineStarts = [0];
   var lineEnds = [];
   var match3;
   var foundLineNo = -1;
-  while (match3 = re.exec(mark.buffer)) {
+  while (match3 = re2.exec(mark.buffer)) {
     lineEnds.push(match3.index);
     lineStarts.push(match3.index + match3[0].length);
     if (mark.position <= match3.index && foundLineNo < 0) {
@@ -83358,9 +86699,9 @@ var _OrganisationService = class _OrganisationService {
   }
   /** Mapping building settings overrides */
   buildingSettings(bld_id = "") {
-    var _a8, _b2;
+    var _a9, _b3;
     if (!bld_id && this.building) {
-      bld_id = ((_a8 = this.building) == null ? void 0 : _a8.id) || ((_b2 = this.buildings[0]) == null ? void 0 : _b2.id);
+      bld_id = ((_a9 = this.building) == null ? void 0 : _a9.id) || ((_b3 = this.buildings[0]) == null ? void 0 : _b3.id);
     }
     return this._building_settings ? this._building_settings[bld_id] || {} : {};
   }
@@ -83380,13 +86721,13 @@ var _OrganisationService = class _OrganisationService {
     this.setRegion(item);
   }
   async setRegion(item) {
-    var _a8, _b2;
-    if (!item || ((_a8 = this._active_region.value) == null ? void 0 : _a8.id) == item.id)
+    var _a9, _b3;
+    if (!item || ((_a9 = this._active_region.value) == null ? void 0 : _a9.id) == item.id)
       return;
     this._active_region.next(item);
     await this.loadRegionData(item);
     this._setBuildingFromTimezone();
-    if (((_b2 = this.building) == null ? void 0 : _b2.parent_id) !== item.id && this.buildingsForRegion(item).length) {
+    if (((_b3 = this.building) == null ? void 0 : _b3.parent_id) !== item.id && this.buildingsForRegion(item).length) {
       this.building = this.buildingsForRegion(item)[0];
     } else
       this._updateSettingOverrides();
@@ -83404,14 +86745,14 @@ var _OrganisationService = class _OrganisationService {
     this.setBuilding(bld);
   }
   setBuilding(bld, save = false) {
-    var _a8;
+    var _a9;
     if (!(bld instanceof Object))
       return;
     this._active_building.next(bld);
     if (!this._service.get("dont_load_metadata")) {
       this.loadBuildingData(bld).then(() => this._updateSettingOverrides());
     }
-    if (this.regions.length && ((_a8 = this.region) == null ? void 0 : _a8.id) !== bld.parent_id) {
+    if (this.regions.length && ((_a9 = this.region) == null ? void 0 : _a9.id) !== bld.parent_id) {
       this.region = this.regions.find((_3) => _3.id === this.building.parent_id);
     }
     if (save)
@@ -83421,13 +86762,13 @@ var _OrganisationService = class _OrganisationService {
     return Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
   get currency_code() {
-    var _a8;
-    return this._service.get("app.currency") || ((_a8 = this.building) == null ? void 0 : _a8.currency) || "USD";
+    var _a9;
+    return this._service.get("app.currency") || ((_a9 = this.building) == null ? void 0 : _a9.currency) || "USD";
   }
   /** Get binding value from the building/organisation */
   binding(name) {
-    var _a8, _b2;
-    return ((_a8 = this.building) == null ? void 0 : _a8.bindings[name]) || ((_b2 = this._organisation) == null ? void 0 : _b2.bindings[name]);
+    var _a9, _b3;
+    return ((_a9 = this.building) == null ? void 0 : _a9.bindings[name]) || ((_b3 = this._organisation) == null ? void 0 : _b3.bindings[name]);
   }
   module(name, default_mod_id = "System") {
     const binding = this.binding(name);
@@ -83565,7 +86906,7 @@ var _OrganisationService = class _OrganisationService {
    * Initialise service data
    */
   async load() {
-    var _a8;
+    var _a9;
     await this.loadOrganisation();
     await this.loadRegions();
     if (!this._regions.getValue().length) {
@@ -83580,7 +86921,7 @@ var _OrganisationService = class _OrganisationService {
       }
     }
     await this.loadSettings();
-    if (!((_a8 = this._buildings.getValue()) == null ? void 0 : _a8.length)) {
+    if (!((_a9 = this._buildings.getValue()) == null ? void 0 : _a9.length)) {
       log("ORG", "Unable to find any building zones");
     }
     await this.loadLevels();
@@ -83590,16 +86931,16 @@ var _OrganisationService = class _OrganisationService {
    * Load organisation data for application
    */
   async loadOrganisation() {
-    var _a8;
+    var _a9;
     const org_list = await Cc({ tags: "org" }).pipe(map((i) => i.data)).toPromise();
     if (org_list.length) {
       const auth = ve();
       const org = org_list.find((list) => {
-        var _a9;
-        return ln() || list.id === ((_a9 = auth == null ? void 0 : auth.config) == null ? void 0 : _a9.org_zone);
+        var _a10;
+        return ln() || list.id === ((_a10 = auth == null ? void 0 : auth.config) == null ? void 0 : _a10.org_zone);
       }) || org_list[0];
       const load_metadata = !this._service.get("dont_load_metadata");
-      const bindings = (_a8 = await (load_metadata ? hu(org.id, "bindings") : of({ details: {} })).toPromise()) == null ? void 0 : _a8.details;
+      const bindings = (_a9 = await (load_metadata ? hu(org.id, "bindings") : of({ details: {} })).toPromise()) == null ? void 0 : _a9.details;
       this._organisation = new Organisation(__spreadProps(__spreadValues({}, org), { bindings }));
     } else {
       log("ORG", "Unable to find organisation");
@@ -83610,10 +86951,10 @@ var _OrganisationService = class _OrganisationService {
    * Load region data for the organisation
    */
   async loadRegions() {
-    var _a8;
+    var _a9;
     const list = await Cc({
       tags: "region",
-      parent_id: ((_a8 = this._organisation) == null ? void 0 : _a8.id) || "",
+      parent_id: ((_a9 = this._organisation) == null ? void 0 : _a9.id) || "",
       limit: 500
     }).pipe(map((i) => i.data.map((_3) => new Region(_3))), catchError(() => of([]))).toPromise();
     this._regions.next(list);
@@ -83637,7 +86978,7 @@ var _OrganisationService = class _OrganisationService {
   /**
    * Load buildings data for the organisation
    */
-  async loadBuildings(parent_id = ((_a8) => (_a8 = this._organisation) == null ? void 0 : _a8.id)()) {
+  async loadBuildings(parent_id = ((_a9) => (_a9 = this._organisation) == null ? void 0 : _a9.id)()) {
     const building_list = await Cc({
       tags: "building",
       parent_id,
@@ -83687,11 +87028,11 @@ var _OrganisationService = class _OrganisationService {
     return this.buildings.map((m2) => [...m2.room_configurations]).reduce((prev, curr) => prev.concat(curr), []).sort((a, b3) => a.name.localeCompare(b3.name));
   }
   async loadSettings() {
-    var _a8, _b2, _c, _d;
+    var _a9, _b3, _c10, _d2;
     if (!this._organisation)
       return;
-    const app_settings = (_b2 = await hu((_a8 = this._organisation) == null ? void 0 : _a8.id, this.app_key).toPromise()) == null ? void 0 : _b2.details;
-    const global_settings = (_d = await hu((_c = this._organisation) == null ? void 0 : _c.id, "settings").toPromise()) == null ? void 0 : _d.details;
+    const app_settings = (_b3 = await hu((_a9 = this._organisation) == null ? void 0 : _a9.id, this.app_key).toPromise()) == null ? void 0 : _b3.details;
+    const global_settings = (_d2 = await hu((_c10 = this._organisation) == null ? void 0 : _c10.id, "settings").toPromise()) == null ? void 0 : _d2.details;
     this._settings = [global_settings, app_settings];
     this._service.overrides = [...this._settings];
     await this._initialiseActiveBuilding();
@@ -83699,7 +87040,7 @@ var _OrganisationService = class _OrganisationService {
   }
   _initialiseActiveBuilding() {
     return new Promise((resolve) => {
-      var _a8;
+      var _a9;
       const id = sessionStorage.getItem(`PLACEOS.building`);
       if (id && this.buildings.find((bld) => bld.id === id)) {
         this.building = this.buildings.find((bld) => bld.id === id);
@@ -83708,7 +87049,7 @@ var _OrganisationService = class _OrganisationService {
       const use_location = !!this._service.get("app.use_geolocation");
       if (use_location && "geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition((position) => {
-          var _a9;
+          var _a10;
           const { latitude, longitude } = position.coords;
           let closest_bld = null;
           for (const bld of this.buildings) {
@@ -83727,16 +87068,16 @@ var _OrganisationService = class _OrganisationService {
           }
           if (closest_bld)
             this.building = closest_bld;
-          if (!((_a9 = this.building) == null ? void 0 : _a9.id))
+          if (!((_a10 = this.building) == null ? void 0 : _a10.id))
             this._setDefaultBuilding();
           resolve();
         }, () => {
-          var _a9;
-          if (!((_a9 = this.building) == null ? void 0 : _a9.id))
+          var _a10;
+          if (!((_a10 = this.building) == null ? void 0 : _a10.id))
             this._setDefaultBuilding();
           resolve();
         });
-      } else if (!((_a8 = this.building) == null ? void 0 : _a8.id)) {
+      } else if (!((_a9 = this.building) == null ? void 0 : _a9.id)) {
         this._setDefaultBuilding();
         resolve();
       }
@@ -83774,8 +87115,8 @@ var _OrganisationService = class _OrganisationService {
   }
   _setBuildingFromTimezone() {
     const bld_list = this.buildings.filter((bld) => {
-      var _a8;
-      return !this.region || bld.parent_id === ((_a8 = this.region) == null ? void 0 : _a8.id);
+      var _a9;
+      return !this.region || bld.parent_id === ((_a9 = this.region) == null ? void 0 : _a9.id);
     });
     const timezone = this.timezone;
     for (const bld of bld_list) {
@@ -83794,10 +87135,10 @@ var _OrganisationService = class _OrganisationService {
   }
   _updateSettingOverrides() {
     setTimeout(() => {
-      var _a8, _b2;
+      var _a9, _b3;
       return this._service.overrides = [
-        this.buildingSettings((_a8 = this.building) == null ? void 0 : _a8.id),
-        this.regionSettings((_b2 = this.region) == null ? void 0 : _b2.id),
+        this.buildingSettings((_a9 = this.building) == null ? void 0 : _a9.id),
+        this.regionSettings((_b3 = this.region) == null ? void 0 : _b3.id),
         ...this._settings
       ];
     }, 300);
@@ -83844,553 +87185,13 @@ var Space = class {
   }
 };
 
-// node_modules/@angular/material/fesm2022/date-formats-K6TQue-Y.mjs
-var MAT_DATE_LOCALE = new InjectionToken("MAT_DATE_LOCALE", {
-  providedIn: "root",
-  factory: MAT_DATE_LOCALE_FACTORY
-});
-function MAT_DATE_LOCALE_FACTORY() {
-  return inject(LOCALE_ID);
-}
-var NOT_IMPLEMENTED = "Method not implemented";
-var DateAdapter = class {
-  /** The locale to use for all dates. */
-  locale;
-  _localeChanges = new Subject();
-  /** A stream that emits when the locale changes. */
-  localeChanges = this._localeChanges;
-  /**
-   * Sets the time of one date to the time of another.
-   * @param target Date whose time will be set.
-   * @param hours New hours to set on the date object.
-   * @param minutes New minutes to set on the date object.
-   * @param seconds New seconds to set on the date object.
-   */
-  setTime(target, hours, minutes, seconds) {
-    throw new Error(NOT_IMPLEMENTED);
-  }
-  /**
-   * Gets the hours component of the given date.
-   * @param date The date to extract the hours from.
-   */
-  getHours(date) {
-    throw new Error(NOT_IMPLEMENTED);
-  }
-  /**
-   * Gets the minutes component of the given date.
-   * @param date The date to extract the minutes from.
-   */
-  getMinutes(date) {
-    throw new Error(NOT_IMPLEMENTED);
-  }
-  /**
-   * Gets the seconds component of the given date.
-   * @param date The date to extract the seconds from.
-   */
-  getSeconds(date) {
-    throw new Error(NOT_IMPLEMENTED);
-  }
-  /**
-   * Parses a date with a specific time from a user-provided value.
-   * @param value The value to parse.
-   * @param parseFormat The expected format of the value being parsed
-   *     (type is implementation-dependent).
-   */
-  parseTime(value, parseFormat) {
-    throw new Error(NOT_IMPLEMENTED);
-  }
-  /**
-   * Adds an amount of seconds to the specified date.
-   * @param date Date to which to add the seconds.
-   * @param amount Amount of seconds to add to the date.
-   */
-  addSeconds(date, amount) {
-    throw new Error(NOT_IMPLEMENTED);
-  }
-  /**
-   * Given a potential date object, returns that same date object if it is
-   * a valid date, or `null` if it's not a valid date.
-   * @param obj The object to check.
-   * @returns A date or `null`.
-   */
-  getValidDateOrNull(obj) {
-    return this.isDateInstance(obj) && this.isValid(obj) ? obj : null;
-  }
-  /**
-   * Attempts to deserialize a value to a valid date object. This is different from parsing in that
-   * deserialize should only accept non-ambiguous, locale-independent formats (e.g. a ISO 8601
-   * string). The default implementation does not allow any deserialization, it simply checks that
-   * the given value is already a valid date object or null. The `<mat-datepicker>` will call this
-   * method on all of its `@Input()` properties that accept dates. It is therefore possible to
-   * support passing values from your backend directly to these properties by overriding this method
-   * to also deserialize the format used by your backend.
-   * @param value The value to be deserialized into a date object.
-   * @returns The deserialized date object, either a valid date, null if the value can be
-   *     deserialized into a null date (e.g. the empty string), or an invalid date.
-   */
-  deserialize(value) {
-    if (value == null || this.isDateInstance(value) && this.isValid(value)) {
-      return value;
-    }
-    return this.invalid();
-  }
-  /**
-   * Sets the locale used for all dates.
-   * @param locale The new locale.
-   */
-  setLocale(locale) {
-    this.locale = locale;
-    this._localeChanges.next();
-  }
-  /**
-   * Compares two dates.
-   * @param first The first date to compare.
-   * @param second The second date to compare.
-   * @returns 0 if the dates are equal, a number less than 0 if the first date is earlier,
-   *     a number greater than 0 if the first date is later.
-   */
-  compareDate(first2, second) {
-    return this.getYear(first2) - this.getYear(second) || this.getMonth(first2) - this.getMonth(second) || this.getDate(first2) - this.getDate(second);
-  }
-  /**
-   * Compares the time values of two dates.
-   * @param first First date to compare.
-   * @param second Second date to compare.
-   * @returns 0 if the times are equal, a number less than 0 if the first time is earlier,
-   *     a number greater than 0 if the first time is later.
-   */
-  compareTime(first2, second) {
-    return this.getHours(first2) - this.getHours(second) || this.getMinutes(first2) - this.getMinutes(second) || this.getSeconds(first2) - this.getSeconds(second);
-  }
-  /**
-   * Checks if two dates are equal.
-   * @param first The first date to check.
-   * @param second The second date to check.
-   * @returns Whether the two dates are equal.
-   *     Null dates are considered equal to other null dates.
-   */
-  sameDate(first2, second) {
-    if (first2 && second) {
-      let firstValid = this.isValid(first2);
-      let secondValid = this.isValid(second);
-      if (firstValid && secondValid) {
-        return !this.compareDate(first2, second);
-      }
-      return firstValid == secondValid;
-    }
-    return first2 == second;
-  }
-  /**
-   * Checks if the times of two dates are equal.
-   * @param first The first date to check.
-   * @param second The second date to check.
-   * @returns Whether the times of the two dates are equal.
-   *     Null dates are considered equal to other null dates.
-   */
-  sameTime(first2, second) {
-    if (first2 && second) {
-      const firstValid = this.isValid(first2);
-      const secondValid = this.isValid(second);
-      if (firstValid && secondValid) {
-        return !this.compareTime(first2, second);
-      }
-      return firstValid == secondValid;
-    }
-    return first2 == second;
-  }
-  /**
-   * Clamp the given date between min and max dates.
-   * @param date The date to clamp.
-   * @param min The minimum value to allow. If null or omitted no min is enforced.
-   * @param max The maximum value to allow. If null or omitted no max is enforced.
-   * @returns `min` if `date` is less than `min`, `max` if date is greater than `max`,
-   *     otherwise `date`.
-   */
-  clampDate(date, min, max) {
-    if (min && this.compareDate(date, min) < 0) {
-      return min;
-    }
-    if (max && this.compareDate(date, max) > 0) {
-      return max;
-    }
-    return date;
-  }
-};
-var MAT_DATE_FORMATS = new InjectionToken("mat-date-formats");
-
-// node_modules/@angular/material/fesm2022/core.mjs
-var VERSION7 = new Version("20.0.3");
-var ISO_8601_REGEX = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|(?:(?:\+|-)\d{2}:\d{2}))?)?$/;
-var TIME_REGEX = /^(\d?\d)[:.](\d?\d)(?:[:.](\d?\d))?\s*(AM|PM)?$/i;
-function range(length, valueFunction) {
-  const valuesArray = Array(length);
-  for (let i = 0; i < length; i++) {
-    valuesArray[i] = valueFunction(i);
-  }
-  return valuesArray;
-}
-var NativeDateAdapter = class _NativeDateAdapter extends DateAdapter {
-  /**
-   * @deprecated No longer being used. To be removed.
-   * @breaking-change 14.0.0
-   */
-  useUtcForDisplay = false;
-  /** The injected locale. */
-  _matDateLocale = inject(MAT_DATE_LOCALE, {
-    optional: true
-  });
-  constructor() {
-    super();
-    const matDateLocale = inject(MAT_DATE_LOCALE, {
-      optional: true
-    });
-    if (matDateLocale !== void 0) {
-      this._matDateLocale = matDateLocale;
-    }
-    super.setLocale(this._matDateLocale);
-  }
-  getYear(date) {
-    return date.getFullYear();
-  }
-  getMonth(date) {
-    return date.getMonth();
-  }
-  getDate(date) {
-    return date.getDate();
-  }
-  getDayOfWeek(date) {
-    return date.getDay();
-  }
-  getMonthNames(style2) {
-    const dtf = new Intl.DateTimeFormat(this.locale, {
-      month: style2,
-      timeZone: "utc"
-    });
-    return range(12, (i) => this._format(dtf, new Date(2017, i, 1)));
-  }
-  getDateNames() {
-    const dtf = new Intl.DateTimeFormat(this.locale, {
-      day: "numeric",
-      timeZone: "utc"
-    });
-    return range(31, (i) => this._format(dtf, new Date(2017, 0, i + 1)));
-  }
-  getDayOfWeekNames(style2) {
-    const dtf = new Intl.DateTimeFormat(this.locale, {
-      weekday: style2,
-      timeZone: "utc"
-    });
-    return range(7, (i) => this._format(dtf, new Date(2017, 0, i + 1)));
-  }
-  getYearName(date) {
-    const dtf = new Intl.DateTimeFormat(this.locale, {
-      year: "numeric",
-      timeZone: "utc"
-    });
-    return this._format(dtf, date);
-  }
-  getFirstDayOfWeek() {
-    var _a8, _b2;
-    if (typeof Intl !== "undefined" && Intl.Locale) {
-      const locale = new Intl.Locale(this.locale);
-      const firstDay = ((_b2 = ((_a8 = locale.getWeekInfo) == null ? void 0 : _a8.call(locale)) || locale.weekInfo) == null ? void 0 : _b2.firstDay) ?? 0;
-      return firstDay === 7 ? 0 : firstDay;
-    }
-    return 0;
-  }
-  getNumDaysInMonth(date) {
-    return this.getDate(this._createDateWithOverflow(this.getYear(date), this.getMonth(date) + 1, 0));
-  }
-  clone(date) {
-    return new Date(date.getTime());
-  }
-  createDate(year, month, date) {
-    if (typeof ngDevMode === "undefined" || ngDevMode) {
-      if (month < 0 || month > 11) {
-        throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
-      }
-      if (date < 1) {
-        throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
-      }
-    }
-    let result = this._createDateWithOverflow(year, month, date);
-    if (result.getMonth() != month && (typeof ngDevMode === "undefined" || ngDevMode)) {
-      throw Error(`Invalid date "${date}" for month with index "${month}".`);
-    }
-    return result;
-  }
-  today() {
-    return /* @__PURE__ */ new Date();
-  }
-  parse(value, parseFormat) {
-    if (typeof value == "number") {
-      return new Date(value);
-    }
-    return value ? new Date(Date.parse(value)) : null;
-  }
-  format(date, displayFormat) {
-    if (!this.isValid(date)) {
-      throw Error("NativeDateAdapter: Cannot format invalid date.");
-    }
-    const dtf = new Intl.DateTimeFormat(this.locale, __spreadProps(__spreadValues({}, displayFormat), {
-      timeZone: "utc"
-    }));
-    return this._format(dtf, date);
-  }
-  addCalendarYears(date, years) {
-    return this.addCalendarMonths(date, years * 12);
-  }
-  addCalendarMonths(date, months) {
-    let newDate = this._createDateWithOverflow(this.getYear(date), this.getMonth(date) + months, this.getDate(date));
-    if (this.getMonth(newDate) != ((this.getMonth(date) + months) % 12 + 12) % 12) {
-      newDate = this._createDateWithOverflow(this.getYear(newDate), this.getMonth(newDate), 0);
-    }
-    return newDate;
-  }
-  addCalendarDays(date, days) {
-    return this._createDateWithOverflow(this.getYear(date), this.getMonth(date), this.getDate(date) + days);
-  }
-  toIso8601(date) {
-    return [date.getUTCFullYear(), this._2digit(date.getUTCMonth() + 1), this._2digit(date.getUTCDate())].join("-");
-  }
-  /**
-   * Returns the given value if given a valid Date or null. Deserializes valid ISO 8601 strings
-   * (https://www.ietf.org/rfc/rfc3339.txt) into valid Dates and empty string into null. Returns an
-   * invalid date for all other values.
-   */
-  deserialize(value) {
-    if (typeof value === "string") {
-      if (!value) {
-        return null;
-      }
-      if (ISO_8601_REGEX.test(value)) {
-        let date = new Date(value);
-        if (this.isValid(date)) {
-          return date;
-        }
-      }
-    }
-    return super.deserialize(value);
-  }
-  isDateInstance(obj) {
-    return obj instanceof Date;
-  }
-  isValid(date) {
-    return !isNaN(date.getTime());
-  }
-  invalid() {
-    return /* @__PURE__ */ new Date(NaN);
-  }
-  setTime(target, hours, minutes, seconds) {
-    if (typeof ngDevMode === "undefined" || ngDevMode) {
-      if (!inRange(hours, 0, 23)) {
-        throw Error(`Invalid hours "${hours}". Hours value must be between 0 and 23.`);
-      }
-      if (!inRange(minutes, 0, 59)) {
-        throw Error(`Invalid minutes "${minutes}". Minutes value must be between 0 and 59.`);
-      }
-      if (!inRange(seconds, 0, 59)) {
-        throw Error(`Invalid seconds "${seconds}". Seconds value must be between 0 and 59.`);
-      }
-    }
-    const clone = this.clone(target);
-    clone.setHours(hours, minutes, seconds, 0);
-    return clone;
-  }
-  getHours(date) {
-    return date.getHours();
-  }
-  getMinutes(date) {
-    return date.getMinutes();
-  }
-  getSeconds(date) {
-    return date.getSeconds();
-  }
-  parseTime(userValue, parseFormat) {
-    if (typeof userValue !== "string") {
-      return userValue instanceof Date ? new Date(userValue.getTime()) : null;
-    }
-    const value = userValue.trim();
-    if (value.length === 0) {
-      return null;
-    }
-    let result = this._parseTimeString(value);
-    if (result === null) {
-      const withoutExtras = value.replace(/[^0-9:(AM|PM)]/gi, "").trim();
-      if (withoutExtras.length > 0) {
-        result = this._parseTimeString(withoutExtras);
-      }
-    }
-    return result || this.invalid();
-  }
-  addSeconds(date, amount) {
-    return new Date(date.getTime() + amount * 1e3);
-  }
-  /** Creates a date but allows the month and date to overflow. */
-  _createDateWithOverflow(year, month, date) {
-    const d2 = /* @__PURE__ */ new Date();
-    d2.setFullYear(year, month, date);
-    d2.setHours(0, 0, 0, 0);
-    return d2;
-  }
-  /**
-   * Pads a number to make it two digits.
-   * @param n The number to pad.
-   * @returns The padded number.
-   */
-  _2digit(n2) {
-    return ("00" + n2).slice(-2);
-  }
-  /**
-   * When converting Date object to string, javascript built-in functions may return wrong
-   * results because it applies its internal DST rules. The DST rules around the world change
-   * very frequently, and the current valid rule is not always valid in previous years though.
-   * We work around this problem building a new Date object which has its internal UTC
-   * representation with the local date and time.
-   * @param dtf Intl.DateTimeFormat object, containing the desired string format. It must have
-   *    timeZone set to 'utc' to work fine.
-   * @param date Date from which we want to get the string representation according to dtf
-   * @returns A Date object with its UTC representation based on the passed in date info
-   */
-  _format(dtf, date) {
-    const d2 = /* @__PURE__ */ new Date();
-    d2.setUTCFullYear(date.getFullYear(), date.getMonth(), date.getDate());
-    d2.setUTCHours(date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
-    return dtf.format(d2);
-  }
-  /**
-   * Attempts to parse a time string into a date object. Returns null if it cannot be parsed.
-   * @param value Time string to parse.
-   */
-  _parseTimeString(value) {
-    const parsed = value.toUpperCase().match(TIME_REGEX);
-    if (parsed) {
-      let hours = parseInt(parsed[1]);
-      const minutes = parseInt(parsed[2]);
-      let seconds = parsed[3] == null ? void 0 : parseInt(parsed[3]);
-      const amPm = parsed[4];
-      if (hours === 12) {
-        hours = amPm === "AM" ? 0 : hours;
-      } else if (amPm === "PM") {
-        hours += 12;
-      }
-      if (inRange(hours, 0, 23) && inRange(minutes, 0, 59) && (seconds == null || inRange(seconds, 0, 59))) {
-        return this.setTime(this.today(), hours, minutes, seconds || 0);
-      }
-    }
-    return null;
-  }
-  static \u0275fac = function NativeDateAdapter_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _NativeDateAdapter)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _NativeDateAdapter,
-    factory: _NativeDateAdapter.\u0275fac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NativeDateAdapter, [{
-    type: Injectable
-  }], () => [], null);
-})();
-function inRange(value, min, max) {
-  return !isNaN(value) && value >= min && value <= max;
-}
-var MAT_NATIVE_DATE_FORMATS = {
-  parse: {
-    dateInput: null,
-    timeInput: null
-  },
-  display: {
-    dateInput: {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric"
-    },
-    timeInput: {
-      hour: "numeric",
-      minute: "numeric"
-    },
-    monthYearLabel: {
-      year: "numeric",
-      month: "short"
-    },
-    dateA11yLabel: {
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    },
-    monthYearA11yLabel: {
-      year: "numeric",
-      month: "long"
-    },
-    timeOptionLabel: {
-      hour: "numeric",
-      minute: "numeric"
-    }
-  }
-};
-var NativeDateModule = class _NativeDateModule {
-  static \u0275fac = function NativeDateModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _NativeDateModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _NativeDateModule
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    providers: [{
-      provide: DateAdapter,
-      useClass: NativeDateAdapter
-    }]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NativeDateModule, [{
-    type: NgModule,
-    args: [{
-      providers: [{
-        provide: DateAdapter,
-        useClass: NativeDateAdapter
-      }]
-    }]
-  }], null, null);
-})();
-var MatNativeDateModule = class _MatNativeDateModule {
-  static \u0275fac = function MatNativeDateModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatNativeDateModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _MatNativeDateModule
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    providers: [provideNativeDateAdapter()]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatNativeDateModule, [{
-    type: NgModule,
-    args: [{
-      providers: [provideNativeDateAdapter()]
-    }]
-  }], null, null);
-})();
-function provideNativeDateAdapter(formats = MAT_NATIVE_DATE_FORMATS) {
-  return [{
-    provide: DateAdapter,
-    useClass: NativeDateAdapter
-  }, {
-    provide: MAT_DATE_FORMATS,
-    useValue: formats
-  }];
-}
-
 // libs/components/src/lib/translate.pipe.ts
 var _TranslatePipe = class _TranslatePipe {
   constructor() {
     this._locale = inject(LocaleService);
   }
   transform(value, args = {}, plural8) {
-    return this._locale.get(value, args, plural8);
+    return this._locale.get(value, args, plural8) || value;
   }
 };
 _TranslatePipe.\u0275fac = function TranslatePipe_Factory(__ngFactoryType__) {
@@ -84408,7 +87209,7 @@ var TranslatePipe = _TranslatePipe;
 })();
 
 // apps/booking-panel/src/app/bootstrap.component.ts
-var _c09 = ["app-bootstrap", ""];
+var _c014 = ["app-bootstrap", ""];
 var _forTrack0 = ($index, $item) => $item.id;
 function BootstrapComponent_Conditional_4_Conditional_10_Template(rf, ctx) {
   if (rf & 1) {
@@ -84622,7 +87423,7 @@ _BootstrapComponent.\u0275fac = /* @__PURE__ */ (() => {
     return (\u0275BootstrapComponent_BaseFactory || (\u0275BootstrapComponent_BaseFactory = \u0275\u0275getInheritedFactory(_BootstrapComponent)))(__ngFactoryType__ || _BootstrapComponent);
   };
 })();
-_BootstrapComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BootstrapComponent, selectors: [["", "app-bootstrap", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c09, decls: 6, vars: 4, consts: [["auto", "matAutocomplete"], [1, "m-4", "mx-auto", "flex", "flex-col", "items-center", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-100", "text-center", "shadow"], [1, "m-0", "w-full", "bg-error", "px-4", "py-2", "text-2xl", "text-white"], ["load", "", 1, "my-16", "flex", "flex-col", "items-center"], [1, "description", "py-4"], ["appearance", "outline"], ["matInput", "", 3, "ngModelChange", "ngModel", "matAutocomplete", "placeholder"], ["matSuffix", "", 3, "diameter"], [3, "value"], [1, "pointer-events-none", "opacity-60"], ["btn", "", "matRipple", "", 3, "click", "disabled"], [1, "flex", "w-full", "items-center", "space-x-4", "leading-tight"], [1, "flex", "flex-1", "flex-col"], [1, "text-xs", "opacity-30"], [1, "rounded", "bg-base-200", "px-2", "py-1", "font-mono", "text-[0.625rem]"], [3, "diameter"], [1, "m-4"]], template: function BootstrapComponent_Template(rf, ctx) {
+_BootstrapComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BootstrapComponent, selectors: [["", "app-bootstrap", ""]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c014, decls: 6, vars: 4, consts: [["auto", "matAutocomplete"], [1, "m-4", "mx-auto", "flex", "flex-col", "items-center", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-100", "text-center", "shadow"], [1, "m-0", "w-full", "bg-error", "px-4", "py-2", "text-2xl", "text-white"], ["load", "", 1, "my-16", "flex", "flex-col", "items-center"], [1, "description", "py-4"], ["appearance", "outline"], ["matInput", "", 3, "ngModelChange", "ngModel", "matAutocomplete", "placeholder"], ["matSuffix", "", 3, "diameter"], [3, "value"], [1, "pointer-events-none", "opacity-60"], ["btn", "", "matRipple", "", 3, "click", "disabled"], [1, "flex", "w-full", "items-center", "space-x-4", "leading-tight"], [1, "flex", "flex-1", "flex-col"], [1, "text-xs", "opacity-30"], [1, "rounded", "bg-base-200", "px-2", "py-1", "font-mono", "text-[0.625rem]"], [3, "diameter"], [1, "m-4"]], template: function BootstrapComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 1)(1, "h2", 2);
     \u0275\u0275text(2);
@@ -84787,10 +87588,10 @@ var DAYS_OF_WEEK = [
   "saturday"
 ];
 function eventStatus(details) {
-  var _a8;
+  var _a9;
   if (details.status === "cancelled")
     return "declined";
-  if ((_a8 = details.resources) == null ? void 0 : _a8.length) {
+  if ((_a9 = details.resources) == null ? void 0 : _a9.length) {
     if (details.resources.every((i) => i.response_status === "accepted" || details.approved)) {
       return "approved";
     } else if (details.resources.some((i) => i.response_status === "tentative" || i.response_status === "needsAction")) {
@@ -84801,7 +87602,7 @@ function eventStatus(details) {
   return "approved";
 }
 function parseRecurrence(data) {
-  var _a8;
+  var _a9;
   let start = data.start || data.range_start * 1e3;
   let end = data.end || data.range_end;
   if (data.occurrences > 1) {
@@ -84827,17 +87628,17 @@ function parseRecurrence(data) {
     range_end: getUnixTime(endOfDay(end)),
     interval: data.interval,
     pattern: data.pattern,
-    days_of_week: ((_a8 = data.days_of_week) == null ? void 0 : _a8.map((_3) => typeof _3 === "number" ? DAYS_OF_WEEK[_3] : _3)) || []
+    days_of_week: ((_a9 = data.days_of_week) == null ? void 0 : _a9.map((_3) => typeof _3 === "number" ? DAYS_OF_WEEK[_3] : _3)) || []
   };
 }
 function getFreeTimeSlots(list, min_size = 29) {
-  var _a8, _b2;
+  var _a9, _b3;
   let start = /* @__PURE__ */ new Date(0);
   const slots = [];
   list.sort((a, b3) => a.date - b3.date);
   for (const booking of list) {
-    const bkn_start = new Date(addMinutes(booking.date, -((_a8 = booking.extension_data) == null ? void 0 : _a8.setup_time) || 0));
-    const bkn_end = addMinutes(booking.date, booking.duration + (((_b2 = booking.extension_data) == null ? void 0 : _b2.breakdown_time) || 0));
+    const bkn_start = new Date(addMinutes(booking.date, -((_a9 = booking.extension_data) == null ? void 0 : _a9.setup_time) || 0));
+    const bkn_end = addMinutes(booking.date, booking.duration + (((_b3 = booking.extension_data) == null ? void 0 : _b3.breakdown_time) || 0));
     if (isAfter(booking.date, start)) {
       const diff = Math.abs(differenceInMinutes(bkn_start, start));
       if (diff >= min_size) {
@@ -84890,15 +87691,15 @@ function currentPeriod(bookings, current, next) {
 
 // libs/assets/src/lib/asset-request.class.ts
 function deliverAtTime(request) {
-  var _a8, _b2;
-  let date = ((_a8 = request.event) == null ? void 0 : _a8.date) || request._time;
+  var _a9, _b3;
+  let date = ((_a9 = request.event) == null ? void 0 : _a9.date) || request._time;
   if (request.deliver_time) {
     date = set(date, {
       hours: Math.floor(request.deliver_time),
       minutes: request.deliver_time % 1 * 60
     }).valueOf();
   }
-  if (request.deliver_day_offset > 0 || ((_b2 = request.event) == null ? void 0 : _b2.all_day)) {
+  if (request.deliver_day_offset > 0 || ((_b3 = request.event) == null ? void 0 : _b3.all_day)) {
     date = addDays(startOfDay(date), request.deliver_day_offset).valueOf();
   }
   return addMinutes(date, request.deliver_offset).valueOf();
@@ -84915,17 +87716,17 @@ var AssetRequest = class {
     this[`${this.event_id}_status`] = value;
   }
   constructor(data = {}) {
-    var _a8, _b2, _c, _d, _e3, _f, _g;
+    var _a9, _b3, _c10, _d2, _e3, _f, _g;
     this.conflict = false;
     this._changed = false;
     this._time = startOfMinute(Date.now()).valueOf();
     this.id = data.id || `order-${randomInt(9999999, 1e6)}`;
     this.event_id = data.event_id || data.parent_id || "";
-    this.items = data.items || ((_a8 = data.asset_ids) == null ? void 0 : _a8.map((_3) => ({ id: _3, quantity: 1 }))) || [];
+    this.items = data.items || ((_a9 = data.asset_ids) == null ? void 0 : _a9.map((_3) => ({ id: _3, quantity: 1 }))) || [];
     this.item_count = this.items.reduce((amount, item) => amount + item.quantity, 0);
-    this._status = data[`${this.event_id}_status`] || data.status || (data.extension_data || {})[`${this.event_id}_status`] || ((_b2 = data.extension_data) == null ? void 0 : _b2.status) || "in_storage";
+    this._status = data[`${this.event_id}_status`] || data.status || (data.extension_data || {})[`${this.event_id}_status`] || ((_b3 = data.extension_data) == null ? void 0 : _b3.status) || "in_storage";
     this.event = data.event || data || null;
-    const booking = (_d = (_c = this.event) == null ? void 0 : _c.linked_bookings) == null ? void 0 : _d.find((_3) => _3.extension_data.request_id === this.id);
+    const booking = (_d2 = (_c10 = this.event) == null ? void 0 : _c10.linked_bookings) == null ? void 0 : _d2.find((_3) => _3.extension_data.request_id === this.id);
     this._booking = booking || data.booking || null;
     this._changed = !!data._changed || !booking;
     this.notes = data.notes || data.description || "";
@@ -84962,7 +87763,7 @@ var CateringItem = class {
     return `${this.id}[${options}]${!this.in_order ? "menu" : ""}`;
   }
   constructor(data = {}) {
-    var _a8;
+    var _a9;
     this.id = data.id || "";
     this.name = data.name || data.id || "";
     this.category = data.category || "";
@@ -84980,22 +87781,22 @@ var CateringItem = class {
     this.hide_for_zones = data.hide_for_zones || [];
     this.unit_price_with_options = this.unit_price + this.option_list.map((i) => i.unit_price || 0).reduce((c3, a) => c3 + a, 0);
     this.total_cost = this.unit_price_with_options * this.quantity;
-    this.options_string = ((_a8 = this.options) == null ? void 0 : _a8.map((_3) => _3.id || "").sort((a, b3) => a.localeCompare(b3)).join(",")) || "";
+    this.options_string = ((_a9 = this.options) == null ? void 0 : _a9.map((_3) => _3.id || "").sort((a, b3) => a.localeCompare(b3)).join(",")) || "";
     this.in_order = data.in_order ?? false;
   }
 };
 
 // libs/catering/src/lib/catering-order.class.ts
 function deliverAtTime2(order) {
-  var _a8, _b2, _c;
-  let date = ((_a8 = order.event) == null ? void 0 : _a8.date) || ((_b2 = order.event) == null ? void 0 : _b2.event_start) * 1e3 || order._time;
+  var _a9, _b3, _c10;
+  let date = ((_a9 = order.event) == null ? void 0 : _a9.date) || ((_b3 = order.event) == null ? void 0 : _b3.event_start) * 1e3 || order._time;
   if (order.deliver_time) {
     date = set(date, {
       hours: Math.floor(order.deliver_time),
       minutes: order.deliver_time % 1 * 60
     }).valueOf();
   }
-  if (order.deliver_day_offset > 0 || ((_c = order.event) == null ? void 0 : _c.all_day)) {
+  if (order.deliver_day_offset > 0 || ((_c10 = order.event) == null ? void 0 : _c10.all_day)) {
     date = addDays(startOfDay(date), order.deliver_day_offset).valueOf();
   }
   return addMinutes(date, order.deliver_offset).valueOf();
@@ -85012,11 +87813,11 @@ var CateringOrder = class {
     this[`${this.event_id}_status`] = value;
   }
   constructor(data = {}) {
-    var _a8;
+    var _a9;
     this._time = startOfMinute(Date.now()).valueOf();
     this.id = data.id || `order-${randomInt(9999999, 1e6)}`;
     this.system_id = data.system_id || "";
-    this.event_id = data.event_id || ((_a8 = data.event) == null ? void 0 : _a8.id) || "";
+    this.event_id = data.event_id || ((_a9 = data.event) == null ? void 0 : _a9.id) || "";
     this.caterer = data.caterer || "";
     this.items = (data.items || []).map((i) => i instanceof CateringItem ? i : new CateringItem(i));
     this.items = this.items.filter((i) => i.quantity > 0 && this.caterer === i.caterer);
@@ -85072,7 +87873,7 @@ var CalendarEvent = class _CalendarEvent {
     return this.extension_data[key];
   }
   constructor(data = {}) {
-    var _a8, _b2, _c, _d;
+    var _a9, _b3, _c10, _d2;
     this._valid_asset_cache = [];
     this._valid_cache_expiry = 0;
     this.id = data.event_id || data.id || "";
@@ -85081,7 +87882,7 @@ var CalendarEvent = class _CalendarEvent {
     }));
     this.event_end = data.event_end || getUnixTime(addMinutes(this.event_start * 1e3, data.duration || 30));
     this.calendar = data.calendar || "";
-    this.creator = ((_a8 = data.creator || _default_user.email) == null ? void 0 : _a8.toLowerCase()) || "";
+    this.creator = ((_a9 = data.creator || _default_user.email) == null ? void 0 : _a9.toLowerCase()) || "";
     this.host = (data.host || this.creator || data.host_email || _default_user.email || "").toLowerCase();
     const attendees = data.attendees || [];
     this.attendees = attendees.filter((user) => !user.resource).map((u9) => new User(u9));
@@ -85120,7 +87921,7 @@ var CalendarEvent = class _CalendarEvent {
         interval: data.recurrence.interval,
         pattern: data.recurrence.pattern,
         occurrences: data.recurrence.occurrences,
-        days_of_week: ((_b2 = data.recurrence.days_of_week) == null ? void 0 : _b2.map((_3) => typeof _3 === "number" ? _3 : DAYS_OF_WEEK2.indexOf(_3))) || []
+        days_of_week: ((_b3 = data.recurrence.days_of_week) == null ? void 0 : _b3.map((_3) => typeof _3 === "number" ? _3 : DAYS_OF_WEEK2.indexOf(_3))) || []
       };
     } else {
       this.recurrence = {};
@@ -85138,7 +87939,7 @@ var CalendarEvent = class _CalendarEvent {
     this.attachments = data.attachments || [];
     this.extension_data = data.extension_data || {};
     this.status = eventStatus(__spreadValues(__spreadValues({}, data), this)) || "none";
-    this.location = data.location || ((_c = this.space) == null ? void 0 : _c.display_name) || ((_d = this.space) == null ? void 0 : _d.name) || "";
+    this.location = data.location || ((_c10 = this.space) == null ? void 0 : _c10.display_name) || ((_d2 = this.space) == null ? void 0 : _d2.name) || "";
     this.setup_time = data.setup_time || 0;
     this.breakdown_time = data.breakdown_time || 0;
     this.type = this.status === "declined" ? "cancelled" : this.attendees.find((_3) => _3.is_external) ? "external" : "internal";
@@ -85157,8 +87958,8 @@ var CalendarEvent = class _CalendarEvent {
     };
     this.extension_data.catering = (this.extension_data.catering || []).map((i) => new CateringOrder(__spreadProps(__spreadValues({}, i), { event: simple_event })));
     const linked_assets = this.linked_bookings.filter((_3) => _3.booking_type === "asset-request").map((_3) => {
-      var _a9;
-      return (_a9 = _3.extension_data) == null ? void 0 : _a9.request;
+      var _a10;
+      return (_a10 = _3.extension_data) == null ? void 0 : _a10.request;
     }).filter((_3) => !!_3);
     const asset_requests = (linked_assets.length ? linked_assets : this.extension_data.assets) || [];
     this.extension_data.images = this.extension_data.images || data.images || [];
@@ -85197,14 +87998,14 @@ var CalendarEvent = class _CalendarEvent {
    * Convert class data to simple JSON object
    */
   toJSON() {
-    var _a8, _b2;
+    var _a9, _b3;
     const obj = __spreadValues({}, this);
     const date = this.all_day ? startOfDay(this.date) : this.date;
     const end = this.all_day ? endOfDay(this.date_end).valueOf() + 1 : this.date_end;
     obj.event_start = getUnixTime(date);
     obj.event_end = getUnixTime(end);
     const attendees = this.attendees;
-    this.recurring = ((_a8 = this.recurrence) == null ? void 0 : _a8.pattern) && this.recurrence._pattern !== "none";
+    this.recurring = ((_a9 = this.recurrence) == null ? void 0 : _a9.pattern) && this.recurrence._pattern !== "none";
     if (this.recurring) {
       obj.recurrence = parseRecurrence(__spreadProps(__spreadValues({}, this.recurrence), {
         start: this.date
@@ -85224,7 +88025,7 @@ var CalendarEvent = class _CalendarEvent {
     }
     obj.extension_data.catering = obj.extension_data.catering.map((i) => new CateringOrder(__spreadProps(__spreadValues({}, i), { event: null })));
     obj.extension_data.assets = obj.extension_data.assets.map((i) => new AssetRequest(__spreadProps(__spreadValues({}, i), { event: null })));
-    obj.system_id = (_b2 = this.system) == null ? void 0 : _b2.id;
+    obj.system_id = (_b3 = this.system) == null ? void 0 : _b3.id;
     for (const key of [
       "catering",
       "date",
@@ -85263,125 +88064,6 @@ var CalendarEvent = class _CalendarEvent {
     return this.is_today || isAfter(now, addMinutes(this.date, -5)) && isBefore(now, addMinutes(this.date, this.duration));
   }
 };
-
-// libs/components/src/lib/safe.pipe.ts
-var _SafePipe = class _SafePipe {
-  constructor() {
-    this.sanitizer = inject(DomSanitizer);
-  }
-  /**
-   * Sanitizes the string allowing it to be injected into a template
-   * @param value String to sanitize
-   * @param type Type of value to sanitise. `resource`, `url`, `script`, `style` or `html`
-   */
-  transform(value, type2 = "html") {
-    switch (type2) {
-      case "resource":
-        return this.sanitizer.bypassSecurityTrustResourceUrl(value);
-      case "url":
-        return this.sanitizer.bypassSecurityTrustUrl(value);
-      case "script":
-        return this.sanitizer.bypassSecurityTrustScript(value);
-      case "style":
-        return this.sanitizer.bypassSecurityTrustStyle(value);
-      default:
-        return this.sanitizer.bypassSecurityTrustHtml(value);
-    }
-  }
-};
-_SafePipe.\u0275fac = function SafePipe_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _SafePipe)();
-};
-_SafePipe.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "safe", type: _SafePipe, pure: true });
-var SafePipe = _SafePipe;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SafePipe, [{
-    type: Pipe,
-    args: [{
-      name: "safe"
-    }]
-  }], null, null);
-})();
-
-// libs/components/src/lib/icon.component.ts
-var _c010 = ["*"];
-function IconComponent_Conditional_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "i");
-    \u0275\u0275text(1);
-    \u0275\u0275projection(2);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    let tmp_1_0;
-    let tmp_2_0;
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275classMap(((tmp_1_0 = ctx_r0.icon()) == null ? null : tmp_1_0.class) || ctx_r0.className());
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", (tmp_2_0 = ctx_r0.icon()) == null ? null : tmp_2_0.content, " ");
-  }
-}
-function IconComponent_Conditional_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 2);
-    \u0275\u0275pipe(1, "safe");
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("src", \u0275\u0275pipeBind2(1, 1, ctx_r0.icon().src, "resource"), \u0275\u0275sanitizeUrl);
-  }
-}
-var _IconComponent = class _IconComponent {
-  constructor() {
-    this.className = input("material-symbols-rounded");
-    this.icon = input(void 0);
-  }
-};
-_IconComponent.\u0275fac = function IconComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _IconComponent)();
-};
-_IconComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["icon"], ["i", "icon", ""]], inputs: { className: [1, "className"], icon: [1, "icon"] }, ngContentSelectors: _c010, decls: 3, vars: 2, consts: [[1, "flex", "h-[1.25em]", "w-[1.25em]", "items-center", "justify-center", "overflow-hidden"], [3, "class"], [1, "h-[1em]", "w-[1em]", 3, "src"]], template: function IconComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275projectionDef();
-    \u0275\u0275elementStart(0, "div", 0);
-    \u0275\u0275conditionalCreate(1, IconComponent_Conditional_1_Template, 3, 3, "i", 1);
-    \u0275\u0275conditionalCreate(2, IconComponent_Conditional_2_Template, 2, 4, "img", 2);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275conditional(!ctx.icon() || ctx.icon().type !== "img" ? 1 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.icon() && ctx.icon().type === "img" ? 2 : -1);
-  }
-}, dependencies: [SafePipe], styles: ["\n\ni[_ngcontent-%COMP%] {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */"] });
-var IconComponent = _IconComponent;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IconComponent, [{
-    type: Component,
-    args: [{ selector: "icon,i[icon]", template: `
-        <div
-            class="flex h-[1.25em] w-[1.25em] items-center justify-center overflow-hidden"
-        >
-            @if (!icon() || icon().type !== 'img') {
-                <i [class]="icon()?.class || className()">
-                    {{ icon()?.content }}
-                    <ng-content></ng-content>
-                </i>
-            }
-            @if (icon() && icon().type === 'img') {
-                <img
-                    class="h-[1em] w-[1em]"
-                    [src]="icon().src | safe: 'resource'"
-                />
-            }
-        </div>
-    `, imports: [SafePipe], styles: ["/* angular:styles/component:css;9dcb326dcc2b3d8b68e7d89ef488eb28abc701fb0e2ab3f372b27f7bf732088c;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/icon.component.ts */\ni {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */\n"] }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IconComponent, { className: "IconComponent", filePath: "libs/components/src/lib/icon.component.ts", lineNumber: 34 });
-})();
 
 // libs/components/src/lib/sanitise.pipe.ts
 var SecurityContext2;
@@ -85666,8 +88348,8 @@ function querySpaceAvailability(id_list, start, duration, ignore, type2, ignore_
     }) : of([])
   ]).pipe(map(([spaces, ignore_check]) => {
     const short_list = id_list.map((id) => !!spaces.find((s) => {
-      var _a8;
-      return s.id === id || ((_a8 = s.resource) == null ? void 0 : _a8.id) === id;
+      var _a9;
+      return s.id === id || ((_a9 = s.resource) == null ? void 0 : _a9.id) === id;
     }));
     for (const space of ignore_check) {
       if (!id_list.includes(space.id))
@@ -85681,8 +88363,8 @@ function querySpaceAvailability(id_list, start, duration, ignore, type2, ignore_
 
 // libs/events/src/lib/validators.ts
 var endInFuture = (control) => {
-  var _a8;
-  const date = (_a8 = control.parent) == null ? void 0 : _a8.get("date");
+  var _a9;
+  const date = (_a9 = control.parent) == null ? void 0 : _a9.get("date");
   if (date && isAfter(Date.now(), addMinutes(date.value, control.value))) {
     return { duration: true };
   }
@@ -85692,22 +88374,22 @@ var endInFuture = (control) => {
 // libs/events/src/lib/utilities.ts
 var BOOKING_DATE = add(setMinutes(setHours(/* @__PURE__ */ new Date(), 6), 0), { days: -1 });
 var validateCateringField = (catering_control) => (control) => {
-  var _a8;
-  if (((_a8 = catering_control.value) == null ? void 0 : _a8.length) && !control.value) {
+  var _a9;
+  if (((_a9 = catering_control.value) == null ? void 0 : _a9.length) && !control.value) {
     return { catering_field: "Catering sub-fields are required" };
   }
   return null;
 };
 function generateEventForm(event = new CalendarEvent(), settings) {
-  var _a8, _b2, _c, _d, _e3, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o2, _p, _q, _r2, _s2;
+  var _a9, _b3, _c10, _d2, _e3, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o2, _p, _q, _r2, _s2;
   if (!event)
     event = new CalendarEvent();
   const form = new FormGroup({
     id: new FormControl(event.id),
     ical_uid: new FormControl(event.ical_uid),
-    host: new FormControl(event.host || ((_a8 = event.organiser) == null ? void 0 : _a8.email) || ((_b2 = currentUser()) == null ? void 0 : _b2.email) || "", [Validators.required]),
+    host: new FormControl(event.host || ((_a9 = event.organiser) == null ? void 0 : _a9.email) || ((_b3 = currentUser()) == null ? void 0 : _b3.email) || "", [Validators.required]),
     organiser: new FormControl(event.organiser || new User({ email: event.host || "" })),
-    creator: new FormControl(event.creator || ((_c = currentUser()) == null ? void 0 : _c.email)),
+    creator: new FormControl(event.creator || ((_c10 = currentUser()) == null ? void 0 : _c10.email)),
     calendar: new FormControl(event.calendar),
     attendees: new FormControl(event.attendees || []),
     resources: new FormControl(event.resources || []),
@@ -85723,7 +88405,7 @@ function generateEventForm(event = new CalendarEvent(), settings) {
     recurring_event_id: new FormControl(event.recurring_event_id),
     master: new FormControl(event.master),
     attachments: new FormControl(event.attachments),
-    catering: new FormControl((_d = event.extension_data) == null ? void 0 : _d.catering),
+    catering: new FormControl((_d2 = event.extension_data) == null ? void 0 : _d2.catering),
     catering_notes: new FormControl(((_f = (_e3 = event.extension_data) == null ? void 0 : _e3.catering[0]) == null ? void 0 : _f.notes) || ""),
     catering_charge_code: new FormControl(((_h = (_g = event.extension_data) == null ? void 0 : _g.catering[0]) == null ? void 0 : _h.charge_code) || ""),
     setup_time: new FormControl(event.setup_time || 0),
@@ -85752,8 +88434,8 @@ function generateEventForm(event = new CalendarEvent(), settings) {
     form.controls.assets[(l2 == null ? void 0 : l2.length) ? "enable" : "disable"]();
   });
   const setCateringTime = () => {
-    var _a9;
-    if (!((_a9 = form.value.catering) == null ? void 0 : _a9.length) || !form.getRawValue().date)
+    var _a10;
+    if (!((_a10 = form.value.catering) == null ? void 0 : _a10.length) || !form.getRawValue().date)
       return;
     form.patchValue({
       catering: form.value.catering.map((order) => __spreadProps(__spreadValues({}, order), {
@@ -85765,11 +88447,11 @@ function generateEventForm(event = new CalendarEvent(), settings) {
     }, { emitEvent: false });
   };
   form.valueChanges.subscribe((v3) => {
-    var _a9, _b3;
+    var _a10, _b4;
     if (form.getRawValue().date < Date.now() && form.value.id) {
-      (_a9 = form.get("date")) == null ? void 0 : _a9.disable({ emitEvent: false });
+      (_a10 = form.get("date")) == null ? void 0 : _a10.disable({ emitEvent: false });
     } else {
-      (_b3 = form.get("date")) == null ? void 0 : _b3.enable({ emitEvent: false });
+      (_b4 = form.get("date")) == null ? void 0 : _b4.enable({ emitEvent: false });
     }
     if (v3.date || v3.duration || v3.all_day)
       setCateringTime();
@@ -85794,7 +88476,7 @@ function generateEventForm(event = new CalendarEvent(), settings) {
     setCateringTime();
   });
   form.controls.date.valueChanges.subscribe((date) => {
-    var _a9, _b3;
+    var _a10, _b4;
     form.patchValue({
       date_end: roundToNearestMinutes(addMinutes(date, form.value.duration), { nearestTo: 5, roundingMethod: "ceil" }).valueOf()
     }, { emitEvent: false });
@@ -85806,7 +88488,7 @@ function generateEventForm(event = new CalendarEvent(), settings) {
         }).valueOf()
       }, { emitEvent: false });
     }
-    if (((_a9 = form.value.recurrence) == null ? void 0 : _a9._pattern) !== "custom_display" && ((_b3 = form.value.recurrence) == null ? void 0 : _b3._pattern) !== "none") {
+    if (((_a10 = form.value.recurrence) == null ? void 0 : _a10._pattern) !== "custom_display" && ((_b4 = form.value.recurrence) == null ? void 0 : _b4._pattern) !== "none") {
       form.patchValue({
         recurrence: __spreadProps(__spreadValues({}, form.value.recurrence), {
           days_of_week: [new Date(date).getDay()]
@@ -85816,13 +88498,13 @@ function generateEventForm(event = new CalendarEvent(), settings) {
     setCateringTime();
   });
   form.controls.catering.valueChanges.subscribe((_3) => {
-    var _a9, _b3;
+    var _a10, _b4;
     const catering = form.getRawValue().catering || [];
     if ((catering == null ? void 0 : catering.length) && ((settings == null ? void 0 : settings.get("app.events.catering_notes_required")) || settings.value("require_catering_notes"))) {
-      (_a9 = form.get("catering_notes")) == null ? void 0 : _a9.setValidators([Validators.required]);
+      (_a10 = form.get("catering_notes")) == null ? void 0 : _a10.setValidators([Validators.required]);
       form.get("catering_notes").patchValue(form.value.catering_notes);
     } else {
-      (_b3 = form.get("catering_notes")) == null ? void 0 : _b3.clearValidators();
+      (_b4 = form.get("catering_notes")) == null ? void 0 : _b4.clearValidators();
       form.get("catering_notes").setErrors(null);
     }
     form.updateValueAndValidity();
@@ -85864,23 +88546,23 @@ function newCalendarEventFromBooking(booking) {
 }
 
 // node_modules/@placeos/svg-viewer/dist/index.es.js
-var ue = function(e2, n2) {
-  return ue = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r2) {
+var fe2 = function(e2, n2) {
+  return fe2 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r2) {
     t.__proto__ = r2;
   } || function(t, r2) {
     for (var o in r2) Object.prototype.hasOwnProperty.call(r2, o) && (t[o] = r2[o]);
-  }, ue(e2, n2);
+  }, fe2(e2, n2);
 };
-function R3(e2, n2) {
+function V3(e2, n2) {
   if (typeof n2 != "function" && n2 !== null)
     throw new TypeError("Class extends value " + String(n2) + " is not a constructor or null");
-  ue(e2, n2);
+  fe2(e2, n2);
   function t() {
     this.constructor = e2;
   }
   e2.prototype = n2 === null ? Object.create(n2) : (t.prototype = n2.prototype, new t());
 }
-function I4(e2) {
+function q3(e2) {
   var n2 = typeof Symbol == "function" && Symbol.iterator, t = n2 && e2[n2], r2 = 0;
   if (t) return t.call(e2);
   if (e2 && typeof e2.length == "number") return {
@@ -85907,7 +88589,7 @@ function Y4(e2, n2) {
   }
   return i;
 }
-function ne(e2, n2, t) {
+function re(e2, n2, t) {
   if (t || arguments.length === 2) for (var r2 = 0, o = n2.length, i; r2 < o; r2++)
     (i || !(r2 in n2)) && (i || (i = Array.prototype.slice.call(n2, 0, r2)), i[r2] = n2[r2]);
   return e2.concat(i || Array.prototype.slice.call(n2));
@@ -85915,13 +88597,13 @@ function ne(e2, n2, t) {
 function h(e2) {
   return typeof e2 == "function";
 }
-function je(e2) {
+function Fe(e2) {
   var n2 = function(r2) {
     Error.call(r2), r2.stack = new Error().stack;
   }, t = e2(n2);
   return t.prototype = Object.create(Error.prototype), t.prototype.constructor = t, t;
 }
-var ae2 = je(function(e2) {
+var le2 = Fe(function(e2) {
   return function(t) {
     e2(this), this.message = t ? t.length + ` errors occurred during unsubscription:
 ` + t.map(function(r2, o) {
@@ -85930,7 +88612,7 @@ var ae2 = je(function(e2) {
   `) : "", this.name = "UnsubscriptionError", this.errors = t;
   };
 });
-function fe2(e2, n2) {
+function he2(e2, n2) {
   if (e2) {
     var t = e2.indexOf(n2);
     0 <= t && e2.splice(t, 1);
@@ -85948,7 +88630,7 @@ var G3 = function() {
       if (s)
         if (this._parentage = null, Array.isArray(s))
           try {
-            for (var c3 = I4(s), a = c3.next(); !a.done; a = c3.next()) {
+            for (var c3 = q3(s), a = c3.next(); !a.done; a = c3.next()) {
               var l2 = a.value;
               l2.remove(this);
             }
@@ -85968,18 +88650,18 @@ var G3 = function() {
         try {
           u9();
         } catch (y2) {
-          i = y2 instanceof ae2 ? y2.errors : [y2];
+          i = y2 instanceof le2 ? y2.errors : [y2];
         }
       var v3 = this._finalizers;
       if (v3) {
         this._finalizers = null;
         try {
-          for (var d2 = I4(v3), f2 = d2.next(); !f2.done; f2 = d2.next()) {
+          for (var d2 = q3(v3), f2 = d2.next(); !f2.done; f2 = d2.next()) {
             var p = f2.value;
             try {
               Ce(p);
             } catch (y2) {
-              i = i ?? [], y2 instanceof ae2 ? i = ne(ne([], Y4(i)), Y4(y2.errors)) : i.push(y2);
+              i = i ?? [], y2 instanceof le2 ? i = re(re([], Y4(i)), Y4(y2.errors)) : i.push(y2);
             }
           }
         } catch (y2) {
@@ -85993,7 +88675,7 @@ var G3 = function() {
         }
       }
       if (i)
-        throw new ae2(i);
+        throw new le2(i);
     }
   }, e2.prototype.add = function(n2) {
     var t;
@@ -86016,16 +88698,16 @@ var G3 = function() {
     this._parentage = Array.isArray(t) ? (t.push(n2), t) : t ? [t, n2] : n2;
   }, e2.prototype._removeParent = function(n2) {
     var t = this._parentage;
-    t === n2 ? this._parentage = null : Array.isArray(t) && fe2(t, n2);
+    t === n2 ? this._parentage = null : Array.isArray(t) && he2(t, n2);
   }, e2.prototype.remove = function(n2) {
     var t = this._finalizers;
-    t && fe2(t, n2), n2 instanceof e2 && n2._removeParent(this);
+    t && he2(t, n2), n2 instanceof e2 && n2._removeParent(this);
   }, e2.EMPTY = function() {
     var n2 = new e2();
     return n2.closed = true, n2;
   }(), e2;
 }();
-var Fe = G3.EMPTY;
+var je = G3.EMPTY;
 function Be(e2) {
   return e2 instanceof G3 || e2 && "closed" in e2 && h(e2.remove) && h(e2.add) && h(e2.unsubscribe);
 }
@@ -86039,7 +88721,7 @@ var bt3 = {
   setTimeout: function(e2, n2) {
     for (var t = [], r2 = 2; r2 < arguments.length; r2++)
       t[r2 - 2] = arguments[r2];
-    return setTimeout.apply(void 0, ne([e2, n2], Y4(t)));
+    return setTimeout.apply(void 0, re([e2, n2], Y4(t)));
   },
   clearTimeout: function(e2) {
     return clearTimeout(e2);
@@ -86051,19 +88733,19 @@ function Ne(e2) {
     throw e2;
   });
 }
-function he2() {
+function de2() {
 }
-function ee(e2) {
+function te2(e2) {
   e2();
 }
-var be2 = function(e2) {
-  R3(n2, e2);
+var we2 = function(e2) {
+  V3(n2, e2);
   function n2(t) {
     var r2 = e2.call(this) || this;
     return r2.isStopped = false, t ? (r2.destination = t, Be(t) && t.add(r2)) : r2.destination = St3, r2;
   }
   return n2.create = function(t, r2, o) {
-    return new de2(t, r2, o);
+    return new ye(t, r2, o);
   }, n2.prototype.next = function(t) {
     this.isStopped || this._next(t);
   }, n2.prototype.error = function(t) {
@@ -86098,7 +88780,7 @@ var wt3 = function() {
       try {
         t.next(n2);
       } catch (r2) {
-        Z4(r2);
+        K3(r2);
       }
   }, e2.prototype.error = function(n2) {
     var t = this.partialObserver;
@@ -86106,22 +88788,22 @@ var wt3 = function() {
       try {
         t.error(n2);
       } catch (r2) {
-        Z4(r2);
+        K3(r2);
       }
     else
-      Z4(n2);
+      K3(n2);
   }, e2.prototype.complete = function() {
     var n2 = this.partialObserver;
     if (n2.complete)
       try {
         n2.complete();
       } catch (t) {
-        Z4(t);
+        K3(t);
       }
   }, e2;
 }();
-var de2 = function(e2) {
-  R3(n2, e2);
+var ye = function(e2) {
+  V3(n2, e2);
   function n2(t, r2, o) {
     var i = e2.call(this) || this, s;
     return h(t) || !t ? s = {
@@ -86131,8 +88813,8 @@ var de2 = function(e2) {
     } : s = t, i.destination = new wt3(s), i;
   }
   return n2;
-}(be2);
-function Z4(e2) {
+}(we2);
+function K3(e2) {
   Ne(e2);
 }
 function xt3(e2) {
@@ -86140,11 +88822,11 @@ function xt3(e2) {
 }
 var St3 = {
   closed: true,
-  next: he2,
+  next: de2,
   error: xt3,
-  complete: he2
+  complete: de2
 };
-var we2 = function() {
+var xe2 = function() {
   return typeof Symbol == "function" && Symbol.observable || "@@observable";
 }();
 function Ue(e2) {
@@ -86165,8 +88847,8 @@ var g2 = function() {
     var t = new e2();
     return t.source = this, t.operator = n2, t;
   }, e2.prototype.subscribe = function(n2, t, r2) {
-    var o = this, i = Lt3(n2) ? n2 : new de2(n2, t, r2);
-    return ee(function() {
+    var o = this, i = Lt3(n2) ? n2 : new ye(n2, t, r2);
+    return te2(function() {
       var s = o, c3 = s.operator, a = s.source;
       i.add(c3 ? c3.call(i, a) : a ? o._subscribe(i) : o._trySubscribe(i));
     }), i;
@@ -86179,7 +88861,7 @@ var g2 = function() {
   }, e2.prototype.forEach = function(n2, t) {
     var r2 = this;
     return t = Oe2(t), new t(function(o, i) {
-      var s = new de2({
+      var s = new ye({
         next: function(c3) {
           try {
             n2(c3);
@@ -86195,7 +88877,7 @@ var g2 = function() {
   }, e2.prototype._subscribe = function(n2) {
     var t;
     return (t = this.source) === null || t === void 0 ? void 0 : t.subscribe(n2);
-  }, e2.prototype[we2] = function() {
+  }, e2.prototype[xe2] = function() {
     return this;
   }, e2.prototype.pipe = function() {
     for (var n2 = [], t = 0; t < arguments.length; t++)
@@ -86225,12 +88907,12 @@ function At3(e2) {
   return e2 && h(e2.next) && h(e2.error) && h(e2.complete);
 }
 function Lt3(e2) {
-  return e2 && e2 instanceof be2 || At3(e2) && Be(e2);
+  return e2 && e2 instanceof we2 || At3(e2) && Be(e2);
 }
 function $t3(e2) {
   return h(e2 == null ? void 0 : e2.lift);
 }
-function V3(e2) {
+function R3(e2) {
   return function(n2) {
     if ($t3(n2))
       return n2.lift(function(t) {
@@ -86247,7 +88929,7 @@ function O3(e2, n2, t, r2, o) {
   return new zt3(e2, n2, t, r2, o);
 }
 var zt3 = function(e2) {
-  R3(n2, e2);
+  V3(n2, e2);
   function n2(t, r2, o, i, s, c3) {
     var a = e2.call(this, t) || this;
     return a.onFinalize = s, a.shouldUnsubscribe = c3, a._next = r2 ? function(l2) {
@@ -86281,32 +88963,32 @@ var zt3 = function(e2) {
       e2.prototype.unsubscribe.call(this), !r2 && ((t = this.onFinalize) === null || t === void 0 || t.call(this));
     }
   }, n2;
-}(be2);
-var Ct2 = je(function(e2) {
+}(we2);
+var Ct2 = Fe(function(e2) {
   return function() {
     e2(this), this.name = "ObjectUnsubscribedError", this.message = "object unsubscribed";
   };
 });
-var xe2 = function(e2) {
-  R3(n2, e2);
+var Se2 = function(e2) {
+  V3(n2, e2);
   function n2() {
     var t = e2.call(this) || this;
     return t.closed = false, t.currentObservers = null, t.observers = [], t.isStopped = false, t.hasError = false, t.thrownError = null, t;
   }
   return n2.prototype.lift = function(t) {
-    var r2 = new Me(this, this);
+    var r2 = new Te(this, this);
     return r2.operator = t, r2;
   }, n2.prototype._throwIfClosed = function() {
     if (this.closed)
       throw new Ct2();
   }, n2.prototype.next = function(t) {
     var r2 = this;
-    ee(function() {
+    te2(function() {
       var o, i;
       if (r2._throwIfClosed(), !r2.isStopped) {
         r2.currentObservers || (r2.currentObservers = Array.from(r2.observers));
         try {
-          for (var s = I4(r2.currentObservers), c3 = s.next(); !c3.done; c3 = s.next()) {
+          for (var s = q3(r2.currentObservers), c3 = s.next(); !c3.done; c3 = s.next()) {
             var a = c3.value;
             a.next(t);
           }
@@ -86323,7 +89005,7 @@ var xe2 = function(e2) {
     });
   }, n2.prototype.error = function(t) {
     var r2 = this;
-    ee(function() {
+    te2(function() {
       if (r2._throwIfClosed(), !r2.isStopped) {
         r2.hasError = r2.isStopped = true, r2.thrownError = t;
         for (var o = r2.observers; o.length; )
@@ -86332,7 +89014,7 @@ var xe2 = function(e2) {
     });
   }, n2.prototype.complete = function() {
     var t = this;
-    ee(function() {
+    te2(function() {
       if (t._throwIfClosed(), !t.isStopped) {
         t.isStopped = true;
         for (var r2 = t.observers; r2.length; )
@@ -86354,8 +89036,8 @@ var xe2 = function(e2) {
     return this._throwIfClosed(), this._checkFinalizedStatuses(t), this._innerSubscribe(t);
   }, n2.prototype._innerSubscribe = function(t) {
     var r2 = this, o = this, i = o.hasError, s = o.isStopped, c3 = o.observers;
-    return i || s ? Fe : (this.currentObservers = null, c3.push(t), new G3(function() {
-      r2.currentObservers = null, fe2(c3, t);
+    return i || s ? je : (this.currentObservers = null, c3.push(t), new G3(function() {
+      r2.currentObservers = null, he2(c3, t);
     }));
   }, n2.prototype._checkFinalizedStatuses = function(t) {
     var r2 = this, o = r2.hasError, i = r2.thrownError, s = r2.isStopped;
@@ -86364,11 +89046,11 @@ var xe2 = function(e2) {
     var t = new g2();
     return t.source = this, t;
   }, n2.create = function(t, r2) {
-    return new Me(t, r2);
+    return new Te(t, r2);
   }, n2;
 }(g2);
-var Me = function(e2) {
-  R3(n2, e2);
+var Te = function(e2) {
+  V3(n2, e2);
   function n2(t, r2) {
     var o = e2.call(this) || this;
     return o.destination = t, o.source = r2, o;
@@ -86384,11 +89066,11 @@ var Me = function(e2) {
     (r2 = (t = this.destination) === null || t === void 0 ? void 0 : t.complete) === null || r2 === void 0 || r2.call(t);
   }, n2.prototype._subscribe = function(t) {
     var r2, o;
-    return (o = (r2 = this.source) === null || r2 === void 0 ? void 0 : r2.subscribe(t)) !== null && o !== void 0 ? o : Fe;
+    return (o = (r2 = this.source) === null || r2 === void 0 ? void 0 : r2.subscribe(t)) !== null && o !== void 0 ? o : je;
   }, n2;
-}(xe2);
+}(Se2);
 var Ye2 = function(e2) {
-  R3(n2, e2);
+  V3(n2, e2);
   function n2(t) {
     var r2 = e2.call(this) || this;
     return r2._value = t, r2;
@@ -86410,7 +89092,7 @@ var Ye2 = function(e2) {
   }, n2.prototype.next = function(t) {
     e2.prototype.next.call(this, this._value = t);
   }, n2;
-}(xe2);
+}(Se2);
 var Ot3 = new g2(function(e2) {
   return e2.complete();
 });
@@ -86418,9 +89100,9 @@ function kt3() {
   return typeof Symbol != "function" || !Symbol.iterator ? "@@iterator" : Symbol.iterator;
 }
 var Xe2 = kt3();
-var Jt2 = Array.isArray;
+var Wt2 = Array.isArray;
 function ot3(e2, n2) {
-  return V3(function(t, r2) {
+  return R3(function(t, r2) {
     var o = 0;
     t.subscribe(O3(r2, function(i) {
       return e2.call(n2, i, o++) && r2.next(i);
@@ -86429,7 +89111,7 @@ function ot3(e2, n2) {
 }
 var N4 = {};
 var E3 = {};
-function M4(e2, n2, t = 300) {
+function T3(e2, n2, t = 300) {
   if (e2 && n2 && n2 instanceof Function)
     it3(e2), N4[e2] = setTimeout(() => {
       n2(), delete N4[e2];
@@ -86454,7 +89136,7 @@ function b2(e2, n2, t, r2 = "debug", o = false, i = "SVG VIEWER") {
     t ? console[r2](`%c[${i}]%c[${e2}] %c${n2}`, ...s, t) : console[r2](`%c[${i}]%c[${e2}] %c${n2}`, ...s);
   }
 }
-function Ae2(e2) {
+function W3(e2) {
   let n2 = e2.replace(/[!"#$%&'()*+,.\/;<=>?@[\\\]^`{|}~]/g, "\\$&");
   const t = n2.split(" ");
   for (const r2 of t)
@@ -86462,8 +89144,8 @@ function Ae2(e2) {
   return n2 = t.join(" "), n2;
 }
 function un2(e2, n2, t) {
-  var _a8, _b2;
-  const r2 = (_a8 = e2.element) == null ? void 0 : _a8.querySelector(".svg-viewer__svg-overlays"), o = (_b2 = e2.element) == null ? void 0 : _b2.querySelector("svg"), i = o == null ? void 0 : o.querySelector(`#${Ae2(n2)}`);
+  var _a9, _b3;
+  const r2 = (_a9 = e2.element) == null ? void 0 : _a9.querySelector(".svg-viewer__svg-overlays"), o = (_b3 = e2.element) == null ? void 0 : _b3.querySelector("svg"), i = o == null ? void 0 : o.querySelector(`#${W3(n2)}`);
   if (i && o && r2) {
     const s = t || (r2 == null ? void 0 : r2.getBoundingClientRect()) || {}, c3 = (i == null ? void 0 : i.getBoundingClientRect()) || {};
     return {
@@ -86648,8 +89330,8 @@ var m = class _m {
 };
 if (m.hashStr("hello") !== "5d41402abc4b2a76b9719d911017c592")
   throw new Error("Md5 self test failed.");
-var Q4 = { top: 0, left: 0, height: 0, width: 0 };
-var te2 = class {
+var ee = { top: 0, left: 0, height: 0, width: 0 };
+var ne = class {
   /** Unique Identifier for the Viewer */
   id;
   /** URL associated with the map data */
@@ -86702,15 +89384,15 @@ var te2 = class {
     this.svg_data.includes(`id="${n2}"`);
   }
   constructor(n2) {
-    var _a8, _b2, _c, _d;
-    if (this.id = n2.id || `map-${Math.floor(Math.random() * 999999)}`, this.url = n2.url || `local-${m.hashAsciiStr(n2.svg_data || "")}`, this.element = n2.element || null, this.labels = n2.labels || [], this.features = n2.features || [], this.actions = n2.actions || [], this.styles = n2.styles || {}, this.svg_data = n2.svg_data || "", this.content_ratio = n2.content_ratio || { x: 1, y: 1 }, this.zoom = n2.zoom || 1, this.center = { x: ((_a8 = n2.center) == null ? void 0 : _a8.x) ?? 0.5, y: ((_b2 = n2.center) == null ? void 0 : _b2.y) ?? 0.5 }, this.rotate = n2.rotate || 0, this.ratio = n2.ratio || 1, this.svg_ratio = n2.svg_ratio || 1, this.max_resolution = n2.max_resolution || window.innerWidth * window.innerHeight * 10, this.focus = n2.focus || null, this.options = n2.options || {}, this.mappings = n2.mappings || {}, this.box = {
-      top: (n2.box || Q4).top,
-      left: (n2.box || Q4).left,
-      height: (n2.box || Q4).height,
-      width: (n2.box || Q4).width
+    var _a9, _b3, _c10, _d2;
+    if (this.id = n2.id || `map-${Math.floor(Math.random() * 999999)}`, this.url = n2.url || `local-${m.hashAsciiStr(n2.svg_data || "")}`, this.element = n2.element || null, this.labels = n2.labels || [], this.features = n2.features || [], this.actions = n2.actions || [], this.styles = n2.styles || {}, this.svg_data = n2.svg_data || "", this.content_ratio = n2.content_ratio || { x: 1, y: 1 }, this.zoom = n2.zoom || 1, this.center = { x: ((_a9 = n2.center) == null ? void 0 : _a9.x) ?? 0.5, y: ((_b3 = n2.center) == null ? void 0 : _b3.y) ?? 0.5 }, this.rotate = n2.rotate || 0, this.ratio = n2.ratio || 1, this.svg_ratio = n2.svg_ratio || 1, this.max_resolution = n2.max_resolution || window.innerWidth * window.innerHeight * 10, this.focus = n2.focus || null, this.options = n2.options || {}, this.mappings = n2.mappings || {}, this.box = {
+      top: (n2.box || ee).top,
+      left: (n2.box || ee).left,
+      height: (n2.box || ee).height,
+      width: (n2.box || ee).width
     }, this.desired_zoom = n2.desired_zoom || n2.zoom || this.zoom, this.desired_center = {
-      x: ((_c = n2.desired_center) == null ? void 0 : _c.x) || this.center.x,
-      y: ((_d = n2.desired_center) == null ? void 0 : _d.y) || this.center.y
+      x: ((_c10 = n2.desired_center) == null ? void 0 : _c10.x) || this.center.x,
+      y: ((_d2 = n2.desired_center) == null ? void 0 : _d2.y) || this.center.y
     }, this.updated_count = (n2.updated_count || 0) + 1, this.zoom !== this.desired_zoom) {
       const t = this.desired_zoom - this.zoom >= 0 ? 1 : -1, r2 = Math.min(0.05, Math.abs(this.desired_zoom - this.zoom)), o = Math.round(r2 / Math.abs(this.desired_zoom - this.zoom) * 1e3) / 1e3;
       this.zoom = r2 === 0.05 ? this.zoom + t * r2 : this.desired_zoom, this.center = {
@@ -86727,31 +89409,31 @@ var te2 = class {
     this.needs_update = this.desired_zoom !== this.zoom || this.desired_center.x !== this.center.x || this.desired_center.y !== this.center.y, this.use_gpu = (n2 == null ? void 0 : n2.use_gpu) ?? true;
   }
 };
-var j2 = new Ye2([]);
-var ut3 = new xe2();
+var F14 = new Ye2([]);
+var ut3 = new Se2();
 var pn2 = ut3.pipe(ot3((e2) => e2 === "resize"));
 function x2(e2, n2) {
-  if (e2 = W3().find((o) => o.id === (e2 instanceof te2 ? e2.id : e2)), !(e2 instanceof te2)) return null;
+  if (e2 = X4().find((o) => o.id === (e2 instanceof ne ? e2.id : e2)), !(e2 instanceof ne)) return null;
   delete n2.url;
-  const r2 = new te2(__spreadValues(__spreadValues({}, e2), n2));
-  return ft3(r2), r2.needs_update && M4(`${e2.id}_updating`, () => x2(r2, {}), 16), r2;
+  const r2 = new ne(__spreadValues(__spreadValues({}, e2), n2));
+  return ft3(r2), r2.needs_update && T3(`${e2.id}_updating`, () => x2(r2, {}), 16), r2;
 }
 function ft3(e2) {
-  const n2 = W3().filter((t) => t.id !== e2.id);
-  n2.push(e2), j2.next(n2);
+  const n2 = X4().filter((t) => t.id !== e2.id);
+  n2.push(e2), F14.next(n2);
 }
-function W3() {
-  return j2.getValue();
+function X4() {
+  return F14.getValue();
 }
 var Pe2 = new Ye2({});
 var ke2 = {};
-var X4 = false;
-var se2 = false;
+var Z4 = false;
+var ce2 = false;
 var P4;
 var A4;
 var k2;
 var _2;
-var q3;
+var I4;
 window.addEventListener("blur", () => H4());
 function xn2(e2) {
   const n2 = JSON.stringify(e2.focus);
@@ -86769,30 +89451,30 @@ function xn2(e2) {
   }
 }
 function H4() {
-  b2("INPUT", "Ending pinch/pan..."), it3("pan_start"), X4 = false, se2 = false, A4 && window.removeEventListener("mousemove", A4), k2 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), q3 && window.removeEventListener("touchend", q3), A4 = k2 = _2 = q3 = P4 = null;
+  b2("INPUT", "Ending pinch/pan..."), it3("pan_start"), Z4 = false, ce2 = false, A4 && window.removeEventListener("mousemove", A4), k2 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), I4 && window.removeEventListener("touchend", I4), A4 = k2 = _2 = I4 = P4 = null;
 }
-var F14 = {};
-var ve2 = {};
+var j2 = {};
 var pe2 = {};
 var me2 = {};
+var ge2 = {};
 var D3 = {};
 var B4 = {};
 st2(
   "on_resize",
   pn2.subscribe(() => {
-    const e2 = W3();
+    const e2 = X4();
     for (const n2 of e2)
       try {
-        M4(`resize-${n2.id}`, () => yt3(n2));
+        T3(`resize-${n2.id}`, () => yt3(n2));
       } catch (t) {
         console.warn(t);
       }
   })
 );
 function dt3(e2) {
-  return F14[e2.id] || (F14[e2.id] = new Promise((n2) => {
+  return j2[e2.id] || (j2[e2.id] = new Promise((n2) => {
     const t = requestAnimationFrame(() => {
-      if (!F14[e2.id]) return;
+      if (!j2[e2.id]) return;
       const r2 = e2.element;
       if (!r2) throw new Error("No element set on viewer");
       const o = r2.querySelector("style");
@@ -86803,11 +89485,11 @@ function dt3(e2) {
       if (!s || !o)
         throw new Error("Viewer is not setup yet.");
       const a = (e2.center.x - 0.5) * (100 * e2.zoom * e2.svg_ratio), l2 = (e2.center.y - 0.5) * (100 * e2.zoom * e2.svg_ratio), u9 = e2.use_gpu ? `translate3d(${a}%, ${l2}%, 0)` : `translate(${a}%, ${l2}%)`;
-      s.style.transform = `${u9} ${c3} rotate(${e2.rotate}deg)`, i += `#${e2.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e2.rotate}deg) scale(${1 / e2.zoom * (1 / e2.svg_ratio)}); }`, i += `#${e2.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e2.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, ge2(e2), xn2(e2), Le2(e2), delete F14[e2.id], cancelAnimationFrame(t), n2();
+      s.style.transform = `${u9} ${c3} rotate(${e2.rotate}deg)`, i += `#${e2.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e2.rotate}deg) scale(${1 / e2.zoom * (1 / e2.svg_ratio)}); }`, i += `#${e2.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e2.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, _e2(e2), xn2(e2), Le2(e2), delete j2[e2.id], cancelAnimationFrame(t), n2();
     });
-  })), F14[e2.id];
+  })), j2[e2.id];
 }
-async function ge2(e2) {
+async function _e2(e2) {
   if ((JSON.stringify(__spreadValues({}, e2.styles)) || "").localeCompare(D3[e2.id])) {
     const t = e2.element;
     if (!t) throw new Error("No element set on viewer");
@@ -86817,7 +89499,7 @@ async function ge2(e2) {
     if (!r2) throw new Error("No iframe created for viewer");
     if (!r2.contentWindow) {
       r2.onload = () => {
-        setTimeout(() => ge2(e2), 50), setTimeout(() => ge2(e2), 500);
+        setTimeout(() => _e2(e2), 50), setTimeout(() => _e2(e2), 500);
       };
       return;
     }
@@ -86832,7 +89514,7 @@ async function ge2(e2) {
 }
 async function yt3(e2) {
   return new Promise((n2) => {
-    B4[e2.id] || (B4[e2.id] = []), B4[e2.id].push(n2), M4(
+    B4[e2.id] || (B4[e2.id] = []), B4[e2.id].push(n2), T3(
       `resize-${e2.id}`,
       () => {
         const t = e2.element;
@@ -86840,7 +89522,7 @@ async function yt3(e2) {
         const r2 = t.querySelector(
           ".svg-viewer__view-container"
         ), o = t.querySelector(".svg-viewer__svg-overlays"), i = t.querySelector(
-          `#${e2.id}`
+          `#${W3(e2.id)}`
         ), s = t.querySelector(
           ".svg-viewer"
         ), c3 = t.querySelector(
@@ -86849,8 +89531,8 @@ async function yt3(e2) {
         if (!o || !c3 || !a || !r2)
           throw new Error("Viewer elements not ready yet.");
         requestAnimationFrame(async () => {
-          var _a8, _b2;
-          const v3 = l2.height / l2.width, d2 = ((_b2 = (_a8 = c3.firstElementChild) == null ? void 0 : _a8.viewBox) == null ? void 0 : _b2.baseVal) || {}, f2 = d2.height / d2.width;
+          var _a9, _b3;
+          const v3 = l2.height / l2.width, d2 = ((_b3 = (_a9 = c3.firstElementChild) == null ? void 0 : _a9.viewBox) == null ? void 0 : _b3.baseVal) || {}, f2 = d2.height / d2.width;
           c3.firstElementChild && (c3.firstElementChild.style.width = "200%");
           const p = (l2.width - 32) * Math.min(1, v3 / f2), y2 = { width: p, height: p * f2 };
           o.style.width = d2.width + "px", o.style.height = d2.height + "px", r2.style.width = d2.width + "px", r2.style.height = d2.height + "px", a.style.width = d2.width + "px", a.style.height = d2.height + "px", a.width = `${d2.width}`, a.height = `${d2.height}`;
@@ -86869,7 +89551,7 @@ async function yt3(e2) {
             box: u9,
             content_ratio: $e2
           });
-          !ze || (e2 = ze, !await dt3(e2).catch((ce2) => (console.warn(ce2), false))) || (B4[e2.id].forEach((ce2) => ce2()), B4[e2.id] = []);
+          !ze || (e2 = ze, !await dt3(e2).catch((ae2) => (console.warn(ae2), false))) || (B4[e2.id].forEach((ae2) => ae2()), B4[e2.id] = []);
         });
       },
       100
@@ -86877,30 +89559,30 @@ async function yt3(e2) {
   });
 }
 function Le2(e2) {
-  var _a8, _b2;
-  const n2 = (_a8 = e2.element) == null ? void 0 : _a8.querySelector("svg");
+  var _a9, _b3;
+  const n2 = (_a9 = e2.element) == null ? void 0 : _a9.querySelector("svg");
   if (!Object.keys(e2.mappings || {}).length) return;
-  const t = (_b2 = e2.element) == null ? void 0 : _b2.querySelector(
+  const t = (_b3 = e2.element) == null ? void 0 : _b3.querySelector(
     ".svg-viewer__svg-overlays"
   );
   if (!t || !n2) return;
   if (!t.getBoundingClientRect().width)
-    return M4(
+    return T3(
       `${e2.id}|render-overlays`,
       () => Le2(e2),
       50
     );
   requestAnimationFrame(() => {
-    Pn2(e2), qn2(e2), kn2(e2);
+    Pn2(e2), In2(e2), kn2(e2);
   });
 }
 function Pn2(e2) {
-  var _a8, _b2, _c, _d;
+  var _a9, _b3, _c10, _d2;
   const n2 = e2.labels.filter(
     (r2) => !r2.zoom_level || r2.zoom_level <= e2.zoom
   ), t = JSON.stringify(n2);
-  if (t !== ve2[e2.id]) {
-    const r2 = (_a8 = e2.element) == null ? void 0 : _a8.querySelector(
+  if (t !== pe2[e2.id]) {
+    const r2 = (_a9 = e2.element) == null ? void 0 : _a9.querySelector(
       ".svg-viewer__svg-overlays"
     );
     if (!r2) return;
@@ -86909,25 +89591,25 @@ function Pn2(e2) {
     ).filter((i) => i.parentNode).forEach((i) => r2.removeChild(i));
     for (const i of n2) {
       let s = { x: 0, y: 0 }, c3 = "~Nothing~";
-      typeof i.location == "string" ? (s = e2.mappings[i.location] || s, c3 = `#${i.location}`) : (((_b2 = i.location) == null ? void 0 : _b2.y) || ((_c = i.location) == null ? void 0 : _c.x)) && (s = i.location, c3 = `loc-${s.x}-${s.y}`);
+      typeof i.location == "string" ? (s = e2.mappings[i.location] || s, c3 = `#${i.location}`) : (((_b3 = i.location) == null ? void 0 : _b3.y) || ((_c10 = i.location) == null ? void 0 : _c10.x)) && (s = i.location, c3 = `loc-${s.x}-${s.y}`);
       const a = document.createElement("div");
       a.setAttribute("label", "true"), a.classList.add("svg-viewer__svg-overlay-item"), a.classList.add("label"), a.style.top = `${s.y * 100}%`, a.style.left = `${s.x * 100}%`;
       const l2 = document.createElement("div"), u9 = document.createElement("label");
-      u9.classList.add("svg-viewer__label"), u9.setAttribute("for", c3), ((_d = i.css_class) == null ? void 0 : _d.length) && u9.classList.add(...i.css_class), i.z_index && (a.style.zIndex = `${i.z_index}`), u9.textContent = i.content, l2.appendChild(u9), a.appendChild(l2), r2.appendChild(a);
+      u9.classList.add("svg-viewer__label"), u9.setAttribute("for", c3), ((_d2 = i.css_class) == null ? void 0 : _d2.length) && u9.classList.add(...i.css_class), i.z_index && (a.style.zIndex = `${i.z_index}`), u9.textContent = i.content, l2.appendChild(u9), a.appendChild(l2), r2.appendChild(a);
     }
-    b2("RENDER", `Added ${e2.labels.length} labels to view.`), ve2[e2.id] = t;
+    b2("RENDER", `Added ${e2.labels.length} labels to view.`), pe2[e2.id] = t;
   }
 }
 function kn2(e2) {
-  var _a8, _b2, _c;
+  var _a9, _b3, _c10;
   const n2 = JSON.stringify(
     e2.features.map((t) => __spreadProps(__spreadValues({}, t), {
       content: "",
       data: fn2(t.data)
     }))
   );
-  if (n2 !== pe2[e2.id]) {
-    const t = (_a8 = e2.element) == null ? void 0 : _a8.querySelector(
+  if (n2 !== me2[e2.id]) {
+    const t = (_a9 = e2.element) == null ? void 0 : _a9.querySelector(
       ".svg-viewer__svg-overlays"
     );
     if (!t) return console.log("Unable to get overlay element.");
@@ -86942,23 +89624,23 @@ function kn2(e2) {
         continue;
       let s = { x: 0, y: 0 }, c3 = { w: 0, h: 0 };
       const a = document.createElement("button");
-      typeof i.location == "string" ? (a.id = `${i.location}`, s = e2.mappings[i.location] || s, (i.hover || i.full_size) && (c3 = e2.mappings[i.location] || c3)) : (((_b2 = i.location) == null ? void 0 : _b2.y) || ((_c = i.location) == null ? void 0 : _c.x)) && (s = i.location), !(!s.x && !s.y) && (a.classList.add("svg-viewer__svg-overlay-item"), a.setAttribute("feature", "true"), a.setAttribute(
+      typeof i.location == "string" ? (a.id = `${i.location}`, s = e2.mappings[i.location] || s, (i.hover || i.full_size) && (c3 = e2.mappings[i.location] || c3)) : (((_b3 = i.location) == null ? void 0 : _b3.y) || ((_c10 = i.location) == null ? void 0 : _c10.x)) && (s = i.location), !(!s.x && !s.y) && (a.classList.add("svg-viewer__svg-overlay-item"), a.setAttribute("feature", "true"), a.setAttribute(
         "track-id",
         `${i.track_id || "none"}`
       ), a.classList.add("feature"), i.z_index && (a.style.zIndex = `${i.z_index}`), i.hover && a.classList.add(
         "svg-viewer__svg-overlay-item__hover"
       ), a.style.top = `${s.y * 100}%`, a.style.left = `${s.x * 100}%`, c3.w || c3.h ? (a.style.width = `${c3.w * 100}%`, a.style.height = `${c3.h * 100}%`) : (a.style.width = "1%", a.style.height = `${1 / e2.ratio}%`), a.style.transform = "translate(-50%, -50%)", i.content instanceof Node && a.appendChild(i.content), t.appendChild(a));
     }
-    b2("RENDER", `Added ${e2.features.length} features to view.`), pe2[e2.id] = n2;
+    b2("RENDER", `Added ${e2.features.length} features to view.`), me2[e2.id] = n2;
   }
 }
-function qn2(e2) {
-  var _a8;
+function In2(e2) {
+  var _a9;
   const n2 = JSON.stringify(
     e2.actions.map((t) => __spreadProps(__spreadValues({}, t), { callback: "" }))
   );
-  if (n2 !== me2[e2.id]) {
-    const t = (_a8 = e2.element) == null ? void 0 : _a8.querySelector(
+  if (n2 !== ge2[e2.id]) {
+    const t = (_a9 = e2.element) == null ? void 0 : _a9.querySelector(
       ".svg-viewer__svg-overlays"
     );
     if (!t) return;
@@ -86966,13 +89648,15 @@ function qn2(e2) {
       t.querySelectorAll(".action-zone")
     ).filter((o) => o.parentNode && t.contains(o.parentNode)).forEach((o) => t.removeChild(o));
     for (const o of e2.actions) {
-      if (!o.action || !o.id || o.id === "*" || o.zone === false || t.querySelector(`#${o.id}`)) continue;
+      if (!o.action || !o.id || o.id === "*" || o.zone === false || t.querySelector(
+        `#${W3(o.id)}`
+      )) continue;
       const s = document.createElement("button");
       s.id = `${o.id}`;
       const c3 = e2.mappings[o.id] || { x: 0, y: 0 }, a = e2.mappings[o.id] || { w: 0, h: 0 };
       s.classList.add("svg-viewer__svg-overlay-item"), s.classList.add("action-zone"), s.style.top = `${c3.y * 100}%`, s.style.left = `${c3.x * 100}%`, (a.w || a.h) && (s.style.width = `${a.w * 100}%`, s.style.height = `${a.h * 100}%`, s.style.transform = "translate(-50%, -50%)"), t.appendChild(s);
     }
-    me2[e2.id] = n2;
+    ge2[e2.id] = n2;
   }
 }
 function vt3(e2) {
@@ -86983,14 +89667,14 @@ function vt3(e2) {
     let r2 = "";
     for (const o in e2[t])
       e2[t][o] && (r2 += `${o}: ${e2[t][o]}; `);
-    n2 += `svg ${t.split(" ").map((o) => Ae2(o)).join(" ")} { ${r2} } `;
+    n2 += `svg ${t.split(" ").map((o) => W3(o)).join(" ")} { ${r2} } `;
   }
   return n2;
 }
-var _e2 = {};
+var be2 = {};
 function Nn2(e2) {
   for (const n2 in e2)
-    _e2[n2.toLowerCase()] = e2[n2];
+    be2[n2.toLowerCase()] = e2[n2];
 }
 
 // libs/bookings/src/lib/booking.class.ts
@@ -87050,14 +89734,14 @@ var Booking = class {
     return this._valid_asset_cache;
   }
   constructor(data = {}) {
-    var _a8, _b2, _c, _d;
+    var _a9, _b3, _c10, _d2;
     this._valid_asset_cache = [];
     this._valid_cache_expiry = 0;
     this.id = data.id || "";
     this.parent_id = data.parent_id || "";
     this.asset_id = data.asset_id || "";
     this.asset_ids = data.asset_ids || [data.asset_id].filter((_3) => _3);
-    this.asset_name = data.asset_name || ((_a8 = data.extension_data) == null ? void 0 : _a8.asset_name) || ((_b2 = data.extension_data) == null ? void 0 : _b2.name) || data.description || data.asset_id || "";
+    this.asset_name = data.asset_name || ((_a9 = data.extension_data) == null ? void 0 : _a9.asset_name) || ((_b3 = data.extension_data) == null ? void 0 : _b3.name) || data.description || data.asset_id || "";
     this.zones = data.zones || [];
     this.booking_start = Math.floor(data.date / 1e3) || data.booking_start || getUnixTime(roundToNearestMinutes(addMinutes(Date.now(), 5), {
       nearestTo: 5
@@ -87085,11 +89769,11 @@ var Booking = class {
     this.approver_email = data.approver_email || "";
     this.approver_name = data.approver_name || "";
     this.extension_data = data.extension_data || {};
-    this.access = !!((_c = data.extension_data) == null ? void 0 : _c.access);
+    this.access = !!((_c10 = data.extension_data) == null ? void 0 : _c10.access);
     this.event_id = data.event_id;
     this.permission = (data.permission || "PRIVATE").toUpperCase();
     this.attendees = data.attendees || data.guests || data.members || [];
-    this.tags = data.tags || ((_d = data.extension_data) == null ? void 0 : _d.tags) || [];
+    this.tags = data.tags || ((_d2 = data.extension_data) == null ? void 0 : _d2.tags) || [];
     this.images = data.images || [];
     this.all_day = data.all_day || this.duration >= 24 * 60;
     this.induction = data.induction || void 0;
@@ -87146,8 +89830,8 @@ var Booking = class {
     return data;
   }
   get location() {
-    var _a8;
-    return ((_a8 = this.extension_data) == null ? void 0 : _a8.location) || this.description;
+    var _a9;
+    return ((_a9 = this.extension_data) == null ? void 0 : _a9.location) || this.description;
   }
   /** Whether the booking occurs today */
   get is_today() {
@@ -87181,12 +89865,12 @@ var Booking = class {
 
 // libs/bookings/src/lib/booking.utilities.ts
 function newBookingFromCalendarEvent(event) {
-  var _a8, _b2, _c;
+  var _a9, _b3, _c10;
   return new Booking({
     id: event.id,
     user_email: event.host,
-    asset_id: (_a8 = event.system) == null ? void 0 : _a8.id,
-    asset_name: ((_b2 = event.system) == null ? void 0 : _b2.display_name) || ((_c = event.system) == null ? void 0 : _c.name),
+    asset_id: (_a9 = event.system) == null ? void 0 : _a9.id,
+    asset_name: ((_b3 = event.system) == null ? void 0 : _b3.display_name) || ((_c10 = event.system) == null ? void 0 : _c10.name),
     booking_type: "room",
     approved: event.status === "approved",
     extension_data: __spreadValues({}, event)
@@ -87238,7 +89922,7 @@ function queryResourceAvailability(id_list, start, duration, ignore, type2 = "ro
   }).pipe(map((_3) => id_list.map((id) => !_3.find((b3) => b3.asset_id === id && (!ignore || ignore !== b3.id)))));
 }
 async function createBookingsForEvent(event, type2, resources) {
-  var _a8;
+  var _a9;
   const bookings = await queryBookings({
     type: type2,
     period_start: getUnixTime(event.date),
@@ -87246,11 +89930,11 @@ async function createBookingsForEvent(event, type2, resources) {
   }).pipe(map((_3) => _3.filter((_4) => _4.parent_id === event.id))).toPromise();
   await Promise.all(bookings.map((_3) => removeBooking(_3.id).toPromise()));
   await Promise.all(event.linked_bookings.filter((_3) => _3.booking_type === type2).map((_3) => removeBooking(_3.id).toPromise()));
-  const zones = ((_a8 = event.system) == null ? void 0 : _a8.zones) || unique(flatten2(event.resources.map((_3) => _3.zones))) || [];
+  const zones = ((_a9 = event.system) == null ? void 0 : _a9.zones) || unique(flatten2(event.resources.map((_3) => _3.zones))) || [];
   await Promise.all(resources.map((item) => {
     const booking = bookings.find((_3) => _3.asset_ids.find((id) => {
-      var _a9;
-      return (_a9 = item.items) == null ? void 0 : _a9.find((i) => i.item_ids.includes(id));
+      var _a10;
+      return (_a10 = item.items) == null ? void 0 : _a10.find((i) => i.item_ids.includes(id));
     }));
     return lastValueFrom(createBooking(new Booking({
       type: type2,
@@ -87312,7 +89996,7 @@ var _SpacePipe = class _SpacePipe {
    * @param space_id ID or Email of the space
    */
   async transform(space_id) {
-    var _a8, _b2, _c;
+    var _a9, _b3, _c10;
     if (this.org) {
       await firstTruthyValueFrom(this.org.initialised.pipe(first((_3) => _3)));
     }
@@ -87328,7 +90012,7 @@ var _SpacePipe = class _SpacePipe {
       const system = await cc(space_id).toPromise().catch((_3) => null);
       if (system) {
         space = new Space(__spreadProps(__spreadValues({}, system), {
-          level: (_a8 = this.org) == null ? void 0 : _a8.levelWithID([...system.zones])
+          level: (_a9 = this.org) == null ? void 0 : _a9.levelWithID([...system.zones])
         }));
         SPACE_LIST.push(space);
         return space;
@@ -87336,11 +90020,11 @@ var _SpacePipe = class _SpacePipe {
     }
     const systems = (await lastValueFrom(uc({
       in: space_id,
-      zone_id: (_b2 = this.org) == null ? void 0 : _b2.organisation.id
+      zone_id: (_b3 = this.org) == null ? void 0 : _b3.organisation.id
     }))).data;
     if (systems.length === 1) {
       space = new Space(__spreadProps(__spreadValues({}, systems[0]), {
-        level: (_c = this.org) == null ? void 0 : _c.levelWithID([...systems[0].zones])
+        level: (_c10 = this.org) == null ? void 0 : _c10.levelWithID([...systems[0].zones])
       }));
       SPACE_LIST.push(space);
       return space;
@@ -87460,8 +90144,8 @@ function queryGroupAvailability(query2, ignore = []) {
     bookings = bookings.filter((_3) => _3.status !== "declined" && _3.status !== "cancelled");
     return products.map((product) => __spreadProps(__spreadValues({}, product), {
       assets: product.assets.filter((asset) => (ignore == null ? void 0 : ignore.includes(asset.id)) || !bookings.find((booking) => {
-        var _a8;
-        return !ignore.includes(booking.id) && (booking.asset_id === asset.id || ((_a8 = booking.asset_ids) == null ? void 0 : _a8.includes(asset.id)));
+        var _a9;
+        return !ignore.includes(booking.id) && (booking.asset_id === asset.id || ((_a9 = booking.asset_ids) == null ? void 0 : _a9.includes(asset.id)));
       }))
     }));
   }));
@@ -87527,16 +90211,16 @@ async function validateAssetRequestsForResource({ id, ical_uid, from_booking }, 
   }, bookings.map((_3) => _3.id)).toPromise();
   const processed_requests = changed_assets.map((request) => {
     let asset_ids = flatten2(request.items.map(({ id: id2, item_ids, quantity }) => {
-      var _a8;
-      const assets = (_a8 = available_groups.find((_3) => _3.id === id2)) == null ? void 0 : _a8.assets;
+      var _a9;
+      const assets = (_a9 = available_groups.find((_3) => _3.id === id2)) == null ? void 0 : _a9.assets;
       if (!assets)
         return item_ids;
       const list = [];
       return new Array(quantity).fill(0).map((_3, idx) => {
-        var _a9;
-        const item = used_ids.includes(item_ids[idx]) || list.includes(item_ids[idx]) || !item_ids[idx] ? (_a9 = assets == null ? void 0 : assets.find(({ id: id3 }) => {
+        var _a10;
+        const item = used_ids.includes(item_ids[idx]) || list.includes(item_ids[idx]) || !item_ids[idx] ? (_a10 = assets == null ? void 0 : assets.find(({ id: id3 }) => {
           return !used_ids.includes(id3) && !list.includes(id3);
-        })) == null ? void 0 : _a9.id : item_ids[idx];
+        })) == null ? void 0 : _a10.id : item_ids[idx];
         if (!item) {
           request.conflict = true;
           throw "Unable to find available asset for request";
@@ -87546,8 +90230,8 @@ async function validateAssetRequestsForResource({ id, ical_uid, from_booking }, 
       });
     }));
     const booking = bookings.find((_3) => _3.asset_ids.find((id2) => {
-      var _a8;
-      return (_a8 = request.items) == null ? void 0 : _a8.find((i) => i.item_ids.includes(id2));
+      var _a9;
+      return (_a9 = request.items) == null ? void 0 : _a9.find((i) => i.item_ids.includes(id2));
     }));
     used_ids = [...used_ids, ...asset_ids];
     const asset_data = {
@@ -87645,11 +90329,11 @@ function assetAvailable(item, rules, event) {
   const current_date = Date.now();
   const event_date = new Date(event.date);
   const isRuleMatch = (rule) => {
-    var _a8, _b2, _c, _d;
-    return item.name === rule.name || ((_a8 = item.category) == null ? void 0 : _a8.name.includes(rule.name)) || ((_b2 = event.resources) == null ? void 0 : _b2.some((resource2) => {
-      var _a9;
-      return (_a9 = resource2.zones) == null ? void 0 : _a9.includes(rule.name);
-    })) || ((_d = (_c = event.space) == null ? void 0 : _c.zones) == null ? void 0 : _d.includes(rule.name)) || rule.name === "*";
+    var _a9, _b3, _c10, _d2;
+    return item.name === rule.name || ((_a9 = item.category) == null ? void 0 : _a9.name.includes(rule.name)) || ((_b3 = event.resources) == null ? void 0 : _b3.some((resource2) => {
+      var _a10;
+      return (_a10 = resource2.zones) == null ? void 0 : _a10.includes(rule.name);
+    })) || ((_d2 = (_c10 = event.space) == null ? void 0 : _c10.zones) == null ? void 0 : _d2.includes(rule.name)) || rule.name === "*";
   };
   const countMatches = (rule) => rule.rules.reduce((matches, condition) => {
     switch (condition[0]) {
@@ -87735,8 +90419,8 @@ var _AssetStateService = class _AssetStateService {
       const s = search.toLowerCase();
       console.log("Rules:", rules);
       const list = assets.filter((_3) => {
-        var _a8;
-        return ((_a8 = _3.assets) == null ? void 0 : _a8.length) && (!category.length || category.includes(_3.category_id)) && (_3.name.toLowerCase().includes(s) || _3.description.toLowerCase().includes(s)) && assetAvailable(_3, rules, this._options.getValue());
+        var _a9;
+        return ((_a9 = _3.assets) == null ? void 0 : _a9.length) && (!category.length || category.includes(_3.category_id)) && (_3.name.toLowerCase().includes(s) || _3.description.toLowerCase().includes(s)) && assetAvailable(_3, rules, this._options.getValue());
       });
       return list;
     }), shareReplay(1));
@@ -87793,9 +90477,9 @@ var Tags;
 })(Tags || (Tags = {}));
 var _EventFormService = class _EventFormService extends AsyncHandler {
   get last_success() {
-    var _a8;
+    var _a9;
     const event = new CalendarEvent(JSON.parse((sessionStorage == null ? void 0 : sessionStorage.getItem("PLACEOS.last_modified_event")) || "{}"));
-    if (((_a8 = this._last_event) == null ? void 0 : _a8.date) === event.date)
+    if (((_a9 = this._last_event) == null ? void 0 : _a9.date) === event.date)
       return this._last_event;
     this._last_event = event;
     return event;
@@ -87816,8 +90500,8 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     return this._event.getValue();
   }
   get is_multiday() {
-    var _a8;
-    return ((_a8 = this._event.getValue()) == null ? void 0 : _a8.duration) > 24 * 60;
+    var _a9;
+    return ((_a9 = this._event.getValue()) == null ? void 0 : _a9.duration) > 24 * 60;
   }
   get favorite_spaces() {
     return this._settings.get("favourite_spaces") || [];
@@ -87911,19 +90595,19 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
       this._event,
       this._options
     ]).pipe(debounceTime(300), switchMap(([spaces, rules, event, { date, duration, all_day }]) => {
-      var _a8, _b2, _c;
+      var _a9, _b3, _c10;
       this.addLoadingTag(Tags.Availability);
       const method = this.book_internal ? queryResourceAvailability : querySpaceAvailability;
-      spaces = filterResourcesFromRules(spaces, { date, duration, resource: null, host: currentUser() }, rules[(_a8 = this._org.building) == null ? void 0 : _a8.id] || []);
-      return method(spaces.map(({ id }) => id), (all_day ? startOfDay(date).valueOf() : date) || 60, (all_day ? Math.max(24 * 60, duration) : duration) || 60, ((_b2 = event == null ? void 0 : event.resources[0]) == null ? void 0 : _b2.id) || ((_c = event == null ? void 0 : event.system) == null ? void 0 : _c.id) || (event == null ? void 0 : event.id), void 0, [event == null ? void 0 : event.date, event == null ? void 0 : event.duration]).pipe(map((availability) => {
-        var _a9;
+      spaces = filterResourcesFromRules(spaces, { date, duration, resource: null, host: currentUser() }, rules[(_a9 = this._org.building) == null ? void 0 : _a9.id] || []);
+      return method(spaces.map(({ id }) => id), (all_day ? startOfDay(date).valueOf() : date) || 60, (all_day ? Math.max(24 * 60, duration) : duration) || 60, ((_b3 = event == null ? void 0 : event.resources[0]) == null ? void 0 : _b3.id) || ((_c10 = event == null ? void 0 : event.system) == null ? void 0 : _c10.id) || (event == null ? void 0 : event.id), void 0, [event == null ? void 0 : event.date, event == null ? void 0 : event.duration]).pipe(map((availability) => {
+        var _a10;
         let list = spaces.filter((_3, i) => availability[i]);
         list = filterResourcesFromRules(list, {
           date,
           duration,
           resource: null,
           host: currentUser()
-        }, rules[(_a9 = this._org.building) == null ? void 0 : _a9.id] || []);
+        }, rules[(_a10 = this._org.building) == null ? void 0 : _a10.id] || []);
         return list;
       }), catchError(() => of([])));
     }), tap(() => this.removeLoadingTag(Tags.Availability)), startWith([]), shareReplay(1));
@@ -87963,12 +90647,12 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     this._options.next(__spreadValues(__spreadValues({}, this._options.getValue()), options));
   }
   newForm(event = new CalendarEvent()) {
-    var _a8, _b2, _c, _d;
+    var _a9, _b3, _c10, _d2;
     this._loading.next("");
     this._form.reset(__spreadProps(__spreadValues({}, event), {
       catering: event.extension_data.catering,
-      catering_charge_code: (_b2 = (_a8 = event.extension_data.catering) == null ? void 0 : _a8[0]) == null ? void 0 : _b2.charge_code,
-      catering_notes: (_d = (_c = event.extension_data.catering) == null ? void 0 : _c[0]) == null ? void 0 : _d.notes
+      catering_charge_code: (_b3 = (_a9 = event.extension_data.catering) == null ? void 0 : _a9[0]) == null ? void 0 : _b3.charge_code,
+      catering_notes: (_d2 = (_c10 = event.extension_data.catering) == null ? void 0 : _c10[0]) == null ? void 0 : _d2.notes
     }));
     if (!event.id)
       return;
@@ -88007,7 +90691,7 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
   cancelPostForm() {
   }
   async postForm(force = false, ignore_space_check = [], ignore_owner = false) {
-    var _a8, _b2, _c, _d, _e3, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o2, _p;
+    var _a9, _b3, _c10, _d2, _e3, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o2, _p, _q;
     this.form.markAllAsTouched();
     if (this.form.invalid && !force) {
       throw i18n("FORM.INVALID_FIELDS", {
@@ -88033,7 +90717,10 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     const has_time_changed = !event.id || event.date !== this.form.value.date || event.duration !== this.form.value.duration;
     if (spaces.length && has_time_changed) {
       const space_list2 = await Promise.all(changed_spaces.map((_3) => this._space_pipe.transform(_3.email)));
-      await this._checkResourcesAvailable(space_list2, this.form.value.all_day ? startOfDay(this.form.value.date).valueOf() : this.form.value.date, this.form.value.all_day ? Math.max(24 * 60, this.form.value.duration) : this.form.value.duration, event.ical_uid || event.id || "").catch(on_error);
+      const date = this.form.value.all_day ? startOfDay(this.form.value.date).valueOf() : this.form.value.date;
+      const duration = this.form.value.all_day ? Math.max(24 * 60, this.form.value.duration) : this.form.value.duration;
+      await this._checkResourcesAvailable(space_list2, date, duration, event.ical_uid || event.id || "").catch(on_error);
+      await this._checkResourceRules(space_list2, date, duration, this._host(this.form.value.host, (_a9 = spaces[0]) == null ? void 0 : _a9.email)).catch(on_error);
     } else if (!space_list.length && this.lone_space) {
       spaces = [await this._space_pipe.transform(this.lone_space)];
       this.form.patchValue({ resources: spaces });
@@ -88064,15 +90751,15 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
       order.charge_code = this.form.value.catering_charge_code;
     }
     const query2 = event.id ? {
-      system_id: ((_a8 = event == null ? void 0 : event.resources[0]) == null ? void 0 : _a8.id) || ((_b2 = event == null ? void 0 : event.system) == null ? void 0 : _b2.id) || ((_c = spaces[0]) == null ? void 0 : _c.id)
+      system_id: ((_b3 = event == null ? void 0 : event.resources[0]) == null ? void 0 : _b3.id) || ((_c10 = event == null ? void 0 : event.system) == null ? void 0 : _c10.id) || ((_d2 = spaces[0]) == null ? void 0 : _d2.id)
     } : {};
-    const is_owner = this.form.value.host === ((_d = currentUser()) == null ? void 0 : _d.email) || this.form.value.creator === ((_e3 = currentUser()) == null ? void 0 : _e3.email);
+    const is_owner = this.form.value.host === ((_e3 = currentUser()) == null ? void 0 : _e3.email) || this.form.value.creator === ((_f = currentUser()) == null ? void 0 : _f.email);
     if (is_owner && !ignore_owner)
       query2.calendar = this.form.value.host || this.form.value.creator;
     const processed_assets = (this.form.value.assets || []).map((_3) => new AssetRequest(_3).toJSON());
-    const host = this._host(this.form.value.host, (_f = spaces[0]) == null ? void 0 : _f.email);
+    const host = this._host(this.form.value.host, (_g = spaces[0]) == null ? void 0 : _g.email);
     const ext = {
-      department: ((_g = this.form.value.organiser) == null ? void 0 : _g.department) || ((_h = currentUser()) == null ? void 0 : _h.department)
+      department: ((_h = this.form.value.organiser) == null ? void 0 : _h.department) || ((_i2 = currentUser()) == null ? void 0 : _i2.department)
     };
     if (this.form.value.host !== host)
       ext.host_override = this.form.value.host;
@@ -88089,12 +90776,12 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
       assets: processed_assets,
       extension_data: ext
     })), query2).catch(on_error);
-    const domain = (((_i2 = currentUser()) == null ? void 0 : _i2.email) || "@").split("@")[1];
+    const domain = (((_j = currentUser()) == null ? void 0 : _j.email) || "@").split("@")[1];
     const visitors = this.form.value.attendees.filter((user) => user.is_external && user.email !== event.host && !user.email.includes(domain) && user.visit_expected);
     if (visitors.length) {
       await createBookingsForEvent(created_event, "visitor", visitors).catch((e2) => this._removeBookingAfterError(!event.id, created_event, false, e2));
     }
-    if ((_j = this.form.value.catering) == null ? void 0 : _j.length) {
+    if ((_k = this.form.value.catering) == null ? void 0 : _k.length) {
       await createBookingsForEvent(created_event, "catering-order", this.form.value.catering).catch((e2) => this._removeBookingAfterError(!event.id, created_event, false, e2));
     }
     const assets = this.form.value.assets || event.extension_data.assets || [];
@@ -88104,13 +90791,13 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
         duration: value.duration,
         host: value.host,
         all_day: value.all_day,
-        location_name: ((_k = spaces[0]) == null ? void 0 : _k.display_name) || ((_l = spaces[0]) == null ? void 0 : _l.name) || "",
-        location_id: ((_m = spaces[0]) == null ? void 0 : _m.id) || "",
+        location_name: ((_l = spaces[0]) == null ? void 0 : _l.display_name) || ((_m = spaces[0]) == null ? void 0 : _m.name) || "",
+        location_id: ((_n = spaces[0]) == null ? void 0 : _n.id) || "",
         zones: unique([
           this._org.organisation.id,
-          (_n = this._org.region) == null ? void 0 : _n.id,
-          (_o2 = this._org.building) == null ? void 0 : _o2.id,
-          ...((_p = spaces[0]) == null ? void 0 : _p.zones) || []
+          (_o2 = this._org.region) == null ? void 0 : _o2.id,
+          (_p = this._org.building) == null ? void 0 : _p.id,
+          ...((_q = spaces[0]) == null ? void 0 : _q.zones) || []
         ]).filter((_3) => !!_3),
         reset_state: has_time_changed
       }, assets, changed_spaces.length > 0 || has_time_changed).catch((e2) => this._removeBookingAfterError(!event.id, created_event, true, e2));
@@ -88126,36 +90813,55 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     return "INV-000_001";
   }
   async _checkResourcesAvailable(spaces, date, duration, ignore) {
-    var _a8, _b2;
+    var _a9, _b3;
     if (!(spaces == null ? void 0 : spaces.length))
       return true;
     const event = this._event.getValue();
     const id_list = spaces.map((_3) => _3.id);
-    const response = await lastValueFrom(this.book_internal ? queryResourceAvailability(id_list, date, duration, ignore) : querySpaceAvailability(id_list, date, duration, ((_a8 = event == null ? void 0 : event.resources[0]) == null ? void 0 : _a8.id) || ((_b2 = event == null ? void 0 : event.system) == null ? void 0 : _b2.id) || (event == null ? void 0 : event.id) || void 0, void 0, [event == null ? void 0 : event.date, event == null ? void 0 : event.duration]));
+    const response = await lastValueFrom(this.book_internal ? queryResourceAvailability(id_list, date, duration, ignore) : querySpaceAvailability(id_list, date, duration, ((_a9 = event == null ? void 0 : event.resources[0]) == null ? void 0 : _a9.id) || ((_b3 = event == null ? void 0 : event.system) == null ? void 0 : _b3.id) || (event == null ? void 0 : event.id) || void 0, void 0, [event == null ? void 0 : event.date, event == null ? void 0 : event.duration]));
     if (!response.every((_3) => _3)) {
       throw i18n(spaces.length > 1 ? "CALENDAR_EVENT.SPACES_UNAVAILABLE" : "CALENDAR_EVENT.SPACE_UNAVAILABLE");
     }
     return true;
   }
+  async _checkResourceRules(spaces, date, duration, host) {
+    const user = await lastValueFrom(Mc(host)).catch(() => ({
+      email: host
+    }));
+    const rules = await nextValueFrom(this.booking_rules$);
+    const space_rules = spaces.map((space) => {
+      const bld = this._org.buildings.find((b3) => space.zones.includes(b3.id));
+      return rulesForResource({
+        date,
+        duration,
+        host: new User(user),
+        resource: space
+      }, rules[bld.id]);
+    });
+    if (!space_rules.every((_3) => !_3.hidden)) {
+      throw i18n("CALENDAR_EVENT.SPACE_BOOKING_RULES_HIDDEN", void 0, spaces.length);
+    }
+    return true;
+  }
   async _performBooking(event, query2) {
-    var _a8, _b2, _c, _d, _e3, _f, _g;
+    var _a9, _b3, _c10, _d2, _e3, _f;
     this._updateVisitorList(event.attendees);
-    const old_system = ((_a8 = event.old_system) == null ? void 0 : _a8.id) || ((_b2 = event.old_system) == null ? void 0 : _b2.email) || ((_c = event.resources[0]) == null ? void 0 : _c.email);
-    const system_id = ((_d = event.system) == null ? void 0 : _d.id) || ((_e3 = event.system) == null ? void 0 : _e3.email) || ((_f = event.resources[0]) == null ? void 0 : _f.email);
+    const old_system = ((_a9 = event.old_system) == null ? void 0 : _a9.id) || ((_b3 = event.old_system) == null ? void 0 : _b3.email) || ((_c10 = event.resources[0]) == null ? void 0 : _c10.email);
+    const system_id = ((_d2 = event.system) == null ? void 0 : _d2.id) || ((_e3 = event.system) == null ? void 0 : _e3.email) || ((_f = event.resources[0]) == null ? void 0 : _f.email);
     if (old_system !== system_id) {
       event.attendees = event.attendees.filter((_3) => _3.email !== old_system || _3.id !== old_system);
     }
-    return (_g = this.book_internal ? saveBooking(newBookingFromCalendarEvent(__spreadProps(__spreadValues({}, event.toJSON()), {
+    return lastValueFrom(this.book_internal ? saveBooking(newBookingFromCalendarEvent(__spreadProps(__spreadValues({}, event.toJSON()), {
       status: this._settings.get("app.bookings.no_approval") === true ? "approved" : "tentative"
-    }))).pipe(map((_3) => newCalendarEventFromBooking(_3))) : saveEvent(event, query2)) == null ? void 0 : _g.toPromise();
+    }))).pipe(map((_3) => newCalendarEventFromBooking(_3))) : saveEvent(event, query2));
   }
   async _removeBookingAfterError(is_new, event, assets = false, e2) {
-    var _a8, _b2;
+    var _a9;
     if (is_new) {
-      await ((_b2 = removeEvent(event.id, event.resources.length ? {
-        calendar: this.form.value.host || ((_a8 = currentUser()) == null ? void 0 : _a8.email),
+      await lastValueFrom(removeEvent(event.id, event.resources.length ? {
+        calendar: this.form.value.host || ((_a9 = currentUser()) == null ? void 0 : _a9.email),
         system_id: event.resources[0].id
-      } : {})) == null ? void 0 : _b2.toPromise());
+      } : {}));
       throw (e2 == null ? void 0 : e2.status) === 409 ? i18n("CALENDAR_EVENT.ASSETS_CLASH_ERROR") : i18n("CALENDAR_EVENT.ASSETS_ERROR");
     } else if (assets) {
       throw i18n("CALENDAR_EVENT.ASSETS_PARTIAL_ERROR", {
@@ -88241,11 +90947,11 @@ var _SpacesService = class _SpacesService {
     return this.space_list.find(({ id }) => space_id === id);
   }
   async loadSpaces() {
-    var _a8;
-    const systems = await lastValueFrom((_a8 = sc({
+    var _a9;
+    const systems = await lastValueFrom((_a9 = sc({
       zone_id: this._org.organisation.id,
       limit: 5e3
-    })) == null ? void 0 : _a8.pipe(map((i) => i.data)));
+    })) == null ? void 0 : _a9.pipe(map((i) => i.data)));
     const space_list = systems.map((sys) => new Space(__spreadProps(__spreadValues({}, sys), {
       level: this._org.levelWithID([...sys.zones])
     })));
@@ -88269,7 +90975,7 @@ var SpacesService = _SpacesService;
 })();
 
 // node_modules/@angular/material/fesm2022/progress-spinner.mjs
-var _c011 = ["determinateSpinner"];
+var _c015 = ["determinateSpinner"];
 function MatProgressSpinner_ng_template_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275namespaceSVG();
@@ -88319,18 +91025,18 @@ var MatProgressSpinner = class _MatProgressSpinner {
   /** The element of the determinate spinner. */
   _determinateCircle;
   constructor() {
-    const defaults2 = inject(MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS);
-    this._noopAnimations = _animationsDisabled() && !!defaults2 && !defaults2._forceAnimations;
+    const defaults3 = inject(MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS);
+    this._noopAnimations = _animationsDisabled() && !!defaults3 && !defaults3._forceAnimations;
     this.mode = this._elementRef.nativeElement.nodeName.toLowerCase() === "mat-spinner" ? "indeterminate" : "determinate";
-    if (defaults2) {
-      if (defaults2.color) {
-        this.color = this._defaultColor = defaults2.color;
+    if (defaults3) {
+      if (defaults3.color) {
+        this.color = this._defaultColor = defaults3.color;
       }
-      if (defaults2.diameter) {
-        this.diameter = defaults2.diameter;
+      if (defaults3.diameter) {
+        this.diameter = defaults3.diameter;
       }
-      if (defaults2.strokeWidth) {
-        this.strokeWidth = defaults2.strokeWidth;
+      if (defaults3.strokeWidth) {
+        this.strokeWidth = defaults3.strokeWidth;
       }
     }
   }
@@ -88398,7 +91104,7 @@ var MatProgressSpinner = class _MatProgressSpinner {
     selectors: [["mat-progress-spinner"], ["mat-spinner"]],
     viewQuery: function MatProgressSpinner_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c011, 5);
+        \u0275\u0275viewQuery(_c015, 5);
       }
       if (rf & 2) {
         let _t4;
@@ -88766,8 +91472,8 @@ function searchStaff(q4) {
 }
 
 // libs/form-fields/src/lib/user-search-field.component.ts
-var _c012 = ["input"];
-var _c17 = (a0) => ({ name: a0 });
+var _c016 = ["input"];
+var _c110 = (a0) => ({ name: a0 });
 function UserSearchFieldComponent_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "mat-spinner", 5);
@@ -88844,7 +91550,7 @@ function UserSearchFieldComponent_Conditional_11_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r3 = \u0275\u0275nextContext();
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 1, "FORM.USER_ADD_EXTERNAL", \u0275\u0275pureFunction1(4, _c17, ctx_r3.search_str)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 1, "FORM.USER_ADD_EXTERNAL", \u0275\u0275pureFunction1(4, _c110, ctx_r3.search_str)), " ");
   }
 }
 function UserSearchFieldComponent_Conditional_12_Template(rf, ctx) {
@@ -88880,8 +91586,8 @@ var _UserSearchFieldComponent = class _UserSearchFieldComponent extends AsyncHan
     this.empty_fn = input(void 0);
     this.filter = input(void 0);
     this.query_fn = input((q4) => {
-      var _a8;
-      return this._settings.get("app.basic_user_search") ? Tc({ q: q4, authority_id: (_a8 = ve()) == null ? void 0 : _a8.id }).pipe(map((_3) => _3.data.map((_4) => new User(_4))), catchError(() => of([]))) : searchStaff(q4).pipe(catchError(() => of([])));
+      var _a9;
+      return this._settings.get("app.basic_user_search") ? Tc({ q: q4, authority_id: (_a9 = ve()) == null ? void 0 : _a9.id }).pipe(map((_3) => _3.data.map((_4) => new User(_4))), catchError(() => of([]))) : searchStaff(q4).pipe(catchError(() => of([])));
     });
     this.loading = signal(false);
     this.search_str = signal("");
@@ -88908,8 +91614,8 @@ var _UserSearchFieldComponent = class _UserSearchFieldComponent extends AsyncHan
     this.cancelReset = () => this.clearTimeout("reset");
     this.blurInput = () => {
       this.timeout("blur", () => {
-        var _a8, _b2;
-        return (_b2 = (_a8 = this._input_el()) == null ? void 0 : _a8.nativeElement) == null ? void 0 : _b2.blur();
+        var _a9, _b3;
+        return (_b3 = (_a9 = this._input_el()) == null ? void 0 : _a9.nativeElement) == null ? void 0 : _b3.blur();
       });
     };
   }
@@ -88922,8 +91628,8 @@ var _UserSearchFieldComponent = class _UserSearchFieldComponent extends AsyncHan
    */
   resetSearchString() {
     this.timeout("reset", () => {
-      var _a8;
-      return this.search_str.set(((_a8 = this.active_user) == null ? void 0 : _a8.name) || "");
+      var _a9;
+      return this.search_str.set(((_a9 = this.active_user) == null ? void 0 : _a9.name) || "");
     }, 100);
   }
   /**
@@ -88964,7 +91670,7 @@ _UserSearchFieldComponent.\u0275fac = function UserSearchFieldComponent_Factory(
 };
 _UserSearchFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserSearchFieldComponent, selectors: [["a-user-search-field"]], viewQuery: function UserSearchFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx._input_el, _c012, 5, ElementRef);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c016, 5, ElementRef);
   }
   if (rf & 2) {
     \u0275\u0275queryAdvance();
@@ -89150,9 +91856,9 @@ var UserSearchFieldComponent = _UserSearchFieldComponent;
 })();
 
 // node_modules/@angular/material/fesm2022/menu.mjs
-var _c013 = ["mat-menu-item", ""];
-var _c18 = [[["mat-icon"], ["", "matMenuItemIcon", ""]], "*"];
-var _c24 = ["mat-icon, [matMenuItemIcon]", "*"];
+var _c017 = ["mat-menu-item", ""];
+var _c111 = [[["mat-icon"], ["", "matMenuItemIcon", ""]], "*"];
+var _c26 = ["mat-icon, [matMenuItemIcon]", "*"];
 function MatMenuItem_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275namespaceSVG();
@@ -89161,7 +91867,7 @@ function MatMenuItem_Conditional_4_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
 }
-var _c34 = ["*"];
+var _c35 = ["*"];
 function MatMenu_ng_template_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -89219,9 +91925,9 @@ var MatMenuItem = class _MatMenuItem {
   /** Whether the menu item acts as a trigger for a sub-menu. */
   _triggersSubmenu = false;
   constructor() {
-    var _a8, _b2;
+    var _a9, _b3;
     inject(_CdkPrivateStyleLoader).load(_StructuralStylesLoader);
-    (_b2 = (_a8 = this._parentMenu) == null ? void 0 : _a8.addItem) == null ? void 0 : _b2.call(_a8, this);
+    (_b3 = (_a9 = this._parentMenu) == null ? void 0 : _a9.addItem) == null ? void 0 : _b3.call(_a9, this);
   }
   /** Focuses the menu item. */
   focus(origin, options) {
@@ -89268,13 +91974,13 @@ var MatMenuItem = class _MatMenuItem {
   }
   /** Gets the label to be used when determining whether the option should be focused. */
   getLabel() {
-    var _a8;
+    var _a9;
     const clone = this._elementRef.nativeElement.cloneNode(true);
     const icons = clone.querySelectorAll("mat-icon, .material-icons");
     for (let i = 0; i < icons.length; i++) {
       icons[i].remove();
     }
-    return ((_a8 = clone.textContent) == null ? void 0 : _a8.trim()) || "";
+    return ((_a9 = clone.textContent) == null ? void 0 : _a9.trim()) || "";
   }
   _setHighlighted(isHighlighted) {
     this._highlighted = isHighlighted;
@@ -89314,14 +92020,14 @@ var MatMenuItem = class _MatMenuItem {
       disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute]
     },
     exportAs: ["matMenuItem"],
-    attrs: _c013,
-    ngContentSelectors: _c24,
+    attrs: _c017,
+    ngContentSelectors: _c26,
     decls: 5,
     vars: 3,
     consts: [[1, "mat-mdc-menu-item-text"], ["matRipple", "", 1, "mat-mdc-menu-ripple", 3, "matRippleDisabled", "matRippleTrigger"], ["viewBox", "0 0 5 10", "focusable", "false", "aria-hidden", "true", 1, "mat-mdc-menu-submenu-icon"], ["points", "0,0 5,5 0,10"]],
     template: function MatMenuItem_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c18);
+        \u0275\u0275projectionDef(_c111);
         \u0275\u0275projection(0);
         \u0275\u0275elementStart(1, "span", 0);
         \u0275\u0275projection(2, 1);
@@ -89429,15 +92135,15 @@ var MatMenuContent = class _MatMenuContent {
    * @docs-private
    */
   detach() {
-    var _a8;
-    if ((_a8 = this._portal) == null ? void 0 : _a8.isAttached) {
+    var _a9;
+    if ((_a9 = this._portal) == null ? void 0 : _a9.isAttached) {
       this._portal.detach();
     }
   }
   ngOnDestroy() {
-    var _a8;
+    var _a9;
     this.detach();
-    (_a8 = this._outlet) == null ? void 0 : _a8.dispose();
+    (_a9 = this._outlet) == null ? void 0 : _a9.dispose();
   }
   static \u0275fac = function MatMenuContent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _MatMenuContent)();
@@ -89617,9 +92323,9 @@ var MatMenu = class _MatMenu {
     this._keyManager.tabOut.subscribe(() => this.closed.emit("tab"));
     this._directDescendantItems.changes.pipe(startWith(this._directDescendantItems), switchMap((items) => merge(...items.map((item) => item._focused)))).subscribe((focusedItem) => this._keyManager.updateActiveItem(focusedItem));
     this._directDescendantItems.changes.subscribe((itemsList) => {
-      var _a8;
+      var _a9;
       const manager = this._keyManager;
-      if (this._panelAnimationState === "enter" && ((_a8 = manager.activeItem) == null ? void 0 : _a8._hasFocus())) {
+      if (this._panelAnimationState === "enter" && ((_a9 = manager.activeItem) == null ? void 0 : _a9._hasFocus())) {
         const items = itemsList.toArray();
         const index = Math.max(0, Math.min(items.length - 1, manager.activeItemIndex || 0));
         if (items[index] && !items[index].disabled) {
@@ -89631,11 +92337,11 @@ var MatMenu = class _MatMenu {
     });
   }
   ngOnDestroy() {
-    var _a8, _b2;
-    (_a8 = this._keyManager) == null ? void 0 : _a8.destroy();
+    var _a9, _b3;
+    (_a9 = this._keyManager) == null ? void 0 : _a9.destroy();
     this._directDescendantItems.destroy();
     this.closed.complete();
-    (_b2 = this._firstItemFocusRef) == null ? void 0 : _b2.destroy();
+    (_b3 = this._firstItemFocusRef) == null ? void 0 : _b3.destroy();
     clearTimeout(this._exitFallbackTimeout);
   }
   /** Stream that emits whenever the hovered menu item changes. */
@@ -89693,8 +92399,8 @@ var MatMenu = class _MatMenu {
    * @param origin Action from which the focus originated. Used to set the correct styling.
    */
   focusFirstItem(origin = "program") {
-    var _a8;
-    (_a8 = this._firstItemFocusRef) == null ? void 0 : _a8.destroy();
+    var _a9;
+    (_a9 = this._firstItemFocusRef) == null ? void 0 : _a9.destroy();
     this._firstItemFocusRef = afterNextRender(() => {
       const menuPanel = this._resolvePanel();
       if (!menuPanel || !menuPanel.contains(document.activeElement)) {
@@ -89848,7 +92554,7 @@ var MatMenu = class _MatMenu {
       provide: MAT_MENU_PANEL,
       useExisting: _MatMenu
     }])],
-    ngContentSelectors: _c34,
+    ngContentSelectors: _c35,
     decls: 1,
     vars: 0,
     consts: [["tabindex", "-1", "role", "menu", 1, "mat-mdc-menu-panel", 3, "click", "animationstart", "animationend", "animationcancel", "id"], [1, "mat-mdc-menu-content"]],
@@ -90043,7 +92749,7 @@ var MatMenuTrigger = class _MatMenuTrigger {
     return this._menu;
   }
   set menu(menu) {
-    var _a8;
+    var _a9;
     if (menu === this._menu) {
       return;
     }
@@ -90060,7 +92766,7 @@ var MatMenuTrigger = class _MatMenuTrigger {
         }
       });
     }
-    (_a8 = this._menuItemInstance) == null ? void 0 : _a8._setTriggersSubmenu(this.triggersSubmenu());
+    (_a9 = this._menuItemInstance) == null ? void 0 : _a9._setTriggersSubmenu(this.triggersSubmenu());
   }
   _menu;
   /** Data to be passed along to any lazily-rendered content. */
@@ -90107,12 +92813,12 @@ var MatMenuTrigger = class _MatMenuTrigger {
     this._handleHover();
   }
   ngOnDestroy() {
-    var _a8;
+    var _a9;
     if (this.menu && this._ownsMenu(this.menu)) {
       PANELS_TO_TRIGGERS.delete(this.menu);
     }
     this._cleanupTouchstart();
-    (_a8 = this._pendingRemoval) == null ? void 0 : _a8.unsubscribe();
+    (_a9 = this._pendingRemoval) == null ? void 0 : _a9.unsubscribe();
     this._menuCloseSubscription.unsubscribe();
     this._closingActionsSubscription.unsubscribe();
     this._hoverSubscription.unsubscribe();
@@ -90139,12 +92845,12 @@ var MatMenuTrigger = class _MatMenuTrigger {
   }
   /** Opens the menu. */
   openMenu() {
-    var _a8, _b2;
+    var _a9, _b3;
     const menu = this.menu;
     if (this._menuOpen || !menu) {
       return;
     }
-    (_a8 = this._pendingRemoval) == null ? void 0 : _a8.unsubscribe();
+    (_a9 = this._pendingRemoval) == null ? void 0 : _a9.unsubscribe();
     const previousTrigger = PANELS_TO_TRIGGERS.get(menu);
     PANELS_TO_TRIGGERS.set(menu, this);
     if (previousTrigger && previousTrigger !== this) {
@@ -90157,7 +92863,7 @@ var MatMenuTrigger = class _MatMenuTrigger {
     overlayConfig.hasBackdrop = menu.hasBackdrop == null ? !this.triggersSubmenu() : menu.hasBackdrop;
     if (!overlayRef.hasAttached()) {
       overlayRef.attach(this._getPortal(menu));
-      (_b2 = menu.lazyContent) == null ? void 0 : _b2.attach(this.menuData);
+      (_b3 = menu.lazyContent) == null ? void 0 : _b3.attach(this.menuData);
     }
     this._closingActionsSubscription = this._menuClosingActions().subscribe(() => this.closeMenu());
     menu.parentMenu = this.triggersSubmenu() ? this._parentMaterialMenu : void 0;
@@ -90174,8 +92880,8 @@ var MatMenuTrigger = class _MatMenuTrigger {
   }
   /** Closes the menu. */
   closeMenu() {
-    var _a8;
-    (_a8 = this.menu) == null ? void 0 : _a8.close.emit();
+    var _a9;
+    (_a9 = this.menu) == null ? void 0 : _a9.close.emit();
   }
   /**
    * Focuses the menu trigger.
@@ -90192,29 +92898,29 @@ var MatMenuTrigger = class _MatMenuTrigger {
    * Updates the position of the menu to ensure that it fits all options within the viewport.
    */
   updatePosition() {
-    var _a8;
-    (_a8 = this._overlayRef) == null ? void 0 : _a8.updatePosition();
+    var _a9;
+    (_a9 = this._overlayRef) == null ? void 0 : _a9.updatePosition();
   }
   /** Closes the menu and does the necessary cleanup. */
   _destroyMenu(reason) {
-    var _a8, _b2;
+    var _a9, _b3;
     const overlayRef = this._overlayRef;
     const menu = this._menu;
     if (!overlayRef || !this.menuOpen) {
       return;
     }
     this._closingActionsSubscription.unsubscribe();
-    (_a8 = this._pendingRemoval) == null ? void 0 : _a8.unsubscribe();
+    (_a9 = this._pendingRemoval) == null ? void 0 : _a9.unsubscribe();
     if (menu instanceof MatMenu && this._ownsMenu(menu)) {
       this._pendingRemoval = menu._animationDone.pipe(take(1)).subscribe(() => {
-        var _a9;
+        var _a10;
         overlayRef.detach();
-        (_a9 = menu.lazyContent) == null ? void 0 : _a9.detach();
+        (_a10 = menu.lazyContent) == null ? void 0 : _a10.detach();
       });
       menu._setIsOpen(false);
     } else {
       overlayRef.detach();
-      (_b2 = menu == null ? void 0 : menu.lazyContent) == null ? void 0 : _b2.detach();
+      (_b3 = menu == null ? void 0 : menu.lazyContent) == null ? void 0 : _b3.detach();
     }
     if (menu && this._ownsMenu(menu)) {
       PANELS_TO_TRIGGERS.delete(menu);
@@ -90633,7 +93339,7 @@ var fadeInItems = matMenuAnimations.fadeInItems;
 var transformMenu = matMenuAnimations.transformMenu;
 
 // libs/form-fields/src/lib/duration-field.component.ts
-var _c014 = ["*"];
+var _c018 = ["*"];
 var _forTrack02 = ($index, $item) => $item.id;
 function DurationFieldComponent_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
@@ -90825,8 +93531,8 @@ var _DurationFieldComponent = class _DurationFieldComponent {
     return blocks;
   }
   _updateOption() {
-    var _a8;
-    if (!((_a8 = this.duration_options) == null ? void 0 : _a8.length))
+    var _a9;
+    if (!((_a9 = this.duration_options) == null ? void 0 : _a9.length))
       return;
     const idx = this.duration_options.findIndex((_3) => _3.id === this.duration);
     if (idx < 0)
@@ -90842,7 +93548,7 @@ _DurationFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent(
     useExisting: forwardRef(() => _DurationFieldComponent),
     multi: true
   }
-]), \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c014, decls: 14, vars: 11, consts: [["menu", "matMenu"], ["duration-field", "", "matRipple", "", 1, "flex", "h-12", "w-full", "items-center", "justify-between", "rounded", "border", "border-neutral", "px-2", 3, "disabled", "matMenuTriggerFor"], [1, "flex", "w-1/2", "flex-1", "flex-col", "px-2", "text-left", "leading-tight"], [1, "truncate"], [1, "truncate", "text-xs", "opacity-30"], [1, "text-2xl"], [1, "max-h-[15rem]", "min-w-[18rem]"], ["mat-menu-item", "", 1, "text-left"], ["mat-menu-item", "", 1, "text-left", 3, "click"], [1, "flex", "items-center", "justify-between"], [1, "flex", "flex-col", "leading-tight"], [1, "ml-2", "text-2xl"]], template: function DurationFieldComponent_Template(rf, ctx) {
+]), \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c018, decls: 14, vars: 11, consts: [["menu", "matMenu"], ["duration-field", "", "matRipple", "", 1, "flex", "h-12", "w-full", "items-center", "justify-between", "rounded", "border", "border-neutral", "px-2", 3, "disabled", "matMenuTriggerFor"], [1, "flex", "w-1/2", "flex-1", "flex-col", "px-2", "text-left", "leading-tight"], [1, "truncate"], [1, "truncate", "text-xs", "opacity-30"], [1, "text-2xl"], [1, "max-h-[15rem]", "min-w-[18rem]"], ["mat-menu-item", "", 1, "text-left"], ["mat-menu-item", "", 1, "text-left", 3, "click"], [1, "flex", "items-center", "justify-between"], [1, "flex", "flex-col", "leading-tight"], [1, "ml-2", "text-2xl"]], template: function DurationFieldComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projectionDef();
     \u0275\u0275elementStart(0, "button", 1)(1, "div", 2)(2, "div", 3);
@@ -91114,7 +93820,7 @@ async function openBookingModal(data, dialog) {
 }
 var _BookingModalComponent = class _BookingModalComponent extends AsyncHandler {
   constructor() {
-    var _a8;
+    var _a9;
     super(...arguments);
     this._data = inject(MAT_DIALOG_DATA);
     this.event = new EventEmitter();
@@ -91124,14 +93830,14 @@ var _BookingModalComponent = class _BookingModalComponent extends AsyncHandler {
     this.max_duration = this._data.max_duration || 480;
     this.form = new FormGroup({
       organiser: new FormControl(this._data.user || null),
-      room_ids: new FormControl([((_a8 = this._data.space) == null ? void 0 : _a8.email) || ""]),
+      room_ids: new FormControl([((_a9 = this._data.space) == null ? void 0 : _a9.email) || ""]),
       date: new FormControl(this._data.date || (/* @__PURE__ */ new Date()).valueOf()),
       duration: new FormControl(Math.min(this._data.min_duration || 15, 30)),
       title: new FormControl(`${this._data.title || ""}`)
     });
     this.searchStaff = (q4) => of(q4).pipe(switchMap(() => {
-      var _a9;
-      const mod2 = Ea((_a9 = this._data.space) == null ? void 0 : _a9.id, "Bookings");
+      var _a10;
+      const mod2 = Ea((_a10 = this._data.space) == null ? void 0 : _a10.id, "Bookings");
       if (!mod2)
         return of([]);
       return mod2.execute("list_users", [q4]).catch(() => []);
@@ -91571,7 +94277,7 @@ var _PanelStateService = class _PanelStateService extends AsyncHandler {
    * @param date Start time of the new booking
    */
   async newBooking(date = Date.now(), user = false, future = false, force_api = false) {
-    var _a8;
+    var _a9;
     const current = await nextValueFrom(this._current);
     if (current && isAfter(date, current.date) && isBefore(date, addMinutes(current.date, current.duration)))
       return notifyError("Booking already exists for this time");
@@ -91599,7 +94305,7 @@ var _PanelStateService = class _PanelStateService extends AsyncHandler {
       return details.close();
     this._events.newForm();
     this._events.form.patchValue(__spreadProps(__spreadValues({}, details.metadata), {
-      host: (_a8 = details.metadata.organiser) == null ? void 0 : _a8.email,
+      host: (_a9 = details.metadata.organiser) == null ? void 0 : _a9.email,
       resources: [space],
       system: space
     }));
@@ -92042,8 +94748,8 @@ var CheckinTimetableComponent = _CheckinTimetableComponent;
 })();
 
 // apps/booking-panel/src/app/checkin/checkin-view.component.ts
-var _c015 = (a0, a1) => ({ hour: a0, minute: a1 });
-var _c19 = (a0) => ({ minute: a0 });
+var _c019 = (a0, a1) => ({ hour: a0, minute: a1 });
+var _c112 = (a0) => ({ minute: a0 });
 function CheckinViewComponent_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "div", 18);
@@ -92063,7 +94769,7 @@ function CheckinViewComponent_Conditional_21_Conditional_0_Conditional_0_Templat
   if (rf & 2) {
     let tmp_3_0;
     const ctx_r0 = \u0275\u0275nextContext(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 5, "APP.BOOKING_PANEL.FREE_IN_HOURS_AND_MINUTES", \u0275\u0275pureFunction2(8, _c015, (tmp_3_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_3_0.current[1], (tmp_3_0 = \u0275\u0275pipeBind1(2, 3, ctx_r0.event_state)) == null ? null : tmp_3_0.current[2])), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 5, "APP.BOOKING_PANEL.FREE_IN_HOURS_AND_MINUTES", \u0275\u0275pureFunction2(8, _c019, (tmp_3_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_3_0.current[1], (tmp_3_0 = \u0275\u0275pipeBind1(2, 3, ctx_r0.event_state)) == null ? null : tmp_3_0.current[2])), " ");
   }
 }
 function CheckinViewComponent_Conditional_21_Conditional_0_Conditional_2_Template(rf, ctx) {
@@ -92075,7 +94781,7 @@ function CheckinViewComponent_Conditional_21_Conditional_0_Conditional_2_Templat
   if (rf & 2) {
     let tmp_3_0;
     const ctx_r0 = \u0275\u0275nextContext(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 3, "APP.BOOKING_PANEL.FREE_IN_MINUTES", \u0275\u0275pureFunction1(6, _c19, (tmp_3_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_3_0.current[2])), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 3, "APP.BOOKING_PANEL.FREE_IN_MINUTES", \u0275\u0275pureFunction1(6, _c112, (tmp_3_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_3_0.current[2])), " ");
   }
 }
 function CheckinViewComponent_Conditional_21_Conditional_0_Conditional_4_Template(rf, ctx) {
@@ -92119,7 +94825,7 @@ function CheckinViewComponent_Conditional_21_Conditional_2_Conditional_0_Templat
   if (rf & 2) {
     let tmp_3_0;
     const ctx_r0 = \u0275\u0275nextContext(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 5, "APP.BOOKING_PANEL.FREE_FOR_HOURS_AND_MINUTES", \u0275\u0275pureFunction2(8, _c015, (tmp_3_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_3_0.current[1], (tmp_3_0 = \u0275\u0275pipeBind1(2, 3, ctx_r0.event_state)) == null ? null : tmp_3_0.current[2])), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 5, "APP.BOOKING_PANEL.FREE_FOR_HOURS_AND_MINUTES", \u0275\u0275pureFunction2(8, _c019, (tmp_3_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_3_0.current[1], (tmp_3_0 = \u0275\u0275pipeBind1(2, 3, ctx_r0.event_state)) == null ? null : tmp_3_0.current[2])), " ");
   }
 }
 function CheckinViewComponent_Conditional_21_Conditional_2_Conditional_2_Template(rf, ctx) {
@@ -92131,7 +94837,7 @@ function CheckinViewComponent_Conditional_21_Conditional_2_Conditional_2_Templat
   if (rf & 2) {
     let tmp_3_0;
     const ctx_r0 = \u0275\u0275nextContext(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 3, "APP.BOOKING_PANEL.FREE_FOR_MINUTES", \u0275\u0275pureFunction1(6, _c19, (tmp_3_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_3_0.current[2])), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 3, "APP.BOOKING_PANEL.FREE_FOR_MINUTES", \u0275\u0275pureFunction1(6, _c112, (tmp_3_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_3_0.current[2])), " ");
   }
 }
 function CheckinViewComponent_Conditional_21_Conditional_2_Conditional_4_Template(rf, ctx) {
@@ -93634,7 +96340,7 @@ function penalty(bm) {
   for (const column of inverse.data)
     finder += finderPattern(column);
   let darkPixels = 0;
-  bm.rectRead(0, Infinity, (_c, val) => darkPixels += val ? 1 : 0);
+  bm.rectRead(0, Infinity, (_c10, val) => darkPixels += val ? 1 : 0);
   const darkPercent = darkPixels / (bm.height * bm.width) * 100;
   const dark = 10 * Math.floor(Math.abs(darkPercent - 50) / 5);
   return adjacent + box + finder + dark;
@@ -94393,8 +97099,8 @@ var PanelViewDetailsComponent = _PanelViewDetailsComponent;
 })();
 
 // apps/booking-panel/src/app/new-panel/panel-view-status.component.ts
-var _c016 = (a0, a1) => ({ hour: a0, minute: a1 });
-var _c110 = (a0) => ({ minute: a0 });
+var _c020 = (a0, a1) => ({ hour: a0, minute: a1 });
+var _c113 = (a0) => ({ minute: a0 });
 function PanelViewStatusComponent_Conditional_16_Conditional_0_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275text(0);
@@ -94405,7 +97111,7 @@ function PanelViewStatusComponent_Conditional_16_Conditional_0_Conditional_0_Tem
   if (rf & 2) {
     let tmp_3_0;
     const ctx_r0 = \u0275\u0275nextContext(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 5, "APP.BOOKING_PANEL.FREE_IN_HOURS_AND_MINUTES", \u0275\u0275pureFunction2(8, _c016, (tmp_3_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_3_0.current[1], (tmp_3_0 = \u0275\u0275pipeBind1(2, 3, ctx_r0.event_state)) == null ? null : tmp_3_0.current[2])), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 5, "APP.BOOKING_PANEL.FREE_IN_HOURS_AND_MINUTES", \u0275\u0275pureFunction2(8, _c020, (tmp_3_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_3_0.current[1], (tmp_3_0 = \u0275\u0275pipeBind1(2, 3, ctx_r0.event_state)) == null ? null : tmp_3_0.current[2])), " ");
   }
 }
 function PanelViewStatusComponent_Conditional_16_Conditional_0_Conditional_2_Template(rf, ctx) {
@@ -94417,7 +97123,7 @@ function PanelViewStatusComponent_Conditional_16_Conditional_0_Conditional_2_Tem
   if (rf & 2) {
     let tmp_3_0;
     const ctx_r0 = \u0275\u0275nextContext(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 3, "APP.BOOKING_PANEL.FREE_IN_MINUTES", \u0275\u0275pureFunction1(6, _c110, (tmp_3_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_3_0.current[2])), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 3, "APP.BOOKING_PANEL.FREE_IN_MINUTES", \u0275\u0275pureFunction1(6, _c113, (tmp_3_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_3_0.current[2])), " ");
   }
 }
 function PanelViewStatusComponent_Conditional_16_Conditional_0_Conditional_5_Template(rf, ctx) {
@@ -94471,7 +97177,7 @@ function PanelViewStatusComponent_Conditional_16_Conditional_2_Conditional_2_Con
   if (rf & 2) {
     let tmp_4_0;
     const ctx_r0 = \u0275\u0275nextContext(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 5, "APP.BOOKING_PANEL.FREE_FOR_HOURS_AND_MINUTES", \u0275\u0275pureFunction2(8, _c016, (tmp_4_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_4_0.current[1], (tmp_4_0 = \u0275\u0275pipeBind1(2, 3, ctx_r0.event_state)) == null ? null : tmp_4_0.current[2])), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 5, "APP.BOOKING_PANEL.FREE_FOR_HOURS_AND_MINUTES", \u0275\u0275pureFunction2(8, _c020, (tmp_4_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_4_0.current[1], (tmp_4_0 = \u0275\u0275pipeBind1(2, 3, ctx_r0.event_state)) == null ? null : tmp_4_0.current[2])), " ");
   }
 }
 function PanelViewStatusComponent_Conditional_16_Conditional_2_Conditional_2_Conditional_2_Template(rf, ctx) {
@@ -94483,7 +97189,7 @@ function PanelViewStatusComponent_Conditional_16_Conditional_2_Conditional_2_Con
   if (rf & 2) {
     let tmp_4_0;
     const ctx_r0 = \u0275\u0275nextContext(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 3, "APP.BOOKING_PANEL.FREE_FOR_MINUTES", \u0275\u0275pureFunction1(6, _c110, (tmp_4_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_4_0.current[2])), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(2, 3, "APP.BOOKING_PANEL.FREE_FOR_MINUTES", \u0275\u0275pureFunction1(6, _c113, (tmp_4_0 = \u0275\u0275pipeBind1(1, 1, ctx_r0.event_state)) == null ? null : tmp_4_0.current[2])), " ");
   }
 }
 function PanelViewStatusComponent_Conditional_16_Conditional_2_Conditional_2_Conditional_5_Template(rf, ctx) {
@@ -96036,7 +98742,7 @@ var TYPES = [
 ];
 var TRACKING = ["in_storage", "in_transit", "at_location"];
 var MOCK_BOOKINGS = new Array(300).fill(0).map((_3, index) => {
-  var _a8;
+  var _a9;
   const throw_away = predictableRandomInt(999999) % 3 === 0;
   const user = MOCK_STAFF[predictableRandomInt(MOCK_STAFF.length)] || {};
   const type2 = TYPES[predictableRandomInt(TYPES.length)];
@@ -96081,7 +98787,7 @@ var MOCK_BOOKINGS = new Array(300).fill(0).map((_3, index) => {
         amount: predictableRandomInt(5, 1)
       })),
       tracking: approved === 0 ? TRACKING[predictableRandomInt(TRACKING.length)] : "in_storage",
-      space_id: (_a8 = lvl_spaces[predictableRandomInt(lvl_spaces.length)]) == null ? void 0 : _a8.id
+      space_id: (_a9 = lvl_spaces[predictableRandomInt(lvl_spaces.length)]) == null ? void 0 : _a9.id
     }
   };
 });
@@ -96431,11 +99137,11 @@ var MOCK_EVENTS = new Array(200).fill(0).map((_3, index) => {
 });
 var event_spaces = {};
 MOCK_EVENTS.forEach((event) => {
-  var _a8, _b2, _c;
-  if (!event_spaces[(_a8 = event.system) == null ? void 0 : _a8.id]) {
-    event_spaces[(_b2 = event.system) == null ? void 0 : _b2.id] = [];
+  var _a9, _b3, _c10;
+  if (!event_spaces[(_a9 = event.system) == null ? void 0 : _a9.id]) {
+    event_spaces[(_b3 = event.system) == null ? void 0 : _b3.id] = [];
   }
-  event_spaces[(_c = event.system) == null ? void 0 : _c.id].push(event);
+  event_spaces[(_c10 = event.system) == null ? void 0 : _c10.id].push(event);
 });
 
 // libs/mocks/src/lib/api/calendars.mock.ts
@@ -96537,7 +99243,7 @@ function registerMocks4() {
     metadata: {},
     method: "POST",
     callback: (request) => {
-      var _a8, _b2;
+      var _a9, _b3;
       const new_event = __spreadProps(__spreadValues({}, request.body), {
         id: `-cal-event-${predictableRandomInt(999)}`
       });
@@ -96556,8 +99262,8 @@ function registerMocks4() {
         ];
       }
       MOCK_EVENTS.push(new_event);
-      const system = Xo((_a8 = new_event.system) == null ? void 0 : _a8.id);
-      (_b2 = system == null ? void 0 : system.Bookings[0]) == null ? void 0 : _b2.$poll_bookings();
+      const system = Xo((_a9 = new_event.system) == null ? void 0 : _a9.id);
+      (_b3 = system == null ? void 0 : system.Bookings[0]) == null ? void 0 : _b3.$poll_bookings();
       return new_event;
     }
   });
@@ -96674,8 +99380,8 @@ function registerMocks5() {
     metadata: {},
     method: "GET",
     callback: (request) => {
-      var _a8;
-      return ((_a8 = request.query_params) == null ? void 0 : _a8.building_id) ? MOCK_SURVEYS.filter((_3) => _3.zone_id === request.query_params.building_id) : MOCK_SURVEYS;
+      var _a9;
+      return ((_a9 = request.query_params) == null ? void 0 : _a9.building_id) ? MOCK_SURVEYS.filter((_3) => _3.zone_id === request.query_params.building_id) : MOCK_SURVEYS;
     }
   });
   $s({
@@ -96683,8 +99389,8 @@ function registerMocks5() {
     metadata: {},
     method: "GET",
     callback: (request) => {
-      var _a8;
-      return ((_a8 = request.query_params) == null ? void 0 : _a8.survey_id) ? MOCK_SURVEY_ANSWERS.filter((_3) => _3.survey_id === request.query_params.survey_id) : MOCK_SURVEY_ANSWERS;
+      var _a9;
+      return ((_a9 = request.query_params) == null ? void 0 : _a9.survey_id) ? MOCK_SURVEY_ANSWERS.filter((_3) => _3.survey_id === request.query_params.survey_id) : MOCK_SURVEY_ANSWERS;
     }
   });
   $s({
@@ -96692,8 +99398,8 @@ function registerMocks5() {
     metadata: {},
     method: "GET",
     callback: (request) => {
-      var _a8;
-      return ((_a8 = request.query_params) == null ? void 0 : _a8.id) ? MOCK_SURVEY_QUESTIONS.filter((_3) => _3.id === +request.query_params.id) : MOCK_SURVEY_QUESTIONS;
+      var _a9;
+      return ((_a9 = request.query_params) == null ? void 0 : _a9.id) ? MOCK_SURVEY_QUESTIONS.filter((_3) => _3.id === +request.query_params.id) : MOCK_SURVEY_QUESTIONS;
     }
   });
   $s({
@@ -97400,14 +100106,14 @@ function updateLocations(mod2, levels) {
   }
 }
 function generateLocation(lvl, desks, users = MOCK_STAFF) {
-  var _a8, _b2, _c, _d;
+  var _a9, _b3, _c10, _d2;
   const fixed = predictableRandomInt(9999) % 3 === 0;
-  const usr = (_b2 = (users || [])[predictableRandomInt((_a8 = users || []) == null ? void 0 : _a8.length)]) == null ? void 0 : _b2.email;
+  const usr = (_b3 = (users || [])[predictableRandomInt((_a9 = users || []) == null ? void 0 : _a9.length)]) == null ? void 0 : _b3.email;
   return fixed ? {
     location: "desk",
     at_location: predictableRandomInt(9999) % 2 !== 0,
     map_id: desks[predictableRandomInt(desks.length)],
-    mac: (_c = h2) == null ? void 0 : _c.hashStr(usr || ""),
+    mac: (_c10 = h2) == null ? void 0 : _c10.hashStr(usr || ""),
     level: lvl.id,
     building: lvl.parent_id
   } : {
@@ -97418,7 +100124,7 @@ function generateLocation(lvl, desks, users = MOCK_STAFF) {
     lon: 55.27476066828535,
     lat: 25.20106100633537,
     s2_cell_id: "3e5f4281459c",
-    mac: (_d = h2) == null ? void 0 : _d.hashStr(usr || ""),
+    mac: (_d2 = h2) == null ? void 0 : _d2.hashStr(usr || ""),
     variance: 9.62534032222287,
     last_seen: Math.floor((/* @__PURE__ */ new Date()).valueOf() / 1e3),
     map_width: 100,
@@ -97475,12 +100181,12 @@ var MockBookingModule = class {
 };
 var createBookingsModule = (space, overrides = {}) => new MockBookingModule(space, overrides);
 function updateBookings(space, mod2) {
-  var _a8;
+  var _a9;
   const bookings = MOCK_EVENTS.filter((event) => {
-    var _a9;
-    return (_a9 = event.attendees) == null ? void 0 : _a9.find((u9) => {
-      var _a10;
-      return u9.email === space.email || u9.id === space.id || ((_a10 = event.system) == null ? void 0 : _a10.id) === space.id;
+    var _a10;
+    return (_a10 = event.attendees) == null ? void 0 : _a10.find((u9) => {
+      var _a11;
+      return u9.email === space.email || u9.id === space.id || ((_a11 = event.system) == null ? void 0 : _a11.id) === space.id;
     });
   }) || [];
   bookings.sort((a, b3) => a.event_start - b3.event_start);
@@ -97489,7 +100195,7 @@ function updateBookings(space, mod2) {
   mod2.next_booking = bookings.find((_3) => _3.event_start * 1e3 > Date.now());
   const date = /* @__PURE__ */ new Date();
   const { current_booking, next_booking } = mod2;
-  const start = new Date((_a8 = current_booking || next_booking) == null ? void 0 : _a8.event_start);
+  const start = new Date((_a9 = current_booking || next_booking) == null ? void 0 : _a9.event_start);
   const pending = timePeriodsIntersect(date.valueOf(), date.valueOf(), subSeconds(start, mod2.pending_before).valueOf(), addSeconds(start, mod2.pending_period).valueOf());
   mod2.status = (space == null ? void 0 : space.bookable) ? current_booking ? "busy" : pending ? "pending" : "free" : "not-bookable";
 }
@@ -97647,8 +100353,8 @@ function registerMocks6() {
     metadata: {},
     method: "GET",
     callback: (request) => {
-      var _a8;
-      return ((_a8 = request.query_params) == null ? void 0 : _a8.zone_id) ? MOCK_SPACES.filter((_3) => _3.zones.includes(request.query_params.zone_id)) : MOCK_SPACES;
+      var _a9;
+      return ((_a9 = request.query_params) == null ? void 0 : _a9.zone_id) ? MOCK_SPACES.filter((_3) => _3.zones.includes(request.query_params.zone_id)) : MOCK_SPACES;
     }
   });
   $s({
@@ -98692,8 +101398,8 @@ function uuid4(crypto = getCrypto()) {
   );
 }
 function getFirstException(event) {
-  var _a8, _b2;
-  return (_b2 = (_a8 = event.exception) == null ? void 0 : _a8.values) == null ? void 0 : _b2[0];
+  var _a9, _b3;
+  return (_b3 = (_a9 = event.exception) == null ? void 0 : _a9.values) == null ? void 0 : _b3[0];
 }
 function getEventDescription(event) {
   const { message: message2, event_id: eventId } = event;
@@ -98769,7 +101475,7 @@ function createUnixTimestampInSecondsFunc() {
 var timestampInSeconds = createUnixTimestampInSecondsFunc();
 var cachedTimeOrigin;
 function getBrowserTimeOrigin() {
-  var _a8;
+  var _a9;
   const { performance: performance2 } = GLOBAL_OBJ;
   if (!(performance2 == null ? void 0 : performance2.now)) {
     return [void 0, "none"];
@@ -98779,7 +101485,7 @@ function getBrowserTimeOrigin() {
   const dateNow = Date.now();
   const timeOriginDelta = performance2.timeOrigin ? Math.abs(performance2.timeOrigin + performanceNow - dateNow) : threshold;
   const timeOriginIsReliable = timeOriginDelta < threshold;
-  const navigationStart = (_a8 = performance2.timing) == null ? void 0 : _a8.navigationStart;
+  const navigationStart = (_a9 = performance2.timing) == null ? void 0 : _a9.navigationStart;
   const hasNavigationStart = typeof navigationStart === "number";
   const navigationStartDelta = hasNavigationStart ? Math.abs(navigationStart + performanceNow - dateNow) : threshold;
   const navigationStartIsReliable = navigationStartDelta < threshold;
@@ -99232,7 +101938,7 @@ var Scope = class _Scope {
    * By default, the last 100 breadcrumbs are kept.
    */
   addBreadcrumb(breadcrumb, maxBreadcrumbs) {
-    var _a8;
+    var _a9;
     const maxCrumbs = typeof maxBreadcrumbs === "number" ? maxBreadcrumbs : DEFAULT_MAX_BREADCRUMBS;
     if (maxCrumbs <= 0) {
       return this;
@@ -99246,7 +101952,7 @@ var Scope = class _Scope {
     this._breadcrumbs.push(mergedBreadcrumb);
     if (this._breadcrumbs.length > maxCrumbs) {
       this._breadcrumbs = this._breadcrumbs.slice(-maxCrumbs);
-      (_a8 = this._client) == null ? void 0 : _a8.recordDroppedEvent("buffer_overflow", "log_item");
+      (_a9 = this._client) == null ? void 0 : _a9.recordDroppedEvent("buffer_overflow", "log_item");
     }
     this._notifyScopeListeners();
     return this;
@@ -99864,8 +102570,8 @@ function spanToTraceHeader(span) {
 }
 function convertSpanLinksForEnvelope(links) {
   if (links && links.length > 0) {
-    return links.map((_a8) => {
-      var _b2 = _a8, { context: _c } = _b2, _d = _c, { spanId, traceId, traceFlags } = _d, restContext = __objRest(_d, ["spanId", "traceId", "traceFlags"]), { attributes } = _b2;
+    return links.map((_a9) => {
+      var _b3 = _a9, { context: _c10 } = _b3, _d2 = _c10, { spanId, traceId, traceFlags } = _d2, restContext = __objRest(_d2, ["spanId", "traceId", "traceFlags"]), { attributes } = _b3;
       return __spreadValues({
         span_id: spanId,
         trace_id: traceId,
@@ -99894,14 +102600,14 @@ function ensureTimestampInSeconds(timestamp2) {
   return isMs ? timestamp2 / 1e3 : timestamp2;
 }
 function spanToJSON(span) {
-  var _a8;
+  var _a9;
   if (spanIsSentrySpan(span)) {
     return span.getSpanJSON();
   }
   const { spanId: span_id, traceId: trace_id } = span.spanContext();
   if (spanIsOpenTelemetrySdkTraceBaseSpan(span)) {
     const { attributes, startTime, name, endTime, status, links } = span;
-    const parentSpanId = "parentSpanId" in span ? span.parentSpanId : "parentSpanContext" in span ? (_a8 = span.parentSpanContext) == null ? void 0 : _a8.spanId : void 0;
+    const parentSpanId = "parentSpanId" in span ? span.parentSpanId : "parentSpanContext" in span ? (_a9 = span.parentSpanContext) == null ? void 0 : _a9.spanId : void 0;
     return {
       span_id,
       trace_id,
@@ -100021,11 +102727,11 @@ errorCallback.tag = "sentry_tracingErrorCallback";
 
 // node_modules/@sentry/core/build/esm/utils/hasSpansEnabled.js
 function hasSpansEnabled(maybeOptions) {
-  var _a8;
+  var _a9;
   if (typeof __SENTRY_TRACING__ === "boolean" && !__SENTRY_TRACING__) {
     return false;
   }
-  const options = maybeOptions || ((_a8 = getClient()) == null ? void 0 : _a8.getOptions());
+  const options = maybeOptions || ((_a9 = getClient()) == null ? void 0 : _a9.getOptions());
   return !!options && // Note: This check is `!= null`, meaning "nullish". `0` is not "nullish", `undefined` and `null` are. (This comment was brought to you by 15 minutes of questioning life)
   (options.tracesSampleRate != null || !!options.tracesSampler);
 }
@@ -100150,7 +102856,7 @@ function getDynamicSamplingContextFromScope(client, scope) {
   return propagationContext.dsc || getDynamicSamplingContextFromClient(propagationContext.traceId, client);
 }
 function getDynamicSamplingContextFromSpan(span) {
-  var _a8;
+  var _a9;
   const client = getClient();
   if (!client) {
     return {};
@@ -100186,7 +102892,7 @@ function getDynamicSamplingContextFromSpan(span) {
     dsc.sample_rand = // In OTEL we store the sample rand on the trace state because we cannot access scopes for NonRecordingSpans
     // The Sentry OTEL SpanSampler takes care of writing the sample rand on the root span
     (traceState == null ? void 0 : traceState.get("sentry.sample_rand")) ?? // On all other platforms we can actually get the scopes from a root span (we use this as a fallback)
-    ((_a8 = getCapturedScopesOnSpan(rootSpan).scope) == null ? void 0 : _a8.getPropagationContext().sampleRand.toString());
+    ((_a9 = getCapturedScopesOnSpan(rootSpan).scope) == null ? void 0 : _a9.getPropagationContext().sampleRand.toString());
   }
   applyLocalSampleRateToDsc(dsc);
   client.emit("createDsc", dsc, rootSpan);
@@ -100582,8 +103288,8 @@ function getSdkMetadataForEnvelopeHeader(metadataOrEvent) {
   return { name, version };
 }
 function createEventEnvelopeHeaders(event, sdkInfo, tunnel, dsn) {
-  var _a8;
-  const dynamicSamplingContext = (_a8 = event.sdkProcessingMetadata) == null ? void 0 : _a8.dynamicSamplingContext;
+  var _a9;
+  const dynamicSamplingContext = (_a9 = event.sdkProcessingMetadata) == null ? void 0 : _a9.dynamicSamplingContext;
   return __spreadValues(__spreadValues(__spreadValues({
     event_id: event.event_id,
     sent_at: (/* @__PURE__ */ new Date()).toISOString()
@@ -100893,7 +103599,7 @@ var SentrySpan = class {
    * Finish the transaction & prepare the event to send to Sentry.
    */
   _convertSpanToTransaction() {
-    var _a8;
+    var _a9;
     if (!isFullFinishedSpan(spanToJSON(this))) {
       return void 0;
     }
@@ -100902,7 +103608,7 @@ var SentrySpan = class {
       this._name = "<unlabeled transaction>";
     }
     const { scope: capturedSpanScope, isolationScope: capturedSpanIsolationScope } = getCapturedScopesOnSpan(this);
-    const normalizedRequest = (_a8 = capturedSpanScope == null ? void 0 : capturedSpanScope.getScopeData().sdkProcessingMetadata) == null ? void 0 : _a8.normalizedRequest;
+    const normalizedRequest = (_a9 = capturedSpanScope == null ? void 0 : capturedSpanScope.getScopeData().sdkProcessingMetadata) == null ? void 0 : _a9.normalizedRequest;
     if (this._sampled !== true) {
       return void 0;
     }
@@ -101083,7 +103789,7 @@ function getAcs() {
   return getAsyncContextStrategy(carrier);
 }
 function _startRootSpan(spanArguments, scope, parentSampled) {
-  var _a8;
+  var _a9;
   const client = getClient();
   const options = (client == null ? void 0 : client.getOptions()) || {};
   const { name = "" } = spanArguments;
@@ -101098,7 +103804,7 @@ function _startRootSpan(spanArguments, scope, parentSampled) {
       name,
       parentSampled: finalParentSampled,
       attributes: finalAttributes,
-      parentSampleRate: parseSampleRate((_a8 = currentPropagationContext.dsc) == null ? void 0 : _a8.sample_rate)
+      parentSampleRate: parseSampleRate((_a9 = currentPropagationContext.dsc) == null ? void 0 : _a9.sample_rate)
     },
     currentPropagationContext.sampleRand
   );
@@ -101714,11 +104420,11 @@ function applyClientOptions(event, options) {
   }
 }
 function applyDebugIds(event, stackParser) {
-  var _a8, _b2;
+  var _a9, _b3;
   const filenameDebugIdMap = getFilenameToDebugIdMap(stackParser);
-  (_b2 = (_a8 = event.exception) == null ? void 0 : _a8.values) == null ? void 0 : _b2.forEach((exception2) => {
-    var _a9, _b3;
-    (_b3 = (_a9 = exception2.stacktrace) == null ? void 0 : _a9.frames) == null ? void 0 : _b3.forEach((frame) => {
+  (_b3 = (_a9 = event.exception) == null ? void 0 : _a9.values) == null ? void 0 : _b3.forEach((exception2) => {
+    var _a10, _b4;
+    (_b4 = (_a10 = exception2.stacktrace) == null ? void 0 : _a10.frames) == null ? void 0 : _b4.forEach((frame) => {
       if (frame.filename) {
         frame.debug_id = filenameDebugIdMap[frame.filename];
       }
@@ -101726,11 +104432,11 @@ function applyDebugIds(event, stackParser) {
   });
 }
 function applyDebugMeta(event) {
-  var _a8, _b2;
+  var _a9, _b3;
   const filenameDebugIdMap = {};
-  (_b2 = (_a8 = event.exception) == null ? void 0 : _a8.values) == null ? void 0 : _b2.forEach((exception2) => {
-    var _a9, _b3;
-    (_b3 = (_a9 = exception2.stacktrace) == null ? void 0 : _a9.frames) == null ? void 0 : _b3.forEach((frame) => {
+  (_b3 = (_a9 = event.exception) == null ? void 0 : _a9.values) == null ? void 0 : _b3.forEach((exception2) => {
+    var _a10, _b4;
+    (_b4 = (_a10 = exception2.stacktrace) == null ? void 0 : _a10.frames) == null ? void 0 : _b4.forEach((frame) => {
       if (frame.debug_id) {
         if (frame.abs_path) {
           filenameDebugIdMap[frame.abs_path] = frame.debug_id;
@@ -101762,7 +104468,7 @@ function applyIntegrationsMetadata(event, integrationNames) {
   }
 }
 function normalizeEvent(event, depth, maxBreadth) {
-  var _a8, _b2;
+  var _a9, _b3;
   if (!event) {
     return null;
   }
@@ -101777,7 +104483,7 @@ function normalizeEvent(event, depth, maxBreadth) {
   }), event.extra && {
     extra: normalize(event.extra, depth, maxBreadth)
   });
-  if (((_a8 = event.contexts) == null ? void 0 : _a8.trace) && normalized.contexts) {
+  if (((_a9 = event.contexts) == null ? void 0 : _a9.trace) && normalized.contexts) {
     normalized.contexts.trace = event.contexts.trace;
     if (event.contexts.trace.data) {
       normalized.contexts.trace.data = normalize(event.contexts.trace.data, depth, maxBreadth);
@@ -101790,7 +104496,7 @@ function normalizeEvent(event, depth, maxBreadth) {
       });
     });
   }
-  if (((_b2 = event.contexts) == null ? void 0 : _b2.flags) && normalized.contexts) {
+  if (((_b3 = event.contexts) == null ? void 0 : _b3.flags) && normalized.contexts) {
     normalized.contexts.flags = normalize(event.contexts.flags, 3, maxBreadth);
   }
   return normalized;
@@ -102061,8 +104767,8 @@ function getPossibleEventMessages(event) {
 
 // node_modules/@sentry/core/build/esm/utils/transactionEvent.js
 function convertTransactionEventToSpanJson(event) {
-  var _a8;
-  const { trace_id, parent_span_id, span_id, status, origin, data, op } = ((_a8 = event.contexts) == null ? void 0 : _a8.trace) ?? {};
+  var _a9;
+  const { trace_id, parent_span_id, span_id, status, origin, data, op } = ((_a9 = event.contexts) == null ? void 0 : _a9.trace) ?? {};
   return {
     data: data ?? {},
     description: event.transaction,
@@ -102445,10 +105151,10 @@ var Client = class {
   }
   /** Updates existing session based on the provided event */
   _updateSessionFromEvent(session, event) {
-    var _a8;
+    var _a9;
     let crashed = event.level === "fatal";
     let errored = false;
-    const exceptions = (_a8 = event.exception) == null ? void 0 : _a8.values;
+    const exceptions = (_a9 = event.exception) == null ? void 0 : _a9.values;
     if (exceptions) {
       errored = true;
       for (const ex of exceptions) {
@@ -102609,7 +105315,7 @@ var Client = class {
       const result = processBeforeSend(this, options, prepared, hint);
       return _validateBeforeSendResult(result, beforeSendLabel);
     }).then((processedEvent) => {
-      var _a8;
+      var _a9;
       if (processedEvent === null) {
         this.recordDroppedEvent("before_send", dataCategory);
         if (isTransaction) {
@@ -102624,7 +105330,7 @@ var Client = class {
         this._updateSessionFromEvent(session, processedEvent);
       }
       if (isTransaction) {
-        const spanCountBefore = ((_a8 = processedEvent.sdkProcessingMetadata) == null ? void 0 : _a8.spanCountBeforeProcessing) || 0;
+        const spanCountBefore = ((_a9 = processedEvent.sdkProcessingMetadata) == null ? void 0 : _a9.spanCountBeforeProcessing) || 0;
         const spanCountAfter = processedEvent.spans ? processedEvent.spans.length : 0;
         const droppedSpanCount = spanCountBefore - spanCountAfter;
         if (droppedSpanCount > 0) {
@@ -102805,20 +105511,20 @@ function createLogEnvelope(logs, metadata, tunnel, dsn) {
 // node_modules/@sentry/core/build/esm/logs/exports.js
 GLOBAL_OBJ._sentryClientToLogBufferMap = /* @__PURE__ */ new WeakMap();
 function _INTERNAL_flushLogsBuffer(client, maybeLogBuffer) {
-  var _a8;
+  var _a9;
   const logBuffer = maybeLogBuffer ?? _INTERNAL_getLogBuffer(client) ?? [];
   if (logBuffer.length === 0) {
     return;
   }
   const clientOptions = client.getOptions();
   const envelope = createLogEnvelope(logBuffer, clientOptions._metadata, clientOptions.tunnel, client.getDsn());
-  (_a8 = GLOBAL_OBJ._sentryClientToLogBufferMap) == null ? void 0 : _a8.set(client, []);
+  (_a9 = GLOBAL_OBJ._sentryClientToLogBufferMap) == null ? void 0 : _a9.set(client, []);
   client.emit("flushLogs");
   client.sendEnvelope(envelope);
 }
 function _INTERNAL_getLogBuffer(client) {
-  var _a8;
-  return (_a8 = GLOBAL_OBJ._sentryClientToLogBufferMap) == null ? void 0 : _a8.get(client);
+  var _a9;
+  return (_a9 = GLOBAL_OBJ._sentryClientToLogBufferMap) == null ? void 0 : _a9.get(client);
 }
 
 // node_modules/@sentry/core/build/esm/sdk.js
@@ -103026,17 +105732,17 @@ function removeTrailingSlash(str2) {
 
 // node_modules/@sentry/core/build/esm/utils/ipAddress.js
 function addAutoIpAddressToUser(objWithMaybeUser) {
-  var _a8;
-  if (((_a8 = objWithMaybeUser.user) == null ? void 0 : _a8.ip_address) === void 0) {
+  var _a9;
+  if (((_a9 = objWithMaybeUser.user) == null ? void 0 : _a9.ip_address) === void 0) {
     objWithMaybeUser.user = __spreadProps(__spreadValues({}, objWithMaybeUser.user), {
       ip_address: "{{auto}}"
     });
   }
 }
 function addAutoIpAddressToSession(session) {
-  var _a8;
+  var _a9;
   if ("aggregates" in session) {
-    if (((_a8 = session.attrs) == null ? void 0 : _a8["ip_address"]) === void 0) {
+    if (((_a9 = session.attrs) == null ? void 0 : _a9["ip_address"]) === void 0) {
       session.attrs = __spreadProps(__spreadValues({}, session.attrs), {
         ip_address: "{{auto}}"
       });
@@ -103320,13 +106026,13 @@ function _getLastValidUrl(frames = []) {
   return null;
 }
 function _getEventFilterUrl(event) {
-  var _a8, _b2;
+  var _a9, _b3;
   try {
-    const rootException = [...((_a8 = event.exception) == null ? void 0 : _a8.values) ?? []].reverse().find((value) => {
-      var _a9, _b3, _c;
-      return ((_a9 = value.mechanism) == null ? void 0 : _a9.parent_id) === void 0 && ((_c = (_b3 = value.stacktrace) == null ? void 0 : _b3.frames) == null ? void 0 : _c.length);
+    const rootException = [...((_a9 = event.exception) == null ? void 0 : _a9.values) ?? []].reverse().find((value) => {
+      var _a10, _b4, _c10;
+      return ((_a10 = value.mechanism) == null ? void 0 : _a10.parent_id) === void 0 && ((_c10 = (_b4 = value.stacktrace) == null ? void 0 : _b4.frames) == null ? void 0 : _c10.length);
     });
-    const frames = (_b2 = rootException == null ? void 0 : rootException.stacktrace) == null ? void 0 : _b2.frames;
+    const frames = (_b3 = rootException == null ? void 0 : rootException.stacktrace) == null ? void 0 : _b3.frames;
     return frames ? _getLastValidUrl(frames) : null;
   } catch (oO) {
     DEBUG_BUILD && logger.error(`Cannot extract url for event ${getEventDescription(event)}`);
@@ -103334,8 +106040,8 @@ function _getEventFilterUrl(event) {
   }
 }
 function _isUselessError(event) {
-  var _a8, _b2;
-  if (!((_b2 = (_a8 = event.exception) == null ? void 0 : _a8.values) == null ? void 0 : _b2.length)) {
+  var _a9, _b3;
+  if (!((_b3 = (_a9 = event.exception) == null ? void 0 : _a9.values) == null ? void 0 : _b3.length)) {
     return false;
   }
   return (
@@ -103347,8 +106053,8 @@ function _isUselessError(event) {
 
 // node_modules/@sentry/core/build/esm/utils/aggregate-errors.js
 function applyAggregateErrorsToEvent(exceptionFromErrorImplementation, parser, key, limit, event, hint) {
-  var _a8;
-  if (!((_a8 = event.exception) == null ? void 0 : _a8.values) || !hint || !isInstanceOf(hint.originalException, Error)) {
+  var _a9;
+  if (!((_a9 = event.exception) == null ? void 0 : _a9.values) || !hint || !isInstanceOf(hint.originalException, Error)) {
     return;
   }
   const originalException = event.exception.values.length > 0 ? event.exception.values[event.exception.values.length - 1] : void 0;
@@ -103567,8 +106273,8 @@ function _isSameFingerprint(currentEvent, previousEvent) {
   }
 }
 function _getExceptionFromEvent(event) {
-  var _a8;
-  return ((_a8 = event.exception) == null ? void 0 : _a8.values) && event.exception.values[0];
+  var _a9;
+  return ((_a9 = event.exception) == null ? void 0 : _a9.values) && event.exception.values[0];
 }
 
 // node_modules/@sentry/core/build/esm/utils/url.js
@@ -103739,10 +106445,10 @@ function _addTracingHeadersToFetchRequest(request, fetchOptionsObj, span) {
   }
 }
 function endSpan(span, handlerData) {
-  var _a8;
+  var _a9;
   if (handlerData.response) {
     setHttpStatus(span, handlerData.response.status);
-    const contentLength = ((_a8 = handlerData.response) == null ? void 0 : _a8.headers) && handlerData.response.headers.get("content-length");
+    const contentLength = ((_a9 = handlerData.response) == null ? void 0 : _a9.headers) && handlerData.response.headers.get("content-length");
     if (contentLength) {
       const contentLengthNum = parseInt(contentLength);
       if (contentLengthNum > 0) {
@@ -103825,7 +106531,7 @@ function isNativeFunction(func) {
   return func && /^function\s+\w+\(\)\s+\{\s+\[native code\]\s+\}$/.test(func.toString());
 }
 function supportsNativeFetch() {
-  var _a8;
+  var _a9;
   if (typeof EdgeRuntime === "string") {
     return true;
   }
@@ -103842,7 +106548,7 @@ function supportsNativeFetch() {
       const sandbox = doc.createElement("iframe");
       sandbox.hidden = true;
       doc.head.appendChild(sandbox);
-      if ((_a8 = sandbox.contentWindow) == null ? void 0 : _a8.fetch) {
+      if ((_a9 = sandbox.contentWindow) == null ? void 0 : _a9.fetch) {
         result = isNativeFunction(sandbox.contentWindow.fetch);
       }
       doc.head.removeChild(sandbox);
@@ -104421,9 +107127,9 @@ var BrowserClient = class extends Client {
   }
 };
 function applyDefaultOptions(optionsArg) {
-  var _a8;
+  var _a9;
   return __spreadValues({
-    release: typeof __SENTRY_RELEASE__ === "string" ? __SENTRY_RELEASE__ : (_a8 = WINDOW3.SENTRY_RELEASE) == null ? void 0 : _a8.id,
+    release: typeof __SENTRY_RELEASE__ === "string" ? __SENTRY_RELEASE__ : (_a9 = WINDOW3.SENTRY_RELEASE) == null ? void 0 : _a9.id,
     // This supports the variable that sentry-webpack-plugin injects
     sendClientReports: true,
     // We default this to true, as it is the safer scenario
@@ -104472,8 +107178,8 @@ var generateUniqueID = () => {
 
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/getNavigationEntry.js
 var getNavigationEntry = (checkResponseStart = true) => {
-  var _a8, _b2;
-  const navigationEntry = (_b2 = (_a8 = WINDOW4.performance) == null ? void 0 : _a8.getEntriesByType) == null ? void 0 : _b2.call(_a8, "navigation")[0];
+  var _a9, _b3;
+  const navigationEntry = (_b3 = (_a9 = WINDOW4.performance) == null ? void 0 : _a9.getEntriesByType) == null ? void 0 : _b3.call(_a9, "navigation")[0];
   if (
     // sentry-specific change:
     // We don't want to check for responseStart for our own use of `getNavigationEntry`
@@ -104491,13 +107197,13 @@ var getActivationStart = () => {
 
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/initMetric.js
 var initMetric = (name, value = -1) => {
-  var _a8, _b2;
+  var _a9, _b3;
   const navEntry = getNavigationEntry();
   let navigationType = "navigate";
   if (navEntry) {
-    if (((_a8 = WINDOW4.document) == null ? void 0 : _a8.prerendering) || getActivationStart() > 0) {
+    if (((_a9 = WINDOW4.document) == null ? void 0 : _a9.prerendering) || getActivationStart() > 0) {
       navigationType = "prerender";
-    } else if ((_b2 = WINDOW4.document) == null ? void 0 : _b2.wasDiscarded) {
+    } else if ((_b3 = WINDOW4.document) == null ? void 0 : _b3.wasDiscarded) {
       navigationType = "restore";
     } else if (navEntry.type) {
       navigationType = navEntry.type.replace(/_/g, "-");
@@ -104542,7 +107248,7 @@ var LayoutShiftManager = class _LayoutShiftManager {
   }
   // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   _processEntry(entry) {
-    var _a8;
+    var _a9;
     if (entry.hadRecentInput) return;
     const firstSessionEntry = this._sessionEntries[0];
     const lastSessionEntry = this._sessionEntries[this._sessionEntries.length - 1];
@@ -104553,7 +107259,7 @@ var LayoutShiftManager = class _LayoutShiftManager {
       this._sessionValue = entry.value;
       this._sessionEntries = [entry];
     }
-    (_a8 = this._onAfterProcessingUnexpectedShift) == null ? void 0 : _a8.call(this, entry);
+    (_a9 = this._onAfterProcessingUnexpectedShift) == null ? void 0 : _a9.call(this, entry);
   }
 };
 
@@ -104588,8 +107294,8 @@ var runOnce = (cb) => {
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/getVisibilityWatcher.js
 var firstHiddenTime = -1;
 var initHiddenTime = () => {
-  var _a8, _b2;
-  return ((_a8 = WINDOW4.document) == null ? void 0 : _a8.visibilityState) === "hidden" && !((_b2 = WINDOW4.document) == null ? void 0 : _b2.prerendering) ? 0 : Infinity;
+  var _a9, _b3;
+  return ((_a9 = WINDOW4.document) == null ? void 0 : _a9.visibilityState) === "hidden" && !((_b3 = WINDOW4.document) == null ? void 0 : _b3.prerendering) ? 0 : Infinity;
 };
 var onVisibilityUpdate = (event) => {
   if (WINDOW4.document.visibilityState === "hidden" && firstHiddenTime > -1) {
@@ -104606,10 +107312,10 @@ var removeChangeListeners = () => {
   removeEventListener("prerenderingchange", onVisibilityUpdate, true);
 };
 var getVisibilityWatcher = () => {
-  var _a8;
+  var _a9;
   if (WINDOW4.document && firstHiddenTime < 0) {
     const activationStart = getActivationStart();
-    const firstVisibilityStateHiddenTime = !WINDOW4.document.prerendering ? (_a8 = globalThis.performance.getEntriesByType("visibility-state").filter((e2) => e2.name === "hidden" && e2.startTime > activationStart)[0]) == null ? void 0 : _a8.startTime : void 0;
+    const firstVisibilityStateHiddenTime = !WINDOW4.document.prerendering ? (_a9 = globalThis.performance.getEntriesByType("visibility-state").filter((e2) => e2.name === "hidden" && e2.startTime > activationStart)[0]) == null ? void 0 : _a9.startTime : void 0;
     firstHiddenTime = firstVisibilityStateHiddenTime ?? initHiddenTime();
     addChangeListeners();
   }
@@ -104622,8 +107328,8 @@ var getVisibilityWatcher = () => {
 
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/whenActivated.js
 var whenActivated = (callback) => {
-  var _a8;
-  if ((_a8 = WINDOW4.document) == null ? void 0 : _a8.prerendering) {
+  var _a9;
+  if ((_a9 = WINDOW4.document) == null ? void 0 : _a9.prerendering) {
     addEventListener("prerenderingchange", () => callback(), true);
   } else {
     callback();
@@ -104661,7 +107367,7 @@ var CLSThresholds = [0.1, 0.25];
 var onCLS = (onReport, opts = {}) => {
   onFCP(
     runOnce(() => {
-      var _a8, _b2, _c;
+      var _a9, _b3, _c10;
       const metric = initMetric("CLS", 0);
       let report;
       const layoutShiftManager = initUnique(opts, LayoutShiftManager);
@@ -104678,14 +107384,14 @@ var onCLS = (onReport, opts = {}) => {
       const po3 = observe("layout-shift", handleEntries);
       if (po3) {
         report = bindReporter(onReport, metric, CLSThresholds, opts.reportAllChanges);
-        (_a8 = WINDOW4.document) == null ? void 0 : _a8.addEventListener("visibilitychange", () => {
-          var _a9;
-          if (((_a9 = WINDOW4.document) == null ? void 0 : _a9.visibilityState) === "hidden") {
+        (_a9 = WINDOW4.document) == null ? void 0 : _a9.addEventListener("visibilitychange", () => {
+          var _a10;
+          if (((_a10 = WINDOW4.document) == null ? void 0 : _a10.visibilityState) === "hidden") {
             handleEntries(po3.takeRecords());
             report(true);
           }
         });
-        (_c = (_b2 = WINDOW4) == null ? void 0 : _b2.setTimeout) == null ? void 0 : _c.call(_b2, report);
+        (_c10 = (_b3 = WINDOW4) == null ? void 0 : _b3.setTimeout) == null ? void 0 : _c10.call(_b3, report);
       }
     })
   );
@@ -104694,8 +107400,8 @@ var onCLS = (onReport, opts = {}) => {
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/onHidden.js
 var onHidden = (cb) => {
   const onHiddenOrPageHide = (event) => {
-    var _a8;
-    if (event.type === "pagehide" || ((_a8 = WINDOW4.document) == null ? void 0 : _a8.visibilityState) === "hidden") {
+    var _a9;
+    if (event.type === "pagehide" || ((_a9 = WINDOW4.document) == null ? void 0 : _a9.visibilityState) === "hidden") {
       cb(event);
     }
   };
@@ -104817,8 +107523,8 @@ var InteractionManager = class _InteractionManager {
    */
   // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   _processEntry(entry) {
-    var _a8, _b2;
-    (_a8 = this._onBeforeProcessingEntry) == null ? void 0 : _a8.call(this, entry);
+    var _a9, _b3;
+    (_a9 = this._onBeforeProcessingEntry) == null ? void 0 : _a9.call(this, entry);
     if (!(entry.interactionId || entry.entryType === "first-input")) return;
     const minLongestInteraction = this._longestInteractionList.at(-1);
     let interaction = this._longestInteractionMap.get(entry.interactionId);
@@ -104847,16 +107553,16 @@ var InteractionManager = class _InteractionManager {
           this._longestInteractionMap.delete(interaction2.id);
         }
       }
-      (_b2 = this._onAfterProcessingINPCandidate) == null ? void 0 : _b2.call(this, interaction);
+      (_b3 = this._onAfterProcessingINPCandidate) == null ? void 0 : _b3.call(this, interaction);
     }
   }
 };
 
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/lib/whenIdleOrHidden.js
 var whenIdleOrHidden = (cb) => {
-  var _a8;
+  var _a9;
   const rIC = WINDOW4.requestIdleCallback || WINDOW4.setTimeout;
-  if (((_a8 = WINDOW4.document) == null ? void 0 : _a8.visibilityState) === "hidden") {
+  if (((_a9 = WINDOW4.document) == null ? void 0 : _a9.visibilityState) === "hidden") {
     cb();
   } else {
     cb = runOnce(cb);
@@ -104915,8 +107621,8 @@ var LCPEntryManager = class {
   // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility, jsdoc/require-jsdoc
   _processEntry(entry) {
-    var _a8;
-    (_a8 = this._onBeforeProcessingEntry) == null ? void 0 : _a8.call(this, entry);
+    var _a9;
+    (_a9 = this._onBeforeProcessingEntry) == null ? void 0 : _a9.call(this, entry);
   }
 };
 
@@ -104964,10 +107670,10 @@ var onLCP = (onReport, opts = {}) => {
 // node_modules/@sentry-internal/browser-utils/build/esm/metrics/web-vitals/onTTFB.js
 var TTFBThresholds = [800, 1800];
 var whenReady = (callback) => {
-  var _a8, _b2;
-  if ((_a8 = WINDOW4.document) == null ? void 0 : _a8.prerendering) {
+  var _a9, _b3;
+  if ((_a9 = WINDOW4.document) == null ? void 0 : _a9.prerendering) {
     whenActivated(() => whenReady(callback));
-  } else if (((_b2 = WINDOW4.document) == null ? void 0 : _b2.readyState) !== "complete") {
+  } else if (((_b3 = WINDOW4.document) == null ? void 0 : _b3.readyState) !== "complete") {
     addEventListener("load", () => whenReady(callback), true);
   } else {
     setTimeout(callback);
@@ -105138,8 +107844,8 @@ function isPerformanceEventTiming(entry) {
 function isMeasurementValue(value) {
   return typeof value === "number" && isFinite(value);
 }
-function startAndEndSpan(parentSpan, startTimeInSeconds, endTime, _a8) {
-  var ctx = __objRest(_a8, []);
+function startAndEndSpan(parentSpan, startTimeInSeconds, endTime, _a9) {
+  var ctx = __objRest(_a9, []);
   const parentStartTime = spanToJSON(parentSpan).start_timestamp;
   if (parentStartTime && parentStartTime > startTimeInSeconds) {
     if (typeof parentSpan.updateStartTime === "function") {
@@ -105157,7 +107863,7 @@ function startAndEndSpan(parentSpan, startTimeInSeconds, endTime, _a8) {
   });
 }
 function startStandaloneWebVitalSpan(options) {
-  var _a8;
+  var _a9;
   const client = getClient();
   if (!client) {
     return;
@@ -105184,7 +107890,7 @@ function startStandaloneWebVitalSpan(options) {
     // Web vital score calculation relies on the user agent to account for different
     // browsers setting different thresholds for what is considered a good/meh/bad value.
     // For example: Chrome vs. Chrome Mobile
-    "user_agent.original": (_a8 = WINDOW4.navigator) == null ? void 0 : _a8.userAgent,
+    "user_agent.original": (_a9 = WINDOW4.navigator) == null ? void 0 : _a9.userAgent,
     // This tells Sentry to infer the IP address from the request
     "client.address": sendDefaultPii ? "{{auto}}" : void 0
   }, passedAttributes);
@@ -105275,11 +107981,11 @@ function trackClsAsStandaloneSpan() {
   }, 0);
 }
 function sendStandaloneClsSpan(clsValue, entry, pageloadSpanId) {
-  var _a8;
+  var _a9;
   DEBUG_BUILD2 && logger.log(`Sending CLS span (${clsValue})`);
   const startTime = msToSec((browserPerformanceTimeOrigin() || 0) + ((entry == null ? void 0 : entry.startTime) || 0));
   const routeName = getCurrentScope().getScopeData().transactionName;
-  const name = entry ? htmlTreeAsString((_a8 = entry.sources[0]) == null ? void 0 : _a8.node) : "Layout shift";
+  const name = entry ? htmlTreeAsString((_a9 = entry.sources[0]) == null ? void 0 : _a9.node) : "Layout shift";
   const attributes = {
     [SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: "auto.http.browser.cls",
     [SEMANTIC_ATTRIBUTE_SENTRY_OP]: "ui.webvital.cls",
@@ -105890,10 +108596,10 @@ function instrumentDOM() {
   WINDOW4.document.addEventListener("click", globalDOMEventHandler, false);
   WINDOW4.document.addEventListener("keypress", globalDOMEventHandler, false);
   ["EventTarget", "Node"].forEach((target) => {
-    var _a8, _b2;
+    var _a9, _b3;
     const globalObject = WINDOW4;
-    const proto = (_a8 = globalObject[target]) == null ? void 0 : _a8.prototype;
-    if (!((_b2 = proto == null ? void 0 : proto.hasOwnProperty) == null ? void 0 : _b2.call(proto, "addEventListener"))) {
+    const proto = (_a9 = globalObject[target]) == null ? void 0 : _a9.prototype;
+    if (!((_b3 = proto == null ? void 0 : proto.hasOwnProperty) == null ? void 0 : _b3.call(proto, "addEventListener"))) {
       return;
     }
     fill(proto, "addEventListener", function(originalAddEventListener) {
@@ -106841,10 +109547,10 @@ function _wrapXHR(originalSend) {
   };
 }
 function _wrapEventTarget(target, integrationOptions) {
-  var _a8, _b2;
+  var _a9, _b3;
   const globalObject = WINDOW3;
-  const proto = (_a8 = globalObject[target]) == null ? void 0 : _a8.prototype;
-  if (!((_b2 = proto == null ? void 0 : proto.hasOwnProperty) == null ? void 0 : _b2.call(proto, "addEventListener"))) {
+  const proto = (_a9 = globalObject[target]) == null ? void 0 : _a9.prototype;
+  if (!((_b3 = proto == null ? void 0 : proto.hasOwnProperty) == null ? void 0 : _b3.call(proto, "addEventListener"))) {
     return;
   }
   fill(proto, "addEventListener", function(original) {
@@ -107059,12 +109765,12 @@ var httpContextIntegration = defineIntegration(() => {
   return {
     name: "HttpContext",
     preprocessEvent(event) {
-      var _a8;
+      var _a9;
       if (!WINDOW3.navigator && !WINDOW3.location && !WINDOW3.document) {
         return;
       }
       const reqData = getHttpRequestData();
-      const headers = __spreadValues(__spreadValues({}, reqData.headers), (_a8 = event.request) == null ? void 0 : _a8.headers);
+      const headers = __spreadValues(__spreadValues({}, reqData.headers), (_a9 = event.request) == null ? void 0 : _a9.headers);
       event.request = __spreadProps(__spreadValues(__spreadValues({}, reqData), event.request), {
         headers
       });
@@ -107112,7 +109818,7 @@ function checkAndWarnIfIsEmbeddedBrowserExtension() {
   return false;
 }
 function _isEmbeddedBrowserExtension() {
-  var _a8;
+  var _a9;
   if (typeof WINDOW3.window === "undefined") {
     return false;
   }
@@ -107121,7 +109827,7 @@ function _isEmbeddedBrowserExtension() {
     return false;
   }
   const extensionObject = _window["chrome"] || _window["browser"];
-  if (!((_a8 = extensionObject == null ? void 0 : extensionObject.runtime) == null ? void 0 : _a8.id)) {
+  if (!((_a9 = extensionObject == null ? void 0 : extensionObject.runtime) == null ? void 0 : _a9.id)) {
     return false;
   }
   const href = getLocationHref();
@@ -107332,9 +110038,9 @@ var Mirror = class {
     __publicField$1(this, "nodeMetaMap", /* @__PURE__ */ new WeakMap());
   }
   getId(n2) {
-    var _a8;
+    var _a9;
     if (!n2) return -1;
-    const id = (_a8 = this.getMeta(n2)) == null ? void 0 : _a8.id;
+    const id = (_a9 = this.getMeta(n2)) == null ? void 0 : _a9.id;
     return id ?? -1;
   }
   getNode(id) {
@@ -107944,7 +110650,7 @@ function getRootId(doc, mirror2) {
   return docId === 1 ? void 0 : docId;
 }
 function serializeTextNode(n2, options) {
-  var _a8;
+  var _a9;
   const {
     maskAllText,
     maskTextClass,
@@ -107964,7 +110670,7 @@ function serializeTextNode(n2, options) {
   if (isStyle && textContent) {
     try {
       if (n2.nextSibling || n2.previousSibling) {
-      } else if ((_a8 = n2.parentNode.sheet) == null ? void 0 : _a8.cssRules) {
+      } else if ((_a9 = n2.parentNode.sheet) == null ? void 0 : _a9.cssRules) {
         textContent = stringifyStylesheet(
           n2.parentNode.sheet
         );
@@ -108703,11 +111409,11 @@ if (!/* @__PURE__ */ /[1-9][0-9]{12}/.test(Date.now().toString())) {
   nowTimestamp = () => (/* @__PURE__ */ new Date()).getTime();
 }
 function getWindowScroll(win) {
-  var _a8, _b2, _c, _d, _e3, _f;
+  var _a9, _b3, _c10, _d2, _e3, _f;
   const doc = win.document;
   return {
-    left: doc.scrollingElement ? doc.scrollingElement.scrollLeft : win.pageXOffset !== void 0 ? win.pageXOffset : (doc == null ? void 0 : doc.documentElement.scrollLeft) || ((_b2 = (_a8 = doc == null ? void 0 : doc.body) == null ? void 0 : _a8.parentElement) == null ? void 0 : _b2.scrollLeft) || ((_c = doc == null ? void 0 : doc.body) == null ? void 0 : _c.scrollLeft) || 0,
-    top: doc.scrollingElement ? doc.scrollingElement.scrollTop : win.pageYOffset !== void 0 ? win.pageYOffset : (doc == null ? void 0 : doc.documentElement.scrollTop) || ((_e3 = (_d = doc == null ? void 0 : doc.body) == null ? void 0 : _d.parentElement) == null ? void 0 : _e3.scrollTop) || ((_f = doc == null ? void 0 : doc.body) == null ? void 0 : _f.scrollTop) || 0
+    left: doc.scrollingElement ? doc.scrollingElement.scrollLeft : win.pageXOffset !== void 0 ? win.pageXOffset : (doc == null ? void 0 : doc.documentElement.scrollLeft) || ((_b3 = (_a9 = doc == null ? void 0 : doc.body) == null ? void 0 : _a9.parentElement) == null ? void 0 : _b3.scrollLeft) || ((_c10 = doc == null ? void 0 : doc.body) == null ? void 0 : _c10.scrollLeft) || 0,
+    top: doc.scrollingElement ? doc.scrollingElement.scrollTop : win.pageYOffset !== void 0 ? win.pageYOffset : (doc == null ? void 0 : doc.documentElement.scrollTop) || ((_e3 = (_d2 = doc == null ? void 0 : doc.body) == null ? void 0 : _d2.parentElement) == null ? void 0 : _e3.scrollTop) || ((_f = doc == null ? void 0 : doc.body) == null ? void 0 : _f.scrollTop) || 0
   };
 }
 function getWindowHeight() {
@@ -108852,9 +111558,9 @@ var StyleSheetMirror = class {
   }
 };
 function getShadowHost(n2) {
-  var _a8, _b2;
+  var _a9, _b3;
   let shadowHost = null;
-  if (((_b2 = (_a8 = n2.getRootNode) == null ? void 0 : _a8.call(n2)) == null ? void 0 : _b2.nodeType) === Node.DOCUMENT_FRAGMENT_NODE && n2.getRootNode().host)
+  if (((_b3 = (_a9 = n2.getRootNode) == null ? void 0 : _a9.call(n2)) == null ? void 0 : _b3.nodeType) === Node.DOCUMENT_FRAGMENT_NODE && n2.getRootNode().host)
     shadowHost = n2.getRootNode().host;
   return shadowHost;
 }
@@ -109617,7 +112323,7 @@ function getEventTarget2(event) {
   return event && event.target;
 }
 function initMutationObserver(options, rootEl) {
-  var _a8, _b2;
+  var _a9, _b3;
   const mutationBuffer = new MutationBuffer();
   mutationBuffers.push(mutationBuffer);
   mutationBuffer.init(options);
@@ -109630,7 +112336,7 @@ function initMutationObserver(options, rootEl) {
   * window.__rrMutationObserver = MutationObserver
   */
   window.__rrMutationObserver;
-  const angularZoneSymbol = (_b2 = (_a8 = window == null ? void 0 : window.Zone) == null ? void 0 : _a8.__symbol__) == null ? void 0 : _b2.call(_a8, "MutationObserver");
+  const angularZoneSymbol = (_b3 = (_a9 = window == null ? void 0 : window.Zone) == null ? void 0 : _a9.__symbol__) == null ? void 0 : _b3.call(_a9, "MutationObserver");
   if (angularZoneSymbol && window[angularZoneSymbol]) {
     mutationObserverCtor = window[angularZoneSymbol];
   }
@@ -110237,11 +112943,11 @@ function initAdoptedStyleSheetObserver({
   mirror: mirror2,
   stylesheetManager
 }, host) {
-  var _a8, _b2, _c;
+  var _a9, _b3, _c10;
   let hostId = null;
   if (host.nodeName === "#document") hostId = mirror2.getId(host);
   else hostId = mirror2.getId(host.host);
-  const patchTarget = host.nodeName === "#document" ? (_a8 = host.defaultView) == null ? void 0 : _a8.Document : (_c = (_b2 = host.ownerDocument) == null ? void 0 : _b2.defaultView) == null ? void 0 : _c.ShadowRoot;
+  const patchTarget = host.nodeName === "#document" ? (_a9 = host.defaultView) == null ? void 0 : _a9.Document : (_c10 = (_b3 = host.ownerDocument) == null ? void 0 : _b3.defaultView) == null ? void 0 : _c10.ShadowRoot;
   const originalPropertyDescriptor = (patchTarget == null ? void 0 : patchTarget.prototype) ? Object.getOwnPropertyDescriptor(
     patchTarget == null ? void 0 : patchTarget.prototype,
     "adoptedStyleSheets"
@@ -110253,12 +112959,12 @@ function initAdoptedStyleSheetObserver({
     configurable: originalPropertyDescriptor.configurable,
     enumerable: originalPropertyDescriptor.enumerable,
     get() {
-      var _a9;
-      return (_a9 = originalPropertyDescriptor.get) == null ? void 0 : _a9.call(this);
+      var _a10;
+      return (_a10 = originalPropertyDescriptor.get) == null ? void 0 : _a10.call(this);
     },
     set(sheets) {
-      var _a9;
-      const result = (_a9 = originalPropertyDescriptor.set) == null ? void 0 : _a9.call(this, sheets);
+      var _a10;
+      const result = (_a10 = originalPropertyDescriptor.set) == null ? void 0 : _a10.call(this, sheets);
       if (hostId !== null && hostId !== -1) {
         try {
           stylesheetManager.adoptStyleSheets(sheets, hostId);
@@ -110289,13 +112995,13 @@ function initStyleDeclarationObserver({
   win.CSSStyleDeclaration.prototype.setProperty = new Proxy(setProperty, {
     apply: callbackWrapper(
       (target, thisArg, argumentsList) => {
-        var _a8;
+        var _a9;
         const [property, value, priority] = argumentsList;
         if (ignoreCSSAttributes.has(property)) {
           return setProperty.apply(thisArg, [property, value, priority]);
         }
         const { id, styleId } = getIdAndStyleId(
-          (_a8 = thisArg.parentRule) == null ? void 0 : _a8.parentStyleSheet,
+          (_a9 = thisArg.parentRule) == null ? void 0 : _a9.parentStyleSheet,
           mirror2,
           stylesheetManager.styleMirror
         );
@@ -110320,13 +113026,13 @@ function initStyleDeclarationObserver({
   win.CSSStyleDeclaration.prototype.removeProperty = new Proxy(removeProperty, {
     apply: callbackWrapper(
       (target, thisArg, argumentsList) => {
-        var _a8;
+        var _a9;
         const [property] = argumentsList;
         if (ignoreCSSAttributes.has(property)) {
           return removeProperty.apply(thisArg, [property]);
         }
         const { id, styleId } = getIdAndStyleId(
-          (_a8 = thisArg.parentRule) == null ? void 0 : _a8.parentStyleSheet,
+          (_a9 = thisArg.parentRule) == null ? void 0 : _a9.parentStyleSheet,
           mirror2,
           stylesheetManager.styleMirror
         );
@@ -110687,7 +113393,7 @@ var IframeManager = class {
     this.loadListener = cb;
   }
   attachIframe(iframeEl, childSn) {
-    var _a8, _b2;
+    var _a9, _b3;
     this.mutationCb({
       adds: [
         {
@@ -110702,11 +113408,11 @@ var IframeManager = class {
       isAttachIframe: true
     });
     if (this.recordCrossOriginIframes)
-      (_a8 = iframeEl.contentWindow) == null ? void 0 : _a8.addEventListener(
+      (_a9 = iframeEl.contentWindow) == null ? void 0 : _a9.addEventListener(
         "message",
         this.handleMessage.bind(this)
       );
-    (_b2 = this.loadListener) == null ? void 0 : _b2.call(this, iframeEl);
+    (_b3 = this.loadListener) == null ? void 0 : _b3.call(this, iframeEl);
     const iframeDoc = getIFrameContentDocument(iframeEl);
     if (iframeDoc && iframeDoc.adoptedStyleSheets && iframeDoc.adoptedStyleSheets.length > 0)
       this.stylesheetManager.adoptStyleSheets(
@@ -110734,7 +113440,7 @@ var IframeManager = class {
       );
   }
   transformCrossOriginEvent(iframeEl, e2) {
-    var _a8;
+    var _a9;
     switch (e2.type) {
       case EventType2.FullSnapshot: {
         this.crossOriginIframeMirror.reset(iframeEl);
@@ -110839,7 +113545,7 @@ var IframeManager = class {
           case IncrementalSource.AdoptedStyleSheet: {
             this.replaceIds(e2.data, iframeEl, ["id"]);
             this.replaceStyleIds(e2.data, iframeEl, ["styleIds"]);
-            (_a8 = e2.data.styles) == null ? void 0 : _a8.forEach((style2) => {
+            (_a9 = e2.data.styles) == null ? void 0 : _a9.forEach((style2) => {
               this.replaceStyleIds(style2, iframeEl, ["styleId"]);
             });
             return e2;
@@ -111104,12 +113810,12 @@ var ProcessedNodeManager = class {
 };
 var wrappedEmit;
 var _takeFullSnapshot;
-var _a6;
+var _a7;
 try {
   if (Array.from([1], (x3) => x3 * 2)[0] !== 2) {
     const cleanFrame = document.createElement("iframe");
     document.body.appendChild(cleanFrame);
-    Array.from = ((_a6 = cleanFrame.contentWindow) == null ? void 0 : _a6.Array.from) || Array.from;
+    Array.from = ((_a7 = cleanFrame.contentWindow) == null ? void 0 : _a7.Array.from) || Array.from;
     document.body.removeChild(cleanFrame);
   }
 } catch (err) {
@@ -111229,10 +113935,10 @@ function record(options = {}) {
     return e2;
   };
   wrappedEmit = (r2, isCheckout) => {
-    var _a8;
+    var _a9;
     const e2 = r2;
     e2.timestamp = nowTimestamp();
-    if (((_a8 = mutationBuffers[0]) == null ? void 0 : _a8.isFrozen()) && e2.type !== EventType2.FullSnapshot && !(e2.type === EventType2.IncrementalSnapshot && e2.data.source === IncrementalSource.Mutation)) {
+    if (((_a9 = mutationBuffers[0]) == null ? void 0 : _a9.isFrozen()) && e2.type !== EventType2.FullSnapshot && !(e2.type === EventType2.IncrementalSnapshot && e2.data.source === IncrementalSource.Mutation)) {
       mutationBuffers.forEach((buf) => buf.unfreeze());
     }
     if (inEmittingFrame) {
@@ -111440,7 +114146,7 @@ function record(options = {}) {
   try {
     const handlers4 = [];
     const observe2 = (doc) => {
-      var _a8;
+      var _a9;
       return callbackWrapper(initObservers)(
         {
           onMutation,
@@ -111544,7 +114250,7 @@ function record(options = {}) {
           processedNodeManager,
           canvasManager,
           ignoreCSSAttributes,
-          plugins: ((_a8 = plugins == null ? void 0 : plugins.filter((p) => p.observer)) == null ? void 0 : _a8.map((p) => ({
+          plugins: ((_a9 = plugins == null ? void 0 : plugins.filter((p) => p.observer)) == null ? void 0 : _a9.map((p) => ({
             observer: p.observer,
             options: p.options,
             callback: (payload) => wrappedEmit({
@@ -112888,9 +115594,9 @@ function handleAfterSendEvent(replay) {
   };
 }
 function handleTransactionEvent(replay, event) {
-  var _a8, _b2;
+  var _a9, _b3;
   const replayContext = replay.getContext();
-  if (((_b2 = (_a8 = event.contexts) == null ? void 0 : _a8.trace) == null ? void 0 : _b2.trace_id) && replayContext.traceIds.size < 100) {
+  if (((_b3 = (_a9 = event.contexts) == null ? void 0 : _a9.trace) == null ? void 0 : _b3.trace_id) && replayContext.traceIds.size < 100) {
     replayContext.traceIds.add(event.contexts.trace.trace_id);
   }
 }
@@ -112923,8 +115629,8 @@ function handleBeforeSendEvent(replay) {
   };
 }
 function handleHydrationError(replay, event) {
-  var _a8, _b2, _c;
-  const exceptionValue = (_c = (_b2 = (_a8 = event.exception) == null ? void 0 : _a8.values) == null ? void 0 : _b2[0]) == null ? void 0 : _c.value;
+  var _a9, _b3, _c10;
+  const exceptionValue = (_c10 = (_b3 = (_a9 = event.exception) == null ? void 0 : _a9.values) == null ? void 0 : _b3[0]) == null ? void 0 : _c10.value;
   if (typeof exceptionValue !== "string") {
     return;
   }
@@ -112982,8 +115688,8 @@ function normalizeBreadcrumb(breadcrumb) {
   return createBreadcrumb(breadcrumb);
 }
 function normalizeConsoleBreadcrumb(breadcrumb) {
-  var _a8;
-  const args = (_a8 = breadcrumb.data) == null ? void 0 : _a8.arguments;
+  var _a9;
+  const args = (_a9 = breadcrumb.data) == null ? void 0 : _a9.arguments;
   if (!Array.isArray(args) || args.length === 0) {
     return createBreadcrumb(breadcrumb);
   }
@@ -113023,11 +115729,11 @@ function isBreadcrumbWithCategory(breadcrumb) {
   return !!breadcrumb.category;
 }
 function isRrwebError(event, hint) {
-  var _a8;
+  var _a9;
   if (event.type || !event.exception || !event.exception.values || !event.exception.values.length) {
     return false;
   }
-  if ((_a8 = hint.originalException) == null ? void 0 : _a8.__rrweb__) {
+  if ((_a9 = hint.originalException) == null ? void 0 : _a9.__rrweb__) {
     return true;
   }
   return false;
@@ -113731,9 +116437,9 @@ function addGlobalListeners(replay, { autoFlushOnFeedback }) {
       replay.lastActiveSpan = span;
     });
     client.on("beforeSendFeedback", async (feedbackEvent, options) => {
-      var _a8;
+      var _a9;
       const replayId = replay.getSessionId();
-      if ((options == null ? void 0 : options.includeReplay) && replay.isEnabled() && replayId && ((_a8 = feedbackEvent.contexts) == null ? void 0 : _a8.feedback)) {
+      if ((options == null ? void 0 : options.includeReplay) && replay.isEnabled() && replayId && ((_a9 = feedbackEvent.contexts) == null ? void 0 : _a9.feedback)) {
         if (feedbackEvent.contexts.feedback.source === "api" && autoFlushOnFeedback) {
           await replay.flush();
         }
@@ -114374,7 +117080,7 @@ var ReplayContainer = class {
    * does not support a teardown
    */
   async stop({ forceFlush = false, reason } = {}) {
-    var _a8;
+    var _a9;
     if (!this._isEnabled) {
       return;
     }
@@ -114388,7 +117094,7 @@ var ReplayContainer = class {
       if (forceFlush) {
         await this._flush({ force: true });
       }
-      (_a8 = this.eventBuffer) == null ? void 0 : _a8.destroy();
+      (_a9 = this.eventBuffer) == null ? void 0 : _a9.destroy();
       this.eventBuffer = null;
       clearSession(this);
     } catch (err) {
@@ -114529,8 +117235,8 @@ var ReplayContainer = class {
   }
   /** Get the current session (=replay) ID */
   getSessionId() {
-    var _a8;
-    return (_a8 = this.session) == null ? void 0 : _a8.id;
+    var _a9;
+    return (_a9 = this.session) == null ? void 0 : _a9.id;
   }
   /**
    * Checks if recording should be stopped due to user inactivity. Otherwise
@@ -114833,14 +117539,14 @@ var ReplayContainer = class {
    * Should never be called directly, only by `flush`
    */
   async _runFlush() {
-    var _a8;
+    var _a9;
     const replayId = this.getSessionId();
     if (!this.session || !this.eventBuffer || !replayId) {
       DEBUG_BUILD4 && logger2.error("No session or eventBuffer found to flush.");
       return;
     }
     await this._addPerformanceEntries();
-    if (!((_a8 = this.eventBuffer) == null ? void 0 : _a8.hasEvents)) {
+    if (!((_a9 = this.eventBuffer) == null ? void 0 : _a9.hasEvents)) {
       return;
     }
     await addMemoryEntry(this);
@@ -115199,8 +117905,8 @@ var Replay = class {
    * Get the current session ID.
    */
   getReplayId() {
-    var _a8;
-    if (!((_a8 = this._replay) == null ? void 0 : _a8.isEnabled())) {
+    var _a9;
+    if (!((_a9 = this._replay) == null ? void 0 : _a9.isEnabled())) {
       return;
     }
     return this._replay.getSessionId();
@@ -115214,8 +117920,8 @@ var Replay = class {
    *   - or calling `flush()` to send the replay
    */
   getRecordingMode() {
-    var _a8;
-    if (!((_a8 = this._replay) == null ? void 0 : _a8.isEnabled())) {
+    var _a9;
+    if (!((_a9 = this._replay) == null ? void 0 : _a9.isEnabled())) {
       return;
     }
     return this._replay.recordingMode;
@@ -115345,7 +118051,7 @@ function instrumentOutgoingRequests(client, _options) {
   }
   if (traceXHR) {
     addXhrInstrumentationHandler((handlerData) => {
-      var _a8;
+      var _a9;
       const createdSpan = xhrCallback(handlerData, shouldCreateSpan, shouldAttachHeadersWithTargets, spans);
       if (createdSpan) {
         if (enableHTTPTimings) {
@@ -115353,7 +118059,7 @@ function instrumentOutgoingRequests(client, _options) {
         }
         let headers;
         try {
-          headers = new Headers((_a8 = handlerData.xhr.__sentry_xhr_v3__) == null ? void 0 : _a8.request_headers);
+          headers = new Headers((_a9 = handlerData.xhr.__sentry_xhr_v3__) == null ? void 0 : _a9.request_headers);
         } catch {
         }
         onRequestSpanStart == null ? void 0 : onRequestSpanStart(createdSpan, { headers });
@@ -115488,8 +118194,8 @@ function addTracingHeadersToXhrRequest(xhr, span) {
   }
 }
 function setHeaderOnXhr(xhr, sentryTraceHeader, sentryBaggageHeader) {
-  var _a8;
-  const originalHeaders = (_a8 = xhr.__sentry_xhr_v3__) == null ? void 0 : _a8.request_headers;
+  var _a9;
+  const originalHeaders = (_a9 = xhr.__sentry_xhr_v3__) == null ? void 0 : _a9.request_headers;
   if (originalHeaders == null ? void 0 : originalHeaders["sentry-trace"]) {
     return;
   }
@@ -115593,9 +118299,9 @@ function linkTraces(client, {
 function addPreviousTraceSpanLink(previousTraceInfo, span, oldPropagationContext) {
   const spanJson = spanToJSON(span);
   function getSampleRate() {
-    var _a8, _b2;
+    var _a9, _b3;
     try {
-      return Number((_a8 = oldPropagationContext.dsc) == null ? void 0 : _a8.sample_rate) ?? Number((_b2 = spanJson.data) == null ? void 0 : _b2[SEMANTIC_ATTRIBUTE_SENTRY_SAMPLE_RATE]);
+      return Number((_a9 = oldPropagationContext.dsc) == null ? void 0 : _a9.sample_rate) ?? Number((_b3 = spanJson.data) == null ? void 0 : _b3[SEMANTIC_ATTRIBUTE_SENTRY_SAMPLE_RATE]);
     } catch {
       return 0;
     }
@@ -115642,9 +118348,9 @@ function storePreviousTraceInSessionStorage(previousTraceInfo) {
   }
 }
 function getPreviousTraceFromSessionStorage() {
-  var _a8;
+  var _a9;
   try {
-    const previousTraceInfo = (_a8 = WINDOW3.sessionStorage) == null ? void 0 : _a8.getItem(PREVIOUS_TRACE_KEY);
+    const previousTraceInfo = (_a9 = WINDOW3.sessionStorage) == null ? void 0 : _a9.getItem(PREVIOUS_TRACE_KEY);
     return JSON.parse(previousTraceInfo);
   } catch (e2) {
     return void 0;
@@ -115958,9 +118664,9 @@ function init2(options) {
   return init(opts);
 }
 function checkAndSetAngularVersion() {
-  var _a8;
+  var _a9;
   const ANGULAR_MINIMUM_VERSION = 14;
-  const angularVersion = ((_a8 = VERSION) == null ? void 0 : _a8.major) && parseInt(VERSION.major, 10);
+  const angularVersion = ((_a9 = VERSION) == null ? void 0 : _a9.major) && parseInt(VERSION.major, 10);
   if (angularVersion) {
     if (angularVersion < ANGULAR_MINIMUM_VERSION) {
       IS_DEBUG_BUILD && logger.warn(`This Sentry SDK does not officially support Angular ${angularVersion}.`, `This SDK only supports Angular ${ANGULAR_MINIMUM_VERSION} and above.`, "If you're using lower Angular versions, check the Angular Version Compatibility table in our docs: https://docs.sentry.io/platforms/javascript/guides/angular/#angular-version-compatibility.", "Otherwise, please consider upgrading your Angular version.");
@@ -115970,8 +118676,8 @@ function checkAndSetAngularVersion() {
     });
   }
 }
-var _a7;
-var isNgZoneEnabled = typeof Zone !== "undefined" && ((_a7 = Zone.root) == null ? void 0 : _a7.run);
+var _a8;
+var isNgZoneEnabled = typeof Zone !== "undefined" && ((_a8 = Zone.root) == null ? void 0 : _a8.run);
 function runOutsideAngular(callback) {
   return isNgZoneEnabled ? Zone.root.run(callback) : callback();
 }
@@ -116410,7 +119116,7 @@ _GlobalBannerComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
   if (rf & 2) {
     \u0275\u0275conditional(!\u0275\u0275pipeBind1(1, 1, ctx.has_been_closed) && \u0275\u0275pipeBind1(2, 3, ctx.banner) ? 0 : -1);
   }
-}, dependencies: [CommonModule, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
+}, dependencies: [CommonModule, AsyncPipe, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
 var GlobalBannerComponent = _GlobalBannerComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GlobalBannerComponent, [{
@@ -116438,11 +119144,11 @@ var GlobalBannerComponent = _GlobalBannerComponent;
                 </button>
             </div>
         }
-    `, imports: [CommonModule], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
+    `, imports: [CommonModule, IconComponent], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 50 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 51 });
 })();
 
 // libs/components/src/lib/global-loading.component.ts
@@ -116471,17 +119177,17 @@ function GlobalLoadingComponent_Conditional_1_Template(rf, ctx) {
 }
 var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler {
   constructor() {
-    super();
+    super(...arguments);
     this._org = inject(OrganisationService);
     this._settings = inject(SettingsService);
-    this.loading = signal(false);
-    this.online = signal(false);
+    this.loading = signal(true);
+    this.online = signal(true);
   }
   async ngOnInit() {
     this.loading.set(true);
-    this.online.set(vs());
     await firstTruthyValueFrom(this._org.initialised);
     await firstTruthyValueFrom(this._settings.initialised);
+    this.online.set(vs());
     this.interval("has_token", () => {
       this.online.set(vs());
       if (!ve() || !Y2())
@@ -116492,10 +119198,13 @@ var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler
     }, 1e3);
   }
 };
-_GlobalLoadingComponent.\u0275fac = function GlobalLoadingComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _GlobalLoadingComponent)();
-};
-_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-50", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-40", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
+_GlobalLoadingComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275GlobalLoadingComponent_BaseFactory;
+  return function GlobalLoadingComponent_Factory(__ngFactoryType__) {
+    return (\u0275GlobalLoadingComponent_BaseFactory || (\u0275GlobalLoadingComponent_BaseFactory = \u0275\u0275getInheritedFactory(_GlobalLoadingComponent)))(__ngFactoryType__ || _GlobalLoadingComponent);
+  };
+})();
+_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-[9999]", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-[9998]", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, GlobalLoadingComponent_Conditional_0_Template, 3, 3, "div", 0);
     \u0275\u0275conditionalCreate(1, GlobalLoadingComponent_Conditional_1_Template, 2, 1, "div", 1);
@@ -116522,7 +119231,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
     args: [{ selector: "global-loading", template: `
         @if (!online()) {
             <div
-                class="fixed bottom-2 left-1/2 z-50 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
+                class="fixed bottom-2 left-1/2 z-[9999] -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
             >
                 {{ 'COMMON.SERVER_DOWN' | translate }}
             </div>
@@ -116530,7 +119239,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
         @if (loading()) {
             <div
                 loader
-                class="pointer-events-auto fixed inset-0 z-40 flex items-center justify-center bg-base-100"
+                class="pointer-events-auto fixed inset-0 z-[9998] flex items-center justify-center bg-base-100"
             >
                 <mat-spinner [diameter]="64"></mat-spinner>
             </div>
@@ -116545,7 +119254,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
 }
 /*# sourceMappingURL=global-loading.component.css.map */
 `] }]
-  }], () => [], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalLoadingComponent, { className: "GlobalLoadingComponent", filePath: "libs/components/src/lib/global-loading.component.ts", lineNumber: 46 });
@@ -116611,7 +119320,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
     return this._settings.get("app.chat.enabled");
   }
   async ngOnInit() {
-    var _a8, _b2;
+    var _a9, _b3;
     log("APP", "MOCKS:", mocks_exports);
     this._hotkey.listen(["Control", "Alt", "Shift", "KeyM"], () => {
       localStorage.setItem("mock", `${localStorage.getItem("mock") !== "true"}`);
@@ -116626,21 +119335,21 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
       notifySuccess("Successfully copied token.");
     });
     this._hotkey.listen(["Control", "Alt", "Shift", "KeyV"], () => {
-      var _a9;
-      (_a9 = navigator.clipboard) == null ? void 0 : _a9.readText().then((tkn) => this._pasteToken(tkn));
+      var _a10;
+      (_a10 = navigator.clipboard) == null ? void 0 : _a10.readText().then((tkn) => this._pasteToken(tkn));
     });
     this._hotkey.listen(["Control", "Alt", "Shift", "KeyF"], () => {
-      var _a9;
-      (_a9 = navigator.clipboard) == null ? void 0 : _a9.readText().then((tkn) => this._pasteToken(tkn));
+      var _a10;
+      (_a10 = navigator.clipboard) == null ? void 0 : _a10.readText().then((tkn) => this._pasteToken(tkn));
     });
     window.pasteToken = (t) => this._pasteToken(t);
     this._route.queryParamMap.subscribe((params) => {
-      var _a9;
+      var _a10;
       if (params.has("hide_nav"))
         localStorage.setItem("PlaceOS.hide_nav", "true");
       if (params.has("lang")) {
         const locale = params.get("lang");
-        (_a9 = this._locale) == null ? void 0 : _a9.setLocale(locale);
+        (_a10 = this._locale) == null ? void 0 : _a10.setLocale(locale);
         localStorage.setItem("PLACEOS.locale", locale);
       }
       if (params.has("x-api-key")) {
@@ -116681,7 +119390,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
     await lastValueFrom(current_user.pipe(first((_3) => !!_3)));
     this.clearTimeout("wait_for_user");
     this._initLocale();
-    setInternalUserDomain(this._settings.get("app.internal_user_domain") || `@${(_b2 = (_a8 = currentUser()) == null ? void 0 : _a8.email) == null ? void 0 : _b2.split("@")[1]}`);
+    setInternalUserDomain(this._settings.get("app.internal_user_domain") || `@${(_b3 = (_a9 = currentUser()) == null ? void 0 : _a9.email) == null ? void 0 : _b3.split("@")[1]}`);
     this._initAnalytics();
     initSentry(this._settings.get("app.sentry_dsn"));
     try {
@@ -116694,8 +119403,8 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
     this._setZones();
   }
   onInitError() {
-    var _a8;
-    if (ln() || ((_a8 = currentUser()) == null ? void 0 : _a8.is_logged_in))
+    var _a9;
+    if (ln() || ((_a9 = currentUser()) == null ? void 0 : _a9.is_logged_in))
       return;
     hn();
     location.reload();
@@ -116709,12 +119418,12 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
     this._analytics.setUser(currentUser().id);
   }
   _initLocale() {
-    var _a8, _b2;
+    var _a9, _b3;
     try {
       let locale = localStorage.getItem("PLACEOS.locale");
       const locales = this._settings.get("app.locales") || [];
       if (locale) {
-        (_a8 = this._locale) == null ? void 0 : _a8.setLocale(locale);
+        (_a9 = this._locale) == null ? void 0 : _a9.setLocale(locale);
       } else {
         const list = navigator.languages;
         for (const lang of list) {
@@ -116722,7 +119431,7 @@ var _AppComponent = class _AppComponent extends AsyncHandler {
           if (!locale)
             locale = locales.find((_3) => lang.includes(_3.id));
           if (locale) {
-            (_b2 = this._locale) == null ? void 0 : _b2.setLocale(lang);
+            (_b3 = this._locale) == null ? void 0 : _b3.setLocale(lang);
             localStorage.setItem("PLACEOS.locale", lang);
             break;
           }
