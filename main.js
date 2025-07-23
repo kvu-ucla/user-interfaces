@@ -74285,15 +74285,15 @@ var LOCAL_TIMEZONE = ((_b = (_a4 = Intl == null ? void 0 : Intl.DateTimeFormat()
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "f13636e",
-  "hash": "f13636e",
+  "raw": "c942bb5",
+  "hash": "c942bb5",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "f13636e",
+  "suffix": "c942bb5",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1753236200816
+  "time": 1753237347006
 };
 
 // libs/common/src/lib/vorlon.service.ts
