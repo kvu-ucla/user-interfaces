@@ -2933,6 +2933,12 @@ video {
 #placeos .z-\[998\] {
   z-index: 998;
 }
+#placeos .z-\[9998\] {
+  z-index: 9998;
+}
+#placeos .z-\[9999\] {
+  z-index: 9999;
+}
 #placeos .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -3106,6 +3112,9 @@ video {
 }
 #placeos .mb-10 {
   margin-bottom: 2.5rem;
+}
+#placeos .mb-12 {
+  margin-bottom: 3rem;
 }
 #placeos .mb-16 {
   margin-bottom: 4rem;
@@ -5395,6 +5404,9 @@ body {
 #placeos .focus-within\:border-base-200:focus-within {
   border-color: var(--b2);
 }
+#placeos .focus-within\:border-base-content:focus-within {
+  border-color: var(--bc);
+}
 #placeos .focus-within\:shadow:focus-within {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
@@ -5405,6 +5417,12 @@ body {
 }
 #placeos .focus-within\:outline:focus-within {
   outline-style: solid;
+}
+#placeos .focus-within\:outline-4:focus-within {
+  outline-width: 4px;
+}
+#placeos .focus-within\:outline-base-content:focus-within {
+  outline-color: var(--bc);
 }
 #placeos .hover\:z-30:hover {
   z-index: 30;
