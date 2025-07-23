@@ -73101,7 +73101,7 @@ var COMMON = {
   FAVOURITES: "Favourites",
   FAVOURITES_ONLY: "Favourites Only",
   FAVOURITES_ADD: "Add to favourites",
-  FAVOURITES_REMOVE: "Add to favourites",
+  FAVOURITES_REMOVE: "Remove from favourites",
   ACCESSIBLE_ONLY: "Accessible Only",
   LANGUAGE: "Language",
   LANGUAGE_SELECT: "Select a language",
@@ -73188,7 +73188,7 @@ var COMMON = {
   SUPPORT_HEADER: "Raise a support ticket",
   SUPPORT_LOCATION: "Location",
   SUPPORT_TYPE: "Issue Type",
-  SUPPORT_DESCRIPTION: " Issue Description",
+  SUPPORT_DESCRIPTION: "Issue Description",
   SUPPORT_DESCRIPTION_REQUIRED: " A description is required",
   SUPPORT_IMAGES: "Images",
   SUPPORT_LOADING: "Sending support ticket...",
@@ -73272,7 +73272,8 @@ var COMMON = {
   WFH: "Work from Home",
   AOL: "Away on Leave",
   END_OF_LIST: "End of list",
-  NO_DESCRIPTION: "No description"
+  NO_DESCRIPTION: "No description",
+  LOCATABLE: "Location tracking"
 };
 var LANGUAGE = {
   ENGLISH: "English",
@@ -73281,7 +73282,7 @@ var LANGUAGE = {
   FRENCH: "French",
   FRENCH_CA: "French (Canadian)",
   SPANISH: "Spanish",
-  PORTUGESE: "Portugese",
+  PORTUGUESE: "Portuguese",
   ITALIAN: "Italian",
   CHINESE: "Chinese",
   ARABIC: "Arabic",
@@ -73401,13 +73402,13 @@ var EXPLORE = {
   LOCATE_CURRENT_FAILED: "Failed to retrieve your current location.",
   LOCATE_USER_FAILED: 'Failed to locate user "{{ name }}".',
   LOCATE_USER_NOT_FOUND: "No location for the given user",
-  LOCATE_USER_FOUND_NO_PIN: "Unable to resolve user's exact location on this level",
+  LOCATE_USER_FOUND_NO_PIN: "User is on this level but with an inaccurate method. {{ type }}",
   LOCATE_USER_DETAILS_FAILED: 'Failed to find user details for "{{ name }}".',
   LOCATE_SPACE_DETAILS_FAILED: "Failed to find space details.",
-  LOCATE_SERVICE_UNAVAILABLE: "Location services is not setup for this application.",
+  LOCATE_SERVICE_UNAVAILABLE: "Location services is not set up for this application.",
   ZOOM_IN: "Zoom in",
   ZOOM_OUT: "Zoom out",
-  ZOOM_RESET: "Reset zoom & center",
+  ZOOM_RESET: "Reset zoom & centre",
   DEVICE_COUNT: "{{ count }} user device(s)",
   SENSORS_TEMP: "Temperature: {{ value }}",
   SENSORS_PEOPLE: "{{ count }} people",
@@ -73445,6 +73446,7 @@ var EXPLORE = {
   BOOK_RESOURCE: "Book - {{ name }}",
   MAPSINDOORS_INIT_FAILED: "Failed to initialise map view.",
   MAP_EMPTY: "No map is set to display",
+  MAP_FAILED_TO_LOAD: "Failed to load map",
   COORDINATES: "Coordinates",
   MAP_ID: "Map ID",
   MAP_ID_EMPTY: "No map ID",
@@ -73513,7 +73515,7 @@ var BOOKINGS = {
   LOADING_AVAILABILITY: "Checking {{ type }} availability...",
   CONFIRM_TITLE: "Book {{ type }}",
   CONFIRM_MSG: "Would you like to book the {{ type }} for {{ date }}?",
-  CONFIRM_MSG_GROUP: "Would you like to book the {{ type }} for {{ date }}? <br>You group members will be assigned desks nearby your selected desk.",
+  CONFIRM_MSG_GROUP: "Would you like to book the {{ type }} for {{ date }}? <br>Your group members will be assigned desks nearby your selected desk.",
   CONFIRM_LOADING: "Processing booking request...",
   ASSETS_CLASH_ERROR: "Some assets are already booked for the selected time",
   ASSETS_INVALID_ERROR: "Failed to validate asset requests",
@@ -73545,15 +73547,15 @@ var BOOKINGS = {
   DESK_AVAILABLE_ERROR: "Desk is unavailable at this time.",
   DESK_LIST_LOADING: "Finding available desks...",
   DESK_LIST_EMPTY: "No available desks for selected time and/or filters",
-  DESK_SELECT_MSG: "Select a desk to view it's details",
+  DESK_SELECT_MSG: "Select a desk to view its details",
   ITEM_BOOKED: "{{ name }} booked!",
-  DESK_SUCCESS_LONE: "You desk booking has been successfully booked for {{ date }} at {{ time }}",
-  DESK_SUCCESS_GROUP: "You group of {{ size }} desks have been successfully booked for {{ date }} at {{ time }}",
-  DESK_SUCCESS_LONE_ALLDAY: "You desk booking has been successfully booked for {{ date }}",
-  DESK_SUCCESS_GROUP_ALLDAY: "You group of {{ size }} desks have been successfully booked for {{ date }}",
+  DESK_SUCCESS_LONE: "Your desk booking has been successfully booked for {{ date }} at {{ time }}",
+  DESK_SUCCESS_GROUP: "Your group of {{ size }} desks have been successfully booked for {{ date }} at {{ time }}",
+  DESK_SUCCESS_LONE_ALLDAY: "Your desk booking has been successfully booked for {{ date }}",
+  DESK_SUCCESS_GROUP_ALLDAY: "Your group of {{ size }} desks have been successfully booked for {{ date }}",
   ASSETS_BOOKED: "Booking includes {{ count }} asset(s)",
-  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for you booking to be approved.",
-  LINK_HEADER: "Add to event to your calendar",
+  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for your booking to be approved.",
+  LINK_HEADER: "Add event to your calendar",
   LINK_OUTLOOK: "Add to Outlook",
   LINK_GOOGLE: "Add to Google Calendar",
   LINK_ICAL: "Download iCal File",
@@ -73580,7 +73582,7 @@ var BOOKINGS = {
   PARKING_PLATE_NUMBER_REQUIRED: "A plate number is required",
   PARKING_LIST_LOADING: "Finding available parking spaces...",
   PARKING_LIST_EMPTY: "No available parking spaces for selected time and/or filters",
-  PARKING_SELECT_MSG: "Select a parking space to view it's details",
+  PARKING_SELECT_MSG: "Select a parking space to view its details",
   VISITOR_INVITE_TITLE: "Invite Visitor",
   VISITOR_LIST: "Visitors",
   VISITOR_NAME: "Visitor Name",
@@ -73607,14 +73609,16 @@ var BOOKINGS = {
   ASSETS_ADD_HEADER: "Add Assets",
   ASSETS_ADD: "Add this Asset",
   ASSETS_REMOVE: "Remove this Asset",
-  ASSETS_SELECT: "Select an asset to view it's details",
+  ASSETS_SELECT: "Select an asset to view its details",
   ASSETS_SEARCH: "Search assets...",
   ASSETS_LOADING: "Finding assets...",
   ASSETS_EMPTY: "No available assets for selected time and/or filters",
   ASSETS_DELIVER_TOGGLE: "Exact Time",
   ASSETS_DELIVER_DATE: "Delivery Date",
   ASSETS_DELIVER_TIME: "Deliver After",
-  ASSETS_AVAILABLE: "{{ count }} available"
+  ASSETS_AVAILABLE: "{{ count }} available",
+  RULES_HIDDEN_1: "The selected {{ type }} is unavailable for the selected time or duration",
+  RULES_HIDDEN_N: "Some of the selected {{ type }}s are unavailable for the selected time or duration"
 };
 var CALENDAR_EVENT = {
   CATERING: "Catering",
@@ -73641,7 +73645,7 @@ var CALENDAR_EVENT = {
   ACTION_DELETE: "Delete event",
   ACTION_PRINT: "Print event",
   ACTION_DELETE_SERIES: "Delete series",
-  NO_LONG_EDIT_MSG: "Editing bookings long than \n a day is not available",
+  NO_LONG_EDIT_MSG: "Editing bookings longer than \n a day is not available",
   SPACE_LOADING: "Loading space list for location...",
   SPACE_STATUS_LOADING: "Updating available spaces...",
   SPACE_EXTERNALS_ERROR: "External attendees require a space to be booked",
@@ -73654,7 +73658,7 @@ var CALENDAR_EVENT = {
   CAPACITY_WARNING: "The selected room has less capacity than the number of meeting attendees.",
   CAPACITY_ERROR: "Attendee count is greater than the capacity of the selected rooms",
   CATERING_CHARGE_CODE: "Charge Code",
-  CATERING_CHARGE_CODE_SEACH: "Search for charge code...",
+  CATERING_CHARGE_CODE_SEARCH: "Search for charge code...",
   CATERING_CHARGE_CODE_REQUIRED: "Catering charge code is required",
   CATERING_NOTES: "Extra catering details. e.g. Dietary requirements etc.",
   CATERING_NOTES_REQUIRED: "Catering order notes are required",
@@ -73668,9 +73672,9 @@ var CALENDAR_EVENT = {
   SUCCESS: "Successfully created event",
   SUCCESS_WITH_SPACE: "You room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }} at {{ time }}",
   SUCCESS_WITHOUT_SPACE: "You meeting has been successfully booked for {{ date }} at {{ time }}",
-  SUCCESS_WITH_SPACE_ALLDAY: "You room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }}",
-  SUCCESS_WITHOUT_SPACE_ALLDAY: "You meeting has been successfully booked for {{ date }}",
-  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for you booking to be approved.",
+  SUCCESS_WITH_SPACE_ALLDAY: "Your room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }}",
+  SUCCESS_WITHOUT_SPACE_ALLDAY: "Your meeting has been successfully booked for {{ date }}",
+  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for your booking to be approved.",
   BOOK_NEARBY_DESK: "Book nearby desk",
   SPACE_SELECT_SIZE: "Select room size",
   SPACE_SELECT_SIZE_X: "Min. {{ count }} people",
@@ -73682,12 +73686,14 @@ var CALENDAR_EVENT = {
   FACILITIES: "Room Facilities",
   SPACE_REMOVE: "Remove this room",
   SPACE_ADD_TO: "Add this room",
-  SPACE_LIST_INFO: "Select a room to view it's details",
+  SPACE_LIST_INFO: "Select a room to view its details",
   SPACE_LOCATION: "Location",
   SPACE_REGION_ANY: "Any region",
   SPACE_LEVEL_ANY: "Any level",
   SPACE_SELECT_EMPTY: "No available spaces for selected time and/or filters",
   SPACE_SELECT_LOADING: "Finding available spaces...",
+  SPACE_BOOKING_RULES_HIDDEN_1: "The selected room is not available for the selected time or duration",
+  SPACE_BOOKING_RULES_HIDDEN_N: "Some of the selected rooms are not available for the selected time or duration",
   CONFIRM_DETAILS: "Confirm Meeting",
   FINISHED: "Return home",
   LOADING: "Creating meeting requests...",
@@ -73700,14 +73706,14 @@ var CALENDAR_EVENT = {
   GROUP_FEATURED: "Featured",
   GROUP_INTERESTED: "Interested",
   GROUP_NOT_INTERESTED: "Not Interested",
-  GROUP_INTEREST_ADD: "Indictate Interest",
+  GROUP_INTEREST_ADD: "Indicate Interest",
   GROUP_INTEREST_REMOVE: "Revoke Interest",
   GROUP_ATTENDING_FIELD: "Attending",
   GROUP_GOING: "Going",
   GROUP_NOT_GOING: "Not Going",
-  GROUP_GOING_ADD: "Indictate Going",
+  GROUP_GOING_ADD: "Indicate Going",
   GROUP_GOING_REMOVE: "Revoke Going",
-  GROUP_PREMOTE: "Premote Event",
+  GROUP_PROMOTE: "Promote Event",
   GROUP_EDIT: "Edit Event",
   GROUP_COPY_URL: "Copy URL",
   GROUP_DELETE: "Delete Event",
@@ -73782,7 +73788,7 @@ var CATERING = {
   ORDER_ITEMS_LOADING: "Finding available menu items...",
   ORDER_ITEM_REMOVE: "Remove this item",
   ORDER_ITEM_ADD: "Add this item",
-  ORDER_ITEM_SELECT: "Select an item to view it's details",
+  ORDER_ITEM_SELECT: "Select an item to view its details",
   ORDER_ALLOW: "Allow ordering this item from this zone",
   ORDERS_EMPTY: "No catering orders for the selected date.",
   ORDERS_DELIVER_TIME: "Deliver at {{ time }}",
@@ -73908,9 +73914,9 @@ var APP = {
     PARKING_NEW_HEADER: "New Parking Reservation",
     PARKING_EDIT_HEADER: "Edit Parking Reservation",
     PARKING_ASSIGNED: 'You are already assigned a parking space "{{ name }}"',
-    PARKING_SUCCESS_MSG: 'Your parking space reservation for "{{ name }}" at {{ place }} has been successfully booked for the {{ date }} at {{ time }}',
+    PARKING_SUCCESS_MSG: 'Your parking space reservation for "{{ name }}" has been successfully booked for the {{ date }} at {{ time }}',
     PARKING_CONFIRM_TITLE: "Confirm Parking Reservation",
-    DESK_ASSIGNED: 'You are already assigned a parking space "{{ name }}"',
+    DESK_ASSIGNED: 'You are already assigned a desk "{{ name }}"',
     DESK_CONFIRM_TITLE: "Confirm Desk Booking",
     VIEW_SCHEDULE: "View your Bookings",
     BOOKING_FINISHED: "Return home",
@@ -73922,8 +73928,9 @@ var APP = {
     CHAT_ASSISTANT: "Assistant",
     CHAT_WAITING: "Waiting for a reply...",
     CHAT_MESSAGE_PLACEHOLDER: "New message...",
-    RESOURCE_CHECKED_IN_FAILED: "Failed to check in resource",
-    RESOURCE_CHECKED_IN: "Successfully checked in resource"
+    RESOURCE_CHECKED_IN_FAILED: "No booking found",
+    RESOURCE_CHECKED_IN: "Successfully checked in resource",
+    RESOURCE_CHECKED_IN_MESSAGE: "Resource checked in successfully"
   },
   CONCIERGE: {
     MENU_BOOKINGS: "Bookings",
@@ -74275,7 +74282,7 @@ var APP = {
     EMAIL_TEMPLATES_SAVE: "Save Template",
     EMAIL_TEMPLATES_SEND_TEST: "Send test Email",
     EMAIL_TEMPLATES_SENT_TEST: "Successfully sent test email.",
-    EMAIL_TEMPLATES_CONFIG_ERROR: "Mailing system is not configured fot this application",
+    EMAIL_TEMPLATES_CONFIG_ERROR: "Mailing system is not configured for this application",
     EMAIL_TEMPLATES_SAVE_SUCCESS: "Successfully saved email template.",
     EMAIL_TEMPLATES_SAVE_ERROR: "Failed to save email template. Error: {{ error }}",
     EMAIL_TEMPLATES_REMOVE_SUCCESS: "Successfully removed email template",
@@ -74491,7 +74498,7 @@ var APP = {
     LOCKERS_RELEASE_ALL_SUCCESS: "Successfully released all locker",
     LOCKERS_SHARE_ERROR: 'Failed to share locker with "{{ name }}". Error: {{ error }}',
     LOCKERS_SHARE_SUCCESS: 'Successfully shared locker "{{ name }}" with {{ user }}',
-    LOCKERS_NO_DRIVER: "Driver is not setup for lockers",
+    LOCKERS_NO_DRIVER: "Driver is not set up for lockers",
     LOCKERS_POSITION_INVALID: "Position of the locker overlaps with another locker",
     LOCKERS_SIZE_INVALID: "Locker overlaps with another locker",
     SIGNAGE_HEADER: "Digital Signage Management",
@@ -74784,6 +74791,11 @@ var APP = {
     APPROVER: "Approver",
     VALID_FROM: "Valid From",
     VALID_UNTIL: "Valid Until",
+    PLAY_FROM: "Play From",
+    PLAY_UNTIL: "Play Until",
+    PLAY_AT: "Play At",
+    PLAY_CRON: "Play Schedule",
+    PLAY_DURATION: "Play For",
     AVAILABLE_ROOMS_HEADER: "Set {{ type }} availability for rooms",
     AVAILABLE_ROOMS_SAVING: "Saving room availability for {{ type }}...",
     AVAILABLE_ROOMS_ENABLE: "Enable Selected",
@@ -74864,7 +74876,7 @@ var APP = {
     ACTION_HELP: "Help",
     ACTION_JOIN_ROOMS: "Join Rooms",
     ACTION_POWER: "Power",
-    OUTPUTS_EMPTY: "No output devices setup for this system.",
+    OUTPUTS_EMPTY: "No output devices set up for this system.",
     CONTROLS_EMPTY: "No controls available for this input source",
     INPUT_EMPTY: "No input source",
     INPUT_CATEGORY_EMPTY: "No inputs available for category",
@@ -74944,7 +74956,7 @@ var APP = {
     PREVIOUS: "Previous Media",
     PLAY: "Playing",
     PAUSE: "Paused",
-    NEXT: "Previous Media",
+    NEXT: "Next Media",
     VOLUME: "Volume [{{ state }}]",
     LOOP_ALL: "Loop [All]",
     LOOP_ONE: "Loop [One]",
@@ -74988,7 +75000,7 @@ var APP = {
     CAMERA_UNAVAILABLE: "Camera feed loading...",
     HOST: "Host",
     PHONE: "Phone",
-    ORGANISATION: "Organization",
+    ORGANISATION: "Organisation",
     REASON: "Reason for visit",
     CHECKED_IN_MSG: "You are checked in!",
     CHECKED_IN_MSG_SELF_REG: "Your registration is confirmed!",
@@ -75017,7 +75029,7 @@ var APP = {
     BEVERAGE_LOADING: "Requesting drink...",
     BEVERAGE_SUCCESS: "Successfully requested drink. Your request should show up at your meeting shortly after the start time.",
     ERROR_PRINT: "Failed to print visitor label.",
-    ERROR_CHECKIN: "Failed to check-in {{ guest }} for {{ host }}'s meeting.",
+    ERROR_CHECKIN: "Failed to check in {{ guest }} for {{ host }}'s meeting.",
     SUCCESS_CHECKIN: "Successfully checked in {{ guest }} for {{ host }}'s meeting",
     NOT_FOUND: 'No meetings for guest "{{ email }}" today',
     LOAD_ERROR: "Failed to load booking for guest.",
@@ -78066,12 +78078,14 @@ var Ho = class extends B2 {
   work_overrides;
   /** ID of the user's photo in the PlaceOS uploads service */
   photo_upload_id;
+  /** Whether the user has opted in to location tracking */
+  locatable;
   /** Password */
   password = "";
   /** Password */
   confirm_password = "";
   constructor(t = {}) {
-    super(t), this.authority_id = t.authority_id || "", this.email = t.email || "", this.email_digest = t.email_digest || "", this.phone = t.phone || "", this.country = t.country || "", this.building = t.building || "", this.image = t.image || "", this.metadata = t.metadata || "", this.login_name = t.login_name || "", this.staff_id = t.staff_id || "", this.first_name = t.first_name || "", this.last_name = t.last_name || "", this.support = !!t.support, this.sys_admin = !!t.sys_admin, this.ui_theme = t.ui_theme || "", this.card_number = t.card_number || "", this.groups = t.groups || [], this.department = t.department || "", this.photo_upload_id = t.photo_upload_id || "", this.work_preferences = t.work_preferences || [], this.work_overrides = t.work_overrides || {};
+    super(t), this.authority_id = t.authority_id || "", this.email = t.email || "", this.email_digest = t.email_digest || "", this.phone = t.phone || "", this.country = t.country || "", this.building = t.building || "", this.image = t.image || "", this.metadata = t.metadata || "", this.login_name = t.login_name || "", this.staff_id = t.staff_id || "", this.first_name = t.first_name || "", this.last_name = t.last_name || "", this.support = !!t.support, this.sys_admin = !!t.sys_admin, this.ui_theme = t.ui_theme || "", this.card_number = t.card_number || "", this.groups = t.groups || [], this.department = t.department || "", this.photo_upload_id = t.photo_upload_id || "", this.work_preferences = t.work_preferences || [], this.work_overrides = t.work_overrides || {}, this.locatable = t.locatable ?? true;
   }
 };
 var Dt = "users";
@@ -80208,6 +80222,7 @@ var User = class {
     this.checked_in = !!data.checked_in;
     this.required = data.required ?? true;
     this.resource = data.resource ?? false;
+    this.locatable = data.locatable ?? false;
     this.response_status = data.response_status || "";
     const groups = data.groups || [];
     this.department = data.department ?? "";
@@ -80347,7 +80362,7 @@ setTimeout(() => {
 }, 300);
 function reloadUserData() {
   setTimeout(async () => {
-    const user = await Mc("current").toPromise();
+    const user = await lastValueFrom(Mc("current"));
     _current_user.next(new StaffUser(user));
   }, 300);
 }
@@ -80358,15 +80373,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "ecafbbc",
-  "hash": "ecafbbc",
+  "raw": "57828e4",
+  "hash": "57828e4",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "ecafbbc",
+  "suffix": "57828e4",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752125226357
+  "time": 1753234277172
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -80490,6 +80505,10 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
     if (name === "font_size")
       this._setFontSize();
     this.timeout("save_settings", () => this._savePendingChanges(), 2400);
+  }
+  async updateLocatable(locatable) {
+    await lastValueFrom(Uc(currentUser().id, { locatable }, "patch"));
+    reloadUserData();
   }
   overrideCssVariable(key, value, important = false) {
     let element = document.getElementById(`css-var-overrides+${key}`);
@@ -86489,7 +86508,7 @@ function uploadFile(file, pub = true, permissions = "none") {
       });
       const upload = upload_list[0];
       const upload_details = {
-        id: randomInt(999999999999),
+        id: upload?.id || `uploads-${randomString(8)}`,
         name: file.name,
         progress: 0,
         link: "",
@@ -88286,28 +88305,1615 @@ var MatDialogModule = class _MatDialogModule {
   }], null, null);
 })();
 
+// node_modules/@angular/material/fesm2022/internal-form-field-D5iFxU6d.mjs
+var _c08 = ["mat-internal-form-field", ""];
+var _c17 = ["*"];
+var _MatInternalFormField = class __MatInternalFormField {
+  /** Position of the label relative to the content. */
+  labelPosition;
+  static \u0275fac = function _MatInternalFormField_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || __MatInternalFormField)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: __MatInternalFormField,
+    selectors: [["div", "mat-internal-form-field", ""]],
+    hostAttrs: [1, "mdc-form-field", "mat-internal-form-field"],
+    hostVars: 2,
+    hostBindings: function _MatInternalFormField_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275classProp("mdc-form-field--align-end", ctx.labelPosition === "before");
+      }
+    },
+    inputs: {
+      labelPosition: "labelPosition"
+    },
+    attrs: _c08,
+    ngContentSelectors: _c17,
+    decls: 1,
+    vars: 0,
+    template: function _MatInternalFormField_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275projection(0);
+      }
+    },
+    styles: [".mat-internal-form-field{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-flex;align-items:center;vertical-align:middle}.mat-internal-form-field>label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0;order:0}[dir=rtl] .mat-internal-form-field>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px}.mdc-form-field--align-end>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px;order:-1}[dir=rtl] .mdc-form-field--align-end .mdc-form-field--align-end label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0}\n"],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(_MatInternalFormField, [{
+    type: Component,
+    args: [{
+      selector: "div[mat-internal-form-field]",
+      template: "<ng-content></ng-content>",
+      encapsulation: ViewEncapsulation.None,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      host: {
+        "class": "mdc-form-field mat-internal-form-field",
+        "[class.mdc-form-field--align-end]": 'labelPosition === "before"'
+      },
+      styles: [".mat-internal-form-field{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-flex;align-items:center;vertical-align:middle}.mat-internal-form-field>label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0;order:0}[dir=rtl] .mat-internal-form-field>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px}.mdc-form-field--align-end>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px;order:-1}[dir=rtl] .mdc-form-field--align-end .mdc-form-field--align-end label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0}\n"]
+    }]
+  }], null, {
+    labelPosition: [{
+      type: Input,
+      args: [{
+        required: true
+      }]
+    }]
+  });
+})();
+
+// node_modules/@angular/material/fesm2022/date-formats-K6TQue-Y.mjs
+var MAT_DATE_LOCALE = new InjectionToken("MAT_DATE_LOCALE", {
+  providedIn: "root",
+  factory: MAT_DATE_LOCALE_FACTORY
+});
+function MAT_DATE_LOCALE_FACTORY() {
+  return inject(LOCALE_ID);
+}
+var NOT_IMPLEMENTED = "Method not implemented";
+var DateAdapter = class {
+  /** The locale to use for all dates. */
+  locale;
+  _localeChanges = new Subject();
+  /** A stream that emits when the locale changes. */
+  localeChanges = this._localeChanges;
+  /**
+   * Sets the time of one date to the time of another.
+   * @param target Date whose time will be set.
+   * @param hours New hours to set on the date object.
+   * @param minutes New minutes to set on the date object.
+   * @param seconds New seconds to set on the date object.
+   */
+  setTime(target, hours, minutes, seconds) {
+    throw new Error(NOT_IMPLEMENTED);
+  }
+  /**
+   * Gets the hours component of the given date.
+   * @param date The date to extract the hours from.
+   */
+  getHours(date) {
+    throw new Error(NOT_IMPLEMENTED);
+  }
+  /**
+   * Gets the minutes component of the given date.
+   * @param date The date to extract the minutes from.
+   */
+  getMinutes(date) {
+    throw new Error(NOT_IMPLEMENTED);
+  }
+  /**
+   * Gets the seconds component of the given date.
+   * @param date The date to extract the seconds from.
+   */
+  getSeconds(date) {
+    throw new Error(NOT_IMPLEMENTED);
+  }
+  /**
+   * Parses a date with a specific time from a user-provided value.
+   * @param value The value to parse.
+   * @param parseFormat The expected format of the value being parsed
+   *     (type is implementation-dependent).
+   */
+  parseTime(value, parseFormat) {
+    throw new Error(NOT_IMPLEMENTED);
+  }
+  /**
+   * Adds an amount of seconds to the specified date.
+   * @param date Date to which to add the seconds.
+   * @param amount Amount of seconds to add to the date.
+   */
+  addSeconds(date, amount) {
+    throw new Error(NOT_IMPLEMENTED);
+  }
+  /**
+   * Given a potential date object, returns that same date object if it is
+   * a valid date, or `null` if it's not a valid date.
+   * @param obj The object to check.
+   * @returns A date or `null`.
+   */
+  getValidDateOrNull(obj) {
+    return this.isDateInstance(obj) && this.isValid(obj) ? obj : null;
+  }
+  /**
+   * Attempts to deserialize a value to a valid date object. This is different from parsing in that
+   * deserialize should only accept non-ambiguous, locale-independent formats (e.g. a ISO 8601
+   * string). The default implementation does not allow any deserialization, it simply checks that
+   * the given value is already a valid date object or null. The `<mat-datepicker>` will call this
+   * method on all of its `@Input()` properties that accept dates. It is therefore possible to
+   * support passing values from your backend directly to these properties by overriding this method
+   * to also deserialize the format used by your backend.
+   * @param value The value to be deserialized into a date object.
+   * @returns The deserialized date object, either a valid date, null if the value can be
+   *     deserialized into a null date (e.g. the empty string), or an invalid date.
+   */
+  deserialize(value) {
+    if (value == null || this.isDateInstance(value) && this.isValid(value)) {
+      return value;
+    }
+    return this.invalid();
+  }
+  /**
+   * Sets the locale used for all dates.
+   * @param locale The new locale.
+   */
+  setLocale(locale) {
+    this.locale = locale;
+    this._localeChanges.next();
+  }
+  /**
+   * Compares two dates.
+   * @param first The first date to compare.
+   * @param second The second date to compare.
+   * @returns 0 if the dates are equal, a number less than 0 if the first date is earlier,
+   *     a number greater than 0 if the first date is later.
+   */
+  compareDate(first2, second) {
+    return this.getYear(first2) - this.getYear(second) || this.getMonth(first2) - this.getMonth(second) || this.getDate(first2) - this.getDate(second);
+  }
+  /**
+   * Compares the time values of two dates.
+   * @param first First date to compare.
+   * @param second Second date to compare.
+   * @returns 0 if the times are equal, a number less than 0 if the first time is earlier,
+   *     a number greater than 0 if the first time is later.
+   */
+  compareTime(first2, second) {
+    return this.getHours(first2) - this.getHours(second) || this.getMinutes(first2) - this.getMinutes(second) || this.getSeconds(first2) - this.getSeconds(second);
+  }
+  /**
+   * Checks if two dates are equal.
+   * @param first The first date to check.
+   * @param second The second date to check.
+   * @returns Whether the two dates are equal.
+   *     Null dates are considered equal to other null dates.
+   */
+  sameDate(first2, second) {
+    if (first2 && second) {
+      let firstValid = this.isValid(first2);
+      let secondValid = this.isValid(second);
+      if (firstValid && secondValid) {
+        return !this.compareDate(first2, second);
+      }
+      return firstValid == secondValid;
+    }
+    return first2 == second;
+  }
+  /**
+   * Checks if the times of two dates are equal.
+   * @param first The first date to check.
+   * @param second The second date to check.
+   * @returns Whether the times of the two dates are equal.
+   *     Null dates are considered equal to other null dates.
+   */
+  sameTime(first2, second) {
+    if (first2 && second) {
+      const firstValid = this.isValid(first2);
+      const secondValid = this.isValid(second);
+      if (firstValid && secondValid) {
+        return !this.compareTime(first2, second);
+      }
+      return firstValid == secondValid;
+    }
+    return first2 == second;
+  }
+  /**
+   * Clamp the given date between min and max dates.
+   * @param date The date to clamp.
+   * @param min The minimum value to allow. If null or omitted no min is enforced.
+   * @param max The maximum value to allow. If null or omitted no max is enforced.
+   * @returns `min` if `date` is less than `min`, `max` if date is greater than `max`,
+   *     otherwise `date`.
+   */
+  clampDate(date, min, max) {
+    if (min && this.compareDate(date, min) < 0) {
+      return min;
+    }
+    if (max && this.compareDate(date, max) > 0) {
+      return max;
+    }
+    return date;
+  }
+};
+var MAT_DATE_FORMATS = new InjectionToken("mat-date-formats");
+
+// node_modules/@angular/material/fesm2022/core.mjs
+var VERSION7 = new Version("20.0.3");
+var ISO_8601_REGEX = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|(?:(?:\+|-)\d{2}:\d{2}))?)?$/;
+var TIME_REGEX = /^(\d?\d)[:.](\d?\d)(?:[:.](\d?\d))?\s*(AM|PM)?$/i;
+function range(length, valueFunction) {
+  const valuesArray = Array(length);
+  for (let i = 0; i < length; i++) {
+    valuesArray[i] = valueFunction(i);
+  }
+  return valuesArray;
+}
+var NativeDateAdapter = class _NativeDateAdapter extends DateAdapter {
+  /**
+   * @deprecated No longer being used. To be removed.
+   * @breaking-change 14.0.0
+   */
+  useUtcForDisplay = false;
+  /** The injected locale. */
+  _matDateLocale = inject(MAT_DATE_LOCALE, {
+    optional: true
+  });
+  constructor() {
+    super();
+    const matDateLocale = inject(MAT_DATE_LOCALE, {
+      optional: true
+    });
+    if (matDateLocale !== void 0) {
+      this._matDateLocale = matDateLocale;
+    }
+    super.setLocale(this._matDateLocale);
+  }
+  getYear(date) {
+    return date.getFullYear();
+  }
+  getMonth(date) {
+    return date.getMonth();
+  }
+  getDate(date) {
+    return date.getDate();
+  }
+  getDayOfWeek(date) {
+    return date.getDay();
+  }
+  getMonthNames(style2) {
+    const dtf = new Intl.DateTimeFormat(this.locale, {
+      month: style2,
+      timeZone: "utc"
+    });
+    return range(12, (i) => this._format(dtf, new Date(2017, i, 1)));
+  }
+  getDateNames() {
+    const dtf = new Intl.DateTimeFormat(this.locale, {
+      day: "numeric",
+      timeZone: "utc"
+    });
+    return range(31, (i) => this._format(dtf, new Date(2017, 0, i + 1)));
+  }
+  getDayOfWeekNames(style2) {
+    const dtf = new Intl.DateTimeFormat(this.locale, {
+      weekday: style2,
+      timeZone: "utc"
+    });
+    return range(7, (i) => this._format(dtf, new Date(2017, 0, i + 1)));
+  }
+  getYearName(date) {
+    const dtf = new Intl.DateTimeFormat(this.locale, {
+      year: "numeric",
+      timeZone: "utc"
+    });
+    return this._format(dtf, date);
+  }
+  getFirstDayOfWeek() {
+    if (typeof Intl !== "undefined" && Intl.Locale) {
+      const locale = new Intl.Locale(this.locale);
+      const firstDay = (locale.getWeekInfo?.() || locale.weekInfo)?.firstDay ?? 0;
+      return firstDay === 7 ? 0 : firstDay;
+    }
+    return 0;
+  }
+  getNumDaysInMonth(date) {
+    return this.getDate(this._createDateWithOverflow(this.getYear(date), this.getMonth(date) + 1, 0));
+  }
+  clone(date) {
+    return new Date(date.getTime());
+  }
+  createDate(year, month, date) {
+    if (typeof ngDevMode === "undefined" || ngDevMode) {
+      if (month < 0 || month > 11) {
+        throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
+      }
+      if (date < 1) {
+        throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
+      }
+    }
+    let result = this._createDateWithOverflow(year, month, date);
+    if (result.getMonth() != month && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw Error(`Invalid date "${date}" for month with index "${month}".`);
+    }
+    return result;
+  }
+  today() {
+    return /* @__PURE__ */ new Date();
+  }
+  parse(value, parseFormat) {
+    if (typeof value == "number") {
+      return new Date(value);
+    }
+    return value ? new Date(Date.parse(value)) : null;
+  }
+  format(date, displayFormat) {
+    if (!this.isValid(date)) {
+      throw Error("NativeDateAdapter: Cannot format invalid date.");
+    }
+    const dtf = new Intl.DateTimeFormat(this.locale, __spreadProps(__spreadValues({}, displayFormat), {
+      timeZone: "utc"
+    }));
+    return this._format(dtf, date);
+  }
+  addCalendarYears(date, years) {
+    return this.addCalendarMonths(date, years * 12);
+  }
+  addCalendarMonths(date, months) {
+    let newDate = this._createDateWithOverflow(this.getYear(date), this.getMonth(date) + months, this.getDate(date));
+    if (this.getMonth(newDate) != ((this.getMonth(date) + months) % 12 + 12) % 12) {
+      newDate = this._createDateWithOverflow(this.getYear(newDate), this.getMonth(newDate), 0);
+    }
+    return newDate;
+  }
+  addCalendarDays(date, days) {
+    return this._createDateWithOverflow(this.getYear(date), this.getMonth(date), this.getDate(date) + days);
+  }
+  toIso8601(date) {
+    return [date.getUTCFullYear(), this._2digit(date.getUTCMonth() + 1), this._2digit(date.getUTCDate())].join("-");
+  }
+  /**
+   * Returns the given value if given a valid Date or null. Deserializes valid ISO 8601 strings
+   * (https://www.ietf.org/rfc/rfc3339.txt) into valid Dates and empty string into null. Returns an
+   * invalid date for all other values.
+   */
+  deserialize(value) {
+    if (typeof value === "string") {
+      if (!value) {
+        return null;
+      }
+      if (ISO_8601_REGEX.test(value)) {
+        let date = new Date(value);
+        if (this.isValid(date)) {
+          return date;
+        }
+      }
+    }
+    return super.deserialize(value);
+  }
+  isDateInstance(obj) {
+    return obj instanceof Date;
+  }
+  isValid(date) {
+    return !isNaN(date.getTime());
+  }
+  invalid() {
+    return /* @__PURE__ */ new Date(NaN);
+  }
+  setTime(target, hours, minutes, seconds) {
+    if (typeof ngDevMode === "undefined" || ngDevMode) {
+      if (!inRange(hours, 0, 23)) {
+        throw Error(`Invalid hours "${hours}". Hours value must be between 0 and 23.`);
+      }
+      if (!inRange(minutes, 0, 59)) {
+        throw Error(`Invalid minutes "${minutes}". Minutes value must be between 0 and 59.`);
+      }
+      if (!inRange(seconds, 0, 59)) {
+        throw Error(`Invalid seconds "${seconds}". Seconds value must be between 0 and 59.`);
+      }
+    }
+    const clone = this.clone(target);
+    clone.setHours(hours, minutes, seconds, 0);
+    return clone;
+  }
+  getHours(date) {
+    return date.getHours();
+  }
+  getMinutes(date) {
+    return date.getMinutes();
+  }
+  getSeconds(date) {
+    return date.getSeconds();
+  }
+  parseTime(userValue, parseFormat) {
+    if (typeof userValue !== "string") {
+      return userValue instanceof Date ? new Date(userValue.getTime()) : null;
+    }
+    const value = userValue.trim();
+    if (value.length === 0) {
+      return null;
+    }
+    let result = this._parseTimeString(value);
+    if (result === null) {
+      const withoutExtras = value.replace(/[^0-9:(AM|PM)]/gi, "").trim();
+      if (withoutExtras.length > 0) {
+        result = this._parseTimeString(withoutExtras);
+      }
+    }
+    return result || this.invalid();
+  }
+  addSeconds(date, amount) {
+    return new Date(date.getTime() + amount * 1e3);
+  }
+  /** Creates a date but allows the month and date to overflow. */
+  _createDateWithOverflow(year, month, date) {
+    const d2 = /* @__PURE__ */ new Date();
+    d2.setFullYear(year, month, date);
+    d2.setHours(0, 0, 0, 0);
+    return d2;
+  }
+  /**
+   * Pads a number to make it two digits.
+   * @param n The number to pad.
+   * @returns The padded number.
+   */
+  _2digit(n) {
+    return ("00" + n).slice(-2);
+  }
+  /**
+   * When converting Date object to string, javascript built-in functions may return wrong
+   * results because it applies its internal DST rules. The DST rules around the world change
+   * very frequently, and the current valid rule is not always valid in previous years though.
+   * We work around this problem building a new Date object which has its internal UTC
+   * representation with the local date and time.
+   * @param dtf Intl.DateTimeFormat object, containing the desired string format. It must have
+   *    timeZone set to 'utc' to work fine.
+   * @param date Date from which we want to get the string representation according to dtf
+   * @returns A Date object with its UTC representation based on the passed in date info
+   */
+  _format(dtf, date) {
+    const d2 = /* @__PURE__ */ new Date();
+    d2.setUTCFullYear(date.getFullYear(), date.getMonth(), date.getDate());
+    d2.setUTCHours(date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
+    return dtf.format(d2);
+  }
+  /**
+   * Attempts to parse a time string into a date object. Returns null if it cannot be parsed.
+   * @param value Time string to parse.
+   */
+  _parseTimeString(value) {
+    const parsed = value.toUpperCase().match(TIME_REGEX);
+    if (parsed) {
+      let hours = parseInt(parsed[1]);
+      const minutes = parseInt(parsed[2]);
+      let seconds = parsed[3] == null ? void 0 : parseInt(parsed[3]);
+      const amPm = parsed[4];
+      if (hours === 12) {
+        hours = amPm === "AM" ? 0 : hours;
+      } else if (amPm === "PM") {
+        hours += 12;
+      }
+      if (inRange(hours, 0, 23) && inRange(minutes, 0, 59) && (seconds == null || inRange(seconds, 0, 59))) {
+        return this.setTime(this.today(), hours, minutes, seconds || 0);
+      }
+    }
+    return null;
+  }
+  static \u0275fac = function NativeDateAdapter_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NativeDateAdapter)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _NativeDateAdapter,
+    factory: _NativeDateAdapter.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NativeDateAdapter, [{
+    type: Injectable
+  }], () => [], null);
+})();
+function inRange(value, min, max) {
+  return !isNaN(value) && value >= min && value <= max;
+}
+var MAT_NATIVE_DATE_FORMATS = {
+  parse: {
+    dateInput: null,
+    timeInput: null
+  },
+  display: {
+    dateInput: {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric"
+    },
+    timeInput: {
+      hour: "numeric",
+      minute: "numeric"
+    },
+    monthYearLabel: {
+      year: "numeric",
+      month: "short"
+    },
+    dateA11yLabel: {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    },
+    monthYearA11yLabel: {
+      year: "numeric",
+      month: "long"
+    },
+    timeOptionLabel: {
+      hour: "numeric",
+      minute: "numeric"
+    }
+  }
+};
+var NativeDateModule = class _NativeDateModule {
+  static \u0275fac = function NativeDateModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NativeDateModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _NativeDateModule
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    providers: [{
+      provide: DateAdapter,
+      useClass: NativeDateAdapter
+    }]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NativeDateModule, [{
+    type: NgModule,
+    args: [{
+      providers: [{
+        provide: DateAdapter,
+        useClass: NativeDateAdapter
+      }]
+    }]
+  }], null, null);
+})();
+var MatNativeDateModule = class _MatNativeDateModule {
+  static \u0275fac = function MatNativeDateModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatNativeDateModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatNativeDateModule
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    providers: [provideNativeDateAdapter()]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatNativeDateModule, [{
+    type: NgModule,
+    args: [{
+      providers: [provideNativeDateAdapter()]
+    }]
+  }], null, null);
+})();
+function provideNativeDateAdapter(formats = MAT_NATIVE_DATE_FORMATS) {
+  return [{
+    provide: DateAdapter,
+    useClass: NativeDateAdapter
+  }, {
+    provide: MAT_DATE_FORMATS,
+    useValue: formats
+  }];
+}
+
+// libs/components/src/lib/safe.pipe.ts
+var _SafePipe = class _SafePipe {
+  constructor() {
+    this.sanitizer = inject(DomSanitizer);
+  }
+  /**
+   * Sanitizes the string allowing it to be injected into a template
+   * @param value String to sanitize
+   * @param type Type of value to sanitise. `resource`, `url`, `script`, `style` or `html`
+   */
+  transform(value, type2 = "html") {
+    switch (type2) {
+      case "resource":
+        return this.sanitizer.bypassSecurityTrustResourceUrl(value);
+      case "url":
+        return this.sanitizer.bypassSecurityTrustUrl(value);
+      case "script":
+        return this.sanitizer.bypassSecurityTrustScript(value);
+      case "style":
+        return this.sanitizer.bypassSecurityTrustStyle(value);
+      default:
+        return this.sanitizer.bypassSecurityTrustHtml(value);
+    }
+  }
+};
+_SafePipe.\u0275fac = function SafePipe_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _SafePipe)();
+};
+_SafePipe.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "safe", type: _SafePipe, pure: true });
+var SafePipe = _SafePipe;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SafePipe, [{
+    type: Pipe,
+    args: [{
+      name: "safe"
+    }]
+  }], null, null);
+})();
+
+// libs/components/src/lib/icon.component.ts
+var _c09 = ["*"];
+function IconComponent_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "i");
+    \u0275\u0275text(1);
+    \u0275\u0275projection(2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    let tmp_1_0;
+    let tmp_2_0;
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(((tmp_1_0 = ctx_r0.icon()) == null ? null : tmp_1_0.class) || ctx_r0.className());
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", (tmp_2_0 = ctx_r0.icon()) == null ? null : tmp_2_0.content, " ");
+  }
+}
+function IconComponent_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 2);
+    \u0275\u0275pipe(1, "safe");
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("src", \u0275\u0275pipeBind2(1, 1, ctx_r0.icon().src, "resource"), \u0275\u0275sanitizeUrl);
+  }
+}
+var _IconComponent = class _IconComponent {
+  constructor() {
+    this.className = input("material-symbols-rounded");
+    this.icon = input(void 0);
+  }
+};
+_IconComponent.\u0275fac = function IconComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _IconComponent)();
+};
+_IconComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["icon"], ["i", "icon", ""]], inputs: { className: [1, "className"], icon: [1, "icon"] }, ngContentSelectors: _c09, decls: 3, vars: 2, consts: [[1, "flex", "h-[1.25em]", "w-[1.25em]", "items-center", "justify-center", "overflow-hidden"], [3, "class"], [1, "h-[1em]", "w-[1em]", 3, "src"]], template: function IconComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275projectionDef();
+    \u0275\u0275elementStart(0, "div", 0);
+    \u0275\u0275conditionalCreate(1, IconComponent_Conditional_1_Template, 3, 3, "i", 1);
+    \u0275\u0275conditionalCreate(2, IconComponent_Conditional_2_Template, 2, 4, "img", 2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance();
+    \u0275\u0275conditional(!ctx.icon() || ctx.icon().type !== "img" ? 1 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.icon() && ctx.icon().type === "img" ? 2 : -1);
+  }
+}, dependencies: [SafePipe], styles: ["\n\ni[_ngcontent-%COMP%] {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */"] });
+var IconComponent = _IconComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IconComponent, [{
+    type: Component,
+    args: [{ selector: "icon,i[icon]", template: `
+        <div
+            class="flex h-[1.25em] w-[1.25em] items-center justify-center overflow-hidden"
+        >
+            @if (!icon() || icon().type !== 'img') {
+                <i [class]="icon()?.class || className()">
+                    {{ icon()?.content }}
+                    <ng-content></ng-content>
+                </i>
+            }
+            @if (icon() && icon().type === 'img') {
+                <img
+                    class="h-[1em] w-[1em]"
+                    [src]="icon().src | safe: 'resource'"
+                />
+            }
+        </div>
+    `, imports: [SafePipe], styles: ["/* angular:styles/component:css;9dcb326dcc2b3d8b68e7d89ef488eb28abc701fb0e2ab3f372b27f7bf732088c;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/icon.component.ts */\ni {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IconComponent, { className: "IconComponent", filePath: "libs/components/src/lib/icon.component.ts", lineNumber: 34 });
+})();
+
+// node_modules/@angular/material/fesm2022/checkbox.mjs
+var _c010 = ["input"];
+var _c18 = ["label"];
+var _c25 = ["*"];
+var MAT_CHECKBOX_DEFAULT_OPTIONS = new InjectionToken("mat-checkbox-default-options", {
+  providedIn: "root",
+  factory: MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY
+});
+function MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY() {
+  return {
+    color: "accent",
+    clickAction: "check-indeterminate",
+    disabledInteractive: false
+  };
+}
+var TransitionCheckState;
+(function(TransitionCheckState2) {
+  TransitionCheckState2[TransitionCheckState2["Init"] = 0] = "Init";
+  TransitionCheckState2[TransitionCheckState2["Checked"] = 1] = "Checked";
+  TransitionCheckState2[TransitionCheckState2["Unchecked"] = 2] = "Unchecked";
+  TransitionCheckState2[TransitionCheckState2["Indeterminate"] = 3] = "Indeterminate";
+})(TransitionCheckState || (TransitionCheckState = {}));
+var MatCheckboxChange = class {
+  /** The source checkbox of the event. */
+  source;
+  /** The new `checked` value of the checkbox. */
+  checked;
+};
+var defaults2 = MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY();
+var MatCheckbox = class _MatCheckbox {
+  _elementRef = inject(ElementRef);
+  _changeDetectorRef = inject(ChangeDetectorRef);
+  _ngZone = inject(NgZone);
+  _animationsDisabled = _animationsDisabled();
+  _options = inject(MAT_CHECKBOX_DEFAULT_OPTIONS, {
+    optional: true
+  });
+  /** Focuses the checkbox. */
+  focus() {
+    this._inputElement.nativeElement.focus();
+  }
+  /** Creates the change event that will be emitted by the checkbox. */
+  _createChangeEvent(isChecked) {
+    const event = new MatCheckboxChange();
+    event.source = this;
+    event.checked = isChecked;
+    return event;
+  }
+  /** Gets the element on which to add the animation CSS classes. */
+  _getAnimationTargetElement() {
+    return this._inputElement?.nativeElement;
+  }
+  /** CSS classes to add when transitioning between the different checkbox states. */
+  _animationClasses = {
+    uncheckedToChecked: "mdc-checkbox--anim-unchecked-checked",
+    uncheckedToIndeterminate: "mdc-checkbox--anim-unchecked-indeterminate",
+    checkedToUnchecked: "mdc-checkbox--anim-checked-unchecked",
+    checkedToIndeterminate: "mdc-checkbox--anim-checked-indeterminate",
+    indeterminateToChecked: "mdc-checkbox--anim-indeterminate-checked",
+    indeterminateToUnchecked: "mdc-checkbox--anim-indeterminate-unchecked"
+  };
+  /**
+   * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
+   * take precedence so this may be omitted.
+   */
+  ariaLabel = "";
+  /**
+   * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
+   */
+  ariaLabelledby = null;
+  /** The 'aria-describedby' attribute is read after the element's label and field type. */
+  ariaDescribedby;
+  /**
+   * Users can specify the `aria-expanded` attribute which will be forwarded to the input element
+   */
+  ariaExpanded;
+  /**
+   * Users can specify the `aria-controls` attribute which will be forwarded to the input element
+   */
+  ariaControls;
+  /** Users can specify the `aria-owns` attribute which will be forwarded to the input element */
+  ariaOwns;
+  _uniqueId;
+  /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
+  id;
+  /** Returns the unique id for the visual hidden input. */
+  get inputId() {
+    return `${this.id || this._uniqueId}-input`;
+  }
+  /** Whether the checkbox is required. */
+  required;
+  /** Whether the label should appear after or before the checkbox. Defaults to 'after' */
+  labelPosition = "after";
+  /** Name value will be applied to the input element if present */
+  name = null;
+  /** Event emitted when the checkbox's `checked` value changes. */
+  change = new EventEmitter();
+  /** Event emitted when the checkbox's `indeterminate` value changes. */
+  indeterminateChange = new EventEmitter();
+  /** The value attribute of the native input element */
+  value;
+  /** Whether the checkbox has a ripple. */
+  disableRipple;
+  /** The native `<input type="checkbox">` element */
+  _inputElement;
+  /** The native `<label>` element */
+  _labelElement;
+  /** Tabindex for the checkbox. */
+  tabIndex;
+  // TODO(crisbeto): this should be a ThemePalette, but some internal apps were abusing
+  // the lack of type checking previously and assigning random strings.
+  /**
+   * Theme color of the checkbox. This API is supported in M2 themes only, it
+   * has no effect in M3 themes. For color customization in M3, see https://material.angular.dev/components/checkbox/styling.
+   *
+   * For information on applying color variants in M3, see
+   * https://material.angular.dev/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
+   */
+  color;
+  /** Whether the checkbox should remain interactive when it is disabled. */
+  disabledInteractive;
+  /**
+   * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
+   * @docs-private
+   */
+  _onTouched = () => {
+  };
+  _currentAnimationClass = "";
+  _currentCheckState = TransitionCheckState.Init;
+  _controlValueAccessorChangeFn = () => {
+  };
+  _validatorChangeFn = () => {
+  };
+  constructor() {
+    inject(_CdkPrivateStyleLoader).load(_StructuralStylesLoader);
+    const tabIndex = inject(new HostAttributeToken("tabindex"), {
+      optional: true
+    });
+    this._options = this._options || defaults2;
+    this.color = this._options.color || defaults2.color;
+    this.tabIndex = tabIndex == null ? 0 : parseInt(tabIndex) || 0;
+    this.id = this._uniqueId = inject(_IdGenerator).getId("mat-mdc-checkbox-");
+    this.disabledInteractive = this._options?.disabledInteractive ?? false;
+  }
+  ngOnChanges(changes) {
+    if (changes["required"]) {
+      this._validatorChangeFn();
+    }
+  }
+  ngAfterViewInit() {
+    this._syncIndeterminate(this.indeterminate);
+  }
+  /** Whether the checkbox is checked. */
+  get checked() {
+    return this._checked;
+  }
+  set checked(value) {
+    if (value != this.checked) {
+      this._checked = value;
+      this._changeDetectorRef.markForCheck();
+    }
+  }
+  _checked = false;
+  /** Whether the checkbox is disabled. */
+  get disabled() {
+    return this._disabled;
+  }
+  set disabled(value) {
+    if (value !== this.disabled) {
+      this._disabled = value;
+      this._changeDetectorRef.markForCheck();
+    }
+  }
+  _disabled = false;
+  /**
+   * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
+   * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
+   * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
+   * set to false.
+   */
+  get indeterminate() {
+    return this._indeterminate();
+  }
+  set indeterminate(value) {
+    const changed = value != this._indeterminate();
+    this._indeterminate.set(value);
+    if (changed) {
+      if (value) {
+        this._transitionCheckState(TransitionCheckState.Indeterminate);
+      } else {
+        this._transitionCheckState(this.checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
+      }
+      this.indeterminateChange.emit(value);
+    }
+    this._syncIndeterminate(value);
+  }
+  _indeterminate = signal(false);
+  _isRippleDisabled() {
+    return this.disableRipple || this.disabled;
+  }
+  /** Method being called whenever the label text changes. */
+  _onLabelTextChange() {
+    this._changeDetectorRef.detectChanges();
+  }
+  // Implemented as part of ControlValueAccessor.
+  writeValue(value) {
+    this.checked = !!value;
+  }
+  // Implemented as part of ControlValueAccessor.
+  registerOnChange(fn3) {
+    this._controlValueAccessorChangeFn = fn3;
+  }
+  // Implemented as part of ControlValueAccessor.
+  registerOnTouched(fn3) {
+    this._onTouched = fn3;
+  }
+  // Implemented as part of ControlValueAccessor.
+  setDisabledState(isDisabled) {
+    this.disabled = isDisabled;
+  }
+  // Implemented as a part of Validator.
+  validate(control) {
+    return this.required && control.value !== true ? {
+      "required": true
+    } : null;
+  }
+  // Implemented as a part of Validator.
+  registerOnValidatorChange(fn3) {
+    this._validatorChangeFn = fn3;
+  }
+  _transitionCheckState(newState) {
+    let oldState = this._currentCheckState;
+    let element = this._getAnimationTargetElement();
+    if (oldState === newState || !element) {
+      return;
+    }
+    if (this._currentAnimationClass) {
+      element.classList.remove(this._currentAnimationClass);
+    }
+    this._currentAnimationClass = this._getAnimationClassForCheckStateTransition(oldState, newState);
+    this._currentCheckState = newState;
+    if (this._currentAnimationClass.length > 0) {
+      element.classList.add(this._currentAnimationClass);
+      const animationClass = this._currentAnimationClass;
+      this._ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          element.classList.remove(animationClass);
+        }, 1e3);
+      });
+    }
+  }
+  _emitChangeEvent() {
+    this._controlValueAccessorChangeFn(this.checked);
+    this.change.emit(this._createChangeEvent(this.checked));
+    if (this._inputElement) {
+      this._inputElement.nativeElement.checked = this.checked;
+    }
+  }
+  /** Toggles the `checked` state of the checkbox. */
+  toggle() {
+    this.checked = !this.checked;
+    this._controlValueAccessorChangeFn(this.checked);
+  }
+  _handleInputClick() {
+    const clickAction = this._options?.clickAction;
+    if (!this.disabled && clickAction !== "noop") {
+      if (this.indeterminate && clickAction !== "check") {
+        Promise.resolve().then(() => {
+          this._indeterminate.set(false);
+          this.indeterminateChange.emit(false);
+        });
+      }
+      this._checked = !this._checked;
+      this._transitionCheckState(this._checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
+      this._emitChangeEvent();
+    } else if (this.disabled && this.disabledInteractive || !this.disabled && clickAction === "noop") {
+      this._inputElement.nativeElement.checked = this.checked;
+      this._inputElement.nativeElement.indeterminate = this.indeterminate;
+    }
+  }
+  _onInteractionEvent(event) {
+    event.stopPropagation();
+  }
+  _onBlur() {
+    Promise.resolve().then(() => {
+      this._onTouched();
+      this._changeDetectorRef.markForCheck();
+    });
+  }
+  _getAnimationClassForCheckStateTransition(oldState, newState) {
+    if (this._animationsDisabled) {
+      return "";
+    }
+    switch (oldState) {
+      case TransitionCheckState.Init:
+        if (newState === TransitionCheckState.Checked) {
+          return this._animationClasses.uncheckedToChecked;
+        } else if (newState == TransitionCheckState.Indeterminate) {
+          return this._checked ? this._animationClasses.checkedToIndeterminate : this._animationClasses.uncheckedToIndeterminate;
+        }
+        break;
+      case TransitionCheckState.Unchecked:
+        return newState === TransitionCheckState.Checked ? this._animationClasses.uncheckedToChecked : this._animationClasses.uncheckedToIndeterminate;
+      case TransitionCheckState.Checked:
+        return newState === TransitionCheckState.Unchecked ? this._animationClasses.checkedToUnchecked : this._animationClasses.checkedToIndeterminate;
+      case TransitionCheckState.Indeterminate:
+        return newState === TransitionCheckState.Checked ? this._animationClasses.indeterminateToChecked : this._animationClasses.indeterminateToUnchecked;
+    }
+    return "";
+  }
+  /**
+   * Syncs the indeterminate value with the checkbox DOM node.
+   *
+   * We sync `indeterminate` directly on the DOM node, because in Ivy the check for whether a
+   * property is supported on an element boils down to `if (propName in element)`. Domino's
+   * HTMLInputElement doesn't have an `indeterminate` property so Ivy will warn during
+   * server-side rendering.
+   */
+  _syncIndeterminate(value) {
+    const nativeCheckbox = this._inputElement;
+    if (nativeCheckbox) {
+      nativeCheckbox.nativeElement.indeterminate = value;
+    }
+  }
+  _onInputClick() {
+    this._handleInputClick();
+  }
+  _onTouchTargetClick() {
+    this._handleInputClick();
+    if (!this.disabled) {
+      this._inputElement.nativeElement.focus();
+    }
+  }
+  /**
+   *  Prevent click events that come from the `<label/>` element from bubbling. This prevents the
+   *  click handler on the host from triggering twice when clicking on the `<label/>` element. After
+   *  the click event on the `<label/>` propagates, the browsers dispatches click on the associated
+   *  `<input/>`. By preventing clicks on the label by bubbling, we ensure only one click event
+   *  bubbles when the label is clicked.
+   */
+  _preventBubblingFromLabel(event) {
+    if (!!event.target && this._labelElement.nativeElement.contains(event.target)) {
+      event.stopPropagation();
+    }
+  }
+  static \u0275fac = function MatCheckbox_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatCheckbox)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _MatCheckbox,
+    selectors: [["mat-checkbox"]],
+    viewQuery: function MatCheckbox_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c010, 5);
+        \u0275\u0275viewQuery(_c18, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._inputElement = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._labelElement = _t4.first);
+      }
+    },
+    hostAttrs: [1, "mat-mdc-checkbox"],
+    hostVars: 16,
+    hostBindings: function MatCheckbox_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275domProperty("id", ctx.id);
+        \u0275\u0275attribute("tabindex", null)("aria-label", null)("aria-labelledby", null);
+        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "mat-accent");
+        \u0275\u0275classProp("_mat-animation-noopable", ctx._animationsDisabled)("mdc-checkbox--disabled", ctx.disabled)("mat-mdc-checkbox-disabled", ctx.disabled)("mat-mdc-checkbox-checked", ctx.checked)("mat-mdc-checkbox-disabled-interactive", ctx.disabledInteractive);
+      }
+    },
+    inputs: {
+      ariaLabel: [0, "aria-label", "ariaLabel"],
+      ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
+      ariaDescribedby: [0, "aria-describedby", "ariaDescribedby"],
+      ariaExpanded: [2, "aria-expanded", "ariaExpanded", booleanAttribute],
+      ariaControls: [0, "aria-controls", "ariaControls"],
+      ariaOwns: [0, "aria-owns", "ariaOwns"],
+      id: "id",
+      required: [2, "required", "required", booleanAttribute],
+      labelPosition: "labelPosition",
+      name: "name",
+      value: "value",
+      disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
+      tabIndex: [2, "tabIndex", "tabIndex", (value) => value == null ? void 0 : numberAttribute(value)],
+      color: "color",
+      disabledInteractive: [2, "disabledInteractive", "disabledInteractive", booleanAttribute],
+      checked: [2, "checked", "checked", booleanAttribute],
+      disabled: [2, "disabled", "disabled", booleanAttribute],
+      indeterminate: [2, "indeterminate", "indeterminate", booleanAttribute]
+    },
+    outputs: {
+      change: "change",
+      indeterminateChange: "indeterminateChange"
+    },
+    exportAs: ["matCheckbox"],
+    features: [\u0275\u0275ProvidersFeature([{
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => _MatCheckbox),
+      multi: true
+    }, {
+      provide: NG_VALIDATORS,
+      useExisting: _MatCheckbox,
+      multi: true
+    }]), \u0275\u0275NgOnChangesFeature],
+    ngContentSelectors: _c25,
+    decls: 15,
+    vars: 23,
+    consts: [["checkbox", ""], ["input", ""], ["label", ""], ["mat-internal-form-field", "", 3, "click", "labelPosition"], [1, "mdc-checkbox"], [1, "mat-mdc-checkbox-touch-target", 3, "click"], ["type", "checkbox", 1, "mdc-checkbox__native-control", 3, "blur", "click", "change", "checked", "indeterminate", "disabled", "id", "required", "tabIndex"], [1, "mdc-checkbox__ripple"], [1, "mdc-checkbox__background"], ["focusable", "false", "viewBox", "0 0 24 24", "aria-hidden", "true", 1, "mdc-checkbox__checkmark"], ["fill", "none", "d", "M1.73,12.91 8.1,19.28 22.79,4.59", 1, "mdc-checkbox__checkmark-path"], [1, "mdc-checkbox__mixedmark"], ["mat-ripple", "", 1, "mat-mdc-checkbox-ripple", "mat-focus-indicator", 3, "matRippleTrigger", "matRippleDisabled", "matRippleCentered"], [1, "mdc-label", 3, "for"]],
+    template: function MatCheckbox_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275projectionDef();
+        \u0275\u0275elementStart(0, "div", 3);
+        \u0275\u0275listener("click", function MatCheckbox_Template_div_click_0_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._preventBubblingFromLabel($event));
+        });
+        \u0275\u0275elementStart(1, "div", 4, 0)(3, "div", 5);
+        \u0275\u0275listener("click", function MatCheckbox_Template_div_click_3_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onTouchTargetClick());
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(4, "input", 6, 1);
+        \u0275\u0275listener("blur", function MatCheckbox_Template_input_blur_4_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onBlur());
+        })("click", function MatCheckbox_Template_input_click_4_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onInputClick());
+        })("change", function MatCheckbox_Template_input_change_4_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onInteractionEvent($event));
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(6, "div", 7);
+        \u0275\u0275elementStart(7, "div", 8);
+        \u0275\u0275namespaceSVG();
+        \u0275\u0275elementStart(8, "svg", 9);
+        \u0275\u0275element(9, "path", 10);
+        \u0275\u0275elementEnd();
+        \u0275\u0275namespaceHTML();
+        \u0275\u0275element(10, "div", 11);
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(11, "div", 12);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(12, "label", 13, 2);
+        \u0275\u0275projection(14);
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        const checkbox_r2 = \u0275\u0275reference(2);
+        \u0275\u0275property("labelPosition", ctx.labelPosition);
+        \u0275\u0275advance(4);
+        \u0275\u0275classProp("mdc-checkbox--selected", ctx.checked);
+        \u0275\u0275property("checked", ctx.checked)("indeterminate", ctx.indeterminate)("disabled", ctx.disabled && !ctx.disabledInteractive)("id", ctx.inputId)("required", ctx.required)("tabIndex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex);
+        \u0275\u0275attribute("aria-label", ctx.ariaLabel || null)("aria-labelledby", ctx.ariaLabelledby)("aria-describedby", ctx.ariaDescribedby)("aria-checked", ctx.indeterminate ? "mixed" : null)("aria-controls", ctx.ariaControls)("aria-disabled", ctx.disabled && ctx.disabledInteractive ? true : null)("aria-expanded", ctx.ariaExpanded)("aria-owns", ctx.ariaOwns)("name", ctx.name)("value", ctx.value);
+        \u0275\u0275advance(7);
+        \u0275\u0275property("matRippleTrigger", checkbox_r2)("matRippleDisabled", ctx.disableRipple || ctx.disabled)("matRippleCentered", true);
+        \u0275\u0275advance();
+        \u0275\u0275property("for", ctx.inputId);
+      }
+    },
+    dependencies: [MatRipple, _MatInternalFormField],
+    styles: ['.mdc-checkbox{display:inline-block;position:relative;flex:0 0 18px;box-sizing:content-box;width:18px;height:18px;line-height:0;white-space:nowrap;cursor:pointer;vertical-align:bottom;padding:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);margin:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox:hover>.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:hover>.mat-mdc-checkbox-ripple>.mat-ripple-element{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control+.mdc-checkbox__ripple{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control{position:absolute;margin:0;padding:0;opacity:0;cursor:inherit;z-index:1;width:var(--mat-checkbox-state-layer-size, 40px);height:var(--mat-checkbox-state-layer-size, 40px);top:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);right:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox--disabled{cursor:default;pointer-events:none}@media(forced-colors: active){.mdc-checkbox--disabled{opacity:.5}}.mdc-checkbox__background{display:inline-flex;position:absolute;align-items:center;justify-content:center;box-sizing:border-box;width:18px;height:18px;border:2px solid currentColor;border-radius:2px;background-color:rgba(0,0,0,0);pointer-events:none;will-change:background-color,border-color;transition:background-color 90ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms cubic-bezier(0.4, 0, 0.6, 1);-webkit-print-color-adjust:exact;color-adjust:exact;border-color:var(--mat-checkbox-unselected-icon-color, var(--mat-sys-on-surface-variant));top:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2)}.mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox__native-control:disabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:disabled:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:checked)~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-hover-icon-color, var(--mat-sys-on-surface));background-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary))}.mdc-checkbox__native-control:focus:focus:not(:checked)~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-focus-icon-color, var(--mat-sys-on-surface))}.mdc-checkbox__native-control:focus:focus:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox:hover>.mdc-checkbox__native-control~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox__checkmark{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0;transition:opacity 180ms cubic-bezier(0.4, 0, 0.6, 1);color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}@media(forced-colors: active){.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox__checkmark-path{transition:stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1);stroke:currentColor;stroke-width:3.12px;stroke-dashoffset:29.7833385;stroke-dasharray:29.7833385}.mdc-checkbox__mixedmark{width:100%;height:0;transform:scaleX(0) rotate(0deg);border-width:1px;border-style:solid;opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1);border-color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__mixedmark{margin:0 1px}}.mdc-checkbox--disabled .mdc-checkbox__mixedmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__mixedmark{border-color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background,.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background,.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background,.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background{animation-duration:180ms;animation-timing-function:linear}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-unchecked-checked-checkmark-path 180ms linear;transition:none}.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-unchecked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-checked-unchecked-checkmark-path 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__checkmark{animation:mdc-checkbox-checked-indeterminate-checkmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-checked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__checkmark{animation:mdc-checkbox-indeterminate-checked-checkmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-checked-mixedmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-unchecked-mixedmark 300ms linear;transition:none}.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{transition:border-color 90ms cubic-bezier(0, 0, 0.2, 1),background-color 90ms cubic-bezier(0, 0, 0.2, 1)}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path{stroke-dashoffset:0}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark{transition:opacity 180ms cubic-bezier(0, 0, 0.2, 1),transform 180ms cubic-bezier(0, 0, 0.2, 1);opacity:1}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(-45deg)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark{transform:rotate(45deg);opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(0deg);opacity:1}@keyframes mdc-checkbox-unchecked-checked-checkmark-path{0%,50%{stroke-dashoffset:29.7833385}50%{animation-timing-function:cubic-bezier(0, 0, 0.2, 1)}100%{stroke-dashoffset:0}}@keyframes mdc-checkbox-unchecked-indeterminate-mixedmark{0%,68.2%{transform:scaleX(0)}68.2%{animation-timing-function:cubic-bezier(0, 0, 0, 1)}100%{transform:scaleX(1)}}@keyframes mdc-checkbox-checked-unchecked-checkmark-path{from{animation-timing-function:cubic-bezier(0.4, 0, 1, 1);opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:-29.7833385}}@keyframes mdc-checkbox-checked-indeterminate-checkmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(45deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-checked-checkmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(45deg);opacity:0}to{transform:rotate(360deg);opacity:1}}@keyframes mdc-checkbox-checked-indeterminate-mixedmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(-45deg);opacity:0}to{transform:rotate(0deg);opacity:1}}@keyframes mdc-checkbox-indeterminate-checked-mixedmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(315deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-unchecked-mixedmark{0%{animation-timing-function:linear;transform:scaleX(1);opacity:1}32.8%,100%{transform:scaleX(0);opacity:0}}.mat-mdc-checkbox{display:inline-block;position:relative;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-touch-target,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__native-control,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__ripple,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-ripple::before,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__mixedmark{transition:none !important;animation:none !important}.mat-mdc-checkbox label{cursor:pointer}.mat-mdc-checkbox .mat-internal-form-field{color:var(--mat-checkbox-label-text-color, var(--mat-sys-on-surface));font-family:var(--mat-checkbox-label-text-font, var(--mat-sys-body-medium-font));line-height:var(--mat-checkbox-label-text-line-height, var(--mat-sys-body-medium-line-height));font-size:var(--mat-checkbox-label-text-size, var(--mat-sys-body-medium-size));letter-spacing:var(--mat-checkbox-label-text-tracking, var(--mat-sys-body-medium-tracking));font-weight:var(--mat-checkbox-label-text-weight, var(--mat-sys-body-medium-weight))}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive{pointer-events:auto}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive input{cursor:default}.mat-mdc-checkbox.mat-mdc-checkbox-disabled label{cursor:default;color:var(--mat-checkbox-disabled-label-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-checkbox label:empty{display:none}.mat-mdc-checkbox .mdc-checkbox__ripple{opacity:0}.mat-mdc-checkbox .mat-mdc-checkbox-ripple,.mdc-checkbox__ripple{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:50%;pointer-events:none}.mat-mdc-checkbox .mat-mdc-checkbox-ripple:not(:empty),.mdc-checkbox__ripple:not(:empty){transform:translateZ(0)}.mat-mdc-checkbox-ripple .mat-ripple-element{opacity:.1}.mat-mdc-checkbox-touch-target{position:absolute;top:50%;left:50%;height:48px;width:48px;transform:translate(-50%, -50%);display:var(--mat-checkbox-touch-target-display, block)}.mat-mdc-checkbox .mat-mdc-checkbox-ripple::before{border-radius:50%}.mdc-checkbox__native-control:focus~.mat-focus-indicator::before{content:""}\n'],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCheckbox, [{
+    type: Component,
+    args: [{
+      selector: "mat-checkbox",
+      host: {
+        "class": "mat-mdc-checkbox",
+        "[attr.tabindex]": "null",
+        "[attr.aria-label]": "null",
+        "[attr.aria-labelledby]": "null",
+        "[class._mat-animation-noopable]": "_animationsDisabled",
+        "[class.mdc-checkbox--disabled]": "disabled",
+        "[id]": "id",
+        // Add classes that users can use to more easily target disabled or checked checkboxes.
+        "[class.mat-mdc-checkbox-disabled]": "disabled",
+        "[class.mat-mdc-checkbox-checked]": "checked",
+        "[class.mat-mdc-checkbox-disabled-interactive]": "disabledInteractive",
+        "[class]": 'color ? "mat-" + color : "mat-accent"'
+      },
+      providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => MatCheckbox),
+        multi: true
+      }, {
+        provide: NG_VALIDATORS,
+        useExisting: MatCheckbox,
+        multi: true
+      }],
+      exportAs: "matCheckbox",
+      encapsulation: ViewEncapsulation.None,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      imports: [MatRipple, _MatInternalFormField],
+      template: `<div mat-internal-form-field [labelPosition]="labelPosition" (click)="_preventBubblingFromLabel($event)">
+  <div #checkbox class="mdc-checkbox">
+    <!-- Render this element first so the input is on top. -->
+    <div class="mat-mdc-checkbox-touch-target" (click)="_onTouchTargetClick()"></div>
+    <input #input
+           type="checkbox"
+           class="mdc-checkbox__native-control"
+           [class.mdc-checkbox--selected]="checked"
+           [attr.aria-label]="ariaLabel || null"
+           [attr.aria-labelledby]="ariaLabelledby"
+           [attr.aria-describedby]="ariaDescribedby"
+           [attr.aria-checked]="indeterminate ? 'mixed' : null"
+           [attr.aria-controls]="ariaControls"
+           [attr.aria-disabled]="disabled && disabledInteractive ? true : null"
+           [attr.aria-expanded]="ariaExpanded"
+           [attr.aria-owns]="ariaOwns"
+           [attr.name]="name"
+           [attr.value]="value"
+           [checked]="checked"
+           [indeterminate]="indeterminate"
+           [disabled]="disabled && !disabledInteractive"
+           [id]="inputId"
+           [required]="required"
+           [tabIndex]="disabled && !disabledInteractive ? -1 : tabIndex"
+           (blur)="_onBlur()"
+           (click)="_onInputClick()"
+           (change)="_onInteractionEvent($event)"/>
+    <div class="mdc-checkbox__ripple"></div>
+    <div class="mdc-checkbox__background">
+      <svg class="mdc-checkbox__checkmark"
+           focusable="false"
+           viewBox="0 0 24 24"
+           aria-hidden="true">
+        <path class="mdc-checkbox__checkmark-path"
+              fill="none"
+              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+      </svg>
+      <div class="mdc-checkbox__mixedmark"></div>
+    </div>
+    <div class="mat-mdc-checkbox-ripple mat-focus-indicator" mat-ripple
+      [matRippleTrigger]="checkbox"
+      [matRippleDisabled]="disableRipple || disabled"
+      [matRippleCentered]="true"></div>
+  </div>
+  <!--
+    Avoid putting a click handler on the <label/> to fix duplicate navigation stop on Talk Back
+    (#14385). Putting a click handler on the <label/> caused this bug because the browser produced
+    an unnecessary accessibility tree node.
+  -->
+  <label class="mdc-label" #label [for]="inputId">
+    <ng-content></ng-content>
+  </label>
+</div>
+`,
+      styles: ['.mdc-checkbox{display:inline-block;position:relative;flex:0 0 18px;box-sizing:content-box;width:18px;height:18px;line-height:0;white-space:nowrap;cursor:pointer;vertical-align:bottom;padding:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);margin:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox:hover>.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:hover>.mat-mdc-checkbox-ripple>.mat-ripple-element{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control+.mdc-checkbox__ripple{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control{position:absolute;margin:0;padding:0;opacity:0;cursor:inherit;z-index:1;width:var(--mat-checkbox-state-layer-size, 40px);height:var(--mat-checkbox-state-layer-size, 40px);top:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);right:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox--disabled{cursor:default;pointer-events:none}@media(forced-colors: active){.mdc-checkbox--disabled{opacity:.5}}.mdc-checkbox__background{display:inline-flex;position:absolute;align-items:center;justify-content:center;box-sizing:border-box;width:18px;height:18px;border:2px solid currentColor;border-radius:2px;background-color:rgba(0,0,0,0);pointer-events:none;will-change:background-color,border-color;transition:background-color 90ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms cubic-bezier(0.4, 0, 0.6, 1);-webkit-print-color-adjust:exact;color-adjust:exact;border-color:var(--mat-checkbox-unselected-icon-color, var(--mat-sys-on-surface-variant));top:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2)}.mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox__native-control:disabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:disabled:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:checked)~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-hover-icon-color, var(--mat-sys-on-surface));background-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary))}.mdc-checkbox__native-control:focus:focus:not(:checked)~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-focus-icon-color, var(--mat-sys-on-surface))}.mdc-checkbox__native-control:focus:focus:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox:hover>.mdc-checkbox__native-control~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox__checkmark{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0;transition:opacity 180ms cubic-bezier(0.4, 0, 0.6, 1);color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}@media(forced-colors: active){.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox__checkmark-path{transition:stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1);stroke:currentColor;stroke-width:3.12px;stroke-dashoffset:29.7833385;stroke-dasharray:29.7833385}.mdc-checkbox__mixedmark{width:100%;height:0;transform:scaleX(0) rotate(0deg);border-width:1px;border-style:solid;opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1);border-color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__mixedmark{margin:0 1px}}.mdc-checkbox--disabled .mdc-checkbox__mixedmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__mixedmark{border-color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background,.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background,.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background,.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background{animation-duration:180ms;animation-timing-function:linear}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-unchecked-checked-checkmark-path 180ms linear;transition:none}.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-unchecked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-checked-unchecked-checkmark-path 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__checkmark{animation:mdc-checkbox-checked-indeterminate-checkmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-checked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__checkmark{animation:mdc-checkbox-indeterminate-checked-checkmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-checked-mixedmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-unchecked-mixedmark 300ms linear;transition:none}.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{transition:border-color 90ms cubic-bezier(0, 0, 0.2, 1),background-color 90ms cubic-bezier(0, 0, 0.2, 1)}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path{stroke-dashoffset:0}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark{transition:opacity 180ms cubic-bezier(0, 0, 0.2, 1),transform 180ms cubic-bezier(0, 0, 0.2, 1);opacity:1}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(-45deg)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark{transform:rotate(45deg);opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(0deg);opacity:1}@keyframes mdc-checkbox-unchecked-checked-checkmark-path{0%,50%{stroke-dashoffset:29.7833385}50%{animation-timing-function:cubic-bezier(0, 0, 0.2, 1)}100%{stroke-dashoffset:0}}@keyframes mdc-checkbox-unchecked-indeterminate-mixedmark{0%,68.2%{transform:scaleX(0)}68.2%{animation-timing-function:cubic-bezier(0, 0, 0, 1)}100%{transform:scaleX(1)}}@keyframes mdc-checkbox-checked-unchecked-checkmark-path{from{animation-timing-function:cubic-bezier(0.4, 0, 1, 1);opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:-29.7833385}}@keyframes mdc-checkbox-checked-indeterminate-checkmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(45deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-checked-checkmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(45deg);opacity:0}to{transform:rotate(360deg);opacity:1}}@keyframes mdc-checkbox-checked-indeterminate-mixedmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(-45deg);opacity:0}to{transform:rotate(0deg);opacity:1}}@keyframes mdc-checkbox-indeterminate-checked-mixedmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(315deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-unchecked-mixedmark{0%{animation-timing-function:linear;transform:scaleX(1);opacity:1}32.8%,100%{transform:scaleX(0);opacity:0}}.mat-mdc-checkbox{display:inline-block;position:relative;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-touch-target,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__native-control,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__ripple,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-ripple::before,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__mixedmark{transition:none !important;animation:none !important}.mat-mdc-checkbox label{cursor:pointer}.mat-mdc-checkbox .mat-internal-form-field{color:var(--mat-checkbox-label-text-color, var(--mat-sys-on-surface));font-family:var(--mat-checkbox-label-text-font, var(--mat-sys-body-medium-font));line-height:var(--mat-checkbox-label-text-line-height, var(--mat-sys-body-medium-line-height));font-size:var(--mat-checkbox-label-text-size, var(--mat-sys-body-medium-size));letter-spacing:var(--mat-checkbox-label-text-tracking, var(--mat-sys-body-medium-tracking));font-weight:var(--mat-checkbox-label-text-weight, var(--mat-sys-body-medium-weight))}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive{pointer-events:auto}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive input{cursor:default}.mat-mdc-checkbox.mat-mdc-checkbox-disabled label{cursor:default;color:var(--mat-checkbox-disabled-label-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-checkbox label:empty{display:none}.mat-mdc-checkbox .mdc-checkbox__ripple{opacity:0}.mat-mdc-checkbox .mat-mdc-checkbox-ripple,.mdc-checkbox__ripple{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:50%;pointer-events:none}.mat-mdc-checkbox .mat-mdc-checkbox-ripple:not(:empty),.mdc-checkbox__ripple:not(:empty){transform:translateZ(0)}.mat-mdc-checkbox-ripple .mat-ripple-element{opacity:.1}.mat-mdc-checkbox-touch-target{position:absolute;top:50%;left:50%;height:48px;width:48px;transform:translate(-50%, -50%);display:var(--mat-checkbox-touch-target-display, block)}.mat-mdc-checkbox .mat-mdc-checkbox-ripple::before{border-radius:50%}.mdc-checkbox__native-control:focus~.mat-focus-indicator::before{content:""}\n']
+    }]
+  }], () => [], {
+    ariaLabel: [{
+      type: Input,
+      args: ["aria-label"]
+    }],
+    ariaLabelledby: [{
+      type: Input,
+      args: ["aria-labelledby"]
+    }],
+    ariaDescribedby: [{
+      type: Input,
+      args: ["aria-describedby"]
+    }],
+    ariaExpanded: [{
+      type: Input,
+      args: [{
+        alias: "aria-expanded",
+        transform: booleanAttribute
+      }]
+    }],
+    ariaControls: [{
+      type: Input,
+      args: ["aria-controls"]
+    }],
+    ariaOwns: [{
+      type: Input,
+      args: ["aria-owns"]
+    }],
+    id: [{
+      type: Input
+    }],
+    required: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    labelPosition: [{
+      type: Input
+    }],
+    name: [{
+      type: Input
+    }],
+    change: [{
+      type: Output
+    }],
+    indeterminateChange: [{
+      type: Output
+    }],
+    value: [{
+      type: Input
+    }],
+    disableRipple: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    _inputElement: [{
+      type: ViewChild,
+      args: ["input"]
+    }],
+    _labelElement: [{
+      type: ViewChild,
+      args: ["label"]
+    }],
+    tabIndex: [{
+      type: Input,
+      args: [{
+        transform: (value) => value == null ? void 0 : numberAttribute(value)
+      }]
+    }],
+    color: [{
+      type: Input
+    }],
+    disabledInteractive: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    checked: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    disabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    indeterminate: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }]
+  });
+})();
+var MatCheckboxModule = class _MatCheckboxModule {
+  static \u0275fac = function MatCheckboxModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatCheckboxModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatCheckboxModule,
+    imports: [MatCheckbox, MatCommonModule],
+    exports: [MatCheckbox, MatCommonModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [MatCheckbox, MatCommonModule, MatCommonModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCheckboxModule, [{
+    type: NgModule,
+    args: [{
+      imports: [MatCheckbox, MatCommonModule],
+      exports: [MatCheckbox, MatCommonModule]
+    }]
+  }], null, null);
+})();
+
+// libs/components/src/lib/settings-toggle.component.ts
+var _c011 = ["*"];
+function SettingsToggleComponent_Conditional_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "icon", 2);
+    \u0275\u0275text(1, "info");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("matTooltip", ctx_r0.info());
+  }
+}
+function SettingsToggleComponent_Conditional_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 3);
+  }
+}
+function SettingsToggleComponent_Conditional_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 4)(1, "div", 6)(2, "div", 7)(3, "icon");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275classProp("bg-base-300", !ctx_r0.value)("bg-info", ctx_r0.value)("!border-info", ctx_r0.value);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("left-1", !ctx_r0.value)("left-5", ctx_r0.value)("bg-base-400", !ctx_r0.value)("bg-info-light", ctx_r0.value);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r0.value ? "done" : "remove");
+  }
+}
+function SettingsToggleComponent_Conditional_8_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-checkbox", 8);
+    \u0275\u0275twoWayListener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r0.value, $event) || (ctx_r0.value = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.setValue($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275twoWayProperty("ngModel", ctx_r0.value);
+  }
+}
+var _SettingsToggleComponent = class _SettingsToggleComponent {
+  constructor() {
+    this.toggle = input(void 0);
+    this.name = input(void 0);
+    this.info = input(void 0);
+    this.registerOnChange = (fn3) => this._onChange = fn3;
+    this.registerOnTouched = (fn3) => this._onTouch = fn3;
+  }
+  /**
+   * Update the form field value
+   * @param new_value New value to set on the form field
+   */
+  setValue(new_value) {
+    this.value = new_value;
+    if (this._onChange)
+      this._onChange(new_value);
+  }
+  /* istanbul ignore next */
+  /**
+   * Update local value when form control value is changed
+   * @param value The new value for the component
+   */
+  writeValue(value) {
+    this.value = value;
+  }
+};
+_SettingsToggleComponent.\u0275fac = function SettingsToggleComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _SettingsToggleComponent)();
+};
+_SettingsToggleComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SettingsToggleComponent, selectors: [["settings-toggle"]], inputs: { toggle: [1, "toggle"], name: [1, "name"], info: [1, "info"] }, features: [\u0275\u0275ProvidersFeature([
+  {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => _SettingsToggleComponent),
+    multi: true
+  }
+])], ngContentSelectors: _c011, decls: 9, vars: 8, consts: [["matRipple", "", 1, "relative", "flex", "flex-1", "items-center", "space-x-2", "overflow-hidden", "rounded", "border", "py-1", "pl-2", "pr-1", "hover:bg-base-200", 3, "click"], [1, "z-10", "flex", "flex-1", "items-center", "space-x-2", "p-2", "text-left"], [3, "matTooltip"], [1, "absolute", "inset-0", "z-0", "!m-0", "bg-info", "opacity-10"], [1, "px-2"], [1, "pointer-events-none", 3, "ngModel"], ["toggle", "", 1, "relative", "h-8", "w-12", "rounded-full", "border-2", "border-base-400"], [1, "absolute", "top-1/2", "flex", "h-6", "w-6", "-translate-x-0.5", "-translate-y-1/2", "items-center", "justify-center", "rounded-full", "text-black", "shadow"], [1, "pointer-events-none", 3, "ngModelChange", "ngModel"]], template: function SettingsToggleComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275projectionDef();
+    \u0275\u0275elementStart(0, "button", 0);
+    \u0275\u0275listener("click", function SettingsToggleComponent_Template_button_click_0_listener() {
+      return ctx.setValue(!ctx.value);
+    });
+    \u0275\u0275elementStart(1, "div", 1)(2, "div");
+    \u0275\u0275text(3);
+    \u0275\u0275projection(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275conditionalCreate(5, SettingsToggleComponent_Conditional_5_Template, 2, 1, "icon", 2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275conditionalCreate(6, SettingsToggleComponent_Conditional_6_Template, 1, 0, "div", 3);
+    \u0275\u0275conditionalCreate(7, SettingsToggleComponent_Conditional_7_Template, 5, 15, "div", 4)(8, SettingsToggleComponent_Conditional_8_Template, 1, 1, "mat-checkbox", 5);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275classProp("border-base-300", !ctx.value)("border-info", ctx.value);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", ctx.name(), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(ctx.info() ? 5 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.value ? 6 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.toggle() ? 7 : 8);
+  }
+}, dependencies: [MatCheckboxModule, MatCheckbox, FormsModule, NgControlStatus, NgModel, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n}\n[toggle][_ngcontent-%COMP%] {\n  transition: background 200ms, left 200ms;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */"] });
+var SettingsToggleComponent = _SettingsToggleComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SettingsToggleComponent, [{
+    type: Component,
+    args: [{ selector: "settings-toggle", template: `
+        <button
+            matRipple
+            class="relative flex flex-1 items-center space-x-2 overflow-hidden rounded border py-1 pl-2 pr-1 hover:bg-base-200"
+            [class.border-base-300]="!value"
+            [class.border-info]="value"
+            (click)="setValue(!value)"
+        >
+            <div class="z-10 flex flex-1 items-center space-x-2 p-2 text-left">
+                <div>
+                    {{ name() }}
+                    <ng-content></ng-content>
+                </div>
+                @if (info()) {
+                    <icon [matTooltip]="info()">info</icon>
+                }
+            </div>
+            @if (value) {
+                <div class="absolute inset-0 z-0 !m-0 bg-info opacity-10"></div>
+            }
+            @if (toggle()) {
+                <div class="px-2">
+                    <div
+                        toggle
+                        class="relative h-8 w-12 rounded-full border-2 border-base-400"
+                        [class.bg-base-300]="!value"
+                        [class.bg-info]="value"
+                        [class.!border-info]="value"
+                    >
+                        <div
+                            class="absolute top-1/2 flex h-6 w-6 -translate-x-0.5 -translate-y-1/2 items-center justify-center rounded-full text-black shadow"
+                            [class.left-1]="!value"
+                            [class.left-5]="value"
+                            [class.bg-base-400]="!value"
+                            [class.bg-info-light]="value"
+                        >
+                            <icon>{{ value ? 'done' : 'remove' }}</icon>
+                        </div>
+                    </div>
+                </div>
+            } @else {
+                <mat-checkbox
+                    [(ngModel)]="value"
+                    (ngModelChange)="setValue($event)"
+                    class="pointer-events-none"
+                ></mat-checkbox>
+            }
+        </button>
+    `, providers: [
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => SettingsToggleComponent),
+        multi: true
+      }
+    ], imports: [MatCheckboxModule, FormsModule, IconComponent], styles: ["/* angular:styles/component:css;09d472dfc67150cf01347a580874515fc3cc343b61a90041f2b167ad15a01cf4;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/settings-toggle.component.ts */\n:host {\n  display: flex;\n}\n[toggle] {\n  transition: background 200ms, left 200ms;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SettingsToggleComponent, { className: "SettingsToggleComponent", filePath: "libs/components/src/lib/settings-toggle.component.ts", lineNumber: 83 });
+})();
+
 // libs/components/src/lib/upload-permissions-modal.component.ts
-var _c08 = (a0, a1, a2) => ({ file: a0, is_public: a1, permissions: a2 });
+var _c012 = (a0, a1, a2) => ({ file: a0, is_public: a1, permissions: a2 });
 function UploadPermissionsModalComponent_Conditional_15_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 2)(1, "label");
+    \u0275\u0275elementStart(0, "div", 8)(1, "label");
     \u0275\u0275text(2, "Permissions");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "mat-form-field", 3)(4, "mat-select", 6);
+    \u0275\u0275elementStart(3, "mat-form-field", 12)(4, "mat-select", 7);
     \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Conditional_15_Template_mat_select_ngModelChange_4_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       \u0275\u0275twoWayBindingSet(ctx_r1.permissions, $event) || (ctx_r1.permissions = $event);
       return \u0275\u0275resetView($event);
     });
-    \u0275\u0275elementStart(5, "mat-option", 10);
+    \u0275\u0275elementStart(5, "mat-option", 13);
     \u0275\u0275text(6, "None");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "mat-option", 11);
+    \u0275\u0275elementStart(7, "mat-option", 14);
     \u0275\u0275text(8, "Support");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(9, "mat-option", 12);
+    \u0275\u0275elementStart(9, "mat-option", 15);
     \u0275\u0275text(10, "Admin");
     \u0275\u0275elementEnd()()()();
   }
@@ -88333,33 +89939,33 @@ var _UploadPermissionsModalComponent = class _UploadPermissionsModalComponent {
 _UploadPermissionsModalComponent.\u0275fac = function UploadPermissionsModalComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _UploadPermissionsModalComponent)();
 };
-_UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadPermissionsModalComponent, selectors: [["upload-permissions-modal"]], decls: 21, vars: 8, consts: [["btn", "", "icon", "", "mat-dialog-close", ""], [1, "min-w-[20rem]", "p-4"], [1, "flex", "flex-col", "space-y-2"], ["appearance", "outline"], ["matInput", "", "disabled", "true", "placeholder", "File Name", 3, "ngModel"], [1, "pb-4"], [3, "ngModelChange", "ngModel"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", 1, "w-32", 3, "mat-dialog-close"], ["value", "none"], ["value", "support"], ["value", "admin"]], template: function UploadPermissionsModalComponent_Template(rf, ctx) {
+_UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadPermissionsModalComponent, selectors: [["upload-permissions-modal"]], decls: 21, vars: 8, consts: [[1, "sticky", "top-0", "z-10", "m-2", "w-[calc(100%-1rem)]", "rounded", "border-none", "bg-base-200", "p-2"], [1, "px-2", "text-xl", "font-medium"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "min-w-[20rem]", "space-y-2", "px-4", "py-2"], [1, "flex", "flex-col"], ["appearance", "outline", 1, "no-subscript"], ["matInput", "", "disabled", "true", "placeholder", "File Name", 3, "ngModel"], [3, "ngModelChange", "ngModel"], [1, "flex", "flex-col", "space-y-2"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", "matRipple", "", 1, "w-32", 3, "mat-dialog-close"], ["appearance", "outline"], ["value", "none"], ["value", "support"], ["value", "admin"]], template: function UploadPermissionsModalComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "header")(1, "h2");
+    \u0275\u0275elementStart(0, "header", 0)(1, "h2", 1);
     \u0275\u0275text(2, "Upload File");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "button", 0)(4, "icon");
+    \u0275\u0275elementStart(3, "button", 2)(4, "icon");
     \u0275\u0275text(5, "close");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(6, "main", 1)(7, "div", 2)(8, "label");
+    \u0275\u0275elementStart(6, "main", 3)(7, "div", 4)(8, "label");
     \u0275\u0275text(9, "File Name");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "mat-form-field", 3);
-    \u0275\u0275element(11, "input", 4);
+    \u0275\u0275elementStart(10, "mat-form-field", 5);
+    \u0275\u0275element(11, "input", 6);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(12, "div", 5)(13, "mat-checkbox", 6);
-    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Template_mat_checkbox_ngModelChange_13_listener($event) {
+    \u0275\u0275elementStart(12, "div")(13, "settings-toggle", 7);
+    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Template_settings_toggle_ngModelChange_13_listener($event) {
       \u0275\u0275twoWayBindingSet(ctx.is_public, $event) || (ctx.is_public = $event);
       return $event;
     });
     \u0275\u0275text(14, "Public");
     \u0275\u0275elementEnd()();
-    \u0275\u0275conditionalCreate(15, UploadPermissionsModalComponent_Conditional_15_Template, 11, 1, "div", 2);
+    \u0275\u0275conditionalCreate(15, UploadPermissionsModalComponent_Conditional_15_Template, 11, 1, "div", 8);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(16, "footer", 7)(17, "button", 8);
-    \u0275\u0275text(18, "Cancel");
+    \u0275\u0275elementStart(16, "footer", 9)(17, "button", 10);
+    \u0275\u0275text(18, " Cancel ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(19, "button", 9);
+    \u0275\u0275elementStart(19, "button", 11);
     \u0275\u0275text(20, " Upload ");
     \u0275\u0275elementEnd()();
   }
@@ -88371,24 +89977,44 @@ _UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineC
     \u0275\u0275advance(2);
     \u0275\u0275conditional(!ctx.is_public ? 15 : -1);
     \u0275\u0275advance(4);
-    \u0275\u0275property("mat-dialog-close", \u0275\u0275pureFunction3(4, _c08, ctx.file, ctx.is_public, ctx.permissions));
+    \u0275\u0275property("mat-dialog-close", \u0275\u0275pureFunction3(4, _c012, ctx.file, ctx.is_public, ctx.permissions));
   }
-}, dependencies: [MatDialogModule, MatDialogClose, MatFormFieldModule, MatFormField, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel], encapsulation: 2 });
+}, dependencies: [
+  MatDialogModule,
+  MatDialogClose,
+  MatFormFieldModule,
+  MatFormField,
+  FormsModule,
+  DefaultValueAccessor,
+  NgControlStatus,
+  NgModel,
+  MatSelectModule,
+  MatSelect,
+  MatOption,
+  SettingsToggleComponent,
+  IconComponent,
+  MatInputModule,
+  MatInput,
+  MatRippleModule,
+  MatRipple
+], encapsulation: 2 });
 var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UploadPermissionsModalComponent, [{
     type: Component,
     args: [{ selector: "upload-permissions-modal", template: `
-        <header>
-            <h2>Upload File</h2>
-            <button btn icon mat-dialog-close>
+        <header
+            class="sticky top-0 z-10 m-2 w-[calc(100%-1rem)] rounded border-none bg-base-200 p-2"
+        >
+            <h2 class="px-2 text-xl font-medium">Upload File</h2>
+            <button icon matRipple mat-dialog-close>
                 <icon>close</icon>
             </button>
         </header>
-        <main class="min-w-[20rem] p-4">
-            <div class="flex flex-col space-y-2">
+        <main class="min-w-[20rem] space-y-2 px-4 py-2">
+            <div class="flex flex-col">
                 <label>File Name</label>
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="no-subscript">
                     <input
                         matInput
                         [ngModel]="file.name"
@@ -88397,8 +90023,10 @@ var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
                     />
                 </mat-form-field>
             </div>
-            <div class="pb-4">
-                <mat-checkbox [(ngModel)]="is_public">Public</mat-checkbox>
+            <div>
+                <settings-toggle [(ngModel)]="is_public"
+                    >Public</settings-toggle
+                >
             </div>
             @if (!is_public) {
                 <div class="flex flex-col space-y-2">
@@ -88416,20 +90044,32 @@ var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
         <footer
             class="flex items-center justify-end space-x-2 border-t border-base-200 px-4 py-2"
         >
-            <button btn class="inverse w-32" mat-dialog-close>Cancel</button>
+            <button btn matRipple class="inverse w-32" mat-dialog-close>
+                Cancel
+            </button>
             <button
                 btn
+                matRipple
                 class="w-32"
                 [mat-dialog-close]="{ file, is_public, permissions }"
             >
                 Upload
             </button>
         </footer>
-    `, schemas: [NO_ERRORS_SCHEMA], imports: [MatDialogModule, MatFormFieldModule, FormsModule] }]
+    `, schemas: [NO_ERRORS_SCHEMA], imports: [
+      MatDialogModule,
+      MatFormFieldModule,
+      FormsModule,
+      MatSelectModule,
+      SettingsToggleComponent,
+      IconComponent,
+      MatInputModule,
+      MatRippleModule
+    ] }]
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadPermissionsModalComponent, { className: "UploadPermissionsModalComponent", filePath: "libs/components/src/lib/upload-permissions-modal.component.ts", lineNumber: 65 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadPermissionsModalComponent, { className: "UploadPermissionsModalComponent", filePath: "libs/components/src/lib/upload-permissions-modal.component.ts", lineNumber: 86 });
 })();
 
 // libs/common/src/lib/uploads.service.ts
@@ -88468,7 +90108,7 @@ var _UploadsService = class _UploadsService {
       let resolved2 = false;
       const update_fn = (details) => {
         if (!resolved2) {
-          resolve(details.id);
+          resolve(details.upload?.id || details.id);
           resolved2 = true;
         }
         this._upload_list.next([
@@ -88595,7 +90235,7 @@ var _TranslatePipe = class _TranslatePipe {
     this._locale = inject(LocaleService);
   }
   transform(value, args = {}, plural2) {
-    return this._locale.get(value, args, plural2);
+    return this._locale.get(value, args, plural2) || value;
   }
 };
 _TranslatePipe.\u0275fac = function TranslatePipe_Factory(__ngFactoryType__) {
@@ -88670,7 +90310,7 @@ var UnauthorisedComponent = _UnauthorisedComponent;
 })();
 
 // node_modules/@angular/material/fesm2022/module-CWxMD37a.mjs
-var _c09 = ["tooltip"];
+var _c013 = ["tooltip"];
 var SCROLL_THROTTLE_MS = 20;
 function getMatTooltipInvalidPositionError(position) {
   return Error(`Tooltip position "${position}" is invalid.`);
@@ -89530,7 +91170,7 @@ var TooltipComponent = class _TooltipComponent {
     selectors: [["mat-tooltip-component"]],
     viewQuery: function TooltipComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c09, 7);
+        \u0275\u0275viewQuery(_c013, 7);
       }
       if (rf & 2) {
         let _t4;
@@ -89624,127 +91264,8 @@ var MatTooltipModule = class _MatTooltipModule {
   }], null, null);
 })();
 
-// libs/components/src/lib/safe.pipe.ts
-var _SafePipe = class _SafePipe {
-  constructor() {
-    this.sanitizer = inject(DomSanitizer);
-  }
-  /**
-   * Sanitizes the string allowing it to be injected into a template
-   * @param value String to sanitize
-   * @param type Type of value to sanitise. `resource`, `url`, `script`, `style` or `html`
-   */
-  transform(value, type2 = "html") {
-    switch (type2) {
-      case "resource":
-        return this.sanitizer.bypassSecurityTrustResourceUrl(value);
-      case "url":
-        return this.sanitizer.bypassSecurityTrustUrl(value);
-      case "script":
-        return this.sanitizer.bypassSecurityTrustScript(value);
-      case "style":
-        return this.sanitizer.bypassSecurityTrustStyle(value);
-      default:
-        return this.sanitizer.bypassSecurityTrustHtml(value);
-    }
-  }
-};
-_SafePipe.\u0275fac = function SafePipe_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _SafePipe)();
-};
-_SafePipe.\u0275pipe = /* @__PURE__ */ \u0275\u0275definePipe({ name: "safe", type: _SafePipe, pure: true });
-var SafePipe = _SafePipe;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SafePipe, [{
-    type: Pipe,
-    args: [{
-      name: "safe"
-    }]
-  }], null, null);
-})();
-
-// libs/components/src/lib/icon.component.ts
-var _c010 = ["*"];
-function IconComponent_Conditional_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "i");
-    \u0275\u0275text(1);
-    \u0275\u0275projection(2);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    let tmp_1_0;
-    let tmp_2_0;
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275classMap(((tmp_1_0 = ctx_r0.icon()) == null ? null : tmp_1_0.class) || ctx_r0.className());
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", (tmp_2_0 = ctx_r0.icon()) == null ? null : tmp_2_0.content, " ");
-  }
-}
-function IconComponent_Conditional_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "img", 2);
-    \u0275\u0275pipe(1, "safe");
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("src", \u0275\u0275pipeBind2(1, 1, ctx_r0.icon().src, "resource"), \u0275\u0275sanitizeUrl);
-  }
-}
-var _IconComponent = class _IconComponent {
-  constructor() {
-    this.className = input("material-symbols-rounded");
-    this.icon = input(void 0);
-  }
-};
-_IconComponent.\u0275fac = function IconComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _IconComponent)();
-};
-_IconComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["icon"], ["i", "icon", ""]], inputs: { className: [1, "className"], icon: [1, "icon"] }, ngContentSelectors: _c010, decls: 3, vars: 2, consts: [[1, "flex", "h-[1.25em]", "w-[1.25em]", "items-center", "justify-center", "overflow-hidden"], [3, "class"], [1, "h-[1em]", "w-[1em]", 3, "src"]], template: function IconComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275projectionDef();
-    \u0275\u0275elementStart(0, "div", 0);
-    \u0275\u0275conditionalCreate(1, IconComponent_Conditional_1_Template, 3, 3, "i", 1);
-    \u0275\u0275conditionalCreate(2, IconComponent_Conditional_2_Template, 2, 4, "img", 2);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275conditional(!ctx.icon() || ctx.icon().type !== "img" ? 1 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.icon() && ctx.icon().type === "img" ? 2 : -1);
-  }
-}, dependencies: [SafePipe], styles: ["\n\ni[_ngcontent-%COMP%] {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */"] });
-var IconComponent = _IconComponent;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IconComponent, [{
-    type: Component,
-    args: [{ selector: "icon,i[icon]", template: `
-        <div
-            class="flex h-[1.25em] w-[1.25em] items-center justify-center overflow-hidden"
-        >
-            @if (!icon() || icon().type !== 'img') {
-                <i [class]="icon()?.class || className()">
-                    {{ icon()?.content }}
-                    <ng-content></ng-content>
-                </i>
-            }
-            @if (icon() && icon().type === 'img') {
-                <img
-                    class="h-[1em] w-[1em]"
-                    [src]="icon().src | safe: 'resource'"
-                />
-            }
-        </div>
-    `, imports: [SafePipe], styles: ["/* angular:styles/component:css;9dcb326dcc2b3d8b68e7d89ef488eb28abc701fb0e2ab3f372b27f7bf732088c;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/icon.component.ts */\ni {\n  font-size: 1em;\n}\n/*# sourceMappingURL=icon.component.css.map */\n"] }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IconComponent, { className: "IconComponent", filePath: "libs/components/src/lib/icon.component.ts", lineNumber: 34 });
-})();
-
 // libs/components/src/lib/status-pill.component.ts
-var _c011 = ["*"];
+var _c014 = ["*"];
 function StatusPillComponent_Case_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275text(0, " check_circle ");
@@ -89778,7 +91299,7 @@ var _StatusPillComponent = class _StatusPillComponent {
 _StatusPillComponent.\u0275fac = function StatusPillComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _StatusPillComponent)();
 };
-_StatusPillComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _StatusPillComponent, selectors: [["status-pill"]], inputs: { status: [1, "status"] }, ngContentSelectors: _c011, decls: 10, vars: 25, consts: [[1, "flex", "items-center", "space-x-2", "rounded-full", "bg-opacity-30", "px-2", "py-1", "text-base", "font-medium", "text-black"], [1, "flex", "h-5", "w-5", "items-center", "justify-center", "rounded-full"], [1, "text-2xl"], [1, "text-base-content"]], template: function StatusPillComponent_Template(rf, ctx) {
+_StatusPillComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _StatusPillComponent, selectors: [["status-pill"]], inputs: { status: [1, "status"] }, ngContentSelectors: _c014, decls: 10, vars: 25, consts: [[1, "flex", "items-center", "space-x-2", "rounded-full", "bg-opacity-30", "px-2", "py-1", "text-base", "font-medium", "text-black"], [1, "flex", "h-5", "w-5", "items-center", "justify-center", "rounded-full"], [1, "text-2xl"], [1, "text-base-content"]], template: function StatusPillComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projectionDef();
     \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "icon", 2);
@@ -89855,610 +91376,10 @@ var StatusPillComponent = _StatusPillComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(StatusPillComponent, { className: "StatusPillComponent", filePath: "libs/components/src/lib/status-pill.component.ts", lineNumber: 57 });
 })();
 
-// node_modules/@angular/material/fesm2022/internal-form-field-D5iFxU6d.mjs
-var _c012 = ["mat-internal-form-field", ""];
-var _c17 = ["*"];
-var _MatInternalFormField = class __MatInternalFormField {
-  /** Position of the label relative to the content. */
-  labelPosition;
-  static \u0275fac = function _MatInternalFormField_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || __MatInternalFormField)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: __MatInternalFormField,
-    selectors: [["div", "mat-internal-form-field", ""]],
-    hostAttrs: [1, "mdc-form-field", "mat-internal-form-field"],
-    hostVars: 2,
-    hostBindings: function _MatInternalFormField_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275classProp("mdc-form-field--align-end", ctx.labelPosition === "before");
-      }
-    },
-    inputs: {
-      labelPosition: "labelPosition"
-    },
-    attrs: _c012,
-    ngContentSelectors: _c17,
-    decls: 1,
-    vars: 0,
-    template: function _MatInternalFormField_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275projection(0);
-      }
-    },
-    styles: [".mat-internal-form-field{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-flex;align-items:center;vertical-align:middle}.mat-internal-form-field>label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0;order:0}[dir=rtl] .mat-internal-form-field>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px}.mdc-form-field--align-end>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px;order:-1}[dir=rtl] .mdc-form-field--align-end .mdc-form-field--align-end label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0}\n"],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(_MatInternalFormField, [{
-    type: Component,
-    args: [{
-      selector: "div[mat-internal-form-field]",
-      template: "<ng-content></ng-content>",
-      encapsulation: ViewEncapsulation.None,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      host: {
-        "class": "mdc-form-field mat-internal-form-field",
-        "[class.mdc-form-field--align-end]": 'labelPosition === "before"'
-      },
-      styles: [".mat-internal-form-field{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-flex;align-items:center;vertical-align:middle}.mat-internal-form-field>label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0;order:0}[dir=rtl] .mat-internal-form-field>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px}.mdc-form-field--align-end>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px;order:-1}[dir=rtl] .mdc-form-field--align-end .mdc-form-field--align-end label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0}\n"]
-    }]
-  }], null, {
-    labelPosition: [{
-      type: Input,
-      args: [{
-        required: true
-      }]
-    }]
-  });
-})();
-
-// node_modules/@angular/material/fesm2022/date-formats-K6TQue-Y.mjs
-var MAT_DATE_LOCALE = new InjectionToken("MAT_DATE_LOCALE", {
-  providedIn: "root",
-  factory: MAT_DATE_LOCALE_FACTORY
-});
-function MAT_DATE_LOCALE_FACTORY() {
-  return inject(LOCALE_ID);
-}
-var NOT_IMPLEMENTED = "Method not implemented";
-var DateAdapter = class {
-  /** The locale to use for all dates. */
-  locale;
-  _localeChanges = new Subject();
-  /** A stream that emits when the locale changes. */
-  localeChanges = this._localeChanges;
-  /**
-   * Sets the time of one date to the time of another.
-   * @param target Date whose time will be set.
-   * @param hours New hours to set on the date object.
-   * @param minutes New minutes to set on the date object.
-   * @param seconds New seconds to set on the date object.
-   */
-  setTime(target, hours, minutes, seconds) {
-    throw new Error(NOT_IMPLEMENTED);
-  }
-  /**
-   * Gets the hours component of the given date.
-   * @param date The date to extract the hours from.
-   */
-  getHours(date) {
-    throw new Error(NOT_IMPLEMENTED);
-  }
-  /**
-   * Gets the minutes component of the given date.
-   * @param date The date to extract the minutes from.
-   */
-  getMinutes(date) {
-    throw new Error(NOT_IMPLEMENTED);
-  }
-  /**
-   * Gets the seconds component of the given date.
-   * @param date The date to extract the seconds from.
-   */
-  getSeconds(date) {
-    throw new Error(NOT_IMPLEMENTED);
-  }
-  /**
-   * Parses a date with a specific time from a user-provided value.
-   * @param value The value to parse.
-   * @param parseFormat The expected format of the value being parsed
-   *     (type is implementation-dependent).
-   */
-  parseTime(value, parseFormat) {
-    throw new Error(NOT_IMPLEMENTED);
-  }
-  /**
-   * Adds an amount of seconds to the specified date.
-   * @param date Date to which to add the seconds.
-   * @param amount Amount of seconds to add to the date.
-   */
-  addSeconds(date, amount) {
-    throw new Error(NOT_IMPLEMENTED);
-  }
-  /**
-   * Given a potential date object, returns that same date object if it is
-   * a valid date, or `null` if it's not a valid date.
-   * @param obj The object to check.
-   * @returns A date or `null`.
-   */
-  getValidDateOrNull(obj) {
-    return this.isDateInstance(obj) && this.isValid(obj) ? obj : null;
-  }
-  /**
-   * Attempts to deserialize a value to a valid date object. This is different from parsing in that
-   * deserialize should only accept non-ambiguous, locale-independent formats (e.g. a ISO 8601
-   * string). The default implementation does not allow any deserialization, it simply checks that
-   * the given value is already a valid date object or null. The `<mat-datepicker>` will call this
-   * method on all of its `@Input()` properties that accept dates. It is therefore possible to
-   * support passing values from your backend directly to these properties by overriding this method
-   * to also deserialize the format used by your backend.
-   * @param value The value to be deserialized into a date object.
-   * @returns The deserialized date object, either a valid date, null if the value can be
-   *     deserialized into a null date (e.g. the empty string), or an invalid date.
-   */
-  deserialize(value) {
-    if (value == null || this.isDateInstance(value) && this.isValid(value)) {
-      return value;
-    }
-    return this.invalid();
-  }
-  /**
-   * Sets the locale used for all dates.
-   * @param locale The new locale.
-   */
-  setLocale(locale) {
-    this.locale = locale;
-    this._localeChanges.next();
-  }
-  /**
-   * Compares two dates.
-   * @param first The first date to compare.
-   * @param second The second date to compare.
-   * @returns 0 if the dates are equal, a number less than 0 if the first date is earlier,
-   *     a number greater than 0 if the first date is later.
-   */
-  compareDate(first2, second) {
-    return this.getYear(first2) - this.getYear(second) || this.getMonth(first2) - this.getMonth(second) || this.getDate(first2) - this.getDate(second);
-  }
-  /**
-   * Compares the time values of two dates.
-   * @param first First date to compare.
-   * @param second Second date to compare.
-   * @returns 0 if the times are equal, a number less than 0 if the first time is earlier,
-   *     a number greater than 0 if the first time is later.
-   */
-  compareTime(first2, second) {
-    return this.getHours(first2) - this.getHours(second) || this.getMinutes(first2) - this.getMinutes(second) || this.getSeconds(first2) - this.getSeconds(second);
-  }
-  /**
-   * Checks if two dates are equal.
-   * @param first The first date to check.
-   * @param second The second date to check.
-   * @returns Whether the two dates are equal.
-   *     Null dates are considered equal to other null dates.
-   */
-  sameDate(first2, second) {
-    if (first2 && second) {
-      let firstValid = this.isValid(first2);
-      let secondValid = this.isValid(second);
-      if (firstValid && secondValid) {
-        return !this.compareDate(first2, second);
-      }
-      return firstValid == secondValid;
-    }
-    return first2 == second;
-  }
-  /**
-   * Checks if the times of two dates are equal.
-   * @param first The first date to check.
-   * @param second The second date to check.
-   * @returns Whether the times of the two dates are equal.
-   *     Null dates are considered equal to other null dates.
-   */
-  sameTime(first2, second) {
-    if (first2 && second) {
-      const firstValid = this.isValid(first2);
-      const secondValid = this.isValid(second);
-      if (firstValid && secondValid) {
-        return !this.compareTime(first2, second);
-      }
-      return firstValid == secondValid;
-    }
-    return first2 == second;
-  }
-  /**
-   * Clamp the given date between min and max dates.
-   * @param date The date to clamp.
-   * @param min The minimum value to allow. If null or omitted no min is enforced.
-   * @param max The maximum value to allow. If null or omitted no max is enforced.
-   * @returns `min` if `date` is less than `min`, `max` if date is greater than `max`,
-   *     otherwise `date`.
-   */
-  clampDate(date, min, max) {
-    if (min && this.compareDate(date, min) < 0) {
-      return min;
-    }
-    if (max && this.compareDate(date, max) > 0) {
-      return max;
-    }
-    return date;
-  }
-};
-var MAT_DATE_FORMATS = new InjectionToken("mat-date-formats");
-
-// node_modules/@angular/material/fesm2022/core.mjs
-var VERSION7 = new Version("20.0.3");
-var ISO_8601_REGEX = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|(?:(?:\+|-)\d{2}:\d{2}))?)?$/;
-var TIME_REGEX = /^(\d?\d)[:.](\d?\d)(?:[:.](\d?\d))?\s*(AM|PM)?$/i;
-function range(length, valueFunction) {
-  const valuesArray = Array(length);
-  for (let i = 0; i < length; i++) {
-    valuesArray[i] = valueFunction(i);
-  }
-  return valuesArray;
-}
-var NativeDateAdapter = class _NativeDateAdapter extends DateAdapter {
-  /**
-   * @deprecated No longer being used. To be removed.
-   * @breaking-change 14.0.0
-   */
-  useUtcForDisplay = false;
-  /** The injected locale. */
-  _matDateLocale = inject(MAT_DATE_LOCALE, {
-    optional: true
-  });
-  constructor() {
-    super();
-    const matDateLocale = inject(MAT_DATE_LOCALE, {
-      optional: true
-    });
-    if (matDateLocale !== void 0) {
-      this._matDateLocale = matDateLocale;
-    }
-    super.setLocale(this._matDateLocale);
-  }
-  getYear(date) {
-    return date.getFullYear();
-  }
-  getMonth(date) {
-    return date.getMonth();
-  }
-  getDate(date) {
-    return date.getDate();
-  }
-  getDayOfWeek(date) {
-    return date.getDay();
-  }
-  getMonthNames(style2) {
-    const dtf = new Intl.DateTimeFormat(this.locale, {
-      month: style2,
-      timeZone: "utc"
-    });
-    return range(12, (i) => this._format(dtf, new Date(2017, i, 1)));
-  }
-  getDateNames() {
-    const dtf = new Intl.DateTimeFormat(this.locale, {
-      day: "numeric",
-      timeZone: "utc"
-    });
-    return range(31, (i) => this._format(dtf, new Date(2017, 0, i + 1)));
-  }
-  getDayOfWeekNames(style2) {
-    const dtf = new Intl.DateTimeFormat(this.locale, {
-      weekday: style2,
-      timeZone: "utc"
-    });
-    return range(7, (i) => this._format(dtf, new Date(2017, 0, i + 1)));
-  }
-  getYearName(date) {
-    const dtf = new Intl.DateTimeFormat(this.locale, {
-      year: "numeric",
-      timeZone: "utc"
-    });
-    return this._format(dtf, date);
-  }
-  getFirstDayOfWeek() {
-    if (typeof Intl !== "undefined" && Intl.Locale) {
-      const locale = new Intl.Locale(this.locale);
-      const firstDay = (locale.getWeekInfo?.() || locale.weekInfo)?.firstDay ?? 0;
-      return firstDay === 7 ? 0 : firstDay;
-    }
-    return 0;
-  }
-  getNumDaysInMonth(date) {
-    return this.getDate(this._createDateWithOverflow(this.getYear(date), this.getMonth(date) + 1, 0));
-  }
-  clone(date) {
-    return new Date(date.getTime());
-  }
-  createDate(year, month, date) {
-    if (typeof ngDevMode === "undefined" || ngDevMode) {
-      if (month < 0 || month > 11) {
-        throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
-      }
-      if (date < 1) {
-        throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
-      }
-    }
-    let result = this._createDateWithOverflow(year, month, date);
-    if (result.getMonth() != month && (typeof ngDevMode === "undefined" || ngDevMode)) {
-      throw Error(`Invalid date "${date}" for month with index "${month}".`);
-    }
-    return result;
-  }
-  today() {
-    return /* @__PURE__ */ new Date();
-  }
-  parse(value, parseFormat) {
-    if (typeof value == "number") {
-      return new Date(value);
-    }
-    return value ? new Date(Date.parse(value)) : null;
-  }
-  format(date, displayFormat) {
-    if (!this.isValid(date)) {
-      throw Error("NativeDateAdapter: Cannot format invalid date.");
-    }
-    const dtf = new Intl.DateTimeFormat(this.locale, __spreadProps(__spreadValues({}, displayFormat), {
-      timeZone: "utc"
-    }));
-    return this._format(dtf, date);
-  }
-  addCalendarYears(date, years) {
-    return this.addCalendarMonths(date, years * 12);
-  }
-  addCalendarMonths(date, months) {
-    let newDate = this._createDateWithOverflow(this.getYear(date), this.getMonth(date) + months, this.getDate(date));
-    if (this.getMonth(newDate) != ((this.getMonth(date) + months) % 12 + 12) % 12) {
-      newDate = this._createDateWithOverflow(this.getYear(newDate), this.getMonth(newDate), 0);
-    }
-    return newDate;
-  }
-  addCalendarDays(date, days) {
-    return this._createDateWithOverflow(this.getYear(date), this.getMonth(date), this.getDate(date) + days);
-  }
-  toIso8601(date) {
-    return [date.getUTCFullYear(), this._2digit(date.getUTCMonth() + 1), this._2digit(date.getUTCDate())].join("-");
-  }
-  /**
-   * Returns the given value if given a valid Date or null. Deserializes valid ISO 8601 strings
-   * (https://www.ietf.org/rfc/rfc3339.txt) into valid Dates and empty string into null. Returns an
-   * invalid date for all other values.
-   */
-  deserialize(value) {
-    if (typeof value === "string") {
-      if (!value) {
-        return null;
-      }
-      if (ISO_8601_REGEX.test(value)) {
-        let date = new Date(value);
-        if (this.isValid(date)) {
-          return date;
-        }
-      }
-    }
-    return super.deserialize(value);
-  }
-  isDateInstance(obj) {
-    return obj instanceof Date;
-  }
-  isValid(date) {
-    return !isNaN(date.getTime());
-  }
-  invalid() {
-    return /* @__PURE__ */ new Date(NaN);
-  }
-  setTime(target, hours, minutes, seconds) {
-    if (typeof ngDevMode === "undefined" || ngDevMode) {
-      if (!inRange(hours, 0, 23)) {
-        throw Error(`Invalid hours "${hours}". Hours value must be between 0 and 23.`);
-      }
-      if (!inRange(minutes, 0, 59)) {
-        throw Error(`Invalid minutes "${minutes}". Minutes value must be between 0 and 59.`);
-      }
-      if (!inRange(seconds, 0, 59)) {
-        throw Error(`Invalid seconds "${seconds}". Seconds value must be between 0 and 59.`);
-      }
-    }
-    const clone = this.clone(target);
-    clone.setHours(hours, minutes, seconds, 0);
-    return clone;
-  }
-  getHours(date) {
-    return date.getHours();
-  }
-  getMinutes(date) {
-    return date.getMinutes();
-  }
-  getSeconds(date) {
-    return date.getSeconds();
-  }
-  parseTime(userValue, parseFormat) {
-    if (typeof userValue !== "string") {
-      return userValue instanceof Date ? new Date(userValue.getTime()) : null;
-    }
-    const value = userValue.trim();
-    if (value.length === 0) {
-      return null;
-    }
-    let result = this._parseTimeString(value);
-    if (result === null) {
-      const withoutExtras = value.replace(/[^0-9:(AM|PM)]/gi, "").trim();
-      if (withoutExtras.length > 0) {
-        result = this._parseTimeString(withoutExtras);
-      }
-    }
-    return result || this.invalid();
-  }
-  addSeconds(date, amount) {
-    return new Date(date.getTime() + amount * 1e3);
-  }
-  /** Creates a date but allows the month and date to overflow. */
-  _createDateWithOverflow(year, month, date) {
-    const d2 = /* @__PURE__ */ new Date();
-    d2.setFullYear(year, month, date);
-    d2.setHours(0, 0, 0, 0);
-    return d2;
-  }
-  /**
-   * Pads a number to make it two digits.
-   * @param n The number to pad.
-   * @returns The padded number.
-   */
-  _2digit(n) {
-    return ("00" + n).slice(-2);
-  }
-  /**
-   * When converting Date object to string, javascript built-in functions may return wrong
-   * results because it applies its internal DST rules. The DST rules around the world change
-   * very frequently, and the current valid rule is not always valid in previous years though.
-   * We work around this problem building a new Date object which has its internal UTC
-   * representation with the local date and time.
-   * @param dtf Intl.DateTimeFormat object, containing the desired string format. It must have
-   *    timeZone set to 'utc' to work fine.
-   * @param date Date from which we want to get the string representation according to dtf
-   * @returns A Date object with its UTC representation based on the passed in date info
-   */
-  _format(dtf, date) {
-    const d2 = /* @__PURE__ */ new Date();
-    d2.setUTCFullYear(date.getFullYear(), date.getMonth(), date.getDate());
-    d2.setUTCHours(date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
-    return dtf.format(d2);
-  }
-  /**
-   * Attempts to parse a time string into a date object. Returns null if it cannot be parsed.
-   * @param value Time string to parse.
-   */
-  _parseTimeString(value) {
-    const parsed = value.toUpperCase().match(TIME_REGEX);
-    if (parsed) {
-      let hours = parseInt(parsed[1]);
-      const minutes = parseInt(parsed[2]);
-      let seconds = parsed[3] == null ? void 0 : parseInt(parsed[3]);
-      const amPm = parsed[4];
-      if (hours === 12) {
-        hours = amPm === "AM" ? 0 : hours;
-      } else if (amPm === "PM") {
-        hours += 12;
-      }
-      if (inRange(hours, 0, 23) && inRange(minutes, 0, 59) && (seconds == null || inRange(seconds, 0, 59))) {
-        return this.setTime(this.today(), hours, minutes, seconds || 0);
-      }
-    }
-    return null;
-  }
-  static \u0275fac = function NativeDateAdapter_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _NativeDateAdapter)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _NativeDateAdapter,
-    factory: _NativeDateAdapter.\u0275fac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NativeDateAdapter, [{
-    type: Injectable
-  }], () => [], null);
-})();
-function inRange(value, min, max) {
-  return !isNaN(value) && value >= min && value <= max;
-}
-var MAT_NATIVE_DATE_FORMATS = {
-  parse: {
-    dateInput: null,
-    timeInput: null
-  },
-  display: {
-    dateInput: {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric"
-    },
-    timeInput: {
-      hour: "numeric",
-      minute: "numeric"
-    },
-    monthYearLabel: {
-      year: "numeric",
-      month: "short"
-    },
-    dateA11yLabel: {
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    },
-    monthYearA11yLabel: {
-      year: "numeric",
-      month: "long"
-    },
-    timeOptionLabel: {
-      hour: "numeric",
-      minute: "numeric"
-    }
-  }
-};
-var NativeDateModule = class _NativeDateModule {
-  static \u0275fac = function NativeDateModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _NativeDateModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _NativeDateModule
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    providers: [{
-      provide: DateAdapter,
-      useClass: NativeDateAdapter
-    }]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NativeDateModule, [{
-    type: NgModule,
-    args: [{
-      providers: [{
-        provide: DateAdapter,
-        useClass: NativeDateAdapter
-      }]
-    }]
-  }], null, null);
-})();
-var MatNativeDateModule = class _MatNativeDateModule {
-  static \u0275fac = function MatNativeDateModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatNativeDateModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _MatNativeDateModule
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    providers: [provideNativeDateAdapter()]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatNativeDateModule, [{
-    type: NgModule,
-    args: [{
-      providers: [provideNativeDateAdapter()]
-    }]
-  }], null, null);
-})();
-function provideNativeDateAdapter(formats = MAT_NATIVE_DATE_FORMATS) {
-  return [{
-    provide: DateAdapter,
-    useClass: NativeDateAdapter
-  }, {
-    provide: MAT_DATE_FORMATS,
-    useValue: formats
-  }];
-}
-
 // node_modules/@angular/material/fesm2022/menu.mjs
-var _c013 = ["mat-menu-item", ""];
-var _c18 = [[["mat-icon"], ["", "matMenuItemIcon", ""]], "*"];
-var _c25 = ["mat-icon, [matMenuItemIcon]", "*"];
+var _c015 = ["mat-menu-item", ""];
+var _c19 = [[["mat-icon"], ["", "matMenuItemIcon", ""]], "*"];
+var _c26 = ["mat-icon, [matMenuItemIcon]", "*"];
 function MatMenuItem_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275namespaceSVG();
@@ -90618,14 +91539,14 @@ var MatMenuItem = class _MatMenuItem {
       disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute]
     },
     exportAs: ["matMenuItem"],
-    attrs: _c013,
-    ngContentSelectors: _c25,
+    attrs: _c015,
+    ngContentSelectors: _c26,
     decls: 5,
     vars: 3,
     consts: [[1, "mat-mdc-menu-item-text"], ["matRipple", "", 1, "mat-mdc-menu-ripple", 3, "matRippleDisabled", "matRippleTrigger"], ["viewBox", "0 0 5 10", "focusable", "false", "aria-hidden", "true", 1, "mat-mdc-menu-submenu-icon"], ["points", "0,0 5,5 0,10"]],
     template: function MatMenuItem_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c18);
+        \u0275\u0275projectionDef(_c19);
         \u0275\u0275projection(0);
         \u0275\u0275elementStart(1, "span", 0);
         \u0275\u0275projection(2, 1);
@@ -92140,8 +93061,8 @@ var ClipboardModule = class _ClipboardModule {
 })();
 
 // node_modules/@angular/material/fesm2022/autocomplete.mjs
-var _c014 = ["panel"];
-var _c19 = ["*"];
+var _c016 = ["panel"];
+var _c110 = ["*"];
 function MatAutocomplete_ng_template_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 1, 0);
@@ -92373,7 +93294,7 @@ var MatAutocomplete = class _MatAutocomplete {
     viewQuery: function MatAutocomplete_Query(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275viewQuery(TemplateRef, 7);
-        \u0275\u0275viewQuery(_c014, 5);
+        \u0275\u0275viewQuery(_c016, 5);
       }
       if (rf & 2) {
         let _t4;
@@ -92405,7 +93326,7 @@ var MatAutocomplete = class _MatAutocomplete {
       provide: MAT_OPTION_PARENT_COMPONENT,
       useExisting: _MatAutocomplete
     }])],
-    ngContentSelectors: _c19,
+    ngContentSelectors: _c110,
     decls: 1,
     vars: 0,
     consts: [["panel", ""], ["role", "listbox", 1, "mat-mdc-autocomplete-panel", "mdc-menu-surface", "mdc-menu-surface--open", 3, "id"]],
@@ -93390,691 +94311,8 @@ var MatAutocompleteModule = class _MatAutocompleteModule {
   }], null, null);
 })();
 
-// node_modules/@angular/material/fesm2022/checkbox.mjs
-var _c015 = ["input"];
-var _c110 = ["label"];
-var _c26 = ["*"];
-var MAT_CHECKBOX_DEFAULT_OPTIONS = new InjectionToken("mat-checkbox-default-options", {
-  providedIn: "root",
-  factory: MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY
-});
-function MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY() {
-  return {
-    color: "accent",
-    clickAction: "check-indeterminate",
-    disabledInteractive: false
-  };
-}
-var TransitionCheckState;
-(function(TransitionCheckState2) {
-  TransitionCheckState2[TransitionCheckState2["Init"] = 0] = "Init";
-  TransitionCheckState2[TransitionCheckState2["Checked"] = 1] = "Checked";
-  TransitionCheckState2[TransitionCheckState2["Unchecked"] = 2] = "Unchecked";
-  TransitionCheckState2[TransitionCheckState2["Indeterminate"] = 3] = "Indeterminate";
-})(TransitionCheckState || (TransitionCheckState = {}));
-var MatCheckboxChange = class {
-  /** The source checkbox of the event. */
-  source;
-  /** The new `checked` value of the checkbox. */
-  checked;
-};
-var defaults2 = MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY();
-var MatCheckbox = class _MatCheckbox {
-  _elementRef = inject(ElementRef);
-  _changeDetectorRef = inject(ChangeDetectorRef);
-  _ngZone = inject(NgZone);
-  _animationsDisabled = _animationsDisabled();
-  _options = inject(MAT_CHECKBOX_DEFAULT_OPTIONS, {
-    optional: true
-  });
-  /** Focuses the checkbox. */
-  focus() {
-    this._inputElement.nativeElement.focus();
-  }
-  /** Creates the change event that will be emitted by the checkbox. */
-  _createChangeEvent(isChecked) {
-    const event = new MatCheckboxChange();
-    event.source = this;
-    event.checked = isChecked;
-    return event;
-  }
-  /** Gets the element on which to add the animation CSS classes. */
-  _getAnimationTargetElement() {
-    return this._inputElement?.nativeElement;
-  }
-  /** CSS classes to add when transitioning between the different checkbox states. */
-  _animationClasses = {
-    uncheckedToChecked: "mdc-checkbox--anim-unchecked-checked",
-    uncheckedToIndeterminate: "mdc-checkbox--anim-unchecked-indeterminate",
-    checkedToUnchecked: "mdc-checkbox--anim-checked-unchecked",
-    checkedToIndeterminate: "mdc-checkbox--anim-checked-indeterminate",
-    indeterminateToChecked: "mdc-checkbox--anim-indeterminate-checked",
-    indeterminateToUnchecked: "mdc-checkbox--anim-indeterminate-unchecked"
-  };
-  /**
-   * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
-   * take precedence so this may be omitted.
-   */
-  ariaLabel = "";
-  /**
-   * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
-   */
-  ariaLabelledby = null;
-  /** The 'aria-describedby' attribute is read after the element's label and field type. */
-  ariaDescribedby;
-  /**
-   * Users can specify the `aria-expanded` attribute which will be forwarded to the input element
-   */
-  ariaExpanded;
-  /**
-   * Users can specify the `aria-controls` attribute which will be forwarded to the input element
-   */
-  ariaControls;
-  /** Users can specify the `aria-owns` attribute which will be forwarded to the input element */
-  ariaOwns;
-  _uniqueId;
-  /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
-  id;
-  /** Returns the unique id for the visual hidden input. */
-  get inputId() {
-    return `${this.id || this._uniqueId}-input`;
-  }
-  /** Whether the checkbox is required. */
-  required;
-  /** Whether the label should appear after or before the checkbox. Defaults to 'after' */
-  labelPosition = "after";
-  /** Name value will be applied to the input element if present */
-  name = null;
-  /** Event emitted when the checkbox's `checked` value changes. */
-  change = new EventEmitter();
-  /** Event emitted when the checkbox's `indeterminate` value changes. */
-  indeterminateChange = new EventEmitter();
-  /** The value attribute of the native input element */
-  value;
-  /** Whether the checkbox has a ripple. */
-  disableRipple;
-  /** The native `<input type="checkbox">` element */
-  _inputElement;
-  /** The native `<label>` element */
-  _labelElement;
-  /** Tabindex for the checkbox. */
-  tabIndex;
-  // TODO(crisbeto): this should be a ThemePalette, but some internal apps were abusing
-  // the lack of type checking previously and assigning random strings.
-  /**
-   * Theme color of the checkbox. This API is supported in M2 themes only, it
-   * has no effect in M3 themes. For color customization in M3, see https://material.angular.dev/components/checkbox/styling.
-   *
-   * For information on applying color variants in M3, see
-   * https://material.angular.dev/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
-   */
-  color;
-  /** Whether the checkbox should remain interactive when it is disabled. */
-  disabledInteractive;
-  /**
-   * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
-   * @docs-private
-   */
-  _onTouched = () => {
-  };
-  _currentAnimationClass = "";
-  _currentCheckState = TransitionCheckState.Init;
-  _controlValueAccessorChangeFn = () => {
-  };
-  _validatorChangeFn = () => {
-  };
-  constructor() {
-    inject(_CdkPrivateStyleLoader).load(_StructuralStylesLoader);
-    const tabIndex = inject(new HostAttributeToken("tabindex"), {
-      optional: true
-    });
-    this._options = this._options || defaults2;
-    this.color = this._options.color || defaults2.color;
-    this.tabIndex = tabIndex == null ? 0 : parseInt(tabIndex) || 0;
-    this.id = this._uniqueId = inject(_IdGenerator).getId("mat-mdc-checkbox-");
-    this.disabledInteractive = this._options?.disabledInteractive ?? false;
-  }
-  ngOnChanges(changes) {
-    if (changes["required"]) {
-      this._validatorChangeFn();
-    }
-  }
-  ngAfterViewInit() {
-    this._syncIndeterminate(this.indeterminate);
-  }
-  /** Whether the checkbox is checked. */
-  get checked() {
-    return this._checked;
-  }
-  set checked(value) {
-    if (value != this.checked) {
-      this._checked = value;
-      this._changeDetectorRef.markForCheck();
-    }
-  }
-  _checked = false;
-  /** Whether the checkbox is disabled. */
-  get disabled() {
-    return this._disabled;
-  }
-  set disabled(value) {
-    if (value !== this.disabled) {
-      this._disabled = value;
-      this._changeDetectorRef.markForCheck();
-    }
-  }
-  _disabled = false;
-  /**
-   * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
-   * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
-   * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
-   * set to false.
-   */
-  get indeterminate() {
-    return this._indeterminate();
-  }
-  set indeterminate(value) {
-    const changed = value != this._indeterminate();
-    this._indeterminate.set(value);
-    if (changed) {
-      if (value) {
-        this._transitionCheckState(TransitionCheckState.Indeterminate);
-      } else {
-        this._transitionCheckState(this.checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
-      }
-      this.indeterminateChange.emit(value);
-    }
-    this._syncIndeterminate(value);
-  }
-  _indeterminate = signal(false);
-  _isRippleDisabled() {
-    return this.disableRipple || this.disabled;
-  }
-  /** Method being called whenever the label text changes. */
-  _onLabelTextChange() {
-    this._changeDetectorRef.detectChanges();
-  }
-  // Implemented as part of ControlValueAccessor.
-  writeValue(value) {
-    this.checked = !!value;
-  }
-  // Implemented as part of ControlValueAccessor.
-  registerOnChange(fn3) {
-    this._controlValueAccessorChangeFn = fn3;
-  }
-  // Implemented as part of ControlValueAccessor.
-  registerOnTouched(fn3) {
-    this._onTouched = fn3;
-  }
-  // Implemented as part of ControlValueAccessor.
-  setDisabledState(isDisabled) {
-    this.disabled = isDisabled;
-  }
-  // Implemented as a part of Validator.
-  validate(control) {
-    return this.required && control.value !== true ? {
-      "required": true
-    } : null;
-  }
-  // Implemented as a part of Validator.
-  registerOnValidatorChange(fn3) {
-    this._validatorChangeFn = fn3;
-  }
-  _transitionCheckState(newState) {
-    let oldState = this._currentCheckState;
-    let element = this._getAnimationTargetElement();
-    if (oldState === newState || !element) {
-      return;
-    }
-    if (this._currentAnimationClass) {
-      element.classList.remove(this._currentAnimationClass);
-    }
-    this._currentAnimationClass = this._getAnimationClassForCheckStateTransition(oldState, newState);
-    this._currentCheckState = newState;
-    if (this._currentAnimationClass.length > 0) {
-      element.classList.add(this._currentAnimationClass);
-      const animationClass = this._currentAnimationClass;
-      this._ngZone.runOutsideAngular(() => {
-        setTimeout(() => {
-          element.classList.remove(animationClass);
-        }, 1e3);
-      });
-    }
-  }
-  _emitChangeEvent() {
-    this._controlValueAccessorChangeFn(this.checked);
-    this.change.emit(this._createChangeEvent(this.checked));
-    if (this._inputElement) {
-      this._inputElement.nativeElement.checked = this.checked;
-    }
-  }
-  /** Toggles the `checked` state of the checkbox. */
-  toggle() {
-    this.checked = !this.checked;
-    this._controlValueAccessorChangeFn(this.checked);
-  }
-  _handleInputClick() {
-    const clickAction = this._options?.clickAction;
-    if (!this.disabled && clickAction !== "noop") {
-      if (this.indeterminate && clickAction !== "check") {
-        Promise.resolve().then(() => {
-          this._indeterminate.set(false);
-          this.indeterminateChange.emit(false);
-        });
-      }
-      this._checked = !this._checked;
-      this._transitionCheckState(this._checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
-      this._emitChangeEvent();
-    } else if (this.disabled && this.disabledInteractive || !this.disabled && clickAction === "noop") {
-      this._inputElement.nativeElement.checked = this.checked;
-      this._inputElement.nativeElement.indeterminate = this.indeterminate;
-    }
-  }
-  _onInteractionEvent(event) {
-    event.stopPropagation();
-  }
-  _onBlur() {
-    Promise.resolve().then(() => {
-      this._onTouched();
-      this._changeDetectorRef.markForCheck();
-    });
-  }
-  _getAnimationClassForCheckStateTransition(oldState, newState) {
-    if (this._animationsDisabled) {
-      return "";
-    }
-    switch (oldState) {
-      case TransitionCheckState.Init:
-        if (newState === TransitionCheckState.Checked) {
-          return this._animationClasses.uncheckedToChecked;
-        } else if (newState == TransitionCheckState.Indeterminate) {
-          return this._checked ? this._animationClasses.checkedToIndeterminate : this._animationClasses.uncheckedToIndeterminate;
-        }
-        break;
-      case TransitionCheckState.Unchecked:
-        return newState === TransitionCheckState.Checked ? this._animationClasses.uncheckedToChecked : this._animationClasses.uncheckedToIndeterminate;
-      case TransitionCheckState.Checked:
-        return newState === TransitionCheckState.Unchecked ? this._animationClasses.checkedToUnchecked : this._animationClasses.checkedToIndeterminate;
-      case TransitionCheckState.Indeterminate:
-        return newState === TransitionCheckState.Checked ? this._animationClasses.indeterminateToChecked : this._animationClasses.indeterminateToUnchecked;
-    }
-    return "";
-  }
-  /**
-   * Syncs the indeterminate value with the checkbox DOM node.
-   *
-   * We sync `indeterminate` directly on the DOM node, because in Ivy the check for whether a
-   * property is supported on an element boils down to `if (propName in element)`. Domino's
-   * HTMLInputElement doesn't have an `indeterminate` property so Ivy will warn during
-   * server-side rendering.
-   */
-  _syncIndeterminate(value) {
-    const nativeCheckbox = this._inputElement;
-    if (nativeCheckbox) {
-      nativeCheckbox.nativeElement.indeterminate = value;
-    }
-  }
-  _onInputClick() {
-    this._handleInputClick();
-  }
-  _onTouchTargetClick() {
-    this._handleInputClick();
-    if (!this.disabled) {
-      this._inputElement.nativeElement.focus();
-    }
-  }
-  /**
-   *  Prevent click events that come from the `<label/>` element from bubbling. This prevents the
-   *  click handler on the host from triggering twice when clicking on the `<label/>` element. After
-   *  the click event on the `<label/>` propagates, the browsers dispatches click on the associated
-   *  `<input/>`. By preventing clicks on the label by bubbling, we ensure only one click event
-   *  bubbles when the label is clicked.
-   */
-  _preventBubblingFromLabel(event) {
-    if (!!event.target && this._labelElement.nativeElement.contains(event.target)) {
-      event.stopPropagation();
-    }
-  }
-  static \u0275fac = function MatCheckbox_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatCheckbox)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _MatCheckbox,
-    selectors: [["mat-checkbox"]],
-    viewQuery: function MatCheckbox_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(_c015, 5);
-        \u0275\u0275viewQuery(_c110, 5);
-      }
-      if (rf & 2) {
-        let _t4;
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._inputElement = _t4.first);
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._labelElement = _t4.first);
-      }
-    },
-    hostAttrs: [1, "mat-mdc-checkbox"],
-    hostVars: 16,
-    hostBindings: function MatCheckbox_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275domProperty("id", ctx.id);
-        \u0275\u0275attribute("tabindex", null)("aria-label", null)("aria-labelledby", null);
-        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "mat-accent");
-        \u0275\u0275classProp("_mat-animation-noopable", ctx._animationsDisabled)("mdc-checkbox--disabled", ctx.disabled)("mat-mdc-checkbox-disabled", ctx.disabled)("mat-mdc-checkbox-checked", ctx.checked)("mat-mdc-checkbox-disabled-interactive", ctx.disabledInteractive);
-      }
-    },
-    inputs: {
-      ariaLabel: [0, "aria-label", "ariaLabel"],
-      ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
-      ariaDescribedby: [0, "aria-describedby", "ariaDescribedby"],
-      ariaExpanded: [2, "aria-expanded", "ariaExpanded", booleanAttribute],
-      ariaControls: [0, "aria-controls", "ariaControls"],
-      ariaOwns: [0, "aria-owns", "ariaOwns"],
-      id: "id",
-      required: [2, "required", "required", booleanAttribute],
-      labelPosition: "labelPosition",
-      name: "name",
-      value: "value",
-      disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
-      tabIndex: [2, "tabIndex", "tabIndex", (value) => value == null ? void 0 : numberAttribute(value)],
-      color: "color",
-      disabledInteractive: [2, "disabledInteractive", "disabledInteractive", booleanAttribute],
-      checked: [2, "checked", "checked", booleanAttribute],
-      disabled: [2, "disabled", "disabled", booleanAttribute],
-      indeterminate: [2, "indeterminate", "indeterminate", booleanAttribute]
-    },
-    outputs: {
-      change: "change",
-      indeterminateChange: "indeterminateChange"
-    },
-    exportAs: ["matCheckbox"],
-    features: [\u0275\u0275ProvidersFeature([{
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => _MatCheckbox),
-      multi: true
-    }, {
-      provide: NG_VALIDATORS,
-      useExisting: _MatCheckbox,
-      multi: true
-    }]), \u0275\u0275NgOnChangesFeature],
-    ngContentSelectors: _c26,
-    decls: 15,
-    vars: 23,
-    consts: [["checkbox", ""], ["input", ""], ["label", ""], ["mat-internal-form-field", "", 3, "click", "labelPosition"], [1, "mdc-checkbox"], [1, "mat-mdc-checkbox-touch-target", 3, "click"], ["type", "checkbox", 1, "mdc-checkbox__native-control", 3, "blur", "click", "change", "checked", "indeterminate", "disabled", "id", "required", "tabIndex"], [1, "mdc-checkbox__ripple"], [1, "mdc-checkbox__background"], ["focusable", "false", "viewBox", "0 0 24 24", "aria-hidden", "true", 1, "mdc-checkbox__checkmark"], ["fill", "none", "d", "M1.73,12.91 8.1,19.28 22.79,4.59", 1, "mdc-checkbox__checkmark-path"], [1, "mdc-checkbox__mixedmark"], ["mat-ripple", "", 1, "mat-mdc-checkbox-ripple", "mat-focus-indicator", 3, "matRippleTrigger", "matRippleDisabled", "matRippleCentered"], [1, "mdc-label", 3, "for"]],
-    template: function MatCheckbox_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275projectionDef();
-        \u0275\u0275elementStart(0, "div", 3);
-        \u0275\u0275listener("click", function MatCheckbox_Template_div_click_0_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx._preventBubblingFromLabel($event));
-        });
-        \u0275\u0275elementStart(1, "div", 4, 0)(3, "div", 5);
-        \u0275\u0275listener("click", function MatCheckbox_Template_div_click_3_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx._onTouchTargetClick());
-        });
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(4, "input", 6, 1);
-        \u0275\u0275listener("blur", function MatCheckbox_Template_input_blur_4_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx._onBlur());
-        })("click", function MatCheckbox_Template_input_click_4_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx._onInputClick());
-        })("change", function MatCheckbox_Template_input_change_4_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx._onInteractionEvent($event));
-        });
-        \u0275\u0275elementEnd();
-        \u0275\u0275element(6, "div", 7);
-        \u0275\u0275elementStart(7, "div", 8);
-        \u0275\u0275namespaceSVG();
-        \u0275\u0275elementStart(8, "svg", 9);
-        \u0275\u0275element(9, "path", 10);
-        \u0275\u0275elementEnd();
-        \u0275\u0275namespaceHTML();
-        \u0275\u0275element(10, "div", 11);
-        \u0275\u0275elementEnd();
-        \u0275\u0275element(11, "div", 12);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(12, "label", 13, 2);
-        \u0275\u0275projection(14);
-        \u0275\u0275elementEnd()();
-      }
-      if (rf & 2) {
-        const checkbox_r2 = \u0275\u0275reference(2);
-        \u0275\u0275property("labelPosition", ctx.labelPosition);
-        \u0275\u0275advance(4);
-        \u0275\u0275classProp("mdc-checkbox--selected", ctx.checked);
-        \u0275\u0275property("checked", ctx.checked)("indeterminate", ctx.indeterminate)("disabled", ctx.disabled && !ctx.disabledInteractive)("id", ctx.inputId)("required", ctx.required)("tabIndex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex);
-        \u0275\u0275attribute("aria-label", ctx.ariaLabel || null)("aria-labelledby", ctx.ariaLabelledby)("aria-describedby", ctx.ariaDescribedby)("aria-checked", ctx.indeterminate ? "mixed" : null)("aria-controls", ctx.ariaControls)("aria-disabled", ctx.disabled && ctx.disabledInteractive ? true : null)("aria-expanded", ctx.ariaExpanded)("aria-owns", ctx.ariaOwns)("name", ctx.name)("value", ctx.value);
-        \u0275\u0275advance(7);
-        \u0275\u0275property("matRippleTrigger", checkbox_r2)("matRippleDisabled", ctx.disableRipple || ctx.disabled)("matRippleCentered", true);
-        \u0275\u0275advance();
-        \u0275\u0275property("for", ctx.inputId);
-      }
-    },
-    dependencies: [MatRipple, _MatInternalFormField],
-    styles: ['.mdc-checkbox{display:inline-block;position:relative;flex:0 0 18px;box-sizing:content-box;width:18px;height:18px;line-height:0;white-space:nowrap;cursor:pointer;vertical-align:bottom;padding:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);margin:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox:hover>.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:hover>.mat-mdc-checkbox-ripple>.mat-ripple-element{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control+.mdc-checkbox__ripple{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control{position:absolute;margin:0;padding:0;opacity:0;cursor:inherit;z-index:1;width:var(--mat-checkbox-state-layer-size, 40px);height:var(--mat-checkbox-state-layer-size, 40px);top:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);right:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox--disabled{cursor:default;pointer-events:none}@media(forced-colors: active){.mdc-checkbox--disabled{opacity:.5}}.mdc-checkbox__background{display:inline-flex;position:absolute;align-items:center;justify-content:center;box-sizing:border-box;width:18px;height:18px;border:2px solid currentColor;border-radius:2px;background-color:rgba(0,0,0,0);pointer-events:none;will-change:background-color,border-color;transition:background-color 90ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms cubic-bezier(0.4, 0, 0.6, 1);-webkit-print-color-adjust:exact;color-adjust:exact;border-color:var(--mat-checkbox-unselected-icon-color, var(--mat-sys-on-surface-variant));top:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2)}.mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox__native-control:disabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:disabled:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:checked)~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-hover-icon-color, var(--mat-sys-on-surface));background-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary))}.mdc-checkbox__native-control:focus:focus:not(:checked)~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-focus-icon-color, var(--mat-sys-on-surface))}.mdc-checkbox__native-control:focus:focus:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox:hover>.mdc-checkbox__native-control~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox__checkmark{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0;transition:opacity 180ms cubic-bezier(0.4, 0, 0.6, 1);color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}@media(forced-colors: active){.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox__checkmark-path{transition:stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1);stroke:currentColor;stroke-width:3.12px;stroke-dashoffset:29.7833385;stroke-dasharray:29.7833385}.mdc-checkbox__mixedmark{width:100%;height:0;transform:scaleX(0) rotate(0deg);border-width:1px;border-style:solid;opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1);border-color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__mixedmark{margin:0 1px}}.mdc-checkbox--disabled .mdc-checkbox__mixedmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__mixedmark{border-color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background,.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background,.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background,.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background{animation-duration:180ms;animation-timing-function:linear}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-unchecked-checked-checkmark-path 180ms linear;transition:none}.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-unchecked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-checked-unchecked-checkmark-path 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__checkmark{animation:mdc-checkbox-checked-indeterminate-checkmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-checked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__checkmark{animation:mdc-checkbox-indeterminate-checked-checkmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-checked-mixedmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-unchecked-mixedmark 300ms linear;transition:none}.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{transition:border-color 90ms cubic-bezier(0, 0, 0.2, 1),background-color 90ms cubic-bezier(0, 0, 0.2, 1)}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path{stroke-dashoffset:0}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark{transition:opacity 180ms cubic-bezier(0, 0, 0.2, 1),transform 180ms cubic-bezier(0, 0, 0.2, 1);opacity:1}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(-45deg)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark{transform:rotate(45deg);opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(0deg);opacity:1}@keyframes mdc-checkbox-unchecked-checked-checkmark-path{0%,50%{stroke-dashoffset:29.7833385}50%{animation-timing-function:cubic-bezier(0, 0, 0.2, 1)}100%{stroke-dashoffset:0}}@keyframes mdc-checkbox-unchecked-indeterminate-mixedmark{0%,68.2%{transform:scaleX(0)}68.2%{animation-timing-function:cubic-bezier(0, 0, 0, 1)}100%{transform:scaleX(1)}}@keyframes mdc-checkbox-checked-unchecked-checkmark-path{from{animation-timing-function:cubic-bezier(0.4, 0, 1, 1);opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:-29.7833385}}@keyframes mdc-checkbox-checked-indeterminate-checkmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(45deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-checked-checkmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(45deg);opacity:0}to{transform:rotate(360deg);opacity:1}}@keyframes mdc-checkbox-checked-indeterminate-mixedmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(-45deg);opacity:0}to{transform:rotate(0deg);opacity:1}}@keyframes mdc-checkbox-indeterminate-checked-mixedmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(315deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-unchecked-mixedmark{0%{animation-timing-function:linear;transform:scaleX(1);opacity:1}32.8%,100%{transform:scaleX(0);opacity:0}}.mat-mdc-checkbox{display:inline-block;position:relative;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-touch-target,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__native-control,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__ripple,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-ripple::before,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__mixedmark{transition:none !important;animation:none !important}.mat-mdc-checkbox label{cursor:pointer}.mat-mdc-checkbox .mat-internal-form-field{color:var(--mat-checkbox-label-text-color, var(--mat-sys-on-surface));font-family:var(--mat-checkbox-label-text-font, var(--mat-sys-body-medium-font));line-height:var(--mat-checkbox-label-text-line-height, var(--mat-sys-body-medium-line-height));font-size:var(--mat-checkbox-label-text-size, var(--mat-sys-body-medium-size));letter-spacing:var(--mat-checkbox-label-text-tracking, var(--mat-sys-body-medium-tracking));font-weight:var(--mat-checkbox-label-text-weight, var(--mat-sys-body-medium-weight))}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive{pointer-events:auto}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive input{cursor:default}.mat-mdc-checkbox.mat-mdc-checkbox-disabled label{cursor:default;color:var(--mat-checkbox-disabled-label-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-checkbox label:empty{display:none}.mat-mdc-checkbox .mdc-checkbox__ripple{opacity:0}.mat-mdc-checkbox .mat-mdc-checkbox-ripple,.mdc-checkbox__ripple{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:50%;pointer-events:none}.mat-mdc-checkbox .mat-mdc-checkbox-ripple:not(:empty),.mdc-checkbox__ripple:not(:empty){transform:translateZ(0)}.mat-mdc-checkbox-ripple .mat-ripple-element{opacity:.1}.mat-mdc-checkbox-touch-target{position:absolute;top:50%;left:50%;height:48px;width:48px;transform:translate(-50%, -50%);display:var(--mat-checkbox-touch-target-display, block)}.mat-mdc-checkbox .mat-mdc-checkbox-ripple::before{border-radius:50%}.mdc-checkbox__native-control:focus~.mat-focus-indicator::before{content:""}\n'],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCheckbox, [{
-    type: Component,
-    args: [{
-      selector: "mat-checkbox",
-      host: {
-        "class": "mat-mdc-checkbox",
-        "[attr.tabindex]": "null",
-        "[attr.aria-label]": "null",
-        "[attr.aria-labelledby]": "null",
-        "[class._mat-animation-noopable]": "_animationsDisabled",
-        "[class.mdc-checkbox--disabled]": "disabled",
-        "[id]": "id",
-        // Add classes that users can use to more easily target disabled or checked checkboxes.
-        "[class.mat-mdc-checkbox-disabled]": "disabled",
-        "[class.mat-mdc-checkbox-checked]": "checked",
-        "[class.mat-mdc-checkbox-disabled-interactive]": "disabledInteractive",
-        "[class]": 'color ? "mat-" + color : "mat-accent"'
-      },
-      providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => MatCheckbox),
-        multi: true
-      }, {
-        provide: NG_VALIDATORS,
-        useExisting: MatCheckbox,
-        multi: true
-      }],
-      exportAs: "matCheckbox",
-      encapsulation: ViewEncapsulation.None,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      imports: [MatRipple, _MatInternalFormField],
-      template: `<div mat-internal-form-field [labelPosition]="labelPosition" (click)="_preventBubblingFromLabel($event)">
-  <div #checkbox class="mdc-checkbox">
-    <!-- Render this element first so the input is on top. -->
-    <div class="mat-mdc-checkbox-touch-target" (click)="_onTouchTargetClick()"></div>
-    <input #input
-           type="checkbox"
-           class="mdc-checkbox__native-control"
-           [class.mdc-checkbox--selected]="checked"
-           [attr.aria-label]="ariaLabel || null"
-           [attr.aria-labelledby]="ariaLabelledby"
-           [attr.aria-describedby]="ariaDescribedby"
-           [attr.aria-checked]="indeterminate ? 'mixed' : null"
-           [attr.aria-controls]="ariaControls"
-           [attr.aria-disabled]="disabled && disabledInteractive ? true : null"
-           [attr.aria-expanded]="ariaExpanded"
-           [attr.aria-owns]="ariaOwns"
-           [attr.name]="name"
-           [attr.value]="value"
-           [checked]="checked"
-           [indeterminate]="indeterminate"
-           [disabled]="disabled && !disabledInteractive"
-           [id]="inputId"
-           [required]="required"
-           [tabIndex]="disabled && !disabledInteractive ? -1 : tabIndex"
-           (blur)="_onBlur()"
-           (click)="_onInputClick()"
-           (change)="_onInteractionEvent($event)"/>
-    <div class="mdc-checkbox__ripple"></div>
-    <div class="mdc-checkbox__background">
-      <svg class="mdc-checkbox__checkmark"
-           focusable="false"
-           viewBox="0 0 24 24"
-           aria-hidden="true">
-        <path class="mdc-checkbox__checkmark-path"
-              fill="none"
-              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-      </svg>
-      <div class="mdc-checkbox__mixedmark"></div>
-    </div>
-    <div class="mat-mdc-checkbox-ripple mat-focus-indicator" mat-ripple
-      [matRippleTrigger]="checkbox"
-      [matRippleDisabled]="disableRipple || disabled"
-      [matRippleCentered]="true"></div>
-  </div>
-  <!--
-    Avoid putting a click handler on the <label/> to fix duplicate navigation stop on Talk Back
-    (#14385). Putting a click handler on the <label/> caused this bug because the browser produced
-    an unnecessary accessibility tree node.
-  -->
-  <label class="mdc-label" #label [for]="inputId">
-    <ng-content></ng-content>
-  </label>
-</div>
-`,
-      styles: ['.mdc-checkbox{display:inline-block;position:relative;flex:0 0 18px;box-sizing:content-box;width:18px;height:18px;line-height:0;white-space:nowrap;cursor:pointer;vertical-align:bottom;padding:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);margin:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox:hover>.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:hover>.mat-mdc-checkbox-ripple>.mat-ripple-element{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control+.mdc-checkbox__ripple{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control{position:absolute;margin:0;padding:0;opacity:0;cursor:inherit;z-index:1;width:var(--mat-checkbox-state-layer-size, 40px);height:var(--mat-checkbox-state-layer-size, 40px);top:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);right:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox--disabled{cursor:default;pointer-events:none}@media(forced-colors: active){.mdc-checkbox--disabled{opacity:.5}}.mdc-checkbox__background{display:inline-flex;position:absolute;align-items:center;justify-content:center;box-sizing:border-box;width:18px;height:18px;border:2px solid currentColor;border-radius:2px;background-color:rgba(0,0,0,0);pointer-events:none;will-change:background-color,border-color;transition:background-color 90ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms cubic-bezier(0.4, 0, 0.6, 1);-webkit-print-color-adjust:exact;color-adjust:exact;border-color:var(--mat-checkbox-unselected-icon-color, var(--mat-sys-on-surface-variant));top:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2)}.mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox__native-control:disabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:disabled:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:checked)~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-hover-icon-color, var(--mat-sys-on-surface));background-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary))}.mdc-checkbox__native-control:focus:focus:not(:checked)~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-focus-icon-color, var(--mat-sys-on-surface))}.mdc-checkbox__native-control:focus:focus:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox:hover>.mdc-checkbox__native-control~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox__checkmark{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0;transition:opacity 180ms cubic-bezier(0.4, 0, 0.6, 1);color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}@media(forced-colors: active){.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox__checkmark-path{transition:stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1);stroke:currentColor;stroke-width:3.12px;stroke-dashoffset:29.7833385;stroke-dasharray:29.7833385}.mdc-checkbox__mixedmark{width:100%;height:0;transform:scaleX(0) rotate(0deg);border-width:1px;border-style:solid;opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1);border-color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__mixedmark{margin:0 1px}}.mdc-checkbox--disabled .mdc-checkbox__mixedmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__mixedmark{border-color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background,.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background,.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background,.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background{animation-duration:180ms;animation-timing-function:linear}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-unchecked-checked-checkmark-path 180ms linear;transition:none}.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-unchecked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-checked-unchecked-checkmark-path 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__checkmark{animation:mdc-checkbox-checked-indeterminate-checkmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-checked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__checkmark{animation:mdc-checkbox-indeterminate-checked-checkmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-checked-mixedmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-unchecked-mixedmark 300ms linear;transition:none}.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{transition:border-color 90ms cubic-bezier(0, 0, 0.2, 1),background-color 90ms cubic-bezier(0, 0, 0.2, 1)}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path{stroke-dashoffset:0}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark{transition:opacity 180ms cubic-bezier(0, 0, 0.2, 1),transform 180ms cubic-bezier(0, 0, 0.2, 1);opacity:1}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(-45deg)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark{transform:rotate(45deg);opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(0deg);opacity:1}@keyframes mdc-checkbox-unchecked-checked-checkmark-path{0%,50%{stroke-dashoffset:29.7833385}50%{animation-timing-function:cubic-bezier(0, 0, 0.2, 1)}100%{stroke-dashoffset:0}}@keyframes mdc-checkbox-unchecked-indeterminate-mixedmark{0%,68.2%{transform:scaleX(0)}68.2%{animation-timing-function:cubic-bezier(0, 0, 0, 1)}100%{transform:scaleX(1)}}@keyframes mdc-checkbox-checked-unchecked-checkmark-path{from{animation-timing-function:cubic-bezier(0.4, 0, 1, 1);opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:-29.7833385}}@keyframes mdc-checkbox-checked-indeterminate-checkmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(45deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-checked-checkmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(45deg);opacity:0}to{transform:rotate(360deg);opacity:1}}@keyframes mdc-checkbox-checked-indeterminate-mixedmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(-45deg);opacity:0}to{transform:rotate(0deg);opacity:1}}@keyframes mdc-checkbox-indeterminate-checked-mixedmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(315deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-unchecked-mixedmark{0%{animation-timing-function:linear;transform:scaleX(1);opacity:1}32.8%,100%{transform:scaleX(0);opacity:0}}.mat-mdc-checkbox{display:inline-block;position:relative;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-touch-target,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__native-control,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__ripple,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-ripple::before,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__mixedmark{transition:none !important;animation:none !important}.mat-mdc-checkbox label{cursor:pointer}.mat-mdc-checkbox .mat-internal-form-field{color:var(--mat-checkbox-label-text-color, var(--mat-sys-on-surface));font-family:var(--mat-checkbox-label-text-font, var(--mat-sys-body-medium-font));line-height:var(--mat-checkbox-label-text-line-height, var(--mat-sys-body-medium-line-height));font-size:var(--mat-checkbox-label-text-size, var(--mat-sys-body-medium-size));letter-spacing:var(--mat-checkbox-label-text-tracking, var(--mat-sys-body-medium-tracking));font-weight:var(--mat-checkbox-label-text-weight, var(--mat-sys-body-medium-weight))}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive{pointer-events:auto}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive input{cursor:default}.mat-mdc-checkbox.mat-mdc-checkbox-disabled label{cursor:default;color:var(--mat-checkbox-disabled-label-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-checkbox label:empty{display:none}.mat-mdc-checkbox .mdc-checkbox__ripple{opacity:0}.mat-mdc-checkbox .mat-mdc-checkbox-ripple,.mdc-checkbox__ripple{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:50%;pointer-events:none}.mat-mdc-checkbox .mat-mdc-checkbox-ripple:not(:empty),.mdc-checkbox__ripple:not(:empty){transform:translateZ(0)}.mat-mdc-checkbox-ripple .mat-ripple-element{opacity:.1}.mat-mdc-checkbox-touch-target{position:absolute;top:50%;left:50%;height:48px;width:48px;transform:translate(-50%, -50%);display:var(--mat-checkbox-touch-target-display, block)}.mat-mdc-checkbox .mat-mdc-checkbox-ripple::before{border-radius:50%}.mdc-checkbox__native-control:focus~.mat-focus-indicator::before{content:""}\n']
-    }]
-  }], () => [], {
-    ariaLabel: [{
-      type: Input,
-      args: ["aria-label"]
-    }],
-    ariaLabelledby: [{
-      type: Input,
-      args: ["aria-labelledby"]
-    }],
-    ariaDescribedby: [{
-      type: Input,
-      args: ["aria-describedby"]
-    }],
-    ariaExpanded: [{
-      type: Input,
-      args: [{
-        alias: "aria-expanded",
-        transform: booleanAttribute
-      }]
-    }],
-    ariaControls: [{
-      type: Input,
-      args: ["aria-controls"]
-    }],
-    ariaOwns: [{
-      type: Input,
-      args: ["aria-owns"]
-    }],
-    id: [{
-      type: Input
-    }],
-    required: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    labelPosition: [{
-      type: Input
-    }],
-    name: [{
-      type: Input
-    }],
-    change: [{
-      type: Output
-    }],
-    indeterminateChange: [{
-      type: Output
-    }],
-    value: [{
-      type: Input
-    }],
-    disableRipple: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    _inputElement: [{
-      type: ViewChild,
-      args: ["input"]
-    }],
-    _labelElement: [{
-      type: ViewChild,
-      args: ["label"]
-    }],
-    tabIndex: [{
-      type: Input,
-      args: [{
-        transform: (value) => value == null ? void 0 : numberAttribute(value)
-      }]
-    }],
-    color: [{
-      type: Input
-    }],
-    disabledInteractive: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    checked: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    disabled: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    indeterminate: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }]
-  });
-})();
-var MatCheckboxModule = class _MatCheckboxModule {
-  static \u0275fac = function MatCheckboxModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatCheckboxModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _MatCheckboxModule,
-    imports: [MatCheckbox, MatCommonModule],
-    exports: [MatCheckbox, MatCommonModule]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    imports: [MatCheckbox, MatCommonModule, MatCommonModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCheckboxModule, [{
-    type: NgModule,
-    args: [{
-      imports: [MatCheckbox, MatCommonModule],
-      exports: [MatCheckbox, MatCommonModule]
-    }]
-  }], null, null);
-})();
-
 // node_modules/@angular/material/fesm2022/chips.mjs
-var _c016 = ["*", [["mat-chip-avatar"], ["", "matChipAvatar", ""]], [["mat-chip-trailing-icon"], ["", "matChipRemove", ""], ["", "matChipTrailingIcon", ""]]];
+var _c017 = ["*", [["mat-chip-avatar"], ["", "matChipAvatar", ""]], [["mat-chip-trailing-icon"], ["", "matChipRemove", ""], ["", "matChipTrailingIcon", ""]]];
 var _c111 = ["*", "mat-chip-avatar, [matChipAvatar]", "mat-chip-trailing-icon,[matChipRemove],[matChipTrailingIcon]"];
 function MatChip_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
@@ -94712,7 +94950,7 @@ var MatChip = class _MatChip {
     consts: [[1, "mat-mdc-chip-focus-overlay"], [1, "mdc-evolution-chip__cell", "mdc-evolution-chip__cell--primary"], ["matChipAction", "", 3, "isInteractive"], [1, "mdc-evolution-chip__graphic", "mat-mdc-chip-graphic"], [1, "mdc-evolution-chip__text-label", "mat-mdc-chip-action-label"], [1, "mat-mdc-chip-primary-focus-indicator", "mat-focus-indicator"], [1, "mdc-evolution-chip__cell", "mdc-evolution-chip__cell--trailing"]],
     template: function MatChip_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c016);
+        \u0275\u0275projectionDef(_c017);
         \u0275\u0275element(0, "span", 0);
         \u0275\u0275elementStart(1, "span", 1)(2, "span", 2);
         \u0275\u0275conditionalCreate(3, MatChip_Conditional_3_Template, 2, 0, "span", 3);
@@ -95001,7 +95239,7 @@ var MatChipOption = class _MatChipOption extends MatChip {
     consts: [[1, "mat-mdc-chip-focus-overlay"], [1, "mdc-evolution-chip__cell", "mdc-evolution-chip__cell--primary"], ["matChipAction", "", "role", "option", 3, "_allowFocusWhenDisabled"], [1, "mdc-evolution-chip__graphic", "mat-mdc-chip-graphic"], [1, "mdc-evolution-chip__text-label", "mat-mdc-chip-action-label"], [1, "mat-mdc-chip-primary-focus-indicator", "mat-focus-indicator"], [1, "mdc-evolution-chip__cell", "mdc-evolution-chip__cell--trailing"], [1, "cdk-visually-hidden", 3, "id"], [1, "mdc-evolution-chip__checkmark"], ["viewBox", "-2 -3 30 30", "focusable", "false", "aria-hidden", "true", 1, "mdc-evolution-chip__checkmark-svg"], ["fill", "none", "stroke", "currentColor", "d", "M1.73,12.91 8.1,19.28 22.79,4.59", 1, "mdc-evolution-chip__checkmark-path"]],
     template: function MatChipOption_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c016);
+        \u0275\u0275projectionDef(_c017);
         \u0275\u0275element(0, "span", 0);
         \u0275\u0275elementStart(1, "span", 1)(2, "button", 2);
         \u0275\u0275conditionalCreate(3, MatChipOption_Conditional_3_Template, 5, 0, "span", 3);
@@ -97396,7 +97634,7 @@ var MatPaginatorModule = class _MatPaginatorModule {
 })();
 
 // node_modules/@angular/material/fesm2022/progress-spinner.mjs
-var _c017 = ["determinateSpinner"];
+var _c018 = ["determinateSpinner"];
 function MatProgressSpinner_ng_template_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275namespaceSVG();
@@ -97525,7 +97763,7 @@ var MatProgressSpinner = class _MatProgressSpinner {
     selectors: [["mat-progress-spinner"], ["mat-spinner"]],
     viewQuery: function MatProgressSpinner_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c017, 5);
+        \u0275\u0275viewQuery(_c018, 5);
       }
       if (rf & 2) {
         let _t4;
@@ -97679,7 +97917,7 @@ var MatProgressSpinnerModule = class _MatProgressSpinnerModule {
 })();
 
 // node_modules/@angular/material/fesm2022/radio.mjs
-var _c018 = ["input"];
+var _c019 = ["input"];
 var _c112 = ["formField"];
 var _c28 = ["*"];
 var MatRadioChange = class {
@@ -98291,7 +98529,7 @@ var MatRadioButton = class _MatRadioButton {
     selectors: [["mat-radio-button"]],
     viewQuery: function MatRadioButton_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c018, 5);
+        \u0275\u0275viewQuery(_c019, 5);
         \u0275\u0275viewQuery(_c112, 7, ElementRef);
       }
       if (rf & 2) {
@@ -98518,7 +98756,7 @@ var MatRadioModule = class _MatRadioModule {
 })();
 
 // node_modules/@angular/material/fesm2022/slide-toggle.mjs
-var _c019 = ["switch"];
+var _c020 = ["switch"];
 var _c113 = ["*"];
 function MatSlideToggle_Conditional_10_Template(rf, ctx) {
   if (rf & 1) {
@@ -98733,7 +98971,7 @@ var MatSlideToggle = class _MatSlideToggle {
     selectors: [["mat-slide-toggle"]],
     viewQuery: function MatSlideToggle_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c019, 5);
+        \u0275\u0275viewQuery(_c020, 5);
       }
       if (rf & 2) {
         let _t4;
@@ -99031,7 +99269,7 @@ var MatSlideToggleModule = class _MatSlideToggleModule {
 })();
 
 // node_modules/@angular/material/fesm2022/slider.mjs
-var _c020 = ["knob"];
+var _c021 = ["knob"];
 var _c114 = ["valueIndicatorContainer"];
 function MatSliderVisualThumb_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
@@ -99312,7 +99550,7 @@ var MatSliderVisualThumb = class _MatSliderVisualThumb {
     viewQuery: function MatSliderVisualThumb_Query(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275viewQuery(MatRipple, 5);
-        \u0275\u0275viewQuery(_c020, 5);
+        \u0275\u0275viewQuery(_c021, 5);
         \u0275\u0275viewQuery(_c114, 5);
       }
       if (rf & 2) {
@@ -100998,7 +101236,7 @@ var MatSliderModule = class _MatSliderModule {
 })();
 
 // libs/components/src/lib/action-icon.component.ts
-var _c021 = ["*"];
+var _c022 = ["*"];
 function ActionIconComponent_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div")(1, "icon");
@@ -101036,7 +101274,7 @@ var _ActionIconComponent = class _ActionIconComponent {
 _ActionIconComponent.\u0275fac = function ActionIconComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ActionIconComponent)();
 };
-_ActionIconComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ActionIconComponent, selectors: [["action-icon"]], inputs: { icon: [1, "icon"], className: [1, "className"], content: [1, "content"], loading: [1, "loading"], disabled: [1, "disabled"], state: [1, "state"] }, standalone: false, ngContentSelectors: _c021, decls: 6, vars: 8, consts: [["icon", "", "matRipple", "", "title", "", 1, "relative", 3, "disabled"], ["root", "", 3, "className", "icon"], [3, "class"], [1, "loader", "center"], [3, "diameter"]], template: function ActionIconComponent_Template(rf, ctx) {
+_ActionIconComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ActionIconComponent, selectors: [["action-icon"]], inputs: { icon: [1, "icon"], className: [1, "className"], content: [1, "content"], loading: [1, "loading"], disabled: [1, "disabled"], state: [1, "state"] }, standalone: false, ngContentSelectors: _c022, decls: 6, vars: 8, consts: [["icon", "", "matRipple", "", "title", "", 1, "relative", 3, "disabled"], ["root", "", 3, "className", "icon"], [3, "class"], [1, "loader", "center"], [3, "diameter"]], template: function ActionIconComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projectionDef();
     \u0275\u0275elementStart(0, "button", 0)(1, "icon", 1);
@@ -101477,7 +101715,7 @@ var SanitizePipe = _SanitizePipe;
 })();
 
 // libs/components/src/lib/custom-tooltip.component.ts
-var _c022 = ["customTooltip", ""];
+var _c023 = ["customTooltip", ""];
 var _c115 = ["*"];
 function CustomTooltipComponent_ng_template_1_Case_1_ng_container_0_Template(rf, ctx) {
   if (rf & 1) {
@@ -101662,7 +101900,7 @@ _CustomTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent(
   if (rf & 2) {
     \u0275\u0275queryAdvance();
   }
-}, inputs: { x_pos: [1, "xPosition", "x_pos"], y_pos: [1, "yPosition", "y_pos"], content: [1, "content"], data: [1, "data"], backdrop: [1, "backdrop"], hover: [1, "hover"], delay: [1, "delay"] }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c022, ngContentSelectors: _c115, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["custom-tooltip", "", 1, "relative", "print:hidden"], [3, "innerHTML"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function CustomTooltipComponent_Template(rf, ctx) {
+}, inputs: { x_pos: [1, "xPosition", "x_pos"], y_pos: [1, "yPosition", "y_pos"], content: [1, "content"], data: [1, "data"], backdrop: [1, "backdrop"], hover: [1, "hover"], delay: [1, "delay"] }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c023, ngContentSelectors: _c115, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["custom-tooltip", "", 1, "relative", "print:hidden"], [3, "innerHTML"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function CustomTooltipComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projectionDef();
     \u0275\u0275projection(0);
@@ -101701,191 +101939,6 @@ var CustomTooltipComponent = _CustomTooltipComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CustomTooltipComponent, { className: "CustomTooltipComponent", filePath: "libs/components/src/lib/custom-tooltip.component.ts", lineNumber: 65 });
 })();
 
-// libs/components/src/lib/settings-toggle.component.ts
-var _c023 = ["*"];
-function SettingsToggleComponent_Conditional_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "icon", 2);
-    \u0275\u0275text(1, "info");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("matTooltip", ctx_r0.info());
-  }
-}
-function SettingsToggleComponent_Conditional_6_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "div", 3);
-  }
-}
-function SettingsToggleComponent_Conditional_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 4)(1, "div", 6)(2, "div", 7)(3, "icon");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd()()()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275classProp("bg-base-300", !ctx_r0.value)("bg-info", ctx_r0.value)("!border-info", ctx_r0.value);
-    \u0275\u0275advance();
-    \u0275\u0275classProp("left-1", !ctx_r0.value)("left-5", ctx_r0.value)("bg-base-400", !ctx_r0.value)("bg-info-light", ctx_r0.value);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r0.value ? "done" : "remove");
-  }
-}
-function SettingsToggleComponent_Conditional_8_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-checkbox", 8);
-    \u0275\u0275twoWayListener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r0 = \u0275\u0275nextContext();
-      \u0275\u0275twoWayBindingSet(ctx_r0.value, $event) || (ctx_r0.value = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275listener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r0 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r0.setValue($event));
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275twoWayProperty("ngModel", ctx_r0.value);
-  }
-}
-var _SettingsToggleComponent = class _SettingsToggleComponent {
-  constructor() {
-    this.toggle = input(void 0);
-    this.name = input(void 0);
-    this.info = input(void 0);
-    this.registerOnChange = (fn3) => this._onChange = fn3;
-    this.registerOnTouched = (fn3) => this._onTouch = fn3;
-  }
-  /**
-   * Update the form field value
-   * @param new_value New value to set on the form field
-   */
-  setValue(new_value) {
-    this.value = new_value;
-    if (this._onChange)
-      this._onChange(new_value);
-  }
-  /* istanbul ignore next */
-  /**
-   * Update local value when form control value is changed
-   * @param value The new value for the component
-   */
-  writeValue(value) {
-    this.value = value;
-  }
-};
-_SettingsToggleComponent.\u0275fac = function SettingsToggleComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _SettingsToggleComponent)();
-};
-_SettingsToggleComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SettingsToggleComponent, selectors: [["settings-toggle"]], inputs: { toggle: [1, "toggle"], name: [1, "name"], info: [1, "info"] }, features: [\u0275\u0275ProvidersFeature([
-  {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => _SettingsToggleComponent),
-    multi: true
-  }
-])], ngContentSelectors: _c023, decls: 9, vars: 8, consts: [["matRipple", "", 1, "relative", "flex", "flex-1", "items-center", "space-x-2", "overflow-hidden", "rounded", "border", "py-1", "pl-2", "pr-1", "hover:bg-base-200", 3, "click"], [1, "z-10", "flex", "flex-1", "items-center", "space-x-2", "p-2", "text-left"], [3, "matTooltip"], [1, "absolute", "inset-0", "z-0", "!m-0", "bg-info", "opacity-10"], [1, "px-2"], [1, "pointer-events-none", 3, "ngModel"], ["toggle", "", 1, "relative", "h-8", "w-12", "rounded-full", "border-2", "border-base-400"], [1, "absolute", "top-1/2", "flex", "h-6", "w-6", "-translate-x-0.5", "-translate-y-1/2", "items-center", "justify-center", "rounded-full", "text-black", "shadow"], [1, "pointer-events-none", 3, "ngModelChange", "ngModel"]], template: function SettingsToggleComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275projectionDef();
-    \u0275\u0275elementStart(0, "button", 0);
-    \u0275\u0275listener("click", function SettingsToggleComponent_Template_button_click_0_listener() {
-      return ctx.setValue(!ctx.value);
-    });
-    \u0275\u0275elementStart(1, "div", 1)(2, "div");
-    \u0275\u0275text(3);
-    \u0275\u0275projection(4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(5, SettingsToggleComponent_Conditional_5_Template, 2, 1, "icon", 2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(6, SettingsToggleComponent_Conditional_6_Template, 1, 0, "div", 3);
-    \u0275\u0275conditionalCreate(7, SettingsToggleComponent_Conditional_7_Template, 5, 15, "div", 4)(8, SettingsToggleComponent_Conditional_8_Template, 1, 1, "mat-checkbox", 5);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275classProp("border-base-300", !ctx.value)("border-info", ctx.value);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", ctx.name(), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx.info() ? 5 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.value ? 6 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.toggle() ? 7 : 8);
-  }
-}, dependencies: [MatCheckboxModule, MatCheckbox, FormsModule, NgControlStatus, NgModel, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n}\n[toggle][_ngcontent-%COMP%] {\n  transition: background 200ms, left 200ms;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */"] });
-var SettingsToggleComponent = _SettingsToggleComponent;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SettingsToggleComponent, [{
-    type: Component,
-    args: [{ selector: "settings-toggle", template: `
-        <button
-            matRipple
-            class="relative flex flex-1 items-center space-x-2 overflow-hidden rounded border py-1 pl-2 pr-1 hover:bg-base-200"
-            [class.border-base-300]="!value"
-            [class.border-info]="value"
-            (click)="setValue(!value)"
-        >
-            <div class="z-10 flex flex-1 items-center space-x-2 p-2 text-left">
-                <div>
-                    {{ name() }}
-                    <ng-content></ng-content>
-                </div>
-                @if (info()) {
-                    <icon [matTooltip]="info()">info</icon>
-                }
-            </div>
-            @if (value) {
-                <div class="absolute inset-0 z-0 !m-0 bg-info opacity-10"></div>
-            }
-            @if (toggle()) {
-                <div class="px-2">
-                    <div
-                        toggle
-                        class="relative h-8 w-12 rounded-full border-2 border-base-400"
-                        [class.bg-base-300]="!value"
-                        [class.bg-info]="value"
-                        [class.!border-info]="value"
-                    >
-                        <div
-                            class="absolute top-1/2 flex h-6 w-6 -translate-x-0.5 -translate-y-1/2 items-center justify-center rounded-full text-black shadow"
-                            [class.left-1]="!value"
-                            [class.left-5]="value"
-                            [class.bg-base-400]="!value"
-                            [class.bg-info-light]="value"
-                        >
-                            <icon>{{ value ? 'done' : 'remove' }}</icon>
-                        </div>
-                    </div>
-                </div>
-            } @else {
-                <mat-checkbox
-                    [(ngModel)]="value"
-                    (ngModelChange)="setValue($event)"
-                    class="pointer-events-none"
-                ></mat-checkbox>
-            }
-        </button>
-    `, providers: [
-      {
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => SettingsToggleComponent),
-        multi: true
-      }
-    ], imports: [MatCheckboxModule, FormsModule, IconComponent], styles: ["/* angular:styles/component:css;09d472dfc67150cf01347a580874515fc3cc343b61a90041f2b167ad15a01cf4;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/settings-toggle.component.ts */\n:host {\n  display: flex;\n}\n[toggle] {\n  transition: background 200ms, left 200ms;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */\n"] }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SettingsToggleComponent, { className: "SettingsToggleComponent", filePath: "libs/components/src/lib/settings-toggle.component.ts", lineNumber: 83 });
-})();
-
 // libs/components/src/lib/accessibility-tooltip.component.ts
 function AccessibilityTooltipComponent_Conditional_8_Template(rf, ctx) {
   if (rf & 1) {
@@ -101911,7 +101964,7 @@ function AccessibilityTooltipComponent_Conditional_8_Template(rf, ctx) {
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 3, "COMMON.DARK_MODE"));
   }
 }
-function AccessibilityTooltipComponent_Conditional_16_Template(rf, ctx) {
+function AccessibilityTooltipComponent_Conditional_23_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 9);
@@ -101922,7 +101975,7 @@ function AccessibilityTooltipComponent_Conditional_16_Template(rf, ctx) {
     \u0275\u0275text(5, "A");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(6, "mat-slider", 12)(7, "input", 13);
-    \u0275\u0275listener("ngModelChange", function AccessibilityTooltipComponent_Conditional_16_Template_input_ngModelChange_7_listener($event) {
+    \u0275\u0275listener("ngModelChange", function AccessibilityTooltipComponent_Conditional_23_Template_input_ngModelChange_7_listener($event) {
       \u0275\u0275restoreView(_r3);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.applySetting("font_size", $event));
@@ -101948,24 +102001,38 @@ function AccessibilityTooltipComponent_Conditional_16_Template(rf, ctx) {
   }
 }
 var _AccessibilityTooltipComponent = class _AccessibilityTooltipComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._data = inject(CustomTooltipData);
+    this._settings = inject(SettingsService);
+    this.accessible = signal(false);
+    this.locatable = signal(false);
+    this.applySetting = (n, v3) => this.timeout("apply_setting", () => {
+      this._settings.saveUserSetting(n, v3);
+      if (n === "accessible") {
+        this.accessible.set(v3);
+      }
+    }, 500);
+    this.close = () => this._data?.close();
+    this.setLocatable = (l) => {
+      this._settings.updateLocatable(l);
+      this.locatable.set(l);
+    };
+  }
   get dark_mode() {
     return this._settings.theme === "dark";
   }
   get can_change_dark_mode() {
     return !!this._settings.get("app.allow_dark_mode");
   }
-  get accessible() {
-    return !!this._settings.get("accessible");
-  }
   get font_size() {
     return this._settings.get("font_size") || 16;
   }
-  constructor() {
-    super();
-    this._data = inject(CustomTooltipData);
-    this._settings = inject(SettingsService);
-    this.applySetting = (n, v3) => this.timeout("apply_setting", () => this._settings.saveUserSetting(n, v3), 500);
-    this.close = () => this._data?.close();
+  async ngOnInit() {
+    this.accessible.set(!!this._settings.get("accessible"));
+    this.subscription("user", current_user.subscribe((u3) => {
+      this.locatable.set(u3.locatable);
+    }));
   }
   setDarkMode(state2) {
     const theme = this._settings.theme;
@@ -101975,10 +102042,13 @@ var _AccessibilityTooltipComponent = class _AccessibilityTooltipComponent extend
       this._settings.setTheme("light");
   }
 };
-_AccessibilityTooltipComponent.\u0275fac = function AccessibilityTooltipComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _AccessibilityTooltipComponent)();
-};
-_AccessibilityTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AccessibilityTooltipComponent, selectors: [["accessibility-tooltip"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 17, vars: 10, consts: [[1, "relative", "-right-1", "-top-12", "flex", "max-h-[65vh]", "w-[20rem]", "flex-col", "overflow-auto", "rounded", "bg-base-100", "pb-3", "shadow"], ["matRipple", "", 1, "flex", "items-center", "space-x-2", "border-b", "border-base-300", "px-2", "py-3", 3, "click"], [1, "text-2xl"], [1, ""], [1, "space-y-2", "p-2"], [3, "ngModel", "toggle"], [3, "ngModelChange", "ngModel", "toggle"], [1, "flex", "items-center", "space-x-2"], [1, "-ml-2", "text-xl"], [1, "bg-base-200", "px-8", "py-4", "text-center"], [1, "flex", "items-center", "space-x-4", "px-4"], [1, "text-sm"], [1, "w-1/2", "flex-1", "text-[16px]", 3, "min", "max", "step"], ["matSliderThumb", "", 1, "text-[16px]", 3, "ngModelChange", "ngModel"], [1, "my-2", "rounded", "bg-base-300", "px-2", "py-1", "text-base", "text-white"]], template: function AccessibilityTooltipComponent_Template(rf, ctx) {
+_AccessibilityTooltipComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275AccessibilityTooltipComponent_BaseFactory;
+  return function AccessibilityTooltipComponent_Factory(__ngFactoryType__) {
+    return (\u0275AccessibilityTooltipComponent_BaseFactory || (\u0275AccessibilityTooltipComponent_BaseFactory = \u0275\u0275getInheritedFactory(_AccessibilityTooltipComponent)))(__ngFactoryType__ || _AccessibilityTooltipComponent);
+  };
+})();
+_AccessibilityTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AccessibilityTooltipComponent, selectors: [["accessibility-tooltip"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 24, vars: 15, consts: [[1, "relative", "-right-1", "-top-12", "flex", "max-h-[65vh]", "w-[20rem]", "flex-col", "overflow-auto", "rounded", "bg-base-100", "pb-3", "shadow"], ["matRipple", "", 1, "flex", "items-center", "space-x-2", "border-b", "border-base-300", "px-2", "py-3", 3, "click"], [1, "text-2xl"], [1, ""], [1, "space-y-2", "p-2"], [3, "ngModel", "toggle"], [3, "ngModelChange", "ngModel", "toggle"], [1, "flex", "items-center", "space-x-2"], [1, "-ml-2", "text-xl"], [1, "bg-base-200", "px-8", "py-4", "text-center"], [1, "flex", "items-center", "space-x-4", "px-4"], [1, "text-sm"], [1, "w-1/2", "flex-1", "text-[16px]", 3, "min", "max", "step"], ["matSliderThumb", "", 1, "text-[16px]", 3, "ngModelChange", "ngModel"], [1, "my-2", "rounded", "bg-base-300", "px-2", "py-1", "text-base", "text-white"]], template: function AccessibilityTooltipComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
     \u0275\u0275listener("click", function AccessibilityTooltipComponent_Template_div_click_1_listener() {
@@ -101995,29 +102065,44 @@ _AccessibilityTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineCom
     \u0275\u0275conditionalCreate(8, AccessibilityTooltipComponent_Conditional_8_Template, 7, 5, "settings-toggle", 5);
     \u0275\u0275elementStart(9, "settings-toggle", 6);
     \u0275\u0275listener("ngModelChange", function AccessibilityTooltipComponent_Template_settings_toggle_ngModelChange_9_listener($event) {
-      return ctx.applySetting("accessible", $event);
+      return ctx.setLocatable($event);
     });
     \u0275\u0275elementStart(10, "div", 7)(11, "icon", 8);
-    \u0275\u0275text(12, "playlist_add");
+    \u0275\u0275text(12, "emergency_share");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(13, "div");
     \u0275\u0275text(14);
     \u0275\u0275pipe(15, "translate");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(16, "settings-toggle", 6);
+    \u0275\u0275listener("ngModelChange", function AccessibilityTooltipComponent_Template_settings_toggle_ngModelChange_16_listener($event) {
+      return ctx.applySetting("accessible", $event);
+    });
+    \u0275\u0275elementStart(17, "div", 7)(18, "icon", 8);
+    \u0275\u0275text(19, "playlist_add");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(20, "div");
+    \u0275\u0275text(21);
+    \u0275\u0275pipe(22, "translate");
     \u0275\u0275elementEnd()()()();
-    \u0275\u0275conditionalCreate(16, AccessibilityTooltipComponent_Conditional_16_Template, 12, 8);
+    \u0275\u0275conditionalCreate(23, AccessibilityTooltipComponent_Conditional_23_Template, 12, 8);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 6, "COMMON.CONTROLS_ACCESSIBILITY"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 9, "COMMON.CONTROLS_ACCESSIBILITY"), " ");
     \u0275\u0275advance(3);
     \u0275\u0275conditional(ctx.can_change_dark_mode ? 8 : -1);
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", ctx.accessible)("toggle", true);
+    \u0275\u0275property("ngModel", ctx.locatable())("toggle", true);
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(15, 8, "COMMON.TEXT_SIZE"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(15, 11, "COMMON.LOCATABLE"));
     \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx.accessible ? 16 : -1);
+    \u0275\u0275property("ngModel", ctx.accessible())("toggle", true);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(22, 13, "COMMON.TEXT_SIZE"));
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(ctx.accessible() ? 23 : -1);
   }
 }, dependencies: [DefaultValueAccessor, NgControlStatus, NgModel, MatRipple, MatSlider, MatSliderThumb, IconComponent, SettingsToggleComponent, TranslatePipe], encapsulation: 2 });
 var AccessibilityTooltipComponent = _AccessibilityTooltipComponent;
@@ -102052,7 +102137,17 @@ var AccessibilityTooltipComponent = _AccessibilityTooltipComponent;
                     </settings-toggle>
                 }
                 <settings-toggle
-                    [ngModel]="accessible"
+                    [ngModel]="locatable()"
+                    (ngModelChange)="setLocatable($event)"
+                    [toggle]="true"
+                >
+                    <div class="flex items-center space-x-2">
+                        <icon class="-ml-2 text-xl">emergency_share</icon>
+                        <div>{{ 'COMMON.LOCATABLE' | translate }}</div>
+                    </div>
+                </settings-toggle>
+                <settings-toggle
+                    [ngModel]="accessible()"
                     (ngModelChange)="applySetting('accessible', $event)"
                     [toggle]="true"
                 >
@@ -102062,7 +102157,7 @@ var AccessibilityTooltipComponent = _AccessibilityTooltipComponent;
                     </div>
                 </settings-toggle>
             </div>
-            @if (accessible) {
+            @if (accessible()) {
                 <div class="bg-base-200 px-8 py-4 text-center">
                     {{ 'COMMON.TEXT_SIZE_MSG' | translate }}
                 </div>
@@ -102091,10 +102186,10 @@ var AccessibilityTooltipComponent = _AccessibilityTooltipComponent;
             }
         </div>
     `, standalone: false }]
-  }], () => [], null);
+  }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AccessibilityTooltipComponent, { className: "AccessibilityTooltipComponent", filePath: "libs/components/src/lib/accessibility-tooltip.component.ts", lineNumber: 77 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AccessibilityTooltipComponent, { className: "AccessibilityTooltipComponent", filePath: "libs/components/src/lib/accessibility-tooltip.component.ts", lineNumber: 87 });
 })();
 
 // libs/components/src/lib/attached-resource-config-modal.component.ts
@@ -107706,7 +107801,7 @@ _GlobalBannerComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
   if (rf & 2) {
     \u0275\u0275conditional(!\u0275\u0275pipeBind1(1, 1, ctx.has_been_closed) && \u0275\u0275pipeBind1(2, 3, ctx.banner) ? 0 : -1);
   }
-}, dependencies: [CommonModule, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
+}, dependencies: [CommonModule, AsyncPipe, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
 var GlobalBannerComponent = _GlobalBannerComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GlobalBannerComponent, [{
@@ -107734,11 +107829,11 @@ var GlobalBannerComponent = _GlobalBannerComponent;
                 </button>
             </div>
         }
-    `, imports: [CommonModule], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
+    `, imports: [CommonModule, IconComponent], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 50 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 51 });
 })();
 
 // libs/components/src/lib/global-loading.component.ts
@@ -107767,17 +107862,17 @@ function GlobalLoadingComponent_Conditional_1_Template(rf, ctx) {
 }
 var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler {
   constructor() {
-    super();
+    super(...arguments);
     this._org = inject(OrganisationService);
     this._settings = inject(SettingsService);
-    this.loading = signal(false);
-    this.online = signal(false);
+    this.loading = signal(true);
+    this.online = signal(true);
   }
   async ngOnInit() {
     this.loading.set(true);
-    this.online.set(vs());
     await firstTruthyValueFrom(this._org.initialised);
     await firstTruthyValueFrom(this._settings.initialised);
+    this.online.set(vs());
     this.interval("has_token", () => {
       this.online.set(vs());
       if (!ve() || !Y2())
@@ -107788,10 +107883,13 @@ var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler
     }, 1e3);
   }
 };
-_GlobalLoadingComponent.\u0275fac = function GlobalLoadingComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _GlobalLoadingComponent)();
-};
-_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-50", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-40", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
+_GlobalLoadingComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275GlobalLoadingComponent_BaseFactory;
+  return function GlobalLoadingComponent_Factory(__ngFactoryType__) {
+    return (\u0275GlobalLoadingComponent_BaseFactory || (\u0275GlobalLoadingComponent_BaseFactory = \u0275\u0275getInheritedFactory(_GlobalLoadingComponent)))(__ngFactoryType__ || _GlobalLoadingComponent);
+  };
+})();
+_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-[9999]", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-[9998]", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, GlobalLoadingComponent_Conditional_0_Template, 3, 3, "div", 0);
     \u0275\u0275conditionalCreate(1, GlobalLoadingComponent_Conditional_1_Template, 2, 1, "div", 1);
@@ -107818,7 +107916,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
     args: [{ selector: "global-loading", template: `
         @if (!online()) {
             <div
-                class="fixed bottom-2 left-1/2 z-50 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
+                class="fixed bottom-2 left-1/2 z-[9999] -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
             >
                 {{ 'COMMON.SERVER_DOWN' | translate }}
             </div>
@@ -107826,7 +107924,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
         @if (loading()) {
             <div
                 loader
-                class="pointer-events-auto fixed inset-0 z-40 flex items-center justify-center bg-base-100"
+                class="pointer-events-auto fixed inset-0 z-[9998] flex items-center justify-center bg-base-100"
             >
                 <mat-spinner [diameter]="64"></mat-spinner>
             </div>
@@ -107841,7 +107939,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
 }
 /*# sourceMappingURL=global-loading.component.css.map */
 `] }]
-  }], () => [], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalLoadingComponent, { className: "GlobalLoadingComponent", filePath: "libs/components/src/lib/global-loading.component.ts", lineNumber: 46 });
@@ -109097,17 +109195,17 @@ var IndoorMapsComponent = _IndoorMapsComponent;
 })();
 
 // node_modules/@placeos/svg-viewer/dist/index.es.js
-var ue = function(e, n) {
-  return ue = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r) {
+var fe2 = function(e, n) {
+  return fe2 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r) {
     t.__proto__ = r;
   } || function(t, r) {
     for (var o in r) Object.prototype.hasOwnProperty.call(r, o) && (t[o] = r[o]);
-  }, ue(e, n);
+  }, fe2(e, n);
 };
-function R3(e, n) {
+function V3(e, n) {
   if (typeof n != "function" && n !== null)
     throw new TypeError("Class extends value " + String(n) + " is not a constructor or null");
-  ue(e, n);
+  fe2(e, n);
   function t() {
     this.constructor = e;
   }
@@ -109140,7 +109238,7 @@ function pt3(e, n, t, r) {
     l((r = r.apply(e, n || [])).next());
   });
 }
-function Ve(e, n) {
+function Re(e, n) {
   var t = { label: 0, sent: function() {
     if (i[0] & 1) throw i[1];
     return i[1];
@@ -109200,7 +109298,7 @@ function Ve(e, n) {
     return { value: l[0] ? l[1] : void 0, done: true };
   }
 }
-function I4(e) {
+function q2(e) {
   var n = typeof Symbol == "function" && Symbol.iterator, t = n && e[n], r = 0;
   if (t) return t.call(e);
   if (e && typeof e.length == "number") return {
@@ -109227,13 +109325,13 @@ function Y4(e, n) {
   }
   return i;
 }
-function ne(e, n, t) {
+function re(e, n, t) {
   if (t || arguments.length === 2) for (var r = 0, o = n.length, i; r < o; r++)
     (i || !(r in n)) && (i || (i = Array.prototype.slice.call(n, 0, r)), i[r] = n[r]);
   return e.concat(i || Array.prototype.slice.call(n));
 }
-function T3(e) {
-  return this instanceof T3 ? (this.v = e, this) : new T3(e);
+function M4(e) {
+  return this instanceof M4 ? (this.v = e, this) : new M4(e);
 }
 function mt3(e, n, t) {
   if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
@@ -109261,7 +109359,7 @@ function mt3(e, n, t) {
     }
   }
   function l(f2) {
-    f2.value instanceof T3 ? Promise.resolve(f2.value.v).then(u3, v3) : d2(i[0][2], f2);
+    f2.value instanceof M4 ? Promise.resolve(f2.value.v).then(u3, v3) : d2(i[0][2], f2);
   }
   function u3(f2) {
     a("next", f2);
@@ -109276,7 +109374,7 @@ function mt3(e, n, t) {
 function gt3(e) {
   if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
   var n = e[Symbol.asyncIterator], t;
-  return n ? n.call(e) : (e = typeof I4 == "function" ? I4(e) : e[Symbol.iterator](), t = {}, r("next"), r("throw"), r("return"), t[Symbol.asyncIterator] = function() {
+  return n ? n.call(e) : (e = typeof q2 == "function" ? q2(e) : e[Symbol.iterator](), t = {}, r("next"), r("throw"), r("return"), t[Symbol.asyncIterator] = function() {
     return this;
   }, t);
   function r(i) {
@@ -109295,13 +109393,13 @@ function gt3(e) {
 function h(e) {
   return typeof e == "function";
 }
-function je(e) {
+function Fe(e) {
   var n = function(r) {
     Error.call(r), r.stack = new Error().stack;
   }, t = e(n);
   return t.prototype = Object.create(Error.prototype), t.prototype.constructor = t, t;
 }
-var ae2 = je(function(e) {
+var le2 = Fe(function(e) {
   return function(t) {
     e(this), this.message = t ? t.length + ` errors occurred during unsubscription:
 ` + t.map(function(r, o) {
@@ -109310,7 +109408,7 @@ var ae2 = je(function(e) {
   `) : "", this.name = "UnsubscriptionError", this.errors = t;
   };
 });
-function fe2(e, n) {
+function he2(e, n) {
   if (e) {
     var t = e.indexOf(n);
     0 <= t && e.splice(t, 1);
@@ -109328,7 +109426,7 @@ var G3 = function() {
       if (s)
         if (this._parentage = null, Array.isArray(s))
           try {
-            for (var c2 = I4(s), a = c2.next(); !a.done; a = c2.next()) {
+            for (var c2 = q2(s), a = c2.next(); !a.done; a = c2.next()) {
               var l = a.value;
               l.remove(this);
             }
@@ -109348,18 +109446,18 @@ var G3 = function() {
         try {
           u3();
         } catch (y3) {
-          i = y3 instanceof ae2 ? y3.errors : [y3];
+          i = y3 instanceof le2 ? y3.errors : [y3];
         }
       var v3 = this._finalizers;
       if (v3) {
         this._finalizers = null;
         try {
-          for (var d2 = I4(v3), f2 = d2.next(); !f2.done; f2 = d2.next()) {
+          for (var d2 = q2(v3), f2 = d2.next(); !f2.done; f2 = d2.next()) {
             var p = f2.value;
             try {
               Ce(p);
             } catch (y3) {
-              i = i ?? [], y3 instanceof ae2 ? i = ne(ne([], Y4(i)), Y4(y3.errors)) : i.push(y3);
+              i = i ?? [], y3 instanceof le2 ? i = re(re([], Y4(i)), Y4(y3.errors)) : i.push(y3);
             }
           }
         } catch (y3) {
@@ -109373,7 +109471,7 @@ var G3 = function() {
         }
       }
       if (i)
-        throw new ae2(i);
+        throw new le2(i);
     }
   }, e.prototype.add = function(n) {
     var t;
@@ -109396,16 +109494,16 @@ var G3 = function() {
     this._parentage = Array.isArray(t) ? (t.push(n), t) : t ? [t, n] : n;
   }, e.prototype._removeParent = function(n) {
     var t = this._parentage;
-    t === n ? this._parentage = null : Array.isArray(t) && fe2(t, n);
+    t === n ? this._parentage = null : Array.isArray(t) && he2(t, n);
   }, e.prototype.remove = function(n) {
     var t = this._finalizers;
-    t && fe2(t, n), n instanceof e && n._removeParent(this);
+    t && he2(t, n), n instanceof e && n._removeParent(this);
   }, e.EMPTY = function() {
     var n = new e();
     return n.closed = true, n;
   }(), e;
 }();
-var Fe = G3.EMPTY;
+var je = G3.EMPTY;
 function Be(e) {
   return e instanceof G3 || e && "closed" in e && h(e.remove) && h(e.add) && h(e.unsubscribe);
 }
@@ -109419,7 +109517,7 @@ var bt3 = {
   setTimeout: function(e, n) {
     for (var t = [], r = 2; r < arguments.length; r++)
       t[r - 2] = arguments[r];
-    return setTimeout.apply(void 0, ne([e, n], Y4(t)));
+    return setTimeout.apply(void 0, re([e, n], Y4(t)));
   },
   clearTimeout: function(e) {
     return clearTimeout(e);
@@ -109431,19 +109529,19 @@ function Ne(e) {
     throw e;
   });
 }
-function he2() {
+function de2() {
 }
-function ee(e) {
+function te2(e) {
   e();
 }
-var be2 = function(e) {
-  R3(n, e);
+var we2 = function(e) {
+  V3(n, e);
   function n(t) {
     var r = e.call(this) || this;
     return r.isStopped = false, t ? (r.destination = t, Be(t) && t.add(r)) : r.destination = St3, r;
   }
   return n.create = function(t, r, o) {
-    return new de2(t, r, o);
+    return new ye(t, r, o);
   }, n.prototype.next = function(t) {
     this.isStopped || this._next(t);
   }, n.prototype.error = function(t) {
@@ -109478,7 +109576,7 @@ var wt3 = function() {
       try {
         t.next(n);
       } catch (r) {
-        Z4(r);
+        K3(r);
       }
   }, e.prototype.error = function(n) {
     var t = this.partialObserver;
@@ -109486,22 +109584,22 @@ var wt3 = function() {
       try {
         t.error(n);
       } catch (r) {
-        Z4(r);
+        K3(r);
       }
     else
-      Z4(n);
+      K3(n);
   }, e.prototype.complete = function() {
     var n = this.partialObserver;
     if (n.complete)
       try {
         n.complete();
       } catch (t) {
-        Z4(t);
+        K3(t);
       }
   }, e;
 }();
-var de2 = function(e) {
-  R3(n, e);
+var ye = function(e) {
+  V3(n, e);
   function n(t, r, o) {
     var i = e.call(this) || this, s;
     return h(t) || !t ? s = {
@@ -109511,8 +109609,8 @@ var de2 = function(e) {
     } : s = t, i.destination = new wt3(s), i;
   }
   return n;
-}(be2);
-function Z4(e) {
+}(we2);
+function K3(e) {
   Ne(e);
 }
 function xt3(e) {
@@ -109520,11 +109618,11 @@ function xt3(e) {
 }
 var St3 = {
   closed: true,
-  next: he2,
+  next: de2,
   error: xt3,
-  complete: he2
+  complete: de2
 };
-var we2 = function() {
+var xe2 = function() {
   return typeof Symbol == "function" && Symbol.observable || "@@observable";
 }();
 function Ue(e) {
@@ -109545,8 +109643,8 @@ var g2 = function() {
     var t = new e();
     return t.source = this, t.operator = n, t;
   }, e.prototype.subscribe = function(n, t, r) {
-    var o = this, i = Lt2(n) ? n : new de2(n, t, r);
-    return ee(function() {
+    var o = this, i = Lt2(n) ? n : new ye(n, t, r);
+    return te2(function() {
       var s = o, c2 = s.operator, a = s.source;
       i.add(c2 ? c2.call(i, a) : a ? o._subscribe(i) : o._trySubscribe(i));
     }), i;
@@ -109559,7 +109657,7 @@ var g2 = function() {
   }, e.prototype.forEach = function(n, t) {
     var r = this;
     return t = Oe2(t), new t(function(o, i) {
-      var s = new de2({
+      var s = new ye({
         next: function(c2) {
           try {
             n(c2);
@@ -109575,7 +109673,7 @@ var g2 = function() {
   }, e.prototype._subscribe = function(n) {
     var t;
     return (t = this.source) === null || t === void 0 ? void 0 : t.subscribe(n);
-  }, e.prototype[we2] = function() {
+  }, e.prototype[xe2] = function() {
     return this;
   }, e.prototype.pipe = function() {
     for (var n = [], t = 0; t < arguments.length; t++)
@@ -109605,12 +109703,12 @@ function At3(e) {
   return e && h(e.next) && h(e.error) && h(e.complete);
 }
 function Lt2(e) {
-  return e && e instanceof be2 || At3(e) && Be(e);
+  return e && e instanceof we2 || At3(e) && Be(e);
 }
 function $t3(e) {
   return h(e?.lift);
 }
-function V3(e) {
+function R3(e) {
   return function(n) {
     if ($t3(n))
       return n.lift(function(t) {
@@ -109627,7 +109725,7 @@ function O2(e, n, t, r, o) {
   return new zt3(e, n, t, r, o);
 }
 var zt3 = function(e) {
-  R3(n, e);
+  V3(n, e);
   function n(t, r, o, i, s, c2) {
     var a = e.call(this, t) || this;
     return a.onFinalize = s, a.shouldUnsubscribe = c2, a._next = r ? function(l) {
@@ -109661,32 +109759,32 @@ var zt3 = function(e) {
       e.prototype.unsubscribe.call(this), !r && ((t = this.onFinalize) === null || t === void 0 || t.call(this));
     }
   }, n;
-}(be2);
-var Ct2 = je(function(e) {
+}(we2);
+var Ct2 = Fe(function(e) {
   return function() {
     e(this), this.name = "ObjectUnsubscribedError", this.message = "object unsubscribed";
   };
 });
-var xe2 = function(e) {
-  R3(n, e);
+var Se2 = function(e) {
+  V3(n, e);
   function n() {
     var t = e.call(this) || this;
     return t.closed = false, t.currentObservers = null, t.observers = [], t.isStopped = false, t.hasError = false, t.thrownError = null, t;
   }
   return n.prototype.lift = function(t) {
-    var r = new Me(this, this);
+    var r = new Te(this, this);
     return r.operator = t, r;
   }, n.prototype._throwIfClosed = function() {
     if (this.closed)
       throw new Ct2();
   }, n.prototype.next = function(t) {
     var r = this;
-    ee(function() {
+    te2(function() {
       var o, i;
       if (r._throwIfClosed(), !r.isStopped) {
         r.currentObservers || (r.currentObservers = Array.from(r.observers));
         try {
-          for (var s = I4(r.currentObservers), c2 = s.next(); !c2.done; c2 = s.next()) {
+          for (var s = q2(r.currentObservers), c2 = s.next(); !c2.done; c2 = s.next()) {
             var a = c2.value;
             a.next(t);
           }
@@ -109703,7 +109801,7 @@ var xe2 = function(e) {
     });
   }, n.prototype.error = function(t) {
     var r = this;
-    ee(function() {
+    te2(function() {
       if (r._throwIfClosed(), !r.isStopped) {
         r.hasError = r.isStopped = true, r.thrownError = t;
         for (var o = r.observers; o.length; )
@@ -109712,7 +109810,7 @@ var xe2 = function(e) {
     });
   }, n.prototype.complete = function() {
     var t = this;
-    ee(function() {
+    te2(function() {
       if (t._throwIfClosed(), !t.isStopped) {
         t.isStopped = true;
         for (var r = t.observers; r.length; )
@@ -109734,8 +109832,8 @@ var xe2 = function(e) {
     return this._throwIfClosed(), this._checkFinalizedStatuses(t), this._innerSubscribe(t);
   }, n.prototype._innerSubscribe = function(t) {
     var r = this, o = this, i = o.hasError, s = o.isStopped, c2 = o.observers;
-    return i || s ? Fe : (this.currentObservers = null, c2.push(t), new G3(function() {
-      r.currentObservers = null, fe2(c2, t);
+    return i || s ? je : (this.currentObservers = null, c2.push(t), new G3(function() {
+      r.currentObservers = null, he2(c2, t);
     }));
   }, n.prototype._checkFinalizedStatuses = function(t) {
     var r = this, o = r.hasError, i = r.thrownError, s = r.isStopped;
@@ -109744,11 +109842,11 @@ var xe2 = function(e) {
     var t = new g2();
     return t.source = this, t;
   }, n.create = function(t, r) {
-    return new Me(t, r);
+    return new Te(t, r);
   }, n;
 }(g2);
-var Me = function(e) {
-  R3(n, e);
+var Te = function(e) {
+  V3(n, e);
   function n(t, r) {
     var o = e.call(this) || this;
     return o.destination = t, o.source = r, o;
@@ -109764,11 +109862,11 @@ var Me = function(e) {
     (r = (t = this.destination) === null || t === void 0 ? void 0 : t.complete) === null || r === void 0 || r.call(t);
   }, n.prototype._subscribe = function(t) {
     var r, o;
-    return (o = (r = this.source) === null || r === void 0 ? void 0 : r.subscribe(t)) !== null && o !== void 0 ? o : Fe;
+    return (o = (r = this.source) === null || r === void 0 ? void 0 : r.subscribe(t)) !== null && o !== void 0 ? o : je;
   }, n;
-}(xe2);
+}(Se2);
 var Ye2 = function(e) {
-  R3(n, e);
+  V3(n, e);
   function n(t) {
     var r = e.call(this) || this;
     return r._value = t, r;
@@ -109790,35 +109888,35 @@ var Ye2 = function(e) {
   }, n.prototype.next = function(t) {
     e.prototype.next.call(this, this._value = t);
   }, n;
-}(xe2);
+}(Se2);
 var Ot2 = new g2(function(e) {
   return e.complete();
 });
-function Mt2(e) {
+function Tt2(e) {
   return e && h(e.schedule);
 }
 function He(e) {
   return e[e.length - 1];
 }
-function Tt2(e) {
-  return Mt2(He(e)) ? e.pop() : void 0;
+function Mt2(e) {
+  return Tt2(He(e)) ? e.pop() : void 0;
 }
 function Pt3(e, n) {
   return typeof He(e) == "number" ? e.pop() : n;
 }
-var Se2 = function(e) {
+var Ee2 = function(e) {
   return e && typeof e.length == "number" && typeof e != "function";
 };
 function De(e) {
   return h(e?.then);
 }
 function Ge2(e) {
-  return h(e[we2]);
-}
-function Je2(e) {
-  return Symbol.asyncIterator && h(e?.[Symbol.asyncIterator]);
+  return h(e[xe2]);
 }
 function We(e) {
+  return Symbol.asyncIterator && h(e?.[Symbol.asyncIterator]);
+}
+function Je2(e) {
   return new TypeError("You provided " + (e !== null && typeof e == "object" ? "an invalid object" : "'" + e + "'") + " where a stream was expected. You can provide an Observable, Promise, ReadableStream, Array, AsyncIterable, or Iterable.");
 }
 function kt3() {
@@ -109831,20 +109929,20 @@ function Ze2(e) {
 function Ke2(e) {
   return mt3(this, arguments, function() {
     var t, r, o, i;
-    return Ve(this, function(s) {
+    return Re(this, function(s) {
       switch (s.label) {
         case 0:
           t = e.getReader(), s.label = 1;
         case 1:
           s.trys.push([1, , 9, 10]), s.label = 2;
         case 2:
-          return [4, T3(t.read())];
+          return [4, M4(t.read())];
         case 3:
-          return r = s.sent(), o = r.value, i = r.done, i ? [4, T3(void 0)] : [3, 5];
+          return r = s.sent(), o = r.value, i = r.done, i ? [4, M4(void 0)] : [3, 5];
         case 4:
           return [2, s.sent()];
         case 5:
-          return [4, T3(o)];
+          return [4, M4(o)];
         case 6:
           return [4, s.sent()];
         case 7:
@@ -109867,36 +109965,36 @@ function L4(e) {
     return e;
   if (e != null) {
     if (Ge2(e))
-      return qt2(e);
-    if (Se2(e))
       return It2(e);
+    if (Ee2(e))
+      return qt2(e);
     if (De(e))
-      return Rt2(e);
-    if (Je2(e))
+      return Vt2(e);
+    if (We(e))
       return et2(e);
     if (Ze2(e))
-      return Vt2(e);
+      return Rt2(e);
     if (Qe(e))
-      return jt3(e);
+      return Ft(e);
   }
-  throw We(e);
+  throw Je2(e);
 }
-function qt2(e) {
+function It2(e) {
   return new g2(function(n) {
-    var t = e[we2]();
+    var t = e[xe2]();
     if (h(t.subscribe))
       return t.subscribe(n);
     throw new TypeError("Provided object does not correctly implement Symbol.observable");
   });
 }
-function It2(e) {
+function qt2(e) {
   return new g2(function(n) {
     for (var t = 0; t < e.length && !n.closed; t++)
       n.next(e[t]);
     n.complete();
   });
 }
-function Rt2(e) {
+function Vt2(e) {
   return new g2(function(n) {
     e.then(function(t) {
       n.closed || (n.next(t), n.complete());
@@ -109905,11 +110003,11 @@ function Rt2(e) {
     }).then(null, Ne);
   });
 }
-function Vt2(e) {
+function Rt2(e) {
   return new g2(function(n) {
     var t, r;
     try {
-      for (var o = I4(e), i = o.next(); !i.done; i = o.next()) {
+      for (var o = q2(e), i = o.next(); !i.done; i = o.next()) {
         var s = i.value;
         if (n.next(s), n.closed)
           return;
@@ -109928,19 +110026,19 @@ function Vt2(e) {
 }
 function et2(e) {
   return new g2(function(n) {
-    Ft(e, n).catch(function(t) {
+    jt3(e, n).catch(function(t) {
       return n.error(t);
     });
   });
 }
-function jt3(e) {
+function Ft(e) {
   return et2(Ke2(e));
 }
-function Ft(e, n) {
+function jt3(e, n) {
   var t, r, o, i;
   return pt3(this, void 0, void 0, function() {
     var s, c2;
-    return Ve(this, function(a) {
+    return Re(this, function(a) {
       switch (a.label) {
         case 0:
           a.trys.push([0, 5, 6, 11]), t = gt3(e), a.label = 1;
@@ -109983,7 +110081,7 @@ function C3(e, n, t, r, o) {
     return i;
 }
 function tt3(e, n) {
-  return n === void 0 && (n = 0), V3(function(t, r) {
+  return n === void 0 && (n = 0), R3(function(t, r) {
     t.subscribe(O2(r, function(o) {
       return C3(r, e, function() {
         return r.next(o);
@@ -110000,7 +110098,7 @@ function tt3(e, n) {
   });
 }
 function nt3(e, n) {
-  return n === void 0 && (n = 0), V3(function(t, r) {
+  return n === void 0 && (n = 0), R3(function(t, r) {
     r.add(e.schedule(function() {
       return t.subscribe(r);
     }, n));
@@ -110060,37 +110158,37 @@ function Dt2(e, n) {
   if (e != null) {
     if (Ge2(e))
       return Bt2(e, n);
-    if (Se2(e))
+    if (Ee2(e))
       return Ut2(e, n);
     if (De(e))
       return Nt(e, n);
-    if (Je2(e))
+    if (We(e))
       return rt3(e, n);
     if (Ze2(e))
       return Yt(e, n);
     if (Qe(e))
       return Ht2(e, n);
   }
-  throw We(e);
+  throw Je2(e);
 }
 function Gt(e, n) {
   return n ? Dt2(e, n) : L4(e);
 }
-function oe2(e, n) {
-  return V3(function(t, r) {
+function ie(e, n) {
+  return R3(function(t, r) {
     var o = 0;
     t.subscribe(O2(r, function(i) {
       r.next(e.call(n, i, o++));
     }));
   });
 }
-var Jt = Array.isArray;
-function Wt2(e, n) {
-  return Jt(n) ? e.apply(void 0, ne([], Y4(n))) : e(n);
+var Wt2 = Array.isArray;
+function Jt(e, n) {
+  return Wt2(n) ? e.apply(void 0, re([], Y4(n))) : e(n);
 }
 function Xt2(e) {
-  return oe2(function(n) {
-    return Wt2(e, n);
+  return ie(function(n) {
+    return Jt(e, n);
   });
 }
 function Zt(e, n, t, r, o, i, s, c2) {
@@ -110125,32 +110223,32 @@ function Zt(e, n, t, r, o, i, s, c2) {
   })), function() {
   };
 }
-function Ee2(e, n, t) {
-  return t === void 0 && (t = 1 / 0), h(n) ? Ee2(function(r, o) {
-    return oe2(function(i, s) {
+function Ae2(e, n, t) {
+  return t === void 0 && (t = 1 / 0), h(n) ? Ae2(function(r, o) {
+    return ie(function(i, s) {
       return n(r, i, o, s);
     })(L4(e(r, o)));
-  }, t) : (typeof n == "number" && (t = n), V3(function(r, o) {
+  }, t) : (typeof n == "number" && (t = n), R3(function(r, o) {
     return Zt(r, o, e, t);
   }));
 }
 function Kt2(e) {
-  return e === void 0 && (e = 1 / 0), Ee2(Ue, e);
+  return e === void 0 && (e = 1 / 0), Ae2(Ue, e);
 }
 var Qt = ["addListener", "removeListener"];
 var en2 = ["addEventListener", "removeEventListener"];
 var tn2 = ["on", "off"];
-function ye(e, n, t, r) {
+function ve2(e, n, t, r) {
   if (h(t) && (r = t, t = void 0), r)
-    return ye(e, n, t).pipe(Xt2(r));
+    return ve2(e, n, t).pipe(Xt2(r));
   var o = Y4(on2(e) ? en2.map(function(c2) {
     return function(a) {
       return e[c2](n, a, t);
     };
-  }) : nn2(e) ? Qt.map(Te(e, n)) : rn2(e) ? tn2.map(Te(e, n)) : [], 2), i = o[0], s = o[1];
-  if (!i && Se2(e))
-    return Ee2(function(c2) {
-      return ye(c2, n, t);
+  }) : nn2(e) ? Qt.map(Me(e, n)) : rn2(e) ? tn2.map(Me(e, n)) : [], 2), i = o[0], s = o[1];
+  if (!i && Ee2(e))
+    return Ae2(function(c2) {
+      return ve2(c2, n, t);
     })(L4(e));
   if (!i)
     throw new TypeError("Invalid event target");
@@ -110165,7 +110263,7 @@ function ye(e, n, t, r) {
     };
   });
 }
-function Te(e, n) {
+function Me(e, n) {
   return function(t) {
     return function(r) {
       return e[t](n, r);
@@ -110184,11 +110282,11 @@ function on2(e) {
 function sn2() {
   for (var e = [], n = 0; n < arguments.length; n++)
     e[n] = arguments[n];
-  var t = Tt2(e), r = Pt3(e, 1 / 0), o = e;
+  var t = Mt2(e), r = Pt3(e, 1 / 0), o = e;
   return o.length ? o.length === 1 ? L4(o[0]) : Kt2(r)(Gt(o, t)) : Ot2;
 }
 function ot3(e, n) {
-  return V3(function(t, r) {
+  return R3(function(t, r) {
     var o = 0;
     t.subscribe(O2(r, function(i) {
       return e.call(n, i, o++) && r.next(i);
@@ -110196,19 +110294,19 @@ function ot3(e, n) {
   });
 }
 function cn2(e, n) {
-  return V3(function(t, r) {
+  return R3(function(t, r) {
     var o = /* @__PURE__ */ new Set();
     t.subscribe(O2(r, function(i) {
       var s = e ? e(i) : i;
       o.has(s) || (o.add(s), r.next(i));
     })), n && L4(n).subscribe(O2(r, function() {
       return o.clear();
-    }, he2));
+    }, de2));
   });
 }
 var N4 = {};
 var E3 = {};
-function M4(e, n, t = 300) {
+function T3(e, n, t = 300) {
   if (e && n && n instanceof Function)
     it3(e), N4[e] = setTimeout(() => {
       n(), delete N4[e];
@@ -110236,7 +110334,7 @@ function b2(e, n, t, r = "debug", o = false, i = "SVG VIEWER") {
     t ? console[r](`%c[${i}]%c[${e}] %c${n}`, ...s, t) : console[r](`%c[${i}]%c[${e}] %c${n}`, ...s);
   }
 }
-function Ae2(e) {
+function W3(e) {
   let n = e.replace(/[!"#$%&'()*+,.\/;<=>?@[\\\]^`{|}~]/g, "\\$&");
   const t = n.split(" ");
   for (const r of t)
@@ -110268,7 +110366,7 @@ function ln2(e) {
   }, r.forEach(o), n;
 }
 function un2(e, n, t) {
-  const r = e.element?.querySelector(".svg-viewer__svg-overlays"), o = e.element?.querySelector("svg"), i = o?.querySelector(`#${Ae2(n)}`);
+  const r = e.element?.querySelector(".svg-viewer__svg-overlays"), o = e.element?.querySelector("svg"), i = o?.querySelector(`#${W3(n)}`);
   if (i && o && r) {
     const s = t || r?.getBoundingClientRect() || {}, c2 = i?.getBoundingClientRect() || {};
     return {
@@ -110279,7 +110377,7 @@ function un2(e, n, t) {
     b2("DOM", `Unable to find element with ID ${n}`, void 0, "warn");
   return { x: -1, y: -1 };
 }
-function ie(e, n, t, r = 1) {
+function se2(e, n, t, r = 1) {
   const o = e.element?.querySelector(".svg-viewer__svg-overlays");
   if (e.element?.querySelector("svg") && o) {
     const s = o?.getBoundingClientRect() || {};
@@ -110307,17 +110405,17 @@ function fn2(e) {
     n[t] instanceof Object && (n[t] = `${n[t]}`);
   return n;
 }
-function K3(e) {
+function Q4(e) {
   return e < 26 ? e + 65 : e < 52 ? e + 71 : e < 62 ? e - 4 : e === 62 ? 43 : e === 63 ? 47 : 65;
 }
 function hn2(e) {
   for (var n = 2, t = "", r = e.length, o = 0, i = 0; i < r; i++)
     n = i % 3, i > 0 && i * 4 / 3 % 76 === 0 && (t += `\r
 `), o |= e[i] << (16 >>> n & 24), (n === 2 || e.length - i === 1) && (t += String.fromCodePoint(
-      K3(o >>> 18 & 63),
-      K3(o >>> 12 & 63),
-      K3(o >>> 6 & 63),
-      K3(o & 63)
+      Q4(o >>> 18 & 63),
+      Q4(o >>> 12 & 63),
+      Q4(o >>> 6 & 63),
+      Q4(o & 63)
     ), o = 0);
   return t.substr(0, t.length - 2 + n) + (n === 2 ? "" : n === 1 ? "=" : "==");
 }
@@ -110499,8 +110597,8 @@ var m = class _m {
 };
 if (m.hashStr("hello") !== "5d41402abc4b2a76b9719d911017c592")
   throw new Error("Md5 self test failed.");
-var Q4 = { top: 0, left: 0, height: 0, width: 0 };
-var te2 = class {
+var ee = { top: 0, left: 0, height: 0, width: 0 };
+var ne = class {
   /** Unique Identifier for the Viewer */
   id;
   /** URL associated with the map data */
@@ -110554,10 +110652,10 @@ var te2 = class {
   }
   constructor(n) {
     if (this.id = n.id || `map-${Math.floor(Math.random() * 999999)}`, this.url = n.url || `local-${m.hashAsciiStr(n.svg_data || "")}`, this.element = n.element || null, this.labels = n.labels || [], this.features = n.features || [], this.actions = n.actions || [], this.styles = n.styles || {}, this.svg_data = n.svg_data || "", this.content_ratio = n.content_ratio || { x: 1, y: 1 }, this.zoom = n.zoom || 1, this.center = { x: n.center?.x ?? 0.5, y: n.center?.y ?? 0.5 }, this.rotate = n.rotate || 0, this.ratio = n.ratio || 1, this.svg_ratio = n.svg_ratio || 1, this.max_resolution = n.max_resolution || window.innerWidth * window.innerHeight * 10, this.focus = n.focus || null, this.options = n.options || {}, this.mappings = n.mappings || {}, this.box = {
-      top: (n.box || Q4).top,
-      left: (n.box || Q4).left,
-      height: (n.box || Q4).height,
-      width: (n.box || Q4).width
+      top: (n.box || ee).top,
+      left: (n.box || ee).left,
+      height: (n.box || ee).height,
+      width: (n.box || ee).width
     }, this.desired_zoom = n.desired_zoom || n.zoom || this.zoom, this.desired_center = {
       x: n.desired_center?.x || this.center.x,
       y: n.desired_center?.y || this.center.y
@@ -110577,50 +110675,50 @@ var te2 = class {
     this.needs_update = this.desired_zoom !== this.zoom || this.desired_center.x !== this.center.x || this.desired_center.y !== this.center.y, this.use_gpu = n?.use_gpu ?? true;
   }
 };
-var j2 = new Ye2([]);
-var ut3 = new xe2();
+var F14 = new Ye2([]);
+var ut3 = new Se2();
 var pn2 = ut3.pipe(ot3((e) => e === "resize"));
 function mn2(e) {
   ut3.next(e);
 }
 function $3(e) {
-  return j2.getValue().find((n) => n.id === e);
+  return F14.getValue().find((n) => n.id === e);
 }
 function x(e, n) {
-  if (e = W3().find((o) => o.id === (e instanceof te2 ? e.id : e)), !(e instanceof te2)) return null;
+  if (e = X4().find((o) => o.id === (e instanceof ne ? e.id : e)), !(e instanceof ne)) return null;
   delete n.url;
-  const r = new te2(__spreadValues(__spreadValues({}, e), n));
-  return ft3(r), r.needs_update && M4(`${e.id}_updating`, () => x(r, {}), 16), r;
+  const r = new ne(__spreadValues(__spreadValues({}, e), n));
+  return ft3(r), r.needs_update && T3(`${e.id}_updating`, () => x(r, {}), 16), r;
 }
 function gn2(e) {
-  return j2.pipe(
+  return F14.pipe(
     ot3((n) => !!n.find((t) => t.id === e)),
-    oe2((n) => n.find((t) => t.id === e)),
+    ie((n) => n.find((t) => t.id === e)),
     cn2()
   );
 }
 function ft3(e) {
-  const n = W3().filter((t) => t.id !== e.id);
-  n.push(e), j2.next(n);
+  const n = X4().filter((t) => t.id !== e.id);
+  n.push(e), F14.next(n);
 }
 function _n(e) {
-  const n = W3().filter((t) => t.id !== e.id);
-  j2.next(n);
+  const n = X4().filter((t) => t.id !== e.id);
+  F14.next(n);
 }
-function W3() {
-  return j2.getValue();
+function X4() {
+  return F14.getValue();
 }
 var Pe2 = new Ye2({});
 var ke2 = {};
-var X4 = false;
-var se2 = false;
+var Z4 = false;
+var ce2 = false;
 var U3;
 var P3;
-var re;
+var oe2;
 var A4;
 var k2;
 var _2;
-var q2;
+var I4;
 var bn2 = [
   "click",
   "mousedown",
@@ -110640,7 +110738,7 @@ var wn2 = [
   "touchstart",
   "touchmove"
 ];
-var qe = false;
+var Ie2 = false;
 window.addEventListener("blur", () => H4());
 function xn2(e) {
   const n = JSON.stringify(e.focus);
@@ -110658,7 +110756,7 @@ function xn2(e) {
   }
 }
 function Sn2() {
-  qe || (window.addEventListener("resize", () => mn2("resize")), window.addEventListener("blur", () => H4()), qe = true);
+  Ie2 || (window.addEventListener("resize", () => mn2("resize")), window.addEventListener("blur", () => H4()), Ie2 = true);
 }
 function En2(e, n = bn2) {
   const t = Pe2.getValue(), r = e.element;
@@ -110666,7 +110764,7 @@ function En2(e, n = bn2) {
   const o = [];
   for (const i of n)
     o.push(
-      ye(r, i).pipe(oe2((s) => ({ id: e.id, type: i, event: s })))
+      ve2(r, i).pipe(ie((s) => ({ id: e.id, type: i, event: s })))
     );
   t[e.id] = sn2(...o).subscribe((i) => {
     const { id: s, type: c2, event: a } = i, l = a;
@@ -110677,7 +110775,7 @@ function En2(e, n = bn2) {
         break;
       case "touchend":
       case "mouseup":
-        !se2 && !X4 && An2(s, l), H4();
+        !ce2 && !Z4 && An2(s, l), H4();
         break;
       case "mousewheel":
       case "wheel":
@@ -110688,17 +110786,17 @@ function En2(e, n = bn2) {
 }
 function An2(e, n) {
   const t = $3(e);
-  t && b2("INPUT", "Clicked:", ie(t, J4(n)));
+  t && b2("INPUT", "Clicked:", se2(t, J4(n)));
 }
 function Ln2(e, n) {
-  if (X4) return;
+  if (Z4) return;
   b2("INPUT", "Starting panning...");
   const t = $3(e);
-  A4 && window.removeEventListener("mousemove", A4), A4 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), _2 && window.removeEventListener("touchend", q2), t && !t.options.disable_pan && (U3 = J4(n), n instanceof MouseEvent ? (A4 = (r) => Ie2(e, r, U3), k2 = () => H4(), window.addEventListener("mousemove", A4), window.addEventListener("mouseup", k2)) : (_2 = (r) => Ie2(e, r, U3), q2 = () => H4(), window.addEventListener("touchmove", _2), window.addEventListener("touchend", q2)), M4("pan_start", () => se2 = true, 200));
+  A4 && window.removeEventListener("mousemove", A4), A4 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), _2 && window.removeEventListener("touchend", I4), t && !t.options.disable_pan && (U3 = J4(n), n instanceof MouseEvent ? (A4 = (r) => qe(e, r, U3), k2 = () => H4(), window.addEventListener("mousemove", A4), window.addEventListener("mouseup", k2)) : (_2 = (r) => qe(e, r, U3), I4 = () => H4(), window.addEventListener("touchmove", _2), window.addEventListener("touchend", I4)), T3("pan_start", () => ce2 = true, 200));
 }
-function Ie2(e, n, t = U3) {
-  if (X4) return;
-  se2 = true;
+function qe(e, n, t = U3) {
+  if (Z4) return;
+  ce2 = true;
   const r = $3(e);
   if (r) {
     const o = J4(n), i = {
@@ -110723,25 +110821,25 @@ function Ie2(e, n, t = U3) {
 function $n2(e, n) {
   b2("INPUT", "Starting pinching..."), _2 && window.removeEventListener("touchmove", _2);
   const t = $3(e);
-  if (X4 = true, t && !t.options.disable_zoom) {
+  if (Z4 = true, t && !t.options.disable_zoom) {
     const r = [
       { x: n.touches[0].clientX, y: n.touches[0].clientY },
       { x: n.touches[1].clientX, y: n.touches[1].clientY }
-    ], o = r.map((c2) => ie(t, c2)), { x: i, y: s } = {
+    ], o = r.map((c2) => se2(t, c2)), { x: i, y: s } = {
       x: (o[0].x + o[1].x) / 2,
       y: (o[0].y + o[1].y) / 2
     };
-    P3 = { x: 1 - i, y: 1 - s }, re = at2(r[0], r[1]), n instanceof MouseEvent || (_2 = (c2) => c2.touches.length >= 2 ? zn2(e, c2, re) : "", window.addEventListener("touchmove", _2));
+    P3 = { x: 1 - i, y: 1 - s }, oe2 = at2(r[0], r[1]), n instanceof MouseEvent || (_2 = (c2) => c2.touches.length >= 2 ? zn2(e, c2, oe2) : "", window.addEventListener("touchmove", _2));
   }
 }
-function zn2(e, n, t = re) {
+function zn2(e, n, t = oe2) {
   const r = $3(e);
   if (r && !r.options.disable_zoom) {
     const o = [
       { x: n.touches[0].clientX, y: n.touches[0].clientY },
       { x: n.touches[1].clientX, y: n.touches[1].clientY }
     ], i = at2(o[0], o[1]), s = Math.max(0.5, Math.min(10, r.zoom * i / t)), c2 = 1 - r.zoom / s, a = s != r.zoom ? lt2(r.center, P3, c2) : r.center;
-    re = i, x(r, {
+    oe2 = i, x(r, {
       zoom: s,
       center: a,
       desired_zoom: s,
@@ -110750,13 +110848,13 @@ function zn2(e, n, t = re) {
   }
 }
 function H4() {
-  b2("INPUT", "Ending pinch/pan..."), it3("pan_start"), X4 = false, se2 = false, A4 && window.removeEventListener("mousemove", A4), k2 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), q2 && window.removeEventListener("touchend", q2), A4 = k2 = _2 = q2 = P3 = null;
+  b2("INPUT", "Ending pinch/pan..."), it3("pan_start"), Z4 = false, ce2 = false, A4 && window.removeEventListener("mousemove", A4), k2 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), I4 && window.removeEventListener("touchend", I4), A4 = k2 = _2 = I4 = P3 = null;
 }
 function Cn2(e, n) {
   const t = $3(e);
   if (t) {
-    const r = n.deltaY >= 0 ? -0.02 : 0.02, o = Math.min(10, Math.max(0.5, t.zoom * (1 + r))), { x: i, y: s } = ie(t, J4(n));
-    P3 = { x: 1 - i, y: 1 - s }, M4("clear_action_start", () => P3 = null);
+    const r = n.deltaY >= 0 ? -0.02 : 0.02, o = Math.min(10, Math.max(0.5, t.zoom * (1 + r))), { x: i, y: s } = se2(t, J4(n));
+    P3 = { x: 1 - i, y: 1 - s }, T3("clear_action_start", () => P3 = null);
     const c2 = 1 - t.zoom / o, a = o != t.zoom ? lt2(t.center, P3, c2) : t.center;
     x(t, {
       zoom: o,
@@ -110772,28 +110870,28 @@ function On2(e) {
   const s = o.actions.sort((c2, a) => (a.priority || 0) - (c2.priority || 0)).find(
     (c2) => c2.action.includes(t) && (c2.id === "*" || c2.id === r.target?.id)
   );
-  s && s.callback(r, ie(o, J4(r)));
+  s && s.callback(r, se2(o, J4(r)));
 }
-var F14 = {};
-var Re = {};
-var ve2 = {};
+var j2 = {};
+var Ve = {};
 var pe2 = {};
 var me2 = {};
+var ge2 = {};
 var D3 = {};
 var B4 = {};
 st2(
   "on_resize",
   pn2.subscribe(() => {
-    const e = W3();
+    const e = X4();
     for (const n of e)
       try {
-        M4(`resize-${n.id}`, () => yt3(n));
+        T3(`resize-${n.id}`, () => yt3(n));
       } catch (t) {
         console.warn(t);
       }
   })
 );
-async function Mn(e) {
+async function Tn2(e) {
   const n = e.element;
   if (!n) throw new Error("No element set on viewer");
   const t = document.createElement("div"), r = document.createElement("style"), o = document.createElement("div"), i = document.createElement("div"), s = document.createElement("div"), c2 = document.createElement("div"), a = document.createElement("iframe");
@@ -110810,20 +110908,20 @@ function ht2(e) {
         "svg"
       );
       if (!t || !t.clientWidth)
-        return M4(
+        return T3(
           `${e.id}-setup`,
           () => ht2(e).then((o) => n()),
           100
         );
-      const r = Re[e.url] || ln2(t);
-      Re[e.url] = r, x(e, { mappings: r }), t.style.display = "none", Tn2(e), Le2(e), n();
+      const r = Ve[e.url] || ln2(t);
+      Ve[e.url] = r, x(e, { mappings: r }), t.style.display = "none", Mn(e), Le2(e), n();
     });
   });
 }
 function dt3(e) {
-  return F14[e.id] || (F14[e.id] = new Promise((n) => {
+  return j2[e.id] || (j2[e.id] = new Promise((n) => {
     const t = requestAnimationFrame(() => {
-      if (!F14[e.id]) return;
+      if (!j2[e.id]) return;
       const r = e.element;
       if (!r) throw new Error("No element set on viewer");
       const o = r.querySelector("style");
@@ -110834,11 +110932,11 @@ function dt3(e) {
       if (!s || !o)
         throw new Error("Viewer is not setup yet.");
       const a = (e.center.x - 0.5) * (100 * e.zoom * e.svg_ratio), l = (e.center.y - 0.5) * (100 * e.zoom * e.svg_ratio), u3 = e.use_gpu ? `translate3d(${a}%, ${l}%, 0)` : `translate(${a}%, ${l}%)`;
-      s.style.transform = `${u3} ${c2} rotate(${e.rotate}deg)`, i += `#${e.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e.rotate}deg) scale(${1 / e.zoom * (1 / e.svg_ratio)}); }`, i += `#${e.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, ge2(e), xn2(e), Le2(e), delete F14[e.id], cancelAnimationFrame(t), n();
+      s.style.transform = `${u3} ${c2} rotate(${e.rotate}deg)`, i += `#${e.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e.rotate}deg) scale(${1 / e.zoom * (1 / e.svg_ratio)}); }`, i += `#${e.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, _e2(e), xn2(e), Le2(e), delete j2[e.id], cancelAnimationFrame(t), n();
     });
-  })), F14[e.id];
+  })), j2[e.id];
 }
-async function Tn2(e) {
+async function Mn(e) {
   const n = JSON.stringify(__spreadValues({}, e.styles)) || "";
   if (n.localeCompare(D3[e.id])) {
     const t = e.element;
@@ -110878,7 +110976,7 @@ async function Tn2(e) {
     r.src = d2, D3[e.id] = n;
   }
 }
-async function ge2(e) {
+async function _e2(e) {
   if ((JSON.stringify(__spreadValues({}, e.styles)) || "").localeCompare(D3[e.id])) {
     const t = e.element;
     if (!t) throw new Error("No element set on viewer");
@@ -110888,7 +110986,7 @@ async function ge2(e) {
     if (!r) throw new Error("No iframe created for viewer");
     if (!r.contentWindow) {
       r.onload = () => {
-        setTimeout(() => ge2(e), 50), setTimeout(() => ge2(e), 500);
+        setTimeout(() => _e2(e), 50), setTimeout(() => _e2(e), 500);
       };
       return;
     }
@@ -110903,7 +111001,7 @@ async function ge2(e) {
 }
 async function yt3(e) {
   return new Promise((n) => {
-    B4[e.id] || (B4[e.id] = []), B4[e.id].push(n), M4(
+    B4[e.id] || (B4[e.id] = []), B4[e.id].push(n), T3(
       `resize-${e.id}`,
       () => {
         const t = e.element;
@@ -110911,7 +111009,7 @@ async function yt3(e) {
         const r = t.querySelector(
           ".svg-viewer__view-container"
         ), o = t.querySelector(".svg-viewer__svg-overlays"), i = t.querySelector(
-          `#${e.id}`
+          `#${W3(e.id)}`
         ), s = t.querySelector(
           ".svg-viewer"
         ), c2 = t.querySelector(
@@ -110939,7 +111037,7 @@ async function yt3(e) {
             box: u3,
             content_ratio: $e2
           });
-          !ze || (e = ze, !await dt3(e).catch((ce2) => (console.warn(ce2), false))) || (B4[e.id].forEach((ce2) => ce2()), B4[e.id] = []);
+          !ze || (e = ze, !await dt3(e).catch((ae2) => (console.warn(ae2), false))) || (B4[e.id].forEach((ae2) => ae2()), B4[e.id] = []);
         });
       },
       100
@@ -110954,20 +111052,20 @@ function Le2(e) {
   );
   if (!t || !n) return;
   if (!t.getBoundingClientRect().width)
-    return M4(
+    return T3(
       `${e.id}|render-overlays`,
       () => Le2(e),
       50
     );
   requestAnimationFrame(() => {
-    Pn2(e), qn2(e), kn2(e);
+    Pn2(e), In2(e), kn2(e);
   });
 }
 function Pn2(e) {
   const n = e.labels.filter(
     (r) => !r.zoom_level || r.zoom_level <= e.zoom
   ), t = JSON.stringify(n);
-  if (t !== ve2[e.id]) {
+  if (t !== pe2[e.id]) {
     const r = e.element?.querySelector(
       ".svg-viewer__svg-overlays"
     );
@@ -110983,7 +111081,7 @@ function Pn2(e) {
       const l = document.createElement("div"), u3 = document.createElement("label");
       u3.classList.add("svg-viewer__label"), u3.setAttribute("for", c2), i.css_class?.length && u3.classList.add(...i.css_class), i.z_index && (a.style.zIndex = `${i.z_index}`), u3.textContent = i.content, l.appendChild(u3), a.appendChild(l), r.appendChild(a);
     }
-    b2("RENDER", `Added ${e.labels.length} labels to view.`), ve2[e.id] = t;
+    b2("RENDER", `Added ${e.labels.length} labels to view.`), pe2[e.id] = t;
   }
 }
 function kn2(e) {
@@ -110993,7 +111091,7 @@ function kn2(e) {
       data: fn2(t.data)
     }))
   );
-  if (n !== pe2[e.id]) {
+  if (n !== me2[e.id]) {
     const t = e.element?.querySelector(
       ".svg-viewer__svg-overlays"
     );
@@ -111016,14 +111114,14 @@ function kn2(e) {
         "svg-viewer__svg-overlay-item__hover"
       ), a.style.top = `${s.y * 100}%`, a.style.left = `${s.x * 100}%`, c2.w || c2.h ? (a.style.width = `${c2.w * 100}%`, a.style.height = `${c2.h * 100}%`) : (a.style.width = "1%", a.style.height = `${1 / e.ratio}%`), a.style.transform = "translate(-50%, -50%)", i.content instanceof Node && a.appendChild(i.content), t.appendChild(a));
     }
-    b2("RENDER", `Added ${e.features.length} features to view.`), pe2[e.id] = n;
+    b2("RENDER", `Added ${e.features.length} features to view.`), me2[e.id] = n;
   }
 }
-function qn2(e) {
+function In2(e) {
   const n = JSON.stringify(
     e.actions.map((t) => __spreadProps(__spreadValues({}, t), { callback: "" }))
   );
-  if (n !== me2[e.id]) {
+  if (n !== ge2[e.id]) {
     const t = e.element?.querySelector(
       ".svg-viewer__svg-overlays"
     );
@@ -111032,13 +111130,15 @@ function qn2(e) {
       t.querySelectorAll(".action-zone")
     ).filter((o) => o.parentNode && t.contains(o.parentNode)).forEach((o) => t.removeChild(o));
     for (const o of e.actions) {
-      if (!o.action || !o.id || o.id === "*" || o.zone === false || t.querySelector(`#${o.id}`)) continue;
+      if (!o.action || !o.id || o.id === "*" || o.zone === false || t.querySelector(
+        `#${W3(o.id)}`
+      )) continue;
       const s = document.createElement("button");
       s.id = `${o.id}`;
       const c2 = e.mappings[o.id] || { x: 0, y: 0 }, a = e.mappings[o.id] || { w: 0, h: 0 };
       s.classList.add("svg-viewer__svg-overlay-item"), s.classList.add("action-zone"), s.style.top = `${c2.y * 100}%`, s.style.left = `${c2.x * 100}%`, (a.w || a.h) && (s.style.width = `${a.w * 100}%`, s.style.height = `${a.h * 100}%`, s.style.transform = "translate(-50%, -50%)"), t.appendChild(s);
     }
-    me2[e.id] = n;
+    ge2[e.id] = n;
   }
 }
 function vt3(e) {
@@ -111049,22 +111149,23 @@ function vt3(e) {
     let r = "";
     for (const o in e[t])
       e[t][o] && (r += `${o}: ${e[t][o]}; `);
-    n += `svg ${t.split(" ").map((o) => Ae2(o)).join(" ")} { ${r} } `;
+    n += `svg ${t.split(" ").map((o) => W3(o)).join(" ")} { ${r} } `;
   }
   return n;
 }
-var le2 = {};
-var _e2 = {};
+var ue = {};
+var be2 = {};
 async function Un2(e) {
-  let t = W3().find((o) => o.url === e.url);
+  let t = X4().find((o) => o.url === e.url);
   if (t) return t.id;
-  const r = e.svg_data || await In2(e.url);
-  return t = new te2(__spreadProps(__spreadValues({}, e), { svg_data: r })), st2(
+  const r = e.svg_data || await qn2(e.url);
+  if (!r) throw new Error("No SVG data to display");
+  return t = new ne(__spreadProps(__spreadValues({}, e), { svg_data: r })), st2(
     `${t.id}-render`,
     gn2(t.id).subscribe(
       (o) => dt3(o).catch((i) => console.warn(i))
     )
-  ), ft3(t), await Mn(t), t.id;
+  ), ft3(t), await Tn2(t), t.id;
 }
 function Yn2(e, n) {
   return x(e, n);
@@ -111075,20 +111176,23 @@ function Hn2(e) {
   const t = n.element?.querySelector(".svg-viewer");
   t && (n.element.removeChild(t), _n(n), an2(`${e}`));
 }
-async function In2(e = "") {
+async function qn2(e = "") {
   const n = new Headers();
   if (e.startsWith(location.origin) || e.startsWith("/"))
-    for (const o in _e2)
-      n.append(o, _e2[o]);
-  if (le2[e]) return le2[e];
-  const r = await (await fetch(e, { headers: n }).catch((o) => (b2("SVG VIEWER", "Failed to load map", o, "error"), { text: async () => "" }))).text();
-  return le2[e] = r, r;
+    for (const i in be2)
+      n.append(i, be2[i]);
+  if (ue[e]) return ue[e];
+  const t = { text: async () => "" };
+  let r = await fetch(e, { headers: n }).catch((i) => (b2("SVG VIEWER", "Failed to load map", i, "error"), t));
+  r.status >= 400 && (b2("SVG VIEWER", "Failed to load map", r.statusText, "error"), r = t);
+  const o = await r.text();
+  return ue[e] = o, o;
 }
 function Dn2() {
   let e = document.getElementById("svg-viewer-global");
-  e || (e = document.createElement("style"), e.id = "svg-viewer-global", e.innerHTML = Rn2, document.head.appendChild(e), b2("Styles", "Added global viewer styles to document"));
+  e || (e = document.createElement("style"), e.id = "svg-viewer-global", e.innerHTML = Vn2, document.head.appendChild(e), b2("Styles", "Added global viewer styles to document"));
 }
-var Rn2 = `
+var Vn2 = `
     .svg-viewer {
         position: absolute;
         top: 0;
@@ -111201,13 +111305,28 @@ function MapRendererComponent_Conditional_2_Conditional_0_Template(rf, ctx) {
     \u0275\u0275property("diameter", 48);
   }
 }
+function MapRendererComponent_Conditional_2_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 3)(1, "div", 6);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "EXPLORE.MAP_FAILED_TO_LOAD"), " ");
+  }
+}
 function MapRendererComponent_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, MapRendererComponent_Conditional_2_Conditional_0_Template, 1, 1, "mat-spinner", 5);
+    \u0275\u0275conditionalCreate(1, MapRendererComponent_Conditional_2_Conditional_1_Template, 4, 3, "div", 3);
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275conditional(!ctx_r0.viewer || ctx_r0.loading ? 0 : -1);
+    \u0275\u0275conditional(!ctx_r0.viewer || ctx_r0.loading() ? 0 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx_r0.viewer === "~empty~" ? 1 : -1);
   }
 }
 function MapRendererComponent_Conditional_3_Template(rf, ctx) {
@@ -111234,9 +111353,9 @@ function MapRendererComponent_Conditional_4_For_2_Conditional_0_Case_3_Template(
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     const element_r3 = ctx_r1.$implicit;
-    const \u0275$index_17_r4 = ctx_r1.$index;
+    const \u0275$index_24_r4 = ctx_r1.$index;
     const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngComponentOutlet", element_r3.content)("ngComponentOutletInjector", ctx_r0.injectors[\u0275$index_17_r4]);
+    \u0275\u0275property("ngComponentOutlet", element_r3.content)("ngComponentOutletInjector", ctx_r0.injectors[\u0275$index_24_r4]);
   }
 }
 function MapRendererComponent_Conditional_4_For_2_Conditional_0_Case_4_Template(rf, ctx) {
@@ -111315,10 +111434,10 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
   constructor() {
     super();
     this._injector = inject(Injector);
-    this.src = input(void 0);
-    this.styles = input(void 0);
     this.zoom = model(1);
     this.center = model({ x: 0.5, y: 0.5 });
+    this.src = input(void 0);
+    this.styles = input(void 0);
     this.features = input(void 0);
     this.labels = input(void 0);
     this.actions = input(void 0);
@@ -111328,6 +111447,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
     this.zoomChange = output();
     this.centerChange = output();
     this.mapInfo = output();
+    this.loading = signal(false);
     this.injectors = [];
     this.feature_list = [];
     this._on_changes = new BehaviorSubject(null);
@@ -111344,13 +111464,16 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
     Dn2();
   }
   ngOnDestroy() {
-    if (this.viewer) {
+    if (this.viewer)
       Hn2(this.viewer);
-    }
   }
   ngOnChanges(changes) {
     if (changes.src && this.src()) {
-      this.createView().catch((e) => console.warn(e));
+      this.createView().catch((e) => {
+        console.warn(e);
+        this.loading.set(false);
+        this.viewer = "~empty~";
+      });
     }
     if (changes.features) {
       this.updateInjectors();
@@ -111373,12 +111496,16 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
     }
   }
   ngAfterViewInit() {
-    this.createView().catch((e) => console.warn(e));
+    this.createView().catch((e) => {
+      console.warn(e);
+      this.loading.set(false);
+      this.viewer = "~empty~";
+    });
   }
   /** Update overlays, styles and actions of viewer */
   updateView() {
     try {
-      if (!$3(this.viewer) || this.loading) {
+      if (!$3(this.viewer) || this.loading()) {
         return this.timeout("update_view", () => this.updateView());
       }
       this.updateFeatureList();
@@ -111418,8 +111545,8 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
       return;
     const _outlet_el = this._outlet_el();
     const src = this.src();
-    if (src && _outlet_el?.nativeElement && !this.loading) {
-      this.loading = true;
+    if (src && _outlet_el?.nativeElement && !this.loading()) {
+      this.loading.set(true);
       const styles = this.styles();
       const labels = this.labels();
       const actions = this.actions();
@@ -111453,14 +111580,12 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         labels,
         actions,
         options: options2
-      }).catch((e) => {
-        console.warn(e);
-        return "";
-      });
-      this.loading = false;
-      if (!this.viewer)
+      }).catch((e) => "");
+      this.loading.set(false);
+      if (!this.viewer) {
+        this.viewer = "~empty~";
         return;
-      this.loading = false;
+      }
       this.subscription("view_changes", gn2(this.viewer)?.subscribe((v3) => {
         this._on_changes.next(__spreadValues({}, v3));
         this.zoomChange.emit(v3.zoom);
@@ -111473,7 +111598,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
       const focus = this.focus();
       if (focus)
         this.focusOn(focus);
-    } else if (src && !_outlet_el?.nativeElement || this.loading) {
+    } else if (src && !_outlet_el?.nativeElement || this.loading()) {
       this.timeout("create_view", () => this.createView().catch((e) => console.warn(e)));
     }
   }
@@ -111530,10 +111655,10 @@ _MapRendererComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ 
       return ctx.onResize();
     }, \u0275\u0275resolveWindow);
   }
-}, inputs: { src: [1, "src"], styles: [1, "styles"], zoom: [1, "zoom"], center: [1, "center"], features: [1, "features"], labels: [1, "labels"], actions: [1, "actions"], reset: [1, "reset"], options: [1, "options"], focus: [1, "focus"] }, outputs: { zoom: "zoomChange", center: "centerChange", zoomChange: "zoomChange", centerChange: "centerChange", mapInfo: "mapInfo" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 5, vars: 4, consts: [["outlet", ""], ["feature", ""], ["tabindex", "0", "role", "map", 1, "absolute", "inset-0"], [1, "absolute", "inset-0", "flex", "items-center", "justify-center"], ["hidden", ""], [1, "absolute", 3, "diameter"], [1, "opacity-30"], [1, "pointer-events-none"], [3, "innerHTML"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function MapRendererComponent_Template(rf, ctx) {
+}, inputs: { zoom: [1, "zoom"], center: [1, "center"], src: [1, "src"], styles: [1, "styles"], features: [1, "features"], labels: [1, "labels"], actions: [1, "actions"], reset: [1, "reset"], options: [1, "options"], focus: [1, "focus"] }, outputs: { zoom: "zoomChange", center: "centerChange", zoomChange: "zoomChange", centerChange: "centerChange", mapInfo: "mapInfo" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 5, vars: 4, consts: [["outlet", ""], ["feature", ""], ["tabindex", "0", "role", "map", 1, "absolute", "inset-0"], [1, "absolute", "inset-0", "flex", "items-center", "justify-center"], ["hidden", ""], [1, "absolute", 3, "diameter"], [1, "opacity-30"], [1, "pointer-events-none"], [3, "innerHTML"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function MapRendererComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "div", 2, 0);
-    \u0275\u0275conditionalCreate(2, MapRendererComponent_Conditional_2_Template, 1, 1)(3, MapRendererComponent_Conditional_3_Template, 4, 3, "div", 3);
+    \u0275\u0275conditionalCreate(2, MapRendererComponent_Conditional_2_Template, 2, 2)(3, MapRendererComponent_Conditional_3_Template, 4, 3, "div", 3);
     \u0275\u0275conditionalCreate(4, MapRendererComponent_Conditional_4_Template, 3, 0, "div", 4);
   }
   if (rf & 2) {
@@ -111557,8 +111682,15 @@ var MapRendererComponent = _MapRendererComponent;
             [class.hidden]="!src()"
         ></div>
         @if (src()) {
-            @if (!viewer || loading) {
+            @if (!viewer || loading()) {
                 <mat-spinner class="absolute" [diameter]="48" />
+            }
+            @if (viewer === '~empty~') {
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="opacity-30">
+                        {{ 'EXPLORE.MAP_FAILED_TO_LOAD' | translate }}
+                    </div>
+                </div>
             }
         } @else {
             <div class="absolute inset-0 flex items-center justify-center">
@@ -111622,7 +111754,7 @@ var MapRendererComponent = _MapRendererComponent;
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MapRendererComponent, { className: "MapRendererComponent", filePath: "libs/components/src/lib/map-renderer.component.ts", lineNumber: 134 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MapRendererComponent, { className: "MapRendererComponent", filePath: "libs/components/src/lib/map-renderer.component.ts", lineNumber: 142 });
 })();
 
 // libs/components/src/lib/maps-indoors.component.ts
@@ -116292,15 +116424,13 @@ function ImageListFieldComponent_For_21_Template(rf, ctx) {
   }
 }
 var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandler {
-  get length() {
-    return this.list.length + this._upload_list.getValue().length + 1;
-  }
   constructor() {
-    super();
+    super(...arguments);
     this._clipboard = inject(Clipboard);
     this._uploads = inject(UploadsService);
     this._dialog = inject(MatDialog);
     this.list = [];
+    this.upload_map = {};
     this.upload_ids = new BehaviorSubject([]);
     this._upload_list = new BehaviorSubject([]);
     this.upload_list = this._upload_list.asObservable();
@@ -116310,11 +116440,14 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
     this.uploads = combineLatest([
       this.upload_list,
       this.upload_ids
-    ]).pipe(map(([list2, ids]) => list2.filter((i) => ids.includes(i.id))));
+    ]).pipe(map(([list2, ids]) => list2.filter((i) => ids.includes(i?.id))));
     this._list_el = viewChild("image_list");
     this._file_input = viewChild("file_input");
     this.registerOnChange = (fn3) => this._onChange = fn3;
     this.registerOnTouched = (fn3) => this._onTouch = fn3;
+  }
+  get length() {
+    return this.list.length + this._upload_list.getValue().length + 1;
   }
   ngAfterViewInit() {
     this.timeout("init_view_space", () => {
@@ -116324,7 +116457,7 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
     this.subscription("upload_changes", this.upload_list.subscribe((list2) => {
       const id_list = this.upload_ids.getValue();
       for (const id of id_list) {
-        const item = list2.find((_3) => _3.id === id);
+        const item = list2.find((_3) => _3?.id === id);
         if (item && item.progress >= 100) {
           this.addImageUrl(item.link);
           this.upload_ids.next(this.upload_ids.getValue().filter((_3) => _3 !== id));
@@ -116388,17 +116521,24 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
     if (list2.length === 0)
       return;
     const global_list = await nextValueFrom(this._uploads.upload_list);
-    const new_list = global_list.filter((_3) => list2.find((i) => i === _3.id));
+    const new_list = global_list.filter((_3) => list2.find((i) => i === _3?.id));
     const done_list = new_list.filter((file) => file.progress >= 100);
     this._upload_list.next(new_list);
-    done_list.forEach((i) => delete i.upload);
+    done_list.forEach((i) => {
+      console.log("ID:", __spreadValues({}, i));
+      this.upload_map[i?.id] = i.upload?.id || i?.id;
+      delete i.upload;
+    });
     if (done_list.length >= list2.length)
       this.clearInterval("update_status");
   }
 };
-_ImageListFieldComponent.\u0275fac = function ImageListFieldComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ImageListFieldComponent)();
-};
+_ImageListFieldComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275ImageListFieldComponent_BaseFactory;
+  return function ImageListFieldComponent_Factory(__ngFactoryType__) {
+    return (\u0275ImageListFieldComponent_BaseFactory || (\u0275ImageListFieldComponent_BaseFactory = \u0275\u0275getInheritedFactory(_ImageListFieldComponent)))(__ngFactoryType__ || _ImageListFieldComponent);
+  };
+})();
 _ImageListFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ImageListFieldComponent, selectors: [["image-list-field"]], viewQuery: function ImageListFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275viewQuerySignal(ctx._list_el, _c043, 5);
@@ -116413,7 +116553,7 @@ _ImageListFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent
     useExisting: forwardRef(() => _ImageListFieldComponent),
     multi: true
   }
-]), \u0275\u0275InheritDefinitionFeature], decls: 24, vars: 15, consts: [["image_list", ""], ["file_input", ""], ["chipList", ""], ["images", "", 1, "relative", "mb-2", "flex", "w-full", "items-center", "space-x-2", "overflow-hidden", "py-2", 3, "resize"], ["image", "", 1, "relative", "flex", "h-32", "w-36", "flex-shrink-0", "cursor-pointer", "flex-col", "items-center", "justify-center", "rounded-xl", "border-2", "border-dashed", "border-base-200", "hover:border-base-300", "hover:bg-base-200"], [1, "text-4xl", "opacity-60"], [1, "px-4", "text-center", "opacity-60"], ["type", "file", 1, "absolute", "inset-0", "h-32", "w-32", "cursor-pointer", "opacity-0", 3, "change"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center", 3, "transform"], ["image", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "transform", "matTooltip"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "disabled"], ["appearance", "outline", 1, "w-full"], ["aria-label", "Image List"], [3, "matChipInputTokenEnd", "placeholder", "matChipInputFor", "matChipInputSeparatorKeyCodes", "matChipInputAddOnBlur"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center"], ["auth", "", 1, "pointer-events-none", "absolute", "left-1/2", "top-1/2", "z-10", "-translate-x-1/2", "-translate-y-1/2", "object-contain", 3, "source"], ["overlay", "", 1, "absolute", "inset-0", "z-20", "text-base-100"], ["bg", "", 1, "absolute", "inset-0", "bg-black", "opacity-0"], ["actions", "", 1, "absolute", "left-0", "right-0", "top-0", "flex", "items-center", "justify-center", "space-x-2", "opacity-0"], ["icon", "", 3, "click"], ["image", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "click", "matTooltip"], ["mode", "determinate", 3, "value", "diameter"], [1, "text-6xl", "text-error"], ["overlay", "", 1, "absolute", "inset-0", "flex", "items-center", "justify-center", "text-base-100", "hover:bg-base-content", "hover:bg-opacity-50"], [1, "text-3xl", "opacity-0"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], [3, "removed"], [1, "max-w-md", "truncate"], ["matChipRemove", ""]], template: function ImageListFieldComponent_Template(rf, ctx) {
+]), \u0275\u0275InheritDefinitionFeature], decls: 24, vars: 15, consts: [["image_list", ""], ["file_input", ""], ["chipList", ""], ["images", "", 1, "relative", "mb-2", "flex", "w-full", "items-center", "space-x-2", "overflow-hidden", "py-2", 3, "resize"], ["image", "", 1, "relative", "flex", "h-32", "w-36", "flex-shrink-0", "cursor-pointer", "flex-col", "items-center", "justify-center", "rounded-xl", "border-2", "border-dashed", "border-base-200", "hover:border-base-300", "hover:bg-base-200"], [1, "text-4xl", "opacity-60"], [1, "px-4", "text-center", "opacity-60"], ["type", "file", 1, "absolute", "inset-0", "h-32", "w-32", "cursor-pointer", "opacity-0", 3, "change"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center", 3, "transform"], ["upload", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "transform", "matTooltip"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "disabled"], ["appearance", "outline", 1, "w-full"], ["aria-label", "Image List"], [3, "matChipInputTokenEnd", "placeholder", "matChipInputFor", "matChipInputSeparatorKeyCodes", "matChipInputAddOnBlur"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center"], ["auth", "", 1, "pointer-events-none", "absolute", "left-1/2", "top-1/2", "z-10", "-translate-x-1/2", "-translate-y-1/2", "object-contain", 3, "source"], ["overlay", "", 1, "absolute", "inset-0", "z-20", "text-base-100"], ["bg", "", 1, "absolute", "inset-0", "bg-black", "opacity-0"], ["actions", "", 1, "absolute", "left-0", "right-0", "top-0", "flex", "items-center", "justify-center", "space-x-2", "opacity-0"], ["icon", "", 3, "click"], ["upload", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "click", "matTooltip"], ["mode", "determinate", 3, "value", "diameter"], [1, "text-6xl", "text-error"], ["overlay", "", 1, "absolute", "inset-0", "flex", "items-center", "justify-center", "text-base-100", "hover:bg-base-content", "hover:bg-opacity-50"], [1, "text-3xl", "opacity-0"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], [3, "removed"], [1, "max-w-md", "truncate"], ["matChipRemove", ""]], template: function ImageListFieldComponent_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 3, 0);
@@ -116483,7 +116623,8 @@ _ImageListFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent
   IconComponent,
   CommonModule,
   AsyncPipe,
-  TranslatePipe
+  TranslatePipe,
+  AuthenticatedImageDirective
 ], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n}\n[overlay][_ngcontent-%COMP%] {\n  transition: background 200ms;\n}\n[image][_ngcontent-%COMP%]:hover   [actions][_ngcontent-%COMP%], \n[image][_ngcontent-%COMP%]:hover    > icon[_ngcontent-%COMP%] {\n  opacity: 1 !important;\n}\n[image][_ngcontent-%COMP%]:hover   [bg][_ngcontent-%COMP%] {\n  opacity: 0.4 !important;\n}\n[actions][_ngcontent-%COMP%], \n[image][_ngcontent-%COMP%]    > icon[_ngcontent-%COMP%] {\n  transition: opacity 200ms;\n}\n[image][_ngcontent-%COMP%] {\n  transition: transform 200ms;\n}\n/*# sourceMappingURL=image-list-field.component.css.map */"] });
 var ImageListFieldComponent = _ImageListFieldComponent;
 (() => {
@@ -116547,7 +116688,7 @@ var ImageListFieldComponent = _ImageListFieldComponent;
             }
             @for (item of uploads | async; track item; let i = $index) {
                 <div
-                    image
+                    upload
                     class="border-base-content/10 /5 flex h-32 w-36 flex-shrink-0 items-center justify-center rounded border bg-base-200 bg-cover bg-center"
                     [style.transform]="'translate(-' + offset + '00%)'"
                     [matTooltip]="item.error"
@@ -116630,12 +116771,13 @@ var ImageListFieldComponent = _ImageListFieldComponent;
       MatProgressSpinnerModule,
       IconComponent,
       CommonModule,
-      TranslatePipe
+      TranslatePipe,
+      AuthenticatedImageDirective
     ], styles: ["/* angular:styles/component:css;95dcaaaa826894df5bf437b6ea5774f7f209a30340873d0fad154aed06b72211;/home/runner/work/user-interfaces/user-interfaces/libs/form-fields/src/lib/image-list-field.component.ts */\n:host {\n  width: 100%;\n}\n[overlay] {\n  transition: background 200ms;\n}\n[image]:hover [actions],\n[image]:hover > icon {\n  opacity: 1 !important;\n}\n[image]:hover [bg] {\n  opacity: 0.4 !important;\n}\n[actions],\n[image] > icon {\n  transition: opacity 200ms;\n}\n[image] {\n  transition: transform 200ms;\n}\n/*# sourceMappingURL=image-list-field.component.css.map */\n"] }]
-  }], () => [], null);
+  }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageListFieldComponent, { className: "ImageListFieldComponent", filePath: "libs/form-fields/src/lib/image-list-field.component.ts", lineNumber: 230 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageListFieldComponent, { className: "ImageListFieldComponent", filePath: "libs/form-fields/src/lib/image-list-field.component.ts", lineNumber: 232 });
 })();
 
 // node_modules/lodash-es/_freeGlobal.js
@@ -132995,8 +133137,6 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
         type: options2.type,
         zones: options2.zone_id || (this._settings.get("app.use_region") ? this._org.region?.id : this._org.building?.id) || this._org.organisation.id
       }).pipe(map((booked_ids) => {
-        const start = this.form.getRawValue().date;
-        const end = addMinutes(start, this.form.getRawValue().duration).valueOf();
         this._resource_use = {};
         for (const id of booked_ids) {
           this._resource_use[id] = " ";
@@ -133012,7 +133152,7 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
         });
         console.log("Resources Available:", available);
         return available;
-      }, catchError(() => of([]))));
+      }), catchError(() => of([])));
     }), tap(() => this._loading.next("")), shareReplay(1));
     this.grouped_availability = combineLatest([
       this.options,
@@ -133144,9 +133284,11 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
     const value = this.form.getRawValue();
     const booking = this._booking.getValue() || new Booking();
     if (!ignore_check) {
-      await this.checkResourceAvailable(__spreadProps(__spreadValues(__spreadValues({}, booking), value), {
-        user_email: value.user?.email || value.user_email || currentUser()?.email
+      const host = value.user?.email || value.user_email || currentUser()?.email;
+      await this._checkResourceAvailable(__spreadProps(__spreadValues(__spreadValues({}, booking), value), {
+        user_email: host
       }), this._options.getValue().type);
+      await this._checkResourceRules(value.resources, value.date, value.duration, host);
     }
     if (this._payments.enabled) {
       const receipt = await this._payments.makePayment({
@@ -133255,7 +133397,7 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
       ...await this._getNearbyResources(level2.map_id, form.asset_id, asset_list, extra_members.length)
     ];
     const group_members = unique([currentUser(), ...extra_members], "email");
-    const available = await Promise.all(group_members.map((_3, idx) => this.checkResourceAvailable(__spreadProps(__spreadValues({}, form), {
+    const available = await Promise.all(group_members.map((_3, idx) => this._checkResourceAvailable(__spreadProps(__spreadValues({}, form), {
       asset_id: resources[idx].map_id || resources[idx].id,
       user_email: _3.email
     }), type2)));
@@ -133314,18 +133456,18 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
     ref.close();
   }
   /** Check if the given resource is available for the selected user to book */
-  async checkResourceAvailable({ id, asset_id, date, duration, user_email }, type2) {
+  async _checkResourceAvailable({ id, asset_id, date, duration, user_email }, type2) {
     if (!user_email)
       throw i18n("BOOKINGS.NO_USER");
     if (type2 === "group-event")
       return true;
-    const bookings = await queryBookings({
+    const bookings = await lastValueFrom(queryBookings({
       period_start: getUnixTime(date),
       period_end: getUnixTime(date + duration * 60 * 1e3),
       type: type2,
       email: user_email,
       limit: 1e3
-    }).toPromise();
+    }));
     const active_bookings = bookings.filter((_3) => _3.status !== "declined" && _3.status !== "cancelled" && !_3.rejected);
     if (active_bookings.find((_3) => _3.asset_id === asset_id && id !== _3.id)) {
       throw i18n(asset_id.includes("@") ? "BOOKINGS.VISITOR_BOOKED" : "BOOKINGS.RESOURCE_BOOKED", { name: asset_id });
@@ -133334,6 +133476,27 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
     if (allowed_bookings > 0 && active_bookings.filter((_3) => _3.user_email.toLowerCase() === (user_email || currentUser()?.email || "").toLowerCase() && _3.id !== id).length >= allowed_bookings) {
       const current = user_email === currentUser()?.email;
       throw i18n(current ? "BOOKINGS.CLASH_CURRENT_USER" : "BOOKINGS.CLASH_OTHER_USER", { name: user_email });
+    }
+    return true;
+  }
+  async _checkResourceRules(assets, date, duration, host) {
+    const user = await lastValueFrom(Mc(host)).catch(() => ({
+      email: host
+    }));
+    if (!assets?.length)
+      return true;
+    const rules = await nextValueFrom(this.booking_rules);
+    const resource_rules = assets?.map((space) => {
+      const bld = this._org.buildings.find((b3) => space.zone.parent_id === b3.id);
+      return rulesForResource({
+        date,
+        duration,
+        host: new User(user),
+        resource: space
+      }, rules[bld.id]);
+    });
+    if (!resource_rules.every((_3) => !_3.hidden)) {
+      throw i18n("BOOKINGS.RULES_HIDDEN", void 0, assets.length);
     }
     return true;
   }
@@ -133633,7 +133796,7 @@ function DateFieldComponent_Conditional_3_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(1, 1, ctx_r0.date, ctx_r0.date_format), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(1, 1, ctx_r0.date(), ctx_r0.date_format), " ");
   }
 }
 function DateFieldComponent_Conditional_4_Template(rf, ctx) {
@@ -133718,7 +133881,7 @@ function DateFieldComponent_ng_template_11_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", ctx_r0.date || ctx_r0.now)("from", ctx_r0.from)("to", ctx_r0.until)("offset_weekday", ctx_r0.week_start());
+    \u0275\u0275property("ngModel", ctx_r0.date() || ctx_r0.now)("from", ctx_r0.from)("to", ctx_r0.until)("offset_weekday", ctx_r0.week_start());
   }
 }
 var TimezoneDiffRange;
@@ -133735,12 +133898,12 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
     return this.use_24hr() ? "HH : mm" : "h : mm a";
   }
   get start_of_day() {
-    const start = startOfDay(this.date).valueOf();
+    const start = startOfDay(this.date()).valueOf();
     const format3 = `MMM d, ${this.time_format}${this.range() === 1 ? " (z)" : ""}`;
     return this._date_pipe.transform(start, format3, this.tz);
   }
   get end_of_day() {
-    const end = endOfDay(this.date).valueOf();
+    const end = endOfDay(this.date()).valueOf();
     const format3 = `MMM d, ${this.time_format}${this.range() === 1 ? " (z)" : ""}`;
     return this._date_pipe.transform(end, format3, this.tz);
   }
@@ -133765,6 +133928,7 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
     this.short = input(false);
     this.timezone = input("");
     this.range = input(TimezoneDiffRange.Both);
+    this.date = signal(Date.now());
     this.now = Date.now();
     this._date_pipe = new DatePipe("en");
     this._local_tz = getTimezoneOffsetString(Intl.DateTimeFormat().resolvedOptions().timeZone);
@@ -133780,14 +133944,14 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
   }
   ngOnInit() {
     this._control = this._injector.get(NgControl);
-    this.date = Date.now();
+    this.date.set(Date.now());
   }
   /**
    * Update the form field value
    * @param new_value New value to set on the form field
    */
   setValue(new_value) {
-    const old_date = new Date(this.date);
+    const old_date = new Date(this.date() || Date.now());
     let new_date = set(new_value, {
       hours: old_date.getHours(),
       minutes: old_date.getMinutes()
@@ -133795,10 +133959,9 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
     if (new_date < this.from.valueOf()) {
       new_date = this.from.valueOf();
     }
-    this.date = new_date;
-    if (this._onChange) {
+    this.date.set(new_date);
+    if (this._onChange)
       this._onChange(new_date);
-    }
     this._tooltip()?.close();
   }
   /* istanbul ignore next */
@@ -133807,7 +133970,7 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
    * @param value The new value for the component
    */
   writeValue(value) {
-    this.date = value;
+    this.date.set(value);
     this._tooltip()?.close();
   }
   /* istanbul ignore next */
@@ -133867,7 +134030,7 @@ _DateFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ ty
     \u0275\u0275classProp("opacity-30", ctx.disabled());
     \u0275\u0275property("content", calendar_picker_r3)("disabled", ctx.disabled());
     \u0275\u0275advance(3);
-    \u0275\u0275conditional(ctx.date ? 3 : 4);
+    \u0275\u0275conditional(ctx.date() ? 3 : 4);
     \u0275\u0275advance(2);
     \u0275\u0275conditional(ctx.timezone() && ctx.tz ? 5 : -1);
     \u0275\u0275advance(5);
@@ -133902,8 +134065,8 @@ var DateFieldComponent = _DateFieldComponent;
                 class="flex w-1/2 flex-1 flex-col truncate px-4 py-2 text-left leading-tight"
             >
                 <div class="text-base font-normal">
-                    @if (date) {
-                        {{ date | date: date_format }}
+                    @if (date()) {
+                        {{ date() | date: date_format }}
                     } @else {
                         <span class="opacity-30">{{
                             'FORM.DATE_EMPTY' | translate
@@ -133936,7 +134099,7 @@ var DateFieldComponent = _DateFieldComponent;
         <ng-template #calendar_picker>
             <div class="relative w-[18rem] rounded bg-base-100 px-2 py-4">
                 <date-calendar
-                    [ngModel]="date || now"
+                    [ngModel]="date() || now"
                     [from]="from"
                     [to]="until"
                     [offset_weekday]="week_start()"
@@ -133961,7 +134124,7 @@ var DateFieldComponent = _DateFieldComponent;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateFieldComponent, { className: "DateFieldComponent", filePath: "libs/form-fields/src/lib/date-field.component.ts", lineNumber: 108 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateFieldComponent, { className: "DateFieldComponent", filePath: "libs/form-fields/src/lib/date-field.component.ts", lineNumber: 109 });
 })();
 
 // libs/users/src/lib/guests.fn.ts
@@ -137778,7 +137941,10 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     const has_time_changed = !event.id || event.date !== this.form.value.date || event.duration !== this.form.value.duration;
     if (spaces.length && has_time_changed) {
       const space_list2 = await Promise.all(changed_spaces.map((_3) => this._space_pipe.transform(_3.email)));
-      await this._checkResourcesAvailable(space_list2, this.form.value.all_day ? startOfDay(this.form.value.date).valueOf() : this.form.value.date, this.form.value.all_day ? Math.max(24 * 60, this.form.value.duration) : this.form.value.duration, event.ical_uid || event.id || "").catch(on_error);
+      const date = this.form.value.all_day ? startOfDay(this.form.value.date).valueOf() : this.form.value.date;
+      const duration = this.form.value.all_day ? Math.max(24 * 60, this.form.value.duration) : this.form.value.duration;
+      await this._checkResourcesAvailable(space_list2, date, duration, event.ical_uid || event.id || "").catch(on_error);
+      await this._checkResourceRules(space_list2, date, duration, this._host(this.form.value.host, spaces[0]?.email)).catch(on_error);
     } else if (!space_list.length && this.lone_space) {
       spaces = [await this._space_pipe.transform(this.lone_space)];
       this.form.patchValue({ resources: spaces });
@@ -137881,6 +138047,25 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     }
     return true;
   }
+  async _checkResourceRules(spaces, date, duration, host) {
+    const user = await lastValueFrom(Mc(host)).catch(() => ({
+      email: host
+    }));
+    const rules = await nextValueFrom(this.booking_rules$);
+    const space_rules = spaces.map((space) => {
+      const bld = this._org.buildings.find((b3) => space.zones.includes(b3.id));
+      return rulesForResource({
+        date,
+        duration,
+        host: new User(user),
+        resource: space
+      }, rules[bld.id]);
+    });
+    if (!space_rules.every((_3) => !_3.hidden)) {
+      throw i18n("CALENDAR_EVENT.SPACE_BOOKING_RULES_HIDDEN", void 0, spaces.length);
+    }
+    return true;
+  }
   async _performBooking(event, query2) {
     this._updateVisitorList(event.attendees);
     const old_system = event.old_system?.id || event.old_system?.email || event.resources[0]?.email;
@@ -137888,16 +138073,16 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     if (old_system !== system_id) {
       event.attendees = event.attendees.filter((_3) => _3.email !== old_system || _3.id !== old_system);
     }
-    return (this.book_internal ? saveBooking(newBookingFromCalendarEvent(__spreadProps(__spreadValues({}, event.toJSON()), {
+    return lastValueFrom(this.book_internal ? saveBooking(newBookingFromCalendarEvent(__spreadProps(__spreadValues({}, event.toJSON()), {
       status: this._settings.get("app.bookings.no_approval") === true ? "approved" : "tentative"
-    }))).pipe(map((_3) => newCalendarEventFromBooking(_3))) : saveEvent(event, query2))?.toPromise();
+    }))).pipe(map((_3) => newCalendarEventFromBooking(_3))) : saveEvent(event, query2));
   }
   async _removeBookingAfterError(is_new, event, assets = false, e) {
     if (is_new) {
-      await removeEvent(event.id, event.resources.length ? {
+      await lastValueFrom(removeEvent(event.id, event.resources.length ? {
         calendar: this.form.value.host || currentUser()?.email,
         system_id: event.resources[0].id
-      } : {})?.toPromise();
+      } : {}));
       throw e?.status === 409 ? i18n("CALENDAR_EVENT.ASSETS_CLASH_ERROR") : i18n("CALENDAR_EVENT.ASSETS_ERROR");
     } else if (assets) {
       throw i18n("CALENDAR_EVENT.ASSETS_PARTIAL_ERROR", {
@@ -168900,7 +169085,7 @@ var _MeetingBookingSuccessComponent = class _MeetingBookingSuccessComponent {
 _MeetingBookingSuccessComponent.\u0275fac = function MeetingBookingSuccessComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MeetingBookingSuccessComponent)();
 };
-_MeetingBookingSuccessComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MeetingBookingSuccessComponent, selectors: [["meeting-booking-success"]], standalone: false, decls: 16, vars: 17, consts: [[1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "space-y-4", "bg-base-100", "p-4", "text-center"], [1, "text-3xl"], ["src", "assets/tick_success.svg"], ["btn", "", "btn", "", "matRipple", "", 1, "w-64", 3, "routerLink"]], template: function MeetingBookingSuccessComponent_Template(rf, ctx) {
+_MeetingBookingSuccessComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MeetingBookingSuccessComponent, selectors: [["meeting-booking-success"]], standalone: false, decls: 16, vars: 17, consts: [[1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "space-y-4", "bg-base-100", "p-4", "text-center"], [1, "text-3xl"], ["src", "assets/tick_success.svg"], ["btn", "", "matRipple", "", 1, "w-64", 3, "routerLink"]], template: function MeetingBookingSuccessComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "h3", 1);
     \u0275\u0275text(2, "Booking Confirmed!");
@@ -168956,13 +169141,7 @@ var MeetingBookingSuccessComponent = _MeetingBookingSuccessComponent;
                         | date: 'shortTime'
                 }}
             </p>
-            <a
-                btn
-                btn
-                matRipple
-                [routerLink]="['/book', 'meeting']"
-                class="w-64"
-            >
+            <a btn matRipple [routerLink]="['/book', 'meeting']" class="w-64">
                 New Booking
             </a>
         </div>
@@ -168970,7 +169149,7 @@ var MeetingBookingSuccessComponent = _MeetingBookingSuccessComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MeetingBookingSuccessComponent, { className: "MeetingBookingSuccessComponent", filePath: "apps/outlook-addin/src/app/meetings/meeting-success.component.ts", lineNumber: 47 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MeetingBookingSuccessComponent, { className: "MeetingBookingSuccessComponent", filePath: "apps/outlook-addin/src/app/meetings/meeting-success.component.ts", lineNumber: 41 });
 })();
 
 // apps/outlook-addin/src/app/not-found.component.ts
