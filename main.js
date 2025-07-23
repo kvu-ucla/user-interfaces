@@ -74048,7 +74048,7 @@ var COMMON = {
   FAVOURITES: "Favourites",
   FAVOURITES_ONLY: "Favourites Only",
   FAVOURITES_ADD: "Add to favourites",
-  FAVOURITES_REMOVE: "Add to favourites",
+  FAVOURITES_REMOVE: "Remove from favourites",
   ACCESSIBLE_ONLY: "Accessible Only",
   LANGUAGE: "Language",
   LANGUAGE_SELECT: "Select a language",
@@ -74136,7 +74136,7 @@ var COMMON = {
   SUPPORT_HEADER: "Raise a support ticket",
   SUPPORT_LOCATION: "Location",
   SUPPORT_TYPE: "Issue Type",
-  SUPPORT_DESCRIPTION: " Issue Description",
+  SUPPORT_DESCRIPTION: "Issue Description",
   SUPPORT_DESCRIPTION_REQUIRED: " A description is required",
   SUPPORT_IMAGES: "Images",
   SUPPORT_LOADING: "Sending support ticket...",
@@ -74223,7 +74223,8 @@ var COMMON = {
   NO_DESCRIPTION: "No description",
   VALID_UNTIL: "Valid until",
   VALID_UNTIL_DATE: "Valid until {{ date }}",
-  TERMS: "Terms & Conditions"
+  TERMS: "Terms & Conditions",
+  LOCATABLE: "Location tracking"
 };
 var LANGUAGE = {
   ENGLISH: "English",
@@ -74232,7 +74233,7 @@ var LANGUAGE = {
   FRENCH: "French",
   FRENCH_CA: "French (Canadian)",
   SPANISH: "Spanish",
-  PORTUGESE: "Portugese",
+  PORTUGUESE: "Portuguese",
   ITALIAN: "Italian",
   CHINESE: "Chinese",
   ARABIC: "Arabic",
@@ -74353,13 +74354,13 @@ var EXPLORE = {
   LOCATE_CURRENT_FAILED: "Failed to retrieve your current location.",
   LOCATE_USER_FAILED: 'Failed to locate user "{{ name }}".',
   LOCATE_USER_NOT_FOUND: "No location for the given user",
-  LOCATE_USER_FOUND_NO_PIN: "Unable to resolve user's exact location on this level",
+  LOCATE_USER_FOUND_NO_PIN: "User is on this level but with an inaccurate method. {{ type }}",
   LOCATE_USER_DETAILS_FAILED: 'Failed to find user details for "{{ name }}".',
   LOCATE_SPACE_DETAILS_FAILED: "Failed to find space details.",
-  LOCATE_SERVICE_UNAVAILABLE: "Location services is not setup for this application.",
+  LOCATE_SERVICE_UNAVAILABLE: "Location services is not set up for this application.",
   ZOOM_IN: "Zoom in",
   ZOOM_OUT: "Zoom out",
-  ZOOM_RESET: "Reset zoom & center",
+  ZOOM_RESET: "Reset zoom & centre",
   DEVICE_COUNT: "{{ count }} user device(s)",
   SENSORS_TEMP: "Temperature: {{ value }}",
   SENSORS_PEOPLE: "{{ count }} people",
@@ -74397,6 +74398,7 @@ var EXPLORE = {
   BOOK_RESOURCE: "Book - {{ name }}",
   MAPSINDOORS_INIT_FAILED: "Failed to initialise map view.",
   MAP_EMPTY: "No map is set to display",
+  MAP_FAILED_TO_LOAD: "Failed to load map",
   COORDINATES: "Coordinates",
   MAP_ID: "Map ID",
   MAP_ID_EMPTY: "No map ID",
@@ -74465,7 +74467,7 @@ var BOOKINGS = {
   LOADING_AVAILABILITY: "Checking {{ type }} availability...",
   CONFIRM_TITLE: "Book {{ type }}",
   CONFIRM_MSG: "Would you like to book the {{ type }} for {{ date }}?",
-  CONFIRM_MSG_GROUP: "Would you like to book the {{ type }} for {{ date }}? <br>You group members will be assigned desks nearby your selected desk.",
+  CONFIRM_MSG_GROUP: "Would you like to book the {{ type }} for {{ date }}? <br>Your group members will be assigned desks nearby your selected desk.",
   CONFIRM_LOADING: "Processing booking request...",
   ASSETS_CLASH_ERROR: "Some assets are already booked for the selected time",
   ASSETS_INVALID_ERROR: "Failed to validate asset requests",
@@ -74497,15 +74499,15 @@ var BOOKINGS = {
   DESK_AVAILABLE_ERROR: "Desk is unavailable at this time.",
   DESK_LIST_LOADING: "Finding available desks...",
   DESK_LIST_EMPTY: "No available desks for selected time and/or filters",
-  DESK_SELECT_MSG: "Select a desk to view it's details",
+  DESK_SELECT_MSG: "Select a desk to view its details",
   ITEM_BOOKED: "{{ name }} booked!",
-  DESK_SUCCESS_LONE: "You desk booking has been successfully booked for {{ date }} at {{ time }}",
-  DESK_SUCCESS_GROUP: "You group of {{ size }} desks have been successfully booked for {{ date }} at {{ time }}",
-  DESK_SUCCESS_LONE_ALLDAY: "You desk booking has been successfully booked for {{ date }}",
-  DESK_SUCCESS_GROUP_ALLDAY: "You group of {{ size }} desks have been successfully booked for {{ date }}",
+  DESK_SUCCESS_LONE: "Your desk booking has been successfully booked for {{ date }} at {{ time }}",
+  DESK_SUCCESS_GROUP: "Your group of {{ size }} desks have been successfully booked for {{ date }} at {{ time }}",
+  DESK_SUCCESS_LONE_ALLDAY: "Your desk booking has been successfully booked for {{ date }}",
+  DESK_SUCCESS_GROUP_ALLDAY: "Your group of {{ size }} desks have been successfully booked for {{ date }}",
   ASSETS_BOOKED: "Booking includes {{ count }} asset(s)",
-  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for you booking to be approved.",
-  LINK_HEADER: "Add to event to your calendar",
+  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for your booking to be approved.",
+  LINK_HEADER: "Add event to your calendar",
   LINK_OUTLOOK: "Add to Outlook",
   LINK_GOOGLE: "Add to Google Calendar",
   LINK_ICAL: "Download iCal File",
@@ -74532,7 +74534,7 @@ var BOOKINGS = {
   PARKING_PLATE_NUMBER_REQUIRED: "A plate number is required",
   PARKING_LIST_LOADING: "Finding available parking spaces...",
   PARKING_LIST_EMPTY: "No available parking spaces for selected time and/or filters",
-  PARKING_SELECT_MSG: "Select a parking space to view it's details",
+  PARKING_SELECT_MSG: "Select a parking space to view its details",
   VISITOR_INVITE_TITLE: "Invite Visitor",
   VISITOR_LIST: "Visitors",
   VISITOR_NAME: "Visitor Name",
@@ -74559,14 +74561,16 @@ var BOOKINGS = {
   ASSETS_ADD_HEADER: "Add Assets",
   ASSETS_ADD: "Add this Asset",
   ASSETS_REMOVE: "Remove this Asset",
-  ASSETS_SELECT: "Select an asset to view it's details",
+  ASSETS_SELECT: "Select an asset to view its details",
   ASSETS_SEARCH: "Search assets...",
   ASSETS_LOADING: "Finding assets...",
   ASSETS_EMPTY: "No available assets for selected time and/or filters",
   ASSETS_DELIVER_TOGGLE: "Exact Time",
   ASSETS_DELIVER_DATE: "Delivery Date",
   ASSETS_DELIVER_TIME: "Deliver After",
-  ASSETS_AVAILABLE: "{{ count }} available"
+  ASSETS_AVAILABLE: "{{ count }} available",
+  RULES_HIDDEN_1: "The selected {{ type }} is unavailable for the selected time or duration",
+  RULES_HIDDEN_N: "Some of the selected {{ type }}s are unavailable for the selected time or duration"
 };
 var CALENDAR_EVENT = {
   CATERING: "Catering",
@@ -74593,7 +74597,7 @@ var CALENDAR_EVENT = {
   ACTION_DELETE: "Delete event",
   ACTION_PRINT: "Print event",
   ACTION_DELETE_SERIES: "Delete series",
-  NO_LONG_EDIT_MSG: "Editing bookings long than \n a day is not available",
+  NO_LONG_EDIT_MSG: "Editing bookings longer than \n a day is not available",
   SPACE_LOADING: "Loading space list for location...",
   SPACE_STATUS_LOADING: "Updating available spaces...",
   SPACE_EXTERNALS_ERROR: "External attendees require a space to be booked",
@@ -74606,7 +74610,7 @@ var CALENDAR_EVENT = {
   CAPACITY_WARNING: "The selected room has less capacity than the number of meeting attendees.",
   CAPACITY_ERROR: "Attendee count is greater than the capacity of the selected rooms",
   CATERING_CHARGE_CODE: "Charge Code",
-  CATERING_CHARGE_CODE_SEACH: "Search for charge code...",
+  CATERING_CHARGE_CODE_SEARCH: "Search for charge code...",
   CATERING_CHARGE_CODE_REQUIRED: "Catering charge code is required",
   CATERING_NOTES: "Extra catering details. e.g. Dietary requirements etc.",
   CATERING_NOTES_REQUIRED: "Catering order notes are required",
@@ -74620,9 +74624,9 @@ var CALENDAR_EVENT = {
   SUCCESS: "Successfully created event",
   SUCCESS_WITH_SPACE: "You room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }} at {{ time }}",
   SUCCESS_WITHOUT_SPACE: "You meeting has been successfully booked for {{ date }} at {{ time }}",
-  SUCCESS_WITH_SPACE_ALLDAY: "You room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }}",
-  SUCCESS_WITHOUT_SPACE_ALLDAY: "You meeting has been successfully booked for {{ date }}",
-  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for you booking to be approved.",
+  SUCCESS_WITH_SPACE_ALLDAY: "Your room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }}",
+  SUCCESS_WITHOUT_SPACE_ALLDAY: "Your meeting has been successfully booked for {{ date }}",
+  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for your booking to be approved.",
   BOOK_NEARBY_DESK: "Book nearby desk",
   SPACE_SELECT_SIZE: "Select room size",
   SPACE_SELECT_SIZE_X: "Min. {{ count }} people",
@@ -74634,12 +74638,14 @@ var CALENDAR_EVENT = {
   FACILITIES: "Room Facilities",
   SPACE_REMOVE: "Remove this room",
   SPACE_ADD_TO: "Add this room",
-  SPACE_LIST_INFO: "Select a room to view it's details",
+  SPACE_LIST_INFO: "Select a room to view its details",
   SPACE_LOCATION: "Location",
   SPACE_REGION_ANY: "Any region",
   SPACE_LEVEL_ANY: "Any level",
   SPACE_SELECT_EMPTY: "No available spaces for selected time and/or filters",
   SPACE_SELECT_LOADING: "Finding available spaces...",
+  SPACE_BOOKING_RULES_HIDDEN_1: "The selected room is not available for the selected time or duration",
+  SPACE_BOOKING_RULES_HIDDEN_N: "Some of the selected rooms are not available for the selected time or duration",
   CONFIRM_DETAILS: "Confirm Meeting",
   FINISHED: "Return home",
   LOADING: "Creating meeting requests...",
@@ -74652,14 +74658,14 @@ var CALENDAR_EVENT = {
   GROUP_FEATURED: "Featured",
   GROUP_INTERESTED: "Interested",
   GROUP_NOT_INTERESTED: "Not Interested",
-  GROUP_INTEREST_ADD: "Indictate Interest",
+  GROUP_INTEREST_ADD: "Indicate Interest",
   GROUP_INTEREST_REMOVE: "Revoke Interest",
   GROUP_ATTENDING_FIELD: "Attending",
   GROUP_GOING: "Going",
   GROUP_NOT_GOING: "Not Going",
-  GROUP_GOING_ADD: "Indictate Going",
+  GROUP_GOING_ADD: "Indicate Going",
   GROUP_GOING_REMOVE: "Revoke Going",
-  GROUP_PREMOTE: "Premote Event",
+  GROUP_PROMOTE: "Promote Event",
   GROUP_EDIT: "Edit Event",
   GROUP_COPY_URL: "Copy URL",
   GROUP_DELETE: "Delete Event",
@@ -74734,7 +74740,7 @@ var CATERING = {
   ORDER_ITEMS_LOADING: "Finding available menu items...",
   ORDER_ITEM_REMOVE: "Remove this item",
   ORDER_ITEM_ADD: "Add this item",
-  ORDER_ITEM_SELECT: "Select an item to view it's details",
+  ORDER_ITEM_SELECT: "Select an item to view its details",
   ORDER_ALLOW: "Allow ordering this item from this zone",
   ORDERS_EMPTY: "No catering orders for the selected date.",
   ORDERS_DELIVER_TIME: "Deliver at {{ time }}",
@@ -74861,9 +74867,9 @@ var APP = {
     PARKING_NEW_HEADER: "New Parking Reservation",
     PARKING_EDIT_HEADER: "Edit Parking Reservation",
     PARKING_ASSIGNED: 'You are already assigned a parking space "{{ name }}"',
-    PARKING_SUCCESS_MSG: 'Your parking space reservation for "{{ name }}" at {{ place }} has been successfully booked for the {{ date }} at {{ time }}',
+    PARKING_SUCCESS_MSG: 'Your parking space reservation for "{{ name }}" has been successfully booked for the {{ date }} at {{ time }}',
     PARKING_CONFIRM_TITLE: "Confirm Parking Reservation",
-    DESK_ASSIGNED: 'You are already assigned a parking space "{{ name }}"',
+    DESK_ASSIGNED: 'You are already assigned a desk "{{ name }}"',
     DESK_CONFIRM_TITLE: "Confirm Desk Booking",
     VIEW_SCHEDULE: "View your Bookings",
     BOOKING_FINISHED: "Return home",
@@ -74875,15 +74881,16 @@ var APP = {
     CHAT_ASSISTANT: "Assistant",
     CHAT_WAITING: "Waiting for a reply...",
     CHAT_MESSAGE_PLACEHOLDER: "New message...",
-    RESOURCE_CHECKED_IN_FAILED: "Failed to check in resource",
-    RESOURCE_CHECKED_IN: "Successfully checked in resource",
     DEAL_COUNT_1: "{{ count }} Offer",
     DEAL_COUNT_N: "{{ count }} Offers",
     SORT_BY_DATE_DESC: "Sort by Date (Newest First)",
     SORT_BY_DATE_ASC: "Sort by Date (Oldest First)",
     SORT_BY_RELEVANCE: "Sort by Relevance",
     DEALS_EMPTY_HEADER: "No Deals or Offers Available",
-    DEALS_EMPTY_BODY: "We're working on bringing you exciting deals and offers. Please check back later or explore other sections."
+    DEALS_EMPTY_BODY: "We're working on bringing you exciting deals and offers. Please check back later or explore other sections.",
+    RESOURCE_CHECKED_IN_FAILED: "No booking found",
+    RESOURCE_CHECKED_IN: "Successfully checked in resource",
+    RESOURCE_CHECKED_IN_MESSAGE: "Resource checked in successfully"
   },
   CONCIERGE: {
     MENU_BOOKINGS: "Bookings",
@@ -75236,7 +75243,7 @@ var APP = {
     EMAIL_TEMPLATES_SAVE: "Save Template",
     EMAIL_TEMPLATES_SEND_TEST: "Send test Email",
     EMAIL_TEMPLATES_SENT_TEST: "Successfully sent test email.",
-    EMAIL_TEMPLATES_CONFIG_ERROR: "Mailing system is not configured fot this application",
+    EMAIL_TEMPLATES_CONFIG_ERROR: "Mailing system is not configured for this application",
     EMAIL_TEMPLATES_SAVE_SUCCESS: "Successfully saved email template.",
     EMAIL_TEMPLATES_SAVE_ERROR: "Failed to save email template. Error: {{ error }}",
     EMAIL_TEMPLATES_REMOVE_SUCCESS: "Successfully removed email template",
@@ -75467,7 +75474,7 @@ var APP = {
     LOCKERS_RELEASE_ALL_SUCCESS: "Successfully released all locker",
     LOCKERS_SHARE_ERROR: 'Failed to share locker with "{{ name }}". Error: {{ error }}',
     LOCKERS_SHARE_SUCCESS: 'Successfully shared locker "{{ name }}" with {{ user }}',
-    LOCKERS_NO_DRIVER: "Driver is not setup for lockers",
+    LOCKERS_NO_DRIVER: "Driver is not set up for lockers",
     LOCKERS_POSITION_INVALID: "Position of the locker overlaps with another locker",
     LOCKERS_SIZE_INVALID: "Locker overlaps with another locker",
     SIGNAGE_HEADER: "Digital Signage Management",
@@ -75760,6 +75767,11 @@ var APP = {
     APPROVER: "Approver",
     VALID_FROM: "Valid From",
     VALID_UNTIL: "Valid Until",
+    PLAY_FROM: "Play From",
+    PLAY_UNTIL: "Play Until",
+    PLAY_AT: "Play At",
+    PLAY_CRON: "Play Schedule",
+    PLAY_DURATION: "Play For",
     AVAILABLE_ROOMS_HEADER: "Set {{ type }} availability for rooms",
     AVAILABLE_ROOMS_SAVING: "Saving room availability for {{ type }}...",
     AVAILABLE_ROOMS_ENABLE: "Enable Selected",
@@ -75840,7 +75852,7 @@ var APP = {
     ACTION_HELP: "Help",
     ACTION_JOIN_ROOMS: "Join Rooms",
     ACTION_POWER: "Power",
-    OUTPUTS_EMPTY: "No output devices setup for this system.",
+    OUTPUTS_EMPTY: "No output devices set up for this system.",
     CONTROLS_EMPTY: "No controls available for this input source",
     INPUT_EMPTY: "No input source",
     INPUT_CATEGORY_EMPTY: "No inputs available for category",
@@ -75920,7 +75932,7 @@ var APP = {
     PREVIOUS: "Previous Media",
     PLAY: "Playing",
     PAUSE: "Paused",
-    NEXT: "Previous Media",
+    NEXT: "Next Media",
     VOLUME: "Volume [{{ state }}]",
     LOOP_ALL: "Loop [All]",
     LOOP_ONE: "Loop [One]",
@@ -75964,7 +75976,7 @@ var APP = {
     CAMERA_UNAVAILABLE: "Camera feed loading...",
     HOST: "Host",
     PHONE: "Phone",
-    ORGANISATION: "Organization",
+    ORGANISATION: "Organisation",
     REASON: "Reason for visit",
     CHECKED_IN_MSG: "You are checked in!",
     CHECKED_IN_MSG_SELF_REG: "Your registration is confirmed!",
@@ -75993,7 +76005,7 @@ var APP = {
     BEVERAGE_LOADING: "Requesting drink...",
     BEVERAGE_SUCCESS: "Successfully requested drink. Your request should show up at your meeting shortly after the start time.",
     ERROR_PRINT: "Failed to print visitor label.",
-    ERROR_CHECKIN: "Failed to check-in {{ guest }} for {{ host }}'s meeting.",
+    ERROR_CHECKIN: "Failed to check in {{ guest }} for {{ host }}'s meeting.",
     SUCCESS_CHECKIN: "Successfully checked in {{ guest }} for {{ host }}'s meeting",
     NOT_FOUND: 'No meetings for guest "{{ email }}" today',
     LOAD_ERROR: "Failed to load booking for guest.",
@@ -77622,13 +77634,13 @@ function Di() {
         3329325298
       ]);
       function r2(p, a, h3, f2, S3) {
-        for (var m2, k3, x3, W4, R4, O4, G4, U3, j3, D4, Ct3, Nt, ue2; S3 >= 64; ) {
+        for (var m2, k3, x3, W4, R4, O4, G4, U3, j3, D4, Ct3, Nt, ue; S3 >= 64; ) {
           for (m2 = a[0], k3 = a[1], x3 = a[2], W4 = a[3], R4 = a[4], O4 = a[5], G4 = a[6], U3 = a[7], D4 = 0; D4 < 16; D4++)
             Ct3 = f2 + D4 * 4, p[D4] = (h3[Ct3] & 255) << 24 | (h3[Ct3 + 1] & 255) << 16 | (h3[Ct3 + 2] & 255) << 8 | h3[Ct3 + 3] & 255;
           for (D4 = 16; D4 < 64; D4++)
-            j3 = p[D4 - 2], Nt = (j3 >>> 17 | j3 << 15) ^ (j3 >>> 19 | j3 << 13) ^ j3 >>> 10, j3 = p[D4 - 15], ue2 = (j3 >>> 7 | j3 << 25) ^ (j3 >>> 18 | j3 << 14) ^ j3 >>> 3, p[D4] = (Nt + p[D4 - 7] | 0) + (ue2 + p[D4 - 16] | 0);
+            j3 = p[D4 - 2], Nt = (j3 >>> 17 | j3 << 15) ^ (j3 >>> 19 | j3 << 13) ^ j3 >>> 10, j3 = p[D4 - 15], ue = (j3 >>> 7 | j3 << 25) ^ (j3 >>> 18 | j3 << 14) ^ j3 >>> 3, p[D4] = (Nt + p[D4 - 7] | 0) + (ue + p[D4 - 16] | 0);
           for (D4 = 0; D4 < 64; D4++)
-            Nt = (((R4 >>> 6 | R4 << 26) ^ (R4 >>> 11 | R4 << 21) ^ (R4 >>> 25 | R4 << 7)) + (R4 & O4 ^ ~R4 & G4) | 0) + (U3 + (n2[D4] + p[D4] | 0) | 0) | 0, ue2 = ((m2 >>> 2 | m2 << 30) ^ (m2 >>> 13 | m2 << 19) ^ (m2 >>> 22 | m2 << 10)) + (m2 & k3 ^ m2 & x3 ^ k3 & x3) | 0, U3 = G4, G4 = O4, O4 = R4, R4 = W4 + Nt | 0, W4 = x3, x3 = k3, k3 = m2, m2 = Nt + ue2 | 0;
+            Nt = (((R4 >>> 6 | R4 << 26) ^ (R4 >>> 11 | R4 << 21) ^ (R4 >>> 25 | R4 << 7)) + (R4 & O4 ^ ~R4 & G4) | 0) + (U3 + (n2[D4] + p[D4] | 0) | 0) | 0, ue = ((m2 >>> 2 | m2 << 30) ^ (m2 >>> 13 | m2 << 19) ^ (m2 >>> 22 | m2 << 10)) + (m2 & k3 ^ m2 & x3 ^ k3 & x3) | 0, U3 = G4, G4 = O4, O4 = R4, R4 = W4 + Nt | 0, W4 = x3, x3 = k3, k3 = m2, m2 = Nt + ue | 0;
           a[0] += m2, a[1] += k3, a[2] += x3, a[3] += W4, a[4] += R4, a[5] += O4, a[6] += G4, a[7] += U3, f2 += 64, S3 -= 64;
         }
         return f2;
@@ -79028,6 +79040,16 @@ function te(e2) {
 }
 function Mc(e2, t = {}) {
   return $({ id: e2, query_params: t, fn: te, path: Dt });
+}
+function Uc(e2, t, n2 = "patch") {
+  return N2({
+    id: e2,
+    form_data: t,
+    query_params: {},
+    method: n2,
+    fn: te,
+    path: Dt
+  });
 }
 var ft = "zones";
 function Le(e2) {
@@ -80748,6 +80770,7 @@ var User = class {
     this.checked_in = !!data.checked_in;
     this.required = data.required ?? true;
     this.resource = data.resource ?? false;
+    this.locatable = data.locatable ?? false;
     this.response_status = data.response_status || "";
     const groups = data.groups || [];
     this.department = data.department ?? "";
@@ -80874,6 +80897,12 @@ setTimeout(() => {
   }
   combineLatest([Mc("current"), _change]).pipe(delay(1e3), retry(10), map(([i]) => new StaffUser(i))).subscribe((user) => _current_user.next(user));
 }, 300);
+function reloadUserData() {
+  setTimeout(async () => {
+    const user = await lastValueFrom(Mc("current"));
+    _current_user.next(new StaffUser(user));
+  }, 300);
+}
 function currentUser() {
   return _current_user.getValue() || EMPTY_USER;
 }
@@ -80881,15 +80910,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "17624a7",
-  "hash": "17624a7",
+  "raw": "34c199c",
+  "hash": "34c199c",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "17624a7",
+  "suffix": "34c199c",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752722770075
+  "time": 1753234031962
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -81013,6 +81042,10 @@ var _SettingsService = class _SettingsService extends AsyncHandler {
     if (name === "font_size")
       this._setFontSize();
     this.timeout("save_settings", () => this._savePendingChanges(), 2400);
+  }
+  async updateLocatable(locatable) {
+    await lastValueFrom(Uc(currentUser().id, { locatable }, "patch"));
+    reloadUserData();
   }
   overrideCssVariable(key, value, important = false) {
     let element = document.getElementById(`css-var-overrides+${key}`);
@@ -81225,12 +81258,12 @@ function makeSnippet(mark, options) {
   if (typeof options.indent !== "number") options.indent = 1;
   if (typeof options.linesBefore !== "number") options.linesBefore = 3;
   if (typeof options.linesAfter !== "number") options.linesAfter = 2;
-  var re = /\r?\n|\r|\0/g;
+  var re2 = /\r?\n|\r|\0/g;
   var lineStarts = [0];
   var lineEnds = [];
   var match3;
   var foundLineNo = -1;
-  while (match3 = re.exec(mark.buffer)) {
+  while (match3 = re2.exec(mark.buffer)) {
     lineEnds.push(match3.index);
     lineStarts.push(match3.index + match3[0].length);
     if (mark.position <= match3.index && foundLineNo < 0) {
@@ -87436,7 +87469,7 @@ function uploadFile(file, pub = true, permissions = "none") {
       });
       const upload = upload_list[0];
       const upload_details = {
-        id: randomInt(999999999999),
+        id: upload?.id || `uploads-${randomString(8)}`,
         name: file.name,
         progress: 0,
         link: "",
@@ -87462,1519 +87495,6 @@ function uploadFile(file, pub = true, permissions = "none") {
     fileReader.readAsArrayBuffer(file);
   });
 }
-
-// libs/components/src/lib/upload-permissions-modal.component.ts
-var _c010 = (a0, a1, a2) => ({ file: a0, is_public: a1, permissions: a2 });
-function UploadPermissionsModalComponent_Conditional_15_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 2)(1, "label");
-    \u0275\u0275text(2, "Permissions");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "mat-form-field", 3)(4, "mat-select", 6);
-    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Conditional_15_Template_mat_select_ngModelChange_4_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      \u0275\u0275twoWayBindingSet(ctx_r1.permissions, $event) || (ctx_r1.permissions = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275elementStart(5, "mat-option", 10);
-    \u0275\u0275text(6, "None");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "mat-option", 11);
-    \u0275\u0275text(8, "Support");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(9, "mat-option", 12);
-    \u0275\u0275text(10, "Admin");
-    \u0275\u0275elementEnd()()()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275twoWayProperty("ngModel", ctx_r1.permissions);
-  }
-}
-var _UploadPermissionsModalComponent = class _UploadPermissionsModalComponent {
-  constructor() {
-    this._dialog_ref = inject(MatDialogRef);
-    this._data = inject(MAT_DIALOG_DATA);
-    this.file = this._data.file;
-    this.is_public = true;
-    this.permissions = "none";
-    this.file = this._data.file;
-  }
-  close() {
-    this._dialog_ref.close();
-  }
-};
-_UploadPermissionsModalComponent.\u0275fac = function UploadPermissionsModalComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _UploadPermissionsModalComponent)();
-};
-_UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadPermissionsModalComponent, selectors: [["upload-permissions-modal"]], decls: 21, vars: 8, consts: [["btn", "", "icon", "", "mat-dialog-close", ""], [1, "min-w-[20rem]", "p-4"], [1, "flex", "flex-col", "space-y-2"], ["appearance", "outline"], ["matInput", "", "disabled", "true", "placeholder", "File Name", 3, "ngModel"], [1, "pb-4"], [3, "ngModelChange", "ngModel"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", 1, "w-32", 3, "mat-dialog-close"], ["value", "none"], ["value", "support"], ["value", "admin"]], template: function UploadPermissionsModalComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "header")(1, "h2");
-    \u0275\u0275text(2, "Upload File");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "button", 0)(4, "icon");
-    \u0275\u0275text(5, "close");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(6, "main", 1)(7, "div", 2)(8, "label");
-    \u0275\u0275text(9, "File Name");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "mat-form-field", 3);
-    \u0275\u0275element(11, "input", 4);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(12, "div", 5)(13, "mat-checkbox", 6);
-    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Template_mat_checkbox_ngModelChange_13_listener($event) {
-      \u0275\u0275twoWayBindingSet(ctx.is_public, $event) || (ctx.is_public = $event);
-      return $event;
-    });
-    \u0275\u0275text(14, "Public");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275conditionalCreate(15, UploadPermissionsModalComponent_Conditional_15_Template, 11, 1, "div", 2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(16, "footer", 7)(17, "button", 8);
-    \u0275\u0275text(18, "Cancel");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(19, "button", 9);
-    \u0275\u0275text(20, " Upload ");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance(11);
-    \u0275\u0275property("ngModel", ctx.file.name);
-    \u0275\u0275advance(2);
-    \u0275\u0275twoWayProperty("ngModel", ctx.is_public);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(!ctx.is_public ? 15 : -1);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("mat-dialog-close", \u0275\u0275pureFunction3(4, _c010, ctx.file, ctx.is_public, ctx.permissions));
-  }
-}, dependencies: [MatDialogModule, MatDialogClose, MatFormFieldModule, MatFormField, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel], encapsulation: 2 });
-var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UploadPermissionsModalComponent, [{
-    type: Component,
-    args: [{ selector: "upload-permissions-modal", template: `
-        <header>
-            <h2>Upload File</h2>
-            <button btn icon mat-dialog-close>
-                <icon>close</icon>
-            </button>
-        </header>
-        <main class="min-w-[20rem] p-4">
-            <div class="flex flex-col space-y-2">
-                <label>File Name</label>
-                <mat-form-field appearance="outline">
-                    <input
-                        matInput
-                        [ngModel]="file.name"
-                        disabled="true"
-                        placeholder="File Name"
-                    />
-                </mat-form-field>
-            </div>
-            <div class="pb-4">
-                <mat-checkbox [(ngModel)]="is_public">Public</mat-checkbox>
-            </div>
-            @if (!is_public) {
-                <div class="flex flex-col space-y-2">
-                    <label>Permissions</label>
-                    <mat-form-field appearance="outline">
-                        <mat-select [(ngModel)]="permissions">
-                            <mat-option value="none">None</mat-option>
-                            <mat-option value="support">Support</mat-option>
-                            <mat-option value="admin">Admin</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-            }
-        </main>
-        <footer
-            class="flex items-center justify-end space-x-2 border-t border-base-200 px-4 py-2"
-        >
-            <button btn class="inverse w-32" mat-dialog-close>Cancel</button>
-            <button
-                btn
-                class="w-32"
-                [mat-dialog-close]="{ file, is_public, permissions }"
-            >
-                Upload
-            </button>
-        </footer>
-    `, schemas: [NO_ERRORS_SCHEMA], imports: [MatDialogModule, MatFormFieldModule, FormsModule] }]
-  }], () => [], null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadPermissionsModalComponent, { className: "UploadPermissionsModalComponent", filePath: "libs/components/src/lib/upload-permissions-modal.component.ts", lineNumber: 65 });
-})();
-
-// libs/common/src/lib/uploads.service.ts
-var _UploadsService = class _UploadsService {
-  constructor() {
-    this._dialog = inject(MatDialog);
-    this._upload_list = new BehaviorSubject([]);
-    this.upload_list = this._upload_list.asObservable();
-    if (localStorage) {
-      this._upload_list.next(JSON.parse(localStorage.getItem("BACKOFFICE.uploads") || "[]"));
-    }
-  }
-  clearList() {
-    const in_progress_list = this._upload_list.getValue().filter((file) => file.progress < 100 && !file.error);
-    this._upload_list.next(in_progress_list);
-  }
-  uploadFileWithPermissions(file) {
-    return new Promise((resolve, reject) => {
-      const ref = this._dialog.open(UploadPermissionsModalComponent, {
-        data: { file }
-      });
-      ref.afterClosed().subscribe(async (details) => {
-        if (details) {
-          const id = await this.uploadFile(details.file, details.is_public, details.permissions).catch((e2) => {
-            reject(e2);
-            throw e2;
-          });
-          resolve(id);
-        } else
-          reject();
-      });
-    });
-  }
-  uploadFile(file, pub = true, permissions = "none") {
-    return new Promise((resolve) => {
-      let resolved2 = false;
-      const update_fn = (details) => {
-        if (!resolved2) {
-          resolve(details.id);
-          resolved2 = true;
-        }
-        this._upload_list.next([
-          ...this._upload_list.getValue().filter((_3) => _3.id !== details.id),
-          details
-        ]);
-      };
-      uploadFile(file, pub, permissions).subscribe(update_fn, update_fn, () => this._updateUploadHistory());
-    });
-  }
-  _updateUploadHistory() {
-    const done_list = this._upload_list.getValue().filter((file) => file.progress >= 100);
-    done_list.forEach((i) => delete i.upload);
-    if (localStorage) {
-      localStorage.setItem("PLACEOS.uploads", JSON.stringify(done_list));
-    }
-  }
-};
-_UploadsService.\u0275fac = function UploadsService_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _UploadsService)();
-};
-_UploadsService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _UploadsService, factory: _UploadsService.\u0275fac, providedIn: "root" });
-var UploadsService = _UploadsService;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UploadsService, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], () => [], null);
-})();
-
-// libs/common/src/lib/user-idle-time.service.ts
-var EVENTS_NAMES = ["keypress", "mousemove", "touchmove", "scroll", "wheel"];
-var _UserIdleTimeService = class _UserIdleTimeService {
-  constructor() {
-    this._last_action = new BehaviorSubject(Date.now());
-    this._update = (e2) => this._onUserInteraction();
-    this._event_names = EVENTS_NAMES;
-    this.last_action = combineLatest([
-      this._last_action,
-      interval(1e3)
-    ]).pipe(throttleTime(300), map(([last_action]) => last_action));
-    this.idle_time = this.last_action.pipe(map((time) => Date.now() - time));
-  }
-  _onUserInteraction() {
-    this._last_action.next(Date.now());
-  }
-  idleFor(time_ms) {
-    const stop = this.startListening();
-    return this.idle_time.pipe(first((t) => t >= time_ms), tap(() => stop()));
-  }
-  startListening() {
-    this._last_action.next(Date.now());
-    for (const name of this._event_names) {
-      document.body.addEventListener(name, this._update);
-    }
-    return () => this.stopListening();
-  }
-  stopListening() {
-    for (const name of this._event_names) {
-      document.body.removeEventListener(name, this._update);
-    }
-  }
-};
-_UserIdleTimeService.\u0275fac = function UserIdleTimeService_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _UserIdleTimeService)();
-};
-_UserIdleTimeService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _UserIdleTimeService, factory: _UserIdleTimeService.\u0275fac, providedIn: "root" });
-var UserIdleTimeService = _UserIdleTimeService;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UserIdleTimeService, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], null, null);
-})();
-
-// node_modules/@angular/material/fesm2022/autocomplete.mjs
-var _c011 = ["panel"];
-var _c19 = ["*"];
-function MatAutocomplete_ng_template_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 1, 0);
-    \u0275\u0275projection(2);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const formFieldId_r1 = ctx.id;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275classMap(ctx_r1._classList);
-    \u0275\u0275classProp("mat-mdc-autocomplete-visible", ctx_r1.showPanel)("mat-mdc-autocomplete-hidden", !ctx_r1.showPanel)("mat-autocomplete-panel-animations-enabled", !ctx_r1._animationsDisabled)("mat-primary", ctx_r1._color === "primary")("mat-accent", ctx_r1._color === "accent")("mat-warn", ctx_r1._color === "warn");
-    \u0275\u0275property("id", ctx_r1.id);
-    \u0275\u0275attribute("aria-label", ctx_r1.ariaLabel || null)("aria-labelledby", ctx_r1._getPanelAriaLabelledby(formFieldId_r1));
-  }
-}
-var MatAutocompleteSelectedEvent = class {
-  source;
-  option;
-  constructor(source, option) {
-    this.source = source;
-    this.option = option;
-  }
-};
-var MAT_AUTOCOMPLETE_DEFAULT_OPTIONS = new InjectionToken("mat-autocomplete-default-options", {
-  providedIn: "root",
-  factory: MAT_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY
-});
-function MAT_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY() {
-  return {
-    autoActiveFirstOption: false,
-    autoSelectActiveOption: false,
-    hideSingleSelectionIndicator: false,
-    requireSelection: false,
-    hasBackdrop: false
-  };
-}
-var MatAutocomplete = class _MatAutocomplete {
-  _changeDetectorRef = inject(ChangeDetectorRef);
-  _elementRef = inject(ElementRef);
-  _defaults = inject(MAT_AUTOCOMPLETE_DEFAULT_OPTIONS);
-  _animationsDisabled = _animationsDisabled();
-  _activeOptionChanges = Subscription.EMPTY;
-  /** Manages active item in option list based on key events. */
-  _keyManager;
-  /** Whether the autocomplete panel should be visible, depending on option length. */
-  showPanel = false;
-  /** Whether the autocomplete panel is open. */
-  get isOpen() {
-    return this._isOpen && this.showPanel;
-  }
-  _isOpen = false;
-  /** Latest trigger that opened the autocomplete. */
-  _latestOpeningTrigger;
-  /** @docs-private Sets the theme color of the panel. */
-  _setColor(value) {
-    this._color = value;
-    this._changeDetectorRef.markForCheck();
-  }
-  /** @docs-private theme color of the panel */
-  _color;
-  // The @ViewChild query for TemplateRef here needs to be static because some code paths
-  // lead to the overlay being created before change detection has finished for this component.
-  // Notably, another component may trigger `focus` on the autocomplete-trigger.
-  /** @docs-private */
-  template;
-  /** Element for the panel containing the autocomplete options. */
-  panel;
-  /** Reference to all options within the autocomplete. */
-  options;
-  /** Reference to all option groups within the autocomplete. */
-  optionGroups;
-  /** Aria label of the autocomplete. */
-  ariaLabel;
-  /** Input that can be used to specify the `aria-labelledby` attribute. */
-  ariaLabelledby;
-  /** Function that maps an option's control value to its display value in the trigger. */
-  displayWith = null;
-  /**
-   * Whether the first option should be highlighted when the autocomplete panel is opened.
-   * Can be configured globally through the `MAT_AUTOCOMPLETE_DEFAULT_OPTIONS` token.
-   */
-  autoActiveFirstOption;
-  /** Whether the active option should be selected as the user is navigating. */
-  autoSelectActiveOption;
-  /**
-   * Whether the user is required to make a selection when they're interacting with the
-   * autocomplete. If the user moves away from the autocomplete without selecting an option from
-   * the list, the value will be reset. If the user opens the panel and closes it without
-   * interacting or selecting a value, the initial value will be kept.
-   */
-  requireSelection;
-  /**
-   * Specify the width of the autocomplete panel.  Can be any CSS sizing value, otherwise it will
-   * match the width of its host.
-   */
-  panelWidth;
-  /** Whether ripples are disabled within the autocomplete panel. */
-  disableRipple;
-  /** Event that is emitted whenever an option from the list is selected. */
-  optionSelected = new EventEmitter();
-  /** Event that is emitted when the autocomplete panel is opened. */
-  opened = new EventEmitter();
-  /** Event that is emitted when the autocomplete panel is closed. */
-  closed = new EventEmitter();
-  /** Emits whenever an option is activated. */
-  optionActivated = new EventEmitter();
-  /**
-   * Takes classes set on the host mat-autocomplete element and applies them to the panel
-   * inside the overlay container to allow for easy styling.
-   */
-  set classList(value) {
-    this._classList = value;
-    this._elementRef.nativeElement.className = "";
-  }
-  _classList;
-  /** Whether checkmark indicator for single-selection options is hidden. */
-  get hideSingleSelectionIndicator() {
-    return this._hideSingleSelectionIndicator;
-  }
-  set hideSingleSelectionIndicator(value) {
-    this._hideSingleSelectionIndicator = value;
-    this._syncParentProperties();
-  }
-  _hideSingleSelectionIndicator;
-  /** Syncs the parent state with the individual options. */
-  _syncParentProperties() {
-    if (this.options) {
-      for (const option of this.options) {
-        option._changeDetectorRef.markForCheck();
-      }
-    }
-  }
-  /** Unique ID to be used by autocomplete trigger's "aria-owns" property. */
-  id = inject(_IdGenerator).getId("mat-autocomplete-");
-  /**
-   * Tells any descendant `mat-optgroup` to use the inert a11y pattern.
-   * @docs-private
-   */
-  inertGroups;
-  constructor() {
-    const platform = inject(Platform);
-    this.inertGroups = platform?.SAFARI || false;
-    this.autoActiveFirstOption = !!this._defaults.autoActiveFirstOption;
-    this.autoSelectActiveOption = !!this._defaults.autoSelectActiveOption;
-    this.requireSelection = !!this._defaults.requireSelection;
-    this._hideSingleSelectionIndicator = this._defaults.hideSingleSelectionIndicator ?? false;
-  }
-  ngAfterContentInit() {
-    this._keyManager = new ActiveDescendantKeyManager(this.options).withWrap().skipPredicate(this._skipPredicate);
-    this._activeOptionChanges = this._keyManager.change.subscribe((index) => {
-      if (this.isOpen) {
-        this.optionActivated.emit({
-          source: this,
-          option: this.options.toArray()[index] || null
-        });
-      }
-    });
-    this._setVisibility();
-  }
-  ngOnDestroy() {
-    this._keyManager?.destroy();
-    this._activeOptionChanges.unsubscribe();
-  }
-  /**
-   * Sets the panel scrollTop. This allows us to manually scroll to display options
-   * above or below the fold, as they are not actually being focused when active.
-   */
-  _setScrollTop(scrollTop) {
-    if (this.panel) {
-      this.panel.nativeElement.scrollTop = scrollTop;
-    }
-  }
-  /** Returns the panel's scrollTop. */
-  _getScrollTop() {
-    return this.panel ? this.panel.nativeElement.scrollTop : 0;
-  }
-  /** Panel should hide itself when the option list is empty. */
-  _setVisibility() {
-    this.showPanel = !!this.options?.length;
-    this._changeDetectorRef.markForCheck();
-  }
-  /** Emits the `select` event. */
-  _emitSelectEvent(option) {
-    const event = new MatAutocompleteSelectedEvent(this, option);
-    this.optionSelected.emit(event);
-  }
-  /** Gets the aria-labelledby for the autocomplete panel. */
-  _getPanelAriaLabelledby(labelId) {
-    if (this.ariaLabel) {
-      return null;
-    }
-    const labelExpression = labelId ? labelId + " " : "";
-    return this.ariaLabelledby ? labelExpression + this.ariaLabelledby : labelId;
-  }
-  // `skipPredicate` determines if key manager should avoid putting a given option in the tab
-  // order. Allow disabled list items to receive focus via keyboard to align with WAI ARIA
-  // recommendation.
-  //
-  // Normally WAI ARIA's instructions are to exclude disabled items from the tab order, but it
-  // makes a few exceptions for compound widgets.
-  //
-  // From [Developing a Keyboard Interface](
-  // https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/):
-  //   "For the following composite widget elements, keep them focusable when disabled: Options in a
-  //   Listbox..."
-  //
-  // The user can focus disabled options using the keyboard, but the user cannot click disabled
-  // options.
-  _skipPredicate() {
-    return false;
-  }
-  static \u0275fac = function MatAutocomplete_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatAutocomplete)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _MatAutocomplete,
-    selectors: [["mat-autocomplete"]],
-    contentQueries: function MatAutocomplete_ContentQueries(rf, ctx, dirIndex) {
-      if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, MatOption, 5);
-        \u0275\u0275contentQuery(dirIndex, MAT_OPTGROUP, 5);
-      }
-      if (rf & 2) {
-        let _t4;
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.options = _t4);
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.optionGroups = _t4);
-      }
-    },
-    viewQuery: function MatAutocomplete_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(TemplateRef, 7);
-        \u0275\u0275viewQuery(_c011, 5);
-      }
-      if (rf & 2) {
-        let _t4;
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.template = _t4.first);
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.panel = _t4.first);
-      }
-    },
-    hostAttrs: [1, "mat-mdc-autocomplete"],
-    inputs: {
-      ariaLabel: [0, "aria-label", "ariaLabel"],
-      ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
-      displayWith: "displayWith",
-      autoActiveFirstOption: [2, "autoActiveFirstOption", "autoActiveFirstOption", booleanAttribute],
-      autoSelectActiveOption: [2, "autoSelectActiveOption", "autoSelectActiveOption", booleanAttribute],
-      requireSelection: [2, "requireSelection", "requireSelection", booleanAttribute],
-      panelWidth: "panelWidth",
-      disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
-      classList: [0, "class", "classList"],
-      hideSingleSelectionIndicator: [2, "hideSingleSelectionIndicator", "hideSingleSelectionIndicator", booleanAttribute]
-    },
-    outputs: {
-      optionSelected: "optionSelected",
-      opened: "opened",
-      closed: "closed",
-      optionActivated: "optionActivated"
-    },
-    exportAs: ["matAutocomplete"],
-    features: [\u0275\u0275ProvidersFeature([{
-      provide: MAT_OPTION_PARENT_COMPONENT,
-      useExisting: _MatAutocomplete
-    }])],
-    ngContentSelectors: _c19,
-    decls: 1,
-    vars: 0,
-    consts: [["panel", ""], ["role", "listbox", 1, "mat-mdc-autocomplete-panel", "mdc-menu-surface", "mdc-menu-surface--open", 3, "id"]],
-    template: function MatAutocomplete_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275projectionDef();
-        \u0275\u0275template(0, MatAutocomplete_ng_template_0_Template, 3, 17, "ng-template");
-      }
-    },
-    styles: ["div.mat-mdc-autocomplete-panel{width:100%;max-height:256px;visibility:hidden;transform-origin:center top;overflow:auto;padding:8px 0;box-sizing:border-box;position:relative;border-radius:var(--mat-autocomplete-container-shape, var(--mat-sys-corner-extra-small));box-shadow:var(--mat-autocomplete-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12));background-color:var(--mat-autocomplete-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-autocomplete-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{border-top-left-radius:0;border-top-right-radius:0}.mat-mdc-autocomplete-panel-above div.mat-mdc-autocomplete-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:center bottom}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-visible{visibility:visible}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-hidden{visibility:hidden;pointer-events:none}@keyframes _mat-autocomplete-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}.mat-autocomplete-panel-animations-enabled{animation:_mat-autocomplete-enter 120ms cubic-bezier(0, 0, 0.2, 1)}mat-autocomplete{display:none}\n"],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatAutocomplete, [{
-    type: Component,
-    args: [{
-      selector: "mat-autocomplete",
-      encapsulation: ViewEncapsulation.None,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      exportAs: "matAutocomplete",
-      host: {
-        "class": "mat-mdc-autocomplete"
-      },
-      providers: [{
-        provide: MAT_OPTION_PARENT_COMPONENT,
-        useExisting: MatAutocomplete
-      }],
-      template: `<ng-template let-formFieldId="id">
-  <div
-    class="mat-mdc-autocomplete-panel mdc-menu-surface mdc-menu-surface--open"
-    role="listbox"
-    [id]="id"
-    [class]="_classList"
-    [class.mat-mdc-autocomplete-visible]="showPanel"
-    [class.mat-mdc-autocomplete-hidden]="!showPanel"
-    [class.mat-autocomplete-panel-animations-enabled]="!_animationsDisabled"
-    [class.mat-primary]="_color === 'primary'"
-    [class.mat-accent]="_color === 'accent'"
-    [class.mat-warn]="_color === 'warn'"
-    [attr.aria-label]="ariaLabel || null"
-    [attr.aria-labelledby]="_getPanelAriaLabelledby(formFieldId)"
-    #panel>
-    <ng-content></ng-content>
-  </div>
-</ng-template>
-`,
-      styles: ["div.mat-mdc-autocomplete-panel{width:100%;max-height:256px;visibility:hidden;transform-origin:center top;overflow:auto;padding:8px 0;box-sizing:border-box;position:relative;border-radius:var(--mat-autocomplete-container-shape, var(--mat-sys-corner-extra-small));box-shadow:var(--mat-autocomplete-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12));background-color:var(--mat-autocomplete-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-autocomplete-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{border-top-left-radius:0;border-top-right-radius:0}.mat-mdc-autocomplete-panel-above div.mat-mdc-autocomplete-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:center bottom}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-visible{visibility:visible}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-hidden{visibility:hidden;pointer-events:none}@keyframes _mat-autocomplete-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}.mat-autocomplete-panel-animations-enabled{animation:_mat-autocomplete-enter 120ms cubic-bezier(0, 0, 0.2, 1)}mat-autocomplete{display:none}\n"]
-    }]
-  }], () => [], {
-    template: [{
-      type: ViewChild,
-      args: [TemplateRef, {
-        static: true
-      }]
-    }],
-    panel: [{
-      type: ViewChild,
-      args: ["panel"]
-    }],
-    options: [{
-      type: ContentChildren,
-      args: [MatOption, {
-        descendants: true
-      }]
-    }],
-    optionGroups: [{
-      type: ContentChildren,
-      args: [MAT_OPTGROUP, {
-        descendants: true
-      }]
-    }],
-    ariaLabel: [{
-      type: Input,
-      args: ["aria-label"]
-    }],
-    ariaLabelledby: [{
-      type: Input,
-      args: ["aria-labelledby"]
-    }],
-    displayWith: [{
-      type: Input
-    }],
-    autoActiveFirstOption: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    autoSelectActiveOption: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    requireSelection: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    panelWidth: [{
-      type: Input
-    }],
-    disableRipple: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    optionSelected: [{
-      type: Output
-    }],
-    opened: [{
-      type: Output
-    }],
-    closed: [{
-      type: Output
-    }],
-    optionActivated: [{
-      type: Output
-    }],
-    classList: [{
-      type: Input,
-      args: ["class"]
-    }],
-    hideSingleSelectionIndicator: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }]
-  });
-})();
-var MatAutocompleteOrigin = class _MatAutocompleteOrigin {
-  elementRef = inject(ElementRef);
-  constructor() {
-  }
-  static \u0275fac = function MatAutocompleteOrigin_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatAutocompleteOrigin)();
-  };
-  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
-    type: _MatAutocompleteOrigin,
-    selectors: [["", "matAutocompleteOrigin", ""]],
-    exportAs: ["matAutocompleteOrigin"]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatAutocompleteOrigin, [{
-    type: Directive,
-    args: [{
-      selector: "[matAutocompleteOrigin]",
-      exportAs: "matAutocompleteOrigin"
-    }]
-  }], () => [], null);
-})();
-var MAT_AUTOCOMPLETE_VALUE_ACCESSOR = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => MatAutocompleteTrigger),
-  multi: true
-};
-function getMatAutocompleteMissingPanelError() {
-  return Error("Attempting to open an undefined instance of `mat-autocomplete`. Make sure that the id passed to the `matAutocomplete` is correct and that you're attempting to open it after the ngAfterContentInit hook.");
-}
-var MAT_AUTOCOMPLETE_SCROLL_STRATEGY = new InjectionToken("mat-autocomplete-scroll-strategy", {
-  providedIn: "root",
-  factory: () => {
-    const injector = inject(Injector);
-    return () => createRepositionScrollStrategy(injector);
-  }
-});
-function MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY(_overlay) {
-  const injector = inject(Injector);
-  return () => createRepositionScrollStrategy(injector);
-}
-var MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER = {
-  provide: MAT_AUTOCOMPLETE_SCROLL_STRATEGY,
-  deps: [],
-  useFactory: MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY
-};
-var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
-  _environmentInjector = inject(EnvironmentInjector);
-  _element = inject(ElementRef);
-  _injector = inject(Injector);
-  _viewContainerRef = inject(ViewContainerRef);
-  _zone = inject(NgZone);
-  _changeDetectorRef = inject(ChangeDetectorRef);
-  _dir = inject(Directionality, {
-    optional: true
-  });
-  _formField = inject(MAT_FORM_FIELD, {
-    optional: true,
-    host: true
-  });
-  _viewportRuler = inject(ViewportRuler);
-  _scrollStrategy = inject(MAT_AUTOCOMPLETE_SCROLL_STRATEGY);
-  _renderer = inject(Renderer2);
-  _animationsDisabled = _animationsDisabled();
-  _defaults = inject(MAT_AUTOCOMPLETE_DEFAULT_OPTIONS, {
-    optional: true
-  });
-  _overlayRef;
-  _portal;
-  _componentDestroyed = false;
-  _initialized = new Subject();
-  _keydownSubscription;
-  _outsideClickSubscription;
-  _cleanupWindowBlur;
-  /** Old value of the native input. Used to work around issues with the `input` event on IE. */
-  _previousValue;
-  /** Value of the input element when the panel was attached (even if there are no options). */
-  _valueOnAttach;
-  /** Value on the previous keydown event. */
-  _valueOnLastKeydown;
-  /** Strategy that is used to position the panel. */
-  _positionStrategy;
-  /** Whether or not the label state is being overridden. */
-  _manuallyFloatingLabel = false;
-  /** The subscription for closing actions (some are bound to document). */
-  _closingActionsSubscription;
-  /** Subscription to viewport size changes. */
-  _viewportSubscription = Subscription.EMPTY;
-  /** Implements BreakpointObserver to be used to detect handset landscape */
-  _breakpointObserver = inject(BreakpointObserver);
-  _handsetLandscapeSubscription = Subscription.EMPTY;
-  /**
-   * Whether the autocomplete can open the next time it is focused. Used to prevent a focused,
-   * closed autocomplete from being reopened if the user switches to another browser tab and then
-   * comes back.
-   */
-  _canOpenOnNextFocus = true;
-  /** Value inside the input before we auto-selected an option. */
-  _valueBeforeAutoSelection;
-  /**
-   * Current option that we have auto-selected as the user is navigating,
-   * but which hasn't been propagated to the model value yet.
-   */
-  _pendingAutoselectedOption;
-  /** Stream of keyboard events that can close the panel. */
-  _closeKeyEventStream = new Subject();
-  /** Classes to apply to the panel. Exposed as a public property for internal usage. */
-  _overlayPanelClass = coerceArray(this._defaults?.overlayPanelClass || []);
-  /**
-   * Event handler for when the window is blurred. Needs to be an
-   * arrow function in order to preserve the context.
-   */
-  _windowBlurHandler = () => {
-    this._canOpenOnNextFocus = this.panelOpen || !this._hasFocus();
-  };
-  /** `View -> model callback called when value changes` */
-  _onChange = () => {
-  };
-  /** `View -> model callback called when autocomplete has been touched` */
-  _onTouched = () => {
-  };
-  /** The autocomplete panel to be attached to this trigger. */
-  autocomplete;
-  /**
-   * Position of the autocomplete panel relative to the trigger element. A position of `auto`
-   * will render the panel underneath the trigger if there is enough space for it to fit in
-   * the viewport, otherwise the panel will be shown above it. If the position is set to
-   * `above` or `below`, the panel will always be shown above or below the trigger. no matter
-   * whether it fits completely in the viewport.
-   */
-  position = "auto";
-  /**
-   * Reference relative to which to position the autocomplete panel.
-   * Defaults to the autocomplete trigger element.
-   */
-  connectedTo;
-  /**
-   * `autocomplete` attribute to be set on the input element.
-   * @docs-private
-   */
-  autocompleteAttribute = "off";
-  /**
-   * Whether the autocomplete is disabled. When disabled, the element will
-   * act as a regular input and the user won't be able to open the panel.
-   */
-  autocompleteDisabled;
-  constructor() {
-  }
-  /** Class to apply to the panel when it's above the input. */
-  _aboveClass = "mat-mdc-autocomplete-panel-above";
-  ngAfterViewInit() {
-    this._initialized.next();
-    this._initialized.complete();
-    this._cleanupWindowBlur = this._renderer.listen("window", "blur", this._windowBlurHandler);
-  }
-  ngOnChanges(changes) {
-    if (changes["position"] && this._positionStrategy) {
-      this._setStrategyPositions(this._positionStrategy);
-      if (this.panelOpen) {
-        this._overlayRef.updatePosition();
-      }
-    }
-  }
-  ngOnDestroy() {
-    this._cleanupWindowBlur?.();
-    this._handsetLandscapeSubscription.unsubscribe();
-    this._viewportSubscription.unsubscribe();
-    this._componentDestroyed = true;
-    this._destroyPanel();
-    this._closeKeyEventStream.complete();
-    this._clearFromModal();
-  }
-  /** Whether or not the autocomplete panel is open. */
-  get panelOpen() {
-    return this._overlayAttached && this.autocomplete.showPanel;
-  }
-  _overlayAttached = false;
-  /** Opens the autocomplete suggestion panel. */
-  openPanel() {
-    this._openPanelInternal();
-  }
-  /** Closes the autocomplete suggestion panel. */
-  closePanel() {
-    this._resetLabel();
-    if (!this._overlayAttached) {
-      return;
-    }
-    if (this.panelOpen) {
-      this._zone.run(() => {
-        this.autocomplete.closed.emit();
-      });
-    }
-    if (this.autocomplete._latestOpeningTrigger === this) {
-      this.autocomplete._isOpen = false;
-      this.autocomplete._latestOpeningTrigger = null;
-    }
-    this._overlayAttached = false;
-    this._pendingAutoselectedOption = null;
-    if (this._overlayRef && this._overlayRef.hasAttached()) {
-      this._overlayRef.detach();
-      this._closingActionsSubscription.unsubscribe();
-    }
-    this._updatePanelState();
-    if (!this._componentDestroyed) {
-      this._changeDetectorRef.detectChanges();
-    }
-    if (this._trackedModal) {
-      removeAriaReferencedId(this._trackedModal, "aria-owns", this.autocomplete.id);
-    }
-  }
-  /**
-   * Updates the position of the autocomplete suggestion panel to ensure that it fits all options
-   * within the viewport.
-   */
-  updatePosition() {
-    if (this._overlayAttached) {
-      this._overlayRef.updatePosition();
-    }
-  }
-  /**
-   * A stream of actions that should close the autocomplete panel, including
-   * when an option is selected, on blur, and when TAB is pressed.
-   */
-  get panelClosingActions() {
-    return merge(this.optionSelections, this.autocomplete._keyManager.tabOut.pipe(filter(() => this._overlayAttached)), this._closeKeyEventStream, this._getOutsideClickStream(), this._overlayRef ? this._overlayRef.detachments().pipe(filter(() => this._overlayAttached)) : of()).pipe(
-      // Normalize the output so we return a consistent type.
-      map((event) => event instanceof MatOptionSelectionChange ? event : null)
-    );
-  }
-  /** Stream of changes to the selection state of the autocomplete options. */
-  optionSelections = defer(() => {
-    const options = this.autocomplete ? this.autocomplete.options : null;
-    if (options) {
-      return options.changes.pipe(startWith(options), switchMap(() => merge(...options.map((option) => option.onSelectionChange))));
-    }
-    return this._initialized.pipe(switchMap(() => this.optionSelections));
-  });
-  /** The currently active option, coerced to MatOption type. */
-  get activeOption() {
-    if (this.autocomplete && this.autocomplete._keyManager) {
-      return this.autocomplete._keyManager.activeItem;
-    }
-    return null;
-  }
-  /** Stream of clicks outside of the autocomplete panel. */
-  _getOutsideClickStream() {
-    return new Observable((observer) => {
-      const listener = (event) => {
-        const clickTarget = _getEventTarget(event);
-        const formField = this._formField ? this._formField.getConnectedOverlayOrigin().nativeElement : null;
-        const customOrigin = this.connectedTo ? this.connectedTo.elementRef.nativeElement : null;
-        if (this._overlayAttached && clickTarget !== this._element.nativeElement && // Normally focus moves inside `mousedown` so this condition will almost always be
-        // true. Its main purpose is to handle the case where the input is focused from an
-        // outside click which propagates up to the `body` listener within the same sequence
-        // and causes the panel to close immediately (see #3106).
-        !this._hasFocus() && (!formField || !formField.contains(clickTarget)) && (!customOrigin || !customOrigin.contains(clickTarget)) && !!this._overlayRef && !this._overlayRef.overlayElement.contains(clickTarget)) {
-          observer.next(event);
-        }
-      };
-      const cleanups = [this._renderer.listen("document", "click", listener), this._renderer.listen("document", "auxclick", listener), this._renderer.listen("document", "touchend", listener)];
-      return () => {
-        cleanups.forEach((current) => current());
-      };
-    });
-  }
-  // Implemented as part of ControlValueAccessor.
-  writeValue(value) {
-    Promise.resolve(null).then(() => this._assignOptionValue(value));
-  }
-  // Implemented as part of ControlValueAccessor.
-  registerOnChange(fn3) {
-    this._onChange = fn3;
-  }
-  // Implemented as part of ControlValueAccessor.
-  registerOnTouched(fn3) {
-    this._onTouched = fn3;
-  }
-  // Implemented as part of ControlValueAccessor.
-  setDisabledState(isDisabled) {
-    this._element.nativeElement.disabled = isDisabled;
-  }
-  _handleKeydown(e2) {
-    const event = e2;
-    const keyCode = event.keyCode;
-    const hasModifier = hasModifierKey(event);
-    if (keyCode === ESCAPE && !hasModifier) {
-      event.preventDefault();
-    }
-    this._valueOnLastKeydown = this._element.nativeElement.value;
-    if (this.activeOption && keyCode === ENTER && this.panelOpen && !hasModifier) {
-      this.activeOption._selectViaInteraction();
-      this._resetActiveItem();
-      event.preventDefault();
-    } else if (this.autocomplete) {
-      const prevActiveItem = this.autocomplete._keyManager.activeItem;
-      const isArrowKey = keyCode === UP_ARROW || keyCode === DOWN_ARROW;
-      if (keyCode === TAB || isArrowKey && !hasModifier && this.panelOpen) {
-        this.autocomplete._keyManager.onKeydown(event);
-      } else if (isArrowKey && this._canOpen()) {
-        this._openPanelInternal(this._valueOnLastKeydown);
-      }
-      if (isArrowKey || this.autocomplete._keyManager.activeItem !== prevActiveItem) {
-        this._scrollToOption(this.autocomplete._keyManager.activeItemIndex || 0);
-        if (this.autocomplete.autoSelectActiveOption && this.activeOption) {
-          if (!this._pendingAutoselectedOption) {
-            this._valueBeforeAutoSelection = this._valueOnLastKeydown;
-          }
-          this._pendingAutoselectedOption = this.activeOption;
-          this._assignOptionValue(this.activeOption.value);
-        }
-      }
-    }
-  }
-  _handleInput(event) {
-    let target = event.target;
-    let value = target.value;
-    if (target.type === "number") {
-      value = value == "" ? null : parseFloat(value);
-    }
-    if (this._previousValue !== value) {
-      this._previousValue = value;
-      this._pendingAutoselectedOption = null;
-      if (!this.autocomplete || !this.autocomplete.requireSelection) {
-        this._onChange(value);
-      }
-      if (!value) {
-        this._clearPreviousSelectedOption(null, false);
-      } else if (this.panelOpen && !this.autocomplete.requireSelection) {
-        const selectedOption = this.autocomplete.options?.find((option) => option.selected);
-        if (selectedOption) {
-          const display = this._getDisplayValue(selectedOption.value);
-          if (value !== display) {
-            selectedOption.deselect(false);
-          }
-        }
-      }
-      if (this._canOpen() && this._hasFocus()) {
-        const valueOnAttach = this._valueOnLastKeydown ?? this._element.nativeElement.value;
-        this._valueOnLastKeydown = null;
-        this._openPanelInternal(valueOnAttach);
-      }
-    }
-  }
-  _handleFocus() {
-    if (!this._canOpenOnNextFocus) {
-      this._canOpenOnNextFocus = true;
-    } else if (this._canOpen()) {
-      this._previousValue = this._element.nativeElement.value;
-      this._attachOverlay(this._previousValue);
-      this._floatLabel(true);
-    }
-  }
-  _handleClick() {
-    if (this._canOpen() && !this.panelOpen) {
-      this._openPanelInternal();
-    }
-  }
-  /** Whether the input currently has focus. */
-  _hasFocus() {
-    return _getFocusedElementPierceShadowDom() === this._element.nativeElement;
-  }
-  /**
-   * In "auto" mode, the label will animate down as soon as focus is lost.
-   * This causes the value to jump when selecting an option with the mouse.
-   * This method manually floats the label until the panel can be closed.
-   * @param shouldAnimate Whether the label should be animated when it is floated.
-   */
-  _floatLabel(shouldAnimate = false) {
-    if (this._formField && this._formField.floatLabel === "auto") {
-      if (shouldAnimate) {
-        this._formField._animateAndLockLabel();
-      } else {
-        this._formField.floatLabel = "always";
-      }
-      this._manuallyFloatingLabel = true;
-    }
-  }
-  /** If the label has been manually elevated, return it to its normal state. */
-  _resetLabel() {
-    if (this._manuallyFloatingLabel) {
-      if (this._formField) {
-        this._formField.floatLabel = "auto";
-      }
-      this._manuallyFloatingLabel = false;
-    }
-  }
-  /**
-   * This method listens to a stream of panel closing actions and resets the
-   * stream every time the option list changes.
-   */
-  _subscribeToClosingActions() {
-    const initialRender = new Observable((subscriber) => {
-      afterNextRender(() => {
-        subscriber.next();
-      }, {
-        injector: this._environmentInjector
-      });
-    });
-    const optionChanges = this.autocomplete.options?.changes.pipe(
-      tap(() => this._positionStrategy.reapplyLastPosition()),
-      // Defer emitting to the stream until the next tick, because changing
-      // bindings in here will cause "changed after checked" errors.
-      delay(0)
-    ) ?? of();
-    return merge(initialRender, optionChanges).pipe(
-      // create a new stream of panelClosingActions, replacing any previous streams
-      // that were created, and flatten it so our stream only emits closing events...
-      switchMap(() => this._zone.run(() => {
-        const wasOpen = this.panelOpen;
-        this._resetActiveItem();
-        this._updatePanelState();
-        this._changeDetectorRef.detectChanges();
-        if (this.panelOpen) {
-          this._overlayRef.updatePosition();
-        }
-        if (wasOpen !== this.panelOpen) {
-          if (this.panelOpen) {
-            this._emitOpened();
-          } else {
-            this.autocomplete.closed.emit();
-          }
-        }
-        return this.panelClosingActions;
-      })),
-      // when the first closing event occurs...
-      take(1)
-    ).subscribe((event) => this._setValueAndClose(event));
-  }
-  /**
-   * Emits the opened event once it's known that the panel will be shown and stores
-   * the state of the trigger right before the opening sequence was finished.
-   */
-  _emitOpened() {
-    this.autocomplete.opened.emit();
-  }
-  /** Destroys the autocomplete suggestion panel. */
-  _destroyPanel() {
-    if (this._overlayRef) {
-      this.closePanel();
-      this._overlayRef.dispose();
-      this._overlayRef = null;
-    }
-  }
-  /** Given a value, returns the string that should be shown within the input. */
-  _getDisplayValue(value) {
-    const autocomplete = this.autocomplete;
-    return autocomplete && autocomplete.displayWith ? autocomplete.displayWith(value) : value;
-  }
-  _assignOptionValue(value) {
-    const toDisplay = this._getDisplayValue(value);
-    if (value == null) {
-      this._clearPreviousSelectedOption(null, false);
-    }
-    this._updateNativeInputValue(toDisplay != null ? toDisplay : "");
-  }
-  _updateNativeInputValue(value) {
-    if (this._formField) {
-      this._formField._control.value = value;
-    } else {
-      this._element.nativeElement.value = value;
-    }
-    this._previousValue = value;
-  }
-  /**
-   * This method closes the panel, and if a value is specified, also sets the associated
-   * control to that value. It will also mark the control as dirty if this interaction
-   * stemmed from the user.
-   */
-  _setValueAndClose(event) {
-    const panel = this.autocomplete;
-    const toSelect = event ? event.source : this._pendingAutoselectedOption;
-    if (toSelect) {
-      this._clearPreviousSelectedOption(toSelect);
-      this._assignOptionValue(toSelect.value);
-      this._onChange(toSelect.value);
-      panel._emitSelectEvent(toSelect);
-      this._element.nativeElement.focus();
-    } else if (panel.requireSelection && this._element.nativeElement.value !== this._valueOnAttach) {
-      this._clearPreviousSelectedOption(null);
-      this._assignOptionValue(null);
-      this._onChange(null);
-    }
-    this.closePanel();
-  }
-  /**
-   * Clear any previous selected option and emit a selection change event for this option
-   */
-  _clearPreviousSelectedOption(skip2, emitEvent) {
-    this.autocomplete?.options?.forEach((option) => {
-      if (option !== skip2 && option.selected) {
-        option.deselect(emitEvent);
-      }
-    });
-  }
-  _openPanelInternal(valueOnAttach = this._element.nativeElement.value) {
-    this._attachOverlay(valueOnAttach);
-    this._floatLabel();
-    if (this._trackedModal) {
-      const panelId = this.autocomplete.id;
-      addAriaReferencedId(this._trackedModal, "aria-owns", panelId);
-    }
-  }
-  _attachOverlay(valueOnAttach) {
-    if (!this.autocomplete && (typeof ngDevMode === "undefined" || ngDevMode)) {
-      throw getMatAutocompleteMissingPanelError();
-    }
-    let overlayRef = this._overlayRef;
-    if (!overlayRef) {
-      this._portal = new TemplatePortal(this.autocomplete.template, this._viewContainerRef, {
-        id: this._formField?.getLabelId()
-      });
-      overlayRef = createOverlayRef(this._injector, this._getOverlayConfig());
-      this._overlayRef = overlayRef;
-      this._viewportSubscription = this._viewportRuler.change().subscribe(() => {
-        if (this.panelOpen && overlayRef) {
-          overlayRef.updateSize({
-            width: this._getPanelWidth()
-          });
-        }
-      });
-      this._handsetLandscapeSubscription = this._breakpointObserver.observe(Breakpoints.HandsetLandscape).subscribe((result) => {
-        const isHandsetLandscape = result.matches;
-        if (isHandsetLandscape) {
-          this._positionStrategy.withFlexibleDimensions(true).withGrowAfterOpen(true).withViewportMargin(8);
-        } else {
-          this._positionStrategy.withFlexibleDimensions(false).withGrowAfterOpen(false).withViewportMargin(0);
-        }
-      });
-    } else {
-      this._positionStrategy.setOrigin(this._getConnectedElement());
-      overlayRef.updateSize({
-        width: this._getPanelWidth()
-      });
-    }
-    if (overlayRef && !overlayRef.hasAttached()) {
-      overlayRef.attach(this._portal);
-      this._valueOnAttach = valueOnAttach;
-      this._valueOnLastKeydown = null;
-      this._closingActionsSubscription = this._subscribeToClosingActions();
-    }
-    const wasOpen = this.panelOpen;
-    this.autocomplete._isOpen = this._overlayAttached = true;
-    this.autocomplete._latestOpeningTrigger = this;
-    this.autocomplete._setColor(this._formField?.color);
-    this._updatePanelState();
-    this._applyModalPanelOwnership();
-    if (this.panelOpen && wasOpen !== this.panelOpen) {
-      this._emitOpened();
-    }
-  }
-  /** Handles keyboard events coming from the overlay panel. */
-  _handlePanelKeydown = (event) => {
-    if (event.keyCode === ESCAPE && !hasModifierKey(event) || event.keyCode === UP_ARROW && hasModifierKey(event, "altKey")) {
-      if (this._pendingAutoselectedOption) {
-        this._updateNativeInputValue(this._valueBeforeAutoSelection ?? "");
-        this._pendingAutoselectedOption = null;
-      }
-      this._closeKeyEventStream.next();
-      this._resetActiveItem();
-      event.stopPropagation();
-      event.preventDefault();
-    }
-  };
-  /** Updates the panel's visibility state and any trigger state tied to id. */
-  _updatePanelState() {
-    this.autocomplete._setVisibility();
-    if (this.panelOpen) {
-      const overlayRef = this._overlayRef;
-      if (!this._keydownSubscription) {
-        this._keydownSubscription = overlayRef.keydownEvents().subscribe(this._handlePanelKeydown);
-      }
-      if (!this._outsideClickSubscription) {
-        this._outsideClickSubscription = overlayRef.outsidePointerEvents().subscribe();
-      }
-    } else {
-      this._keydownSubscription?.unsubscribe();
-      this._outsideClickSubscription?.unsubscribe();
-      this._keydownSubscription = this._outsideClickSubscription = null;
-    }
-  }
-  _getOverlayConfig() {
-    return new OverlayConfig({
-      positionStrategy: this._getOverlayPosition(),
-      scrollStrategy: this._scrollStrategy(),
-      width: this._getPanelWidth(),
-      direction: this._dir ?? void 0,
-      hasBackdrop: this._defaults?.hasBackdrop,
-      backdropClass: this._defaults?.backdropClass,
-      panelClass: this._overlayPanelClass,
-      disableAnimations: this._animationsDisabled
-    });
-  }
-  _getOverlayPosition() {
-    const strategy = createFlexibleConnectedPositionStrategy(this._injector, this._getConnectedElement()).withFlexibleDimensions(false).withPush(false);
-    this._setStrategyPositions(strategy);
-    this._positionStrategy = strategy;
-    return strategy;
-  }
-  /** Sets the positions on a position strategy based on the directive's input state. */
-  _setStrategyPositions(positionStrategy) {
-    const belowPositions = [{
-      originX: "start",
-      originY: "bottom",
-      overlayX: "start",
-      overlayY: "top"
-    }, {
-      originX: "end",
-      originY: "bottom",
-      overlayX: "end",
-      overlayY: "top"
-    }];
-    const panelClass = this._aboveClass;
-    const abovePositions = [{
-      originX: "start",
-      originY: "top",
-      overlayX: "start",
-      overlayY: "bottom",
-      panelClass
-    }, {
-      originX: "end",
-      originY: "top",
-      overlayX: "end",
-      overlayY: "bottom",
-      panelClass
-    }];
-    let positions;
-    if (this.position === "above") {
-      positions = abovePositions;
-    } else if (this.position === "below") {
-      positions = belowPositions;
-    } else {
-      positions = [...belowPositions, ...abovePositions];
-    }
-    positionStrategy.withPositions(positions);
-  }
-  _getConnectedElement() {
-    if (this.connectedTo) {
-      return this.connectedTo.elementRef;
-    }
-    return this._formField ? this._formField.getConnectedOverlayOrigin() : this._element;
-  }
-  _getPanelWidth() {
-    return this.autocomplete.panelWidth || this._getHostWidth();
-  }
-  /** Returns the width of the input element, so the panel width can match it. */
-  _getHostWidth() {
-    return this._getConnectedElement().nativeElement.getBoundingClientRect().width;
-  }
-  /**
-   * Reset the active item to -1. This is so that pressing arrow keys will activate the correct
-   * option.
-   *
-   * If the consumer opted-in to automatically activatating the first option, activate the first
-   * *enabled* option.
-   */
-  _resetActiveItem() {
-    const autocomplete = this.autocomplete;
-    if (autocomplete.autoActiveFirstOption) {
-      let firstEnabledOptionIndex = -1;
-      for (let index = 0; index < autocomplete.options.length; index++) {
-        const option = autocomplete.options.get(index);
-        if (!option.disabled) {
-          firstEnabledOptionIndex = index;
-          break;
-        }
-      }
-      autocomplete._keyManager.setActiveItem(firstEnabledOptionIndex);
-    } else {
-      autocomplete._keyManager.setActiveItem(-1);
-    }
-  }
-  /** Determines whether the panel can be opened. */
-  _canOpen() {
-    const element = this._element.nativeElement;
-    return !element.readOnly && !element.disabled && !this.autocompleteDisabled;
-  }
-  /** Scrolls to a particular option in the list. */
-  _scrollToOption(index) {
-    const autocomplete = this.autocomplete;
-    const labelCount = _countGroupLabelsBeforeOption(index, autocomplete.options, autocomplete.optionGroups);
-    if (index === 0 && labelCount === 1) {
-      autocomplete._setScrollTop(0);
-    } else if (autocomplete.panel) {
-      const option = autocomplete.options.toArray()[index];
-      if (option) {
-        const element = option._getHostElement();
-        const newScrollPosition = _getOptionScrollPosition(element.offsetTop, element.offsetHeight, autocomplete._getScrollTop(), autocomplete.panel.nativeElement.offsetHeight);
-        autocomplete._setScrollTop(newScrollPosition);
-      }
-    }
-  }
-  /**
-   * Track which modal we have modified the `aria-owns` attribute of. When the combobox trigger is
-   * inside an aria-modal, we apply aria-owns to the parent modal with the `id` of the options
-   * panel. Track the modal we have changed so we can undo the changes on destroy.
-   */
-  _trackedModal = null;
-  /**
-   * If the autocomplete trigger is inside of an `aria-modal` element, connect
-   * that modal to the options panel with `aria-owns`.
-   *
-   * For some browser + screen reader combinations, when navigation is inside
-   * of an `aria-modal` element, the screen reader treats everything outside
-   * of that modal as hidden or invisible.
-   *
-   * This causes a problem when the combobox trigger is _inside_ of a modal, because the
-   * options panel is rendered _outside_ of that modal, preventing screen reader navigation
-   * from reaching the panel.
-   *
-   * We can work around this issue by applying `aria-owns` to the modal with the `id` of
-   * the options panel. This effectively communicates to assistive technology that the
-   * options panel is part of the same interaction as the modal.
-   *
-   * At time of this writing, this issue is present in VoiceOver.
-   * See https://github.com/angular/components/issues/20694
-   */
-  _applyModalPanelOwnership() {
-    const modal = this._element.nativeElement.closest('body > .cdk-overlay-container [aria-modal="true"]');
-    if (!modal) {
-      return;
-    }
-    const panelId = this.autocomplete.id;
-    if (this._trackedModal) {
-      removeAriaReferencedId(this._trackedModal, "aria-owns", panelId);
-    }
-    addAriaReferencedId(modal, "aria-owns", panelId);
-    this._trackedModal = modal;
-  }
-  /** Clears the references to the listbox overlay element from the modal it was added to. */
-  _clearFromModal() {
-    if (this._trackedModal) {
-      const panelId = this.autocomplete.id;
-      removeAriaReferencedId(this._trackedModal, "aria-owns", panelId);
-      this._trackedModal = null;
-    }
-  }
-  static \u0275fac = function MatAutocompleteTrigger_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatAutocompleteTrigger)();
-  };
-  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
-    type: _MatAutocompleteTrigger,
-    selectors: [["input", "matAutocomplete", ""], ["textarea", "matAutocomplete", ""]],
-    hostAttrs: [1, "mat-mdc-autocomplete-trigger"],
-    hostVars: 7,
-    hostBindings: function MatAutocompleteTrigger_HostBindings(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275listener("focusin", function MatAutocompleteTrigger_focusin_HostBindingHandler() {
-          return ctx._handleFocus();
-        })("blur", function MatAutocompleteTrigger_blur_HostBindingHandler() {
-          return ctx._onTouched();
-        })("input", function MatAutocompleteTrigger_input_HostBindingHandler($event) {
-          return ctx._handleInput($event);
-        })("keydown", function MatAutocompleteTrigger_keydown_HostBindingHandler($event) {
-          return ctx._handleKeydown($event);
-        })("click", function MatAutocompleteTrigger_click_HostBindingHandler() {
-          return ctx._handleClick();
-        });
-      }
-      if (rf & 2) {
-        \u0275\u0275attribute("autocomplete", ctx.autocompleteAttribute)("role", ctx.autocompleteDisabled ? null : "combobox")("aria-autocomplete", ctx.autocompleteDisabled ? null : "list")("aria-activedescendant", ctx.panelOpen && ctx.activeOption ? ctx.activeOption.id : null)("aria-expanded", ctx.autocompleteDisabled ? null : ctx.panelOpen.toString())("aria-controls", ctx.autocompleteDisabled || !ctx.panelOpen ? null : ctx.autocomplete == null ? null : ctx.autocomplete.id)("aria-haspopup", ctx.autocompleteDisabled ? null : "listbox");
-      }
-    },
-    inputs: {
-      autocomplete: [0, "matAutocomplete", "autocomplete"],
-      position: [0, "matAutocompletePosition", "position"],
-      connectedTo: [0, "matAutocompleteConnectedTo", "connectedTo"],
-      autocompleteAttribute: [0, "autocomplete", "autocompleteAttribute"],
-      autocompleteDisabled: [2, "matAutocompleteDisabled", "autocompleteDisabled", booleanAttribute]
-    },
-    exportAs: ["matAutocompleteTrigger"],
-    features: [\u0275\u0275ProvidersFeature([MAT_AUTOCOMPLETE_VALUE_ACCESSOR]), \u0275\u0275NgOnChangesFeature]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatAutocompleteTrigger, [{
-    type: Directive,
-    args: [{
-      selector: `input[matAutocomplete], textarea[matAutocomplete]`,
-      host: {
-        "class": "mat-mdc-autocomplete-trigger",
-        "[attr.autocomplete]": "autocompleteAttribute",
-        "[attr.role]": 'autocompleteDisabled ? null : "combobox"',
-        "[attr.aria-autocomplete]": 'autocompleteDisabled ? null : "list"',
-        "[attr.aria-activedescendant]": "(panelOpen && activeOption) ? activeOption.id : null",
-        "[attr.aria-expanded]": "autocompleteDisabled ? null : panelOpen.toString()",
-        "[attr.aria-controls]": "(autocompleteDisabled || !panelOpen) ? null : autocomplete?.id",
-        "[attr.aria-haspopup]": 'autocompleteDisabled ? null : "listbox"',
-        // Note: we use `focusin`, as opposed to `focus`, in order to open the panel
-        // a little earlier. This avoids issues where IE delays the focusing of the input.
-        "(focusin)": "_handleFocus()",
-        "(blur)": "_onTouched()",
-        "(input)": "_handleInput($event)",
-        "(keydown)": "_handleKeydown($event)",
-        "(click)": "_handleClick()"
-      },
-      exportAs: "matAutocompleteTrigger",
-      providers: [MAT_AUTOCOMPLETE_VALUE_ACCESSOR]
-    }]
-  }], () => [], {
-    autocomplete: [{
-      type: Input,
-      args: ["matAutocomplete"]
-    }],
-    position: [{
-      type: Input,
-      args: ["matAutocompletePosition"]
-    }],
-    connectedTo: [{
-      type: Input,
-      args: ["matAutocompleteConnectedTo"]
-    }],
-    autocompleteAttribute: [{
-      type: Input,
-      args: ["autocomplete"]
-    }],
-    autocompleteDisabled: [{
-      type: Input,
-      args: [{
-        alias: "matAutocompleteDisabled",
-        transform: booleanAttribute
-      }]
-    }]
-  });
-})();
-var MatAutocompleteModule = class _MatAutocompleteModule {
-  static \u0275fac = function MatAutocompleteModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatAutocompleteModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _MatAutocompleteModule,
-    imports: [OverlayModule, MatOptionModule, MatCommonModule, MatAutocomplete, MatAutocompleteTrigger, MatAutocompleteOrigin],
-    exports: [CdkScrollableModule, MatAutocomplete, MatOptionModule, MatCommonModule, MatAutocompleteTrigger, MatAutocompleteOrigin]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    providers: [MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER],
-    imports: [OverlayModule, MatOptionModule, MatCommonModule, CdkScrollableModule, MatOptionModule, MatCommonModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatAutocompleteModule, [{
-    type: NgModule,
-    args: [{
-      imports: [OverlayModule, MatOptionModule, MatCommonModule, MatAutocomplete, MatAutocompleteTrigger, MatAutocompleteOrigin],
-      exports: [CdkScrollableModule, MatAutocomplete, MatOptionModule, MatCommonModule, MatAutocompleteTrigger, MatAutocompleteOrigin],
-      providers: [MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER]
-    }]
-  }], null, null);
-})();
 
 // node_modules/@angular/cdk/fesm2022/text-field.mjs
 var _CdkTextFieldStyleLoader = class __CdkTextFieldStyleLoader {
@@ -89987,289 +88507,6 @@ var MatInputModule = class _MatInputModule {
   }], null, null);
 })();
 
-// node_modules/@angular/material/fesm2022/progress-spinner.mjs
-var _c012 = ["determinateSpinner"];
-function MatProgressSpinner_ng_template_0_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(0, "svg", 11);
-    \u0275\u0275element(1, "circle", 12);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275attribute("viewBox", ctx_r0._viewBox());
-    \u0275\u0275advance();
-    \u0275\u0275styleProp("stroke-dasharray", ctx_r0._strokeCircumference(), "px")("stroke-dashoffset", ctx_r0._strokeCircumference() / 2, "px")("stroke-width", ctx_r0._circleStrokeWidth(), "%");
-    \u0275\u0275attribute("r", ctx_r0._circleRadius());
-  }
-}
-var MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS = new InjectionToken("mat-progress-spinner-default-options", {
-  providedIn: "root",
-  factory: MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS_FACTORY
-});
-function MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS_FACTORY() {
-  return {
-    diameter: BASE_SIZE
-  };
-}
-var BASE_SIZE = 100;
-var BASE_STROKE_WIDTH = 10;
-var MatProgressSpinner = class _MatProgressSpinner {
-  _elementRef = inject(ElementRef);
-  /** Whether the _mat-animation-noopable class should be applied, disabling animations.  */
-  _noopAnimations;
-  // TODO: should be typed as `ThemePalette` but internal apps pass in arbitrary strings.
-  /**
-   * Theme color of the progress spinner. This API is supported in M2 themes only, it
-   * has no effect in M3 themes. For color customization in M3, see https://material.angular.dev/components/progress-spinner/styling.
-   *
-   * For information on applying color variants in M3, see
-   * https://material.angular.dev/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
-   */
-  get color() {
-    return this._color || this._defaultColor;
-  }
-  set color(value) {
-    this._color = value;
-  }
-  _color;
-  _defaultColor = "primary";
-  /** The element of the determinate spinner. */
-  _determinateCircle;
-  constructor() {
-    const defaults3 = inject(MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS);
-    this._noopAnimations = _animationsDisabled() && !!defaults3 && !defaults3._forceAnimations;
-    this.mode = this._elementRef.nativeElement.nodeName.toLowerCase() === "mat-spinner" ? "indeterminate" : "determinate";
-    if (defaults3) {
-      if (defaults3.color) {
-        this.color = this._defaultColor = defaults3.color;
-      }
-      if (defaults3.diameter) {
-        this.diameter = defaults3.diameter;
-      }
-      if (defaults3.strokeWidth) {
-        this.strokeWidth = defaults3.strokeWidth;
-      }
-    }
-  }
-  /**
-   * Mode of the progress bar.
-   *
-   * Input must be one of these values: determinate, indeterminate, buffer, query, defaults to
-   * 'determinate'.
-   * Mirrored to mode attribute.
-   */
-  mode;
-  /** Value of the progress bar. Defaults to zero. Mirrored to aria-valuenow. */
-  get value() {
-    return this.mode === "determinate" ? this._value : 0;
-  }
-  set value(v3) {
-    this._value = Math.max(0, Math.min(100, v3 || 0));
-  }
-  _value = 0;
-  /** The diameter of the progress spinner (will set width and height of svg). */
-  get diameter() {
-    return this._diameter;
-  }
-  set diameter(size) {
-    this._diameter = size || 0;
-  }
-  _diameter = BASE_SIZE;
-  /** Stroke width of the progress spinner. */
-  get strokeWidth() {
-    return this._strokeWidth ?? this.diameter / 10;
-  }
-  set strokeWidth(value) {
-    this._strokeWidth = value || 0;
-  }
-  _strokeWidth;
-  /** The radius of the spinner, adjusted for stroke width. */
-  _circleRadius() {
-    return (this.diameter - BASE_STROKE_WIDTH) / 2;
-  }
-  /** The view box of the spinner's svg element. */
-  _viewBox() {
-    const viewBox = this._circleRadius() * 2 + this.strokeWidth;
-    return `0 0 ${viewBox} ${viewBox}`;
-  }
-  /** The stroke circumference of the svg circle. */
-  _strokeCircumference() {
-    return 2 * Math.PI * this._circleRadius();
-  }
-  /** The dash offset of the svg circle. */
-  _strokeDashOffset() {
-    if (this.mode === "determinate") {
-      return this._strokeCircumference() * (100 - this._value) / 100;
-    }
-    return null;
-  }
-  /** Stroke width of the circle in percent. */
-  _circleStrokeWidth() {
-    return this.strokeWidth / this.diameter * 100;
-  }
-  static \u0275fac = function MatProgressSpinner_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatProgressSpinner)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _MatProgressSpinner,
-    selectors: [["mat-progress-spinner"], ["mat-spinner"]],
-    viewQuery: function MatProgressSpinner_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(_c012, 5);
-      }
-      if (rf & 2) {
-        let _t4;
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._determinateCircle = _t4.first);
-      }
-    },
-    hostAttrs: ["role", "progressbar", "tabindex", "-1", 1, "mat-mdc-progress-spinner", "mdc-circular-progress"],
-    hostVars: 18,
-    hostBindings: function MatProgressSpinner_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275attribute("aria-valuemin", 0)("aria-valuemax", 100)("aria-valuenow", ctx.mode === "determinate" ? ctx.value : null)("mode", ctx.mode);
-        \u0275\u0275classMap("mat-" + ctx.color);
-        \u0275\u0275styleProp("width", ctx.diameter, "px")("height", ctx.diameter, "px")("--mat-progress-spinner-size", ctx.diameter + "px")("--mat-progress-spinner-active-indicator-width", ctx.diameter + "px");
-        \u0275\u0275classProp("_mat-animation-noopable", ctx._noopAnimations)("mdc-circular-progress--indeterminate", ctx.mode === "indeterminate");
-      }
-    },
-    inputs: {
-      color: "color",
-      mode: "mode",
-      value: [2, "value", "value", numberAttribute],
-      diameter: [2, "diameter", "diameter", numberAttribute],
-      strokeWidth: [2, "strokeWidth", "strokeWidth", numberAttribute]
-    },
-    exportAs: ["matProgressSpinner"],
-    decls: 14,
-    vars: 11,
-    consts: [["circle", ""], ["determinateSpinner", ""], ["aria-hidden", "true", 1, "mdc-circular-progress__determinate-container"], ["xmlns", "http://www.w3.org/2000/svg", "focusable", "false", 1, "mdc-circular-progress__determinate-circle-graphic"], ["cx", "50%", "cy", "50%", 1, "mdc-circular-progress__determinate-circle"], ["aria-hidden", "true", 1, "mdc-circular-progress__indeterminate-container"], [1, "mdc-circular-progress__spinner-layer"], [1, "mdc-circular-progress__circle-clipper", "mdc-circular-progress__circle-left"], [3, "ngTemplateOutlet"], [1, "mdc-circular-progress__gap-patch"], [1, "mdc-circular-progress__circle-clipper", "mdc-circular-progress__circle-right"], ["xmlns", "http://www.w3.org/2000/svg", "focusable", "false", 1, "mdc-circular-progress__indeterminate-circle-graphic"], ["cx", "50%", "cy", "50%"]],
-    template: function MatProgressSpinner_Template(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275template(0, MatProgressSpinner_ng_template_0_Template, 2, 8, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-        \u0275\u0275elementStart(2, "div", 2, 1);
-        \u0275\u0275namespaceSVG();
-        \u0275\u0275elementStart(4, "svg", 3);
-        \u0275\u0275element(5, "circle", 4);
-        \u0275\u0275elementEnd()();
-        \u0275\u0275namespaceHTML();
-        \u0275\u0275elementStart(6, "div", 5)(7, "div", 6)(8, "div", 7);
-        \u0275\u0275elementContainer(9, 8);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(10, "div", 9);
-        \u0275\u0275elementContainer(11, 8);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(12, "div", 10);
-        \u0275\u0275elementContainer(13, 8);
-        \u0275\u0275elementEnd()()();
-      }
-      if (rf & 2) {
-        const circle_r2 = \u0275\u0275reference(1);
-        \u0275\u0275advance(4);
-        \u0275\u0275attribute("viewBox", ctx._viewBox());
-        \u0275\u0275advance();
-        \u0275\u0275styleProp("stroke-dasharray", ctx._strokeCircumference(), "px")("stroke-dashoffset", ctx._strokeDashOffset(), "px")("stroke-width", ctx._circleStrokeWidth(), "%");
-        \u0275\u0275attribute("r", ctx._circleRadius());
-        \u0275\u0275advance(4);
-        \u0275\u0275property("ngTemplateOutlet", circle_r2);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngTemplateOutlet", circle_r2);
-        \u0275\u0275advance(2);
-        \u0275\u0275property("ngTemplateOutlet", circle_r2);
-      }
-    },
-    dependencies: [NgTemplateOutlet],
-    styles: [".mat-mdc-progress-spinner{display:block;overflow:hidden;line-height:0;position:relative;direction:ltr;transition:opacity 250ms cubic-bezier(0.4, 0, 0.6, 1)}.mat-mdc-progress-spinner circle{stroke-width:var(--mat-progress-spinner-active-indicator-width, 4px)}.mat-mdc-progress-spinner._mat-animation-noopable,.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__determinate-circle{transition:none !important}.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__indeterminate-circle-graphic,.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__spinner-layer,.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__indeterminate-container{animation:none !important}.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__indeterminate-container circle{stroke-dasharray:0 !important}@media(forced-colors: active){.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic,.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle{stroke:currentColor;stroke:CanvasText}}.mdc-circular-progress__determinate-container,.mdc-circular-progress__indeterminate-circle-graphic,.mdc-circular-progress__indeterminate-container,.mdc-circular-progress__spinner-layer{position:absolute;width:100%;height:100%}.mdc-circular-progress__determinate-container{transform:rotate(-90deg)}.mdc-circular-progress--indeterminate .mdc-circular-progress__determinate-container{opacity:0}.mdc-circular-progress__indeterminate-container{font-size:0;letter-spacing:0;white-space:nowrap;opacity:0}.mdc-circular-progress--indeterminate .mdc-circular-progress__indeterminate-container{opacity:1;animation:mdc-circular-progress-container-rotate 1568.2352941176ms linear infinite}.mdc-circular-progress__determinate-circle-graphic,.mdc-circular-progress__indeterminate-circle-graphic{fill:rgba(0,0,0,0)}.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic{stroke:var(--mat-progress-spinner-active-indicator-color, var(--mat-sys-primary))}@media(forced-colors: active){.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic{stroke:CanvasText}}.mdc-circular-progress__determinate-circle{transition:stroke-dashoffset 500ms cubic-bezier(0, 0, 0.2, 1)}.mdc-circular-progress__gap-patch{position:absolute;top:0;left:47.5%;box-sizing:border-box;width:5%;height:100%;overflow:hidden}.mdc-circular-progress__gap-patch .mdc-circular-progress__indeterminate-circle-graphic{left:-900%;width:2000%;transform:rotate(180deg)}.mdc-circular-progress__circle-clipper .mdc-circular-progress__indeterminate-circle-graphic{width:200%}.mdc-circular-progress__circle-right .mdc-circular-progress__indeterminate-circle-graphic{left:-100%}.mdc-circular-progress--indeterminate .mdc-circular-progress__circle-left .mdc-circular-progress__indeterminate-circle-graphic{animation:mdc-circular-progress-left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both}.mdc-circular-progress--indeterminate .mdc-circular-progress__circle-right .mdc-circular-progress__indeterminate-circle-graphic{animation:mdc-circular-progress-right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both}.mdc-circular-progress__circle-clipper{display:inline-flex;position:relative;width:50%;height:100%;overflow:hidden}.mdc-circular-progress--indeterminate .mdc-circular-progress__spinner-layer{animation:mdc-circular-progress-spinner-layer-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both}@keyframes mdc-circular-progress-container-rotate{to{transform:rotate(360deg)}}@keyframes mdc-circular-progress-spinner-layer-rotate{12.5%{transform:rotate(135deg)}25%{transform:rotate(270deg)}37.5%{transform:rotate(405deg)}50%{transform:rotate(540deg)}62.5%{transform:rotate(675deg)}75%{transform:rotate(810deg)}87.5%{transform:rotate(945deg)}100%{transform:rotate(1080deg)}}@keyframes mdc-circular-progress-left-spin{from{transform:rotate(265deg)}50%{transform:rotate(130deg)}to{transform:rotate(265deg)}}@keyframes mdc-circular-progress-right-spin{from{transform:rotate(-265deg)}50%{transform:rotate(-130deg)}to{transform:rotate(-265deg)}}\n"],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatProgressSpinner, [{
-    type: Component,
-    args: [{
-      selector: "mat-progress-spinner, mat-spinner",
-      exportAs: "matProgressSpinner",
-      host: {
-        "role": "progressbar",
-        "class": "mat-mdc-progress-spinner mdc-circular-progress",
-        // set tab index to -1 so screen readers will read the aria-label
-        // Note: there is a known issue with JAWS that does not read progressbar aria labels on FireFox
-        "tabindex": "-1",
-        "[class]": '"mat-" + color',
-        "[class._mat-animation-noopable]": `_noopAnimations`,
-        "[class.mdc-circular-progress--indeterminate]": 'mode === "indeterminate"',
-        "[style.width.px]": "diameter",
-        "[style.height.px]": "diameter",
-        "[style.--mat-progress-spinner-size]": 'diameter + "px"',
-        "[style.--mat-progress-spinner-active-indicator-width]": 'diameter + "px"',
-        "[attr.aria-valuemin]": "0",
-        "[attr.aria-valuemax]": "100",
-        "[attr.aria-valuenow]": 'mode === "determinate" ? value : null',
-        "[attr.mode]": "mode"
-      },
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      encapsulation: ViewEncapsulation.None,
-      imports: [NgTemplateOutlet],
-      template: '<ng-template #circle>\n  <svg [attr.viewBox]="_viewBox()" class="mdc-circular-progress__indeterminate-circle-graphic"\n       xmlns="http://www.w3.org/2000/svg" focusable="false">\n    <circle [attr.r]="_circleRadius()"\n            [style.stroke-dasharray.px]="_strokeCircumference()"\n            [style.stroke-dashoffset.px]="_strokeCircumference() / 2"\n            [style.stroke-width.%]="_circleStrokeWidth()"\n            cx="50%" cy="50%"/>\n  </svg>\n</ng-template>\n\n<!--\n  All children need to be hidden for screen readers in order to support ChromeVox.\n  More context in the issue: https://github.com/angular/components/issues/22165.\n-->\n<div class="mdc-circular-progress__determinate-container" aria-hidden="true" #determinateSpinner>\n  <svg [attr.viewBox]="_viewBox()" class="mdc-circular-progress__determinate-circle-graphic"\n       xmlns="http://www.w3.org/2000/svg" focusable="false">\n    <circle [attr.r]="_circleRadius()"\n            [style.stroke-dasharray.px]="_strokeCircumference()"\n            [style.stroke-dashoffset.px]="_strokeDashOffset()"\n            [style.stroke-width.%]="_circleStrokeWidth()"\n            class="mdc-circular-progress__determinate-circle"\n            cx="50%" cy="50%"/>\n  </svg>\n</div>\n<!--TODO: figure out why there are 3 separate svgs-->\n<div class="mdc-circular-progress__indeterminate-container" aria-hidden="true">\n  <div class="mdc-circular-progress__spinner-layer">\n    <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-left">\n      <ng-container [ngTemplateOutlet]="circle"></ng-container>\n    </div>\n    <div class="mdc-circular-progress__gap-patch">\n      <ng-container [ngTemplateOutlet]="circle"></ng-container>\n    </div>\n    <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-right">\n      <ng-container [ngTemplateOutlet]="circle"></ng-container>\n    </div>\n  </div>\n</div>\n',
-      styles: [".mat-mdc-progress-spinner{display:block;overflow:hidden;line-height:0;position:relative;direction:ltr;transition:opacity 250ms cubic-bezier(0.4, 0, 0.6, 1)}.mat-mdc-progress-spinner circle{stroke-width:var(--mat-progress-spinner-active-indicator-width, 4px)}.mat-mdc-progress-spinner._mat-animation-noopable,.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__determinate-circle{transition:none !important}.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__indeterminate-circle-graphic,.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__spinner-layer,.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__indeterminate-container{animation:none !important}.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__indeterminate-container circle{stroke-dasharray:0 !important}@media(forced-colors: active){.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic,.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle{stroke:currentColor;stroke:CanvasText}}.mdc-circular-progress__determinate-container,.mdc-circular-progress__indeterminate-circle-graphic,.mdc-circular-progress__indeterminate-container,.mdc-circular-progress__spinner-layer{position:absolute;width:100%;height:100%}.mdc-circular-progress__determinate-container{transform:rotate(-90deg)}.mdc-circular-progress--indeterminate .mdc-circular-progress__determinate-container{opacity:0}.mdc-circular-progress__indeterminate-container{font-size:0;letter-spacing:0;white-space:nowrap;opacity:0}.mdc-circular-progress--indeterminate .mdc-circular-progress__indeterminate-container{opacity:1;animation:mdc-circular-progress-container-rotate 1568.2352941176ms linear infinite}.mdc-circular-progress__determinate-circle-graphic,.mdc-circular-progress__indeterminate-circle-graphic{fill:rgba(0,0,0,0)}.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic{stroke:var(--mat-progress-spinner-active-indicator-color, var(--mat-sys-primary))}@media(forced-colors: active){.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic{stroke:CanvasText}}.mdc-circular-progress__determinate-circle{transition:stroke-dashoffset 500ms cubic-bezier(0, 0, 0.2, 1)}.mdc-circular-progress__gap-patch{position:absolute;top:0;left:47.5%;box-sizing:border-box;width:5%;height:100%;overflow:hidden}.mdc-circular-progress__gap-patch .mdc-circular-progress__indeterminate-circle-graphic{left:-900%;width:2000%;transform:rotate(180deg)}.mdc-circular-progress__circle-clipper .mdc-circular-progress__indeterminate-circle-graphic{width:200%}.mdc-circular-progress__circle-right .mdc-circular-progress__indeterminate-circle-graphic{left:-100%}.mdc-circular-progress--indeterminate .mdc-circular-progress__circle-left .mdc-circular-progress__indeterminate-circle-graphic{animation:mdc-circular-progress-left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both}.mdc-circular-progress--indeterminate .mdc-circular-progress__circle-right .mdc-circular-progress__indeterminate-circle-graphic{animation:mdc-circular-progress-right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both}.mdc-circular-progress__circle-clipper{display:inline-flex;position:relative;width:50%;height:100%;overflow:hidden}.mdc-circular-progress--indeterminate .mdc-circular-progress__spinner-layer{animation:mdc-circular-progress-spinner-layer-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both}@keyframes mdc-circular-progress-container-rotate{to{transform:rotate(360deg)}}@keyframes mdc-circular-progress-spinner-layer-rotate{12.5%{transform:rotate(135deg)}25%{transform:rotate(270deg)}37.5%{transform:rotate(405deg)}50%{transform:rotate(540deg)}62.5%{transform:rotate(675deg)}75%{transform:rotate(810deg)}87.5%{transform:rotate(945deg)}100%{transform:rotate(1080deg)}}@keyframes mdc-circular-progress-left-spin{from{transform:rotate(265deg)}50%{transform:rotate(130deg)}to{transform:rotate(265deg)}}@keyframes mdc-circular-progress-right-spin{from{transform:rotate(-265deg)}50%{transform:rotate(-130deg)}to{transform:rotate(-265deg)}}\n"]
-    }]
-  }], () => [], {
-    color: [{
-      type: Input
-    }],
-    _determinateCircle: [{
-      type: ViewChild,
-      args: ["determinateSpinner"]
-    }],
-    mode: [{
-      type: Input
-    }],
-    value: [{
-      type: Input,
-      args: [{
-        transform: numberAttribute
-      }]
-    }],
-    diameter: [{
-      type: Input,
-      args: [{
-        transform: numberAttribute
-      }]
-    }],
-    strokeWidth: [{
-      type: Input,
-      args: [{
-        transform: numberAttribute
-      }]
-    }]
-  });
-})();
-var MatSpinner = MatProgressSpinner;
-var MatProgressSpinnerModule = class _MatProgressSpinnerModule {
-  static \u0275fac = function MatProgressSpinnerModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatProgressSpinnerModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _MatProgressSpinnerModule,
-    imports: [MatProgressSpinner, MatSpinner],
-    exports: [MatProgressSpinner, MatSpinner, MatCommonModule]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    imports: [MatCommonModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatProgressSpinnerModule, [{
-    type: NgModule,
-    args: [{
-      imports: [MatProgressSpinner, MatSpinner],
-      exports: [MatProgressSpinner, MatSpinner, MatCommonModule]
-    }]
-  }], null, null);
-})();
-
 // libs/components/src/lib/safe.pipe.ts
 var _SafePipe = class _SafePipe {
   constructor() {
@@ -90310,7 +88547,7 @@ var SafePipe = _SafePipe;
 })();
 
 // libs/components/src/lib/icon.component.ts
-var _c013 = ["*"];
+var _c010 = ["*"];
 function IconComponent_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "i");
@@ -90346,7 +88583,7 @@ var _IconComponent = class _IconComponent {
 _IconComponent.\u0275fac = function IconComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _IconComponent)();
 };
-_IconComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["icon"], ["i", "icon", ""]], inputs: { className: [1, "className"], icon: [1, "icon"] }, ngContentSelectors: _c013, decls: 3, vars: 2, consts: [[1, "flex", "h-[1.25em]", "w-[1.25em]", "items-center", "justify-center", "overflow-hidden"], [3, "class"], [1, "h-[1em]", "w-[1em]", 3, "src"]], template: function IconComponent_Template(rf, ctx) {
+_IconComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IconComponent, selectors: [["icon"], ["i", "icon", ""]], inputs: { className: [1, "className"], icon: [1, "icon"] }, ngContentSelectors: _c010, decls: 3, vars: 2, consts: [[1, "flex", "h-[1.25em]", "w-[1.25em]", "items-center", "justify-center", "overflow-hidden"], [3, "class"], [1, "h-[1em]", "w-[1em]", 3, "src"]], template: function IconComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projectionDef();
     \u0275\u0275elementStart(0, "div", 0);
@@ -90390,8 +88627,8 @@ var IconComponent = _IconComponent;
 })();
 
 // node_modules/@angular/material/fesm2022/checkbox.mjs
-var _c014 = ["input"];
-var _c110 = ["label"];
+var _c011 = ["input"];
+var _c19 = ["label"];
 var _c26 = ["*"];
 var MAT_CHECKBOX_DEFAULT_OPTIONS = new InjectionToken("mat-checkbox-default-options", {
   providedIn: "root",
@@ -90742,8 +88979,8 @@ var MatCheckbox = class _MatCheckbox {
     selectors: [["mat-checkbox"]],
     viewQuery: function MatCheckbox_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c014, 5);
-        \u0275\u0275viewQuery(_c110, 5);
+        \u0275\u0275viewQuery(_c011, 5);
+        \u0275\u0275viewQuery(_c19, 5);
       }
       if (rf & 2) {
         let _t4;
@@ -91073,7 +89310,7 @@ var MatCheckboxModule = class _MatCheckboxModule {
 })();
 
 // libs/components/src/lib/settings-toggle.component.ts
-var _c015 = ["*"];
+var _c012 = ["*"];
 function SettingsToggleComponent_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "icon", 2);
@@ -91163,7 +89400,7 @@ _SettingsToggleComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent
     useExisting: forwardRef(() => _SettingsToggleComponent),
     multi: true
   }
-])], ngContentSelectors: _c015, decls: 9, vars: 8, consts: [["matRipple", "", 1, "relative", "flex", "flex-1", "items-center", "space-x-2", "overflow-hidden", "rounded", "border", "py-1", "pl-2", "pr-1", "hover:bg-base-200", 3, "click"], [1, "z-10", "flex", "flex-1", "items-center", "space-x-2", "p-2", "text-left"], [3, "matTooltip"], [1, "absolute", "inset-0", "z-0", "!m-0", "bg-info", "opacity-10"], [1, "px-2"], [1, "pointer-events-none", 3, "ngModel"], ["toggle", "", 1, "relative", "h-8", "w-12", "rounded-full", "border-2", "border-base-400"], [1, "absolute", "top-1/2", "flex", "h-6", "w-6", "-translate-x-0.5", "-translate-y-1/2", "items-center", "justify-center", "rounded-full", "text-black", "shadow"], [1, "pointer-events-none", 3, "ngModelChange", "ngModel"]], template: function SettingsToggleComponent_Template(rf, ctx) {
+])], ngContentSelectors: _c012, decls: 9, vars: 8, consts: [["matRipple", "", 1, "relative", "flex", "flex-1", "items-center", "space-x-2", "overflow-hidden", "rounded", "border", "py-1", "pl-2", "pr-1", "hover:bg-base-200", 3, "click"], [1, "z-10", "flex", "flex-1", "items-center", "space-x-2", "p-2", "text-left"], [3, "matTooltip"], [1, "absolute", "inset-0", "z-0", "!m-0", "bg-info", "opacity-10"], [1, "px-2"], [1, "pointer-events-none", 3, "ngModel"], ["toggle", "", 1, "relative", "h-8", "w-12", "rounded-full", "border-2", "border-base-400"], [1, "absolute", "top-1/2", "flex", "h-6", "w-6", "-translate-x-0.5", "-translate-y-1/2", "items-center", "justify-center", "rounded-full", "text-black", "shadow"], [1, "pointer-events-none", 3, "ngModelChange", "ngModel"]], template: function SettingsToggleComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projectionDef();
     \u0275\u0275elementStart(0, "button", 0);
@@ -91257,13 +89494,1843 @@ var SettingsToggleComponent = _SettingsToggleComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SettingsToggleComponent, { className: "SettingsToggleComponent", filePath: "libs/components/src/lib/settings-toggle.component.ts", lineNumber: 83 });
 })();
 
+// libs/components/src/lib/upload-permissions-modal.component.ts
+var _c013 = (a0, a1, a2) => ({ file: a0, is_public: a1, permissions: a2 });
+function UploadPermissionsModalComponent_Conditional_15_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 8)(1, "label");
+    \u0275\u0275text(2, "Permissions");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "mat-form-field", 12)(4, "mat-select", 7);
+    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Conditional_15_Template_mat_select_ngModelChange_4_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r1.permissions, $event) || (ctx_r1.permissions = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementStart(5, "mat-option", 13);
+    \u0275\u0275text(6, "None");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "mat-option", 14);
+    \u0275\u0275text(8, "Support");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(9, "mat-option", 15);
+    \u0275\u0275text(10, "Admin");
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(4);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r1.permissions);
+  }
+}
+var _UploadPermissionsModalComponent = class _UploadPermissionsModalComponent {
+  constructor() {
+    this._dialog_ref = inject(MatDialogRef);
+    this._data = inject(MAT_DIALOG_DATA);
+    this.file = this._data.file;
+    this.is_public = true;
+    this.permissions = "none";
+    this.file = this._data.file;
+  }
+  close() {
+    this._dialog_ref.close();
+  }
+};
+_UploadPermissionsModalComponent.\u0275fac = function UploadPermissionsModalComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _UploadPermissionsModalComponent)();
+};
+_UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadPermissionsModalComponent, selectors: [["upload-permissions-modal"]], decls: 21, vars: 8, consts: [[1, "sticky", "top-0", "z-10", "m-2", "w-[calc(100%-1rem)]", "rounded", "border-none", "bg-base-200", "p-2"], [1, "px-2", "text-xl", "font-medium"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "min-w-[20rem]", "space-y-2", "px-4", "py-2"], [1, "flex", "flex-col"], ["appearance", "outline", 1, "no-subscript"], ["matInput", "", "disabled", "true", "placeholder", "File Name", 3, "ngModel"], [3, "ngModelChange", "ngModel"], [1, "flex", "flex-col", "space-y-2"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", "matRipple", "", 1, "w-32", 3, "mat-dialog-close"], ["appearance", "outline"], ["value", "none"], ["value", "support"], ["value", "admin"]], template: function UploadPermissionsModalComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "header", 0)(1, "h2", 1);
+    \u0275\u0275text(2, "Upload File");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "button", 2)(4, "icon");
+    \u0275\u0275text(5, "close");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(6, "main", 3)(7, "div", 4)(8, "label");
+    \u0275\u0275text(9, "File Name");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "mat-form-field", 5);
+    \u0275\u0275element(11, "input", 6);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(12, "div")(13, "settings-toggle", 7);
+    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Template_settings_toggle_ngModelChange_13_listener($event) {
+      \u0275\u0275twoWayBindingSet(ctx.is_public, $event) || (ctx.is_public = $event);
+      return $event;
+    });
+    \u0275\u0275text(14, "Public");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275conditionalCreate(15, UploadPermissionsModalComponent_Conditional_15_Template, 11, 1, "div", 8);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(16, "footer", 9)(17, "button", 10);
+    \u0275\u0275text(18, " Cancel ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(19, "button", 11);
+    \u0275\u0275text(20, " Upload ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(11);
+    \u0275\u0275property("ngModel", ctx.file.name);
+    \u0275\u0275advance(2);
+    \u0275\u0275twoWayProperty("ngModel", ctx.is_public);
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(!ctx.is_public ? 15 : -1);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("mat-dialog-close", \u0275\u0275pureFunction3(4, _c013, ctx.file, ctx.is_public, ctx.permissions));
+  }
+}, dependencies: [
+  MatDialogModule,
+  MatDialogClose,
+  MatFormFieldModule,
+  MatFormField,
+  FormsModule,
+  DefaultValueAccessor,
+  NgControlStatus,
+  NgModel,
+  MatSelectModule,
+  MatSelect,
+  MatOption,
+  SettingsToggleComponent,
+  IconComponent,
+  MatInputModule,
+  MatInput,
+  MatRippleModule,
+  MatRipple
+], encapsulation: 2 });
+var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UploadPermissionsModalComponent, [{
+    type: Component,
+    args: [{ selector: "upload-permissions-modal", template: `
+        <header
+            class="sticky top-0 z-10 m-2 w-[calc(100%-1rem)] rounded border-none bg-base-200 p-2"
+        >
+            <h2 class="px-2 text-xl font-medium">Upload File</h2>
+            <button icon matRipple mat-dialog-close>
+                <icon>close</icon>
+            </button>
+        </header>
+        <main class="min-w-[20rem] space-y-2 px-4 py-2">
+            <div class="flex flex-col">
+                <label>File Name</label>
+                <mat-form-field appearance="outline" class="no-subscript">
+                    <input
+                        matInput
+                        [ngModel]="file.name"
+                        disabled="true"
+                        placeholder="File Name"
+                    />
+                </mat-form-field>
+            </div>
+            <div>
+                <settings-toggle [(ngModel)]="is_public"
+                    >Public</settings-toggle
+                >
+            </div>
+            @if (!is_public) {
+                <div class="flex flex-col space-y-2">
+                    <label>Permissions</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="permissions">
+                            <mat-option value="none">None</mat-option>
+                            <mat-option value="support">Support</mat-option>
+                            <mat-option value="admin">Admin</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            }
+        </main>
+        <footer
+            class="flex items-center justify-end space-x-2 border-t border-base-200 px-4 py-2"
+        >
+            <button btn matRipple class="inverse w-32" mat-dialog-close>
+                Cancel
+            </button>
+            <button
+                btn
+                matRipple
+                class="w-32"
+                [mat-dialog-close]="{ file, is_public, permissions }"
+            >
+                Upload
+            </button>
+        </footer>
+    `, schemas: [NO_ERRORS_SCHEMA], imports: [
+      MatDialogModule,
+      MatFormFieldModule,
+      FormsModule,
+      MatSelectModule,
+      SettingsToggleComponent,
+      IconComponent,
+      MatInputModule,
+      MatRippleModule
+    ] }]
+  }], () => [], null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadPermissionsModalComponent, { className: "UploadPermissionsModalComponent", filePath: "libs/components/src/lib/upload-permissions-modal.component.ts", lineNumber: 86 });
+})();
+
+// libs/common/src/lib/uploads.service.ts
+var _UploadsService = class _UploadsService {
+  constructor() {
+    this._dialog = inject(MatDialog);
+    this._upload_list = new BehaviorSubject([]);
+    this.upload_list = this._upload_list.asObservable();
+    if (localStorage) {
+      this._upload_list.next(JSON.parse(localStorage.getItem("BACKOFFICE.uploads") || "[]"));
+    }
+  }
+  clearList() {
+    const in_progress_list = this._upload_list.getValue().filter((file) => file.progress < 100 && !file.error);
+    this._upload_list.next(in_progress_list);
+  }
+  uploadFileWithPermissions(file) {
+    return new Promise((resolve, reject) => {
+      const ref = this._dialog.open(UploadPermissionsModalComponent, {
+        data: { file }
+      });
+      ref.afterClosed().subscribe(async (details) => {
+        if (details) {
+          const id = await this.uploadFile(details.file, details.is_public, details.permissions).catch((e2) => {
+            reject(e2);
+            throw e2;
+          });
+          resolve(id);
+        } else
+          reject();
+      });
+    });
+  }
+  uploadFile(file, pub = true, permissions = "none") {
+    return new Promise((resolve) => {
+      let resolved2 = false;
+      const update_fn = (details) => {
+        if (!resolved2) {
+          resolve(details.upload?.id || details.id);
+          resolved2 = true;
+        }
+        this._upload_list.next([
+          ...this._upload_list.getValue().filter((_3) => _3.id !== details.id),
+          details
+        ]);
+      };
+      uploadFile(file, pub, permissions).subscribe(update_fn, update_fn, () => this._updateUploadHistory());
+    });
+  }
+  _updateUploadHistory() {
+    const done_list = this._upload_list.getValue().filter((file) => file.progress >= 100);
+    done_list.forEach((i) => delete i.upload);
+    if (localStorage) {
+      localStorage.setItem("PLACEOS.uploads", JSON.stringify(done_list));
+    }
+  }
+};
+_UploadsService.\u0275fac = function UploadsService_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _UploadsService)();
+};
+_UploadsService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _UploadsService, factory: _UploadsService.\u0275fac, providedIn: "root" });
+var UploadsService = _UploadsService;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UploadsService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], () => [], null);
+})();
+
+// libs/common/src/lib/user-idle-time.service.ts
+var EVENTS_NAMES = ["keypress", "mousemove", "touchmove", "scroll", "wheel"];
+var _UserIdleTimeService = class _UserIdleTimeService {
+  constructor() {
+    this._last_action = new BehaviorSubject(Date.now());
+    this._update = (e2) => this._onUserInteraction();
+    this._event_names = EVENTS_NAMES;
+    this.last_action = combineLatest([
+      this._last_action,
+      interval(1e3)
+    ]).pipe(throttleTime(300), map(([last_action]) => last_action));
+    this.idle_time = this.last_action.pipe(map((time) => Date.now() - time));
+  }
+  _onUserInteraction() {
+    this._last_action.next(Date.now());
+  }
+  idleFor(time_ms) {
+    const stop = this.startListening();
+    return this.idle_time.pipe(first((t) => t >= time_ms), tap(() => stop()));
+  }
+  startListening() {
+    this._last_action.next(Date.now());
+    for (const name of this._event_names) {
+      document.body.addEventListener(name, this._update);
+    }
+    return () => this.stopListening();
+  }
+  stopListening() {
+    for (const name of this._event_names) {
+      document.body.removeEventListener(name, this._update);
+    }
+  }
+};
+_UserIdleTimeService.\u0275fac = function UserIdleTimeService_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _UserIdleTimeService)();
+};
+_UserIdleTimeService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _UserIdleTimeService, factory: _UserIdleTimeService.\u0275fac, providedIn: "root" });
+var UserIdleTimeService = _UserIdleTimeService;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UserIdleTimeService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
+// node_modules/@angular/material/fesm2022/autocomplete.mjs
+var _c014 = ["panel"];
+var _c110 = ["*"];
+function MatAutocomplete_ng_template_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 1, 0);
+    \u0275\u0275projection(2);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const formFieldId_r1 = ctx.id;
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(ctx_r1._classList);
+    \u0275\u0275classProp("mat-mdc-autocomplete-visible", ctx_r1.showPanel)("mat-mdc-autocomplete-hidden", !ctx_r1.showPanel)("mat-autocomplete-panel-animations-enabled", !ctx_r1._animationsDisabled)("mat-primary", ctx_r1._color === "primary")("mat-accent", ctx_r1._color === "accent")("mat-warn", ctx_r1._color === "warn");
+    \u0275\u0275property("id", ctx_r1.id);
+    \u0275\u0275attribute("aria-label", ctx_r1.ariaLabel || null)("aria-labelledby", ctx_r1._getPanelAriaLabelledby(formFieldId_r1));
+  }
+}
+var MatAutocompleteSelectedEvent = class {
+  source;
+  option;
+  constructor(source, option) {
+    this.source = source;
+    this.option = option;
+  }
+};
+var MAT_AUTOCOMPLETE_DEFAULT_OPTIONS = new InjectionToken("mat-autocomplete-default-options", {
+  providedIn: "root",
+  factory: MAT_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY
+});
+function MAT_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY() {
+  return {
+    autoActiveFirstOption: false,
+    autoSelectActiveOption: false,
+    hideSingleSelectionIndicator: false,
+    requireSelection: false,
+    hasBackdrop: false
+  };
+}
+var MatAutocomplete = class _MatAutocomplete {
+  _changeDetectorRef = inject(ChangeDetectorRef);
+  _elementRef = inject(ElementRef);
+  _defaults = inject(MAT_AUTOCOMPLETE_DEFAULT_OPTIONS);
+  _animationsDisabled = _animationsDisabled();
+  _activeOptionChanges = Subscription.EMPTY;
+  /** Manages active item in option list based on key events. */
+  _keyManager;
+  /** Whether the autocomplete panel should be visible, depending on option length. */
+  showPanel = false;
+  /** Whether the autocomplete panel is open. */
+  get isOpen() {
+    return this._isOpen && this.showPanel;
+  }
+  _isOpen = false;
+  /** Latest trigger that opened the autocomplete. */
+  _latestOpeningTrigger;
+  /** @docs-private Sets the theme color of the panel. */
+  _setColor(value) {
+    this._color = value;
+    this._changeDetectorRef.markForCheck();
+  }
+  /** @docs-private theme color of the panel */
+  _color;
+  // The @ViewChild query for TemplateRef here needs to be static because some code paths
+  // lead to the overlay being created before change detection has finished for this component.
+  // Notably, another component may trigger `focus` on the autocomplete-trigger.
+  /** @docs-private */
+  template;
+  /** Element for the panel containing the autocomplete options. */
+  panel;
+  /** Reference to all options within the autocomplete. */
+  options;
+  /** Reference to all option groups within the autocomplete. */
+  optionGroups;
+  /** Aria label of the autocomplete. */
+  ariaLabel;
+  /** Input that can be used to specify the `aria-labelledby` attribute. */
+  ariaLabelledby;
+  /** Function that maps an option's control value to its display value in the trigger. */
+  displayWith = null;
+  /**
+   * Whether the first option should be highlighted when the autocomplete panel is opened.
+   * Can be configured globally through the `MAT_AUTOCOMPLETE_DEFAULT_OPTIONS` token.
+   */
+  autoActiveFirstOption;
+  /** Whether the active option should be selected as the user is navigating. */
+  autoSelectActiveOption;
+  /**
+   * Whether the user is required to make a selection when they're interacting with the
+   * autocomplete. If the user moves away from the autocomplete without selecting an option from
+   * the list, the value will be reset. If the user opens the panel and closes it without
+   * interacting or selecting a value, the initial value will be kept.
+   */
+  requireSelection;
+  /**
+   * Specify the width of the autocomplete panel.  Can be any CSS sizing value, otherwise it will
+   * match the width of its host.
+   */
+  panelWidth;
+  /** Whether ripples are disabled within the autocomplete panel. */
+  disableRipple;
+  /** Event that is emitted whenever an option from the list is selected. */
+  optionSelected = new EventEmitter();
+  /** Event that is emitted when the autocomplete panel is opened. */
+  opened = new EventEmitter();
+  /** Event that is emitted when the autocomplete panel is closed. */
+  closed = new EventEmitter();
+  /** Emits whenever an option is activated. */
+  optionActivated = new EventEmitter();
+  /**
+   * Takes classes set on the host mat-autocomplete element and applies them to the panel
+   * inside the overlay container to allow for easy styling.
+   */
+  set classList(value) {
+    this._classList = value;
+    this._elementRef.nativeElement.className = "";
+  }
+  _classList;
+  /** Whether checkmark indicator for single-selection options is hidden. */
+  get hideSingleSelectionIndicator() {
+    return this._hideSingleSelectionIndicator;
+  }
+  set hideSingleSelectionIndicator(value) {
+    this._hideSingleSelectionIndicator = value;
+    this._syncParentProperties();
+  }
+  _hideSingleSelectionIndicator;
+  /** Syncs the parent state with the individual options. */
+  _syncParentProperties() {
+    if (this.options) {
+      for (const option of this.options) {
+        option._changeDetectorRef.markForCheck();
+      }
+    }
+  }
+  /** Unique ID to be used by autocomplete trigger's "aria-owns" property. */
+  id = inject(_IdGenerator).getId("mat-autocomplete-");
+  /**
+   * Tells any descendant `mat-optgroup` to use the inert a11y pattern.
+   * @docs-private
+   */
+  inertGroups;
+  constructor() {
+    const platform = inject(Platform);
+    this.inertGroups = platform?.SAFARI || false;
+    this.autoActiveFirstOption = !!this._defaults.autoActiveFirstOption;
+    this.autoSelectActiveOption = !!this._defaults.autoSelectActiveOption;
+    this.requireSelection = !!this._defaults.requireSelection;
+    this._hideSingleSelectionIndicator = this._defaults.hideSingleSelectionIndicator ?? false;
+  }
+  ngAfterContentInit() {
+    this._keyManager = new ActiveDescendantKeyManager(this.options).withWrap().skipPredicate(this._skipPredicate);
+    this._activeOptionChanges = this._keyManager.change.subscribe((index) => {
+      if (this.isOpen) {
+        this.optionActivated.emit({
+          source: this,
+          option: this.options.toArray()[index] || null
+        });
+      }
+    });
+    this._setVisibility();
+  }
+  ngOnDestroy() {
+    this._keyManager?.destroy();
+    this._activeOptionChanges.unsubscribe();
+  }
+  /**
+   * Sets the panel scrollTop. This allows us to manually scroll to display options
+   * above or below the fold, as they are not actually being focused when active.
+   */
+  _setScrollTop(scrollTop) {
+    if (this.panel) {
+      this.panel.nativeElement.scrollTop = scrollTop;
+    }
+  }
+  /** Returns the panel's scrollTop. */
+  _getScrollTop() {
+    return this.panel ? this.panel.nativeElement.scrollTop : 0;
+  }
+  /** Panel should hide itself when the option list is empty. */
+  _setVisibility() {
+    this.showPanel = !!this.options?.length;
+    this._changeDetectorRef.markForCheck();
+  }
+  /** Emits the `select` event. */
+  _emitSelectEvent(option) {
+    const event = new MatAutocompleteSelectedEvent(this, option);
+    this.optionSelected.emit(event);
+  }
+  /** Gets the aria-labelledby for the autocomplete panel. */
+  _getPanelAriaLabelledby(labelId) {
+    if (this.ariaLabel) {
+      return null;
+    }
+    const labelExpression = labelId ? labelId + " " : "";
+    return this.ariaLabelledby ? labelExpression + this.ariaLabelledby : labelId;
+  }
+  // `skipPredicate` determines if key manager should avoid putting a given option in the tab
+  // order. Allow disabled list items to receive focus via keyboard to align with WAI ARIA
+  // recommendation.
+  //
+  // Normally WAI ARIA's instructions are to exclude disabled items from the tab order, but it
+  // makes a few exceptions for compound widgets.
+  //
+  // From [Developing a Keyboard Interface](
+  // https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/):
+  //   "For the following composite widget elements, keep them focusable when disabled: Options in a
+  //   Listbox..."
+  //
+  // The user can focus disabled options using the keyboard, but the user cannot click disabled
+  // options.
+  _skipPredicate() {
+    return false;
+  }
+  static \u0275fac = function MatAutocomplete_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatAutocomplete)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _MatAutocomplete,
+    selectors: [["mat-autocomplete"]],
+    contentQueries: function MatAutocomplete_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, MatOption, 5);
+        \u0275\u0275contentQuery(dirIndex, MAT_OPTGROUP, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.options = _t4);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.optionGroups = _t4);
+      }
+    },
+    viewQuery: function MatAutocomplete_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(TemplateRef, 7);
+        \u0275\u0275viewQuery(_c014, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.template = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.panel = _t4.first);
+      }
+    },
+    hostAttrs: [1, "mat-mdc-autocomplete"],
+    inputs: {
+      ariaLabel: [0, "aria-label", "ariaLabel"],
+      ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
+      displayWith: "displayWith",
+      autoActiveFirstOption: [2, "autoActiveFirstOption", "autoActiveFirstOption", booleanAttribute],
+      autoSelectActiveOption: [2, "autoSelectActiveOption", "autoSelectActiveOption", booleanAttribute],
+      requireSelection: [2, "requireSelection", "requireSelection", booleanAttribute],
+      panelWidth: "panelWidth",
+      disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
+      classList: [0, "class", "classList"],
+      hideSingleSelectionIndicator: [2, "hideSingleSelectionIndicator", "hideSingleSelectionIndicator", booleanAttribute]
+    },
+    outputs: {
+      optionSelected: "optionSelected",
+      opened: "opened",
+      closed: "closed",
+      optionActivated: "optionActivated"
+    },
+    exportAs: ["matAutocomplete"],
+    features: [\u0275\u0275ProvidersFeature([{
+      provide: MAT_OPTION_PARENT_COMPONENT,
+      useExisting: _MatAutocomplete
+    }])],
+    ngContentSelectors: _c110,
+    decls: 1,
+    vars: 0,
+    consts: [["panel", ""], ["role", "listbox", 1, "mat-mdc-autocomplete-panel", "mdc-menu-surface", "mdc-menu-surface--open", 3, "id"]],
+    template: function MatAutocomplete_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275projectionDef();
+        \u0275\u0275template(0, MatAutocomplete_ng_template_0_Template, 3, 17, "ng-template");
+      }
+    },
+    styles: ["div.mat-mdc-autocomplete-panel{width:100%;max-height:256px;visibility:hidden;transform-origin:center top;overflow:auto;padding:8px 0;box-sizing:border-box;position:relative;border-radius:var(--mat-autocomplete-container-shape, var(--mat-sys-corner-extra-small));box-shadow:var(--mat-autocomplete-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12));background-color:var(--mat-autocomplete-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-autocomplete-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{border-top-left-radius:0;border-top-right-radius:0}.mat-mdc-autocomplete-panel-above div.mat-mdc-autocomplete-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:center bottom}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-visible{visibility:visible}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-hidden{visibility:hidden;pointer-events:none}@keyframes _mat-autocomplete-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}.mat-autocomplete-panel-animations-enabled{animation:_mat-autocomplete-enter 120ms cubic-bezier(0, 0, 0.2, 1)}mat-autocomplete{display:none}\n"],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatAutocomplete, [{
+    type: Component,
+    args: [{
+      selector: "mat-autocomplete",
+      encapsulation: ViewEncapsulation.None,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      exportAs: "matAutocomplete",
+      host: {
+        "class": "mat-mdc-autocomplete"
+      },
+      providers: [{
+        provide: MAT_OPTION_PARENT_COMPONENT,
+        useExisting: MatAutocomplete
+      }],
+      template: `<ng-template let-formFieldId="id">
+  <div
+    class="mat-mdc-autocomplete-panel mdc-menu-surface mdc-menu-surface--open"
+    role="listbox"
+    [id]="id"
+    [class]="_classList"
+    [class.mat-mdc-autocomplete-visible]="showPanel"
+    [class.mat-mdc-autocomplete-hidden]="!showPanel"
+    [class.mat-autocomplete-panel-animations-enabled]="!_animationsDisabled"
+    [class.mat-primary]="_color === 'primary'"
+    [class.mat-accent]="_color === 'accent'"
+    [class.mat-warn]="_color === 'warn'"
+    [attr.aria-label]="ariaLabel || null"
+    [attr.aria-labelledby]="_getPanelAriaLabelledby(formFieldId)"
+    #panel>
+    <ng-content></ng-content>
+  </div>
+</ng-template>
+`,
+      styles: ["div.mat-mdc-autocomplete-panel{width:100%;max-height:256px;visibility:hidden;transform-origin:center top;overflow:auto;padding:8px 0;box-sizing:border-box;position:relative;border-radius:var(--mat-autocomplete-container-shape, var(--mat-sys-corner-extra-small));box-shadow:var(--mat-autocomplete-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12));background-color:var(--mat-autocomplete-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-autocomplete-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{border-top-left-radius:0;border-top-right-radius:0}.mat-mdc-autocomplete-panel-above div.mat-mdc-autocomplete-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:center bottom}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-visible{visibility:visible}div.mat-mdc-autocomplete-panel.mat-mdc-autocomplete-hidden{visibility:hidden;pointer-events:none}@keyframes _mat-autocomplete-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}.mat-autocomplete-panel-animations-enabled{animation:_mat-autocomplete-enter 120ms cubic-bezier(0, 0, 0.2, 1)}mat-autocomplete{display:none}\n"]
+    }]
+  }], () => [], {
+    template: [{
+      type: ViewChild,
+      args: [TemplateRef, {
+        static: true
+      }]
+    }],
+    panel: [{
+      type: ViewChild,
+      args: ["panel"]
+    }],
+    options: [{
+      type: ContentChildren,
+      args: [MatOption, {
+        descendants: true
+      }]
+    }],
+    optionGroups: [{
+      type: ContentChildren,
+      args: [MAT_OPTGROUP, {
+        descendants: true
+      }]
+    }],
+    ariaLabel: [{
+      type: Input,
+      args: ["aria-label"]
+    }],
+    ariaLabelledby: [{
+      type: Input,
+      args: ["aria-labelledby"]
+    }],
+    displayWith: [{
+      type: Input
+    }],
+    autoActiveFirstOption: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    autoSelectActiveOption: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    requireSelection: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    panelWidth: [{
+      type: Input
+    }],
+    disableRipple: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    optionSelected: [{
+      type: Output
+    }],
+    opened: [{
+      type: Output
+    }],
+    closed: [{
+      type: Output
+    }],
+    optionActivated: [{
+      type: Output
+    }],
+    classList: [{
+      type: Input,
+      args: ["class"]
+    }],
+    hideSingleSelectionIndicator: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }]
+  });
+})();
+var MatAutocompleteOrigin = class _MatAutocompleteOrigin {
+  elementRef = inject(ElementRef);
+  constructor() {
+  }
+  static \u0275fac = function MatAutocompleteOrigin_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatAutocompleteOrigin)();
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _MatAutocompleteOrigin,
+    selectors: [["", "matAutocompleteOrigin", ""]],
+    exportAs: ["matAutocompleteOrigin"]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatAutocompleteOrigin, [{
+    type: Directive,
+    args: [{
+      selector: "[matAutocompleteOrigin]",
+      exportAs: "matAutocompleteOrigin"
+    }]
+  }], () => [], null);
+})();
+var MAT_AUTOCOMPLETE_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => MatAutocompleteTrigger),
+  multi: true
+};
+function getMatAutocompleteMissingPanelError() {
+  return Error("Attempting to open an undefined instance of `mat-autocomplete`. Make sure that the id passed to the `matAutocomplete` is correct and that you're attempting to open it after the ngAfterContentInit hook.");
+}
+var MAT_AUTOCOMPLETE_SCROLL_STRATEGY = new InjectionToken("mat-autocomplete-scroll-strategy", {
+  providedIn: "root",
+  factory: () => {
+    const injector = inject(Injector);
+    return () => createRepositionScrollStrategy(injector);
+  }
+});
+function MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY(_overlay) {
+  const injector = inject(Injector);
+  return () => createRepositionScrollStrategy(injector);
+}
+var MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER = {
+  provide: MAT_AUTOCOMPLETE_SCROLL_STRATEGY,
+  deps: [],
+  useFactory: MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY
+};
+var MatAutocompleteTrigger = class _MatAutocompleteTrigger {
+  _environmentInjector = inject(EnvironmentInjector);
+  _element = inject(ElementRef);
+  _injector = inject(Injector);
+  _viewContainerRef = inject(ViewContainerRef);
+  _zone = inject(NgZone);
+  _changeDetectorRef = inject(ChangeDetectorRef);
+  _dir = inject(Directionality, {
+    optional: true
+  });
+  _formField = inject(MAT_FORM_FIELD, {
+    optional: true,
+    host: true
+  });
+  _viewportRuler = inject(ViewportRuler);
+  _scrollStrategy = inject(MAT_AUTOCOMPLETE_SCROLL_STRATEGY);
+  _renderer = inject(Renderer2);
+  _animationsDisabled = _animationsDisabled();
+  _defaults = inject(MAT_AUTOCOMPLETE_DEFAULT_OPTIONS, {
+    optional: true
+  });
+  _overlayRef;
+  _portal;
+  _componentDestroyed = false;
+  _initialized = new Subject();
+  _keydownSubscription;
+  _outsideClickSubscription;
+  _cleanupWindowBlur;
+  /** Old value of the native input. Used to work around issues with the `input` event on IE. */
+  _previousValue;
+  /** Value of the input element when the panel was attached (even if there are no options). */
+  _valueOnAttach;
+  /** Value on the previous keydown event. */
+  _valueOnLastKeydown;
+  /** Strategy that is used to position the panel. */
+  _positionStrategy;
+  /** Whether or not the label state is being overridden. */
+  _manuallyFloatingLabel = false;
+  /** The subscription for closing actions (some are bound to document). */
+  _closingActionsSubscription;
+  /** Subscription to viewport size changes. */
+  _viewportSubscription = Subscription.EMPTY;
+  /** Implements BreakpointObserver to be used to detect handset landscape */
+  _breakpointObserver = inject(BreakpointObserver);
+  _handsetLandscapeSubscription = Subscription.EMPTY;
+  /**
+   * Whether the autocomplete can open the next time it is focused. Used to prevent a focused,
+   * closed autocomplete from being reopened if the user switches to another browser tab and then
+   * comes back.
+   */
+  _canOpenOnNextFocus = true;
+  /** Value inside the input before we auto-selected an option. */
+  _valueBeforeAutoSelection;
+  /**
+   * Current option that we have auto-selected as the user is navigating,
+   * but which hasn't been propagated to the model value yet.
+   */
+  _pendingAutoselectedOption;
+  /** Stream of keyboard events that can close the panel. */
+  _closeKeyEventStream = new Subject();
+  /** Classes to apply to the panel. Exposed as a public property for internal usage. */
+  _overlayPanelClass = coerceArray(this._defaults?.overlayPanelClass || []);
+  /**
+   * Event handler for when the window is blurred. Needs to be an
+   * arrow function in order to preserve the context.
+   */
+  _windowBlurHandler = () => {
+    this._canOpenOnNextFocus = this.panelOpen || !this._hasFocus();
+  };
+  /** `View -> model callback called when value changes` */
+  _onChange = () => {
+  };
+  /** `View -> model callback called when autocomplete has been touched` */
+  _onTouched = () => {
+  };
+  /** The autocomplete panel to be attached to this trigger. */
+  autocomplete;
+  /**
+   * Position of the autocomplete panel relative to the trigger element. A position of `auto`
+   * will render the panel underneath the trigger if there is enough space for it to fit in
+   * the viewport, otherwise the panel will be shown above it. If the position is set to
+   * `above` or `below`, the panel will always be shown above or below the trigger. no matter
+   * whether it fits completely in the viewport.
+   */
+  position = "auto";
+  /**
+   * Reference relative to which to position the autocomplete panel.
+   * Defaults to the autocomplete trigger element.
+   */
+  connectedTo;
+  /**
+   * `autocomplete` attribute to be set on the input element.
+   * @docs-private
+   */
+  autocompleteAttribute = "off";
+  /**
+   * Whether the autocomplete is disabled. When disabled, the element will
+   * act as a regular input and the user won't be able to open the panel.
+   */
+  autocompleteDisabled;
+  constructor() {
+  }
+  /** Class to apply to the panel when it's above the input. */
+  _aboveClass = "mat-mdc-autocomplete-panel-above";
+  ngAfterViewInit() {
+    this._initialized.next();
+    this._initialized.complete();
+    this._cleanupWindowBlur = this._renderer.listen("window", "blur", this._windowBlurHandler);
+  }
+  ngOnChanges(changes) {
+    if (changes["position"] && this._positionStrategy) {
+      this._setStrategyPositions(this._positionStrategy);
+      if (this.panelOpen) {
+        this._overlayRef.updatePosition();
+      }
+    }
+  }
+  ngOnDestroy() {
+    this._cleanupWindowBlur?.();
+    this._handsetLandscapeSubscription.unsubscribe();
+    this._viewportSubscription.unsubscribe();
+    this._componentDestroyed = true;
+    this._destroyPanel();
+    this._closeKeyEventStream.complete();
+    this._clearFromModal();
+  }
+  /** Whether or not the autocomplete panel is open. */
+  get panelOpen() {
+    return this._overlayAttached && this.autocomplete.showPanel;
+  }
+  _overlayAttached = false;
+  /** Opens the autocomplete suggestion panel. */
+  openPanel() {
+    this._openPanelInternal();
+  }
+  /** Closes the autocomplete suggestion panel. */
+  closePanel() {
+    this._resetLabel();
+    if (!this._overlayAttached) {
+      return;
+    }
+    if (this.panelOpen) {
+      this._zone.run(() => {
+        this.autocomplete.closed.emit();
+      });
+    }
+    if (this.autocomplete._latestOpeningTrigger === this) {
+      this.autocomplete._isOpen = false;
+      this.autocomplete._latestOpeningTrigger = null;
+    }
+    this._overlayAttached = false;
+    this._pendingAutoselectedOption = null;
+    if (this._overlayRef && this._overlayRef.hasAttached()) {
+      this._overlayRef.detach();
+      this._closingActionsSubscription.unsubscribe();
+    }
+    this._updatePanelState();
+    if (!this._componentDestroyed) {
+      this._changeDetectorRef.detectChanges();
+    }
+    if (this._trackedModal) {
+      removeAriaReferencedId(this._trackedModal, "aria-owns", this.autocomplete.id);
+    }
+  }
+  /**
+   * Updates the position of the autocomplete suggestion panel to ensure that it fits all options
+   * within the viewport.
+   */
+  updatePosition() {
+    if (this._overlayAttached) {
+      this._overlayRef.updatePosition();
+    }
+  }
+  /**
+   * A stream of actions that should close the autocomplete panel, including
+   * when an option is selected, on blur, and when TAB is pressed.
+   */
+  get panelClosingActions() {
+    return merge(this.optionSelections, this.autocomplete._keyManager.tabOut.pipe(filter(() => this._overlayAttached)), this._closeKeyEventStream, this._getOutsideClickStream(), this._overlayRef ? this._overlayRef.detachments().pipe(filter(() => this._overlayAttached)) : of()).pipe(
+      // Normalize the output so we return a consistent type.
+      map((event) => event instanceof MatOptionSelectionChange ? event : null)
+    );
+  }
+  /** Stream of changes to the selection state of the autocomplete options. */
+  optionSelections = defer(() => {
+    const options = this.autocomplete ? this.autocomplete.options : null;
+    if (options) {
+      return options.changes.pipe(startWith(options), switchMap(() => merge(...options.map((option) => option.onSelectionChange))));
+    }
+    return this._initialized.pipe(switchMap(() => this.optionSelections));
+  });
+  /** The currently active option, coerced to MatOption type. */
+  get activeOption() {
+    if (this.autocomplete && this.autocomplete._keyManager) {
+      return this.autocomplete._keyManager.activeItem;
+    }
+    return null;
+  }
+  /** Stream of clicks outside of the autocomplete panel. */
+  _getOutsideClickStream() {
+    return new Observable((observer) => {
+      const listener = (event) => {
+        const clickTarget = _getEventTarget(event);
+        const formField = this._formField ? this._formField.getConnectedOverlayOrigin().nativeElement : null;
+        const customOrigin = this.connectedTo ? this.connectedTo.elementRef.nativeElement : null;
+        if (this._overlayAttached && clickTarget !== this._element.nativeElement && // Normally focus moves inside `mousedown` so this condition will almost always be
+        // true. Its main purpose is to handle the case where the input is focused from an
+        // outside click which propagates up to the `body` listener within the same sequence
+        // and causes the panel to close immediately (see #3106).
+        !this._hasFocus() && (!formField || !formField.contains(clickTarget)) && (!customOrigin || !customOrigin.contains(clickTarget)) && !!this._overlayRef && !this._overlayRef.overlayElement.contains(clickTarget)) {
+          observer.next(event);
+        }
+      };
+      const cleanups = [this._renderer.listen("document", "click", listener), this._renderer.listen("document", "auxclick", listener), this._renderer.listen("document", "touchend", listener)];
+      return () => {
+        cleanups.forEach((current) => current());
+      };
+    });
+  }
+  // Implemented as part of ControlValueAccessor.
+  writeValue(value) {
+    Promise.resolve(null).then(() => this._assignOptionValue(value));
+  }
+  // Implemented as part of ControlValueAccessor.
+  registerOnChange(fn3) {
+    this._onChange = fn3;
+  }
+  // Implemented as part of ControlValueAccessor.
+  registerOnTouched(fn3) {
+    this._onTouched = fn3;
+  }
+  // Implemented as part of ControlValueAccessor.
+  setDisabledState(isDisabled) {
+    this._element.nativeElement.disabled = isDisabled;
+  }
+  _handleKeydown(e2) {
+    const event = e2;
+    const keyCode = event.keyCode;
+    const hasModifier = hasModifierKey(event);
+    if (keyCode === ESCAPE && !hasModifier) {
+      event.preventDefault();
+    }
+    this._valueOnLastKeydown = this._element.nativeElement.value;
+    if (this.activeOption && keyCode === ENTER && this.panelOpen && !hasModifier) {
+      this.activeOption._selectViaInteraction();
+      this._resetActiveItem();
+      event.preventDefault();
+    } else if (this.autocomplete) {
+      const prevActiveItem = this.autocomplete._keyManager.activeItem;
+      const isArrowKey = keyCode === UP_ARROW || keyCode === DOWN_ARROW;
+      if (keyCode === TAB || isArrowKey && !hasModifier && this.panelOpen) {
+        this.autocomplete._keyManager.onKeydown(event);
+      } else if (isArrowKey && this._canOpen()) {
+        this._openPanelInternal(this._valueOnLastKeydown);
+      }
+      if (isArrowKey || this.autocomplete._keyManager.activeItem !== prevActiveItem) {
+        this._scrollToOption(this.autocomplete._keyManager.activeItemIndex || 0);
+        if (this.autocomplete.autoSelectActiveOption && this.activeOption) {
+          if (!this._pendingAutoselectedOption) {
+            this._valueBeforeAutoSelection = this._valueOnLastKeydown;
+          }
+          this._pendingAutoselectedOption = this.activeOption;
+          this._assignOptionValue(this.activeOption.value);
+        }
+      }
+    }
+  }
+  _handleInput(event) {
+    let target = event.target;
+    let value = target.value;
+    if (target.type === "number") {
+      value = value == "" ? null : parseFloat(value);
+    }
+    if (this._previousValue !== value) {
+      this._previousValue = value;
+      this._pendingAutoselectedOption = null;
+      if (!this.autocomplete || !this.autocomplete.requireSelection) {
+        this._onChange(value);
+      }
+      if (!value) {
+        this._clearPreviousSelectedOption(null, false);
+      } else if (this.panelOpen && !this.autocomplete.requireSelection) {
+        const selectedOption = this.autocomplete.options?.find((option) => option.selected);
+        if (selectedOption) {
+          const display = this._getDisplayValue(selectedOption.value);
+          if (value !== display) {
+            selectedOption.deselect(false);
+          }
+        }
+      }
+      if (this._canOpen() && this._hasFocus()) {
+        const valueOnAttach = this._valueOnLastKeydown ?? this._element.nativeElement.value;
+        this._valueOnLastKeydown = null;
+        this._openPanelInternal(valueOnAttach);
+      }
+    }
+  }
+  _handleFocus() {
+    if (!this._canOpenOnNextFocus) {
+      this._canOpenOnNextFocus = true;
+    } else if (this._canOpen()) {
+      this._previousValue = this._element.nativeElement.value;
+      this._attachOverlay(this._previousValue);
+      this._floatLabel(true);
+    }
+  }
+  _handleClick() {
+    if (this._canOpen() && !this.panelOpen) {
+      this._openPanelInternal();
+    }
+  }
+  /** Whether the input currently has focus. */
+  _hasFocus() {
+    return _getFocusedElementPierceShadowDom() === this._element.nativeElement;
+  }
+  /**
+   * In "auto" mode, the label will animate down as soon as focus is lost.
+   * This causes the value to jump when selecting an option with the mouse.
+   * This method manually floats the label until the panel can be closed.
+   * @param shouldAnimate Whether the label should be animated when it is floated.
+   */
+  _floatLabel(shouldAnimate = false) {
+    if (this._formField && this._formField.floatLabel === "auto") {
+      if (shouldAnimate) {
+        this._formField._animateAndLockLabel();
+      } else {
+        this._formField.floatLabel = "always";
+      }
+      this._manuallyFloatingLabel = true;
+    }
+  }
+  /** If the label has been manually elevated, return it to its normal state. */
+  _resetLabel() {
+    if (this._manuallyFloatingLabel) {
+      if (this._formField) {
+        this._formField.floatLabel = "auto";
+      }
+      this._manuallyFloatingLabel = false;
+    }
+  }
+  /**
+   * This method listens to a stream of panel closing actions and resets the
+   * stream every time the option list changes.
+   */
+  _subscribeToClosingActions() {
+    const initialRender = new Observable((subscriber) => {
+      afterNextRender(() => {
+        subscriber.next();
+      }, {
+        injector: this._environmentInjector
+      });
+    });
+    const optionChanges = this.autocomplete.options?.changes.pipe(
+      tap(() => this._positionStrategy.reapplyLastPosition()),
+      // Defer emitting to the stream until the next tick, because changing
+      // bindings in here will cause "changed after checked" errors.
+      delay(0)
+    ) ?? of();
+    return merge(initialRender, optionChanges).pipe(
+      // create a new stream of panelClosingActions, replacing any previous streams
+      // that were created, and flatten it so our stream only emits closing events...
+      switchMap(() => this._zone.run(() => {
+        const wasOpen = this.panelOpen;
+        this._resetActiveItem();
+        this._updatePanelState();
+        this._changeDetectorRef.detectChanges();
+        if (this.panelOpen) {
+          this._overlayRef.updatePosition();
+        }
+        if (wasOpen !== this.panelOpen) {
+          if (this.panelOpen) {
+            this._emitOpened();
+          } else {
+            this.autocomplete.closed.emit();
+          }
+        }
+        return this.panelClosingActions;
+      })),
+      // when the first closing event occurs...
+      take(1)
+    ).subscribe((event) => this._setValueAndClose(event));
+  }
+  /**
+   * Emits the opened event once it's known that the panel will be shown and stores
+   * the state of the trigger right before the opening sequence was finished.
+   */
+  _emitOpened() {
+    this.autocomplete.opened.emit();
+  }
+  /** Destroys the autocomplete suggestion panel. */
+  _destroyPanel() {
+    if (this._overlayRef) {
+      this.closePanel();
+      this._overlayRef.dispose();
+      this._overlayRef = null;
+    }
+  }
+  /** Given a value, returns the string that should be shown within the input. */
+  _getDisplayValue(value) {
+    const autocomplete = this.autocomplete;
+    return autocomplete && autocomplete.displayWith ? autocomplete.displayWith(value) : value;
+  }
+  _assignOptionValue(value) {
+    const toDisplay = this._getDisplayValue(value);
+    if (value == null) {
+      this._clearPreviousSelectedOption(null, false);
+    }
+    this._updateNativeInputValue(toDisplay != null ? toDisplay : "");
+  }
+  _updateNativeInputValue(value) {
+    if (this._formField) {
+      this._formField._control.value = value;
+    } else {
+      this._element.nativeElement.value = value;
+    }
+    this._previousValue = value;
+  }
+  /**
+   * This method closes the panel, and if a value is specified, also sets the associated
+   * control to that value. It will also mark the control as dirty if this interaction
+   * stemmed from the user.
+   */
+  _setValueAndClose(event) {
+    const panel = this.autocomplete;
+    const toSelect = event ? event.source : this._pendingAutoselectedOption;
+    if (toSelect) {
+      this._clearPreviousSelectedOption(toSelect);
+      this._assignOptionValue(toSelect.value);
+      this._onChange(toSelect.value);
+      panel._emitSelectEvent(toSelect);
+      this._element.nativeElement.focus();
+    } else if (panel.requireSelection && this._element.nativeElement.value !== this._valueOnAttach) {
+      this._clearPreviousSelectedOption(null);
+      this._assignOptionValue(null);
+      this._onChange(null);
+    }
+    this.closePanel();
+  }
+  /**
+   * Clear any previous selected option and emit a selection change event for this option
+   */
+  _clearPreviousSelectedOption(skip2, emitEvent) {
+    this.autocomplete?.options?.forEach((option) => {
+      if (option !== skip2 && option.selected) {
+        option.deselect(emitEvent);
+      }
+    });
+  }
+  _openPanelInternal(valueOnAttach = this._element.nativeElement.value) {
+    this._attachOverlay(valueOnAttach);
+    this._floatLabel();
+    if (this._trackedModal) {
+      const panelId = this.autocomplete.id;
+      addAriaReferencedId(this._trackedModal, "aria-owns", panelId);
+    }
+  }
+  _attachOverlay(valueOnAttach) {
+    if (!this.autocomplete && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw getMatAutocompleteMissingPanelError();
+    }
+    let overlayRef = this._overlayRef;
+    if (!overlayRef) {
+      this._portal = new TemplatePortal(this.autocomplete.template, this._viewContainerRef, {
+        id: this._formField?.getLabelId()
+      });
+      overlayRef = createOverlayRef(this._injector, this._getOverlayConfig());
+      this._overlayRef = overlayRef;
+      this._viewportSubscription = this._viewportRuler.change().subscribe(() => {
+        if (this.panelOpen && overlayRef) {
+          overlayRef.updateSize({
+            width: this._getPanelWidth()
+          });
+        }
+      });
+      this._handsetLandscapeSubscription = this._breakpointObserver.observe(Breakpoints.HandsetLandscape).subscribe((result) => {
+        const isHandsetLandscape = result.matches;
+        if (isHandsetLandscape) {
+          this._positionStrategy.withFlexibleDimensions(true).withGrowAfterOpen(true).withViewportMargin(8);
+        } else {
+          this._positionStrategy.withFlexibleDimensions(false).withGrowAfterOpen(false).withViewportMargin(0);
+        }
+      });
+    } else {
+      this._positionStrategy.setOrigin(this._getConnectedElement());
+      overlayRef.updateSize({
+        width: this._getPanelWidth()
+      });
+    }
+    if (overlayRef && !overlayRef.hasAttached()) {
+      overlayRef.attach(this._portal);
+      this._valueOnAttach = valueOnAttach;
+      this._valueOnLastKeydown = null;
+      this._closingActionsSubscription = this._subscribeToClosingActions();
+    }
+    const wasOpen = this.panelOpen;
+    this.autocomplete._isOpen = this._overlayAttached = true;
+    this.autocomplete._latestOpeningTrigger = this;
+    this.autocomplete._setColor(this._formField?.color);
+    this._updatePanelState();
+    this._applyModalPanelOwnership();
+    if (this.panelOpen && wasOpen !== this.panelOpen) {
+      this._emitOpened();
+    }
+  }
+  /** Handles keyboard events coming from the overlay panel. */
+  _handlePanelKeydown = (event) => {
+    if (event.keyCode === ESCAPE && !hasModifierKey(event) || event.keyCode === UP_ARROW && hasModifierKey(event, "altKey")) {
+      if (this._pendingAutoselectedOption) {
+        this._updateNativeInputValue(this._valueBeforeAutoSelection ?? "");
+        this._pendingAutoselectedOption = null;
+      }
+      this._closeKeyEventStream.next();
+      this._resetActiveItem();
+      event.stopPropagation();
+      event.preventDefault();
+    }
+  };
+  /** Updates the panel's visibility state and any trigger state tied to id. */
+  _updatePanelState() {
+    this.autocomplete._setVisibility();
+    if (this.panelOpen) {
+      const overlayRef = this._overlayRef;
+      if (!this._keydownSubscription) {
+        this._keydownSubscription = overlayRef.keydownEvents().subscribe(this._handlePanelKeydown);
+      }
+      if (!this._outsideClickSubscription) {
+        this._outsideClickSubscription = overlayRef.outsidePointerEvents().subscribe();
+      }
+    } else {
+      this._keydownSubscription?.unsubscribe();
+      this._outsideClickSubscription?.unsubscribe();
+      this._keydownSubscription = this._outsideClickSubscription = null;
+    }
+  }
+  _getOverlayConfig() {
+    return new OverlayConfig({
+      positionStrategy: this._getOverlayPosition(),
+      scrollStrategy: this._scrollStrategy(),
+      width: this._getPanelWidth(),
+      direction: this._dir ?? void 0,
+      hasBackdrop: this._defaults?.hasBackdrop,
+      backdropClass: this._defaults?.backdropClass,
+      panelClass: this._overlayPanelClass,
+      disableAnimations: this._animationsDisabled
+    });
+  }
+  _getOverlayPosition() {
+    const strategy = createFlexibleConnectedPositionStrategy(this._injector, this._getConnectedElement()).withFlexibleDimensions(false).withPush(false);
+    this._setStrategyPositions(strategy);
+    this._positionStrategy = strategy;
+    return strategy;
+  }
+  /** Sets the positions on a position strategy based on the directive's input state. */
+  _setStrategyPositions(positionStrategy) {
+    const belowPositions = [{
+      originX: "start",
+      originY: "bottom",
+      overlayX: "start",
+      overlayY: "top"
+    }, {
+      originX: "end",
+      originY: "bottom",
+      overlayX: "end",
+      overlayY: "top"
+    }];
+    const panelClass = this._aboveClass;
+    const abovePositions = [{
+      originX: "start",
+      originY: "top",
+      overlayX: "start",
+      overlayY: "bottom",
+      panelClass
+    }, {
+      originX: "end",
+      originY: "top",
+      overlayX: "end",
+      overlayY: "bottom",
+      panelClass
+    }];
+    let positions;
+    if (this.position === "above") {
+      positions = abovePositions;
+    } else if (this.position === "below") {
+      positions = belowPositions;
+    } else {
+      positions = [...belowPositions, ...abovePositions];
+    }
+    positionStrategy.withPositions(positions);
+  }
+  _getConnectedElement() {
+    if (this.connectedTo) {
+      return this.connectedTo.elementRef;
+    }
+    return this._formField ? this._formField.getConnectedOverlayOrigin() : this._element;
+  }
+  _getPanelWidth() {
+    return this.autocomplete.panelWidth || this._getHostWidth();
+  }
+  /** Returns the width of the input element, so the panel width can match it. */
+  _getHostWidth() {
+    return this._getConnectedElement().nativeElement.getBoundingClientRect().width;
+  }
+  /**
+   * Reset the active item to -1. This is so that pressing arrow keys will activate the correct
+   * option.
+   *
+   * If the consumer opted-in to automatically activatating the first option, activate the first
+   * *enabled* option.
+   */
+  _resetActiveItem() {
+    const autocomplete = this.autocomplete;
+    if (autocomplete.autoActiveFirstOption) {
+      let firstEnabledOptionIndex = -1;
+      for (let index = 0; index < autocomplete.options.length; index++) {
+        const option = autocomplete.options.get(index);
+        if (!option.disabled) {
+          firstEnabledOptionIndex = index;
+          break;
+        }
+      }
+      autocomplete._keyManager.setActiveItem(firstEnabledOptionIndex);
+    } else {
+      autocomplete._keyManager.setActiveItem(-1);
+    }
+  }
+  /** Determines whether the panel can be opened. */
+  _canOpen() {
+    const element = this._element.nativeElement;
+    return !element.readOnly && !element.disabled && !this.autocompleteDisabled;
+  }
+  /** Scrolls to a particular option in the list. */
+  _scrollToOption(index) {
+    const autocomplete = this.autocomplete;
+    const labelCount = _countGroupLabelsBeforeOption(index, autocomplete.options, autocomplete.optionGroups);
+    if (index === 0 && labelCount === 1) {
+      autocomplete._setScrollTop(0);
+    } else if (autocomplete.panel) {
+      const option = autocomplete.options.toArray()[index];
+      if (option) {
+        const element = option._getHostElement();
+        const newScrollPosition = _getOptionScrollPosition(element.offsetTop, element.offsetHeight, autocomplete._getScrollTop(), autocomplete.panel.nativeElement.offsetHeight);
+        autocomplete._setScrollTop(newScrollPosition);
+      }
+    }
+  }
+  /**
+   * Track which modal we have modified the `aria-owns` attribute of. When the combobox trigger is
+   * inside an aria-modal, we apply aria-owns to the parent modal with the `id` of the options
+   * panel. Track the modal we have changed so we can undo the changes on destroy.
+   */
+  _trackedModal = null;
+  /**
+   * If the autocomplete trigger is inside of an `aria-modal` element, connect
+   * that modal to the options panel with `aria-owns`.
+   *
+   * For some browser + screen reader combinations, when navigation is inside
+   * of an `aria-modal` element, the screen reader treats everything outside
+   * of that modal as hidden or invisible.
+   *
+   * This causes a problem when the combobox trigger is _inside_ of a modal, because the
+   * options panel is rendered _outside_ of that modal, preventing screen reader navigation
+   * from reaching the panel.
+   *
+   * We can work around this issue by applying `aria-owns` to the modal with the `id` of
+   * the options panel. This effectively communicates to assistive technology that the
+   * options panel is part of the same interaction as the modal.
+   *
+   * At time of this writing, this issue is present in VoiceOver.
+   * See https://github.com/angular/components/issues/20694
+   */
+  _applyModalPanelOwnership() {
+    const modal = this._element.nativeElement.closest('body > .cdk-overlay-container [aria-modal="true"]');
+    if (!modal) {
+      return;
+    }
+    const panelId = this.autocomplete.id;
+    if (this._trackedModal) {
+      removeAriaReferencedId(this._trackedModal, "aria-owns", panelId);
+    }
+    addAriaReferencedId(modal, "aria-owns", panelId);
+    this._trackedModal = modal;
+  }
+  /** Clears the references to the listbox overlay element from the modal it was added to. */
+  _clearFromModal() {
+    if (this._trackedModal) {
+      const panelId = this.autocomplete.id;
+      removeAriaReferencedId(this._trackedModal, "aria-owns", panelId);
+      this._trackedModal = null;
+    }
+  }
+  static \u0275fac = function MatAutocompleteTrigger_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatAutocompleteTrigger)();
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _MatAutocompleteTrigger,
+    selectors: [["input", "matAutocomplete", ""], ["textarea", "matAutocomplete", ""]],
+    hostAttrs: [1, "mat-mdc-autocomplete-trigger"],
+    hostVars: 7,
+    hostBindings: function MatAutocompleteTrigger_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("focusin", function MatAutocompleteTrigger_focusin_HostBindingHandler() {
+          return ctx._handleFocus();
+        })("blur", function MatAutocompleteTrigger_blur_HostBindingHandler() {
+          return ctx._onTouched();
+        })("input", function MatAutocompleteTrigger_input_HostBindingHandler($event) {
+          return ctx._handleInput($event);
+        })("keydown", function MatAutocompleteTrigger_keydown_HostBindingHandler($event) {
+          return ctx._handleKeydown($event);
+        })("click", function MatAutocompleteTrigger_click_HostBindingHandler() {
+          return ctx._handleClick();
+        });
+      }
+      if (rf & 2) {
+        \u0275\u0275attribute("autocomplete", ctx.autocompleteAttribute)("role", ctx.autocompleteDisabled ? null : "combobox")("aria-autocomplete", ctx.autocompleteDisabled ? null : "list")("aria-activedescendant", ctx.panelOpen && ctx.activeOption ? ctx.activeOption.id : null)("aria-expanded", ctx.autocompleteDisabled ? null : ctx.panelOpen.toString())("aria-controls", ctx.autocompleteDisabled || !ctx.panelOpen ? null : ctx.autocomplete == null ? null : ctx.autocomplete.id)("aria-haspopup", ctx.autocompleteDisabled ? null : "listbox");
+      }
+    },
+    inputs: {
+      autocomplete: [0, "matAutocomplete", "autocomplete"],
+      position: [0, "matAutocompletePosition", "position"],
+      connectedTo: [0, "matAutocompleteConnectedTo", "connectedTo"],
+      autocompleteAttribute: [0, "autocomplete", "autocompleteAttribute"],
+      autocompleteDisabled: [2, "matAutocompleteDisabled", "autocompleteDisabled", booleanAttribute]
+    },
+    exportAs: ["matAutocompleteTrigger"],
+    features: [\u0275\u0275ProvidersFeature([MAT_AUTOCOMPLETE_VALUE_ACCESSOR]), \u0275\u0275NgOnChangesFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatAutocompleteTrigger, [{
+    type: Directive,
+    args: [{
+      selector: `input[matAutocomplete], textarea[matAutocomplete]`,
+      host: {
+        "class": "mat-mdc-autocomplete-trigger",
+        "[attr.autocomplete]": "autocompleteAttribute",
+        "[attr.role]": 'autocompleteDisabled ? null : "combobox"',
+        "[attr.aria-autocomplete]": 'autocompleteDisabled ? null : "list"',
+        "[attr.aria-activedescendant]": "(panelOpen && activeOption) ? activeOption.id : null",
+        "[attr.aria-expanded]": "autocompleteDisabled ? null : panelOpen.toString()",
+        "[attr.aria-controls]": "(autocompleteDisabled || !panelOpen) ? null : autocomplete?.id",
+        "[attr.aria-haspopup]": 'autocompleteDisabled ? null : "listbox"',
+        // Note: we use `focusin`, as opposed to `focus`, in order to open the panel
+        // a little earlier. This avoids issues where IE delays the focusing of the input.
+        "(focusin)": "_handleFocus()",
+        "(blur)": "_onTouched()",
+        "(input)": "_handleInput($event)",
+        "(keydown)": "_handleKeydown($event)",
+        "(click)": "_handleClick()"
+      },
+      exportAs: "matAutocompleteTrigger",
+      providers: [MAT_AUTOCOMPLETE_VALUE_ACCESSOR]
+    }]
+  }], () => [], {
+    autocomplete: [{
+      type: Input,
+      args: ["matAutocomplete"]
+    }],
+    position: [{
+      type: Input,
+      args: ["matAutocompletePosition"]
+    }],
+    connectedTo: [{
+      type: Input,
+      args: ["matAutocompleteConnectedTo"]
+    }],
+    autocompleteAttribute: [{
+      type: Input,
+      args: ["autocomplete"]
+    }],
+    autocompleteDisabled: [{
+      type: Input,
+      args: [{
+        alias: "matAutocompleteDisabled",
+        transform: booleanAttribute
+      }]
+    }]
+  });
+})();
+var MatAutocompleteModule = class _MatAutocompleteModule {
+  static \u0275fac = function MatAutocompleteModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatAutocompleteModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatAutocompleteModule,
+    imports: [OverlayModule, MatOptionModule, MatCommonModule, MatAutocomplete, MatAutocompleteTrigger, MatAutocompleteOrigin],
+    exports: [CdkScrollableModule, MatAutocomplete, MatOptionModule, MatCommonModule, MatAutocompleteTrigger, MatAutocompleteOrigin]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    providers: [MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER],
+    imports: [OverlayModule, MatOptionModule, MatCommonModule, CdkScrollableModule, MatOptionModule, MatCommonModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatAutocompleteModule, [{
+    type: NgModule,
+    args: [{
+      imports: [OverlayModule, MatOptionModule, MatCommonModule, MatAutocomplete, MatAutocompleteTrigger, MatAutocompleteOrigin],
+      exports: [CdkScrollableModule, MatAutocomplete, MatOptionModule, MatCommonModule, MatAutocompleteTrigger, MatAutocompleteOrigin],
+      providers: [MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER]
+    }]
+  }], null, null);
+})();
+
+// node_modules/@angular/material/fesm2022/progress-spinner.mjs
+var _c015 = ["determinateSpinner"];
+function MatProgressSpinner_ng_template_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(0, "svg", 11);
+    \u0275\u0275element(1, "circle", 12);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275attribute("viewBox", ctx_r0._viewBox());
+    \u0275\u0275advance();
+    \u0275\u0275styleProp("stroke-dasharray", ctx_r0._strokeCircumference(), "px")("stroke-dashoffset", ctx_r0._strokeCircumference() / 2, "px")("stroke-width", ctx_r0._circleStrokeWidth(), "%");
+    \u0275\u0275attribute("r", ctx_r0._circleRadius());
+  }
+}
+var MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS = new InjectionToken("mat-progress-spinner-default-options", {
+  providedIn: "root",
+  factory: MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS_FACTORY
+});
+function MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS_FACTORY() {
+  return {
+    diameter: BASE_SIZE
+  };
+}
+var BASE_SIZE = 100;
+var BASE_STROKE_WIDTH = 10;
+var MatProgressSpinner = class _MatProgressSpinner {
+  _elementRef = inject(ElementRef);
+  /** Whether the _mat-animation-noopable class should be applied, disabling animations.  */
+  _noopAnimations;
+  // TODO: should be typed as `ThemePalette` but internal apps pass in arbitrary strings.
+  /**
+   * Theme color of the progress spinner. This API is supported in M2 themes only, it
+   * has no effect in M3 themes. For color customization in M3, see https://material.angular.dev/components/progress-spinner/styling.
+   *
+   * For information on applying color variants in M3, see
+   * https://material.angular.dev/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
+   */
+  get color() {
+    return this._color || this._defaultColor;
+  }
+  set color(value) {
+    this._color = value;
+  }
+  _color;
+  _defaultColor = "primary";
+  /** The element of the determinate spinner. */
+  _determinateCircle;
+  constructor() {
+    const defaults3 = inject(MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS);
+    this._noopAnimations = _animationsDisabled() && !!defaults3 && !defaults3._forceAnimations;
+    this.mode = this._elementRef.nativeElement.nodeName.toLowerCase() === "mat-spinner" ? "indeterminate" : "determinate";
+    if (defaults3) {
+      if (defaults3.color) {
+        this.color = this._defaultColor = defaults3.color;
+      }
+      if (defaults3.diameter) {
+        this.diameter = defaults3.diameter;
+      }
+      if (defaults3.strokeWidth) {
+        this.strokeWidth = defaults3.strokeWidth;
+      }
+    }
+  }
+  /**
+   * Mode of the progress bar.
+   *
+   * Input must be one of these values: determinate, indeterminate, buffer, query, defaults to
+   * 'determinate'.
+   * Mirrored to mode attribute.
+   */
+  mode;
+  /** Value of the progress bar. Defaults to zero. Mirrored to aria-valuenow. */
+  get value() {
+    return this.mode === "determinate" ? this._value : 0;
+  }
+  set value(v3) {
+    this._value = Math.max(0, Math.min(100, v3 || 0));
+  }
+  _value = 0;
+  /** The diameter of the progress spinner (will set width and height of svg). */
+  get diameter() {
+    return this._diameter;
+  }
+  set diameter(size) {
+    this._diameter = size || 0;
+  }
+  _diameter = BASE_SIZE;
+  /** Stroke width of the progress spinner. */
+  get strokeWidth() {
+    return this._strokeWidth ?? this.diameter / 10;
+  }
+  set strokeWidth(value) {
+    this._strokeWidth = value || 0;
+  }
+  _strokeWidth;
+  /** The radius of the spinner, adjusted for stroke width. */
+  _circleRadius() {
+    return (this.diameter - BASE_STROKE_WIDTH) / 2;
+  }
+  /** The view box of the spinner's svg element. */
+  _viewBox() {
+    const viewBox = this._circleRadius() * 2 + this.strokeWidth;
+    return `0 0 ${viewBox} ${viewBox}`;
+  }
+  /** The stroke circumference of the svg circle. */
+  _strokeCircumference() {
+    return 2 * Math.PI * this._circleRadius();
+  }
+  /** The dash offset of the svg circle. */
+  _strokeDashOffset() {
+    if (this.mode === "determinate") {
+      return this._strokeCircumference() * (100 - this._value) / 100;
+    }
+    return null;
+  }
+  /** Stroke width of the circle in percent. */
+  _circleStrokeWidth() {
+    return this.strokeWidth / this.diameter * 100;
+  }
+  static \u0275fac = function MatProgressSpinner_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatProgressSpinner)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _MatProgressSpinner,
+    selectors: [["mat-progress-spinner"], ["mat-spinner"]],
+    viewQuery: function MatProgressSpinner_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c015, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._determinateCircle = _t4.first);
+      }
+    },
+    hostAttrs: ["role", "progressbar", "tabindex", "-1", 1, "mat-mdc-progress-spinner", "mdc-circular-progress"],
+    hostVars: 18,
+    hostBindings: function MatProgressSpinner_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("aria-valuemin", 0)("aria-valuemax", 100)("aria-valuenow", ctx.mode === "determinate" ? ctx.value : null)("mode", ctx.mode);
+        \u0275\u0275classMap("mat-" + ctx.color);
+        \u0275\u0275styleProp("width", ctx.diameter, "px")("height", ctx.diameter, "px")("--mat-progress-spinner-size", ctx.diameter + "px")("--mat-progress-spinner-active-indicator-width", ctx.diameter + "px");
+        \u0275\u0275classProp("_mat-animation-noopable", ctx._noopAnimations)("mdc-circular-progress--indeterminate", ctx.mode === "indeterminate");
+      }
+    },
+    inputs: {
+      color: "color",
+      mode: "mode",
+      value: [2, "value", "value", numberAttribute],
+      diameter: [2, "diameter", "diameter", numberAttribute],
+      strokeWidth: [2, "strokeWidth", "strokeWidth", numberAttribute]
+    },
+    exportAs: ["matProgressSpinner"],
+    decls: 14,
+    vars: 11,
+    consts: [["circle", ""], ["determinateSpinner", ""], ["aria-hidden", "true", 1, "mdc-circular-progress__determinate-container"], ["xmlns", "http://www.w3.org/2000/svg", "focusable", "false", 1, "mdc-circular-progress__determinate-circle-graphic"], ["cx", "50%", "cy", "50%", 1, "mdc-circular-progress__determinate-circle"], ["aria-hidden", "true", 1, "mdc-circular-progress__indeterminate-container"], [1, "mdc-circular-progress__spinner-layer"], [1, "mdc-circular-progress__circle-clipper", "mdc-circular-progress__circle-left"], [3, "ngTemplateOutlet"], [1, "mdc-circular-progress__gap-patch"], [1, "mdc-circular-progress__circle-clipper", "mdc-circular-progress__circle-right"], ["xmlns", "http://www.w3.org/2000/svg", "focusable", "false", 1, "mdc-circular-progress__indeterminate-circle-graphic"], ["cx", "50%", "cy", "50%"]],
+    template: function MatProgressSpinner_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275template(0, MatProgressSpinner_ng_template_0_Template, 2, 8, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
+        \u0275\u0275elementStart(2, "div", 2, 1);
+        \u0275\u0275namespaceSVG();
+        \u0275\u0275elementStart(4, "svg", 3);
+        \u0275\u0275element(5, "circle", 4);
+        \u0275\u0275elementEnd()();
+        \u0275\u0275namespaceHTML();
+        \u0275\u0275elementStart(6, "div", 5)(7, "div", 6)(8, "div", 7);
+        \u0275\u0275elementContainer(9, 8);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(10, "div", 9);
+        \u0275\u0275elementContainer(11, 8);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(12, "div", 10);
+        \u0275\u0275elementContainer(13, 8);
+        \u0275\u0275elementEnd()()();
+      }
+      if (rf & 2) {
+        const circle_r2 = \u0275\u0275reference(1);
+        \u0275\u0275advance(4);
+        \u0275\u0275attribute("viewBox", ctx._viewBox());
+        \u0275\u0275advance();
+        \u0275\u0275styleProp("stroke-dasharray", ctx._strokeCircumference(), "px")("stroke-dashoffset", ctx._strokeDashOffset(), "px")("stroke-width", ctx._circleStrokeWidth(), "%");
+        \u0275\u0275attribute("r", ctx._circleRadius());
+        \u0275\u0275advance(4);
+        \u0275\u0275property("ngTemplateOutlet", circle_r2);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngTemplateOutlet", circle_r2);
+        \u0275\u0275advance(2);
+        \u0275\u0275property("ngTemplateOutlet", circle_r2);
+      }
+    },
+    dependencies: [NgTemplateOutlet],
+    styles: [".mat-mdc-progress-spinner{display:block;overflow:hidden;line-height:0;position:relative;direction:ltr;transition:opacity 250ms cubic-bezier(0.4, 0, 0.6, 1)}.mat-mdc-progress-spinner circle{stroke-width:var(--mat-progress-spinner-active-indicator-width, 4px)}.mat-mdc-progress-spinner._mat-animation-noopable,.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__determinate-circle{transition:none !important}.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__indeterminate-circle-graphic,.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__spinner-layer,.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__indeterminate-container{animation:none !important}.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__indeterminate-container circle{stroke-dasharray:0 !important}@media(forced-colors: active){.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic,.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle{stroke:currentColor;stroke:CanvasText}}.mdc-circular-progress__determinate-container,.mdc-circular-progress__indeterminate-circle-graphic,.mdc-circular-progress__indeterminate-container,.mdc-circular-progress__spinner-layer{position:absolute;width:100%;height:100%}.mdc-circular-progress__determinate-container{transform:rotate(-90deg)}.mdc-circular-progress--indeterminate .mdc-circular-progress__determinate-container{opacity:0}.mdc-circular-progress__indeterminate-container{font-size:0;letter-spacing:0;white-space:nowrap;opacity:0}.mdc-circular-progress--indeterminate .mdc-circular-progress__indeterminate-container{opacity:1;animation:mdc-circular-progress-container-rotate 1568.2352941176ms linear infinite}.mdc-circular-progress__determinate-circle-graphic,.mdc-circular-progress__indeterminate-circle-graphic{fill:rgba(0,0,0,0)}.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic{stroke:var(--mat-progress-spinner-active-indicator-color, var(--mat-sys-primary))}@media(forced-colors: active){.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic{stroke:CanvasText}}.mdc-circular-progress__determinate-circle{transition:stroke-dashoffset 500ms cubic-bezier(0, 0, 0.2, 1)}.mdc-circular-progress__gap-patch{position:absolute;top:0;left:47.5%;box-sizing:border-box;width:5%;height:100%;overflow:hidden}.mdc-circular-progress__gap-patch .mdc-circular-progress__indeterminate-circle-graphic{left:-900%;width:2000%;transform:rotate(180deg)}.mdc-circular-progress__circle-clipper .mdc-circular-progress__indeterminate-circle-graphic{width:200%}.mdc-circular-progress__circle-right .mdc-circular-progress__indeterminate-circle-graphic{left:-100%}.mdc-circular-progress--indeterminate .mdc-circular-progress__circle-left .mdc-circular-progress__indeterminate-circle-graphic{animation:mdc-circular-progress-left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both}.mdc-circular-progress--indeterminate .mdc-circular-progress__circle-right .mdc-circular-progress__indeterminate-circle-graphic{animation:mdc-circular-progress-right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both}.mdc-circular-progress__circle-clipper{display:inline-flex;position:relative;width:50%;height:100%;overflow:hidden}.mdc-circular-progress--indeterminate .mdc-circular-progress__spinner-layer{animation:mdc-circular-progress-spinner-layer-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both}@keyframes mdc-circular-progress-container-rotate{to{transform:rotate(360deg)}}@keyframes mdc-circular-progress-spinner-layer-rotate{12.5%{transform:rotate(135deg)}25%{transform:rotate(270deg)}37.5%{transform:rotate(405deg)}50%{transform:rotate(540deg)}62.5%{transform:rotate(675deg)}75%{transform:rotate(810deg)}87.5%{transform:rotate(945deg)}100%{transform:rotate(1080deg)}}@keyframes mdc-circular-progress-left-spin{from{transform:rotate(265deg)}50%{transform:rotate(130deg)}to{transform:rotate(265deg)}}@keyframes mdc-circular-progress-right-spin{from{transform:rotate(-265deg)}50%{transform:rotate(-130deg)}to{transform:rotate(-265deg)}}\n"],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatProgressSpinner, [{
+    type: Component,
+    args: [{
+      selector: "mat-progress-spinner, mat-spinner",
+      exportAs: "matProgressSpinner",
+      host: {
+        "role": "progressbar",
+        "class": "mat-mdc-progress-spinner mdc-circular-progress",
+        // set tab index to -1 so screen readers will read the aria-label
+        // Note: there is a known issue with JAWS that does not read progressbar aria labels on FireFox
+        "tabindex": "-1",
+        "[class]": '"mat-" + color',
+        "[class._mat-animation-noopable]": `_noopAnimations`,
+        "[class.mdc-circular-progress--indeterminate]": 'mode === "indeterminate"',
+        "[style.width.px]": "diameter",
+        "[style.height.px]": "diameter",
+        "[style.--mat-progress-spinner-size]": 'diameter + "px"',
+        "[style.--mat-progress-spinner-active-indicator-width]": 'diameter + "px"',
+        "[attr.aria-valuemin]": "0",
+        "[attr.aria-valuemax]": "100",
+        "[attr.aria-valuenow]": 'mode === "determinate" ? value : null',
+        "[attr.mode]": "mode"
+      },
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      imports: [NgTemplateOutlet],
+      template: '<ng-template #circle>\n  <svg [attr.viewBox]="_viewBox()" class="mdc-circular-progress__indeterminate-circle-graphic"\n       xmlns="http://www.w3.org/2000/svg" focusable="false">\n    <circle [attr.r]="_circleRadius()"\n            [style.stroke-dasharray.px]="_strokeCircumference()"\n            [style.stroke-dashoffset.px]="_strokeCircumference() / 2"\n            [style.stroke-width.%]="_circleStrokeWidth()"\n            cx="50%" cy="50%"/>\n  </svg>\n</ng-template>\n\n<!--\n  All children need to be hidden for screen readers in order to support ChromeVox.\n  More context in the issue: https://github.com/angular/components/issues/22165.\n-->\n<div class="mdc-circular-progress__determinate-container" aria-hidden="true" #determinateSpinner>\n  <svg [attr.viewBox]="_viewBox()" class="mdc-circular-progress__determinate-circle-graphic"\n       xmlns="http://www.w3.org/2000/svg" focusable="false">\n    <circle [attr.r]="_circleRadius()"\n            [style.stroke-dasharray.px]="_strokeCircumference()"\n            [style.stroke-dashoffset.px]="_strokeDashOffset()"\n            [style.stroke-width.%]="_circleStrokeWidth()"\n            class="mdc-circular-progress__determinate-circle"\n            cx="50%" cy="50%"/>\n  </svg>\n</div>\n<!--TODO: figure out why there are 3 separate svgs-->\n<div class="mdc-circular-progress__indeterminate-container" aria-hidden="true">\n  <div class="mdc-circular-progress__spinner-layer">\n    <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-left">\n      <ng-container [ngTemplateOutlet]="circle"></ng-container>\n    </div>\n    <div class="mdc-circular-progress__gap-patch">\n      <ng-container [ngTemplateOutlet]="circle"></ng-container>\n    </div>\n    <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-right">\n      <ng-container [ngTemplateOutlet]="circle"></ng-container>\n    </div>\n  </div>\n</div>\n',
+      styles: [".mat-mdc-progress-spinner{display:block;overflow:hidden;line-height:0;position:relative;direction:ltr;transition:opacity 250ms cubic-bezier(0.4, 0, 0.6, 1)}.mat-mdc-progress-spinner circle{stroke-width:var(--mat-progress-spinner-active-indicator-width, 4px)}.mat-mdc-progress-spinner._mat-animation-noopable,.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__determinate-circle{transition:none !important}.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__indeterminate-circle-graphic,.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__spinner-layer,.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__indeterminate-container{animation:none !important}.mat-mdc-progress-spinner._mat-animation-noopable .mdc-circular-progress__indeterminate-container circle{stroke-dasharray:0 !important}@media(forced-colors: active){.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic,.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle{stroke:currentColor;stroke:CanvasText}}.mdc-circular-progress__determinate-container,.mdc-circular-progress__indeterminate-circle-graphic,.mdc-circular-progress__indeterminate-container,.mdc-circular-progress__spinner-layer{position:absolute;width:100%;height:100%}.mdc-circular-progress__determinate-container{transform:rotate(-90deg)}.mdc-circular-progress--indeterminate .mdc-circular-progress__determinate-container{opacity:0}.mdc-circular-progress__indeterminate-container{font-size:0;letter-spacing:0;white-space:nowrap;opacity:0}.mdc-circular-progress--indeterminate .mdc-circular-progress__indeterminate-container{opacity:1;animation:mdc-circular-progress-container-rotate 1568.2352941176ms linear infinite}.mdc-circular-progress__determinate-circle-graphic,.mdc-circular-progress__indeterminate-circle-graphic{fill:rgba(0,0,0,0)}.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic{stroke:var(--mat-progress-spinner-active-indicator-color, var(--mat-sys-primary))}@media(forced-colors: active){.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic{stroke:CanvasText}}.mdc-circular-progress__determinate-circle{transition:stroke-dashoffset 500ms cubic-bezier(0, 0, 0.2, 1)}.mdc-circular-progress__gap-patch{position:absolute;top:0;left:47.5%;box-sizing:border-box;width:5%;height:100%;overflow:hidden}.mdc-circular-progress__gap-patch .mdc-circular-progress__indeterminate-circle-graphic{left:-900%;width:2000%;transform:rotate(180deg)}.mdc-circular-progress__circle-clipper .mdc-circular-progress__indeterminate-circle-graphic{width:200%}.mdc-circular-progress__circle-right .mdc-circular-progress__indeterminate-circle-graphic{left:-100%}.mdc-circular-progress--indeterminate .mdc-circular-progress__circle-left .mdc-circular-progress__indeterminate-circle-graphic{animation:mdc-circular-progress-left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both}.mdc-circular-progress--indeterminate .mdc-circular-progress__circle-right .mdc-circular-progress__indeterminate-circle-graphic{animation:mdc-circular-progress-right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both}.mdc-circular-progress__circle-clipper{display:inline-flex;position:relative;width:50%;height:100%;overflow:hidden}.mdc-circular-progress--indeterminate .mdc-circular-progress__spinner-layer{animation:mdc-circular-progress-spinner-layer-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both}@keyframes mdc-circular-progress-container-rotate{to{transform:rotate(360deg)}}@keyframes mdc-circular-progress-spinner-layer-rotate{12.5%{transform:rotate(135deg)}25%{transform:rotate(270deg)}37.5%{transform:rotate(405deg)}50%{transform:rotate(540deg)}62.5%{transform:rotate(675deg)}75%{transform:rotate(810deg)}87.5%{transform:rotate(945deg)}100%{transform:rotate(1080deg)}}@keyframes mdc-circular-progress-left-spin{from{transform:rotate(265deg)}50%{transform:rotate(130deg)}to{transform:rotate(265deg)}}@keyframes mdc-circular-progress-right-spin{from{transform:rotate(-265deg)}50%{transform:rotate(-130deg)}to{transform:rotate(-265deg)}}\n"]
+    }]
+  }], () => [], {
+    color: [{
+      type: Input
+    }],
+    _determinateCircle: [{
+      type: ViewChild,
+      args: ["determinateSpinner"]
+    }],
+    mode: [{
+      type: Input
+    }],
+    value: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    diameter: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    strokeWidth: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }]
+  });
+})();
+var MatSpinner = MatProgressSpinner;
+var MatProgressSpinnerModule = class _MatProgressSpinnerModule {
+  static \u0275fac = function MatProgressSpinnerModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatProgressSpinnerModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatProgressSpinnerModule,
+    imports: [MatProgressSpinner, MatSpinner],
+    exports: [MatProgressSpinner, MatSpinner, MatCommonModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [MatCommonModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatProgressSpinnerModule, [{
+    type: NgModule,
+    args: [{
+      imports: [MatProgressSpinner, MatSpinner],
+      exports: [MatProgressSpinner, MatSpinner, MatCommonModule]
+    }]
+  }], null, null);
+})();
+
 // libs/components/src/lib/translate.pipe.ts
 var _TranslatePipe = class _TranslatePipe {
   constructor() {
     this._locale = inject(LocaleService);
   }
   transform(value, args = {}, plural2) {
-    return this._locale.get(value, args, plural2);
+    return this._locale.get(value, args, plural2) || value;
   }
 };
 _TranslatePipe.\u0275fac = function TranslatePipe_Factory(__ngFactoryType__) {
@@ -91709,6 +91776,64 @@ var ClipboardModule = class _ClipboardModule {
   }], null, null);
 })();
 
+// libs/components/src/lib/authenticated-image.directive.ts
+var IMAGE_STORE = /* @__PURE__ */ new Map();
+var _AuthenticatedImageDirective = class _AuthenticatedImageDirective extends AsyncHandler {
+  constructor() {
+    super();
+    this._element = inject(ElementRef);
+    this.source = input(void 0);
+  }
+  ngOnChanges(changes) {
+    if (changes.source && this.source())
+      this._loadImage();
+  }
+  async _loadImage() {
+    const source = this.source();
+    if (typeof source !== "string")
+      return;
+    if (!this._element || !ve()) {
+      return this.timeout("load", () => this._loadImage(), 300);
+    }
+    if (!source.includes("/api/engine/v2/uploads")) {
+      this._element.nativeElement.src = source;
+      return;
+    }
+    if (IMAGE_STORE.has(source)) {
+      this._element.nativeElement.src = IMAGE_STORE.get(source);
+      return;
+    }
+    const tkn = Y2();
+    document.cookie = `${tkn === "x-api-key" ? "api-key=" + encodeURIComponent(Oe()) : "bearer_token=" + encodeURIComponent(tkn)};max-age=30;path=/api/engine/v2/uploads;samesite=strict;${location.protocol === "https:" ? "secure;" : ""}`;
+    let response = null;
+    try {
+      response = await fetch(source).catch((_3) => null);
+    } catch {
+    }
+    if (!response || !response.ok) {
+      console.info("Failed to load image:", source);
+      return;
+    }
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    IMAGE_STORE.set(source, url);
+    this._element.nativeElement.src = url;
+  }
+};
+_AuthenticatedImageDirective.\u0275fac = function AuthenticatedImageDirective_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _AuthenticatedImageDirective)();
+};
+_AuthenticatedImageDirective.\u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({ type: _AuthenticatedImageDirective, selectors: [["img", "auth", ""], ["video", "auth", ""]], inputs: { source: [1, "source"] }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature] });
+var AuthenticatedImageDirective = _AuthenticatedImageDirective;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AuthenticatedImageDirective, [{
+    type: Directive,
+    args: [{
+      selector: "img[auth], video[auth]"
+    }]
+  }], () => [], null);
+})();
+
 // libs/components/src/lib/image-viewer.component.ts
 var _ImageViewerComponent = class _ImageViewerComponent {
   constructor() {
@@ -91914,15 +92039,13 @@ function ImageListFieldComponent_For_21_Template(rf, ctx) {
   }
 }
 var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandler {
-  get length() {
-    return this.list.length + this._upload_list.getValue().length + 1;
-  }
   constructor() {
-    super();
+    super(...arguments);
     this._clipboard = inject(Clipboard);
     this._uploads = inject(UploadsService);
     this._dialog = inject(MatDialog);
     this.list = [];
+    this.upload_map = {};
     this.upload_ids = new BehaviorSubject([]);
     this._upload_list = new BehaviorSubject([]);
     this.upload_list = this._upload_list.asObservable();
@@ -91932,11 +92055,14 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
     this.uploads = combineLatest([
       this.upload_list,
       this.upload_ids
-    ]).pipe(map(([list, ids]) => list.filter((i) => ids.includes(i.id))));
+    ]).pipe(map(([list, ids]) => list.filter((i) => ids.includes(i?.id))));
     this._list_el = viewChild("image_list");
     this._file_input = viewChild("file_input");
     this.registerOnChange = (fn3) => this._onChange = fn3;
     this.registerOnTouched = (fn3) => this._onTouch = fn3;
+  }
+  get length() {
+    return this.list.length + this._upload_list.getValue().length + 1;
   }
   ngAfterViewInit() {
     this.timeout("init_view_space", () => {
@@ -91946,7 +92072,7 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
     this.subscription("upload_changes", this.upload_list.subscribe((list) => {
       const id_list = this.upload_ids.getValue();
       for (const id of id_list) {
-        const item = list.find((_3) => _3.id === id);
+        const item = list.find((_3) => _3?.id === id);
         if (item && item.progress >= 100) {
           this.addImageUrl(item.link);
           this.upload_ids.next(this.upload_ids.getValue().filter((_3) => _3 !== id));
@@ -92010,17 +92136,24 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
     if (list.length === 0)
       return;
     const global_list = await nextValueFrom(this._uploads.upload_list);
-    const new_list = global_list.filter((_3) => list.find((i) => i === _3.id));
+    const new_list = global_list.filter((_3) => list.find((i) => i === _3?.id));
     const done_list = new_list.filter((file) => file.progress >= 100);
     this._upload_list.next(new_list);
-    done_list.forEach((i) => delete i.upload);
+    done_list.forEach((i) => {
+      console.log("ID:", __spreadValues({}, i));
+      this.upload_map[i?.id] = i.upload?.id || i?.id;
+      delete i.upload;
+    });
     if (done_list.length >= list.length)
       this.clearInterval("update_status");
   }
 };
-_ImageListFieldComponent.\u0275fac = function ImageListFieldComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ImageListFieldComponent)();
-};
+_ImageListFieldComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275ImageListFieldComponent_BaseFactory;
+  return function ImageListFieldComponent_Factory(__ngFactoryType__) {
+    return (\u0275ImageListFieldComponent_BaseFactory || (\u0275ImageListFieldComponent_BaseFactory = \u0275\u0275getInheritedFactory(_ImageListFieldComponent)))(__ngFactoryType__ || _ImageListFieldComponent);
+  };
+})();
 _ImageListFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ImageListFieldComponent, selectors: [["image-list-field"]], viewQuery: function ImageListFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275viewQuerySignal(ctx._list_el, _c016, 5);
@@ -92035,7 +92168,7 @@ _ImageListFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent
     useExisting: forwardRef(() => _ImageListFieldComponent),
     multi: true
   }
-]), \u0275\u0275InheritDefinitionFeature], decls: 24, vars: 15, consts: [["image_list", ""], ["file_input", ""], ["chipList", ""], ["images", "", 1, "relative", "mb-2", "flex", "w-full", "items-center", "space-x-2", "overflow-hidden", "py-2", 3, "resize"], ["image", "", 1, "relative", "flex", "h-32", "w-36", "flex-shrink-0", "cursor-pointer", "flex-col", "items-center", "justify-center", "rounded-xl", "border-2", "border-dashed", "border-base-200", "hover:border-base-300", "hover:bg-base-200"], [1, "text-4xl", "opacity-60"], [1, "px-4", "text-center", "opacity-60"], ["type", "file", 1, "absolute", "inset-0", "h-32", "w-32", "cursor-pointer", "opacity-0", 3, "change"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center", 3, "transform"], ["image", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "transform", "matTooltip"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "disabled"], ["appearance", "outline", 1, "w-full"], ["aria-label", "Image List"], [3, "matChipInputTokenEnd", "placeholder", "matChipInputFor", "matChipInputSeparatorKeyCodes", "matChipInputAddOnBlur"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center"], ["auth", "", 1, "pointer-events-none", "absolute", "left-1/2", "top-1/2", "z-10", "-translate-x-1/2", "-translate-y-1/2", "object-contain", 3, "source"], ["overlay", "", 1, "absolute", "inset-0", "z-20", "text-base-100"], ["bg", "", 1, "absolute", "inset-0", "bg-black", "opacity-0"], ["actions", "", 1, "absolute", "left-0", "right-0", "top-0", "flex", "items-center", "justify-center", "space-x-2", "opacity-0"], ["icon", "", 3, "click"], ["image", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "click", "matTooltip"], ["mode", "determinate", 3, "value", "diameter"], [1, "text-6xl", "text-error"], ["overlay", "", 1, "absolute", "inset-0", "flex", "items-center", "justify-center", "text-base-100", "hover:bg-base-content", "hover:bg-opacity-50"], [1, "text-3xl", "opacity-0"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], [3, "removed"], [1, "max-w-md", "truncate"], ["matChipRemove", ""]], template: function ImageListFieldComponent_Template(rf, ctx) {
+]), \u0275\u0275InheritDefinitionFeature], decls: 24, vars: 15, consts: [["image_list", ""], ["file_input", ""], ["chipList", ""], ["images", "", 1, "relative", "mb-2", "flex", "w-full", "items-center", "space-x-2", "overflow-hidden", "py-2", 3, "resize"], ["image", "", 1, "relative", "flex", "h-32", "w-36", "flex-shrink-0", "cursor-pointer", "flex-col", "items-center", "justify-center", "rounded-xl", "border-2", "border-dashed", "border-base-200", "hover:border-base-300", "hover:bg-base-200"], [1, "text-4xl", "opacity-60"], [1, "px-4", "text-center", "opacity-60"], ["type", "file", 1, "absolute", "inset-0", "h-32", "w-32", "cursor-pointer", "opacity-0", 3, "change"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center", 3, "transform"], ["upload", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "transform", "matTooltip"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "disabled"], ["appearance", "outline", 1, "w-full"], ["aria-label", "Image List"], [3, "matChipInputTokenEnd", "placeholder", "matChipInputFor", "matChipInputSeparatorKeyCodes", "matChipInputAddOnBlur"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center"], ["auth", "", 1, "pointer-events-none", "absolute", "left-1/2", "top-1/2", "z-10", "-translate-x-1/2", "-translate-y-1/2", "object-contain", 3, "source"], ["overlay", "", 1, "absolute", "inset-0", "z-20", "text-base-100"], ["bg", "", 1, "absolute", "inset-0", "bg-black", "opacity-0"], ["actions", "", 1, "absolute", "left-0", "right-0", "top-0", "flex", "items-center", "justify-center", "space-x-2", "opacity-0"], ["icon", "", 3, "click"], ["upload", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "click", "matTooltip"], ["mode", "determinate", 3, "value", "diameter"], [1, "text-6xl", "text-error"], ["overlay", "", 1, "absolute", "inset-0", "flex", "items-center", "justify-center", "text-base-100", "hover:bg-base-content", "hover:bg-opacity-50"], [1, "text-3xl", "opacity-0"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], [3, "removed"], [1, "max-w-md", "truncate"], ["matChipRemove", ""]], template: function ImageListFieldComponent_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 3, 0);
@@ -92105,7 +92238,8 @@ _ImageListFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent
   IconComponent,
   CommonModule,
   AsyncPipe,
-  TranslatePipe
+  TranslatePipe,
+  AuthenticatedImageDirective
 ], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n}\n[overlay][_ngcontent-%COMP%] {\n  transition: background 200ms;\n}\n[image][_ngcontent-%COMP%]:hover   [actions][_ngcontent-%COMP%], \n[image][_ngcontent-%COMP%]:hover    > icon[_ngcontent-%COMP%] {\n  opacity: 1 !important;\n}\n[image][_ngcontent-%COMP%]:hover   [bg][_ngcontent-%COMP%] {\n  opacity: 0.4 !important;\n}\n[actions][_ngcontent-%COMP%], \n[image][_ngcontent-%COMP%]    > icon[_ngcontent-%COMP%] {\n  transition: opacity 200ms;\n}\n[image][_ngcontent-%COMP%] {\n  transition: transform 200ms;\n}\n/*# sourceMappingURL=image-list-field.component.css.map */"] });
 var ImageListFieldComponent = _ImageListFieldComponent;
 (() => {
@@ -92169,7 +92303,7 @@ var ImageListFieldComponent = _ImageListFieldComponent;
             }
             @for (item of uploads | async; track item; let i = $index) {
                 <div
-                    image
+                    upload
                     class="border-base-content/10 /5 flex h-32 w-36 flex-shrink-0 items-center justify-center rounded border bg-base-200 bg-cover bg-center"
                     [style.transform]="'translate(-' + offset + '00%)'"
                     [matTooltip]="item.error"
@@ -92252,12 +92386,13 @@ var ImageListFieldComponent = _ImageListFieldComponent;
       MatProgressSpinnerModule,
       IconComponent,
       CommonModule,
-      TranslatePipe
+      TranslatePipe,
+      AuthenticatedImageDirective
     ], styles: ["/* angular:styles/component:css;95dcaaaa826894df5bf437b6ea5774f7f209a30340873d0fad154aed06b72211;/home/runner/work/user-interfaces/user-interfaces/libs/form-fields/src/lib/image-list-field.component.ts */\n:host {\n  width: 100%;\n}\n[overlay] {\n  transition: background 200ms;\n}\n[image]:hover [actions],\n[image]:hover > icon {\n  opacity: 1 !important;\n}\n[image]:hover [bg] {\n  opacity: 0.4 !important;\n}\n[actions],\n[image] > icon {\n  transition: opacity 200ms;\n}\n[image] {\n  transition: transform 200ms;\n}\n/*# sourceMappingURL=image-list-field.component.css.map */\n"] }]
-  }], () => [], null);
+  }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageListFieldComponent, { className: "ImageListFieldComponent", filePath: "libs/form-fields/src/lib/image-list-field.component.ts", lineNumber: 230 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageListFieldComponent, { className: "ImageListFieldComponent", filePath: "libs/form-fields/src/lib/image-list-field.component.ts", lineNumber: 232 });
 })();
 
 // libs/catering/src/lib/catering-item.class.ts
@@ -97198,18 +97333,21 @@ var _CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
       updated_order
     ].map((i) => new CateringOrder(__spreadValues({}, i)).toJSON());
     const system_id = order.event?.resources[0]?.id || order.event?.system?.id;
-    const extension_data = await showEventMetadata(order.event.id, system_id).toPromise();
-    const event = new CalendarEvent(__spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, order.event), { extension_data })), {
-      catering
-    }));
-    const booking = await updateEventMetadata(event.id, system_id, event.extension_data).toPromise();
+    let booking;
+    if (system_id) {
+      const extension_data = await lastValueFrom(showEventMetadata(order.event.id, system_id));
+      const event = new CalendarEvent(__spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, order.event), { extension_data })), {
+        catering
+      }));
+      await lastValueFrom(updateEventMetadata(event.id, system_id, event.extension_data));
+    }
     if (this.using_bookings) {
-      const booking2 = BOOKINGS2[order.id];
-      await updateBooking(booking2.id, __spreadProps(__spreadValues({}, booking2.toJSON()), {
-        extension_data: __spreadProps(__spreadValues({}, booking2.extension_data), {
+      booking = BOOKINGS2[order.id];
+      await lastValueFrom(updateBooking(booking.id, __spreadProps(__spreadValues({}, booking.toJSON()), {
+        extension_data: __spreadProps(__spreadValues({}, booking.extension_data), {
           details: updated_order.toJSON()
         })
-      })).toPromise();
+      })));
     }
     this.timeout("refresh-list", () => this._poll.next(Date.now()), 1e3);
     order.status = status;
@@ -105249,64 +105387,6 @@ var CateringOrderListComponent = _CateringOrderListComponent;
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CateringOrderListComponent, { className: "CateringOrderListComponent", filePath: "libs/catering/src/lib/catering-order-list.component.ts", lineNumber: 256 });
-})();
-
-// libs/components/src/lib/authenticated-image.directive.ts
-var IMAGE_STORE = /* @__PURE__ */ new Map();
-var _AuthenticatedImageDirective = class _AuthenticatedImageDirective extends AsyncHandler {
-  constructor() {
-    super();
-    this._element = inject(ElementRef);
-    this.source = input(void 0);
-  }
-  ngOnChanges(changes) {
-    if (changes.source && this.source())
-      this._loadImage();
-  }
-  async _loadImage() {
-    const source = this.source();
-    if (typeof source !== "string")
-      return;
-    if (!this._element || !ve()) {
-      return this.timeout("load", () => this._loadImage(), 300);
-    }
-    if (!source.includes("/api/engine/v2/uploads")) {
-      this._element.nativeElement.src = source;
-      return;
-    }
-    if (IMAGE_STORE.has(source)) {
-      this._element.nativeElement.src = IMAGE_STORE.get(source);
-      return;
-    }
-    const tkn = Y2();
-    document.cookie = `${tkn === "x-api-key" ? "api-key=" + encodeURIComponent(Oe()) : "bearer_token=" + encodeURIComponent(tkn)};max-age=30;path=/api/engine/v2/uploads;samesite=strict;${location.protocol === "https:" ? "secure;" : ""}`;
-    let response = null;
-    try {
-      response = await fetch(source).catch((_3) => null);
-    } catch {
-    }
-    if (!response || !response.ok) {
-      console.info("Failed to load image:", source);
-      return;
-    }
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    IMAGE_STORE.set(source, url);
-    this._element.nativeElement.src = url;
-  }
-};
-_AuthenticatedImageDirective.\u0275fac = function AuthenticatedImageDirective_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _AuthenticatedImageDirective)();
-};
-_AuthenticatedImageDirective.\u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({ type: _AuthenticatedImageDirective, selectors: [["img", "auth", ""], ["video", "auth", ""]], inputs: { source: [1, "source"] }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature] });
-var AuthenticatedImageDirective = _AuthenticatedImageDirective;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AuthenticatedImageDirective, [{
-    type: Directive,
-    args: [{
-      selector: "img[auth], video[auth]"
-    }]
-  }], () => [], null);
 })();
 
 // libs/components/src/lib/image-carousel.component.ts
@@ -113710,23 +113790,23 @@ var mocks_default = {
 log("MOCKS", "Mocks included with application.");
 
 // node_modules/@placeos/svg-viewer/dist/index.es.js
-var ue = function(e2, n2) {
-  return ue = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r2) {
+var fe2 = function(e2, n2) {
+  return fe2 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r2) {
     t.__proto__ = r2;
   } || function(t, r2) {
     for (var o in r2) Object.prototype.hasOwnProperty.call(r2, o) && (t[o] = r2[o]);
-  }, ue(e2, n2);
+  }, fe2(e2, n2);
 };
-function R3(e2, n2) {
+function V3(e2, n2) {
   if (typeof n2 != "function" && n2 !== null)
     throw new TypeError("Class extends value " + String(n2) + " is not a constructor or null");
-  ue(e2, n2);
+  fe2(e2, n2);
   function t() {
     this.constructor = e2;
   }
   e2.prototype = n2 === null ? Object.create(n2) : (t.prototype = n2.prototype, new t());
 }
-function I4(e2) {
+function q3(e2) {
   var n2 = typeof Symbol == "function" && Symbol.iterator, t = n2 && e2[n2], r2 = 0;
   if (t) return t.call(e2);
   if (e2 && typeof e2.length == "number") return {
@@ -113753,7 +113833,7 @@ function Y4(e2, n2) {
   }
   return i;
 }
-function ne(e2, n2, t) {
+function re(e2, n2, t) {
   if (t || arguments.length === 2) for (var r2 = 0, o = n2.length, i; r2 < o; r2++)
     (i || !(r2 in n2)) && (i || (i = Array.prototype.slice.call(n2, 0, r2)), i[r2] = n2[r2]);
   return e2.concat(i || Array.prototype.slice.call(n2));
@@ -113761,13 +113841,13 @@ function ne(e2, n2, t) {
 function h2(e2) {
   return typeof e2 == "function";
 }
-function je(e2) {
+function Fe(e2) {
   var n2 = function(r2) {
     Error.call(r2), r2.stack = new Error().stack;
   }, t = e2(n2);
   return t.prototype = Object.create(Error.prototype), t.prototype.constructor = t, t;
 }
-var ae2 = je(function(e2) {
+var le2 = Fe(function(e2) {
   return function(t) {
     e2(this), this.message = t ? t.length + ` errors occurred during unsubscription:
 ` + t.map(function(r2, o) {
@@ -113776,7 +113856,7 @@ var ae2 = je(function(e2) {
   `) : "", this.name = "UnsubscriptionError", this.errors = t;
   };
 });
-function fe2(e2, n2) {
+function he2(e2, n2) {
   if (e2) {
     var t = e2.indexOf(n2);
     0 <= t && e2.splice(t, 1);
@@ -113794,7 +113874,7 @@ var G3 = function() {
       if (s)
         if (this._parentage = null, Array.isArray(s))
           try {
-            for (var c3 = I4(s), a = c3.next(); !a.done; a = c3.next()) {
+            for (var c3 = q3(s), a = c3.next(); !a.done; a = c3.next()) {
               var l2 = a.value;
               l2.remove(this);
             }
@@ -113814,18 +113894,18 @@ var G3 = function() {
         try {
           u3();
         } catch (y2) {
-          i = y2 instanceof ae2 ? y2.errors : [y2];
+          i = y2 instanceof le2 ? y2.errors : [y2];
         }
       var v3 = this._finalizers;
       if (v3) {
         this._finalizers = null;
         try {
-          for (var d2 = I4(v3), f2 = d2.next(); !f2.done; f2 = d2.next()) {
+          for (var d2 = q3(v3), f2 = d2.next(); !f2.done; f2 = d2.next()) {
             var p = f2.value;
             try {
               Ce(p);
             } catch (y2) {
-              i = i ?? [], y2 instanceof ae2 ? i = ne(ne([], Y4(i)), Y4(y2.errors)) : i.push(y2);
+              i = i ?? [], y2 instanceof le2 ? i = re(re([], Y4(i)), Y4(y2.errors)) : i.push(y2);
             }
           }
         } catch (y2) {
@@ -113839,7 +113919,7 @@ var G3 = function() {
         }
       }
       if (i)
-        throw new ae2(i);
+        throw new le2(i);
     }
   }, e2.prototype.add = function(n2) {
     var t;
@@ -113862,16 +113942,16 @@ var G3 = function() {
     this._parentage = Array.isArray(t) ? (t.push(n2), t) : t ? [t, n2] : n2;
   }, e2.prototype._removeParent = function(n2) {
     var t = this._parentage;
-    t === n2 ? this._parentage = null : Array.isArray(t) && fe2(t, n2);
+    t === n2 ? this._parentage = null : Array.isArray(t) && he2(t, n2);
   }, e2.prototype.remove = function(n2) {
     var t = this._finalizers;
-    t && fe2(t, n2), n2 instanceof e2 && n2._removeParent(this);
+    t && he2(t, n2), n2 instanceof e2 && n2._removeParent(this);
   }, e2.EMPTY = function() {
     var n2 = new e2();
     return n2.closed = true, n2;
   }(), e2;
 }();
-var Fe = G3.EMPTY;
+var je = G3.EMPTY;
 function Be(e2) {
   return e2 instanceof G3 || e2 && "closed" in e2 && h2(e2.remove) && h2(e2.add) && h2(e2.unsubscribe);
 }
@@ -113885,7 +113965,7 @@ var bt3 = {
   setTimeout: function(e2, n2) {
     for (var t = [], r2 = 2; r2 < arguments.length; r2++)
       t[r2 - 2] = arguments[r2];
-    return setTimeout.apply(void 0, ne([e2, n2], Y4(t)));
+    return setTimeout.apply(void 0, re([e2, n2], Y4(t)));
   },
   clearTimeout: function(e2) {
     return clearTimeout(e2);
@@ -113897,19 +113977,19 @@ function Ne(e2) {
     throw e2;
   });
 }
-function he2() {
+function de2() {
 }
-function ee(e2) {
+function te2(e2) {
   e2();
 }
-var be2 = function(e2) {
-  R3(n2, e2);
+var we2 = function(e2) {
+  V3(n2, e2);
   function n2(t) {
     var r2 = e2.call(this) || this;
     return r2.isStopped = false, t ? (r2.destination = t, Be(t) && t.add(r2)) : r2.destination = St3, r2;
   }
   return n2.create = function(t, r2, o) {
-    return new de2(t, r2, o);
+    return new ye(t, r2, o);
   }, n2.prototype.next = function(t) {
     this.isStopped || this._next(t);
   }, n2.prototype.error = function(t) {
@@ -113944,7 +114024,7 @@ var wt3 = function() {
       try {
         t.next(n2);
       } catch (r2) {
-        Z4(r2);
+        K3(r2);
       }
   }, e2.prototype.error = function(n2) {
     var t = this.partialObserver;
@@ -113952,22 +114032,22 @@ var wt3 = function() {
       try {
         t.error(n2);
       } catch (r2) {
-        Z4(r2);
+        K3(r2);
       }
     else
-      Z4(n2);
+      K3(n2);
   }, e2.prototype.complete = function() {
     var n2 = this.partialObserver;
     if (n2.complete)
       try {
         n2.complete();
       } catch (t) {
-        Z4(t);
+        K3(t);
       }
   }, e2;
 }();
-var de2 = function(e2) {
-  R3(n2, e2);
+var ye = function(e2) {
+  V3(n2, e2);
   function n2(t, r2, o) {
     var i = e2.call(this) || this, s;
     return h2(t) || !t ? s = {
@@ -113977,8 +114057,8 @@ var de2 = function(e2) {
     } : s = t, i.destination = new wt3(s), i;
   }
   return n2;
-}(be2);
-function Z4(e2) {
+}(we2);
+function K3(e2) {
   Ne(e2);
 }
 function xt3(e2) {
@@ -113986,11 +114066,11 @@ function xt3(e2) {
 }
 var St3 = {
   closed: true,
-  next: he2,
+  next: de2,
   error: xt3,
-  complete: he2
+  complete: de2
 };
-var we2 = function() {
+var xe2 = function() {
   return typeof Symbol == "function" && Symbol.observable || "@@observable";
 }();
 function Ue(e2) {
@@ -114011,8 +114091,8 @@ var g2 = function() {
     var t = new e2();
     return t.source = this, t.operator = n2, t;
   }, e2.prototype.subscribe = function(n2, t, r2) {
-    var o = this, i = Lt3(n2) ? n2 : new de2(n2, t, r2);
-    return ee(function() {
+    var o = this, i = Lt3(n2) ? n2 : new ye(n2, t, r2);
+    return te2(function() {
       var s = o, c3 = s.operator, a = s.source;
       i.add(c3 ? c3.call(i, a) : a ? o._subscribe(i) : o._trySubscribe(i));
     }), i;
@@ -114025,7 +114105,7 @@ var g2 = function() {
   }, e2.prototype.forEach = function(n2, t) {
     var r2 = this;
     return t = Oe2(t), new t(function(o, i) {
-      var s = new de2({
+      var s = new ye({
         next: function(c3) {
           try {
             n2(c3);
@@ -114041,7 +114121,7 @@ var g2 = function() {
   }, e2.prototype._subscribe = function(n2) {
     var t;
     return (t = this.source) === null || t === void 0 ? void 0 : t.subscribe(n2);
-  }, e2.prototype[we2] = function() {
+  }, e2.prototype[xe2] = function() {
     return this;
   }, e2.prototype.pipe = function() {
     for (var n2 = [], t = 0; t < arguments.length; t++)
@@ -114071,12 +114151,12 @@ function At3(e2) {
   return e2 && h2(e2.next) && h2(e2.error) && h2(e2.complete);
 }
 function Lt3(e2) {
-  return e2 && e2 instanceof be2 || At3(e2) && Be(e2);
+  return e2 && e2 instanceof we2 || At3(e2) && Be(e2);
 }
 function $t3(e2) {
   return h2(e2?.lift);
 }
-function V3(e2) {
+function R3(e2) {
   return function(n2) {
     if ($t3(n2))
       return n2.lift(function(t) {
@@ -114093,7 +114173,7 @@ function O3(e2, n2, t, r2, o) {
   return new zt3(e2, n2, t, r2, o);
 }
 var zt3 = function(e2) {
-  R3(n2, e2);
+  V3(n2, e2);
   function n2(t, r2, o, i, s, c3) {
     var a = e2.call(this, t) || this;
     return a.onFinalize = s, a.shouldUnsubscribe = c3, a._next = r2 ? function(l2) {
@@ -114127,32 +114207,32 @@ var zt3 = function(e2) {
       e2.prototype.unsubscribe.call(this), !r2 && ((t = this.onFinalize) === null || t === void 0 || t.call(this));
     }
   }, n2;
-}(be2);
-var Ct2 = je(function(e2) {
+}(we2);
+var Ct2 = Fe(function(e2) {
   return function() {
     e2(this), this.name = "ObjectUnsubscribedError", this.message = "object unsubscribed";
   };
 });
-var xe2 = function(e2) {
-  R3(n2, e2);
+var Se2 = function(e2) {
+  V3(n2, e2);
   function n2() {
     var t = e2.call(this) || this;
     return t.closed = false, t.currentObservers = null, t.observers = [], t.isStopped = false, t.hasError = false, t.thrownError = null, t;
   }
   return n2.prototype.lift = function(t) {
-    var r2 = new Me(this, this);
+    var r2 = new Te(this, this);
     return r2.operator = t, r2;
   }, n2.prototype._throwIfClosed = function() {
     if (this.closed)
       throw new Ct2();
   }, n2.prototype.next = function(t) {
     var r2 = this;
-    ee(function() {
+    te2(function() {
       var o, i;
       if (r2._throwIfClosed(), !r2.isStopped) {
         r2.currentObservers || (r2.currentObservers = Array.from(r2.observers));
         try {
-          for (var s = I4(r2.currentObservers), c3 = s.next(); !c3.done; c3 = s.next()) {
+          for (var s = q3(r2.currentObservers), c3 = s.next(); !c3.done; c3 = s.next()) {
             var a = c3.value;
             a.next(t);
           }
@@ -114169,7 +114249,7 @@ var xe2 = function(e2) {
     });
   }, n2.prototype.error = function(t) {
     var r2 = this;
-    ee(function() {
+    te2(function() {
       if (r2._throwIfClosed(), !r2.isStopped) {
         r2.hasError = r2.isStopped = true, r2.thrownError = t;
         for (var o = r2.observers; o.length; )
@@ -114178,7 +114258,7 @@ var xe2 = function(e2) {
     });
   }, n2.prototype.complete = function() {
     var t = this;
-    ee(function() {
+    te2(function() {
       if (t._throwIfClosed(), !t.isStopped) {
         t.isStopped = true;
         for (var r2 = t.observers; r2.length; )
@@ -114200,8 +114280,8 @@ var xe2 = function(e2) {
     return this._throwIfClosed(), this._checkFinalizedStatuses(t), this._innerSubscribe(t);
   }, n2.prototype._innerSubscribe = function(t) {
     var r2 = this, o = this, i = o.hasError, s = o.isStopped, c3 = o.observers;
-    return i || s ? Fe : (this.currentObservers = null, c3.push(t), new G3(function() {
-      r2.currentObservers = null, fe2(c3, t);
+    return i || s ? je : (this.currentObservers = null, c3.push(t), new G3(function() {
+      r2.currentObservers = null, he2(c3, t);
     }));
   }, n2.prototype._checkFinalizedStatuses = function(t) {
     var r2 = this, o = r2.hasError, i = r2.thrownError, s = r2.isStopped;
@@ -114210,11 +114290,11 @@ var xe2 = function(e2) {
     var t = new g2();
     return t.source = this, t;
   }, n2.create = function(t, r2) {
-    return new Me(t, r2);
+    return new Te(t, r2);
   }, n2;
 }(g2);
-var Me = function(e2) {
-  R3(n2, e2);
+var Te = function(e2) {
+  V3(n2, e2);
   function n2(t, r2) {
     var o = e2.call(this) || this;
     return o.destination = t, o.source = r2, o;
@@ -114230,11 +114310,11 @@ var Me = function(e2) {
     (r2 = (t = this.destination) === null || t === void 0 ? void 0 : t.complete) === null || r2 === void 0 || r2.call(t);
   }, n2.prototype._subscribe = function(t) {
     var r2, o;
-    return (o = (r2 = this.source) === null || r2 === void 0 ? void 0 : r2.subscribe(t)) !== null && o !== void 0 ? o : Fe;
+    return (o = (r2 = this.source) === null || r2 === void 0 ? void 0 : r2.subscribe(t)) !== null && o !== void 0 ? o : je;
   }, n2;
-}(xe2);
+}(Se2);
 var Ye2 = function(e2) {
-  R3(n2, e2);
+  V3(n2, e2);
   function n2(t) {
     var r2 = e2.call(this) || this;
     return r2._value = t, r2;
@@ -114256,7 +114336,7 @@ var Ye2 = function(e2) {
   }, n2.prototype.next = function(t) {
     e2.prototype.next.call(this, this._value = t);
   }, n2;
-}(xe2);
+}(Se2);
 var Ot3 = new g2(function(e2) {
   return e2.complete();
 });
@@ -114264,9 +114344,9 @@ function kt3() {
   return typeof Symbol != "function" || !Symbol.iterator ? "@@iterator" : Symbol.iterator;
 }
 var Xe2 = kt3();
-var Jt2 = Array.isArray;
+var Wt2 = Array.isArray;
 function ot3(e2, n2) {
-  return V3(function(t, r2) {
+  return R3(function(t, r2) {
     var o = 0;
     t.subscribe(O3(r2, function(i) {
       return e2.call(n2, i, o++) && r2.next(i);
@@ -114275,7 +114355,7 @@ function ot3(e2, n2) {
 }
 var N4 = {};
 var E3 = {};
-function M4(e2, n2, t = 300) {
+function T3(e2, n2, t = 300) {
   if (e2 && n2 && n2 instanceof Function)
     it3(e2), N4[e2] = setTimeout(() => {
       n2(), delete N4[e2];
@@ -114300,7 +114380,7 @@ function b2(e2, n2, t, r2 = "debug", o = false, i = "SVG VIEWER") {
     t ? console[r2](`%c[${i}]%c[${e2}] %c${n2}`, ...s, t) : console[r2](`%c[${i}]%c[${e2}] %c${n2}`, ...s);
   }
 }
-function Ae2(e2) {
+function W3(e2) {
   let n2 = e2.replace(/[!"#$%&'()*+,.\/;<=>?@[\\\]^`{|}~]/g, "\\$&");
   const t = n2.split(" ");
   for (const r2 of t)
@@ -114308,7 +114388,7 @@ function Ae2(e2) {
   return n2 = t.join(" "), n2;
 }
 function un2(e2, n2, t) {
-  const r2 = e2.element?.querySelector(".svg-viewer__svg-overlays"), o = e2.element?.querySelector("svg"), i = o?.querySelector(`#${Ae2(n2)}`);
+  const r2 = e2.element?.querySelector(".svg-viewer__svg-overlays"), o = e2.element?.querySelector("svg"), i = o?.querySelector(`#${W3(n2)}`);
   if (i && o && r2) {
     const s = t || r2?.getBoundingClientRect() || {}, c3 = i?.getBoundingClientRect() || {};
     return {
@@ -114493,8 +114573,8 @@ var m = class _m {
 };
 if (m.hashStr("hello") !== "5d41402abc4b2a76b9719d911017c592")
   throw new Error("Md5 self test failed.");
-var Q4 = { top: 0, left: 0, height: 0, width: 0 };
-var te2 = class {
+var ee = { top: 0, left: 0, height: 0, width: 0 };
+var ne = class {
   /** Unique Identifier for the Viewer */
   id;
   /** URL associated with the map data */
@@ -114548,10 +114628,10 @@ var te2 = class {
   }
   constructor(n2) {
     if (this.id = n2.id || `map-${Math.floor(Math.random() * 999999)}`, this.url = n2.url || `local-${m.hashAsciiStr(n2.svg_data || "")}`, this.element = n2.element || null, this.labels = n2.labels || [], this.features = n2.features || [], this.actions = n2.actions || [], this.styles = n2.styles || {}, this.svg_data = n2.svg_data || "", this.content_ratio = n2.content_ratio || { x: 1, y: 1 }, this.zoom = n2.zoom || 1, this.center = { x: n2.center?.x ?? 0.5, y: n2.center?.y ?? 0.5 }, this.rotate = n2.rotate || 0, this.ratio = n2.ratio || 1, this.svg_ratio = n2.svg_ratio || 1, this.max_resolution = n2.max_resolution || window.innerWidth * window.innerHeight * 10, this.focus = n2.focus || null, this.options = n2.options || {}, this.mappings = n2.mappings || {}, this.box = {
-      top: (n2.box || Q4).top,
-      left: (n2.box || Q4).left,
-      height: (n2.box || Q4).height,
-      width: (n2.box || Q4).width
+      top: (n2.box || ee).top,
+      left: (n2.box || ee).left,
+      height: (n2.box || ee).height,
+      width: (n2.box || ee).width
     }, this.desired_zoom = n2.desired_zoom || n2.zoom || this.zoom, this.desired_center = {
       x: n2.desired_center?.x || this.center.x,
       y: n2.desired_center?.y || this.center.y
@@ -114571,31 +114651,31 @@ var te2 = class {
     this.needs_update = this.desired_zoom !== this.zoom || this.desired_center.x !== this.center.x || this.desired_center.y !== this.center.y, this.use_gpu = n2?.use_gpu ?? true;
   }
 };
-var j2 = new Ye2([]);
-var ut3 = new xe2();
+var F14 = new Ye2([]);
+var ut3 = new Se2();
 var pn2 = ut3.pipe(ot3((e2) => e2 === "resize"));
 function x2(e2, n2) {
-  if (e2 = W3().find((o) => o.id === (e2 instanceof te2 ? e2.id : e2)), !(e2 instanceof te2)) return null;
+  if (e2 = X4().find((o) => o.id === (e2 instanceof ne ? e2.id : e2)), !(e2 instanceof ne)) return null;
   delete n2.url;
-  const r2 = new te2(__spreadValues(__spreadValues({}, e2), n2));
-  return ft3(r2), r2.needs_update && M4(`${e2.id}_updating`, () => x2(r2, {}), 16), r2;
+  const r2 = new ne(__spreadValues(__spreadValues({}, e2), n2));
+  return ft3(r2), r2.needs_update && T3(`${e2.id}_updating`, () => x2(r2, {}), 16), r2;
 }
 function ft3(e2) {
-  const n2 = W3().filter((t) => t.id !== e2.id);
-  n2.push(e2), j2.next(n2);
+  const n2 = X4().filter((t) => t.id !== e2.id);
+  n2.push(e2), F14.next(n2);
 }
-function W3() {
-  return j2.getValue();
+function X4() {
+  return F14.getValue();
 }
 var Pe2 = new Ye2({});
 var ke2 = {};
-var X4 = false;
-var se2 = false;
+var Z4 = false;
+var ce2 = false;
 var P4;
 var A4;
 var k2;
 var _2;
-var q3;
+var I4;
 window.addEventListener("blur", () => H4());
 function xn2(e2) {
   const n2 = JSON.stringify(e2.focus);
@@ -114613,30 +114693,30 @@ function xn2(e2) {
   }
 }
 function H4() {
-  b2("INPUT", "Ending pinch/pan..."), it3("pan_start"), X4 = false, se2 = false, A4 && window.removeEventListener("mousemove", A4), k2 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), q3 && window.removeEventListener("touchend", q3), A4 = k2 = _2 = q3 = P4 = null;
+  b2("INPUT", "Ending pinch/pan..."), it3("pan_start"), Z4 = false, ce2 = false, A4 && window.removeEventListener("mousemove", A4), k2 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), I4 && window.removeEventListener("touchend", I4), A4 = k2 = _2 = I4 = P4 = null;
 }
-var F14 = {};
-var ve2 = {};
+var j2 = {};
 var pe2 = {};
 var me2 = {};
+var ge2 = {};
 var D3 = {};
 var B4 = {};
 st2(
   "on_resize",
   pn2.subscribe(() => {
-    const e2 = W3();
+    const e2 = X4();
     for (const n2 of e2)
       try {
-        M4(`resize-${n2.id}`, () => yt3(n2));
+        T3(`resize-${n2.id}`, () => yt3(n2));
       } catch (t) {
         console.warn(t);
       }
   })
 );
 function dt3(e2) {
-  return F14[e2.id] || (F14[e2.id] = new Promise((n2) => {
+  return j2[e2.id] || (j2[e2.id] = new Promise((n2) => {
     const t = requestAnimationFrame(() => {
-      if (!F14[e2.id]) return;
+      if (!j2[e2.id]) return;
       const r2 = e2.element;
       if (!r2) throw new Error("No element set on viewer");
       const o = r2.querySelector("style");
@@ -114647,11 +114727,11 @@ function dt3(e2) {
       if (!s || !o)
         throw new Error("Viewer is not setup yet.");
       const a = (e2.center.x - 0.5) * (100 * e2.zoom * e2.svg_ratio), l2 = (e2.center.y - 0.5) * (100 * e2.zoom * e2.svg_ratio), u3 = e2.use_gpu ? `translate3d(${a}%, ${l2}%, 0)` : `translate(${a}%, ${l2}%)`;
-      s.style.transform = `${u3} ${c3} rotate(${e2.rotate}deg)`, i += `#${e2.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e2.rotate}deg) scale(${1 / e2.zoom * (1 / e2.svg_ratio)}); }`, i += `#${e2.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e2.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, ge2(e2), xn2(e2), Le2(e2), delete F14[e2.id], cancelAnimationFrame(t), n2();
+      s.style.transform = `${u3} ${c3} rotate(${e2.rotate}deg)`, i += `#${e2.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e2.rotate}deg) scale(${1 / e2.zoom * (1 / e2.svg_ratio)}); }`, i += `#${e2.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e2.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, _e2(e2), xn2(e2), Le2(e2), delete j2[e2.id], cancelAnimationFrame(t), n2();
     });
-  })), F14[e2.id];
+  })), j2[e2.id];
 }
-async function ge2(e2) {
+async function _e2(e2) {
   if ((JSON.stringify(__spreadValues({}, e2.styles)) || "").localeCompare(D3[e2.id])) {
     const t = e2.element;
     if (!t) throw new Error("No element set on viewer");
@@ -114661,7 +114741,7 @@ async function ge2(e2) {
     if (!r2) throw new Error("No iframe created for viewer");
     if (!r2.contentWindow) {
       r2.onload = () => {
-        setTimeout(() => ge2(e2), 50), setTimeout(() => ge2(e2), 500);
+        setTimeout(() => _e2(e2), 50), setTimeout(() => _e2(e2), 500);
       };
       return;
     }
@@ -114676,7 +114756,7 @@ async function ge2(e2) {
 }
 async function yt3(e2) {
   return new Promise((n2) => {
-    B4[e2.id] || (B4[e2.id] = []), B4[e2.id].push(n2), M4(
+    B4[e2.id] || (B4[e2.id] = []), B4[e2.id].push(n2), T3(
       `resize-${e2.id}`,
       () => {
         const t = e2.element;
@@ -114684,7 +114764,7 @@ async function yt3(e2) {
         const r2 = t.querySelector(
           ".svg-viewer__view-container"
         ), o = t.querySelector(".svg-viewer__svg-overlays"), i = t.querySelector(
-          `#${e2.id}`
+          `#${W3(e2.id)}`
         ), s = t.querySelector(
           ".svg-viewer"
         ), c3 = t.querySelector(
@@ -114712,7 +114792,7 @@ async function yt3(e2) {
             box: u3,
             content_ratio: $e2
           });
-          !ze || (e2 = ze, !await dt3(e2).catch((ce2) => (console.warn(ce2), false))) || (B4[e2.id].forEach((ce2) => ce2()), B4[e2.id] = []);
+          !ze || (e2 = ze, !await dt3(e2).catch((ae2) => (console.warn(ae2), false))) || (B4[e2.id].forEach((ae2) => ae2()), B4[e2.id] = []);
         });
       },
       100
@@ -114727,20 +114807,20 @@ function Le2(e2) {
   );
   if (!t || !n2) return;
   if (!t.getBoundingClientRect().width)
-    return M4(
+    return T3(
       `${e2.id}|render-overlays`,
       () => Le2(e2),
       50
     );
   requestAnimationFrame(() => {
-    Pn2(e2), qn2(e2), kn2(e2);
+    Pn2(e2), In2(e2), kn2(e2);
   });
 }
 function Pn2(e2) {
   const n2 = e2.labels.filter(
     (r2) => !r2.zoom_level || r2.zoom_level <= e2.zoom
   ), t = JSON.stringify(n2);
-  if (t !== ve2[e2.id]) {
+  if (t !== pe2[e2.id]) {
     const r2 = e2.element?.querySelector(
       ".svg-viewer__svg-overlays"
     );
@@ -114756,7 +114836,7 @@ function Pn2(e2) {
       const l2 = document.createElement("div"), u3 = document.createElement("label");
       u3.classList.add("svg-viewer__label"), u3.setAttribute("for", c3), i.css_class?.length && u3.classList.add(...i.css_class), i.z_index && (a.style.zIndex = `${i.z_index}`), u3.textContent = i.content, l2.appendChild(u3), a.appendChild(l2), r2.appendChild(a);
     }
-    b2("RENDER", `Added ${e2.labels.length} labels to view.`), ve2[e2.id] = t;
+    b2("RENDER", `Added ${e2.labels.length} labels to view.`), pe2[e2.id] = t;
   }
 }
 function kn2(e2) {
@@ -114766,7 +114846,7 @@ function kn2(e2) {
       data: fn2(t.data)
     }))
   );
-  if (n2 !== pe2[e2.id]) {
+  if (n2 !== me2[e2.id]) {
     const t = e2.element?.querySelector(
       ".svg-viewer__svg-overlays"
     );
@@ -114789,14 +114869,14 @@ function kn2(e2) {
         "svg-viewer__svg-overlay-item__hover"
       ), a.style.top = `${s.y * 100}%`, a.style.left = `${s.x * 100}%`, c3.w || c3.h ? (a.style.width = `${c3.w * 100}%`, a.style.height = `${c3.h * 100}%`) : (a.style.width = "1%", a.style.height = `${1 / e2.ratio}%`), a.style.transform = "translate(-50%, -50%)", i.content instanceof Node && a.appendChild(i.content), t.appendChild(a));
     }
-    b2("RENDER", `Added ${e2.features.length} features to view.`), pe2[e2.id] = n2;
+    b2("RENDER", `Added ${e2.features.length} features to view.`), me2[e2.id] = n2;
   }
 }
-function qn2(e2) {
+function In2(e2) {
   const n2 = JSON.stringify(
     e2.actions.map((t) => __spreadProps(__spreadValues({}, t), { callback: "" }))
   );
-  if (n2 !== me2[e2.id]) {
+  if (n2 !== ge2[e2.id]) {
     const t = e2.element?.querySelector(
       ".svg-viewer__svg-overlays"
     );
@@ -114805,13 +114885,15 @@ function qn2(e2) {
       t.querySelectorAll(".action-zone")
     ).filter((o) => o.parentNode && t.contains(o.parentNode)).forEach((o) => t.removeChild(o));
     for (const o of e2.actions) {
-      if (!o.action || !o.id || o.id === "*" || o.zone === false || t.querySelector(`#${o.id}`)) continue;
+      if (!o.action || !o.id || o.id === "*" || o.zone === false || t.querySelector(
+        `#${W3(o.id)}`
+      )) continue;
       const s = document.createElement("button");
       s.id = `${o.id}`;
       const c3 = e2.mappings[o.id] || { x: 0, y: 0 }, a = e2.mappings[o.id] || { w: 0, h: 0 };
       s.classList.add("svg-viewer__svg-overlay-item"), s.classList.add("action-zone"), s.style.top = `${c3.y * 100}%`, s.style.left = `${c3.x * 100}%`, (a.w || a.h) && (s.style.width = `${a.w * 100}%`, s.style.height = `${a.h * 100}%`, s.style.transform = "translate(-50%, -50%)"), t.appendChild(s);
     }
-    me2[e2.id] = n2;
+    ge2[e2.id] = n2;
   }
 }
 function vt3(e2) {
@@ -114822,14 +114904,14 @@ function vt3(e2) {
     let r2 = "";
     for (const o in e2[t])
       e2[t][o] && (r2 += `${o}: ${e2[t][o]}; `);
-    n2 += `svg ${t.split(" ").map((o) => Ae2(o)).join(" ")} { ${r2} } `;
+    n2 += `svg ${t.split(" ").map((o) => W3(o)).join(" ")} { ${r2} } `;
   }
   return n2;
 }
-var _e2 = {};
+var be2 = {};
 function Nn2(e2) {
   for (const n2 in e2)
-    _e2[n2.toLowerCase()] = e2[n2];
+    be2[n2.toLowerCase()] = e2[n2];
 }
 
 // node_modules/@sentry/core/build/esm/debug-build.js
@@ -133078,7 +133160,7 @@ _GlobalBannerComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
   if (rf & 2) {
     \u0275\u0275conditional(!\u0275\u0275pipeBind1(1, 1, ctx.has_been_closed) && \u0275\u0275pipeBind1(2, 3, ctx.banner) ? 0 : -1);
   }
-}, dependencies: [CommonModule, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
+}, dependencies: [CommonModule, AsyncPipe, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
 var GlobalBannerComponent = _GlobalBannerComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GlobalBannerComponent, [{
@@ -133106,11 +133188,11 @@ var GlobalBannerComponent = _GlobalBannerComponent;
                 </button>
             </div>
         }
-    `, imports: [CommonModule], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
+    `, imports: [CommonModule, IconComponent], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 50 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 51 });
 })();
 
 // libs/components/src/lib/global-loading.component.ts
@@ -133142,7 +133224,7 @@ var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler
     super(...arguments);
     this._org = inject(OrganisationService);
     this._settings = inject(SettingsService);
-    this.loading = signal(false);
+    this.loading = signal(true);
     this.online = signal(true);
   }
   async ngOnInit() {
@@ -133166,7 +133248,7 @@ _GlobalLoadingComponent.\u0275fac = /* @__PURE__ */ (() => {
     return (\u0275GlobalLoadingComponent_BaseFactory || (\u0275GlobalLoadingComponent_BaseFactory = \u0275\u0275getInheritedFactory(_GlobalLoadingComponent)))(__ngFactoryType__ || _GlobalLoadingComponent);
   };
 })();
-_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-50", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-40", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
+_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-[9999]", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-[9998]", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, GlobalLoadingComponent_Conditional_0_Template, 3, 3, "div", 0);
     \u0275\u0275conditionalCreate(1, GlobalLoadingComponent_Conditional_1_Template, 2, 1, "div", 1);
@@ -133193,7 +133275,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
     args: [{ selector: "global-loading", template: `
         @if (!online()) {
             <div
-                class="fixed bottom-2 left-1/2 z-50 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
+                class="fixed bottom-2 left-1/2 z-[9999] -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
             >
                 {{ 'COMMON.SERVER_DOWN' | translate }}
             </div>
@@ -133201,7 +133283,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
         @if (loading()) {
             <div
                 loader
-                class="pointer-events-auto fixed inset-0 z-40 flex items-center justify-center bg-base-100"
+                class="pointer-events-auto fixed inset-0 z-[9998] flex items-center justify-center bg-base-100"
             >
                 <mat-spinner [diameter]="64"></mat-spinner>
             </div>
