@@ -1,9 +1,9 @@
 import {
   subMinutes
-} from "./chunk-56LSFBVA.js";
+} from "./chunk-VZT3SBFD.js";
 import {
   FindAvailabilityModalComponent
-} from "./chunk-REYTSQ47.js";
+} from "./chunk-QEA2SOFX.js";
 import {
   ANIMATION_SHOW_CONTRACT_EXPAND,
   ActivatedRoute,
@@ -263,7 +263,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuerySignal
-} from "./chunk-SMI3JQDD.js";
+} from "./chunk-7HU6ECV7.js";
 import {
   __spreadProps,
   __spreadValues
@@ -1283,18 +1283,21 @@ var _CateringOrdersService = class _CateringOrdersService extends AsyncHandler {
       updated_order
     ].map((i) => new CateringOrder(__spreadValues({}, i)).toJSON());
     const system_id = order.event?.resources[0]?.id || order.event?.system?.id;
-    const extension_data = await showEventMetadata(order.event.id, system_id).toPromise();
-    const event = new CalendarEvent(__spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, order.event), { extension_data })), {
-      catering
-    }));
-    const booking = await updateEventMetadata(event.id, system_id, event.extension_data).toPromise();
+    let booking;
+    if (system_id) {
+      const extension_data = await lastValueFrom(showEventMetadata(order.event.id, system_id));
+      const event = new CalendarEvent(__spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, order.event), { extension_data })), {
+        catering
+      }));
+      await lastValueFrom(updateEventMetadata(event.id, system_id, event.extension_data));
+    }
     if (this.using_bookings) {
-      const booking2 = BOOKINGS[order.id];
-      await updateBooking(booking2.id, __spreadProps(__spreadValues({}, booking2.toJSON()), {
-        extension_data: __spreadProps(__spreadValues({}, booking2.extension_data), {
+      booking = BOOKINGS[order.id];
+      await lastValueFrom(updateBooking(booking.id, __spreadProps(__spreadValues({}, booking.toJSON()), {
+        extension_data: __spreadProps(__spreadValues({}, booking.extension_data), {
           details: updated_order.toJSON()
         })
-      })).toPromise();
+      })));
     }
     this.timeout("refresh-list", () => this._poll.next(Date.now()), 1e3);
     order.status = status;
@@ -9601,10 +9604,11 @@ var BookComponent = _BookComponent;
 })();
 
 // apps/workplace/src/app/book/code-flow-error.component.ts
-var _c010 = () => ["/"];
-var _c16 = () => ["/book", "code"];
-var _c24 = (a0) => ({ asset_id: a0 });
-var _c33 = () => ["/book", "desk"];
+var _c010 = (a0) => ({ type: a0 });
+var _c16 = () => ["/"];
+var _c24 = () => ["/book", "code"];
+var _c33 = (a0) => ({ asset_id: a0 });
+var _c43 = () => ["/book", "desk"];
 function CodeFlowErrorComponent_Case_8_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275text(0, " Booking has not started yet. Please try again once the booking has commenced. ");
@@ -9612,12 +9616,12 @@ function CodeFlowErrorComponent_Case_8_Template(rf, ctx) {
 }
 function CodeFlowErrorComponent_Case_9_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275text(0, " You have booking with a difference resource. ");
+    \u0275\u0275text(0, " You have booking with a different resource. ");
   }
 }
 function CodeFlowErrorComponent_Case_10_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275text(0, " You do not have a booking. Would you like to book the set resource? ");
+    \u0275\u0275text(0, " You do not have a booking. Would you like to book this desk? ");
   }
 }
 function CodeFlowErrorComponent_Conditional_12_Template(rf, ctx) {
@@ -9629,7 +9633,7 @@ function CodeFlowErrorComponent_Conditional_12_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(5, _c16))("queryParams", \u0275\u0275pureFunction1(6, _c24, ctx_r0.asset_id));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(5, _c24))("queryParams", \u0275\u0275pureFunction1(6, _c33, ctx_r0.asset_id));
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 3, "APP.WORKPLACE.TRY_AGAIN"), " ");
   }
@@ -9643,7 +9647,7 @@ function CodeFlowErrorComponent_Conditional_13_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(5, _c33))("queryParams", \u0275\u0275pureFunction1(6, _c24, ctx_r0.asset_id));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(5, _c43))("queryParams", \u0275\u0275pureFunction1(6, _c33, ctx_r0.asset_id));
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 3, "COMMON.BOOK"), " ");
   }
@@ -9653,14 +9657,16 @@ var _CodeFlowErrorComponent = class _CodeFlowErrorComponent extends AsyncHandler
     super(...arguments);
     this._route = inject(ActivatedRoute);
     this._state = inject(BookingFormService);
-    this.type = "other";
+    this.type = signal("other");
+    this.asset_type = signal("resource");
+    this.asset_id = signal("");
     this.asset = null;
-    this.asset_id = "";
   }
   ngOnInit() {
     this.subscription("route.query", this._route.queryParamMap.subscribe((params) => {
-      this.type = params.get("type");
-      this.asset_id = params.get("asset_id");
+      this.type.set(params.get("type") || "other");
+      this.asset_type.set(params.get("asset_type") || "resource");
+      this.asset_id.set(params.get("asset_id"));
     }));
   }
 };
@@ -9670,7 +9676,7 @@ _CodeFlowErrorComponent.\u0275fac = /* @__PURE__ */ (() => {
     return (\u0275CodeFlowErrorComponent_BaseFactory || (\u0275CodeFlowErrorComponent_BaseFactory = \u0275\u0275getInheritedFactory(_CodeFlowErrorComponent)))(__ngFactoryType__ || _CodeFlowErrorComponent);
   };
 })();
-_CodeFlowErrorComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CodeFlowErrorComponent, selectors: [["code-flow-success"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 17, vars: 11, consts: [[1, "absolute", "inset-0", "z-50", "flex", "flex-col", "bg-base-100"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-2", "p-8"], [1, "text-2xl", "font-medium"], [1, "py-4"], ["src", "assets/icons/not-found.svg", 1, "h-64"], [1, "max-w-[32rem]", "text-center"], [1, "mt-4", "flex", "w-full", "items-center", "justify-center", "space-x-2", "border-t", "border-base-200", "p-2"], ["btn", "", "matRipple", "", 1, "w-full", "max-w-[32rem]", 3, "routerLink", "queryParams"], ["btn", "", "matRipple", "", 1, "inverse", "w-full", "max-w-[32rem]", 3, "routerLink"]], template: function CodeFlowErrorComponent_Template(rf, ctx) {
+_CodeFlowErrorComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CodeFlowErrorComponent, selectors: [["code-flow-success"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 17, vars: 14, consts: [[1, "absolute", "inset-0", "z-50", "flex", "flex-col", "bg-base-100"], [1, "flex", "flex-1", "flex-col", "items-center", "justify-center", "space-y-2", "p-8"], [1, "text-2xl", "font-medium"], [1, "py-4"], ["src", "assets/icons/not-found.svg", 1, "h-64"], [1, "max-w-[32rem]", "text-center"], [1, "mt-4", "flex", "w-full", "items-center", "justify-center", "space-x-2", "border-t", "border-base-200", "p-2"], ["btn", "", "matRipple", "", 1, "w-full", "max-w-[32rem]", 3, "routerLink", "queryParams"], ["btn", "", "matRipple", "", 1, "inverse", "w-full", "max-w-[32rem]", 3, "routerLink"]], template: function CodeFlowErrorComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "main", 1)(2, "h2", 2);
     \u0275\u0275text(3);
@@ -9693,17 +9699,17 @@ _CodeFlowErrorComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent(
   if (rf & 2) {
     let tmp_1_0;
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 6, "APP.WORKPLACE.RESOURCE_CHECKED_IN_FAILED"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 6, "APP.WORKPLACE.RESOURCE_CHECKED_IN_FAILED", \u0275\u0275pureFunction1(11, _c010, ctx.asset_type())), " ");
     \u0275\u0275advance(5);
-    \u0275\u0275conditional((tmp_1_0 = ctx.type) === "not_started" ? 8 : tmp_1_0 === "wrong_resource" ? 9 : 10);
+    \u0275\u0275conditional((tmp_1_0 = ctx.type()) === "not_started" ? 8 : tmp_1_0 === "wrong_resource" ? 9 : 10);
     \u0275\u0275advance(4);
-    \u0275\u0275conditional(ctx.type === "not_started" ? 12 : -1);
+    \u0275\u0275conditional(ctx.type() === "not_started" ? 12 : -1);
     \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.type === "no_booking" ? 13 : -1);
+    \u0275\u0275conditional(ctx.type() === "no_booking" ? 13 : -1);
     \u0275\u0275advance();
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(10, _c010));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(13, _c16));
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(16, 8, "COMMON.CONTINUE"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(16, 9, "COMMON.CONTINUE"), " ");
   }
 }, dependencies: [MatRipple, RouterLink, TranslatePipe], encapsulation: 2 });
 var CodeFlowErrorComponent = _CodeFlowErrorComponent;
@@ -9716,23 +9722,26 @@ var CodeFlowErrorComponent = _CodeFlowErrorComponent;
                 class="flex flex-1 flex-col items-center justify-center space-y-2 p-8"
             >
                 <h2 class="text-2xl font-medium">
-                    {{ 'APP.WORKPLACE.RESOURCE_CHECKED_IN_FAILED' | translate }}
+                    {{
+                        'APP.WORKPLACE.RESOURCE_CHECKED_IN_FAILED'
+                            | translate: { type: asset_type() }
+                    }}
                 </h2>
                 <div class="py-4">
                     <img src="assets/icons/not-found.svg" class="h-64" />
                 </div>
                 <p class="max-w-[32rem] text-center">
-                    @switch (type) {
+                    @switch (type()) {
                         @case ('not_started') {
                             Booking has not started yet. Please try again once
                             the booking has commenced.
                         }
                         @case ('wrong_resource') {
-                            You have booking with a difference resource.
+                            You have booking with a different resource.
                         }
                         @default {
                             You do not have a booking. Would you like to book
-                            the set resource?
+                            this desk?
                         }
                     }
                 </p>
@@ -9740,7 +9749,7 @@ var CodeFlowErrorComponent = _CodeFlowErrorComponent;
             <footer
                 class="mt-4 flex w-full items-center justify-center space-x-2 border-t border-base-200 p-2"
             >
-                @if (type === 'not_started') {
+                @if (type() === 'not_started') {
                     <a
                         btn
                         matRipple
@@ -9751,7 +9760,7 @@ var CodeFlowErrorComponent = _CodeFlowErrorComponent;
                         {{ 'APP.WORKPLACE.TRY_AGAIN' | translate }}
                     </a>
                 }
-                @if (type === 'no_booking') {
+                @if (type() === 'no_booking') {
                     <a
                         btn
                         matRipple
@@ -9776,7 +9785,7 @@ var CodeFlowErrorComponent = _CodeFlowErrorComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CodeFlowErrorComponent, { className: "CodeFlowErrorComponent", filePath: "apps/workplace/src/app/book/code-flow-error.component.ts", lineNumber: 76 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CodeFlowErrorComponent, { className: "CodeFlowErrorComponent", filePath: "apps/workplace/src/app/book/code-flow-error.component.ts", lineNumber: 79 });
 })();
 
 // apps/workplace/src/app/book/code-flow-success.component.ts
@@ -9806,11 +9815,11 @@ _CodeFlowSuccessComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponen
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(4, 4, "APP.WORKPLACE.RESOURCE_CHECKED_IN"), " ");
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(8, 6, "APP.WORKPLACE.CHECKED_IN"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(8, 6, "APP.WORKPLACE.RESOURCE_CHECKED_IN_MESSAGE"), " ");
     \u0275\u0275advance(3);
     \u0275\u0275property("routerLink", \u0275\u0275pureFunction0(10, _c011));
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(12, 8, "APP.WORKPLACE.BOOKING_DONE_CONTINUE"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(12, 8, "COMMON.CONTINUE"), " ");
   }
 }, dependencies: [MatRipple, RouterLink, TranslatePipe], encapsulation: 2 });
 var CodeFlowSuccessComponent = _CodeFlowSuccessComponent;
@@ -9827,7 +9836,9 @@ var CodeFlowSuccessComponent = _CodeFlowSuccessComponent;
                 </h2>
                 <img src="assets/icons/success.svg" />
                 <p class="max-w-[32rem] text-center">
-                    {{ 'APP.WORKPLACE.CHECKED_IN' | translate }}
+                    {{
+                        'APP.WORKPLACE.RESOURCE_CHECKED_IN_MESSAGE' | translate
+                    }}
                 </p>
             </main>
             <footer
@@ -9839,7 +9850,7 @@ var CodeFlowSuccessComponent = _CodeFlowSuccessComponent;
                     class="w-full max-w-[32rem]"
                     [routerLink]="['/']"
                 >
-                    {{ 'APP.WORKPLACE.BOOKING_DONE_CONTINUE' | translate }}
+                    {{ 'COMMON.CONTINUE' | translate }}
                 </a>
             </footer>
         </div>
@@ -9847,7 +9858,7 @@ var CodeFlowSuccessComponent = _CodeFlowSuccessComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CodeFlowSuccessComponent, { className: "CodeFlowSuccessComponent", filePath: "apps/workplace/src/app/book/code-flow-success.component.ts", lineNumber: 35 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CodeFlowSuccessComponent, { className: "CodeFlowSuccessComponent", filePath: "apps/workplace/src/app/book/code-flow-success.component.ts", lineNumber: 37 });
 })();
 
 // node_modules/qr-scanner/qr-scanner.min.js
@@ -10243,7 +10254,7 @@ function BookCodeFlowComponent_Conditional_0_Conditional_4_Template(rf, ctx) {
     \u0275\u0275text(2, " Scan QR Code ");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(3, "span", 13);
-    \u0275\u0275text(4, " Scan the QR code outisde a PlaceOS room or space. ");
+    \u0275\u0275text(4, " Scan the QR code outside a PlaceOS room or space. ");
     \u0275\u0275elementEnd()();
   }
 }
@@ -10280,7 +10291,7 @@ function BookCodeFlowComponent_Conditional_0_Template(rf, ctx) {
     \u0275\u0275listener("click", function BookCodeFlowComponent_Conditional_0_Template_button_click_12_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.is_scanning = true);
+      return \u0275\u0275resetView(ctx_r1.is_scanning.set(true));
     });
     \u0275\u0275text(13, " Scan Code ");
     \u0275\u0275elementEnd();
@@ -10288,7 +10299,7 @@ function BookCodeFlowComponent_Conditional_0_Template(rf, ctx) {
     \u0275\u0275listener("click", function BookCodeFlowComponent_Conditional_0_Template_button_click_14_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.is_scanning = false);
+      return \u0275\u0275resetView(ctx_r1.is_scanning.set(false));
     });
     \u0275\u0275text(15, " Enter Code ");
     \u0275\u0275elementEnd()()()();
@@ -10296,17 +10307,17 @@ function BookCodeFlowComponent_Conditional_0_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance(4);
-    \u0275\u0275conditional(ctx_r1.is_scanning ? 4 : -1);
+    \u0275\u0275conditional(ctx_r1.is_scanning() ? 4 : -1);
     \u0275\u0275advance();
-    \u0275\u0275conditional(!ctx_r1.is_scanning ? 5 : -1);
+    \u0275\u0275conditional(!ctx_r1.is_scanning() ? 5 : -1);
     \u0275\u0275advance(2);
-    \u0275\u0275classProp("input", !ctx_r1.is_scanning);
+    \u0275\u0275classProp("input", !ctx_r1.is_scanning());
     \u0275\u0275advance(3);
     \u0275\u0275twoWayProperty("ngModel", ctx_r1.room_code);
     \u0275\u0275advance(2);
-    \u0275\u0275classMap("w-40 flex-1 border-none text-black " + (ctx_r1.is_scanning ? "bg-base-100" : "bg-transparent bg-opacity-50 hover:bg-base-100"));
+    \u0275\u0275classMap("w-40 flex-1 border-none text-black " + (ctx_r1.is_scanning() ? "bg-base-100" : "bg-transparent bg-opacity-50 hover:bg-base-100"));
     \u0275\u0275advance(2);
-    \u0275\u0275classMap("w-40 flex-1 border-none text-black " + (!ctx_r1.is_scanning ? "bg-base-100" : "bg-transparent bg-opacity-50 hover:bg-base-100"));
+    \u0275\u0275classMap("w-40 flex-1 border-none text-black " + (!ctx_r1.is_scanning() ? "bg-base-100" : "bg-transparent bg-opacity-50 hover:bg-base-100"));
   }
 }
 function BookCodeFlowComponent_Conditional_1_Template(rf, ctx) {
@@ -10331,16 +10342,12 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
     this._booking_form = inject(BookingFormService);
     this._org = inject(OrganisationService);
     this.menu = output();
-    this.is_scanning = true;
-    this.loading = false;
+    this.is_scanning = signal(false);
+    this.loading = signal(false);
     this._video_el = viewChild("video");
   }
   ngOnDestroy() {
-    const _video_el = this._video_el();
-    if (_video_el?.nativeElement?.srcObject) {
-      _video_el.nativeElement.srcObject.getTracks().forEach((track) => track?.stop());
-    }
-    this._qr_scanner?.stop();
+    this._stopScanning();
   }
   async ngOnInit() {
     await firstTruthyValueFrom(this._org.initialised);
@@ -10352,11 +10359,7 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
     }));
   }
   ngAfterViewInit() {
-    if (!navigator.mediaDevices?.getUserMedia || this.loading)
-      return;
-    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => this._video_el().nativeElement.srcObject = stream).catch((e2) => console.error("Unable to fetch media devices!", e2));
-    this._qr_scanner = new qr_scanner_min_default(this._video_el().nativeElement, (r) => this.handleQrCode(r));
-    this._qr_scanner.start();
+    this.timeout("initialise", () => this._startScanning());
   }
   handleQrCode(result) {
     const url = result;
@@ -10372,27 +10375,28 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
     }
   }
   async _checkinBooking(asset_id, type = "desk") {
-    this.loading = true;
-    let bookings = await queryBookings({
+    this.loading.set(true);
+    this._stopScanning();
+    let bookings = await lastValueFrom(queryBookings({
       period_start: getUnixTime(Date.now()),
       period_end: getUnixTime(addMinutes(Date.now(), 5)),
       type,
       email: currentUser().email
-    }).toPromise().catch((_) => []);
+    })).catch((_) => []);
     const item = bookings.find((_) => _.asset_id === asset_id);
     if (item) {
-      await checkinBooking(item.id, true).toPromise().catch((_) => {
+      await lastValueFrom(checkinBooking(item.id, true)).catch((_) => {
         notifyError(`Unable to checkin booking with resource "${asset_id}"`);
-        this.loading = false;
+        this.loading.set(false);
         throw _;
       });
       this._router.navigate(["/book", "code", "success"]);
     } else {
-      bookings = await queryBookings({
+      bookings = await lastValueFrom(queryBookings({
         period_start: getUnixTime(Date.now()),
         period_end: getUnixTime(endOfDay(Date.now())),
         type
-      }).toPromise().catch((_) => []);
+      })).catch((_) => []);
       let item2 = bookings.find((_) => _.asset_id === asset_id);
       if (item2) {
         this._router.navigate(["/book", "code", "error"], {
@@ -10400,11 +10404,11 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
         });
         return;
       }
-      bookings = await queryBookings({
+      bookings = await lastValueFrom(queryBookings({
         period_start: getUnixTime(Date.now()),
         period_end: getUnixTime(addMinutes(Date.now(), 5)),
         type
-      }).toPromise().catch((_) => []);
+      })).catch((_) => []);
       item2 = bookings.find((_) => _.asset_id === asset_id);
       if (item2) {
         this._router.navigate(["/book", "code", "error"], {
@@ -10418,33 +10422,51 @@ var _BookCodeFlowComponent = class _BookCodeFlowComponent extends AsyncHandler {
       this._booking_form.newForm(type, new Booking({ asset_id, type }));
       this._booking_form.setOptions({ type });
     }
-    this.loading = false;
+    this.loading.set(false);
   }
   async _checkinEvent(space_id, email) {
     if (!email)
       email = currentUser().email;
-    this.loading = true;
-    const bookings = await queryEvents({
+    this.loading.set(true);
+    this._stopScanning();
+    const bookings = await lastValueFrom(queryEvents({
       period_start: getUnixTime(Date.now()),
       period_end: getUnixTime(Date.now() + 5 * 60 * 1e3)
-    }).toPromise().catch((_) => []);
+    })).catch((_) => []);
     const item = bookings.find((_) => _.resources.find((s) => s.id === space_id || s.email === space_id));
     if (item) {
-      await checkinEventGuest(item.id, email, true).toPromise().catch((_) => {
+      await lastValueFrom(checkinEventGuest(item.id, email, true)).catch((_) => {
         notifyError(`Unable to checkin event with resource "${space_id}"`);
-        this.loading = false;
+        this.loading.set(false);
         throw _;
       });
       this._router.navigate(["/book", "code", "success"]);
-      this.loading = false;
+      this.loading.set(false);
     } else {
-      const space = await cc(space_id).toPromise();
+      const space = await lastValueFrom(cc(space_id));
       if (space) {
         this._event_form.newForm(new CalendarEvent({ system: space }));
       }
       this._router.navigate(["/book", "meeting"]);
     }
-    this.loading = false;
+    this.loading.set(false);
+  }
+  _startScanning() {
+    if (!navigator.mediaDevices?.getUserMedia || this.loading())
+      return;
+    const video_el = this._video_el()?.nativeElement;
+    if (!video_el)
+      return this.timeout("retry_start_scan", () => this._startScanning());
+    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => video_el.srcObject = stream).catch((e2) => console.error("Unable to fetch media devices!", e2));
+    this._qr_scanner = new qr_scanner_min_default(this._video_el().nativeElement, (r) => this.handleQrCode(r));
+    this._qr_scanner.start();
+  }
+  _stopScanning() {
+    const video_el = this._video_el()?.nativeElement;
+    if (video_el?.srcObject) {
+      (video_el?.srcObject).getTracks().forEach((track) => track?.stop());
+    }
+    this._qr_scanner?.stop();
   }
 };
 _BookCodeFlowComponent.\u0275fac = /* @__PURE__ */ (() => {
@@ -10465,7 +10487,7 @@ _BookCodeFlowComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
     \u0275\u0275conditionalCreate(0, BookCodeFlowComponent_Conditional_0_Template, 16, 9, "div", 1)(1, BookCodeFlowComponent_Conditional_1_Template, 4, 1, "div", 2);
   }
   if (rf & 2) {
-    \u0275\u0275conditional(!ctx.loading ? 0 : 1);
+    \u0275\u0275conditional(!ctx.loading() ? 0 : 1);
   }
 }, dependencies: [MatRipple, MatInput, MatProgressSpinner, DefaultValueAccessor, NgControlStatus, NgModel], styles: ["\n\n[_nghost-%COMP%] {\n  position: relative;\n  width: 100%;\n  height: 100vh;\n  display: flex;\n  flex-direction: column;\n  background: #f0f0f0;\n}\n[box][_ngcontent-%COMP%] {\n  box-shadow: 0px 0px 0px 100vw rgba(0, 0, 0, 0.5);\n}\n[box][_ngcontent-%COMP%]    > *[_ngcontent-%COMP%] {\n  display: none;\n}\n[box].input[_ngcontent-%COMP%] {\n  width: 32rem !important;\n  max-width: calc(100% - 2rem) !important;\n  padding: 1rem !important;\n  height: 4rem !important;\n  color: black !important;\n  background: white;\n  box-shadow: 0px 0px 0px 100vw rgba(0, 0, 0, 0.8);\n}\n[box].input[_ngcontent-%COMP%]    > *[_ngcontent-%COMP%] {\n  display: initial;\n}\n[box][_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  font-family: var(--heading-font);\n  font-weight: 500;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n}\n/*# sourceMappingURL=code-flow.component.css.map */"] });
 var BookCodeFlowComponent = _BookCodeFlowComponent;
@@ -10473,7 +10495,7 @@ var BookCodeFlowComponent = _BookCodeFlowComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BookCodeFlowComponent, [{
     type: Component,
     args: [{ selector: "book-code-flow", template: `
-        @if (!loading) {
+        @if (!loading()) {
             <div
                 class="relative flex flex-1 items-center justify-center overflow-hidden bg-neutral"
             >
@@ -10485,7 +10507,7 @@ var BookCodeFlowComponent = _BookCodeFlowComponent;
                 <div
                     class="absolute inset-0 flex flex-col items-center justify-center text-center text-white"
                 >
-                    @if (is_scanning) {
+                    @if (is_scanning()) {
                         <div
                             class="relative z-10 flex flex-col items-center justify-end"
                         >
@@ -10495,12 +10517,12 @@ var BookCodeFlowComponent = _BookCodeFlowComponent;
                                 Scan QR Code
                             </h2>
                             <span class="mb-4">
-                                Scan the QR code outisde a PlaceOS room or
+                                Scan the QR code outside a PlaceOS room or
                                 space.
                             </span>
                         </div>
                     }
-                    @if (!is_scanning) {
+                    @if (!is_scanning()) {
                         <div
                             class="relative z-10 flex flex-col items-center justify-end"
                         >
@@ -10519,7 +10541,7 @@ var BookCodeFlowComponent = _BookCodeFlowComponent;
                         <div
                             box
                             class="m-8 flex h-64 w-64 items-center justify-center space-x-2 rounded-2xl p-8 transition-all"
-                            [class.input]="!is_scanning"
+                            [class.input]="!is_scanning()"
                         >
                             <span class="uppercase">Booking ID</span>
                             <input
@@ -10538,11 +10560,11 @@ var BookCodeFlowComponent = _BookCodeFlowComponent;
                             matRipple
                             [class]="
                                 'w-40 flex-1 border-none text-black ' +
-                                (is_scanning
+                                (is_scanning()
                                     ? 'bg-base-100'
                                     : 'bg-transparent bg-opacity-50 hover:bg-base-100')
                             "
-                            (click)="is_scanning = true"
+                            (click)="is_scanning.set(true)"
                         >
                             Scan Code
                         </button>
@@ -10550,11 +10572,11 @@ var BookCodeFlowComponent = _BookCodeFlowComponent;
                             matRipple
                             [class]="
                                 'w-40 flex-1 border-none text-black ' +
-                                (!is_scanning
+                                (!is_scanning()
                                     ? 'bg-base-100'
                                     : 'bg-transparent bg-opacity-50 hover:bg-base-100')
                             "
-                            (click)="is_scanning = false"
+                            (click)="is_scanning.set(false)"
                         >
                             Enter Code
                         </button>
@@ -10573,7 +10595,7 @@ var BookCodeFlowComponent = _BookCodeFlowComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookCodeFlowComponent, { className: "BookCodeFlowComponent", filePath: "apps/workplace/src/app/book/code-flow.component.ts", lineNumber: 179 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BookCodeFlowComponent, { className: "BookCodeFlowComponent", filePath: "apps/workplace/src/app/book/code-flow.component.ts", lineNumber: 182 });
 })();
 
 // apps/workplace/src/app/book/desk-flow/desk-flow-confirm.component.ts
@@ -12458,7 +12480,8 @@ var _NewDeskFlowComponent = class _NewDeskFlowComponent extends AsyncHandler {
           resources: [
             new Desk({
               id: asset.id,
-              name: asset.name || asset.id
+              name: asset.name || asset.id,
+              zone: asset.zone || this._org.levelsForBuilding()[0]
             })
           ]
         });
@@ -17063,8 +17086,8 @@ var _MeetingFlowSuccessComponent = class _MeetingFlowSuccessComponent {
     this._settings = inject(SettingsService);
     this._booking_form = inject(BookingFormService);
     this._router = inject(Router);
-    this.loading = false;
     this._space_pipe = new SpacePipe(this._org);
+    this.loading = signal(false);
   }
   get allow_desk_booking() {
     return this._settings.get("app.features").includes("desks");
@@ -17082,8 +17105,8 @@ var _MeetingFlowSuccessComponent = class _MeetingFlowSuccessComponent {
     return this._settings.time_format;
   }
   ngOnInit() {
-    this.loading = true;
-    setTimeout(() => this.loading = false, 500);
+    this.loading.set(true);
+    setTimeout(() => this.loading.set(false), 500);
   }
   startDeskBooking() {
     this._router.navigate(["/book", "desks", "form"]);
@@ -17137,7 +17160,7 @@ _MeetingFlowSuccessComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineCompo
   if (rf & 2) {
     \u0275\u0275storeLet(\u0275\u0275pureFunction4(11, _c024, (ctx.level == null ? null : ctx.level.display_name) || (ctx.level == null ? null : ctx.level.name), (ctx.space == null ? null : ctx.space.display_name) || (ctx.space == null ? null : ctx.space.name), \u0275\u0275pipeBind2(1, 1, ctx.last_event.date, "mediumDate"), \u0275\u0275pipeBind2(2, 4, ctx.last_event.date, ctx.time_format) + " \u2014 " + \u0275\u0275pipeBind2(3, 7, ctx.last_event.date_end, ctx.time_format)));
     \u0275\u0275advance(4);
-    \u0275\u0275conditional(!ctx.loading ? 4 : -1);
+    \u0275\u0275conditional(!ctx.loading() ? 4 : -1);
   }
 }, dependencies: [MatRipple, RouterLink, DatePipe, TranslatePipe], encapsulation: 2 });
 var MeetingFlowSuccessComponent = _MeetingFlowSuccessComponent;
@@ -17155,7 +17178,7 @@ var MeetingFlowSuccessComponent = _MeetingFlowSuccessComponent;
                     ' \u2014 ' +
                     (last_event.date_end | date: time_format),
             };
-        @if (!loading) {
+        @if (!loading()) {
             <div
                 class="absolute inset-0 z-50 flex flex-col overflow-auto bg-base-100"
             >
@@ -18768,4 +18791,4 @@ var BookModule = _BookModule;
 export {
   BookModule
 };
-//# sourceMappingURL=book.module-PITCRAPB.js.map
+//# sourceMappingURL=book.module-EXUZOV3C.js.map

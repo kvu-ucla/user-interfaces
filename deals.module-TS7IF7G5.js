@@ -72,7 +72,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-SMI3JQDD.js";
+} from "./chunk-7HU6ECV7.js";
 import "./chunk-KWSTWQNB.js";
 
 // apps/workplace/src/app/deals/deal-details-modal.component.ts
@@ -691,4 +691,4 @@ var DealsModule = _DealsModule;
 export {
   DealsModule
 };
-//# sourceMappingURL=deals.module-ILUC3NLR.js.map
+//# sourceMappingURL=deals.module-TS7IF7G5.js.map
