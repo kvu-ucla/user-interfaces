@@ -1,7 +1,7 @@
-import "./chunk-DS3L22F2.js";
+import "./chunk-CAACQPCW.js";
 import {
   ScheduleStateService
-} from "./chunk-7RZXJLHS.js";
+} from "./chunk-HDZTMXTD.js";
 import {
   AsyncHandler,
   AsyncPipe,
@@ -131,7 +131,7 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵviewQuerySignal
-} from "./chunk-W5ZSL5WJ.js";
+} from "./chunk-TO2FZ3EQ.js";
 import {
   __spreadProps,
   __spreadValues
@@ -999,7 +999,9 @@ var _LandingColleaguesComponent = class _LandingColleaguesComponent extends Asyn
   }
   newMeeting(user) {
     this._event_form.newForm();
-    this._event_form.form.patchValue({ attendees: [user] });
+    setTimeout(() => {
+      this._event_form.form.patchValue({ attendees: [user] });
+    }, 300);
     if (this._settings.get("app.new_features")) {
       this._router.navigate(["/book", "meeting"]);
     } else {
@@ -2663,4 +2665,4 @@ var AppLandingModule = _AppLandingModule;
 export {
   AppLandingModule
 };
-//# sourceMappingURL=landing.module-I7ZY3BV4.js.map
+//# sourceMappingURL=landing.module-DKR7BL6G.js.map
