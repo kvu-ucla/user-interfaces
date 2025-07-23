@@ -23,13 +23,13 @@ import {
   setHours,
   showStaff,
   validateAssetRequestsForResource
-} from "./chunk-4D5JR2QI.js";
+} from "./chunk-SK5ZSTXT.js";
 import {
   generateQRCode,
   querySpaceAvailability,
   removeEvent,
   saveEvent
-} from "./chunk-Q2POTBSI.js";
+} from "./chunk-G5WFAAI3.js";
 import {
   A11yModule,
   ANIMATION_SHOW_CONTRACT_EXPAND,
@@ -97,6 +97,7 @@ import {
   MatRippleModule,
   MatSelect,
   MatSelectModule,
+  Mc,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   NavigationEnd,
@@ -304,7 +305,7 @@ import {
   ɵɵtwoWayProperty,
   ɵɵviewQuery,
   ɵɵviewQuerySignal
-} from "./chunk-UDKH2ZJM.js";
+} from "./chunk-PKDNA2WR.js";
 import {
   __spreadProps,
   __spreadValues
@@ -1466,7 +1467,7 @@ function DateFieldComponent_Conditional_3_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(1, 1, ctx_r0.date, ctx_r0.date_format), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(1, 1, ctx_r0.date(), ctx_r0.date_format), " ");
   }
 }
 function DateFieldComponent_Conditional_4_Template(rf, ctx) {
@@ -1551,7 +1552,7 @@ function DateFieldComponent_ng_template_11_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", ctx_r0.date || ctx_r0.now)("from", ctx_r0.from)("to", ctx_r0.until)("offset_weekday", ctx_r0.week_start());
+    \u0275\u0275property("ngModel", ctx_r0.date() || ctx_r0.now)("from", ctx_r0.from)("to", ctx_r0.until)("offset_weekday", ctx_r0.week_start());
   }
 }
 var TimezoneDiffRange;
@@ -1568,12 +1569,12 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
     return this.use_24hr() ? "HH : mm" : "h : mm a";
   }
   get start_of_day() {
-    const start = startOfDay(this.date).valueOf();
+    const start = startOfDay(this.date()).valueOf();
     const format2 = `MMM d, ${this.time_format}${this.range() === 1 ? " (z)" : ""}`;
     return this._date_pipe.transform(start, format2, this.tz);
   }
   get end_of_day() {
-    const end = endOfDay(this.date).valueOf();
+    const end = endOfDay(this.date()).valueOf();
     const format2 = `MMM d, ${this.time_format}${this.range() === 1 ? " (z)" : ""}`;
     return this._date_pipe.transform(end, format2, this.tz);
   }
@@ -1598,6 +1599,7 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
     this.short = input(false);
     this.timezone = input("");
     this.range = input(TimezoneDiffRange.Both);
+    this.date = signal(Date.now());
     this.now = Date.now();
     this._date_pipe = new DatePipe("en");
     this._local_tz = getTimezoneOffsetString(Intl.DateTimeFormat().resolvedOptions().timeZone);
@@ -1613,14 +1615,14 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
   }
   ngOnInit() {
     this._control = this._injector.get(NgControl);
-    this.date = Date.now();
+    this.date.set(Date.now());
   }
   /**
    * Update the form field value
    * @param new_value New value to set on the form field
    */
   setValue(new_value) {
-    const old_date = new Date(this.date);
+    const old_date = new Date(this.date() || Date.now());
     let new_date = set(new_value, {
       hours: old_date.getHours(),
       minutes: old_date.getMinutes()
@@ -1628,10 +1630,9 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
     if (new_date < this.from.valueOf()) {
       new_date = this.from.valueOf();
     }
-    this.date = new_date;
-    if (this._onChange) {
+    this.date.set(new_date);
+    if (this._onChange)
       this._onChange(new_date);
-    }
     this._tooltip()?.close();
   }
   /* istanbul ignore next */
@@ -1640,7 +1641,7 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
    * @param value The new value for the component
    */
   writeValue(value) {
-    this.date = value;
+    this.date.set(value);
     this._tooltip()?.close();
   }
   /* istanbul ignore next */
@@ -1700,7 +1701,7 @@ _DateFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ ty
     \u0275\u0275classProp("opacity-30", ctx.disabled());
     \u0275\u0275property("content", calendar_picker_r3)("disabled", ctx.disabled());
     \u0275\u0275advance(3);
-    \u0275\u0275conditional(ctx.date ? 3 : 4);
+    \u0275\u0275conditional(ctx.date() ? 3 : 4);
     \u0275\u0275advance(2);
     \u0275\u0275conditional(ctx.timezone() && ctx.tz ? 5 : -1);
     \u0275\u0275advance(5);
@@ -1735,8 +1736,8 @@ var DateFieldComponent = _DateFieldComponent;
                 class="flex w-1/2 flex-1 flex-col truncate px-4 py-2 text-left leading-tight"
             >
                 <div class="text-base font-normal">
-                    @if (date) {
-                        {{ date | date: date_format }}
+                    @if (date()) {
+                        {{ date() | date: date_format }}
                     } @else {
                         <span class="opacity-30">{{
                             'FORM.DATE_EMPTY' | translate
@@ -1769,7 +1770,7 @@ var DateFieldComponent = _DateFieldComponent;
         <ng-template #calendar_picker>
             <div class="relative w-[18rem] rounded bg-base-100 px-2 py-4">
                 <date-calendar
-                    [ngModel]="date || now"
+                    [ngModel]="date() || now"
                     [from]="from"
                     [to]="until"
                     [offset_weekday]="week_start()"
@@ -1794,7 +1795,7 @@ var DateFieldComponent = _DateFieldComponent;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateFieldComponent, { className: "DateFieldComponent", filePath: "libs/form-fields/src/lib/date-field.component.ts", lineNumber: 114 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateFieldComponent, { className: "DateFieldComponent", filePath: "libs/form-fields/src/lib/date-field.component.ts", lineNumber: 115 });
 })();
 
 // libs/form-fields/src/lib/duration-field.component.ts
@@ -2552,10 +2553,10 @@ var TimeFieldComponent = _TimeFieldComponent;
 var _c06 = () => ({ standalone: true });
 function SetDatetimeModalComponent_Conditional_6_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 5)(1, "div", 11)(2, "label");
+    \u0275\u0275elementStart(0, "div", 6)(1, "div", 12)(2, "label");
     \u0275\u0275text(3, "Resource:");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 12);
+    \u0275\u0275elementStart(4, "div", 13);
     \u0275\u0275text(5);
     \u0275\u0275elementEnd()()();
   }
@@ -2567,39 +2568,39 @@ function SetDatetimeModalComponent_Conditional_6_Conditional_1_Template(rf, ctx)
 }
 function SetDatetimeModalComponent_Conditional_6_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 5)(1, "div", 6)(2, "label");
+    \u0275\u0275elementStart(0, "div", 6)(1, "div", 7)(2, "label");
     \u0275\u0275text(3, "Host");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(4, "a-user-search-field", 13);
+    \u0275\u0275element(4, "a-user-search-field", 14);
     \u0275\u0275elementEnd()();
   }
 }
 function SetDatetimeModalComponent_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "main", 2);
-    \u0275\u0275conditionalCreate(1, SetDatetimeModalComponent_Conditional_6_Conditional_1_Template, 6, 1, "div", 5);
-    \u0275\u0275conditionalCreate(2, SetDatetimeModalComponent_Conditional_6_Conditional_2_Template, 5, 0, "div", 5);
-    \u0275\u0275elementStart(3, "div", 5)(4, "div", 6)(5, "label");
+    \u0275\u0275elementStart(0, "main", 3);
+    \u0275\u0275conditionalCreate(1, SetDatetimeModalComponent_Conditional_6_Conditional_1_Template, 6, 1, "div", 6);
+    \u0275\u0275conditionalCreate(2, SetDatetimeModalComponent_Conditional_6_Conditional_2_Template, 5, 0, "div", 6);
+    \u0275\u0275elementStart(3, "div", 6)(4, "div", 7)(5, "label");
     \u0275\u0275text(6, "Date");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "a-date-field", 7);
+    \u0275\u0275elementStart(7, "a-date-field", 8);
     \u0275\u0275text(8, " Date and time must be in the future ");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(9, "div", 5)(10, "div", 8)(11, "label");
+    \u0275\u0275elementStart(9, "div", 6)(10, "div", 9)(11, "label");
     \u0275\u0275text(12, "Start Time");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "a-time-field", 9);
+    \u0275\u0275elementStart(13, "a-time-field", 10);
     \u0275\u0275listener("ngModelChange", function SetDatetimeModalComponent_Conditional_6_Template_a_time_field_ngModelChange_13_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.form.patchValue({ date: $event }));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(14, "div", 8)(15, "label");
+    \u0275\u0275elementStart(14, "div", 9)(15, "label");
     \u0275\u0275text(16, "End Time");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(17, "a-duration-field", 10);
+    \u0275\u0275element(17, "a-duration-field", 11);
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
@@ -2638,16 +2639,16 @@ var _SetDatetimeModalComponent = class _SetDatetimeModalComponent {
 _SetDatetimeModalComponent.\u0275fac = function SetDatetimeModalComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _SetDatetimeModalComponent)();
 };
-_SetDatetimeModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SetDatetimeModalComponent, selectors: [["set-datetime-modal"]], decls: 11, vars: 5, consts: [["classs", "flex items-center justify-between"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "w-[24rem]", "max-w-[85vw]", "pt-4", 3, "formGroup"], [1, "flex", "w-full", "items-center", "justify-center", "border-t", "border-base-200", "p-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "mat-dialog-close"], [1, "mx-auto", "flex", "w-[640px]", "max-w-[calc(100%-2rem)]", "flex-col", "space-x-0", "sm:flex-row", "sm:space-x-2"], [1, "flex", "w-full", "flex-1", "flex-col", "sm:w-1/4"], ["formControlName", "date", 3, "to"], [1, "flex", "w-full", "flex-1", "flex-col", "sm:w-1/3"], [3, "ngModelChange", "ngModel", "ngModelOptions", "use_24hr"], ["formControlName", "duration", 3, "time", "max", "min", "step", "use_24hr"], [1, "mb-2", "flex", "w-full", "flex-1", "flex-col", "sm:w-1/4"], [1, "mb-4", "w-full", "rounded", "border", "border-base-200", "px-4", "py-3"], ["formControlName", "user", 1, "mb-4"]], template: function SetDatetimeModalComponent_Template(rf, ctx) {
+_SetDatetimeModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SetDatetimeModalComponent, selectors: [["set-datetime-modal"]], decls: 11, vars: 5, consts: [[1, "m-2", "flex", "h-14", "w-[calc(100%-1rem)]", "items-center", "justify-between", "rounded", "border-none", "bg-base-200", "p-2"], [1, "px-2", "text-xl", "font-medium"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "w-[24rem]", "max-w-[85vw]", 3, "formGroup"], [1, "mx-2", "mb-2", "flex", "w-[calc(100%-1rem)]", "items-center", "justify-end", "rounded", "border-none", "bg-base-200", "p-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "mat-dialog-close"], [1, "mx-auto", "flex", "w-[640px]", "max-w-[calc(100%-2rem)]", "flex-col", "space-x-0", "sm:flex-row", "sm:space-x-2"], [1, "flex", "w-full", "flex-1", "flex-col", "sm:w-1/4"], ["formControlName", "date", 3, "to"], [1, "flex", "w-full", "flex-1", "flex-col", "sm:w-1/3"], [3, "ngModelChange", "ngModel", "ngModelOptions", "use_24hr"], ["formControlName", "duration", 3, "time", "max", "min", "step", "use_24hr"], [1, "mb-2", "flex", "w-full", "flex-1", "flex-col", "sm:w-1/4"], [1, "mb-4", "w-full", "rounded", "border", "border-base-200", "px-4", "py-3"], ["formControlName", "user", 1, "mb-4"]], template: function SetDatetimeModalComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "header", 0)(1, "h2");
+    \u0275\u0275elementStart(0, "header", 0)(1, "h2", 1);
     \u0275\u0275text(2, "Set date and time");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "button", 1)(4, "icon");
+    \u0275\u0275elementStart(3, "button", 2)(4, "icon");
     \u0275\u0275text(5, "close");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275conditionalCreate(6, SetDatetimeModalComponent_Conditional_6_Template, 18, 13, "main", 2);
-    \u0275\u0275elementStart(7, "footer", 3)(8, "button", 4);
+    \u0275\u0275conditionalCreate(6, SetDatetimeModalComponent_Conditional_6_Template, 18, 13, "main", 3);
+    \u0275\u0275elementStart(7, "footer", 4)(8, "button", 5);
     \u0275\u0275text(9);
     \u0275\u0275pipe(10, "translate");
     \u0275\u0275elementEnd()();
@@ -2684,14 +2685,16 @@ var SetDatetimeModalComponent = _SetDatetimeModalComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SetDatetimeModalComponent, [{
     type: Component,
     args: [{ selector: "set-datetime-modal", template: `
-        <header classs="flex items-center justify-between">
-            <h2>Set date and time</h2>
+        <header
+            class="m-2 flex h-14 w-[calc(100%-1rem)] items-center justify-between rounded border-none bg-base-200 p-2"
+        >
+            <h2 class="px-2 text-xl font-medium">Set date and time</h2>
             <button icon matRipple mat-dialog-close>
                 <icon>close</icon>
             </button>
         </header>
         @if (form) {
-            <main [formGroup]="form" class="w-[24rem] max-w-[85vw] pt-4">
+            <main [formGroup]="form" class="w-[24rem] max-w-[85vw]">
                 @if (resource) {
                     <div
                         class="mx-auto flex w-[640px] max-w-[calc(100%-2rem)] flex-col space-x-0 sm:flex-row sm:space-x-2"
@@ -2761,7 +2764,7 @@ var SetDatetimeModalComponent = _SetDatetimeModalComponent;
             </main>
         }
         <footer
-            class="flex w-full items-center justify-center border-t border-base-200 p-2"
+            class="mx-2 mb-2 flex w-[calc(100%-1rem)] items-center justify-end rounded border-none bg-base-200 p-2"
         >
             <button btn matRipple [mat-dialog-close]="form.value" class="w-32">
                 {{ 'COMMON.CONTINUE' | translate }}
@@ -2782,7 +2785,7 @@ var SetDatetimeModalComponent = _SetDatetimeModalComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SetDatetimeModalComponent, { className: "SetDatetimeModalComponent", filePath: "libs/explore/src/lib/set-datetime-modal.component.ts", lineNumber: 121 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SetDatetimeModalComponent, { className: "SetDatetimeModalComponent", filePath: "libs/explore/src/lib/set-datetime-modal.component.ts", lineNumber: 124 });
 })();
 
 // libs/explore/src/lib/explore-desk-info.component.ts
@@ -3906,7 +3909,10 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     const has_time_changed = !event.id || event.date !== this.form.value.date || event.duration !== this.form.value.duration;
     if (spaces.length && has_time_changed) {
       const space_list2 = await Promise.all(changed_spaces.map((_) => this._space_pipe.transform(_.email)));
-      await this._checkResourcesAvailable(space_list2, this.form.value.all_day ? startOfDay(this.form.value.date).valueOf() : this.form.value.date, this.form.value.all_day ? Math.max(24 * 60, this.form.value.duration) : this.form.value.duration, event.ical_uid || event.id || "").catch(on_error);
+      const date = this.form.value.all_day ? startOfDay(this.form.value.date).valueOf() : this.form.value.date;
+      const duration = this.form.value.all_day ? Math.max(24 * 60, this.form.value.duration) : this.form.value.duration;
+      await this._checkResourcesAvailable(space_list2, date, duration, event.ical_uid || event.id || "").catch(on_error);
+      await this._checkResourceRules(space_list2, date, duration, this._host(this.form.value.host, spaces[0]?.email)).catch(on_error);
     } else if (!space_list.length && this.lone_space) {
       spaces = [await this._space_pipe.transform(this.lone_space)];
       this.form.patchValue({ resources: spaces });
@@ -4009,6 +4015,25 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     }
     return true;
   }
+  async _checkResourceRules(spaces, date, duration, host) {
+    const user = await lastValueFrom(Mc(host)).catch(() => ({
+      email: host
+    }));
+    const rules = await nextValueFrom(this.booking_rules$);
+    const space_rules = spaces.map((space) => {
+      const bld = this._org.buildings.find((b) => space.zones.includes(b.id));
+      return rulesForResource({
+        date,
+        duration,
+        host: new User(user),
+        resource: space
+      }, rules[bld.id]);
+    });
+    if (!space_rules.every((_) => !_.hidden)) {
+      throw i18n("CALENDAR_EVENT.SPACE_BOOKING_RULES_HIDDEN", void 0, spaces.length);
+    }
+    return true;
+  }
   async _performBooking(event, query) {
     this._updateVisitorList(event.attendees);
     const old_system = event.old_system?.id || event.old_system?.email || event.resources[0]?.email;
@@ -4016,16 +4041,16 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     if (old_system !== system_id) {
       event.attendees = event.attendees.filter((_) => _.email !== old_system || _.id !== old_system);
     }
-    return (this.book_internal ? saveBooking(newBookingFromCalendarEvent(__spreadProps(__spreadValues({}, event.toJSON()), {
+    return lastValueFrom(this.book_internal ? saveBooking(newBookingFromCalendarEvent(__spreadProps(__spreadValues({}, event.toJSON()), {
       status: this._settings.get("app.bookings.no_approval") === true ? "approved" : "tentative"
-    }))).pipe(map((_) => newCalendarEventFromBooking(_))) : saveEvent(event, query))?.toPromise();
+    }))).pipe(map((_) => newCalendarEventFromBooking(_))) : saveEvent(event, query));
   }
   async _removeBookingAfterError(is_new, event, assets = false, e) {
     if (is_new) {
-      await removeEvent(event.id, event.resources.length ? {
+      await lastValueFrom(removeEvent(event.id, event.resources.length ? {
         calendar: this.form.value.host || currentUser()?.email,
         system_id: event.resources[0].id
-      } : {})?.toPromise();
+      } : {}));
       throw e?.status === 409 ? i18n("CALENDAR_EVENT.ASSETS_CLASH_ERROR") : i18n("CALENDAR_EVENT.ASSETS_ERROR");
     } else if (assets) {
       throw i18n("CALENDAR_EVENT.ASSETS_PARTIAL_ERROR", {
@@ -5889,13 +5914,28 @@ function MapRendererComponent_Conditional_2_Conditional_0_Template(rf, ctx) {
     \u0275\u0275property("diameter", 48);
   }
 }
+function MapRendererComponent_Conditional_2_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 3)(1, "div", 6);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "EXPLORE.MAP_FAILED_TO_LOAD"), " ");
+  }
+}
 function MapRendererComponent_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, MapRendererComponent_Conditional_2_Conditional_0_Template, 1, 1, "mat-spinner", 5);
+    \u0275\u0275conditionalCreate(1, MapRendererComponent_Conditional_2_Conditional_1_Template, 4, 3, "div", 3);
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275conditional(!ctx_r0.viewer || ctx_r0.loading ? 0 : -1);
+    \u0275\u0275conditional(!ctx_r0.viewer || ctx_r0.loading() ? 0 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx_r0.viewer === "~empty~" ? 1 : -1);
   }
 }
 function MapRendererComponent_Conditional_3_Template(rf, ctx) {
@@ -5922,9 +5962,9 @@ function MapRendererComponent_Conditional_4_For_2_Conditional_0_Case_3_Template(
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     const element_r3 = ctx_r1.$implicit;
-    const \u0275$index_17_r4 = ctx_r1.$index;
+    const \u0275$index_24_r4 = ctx_r1.$index;
     const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngComponentOutlet", element_r3.content)("ngComponentOutletInjector", ctx_r0.injectors[\u0275$index_17_r4]);
+    \u0275\u0275property("ngComponentOutlet", element_r3.content)("ngComponentOutletInjector", ctx_r0.injectors[\u0275$index_24_r4]);
   }
 }
 function MapRendererComponent_Conditional_4_For_2_Conditional_0_Case_4_Template(rf, ctx) {
@@ -6003,10 +6043,10 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
   constructor() {
     super();
     this._injector = inject(Injector);
-    this.src = input(void 0);
-    this.styles = input(void 0);
     this.zoom = model(1);
     this.center = model({ x: 0.5, y: 0.5 });
+    this.src = input(void 0);
+    this.styles = input(void 0);
     this.features = input(void 0);
     this.labels = input(void 0);
     this.actions = input(void 0);
@@ -6016,6 +6056,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
     this.zoomChange = output();
     this.centerChange = output();
     this.mapInfo = output();
+    this.loading = signal(false);
     this.injectors = [];
     this.feature_list = [];
     this._on_changes = new BehaviorSubject(null);
@@ -6032,13 +6073,16 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
     Dn();
   }
   ngOnDestroy() {
-    if (this.viewer) {
+    if (this.viewer)
       Hn(this.viewer);
-    }
   }
   ngOnChanges(changes) {
     if (changes.src && this.src()) {
-      this.createView().catch((e) => console.warn(e));
+      this.createView().catch((e) => {
+        console.warn(e);
+        this.loading.set(false);
+        this.viewer = "~empty~";
+      });
     }
     if (changes.features) {
       this.updateInjectors();
@@ -6061,12 +6105,16 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
     }
   }
   ngAfterViewInit() {
-    this.createView().catch((e) => console.warn(e));
+    this.createView().catch((e) => {
+      console.warn(e);
+      this.loading.set(false);
+      this.viewer = "~empty~";
+    });
   }
   /** Update overlays, styles and actions of viewer */
   updateView() {
     try {
-      if (!$(this.viewer) || this.loading) {
+      if (!$(this.viewer) || this.loading()) {
         return this.timeout("update_view", () => this.updateView());
       }
       this.updateFeatureList();
@@ -6106,8 +6154,8 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
       return;
     const _outlet_el = this._outlet_el();
     const src = this.src();
-    if (src && _outlet_el?.nativeElement && !this.loading) {
-      this.loading = true;
+    if (src && _outlet_el?.nativeElement && !this.loading()) {
+      this.loading.set(true);
       const styles = this.styles();
       const labels = this.labels();
       const actions = this.actions();
@@ -6141,14 +6189,12 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         labels,
         actions,
         options
-      }).catch((e) => {
-        console.warn(e);
-        return "";
-      });
-      this.loading = false;
-      if (!this.viewer)
+      }).catch((e) => "");
+      this.loading.set(false);
+      if (!this.viewer) {
+        this.viewer = "~empty~";
         return;
-      this.loading = false;
+      }
       this.subscription("view_changes", gn(this.viewer)?.subscribe((v) => {
         this._on_changes.next(__spreadValues({}, v));
         this.zoomChange.emit(v.zoom);
@@ -6161,7 +6207,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
       const focus = this.focus();
       if (focus)
         this.focusOn(focus);
-    } else if (src && !_outlet_el?.nativeElement || this.loading) {
+    } else if (src && !_outlet_el?.nativeElement || this.loading()) {
       this.timeout("create_view", () => this.createView().catch((e) => console.warn(e)));
     }
   }
@@ -6218,10 +6264,10 @@ _MapRendererComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ 
       return ctx.onResize();
     }, \u0275\u0275resolveWindow);
   }
-}, inputs: { src: [1, "src"], styles: [1, "styles"], zoom: [1, "zoom"], center: [1, "center"], features: [1, "features"], labels: [1, "labels"], actions: [1, "actions"], reset: [1, "reset"], options: [1, "options"], focus: [1, "focus"] }, outputs: { zoom: "zoomChange", center: "centerChange", zoomChange: "zoomChange", centerChange: "centerChange", mapInfo: "mapInfo" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 5, vars: 4, consts: [["outlet", ""], ["feature", ""], ["tabindex", "0", "role", "map", 1, "absolute", "inset-0"], [1, "absolute", "inset-0", "flex", "items-center", "justify-center"], ["hidden", ""], [1, "absolute", 3, "diameter"], [1, "opacity-30"], [1, "pointer-events-none"], [3, "innerHTML"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function MapRendererComponent_Template(rf, ctx) {
+}, inputs: { zoom: [1, "zoom"], center: [1, "center"], src: [1, "src"], styles: [1, "styles"], features: [1, "features"], labels: [1, "labels"], actions: [1, "actions"], reset: [1, "reset"], options: [1, "options"], focus: [1, "focus"] }, outputs: { zoom: "zoomChange", center: "centerChange", zoomChange: "zoomChange", centerChange: "centerChange", mapInfo: "mapInfo" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 5, vars: 4, consts: [["outlet", ""], ["feature", ""], ["tabindex", "0", "role", "map", 1, "absolute", "inset-0"], [1, "absolute", "inset-0", "flex", "items-center", "justify-center"], ["hidden", ""], [1, "absolute", 3, "diameter"], [1, "opacity-30"], [1, "pointer-events-none"], [3, "innerHTML"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function MapRendererComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "div", 2, 0);
-    \u0275\u0275conditionalCreate(2, MapRendererComponent_Conditional_2_Template, 1, 1)(3, MapRendererComponent_Conditional_3_Template, 4, 3, "div", 3);
+    \u0275\u0275conditionalCreate(2, MapRendererComponent_Conditional_2_Template, 2, 2)(3, MapRendererComponent_Conditional_3_Template, 4, 3, "div", 3);
     \u0275\u0275conditionalCreate(4, MapRendererComponent_Conditional_4_Template, 3, 0, "div", 4);
   }
   if (rf & 2) {
@@ -6245,8 +6291,15 @@ var MapRendererComponent = _MapRendererComponent;
             [class.hidden]="!src()"
         ></div>
         @if (src()) {
-            @if (!viewer || loading) {
+            @if (!viewer || loading()) {
                 <mat-spinner class="absolute" [diameter]="48" />
+            }
+            @if (viewer === '~empty~') {
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="opacity-30">
+                        {{ 'EXPLORE.MAP_FAILED_TO_LOAD' | translate }}
+                    </div>
+                </div>
             }
         } @else {
             <div class="absolute inset-0 flex items-center justify-center">
@@ -6310,7 +6363,7 @@ var MapRendererComponent = _MapRendererComponent;
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MapRendererComponent, { className: "MapRendererComponent", filePath: "libs/components/src/lib/map-renderer.component.ts", lineNumber: 134 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MapRendererComponent, { className: "MapRendererComponent", filePath: "libs/components/src/lib/map-renderer.component.ts", lineNumber: 142 });
 })();
 
 // libs/components/src/lib/maps-indoors.component.ts
@@ -8793,9 +8846,10 @@ var _ExploreMapViewComponent = class _ExploreMapViewComponent extends AsyncHandl
     if (!locations?.length)
       throw i18n("EXPLORE.LOCATE_USER_NOT_FOUND");
     let loc = locations.find(({ position }) => typeof position !== "string" || position in this.map_info);
-    if (!loc) {
+    if (!loc)
       loc = locations[0];
-      notifyWarn(i18n(`EXPLORE.LOCATE_USER_FOUND_NO_PIN`));
+    if (typeof loc.position !== "string") {
+      notifyWarn(i18n(`EXPLORE.LOCATE_USER_FOUND_NO_PIN`, { type: loc.type }));
     }
     this._state.setLevel(this._org.levelWithID([locations[0]?.level])?.id);
     const pos = loc.position;
@@ -9018,7 +9072,7 @@ var _ExploreSearchService = class _ExploreSearchService {
     this._poi_list = combineLatest([
       this._org.active_building,
       this._poi_metadata
-    ]).pipe(filter(([bld]) => !!bld.id), map(([bld, metadata]) => {
+    ]).pipe(filter(([bld]) => !!bld?.id), map(([bld, metadata]) => {
       const mapping = metadata.details || {};
       const levels = this._org.levelsForBuilding(bld);
       const list = flatten(levels.map((lvl) => mapping[lvl.id] || []));
@@ -11578,4 +11632,4 @@ var AppExploreModule = _AppExploreModule;
 export {
   AppExploreModule
 };
-//# sourceMappingURL=explore.module-7JNWTILJ.js.map
+//# sourceMappingURL=explore.module-G3CAL7ZP.js.map

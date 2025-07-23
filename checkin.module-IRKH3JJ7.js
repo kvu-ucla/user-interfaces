@@ -1,13 +1,11 @@
 import {
-  CheckinStateService,
-  MatCheckbox,
-  MatCheckboxModule
-} from "./chunk-ITO5N5W7.js";
+  CheckinStateService
+} from "./chunk-2I4GN7JR.js";
 import {
   generateQRCode,
   showEventMetadata,
   updateEventMetadata
-} from "./chunk-Q2POTBSI.js";
+} from "./chunk-G5WFAAI3.js";
 import {
   ActivatedRoute,
   AsyncHandler,
@@ -26,6 +24,8 @@ import {
   FormGroupDirective,
   FormsModule,
   IconComponent,
+  MatCheckbox,
+  MatCheckboxModule,
   MatError,
   MatFormField,
   MatFormFieldModule,
@@ -140,7 +140,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuerySignal
-} from "./chunk-UDKH2ZJM.js";
+} from "./chunk-PKDNA2WR.js";
 import {
   __spreadProps,
   __spreadValues
@@ -228,8 +228,8 @@ var _TakePhotoComponent = class _TakePhotoComponent extends AsyncHandler {
     this.back_text = input("");
     this.captured = output();
     this.back = output();
-    this.has_photo = false;
-    this.loading = false;
+    this.has_photo = signal(false);
+    this.loading = signal(false);
     this._video_el = viewChild("video");
     this._canvas_el = viewChild("canvas");
     this.constraints = {
@@ -241,7 +241,7 @@ var _TakePhotoComponent = class _TakePhotoComponent extends AsyncHandler {
     this.image_url = null;
   }
   ngOnInit() {
-    this.loading = true;
+    this.loading.set(true);
     this.startCapture();
   }
   ngOnDestroy() {
@@ -251,7 +251,7 @@ var _TakePhotoComponent = class _TakePhotoComponent extends AsyncHandler {
     this.image_url = null;
     const stream = await navigator.mediaDevices?.getUserMedia(this.constraints);
     this._video_el().nativeElement.srcObject = stream;
-    this.loading = false;
+    this.loading.set(false);
   }
   stopCapture() {
     const el = this._video_el().nativeElement;
@@ -263,7 +263,7 @@ var _TakePhotoComponent = class _TakePhotoComponent extends AsyncHandler {
     }
   }
   takePhoto() {
-    this.loading = true;
+    this.loading.set(true);
     const canvas = this._canvas_el().nativeElement;
     const ctx = canvas.getContext("2d");
     const vid_el = this._video_el().nativeElement;
@@ -276,16 +276,16 @@ var _TakePhotoComponent = class _TakePhotoComponent extends AsyncHandler {
     const sx = (videoWidth - sw) / 2;
     const sy = (videoHeight - sh) / 2;
     ctx.drawImage(vid_el, sx, sy, sw, sh, 0, 0, cw, ch);
-    this.has_photo = true;
+    this.has_photo.set(true);
     this.stopCapture();
-    this.loading = false;
+    this.loading.set(false);
   }
   cancelPhoto() {
-    this.loading = true;
+    this.loading.set(true);
     const canvas = this._canvas_el().nativeElement;
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.has_photo = false;
+    this.has_photo.set(false);
     this.startCapture();
   }
   acceptPhoto() {
@@ -326,13 +326,13 @@ _TakePhotoComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ ty
   }
   if (rf & 2) {
     \u0275\u0275advance();
-    \u0275\u0275classProp("opacity-0", ctx.has_photo);
+    \u0275\u0275classProp("opacity-0", ctx.has_photo());
     \u0275\u0275advance(2);
-    \u0275\u0275classProp("opacity-0", !ctx.has_photo);
+    \u0275\u0275classProp("opacity-0", !ctx.has_photo());
     \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx.loading ? 5 : -1);
+    \u0275\u0275conditional(ctx.loading() ? 5 : -1);
     \u0275\u0275advance(2);
-    \u0275\u0275conditional(!ctx.has_photo ? 7 : 8);
+    \u0275\u0275conditional(!ctx.has_photo() ? 7 : 8);
   }
 }, dependencies: [MatProgressSpinner, MatRipple, TranslatePipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n[name=camera][_ngcontent-%COMP%] {\n  width: 22.5rem;\n  height: 25rem;\n}\nbutton[_ngcontent-%COMP%] {\n  width: 8rem;\n}\n/*# sourceMappingURL=take-photo.component.css.map */"] });
 var TakePhotoComponent = _TakePhotoComponent;
@@ -348,7 +348,7 @@ var TakePhotoComponent = _TakePhotoComponent;
                 id="video"
                 #video
                 autoplay
-                [class.opacity-0]="has_photo"
+                [class.opacity-0]="has_photo()"
                 class="absolute left-1/2 top-1/2 mx-auto min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 object-cover"
             ></video>
             <canvas
@@ -357,9 +357,9 @@ var TakePhotoComponent = _TakePhotoComponent;
                 width="400"
                 height="400"
                 class="absolute left-1/2 top-1/2 mx-auto h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover"
-                [class.opacity-0]="!has_photo"
+                [class.opacity-0]="!has_photo()"
             ></canvas>
-            @if (loading) {
+            @if (loading()) {
                 <div
                     class="absolute inset-0 flex flex-col items-center justify-center space-y-4"
                 >
@@ -371,7 +371,7 @@ var TakePhotoComponent = _TakePhotoComponent;
             }
         </div>
         <div class="mt-4 flex w-full items-center justify-center space-x-2">
-            @if (!has_photo) {
+            @if (!has_photo()) {
                 <button
                     class="inverse flex-1"
                     btn
@@ -406,7 +406,7 @@ var TakePhotoComponent = _TakePhotoComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TakePhotoComponent, { className: "TakePhotoComponent", filePath: "apps/visitor-kiosk/src/app/components/take-photo.component.ts", lineNumber: 98 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(TakePhotoComponent, { className: "TakePhotoComponent", filePath: "apps/visitor-kiosk/src/app/components/take-photo.component.ts", lineNumber: 99 });
 })();
 
 // apps/visitor-kiosk/src/app/checkin/checkin-covid.component.ts
@@ -2833,11 +2833,11 @@ function CheckinResultsComponent_Conditional_0_Template(rf, ctx) {
     \u0275\u0275advance(3);
     \u0275\u0275storeLet(\u0275\u0275pipeBind1(10, 15, ctx_r2.event));
     \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx_r2.printing ? 11 : -1);
+    \u0275\u0275conditional(ctx_r2.printing() ? 11 : -1);
     \u0275\u0275advance(2);
     \u0275\u0275conditional(ctx_r2.allow_printing_label ? 13 : -1);
     \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r2.allow_beverages ? 14 : -1);
+    \u0275\u0275conditional(ctx_r2.allow_beverages() ? 14 : -1);
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(17, 18, "APP.VISITOR_KIOSK.CONFIRM"), " ");
   }
@@ -2860,8 +2860,8 @@ var _CheckinResultsComponent = class _CheckinResultsComponent extends AsyncHandl
     this.qr_code = "";
     this.date = Date.now();
     this.zones = [];
-    this.allow_beverages = false;
-    this.printing = false;
+    this.allow_beverages = signal(false);
+    this.printing = signal(false);
     this.event = this._checkin.event;
     this.guest = this._checkin.guest;
     this.photo = this._checkin.photo;
@@ -2885,7 +2885,7 @@ var _CheckinResultsComponent = class _CheckinResultsComponent extends AsyncHandl
       return updated_template;
     }), startWith(DEFAULT_TEMPLATE));
     this.print = () => {
-      this.printing = true;
+      this.printing.set(true);
       this.qr_code = generateQRCode(this.e?.asset_id);
       this.timeout("print", () => window.print());
     };
@@ -2911,7 +2911,7 @@ var _CheckinResultsComponent = class _CheckinResultsComponent extends AsyncHandl
     this.zones = event.zones;
     this.e = event;
     const standalone_location = this._settings.get("app.standalone_visitor_location");
-    this.allow_beverages = this._settings.get("app.allow_beverages") && (event.linked_event || standalone_location);
+    this.allow_beverages.set(this._settings.get("app.allow_beverages") && (event.linked_event || standalone_location));
   }
   previous() {
     this._router.navigate(["/checkin"]);
@@ -2963,7 +2963,7 @@ var CheckinResultsComponent = _CheckinResultsComponent;
                     [innerHTML]="result_template | async | sanitize: 'html'"
                 ></div>
                 @let ev = event | async;
-                @if (printing) {
+                @if (printing()) {
                     <div printable class="print-only">
                         <user-label
                             [user]="{
@@ -2989,7 +2989,7 @@ var CheckinResultsComponent = _CheckinResultsComponent;
                             {{ 'APP.VISITOR_KIOSK.PRINT_LABEL' | translate }}
                         </button>
                     }
-                    @if (allow_beverages) {
+                    @if (allow_beverages()) {
                         <button
                             btn
                             matRipple
@@ -3294,4 +3294,4 @@ var VisitorCheckinModule = _VisitorCheckinModule;
 export {
   VisitorCheckinModule
 };
-//# sourceMappingURL=checkin.module-I5VIIOWB.js.map
+//# sourceMappingURL=checkin.module-IRKH3JJ7.js.map

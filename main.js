@@ -5,11 +5,10 @@ import {
   VirtualKeyboardComponent,
   generateMockSpace,
   setHours
-} from "./chunk-4D5JR2QI.js";
+} from "./chunk-SK5ZSTXT.js";
 import {
-  CheckinStateService,
-  MatCheckboxModule
-} from "./chunk-ITO5N5W7.js";
+  CheckinStateService
+} from "./chunk-2I4GN7JR.js";
 import {
   $s,
   ANIMATION_MODULE_TYPE,
@@ -59,6 +58,7 @@ import {
   LiveAnnouncer,
   LocaleService,
   MapsPeopleService,
+  MatCheckboxModule,
   MatCommonModule,
   MatError,
   MatFormField,
@@ -252,7 +252,7 @@ import {
   ɵɵtwoWayListener,
   ɵɵtwoWayProperty,
   ɵɵviewQuery
-} from "./chunk-UDKH2ZJM.js";
+} from "./chunk-PKDNA2WR.js";
 import {
   __export,
   __objRest,
@@ -27776,7 +27776,7 @@ var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler
     super(...arguments);
     this._org = inject(OrganisationService);
     this._settings = inject(SettingsService);
-    this.loading = signal(false);
+    this.loading = signal(true);
     this.online = signal(true);
   }
   async ngOnInit() {
@@ -27800,7 +27800,7 @@ _GlobalLoadingComponent.\u0275fac = /* @__PURE__ */ (() => {
     return (\u0275GlobalLoadingComponent_BaseFactory || (\u0275GlobalLoadingComponent_BaseFactory = \u0275\u0275getInheritedFactory(_GlobalLoadingComponent)))(__ngFactoryType__ || _GlobalLoadingComponent);
   };
 })();
-_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-50", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-40", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
+_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-[9999]", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-[9998]", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, GlobalLoadingComponent_Conditional_0_Template, 3, 3, "div", 0);
     \u0275\u0275conditionalCreate(1, GlobalLoadingComponent_Conditional_1_Template, 2, 1, "div", 1);
@@ -27827,7 +27827,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
     args: [{ selector: "global-loading", template: `
         @if (!online()) {
             <div
-                class="fixed bottom-2 left-1/2 z-50 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
+                class="fixed bottom-2 left-1/2 z-[9999] -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
             >
                 {{ 'COMMON.SERVER_DOWN' | translate }}
             </div>
@@ -27835,7 +27835,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
         @if (loading()) {
             <div
                 loader
-                class="pointer-events-auto fixed inset-0 z-40 flex items-center justify-center bg-base-100"
+                class="pointer-events-auto fixed inset-0 z-[9998] flex items-center justify-center bg-base-100"
             >
                 <mat-spinner [diameter]="64"></mat-spinner>
             </div>
@@ -27923,7 +27923,7 @@ _GlobalBannerComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
   if (rf & 2) {
     \u0275\u0275conditional(!\u0275\u0275pipeBind1(1, 1, ctx.has_been_closed) && \u0275\u0275pipeBind1(2, 3, ctx.banner) ? 0 : -1);
   }
-}, dependencies: [CommonModule, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
+}, dependencies: [CommonModule, AsyncPipe, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
 var GlobalBannerComponent = _GlobalBannerComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GlobalBannerComponent, [{
@@ -27951,11 +27951,11 @@ var GlobalBannerComponent = _GlobalBannerComponent;
                 </button>
             </div>
         }
-    `, imports: [CommonModule], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
+    `, imports: [CommonModule, IconComponent], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 50 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 51 });
 })();
 
 // libs/components/src/lib/app.component.ts
@@ -29835,11 +29835,11 @@ var routes = [
   { path: "register", component: VisitorRegistrationComponent },
   {
     path: "explore",
-    loadChildren: () => import("./explore.module-7JNWTILJ.js").then((m) => m.AppExploreModule)
+    loadChildren: () => import("./explore.module-G3CAL7ZP.js").then((m) => m.AppExploreModule)
   },
   {
     path: "checkin",
-    loadChildren: () => import("./checkin.module-I5VIIOWB.js").then((m) => m.VisitorCheckinModule)
+    loadChildren: () => import("./checkin.module-IRKH3JJ7.js").then((m) => m.VisitorCheckinModule)
   },
   { path: "**", redirectTo: "bootstrap" }
 ];
