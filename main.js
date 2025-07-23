@@ -67735,7 +67735,7 @@ var COMMON = {
   FAVOURITES: "Favourites",
   FAVOURITES_ONLY: "Favourites Only",
   FAVOURITES_ADD: "Add to favourites",
-  FAVOURITES_REMOVE: "Add to favourites",
+  FAVOURITES_REMOVE: "Remove from favourites",
   ACCESSIBLE_ONLY: "Accessible Only",
   LANGUAGE: "Language",
   LANGUAGE_SELECT: "Select a language",
@@ -67822,7 +67822,7 @@ var COMMON = {
   SUPPORT_HEADER: "Raise a support ticket",
   SUPPORT_LOCATION: "Location",
   SUPPORT_TYPE: "Issue Type",
-  SUPPORT_DESCRIPTION: " Issue Description",
+  SUPPORT_DESCRIPTION: "Issue Description",
   SUPPORT_DESCRIPTION_REQUIRED: " A description is required",
   SUPPORT_IMAGES: "Images",
   SUPPORT_LOADING: "Sending support ticket...",
@@ -67906,7 +67906,8 @@ var COMMON = {
   WFH: "Work from Home",
   AOL: "Away on Leave",
   END_OF_LIST: "End of list",
-  NO_DESCRIPTION: "No description"
+  NO_DESCRIPTION: "No description",
+  LOCATABLE: "Location tracking"
 };
 var LANGUAGE = {
   ENGLISH: "English",
@@ -67915,7 +67916,7 @@ var LANGUAGE = {
   FRENCH: "French",
   FRENCH_CA: "French (Canadian)",
   SPANISH: "Spanish",
-  PORTUGESE: "Portugese",
+  PORTUGUESE: "Portuguese",
   ITALIAN: "Italian",
   CHINESE: "Chinese",
   ARABIC: "Arabic",
@@ -68035,13 +68036,13 @@ var EXPLORE = {
   LOCATE_CURRENT_FAILED: "Failed to retrieve your current location.",
   LOCATE_USER_FAILED: 'Failed to locate user "{{ name }}".',
   LOCATE_USER_NOT_FOUND: "No location for the given user",
-  LOCATE_USER_FOUND_NO_PIN: "Unable to resolve user's exact location on this level",
+  LOCATE_USER_FOUND_NO_PIN: "User is on this level but with an inaccurate method. {{ type }}",
   LOCATE_USER_DETAILS_FAILED: 'Failed to find user details for "{{ name }}".',
   LOCATE_SPACE_DETAILS_FAILED: "Failed to find space details.",
-  LOCATE_SERVICE_UNAVAILABLE: "Location services is not setup for this application.",
+  LOCATE_SERVICE_UNAVAILABLE: "Location services is not set up for this application.",
   ZOOM_IN: "Zoom in",
   ZOOM_OUT: "Zoom out",
-  ZOOM_RESET: "Reset zoom & center",
+  ZOOM_RESET: "Reset zoom & centre",
   DEVICE_COUNT: "{{ count }} user device(s)",
   SENSORS_TEMP: "Temperature: {{ value }}",
   SENSORS_PEOPLE: "{{ count }} people",
@@ -68079,6 +68080,7 @@ var EXPLORE = {
   BOOK_RESOURCE: "Book - {{ name }}",
   MAPSINDOORS_INIT_FAILED: "Failed to initialise map view.",
   MAP_EMPTY: "No map is set to display",
+  MAP_FAILED_TO_LOAD: "Failed to load map",
   COORDINATES: "Coordinates",
   MAP_ID: "Map ID",
   MAP_ID_EMPTY: "No map ID",
@@ -68147,7 +68149,7 @@ var BOOKINGS = {
   LOADING_AVAILABILITY: "Checking {{ type }} availability...",
   CONFIRM_TITLE: "Book {{ type }}",
   CONFIRM_MSG: "Would you like to book the {{ type }} for {{ date }}?",
-  CONFIRM_MSG_GROUP: "Would you like to book the {{ type }} for {{ date }}? <br>You group members will be assigned desks nearby your selected desk.",
+  CONFIRM_MSG_GROUP: "Would you like to book the {{ type }} for {{ date }}? <br>Your group members will be assigned desks nearby your selected desk.",
   CONFIRM_LOADING: "Processing booking request...",
   ASSETS_CLASH_ERROR: "Some assets are already booked for the selected time",
   ASSETS_INVALID_ERROR: "Failed to validate asset requests",
@@ -68179,15 +68181,15 @@ var BOOKINGS = {
   DESK_AVAILABLE_ERROR: "Desk is unavailable at this time.",
   DESK_LIST_LOADING: "Finding available desks...",
   DESK_LIST_EMPTY: "No available desks for selected time and/or filters",
-  DESK_SELECT_MSG: "Select a desk to view it's details",
+  DESK_SELECT_MSG: "Select a desk to view its details",
   ITEM_BOOKED: "{{ name }} booked!",
-  DESK_SUCCESS_LONE: "You desk booking has been successfully booked for {{ date }} at {{ time }}",
-  DESK_SUCCESS_GROUP: "You group of {{ size }} desks have been successfully booked for {{ date }} at {{ time }}",
-  DESK_SUCCESS_LONE_ALLDAY: "You desk booking has been successfully booked for {{ date }}",
-  DESK_SUCCESS_GROUP_ALLDAY: "You group of {{ size }} desks have been successfully booked for {{ date }}",
+  DESK_SUCCESS_LONE: "Your desk booking has been successfully booked for {{ date }} at {{ time }}",
+  DESK_SUCCESS_GROUP: "Your group of {{ size }} desks have been successfully booked for {{ date }} at {{ time }}",
+  DESK_SUCCESS_LONE_ALLDAY: "Your desk booking has been successfully booked for {{ date }}",
+  DESK_SUCCESS_GROUP_ALLDAY: "Your group of {{ size }} desks have been successfully booked for {{ date }}",
   ASSETS_BOOKED: "Booking includes {{ count }} asset(s)",
-  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for you booking to be approved.",
-  LINK_HEADER: "Add to event to your calendar",
+  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for your booking to be approved.",
+  LINK_HEADER: "Add event to your calendar",
   LINK_OUTLOOK: "Add to Outlook",
   LINK_GOOGLE: "Add to Google Calendar",
   LINK_ICAL: "Download iCal File",
@@ -68214,7 +68216,7 @@ var BOOKINGS = {
   PARKING_PLATE_NUMBER_REQUIRED: "A plate number is required",
   PARKING_LIST_LOADING: "Finding available parking spaces...",
   PARKING_LIST_EMPTY: "No available parking spaces for selected time and/or filters",
-  PARKING_SELECT_MSG: "Select a parking space to view it's details",
+  PARKING_SELECT_MSG: "Select a parking space to view its details",
   VISITOR_INVITE_TITLE: "Invite Visitor",
   VISITOR_LIST: "Visitors",
   VISITOR_NAME: "Visitor Name",
@@ -68241,14 +68243,16 @@ var BOOKINGS = {
   ASSETS_ADD_HEADER: "Add Assets",
   ASSETS_ADD: "Add this Asset",
   ASSETS_REMOVE: "Remove this Asset",
-  ASSETS_SELECT: "Select an asset to view it's details",
+  ASSETS_SELECT: "Select an asset to view its details",
   ASSETS_SEARCH: "Search assets...",
   ASSETS_LOADING: "Finding assets...",
   ASSETS_EMPTY: "No available assets for selected time and/or filters",
   ASSETS_DELIVER_TOGGLE: "Exact Time",
   ASSETS_DELIVER_DATE: "Delivery Date",
   ASSETS_DELIVER_TIME: "Deliver After",
-  ASSETS_AVAILABLE: "{{ count }} available"
+  ASSETS_AVAILABLE: "{{ count }} available",
+  RULES_HIDDEN_1: "The selected {{ type }} is unavailable for the selected time or duration",
+  RULES_HIDDEN_N: "Some of the selected {{ type }}s are unavailable for the selected time or duration"
 };
 var CALENDAR_EVENT = {
   CATERING: "Catering",
@@ -68275,7 +68279,7 @@ var CALENDAR_EVENT = {
   ACTION_DELETE: "Delete event",
   ACTION_PRINT: "Print event",
   ACTION_DELETE_SERIES: "Delete series",
-  NO_LONG_EDIT_MSG: "Editing bookings long than \n a day is not available",
+  NO_LONG_EDIT_MSG: "Editing bookings longer than \n a day is not available",
   SPACE_LOADING: "Loading space list for location...",
   SPACE_STATUS_LOADING: "Updating available spaces...",
   SPACE_EXTERNALS_ERROR: "External attendees require a space to be booked",
@@ -68288,7 +68292,7 @@ var CALENDAR_EVENT = {
   CAPACITY_WARNING: "The selected room has less capacity than the number of meeting attendees.",
   CAPACITY_ERROR: "Attendee count is greater than the capacity of the selected rooms",
   CATERING_CHARGE_CODE: "Charge Code",
-  CATERING_CHARGE_CODE_SEACH: "Search for charge code...",
+  CATERING_CHARGE_CODE_SEARCH: "Search for charge code...",
   CATERING_CHARGE_CODE_REQUIRED: "Catering charge code is required",
   CATERING_NOTES: "Extra catering details. e.g. Dietary requirements etc.",
   CATERING_NOTES_REQUIRED: "Catering order notes are required",
@@ -68302,9 +68306,9 @@ var CALENDAR_EVENT = {
   SUCCESS: "Successfully created event",
   SUCCESS_WITH_SPACE: "You room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }} at {{ time }}",
   SUCCESS_WITHOUT_SPACE: "You meeting has been successfully booked for {{ date }} at {{ time }}",
-  SUCCESS_WITH_SPACE_ALLDAY: "You room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }}",
-  SUCCESS_WITHOUT_SPACE_ALLDAY: "You meeting has been successfully booked for {{ date }}",
-  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for you booking to be approved.",
+  SUCCESS_WITH_SPACE_ALLDAY: "Your room booking for {{ level }}, {{ space }} has been successfully booked for {{ date }}",
+  SUCCESS_WITHOUT_SPACE_ALLDAY: "Your meeting has been successfully booked for {{ date }}",
+  SUCCESS_WAIT_APPROVED: "Please allow up to 5 minutes for your booking to be approved.",
   BOOK_NEARBY_DESK: "Book nearby desk",
   SPACE_SELECT_SIZE: "Select room size",
   SPACE_SELECT_SIZE_X: "Min. {{ count }} people",
@@ -68316,12 +68320,14 @@ var CALENDAR_EVENT = {
   FACILITIES: "Room Facilities",
   SPACE_REMOVE: "Remove this room",
   SPACE_ADD_TO: "Add this room",
-  SPACE_LIST_INFO: "Select a room to view it's details",
+  SPACE_LIST_INFO: "Select a room to view its details",
   SPACE_LOCATION: "Location",
   SPACE_REGION_ANY: "Any region",
   SPACE_LEVEL_ANY: "Any level",
   SPACE_SELECT_EMPTY: "No available spaces for selected time and/or filters",
   SPACE_SELECT_LOADING: "Finding available spaces...",
+  SPACE_BOOKING_RULES_HIDDEN_1: "The selected room is not available for the selected time or duration",
+  SPACE_BOOKING_RULES_HIDDEN_N: "Some of the selected rooms are not available for the selected time or duration",
   CONFIRM_DETAILS: "Confirm Meeting",
   FINISHED: "Return home",
   LOADING: "Creating meeting requests...",
@@ -68334,14 +68340,14 @@ var CALENDAR_EVENT = {
   GROUP_FEATURED: "Featured",
   GROUP_INTERESTED: "Interested",
   GROUP_NOT_INTERESTED: "Not Interested",
-  GROUP_INTEREST_ADD: "Indictate Interest",
+  GROUP_INTEREST_ADD: "Indicate Interest",
   GROUP_INTEREST_REMOVE: "Revoke Interest",
   GROUP_ATTENDING_FIELD: "Attending",
   GROUP_GOING: "Going",
   GROUP_NOT_GOING: "Not Going",
-  GROUP_GOING_ADD: "Indictate Going",
+  GROUP_GOING_ADD: "Indicate Going",
   GROUP_GOING_REMOVE: "Revoke Going",
-  GROUP_PREMOTE: "Premote Event",
+  GROUP_PROMOTE: "Promote Event",
   GROUP_EDIT: "Edit Event",
   GROUP_COPY_URL: "Copy URL",
   GROUP_DELETE: "Delete Event",
@@ -68416,7 +68422,7 @@ var CATERING = {
   ORDER_ITEMS_LOADING: "Finding available menu items...",
   ORDER_ITEM_REMOVE: "Remove this item",
   ORDER_ITEM_ADD: "Add this item",
-  ORDER_ITEM_SELECT: "Select an item to view it's details",
+  ORDER_ITEM_SELECT: "Select an item to view its details",
   ORDER_ALLOW: "Allow ordering this item from this zone",
   ORDERS_EMPTY: "No catering orders for the selected date.",
   ORDERS_DELIVER_TIME: "Deliver at {{ time }}",
@@ -68542,9 +68548,9 @@ var APP = {
     PARKING_NEW_HEADER: "New Parking Reservation",
     PARKING_EDIT_HEADER: "Edit Parking Reservation",
     PARKING_ASSIGNED: 'You are already assigned a parking space "{{ name }}"',
-    PARKING_SUCCESS_MSG: 'Your parking space reservation for "{{ name }}" at {{ place }} has been successfully booked for the {{ date }} at {{ time }}',
+    PARKING_SUCCESS_MSG: 'Your parking space reservation for "{{ name }}" has been successfully booked for the {{ date }} at {{ time }}',
     PARKING_CONFIRM_TITLE: "Confirm Parking Reservation",
-    DESK_ASSIGNED: 'You are already assigned a parking space "{{ name }}"',
+    DESK_ASSIGNED: 'You are already assigned a desk "{{ name }}"',
     DESK_CONFIRM_TITLE: "Confirm Desk Booking",
     VIEW_SCHEDULE: "View your Bookings",
     BOOKING_FINISHED: "Return home",
@@ -68556,8 +68562,9 @@ var APP = {
     CHAT_ASSISTANT: "Assistant",
     CHAT_WAITING: "Waiting for a reply...",
     CHAT_MESSAGE_PLACEHOLDER: "New message...",
-    RESOURCE_CHECKED_IN_FAILED: "Failed to check in resource",
-    RESOURCE_CHECKED_IN: "Successfully checked in resource"
+    RESOURCE_CHECKED_IN_FAILED: "No booking found",
+    RESOURCE_CHECKED_IN: "Successfully checked in resource",
+    RESOURCE_CHECKED_IN_MESSAGE: "Resource checked in successfully"
   },
   CONCIERGE: {
     MENU_BOOKINGS: "Bookings",
@@ -68909,7 +68916,7 @@ var APP = {
     EMAIL_TEMPLATES_SAVE: "Save Template",
     EMAIL_TEMPLATES_SEND_TEST: "Send test Email",
     EMAIL_TEMPLATES_SENT_TEST: "Successfully sent test email.",
-    EMAIL_TEMPLATES_CONFIG_ERROR: "Mailing system is not configured fot this application",
+    EMAIL_TEMPLATES_CONFIG_ERROR: "Mailing system is not configured for this application",
     EMAIL_TEMPLATES_SAVE_SUCCESS: "Successfully saved email template.",
     EMAIL_TEMPLATES_SAVE_ERROR: "Failed to save email template. Error: {{ error }}",
     EMAIL_TEMPLATES_REMOVE_SUCCESS: "Successfully removed email template",
@@ -69125,7 +69132,7 @@ var APP = {
     LOCKERS_RELEASE_ALL_SUCCESS: "Successfully released all locker",
     LOCKERS_SHARE_ERROR: 'Failed to share locker with "{{ name }}". Error: {{ error }}',
     LOCKERS_SHARE_SUCCESS: 'Successfully shared locker "{{ name }}" with {{ user }}',
-    LOCKERS_NO_DRIVER: "Driver is not setup for lockers",
+    LOCKERS_NO_DRIVER: "Driver is not set up for lockers",
     LOCKERS_POSITION_INVALID: "Position of the locker overlaps with another locker",
     LOCKERS_SIZE_INVALID: "Locker overlaps with another locker",
     SIGNAGE_HEADER: "Digital Signage Management",
@@ -69418,6 +69425,11 @@ var APP = {
     APPROVER: "Approver",
     VALID_FROM: "Valid From",
     VALID_UNTIL: "Valid Until",
+    PLAY_FROM: "Play From",
+    PLAY_UNTIL: "Play Until",
+    PLAY_AT: "Play At",
+    PLAY_CRON: "Play Schedule",
+    PLAY_DURATION: "Play For",
     AVAILABLE_ROOMS_HEADER: "Set {{ type }} availability for rooms",
     AVAILABLE_ROOMS_SAVING: "Saving room availability for {{ type }}...",
     AVAILABLE_ROOMS_ENABLE: "Enable Selected",
@@ -69498,7 +69510,7 @@ var APP = {
     ACTION_HELP: "Help",
     ACTION_JOIN_ROOMS: "Join Rooms",
     ACTION_POWER: "Power",
-    OUTPUTS_EMPTY: "No output devices setup for this system.",
+    OUTPUTS_EMPTY: "No output devices set up for this system.",
     CONTROLS_EMPTY: "No controls available for this input source",
     INPUT_EMPTY: "No input source",
     INPUT_CATEGORY_EMPTY: "No inputs available for category",
@@ -69578,7 +69590,7 @@ var APP = {
     PREVIOUS: "Previous Media",
     PLAY: "Playing",
     PAUSE: "Paused",
-    NEXT: "Previous Media",
+    NEXT: "Next Media",
     VOLUME: "Volume [{{ state }}]",
     LOOP_ALL: "Loop [All]",
     LOOP_ONE: "Loop [One]",
@@ -69622,7 +69634,7 @@ var APP = {
     CAMERA_UNAVAILABLE: "Camera feed loading...",
     HOST: "Host",
     PHONE: "Phone",
-    ORGANISATION: "Organization",
+    ORGANISATION: "Organisation",
     REASON: "Reason for visit",
     CHECKED_IN_MSG: "You are checked in!",
     CHECKED_IN_MSG_SELF_REG: "Your registration is confirmed!",
@@ -69651,7 +69663,7 @@ var APP = {
     BEVERAGE_LOADING: "Requesting drink...",
     BEVERAGE_SUCCESS: "Successfully requested drink. Your request should show up at your meeting shortly after the start time.",
     ERROR_PRINT: "Failed to print visitor label.",
-    ERROR_CHECKIN: "Failed to check-in {{ guest }} for {{ host }}'s meeting.",
+    ERROR_CHECKIN: "Failed to check in {{ guest }} for {{ host }}'s meeting.",
     SUCCESS_CHECKIN: "Successfully checked in {{ guest }} for {{ host }}'s meeting",
     NOT_FOUND: 'No meetings for guest "{{ email }}" today',
     LOAD_ERROR: "Failed to load booking for guest.",
@@ -72732,12 +72744,14 @@ var Ho = class extends B2 {
   work_overrides;
   /** ID of the user's photo in the PlaceOS uploads service */
   photo_upload_id;
+  /** Whether the user has opted in to location tracking */
+  locatable;
   /** Password */
   password = "";
   /** Password */
   confirm_password = "";
   constructor(t = {}) {
-    super(t), this.authority_id = t.authority_id || "", this.email = t.email || "", this.email_digest = t.email_digest || "", this.phone = t.phone || "", this.country = t.country || "", this.building = t.building || "", this.image = t.image || "", this.metadata = t.metadata || "", this.login_name = t.login_name || "", this.staff_id = t.staff_id || "", this.first_name = t.first_name || "", this.last_name = t.last_name || "", this.support = !!t.support, this.sys_admin = !!t.sys_admin, this.ui_theme = t.ui_theme || "", this.card_number = t.card_number || "", this.groups = t.groups || [], this.department = t.department || "", this.photo_upload_id = t.photo_upload_id || "", this.work_preferences = t.work_preferences || [], this.work_overrides = t.work_overrides || {};
+    super(t), this.authority_id = t.authority_id || "", this.email = t.email || "", this.email_digest = t.email_digest || "", this.phone = t.phone || "", this.country = t.country || "", this.building = t.building || "", this.image = t.image || "", this.metadata = t.metadata || "", this.login_name = t.login_name || "", this.staff_id = t.staff_id || "", this.first_name = t.first_name || "", this.last_name = t.last_name || "", this.support = !!t.support, this.sys_admin = !!t.sys_admin, this.ui_theme = t.ui_theme || "", this.card_number = t.card_number || "", this.groups = t.groups || [], this.department = t.department || "", this.photo_upload_id = t.photo_upload_id || "", this.work_preferences = t.work_preferences || [], this.work_overrides = t.work_overrides || {}, this.locatable = t.locatable ?? true;
   }
 };
 var Dt = "users";
@@ -77569,7 +77583,7 @@ var _TranslatePipe = class _TranslatePipe {
     this._locale = inject(LocaleService);
   }
   transform(value, args = {}, plural2) {
-    return this._locale.get(value, args, plural2);
+    return this._locale.get(value, args, plural2) || value;
   }
 };
 _TranslatePipe.\u0275fac = function TranslatePipe_Factory(__ngFactoryType__) {
@@ -82864,15 +82878,15 @@ var MapsPeopleService = _MapsPeopleService;
 // libs/common/src/lib/version.ts
 var VERSION7 = {
   "dirty": false,
-  "raw": "ecafbbc",
-  "hash": "ecafbbc",
+  "raw": "57828e4",
+  "hash": "57828e4",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "ecafbbc",
+  "suffix": "57828e4",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1752125223e3
+  "time": 1753234272984
 };
 
 // libs/common/src/lib/vorlon.service.ts
@@ -86163,7 +86177,7 @@ function uploadFile(file, pub = true, permissions = "none") {
       });
       const upload = upload_list[0];
       const upload_details = {
-        id: randomInt(999999999999),
+        id: upload?.id || `uploads-${randomString(8)}`,
         name: file.name,
         progress: 0,
         link: "",
@@ -87731,713 +87745,6 @@ var MatFormFieldModule = class _MatFormFieldModule {
   }], null, null);
 })();
 
-// libs/components/src/lib/upload-permissions-modal.component.ts
-var _c010 = (a0, a1, a2) => ({ file: a0, is_public: a1, permissions: a2 });
-function UploadPermissionsModalComponent_Conditional_15_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 2)(1, "label");
-    \u0275\u0275text(2, "Permissions");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "mat-form-field", 3)(4, "mat-select", 6);
-    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Conditional_15_Template_mat_select_ngModelChange_4_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      \u0275\u0275twoWayBindingSet(ctx_r1.permissions, $event) || (ctx_r1.permissions = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275elementStart(5, "mat-option", 10);
-    \u0275\u0275text(6, "None");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "mat-option", 11);
-    \u0275\u0275text(8, "Support");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(9, "mat-option", 12);
-    \u0275\u0275text(10, "Admin");
-    \u0275\u0275elementEnd()()()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275twoWayProperty("ngModel", ctx_r1.permissions);
-  }
-}
-var _UploadPermissionsModalComponent = class _UploadPermissionsModalComponent {
-  constructor() {
-    this._dialog_ref = inject(MatDialogRef);
-    this._data = inject(MAT_DIALOG_DATA);
-    this.file = this._data.file;
-    this.is_public = true;
-    this.permissions = "none";
-    this.file = this._data.file;
-  }
-  close() {
-    this._dialog_ref.close();
-  }
-};
-_UploadPermissionsModalComponent.\u0275fac = function UploadPermissionsModalComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _UploadPermissionsModalComponent)();
-};
-_UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadPermissionsModalComponent, selectors: [["upload-permissions-modal"]], decls: 21, vars: 8, consts: [["btn", "", "icon", "", "mat-dialog-close", ""], [1, "min-w-[20rem]", "p-4"], [1, "flex", "flex-col", "space-y-2"], ["appearance", "outline"], ["matInput", "", "disabled", "true", "placeholder", "File Name", 3, "ngModel"], [1, "pb-4"], [3, "ngModelChange", "ngModel"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", 1, "w-32", 3, "mat-dialog-close"], ["value", "none"], ["value", "support"], ["value", "admin"]], template: function UploadPermissionsModalComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "header")(1, "h2");
-    \u0275\u0275text(2, "Upload File");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "button", 0)(4, "icon");
-    \u0275\u0275text(5, "close");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(6, "main", 1)(7, "div", 2)(8, "label");
-    \u0275\u0275text(9, "File Name");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "mat-form-field", 3);
-    \u0275\u0275element(11, "input", 4);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(12, "div", 5)(13, "mat-checkbox", 6);
-    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Template_mat_checkbox_ngModelChange_13_listener($event) {
-      \u0275\u0275twoWayBindingSet(ctx.is_public, $event) || (ctx.is_public = $event);
-      return $event;
-    });
-    \u0275\u0275text(14, "Public");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275conditionalCreate(15, UploadPermissionsModalComponent_Conditional_15_Template, 11, 1, "div", 2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(16, "footer", 7)(17, "button", 8);
-    \u0275\u0275text(18, "Cancel");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(19, "button", 9);
-    \u0275\u0275text(20, " Upload ");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance(11);
-    \u0275\u0275property("ngModel", ctx.file.name);
-    \u0275\u0275advance(2);
-    \u0275\u0275twoWayProperty("ngModel", ctx.is_public);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(!ctx.is_public ? 15 : -1);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("mat-dialog-close", \u0275\u0275pureFunction3(4, _c010, ctx.file, ctx.is_public, ctx.permissions));
-  }
-}, dependencies: [MatDialogModule, MatDialogClose, MatFormFieldModule, MatFormField, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel], encapsulation: 2 });
-var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UploadPermissionsModalComponent, [{
-    type: Component,
-    args: [{ selector: "upload-permissions-modal", template: `
-        <header>
-            <h2>Upload File</h2>
-            <button btn icon mat-dialog-close>
-                <icon>close</icon>
-            </button>
-        </header>
-        <main class="min-w-[20rem] p-4">
-            <div class="flex flex-col space-y-2">
-                <label>File Name</label>
-                <mat-form-field appearance="outline">
-                    <input
-                        matInput
-                        [ngModel]="file.name"
-                        disabled="true"
-                        placeholder="File Name"
-                    />
-                </mat-form-field>
-            </div>
-            <div class="pb-4">
-                <mat-checkbox [(ngModel)]="is_public">Public</mat-checkbox>
-            </div>
-            @if (!is_public) {
-                <div class="flex flex-col space-y-2">
-                    <label>Permissions</label>
-                    <mat-form-field appearance="outline">
-                        <mat-select [(ngModel)]="permissions">
-                            <mat-option value="none">None</mat-option>
-                            <mat-option value="support">Support</mat-option>
-                            <mat-option value="admin">Admin</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-            }
-        </main>
-        <footer
-            class="flex items-center justify-end space-x-2 border-t border-base-200 px-4 py-2"
-        >
-            <button btn class="inverse w-32" mat-dialog-close>Cancel</button>
-            <button
-                btn
-                class="w-32"
-                [mat-dialog-close]="{ file, is_public, permissions }"
-            >
-                Upload
-            </button>
-        </footer>
-    `, schemas: [NO_ERRORS_SCHEMA], imports: [MatDialogModule, MatFormFieldModule, FormsModule] }]
-  }], () => [], null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadPermissionsModalComponent, { className: "UploadPermissionsModalComponent", filePath: "libs/components/src/lib/upload-permissions-modal.component.ts", lineNumber: 65 });
-})();
-
-// libs/common/src/lib/uploads.service.ts
-var _UploadsService = class _UploadsService {
-  constructor() {
-    this._dialog = inject(MatDialog);
-    this._upload_list = new BehaviorSubject([]);
-    this.upload_list = this._upload_list.asObservable();
-    if (localStorage) {
-      this._upload_list.next(JSON.parse(localStorage.getItem("BACKOFFICE.uploads") || "[]"));
-    }
-  }
-  clearList() {
-    const in_progress_list = this._upload_list.getValue().filter((file) => file.progress < 100 && !file.error);
-    this._upload_list.next(in_progress_list);
-  }
-  uploadFileWithPermissions(file) {
-    return new Promise((resolve, reject) => {
-      const ref = this._dialog.open(UploadPermissionsModalComponent, {
-        data: { file }
-      });
-      ref.afterClosed().subscribe(async (details) => {
-        if (details) {
-          const id = await this.uploadFile(details.file, details.is_public, details.permissions).catch((e2) => {
-            reject(e2);
-            throw e2;
-          });
-          resolve(id);
-        } else
-          reject();
-      });
-    });
-  }
-  uploadFile(file, pub = true, permissions = "none") {
-    return new Promise((resolve) => {
-      let resolved2 = false;
-      const update_fn = (details) => {
-        if (!resolved2) {
-          resolve(details.id);
-          resolved2 = true;
-        }
-        this._upload_list.next([
-          ...this._upload_list.getValue().filter((_3) => _3.id !== details.id),
-          details
-        ]);
-      };
-      uploadFile(file, pub, permissions).subscribe(update_fn, update_fn, () => this._updateUploadHistory());
-    });
-  }
-  _updateUploadHistory() {
-    const done_list = this._upload_list.getValue().filter((file) => file.progress >= 100);
-    done_list.forEach((i) => delete i.upload);
-    if (localStorage) {
-      localStorage.setItem("PLACEOS.uploads", JSON.stringify(done_list));
-    }
-  }
-};
-_UploadsService.\u0275fac = function UploadsService_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _UploadsService)();
-};
-_UploadsService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _UploadsService, factory: _UploadsService.\u0275fac, providedIn: "root" });
-var UploadsService = _UploadsService;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UploadsService, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], () => [], null);
-})();
-
-// libs/common/src/lib/user-idle-time.service.ts
-var EVENTS_NAMES = ["keypress", "mousemove", "touchmove", "scroll", "wheel"];
-var _UserIdleTimeService = class _UserIdleTimeService {
-  constructor() {
-    this._last_action = new BehaviorSubject(Date.now());
-    this._update = (e2) => this._onUserInteraction();
-    this._event_names = EVENTS_NAMES;
-    this.last_action = combineLatest([
-      this._last_action,
-      interval(1e3)
-    ]).pipe(throttleTime(300), map(([last_action]) => last_action));
-    this.idle_time = this.last_action.pipe(map((time) => Date.now() - time));
-  }
-  _onUserInteraction() {
-    this._last_action.next(Date.now());
-  }
-  idleFor(time_ms) {
-    const stop = this.startListening();
-    return this.idle_time.pipe(first((t) => t >= time_ms), tap(() => stop()));
-  }
-  startListening() {
-    this._last_action.next(Date.now());
-    for (const name of this._event_names) {
-      document.body.addEventListener(name, this._update);
-    }
-    return () => this.stopListening();
-  }
-  stopListening() {
-    for (const name of this._event_names) {
-      document.body.removeEventListener(name, this._update);
-    }
-  }
-};
-_UserIdleTimeService.\u0275fac = function UserIdleTimeService_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _UserIdleTimeService)();
-};
-_UserIdleTimeService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _UserIdleTimeService, factory: _UserIdleTimeService.\u0275fac, providedIn: "root" });
-var UserIdleTimeService = _UserIdleTimeService;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UserIdleTimeService, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], null, null);
-})();
-
-// libs/users/src/lib/user.utilities.ts
-var USER_DOMAIN = "@place.tech";
-function setInternalUserDomain(domain) {
-  USER_DOMAIN = domain;
-}
-
-// libs/users/src/lib/user.class.ts
-var User = class {
-  constructor(data = {}) {
-    this.id = data.id || data.email || `USER::${randomString(8)}`;
-    this.name = data.name || "";
-    this.email = data.email || "";
-    this.first_name = data.first_name || data.name || "";
-    this.last_name = data.last_name || "";
-    this.phone = data.phone || "";
-    this.organisation = data.organisation || "";
-    this.notes = data.notes || "";
-    this.photo = data.photo || data.image || (data.photo_upload_id ? `/api/engine/v2/uploads/${encodeURIComponent(data.photo_upload_id)}/url` : "") || "";
-    this.photo_upload_id = data.photo_upload_id || "";
-    this.username = data.username || "";
-    this.organizer = !!data.organizer;
-    this.checked_in = !!data.checked_in;
-    this.required = data.required ?? true;
-    this.resource = data.resource ?? false;
-    this.response_status = data.response_status || "";
-    const groups = data.groups || [];
-    this.department = data.department ?? "";
-    if (data.sys_admin)
-      groups.push("placeos_admin");
-    if (data.support)
-      groups.push("placeos_support");
-    if (data.department)
-      groups.push(data.department);
-    this.groups = groups;
-    this.extension_data = data.extension_data || {};
-    this.extension_data.assistance_required = data.assistance_required || this.extension_data.assistance_required;
-    this.is_external = !this.email?.endsWith(`${USER_DOMAIN}`);
-    this.visit_expected = data.visit_expected ?? true;
-    this.assistance_required = !!this.extension_data?.assistance_required;
-    for (const key in data) {
-      if (!(key in this))
-        this.extension_data[key] = data[key];
-    }
-  }
-};
-var GuestUser = class extends User {
-  constructor(data = {}) {
-    super(data);
-    this.preferred_beverage = data.preferred_beverage || "";
-    this.accepted_terms_conditions = data.accepted_terms_conditions || false;
-    this.attachments = data.extension_data?.attachments || data.attachments || [];
-    this.status = data.booking?.approved ? "approved" : data.booking?.rejected ? "declined" : data.extension_data?.status || data.status || "pending";
-    this.booking = data.booking;
-    this.extension_data.event = data.event_metadata;
-  }
-};
-var StaffUser = class extends User {
-  get location() {
-    return this.location_time(Date.now());
-  }
-  work_preference(datetime) {
-    if (!datetime)
-      datetime = Date.now();
-    const date = new Date(datetime);
-    const day = date.getDay();
-    const date_string = format(date, "yyyy-MM-dd");
-    if (this.work_overrides[date_string]?.blocks?.length) {
-      for (const block2 of this.work_overrides[date_string].blocks) {
-        const start = block2.start_time;
-        const end = block2.end_time;
-        if (start <= date.getHours() + date.getMinutes() / 60 && end >= date.getHours() + date.getMinutes() / 60) {
-          return block2;
-        }
-      }
-    }
-    for (const pref of this.work_preferences) {
-      if (pref.day_of_week === day && pref.blocks?.length) {
-        for (const block2 of pref.blocks) {
-          if (block2.start_time <= date.getHours() + date.getMinutes() / 60 && block2.end_time >= date.getHours() + date.getMinutes() / 60) {
-            return block2;
-          }
-        }
-      }
-    }
-  }
-  location_time(datetime = Date.now()) {
-    return this.work_preference(datetime)?.location || "ooo";
-  }
-  get location_name() {
-    return this.location_name_time();
-  }
-  location_name_time(datetime = Date.now()) {
-    if (!datetime)
-      datetime = Date.now();
-    const location2 = this.location_time(datetime);
-    const in_hours = this.in_hours_time(datetime);
-    if (location2.includes("w") && !in_hours) {
-      return i18n("COMMON.WORK_HOURS_OUTSIDE");
-    }
-    switch (location2) {
-      case "wfh":
-        return i18n("COMMON.WORK_HOURS_HOME");
-      case "wfo":
-        return i18n("COMMON.WORK_HOURS_OFFICE");
-      case "ooo":
-        return i18n("COMMON.WORK_HOURS_OUT");
-      case "aol":
-        return i18n("COMMON.WORK_HOURS_LEAVE");
-      default:
-        return i18n("COMMON.UNKNOWN");
-    }
-  }
-  outsideHours(datetime = Date.now()) {
-    const location2 = this.location_time(datetime);
-    const in_hours = this.in_hours_time(datetime);
-    return location2.includes("w") && !in_hours;
-  }
-  get in_hours() {
-    return this.in_hours_time(Date.now());
-  }
-  location_icon(datetime) {
-    if (!datetime)
-      datetime = Date.now();
-    const location2 = this.location_time(datetime);
-    const in_hours = this.in_hours_time(datetime);
-    if (location2 === "wfh" && in_hours)
-      return "home";
-    if (location2 === "wfo" && in_hours)
-      return "business";
-    return "event_busy";
-  }
-  in_hours_time(datetime = Date.now()) {
-    const block2 = this.work_preference(datetime);
-    return !!block2;
-  }
-  constructor(data = {}) {
-    super(data);
-    this.card_number = data.card_number || "";
-    this.staff_id = data.staff_id || "";
-    this.is_logged_in = !!data.is_logged_in;
-    this.work_preferences = data.work_preferences || [];
-    this.work_overrides = data.work_overrides || {};
-  }
-};
-
-// libs/common/src/lib/user-state.ts
-var EMPTY_USER = {
-  name: "<empty>",
-  email: "<empty>@place.tech"
-};
-var _current_user = new BehaviorSubject(null);
-var _change = new BehaviorSubject(0);
-var current_user = _current_user.asObservable();
-setTimeout(() => {
-  try {
-    if (jest)
-      return;
-  } catch {
-  }
-  combineLatest([Mc("current"), _change]).pipe(delay(1e3), retry(10), map(([i]) => new StaffUser(i))).subscribe((user) => _current_user.next(user));
-}, 300);
-function reloadUserData() {
-  setTimeout(async () => {
-    const user = await Mc("current").toPromise();
-    _current_user.next(new StaffUser(user));
-  }, 300);
-}
-function currentUser() {
-  return _current_user.getValue() || EMPTY_USER;
-}
-
-// libs/common/src/lib/settings.service.ts
-var _SettingsService = class _SettingsService extends AsyncHandler {
-  /**
-   * @hidden
-   */
-  set overrides(value) {
-    this._overrides.next(value);
-    this._applyCssVariables();
-  }
-  get theme() {
-    const allow_dark_mode = this.get("app.allow_dark_mode");
-    return allow_dark_mode ? this.get("theme") : "light";
-  }
-  /** Get observable for key */
-  listen(name) {
-    if (!this._observables[name]) {
-      this._subjects[name] = new BehaviorSubject(null);
-      this._observables[name] = this._subjects[name].asObservable();
-    }
-    return this._observables[name];
-  }
-  /** Update observable value for key */
-  post(name, value) {
-    if (!this._observables[name]) {
-      this._subjects[name] = new BehaviorSubject(null);
-      this._observables[name] = this._subjects[name].asObservable();
-    }
-    this._subjects[name].next(value);
-  }
-  value(name) {
-    return !this._observables[name] ? null : this._subjects[name].getValue();
-  }
-  /** Page title */
-  get title() {
-    return this._title.getTitle();
-  }
-  set title(value) {
-    this._title.setTitle(`${value} | ${this.get("app.name") || this._app_name}`);
-    const tracking_id = this.get("app.analytics.tracking_id");
-    if (!tracking_id)
-      return;
-    this._analytics?.send("pagename", { title: value });
-  }
-  constructor() {
-    super();
-    this._title = inject(Title);
-    this._analytics = inject(GoogleAnalyticsService, { optional: true });
-    this._app_name = "PlaceOS";
-    this._overrides = new BehaviorSubject([]);
-    this._user_settings = new BehaviorSubject({});
-    this._subjects = {};
-    this._observables = {};
-    this._pending_settings = {};
-    const now = /* @__PURE__ */ new Date();
-    const time = new Date(VERSION7.time);
-    const built = isSameDay(now, time) ? `Today at ${format(time, "h:mma")}` : format(time, "do MMM yyyy, h:mma");
-    log("CORE", `${VERSION7.semver}`, null, "debug", true);
-    log("APP", `${VERSION7.hash} | Built: ${built}`, null, "debug", true);
-    this.init();
-  }
-  /**
-   * Initialise the settings
-   */
-  async init() {
-    if (this.get("debug"))
-      window.debug = true;
-    if (this.get("app")?.name) {
-      this._app_name = this.get("app").name;
-    }
-    this._app_name = location.pathname.replace(/[\\/]/g, "").trim() || this._app_name;
-    setAppName(this._app_name.split("-").join("_").toUpperCase());
-    log("Settings", "Successfully loaded settings");
-    this._initialised.next(true);
-    if (window.debug) {
-      if (!window.application)
-        window.application = {};
-      window.application.settings = this;
-      window.setting = (key) => this.get(key);
-    }
-    const user = await firstTruthyValueFrom(current_user);
-    const data = await lastValueFrom(hu(user.id, "settings"));
-    this._user_settings.next(data.details || {});
-    this.timeout("init", () => {
-      this._initDarkMode();
-      this._applyTheme();
-      this._setFontSize();
-      this._setPrintFontSize();
-    }, 1e3);
-  }
-  /** Whether settings service has initialised */
-  get app_name() {
-    return this._app_name;
-  }
-  get time_format() {
-    return this.get("app.use_24_hour_time") ? "HH:mm" : "h:mm a";
-  }
-  /**
-   * Get a setting
-   * @param key Name of the setting. i.e. nested items can be grabbed using `.` to seperate key names
-   */
-  get(key) {
-    const keys2 = key.split(".");
-    if (keys2[0] !== "app") {
-      return getItemWithKeys(keys2, this._pending_settings) ?? getItemWithKeys(keys2, this._user_settings.getValue()) ?? getItemWithKeys(keys2, DEFAULT_SETTINGS);
-    }
-    const override_settings = [...this._overrides.getValue()];
-    for (const override of override_settings) {
-      const value = getItemWithKeys(keys2.slice(1), override);
-      if (value != null) {
-        return value;
-      }
-    }
-    return getItemWithKeys(keys2, DEFAULT_SETTINGS);
-  }
-  saveUserSetting(name, value) {
-    this._pending_settings[name] = value;
-    if (name === "dark_mode")
-      this.setTheme(value ? "dark" : "");
-    if (name === "font_size")
-      this._setFontSize();
-    this.timeout("save_settings", () => this._savePendingChanges(), 2400);
-  }
-  overrideCssVariable(key, value, important = false) {
-    let element = document.getElementById(`css-var-overrides+${key}`);
-    if (!element) {
-      element = document.createElement("style");
-      element.id = `css-var-overrides+${key}`;
-      document.head.appendChild(element);
-    }
-    element.innerText = `html, body { --${key}: ${value} ${important ? "!important" : ""}}`;
-  }
-  setTheme(theme) {
-    const current_theme = this.theme;
-    if (current_theme === theme)
-      return;
-    this.saveUserSetting("theme", theme);
-    this._applyTheme();
-  }
-  _applyCssVariables() {
-    const variable_map = this.get("app.css_variables") || {};
-    let css_string = "body { ";
-    for (const key in variable_map) {
-      css_string += `--${key}: ${variable_map[key]}; `;
-    }
-    css_string += "}";
-    let element = document.getElementById("css-var-overrides");
-    if (!element) {
-      element = document.createElement("style");
-      element.id = "css-var-overrides";
-      document.head.appendChild(element);
-    }
-    element.innerText = css_string;
-  }
-  async _savePendingChanges() {
-    const user = currentUser();
-    if (!user?.id || !Object.keys(this._pending_settings).length)
-      return;
-    await lastValueFrom(du(user.id, {
-      name: "settings",
-      description: "",
-      details: __spreadValues(__spreadValues({}, this._user_settings.getValue()), this._pending_settings)
-    }));
-    this._user_settings.next(__spreadValues(__spreadValues({}, this._user_settings.getValue()), this._pending_settings));
-    this._pending_settings = {};
-  }
-  _setFontSize() {
-    if (!this.get("font_size"))
-      return;
-    this.overrideCssVariable("font-size", `${this.get("font_size")}px`);
-  }
-  _applyTheme() {
-    const allow_dark_mode = this.get("app.allow_dark_mode");
-    this._clearTheme();
-    if (!allow_dark_mode)
-      return;
-    document.body.classList.add(`theme-${this.theme}`);
-  }
-  _clearTheme() {
-    const class_list = document.body.classList.value.split(" ");
-    for (const item of class_list) {
-      if (item.startsWith("theme-")) {
-        document.body.classList.remove(item);
-      }
-    }
-  }
-  _setPrintFontSize() {
-    let print_style_el = document.getElementById("placeos-print-block");
-    if (!print_style_el) {
-      print_style_el = document.createElement("style");
-      print_style_el.id = "placeos-print-block";
-      document.head.appendChild(print_style_el);
-    }
-    print_style_el.innerText = `@media print { html, body { font-size: ${this.get("app.print_font_size") || "4mm"}; } }`;
-  }
-  _initDarkMode() {
-    if (this.theme)
-      return;
-    const os_dark = window?.matchMedia ? window?.matchMedia("(prefers-color-scheme: dark)")?.matches : false;
-    this.setTheme(os_dark ? "dark" : "");
-  }
-};
-_SettingsService.\u0275fac = function SettingsService_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _SettingsService)();
-};
-_SettingsService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _SettingsService, factory: _SettingsService.\u0275fac, providedIn: "root" });
-var SettingsService = _SettingsService;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SettingsService, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], () => [], null);
-})();
-
-// libs/explore/src/lib/explore-book-qr.component.ts
-var _c011 = (a0) => ({ name: a0 });
-var DEFAULT_PATH = `workplace/#/explore?space={{id}}`;
-var _ExploreBookQrComponent = class _ExploreBookQrComponent {
-  constructor() {
-    this._data = inject(MAT_DIALOG_DATA);
-    this._settings = inject(SettingsService);
-    this.space = this._data.space;
-    this.qr_code = generateQRCode(`${location.origin}${(this._settings.get("app.booking_qr_path") || DEFAULT_PATH).replace("{{id}}", this._data.space?.email)}`);
-  }
-};
-_ExploreBookQrComponent.\u0275fac = function ExploreBookQrComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ExploreBookQrComponent)();
-};
-_ExploreBookQrComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreBookQrComponent, selectors: [["explore-book-qr"]], decls: 10, vars: 7, consts: [[1, "truncate"], [1, "flex-1"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "p-4"], [1, "m-auto", "h-64", "w-64", 3, "src"]], template: function ExploreBookQrComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "header")(1, "h2", 0);
-    \u0275\u0275text(2);
-    \u0275\u0275pipe(3, "translate");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(4, "div", 1);
-    \u0275\u0275elementStart(5, "button", 2)(6, "icon");
-    \u0275\u0275text(7, "close");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(8, "main", 3);
-    \u0275\u0275element(9, "img", 4);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 2, "EXPLORE.BOOK_RESOURCE", \u0275\u0275pureFunction1(5, _c011, ctx.space == null ? null : ctx.space.name)), " ");
-    \u0275\u0275advance(7);
-    \u0275\u0275property("src", ctx.qr_code, \u0275\u0275sanitizeUrl);
-  }
-}, dependencies: [TranslatePipe, MatRippleModule, MatRipple, IconComponent], encapsulation: 2 });
-var ExploreBookQrComponent = _ExploreBookQrComponent;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ExploreBookQrComponent, [{
-    type: Component,
-    args: [{ selector: "explore-book-qr", template: `
-        <header>
-            <h2 class="truncate">
-                {{ 'EXPLORE.BOOK_RESOURCE' | translate: { name: space?.name } }}
-            </h2>
-            <div class="flex-1"></div>
-            <button icon matRipple mat-dialog-close>
-                <icon>close</icon>
-            </button>
-        </header>
-        <main class="p-4">
-            <img class="m-auto h-64 w-64" [src]="qr_code" />
-        </main>
-    `, imports: [TranslatePipe, MatRippleModule, IconComponent] }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreBookQrComponent, { className: "ExploreBookQrComponent", filePath: "libs/explore/src/lib/explore-book-qr.component.ts", lineNumber: 32 });
-})();
-
 // node_modules/@angular/cdk/fesm2022/text-field.mjs
 var _CdkTextFieldStyleLoader = class __CdkTextFieldStyleLoader {
   static \u0275fac = function _CdkTextFieldStyleLoader_Factory(__ngFactoryType__) {
@@ -89449,6 +88756,3333 @@ var MatInputModule = class _MatInputModule {
   }], null, null);
 })();
 
+// node_modules/@angular/cdk/fesm2022/unique-selection-dispatcher-Cewa_Eg3.mjs
+var UniqueSelectionDispatcher = class _UniqueSelectionDispatcher {
+  _listeners = [];
+  /**
+   * Notify other items that selection for the given name has been set.
+   * @param id ID of the item.
+   * @param name Name of the item.
+   */
+  notify(id, name) {
+    for (let listener of this._listeners) {
+      listener(id, name);
+    }
+  }
+  /**
+   * Listen for future changes to item selection.
+   * @return Function used to deregister listener
+   */
+  listen(listener) {
+    this._listeners.push(listener);
+    return () => {
+      this._listeners = this._listeners.filter((registered) => {
+        return listener !== registered;
+      });
+    };
+  }
+  ngOnDestroy() {
+    this._listeners = [];
+  }
+  static \u0275fac = function UniqueSelectionDispatcher_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _UniqueSelectionDispatcher)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _UniqueSelectionDispatcher,
+    factory: _UniqueSelectionDispatcher.\u0275fac,
+    providedIn: "root"
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UniqueSelectionDispatcher, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
+// node_modules/@angular/cdk/fesm2022/selection-model-BCgC8uEN.mjs
+var SelectionModel = class {
+  _multiple;
+  _emitChanges;
+  compareWith;
+  /** Currently-selected values. */
+  _selection = /* @__PURE__ */ new Set();
+  /** Keeps track of the deselected options that haven't been emitted by the change event. */
+  _deselectedToEmit = [];
+  /** Keeps track of the selected options that haven't been emitted by the change event. */
+  _selectedToEmit = [];
+  /** Cache for the array value of the selected items. */
+  _selected;
+  /** Selected values. */
+  get selected() {
+    if (!this._selected) {
+      this._selected = Array.from(this._selection.values());
+    }
+    return this._selected;
+  }
+  /** Event emitted when the value has changed. */
+  changed = new Subject();
+  constructor(_multiple = false, initiallySelectedValues, _emitChanges = true, compareWith) {
+    this._multiple = _multiple;
+    this._emitChanges = _emitChanges;
+    this.compareWith = compareWith;
+    if (initiallySelectedValues && initiallySelectedValues.length) {
+      if (_multiple) {
+        initiallySelectedValues.forEach((value) => this._markSelected(value));
+      } else {
+        this._markSelected(initiallySelectedValues[0]);
+      }
+      this._selectedToEmit.length = 0;
+    }
+  }
+  /**
+   * Selects a value or an array of values.
+   * @param values The values to select
+   * @return Whether the selection changed as a result of this call
+   */
+  select(...values) {
+    this._verifyValueAssignment(values);
+    values.forEach((value) => this._markSelected(value));
+    const changed = this._hasQueuedChanges();
+    this._emitChangeEvent();
+    return changed;
+  }
+  /**
+   * Deselects a value or an array of values.
+   * @param values The values to deselect
+   * @return Whether the selection changed as a result of this call
+   */
+  deselect(...values) {
+    this._verifyValueAssignment(values);
+    values.forEach((value) => this._unmarkSelected(value));
+    const changed = this._hasQueuedChanges();
+    this._emitChangeEvent();
+    return changed;
+  }
+  /**
+   * Sets the selected values
+   * @param values The new selected values
+   * @return Whether the selection changed as a result of this call
+   */
+  setSelection(...values) {
+    this._verifyValueAssignment(values);
+    const oldValues = this.selected;
+    const newSelectedSet = new Set(values.map((value) => this._getConcreteValue(value)));
+    values.forEach((value) => this._markSelected(value));
+    oldValues.filter((value) => !newSelectedSet.has(this._getConcreteValue(value, newSelectedSet))).forEach((value) => this._unmarkSelected(value));
+    const changed = this._hasQueuedChanges();
+    this._emitChangeEvent();
+    return changed;
+  }
+  /**
+   * Toggles a value between selected and deselected.
+   * @param value The value to toggle
+   * @return Whether the selection changed as a result of this call
+   */
+  toggle(value) {
+    return this.isSelected(value) ? this.deselect(value) : this.select(value);
+  }
+  /**
+   * Clears all of the selected values.
+   * @param flushEvent Whether to flush the changes in an event.
+   *   If false, the changes to the selection will be flushed along with the next event.
+   * @return Whether the selection changed as a result of this call
+   */
+  clear(flushEvent = true) {
+    this._unmarkAll();
+    const changed = this._hasQueuedChanges();
+    if (flushEvent) {
+      this._emitChangeEvent();
+    }
+    return changed;
+  }
+  /**
+   * Determines whether a value is selected.
+   */
+  isSelected(value) {
+    return this._selection.has(this._getConcreteValue(value));
+  }
+  /**
+   * Determines whether the model does not have a value.
+   */
+  isEmpty() {
+    return this._selection.size === 0;
+  }
+  /**
+   * Determines whether the model has a value.
+   */
+  hasValue() {
+    return !this.isEmpty();
+  }
+  /**
+   * Sorts the selected values based on a predicate function.
+   */
+  sort(predicate) {
+    if (this._multiple && this.selected) {
+      this._selected.sort(predicate);
+    }
+  }
+  /**
+   * Gets whether multiple values can be selected.
+   */
+  isMultipleSelection() {
+    return this._multiple;
+  }
+  /** Emits a change event and clears the records of selected and deselected values. */
+  _emitChangeEvent() {
+    this._selected = null;
+    if (this._selectedToEmit.length || this._deselectedToEmit.length) {
+      this.changed.next({
+        source: this,
+        added: this._selectedToEmit,
+        removed: this._deselectedToEmit
+      });
+      this._deselectedToEmit = [];
+      this._selectedToEmit = [];
+    }
+  }
+  /** Selects a value. */
+  _markSelected(value) {
+    value = this._getConcreteValue(value);
+    if (!this.isSelected(value)) {
+      if (!this._multiple) {
+        this._unmarkAll();
+      }
+      if (!this.isSelected(value)) {
+        this._selection.add(value);
+      }
+      if (this._emitChanges) {
+        this._selectedToEmit.push(value);
+      }
+    }
+  }
+  /** Deselects a value. */
+  _unmarkSelected(value) {
+    value = this._getConcreteValue(value);
+    if (this.isSelected(value)) {
+      this._selection.delete(value);
+      if (this._emitChanges) {
+        this._deselectedToEmit.push(value);
+      }
+    }
+  }
+  /** Clears out the selected values. */
+  _unmarkAll() {
+    if (!this.isEmpty()) {
+      this._selection.forEach((value) => this._unmarkSelected(value));
+    }
+  }
+  /**
+   * Verifies the value assignment and throws an error if the specified value array is
+   * including multiple values while the selection model is not supporting multiple values.
+   */
+  _verifyValueAssignment(values) {
+    if (values.length > 1 && !this._multiple && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw getMultipleValuesInSingleSelectionError();
+    }
+  }
+  /** Whether there are queued up change to be emitted. */
+  _hasQueuedChanges() {
+    return !!(this._deselectedToEmit.length || this._selectedToEmit.length);
+  }
+  /** Returns a value that is comparable to inputValue by applying compareWith function, returns the same inputValue otherwise. */
+  _getConcreteValue(inputValue, selection) {
+    if (!this.compareWith) {
+      return inputValue;
+    } else {
+      selection = selection ?? this._selection;
+      for (let selectedValue of selection) {
+        if (this.compareWith(inputValue, selectedValue)) {
+          return selectedValue;
+        }
+      }
+      return inputValue;
+    }
+  }
+};
+function getMultipleValuesInSingleSelectionError() {
+  return Error("Cannot pass multiple values into SelectionModel with single-value mode.");
+}
+
+// node_modules/@angular/material/fesm2022/module-BDiw_nWS.mjs
+var _c010 = ["trigger"];
+var _c17 = ["panel"];
+var _c24 = [[["mat-select-trigger"]], "*"];
+var _c34 = ["mat-select-trigger", "*"];
+function MatSelect_Conditional_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 4);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.placeholder);
+  }
+}
+function MatSelect_Conditional_5_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275projection(0);
+  }
+}
+function MatSelect_Conditional_5_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 11);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r1.triggerValue);
+  }
+}
+function MatSelect_Conditional_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 5);
+    \u0275\u0275conditionalCreate(1, MatSelect_Conditional_5_Conditional_1_Template, 1, 0)(2, MatSelect_Conditional_5_Conditional_2_Template, 2, 1, "span", 11);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx_r1.customTrigger ? 1 : 2);
+  }
+}
+function MatSelect_ng_template_10_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 12, 1);
+    \u0275\u0275listener("keydown", function MatSelect_ng_template_10_Template_div_keydown_0_listener($event) {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1._handleKeydown($event));
+    });
+    \u0275\u0275projection(2, 1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275classMap(\u0275\u0275interpolate1("mat-mdc-select-panel mdc-menu-surface mdc-menu-surface--open ", ctx_r1._getPanelTheme()));
+    \u0275\u0275classProp("mat-select-panel-animations-enabled", !ctx_r1._animationsDisabled);
+    \u0275\u0275property("ngClass", ctx_r1.panelClass);
+    \u0275\u0275attribute("id", ctx_r1.id + "-panel")("aria-multiselectable", ctx_r1.multiple)("aria-label", ctx_r1.ariaLabel || null)("aria-labelledby", ctx_r1._getPanelAriaLabelledby());
+  }
+}
+function getMatSelectDynamicMultipleError() {
+  return Error("Cannot change `multiple` mode of select after initialization.");
+}
+function getMatSelectNonArrayValueError() {
+  return Error("Value must be an array in multiple-selection mode.");
+}
+function getMatSelectNonFunctionValueError() {
+  return Error("`compareWith` must be a function.");
+}
+var MAT_SELECT_SCROLL_STRATEGY = new InjectionToken("mat-select-scroll-strategy", {
+  providedIn: "root",
+  factory: () => {
+    const injector = inject(Injector);
+    return () => createRepositionScrollStrategy(injector);
+  }
+});
+function MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY(_overlay) {
+  const injector = inject(Injector);
+  return () => createRepositionScrollStrategy(injector);
+}
+var MAT_SELECT_CONFIG = new InjectionToken("MAT_SELECT_CONFIG");
+var MAT_SELECT_SCROLL_STRATEGY_PROVIDER = {
+  provide: MAT_SELECT_SCROLL_STRATEGY,
+  deps: [],
+  useFactory: MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY
+};
+var MAT_SELECT_TRIGGER = new InjectionToken("MatSelectTrigger");
+var MatSelectChange = class {
+  source;
+  value;
+  constructor(source, value) {
+    this.source = source;
+    this.value = value;
+  }
+};
+var MatSelect = class _MatSelect {
+  _viewportRuler = inject(ViewportRuler);
+  _changeDetectorRef = inject(ChangeDetectorRef);
+  _elementRef = inject(ElementRef);
+  _dir = inject(Directionality, {
+    optional: true
+  });
+  _idGenerator = inject(_IdGenerator);
+  _renderer = inject(Renderer2);
+  _parentFormField = inject(MAT_FORM_FIELD, {
+    optional: true
+  });
+  ngControl = inject(NgControl, {
+    self: true,
+    optional: true
+  });
+  _liveAnnouncer = inject(LiveAnnouncer);
+  _defaultOptions = inject(MAT_SELECT_CONFIG, {
+    optional: true
+  });
+  _animationsDisabled = _animationsDisabled();
+  _initialized = new Subject();
+  _cleanupDetach;
+  /** All of the defined select options. */
+  options;
+  // TODO(crisbeto): this is only necessary for the non-MDC select, but it's technically a
+  // public API so we have to keep it. It should be deprecated and removed eventually.
+  /** All of the defined groups of options. */
+  optionGroups;
+  /** User-supplied override of the trigger element. */
+  customTrigger;
+  /**
+   * This position config ensures that the top "start" corner of the overlay
+   * is aligned with with the top "start" of the origin by default (overlapping
+   * the trigger completely). If the panel cannot fit below the trigger, it
+   * will fall back to a position above the trigger.
+   */
+  _positions = [{
+    originX: "start",
+    originY: "bottom",
+    overlayX: "start",
+    overlayY: "top"
+  }, {
+    originX: "end",
+    originY: "bottom",
+    overlayX: "end",
+    overlayY: "top"
+  }, {
+    originX: "start",
+    originY: "top",
+    overlayX: "start",
+    overlayY: "bottom",
+    panelClass: "mat-mdc-select-panel-above"
+  }, {
+    originX: "end",
+    originY: "top",
+    overlayX: "end",
+    overlayY: "bottom",
+    panelClass: "mat-mdc-select-panel-above"
+  }];
+  /** Scrolls a particular option into the view. */
+  _scrollOptionIntoView(index) {
+    const option = this.options.toArray()[index];
+    if (option) {
+      const panel = this.panel.nativeElement;
+      const labelCount = _countGroupLabelsBeforeOption(index, this.options, this.optionGroups);
+      const element = option._getHostElement();
+      if (index === 0 && labelCount === 1) {
+        panel.scrollTop = 0;
+      } else {
+        panel.scrollTop = _getOptionScrollPosition(element.offsetTop, element.offsetHeight, panel.scrollTop, panel.offsetHeight);
+      }
+    }
+  }
+  /** Called when the panel has been opened and the overlay has settled on its final position. */
+  _positioningSettled() {
+    this._scrollOptionIntoView(this._keyManager.activeItemIndex || 0);
+  }
+  /** Creates a change event object that should be emitted by the select. */
+  _getChangeEvent(value) {
+    return new MatSelectChange(this, value);
+  }
+  /** Factory function used to create a scroll strategy for this select. */
+  _scrollStrategyFactory = inject(MAT_SELECT_SCROLL_STRATEGY);
+  /** Whether or not the overlay panel is open. */
+  _panelOpen = false;
+  /** Comparison function to specify which option is displayed. Defaults to object equality. */
+  _compareWith = (o1, o2) => o1 === o2;
+  /** Unique id for this input. */
+  _uid = this._idGenerator.getId("mat-select-");
+  /** Current `aria-labelledby` value for the select trigger. */
+  _triggerAriaLabelledBy = null;
+  /**
+   * Keeps track of the previous form control assigned to the select.
+   * Used to detect if it has changed.
+   */
+  _previousControl;
+  /** Emits whenever the component is destroyed. */
+  _destroy = new Subject();
+  /** Tracks the error state of the select. */
+  _errorStateTracker;
+  /**
+   * Emits whenever the component state changes and should cause the parent
+   * form-field to update. Implemented as part of `MatFormFieldControl`.
+   * @docs-private
+   */
+  stateChanges = new Subject();
+  /**
+   * Disable the automatic labeling to avoid issues like #27241.
+   * @docs-private
+   */
+  disableAutomaticLabeling = true;
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  userAriaDescribedBy;
+  /** Deals with the selection logic. */
+  _selectionModel;
+  /** Manages keyboard events for options in the panel. */
+  _keyManager;
+  /** Ideal origin for the overlay panel. */
+  _preferredOverlayOrigin;
+  /** Width of the overlay panel. */
+  _overlayWidth;
+  /** `View -> model callback called when value changes` */
+  _onChange = () => {
+  };
+  /** `View -> model callback called when select has been touched` */
+  _onTouched = () => {
+  };
+  /** ID for the DOM node containing the select's value. */
+  _valueId = this._idGenerator.getId("mat-select-value-");
+  /** Strategy that will be used to handle scrolling while the select panel is open. */
+  _scrollStrategy;
+  _overlayPanelClass = this._defaultOptions?.overlayPanelClass || "";
+  /** Whether the select is focused. */
+  get focused() {
+    return this._focused || this._panelOpen;
+  }
+  _focused = false;
+  /** A name for this control that can be used by `mat-form-field`. */
+  controlType = "mat-select";
+  /** Trigger that opens the select. */
+  trigger;
+  /** Panel containing the select options. */
+  panel;
+  /** Overlay pane containing the options. */
+  _overlayDir;
+  /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
+  panelClass;
+  /** Whether the select is disabled. */
+  disabled = false;
+  /** Whether ripples in the select are disabled. */
+  get disableRipple() {
+    return this._disableRipple();
+  }
+  set disableRipple(value) {
+    this._disableRipple.set(value);
+  }
+  _disableRipple = signal(false);
+  /** Tab index of the select. */
+  tabIndex = 0;
+  /** Whether checkmark indicator for single-selection options is hidden. */
+  get hideSingleSelectionIndicator() {
+    return this._hideSingleSelectionIndicator;
+  }
+  set hideSingleSelectionIndicator(value) {
+    this._hideSingleSelectionIndicator = value;
+    this._syncParentProperties();
+  }
+  _hideSingleSelectionIndicator = this._defaultOptions?.hideSingleSelectionIndicator ?? false;
+  /** Placeholder to be shown if no value has been selected. */
+  get placeholder() {
+    return this._placeholder;
+  }
+  set placeholder(value) {
+    this._placeholder = value;
+    this.stateChanges.next();
+  }
+  _placeholder;
+  /** Whether the component is required. */
+  get required() {
+    return this._required ?? this.ngControl?.control?.hasValidator(Validators.required) ?? false;
+  }
+  set required(value) {
+    this._required = value;
+    this.stateChanges.next();
+  }
+  _required;
+  /** Whether the user should be allowed to select multiple options. */
+  get multiple() {
+    return this._multiple;
+  }
+  set multiple(value) {
+    if (this._selectionModel && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw getMatSelectDynamicMultipleError();
+    }
+    this._multiple = value;
+  }
+  _multiple = false;
+  /** Whether to center the active option over the trigger. */
+  disableOptionCentering = this._defaultOptions?.disableOptionCentering ?? false;
+  /**
+   * Function to compare the option values with the selected values. The first argument
+   * is a value from an option. The second is a value from the selection. A boolean
+   * should be returned.
+   */
+  get compareWith() {
+    return this._compareWith;
+  }
+  set compareWith(fn3) {
+    if (typeof fn3 !== "function" && (typeof ngDevMode === "undefined" || ngDevMode)) {
+      throw getMatSelectNonFunctionValueError();
+    }
+    this._compareWith = fn3;
+    if (this._selectionModel) {
+      this._initializeSelection();
+    }
+  }
+  /** Value of the select control. */
+  get value() {
+    return this._value;
+  }
+  set value(newValue) {
+    const hasAssigned = this._assignValue(newValue);
+    if (hasAssigned) {
+      this._onChange(newValue);
+    }
+  }
+  _value;
+  /** Aria label of the select. */
+  ariaLabel = "";
+  /** Input that can be used to specify the `aria-labelledby` attribute. */
+  ariaLabelledby;
+  /** Object used to control when error messages are shown. */
+  get errorStateMatcher() {
+    return this._errorStateTracker.matcher;
+  }
+  set errorStateMatcher(value) {
+    this._errorStateTracker.matcher = value;
+  }
+  /** Time to wait in milliseconds after the last keystroke before moving focus to an item. */
+  typeaheadDebounceInterval;
+  /**
+   * Function used to sort the values in a select in multiple mode.
+   * Follows the same logic as `Array.prototype.sort`.
+   */
+  sortComparator;
+  /** Unique id of the element. */
+  get id() {
+    return this._id;
+  }
+  set id(value) {
+    this._id = value || this._uid;
+    this.stateChanges.next();
+  }
+  _id;
+  /** Whether the select is in an error state. */
+  get errorState() {
+    return this._errorStateTracker.errorState;
+  }
+  set errorState(value) {
+    this._errorStateTracker.errorState = value;
+  }
+  /**
+   * Width of the panel. If set to `auto`, the panel will match the trigger width.
+   * If set to null or an empty string, the panel will grow to match the longest option's text.
+   */
+  panelWidth = this._defaultOptions && typeof this._defaultOptions.panelWidth !== "undefined" ? this._defaultOptions.panelWidth : "auto";
+  /**
+   * By default selecting an option with a `null` or `undefined` value will reset the select's
+   * value. Enable this option if the reset behavior doesn't match your requirements and instead
+   * the nullable options should become selected. The value of this input can be controlled app-wide
+   * using the `MAT_SELECT_CONFIG` injection token.
+   */
+  canSelectNullableOptions = this._defaultOptions?.canSelectNullableOptions ?? false;
+  /** Combined stream of all of the child options' change events. */
+  optionSelectionChanges = defer(() => {
+    const options2 = this.options;
+    if (options2) {
+      return options2.changes.pipe(startWith(options2), switchMap(() => merge(...options2.map((option) => option.onSelectionChange))));
+    }
+    return this._initialized.pipe(switchMap(() => this.optionSelectionChanges));
+  });
+  /** Event emitted when the select panel has been toggled. */
+  openedChange = new EventEmitter();
+  /** Event emitted when the select has been opened. */
+  _openedStream = this.openedChange.pipe(filter((o) => o), map(() => {
+  }));
+  /** Event emitted when the select has been closed. */
+  _closedStream = this.openedChange.pipe(filter((o) => !o), map(() => {
+  }));
+  /** Event emitted when the selected value has been changed by the user. */
+  selectionChange = new EventEmitter();
+  /**
+   * Event that emits whenever the raw value of the select changes. This is here primarily
+   * to facilitate the two-way binding for the `value` input.
+   * @docs-private
+   */
+  valueChange = new EventEmitter();
+  constructor() {
+    const defaultErrorStateMatcher = inject(ErrorStateMatcher);
+    const parentForm = inject(NgForm, {
+      optional: true
+    });
+    const parentFormGroup = inject(FormGroupDirective, {
+      optional: true
+    });
+    const tabIndex = inject(new HostAttributeToken("tabindex"), {
+      optional: true
+    });
+    if (this.ngControl) {
+      this.ngControl.valueAccessor = this;
+    }
+    if (this._defaultOptions?.typeaheadDebounceInterval != null) {
+      this.typeaheadDebounceInterval = this._defaultOptions.typeaheadDebounceInterval;
+    }
+    this._errorStateTracker = new _ErrorStateTracker(defaultErrorStateMatcher, this.ngControl, parentFormGroup, parentForm, this.stateChanges);
+    this._scrollStrategy = this._scrollStrategyFactory();
+    this.tabIndex = tabIndex == null ? 0 : parseInt(tabIndex) || 0;
+    this.id = this.id;
+  }
+  ngOnInit() {
+    this._selectionModel = new SelectionModel(this.multiple);
+    this.stateChanges.next();
+    this._viewportRuler.change().pipe(takeUntil(this._destroy)).subscribe(() => {
+      if (this.panelOpen) {
+        this._overlayWidth = this._getOverlayWidth(this._preferredOverlayOrigin);
+        this._changeDetectorRef.detectChanges();
+      }
+    });
+  }
+  ngAfterContentInit() {
+    this._initialized.next();
+    this._initialized.complete();
+    this._initKeyManager();
+    this._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
+      event.added.forEach((option) => option.select());
+      event.removed.forEach((option) => option.deselect());
+    });
+    this.options.changes.pipe(startWith(null), takeUntil(this._destroy)).subscribe(() => {
+      this._resetOptions();
+      this._initializeSelection();
+    });
+  }
+  ngDoCheck() {
+    const newAriaLabelledby = this._getTriggerAriaLabelledby();
+    const ngControl = this.ngControl;
+    if (newAriaLabelledby !== this._triggerAriaLabelledBy) {
+      const element = this._elementRef.nativeElement;
+      this._triggerAriaLabelledBy = newAriaLabelledby;
+      if (newAriaLabelledby) {
+        element.setAttribute("aria-labelledby", newAriaLabelledby);
+      } else {
+        element.removeAttribute("aria-labelledby");
+      }
+    }
+    if (ngControl) {
+      if (this._previousControl !== ngControl.control) {
+        if (this._previousControl !== void 0 && ngControl.disabled !== null && ngControl.disabled !== this.disabled) {
+          this.disabled = ngControl.disabled;
+        }
+        this._previousControl = ngControl.control;
+      }
+      this.updateErrorState();
+    }
+  }
+  ngOnChanges(changes) {
+    if (changes["disabled"] || changes["userAriaDescribedBy"]) {
+      this.stateChanges.next();
+    }
+    if (changes["typeaheadDebounceInterval"] && this._keyManager) {
+      this._keyManager.withTypeAhead(this.typeaheadDebounceInterval);
+    }
+  }
+  ngOnDestroy() {
+    this._cleanupDetach?.();
+    this._keyManager?.destroy();
+    this._destroy.next();
+    this._destroy.complete();
+    this.stateChanges.complete();
+    this._clearFromModal();
+  }
+  /** Toggles the overlay panel open or closed. */
+  toggle() {
+    this.panelOpen ? this.close() : this.open();
+  }
+  /** Opens the overlay panel. */
+  open() {
+    if (!this._canOpen()) {
+      return;
+    }
+    if (this._parentFormField) {
+      this._preferredOverlayOrigin = this._parentFormField.getConnectedOverlayOrigin();
+    }
+    this._cleanupDetach?.();
+    this._overlayWidth = this._getOverlayWidth(this._preferredOverlayOrigin);
+    this._applyModalPanelOwnership();
+    this._panelOpen = true;
+    this._overlayDir.positionChange.pipe(take(1)).subscribe(() => {
+      this._changeDetectorRef.detectChanges();
+      this._positioningSettled();
+    });
+    this._overlayDir.attachOverlay();
+    this._keyManager.withHorizontalOrientation(null);
+    this._highlightCorrectOption();
+    this._changeDetectorRef.markForCheck();
+    this.stateChanges.next();
+    Promise.resolve().then(() => this.openedChange.emit(true));
+  }
+  /**
+   * Track which modal we have modified the `aria-owns` attribute of. When the combobox trigger is
+   * inside an aria-modal, we apply aria-owns to the parent modal with the `id` of the options
+   * panel. Track the modal we have changed so we can undo the changes on destroy.
+   */
+  _trackedModal = null;
+  /**
+   * If the autocomplete trigger is inside of an `aria-modal` element, connect
+   * that modal to the options panel with `aria-owns`.
+   *
+   * For some browser + screen reader combinations, when navigation is inside
+   * of an `aria-modal` element, the screen reader treats everything outside
+   * of that modal as hidden or invisible.
+   *
+   * This causes a problem when the combobox trigger is _inside_ of a modal, because the
+   * options panel is rendered _outside_ of that modal, preventing screen reader navigation
+   * from reaching the panel.
+   *
+   * We can work around this issue by applying `aria-owns` to the modal with the `id` of
+   * the options panel. This effectively communicates to assistive technology that the
+   * options panel is part of the same interaction as the modal.
+   *
+   * At time of this writing, this issue is present in VoiceOver.
+   * See https://github.com/angular/components/issues/20694
+   */
+  _applyModalPanelOwnership() {
+    const modal = this._elementRef.nativeElement.closest('body > .cdk-overlay-container [aria-modal="true"]');
+    if (!modal) {
+      return;
+    }
+    const panelId = `${this.id}-panel`;
+    if (this._trackedModal) {
+      removeAriaReferencedId(this._trackedModal, "aria-owns", panelId);
+    }
+    addAriaReferencedId(modal, "aria-owns", panelId);
+    this._trackedModal = modal;
+  }
+  /** Clears the reference to the listbox overlay element from the modal it was added to. */
+  _clearFromModal() {
+    if (!this._trackedModal) {
+      return;
+    }
+    const panelId = `${this.id}-panel`;
+    removeAriaReferencedId(this._trackedModal, "aria-owns", panelId);
+    this._trackedModal = null;
+  }
+  /** Closes the overlay panel and focuses the host element. */
+  close() {
+    if (this._panelOpen) {
+      this._panelOpen = false;
+      this._exitAndDetach();
+      this._keyManager.withHorizontalOrientation(this._isRtl() ? "rtl" : "ltr");
+      this._changeDetectorRef.markForCheck();
+      this._onTouched();
+      this.stateChanges.next();
+      Promise.resolve().then(() => this.openedChange.emit(false));
+    }
+  }
+  /** Triggers the exit animation and detaches the overlay at the end. */
+  _exitAndDetach() {
+    if (this._animationsDisabled || !this.panel) {
+      this._detachOverlay();
+      return;
+    }
+    this._cleanupDetach?.();
+    this._cleanupDetach = () => {
+      cleanupEvent();
+      clearTimeout(exitFallbackTimer);
+      this._cleanupDetach = void 0;
+    };
+    const panel = this.panel.nativeElement;
+    const cleanupEvent = this._renderer.listen(panel, "animationend", (event) => {
+      if (event.animationName === "_mat-select-exit") {
+        this._cleanupDetach?.();
+        this._detachOverlay();
+      }
+    });
+    const exitFallbackTimer = setTimeout(() => {
+      this._cleanupDetach?.();
+      this._detachOverlay();
+    }, 200);
+    panel.classList.add("mat-select-panel-exit");
+  }
+  /** Detaches the current overlay directive. */
+  _detachOverlay() {
+    this._overlayDir.detachOverlay();
+    this._changeDetectorRef.markForCheck();
+  }
+  /**
+   * Sets the select's value. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param value New value to be written to the model.
+   */
+  writeValue(value) {
+    this._assignValue(value);
+  }
+  /**
+   * Saves a callback function to be invoked when the select's value
+   * changes from user input. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the value changes.
+   */
+  registerOnChange(fn3) {
+    this._onChange = fn3;
+  }
+  /**
+   * Saves a callback function to be invoked when the select is blurred
+   * by the user. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the component has been touched.
+   */
+  registerOnTouched(fn3) {
+    this._onTouched = fn3;
+  }
+  /**
+   * Disables the select. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param isDisabled Sets whether the component is disabled.
+   */
+  setDisabledState(isDisabled) {
+    this.disabled = isDisabled;
+    this._changeDetectorRef.markForCheck();
+    this.stateChanges.next();
+  }
+  /** Whether or not the overlay panel is open. */
+  get panelOpen() {
+    return this._panelOpen;
+  }
+  /** The currently selected option. */
+  get selected() {
+    return this.multiple ? this._selectionModel?.selected || [] : this._selectionModel?.selected[0];
+  }
+  /** The value displayed in the trigger. */
+  get triggerValue() {
+    if (this.empty) {
+      return "";
+    }
+    if (this._multiple) {
+      const selectedOptions = this._selectionModel.selected.map((option) => option.viewValue);
+      if (this._isRtl()) {
+        selectedOptions.reverse();
+      }
+      return selectedOptions.join(", ");
+    }
+    return this._selectionModel.selected[0].viewValue;
+  }
+  /** Refreshes the error state of the select. */
+  updateErrorState() {
+    this._errorStateTracker.updateErrorState();
+  }
+  /** Whether the element is in RTL mode. */
+  _isRtl() {
+    return this._dir ? this._dir.value === "rtl" : false;
+  }
+  /** Handles all keydown events on the select. */
+  _handleKeydown(event) {
+    if (!this.disabled) {
+      this.panelOpen ? this._handleOpenKeydown(event) : this._handleClosedKeydown(event);
+    }
+  }
+  /** Handles keyboard events while the select is closed. */
+  _handleClosedKeydown(event) {
+    const keyCode = event.keyCode;
+    const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW || keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW;
+    const isOpenKey = keyCode === ENTER || keyCode === SPACE;
+    const manager = this._keyManager;
+    if (!manager.isTyping() && isOpenKey && !hasModifierKey(event) || (this.multiple || event.altKey) && isArrowKey) {
+      event.preventDefault();
+      this.open();
+    } else if (!this.multiple) {
+      const previouslySelectedOption = this.selected;
+      manager.onKeydown(event);
+      const selectedOption = this.selected;
+      if (selectedOption && previouslySelectedOption !== selectedOption) {
+        this._liveAnnouncer.announce(selectedOption.viewValue, 1e4);
+      }
+    }
+  }
+  /** Handles keyboard events when the selected is open. */
+  _handleOpenKeydown(event) {
+    const manager = this._keyManager;
+    const keyCode = event.keyCode;
+    const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
+    const isTyping = manager.isTyping();
+    if (isArrowKey && event.altKey) {
+      event.preventDefault();
+      this.close();
+    } else if (!isTyping && (keyCode === ENTER || keyCode === SPACE) && manager.activeItem && !hasModifierKey(event)) {
+      event.preventDefault();
+      manager.activeItem._selectViaInteraction();
+    } else if (!isTyping && this._multiple && keyCode === A && event.ctrlKey) {
+      event.preventDefault();
+      const hasDeselectedOptions = this.options.some((opt) => !opt.disabled && !opt.selected);
+      this.options.forEach((option) => {
+        if (!option.disabled) {
+          hasDeselectedOptions ? option.select() : option.deselect();
+        }
+      });
+    } else {
+      const previouslyFocusedIndex = manager.activeItemIndex;
+      manager.onKeydown(event);
+      if (this._multiple && isArrowKey && event.shiftKey && manager.activeItem && manager.activeItemIndex !== previouslyFocusedIndex) {
+        manager.activeItem._selectViaInteraction();
+      }
+    }
+  }
+  /** Handles keyboard events coming from the overlay. */
+  _handleOverlayKeydown(event) {
+    if (event.keyCode === ESCAPE && !hasModifierKey(event)) {
+      event.preventDefault();
+      this.close();
+    }
+  }
+  _onFocus() {
+    if (!this.disabled) {
+      this._focused = true;
+      this.stateChanges.next();
+    }
+  }
+  /**
+   * Calls the touched callback only if the panel is closed. Otherwise, the trigger will
+   * "blur" to the panel when it opens, causing a false positive.
+   */
+  _onBlur() {
+    this._focused = false;
+    this._keyManager?.cancelTypeahead();
+    if (!this.disabled && !this.panelOpen) {
+      this._onTouched();
+      this._changeDetectorRef.markForCheck();
+      this.stateChanges.next();
+    }
+  }
+  /** Returns the theme to be used on the panel. */
+  _getPanelTheme() {
+    return this._parentFormField ? `mat-${this._parentFormField.color}` : "";
+  }
+  /** Whether the select has a value. */
+  get empty() {
+    return !this._selectionModel || this._selectionModel.isEmpty();
+  }
+  _initializeSelection() {
+    Promise.resolve().then(() => {
+      if (this.ngControl) {
+        this._value = this.ngControl.value;
+      }
+      this._setSelectionByValue(this._value);
+      this.stateChanges.next();
+    });
+  }
+  /**
+   * Sets the selected option based on a value. If no option can be
+   * found with the designated value, the select trigger is cleared.
+   */
+  _setSelectionByValue(value) {
+    this.options.forEach((option) => option.setInactiveStyles());
+    this._selectionModel.clear();
+    if (this.multiple && value) {
+      if (!Array.isArray(value) && (typeof ngDevMode === "undefined" || ngDevMode)) {
+        throw getMatSelectNonArrayValueError();
+      }
+      value.forEach((currentValue) => this._selectOptionByValue(currentValue));
+      this._sortValues();
+    } else {
+      const correspondingOption = this._selectOptionByValue(value);
+      if (correspondingOption) {
+        this._keyManager.updateActiveItem(correspondingOption);
+      } else if (!this.panelOpen) {
+        this._keyManager.updateActiveItem(-1);
+      }
+    }
+    this._changeDetectorRef.markForCheck();
+  }
+  /**
+   * Finds and selects and option based on its value.
+   * @returns Option that has the corresponding value.
+   */
+  _selectOptionByValue(value) {
+    const correspondingOption = this.options.find((option) => {
+      if (this._selectionModel.isSelected(option)) {
+        return false;
+      }
+      try {
+        return (option.value != null || this.canSelectNullableOptions) && this._compareWith(option.value, value);
+      } catch (error) {
+        if (typeof ngDevMode === "undefined" || ngDevMode) {
+          console.warn(error);
+        }
+        return false;
+      }
+    });
+    if (correspondingOption) {
+      this._selectionModel.select(correspondingOption);
+    }
+    return correspondingOption;
+  }
+  /** Assigns a specific value to the select. Returns whether the value has changed. */
+  _assignValue(newValue) {
+    if (newValue !== this._value || this._multiple && Array.isArray(newValue)) {
+      if (this.options) {
+        this._setSelectionByValue(newValue);
+      }
+      this._value = newValue;
+      return true;
+    }
+    return false;
+  }
+  // `skipPredicate` determines if key manager should avoid putting a given option in the tab
+  // order. Allow disabled list items to receive focus via keyboard to align with WAI ARIA
+  // recommendation.
+  //
+  // Normally WAI ARIA's instructions are to exclude disabled items from the tab order, but it
+  // makes a few exceptions for compound widgets.
+  //
+  // From [Developing a Keyboard Interface](
+  // https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/):
+  //   "For the following composite widget elements, keep them focusable when disabled: Options in a
+  //   Listbox..."
+  //
+  // The user can focus disabled options using the keyboard, but the user cannot click disabled
+  // options.
+  _skipPredicate = (option) => {
+    if (this.panelOpen) {
+      return false;
+    }
+    return option.disabled;
+  };
+  /** Gets how wide the overlay panel should be. */
+  _getOverlayWidth(preferredOrigin) {
+    if (this.panelWidth === "auto") {
+      const refToMeasure = preferredOrigin instanceof CdkOverlayOrigin ? preferredOrigin.elementRef : preferredOrigin || this._elementRef;
+      return refToMeasure.nativeElement.getBoundingClientRect().width;
+    }
+    return this.panelWidth === null ? "" : this.panelWidth;
+  }
+  /** Syncs the parent state with the individual options. */
+  _syncParentProperties() {
+    if (this.options) {
+      for (const option of this.options) {
+        option._changeDetectorRef.markForCheck();
+      }
+    }
+  }
+  /** Sets up a key manager to listen to keyboard events on the overlay panel. */
+  _initKeyManager() {
+    this._keyManager = new ActiveDescendantKeyManager(this.options).withTypeAhead(this.typeaheadDebounceInterval).withVerticalOrientation().withHorizontalOrientation(this._isRtl() ? "rtl" : "ltr").withHomeAndEnd().withPageUpDown().withAllowedModifierKeys(["shiftKey"]).skipPredicate(this._skipPredicate);
+    this._keyManager.tabOut.subscribe(() => {
+      if (this.panelOpen) {
+        if (!this.multiple && this._keyManager.activeItem) {
+          this._keyManager.activeItem._selectViaInteraction();
+        }
+        this.focus();
+        this.close();
+      }
+    });
+    this._keyManager.change.subscribe(() => {
+      if (this._panelOpen && this.panel) {
+        this._scrollOptionIntoView(this._keyManager.activeItemIndex || 0);
+      } else if (!this._panelOpen && !this.multiple && this._keyManager.activeItem) {
+        this._keyManager.activeItem._selectViaInteraction();
+      }
+    });
+  }
+  /** Drops current option subscriptions and IDs and resets from scratch. */
+  _resetOptions() {
+    const changedOrDestroyed = merge(this.options.changes, this._destroy);
+    this.optionSelectionChanges.pipe(takeUntil(changedOrDestroyed)).subscribe((event) => {
+      this._onSelect(event.source, event.isUserInput);
+      if (event.isUserInput && !this.multiple && this._panelOpen) {
+        this.close();
+        this.focus();
+      }
+    });
+    merge(...this.options.map((option) => option._stateChanges)).pipe(takeUntil(changedOrDestroyed)).subscribe(() => {
+      this._changeDetectorRef.detectChanges();
+      this.stateChanges.next();
+    });
+  }
+  /** Invoked when an option is clicked. */
+  _onSelect(option, isUserInput) {
+    const wasSelected = this._selectionModel.isSelected(option);
+    if (!this.canSelectNullableOptions && option.value == null && !this._multiple) {
+      option.deselect();
+      this._selectionModel.clear();
+      if (this.value != null) {
+        this._propagateChanges(option.value);
+      }
+    } else {
+      if (wasSelected !== option.selected) {
+        option.selected ? this._selectionModel.select(option) : this._selectionModel.deselect(option);
+      }
+      if (isUserInput) {
+        this._keyManager.setActiveItem(option);
+      }
+      if (this.multiple) {
+        this._sortValues();
+        if (isUserInput) {
+          this.focus();
+        }
+      }
+    }
+    if (wasSelected !== this._selectionModel.isSelected(option)) {
+      this._propagateChanges();
+    }
+    this.stateChanges.next();
+  }
+  /** Sorts the selected values in the selected based on their order in the panel. */
+  _sortValues() {
+    if (this.multiple) {
+      const options2 = this.options.toArray();
+      this._selectionModel.sort((a, b3) => {
+        return this.sortComparator ? this.sortComparator(a, b3, options2) : options2.indexOf(a) - options2.indexOf(b3);
+      });
+      this.stateChanges.next();
+    }
+  }
+  /** Emits change event to set the model value. */
+  _propagateChanges(fallbackValue) {
+    let valueToEmit;
+    if (this.multiple) {
+      valueToEmit = this.selected.map((option) => option.value);
+    } else {
+      valueToEmit = this.selected ? this.selected.value : fallbackValue;
+    }
+    this._value = valueToEmit;
+    this.valueChange.emit(valueToEmit);
+    this._onChange(valueToEmit);
+    this.selectionChange.emit(this._getChangeEvent(valueToEmit));
+    this._changeDetectorRef.markForCheck();
+  }
+  /**
+   * Highlights the selected item. If no option is selected, it will highlight
+   * the first *enabled* option.
+   */
+  _highlightCorrectOption() {
+    if (this._keyManager) {
+      if (this.empty) {
+        let firstEnabledOptionIndex = -1;
+        for (let index = 0; index < this.options.length; index++) {
+          const option = this.options.get(index);
+          if (!option.disabled) {
+            firstEnabledOptionIndex = index;
+            break;
+          }
+        }
+        this._keyManager.setActiveItem(firstEnabledOptionIndex);
+      } else {
+        this._keyManager.setActiveItem(this._selectionModel.selected[0]);
+      }
+    }
+  }
+  /** Whether the panel is allowed to open. */
+  _canOpen() {
+    return !this._panelOpen && !this.disabled && this.options?.length > 0 && !!this._overlayDir;
+  }
+  /** Focuses the select element. */
+  focus(options2) {
+    this._elementRef.nativeElement.focus(options2);
+  }
+  /** Gets the aria-labelledby for the select panel. */
+  _getPanelAriaLabelledby() {
+    if (this.ariaLabel) {
+      return null;
+    }
+    const labelId = this._parentFormField?.getLabelId() || null;
+    const labelExpression = labelId ? labelId + " " : "";
+    return this.ariaLabelledby ? labelExpression + this.ariaLabelledby : labelId;
+  }
+  /** Determines the `aria-activedescendant` to be set on the host. */
+  _getAriaActiveDescendant() {
+    if (this.panelOpen && this._keyManager && this._keyManager.activeItem) {
+      return this._keyManager.activeItem.id;
+    }
+    return null;
+  }
+  /** Gets the aria-labelledby of the select component trigger. */
+  _getTriggerAriaLabelledby() {
+    if (this.ariaLabel) {
+      return null;
+    }
+    let value = this._parentFormField?.getLabelId() || "";
+    if (this.ariaLabelledby) {
+      value += " " + this.ariaLabelledby;
+    }
+    if (!value) {
+      value = this._valueId;
+    }
+    return value;
+  }
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  get describedByIds() {
+    const element = this._elementRef.nativeElement;
+    const existingDescribedBy = element.getAttribute("aria-describedby");
+    return existingDescribedBy?.split(" ") || [];
+  }
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  setDescribedByIds(ids) {
+    if (ids.length) {
+      this._elementRef.nativeElement.setAttribute("aria-describedby", ids.join(" "));
+    } else {
+      this._elementRef.nativeElement.removeAttribute("aria-describedby");
+    }
+  }
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  onContainerClick() {
+    this.focus();
+    this.open();
+  }
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
+  get shouldLabelFloat() {
+    return this.panelOpen || !this.empty || this.focused && !!this.placeholder;
+  }
+  static \u0275fac = function MatSelect_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatSelect)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _MatSelect,
+    selectors: [["mat-select"]],
+    contentQueries: function MatSelect_ContentQueries(rf, ctx, dirIndex) {
+      if (rf & 1) {
+        \u0275\u0275contentQuery(dirIndex, MAT_SELECT_TRIGGER, 5);
+        \u0275\u0275contentQuery(dirIndex, MatOption, 5);
+        \u0275\u0275contentQuery(dirIndex, MAT_OPTGROUP, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.customTrigger = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.options = _t4);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.optionGroups = _t4);
+      }
+    },
+    viewQuery: function MatSelect_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c010, 5);
+        \u0275\u0275viewQuery(_c17, 5);
+        \u0275\u0275viewQuery(CdkConnectedOverlay, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.trigger = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.panel = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._overlayDir = _t4.first);
+      }
+    },
+    hostAttrs: ["role", "combobox", "aria-haspopup", "listbox", 1, "mat-mdc-select"],
+    hostVars: 19,
+    hostBindings: function MatSelect_HostBindings(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275listener("keydown", function MatSelect_keydown_HostBindingHandler($event) {
+          return ctx._handleKeydown($event);
+        })("focus", function MatSelect_focus_HostBindingHandler() {
+          return ctx._onFocus();
+        })("blur", function MatSelect_blur_HostBindingHandler() {
+          return ctx._onBlur();
+        });
+      }
+      if (rf & 2) {
+        \u0275\u0275attribute("id", ctx.id)("tabindex", ctx.disabled ? -1 : ctx.tabIndex)("aria-controls", ctx.panelOpen ? ctx.id + "-panel" : null)("aria-expanded", ctx.panelOpen)("aria-label", ctx.ariaLabel || null)("aria-required", ctx.required.toString())("aria-disabled", ctx.disabled.toString())("aria-invalid", ctx.errorState)("aria-activedescendant", ctx._getAriaActiveDescendant());
+        \u0275\u0275classProp("mat-mdc-select-disabled", ctx.disabled)("mat-mdc-select-invalid", ctx.errorState)("mat-mdc-select-required", ctx.required)("mat-mdc-select-empty", ctx.empty)("mat-mdc-select-multiple", ctx.multiple);
+      }
+    },
+    inputs: {
+      userAriaDescribedBy: [0, "aria-describedby", "userAriaDescribedBy"],
+      panelClass: "panelClass",
+      disabled: [2, "disabled", "disabled", booleanAttribute],
+      disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
+      tabIndex: [2, "tabIndex", "tabIndex", (value) => value == null ? 0 : numberAttribute(value)],
+      hideSingleSelectionIndicator: [2, "hideSingleSelectionIndicator", "hideSingleSelectionIndicator", booleanAttribute],
+      placeholder: "placeholder",
+      required: [2, "required", "required", booleanAttribute],
+      multiple: [2, "multiple", "multiple", booleanAttribute],
+      disableOptionCentering: [2, "disableOptionCentering", "disableOptionCentering", booleanAttribute],
+      compareWith: "compareWith",
+      value: "value",
+      ariaLabel: [0, "aria-label", "ariaLabel"],
+      ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
+      errorStateMatcher: "errorStateMatcher",
+      typeaheadDebounceInterval: [2, "typeaheadDebounceInterval", "typeaheadDebounceInterval", numberAttribute],
+      sortComparator: "sortComparator",
+      id: "id",
+      panelWidth: "panelWidth",
+      canSelectNullableOptions: [2, "canSelectNullableOptions", "canSelectNullableOptions", booleanAttribute]
+    },
+    outputs: {
+      openedChange: "openedChange",
+      _openedStream: "opened",
+      _closedStream: "closed",
+      selectionChange: "selectionChange",
+      valueChange: "valueChange"
+    },
+    exportAs: ["matSelect"],
+    features: [\u0275\u0275ProvidersFeature([{
+      provide: MatFormFieldControl,
+      useExisting: _MatSelect
+    }, {
+      provide: MAT_OPTION_PARENT_COMPONENT,
+      useExisting: _MatSelect
+    }]), \u0275\u0275NgOnChangesFeature],
+    ngContentSelectors: _c34,
+    decls: 11,
+    vars: 9,
+    consts: [["fallbackOverlayOrigin", "cdkOverlayOrigin", "trigger", ""], ["panel", ""], ["cdk-overlay-origin", "", 1, "mat-mdc-select-trigger", 3, "click"], [1, "mat-mdc-select-value"], [1, "mat-mdc-select-placeholder", "mat-mdc-select-min-line"], [1, "mat-mdc-select-value-text"], [1, "mat-mdc-select-arrow-wrapper"], [1, "mat-mdc-select-arrow"], ["viewBox", "0 0 24 24", "width", "24px", "height", "24px", "focusable", "false", "aria-hidden", "true"], ["d", "M7 10l5 5 5-5z"], ["cdk-connected-overlay", "", "cdkConnectedOverlayLockPosition", "", "cdkConnectedOverlayHasBackdrop", "", "cdkConnectedOverlayBackdropClass", "cdk-overlay-transparent-backdrop", 3, "detach", "backdropClick", "overlayKeydown", "cdkConnectedOverlayDisableClose", "cdkConnectedOverlayPanelClass", "cdkConnectedOverlayScrollStrategy", "cdkConnectedOverlayOrigin", "cdkConnectedOverlayPositions", "cdkConnectedOverlayWidth", "cdkConnectedOverlayFlexibleDimensions"], [1, "mat-mdc-select-min-line"], ["role", "listbox", "tabindex", "-1", 3, "keydown", "ngClass"]],
+    template: function MatSelect_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275projectionDef(_c24);
+        \u0275\u0275elementStart(0, "div", 2, 0);
+        \u0275\u0275listener("click", function MatSelect_Template_div_click_0_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.open());
+        });
+        \u0275\u0275elementStart(3, "div", 3);
+        \u0275\u0275conditionalCreate(4, MatSelect_Conditional_4_Template, 2, 1, "span", 4)(5, MatSelect_Conditional_5_Template, 3, 1, "span", 5);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(6, "div", 6)(7, "div", 7);
+        \u0275\u0275namespaceSVG();
+        \u0275\u0275elementStart(8, "svg", 8);
+        \u0275\u0275element(9, "path", 9);
+        \u0275\u0275elementEnd()()()();
+        \u0275\u0275template(10, MatSelect_ng_template_10_Template, 3, 10, "ng-template", 10);
+        \u0275\u0275listener("detach", function MatSelect_Template_ng_template_detach_10_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.close());
+        })("backdropClick", function MatSelect_Template_ng_template_backdropClick_10_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx.close());
+        })("overlayKeydown", function MatSelect_Template_ng_template_overlayKeydown_10_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._handleOverlayKeydown($event));
+        });
+      }
+      if (rf & 2) {
+        const fallbackOverlayOrigin_r4 = \u0275\u0275reference(1);
+        \u0275\u0275advance(3);
+        \u0275\u0275attribute("id", ctx._valueId);
+        \u0275\u0275advance();
+        \u0275\u0275conditional(ctx.empty ? 4 : 5);
+        \u0275\u0275advance(6);
+        \u0275\u0275property("cdkConnectedOverlayDisableClose", true)("cdkConnectedOverlayPanelClass", ctx._overlayPanelClass)("cdkConnectedOverlayScrollStrategy", ctx._scrollStrategy)("cdkConnectedOverlayOrigin", ctx._preferredOverlayOrigin || fallbackOverlayOrigin_r4)("cdkConnectedOverlayPositions", ctx._positions)("cdkConnectedOverlayWidth", ctx._overlayWidth)("cdkConnectedOverlayFlexibleDimensions", true);
+      }
+    },
+    dependencies: [CdkOverlayOrigin, CdkConnectedOverlay, NgClass],
+    styles: ['@keyframes _mat-select-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}@keyframes _mat-select-exit{from{opacity:1}to{opacity:0}}.mat-mdc-select{display:inline-block;width:100%;outline:none;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;color:var(--mat-select-enabled-trigger-text-color, var(--mat-sys-on-surface));font-family:var(--mat-select-trigger-text-font, var(--mat-sys-body-large-font));line-height:var(--mat-select-trigger-text-line-height, var(--mat-sys-body-large-line-height));font-size:var(--mat-select-trigger-text-size, var(--mat-sys-body-large-size));font-weight:var(--mat-select-trigger-text-weight, var(--mat-sys-body-large-weight));letter-spacing:var(--mat-select-trigger-text-tracking, var(--mat-sys-body-large-tracking))}div.mat-mdc-select-panel{box-shadow:var(--mat-select-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12))}.mat-mdc-select-disabled{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-disabled .mat-mdc-select-placeholder{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-trigger{display:inline-flex;align-items:center;cursor:pointer;position:relative;box-sizing:border-box;width:100%}.mat-mdc-select-disabled .mat-mdc-select-trigger{-webkit-user-select:none;user-select:none;cursor:default}.mat-mdc-select-value{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mat-mdc-select-value-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mat-mdc-select-arrow-wrapper{height:24px;flex-shrink:0;display:inline-flex;align-items:center}.mat-form-field-appearance-fill .mdc-text-field--no-label .mat-mdc-select-arrow-wrapper{transform:none}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-invalid .mat-mdc-select-arrow,.mat-form-field-invalid:not(.mat-form-field-disabled) .mat-mdc-form-field-infix::after{color:var(--mat-select-invalid-arrow-color, var(--mat-sys-error))}.mat-mdc-select-arrow{width:10px;height:5px;position:relative;color:var(--mat-select-enabled-arrow-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field.mat-focused .mat-mdc-select-arrow{color:var(--mat-select-focused-arrow-color, var(--mat-sys-primary))}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-disabled .mat-mdc-select-arrow{color:var(--mat-select-disabled-arrow-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-arrow svg{fill:currentColor;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)}@media(forced-colors: active){.mat-mdc-select-arrow svg{fill:CanvasText}.mat-mdc-select-disabled .mat-mdc-select-arrow svg{fill:GrayText}}div.mat-mdc-select-panel{width:100%;max-height:275px;outline:0;overflow:auto;padding:8px 0;border-radius:4px;box-sizing:border-box;position:relative;background-color:var(--mat-select-panel-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-select-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel{border-top-left-radius:0;border-top-right-radius:0;transform-origin:top center}.mat-mdc-select-panel-above div.mat-mdc-select-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:bottom center}.mat-select-panel-animations-enabled{animation:_mat-select-enter 120ms cubic-bezier(0, 0, 0.2, 1)}.mat-select-panel-animations-enabled.mat-select-panel-exit{animation:_mat-select-exit 100ms linear}.mat-mdc-select-placeholder{transition:color 400ms 133.3333333333ms cubic-bezier(0.25, 0.8, 0.25, 1);color:var(--mat-select-placeholder-text-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field:not(.mat-form-field-animations-enabled) .mat-mdc-select-placeholder,._mat-animation-noopable .mat-mdc-select-placeholder{transition:none}.mat-form-field-hide-placeholder .mat-mdc-select-placeholder{color:rgba(0,0,0,0);-webkit-text-fill-color:rgba(0,0,0,0);transition:none;display:block}.mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{cursor:pointer}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mat-mdc-floating-label{max-width:calc(100% - 18px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mdc-floating-label--float-above{max-width:calc(100%/0.75 - 24px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-notched-outline__notch{max-width:calc(100% - 60px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-text-field--label-floating .mdc-notched-outline__notch{max-width:calc(100% - 24px)}.mat-mdc-select-min-line:empty::before{content:" ";white-space:pre;width:1px;display:inline-block;visibility:hidden}.mat-form-field-appearance-fill .mat-mdc-select-arrow-wrapper{transform:var(--mat-select-arrow-transform, translateY(-8px))}\n'],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatSelect, [{
+    type: Component,
+    args: [{
+      selector: "mat-select",
+      exportAs: "matSelect",
+      encapsulation: ViewEncapsulation.None,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      host: {
+        "role": "combobox",
+        "aria-haspopup": "listbox",
+        "class": "mat-mdc-select",
+        "[attr.id]": "id",
+        "[attr.tabindex]": "disabled ? -1 : tabIndex",
+        "[attr.aria-controls]": 'panelOpen ? id + "-panel" : null',
+        "[attr.aria-expanded]": "panelOpen",
+        "[attr.aria-label]": "ariaLabel || null",
+        "[attr.aria-required]": "required.toString()",
+        "[attr.aria-disabled]": "disabled.toString()",
+        "[attr.aria-invalid]": "errorState",
+        "[attr.aria-activedescendant]": "_getAriaActiveDescendant()",
+        "[class.mat-mdc-select-disabled]": "disabled",
+        "[class.mat-mdc-select-invalid]": "errorState",
+        "[class.mat-mdc-select-required]": "required",
+        "[class.mat-mdc-select-empty]": "empty",
+        "[class.mat-mdc-select-multiple]": "multiple",
+        "(keydown)": "_handleKeydown($event)",
+        "(focus)": "_onFocus()",
+        "(blur)": "_onBlur()"
+      },
+      providers: [{
+        provide: MatFormFieldControl,
+        useExisting: MatSelect
+      }, {
+        provide: MAT_OPTION_PARENT_COMPONENT,
+        useExisting: MatSelect
+      }],
+      imports: [CdkOverlayOrigin, CdkConnectedOverlay, NgClass],
+      template: `<div cdk-overlay-origin
+     class="mat-mdc-select-trigger"
+     (click)="open()"
+     #fallbackOverlayOrigin="cdkOverlayOrigin"
+     #trigger>
+
+  <div class="mat-mdc-select-value" [attr.id]="_valueId">
+    @if (empty) {
+      <span class="mat-mdc-select-placeholder mat-mdc-select-min-line">{{placeholder}}</span>
+    } @else {
+      <span class="mat-mdc-select-value-text">
+        @if (customTrigger) {
+          <ng-content select="mat-select-trigger"></ng-content>
+        } @else {
+          <span class="mat-mdc-select-min-line">{{triggerValue}}</span>
+        }
+      </span>
+    }
+  </div>
+
+  <div class="mat-mdc-select-arrow-wrapper">
+    <div class="mat-mdc-select-arrow">
+      <!-- Use an inline SVG, because it works better than a CSS triangle in high contrast mode. -->
+      <svg viewBox="0 0 24 24" width="24px" height="24px" focusable="false" aria-hidden="true">
+        <path d="M7 10l5 5 5-5z"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<ng-template
+  cdk-connected-overlay
+  cdkConnectedOverlayLockPosition
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayDisableClose]="true"
+  [cdkConnectedOverlayPanelClass]="_overlayPanelClass"
+  [cdkConnectedOverlayScrollStrategy]="_scrollStrategy"
+  [cdkConnectedOverlayOrigin]="_preferredOverlayOrigin || fallbackOverlayOrigin"
+  [cdkConnectedOverlayPositions]="_positions"
+  [cdkConnectedOverlayWidth]="_overlayWidth"
+  [cdkConnectedOverlayFlexibleDimensions]="true"
+  (detach)="close()"
+  (backdropClick)="close()"
+  (overlayKeydown)="_handleOverlayKeydown($event)">
+  <div
+    #panel
+    role="listbox"
+    tabindex="-1"
+    class="mat-mdc-select-panel mdc-menu-surface mdc-menu-surface--open {{ _getPanelTheme() }}"
+    [class.mat-select-panel-animations-enabled]="!_animationsDisabled"
+    [attr.id]="id + '-panel'"
+    [attr.aria-multiselectable]="multiple"
+    [attr.aria-label]="ariaLabel || null"
+    [attr.aria-labelledby]="_getPanelAriaLabelledby()"
+    [ngClass]="panelClass"
+    (keydown)="_handleKeydown($event)">
+    <ng-content></ng-content>
+  </div>
+</ng-template>
+`,
+      styles: ['@keyframes _mat-select-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}@keyframes _mat-select-exit{from{opacity:1}to{opacity:0}}.mat-mdc-select{display:inline-block;width:100%;outline:none;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;color:var(--mat-select-enabled-trigger-text-color, var(--mat-sys-on-surface));font-family:var(--mat-select-trigger-text-font, var(--mat-sys-body-large-font));line-height:var(--mat-select-trigger-text-line-height, var(--mat-sys-body-large-line-height));font-size:var(--mat-select-trigger-text-size, var(--mat-sys-body-large-size));font-weight:var(--mat-select-trigger-text-weight, var(--mat-sys-body-large-weight));letter-spacing:var(--mat-select-trigger-text-tracking, var(--mat-sys-body-large-tracking))}div.mat-mdc-select-panel{box-shadow:var(--mat-select-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12))}.mat-mdc-select-disabled{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-disabled .mat-mdc-select-placeholder{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-trigger{display:inline-flex;align-items:center;cursor:pointer;position:relative;box-sizing:border-box;width:100%}.mat-mdc-select-disabled .mat-mdc-select-trigger{-webkit-user-select:none;user-select:none;cursor:default}.mat-mdc-select-value{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mat-mdc-select-value-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mat-mdc-select-arrow-wrapper{height:24px;flex-shrink:0;display:inline-flex;align-items:center}.mat-form-field-appearance-fill .mdc-text-field--no-label .mat-mdc-select-arrow-wrapper{transform:none}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-invalid .mat-mdc-select-arrow,.mat-form-field-invalid:not(.mat-form-field-disabled) .mat-mdc-form-field-infix::after{color:var(--mat-select-invalid-arrow-color, var(--mat-sys-error))}.mat-mdc-select-arrow{width:10px;height:5px;position:relative;color:var(--mat-select-enabled-arrow-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field.mat-focused .mat-mdc-select-arrow{color:var(--mat-select-focused-arrow-color, var(--mat-sys-primary))}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-disabled .mat-mdc-select-arrow{color:var(--mat-select-disabled-arrow-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-arrow svg{fill:currentColor;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)}@media(forced-colors: active){.mat-mdc-select-arrow svg{fill:CanvasText}.mat-mdc-select-disabled .mat-mdc-select-arrow svg{fill:GrayText}}div.mat-mdc-select-panel{width:100%;max-height:275px;outline:0;overflow:auto;padding:8px 0;border-radius:4px;box-sizing:border-box;position:relative;background-color:var(--mat-select-panel-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-select-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel{border-top-left-radius:0;border-top-right-radius:0;transform-origin:top center}.mat-mdc-select-panel-above div.mat-mdc-select-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:bottom center}.mat-select-panel-animations-enabled{animation:_mat-select-enter 120ms cubic-bezier(0, 0, 0.2, 1)}.mat-select-panel-animations-enabled.mat-select-panel-exit{animation:_mat-select-exit 100ms linear}.mat-mdc-select-placeholder{transition:color 400ms 133.3333333333ms cubic-bezier(0.25, 0.8, 0.25, 1);color:var(--mat-select-placeholder-text-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field:not(.mat-form-field-animations-enabled) .mat-mdc-select-placeholder,._mat-animation-noopable .mat-mdc-select-placeholder{transition:none}.mat-form-field-hide-placeholder .mat-mdc-select-placeholder{color:rgba(0,0,0,0);-webkit-text-fill-color:rgba(0,0,0,0);transition:none;display:block}.mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{cursor:pointer}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mat-mdc-floating-label{max-width:calc(100% - 18px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mdc-floating-label--float-above{max-width:calc(100%/0.75 - 24px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-notched-outline__notch{max-width:calc(100% - 60px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-text-field--label-floating .mdc-notched-outline__notch{max-width:calc(100% - 24px)}.mat-mdc-select-min-line:empty::before{content:" ";white-space:pre;width:1px;display:inline-block;visibility:hidden}.mat-form-field-appearance-fill .mat-mdc-select-arrow-wrapper{transform:var(--mat-select-arrow-transform, translateY(-8px))}\n']
+    }]
+  }], () => [], {
+    options: [{
+      type: ContentChildren,
+      args: [MatOption, {
+        descendants: true
+      }]
+    }],
+    optionGroups: [{
+      type: ContentChildren,
+      args: [MAT_OPTGROUP, {
+        descendants: true
+      }]
+    }],
+    customTrigger: [{
+      type: ContentChild,
+      args: [MAT_SELECT_TRIGGER]
+    }],
+    userAriaDescribedBy: [{
+      type: Input,
+      args: ["aria-describedby"]
+    }],
+    trigger: [{
+      type: ViewChild,
+      args: ["trigger"]
+    }],
+    panel: [{
+      type: ViewChild,
+      args: ["panel"]
+    }],
+    _overlayDir: [{
+      type: ViewChild,
+      args: [CdkConnectedOverlay]
+    }],
+    panelClass: [{
+      type: Input
+    }],
+    disabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    disableRipple: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    tabIndex: [{
+      type: Input,
+      args: [{
+        transform: (value) => value == null ? 0 : numberAttribute(value)
+      }]
+    }],
+    hideSingleSelectionIndicator: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    placeholder: [{
+      type: Input
+    }],
+    required: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    multiple: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    disableOptionCentering: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    compareWith: [{
+      type: Input
+    }],
+    value: [{
+      type: Input
+    }],
+    ariaLabel: [{
+      type: Input,
+      args: ["aria-label"]
+    }],
+    ariaLabelledby: [{
+      type: Input,
+      args: ["aria-labelledby"]
+    }],
+    errorStateMatcher: [{
+      type: Input
+    }],
+    typeaheadDebounceInterval: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    sortComparator: [{
+      type: Input
+    }],
+    id: [{
+      type: Input
+    }],
+    panelWidth: [{
+      type: Input
+    }],
+    canSelectNullableOptions: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    openedChange: [{
+      type: Output
+    }],
+    _openedStream: [{
+      type: Output,
+      args: ["opened"]
+    }],
+    _closedStream: [{
+      type: Output,
+      args: ["closed"]
+    }],
+    selectionChange: [{
+      type: Output
+    }],
+    valueChange: [{
+      type: Output
+    }]
+  });
+})();
+var MatSelectTrigger = class _MatSelectTrigger {
+  static \u0275fac = function MatSelectTrigger_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatSelectTrigger)();
+  };
+  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+    type: _MatSelectTrigger,
+    selectors: [["mat-select-trigger"]],
+    features: [\u0275\u0275ProvidersFeature([{
+      provide: MAT_SELECT_TRIGGER,
+      useExisting: _MatSelectTrigger
+    }])]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatSelectTrigger, [{
+    type: Directive,
+    args: [{
+      selector: "mat-select-trigger",
+      providers: [{
+        provide: MAT_SELECT_TRIGGER,
+        useExisting: MatSelectTrigger
+      }]
+    }]
+  }], null, null);
+})();
+var MatSelectModule = class _MatSelectModule {
+  static \u0275fac = function MatSelectModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatSelectModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatSelectModule,
+    imports: [OverlayModule, MatOptionModule, MatCommonModule, MatSelect, MatSelectTrigger],
+    exports: [CdkScrollableModule, MatFormFieldModule, MatSelect, MatSelectTrigger, MatOptionModule, MatCommonModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    providers: [MAT_SELECT_SCROLL_STRATEGY_PROVIDER],
+    imports: [OverlayModule, MatOptionModule, MatCommonModule, CdkScrollableModule, MatFormFieldModule, MatOptionModule, MatCommonModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatSelectModule, [{
+    type: NgModule,
+    args: [{
+      imports: [OverlayModule, MatOptionModule, MatCommonModule, MatSelect, MatSelectTrigger],
+      exports: [CdkScrollableModule, MatFormFieldModule, MatSelect, MatSelectTrigger, MatOptionModule, MatCommonModule],
+      providers: [MAT_SELECT_SCROLL_STRATEGY_PROVIDER]
+    }]
+  }], null, null);
+})();
+
+// node_modules/@angular/material/fesm2022/checkbox.mjs
+var _c011 = ["input"];
+var _c18 = ["label"];
+var _c25 = ["*"];
+var MAT_CHECKBOX_DEFAULT_OPTIONS = new InjectionToken("mat-checkbox-default-options", {
+  providedIn: "root",
+  factory: MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY
+});
+function MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY() {
+  return {
+    color: "accent",
+    clickAction: "check-indeterminate",
+    disabledInteractive: false
+  };
+}
+var TransitionCheckState;
+(function(TransitionCheckState2) {
+  TransitionCheckState2[TransitionCheckState2["Init"] = 0] = "Init";
+  TransitionCheckState2[TransitionCheckState2["Checked"] = 1] = "Checked";
+  TransitionCheckState2[TransitionCheckState2["Unchecked"] = 2] = "Unchecked";
+  TransitionCheckState2[TransitionCheckState2["Indeterminate"] = 3] = "Indeterminate";
+})(TransitionCheckState || (TransitionCheckState = {}));
+var MatCheckboxChange = class {
+  /** The source checkbox of the event. */
+  source;
+  /** The new `checked` value of the checkbox. */
+  checked;
+};
+var defaults2 = MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY();
+var MatCheckbox = class _MatCheckbox {
+  _elementRef = inject(ElementRef);
+  _changeDetectorRef = inject(ChangeDetectorRef);
+  _ngZone = inject(NgZone);
+  _animationsDisabled = _animationsDisabled();
+  _options = inject(MAT_CHECKBOX_DEFAULT_OPTIONS, {
+    optional: true
+  });
+  /** Focuses the checkbox. */
+  focus() {
+    this._inputElement.nativeElement.focus();
+  }
+  /** Creates the change event that will be emitted by the checkbox. */
+  _createChangeEvent(isChecked) {
+    const event = new MatCheckboxChange();
+    event.source = this;
+    event.checked = isChecked;
+    return event;
+  }
+  /** Gets the element on which to add the animation CSS classes. */
+  _getAnimationTargetElement() {
+    return this._inputElement?.nativeElement;
+  }
+  /** CSS classes to add when transitioning between the different checkbox states. */
+  _animationClasses = {
+    uncheckedToChecked: "mdc-checkbox--anim-unchecked-checked",
+    uncheckedToIndeterminate: "mdc-checkbox--anim-unchecked-indeterminate",
+    checkedToUnchecked: "mdc-checkbox--anim-checked-unchecked",
+    checkedToIndeterminate: "mdc-checkbox--anim-checked-indeterminate",
+    indeterminateToChecked: "mdc-checkbox--anim-indeterminate-checked",
+    indeterminateToUnchecked: "mdc-checkbox--anim-indeterminate-unchecked"
+  };
+  /**
+   * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
+   * take precedence so this may be omitted.
+   */
+  ariaLabel = "";
+  /**
+   * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
+   */
+  ariaLabelledby = null;
+  /** The 'aria-describedby' attribute is read after the element's label and field type. */
+  ariaDescribedby;
+  /**
+   * Users can specify the `aria-expanded` attribute which will be forwarded to the input element
+   */
+  ariaExpanded;
+  /**
+   * Users can specify the `aria-controls` attribute which will be forwarded to the input element
+   */
+  ariaControls;
+  /** Users can specify the `aria-owns` attribute which will be forwarded to the input element */
+  ariaOwns;
+  _uniqueId;
+  /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
+  id;
+  /** Returns the unique id for the visual hidden input. */
+  get inputId() {
+    return `${this.id || this._uniqueId}-input`;
+  }
+  /** Whether the checkbox is required. */
+  required;
+  /** Whether the label should appear after or before the checkbox. Defaults to 'after' */
+  labelPosition = "after";
+  /** Name value will be applied to the input element if present */
+  name = null;
+  /** Event emitted when the checkbox's `checked` value changes. */
+  change = new EventEmitter();
+  /** Event emitted when the checkbox's `indeterminate` value changes. */
+  indeterminateChange = new EventEmitter();
+  /** The value attribute of the native input element */
+  value;
+  /** Whether the checkbox has a ripple. */
+  disableRipple;
+  /** The native `<input type="checkbox">` element */
+  _inputElement;
+  /** The native `<label>` element */
+  _labelElement;
+  /** Tabindex for the checkbox. */
+  tabIndex;
+  // TODO(crisbeto): this should be a ThemePalette, but some internal apps were abusing
+  // the lack of type checking previously and assigning random strings.
+  /**
+   * Theme color of the checkbox. This API is supported in M2 themes only, it
+   * has no effect in M3 themes. For color customization in M3, see https://material.angular.dev/components/checkbox/styling.
+   *
+   * For information on applying color variants in M3, see
+   * https://material.angular.dev/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
+   */
+  color;
+  /** Whether the checkbox should remain interactive when it is disabled. */
+  disabledInteractive;
+  /**
+   * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
+   * @docs-private
+   */
+  _onTouched = () => {
+  };
+  _currentAnimationClass = "";
+  _currentCheckState = TransitionCheckState.Init;
+  _controlValueAccessorChangeFn = () => {
+  };
+  _validatorChangeFn = () => {
+  };
+  constructor() {
+    inject(_CdkPrivateStyleLoader).load(_StructuralStylesLoader);
+    const tabIndex = inject(new HostAttributeToken("tabindex"), {
+      optional: true
+    });
+    this._options = this._options || defaults2;
+    this.color = this._options.color || defaults2.color;
+    this.tabIndex = tabIndex == null ? 0 : parseInt(tabIndex) || 0;
+    this.id = this._uniqueId = inject(_IdGenerator).getId("mat-mdc-checkbox-");
+    this.disabledInteractive = this._options?.disabledInteractive ?? false;
+  }
+  ngOnChanges(changes) {
+    if (changes["required"]) {
+      this._validatorChangeFn();
+    }
+  }
+  ngAfterViewInit() {
+    this._syncIndeterminate(this.indeterminate);
+  }
+  /** Whether the checkbox is checked. */
+  get checked() {
+    return this._checked;
+  }
+  set checked(value) {
+    if (value != this.checked) {
+      this._checked = value;
+      this._changeDetectorRef.markForCheck();
+    }
+  }
+  _checked = false;
+  /** Whether the checkbox is disabled. */
+  get disabled() {
+    return this._disabled;
+  }
+  set disabled(value) {
+    if (value !== this.disabled) {
+      this._disabled = value;
+      this._changeDetectorRef.markForCheck();
+    }
+  }
+  _disabled = false;
+  /**
+   * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
+   * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
+   * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
+   * set to false.
+   */
+  get indeterminate() {
+    return this._indeterminate();
+  }
+  set indeterminate(value) {
+    const changed = value != this._indeterminate();
+    this._indeterminate.set(value);
+    if (changed) {
+      if (value) {
+        this._transitionCheckState(TransitionCheckState.Indeterminate);
+      } else {
+        this._transitionCheckState(this.checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
+      }
+      this.indeterminateChange.emit(value);
+    }
+    this._syncIndeterminate(value);
+  }
+  _indeterminate = signal(false);
+  _isRippleDisabled() {
+    return this.disableRipple || this.disabled;
+  }
+  /** Method being called whenever the label text changes. */
+  _onLabelTextChange() {
+    this._changeDetectorRef.detectChanges();
+  }
+  // Implemented as part of ControlValueAccessor.
+  writeValue(value) {
+    this.checked = !!value;
+  }
+  // Implemented as part of ControlValueAccessor.
+  registerOnChange(fn3) {
+    this._controlValueAccessorChangeFn = fn3;
+  }
+  // Implemented as part of ControlValueAccessor.
+  registerOnTouched(fn3) {
+    this._onTouched = fn3;
+  }
+  // Implemented as part of ControlValueAccessor.
+  setDisabledState(isDisabled) {
+    this.disabled = isDisabled;
+  }
+  // Implemented as a part of Validator.
+  validate(control) {
+    return this.required && control.value !== true ? {
+      "required": true
+    } : null;
+  }
+  // Implemented as a part of Validator.
+  registerOnValidatorChange(fn3) {
+    this._validatorChangeFn = fn3;
+  }
+  _transitionCheckState(newState) {
+    let oldState = this._currentCheckState;
+    let element = this._getAnimationTargetElement();
+    if (oldState === newState || !element) {
+      return;
+    }
+    if (this._currentAnimationClass) {
+      element.classList.remove(this._currentAnimationClass);
+    }
+    this._currentAnimationClass = this._getAnimationClassForCheckStateTransition(oldState, newState);
+    this._currentCheckState = newState;
+    if (this._currentAnimationClass.length > 0) {
+      element.classList.add(this._currentAnimationClass);
+      const animationClass = this._currentAnimationClass;
+      this._ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          element.classList.remove(animationClass);
+        }, 1e3);
+      });
+    }
+  }
+  _emitChangeEvent() {
+    this._controlValueAccessorChangeFn(this.checked);
+    this.change.emit(this._createChangeEvent(this.checked));
+    if (this._inputElement) {
+      this._inputElement.nativeElement.checked = this.checked;
+    }
+  }
+  /** Toggles the `checked` state of the checkbox. */
+  toggle() {
+    this.checked = !this.checked;
+    this._controlValueAccessorChangeFn(this.checked);
+  }
+  _handleInputClick() {
+    const clickAction = this._options?.clickAction;
+    if (!this.disabled && clickAction !== "noop") {
+      if (this.indeterminate && clickAction !== "check") {
+        Promise.resolve().then(() => {
+          this._indeterminate.set(false);
+          this.indeterminateChange.emit(false);
+        });
+      }
+      this._checked = !this._checked;
+      this._transitionCheckState(this._checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
+      this._emitChangeEvent();
+    } else if (this.disabled && this.disabledInteractive || !this.disabled && clickAction === "noop") {
+      this._inputElement.nativeElement.checked = this.checked;
+      this._inputElement.nativeElement.indeterminate = this.indeterminate;
+    }
+  }
+  _onInteractionEvent(event) {
+    event.stopPropagation();
+  }
+  _onBlur() {
+    Promise.resolve().then(() => {
+      this._onTouched();
+      this._changeDetectorRef.markForCheck();
+    });
+  }
+  _getAnimationClassForCheckStateTransition(oldState, newState) {
+    if (this._animationsDisabled) {
+      return "";
+    }
+    switch (oldState) {
+      case TransitionCheckState.Init:
+        if (newState === TransitionCheckState.Checked) {
+          return this._animationClasses.uncheckedToChecked;
+        } else if (newState == TransitionCheckState.Indeterminate) {
+          return this._checked ? this._animationClasses.checkedToIndeterminate : this._animationClasses.uncheckedToIndeterminate;
+        }
+        break;
+      case TransitionCheckState.Unchecked:
+        return newState === TransitionCheckState.Checked ? this._animationClasses.uncheckedToChecked : this._animationClasses.uncheckedToIndeterminate;
+      case TransitionCheckState.Checked:
+        return newState === TransitionCheckState.Unchecked ? this._animationClasses.checkedToUnchecked : this._animationClasses.checkedToIndeterminate;
+      case TransitionCheckState.Indeterminate:
+        return newState === TransitionCheckState.Checked ? this._animationClasses.indeterminateToChecked : this._animationClasses.indeterminateToUnchecked;
+    }
+    return "";
+  }
+  /**
+   * Syncs the indeterminate value with the checkbox DOM node.
+   *
+   * We sync `indeterminate` directly on the DOM node, because in Ivy the check for whether a
+   * property is supported on an element boils down to `if (propName in element)`. Domino's
+   * HTMLInputElement doesn't have an `indeterminate` property so Ivy will warn during
+   * server-side rendering.
+   */
+  _syncIndeterminate(value) {
+    const nativeCheckbox = this._inputElement;
+    if (nativeCheckbox) {
+      nativeCheckbox.nativeElement.indeterminate = value;
+    }
+  }
+  _onInputClick() {
+    this._handleInputClick();
+  }
+  _onTouchTargetClick() {
+    this._handleInputClick();
+    if (!this.disabled) {
+      this._inputElement.nativeElement.focus();
+    }
+  }
+  /**
+   *  Prevent click events that come from the `<label/>` element from bubbling. This prevents the
+   *  click handler on the host from triggering twice when clicking on the `<label/>` element. After
+   *  the click event on the `<label/>` propagates, the browsers dispatches click on the associated
+   *  `<input/>`. By preventing clicks on the label by bubbling, we ensure only one click event
+   *  bubbles when the label is clicked.
+   */
+  _preventBubblingFromLabel(event) {
+    if (!!event.target && this._labelElement.nativeElement.contains(event.target)) {
+      event.stopPropagation();
+    }
+  }
+  static \u0275fac = function MatCheckbox_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatCheckbox)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _MatCheckbox,
+    selectors: [["mat-checkbox"]],
+    viewQuery: function MatCheckbox_Query(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275viewQuery(_c011, 5);
+        \u0275\u0275viewQuery(_c18, 5);
+      }
+      if (rf & 2) {
+        let _t4;
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._inputElement = _t4.first);
+        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._labelElement = _t4.first);
+      }
+    },
+    hostAttrs: [1, "mat-mdc-checkbox"],
+    hostVars: 16,
+    hostBindings: function MatCheckbox_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275domProperty("id", ctx.id);
+        \u0275\u0275attribute("tabindex", null)("aria-label", null)("aria-labelledby", null);
+        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "mat-accent");
+        \u0275\u0275classProp("_mat-animation-noopable", ctx._animationsDisabled)("mdc-checkbox--disabled", ctx.disabled)("mat-mdc-checkbox-disabled", ctx.disabled)("mat-mdc-checkbox-checked", ctx.checked)("mat-mdc-checkbox-disabled-interactive", ctx.disabledInteractive);
+      }
+    },
+    inputs: {
+      ariaLabel: [0, "aria-label", "ariaLabel"],
+      ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
+      ariaDescribedby: [0, "aria-describedby", "ariaDescribedby"],
+      ariaExpanded: [2, "aria-expanded", "ariaExpanded", booleanAttribute],
+      ariaControls: [0, "aria-controls", "ariaControls"],
+      ariaOwns: [0, "aria-owns", "ariaOwns"],
+      id: "id",
+      required: [2, "required", "required", booleanAttribute],
+      labelPosition: "labelPosition",
+      name: "name",
+      value: "value",
+      disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
+      tabIndex: [2, "tabIndex", "tabIndex", (value) => value == null ? void 0 : numberAttribute(value)],
+      color: "color",
+      disabledInteractive: [2, "disabledInteractive", "disabledInteractive", booleanAttribute],
+      checked: [2, "checked", "checked", booleanAttribute],
+      disabled: [2, "disabled", "disabled", booleanAttribute],
+      indeterminate: [2, "indeterminate", "indeterminate", booleanAttribute]
+    },
+    outputs: {
+      change: "change",
+      indeterminateChange: "indeterminateChange"
+    },
+    exportAs: ["matCheckbox"],
+    features: [\u0275\u0275ProvidersFeature([{
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => _MatCheckbox),
+      multi: true
+    }, {
+      provide: NG_VALIDATORS,
+      useExisting: _MatCheckbox,
+      multi: true
+    }]), \u0275\u0275NgOnChangesFeature],
+    ngContentSelectors: _c25,
+    decls: 15,
+    vars: 23,
+    consts: [["checkbox", ""], ["input", ""], ["label", ""], ["mat-internal-form-field", "", 3, "click", "labelPosition"], [1, "mdc-checkbox"], [1, "mat-mdc-checkbox-touch-target", 3, "click"], ["type", "checkbox", 1, "mdc-checkbox__native-control", 3, "blur", "click", "change", "checked", "indeterminate", "disabled", "id", "required", "tabIndex"], [1, "mdc-checkbox__ripple"], [1, "mdc-checkbox__background"], ["focusable", "false", "viewBox", "0 0 24 24", "aria-hidden", "true", 1, "mdc-checkbox__checkmark"], ["fill", "none", "d", "M1.73,12.91 8.1,19.28 22.79,4.59", 1, "mdc-checkbox__checkmark-path"], [1, "mdc-checkbox__mixedmark"], ["mat-ripple", "", 1, "mat-mdc-checkbox-ripple", "mat-focus-indicator", 3, "matRippleTrigger", "matRippleDisabled", "matRippleCentered"], [1, "mdc-label", 3, "for"]],
+    template: function MatCheckbox_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r1 = \u0275\u0275getCurrentView();
+        \u0275\u0275projectionDef();
+        \u0275\u0275elementStart(0, "div", 3);
+        \u0275\u0275listener("click", function MatCheckbox_Template_div_click_0_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._preventBubblingFromLabel($event));
+        });
+        \u0275\u0275elementStart(1, "div", 4, 0)(3, "div", 5);
+        \u0275\u0275listener("click", function MatCheckbox_Template_div_click_3_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onTouchTargetClick());
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(4, "input", 6, 1);
+        \u0275\u0275listener("blur", function MatCheckbox_Template_input_blur_4_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onBlur());
+        })("click", function MatCheckbox_Template_input_click_4_listener() {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onInputClick());
+        })("change", function MatCheckbox_Template_input_change_4_listener($event) {
+          \u0275\u0275restoreView(_r1);
+          return \u0275\u0275resetView(ctx._onInteractionEvent($event));
+        });
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(6, "div", 7);
+        \u0275\u0275elementStart(7, "div", 8);
+        \u0275\u0275namespaceSVG();
+        \u0275\u0275elementStart(8, "svg", 9);
+        \u0275\u0275element(9, "path", 10);
+        \u0275\u0275elementEnd();
+        \u0275\u0275namespaceHTML();
+        \u0275\u0275element(10, "div", 11);
+        \u0275\u0275elementEnd();
+        \u0275\u0275element(11, "div", 12);
+        \u0275\u0275elementEnd();
+        \u0275\u0275elementStart(12, "label", 13, 2);
+        \u0275\u0275projection(14);
+        \u0275\u0275elementEnd()();
+      }
+      if (rf & 2) {
+        const checkbox_r2 = \u0275\u0275reference(2);
+        \u0275\u0275property("labelPosition", ctx.labelPosition);
+        \u0275\u0275advance(4);
+        \u0275\u0275classProp("mdc-checkbox--selected", ctx.checked);
+        \u0275\u0275property("checked", ctx.checked)("indeterminate", ctx.indeterminate)("disabled", ctx.disabled && !ctx.disabledInteractive)("id", ctx.inputId)("required", ctx.required)("tabIndex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex);
+        \u0275\u0275attribute("aria-label", ctx.ariaLabel || null)("aria-labelledby", ctx.ariaLabelledby)("aria-describedby", ctx.ariaDescribedby)("aria-checked", ctx.indeterminate ? "mixed" : null)("aria-controls", ctx.ariaControls)("aria-disabled", ctx.disabled && ctx.disabledInteractive ? true : null)("aria-expanded", ctx.ariaExpanded)("aria-owns", ctx.ariaOwns)("name", ctx.name)("value", ctx.value);
+        \u0275\u0275advance(7);
+        \u0275\u0275property("matRippleTrigger", checkbox_r2)("matRippleDisabled", ctx.disableRipple || ctx.disabled)("matRippleCentered", true);
+        \u0275\u0275advance();
+        \u0275\u0275property("for", ctx.inputId);
+      }
+    },
+    dependencies: [MatRipple, _MatInternalFormField],
+    styles: ['.mdc-checkbox{display:inline-block;position:relative;flex:0 0 18px;box-sizing:content-box;width:18px;height:18px;line-height:0;white-space:nowrap;cursor:pointer;vertical-align:bottom;padding:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);margin:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox:hover>.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:hover>.mat-mdc-checkbox-ripple>.mat-ripple-element{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control+.mdc-checkbox__ripple{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control{position:absolute;margin:0;padding:0;opacity:0;cursor:inherit;z-index:1;width:var(--mat-checkbox-state-layer-size, 40px);height:var(--mat-checkbox-state-layer-size, 40px);top:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);right:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox--disabled{cursor:default;pointer-events:none}@media(forced-colors: active){.mdc-checkbox--disabled{opacity:.5}}.mdc-checkbox__background{display:inline-flex;position:absolute;align-items:center;justify-content:center;box-sizing:border-box;width:18px;height:18px;border:2px solid currentColor;border-radius:2px;background-color:rgba(0,0,0,0);pointer-events:none;will-change:background-color,border-color;transition:background-color 90ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms cubic-bezier(0.4, 0, 0.6, 1);-webkit-print-color-adjust:exact;color-adjust:exact;border-color:var(--mat-checkbox-unselected-icon-color, var(--mat-sys-on-surface-variant));top:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2)}.mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox__native-control:disabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:disabled:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:checked)~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-hover-icon-color, var(--mat-sys-on-surface));background-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary))}.mdc-checkbox__native-control:focus:focus:not(:checked)~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-focus-icon-color, var(--mat-sys-on-surface))}.mdc-checkbox__native-control:focus:focus:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox:hover>.mdc-checkbox__native-control~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox__checkmark{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0;transition:opacity 180ms cubic-bezier(0.4, 0, 0.6, 1);color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}@media(forced-colors: active){.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox__checkmark-path{transition:stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1);stroke:currentColor;stroke-width:3.12px;stroke-dashoffset:29.7833385;stroke-dasharray:29.7833385}.mdc-checkbox__mixedmark{width:100%;height:0;transform:scaleX(0) rotate(0deg);border-width:1px;border-style:solid;opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1);border-color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__mixedmark{margin:0 1px}}.mdc-checkbox--disabled .mdc-checkbox__mixedmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__mixedmark{border-color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background,.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background,.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background,.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background{animation-duration:180ms;animation-timing-function:linear}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-unchecked-checked-checkmark-path 180ms linear;transition:none}.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-unchecked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-checked-unchecked-checkmark-path 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__checkmark{animation:mdc-checkbox-checked-indeterminate-checkmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-checked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__checkmark{animation:mdc-checkbox-indeterminate-checked-checkmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-checked-mixedmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-unchecked-mixedmark 300ms linear;transition:none}.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{transition:border-color 90ms cubic-bezier(0, 0, 0.2, 1),background-color 90ms cubic-bezier(0, 0, 0.2, 1)}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path{stroke-dashoffset:0}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark{transition:opacity 180ms cubic-bezier(0, 0, 0.2, 1),transform 180ms cubic-bezier(0, 0, 0.2, 1);opacity:1}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(-45deg)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark{transform:rotate(45deg);opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(0deg);opacity:1}@keyframes mdc-checkbox-unchecked-checked-checkmark-path{0%,50%{stroke-dashoffset:29.7833385}50%{animation-timing-function:cubic-bezier(0, 0, 0.2, 1)}100%{stroke-dashoffset:0}}@keyframes mdc-checkbox-unchecked-indeterminate-mixedmark{0%,68.2%{transform:scaleX(0)}68.2%{animation-timing-function:cubic-bezier(0, 0, 0, 1)}100%{transform:scaleX(1)}}@keyframes mdc-checkbox-checked-unchecked-checkmark-path{from{animation-timing-function:cubic-bezier(0.4, 0, 1, 1);opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:-29.7833385}}@keyframes mdc-checkbox-checked-indeterminate-checkmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(45deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-checked-checkmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(45deg);opacity:0}to{transform:rotate(360deg);opacity:1}}@keyframes mdc-checkbox-checked-indeterminate-mixedmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(-45deg);opacity:0}to{transform:rotate(0deg);opacity:1}}@keyframes mdc-checkbox-indeterminate-checked-mixedmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(315deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-unchecked-mixedmark{0%{animation-timing-function:linear;transform:scaleX(1);opacity:1}32.8%,100%{transform:scaleX(0);opacity:0}}.mat-mdc-checkbox{display:inline-block;position:relative;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-touch-target,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__native-control,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__ripple,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-ripple::before,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__mixedmark{transition:none !important;animation:none !important}.mat-mdc-checkbox label{cursor:pointer}.mat-mdc-checkbox .mat-internal-form-field{color:var(--mat-checkbox-label-text-color, var(--mat-sys-on-surface));font-family:var(--mat-checkbox-label-text-font, var(--mat-sys-body-medium-font));line-height:var(--mat-checkbox-label-text-line-height, var(--mat-sys-body-medium-line-height));font-size:var(--mat-checkbox-label-text-size, var(--mat-sys-body-medium-size));letter-spacing:var(--mat-checkbox-label-text-tracking, var(--mat-sys-body-medium-tracking));font-weight:var(--mat-checkbox-label-text-weight, var(--mat-sys-body-medium-weight))}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive{pointer-events:auto}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive input{cursor:default}.mat-mdc-checkbox.mat-mdc-checkbox-disabled label{cursor:default;color:var(--mat-checkbox-disabled-label-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-checkbox label:empty{display:none}.mat-mdc-checkbox .mdc-checkbox__ripple{opacity:0}.mat-mdc-checkbox .mat-mdc-checkbox-ripple,.mdc-checkbox__ripple{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:50%;pointer-events:none}.mat-mdc-checkbox .mat-mdc-checkbox-ripple:not(:empty),.mdc-checkbox__ripple:not(:empty){transform:translateZ(0)}.mat-mdc-checkbox-ripple .mat-ripple-element{opacity:.1}.mat-mdc-checkbox-touch-target{position:absolute;top:50%;left:50%;height:48px;width:48px;transform:translate(-50%, -50%);display:var(--mat-checkbox-touch-target-display, block)}.mat-mdc-checkbox .mat-mdc-checkbox-ripple::before{border-radius:50%}.mdc-checkbox__native-control:focus~.mat-focus-indicator::before{content:""}\n'],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCheckbox, [{
+    type: Component,
+    args: [{
+      selector: "mat-checkbox",
+      host: {
+        "class": "mat-mdc-checkbox",
+        "[attr.tabindex]": "null",
+        "[attr.aria-label]": "null",
+        "[attr.aria-labelledby]": "null",
+        "[class._mat-animation-noopable]": "_animationsDisabled",
+        "[class.mdc-checkbox--disabled]": "disabled",
+        "[id]": "id",
+        // Add classes that users can use to more easily target disabled or checked checkboxes.
+        "[class.mat-mdc-checkbox-disabled]": "disabled",
+        "[class.mat-mdc-checkbox-checked]": "checked",
+        "[class.mat-mdc-checkbox-disabled-interactive]": "disabledInteractive",
+        "[class]": 'color ? "mat-" + color : "mat-accent"'
+      },
+      providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => MatCheckbox),
+        multi: true
+      }, {
+        provide: NG_VALIDATORS,
+        useExisting: MatCheckbox,
+        multi: true
+      }],
+      exportAs: "matCheckbox",
+      encapsulation: ViewEncapsulation.None,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      imports: [MatRipple, _MatInternalFormField],
+      template: `<div mat-internal-form-field [labelPosition]="labelPosition" (click)="_preventBubblingFromLabel($event)">
+  <div #checkbox class="mdc-checkbox">
+    <!-- Render this element first so the input is on top. -->
+    <div class="mat-mdc-checkbox-touch-target" (click)="_onTouchTargetClick()"></div>
+    <input #input
+           type="checkbox"
+           class="mdc-checkbox__native-control"
+           [class.mdc-checkbox--selected]="checked"
+           [attr.aria-label]="ariaLabel || null"
+           [attr.aria-labelledby]="ariaLabelledby"
+           [attr.aria-describedby]="ariaDescribedby"
+           [attr.aria-checked]="indeterminate ? 'mixed' : null"
+           [attr.aria-controls]="ariaControls"
+           [attr.aria-disabled]="disabled && disabledInteractive ? true : null"
+           [attr.aria-expanded]="ariaExpanded"
+           [attr.aria-owns]="ariaOwns"
+           [attr.name]="name"
+           [attr.value]="value"
+           [checked]="checked"
+           [indeterminate]="indeterminate"
+           [disabled]="disabled && !disabledInteractive"
+           [id]="inputId"
+           [required]="required"
+           [tabIndex]="disabled && !disabledInteractive ? -1 : tabIndex"
+           (blur)="_onBlur()"
+           (click)="_onInputClick()"
+           (change)="_onInteractionEvent($event)"/>
+    <div class="mdc-checkbox__ripple"></div>
+    <div class="mdc-checkbox__background">
+      <svg class="mdc-checkbox__checkmark"
+           focusable="false"
+           viewBox="0 0 24 24"
+           aria-hidden="true">
+        <path class="mdc-checkbox__checkmark-path"
+              fill="none"
+              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+      </svg>
+      <div class="mdc-checkbox__mixedmark"></div>
+    </div>
+    <div class="mat-mdc-checkbox-ripple mat-focus-indicator" mat-ripple
+      [matRippleTrigger]="checkbox"
+      [matRippleDisabled]="disableRipple || disabled"
+      [matRippleCentered]="true"></div>
+  </div>
+  <!--
+    Avoid putting a click handler on the <label/> to fix duplicate navigation stop on Talk Back
+    (#14385). Putting a click handler on the <label/> caused this bug because the browser produced
+    an unnecessary accessibility tree node.
+  -->
+  <label class="mdc-label" #label [for]="inputId">
+    <ng-content></ng-content>
+  </label>
+</div>
+`,
+      styles: ['.mdc-checkbox{display:inline-block;position:relative;flex:0 0 18px;box-sizing:content-box;width:18px;height:18px;line-height:0;white-space:nowrap;cursor:pointer;vertical-align:bottom;padding:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);margin:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox:hover>.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:hover>.mat-mdc-checkbox-ripple>.mat-ripple-element{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control+.mdc-checkbox__ripple{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control{position:absolute;margin:0;padding:0;opacity:0;cursor:inherit;z-index:1;width:var(--mat-checkbox-state-layer-size, 40px);height:var(--mat-checkbox-state-layer-size, 40px);top:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);right:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox--disabled{cursor:default;pointer-events:none}@media(forced-colors: active){.mdc-checkbox--disabled{opacity:.5}}.mdc-checkbox__background{display:inline-flex;position:absolute;align-items:center;justify-content:center;box-sizing:border-box;width:18px;height:18px;border:2px solid currentColor;border-radius:2px;background-color:rgba(0,0,0,0);pointer-events:none;will-change:background-color,border-color;transition:background-color 90ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms cubic-bezier(0.4, 0, 0.6, 1);-webkit-print-color-adjust:exact;color-adjust:exact;border-color:var(--mat-checkbox-unselected-icon-color, var(--mat-sys-on-surface-variant));top:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2)}.mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox__native-control:disabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:disabled:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:checked)~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-hover-icon-color, var(--mat-sys-on-surface));background-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary))}.mdc-checkbox__native-control:focus:focus:not(:checked)~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-focus-icon-color, var(--mat-sys-on-surface))}.mdc-checkbox__native-control:focus:focus:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox:hover>.mdc-checkbox__native-control~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox__checkmark{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0;transition:opacity 180ms cubic-bezier(0.4, 0, 0.6, 1);color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}@media(forced-colors: active){.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox__checkmark-path{transition:stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1);stroke:currentColor;stroke-width:3.12px;stroke-dashoffset:29.7833385;stroke-dasharray:29.7833385}.mdc-checkbox__mixedmark{width:100%;height:0;transform:scaleX(0) rotate(0deg);border-width:1px;border-style:solid;opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1);border-color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__mixedmark{margin:0 1px}}.mdc-checkbox--disabled .mdc-checkbox__mixedmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__mixedmark{border-color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background,.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background,.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background,.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background{animation-duration:180ms;animation-timing-function:linear}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-unchecked-checked-checkmark-path 180ms linear;transition:none}.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-unchecked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-checked-unchecked-checkmark-path 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__checkmark{animation:mdc-checkbox-checked-indeterminate-checkmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-checked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__checkmark{animation:mdc-checkbox-indeterminate-checked-checkmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-checked-mixedmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-unchecked-mixedmark 300ms linear;transition:none}.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{transition:border-color 90ms cubic-bezier(0, 0, 0.2, 1),background-color 90ms cubic-bezier(0, 0, 0.2, 1)}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path{stroke-dashoffset:0}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark{transition:opacity 180ms cubic-bezier(0, 0, 0.2, 1),transform 180ms cubic-bezier(0, 0, 0.2, 1);opacity:1}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(-45deg)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark{transform:rotate(45deg);opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(0deg);opacity:1}@keyframes mdc-checkbox-unchecked-checked-checkmark-path{0%,50%{stroke-dashoffset:29.7833385}50%{animation-timing-function:cubic-bezier(0, 0, 0.2, 1)}100%{stroke-dashoffset:0}}@keyframes mdc-checkbox-unchecked-indeterminate-mixedmark{0%,68.2%{transform:scaleX(0)}68.2%{animation-timing-function:cubic-bezier(0, 0, 0, 1)}100%{transform:scaleX(1)}}@keyframes mdc-checkbox-checked-unchecked-checkmark-path{from{animation-timing-function:cubic-bezier(0.4, 0, 1, 1);opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:-29.7833385}}@keyframes mdc-checkbox-checked-indeterminate-checkmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(45deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-checked-checkmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(45deg);opacity:0}to{transform:rotate(360deg);opacity:1}}@keyframes mdc-checkbox-checked-indeterminate-mixedmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(-45deg);opacity:0}to{transform:rotate(0deg);opacity:1}}@keyframes mdc-checkbox-indeterminate-checked-mixedmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(315deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-unchecked-mixedmark{0%{animation-timing-function:linear;transform:scaleX(1);opacity:1}32.8%,100%{transform:scaleX(0);opacity:0}}.mat-mdc-checkbox{display:inline-block;position:relative;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-touch-target,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__native-control,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__ripple,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-ripple::before,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__mixedmark{transition:none !important;animation:none !important}.mat-mdc-checkbox label{cursor:pointer}.mat-mdc-checkbox .mat-internal-form-field{color:var(--mat-checkbox-label-text-color, var(--mat-sys-on-surface));font-family:var(--mat-checkbox-label-text-font, var(--mat-sys-body-medium-font));line-height:var(--mat-checkbox-label-text-line-height, var(--mat-sys-body-medium-line-height));font-size:var(--mat-checkbox-label-text-size, var(--mat-sys-body-medium-size));letter-spacing:var(--mat-checkbox-label-text-tracking, var(--mat-sys-body-medium-tracking));font-weight:var(--mat-checkbox-label-text-weight, var(--mat-sys-body-medium-weight))}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive{pointer-events:auto}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive input{cursor:default}.mat-mdc-checkbox.mat-mdc-checkbox-disabled label{cursor:default;color:var(--mat-checkbox-disabled-label-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-checkbox label:empty{display:none}.mat-mdc-checkbox .mdc-checkbox__ripple{opacity:0}.mat-mdc-checkbox .mat-mdc-checkbox-ripple,.mdc-checkbox__ripple{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:50%;pointer-events:none}.mat-mdc-checkbox .mat-mdc-checkbox-ripple:not(:empty),.mdc-checkbox__ripple:not(:empty){transform:translateZ(0)}.mat-mdc-checkbox-ripple .mat-ripple-element{opacity:.1}.mat-mdc-checkbox-touch-target{position:absolute;top:50%;left:50%;height:48px;width:48px;transform:translate(-50%, -50%);display:var(--mat-checkbox-touch-target-display, block)}.mat-mdc-checkbox .mat-mdc-checkbox-ripple::before{border-radius:50%}.mdc-checkbox__native-control:focus~.mat-focus-indicator::before{content:""}\n']
+    }]
+  }], () => [], {
+    ariaLabel: [{
+      type: Input,
+      args: ["aria-label"]
+    }],
+    ariaLabelledby: [{
+      type: Input,
+      args: ["aria-labelledby"]
+    }],
+    ariaDescribedby: [{
+      type: Input,
+      args: ["aria-describedby"]
+    }],
+    ariaExpanded: [{
+      type: Input,
+      args: [{
+        alias: "aria-expanded",
+        transform: booleanAttribute
+      }]
+    }],
+    ariaControls: [{
+      type: Input,
+      args: ["aria-controls"]
+    }],
+    ariaOwns: [{
+      type: Input,
+      args: ["aria-owns"]
+    }],
+    id: [{
+      type: Input
+    }],
+    required: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    labelPosition: [{
+      type: Input
+    }],
+    name: [{
+      type: Input
+    }],
+    change: [{
+      type: Output
+    }],
+    indeterminateChange: [{
+      type: Output
+    }],
+    value: [{
+      type: Input
+    }],
+    disableRipple: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    _inputElement: [{
+      type: ViewChild,
+      args: ["input"]
+    }],
+    _labelElement: [{
+      type: ViewChild,
+      args: ["label"]
+    }],
+    tabIndex: [{
+      type: Input,
+      args: [{
+        transform: (value) => value == null ? void 0 : numberAttribute(value)
+      }]
+    }],
+    color: [{
+      type: Input
+    }],
+    disabledInteractive: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    checked: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    disabled: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }],
+    indeterminate: [{
+      type: Input,
+      args: [{
+        transform: booleanAttribute
+      }]
+    }]
+  });
+})();
+var MatCheckboxModule = class _MatCheckboxModule {
+  static \u0275fac = function MatCheckboxModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatCheckboxModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatCheckboxModule,
+    imports: [MatCheckbox, MatCommonModule],
+    exports: [MatCheckbox, MatCommonModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [MatCheckbox, MatCommonModule, MatCommonModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCheckboxModule, [{
+    type: NgModule,
+    args: [{
+      imports: [MatCheckbox, MatCommonModule],
+      exports: [MatCheckbox, MatCommonModule]
+    }]
+  }], null, null);
+})();
+
+// libs/components/src/lib/settings-toggle.component.ts
+var _c012 = ["*"];
+function SettingsToggleComponent_Conditional_5_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "icon", 2);
+    \u0275\u0275text(1, "info");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("matTooltip", ctx_r0.info());
+  }
+}
+function SettingsToggleComponent_Conditional_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "div", 3);
+  }
+}
+function SettingsToggleComponent_Conditional_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 4)(1, "div", 6)(2, "div", 7)(3, "icon");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275classProp("bg-base-300", !ctx_r0.value)("bg-info", ctx_r0.value)("!border-info", ctx_r0.value);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("left-1", !ctx_r0.value)("left-5", ctx_r0.value)("bg-base-400", !ctx_r0.value)("bg-info-light", ctx_r0.value);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r0.value ? "done" : "remove");
+  }
+}
+function SettingsToggleComponent_Conditional_8_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "mat-checkbox", 8);
+    \u0275\u0275twoWayListener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r0.value, $event) || (ctx_r0.value = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275listener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.setValue($event));
+    });
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275twoWayProperty("ngModel", ctx_r0.value);
+  }
+}
+var _SettingsToggleComponent = class _SettingsToggleComponent {
+  constructor() {
+    this.toggle = input(void 0);
+    this.name = input(void 0);
+    this.info = input(void 0);
+    this.registerOnChange = (fn3) => this._onChange = fn3;
+    this.registerOnTouched = (fn3) => this._onTouch = fn3;
+  }
+  /**
+   * Update the form field value
+   * @param new_value New value to set on the form field
+   */
+  setValue(new_value) {
+    this.value = new_value;
+    if (this._onChange)
+      this._onChange(new_value);
+  }
+  /* istanbul ignore next */
+  /**
+   * Update local value when form control value is changed
+   * @param value The new value for the component
+   */
+  writeValue(value) {
+    this.value = value;
+  }
+};
+_SettingsToggleComponent.\u0275fac = function SettingsToggleComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _SettingsToggleComponent)();
+};
+_SettingsToggleComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SettingsToggleComponent, selectors: [["settings-toggle"]], inputs: { toggle: [1, "toggle"], name: [1, "name"], info: [1, "info"] }, features: [\u0275\u0275ProvidersFeature([
+  {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => _SettingsToggleComponent),
+    multi: true
+  }
+])], ngContentSelectors: _c012, decls: 9, vars: 8, consts: [["matRipple", "", 1, "relative", "flex", "flex-1", "items-center", "space-x-2", "overflow-hidden", "rounded", "border", "py-1", "pl-2", "pr-1", "hover:bg-base-200", 3, "click"], [1, "z-10", "flex", "flex-1", "items-center", "space-x-2", "p-2", "text-left"], [3, "matTooltip"], [1, "absolute", "inset-0", "z-0", "!m-0", "bg-info", "opacity-10"], [1, "px-2"], [1, "pointer-events-none", 3, "ngModel"], ["toggle", "", 1, "relative", "h-8", "w-12", "rounded-full", "border-2", "border-base-400"], [1, "absolute", "top-1/2", "flex", "h-6", "w-6", "-translate-x-0.5", "-translate-y-1/2", "items-center", "justify-center", "rounded-full", "text-black", "shadow"], [1, "pointer-events-none", 3, "ngModelChange", "ngModel"]], template: function SettingsToggleComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275projectionDef();
+    \u0275\u0275elementStart(0, "button", 0);
+    \u0275\u0275listener("click", function SettingsToggleComponent_Template_button_click_0_listener() {
+      return ctx.setValue(!ctx.value);
+    });
+    \u0275\u0275elementStart(1, "div", 1)(2, "div");
+    \u0275\u0275text(3);
+    \u0275\u0275projection(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275conditionalCreate(5, SettingsToggleComponent_Conditional_5_Template, 2, 1, "icon", 2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275conditionalCreate(6, SettingsToggleComponent_Conditional_6_Template, 1, 0, "div", 3);
+    \u0275\u0275conditionalCreate(7, SettingsToggleComponent_Conditional_7_Template, 5, 15, "div", 4)(8, SettingsToggleComponent_Conditional_8_Template, 1, 1, "mat-checkbox", 5);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275classProp("border-base-300", !ctx.value)("border-info", ctx.value);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", ctx.name(), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(ctx.info() ? 5 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.value ? 6 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx.toggle() ? 7 : 8);
+  }
+}, dependencies: [MatCheckboxModule, MatCheckbox, FormsModule, NgControlStatus, NgModel, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n}\n[toggle][_ngcontent-%COMP%] {\n  transition: background 200ms, left 200ms;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */"] });
+var SettingsToggleComponent = _SettingsToggleComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SettingsToggleComponent, [{
+    type: Component,
+    args: [{ selector: "settings-toggle", template: `
+        <button
+            matRipple
+            class="relative flex flex-1 items-center space-x-2 overflow-hidden rounded border py-1 pl-2 pr-1 hover:bg-base-200"
+            [class.border-base-300]="!value"
+            [class.border-info]="value"
+            (click)="setValue(!value)"
+        >
+            <div class="z-10 flex flex-1 items-center space-x-2 p-2 text-left">
+                <div>
+                    {{ name() }}
+                    <ng-content></ng-content>
+                </div>
+                @if (info()) {
+                    <icon [matTooltip]="info()">info</icon>
+                }
+            </div>
+            @if (value) {
+                <div class="absolute inset-0 z-0 !m-0 bg-info opacity-10"></div>
+            }
+            @if (toggle()) {
+                <div class="px-2">
+                    <div
+                        toggle
+                        class="relative h-8 w-12 rounded-full border-2 border-base-400"
+                        [class.bg-base-300]="!value"
+                        [class.bg-info]="value"
+                        [class.!border-info]="value"
+                    >
+                        <div
+                            class="absolute top-1/2 flex h-6 w-6 -translate-x-0.5 -translate-y-1/2 items-center justify-center rounded-full text-black shadow"
+                            [class.left-1]="!value"
+                            [class.left-5]="value"
+                            [class.bg-base-400]="!value"
+                            [class.bg-info-light]="value"
+                        >
+                            <icon>{{ value ? 'done' : 'remove' }}</icon>
+                        </div>
+                    </div>
+                </div>
+            } @else {
+                <mat-checkbox
+                    [(ngModel)]="value"
+                    (ngModelChange)="setValue($event)"
+                    class="pointer-events-none"
+                ></mat-checkbox>
+            }
+        </button>
+    `, providers: [
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => SettingsToggleComponent),
+        multi: true
+      }
+    ], imports: [MatCheckboxModule, FormsModule, IconComponent], styles: ["/* angular:styles/component:css;09d472dfc67150cf01347a580874515fc3cc343b61a90041f2b167ad15a01cf4;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/settings-toggle.component.ts */\n:host {\n  display: flex;\n}\n[toggle] {\n  transition: background 200ms, left 200ms;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */\n"] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SettingsToggleComponent, { className: "SettingsToggleComponent", filePath: "libs/components/src/lib/settings-toggle.component.ts", lineNumber: 83 });
+})();
+
+// libs/components/src/lib/upload-permissions-modal.component.ts
+var _c013 = (a0, a1, a2) => ({ file: a0, is_public: a1, permissions: a2 });
+function UploadPermissionsModalComponent_Conditional_15_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 8)(1, "label");
+    \u0275\u0275text(2, "Permissions");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "mat-form-field", 12)(4, "mat-select", 7);
+    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Conditional_15_Template_mat_select_ngModelChange_4_listener($event) {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      \u0275\u0275twoWayBindingSet(ctx_r1.permissions, $event) || (ctx_r1.permissions = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementStart(5, "mat-option", 13);
+    \u0275\u0275text(6, "None");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "mat-option", 14);
+    \u0275\u0275text(8, "Support");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(9, "mat-option", 15);
+    \u0275\u0275text(10, "Admin");
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(4);
+    \u0275\u0275twoWayProperty("ngModel", ctx_r1.permissions);
+  }
+}
+var _UploadPermissionsModalComponent = class _UploadPermissionsModalComponent {
+  constructor() {
+    this._dialog_ref = inject(MatDialogRef);
+    this._data = inject(MAT_DIALOG_DATA);
+    this.file = this._data.file;
+    this.is_public = true;
+    this.permissions = "none";
+    this.file = this._data.file;
+  }
+  close() {
+    this._dialog_ref.close();
+  }
+};
+_UploadPermissionsModalComponent.\u0275fac = function UploadPermissionsModalComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _UploadPermissionsModalComponent)();
+};
+_UploadPermissionsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UploadPermissionsModalComponent, selectors: [["upload-permissions-modal"]], decls: 21, vars: 8, consts: [[1, "sticky", "top-0", "z-10", "m-2", "w-[calc(100%-1rem)]", "rounded", "border-none", "bg-base-200", "p-2"], [1, "px-2", "text-xl", "font-medium"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "min-w-[20rem]", "space-y-2", "px-4", "py-2"], [1, "flex", "flex-col"], ["appearance", "outline", 1, "no-subscript"], ["matInput", "", "disabled", "true", "placeholder", "File Name", 3, "ngModel"], [3, "ngModelChange", "ngModel"], [1, "flex", "flex-col", "space-y-2"], [1, "flex", "items-center", "justify-end", "space-x-2", "border-t", "border-base-200", "px-4", "py-2"], ["btn", "", "matRipple", "", "mat-dialog-close", "", 1, "inverse", "w-32"], ["btn", "", "matRipple", "", 1, "w-32", 3, "mat-dialog-close"], ["appearance", "outline"], ["value", "none"], ["value", "support"], ["value", "admin"]], template: function UploadPermissionsModalComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "header", 0)(1, "h2", 1);
+    \u0275\u0275text(2, "Upload File");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "button", 2)(4, "icon");
+    \u0275\u0275text(5, "close");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(6, "main", 3)(7, "div", 4)(8, "label");
+    \u0275\u0275text(9, "File Name");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "mat-form-field", 5);
+    \u0275\u0275element(11, "input", 6);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(12, "div")(13, "settings-toggle", 7);
+    \u0275\u0275twoWayListener("ngModelChange", function UploadPermissionsModalComponent_Template_settings_toggle_ngModelChange_13_listener($event) {
+      \u0275\u0275twoWayBindingSet(ctx.is_public, $event) || (ctx.is_public = $event);
+      return $event;
+    });
+    \u0275\u0275text(14, "Public");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275conditionalCreate(15, UploadPermissionsModalComponent_Conditional_15_Template, 11, 1, "div", 8);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(16, "footer", 9)(17, "button", 10);
+    \u0275\u0275text(18, " Cancel ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(19, "button", 11);
+    \u0275\u0275text(20, " Upload ");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(11);
+    \u0275\u0275property("ngModel", ctx.file.name);
+    \u0275\u0275advance(2);
+    \u0275\u0275twoWayProperty("ngModel", ctx.is_public);
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(!ctx.is_public ? 15 : -1);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("mat-dialog-close", \u0275\u0275pureFunction3(4, _c013, ctx.file, ctx.is_public, ctx.permissions));
+  }
+}, dependencies: [
+  MatDialogModule,
+  MatDialogClose,
+  MatFormFieldModule,
+  MatFormField,
+  FormsModule,
+  DefaultValueAccessor,
+  NgControlStatus,
+  NgModel,
+  MatSelectModule,
+  MatSelect,
+  MatOption,
+  SettingsToggleComponent,
+  IconComponent,
+  MatInputModule,
+  MatInput,
+  MatRippleModule,
+  MatRipple
+], encapsulation: 2 });
+var UploadPermissionsModalComponent = _UploadPermissionsModalComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UploadPermissionsModalComponent, [{
+    type: Component,
+    args: [{ selector: "upload-permissions-modal", template: `
+        <header
+            class="sticky top-0 z-10 m-2 w-[calc(100%-1rem)] rounded border-none bg-base-200 p-2"
+        >
+            <h2 class="px-2 text-xl font-medium">Upload File</h2>
+            <button icon matRipple mat-dialog-close>
+                <icon>close</icon>
+            </button>
+        </header>
+        <main class="min-w-[20rem] space-y-2 px-4 py-2">
+            <div class="flex flex-col">
+                <label>File Name</label>
+                <mat-form-field appearance="outline" class="no-subscript">
+                    <input
+                        matInput
+                        [ngModel]="file.name"
+                        disabled="true"
+                        placeholder="File Name"
+                    />
+                </mat-form-field>
+            </div>
+            <div>
+                <settings-toggle [(ngModel)]="is_public"
+                    >Public</settings-toggle
+                >
+            </div>
+            @if (!is_public) {
+                <div class="flex flex-col space-y-2">
+                    <label>Permissions</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="permissions">
+                            <mat-option value="none">None</mat-option>
+                            <mat-option value="support">Support</mat-option>
+                            <mat-option value="admin">Admin</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            }
+        </main>
+        <footer
+            class="flex items-center justify-end space-x-2 border-t border-base-200 px-4 py-2"
+        >
+            <button btn matRipple class="inverse w-32" mat-dialog-close>
+                Cancel
+            </button>
+            <button
+                btn
+                matRipple
+                class="w-32"
+                [mat-dialog-close]="{ file, is_public, permissions }"
+            >
+                Upload
+            </button>
+        </footer>
+    `, schemas: [NO_ERRORS_SCHEMA], imports: [
+      MatDialogModule,
+      MatFormFieldModule,
+      FormsModule,
+      MatSelectModule,
+      SettingsToggleComponent,
+      IconComponent,
+      MatInputModule,
+      MatRippleModule
+    ] }]
+  }], () => [], null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UploadPermissionsModalComponent, { className: "UploadPermissionsModalComponent", filePath: "libs/components/src/lib/upload-permissions-modal.component.ts", lineNumber: 86 });
+})();
+
+// libs/common/src/lib/uploads.service.ts
+var _UploadsService = class _UploadsService {
+  constructor() {
+    this._dialog = inject(MatDialog);
+    this._upload_list = new BehaviorSubject([]);
+    this.upload_list = this._upload_list.asObservable();
+    if (localStorage) {
+      this._upload_list.next(JSON.parse(localStorage.getItem("BACKOFFICE.uploads") || "[]"));
+    }
+  }
+  clearList() {
+    const in_progress_list = this._upload_list.getValue().filter((file) => file.progress < 100 && !file.error);
+    this._upload_list.next(in_progress_list);
+  }
+  uploadFileWithPermissions(file) {
+    return new Promise((resolve, reject) => {
+      const ref = this._dialog.open(UploadPermissionsModalComponent, {
+        data: { file }
+      });
+      ref.afterClosed().subscribe(async (details) => {
+        if (details) {
+          const id = await this.uploadFile(details.file, details.is_public, details.permissions).catch((e2) => {
+            reject(e2);
+            throw e2;
+          });
+          resolve(id);
+        } else
+          reject();
+      });
+    });
+  }
+  uploadFile(file, pub = true, permissions = "none") {
+    return new Promise((resolve) => {
+      let resolved2 = false;
+      const update_fn = (details) => {
+        if (!resolved2) {
+          resolve(details.upload?.id || details.id);
+          resolved2 = true;
+        }
+        this._upload_list.next([
+          ...this._upload_list.getValue().filter((_3) => _3.id !== details.id),
+          details
+        ]);
+      };
+      uploadFile(file, pub, permissions).subscribe(update_fn, update_fn, () => this._updateUploadHistory());
+    });
+  }
+  _updateUploadHistory() {
+    const done_list = this._upload_list.getValue().filter((file) => file.progress >= 100);
+    done_list.forEach((i) => delete i.upload);
+    if (localStorage) {
+      localStorage.setItem("PLACEOS.uploads", JSON.stringify(done_list));
+    }
+  }
+};
+_UploadsService.\u0275fac = function UploadsService_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _UploadsService)();
+};
+_UploadsService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _UploadsService, factory: _UploadsService.\u0275fac, providedIn: "root" });
+var UploadsService = _UploadsService;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UploadsService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], () => [], null);
+})();
+
+// libs/common/src/lib/user-idle-time.service.ts
+var EVENTS_NAMES = ["keypress", "mousemove", "touchmove", "scroll", "wheel"];
+var _UserIdleTimeService = class _UserIdleTimeService {
+  constructor() {
+    this._last_action = new BehaviorSubject(Date.now());
+    this._update = (e2) => this._onUserInteraction();
+    this._event_names = EVENTS_NAMES;
+    this.last_action = combineLatest([
+      this._last_action,
+      interval(1e3)
+    ]).pipe(throttleTime(300), map(([last_action]) => last_action));
+    this.idle_time = this.last_action.pipe(map((time) => Date.now() - time));
+  }
+  _onUserInteraction() {
+    this._last_action.next(Date.now());
+  }
+  idleFor(time_ms) {
+    const stop = this.startListening();
+    return this.idle_time.pipe(first((t) => t >= time_ms), tap(() => stop()));
+  }
+  startListening() {
+    this._last_action.next(Date.now());
+    for (const name of this._event_names) {
+      document.body.addEventListener(name, this._update);
+    }
+    return () => this.stopListening();
+  }
+  stopListening() {
+    for (const name of this._event_names) {
+      document.body.removeEventListener(name, this._update);
+    }
+  }
+};
+_UserIdleTimeService.\u0275fac = function UserIdleTimeService_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _UserIdleTimeService)();
+};
+_UserIdleTimeService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _UserIdleTimeService, factory: _UserIdleTimeService.\u0275fac, providedIn: "root" });
+var UserIdleTimeService = _UserIdleTimeService;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UserIdleTimeService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
+// libs/users/src/lib/user.utilities.ts
+var USER_DOMAIN = "@place.tech";
+function setInternalUserDomain(domain) {
+  USER_DOMAIN = domain;
+}
+
+// libs/users/src/lib/user.class.ts
+var User = class {
+  constructor(data = {}) {
+    this.id = data.id || data.email || `USER::${randomString(8)}`;
+    this.name = data.name || "";
+    this.email = data.email || "";
+    this.first_name = data.first_name || data.name || "";
+    this.last_name = data.last_name || "";
+    this.phone = data.phone || "";
+    this.organisation = data.organisation || "";
+    this.notes = data.notes || "";
+    this.photo = data.photo || data.image || (data.photo_upload_id ? `/api/engine/v2/uploads/${encodeURIComponent(data.photo_upload_id)}/url` : "") || "";
+    this.photo_upload_id = data.photo_upload_id || "";
+    this.username = data.username || "";
+    this.organizer = !!data.organizer;
+    this.checked_in = !!data.checked_in;
+    this.required = data.required ?? true;
+    this.resource = data.resource ?? false;
+    this.locatable = data.locatable ?? false;
+    this.response_status = data.response_status || "";
+    const groups = data.groups || [];
+    this.department = data.department ?? "";
+    if (data.sys_admin)
+      groups.push("placeos_admin");
+    if (data.support)
+      groups.push("placeos_support");
+    if (data.department)
+      groups.push(data.department);
+    this.groups = groups;
+    this.extension_data = data.extension_data || {};
+    this.extension_data.assistance_required = data.assistance_required || this.extension_data.assistance_required;
+    this.is_external = !this.email?.endsWith(`${USER_DOMAIN}`);
+    this.visit_expected = data.visit_expected ?? true;
+    this.assistance_required = !!this.extension_data?.assistance_required;
+    for (const key in data) {
+      if (!(key in this))
+        this.extension_data[key] = data[key];
+    }
+  }
+};
+var GuestUser = class extends User {
+  constructor(data = {}) {
+    super(data);
+    this.preferred_beverage = data.preferred_beverage || "";
+    this.accepted_terms_conditions = data.accepted_terms_conditions || false;
+    this.attachments = data.extension_data?.attachments || data.attachments || [];
+    this.status = data.booking?.approved ? "approved" : data.booking?.rejected ? "declined" : data.extension_data?.status || data.status || "pending";
+    this.booking = data.booking;
+    this.extension_data.event = data.event_metadata;
+  }
+};
+var StaffUser = class extends User {
+  get location() {
+    return this.location_time(Date.now());
+  }
+  work_preference(datetime) {
+    if (!datetime)
+      datetime = Date.now();
+    const date = new Date(datetime);
+    const day = date.getDay();
+    const date_string = format(date, "yyyy-MM-dd");
+    if (this.work_overrides[date_string]?.blocks?.length) {
+      for (const block2 of this.work_overrides[date_string].blocks) {
+        const start = block2.start_time;
+        const end = block2.end_time;
+        if (start <= date.getHours() + date.getMinutes() / 60 && end >= date.getHours() + date.getMinutes() / 60) {
+          return block2;
+        }
+      }
+    }
+    for (const pref of this.work_preferences) {
+      if (pref.day_of_week === day && pref.blocks?.length) {
+        for (const block2 of pref.blocks) {
+          if (block2.start_time <= date.getHours() + date.getMinutes() / 60 && block2.end_time >= date.getHours() + date.getMinutes() / 60) {
+            return block2;
+          }
+        }
+      }
+    }
+  }
+  location_time(datetime = Date.now()) {
+    return this.work_preference(datetime)?.location || "ooo";
+  }
+  get location_name() {
+    return this.location_name_time();
+  }
+  location_name_time(datetime = Date.now()) {
+    if (!datetime)
+      datetime = Date.now();
+    const location2 = this.location_time(datetime);
+    const in_hours = this.in_hours_time(datetime);
+    if (location2.includes("w") && !in_hours) {
+      return i18n("COMMON.WORK_HOURS_OUTSIDE");
+    }
+    switch (location2) {
+      case "wfh":
+        return i18n("COMMON.WORK_HOURS_HOME");
+      case "wfo":
+        return i18n("COMMON.WORK_HOURS_OFFICE");
+      case "ooo":
+        return i18n("COMMON.WORK_HOURS_OUT");
+      case "aol":
+        return i18n("COMMON.WORK_HOURS_LEAVE");
+      default:
+        return i18n("COMMON.UNKNOWN");
+    }
+  }
+  outsideHours(datetime = Date.now()) {
+    const location2 = this.location_time(datetime);
+    const in_hours = this.in_hours_time(datetime);
+    return location2.includes("w") && !in_hours;
+  }
+  get in_hours() {
+    return this.in_hours_time(Date.now());
+  }
+  location_icon(datetime) {
+    if (!datetime)
+      datetime = Date.now();
+    const location2 = this.location_time(datetime);
+    const in_hours = this.in_hours_time(datetime);
+    if (location2 === "wfh" && in_hours)
+      return "home";
+    if (location2 === "wfo" && in_hours)
+      return "business";
+    return "event_busy";
+  }
+  in_hours_time(datetime = Date.now()) {
+    const block2 = this.work_preference(datetime);
+    return !!block2;
+  }
+  constructor(data = {}) {
+    super(data);
+    this.card_number = data.card_number || "";
+    this.staff_id = data.staff_id || "";
+    this.is_logged_in = !!data.is_logged_in;
+    this.work_preferences = data.work_preferences || [];
+    this.work_overrides = data.work_overrides || {};
+  }
+};
+
+// libs/common/src/lib/user-state.ts
+var EMPTY_USER = {
+  name: "<empty>",
+  email: "<empty>@place.tech"
+};
+var _current_user = new BehaviorSubject(null);
+var _change = new BehaviorSubject(0);
+var current_user = _current_user.asObservable();
+setTimeout(() => {
+  try {
+    if (jest)
+      return;
+  } catch {
+  }
+  combineLatest([Mc("current"), _change]).pipe(delay(1e3), retry(10), map(([i]) => new StaffUser(i))).subscribe((user) => _current_user.next(user));
+}, 300);
+function reloadUserData() {
+  setTimeout(async () => {
+    const user = await lastValueFrom(Mc("current"));
+    _current_user.next(new StaffUser(user));
+  }, 300);
+}
+function currentUser() {
+  return _current_user.getValue() || EMPTY_USER;
+}
+
+// libs/common/src/lib/settings.service.ts
+var _SettingsService = class _SettingsService extends AsyncHandler {
+  /**
+   * @hidden
+   */
+  set overrides(value) {
+    this._overrides.next(value);
+    this._applyCssVariables();
+  }
+  get theme() {
+    const allow_dark_mode = this.get("app.allow_dark_mode");
+    return allow_dark_mode ? this.get("theme") : "light";
+  }
+  /** Get observable for key */
+  listen(name) {
+    if (!this._observables[name]) {
+      this._subjects[name] = new BehaviorSubject(null);
+      this._observables[name] = this._subjects[name].asObservable();
+    }
+    return this._observables[name];
+  }
+  /** Update observable value for key */
+  post(name, value) {
+    if (!this._observables[name]) {
+      this._subjects[name] = new BehaviorSubject(null);
+      this._observables[name] = this._subjects[name].asObservable();
+    }
+    this._subjects[name].next(value);
+  }
+  value(name) {
+    return !this._observables[name] ? null : this._subjects[name].getValue();
+  }
+  /** Page title */
+  get title() {
+    return this._title.getTitle();
+  }
+  set title(value) {
+    this._title.setTitle(`${value} | ${this.get("app.name") || this._app_name}`);
+    const tracking_id = this.get("app.analytics.tracking_id");
+    if (!tracking_id)
+      return;
+    this._analytics?.send("pagename", { title: value });
+  }
+  constructor() {
+    super();
+    this._title = inject(Title);
+    this._analytics = inject(GoogleAnalyticsService, { optional: true });
+    this._app_name = "PlaceOS";
+    this._overrides = new BehaviorSubject([]);
+    this._user_settings = new BehaviorSubject({});
+    this._subjects = {};
+    this._observables = {};
+    this._pending_settings = {};
+    const now = /* @__PURE__ */ new Date();
+    const time = new Date(VERSION7.time);
+    const built = isSameDay(now, time) ? `Today at ${format(time, "h:mma")}` : format(time, "do MMM yyyy, h:mma");
+    log("CORE", `${VERSION7.semver}`, null, "debug", true);
+    log("APP", `${VERSION7.hash} | Built: ${built}`, null, "debug", true);
+    this.init();
+  }
+  /**
+   * Initialise the settings
+   */
+  async init() {
+    if (this.get("debug"))
+      window.debug = true;
+    if (this.get("app")?.name) {
+      this._app_name = this.get("app").name;
+    }
+    this._app_name = location.pathname.replace(/[\\/]/g, "").trim() || this._app_name;
+    setAppName(this._app_name.split("-").join("_").toUpperCase());
+    log("Settings", "Successfully loaded settings");
+    this._initialised.next(true);
+    if (window.debug) {
+      if (!window.application)
+        window.application = {};
+      window.application.settings = this;
+      window.setting = (key) => this.get(key);
+    }
+    const user = await firstTruthyValueFrom(current_user);
+    const data = await lastValueFrom(hu(user.id, "settings"));
+    this._user_settings.next(data.details || {});
+    this.timeout("init", () => {
+      this._initDarkMode();
+      this._applyTheme();
+      this._setFontSize();
+      this._setPrintFontSize();
+    }, 1e3);
+  }
+  /** Whether settings service has initialised */
+  get app_name() {
+    return this._app_name;
+  }
+  get time_format() {
+    return this.get("app.use_24_hour_time") ? "HH:mm" : "h:mm a";
+  }
+  /**
+   * Get a setting
+   * @param key Name of the setting. i.e. nested items can be grabbed using `.` to seperate key names
+   */
+  get(key) {
+    const keys2 = key.split(".");
+    if (keys2[0] !== "app") {
+      return getItemWithKeys(keys2, this._pending_settings) ?? getItemWithKeys(keys2, this._user_settings.getValue()) ?? getItemWithKeys(keys2, DEFAULT_SETTINGS);
+    }
+    const override_settings = [...this._overrides.getValue()];
+    for (const override of override_settings) {
+      const value = getItemWithKeys(keys2.slice(1), override);
+      if (value != null) {
+        return value;
+      }
+    }
+    return getItemWithKeys(keys2, DEFAULT_SETTINGS);
+  }
+  saveUserSetting(name, value) {
+    this._pending_settings[name] = value;
+    if (name === "dark_mode")
+      this.setTheme(value ? "dark" : "");
+    if (name === "font_size")
+      this._setFontSize();
+    this.timeout("save_settings", () => this._savePendingChanges(), 2400);
+  }
+  async updateLocatable(locatable) {
+    await lastValueFrom(Uc(currentUser().id, { locatable }, "patch"));
+    reloadUserData();
+  }
+  overrideCssVariable(key, value, important = false) {
+    let element = document.getElementById(`css-var-overrides+${key}`);
+    if (!element) {
+      element = document.createElement("style");
+      element.id = `css-var-overrides+${key}`;
+      document.head.appendChild(element);
+    }
+    element.innerText = `html, body { --${key}: ${value} ${important ? "!important" : ""}}`;
+  }
+  setTheme(theme) {
+    const current_theme = this.theme;
+    if (current_theme === theme)
+      return;
+    this.saveUserSetting("theme", theme);
+    this._applyTheme();
+  }
+  _applyCssVariables() {
+    const variable_map = this.get("app.css_variables") || {};
+    let css_string = "body { ";
+    for (const key in variable_map) {
+      css_string += `--${key}: ${variable_map[key]}; `;
+    }
+    css_string += "}";
+    let element = document.getElementById("css-var-overrides");
+    if (!element) {
+      element = document.createElement("style");
+      element.id = "css-var-overrides";
+      document.head.appendChild(element);
+    }
+    element.innerText = css_string;
+  }
+  async _savePendingChanges() {
+    const user = currentUser();
+    if (!user?.id || !Object.keys(this._pending_settings).length)
+      return;
+    await lastValueFrom(du(user.id, {
+      name: "settings",
+      description: "",
+      details: __spreadValues(__spreadValues({}, this._user_settings.getValue()), this._pending_settings)
+    }));
+    this._user_settings.next(__spreadValues(__spreadValues({}, this._user_settings.getValue()), this._pending_settings));
+    this._pending_settings = {};
+  }
+  _setFontSize() {
+    if (!this.get("font_size"))
+      return;
+    this.overrideCssVariable("font-size", `${this.get("font_size")}px`);
+  }
+  _applyTheme() {
+    const allow_dark_mode = this.get("app.allow_dark_mode");
+    this._clearTheme();
+    if (!allow_dark_mode)
+      return;
+    document.body.classList.add(`theme-${this.theme}`);
+  }
+  _clearTheme() {
+    const class_list = document.body.classList.value.split(" ");
+    for (const item of class_list) {
+      if (item.startsWith("theme-")) {
+        document.body.classList.remove(item);
+      }
+    }
+  }
+  _setPrintFontSize() {
+    let print_style_el = document.getElementById("placeos-print-block");
+    if (!print_style_el) {
+      print_style_el = document.createElement("style");
+      print_style_el.id = "placeos-print-block";
+      document.head.appendChild(print_style_el);
+    }
+    print_style_el.innerText = `@media print { html, body { font-size: ${this.get("app.print_font_size") || "4mm"}; } }`;
+  }
+  _initDarkMode() {
+    if (this.theme)
+      return;
+    const os_dark = window?.matchMedia ? window?.matchMedia("(prefers-color-scheme: dark)")?.matches : false;
+    this.setTheme(os_dark ? "dark" : "");
+  }
+};
+_SettingsService.\u0275fac = function SettingsService_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _SettingsService)();
+};
+_SettingsService.\u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _SettingsService, factory: _SettingsService.\u0275fac, providedIn: "root" });
+var SettingsService = _SettingsService;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SettingsService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], () => [], null);
+})();
+
+// libs/explore/src/lib/explore-book-qr.component.ts
+var _c014 = (a0) => ({ name: a0 });
+var DEFAULT_PATH = `workplace/#/explore?space={{id}}`;
+var _ExploreBookQrComponent = class _ExploreBookQrComponent {
+  constructor() {
+    this._data = inject(MAT_DIALOG_DATA);
+    this._settings = inject(SettingsService);
+    this.space = this._data.space;
+    this.qr_code = generateQRCode(`${location.origin}${(this._settings.get("app.booking_qr_path") || DEFAULT_PATH).replace("{{id}}", this._data.space?.email)}`);
+  }
+};
+_ExploreBookQrComponent.\u0275fac = function ExploreBookQrComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _ExploreBookQrComponent)();
+};
+_ExploreBookQrComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreBookQrComponent, selectors: [["explore-book-qr"]], decls: 10, vars: 7, consts: [[1, "truncate"], [1, "flex-1"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "p-4"], [1, "m-auto", "h-64", "w-64", 3, "src"]], template: function ExploreBookQrComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "header")(1, "h2", 0);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd();
+    \u0275\u0275element(4, "div", 1);
+    \u0275\u0275elementStart(5, "button", 2)(6, "icon");
+    \u0275\u0275text(7, "close");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(8, "main", 3);
+    \u0275\u0275element(9, "img", 4);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(3, 2, "EXPLORE.BOOK_RESOURCE", \u0275\u0275pureFunction1(5, _c014, ctx.space == null ? null : ctx.space.name)), " ");
+    \u0275\u0275advance(7);
+    \u0275\u0275property("src", ctx.qr_code, \u0275\u0275sanitizeUrl);
+  }
+}, dependencies: [TranslatePipe, MatRippleModule, MatRipple, IconComponent], encapsulation: 2 });
+var ExploreBookQrComponent = _ExploreBookQrComponent;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ExploreBookQrComponent, [{
+    type: Component,
+    args: [{ selector: "explore-book-qr", template: `
+        <header>
+            <h2 class="truncate">
+                {{ 'EXPLORE.BOOK_RESOURCE' | translate: { name: space?.name } }}
+            </h2>
+            <div class="flex-1"></div>
+            <button icon matRipple mat-dialog-close>
+                <icon>close</icon>
+            </button>
+        </header>
+        <main class="p-4">
+            <img class="m-auto h-64 w-64" [src]="qr_code" />
+        </main>
+    `, imports: [TranslatePipe, MatRippleModule, IconComponent] }]
+  }], null, null);
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreBookQrComponent, { className: "ExploreBookQrComponent", filePath: "libs/explore/src/lib/explore-book-qr.component.ts", lineNumber: 32 });
+})();
+
 // libs/components/src/lib/sanitise.pipe.ts
 var SecurityContext2;
 (function(SecurityContext3) {
@@ -90426,17 +93060,17 @@ function newCalendarEventFromBooking(booking) {
 }
 
 // node_modules/@placeos/svg-viewer/dist/index.es.js
-var ue = function(e2, n2) {
-  return ue = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r2) {
+var fe2 = function(e2, n2) {
+  return fe2 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r2) {
     t.__proto__ = r2;
   } || function(t, r2) {
     for (var o in r2) Object.prototype.hasOwnProperty.call(r2, o) && (t[o] = r2[o]);
-  }, ue(e2, n2);
+  }, fe2(e2, n2);
 };
-function R3(e2, n2) {
+function V3(e2, n2) {
   if (typeof n2 != "function" && n2 !== null)
     throw new TypeError("Class extends value " + String(n2) + " is not a constructor or null");
-  ue(e2, n2);
+  fe2(e2, n2);
   function t() {
     this.constructor = e2;
   }
@@ -90469,7 +93103,7 @@ function pt3(e2, n2, t, r2) {
     l2((r2 = r2.apply(e2, n2 || [])).next());
   });
 }
-function Ve(e2, n2) {
+function Re(e2, n2) {
   var t = { label: 0, sent: function() {
     if (i[0] & 1) throw i[1];
     return i[1];
@@ -90529,7 +93163,7 @@ function Ve(e2, n2) {
     return { value: l2[0] ? l2[1] : void 0, done: true };
   }
 }
-function I4(e2) {
+function q3(e2) {
   var n2 = typeof Symbol == "function" && Symbol.iterator, t = n2 && e2[n2], r2 = 0;
   if (t) return t.call(e2);
   if (e2 && typeof e2.length == "number") return {
@@ -90556,13 +93190,13 @@ function Y4(e2, n2) {
   }
   return i;
 }
-function ne(e2, n2, t) {
+function re(e2, n2, t) {
   if (t || arguments.length === 2) for (var r2 = 0, o = n2.length, i; r2 < o; r2++)
     (i || !(r2 in n2)) && (i || (i = Array.prototype.slice.call(n2, 0, r2)), i[r2] = n2[r2]);
   return e2.concat(i || Array.prototype.slice.call(n2));
 }
-function T3(e2) {
-  return this instanceof T3 ? (this.v = e2, this) : new T3(e2);
+function M4(e2) {
+  return this instanceof M4 ? (this.v = e2, this) : new M4(e2);
 }
 function mt3(e2, n2, t) {
   if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
@@ -90590,7 +93224,7 @@ function mt3(e2, n2, t) {
     }
   }
   function l2(f2) {
-    f2.value instanceof T3 ? Promise.resolve(f2.value.v).then(u3, v3) : d2(i[0][2], f2);
+    f2.value instanceof M4 ? Promise.resolve(f2.value.v).then(u3, v3) : d2(i[0][2], f2);
   }
   function u3(f2) {
     a("next", f2);
@@ -90605,7 +93239,7 @@ function mt3(e2, n2, t) {
 function gt3(e2) {
   if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
   var n2 = e2[Symbol.asyncIterator], t;
-  return n2 ? n2.call(e2) : (e2 = typeof I4 == "function" ? I4(e2) : e2[Symbol.iterator](), t = {}, r2("next"), r2("throw"), r2("return"), t[Symbol.asyncIterator] = function() {
+  return n2 ? n2.call(e2) : (e2 = typeof q3 == "function" ? q3(e2) : e2[Symbol.iterator](), t = {}, r2("next"), r2("throw"), r2("return"), t[Symbol.asyncIterator] = function() {
     return this;
   }, t);
   function r2(i) {
@@ -90624,13 +93258,13 @@ function gt3(e2) {
 function h(e2) {
   return typeof e2 == "function";
 }
-function je(e2) {
+function Fe(e2) {
   var n2 = function(r2) {
     Error.call(r2), r2.stack = new Error().stack;
   }, t = e2(n2);
   return t.prototype = Object.create(Error.prototype), t.prototype.constructor = t, t;
 }
-var ae2 = je(function(e2) {
+var le2 = Fe(function(e2) {
   return function(t) {
     e2(this), this.message = t ? t.length + ` errors occurred during unsubscription:
 ` + t.map(function(r2, o) {
@@ -90639,7 +93273,7 @@ var ae2 = je(function(e2) {
   `) : "", this.name = "UnsubscriptionError", this.errors = t;
   };
 });
-function fe2(e2, n2) {
+function he2(e2, n2) {
   if (e2) {
     var t = e2.indexOf(n2);
     0 <= t && e2.splice(t, 1);
@@ -90657,7 +93291,7 @@ var G3 = function() {
       if (s)
         if (this._parentage = null, Array.isArray(s))
           try {
-            for (var c3 = I4(s), a = c3.next(); !a.done; a = c3.next()) {
+            for (var c3 = q3(s), a = c3.next(); !a.done; a = c3.next()) {
               var l2 = a.value;
               l2.remove(this);
             }
@@ -90677,18 +93311,18 @@ var G3 = function() {
         try {
           u3();
         } catch (y3) {
-          i = y3 instanceof ae2 ? y3.errors : [y3];
+          i = y3 instanceof le2 ? y3.errors : [y3];
         }
       var v3 = this._finalizers;
       if (v3) {
         this._finalizers = null;
         try {
-          for (var d2 = I4(v3), f2 = d2.next(); !f2.done; f2 = d2.next()) {
+          for (var d2 = q3(v3), f2 = d2.next(); !f2.done; f2 = d2.next()) {
             var p = f2.value;
             try {
               Ce(p);
             } catch (y3) {
-              i = i ?? [], y3 instanceof ae2 ? i = ne(ne([], Y4(i)), Y4(y3.errors)) : i.push(y3);
+              i = i ?? [], y3 instanceof le2 ? i = re(re([], Y4(i)), Y4(y3.errors)) : i.push(y3);
             }
           }
         } catch (y3) {
@@ -90702,7 +93336,7 @@ var G3 = function() {
         }
       }
       if (i)
-        throw new ae2(i);
+        throw new le2(i);
     }
   }, e2.prototype.add = function(n2) {
     var t;
@@ -90725,16 +93359,16 @@ var G3 = function() {
     this._parentage = Array.isArray(t) ? (t.push(n2), t) : t ? [t, n2] : n2;
   }, e2.prototype._removeParent = function(n2) {
     var t = this._parentage;
-    t === n2 ? this._parentage = null : Array.isArray(t) && fe2(t, n2);
+    t === n2 ? this._parentage = null : Array.isArray(t) && he2(t, n2);
   }, e2.prototype.remove = function(n2) {
     var t = this._finalizers;
-    t && fe2(t, n2), n2 instanceof e2 && n2._removeParent(this);
+    t && he2(t, n2), n2 instanceof e2 && n2._removeParent(this);
   }, e2.EMPTY = function() {
     var n2 = new e2();
     return n2.closed = true, n2;
   }(), e2;
 }();
-var Fe = G3.EMPTY;
+var je = G3.EMPTY;
 function Be(e2) {
   return e2 instanceof G3 || e2 && "closed" in e2 && h(e2.remove) && h(e2.add) && h(e2.unsubscribe);
 }
@@ -90748,7 +93382,7 @@ var bt3 = {
   setTimeout: function(e2, n2) {
     for (var t = [], r2 = 2; r2 < arguments.length; r2++)
       t[r2 - 2] = arguments[r2];
-    return setTimeout.apply(void 0, ne([e2, n2], Y4(t)));
+    return setTimeout.apply(void 0, re([e2, n2], Y4(t)));
   },
   clearTimeout: function(e2) {
     return clearTimeout(e2);
@@ -90760,19 +93394,19 @@ function Ne(e2) {
     throw e2;
   });
 }
-function he2() {
+function de2() {
 }
-function ee(e2) {
+function te2(e2) {
   e2();
 }
-var be2 = function(e2) {
-  R3(n2, e2);
+var we2 = function(e2) {
+  V3(n2, e2);
   function n2(t) {
     var r2 = e2.call(this) || this;
     return r2.isStopped = false, t ? (r2.destination = t, Be(t) && t.add(r2)) : r2.destination = St3, r2;
   }
   return n2.create = function(t, r2, o) {
-    return new de2(t, r2, o);
+    return new ye(t, r2, o);
   }, n2.prototype.next = function(t) {
     this.isStopped || this._next(t);
   }, n2.prototype.error = function(t) {
@@ -90807,7 +93441,7 @@ var wt3 = function() {
       try {
         t.next(n2);
       } catch (r2) {
-        Z4(r2);
+        K3(r2);
       }
   }, e2.prototype.error = function(n2) {
     var t = this.partialObserver;
@@ -90815,22 +93449,22 @@ var wt3 = function() {
       try {
         t.error(n2);
       } catch (r2) {
-        Z4(r2);
+        K3(r2);
       }
     else
-      Z4(n2);
+      K3(n2);
   }, e2.prototype.complete = function() {
     var n2 = this.partialObserver;
     if (n2.complete)
       try {
         n2.complete();
       } catch (t) {
-        Z4(t);
+        K3(t);
       }
   }, e2;
 }();
-var de2 = function(e2) {
-  R3(n2, e2);
+var ye = function(e2) {
+  V3(n2, e2);
   function n2(t, r2, o) {
     var i = e2.call(this) || this, s;
     return h(t) || !t ? s = {
@@ -90840,8 +93474,8 @@ var de2 = function(e2) {
     } : s = t, i.destination = new wt3(s), i;
   }
   return n2;
-}(be2);
-function Z4(e2) {
+}(we2);
+function K3(e2) {
   Ne(e2);
 }
 function xt3(e2) {
@@ -90849,11 +93483,11 @@ function xt3(e2) {
 }
 var St3 = {
   closed: true,
-  next: he2,
+  next: de2,
   error: xt3,
-  complete: he2
+  complete: de2
 };
-var we2 = function() {
+var xe2 = function() {
   return typeof Symbol == "function" && Symbol.observable || "@@observable";
 }();
 function Ue(e2) {
@@ -90874,8 +93508,8 @@ var g2 = function() {
     var t = new e2();
     return t.source = this, t.operator = n2, t;
   }, e2.prototype.subscribe = function(n2, t, r2) {
-    var o = this, i = Lt3(n2) ? n2 : new de2(n2, t, r2);
-    return ee(function() {
+    var o = this, i = Lt3(n2) ? n2 : new ye(n2, t, r2);
+    return te2(function() {
       var s = o, c3 = s.operator, a = s.source;
       i.add(c3 ? c3.call(i, a) : a ? o._subscribe(i) : o._trySubscribe(i));
     }), i;
@@ -90888,7 +93522,7 @@ var g2 = function() {
   }, e2.prototype.forEach = function(n2, t) {
     var r2 = this;
     return t = Oe2(t), new t(function(o, i) {
-      var s = new de2({
+      var s = new ye({
         next: function(c3) {
           try {
             n2(c3);
@@ -90904,7 +93538,7 @@ var g2 = function() {
   }, e2.prototype._subscribe = function(n2) {
     var t;
     return (t = this.source) === null || t === void 0 ? void 0 : t.subscribe(n2);
-  }, e2.prototype[we2] = function() {
+  }, e2.prototype[xe2] = function() {
     return this;
   }, e2.prototype.pipe = function() {
     for (var n2 = [], t = 0; t < arguments.length; t++)
@@ -90934,12 +93568,12 @@ function At3(e2) {
   return e2 && h(e2.next) && h(e2.error) && h(e2.complete);
 }
 function Lt3(e2) {
-  return e2 && e2 instanceof be2 || At3(e2) && Be(e2);
+  return e2 && e2 instanceof we2 || At3(e2) && Be(e2);
 }
 function $t3(e2) {
   return h(e2?.lift);
 }
-function V3(e2) {
+function R3(e2) {
   return function(n2) {
     if ($t3(n2))
       return n2.lift(function(t) {
@@ -90956,7 +93590,7 @@ function O3(e2, n2, t, r2, o) {
   return new zt3(e2, n2, t, r2, o);
 }
 var zt3 = function(e2) {
-  R3(n2, e2);
+  V3(n2, e2);
   function n2(t, r2, o, i, s, c3) {
     var a = e2.call(this, t) || this;
     return a.onFinalize = s, a.shouldUnsubscribe = c3, a._next = r2 ? function(l2) {
@@ -90990,32 +93624,32 @@ var zt3 = function(e2) {
       e2.prototype.unsubscribe.call(this), !r2 && ((t = this.onFinalize) === null || t === void 0 || t.call(this));
     }
   }, n2;
-}(be2);
-var Ct2 = je(function(e2) {
+}(we2);
+var Ct2 = Fe(function(e2) {
   return function() {
     e2(this), this.name = "ObjectUnsubscribedError", this.message = "object unsubscribed";
   };
 });
-var xe2 = function(e2) {
-  R3(n2, e2);
+var Se2 = function(e2) {
+  V3(n2, e2);
   function n2() {
     var t = e2.call(this) || this;
     return t.closed = false, t.currentObservers = null, t.observers = [], t.isStopped = false, t.hasError = false, t.thrownError = null, t;
   }
   return n2.prototype.lift = function(t) {
-    var r2 = new Me(this, this);
+    var r2 = new Te(this, this);
     return r2.operator = t, r2;
   }, n2.prototype._throwIfClosed = function() {
     if (this.closed)
       throw new Ct2();
   }, n2.prototype.next = function(t) {
     var r2 = this;
-    ee(function() {
+    te2(function() {
       var o, i;
       if (r2._throwIfClosed(), !r2.isStopped) {
         r2.currentObservers || (r2.currentObservers = Array.from(r2.observers));
         try {
-          for (var s = I4(r2.currentObservers), c3 = s.next(); !c3.done; c3 = s.next()) {
+          for (var s = q3(r2.currentObservers), c3 = s.next(); !c3.done; c3 = s.next()) {
             var a = c3.value;
             a.next(t);
           }
@@ -91032,7 +93666,7 @@ var xe2 = function(e2) {
     });
   }, n2.prototype.error = function(t) {
     var r2 = this;
-    ee(function() {
+    te2(function() {
       if (r2._throwIfClosed(), !r2.isStopped) {
         r2.hasError = r2.isStopped = true, r2.thrownError = t;
         for (var o = r2.observers; o.length; )
@@ -91041,7 +93675,7 @@ var xe2 = function(e2) {
     });
   }, n2.prototype.complete = function() {
     var t = this;
-    ee(function() {
+    te2(function() {
       if (t._throwIfClosed(), !t.isStopped) {
         t.isStopped = true;
         for (var r2 = t.observers; r2.length; )
@@ -91063,8 +93697,8 @@ var xe2 = function(e2) {
     return this._throwIfClosed(), this._checkFinalizedStatuses(t), this._innerSubscribe(t);
   }, n2.prototype._innerSubscribe = function(t) {
     var r2 = this, o = this, i = o.hasError, s = o.isStopped, c3 = o.observers;
-    return i || s ? Fe : (this.currentObservers = null, c3.push(t), new G3(function() {
-      r2.currentObservers = null, fe2(c3, t);
+    return i || s ? je : (this.currentObservers = null, c3.push(t), new G3(function() {
+      r2.currentObservers = null, he2(c3, t);
     }));
   }, n2.prototype._checkFinalizedStatuses = function(t) {
     var r2 = this, o = r2.hasError, i = r2.thrownError, s = r2.isStopped;
@@ -91073,11 +93707,11 @@ var xe2 = function(e2) {
     var t = new g2();
     return t.source = this, t;
   }, n2.create = function(t, r2) {
-    return new Me(t, r2);
+    return new Te(t, r2);
   }, n2;
 }(g2);
-var Me = function(e2) {
-  R3(n2, e2);
+var Te = function(e2) {
+  V3(n2, e2);
   function n2(t, r2) {
     var o = e2.call(this) || this;
     return o.destination = t, o.source = r2, o;
@@ -91093,11 +93727,11 @@ var Me = function(e2) {
     (r2 = (t = this.destination) === null || t === void 0 ? void 0 : t.complete) === null || r2 === void 0 || r2.call(t);
   }, n2.prototype._subscribe = function(t) {
     var r2, o;
-    return (o = (r2 = this.source) === null || r2 === void 0 ? void 0 : r2.subscribe(t)) !== null && o !== void 0 ? o : Fe;
+    return (o = (r2 = this.source) === null || r2 === void 0 ? void 0 : r2.subscribe(t)) !== null && o !== void 0 ? o : je;
   }, n2;
-}(xe2);
+}(Se2);
 var Ye2 = function(e2) {
-  R3(n2, e2);
+  V3(n2, e2);
   function n2(t) {
     var r2 = e2.call(this) || this;
     return r2._value = t, r2;
@@ -91119,35 +93753,35 @@ var Ye2 = function(e2) {
   }, n2.prototype.next = function(t) {
     e2.prototype.next.call(this, this._value = t);
   }, n2;
-}(xe2);
+}(Se2);
 var Ot3 = new g2(function(e2) {
   return e2.complete();
 });
-function Mt3(e2) {
+function Tt2(e2) {
   return e2 && h(e2.schedule);
 }
 function He(e2) {
   return e2[e2.length - 1];
 }
-function Tt2(e2) {
-  return Mt3(He(e2)) ? e2.pop() : void 0;
+function Mt3(e2) {
+  return Tt2(He(e2)) ? e2.pop() : void 0;
 }
 function Pt3(e2, n2) {
   return typeof He(e2) == "number" ? e2.pop() : n2;
 }
-var Se2 = function(e2) {
+var Ee2 = function(e2) {
   return e2 && typeof e2.length == "number" && typeof e2 != "function";
 };
 function De(e2) {
   return h(e2?.then);
 }
 function Ge2(e2) {
-  return h(e2[we2]);
-}
-function Je2(e2) {
-  return Symbol.asyncIterator && h(e2?.[Symbol.asyncIterator]);
+  return h(e2[xe2]);
 }
 function We(e2) {
+  return Symbol.asyncIterator && h(e2?.[Symbol.asyncIterator]);
+}
+function Je2(e2) {
   return new TypeError("You provided " + (e2 !== null && typeof e2 == "object" ? "an invalid object" : "'" + e2 + "'") + " where a stream was expected. You can provide an Observable, Promise, ReadableStream, Array, AsyncIterable, or Iterable.");
 }
 function kt3() {
@@ -91160,20 +93794,20 @@ function Ze2(e2) {
 function Ke2(e2) {
   return mt3(this, arguments, function() {
     var t, r2, o, i;
-    return Ve(this, function(s) {
+    return Re(this, function(s) {
       switch (s.label) {
         case 0:
           t = e2.getReader(), s.label = 1;
         case 1:
           s.trys.push([1, , 9, 10]), s.label = 2;
         case 2:
-          return [4, T3(t.read())];
+          return [4, M4(t.read())];
         case 3:
-          return r2 = s.sent(), o = r2.value, i = r2.done, i ? [4, T3(void 0)] : [3, 5];
+          return r2 = s.sent(), o = r2.value, i = r2.done, i ? [4, M4(void 0)] : [3, 5];
         case 4:
           return [2, s.sent()];
         case 5:
-          return [4, T3(o)];
+          return [4, M4(o)];
         case 6:
           return [4, s.sent()];
         case 7:
@@ -91196,36 +93830,36 @@ function L4(e2) {
     return e2;
   if (e2 != null) {
     if (Ge2(e2))
-      return qt3(e2);
-    if (Se2(e2))
       return It3(e2);
+    if (Ee2(e2))
+      return qt3(e2);
     if (De(e2))
-      return Rt3(e2);
-    if (Je2(e2))
+      return Vt2(e2);
+    if (We(e2))
       return et3(e2);
     if (Ze2(e2))
-      return Vt2(e2);
+      return Rt3(e2);
     if (Qe(e2))
-      return jt3(e2);
+      return Ft(e2);
   }
-  throw We(e2);
+  throw Je2(e2);
 }
-function qt3(e2) {
+function It3(e2) {
   return new g2(function(n2) {
-    var t = e2[we2]();
+    var t = e2[xe2]();
     if (h(t.subscribe))
       return t.subscribe(n2);
     throw new TypeError("Provided object does not correctly implement Symbol.observable");
   });
 }
-function It3(e2) {
+function qt3(e2) {
   return new g2(function(n2) {
     for (var t = 0; t < e2.length && !n2.closed; t++)
       n2.next(e2[t]);
     n2.complete();
   });
 }
-function Rt3(e2) {
+function Vt2(e2) {
   return new g2(function(n2) {
     e2.then(function(t) {
       n2.closed || (n2.next(t), n2.complete());
@@ -91234,11 +93868,11 @@ function Rt3(e2) {
     }).then(null, Ne);
   });
 }
-function Vt2(e2) {
+function Rt3(e2) {
   return new g2(function(n2) {
     var t, r2;
     try {
-      for (var o = I4(e2), i = o.next(); !i.done; i = o.next()) {
+      for (var o = q3(e2), i = o.next(); !i.done; i = o.next()) {
         var s = i.value;
         if (n2.next(s), n2.closed)
           return;
@@ -91257,19 +93891,19 @@ function Vt2(e2) {
 }
 function et3(e2) {
   return new g2(function(n2) {
-    Ft(e2, n2).catch(function(t) {
+    jt3(e2, n2).catch(function(t) {
       return n2.error(t);
     });
   });
 }
-function jt3(e2) {
+function Ft(e2) {
   return et3(Ke2(e2));
 }
-function Ft(e2, n2) {
+function jt3(e2, n2) {
   var t, r2, o, i;
   return pt3(this, void 0, void 0, function() {
     var s, c3;
-    return Ve(this, function(a) {
+    return Re(this, function(a) {
       switch (a.label) {
         case 0:
           a.trys.push([0, 5, 6, 11]), t = gt3(e2), a.label = 1;
@@ -91312,7 +93946,7 @@ function C3(e2, n2, t, r2, o) {
     return i;
 }
 function tt3(e2, n2) {
-  return n2 === void 0 && (n2 = 0), V3(function(t, r2) {
+  return n2 === void 0 && (n2 = 0), R3(function(t, r2) {
     t.subscribe(O3(r2, function(o) {
       return C3(r2, e2, function() {
         return r2.next(o);
@@ -91329,7 +93963,7 @@ function tt3(e2, n2) {
   });
 }
 function nt3(e2, n2) {
-  return n2 === void 0 && (n2 = 0), V3(function(t, r2) {
+  return n2 === void 0 && (n2 = 0), R3(function(t, r2) {
     r2.add(e2.schedule(function() {
       return t.subscribe(r2);
     }, n2));
@@ -91389,37 +94023,37 @@ function Dt2(e2, n2) {
   if (e2 != null) {
     if (Ge2(e2))
       return Bt3(e2, n2);
-    if (Se2(e2))
+    if (Ee2(e2))
       return Ut2(e2, n2);
     if (De(e2))
       return Nt(e2, n2);
-    if (Je2(e2))
+    if (We(e2))
       return rt3(e2, n2);
     if (Ze2(e2))
       return Yt2(e2, n2);
     if (Qe(e2))
       return Ht2(e2, n2);
   }
-  throw We(e2);
+  throw Je2(e2);
 }
 function Gt(e2, n2) {
   return n2 ? Dt2(e2, n2) : L4(e2);
 }
-function oe2(e2, n2) {
-  return V3(function(t, r2) {
+function ie(e2, n2) {
+  return R3(function(t, r2) {
     var o = 0;
     t.subscribe(O3(r2, function(i) {
       r2.next(e2.call(n2, i, o++));
     }));
   });
 }
-var Jt2 = Array.isArray;
-function Wt2(e2, n2) {
-  return Jt2(n2) ? e2.apply(void 0, ne([], Y4(n2))) : e2(n2);
+var Wt2 = Array.isArray;
+function Jt2(e2, n2) {
+  return Wt2(n2) ? e2.apply(void 0, re([], Y4(n2))) : e2(n2);
 }
 function Xt3(e2) {
-  return oe2(function(n2) {
-    return Wt2(e2, n2);
+  return ie(function(n2) {
+    return Jt2(e2, n2);
   });
 }
 function Zt(e2, n2, t, r2, o, i, s, c3) {
@@ -91454,32 +94088,32 @@ function Zt(e2, n2, t, r2, o, i, s, c3) {
   })), function() {
   };
 }
-function Ee2(e2, n2, t) {
-  return t === void 0 && (t = 1 / 0), h(n2) ? Ee2(function(r2, o) {
-    return oe2(function(i, s) {
+function Ae2(e2, n2, t) {
+  return t === void 0 && (t = 1 / 0), h(n2) ? Ae2(function(r2, o) {
+    return ie(function(i, s) {
       return n2(r2, i, o, s);
     })(L4(e2(r2, o)));
-  }, t) : (typeof n2 == "number" && (t = n2), V3(function(r2, o) {
+  }, t) : (typeof n2 == "number" && (t = n2), R3(function(r2, o) {
     return Zt(r2, o, e2, t);
   }));
 }
 function Kt2(e2) {
-  return e2 === void 0 && (e2 = 1 / 0), Ee2(Ue, e2);
+  return e2 === void 0 && (e2 = 1 / 0), Ae2(Ue, e2);
 }
 var Qt2 = ["addListener", "removeListener"];
 var en2 = ["addEventListener", "removeEventListener"];
 var tn2 = ["on", "off"];
-function ye(e2, n2, t, r2) {
+function ve2(e2, n2, t, r2) {
   if (h(t) && (r2 = t, t = void 0), r2)
-    return ye(e2, n2, t).pipe(Xt3(r2));
+    return ve2(e2, n2, t).pipe(Xt3(r2));
   var o = Y4(on2(e2) ? en2.map(function(c3) {
     return function(a) {
       return e2[c3](n2, a, t);
     };
-  }) : nn2(e2) ? Qt2.map(Te(e2, n2)) : rn2(e2) ? tn2.map(Te(e2, n2)) : [], 2), i = o[0], s = o[1];
-  if (!i && Se2(e2))
-    return Ee2(function(c3) {
-      return ye(c3, n2, t);
+  }) : nn2(e2) ? Qt2.map(Me(e2, n2)) : rn2(e2) ? tn2.map(Me(e2, n2)) : [], 2), i = o[0], s = o[1];
+  if (!i && Ee2(e2))
+    return Ae2(function(c3) {
+      return ve2(c3, n2, t);
     })(L4(e2));
   if (!i)
     throw new TypeError("Invalid event target");
@@ -91494,7 +94128,7 @@ function ye(e2, n2, t, r2) {
     };
   });
 }
-function Te(e2, n2) {
+function Me(e2, n2) {
   return function(t) {
     return function(r2) {
       return e2[t](n2, r2);
@@ -91513,11 +94147,11 @@ function on2(e2) {
 function sn2() {
   for (var e2 = [], n2 = 0; n2 < arguments.length; n2++)
     e2[n2] = arguments[n2];
-  var t = Tt2(e2), r2 = Pt3(e2, 1 / 0), o = e2;
+  var t = Mt3(e2), r2 = Pt3(e2, 1 / 0), o = e2;
   return o.length ? o.length === 1 ? L4(o[0]) : Kt2(r2)(Gt(o, t)) : Ot3;
 }
 function ot3(e2, n2) {
-  return V3(function(t, r2) {
+  return R3(function(t, r2) {
     var o = 0;
     t.subscribe(O3(r2, function(i) {
       return e2.call(n2, i, o++) && r2.next(i);
@@ -91525,19 +94159,19 @@ function ot3(e2, n2) {
   });
 }
 function cn2(e2, n2) {
-  return V3(function(t, r2) {
+  return R3(function(t, r2) {
     var o = /* @__PURE__ */ new Set();
     t.subscribe(O3(r2, function(i) {
       var s = e2 ? e2(i) : i;
       o.has(s) || (o.add(s), r2.next(i));
     })), n2 && L4(n2).subscribe(O3(r2, function() {
       return o.clear();
-    }, he2));
+    }, de2));
   });
 }
 var N4 = {};
 var E3 = {};
-function M4(e2, n2, t = 300) {
+function T3(e2, n2, t = 300) {
   if (e2 && n2 && n2 instanceof Function)
     it3(e2), N4[e2] = setTimeout(() => {
       n2(), delete N4[e2];
@@ -91565,7 +94199,7 @@ function b2(e2, n2, t, r2 = "debug", o = false, i = "SVG VIEWER") {
     t ? console[r2](`%c[${i}]%c[${e2}] %c${n2}`, ...s, t) : console[r2](`%c[${i}]%c[${e2}] %c${n2}`, ...s);
   }
 }
-function Ae2(e2) {
+function W3(e2) {
   let n2 = e2.replace(/[!"#$%&'()*+,.\/;<=>?@[\\\]^`{|}~]/g, "\\$&");
   const t = n2.split(" ");
   for (const r2 of t)
@@ -91597,7 +94231,7 @@ function ln2(e2) {
   }, r2.forEach(o), n2;
 }
 function un2(e2, n2, t) {
-  const r2 = e2.element?.querySelector(".svg-viewer__svg-overlays"), o = e2.element?.querySelector("svg"), i = o?.querySelector(`#${Ae2(n2)}`);
+  const r2 = e2.element?.querySelector(".svg-viewer__svg-overlays"), o = e2.element?.querySelector("svg"), i = o?.querySelector(`#${W3(n2)}`);
   if (i && o && r2) {
     const s = t || r2?.getBoundingClientRect() || {}, c3 = i?.getBoundingClientRect() || {};
     return {
@@ -91608,7 +94242,7 @@ function un2(e2, n2, t) {
     b2("DOM", `Unable to find element with ID ${n2}`, void 0, "warn");
   return { x: -1, y: -1 };
 }
-function ie(e2, n2, t, r2 = 1) {
+function se2(e2, n2, t, r2 = 1) {
   const o = e2.element?.querySelector(".svg-viewer__svg-overlays");
   if (e2.element?.querySelector("svg") && o) {
     const s = o?.getBoundingClientRect() || {};
@@ -91636,17 +94270,17 @@ function fn2(e2) {
     n2[t] instanceof Object && (n2[t] = `${n2[t]}`);
   return n2;
 }
-function K3(e2) {
+function Q4(e2) {
   return e2 < 26 ? e2 + 65 : e2 < 52 ? e2 + 71 : e2 < 62 ? e2 - 4 : e2 === 62 ? 43 : e2 === 63 ? 47 : 65;
 }
 function hn2(e2) {
   for (var n2 = 2, t = "", r2 = e2.length, o = 0, i = 0; i < r2; i++)
     n2 = i % 3, i > 0 && i * 4 / 3 % 76 === 0 && (t += `\r
 `), o |= e2[i] << (16 >>> n2 & 24), (n2 === 2 || e2.length - i === 1) && (t += String.fromCodePoint(
-      K3(o >>> 18 & 63),
-      K3(o >>> 12 & 63),
-      K3(o >>> 6 & 63),
-      K3(o & 63)
+      Q4(o >>> 18 & 63),
+      Q4(o >>> 12 & 63),
+      Q4(o >>> 6 & 63),
+      Q4(o & 63)
     ), o = 0);
   return t.substr(0, t.length - 2 + n2) + (n2 === 2 ? "" : n2 === 1 ? "=" : "==");
 }
@@ -91828,8 +94462,8 @@ var m = class _m {
 };
 if (m.hashStr("hello") !== "5d41402abc4b2a76b9719d911017c592")
   throw new Error("Md5 self test failed.");
-var Q4 = { top: 0, left: 0, height: 0, width: 0 };
-var te2 = class {
+var ee = { top: 0, left: 0, height: 0, width: 0 };
+var ne = class {
   /** Unique Identifier for the Viewer */
   id;
   /** URL associated with the map data */
@@ -91883,10 +94517,10 @@ var te2 = class {
   }
   constructor(n2) {
     if (this.id = n2.id || `map-${Math.floor(Math.random() * 999999)}`, this.url = n2.url || `local-${m.hashAsciiStr(n2.svg_data || "")}`, this.element = n2.element || null, this.labels = n2.labels || [], this.features = n2.features || [], this.actions = n2.actions || [], this.styles = n2.styles || {}, this.svg_data = n2.svg_data || "", this.content_ratio = n2.content_ratio || { x: 1, y: 1 }, this.zoom = n2.zoom || 1, this.center = { x: n2.center?.x ?? 0.5, y: n2.center?.y ?? 0.5 }, this.rotate = n2.rotate || 0, this.ratio = n2.ratio || 1, this.svg_ratio = n2.svg_ratio || 1, this.max_resolution = n2.max_resolution || window.innerWidth * window.innerHeight * 10, this.focus = n2.focus || null, this.options = n2.options || {}, this.mappings = n2.mappings || {}, this.box = {
-      top: (n2.box || Q4).top,
-      left: (n2.box || Q4).left,
-      height: (n2.box || Q4).height,
-      width: (n2.box || Q4).width
+      top: (n2.box || ee).top,
+      left: (n2.box || ee).left,
+      height: (n2.box || ee).height,
+      width: (n2.box || ee).width
     }, this.desired_zoom = n2.desired_zoom || n2.zoom || this.zoom, this.desired_center = {
       x: n2.desired_center?.x || this.center.x,
       y: n2.desired_center?.y || this.center.y
@@ -91906,50 +94540,50 @@ var te2 = class {
     this.needs_update = this.desired_zoom !== this.zoom || this.desired_center.x !== this.center.x || this.desired_center.y !== this.center.y, this.use_gpu = n2?.use_gpu ?? true;
   }
 };
-var j2 = new Ye2([]);
-var ut3 = new xe2();
+var F14 = new Ye2([]);
+var ut3 = new Se2();
 var pn2 = ut3.pipe(ot3((e2) => e2 === "resize"));
 function mn2(e2) {
   ut3.next(e2);
 }
 function $3(e2) {
-  return j2.getValue().find((n2) => n2.id === e2);
+  return F14.getValue().find((n2) => n2.id === e2);
 }
 function x2(e2, n2) {
-  if (e2 = W3().find((o) => o.id === (e2 instanceof te2 ? e2.id : e2)), !(e2 instanceof te2)) return null;
+  if (e2 = X4().find((o) => o.id === (e2 instanceof ne ? e2.id : e2)), !(e2 instanceof ne)) return null;
   delete n2.url;
-  const r2 = new te2(__spreadValues(__spreadValues({}, e2), n2));
-  return ft3(r2), r2.needs_update && M4(`${e2.id}_updating`, () => x2(r2, {}), 16), r2;
+  const r2 = new ne(__spreadValues(__spreadValues({}, e2), n2));
+  return ft3(r2), r2.needs_update && T3(`${e2.id}_updating`, () => x2(r2, {}), 16), r2;
 }
 function gn2(e2) {
-  return j2.pipe(
+  return F14.pipe(
     ot3((n2) => !!n2.find((t) => t.id === e2)),
-    oe2((n2) => n2.find((t) => t.id === e2)),
+    ie((n2) => n2.find((t) => t.id === e2)),
     cn2()
   );
 }
 function ft3(e2) {
-  const n2 = W3().filter((t) => t.id !== e2.id);
-  n2.push(e2), j2.next(n2);
+  const n2 = X4().filter((t) => t.id !== e2.id);
+  n2.push(e2), F14.next(n2);
 }
 function _n(e2) {
-  const n2 = W3().filter((t) => t.id !== e2.id);
-  j2.next(n2);
+  const n2 = X4().filter((t) => t.id !== e2.id);
+  F14.next(n2);
 }
-function W3() {
-  return j2.getValue();
+function X4() {
+  return F14.getValue();
 }
 var Pe2 = new Ye2({});
 var ke2 = {};
-var X4 = false;
-var se2 = false;
+var Z4 = false;
+var ce2 = false;
 var U3;
 var P4;
-var re;
+var oe2;
 var A4;
 var k2;
 var _2;
-var q3;
+var I4;
 var bn2 = [
   "click",
   "mousedown",
@@ -91969,7 +94603,7 @@ var wn2 = [
   "touchstart",
   "touchmove"
 ];
-var qe = false;
+var Ie2 = false;
 window.addEventListener("blur", () => H4());
 function xn2(e2) {
   const n2 = JSON.stringify(e2.focus);
@@ -91987,7 +94621,7 @@ function xn2(e2) {
   }
 }
 function Sn2() {
-  qe || (window.addEventListener("resize", () => mn2("resize")), window.addEventListener("blur", () => H4()), qe = true);
+  Ie2 || (window.addEventListener("resize", () => mn2("resize")), window.addEventListener("blur", () => H4()), Ie2 = true);
 }
 function En2(e2, n2 = bn2) {
   const t = Pe2.getValue(), r2 = e2.element;
@@ -91995,7 +94629,7 @@ function En2(e2, n2 = bn2) {
   const o = [];
   for (const i of n2)
     o.push(
-      ye(r2, i).pipe(oe2((s) => ({ id: e2.id, type: i, event: s })))
+      ve2(r2, i).pipe(ie((s) => ({ id: e2.id, type: i, event: s })))
     );
   t[e2.id] = sn2(...o).subscribe((i) => {
     const { id: s, type: c3, event: a } = i, l2 = a;
@@ -92006,7 +94640,7 @@ function En2(e2, n2 = bn2) {
         break;
       case "touchend":
       case "mouseup":
-        !se2 && !X4 && An2(s, l2), H4();
+        !ce2 && !Z4 && An2(s, l2), H4();
         break;
       case "mousewheel":
       case "wheel":
@@ -92017,17 +94651,17 @@ function En2(e2, n2 = bn2) {
 }
 function An2(e2, n2) {
   const t = $3(e2);
-  t && b2("INPUT", "Clicked:", ie(t, J4(n2)));
+  t && b2("INPUT", "Clicked:", se2(t, J4(n2)));
 }
 function Ln2(e2, n2) {
-  if (X4) return;
+  if (Z4) return;
   b2("INPUT", "Starting panning...");
   const t = $3(e2);
-  A4 && window.removeEventListener("mousemove", A4), A4 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), _2 && window.removeEventListener("touchend", q3), t && !t.options.disable_pan && (U3 = J4(n2), n2 instanceof MouseEvent ? (A4 = (r2) => Ie2(e2, r2, U3), k2 = () => H4(), window.addEventListener("mousemove", A4), window.addEventListener("mouseup", k2)) : (_2 = (r2) => Ie2(e2, r2, U3), q3 = () => H4(), window.addEventListener("touchmove", _2), window.addEventListener("touchend", q3)), M4("pan_start", () => se2 = true, 200));
+  A4 && window.removeEventListener("mousemove", A4), A4 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), _2 && window.removeEventListener("touchend", I4), t && !t.options.disable_pan && (U3 = J4(n2), n2 instanceof MouseEvent ? (A4 = (r2) => qe(e2, r2, U3), k2 = () => H4(), window.addEventListener("mousemove", A4), window.addEventListener("mouseup", k2)) : (_2 = (r2) => qe(e2, r2, U3), I4 = () => H4(), window.addEventListener("touchmove", _2), window.addEventListener("touchend", I4)), T3("pan_start", () => ce2 = true, 200));
 }
-function Ie2(e2, n2, t = U3) {
-  if (X4) return;
-  se2 = true;
+function qe(e2, n2, t = U3) {
+  if (Z4) return;
+  ce2 = true;
   const r2 = $3(e2);
   if (r2) {
     const o = J4(n2), i = {
@@ -92052,25 +94686,25 @@ function Ie2(e2, n2, t = U3) {
 function $n2(e2, n2) {
   b2("INPUT", "Starting pinching..."), _2 && window.removeEventListener("touchmove", _2);
   const t = $3(e2);
-  if (X4 = true, t && !t.options.disable_zoom) {
+  if (Z4 = true, t && !t.options.disable_zoom) {
     const r2 = [
       { x: n2.touches[0].clientX, y: n2.touches[0].clientY },
       { x: n2.touches[1].clientX, y: n2.touches[1].clientY }
-    ], o = r2.map((c3) => ie(t, c3)), { x: i, y: s } = {
+    ], o = r2.map((c3) => se2(t, c3)), { x: i, y: s } = {
       x: (o[0].x + o[1].x) / 2,
       y: (o[0].y + o[1].y) / 2
     };
-    P4 = { x: 1 - i, y: 1 - s }, re = at2(r2[0], r2[1]), n2 instanceof MouseEvent || (_2 = (c3) => c3.touches.length >= 2 ? zn2(e2, c3, re) : "", window.addEventListener("touchmove", _2));
+    P4 = { x: 1 - i, y: 1 - s }, oe2 = at2(r2[0], r2[1]), n2 instanceof MouseEvent || (_2 = (c3) => c3.touches.length >= 2 ? zn2(e2, c3, oe2) : "", window.addEventListener("touchmove", _2));
   }
 }
-function zn2(e2, n2, t = re) {
+function zn2(e2, n2, t = oe2) {
   const r2 = $3(e2);
   if (r2 && !r2.options.disable_zoom) {
     const o = [
       { x: n2.touches[0].clientX, y: n2.touches[0].clientY },
       { x: n2.touches[1].clientX, y: n2.touches[1].clientY }
     ], i = at2(o[0], o[1]), s = Math.max(0.5, Math.min(10, r2.zoom * i / t)), c3 = 1 - r2.zoom / s, a = s != r2.zoom ? lt2(r2.center, P4, c3) : r2.center;
-    re = i, x2(r2, {
+    oe2 = i, x2(r2, {
       zoom: s,
       center: a,
       desired_zoom: s,
@@ -92079,13 +94713,13 @@ function zn2(e2, n2, t = re) {
   }
 }
 function H4() {
-  b2("INPUT", "Ending pinch/pan..."), it3("pan_start"), X4 = false, se2 = false, A4 && window.removeEventListener("mousemove", A4), k2 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), q3 && window.removeEventListener("touchend", q3), A4 = k2 = _2 = q3 = P4 = null;
+  b2("INPUT", "Ending pinch/pan..."), it3("pan_start"), Z4 = false, ce2 = false, A4 && window.removeEventListener("mousemove", A4), k2 && window.removeEventListener("mouseup", k2), _2 && window.removeEventListener("touchmove", _2), I4 && window.removeEventListener("touchend", I4), A4 = k2 = _2 = I4 = P4 = null;
 }
 function Cn2(e2, n2) {
   const t = $3(e2);
   if (t) {
-    const r2 = n2.deltaY >= 0 ? -0.02 : 0.02, o = Math.min(10, Math.max(0.5, t.zoom * (1 + r2))), { x: i, y: s } = ie(t, J4(n2));
-    P4 = { x: 1 - i, y: 1 - s }, M4("clear_action_start", () => P4 = null);
+    const r2 = n2.deltaY >= 0 ? -0.02 : 0.02, o = Math.min(10, Math.max(0.5, t.zoom * (1 + r2))), { x: i, y: s } = se2(t, J4(n2));
+    P4 = { x: 1 - i, y: 1 - s }, T3("clear_action_start", () => P4 = null);
     const c3 = 1 - t.zoom / o, a = o != t.zoom ? lt2(t.center, P4, c3) : t.center;
     x2(t, {
       zoom: o,
@@ -92101,28 +94735,28 @@ function On2(e2) {
   const s = o.actions.sort((c3, a) => (a.priority || 0) - (c3.priority || 0)).find(
     (c3) => c3.action.includes(t) && (c3.id === "*" || c3.id === r2.target?.id)
   );
-  s && s.callback(r2, ie(o, J4(r2)));
+  s && s.callback(r2, se2(o, J4(r2)));
 }
-var F14 = {};
-var Re = {};
-var ve2 = {};
+var j2 = {};
+var Ve = {};
 var pe2 = {};
 var me2 = {};
+var ge2 = {};
 var D3 = {};
 var B4 = {};
 st2(
   "on_resize",
   pn2.subscribe(() => {
-    const e2 = W3();
+    const e2 = X4();
     for (const n2 of e2)
       try {
-        M4(`resize-${n2.id}`, () => yt3(n2));
+        T3(`resize-${n2.id}`, () => yt3(n2));
       } catch (t) {
         console.warn(t);
       }
   })
 );
-async function Mn(e2) {
+async function Tn2(e2) {
   const n2 = e2.element;
   if (!n2) throw new Error("No element set on viewer");
   const t = document.createElement("div"), r2 = document.createElement("style"), o = document.createElement("div"), i = document.createElement("div"), s = document.createElement("div"), c3 = document.createElement("div"), a = document.createElement("iframe");
@@ -92139,20 +94773,20 @@ function ht2(e2) {
         "svg"
       );
       if (!t || !t.clientWidth)
-        return M4(
+        return T3(
           `${e2.id}-setup`,
           () => ht2(e2).then((o) => n2()),
           100
         );
-      const r2 = Re[e2.url] || ln2(t);
-      Re[e2.url] = r2, x2(e2, { mappings: r2 }), t.style.display = "none", Tn2(e2), Le2(e2), n2();
+      const r2 = Ve[e2.url] || ln2(t);
+      Ve[e2.url] = r2, x2(e2, { mappings: r2 }), t.style.display = "none", Mn(e2), Le2(e2), n2();
     });
   });
 }
 function dt3(e2) {
-  return F14[e2.id] || (F14[e2.id] = new Promise((n2) => {
+  return j2[e2.id] || (j2[e2.id] = new Promise((n2) => {
     const t = requestAnimationFrame(() => {
-      if (!F14[e2.id]) return;
+      if (!j2[e2.id]) return;
       const r2 = e2.element;
       if (!r2) throw new Error("No element set on viewer");
       const o = r2.querySelector("style");
@@ -92163,11 +94797,11 @@ function dt3(e2) {
       if (!s || !o)
         throw new Error("Viewer is not setup yet.");
       const a = (e2.center.x - 0.5) * (100 * e2.zoom * e2.svg_ratio), l2 = (e2.center.y - 0.5) * (100 * e2.zoom * e2.svg_ratio), u3 = e2.use_gpu ? `translate3d(${a}%, ${l2}%, 0)` : `translate(${a}%, ${l2}%)`;
-      s.style.transform = `${u3} ${c3} rotate(${e2.rotate}deg)`, i += `#${e2.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e2.rotate}deg) scale(${1 / e2.zoom * (1 / e2.svg_ratio)}); }`, i += `#${e2.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e2.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, ge2(e2), xn2(e2), Le2(e2), delete F14[e2.id], cancelAnimationFrame(t), n2();
+      s.style.transform = `${u3} ${c3} rotate(${e2.rotate}deg)`, i += `#${e2.id} .svg-viewer__svg-overlay-item > *:not([no-scale="true"]) { transform: rotate(-${e2.rotate}deg) scale(${1 / e2.zoom * (1 / e2.svg_ratio)}); }`, i += `#${e2.id} .svg-viewer__svg-overlay-item > * { transform: rotate(-${e2.rotate}deg); height: 100%; width: 100%; }`, o.innerHTML = i, _e2(e2), xn2(e2), Le2(e2), delete j2[e2.id], cancelAnimationFrame(t), n2();
     });
-  })), F14[e2.id];
+  })), j2[e2.id];
 }
-async function Tn2(e2) {
+async function Mn(e2) {
   const n2 = JSON.stringify(__spreadValues({}, e2.styles)) || "";
   if (n2.localeCompare(D3[e2.id])) {
     const t = e2.element;
@@ -92207,7 +94841,7 @@ async function Tn2(e2) {
     r2.src = d2, D3[e2.id] = n2;
   }
 }
-async function ge2(e2) {
+async function _e2(e2) {
   if ((JSON.stringify(__spreadValues({}, e2.styles)) || "").localeCompare(D3[e2.id])) {
     const t = e2.element;
     if (!t) throw new Error("No element set on viewer");
@@ -92217,7 +94851,7 @@ async function ge2(e2) {
     if (!r2) throw new Error("No iframe created for viewer");
     if (!r2.contentWindow) {
       r2.onload = () => {
-        setTimeout(() => ge2(e2), 50), setTimeout(() => ge2(e2), 500);
+        setTimeout(() => _e2(e2), 50), setTimeout(() => _e2(e2), 500);
       };
       return;
     }
@@ -92232,7 +94866,7 @@ async function ge2(e2) {
 }
 async function yt3(e2) {
   return new Promise((n2) => {
-    B4[e2.id] || (B4[e2.id] = []), B4[e2.id].push(n2), M4(
+    B4[e2.id] || (B4[e2.id] = []), B4[e2.id].push(n2), T3(
       `resize-${e2.id}`,
       () => {
         const t = e2.element;
@@ -92240,7 +94874,7 @@ async function yt3(e2) {
         const r2 = t.querySelector(
           ".svg-viewer__view-container"
         ), o = t.querySelector(".svg-viewer__svg-overlays"), i = t.querySelector(
-          `#${e2.id}`
+          `#${W3(e2.id)}`
         ), s = t.querySelector(
           ".svg-viewer"
         ), c3 = t.querySelector(
@@ -92268,7 +94902,7 @@ async function yt3(e2) {
             box: u3,
             content_ratio: $e2
           });
-          !ze || (e2 = ze, !await dt3(e2).catch((ce2) => (console.warn(ce2), false))) || (B4[e2.id].forEach((ce2) => ce2()), B4[e2.id] = []);
+          !ze || (e2 = ze, !await dt3(e2).catch((ae2) => (console.warn(ae2), false))) || (B4[e2.id].forEach((ae2) => ae2()), B4[e2.id] = []);
         });
       },
       100
@@ -92283,20 +94917,20 @@ function Le2(e2) {
   );
   if (!t || !n2) return;
   if (!t.getBoundingClientRect().width)
-    return M4(
+    return T3(
       `${e2.id}|render-overlays`,
       () => Le2(e2),
       50
     );
   requestAnimationFrame(() => {
-    Pn2(e2), qn2(e2), kn2(e2);
+    Pn2(e2), In2(e2), kn2(e2);
   });
 }
 function Pn2(e2) {
   const n2 = e2.labels.filter(
     (r2) => !r2.zoom_level || r2.zoom_level <= e2.zoom
   ), t = JSON.stringify(n2);
-  if (t !== ve2[e2.id]) {
+  if (t !== pe2[e2.id]) {
     const r2 = e2.element?.querySelector(
       ".svg-viewer__svg-overlays"
     );
@@ -92312,7 +94946,7 @@ function Pn2(e2) {
       const l2 = document.createElement("div"), u3 = document.createElement("label");
       u3.classList.add("svg-viewer__label"), u3.setAttribute("for", c3), i.css_class?.length && u3.classList.add(...i.css_class), i.z_index && (a.style.zIndex = `${i.z_index}`), u3.textContent = i.content, l2.appendChild(u3), a.appendChild(l2), r2.appendChild(a);
     }
-    b2("RENDER", `Added ${e2.labels.length} labels to view.`), ve2[e2.id] = t;
+    b2("RENDER", `Added ${e2.labels.length} labels to view.`), pe2[e2.id] = t;
   }
 }
 function kn2(e2) {
@@ -92322,7 +94956,7 @@ function kn2(e2) {
       data: fn2(t.data)
     }))
   );
-  if (n2 !== pe2[e2.id]) {
+  if (n2 !== me2[e2.id]) {
     const t = e2.element?.querySelector(
       ".svg-viewer__svg-overlays"
     );
@@ -92345,14 +94979,14 @@ function kn2(e2) {
         "svg-viewer__svg-overlay-item__hover"
       ), a.style.top = `${s.y * 100}%`, a.style.left = `${s.x * 100}%`, c3.w || c3.h ? (a.style.width = `${c3.w * 100}%`, a.style.height = `${c3.h * 100}%`) : (a.style.width = "1%", a.style.height = `${1 / e2.ratio}%`), a.style.transform = "translate(-50%, -50%)", i.content instanceof Node && a.appendChild(i.content), t.appendChild(a));
     }
-    b2("RENDER", `Added ${e2.features.length} features to view.`), pe2[e2.id] = n2;
+    b2("RENDER", `Added ${e2.features.length} features to view.`), me2[e2.id] = n2;
   }
 }
-function qn2(e2) {
+function In2(e2) {
   const n2 = JSON.stringify(
     e2.actions.map((t) => __spreadProps(__spreadValues({}, t), { callback: "" }))
   );
-  if (n2 !== me2[e2.id]) {
+  if (n2 !== ge2[e2.id]) {
     const t = e2.element?.querySelector(
       ".svg-viewer__svg-overlays"
     );
@@ -92361,13 +94995,15 @@ function qn2(e2) {
       t.querySelectorAll(".action-zone")
     ).filter((o) => o.parentNode && t.contains(o.parentNode)).forEach((o) => t.removeChild(o));
     for (const o of e2.actions) {
-      if (!o.action || !o.id || o.id === "*" || o.zone === false || t.querySelector(`#${o.id}`)) continue;
+      if (!o.action || !o.id || o.id === "*" || o.zone === false || t.querySelector(
+        `#${W3(o.id)}`
+      )) continue;
       const s = document.createElement("button");
       s.id = `${o.id}`;
       const c3 = e2.mappings[o.id] || { x: 0, y: 0 }, a = e2.mappings[o.id] || { w: 0, h: 0 };
       s.classList.add("svg-viewer__svg-overlay-item"), s.classList.add("action-zone"), s.style.top = `${c3.y * 100}%`, s.style.left = `${c3.x * 100}%`, (a.w || a.h) && (s.style.width = `${a.w * 100}%`, s.style.height = `${a.h * 100}%`, s.style.transform = "translate(-50%, -50%)"), t.appendChild(s);
     }
-    me2[e2.id] = n2;
+    ge2[e2.id] = n2;
   }
 }
 function vt3(e2) {
@@ -92378,26 +95014,27 @@ function vt3(e2) {
     let r2 = "";
     for (const o in e2[t])
       e2[t][o] && (r2 += `${o}: ${e2[t][o]}; `);
-    n2 += `svg ${t.split(" ").map((o) => Ae2(o)).join(" ")} { ${r2} } `;
+    n2 += `svg ${t.split(" ").map((o) => W3(o)).join(" ")} { ${r2} } `;
   }
   return n2;
 }
-var le2 = {};
-var _e2 = {};
+var ue = {};
+var be2 = {};
 function Nn2(e2) {
   for (const n2 in e2)
-    _e2[n2.toLowerCase()] = e2[n2];
+    be2[n2.toLowerCase()] = e2[n2];
 }
 async function Un2(e2) {
-  let t = W3().find((o) => o.url === e2.url);
+  let t = X4().find((o) => o.url === e2.url);
   if (t) return t.id;
-  const r2 = e2.svg_data || await In2(e2.url);
-  return t = new te2(__spreadProps(__spreadValues({}, e2), { svg_data: r2 })), st2(
+  const r2 = e2.svg_data || await qn2(e2.url);
+  if (!r2) throw new Error("No SVG data to display");
+  return t = new ne(__spreadProps(__spreadValues({}, e2), { svg_data: r2 })), st2(
     `${t.id}-render`,
     gn2(t.id).subscribe(
       (o) => dt3(o).catch((i) => console.warn(i))
     )
-  ), ft3(t), await Mn(t), t.id;
+  ), ft3(t), await Tn2(t), t.id;
 }
 function Yn2(e2, n2) {
   return x2(e2, n2);
@@ -92408,20 +95045,23 @@ function Hn2(e2) {
   const t = n2.element?.querySelector(".svg-viewer");
   t && (n2.element.removeChild(t), _n(n2), an2(`${e2}`));
 }
-async function In2(e2 = "") {
+async function qn2(e2 = "") {
   const n2 = new Headers();
   if (e2.startsWith(location.origin) || e2.startsWith("/"))
-    for (const o in _e2)
-      n2.append(o, _e2[o]);
-  if (le2[e2]) return le2[e2];
-  const r2 = await (await fetch(e2, { headers: n2 }).catch((o) => (b2("SVG VIEWER", "Failed to load map", o, "error"), { text: async () => "" }))).text();
-  return le2[e2] = r2, r2;
+    for (const i in be2)
+      n2.append(i, be2[i]);
+  if (ue[e2]) return ue[e2];
+  const t = { text: async () => "" };
+  let r2 = await fetch(e2, { headers: n2 }).catch((i) => (b2("SVG VIEWER", "Failed to load map", i, "error"), t));
+  r2.status >= 400 && (b2("SVG VIEWER", "Failed to load map", r2.statusText, "error"), r2 = t);
+  const o = await r2.text();
+  return ue[e2] = o, o;
 }
 function Dn2() {
   let e2 = document.getElementById("svg-viewer-global");
-  e2 || (e2 = document.createElement("style"), e2.id = "svg-viewer-global", e2.innerHTML = Rn2, document.head.appendChild(e2), b2("Styles", "Added global viewer styles to document"));
+  e2 || (e2 = document.createElement("style"), e2.id = "svg-viewer-global", e2.innerHTML = Vn2, document.head.appendChild(e2), b2("Styles", "Added global viewer styles to document"));
 }
-var Rn2 = `
+var Vn2 = `
     .svg-viewer {
         position: absolute;
         top: 0;
@@ -93710,7 +96350,10 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     const has_time_changed = !event.id || event.date !== this.form.value.date || event.duration !== this.form.value.duration;
     if (spaces.length && has_time_changed) {
       const space_list2 = await Promise.all(changed_spaces.map((_3) => this._space_pipe.transform(_3.email)));
-      await this._checkResourcesAvailable(space_list2, this.form.value.all_day ? startOfDay(this.form.value.date).valueOf() : this.form.value.date, this.form.value.all_day ? Math.max(24 * 60, this.form.value.duration) : this.form.value.duration, event.ical_uid || event.id || "").catch(on_error);
+      const date = this.form.value.all_day ? startOfDay(this.form.value.date).valueOf() : this.form.value.date;
+      const duration = this.form.value.all_day ? Math.max(24 * 60, this.form.value.duration) : this.form.value.duration;
+      await this._checkResourcesAvailable(space_list2, date, duration, event.ical_uid || event.id || "").catch(on_error);
+      await this._checkResourceRules(space_list2, date, duration, this._host(this.form.value.host, spaces[0]?.email)).catch(on_error);
     } else if (!space_list.length && this.lone_space) {
       spaces = [await this._space_pipe.transform(this.lone_space)];
       this.form.patchValue({ resources: spaces });
@@ -93813,6 +96456,25 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     }
     return true;
   }
+  async _checkResourceRules(spaces, date, duration, host) {
+    const user = await lastValueFrom(Mc(host)).catch(() => ({
+      email: host
+    }));
+    const rules = await nextValueFrom(this.booking_rules$);
+    const space_rules = spaces.map((space) => {
+      const bld = this._org.buildings.find((b3) => space.zones.includes(b3.id));
+      return rulesForResource({
+        date,
+        duration,
+        host: new User(user),
+        resource: space
+      }, rules[bld.id]);
+    });
+    if (!space_rules.every((_3) => !_3.hidden)) {
+      throw i18n("CALENDAR_EVENT.SPACE_BOOKING_RULES_HIDDEN", void 0, spaces.length);
+    }
+    return true;
+  }
   async _performBooking(event, query2) {
     this._updateVisitorList(event.attendees);
     const old_system = event.old_system?.id || event.old_system?.email || event.resources[0]?.email;
@@ -93820,16 +96482,16 @@ var _EventFormService = class _EventFormService extends AsyncHandler {
     if (old_system !== system_id) {
       event.attendees = event.attendees.filter((_3) => _3.email !== old_system || _3.id !== old_system);
     }
-    return (this.book_internal ? saveBooking(newBookingFromCalendarEvent(__spreadProps(__spreadValues({}, event.toJSON()), {
+    return lastValueFrom(this.book_internal ? saveBooking(newBookingFromCalendarEvent(__spreadProps(__spreadValues({}, event.toJSON()), {
       status: this._settings.get("app.bookings.no_approval") === true ? "approved" : "tentative"
-    }))).pipe(map((_3) => newCalendarEventFromBooking(_3))) : saveEvent(event, query2))?.toPromise();
+    }))).pipe(map((_3) => newCalendarEventFromBooking(_3))) : saveEvent(event, query2));
   }
   async _removeBookingAfterError(is_new, event, assets = false, e2) {
     if (is_new) {
-      await removeEvent(event.id, event.resources.length ? {
+      await lastValueFrom(removeEvent(event.id, event.resources.length ? {
         calendar: this.form.value.host || currentUser()?.email,
         system_id: event.resources[0].id
-      } : {})?.toPromise();
+      } : {}));
       throw e2?.status === 409 ? i18n("CALENDAR_EVENT.ASSETS_CLASH_ERROR") : i18n("CALENDAR_EVENT.ASSETS_ERROR");
     } else if (assets) {
       throw i18n("CALENDAR_EVENT.ASSETS_PARTIAL_ERROR", {
@@ -93865,9 +96527,9 @@ var EventFormService = _EventFormService;
 })();
 
 // node_modules/@angular/material/fesm2022/menu.mjs
-var _c012 = ["mat-menu-item", ""];
-var _c17 = [[["mat-icon"], ["", "matMenuItemIcon", ""]], "*"];
-var _c24 = ["mat-icon, [matMenuItemIcon]", "*"];
+var _c015 = ["mat-menu-item", ""];
+var _c19 = [[["mat-icon"], ["", "matMenuItemIcon", ""]], "*"];
+var _c26 = ["mat-icon, [matMenuItemIcon]", "*"];
 function MatMenuItem_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275namespaceSVG();
@@ -93876,7 +96538,7 @@ function MatMenuItem_Conditional_4_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
 }
-var _c34 = ["*"];
+var _c35 = ["*"];
 function MatMenu_ng_template_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -94027,14 +96689,14 @@ var MatMenuItem = class _MatMenuItem {
       disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute]
     },
     exportAs: ["matMenuItem"],
-    attrs: _c012,
-    ngContentSelectors: _c24,
+    attrs: _c015,
+    ngContentSelectors: _c26,
     decls: 5,
     vars: 3,
     consts: [[1, "mat-mdc-menu-item-text"], ["matRipple", "", 1, "mat-mdc-menu-ripple", 3, "matRippleDisabled", "matRippleTrigger"], ["viewBox", "0 0 5 10", "focusable", "false", "aria-hidden", "true", 1, "mat-mdc-menu-submenu-icon"], ["points", "0,0 5,5 0,10"]],
     template: function MatMenuItem_Template(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275projectionDef(_c17);
+        \u0275\u0275projectionDef(_c19);
         \u0275\u0275projection(0);
         \u0275\u0275elementStart(1, "span", 0);
         \u0275\u0275projection(2, 1);
@@ -94556,7 +97218,7 @@ var MatMenu = class _MatMenu {
       provide: MAT_MENU_PANEL,
       useExisting: _MatMenu
     }])],
-    ngContentSelectors: _c34,
+    ngContentSelectors: _c35,
     decls: 1,
     vars: 0,
     consts: [["tabindex", "-1", "role", "menu", 1, "mat-mdc-menu-panel", 3, "click", "animationstart", "animationend", "animationcancel", "id"], [1, "mat-mdc-menu-content"]],
@@ -95334,7 +97996,7 @@ var fadeInItems = matMenuAnimations.fadeInItems;
 var transformMenu = matMenuAnimations.transformMenu;
 
 // libs/form-fields/src/lib/duration-field.component.ts
-var _c013 = ["*"];
+var _c016 = ["*"];
 var _forTrack0 = ($index, $item) => $item.id;
 function DurationFieldComponent_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
@@ -95542,7 +98204,7 @@ _DurationFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent(
     useExisting: forwardRef(() => _DurationFieldComponent),
     multi: true
   }
-]), \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c013, decls: 14, vars: 11, consts: [["menu", "matMenu"], ["duration-field", "", "matRipple", "", 1, "flex", "h-12", "w-full", "items-center", "justify-between", "rounded", "border", "border-neutral", "px-2", 3, "disabled", "matMenuTriggerFor"], [1, "flex", "w-1/2", "flex-1", "flex-col", "px-2", "text-left", "leading-tight"], [1, "truncate"], [1, "truncate", "text-xs", "opacity-30"], [1, "text-2xl"], [1, "max-h-[15rem]", "min-w-[18rem]"], ["mat-menu-item", "", 1, "text-left"], ["mat-menu-item", "", 1, "text-left", 3, "click"], [1, "flex", "items-center", "justify-between"], [1, "flex", "flex-col", "leading-tight"], [1, "ml-2", "text-2xl"]], template: function DurationFieldComponent_Template(rf, ctx) {
+]), \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c016, decls: 14, vars: 11, consts: [["menu", "matMenu"], ["duration-field", "", "matRipple", "", 1, "flex", "h-12", "w-full", "items-center", "justify-between", "rounded", "border", "border-neutral", "px-2", 3, "disabled", "matMenuTriggerFor"], [1, "flex", "w-1/2", "flex-1", "flex-col", "px-2", "text-left", "leading-tight"], [1, "truncate"], [1, "truncate", "text-xs", "opacity-30"], [1, "text-2xl"], [1, "max-h-[15rem]", "min-w-[18rem]"], ["mat-menu-item", "", 1, "text-left"], ["mat-menu-item", "", 1, "text-left", 3, "click"], [1, "flex", "items-center", "justify-between"], [1, "flex", "flex-col", "leading-tight"], [1, "ml-2", "text-2xl"]], template: function DurationFieldComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projectionDef();
     \u0275\u0275elementStart(0, "button", 1)(1, "div", 2)(2, "div", 3);
@@ -95666,8 +98328,8 @@ var DurationFieldComponent = _DurationFieldComponent;
 })();
 
 // node_modules/@angular/material/fesm2022/autocomplete.mjs
-var _c014 = ["panel"];
-var _c18 = ["*"];
+var _c017 = ["panel"];
+var _c110 = ["*"];
 function MatAutocomplete_ng_template_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 1, 0);
@@ -95899,7 +98561,7 @@ var MatAutocomplete = class _MatAutocomplete {
     viewQuery: function MatAutocomplete_Query(rf, ctx) {
       if (rf & 1) {
         \u0275\u0275viewQuery(TemplateRef, 7);
-        \u0275\u0275viewQuery(_c014, 5);
+        \u0275\u0275viewQuery(_c017, 5);
       }
       if (rf & 2) {
         let _t4;
@@ -95931,7 +98593,7 @@ var MatAutocomplete = class _MatAutocomplete {
       provide: MAT_OPTION_PARENT_COMPONENT,
       useExisting: _MatAutocomplete
     }])],
-    ngContentSelectors: _c18,
+    ngContentSelectors: _c110,
     decls: 1,
     vars: 0,
     consts: [["panel", ""], ["role", "listbox", 1, "mat-mdc-autocomplete-panel", "mdc-menu-surface", "mdc-menu-surface--open", 3, "id"]],
@@ -96944,8 +99606,8 @@ function showStaff(id) {
 }
 
 // libs/form-fields/src/lib/user-search-field.component.ts
-var _c015 = ["input"];
-var _c19 = (a0) => ({ name: a0 });
+var _c018 = ["input"];
+var _c111 = (a0) => ({ name: a0 });
 function UserSearchFieldComponent_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "mat-spinner", 5);
@@ -97022,7 +99684,7 @@ function UserSearchFieldComponent_Conditional_11_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r3 = \u0275\u0275nextContext();
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 1, "FORM.USER_ADD_EXTERNAL", \u0275\u0275pureFunction1(4, _c19, ctx_r3.search_str)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(4, 1, "FORM.USER_ADD_EXTERNAL", \u0275\u0275pureFunction1(4, _c111, ctx_r3.search_str)), " ");
   }
 }
 function UserSearchFieldComponent_Conditional_12_Template(rf, ctx) {
@@ -97133,7 +99795,7 @@ _UserSearchFieldComponent.\u0275fac = function UserSearchFieldComponent_Factory(
 };
 _UserSearchFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UserSearchFieldComponent, selectors: [["a-user-search-field"]], viewQuery: function UserSearchFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx._input_el, _c015, 5, ElementRef);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c018, 5, ElementRef);
   }
   if (rf & 2) {
     \u0275\u0275queryAdvance();
@@ -97715,8 +100377,8 @@ var ExploreBookingModalComponent = _ExploreBookingModalComponent;
 })();
 
 // libs/components/src/lib/custom-tooltip.component.ts
-var _c016 = ["customTooltip", ""];
-var _c110 = ["*"];
+var _c019 = ["customTooltip", ""];
+var _c112 = ["*"];
 function CustomTooltipComponent_ng_template_1_Case_1_ng_container_0_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementContainer(0);
@@ -97900,7 +100562,7 @@ _CustomTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent(
   if (rf & 2) {
     \u0275\u0275queryAdvance();
   }
-}, inputs: { x_pos: [1, "xPosition", "x_pos"], y_pos: [1, "yPosition", "y_pos"], content: [1, "content"], data: [1, "data"], backdrop: [1, "backdrop"], hover: [1, "hover"], delay: [1, "delay"] }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c016, ngContentSelectors: _c110, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["custom-tooltip", "", 1, "relative", "print:hidden"], [3, "innerHTML"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function CustomTooltipComponent_Template(rf, ctx) {
+}, inputs: { x_pos: [1, "xPosition", "x_pos"], y_pos: [1, "yPosition", "y_pos"], content: [1, "content"], data: [1, "data"], backdrop: [1, "backdrop"], hover: [1, "hover"], delay: [1, "delay"] }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c019, ngContentSelectors: _c112, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["custom-tooltip", "", 1, "relative", "print:hidden"], [3, "innerHTML"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function CustomTooltipComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projectionDef();
     \u0275\u0275projection(0);
@@ -98108,7 +100770,7 @@ var ExploreDeskInfoComponent = _ExploreDeskInfoComponent;
 })();
 
 // libs/explore/src/lib/explore-device-info.component.ts
-var _c017 = ["explore-device-info", ""];
+var _c020 = ["explore-device-info", ""];
 function ExploreDeviceInfoComponent_ng_template_5_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "p", 9)(1, "label");
@@ -98332,7 +100994,7 @@ var _ExploreDeviceInfoComponent = class _ExploreDeviceInfoComponent extends Asyn
 _ExploreDeviceInfoComponent.\u0275fac = function ExploreDeviceInfoComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ExploreDeviceInfoComponent)();
 };
-_ExploreDeviceInfoComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreDeviceInfoComponent, selectors: [["", "explore-device-info", ""]], features: [\u0275\u0275InheritDefinitionFeature], attrs: _c017, decls: 7, vars: 9, consts: [["dot", ""], ["device_tooltip", ""], ["name", "radius", 1, "radius", "center", "border-blue-600", "absolute", "rounded-full", "border-8", "border-dashed", "bg-info", "bg-opacity-25"], ["shadow", "", 1, "center", "absolute", "h-8", "w-8", "rounded-full", "bg-neutral"], ["name", "dot", 1, "center", "absolute", "h-3", "w-3", "rounded-full", "border-2", "border-white", "shadow"], ["customTooltip", "", 1, "pointer-events-auto", "absolute", "inset-0", 3, "mouseenter", "content", "backdrop", "xPosition", "yPosition", "hover"], ["name", "device-info", 1, "pointer-events-none", "left-0", "top-0", "mx-2", "w-64", "rounded", "bg-base-100", "p-4", "shadow", 3, "mouseleave"], [1, "arrow"], [1, "details"], [1, "break-words"], ["type", ""], ["os", ""], ["ssid", ""], ["username", ""], ["user", ""]], template: function ExploreDeviceInfoComponent_Template(rf, ctx) {
+_ExploreDeviceInfoComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreDeviceInfoComponent, selectors: [["", "explore-device-info", ""]], features: [\u0275\u0275InheritDefinitionFeature], attrs: _c020, decls: 7, vars: 9, consts: [["dot", ""], ["device_tooltip", ""], ["name", "radius", 1, "radius", "center", "border-blue-600", "absolute", "rounded-full", "border-8", "border-dashed", "bg-info", "bg-opacity-25"], ["shadow", "", 1, "center", "absolute", "h-8", "w-8", "rounded-full", "bg-neutral"], ["name", "dot", 1, "center", "absolute", "h-3", "w-3", "rounded-full", "border-2", "border-white", "shadow"], ["customTooltip", "", 1, "pointer-events-auto", "absolute", "inset-0", 3, "mouseenter", "content", "backdrop", "xPosition", "yPosition", "hover"], ["name", "device-info", 1, "pointer-events-none", "left-0", "top-0", "mx-2", "w-64", "rounded", "bg-base-100", "p-4", "shadow", 3, "mouseleave"], [1, "arrow"], [1, "details"], [1, "break-words"], ["type", ""], ["os", ""], ["ssid", ""], ["username", ""], ["user", ""]], template: function ExploreDeviceInfoComponent_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275element(0, "div", 2)(1, "div", 3)(2, "div", 4, 0);
@@ -99291,7 +101953,7 @@ var ExploreSpacesService = _ExploreSpacesService;
 })();
 
 // libs/bookings/src/lib/locker-grid.component.ts
-var _c018 = () => [];
+var _c021 = () => [];
 function LockerGridComponent_For_2_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -99369,7 +102031,7 @@ _LockerGridComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ t
     let tmp_3_0;
     \u0275\u0275styleProp("width", ctx.columns * 2.5 + "rem")("grid-template-columns", "repeat(" + ctx.columns + ", 5rem)")("grid-template-rows", "repeat(" + ((tmp_2_0 = ctx.bank()) == null ? null : tmp_2_0.height) + ", 5rem)");
     \u0275\u0275advance();
-    \u0275\u0275repeater(((tmp_3_0 = ctx.bank()) == null ? null : tmp_3_0.lockers) || \u0275\u0275pureFunction0(6, _c018));
+    \u0275\u0275repeater(((tmp_3_0 = ctx.bank()) == null ? null : tmp_3_0.lockers) || \u0275\u0275pureFunction0(6, _c021));
   }
 }, dependencies: [MatRippleModule, MatRipple], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n}\nbutton[disabled][_ngcontent-%COMP%] {\n  pointer-events: none;\n}\n/*# sourceMappingURL=locker-grid.component.css.map */"] });
 var LockerGridComponent = _LockerGridComponent;
@@ -99492,7 +102154,7 @@ var ExploreLockerBankModalComponent = _ExploreLockerBankModalComponent;
 })();
 
 // libs/explore/src/lib/explore-locker-bank-info.component.ts
-var _c019 = (a0, a1) => ({ used: a0, count: a1 });
+var _c022 = (a0, a1) => ({ used: a0, count: a1 });
 function ExploreLockerBankInfoComponent_ng_template_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 3)(1, "h3", 4);
@@ -99510,7 +102172,7 @@ function ExploreLockerBankInfoComponent_ng_template_2_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(ctx_r1.bank.name);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(5, 5, "EXPLORE.LOCKERS_USE", \u0275\u0275pureFunction2(8, _c019, ctx_r1.in_use_count, ctx_r1.bank.lockers.length || 1)), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(5, 5, "EXPLORE.LOCKERS_USE", \u0275\u0275pureFunction2(8, _c022, ctx_r1.in_use_count, ctx_r1.bank.lockers.length || 1)), " ");
   }
 }
 var _ExploreLockerBankInfoComponent = class _ExploreLockerBankInfoComponent {
@@ -99612,1719 +102274,6 @@ var ExploreLockerBankInfoComponent = _ExploreLockerBankInfoComponent;
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExploreLockerBankInfoComponent, { className: "ExploreLockerBankInfoComponent", filePath: "libs/explore/src/lib/explore-locker-bank-info.component.ts", lineNumber: 64 });
-})();
-
-// node_modules/@angular/cdk/fesm2022/unique-selection-dispatcher-Cewa_Eg3.mjs
-var UniqueSelectionDispatcher = class _UniqueSelectionDispatcher {
-  _listeners = [];
-  /**
-   * Notify other items that selection for the given name has been set.
-   * @param id ID of the item.
-   * @param name Name of the item.
-   */
-  notify(id, name) {
-    for (let listener of this._listeners) {
-      listener(id, name);
-    }
-  }
-  /**
-   * Listen for future changes to item selection.
-   * @return Function used to deregister listener
-   */
-  listen(listener) {
-    this._listeners.push(listener);
-    return () => {
-      this._listeners = this._listeners.filter((registered) => {
-        return listener !== registered;
-      });
-    };
-  }
-  ngOnDestroy() {
-    this._listeners = [];
-  }
-  static \u0275fac = function UniqueSelectionDispatcher_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _UniqueSelectionDispatcher)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _UniqueSelectionDispatcher,
-    factory: _UniqueSelectionDispatcher.\u0275fac,
-    providedIn: "root"
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UniqueSelectionDispatcher, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], null, null);
-})();
-
-// node_modules/@angular/cdk/fesm2022/selection-model-BCgC8uEN.mjs
-var SelectionModel = class {
-  _multiple;
-  _emitChanges;
-  compareWith;
-  /** Currently-selected values. */
-  _selection = /* @__PURE__ */ new Set();
-  /** Keeps track of the deselected options that haven't been emitted by the change event. */
-  _deselectedToEmit = [];
-  /** Keeps track of the selected options that haven't been emitted by the change event. */
-  _selectedToEmit = [];
-  /** Cache for the array value of the selected items. */
-  _selected;
-  /** Selected values. */
-  get selected() {
-    if (!this._selected) {
-      this._selected = Array.from(this._selection.values());
-    }
-    return this._selected;
-  }
-  /** Event emitted when the value has changed. */
-  changed = new Subject();
-  constructor(_multiple = false, initiallySelectedValues, _emitChanges = true, compareWith) {
-    this._multiple = _multiple;
-    this._emitChanges = _emitChanges;
-    this.compareWith = compareWith;
-    if (initiallySelectedValues && initiallySelectedValues.length) {
-      if (_multiple) {
-        initiallySelectedValues.forEach((value) => this._markSelected(value));
-      } else {
-        this._markSelected(initiallySelectedValues[0]);
-      }
-      this._selectedToEmit.length = 0;
-    }
-  }
-  /**
-   * Selects a value or an array of values.
-   * @param values The values to select
-   * @return Whether the selection changed as a result of this call
-   */
-  select(...values) {
-    this._verifyValueAssignment(values);
-    values.forEach((value) => this._markSelected(value));
-    const changed = this._hasQueuedChanges();
-    this._emitChangeEvent();
-    return changed;
-  }
-  /**
-   * Deselects a value or an array of values.
-   * @param values The values to deselect
-   * @return Whether the selection changed as a result of this call
-   */
-  deselect(...values) {
-    this._verifyValueAssignment(values);
-    values.forEach((value) => this._unmarkSelected(value));
-    const changed = this._hasQueuedChanges();
-    this._emitChangeEvent();
-    return changed;
-  }
-  /**
-   * Sets the selected values
-   * @param values The new selected values
-   * @return Whether the selection changed as a result of this call
-   */
-  setSelection(...values) {
-    this._verifyValueAssignment(values);
-    const oldValues = this.selected;
-    const newSelectedSet = new Set(values.map((value) => this._getConcreteValue(value)));
-    values.forEach((value) => this._markSelected(value));
-    oldValues.filter((value) => !newSelectedSet.has(this._getConcreteValue(value, newSelectedSet))).forEach((value) => this._unmarkSelected(value));
-    const changed = this._hasQueuedChanges();
-    this._emitChangeEvent();
-    return changed;
-  }
-  /**
-   * Toggles a value between selected and deselected.
-   * @param value The value to toggle
-   * @return Whether the selection changed as a result of this call
-   */
-  toggle(value) {
-    return this.isSelected(value) ? this.deselect(value) : this.select(value);
-  }
-  /**
-   * Clears all of the selected values.
-   * @param flushEvent Whether to flush the changes in an event.
-   *   If false, the changes to the selection will be flushed along with the next event.
-   * @return Whether the selection changed as a result of this call
-   */
-  clear(flushEvent = true) {
-    this._unmarkAll();
-    const changed = this._hasQueuedChanges();
-    if (flushEvent) {
-      this._emitChangeEvent();
-    }
-    return changed;
-  }
-  /**
-   * Determines whether a value is selected.
-   */
-  isSelected(value) {
-    return this._selection.has(this._getConcreteValue(value));
-  }
-  /**
-   * Determines whether the model does not have a value.
-   */
-  isEmpty() {
-    return this._selection.size === 0;
-  }
-  /**
-   * Determines whether the model has a value.
-   */
-  hasValue() {
-    return !this.isEmpty();
-  }
-  /**
-   * Sorts the selected values based on a predicate function.
-   */
-  sort(predicate) {
-    if (this._multiple && this.selected) {
-      this._selected.sort(predicate);
-    }
-  }
-  /**
-   * Gets whether multiple values can be selected.
-   */
-  isMultipleSelection() {
-    return this._multiple;
-  }
-  /** Emits a change event and clears the records of selected and deselected values. */
-  _emitChangeEvent() {
-    this._selected = null;
-    if (this._selectedToEmit.length || this._deselectedToEmit.length) {
-      this.changed.next({
-        source: this,
-        added: this._selectedToEmit,
-        removed: this._deselectedToEmit
-      });
-      this._deselectedToEmit = [];
-      this._selectedToEmit = [];
-    }
-  }
-  /** Selects a value. */
-  _markSelected(value) {
-    value = this._getConcreteValue(value);
-    if (!this.isSelected(value)) {
-      if (!this._multiple) {
-        this._unmarkAll();
-      }
-      if (!this.isSelected(value)) {
-        this._selection.add(value);
-      }
-      if (this._emitChanges) {
-        this._selectedToEmit.push(value);
-      }
-    }
-  }
-  /** Deselects a value. */
-  _unmarkSelected(value) {
-    value = this._getConcreteValue(value);
-    if (this.isSelected(value)) {
-      this._selection.delete(value);
-      if (this._emitChanges) {
-        this._deselectedToEmit.push(value);
-      }
-    }
-  }
-  /** Clears out the selected values. */
-  _unmarkAll() {
-    if (!this.isEmpty()) {
-      this._selection.forEach((value) => this._unmarkSelected(value));
-    }
-  }
-  /**
-   * Verifies the value assignment and throws an error if the specified value array is
-   * including multiple values while the selection model is not supporting multiple values.
-   */
-  _verifyValueAssignment(values) {
-    if (values.length > 1 && !this._multiple && (typeof ngDevMode === "undefined" || ngDevMode)) {
-      throw getMultipleValuesInSingleSelectionError();
-    }
-  }
-  /** Whether there are queued up change to be emitted. */
-  _hasQueuedChanges() {
-    return !!(this._deselectedToEmit.length || this._selectedToEmit.length);
-  }
-  /** Returns a value that is comparable to inputValue by applying compareWith function, returns the same inputValue otherwise. */
-  _getConcreteValue(inputValue, selection) {
-    if (!this.compareWith) {
-      return inputValue;
-    } else {
-      selection = selection ?? this._selection;
-      for (let selectedValue of selection) {
-        if (this.compareWith(inputValue, selectedValue)) {
-          return selectedValue;
-        }
-      }
-      return inputValue;
-    }
-  }
-};
-function getMultipleValuesInSingleSelectionError() {
-  return Error("Cannot pass multiple values into SelectionModel with single-value mode.");
-}
-
-// node_modules/@angular/material/fesm2022/module-BDiw_nWS.mjs
-var _c020 = ["trigger"];
-var _c111 = ["panel"];
-var _c25 = [[["mat-select-trigger"]], "*"];
-var _c35 = ["mat-select-trigger", "*"];
-function MatSelect_Conditional_4_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 4);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r1.placeholder);
-  }
-}
-function MatSelect_Conditional_5_Conditional_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275projection(0);
-  }
-}
-function MatSelect_Conditional_5_Conditional_2_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 11);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r1.triggerValue);
-  }
-}
-function MatSelect_Conditional_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 5);
-    \u0275\u0275conditionalCreate(1, MatSelect_Conditional_5_Conditional_1_Template, 1, 0)(2, MatSelect_Conditional_5_Conditional_2_Template, 2, 1, "span", 11);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r1.customTrigger ? 1 : 2);
-  }
-}
-function MatSelect_ng_template_10_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 12, 1);
-    \u0275\u0275listener("keydown", function MatSelect_ng_template_10_Template_div_keydown_0_listener($event) {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1._handleKeydown($event));
-    });
-    \u0275\u0275projection(2, 1);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275classMap(\u0275\u0275interpolate1("mat-mdc-select-panel mdc-menu-surface mdc-menu-surface--open ", ctx_r1._getPanelTheme()));
-    \u0275\u0275classProp("mat-select-panel-animations-enabled", !ctx_r1._animationsDisabled);
-    \u0275\u0275property("ngClass", ctx_r1.panelClass);
-    \u0275\u0275attribute("id", ctx_r1.id + "-panel")("aria-multiselectable", ctx_r1.multiple)("aria-label", ctx_r1.ariaLabel || null)("aria-labelledby", ctx_r1._getPanelAriaLabelledby());
-  }
-}
-function getMatSelectDynamicMultipleError() {
-  return Error("Cannot change `multiple` mode of select after initialization.");
-}
-function getMatSelectNonArrayValueError() {
-  return Error("Value must be an array in multiple-selection mode.");
-}
-function getMatSelectNonFunctionValueError() {
-  return Error("`compareWith` must be a function.");
-}
-var MAT_SELECT_SCROLL_STRATEGY = new InjectionToken("mat-select-scroll-strategy", {
-  providedIn: "root",
-  factory: () => {
-    const injector = inject(Injector);
-    return () => createRepositionScrollStrategy(injector);
-  }
-});
-function MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY(_overlay) {
-  const injector = inject(Injector);
-  return () => createRepositionScrollStrategy(injector);
-}
-var MAT_SELECT_CONFIG = new InjectionToken("MAT_SELECT_CONFIG");
-var MAT_SELECT_SCROLL_STRATEGY_PROVIDER = {
-  provide: MAT_SELECT_SCROLL_STRATEGY,
-  deps: [],
-  useFactory: MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY
-};
-var MAT_SELECT_TRIGGER = new InjectionToken("MatSelectTrigger");
-var MatSelectChange = class {
-  source;
-  value;
-  constructor(source, value) {
-    this.source = source;
-    this.value = value;
-  }
-};
-var MatSelect = class _MatSelect {
-  _viewportRuler = inject(ViewportRuler);
-  _changeDetectorRef = inject(ChangeDetectorRef);
-  _elementRef = inject(ElementRef);
-  _dir = inject(Directionality, {
-    optional: true
-  });
-  _idGenerator = inject(_IdGenerator);
-  _renderer = inject(Renderer2);
-  _parentFormField = inject(MAT_FORM_FIELD, {
-    optional: true
-  });
-  ngControl = inject(NgControl, {
-    self: true,
-    optional: true
-  });
-  _liveAnnouncer = inject(LiveAnnouncer);
-  _defaultOptions = inject(MAT_SELECT_CONFIG, {
-    optional: true
-  });
-  _animationsDisabled = _animationsDisabled();
-  _initialized = new Subject();
-  _cleanupDetach;
-  /** All of the defined select options. */
-  options;
-  // TODO(crisbeto): this is only necessary for the non-MDC select, but it's technically a
-  // public API so we have to keep it. It should be deprecated and removed eventually.
-  /** All of the defined groups of options. */
-  optionGroups;
-  /** User-supplied override of the trigger element. */
-  customTrigger;
-  /**
-   * This position config ensures that the top "start" corner of the overlay
-   * is aligned with with the top "start" of the origin by default (overlapping
-   * the trigger completely). If the panel cannot fit below the trigger, it
-   * will fall back to a position above the trigger.
-   */
-  _positions = [{
-    originX: "start",
-    originY: "bottom",
-    overlayX: "start",
-    overlayY: "top"
-  }, {
-    originX: "end",
-    originY: "bottom",
-    overlayX: "end",
-    overlayY: "top"
-  }, {
-    originX: "start",
-    originY: "top",
-    overlayX: "start",
-    overlayY: "bottom",
-    panelClass: "mat-mdc-select-panel-above"
-  }, {
-    originX: "end",
-    originY: "top",
-    overlayX: "end",
-    overlayY: "bottom",
-    panelClass: "mat-mdc-select-panel-above"
-  }];
-  /** Scrolls a particular option into the view. */
-  _scrollOptionIntoView(index) {
-    const option = this.options.toArray()[index];
-    if (option) {
-      const panel = this.panel.nativeElement;
-      const labelCount = _countGroupLabelsBeforeOption(index, this.options, this.optionGroups);
-      const element = option._getHostElement();
-      if (index === 0 && labelCount === 1) {
-        panel.scrollTop = 0;
-      } else {
-        panel.scrollTop = _getOptionScrollPosition(element.offsetTop, element.offsetHeight, panel.scrollTop, panel.offsetHeight);
-      }
-    }
-  }
-  /** Called when the panel has been opened and the overlay has settled on its final position. */
-  _positioningSettled() {
-    this._scrollOptionIntoView(this._keyManager.activeItemIndex || 0);
-  }
-  /** Creates a change event object that should be emitted by the select. */
-  _getChangeEvent(value) {
-    return new MatSelectChange(this, value);
-  }
-  /** Factory function used to create a scroll strategy for this select. */
-  _scrollStrategyFactory = inject(MAT_SELECT_SCROLL_STRATEGY);
-  /** Whether or not the overlay panel is open. */
-  _panelOpen = false;
-  /** Comparison function to specify which option is displayed. Defaults to object equality. */
-  _compareWith = (o1, o2) => o1 === o2;
-  /** Unique id for this input. */
-  _uid = this._idGenerator.getId("mat-select-");
-  /** Current `aria-labelledby` value for the select trigger. */
-  _triggerAriaLabelledBy = null;
-  /**
-   * Keeps track of the previous form control assigned to the select.
-   * Used to detect if it has changed.
-   */
-  _previousControl;
-  /** Emits whenever the component is destroyed. */
-  _destroy = new Subject();
-  /** Tracks the error state of the select. */
-  _errorStateTracker;
-  /**
-   * Emits whenever the component state changes and should cause the parent
-   * form-field to update. Implemented as part of `MatFormFieldControl`.
-   * @docs-private
-   */
-  stateChanges = new Subject();
-  /**
-   * Disable the automatic labeling to avoid issues like #27241.
-   * @docs-private
-   */
-  disableAutomaticLabeling = true;
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @docs-private
-   */
-  userAriaDescribedBy;
-  /** Deals with the selection logic. */
-  _selectionModel;
-  /** Manages keyboard events for options in the panel. */
-  _keyManager;
-  /** Ideal origin for the overlay panel. */
-  _preferredOverlayOrigin;
-  /** Width of the overlay panel. */
-  _overlayWidth;
-  /** `View -> model callback called when value changes` */
-  _onChange = () => {
-  };
-  /** `View -> model callback called when select has been touched` */
-  _onTouched = () => {
-  };
-  /** ID for the DOM node containing the select's value. */
-  _valueId = this._idGenerator.getId("mat-select-value-");
-  /** Strategy that will be used to handle scrolling while the select panel is open. */
-  _scrollStrategy;
-  _overlayPanelClass = this._defaultOptions?.overlayPanelClass || "";
-  /** Whether the select is focused. */
-  get focused() {
-    return this._focused || this._panelOpen;
-  }
-  _focused = false;
-  /** A name for this control that can be used by `mat-form-field`. */
-  controlType = "mat-select";
-  /** Trigger that opens the select. */
-  trigger;
-  /** Panel containing the select options. */
-  panel;
-  /** Overlay pane containing the options. */
-  _overlayDir;
-  /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
-  panelClass;
-  /** Whether the select is disabled. */
-  disabled = false;
-  /** Whether ripples in the select are disabled. */
-  get disableRipple() {
-    return this._disableRipple();
-  }
-  set disableRipple(value) {
-    this._disableRipple.set(value);
-  }
-  _disableRipple = signal(false);
-  /** Tab index of the select. */
-  tabIndex = 0;
-  /** Whether checkmark indicator for single-selection options is hidden. */
-  get hideSingleSelectionIndicator() {
-    return this._hideSingleSelectionIndicator;
-  }
-  set hideSingleSelectionIndicator(value) {
-    this._hideSingleSelectionIndicator = value;
-    this._syncParentProperties();
-  }
-  _hideSingleSelectionIndicator = this._defaultOptions?.hideSingleSelectionIndicator ?? false;
-  /** Placeholder to be shown if no value has been selected. */
-  get placeholder() {
-    return this._placeholder;
-  }
-  set placeholder(value) {
-    this._placeholder = value;
-    this.stateChanges.next();
-  }
-  _placeholder;
-  /** Whether the component is required. */
-  get required() {
-    return this._required ?? this.ngControl?.control?.hasValidator(Validators.required) ?? false;
-  }
-  set required(value) {
-    this._required = value;
-    this.stateChanges.next();
-  }
-  _required;
-  /** Whether the user should be allowed to select multiple options. */
-  get multiple() {
-    return this._multiple;
-  }
-  set multiple(value) {
-    if (this._selectionModel && (typeof ngDevMode === "undefined" || ngDevMode)) {
-      throw getMatSelectDynamicMultipleError();
-    }
-    this._multiple = value;
-  }
-  _multiple = false;
-  /** Whether to center the active option over the trigger. */
-  disableOptionCentering = this._defaultOptions?.disableOptionCentering ?? false;
-  /**
-   * Function to compare the option values with the selected values. The first argument
-   * is a value from an option. The second is a value from the selection. A boolean
-   * should be returned.
-   */
-  get compareWith() {
-    return this._compareWith;
-  }
-  set compareWith(fn3) {
-    if (typeof fn3 !== "function" && (typeof ngDevMode === "undefined" || ngDevMode)) {
-      throw getMatSelectNonFunctionValueError();
-    }
-    this._compareWith = fn3;
-    if (this._selectionModel) {
-      this._initializeSelection();
-    }
-  }
-  /** Value of the select control. */
-  get value() {
-    return this._value;
-  }
-  set value(newValue) {
-    const hasAssigned = this._assignValue(newValue);
-    if (hasAssigned) {
-      this._onChange(newValue);
-    }
-  }
-  _value;
-  /** Aria label of the select. */
-  ariaLabel = "";
-  /** Input that can be used to specify the `aria-labelledby` attribute. */
-  ariaLabelledby;
-  /** Object used to control when error messages are shown. */
-  get errorStateMatcher() {
-    return this._errorStateTracker.matcher;
-  }
-  set errorStateMatcher(value) {
-    this._errorStateTracker.matcher = value;
-  }
-  /** Time to wait in milliseconds after the last keystroke before moving focus to an item. */
-  typeaheadDebounceInterval;
-  /**
-   * Function used to sort the values in a select in multiple mode.
-   * Follows the same logic as `Array.prototype.sort`.
-   */
-  sortComparator;
-  /** Unique id of the element. */
-  get id() {
-    return this._id;
-  }
-  set id(value) {
-    this._id = value || this._uid;
-    this.stateChanges.next();
-  }
-  _id;
-  /** Whether the select is in an error state. */
-  get errorState() {
-    return this._errorStateTracker.errorState;
-  }
-  set errorState(value) {
-    this._errorStateTracker.errorState = value;
-  }
-  /**
-   * Width of the panel. If set to `auto`, the panel will match the trigger width.
-   * If set to null or an empty string, the panel will grow to match the longest option's text.
-   */
-  panelWidth = this._defaultOptions && typeof this._defaultOptions.panelWidth !== "undefined" ? this._defaultOptions.panelWidth : "auto";
-  /**
-   * By default selecting an option with a `null` or `undefined` value will reset the select's
-   * value. Enable this option if the reset behavior doesn't match your requirements and instead
-   * the nullable options should become selected. The value of this input can be controlled app-wide
-   * using the `MAT_SELECT_CONFIG` injection token.
-   */
-  canSelectNullableOptions = this._defaultOptions?.canSelectNullableOptions ?? false;
-  /** Combined stream of all of the child options' change events. */
-  optionSelectionChanges = defer(() => {
-    const options2 = this.options;
-    if (options2) {
-      return options2.changes.pipe(startWith(options2), switchMap(() => merge(...options2.map((option) => option.onSelectionChange))));
-    }
-    return this._initialized.pipe(switchMap(() => this.optionSelectionChanges));
-  });
-  /** Event emitted when the select panel has been toggled. */
-  openedChange = new EventEmitter();
-  /** Event emitted when the select has been opened. */
-  _openedStream = this.openedChange.pipe(filter((o) => o), map(() => {
-  }));
-  /** Event emitted when the select has been closed. */
-  _closedStream = this.openedChange.pipe(filter((o) => !o), map(() => {
-  }));
-  /** Event emitted when the selected value has been changed by the user. */
-  selectionChange = new EventEmitter();
-  /**
-   * Event that emits whenever the raw value of the select changes. This is here primarily
-   * to facilitate the two-way binding for the `value` input.
-   * @docs-private
-   */
-  valueChange = new EventEmitter();
-  constructor() {
-    const defaultErrorStateMatcher = inject(ErrorStateMatcher);
-    const parentForm = inject(NgForm, {
-      optional: true
-    });
-    const parentFormGroup = inject(FormGroupDirective, {
-      optional: true
-    });
-    const tabIndex = inject(new HostAttributeToken("tabindex"), {
-      optional: true
-    });
-    if (this.ngControl) {
-      this.ngControl.valueAccessor = this;
-    }
-    if (this._defaultOptions?.typeaheadDebounceInterval != null) {
-      this.typeaheadDebounceInterval = this._defaultOptions.typeaheadDebounceInterval;
-    }
-    this._errorStateTracker = new _ErrorStateTracker(defaultErrorStateMatcher, this.ngControl, parentFormGroup, parentForm, this.stateChanges);
-    this._scrollStrategy = this._scrollStrategyFactory();
-    this.tabIndex = tabIndex == null ? 0 : parseInt(tabIndex) || 0;
-    this.id = this.id;
-  }
-  ngOnInit() {
-    this._selectionModel = new SelectionModel(this.multiple);
-    this.stateChanges.next();
-    this._viewportRuler.change().pipe(takeUntil(this._destroy)).subscribe(() => {
-      if (this.panelOpen) {
-        this._overlayWidth = this._getOverlayWidth(this._preferredOverlayOrigin);
-        this._changeDetectorRef.detectChanges();
-      }
-    });
-  }
-  ngAfterContentInit() {
-    this._initialized.next();
-    this._initialized.complete();
-    this._initKeyManager();
-    this._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
-      event.added.forEach((option) => option.select());
-      event.removed.forEach((option) => option.deselect());
-    });
-    this.options.changes.pipe(startWith(null), takeUntil(this._destroy)).subscribe(() => {
-      this._resetOptions();
-      this._initializeSelection();
-    });
-  }
-  ngDoCheck() {
-    const newAriaLabelledby = this._getTriggerAriaLabelledby();
-    const ngControl = this.ngControl;
-    if (newAriaLabelledby !== this._triggerAriaLabelledBy) {
-      const element = this._elementRef.nativeElement;
-      this._triggerAriaLabelledBy = newAriaLabelledby;
-      if (newAriaLabelledby) {
-        element.setAttribute("aria-labelledby", newAriaLabelledby);
-      } else {
-        element.removeAttribute("aria-labelledby");
-      }
-    }
-    if (ngControl) {
-      if (this._previousControl !== ngControl.control) {
-        if (this._previousControl !== void 0 && ngControl.disabled !== null && ngControl.disabled !== this.disabled) {
-          this.disabled = ngControl.disabled;
-        }
-        this._previousControl = ngControl.control;
-      }
-      this.updateErrorState();
-    }
-  }
-  ngOnChanges(changes) {
-    if (changes["disabled"] || changes["userAriaDescribedBy"]) {
-      this.stateChanges.next();
-    }
-    if (changes["typeaheadDebounceInterval"] && this._keyManager) {
-      this._keyManager.withTypeAhead(this.typeaheadDebounceInterval);
-    }
-  }
-  ngOnDestroy() {
-    this._cleanupDetach?.();
-    this._keyManager?.destroy();
-    this._destroy.next();
-    this._destroy.complete();
-    this.stateChanges.complete();
-    this._clearFromModal();
-  }
-  /** Toggles the overlay panel open or closed. */
-  toggle() {
-    this.panelOpen ? this.close() : this.open();
-  }
-  /** Opens the overlay panel. */
-  open() {
-    if (!this._canOpen()) {
-      return;
-    }
-    if (this._parentFormField) {
-      this._preferredOverlayOrigin = this._parentFormField.getConnectedOverlayOrigin();
-    }
-    this._cleanupDetach?.();
-    this._overlayWidth = this._getOverlayWidth(this._preferredOverlayOrigin);
-    this._applyModalPanelOwnership();
-    this._panelOpen = true;
-    this._overlayDir.positionChange.pipe(take(1)).subscribe(() => {
-      this._changeDetectorRef.detectChanges();
-      this._positioningSettled();
-    });
-    this._overlayDir.attachOverlay();
-    this._keyManager.withHorizontalOrientation(null);
-    this._highlightCorrectOption();
-    this._changeDetectorRef.markForCheck();
-    this.stateChanges.next();
-    Promise.resolve().then(() => this.openedChange.emit(true));
-  }
-  /**
-   * Track which modal we have modified the `aria-owns` attribute of. When the combobox trigger is
-   * inside an aria-modal, we apply aria-owns to the parent modal with the `id` of the options
-   * panel. Track the modal we have changed so we can undo the changes on destroy.
-   */
-  _trackedModal = null;
-  /**
-   * If the autocomplete trigger is inside of an `aria-modal` element, connect
-   * that modal to the options panel with `aria-owns`.
-   *
-   * For some browser + screen reader combinations, when navigation is inside
-   * of an `aria-modal` element, the screen reader treats everything outside
-   * of that modal as hidden or invisible.
-   *
-   * This causes a problem when the combobox trigger is _inside_ of a modal, because the
-   * options panel is rendered _outside_ of that modal, preventing screen reader navigation
-   * from reaching the panel.
-   *
-   * We can work around this issue by applying `aria-owns` to the modal with the `id` of
-   * the options panel. This effectively communicates to assistive technology that the
-   * options panel is part of the same interaction as the modal.
-   *
-   * At time of this writing, this issue is present in VoiceOver.
-   * See https://github.com/angular/components/issues/20694
-   */
-  _applyModalPanelOwnership() {
-    const modal = this._elementRef.nativeElement.closest('body > .cdk-overlay-container [aria-modal="true"]');
-    if (!modal) {
-      return;
-    }
-    const panelId = `${this.id}-panel`;
-    if (this._trackedModal) {
-      removeAriaReferencedId(this._trackedModal, "aria-owns", panelId);
-    }
-    addAriaReferencedId(modal, "aria-owns", panelId);
-    this._trackedModal = modal;
-  }
-  /** Clears the reference to the listbox overlay element from the modal it was added to. */
-  _clearFromModal() {
-    if (!this._trackedModal) {
-      return;
-    }
-    const panelId = `${this.id}-panel`;
-    removeAriaReferencedId(this._trackedModal, "aria-owns", panelId);
-    this._trackedModal = null;
-  }
-  /** Closes the overlay panel and focuses the host element. */
-  close() {
-    if (this._panelOpen) {
-      this._panelOpen = false;
-      this._exitAndDetach();
-      this._keyManager.withHorizontalOrientation(this._isRtl() ? "rtl" : "ltr");
-      this._changeDetectorRef.markForCheck();
-      this._onTouched();
-      this.stateChanges.next();
-      Promise.resolve().then(() => this.openedChange.emit(false));
-    }
-  }
-  /** Triggers the exit animation and detaches the overlay at the end. */
-  _exitAndDetach() {
-    if (this._animationsDisabled || !this.panel) {
-      this._detachOverlay();
-      return;
-    }
-    this._cleanupDetach?.();
-    this._cleanupDetach = () => {
-      cleanupEvent();
-      clearTimeout(exitFallbackTimer);
-      this._cleanupDetach = void 0;
-    };
-    const panel = this.panel.nativeElement;
-    const cleanupEvent = this._renderer.listen(panel, "animationend", (event) => {
-      if (event.animationName === "_mat-select-exit") {
-        this._cleanupDetach?.();
-        this._detachOverlay();
-      }
-    });
-    const exitFallbackTimer = setTimeout(() => {
-      this._cleanupDetach?.();
-      this._detachOverlay();
-    }, 200);
-    panel.classList.add("mat-select-panel-exit");
-  }
-  /** Detaches the current overlay directive. */
-  _detachOverlay() {
-    this._overlayDir.detachOverlay();
-    this._changeDetectorRef.markForCheck();
-  }
-  /**
-   * Sets the select's value. Part of the ControlValueAccessor interface
-   * required to integrate with Angular's core forms API.
-   *
-   * @param value New value to be written to the model.
-   */
-  writeValue(value) {
-    this._assignValue(value);
-  }
-  /**
-   * Saves a callback function to be invoked when the select's value
-   * changes from user input. Part of the ControlValueAccessor interface
-   * required to integrate with Angular's core forms API.
-   *
-   * @param fn Callback to be triggered when the value changes.
-   */
-  registerOnChange(fn3) {
-    this._onChange = fn3;
-  }
-  /**
-   * Saves a callback function to be invoked when the select is blurred
-   * by the user. Part of the ControlValueAccessor interface required
-   * to integrate with Angular's core forms API.
-   *
-   * @param fn Callback to be triggered when the component has been touched.
-   */
-  registerOnTouched(fn3) {
-    this._onTouched = fn3;
-  }
-  /**
-   * Disables the select. Part of the ControlValueAccessor interface required
-   * to integrate with Angular's core forms API.
-   *
-   * @param isDisabled Sets whether the component is disabled.
-   */
-  setDisabledState(isDisabled) {
-    this.disabled = isDisabled;
-    this._changeDetectorRef.markForCheck();
-    this.stateChanges.next();
-  }
-  /** Whether or not the overlay panel is open. */
-  get panelOpen() {
-    return this._panelOpen;
-  }
-  /** The currently selected option. */
-  get selected() {
-    return this.multiple ? this._selectionModel?.selected || [] : this._selectionModel?.selected[0];
-  }
-  /** The value displayed in the trigger. */
-  get triggerValue() {
-    if (this.empty) {
-      return "";
-    }
-    if (this._multiple) {
-      const selectedOptions = this._selectionModel.selected.map((option) => option.viewValue);
-      if (this._isRtl()) {
-        selectedOptions.reverse();
-      }
-      return selectedOptions.join(", ");
-    }
-    return this._selectionModel.selected[0].viewValue;
-  }
-  /** Refreshes the error state of the select. */
-  updateErrorState() {
-    this._errorStateTracker.updateErrorState();
-  }
-  /** Whether the element is in RTL mode. */
-  _isRtl() {
-    return this._dir ? this._dir.value === "rtl" : false;
-  }
-  /** Handles all keydown events on the select. */
-  _handleKeydown(event) {
-    if (!this.disabled) {
-      this.panelOpen ? this._handleOpenKeydown(event) : this._handleClosedKeydown(event);
-    }
-  }
-  /** Handles keyboard events while the select is closed. */
-  _handleClosedKeydown(event) {
-    const keyCode = event.keyCode;
-    const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW || keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW;
-    const isOpenKey = keyCode === ENTER || keyCode === SPACE;
-    const manager = this._keyManager;
-    if (!manager.isTyping() && isOpenKey && !hasModifierKey(event) || (this.multiple || event.altKey) && isArrowKey) {
-      event.preventDefault();
-      this.open();
-    } else if (!this.multiple) {
-      const previouslySelectedOption = this.selected;
-      manager.onKeydown(event);
-      const selectedOption = this.selected;
-      if (selectedOption && previouslySelectedOption !== selectedOption) {
-        this._liveAnnouncer.announce(selectedOption.viewValue, 1e4);
-      }
-    }
-  }
-  /** Handles keyboard events when the selected is open. */
-  _handleOpenKeydown(event) {
-    const manager = this._keyManager;
-    const keyCode = event.keyCode;
-    const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
-    const isTyping = manager.isTyping();
-    if (isArrowKey && event.altKey) {
-      event.preventDefault();
-      this.close();
-    } else if (!isTyping && (keyCode === ENTER || keyCode === SPACE) && manager.activeItem && !hasModifierKey(event)) {
-      event.preventDefault();
-      manager.activeItem._selectViaInteraction();
-    } else if (!isTyping && this._multiple && keyCode === A && event.ctrlKey) {
-      event.preventDefault();
-      const hasDeselectedOptions = this.options.some((opt) => !opt.disabled && !opt.selected);
-      this.options.forEach((option) => {
-        if (!option.disabled) {
-          hasDeselectedOptions ? option.select() : option.deselect();
-        }
-      });
-    } else {
-      const previouslyFocusedIndex = manager.activeItemIndex;
-      manager.onKeydown(event);
-      if (this._multiple && isArrowKey && event.shiftKey && manager.activeItem && manager.activeItemIndex !== previouslyFocusedIndex) {
-        manager.activeItem._selectViaInteraction();
-      }
-    }
-  }
-  /** Handles keyboard events coming from the overlay. */
-  _handleOverlayKeydown(event) {
-    if (event.keyCode === ESCAPE && !hasModifierKey(event)) {
-      event.preventDefault();
-      this.close();
-    }
-  }
-  _onFocus() {
-    if (!this.disabled) {
-      this._focused = true;
-      this.stateChanges.next();
-    }
-  }
-  /**
-   * Calls the touched callback only if the panel is closed. Otherwise, the trigger will
-   * "blur" to the panel when it opens, causing a false positive.
-   */
-  _onBlur() {
-    this._focused = false;
-    this._keyManager?.cancelTypeahead();
-    if (!this.disabled && !this.panelOpen) {
-      this._onTouched();
-      this._changeDetectorRef.markForCheck();
-      this.stateChanges.next();
-    }
-  }
-  /** Returns the theme to be used on the panel. */
-  _getPanelTheme() {
-    return this._parentFormField ? `mat-${this._parentFormField.color}` : "";
-  }
-  /** Whether the select has a value. */
-  get empty() {
-    return !this._selectionModel || this._selectionModel.isEmpty();
-  }
-  _initializeSelection() {
-    Promise.resolve().then(() => {
-      if (this.ngControl) {
-        this._value = this.ngControl.value;
-      }
-      this._setSelectionByValue(this._value);
-      this.stateChanges.next();
-    });
-  }
-  /**
-   * Sets the selected option based on a value. If no option can be
-   * found with the designated value, the select trigger is cleared.
-   */
-  _setSelectionByValue(value) {
-    this.options.forEach((option) => option.setInactiveStyles());
-    this._selectionModel.clear();
-    if (this.multiple && value) {
-      if (!Array.isArray(value) && (typeof ngDevMode === "undefined" || ngDevMode)) {
-        throw getMatSelectNonArrayValueError();
-      }
-      value.forEach((currentValue) => this._selectOptionByValue(currentValue));
-      this._sortValues();
-    } else {
-      const correspondingOption = this._selectOptionByValue(value);
-      if (correspondingOption) {
-        this._keyManager.updateActiveItem(correspondingOption);
-      } else if (!this.panelOpen) {
-        this._keyManager.updateActiveItem(-1);
-      }
-    }
-    this._changeDetectorRef.markForCheck();
-  }
-  /**
-   * Finds and selects and option based on its value.
-   * @returns Option that has the corresponding value.
-   */
-  _selectOptionByValue(value) {
-    const correspondingOption = this.options.find((option) => {
-      if (this._selectionModel.isSelected(option)) {
-        return false;
-      }
-      try {
-        return (option.value != null || this.canSelectNullableOptions) && this._compareWith(option.value, value);
-      } catch (error) {
-        if (typeof ngDevMode === "undefined" || ngDevMode) {
-          console.warn(error);
-        }
-        return false;
-      }
-    });
-    if (correspondingOption) {
-      this._selectionModel.select(correspondingOption);
-    }
-    return correspondingOption;
-  }
-  /** Assigns a specific value to the select. Returns whether the value has changed. */
-  _assignValue(newValue) {
-    if (newValue !== this._value || this._multiple && Array.isArray(newValue)) {
-      if (this.options) {
-        this._setSelectionByValue(newValue);
-      }
-      this._value = newValue;
-      return true;
-    }
-    return false;
-  }
-  // `skipPredicate` determines if key manager should avoid putting a given option in the tab
-  // order. Allow disabled list items to receive focus via keyboard to align with WAI ARIA
-  // recommendation.
-  //
-  // Normally WAI ARIA's instructions are to exclude disabled items from the tab order, but it
-  // makes a few exceptions for compound widgets.
-  //
-  // From [Developing a Keyboard Interface](
-  // https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/):
-  //   "For the following composite widget elements, keep them focusable when disabled: Options in a
-  //   Listbox..."
-  //
-  // The user can focus disabled options using the keyboard, but the user cannot click disabled
-  // options.
-  _skipPredicate = (option) => {
-    if (this.panelOpen) {
-      return false;
-    }
-    return option.disabled;
-  };
-  /** Gets how wide the overlay panel should be. */
-  _getOverlayWidth(preferredOrigin) {
-    if (this.panelWidth === "auto") {
-      const refToMeasure = preferredOrigin instanceof CdkOverlayOrigin ? preferredOrigin.elementRef : preferredOrigin || this._elementRef;
-      return refToMeasure.nativeElement.getBoundingClientRect().width;
-    }
-    return this.panelWidth === null ? "" : this.panelWidth;
-  }
-  /** Syncs the parent state with the individual options. */
-  _syncParentProperties() {
-    if (this.options) {
-      for (const option of this.options) {
-        option._changeDetectorRef.markForCheck();
-      }
-    }
-  }
-  /** Sets up a key manager to listen to keyboard events on the overlay panel. */
-  _initKeyManager() {
-    this._keyManager = new ActiveDescendantKeyManager(this.options).withTypeAhead(this.typeaheadDebounceInterval).withVerticalOrientation().withHorizontalOrientation(this._isRtl() ? "rtl" : "ltr").withHomeAndEnd().withPageUpDown().withAllowedModifierKeys(["shiftKey"]).skipPredicate(this._skipPredicate);
-    this._keyManager.tabOut.subscribe(() => {
-      if (this.panelOpen) {
-        if (!this.multiple && this._keyManager.activeItem) {
-          this._keyManager.activeItem._selectViaInteraction();
-        }
-        this.focus();
-        this.close();
-      }
-    });
-    this._keyManager.change.subscribe(() => {
-      if (this._panelOpen && this.panel) {
-        this._scrollOptionIntoView(this._keyManager.activeItemIndex || 0);
-      } else if (!this._panelOpen && !this.multiple && this._keyManager.activeItem) {
-        this._keyManager.activeItem._selectViaInteraction();
-      }
-    });
-  }
-  /** Drops current option subscriptions and IDs and resets from scratch. */
-  _resetOptions() {
-    const changedOrDestroyed = merge(this.options.changes, this._destroy);
-    this.optionSelectionChanges.pipe(takeUntil(changedOrDestroyed)).subscribe((event) => {
-      this._onSelect(event.source, event.isUserInput);
-      if (event.isUserInput && !this.multiple && this._panelOpen) {
-        this.close();
-        this.focus();
-      }
-    });
-    merge(...this.options.map((option) => option._stateChanges)).pipe(takeUntil(changedOrDestroyed)).subscribe(() => {
-      this._changeDetectorRef.detectChanges();
-      this.stateChanges.next();
-    });
-  }
-  /** Invoked when an option is clicked. */
-  _onSelect(option, isUserInput) {
-    const wasSelected = this._selectionModel.isSelected(option);
-    if (!this.canSelectNullableOptions && option.value == null && !this._multiple) {
-      option.deselect();
-      this._selectionModel.clear();
-      if (this.value != null) {
-        this._propagateChanges(option.value);
-      }
-    } else {
-      if (wasSelected !== option.selected) {
-        option.selected ? this._selectionModel.select(option) : this._selectionModel.deselect(option);
-      }
-      if (isUserInput) {
-        this._keyManager.setActiveItem(option);
-      }
-      if (this.multiple) {
-        this._sortValues();
-        if (isUserInput) {
-          this.focus();
-        }
-      }
-    }
-    if (wasSelected !== this._selectionModel.isSelected(option)) {
-      this._propagateChanges();
-    }
-    this.stateChanges.next();
-  }
-  /** Sorts the selected values in the selected based on their order in the panel. */
-  _sortValues() {
-    if (this.multiple) {
-      const options2 = this.options.toArray();
-      this._selectionModel.sort((a, b3) => {
-        return this.sortComparator ? this.sortComparator(a, b3, options2) : options2.indexOf(a) - options2.indexOf(b3);
-      });
-      this.stateChanges.next();
-    }
-  }
-  /** Emits change event to set the model value. */
-  _propagateChanges(fallbackValue) {
-    let valueToEmit;
-    if (this.multiple) {
-      valueToEmit = this.selected.map((option) => option.value);
-    } else {
-      valueToEmit = this.selected ? this.selected.value : fallbackValue;
-    }
-    this._value = valueToEmit;
-    this.valueChange.emit(valueToEmit);
-    this._onChange(valueToEmit);
-    this.selectionChange.emit(this._getChangeEvent(valueToEmit));
-    this._changeDetectorRef.markForCheck();
-  }
-  /**
-   * Highlights the selected item. If no option is selected, it will highlight
-   * the first *enabled* option.
-   */
-  _highlightCorrectOption() {
-    if (this._keyManager) {
-      if (this.empty) {
-        let firstEnabledOptionIndex = -1;
-        for (let index = 0; index < this.options.length; index++) {
-          const option = this.options.get(index);
-          if (!option.disabled) {
-            firstEnabledOptionIndex = index;
-            break;
-          }
-        }
-        this._keyManager.setActiveItem(firstEnabledOptionIndex);
-      } else {
-        this._keyManager.setActiveItem(this._selectionModel.selected[0]);
-      }
-    }
-  }
-  /** Whether the panel is allowed to open. */
-  _canOpen() {
-    return !this._panelOpen && !this.disabled && this.options?.length > 0 && !!this._overlayDir;
-  }
-  /** Focuses the select element. */
-  focus(options2) {
-    this._elementRef.nativeElement.focus(options2);
-  }
-  /** Gets the aria-labelledby for the select panel. */
-  _getPanelAriaLabelledby() {
-    if (this.ariaLabel) {
-      return null;
-    }
-    const labelId = this._parentFormField?.getLabelId() || null;
-    const labelExpression = labelId ? labelId + " " : "";
-    return this.ariaLabelledby ? labelExpression + this.ariaLabelledby : labelId;
-  }
-  /** Determines the `aria-activedescendant` to be set on the host. */
-  _getAriaActiveDescendant() {
-    if (this.panelOpen && this._keyManager && this._keyManager.activeItem) {
-      return this._keyManager.activeItem.id;
-    }
-    return null;
-  }
-  /** Gets the aria-labelledby of the select component trigger. */
-  _getTriggerAriaLabelledby() {
-    if (this.ariaLabel) {
-      return null;
-    }
-    let value = this._parentFormField?.getLabelId() || "";
-    if (this.ariaLabelledby) {
-      value += " " + this.ariaLabelledby;
-    }
-    if (!value) {
-      value = this._valueId;
-    }
-    return value;
-  }
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @docs-private
-   */
-  get describedByIds() {
-    const element = this._elementRef.nativeElement;
-    const existingDescribedBy = element.getAttribute("aria-describedby");
-    return existingDescribedBy?.split(" ") || [];
-  }
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @docs-private
-   */
-  setDescribedByIds(ids) {
-    if (ids.length) {
-      this._elementRef.nativeElement.setAttribute("aria-describedby", ids.join(" "));
-    } else {
-      this._elementRef.nativeElement.removeAttribute("aria-describedby");
-    }
-  }
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @docs-private
-   */
-  onContainerClick() {
-    this.focus();
-    this.open();
-  }
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @docs-private
-   */
-  get shouldLabelFloat() {
-    return this.panelOpen || !this.empty || this.focused && !!this.placeholder;
-  }
-  static \u0275fac = function MatSelect_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatSelect)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _MatSelect,
-    selectors: [["mat-select"]],
-    contentQueries: function MatSelect_ContentQueries(rf, ctx, dirIndex) {
-      if (rf & 1) {
-        \u0275\u0275contentQuery(dirIndex, MAT_SELECT_TRIGGER, 5);
-        \u0275\u0275contentQuery(dirIndex, MatOption, 5);
-        \u0275\u0275contentQuery(dirIndex, MAT_OPTGROUP, 5);
-      }
-      if (rf & 2) {
-        let _t4;
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.customTrigger = _t4.first);
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.options = _t4);
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.optionGroups = _t4);
-      }
-    },
-    viewQuery: function MatSelect_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(_c020, 5);
-        \u0275\u0275viewQuery(_c111, 5);
-        \u0275\u0275viewQuery(CdkConnectedOverlay, 5);
-      }
-      if (rf & 2) {
-        let _t4;
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.trigger = _t4.first);
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx.panel = _t4.first);
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._overlayDir = _t4.first);
-      }
-    },
-    hostAttrs: ["role", "combobox", "aria-haspopup", "listbox", 1, "mat-mdc-select"],
-    hostVars: 19,
-    hostBindings: function MatSelect_HostBindings(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275listener("keydown", function MatSelect_keydown_HostBindingHandler($event) {
-          return ctx._handleKeydown($event);
-        })("focus", function MatSelect_focus_HostBindingHandler() {
-          return ctx._onFocus();
-        })("blur", function MatSelect_blur_HostBindingHandler() {
-          return ctx._onBlur();
-        });
-      }
-      if (rf & 2) {
-        \u0275\u0275attribute("id", ctx.id)("tabindex", ctx.disabled ? -1 : ctx.tabIndex)("aria-controls", ctx.panelOpen ? ctx.id + "-panel" : null)("aria-expanded", ctx.panelOpen)("aria-label", ctx.ariaLabel || null)("aria-required", ctx.required.toString())("aria-disabled", ctx.disabled.toString())("aria-invalid", ctx.errorState)("aria-activedescendant", ctx._getAriaActiveDescendant());
-        \u0275\u0275classProp("mat-mdc-select-disabled", ctx.disabled)("mat-mdc-select-invalid", ctx.errorState)("mat-mdc-select-required", ctx.required)("mat-mdc-select-empty", ctx.empty)("mat-mdc-select-multiple", ctx.multiple);
-      }
-    },
-    inputs: {
-      userAriaDescribedBy: [0, "aria-describedby", "userAriaDescribedBy"],
-      panelClass: "panelClass",
-      disabled: [2, "disabled", "disabled", booleanAttribute],
-      disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
-      tabIndex: [2, "tabIndex", "tabIndex", (value) => value == null ? 0 : numberAttribute(value)],
-      hideSingleSelectionIndicator: [2, "hideSingleSelectionIndicator", "hideSingleSelectionIndicator", booleanAttribute],
-      placeholder: "placeholder",
-      required: [2, "required", "required", booleanAttribute],
-      multiple: [2, "multiple", "multiple", booleanAttribute],
-      disableOptionCentering: [2, "disableOptionCentering", "disableOptionCentering", booleanAttribute],
-      compareWith: "compareWith",
-      value: "value",
-      ariaLabel: [0, "aria-label", "ariaLabel"],
-      ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
-      errorStateMatcher: "errorStateMatcher",
-      typeaheadDebounceInterval: [2, "typeaheadDebounceInterval", "typeaheadDebounceInterval", numberAttribute],
-      sortComparator: "sortComparator",
-      id: "id",
-      panelWidth: "panelWidth",
-      canSelectNullableOptions: [2, "canSelectNullableOptions", "canSelectNullableOptions", booleanAttribute]
-    },
-    outputs: {
-      openedChange: "openedChange",
-      _openedStream: "opened",
-      _closedStream: "closed",
-      selectionChange: "selectionChange",
-      valueChange: "valueChange"
-    },
-    exportAs: ["matSelect"],
-    features: [\u0275\u0275ProvidersFeature([{
-      provide: MatFormFieldControl,
-      useExisting: _MatSelect
-    }, {
-      provide: MAT_OPTION_PARENT_COMPONENT,
-      useExisting: _MatSelect
-    }]), \u0275\u0275NgOnChangesFeature],
-    ngContentSelectors: _c35,
-    decls: 11,
-    vars: 9,
-    consts: [["fallbackOverlayOrigin", "cdkOverlayOrigin", "trigger", ""], ["panel", ""], ["cdk-overlay-origin", "", 1, "mat-mdc-select-trigger", 3, "click"], [1, "mat-mdc-select-value"], [1, "mat-mdc-select-placeholder", "mat-mdc-select-min-line"], [1, "mat-mdc-select-value-text"], [1, "mat-mdc-select-arrow-wrapper"], [1, "mat-mdc-select-arrow"], ["viewBox", "0 0 24 24", "width", "24px", "height", "24px", "focusable", "false", "aria-hidden", "true"], ["d", "M7 10l5 5 5-5z"], ["cdk-connected-overlay", "", "cdkConnectedOverlayLockPosition", "", "cdkConnectedOverlayHasBackdrop", "", "cdkConnectedOverlayBackdropClass", "cdk-overlay-transparent-backdrop", 3, "detach", "backdropClick", "overlayKeydown", "cdkConnectedOverlayDisableClose", "cdkConnectedOverlayPanelClass", "cdkConnectedOverlayScrollStrategy", "cdkConnectedOverlayOrigin", "cdkConnectedOverlayPositions", "cdkConnectedOverlayWidth", "cdkConnectedOverlayFlexibleDimensions"], [1, "mat-mdc-select-min-line"], ["role", "listbox", "tabindex", "-1", 3, "keydown", "ngClass"]],
-    template: function MatSelect_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275projectionDef(_c25);
-        \u0275\u0275elementStart(0, "div", 2, 0);
-        \u0275\u0275listener("click", function MatSelect_Template_div_click_0_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.open());
-        });
-        \u0275\u0275elementStart(3, "div", 3);
-        \u0275\u0275conditionalCreate(4, MatSelect_Conditional_4_Template, 2, 1, "span", 4)(5, MatSelect_Conditional_5_Template, 3, 1, "span", 5);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(6, "div", 6)(7, "div", 7);
-        \u0275\u0275namespaceSVG();
-        \u0275\u0275elementStart(8, "svg", 8);
-        \u0275\u0275element(9, "path", 9);
-        \u0275\u0275elementEnd()()()();
-        \u0275\u0275template(10, MatSelect_ng_template_10_Template, 3, 10, "ng-template", 10);
-        \u0275\u0275listener("detach", function MatSelect_Template_ng_template_detach_10_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.close());
-        })("backdropClick", function MatSelect_Template_ng_template_backdropClick_10_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx.close());
-        })("overlayKeydown", function MatSelect_Template_ng_template_overlayKeydown_10_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx._handleOverlayKeydown($event));
-        });
-      }
-      if (rf & 2) {
-        const fallbackOverlayOrigin_r4 = \u0275\u0275reference(1);
-        \u0275\u0275advance(3);
-        \u0275\u0275attribute("id", ctx._valueId);
-        \u0275\u0275advance();
-        \u0275\u0275conditional(ctx.empty ? 4 : 5);
-        \u0275\u0275advance(6);
-        \u0275\u0275property("cdkConnectedOverlayDisableClose", true)("cdkConnectedOverlayPanelClass", ctx._overlayPanelClass)("cdkConnectedOverlayScrollStrategy", ctx._scrollStrategy)("cdkConnectedOverlayOrigin", ctx._preferredOverlayOrigin || fallbackOverlayOrigin_r4)("cdkConnectedOverlayPositions", ctx._positions)("cdkConnectedOverlayWidth", ctx._overlayWidth)("cdkConnectedOverlayFlexibleDimensions", true);
-      }
-    },
-    dependencies: [CdkOverlayOrigin, CdkConnectedOverlay, NgClass],
-    styles: ['@keyframes _mat-select-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}@keyframes _mat-select-exit{from{opacity:1}to{opacity:0}}.mat-mdc-select{display:inline-block;width:100%;outline:none;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;color:var(--mat-select-enabled-trigger-text-color, var(--mat-sys-on-surface));font-family:var(--mat-select-trigger-text-font, var(--mat-sys-body-large-font));line-height:var(--mat-select-trigger-text-line-height, var(--mat-sys-body-large-line-height));font-size:var(--mat-select-trigger-text-size, var(--mat-sys-body-large-size));font-weight:var(--mat-select-trigger-text-weight, var(--mat-sys-body-large-weight));letter-spacing:var(--mat-select-trigger-text-tracking, var(--mat-sys-body-large-tracking))}div.mat-mdc-select-panel{box-shadow:var(--mat-select-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12))}.mat-mdc-select-disabled{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-disabled .mat-mdc-select-placeholder{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-trigger{display:inline-flex;align-items:center;cursor:pointer;position:relative;box-sizing:border-box;width:100%}.mat-mdc-select-disabled .mat-mdc-select-trigger{-webkit-user-select:none;user-select:none;cursor:default}.mat-mdc-select-value{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mat-mdc-select-value-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mat-mdc-select-arrow-wrapper{height:24px;flex-shrink:0;display:inline-flex;align-items:center}.mat-form-field-appearance-fill .mdc-text-field--no-label .mat-mdc-select-arrow-wrapper{transform:none}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-invalid .mat-mdc-select-arrow,.mat-form-field-invalid:not(.mat-form-field-disabled) .mat-mdc-form-field-infix::after{color:var(--mat-select-invalid-arrow-color, var(--mat-sys-error))}.mat-mdc-select-arrow{width:10px;height:5px;position:relative;color:var(--mat-select-enabled-arrow-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field.mat-focused .mat-mdc-select-arrow{color:var(--mat-select-focused-arrow-color, var(--mat-sys-primary))}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-disabled .mat-mdc-select-arrow{color:var(--mat-select-disabled-arrow-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-arrow svg{fill:currentColor;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)}@media(forced-colors: active){.mat-mdc-select-arrow svg{fill:CanvasText}.mat-mdc-select-disabled .mat-mdc-select-arrow svg{fill:GrayText}}div.mat-mdc-select-panel{width:100%;max-height:275px;outline:0;overflow:auto;padding:8px 0;border-radius:4px;box-sizing:border-box;position:relative;background-color:var(--mat-select-panel-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-select-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel{border-top-left-radius:0;border-top-right-radius:0;transform-origin:top center}.mat-mdc-select-panel-above div.mat-mdc-select-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:bottom center}.mat-select-panel-animations-enabled{animation:_mat-select-enter 120ms cubic-bezier(0, 0, 0.2, 1)}.mat-select-panel-animations-enabled.mat-select-panel-exit{animation:_mat-select-exit 100ms linear}.mat-mdc-select-placeholder{transition:color 400ms 133.3333333333ms cubic-bezier(0.25, 0.8, 0.25, 1);color:var(--mat-select-placeholder-text-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field:not(.mat-form-field-animations-enabled) .mat-mdc-select-placeholder,._mat-animation-noopable .mat-mdc-select-placeholder{transition:none}.mat-form-field-hide-placeholder .mat-mdc-select-placeholder{color:rgba(0,0,0,0);-webkit-text-fill-color:rgba(0,0,0,0);transition:none;display:block}.mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{cursor:pointer}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mat-mdc-floating-label{max-width:calc(100% - 18px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mdc-floating-label--float-above{max-width:calc(100%/0.75 - 24px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-notched-outline__notch{max-width:calc(100% - 60px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-text-field--label-floating .mdc-notched-outline__notch{max-width:calc(100% - 24px)}.mat-mdc-select-min-line:empty::before{content:" ";white-space:pre;width:1px;display:inline-block;visibility:hidden}.mat-form-field-appearance-fill .mat-mdc-select-arrow-wrapper{transform:var(--mat-select-arrow-transform, translateY(-8px))}\n'],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatSelect, [{
-    type: Component,
-    args: [{
-      selector: "mat-select",
-      exportAs: "matSelect",
-      encapsulation: ViewEncapsulation.None,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      host: {
-        "role": "combobox",
-        "aria-haspopup": "listbox",
-        "class": "mat-mdc-select",
-        "[attr.id]": "id",
-        "[attr.tabindex]": "disabled ? -1 : tabIndex",
-        "[attr.aria-controls]": 'panelOpen ? id + "-panel" : null',
-        "[attr.aria-expanded]": "panelOpen",
-        "[attr.aria-label]": "ariaLabel || null",
-        "[attr.aria-required]": "required.toString()",
-        "[attr.aria-disabled]": "disabled.toString()",
-        "[attr.aria-invalid]": "errorState",
-        "[attr.aria-activedescendant]": "_getAriaActiveDescendant()",
-        "[class.mat-mdc-select-disabled]": "disabled",
-        "[class.mat-mdc-select-invalid]": "errorState",
-        "[class.mat-mdc-select-required]": "required",
-        "[class.mat-mdc-select-empty]": "empty",
-        "[class.mat-mdc-select-multiple]": "multiple",
-        "(keydown)": "_handleKeydown($event)",
-        "(focus)": "_onFocus()",
-        "(blur)": "_onBlur()"
-      },
-      providers: [{
-        provide: MatFormFieldControl,
-        useExisting: MatSelect
-      }, {
-        provide: MAT_OPTION_PARENT_COMPONENT,
-        useExisting: MatSelect
-      }],
-      imports: [CdkOverlayOrigin, CdkConnectedOverlay, NgClass],
-      template: `<div cdk-overlay-origin
-     class="mat-mdc-select-trigger"
-     (click)="open()"
-     #fallbackOverlayOrigin="cdkOverlayOrigin"
-     #trigger>
-
-  <div class="mat-mdc-select-value" [attr.id]="_valueId">
-    @if (empty) {
-      <span class="mat-mdc-select-placeholder mat-mdc-select-min-line">{{placeholder}}</span>
-    } @else {
-      <span class="mat-mdc-select-value-text">
-        @if (customTrigger) {
-          <ng-content select="mat-select-trigger"></ng-content>
-        } @else {
-          <span class="mat-mdc-select-min-line">{{triggerValue}}</span>
-        }
-      </span>
-    }
-  </div>
-
-  <div class="mat-mdc-select-arrow-wrapper">
-    <div class="mat-mdc-select-arrow">
-      <!-- Use an inline SVG, because it works better than a CSS triangle in high contrast mode. -->
-      <svg viewBox="0 0 24 24" width="24px" height="24px" focusable="false" aria-hidden="true">
-        <path d="M7 10l5 5 5-5z"/>
-      </svg>
-    </div>
-  </div>
-</div>
-
-<ng-template
-  cdk-connected-overlay
-  cdkConnectedOverlayLockPosition
-  cdkConnectedOverlayHasBackdrop
-  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
-  [cdkConnectedOverlayDisableClose]="true"
-  [cdkConnectedOverlayPanelClass]="_overlayPanelClass"
-  [cdkConnectedOverlayScrollStrategy]="_scrollStrategy"
-  [cdkConnectedOverlayOrigin]="_preferredOverlayOrigin || fallbackOverlayOrigin"
-  [cdkConnectedOverlayPositions]="_positions"
-  [cdkConnectedOverlayWidth]="_overlayWidth"
-  [cdkConnectedOverlayFlexibleDimensions]="true"
-  (detach)="close()"
-  (backdropClick)="close()"
-  (overlayKeydown)="_handleOverlayKeydown($event)">
-  <div
-    #panel
-    role="listbox"
-    tabindex="-1"
-    class="mat-mdc-select-panel mdc-menu-surface mdc-menu-surface--open {{ _getPanelTheme() }}"
-    [class.mat-select-panel-animations-enabled]="!_animationsDisabled"
-    [attr.id]="id + '-panel'"
-    [attr.aria-multiselectable]="multiple"
-    [attr.aria-label]="ariaLabel || null"
-    [attr.aria-labelledby]="_getPanelAriaLabelledby()"
-    [ngClass]="panelClass"
-    (keydown)="_handleKeydown($event)">
-    <ng-content></ng-content>
-  </div>
-</ng-template>
-`,
-      styles: ['@keyframes _mat-select-enter{from{opacity:0;transform:scaleY(0.8)}to{opacity:1;transform:none}}@keyframes _mat-select-exit{from{opacity:1}to{opacity:0}}.mat-mdc-select{display:inline-block;width:100%;outline:none;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;color:var(--mat-select-enabled-trigger-text-color, var(--mat-sys-on-surface));font-family:var(--mat-select-trigger-text-font, var(--mat-sys-body-large-font));line-height:var(--mat-select-trigger-text-line-height, var(--mat-sys-body-large-line-height));font-size:var(--mat-select-trigger-text-size, var(--mat-sys-body-large-size));font-weight:var(--mat-select-trigger-text-weight, var(--mat-sys-body-large-weight));letter-spacing:var(--mat-select-trigger-text-tracking, var(--mat-sys-body-large-tracking))}div.mat-mdc-select-panel{box-shadow:var(--mat-select-container-elevation-shadow, 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12))}.mat-mdc-select-disabled{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-disabled .mat-mdc-select-placeholder{color:var(--mat-select-disabled-trigger-text-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-trigger{display:inline-flex;align-items:center;cursor:pointer;position:relative;box-sizing:border-box;width:100%}.mat-mdc-select-disabled .mat-mdc-select-trigger{-webkit-user-select:none;user-select:none;cursor:default}.mat-mdc-select-value{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mat-mdc-select-value-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mat-mdc-select-arrow-wrapper{height:24px;flex-shrink:0;display:inline-flex;align-items:center}.mat-form-field-appearance-fill .mdc-text-field--no-label .mat-mdc-select-arrow-wrapper{transform:none}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-invalid .mat-mdc-select-arrow,.mat-form-field-invalid:not(.mat-form-field-disabled) .mat-mdc-form-field-infix::after{color:var(--mat-select-invalid-arrow-color, var(--mat-sys-error))}.mat-mdc-select-arrow{width:10px;height:5px;position:relative;color:var(--mat-select-enabled-arrow-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field.mat-focused .mat-mdc-select-arrow{color:var(--mat-select-focused-arrow-color, var(--mat-sys-primary))}.mat-mdc-form-field .mat-mdc-select.mat-mdc-select-disabled .mat-mdc-select-arrow{color:var(--mat-select-disabled-arrow-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-select-arrow svg{fill:currentColor;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)}@media(forced-colors: active){.mat-mdc-select-arrow svg{fill:CanvasText}.mat-mdc-select-disabled .mat-mdc-select-arrow svg{fill:GrayText}}div.mat-mdc-select-panel{width:100%;max-height:275px;outline:0;overflow:auto;padding:8px 0;border-radius:4px;box-sizing:border-box;position:relative;background-color:var(--mat-select-panel-background-color, var(--mat-sys-surface-container))}@media(forced-colors: active){div.mat-mdc-select-panel{outline:solid 1px}}.cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel{border-top-left-radius:0;border-top-right-radius:0;transform-origin:top center}.mat-mdc-select-panel-above div.mat-mdc-select-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;transform-origin:bottom center}.mat-select-panel-animations-enabled{animation:_mat-select-enter 120ms cubic-bezier(0, 0, 0.2, 1)}.mat-select-panel-animations-enabled.mat-select-panel-exit{animation:_mat-select-exit 100ms linear}.mat-mdc-select-placeholder{transition:color 400ms 133.3333333333ms cubic-bezier(0.25, 0.8, 0.25, 1);color:var(--mat-select-placeholder-text-color, var(--mat-sys-on-surface-variant))}.mat-mdc-form-field:not(.mat-form-field-animations-enabled) .mat-mdc-select-placeholder,._mat-animation-noopable .mat-mdc-select-placeholder{transition:none}.mat-form-field-hide-placeholder .mat-mdc-select-placeholder{color:rgba(0,0,0,0);-webkit-text-fill-color:rgba(0,0,0,0);transition:none;display:block}.mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{cursor:pointer}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mat-mdc-floating-label{max-width:calc(100% - 18px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill .mdc-floating-label--float-above{max-width:calc(100%/0.75 - 24px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-notched-outline__notch{max-width:calc(100% - 60px)}.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-text-field--label-floating .mdc-notched-outline__notch{max-width:calc(100% - 24px)}.mat-mdc-select-min-line:empty::before{content:" ";white-space:pre;width:1px;display:inline-block;visibility:hidden}.mat-form-field-appearance-fill .mat-mdc-select-arrow-wrapper{transform:var(--mat-select-arrow-transform, translateY(-8px))}\n']
-    }]
-  }], () => [], {
-    options: [{
-      type: ContentChildren,
-      args: [MatOption, {
-        descendants: true
-      }]
-    }],
-    optionGroups: [{
-      type: ContentChildren,
-      args: [MAT_OPTGROUP, {
-        descendants: true
-      }]
-    }],
-    customTrigger: [{
-      type: ContentChild,
-      args: [MAT_SELECT_TRIGGER]
-    }],
-    userAriaDescribedBy: [{
-      type: Input,
-      args: ["aria-describedby"]
-    }],
-    trigger: [{
-      type: ViewChild,
-      args: ["trigger"]
-    }],
-    panel: [{
-      type: ViewChild,
-      args: ["panel"]
-    }],
-    _overlayDir: [{
-      type: ViewChild,
-      args: [CdkConnectedOverlay]
-    }],
-    panelClass: [{
-      type: Input
-    }],
-    disabled: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    disableRipple: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    tabIndex: [{
-      type: Input,
-      args: [{
-        transform: (value) => value == null ? 0 : numberAttribute(value)
-      }]
-    }],
-    hideSingleSelectionIndicator: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    placeholder: [{
-      type: Input
-    }],
-    required: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    multiple: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    disableOptionCentering: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    compareWith: [{
-      type: Input
-    }],
-    value: [{
-      type: Input
-    }],
-    ariaLabel: [{
-      type: Input,
-      args: ["aria-label"]
-    }],
-    ariaLabelledby: [{
-      type: Input,
-      args: ["aria-labelledby"]
-    }],
-    errorStateMatcher: [{
-      type: Input
-    }],
-    typeaheadDebounceInterval: [{
-      type: Input,
-      args: [{
-        transform: numberAttribute
-      }]
-    }],
-    sortComparator: [{
-      type: Input
-    }],
-    id: [{
-      type: Input
-    }],
-    panelWidth: [{
-      type: Input
-    }],
-    canSelectNullableOptions: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    openedChange: [{
-      type: Output
-    }],
-    _openedStream: [{
-      type: Output,
-      args: ["opened"]
-    }],
-    _closedStream: [{
-      type: Output,
-      args: ["closed"]
-    }],
-    selectionChange: [{
-      type: Output
-    }],
-    valueChange: [{
-      type: Output
-    }]
-  });
-})();
-var MatSelectTrigger = class _MatSelectTrigger {
-  static \u0275fac = function MatSelectTrigger_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatSelectTrigger)();
-  };
-  static \u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
-    type: _MatSelectTrigger,
-    selectors: [["mat-select-trigger"]],
-    features: [\u0275\u0275ProvidersFeature([{
-      provide: MAT_SELECT_TRIGGER,
-      useExisting: _MatSelectTrigger
-    }])]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatSelectTrigger, [{
-    type: Directive,
-    args: [{
-      selector: "mat-select-trigger",
-      providers: [{
-        provide: MAT_SELECT_TRIGGER,
-        useExisting: MatSelectTrigger
-      }]
-    }]
-  }], null, null);
-})();
-var MatSelectModule = class _MatSelectModule {
-  static \u0275fac = function MatSelectModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatSelectModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _MatSelectModule,
-    imports: [OverlayModule, MatOptionModule, MatCommonModule, MatSelect, MatSelectTrigger],
-    exports: [CdkScrollableModule, MatFormFieldModule, MatSelect, MatSelectTrigger, MatOptionModule, MatCommonModule]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    providers: [MAT_SELECT_SCROLL_STRATEGY_PROVIDER],
-    imports: [OverlayModule, MatOptionModule, MatCommonModule, CdkScrollableModule, MatFormFieldModule, MatOptionModule, MatCommonModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatSelectModule, [{
-    type: NgModule,
-    args: [{
-      imports: [OverlayModule, MatOptionModule, MatCommonModule, MatSelect, MatSelectTrigger],
-      exports: [CdkScrollableModule, MatFormFieldModule, MatSelect, MatSelectTrigger, MatOptionModule, MatCommonModule],
-      providers: [MAT_SELECT_SCROLL_STRATEGY_PROVIDER]
-    }]
-  }], null, null);
 })();
 
 // libs/explore/src/lib/explore-map-control.component.ts
@@ -101506,8 +102455,8 @@ var ExploreMapControlComponent = _ExploreMapControlComponent;
 })();
 
 // node_modules/@angular/material/fesm2022/slide-toggle.mjs
-var _c021 = ["switch"];
-var _c112 = ["*"];
+var _c023 = ["switch"];
+var _c113 = ["*"];
 function MatSlideToggle_Conditional_10_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span", 10);
@@ -101721,7 +102670,7 @@ var MatSlideToggle = class _MatSlideToggle {
     selectors: [["mat-slide-toggle"]],
     viewQuery: function MatSlideToggle_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c021, 5);
+        \u0275\u0275viewQuery(_c023, 5);
       }
       if (rf & 2) {
         let _t4;
@@ -101768,7 +102717,7 @@ var MatSlideToggle = class _MatSlideToggle {
       useExisting: _MatSlideToggle,
       multi: true
     }]), \u0275\u0275NgOnChangesFeature],
-    ngContentSelectors: _c112,
+    ngContentSelectors: _c113,
     decls: 13,
     vars: 27,
     consts: [["switch", ""], ["mat-internal-form-field", "", 3, "labelPosition"], ["role", "switch", "type", "button", 1, "mdc-switch", 3, "click", "tabIndex", "disabled"], [1, "mdc-switch__track"], [1, "mdc-switch__handle-track"], [1, "mdc-switch__handle"], [1, "mdc-switch__shadow"], [1, "mdc-elevation-overlay"], [1, "mdc-switch__ripple"], ["mat-ripple", "", 1, "mat-mdc-slide-toggle-ripple", "mat-focus-indicator", 3, "matRippleTrigger", "matRippleDisabled", "matRippleCentered"], [1, "mdc-switch__icons"], [1, "mdc-label", 3, "click", "for"], ["viewBox", "0 0 24 24", "aria-hidden", "true", 1, "mdc-switch__icon", "mdc-switch__icon--on"], ["d", "M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z"], ["viewBox", "0 0 24 24", "aria-hidden", "true", 1, "mdc-switch__icon", "mdc-switch__icon--off"], ["d", "M20 13H4v-2h16v2z"]],
@@ -102019,7 +102968,7 @@ var MatSlideToggleModule = class _MatSlideToggleModule {
 })();
 
 // libs/components/src/lib/cisco-map.component.ts
-var _c022 = ["map_container"];
+var _c024 = ["map_container"];
 var DEFAULT_ZOOM = 18.5;
 var _CiscoMapComponent = class _CiscoMapComponent extends AsyncHandler {
   constructor() {
@@ -102075,7 +103024,7 @@ _CiscoMapComponent.\u0275fac = function CiscoMapComponent_Factory(__ngFactoryTyp
 };
 _CiscoMapComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CiscoMapComponent, selectors: [["cisco-map"]], viewQuery: function CiscoMapComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx._mapContainer, _c022, 5);
+    \u0275\u0275viewQuerySignal(ctx._mapContainer, _c024, 5);
   }
   if (rf & 2) {
     \u0275\u0275queryAdvance();
@@ -102103,8 +103052,8 @@ var CiscoMapComponent = _CiscoMapComponent;
 })();
 
 // libs/components/src/lib/map-renderer.component.ts
-var _c023 = ["outlet"];
-var _c113 = ["feature"];
+var _c025 = ["outlet"];
+var _c114 = ["feature"];
 var _forTrack03 = ($index, $item) => $item.track_id || $index;
 function MapRendererComponent_Conditional_2_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
@@ -102114,13 +103063,28 @@ function MapRendererComponent_Conditional_2_Conditional_0_Template(rf, ctx) {
     \u0275\u0275property("diameter", 48);
   }
 }
+function MapRendererComponent_Conditional_2_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 3)(1, "div", 6);
+    \u0275\u0275text(2);
+    \u0275\u0275pipe(3, "translate");
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(3, 1, "EXPLORE.MAP_FAILED_TO_LOAD"), " ");
+  }
+}
 function MapRendererComponent_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, MapRendererComponent_Conditional_2_Conditional_0_Template, 1, 1, "mat-spinner", 5);
+    \u0275\u0275conditionalCreate(1, MapRendererComponent_Conditional_2_Conditional_1_Template, 4, 3, "div", 3);
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275conditional(!ctx_r0.viewer || ctx_r0.loading ? 0 : -1);
+    \u0275\u0275conditional(!ctx_r0.viewer || ctx_r0.loading() ? 0 : -1);
+    \u0275\u0275advance();
+    \u0275\u0275conditional(ctx_r0.viewer === "~empty~" ? 1 : -1);
   }
 }
 function MapRendererComponent_Conditional_3_Template(rf, ctx) {
@@ -102147,9 +103111,9 @@ function MapRendererComponent_Conditional_4_For_2_Conditional_0_Case_3_Template(
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext(2);
     const element_r3 = ctx_r1.$implicit;
-    const \u0275$index_17_r4 = ctx_r1.$index;
+    const \u0275$index_24_r4 = ctx_r1.$index;
     const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngComponentOutlet", element_r3.content)("ngComponentOutletInjector", ctx_r0.injectors[\u0275$index_17_r4]);
+    \u0275\u0275property("ngComponentOutlet", element_r3.content)("ngComponentOutletInjector", ctx_r0.injectors[\u0275$index_24_r4]);
   }
 }
 function MapRendererComponent_Conditional_4_For_2_Conditional_0_Case_4_Template(rf, ctx) {
@@ -102228,10 +103192,10 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
   constructor() {
     super();
     this._injector = inject(Injector);
-    this.src = input(void 0);
-    this.styles = input(void 0);
     this.zoom = model(1);
     this.center = model({ x: 0.5, y: 0.5 });
+    this.src = input(void 0);
+    this.styles = input(void 0);
     this.features = input(void 0);
     this.labels = input(void 0);
     this.actions = input(void 0);
@@ -102241,6 +103205,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
     this.zoomChange = output();
     this.centerChange = output();
     this.mapInfo = output();
+    this.loading = signal(false);
     this.injectors = [];
     this.feature_list = [];
     this._on_changes = new BehaviorSubject(null);
@@ -102257,13 +103222,16 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
     Dn2();
   }
   ngOnDestroy() {
-    if (this.viewer) {
+    if (this.viewer)
       Hn2(this.viewer);
-    }
   }
   ngOnChanges(changes) {
     if (changes.src && this.src()) {
-      this.createView().catch((e2) => console.warn(e2));
+      this.createView().catch((e2) => {
+        console.warn(e2);
+        this.loading.set(false);
+        this.viewer = "~empty~";
+      });
     }
     if (changes.features) {
       this.updateInjectors();
@@ -102286,12 +103254,16 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
     }
   }
   ngAfterViewInit() {
-    this.createView().catch((e2) => console.warn(e2));
+    this.createView().catch((e2) => {
+      console.warn(e2);
+      this.loading.set(false);
+      this.viewer = "~empty~";
+    });
   }
   /** Update overlays, styles and actions of viewer */
   updateView() {
     try {
-      if (!$3(this.viewer) || this.loading) {
+      if (!$3(this.viewer) || this.loading()) {
         return this.timeout("update_view", () => this.updateView());
       }
       this.updateFeatureList();
@@ -102331,8 +103303,8 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
       return;
     const _outlet_el = this._outlet_el();
     const src = this.src();
-    if (src && _outlet_el?.nativeElement && !this.loading) {
-      this.loading = true;
+    if (src && _outlet_el?.nativeElement && !this.loading()) {
+      this.loading.set(true);
       const styles = this.styles();
       const labels = this.labels();
       const actions = this.actions();
@@ -102366,14 +103338,12 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
         labels,
         actions,
         options: options2
-      }).catch((e2) => {
-        console.warn(e2);
-        return "";
-      });
-      this.loading = false;
-      if (!this.viewer)
+      }).catch((e2) => "");
+      this.loading.set(false);
+      if (!this.viewer) {
+        this.viewer = "~empty~";
         return;
-      this.loading = false;
+      }
       this.subscription("view_changes", gn2(this.viewer)?.subscribe((v3) => {
         this._on_changes.next(__spreadValues({}, v3));
         this.zoomChange.emit(v3.zoom);
@@ -102386,7 +103356,7 @@ var _MapRendererComponent = class _MapRendererComponent extends AsyncHandler {
       const focus = this.focus();
       if (focus)
         this.focusOn(focus);
-    } else if (src && !_outlet_el?.nativeElement || this.loading) {
+    } else if (src && !_outlet_el?.nativeElement || this.loading()) {
       this.timeout("create_view", () => this.createView().catch((e2) => console.warn(e2)));
     }
   }
@@ -102431,8 +103401,8 @@ _MapRendererComponent.\u0275fac = function MapRendererComponent_Factory(__ngFact
 };
 _MapRendererComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapRendererComponent, selectors: [["map-renderer"]], viewQuery: function MapRendererComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx._outlet_el, _c023, 5);
-    \u0275\u0275viewQuerySignal(ctx._feature_list, _c113, 5);
+    \u0275\u0275viewQuerySignal(ctx._outlet_el, _c025, 5);
+    \u0275\u0275viewQuerySignal(ctx._feature_list, _c114, 5);
   }
   if (rf & 2) {
     \u0275\u0275queryAdvance(2);
@@ -102443,10 +103413,10 @@ _MapRendererComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ 
       return ctx.onResize();
     }, \u0275\u0275resolveWindow);
   }
-}, inputs: { src: [1, "src"], styles: [1, "styles"], zoom: [1, "zoom"], center: [1, "center"], features: [1, "features"], labels: [1, "labels"], actions: [1, "actions"], reset: [1, "reset"], options: [1, "options"], focus: [1, "focus"] }, outputs: { zoom: "zoomChange", center: "centerChange", zoomChange: "zoomChange", centerChange: "centerChange", mapInfo: "mapInfo" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 5, vars: 4, consts: [["outlet", ""], ["feature", ""], ["tabindex", "0", "role", "map", 1, "absolute", "inset-0"], [1, "absolute", "inset-0", "flex", "items-center", "justify-center"], ["hidden", ""], [1, "absolute", 3, "diameter"], [1, "opacity-30"], [1, "pointer-events-none"], [3, "innerHTML"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function MapRendererComponent_Template(rf, ctx) {
+}, inputs: { zoom: [1, "zoom"], center: [1, "center"], src: [1, "src"], styles: [1, "styles"], features: [1, "features"], labels: [1, "labels"], actions: [1, "actions"], reset: [1, "reset"], options: [1, "options"], focus: [1, "focus"] }, outputs: { zoom: "zoomChange", center: "centerChange", zoomChange: "zoomChange", centerChange: "centerChange", mapInfo: "mapInfo" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], decls: 5, vars: 4, consts: [["outlet", ""], ["feature", ""], ["tabindex", "0", "role", "map", 1, "absolute", "inset-0"], [1, "absolute", "inset-0", "flex", "items-center", "justify-center"], ["hidden", ""], [1, "absolute", 3, "diameter"], [1, "opacity-30"], [1, "pointer-events-none"], [3, "innerHTML"], [4, "ngComponentOutlet", "ngComponentOutletInjector"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"]], template: function MapRendererComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "div", 2, 0);
-    \u0275\u0275conditionalCreate(2, MapRendererComponent_Conditional_2_Template, 1, 1)(3, MapRendererComponent_Conditional_3_Template, 4, 3, "div", 3);
+    \u0275\u0275conditionalCreate(2, MapRendererComponent_Conditional_2_Template, 2, 2)(3, MapRendererComponent_Conditional_3_Template, 4, 3, "div", 3);
     \u0275\u0275conditionalCreate(4, MapRendererComponent_Conditional_4_Template, 3, 0, "div", 4);
   }
   if (rf & 2) {
@@ -102470,8 +103440,15 @@ var MapRendererComponent = _MapRendererComponent;
             [class.hidden]="!src()"
         ></div>
         @if (src()) {
-            @if (!viewer || loading) {
+            @if (!viewer || loading()) {
                 <mat-spinner class="absolute" [diameter]="48" />
+            }
+            @if (viewer === '~empty~') {
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="opacity-30">
+                        {{ 'EXPLORE.MAP_FAILED_TO_LOAD' | translate }}
+                    </div>
+                </div>
             }
         } @else {
             <div class="absolute inset-0 flex items-center justify-center">
@@ -102535,11 +103512,11 @@ var MapRendererComponent = _MapRendererComponent;
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MapRendererComponent, { className: "MapRendererComponent", filePath: "libs/components/src/lib/map-renderer.component.ts", lineNumber: 134 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MapRendererComponent, { className: "MapRendererComponent", filePath: "libs/components/src/lib/map-renderer.component.ts", lineNumber: 142 });
 })();
 
 // libs/components/src/lib/maps-indoors.component.ts
-var _c024 = ["map_container"];
+var _c026 = ["map_container"];
 function MapsIndoorsComponent_Conditional_2_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "mat-spinner", 5);
@@ -102920,7 +103897,7 @@ _MapsIndoorsComponent.\u0275fac = function MapsIndoorsComponent_Factory(__ngFact
 };
 _MapsIndoorsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapsIndoorsComponent, selectors: [["maps-indoors"]], viewQuery: function MapsIndoorsComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx._container, _c024, 5);
+    \u0275\u0275viewQuerySignal(ctx._container, _c026, 5);
   }
   if (rf & 2) {
     \u0275\u0275queryAdvance();
@@ -102966,7 +103943,7 @@ var MapsIndoorsComponent = _MapsIndoorsComponent;
 })();
 
 // libs/components/src/lib/interactive-map.component.ts
-var _c025 = ["*", "*", "*"];
+var _c027 = ["*", "*", "*"];
 function InteractiveMapComponent_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -103109,9 +104086,9 @@ _InteractiveMapComponent.\u0275fac = /* @__PURE__ */ (() => {
     return (\u0275InteractiveMapComponent_BaseFactory || (\u0275InteractiveMapComponent_BaseFactory = \u0275\u0275getInheritedFactory(_InteractiveMapComponent)))(__ngFactoryType__ || _InteractiveMapComponent);
   };
 })();
-_InteractiveMapComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InteractiveMapComponent, selectors: [["interactive-map"]], inputs: { src: [1, "src"], zoom: [1, "zoom"], center: [1, "center"], reset: [1, "reset"], metadata: [1, "metadata"], styles: [1, "styles"], features: [1, "features"], labels: [1, "labels"], actions: [1, "actions"], options: [1, "options"], focus: [1, "focus"] }, outputs: { zoom: "zoomChange", center: "centerChange", reset: "resetChange", metadata: "metadataChange", mapInfo: "mapInfo" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c025, decls: 5, vars: 4, consts: [[3, "zone", "zoom", "options", "reset", "focus", "metadata"], [3, "src", "zoom", "reset", "styles", "features", "actions", "labels"], ["zoom", "", 1, "absolute", "bottom-16", "right-1", "flex", "flex-col", "divide-y", "divide-base-200", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-100", "text-base-content", "shadow"], [3, "zoneChange", "zoomChange", "zone", "zoom", "options", "reset", "focus", "metadata"], [3, "zoomChange", "mapInfo", "src", "zoom", "reset", "styles", "features", "actions", "labels"], ["icon", "", "matRipple", "", "matTooltipPosition", "left", 1, "rounded-none", 3, "click", "matTooltip"]], template: function InteractiveMapComponent_Template(rf, ctx) {
+_InteractiveMapComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InteractiveMapComponent, selectors: [["interactive-map"]], inputs: { src: [1, "src"], zoom: [1, "zoom"], center: [1, "center"], reset: [1, "reset"], metadata: [1, "metadata"], styles: [1, "styles"], features: [1, "features"], labels: [1, "labels"], actions: [1, "actions"], options: [1, "options"], focus: [1, "focus"] }, outputs: { zoom: "zoomChange", center: "centerChange", reset: "resetChange", metadata: "metadataChange", mapInfo: "mapInfo" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c027, decls: 5, vars: 4, consts: [[3, "zone", "zoom", "options", "reset", "focus", "metadata"], [3, "src", "zoom", "reset", "styles", "features", "actions", "labels"], ["zoom", "", 1, "absolute", "bottom-16", "right-1", "flex", "flex-col", "divide-y", "divide-base-200", "overflow-hidden", "rounded", "border", "border-base-200", "bg-base-100", "text-base-content", "shadow"], [3, "zoneChange", "zoomChange", "zone", "zoom", "options", "reset", "focus", "metadata"], [3, "zoomChange", "mapInfo", "src", "zoom", "reset", "styles", "features", "actions", "labels"], ["icon", "", "matRipple", "", "matTooltipPosition", "left", 1, "rounded-none", 3, "click", "matTooltip"]], template: function InteractiveMapComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275projectionDef(_c025);
+    \u0275\u0275projectionDef(_c027);
     \u0275\u0275conditionalCreate(0, InteractiveMapComponent_Conditional_0_Template, 2, 6, "maps-indoors", 0);
     \u0275\u0275pipe(1, "async");
     \u0275\u0275conditionalBranchCreate(2, InteractiveMapComponent_Conditional_2_Template, 2, 0, "cisco-map")(3, InteractiveMapComponent_Conditional_3_Template, 2, 7, "map-renderer", 1);
@@ -103224,7 +104201,7 @@ var InteractiveMapComponent = _InteractiveMapComponent;
 })();
 
 // libs/components/src/lib/map-pin.component.ts
-var _c026 = ["map-pin", ""];
+var _c028 = ["map-pin", ""];
 function MapPinComponent_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 1);
@@ -103276,7 +104253,7 @@ var _MapPinComponent = class _MapPinComponent {
 _MapPinComponent.\u0275fac = function MapPinComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MapPinComponent)();
 };
-_MapPinComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapPinComponent, selectors: [["", "map-pin", ""]], standalone: false, attrs: _c026, decls: 3, vars: 2, consts: [[1, "-z-1", "absolute", "bottom-1/2", "left-1/2", "flex", "w-[24rem]", "-translate-x-1/2", "flex-col", "items-center"], ["name", "message", 1, "text-gray-700", "m-2", "rounded", "bg-base-100", "p-2", "shadow"], ["name", "pin", "viewBox", "0 0 380 560", 1, "w-8", 3, "pointer-events-auto"], ["name", "pin", "viewBox", "0 0 380 560", 1, "w-8", 3, "click"], ["stroke-width", "25", "d", "M182.9,551.7c0,0.1,0.2,0.3,0.2,0.3S358.3,283,358.3,194.6c0-130.1-88.8-186.7-175.4-186.9\n            C96.3,7.9,7.5,64.5,7.5,194.6c0,88.4,175.3,357.4,175.3,357.4S182.9,551.7,182.9,551.7z M122.2,187.2c0-33.6,27.2-60.8,60.8-60.8\n            c33.6,0,60.8,27.2,60.8,60.8S216.5,248,182.9,248C149.4,248,122.2,220.8,122.2,187.2z"]], template: function MapPinComponent_Template(rf, ctx) {
+_MapPinComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapPinComponent, selectors: [["", "map-pin", ""]], standalone: false, attrs: _c028, decls: 3, vars: 2, consts: [[1, "-z-1", "absolute", "bottom-1/2", "left-1/2", "flex", "w-[24rem]", "-translate-x-1/2", "flex-col", "items-center"], ["name", "message", 1, "text-gray-700", "m-2", "rounded", "bg-base-100", "p-2", "shadow"], ["name", "pin", "viewBox", "0 0 380 560", 1, "w-8", 3, "pointer-events-auto"], ["name", "pin", "viewBox", "0 0 380 560", 1, "w-8", 3, "click"], ["stroke-width", "25", "d", "M182.9,551.7c0,0.1,0.2,0.3,0.2,0.3S358.3,283,358.3,194.6c0-130.1-88.8-186.7-175.4-186.9\n            C96.3,7.9,7.5,64.5,7.5,194.6c0,88.4,175.3,357.4,175.3,357.4S182.9,551.7,182.9,551.7z M122.2,187.2c0-33.6,27.2-60.8,60.8-60.8\n            c33.6,0,60.8,27.2,60.8,60.8S216.5,248,182.9,248C149.4,248,122.2,220.8,122.2,187.2z"]], template: function MapPinComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0);
     \u0275\u0275conditionalCreate(1, MapPinComponent_Conditional_1_Template, 2, 1, "div", 1);
@@ -103335,7 +104312,7 @@ var MapPinComponent = _MapPinComponent;
 })();
 
 // libs/components/src/lib/map-radius.component.ts
-var _c027 = ["map-radius", ""];
+var _c029 = ["map-radius", ""];
 function MapRadiusComponent_Conditional_0_Conditional_2_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "span", 4);
@@ -103418,7 +104395,7 @@ var _MapRadiusComponent = class _MapRadiusComponent {
 _MapRadiusComponent.\u0275fac = function MapRadiusComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MapRadiusComponent)();
 };
-_MapRadiusComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapRadiusComponent, selectors: [["", "map-radius", ""]], standalone: false, attrs: _c027, decls: 1, vars: 1, consts: [[3, "resize"], ["radius", "", 1, "center", "rounded-full", "border-4", "border-dashed"], ["message", "", 1, "text-gray-700", "whitespace-no-wrap", "absolute", "top-0", "m-2", "flex", "w-64", "flex-col", "rounded", "bg-base-100", "p-2", "shadow", 3, "top"], ["message", "", 1, "text-gray-700", "whitespace-no-wrap", "absolute", "top-0", "m-2", "flex", "w-64", "flex-col", "rounded", "bg-base-100", "p-2", "shadow"], [1, "text-xs"]], template: function MapRadiusComponent_Template(rf, ctx) {
+_MapRadiusComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapRadiusComponent, selectors: [["", "map-radius", ""]], standalone: false, attrs: _c029, decls: 1, vars: 1, consts: [[3, "resize"], ["radius", "", 1, "center", "rounded-full", "border-4", "border-dashed"], ["message", "", 1, "text-gray-700", "whitespace-no-wrap", "absolute", "top-0", "m-2", "flex", "w-64", "flex-col", "rounded", "bg-base-100", "p-2", "shadow", 3, "top"], ["message", "", 1, "text-gray-700", "whitespace-no-wrap", "absolute", "top-0", "m-2", "flex", "w-64", "flex-col", "rounded", "bg-base-100", "p-2", "shadow"], [1, "text-xs"]], template: function MapRadiusComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, MapRadiusComponent_Conditional_0_Template, 3, 9, "ng-container");
   }
@@ -103615,9 +104592,9 @@ var BookingLinkModalComponent = _BookingLinkModalComponent;
 })();
 
 // node_modules/@angular/material/fesm2022/radio.mjs
-var _c028 = ["input"];
-var _c114 = ["formField"];
-var _c26 = ["*"];
+var _c030 = ["input"];
+var _c115 = ["formField"];
+var _c27 = ["*"];
 var MatRadioChange = class {
   source;
   value;
@@ -104227,8 +105204,8 @@ var MatRadioButton = class _MatRadioButton {
     selectors: [["mat-radio-button"]],
     viewQuery: function MatRadioButton_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c028, 5);
-        \u0275\u0275viewQuery(_c114, 7, ElementRef);
+        \u0275\u0275viewQuery(_c030, 5);
+        \u0275\u0275viewQuery(_c115, 7, ElementRef);
       }
       if (rf & 2) {
         let _t4;
@@ -104269,7 +105246,7 @@ var MatRadioButton = class _MatRadioButton {
       change: "change"
     },
     exportAs: ["matRadioButton"],
-    ngContentSelectors: _c26,
+    ngContentSelectors: _c27,
     decls: 13,
     vars: 17,
     consts: [["formField", ""], ["input", ""], ["mat-internal-form-field", "", 3, "labelPosition"], [1, "mdc-radio"], [1, "mat-mdc-radio-touch-target", 3, "click"], ["type", "radio", "aria-invalid", "false", 1, "mdc-radio__native-control", 3, "change", "id", "checked", "disabled", "required"], [1, "mdc-radio__background"], [1, "mdc-radio__outer-circle"], [1, "mdc-radio__inner-circle"], ["mat-ripple", "", 1, "mat-radio-ripple", "mat-focus-indicator", 3, "matRippleTrigger", "matRippleDisabled", "matRippleCentered"], [1, "mat-ripple-element", "mat-radio-persistent-ripple"], [1, "mdc-label", 3, "for"]],
@@ -104863,7 +105840,7 @@ var ConfirmModalComponent = _ConfirmModalComponent;
 })();
 
 // libs/payments/src/lib/card-input-field.component.ts
-var _c029 = ["input"];
+var _c031 = ["input"];
 function CardInputFieldComponent_Conditional_9_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "img", 7);
@@ -105007,7 +105984,7 @@ _CardInputFieldComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _CardInputFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CardInputFieldComponent, selectors: [["card-input-field"]], viewQuery: function CardInputFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx._input_el, _c029, 5);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c031, 5);
   }
   if (rf & 2) {
     \u0275\u0275queryAdvance();
@@ -105748,8 +106725,6 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
         type: options2.type,
         zones: options2.zone_id || (this._settings.get("app.use_region") ? this._org.region?.id : this._org.building?.id) || this._org.organisation.id
       }).pipe(map((booked_ids) => {
-        const start = this.form.getRawValue().date;
-        const end = addMinutes(start, this.form.getRawValue().duration).valueOf();
         this._resource_use = {};
         for (const id of booked_ids) {
           this._resource_use[id] = " ";
@@ -105765,7 +106740,7 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
         });
         console.log("Resources Available:", available);
         return available;
-      }, catchError(() => of([]))));
+      }), catchError(() => of([])));
     }), tap(() => this._loading.next("")), shareReplay(1));
     this.grouped_availability = combineLatest([
       this.options,
@@ -105897,9 +106872,11 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
     const value = this.form.getRawValue();
     const booking = this._booking.getValue() || new Booking();
     if (!ignore_check) {
-      await this.checkResourceAvailable(__spreadProps(__spreadValues(__spreadValues({}, booking), value), {
-        user_email: value.user?.email || value.user_email || currentUser()?.email
+      const host = value.user?.email || value.user_email || currentUser()?.email;
+      await this._checkResourceAvailable(__spreadProps(__spreadValues(__spreadValues({}, booking), value), {
+        user_email: host
       }), this._options.getValue().type);
+      await this._checkResourceRules(value.resources, value.date, value.duration, host);
     }
     if (this._payments.enabled) {
       const receipt = await this._payments.makePayment({
@@ -106008,7 +106985,7 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
       ...await this._getNearbyResources(level2.map_id, form.asset_id, asset_list, extra_members.length)
     ];
     const group_members = unique([currentUser(), ...extra_members], "email");
-    const available = await Promise.all(group_members.map((_3, idx) => this.checkResourceAvailable(__spreadProps(__spreadValues({}, form), {
+    const available = await Promise.all(group_members.map((_3, idx) => this._checkResourceAvailable(__spreadProps(__spreadValues({}, form), {
       asset_id: resources[idx].map_id || resources[idx].id,
       user_email: _3.email
     }), type2)));
@@ -106067,18 +107044,18 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
     ref.close();
   }
   /** Check if the given resource is available for the selected user to book */
-  async checkResourceAvailable({ id, asset_id, date, duration, user_email }, type2) {
+  async _checkResourceAvailable({ id, asset_id, date, duration, user_email }, type2) {
     if (!user_email)
       throw i18n("BOOKINGS.NO_USER");
     if (type2 === "group-event")
       return true;
-    const bookings = await queryBookings({
+    const bookings = await lastValueFrom(queryBookings({
       period_start: getUnixTime(date),
       period_end: getUnixTime(date + duration * 60 * 1e3),
       type: type2,
       email: user_email,
       limit: 1e3
-    }).toPromise();
+    }));
     const active_bookings = bookings.filter((_3) => _3.status !== "declined" && _3.status !== "cancelled" && !_3.rejected);
     if (active_bookings.find((_3) => _3.asset_id === asset_id && id !== _3.id)) {
       throw i18n(asset_id.includes("@") ? "BOOKINGS.VISITOR_BOOKED" : "BOOKINGS.RESOURCE_BOOKED", { name: asset_id });
@@ -106087,6 +107064,27 @@ var _BookingFormService = class _BookingFormService extends AsyncHandler {
     if (allowed_bookings > 0 && active_bookings.filter((_3) => _3.user_email.toLowerCase() === (user_email || currentUser()?.email || "").toLowerCase() && _3.id !== id).length >= allowed_bookings) {
       const current = user_email === currentUser()?.email;
       throw i18n(current ? "BOOKINGS.CLASH_CURRENT_USER" : "BOOKINGS.CLASH_OTHER_USER", { name: user_email });
+    }
+    return true;
+  }
+  async _checkResourceRules(assets, date, duration, host) {
+    const user = await lastValueFrom(Mc(host)).catch(() => ({
+      email: host
+    }));
+    if (!assets?.length)
+      return true;
+    const rules = await nextValueFrom(this.booking_rules);
+    const resource_rules = assets?.map((space) => {
+      const bld = this._org.buildings.find((b3) => space.zone.parent_id === b3.id);
+      return rulesForResource({
+        date,
+        duration,
+        host: new User(user),
+        resource: space
+      }, rules[bld.id]);
+    });
+    if (!resource_rules.every((_3) => !_3.hidden)) {
+      throw i18n("BOOKINGS.RULES_HIDDEN", void 0, assets.length);
     }
     return true;
   }
@@ -106378,7 +107376,7 @@ var DateCalendarComponent = _DateCalendarComponent;
 })();
 
 // libs/form-fields/src/lib/date-field.component.ts
-var _c030 = ["*"];
+var _c032 = ["*"];
 function DateFieldComponent_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275text(0);
@@ -106386,7 +107384,7 @@ function DateFieldComponent_Conditional_3_Template(rf, ctx) {
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(1, 1, ctx_r0.date, ctx_r0.date_format), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(1, 1, ctx_r0.date(), ctx_r0.date_format), " ");
   }
 }
 function DateFieldComponent_Conditional_4_Template(rf, ctx) {
@@ -106471,7 +107469,7 @@ function DateFieldComponent_ng_template_11_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", ctx_r0.date || ctx_r0.now)("from", ctx_r0.from)("to", ctx_r0.until)("offset_weekday", ctx_r0.week_start());
+    \u0275\u0275property("ngModel", ctx_r0.date() || ctx_r0.now)("from", ctx_r0.from)("to", ctx_r0.until)("offset_weekday", ctx_r0.week_start());
   }
 }
 var TimezoneDiffRange;
@@ -106488,12 +107486,12 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
     return this.use_24hr() ? "HH : mm" : "h : mm a";
   }
   get start_of_day() {
-    const start = startOfDay(this.date).valueOf();
+    const start = startOfDay(this.date()).valueOf();
     const format3 = `MMM d, ${this.time_format}${this.range() === 1 ? " (z)" : ""}`;
     return this._date_pipe.transform(start, format3, this.tz);
   }
   get end_of_day() {
-    const end = endOfDay(this.date).valueOf();
+    const end = endOfDay(this.date()).valueOf();
     const format3 = `MMM d, ${this.time_format}${this.range() === 1 ? " (z)" : ""}`;
     return this._date_pipe.transform(end, format3, this.tz);
   }
@@ -106518,6 +107516,7 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
     this.short = input(false);
     this.timezone = input("");
     this.range = input(TimezoneDiffRange.Both);
+    this.date = signal(Date.now());
     this.now = Date.now();
     this._date_pipe = new DatePipe("en");
     this._local_tz = getTimezoneOffsetString(Intl.DateTimeFormat().resolvedOptions().timeZone);
@@ -106533,14 +107532,14 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
   }
   ngOnInit() {
     this._control = this._injector.get(NgControl);
-    this.date = Date.now();
+    this.date.set(Date.now());
   }
   /**
    * Update the form field value
    * @param new_value New value to set on the form field
    */
   setValue(new_value) {
-    const old_date = new Date(this.date);
+    const old_date = new Date(this.date() || Date.now());
     let new_date = set(new_value, {
       hours: old_date.getHours(),
       minutes: old_date.getMinutes()
@@ -106548,10 +107547,9 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
     if (new_date < this.from.valueOf()) {
       new_date = this.from.valueOf();
     }
-    this.date = new_date;
-    if (this._onChange) {
+    this.date.set(new_date);
+    if (this._onChange)
       this._onChange(new_date);
-    }
     this._tooltip()?.close();
   }
   /* istanbul ignore next */
@@ -106560,7 +107558,7 @@ var _DateFieldComponent = class _DateFieldComponent extends AsyncHandler {
    * @param value The new value for the component
    */
   writeValue(value) {
-    this.date = value;
+    this.date.set(value);
     this._tooltip()?.close();
   }
   /* istanbul ignore next */
@@ -106599,7 +107597,7 @@ _DateFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ ty
     useExisting: forwardRef(() => _DateFieldComponent),
     multi: true
   }
-]), \u0275\u0275InheritDefinitionFeature], ngContentSelectors: _c030, decls: 13, vars: 7, consts: [["calendar_picker", ""], ["customTooltip", "", "yPosition", "top", "matRipple", "", 1, "flex", "h-12", "w-full", "items-center", "justify-between", "rounded", "border", "border-neutral", 3, "content", "disabled"], [1, "flex", "w-1/2", "flex-1", "flex-col", "truncate", "px-4", "py-2", "text-left", "leading-tight"], [1, "text-base", "font-normal"], [1, "opacity-30"], [1, "truncate", "text-xs", "opacity-30"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "text-2xl"], [1, "error", "h-5", "p-1", "text-xs", "text-error"], [1, "relative", "w-[18rem]", "rounded", "bg-base-100", "px-2", "py-4"], [3, "ngModelChange", "ngModel", "from", "to", "offset_weekday"]], template: function DateFieldComponent_Template(rf, ctx) {
+]), \u0275\u0275InheritDefinitionFeature], ngContentSelectors: _c032, decls: 13, vars: 7, consts: [["calendar_picker", ""], ["customTooltip", "", "yPosition", "top", "matRipple", "", 1, "flex", "h-12", "w-full", "items-center", "justify-between", "rounded", "border", "border-neutral", 3, "content", "disabled"], [1, "flex", "w-1/2", "flex-1", "flex-col", "truncate", "px-4", "py-2", "text-left", "leading-tight"], [1, "text-base", "font-normal"], [1, "opacity-30"], [1, "truncate", "text-xs", "opacity-30"], [1, "flex", "h-10", "w-10", "items-center", "justify-center", "text-2xl"], [1, "error", "h-5", "p-1", "text-xs", "text-error"], [1, "relative", "w-[18rem]", "rounded", "bg-base-100", "px-2", "py-4"], [3, "ngModelChange", "ngModel", "from", "to", "offset_weekday"]], template: function DateFieldComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projectionDef();
     \u0275\u0275elementStart(0, "button", 1)(1, "div", 2)(2, "div", 3);
@@ -106620,7 +107618,7 @@ _DateFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ ty
     \u0275\u0275classProp("opacity-30", ctx.disabled());
     \u0275\u0275property("content", calendar_picker_r3)("disabled", ctx.disabled());
     \u0275\u0275advance(3);
-    \u0275\u0275conditional(ctx.date ? 3 : 4);
+    \u0275\u0275conditional(ctx.date() ? 3 : 4);
     \u0275\u0275advance(2);
     \u0275\u0275conditional(ctx.timezone() && ctx.tz ? 5 : -1);
     \u0275\u0275advance(5);
@@ -106655,8 +107653,8 @@ var DateFieldComponent = _DateFieldComponent;
                 class="flex w-1/2 flex-1 flex-col truncate px-4 py-2 text-left leading-tight"
             >
                 <div class="text-base font-normal">
-                    @if (date) {
-                        {{ date | date: date_format }}
+                    @if (date()) {
+                        {{ date() | date: date_format }}
                     } @else {
                         <span class="opacity-30">{{
                             'FORM.DATE_EMPTY' | translate
@@ -106689,7 +107687,7 @@ var DateFieldComponent = _DateFieldComponent;
         <ng-template #calendar_picker>
             <div class="relative w-[18rem] rounded bg-base-100 px-2 py-4">
                 <date-calendar
-                    [ngModel]="date || now"
+                    [ngModel]="date() || now"
                     [from]="from"
                     [to]="until"
                     [offset_weekday]="week_start()"
@@ -106714,12 +107712,12 @@ var DateFieldComponent = _DateFieldComponent;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateFieldComponent, { className: "DateFieldComponent", filePath: "libs/form-fields/src/lib/date-field.component.ts", lineNumber: 108 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DateFieldComponent, { className: "DateFieldComponent", filePath: "libs/form-fields/src/lib/date-field.component.ts", lineNumber: 109 });
 })();
 
 // libs/form-fields/src/lib/time-field.component.ts
-var _c031 = ["select"];
-var _c115 = ["*"];
+var _c033 = ["select"];
+var _c116 = ["*"];
 var _forTrack05 = ($index, $item) => $item.id;
 function TimeFieldComponent_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
@@ -106991,7 +107989,7 @@ _TimeFieldComponent.\u0275fac = /* @__PURE__ */ (() => {
 })();
 _TimeFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TimeFieldComponent, selectors: [["a-time-field"]], viewQuery: function TimeFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx.select_field, _c031, 5);
+    \u0275\u0275viewQuerySignal(ctx.select_field, _c033, 5);
   }
   if (rf & 2) {
     \u0275\u0275queryAdvance();
@@ -107002,7 +108000,7 @@ _TimeFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ ty
     useExisting: forwardRef(() => _TimeFieldComponent),
     multi: true
   }
-]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c115, decls: 14, vars: 11, consts: [["menu", "matMenu"], ["time-field", "", "matRipple", "", 1, "flex", "h-12", "w-full", "items-center", "justify-between", "rounded", "border", "border-neutral", "px-2", 3, "disabled", "matMenuTriggerFor"], [1, "flex", "w-1/2", "flex-1", "flex-col", "px-2", "text-left", "leading-tight"], [1, "truncate"], [1, "truncate", "text-xs", "opacity-30"], [1, "text-2xl"], [1, "max-h-[15rem]", "min-w-[18rem]"], ["mat-menu-item", "", 1, "text-left", 3, "value"], ["mat-menu-item", "", 1, "text-left", 3, "click", "value"], [1, "flex", "items-center", "justify-between"], [1, "flex", "flex-col", "leading-tight"], [1, ""], [1, "text-xs", "opacity-30"], [1, "ml-2", "text-2xl"]], template: function TimeFieldComponent_Template(rf, ctx) {
+]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], ngContentSelectors: _c116, decls: 14, vars: 11, consts: [["menu", "matMenu"], ["time-field", "", "matRipple", "", 1, "flex", "h-12", "w-full", "items-center", "justify-between", "rounded", "border", "border-neutral", "px-2", 3, "disabled", "matMenuTriggerFor"], [1, "flex", "w-1/2", "flex-1", "flex-col", "px-2", "text-left", "leading-tight"], [1, "truncate"], [1, "truncate", "text-xs", "opacity-30"], [1, "text-2xl"], [1, "max-h-[15rem]", "min-w-[18rem]"], ["mat-menu-item", "", 1, "text-left", 3, "value"], ["mat-menu-item", "", 1, "text-left", 3, "click", "value"], [1, "flex", "items-center", "justify-between"], [1, "flex", "flex-col", "leading-tight"], [1, ""], [1, "text-xs", "opacity-30"], [1, "ml-2", "text-2xl"]], template: function TimeFieldComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projectionDef();
     \u0275\u0275elementStart(0, "button", 1)(1, "div", 2)(2, "div", 3);
@@ -107137,13 +108135,13 @@ var TimeFieldComponent = _TimeFieldComponent;
 })();
 
 // libs/explore/src/lib/set-datetime-modal.component.ts
-var _c032 = () => ({ standalone: true });
+var _c034 = () => ({ standalone: true });
 function SetDatetimeModalComponent_Conditional_6_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 5)(1, "div", 11)(2, "label");
+    \u0275\u0275elementStart(0, "div", 6)(1, "div", 12)(2, "label");
     \u0275\u0275text(3, "Resource:");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div", 12);
+    \u0275\u0275elementStart(4, "div", 13);
     \u0275\u0275text(5);
     \u0275\u0275elementEnd()()();
   }
@@ -107155,39 +108153,39 @@ function SetDatetimeModalComponent_Conditional_6_Conditional_1_Template(rf, ctx)
 }
 function SetDatetimeModalComponent_Conditional_6_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 5)(1, "div", 6)(2, "label");
+    \u0275\u0275elementStart(0, "div", 6)(1, "div", 7)(2, "label");
     \u0275\u0275text(3, "Host");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(4, "a-user-search-field", 13);
+    \u0275\u0275element(4, "a-user-search-field", 14);
     \u0275\u0275elementEnd()();
   }
 }
 function SetDatetimeModalComponent_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "main", 2);
-    \u0275\u0275conditionalCreate(1, SetDatetimeModalComponent_Conditional_6_Conditional_1_Template, 6, 1, "div", 5);
-    \u0275\u0275conditionalCreate(2, SetDatetimeModalComponent_Conditional_6_Conditional_2_Template, 5, 0, "div", 5);
-    \u0275\u0275elementStart(3, "div", 5)(4, "div", 6)(5, "label");
+    \u0275\u0275elementStart(0, "main", 3);
+    \u0275\u0275conditionalCreate(1, SetDatetimeModalComponent_Conditional_6_Conditional_1_Template, 6, 1, "div", 6);
+    \u0275\u0275conditionalCreate(2, SetDatetimeModalComponent_Conditional_6_Conditional_2_Template, 5, 0, "div", 6);
+    \u0275\u0275elementStart(3, "div", 6)(4, "div", 7)(5, "label");
     \u0275\u0275text(6, "Date");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "a-date-field", 7);
+    \u0275\u0275elementStart(7, "a-date-field", 8);
     \u0275\u0275text(8, " Date and time must be in the future ");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(9, "div", 5)(10, "div", 8)(11, "label");
+    \u0275\u0275elementStart(9, "div", 6)(10, "div", 9)(11, "label");
     \u0275\u0275text(12, "Start Time");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "a-time-field", 9);
+    \u0275\u0275elementStart(13, "a-time-field", 10);
     \u0275\u0275listener("ngModelChange", function SetDatetimeModalComponent_Conditional_6_Template_a_time_field_ngModelChange_13_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.form.patchValue({ date: $event }));
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(14, "div", 8)(15, "label");
+    \u0275\u0275elementStart(14, "div", 9)(15, "label");
     \u0275\u0275text(16, "End Time");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(17, "a-duration-field", 10);
+    \u0275\u0275element(17, "a-duration-field", 11);
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
@@ -107201,7 +108199,7 @@ function SetDatetimeModalComponent_Conditional_6_Template(rf, ctx) {
     \u0275\u0275advance(5);
     \u0275\u0275property("to", ctx_r1.book_until);
     \u0275\u0275advance(6);
-    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(12, _c032))("use_24hr", ctx_r1.use_24hr_time);
+    \u0275\u0275property("ngModel", ctx_r1.form.value.date)("ngModelOptions", \u0275\u0275pureFunction0(12, _c034))("use_24hr", ctx_r1.use_24hr_time);
     \u0275\u0275advance(4);
     \u0275\u0275property("time", (tmp_8_0 = ctx_r1.form.get("date")) == null ? null : tmp_8_0.value)("max", 10 * 60)("min", 60)("step", 60)("use_24hr", ctx_r1.use_24hr_time);
   }
@@ -107226,16 +108224,16 @@ var _SetDatetimeModalComponent = class _SetDatetimeModalComponent {
 _SetDatetimeModalComponent.\u0275fac = function SetDatetimeModalComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _SetDatetimeModalComponent)();
 };
-_SetDatetimeModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SetDatetimeModalComponent, selectors: [["set-datetime-modal"]], decls: 11, vars: 5, consts: [["classs", "flex items-center justify-between"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "w-[24rem]", "max-w-[85vw]", "pt-4", 3, "formGroup"], [1, "flex", "w-full", "items-center", "justify-center", "border-t", "border-base-200", "p-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "mat-dialog-close"], [1, "mx-auto", "flex", "w-[640px]", "max-w-[calc(100%-2rem)]", "flex-col", "space-x-0", "sm:flex-row", "sm:space-x-2"], [1, "flex", "w-full", "flex-1", "flex-col", "sm:w-1/4"], ["formControlName", "date", 3, "to"], [1, "flex", "w-full", "flex-1", "flex-col", "sm:w-1/3"], [3, "ngModelChange", "ngModel", "ngModelOptions", "use_24hr"], ["formControlName", "duration", 3, "time", "max", "min", "step", "use_24hr"], [1, "mb-2", "flex", "w-full", "flex-1", "flex-col", "sm:w-1/4"], [1, "mb-4", "w-full", "rounded", "border", "border-base-200", "px-4", "py-3"], ["formControlName", "user", 1, "mb-4"]], template: function SetDatetimeModalComponent_Template(rf, ctx) {
+_SetDatetimeModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SetDatetimeModalComponent, selectors: [["set-datetime-modal"]], decls: 11, vars: 5, consts: [[1, "m-2", "flex", "h-14", "w-[calc(100%-1rem)]", "items-center", "justify-between", "rounded", "border-none", "bg-base-200", "p-2"], [1, "px-2", "text-xl", "font-medium"], ["icon", "", "matRipple", "", "mat-dialog-close", ""], [1, "w-[24rem]", "max-w-[85vw]", 3, "formGroup"], [1, "mx-2", "mb-2", "flex", "w-[calc(100%-1rem)]", "items-center", "justify-end", "rounded", "border-none", "bg-base-200", "p-2"], ["btn", "", "matRipple", "", 1, "w-32", 3, "mat-dialog-close"], [1, "mx-auto", "flex", "w-[640px]", "max-w-[calc(100%-2rem)]", "flex-col", "space-x-0", "sm:flex-row", "sm:space-x-2"], [1, "flex", "w-full", "flex-1", "flex-col", "sm:w-1/4"], ["formControlName", "date", 3, "to"], [1, "flex", "w-full", "flex-1", "flex-col", "sm:w-1/3"], [3, "ngModelChange", "ngModel", "ngModelOptions", "use_24hr"], ["formControlName", "duration", 3, "time", "max", "min", "step", "use_24hr"], [1, "mb-2", "flex", "w-full", "flex-1", "flex-col", "sm:w-1/4"], [1, "mb-4", "w-full", "rounded", "border", "border-base-200", "px-4", "py-3"], ["formControlName", "user", 1, "mb-4"]], template: function SetDatetimeModalComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "header", 0)(1, "h2");
+    \u0275\u0275elementStart(0, "header", 0)(1, "h2", 1);
     \u0275\u0275text(2, "Set date and time");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "button", 1)(4, "icon");
+    \u0275\u0275elementStart(3, "button", 2)(4, "icon");
     \u0275\u0275text(5, "close");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275conditionalCreate(6, SetDatetimeModalComponent_Conditional_6_Template, 18, 13, "main", 2);
-    \u0275\u0275elementStart(7, "footer", 3)(8, "button", 4);
+    \u0275\u0275conditionalCreate(6, SetDatetimeModalComponent_Conditional_6_Template, 18, 13, "main", 3);
+    \u0275\u0275elementStart(7, "footer", 4)(8, "button", 5);
     \u0275\u0275text(9);
     \u0275\u0275pipe(10, "translate");
     \u0275\u0275elementEnd()();
@@ -107272,14 +108270,16 @@ var SetDatetimeModalComponent = _SetDatetimeModalComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SetDatetimeModalComponent, [{
     type: Component,
     args: [{ selector: "set-datetime-modal", template: `
-        <header classs="flex items-center justify-between">
-            <h2>Set date and time</h2>
+        <header
+            class="m-2 flex h-14 w-[calc(100%-1rem)] items-center justify-between rounded border-none bg-base-200 p-2"
+        >
+            <h2 class="px-2 text-xl font-medium">Set date and time</h2>
             <button icon matRipple mat-dialog-close>
                 <icon>close</icon>
             </button>
         </header>
         @if (form) {
-            <main [formGroup]="form" class="w-[24rem] max-w-[85vw] pt-4">
+            <main [formGroup]="form" class="w-[24rem] max-w-[85vw]">
                 @if (resource) {
                     <div
                         class="mx-auto flex w-[640px] max-w-[calc(100%-2rem)] flex-col space-x-0 sm:flex-row sm:space-x-2"
@@ -107349,7 +108349,7 @@ var SetDatetimeModalComponent = _SetDatetimeModalComponent;
             </main>
         }
         <footer
-            class="flex w-full items-center justify-center border-t border-base-200 p-2"
+            class="mx-2 mb-2 flex w-[calc(100%-1rem)] items-center justify-end rounded border-none bg-base-200 p-2"
         >
             <button btn matRipple [mat-dialog-close]="form.value" class="w-32">
                 {{ 'COMMON.CONTINUE' | translate }}
@@ -107370,7 +108370,7 @@ var SetDatetimeModalComponent = _SetDatetimeModalComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SetDatetimeModalComponent, { className: "SetDatetimeModalComponent", filePath: "libs/explore/src/lib/set-datetime-modal.component.ts", lineNumber: 121 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SetDatetimeModalComponent, { className: "SetDatetimeModalComponent", filePath: "libs/explore/src/lib/set-datetime-modal.component.ts", lineNumber: 124 });
 })();
 
 // libs/explore/src/lib/explore-desks.service.ts
@@ -108154,8 +109154,8 @@ var ExploreParkingService = _ExploreParkingService;
 })();
 
 // libs/components/src/lib/map-canvas.component.ts
-var _c033 = ["canvas"];
-var _c116 = ["map-canvas", ""];
+var _c035 = ["canvas"];
+var _c117 = ["map-canvas", ""];
 var _MapCanvasComponent = class _MapCanvasComponent extends AsyncHandler {
   get ratioed_height() {
     return +(this.width * this.ratio).toFixed(2);
@@ -108249,12 +109249,12 @@ _MapCanvasComponent.\u0275fac = function MapCanvasComponent_Factory(__ngFactoryT
 };
 _MapCanvasComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MapCanvasComponent, selectors: [["", "map-canvas", ""]], viewQuery: function MapCanvasComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx.canvas_element, _c033, 5);
+    \u0275\u0275viewQuerySignal(ctx.canvas_element, _c035, 5);
   }
   if (rf & 2) {
     \u0275\u0275queryAdvance();
   }
-}, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c116, decls: 2, vars: 4, consts: [["canvas", ""], [1, "absolute", "left-1/2", "top-1/2", "-translate-x-1/2", "-translate-y-1/2"]], template: function MapCanvasComponent_Template(rf, ctx) {
+}, standalone: false, features: [\u0275\u0275InheritDefinitionFeature], attrs: _c117, decls: 2, vars: 4, consts: [["canvas", ""], [1, "absolute", "left-1/2", "top-1/2", "-translate-x-1/2", "-translate-y-1/2"]], template: function MapCanvasComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275element(0, "canvas", 1, 0);
   }
@@ -108629,7 +109629,7 @@ function getCenterPoint(points) {
 }
 
 // libs/explore/src/lib/explore-map-view.component.ts
-var _c034 = () => ({ controls: true });
+var _c036 = () => ({ controls: true });
 function ExploreMapViewComponent_Conditional_6_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
@@ -108865,9 +109865,10 @@ var _ExploreMapViewComponent = class _ExploreMapViewComponent extends AsyncHandl
     if (!locations?.length)
       throw i18n("EXPLORE.LOCATE_USER_NOT_FOUND");
     let loc = locations.find(({ position }) => typeof position !== "string" || position in this.map_info);
-    if (!loc) {
+    if (!loc)
       loc = locations[0];
-      notifyWarn(i18n(`EXPLORE.LOCATE_USER_FOUND_NO_PIN`));
+    if (typeof loc.position !== "string") {
+      notifyWarn(i18n(`EXPLORE.LOCATE_USER_FOUND_NO_PIN`, { type: loc.type }));
     }
     this._state.setLevel(this._org.levelWithID([locations[0]?.level])?.id);
     const pos = loc.position;
@@ -108920,7 +109921,7 @@ _ExploreMapViewComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent
     \u0275\u0275conditionalCreate(9, ExploreMapViewComponent_Conditional_9_Template, 2, 0, "button", 3);
   }
   if (rf & 2) {
-    \u0275\u0275property("src", \u0275\u0275pipeBind1(1, 10, ctx.url))("styles", \u0275\u0275pipeBind1(2, 12, ctx.styles))("features", \u0275\u0275pipeBind1(3, 14, ctx.features))("actions", \u0275\u0275pipeBind1(4, 16, ctx.actions))("labels", \u0275\u0275pipeBind1(5, 18, ctx.labels))("focus", ctx.locate)("options", \u0275\u0275pureFunction0(22, _c034));
+    \u0275\u0275property("src", \u0275\u0275pipeBind1(1, 10, ctx.url))("styles", \u0275\u0275pipeBind1(2, 12, ctx.styles))("features", \u0275\u0275pipeBind1(3, 14, ctx.features))("actions", \u0275\u0275pipeBind1(4, 16, ctx.actions))("labels", \u0275\u0275pipeBind1(5, 18, ctx.labels))("focus", ctx.locate)("options", \u0275\u0275pureFunction0(22, _c036));
     \u0275\u0275advance(6);
     \u0275\u0275conditional(!\u0275\u0275pipeBind1(7, 20, ctx.use_mapsindoors$) ? 6 : -1);
     \u0275\u0275advance(2);
@@ -109026,8 +110027,8 @@ var ExploreMapViewComponent = _ExploreMapViewComponent;
 })();
 
 // libs/components/src/lib/virtual-keyboard.component.ts
-var _c035 = ["keyboard", ""];
-var _c117 = ["*"];
+var _c037 = ["keyboard", ""];
+var _c118 = ["*"];
 var _forTrack06 = ($index, $item) => $item[0];
 function VirtualKeyboardComponent_ng_template_1_For_2_For_2_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
@@ -109196,7 +110197,7 @@ _VirtualKeyboardComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponen
       return ctx.onBlur();
     });
   }
-}, inputs: { keyset: [1, "keyset"] }, outputs: { keyset: "keysetChange" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c035, ngContentSelectors: _c117, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["keyboard-view", "", 1, "flex", "w-screen", "flex-col", "space-y-4", "border-t", "border-base-200", "bg-base-200", "p-2"], ["row", "", 1, "flex", "items-center", "justify-center", "space-x-2"], ["matRipple", "", "tabindex", "0", 1, "relative", "cursor-pointer", "rounded-xl", "border", "border-base-200", "bg-base-100", "p-2", 3, "special", "space"], ["matRipple", "", "tabindex", "0", 1, "relative", "cursor-pointer", "rounded-xl", "border", "border-base-200", "bg-base-100", "p-2", 3, "focus", "click"], ["dot", "", 1, "absolute", "right-2", "top-2", "h-2", "w-2", "rounded-full", "bg-base-200", 3, "bg-success"], ["dot", "", 1, "absolute", "right-2", "top-2", "h-2", "w-2", "rounded-full", "bg-base-200"]], template: function VirtualKeyboardComponent_Template(rf, ctx) {
+}, inputs: { keyset: [1, "keyset"] }, outputs: { keyset: "keysetChange" }, features: [\u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature], attrs: _c037, ngContentSelectors: _c118, decls: 2, vars: 0, consts: [["cdk-portal", ""], ["keyboard-view", "", 1, "flex", "w-screen", "flex-col", "space-y-4", "border-t", "border-base-200", "bg-base-200", "p-2"], ["row", "", 1, "flex", "items-center", "justify-center", "space-x-2"], ["matRipple", "", "tabindex", "0", 1, "relative", "cursor-pointer", "rounded-xl", "border", "border-base-200", "bg-base-100", "p-2", 3, "special", "space"], ["matRipple", "", "tabindex", "0", 1, "relative", "cursor-pointer", "rounded-xl", "border", "border-base-200", "bg-base-100", "p-2", 3, "focus", "click"], ["dot", "", 1, "absolute", "right-2", "top-2", "h-2", "w-2", "rounded-full", "bg-base-200", 3, "bg-success"], ["dot", "", 1, "absolute", "right-2", "top-2", "h-2", "w-2", "rounded-full", "bg-base-200"]], template: function VirtualKeyboardComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275projectionDef();
     \u0275\u0275projection(0);
@@ -109467,8 +110468,8 @@ var ExploreSearchService = _ExploreSearchService;
 })();
 
 // libs/explore/src/lib/explore-search.component.ts
-var _c036 = ["input"];
-var _c118 = ["button"];
+var _c038 = ["input"];
+var _c119 = ["button"];
 var _forTrack07 = ($index, $item) => $item.name;
 function ExploreSearchComponent_Conditional_9_Template(rf, ctx) {
   if (rf & 1) {
@@ -109611,8 +110612,8 @@ _ExploreSearchComponent.\u0275fac = function ExploreSearchComponent_Factory(__ng
 };
 _ExploreSearchComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExploreSearchComponent, selectors: [["explore-search"]], viewQuery: function ExploreSearchComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx._input_el, _c036, 5);
-    \u0275\u0275viewQuerySignal(ctx._button_el, _c118, 5);
+    \u0275\u0275viewQuerySignal(ctx._input_el, _c038, 5);
+    \u0275\u0275viewQuerySignal(ctx._button_el, _c119, 5);
   }
   if (rf & 2) {
     \u0275\u0275queryAdvance(2);
@@ -109793,7 +110794,7 @@ var ExploreSearchComponent = _ExploreSearchComponent;
 })();
 
 // node_modules/@angular/material/fesm2022/module-CWxMD37a.mjs
-var _c037 = ["tooltip"];
+var _c039 = ["tooltip"];
 var SCROLL_THROTTLE_MS = 20;
 function getMatTooltipInvalidPositionError(position) {
   return Error(`Tooltip position "${position}" is invalid.`);
@@ -110653,7 +111654,7 @@ var TooltipComponent = class _TooltipComponent {
     selectors: [["mat-tooltip-component"]],
     viewQuery: function TooltipComponent_Query(rf, ctx) {
       if (rf & 1) {
-        \u0275\u0275viewQuery(_c037, 7);
+        \u0275\u0275viewQuery(_c039, 7);
       }
       if (rf & 2) {
         let _t4;
@@ -132058,7 +133059,7 @@ _GlobalBannerComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
   if (rf & 2) {
     \u0275\u0275conditional(!\u0275\u0275pipeBind1(1, 1, ctx.has_been_closed) && \u0275\u0275pipeBind1(2, 3, ctx.banner) ? 0 : -1);
   }
-}, dependencies: [CommonModule, AsyncPipe], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
+}, dependencies: [CommonModule, AsyncPipe, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */"] });
 var GlobalBannerComponent = _GlobalBannerComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GlobalBannerComponent, [{
@@ -132086,11 +133087,11 @@ var GlobalBannerComponent = _GlobalBannerComponent;
                 </button>
             </div>
         }
-    `, imports: [CommonModule], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
+    `, imports: [CommonModule, IconComponent], styles: ["/* angular:styles/component:css;90c7ea3359a529ac871b05907f35a5977bf5db6008218c40ad219ab280ccfa5d;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/global-banner.component.ts */\n:host {\n  display: block;\n  width: 100%;\n}\n/*# sourceMappingURL=global-banner.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 50 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalBannerComponent, { className: "GlobalBannerComponent", filePath: "libs/components/src/lib/global-banner.component.ts", lineNumber: 51 });
 })();
 
 // libs/components/src/lib/global-loading.component.ts
@@ -132119,17 +133120,17 @@ function GlobalLoadingComponent_Conditional_1_Template(rf, ctx) {
 }
 var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler {
   constructor() {
-    super();
+    super(...arguments);
     this._org = inject(OrganisationService);
     this._settings = inject(SettingsService);
-    this.loading = signal(false);
-    this.online = signal(false);
+    this.loading = signal(true);
+    this.online = signal(true);
   }
   async ngOnInit() {
     this.loading.set(true);
-    this.online.set(vs());
     await firstTruthyValueFrom(this._org.initialised);
     await firstTruthyValueFrom(this._settings.initialised);
+    this.online.set(vs());
     this.interval("has_token", () => {
       this.online.set(vs());
       if (!ve() || !Y2())
@@ -132140,10 +133141,13 @@ var _GlobalLoadingComponent = class _GlobalLoadingComponent extends AsyncHandler
     }, 1e3);
   }
 };
-_GlobalLoadingComponent.\u0275fac = function GlobalLoadingComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _GlobalLoadingComponent)();
-};
-_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-50", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-40", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
+_GlobalLoadingComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275GlobalLoadingComponent_BaseFactory;
+  return function GlobalLoadingComponent_Factory(__ngFactoryType__) {
+    return (\u0275GlobalLoadingComponent_BaseFactory || (\u0275GlobalLoadingComponent_BaseFactory = \u0275\u0275getInheritedFactory(_GlobalLoadingComponent)))(__ngFactoryType__ || _GlobalLoadingComponent);
+  };
+})();
+_GlobalLoadingComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GlobalLoadingComponent, selectors: [["global-loading"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 2, vars: 2, consts: [[1, "fixed", "bottom-2", "left-1/2", "z-[9999]", "-translate-x-1/2", "rounded-3xl", "bg-error", "px-4", "py-2", "text-xs", "text-white", "shadow"], ["loader", "", 1, "pointer-events-auto", "fixed", "inset-0", "z-[9998]", "flex", "items-center", "justify-center", "bg-base-100"], [3, "diameter"]], template: function GlobalLoadingComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275conditionalCreate(0, GlobalLoadingComponent_Conditional_0_Template, 3, 3, "div", 0);
     \u0275\u0275conditionalCreate(1, GlobalLoadingComponent_Conditional_1_Template, 2, 1, "div", 1);
@@ -132170,7 +133174,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
     args: [{ selector: "global-loading", template: `
         @if (!online()) {
             <div
-                class="fixed bottom-2 left-1/2 z-50 -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
+                class="fixed bottom-2 left-1/2 z-[9999] -translate-x-1/2 rounded-3xl bg-error px-4 py-2 text-xs text-white shadow"
             >
                 {{ 'COMMON.SERVER_DOWN' | translate }}
             </div>
@@ -132178,7 +133182,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
         @if (loading()) {
             <div
                 loader
-                class="pointer-events-auto fixed inset-0 z-40 flex items-center justify-center bg-base-100"
+                class="pointer-events-auto fixed inset-0 z-[9998] flex items-center justify-center bg-base-100"
             >
                 <mat-spinner [diameter]="64"></mat-spinner>
             </div>
@@ -132193,7 +133197,7 @@ var GlobalLoadingComponent = _GlobalLoadingComponent;
 }
 /*# sourceMappingURL=global-loading.component.css.map */
 `] }]
-  }], () => [], null);
+  }], null, null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GlobalLoadingComponent, { className: "GlobalLoadingComponent", filePath: "libs/components/src/lib/global-loading.component.ts", lineNumber: 46 });
@@ -132642,874 +133646,6 @@ var UnauthorisedComponent = _UnauthorisedComponent;
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UnauthorisedComponent, { className: "UnauthorisedComponent", filePath: "libs/components/src/lib/unauthorised.component.ts", lineNumber: 43 });
-})();
-
-// node_modules/@angular/material/fesm2022/checkbox.mjs
-var _c038 = ["input"];
-var _c119 = ["label"];
-var _c27 = ["*"];
-var MAT_CHECKBOX_DEFAULT_OPTIONS = new InjectionToken("mat-checkbox-default-options", {
-  providedIn: "root",
-  factory: MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY
-});
-function MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY() {
-  return {
-    color: "accent",
-    clickAction: "check-indeterminate",
-    disabledInteractive: false
-  };
-}
-var TransitionCheckState;
-(function(TransitionCheckState2) {
-  TransitionCheckState2[TransitionCheckState2["Init"] = 0] = "Init";
-  TransitionCheckState2[TransitionCheckState2["Checked"] = 1] = "Checked";
-  TransitionCheckState2[TransitionCheckState2["Unchecked"] = 2] = "Unchecked";
-  TransitionCheckState2[TransitionCheckState2["Indeterminate"] = 3] = "Indeterminate";
-})(TransitionCheckState || (TransitionCheckState = {}));
-var MatCheckboxChange = class {
-  /** The source checkbox of the event. */
-  source;
-  /** The new `checked` value of the checkbox. */
-  checked;
-};
-var defaults2 = MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY();
-var MatCheckbox = class _MatCheckbox {
-  _elementRef = inject(ElementRef);
-  _changeDetectorRef = inject(ChangeDetectorRef);
-  _ngZone = inject(NgZone);
-  _animationsDisabled = _animationsDisabled();
-  _options = inject(MAT_CHECKBOX_DEFAULT_OPTIONS, {
-    optional: true
-  });
-  /** Focuses the checkbox. */
-  focus() {
-    this._inputElement.nativeElement.focus();
-  }
-  /** Creates the change event that will be emitted by the checkbox. */
-  _createChangeEvent(isChecked) {
-    const event = new MatCheckboxChange();
-    event.source = this;
-    event.checked = isChecked;
-    return event;
-  }
-  /** Gets the element on which to add the animation CSS classes. */
-  _getAnimationTargetElement() {
-    return this._inputElement?.nativeElement;
-  }
-  /** CSS classes to add when transitioning between the different checkbox states. */
-  _animationClasses = {
-    uncheckedToChecked: "mdc-checkbox--anim-unchecked-checked",
-    uncheckedToIndeterminate: "mdc-checkbox--anim-unchecked-indeterminate",
-    checkedToUnchecked: "mdc-checkbox--anim-checked-unchecked",
-    checkedToIndeterminate: "mdc-checkbox--anim-checked-indeterminate",
-    indeterminateToChecked: "mdc-checkbox--anim-indeterminate-checked",
-    indeterminateToUnchecked: "mdc-checkbox--anim-indeterminate-unchecked"
-  };
-  /**
-   * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
-   * take precedence so this may be omitted.
-   */
-  ariaLabel = "";
-  /**
-   * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
-   */
-  ariaLabelledby = null;
-  /** The 'aria-describedby' attribute is read after the element's label and field type. */
-  ariaDescribedby;
-  /**
-   * Users can specify the `aria-expanded` attribute which will be forwarded to the input element
-   */
-  ariaExpanded;
-  /**
-   * Users can specify the `aria-controls` attribute which will be forwarded to the input element
-   */
-  ariaControls;
-  /** Users can specify the `aria-owns` attribute which will be forwarded to the input element */
-  ariaOwns;
-  _uniqueId;
-  /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
-  id;
-  /** Returns the unique id for the visual hidden input. */
-  get inputId() {
-    return `${this.id || this._uniqueId}-input`;
-  }
-  /** Whether the checkbox is required. */
-  required;
-  /** Whether the label should appear after or before the checkbox. Defaults to 'after' */
-  labelPosition = "after";
-  /** Name value will be applied to the input element if present */
-  name = null;
-  /** Event emitted when the checkbox's `checked` value changes. */
-  change = new EventEmitter();
-  /** Event emitted when the checkbox's `indeterminate` value changes. */
-  indeterminateChange = new EventEmitter();
-  /** The value attribute of the native input element */
-  value;
-  /** Whether the checkbox has a ripple. */
-  disableRipple;
-  /** The native `<input type="checkbox">` element */
-  _inputElement;
-  /** The native `<label>` element */
-  _labelElement;
-  /** Tabindex for the checkbox. */
-  tabIndex;
-  // TODO(crisbeto): this should be a ThemePalette, but some internal apps were abusing
-  // the lack of type checking previously and assigning random strings.
-  /**
-   * Theme color of the checkbox. This API is supported in M2 themes only, it
-   * has no effect in M3 themes. For color customization in M3, see https://material.angular.dev/components/checkbox/styling.
-   *
-   * For information on applying color variants in M3, see
-   * https://material.angular.dev/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
-   */
-  color;
-  /** Whether the checkbox should remain interactive when it is disabled. */
-  disabledInteractive;
-  /**
-   * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
-   * @docs-private
-   */
-  _onTouched = () => {
-  };
-  _currentAnimationClass = "";
-  _currentCheckState = TransitionCheckState.Init;
-  _controlValueAccessorChangeFn = () => {
-  };
-  _validatorChangeFn = () => {
-  };
-  constructor() {
-    inject(_CdkPrivateStyleLoader).load(_StructuralStylesLoader);
-    const tabIndex = inject(new HostAttributeToken("tabindex"), {
-      optional: true
-    });
-    this._options = this._options || defaults2;
-    this.color = this._options.color || defaults2.color;
-    this.tabIndex = tabIndex == null ? 0 : parseInt(tabIndex) || 0;
-    this.id = this._uniqueId = inject(_IdGenerator).getId("mat-mdc-checkbox-");
-    this.disabledInteractive = this._options?.disabledInteractive ?? false;
-  }
-  ngOnChanges(changes) {
-    if (changes["required"]) {
-      this._validatorChangeFn();
-    }
-  }
-  ngAfterViewInit() {
-    this._syncIndeterminate(this.indeterminate);
-  }
-  /** Whether the checkbox is checked. */
-  get checked() {
-    return this._checked;
-  }
-  set checked(value) {
-    if (value != this.checked) {
-      this._checked = value;
-      this._changeDetectorRef.markForCheck();
-    }
-  }
-  _checked = false;
-  /** Whether the checkbox is disabled. */
-  get disabled() {
-    return this._disabled;
-  }
-  set disabled(value) {
-    if (value !== this.disabled) {
-      this._disabled = value;
-      this._changeDetectorRef.markForCheck();
-    }
-  }
-  _disabled = false;
-  /**
-   * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
-   * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
-   * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
-   * set to false.
-   */
-  get indeterminate() {
-    return this._indeterminate();
-  }
-  set indeterminate(value) {
-    const changed = value != this._indeterminate();
-    this._indeterminate.set(value);
-    if (changed) {
-      if (value) {
-        this._transitionCheckState(TransitionCheckState.Indeterminate);
-      } else {
-        this._transitionCheckState(this.checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
-      }
-      this.indeterminateChange.emit(value);
-    }
-    this._syncIndeterminate(value);
-  }
-  _indeterminate = signal(false);
-  _isRippleDisabled() {
-    return this.disableRipple || this.disabled;
-  }
-  /** Method being called whenever the label text changes. */
-  _onLabelTextChange() {
-    this._changeDetectorRef.detectChanges();
-  }
-  // Implemented as part of ControlValueAccessor.
-  writeValue(value) {
-    this.checked = !!value;
-  }
-  // Implemented as part of ControlValueAccessor.
-  registerOnChange(fn3) {
-    this._controlValueAccessorChangeFn = fn3;
-  }
-  // Implemented as part of ControlValueAccessor.
-  registerOnTouched(fn3) {
-    this._onTouched = fn3;
-  }
-  // Implemented as part of ControlValueAccessor.
-  setDisabledState(isDisabled) {
-    this.disabled = isDisabled;
-  }
-  // Implemented as a part of Validator.
-  validate(control) {
-    return this.required && control.value !== true ? {
-      "required": true
-    } : null;
-  }
-  // Implemented as a part of Validator.
-  registerOnValidatorChange(fn3) {
-    this._validatorChangeFn = fn3;
-  }
-  _transitionCheckState(newState) {
-    let oldState = this._currentCheckState;
-    let element = this._getAnimationTargetElement();
-    if (oldState === newState || !element) {
-      return;
-    }
-    if (this._currentAnimationClass) {
-      element.classList.remove(this._currentAnimationClass);
-    }
-    this._currentAnimationClass = this._getAnimationClassForCheckStateTransition(oldState, newState);
-    this._currentCheckState = newState;
-    if (this._currentAnimationClass.length > 0) {
-      element.classList.add(this._currentAnimationClass);
-      const animationClass = this._currentAnimationClass;
-      this._ngZone.runOutsideAngular(() => {
-        setTimeout(() => {
-          element.classList.remove(animationClass);
-        }, 1e3);
-      });
-    }
-  }
-  _emitChangeEvent() {
-    this._controlValueAccessorChangeFn(this.checked);
-    this.change.emit(this._createChangeEvent(this.checked));
-    if (this._inputElement) {
-      this._inputElement.nativeElement.checked = this.checked;
-    }
-  }
-  /** Toggles the `checked` state of the checkbox. */
-  toggle() {
-    this.checked = !this.checked;
-    this._controlValueAccessorChangeFn(this.checked);
-  }
-  _handleInputClick() {
-    const clickAction = this._options?.clickAction;
-    if (!this.disabled && clickAction !== "noop") {
-      if (this.indeterminate && clickAction !== "check") {
-        Promise.resolve().then(() => {
-          this._indeterminate.set(false);
-          this.indeterminateChange.emit(false);
-        });
-      }
-      this._checked = !this._checked;
-      this._transitionCheckState(this._checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
-      this._emitChangeEvent();
-    } else if (this.disabled && this.disabledInteractive || !this.disabled && clickAction === "noop") {
-      this._inputElement.nativeElement.checked = this.checked;
-      this._inputElement.nativeElement.indeterminate = this.indeterminate;
-    }
-  }
-  _onInteractionEvent(event) {
-    event.stopPropagation();
-  }
-  _onBlur() {
-    Promise.resolve().then(() => {
-      this._onTouched();
-      this._changeDetectorRef.markForCheck();
-    });
-  }
-  _getAnimationClassForCheckStateTransition(oldState, newState) {
-    if (this._animationsDisabled) {
-      return "";
-    }
-    switch (oldState) {
-      case TransitionCheckState.Init:
-        if (newState === TransitionCheckState.Checked) {
-          return this._animationClasses.uncheckedToChecked;
-        } else if (newState == TransitionCheckState.Indeterminate) {
-          return this._checked ? this._animationClasses.checkedToIndeterminate : this._animationClasses.uncheckedToIndeterminate;
-        }
-        break;
-      case TransitionCheckState.Unchecked:
-        return newState === TransitionCheckState.Checked ? this._animationClasses.uncheckedToChecked : this._animationClasses.uncheckedToIndeterminate;
-      case TransitionCheckState.Checked:
-        return newState === TransitionCheckState.Unchecked ? this._animationClasses.checkedToUnchecked : this._animationClasses.checkedToIndeterminate;
-      case TransitionCheckState.Indeterminate:
-        return newState === TransitionCheckState.Checked ? this._animationClasses.indeterminateToChecked : this._animationClasses.indeterminateToUnchecked;
-    }
-    return "";
-  }
-  /**
-   * Syncs the indeterminate value with the checkbox DOM node.
-   *
-   * We sync `indeterminate` directly on the DOM node, because in Ivy the check for whether a
-   * property is supported on an element boils down to `if (propName in element)`. Domino's
-   * HTMLInputElement doesn't have an `indeterminate` property so Ivy will warn during
-   * server-side rendering.
-   */
-  _syncIndeterminate(value) {
-    const nativeCheckbox = this._inputElement;
-    if (nativeCheckbox) {
-      nativeCheckbox.nativeElement.indeterminate = value;
-    }
-  }
-  _onInputClick() {
-    this._handleInputClick();
-  }
-  _onTouchTargetClick() {
-    this._handleInputClick();
-    if (!this.disabled) {
-      this._inputElement.nativeElement.focus();
-    }
-  }
-  /**
-   *  Prevent click events that come from the `<label/>` element from bubbling. This prevents the
-   *  click handler on the host from triggering twice when clicking on the `<label/>` element. After
-   *  the click event on the `<label/>` propagates, the browsers dispatches click on the associated
-   *  `<input/>`. By preventing clicks on the label by bubbling, we ensure only one click event
-   *  bubbles when the label is clicked.
-   */
-  _preventBubblingFromLabel(event) {
-    if (!!event.target && this._labelElement.nativeElement.contains(event.target)) {
-      event.stopPropagation();
-    }
-  }
-  static \u0275fac = function MatCheckbox_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatCheckbox)();
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
-    type: _MatCheckbox,
-    selectors: [["mat-checkbox"]],
-    viewQuery: function MatCheckbox_Query(rf, ctx) {
-      if (rf & 1) {
-        \u0275\u0275viewQuery(_c038, 5);
-        \u0275\u0275viewQuery(_c119, 5);
-      }
-      if (rf & 2) {
-        let _t4;
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._inputElement = _t4.first);
-        \u0275\u0275queryRefresh(_t4 = \u0275\u0275loadQuery()) && (ctx._labelElement = _t4.first);
-      }
-    },
-    hostAttrs: [1, "mat-mdc-checkbox"],
-    hostVars: 16,
-    hostBindings: function MatCheckbox_HostBindings(rf, ctx) {
-      if (rf & 2) {
-        \u0275\u0275domProperty("id", ctx.id);
-        \u0275\u0275attribute("tabindex", null)("aria-label", null)("aria-labelledby", null);
-        \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "mat-accent");
-        \u0275\u0275classProp("_mat-animation-noopable", ctx._animationsDisabled)("mdc-checkbox--disabled", ctx.disabled)("mat-mdc-checkbox-disabled", ctx.disabled)("mat-mdc-checkbox-checked", ctx.checked)("mat-mdc-checkbox-disabled-interactive", ctx.disabledInteractive);
-      }
-    },
-    inputs: {
-      ariaLabel: [0, "aria-label", "ariaLabel"],
-      ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
-      ariaDescribedby: [0, "aria-describedby", "ariaDescribedby"],
-      ariaExpanded: [2, "aria-expanded", "ariaExpanded", booleanAttribute],
-      ariaControls: [0, "aria-controls", "ariaControls"],
-      ariaOwns: [0, "aria-owns", "ariaOwns"],
-      id: "id",
-      required: [2, "required", "required", booleanAttribute],
-      labelPosition: "labelPosition",
-      name: "name",
-      value: "value",
-      disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute],
-      tabIndex: [2, "tabIndex", "tabIndex", (value) => value == null ? void 0 : numberAttribute(value)],
-      color: "color",
-      disabledInteractive: [2, "disabledInteractive", "disabledInteractive", booleanAttribute],
-      checked: [2, "checked", "checked", booleanAttribute],
-      disabled: [2, "disabled", "disabled", booleanAttribute],
-      indeterminate: [2, "indeterminate", "indeterminate", booleanAttribute]
-    },
-    outputs: {
-      change: "change",
-      indeterminateChange: "indeterminateChange"
-    },
-    exportAs: ["matCheckbox"],
-    features: [\u0275\u0275ProvidersFeature([{
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => _MatCheckbox),
-      multi: true
-    }, {
-      provide: NG_VALIDATORS,
-      useExisting: _MatCheckbox,
-      multi: true
-    }]), \u0275\u0275NgOnChangesFeature],
-    ngContentSelectors: _c27,
-    decls: 15,
-    vars: 23,
-    consts: [["checkbox", ""], ["input", ""], ["label", ""], ["mat-internal-form-field", "", 3, "click", "labelPosition"], [1, "mdc-checkbox"], [1, "mat-mdc-checkbox-touch-target", 3, "click"], ["type", "checkbox", 1, "mdc-checkbox__native-control", 3, "blur", "click", "change", "checked", "indeterminate", "disabled", "id", "required", "tabIndex"], [1, "mdc-checkbox__ripple"], [1, "mdc-checkbox__background"], ["focusable", "false", "viewBox", "0 0 24 24", "aria-hidden", "true", 1, "mdc-checkbox__checkmark"], ["fill", "none", "d", "M1.73,12.91 8.1,19.28 22.79,4.59", 1, "mdc-checkbox__checkmark-path"], [1, "mdc-checkbox__mixedmark"], ["mat-ripple", "", 1, "mat-mdc-checkbox-ripple", "mat-focus-indicator", 3, "matRippleTrigger", "matRippleDisabled", "matRippleCentered"], [1, "mdc-label", 3, "for"]],
-    template: function MatCheckbox_Template(rf, ctx) {
-      if (rf & 1) {
-        const _r1 = \u0275\u0275getCurrentView();
-        \u0275\u0275projectionDef();
-        \u0275\u0275elementStart(0, "div", 3);
-        \u0275\u0275listener("click", function MatCheckbox_Template_div_click_0_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx._preventBubblingFromLabel($event));
-        });
-        \u0275\u0275elementStart(1, "div", 4, 0)(3, "div", 5);
-        \u0275\u0275listener("click", function MatCheckbox_Template_div_click_3_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx._onTouchTargetClick());
-        });
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(4, "input", 6, 1);
-        \u0275\u0275listener("blur", function MatCheckbox_Template_input_blur_4_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx._onBlur());
-        })("click", function MatCheckbox_Template_input_click_4_listener() {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx._onInputClick());
-        })("change", function MatCheckbox_Template_input_change_4_listener($event) {
-          \u0275\u0275restoreView(_r1);
-          return \u0275\u0275resetView(ctx._onInteractionEvent($event));
-        });
-        \u0275\u0275elementEnd();
-        \u0275\u0275element(6, "div", 7);
-        \u0275\u0275elementStart(7, "div", 8);
-        \u0275\u0275namespaceSVG();
-        \u0275\u0275elementStart(8, "svg", 9);
-        \u0275\u0275element(9, "path", 10);
-        \u0275\u0275elementEnd();
-        \u0275\u0275namespaceHTML();
-        \u0275\u0275element(10, "div", 11);
-        \u0275\u0275elementEnd();
-        \u0275\u0275element(11, "div", 12);
-        \u0275\u0275elementEnd();
-        \u0275\u0275elementStart(12, "label", 13, 2);
-        \u0275\u0275projection(14);
-        \u0275\u0275elementEnd()();
-      }
-      if (rf & 2) {
-        const checkbox_r2 = \u0275\u0275reference(2);
-        \u0275\u0275property("labelPosition", ctx.labelPosition);
-        \u0275\u0275advance(4);
-        \u0275\u0275classProp("mdc-checkbox--selected", ctx.checked);
-        \u0275\u0275property("checked", ctx.checked)("indeterminate", ctx.indeterminate)("disabled", ctx.disabled && !ctx.disabledInteractive)("id", ctx.inputId)("required", ctx.required)("tabIndex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex);
-        \u0275\u0275attribute("aria-label", ctx.ariaLabel || null)("aria-labelledby", ctx.ariaLabelledby)("aria-describedby", ctx.ariaDescribedby)("aria-checked", ctx.indeterminate ? "mixed" : null)("aria-controls", ctx.ariaControls)("aria-disabled", ctx.disabled && ctx.disabledInteractive ? true : null)("aria-expanded", ctx.ariaExpanded)("aria-owns", ctx.ariaOwns)("name", ctx.name)("value", ctx.value);
-        \u0275\u0275advance(7);
-        \u0275\u0275property("matRippleTrigger", checkbox_r2)("matRippleDisabled", ctx.disableRipple || ctx.disabled)("matRippleCentered", true);
-        \u0275\u0275advance();
-        \u0275\u0275property("for", ctx.inputId);
-      }
-    },
-    dependencies: [MatRipple, _MatInternalFormField],
-    styles: ['.mdc-checkbox{display:inline-block;position:relative;flex:0 0 18px;box-sizing:content-box;width:18px;height:18px;line-height:0;white-space:nowrap;cursor:pointer;vertical-align:bottom;padding:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);margin:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox:hover>.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:hover>.mat-mdc-checkbox-ripple>.mat-ripple-element{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control+.mdc-checkbox__ripple{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control{position:absolute;margin:0;padding:0;opacity:0;cursor:inherit;z-index:1;width:var(--mat-checkbox-state-layer-size, 40px);height:var(--mat-checkbox-state-layer-size, 40px);top:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);right:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox--disabled{cursor:default;pointer-events:none}@media(forced-colors: active){.mdc-checkbox--disabled{opacity:.5}}.mdc-checkbox__background{display:inline-flex;position:absolute;align-items:center;justify-content:center;box-sizing:border-box;width:18px;height:18px;border:2px solid currentColor;border-radius:2px;background-color:rgba(0,0,0,0);pointer-events:none;will-change:background-color,border-color;transition:background-color 90ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms cubic-bezier(0.4, 0, 0.6, 1);-webkit-print-color-adjust:exact;color-adjust:exact;border-color:var(--mat-checkbox-unselected-icon-color, var(--mat-sys-on-surface-variant));top:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2)}.mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox__native-control:disabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:disabled:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:checked)~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-hover-icon-color, var(--mat-sys-on-surface));background-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary))}.mdc-checkbox__native-control:focus:focus:not(:checked)~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-focus-icon-color, var(--mat-sys-on-surface))}.mdc-checkbox__native-control:focus:focus:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox:hover>.mdc-checkbox__native-control~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox__checkmark{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0;transition:opacity 180ms cubic-bezier(0.4, 0, 0.6, 1);color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}@media(forced-colors: active){.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox__checkmark-path{transition:stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1);stroke:currentColor;stroke-width:3.12px;stroke-dashoffset:29.7833385;stroke-dasharray:29.7833385}.mdc-checkbox__mixedmark{width:100%;height:0;transform:scaleX(0) rotate(0deg);border-width:1px;border-style:solid;opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1);border-color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__mixedmark{margin:0 1px}}.mdc-checkbox--disabled .mdc-checkbox__mixedmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__mixedmark{border-color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background,.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background,.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background,.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background{animation-duration:180ms;animation-timing-function:linear}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-unchecked-checked-checkmark-path 180ms linear;transition:none}.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-unchecked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-checked-unchecked-checkmark-path 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__checkmark{animation:mdc-checkbox-checked-indeterminate-checkmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-checked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__checkmark{animation:mdc-checkbox-indeterminate-checked-checkmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-checked-mixedmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-unchecked-mixedmark 300ms linear;transition:none}.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{transition:border-color 90ms cubic-bezier(0, 0, 0.2, 1),background-color 90ms cubic-bezier(0, 0, 0.2, 1)}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path{stroke-dashoffset:0}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark{transition:opacity 180ms cubic-bezier(0, 0, 0.2, 1),transform 180ms cubic-bezier(0, 0, 0.2, 1);opacity:1}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(-45deg)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark{transform:rotate(45deg);opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(0deg);opacity:1}@keyframes mdc-checkbox-unchecked-checked-checkmark-path{0%,50%{stroke-dashoffset:29.7833385}50%{animation-timing-function:cubic-bezier(0, 0, 0.2, 1)}100%{stroke-dashoffset:0}}@keyframes mdc-checkbox-unchecked-indeterminate-mixedmark{0%,68.2%{transform:scaleX(0)}68.2%{animation-timing-function:cubic-bezier(0, 0, 0, 1)}100%{transform:scaleX(1)}}@keyframes mdc-checkbox-checked-unchecked-checkmark-path{from{animation-timing-function:cubic-bezier(0.4, 0, 1, 1);opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:-29.7833385}}@keyframes mdc-checkbox-checked-indeterminate-checkmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(45deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-checked-checkmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(45deg);opacity:0}to{transform:rotate(360deg);opacity:1}}@keyframes mdc-checkbox-checked-indeterminate-mixedmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(-45deg);opacity:0}to{transform:rotate(0deg);opacity:1}}@keyframes mdc-checkbox-indeterminate-checked-mixedmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(315deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-unchecked-mixedmark{0%{animation-timing-function:linear;transform:scaleX(1);opacity:1}32.8%,100%{transform:scaleX(0);opacity:0}}.mat-mdc-checkbox{display:inline-block;position:relative;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-touch-target,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__native-control,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__ripple,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-ripple::before,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__mixedmark{transition:none !important;animation:none !important}.mat-mdc-checkbox label{cursor:pointer}.mat-mdc-checkbox .mat-internal-form-field{color:var(--mat-checkbox-label-text-color, var(--mat-sys-on-surface));font-family:var(--mat-checkbox-label-text-font, var(--mat-sys-body-medium-font));line-height:var(--mat-checkbox-label-text-line-height, var(--mat-sys-body-medium-line-height));font-size:var(--mat-checkbox-label-text-size, var(--mat-sys-body-medium-size));letter-spacing:var(--mat-checkbox-label-text-tracking, var(--mat-sys-body-medium-tracking));font-weight:var(--mat-checkbox-label-text-weight, var(--mat-sys-body-medium-weight))}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive{pointer-events:auto}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive input{cursor:default}.mat-mdc-checkbox.mat-mdc-checkbox-disabled label{cursor:default;color:var(--mat-checkbox-disabled-label-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-checkbox label:empty{display:none}.mat-mdc-checkbox .mdc-checkbox__ripple{opacity:0}.mat-mdc-checkbox .mat-mdc-checkbox-ripple,.mdc-checkbox__ripple{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:50%;pointer-events:none}.mat-mdc-checkbox .mat-mdc-checkbox-ripple:not(:empty),.mdc-checkbox__ripple:not(:empty){transform:translateZ(0)}.mat-mdc-checkbox-ripple .mat-ripple-element{opacity:.1}.mat-mdc-checkbox-touch-target{position:absolute;top:50%;left:50%;height:48px;width:48px;transform:translate(-50%, -50%);display:var(--mat-checkbox-touch-target-display, block)}.mat-mdc-checkbox .mat-mdc-checkbox-ripple::before{border-radius:50%}.mdc-checkbox__native-control:focus~.mat-focus-indicator::before{content:""}\n'],
-    encapsulation: 2,
-    changeDetection: 0
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCheckbox, [{
-    type: Component,
-    args: [{
-      selector: "mat-checkbox",
-      host: {
-        "class": "mat-mdc-checkbox",
-        "[attr.tabindex]": "null",
-        "[attr.aria-label]": "null",
-        "[attr.aria-labelledby]": "null",
-        "[class._mat-animation-noopable]": "_animationsDisabled",
-        "[class.mdc-checkbox--disabled]": "disabled",
-        "[id]": "id",
-        // Add classes that users can use to more easily target disabled or checked checkboxes.
-        "[class.mat-mdc-checkbox-disabled]": "disabled",
-        "[class.mat-mdc-checkbox-checked]": "checked",
-        "[class.mat-mdc-checkbox-disabled-interactive]": "disabledInteractive",
-        "[class]": 'color ? "mat-" + color : "mat-accent"'
-      },
-      providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => MatCheckbox),
-        multi: true
-      }, {
-        provide: NG_VALIDATORS,
-        useExisting: MatCheckbox,
-        multi: true
-      }],
-      exportAs: "matCheckbox",
-      encapsulation: ViewEncapsulation.None,
-      changeDetection: ChangeDetectionStrategy.OnPush,
-      imports: [MatRipple, _MatInternalFormField],
-      template: `<div mat-internal-form-field [labelPosition]="labelPosition" (click)="_preventBubblingFromLabel($event)">
-  <div #checkbox class="mdc-checkbox">
-    <!-- Render this element first so the input is on top. -->
-    <div class="mat-mdc-checkbox-touch-target" (click)="_onTouchTargetClick()"></div>
-    <input #input
-           type="checkbox"
-           class="mdc-checkbox__native-control"
-           [class.mdc-checkbox--selected]="checked"
-           [attr.aria-label]="ariaLabel || null"
-           [attr.aria-labelledby]="ariaLabelledby"
-           [attr.aria-describedby]="ariaDescribedby"
-           [attr.aria-checked]="indeterminate ? 'mixed' : null"
-           [attr.aria-controls]="ariaControls"
-           [attr.aria-disabled]="disabled && disabledInteractive ? true : null"
-           [attr.aria-expanded]="ariaExpanded"
-           [attr.aria-owns]="ariaOwns"
-           [attr.name]="name"
-           [attr.value]="value"
-           [checked]="checked"
-           [indeterminate]="indeterminate"
-           [disabled]="disabled && !disabledInteractive"
-           [id]="inputId"
-           [required]="required"
-           [tabIndex]="disabled && !disabledInteractive ? -1 : tabIndex"
-           (blur)="_onBlur()"
-           (click)="_onInputClick()"
-           (change)="_onInteractionEvent($event)"/>
-    <div class="mdc-checkbox__ripple"></div>
-    <div class="mdc-checkbox__background">
-      <svg class="mdc-checkbox__checkmark"
-           focusable="false"
-           viewBox="0 0 24 24"
-           aria-hidden="true">
-        <path class="mdc-checkbox__checkmark-path"
-              fill="none"
-              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-      </svg>
-      <div class="mdc-checkbox__mixedmark"></div>
-    </div>
-    <div class="mat-mdc-checkbox-ripple mat-focus-indicator" mat-ripple
-      [matRippleTrigger]="checkbox"
-      [matRippleDisabled]="disableRipple || disabled"
-      [matRippleCentered]="true"></div>
-  </div>
-  <!--
-    Avoid putting a click handler on the <label/> to fix duplicate navigation stop on Talk Back
-    (#14385). Putting a click handler on the <label/> caused this bug because the browser produced
-    an unnecessary accessibility tree node.
-  -->
-  <label class="mdc-label" #label [for]="inputId">
-    <ng-content></ng-content>
-  </label>
-</div>
-`,
-      styles: ['.mdc-checkbox{display:inline-block;position:relative;flex:0 0 18px;box-sizing:content-box;width:18px;height:18px;line-height:0;white-space:nowrap;cursor:pointer;vertical-align:bottom;padding:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);margin:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox:hover>.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:hover>.mat-mdc-checkbox-ripple>.mat-ripple-element{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control:focus~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-focus-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-unselected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-unselected-pressed-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-hover-state-layer-opacity, var(--mat-sys-hover-state-layer-opacity));background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-hover-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-focus-state-layer-opacity, var(--mat-sys-focus-state-layer-opacity));background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-focus-state-layer-color, var(--mat-sys-primary))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked+.mdc-checkbox__ripple{opacity:var(--mat-checkbox-selected-pressed-state-layer-opacity, var(--mat-sys-pressed-state-layer-opacity));background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox:active>.mdc-checkbox__native-control:checked~.mat-mdc-checkbox-ripple .mat-ripple-element{background-color:var(--mat-checkbox-selected-pressed-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control~.mat-mdc-checkbox-ripple .mat-ripple-element,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control+.mdc-checkbox__ripple{background-color:var(--mat-checkbox-unselected-hover-state-layer-color, var(--mat-sys-on-surface))}.mdc-checkbox .mdc-checkbox__native-control{position:absolute;margin:0;padding:0;opacity:0;cursor:inherit;z-index:1;width:var(--mat-checkbox-state-layer-size, 40px);height:var(--mat-checkbox-state-layer-size, 40px);top:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);right:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - var(--mat-checkbox-state-layer-size, 40px))/2)}.mdc-checkbox--disabled{cursor:default;pointer-events:none}@media(forced-colors: active){.mdc-checkbox--disabled{opacity:.5}}.mdc-checkbox__background{display:inline-flex;position:absolute;align-items:center;justify-content:center;box-sizing:border-box;width:18px;height:18px;border:2px solid currentColor;border-radius:2px;background-color:rgba(0,0,0,0);pointer-events:none;will-change:background-color,border-color;transition:background-color 90ms cubic-bezier(0.4, 0, 0.6, 1),border-color 90ms cubic-bezier(0.4, 0, 0.6, 1);-webkit-print-color-adjust:exact;color-adjust:exact;border-color:var(--mat-checkbox-unselected-icon-color, var(--mat-sys-on-surface-variant));top:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2);left:calc((var(--mat-checkbox-state-layer-size, 40px) - 18px)/2)}.mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox__native-control:disabled:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:disabled:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:checked)~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-hover-icon-color, var(--mat-sys-on-surface));background-color:rgba(0,0,0,0)}.mdc-checkbox:hover>.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox:hover>.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-hover-icon-color, var(--mat-sys-primary))}.mdc-checkbox__native-control:focus:focus:not(:checked)~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:not(:indeterminate)~.mdc-checkbox__background{border-color:var(--mat-checkbox-unselected-focus-icon-color, var(--mat-sys-on-surface))}.mdc-checkbox__native-control:focus:focus:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:focus:focus:indeterminate~.mdc-checkbox__background{border-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary));background-color:var(--mat-checkbox-selected-focus-icon-color, var(--mat-sys-primary))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox:hover>.mdc-checkbox__native-control~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__background{border-color:var(--mat-checkbox-disabled-unselected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{background-color:var(--mat-checkbox-disabled-selected-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent));border-color:rgba(0,0,0,0)}.mdc-checkbox__checkmark{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;opacity:0;transition:opacity 180ms cubic-bezier(0.4, 0, 0.6, 1);color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}@media(forced-colors: active){.mdc-checkbox--disabled .mdc-checkbox__checkmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__checkmark{color:CanvasText}}.mdc-checkbox__checkmark-path{transition:stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1);stroke:currentColor;stroke-width:3.12px;stroke-dashoffset:29.7833385;stroke-dasharray:29.7833385}.mdc-checkbox__mixedmark{width:100%;height:0;transform:scaleX(0) rotate(0deg);border-width:1px;border-style:solid;opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1);border-color:var(--mat-checkbox-selected-checkmark-color, var(--mat-sys-on-primary))}@media(forced-colors: active){.mdc-checkbox__mixedmark{margin:0 1px}}.mdc-checkbox--disabled .mdc-checkbox__mixedmark,.mdc-checkbox--disabled.mat-mdc-checkbox-disabled-interactive .mdc-checkbox__mixedmark{border-color:var(--mat-checkbox-disabled-selected-checkmark-color, var(--mat-sys-surface))}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background,.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background,.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background,.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background{animation-duration:180ms;animation-timing-function:linear}.mdc-checkbox--anim-unchecked-checked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-unchecked-checked-checkmark-path 180ms linear;transition:none}.mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-unchecked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__checkmark-path{animation:mdc-checkbox-checked-unchecked-checkmark-path 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__checkmark{animation:mdc-checkbox-checked-indeterminate-checkmark 90ms linear;transition:none}.mdc-checkbox--anim-checked-indeterminate .mdc-checkbox__mixedmark{animation:mdc-checkbox-checked-indeterminate-mixedmark 90ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__checkmark{animation:mdc-checkbox-indeterminate-checked-checkmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-checked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-checked-mixedmark 500ms linear;transition:none}.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__mixedmark{animation:mdc-checkbox-indeterminate-unchecked-mixedmark 300ms linear;transition:none}.mdc-checkbox__native-control:checked~.mdc-checkbox__background,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background{transition:border-color 90ms cubic-bezier(0, 0, 0.2, 1),background-color 90ms cubic-bezier(0, 0, 0.2, 1)}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path{stroke-dashoffset:0}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__checkmark{transition:opacity 180ms cubic-bezier(0, 0, 0.2, 1),transform 180ms cubic-bezier(0, 0, 0.2, 1);opacity:1}.mdc-checkbox__native-control:checked~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(-45deg)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__checkmark{transform:rotate(45deg);opacity:0;transition:opacity 90ms cubic-bezier(0.4, 0, 0.6, 1),transform 90ms cubic-bezier(0.4, 0, 0.6, 1)}.mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background>.mdc-checkbox__mixedmark{transform:scaleX(1) rotate(0deg);opacity:1}@keyframes mdc-checkbox-unchecked-checked-checkmark-path{0%,50%{stroke-dashoffset:29.7833385}50%{animation-timing-function:cubic-bezier(0, 0, 0.2, 1)}100%{stroke-dashoffset:0}}@keyframes mdc-checkbox-unchecked-indeterminate-mixedmark{0%,68.2%{transform:scaleX(0)}68.2%{animation-timing-function:cubic-bezier(0, 0, 0, 1)}100%{transform:scaleX(1)}}@keyframes mdc-checkbox-checked-unchecked-checkmark-path{from{animation-timing-function:cubic-bezier(0.4, 0, 1, 1);opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:-29.7833385}}@keyframes mdc-checkbox-checked-indeterminate-checkmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(45deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-checked-checkmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(45deg);opacity:0}to{transform:rotate(360deg);opacity:1}}@keyframes mdc-checkbox-checked-indeterminate-mixedmark{from{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);transform:rotate(-45deg);opacity:0}to{transform:rotate(0deg);opacity:1}}@keyframes mdc-checkbox-indeterminate-checked-mixedmark{from{animation-timing-function:cubic-bezier(0.14, 0, 0, 1);transform:rotate(0deg);opacity:1}to{transform:rotate(315deg);opacity:0}}@keyframes mdc-checkbox-indeterminate-unchecked-mixedmark{0%{animation-timing-function:linear;transform:scaleX(1);opacity:1}32.8%,100%{transform:scaleX(0);opacity:0}}.mat-mdc-checkbox{display:inline-block;position:relative;-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-touch-target,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__native-control,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__ripple,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mat-mdc-checkbox-ripple::before,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__checkmark>.mdc-checkbox__checkmark-path,.mat-mdc-checkbox._mat-animation-noopable>.mat-internal-form-field>.mdc-checkbox>.mdc-checkbox__background>.mdc-checkbox__mixedmark{transition:none !important;animation:none !important}.mat-mdc-checkbox label{cursor:pointer}.mat-mdc-checkbox .mat-internal-form-field{color:var(--mat-checkbox-label-text-color, var(--mat-sys-on-surface));font-family:var(--mat-checkbox-label-text-font, var(--mat-sys-body-medium-font));line-height:var(--mat-checkbox-label-text-line-height, var(--mat-sys-body-medium-line-height));font-size:var(--mat-checkbox-label-text-size, var(--mat-sys-body-medium-size));letter-spacing:var(--mat-checkbox-label-text-tracking, var(--mat-sys-body-medium-tracking));font-weight:var(--mat-checkbox-label-text-weight, var(--mat-sys-body-medium-weight))}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive{pointer-events:auto}.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-disabled-interactive input{cursor:default}.mat-mdc-checkbox.mat-mdc-checkbox-disabled label{cursor:default;color:var(--mat-checkbox-disabled-label-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))}.mat-mdc-checkbox label:empty{display:none}.mat-mdc-checkbox .mdc-checkbox__ripple{opacity:0}.mat-mdc-checkbox .mat-mdc-checkbox-ripple,.mdc-checkbox__ripple{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:50%;pointer-events:none}.mat-mdc-checkbox .mat-mdc-checkbox-ripple:not(:empty),.mdc-checkbox__ripple:not(:empty){transform:translateZ(0)}.mat-mdc-checkbox-ripple .mat-ripple-element{opacity:.1}.mat-mdc-checkbox-touch-target{position:absolute;top:50%;left:50%;height:48px;width:48px;transform:translate(-50%, -50%);display:var(--mat-checkbox-touch-target-display, block)}.mat-mdc-checkbox .mat-mdc-checkbox-ripple::before{border-radius:50%}.mdc-checkbox__native-control:focus~.mat-focus-indicator::before{content:""}\n']
-    }]
-  }], () => [], {
-    ariaLabel: [{
-      type: Input,
-      args: ["aria-label"]
-    }],
-    ariaLabelledby: [{
-      type: Input,
-      args: ["aria-labelledby"]
-    }],
-    ariaDescribedby: [{
-      type: Input,
-      args: ["aria-describedby"]
-    }],
-    ariaExpanded: [{
-      type: Input,
-      args: [{
-        alias: "aria-expanded",
-        transform: booleanAttribute
-      }]
-    }],
-    ariaControls: [{
-      type: Input,
-      args: ["aria-controls"]
-    }],
-    ariaOwns: [{
-      type: Input,
-      args: ["aria-owns"]
-    }],
-    id: [{
-      type: Input
-    }],
-    required: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    labelPosition: [{
-      type: Input
-    }],
-    name: [{
-      type: Input
-    }],
-    change: [{
-      type: Output
-    }],
-    indeterminateChange: [{
-      type: Output
-    }],
-    value: [{
-      type: Input
-    }],
-    disableRipple: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    _inputElement: [{
-      type: ViewChild,
-      args: ["input"]
-    }],
-    _labelElement: [{
-      type: ViewChild,
-      args: ["label"]
-    }],
-    tabIndex: [{
-      type: Input,
-      args: [{
-        transform: (value) => value == null ? void 0 : numberAttribute(value)
-      }]
-    }],
-    color: [{
-      type: Input
-    }],
-    disabledInteractive: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    checked: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    disabled: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }],
-    indeterminate: [{
-      type: Input,
-      args: [{
-        transform: booleanAttribute
-      }]
-    }]
-  });
-})();
-var MatCheckboxModule = class _MatCheckboxModule {
-  static \u0275fac = function MatCheckboxModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatCheckboxModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
-    type: _MatCheckboxModule,
-    imports: [MatCheckbox, MatCommonModule],
-    exports: [MatCheckbox, MatCommonModule]
-  });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
-    imports: [MatCheckbox, MatCommonModule, MatCommonModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCheckboxModule, [{
-    type: NgModule,
-    args: [{
-      imports: [MatCheckbox, MatCommonModule],
-      exports: [MatCheckbox, MatCommonModule]
-    }]
-  }], null, null);
-})();
-
-// libs/components/src/lib/settings-toggle.component.ts
-var _c039 = ["*"];
-function SettingsToggleComponent_Conditional_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "icon", 2);
-    \u0275\u0275text(1, "info");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("matTooltip", ctx_r0.info());
-  }
-}
-function SettingsToggleComponent_Conditional_6_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275element(0, "div", 3);
-  }
-}
-function SettingsToggleComponent_Conditional_7_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 4)(1, "div", 6)(2, "div", 7)(3, "icon");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd()()()();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275classProp("bg-base-300", !ctx_r0.value)("bg-info", ctx_r0.value)("!border-info", ctx_r0.value);
-    \u0275\u0275advance();
-    \u0275\u0275classProp("left-1", !ctx_r0.value)("left-5", ctx_r0.value)("bg-base-400", !ctx_r0.value)("bg-info-light", ctx_r0.value);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r0.value ? "done" : "remove");
-  }
-}
-function SettingsToggleComponent_Conditional_8_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-checkbox", 8);
-    \u0275\u0275twoWayListener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r0 = \u0275\u0275nextContext();
-      \u0275\u0275twoWayBindingSet(ctx_r0.value, $event) || (ctx_r0.value = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275listener("ngModelChange", function SettingsToggleComponent_Conditional_8_Template_mat_checkbox_ngModelChange_0_listener($event) {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r0 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r0.setValue($event));
-    });
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275twoWayProperty("ngModel", ctx_r0.value);
-  }
-}
-var _SettingsToggleComponent = class _SettingsToggleComponent {
-  constructor() {
-    this.toggle = input(void 0);
-    this.name = input(void 0);
-    this.info = input(void 0);
-    this.registerOnChange = (fn3) => this._onChange = fn3;
-    this.registerOnTouched = (fn3) => this._onTouch = fn3;
-  }
-  /**
-   * Update the form field value
-   * @param new_value New value to set on the form field
-   */
-  setValue(new_value) {
-    this.value = new_value;
-    if (this._onChange)
-      this._onChange(new_value);
-  }
-  /* istanbul ignore next */
-  /**
-   * Update local value when form control value is changed
-   * @param value The new value for the component
-   */
-  writeValue(value) {
-    this.value = value;
-  }
-};
-_SettingsToggleComponent.\u0275fac = function SettingsToggleComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _SettingsToggleComponent)();
-};
-_SettingsToggleComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SettingsToggleComponent, selectors: [["settings-toggle"]], inputs: { toggle: [1, "toggle"], name: [1, "name"], info: [1, "info"] }, features: [\u0275\u0275ProvidersFeature([
-  {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => _SettingsToggleComponent),
-    multi: true
-  }
-])], ngContentSelectors: _c039, decls: 9, vars: 8, consts: [["matRipple", "", 1, "relative", "flex", "flex-1", "items-center", "space-x-2", "overflow-hidden", "rounded", "border", "py-1", "pl-2", "pr-1", "hover:bg-base-200", 3, "click"], [1, "z-10", "flex", "flex-1", "items-center", "space-x-2", "p-2", "text-left"], [3, "matTooltip"], [1, "absolute", "inset-0", "z-0", "!m-0", "bg-info", "opacity-10"], [1, "px-2"], [1, "pointer-events-none", 3, "ngModel"], ["toggle", "", 1, "relative", "h-8", "w-12", "rounded-full", "border-2", "border-base-400"], [1, "absolute", "top-1/2", "flex", "h-6", "w-6", "-translate-x-0.5", "-translate-y-1/2", "items-center", "justify-center", "rounded-full", "text-black", "shadow"], [1, "pointer-events-none", 3, "ngModelChange", "ngModel"]], template: function SettingsToggleComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275projectionDef();
-    \u0275\u0275elementStart(0, "button", 0);
-    \u0275\u0275listener("click", function SettingsToggleComponent_Template_button_click_0_listener() {
-      return ctx.setValue(!ctx.value);
-    });
-    \u0275\u0275elementStart(1, "div", 1)(2, "div");
-    \u0275\u0275text(3);
-    \u0275\u0275projection(4);
-    \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(5, SettingsToggleComponent_Conditional_5_Template, 2, 1, "icon", 2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(6, SettingsToggleComponent_Conditional_6_Template, 1, 0, "div", 3);
-    \u0275\u0275conditionalCreate(7, SettingsToggleComponent_Conditional_7_Template, 5, 15, "div", 4)(8, SettingsToggleComponent_Conditional_8_Template, 1, 1, "mat-checkbox", 5);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275classProp("border-base-300", !ctx.value)("border-info", ctx.value);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", ctx.name(), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx.info() ? 5 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.value ? 6 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.toggle() ? 7 : 8);
-  }
-}, dependencies: [MatCheckboxModule, MatCheckbox, FormsModule, NgControlStatus, NgModel, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n}\n[toggle][_ngcontent-%COMP%] {\n  transition: background 200ms, left 200ms;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */"] });
-var SettingsToggleComponent = _SettingsToggleComponent;
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SettingsToggleComponent, [{
-    type: Component,
-    args: [{ selector: "settings-toggle", template: `
-        <button
-            matRipple
-            class="relative flex flex-1 items-center space-x-2 overflow-hidden rounded border py-1 pl-2 pr-1 hover:bg-base-200"
-            [class.border-base-300]="!value"
-            [class.border-info]="value"
-            (click)="setValue(!value)"
-        >
-            <div class="z-10 flex flex-1 items-center space-x-2 p-2 text-left">
-                <div>
-                    {{ name() }}
-                    <ng-content></ng-content>
-                </div>
-                @if (info()) {
-                    <icon [matTooltip]="info()">info</icon>
-                }
-            </div>
-            @if (value) {
-                <div class="absolute inset-0 z-0 !m-0 bg-info opacity-10"></div>
-            }
-            @if (toggle()) {
-                <div class="px-2">
-                    <div
-                        toggle
-                        class="relative h-8 w-12 rounded-full border-2 border-base-400"
-                        [class.bg-base-300]="!value"
-                        [class.bg-info]="value"
-                        [class.!border-info]="value"
-                    >
-                        <div
-                            class="absolute top-1/2 flex h-6 w-6 -translate-x-0.5 -translate-y-1/2 items-center justify-center rounded-full text-black shadow"
-                            [class.left-1]="!value"
-                            [class.left-5]="value"
-                            [class.bg-base-400]="!value"
-                            [class.bg-info-light]="value"
-                        >
-                            <icon>{{ value ? 'done' : 'remove' }}</icon>
-                        </div>
-                    </div>
-                </div>
-            } @else {
-                <mat-checkbox
-                    [(ngModel)]="value"
-                    (ngModelChange)="setValue($event)"
-                    class="pointer-events-none"
-                ></mat-checkbox>
-            }
-        </button>
-    `, providers: [
-      {
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => SettingsToggleComponent),
-        multi: true
-      }
-    ], imports: [MatCheckboxModule, FormsModule, IconComponent], styles: ["/* angular:styles/component:css;09d472dfc67150cf01347a580874515fc3cc343b61a90041f2b167ad15a01cf4;/home/runner/work/user-interfaces/user-interfaces/libs/components/src/lib/settings-toggle.component.ts */\n:host {\n  display: flex;\n}\n[toggle] {\n  transition: background 200ms, left 200ms;\n}\n/*# sourceMappingURL=settings-toggle.component.css.map */\n"] }]
-  }], null, null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SettingsToggleComponent, { className: "SettingsToggleComponent", filePath: "libs/components/src/lib/settings-toggle.component.ts", lineNumber: 83 });
 })();
 
 // apps/map-kiosk/src/app/bootstrap.component.ts
@@ -146556,7 +146692,7 @@ function AccessibilityTooltipComponent_Conditional_8_Template(rf, ctx) {
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(6, 3, "COMMON.DARK_MODE"));
   }
 }
-function AccessibilityTooltipComponent_Conditional_16_Template(rf, ctx) {
+function AccessibilityTooltipComponent_Conditional_23_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 9);
@@ -146567,7 +146703,7 @@ function AccessibilityTooltipComponent_Conditional_16_Template(rf, ctx) {
     \u0275\u0275text(5, "A");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(6, "mat-slider", 12)(7, "input", 13);
-    \u0275\u0275listener("ngModelChange", function AccessibilityTooltipComponent_Conditional_16_Template_input_ngModelChange_7_listener($event) {
+    \u0275\u0275listener("ngModelChange", function AccessibilityTooltipComponent_Conditional_23_Template_input_ngModelChange_7_listener($event) {
       \u0275\u0275restoreView(_r3);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.applySetting("font_size", $event));
@@ -146593,24 +146729,38 @@ function AccessibilityTooltipComponent_Conditional_16_Template(rf, ctx) {
   }
 }
 var _AccessibilityTooltipComponent = class _AccessibilityTooltipComponent extends AsyncHandler {
+  constructor() {
+    super(...arguments);
+    this._data = inject(CustomTooltipData);
+    this._settings = inject(SettingsService);
+    this.accessible = signal(false);
+    this.locatable = signal(false);
+    this.applySetting = (n2, v3) => this.timeout("apply_setting", () => {
+      this._settings.saveUserSetting(n2, v3);
+      if (n2 === "accessible") {
+        this.accessible.set(v3);
+      }
+    }, 500);
+    this.close = () => this._data?.close();
+    this.setLocatable = (l2) => {
+      this._settings.updateLocatable(l2);
+      this.locatable.set(l2);
+    };
+  }
   get dark_mode() {
     return this._settings.theme === "dark";
   }
   get can_change_dark_mode() {
     return !!this._settings.get("app.allow_dark_mode");
   }
-  get accessible() {
-    return !!this._settings.get("accessible");
-  }
   get font_size() {
     return this._settings.get("font_size") || 16;
   }
-  constructor() {
-    super();
-    this._data = inject(CustomTooltipData);
-    this._settings = inject(SettingsService);
-    this.applySetting = (n2, v3) => this.timeout("apply_setting", () => this._settings.saveUserSetting(n2, v3), 500);
-    this.close = () => this._data?.close();
+  async ngOnInit() {
+    this.accessible.set(!!this._settings.get("accessible"));
+    this.subscription("user", current_user.subscribe((u3) => {
+      this.locatable.set(u3.locatable);
+    }));
   }
   setDarkMode(state2) {
     const theme = this._settings.theme;
@@ -146620,10 +146770,13 @@ var _AccessibilityTooltipComponent = class _AccessibilityTooltipComponent extend
       this._settings.setTheme("light");
   }
 };
-_AccessibilityTooltipComponent.\u0275fac = function AccessibilityTooltipComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _AccessibilityTooltipComponent)();
-};
-_AccessibilityTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AccessibilityTooltipComponent, selectors: [["accessibility-tooltip"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 17, vars: 10, consts: [[1, "relative", "-right-1", "-top-12", "flex", "max-h-[65vh]", "w-[20rem]", "flex-col", "overflow-auto", "rounded", "bg-base-100", "pb-3", "shadow"], ["matRipple", "", 1, "flex", "items-center", "space-x-2", "border-b", "border-base-300", "px-2", "py-3", 3, "click"], [1, "text-2xl"], [1, ""], [1, "space-y-2", "p-2"], [3, "ngModel", "toggle"], [3, "ngModelChange", "ngModel", "toggle"], [1, "flex", "items-center", "space-x-2"], [1, "-ml-2", "text-xl"], [1, "bg-base-200", "px-8", "py-4", "text-center"], [1, "flex", "items-center", "space-x-4", "px-4"], [1, "text-sm"], [1, "w-1/2", "flex-1", "text-[16px]", 3, "min", "max", "step"], ["matSliderThumb", "", 1, "text-[16px]", 3, "ngModelChange", "ngModel"], [1, "my-2", "rounded", "bg-base-300", "px-2", "py-1", "text-base", "text-white"]], template: function AccessibilityTooltipComponent_Template(rf, ctx) {
+_AccessibilityTooltipComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275AccessibilityTooltipComponent_BaseFactory;
+  return function AccessibilityTooltipComponent_Factory(__ngFactoryType__) {
+    return (\u0275AccessibilityTooltipComponent_BaseFactory || (\u0275AccessibilityTooltipComponent_BaseFactory = \u0275\u0275getInheritedFactory(_AccessibilityTooltipComponent)))(__ngFactoryType__ || _AccessibilityTooltipComponent);
+  };
+})();
+_AccessibilityTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AccessibilityTooltipComponent, selectors: [["accessibility-tooltip"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 24, vars: 15, consts: [[1, "relative", "-right-1", "-top-12", "flex", "max-h-[65vh]", "w-[20rem]", "flex-col", "overflow-auto", "rounded", "bg-base-100", "pb-3", "shadow"], ["matRipple", "", 1, "flex", "items-center", "space-x-2", "border-b", "border-base-300", "px-2", "py-3", 3, "click"], [1, "text-2xl"], [1, ""], [1, "space-y-2", "p-2"], [3, "ngModel", "toggle"], [3, "ngModelChange", "ngModel", "toggle"], [1, "flex", "items-center", "space-x-2"], [1, "-ml-2", "text-xl"], [1, "bg-base-200", "px-8", "py-4", "text-center"], [1, "flex", "items-center", "space-x-4", "px-4"], [1, "text-sm"], [1, "w-1/2", "flex-1", "text-[16px]", 3, "min", "max", "step"], ["matSliderThumb", "", 1, "text-[16px]", 3, "ngModelChange", "ngModel"], [1, "my-2", "rounded", "bg-base-300", "px-2", "py-1", "text-base", "text-white"]], template: function AccessibilityTooltipComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
     \u0275\u0275listener("click", function AccessibilityTooltipComponent_Template_div_click_1_listener() {
@@ -146640,29 +146793,44 @@ _AccessibilityTooltipComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineCom
     \u0275\u0275conditionalCreate(8, AccessibilityTooltipComponent_Conditional_8_Template, 7, 5, "settings-toggle", 5);
     \u0275\u0275elementStart(9, "settings-toggle", 6);
     \u0275\u0275listener("ngModelChange", function AccessibilityTooltipComponent_Template_settings_toggle_ngModelChange_9_listener($event) {
-      return ctx.applySetting("accessible", $event);
+      return ctx.setLocatable($event);
     });
     \u0275\u0275elementStart(10, "div", 7)(11, "icon", 8);
-    \u0275\u0275text(12, "playlist_add");
+    \u0275\u0275text(12, "emergency_share");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(13, "div");
     \u0275\u0275text(14);
     \u0275\u0275pipe(15, "translate");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(16, "settings-toggle", 6);
+    \u0275\u0275listener("ngModelChange", function AccessibilityTooltipComponent_Template_settings_toggle_ngModelChange_16_listener($event) {
+      return ctx.applySetting("accessible", $event);
+    });
+    \u0275\u0275elementStart(17, "div", 7)(18, "icon", 8);
+    \u0275\u0275text(19, "playlist_add");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(20, "div");
+    \u0275\u0275text(21);
+    \u0275\u0275pipe(22, "translate");
     \u0275\u0275elementEnd()()()();
-    \u0275\u0275conditionalCreate(16, AccessibilityTooltipComponent_Conditional_16_Template, 12, 8);
+    \u0275\u0275conditionalCreate(23, AccessibilityTooltipComponent_Conditional_23_Template, 12, 8);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 6, "COMMON.CONTROLS_ACCESSIBILITY"), " ");
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(6, 9, "COMMON.CONTROLS_ACCESSIBILITY"), " ");
     \u0275\u0275advance(3);
     \u0275\u0275conditional(ctx.can_change_dark_mode ? 8 : -1);
     \u0275\u0275advance();
-    \u0275\u0275property("ngModel", ctx.accessible)("toggle", true);
+    \u0275\u0275property("ngModel", ctx.locatable())("toggle", true);
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(15, 8, "COMMON.TEXT_SIZE"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(15, 11, "COMMON.LOCATABLE"));
     \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx.accessible ? 16 : -1);
+    \u0275\u0275property("ngModel", ctx.accessible())("toggle", true);
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(22, 13, "COMMON.TEXT_SIZE"));
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(ctx.accessible() ? 23 : -1);
   }
 }, dependencies: [DefaultValueAccessor, NgControlStatus, NgModel, MatRipple, MatSlider, MatSliderThumb, IconComponent, SettingsToggleComponent, TranslatePipe], encapsulation: 2 });
 var AccessibilityTooltipComponent = _AccessibilityTooltipComponent;
@@ -146697,7 +146865,17 @@ var AccessibilityTooltipComponent = _AccessibilityTooltipComponent;
                     </settings-toggle>
                 }
                 <settings-toggle
-                    [ngModel]="accessible"
+                    [ngModel]="locatable()"
+                    (ngModelChange)="setLocatable($event)"
+                    [toggle]="true"
+                >
+                    <div class="flex items-center space-x-2">
+                        <icon class="-ml-2 text-xl">emergency_share</icon>
+                        <div>{{ 'COMMON.LOCATABLE' | translate }}</div>
+                    </div>
+                </settings-toggle>
+                <settings-toggle
+                    [ngModel]="accessible()"
                     (ngModelChange)="applySetting('accessible', $event)"
                     [toggle]="true"
                 >
@@ -146707,7 +146885,7 @@ var AccessibilityTooltipComponent = _AccessibilityTooltipComponent;
                     </div>
                 </settings-toggle>
             </div>
-            @if (accessible) {
+            @if (accessible()) {
                 <div class="bg-base-200 px-8 py-4 text-center">
                     {{ 'COMMON.TEXT_SIZE_MSG' | translate }}
                 </div>
@@ -146736,10 +146914,10 @@ var AccessibilityTooltipComponent = _AccessibilityTooltipComponent;
             }
         </div>
     `, standalone: false }]
-  }], () => [], null);
+  }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AccessibilityTooltipComponent, { className: "AccessibilityTooltipComponent", filePath: "libs/components/src/lib/accessibility-tooltip.component.ts", lineNumber: 77 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AccessibilityTooltipComponent, { className: "AccessibilityTooltipComponent", filePath: "libs/components/src/lib/accessibility-tooltip.component.ts", lineNumber: 87 });
 })();
 
 // libs/components/src/lib/attached-resource-config-modal.component.ts
@@ -155629,15 +155807,13 @@ function ImageListFieldComponent_For_21_Template(rf, ctx) {
   }
 }
 var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandler {
-  get length() {
-    return this.list.length + this._upload_list.getValue().length + 1;
-  }
   constructor() {
-    super();
+    super(...arguments);
     this._clipboard = inject(Clipboard);
     this._uploads = inject(UploadsService);
     this._dialog = inject(MatDialog);
     this.list = [];
+    this.upload_map = {};
     this.upload_ids = new BehaviorSubject([]);
     this._upload_list = new BehaviorSubject([]);
     this.upload_list = this._upload_list.asObservable();
@@ -155647,11 +155823,14 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
     this.uploads = combineLatest([
       this.upload_list,
       this.upload_ids
-    ]).pipe(map(([list2, ids]) => list2.filter((i) => ids.includes(i.id))));
+    ]).pipe(map(([list2, ids]) => list2.filter((i) => ids.includes(i?.id))));
     this._list_el = viewChild("image_list");
     this._file_input = viewChild("file_input");
     this.registerOnChange = (fn3) => this._onChange = fn3;
     this.registerOnTouched = (fn3) => this._onTouch = fn3;
+  }
+  get length() {
+    return this.list.length + this._upload_list.getValue().length + 1;
   }
   ngAfterViewInit() {
     this.timeout("init_view_space", () => {
@@ -155661,7 +155840,7 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
     this.subscription("upload_changes", this.upload_list.subscribe((list2) => {
       const id_list = this.upload_ids.getValue();
       for (const id of id_list) {
-        const item = list2.find((_3) => _3.id === id);
+        const item = list2.find((_3) => _3?.id === id);
         if (item && item.progress >= 100) {
           this.addImageUrl(item.link);
           this.upload_ids.next(this.upload_ids.getValue().filter((_3) => _3 !== id));
@@ -155725,17 +155904,24 @@ var _ImageListFieldComponent = class _ImageListFieldComponent extends AsyncHandl
     if (list2.length === 0)
       return;
     const global_list = await nextValueFrom(this._uploads.upload_list);
-    const new_list = global_list.filter((_3) => list2.find((i) => i === _3.id));
+    const new_list = global_list.filter((_3) => list2.find((i) => i === _3?.id));
     const done_list = new_list.filter((file) => file.progress >= 100);
     this._upload_list.next(new_list);
-    done_list.forEach((i) => delete i.upload);
+    done_list.forEach((i) => {
+      console.log("ID:", __spreadValues({}, i));
+      this.upload_map[i?.id] = i.upload?.id || i?.id;
+      delete i.upload;
+    });
     if (done_list.length >= list2.length)
       this.clearInterval("update_status");
   }
 };
-_ImageListFieldComponent.\u0275fac = function ImageListFieldComponent_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ImageListFieldComponent)();
-};
+_ImageListFieldComponent.\u0275fac = /* @__PURE__ */ (() => {
+  let \u0275ImageListFieldComponent_BaseFactory;
+  return function ImageListFieldComponent_Factory(__ngFactoryType__) {
+    return (\u0275ImageListFieldComponent_BaseFactory || (\u0275ImageListFieldComponent_BaseFactory = \u0275\u0275getInheritedFactory(_ImageListFieldComponent)))(__ngFactoryType__ || _ImageListFieldComponent);
+  };
+})();
 _ImageListFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ImageListFieldComponent, selectors: [["image-list-field"]], viewQuery: function ImageListFieldComponent_Query(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275viewQuerySignal(ctx._list_el, _c066, 5);
@@ -155750,7 +155936,7 @@ _ImageListFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent
     useExisting: forwardRef(() => _ImageListFieldComponent),
     multi: true
   }
-]), \u0275\u0275InheritDefinitionFeature], decls: 24, vars: 15, consts: [["image_list", ""], ["file_input", ""], ["chipList", ""], ["images", "", 1, "relative", "mb-2", "flex", "w-full", "items-center", "space-x-2", "overflow-hidden", "py-2", 3, "resize"], ["image", "", 1, "relative", "flex", "h-32", "w-36", "flex-shrink-0", "cursor-pointer", "flex-col", "items-center", "justify-center", "rounded-xl", "border-2", "border-dashed", "border-base-200", "hover:border-base-300", "hover:bg-base-200"], [1, "text-4xl", "opacity-60"], [1, "px-4", "text-center", "opacity-60"], ["type", "file", 1, "absolute", "inset-0", "h-32", "w-32", "cursor-pointer", "opacity-0", 3, "change"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center", 3, "transform"], ["image", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "transform", "matTooltip"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "disabled"], ["appearance", "outline", 1, "w-full"], ["aria-label", "Image List"], [3, "matChipInputTokenEnd", "placeholder", "matChipInputFor", "matChipInputSeparatorKeyCodes", "matChipInputAddOnBlur"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center"], ["auth", "", 1, "pointer-events-none", "absolute", "left-1/2", "top-1/2", "z-10", "-translate-x-1/2", "-translate-y-1/2", "object-contain", 3, "source"], ["overlay", "", 1, "absolute", "inset-0", "z-20", "text-base-100"], ["bg", "", 1, "absolute", "inset-0", "bg-black", "opacity-0"], ["actions", "", 1, "absolute", "left-0", "right-0", "top-0", "flex", "items-center", "justify-center", "space-x-2", "opacity-0"], ["icon", "", 3, "click"], ["image", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "click", "matTooltip"], ["mode", "determinate", 3, "value", "diameter"], [1, "text-6xl", "text-error"], ["overlay", "", 1, "absolute", "inset-0", "flex", "items-center", "justify-center", "text-base-100", "hover:bg-base-content", "hover:bg-opacity-50"], [1, "text-3xl", "opacity-0"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], [3, "removed"], [1, "max-w-md", "truncate"], ["matChipRemove", ""]], template: function ImageListFieldComponent_Template(rf, ctx) {
+]), \u0275\u0275InheritDefinitionFeature], decls: 24, vars: 15, consts: [["image_list", ""], ["file_input", ""], ["chipList", ""], ["images", "", 1, "relative", "mb-2", "flex", "w-full", "items-center", "space-x-2", "overflow-hidden", "py-2", 3, "resize"], ["image", "", 1, "relative", "flex", "h-32", "w-36", "flex-shrink-0", "cursor-pointer", "flex-col", "items-center", "justify-center", "rounded-xl", "border-2", "border-dashed", "border-base-200", "hover:border-base-300", "hover:bg-base-200"], [1, "text-4xl", "opacity-60"], [1, "px-4", "text-center", "opacity-60"], ["type", "file", 1, "absolute", "inset-0", "h-32", "w-32", "cursor-pointer", "opacity-0", 3, "change"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center", 3, "transform"], ["upload", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "transform", "matTooltip"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "disabled"], ["appearance", "outline", 1, "w-full"], ["aria-label", "Image List"], [3, "matChipInputTokenEnd", "placeholder", "matChipInputFor", "matChipInputSeparatorKeyCodes", "matChipInputAddOnBlur"], ["image", "", 1, "relative", "h-32", "w-36", "flex-shrink-0", "overflow-hidden", "rounded", "bg-base-200", "bg-cover", "bg-center"], ["auth", "", 1, "pointer-events-none", "absolute", "left-1/2", "top-1/2", "z-10", "-translate-x-1/2", "-translate-y-1/2", "object-contain", 3, "source"], ["overlay", "", 1, "absolute", "inset-0", "z-20", "text-base-100"], ["bg", "", 1, "absolute", "inset-0", "bg-black", "opacity-0"], ["actions", "", 1, "absolute", "left-0", "right-0", "top-0", "flex", "items-center", "justify-center", "space-x-2", "opacity-0"], ["icon", "", 3, "click"], ["upload", "", 1, "border-base-content/10", "/5", "flex", "h-32", "w-36", "flex-shrink-0", "items-center", "justify-center", "rounded", "border", "bg-base-200", "bg-cover", "bg-center", 3, "click", "matTooltip"], ["mode", "determinate", 3, "value", "diameter"], [1, "text-6xl", "text-error"], ["overlay", "", 1, "absolute", "inset-0", "flex", "items-center", "justify-center", "text-base-100", "hover:bg-base-content", "hover:bg-opacity-50"], [1, "text-3xl", "opacity-0"], ["icon", "", "matRipple", "", 1, "absolute", "left-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], ["icon", "", "matRipple", "", 1, "absolute", "right-0", "top-1/2", "-translate-y-1/2", "transform", "bg-base-100", 3, "click", "disabled"], [3, "removed"], [1, "max-w-md", "truncate"], ["matChipRemove", ""]], template: function ImageListFieldComponent_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 3, 0);
@@ -155820,7 +156006,8 @@ _ImageListFieldComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent
   IconComponent,
   CommonModule,
   AsyncPipe,
-  TranslatePipe
+  TranslatePipe,
+  AuthenticatedImageDirective
 ], styles: ["\n\n[_nghost-%COMP%] {\n  width: 100%;\n}\n[overlay][_ngcontent-%COMP%] {\n  transition: background 200ms;\n}\n[image][_ngcontent-%COMP%]:hover   [actions][_ngcontent-%COMP%], \n[image][_ngcontent-%COMP%]:hover    > icon[_ngcontent-%COMP%] {\n  opacity: 1 !important;\n}\n[image][_ngcontent-%COMP%]:hover   [bg][_ngcontent-%COMP%] {\n  opacity: 0.4 !important;\n}\n[actions][_ngcontent-%COMP%], \n[image][_ngcontent-%COMP%]    > icon[_ngcontent-%COMP%] {\n  transition: opacity 200ms;\n}\n[image][_ngcontent-%COMP%] {\n  transition: transform 200ms;\n}\n/*# sourceMappingURL=image-list-field.component.css.map */"] });
 var ImageListFieldComponent = _ImageListFieldComponent;
 (() => {
@@ -155884,7 +156071,7 @@ var ImageListFieldComponent = _ImageListFieldComponent;
             }
             @for (item of uploads | async; track item; let i = $index) {
                 <div
-                    image
+                    upload
                     class="border-base-content/10 /5 flex h-32 w-36 flex-shrink-0 items-center justify-center rounded border bg-base-200 bg-cover bg-center"
                     [style.transform]="'translate(-' + offset + '00%)'"
                     [matTooltip]="item.error"
@@ -155967,12 +156154,13 @@ var ImageListFieldComponent = _ImageListFieldComponent;
       MatProgressSpinnerModule,
       IconComponent,
       CommonModule,
-      TranslatePipe
+      TranslatePipe,
+      AuthenticatedImageDirective
     ], styles: ["/* angular:styles/component:css;95dcaaaa826894df5bf437b6ea5774f7f209a30340873d0fad154aed06b72211;/home/runner/work/user-interfaces/user-interfaces/libs/form-fields/src/lib/image-list-field.component.ts */\n:host {\n  width: 100%;\n}\n[overlay] {\n  transition: background 200ms;\n}\n[image]:hover [actions],\n[image]:hover > icon {\n  opacity: 1 !important;\n}\n[image]:hover [bg] {\n  opacity: 0.4 !important;\n}\n[actions],\n[image] > icon {\n  transition: opacity 200ms;\n}\n[image] {\n  transition: transform 200ms;\n}\n/*# sourceMappingURL=image-list-field.component.css.map */\n"] }]
-  }], () => [], null);
+  }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageListFieldComponent, { className: "ImageListFieldComponent", filePath: "libs/form-fields/src/lib/image-list-field.component.ts", lineNumber: 230 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ImageListFieldComponent, { className: "ImageListFieldComponent", filePath: "libs/form-fields/src/lib/image-list-field.component.ts", lineNumber: 232 });
 })();
 
 // node_modules/lodash-es/_freeGlobal.js
