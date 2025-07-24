@@ -80405,15 +80405,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "34c199c",
-  "hash": "34c199c",
+  "raw": "49754ae",
+  "hash": "49754ae",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "34c199c",
+  "suffix": "49754ae",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1753234102098
+  "time": 1753333009059
 };
 
 // libs/common/src/lib/settings.service.ts
