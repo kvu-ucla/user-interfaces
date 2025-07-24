@@ -72,10 +72,19 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-7HU6ECV7.js";
+} from "./chunk-5YSCMNO6.js";
 import "./chunk-KWSTWQNB.js";
 
 // apps/workplace/src/app/deals/deal-details-modal.component.ts
+function DealDetailsModalComponent_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 2);
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("source", ctx_r0.deal.image);
+  }
+}
 function DealDetailsModalComponent_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 3);
@@ -101,10 +110,10 @@ var _DealDetailsModalComponent = class _DealDetailsModalComponent {
 _DealDetailsModalComponent.\u0275fac = function DealDetailsModalComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _DealDetailsModalComponent)();
 };
-_DealDetailsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DealDetailsModalComponent, selectors: [["deal-details-modal"]], outputs: { remove: "remove" }, decls: 27, vars: 15, consts: [[1, "relative", "bg-base-100"], [1, "relative", "h-48", "w-[32rem]", "max-w-[calc(100vw-2rem)]"], ["auth", "", "alt", "Deal Image", 1, "h-full", "w-full", "object-cover", 3, "source"], [1, "absolute", "bottom-2", "left-2", "max-w-full", "truncate", "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content", "shadow"], [1, "flex", "space-x-2", "p-2"], [1, "w-auto", "px-2", "text-xl", "font-medium"], [1, "flex-1"], [1, "space-y-2", "p-4"], [1, "font-medium"], [1, "pb-4", "text-sm"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "right-2", "top-2", "bg-base-100"]], template: function DealDetailsModalComponent_Template(rf, ctx) {
+_DealDetailsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DealDetailsModalComponent, selectors: [["deal-details-modal"]], outputs: { remove: "remove" }, decls: 27, vars: 15, consts: [[1, "relative", "bg-base-100"], [1, "relative", "h-48", "w-[32rem]", "max-w-[calc(100vw-2rem)]", "overflow-hidden", "rounded-b-lg", "bg-base-300"], ["auth", "", "alt", "Deal Image", 1, "h-full", "w-full", "object-cover", 3, "source"], [1, "absolute", "bottom-2", "left-2", "max-w-full", "truncate", "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content", "shadow"], [1, "flex", "space-x-2", "p-2"], [1, "w-auto", "px-2", "text-xl", "font-medium"], [1, "flex-1"], [1, "space-y-2", "p-4"], [1, "font-medium"], [1, "pb-4", "text-sm"], ["icon", "", "matRipple", "", "mat-dialog-close", "", 1, "absolute", "right-2", "top-2", "bg-base-100"]], template: function DealDetailsModalComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
-    \u0275\u0275element(2, "img", 2);
+    \u0275\u0275conditionalCreate(2, DealDetailsModalComponent_Conditional_2_Template, 1, 1, "img", 2);
     \u0275\u0275conditionalCreate(3, DealDetailsModalComponent_Conditional_3_Template, 2, 1, "div", 3);
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "header", 4)(5, "h3", 5);
@@ -139,7 +148,7 @@ _DealDetailsModalComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineCompone
   }
   if (rf & 2) {
     \u0275\u0275advance(2);
-    \u0275\u0275property("source", ctx.deal.image);
+    \u0275\u0275conditional(ctx.deal.image ? 2 : -1);
     \u0275\u0275advance();
     \u0275\u0275conditional(ctx.deal.details ? 3 : -1);
     \u0275\u0275advance(3);
@@ -173,13 +182,17 @@ var DealDetailsModalComponent = _DealDetailsModalComponent;
     type: Component,
     args: [{ selector: "deal-details-modal", template: `
         <div class="relative bg-base-100">
-            <div class="relative h-48 w-[32rem] max-w-[calc(100vw-2rem)]">
-                <img
-                    class="h-full w-full object-cover"
-                    auth
-                    [source]="deal.image"
-                    alt="Deal Image"
-                />
+            <div
+                class="relative h-48 w-[32rem] max-w-[calc(100vw-2rem)] overflow-hidden rounded-b-lg bg-base-300"
+            >
+                @if (deal.image) {
+                    <img
+                        class="h-full w-full object-cover"
+                        auth
+                        [source]="deal.image"
+                        alt="Deal Image"
+                    />
+                }
                 @if (deal.details) {
                     <div
                         class="absolute bottom-2 left-2 max-w-full truncate rounded bg-info px-2 py-1 text-xs text-info-content shadow"
@@ -234,7 +247,7 @@ var DealDetailsModalComponent = _DealDetailsModalComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DealDetailsModalComponent, { className: "DealDetailsModalComponent", filePath: "apps/workplace/src/app/deals/deal-details-modal.component.ts", lineNumber: 79 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DealDetailsModalComponent, { className: "DealDetailsModalComponent", filePath: "apps/workplace/src/app/deals/deal-details-modal.component.ts", lineNumber: 83 });
 })();
 
 // apps/workplace/src/app/deals/deals.service.ts
@@ -295,6 +308,15 @@ function DealsComponent_For_13_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", t_r3, " ");
   }
 }
+function DealsComponent_For_37_Conditional_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275element(0, "img", 15);
+  }
+  if (rf & 2) {
+    const deal_r6 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275property("src", deal_r6.image, \u0275\u0275sanitizeUrl);
+  }
+}
 function DealsComponent_For_37_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 16);
@@ -317,7 +339,7 @@ function DealsComponent_For_37_Template(rf, ctx) {
       return \u0275\u0275resetView(ctx_r3.view(deal_r6));
     });
     \u0275\u0275elementStart(2, "div", 14);
-    \u0275\u0275element(3, "img", 15);
+    \u0275\u0275conditionalCreate(3, DealsComponent_For_37_Conditional_3_Template, 1, 1, "img", 15);
     \u0275\u0275conditionalCreate(4, DealsComponent_For_37_Conditional_4_Template, 2, 1, "div", 16);
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(5, "div", 17)(6, "h3", 18);
@@ -332,7 +354,7 @@ function DealsComponent_For_37_Template(rf, ctx) {
   if (rf & 2) {
     const deal_r6 = ctx.$implicit;
     \u0275\u0275advance(3);
-    \u0275\u0275property("src", deal_r6.image, \u0275\u0275sanitizeUrl);
+    \u0275\u0275conditional(deal_r6.image ? 3 : -1);
     \u0275\u0275advance();
     \u0275\u0275conditional(deal_r6.details ? 4 : -1);
     \u0275\u0275advance(3);
@@ -391,7 +413,7 @@ var _DealsComponent = class _DealsComponent {
 _DealsComponent.\u0275fac = function DealsComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _DealsComponent)();
 };
-_DealsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DealsComponent, selectors: [["deals-n-offers"]], standalone: false, decls: 40, vars: 30, consts: [["sortMenu", "matMenu"], [1, "absolute", "inset-0", "flex", "flex-col", "overflow-auto"], [1, "min-h-1/2", "flex", "h-1/2", "flex-1", "flex-col", "overflow-auto", "bg-base-200", "px-4", "pt-2"], [1, "sticky", "top-0", "mx-auto", "mb-2", "w-[40rem]", "max-w-full"], [1, "-mx-2", "flex", "flex-wrap", "py-2"], ["matRipple", "", 1, "m-1", "rounded-full", "border", "border-base-300", "px-4", "py-1", 3, "click"], ["matRipple", "", 1, "m-1", "rounded-full", "border", "border-base-300", "px-4", "py-1", 3, "bg-base-100"], [1, "flex", "items-center", "justify-between", "text-base"], ["matRipple", "", 1, "flex", "items-center", "rounded", "p-2", 3, "matMenuTriggerFor"], [1, "ml-2", "text-xl"], ["mat-menu-item", "", 3, "click"], [1, "mx-auto", "grid", "w-[40rem]", "max-w-full", "grid-cols-1", "gap-4", "sm:grid-cols-2", "lg:grid-cols-3"], [1, "col-span-6", "flex", "w-full", "flex-col", "items-center", "justify-center", "rounded-lg", "bg-base-200", "p-16"], [1, "flex", "w-full", "flex-col", "items-center", "overflow-hidden", "rounded-lg", "border", "border-base-300", "bg-base-100", "shadow", 3, "click"], [1, "relative", "h-48", "w-full", "max-w-full", "overflow-hidden", "rounded-b-lg", "bg-base-200"], ["alt", "Deal Image", 1, "h-full", "w-full", "object-cover", 3, "src"], [1, "absolute", "bottom-2", "left-2", "max-w-full", "truncate", "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content", "shadow"], [1, "w-full", "px-4", "py-2", "text-left"], [1, "truncate", "font-bold"], [1, "text-sm", "opacity-50"], ["src", "assets/icons/no-deals.svg", "alt", "No Deals or Offers Available", 1, "mb-8", "w-48"], [1, "flex", "flex-col", "items-center", "space-y-4", "text-center"], [1, "text-lg", "font-bold"], ["btn", "", "matRipple", ""]], template: function DealsComponent_Template(rf, ctx) {
+_DealsComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DealsComponent, selectors: [["deals-n-offers"]], standalone: false, decls: 40, vars: 30, consts: [["sortMenu", "matMenu"], [1, "absolute", "inset-0", "flex", "flex-col", "overflow-auto"], [1, "min-h-1/2", "flex", "h-1/2", "flex-1", "flex-col", "overflow-auto", "bg-base-200", "px-4", "pt-2"], [1, "sticky", "top-0", "mx-auto", "mb-2", "w-[40rem]", "max-w-full"], [1, "-mx-2", "flex", "flex-wrap", "py-2"], ["matRipple", "", 1, "m-1", "rounded-full", "border", "border-base-300", "px-4", "py-1", 3, "click"], ["matRipple", "", 1, "m-1", "rounded-full", "border", "border-base-300", "px-4", "py-1", 3, "bg-base-100"], [1, "flex", "items-center", "justify-between", "text-base"], ["matRipple", "", 1, "flex", "items-center", "rounded", "p-2", 3, "matMenuTriggerFor"], [1, "ml-2", "text-xl"], ["mat-menu-item", "", 3, "click"], [1, "mx-auto", "grid", "w-[40rem]", "max-w-full", "grid-cols-1", "gap-4", "sm:grid-cols-2", "lg:grid-cols-3"], [1, "col-span-6", "flex", "w-full", "flex-col", "items-center", "justify-center", "rounded-lg", "bg-base-200", "p-16"], [1, "flex", "w-full", "flex-col", "items-center", "overflow-hidden", "rounded-lg", "border", "border-base-300", "bg-base-100", "shadow", 3, "click"], [1, "relative", "h-48", "w-full", "max-w-full", "overflow-hidden", "rounded-b-lg", "bg-base-300"], ["alt", "Deal Image", 1, "h-full", "w-full", "object-cover", 3, "src"], [1, "absolute", "bottom-2", "left-2", "max-w-full", "truncate", "rounded", "bg-info", "px-2", "py-1", "text-xs", "text-info-content", "shadow"], [1, "w-full", "px-4", "py-2", "text-left"], [1, "truncate", "font-bold"], [1, "text-sm", "opacity-50"], ["src", "assets/icons/no-deals.svg", "alt", "No Deals or Offers Available", 1, "mb-8", "w-48"], [1, "flex", "flex-col", "items-center", "space-y-4", "text-center"], [1, "text-lg", "font-bold"], ["btn", "", "matRipple", ""]], template: function DealsComponent_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 1);
@@ -576,13 +598,15 @@ var DealsComponent = _DealsComponent;
                                 (click)="view(deal)"
                             >
                                 <div
-                                    class="relative h-48 w-full max-w-full overflow-hidden rounded-b-lg bg-base-200"
+                                    class="relative h-48 w-full max-w-full overflow-hidden rounded-b-lg bg-base-300"
                                 >
-                                    <img
-                                        [src]="deal.image"
-                                        alt="Deal Image"
-                                        class="h-full w-full object-cover"
-                                    />
+                                    @if (deal.image) {
+                                        <img
+                                            [src]="deal.image"
+                                            alt="Deal Image"
+                                            class="h-full w-full object-cover"
+                                        />
+                                    }
                                     @if (deal.details) {
                                         <div
                                             class="absolute bottom-2 left-2 max-w-full truncate rounded bg-info px-2 py-1 text-xs text-info-content shadow"
@@ -652,7 +676,7 @@ var DealsComponent = _DealsComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DealsComponent, { className: "DealsComponent", filePath: "apps/workplace/src/app/deals/deals.component.ts", lineNumber: 173 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DealsComponent, { className: "DealsComponent", filePath: "apps/workplace/src/app/deals/deals.component.ts", lineNumber: 175 });
 })();
 
 // apps/workplace/src/app/deals/deals.module.ts
@@ -691,4 +715,4 @@ var DealsModule = _DealsModule;
 export {
   DealsModule
 };
-//# sourceMappingURL=deals.module-TS7IF7G5.js.map
+//# sourceMappingURL=deals.module-WGRKVXMV.js.map

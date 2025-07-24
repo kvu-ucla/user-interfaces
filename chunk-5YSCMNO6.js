@@ -70402,15 +70402,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "34c199c",
-  "hash": "34c199c",
+  "raw": "49754ae",
+  "hash": "49754ae",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "34c199c",
+  "suffix": "49754ae",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1753234033250
+  "time": 1753333011473
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -175899,4 +175899,4 @@ qr/esm/index.js:
   limitations under the License.
   *)
 */
-//# sourceMappingURL=chunk-7HU6ECV7.js.map
+//# sourceMappingURL=chunk-5YSCMNO6.js.map
