@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1753331579936,
+  "timestamp": 1753333599384,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -52,6 +52,7 @@
         "./assets/icons/more-filled.svg",
         "./assets/icons/more-outline.svg",
         "./assets/icons/no-contacts.svg",
+        "./assets/icons/no-deals.svg",
         "./assets/icons/no-favourites.svg",
         "./assets/icons/no-pending.svg",
         "./assets/icons/no-results.svg",
@@ -133,6 +134,7 @@
     "./assets/icons/more-filled.svg": "a736dcf0bd45c84f52e1f19e8fd709267a60a114",
     "./assets/icons/more-outline.svg": "05fea53d0e90cd200810c2b57e124b5b0759a444",
     "./assets/icons/no-contacts.svg": "5a562642efdcc8a9262f1dd6e3b1c92c841a3912",
+    "./assets/icons/no-deals.svg": "8a5be6467d3bae6d1b77e65767e13a06b54fae10",
     "./assets/icons/no-favourites.svg": "d3a2205b4ed430a4c31fa0e1fcd2dcf2595c6fa8",
     "./assets/icons/no-pending.svg": "682e19e8c784872bd1b3ff7109c505030499822c",
     "./assets/icons/no-results.svg": "d551449f385ac95090bd5e9f63e6c4022c14260e",
@@ -152,7 +154,7 @@
     "./assets/icons/visa.svg": "11187e2ea86894625af0aeb5b85c17bcbf8fe192",
     "./assets/icons/visitor-placeholder.svg": "744f6d0a7c3f96db704b4e4cc301aff7bed145d2",
     "./assets/locale/ar.json": "b08a79fb9939ed532086a0caf9d5e1b0b753907a",
-    "./assets/locale/en-AU.json": "340641d95cc0ebea0a3c47d2ce25807148d52996",
+    "./assets/locale/en-AU.json": "799279f468e4a3c9cb1dee3aa3a98a6a695d0ab5",
     "./assets/locale/en-GB.json": "24eae2d47ed70a752d04a7ce8f61a04bdfe32cb9",
     "./assets/locale/en-US.json": "887fb700b91e57ead77bcca64488952d4ab2a4c0",
     "./assets/locale/es.json": "f3d718ed8abbe9a06ac3ab6762416ea789ab3bb9",
@@ -185,9 +187,9 @@
     "./assets/support/safari-logo.svg": "1c510b0c330f84f6662351e4a0abd7fb8af2f678",
     "./favicon.ico": "4e23d0f9b6ddaf3c9ddef90dbaed2342941297b5",
     "./index.html": "6b85b5b5f13b6eb3f6281af7d99de4aea78fcef6",
-    "./main.js": "724a49b3583f7ef4c7734996734ef4e9ab923071",
+    "./main.js": "b52fb05ddf524c401ebee4e6600d353cd3fb5111",
     "./manifest.webmanifest": "859c98440bb281fcf0ded0850aa3d2f6da75fb5e",
-    "./styles.css": "d7233178f705ab7d81ed68031b4c21837c6da838"
+    "./styles.css": "abb9aa26f003b45bb86d8e8397c4c7ee09bcc70c"
   },
   "navigationUrls": [
     {
