@@ -29,7 +29,7 @@ import { PanelStateService } from './panel-state.service';
                         auth
                         class="h-10"
                         alt="Logo"
-                        src="/src/assets/logo_dts.svg"
+                        [src]="logoPath"
                     />
                 </div>
             </header>
@@ -101,7 +101,7 @@ import { PanelStateService } from './panel-state.service';
                     auth
                     class="h-10"
                     alt="Logo"
-                    src="/src/assets/logo_dts.svg"
+                    [src]="logoPath"
                 />
                 <p class="text-2xl">
                     {{ time | date: 'shortTime' }}
@@ -151,6 +151,7 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
     private _state = inject(PanelStateService);
     private _org = inject(OrganisationService);
 
+    logoPath = 'assets/logo_dts.svg';
     public system_id = '';
     public show_qr = false;
     public room_name: string | null = '';
