@@ -9,25 +9,10 @@ import {
     SettingsService,
 } from '@placeos/common';
 import { OrganisationService } from '@placeos/organisation';
-
 import { generateQRCode } from 'libs/common/src/lib/qr-code';
 import { CalendarEvent } from 'libs/events/src/lib/event.class';
 import { PanelStateService } from './panel-state.service';
 import {timer} from "rxjs";
-
-@Pipe({ name: 'upcoming' })
-export class UpcomingPipe implements PipeTransform {
-    transform<T extends { event_start: number }>(items: T[] | null | undefined, nowMs?: number): T[] {
-        if (!items?.length || !nowMs) return [];
-        return items.filter(b => (b.event_start * 1000) > nowMs);
-    }
-}
-
-@NgModule({
-    imports: [
-        UpcomingPipe
-    ]
-})
 
 @Component({
     selector: 'event-panel',

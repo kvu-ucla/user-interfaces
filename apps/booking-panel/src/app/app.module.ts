@@ -45,6 +45,7 @@ import localeJa from '@angular/common/locales/ja';
 import localeZh from '@angular/common/locales/zh';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SanitizePipe } from 'libs/components/src/lib/sanitise.pipe';
+import {UpcomingPipe} from "./upcoming.pipe";
 
 const MAT_MODULES: any[] = [
     MatFormFieldModule,
@@ -69,6 +70,7 @@ const STANDALONE_COMPONENTS = [
     declarations: [AppComponent, BootstrapComponent, EventPanelComponent],
     bootstrap: [AppComponent],
     imports: [
+        UpcomingPipe,
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
