@@ -29,7 +29,7 @@ import { PanelStateService } from './panel-state.service';
                         auth
                         class="h-10"
                         alt="Logo"
-                        [source]="(logo | async)?.src || (logo | async) || ''"
+                        src="shared/assets/logo_dts.svg"
                     />
                 </div>
             </header>
