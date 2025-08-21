@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {Component, inject, NgModule, OnInit, Pipe, PipeTransform} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { startOfMinute } from 'date-fns';
 import { debounceTime, map } from 'rxjs/operators';
@@ -13,7 +13,21 @@ import { OrganisationService } from '@placeos/organisation';
 import { generateQRCode } from 'libs/common/src/lib/qr-code';
 import { CalendarEvent } from 'libs/events/src/lib/event.class';
 import { PanelStateService } from './panel-state.service';
+import {timer} from "rxjs";
 
+@Pipe({ name: 'upcoming' })
+export class UpcomingPipe implements PipeTransform {
+    transform<T extends { event_start: number }>(items: T[] | null | undefined, nowMs?: number): T[] {
+        if (!items?.length || !nowMs) return [];
+        return items.filter(b => (b.event_start * 1000) > nowMs);
+    }
+}
+
+@NgModule({
+    imports: [
+        UpcomingPipe
+    ]
+})
 
 @Component({
     selector: 'event-panel',
@@ -74,33 +88,30 @@ import { PanelStateService } from './panel-state.service';
                         {{ 'APP.BOOKING_PANEL.NEXT' | translate }}
                     </h2>
                     <hr class="mb-8" />
-                    @let upcoming = bookings | async;
-                    @if (upcoming) {
+                    @let raw = bookings | async;
+                    @let now = now$ | async;
+                    @let upcoming = (raw | upcoming: now | slice:0:3);
+
+                    @if (upcoming?.length) {
                         <h2 class="line-clamp-4 text-2xl font-medium">
                             {{ upcoming[0]?.title }}
                         </h2>
                         <p class="text-2xl lowercase">
-                            starting &#64;
-                            {{ upcoming[0]?.event_start * 1000 | date: 'h:mma' }}
+                            starting &#64; {{ upcoming[0]?.event_start * 1000 | date:'h:mma' }}
                         </p>
-                        <h2 class="line-clamp-4 text-2xl font-medium">
+                        <h2 class="mt-2 line-clamp-4 text-2xl font-medium">
                             {{ upcoming[1]?.title }}
                         </h2>
                         <p class="text-2xl lowercase">
-                            starting &#64;
-                            {{ upcoming[1]?.event_start * 1000 | date: 'h:mma' }}
+                            starting &#64; {{ upcoming[1]?.event_start * 1000 | date:'h:mma' }}
                         </p>
-                        <h2 class="line-clamp-4 text-2xl font-medium">
+
+                        <h2 class="mt-2 line-clamp-4 text-2xl font-medium">
                             {{ upcoming[2]?.title }}
                         </h2>
                         <p class="text-2xl lowercase">
-                            starting &#64;
-                            {{ upcoming[2]?.event_start * 1000 | date: 'h:mma' }}
+                            starting &#64; {{ upcoming[2]?.event_start * 1000 | date:'h:mma' }}
                         </p>
-                        <!-- <p class="text-xl" *ngIf="!hide_meeting_details">
-                {{ 'APP.BOOKING_PANEL.HOST' | translate }}
-                {{ next_bkn?.organiser?.name || next_bkn?.host }}
-              </p> -->
                     } @else {
                         <p class="text-2xl font-medium opacity-60">
                             {{ 'APP.BOOKING_PANEL.NO_UPCOMING' | translate }}
@@ -166,6 +177,7 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
     private _org = inject(OrganisationService);
 
     logoPath = 'assets/logo_dts.svg'; //new path
+    now$ = timer(0, 60_000).pipe(map(() => Date.now()));
 
     public system_id = '';
     public show_qr = false;
