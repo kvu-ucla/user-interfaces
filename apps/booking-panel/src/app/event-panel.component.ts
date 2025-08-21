@@ -33,8 +33,7 @@ import { PanelStateService } from './panel-state.service';
                 </div>
             </header>
             <main
-                class="relative flex h-1/2 w-full flex-1 justify-between space-x-8 overflow-hidden bg-cover p-8 portrait:flex-col portrait:space-x-0 portrait:space-y-4"
-                [style.background-color]="background_color | safe"
+                class="bg-[#2774AE] relative flex h-1/2 w-full flex-1 justify-between space-x-8 overflow-hidden bg-cover p-8 portrait:flex-col portrait:space-x-0 portrait:space-y-4"
                 [style.color]="text_color | safe"
                 [style.background-image]="
                     'url(' + background_image + ')' | safe
@@ -101,7 +100,7 @@ import { PanelStateService } from './panel-state.service';
                     auth
                     class="h-10"
                     alt="Logo"
-                    [source]="(logo | async)?.src || (logo | async)"
+                    src="shared/assets/logo_dts.svg"
                 />
                 <p class="text-2xl">
                     {{ time | date: 'shortTime' }}
@@ -109,14 +108,14 @@ import { PanelStateService } from './panel-state.service';
             </footer>
             @if (!hide_qr && checkin) {
                 <div class="absolute -right-[2px] top-1/2 -translate-y-1/2">
-                    <button
-                        book-tag
-                        matRipple
-                        (click)="toggleQRShow()"
-                        class="absolute left-px top-1/2 z-20 -translate-x-full -translate-y-1/2 rounded-l-lg border-y border-l border-base-300 bg-base-100 px-1 py-4 uppercase"
-                    >
-                        {{ 'COMMON.BOOK' | translate }}
-                    </button>
+<!--                    <button-->
+<!--                        book-tag-->
+<!--                        matRipple-->
+<!--                        (click)="toggleQRShow()"-->
+<!--                        class="absolute left-px top-1/2 z-20 -translate-x-full -translate-y-1/2 rounded-l-lg border-y border-l border-base-300 bg-base-100 px-1 py-4 uppercase"-->
+<!--                    >-->
+<!--                        {{ 'COMMON.BOOK' | translate }}-->
+<!--                    </button>-->
                     <div
                         qr-code-out
                         class="z-10 overflow-hidden rounded-l-lg border border-base-300 bg-base-100 shadow"
