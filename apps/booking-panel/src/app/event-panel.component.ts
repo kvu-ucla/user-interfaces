@@ -29,7 +29,7 @@ import { PanelStateService } from './panel-state.service';
                         auth
                         class="h-10"
                         alt="Logo"
-                        src="/assets/logo_dts.svg"
+                        src="/src/assets/logo_dts.svg"
                     />
                 </div>
             </header>
@@ -101,7 +101,7 @@ import { PanelStateService } from './panel-state.service';
                     auth
                     class="h-10"
                     alt="Logo"
-                    src="/assets/logo_dts.svg"
+                    src="/src/assets/logo_dts.svg"
                 />
                 <p class="text-2xl">
                     {{ time | date: 'shortTime' }}
