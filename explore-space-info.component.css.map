@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": ["angular:styles/component:css;4f3e5464bee94c924a883f86a6b5ca8ac727cb844904db7b9de35fd4337d48ca;/home/runner/work/user-interfaces/user-interfaces/libs/explore/src/lib/explore-space-info.component.ts"],
-  "sourcesContent": ["\n            [name='space-info'] {\n                width: 16rem;\n            }\n\n            [status] {\n                background-color: #43a047;\n                font-weight: 500;\n            }\n\n            [status].busy {\n                background-color: #e53935;\n            }\n\n            [status].pending {\n                background-color: #ffb300;\n            }\n\n            [status].not-bookable {\n                background-color: #757575;\n            }\n        "],
-  "mappings": "AACY,CAAC,iBACG,MAAO,KACX,CAEA,CAAC,QACG,iBAAkB,QAClB,YAAa,GACjB,CAEA,CAAC,OAAO,CAAC,KACL,iBAAkB,OACtB,CAEA,CAAC,OAAO,CAAC,QACL,iBAAkB,OACtB,CAEA,CAAC,OAAO,CAAC,aACL,iBAAkB,OACtB",
+  "sources": ["angular:styles/component:css;1a97499cc8aba8f7e1afb185a271552bfc105d6abaa6ecffcb00f2110075a9e0;/home/runner/work/user-interfaces/user-interfaces/libs/explore/src/lib/explore-space-info.component.ts"],
+  "sourcesContent": ["\n            [status] {\n                background-color: var(--su);\n                color: var(--suc);\n            }\n\n            [status].busy {\n                background-color: var(--er);\n                color: var(--erc);\n            }\n\n            [status].pending {\n                background-color: var(--wa);\n                color: var(--wac);\n            }\n\n            [status].not-bookable {\n                background-color: var(--b3);\n            }\n        "],
+  "mappings": "AACY,CAAC,QACG,iBAAkB,IAAI,MACtB,MAAO,IAAI,MACf,CAEA,CAAC,OAAO,CAAC,KACL,iBAAkB,IAAI,MACtB,MAAO,IAAI,MACf,CAEA,CAAC,OAAO,CAAC,QACL,iBAAkB,IAAI,MACtB,MAAO,IAAI,MACf,CAEA,CAAC,OAAO,CAAC,aACL,iBAAkB,IAAI,KAC1B",
   "names": []
 }

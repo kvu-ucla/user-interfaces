@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1753333594664,
+  "timestamp": 1755752505883,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -93,6 +93,7 @@
         "./assets/locale/zh.json",
         "./assets/logo-dark.svg",
         "./assets/logo-light.svg",
+        "./assets/logo_dts.svg",
         "./assets/maps/level_1.svg",
         "./assets/maps/level_2.svg",
         "./assets/maps/level_3.svg",
@@ -175,7 +176,7 @@
     "./assets/icons/visa.svg": "11187e2ea86894625af0aeb5b85c17bcbf8fe192",
     "./assets/icons/visitor-placeholder.svg": "744f6d0a7c3f96db704b4e4cc301aff7bed145d2",
     "./assets/locale/ar.json": "b08a79fb9939ed532086a0caf9d5e1b0b753907a",
-    "./assets/locale/en-AU.json": "799279f468e4a3c9cb1dee3aa3a98a6a695d0ab5",
+    "./assets/locale/en-AU.json": "381e5ec0197b23635e9500660d2f80e53e2f82d3",
     "./assets/locale/en-GB.json": "24eae2d47ed70a752d04a7ce8f61a04bdfe32cb9",
     "./assets/locale/en-US.json": "887fb700b91e57ead77bcca64488952d4ab2a4c0",
     "./assets/locale/es.json": "f3d718ed8abbe9a06ac3ab6762416ea789ab3bb9",
@@ -187,6 +188,7 @@
     "./assets/locale/zh.json": "c3be13e518b9a04bd3fdf77aeab9f5e1c53aaa2c",
     "./assets/logo-dark.svg": "3c5dbbd620a781a0d1e3680cb697982dd44a1613",
     "./assets/logo-light.svg": "29908fafefe60c105f06b2f8d69f7c1eed436c17",
+    "./assets/logo_dts.svg": "d21f3ec37b3dda098524b557756f46ef452d1825",
     "./assets/maps/level_1.svg": "ba165a2e4b967619f71aa625855113950c4cde53",
     "./assets/maps/level_2.svg": "9a6f3cf8a7cefa4c41187294cb8747b80db8e04d",
     "./assets/maps/level_3.svg": "017bd15f1d17e947d3cde810ded6f09d26c27bd9",
@@ -211,9 +213,9 @@
     "./assets/support/safari-logo.svg": "1c510b0c330f84f6662351e4a0abd7fb8af2f678",
     "./favicon.ico": "5d8cf2b09be186513f3621f4c03d98eea93822ba",
     "./index.html": "5f83aed7e173d20355b832461c08c88c575c9cb3",
-    "./main.js": "369d192e61d2d2c6be9c87929f716f312f7d6802",
+    "./main.js": "38f8c8b5da8fb3f19fcca7b36d385712a8c53012",
     "./manifest.webmanifest": "1403ffbb424e3924fdbd03de6cc312e4a7a0b0b6",
-    "./styles.css": "2b1b5714b67b1c2bd8061546a3623c630d304f33"
+    "./styles.css": "1e7b884da6ad6033b72a2a5327fc0d31afd25ba7"
   },
   "navigationUrls": [
     {
