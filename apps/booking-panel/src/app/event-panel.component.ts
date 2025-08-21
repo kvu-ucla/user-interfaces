@@ -75,27 +75,27 @@ import { PanelStateService } from './panel-state.service';
                     </h2>
                     <hr class="mb-8" />
                     @let upcoming = bookings | async;
-                    @if (bookings) {
+                    @if (upcoming) {
                         <h2 class="line-clamp-4 text-2xl font-medium">
-                            {{ bookings[0]?.title }}
+                            {{ upcoming[0]?.title }}
                         </h2>
                         <p class="text-2xl lowercase">
                             starting &#64;
-                            {{ bookings[0]?.event_start * 1000 | date: 'h:mma' }}
+                            {{ upcoming[0]?.event_start * 1000 | date: 'h:mma' }}
                         </p>
                         <h2 class="line-clamp-4 text-2xl font-medium">
-                            {{ bookings[1]?.title }}
+                            {{ upcoming[1]?.title }}
                         </h2>
                         <p class="text-2xl lowercase">
                             starting &#64;
-                            {{ bookings[1]?.event_start * 1000 | date: 'h:mma' }}
+                            {{ upcoming[1]?.event_start * 1000 | date: 'h:mma' }}
                         </p>
                         <h2 class="line-clamp-4 text-2xl font-medium">
-                            {{ bookings[2]?.title }}
+                            {{ upcoming[2]?.title }}
                         </h2>
                         <p class="text-2xl lowercase">
                             starting &#64;
-                            {{ bookings[2]?.event_start * 1000 | date: 'h:mma' }}
+                            {{ upcoming[2]?.event_start * 1000 | date: 'h:mma' }}
                         </p>
                         <!-- <p class="text-xl" *ngIf="!hide_meeting_details">
                 {{ 'APP.BOOKING_PANEL.HOST' | translate }}
