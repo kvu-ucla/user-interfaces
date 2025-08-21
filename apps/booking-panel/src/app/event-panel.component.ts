@@ -14,6 +14,7 @@ import { generateQRCode } from 'libs/common/src/lib/qr-code';
 import { CalendarEvent } from 'libs/events/src/lib/event.class';
 import { PanelStateService } from './panel-state.service';
 
+
 @Component({
     selector: 'event-panel',
     template: `
