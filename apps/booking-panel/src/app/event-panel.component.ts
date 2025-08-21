@@ -151,7 +151,8 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
     private _state = inject(PanelStateService);
     private _org = inject(OrganisationService);
 
-    logoPath = 'assets/logo_dts.svg';
+    logoPath = 'assets/logo_dts.svg'; //new path
+
     public system_id = '';
     public show_qr = false;
     public room_name: string | null = '';
