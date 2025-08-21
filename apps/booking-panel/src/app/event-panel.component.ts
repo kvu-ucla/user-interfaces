@@ -74,14 +74,28 @@ import { PanelStateService } from './panel-state.service';
                         {{ 'APP.BOOKING_PANEL.NEXT' | translate }}
                     </h2>
                     <hr class="mb-8" />
-                    @let next_bkn = next | async;
-                    @if (next_bkn) {
+                    @let upcoming = bookings | async;
+                    @if (bookings) {
                         <h2 class="line-clamp-4 text-2xl font-medium">
-                            {{ next_bkn?.title }}
+                            {{ bookings[0]?.title }}
                         </h2>
                         <p class="text-2xl lowercase">
                             starting &#64;
-                            {{ next_bkn?.event_start * 1000 | date: 'h:mma' }}
+                            {{ bookings[0]?.event_start * 1000 | date: 'h:mma' }}
+                        </p>
+                        <h2 class="line-clamp-4 text-2xl font-medium">
+                            {{ bookings[1]?.title }}
+                        </h2>
+                        <p class="text-2xl lowercase">
+                            starting &#64;
+                            {{ bookings[1]?.event_start * 1000 | date: 'h:mma' }}
+                        </p>
+                        <h2 class="line-clamp-4 text-2xl font-medium">
+                            {{ bookings[2]?.title }}
+                        </h2>
+                        <p class="text-2xl lowercase">
+                            starting &#64;
+                            {{ bookings[2]?.event_start * 1000 | date: 'h:mma' }}
                         </p>
                         <!-- <p class="text-xl" *ngIf="!hide_meeting_details">
                 {{ 'APP.BOOKING_PANEL.HOST' | translate }}
@@ -158,6 +172,7 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
     public room_name: string | null = '';
     public current = this._state.current;
     public next = this._state.next;
+    public bookings = this._state.bookings;
     public qr_code: any;
     public hide_qr = false;
     public readonly space_name = this._state.space.pipe(
