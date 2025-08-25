@@ -78,25 +78,14 @@ import {timer} from "rxjs";
                     @let upcoming = (raw | upcoming: now | slice:0:3);
 
                     @if (upcoming?.length) {
-                        <h2 class="line-clamp-4 text-2xl font-medium">
-                            {{ upcoming[0]?.title }}
-                        </h2>
-                        <p class="text-2xl lowercase">
-                            starting &#64; {{ upcoming[0]?.event_start * 1000 | date:'h:mma' }}
-                        </p>
-                        <h2 class="mt-2 line-clamp-4 text-2xl font-medium">
-                            {{ upcoming[1]?.title }}
-                        </h2>
-                        <p class="text-2xl lowercase">
-                            starting &#64; {{ upcoming[1]?.event_start * 1000 | date:'h:mma' }}
-                        </p>
-
-                        <h2 class="mt-2 line-clamp-4 text-2xl font-medium">
-                            {{ upcoming[2]?.title }}
-                        </h2>
-                        <p class="text-2xl lowercase">
-                            starting &#64; {{ upcoming[2]?.event_start * 1000 | date:'h:mma' }}
-                        </p>
+                        @for (b of upcoming; track b.id) {
+                            <h2 class="mt-2 line-clamp-4 text-2xl font-medium">
+                                {{ b.title }}
+                            </h2>
+                            <p class="text-2xl lowercase">
+                                starting &#64; {{ b.event_start * 1000 | date:'h:mma' }}
+                            </p>
+                        }
                     } @else {
                         <p class="text-2xl font-medium opacity-60">
                             {{ 'APP.BOOKING_PANEL.NO_UPCOMING' | translate }}
@@ -266,4 +255,6 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
     public asCalendarEvent(data: any) {
         return data ? new CalendarEvent(data) : null;
     }
+
+
 }
