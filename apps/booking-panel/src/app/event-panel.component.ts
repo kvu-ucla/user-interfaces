@@ -18,7 +18,7 @@ import {timer} from "rxjs";
     selector: 'event-panel',
     template: `
         <div class="absolute inset-0 flex flex-col items-center bg-base-100">
-            <header class="flex w-full items-center justify-between p-8">
+            <header class="flex w-full items-center justify-between p-[64px] pt-[128px]">
                 <h1 class="text-3xl font-medium">{{ space_name | async }}</h1>
                 <div class="flex items-center space-x-4 portrait:hidden">
                     <p class="text-2xl">
@@ -153,6 +153,8 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
     logoPath = 'assets/logo_dts.svg'; //new path
     now$ = timer(0, 60_000).pipe(map(() => Date.now()));
 
+
+
     public system_id = '';
     public show_qr = false;
     public room_name: string | null = '';
@@ -245,6 +247,8 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
                 );
             }
         });
+
+        console.log("bookings list from panel: ", this._state.bookings);
     }
 
     public toggleQRShow() {
