@@ -14,6 +14,19 @@ import { CalendarEvent } from 'libs/events/src/lib/event.class';
 import { PanelStateService } from './panel-state.service';
 import {timer} from "rxjs";
 
+declare const Crestron: any;
+
+const DEFAULT_LED_BRIGHTNESS = 100;
+
+/** Crestron USB LED signal names used to show room occupancy status */
+const STATUS_LED_SIGNALS = {
+    red: { state: 'USB_RED_LED_CONTROL', brightness: 'USB_RED_LED_BRIGHTNESS' },
+    green: { state: 'USB_GREEN_LED_CONTROL', brightness: 'USB_GREEN_LED_BRIGHTNESS' },
+    blue: { state: 'USB_BLUE_LED_CONTROL', brightness: 'USB_BLUE_LED_BRIGHTNESS' },
+} as const;
+
+type StatusLEDColor = keyof typeof STATUS_LED_SIGNALS;
+
 @Component({
     selector: 'event-panel',
     template: `
@@ -183,6 +196,10 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
         return this._settings.get('app.background_image');
     }
 
+    public get led_brightness() {
+        return this._settings.get('app.led_brightness') || DEFAULT_LED_BRIGHTNESS;
+    }
+
     public get hide_meeting_details() {
         return this._state.setting('hide_meeting_details');
     }
@@ -230,7 +247,15 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
                 ),
             1000,
         );
-        this._state.current.subscribe();
+        this.setStatusLEDBrightness('red', this.led_brightness);
+        this.setStatusLEDBrightness('green', this.led_brightness);
+        this.setStatusLEDBrightness('blue', this.led_brightness);
+        this.subscription(
+            'status_led',
+            this.current.subscribe((booking) =>
+                this.updateOccupancyLED(!!booking),
+            ),
+        );
         this._state.settings.subscribe(({ custom_qr_url, custom_qr_color }) => {
             if (custom_qr_url) {
                 this.qr_code = generateQRCode(
@@ -247,8 +272,6 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
                 );
             }
         });
-
-        console.log("bookings list from panel: ", this._state.bookings);
     }
 
     public toggleQRShow() {
@@ -260,5 +283,20 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
         return data ? new CalendarEvent(data) : null;
     }
 
+    /** Toggle the room status LED: red while occupied, green while free */
+    private updateOccupancyLED(occupied: boolean) {
+        this.setStatusLED('red', occupied);
+        this.setStatusLED('green', !occupied);
+        this.setStatusLED('blue', false);
+    }
 
+    private setStatusLED(color: StatusLEDColor, on: boolean) {
+        if (typeof Crestron === 'undefined') return;
+        Crestron.sendBooleanSignal(STATUS_LED_SIGNALS[color].state, on);
+    }
+
+    private setStatusLEDBrightness(color: StatusLEDColor, value: number) {
+        if (typeof Crestron === 'undefined') return;
+        Crestron.sendIntegerSignal(STATUS_LED_SIGNALS[color].brightness, value);
+    }
 }
