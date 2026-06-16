@@ -1,7 +1,7 @@
 import {Component, inject, NgModule, OnInit, Pipe, PipeTransform} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { startOfMinute } from 'date-fns';
-import { debounceTime, map } from 'rxjs/operators';
+import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
 
 import {
     AsyncHandler,
@@ -12,7 +12,8 @@ import { OrganisationService } from '@placeos/organisation';
 import { generateQRCode } from 'libs/common/src/lib/qr-code';
 import { CalendarEvent } from 'libs/events/src/lib/event.class';
 import { PanelStateService } from './panel-state.service';
-import {timer} from "rxjs";
+import { combineLatest, of, timer } from "rxjs";
+import { showMetadata } from '@placeos/ts-client';
 
 declare const Crestron: any;
 
@@ -41,7 +42,7 @@ type StatusLEDColor = keyof typeof STATUS_LED_SIGNALS;
                         auth
                         class="h-10"
                         alt="Logo"
-                        [src]="logoPath"
+                        [src]="logo | async"
                     />
                 </div>
             </header>
@@ -62,19 +63,19 @@ type StatusLEDColor = keyof typeof STATUS_LED_SIGNALS;
                             ending &#64;
                             {{ current_bkn?.event_end * 1000 | date: 'h:mma' }}
                         </p>
-                        @if (!hide_meeting_details) {
-                            <p class="text-xl">
-                                {{ 'APP.BOOKING_PANEL.HOST' | translate }}
-                                {{
-                                    current_bkn?.organiser?.name ||
-                                        current_bkn?.host
-                                }}
-                            </p>
-                        }
-                        <p
-                            class="line-clamp-6 text-base portrait:line-clamp-8"
-                            [innerHTML]="current_bkn?.body | sanitize: 'html'"
-                        ></p>
+<!--                        @if (!hide_meeting_details) {-->
+<!--                            <p class="text-xl">-->
+<!--                                {{ 'APP.BOOKING_PANEL.HOST' | translate }}-->
+<!--                                {{-->
+<!--                                    current_bkn?.organiser?.name ||-->
+<!--                                        current_bkn?.host-->
+<!--                                }}-->
+<!--                            </p>-->
+<!--                        }-->
+<!--                        <p-->
+<!--                            class="line-clamp-6 text-base portrait:line-clamp-8"-->
+<!--                            [innerHTML]="current_bkn?.body | sanitize: 'html'"-->
+<!--                        ></p>-->
                     } @else {
                         <p class="text-2xl font-medium opacity-60">
                             {{ 'APP.BOOKING_PANEL.NO_CURRENT' | translate }}
@@ -113,7 +114,7 @@ type StatusLEDColor = keyof typeof STATUS_LED_SIGNALS;
                     auth
                     class="h-10"
                     alt="Logo"
-                    [src]="logoPath"
+                    [src]="logo | async"
                 />
                 <p class="text-2xl">
                     {{ time | date: 'shortTime' }}
@@ -163,7 +164,6 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
     private _state = inject(PanelStateService);
     private _org = inject(OrganisationService);
 
-    logoPath = 'assets/logo_dts.svg'; //new path
     now$ = timer(0, 60_000).pipe(map(() => Date.now()));
 
 
@@ -204,14 +204,38 @@ export class EventPanelComponent extends AsyncHandler implements OnInit {
         return this._state.setting('hide_meeting_details');
     }
 
-    public readonly logo = this._org.active_building.pipe(
+    /** System id from the active route */
+    private readonly _system_id = this._route.paramMap.pipe(
+        map((params) => params.get('system_id') || ''),
+        startWith(''),
+    );
+
+    public readonly logo = combineLatest([
+        this._org.active_building,
+        this._system_id,
+    ]).pipe(
         debounceTime(500),
-        map(
-            () =>
-                (this._settings.theme
-                    ? this._settings.get('app.logo_light')
-                    : this._settings.get('app.logo_dark')) || {},
+        // Read the per-system metadata block (`bookings_app`), if any
+        switchMap(([_, system_id]) =>
+            system_id
+                ? showMetadata(system_id, this._org.app_key).pipe(
+                      map((metadata) => metadata?.details || {}),
+                      catchError(() => of({})),
+                  )
+                : of({}),
         ),
+        map((system_settings: any) => {
+            const key =
+                this._settings.theme === 'dark' ? 'logo_dark' : 'logo_light';
+            return (
+                // 1. Per-system metadata override
+                system_settings[key] ||
+                // 2. Building / region / org / default chain
+                this._settings.get(`app.${key}`) ||
+                // 3. Hard fallback
+                'assets/logo_dts.svg'
+            );
+        }),
     );
 
     public get checkin() {

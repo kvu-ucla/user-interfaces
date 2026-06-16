@@ -5,15 +5,15 @@ const app = {
     title: 'PlaceOS',
     description: 'Bookings UI',
     short_name: 'PlaceOS',
-    logo_light: 'assets/logo-light.svg',
-    logo_dark: 'assets/logo-dark.svg',
+    logo_light: 'assets/logo_dts.svg',
+    logo_dark: 'assets/logo_dts.svg',
     general,
     prevent_space_init: true,
     allow_dark_mode: false,
 };
 
 /**
- * ROOT SETTIGNS
+ * ROOT SETTINGS
  */
 export const DEFAULT_SETTINGS: any = {
     debug: true,
