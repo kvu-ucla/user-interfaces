@@ -74936,8 +74936,8 @@ var app = {
   title: "PlaceOS",
   description: "Bookings UI",
   short_name: "PlaceOS",
-  logo_light: "assets/logo-light.svg",
-  logo_dark: "assets/logo-dark.svg",
+  logo_light: "assets/logo_dts.svg",
+  logo_dark: "assets/logo_dts.svg",
   general,
   prevent_space_init: true,
   allow_dark_mode: false
@@ -75346,15 +75346,15 @@ function currentUser() {
 // libs/common/src/lib/version.ts
 var VERSION6 = {
   "dirty": false,
-  "raw": "f52b3af",
-  "hash": "f52b3af",
+  "raw": "c253732",
+  "hash": "c253732",
   "distance": null,
   "tag": null,
   "semver": null,
-  "suffix": "f52b3af",
+  "suffix": "c253732",
   "semverString": null,
   "version": "1.12.0",
-  "time": 1781125267482
+  "time": 1781571123148
 };
 
 // libs/common/src/lib/settings.service.ts
@@ -99796,21 +99796,7 @@ var UpcomingPipe = _UpcomingPipe;
 
 // apps/booking-panel/src/app/event-panel.component.ts
 var _forTrack04 = ($index, $item) => $item.id;
-function EventPanelComponent_Conditional_16_Conditional_5_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 16);
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "translate");
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    \u0275\u0275nextContext(2);
-    const current_bkn_r1 = \u0275\u0275readContextLet(14);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate2(" ", \u0275\u0275pipeBind1(2, 2, "APP.BOOKING_PANEL.HOST"), " ", (current_bkn_r1 == null ? null : current_bkn_r1.organiser == null ? null : current_bkn_r1.organiser.name) || (current_bkn_r1 == null ? null : current_bkn_r1.host), " ");
-  }
-}
-function EventPanelComponent_Conditional_16_Template(rf, ctx) {
+function EventPanelComponent_Conditional_17_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "h2", 14);
     \u0275\u0275text(1);
@@ -99819,24 +99805,17 @@ function EventPanelComponent_Conditional_16_Template(rf, ctx) {
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "date");
     \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(5, EventPanelComponent_Conditional_16_Conditional_5_Template, 3, 4, "p", 16);
-    \u0275\u0275element(6, "p", 17);
-    \u0275\u0275pipe(7, "sanitize");
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    const current_bkn_r1 = \u0275\u0275readContextLet(14);
+    \u0275\u0275nextContext();
+    const current_bkn_r1 = \u0275\u0275readContextLet(15);
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", current_bkn_r1 == null ? null : current_bkn_r1.title, " ");
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ending @ ", \u0275\u0275pipeBind2(4, 4, (current_bkn_r1 == null ? null : current_bkn_r1.event_end) * 1e3, "h:mma"), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(!ctx_r1.hide_meeting_details ? 5 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275property("innerHTML", \u0275\u0275pipeBind2(7, 7, current_bkn_r1 == null ? null : current_bkn_r1.body, "html"), \u0275\u0275sanitizeHtml);
+    \u0275\u0275textInterpolate1(" ending @ ", \u0275\u0275pipeBind2(4, 2, (current_bkn_r1 == null ? null : current_bkn_r1.event_end) * 1e3, "h:mma"), " ");
   }
 }
-function EventPanelComponent_Conditional_17_Template(rf, ctx) {
+function EventPanelComponent_Conditional_18_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "p", 8);
     \u0275\u0275text(1);
@@ -99848,35 +99827,35 @@ function EventPanelComponent_Conditional_17_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "APP.BOOKING_PANEL.NO_CURRENT"), " ");
   }
 }
-function EventPanelComponent_Conditional_30_For_1_Template(rf, ctx) {
+function EventPanelComponent_Conditional_31_For_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "h2", 18);
+    \u0275\u0275elementStart(0, "h2", 16);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "p", 19);
+    \u0275\u0275elementStart(2, "p", 17);
     \u0275\u0275text(3);
     \u0275\u0275pipe(4, "date");
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const b_r3 = ctx.$implicit;
+    const b_r2 = ctx.$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", b_r3.title, " ");
+    \u0275\u0275textInterpolate1(" ", b_r2.title, " ");
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" starting @ ", \u0275\u0275pipeBind2(4, 2, b_r3.event_start * 1e3, "h:mma"), " ");
-  }
-}
-function EventPanelComponent_Conditional_30_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275repeaterCreate(0, EventPanelComponent_Conditional_30_For_1_Template, 5, 5, null, null, _forTrack04);
-  }
-  if (rf & 2) {
-    \u0275\u0275nextContext();
-    const upcoming_r4 = \u0275\u0275readContextLet(27);
-    \u0275\u0275repeater(upcoming_r4);
+    \u0275\u0275textInterpolate1(" starting @ ", \u0275\u0275pipeBind2(4, 2, b_r2.event_start * 1e3, "h:mma"), " ");
   }
 }
 function EventPanelComponent_Conditional_31_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275repeaterCreate(0, EventPanelComponent_Conditional_31_For_1_Template, 5, 5, null, null, _forTrack04);
+  }
+  if (rf & 2) {
+    \u0275\u0275nextContext();
+    const upcoming_r3 = \u0275\u0275readContextLet(28);
+    \u0275\u0275repeater(upcoming_r3);
+  }
+}
+function EventPanelComponent_Conditional_32_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "p", 8);
     \u0275\u0275text(1);
@@ -99888,18 +99867,18 @@ function EventPanelComponent_Conditional_31_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(2, 1, "APP.BOOKING_PANEL.NO_UPCOMING"), " ");
   }
 }
-function EventPanelComponent_Conditional_37_Template(rf, ctx) {
+function EventPanelComponent_Conditional_39_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 13)(1, "div", 20)(2, "div", 21);
-    \u0275\u0275element(3, "img", 22);
+    \u0275\u0275elementStart(0, "div", 13)(1, "div", 18)(2, "div", 19);
+    \u0275\u0275element(3, "img", 20);
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
+    const ctx_r3 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275classProp("w-0", !ctx_r1.show_qr)("w-56", ctx_r1.show_qr);
+    \u0275\u0275classProp("w-0", !ctx_r3.show_qr)("w-56", ctx_r3.show_qr);
     \u0275\u0275advance(2);
-    \u0275\u0275property("src", ctx_r1.qr_code, \u0275\u0275sanitizeUrl);
+    \u0275\u0275property("src", ctx_r3.qr_code, \u0275\u0275sanitizeUrl);
   }
 }
 var DEFAULT_LED_BRIGHTNESS = 100;
@@ -99915,7 +99894,6 @@ var _EventPanelComponent = class _EventPanelComponent extends AsyncHandler {
     this._route = inject(ActivatedRoute);
     this._state = inject(PanelStateService);
     this._org = inject(OrganisationService);
-    this.logoPath = "assets/logo_dts.svg";
     this.now$ = timer(0, 6e4).pipe(map(() => Date.now()));
     this.system_id = "";
     this.show_qr = false;
@@ -99925,7 +99903,24 @@ var _EventPanelComponent = class _EventPanelComponent extends AsyncHandler {
     this.bookings = this._state.bookings;
     this.hide_qr = false;
     this.space_name = this._state.space.pipe(map((_3) => (_3 == null ? void 0 : _3.display_name) || (_3 == null ? void 0 : _3.name) || ""));
-    this.logo = this._org.active_building.pipe(debounceTime(500), map(() => (this._settings.theme ? this._settings.get("app.logo_light") : this._settings.get("app.logo_dark")) || {}));
+    this._system_id = this._route.paramMap.pipe(map((params) => params.get("system_id") || ""), startWith(""));
+    this.logo = combineLatest([
+      this._org.active_building,
+      this._system_id
+    ]).pipe(
+      debounceTime(500),
+      // Read the per-system metadata block (`bookings_app`), if any
+      switchMap(([_3, system_id]) => system_id ? hu(system_id, this._org.app_key).pipe(map((metadata) => (metadata == null ? void 0 : metadata.details) || {}), catchError(() => of({}))) : of({})),
+      map((system_settings) => {
+        const key = this._settings.theme === "dark" ? "logo_dark" : "logo_light";
+        return (
+          // 1. Per-system metadata override
+          system_settings[key] || // 2. Building / region / org / default chain
+          this._settings.get(`app.${key}`) || // 3. Hard fallback
+          "assets/logo_dts.svg"
+        );
+      })
+    );
   }
   get time() {
     return startOfMinute(Date.now());
@@ -100004,7 +99999,7 @@ _EventPanelComponent.\u0275fac = /* @__PURE__ */ (() => {
     return (\u0275EventPanelComponent_BaseFactory || (\u0275EventPanelComponent_BaseFactory = \u0275\u0275getInheritedFactory(_EventPanelComponent)))(__ngFactoryType__ || _EventPanelComponent);
   };
 })();
-_EventPanelComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _EventPanelComponent, selectors: [["event-panel"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 38, vars: 42, consts: [[1, "absolute", "inset-0", "flex", "flex-col", "items-center", "bg-base-100"], [1, "flex", "w-full", "items-center", "justify-between", "p-[64px]", "pt-[128px]"], [1, "text-3xl", "font-medium"], [1, "flex", "items-center", "space-x-4", "portrait:hidden"], [1, "text-2xl"], ["auth", "", "alt", "Logo", 1, "h-10", 3, "src"], [1, "bg-[#2774AE]", "relative", "flex", "h-1/2", "w-full", "flex-1", "justify-between", "space-x-8", "overflow-hidden", "bg-cover", "p-8", "portrait:flex-col", "portrait:space-x-0", "portrait:space-y-4"], [1, "flex-1", "overflow-hidden"], [1, "text-2xl", "font-medium", "opacity-60"], [1, "min-w-[40%]", "flex-1"], [1, "text-2xl", "font-medium", "uppercase"], [1, "mb-8"], [1, "flex", "w-full", "items-center", "justify-between", "bg-base-100", "px-8", "py-3", "landscape:hidden"], [1, "absolute", "-right-[2px]", "top-1/2", "-translate-y-1/2"], [1, "line-clamp-5", "text-2xl", "font-medium"], [1, "mb-4", "text-2xl", "lowercase"], [1, "text-xl"], [1, "line-clamp-6", "text-base", "portrait:line-clamp-8", 3, "innerHTML"], [1, "mt-2", "line-clamp-4", "text-2xl", "font-medium"], [1, "text-2xl", "lowercase"], ["qr-code-out", "", 1, "z-10", "overflow-hidden", "rounded-l-lg", "border", "border-base-300", "bg-base-100", "shadow"], ["qr-checkin", "", 1, "z-50", "w-56", "p-3"], [1, "w-full", 3, "src"]], template: function EventPanelComponent_Template(rf, ctx) {
+_EventPanelComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _EventPanelComponent, selectors: [["event-panel"]], standalone: false, features: [\u0275\u0275InheritDefinitionFeature], decls: 40, vars: 46, consts: [[1, "absolute", "inset-0", "flex", "flex-col", "items-center", "bg-base-100"], [1, "flex", "w-full", "items-center", "justify-between", "p-[64px]", "pt-[128px]"], [1, "text-3xl", "font-medium"], [1, "flex", "items-center", "space-x-4", "portrait:hidden"], [1, "text-2xl"], ["auth", "", "alt", "Logo", 1, "h-10", 3, "src"], [1, "bg-[#2774AE]", "relative", "flex", "h-1/2", "w-full", "flex-1", "justify-between", "space-x-8", "overflow-hidden", "bg-cover", "p-8", "portrait:flex-col", "portrait:space-x-0", "portrait:space-y-4"], [1, "flex-1", "overflow-hidden"], [1, "text-2xl", "font-medium", "opacity-60"], [1, "min-w-[40%]", "flex-1"], [1, "text-2xl", "font-medium", "uppercase"], [1, "mb-8"], [1, "flex", "w-full", "items-center", "justify-between", "bg-base-100", "px-8", "py-3", "landscape:hidden"], [1, "absolute", "-right-[2px]", "top-1/2", "-translate-y-1/2"], [1, "line-clamp-5", "text-2xl", "font-medium"], [1, "mb-4", "text-2xl", "lowercase"], [1, "mt-2", "line-clamp-4", "text-2xl", "font-medium"], [1, "text-2xl", "lowercase"], ["qr-code-out", "", 1, "z-10", "overflow-hidden", "rounded-l-lg", "border", "border-base-300", "bg-base-100", "shadow"], ["qr-checkin", "", 1, "z-50", "w-56", "p-3"], [1, "w-full", 3, "src"]], template: function EventPanelComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "header", 1)(2, "h1", 2);
     \u0275\u0275text(3);
@@ -100015,36 +100010,38 @@ _EventPanelComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ t
     \u0275\u0275pipe(8, "date");
     \u0275\u0275elementEnd();
     \u0275\u0275element(9, "img", 5);
+    \u0275\u0275pipe(10, "async");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(10, "main", 6);
-    \u0275\u0275pipe(11, "safe");
+    \u0275\u0275elementStart(11, "main", 6);
     \u0275\u0275pipe(12, "safe");
-    \u0275\u0275elementStart(13, "div", 7);
-    \u0275\u0275declareLet(14);
-    \u0275\u0275pipe(15, "async");
-    \u0275\u0275conditionalCreate(16, EventPanelComponent_Conditional_16_Template, 8, 10)(17, EventPanelComponent_Conditional_17_Template, 3, 3, "p", 8);
+    \u0275\u0275pipe(13, "safe");
+    \u0275\u0275elementStart(14, "div", 7);
+    \u0275\u0275declareLet(15);
+    \u0275\u0275pipe(16, "async");
+    \u0275\u0275conditionalCreate(17, EventPanelComponent_Conditional_17_Template, 5, 5)(18, EventPanelComponent_Conditional_18_Template, 3, 3, "p", 8);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(18, "div", 9)(19, "h2", 10);
-    \u0275\u0275text(20);
-    \u0275\u0275pipe(21, "translate");
+    \u0275\u0275elementStart(19, "div", 9)(20, "h2", 10);
+    \u0275\u0275text(21);
+    \u0275\u0275pipe(22, "translate");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(22, "hr", 11);
-    \u0275\u0275declareLet(23);
-    \u0275\u0275pipe(24, "async");
-    \u0275\u0275declareLet(25);
-    \u0275\u0275pipe(26, "async");
-    \u0275\u0275declareLet(27);
-    \u0275\u0275pipe(28, "upcoming");
-    \u0275\u0275pipe(29, "slice");
-    \u0275\u0275conditionalCreate(30, EventPanelComponent_Conditional_30_Template, 2, 0)(31, EventPanelComponent_Conditional_31_Template, 3, 3, "p", 8);
+    \u0275\u0275element(23, "hr", 11);
+    \u0275\u0275declareLet(24);
+    \u0275\u0275pipe(25, "async");
+    \u0275\u0275declareLet(26);
+    \u0275\u0275pipe(27, "async");
+    \u0275\u0275declareLet(28);
+    \u0275\u0275pipe(29, "upcoming");
+    \u0275\u0275pipe(30, "slice");
+    \u0275\u0275conditionalCreate(31, EventPanelComponent_Conditional_31_Template, 2, 0)(32, EventPanelComponent_Conditional_32_Template, 3, 3, "p", 8);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(32, "footer", 12);
-    \u0275\u0275element(33, "img", 5);
-    \u0275\u0275elementStart(34, "p", 4);
-    \u0275\u0275text(35);
-    \u0275\u0275pipe(36, "date");
+    \u0275\u0275elementStart(33, "footer", 12);
+    \u0275\u0275element(34, "img", 5);
+    \u0275\u0275pipe(35, "async");
+    \u0275\u0275elementStart(36, "p", 4);
+    \u0275\u0275text(37);
+    \u0275\u0275pipe(38, "date");
     \u0275\u0275elementEnd()();
-    \u0275\u0275conditionalCreate(37, EventPanelComponent_Conditional_37_Template, 4, 5, "div", 13);
+    \u0275\u0275conditionalCreate(39, EventPanelComponent_Conditional_39_Template, 4, 5, "div", 13);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -100053,29 +100050,29 @@ _EventPanelComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ t
     \u0275\u0275advance(4);
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(8, 15, ctx.time, "shortTime"), " ");
     \u0275\u0275advance(2);
-    \u0275\u0275property("src", ctx.logoPath, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance();
-    \u0275\u0275styleProp("color", \u0275\u0275pipeBind1(11, 18, ctx.text_color))("background-image", \u0275\u0275pipeBind1(12, 20, "url(" + ctx.background_image + ")"));
-    \u0275\u0275advance(4);
-    const current_bkn_r5 = \u0275\u0275storeLet(\u0275\u0275pipeBind1(15, 22, ctx.current));
+    \u0275\u0275property("src", \u0275\u0275pipeBind1(10, 18, ctx.logo), \u0275\u0275sanitizeUrl);
     \u0275\u0275advance(2);
-    \u0275\u0275conditional(current_bkn_r5 ? 16 : 17);
+    \u0275\u0275styleProp("color", \u0275\u0275pipeBind1(12, 20, ctx.text_color))("background-image", \u0275\u0275pipeBind1(13, 22, "url(" + ctx.background_image + ")"));
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(21, 25, "APP.BOOKING_PANEL.NEXT"), " ");
-    const raw_r6 = \u0275\u0275pipeBind1(24, 27, ctx.bookings);
-    const now_r7 = \u0275\u0275pipeBind1(26, 29, ctx.now$);
+    const current_bkn_r5 = \u0275\u0275storeLet(\u0275\u0275pipeBind1(16, 24, ctx.current));
+    \u0275\u0275advance(2);
+    \u0275\u0275conditional(current_bkn_r5 ? 17 : 18);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind1(22, 27, "APP.BOOKING_PANEL.NEXT"), " ");
+    const raw_r6 = \u0275\u0275pipeBind1(25, 29, ctx.bookings);
+    const now_r7 = \u0275\u0275pipeBind1(27, 31, ctx.now$);
     \u0275\u0275advance(7);
-    const upcoming_r8 = \u0275\u0275storeLet(\u0275\u0275pipeBind3(29, 34, \u0275\u0275pipeBind2(28, 31, raw_r6, now_r7), 0, 3));
+    const upcoming_r8 = \u0275\u0275storeLet(\u0275\u0275pipeBind3(30, 36, \u0275\u0275pipeBind2(29, 33, raw_r6, now_r7), 0, 3));
     \u0275\u0275advance(3);
-    \u0275\u0275conditional((upcoming_r8 == null ? null : upcoming_r8.length) ? 30 : 31);
+    \u0275\u0275conditional((upcoming_r8 == null ? null : upcoming_r8.length) ? 31 : 32);
     \u0275\u0275advance(3);
-    \u0275\u0275property("src", ctx.logoPath, \u0275\u0275sanitizeUrl);
+    \u0275\u0275property("src", \u0275\u0275pipeBind1(35, 41, ctx.logo), \u0275\u0275sanitizeUrl);
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(38, 43, ctx.time, "shortTime"), " ");
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(36, 39, ctx.time, "shortTime"), " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(!ctx.hide_qr && ctx.checkin ? 37 : -1);
+    \u0275\u0275conditional(!ctx.hide_qr && ctx.checkin ? 39 : -1);
   }
-}, dependencies: [AuthenticatedImageDirective, UpcomingPipe, AsyncPipe, SlicePipe, DatePipe, TranslatePipe, SafePipe, SanitizePipe], styles: ["\n\n[book-tag][_ngcontent-%COMP%] {\n  writing-mode: vertical-rl;\n  text-orientation: upright;\n}\n[qr-code-out][_ngcontent-%COMP%] {\n  transition: width 300ms;\n}\n/*# sourceMappingURL=event-panel.component.css.map */"] });
+}, dependencies: [AuthenticatedImageDirective, UpcomingPipe, AsyncPipe, SlicePipe, DatePipe, TranslatePipe, SafePipe], styles: ["\n\n[book-tag][_ngcontent-%COMP%] {\n  writing-mode: vertical-rl;\n  text-orientation: upright;\n}\n[qr-code-out][_ngcontent-%COMP%] {\n  transition: width 300ms;\n}\n/*# sourceMappingURL=event-panel.component.css.map */"] });
 var EventPanelComponent = _EventPanelComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(EventPanelComponent, [{
@@ -100092,7 +100089,7 @@ var EventPanelComponent = _EventPanelComponent;
                         auth
                         class="h-10"
                         alt="Logo"
-                        [src]="logoPath"
+                        [src]="logo | async"
                     />
                 </div>
             </header>
@@ -100113,19 +100110,19 @@ var EventPanelComponent = _EventPanelComponent;
                             ending &#64;
                             {{ current_bkn?.event_end * 1000 | date: 'h:mma' }}
                         </p>
-                        @if (!hide_meeting_details) {
-                            <p class="text-xl">
-                                {{ 'APP.BOOKING_PANEL.HOST' | translate }}
-                                {{
-                                    current_bkn?.organiser?.name ||
-                                        current_bkn?.host
-                                }}
-                            </p>
-                        }
-                        <p
-                            class="line-clamp-6 text-base portrait:line-clamp-8"
-                            [innerHTML]="current_bkn?.body | sanitize: 'html'"
-                        ></p>
+<!--                        @if (!hide_meeting_details) {-->
+<!--                            <p class="text-xl">-->
+<!--                                {{ 'APP.BOOKING_PANEL.HOST' | translate }}-->
+<!--                                {{-->
+<!--                                    current_bkn?.organiser?.name ||-->
+<!--                                        current_bkn?.host-->
+<!--                                }}-->
+<!--                            </p>-->
+<!--                        }-->
+<!--                        <p-->
+<!--                            class="line-clamp-6 text-base portrait:line-clamp-8"-->
+<!--                            [innerHTML]="current_bkn?.body | sanitize: 'html'"-->
+<!--                        ></p>-->
                     } @else {
                         <p class="text-2xl font-medium opacity-60">
                             {{ 'APP.BOOKING_PANEL.NO_CURRENT' | translate }}
@@ -100164,7 +100161,7 @@ var EventPanelComponent = _EventPanelComponent;
                     auth
                     class="h-10"
                     alt="Logo"
-                    [src]="logoPath"
+                    [src]="logo | async"
                 />
                 <p class="text-2xl">
                     {{ time | date: 'shortTime' }}
@@ -100197,7 +100194,7 @@ var EventPanelComponent = _EventPanelComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(EventPanelComponent, { className: "EventPanelComponent", filePath: "apps/booking-panel/src/app/event-panel.component.ts", lineNumber: 160 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(EventPanelComponent, { className: "EventPanelComponent", filePath: "apps/booking-panel/src/app/event-panel.component.ts", lineNumber: 161 });
 })();
 
 // apps/booking-panel/src/app/app-routing.module.ts
